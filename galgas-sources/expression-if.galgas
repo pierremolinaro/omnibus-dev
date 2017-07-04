@@ -11,6 +11,55 @@ class @ifExpressionAST : @expressionAST {
   @location mElseExpressionEndLocation
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @ifExpressionSE : @expressionSE {
+  @expressionSE mIfExpression
+  @location mIfExpressionEndLocation
+  @expressionSE mThenExpression
+  @location mThenExpressionEndLocation
+  @expressionSE mElseExpression
+  @location mElseExpressionEndLocation
+}
+
+#·······················································································································
+
+override method @ifExpressionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  !@expressionSE outExpression
+{
+  [mIfExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let ifExpression
+  ]
+  [mThenExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let thenExpression
+  ]
+  [mElseExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let elseExpression
+  ]
+  outExpression = @ifExpressionSE.new {
+    !ifExpression
+    !mIfExpressionEndLocation
+    !thenExpression
+    !mThenExpressionEndLocation
+    !elseExpression
+    !mElseExpressionEndLocation
+  }
+}
+
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

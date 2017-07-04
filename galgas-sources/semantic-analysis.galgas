@@ -90,7 +90,7 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
-  [inAST.mProcedureListAST procedureSemanticAnalysis
+  [inAST.mStandAloneFunctionDeclarationListAST functionSemanticAnalysis
     !receiverType:.void
     !context:inSemanticContext
     !?temporary:temporaries

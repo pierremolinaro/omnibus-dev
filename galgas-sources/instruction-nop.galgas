@@ -15,7 +15,7 @@ syntax extension plm_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $nop$
-    ioInstructionList += !.here !@letInstructionNOP.new
+    ioInstructionList += !@letInstructionNOP.new {!.here}
   }
 
   #·····················································································································
@@ -27,6 +27,24 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @letInstructionNOP noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @letInstructionNOP solveEntities
+  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
+  ?registers:let @controlRegisterMap unused inRegisterMapSE
+  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  ioInstructionListSE += !@letInstructionSE.new {!mInstructionLocation}
+}
+
+#·······················································································································
+
+class @letInstructionSE : @instructionSE {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

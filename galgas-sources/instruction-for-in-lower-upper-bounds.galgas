@@ -41,7 +41,8 @@ syntax extension plm_syntax {
     <instructionList> ?let instructionList
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !varName.location !@forLowerUpperBoundInstructionAST.new {
+    ioInstructionList += !@forLowerUpperBoundInstructionAST.new {
+      !varName.location
       !varName
       !typeName
       !lowerBoundExpression
@@ -69,6 +70,61 @@ override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPreceden
   [mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   [mLowerBoundExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mUpperBoundExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @forLowerUpperBoundInstructionSE : @instructionSE {
+  @lstring mVarName
+  @lstring mTypeName
+  @expressionSE mLowerBoundExpression
+  @location mEndOf_lowerBoundExpression_instruction
+  @expressionSE mUpperBoundExpression
+  @location mEndOf_upperBoundExpression_instruction
+  @instructionListSE mDoInstructionList
+  @location mEndOf_do_instruction
+}
+
+#·······················································································································
+
+override method @forLowerUpperBoundInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  [mLowerBoundExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let lowerBoundExpression
+  ]
+  [mUpperBoundExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let upperBoundExpression
+  ]
+  @instructionListSE do_instructionList = {}
+  [mDoInstructionList solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    !?do_instructionList
+  ]
+  ioInstructionListSE += !@forLowerUpperBoundInstructionSE.new {
+    !mInstructionLocation
+    !mVarName
+    !mTypeName
+    !lowerBoundExpression
+    !mEndOf_lowerBoundExpression_instruction
+    !upperBoundExpression
+    !mEndOf_upperBoundExpression_instruction
+    !do_instructionList
+    !mEndOf_do_instruction
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

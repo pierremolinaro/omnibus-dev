@@ -3,7 +3,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @panicInstructionAST : @instructionAST {
-  @location mThrowLocation
   @expressionAST mCodeExpression
 }
 
@@ -19,7 +18,7 @@ syntax extension plm_syntax {
     $panic$
     let loc = @location.here
     <expression> ?let @expressionAST codeExpression
-    ioInstructionList += !loc !@panicInstructionAST.new {!loc !codeExpression}
+    ioInstructionList += !@panicInstructionAST.new {!loc !codeExpression}
   }
 
   #·····················································································································
@@ -32,6 +31,34 @@ syntax extension plm_syntax {
 
 override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mCodeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @panicInstructionSE : @instructionSE {
+  @expressionSE mCodeExpression
+}
+
+#·······················································································································
+
+override method @panicInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  [mCodeExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let codeExpression
+  ]
+  ioInstructionListSE += !@panicInstructionSE.new {
+    !mInstructionLocation
+    !codeExpression
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -54,7 +81,7 @@ override method @panicInstructionAST analyze
 {
 #--- Panic allowed ?
   if inCurrentMode == .panicMode then
-    error mThrowLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+    error mInstructionLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR unusedInstructionListIR = {}
@@ -77,15 +104,15 @@ override method @panicInstructionAST analyze
   if ([unusedInstructionListIR length] > 0)
      || not [result isLiteralInteger]
      || ([result key] != staticIntegerTypeName ()) then
-    error mThrowLocation : "throw expression should be a literal integer"
+    error mInstructionLocation : "throw expression should be a literal integer"
   else
     [[inContext.mPanicCodeType type] integer ?min:let min ?max:let max ?3*]
     [result literalInteger ?1* ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
-      error mThrowLocation : "panic expression cannot be represented by an `" +[inContext.mPanicCodeType key]
+      error mInstructionLocation : "panic expression cannot be represented by an `" +[inContext.mPanicCodeType key]
     elsif not [option plm_options.noPanicGeneration value] then
       ioInstructionGenerationList += !@panicInstructionIR.new {
-        !mThrowLocation
+        !mInstructionLocation
         !throwValue
       }
     end

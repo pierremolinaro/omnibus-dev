@@ -2,17 +2,55 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @functionCallEffectiveParameterList {
+list @functionCallEffectiveParameterListAST {
   @lstring mSelector
   @expressionAST mExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @constructorCall : @expressionAST {
+class @constructorCallAST : @expressionAST {
   @lstring mTypeName
-  @functionCallEffectiveParameterList mParameterList
+  @functionCallEffectiveParameterListAST mParameterList
   @location mErrorLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @functionCallEffectiveParameterListSE {
+  @lstring mSelector
+  @expressionSE mExpression
+}
+
+#·······················································································································
+
+class @constructorCallSE : @expressionSE {
+  @lstring mTypeName
+  @functionCallEffectiveParameterListSE mParameterList
+  @location mErrorLocation
+}
+
+#·······················································································································
+
+override method @constructorCallAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  !@expressionSE outExpression
+{
+  @functionCallEffectiveParameterListSE parameterList = {}
+  for (selector expressionAST) in mParameterList do
+    [expressionAST solveEntities
+      !globalConstants:inGlobalConstantMap
+      !registers:inRegisterMapSE
+      !globalVars:inGlobalVariableMapSE
+      ?let expression
+    ]
+    parameterList += !selector !expression
+  end
+  outExpression = @constructorCallSE.new {!mTypeName !parameterList !mErrorLocation}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,7 +62,7 @@ syntax extension plm_syntax {
   rule <primary> !@expressionAST outExpression {
     $\$type$ ?let typeName
     $($
-    @functionCallEffectiveParameterList parameterList = {}
+    @functionCallEffectiveParameterListAST parameterList = {}
     repeat
     while
       $!$ ?let selector
@@ -33,7 +71,7 @@ syntax extension plm_syntax {
     end
     let errorLocation = @location.here
     $)$
-    outExpression = @constructorCall.new {!typeName !parameterList !errorLocation}
+    outExpression = @constructorCallAST.new {!typeName !parameterList !errorLocation}
   }
 
 }
@@ -42,7 +80,7 @@ syntax extension plm_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @constructorCall addDependenceEdgeForStaticExpression
+override method @constructorCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -54,7 +92,7 @@ override method @constructorCall addDependenceEdgeForStaticExpression
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
   [!?ioGraph noteNode !typeName]
 }
@@ -63,7 +101,7 @@ override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanti
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @constructorCall analyzeExpression
+override method @constructorCallAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

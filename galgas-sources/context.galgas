@@ -128,7 +128,7 @@ list @globalTaskVariableList {
 struct @semanticContext {
   @targetParameters mTargetParameters
   @uint mPointerSize # in bit count
-#  @unifiedTypeMap-proxy mLiteralIntegerType
+
   @unifiedTypeMap-proxy mPanicCodeType
   @unifiedTypeMap-proxy mPanicLineType
   @unifiedTypeMap mTypeMap
@@ -213,14 +213,14 @@ proc buildSemanticContext
   end
 #--- Enter standalone procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
-  [inAST.mProcedureListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
+  [inAST.mStandAloneFunctionDeclarationListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
   [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
   [inAST.mStandAloneSystemRoutineListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #---
   for (declaration) in inDeclarationListAST do
     [declaration enterInContext
-      !procedureDeclarationList:inAST.mProcedureListAST
+      !procedureDeclarationList:inAST.mStandAloneFunctionDeclarationListAST
       !?context:outSemanticContext
       !?staticlistValues:ioStaticListValueMap
       !?staticStringMap:ioGlobalLiteralStringMap
@@ -251,7 +251,7 @@ proc buildSemanticContext
 #---
   for (declaration) in inDeclarationListAST do
     [declaration enterRoutinesInContext
-      !procedureDeclarationList:inAST.mProcedureListAST
+      !procedureDeclarationList:inAST.mStandAloneFunctionDeclarationListAST
       !?context:outSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]

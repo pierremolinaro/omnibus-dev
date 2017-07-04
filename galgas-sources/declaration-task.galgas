@@ -9,7 +9,7 @@ list @taskList {
   @taskVarListAST mVarList
   @functionDeclarationListAST mTaskProcList
   @taskInitListAST mTaskInitListAST
-  @syncInstructionBranchList mGuardedCommandList
+  @syncInstructionBranchListAST mGuardedCommandList
   @location mEndOfTaskDeclaration
 }
 
@@ -59,7 +59,7 @@ syntax extension plm_syntax {
     @taskVarListAST taskVarList = {}
     @functionDeclarationListAST taskProcList = {}
     @taskInitListAST taskInitListAST = {}
-    @syncInstructionBranchList branchList = {}
+    @syncInstructionBranchListAST branchList = {}
     <taskBody> !?taskVarList !?taskProcList !?taskInitListAST !?branchList
 #    repeat
 #    while
@@ -124,7 +124,7 @@ syntax extension plm_syntax {
   rule <taskBody> ?!@taskVarListAST taskVarList
                   ?!@functionDeclarationListAST taskProcList
                   ?!@taskInitListAST taskInitListAST
-                  ?!@syncInstructionBranchList branchList
+                  ?!@syncInstructionBranchListAST branchList
 {
     repeat
     while
@@ -164,7 +164,7 @@ syntax extension plm_syntax {
       $}$
       taskInitListAST += !priority !instructionList !endOfInit
     while
-      <guarded_command> ?let @guardedCommand guardedCommand
+      <guarded_command> ?let @guardedCommandAST guardedCommand
       ${$
       <instructionList> ?let instructionList
       let endOfInstructions = @location.here
@@ -418,7 +418,7 @@ method @taskList-element semanticAnalysis
   @instructionListAST taskListInstructionList = {}
   if [mGuardedCommandList length] > 0 then
     let syncInstruction = @syncInstructionAST.new {!mTaskName.location !mGuardedCommandList !mTaskName.location}
-    taskListInstructionList += !.nowhere !syncInstruction
+    taskListInstructionList += !syncInstruction
   end
   routineSemanticAnalysis (
     !receiverType:taskType

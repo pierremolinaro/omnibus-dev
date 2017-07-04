@@ -9,7 +9,7 @@ class @forInstructionAST : @instructionAST {
   @location mEndOf_whileExpression
   @bool mStaticWhileExpression
   @instructionListAST mDoInstructionList
-  @location mEndOf_do_instruction
+  @location mEndOf_for_instruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -51,11 +51,10 @@ syntax extension plm_syntax {
     <instructionList> ?let instructionList
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !varName.location !@forInstructionAST.new {
+    ioInstructionList += !@forInstructionAST.new {
+      !varName.location
       !varName
       !iteratedObject
-#      !iteratedExpression
-#      !endOf_iteratedExpression_instruction
       !whileExpression
       !endOf_whileExpression_instruction
       !staticWhileExpression
@@ -75,6 +74,53 @@ syntax extension plm_syntax {
 override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 #  [mIteratedExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @forInstructionSE : @instructionSE {
+  @lstring mVarName
+  @lstring mIteratedObject
+  @expressionSE mWhileExpression
+  @location mEndOf_whileExpression
+  @bool mStaticWhileExpression
+  @instructionListSE mDoInstructionList
+  @location mEndOf_for_instruction
+}
+
+#·······················································································································
+
+override method @forInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  [mWhileExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let whileExpression
+  ]
+  @instructionListSE doInstructionList = {}
+  [mDoInstructionList solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    !?doInstructionList
+  ]
+  ioInstructionListSE += !@forInstructionSE.new {
+    !mInstructionLocation
+    !mVarName
+    !mIteratedObject
+    !whileExpression
+    !mEndOf_whileExpression
+    !mStaticWhileExpression
+    !doInstructionList
+    !mEndOf_for_instruction
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -163,7 +209,7 @@ override method @forInstructionAST analyze
     !propertiesAreMutable:inRoutineCanMutateProperties
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !endOfInstructionList:mEndOf_do_instruction
+    !endOfInstructionList:mEndOf_for_instruction
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -173,8 +219,8 @@ override method @forInstructionAST analyze
     !?alloca:ioAllocaList
     !?instructionListIR:doInstructionList_GenerationList
   ]
-  [!?ioUniversalMap closeOverride !mEndOf_do_instruction]
-  [!?ioVariableMap closeOverride !mEndOf_do_instruction]
+  [!?ioUniversalMap closeOverride !mEndOf_for_instruction]
+  [!?ioVariableMap closeOverride !mEndOf_for_instruction]
 #--- Code generation
   if iteratedTypeKind == .literalString then
     ioInstructionGenerationList += !@forInstructionOnStringIR.new {

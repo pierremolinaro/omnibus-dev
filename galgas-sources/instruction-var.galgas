@@ -34,7 +34,8 @@ syntax extension plm_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    ioInstructionList += !varName.location !@varInstructionWithAssignmentAST.new {
+    ioInstructionList += !@varInstructionWithAssignmentAST.new {
+      !varName.location
       !varName
       !optionalTypeName
       !expression
@@ -47,7 +48,8 @@ syntax extension plm_syntax {
     $var$
     $identifier$ ?let varName
     $\$type$ ?let typeName
-    ioInstructionList += !varName.location !@varInstructionAST.new {
+    ioInstructionList += !@varInstructionAST.new {
+      !varName.location
       !varName
       !typeName
     }
@@ -74,6 +76,56 @@ override method @varInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
   [!?ioGraph noteNode !typeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @varInstructionWithAssignmentSE : @instructionSE {
+  @lstring mVarName
+  @lstring mOptionalTypeName
+  @expressionSE mSourceExpression
+}
+
+#·······················································································································
+
+override method @varInstructionWithAssignmentAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  [mSourceExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let expression
+  ]
+  ioInstructionListSE += !@varInstructionWithAssignmentSE.new {
+    !mInstructionLocation
+    !mVarName
+    !mOptionalTypeName
+    !expression
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @varInstructionSE : @instructionSE {
+  @lstring mVarName
+  @lstring mTypeName
+}
+
+#·······················································································································
+
+override method @varInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
+  ?registers:let @controlRegisterMap unused inRegisterMapSE
+  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  ioInstructionListSE += !@varInstructionSE.new {!mInstructionLocation !mVarName !mTypeName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

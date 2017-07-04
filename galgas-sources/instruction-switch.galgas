@@ -2,18 +2,18 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @switchCaseList {
+list @switchCaseListAST {
   @lstringlist mCaseIdentifiers
   @instructionListAST mCaseInstructionList
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 class @switchInstructionAST : @instructionAST {
   @expressionAST mSwitchExpression
   @location mEndOf_test_expression
-  @switchCaseList mSwitchCaseList
-  @location mEndOf_while_instruction
+  @switchCaseListAST mSwitchCaseList
+  @location mEndOf_switch_instruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -30,7 +30,7 @@ syntax extension plm_syntax {
     <expression> ?let @expressionAST switchExpression
     let switchExpressionEndLocation = @location.here
     ${$
-    @switchCaseList switchCaseList = {}
+    @switchCaseListAST switchCaseList = {}
     repeat
       $case$
       @lstringlist caseIdentifiers = {}
@@ -47,7 +47,8 @@ syntax extension plm_syntax {
     end
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !instructionLocation !@switchInstructionAST.new {
+    ioInstructionList += !@switchInstructionAST.new {
+      !instructionLocation
       !switchExpression
       !switchExpressionEndLocation
       !switchCaseList
@@ -68,6 +69,58 @@ override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
   for (* instructionList) in mSwitchCaseList do
     [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @switchCaseListSE {
+  @lstringlist mCaseIdentifiers
+  @instructionListSE mCaseInstructionList
+}
+
+#·······················································································································
+
+class @switchInstructionSE : @instructionSE {
+  @expressionSE mSwitchExpression
+  @location mEndOf_test_expression
+  @switchCaseListSE mSwitchCaseList
+  @location mEndOf_switch_instruction
+}
+
+#·······················································································································
+
+override method @switchInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  [mSwitchExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let switchExpression
+  ]
+  @switchCaseListSE switchCaseList = {}
+  for () in mSwitchCaseList do
+    @instructionListSE caseInstructionList = {}
+    [mCaseInstructionList solveEntities
+      !globalConstants:inGlobalConstantMap
+      !registers:inRegisterMapSE
+      !globalVars:inGlobalVariableMapSE
+      !?caseInstructionList
+    ]
+  
+  end
+  ioInstructionListSE += !@switchInstructionSE.new {
+    !mInstructionLocation
+    !switchExpression
+    !mEndOf_test_expression
+    !switchCaseList
+    !mEndOf_switch_instruction
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -143,7 +196,7 @@ override method @switchInstructionAST analyze
       !propertiesAreMutable:inRoutineCanMutateProperties
       !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !endOfInstructionList:mEndOf_while_instruction
+      !endOfInstructionList:mEndOf_switch_instruction
       !context:inContext
       !mode:inCurrentMode
       !?temporary:ioTemporaries
@@ -155,8 +208,8 @@ override method @switchInstructionAST analyze
     ]
     switchCaseListIR += !caseIdentifierIndexList !instructionGenerationList
   end  
-  [!?ioUniversalMap closeOverride !mEndOf_while_instruction]
-  [!?ioVariableMap closeOverride !mEndOf_while_instruction]
+  [!?ioUniversalMap closeOverride !mEndOf_switch_instruction]
+  [!?ioVariableMap closeOverride !mEndOf_switch_instruction]
 #--- Check all enumeration values are named in switch instructions
   for (lkey * *) in enumConstantMap do
     if not [usedEnumerationValues hasKey !lkey] then

@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @letInstructionWithAssignmentAST : @instructionAST {
-  @lstring mVarName
+  @lstring mConstantName
   @lstring mOptionalTypeName
   @expressionAST mSourceExpression
 }
@@ -27,7 +27,8 @@ syntax extension plm_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    ioInstructionList += !varName.location !@letInstructionWithAssignmentAST.new {
+    ioInstructionList += !@letInstructionWithAssignmentAST.new {
+      !varName.location
       !varName
       !optionalTypeName
       !expression
@@ -48,6 +49,38 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
     [!?ioGraph noteNode !typeName]
   end
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @letInstructionWithAssignmentSE : @instructionSE {
+  @lstring mConstantName
+  @lstring mOptionalTypeName
+  @expressionSE mSourceExpression
+}
+
+#·······················································································································
+
+override method @letInstructionWithAssignmentAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  [mSourceExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let expression
+  ]
+  ioInstructionListSE += !@letInstructionWithAssignmentSE.new {
+    !mInstructionLocation
+    !mConstantName
+    !mOptionalTypeName
+    !expression
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -90,32 +123,32 @@ override method @letInstructionWithAssignmentAST analyze
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !expressionResultPossibleReference
-    !mVarName
+    !mConstantName
     ?let expressionResult
   ]  
 #--- Declare local constant
   var result = checkAssignmentCompatibility (
     !source:expressionResult
     !targetAnnotationType:targetType
-    !errorLocation:mVarName.location
+    !errorLocation:mConstantName.location
     !staticTypeAllowed:true
   )
   drop targetType
 #---
   if not [[result type] instanciable] then
-    error mVarName : "$" + [result key] + " type is not instanciable" : result
+    error mConstantName : "$" + [result key] + " type is not instanciable" : result
   end
 #--- Declare local constant
-  let varPLMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  let varPLMName = @lstring.new {!mConstantName.string + "." + ioTemporaries.mTemporaryIndex !mConstantName}
   ioTemporaries.mTemporaryIndex ++
   if [result key] != staticIntegerTypeName () then
     ioAllocaList += !varPLMName ![[result type] llvmTypeName]
     let localConstant = @objectIR.localVariableReference {!type:[result type] !plmName:varPLMName}
-    [!?ioInstructionGenerationList appendStoreFromReference !localConstant !mVarName !result]
+    [!?ioInstructionGenerationList appendStoreFromReference !localConstant !mConstantName !result]
   end
-  [!?ioUniversalMap insertLocalConstant !mVarName !expressionResult]
+  [!?ioUniversalMap insertLocalConstant !mConstantName !expressionResult]
   [!?ioVariableMap insertConstant
-    !lkey:mVarName
+    !lkey:mConstantName
     !type:[result type]
     !readAccessAllowed:true
     !objectIR:expressionResult

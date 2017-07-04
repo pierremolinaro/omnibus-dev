@@ -22,9 +22,8 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    let instructionLocation = @location.here
     <if_instruction> ?let ifInstruction
-    ioInstructionList += !instructionLocation !ifInstruction
+    ioInstructionList += !ifInstruction
   }
   
   #·····················································································································
@@ -62,10 +61,11 @@ syntax extension plm_syntax {
     or
       $else$
       <if_instruction> ?let ifInstruction
-      elseInstructionList = {!instructionLocation !ifInstruction}
+      elseInstructionList = {!ifInstruction}
     end
     let endOfElseBranch = @location.here
     outIfInstruction = .new {
+      !instructionLocation
       !testExpression
       !testExpressionEndLocation
       !staticIfExpression
@@ -89,6 +89,62 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
   [mThenInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   [mElseInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   [mTestExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @ifInstructionSE : @instructionSE {
+  @expressionSE mTestExpression
+  @location mTestExpressionEndLocation
+  @bool mStaticIfExpression
+  @instructionListSE mThenInstructionList
+  @location mEndOfThenInstructionList
+  @instructionListSE mElseInstructionList
+  @location mEndOfElseInstructionList
+  @location mEndOf_if_instruction
+}
+
+#·······················································································································
+
+override method @ifInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  [mTestExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let testExpression
+  ]
+  @instructionListSE thenInstructionList = {}
+  [mThenInstructionList solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    !?thenInstructionList
+  ]
+  @instructionListSE elseInstructionList = {}
+  [mElseInstructionList solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    !?elseInstructionList
+  ]
+  ioInstructionListSE += !@ifInstructionSE.new {
+    !mInstructionLocation
+    !testExpression
+    !mTestExpressionEndLocation
+    !mStaticIfExpression
+    !thenInstructionList
+    !mEndOfThenInstructionList
+    !elseInstructionList
+    !mEndOfElseInstructionList
+    !mEndOf_if_instruction
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

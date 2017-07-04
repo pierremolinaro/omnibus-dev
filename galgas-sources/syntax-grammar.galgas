@@ -32,7 +32,7 @@ syntax plm_syntax (plm_lexique) {
     while
       <declaration> !?ioAst
     while
-      <function> !?ioAst.mProcedureListAST
+      <function> !?ioAst.mStandAloneFunctionDeclarationListAST
     while
       <system_routine> !?ioAst.mStandAloneSystemRoutineListAST
     while

@@ -1,26 +1,32 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   S O L V E   E N T I T I E S
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc resolveEntities
-#  ?ast:let @ast inAST
-#  ?context:let @semanticContext inSemanticContext
-#{
-#  outIntermediateCodeStruct = .default
-#  outIntermediateCodeStruct.mTargetParameters = inSemanticContext.mTargetParameters
-#  outIntermediateCodeStruct.mStaticStringMap = inGlobalLiteralStringMap
-#  outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
-#  for requiredProc in inAST.mRequiredProcListAST do
-#    let requiredProcedureMangledName = routineMangledNameFromAST (!"" !requiredProc.mName !requiredProc.mFormalArgumentList)
-#    outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProcedureMangledName.string
-#  end 
-##--- Global variables
-#  for globalVar in inAST.mGlobalVarDeclarationListAST do
-#    [globalVar semanticAnalysis
-#      !context:inSemanticContext
-#      !?intermediateCode:outIntermediateCodeStruct
-#     ]
+proc solveEntities
+  ?ast:let @ast inAST
+  ?context:let @semanticContext inSemanticContext
+{
+#--------------------------------------------- Build register map
+#  @registerMapSE registerMapSE = {}
+#  for registerDeclaration in inAST.mControlRegisterDeclarationListAST do
+#    for register in registerDeclaration.mRegisterNameList do
+#      [!?registerMapSE insertKey !register.mRegisterName ! [register.mControlRegisterKind isRegisterArray]]
+#    end
 #  end
-##---
+#--------------------------------------------- Build global variable map
+#  @globalVariableMap globalVariableMapSE = {}
+#  for globalVar in inAST.mGlobalVarDeclarationListAST do
+#    [!?globalVariableMapSE insertKey !globalVar.mVarName]
+#    if [inSemanticContext.mControlRegisterMap hasKey !globalVar.mVarName.string] then
+#      error globalVar.mVarName : "name collision with a control register"
+#    end
+#  end
+#---------------------------------------------
+  [inAST.mStandAloneFunctionDeclarationListAST solveEntities
+    !globalConstants:inSemanticContext.mGlobalConstantMap
+    !registers:inSemanticContext.mControlRegisterMap
+    !globalVars:inSemanticContext.mGlobalVariableMap
+  ]
 #  @semanticTemporariesStruct temporaries = .default
 #  for (declaration) in inAST.mDeclarationListAST do
 #    [declaration semanticAnalysis
@@ -117,6 +123,6 @@
 #      end
 #    end
 #  end
-#}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -3,7 +3,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @assertInstructionAST : @instructionAST {
-  @location mAssertInstructionLocation
   @expressionAST mExpression
 }
 
@@ -19,7 +18,7 @@ syntax extension plm_syntax {
     $assert$
     let loc = @location.here
     <expression> ?let @expressionAST expression
-    ioInstructionList += !loc !@assertInstructionAST.new {
+    ioInstructionList += !@assertInstructionAST.new {
       !loc
       !expression
     }
@@ -35,6 +34,34 @@ syntax extension plm_syntax {
 
 override method @assertInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @assertInstructionSE : @instructionSE {
+  @expressionSE mExpression
+}
+
+#·······················································································································
+
+override method @assertInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  [mExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let expression
+  ]
+  ioInstructionListSE += !@assertInstructionSE.new {
+    !mInstructionLocation
+    !expression
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -56,7 +83,7 @@ override method @assertInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if inCurrentMode == .panicMode then
-    error mAssertInstructionLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+    error mInstructionLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR instructionGenerationList = {}
@@ -76,16 +103,16 @@ override method @assertInstructionAST analyze
   ]
 #--- Check inferred type
   if not [[expressionValue type] isBoolean] then
-    error mAssertInstructionLocation : "expression is not boolean"
+    error mInstructionLocation : "expression is not boolean"
   end
 #--- Check expression is not static
   if [expressionValue isStatic] then
-    error mAssertInstructionLocation : "expression is static: use check directive"
+    error mInstructionLocation : "expression is static: use check directive"
   end
 #--- Code generation
   if not [option plm_options.noPanicGeneration value] then
     ioInstructionGenerationList += !@assertInstructionIR.new {
-      !mAssertInstructionLocation
+      !mInstructionLocation
       !instructionGenerationList
       !expressionValue
     }
