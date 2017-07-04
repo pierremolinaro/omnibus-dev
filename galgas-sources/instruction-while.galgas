@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @whileInstructionAST : @instructionAST {
-  @expressionAST mTestExpression
+  @expressionAST m_while_Expression
   @location mEndOf_test_expression
   @instructionListAST mWhileInstructionList
   @location mEndOf_while_instruction
@@ -27,7 +27,8 @@ syntax extension plm_syntax {
     <instructionList> ?let instructionList
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !instructionLocation !@whileInstructionAST.new {
+    ioInstructionList += !@whileInstructionAST.new {
+      !instructionLocation
       !testExpression
       !testExpressionEndLocation
       !instructionList
@@ -45,7 +46,48 @@ syntax extension plm_syntax {
 
 override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mWhileInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [mTestExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [m_while_Expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @whileInstructionSE : @instructionSE {
+  @expressionSE m_while_Expression
+  @location mEndOf_test_expression
+  @instructionListSE mWhileInstructionList
+  @location mEndOf_while_instruction
+}
+
+#·······················································································································
+
+override method @whileInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  [m_while_Expression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let whileExpression
+  ]
+  @instructionListSE while_instructionList = {}
+  [mWhileInstructionList solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    !?while_instructionList
+  ]
+  ioInstructionListSE += !@whileInstructionSE.new {
+    !mInstructionLocation
+    !whileExpression
+    !mEndOf_test_expression
+    !while_instructionList
+    !mEndOf_while_instruction
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -68,7 +110,7 @@ override method @whileInstructionAST analyze
 {
 #--- Analyze test expression
   @instructionListIR testInstructionGenerationList = {}
-  [mTestExpression analyzeExpression
+  [m_while_Expression analyzeExpression
     !self:inSelfType
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -131,7 +173,7 @@ override method @whileInstructionAST analyze
 class @whileInstructionIR : @abstractInstructionIR {
   @uint mLabelIndex
   @instructionListIR mTestInstructionGenerationList
-  @objectIR mTestExpression
+  @objectIR m_while_Expression
   @instructionListIR mInstructionGenerationList
 }
 
@@ -148,7 +190,7 @@ override method @whileInstructionIR llvmInstructionCode
   ioLLVMcode += "  br label %" + labelTest + "\n\n"
   ioLLVMcode += labelTest + ":\n"
   [mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + [mTestExpression llvmName] + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
+  ioLLVMcode += "  br i1 " + [m_while_Expression llvmName] + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
   ioLLVMcode += labelLoop + ":\n"
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + labelTest + "\n\n"

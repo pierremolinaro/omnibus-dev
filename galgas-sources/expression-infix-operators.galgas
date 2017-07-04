@@ -45,6 +45,71 @@ class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @infixOperatorExpressionSE : @expressionSE {
+  @expressionSE mLeftExpression
+  @location mOperatorLocation
+  @infixOperator mOp
+  @expressionSE mRightExpression
+}
+
+#·······················································································································
+
+override method @infixOperatorExpressionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  !@expressionSE outExpression
+{
+  [mLeftExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let leftExpression
+  ]
+  [mRightExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let rightExpression
+  ]
+  outExpression = @infixOperatorExpressionSE.new {!leftExpression !mOperatorLocation !mOp !rightExpression}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @booleanShortCircuitAndOperatorExpressionSE : @expressionSE {
+  @expressionSE mLeftExpression
+  @location mOperatorLocation
+  @expressionSE mRightExpression
+}
+
+#·······················································································································
+
+override method @booleanShortCircuitAndOperatorExpressionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  !@expressionSE outExpression
+{
+  [mLeftExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let leftExpression
+  ]
+  [mRightExpression solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    ?let rightExpression
+  ]
+  outExpression = @booleanShortCircuitAndOperatorExpressionSE.new {!leftExpression !mOperatorLocation !rightExpression}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

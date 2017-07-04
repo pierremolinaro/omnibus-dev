@@ -21,9 +21,11 @@ syntax extension plm_syntax {
     $=$
     <expression> ?let sourceExpression
   #--- AST
-    ioInstructionList +=
+    ioInstructionList += !@varAssignmentInstructionAST.new {
       ![assignmentTargetAST mIdentifier].location
-      !@varAssignmentInstructionAST.new {!assignmentTargetAST !sourceExpression}
+      !assignmentTargetAST
+      !sourceExpression
+    }
   }
 
   #·····················································································································
@@ -34,9 +36,11 @@ syntax extension plm_syntax {
     $=$
     <expression> ?let sourceExpression
   #--- AST
-    ioInstructionList +=
+    ioInstructionList += !@varAssignmentInstructionAST.new {
       ![assignmentTargetAST mIdentifier].location
-      !@varAssignmentInstructionAST.new {!assignmentTargetAST !sourceExpression}
+      !assignmentTargetAST
+      !sourceExpression
+    }
   }
 
   #·····················································································································
@@ -50,6 +54,25 @@ syntax extension plm_syntax {
 override method @varAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @varAssignmentInstructionSE : @instructionSE {
+  @assignmentTargetAST mAssignmentTargetAST
+  @expressionSE mSourceExpression
+}
+
+#·······················································································································
+
+override method @varAssignmentInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
+  ?registers:let @controlRegisterMap unused inRegisterMapSE
+  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

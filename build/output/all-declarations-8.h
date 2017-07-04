@@ -11,6 +11,137 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                Extension method '@moduleListIR-element generateLLVM'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_generateLLVM (const class GALGAS_moduleListIR_2D_element inObject,
+                                   class GALGAS_string & io_ioLLVMcode,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'generatePropertyAccess'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_generatePropertyAccess (const class GALGAS_PLMType constinArgument0,
+                                     class GALGAS_intermediateCodeStruct & ioArgument1,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension method '@panicClauseListAST-element enterInContext'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_enterInContext (const class GALGAS_panicClauseListAST_2D_element inObject,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Extension method '@initList-element enterInContext'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_enterInContext (const class GALGAS_initList_2D_element inObject,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Abstract extension method '@callInstructionAST baseGuardAnalyze'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (const class cPtr_callInstructionAST * inObject,
+                                                                              const class GALGAS_PLMType constinArgument0,
+                                                                              const class GALGAS_lstring constinArgument1,
+                                                                              const class GALGAS_semanticContext constinArgument2,
+                                                                              const class GALGAS_mode constinArgument3,
+                                                                              class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                                                              class GALGAS_staticStringMap & ioArgument5,
+                                                                              class GALGAS_unifiedSymbolMapEx & ioArgument6,
+                                                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
+                                                                              class GALGAS_guardKindGenerationIR & outArgument8,
+                                                                              class C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_baseGuardAnalyze (const int32_t inClassIndex,
+                                            extensionMethodSignature_callInstructionAST_baseGuardAnalyze inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST * inObject,
+                                           const GALGAS_PLMType constin_inSelfType,
+                                           const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                           const GALGAS_semanticContext constin_inContext,
+                                           const GALGAS_mode constin_inMode,
+                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                           GALGAS_unifiedSymbolMapEx & io_ioVariableMap,
+                                           GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
+                                           GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Function 'acceptVariableName'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_acceptVariableName (class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Function 'functionResultVariableName'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_functionResultVariableName (class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Function 'llvmNameForPrimitiveImplementation'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveImplementation (const class GALGAS_string & constinArgument0,
+                                                                 class C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Function 'llvmNameForSafeImplementation'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSafeImplementation (const class GALGAS_string & constinArgument0,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'llvmNameForSectionImplementation'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSectionImplementation (const class GALGAS_string & constinArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Routine 'enterBooleanOperators'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -511,47 +642,5 @@ void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
                                       const class GALGAS_location constinArgument2,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Routine 'analyzeFunctionCallInExpression'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeFunctionCallInExpression (const class GALGAS_PLMType constinArgument0,
-                                              const class GALGAS_bool constinArgument1,
-                                              const class GALGAS_bool constinArgument2,
-                                              const class GALGAS_objectIR constinArgument3,
-                                              const class GALGAS_lstring constinArgument4,
-                                              const class GALGAS_effectiveArgumentListAST constinArgument5,
-                                              const class GALGAS_lstring constinArgument6,
-                                              const class GALGAS_semanticContext constinArgument7,
-                                              const class GALGAS_mode constinArgument8,
-                                              class GALGAS_semanticTemporariesStruct & ioArgument9,
-                                              class GALGAS_staticStringMap & ioArgument10,
-                                              class GALGAS_unifiedSymbolMapEx & ioArgument11,
-                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument12,
-                                              class GALGAS_allocaList & ioArgument13,
-                                              class GALGAS_instructionListIR & ioArgument14,
-                                              class GALGAS_procCallEffectiveParameterListIR & outArgument15,
-                                              class GALGAS_calleeKindIR & outArgument16,
-                                              class GALGAS_lstring & outArgument17,
-                                              class GALGAS_lstring & outArgument18,
-                                              class GALGAS_PLMType & outArgument19,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'getInfixOperatorMap'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_infixOperator & constinArgument0,
-                                                            const class GALGAS_semanticContext & constinArgument1,
-                                                            const class GALGAS_mode & constinArgument2,
-                                                            const class GALGAS_location & constinArgument3,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
 
 #endif

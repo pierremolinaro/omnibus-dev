@@ -32,7 +32,7 @@ proc buildOrderedDeclarationList
   [inAST.mBootListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mInitListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mPanicClauseListAST noteTypesInPrecedenceGraph !?precedenceGraph]
-  [inAST.mProcedureListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mStandAloneFunctionDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mExternProcListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mStandAloneSystemRoutineListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGuardListAST noteTypesInPrecedenceGraph !?precedenceGraph]

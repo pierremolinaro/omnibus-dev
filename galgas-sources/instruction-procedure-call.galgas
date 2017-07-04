@@ -29,27 +29,29 @@ syntax extension plm_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     <procedure_call> ?let routineCallInstruction
-    ioInstructionList += ![routineCallInstruction mEndOfArguments] !routineCallInstruction
+    ioInstructionList += !routineCallInstruction
   }
 
   #·····················································································································
 
   rule <procedure_call> !@callInstructionAST outInstruction {
+    let instructionLocation = @location.here
     <assignment_target_noself> ?let assignmentTargetAST
     <effective_parameters> ?let arguments ?let endOfArguments
     if [[assignmentTargetAST mAccessList] length] == 0 then
-      outInstruction = @simpleCallInstructionAST.new {!arguments !endOfArguments ![assignmentTargetAST mIdentifier]}
+      outInstruction = @simpleCallInstructionAST.new {!instructionLocation !arguments !endOfArguments ![assignmentTargetAST mIdentifier]}
     else
-      outInstruction = @complexCallInstructionAST.new {!arguments !endOfArguments !assignmentTargetAST}
+      outInstruction = @complexCallInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
     end
   }
 
   #·····················································································································
 
   rule <procedure_call> !@callInstructionAST outInstruction {
+    let instructionLocation = @location.here
     <assignment_target_self> ?let assignmentTargetAST
     <effective_parameters> ?let arguments ?let endOfArguments
-    outInstruction = @complexCallInstructionAST.new {!arguments !endOfArguments !assignmentTargetAST}
+    outInstruction = @complexCallInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
   }
 
   #·····················································································································
@@ -91,6 +93,28 @@ override method @simpleCallInstructionAST noteInstructionTypesInPrecedenceGraph 
     case outputInputSelfVariable (*) :
     end 
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @simpleCallInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
+  ?registers:let @controlRegisterMap unused inRegisterMapSE
+  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @complexCallInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
+  ?registers:let @controlRegisterMap unused inRegisterMapSE
+  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

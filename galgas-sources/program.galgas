@@ -150,9 +150,9 @@ private proc compileProject
     )
   end
 #------------------------------------------------------------ Entity resolution
-#  if @uint.errorCount == 0 then
-#    resolveEntities (!ast:ast !context:semanticContext)
-#  end
+  if @uint.errorCount == 0 then
+    solveEntities (!ast:ast !context:semanticContext)
+  end
 #------------------------------------------------------------ Semantic analysis
   @intermediateCodeStruct intermediateCodeStruct = .default
   if @uint.errorCount == 0 then
@@ -243,7 +243,7 @@ private proc addTargetSpecificFiles
   ioAST.mGlobalVarDeclarationListAST = ast.mGlobalVarDeclarationListAST + ioAST.mGlobalVarDeclarationListAST
   ioAST.mControlRegisterDeclarationListAST = ast.mControlRegisterDeclarationListAST + ioAST.mControlRegisterDeclarationListAST
   ioAST.mExtensionDeclarationListAST = ast.mExtensionDeclarationListAST + ioAST.mExtensionDeclarationListAST
-  ioAST.mProcedureListAST = ast.mProcedureListAST + ioAST.mProcedureListAST
+  ioAST.mStandAloneFunctionDeclarationListAST = ast.mStandAloneFunctionDeclarationListAST + ioAST.mStandAloneFunctionDeclarationListAST
   ioAST.mRequiredProcListAST = ast.mRequiredProcListAST + ioAST.mRequiredProcListAST
   ioAST.mExternProcListAST = ast.mExternProcListAST + ioAST.mExternProcListAST
   ioAST.mStandAloneSystemRoutineListAST = ast.mStandAloneSystemRoutineListAST + ioAST.mStandAloneSystemRoutineListAST

@@ -289,7 +289,6 @@ method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
   !@controlRegisterFieldList outControlRegisterFieldList
 {
 #--- Build bit slice map
-#  @constantMap constantMap = {}
   outRegisterFieldMap = {}
   outRegisterBitSliceMap = {}
   outControlRegisterFieldList = {} # Used for HTML file
@@ -302,10 +301,6 @@ method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
         outControlRegisterFieldList += ![count.bigint uint] ! "—"
       case namedBit (@lstring name @lbigint count) :
         let bitCount = [count.bigint uint]
-#        if bitCount == 1 then
-         # [!?constantMap insertKey !name !.literalInteger {!type:ioRegisterType !value:1G << shiftCount}]
-#          [!?constantMap insertKey !name !1G << shiftCount !name]
-#        end
         outControlRegisterFieldList += !bitCount !name.string
         [!?outRegisterFieldMap insertKey
           !name
@@ -341,7 +336,7 @@ method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
         shiftCount = shiftCount + bitCount
       end
     end
-  #--- Bit slice count is correct
+  #--- Check slice bit count is correct
     if inRegisterBitCount != shiftCount then
       error mRegisterBitSliceListLocation
        : "total bit slice count is " + shiftCount + " (should be " + inRegisterBitCount + ")"

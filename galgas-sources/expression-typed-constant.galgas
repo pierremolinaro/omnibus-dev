@@ -2,9 +2,29 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @typedConstantCall : @expressionAST {
+class @typedConstantCallAST : @expressionAST {
   @lstring mOptionalTypeName
   @lstring mConstructorName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @typedConstantCallSE : @expressionSE {
+  @lstring mOptionalTypeName
+  @lstring mConstructorName
+}
+
+#·······················································································································
+
+override method @typedConstantCallAST solveEntities
+  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
+  ?registers:let @controlRegisterMap unused inRegisterMapSE
+  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  !@expressionSE outExpression
+{
+  outExpression = @typedConstantCallSE.new {!mOptionalTypeName !mConstructorName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,7 +44,7 @@ syntax extension plm_syntax {
     end
     $.$
     $identifier$ ?let constantName
-    outExpression = @typedConstantCall.new {!optionalTypeName !constantName}
+    outExpression = @typedConstantCallAST.new {!optionalTypeName !constantName}
   }
 
   #·····················································································································
@@ -34,7 +54,7 @@ syntax extension plm_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typedConstantCall addDependenceEdgeForStaticExpression
+override method @typedConstantCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -47,7 +67,7 @@ override method @typedConstantCall addDependenceEdgeForStaticExpression
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typedConstantCall noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if mOptionalTypeName.string != "" then
     [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!mOptionalTypeName)]
   end
@@ -57,7 +77,7 @@ override method @typedConstantCall noteExpressionTypesInPrecedenceGraph ?!@seman
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typedConstantCall analyzeExpression
+override method @typedConstantCallAST analyzeExpression
   ?self:let @PLMType unused inSelfType
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph

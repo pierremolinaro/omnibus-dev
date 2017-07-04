@@ -414,6 +414,21 @@ syntax extension plm_syntax {
 abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract class @expressionSE {
+}
+
+#·······················································································································
+
+abstract method @expressionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  !@expressionSE outExpression
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

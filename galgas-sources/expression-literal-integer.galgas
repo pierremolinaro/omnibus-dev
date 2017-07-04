@@ -7,6 +7,25 @@ class @literalIntegerInExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @literalIntegerInExpressionSE : @expressionSE {
+  @lbigint mLiteralInteger
+}
+
+#·······················································································································
+
+override method @literalIntegerInExpressionAST solveEntities
+  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
+  ?registers:let @controlRegisterMap unused inRegisterMapSE
+  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  !@expressionSE outExpression
+{
+  outExpression = @literalIntegerInExpressionSE.new {!mLiteralInteger}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

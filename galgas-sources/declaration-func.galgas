@@ -261,10 +261,82 @@ method @functionDeclarationListAST enterFunctionInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @functionDeclarationListAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+{
+  for functionDeclaration in self do
+    [functionDeclaration solveEntities
+      !globalConstants:inGlobalConstantMap
+      !registers:inRegisterMapSE
+      !globalVars:inGlobalVariableMapSE
+    ]
+  end
+}
+
+#·······················································································································
+
+method @functionDeclarationListAST-element solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+{
+  @instructionListSE instructionListSE = {}
+  [mFunctionInstructionList solveEntities
+    !globalConstants:inGlobalConstantMap
+    !registers:inRegisterMapSE
+    !globalVars:inGlobalVariableMapSE
+    !?instructionListSE
+  ]
+}
+
+#·······················································································································
+
+method @instructionListAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  for (instruction) in self do
+    [instruction solveEntities
+      !globalConstants:inGlobalConstantMap
+      !registers:inRegisterMapSE
+      !globalVars:inGlobalVariableMapSE
+      !?ioInstructionListSE
+    ]
+  end
+}
+
+#·······················································································································
+
+abstract method @instructionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+
+#·······················································································································
+
+abstract class @instructionSE {
+  @location mInstructionLocation
+}
+
+#·······················································································································
+
+list @instructionListSE {
+  @instructionSE mInstruction
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionDeclarationListAST procedureSemanticAnalysis
+method @functionDeclarationListAST functionSemanticAnalysis
   ?receiverType:@PLMType inReceiverType
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries

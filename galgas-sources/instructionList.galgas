@@ -3,12 +3,12 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @instructionAST {
+  @location mInstructionLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @instructionListAST {
-  @location mInstructionLocation
   @instructionAST mInstruction
 }
 
@@ -89,7 +89,7 @@ method @instructionListAST analyzeBranchInstructionList
   [!?ioUniversalMap openBranch]
   [!?ioVariableMap openBranch]
   for () in self do
-    [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
+    [!?ioInstructionGenerationList appendSourceLineComment ![mInstruction mInstructionLocation]]
     [mInstruction analyze 
       !self:inSelfType
       !propertiesAreMutable:inRoutineCanMutateProperties
@@ -128,7 +128,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {
   for () in self do
-    [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
+    [!?ioInstructionGenerationList appendSourceLineComment ![mInstruction mInstructionLocation]]
     [mInstruction analyze 
       !self:inSelfType
       !propertiesAreMutable:inRoutineCanMutateProperties

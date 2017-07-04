@@ -82,7 +82,8 @@ syntax extension plm_syntax {
     let instructionLocation = @location.here
     <assignment_operator> ?let @operatorAssignmentKind operatorAssign ?let @infixOperator unused infixOperator
     <expression> ?let @expressionAST expression
-    ioInstructionList += !instructionLocation !@varOperatorAssignInstructionAST.new {
+    ioInstructionList += !@varOperatorAssignInstructionAST.new {
+      !instructionLocation
       !assignmentTargetAST
       !operatorAssign
       !expression
@@ -115,7 +116,8 @@ syntax extension plm_syntax {
     let instructionLocation = @location.here
     <assignment_operator> ?let @operatorAssignmentKind operatorAssign ?let @infixOperator unused infixOperator
     <expression> ?let @expressionAST expression
-    ioInstructionList += !instructionLocation !@varOperatorAssignInstructionAST.new {
+    ioInstructionList += !@varOperatorAssignInstructionAST.new {
+      !instructionLocation
       !assignmentTargetAST
       !operatorAssign
       !expression
@@ -134,6 +136,18 @@ syntax extension plm_syntax {
 override method @varOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @varOperatorAssignInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
+  ?registers:let @controlRegisterMap unused inRegisterMapSE
+  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @guardedCommand {
+enum @guardedCommandAST {
   case synchronization (@bool isWhileCommand # if false, it is an "until" command
                         @lstring optionalReceiverName
                         @lstring guardName
@@ -20,19 +20,18 @@ enum @guardedCommand {
                     @effectiveArgumentListAST effectiveParameterListAST)
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-list @syncInstructionBranchList {
-  @guardedCommand mGuardedCommand
+list @syncInstructionBranchListAST {
+  @guardedCommandAST mGuardedCommand
   @instructionListAST mInstructionList
   @location mEndOfBranch
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 class @syncInstructionAST : @instructionAST {
-  @location mStartOf_on_instruction
-  @syncInstructionBranchList mBranchList
+  @syncInstructionBranchListAST mBranchList
   @location mEndOf_on_instruction
 }
 
@@ -44,47 +43,43 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <guarded_command> !@guardedCommand outGuardedCommand {
+  rule <guarded_command> !@guardedCommandAST outGuardedCommand {
     select
       $when$
       <expression> ?let @expressionAST expression
       let endOfExp = @location.here
-#      select
-#        outGuardedCommand = .boolean {!isWhileCommand:isWhileCommand !expression:expression !endOfExpression:endOfExp}
-#      or
-        @bool isWhileCommand
-        select
-          $until$
-          isWhileCommand = false
-        or
-          $while$
-          isWhileCommand = true
-        end
-        $identifier$ ?let name
-        select
-          <effective_parameters> ?let effectiveParameterList ?*
-          outGuardedCommand = .boolAndSync {
-            !isWhileCommand:isWhileCommand
-            !expression:expression
-            !endOfExpression:endOfExp
-            !optionalReceiverName:["" here]
-            !guardName:name
-            !effectiveParameterListAST:effectiveParameterList
-          }
-        or
-          $.$
-          $identifier$ ?let guardName
-          <effective_parameters> ?let effectiveParameterList ?*
-          outGuardedCommand = .boolAndSync {
-            !isWhileCommand:isWhileCommand
-            !expression:expression
-            !endOfExpression:endOfExp
-            !optionalReceiverName:name
-            !guardName:guardName
-            !effectiveParameterListAST:effectiveParameterList
-          }
-        end
-#      end
+      @bool isWhileCommand
+      select
+        $until$
+        isWhileCommand = false
+      or
+        $while$
+        isWhileCommand = true
+      end
+      $identifier$ ?let name
+      select
+        <effective_parameters> ?let effectiveParameterList ?*
+        outGuardedCommand = .boolAndSync {
+          !isWhileCommand:isWhileCommand
+          !expression:expression
+          !endOfExpression:endOfExp
+          !optionalReceiverName:["" here]
+          !guardName:name
+          !effectiveParameterListAST:effectiveParameterList
+        }
+      or
+        $.$
+        $identifier$ ?let guardName
+        <effective_parameters> ?let effectiveParameterList ?*
+        outGuardedCommand = .boolAndSync {
+          !isWhileCommand:isWhileCommand
+          !expression:expression
+          !endOfExpression:endOfExp
+          !optionalReceiverName:name
+          !guardName:guardName
+          !effectiveParameterListAST:effectiveParameterList
+        }
+      end
     or
       @bool isWhileCommand
       select
@@ -123,15 +118,15 @@ syntax extension plm_syntax {
     $sync$
     let startLocation = @location.here
     ${$
-    @syncInstructionBranchList onInstructionBranchList = {}
+    @syncInstructionBranchListAST onInstructionBranchList = {}
     repeat
-      <guarded_command> ?let @guardedCommand guardedCommand
+      <guarded_command> ?let @guardedCommandAST guardedCommand
       $:$
       <instructionList> ?let instructionList
       onInstructionBranchList += !guardedCommand !instructionList !.here
     while
     end
-    ioInstructionList += !startLocation !@syncInstructionAST.new {!startLocation !onInstructionBranchList !.here}
+    ioInstructionList += !@syncInstructionAST.new {!startLocation !onInstructionBranchList !.here}
     $}$
   }
   
@@ -147,6 +142,102 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
   for (* instructionList *) in mBranchList do
     [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @guardedCommandSE {
+  case synchronization (@bool isWhileCommand # if false, it is an "until" command
+                        @lstring optionalReceiverName
+                        @lstring guardName
+                        @effectiveArgumentListAST effectiveParameterListAST)
+
+  case boolean (@bool isWhileCommand # if false, it is an "until" command
+                @expressionSE expression
+                @location endOfExpression)
+
+  case boolAndSync (@bool isWhileCommand # if false, it is an "until" command
+                    @expressionSE expression
+                    @location endOfExpression
+                    @lstring optionalReceiverName
+                    @lstring guardName
+                    @effectiveArgumentListAST effectiveParameterListAST)
+}
+
+#·······················································································································
+
+list @syncInstructionBranchListSE {
+  @guardedCommandSE mGuardedCommand
+  @instructionListSE mInstructionList
+  @location mEndOfBranch
+}
+
+#·······················································································································
+
+class @syncInstructionSE : @instructionSE {
+  @syncInstructionBranchListSE mBranchList
+  @location mEndOf_on_instruction
+}
+
+#·······················································································································
+
+override method @syncInstructionAST solveEntities
+  ?globalConstants:@globalConstantMap inGlobalConstantMap
+  ?registers:let @controlRegisterMap inRegisterMapSE
+  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?!@instructionListSE ioInstructionListSE
+{
+  @syncInstructionBranchListSE branchList = {}
+  for () in mBranchList do
+    @instructionListSE instructionList = {}
+    [mInstructionList solveEntities
+      !globalConstants:inGlobalConstantMap
+      !registers:inRegisterMapSE
+      !globalVars:inGlobalVariableMapSE
+      !?instructionList
+    ]
+    @guardedCommandSE guardedCommand
+    switch mGuardedCommand
+    case synchronization (isWhileCommand optionalReceiverName guardName effectiveParameterListAST) :
+      guardedCommand = .synchronization {
+        !isWhileCommand:isWhileCommand
+        !optionalReceiverName:optionalReceiverName
+        !guardName:guardName
+        !effectiveParameterListAST:effectiveParameterListAST
+      }
+    case boolean (isWhileCommand expressionAST endOfExpression) :
+      [expressionAST solveEntities
+        !globalConstants:inGlobalConstantMap
+        !registers:inRegisterMapSE
+        !globalVars:inGlobalVariableMapSE
+        ?let expression
+      ]
+      guardedCommand = .boolean {
+        !isWhileCommand:isWhileCommand
+        !expression:expression
+        !endOfExpression:endOfExpression
+      }
+    case boolAndSync (isWhileCommand expAST endOfExpression optionalReceiverName guardName effectiveParameterListAST) :
+      [expAST solveEntities
+        !globalConstants:inGlobalConstantMap
+        !registers:inRegisterMapSE
+        !globalVars:inGlobalVariableMapSE
+        ?let expression
+      ]
+      guardedCommand = .boolAndSync {
+        !isWhileCommand:isWhileCommand
+        !expression:expression
+        !endOfExpression:endOfExpression
+        !optionalReceiverName:optionalReceiverName
+        !guardName:guardName
+        !effectiveParameterListAST:effectiveParameterListAST
+      }
+    end
+    branchList += !guardedCommand !instructionList !mEndOfBranch
+  end
+  ioInstructionListSE += !@syncInstructionSE.new {!mInstructionLocation !branchList !mEndOf_on_instruction}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -300,7 +391,7 @@ override method @syncInstructionAST analyze
       !branchInstructionGenerationList
   end
 #--- Code generation
-  ioInstructionGenerationList += !@syncInstructionIR.new {!mStartOf_on_instruction !onInstructionBranchListIR}
+  ioInstructionGenerationList += !@syncInstructionIR.new {!mInstructionLocation !onInstructionBranchListIR}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
