@@ -35,17 +35,13 @@ class @constructorCallSE : @expressionSE {
 #·······················································································································
 
 override method @constructorCallAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   !@expressionSE outExpression
 {
   @functionCallEffectiveParameterListSE parameterList = {}
   for (selector expressionAST) in mParameterList do
     [expressionAST solveEntities
-      !globalConstants:inGlobalConstantMap
-      !registers:inRegisterMapSE
-      !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
       ?let expression
     ]
     parameterList += !selector !expression

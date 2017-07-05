@@ -71,8 +71,8 @@ syntax extension plm_syntax {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractDeclaration addExtension
+abstract method @abstractDeclarationAST addExtension
   ?!@extensionDeclarationListAST ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

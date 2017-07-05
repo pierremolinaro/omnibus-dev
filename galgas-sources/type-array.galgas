@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @typeArrayDeclaration : @abstractDeclaration {
+class @typeArrayDeclarationAST : @abstractDeclarationAST {
   @lstring mArrayTypeName
   @lstring mElementTypeName
   @expressionAST mSizeExpression
@@ -11,7 +11,7 @@ class @typeArrayDeclaration : @abstractDeclaration {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @typeArrayDeclaration location -> @location outLocation {
+override getter @typeArrayDeclarationAST location -> @location outLocation {
   outLocation = mArrayTypeName.location
 }
 
@@ -23,13 +23,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclaration outDeclaration {
+  rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclarationAST outDeclaration {
     $\$type$ ?let elementTypeName
     $[$
     <expression> ?let sizeExpression
     let sizeExpressionLocation = @location.here
     $]$
-    outDeclaration = @typeArrayDeclaration.new {
+    outDeclaration = @typeArrayDeclarationAST.new {
       !inNewTypeName
       !elementTypeName
       !sizeExpression
@@ -45,9 +45,9 @@ syntax extension plm_syntax {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclaration addExtension
+override method @typeArrayDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -56,7 +56,7 @@ override method @typeArrayDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @typeArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let newTypeName = llvmRegularTypeMangledNameFromName (!mArrayTypeName)
   let elementTypeName = llvmRegularTypeMangledNameFromName (!mElementTypeName)
   [!?ioGraph addNode !newTypeName !self]
@@ -68,7 +68,7 @@ override method @typeArrayDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @typeArrayDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @typeArrayDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "arraytype $" + mArrayTypeName 
 }
 
@@ -76,7 +76,7 @@ override getter @typeArrayDeclaration keyRepresentationForErrorSignaling -> @str
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclaration enterRoutinesInContext
+override method @typeArrayDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -85,7 +85,7 @@ override method @typeArrayDeclaration enterRoutinesInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclaration enterInContext
+override method @typeArrayDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
@@ -154,10 +154,19 @@ override method @typeArrayDeclaration enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeArrayDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclaration semanticAnalysis
+override method @typeArrayDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

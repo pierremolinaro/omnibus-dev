@@ -265,15 +265,11 @@ method @functionDeclarationListAST enterFunctionInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @functionDeclarationListAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
 {
   for functionDeclaration in self do
     [functionDeclaration solveEntities
-      !globalConstants:inGlobalConstantMap
-      !registers:inRegisterMapSE
-      !globalVars:inGlobalVariableMapSE
+      !context:inSemanticContext
     ]
   end
 }
@@ -281,15 +277,11 @@ method @functionDeclarationListAST solveEntities
 #·······················································································································
 
 method @functionDeclarationListAST-element solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
 {
   @instructionListSE instructionListSE = {}
   [mFunctionInstructionList solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     !?instructionListSE
   ]
 }
@@ -297,16 +289,12 @@ method @functionDeclarationListAST-element solveEntities
 #·······················································································································
 
 method @instructionListAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   for (instruction) in self do
     [instruction solveEntities
-      !globalConstants:inGlobalConstantMap
-      !registers:inRegisterMapSE
-      !globalVars:inGlobalVariableMapSE
+      !context:inSemanticContext
       !?ioInstructionListSE
     ]
   end
@@ -315,9 +303,7 @@ method @instructionListAST solveEntities
 #·······················································································································
 
 abstract method @instructionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 
 #·······················································································································

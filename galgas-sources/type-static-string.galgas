@@ -2,13 +2,13 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @literalStringDeclaration : @abstractDeclaration {
+class @literalStringDeclarationAST : @abstractDeclarationAST {
   @lstring mLiteralStringTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalStringDeclaration location -> @location outLocation {
+override getter @literalStringDeclarationAST location -> @location outLocation {
   outLocation = mLiteralStringTypeName.location
 }
 
@@ -16,9 +16,9 @@ override getter @literalStringDeclaration location -> @location outLocation {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclaration addExtension
+override method @literalStringDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -27,7 +27,7 @@ override method @literalStringDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclaration enterInPrecedenceGraph
+override method @literalStringDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let literalStringTypeName = llvmRegularTypeMangledNameFromName (!mLiteralStringTypeName)
@@ -37,7 +37,7 @@ override method @literalStringDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalStringDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @literalStringDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "literal string " + mLiteralStringTypeName 
 }
 
@@ -45,7 +45,7 @@ override getter @literalStringDeclaration keyRepresentationForErrorSignaling -> 
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclaration enterRoutinesInContext
+override method @literalStringDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -54,7 +54,7 @@ override method @literalStringDeclaration enterRoutinesInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclaration enterInContext
+override method @literalStringDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
@@ -68,10 +68,19 @@ override method @literalStringDeclaration enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @literalStringDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclaration semanticAnalysis
+override method @literalStringDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

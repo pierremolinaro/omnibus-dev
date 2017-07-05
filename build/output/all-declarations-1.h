@@ -110,7 +110,7 @@ class cParser_plm_5F_target_5F_specific_5F_syntax {
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclaration {
+class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--- Constructor
   public : GALGAS_configurationDeclarationAST (void) ;
 
@@ -307,281 +307,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          @sectionImplementationScheme enum                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_sectionImplementationScheme : public AC_GALGAS_root {
-//--------------------------------- Default constructor
-  public : GALGAS_sectionImplementationScheme (void) ;
-
-//--------------------------------- Enumeration
-  public : typedef enum {
-    kNotBuilt,
-    kEnum_none,
-    kEnum_svc,
-    kEnum_function
-  } enumeration ;
-  
-//--------------------------------- Private data member
-  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
-
-  private : enumeration mEnum ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
-  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
-  public : inline enumeration enumValue (void) const { return mEnum ; }
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_sectionImplementationScheme extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_sectionImplementationScheme constructor_function (const class GALGAS_string & inOperand0,
-                                                                                 const class GALGAS_string & inOperand1
-                                                                                 COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_sectionImplementationScheme constructor_none (LOCATION_ARGS) ;
-
-  public : static class GALGAS_sectionImplementationScheme constructor_svc (const class GALGAS_lbigint & inOperand0,
-                                                                            const class GALGAS_lstring & inOperand1,
-                                                                            const class GALGAS_lstring & inOperand2,
-                                                                            const class GALGAS_lstring & inOperand3,
-                                                                            const class GALGAS_lstring & inOperand4
-                                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_sectionImplementationScheme & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_string & outArgument0,
-                                                  class GALGAS_string & outArgument1,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_svc (class GALGAS_lbigint & outArgument0,
-                                             class GALGAS_lstring & outArgument1,
-                                             class GALGAS_lstring & outArgument2,
-                                             class GALGAS_lstring & outArgument3,
-                                             class GALGAS_lstring & outArgument4,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFunction (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNone (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSvc (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_sectionImplementationScheme class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sectionImplementationScheme ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @targetParameters struct                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_targetParameters : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public : GALGAS__32_lstringlist mProperty_mPython_5F_utilityToolList ;
-
-  public : GALGAS_lstring mProperty_mPython_5F_build ;
-
-  public : GALGAS_lstring mProperty_mTargetPanic_5F_LL_5F_filePath ;
-
-  public : GALGAS_lstring mProperty_mLinkerScript ;
-
-  public : GALGAS_lbigint mProperty_mPointerSize ;
-
-  public : GALGAS_lbigint mProperty_mSystemStackSize ;
-
-  public : GALGAS_lbigint mProperty_mStackedUserRegisterOnInterruptByteSize ;
-
-  public : GALGAS_lstring mProperty_mNopInstructionStringInLLVM ;
-
-  public : GALGAS_lstring mProperty_mServiceHandler ;
-
-  public : GALGAS_lbigint mProperty_mServicePushedRegisterByteSize ;
-
-  public : GALGAS_sectionImplementationScheme mProperty_mSectionImplementation ;
-
-  public : GALGAS_lstringlist mProperty_m_5F_C_5F_definitionFiles ;
-
-  public : GALGAS_lstringlist mProperty_m_5F_S_5F_definitionFiles ;
-
-  public : GALGAS_lstringlist mProperty_m_5F_LL_5F_definitionFiles ;
-
-  public : GALGAS_lstring mProperty_mXtrInterruptHandler ;
-
-  public : GALGAS_lstring mProperty_mUndefinedInterruptHandler ;
-
-  public : GALGAS_lstring mProperty_mServiceDispatcherEntry ;
-
-  public : GALGAS_lstring mProperty_mServiceDispatcherHeader ;
-
-  public : GALGAS_lstring mProperty_mServiceEntry ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_targetParameters constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_targetParameters (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_targetParameters (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_targetParameters (const GALGAS__32_lstringlist & in_mPython_5F_utilityToolList,
-                                    const GALGAS_lstring & in_mPython_5F_build,
-                                    const GALGAS_lstring & in_mTargetPanic_5F_LL_5F_filePath,
-                                    const GALGAS_lstring & in_mLinkerScript,
-                                    const GALGAS_lbigint & in_mPointerSize,
-                                    const GALGAS_lbigint & in_mSystemStackSize,
-                                    const GALGAS_lbigint & in_mStackedUserRegisterOnInterruptByteSize,
-                                    const GALGAS_lstring & in_mNopInstructionStringInLLVM,
-                                    const GALGAS_lstring & in_mServiceHandler,
-                                    const GALGAS_lbigint & in_mServicePushedRegisterByteSize,
-                                    const GALGAS_sectionImplementationScheme & in_mSectionImplementation,
-                                    const GALGAS_lstringlist & in_m_5F_C_5F_definitionFiles,
-                                    const GALGAS_lstringlist & in_m_5F_S_5F_definitionFiles,
-                                    const GALGAS_lstringlist & in_m_5F_LL_5F_definitionFiles,
-                                    const GALGAS_lstring & in_mXtrInterruptHandler,
-                                    const GALGAS_lstring & in_mUndefinedInterruptHandler,
-                                    const GALGAS_lstring & in_mServiceDispatcherEntry,
-                                    const GALGAS_lstring & in_mServiceDispatcherHeader,
-                                    const GALGAS_lstring & in_mServiceEntry) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_targetParameters extractObject (const GALGAS_object & inObject,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_targetParameters constructor_new (const class GALGAS__32_lstringlist & inOperand0,
-                                                                 const class GALGAS_lstring & inOperand1,
-                                                                 const class GALGAS_lstring & inOperand2,
-                                                                 const class GALGAS_lstring & inOperand3,
-                                                                 const class GALGAS_lbigint & inOperand4,
-                                                                 const class GALGAS_lbigint & inOperand5,
-                                                                 const class GALGAS_lbigint & inOperand6,
-                                                                 const class GALGAS_lstring & inOperand7,
-                                                                 const class GALGAS_lstring & inOperand8,
-                                                                 const class GALGAS_lbigint & inOperand9,
-                                                                 const class GALGAS_sectionImplementationScheme & inOperand10,
-                                                                 const class GALGAS_lstringlist & inOperand11,
-                                                                 const class GALGAS_lstringlist & inOperand12,
-                                                                 const class GALGAS_lstringlist & inOperand13,
-                                                                 const class GALGAS_lstring & inOperand14,
-                                                                 const class GALGAS_lstring & inOperand15,
-                                                                 const class GALGAS_lstring & inOperand16,
-                                                                 const class GALGAS_lstring & inOperand17,
-                                                                 const class GALGAS_lstring & inOperand18
-                                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_targetParameters & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLinkerScript (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNopInstructionStringInLLVM (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPython_5F_build (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS__32_lstringlist getter_mPython_5F_utilityToolList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_sectionImplementationScheme getter_mSectionImplementation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceDispatcherEntry (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceDispatcherHeader (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceEntry (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceHandler (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mServicePushedRegisterByteSize (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mStackedUserRegisterOnInterruptByteSize (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSystemStackSize (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTargetPanic_5F_LL_5F_filePath (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mUndefinedInterruptHandler (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mXtrInterruptHandler (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_m_5F_C_5F_definitionFiles (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_m_5F_LL_5F_definitionFiles (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_m_5F_S_5F_definitionFiles (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_targetParameters class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_targetParameters ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                Pointer class for @configurationDeclarationAST class                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_configurationDeclarationAST : public cPtr_abstractDeclaration {
+class cPtr_configurationDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mPanicCodeTypeName ;
   public : GALGAS_lstring mProperty_mPanicLineTypeName ;
@@ -2063,192 +1793,6 @@ class cPtr_universalPropertyAndRoutineMapForContext : public acPtr_class {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                    @PLMType enum                                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_PLMType : public AC_GALGAS_root {
-//--------------------------------- Default constructor
-  public : GALGAS_PLMType (void) ;
-
-//--------------------------------- Enumeration
-  public : typedef enum {
-    kNotBuilt,
-    kEnum_void,
-    kEnum_boolean,
-    kEnum_literalString,
-    kEnum_enumeration,
-    kEnum_structure,
-    kEnum_integer,
-    kEnum_staticInteger,
-    kEnum_opaque,
-    kEnum_arrayType,
-    kEnum_function,
-    kEnum_pointer
-  } enumeration ;
-  
-//--------------------------------- Private data member
-  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
-
-  private : enumeration mEnum ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
-  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
-  public : inline enumeration enumValue (void) const { return mEnum ; }
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_PLMType extractObject (const GALGAS_object & inObject,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_PLMType constructor_arrayType (const class GALGAS_lstring & inOperand0,
-                                                              const class GALGAS_PLMType & inOperand1,
-                                                              const class GALGAS_bigint & inOperand2,
-                                                              const class GALGAS_constantMap & inOperand3,
-                                                              const class GALGAS_uint & inOperand4,
-                                                              const class GALGAS_string & inOperand5
-                                                              COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_boolean (LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_enumeration (const class GALGAS_constantMap & inOperand0,
-                                                                const class GALGAS_string & inOperand1
-                                                                COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_function (const class GALGAS_routineDescriptor & inOperand0
-                                                             COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_integer (const class GALGAS_bigint & inOperand0,
-                                                            const class GALGAS_bigint & inOperand1,
-                                                            const class GALGAS_bool & inOperand2,
-                                                            const class GALGAS_uint & inOperand3,
-                                                            const class GALGAS_string & inOperand4
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_literalString (LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_opaque (const class GALGAS_bigint & inOperand0,
-                                                           const class GALGAS_uint & inOperand1,
-                                                           const class GALGAS_string & inOperand2
-                                                           COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_pointer (const class GALGAS_PLMType & inOperand0
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_staticInteger (LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_structure (const class GALGAS_lstring & inOperand0,
-                                                              const class GALGAS_propertyMap & inOperand1,
-                                                              const class GALGAS_universalPropertyAndRoutineMapForContext & inOperand2,
-                                                              const class GALGAS_propertyList & inOperand3,
-                                                              const class GALGAS_uint & inOperand4,
-                                                              const class GALGAS_string & inOperand5
-                                                              COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_PLMType constructor_void (LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_PLMType & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_arrayType (class GALGAS_lstring & outArgument0,
-                                                   class GALGAS_PLMType & outArgument1,
-                                                   class GALGAS_bigint & outArgument2,
-                                                   class GALGAS_constantMap & outArgument3,
-                                                   class GALGAS_uint & outArgument4,
-                                                   class GALGAS_string & outArgument5,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_enumeration (class GALGAS_constantMap & outArgument0,
-                                                     class GALGAS_string & outArgument1,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_routineDescriptor & outArgument0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_integer (class GALGAS_bigint & outArgument0,
-                                                 class GALGAS_bigint & outArgument1,
-                                                 class GALGAS_bool & outArgument2,
-                                                 class GALGAS_uint & outArgument3,
-                                                 class GALGAS_string & outArgument4,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_opaque (class GALGAS_bigint & outArgument0,
-                                                class GALGAS_uint & outArgument1,
-                                                class GALGAS_string & outArgument2,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_pointer (class GALGAS_PLMType & outArgument0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_lstring & outArgument0,
-                                                   class GALGAS_propertyMap & outArgument1,
-                                                   class GALGAS_universalPropertyAndRoutineMapForContext & outArgument2,
-                                                   class GALGAS_propertyList & outArgument3,
-                                                   class GALGAS_uint & outArgument4,
-                                                   class GALGAS_string & outArgument5,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayType (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolean (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isEnumeration (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFunction (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInteger (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOpaque (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPointer (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticInteger (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStructure (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVoid (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_PLMType class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_PLMType ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                                   @objectIR enum                                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2850,70 +2394,6 @@ class cEnumerator_routineTypedSignature : public cGenericAbstractEnumerator {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineTypedSignature ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         @unifiedTypeMap_2D_proxy map proxy                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_unifiedTypeMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
-//--------------------------------- Default constructor
-  public : GALGAS_unifiedTypeMap_2D_proxy (void) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_unifiedTypeMap_2D_proxy extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_unifiedTypeMap_2D_proxy constructor_null (LOCATION_ARGS) ;
-
-  public : static class GALGAS_unifiedTypeMap_2D_proxy constructor_searchKey (const class GALGAS_unifiedTypeMap & inOperand0,
-                                                                              const class GALGAS_lstring & inOperand1,
-                                                                              class C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-  public : static void class_method_makeOptionalProxy (class GALGAS_unifiedTypeMap & ioArgument0,
-                                                       class GALGAS_lstring constinArgument1,
-                                                       class GALGAS_unifiedTypeMap_2D_proxy & outArgument2
-                                                       COMMA_LOCATION_ARGS) ;
-
-  public : static void class_method_makeProxy (class GALGAS_unifiedTypeMap & ioArgument0,
-                                               class GALGAS_lstring constinArgument1,
-                                               class GALGAS_unifiedTypeMap_2D_proxy & outArgument2
-                                               COMMA_LOCATION_ARGS) ;
-
-  public : static void class_method_makeProxyFromString (class GALGAS_unifiedTypeMap & ioArgument0,
-                                                         class GALGAS_string constinArgument1,
-                                                         class GALGAS_unifiedTypeMap_2D_proxy & outArgument2
-                                                         COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_type (C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_unifiedTypeMap_2D_proxy class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -4733,47 +4213,47 @@ class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_PLMType & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Abstract extension method '@abstractDeclaration addExtension'                            *
+//                          Abstract extension method '@abstractDeclarationAST addExtension'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_abstractDeclaration_addExtension) (const class cPtr_abstractDeclaration * inObject,
-                                                                           class GALGAS_extensionDeclarationListAST & ioArgument0,
-                                                                           class GALGAS_abstractDeclaration & outArgument1,
-                                                                           class C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_abstractDeclarationAST_addExtension) (const class cPtr_abstractDeclarationAST * inObject,
+                                                                              class GALGAS_extensionDeclarationListAST & ioArgument0,
+                                                                              class GALGAS_abstractDeclarationAST & outArgument1,
+                                                                              class C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void enterExtensionMethod_addExtension (const int32_t inClassIndex,
-                                        extensionMethodSignature_abstractDeclaration_addExtension inMethod) ;
+                                        extensionMethodSignature_abstractDeclarationAST_addExtension inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionMethod_addExtension (const class cPtr_abstractDeclaration * inObject,
+void callExtensionMethod_addExtension (const class cPtr_abstractDeclarationAST * inObject,
                                        GALGAS_extensionDeclarationListAST & io_ioExtensionDeclarationListAST,
-                                       GALGAS_abstractDeclaration & out_outNewDeclaration,
+                                       GALGAS_abstractDeclarationAST & out_outNewDeclaration,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              @integerDeclaration class                                              *
+//                                            @integerDeclarationAST class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_integerDeclaration : public GALGAS_abstractDeclaration {
+class GALGAS_integerDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--- Constructor
-  public : GALGAS_integerDeclaration (void) ;
+  public : GALGAS_integerDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_integerDeclaration constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_integerDeclarationAST constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_integerDeclaration * ptr (void) const { return (const cPtr_integerDeclaration *) mObjectPtr ; }
+  public : inline const class cPtr_integerDeclarationAST * ptr (void) const { return (const cPtr_integerDeclarationAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_integerDeclaration (const cPtr_integerDeclaration * inSourcePtr) ;
+  public : GALGAS_integerDeclarationAST (const cPtr_integerDeclarationAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -4781,17 +4261,17 @@ class GALGAS_integerDeclaration : public GALGAS_abstractDeclaration {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_integerDeclaration extractObject (const GALGAS_object & inObject,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_integerDeclarationAST extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_integerDeclaration constructor_new (const class GALGAS_bool & inOperand0,
-                                                                   const class GALGAS_uint & inOperand1
-                                                                   COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_integerDeclarationAST constructor_new (const class GALGAS_bool & inOperand0,
+                                                                      const class GALGAS_uint & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_integerDeclaration & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_integerDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4807,28 +4287,28 @@ class GALGAS_integerDeclaration : public GALGAS_abstractDeclaration {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_integerDeclaration class
+} ; // End of GALGAS_integerDeclarationAST class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerDeclaration ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerDeclarationAST ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Pointer class for @integerDeclaration class                                     *
+//                                   Pointer class for @integerDeclarationAST class                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_integerDeclaration : public cPtr_abstractDeclaration {
+class cPtr_integerDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_bool mProperty_mIsSigned ;
   public : GALGAS_uint mProperty_mSize ;
 
 //--- Constructor
-  public : cPtr_integerDeclaration (const GALGAS_bool & in_mIsSigned,
-                                    const GALGAS_uint & in_mSize
-                                    COMMA_LOCATION_ARGS) ;
+  public : cPtr_integerDeclarationAST (const GALGAS_bool & in_mIsSigned,
+                                       const GALGAS_uint & in_mSize
+                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -4848,43 +4328,43 @@ class cPtr_integerDeclaration : public cPtr_abstractDeclaration {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Extension getter '@integerDeclaration typeName'                                   *
+//                                 Extension getter '@integerDeclarationAST typeName'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef class GALGAS_string (*enterExtensionGetter_integerDeclaration_typeName) (const class cPtr_integerDeclaration * inObject,
-                                                                                 C_Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_string (*enterExtensionGetter_integerDeclarationAST_typeName) (const class cPtr_integerDeclarationAST * inObject,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void enterExtensionGetter_typeName (const int32_t inClassIndex,
-                                    enterExtensionGetter_integerDeclaration_typeName inGetter) ;
+                                    enterExtensionGetter_integerDeclarationAST_typeName inGetter) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string callExtensionGetter_typeName (const cPtr_integerDeclaration * inObject,
+class GALGAS_string callExtensionGetter_typeName (const cPtr_integerDeclarationAST * inObject,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          @literalIntegerDeclaration class                                           *
+//                                         @literalIntegerDeclarationAST class                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_literalIntegerDeclaration : public GALGAS_abstractDeclaration {
+class GALGAS_literalIntegerDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--- Constructor
-  public : GALGAS_literalIntegerDeclaration (void) ;
+  public : GALGAS_literalIntegerDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_literalIntegerDeclaration constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_literalIntegerDeclarationAST constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_literalIntegerDeclaration * ptr (void) const { return (const cPtr_literalIntegerDeclaration *) mObjectPtr ; }
+  public : inline const class cPtr_literalIntegerDeclarationAST * ptr (void) const { return (const cPtr_literalIntegerDeclarationAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_literalIntegerDeclaration (const cPtr_literalIntegerDeclaration * inSourcePtr) ;
+  public : GALGAS_literalIntegerDeclarationAST (const cPtr_literalIntegerDeclarationAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -4892,15 +4372,15 @@ class GALGAS_literalIntegerDeclaration : public GALGAS_abstractDeclaration {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_literalIntegerDeclaration extractObject (const GALGAS_object & inObject,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_literalIntegerDeclarationAST extractObject (const GALGAS_object & inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_literalIntegerDeclaration constructor_new (LOCATION_ARGS) ;
+  public : static class GALGAS_literalIntegerDeclarationAST constructor_new (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_literalIntegerDeclaration & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_literalIntegerDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4912,24 +4392,24 @@ class GALGAS_literalIntegerDeclaration : public GALGAS_abstractDeclaration {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_literalIntegerDeclaration class
+} ; // End of GALGAS_literalIntegerDeclarationAST class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalIntegerDeclaration ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalIntegerDeclarationAST ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Pointer class for @literalIntegerDeclaration class                                  *
+//                                Pointer class for @literalIntegerDeclarationAST class                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_literalIntegerDeclaration : public cPtr_abstractDeclaration {
+class cPtr_literalIntegerDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
 
 //--- Constructor
-  public : cPtr_literalIntegerDeclaration (LOCATION_ARGS) ;
+  public : cPtr_literalIntegerDeclarationAST (LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -5613,227 +5093,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceMap_2D_element
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @controlRegisterMap map                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cMapElement_controlRegisterMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const char * kSearchErrorMessage_controlRegisterMap_searchKey ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_controlRegisterMap : public AC_GALGAS_map {
-//--------------------------------- Default constructor
-  public : GALGAS_controlRegisterMap (void) ;
-
-//--------------------------------- Handle copy
-  public : GALGAS_controlRegisterMap (const GALGAS_controlRegisterMap & inSource) ;
-  public : GALGAS_controlRegisterMap & operator = (const GALGAS_controlRegisterMap & inSource) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_controlRegisterMap extractObject (const GALGAS_object & inObject,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_controlRegisterMap constructor_emptyMap (LOCATION_ARGS) ;
-
-  public : static class GALGAS_controlRegisterMap constructor_mapWithMapToOverride (const class GALGAS_controlRegisterMap & inOperand0
-                                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_PLMType & inOperand1,
-                                                      const class GALGAS_bool & inOperand2,
-                                                      const class GALGAS_bool & inOperand3,
-                                                      const class GALGAS_sliceMap & inOperand4,
-                                                      const class GALGAS_controlRegisterFieldMap & inOperand5,
-                                                      const class GALGAS_bigint & inOperand6,
-                                                      const class GALGAS_controlRegisterFieldList & inOperand7,
-                                                      const class GALGAS_uint & inOperand8,
-                                                      const class GALGAS_uint & inOperand9,
-                                                      const class GALGAS_uint & inOperand10,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_PLMType constinArgument1,
-                                                   class GALGAS_bool constinArgument2,
-                                                   class GALGAS_bool constinArgument3,
-                                                   class GALGAS_sliceMap constinArgument4,
-                                                   class GALGAS_controlRegisterFieldMap constinArgument5,
-                                                   class GALGAS_bigint constinArgument6,
-                                                   class GALGAS_controlRegisterFieldList constinArgument7,
-                                                   class GALGAS_uint constinArgument8,
-                                                   class GALGAS_uint constinArgument9,
-                                                   class GALGAS_uint constinArgument10,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMAddressForKey (class GALGAS_bigint constinArgument0,
-                                                           class GALGAS_string constinArgument1,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMArraySizeForKey (class GALGAS_uint constinArgument0,
-                                                             class GALGAS_string constinArgument1,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterFieldListForKey (class GALGAS_controlRegisterFieldList constinArgument0,
-                                                                            class GALGAS_string constinArgument1,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMElementArraySizeForKey (class GALGAS_uint constinArgument0,
-                                                                    class GALGAS_string constinArgument1,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMIsAccessibleInUserModeForKey (class GALGAS_bool constinArgument0,
-                                                                          class GALGAS_string constinArgument1,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMIsReadOnlyForKey (class GALGAS_bool constinArgument0,
-                                                              class GALGAS_string constinArgument1,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMRegisterBitCountForKey (class GALGAS_uint constinArgument0,
-                                                                    class GALGAS_string constinArgument1,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMRegisterFieldAccessMapForKey (class GALGAS_sliceMap constinArgument0,
-                                                                          class GALGAS_string constinArgument1,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMRegisterFieldMapForKey (class GALGAS_controlRegisterFieldMap constinArgument0,
-                                                                    class GALGAS_string constinArgument1,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMTypeForKey (class GALGAS_PLMType constinArgument0,
-                                                        class GALGAS_string constinArgument1,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_PLMType & outArgument1,
-                                                   class GALGAS_bool & outArgument2,
-                                                   class GALGAS_bool & outArgument3,
-                                                   class GALGAS_sliceMap & outArgument4,
-                                                   class GALGAS_controlRegisterFieldMap & outArgument5,
-                                                   class GALGAS_bigint & outArgument6,
-                                                   class GALGAS_controlRegisterFieldList & outArgument7,
-                                                   class GALGAS_uint & outArgument8,
-                                                   class GALGAS_uint & outArgument9,
-                                                   class GALGAS_uint & outArgument10,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mAddressForKey (const class GALGAS_string & constinOperand0,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mArraySizeForKey (const class GALGAS_string & constinOperand0,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterFieldList getter_mControlRegisterFieldListForKey (const class GALGAS_string & constinOperand0,
-                                                                                                          C_Compiler * inCompiler
-                                                                                                          COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mElementArraySizeForKey (const class GALGAS_string & constinOperand0,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsAccessibleInUserModeForKey (const class GALGAS_string & constinOperand0,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsReadOnlyForKey (const class GALGAS_string & constinOperand0,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mRegisterBitCountForKey (const class GALGAS_string & constinOperand0,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_sliceMap getter_mRegisterFieldAccessMapForKey (const class GALGAS_string & constinOperand0,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterFieldMap getter_mRegisterFieldMapForKey (const class GALGAS_string & constinOperand0,
-                                                                                                 C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mTypeForKey (const class GALGAS_string & constinOperand0,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterMap getter_overriddenMap (C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_controlRegisterMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                const GALGAS_string & inKey
-                                                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Friend
-
-  friend class cEnumerator_controlRegisterMap ;
- 
-} ; // End of GALGAS_controlRegisterMap class
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumerator_controlRegisterMap : public cGenericAbstractEnumerator {
-  public : cEnumerator_controlRegisterMap (const GALGAS_controlRegisterMap & inEnumeratedObject,
-                                           const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-  public : class GALGAS_PLMType current_mType (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mIsReadOnly (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mIsAccessibleInUserMode (LOCATION_ARGS) const ;
-  public : class GALGAS_sliceMap current_mRegisterFieldAccessMap (LOCATION_ARGS) const ;
-  public : class GALGAS_controlRegisterFieldMap current_mRegisterFieldMap (LOCATION_ARGS) const ;
-  public : class GALGAS_bigint current_mAddress (LOCATION_ARGS) const ;
-  public : class GALGAS_controlRegisterFieldList current_mControlRegisterFieldList (LOCATION_ARGS) const ;
-  public : class GALGAS_uint current_mRegisterBitCount (LOCATION_ARGS) const ;
-  public : class GALGAS_uint current_mArraySize (LOCATION_ARGS) const ;
-  public : class GALGAS_uint current_mElementArraySize (LOCATION_ARGS) const ;
-//--- Current element access
-  public : class GALGAS_controlRegisterMap_2D_element current (LOCATION_ARGS) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                   Class for element of '@controlRegisterMap' map                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6047,7 +5306,7 @@ class GALGAS_semanticTypePrecedenceGraph : public AC_GALGAS_graph {
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_addNode (class GALGAS_lstring inArgument0,
-                                                 class GALGAS_abstractDeclaration inArgument1,
+                                                 class GALGAS_abstractDeclarationAST inArgument1,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -6688,89 +5947,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instanciedModuleMap
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                   @moduleMap map                                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cMapElement_moduleMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_moduleMap : public AC_GALGAS_map {
-//--------------------------------- Default constructor
-  public : GALGAS_moduleMap (void) ;
-
-//--------------------------------- Handle copy
-  public : GALGAS_moduleMap (const GALGAS_moduleMap & inSource) ;
-  public : GALGAS_moduleMap & operator = (const GALGAS_moduleMap & inSource) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_moduleMap extractObject (const GALGAS_object & inObject,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_moduleMap constructor_emptyMap (LOCATION_ARGS) ;
-
-  public : static class GALGAS_moduleMap constructor_mapWithMapToOverride (const class GALGAS_moduleMap & inOperand0
-                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_moduleMap getter_overriddenMap (C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_moduleMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                       const GALGAS_string & inKey
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Friend
-
-  friend class cEnumerator_moduleMap ;
- 
-} ; // End of GALGAS_moduleMap class
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumerator_moduleMap : public cGenericAbstractEnumerator {
-  public : cEnumerator_moduleMap (const GALGAS_moduleMap & inEnumeratedObject,
-                                  const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-//--- Current element access
-  public : class GALGAS_moduleMap_2D_element current (LOCATION_ARGS) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_moduleMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Class for element of '@moduleMap' map                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7217,110 +6393,6 @@ class GALGAS_staticArrayPropertyListAST_2D_element : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticArrayPropertyListAST_2D_element ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                 @staticlistMap map                                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cMapElement_staticlistMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const char * kSearchErrorMessage_staticlistMap_searchKey ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_staticlistMap : public AC_GALGAS_map {
-//--------------------------------- Default constructor
-  public : GALGAS_staticlistMap (void) ;
-
-//--------------------------------- Handle copy
-  public : GALGAS_staticlistMap (const GALGAS_staticlistMap & inSource) ;
-  public : GALGAS_staticlistMap & operator = (const GALGAS_staticlistMap & inSource) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_staticlistMap extractObject (const GALGAS_object & inObject,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_staticlistMap constructor_emptyMap (LOCATION_ARGS) ;
-
-  public : static class GALGAS_staticlistMap constructor_mapWithMapToOverride (const class GALGAS_staticlistMap & inOperand0
-                                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_propertyList & inOperand1,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_propertyList constinArgument1,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMStaticlistPropertyListForKey (class GALGAS_propertyList constinArgument0,
-                                                                          class GALGAS_string constinArgument1,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_propertyList & outArgument1,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_propertyList getter_mStaticlistPropertyListForKey (const class GALGAS_string & constinOperand0,
-                                                                                            C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_staticlistMap getter_overriddenMap (C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_staticlistMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                           const GALGAS_string & inKey
-                                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Friend
-
-  friend class cEnumerator_staticlistMap ;
- 
-} ; // End of GALGAS_staticlistMap class
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumerator_staticlistMap : public cGenericAbstractEnumerator {
-  public : cEnumerator_staticlistMap (const GALGAS_staticlistMap & inEnumeratedObject,
-                                      const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-  public : class GALGAS_propertyList current_mStaticlistPropertyList (LOCATION_ARGS) const ;
-//--- Current element access
-  public : class GALGAS_staticlistMap_2D_element current (LOCATION_ARGS) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticlistMap ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

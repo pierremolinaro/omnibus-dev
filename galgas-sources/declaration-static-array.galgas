@@ -16,7 +16,7 @@ list @staticArrayPropertyListAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @staticArrayAST : @abstractDeclaration {
+class @staticArrayAST : @abstractDeclarationAST {
   @lstring mStaticListName
   @staticArrayPropertyListAST mPropertyList
 }
@@ -87,7 +87,7 @@ syntax extension plm_syntax {
 
 override method @staticArrayAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -229,6 +229,15 @@ override method @staticArrayAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @staticArrayAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
 {
 }
 

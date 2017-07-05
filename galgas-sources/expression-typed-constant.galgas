@@ -19,9 +19,7 @@ class @typedConstantCallSE : @expressionSE {
 #·······················································································································
 
 override method @typedConstantCallAST solveEntities
-  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
-  ?registers:let @controlRegisterMap unused inRegisterMapSE
-  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?context:let @semanticContext unused inSemanticContext
   !@expressionSE outExpression
 {
   outExpression = @typedConstantCallSE.new {!mOptionalTypeName !mConstructorName}

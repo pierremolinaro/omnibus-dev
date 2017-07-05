@@ -137,6 +137,23 @@ method @systemRoutineDeclarationListAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @systemRoutineDeclarationListAST solveEntities
+  ?receiverType:@PLMType unused inReceiverType
+  ?context:let @semanticContext inSemanticContext
+{
+  for svc in self do
+    @instructionListSE instructionListSE = {}
+    [svc.mInstructionList solveEntities
+      !context:inSemanticContext
+      !?instructionListSE
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

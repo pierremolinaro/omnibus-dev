@@ -58,21 +58,15 @@ class @infixOperatorExpressionSE : @expressionSE {
 #·······················································································································
 
 override method @infixOperatorExpressionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   !@expressionSE outExpression
 {
   [mLeftExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let leftExpression
   ]
   [mRightExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let rightExpression
   ]
   outExpression = @infixOperatorExpressionSE.new {!leftExpression !mOperatorLocation !mOp !rightExpression}
@@ -89,21 +83,15 @@ class @booleanShortCircuitAndOperatorExpressionSE : @expressionSE {
 #·······················································································································
 
 override method @booleanShortCircuitAndOperatorExpressionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   !@expressionSE outExpression
 {
   [mLeftExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let leftExpression
   ]
   [mRightExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let rightExpression
   ]
   outExpression = @booleanShortCircuitAndOperatorExpressionSE.new {!leftExpression !mOperatorLocation !rightExpression}

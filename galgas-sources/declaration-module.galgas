@@ -41,7 +41,7 @@ list @moduleInstanciationListAST {
 
 #·······················································································································
 
-class @requiredModuleAST : @abstractDeclaration {
+class @requiredModuleAST : @abstractDeclarationAST {
   @lstring mModuleName
 }
 
@@ -160,7 +160,7 @@ override getter @requiredModuleAST location -> @location outLocation {
 
 override method @requiredModuleAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -225,7 +225,7 @@ proc retainRequiredModules ?!@ast ioAST {
     #---
       let moduleTypeName = moduleMangledNameFromModuleName (!declaration.mModuleName)
       ioAST.mDeclarationListAST += !@requiredModuleAST.new {!declaration.mModuleName}
-      ioAST.mDeclarationListAST += !@structureDeclaration.new {
+      ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
         !moduleTypeName
         !{}
         !modulePropertyListAST
@@ -276,6 +276,15 @@ override method @requiredModuleAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @requiredModuleAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
 {
 }
 

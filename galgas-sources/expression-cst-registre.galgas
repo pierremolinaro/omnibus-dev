@@ -37,17 +37,13 @@ class @registerConstantExpressionSE : @expressionSE {
 #·······················································································································
 
 override method @registerConstantExpressionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   !@expressionSE outExpression
 {
   @registerIntegerFieldListSE fieldValues = {}
   for () in mFieldValues do
     [mExpression solveEntities
-      !globalConstants:inGlobalConstantMap
-      !registers:inRegisterMapSE
-      !globalVars:inGlobalVariableMapSE
+      !context:inSemanticContext
       ?let expression
     ]
     fieldValues += !mFieldName !expression !mExpressionLocation

@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @opaqueTypeDeclaration : @abstractDeclaration {
+class @opaqueTypeDeclarationAST : @abstractDeclarationAST {
   @lstring mOpaqueTypeName
   @lstringlist mAttributeList
   @expressionAST mSizeExpression
@@ -11,7 +11,7 @@ class @opaqueTypeDeclaration : @abstractDeclaration {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @opaqueTypeDeclaration location -> @location outLocation {
+override getter @opaqueTypeDeclarationAST location -> @location outLocation {
   outLocation = mOpaqueTypeName.location
 }
 
@@ -23,7 +23,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclaration outDeclaration {
+  rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclarationAST outDeclaration {
     $($
     $($
     <expression> ?let sizeExpression
@@ -36,7 +36,7 @@ syntax extension plm_syntax {
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
-    outDeclaration = @opaqueTypeDeclaration.new {!inNewTypeName !attributeList !sizeExpression !sizeExpressionLocation}
+    outDeclaration = @opaqueTypeDeclarationAST.new {!inNewTypeName !attributeList !sizeExpression !sizeExpressionLocation}
   }
 
   #·····················································································································
@@ -47,9 +47,9 @@ syntax extension plm_syntax {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclaration addExtension
+override method @opaqueTypeDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -58,7 +58,7 @@ override method @opaqueTypeDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclaration enterInPrecedenceGraph
+override method @opaqueTypeDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let typeName = llvmRegularTypeMangledNameFromName (!mOpaqueTypeName)
@@ -69,7 +69,7 @@ override method @opaqueTypeDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @opaqueTypeDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @opaqueTypeDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "opaqueType $" + mOpaqueTypeName 
 }
 
@@ -77,7 +77,7 @@ override getter @opaqueTypeDeclaration keyRepresentationForErrorSignaling -> @st
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclaration enterInContext
+override method @opaqueTypeDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
@@ -143,7 +143,7 @@ override method @opaqueTypeDeclaration enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclaration enterRoutinesInContext
+override method @opaqueTypeDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -151,10 +151,19 @@ override method @opaqueTypeDeclaration enterRoutinesInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @opaqueTypeDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclaration semanticAnalysis
+override method @opaqueTypeDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

@@ -91,15 +91,11 @@ class @varInstructionWithAssignmentSE : @instructionSE {
 #·······················································································································
 
 override method @varInstructionWithAssignmentAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   [mSourceExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let expression
   ]
   ioInstructionListSE += !@varInstructionWithAssignmentSE.new {
@@ -120,9 +116,7 @@ class @varInstructionSE : @instructionSE {
 #·······················································································································
 
 override method @varInstructionAST solveEntities
-  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
-  ?registers:let @controlRegisterMap unused inRegisterMapSE
-  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?context:let @semanticContext unused inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   ioInstructionListSE += !@varInstructionSE.new {!mInstructionLocation !mVarName !mTypeName}

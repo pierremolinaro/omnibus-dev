@@ -21,15 +21,11 @@ class @convertExpressionSE : @expressionSE {
 #·······················································································································
 
 override method @convertExpressionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   !@expressionSE outExpression
 {
   [mExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE 
+    !context:inSemanticContext
     ?let expression]
   outExpression = @convertExpressionSE.new {!expression !mTypeName !mEndOfExpression}
 }

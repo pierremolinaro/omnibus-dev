@@ -63,22 +63,16 @@ class @whileInstructionSE : @instructionSE {
 #·······················································································································
 
 override method @whileInstructionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   [m_while_Expression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let whileExpression
   ]
   @instructionListSE while_instructionList = {}
   [mWhileInstructionList solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     !?while_instructionList
   ]
   ioInstructionListSE += !@whileInstructionSE.new {

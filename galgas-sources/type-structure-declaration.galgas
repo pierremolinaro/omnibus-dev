@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @structureDeclaration : @abstractDeclaration {
+class @structureDeclarationAST : @abstractDeclarationAST {
   @lstring mStructureName
   @lstringlist mAttributeListAST
   @structurePropertyListAST mStructurePropertyListAST
@@ -13,7 +13,7 @@ class @structureDeclaration : @abstractDeclaration {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @structureDeclaration location -> @location outLocation {
+override getter @structureDeclarationAST location -> @location outLocation {
   outLocation = mStructureName.location
 }
 
@@ -96,7 +96,7 @@ syntax extension plm_syntax {
       $;$
     end
     $}$
-    ioAST.mDeclarationListAST += !@structureDeclaration.new {
+    ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
       !structureName
       !attributeList
       !fieldList
@@ -114,11 +114,11 @@ syntax extension plm_syntax {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @structureDeclaration addExtension
+override method @structureDeclarationAST addExtension
   ?!@extensionDeclarationListAST ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
-  @structureDeclaration newDeclaration = self
+  @structureDeclarationAST newDeclaration = self
   let currentExtensionDeclarationListAST = ioExtensionDeclarationListAST
   ioExtensionDeclarationListAST = {}
   for (typeName functions properties svcs guards) in currentExtensionDeclarationListAST do
@@ -142,7 +142,7 @@ override method @structureDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let structureTypeName = llvmRegularTypeMangledNameFromName (!mStructureName)
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
@@ -177,7 +177,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @structureDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @structureDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "struct $" + mStructureName 
 }
 
@@ -218,7 +218,7 @@ sortedlist @sortedOperandIRList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @structureDeclaration enterInContext
+override method @structureDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
@@ -411,7 +411,7 @@ override method @structureDeclaration enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @structureDeclaration enterRoutinesInContext
+override method @structureDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -431,10 +431,40 @@ override method @structureDeclaration enterRoutinesInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @structureDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext inSemanticContext
+{
+  for function in mFunctionDeclarationListAST do
+    @instructionListSE instructionListSE = {}
+    [function.mFunctionInstructionList solveEntities
+      !context:inSemanticContext
+      !?instructionListSE
+    ]
+  end
+  for systemRoutine in mSystemRoutineListAST do
+    @instructionListSE instructionListSE = {}
+    [systemRoutine.mInstructionList solveEntities
+      !context:inSemanticContext
+      !?instructionListSE
+    ]
+  end
+  for guard in mGuardListAST do
+    @instructionListSE instructionListSE = {}
+    [guard.mGuardInstructionList solveEntities
+      !context:inSemanticContext
+      !?instructionListSE
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @structureDeclaration semanticAnalysis
+override method @structureDeclarationAST semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -467,7 +497,7 @@ override method @structureDeclaration semanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @structureDeclaration functionSemanticAnalysis
+method @structureDeclarationAST functionSemanticAnalysis
   ?structureType:let @PLMType inStructureType
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries

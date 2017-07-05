@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @globalConstantDeclaration : @abstractDeclaration {
+class @globalConstantDeclarationAST : @abstractDeclarationAST {
   @lstring mConstantName
   @lstring mConstantTypeName
   @expressionAST mSourceExpression
@@ -10,7 +10,7 @@ class @globalConstantDeclaration : @abstractDeclaration {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @globalConstantDeclaration location -> @location outLocation {
+override getter @globalConstantDeclarationAST location -> @location outLocation {
   outLocation = mConstantName.location
 }
 
@@ -33,7 +33,7 @@ syntax extension plm_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    ioAST.mDeclarationListAST += !@globalConstantDeclaration.new {
+    ioAST.mDeclarationListAST += !@globalConstantDeclarationAST.new {
       !constantName
       !typeName
       !expression
@@ -48,9 +48,9 @@ syntax extension plm_syntax {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclaration addExtension
+override method @globalConstantDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -65,7 +65,7 @@ abstract method @expressionAST addDependenceEdgeForStaticExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add 'constant name' node
   [!?ioGraph addNode !mConstantName !self]
 #--- Add dependency from constant type name
@@ -79,7 +79,7 @@ override method @globalConstantDeclaration enterInPrecedenceGraph ?!@semanticTyp
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @globalConstantDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @globalConstantDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "global constant " + mConstantName 
 }
 
@@ -87,7 +87,7 @@ override getter @globalConstantDeclaration keyRepresentationForErrorSignaling ->
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclaration enterInContext
+override method @globalConstantDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
@@ -143,10 +143,19 @@ override method @globalConstantDeclaration enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclaration enterRoutinesInContext
+override method @globalConstantDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @globalConstantDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
 {
 }
 
@@ -208,7 +217,7 @@ func linkForGlobalConstant ?let @string inConstantName -> @string outResult {
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclaration semanticAnalysis
+override method @globalConstantDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

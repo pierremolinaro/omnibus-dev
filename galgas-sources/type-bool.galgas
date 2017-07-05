@@ -2,13 +2,13 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @booleanDeclaration : @abstractDeclaration {
+class @booleanDeclarationAST : @abstractDeclarationAST {
   @lstring mBooleanTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @booleanDeclaration location -> @location outLocation {
+override getter @booleanDeclarationAST location -> @location outLocation {
   outLocation = mBooleanTypeName.location
 }
 
@@ -16,9 +16,9 @@ override getter @booleanDeclaration location -> @location outLocation {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanDeclaration addExtension
+override method @booleanDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -27,7 +27,7 @@ override method @booleanDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanDeclaration enterInPrecedenceGraph
+override method @booleanDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let boolTypeName = llvmRegularTypeMangledNameFromName (!mBooleanTypeName)
@@ -36,7 +36,7 @@ override method @booleanDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @booleanDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @booleanDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "bool " + llvmRegularTypeMangledNameFromName (!mBooleanTypeName)
 }
 
@@ -44,7 +44,7 @@ override getter @booleanDeclaration keyRepresentationForErrorSignaling -> @strin
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanDeclaration enterInContext
+override method @booleanDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
@@ -61,7 +61,7 @@ override method @booleanDeclaration enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanDeclaration enterRoutinesInContext
+override method @booleanDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -127,10 +127,19 @@ private proc enterBooleanOperators
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @booleanDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanDeclaration semanticAnalysis
+override method @booleanDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
