@@ -424,7 +424,7 @@ override method @primaryInExpressionAST analyzeExpression
   end
 #--- Analyze current internal representation, in order to get result as @objectIR
   switch internalRepresentation
-  case standAloneIdentifier (@lstring unused identifier) :
+  case standAloneIdentifier (identifier) :
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
   case structureMember (propertyName @objectIR currentPointer) :
     if [[currentPointer type] isStructure] then
@@ -473,7 +473,7 @@ private proc handlePropertyAccessInExpression
   case standAloneIdentifier (identifier) :
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?let @objectIR objectIR]
     switch objectIR
-    case globalVariableReference (type unused plmName) :
+    case globalVariableReference (type *) :
       if [type isStructure] then
         ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
       else
@@ -795,7 +795,7 @@ proc handleMethodCallInExpressionNew
     switch routineDescriptor.mRoutineCallingScheme
     case staticCall :
       effectiveParameterListIR += !.outputInput !inCurrentPointerIR # Add receiver as first argument
-    case propertyIndirectCall (*) :
+    case propertyIndirectCall (* *) :
     end
   #--- Analyze effective parameters
     analyzeEffectiveParametersNew (
@@ -829,9 +829,9 @@ proc handleMethodCallInExpressionNew
       }
     #--- Enter in invocation graph
       [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-    case propertyIndirectCall (propertyIndex) :
+    case propertyIndirectCall (propertyIndex type) :
       let propertyReference = @objectIR.temporaryReference {
-         !type:[inCurrentPointerIR type] #.function {!descriptor:routineDescriptor} #  TYPE IS IRRELEVANT
+         !type:type # [inCurrentPointerIR type] #  TYPE IS IRRELEVANT
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inMethodName}
          !sliceMap:{}
          !volatile:false
@@ -844,9 +844,14 @@ proc handleMethodCallInExpressionNew
         !propertyIndex
       ]
     #--- Code generation
+#      let type = @PLMType.function {
+#        !signature:routineDescriptor.mSignature
+#        !mode:[routineDescriptor.mRoutineKind executionMode]
+#        !returnTypeProxy:routineDescriptor.mReturnTypeProxy
+#      }
       ioInstructionGenerationList += !@indirectRoutineCallIR.new {
         !propertyReference
-        !.function {!descriptor:routineDescriptor}
+        !type
         !outCallReturnedResult
         !effectiveParameterListIR
       }
@@ -1057,7 +1062,7 @@ proc analyzeEffectiveParametersNew
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case enumeration (* *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case function (*) :
+      case function (* * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case pointer (*) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
@@ -1431,7 +1436,7 @@ proc analyzeEffectiveParameters
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
         case enumeration (* *) :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case function (*) :
+        case function (* * *) :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
         case pointer (*) :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
