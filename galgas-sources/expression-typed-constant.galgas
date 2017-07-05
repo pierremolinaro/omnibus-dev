@@ -8,24 +8,6 @@ class @typedConstantCallAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @typedConstantCallSE : @expressionSE {
-  @lstring mOptionalTypeName
-  @lstring mConstructorName
-}
-
-#·······················································································································
-
-override method @typedConstantCallAST solveEntities
-  ?context:let @semanticContext unused inSemanticContext
-  !@expressionSE outExpression
-{
-  outExpression = @typedConstantCallSE.new {!mOptionalTypeName !mConstructorName}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

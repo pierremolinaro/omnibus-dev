@@ -46,7 +46,3 @@ struct @ast {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-abstract method @abstractDeclarationAST solveEntitiesForDeclarations
-  ?context:let @semanticContext inSemanticContext
-

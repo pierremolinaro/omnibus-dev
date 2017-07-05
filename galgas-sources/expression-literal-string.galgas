@@ -7,23 +7,6 @@ class @literalStringInExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @literalStringInExpressionSE : @expressionSE {
-  @lstring mLiteralString
-}
-
-#·······················································································································
-
-override method @literalStringInExpressionAST solveEntities
-  ?context:let @semanticContext unused inSemanticContext
-  !@expressionSE outExpression
-{
-  outExpression = @literalStringInExpressionSE.new {!mLiteralString}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

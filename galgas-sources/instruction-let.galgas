@@ -52,34 +52,6 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @letInstructionWithAssignmentSE : @instructionSE {
-  @lstring mConstantName
-  @lstring mOptionalTypeName
-  @expressionSE mSourceExpression
-}
-
-#·······················································································································
-
-override method @letInstructionWithAssignmentAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  [mSourceExpression solveEntities
-    !context:inSemanticContext
-    ?let expression
-  ]
-  ioInstructionListSE += !@letInstructionWithAssignmentSE.new {
-    !mInstructionLocation
-    !mConstantName
-    !mOptionalTypeName
-    !expression
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

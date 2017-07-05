@@ -7,23 +7,6 @@ class @literalBooleanInExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @literalBooleanInExpressionSE : @expressionSE {
-  @bool mValue
-}
-
-#·······················································································································
-
-override method @literalBooleanInExpressionAST solveEntities
-  ?context:let @semanticContext unused inSemanticContext
-  !@expressionSE outExpression
-{
-  outExpression = @literalBooleanInExpressionSE.new {!mValue}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

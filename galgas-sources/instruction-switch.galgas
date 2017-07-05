@@ -72,52 +72,6 @@ override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @switchCaseListSE {
-  @lstringlist mCaseIdentifiers
-  @instructionListSE mCaseInstructionList
-}
-
-#·······················································································································
-
-class @switchInstructionSE : @instructionSE {
-  @expressionSE mSwitchExpression
-  @location mEndOf_test_expression
-  @switchCaseListSE mSwitchCaseList
-  @location mEndOf_switch_instruction
-}
-
-#·······················································································································
-
-override method @switchInstructionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  [mSwitchExpression solveEntities
-    !context:inSemanticContext
-    ?let switchExpression
-  ]
-  @switchCaseListSE switchCaseList = {}
-  for () in mSwitchCaseList do
-    @instructionListSE caseInstructionList = {}
-    [mCaseInstructionList solveEntities
-      !context:inSemanticContext
-      !?caseInstructionList
-    ]
-  
-  end
-  ioInstructionListSE += !@switchInstructionSE.new {
-    !mInstructionLocation
-    !switchExpression
-    !mEndOf_test_expression
-    !switchCaseList
-    !mEndOf_switch_instruction
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

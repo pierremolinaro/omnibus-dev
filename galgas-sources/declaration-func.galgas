@@ -261,64 +261,6 @@ method @functionDeclarationListAST enterFunctionInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @functionDeclarationListAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-{
-  for functionDeclaration in self do
-    [functionDeclaration solveEntities
-      !context:inSemanticContext
-    ]
-  end
-}
-
-#·······················································································································
-
-method @functionDeclarationListAST-element solveEntities
-  ?context:let @semanticContext inSemanticContext
-{
-  @instructionListSE instructionListSE = {}
-  [mFunctionInstructionList solveEntities
-    !context:inSemanticContext
-    !?instructionListSE
-  ]
-}
-
-#·······················································································································
-
-method @instructionListAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  for (instruction) in self do
-    [instruction solveEntities
-      !context:inSemanticContext
-      !?ioInstructionListSE
-    ]
-  end
-}
-
-#·······················································································································
-
-abstract method @instructionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-
-#·······················································································································
-
-abstract class @instructionSE {
-  @location mInstructionLocation
-}
-
-#·······················································································································
-
-list @instructionListSE {
-  @instructionSE mInstruction
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -366,30 +308,5 @@ method @functionDeclarationListAST functionSemanticAnalysis
     )
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   RESOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#method @functionDeclarationListAST resolveEntitiesInProcedures
-#  ?receiverType:@unifiedTypeMap-proxy inReceiverType
-#  ?context:let @semanticContext inSemanticContext
-#{
-#  for procedure in self do
-#    routineResolveEntities (
-#      !receiverType:inReceiverType
-#      !.function {!executionMode:procedure.mMode}
-#      !procedure.mMode
-#      !procedure.mFunctionName
-#      !procedure.mFunctionFormalArgumentList
-#      !returnTypeName:procedure.mFunctionReturnTypeName
-#      !procedure.mFunctionInstructionList
-#      !procedure.mEndOfFunctionDeclaration
-#      !directAccessToPropertiesAllowed:true
-#      !propertiesAreMutable:true
-#      !context:inSemanticContext
-#    )
-#  end
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

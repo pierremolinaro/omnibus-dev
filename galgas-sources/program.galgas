@@ -149,10 +149,6 @@ private proc compileProject
       ?context:semanticContext
     )
   end
-#------------------------------------------------------------ Entity resolution
-  if @uint.errorCount == 0 then
-    solveEntities (!ast:ast !context:semanticContext)
-  end
 #------------------------------------------------------------ Semantic analysis
   @intermediateCodeStruct intermediateCodeStruct = .default
   if @uint.errorCount == 0 then
