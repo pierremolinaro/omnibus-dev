@@ -39,7 +39,7 @@ func checkAssignmentCompatibility
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractDeclaration semanticAnalysis
+abstract method @abstractDeclarationAST semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct

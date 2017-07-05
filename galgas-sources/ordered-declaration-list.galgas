@@ -10,11 +10,11 @@ graph @semanticTypePrecedenceGraph (@declarationListAST) {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
+abstract method @abstractDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract getter @abstractDeclaration keyRepresentationForErrorSignaling -> @string
+abstract getter @abstractDeclarationAST keyRepresentationForErrorSignaling -> @string
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -45,11 +45,11 @@ proc buildOrderedDeclarationList
     if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
       if [split mValueAtIndex !0] == "$u" then
         let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
-        let declaration = @integerDeclaration.new {!false !n}
+        let declaration = @integerDeclarationAST.new {!false !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       elsif [split mValueAtIndex !0] == "$" then
         let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
-        let declaration = @integerDeclaration.new {!true !n}
+        let declaration = @integerDeclarationAST.new {!true !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       end
     end

@@ -2,17 +2,17 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @abstractDeclaration {
+abstract class @abstractDeclarationAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract getter @abstractDeclaration location -> @location
+abstract getter @abstractDeclarationAST location -> @location
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @declarationListAST {
-  @abstractDeclaration mDeclaration
+  @abstractDeclarationAST mDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -46,3 +46,7 @@ struct @ast {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract method @abstractDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext inSemanticContext
+

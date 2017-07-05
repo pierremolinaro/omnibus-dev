@@ -92,24 +92,18 @@ class @switchInstructionSE : @instructionSE {
 #·······················································································································
 
 override method @switchInstructionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   [mSwitchExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let switchExpression
   ]
   @switchCaseListSE switchCaseList = {}
   for () in mSwitchCaseList do
     @instructionListSE caseInstructionList = {}
     [mCaseInstructionList solveEntities
-      !globalConstants:inGlobalConstantMap
-      !registers:inRegisterMapSE
-      !globalVars:inGlobalVariableMapSE
+      !context:inSemanticContext
       !?caseInstructionList
     ]
   

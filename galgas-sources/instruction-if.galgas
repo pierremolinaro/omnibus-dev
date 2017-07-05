@@ -109,29 +109,21 @@ class @ifInstructionSE : @instructionSE {
 #·······················································································································
 
 override method @ifInstructionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   [mTestExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let testExpression
   ]
   @instructionListSE thenInstructionList = {}
   [mThenInstructionList solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     !?thenInstructionList
   ]
   @instructionListSE elseInstructionList = {}
   [mElseInstructionList solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     !?elseInstructionList
   ]
   ioInstructionListSE += !@ifInstructionSE.new {

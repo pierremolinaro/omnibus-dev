@@ -98,6 +98,14 @@ class @globalConstantAccessInExpressionSE : @expressionSE {
 
 #·······················································································································
 
+class @standAloneRoutineCallInExpressionSE : @expressionSE {
+  @lstring mRoutineName
+  @effectiveArgumentListAST arguments
+  @location endOfArguments
+}
+
+#·······················································································································
+
 class @globalVariableAccessInExpressionSE : @expressionSE {
   @lstring mGlobalVariableName
   @primaryInExpressionAccessListSE mAccessList
@@ -113,9 +121,7 @@ class @localVariableAccessInExpressionSE : @expressionSE {
 #·······················································································································
 
 override method @primaryInExpressionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   !@expressionSE outExpression
 {
   @primaryInExpressionAccessListSE accessList = {}
@@ -125,9 +131,7 @@ override method @primaryInExpressionAST solveEntities
       accessList += !.property {!name:name}
     case arrayAccess (indexAST endOfIndex) :
       [indexAST solveEntities
-        !globalConstants:inGlobalConstantMap
-        !registers:inRegisterMapSE
-        !globalVars:inGlobalVariableMapSE
+        !context:inSemanticContext
         ?let index
        ]
       accessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
@@ -138,12 +142,27 @@ override method @primaryInExpressionAST solveEntities
 #---
   switch mSelf
   case noSelf : # Check if named object is a register or a global variable
-    if [inRegisterMapSE hasKey !mObjectName] then
+    if [inSemanticContext.mControlRegisterMap hasKey !mObjectName] then
       outExpression = @registerReadInExpressionSE.new {!mObjectName !accessList}
-    elsif [inGlobalVariableMapSE hasKey !mObjectName] then
+    elsif [inSemanticContext.mGlobalVariableMap hasKey !mObjectName] then
       outExpression = @globalVariableAccessInExpressionSE.new {!mObjectName !accessList}
-    elsif [inGlobalConstantMap hasKey !mObjectName] then
+    elsif [inSemanticContext.mGlobalConstantMap hasKey !mObjectName] then
       outExpression = @globalConstantAccessInExpressionSE.new {!mObjectName !accessList}
+    elsif [accessList length] == 1 then
+      [accessList first ?let @primaryInExpressionAccessSE access]
+      switch access
+      case property (*) :
+        outExpression = @localVariableAccessInExpressionSE.new {!mObjectName !accessList}
+      case arrayAccess (* *) :
+        outExpression = @localVariableAccessInExpressionSE.new {!mObjectName !accessList}
+      case funcCall (@effectiveArgumentListAST arguments @location endOfArguments) :
+        let signature = [arguments routineSignature !mObjectName.location]
+        if [inSemanticContext.mRoutineMapForContext hasKey !mObjectName !signature] then
+          outExpression = @standAloneRoutineCallInExpressionSE.new {!mObjectName !arguments !endOfArguments}
+        else
+          outExpression = @localVariableAccessInExpressionSE.new {!mObjectName !accessList}
+        end
+      end
     else # By default, access to local variable
       outExpression = @localVariableAccessInExpressionSE.new {!mObjectName !accessList}
     end

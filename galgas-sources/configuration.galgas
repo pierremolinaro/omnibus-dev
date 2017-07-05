@@ -69,7 +69,7 @@ struct @targetParameters {
 
 #·······················································································································
 
-class @configurationDeclarationAST : @abstractDeclaration {
+class @configurationDeclarationAST : @abstractDeclarationAST {
   @lstring mPanicCodeTypeName
   @lstring mPanicLineTypeName
   @targetParameters mTargetParameters
@@ -281,7 +281,7 @@ syntax extension plm_target_specific_syntax {
 
 override method @configurationDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -374,6 +374,17 @@ override method @configurationDeclarationAST enterInContext
   end
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @configurationDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @configurationDeclarationAST semanticAnalysis

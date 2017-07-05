@@ -34,9 +34,7 @@ override method @letInstructionNOP noteInstructionTypesInPrecedenceGraph ?!@sema
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @letInstructionNOP solveEntities
-  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
-  ?registers:let @controlRegisterMap unused inRegisterMapSE
-  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?context:let @semanticContext unused inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   ioInstructionListSE += !@letInstructionSE.new {!mInstructionLocation}

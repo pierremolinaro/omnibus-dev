@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @typeAliasDeclaration : @abstractDeclaration {
+class @typeAliasDeclaration : @abstractDeclarationAST {
   @lstring mNewTypeName
   @lstring mAliasedTypeName
 }
@@ -21,7 +21,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclaration outDeclaration {
+  rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclarationAST outDeclaration {
     $\$type$ ?let aliasedTypeName
     outDeclaration = @typeAliasDeclaration.new {
       !inNewTypeName
@@ -39,7 +39,7 @@ syntax extension plm_syntax {
 
 override method @typeAliasDeclaration addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -420,9 +420,16 @@ private proc enterAliasInfixOperator
     ]
   end
 }
-  
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  INIT ANALYSIS                                                                                                        
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeAliasDeclaration solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
+{
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

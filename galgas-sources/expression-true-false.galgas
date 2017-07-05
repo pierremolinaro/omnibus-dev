@@ -17,9 +17,7 @@ class @literalBooleanInExpressionSE : @expressionSE {
 #·······················································································································
 
 override method @literalBooleanInExpressionAST solveEntities
-  ?globalConstants:@globalConstantMap unused inGlobalConstantMap
-  ?registers:let @controlRegisterMap unused inRegisterMapSE
-  ?globalVars:let @globalVariableMap unused inGlobalVariableMapSE
+  ?context:let @semanticContext unused inSemanticContext
   !@expressionSE outExpression
 {
   outExpression = @literalBooleanInExpressionSE.new {!mValue}

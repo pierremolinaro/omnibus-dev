@@ -64,15 +64,11 @@ class @letInstructionWithAssignmentSE : @instructionSE {
 #·······················································································································
 
 override method @letInstructionWithAssignmentAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   [mSourceExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let expression
   ]
   ioInstructionListSE += !@letInstructionWithAssignmentSE.new {

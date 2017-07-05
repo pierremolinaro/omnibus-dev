@@ -11,6 +11,159 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   Extension getter '@objectIR key' (as function)                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_key (const class GALGAS_objectIR & inObject,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Extension getter '@objectIR withType' (as function)                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_objectIR extensionGetter_withType (const class GALGAS_objectIR & inObject,
+                                                const class GALGAS_PLMType & constinArgument0,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Extension getter '@objectIR name' (as function)                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_name (const class GALGAS_objectIR & inObject,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Function 'literalStringName'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_literalStringName (const class GALGAS_uint & constinArgument0,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Class for element of '@globalVariableMapIR' map                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cMapElement_globalVariableMapIR : public cMapElement {
+//--- Map attributes
+  public : GALGAS_PLMType mProperty_mType ;
+  public : GALGAS_bool mProperty_mGenerateVolatile ;
+  public : GALGAS_objectIR mProperty_mInitialValue ;
+
+//--- Constructor
+  public : cMapElement_globalVariableMapIR (const GALGAS_lstring & inKey,
+                                            const GALGAS_PLMType & in_mType,
+                                            const GALGAS_bool & in_mGenerateVolatile,
+                                            const GALGAS_objectIR & in_mInitialValue
+                                            COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cMapElement * copy (void) ;
+
+//--- Description
+ public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       @globalVariableMapIR_2D_element struct                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_globalVariableMapIR_2D_element : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public : GALGAS_lstring mProperty_lkey ;
+
+  public : GALGAS_PLMType mProperty_mType ;
+
+  public : GALGAS_bool mProperty_mGenerateVolatile ;
+
+  public : GALGAS_objectIR mProperty_mInitialValue ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_globalVariableMapIR_2D_element (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_globalVariableMapIR_2D_element (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_globalVariableMapIR_2D_element (const GALGAS_lstring & in_lkey,
+                                                  const GALGAS_PLMType & in_mType,
+                                                  const GALGAS_bool & in_mGenerateVolatile,
+                                                  const GALGAS_objectIR & in_mInitialValue) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_globalVariableMapIR_2D_element extractObject (const GALGAS_object & inObject,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_globalVariableMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                               const class GALGAS_PLMType & inOperand1,
+                                                                               const class GALGAS_bool & inOperand2,
+                                                                               const class GALGAS_objectIR & inOperand3
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_globalVariableMapIR_2D_element & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mGenerateVolatile (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mInitialValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_globalVariableMapIR_2D_element class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalVariableMapIR_2D_element ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                   Class for element of '@globalConstantMapIR' map                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2886,6 +3039,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_assignment_5F_operator_ (GALGAS_operatorAssignmentKind & outArgument0,
                                                     GALGAS_infixOperator & outArgument1,
+                                                    GALGAS_location & outArgument2,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'assignment_target_noself' non terminal
@@ -2926,7 +3080,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 
 //----------- '' label
   public : virtual void nt_declaration_5F_type_ (const GALGAS_lstring inArgument0,
-                                                 GALGAS_abstractDeclaration & outArgument1,
+                                                 GALGAS_abstractDeclarationAST & outArgument1,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'effective_parameters' non terminal

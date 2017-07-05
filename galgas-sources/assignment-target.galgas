@@ -28,6 +28,7 @@ class @assignmentTargetNoSelfAST : @assignmentTargetAST {
 #·······················································································································
 
 class @assignmentTargetSelfAST : @assignmentTargetAST {
+  @location mSelfLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -63,6 +64,7 @@ syntax extension plm_syntax {
   rule <assignment_target_self> !@assignmentTargetSelfAST outAssignmentTargetAST {
   #--- Self
     $self$
+    let selfLocation = @location.here
     $.$
   #--- Object
     $identifier$ ?let identifier
@@ -80,7 +82,7 @@ syntax extension plm_syntax {
       $]$
       accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
     end
-    outAssignmentTargetAST = .new {!identifier !accessListAST}
+    outAssignmentTargetAST = .new {!identifier !accessListAST !selfLocation}
   }
 
   #·····················································································································

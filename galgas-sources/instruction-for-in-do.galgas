@@ -93,22 +93,16 @@ class @forInstructionSE : @instructionSE {
 #·······················································································································
 
 override method @forInstructionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   [mWhileExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let whileExpression
   ]
   @instructionListSE doInstructionList = {}
   [mDoInstructionList solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     !?doInstructionList
   ]
   ioInstructionListSE += !@forInstructionSE.new {

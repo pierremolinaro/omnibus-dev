@@ -79,14 +79,6 @@ list @operandList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @classConstantMap {
-#  @objectIR mValue
-#  insert insertKey error message "the '%K' class constant is already declared in %L"
-#  search searchKey error message "there is no '%K' class constant"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 list @operandIRList {
   @objectIR mOperand
 }
@@ -179,7 +171,7 @@ struct @semanticContext {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractDeclaration enterInContext
+abstract method @abstractDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
@@ -187,7 +179,7 @@ abstract method @abstractDeclaration enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractDeclaration enterRoutinesInContext
+abstract method @abstractDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap

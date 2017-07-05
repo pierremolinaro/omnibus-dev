@@ -2,12 +2,12 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @literalIntegerDeclaration : @abstractDeclaration {
+class @literalIntegerDeclarationAST : @abstractDeclarationAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalIntegerDeclaration location -> @location outLocation {
+override getter @literalIntegerDeclarationAST location -> @location outLocation {
   outLocation = .nowhere
 }
 
@@ -15,9 +15,9 @@ override getter @literalIntegerDeclaration location -> @location outLocation {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclaration addExtension
+override method @literalIntegerDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -26,7 +26,7 @@ override method @literalIntegerDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclaration enterInPrecedenceGraph
+override method @literalIntegerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let staticIntegerTypeName = llvmRegularTypeMangledNameFromName (![staticIntegerTypeName () nowhere])
@@ -36,7 +36,7 @@ override method @literalIntegerDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalIntegerDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @literalIntegerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = staticIntegerTypeName () 
 }
 
@@ -44,7 +44,7 @@ override getter @literalIntegerDeclaration keyRepresentationForErrorSignaling ->
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclaration enterRoutinesInContext
+override method @literalIntegerDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -53,7 +53,7 @@ override method @literalIntegerDeclaration enterRoutinesInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclaration enterInContext
+override method @literalIntegerDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
@@ -200,10 +200,19 @@ private proc enterLiteralIntegerOperators
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @literalIntegerDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclaration semanticAnalysis
+override method @literalIntegerDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

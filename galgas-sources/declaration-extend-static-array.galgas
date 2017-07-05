@@ -16,7 +16,7 @@ list @extendStaticArrayExpressionListAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @extendStaticArrayDeclarationAST : @abstractDeclaration {
+class @extendStaticArrayDeclarationAST : @abstractDeclarationAST {
   @lstring mStaticlistName
   @extendStaticArrayExpressionListAST mExpressions
 }
@@ -86,7 +86,7 @@ syntax extension plm_syntax {
 
 override method @extendStaticArrayDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -247,6 +247,15 @@ override method @extendStaticArrayDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @extendStaticArrayDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
 {
 }
 

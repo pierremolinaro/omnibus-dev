@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @newtypeDeclaration : @abstractDeclaration {
+class @newtypeDeclaration : @abstractDeclarationAST {
   @lstring mNewTypeName
   @lstring mReferenceTypeName
 }

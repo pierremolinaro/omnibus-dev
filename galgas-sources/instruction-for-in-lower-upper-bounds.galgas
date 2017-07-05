@@ -90,28 +90,20 @@ class @forLowerUpperBoundInstructionSE : @instructionSE {
 #·······················································································································
 
 override method @forLowerUpperBoundInstructionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   [mLowerBoundExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let lowerBoundExpression
   ]
   [mUpperBoundExpression solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     ?let upperBoundExpression
   ]
   @instructionListSE do_instructionList = {}
   [mDoInstructionList solveEntities
-    !globalConstants:inGlobalConstantMap
-    !registers:inRegisterMapSE
-    !globalVars:inGlobalVariableMapSE
+    !context:inSemanticContext
     !?do_instructionList
   ]
   ioInstructionListSE += !@forLowerUpperBoundInstructionSE.new {

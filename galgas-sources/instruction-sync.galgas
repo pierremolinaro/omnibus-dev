@@ -184,18 +184,14 @@ class @syncInstructionSE : @instructionSE {
 #·······················································································································
 
 override method @syncInstructionAST solveEntities
-  ?globalConstants:@globalConstantMap inGlobalConstantMap
-  ?registers:let @controlRegisterMap inRegisterMapSE
-  ?globalVars:let @globalVariableMap inGlobalVariableMapSE
+  ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
   @syncInstructionBranchListSE branchList = {}
   for () in mBranchList do
     @instructionListSE instructionList = {}
     [mInstructionList solveEntities
-      !globalConstants:inGlobalConstantMap
-      !registers:inRegisterMapSE
-      !globalVars:inGlobalVariableMapSE
+      !context:inSemanticContext
       !?instructionList
     ]
     @guardedCommandSE guardedCommand
@@ -209,9 +205,7 @@ override method @syncInstructionAST solveEntities
       }
     case boolean (isWhileCommand expressionAST endOfExpression) :
       [expressionAST solveEntities
-        !globalConstants:inGlobalConstantMap
-        !registers:inRegisterMapSE
-        !globalVars:inGlobalVariableMapSE
+        !context:inSemanticContext
         ?let expression
       ]
       guardedCommand = .boolean {
@@ -221,9 +215,7 @@ override method @syncInstructionAST solveEntities
       }
     case boolAndSync (isWhileCommand expAST endOfExpression optionalReceiverName guardName effectiveParameterListAST) :
       [expAST solveEntities
-        !globalConstants:inGlobalConstantMap
-        !registers:inRegisterMapSE
-        !globalVars:inGlobalVariableMapSE
+        !context:inSemanticContext
         ?let expression
       ]
       guardedCommand = .boolAndSync {

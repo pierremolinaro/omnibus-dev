@@ -2,20 +2,20 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @integerDeclaration : @abstractDeclaration {
+class @integerDeclarationAST : @abstractDeclarationAST {
   @bool mIsSigned
   @uint mSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @integerDeclaration location -> @location outLocation {
+override getter @integerDeclarationAST location -> @location outLocation {
   outLocation = .nowhere
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @integerDeclaration typeName -> @string outName {
+getter @integerDeclarationAST typeName -> @string outName {
   outName = if mIsSigned then "int" else "uint" end + mSize
 }
 
@@ -23,9 +23,9 @@ getter @integerDeclaration typeName -> @string outName {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerDeclaration addExtension
+override method @integerDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
+  !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
 }
@@ -34,7 +34,7 @@ override method @integerDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerDeclaration enterInPrecedenceGraph
+override method @integerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let integerTypeName = llvmRegularTypeMangledNameFromName (![[self typeName] nowhere])
@@ -44,7 +44,7 @@ override method @integerDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @integerDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "integer " + llvmRegularTypeMangledNameFromName (![[self typeName] nowhere])
 }
 
@@ -52,7 +52,7 @@ override getter @integerDeclaration keyRepresentationForErrorSignaling -> @strin
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerDeclaration enterInContext
+override method @integerDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
@@ -96,7 +96,7 @@ override method @integerDeclaration enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerDeclaration enterRoutinesInContext
+override method @integerDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -104,10 +104,19 @@ override method @integerDeclaration enterRoutinesInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @integerDeclarationAST solveEntitiesForDeclarations
+  ?context:let @semanticContext unused inSemanticContext
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerDeclaration semanticAnalysis
+override method @integerDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
