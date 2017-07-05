@@ -37,30 +37,6 @@ override method @assertInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @assertInstructionSE : @instructionSE {
-  @expressionSE mExpression
-}
-
-#·······················································································································
-
-override method @assertInstructionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  [mExpression solveEntities
-    !context:inSemanticContext
-    ?let expression
-  ]
-  ioInstructionListSE += !@assertInstructionSE.new {
-    !mInstructionLocation
-    !expression
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

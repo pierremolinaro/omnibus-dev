@@ -92,54 +92,6 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @ifInstructionSE : @instructionSE {
-  @expressionSE mTestExpression
-  @location mTestExpressionEndLocation
-  @bool mStaticIfExpression
-  @instructionListSE mThenInstructionList
-  @location mEndOfThenInstructionList
-  @instructionListSE mElseInstructionList
-  @location mEndOfElseInstructionList
-  @location mEndOf_if_instruction
-}
-
-#·······················································································································
-
-override method @ifInstructionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  [mTestExpression solveEntities
-    !context:inSemanticContext
-    ?let testExpression
-  ]
-  @instructionListSE thenInstructionList = {}
-  [mThenInstructionList solveEntities
-    !context:inSemanticContext
-    !?thenInstructionList
-  ]
-  @instructionListSE elseInstructionList = {}
-  [mElseInstructionList solveEntities
-    !context:inSemanticContext
-    !?elseInstructionList
-  ]
-  ioInstructionListSE += !@ifInstructionSE.new {
-    !mInstructionLocation
-    !testExpression
-    !mTestExpressionEndLocation
-    !mStaticIfExpression
-    !thenInstructionList
-    !mEndOfThenInstructionList
-    !elseInstructionList
-    !mEndOfElseInstructionList
-    !mEndOf_if_instruction
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

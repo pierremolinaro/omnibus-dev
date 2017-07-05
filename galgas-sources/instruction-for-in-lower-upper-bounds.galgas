@@ -73,53 +73,6 @@ override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPreceden
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @forLowerUpperBoundInstructionSE : @instructionSE {
-  @lstring mVarName
-  @lstring mTypeName
-  @expressionSE mLowerBoundExpression
-  @location mEndOf_lowerBoundExpression_instruction
-  @expressionSE mUpperBoundExpression
-  @location mEndOf_upperBoundExpression_instruction
-  @instructionListSE mDoInstructionList
-  @location mEndOf_do_instruction
-}
-
-#·······················································································································
-
-override method @forLowerUpperBoundInstructionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  [mLowerBoundExpression solveEntities
-    !context:inSemanticContext
-    ?let lowerBoundExpression
-  ]
-  [mUpperBoundExpression solveEntities
-    !context:inSemanticContext
-    ?let upperBoundExpression
-  ]
-  @instructionListSE do_instructionList = {}
-  [mDoInstructionList solveEntities
-    !context:inSemanticContext
-    !?do_instructionList
-  ]
-  ioInstructionListSE += !@forLowerUpperBoundInstructionSE.new {
-    !mInstructionLocation
-    !mVarName
-    !mTypeName
-    !lowerBoundExpression
-    !mEndOf_lowerBoundExpression_instruction
-    !upperBoundExpression
-    !mEndOf_upperBoundExpression_instruction
-    !do_instructionList
-    !mEndOf_do_instruction
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

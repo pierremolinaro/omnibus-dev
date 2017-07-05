@@ -34,30 +34,6 @@ override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @panicInstructionSE : @instructionSE {
-  @expressionSE mCodeExpression
-}
-
-#·······················································································································
-
-override method @panicInstructionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  [mCodeExpression solveEntities
-    !context:inSemanticContext
-    ?let codeExpression
-  ]
-  ioInstructionListSE += !@panicInstructionSE.new {
-    !mInstructionLocation
-    !codeExpression
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

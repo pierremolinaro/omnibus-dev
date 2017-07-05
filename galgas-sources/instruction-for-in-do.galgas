@@ -77,47 +77,6 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @forInstructionSE : @instructionSE {
-  @lstring mVarName
-  @lstring mIteratedObject
-  @expressionSE mWhileExpression
-  @location mEndOf_whileExpression
-  @bool mStaticWhileExpression
-  @instructionListSE mDoInstructionList
-  @location mEndOf_for_instruction
-}
-
-#·······················································································································
-
-override method @forInstructionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  [mWhileExpression solveEntities
-    !context:inSemanticContext
-    ?let whileExpression
-  ]
-  @instructionListSE doInstructionList = {}
-  [mDoInstructionList solveEntities
-    !context:inSemanticContext
-    !?doInstructionList
-  ]
-  ioInstructionListSE += !@forInstructionSE.new {
-    !mInstructionLocation
-    !mVarName
-    !mIteratedObject
-    !whileExpression
-    !mEndOf_whileExpression
-    !mStaticWhileExpression
-    !doInstructionList
-    !mEndOf_for_instruction
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

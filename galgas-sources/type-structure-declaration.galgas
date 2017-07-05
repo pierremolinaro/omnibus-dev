@@ -431,36 +431,6 @@ override method @structureDeclarationAST enterRoutinesInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @structureDeclarationAST solveEntitiesForDeclarations
-  ?context:let @semanticContext inSemanticContext
-{
-  for function in mFunctionDeclarationListAST do
-    @instructionListSE instructionListSE = {}
-    [function.mFunctionInstructionList solveEntities
-      !context:inSemanticContext
-      !?instructionListSE
-    ]
-  end
-  for systemRoutine in mSystemRoutineListAST do
-    @instructionListSE instructionListSE = {}
-    [systemRoutine.mInstructionList solveEntities
-      !context:inSemanticContext
-      !?instructionListSE
-    ]
-  end
-  for guard in mGuardListAST do
-    @instructionListSE instructionListSE = {}
-    [guard.mGuardInstructionList solveEntities
-      !context:inSemanticContext
-      !?instructionListSE
-    ]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

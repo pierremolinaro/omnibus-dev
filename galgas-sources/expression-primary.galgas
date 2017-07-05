@@ -58,119 +58,6 @@ class @primaryInExpressionAST : @expressionAST {
   @primaryInExpressionAccessListAST mAccessList
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-enum @primaryInExpressionAccessSE {
-  case property (@lstring name)
-  case arrayAccess (@expressionSE index @location endOfIndex)
-  case funcCall (@effectiveArgumentListAST arguments @location endOfArguments)
-}
-
-#·······················································································································
-
-list @primaryInExpressionAccessListSE {
-  @primaryInExpressionAccessSE mAccess
-}
-
-#·······················································································································
-
-class @selfAccessInExpressionSE : @expressionSE {
-  @lstring mPropertyName
-  @location mSelfLocation
-  @primaryInExpressionAccessListSE mAccessList
-}
-
-#·······················································································································
-
-class @registerReadInExpressionSE : @expressionSE {
-  @lstring mRegisterName
-  @primaryInExpressionAccessListSE mAccessList
-}
-
-#·······················································································································
-
-class @globalConstantAccessInExpressionSE : @expressionSE {
-  @lstring mGlobalConstantName
-  @primaryInExpressionAccessListSE mAccessList
-}
-
-#·······················································································································
-
-class @standAloneRoutineCallInExpressionSE : @expressionSE {
-  @lstring mRoutineName
-  @effectiveArgumentListAST arguments
-  @location endOfArguments
-}
-
-#·······················································································································
-
-class @globalVariableAccessInExpressionSE : @expressionSE {
-  @lstring mGlobalVariableName
-  @primaryInExpressionAccessListSE mAccessList
-}
-
-#·······················································································································
-
-class @localVariableAccessInExpressionSE : @expressionSE {
-  @lstring mLocalVariableName
-  @primaryInExpressionAccessListSE mAccessList
-}
-
-#·······················································································································
-
-override method @primaryInExpressionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  !@expressionSE outExpression
-{
-  @primaryInExpressionAccessListSE accessList = {}
-  for () in mAccessList do
-    switch mAccess
-    case property (@lstring name) :
-      accessList += !.property {!name:name}
-    case arrayAccess (indexAST endOfIndex) :
-      [indexAST solveEntities
-        !context:inSemanticContext
-        ?let index
-       ]
-      accessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
-    case funcCall (@effectiveArgumentListAST arguments @location endOfArguments) :
-      accessList += !.funcCall {!arguments:arguments !endOfArguments:endOfArguments}
-    end
-  end
-#---
-  switch mSelf
-  case noSelf : # Check if named object is a register or a global variable
-    if [inSemanticContext.mControlRegisterMap hasKey !mObjectName] then
-      outExpression = @registerReadInExpressionSE.new {!mObjectName !accessList}
-    elsif [inSemanticContext.mGlobalVariableMap hasKey !mObjectName] then
-      outExpression = @globalVariableAccessInExpressionSE.new {!mObjectName !accessList}
-    elsif [inSemanticContext.mGlobalConstantMap hasKey !mObjectName] then
-      outExpression = @globalConstantAccessInExpressionSE.new {!mObjectName !accessList}
-    elsif [accessList length] == 1 then
-      [accessList first ?let @primaryInExpressionAccessSE access]
-      switch access
-      case property (*) :
-        outExpression = @localVariableAccessInExpressionSE.new {!mObjectName !accessList}
-      case arrayAccess (* *) :
-        outExpression = @localVariableAccessInExpressionSE.new {!mObjectName !accessList}
-      case funcCall (@effectiveArgumentListAST arguments @location endOfArguments) :
-        let signature = [arguments routineSignature !mObjectName.location]
-        if [inSemanticContext.mRoutineMapForContext hasKey !mObjectName !signature] then
-          outExpression = @standAloneRoutineCallInExpressionSE.new {!mObjectName !arguments !endOfArguments}
-        else
-          outExpression = @localVariableAccessInExpressionSE.new {!mObjectName !accessList}
-        end
-      end
-    else # By default, access to local variable
-      outExpression = @localVariableAccessInExpressionSE.new {!mObjectName !accessList}
-    end
-  case selfAt (@location location) :
-    outExpression = @selfAccessInExpressionSE.new {!mObjectName !location !accessList}
-  end  
-}
-
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! SYNTAX                                                                                                               
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -831,7 +718,7 @@ proc handleMethodCallInExpressionNew
       [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
     case propertyIndirectCall (propertyIndex type) :
       let propertyReference = @objectIR.temporaryReference {
-         !type:type # [inCurrentPointerIR type] #  TYPE IS IRRELEVANT
+         !type:type
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inMethodName}
          !sliceMap:{}
          !volatile:false
@@ -844,11 +731,6 @@ proc handleMethodCallInExpressionNew
         !propertyIndex
       ]
     #--- Code generation
-#      let type = @PLMType.function {
-#        !signature:routineDescriptor.mSignature
-#        !mode:[routineDescriptor.mRoutineKind executionMode]
-#        !returnTypeProxy:routineDescriptor.mReturnTypeProxy
-#      }
       ioInstructionGenerationList += !@indirectRoutineCallIR.new {
         !propertyReference
         !type

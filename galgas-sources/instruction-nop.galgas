@@ -30,22 +30,6 @@ override method @letInstructionNOP noteInstructionTypesInPrecedenceGraph ?!@sema
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @letInstructionNOP solveEntities
-  ?context:let @semanticContext unused inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  ioInstructionListSE += !@letInstructionSE.new {!mInstructionLocation}
-}
-
-#·······················································································································
-
-class @letInstructionSE : @instructionSE {
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

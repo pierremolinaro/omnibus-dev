@@ -172,7 +172,6 @@ override method @staticArrayAST enterInContext
       else
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
-#      let type = @PLMType.pointer {!pointee:.function {!signature:signature !mode:mode !returnTypeProxy:returnTypeProxy}}
       let type = @PLMType.function {!signature:signature !mode:mode !returnTypeProxy:returnTypeProxy}
       let descriptor = @routineDescriptor.new {
         !true
@@ -200,16 +199,13 @@ override method @staticArrayAST enterInContext
       propertyList += !propertyName !propertyType
       let propertyIndex = [staticlistPropertyMap count]
       [!?staticlistPropertyMap insertKey
-        !routineMangledName # propertyName
+        !propertyName
         !true # Public
         !.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
       ]
     end
   end
-  [!?ioContext.mStaticlistMap insertKey
-    !mStaticListName
-    !propertyList
-  ]
+  [!?ioContext.mStaticlistMap insertKey !mStaticListName !propertyList]
 #--- Enter element type in type map
   let kind = @PLMType.structure {
     !typeName:llvmNameForStaticListElementType (!mStaticListName)
@@ -231,15 +227,6 @@ override method @staticArrayAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @staticArrayAST solveEntitiesForDeclarations
-  ?context:let @semanticContext unused inSemanticContext
 {
 }
 

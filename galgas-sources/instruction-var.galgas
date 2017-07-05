@@ -79,50 +79,6 @@ override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @varInstructionWithAssignmentSE : @instructionSE {
-  @lstring mVarName
-  @lstring mOptionalTypeName
-  @expressionSE mSourceExpression
-}
-
-#·······················································································································
-
-override method @varInstructionWithAssignmentAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  [mSourceExpression solveEntities
-    !context:inSemanticContext
-    ?let expression
-  ]
-  ioInstructionListSE += !@varInstructionWithAssignmentSE.new {
-    !mInstructionLocation
-    !mVarName
-    !mOptionalTypeName
-    !expression
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @varInstructionSE : @instructionSE {
-  @lstring mVarName
-  @lstring mTypeName
-}
-
-#·······················································································································
-
-override method @varInstructionAST solveEntities
-  ?context:let @semanticContext unused inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  ioInstructionListSE += !@varInstructionSE.new {!mInstructionLocation !mVarName !mTypeName}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

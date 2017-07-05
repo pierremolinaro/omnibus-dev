@@ -50,41 +50,6 @@ override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SOLVE ENTITIES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @whileInstructionSE : @instructionSE {
-  @expressionSE m_while_Expression
-  @location mEndOf_test_expression
-  @instructionListSE mWhileInstructionList
-  @location mEndOf_while_instruction
-}
-
-#·······················································································································
-
-override method @whileInstructionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  ?!@instructionListSE ioInstructionListSE
-{
-  [m_while_Expression solveEntities
-    !context:inSemanticContext
-    ?let whileExpression
-  ]
-  @instructionListSE while_instructionList = {}
-  [mWhileInstructionList solveEntities
-    !context:inSemanticContext
-    !?while_instructionList
-  ]
-  ioInstructionListSE += !@whileInstructionSE.new {
-    !mInstructionLocation
-    !whileExpression
-    !mEndOf_test_expression
-    !while_instructionList
-    !mEndOf_while_instruction
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
