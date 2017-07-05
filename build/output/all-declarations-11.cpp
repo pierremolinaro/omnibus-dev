@@ -1822,8 +1822,8 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_PLMType::kEnum_pointer:
       {
-        const cEnumAssociatedValues_PLMType_pointer * extractPtr_22541 = (const cEnumAssociatedValues_PLMType_pointer *) (enumerator_21879.current_type (HERE).unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_pointee = extractPtr_22541->mAssociatedValue0 ;
+        const cEnumAssociatedValues_PLMType_pointer * extractPtr_22545 = (const cEnumAssociatedValues_PLMType_pointer *) (enumerator_21879.current_type (HERE).unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_pointee = extractPtr_22545->mAssociatedValue0 ;
       }
       break ;
     }

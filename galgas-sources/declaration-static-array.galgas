@@ -172,6 +172,8 @@ override method @staticArrayAST enterInContext
       else
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
+#      let type = @PLMType.pointer {!pointee:.function {!signature:signature !mode:mode !returnTypeProxy:returnTypeProxy}}
+      let type = @PLMType.function {!signature:signature !mode:mode !returnTypeProxy:returnTypeProxy}
       let descriptor = @routineDescriptor.new {
         !true
         !false
@@ -180,7 +182,7 @@ override method @staticArrayAST enterInContext
         !returnTypeProxy
         !false
         !false
-        !.propertyIndirectCall {!index:propertyIndex}
+        !.propertyIndirectCall {!index:propertyIndex !type:type}
       }
       [!?universalMap insertRoutine
         !propertyName
@@ -191,7 +193,7 @@ override method @staticArrayAST enterInContext
       if not [ioContext.mTypeMap hasKey !routineMangledName] then
         [!?ioContext.mTypeMap insertType
           !lkey:routineMangledName
-          !type:.function{!descriptor:descriptor}
+          !type:type
         ]
       end
       let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName} type]

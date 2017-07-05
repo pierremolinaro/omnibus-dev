@@ -73,7 +73,7 @@ getter @routineKind executionMode -> @mode {
 
 enum @routineCallingSheme {
   case staticCall
-  case propertyIndirectCall (@uint index)
+  case propertyIndirectCall (@uint index @PLMType type)
 }
 
 #·······················································································································

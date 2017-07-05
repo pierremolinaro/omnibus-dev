@@ -73,7 +73,7 @@ method @LValueNoSelfAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePre
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @LValueWithoutSelfSE {
-case register (@lstring registerName)
+case register (@lstring registerName @accessInAssignmentListSE accessList)
 case globalVariable (@lstring globalVariableName @accessInAssignmentListSE accessList)
 case localVariableOrStandAloneProcedure (@lstring identifier)
 case localVariable (@lstring localVariableName @accessInAssignmentListSE accessList)
@@ -96,11 +96,7 @@ method @LValueNoSelfAST solveEntitiesForLValueNoSelf
     end
   end
   if [inSemanticContext.mControlRegisterMap hasKey !mIdentifier] then
-    if [accessList length] == 0 then
-      outLValueSE = .register {!registerName:mIdentifier}
-    else
-      error mIdentifier : "control register slices cannot be written" : outLValueSE
-    end
+    outLValueSE = .register {!registerName:mIdentifier !accessList:accessList}
   elsif [inSemanticContext.mGlobalVariableMap hasKey !mIdentifier] then
     outLValueSE = .globalVariable {!globalVariableName:mIdentifier !accessList:accessList}
   elsif [inSemanticContext.mGlobalConstantMap hasKey !mIdentifier] then

@@ -8652,7 +8652,9 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                                 const class GALGAS_string & inOperand1
                                                                 COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_PLMType constructor_function (const class GALGAS_routineDescriptor & inOperand0
+  public : static class GALGAS_PLMType constructor_function (const class GALGAS_routineTypedSignature & inOperand0,
+                                                             const class GALGAS_mode & inOperand1,
+                                                             const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
                                                              COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_PLMType constructor_integer (const class GALGAS_bigint & inOperand0,
@@ -8707,7 +8709,9 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_routineDescriptor & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_routineTypedSignature & outArgument0,
+                                                  class GALGAS_mode & outArgument1,
+                                                  class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 

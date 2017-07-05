@@ -119,7 +119,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "internal error" : leftOperand
     case structure (* * * * * *) :
       error mOperatorLocation : "internal error" : leftOperand
-    case function (*) :
+    case function (* * *) :
       error mOperatorLocation : "internal error" : leftOperand
     case pointer (*) :
       error mOperatorLocation : "internal error" : leftOperand

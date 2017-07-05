@@ -3097,10 +3097,14 @@ typeComparisonResult cEnumAssociatedValues_PLMType_arrayType::compare (const cEn
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_PLMType_function::cEnumAssociatedValues_PLMType_function (const GALGAS_routineDescriptor & inAssociatedValue0
+cEnumAssociatedValues_PLMType_function::cEnumAssociatedValues_PLMType_function (const GALGAS_routineTypedSignature & inAssociatedValue0,
+                                                                                const GALGAS_mode & inAssociatedValue1,
+                                                                                const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2
                                                                                 COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3109,6 +3113,8 @@ void cEnumAssociatedValues_PLMType_function::description (C_String & ioString,
                                                           const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -3120,6 +3126,12 @@ typeComparisonResult cEnumAssociatedValues_PLMType_function::compare (const cEnu
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
   }
   return result ;
 }
@@ -3286,13 +3298,15 @@ GALGAS_PLMType GALGAS_PLMType::constructor_arrayType (const GALGAS_lstring & inA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_PLMType GALGAS_PLMType::constructor_function (const GALGAS_routineDescriptor & inAssociatedValue0
+GALGAS_PLMType GALGAS_PLMType::constructor_function (const GALGAS_routineTypedSignature & inAssociatedValue0,
+                                                     const GALGAS_mode & inAssociatedValue1,
+                                                     const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2
                                                      COMMA_LOCATION_ARGS) {
   GALGAS_PLMType result ;
-  if (inAssociatedValue0.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_function ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_PLMType_function (inAssociatedValue0 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_PLMType_function (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -3447,17 +3461,23 @@ void GALGAS_PLMType::method_arrayType (GALGAS_lstring & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_PLMType::method_function (GALGAS_routineDescriptor & outAssociatedValue0,
+void GALGAS_PLMType::method_function (GALGAS_routineTypedSignature & outAssociatedValue0,
+                                      GALGAS_mode & outAssociatedValue1,
+                                      GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue2,
                                       C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_function) {
     outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
     C_String s ;
     s << "method @PLMType function invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_PLMType_function * ptr = (const cEnumAssociatedValues_PLMType_function *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
   }
 }
 

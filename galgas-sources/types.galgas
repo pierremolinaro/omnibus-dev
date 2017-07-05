@@ -24,7 +24,7 @@ enum @PLMType {
                   @constantMap constantMap
                   @uint flags
                   @string plmTypeName)
-  case function (@routineDescriptor descriptor)
+  case function (@routineTypedSignature signature @mode mode @unifiedTypeMap-proxy returnTypeProxy)
   case pointer (@PLMType pointee)
 }
 
@@ -64,7 +64,7 @@ getter @PLMType equatable -> @bool {
     result = (flags & equatableFlag ()) != 0
   case arrayType (* * * * @uint flags *) :
     result = (flags & equatableFlag ()) != 0
-  case function (*) :
+  case function (* * *) :
     result = false
   case pointer (*) :
     result = false
@@ -97,7 +97,7 @@ getter @PLMType instanciable -> @bool {
     result = (flags & instanciableFlag ()) != 0
   case arrayType (* * * * @uint flags *) :
     result = (flags & instanciableFlag ()) != 0
-  case function (*) :
+  case function (* * *) :
     result = false
   case pointer (*) :
     result = false
@@ -130,7 +130,7 @@ getter @PLMType copyable -> @bool {
     result = (flags & copyableFlag ()) != 0
   case arrayType (* * * * @uint flags *) :
     result = (flags & copyableFlag ()) != 0
-  case function (*) :
+  case function (* * *) :
     result = false
   case pointer (*) :
     result = false
@@ -153,7 +153,7 @@ getter @PLMType classConstantMap -> @constantMap {
     result = {}
   case arrayType (* * * @constantMap constantMap * *) :
     result = constantMap
-  case function (*) :
+  case function (* * *) :
     result = {}
   case pointer (*) :
     result = {}
@@ -182,14 +182,14 @@ getter @PLMType llvmTypeName -> @string {
     result = "i" + bitCount
   case arrayType (@lstring typeName * * * * *) :
     result = "%" + [typeName assemblerRepresentation]
-  case function (descriptor) :
-    if descriptor.mReturnTypeProxy == .null then
+  case function (signature * returnTypeProxy) :
+    if returnTypeProxy == .null then
       result = "void"
     else
-      result = [[descriptor.mReturnTypeProxy type] llvmTypeName]
+      result = [[returnTypeProxy type] llvmTypeName]
     end
     result += "("
-    for () in descriptor.mSignature 
+    for () in signature 
     do
       result += [[mTypeProxy type] llvmTypeName]
       switch mFormalArgumentPassingMode
@@ -226,7 +226,7 @@ getter @PLMType key -> @string {
     result = plmTypeName
   case arrayType (* * * * * plmTypeName) :
     result = plmTypeName
-  case function (*) :
+  case function (* * *) :
     error ["" nowhere] : "«internal error @PLMType key function»" : result
   case pointer (*) :
     error ["" nowhere] : "«internal error @PLMType key pointer»" : result
@@ -256,7 +256,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Opaque (" + bitCount + " bits)"
   case arrayType (* * * * * *) :
     result = "Array"
-  case function (*) :
+  case function (* * *) :
     result = "Function"
   case pointer (pointee) :
     result = "Pointer to " + [pointee llvmTypeName]

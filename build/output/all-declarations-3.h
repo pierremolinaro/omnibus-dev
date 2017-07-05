@@ -2186,7 +2186,8 @@ class GALGAS_LValueWithoutSelfSE : public AC_GALGAS_root {
   public : static class GALGAS_LValueWithoutSelfSE constructor_localVariableOrStandAloneProcedure (const class GALGAS_lstring & inOperand0
                                                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_LValueWithoutSelfSE constructor_register (const class GALGAS_lstring & inOperand0
+  public : static class GALGAS_LValueWithoutSelfSE constructor_register (const class GALGAS_lstring & inOperand0,
+                                                                         const class GALGAS_accessInAssignmentListSE & inOperand1
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2213,6 +2214,7 @@ class GALGAS_LValueWithoutSelfSE : public AC_GALGAS_root {
                                                                             COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_lstring & outArgument0,
+                                                  class GALGAS_accessInAssignmentListSE & outArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -2246,9 +2248,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueWithoutSelfSE
 
 class cEnumAssociatedValues_LValueWithoutSelfSE_register : public cEnumAssociatedValues {
   public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_accessInAssignmentListSE mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_LValueWithoutSelfSE_register (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_LValueWithoutSelfSE_register (const GALGAS_lstring & inAssociatedValue0,
+                                                               const GALGAS_accessInAssignmentListSE & inAssociatedValue1
                                                                COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
