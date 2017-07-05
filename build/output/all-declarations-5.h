@@ -3042,22 +3042,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                                     GALGAS_location & outArgument2,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'assignment_target_noself' non terminal
-//--- 'parse' label
-  public : virtual void nt_assignment_5F_target_5F_noself_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_assignment_5F_target_5F_noself_ (GALGAS_assignmentTargetNoSelfAST & outArgument0,
-                                                            C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'assignment_target_self' non terminal
-//--- 'parse' label
-  public : virtual void nt_assignment_5F_target_5F_self_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_assignment_5F_target_5F_self_ (GALGAS_assignmentTargetSelfAST & outArgument0,
-                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'declaration' non terminal
 //--- 'parse' label
   public : virtual void nt_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -3255,6 +3239,22 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_isr_ (GALGAS_isrDeclarationListAST & ioArgument0,
                                  const GALGAS_lstring inArgument1,
                                  C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'lvalue_with_self' non terminal
+//--- 'parse' label
+  public : virtual void nt_lvalue_5F_with_5F_self_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_lvalue_5F_with_5F_self_ (GALGAS_LValueSelfAST & outArgument0,
+                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'lvalue_without_self' non terminal
+//--- 'parse' label
+  public : virtual void nt_lvalue_5F_without_5F_self_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_lvalue_5F_without_5F_self_ (GALGAS_LValueNoSelfAST & outArgument0,
+                                                       C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'mode' non terminal
 //--- 'parse' label

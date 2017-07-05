@@ -44,57 +44,6 @@ class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Routine 'handlePropertyAccessInAssignment'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handlePropertyAccessInAssignment (class GALGAS_objectIR & ioArgument0,
-                                               const class GALGAS_lstring constinArgument1,
-                                               class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                               class GALGAS_instructionListIR & ioArgument3,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Routine 'handleSubscriptInAssignmentAndExpression'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleSubscriptInAssignmentAndExpression (const class GALGAS_PLMType constinArgument0,
-                                                       const class GALGAS_bool constinArgument1,
-                                                       const class GALGAS_bool constinArgument2,
-                                                       const class GALGAS_lstring constinArgument3,
-                                                       const class GALGAS_semanticContext constinArgument4,
-                                                       const class GALGAS_mode constinArgument5,
-                                                       class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                       class GALGAS_staticStringMap & ioArgument7,
-                                                       class GALGAS_unifiedSymbolMapEx & ioArgument8,
-                                                       class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
-                                                       class GALGAS_allocaList & ioArgument10,
-                                                       const class GALGAS_expressionAST constinArgument11,
-                                                       const class GALGAS_location constinArgument12,
-                                                       class GALGAS_instructionListIR & ioArgument13,
-                                                       class GALGAS_objectIR & ioArgument14,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Routine 'handleSelfAccessInAssignment'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleSelfAccessInAssignment (const class GALGAS_PLMType constinArgument0,
-                                           const class GALGAS_objectIR constinArgument1,
-                                           class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                           class GALGAS_instructionListIR & ioArgument3,
-                                           class GALGAS_objectIR & outArgument4,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                               Routine 'handleSubscriptArrayInAssignmentAndExpression'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

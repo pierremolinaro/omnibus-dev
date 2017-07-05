@@ -319,7 +319,79 @@ override method @simpleCallInstructionAST baseGuardAnalyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @complexCallInstructionAST baseGuardAnalyze
+override method @complexCallNoSelfInstructionAST baseGuardAnalyze
+  ?self:let @PLMType inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+{
+  @allocaList baseGuardAllocaList = {}
+  @instructionListIR baseGuardInstructionGenerationList = {}
+  [mAssignmentTargetAST analyzeAssignmentTarget
+    !self: inSelfType
+    !targetAccessKind:.readWrite
+    !propertiesAreMutable: false
+    !directAccessToPropertiesAllowed: false
+    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+    !context: inContext
+    !mode:.guardMode
+    !?temporary: ioTemporaries
+    !?staticStringMap: ioGlobalLiteralStringMap
+    !?variableMap: ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca: baseGuardAllocaList
+    !?instructionListIR: baseGuardInstructionGenerationList
+    ?@objectIR currentObject
+    ?globalVariableReceiverName: let unused globalVariableReceiverName
+  ]
+#--- Analyze arguments
+  if not [currentObject isPossibleFunction] then
+    error .nowhere : "object is not a function" : outConvenienceGuardGenerationIR
+  else
+    [currentObject possibleFunction ?receiver:let receiver ?functionName:let functionName]
+    analyzeFunctionCallInExpression (
+      !self:inSelfType
+      !propertiesAreMutable:false
+      !directAccessToPropertiesAllowed:true
+      !receiver:receiver
+      !routineName:functionName
+      !effective:mArguments
+      !callerForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !requiredMode:inMode
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?variableMap:ioUniversalMap
+      !?alloca:baseGuardAllocaList
+      !?instructionListIR:baseGuardInstructionGenerationList
+      ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
+      ?routineKind:let @calleeKindIR unused routineKind
+      ?routineMangledName:let @lstring functionMangledName
+      ?routineNameForGeneration:let @lstring unused functionNameForGeneration
+      ?returnType:let @PLMType returnedType
+    )
+    if returnedType != .void then
+      error functionName : "<< internal guard error >>"
+    end
+  #--- Code generation
+    outConvenienceGuardGenerationIR = .convenienceGuard {
+      !baseGuardAllocaList:baseGuardAllocaList
+      !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+      !baseGuardMangledName:functionMangledName.string
+      !baseGuardEffectiveParameterList:effectiveParameterListIR
+    }
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @complexCallSelfInstructionAST baseGuardAnalyze
   ?self:let @PLMType inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext

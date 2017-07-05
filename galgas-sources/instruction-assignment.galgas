@@ -2,8 +2,15 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @varAssignmentInstructionAST : @instructionAST {
-  @assignmentTargetAST mAssignmentTargetAST
+class @varAssignmentNoSelfInstructionAST : @instructionAST {
+  @LValueNoSelfAST mAssignmentTargetAST
+  @expressionAST mSourceExpression
+}
+
+#·······················································································································
+
+class @varAssignmentSelfInstructionAST : @instructionAST {
+  @LValueSelfAST mAssignmentTargetAST
   @expressionAST mSourceExpression
 }
 
@@ -16,13 +23,13 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    <assignment_target_noself> ?let assignmentTargetAST
+    <lvalue_without_self> ?let assignmentTargetAST
   #--- Source expression
     $=$
     <expression> ?let sourceExpression
   #--- AST
-    ioInstructionList += !@varAssignmentInstructionAST.new {
-      ![assignmentTargetAST mIdentifier].location
+    ioInstructionList += !@varAssignmentNoSelfInstructionAST.new {
+      !assignmentTargetAST.mIdentifier.location
       !assignmentTargetAST
       !sourceExpression
     }
@@ -31,13 +38,13 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    <assignment_target_self> ?let assignmentTargetAST
+    <lvalue_with_self> ?let assignmentTargetAST
   #--- Source expression
     $=$
     <expression> ?let sourceExpression
   #--- AST
-    ioInstructionList += !@varAssignmentInstructionAST.new {
-      ![assignmentTargetAST mIdentifier].location
+    ioInstructionList += !@varAssignmentSelfInstructionAST.new {
+      !assignmentTargetAST.mSelfLocation
       !assignmentTargetAST
       !sourceExpression
     }
@@ -51,7 +58,14 @@ syntax extension plm_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @varAssignmentNoSelfInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#·····················································································································
+
+override method @varAssignmentSelfInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
@@ -105,7 +119,7 @@ class @localVariableAssignmentInstructionSE : @instructionSE {
 
 #·······················································································································
 
-override method @varAssignmentInstructionAST solveEntities
+override method @varAssignmentNoSelfInstructionAST solveEntities
   ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
@@ -119,15 +133,21 @@ override method @varAssignmentInstructionAST solveEntities
 
 #·······················································································································
 
-abstract method @assignmentTargetAST solveEntitiesForAssignmentInstruction
+override method @varAssignmentSelfInstructionAST solveEntities
   ?context:let @semanticContext inSemanticContext
-  ?let @location inInstructionLocation
-  ?let @expressionAST inSourceExpressionAST
   ?!@instructionListSE ioInstructionListSE
+{
+  [mAssignmentTargetAST solveEntitiesForAssignmentInstruction
+    !context:inSemanticContext
+    !mInstructionLocation
+    !mSourceExpression
+    !?ioInstructionListSE
+  ]
+}
 
 #·······················································································································
 
-override method @assignmentTargetNoSelfAST solveEntitiesForAssignmentInstruction
+method @LValueNoSelfAST solveEntitiesForAssignmentInstruction
   ?context:let @semanticContext inSemanticContext
   ?let @location inInstructionLocation
   ?let @expressionAST inSourceExpressionAST
@@ -172,7 +192,7 @@ override method @assignmentTargetNoSelfAST solveEntitiesForAssignmentInstruction
 
 #·······················································································································
 
-override method @assignmentTargetSelfAST solveEntitiesForAssignmentInstruction
+method @LValueSelfAST solveEntitiesForAssignmentInstruction
   ?context:let @semanticContext inSemanticContext
   ?let @location inInstructionLocation
   ?let @expressionAST inSourceExpressionAST
@@ -201,7 +221,73 @@ override method @assignmentTargetSelfAST solveEntitiesForAssignmentInstruction
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varAssignmentInstructionAST analyze
+override method @varAssignmentNoSelfInstructionAST analyze
+  ?self:let @PLMType inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  [mAssignmentTargetAST analyzeAssignmentTarget
+    !self: inSelfType
+    !targetAccessKind:.write
+    !propertiesAreMutable: inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
+    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+    !context: inContext
+    !mode: inCurrentMode
+    !?temporary: ioTemporaries
+    !?staticStringMap: ioGlobalLiteralStringMap
+    !?variableMap: ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca: ioAllocaList
+    !?instructionListIR: ioInstructionGenerationList
+    ?@objectIR currentObject
+    ?globalVariableReceiverName:let unused globalVariableReceiverName
+  ]
+  if [currentObject isPossibleFunction] then
+    error [mAssignmentTargetAST mIdentifier] : "invalid assignment target" : currentObject
+  end
+#--- Analyze source expression
+  [mSourceExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:[currentObject type]
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR sourceOperandPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !sourceOperandPossibleReference
+    ![mAssignmentTargetAST mIdentifier]
+    ?let sourceOperand
+  ]  
+  let result = checkAssignmentCompatibility (
+    !source:sourceOperand
+    !targetAnnotationType:[currentObject type]
+    !errorLocation:[mAssignmentTargetAST mIdentifier]
+    !staticTypeAllowed:false
+  )
+  [!?ioInstructionGenerationList appendStoreFromReference !currentObject ![mAssignmentTargetAST mIdentifier] !result]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @varAssignmentSelfInstructionAST analyze
   ?self:let @PLMType inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed

@@ -12507,8 +12507,8 @@ static const char * gNonTerminalNames_plm_grammar [127] = {
   "<if_instruction>",// Index 35
   "<guarded_command>",// Index 36
   "<procedure_call>",// Index 37
-  "<assignment_target_noself>",// Index 38
-  "<assignment_target_self>",// Index 39
+  "<lvalue_without_self>",// Index 38
+  "<lvalue_with_self>",// Index 39
   "<select_plm_5F_syntax_0>",// Index 40
   "<select_plm_5F_syntax_1>",// Index 41
   "<select_plm_5F_syntax_2>",// Index 42
@@ -28956,14 +28956,14 @@ void cGrammar_plm_5F_grammar::nt_procedure_5F_call_ (GALGAS_callInstructionAST &
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
-//                               'assignment_target_noself' non terminal implementation                                 
+//                                 'lvalue_without_self' non terminal implementation                                    
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cGrammar_plm_5F_grammar::nt_assignment_5F_target_5F_noself_parse (C_Lexique_plm_5F_lexique * inLexique) {
+void cGrammar_plm_5F_grammar::nt_lvalue_5F_without_5F_self_parse (C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 92 :
-      rule_plm_5F_syntax_assignment_5F_target_5F_noself_i92_parse(inLexique) ;
+      rule_plm_5F_syntax_lvalue_5F_without_5F_self_i92_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -28971,11 +28971,11 @@ void cGrammar_plm_5F_grammar::nt_assignment_5F_target_5F_noself_parse (C_Lexique
   }
 }
 
-void cGrammar_plm_5F_grammar::nt_assignment_5F_target_5F_noself_ (GALGAS_assignmentTargetNoSelfAST &  parameter_1,
+void cGrammar_plm_5F_grammar::nt_lvalue_5F_without_5F_self_ (GALGAS_LValueNoSelfAST &  parameter_1,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 92 :
-      rule_plm_5F_syntax_assignment_5F_target_5F_noself_i92_(parameter_1, inLexique) ;
+      rule_plm_5F_syntax_lvalue_5F_without_5F_self_i92_(parameter_1, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -28984,14 +28984,14 @@ void cGrammar_plm_5F_grammar::nt_assignment_5F_target_5F_noself_ (GALGAS_assignm
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
-//                                'assignment_target_self' non terminal implementation                                  
+//                                   'lvalue_with_self' non terminal implementation                                     
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cGrammar_plm_5F_grammar::nt_assignment_5F_target_5F_self_parse (C_Lexique_plm_5F_lexique * inLexique) {
+void cGrammar_plm_5F_grammar::nt_lvalue_5F_with_5F_self_parse (C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 93 :
-      rule_plm_5F_syntax_assignment_5F_target_5F_self_i93_parse(inLexique) ;
+      rule_plm_5F_syntax_lvalue_5F_with_5F_self_i93_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -28999,11 +28999,11 @@ void cGrammar_plm_5F_grammar::nt_assignment_5F_target_5F_self_parse (C_Lexique_p
   }
 }
 
-void cGrammar_plm_5F_grammar::nt_assignment_5F_target_5F_self_ (GALGAS_assignmentTargetSelfAST &  parameter_1,
+void cGrammar_plm_5F_grammar::nt_lvalue_5F_with_5F_self_ (GALGAS_LValueSelfAST &  parameter_1,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 93 :
-      rule_plm_5F_syntax_assignment_5F_target_5F_self_i93_(parameter_1, inLexique) ;
+      rule_plm_5F_syntax_lvalue_5F_with_5F_self_i93_(parameter_1, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;

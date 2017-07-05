@@ -1,0 +1,167 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct @LValueSelfAST {
+  @lstring mIdentifier
+  @accessInAssignmentListAST mAccessList
+  @location mSelfLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <lvalue_with_self> !@LValueSelfAST outAssignmentTargetAST {
+  #--- Self
+    $self$
+    let selfLocation = @location.here
+    $.$
+  #--- Property name
+    $identifier$ ?let identifier
+  #--- Properties and subscript
+    @accessInAssignmentListAST accessListAST = {}
+    repeat
+    while
+      $.$
+      $identifier$ ?let propertyName
+      accessListAST += !.property {!name:propertyName}
+    while
+      $[$
+      <expression> ?let expression
+      let endOfIndex = @location.here
+      $]$
+      accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+    end
+    outAssignmentTargetAST = .new {!identifier !accessListAST !selfLocation}
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @LValueSelfAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for (access) in mAccessList do
+    switch access
+    case property (*) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @LValueSelfAST analyzeAssignmentTarget
+  ?self:let @PLMType inSelfType
+  ?targetAccessKind:let @targetAccessKind unused inSelfAccessKind
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !@objectIR outCurrentObject
+  !globalVariableReceiverName:@string outGlobalVariableReceiverName
+{
+#--- object access, with ou without self
+  outGlobalVariableReceiverName = "" # Receiver is not a global variable
+  if [inSelfType isStructure] then
+    [inSelfType structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?3*]
+ ##     [universalMap searchProperty !mIdentifier ?* ?let object]
+    if [structureObjectMap hasKey !mIdentifier] then
+      [structureObjectMap searchKey
+        !mIdentifier
+        ?*
+        ?let object
+      ]
+      handleSelfAccessInAssignment (
+        !inSelfType
+        !object
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+        ?outCurrentObject
+      )
+    else # Function call ?
+      outCurrentObject = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mIdentifier}
+    end
+  else
+    error mIdentifier : "'self' should be a structure instance" : outCurrentObject, outGlobalVariableReceiverName
+  end
+#--- Analyze properties, subscripts
+  for (access) in mAccessList do
+    switch access
+    case property (propertyName) :
+      handlePropertyAccessInAssignment (
+        !?outCurrentObject
+        !propertyName
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+      )
+    case arrayAccess (indexExpression endOfExpression) :
+      handleSubscriptInAssignmentAndExpression (
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:false
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !mode:inCurrentMode
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?variableMap:ioUniversalMap
+        !?alloca:ioAllocaList
+        !indexExpression
+        !endOfExpression
+        !?ioInstructionGenerationList
+        !?outCurrentObject
+      )
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc handleSelfAccessInAssignment
+  ?let @PLMType inSelfType
+  ?let @objectIR inObject
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outObjectPtr
+{
+  if [inObject isProperty] then
+    [inObject property ?type:let type ?plmName:let name ?index:let index]
+    outObjectPtr = .temporaryReference {
+      !type:type
+      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !name}
+      !sliceMap:{}
+      !volatile:false
+    }
+    ioTemporaries.mTemporaryIndex ++
+    [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
+      !outObjectPtr
+      !inSelfType
+      !name
+      !index
+    ]
+  else
+    error .nowhere : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
