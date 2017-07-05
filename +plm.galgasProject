@@ -98,7 +98,8 @@ project (1:0:0) -> "plm" {
 
 #--- Instruction and expression helpers
   "galgas-sources/subscript-in-assignment-and-expression.galgas"
-  "galgas-sources/assignment-target.galgas"
+  "galgas-sources/lvalue-without-self.galgas"
+  "galgas-sources/lvalue-with-self.galgas"
 
 #--- Compilation phases
   "galgas-sources/context-routines.galgas"

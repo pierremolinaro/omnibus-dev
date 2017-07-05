@@ -2771,346 +2771,62 @@ class cPtr_localVariableAssignmentInstructionSE : public cPtr_instructionSE {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Abstract extension method '@assignmentTargetAST solveEntitiesForAssignmentInstruction'                *
+//                      Extension method '@LValueNoSelfAST solveEntitiesForAssignmentInstruction'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_assignmentTargetAST_solveEntitiesForAssignmentInstruction) (const class cPtr_assignmentTargetAST * inObject,
-                                                                                                    const class GALGAS_semanticContext constinArgument0,
-                                                                                                    const class GALGAS_location constinArgument1,
-                                                                                                    const class GALGAS_expressionAST constinArgument2,
-                                                                                                    class GALGAS_instructionListSE & ioArgument3,
-                                                                                                    class C_Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_solveEntitiesForAssignmentInstruction (const int32_t inClassIndex,
-                                                                 extensionMethodSignature_assignmentTargetAST_solveEntitiesForAssignmentInstruction inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_solveEntitiesForAssignmentInstruction (const class cPtr_assignmentTargetAST * inObject,
-                                                                const GALGAS_semanticContext constin_inSemanticContext,
-                                                                const GALGAS_location constin_inInstructionLocation,
-                                                                const GALGAS_expressionAST constin_inSourceExpressionAST,
-                                                                GALGAS_instructionListSE & io_ioInstructionListSE,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_solveEntitiesForAssignmentInstruction (const class GALGAS_LValueNoSelfAST inObject,
+                                                            const class GALGAS_semanticContext constin_inSemanticContext,
+                                                            const class GALGAS_location constin_inInstructionLocation,
+                                                            const class GALGAS_expressionAST constin_inSourceExpressionAST,
+                                                            class GALGAS_instructionListSE & io_ioInstructionListSE,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Abstract extension method '@assignmentTargetAST solveEntitiesForAssignmentOperatorInstruction'            *
+//                       Extension method '@LValueSelfAST solveEntitiesForAssignmentInstruction'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_assignmentTargetAST_solveEntitiesForAssignmentOperatorInstruction) (const class cPtr_assignmentTargetAST * inObject,
-                                                                                                            const class GALGAS_semanticContext constinArgument0,
-                                                                                                            const class GALGAS_location constinArgument1,
-                                                                                                            const class GALGAS_infixOperator constinArgument2,
-                                                                                                            const class GALGAS_location constinArgument3,
-                                                                                                            const class GALGAS_expressionAST constinArgument4,
-                                                                                                            class GALGAS_instructionListSE & ioArgument5,
-                                                                                                            class C_Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_solveEntitiesForAssignmentOperatorInstruction (const int32_t inClassIndex,
-                                                                         extensionMethodSignature_assignmentTargetAST_solveEntitiesForAssignmentOperatorInstruction inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_solveEntitiesForAssignmentOperatorInstruction (const class cPtr_assignmentTargetAST * inObject,
-                                                                        const GALGAS_semanticContext constin_inSemanticContext,
-                                                                        const GALGAS_location constin_inInstructionLocation,
-                                                                        const GALGAS_infixOperator constin_inInfixOperator,
-                                                                        const GALGAS_location constin_inInfixOperatorLocation,
-                                                                        const GALGAS_expressionAST constin_inSourceExpressionAST,
-                                                                        GALGAS_instructionListSE & io_ioInstructionListSE,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
+void extensionMethod_solveEntitiesForAssignmentInstruction (const class GALGAS_LValueSelfAST inObject,
+                                                            const class GALGAS_semanticContext constin_inSemanticContext,
+                                                            const class GALGAS_location constin_inInstructionLocation,
+                                                            const class GALGAS_expressionAST constin_inSourceExpressionAST,
+                                                            class GALGAS_instructionListSE & io_ioInstructionListSE,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        @varInstructionWithAssignmentSE class                                        *
+//                  Extension method '@LValueNoSelfAST solveEntitiesForAssignmentOperatorInstruction'                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_varInstructionWithAssignmentSE : public GALGAS_instructionSE {
-//--- Constructor
-  public : GALGAS_varInstructionWithAssignmentSE (void) ;
-
-//---
-  public : inline const class cPtr_varInstructionWithAssignmentSE * ptr (void) const { return (const cPtr_varInstructionWithAssignmentSE *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_varInstructionWithAssignmentSE (const cPtr_varInstructionWithAssignmentSE * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_varInstructionWithAssignmentSE extractObject (const GALGAS_object & inObject,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_varInstructionWithAssignmentSE constructor_new (const class GALGAS_location & inOperand0,
-                                                                               const class GALGAS_lstring & inOperand1,
-                                                                               const class GALGAS_lstring & inOperand2,
-                                                                               const class GALGAS_expressionSE & inOperand3
-                                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_varInstructionWithAssignmentSE & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_expressionSE getter_mSourceExpression (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_varInstructionWithAssignmentSE class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varInstructionWithAssignmentSE ;
+void extensionMethod_solveEntitiesForAssignmentOperatorInstruction (const class GALGAS_LValueNoSelfAST inObject,
+                                                                    const class GALGAS_semanticContext constin_inSemanticContext,
+                                                                    const class GALGAS_location constin_inInstructionLocation,
+                                                                    const class GALGAS_infixOperator constin_inInfixOperator,
+                                                                    const class GALGAS_location constin_inInfixOperatorLocation,
+                                                                    const class GALGAS_expressionAST constin_inSourceExpressionAST,
+                                                                    class GALGAS_instructionListSE & io_ioInstructionListSE,
+                                                                    class C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Pointer class for @varInstructionWithAssignmentSE class                               *
+//                   Extension method '@LValueSelfAST solveEntitiesForAssignmentOperatorInstruction'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_varInstructionWithAssignmentSE : public cPtr_instructionSE {
-//--- Attributes
-  public : GALGAS_lstring mProperty_mVarName ;
-  public : GALGAS_lstring mProperty_mOptionalTypeName ;
-  public : GALGAS_expressionSE mProperty_mSourceExpression ;
-
-//--- Constructor
-  public : cPtr_varInstructionWithAssignmentSE (const GALGAS_location & in_mInstructionLocation,
-                                                const GALGAS_lstring & in_mVarName,
-                                                const GALGAS_lstring & in_mOptionalTypeName,
-                                                const GALGAS_expressionSE & in_mSourceExpression
-                                                COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_expressionSE getter_mSourceExpression (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               @varInstructionSE class                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_varInstructionSE : public GALGAS_instructionSE {
-//--- Constructor
-  public : GALGAS_varInstructionSE (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_varInstructionSE constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_varInstructionSE * ptr (void) const { return (const cPtr_varInstructionSE *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_varInstructionSE (const cPtr_varInstructionSE * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_varInstructionSE extractObject (const GALGAS_object & inObject,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_varInstructionSE constructor_new (const class GALGAS_location & inOperand0,
-                                                                 const class GALGAS_lstring & inOperand1,
-                                                                 const class GALGAS_lstring & inOperand2
-                                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_varInstructionSE & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_varInstructionSE class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varInstructionSE ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Pointer class for @varInstructionSE class                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_varInstructionSE : public cPtr_instructionSE {
-//--- Attributes
-  public : GALGAS_lstring mProperty_mVarName ;
-  public : GALGAS_lstring mProperty_mTypeName ;
-
-//--- Constructor
-  public : cPtr_varInstructionSE (const GALGAS_location & in_mInstructionLocation,
-                                  const GALGAS_lstring & in_mVarName,
-                                  const GALGAS_lstring & in_mTypeName
-                                  COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @letInstructionWithAssignmentSE class                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_letInstructionWithAssignmentSE : public GALGAS_instructionSE {
-//--- Constructor
-  public : GALGAS_letInstructionWithAssignmentSE (void) ;
-
-//---
-  public : inline const class cPtr_letInstructionWithAssignmentSE * ptr (void) const { return (const cPtr_letInstructionWithAssignmentSE *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_letInstructionWithAssignmentSE (const cPtr_letInstructionWithAssignmentSE * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_letInstructionWithAssignmentSE extractObject (const GALGAS_object & inObject,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_letInstructionWithAssignmentSE constructor_new (const class GALGAS_location & inOperand0,
-                                                                               const class GALGAS_lstring & inOperand1,
-                                                                               const class GALGAS_lstring & inOperand2,
-                                                                               const class GALGAS_expressionSE & inOperand3
-                                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_letInstructionWithAssignmentSE & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_expressionSE getter_mSourceExpression (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_letInstructionWithAssignmentSE class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_letInstructionWithAssignmentSE ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Pointer class for @letInstructionWithAssignmentSE class                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_letInstructionWithAssignmentSE : public cPtr_instructionSE {
-//--- Attributes
-  public : GALGAS_lstring mProperty_mConstantName ;
-  public : GALGAS_lstring mProperty_mOptionalTypeName ;
-  public : GALGAS_expressionSE mProperty_mSourceExpression ;
-
-//--- Constructor
-  public : cPtr_letInstructionWithAssignmentSE (const GALGAS_location & in_mInstructionLocation,
-                                                const GALGAS_lstring & in_mConstantName,
-                                                const GALGAS_lstring & in_mOptionalTypeName,
-                                                const GALGAS_expressionSE & in_mSourceExpression
-                                                COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_expressionSE getter_mSourceExpression (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
+void extensionMethod_solveEntitiesForAssignmentOperatorInstruction (const class GALGAS_LValueSelfAST inObject,
+                                                                    const class GALGAS_semanticContext constin_inSemanticContext,
+                                                                    const class GALGAS_location constin_inInstructionLocation,
+                                                                    const class GALGAS_infixOperator constin_inInfixOperator,
+                                                                    const class GALGAS_location constin_inInfixOperatorLocation,
+                                                                    const class GALGAS_expressionAST constin_inSourceExpressionAST,
+                                                                    class GALGAS_instructionListSE & io_ioInstructionListSE,
+                                                                    class C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
 
 #endif

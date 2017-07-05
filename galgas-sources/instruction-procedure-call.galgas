@@ -9,8 +9,14 @@ abstract class @callInstructionAST : @instructionAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @complexCallInstructionAST : @callInstructionAST {
-  @assignmentTargetAST mAssignmentTargetAST
+class @complexCallNoSelfInstructionAST : @callInstructionAST {
+  @LValueNoSelfAST mAssignmentTargetAST
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @complexCallSelfInstructionAST : @callInstructionAST {
+  @LValueSelfAST mAssignmentTargetAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -36,12 +42,12 @@ syntax extension plm_syntax {
 
   rule <procedure_call> !@callInstructionAST outInstruction {
     let instructionLocation = @location.here
-    <assignment_target_noself> ?let assignmentTargetAST
+    <lvalue_without_self> ?let assignmentTargetAST
     <effective_parameters> ?let arguments ?let endOfArguments
     if [[assignmentTargetAST mAccessList] length] == 0 then
       outInstruction = @simpleCallInstructionAST.new {!instructionLocation !arguments !endOfArguments ![assignmentTargetAST mIdentifier]}
     else
-      outInstruction = @complexCallInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
+      outInstruction = @complexCallNoSelfInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
     end
   }
 
@@ -49,9 +55,9 @@ syntax extension plm_syntax {
 
   rule <procedure_call> !@callInstructionAST outInstruction {
     let instructionLocation = @location.here
-    <assignment_target_self> ?let assignmentTargetAST
+    <lvalue_with_self> ?let assignmentTargetAST
     <effective_parameters> ?let arguments ?let endOfArguments
-    outInstruction = @complexCallInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
+    outInstruction = @complexCallSelfInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
   }
 
   #·····················································································································
@@ -62,7 +68,25 @@ syntax extension plm_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @complexCallInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @complexCallNoSelfInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+  for () in mArguments do
+    switch mEffectiveParameterKind
+    case input (*):
+    case inputWithType (* @lstring typeName *) :
+      if typeName.string != "" then
+        [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+      end
+    case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case outputInput (*) :
+    case outputInputSelfVariable (*) :
+    end 
+  end
+}
+
+#·······················································································································
+
+override method @complexCallSelfInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
   for () in mArguments do
     switch mEffectiveParameterKind
@@ -139,16 +163,7 @@ class @complexCallInstructionSE : @instructionSE {
 
 #·······················································································································
 
-abstract method @assignmentTargetAST solveEntitiesForComplexCallInstruction
-  ?context:let @semanticContext inSemanticContext
-  ?let @location inInstructionLocation
-  ?let @effectiveArgumentListAST inArguments
-  ?let @location inEndOfArguments
-  ?!@instructionListSE ioInstructionListSE
-
-#·······················································································································
-
-override method @assignmentTargetNoSelfAST solveEntitiesForComplexCallInstruction
+method @LValueNoSelfAST solveEntitiesForComplexCallInstruction
   ?context:let @semanticContext inSemanticContext
   ?let @location inInstructionLocation
   ?let @effectiveArgumentListAST inArguments
@@ -184,7 +199,7 @@ override method @assignmentTargetNoSelfAST solveEntitiesForComplexCallInstructio
 
 #·······················································································································
 
-override method @assignmentTargetSelfAST solveEntitiesForComplexCallInstruction
+method @LValueSelfAST solveEntitiesForComplexCallInstruction
   ?context:let @semanticContext inSemanticContext
   ?let @location inInstructionLocation
   ?let @effectiveArgumentListAST inArguments
@@ -212,7 +227,22 @@ override method @assignmentTargetSelfAST solveEntitiesForComplexCallInstruction
 
 #·······················································································································
 
-override method @complexCallInstructionAST solveEntities
+override method @complexCallNoSelfInstructionAST solveEntities
+  ?context:let @semanticContext inSemanticContext
+  ?!@instructionListSE ioInstructionListSE
+{
+  [mAssignmentTargetAST solveEntitiesForComplexCallInstruction
+    !context:inSemanticContext
+    !mInstructionLocation
+    !mArguments
+    !mEndOfArguments
+    !?ioInstructionListSE
+  ]
+}
+
+#·······················································································································
+
+override method @complexCallSelfInstructionAST solveEntities
   ?context:let @semanticContext inSemanticContext
   ?!@instructionListSE ioInstructionListSE
 {
@@ -252,26 +282,7 @@ list @procEffectiveParameterList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @assignmentTargetAST analyzeTargetForRoutineCall
-  ?self:let @PLMType inSelfType
-  ?targetAccessKind:let @targetAccessKind inSelfAccessKind
-  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !@objectIR outCurrentObject
-  !globalVariableReceiverName:@string outGlobalVariableReceiverName
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @assignmentTargetNoSelfAST analyzeTargetForRoutineCall
+method @LValueNoSelfAST analyzeTargetForRoutineCall
   ?self:let @PLMType inSelfType
   ?targetAccessKind:let @targetAccessKind inSelfAccessKind
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
@@ -342,7 +353,7 @@ override method @assignmentTargetNoSelfAST analyzeTargetForRoutineCall
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @assignmentTargetSelfAST analyzeTargetForRoutineCall
+method @LValueSelfAST analyzeTargetForRoutineCall
   ?self:let @PLMType inSelfType
   ?targetAccessKind:let @targetAccessKind unused inSelfAccessKind
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
@@ -488,7 +499,66 @@ override method @simpleCallInstructionAST analyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @complexCallInstructionAST analyze
+override method @complexCallNoSelfInstructionAST analyze
+  ?self:let @PLMType inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  [mAssignmentTargetAST analyzeAssignmentTarget
+    !self: inSelfType
+    !targetAccessKind:.read # § .readWrite
+    !propertiesAreMutable: inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
+    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+    !context: inContext
+    !mode: inCurrentMode
+    !?temporary: ioTemporaries
+    !?staticStringMap: ioGlobalLiteralStringMap
+    !?variableMap: ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca: ioAllocaList
+    !?instructionListIR: ioInstructionGenerationList
+    ?@objectIR currentObject
+    ?globalVariableReceiverName:let globalVariableReceiverName
+  ]
+#--- Analyze procedure call arguments
+  handleFunctionCallInExpression (
+    !self:inSelfType
+    !globalVariableReceiverName:globalVariableReceiverName
+    !propertiesAreMutable:inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !mArguments
+    !mEndOfArguments
+    !?ioInstructionGenerationList
+    !?currentObject
+    ?let returnedType
+  )
+  if returnedType != .void then
+    error mEndOfArguments : "the function cannot be called in instruction: lost return value"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @complexCallSelfInstructionAST analyze
   ?self:let @PLMType inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
