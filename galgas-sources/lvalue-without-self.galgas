@@ -69,6 +69,50 @@ method @LValueNoSelfAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePre
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SOLVE ENTITIES                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @LValueWithoutSelfSE {
+case register (@lstring registerName)
+case globalVariable (@lstring globalVariableName @accessInAssignmentListSE accessList)
+case localVariableOrStandAloneProcedure (@lstring identifier)
+case localVariable (@lstring localVariableName @accessInAssignmentListSE accessList)
+}
+
+#·······················································································································
+
+method @LValueNoSelfAST solveEntitiesForLValueNoSelf
+  ?context:let @semanticContext inSemanticContext
+  !@LValueWithoutSelfSE outLValueSE
+{
+  @accessInAssignmentListSE accessList = {}
+  for (access) in mAccessList do
+    switch access
+    case property (name) :
+      accessList += !.property {!name:name}
+    case arrayAccess (indexAST endOfIndex) :
+      [indexAST solveEntities !context:inSemanticContext ?let index]
+      accessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
+    end
+  end
+  if [inSemanticContext.mControlRegisterMap hasKey !mIdentifier] then
+    if [accessList length] == 0 then
+      outLValueSE = .register {!registerName:mIdentifier}
+    else
+      error mIdentifier : "control register slices cannot be written" : outLValueSE
+    end
+  elsif [inSemanticContext.mGlobalVariableMap hasKey !mIdentifier] then
+    outLValueSE = .globalVariable {!globalVariableName:mIdentifier !accessList:accessList}
+  elsif [inSemanticContext.mGlobalConstantMap hasKey !mIdentifier] then
+    error mIdentifier : "a constant cannot be assigned" : outLValueSE
+  elsif [accessList length] == 0 then # Local variable, or stand alone procedure
+    outLValueSE = .localVariableOrStandAloneProcedure {!identifier:mIdentifier}
+  else # By default, access to local variable
+    outLValueSE = .localVariable {!localVariableName:mIdentifier !accessList:accessList}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

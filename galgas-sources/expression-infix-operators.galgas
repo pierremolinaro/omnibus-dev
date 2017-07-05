@@ -37,14 +37,6 @@ class @infixOperatorExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
-  @expressionAST mLeftExpression
-  @location mOperatorLocation
-  @expressionAST mRightExpression
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SOLVE ENTITIES                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -73,31 +65,6 @@ override method @infixOperatorExpressionAST solveEntities
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @booleanShortCircuitAndOperatorExpressionSE : @expressionSE {
-  @expressionSE mLeftExpression
-  @location mOperatorLocation
-  @expressionSE mRightExpression
-}
-
-#·······················································································································
-
-override method @booleanShortCircuitAndOperatorExpressionAST solveEntities
-  ?context:let @semanticContext inSemanticContext
-  !@expressionSE outExpression
-{
-  [mLeftExpression solveEntities
-    !context:inSemanticContext
-    ?let leftExpression
-  ]
-  [mRightExpression solveEntities
-    !context:inSemanticContext
-    ?let rightExpression
-  ]
-  outExpression = @booleanShortCircuitAndOperatorExpressionSE.new {!leftExpression !mOperatorLocation !rightExpression}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -110,27 +77,10 @@ override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  [mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @infixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
@@ -331,94 +281,6 @@ private func getInfixOperatorMap
     outOperatorMap = inContext.mLeftShiftOperatorMap
   case rightShiftOp :
     outOperatorMap = inContext.mRightShiftOperatorMap
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
-  ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @PLMType inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@objectIR outResult
-{
-#--- Analyze left expression
-  @instructionListIR leftInstructionGenerationList = {}
-  [mLeftExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:inGuard
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:leftInstructionGenerationList
-    ?result:let @objectIR leftOperandPossibleReference
-  ]
-  [!?ioInstructionGenerationList appendLoadFromReference
-    !?ioTemporaries
-    !leftOperandPossibleReference
-    !mOperatorLocation
-    ?let leftOperand
-  ]  
-#--- Analyze right expression
-  @instructionListIR rightInstructionGenerationList = {}
-  [mRightExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:inGuard
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:[leftOperand type]
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:rightInstructionGenerationList
-    ?result:let @objectIR rightOperandPossibleReference
-  ]
-  [!?ioInstructionGenerationList appendLoadFromReference
-    !?ioTemporaries
-    !rightOperandPossibleReference
-    !mOperatorLocation
-    ?let rightOperand
-  ]  
-#--- Check left type is boolean
-  if [leftOperand type] != .boolean then
-    error mOperatorLocation : "left operand should be boolean"
-  end
-#--- Check right type is boolean
-  if [rightOperand type] != .boolean then
-    error mOperatorLocation : "left operand should be boolean"
-  end
-#--- Static operation, or dynamic operation
-  if [leftOperandPossibleReference isLiteralInteger] && [rightOperandPossibleReference isLiteralInteger] then
-    [leftOperandPossibleReference literalInteger ?type:* ?value:let @bigint leftStaticValue]
-    [rightOperandPossibleReference literalInteger ?type:* ?value:let @bigint rightStaticValue]
-    outResult = .literalInteger {!type:[leftOperand type] !value:leftStaticValue & rightStaticValue}
-  else
-  #--- Result type : bool 
-    getNewTempVariable (!.boolean !mOperatorLocation !?ioTemporaries ?outResult)
-  #--- Generate code
-    [!?ioInstructionGenerationList appendShortCircuitAndOperation
-      !outResult
-      !leftOperand
-      !leftInstructionGenerationList
-      !rightOperand
-      !rightInstructionGenerationList
-      !mOperatorLocation
-    ]
   end
 }
 
