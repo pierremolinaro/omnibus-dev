@@ -3714,280 +3714,6 @@ GALGAS_checkInstructionAST GALGAS_checkInstructionAST::extractObject (const GALG
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind::GALGAS_operatorAssignmentKind (void) :
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_bitWiseOrAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_bitWiseOrAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_bitWiseAndAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_bitWiseAndAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_bitWiseXorAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_bitWiseXorAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_addAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_addAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_addModuloAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_addModuloAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_subAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_subAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_subModuloAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_subModuloAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_mulAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_mulAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_mulModuloAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_mulModuloAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_divAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_divAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_divZeroAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_divZeroAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_modAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_modAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::constructor_modZeroAssign (UNUSED_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  result.mEnum = kEnum_modZeroAssign ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_operatorAssignmentKind [14] = {
-  "(not built)",
-  "bitWiseOrAssign",
-  "bitWiseAndAssign",
-  "bitWiseXorAssign",
-  "addAssign",
-  "addModuloAssign",
-  "subAssign",
-  "subModuloAssign",
-  "mulAssign",
-  "mulModuloAssign",
-  "divAssign",
-  "divZeroAssign",
-  "modAssign",
-  "modZeroAssign"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isBitWiseOrAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_bitWiseOrAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isBitWiseAndAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_bitWiseAndAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isBitWiseXorAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_bitWiseXorAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isAddAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_addAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isAddModuloAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_addModuloAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isSubAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_subAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isSubModuloAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_subModuloAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isMulAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mulAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isMulModuloAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mulModuloAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isDivAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_divAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isDivZeroAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_divZeroAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isModAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_modAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_operatorAssignmentKind::getter_isModZeroAssign (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_modZeroAssign == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_operatorAssignmentKind::description (C_String & ioString,
-                                                 const int32_t /* inIndentation */) const {
-  ioString << "<enum @operatorAssignmentKind: " << gEnumNameArrayFor_operatorAssignmentKind [mEnum] ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_operatorAssignmentKind::objectCompare (const GALGAS_operatorAssignmentKind & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = kOperandEqual ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @operatorAssignmentKind type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_operatorAssignmentKind ("operatorAssignmentKind",
-                                               NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_operatorAssignmentKind::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_operatorAssignmentKind ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_operatorAssignmentKind::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_operatorAssignmentKind (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignmentKind GALGAS_operatorAssignmentKind::extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_operatorAssignmentKind result ;
-  const GALGAS_operatorAssignmentKind * p = (const GALGAS_operatorAssignmentKind *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_operatorAssignmentKind *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("operatorAssignmentKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -14187,11 +13913,13 @@ GALGAS_valuedObjectState GALGAS_valuedObjectState::extractObject (const GALGAS_o
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_possibleValuedObject_property::cEnumAssociatedValues_possibleValuedObject_property (const GALGAS_bool & inAssociatedValue0,
-                                                                                                          const GALGAS_objectIR & inAssociatedValue1
+                                                                                                          const GALGAS_bool & inAssociatedValue1,
+                                                                                                          const GALGAS_objectIR & inAssociatedValue2
                                                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14201,6 +13929,7 @@ void cEnumAssociatedValues_possibleValuedObject_property::description (C_String 
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -14215,6 +13944,9 @@ typeComparisonResult cEnumAssociatedValues_possibleValuedObject_property::compar
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
   }
   return result ;
 }
@@ -14429,13 +14161,14 @@ GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_undefined (
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_property (const GALGAS_bool & inAssociatedValue0,
-                                                                               const GALGAS_objectIR & inAssociatedValue1
+                                                                               const GALGAS_bool & inAssociatedValue1,
+                                                                               const GALGAS_objectIR & inAssociatedValue2
                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_possibleValuedObject result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_property ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_property (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_property (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -14538,12 +14271,14 @@ GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_localVariab
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_possibleValuedObject::method_property (GALGAS_bool & outAssociatedValue0,
-                                                   GALGAS_objectIR & outAssociatedValue1,
+                                                   GALGAS_bool & outAssociatedValue1,
+                                                   GALGAS_objectIR & outAssociatedValue2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_property) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
     C_String s ;
     s << "method @possibleValuedObject property invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -14551,6 +14286,7 @@ void GALGAS_possibleValuedObject::method_property (GALGAS_bool & outAssociatedVa
     const cEnumAssociatedValues_possibleValuedObject_property * ptr = (const cEnumAssociatedValues_possibleValuedObject_property *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
   }
 }
 
@@ -14784,6 +14520,315 @@ GALGAS_possibleValuedObject GALGAS_possibleValuedObject::extractObject (const GA
       result = *p ;
     }else{
       inCompiler->castError ("possibleValuedObject", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_routineSignatureMapForContext::cMapElement_routineSignatureMapForContext (const GALGAS_lstring & inKey,
+                                                                                      const GALGAS_lstring & in_mLLVMInvocationRoutineName,
+                                                                                      const GALGAS_routineDescriptor & in_mDescriptor
+                                                                                      COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mProperty_mLLVMInvocationRoutineName (in_mLLVMInvocationRoutineName),
+mProperty_mDescriptor (in_mDescriptor) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_routineSignatureMapForContext::isValid (void) const {
+  return mProperty_lkey.isValid () && mProperty_mLLVMInvocationRoutineName.isValid () && mProperty_mDescriptor.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_routineSignatureMapForContext::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_routineSignatureMapForContext (mProperty_lkey, mProperty_mLLVMInvocationRoutineName, mProperty_mDescriptor COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_routineSignatureMapForContext::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mLLVMInvocationRoutineName" ":" ;
+  mProperty_mLLVMInvocationRoutineName.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mDescriptor" ":" ;
+  mProperty_mDescriptor.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_routineSignatureMapForContext::compare (const cCollectionElement * inOperand) const {
+  cMapElement_routineSignatureMapForContext * operand = (cMapElement_routineSignatureMapForContext *) inOperand ;
+  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mLLVMInvocationRoutineName.objectCompare (operand->mProperty_mLLVMInvocationRoutineName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mDescriptor.objectCompare (operand->mProperty_mDescriptor) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineSignatureMapForContext::GALGAS_routineSignatureMapForContext (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineSignatureMapForContext::GALGAS_routineSignatureMapForContext (const GALGAS_routineSignatureMapForContext & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineSignatureMapForContext & GALGAS_routineSignatureMapForContext::operator = (const GALGAS_routineSignatureMapForContext & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineSignatureMapForContext GALGAS_routineSignatureMapForContext::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_routineSignatureMapForContext result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineSignatureMapForContext GALGAS_routineSignatureMapForContext::constructor_mapWithMapToOverride (const GALGAS_routineSignatureMapForContext & inMapToOverride
+                                                                                                             COMMA_LOCATION_ARGS) {
+  GALGAS_routineSignatureMapForContext result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineSignatureMapForContext GALGAS_routineSignatureMapForContext::getter_overriddenMap (C_Compiler * inCompiler
+                                                                                                 COMMA_LOCATION_ARGS) const {
+  GALGAS_routineSignatureMapForContext result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_routineSignatureMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
+                                                                const GALGAS_lstring & inArgument0,
+                                                                const GALGAS_routineDescriptor & inArgument1,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  cMapElement_routineSignatureMapForContext * p = NULL ;
+  macroMyNew (p, cMapElement_routineSignatureMapForContext (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@routineSignatureMapForContext insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_routineSignatureMapForContext::setter_insertKey (GALGAS_lstring inKey,
+                                                             GALGAS_lstring inArgument0,
+                                                             GALGAS_routineDescriptor inArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) {
+  cMapElement_routineSignatureMapForContext * p = NULL ;
+  macroMyNew (p, cMapElement_routineSignatureMapForContext (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "the '%K' routine signature is already declared in %L" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_routineSignatureMapForContext_searchKey = "there is no '%K' routine signature" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_routineSignatureMapForContext::method_searchKey (GALGAS_lstring inKey,
+                                                             GALGAS_lstring & outArgument0,
+                                                             GALGAS_routineDescriptor & outArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
+  const cMapElement_routineSignatureMapForContext * p = (const cMapElement_routineSignatureMapForContext *) performSearch (inKey,
+                                                                                                                           inCompiler,
+                                                                                                                           kSearchErrorMessage_routineSignatureMapForContext_searchKey
+                                                                                                                           COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_routineSignatureMapForContext) ;
+    outArgument0 = p->mProperty_mLLVMInvocationRoutineName ;
+    outArgument1 = p->mProperty_mDescriptor ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_routineSignatureMapForContext::getter_mLLVMInvocationRoutineNameForKey (const GALGAS_string & inKey,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_routineSignatureMapForContext * p = (const cMapElement_routineSignatureMapForContext *) attributes ;
+  GALGAS_lstring result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_routineSignatureMapForContext) ;
+    result = p->mProperty_mLLVMInvocationRoutineName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineDescriptor GALGAS_routineSignatureMapForContext::getter_mDescriptorForKey (const GALGAS_string & inKey,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_routineSignatureMapForContext * p = (const cMapElement_routineSignatureMapForContext *) attributes ;
+  GALGAS_routineDescriptor result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_routineSignatureMapForContext) ;
+    result = p->mProperty_mDescriptor ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_routineSignatureMapForContext::setter_setMLLVMInvocationRoutineNameForKey (GALGAS_lstring inAttributeValue,
+                                                                                       GALGAS_string inKey,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_routineSignatureMapForContext * p = (cMapElement_routineSignatureMapForContext *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_routineSignatureMapForContext) ;
+    p->mProperty_mLLVMInvocationRoutineName = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_routineSignatureMapForContext::setter_setMDescriptorForKey (GALGAS_routineDescriptor inAttributeValue,
+                                                                        GALGAS_string inKey,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_routineSignatureMapForContext * p = (cMapElement_routineSignatureMapForContext *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_routineSignatureMapForContext) ;
+    p->mProperty_mDescriptor = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_routineSignatureMapForContext * GALGAS_routineSignatureMapForContext::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                                     const GALGAS_string & inKey
+                                                                                                                     COMMA_LOCATION_ARGS) {
+  cMapElement_routineSignatureMapForContext * result = (cMapElement_routineSignatureMapForContext *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_routineSignatureMapForContext) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_routineSignatureMapForContext::cEnumerator_routineSignatureMapForContext (const GALGAS_routineSignatureMapForContext & inEnumeratedObject,
+                                                                                      const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineSignatureMapForContext_2D_element cEnumerator_routineSignatureMapForContext::current (LOCATION_ARGS) const {
+  const cMapElement_routineSignatureMapForContext * p = (const cMapElement_routineSignatureMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_routineSignatureMapForContext) ;
+  return GALGAS_routineSignatureMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mLLVMInvocationRoutineName, p->mProperty_mDescriptor) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_routineSignatureMapForContext::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mProperty_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_routineSignatureMapForContext::current_mLLVMInvocationRoutineName (LOCATION_ARGS) const {
+  const cMapElement_routineSignatureMapForContext * p = (const cMapElement_routineSignatureMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_routineSignatureMapForContext) ;
+  return p->mProperty_mLLVMInvocationRoutineName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineDescriptor cEnumerator_routineSignatureMapForContext::current_mDescriptor (LOCATION_ARGS) const {
+  const cMapElement_routineSignatureMapForContext * p = (const cMapElement_routineSignatureMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_routineSignatureMapForContext) ;
+  return p->mProperty_mDescriptor ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @routineSignatureMapForContext type                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_routineSignatureMapForContext ("routineSignatureMapForContext",
+                                                      NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_routineSignatureMapForContext::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_routineSignatureMapForContext ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_routineSignatureMapForContext::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_routineSignatureMapForContext (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineSignatureMapForContext GALGAS_routineSignatureMapForContext::extractObject (const GALGAS_object & inObject,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_routineSignatureMapForContext result ;
+  const GALGAS_routineSignatureMapForContext * p = (const GALGAS_routineSignatureMapForContext *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_routineSignatureMapForContext *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("routineSignatureMapForContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

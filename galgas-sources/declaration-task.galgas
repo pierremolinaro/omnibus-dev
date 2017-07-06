@@ -6,19 +6,11 @@ list @taskList {
   @lstring mTaskName
   @lbigint mPriority
   @lbigint mStackSize
-  @taskVarListAST mVarList
+  @structurePropertyListAST mVarList
   @functionDeclarationListAST mTaskProcList
   @taskInitListAST mTaskInitListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @location mEndOfTaskDeclaration
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @taskVarListAST {
-  @lstring mVarName
-  @lstring mVarTypeName
-  @expressionAST mVarInitExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -56,7 +48,7 @@ syntax extension plm_syntax {
     $stackSize$
     $integer$ ?let @lbigint stackSize
     ${$
-    @taskVarListAST taskVarList = {}
+    @structurePropertyListAST taskVarList = {}
     @functionDeclarationListAST taskProcList = {}
     @taskInitListAST taskInitListAST = {}
     @syncInstructionBranchListAST branchList = {}
@@ -121,24 +113,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <taskBody> ?!@taskVarListAST taskVarList
+  rule <taskBody> ?!@structurePropertyListAST taskVarList
                   ?!@functionDeclarationListAST taskProcList
                   ?!@taskInitListAST taskInitListAST
                   ?!@syncInstructionBranchListAST branchList
 {
     repeat
     while
-      $var$
-      $identifier$ ?let varName
-      @lstring typeName
-      select
-        typeName = ["" nowhere]
-      or
-        $\$type$ ?typeName
-      end
-      $=$
-      <expression> ?let initExpression
-      taskVarList += !varName !typeName !initExpression
+      <private_struct_property_declaration> !?taskVarList
     while
       $func$
       $identifier$ ?let procName
@@ -183,10 +165,16 @@ syntax extension plm_syntax {
 
 method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
+#    let taskTypeName = llvmRegularTypeMangledNameFromName (!mTaskName)
+#    [!?ioGraph noteNode !taskTypeName]
     for variable in mVarList do
-      [variable.mVarInitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-      if variable.mVarTypeName.string != "" then
-        let typeName = llvmRegularTypeMangledNameFromName (!variable.mVarTypeName)
+#      switch variable.mInitialisation
+#      case noExpression :
+#      case expression (initExpression) :
+#        [initExpression addDependenceEdgeForStaticExpression !taskTypeName !?ioGraph]
+#      end
+      if variable.mPropertyTypeName.string != "" then
+        let typeName = llvmRegularTypeMangledNameFromName (!variable.mPropertyTypeName)
         [!?ioGraph noteNode !typeName]
       end
     end
@@ -220,22 +208,25 @@ map @taskMap {
 
 method @taskList enterInContext
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   for task in self do
   #--- task variables
     @propertyList propertyList = {}
     @propertyMap propertyMap = {}
     @universalPropertyAndRoutineMapForContext universalPropertyMap = .default
-    @operandIRList initialValueList = {}
-    for variable in task.mVarList do
-      [variable enterInContext
+    @sortedOperandIRList initialValueList = {}
+    for property in task.mVarList do (propertyIndex)
+      [property enterInContext
+        !task.mTaskName
+        !propertyIndex
         !?context:ioContext
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?universalPropertyMap
         !?propertyList
         !?propertyMap
-        !?universalPropertyMap
         !?initialValueList
+        !?*
+        !?*
       ]
     end
   #--- Enter task variable map as structure type in type map
@@ -251,7 +242,6 @@ method @taskList enterInContext
       !lkey:task.mTaskName
       !type:taskType
     ]
-#    let taskType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !task.mTaskName}
     ioContext.mGlobalTaskVariableList +=
       !task.mTaskName.string 
       !task.mTaskName.string
@@ -259,78 +249,6 @@ method @taskList enterInContext
   #--- Task procedures
     [task.mTaskProcList enterFunctionInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @taskVarListAST-element enterInContext
-  ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!@propertyList ioPropertyList
-  ?!@propertyMap ioPropertyMap
-  ?!@universalPropertyAndRoutineMapForContext ioUniversalPropertyAndRoutineMapForContext
-  ?!@operandIRList ioInitialValueList
-{
-#--- Get destination type
-  @PLMType variableAnnotationType
-  if mVarTypeName.string == "" then
-    variableAnnotationType = .void
-  else
-    variableAnnotationType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mVarTypeName} type]
-  end
-#--- Analyze source expression
-  @semanticTemporariesStruct temporaries = .default
-  @instructionListIR instructionGenerationList = {}
-  @allocaList allocaList = {}
-  variableMapWithConstants (
-    !context:ioContext
-    ?*
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-  [mVarInitExpression analyzeExpression
-    !self:.void
-    !inGuard:false
-    !routineNameForInvocationGraph:["compiler" nowhere]
-    !optionalTargetType:variableAnnotationType
-    !context:ioContext
-    !mode:.bootMode
-    !?temporary:temporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:universalMap
-    !?alloca:allocaList
-    !?instructionListIR:instructionGenerationList
-    ?result:@objectIR expressionResult
-  ]
-  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
-    error mVarName : "source expression cannot be statically computed"
-  end
-#--- Check variable type and expression type
-  if variableAnnotationType == .void && [[expressionResult type] isStaticInteger] then
-    error mVarName : "cannot infer type"
-  end
-  let @objectIR result = checkAssignmentCompatibility (
-    !source:expressionResult
-    !targetAnnotationType:variableAnnotationType
-    !errorLocation:mVarName.location
-    !staticTypeAllowed:false
-  )
-  drop variableAnnotationType, expressionResult
-#--- Enter variable
-  if not [[result type] instanciable] then
-    error mVarName : "$" + [result key] + " type is not instanciable"
-  end
-  [!?ioPropertyMap insertKey
-    !mVarName
-    !false
-    !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
-  ]
-  [!?ioUniversalPropertyAndRoutineMapForContext insertProperty
-    !mVarName
-    !public:false
-    !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
-  ]
-  ioInitialValueList += !result
-  ioPropertyList += !mVarName.string ![result type]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

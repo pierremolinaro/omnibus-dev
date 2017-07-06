@@ -23,7 +23,7 @@ enum @objectIR {
 #--- Values
   case llvmTemporaryValue (@PLMType type @lstring llvmName @sliceMap sliceMap)
   case literalInteger  (@PLMType type @bigint value)
-  case llvmStructureConstant (@PLMType type @operandIRList values)
+  case llvmStructureConstant (@PLMType type @sortedOperandIRList values)
   case literalString  (@PLMType type @uint size @uint index)
   case zero (@PLMType type)
 #--- Function
@@ -85,7 +85,7 @@ getter @objectIR llvmName -> @string {
   case literalInteger (* @bigint value) : result = [value string]
   case llvmTemporaryValue (* llvmName *) : result = "%" + llvmName
   case temporaryReference (* llvmName * *) : result = "%" + llvmName
-  case llvmStructureConstant (* @operandIRList inValues) :
+  case llvmStructureConstant (* @sortedOperandIRList inValues) :
     result = "{"
     for () in inValues
       do result += [mOperand llvmTypeName] + " " + [mOperand llvmName]
@@ -210,7 +210,7 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
     result = .zero {!type: inType}
   case selfObject (*) :
     result = .selfObject {!type:inType}
-  case llvmStructureConstant (* @operandIRList values) :
+  case llvmStructureConstant (* @sortedOperandIRList values) :
     result = .llvmStructureConstant {!type: inType !values: values}
   case literalString  (* @uint size @uint index) :
     result = .literalString {!type: inType !size: size !index: index}

@@ -50,10 +50,11 @@ setter @universalPropertyAndRoutineMapForContext insertRoutine
 
 setter @universalPropertyAndRoutineMapForContext insertProperty
   ?let @lstring inPropertyName
+  ?readOnly:let @bool inIsReadOnly
   ?public:let @bool inIsPublic
   ?let @objectIR inObjectIR
 {
-  let newValue = @possibleValuedObject.property {!isPublic:inIsPublic !objectIR:inObjectIR}
+  let newValue = @possibleValuedObject.property {!isReadOnly:inIsReadOnly !isPublic:inIsPublic !objectIR:inObjectIR}
   with inPropertyName.string in !?mInternalPropertyAndRoutineMapForContext do
     if [mPossibleValuedObject isUndefined] then
       mPossibleValuedObject = newValue
@@ -267,7 +268,7 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outObjectIR
-  case property (@bool unused isPublic @objectIR objectIR) :
+  case property (* @bool unused isPublic @objectIR objectIR) :
     outObjectIR = objectIR
   case module (@PLMType type) :
     outObjectIR = .globalVariableReference {!type:type !plmName:inValuedObjectName}
@@ -305,7 +306,7 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAcces
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outObjectIR
-  case property (* *) :
+  case property (* * *) :
     error inValuedObjectName : "a property cannot be written" : outObjectIR
   case module (*) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
@@ -346,7 +347,7 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteA
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outObjectIR
-  case property (* *) :
+  case property (* * *) :
     error inValuedObjectName : "a property cannot be written" : outObjectIR
   case module (*) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
@@ -401,7 +402,7 @@ method @universalPropertyAndRoutineMapForContext checkLocalVariableFinalState {
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
     case undefined :
-    case property (* *) :
+    case property (* * *) :
     case module (*) :
     case register (* * *) :
     case globalConstant (*) :
@@ -425,7 +426,7 @@ setter @universalPropertyAndRoutineMapForContext openOverrideForSelectBlock {
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
     case undefined :
-    case property (* *) :
+    case property (* * *) :
     case module (*) :
     case register (* * *) :
     case globalConstant (*) :
@@ -447,7 +448,7 @@ setter @universalPropertyAndRoutineMapForContext openOverrideForRepeatBlock {
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
     case undefined :
-    case property (* *) :
+    case property (* * *) :
     case module (*) :
     case register (* * *) :
     case globalConstant (*) :
@@ -480,7 +481,7 @@ setter @universalPropertyAndRoutineMapForContext closeBranch ?let @location inEr
     for entry in mInternalPropertyAndRoutineMapForContext do
       switch entry.mPossibleValuedObject
       case undefined :
-      case property (* *) :
+      case property (* * *) :
       case module (*) :
       case register (* * *) :
       case globalConstant (*) :
@@ -533,7 +534,7 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
     [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?let objectShouldBeValuedAtEndOfScope ?let possibleValuedObject ?*]
     switch possibleValuedObject
     case undefined :
-    case property (* *) :
+    case property (* * *) :
     case module (*) :
     case register (* * *) :
     case globalConstant (*) :
@@ -611,7 +612,7 @@ map @routineSignatureMapForContext { # argument signature is the key
 
 enum @possibleValuedObject {
   case undefined
-  case property (@bool isPublic @objectIR objectIR)
+  case property (@bool isReadOnly @bool isPublic @objectIR objectIR)
   case module (@PLMType type)
   case register (@bool readable @bool writable @objectIR objectIR)
   case globalConstant (@objectIR objectIR)

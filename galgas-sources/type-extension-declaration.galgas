@@ -57,12 +57,19 @@ syntax extension plm_syntax {
       $public$
       public = true
     end
-    $var$
+    @bool constant
+    select
+      $var$
+      constant = false
+    or
+      $let$
+      constant = true
+    end
     $identifier$ ?let fieldName
     $\$type$ ?let typeName
     $=$
     <expression> ?let initExpression
-    ioPropertyList += !fieldName !public !typeName !.expression{!initExpression:initExpression}
+    ioPropertyList += !fieldName !constant !public !typeName !.expression{!initExpression:initExpression}
   }
 
   #·····················································································································

@@ -4,6 +4,7 @@
 
 list @modulePropertyListAST {
   @lstring mPropertyName
+  @bool mIsConstant # true if declared with "let"
   @lstring mTypeName # Empty string if no type annotation
   @structurePropertyInitOptionalExpressionAST mOptionalExpression
 }
@@ -53,22 +54,29 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <module_variable> ?!@modulePropertyListAST ioPropertyList {
-    $var$
+  rule <module_property> ?!@modulePropertyListAST ioPropertyList {
+    @bool constant
+    select
+      $var$
+      constant = false
+    or
+      $let$
+      constant = true
+    end
     $identifier$ ?let fieldName
     select
       $\$type$ ?let typeName
       select
-        ioPropertyList += !fieldName !typeName !.noExpression
+        ioPropertyList += !fieldName !constant !typeName !.noExpression
       or
         $=$
         <expression> ?let initExpression
-        ioPropertyList += !fieldName !typeName !.expression {!initExpression:initExpression}
+        ioPropertyList += !fieldName !constant !typeName !.expression {!initExpression:initExpression}
       end
     or
       $=$
       <expression> ?let initExpression
-      ioPropertyList += !fieldName !["" nowhere] !.expression {!initExpression:initExpression}
+      ioPropertyList += !fieldName !constant !["" nowhere] !.expression {!initExpression:initExpression}
     end
   }
   
@@ -89,7 +97,7 @@ syntax extension plm_syntax {
     while
       <isr> !?ioAST.mISRDeclarationListAST !moduleName
     while
-      <module_variable> !?modulePropertyListAST
+      <module_property> !?modulePropertyListAST
     while
       <function> !?functionDeclarationListAST
     while
@@ -203,7 +211,7 @@ proc retainRequiredModules ?!@ast ioAST {
     #--- Build module property list, adding init expression
       @stringset validArgumentSet = {}
       @structurePropertyListAST modulePropertyListAST = {}
-      for (propertyName optionalPropertyTypeName optionalInitExpression) in declaration.mPropertyListAST do
+      for (propertyName constant optionalPropertyTypeName optionalInitExpression) in declaration.mPropertyListAST do
         @expressionAST initExpression
         switch optionalInitExpression 
         case noExpression :
@@ -214,6 +222,7 @@ proc retainRequiredModules ?!@ast ioAST {
         end
         modulePropertyListAST += 
          !propertyName
+         !constant
          !false
          !optionalPropertyTypeName
          !.expression{!initExpression:initExpression}

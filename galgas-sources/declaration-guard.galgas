@@ -332,7 +332,7 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
 {
   @allocaList baseGuardAllocaList = {}
   @instructionListIR baseGuardInstructionGenerationList = {}
-  [mAssignmentTargetAST analyzeAssignmentTarget
+  [mAssignmentTargetAST analyzeLValueNoSelf
     !self: inSelfType
     !targetAccessKind:.readWrite
     !propertiesAreMutable: false
