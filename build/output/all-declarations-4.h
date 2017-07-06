@@ -1739,16 +1739,6 @@ class GALGAS_objectIR extensionGetter_withType (const class GALGAS_objectIR & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Extension getter '@objectIR name' (as function)                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_name (const class GALGAS_objectIR & inObject,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                            Function 'literalStringName'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3798,7 +3788,6 @@ void extensionSetter_appendGetPropertyReference (class GALGAS_instructionListIR 
                                                  const class GALGAS_objectIR constin_inTarget,
                                                  const class GALGAS_objectIR constin_inSource,
                                                  const class GALGAS_string constin_inPLMname,
-                                                 const class GALGAS_string constin_inPropertyIndex,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -3831,8 +3820,7 @@ class GALGAS_getPropertyReferenceIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_getPropertyReferenceIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                        const class GALGAS_objectIR & inOperand1,
-                                                                       const class GALGAS_string & inOperand2,
-                                                                       const class GALGAS_string & inOperand3
+                                                                       const class GALGAS_string & inOperand2
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3845,8 +3833,6 @@ class GALGAS_getPropertyReferenceIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPLMname (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPropertyIndex (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
 
@@ -3874,13 +3860,11 @@ class cPtr_getPropertyReferenceIR : public cPtr_abstractInstructionIR {
   public : GALGAS_objectIR mProperty_mTarget ;
   public : GALGAS_objectIR mProperty_mSource ;
   public : GALGAS_string mProperty_mPLMname ;
-  public : GALGAS_string mProperty_mPropertyIndex ;
 
 //--- Constructor
   public : cPtr_getPropertyReferenceIR (const GALGAS_objectIR & in_mTarget,
                                         const GALGAS_objectIR & in_mSource,
-                                        const GALGAS_string & in_mPLMname,
-                                        const GALGAS_string & in_mPropertyIndex
+                                        const GALGAS_string & in_mPLMname
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -3890,7 +3874,6 @@ class cPtr_getPropertyReferenceIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mPLMname (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mPropertyIndex (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3911,7 +3894,6 @@ void extensionSetter_appendPropertyReferenceFromSelf (class GALGAS_instructionLi
                                                       const class GALGAS_objectIR constin_inTarget,
                                                       const class GALGAS_PLMType constin_inSelfType,
                                                       const class GALGAS_string constin_inPropertyName,
-                                                      const class GALGAS_uint constin_inPropertyIndex,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -3944,8 +3926,7 @@ class GALGAS_getPropertyReferenceFromSelfIR : public GALGAS_abstractInstructionI
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_getPropertyReferenceFromSelfIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                                const class GALGAS_PLMType & inOperand1,
-                                                                               const class GALGAS_string & inOperand2,
-                                                                               const class GALGAS_uint & inOperand3
+                                                                               const class GALGAS_string & inOperand2
                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3957,8 +3938,6 @@ class GALGAS_getPropertyReferenceFromSelfIR : public GALGAS_abstractInstructionI
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mSelfType (LOCATION_ARGS) const ;
@@ -3987,13 +3966,11 @@ class cPtr_getPropertyReferenceFromSelfIR : public cPtr_abstractInstructionIR {
   public : GALGAS_objectIR mProperty_mTarget ;
   public : GALGAS_PLMType mProperty_mSelfType ;
   public : GALGAS_string mProperty_mPropertyName ;
-  public : GALGAS_uint mProperty_mPropertyIndex ;
 
 //--- Constructor
   public : cPtr_getPropertyReferenceFromSelfIR (const GALGAS_objectIR & in_mTarget,
                                                 const GALGAS_PLMType & in_mSelfType,
-                                                const GALGAS_string & in_mPropertyName,
-                                                const GALGAS_uint & in_mPropertyIndex
+                                                const GALGAS_string & in_mPropertyName
                                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -4003,7 +3980,6 @@ class cPtr_getPropertyReferenceFromSelfIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mSelfType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

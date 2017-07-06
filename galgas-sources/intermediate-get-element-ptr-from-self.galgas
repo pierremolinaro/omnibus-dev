@@ -4,12 +4,11 @@ setter @instructionListIR appendPropertyReferenceFromSelf
   ?let @objectIR inTarget
   ?let @PLMType inSelfType
   ?let @string inPropertyName
-  ?let @uint inPropertyIndex
 {
   if inSelfType == .void then
     error .nowhere : "<<INTERNAL ERROR>>"
   end
-  self += !@getPropertyReferenceFromSelfIR.new {!inTarget !inSelfType !inPropertyName !inPropertyIndex}
+  self += !@getPropertyReferenceFromSelfIR.new {!inTarget !inSelfType !inPropertyName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -18,7 +17,6 @@ class @getPropertyReferenceFromSelfIR : @abstractInstructionIR {
   @objectIR mTarget
   @PLMType mSelfType
   @string mPropertyName
-  @uint mPropertyIndex
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -32,10 +30,6 @@ override method @getPropertyReferenceFromSelfIR llvmInstructionCode
   ioLLVMcode += "  " + [mTarget llvmName]
   ioLLVMcode += " = call " + [mTarget llvmTypeName] + "* @\"" + llvmType + ".access." + mPropertyName
   ioLLVMcode += "\" (" + llvmType + " * %self) ; " + mPropertyName + "\n"
-
-#  ioLLVMcode += ";  " + [mTarget llvmName] + " = getelementptr inbounds "
-#  ioLLVMcode += llvmType + ", " + llvmType + " * %self, i32 0, i32 " + mPropertyIndex
-#  ioLLVMcode += " ; " + mPropertyName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

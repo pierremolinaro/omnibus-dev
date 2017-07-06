@@ -3,9 +3,8 @@ setter @instructionListIR appendGetPropertyReference
   ?let @objectIR inTarget
   ?let @objectIR inSource
   ?let @string inPLMname
-  ?let @string inPropertyIndex
 {
-  self += !@getPropertyReferenceIR.new {!inTarget !inSource !inPLMname !inPropertyIndex}
+  self += !@getPropertyReferenceIR.new {!inTarget !inSource !inPLMname}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -14,7 +13,6 @@ class @getPropertyReferenceIR : @abstractInstructionIR {
   @objectIR mTarget
   @objectIR mSource
   @string mPLMname
-  @string mPropertyIndex
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -30,10 +28,10 @@ override method @getPropertyReferenceIR llvmInstructionCode
   ioLLVMcode += "\" (" + [mSource llvmTypeName] + " * " + [mSource llvmName] + ") ; " + mPLMname + "\n"
 
 #--- Old code: property direct access
-  let llvmType = [[mSource type] llvmTypeName]
-  ioLLVMcode += ";  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mPropertyIndex
-  ioLLVMcode += " ; " + mPLMname + "\n"
+#  let llvmType = [[mSource type] llvmTypeName]
+#  ioLLVMcode += ";  " + [mTarget llvmName] + " = getelementptr inbounds "
+#  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mPropertyIndex
+#  ioLLVMcode += " ; " + mPLMname + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

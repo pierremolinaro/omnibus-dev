@@ -242,7 +242,7 @@ override method @structureDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
 #---------------------------------------- Properties
   @universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext = .default
@@ -251,11 +251,11 @@ override method @structureDeclarationAST enterInContext
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   var canBeCopied = true
-  for property in mStructurePropertyListAST do (propertyIndex)
+  for property in mStructurePropertyListAST do
     [property enterInContext
       !mStructureName
-      !propertyIndex
       !?context:ioContext
+      !?staticStringMap:ioGlobalLiteralStringMap
       !?universalPropertyAndRoutineMapForContext
       !?propertyList
       !?propertyMap
@@ -263,77 +263,6 @@ override method @structureDeclarationAST enterInContext
       !?constructorSignature
       !?canBeCopied
     ]
-#  #--- Field type
-#    let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
-#      then .void
-#      else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
-#    end
-#  #--- Init expression
-#    @instructionListIR initInstructionGenerationList = {}
-#    @allocaList allocaList = {}
-#    @semanticTemporariesStruct temporaries = .default
-#    switch mInitialisation
-#    case expression (initExpression) :
-#      [initExpression analyzeExpression
-#        !self:.void
-#        !inGuard:false
-#        !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
-#        !optionalTargetType:optionalPropertyType
-#        !context:ioContext
-#        !mode:.bootMode
-#        !?temporary:temporaries
-#        !?staticStringMap:*
-#        !?variableMap:*
-#        !?alloca:allocaList
-#        !?instructionListIR:initInstructionGenerationList
-#        ?result:let @objectIR expressionIR
-#      ]
-#      if (([initInstructionGenerationList length] + [allocaList length]) > 0) || not [expressionIR isStatic] then
-#        error mPropertyName : "initialization expression cannot be computed statically"
-#      end
-#      @PLMType actualPropertyType
-#      if optionalPropertyType != .void then
-#        actualPropertyType = optionalPropertyType
-#      else
-#        actualPropertyType = [expressionIR type]
-#      end
-#      if not [actualPropertyType instanciable] then
-#        error mPropertyName : "$" + [actualPropertyType key] + " type is not instanciable"
-#      end
-#      if not [actualPropertyType copyable] then
-#        canBeCopied = false
-#      end
-#      propertyList += !mPropertyName.string !actualPropertyType
-#      [!?propertyMap insertKey
-#        !mPropertyName
-#        !mIsPublic
-#        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
-#      ]
-#      [!?universalPropertyAndRoutineMapForContext insertProperty
-#        !mPropertyName
-#        !readOnly:mIsConstant
-#        !public:mIsPublic
-#        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
-#      ]
-#      sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
-#    case noExpression :
-#      if not [optionalPropertyType instanciable] then
-#        error mPropertyName : "$" + [optionalPropertyType key] + " type is not instanciable"
-#      end
-#      propertyList += !mPropertyName.string !optionalPropertyType
-#      [!?propertyMap insertKey
-#        !mPropertyName
-#        !mIsPublic
-#        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
-#      ]
-#      [!?universalPropertyAndRoutineMapForContext insertProperty
-#        !mPropertyName
-#        !readOnly:mIsConstant
-#        !public:mIsPublic
-#        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
-#      ]
-#      constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
-#    end
   end
 #--- Enter in constructor map
   [!?ioContext.mConstructorMap insertKey
@@ -446,8 +375,8 @@ override method @structureDeclarationAST enterInContext
 
 method @structurePropertyListAST-element enterInContext
   ?let @lstring inStructureName
-  ?let @uint inPropertyIndex
   ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!@universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext
   ?!@propertyList propertyList
   ?!@propertyMap propertyMap
@@ -474,7 +403,7 @@ method @structurePropertyListAST-element enterInContext
       !context:ioContext
       !mode:.bootMode
       !?temporary:temporaries
-      !?staticStringMap:*
+      !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:*
       !?alloca:allocaList
       !?instructionListIR:initInstructionGenerationList
@@ -495,36 +424,54 @@ method @structurePropertyListAST-element enterInContext
     if not [actualPropertyType copyable] then
       canBeCopied = false
     end
-    propertyList += !mPropertyName.string !actualPropertyType
-    [!?propertyMap insertKey
-      !mPropertyName
-      !mIsPublic
-      !.property {!type:actualPropertyType !plmName:mPropertyName !index:inPropertyIndex}
-    ]
-    [!?universalPropertyAndRoutineMapForContext insertProperty
-      !mPropertyName
-      !readOnly:mIsConstant
-      !public:mIsPublic
-      !.property {!type:actualPropertyType !plmName:mPropertyName !index:inPropertyIndex}
-    ]
-    sortedOperandIRList += ![expressionIR withType !actualPropertyType] !inPropertyIndex
+    if mIsConstant then
+      let constantProperty = @propertyAccessKind.constant{!value:expressionIR}
+      [!?propertyMap insertKey
+        !mPropertyName
+        !mIsPublic
+        !.property {!type:actualPropertyType !plmName:mPropertyName !access:constantProperty}
+      ]
+      [!?universalPropertyAndRoutineMapForContext insertProperty
+        !mPropertyName
+        !readOnly:mIsConstant
+        !public:mIsPublic
+        !.property {!type:actualPropertyType !plmName:mPropertyName !access:constantProperty}
+      ]
+    else
+      let propertyIndex = [propertyList length]
+      let indexedProperty = @propertyAccessKind.indexed{!index:propertyIndex}
+      propertyList += !mPropertyName.string !actualPropertyType
+      [!?propertyMap insertKey
+        !mPropertyName
+        !mIsPublic
+        !.property {!type:actualPropertyType !plmName:mPropertyName !access:indexedProperty}
+      ]
+      [!?universalPropertyAndRoutineMapForContext insertProperty
+        !mPropertyName
+        !readOnly:mIsConstant
+        !public:mIsPublic
+        !.property {!type:actualPropertyType !plmName:mPropertyName !access:indexedProperty}
+      ]
+      sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
+    end
   case noExpression :
     if not [optionalPropertyType instanciable] then
       error mPropertyName : "$" + [optionalPropertyType key] + " type is not instanciable"
     end
+    let propertyIndex = [propertyList length]
     propertyList += !mPropertyName.string !optionalPropertyType
     [!?propertyMap insertKey
       !mPropertyName
       !mIsPublic
-      !.property {!type:optionalPropertyType !plmName:mPropertyName !index:inPropertyIndex}
+      !.property {!type:optionalPropertyType !plmName:mPropertyName !access:.indexed{!index:propertyIndex}}
     ]
     [!?universalPropertyAndRoutineMapForContext insertProperty
       !mPropertyName
       !readOnly:mIsConstant
       !public:mIsPublic
-      !.property {!type:optionalPropertyType !plmName:mPropertyName !index:inPropertyIndex}
+      !.property {!type:optionalPropertyType !plmName:mPropertyName !access:.indexed{!index:propertyIndex}}
     ]
-    constructorSignature += !mPropertyName.string !optionalPropertyType !inPropertyIndex
+    constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
   end
 }
 
@@ -646,10 +593,10 @@ list @propertyAccessRoutineList {
   @PLMType mStructureKind
   @PLMType mPropertyType
   @string mPropertyName
-  @uint mPropertyIndex
+  @propertyAccessKind mAccessKind
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 proc generatePropertyAccess
   ?structureType:let @PLMType inType
@@ -657,29 +604,40 @@ proc generatePropertyAccess
 {
   [inType structure ?1* ?propertyMap:let @propertyMap propertyMap ?1* ?propertyList:@propertyList propertyList ?2*]
   for (propertyName * objectIR) in propertyMap do
-    [objectIR property ?type:let propertyType ?plmName:* ?index:@uint index]
+    [objectIR property ?type:let propertyType ?plmName:* ?access:let access]
     ioIntermediateCodeStruct.mPropertyAccessRoutineList += 
       !inType
       !propertyType
       !propertyName.string
-      !index
+      !access
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
-  for (structureKind propertyType propertyName propertyIndex) in self do
+  for (structureKind propertyType propertyName accessKind) in self do
     let structTypeName = [structureKind llvmTypeName]
     let propTypeName = [propertyType llvmTypeName]
     ioLLVMcode += llvmTitleComment (!"Access property '" + propertyName + "' of structure " + structTypeName)
-    ioLLVMcode += "define internal " + propTypeName
-    ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
-    ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
-    ioLLVMcode += "  %result = getelementptr inbounds " + structTypeName + ", " + structTypeName + " * %self, "
-    ioLLVMcode += "i32 0, i32 " + propertyIndex + " ; " + propertyName + ", index " + propertyIndex + "\n"
-    ioLLVMcode += "  ret " + propTypeName + " * %result\n"
-    ioLLVMcode += "}\n\n"
+    switch accessKind
+    case indexed (index) :
+      ioLLVMcode += "define internal " + propTypeName
+      ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
+      ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
+      ioLLVMcode += "  %result = getelementptr inbounds " + structTypeName + ", " + structTypeName + " * %self, "
+      ioLLVMcode += "i32 0, i32 " + index + " ; " + propertyName + ", index " + index + "\n"
+      ioLLVMcode += "  ret " + propTypeName + " * %result\n"
+      ioLLVMcode += "}\n\n"
+    case constant (value) :
+      let constantName = "@\"" + structTypeName + ".constant." + propertyName + "\""
+      ioLLVMcode += constantName + " = private unnamed_addr constant " + propTypeName + " " + [value name] + "\n\n"
+      ioLLVMcode += "define internal " + propTypeName
+      ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
+      ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
+      ioLLVMcode += "  ret " + propTypeName + " * " + constantName + "\n"
+      ioLLVMcode += "}\n\n"
+    end
   end
 }
 

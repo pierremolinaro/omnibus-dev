@@ -2,6 +2,13 @@
 #! @objectIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @propertyAccessKind {
+  case indexed (@uint index)
+  case constant (@objectIR value)
+}
+
+#·······················································································································
+
 enum @objectIR {
 #--- No object
   case null
@@ -19,7 +26,7 @@ enum @objectIR {
                           @uint arraySize # 0 if not an array
                           @uint elementSize) # 0 if not an array
 #--- Structure property
-  case property (@PLMType type @lstring plmName @uint index)
+  case property (@PLMType type @lstring plmName @propertyAccessKind access)
 #--- Values
   case llvmTemporaryValue (@PLMType type @lstring llvmName @sliceMap sliceMap)
   case literalInteger  (@PLMType type @bigint value)
@@ -156,28 +163,6 @@ getter @objectIR key -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#getter @objectIR kind -> @PLMType {
-#  switch self
-#  case null :
-#    error [self location] : "<<@objectIR kind null>>" : result
-#  case possibleFunction (**) :
-#    error [self location] : "<<@objectIR kind possibleFunction>>" : result
-#  case temporaryReference (@unifiedTypeMap-proxy type * * *) : result = [type type]
-#  case property (type **) : result = [type type]
-#  case registerReference (type *******) : result = [type type]
-#  case globalVariableReference (type *) : result = [type type]
-#  case localVariableReference (type *) : result = [type type]
-#  case zero (type) : result = [type type]
-#  case selfObject (type) : result = type
-#  case literalInteger (type *) : result = [type type]
-#  case llvmTemporaryValue (type * *) : result = [type type]
-#  case llvmStructureConstant (type *) : result = [type type]
-#  case literalString  (type * *) : result = [type type]
-#  end
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 getter @objectIR withType ?let @PLMType inType -> @objectIR {
   switch self
   case null : error [self location] : "<<@objectIR withType null>>" : result
@@ -185,8 +170,8 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
     error [self location] : "<<@objectIR withType possibleFunction>>" : result
   case temporaryReference (* llvmName sliceMap volatile) :
     result = .temporaryReference {!type:inType !llvmName:llvmName !sliceMap:sliceMap !volatile:volatile}
-  case property (* plmName index) :
-    result = .property {!type:inType !plmName:plmName !index:index}
+  case property (* plmName access) :
+    result = .property {!type:inType !plmName:plmName !access:access}
   case registerReference (* plmName readable writable address sliceMap arraySize elementSize) :
     result = .registerReference {
       !type: inType

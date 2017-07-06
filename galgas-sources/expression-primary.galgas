@@ -318,7 +318,6 @@ override method @primaryInExpressionAST analyzeExpression
       [[currentPointer type] structure ?2* ?universalMap:let structureMap ?3*]
       var m = structureMap
       [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
-      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type] # [currentPointer type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
@@ -330,7 +329,6 @@ override method @primaryInExpressionAST analyzeExpression
         !newObject
         !currentPointer
         !propertyName
-        !index
       ]
       outResult = newObject
     else
@@ -435,7 +433,6 @@ private proc handlePropertyAccessInExpression
       [[currentPointer type] structure ?2* ?universalMap:let structureMap ?3*]
       var m = structureMap
       [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR masterPropertyIR]
-      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
@@ -447,7 +444,6 @@ private proc handlePropertyAccessInExpression
         !newObject
         !currentPointer
         !masterPropertyName
-        !index
       ]
       ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:newObject}
     else
@@ -516,12 +512,10 @@ private proc handleArrayAccessInExpression
          !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
-      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
       [!?ioInstructionGenerationList appendGetPropertyReference
         !variableIR
         !currentPointerIR
         !propertyName
-        !index
       ]
     else
       error [currentPointerIR location] : "this should be a structure instance" : variableIR, errorLocation
@@ -682,7 +676,7 @@ proc handleMethodCallInExpressionNew
     switch routineDescriptor.mRoutineCallingScheme
     case staticCall :
       effectiveParameterListIR += !.outputInput !inCurrentPointerIR # Add receiver as first argument
-    case propertyIndirectCall (* *) :
+    case propertyIndirectCall (*) :
     end
   #--- Analyze effective parameters
     analyzeEffectiveParametersNew (
@@ -716,7 +710,7 @@ proc handleMethodCallInExpressionNew
       }
     #--- Enter in invocation graph
       [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-    case propertyIndirectCall (propertyIndex type) :
+    case propertyIndirectCall (type) :
       let propertyReference = @objectIR.temporaryReference {
          !type:type
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inMethodName}
@@ -728,7 +722,6 @@ proc handleMethodCallInExpressionNew
         !propertyReference
         !inCurrentPointerIR
         !inMethodName
-        !propertyIndex
       ]
     #--- Code generation
       ioInstructionGenerationList += !@indirectRoutineCallIR.new {
@@ -953,13 +946,11 @@ proc analyzeEffectiveParametersNew
       case structure (* * universalMap * * *) :
         var m = universalMap
         [!?m searchValuedObjectForReadAccess !name ?let propertyObject]
-        [propertyObject property ?2* ?index:let idx]
         getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
         [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
           !fieldObjectReference
           !inSelfType
           !name
-          !idx
         ]        
         parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![propertyObject type]
         ioEffectiveParameterListIR +=
@@ -1089,7 +1080,7 @@ proc analyzeFunctionCallInExpression
     [receiverType structure ?1* ?propertyMap:let @propertyMap propertyMap ?universalMap:let unused universalMap ?3*]
     if [propertyMap hasKey !inRoutineName] then
       [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
-      [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]
+      [propertyObject property ?type:let type ?2*]
       specialCase = [type isFunction]
       if specialCase then
         log inRoutineName
@@ -1327,13 +1318,11 @@ proc analyzeEffectiveParameters
         case structure (* * universalMap * * *) :
           var m = universalMap
           [!?m searchValuedObjectForReadAccess !name ?let propertyObject]
-          [propertyObject property ?2* ?index:let idx]
           getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
           [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
             !fieldObjectReference
             !inSelfType
             !name
-            !idx
           ]        
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![propertyObject type]
           ioEffectiveParameterListIR +=
