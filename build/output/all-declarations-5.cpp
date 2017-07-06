@@ -1532,7 +1532,7 @@ GALGAS_propertyAccessRoutineList_2D_element::GALGAS_propertyAccessRoutineList_2D
 mProperty_mStructureKind (),
 mProperty_mPropertyType (),
 mProperty_mPropertyName (),
-mProperty_mPropertyIndex () {
+mProperty_mAccessKind () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1545,11 +1545,11 @@ GALGAS_propertyAccessRoutineList_2D_element::~ GALGAS_propertyAccessRoutineList_
 GALGAS_propertyAccessRoutineList_2D_element::GALGAS_propertyAccessRoutineList_2D_element (const GALGAS_PLMType & inOperand0,
                                                                                           const GALGAS_PLMType & inOperand1,
                                                                                           const GALGAS_string & inOperand2,
-                                                                                          const GALGAS_uint & inOperand3) :
+                                                                                          const GALGAS_propertyAccessKind & inOperand3) :
 mProperty_mStructureKind (inOperand0),
 mProperty_mPropertyType (inOperand1),
 mProperty_mPropertyName (inOperand2),
-mProperty_mPropertyIndex (inOperand3) {
+mProperty_mAccessKind (inOperand3) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1557,7 +1557,7 @@ mProperty_mPropertyIndex (inOperand3) {
 GALGAS_propertyAccessRoutineList_2D_element GALGAS_propertyAccessRoutineList_2D_element::constructor_new (const GALGAS_PLMType & inOperand0,
                                                                                                           const GALGAS_PLMType & inOperand1,
                                                                                                           const GALGAS_string & inOperand2,
-                                                                                                          const GALGAS_uint & inOperand3 
+                                                                                                          const GALGAS_propertyAccessKind & inOperand3 
                                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_propertyAccessRoutineList_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
@@ -1580,7 +1580,7 @@ typeComparisonResult GALGAS_propertyAccessRoutineList_2D_element::objectCompare 
     result = mProperty_mPropertyName.objectCompare (inOperand.mProperty_mPropertyName) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mPropertyIndex.objectCompare (inOperand.mProperty_mPropertyIndex) ;
+    result = mProperty_mAccessKind.objectCompare (inOperand.mProperty_mAccessKind) ;
   }
   return result ;
 }
@@ -1588,7 +1588,7 @@ typeComparisonResult GALGAS_propertyAccessRoutineList_2D_element::objectCompare 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_propertyAccessRoutineList_2D_element::isValid (void) const {
-  return mProperty_mStructureKind.isValid () && mProperty_mPropertyType.isValid () && mProperty_mPropertyName.isValid () && mProperty_mPropertyIndex.isValid () ;
+  return mProperty_mStructureKind.isValid () && mProperty_mPropertyType.isValid () && mProperty_mPropertyName.isValid () && mProperty_mAccessKind.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1597,7 +1597,7 @@ void GALGAS_propertyAccessRoutineList_2D_element::drop (void) {
   mProperty_mStructureKind.drop () ;
   mProperty_mPropertyType.drop () ;
   mProperty_mPropertyName.drop () ;
-  mProperty_mPropertyIndex.drop () ;
+  mProperty_mAccessKind.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1614,7 +1614,7 @@ void GALGAS_propertyAccessRoutineList_2D_element::description (C_String & ioStri
     ioString << ", " ;
     mProperty_mPropertyName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mPropertyIndex.description (ioString, inIndentation+1) ;
+    mProperty_mAccessKind.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -1639,8 +1639,8 @@ GALGAS_string GALGAS_propertyAccessRoutineList_2D_element::getter_mPropertyName 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_propertyAccessRoutineList_2D_element::getter_mPropertyIndex (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mPropertyIndex ;
+GALGAS_propertyAccessKind GALGAS_propertyAccessRoutineList_2D_element::getter_mAccessKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAccessKind ;
 }
 
 

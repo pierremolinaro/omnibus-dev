@@ -173,7 +173,7 @@ proc handlePropertyAccessInAssignment
     if [structureObjectMap hasKey !inPropertyName] then
       [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property]
       if [property isProperty] then
-       [property property ?type:let type ?plmName:let name ?index:let index]
+       [property property ?type:let type ?plmName:let name ?1*]
         let newObject = @objectIR.temporaryReference {
           !type:type
           !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
@@ -185,7 +185,6 @@ proc handlePropertyAccessInAssignment
           !newObject
           !ioObject
           !name
-          !index
         ]
         ioObject = newObject
       else

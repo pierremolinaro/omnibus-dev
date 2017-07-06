@@ -2496,7 +2496,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
 
   public : static class GALGAS_objectIR constructor_property (const class GALGAS_PLMType & inOperand0,
                                                               const class GALGAS_lstring & inOperand1,
-                                                              const class GALGAS_uint & inOperand2
+                                                              const class GALGAS_propertyAccessKind & inOperand2
                                                               COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_registerReference (const class GALGAS_PLMType & inOperand0,
@@ -2569,7 +2569,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_property (class GALGAS_PLMType & outArgument0,
                                                   class GALGAS_lstring & outArgument1,
-                                                  class GALGAS_uint & outArgument2,
+                                                  class GALGAS_propertyAccessKind & outArgument2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -3239,6 +3239,124 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sortedOperandIRList
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                              @propertyAccessKind enum                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_propertyAccessKind : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_propertyAccessKind (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_indexed,
+    kEnum_constant
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
+
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_propertyAccessKind extractObject (const GALGAS_object & inObject,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_propertyAccessKind constructor_constant (const class GALGAS_objectIR & inOperand0
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_propertyAccessKind constructor_indexed (const class GALGAS_uint & inOperand0
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_propertyAccessKind & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_constant (class GALGAS_objectIR & outArgument0,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_indexed (class GALGAS_uint & outArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConstant (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIndexed (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_propertyAccessKind class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyAccessKind ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     @propertyAccessKind enum, associated values                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_propertyAccessKind_indexed : public cEnumAssociatedValues {
+  public : const GALGAS_uint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyAccessKind_indexed (const GALGAS_uint & inAssociatedValue0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_indexed (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_propertyAccessKind_constant : public cEnumAssociatedValues {
+  public : const GALGAS_objectIR mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyAccessKind_constant (const GALGAS_objectIR & inAssociatedValue0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_constant (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              @llvmBinaryOperation enum                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3749,12 +3867,12 @@ class cEnumAssociatedValues_objectIR_registerReference : public cEnumAssociatedV
 class cEnumAssociatedValues_objectIR_property : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
-  public : const GALGAS_uint mAssociatedValue2 ;
+  public : const GALGAS_propertyAccessKind mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_objectIR_property (const GALGAS_PLMType & inAssociatedValue0,
                                                     const GALGAS_lstring & inAssociatedValue1,
-                                                    const GALGAS_uint & inAssociatedValue2
+                                                    const GALGAS_propertyAccessKind & inAssociatedValue2
                                                     COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -4185,7 +4303,7 @@ class GALGAS_propertyAccessRoutineList : public AC_GALGAS_list {
                                                   const class GALGAS_PLMType & in_mStructureKind,
                                                   const class GALGAS_PLMType & in_mPropertyType,
                                                   const class GALGAS_string & in_mPropertyName,
-                                                  const class GALGAS_uint & in_mPropertyIndex
+                                                  const class GALGAS_propertyAccessKind & in_mAccessKind
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -4204,7 +4322,7 @@ class GALGAS_propertyAccessRoutineList : public AC_GALGAS_list {
   public : static class GALGAS_propertyAccessRoutineList constructor_listWithValue (const class GALGAS_PLMType & inOperand0,
                                                                                     const class GALGAS_PLMType & inOperand1,
                                                                                     const class GALGAS_string & inOperand2,
-                                                                                    const class GALGAS_uint & inOperand3
+                                                                                    const class GALGAS_propertyAccessKind & inOperand3
                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -4216,7 +4334,7 @@ class GALGAS_propertyAccessRoutineList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_PLMType & inOperand0,
                                                       const class GALGAS_PLMType & inOperand1,
                                                       const class GALGAS_string & inOperand2,
-                                                      const class GALGAS_uint & inOperand3
+                                                      const class GALGAS_propertyAccessKind & inOperand3
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_propertyAccessRoutineList add_operation (const GALGAS_propertyAccessRoutineList & inOperand,
@@ -4228,7 +4346,7 @@ class GALGAS_propertyAccessRoutineList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_PLMType constinArgument0,
                                                        class GALGAS_PLMType constinArgument1,
                                                        class GALGAS_string constinArgument2,
-                                                       class GALGAS_uint constinArgument3,
+                                                       class GALGAS_propertyAccessKind constinArgument3,
                                                        class GALGAS_uint constinArgument4,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
@@ -4236,21 +4354,21 @@ class GALGAS_propertyAccessRoutineList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_PLMType & outArgument0,
                                                   class GALGAS_PLMType & outArgument1,
                                                   class GALGAS_string & outArgument2,
-                                                  class GALGAS_uint & outArgument3,
+                                                  class GALGAS_propertyAccessKind & outArgument3,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_PLMType & outArgument0,
                                                  class GALGAS_PLMType & outArgument1,
                                                  class GALGAS_string & outArgument2,
-                                                 class GALGAS_uint & outArgument3,
+                                                 class GALGAS_propertyAccessKind & outArgument3,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_PLMType & outArgument0,
                                                        class GALGAS_PLMType & outArgument1,
                                                        class GALGAS_string & outArgument2,
-                                                       class GALGAS_uint & outArgument3,
+                                                       class GALGAS_propertyAccessKind & outArgument3,
                                                        class GALGAS_uint constinArgument4,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
@@ -4260,23 +4378,23 @@ class GALGAS_propertyAccessRoutineList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_PLMType & outArgument0,
                                                class GALGAS_PLMType & outArgument1,
                                                class GALGAS_string & outArgument2,
-                                               class GALGAS_uint & outArgument3,
+                                               class GALGAS_propertyAccessKind & outArgument3,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_PLMType & outArgument0,
                                               class GALGAS_PLMType & outArgument1,
                                               class GALGAS_string & outArgument2,
-                                              class GALGAS_uint & outArgument3,
+                                              class GALGAS_propertyAccessKind & outArgument3,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPropertyIndexAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_propertyAccessKind getter_mAccessKindAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPropertyNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                              C_Compiler * inCompiler
@@ -4323,7 +4441,7 @@ class cEnumerator_propertyAccessRoutineList : public cGenericAbstractEnumerator 
   public : class GALGAS_PLMType current_mStructureKind (LOCATION_ARGS) const ;
   public : class GALGAS_PLMType current_mPropertyType (LOCATION_ARGS) const ;
   public : class GALGAS_string current_mPropertyName (LOCATION_ARGS) const ;
-  public : class GALGAS_uint current_mPropertyIndex (LOCATION_ARGS) const ;
+  public : class GALGAS_propertyAccessKind current_mAccessKind (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_propertyAccessRoutineList_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -4346,7 +4464,7 @@ class GALGAS_propertyAccessRoutineList_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_string mProperty_mPropertyName ;
 
-  public : GALGAS_uint mProperty_mPropertyIndex ;
+  public : GALGAS_propertyAccessKind mProperty_mAccessKind ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -4362,7 +4480,7 @@ class GALGAS_propertyAccessRoutineList_2D_element : public AC_GALGAS_root {
   public : GALGAS_propertyAccessRoutineList_2D_element (const GALGAS_PLMType & in_mStructureKind,
                                                         const GALGAS_PLMType & in_mPropertyType,
                                                         const GALGAS_string & in_mPropertyName,
-                                                        const GALGAS_uint & in_mPropertyIndex) ;
+                                                        const GALGAS_propertyAccessKind & in_mAccessKind) ;
 
 //-- Start of generic part --*
 
@@ -4378,7 +4496,7 @@ class GALGAS_propertyAccessRoutineList_2D_element : public AC_GALGAS_root {
   public : static class GALGAS_propertyAccessRoutineList_2D_element constructor_new (const class GALGAS_PLMType & inOperand0,
                                                                                      const class GALGAS_PLMType & inOperand1,
                                                                                      const class GALGAS_string & inOperand2,
-                                                                                     const class GALGAS_uint & inOperand3
+                                                                                     const class GALGAS_propertyAccessKind & inOperand3
                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4393,7 +4511,7 @@ class GALGAS_propertyAccessRoutineList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_propertyAccessKind getter_mAccessKind (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
 
@@ -4442,6 +4560,16 @@ class GALGAS_string function_llvmTitleComment (const class GALGAS_string & const
 class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_PLMType & inObject,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Extension getter '@objectIR name' (as function)                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_name (const class GALGAS_objectIR & inObject,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

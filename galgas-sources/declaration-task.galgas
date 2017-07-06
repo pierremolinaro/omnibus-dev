@@ -208,7 +208,7 @@ map @taskMap {
 
 method @taskList enterInContext
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
   for task in self do
   #--- task variables
@@ -216,11 +216,11 @@ method @taskList enterInContext
     @propertyMap propertyMap = {}
     @universalPropertyAndRoutineMapForContext universalPropertyMap = .default
     @sortedOperandIRList initialValueList = {}
-    for property in task.mVarList do (propertyIndex)
+    for property in task.mVarList do
       [property enterInContext
         !task.mTaskName
-        !propertyIndex
         !?context:ioContext
+        !?staticStringMap:ioGlobalLiteralStringMap
         !?universalPropertyMap
         !?propertyList
         !?propertyMap

@@ -1335,8 +1335,8 @@ void extensionMethod_enterFunctionInContext (const class GALGAS_functionDeclarat
 
 void extensionMethod_enterInContext (const class GALGAS_structurePropertyListAST_2D_element inObject,
                                      const class GALGAS_lstring constin_inStructureName,
-                                     const class GALGAS_uint constin_inPropertyIndex,
                                      class GALGAS_semanticContext & io_ioContext,
+                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                      class GALGAS_universalPropertyAndRoutineMapForContext & io_universalPropertyAndRoutineMapForContext,
                                      class GALGAS_propertyList & io_propertyList,
                                      class GALGAS_propertyMap & io_propertyMap,
@@ -6392,8 +6392,7 @@ class GALGAS_routineCallingSheme : public AC_GALGAS_root {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_routineCallingSheme constructor_propertyIndirectCall (const class GALGAS_uint & inOperand0,
-                                                                                     const class GALGAS_PLMType & inOperand1
+  public : static class GALGAS_routineCallingSheme constructor_propertyIndirectCall (const class GALGAS_PLMType & inOperand0
                                                                                      COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_routineCallingSheme constructor_staticCall (LOCATION_ARGS) ;
@@ -6407,8 +6406,7 @@ class GALGAS_routineCallingSheme : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_propertyIndirectCall (class GALGAS_uint & outArgument0,
-                                                              class GALGAS_PLMType & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_propertyIndirectCall (class GALGAS_PLMType & outArgument0,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const ;
 
@@ -6437,12 +6435,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineCallingSheme
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall : public cEnumAssociatedValues {
-  public : const GALGAS_uint mAssociatedValue0 ;
-  public : const GALGAS_PLMType mAssociatedValue1 ;
+  public : const GALGAS_PLMType mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall (const GALGAS_uint & inAssociatedValue0,
-                                                                           const GALGAS_PLMType & inAssociatedValue1
+  public : cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall (const GALGAS_PLMType & inAssociatedValue0
                                                                            COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

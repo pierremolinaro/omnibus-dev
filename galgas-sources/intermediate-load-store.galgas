@@ -96,7 +96,6 @@ setter @instructionListIR appendLoadFromReference
       !outResultingValue
       !inSource
       !plmName
-      !index
     ]
 #--- Values
   case literalInteger (**) :

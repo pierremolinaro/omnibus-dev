@@ -145,7 +145,7 @@ proc handleSelfAccessInAssignment
   !@objectIR outObjectPtr
 {
   if [inObject isProperty] then
-    [inObject property ?type:let type ?plmName:let name ?index:let index]
+    [inObject property ?type:let type ?plmName:let name ?access:*]
     outObjectPtr = .temporaryReference {
       !type:type
       !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !name}
@@ -157,10 +157,9 @@ proc handleSelfAccessInAssignment
       !outObjectPtr
       !inSelfType
       !name
-      !index
     ]
   else
-    error .nowhere : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
+    error [inObject location] : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
   end
 }
 
