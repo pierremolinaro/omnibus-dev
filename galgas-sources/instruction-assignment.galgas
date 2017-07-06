@@ -3,7 +3,7 @@
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @varAssignmentNoSelfInstructionAST : @instructionAST {
-  @LValueNoSelfAST mAssignmentTargetAST
+  @LValueWithoutSelfAST mAssignmentTargetAST
   @expressionAST mSourceExpression
 }
 
@@ -88,7 +88,8 @@ override method @varAssignmentNoSelfInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  [mAssignmentTargetAST analyzeAssignmentTarget
+#--- Analyze LValue
+  [mAssignmentTargetAST analyzeLValueNoSelf
     !self: inSelfType
     !targetAccessKind:.write
     !propertiesAreMutable: inRoutineCanMutateProperties
@@ -106,7 +107,7 @@ override method @varAssignmentNoSelfInstructionAST analyze
     ?globalVariableReceiverName:let unused globalVariableReceiverName
   ]
   if [currentObject isPossibleFunction] then
-    error [mAssignmentTargetAST mIdentifier] : "invalid assignment target" : currentObject
+    error mAssignmentTargetAST.mIdentifier : "invalid assignment target" : currentObject
   end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -123,6 +124,7 @@ override method @varAssignmentNoSelfInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR sourceOperandPossibleReference
   ]
+#---
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !sourceOperandPossibleReference
@@ -132,10 +134,10 @@ override method @varAssignmentNoSelfInstructionAST analyze
   let result = checkAssignmentCompatibility (
     !source:sourceOperand
     !targetAnnotationType:[currentObject type]
-    !errorLocation:[mAssignmentTargetAST mIdentifier]
+    !errorLocation:mAssignmentTargetAST.mIdentifier
     !staticTypeAllowed:false
   )
-  [!?ioInstructionGenerationList appendStoreFromReference !currentObject ![mAssignmentTargetAST mIdentifier] !result]
+  [!?ioInstructionGenerationList appendStoreFromReference !currentObject !mAssignmentTargetAST.mIdentifier !result]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

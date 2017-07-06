@@ -131,11 +131,11 @@ override method @constructorCallAST analyzeExpression
           )
           sortedOperandIRList += !result !formal_mFieldIndex
         end
-        @operandIRList initialValueList = {}
-        for (initialValue *) in sortedOperandIRList do
-          initialValueList += !initialValue
-        end
-        outResult = .llvmStructureConstant {!type: resultType !values:initialValueList}
+#        @operandIRList initialValueList = {}
+#        for (initialValue *) in sortedOperandIRList do
+#          initialValueList += !initialValue
+#        end
+        outResult = .llvmStructureConstant {!type: resultType !values:sortedOperandIRList}
       end
     end
   end

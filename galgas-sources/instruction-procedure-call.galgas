@@ -10,7 +10,7 @@ abstract class @callInstructionAST : @instructionAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @complexCallNoSelfInstructionAST : @callInstructionAST {
-  @LValueNoSelfAST mAssignmentTargetAST
+  @LValueWithoutSelfAST mAssignmentTargetAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -146,7 +146,7 @@ list @procEffectiveParameterList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueNoSelfAST analyzeTargetForRoutineCall
+method @LValueWithoutSelfAST analyzeTargetForRoutineCall
   ?self:let @PLMType inSelfType
   ?targetAccessKind:let @targetAccessKind inSelfAccessKind
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
@@ -377,7 +377,7 @@ override method @complexCallNoSelfInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  [mAssignmentTargetAST analyzeAssignmentTarget
+  [mAssignmentTargetAST analyzeLValueNoSelf
     !self: inSelfType
     !targetAccessKind:.read # § .readWrite
     !propertiesAreMutable: inRoutineCanMutateProperties

@@ -28,6 +28,7 @@ enum @structurePropertyInitOptionalExpressionAST {
 
 list @structurePropertyListAST {
   @lstring mPropertyName
+  @bool mIsConstant # declared by "let" --> true, declared by "var" --> false
   @bool mIsPublic
   @lstring mPropertyTypeName
   @structurePropertyInitOptionalExpressionAST mInitialisation
@@ -41,7 +42,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <struct_var_declaration> ?!@structurePropertyListAST ioFieldListAST {
+  rule <private_or_public_struct_property_declaration> ?!@structurePropertyListAST ioFieldListAST {
     @bool public
     select
       public = false
@@ -49,21 +50,40 @@ syntax extension plm_syntax {
       $public$
       public = true
     end
-    $var$
+    <struct_property_declaration> !public !?ioFieldListAST
+  }
+  
+  #·····················································································································
+
+  rule <private_struct_property_declaration> ?!@structurePropertyListAST ioFieldListAST {
+    <struct_property_declaration> !false !?ioFieldListAST
+  }
+
+  #·····················································································································
+
+  rule <struct_property_declaration> ?let @bool isPublic ?!@structurePropertyListAST ioFieldListAST {
+    @bool constant
+    select
+      $var$
+      constant = false
+    or
+      $let$
+      constant = true
+    end
     $identifier$ ?let fieldName
     select
       $\$type$ ?let typeName
       select
-        ioFieldListAST += !fieldName !public !typeName !.noExpression
+        ioFieldListAST += !fieldName !constant !isPublic !typeName !.noExpression
       or
         $=$
         <expression> ?let initExpression
-        ioFieldListAST += !fieldName !public !typeName !.expression{!initExpression:initExpression}
+        ioFieldListAST += !fieldName !constant !isPublic !typeName !.expression{!initExpression:initExpression}
       end
     or
       $=$
       <expression> ?let initExpression
-      ioFieldListAST += !fieldName !public !["" nowhere] !.expression{!initExpression:initExpression}
+      ioFieldListAST += !fieldName !constant !isPublic !["" nowhere] !.expression{!initExpression:initExpression}
     end
   }
 
@@ -85,7 +105,7 @@ syntax extension plm_syntax {
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
-      <struct_var_declaration> !?fieldList
+      <private_or_public_struct_property_declaration> !?fieldList
     while
       <function> !?procedureDeclarationListAST
     while
@@ -147,7 +167,7 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- add field types
-  for (* * fieldTypeName initExpression) in mStructurePropertyListAST do
+  for (* * * fieldTypeName initExpression) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       let typeName = llvmRegularTypeMangledNameFromName (!fieldTypeName)
       [!?ioGraph addEdge !structureTypeName !typeName]
@@ -231,76 +251,89 @@ override method @structureDeclarationAST enterInContext
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   var canBeCopied = true
-  for () in mStructurePropertyListAST do (propertyIndex)
-  #--- Field type
-    let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
-      then .void
-      else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
-    end
-  #--- Init expression
-    @instructionListIR initInstructionGenerationList = {}
-    @allocaList allocaList = {}
-    @semanticTemporariesStruct temporaries = .default
-    switch mInitialisation
-    case expression (initExpression) :
-      [initExpression analyzeExpression
-        !self:.void
-        !inGuard:false
-        !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
-        !optionalTargetType:optionalPropertyType
-        !context:ioContext
-        !mode:.bootMode
-        !?temporary:temporaries
-        !?staticStringMap:*
-        !?variableMap:*
-        !?alloca:allocaList
-        !?instructionListIR:initInstructionGenerationList
-        ?result:let @objectIR expressionIR
-      ]
-      if (([initInstructionGenerationList length] + [allocaList length]) > 0) || not [expressionIR isStatic] then
-        error mPropertyName : "initialization expression cannot be computed statically"
-      end
-      @PLMType actualPropertyType
-      if optionalPropertyType != .void then
-        actualPropertyType = optionalPropertyType
-      else
-        actualPropertyType = [expressionIR type]
-      end
-      if not [actualPropertyType instanciable] then
-        error mPropertyName : "$" + [actualPropertyType key] + " type is not instanciable"
-      end
-      if not [actualPropertyType copyable] then
-        canBeCopied = false
-      end
-      propertyList += !mPropertyName.string !actualPropertyType
-      [!?propertyMap insertKey
-        !mPropertyName
-        !mIsPublic
-        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
-      ]
-      [!?universalPropertyAndRoutineMapForContext insertProperty
-        !mPropertyName
-        !public:mIsPublic
-        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
-      ]
-      sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
-    case noExpression :
-      if not [optionalPropertyType instanciable] then
-        error mPropertyName : "$" + [optionalPropertyType key] + " type is not instanciable"
-      end
-      propertyList += !mPropertyName.string !optionalPropertyType
-      [!?propertyMap insertKey
-        !mPropertyName
-        !mIsPublic
-        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
-      ]
-      [!?universalPropertyAndRoutineMapForContext insertProperty
-        !mPropertyName
-        !public:mIsPublic
-        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
-      ]
-      constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
-    end
+  for property in mStructurePropertyListAST do (propertyIndex)
+    [property enterInContext
+      !mStructureName
+      !propertyIndex
+      !?context:ioContext
+      !?universalPropertyAndRoutineMapForContext
+      !?propertyList
+      !?propertyMap
+      !?sortedOperandIRList
+      !?constructorSignature
+      !?canBeCopied
+    ]
+#  #--- Field type
+#    let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
+#      then .void
+#      else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
+#    end
+#  #--- Init expression
+#    @instructionListIR initInstructionGenerationList = {}
+#    @allocaList allocaList = {}
+#    @semanticTemporariesStruct temporaries = .default
+#    switch mInitialisation
+#    case expression (initExpression) :
+#      [initExpression analyzeExpression
+#        !self:.void
+#        !inGuard:false
+#        !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
+#        !optionalTargetType:optionalPropertyType
+#        !context:ioContext
+#        !mode:.bootMode
+#        !?temporary:temporaries
+#        !?staticStringMap:*
+#        !?variableMap:*
+#        !?alloca:allocaList
+#        !?instructionListIR:initInstructionGenerationList
+#        ?result:let @objectIR expressionIR
+#      ]
+#      if (([initInstructionGenerationList length] + [allocaList length]) > 0) || not [expressionIR isStatic] then
+#        error mPropertyName : "initialization expression cannot be computed statically"
+#      end
+#      @PLMType actualPropertyType
+#      if optionalPropertyType != .void then
+#        actualPropertyType = optionalPropertyType
+#      else
+#        actualPropertyType = [expressionIR type]
+#      end
+#      if not [actualPropertyType instanciable] then
+#        error mPropertyName : "$" + [actualPropertyType key] + " type is not instanciable"
+#      end
+#      if not [actualPropertyType copyable] then
+#        canBeCopied = false
+#      end
+#      propertyList += !mPropertyName.string !actualPropertyType
+#      [!?propertyMap insertKey
+#        !mPropertyName
+#        !mIsPublic
+#        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
+#      ]
+#      [!?universalPropertyAndRoutineMapForContext insertProperty
+#        !mPropertyName
+#        !readOnly:mIsConstant
+#        !public:mIsPublic
+#        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
+#      ]
+#      sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
+#    case noExpression :
+#      if not [optionalPropertyType instanciable] then
+#        error mPropertyName : "$" + [optionalPropertyType key] + " type is not instanciable"
+#      end
+#      propertyList += !mPropertyName.string !optionalPropertyType
+#      [!?propertyMap insertKey
+#        !mPropertyName
+#        !mIsPublic
+#        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
+#      ]
+#      [!?universalPropertyAndRoutineMapForContext insertProperty
+#        !mPropertyName
+#        !readOnly:mIsConstant
+#        !public:mIsPublic
+#        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
+#      ]
+#      constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
+#    end
   end
 #--- Enter in constructor map
   [!?ioContext.mConstructorMap insertKey
@@ -407,6 +440,92 @@ override method @structureDeclarationAST enterInContext
       !plmTypeName:mStructureName
     }
   ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @structurePropertyListAST-element enterInContext
+  ?let @lstring inStructureName
+  ?let @uint inPropertyIndex
+  ?!context:@semanticContext ioContext
+  ?!@universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext
+  ?!@propertyList propertyList
+  ?!@propertyMap propertyMap
+  ?!@sortedOperandIRList sortedOperandIRList
+  ?!@constructorSignature constructorSignature
+  ?!@bool canBeCopied
+{
+#--- Property type
+  let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
+    then .void
+    else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
+  end
+#--- Init expression
+  @instructionListIR initInstructionGenerationList = {}
+  @allocaList allocaList = {}
+  @semanticTemporariesStruct temporaries = .default
+  switch mInitialisation
+  case expression (initExpression) :
+    [initExpression analyzeExpression
+      !self:.void
+      !inGuard:false
+      !routineNameForInvocationGraph:.new {!inStructureName.string + " init" !inStructureName.location}
+      !optionalTargetType:optionalPropertyType
+      !context:ioContext
+      !mode:.bootMode
+      !?temporary:temporaries
+      !?staticStringMap:*
+      !?variableMap:*
+      !?alloca:allocaList
+      !?instructionListIR:initInstructionGenerationList
+      ?result:let @objectIR expressionIR
+    ]
+    if (([initInstructionGenerationList length] + [allocaList length]) > 0) || not [expressionIR isStatic] then
+      error mPropertyName : "initialization expression cannot be computed statically"
+    end
+    @PLMType actualPropertyType
+    if optionalPropertyType != .void then
+      actualPropertyType = optionalPropertyType
+    else
+      actualPropertyType = [expressionIR type]
+    end
+    if not [actualPropertyType instanciable] then
+      error mPropertyName : "$" + [actualPropertyType key] + " type is not instanciable"
+    end
+    if not [actualPropertyType copyable] then
+      canBeCopied = false
+    end
+    propertyList += !mPropertyName.string !actualPropertyType
+    [!?propertyMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.property {!type:actualPropertyType !plmName:mPropertyName !index:inPropertyIndex}
+    ]
+    [!?universalPropertyAndRoutineMapForContext insertProperty
+      !mPropertyName
+      !readOnly:mIsConstant
+      !public:mIsPublic
+      !.property {!type:actualPropertyType !plmName:mPropertyName !index:inPropertyIndex}
+    ]
+    sortedOperandIRList += ![expressionIR withType !actualPropertyType] !inPropertyIndex
+  case noExpression :
+    if not [optionalPropertyType instanciable] then
+      error mPropertyName : "$" + [optionalPropertyType key] + " type is not instanciable"
+    end
+    propertyList += !mPropertyName.string !optionalPropertyType
+    [!?propertyMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.property {!type:optionalPropertyType !plmName:mPropertyName !index:inPropertyIndex}
+    ]
+    [!?universalPropertyAndRoutineMapForContext insertProperty
+      !mPropertyName
+      !readOnly:mIsConstant
+      !public:mIsPublic
+      !.property {!type:optionalPropertyType !plmName:mPropertyName !index:inPropertyIndex}
+    ]
+    constructorSignature += !mPropertyName.string !optionalPropertyType !inPropertyIndex
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

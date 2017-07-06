@@ -15,7 +15,7 @@ list @accessInAssignmentListAST {
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct @LValueNoSelfAST {
+struct @LValueWithoutSelfAST {
   @lstring mIdentifier
   @accessInAssignmentListAST mAccessList
 }
@@ -30,7 +30,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <lvalue_without_self> !@LValueNoSelfAST outAssignmentTargetAST {
+  rule <lvalue_without_self> !@LValueWithoutSelfAST outAssignmentTargetAST {
   #--- Object
     $identifier$ ?let @lstring identifier
   #--- Properties and subscript
@@ -58,7 +58,7 @@ syntax extension plm_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueNoSelfAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @LValueWithoutSelfAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (access) in mAccessList do
     switch access
     case property (*) :
@@ -80,7 +80,7 @@ enum @targetAccessKind {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueNoSelfAST analyzeAssignmentTarget
+method @LValueWithoutSelfAST analyzeLValueNoSelf
   ?self:let @PLMType inSelfType
   ?targetAccessKind:let @targetAccessKind inSelfAccessKind
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
@@ -198,5 +198,75 @@ proc handlePropertyAccessInAssignment
     error inPropertyName : "the current object has no property" : ioObject
   end
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#getter @LValueWithoutSelfAST type
+#  ?self:let @PLMType inSelfType
+#  ?targetAccessKind:let @targetAccessKind inSelfAccessKind
+#  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  -> @PLMType
+#{
+##--- object access, with ou without self
+#  if [ioVariableMap hasKey !mIdentifier] then
+#    switch inSelfAccessKind
+#    case read :
+#      [!?ioVariableMap searchForReadAccess !lkey:mIdentifier ?2* ?objectIR:currentObject ?2*]
+#    case write :
+#      [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+#    case readWrite :
+#      [!?ioVariableMap searchForReadWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+#    end
+#    outGlobalVariableReceiverName = if [outCurrentObject isGlobalVariableReference] then mIdentifier.string else "" end
+#  else # Stand alone function call ?
+#    outCurrentObject = .possibleFunction {!receiver:.null !functionName:mIdentifier}
+#    outGlobalVariableReceiverName = ""
+#  end
+##--- Analyze properties, subscripts
+#  if [mAccessList length] == 0 then # 
+#    switch inSelfAccessKind
+#    case read :
+#      [!?ioUniversalMap searchValuedObjectForWriteAccess !mIdentifier ?outCurrentObject]
+#    case write :
+#      [!?ioUniversalMap searchValuedObjectForWriteAccess !mIdentifier ?outCurrentObject]
+#    case readWrite :
+#      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !mIdentifier ?outCurrentObject]
+#    end
+#  else
+#    for (access) in mAccessList do
+#      switch access
+#      case property (propertyName) :
+#        handlePropertyAccessInAssignment (
+#          !?outCurrentObject
+#          !propertyName
+#          !?ioTemporaries
+#          !?ioInstructionGenerationList
+#        )
+#      case arrayAccess (indexExpression endOfExpression) :
+#        handleSubscriptInAssignmentAndExpression (
+#          !self:inSelfType
+#          !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#          !inGuard:false
+#          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#          !context:inContext
+#          !mode:inCurrentMode
+#          !?temporary:ioTemporaries
+#          !?staticStringMap:ioGlobalLiteralStringMap
+#          !?variableMap:ioVariableMap
+#          !?variableMap:ioUniversalMap
+#          !?alloca:ioAllocaList
+#          !indexExpression
+#          !endOfExpression
+#          !?ioInstructionGenerationList
+#          !?outCurrentObject
+#        )
+#      end
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

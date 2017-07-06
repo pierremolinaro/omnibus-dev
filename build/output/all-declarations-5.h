@@ -11,119 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Extension setter '@instructionListIR appendUpperBoundCheck'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendUpperBoundCheck (class GALGAS_instructionListIR & ioObject,
-                                            const class GALGAS_objectIR constin_inSource,
-                                            const class GALGAS_bigint constin_inUpperBoundPlusOne,
-                                            const class GALGAS_uint constin_inPanicCode,
-                                            const class GALGAS_location constin_inLocation,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @upperBoundCheckIR class                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_upperBoundCheckIR : public GALGAS_abstractInstructionIR {
-//--- Constructor
-  public : GALGAS_upperBoundCheckIR (void) ;
-
-//---
-  public : inline const class cPtr_upperBoundCheckIR * ptr (void) const { return (const cPtr_upperBoundCheckIR *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_upperBoundCheckIR (const cPtr_upperBoundCheckIR * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_upperBoundCheckIR extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_upperBoundCheckIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                  const class GALGAS_bigint & inOperand1,
-                                                                  const class GALGAS_uint & inOperand2,
-                                                                  const class GALGAS_location & inOperand3
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_upperBoundCheckIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPanicCode (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mUpperBoundPlusOne (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_upperBoundCheckIR class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_upperBoundCheckIR ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Pointer class for @upperBoundCheckIR class                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_upperBoundCheckIR : public cPtr_abstractInstructionIR {
-//--- Attributes
-  public : GALGAS_objectIR mProperty_mSource ;
-  public : GALGAS_bigint mProperty_mUpperBoundPlusOne ;
-  public : GALGAS_uint mProperty_mPanicCode ;
-  public : GALGAS_location mProperty_mLocation ;
-
-//--- Constructor
-  public : cPtr_upperBoundCheckIR (const GALGAS_objectIR & in_mSource,
-                                   const GALGAS_bigint & in_mUpperBoundPlusOne,
-                                   const GALGAS_uint & in_mPanicCode,
-                                   const GALGAS_location & in_mLocation
-                                   COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mUpperBoundPlusOne (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mPanicCode (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                               @sourceLocationIR class                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -413,9 +300,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_assignment_5F_operator_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_assignment_5F_operator_ (GALGAS_operatorAssignmentKind & outArgument0,
-                                                    GALGAS_infixOperator & outArgument1,
-                                                    GALGAS_location & outArgument2,
+  public : virtual void nt_assignment_5F_operator_ (GALGAS_infixOperator & outArgument0,
+                                                    GALGAS_location & outArgument1,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'declaration' non terminal
@@ -629,7 +515,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_lvalue_5F_without_5F_self_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_lvalue_5F_without_5F_self_ (GALGAS_LValueNoSelfAST & outArgument0,
+  public : virtual void nt_lvalue_5F_without_5F_self_ (GALGAS_LValueWithoutSelfAST & outArgument0,
                                                        C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'mode' non terminal
@@ -640,12 +526,12 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_mode_ (GALGAS_mode & outArgument0,
                                   C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'module_variable' non terminal
+//------------------------------------- 'module_property' non terminal
 //--- 'parse' label
-  public : virtual void nt_module_5F_variable_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_module_5F_property_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_module_5F_variable_ (GALGAS_modulePropertyListAST & ioArgument0,
+  public : virtual void nt_module_5F_property_ (GALGAS_modulePropertyListAST & ioArgument0,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'primary' non terminal
@@ -655,6 +541,22 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_primary_ (GALGAS_expressionAST & outArgument0,
                                      C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'private_or_public_struct_property_declaration' non terminal
+//--- 'parse' label
+  public : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (GALGAS_structurePropertyListAST & ioArgument0,
+                                                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'private_struct_property_declaration' non terminal
+//--- 'parse' label
+  public : virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_private_5F_struct_5F_property_5F_declaration_ (GALGAS_structurePropertyListAST & ioArgument0,
+                                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'procedure_call' non terminal
 //--- 'parse' label
@@ -742,13 +644,14 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_staticArray_5F_exp_ (GALGAS_extendStaticArrayExpressionListAST & ioArgument0,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'struct_var_declaration' non terminal
+//------------------------------------- 'struct_property_declaration' non terminal
 //--- 'parse' label
-  public : virtual void nt_struct_5F_var_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_struct_5F_property_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_struct_5F_var_5F_declaration_ (GALGAS_structurePropertyListAST & ioArgument0,
-                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_struct_5F_property_5F_declaration_ (const GALGAS_bool inArgument0,
+                                                               GALGAS_structurePropertyListAST & ioArgument1,
+                                                               C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'system_routine' non terminal
 //--- 'parse' label
@@ -763,7 +666,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_taskBody_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_taskBody_ (GALGAS_taskVarListAST & ioArgument0,
+  public : virtual void nt_taskBody_ (GALGAS_structurePropertyListAST & ioArgument0,
                                       GALGAS_functionDeclarationListAST & ioArgument1,
                                       GALGAS_taskInitListAST & ioArgument2,
                                       GALGAS_syncInstructionBranchListAST & ioArgument3,
@@ -940,6 +843,10 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_84 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_85 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_plm_5F_syntax_86 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_plm_5F_syntax_87 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
