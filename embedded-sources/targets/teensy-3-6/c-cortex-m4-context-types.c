@@ -79,28 +79,3 @@ typedef struct {
   unsigned mLR_RETURN_CODE ;
 } TaskContext ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void kernel_set_task_context (TaskContext * inTaskContext,
-                                     const unsigned inTopOfStack,
-                                     RoutineTaskType inTaskRoutine) {
-//--- Initialize LR
-  inTaskContext->mLR_RETURN_CODE = 0xFFFFFFFD ; // Thread mode, process stack
-//--- Initialize SP
-  StackedRegisters * ptr = (StackedRegisters *) (inTopOfStack - sizeof (StackedRegisters)) ; // 8 stacked registers
-  inTaskContext->mSP_USR = ptr ;
-//--- Initialize PC
-  ptr->mPC = (unsigned) inTaskRoutine ;
-//--- Initialize CPSR
-  ptr->mXPSR = 1 << 24 ; // Thumb bit
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void kernel_set_return_code (TaskContext * inTaskContext,
-                                    const unsigned inReturnCode) {
-  StackedRegisters * ptr = inTaskContext->mSP_USR ;
-  ptr->mR0 = inReturnCode ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*

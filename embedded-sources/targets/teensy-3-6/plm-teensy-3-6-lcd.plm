@@ -7,10 +7,6 @@ check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
 
 //——————————————————————————————————————————————————————————————————————————————
 
-module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
-
-//——————————————————————————————————————————————————————————————————————————————
-
 module lcd {
   let DB4 $digitalPort
   let DB5 $digitalPort
@@ -19,7 +15,6 @@ module lcd {
   
   let RS $digitalPort
   let ENABLE $digitalPort
-  let toto = "azerty"
 
   //············································································
 

@@ -54,22 +54,3 @@ typedef struct {
 } TaskContext ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-static void kernel_set_task_context (TaskContext * inTaskContext,
-                                     const unsigned inTopOfStack,
-                                     RoutineTaskType inTaskRoutine) {
-//--- Initialize PC
-  inTaskContext->mPC_USR = (unsigned) inTaskRoutine ;
-//--- Initialize SP
-  inTaskContext->mSP_USR = inTopOfStack ;
-//--- Initialize CPSR
-  inTaskContext->mCPSR = 0x10 ; // ARM USER MODE, IRQ and FIRQ interrupts enabled
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void kernel_set_return_code (TaskContext * inTaskContext, const unsigned inReturnCode) {
-  inTaskContext->mR0 = inReturnCode ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*

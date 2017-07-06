@@ -44,8 +44,10 @@ SECTION:
 //--- C Source files
 C_FILES:
   "c-arm7tdmi-vectors.c",
-  "c-arm7tdmi-context.c",
-  "../c-real-time-kernel.c",
+  "c-arm7tdmi-context-types.c",
+  "../c-real-time-kernel-types.c",
+  "c-arm7tdmi-context-code.c",
+  "../c-real-time-kernel-code.c",
   "c-countTrainingZeros.c"
 //--- Assembler Source files
 S_FILES:

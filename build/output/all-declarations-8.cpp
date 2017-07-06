@@ -1089,13 +1089,13 @@ static void extensionMethod_structureDeclarationAST_semanticAnalysis (const cPtr
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_structureDeclarationAST * object = (const cPtr_structureDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_structureDeclarationAST) ;
-  GALGAS_PLMType var_structureType_19719 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), object->mProperty_mStructureName, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 508)).getter_type (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 508)) ;
+  GALGAS_PLMType var_structureType_19728 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), object->mProperty_mStructureName, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 508)).getter_type (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 508)) ;
   const GALGAS_structureDeclarationAST temp_0 = object ;
-  callExtensionMethod_functionSemanticAnalysis ((const cPtr_structureDeclarationAST *) temp_0.ptr (), var_structureType_19719, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 510)) ;
-  extensionMethod_systemRoutineSemanticAnalysis (object->mProperty_mSystemRoutineListAST, var_structureType_19719, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 517)) ;
-  extensionMethod_guardSemanticAnalysis (object->mProperty_mGuardListAST, var_structureType_19719, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 524)) ;
+  callExtensionMethod_functionSemanticAnalysis ((const cPtr_structureDeclarationAST *) temp_0.ptr (), var_structureType_19728, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 510)) ;
+  extensionMethod_systemRoutineSemanticAnalysis (object->mProperty_mSystemRoutineListAST, var_structureType_19728, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 517)) ;
+  extensionMethod_guardSemanticAnalysis (object->mProperty_mGuardListAST, var_structureType_19728, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 524)) ;
   {
-  routine_generatePropertyAccess (var_structureType_19719, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 531)) ;
+  routine_generatePropertyAccess (var_structureType_19728, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 531)) ;
   }
 }
 
@@ -1120,21 +1120,21 @@ void routine_generatePropertyAccess (const GALGAS_PLMType constinArgument_inType
                                      GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                      C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_propertyMap var_propertyMap_23513 ;
-  GALGAS_propertyList var_propertyList_23558 ;
-  GALGAS_lstring joker_23469_1 ; // Joker input parameter
-  GALGAS_universalPropertyAndRoutineMapForContext joker_23515_1 ; // Joker input parameter
-  GALGAS_uint joker_23560_2 ; // Joker input parameter
-  GALGAS_string joker_23560_1 ; // Joker input parameter
-  constinArgument_inType.method_structure (joker_23469_1, var_propertyMap_23513, joker_23515_1, var_propertyList_23558, joker_23560_2, joker_23560_1, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 605)) ;
-  cEnumerator_propertyMap enumerator_23610 (var_propertyMap_23513, kENUMERATION_UP) ;
-  while (enumerator_23610.hasCurrentObject ()) {
-    GALGAS_PLMType var_propertyType_23659 ;
-    GALGAS_propertyAccessKind var_access_23689 ;
-    GALGAS_lstring joker_23669 ; // Joker input parameter
-    enumerator_23610.current_mPropertyObject (HERE).method_property (var_propertyType_23659, joker_23669, var_access_23689, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 607)) ;
-    ioArgument_ioIntermediateCodeStruct.mProperty_mPropertyAccessRoutineList.addAssign_operation (constinArgument_inType, var_propertyType_23659, enumerator_23610.current_lkey (HERE).getter_string (HERE), var_access_23689  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 608)) ;
-    enumerator_23610.gotoNextObject () ;
+  GALGAS_propertyMap var_propertyMap_23522 ;
+  GALGAS_propertyList var_propertyList_23567 ;
+  GALGAS_lstring joker_23478_1 ; // Joker input parameter
+  GALGAS_universalPropertyAndRoutineMapForContext joker_23524_1 ; // Joker input parameter
+  GALGAS_uint joker_23569_2 ; // Joker input parameter
+  GALGAS_string joker_23569_1 ; // Joker input parameter
+  constinArgument_inType.method_structure (joker_23478_1, var_propertyMap_23522, joker_23524_1, var_propertyList_23567, joker_23569_2, joker_23569_1, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 605)) ;
+  cEnumerator_propertyMap enumerator_23619 (var_propertyMap_23522, kENUMERATION_UP) ;
+  while (enumerator_23619.hasCurrentObject ()) {
+    GALGAS_PLMType var_propertyType_23668 ;
+    GALGAS_propertyAccessKind var_access_23698 ;
+    GALGAS_lstring joker_23678 ; // Joker input parameter
+    enumerator_23619.current_mPropertyObject (HERE).method_property (var_propertyType_23668, joker_23678, var_access_23698, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 607)) ;
+    ioArgument_ioIntermediateCodeStruct.mProperty_mPropertyAccessRoutineList.addAssign_operation (constinArgument_inType, var_propertyType_23668, enumerator_23619.current_lkey (HERE).getter_string (HERE), var_access_23698  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 608)) ;
+    enumerator_23619.gotoNextObject () ;
   }
 }
 

@@ -43,8 +43,10 @@ SECTION:
   "udfcoded-section-invocation.s"
 //--- C Source files
 C_FILES:
-  "../c-cortex-m4-context.c",
-  "../../c-real-time-kernel.c",
+  "../c-cortex-m4-context-types.c",
+  "../../c-real-time-kernel-types.c",
+  "../c-cortex-m4-context-code.c",
+  "../../c-real-time-kernel-code.c",
   "../c-countTrainingZeros.c"
 //--- Assembler Source files
 S_FILES:

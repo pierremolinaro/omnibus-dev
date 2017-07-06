@@ -1,56 +1,3 @@
-//---------------------------------------------------------------------------------------------------------------------*
-
-#define TASK_COUNT (!TASKCOUNT!)
-#define GUARD_COUNT (!GUARDCOUNT!)
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef unsigned TaskList ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef struct { unsigned mGuardValue ; } GuardList ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef unsigned char bool ;
-
-#define true  ((bool) 1)
-#define false ((bool) 0)
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-// GUARD_EVALUATING_OR_OUTSIDE should be the first constant
-typedef enum {GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static unsigned countTrainingZeros (const unsigned inValue) ; // Defined in countTrainingZeros.c
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   T A S K    C O N T R O L    B L O C K                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef struct {
-//--- Context buffer (SHOULD BE THE FIRST FIELD)
-  TaskContext mTaskContext ;
-//--- This field is used for deadline waiting
-  unsigned mTaskDeadline ;
-//---
-  TaskList * mWaitingList ;
-//--- Stack buffer parameters
-//  unsigned * mStackBufferAddress ;
-//  unsigned mStackBufferSize ; // In bytes
-//--- Task index
-  unsigned char mTaskIndex ;
-//--- Guards
-  GuardState mGuardState ;
-  bool mHaveDeadlineGuard ;
-  unsigned mGuardCount ;
-  GuardList * mGuardListArray [GUARD_COUNT] ;
-} TaskControlBlock ;
-
-//---------------------------------------------------------------------------------------------------------------------*
 
 static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;
 
@@ -110,12 +57,10 @@ void kernel_create_task (const unsigned inTaskIndex,
   taskControlBlockPtr->mHaveDeadlineGuard = false ; // statically initialized to 0
   taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to 0
 //--- Store stack parameters
-//  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;
-//  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;
-//--- Stack Pointer initial value
-  const unsigned topOfStack = ((unsigned) inStackBufferAddress) + inStackBufferSize ;
+  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;
+  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;
 //--- Initialize Context
-  kernel_set_task_context (& taskControlBlockPtr->mTaskContext, topOfStack, inTaskRoutine) ;
+  kernel_set_task_context (taskControlBlockPtr, inTaskRoutine) ;
 //--- Make task ready
   kernel_makeTaskReady (inTaskIndex) ;
 }
@@ -227,6 +172,16 @@ void makeTasksReadyFrom (const unsigned inCurrentDate) {
       kernel_makeTaskReady (taskIndex) ;
     }
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  G E T T I N G    F R E E    S T A C K    S I Z E                                                                   *
+//---------------------------------------------------------------------------------------------------------------------*
+
+unsigned freeStackSize (void) asm ("!FUNC!freeStackSize") ;
+
+unsigned freeStackSize (void) {
+  return gRunningTaskControlBlock->mStackFreeSize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
