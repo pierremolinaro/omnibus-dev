@@ -366,19 +366,19 @@ override method @forInstructionOnStringIR llvmInstructionCode
   let endLabel  = "for.label.end." + [mLocation locationIndex]
   let ptrVar    = "for.ptr." + [mLocation locationIndex]
   let currentVar = "for.current." + [mLocation locationIndex]
-  
+  let stringLLVMTypeName = [@PLMType.literalString llvmTypeName]
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
 
   ioLLVMcode += startLabel + ":\n"
-  ioLLVMcode += "  %" + ptrVar + ".start = load i8*, i8** " + [mIteratedObject llvmName]
+  ioLLVMcode += "  %" + ptrVar + ".start = load " + stringLLVMTypeName + ", " + stringLLVMTypeName + "* " + [mIteratedObject llvmName] + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
   
 #------------ Test
   ioLLVMcode += testLabel + ":\n"
-  ioLLVMcode += "  %" + ptrVar + " = phi i8* [%" + ptrVar + ".start, %"
+  ioLLVMcode += "  %" + ptrVar + " = phi " + stringLLVMTypeName + " [%" + ptrVar + ".start, %"
   ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + nextLabel + "]\n"
-  ioLLVMcode += "  %" + currentVar + " = load i8, i8* %" + ptrVar + "\n"
+  ioLLVMcode += "  %" + currentVar + " = load i8, " + stringLLVMTypeName + " %" + ptrVar + "\n"
   ioLLVMcode += "  %" + currentVar + ".nul = icmp eq i8 %" + currentVar + ", 0\n"
   ioLLVMcode += "  br i1 %" + currentVar + ".nul, label %" + endLabel + ", label %" + whileLabel + "\n\n"
 

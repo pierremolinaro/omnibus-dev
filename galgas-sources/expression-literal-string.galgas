@@ -51,7 +51,7 @@ override method @literalStringInExpressionAST analyzeExpression
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
+  ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -60,9 +60,9 @@ override method @literalStringInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]} type]
+#  let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]} type]
   [!?ioGlobalLiteralStringMap findOrAddStaticString !mLiteralString.string ?let staticStringIndex]
-  outResult = .literalString {!type:type !size:[mLiteralString.string length] + 1 !index:staticStringIndex}
+  outResult = .literalString {!size:[mLiteralString.string length] + 1 !index:staticStringIndex}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

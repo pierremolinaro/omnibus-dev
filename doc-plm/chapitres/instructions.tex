@@ -184,8 +184,12 @@ Si le programme est compilé avec l'option \texttt{-{}-no-panic-generation}, alo
 
 Noter que \plm=expression= ne doit pas être calculable statiquement. Si elle est calculable statiquement, il faut utiliser la directive \plm=check=, \refSectionPage{directiveCheck}. Par exemple, le code suivant provoque une erreur de compilation :
 \begin{PLM}
-assert true // Erreur, l'expression est calculable statiquement
+assert true // Erreur de compilation, l'expression est calculable statiquement
 \end{PLM}
+
+
+
+
 
 
 
@@ -341,5 +345,5 @@ for nom in objet while expression {
 nop
 \end{PLM}
 
-Le mot réservé \plm=nop= engendre une instruction assembleur \emph{nop}.
+Le mot réservé \plm=nop= engendre une instruction assembleur \emph{nop}, telle que défini par le paramètre \texttt{NOP} dans la définition de la cible (\refSubsectionPage{configurationNop}).
 

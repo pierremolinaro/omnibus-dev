@@ -2470,9 +2470,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                     const class GALGAS_bigint & inOperand1
                                                                     COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_objectIR constructor_literalString (const class GALGAS_PLMType & inOperand0,
-                                                                   const class GALGAS_uint & inOperand1,
-                                                                   const class GALGAS_uint & inOperand2
+  public : static class GALGAS_objectIR constructor_literalString (const class GALGAS_uint & inOperand0,
+                                                                   const class GALGAS_uint & inOperand1
                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_llvmStructureConstant (const class GALGAS_PLMType & inOperand0,
@@ -2540,9 +2539,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_literalString (class GALGAS_PLMType & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_literalString (class GALGAS_uint & outArgument0,
                                                        class GALGAS_uint & outArgument1,
-                                                       class GALGAS_uint & outArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
@@ -3278,7 +3276,7 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_propertyAccessKind constructor_constant (const class GALGAS_objectIR & inOperand0
+  public : static class GALGAS_propertyAccessKind constructor_constant (const class GALGAS_string & inOperand0
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_propertyAccessKind constructor_indexed (const class GALGAS_uint & inOperand0
@@ -3293,7 +3291,7 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_constant (class GALGAS_objectIR & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_constant (class GALGAS_string & outArgument0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -3342,10 +3340,10 @@ class cEnumAssociatedValues_propertyAccessKind_indexed : public cEnumAssociatedV
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_propertyAccessKind_constant : public cEnumAssociatedValues {
-  public : const GALGAS_objectIR mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_propertyAccessKind_constant (const GALGAS_objectIR & inAssociatedValue0
+  public : cEnumAssociatedValues_propertyAccessKind_constant (const GALGAS_string & inAssociatedValue0
                                                               COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -3941,14 +3939,12 @@ class cEnumAssociatedValues_objectIR_llvmStructureConstant : public cEnumAssocia
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_objectIR_literalString : public cEnumAssociatedValues {
-  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue0 ;
   public : const GALGAS_uint mAssociatedValue1 ;
-  public : const GALGAS_uint mAssociatedValue2 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_objectIR_literalString (const GALGAS_PLMType & inAssociatedValue0,
-                                                         const GALGAS_uint & inAssociatedValue1,
-                                                         const GALGAS_uint & inAssociatedValue2
+  public : cEnumAssociatedValues_objectIR_literalString (const GALGAS_uint & inAssociatedValue0,
+                                                         const GALGAS_uint & inAssociatedValue1
                                                          COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -4560,16 +4556,6 @@ class GALGAS_string function_llvmTitleComment (const class GALGAS_string & const
 class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_PLMType & inObject,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Extension getter '@objectIR name' (as function)                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_name (const class GALGAS_objectIR & inObject,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -421,7 +421,7 @@ private proc handlePropertyAccessInExpression
       error identifier : "«literalInteger» invalid here" : ioInternalRepresentation
     case llvmStructureConstant (* *) :
        error identifier : "«llvmStructureConstant» invalid here" : ioInternalRepresentation
-    case literalString  (* * *) :
+    case literalString  (* *) :
        error identifier : "a global string constant is invalid here" : ioInternalRepresentation
     case zero (*) :
       error identifier : "«zero» invalid here" : ioInternalRepresentation

@@ -425,8 +425,8 @@ method @structurePropertyListAST-element enterInContext
       canBeCopied = false
     end
     if mIsConstant then
-      let constantProperty = @propertyAccessKind.constant{!value:expressionIR}
-      [!?propertyMap insertKey
+     let constantProperty = @propertyAccessKind.constant{!llvmValue:[expressionIR name]}
+     [!?propertyMap insertKey
         !mPropertyName
         !mIsPublic
         !.property {!type:actualPropertyType !plmName:mPropertyName !access:constantProperty}
@@ -617,8 +617,8 @@ proc generatePropertyAccess
 
 method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
   for (structureKind propertyType propertyName accessKind) in self do
+    var propTypeName = [propertyType llvmTypeName]
     let structTypeName = [structureKind llvmTypeName]
-    let propTypeName = [propertyType llvmTypeName]
     ioLLVMcode += llvmTitleComment (!"Access property '" + propertyName + "' of structure " + structTypeName)
     switch accessKind
     case indexed (index) :
@@ -630,8 +630,11 @@ method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
       ioLLVMcode += "  ret " + propTypeName + " * %result\n"
       ioLLVMcode += "}\n\n"
     case constant (value) :
+#      if [value isLiteralString] then
+#        propTypeName += "*"
+#      end
       let constantName = "@\"" + structTypeName + ".constant." + propertyName + "\""
-      ioLLVMcode += constantName + " = private unnamed_addr constant " + propTypeName + " " + [value name] + "\n\n"
+      ioLLVMcode += constantName + " = private unnamed_addr constant " + propTypeName + " " + value + "\n\n"
       ioLLVMcode += "define internal " + propTypeName
       ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
       ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"

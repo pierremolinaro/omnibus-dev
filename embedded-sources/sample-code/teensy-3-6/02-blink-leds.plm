@@ -1,6 +1,8 @@
 target "teensy-3-6/privileged"
 let F_CPU_MHZ = 240
 
+module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
 //——————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
@@ -37,14 +39,21 @@ init 1000 {
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
+  setup 0 {
+    let titre = "Hello"
+    lcd.printString (!titre)
+  }
+  
   while time.waitUntilMS (!deadline:self.compteur) {
     digitalWrite (!port:LED_L0 !true)
     self.compteur +%= 500
     time.waitUntilMS (!deadline:self.compteur)
     digitalWrite (!port:LED_L0 !false)
     self.compteur +%= 500
-    lcd.goto (!line:0 !column:0)
+    lcd.goto (!line:1 !column:0)
     lcd.printUnsigned (!time.millis ())
+    lcd.goto (!line:2 !column:0)
+    lcd.printUnsigned (!freeStackSize ())
   }
 }
 

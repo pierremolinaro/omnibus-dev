@@ -31,7 +31,7 @@ setter @instructionListIR appendStoreFromReference
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue literalInteger>>"
   case llvmStructureConstant (* *) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue llvmStructureConstant>>"
-  case literalString  (* * *) :
+  case literalString  (* *) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue literalString>>"
   case zero (*) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue zero>>"
@@ -90,7 +90,7 @@ setter @instructionListIR appendLoadFromReference
       ]
     end
 #--- Structure property
-  case property (type plmName index) :
+  case property (type plmName *) :
     getNewTempVariable (!type !plmName !?ioTemporaries ?outResultingValue)
     [!?self appendGetPropertyReference
       !outResultingValue
@@ -104,7 +104,7 @@ setter @instructionListIR appendLoadFromReference
     outResultingValue = inSource
   case llvmStructureConstant (* *) :
     outResultingValue = inSource
-  case literalString (***) :
+  case literalString (**) :
     outResultingValue = inSource
   case zero (*) :
     outResultingValue = inSource
