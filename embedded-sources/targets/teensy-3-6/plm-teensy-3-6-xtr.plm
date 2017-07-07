@@ -7,6 +7,10 @@ check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
 
 extern func user freeStackSize () -> $uint32 : "freeStackSize"
 
+extern func user noteFreeStackSize () : "noteFreeStackSize"
+
+extern func service noteCurrentTaskFreeStackSize () : "noteCurrentTaskFreeStackSize"
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   SYNCHRONIZATION TOOLS ROUTINES                                                                                     
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

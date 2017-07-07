@@ -73,6 +73,7 @@ override method @integerDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
     !type:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize !plmTypeName:integerTypeName}
+    !index:[ioContext.mTypeMap count]
   ]
 #--- Enter integer <-> integer operators
   enter_integer_integer_operators (

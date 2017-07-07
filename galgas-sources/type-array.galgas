@@ -95,6 +95,7 @@ override method @typeArrayDeclarationAST enterInContext
   [ioContext.mTypeMap searchKey
     !lkey:mElementTypeName
     ?type:let kind
+    ?1*
   ]
   if not [kind copyable] then
     error mElementTypeName : "an array element should be copyable"
@@ -144,6 +145,7 @@ override method @typeArrayDeclarationAST enterInContext
         !flags: instanciableFlag () | copyableFlag ()
         !plmTypeName:mArrayTypeName
       }
+      !index:[ioContext.mTypeMap count]
     ]
   #--- Enter array constructor
     [!?ioContext.mConstructorMap insertKey

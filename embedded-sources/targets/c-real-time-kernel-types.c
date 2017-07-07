@@ -51,3 +51,14 @@ typedef struct {
   GuardList * mGuardListArray [GUARD_COUNT] ;
 } TaskControlBlock ;
 
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   S C H E D U L E R                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+TaskControlBlock * gRunningTaskControlBlock ; // Shared with assembly code (arm_context.s)
+static TaskList gReadyTaskList ;
+

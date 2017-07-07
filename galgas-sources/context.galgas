@@ -263,6 +263,7 @@ proc buildSemanticContext
         !flags:0
         !plmTypeName:plmNameForStaticListType (!lkey)
       }
+      !index:[outSemanticContext.mTypeMap count]
     ]
     let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
     [!?outSemanticContext.mGlobalConstantMap insertKey

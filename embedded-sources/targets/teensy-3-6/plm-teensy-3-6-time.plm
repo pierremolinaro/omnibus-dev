@@ -57,6 +57,7 @@ module time {
   //····················································································································
 
   isr service systick {
+    noteCurrentTaskFreeStackSize ()
     let now = self.mUptimeMS +% 1
     self.mUptimeMS = now
     makeTasksReady (!fromCurrentDate:now)
@@ -82,6 +83,7 @@ module time {
   //····················································································································
 
   public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
+    noteCurrentTaskFreeStackSize ()
     accept = (inDeadline) <= self.mUptimeMS
     if not accept {
       handle (!guardedDeadline:inDeadline)

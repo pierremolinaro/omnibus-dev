@@ -193,6 +193,7 @@ override method @staticArrayAST enterInContext
         [!?ioContext.mTypeMap insertType
           !lkey:routineMangledName
           !type:type
+          !index:[ioContext.mTypeMap count]
         ]
       end
       let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName} type]
@@ -218,6 +219,7 @@ override method @staticArrayAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:plmTypeName
     !type:kind
+    !index:[ioContext.mTypeMap count]
   ]
 }
 
@@ -241,7 +243,7 @@ override method @staticArrayAST semanticAnalysis
 {
 #--- Generate property access
   let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
-  [inContext.mTypeMap searchKey !lkey:plmTypeName ?type:let type]
+  [inContext.mTypeMap searchKey !lkey:plmTypeName ?type:let type ?1*]
   generatePropertyAccess (!structureType:type !?intermediateCode:ioIntermediateCodeStruct)
 }
 

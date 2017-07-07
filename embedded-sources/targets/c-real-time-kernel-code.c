@@ -1,13 +1,3 @@
-
-static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   S C H E D U L E R                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-TaskControlBlock * gRunningTaskControlBlock ; // Shared with assembly code (arm_context.s)
-static TaskList gReadyTaskList ;
-
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void kernel_makeTaskReady (const unsigned inTaskIndex) {
@@ -182,6 +172,23 @@ unsigned freeStackSize (void) asm ("!FUNC!freeStackSize") ;
 
 unsigned freeStackSize (void) {
   return gRunningTaskControlBlock->mStackFreeSize ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  N O T E    F R E E    S T A C K    S I Z E  (callable by task)                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void noteFreeStackSize (void) asm ("!FUNC!noteFreeStackSize") ;
+
+void noteFreeStackSize (void) {
+//--- Get stack pointer current value
+  unsigned stackPointer ; __asm__ ("mov %0, sp" : "=r" (stackPointer)) ;
+//--- Compute current free stack size
+  const unsigned currentFreeStack = stackPointer - (unsigned) gRunningTaskControlBlock->mStackBufferAddress ;
+//--- If current free stack size lower than registered free stack size, assign new value
+  if (currentFreeStack < gRunningTaskControlBlock->mStackFreeSize) {
+    gRunningTaskControlBlock->mStackFreeSize = currentFreeStack ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

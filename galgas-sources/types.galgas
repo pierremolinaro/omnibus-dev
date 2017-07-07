@@ -32,6 +32,7 @@ enum @PLMType {
 
 shared map @unifiedTypeMap %selectors {
   @PLMType type
+  @uint index
 
   insert insertType error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"

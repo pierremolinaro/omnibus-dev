@@ -108,6 +108,7 @@ override method @enumerationDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName
     !type:.enumeration {!constantMap:enumConstantMap !plmTypeName:mEnumerationName}
+    !index:[ioContext.mTypeMap count]
   ]
 #--- Infix operators
   enterEnumerationOperators (

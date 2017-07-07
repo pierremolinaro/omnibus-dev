@@ -83,9 +83,10 @@ override method @typeAliasDeclaration enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Enter in type map
-  [ioContext.mTypeMap searchKey !lkey:mAliasedTypeName ?type:let kind]
+  [ioContext.mTypeMap searchKey !lkey:mAliasedTypeName ?type:let kind ?1*]
 #--- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:kind]
+  [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:kind !index:[ioContext.mTypeMap count]
+]
 #--- Enter infix operators
   let newNewInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !mNewTypeName.string)
   let aliasAliasInfixKey = combineTypeNamesForInfixOperator (!mAliasedTypeName.string !mAliasedTypeName.string)

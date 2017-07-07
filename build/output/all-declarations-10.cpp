@@ -4643,10 +4643,16 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
                                GALGAS_string & ioArgument_ioLLVMcode,
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Types"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 483)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 483)) ;
-  cEnumerator_unifiedTypeMap enumerator_21905 (constinArgument_inTypeMap, kENUMERATION_UP) ;
-  while (enumerator_21905.hasCurrentObject ()) {
-    switch (enumerator_21905.current_type (HERE).enumValue ()) {
+  GALGAS_orderedTypeList var_orderedTypeList_21953 = GALGAS_orderedTypeList::constructor_emptySortedList (SOURCE_FILE ("code-generation.galgas", 490)) ;
+  cEnumerator_unifiedTypeMap enumerator_21992 (constinArgument_inTypeMap, kENUMERATION_UP) ;
+  while (enumerator_21992.hasCurrentObject ()) {
+    var_orderedTypeList_21953.addAssign_operation (enumerator_21992.current_type (HERE), enumerator_21992.current_index (HERE)  COMMA_SOURCE_FILE ("code-generation.galgas", 492)) ;
+    enumerator_21992.gotoNextObject () ;
+  }
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Types"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 494)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 494)) ;
+  cEnumerator_orderedTypeList enumerator_22115 (var_orderedTypeList_21953, kENUMERATION_UP) ;
+  while (enumerator_22115.hasCurrentObject ()) {
+    switch (enumerator_22115.current_mType (HERE).enumValue ()) {
     case GALGAS_PLMType::kNotBuilt:
       break ;
     case GALGAS_PLMType::kEnum_void:
@@ -4667,18 +4673,18 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_PLMType::kEnum_structure:
       {
-        const cEnumAssociatedValues_PLMType_structure * extractPtr_22265 = (const cEnumAssociatedValues_PLMType_structure *) (enumerator_21905.current_type (HERE).unsafePointer ()) ;
-        const GALGAS_propertyList extractedValue_propertyList = extractPtr_22265->mAssociatedValue3 ;
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_21905.current_type (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 491)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 491)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 491)) ;
-        cEnumerator_propertyList enumerator_22148 (extractedValue_propertyList, kENUMERATION_UP) ;
-        while (enumerator_22148.hasCurrentObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22148.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 493)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 493)) ;
-          if (enumerator_22148.hasNextObject ()) {
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 494)) ;
+        const cEnumAssociatedValues_PLMType_structure * extractPtr_22475 = (const cEnumAssociatedValues_PLMType_structure *) (enumerator_22115.current_mType (HERE).unsafePointer ()) ;
+        const GALGAS_propertyList extractedValue_propertyList = extractPtr_22475->mAssociatedValue3 ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22115.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 502)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 502)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 502)) ;
+        cEnumerator_propertyList enumerator_22358 (extractedValue_propertyList, kENUMERATION_UP) ;
+        while (enumerator_22358.hasCurrentObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22358.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 504)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 504)) ;
+          if (enumerator_22358.hasNextObject ()) {
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 505)) ;
           }
-          enumerator_22148.gotoNextObject () ;
+          enumerator_22358.gotoNextObject () ;
         }
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 496)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 507)) ;
       }
       break ;
     case GALGAS_PLMType::kEnum_literalString:
@@ -4695,10 +4701,10 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_PLMType::kEnum_arrayType:
       {
-        const cEnumAssociatedValues_PLMType_arrayType * extractPtr_22507 = (const cEnumAssociatedValues_PLMType_arrayType *) (enumerator_21905.current_type (HERE).unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_elementType = extractPtr_22507->mAssociatedValue1 ;
-        const GALGAS_bigint extractedValue_arraySize = extractPtr_22507->mAssociatedValue2 ;
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_21905.current_type (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 501)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 501)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("code-generation.galgas", 501)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 501)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 501)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 501)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 501)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 501)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 501)) ;
+        const cEnumAssociatedValues_PLMType_arrayType * extractPtr_22717 = (const cEnumAssociatedValues_PLMType_arrayType *) (enumerator_22115.current_mType (HERE).unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_elementType = extractPtr_22717->mAssociatedValue1 ;
+        const GALGAS_bigint extractedValue_arraySize = extractPtr_22717->mAssociatedValue2 ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22115.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("code-generation.galgas", 512)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 512)) ;
       }
       break ;
     case GALGAS_PLMType::kEnum_function:
@@ -4707,14 +4713,14 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_PLMType::kEnum_pointer:
       {
-        const cEnumAssociatedValues_PLMType_pointer * extractPtr_22576 = (const cEnumAssociatedValues_PLMType_pointer *) (enumerator_21905.current_type (HERE).unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_pointee = extractPtr_22576->mAssociatedValue0 ;
+        const cEnumAssociatedValues_PLMType_pointer * extractPtr_22786 = (const cEnumAssociatedValues_PLMType_pointer *) (enumerator_22115.current_mType (HERE).unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_pointee = extractPtr_22786->mAssociatedValue0 ;
       }
       break ;
     }
-    enumerator_21905.gotoNextObject () ;
+    enumerator_22115.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 507)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 518)) ;
 }
 
 
@@ -4726,17 +4732,7 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
 
 //--- File '/c-real-time-kernel-code.c'
 
-const char * gWrapperFileContent_0_targetTemplates = "\n"
-  "static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//   S C H E D U L E R                                                                                                 *\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "TaskControlBlock * gRunningTaskControlBlock ; // Shared with assembly code (arm_context.s)\n"
-  "static TaskList gReadyTaskList ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_0_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void kernel_makeTaskReady (const unsigned inTaskIndex) {\n"
   "  gReadyTaskList |= 1 << inTaskIndex ;\n"
@@ -4913,6 +4909,23 @@ const char * gWrapperFileContent_0_targetTemplates = "\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  N O T E    F R E E    S T A C K    S I Z E  (callable by task)                                                     *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void noteFreeStackSize (void) asm (\"!FUNC!noteFreeStackSize\") ;\n"
+  "\n"
+  "void noteFreeStackSize (void) {\n"
+  "//--- Get stack pointer current value\n"
+  "  unsigned stackPointer ; __asm__ (\"mov %0, sp\" : \"=r\" (stackPointer)) ;\n"
+  "//--- Compute current free stack size\n"
+  "  const unsigned currentFreeStack = stackPointer - (unsigned) gRunningTaskControlBlock->mStackBufferAddress ;\n"
+  "//--- If current free stack size lower than registered free stack size, assign new value\n"
+  "  if (currentFreeStack < gRunningTaskControlBlock->mStackFreeSize) {\n"
+  "    gRunningTaskControlBlock->mStackFreeSize = currentFreeStack ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//  G U A R D S                                                                                                        *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -5044,7 +5057,7 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   "c-real-time-kernel-code.c",
   "c",
   true, // Text file
-  14947, // Text length
+  15347, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
@@ -5102,13 +5115,24 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "  unsigned mGuardCount ;\n"
   "  GuardList * mGuardListArray [GUARD_COUNT] ;\n"
   "} TaskControlBlock ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   S C H E D U L E R                                                                                                 *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "TaskControlBlock * gRunningTaskControlBlock ; // Shared with assembly code (arm_context.s)\n"
+  "static TaskList gReadyTaskList ;\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "c-real-time-kernel-types.c",
   "c",
   true, // Text file
-  2145, // Text length
+  2817, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -6902,8 +6926,7 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-4.0.1rc1-binutils-2.28-openocd-0.8.0-libusb-1.0.21\")\n"
-  "  #return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.9.1-binutils-2.27-openocd-0.8.0-libusb-1.0.20\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-4.0.1-binutils-2.28-openocd-0.10.0-libusb-1.0.21\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
@@ -6911,7 +6934,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "py-toolpath.txt",
   "txt",
   true, // Text file
-  1080, // Text length
+  940, // Text length
   gWrapperFileContent_14_targetTemplates
 ) ;
 
@@ -14633,13 +14656,33 @@ const char * gWrapperFileContent_75_targetTemplates = "//-----------------------
   "  ptr->mR0 = inReturnCode ;\n"
   "}\n"
   "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  N O T E    F R E E    S T A C K    S I Z E  (callable in service mode)                                             *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void noteCurrentTaskFreeStackSize (void) asm (\"!FUNC!noteCurrentTaskFreeStackSize\") ;\n"
+  "\n"
+  "void noteCurrentTaskFreeStackSize (void) {\n"
+  "  if (gRunningTaskControlBlock != (TaskControlBlock *) 0) { // Only if a task was running\n"
+  "  //--- Get current task stack pointer current value\n"
+  "    const unsigned stackPointer = (unsigned) gRunningTaskControlBlock->mTaskContext.mSP_USR ;\n"
+  "  //--- Compute current free stack size\n"
+  "    const unsigned bottomOfStack = (unsigned) gRunningTaskControlBlock->mStackBufferAddress ;\n"
+  "    const unsigned currentFreeStack = stackPointer - bottomOfStack ;\n"
+  "  //--- If current free stack size lower than registered free stack size, assign new value\n"
+  "    if (currentFreeStack < gRunningTaskControlBlock->mStackFreeSize) {\n"
+  "      gRunningTaskControlBlock->mStackFreeSize = currentFreeStack ;\n"
+  "    }\n"
+  "  }\n"
+  "}\n"
+  "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_75_targetTemplates (
   "c-cortex-m4-context-code.c",
   "c",
   true, // Text file
-  1511, // Text length
+  2688, // Text length
   gWrapperFileContent_75_targetTemplates
 ) ;
 
@@ -17920,6 +17963,8 @@ const char * gWrapperFileContent_83_targetTemplates = "\n"
   "\n"
   "// http://esd.cs.ucr.edu/labs/interface/interface.html\n"
   "\n"
+  "type $lcdBuffer : $uint8 [20]\n"
+  "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "module lcd {\n"
@@ -17931,6 +17976,8 @@ const char * gWrapperFileContent_83_targetTemplates = "\n"
   "  let RS $digitalPort\n"
   "  let ENABLE $digitalPort\n"
   "\n"
+  "  var buffer = $lcdBuffer ()\n"
+  "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  func init configurePorts @noUnusedWarning () {\n"
@@ -18333,7 +18380,7 @@ const cRegularFileWrapper gWrapperFile_83_targetTemplates (
   "plm-teensy-3-6-lcd.plm",
   "plm",
   true, // Text file
-  13959, // Text length
+  14022, // Text length
   gWrapperFileContent_83_targetTemplates
 ) ;
 
@@ -18448,6 +18495,7 @@ const char * gWrapperFileContent_85_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  isr service systick {\n"
+  "    noteCurrentTaskFreeStackSize ()\n"
   "    let now = self.mUptimeMS +% 1\n"
   "    self.mUptimeMS = now\n"
   "    makeTasksReady (!fromCurrentDate:now)\n"
@@ -18473,6 +18521,7 @@ const char * gWrapperFileContent_85_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public guard waitUntilMS @noUnusedWarning (\?deadline:inDeadline $uint32) {\n"
+  "    noteCurrentTaskFreeStackSize ()\n"
   "    accept = (inDeadline) <= self.mUptimeMS\n"
   "    if not accept {\n"
   "      handle (!guardedDeadline:inDeadline)\n"
@@ -18489,7 +18538,7 @@ const cRegularFileWrapper gWrapperFile_85_targetTemplates (
   "plm-teensy-3-6-time.plm",
   "plm",
   true, // Text file
-  3546, // Text length
+  3618, // Text length
   gWrapperFileContent_85_targetTemplates
 ) ;
 
@@ -18503,6 +18552,10 @@ const char * gWrapperFileContent_86_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "extern func user freeStackSize () -> $uint32 : \"freeStackSize\"\n"
+  "\n"
+  "extern func user noteFreeStackSize () : \"noteFreeStackSize\"\n"
+  "\n"
+  "extern func service noteCurrentTaskFreeStackSize () : \"noteCurrentTaskFreeStackSize\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   SYNCHRONIZATION TOOLS ROUTINES                                                                                     \n"
@@ -18562,7 +18615,7 @@ const cRegularFileWrapper gWrapperFile_86_targetTemplates (
   "plm-teensy-3-6-xtr.plm",
   "plm",
   true, // Text file
-  2847, // Text length
+  2994, // Text length
   gWrapperFileContent_86_targetTemplates
 ) ;
 

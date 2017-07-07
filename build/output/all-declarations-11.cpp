@@ -2353,9 +2353,10 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/pr
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
+  "  let titre = \"Hello\"\n"
+  "\n"
   "  setup 0 {\n"
-  "    let titre = \"Hello\"\n"
-  "    lcd.printString (!titre)\n"
+  "    lcd.printString (!self.titre)\n"
   "  }\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
@@ -2433,7 +2434,7 @@ const cRegularFileWrapper gWrapperFile_17_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3289, // Text length
+  3293, // Text length
   gWrapperFileContent_17_embeddedSampleCode
 ) ;
 
