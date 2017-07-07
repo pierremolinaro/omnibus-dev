@@ -241,6 +241,7 @@ method @taskList enterInContext
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
       !type:taskType
+      !index:[ioContext.mTypeMap count]
     ]
     ioContext.mGlobalTaskVariableList +=
       !task.mTaskName.string 

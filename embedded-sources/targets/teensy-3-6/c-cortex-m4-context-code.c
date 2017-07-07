@@ -28,3 +28,23 @@ static void kernel_set_return_code (TaskContext * inTaskContext,
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+//  N O T E    F R E E    S T A C K    S I Z E  (callable in service mode)                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void noteCurrentTaskFreeStackSize (void) asm ("!FUNC!noteCurrentTaskFreeStackSize") ;
+
+void noteCurrentTaskFreeStackSize (void) {
+  if (gRunningTaskControlBlock != (TaskControlBlock *) 0) { // Only if a task was running
+  //--- Get current task stack pointer current value
+    const unsigned stackPointer = (unsigned) gRunningTaskControlBlock->mTaskContext.mSP_USR ;
+  //--- Compute current free stack size
+    const unsigned bottomOfStack = (unsigned) gRunningTaskControlBlock->mStackBufferAddress ;
+    const unsigned currentFreeStack = stackPointer - bottomOfStack ;
+  //--- If current free stack size lower than registered free stack size, assign new value
+    if (currentFreeStack < gRunningTaskControlBlock->mStackFreeSize) {
+      gRunningTaskControlBlock->mStackFreeSize = currentFreeStack ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*

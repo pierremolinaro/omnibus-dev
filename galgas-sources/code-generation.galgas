@@ -479,9 +479,25 @@ private proc generateCodeFiles
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+sortedlist @orderedTypeList {
+  @PLMType mType
+  @uint mIndex
+}{
+  mIndex <
+}
+
+#·······················································································································
+
 proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
-  ioLLVMcode += llvmTitleComment (!"Types")
-  for () in inTypeMap do
+#--- Build ordered list
+  @orderedTypeList orderedTypeList = {}
+  for (* type index) in inTypeMap do
+    orderedTypeList += !type !index
+  end
+#--- Generate LLVM type declarations
+# Unsing forward type is allowed for pointers
+  ioLLVMcode += llvmTitleComment (!"Types (structures and static arraies)")
+  for (type *) in orderedTypeList do
     switch type
     case void :
     case boolean :

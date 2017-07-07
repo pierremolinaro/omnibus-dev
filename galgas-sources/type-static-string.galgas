@@ -64,6 +64,7 @@ override method @literalStringDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mLiteralStringTypeName
     !type:.literalString
+    !index:[ioContext.mTypeMap count]
   ]
 }
 

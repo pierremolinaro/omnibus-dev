@@ -368,6 +368,7 @@ override method @structureDeclarationAST enterInContext
       !flags:flags
       !plmTypeName:mStructureName
     }
+    !index:[ioContext.mTypeMap count]
   ]
 }
 
