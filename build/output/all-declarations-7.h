@@ -248,6 +248,18 @@ void extensionMethod_enterAccessibleEntities (const class GALGAS_routineMapIR_2D
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         Routine 'variableMapWithConstants'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_variableMapWithConstants (const class GALGAS_semanticContext constinArgument0,
+                                       class GALGAS_unifiedSymbolMapEx & outArgument1,
+                                       class GALGAS_universalPropertyAndRoutineMapForContext & outArgument2,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                     @infixObjectObjectOperatorDescription class                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -347,18 +359,6 @@ class GALGAS_objectIR function_checkAssignmentCompatibility (const class GALGAS_
                                                              const class GALGAS_bool & constinArgument3,
                                                              class C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Routine 'variableMapWithConstants'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_variableMapWithConstants (const class GALGAS_semanticContext constinArgument0,
-                                       class GALGAS_unifiedSymbolMapEx & outArgument1,
-                                       class GALGAS_universalPropertyAndRoutineMapForContext & outArgument2,
-                                       class C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
