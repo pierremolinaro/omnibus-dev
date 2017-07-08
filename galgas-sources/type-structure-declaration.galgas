@@ -166,7 +166,7 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
   let structureTypeName = llvmRegularTypeMangledNameFromName (!mStructureName)
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
-#--- add field types
+#--- Add property types
   for (* * * fieldTypeName initExpression) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       let typeName = llvmRegularTypeMangledNameFromName (!fieldTypeName)
@@ -390,6 +390,12 @@ method @structurePropertyListAST-element enterInContext
     then .void
     else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
   end
+#--- Variable map (with constants)
+  variableMapWithConstants (
+    !context:ioContext
+    ?let @unifiedSymbolMapEx unused variableMap
+    ?@universalPropertyAndRoutineMapForContext universalMap
+  )
 #--- Init expression
   @instructionListIR initInstructionGenerationList = {}
   @allocaList allocaList = {}
@@ -405,7 +411,7 @@ method @structurePropertyListAST-element enterInContext
       !mode:.bootMode
       !?temporary:temporaries
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:*
+      !?variableMap:universalMap
       !?alloca:allocaList
       !?instructionListIR:initInstructionGenerationList
       ?result:let @objectIR expressionIR

@@ -5,7 +5,9 @@ check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
 
 // http://esd.cs.ucr.edu/labs/interface/interface.html
 
-type $lcdBuffer : $uint8 [20]
+let LCD_BUFFER_SIZE = 20
+
+type $lcdBuffer : $uint8 [LCD_BUFFER_SIZE]
 
 //——————————————————————————————————————————————————————————————————————————————
 
@@ -19,6 +21,8 @@ module lcd {
   let ENABLE $digitalPort
 
   var buffer = $lcdBuffer ()
+  var sEntree = $semaphore (!value:0)
+  var sSortie = $semaphore (!value:LCD_BUFFER_SIZE)
   
   //············································································
 

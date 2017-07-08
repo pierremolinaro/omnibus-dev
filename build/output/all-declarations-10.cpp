@@ -4643,16 +4643,16 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
                                GALGAS_string & ioArgument_ioLLVMcode,
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_orderedTypeList var_orderedTypeList_21953 = GALGAS_orderedTypeList::constructor_emptySortedList (SOURCE_FILE ("code-generation.galgas", 490)) ;
-  cEnumerator_unifiedTypeMap enumerator_21992 (constinArgument_inTypeMap, kENUMERATION_UP) ;
-  while (enumerator_21992.hasCurrentObject ()) {
-    var_orderedTypeList_21953.addAssign_operation (enumerator_21992.current_type (HERE), enumerator_21992.current_index (HERE)  COMMA_SOURCE_FILE ("code-generation.galgas", 492)) ;
-    enumerator_21992.gotoNextObject () ;
+  GALGAS_orderedTypeList var_orderedTypeList_22099 = GALGAS_orderedTypeList::constructor_emptySortedList (SOURCE_FILE ("code-generation.galgas", 493)) ;
+  cEnumerator_unifiedTypeMap enumerator_22138 (constinArgument_inTypeMap, kENUMERATION_UP) ;
+  while (enumerator_22138.hasCurrentObject ()) {
+    var_orderedTypeList_22099.addAssign_operation (enumerator_22138.current_type (HERE), enumerator_22138.current_index (HERE)  COMMA_SOURCE_FILE ("code-generation.galgas", 495)) ;
+    enumerator_22138.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Types"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 494)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 494)) ;
-  cEnumerator_orderedTypeList enumerator_22115 (var_orderedTypeList_21953, kENUMERATION_UP) ;
-  while (enumerator_22115.hasCurrentObject ()) {
-    switch (enumerator_22115.current_mType (HERE).enumValue ()) {
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Types (structures and static arraies)"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 499)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 499)) ;
+  cEnumerator_orderedTypeList enumerator_22376 (var_orderedTypeList_22099, kENUMERATION_UP) ;
+  while (enumerator_22376.hasCurrentObject ()) {
+    switch (enumerator_22376.current_mType (HERE).enumValue ()) {
     case GALGAS_PLMType::kNotBuilt:
       break ;
     case GALGAS_PLMType::kEnum_void:
@@ -4673,18 +4673,18 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_PLMType::kEnum_structure:
       {
-        const cEnumAssociatedValues_PLMType_structure * extractPtr_22475 = (const cEnumAssociatedValues_PLMType_structure *) (enumerator_22115.current_mType (HERE).unsafePointer ()) ;
-        const GALGAS_propertyList extractedValue_propertyList = extractPtr_22475->mAssociatedValue3 ;
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22115.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 502)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 502)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 502)) ;
-        cEnumerator_propertyList enumerator_22358 (extractedValue_propertyList, kENUMERATION_UP) ;
-        while (enumerator_22358.hasCurrentObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22358.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 504)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 504)) ;
-          if (enumerator_22358.hasNextObject ()) {
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 505)) ;
+        const cEnumAssociatedValues_PLMType_structure * extractPtr_22736 = (const cEnumAssociatedValues_PLMType_structure *) (enumerator_22376.current_mType (HERE).unsafePointer ()) ;
+        const GALGAS_propertyList extractedValue_propertyList = extractPtr_22736->mAssociatedValue3 ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22376.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 507)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 507)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 507)) ;
+        cEnumerator_propertyList enumerator_22619 (extractedValue_propertyList, kENUMERATION_UP) ;
+        while (enumerator_22619.hasCurrentObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22619.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 509)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 509)) ;
+          if (enumerator_22619.hasNextObject ()) {
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 510)) ;
           }
-          enumerator_22358.gotoNextObject () ;
+          enumerator_22619.gotoNextObject () ;
         }
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 507)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 512)) ;
       }
       break ;
     case GALGAS_PLMType::kEnum_literalString:
@@ -4701,10 +4701,10 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_PLMType::kEnum_arrayType:
       {
-        const cEnumAssociatedValues_PLMType_arrayType * extractPtr_22717 = (const cEnumAssociatedValues_PLMType_arrayType *) (enumerator_22115.current_mType (HERE).unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_elementType = extractPtr_22717->mAssociatedValue1 ;
-        const GALGAS_bigint extractedValue_arraySize = extractPtr_22717->mAssociatedValue2 ;
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22115.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("code-generation.galgas", 512)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 512)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 512)) ;
+        const cEnumAssociatedValues_PLMType_arrayType * extractPtr_22978 = (const cEnumAssociatedValues_PLMType_arrayType *) (enumerator_22376.current_mType (HERE).unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_elementType = extractPtr_22978->mAssociatedValue1 ;
+        const GALGAS_bigint extractedValue_arraySize = extractPtr_22978->mAssociatedValue2 ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22376.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 517)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 517)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("code-generation.galgas", 517)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 517)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 517)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 517)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 517)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 517)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 517)) ;
       }
       break ;
     case GALGAS_PLMType::kEnum_function:
@@ -4713,14 +4713,14 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_PLMType::kEnum_pointer:
       {
-        const cEnumAssociatedValues_PLMType_pointer * extractPtr_22786 = (const cEnumAssociatedValues_PLMType_pointer *) (enumerator_22115.current_mType (HERE).unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_pointee = extractPtr_22786->mAssociatedValue0 ;
+        const cEnumAssociatedValues_PLMType_pointer * extractPtr_23047 = (const cEnumAssociatedValues_PLMType_pointer *) (enumerator_22376.current_mType (HERE).unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_pointee = extractPtr_23047->mAssociatedValue0 ;
       }
       break ;
     }
-    enumerator_22115.gotoNextObject () ;
+    enumerator_22376.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 518)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 523)) ;
 }
 
 
@@ -17963,7 +17963,9 @@ const char * gWrapperFileContent_83_targetTemplates = "\n"
   "\n"
   "// http://esd.cs.ucr.edu/labs/interface/interface.html\n"
   "\n"
-  "type $lcdBuffer : $uint8 [20]\n"
+  "let LCD_BUFFER_SIZE = 20\n"
+  "\n"
+  "type $lcdBuffer : $uint8 [LCD_BUFFER_SIZE]\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -17977,6 +17979,8 @@ const char * gWrapperFileContent_83_targetTemplates = "\n"
   "  let ENABLE $digitalPort\n"
   "\n"
   "  var buffer = $lcdBuffer ()\n"
+  "  var sEntree = $semaphore (!value:0)\n"
+  "  var sSortie = $semaphore (!value:LCD_BUFFER_SIZE)\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
@@ -18380,7 +18384,7 @@ const cRegularFileWrapper gWrapperFile_83_targetTemplates (
   "plm-teensy-3-6-lcd.plm",
   "plm",
   true, // Text file
-  14022, // Text length
+  14151, // Text length
   gWrapperFileContent_83_targetTemplates
 ) ;
 
