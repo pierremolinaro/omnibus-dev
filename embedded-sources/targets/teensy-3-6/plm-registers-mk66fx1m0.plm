@@ -1,9 +1,5 @@
 check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
 
-//let f_cpu $uint32 = 96_000_000
-//let f_bus $uint32 = 48_000_000
-//let f_mem $uint32 = 24_000_000
-
 // chapter 11: Port control and interrupts (PORT) Pin Control Register n
 register
   PORTA_PCR @user [32] at 0x4004_9000 : 4 $uint32 {
@@ -68,7 +64,6 @@ register SIM_SOPT2    at 0x40048004 $uint32 { // System Options Register 2
   3,
   TRACECLKSEL, // 0=MCGOUTCLK, 1=CPU
   2,
-//  PTD7PAD, // 0=normal, 1=double drive PTD7
   FBSL[2], // FlexBus security level
   CLKOUTSEL[3], // Selects the clock to output on the CLKOUT pin.
   RTCCLKOUTSEL, // RTC clock out select
@@ -76,26 +71,6 @@ register SIM_SOPT2    at 0x40048004 $uint32 { // System Options Register 2
   USBREGEN, // USB PHY PLL Regulator Enable
   USBSLSRC // USB Slow Clock Source
 }
-
-//#define SIM_SOPT2_SDHCSRC(n)            (uint32_t)(((n) & 3) << 28)     // SDHC Clock, 0=system, 1=FLL/PLL, 2=OSCERCLK, 3=external
-//#define SIM_SOPT2_LPUARTSRC(n)          (uint32_t)(((n) & 3) << 26)     // LPUART Clock, 0=off, 1=FLL/PLL, 2=OSCERCLK, 3=MCGIRCLK
-//#define SIM_SOPT2_UART0SRC(n)           (uint32_t)(((n) & 3) << 26)     // UART0 Clock, 0=off, 1=FLL/PLL, 2=OSCERCLK, 3=MCGIRCLK
-//#define SIM_SOPT2_TPMSRC(n)             (uint32_t)(((n) & 3) << 24)     // TPM Clock, 0=off, 1=FLL/PLL, 2=OSCERCLK, 3=MCGIRCLK
-//#define SIM_SOPT2_TIMESRC(n)  (uint32_t)(((n) & 3) << 20) // IEEE 1588 clock, 0=system, 1=FLL/PLL, 2=OSCERCLK, 3=external
-//#define SIM_SOPT2_RMIISRC  ((uint32_t)0x00080000) // 0=external, 1=external 1588
-//#define SIM_SOPT2_USBSRC  ((uint32_t)0x00040000) // 0=USB_CLKIN, 1=FFL/PLL
-//#define SIM_SOPT2_PLLFLLSEL  ((uint32_t)0x00010000) // 0=FLL, 1=PLL
-//#define SIM_SOPT2_IRC48SEL  ((uint32_t)0x00030000) // 0=FLL, 1=PLL
-//#define SIM_SOPT2_TRACECLKSEL  ((uint32_t)0x00001000) // 0=MCGOUTCLK, 1=CPU
-//#define SIM_SOPT2_PTD7PAD  ((uint32_t)0x00000800) // 0=normal, 1=double drive PTD7
-//#define SIM_SOPT2_FBSL(n)  ((uint32_t)(((n) & 3) << 8 // FlexBus security level
-//#define SIM_SOPT2_CLKOUTSEL(n)  ((uint32_t)(((n) & 7) << 5)) // Selects the clock to output on the CLKOUT pin.
-//#define SIM_SOPT2_RTCCLKOUTSEL  ((uint32_t)0x00000010) // RTC clock out select
-//#define SIM_SOPT2_USBREGEN  ((uint32_t)0x00000002) // USB PHY PLL Regulator Enable
-//#define SIM_SOPT2_USBSLSRC  ((uint32_t)0x00000001) // USB Slow Clock Source
-
-
-let SIM_SOPT2_RTCCLKOUTSEL $uint32 = 0x00000010  // RTC clock out select
 
 register SIM_SOPT4   at 0x4004800C $uint32 // System Options Register 4
 
@@ -105,8 +80,18 @@ register SIM_SOPT7   at 0x40048018 $uint32 // System Options Register 7
 
 register SIM_SDID @ro at 0x40048024 $uint32 // System Device Identification Register
 
-register SIM_SCGC2  at 0x4004802C $uint32 // System Clock Gating Control Register 2
-let SIM_SCGC2_DAC0  $uint32 =  0x00001000 // DAC0 Clock Gate Control
+register SIM_SCGC2  at 0x4004802C $uint32 { // System Clock Gating Control Register 2
+  18,
+  DAC1,
+  DAC0,
+  1,
+  TPM2,
+  TPM1,
+  4,
+  LPUART0,
+  3,
+  ENET
+}
 
 register SIM_SCGC3  at 0x4004_8030 $uint32 {// System Clock Gating Control Register 3
   4,
@@ -210,8 +195,6 @@ register SIM_CLKDIV2 at 0x40048048 $uint32 { // System Clock Divider Register 2
   USBDIV [3],
   USBFRAC
 }
-//register $uint32 SIM_CLKDIV2_USBDIV(n)   (((n) & 0x07) << 1)
-//let SIM_CLKDIV2_USBFRAC  $uint32 =  0x01
 
 register SIM_FCFG1 @ro at 0x4004804C $uint32 // Flash Configuration Register 1
 register SIM_FCFG2 @ro at 0x40048050 $uint32 // Flash Configuration Register 2
@@ -239,10 +222,6 @@ register SMC_PMPROT  at 0x4007E000 $uint8 { // Power Mode Protection Register
   1
 }
 
-//let SMC_PMPROT_AHSRUN  $uint8 = 0x80   // Allow high speed run mode
-//let SMC_PMPROT_AVLP  $uint8 = 0x20   // Allow very low power modes
-//let SMC_PMPROT_ALLS $uint8  = 0x08   // Allow low leakage stop mode
-//let SMC_PMPROT_AVLLS $uint8 = 0x02   // Allow very low leakage stop mode
 
 register SMC_PMCTRL at 0x4007_E001 $uint8 { // Power Mode Control Register
   LPWUI, // Low Power Wake Up on Interrupt
@@ -252,38 +231,38 @@ register SMC_PMCTRL at 0x4007_E001 $uint8 { // Power Mode Control Register
   STOPM [3] // Stop Mode Control
 }
 
-//let SMC_PMCTRL_LPWUI $uint8  = 0x80   // Low Power Wake Up on Interrupt
-//register $uint8 SMC_PMCTRL_RUNM(n)  ($uint8_t)(((n) & 0x03) << 5) // Run Mode Control
-//let SMC_PMCTRL_STOPA $uint8  = 0x08   // Stop Aborted
-//register $uint8 SMC_PMCTRL_STOPM(n)  ($uint8_t)((n) & 0x07)  // Stop Mode Control
 
-register SMC_VLLSCTRL at 0x4007E002 $uint8 // VLLS Control Register
-let SMC_VLLSCTRL_PORPO $uint8 = 0x20   // POR Power Option
-//let $uint8 SMC_VLLSCTRL_VLLSM(n)  ($uint8_t)((n) & 0x07)  // VLLS Mode Control
+register SMC_STOPCTRL at 0x4007E002 $uint8 { // VLLS Control Register
+  PSTOPO [2],
+  PORPO,
+  RAM2PO,
+  1,
+  LLSM [3]
+}
+
 
 register SMC_PMSTAT at 0x4007E003 $uint8 { // Power Mode Status Register
   HSRUN, VLLS, LLS, VLPS, VLPW, VLPR, STOP, RUN
 }
-//let SMC_PMSTAT_RUN  $uint8 = 0x01   // Current power mode is RUN
-//let SMC_PMSTAT_STOP $uint8 = 0x02   // Current power mode is STOP
-//let SMC_PMSTAT_VLPR $uint8 = 0x04   // Current power mode is VLPR
-//let SMC_PMSTAT_VLPW $uint8 = 0x08   // Current power mode is VLPW
-//let SMC_PMSTAT_VLPS $uint8 = 0x10   // Current power mode is VLPS
-//let SMC_PMSTAT_LLS  $uint8 = 0x20   // Current power mode is LLS
-//let SMC_PMSTAT_VLLS $uint8 = 0x40   // Current power mode is VLLS
+
 
 // Chapter 15: Power Management Controller
-register PMC_LVDSC1 at 0x4007D000 $uint8 // Low Voltage Detect Status And Control 1 register
-let PMC_LVDSC1_LVDF $uint8 = 0x80   // Low-Voltage Detect Flag
-let PMC_LVDSC1_LVDACK $uint8 = 0x40   // Low-Voltage Detect Acknowledge
-let PMC_LVDSC1_LVDIE $uint8 = 0x20   // Low-Voltage Detect Interrupt Enable
-let PMC_LVDSC1_LVDRE $uint8 = 0x10   // Low-Voltage Detect Reset Enable
-//let $uint8 PMC_LVDSC1_LVDV(n)  ($uint8_t)((n) & 0x03)  // Low-Voltage Detect Voltage Select
-register PMC_LVDSC2 at 0x4007D001 $uint8 // Low Voltage Detect Status And Control 2 register
-let PMC_LVDSC2_LVWF $uint8  = 0x80   // Low-Voltage Warning Flag
-let PMC_LVDSC2_LVWACK $uint8 = 0x40   // Low-Voltage Warning Acknowledge
-let PMC_LVDSC2_LVWIE $uint8 = 0x20   // Low-Voltage Warning Interrupt Enable
-//let $uint8 PMC_LVDSC2_LVWV(n)  ($uint8_t)((n) & 0x03)  // Low-Voltage Warning Voltage Select
+register PMC_LVDSC1 at 0x4007D000 $uint8 { // Low Voltage Detect Status And Control 1 register
+  LVDF,
+  LVDACK,
+  LVDIE,
+  LVDRE,
+  2,
+  LVDV [2]
+}
+
+register PMC_LVDSC2 at 0x4007D001 $uint8 { // Low Voltage Detect Status And Control 2 register
+  LVWF, // Low-Voltage Warning Flag
+  LVWACK, // Low-Voltage Warning Acknowledge
+  LVWIE, // Low-Voltage Warning Interrupt Enable
+  3,
+  LVWV [2] // Low-Voltage Warning Voltage Select
+}
 
 register PMC_REGSC at 0x4007D002 $uint8 { // Regulator Status And Control register
   3, BGEN, ACKISO, REGONS, BGBE, 1
@@ -307,140 +286,221 @@ register MCM_PLASC at 0xE0080008 $uint16 // Crossbar Switch (AXBS) Slave Configu
 
 register MCM_PLAMC at 0xE008000A $uint16 // Crossbar Switch (AXBS) Master Configuration
 
-register MCM_PLACR at 0xE008000C $uint32 // Crossbar Switch (AXBS) Control Register (MK20DX128)
-let MCM_PLACR_ARG   $uint32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin
-
-register MCM_CR at 0xE008000C $uint32 // RAM arbitration control register (MK20DX256)
-let MCM_CR_SRAMLWP  $uint32 =  0x4000_0000  // SRAM_L write protect
-//let $uint32 MCM_CR_SRAMLAP(n)   (((n) & 0x03) << 28) // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA
-let MCM_CR_SRAMUWP  $uint32 =  0x0400_0000  // SRAM_U write protect
-//let $uint32 MCM_CR_SRAMUAP(n)   (((n) & 0x03) << 24) // SRAM_U priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA
+register MCM_CR at 0xE008_000C $uint32 { // Crossbar Switch (AXBS) Control Register
+  1,
+  SRAMLWP, // SRAM_L write protect
+  SRAMLAP [2], // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA
+  1,
+  SRAMUWP, // SRAM_U write protect
+  SRAMUAP [2],
+  24
+}
 
 // Crossbar Switch (AXBS) - only programmable on MK20DX256
 register AXBS_PRS0   at 0x40004000 $uint32 // Priority Registers Slave 0
-register AXBS_CRS0   at 0x40004010 $uint32 // Control Register 0
 register AXBS_PRS1   at 0x40004100 $uint32 // Priority Registers Slave 1
-register AXBS_CRS1   at 0x40004110 $uint32 // Control Register 1
 register AXBS_PRS2   at 0x40004200 $uint32 // Priority Registers Slave 2
-register AXBS_CRS2   at 0x40004210 $uint32 // Control Register 2
 register AXBS_PRS3   at 0x40004300 $uint32 // Priority Registers Slave 3
-register AXBS_CRS3   at 0x40004310 $uint32 // Control Register 3
 register AXBS_PRS4   at 0x40004400 $uint32 // Priority Registers Slave 4
-register AXBS_CRS4   at 0x40004410 $uint32 // Control Register 4
 register AXBS_PRS5   at 0x40004500 $uint32 // Priority Registers Slave 5
-register AXBS_CRS5   at 0x40004510 $uint32 // Control Register 5
 register AXBS_PRS6   at 0x40004600 $uint32 // Priority Registers Slave 6
-register AXBS_CRS6   at 0x40004610 $uint32 // Control Register 6
 register AXBS_PRS7   at 0x40004700 $uint32 // Priority Registers Slave 7
-register AXBS_CRS7   at 0x40004710 $uint32 // Control Register 7
-register AXBS_MGPCR0 at 0x40004800 $uint32 // Master 0 General Purpose Control Register
-register AXBS_MGPCR1 at 0x40004900 $uint32 // Master 1 General Purpose Control Register
-register AXBS_MGPCR2 at 0x40004A00 $uint32 // Master 2 General Purpose Control Register
-register AXBS_MGPCR3 at 0x40004B00 $uint32 // Master 3 General Purpose Control Register
-register AXBS_MGPCR4 at 0x40004C00 $uint32 // Master 4 General Purpose Control Register
-register AXBS_MGPCR5 at 0x40004D00 $uint32 // Master 5 General Purpose Control Register
-register AXBS_MGPCR6 at 0x40004E00 $uint32 // Master 6 General Purpose Control Register
-register AXBS_MGPCR7 at 0x40004F00 $uint32 // Master 7 General Purpose Control Register
-let AXBS_CRS_READONLY  $uint32=  0x80000000
-let AXBS_CRS_HALTLOWPRIORITY  $uint32 = 0x40000000
-let AXBS_CRS_ARB_FIXED  $uint32 = 0x00000000
-let AXBS_CRS_ARB_ROUNDROBIN  $uint32 = 0x00010000
-let AXBS_CRS_PARK_FIXED  $uint32 =  0x00000000
-let AXBS_CRS_PARK_PREVIOUS  $uint32 =  0x00000010
-let AXBS_CRS_PARK_NONE  $uint32 =  0x00000020
-//let $uint32 AXBS_CRS_PARK(n)   (((n) & 7) << 0)
+
+register AXBS_CRS0   at 0x40004010         // Control Register 0
+         AXBS_CRS1   at 0x40004110         // Control Register 1
+         AXBS_CRS2   at 0x40004210         // Control Register 2
+         AXBS_CRS3   at 0x40004310         // Control Register 3
+         AXBS_CRS4   at 0x40004410         // Control Register 4
+         AXBS_CRS5   at 0x40004510         // Control Register 5
+         AXBS_CRS6   at 0x40004610         // Control Register 6
+         AXBS_CRS7   at 0x40004710 $uint32 { // Control Register 7
+  READONLY,
+  HLP,
+  20,
+  ARB [2],
+  2,
+  PCTL [2],
+  1,
+  PARK [3]
+}
+
+
+register AXBS_MGPCR0 at 0x40004800 // Master 0 General Purpose Control Register
+         AXBS_MGPCR1 at 0x40004900 // Master 1 General Purpose Control Register
+         AXBS_MGPCR2 at 0x40004A00 // Master 2 General Purpose Control Register
+         AXBS_MGPCR3 at 0x40004B00 // Master 3 General Purpose Control Register
+         AXBS_MGPCR4 at 0x40004C00 // Master 4 General Purpose Control Register
+         AXBS_MGPCR5 at 0x40004D00 // Master 5 General Purpose Control Register
+         AXBS_MGPCR6 at 0x40004E00 // Master 6 General Purpose Control Register
+         AXBS_MGPCR7 at 0x40004F00 $uint32 { // Master 7 General Purpose Control Register
+  29,
+  AULB [3]
+}
 
 
 
 // Chapter 20: Direct Memory Access Multiplexer (DMAMUX)
-register DMAMUX0_CHCFG0  at 0x40021000 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG1  at 0x40021001 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG2  at 0x40021002 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG3  at 0x40021003 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG4  at 0x40021004 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG5  at 0x40021005 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG6  at 0x40021006 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG7  at 0x40021007 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG8  at 0x40021008 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG9  at 0x40021009 $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG10 at 0x4002100A $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG11 at 0x4002100B $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG12 at 0x4002100C $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG13 at 0x4002100D $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG14 at 0x4002100E $uint8 // Channel Configuration register
-register DMAMUX0_CHCFG15 at 0x4002100F $uint8 // Channel Configuration register
-let DMAMUX_DISABLE $uint8 =  0
-let DMAMUX_TRIG  $uint8 = 64
-let DMAMUX_ENABLE $uint8 =  128
-let DMAMUX_SOURCE_UART0_RX $uint8 = 2
-let DMAMUX_SOURCE_UART0_TX $uint8 = 3
-let DMAMUX_SOURCE_UART1_RX $uint8 = 4
-let DMAMUX_SOURCE_UART1_TX $uint8 = 5
-let DMAMUX_SOURCE_UART2_RX $uint8 = 6
-let DMAMUX_SOURCE_UART2_TX $uint8 = 7
-let DMAMUX_SOURCE_I2S0_RX  $uint8 =14
-let DMAMUX_SOURCE_I2S0_TX  $uint8 =15
-let DMAMUX_SOURCE_SPI0_RX  $uint8 =16
-let DMAMUX_SOURCE_SPI0_TX  $uint8 =17
-let DMAMUX_SOURCE_I2C0  $uint8 =22
-let DMAMUX_SOURCE_I2C1  $uint8 =23
-let DMAMUX_SOURCE_FTM0_CH0 $uint8 = 24
-let DMAMUX_SOURCE_FTM0_CH1 $uint8 = 25
-let DMAMUX_SOURCE_FTM0_CH2 $uint8 = 26
-let DMAMUX_SOURCE_FTM0_CH3 $uint8 = 27
-let DMAMUX_SOURCE_FTM0_CH4 $uint8 = 28
-let DMAMUX_SOURCE_FTM0_CH5 $uint8 = 29
-let DMAMUX_SOURCE_FTM0_CH6 $uint8 = 30
-let DMAMUX_SOURCE_FTM0_CH7 $uint8 = 31
-let DMAMUX_SOURCE_FTM1_CH0 $uint8 = 32
-let DMAMUX_SOURCE_FTM1_CH1 $uint8 = 33
-let DMAMUX_SOURCE_FTM2_CH0 $uint8 = 34
-let DMAMUX_SOURCE_FTM2_CH1 $uint8 = 35
-let DMAMUX_SOURCE_ADC0 $uint8 = 40
-let DMAMUX_SOURCE_ADC1 $uint8 = 41
-let DMAMUX_SOURCE_CMP0 $uint8 = 42
-let DMAMUX_SOURCE_CMP1 $uint8 = 43
-let DMAMUX_SOURCE_CMP2 $uint8 = 44
-let DMAMUX_SOURCE_DAC0 $uint8 = 45
-let DMAMUX_SOURCE_CMT  $uint8 = 47
-let DMAMUX_SOURCE_PDB  $uint8 = 48
-let DMAMUX_SOURCE_PORTA $uint8 = 49
-let DMAMUX_SOURCE_PORTB $uint8 = 50
-let DMAMUX_SOURCE_PORTC $uint8 = 51
-let DMAMUX_SOURCE_PORTD $uint8 = 52
-let DMAMUX_SOURCE_PORTE $uint8 = 53
-let DMAMUX_SOURCE_ALWAYS0 $uint8 = 54
-let DMAMUX_SOURCE_ALWAYS1 $uint8 = 55
-let DMAMUX_SOURCE_ALWAYS2 $uint8 = 56
-let DMAMUX_SOURCE_ALWAYS3 $uint8 = 57
-let DMAMUX_SOURCE_ALWAYS4 $uint8 = 58
-let DMAMUX_SOURCE_ALWAYS5 $uint8 = 59
-let DMAMUX_SOURCE_ALWAYS6 $uint8 = 60
-let DMAMUX_SOURCE_ALWAYS7 $uint8 = 61
-let DMAMUX_SOURCE_ALWAYS8 $uint8 = 62
-let DMAMUX_SOURCE_ALWAYS9 $uint8 = 63
+register DMAMUX0_CHCFG0  at 0x40021000        // Channel Configuration register
+         DMAMUX0_CHCFG1  at 0x40021001        // Channel Configuration register
+         DMAMUX0_CHCFG2  at 0x40021002        // Channel Configuration register
+         DMAMUX0_CHCFG3  at 0x40021003        // Channel Configuration register
+         DMAMUX0_CHCFG4  at 0x40021004        // Channel Configuration register
+         DMAMUX0_CHCFG5  at 0x40021005        // Channel Configuration register
+         DMAMUX0_CHCFG6  at 0x40021006        // Channel Configuration register
+         DMAMUX0_CHCFG7  at 0x40021007        // Channel Configuration register
+         DMAMUX0_CHCFG8  at 0x40021008        // Channel Configuration register
+         DMAMUX0_CHCFG9  at 0x40021009        // Channel Configuration register
+         DMAMUX0_CHCFG10 at 0x4002100A        // Channel Configuration register
+         DMAMUX0_CHCFG11 at 0x4002100B        // Channel Configuration register
+         DMAMUX0_CHCFG12 at 0x4002100C        // Channel Configuration register
+         DMAMUX0_CHCFG13 at 0x4002100D        // Channel Configuration register
+         DMAMUX0_CHCFG14 at 0x4002100E        // Channel Configuration register
+         DMAMUX0_CHCFG15 at 0x4002100F $uint8 { // Channel Configuration register
+  ENBL,
+  TRIG,
+  SOURCE [6]
+}
+
+//let DMAMUX_SOURCE_UART0_RX $uint8 = 2
+//let DMAMUX_SOURCE_UART0_TX $uint8 = 3
+//let DMAMUX_SOURCE_UART1_RX $uint8 = 4
+//let DMAMUX_SOURCE_UART1_TX $uint8 = 5
+//let DMAMUX_SOURCE_UART2_RX $uint8 = 6
+//let DMAMUX_SOURCE_UART2_TX $uint8 = 7
+//let DMAMUX_SOURCE_I2S0_RX  $uint8 =14
+//let DMAMUX_SOURCE_I2S0_TX  $uint8 =15
+//let DMAMUX_SOURCE_SPI0_RX  $uint8 =16
+//let DMAMUX_SOURCE_SPI0_TX  $uint8 =17
+//let DMAMUX_SOURCE_I2C0  $uint8 =22
+//let DMAMUX_SOURCE_I2C1  $uint8 =23
+//let DMAMUX_SOURCE_FTM0_CH0 $uint8 = 24
+//let DMAMUX_SOURCE_FTM0_CH1 $uint8 = 25
+//let DMAMUX_SOURCE_FTM0_CH2 $uint8 = 26
+//let DMAMUX_SOURCE_FTM0_CH3 $uint8 = 27
+//let DMAMUX_SOURCE_FTM0_CH4 $uint8 = 28
+//let DMAMUX_SOURCE_FTM0_CH5 $uint8 = 29
+//let DMAMUX_SOURCE_FTM0_CH6 $uint8 = 30
+//let DMAMUX_SOURCE_FTM0_CH7 $uint8 = 31
+//let DMAMUX_SOURCE_FTM1_CH0 $uint8 = 32
+//let DMAMUX_SOURCE_FTM1_CH1 $uint8 = 33
+//let DMAMUX_SOURCE_FTM2_CH0 $uint8 = 34
+//let DMAMUX_SOURCE_FTM2_CH1 $uint8 = 35
+//let DMAMUX_SOURCE_ADC0 $uint8 = 40
+//let DMAMUX_SOURCE_ADC1 $uint8 = 41
+//let DMAMUX_SOURCE_CMP0 $uint8 = 42
+//let DMAMUX_SOURCE_CMP1 $uint8 = 43
+//let DMAMUX_SOURCE_CMP2 $uint8 = 44
+//let DMAMUX_SOURCE_DAC0 $uint8 = 45
+//let DMAMUX_SOURCE_CMT  $uint8 = 47
+//let DMAMUX_SOURCE_PDB  $uint8 = 48
+//let DMAMUX_SOURCE_PORTA $uint8 = 49
+//let DMAMUX_SOURCE_PORTB $uint8 = 50
+//let DMAMUX_SOURCE_PORTC $uint8 = 51
+//let DMAMUX_SOURCE_PORTD $uint8 = 52
+//let DMAMUX_SOURCE_PORTE $uint8 = 53
+//let DMAMUX_SOURCE_ALWAYS0 $uint8 = 54
+//let DMAMUX_SOURCE_ALWAYS1 $uint8 = 55
+//let DMAMUX_SOURCE_ALWAYS2 $uint8 = 56
+//let DMAMUX_SOURCE_ALWAYS3 $uint8 = 57
+//let DMAMUX_SOURCE_ALWAYS4 $uint8 = 58
+//let DMAMUX_SOURCE_ALWAYS5 $uint8 = 59
+//let DMAMUX_SOURCE_ALWAYS6 $uint8 = 60
+//let DMAMUX_SOURCE_ALWAYS7 $uint8 = 61
+//let DMAMUX_SOURCE_ALWAYS8 $uint8 = 62
+//let DMAMUX_SOURCE_ALWAYS9 $uint8 = 63
 
 // Chapter 21: Direct Memory Access Controller (eDMA)
-register DMA_CR at 0x40008000 $uint32 // Control Register
-let DMA_CR_CX   $uint32  = 0x2_0000 // Cancel Transfer
-let DMA_CR_ECX   $uint32 = 0x1_0000 // Error Cancel Transfer
-let DMA_CR_EMLM   $uint32= 0x80 // Enable Minor Loop Mapping
-let DMA_CR_CLM   $uint32 = 0x40 // Continuous Link Mode
-let DMA_CR_HALT  $uint32 = 0x20 // Halt DMA Operations
-let DMA_CR_HOE   $uint32 = 0x10 // Halt On Error
-let DMA_CR_ERCA  $uint32 = 0x04 // Enable Round Robin Channel Arbitration
-let DMA_CR_EDBG   $uint32= 0x02 // Enable Debug
+register DMA_CR at 0x40008000 $uint32 { // Control Register
+  14,
+  CX, // Cancel Transfer
+  ECX, // Error Cancel Transfer
+  5,
+  GRP1PRI,
+  1,
+  GRP0PRI,
+  EMLM, // Enable Minor Loop Mapping
+  CLM, // Continuous Link Mode
+  HALT, // Halt DMA Operations
+  HOE, // Halt On Error
+  ERGA, // Enable Round Robin Group Arbitration
+  ERCA, // Enable Round Robin Channel Arbitration 
+  EDBG, // Enable Debug
+  1
+}
+
+
 register DMA_ES  at 0x40008004 $uint32 // Error Status Register
-register DMA_ERQ at 0x4000800C $uint32 // Enable Request Register
-let DMA_ERQ_ERQ0   $uint32 = 1 // Enable DMA Request 0
-let DMA_ERQ_ERQ1   $uint32 = 2 // Enable DMA Request 1
-let DMA_ERQ_ERQ2   $uint32 = 4 // Enable DMA Request 2
-let DMA_ERQ_ERQ3   $uint32 = 8 // Enable DMA Request 3
-register DMA_EEI at 0x40008014 $uint8 // Enable Error Interrupt Register
-let DMA_EEI_EEI0   $uint32 = 1 // Enable Error Interrupt 0
-let DMA_EEI_EEI1   $uint32 = 2 // Enable Error Interrupt 1
-let DMA_EEI_EEI2   $uint32 = 4 // Enable Error Interrupt 2
-let DMA_EEI_EEI3   $uint32 = 8 // Enable Error Interrupt 3
+
+register DMA_ERQ at 0x4000800C $uint32 { // Enable Request Register
+  ERQ31,
+  ERQ30,
+  ERQ29,
+  ERQ28,
+  ERQ27,
+  ERQ26,
+  ERQ25,
+  ERQ24,
+  ERQ23,
+  ERQ22,
+  ERQ21,
+  ERQ20,
+  ERQ19,
+  ERQ18,
+  ERQ17,
+  ERQ16,
+  ERQ15,
+  ERQ14,
+  ERQ13,
+  ERQ12,
+  ERQ11,
+  ERQ10,
+  ERQ9,
+  ERQ8,
+  ERQ7,
+  ERQ6,
+  ERQ5,
+  ERQ4,
+  ERQ3,
+  ERQ2,
+  ERQ1,
+  ERQ0
+}
+
+register DMA_EEI at 0x40008014 $uint32 { // Enable Error Interrupt Register
+  EEI31,
+  EEI30,
+  EEI29,
+  EEI28,
+  EEI27,
+  EEI26,
+  EEI25,
+  EEI24,
+  EEI23,
+  EEI22,
+  EEI21,
+  EEI20,
+  EEI19,
+  EEI18,
+  EEI17,
+  EEI16,
+  EEI15,
+  EEI14,
+  EEI13,
+  EEI12,
+  EEI11,
+  EEI10,
+  EEI9,
+  EEI8,
+  EEI7,
+  EEI6,
+  EEI5,
+  EEI4,
+  EEI3,
+  EEI2,
+  EEI1,
+  EEI0
+}
+
 //register $uint8 DMA_CEEI  *(volatile $uint8_t  *)0x40008018 // Clear Enable Error Interrupt Register
 //register $uint32 DMA_CEEI_CEEI(n)  (($uint8_t)(n & 3)<<0) // Clear Enable Error Interrupt
 //register $uint32 DMA_CEEI_CAEE   (($uint8_t)1<<6)  // Clear All Enable Error Interrupts
@@ -808,18 +868,6 @@ register WDOG_STCTRLH at 0x40052000 $uint16 { // Watchdog Status and Control Reg
   WDOGEN
 }
 
-//let WDOG_STCTRLH_DISTESTWDOG $uint16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.
-////register WDOG_STCTRLH_BYTESEL(n)  ($uint16_t)(((n) & 3) << 12) // selects the byte to be tested when the watchdog is in the byte test mode.
-//let WDOG_STCTRLH_TESTSEL  $uint16 = 0x0800
-//let WDOG_STCTRLH_TESTWDOG $uint16 = 0x0400
-//let WDOG_STCTRLH_WAITEN $uint16 = 0x0080
-//let WDOG_STCTRLH_STOPEN $uint16 = 0x0040
-//let WDOG_STCTRLH_DBGEN  $uint16 = 0x0020
-//let WDOG_STCTRLH_ALLOWUPDATE $uint16 = 0x0010
-//let WDOG_STCTRLH_WINEN $uint16 = 0x0008
-//let WDOG_STCTRLH_IRQRSTEN $uint16 = 0x0004
-//let WDOG_STCTRLH_CLKSRC $uint16 = 0x0002
-//let WDOG_STCTRLH_WDOGEN $uint16 = 0x0001
 
 register WDOG_STCTRLL  at 0x40052002 $uint16 // Watchdog Status and Control Register Low
 register WDOG_TOVALH   at 0x40052004 $uint16 // Watchdog Time-out Value Register High
@@ -860,11 +908,13 @@ register MCG_C2 at 0x4006_4001 $uint8 { // MCG Control 2 Register
 
 register MCG_C3 at 0x4006_4002 $uint8 // MCG Control 3 Register
 //register MCG_C3_SCTRIM(n)  ($uint8_t)(n)   // Slow Internal Reference Clock Trim Setting
-register MCG_C4 at 0x40064003 $uint8 // MCG Control 4 Register
-let MCG_C4_SCFTRIM $uint8 = 0x01   // Slow Internal Reference Clock Fine Trim
-//register MCG_C4_FCTRIM(n)  ($uint8_t)(((n) & 0x0F) << 1) // Fast Internal Reference Clock Trim Setting
-//register MCG_C4_DRST_DRS(n)  ($uint8_t)(((n) & 0x03) << 5) // DCO Range Select
-let MCG_C4_DMX32 $uint8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed
+
+register MCG_C4 at 0x40064003 $uint8 { // MCG Control 4 Register
+  DMX32, // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed
+  DRST_DRS [2], // Fast Internal Reference Clock Trim Setting
+  FCTRIM [4], // DCO Range Select
+  SCFTRIM // Slow Internal Reference Clock Fine Trim
+}
 
 
 register MCG_C5 at 0x4006_4004 $uint8 { // MCG Control 5 Register
@@ -891,20 +941,23 @@ register MCG_S @ro at 0x40064006 $uint8 { // MCG Status Register
  IRCST   // Internal Reference Clock Status
 }
 
-register MCG_SC at 0x40064008 $uint8 // MCG Status and Control Register
-let MCG_SC_LOCS0 $uint8 = 0x01   // OSC0 Loss of Clock Status
-//register MCG_SC_FCRDIV(n)  ($uint8_t)(((n) & 0x07) << 1) // Fast Clock Internal Reference Divider
-let MCG_SC_FLTPRSRV $uint8 = 0x10   // FLL Filter Preserve Enable
-let MCG_SC_ATMF $uint8 = 0x20   // Automatic Trim Machine Fail Flag
-let MCG_SC_ATMS $uint8 = 0x40   // Automatic Trim Machine Select
-let MCG_SC_ATME $uint8 = 0x80   // Automatic Trim Machine Enable
+register MCG_SC at 0x40064008 $uint8 { // MCG Status and Control Register
+  ATME, // Automatic Trim Machine Enable
+  ATMS, // Automatic Trim Machine Select
+  ATMF, // Automatic Trim Machine Fail Flag
+  FLTPRSRV, // FLL Filter Preserve Enable
+  FCRDIV [3], // Fast Clock Internal Reference Divider
+  LOCS0 // OSC0 Loss of Clock Status
+}
+
+
 
 register MCG_ATCVH at 0x4006400A $uint8 // MCG Auto Trim Compare Value High Register
 register MCG_ATCVL at 0x4006400B $uint8 // MCG Auto Trim Compare Value Low Register
 register MCG_C7    at 0x4006400C $uint8 // MCG Control 7 Register
 register MCG_C8    at 0x4006400D $uint8 // MCG Control 8 Register
-//
-//// Chapter 25: Oscillator (OSC)
+
+// Chapter 25: Oscillator (OSC)
 register OSC_CR at 0x40065000 $uint8 {// OSC Control Register
   ERCLKEN, // External Reference Enable, Enables external reference clock (OSCERCLK)
   1,
@@ -917,7 +970,6 @@ register OSC_CR at 0x40065000 $uint8 {// OSC Control Register
   SC8P, // Oscillator 8 pF Capacitor Load Configure
   SC16P // Oscillator 16 pF Capacitor Load Configure
 }
-let OSC_SC16P  $uint8 = 0x01   
 
 // Local Memory Controller
 register LMEM_PCCCR at 0xE008_2000 $uint32 { // Cache control register

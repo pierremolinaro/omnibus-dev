@@ -10857,13 +10857,13 @@ void extensionMethod_noteTypesInPrecedenceGraph (const GALGAS_controlRegisterDec
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_controlRegisterDeclarationListAST temp_0 = inObject ;
-  cEnumerator_controlRegisterDeclarationListAST enumerator_8231 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_8231.hasCurrentObject ()) {
-    GALGAS_lstring var_typeName_8251 = function_llvmRegularTypeMangledNameFromName (enumerator_8231.current_mRegisterTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 232)) ;
+  cEnumerator_controlRegisterDeclarationListAST enumerator_7125 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_7125.hasCurrentObject ()) {
+    GALGAS_lstring var_typeName_7145 = function_llvmRegularTypeMangledNameFromName (enumerator_7125.current_mRegisterTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 195)) ;
     {
-    ioArgument_ioGraph.setter_noteNode (var_typeName_8251 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 233)) ;
+    ioArgument_ioGraph.setter_noteNode (var_typeName_7145 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 196)) ;
     }
-    enumerator_8231.gotoNextObject () ;
+    enumerator_7125.gotoNextObject () ;
   }
 }
 

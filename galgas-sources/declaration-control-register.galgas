@@ -56,45 +56,6 @@ syntax extension plm_syntax {
     @controlRegisterNameList registerDeclarationList = {}
     repeat
       <registerDeclaration> !?registerDeclarationList
-#      $identifier$ ?let registerName
-#      @lstringlist attributeList = {}
-#      repeat
-#      while
-#        $@attribute$ ?let attribute
-#        attributeList += !attribute
-#      end
-#      select
-#        $at$
-#        <expression> ?let registerAddress
-#        registerDeclarationList +=
-#          !registerName
-#          !.scalar
-#          !attributeList
-#          !registerAddress 
-#          !.here
-#      or
-#        $[$
-#        <expression> ?let sizeExpression
-#        let sizeExpressionLocation = @location.here
-#        $]$
-#        $at$
-#        <expression> ?let baseAddressExpression
-#        let baseAddressExpressionLocation = @location.here
-#        $:$
-#        <expression> ?let arrayElementSizeExpression
-#        let arrayElementSizeExpressionLocation = @location.here
-#        registerDeclarationList +=
-#          !registerName
-#          !.registerArray {
-#             !arraySize:sizeExpression
-#             !arraySizeLocation:sizeExpressionLocation
-#             !arrayElementSize:arrayElementSizeExpression
-#             !arrayElementSizeLocation:arrayElementSizeExpressionLocation
-#           }
-#          !attributeList
-#          !baseAddressExpression 
-#          !baseAddressExpressionLocation
-#      end
     while
     end
     $\$type$ ?let registerTypeName
@@ -226,6 +187,8 @@ map @controlRegisterMap {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   PRECEDENCE GRAPH
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (registerNameList registerTypeName * *) in self do
@@ -234,6 +197,8 @@ method @controlRegisterDeclarationListAST noteTypesInPrecedenceGraph ?!@semantic
   end
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   CONTEXT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc enterControlRegistersInContext
