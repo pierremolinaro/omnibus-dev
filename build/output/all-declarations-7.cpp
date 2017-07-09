@@ -10905,14 +10905,14 @@ void extensionMethod_controlRegisterType (const GALGAS_controlRegisterDeclaratio
                                           COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outRegisterType.drop () ; // Release 'out' argument
   outArgument_outRegisterBitCount.drop () ; // Release 'out' argument
-  outArgument_outRegisterType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), inObject.mProperty_mRegisterTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 256)).getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 256)) ;
+  outArgument_outRegisterType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), inObject.mProperty_mRegisterTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 221)).getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 221)) ;
   switch (outArgument_outRegisterType.enumValue ()) {
   case GALGAS_PLMType::kNotBuilt:
     break ;
   case GALGAS_PLMType::kEnum_integer:
     {
-      const cEnumAssociatedValues_PLMType_integer * extractPtr_9349 = (const cEnumAssociatedValues_PLMType_integer *) (outArgument_outRegisterType.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_9349->mAssociatedValue3 ;
+      const cEnumAssociatedValues_PLMType_integer * extractPtr_8376 = (const cEnumAssociatedValues_PLMType_integer *) (outArgument_outRegisterType.unsafePointer ()) ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_8376->mAssociatedValue3 ;
       outArgument_outRegisterBitCount = extractedValue_bitCount ;
     }
     break ;
@@ -10920,63 +10920,63 @@ void extensionMethod_controlRegisterType (const GALGAS_controlRegisterDeclaratio
   case GALGAS_PLMType::kEnum_void:
     {
       TC_Array <C_FixItDescription> fixItArray0 ;
-      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 261)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray0  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 261)) ;
+      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 226)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray0  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 226)) ;
       outArgument_outRegisterBitCount.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_PLMType::kEnum_enumeration:
     {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 263)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray1  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 263)) ;
+      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 228)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray1  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 228)) ;
       outArgument_outRegisterBitCount.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_PLMType::kEnum_literalString:
     {
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 265)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray2  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 265)) ;
+      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 230)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray2  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 230)) ;
       outArgument_outRegisterBitCount.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_PLMType::kEnum_staticInteger:
     {
       TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 267)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray3  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 267)) ;
+      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 232)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray3  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 232)) ;
       outArgument_outRegisterBitCount.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_PLMType::kEnum_structure:
     {
       TC_Array <C_FixItDescription> fixItArray4 ;
-      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 269)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray4  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 269)) ;
+      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 234)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray4  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 234)) ;
       outArgument_outRegisterBitCount.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_PLMType::kEnum_opaque:
     {
       TC_Array <C_FixItDescription> fixItArray5 ;
-      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 271)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray5  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 271)) ;
+      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 236)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray5  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 236)) ;
       outArgument_outRegisterBitCount.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_PLMType::kEnum_arrayType:
     {
       TC_Array <C_FixItDescription> fixItArray6 ;
-      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 273)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray6  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 273)) ;
+      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 238)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray6  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 238)) ;
       outArgument_outRegisterBitCount.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_PLMType::kEnum_function:
     {
       TC_Array <C_FixItDescription> fixItArray7 ;
-      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 275)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray7  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 275)) ;
+      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 240)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray7  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 240)) ;
       outArgument_outRegisterBitCount.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_PLMType::kEnum_pointer:
     {
       TC_Array <C_FixItDescription> fixItArray8 ;
-      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 277)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray8  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 277)) ;
+      inCompiler->emitSemanticError (inObject.mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 242)), GALGAS_string ("a register should be an $intXX or an $uintXX"), fixItArray8  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 242)) ;
       outArgument_outRegisterBitCount.drop () ; // Release error dropped variable
     }
     break ;
