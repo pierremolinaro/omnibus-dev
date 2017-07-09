@@ -34,6 +34,8 @@ static unsigned countTrainingZeros (const unsigned inValue) ; // Defined in coun
 typedef struct {
 //--- Context buffer (SHOULD BE THE FIRST FIELD)
   TaskContext mTaskContext ;
+//--- Task name
+  const char * mTaskName ;
 //--- This field is used for deadline waiting
   unsigned mTaskDeadline ;
 //---

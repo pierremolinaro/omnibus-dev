@@ -366,11 +366,9 @@ private proc generateCodeFiles
   if [generationAdds.mStaticStringMap count] > 0 then
     llvmCode += llvmTitleComment (!"Static strings")
     for () in generationAdds.mStaticStringMap do
-      let lgStr = [[lkey.string length] + 1 string]
+      let lgStr = [[lkey.string utf8Length] + 1 string]
       llvmCode += literalCharacterArrayName (!mIndex) + " = private unnamed_addr constant ["
-      llvmCode += lgStr + " x i8] c\""
-      llvmCode += [lkey.string utf8RepresentationWithoutDelimiters]
-      llvmCode += "\\00\", align 1\n"
+      llvmCode += lgStr + " x i8] c\"" + lkey.string + "\\00\", align 1\n"
       llvmCode += literalStringName (!mIndex) + " = private constant i8* getelementptr inbounds (["
       llvmCode += lgStr + " x i8], [" + lgStr + " x i8]* "
       llvmCode += literalCharacterArrayName (!mIndex) + ", i32 0, i32 0), align 4\n\n"

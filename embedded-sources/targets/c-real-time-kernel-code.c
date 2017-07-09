@@ -31,16 +31,19 @@ void kernel_selectTaskToRun (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 void kernel_create_task (const unsigned inTaskIndex,
+                         const char * inTaskName,
                          unsigned * inStackBufferAddress,
                          unsigned inStackBufferSize,
                          RoutineTaskType inTaskRoutine) ;
 
 void kernel_create_task (const unsigned inTaskIndex,
+                         const char * inTaskName,
                          unsigned * inStackBufferAddress,
                          unsigned inStackBufferSize,
                          RoutineTaskType inTaskRoutine) {
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
   taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;
+  taskControlBlockPtr->mTaskName = inTaskName ;
   taskControlBlockPtr->mTaskDeadline = 0 ; // statically initialized to 0
   taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // statically initialized to 0
   taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0
@@ -189,6 +192,36 @@ void noteFreeStackSize (void) {
   if (currentFreeStack < gRunningTaskControlBlock->mStackFreeSize) {
     gRunningTaskControlBlock->mStackFreeSize = currentFreeStack ;
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  T A S K    C O U N T                                                                                               *
+//---------------------------------------------------------------------------------------------------------------------*
+
+unsigned taskCount (void) asm ("!FUNC!taskCount") ;
+
+unsigned taskCount (void) {
+  return TASK_COUNT ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  T A S K    G U A R D   S T A T E                                                                                   *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern GuardState taskGuardState (const unsigned inIndex)  asm ("!FUNC!taskGuardState") ;
+
+extern GuardState taskGuardState (const unsigned inIndex) {
+  return gTaskDescriptorArray [inIndex].mGuardState ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  T A S K    F R E E   S T A S K    S I Z E                                                                          *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern unsigned taskFreeStackSize (const unsigned inIndex)  asm ("!FUNC!taskFreeStackSize") ;
+
+extern unsigned taskFreeStackSize (const unsigned inIndex) {
+  return gTaskDescriptorArray [inIndex].mStackFreeSize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

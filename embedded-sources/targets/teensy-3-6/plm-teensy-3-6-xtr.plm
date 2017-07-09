@@ -11,6 +11,18 @@ extern func user noteFreeStackSize () : "noteFreeStackSize"
 
 extern func service noteCurrentTaskFreeStackSize () : "noteCurrentTaskFreeStackSize"
 
+extern func user taskCount () -> $uint32 : "taskCount"
+
+enum $guardState {
+  case evaluatingOrOutside
+  case didChange
+  case waitingForChange
+}
+
+extern func user taskGuardState (?taskIndex: inIndex $uint32) -> $guardState : "taskGuardState"
+
+extern func user taskFreeStackSize (?taskIndex: inIndex $uint32) -> $uint32 : "taskFreeStackSize"
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   SYNCHRONIZATION TOOLS ROUTINES                                                                                     
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1053,126 +1053,208 @@ register CRC_GPOLY at 0x40032004 $uint32 // CRC Polynomial register
 register CRC_CTRL  at 0x40032008 $uint32 // CRC Control register
 
 // Chapter 31: Analog-to-Digital Converter (ADC)
-register ADC0_SC1A   at 0x4003B000 $uint32 // ADC status and control registers 1
-register ADC0_SC1B   at 0x4003B004 $uint32 // ADC status and control registers 1
-let ADC_SC1_COCO  $uint32 = 0x80   // Conversion complete flag
-let ADC_SC1_AIEN  $uint32 = 0x40   // Interrupt enable
-let ADC_SC1_DIFF  $uint32 = 0x20   // Differential mode enable
-//register ADC_SC1_ADCH(n)    ((n) & 0x1F)  // Input channel select
-register ADC0_CFG1   at 0x4003B008 $uint32 // ADC configuration register 1
-let ADC_CFG1_ADLPC  $uint32 = 0x80   // Low-power configuration
-//register ADC_CFG1_ADIV(n)   (((n) & 3) << 5) // Clock divide select, 0=direct, 1=div2, 2=div4, 3=div8
-let ADC_CFG1_ADLSMP  $uint32 = 0x10   // Sample time configuration, 0=Short, 1=Long
-//register ADC_CFG1_MODE(n)   (((n) & 3) << 2) // Conversion mode, 0=8 bit, 1=12 bit, 2=10 bit, 3=16 bit
-//register ADC_CFG1_ADICLK(n)   (((n) & 3) << 0) // Input clock, 0=bus, 1=bus/2, 2=OSCERCLK, 3=async
-register ADC0_CFG2  at 0x4003B00C $uint32 // Configuration register 2
-let ADC_CFG2_MUXSEL  $uint32 = 0x10   // 0=a channels, 1=b channels
-let ADC_CFG2_ADACKEN  $uint32 = 0x08   // async clock enable
-let ADC_CFG2_ADHSC   $uint32 = 0x04   // High speed configuration
-//register ADC_CFG2_ADLSTS(n)   (((n) & 3) << 0) // Sample time, 0=24 cycles, 1=12 cycles, 2=6 cycles, 3=2 cycles
+register ADC0_SC1A   at 0x4003B000
+         ADC0_SC1B   at 0x4003B004 $uint32  {// ADC status and control registers 1
+  24,
+  COCO, // Conversion complete flag
+  AIEN, // Interrupt enable
+  DIFF, // Differential mode enable
+  ADCH [5] // Input channel select
+}
+
+register ADC0_CFG1 at 0x4003B008 $uint32 { // ADC configuration register 1
+  24,
+  ADLPC, // Low-power configuration
+  ADIV [2], // Clock divide select, 0=direct, 1=div2, 2=div4, 3=div8
+  ADLSMP, // Sample time configuration, 0=Short, 1=Long
+  MODE [2], // Conversion mode, 0=8 bit, 1=12 bit, 2=10 bit, 3=16 bit
+  ADICLK [2] // Input clock, 0=bus, 1=bus/2, 2=OSCERCLK, 3=async
+}
+
+register ADC0_CFG2  at 0x4003B00C $uint32 { // Configuration register 2
+  27,
+  MUXSEL,  // 0=a channels, 1=b channels
+  ADACKEN,   // async clock enable
+  ADHSC, // High speed configuration
+  ADLSTS [2] // Sample time, 0=24 cycles, 1=12 cycles, 2=6 cycles, 3=2 cycles
+}
+
 register ADC0_RA    at 0x4003B010 $uint32 // ADC data result register
+
 register ADC0_RB    at 0x4003B014 $uint32 // ADC data result register
+
 register ADC0_CV1   at 0x4003B018 $uint32 // Compare value registers
+
 register ADC0_CV2   at 0x4003B01C $uint32 // Compare value registers
-register ADC0_SC2   at 0x4003B020 $uint32 // Status and control register 2
-let ADC_SC2_ADACT  $uint32 = 0x80   // Conversion active
-let ADC_SC2_ADTRG  $uint32 = 0x40   // Conversion trigger select, 0=software, 1=hardware
-let ADC_SC2_ACFE   $uint32 = 0x20   // Compare function enable
-let ADC_SC2_ACFGT  $uint32 = 0x10   // Compare function greater than enable
-let ADC_SC2_ACREN  $uint32 = 0x08   // Compare function range enable
-let ADC_SC2_DMAEN  $uint32= 0x04   // DMA enable
-//register ADC_SC2_REFSEL(n)   (((n) & 3) << 0) // Voltage reference, 0=vcc/external, 1=1.2 volts
-register ADC0_SC3   at 0x4003B024 $uint32 // Status and control register 3
-let ADC_SC3_CAL  $uint32 = 0x80   // Calibration, 1=begin, stays set while cal in progress
-let ADC_SC3_CALF  $uint32= 0x40   // Calibration failed flag
-let ADC_SC3_ADCO  $uint32= 0x08   // Continuous conversion enable
-let ADC_SC3_AVGE  $uint32= 0x04   // Hardware average enable
-//register ADC_SC3_AVGS(n)    (((n) & 3) << 0) // avg select, 0=4 samples, 1=8 samples, 2=16 samples, 3=32 samples
+
+register ADC0_SC2 at 0x4003B020 $uint32 { // Status and control register 2
+  24,
+  ADACT,  // Conversion active
+  ADTRG,  // Conversion trigger select, 0=software, 1=hardware
+  ACFE,   // Compare function enable
+  ACFGT,  // Compare function greater than enable
+  ACREN,  // Compare function range enable
+  DMAEN,  // DMA enable
+  REFSEL [2] // Voltage reference, 0=vcc/external, 1=1.2 volts
+}
+
+register ADC0_SC3 at 0x4003B024 $uint32 { // Status and control register 3
+  24,
+  CAL,   // Calibration, 1=begin, stays set while cal in progress
+  CALF,  // Calibration failed flag
+  2,
+  ADCO,  // Continuous conversion enable
+  AVGE,  // Hardware average enable
+  AVGS [2] // avg select, 0=4 samples, 1=8 samples, 2=16 samples, 3=32 samples
+}
+
 register ADC0_OFS   at 0x4003B028 $uint32 // ADC offset correction register
+
 register ADC0_PG    at 0x4003B02C $uint32 // ADC plus-side gain register
+
 register ADC0_MG    at 0x4003B030 $uint32 // ADC minus-side gain register
+
 register ADC0_CLPD  at 0x4003B034 $uint32 // ADC plus-side general calibration value register
+
 register ADC0_CLPS  at 0x4003B038 $uint32 // ADC plus-side general calibration value register
+
 register ADC0_CLP4  at 0x4003B03C $uint32 // ADC plus-side general calibration value register
+
 register ADC0_CLP3  at 0x4003B040 $uint32 // ADC plus-side general calibration value register
+
 register ADC0_CLP2  at 0x4003B044 $uint32 // ADC plus-side general calibration value register
+
 register ADC0_CLP1  at 0x4003B048 $uint32 // ADC plus-side general calibration value register
+
 register ADC0_CLP0  at 0x4003B04C $uint32 // ADC plus-side general calibration value register
-register ADC0_PGA   at 0x4003B050 $uint32 // ADC Programmable Gain Amplifier
-let ADC0_PGA_PGAEN  $uint32 = 0x00800000  // Enable
-let ADC0_PGA_PGALPB  $uint32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal
-//register ADC0_PGA_PGAG(n)   (((n) & 15) << 16) // Gain, 0=1X, 1=2X, 2=4X, 3=8X, 4=16X, 5=32X, 6=64X
+
 register ADC0_CLMD   at 0x4003B054 $uint32 // ADC minus-side general calibration value register
+
 register ADC0_CLMS   at 0x4003B058 $uint32 // ADC minus-side general calibration value register
+
 register ADC0_CLM4   at 0x4003B05C $uint32 // ADC minus-side general calibration value register
+
 register ADC0_CLM3   at 0x4003B060 $uint32 // ADC minus-side general calibration value register
+
 register ADC0_CLM2   at 0x4003B064 $uint32 // ADC minus-side general calibration value register
+
 register ADC0_CLM1   at 0x4003B068 $uint32 // ADC minus-side general calibration value register
+
 register ADC0_CLM0   at 0x4003B06C $uint32 // ADC minus-side general calibration value register
 
 register ADC1_SC1A   at 0x400BB000 $uint32 // ADC status and control registers 1
+
 register ADC1_SC1B   at 0x400BB004 $uint32 // ADC status and control registers 1
+
 register ADC1_CFG1   at 0x400BB008 $uint32 // ADC configuration register 1
+
 register ADC1_CFG2   at 0x400BB00C $uint32 // Configuration register 2
+
 register ADC1_RA     at 0x400BB010 $uint32 // ADC data result register
+
 register ADC1_RB     at 0x400BB014 $uint32 // ADC data result register
+
 register ADC1_CV1    at 0x400BB018 $uint32 // Compare value registers
+
 register ADC1_CV2    at 0x400BB01C $uint32 // Compare value registers
+
 register ADC1_SC2    at 0x400BB020 $uint32 // Status and control register 2
+
 register ADC1_SC3    at 0x400BB024 $uint32 // Status and control register 3
+
 register ADC1_OFS    at 0x400BB028 $uint32 // ADC offset correction register
+
 register ADC1_PG     at 0x400BB02C $uint32 // ADC plus-side gain register
+
 register ADC1_MG     at 0x400BB030 $uint32 // ADC minus-side gain register
+
 register ADC1_CLPD   at 0x400BB034 $uint32 // ADC plus-side general calibration value register
+
 register ADC1_CLPS   at 0x400BB038 $uint32 // ADC plus-side general calibration value register
+
 register ADC1_CLP4   at 0x400BB03C $uint32 // ADC plus-side general calibration value register
+
 register ADC1_CLP3   at 0x400BB040 $uint32 // ADC plus-side general calibration value register
+
 register ADC1_CLP2   at 0x400BB044 $uint32 // ADC plus-side general calibration value register
+
 register ADC1_CLP1   at 0x400BB048 $uint32 // ADC plus-side general calibration value register
+
 register ADC1_CLP0   at 0x400BB04C $uint32 // ADC plus-side general calibration value register
+
 register ADC1_PGA    at 0x400BB050 $uint32 // ADC Programmable Gain Amplifier
+
 register ADC1_CLMD   at 0x400BB054 $uint32 // ADC minus-side general calibration value register
+
 register ADC1_CLMS   at 0x400BB058 $uint32 // ADC minus-side general calibration value register
+
 register ADC1_CLM4   at 0x400BB05C $uint32 // ADC minus-side general calibration value register
+
 register ADC1_CLM3   at 0x400BB060 $uint32 // ADC minus-side general calibration value register
+
 register ADC1_CLM2   at 0x400BB064 $uint32 // ADC minus-side general calibration value register
+
 register ADC1_CLM1   at 0x400BB068 $uint32 // ADC minus-side general calibration value register
+
 register ADC1_CLM0   at 0x400BB06C $uint32 // ADC minus-side general calibration value register
 
-register DAC0_DAT0L at 0x400CC000 $uint8 // DAC Data Low Register 
-register DAC0_DATH  at 0x400CC001 $uint8 // DAC Data High Register 
-register DAC0_DAT1L at 0x400CC002 $uint8 // DAC Data Low Register 
-register DAC0_DAT2L at 0x400CC004 $uint8 // DAC Data Low Register 
-register DAC0_DAT3L at 0x400CC006 $uint8 // DAC Data Low Register 
-register DAC0_DAT4L at 0x400CC008 $uint8 // DAC Data Low Register 
-register DAC0_DAT5L at 0x400CC00A $uint8 // DAC Data Low Register 
-register DAC0_DAT6L at 0x400CC00C $uint8 // DAC Data Low Register 
-register DAC0_DAT7L at 0x400CC00E $uint8 // DAC Data Low Register 
-register DAC0_DAT8L at 0x400CC010 $uint8 // DAC Data Low Register 
-register DAC0_DAT9L at 0x400CC012 $uint8 // DAC Data Low Register 
-register DAC0_DAT10L at 0x400CC014 $uint8 // DAC Data Low Register 
-register DAC0_DAT11L at 0x400CC016 $uint8 // DAC Data Low Register 
-register DAC0_DAT12L at 0x400CC018 $uint8 // DAC Data Low Register 
-register DAC0_DAT13L at 0x400CC01A $uint8 // DAC Data Low Register 
-register DAC0_DAT14L at 0x400CC01C $uint8 // DAC Data Low Register 
-register DAC0_DAT15L at 0x400CC01E $uint8 // DAC Data Low Register 
-register DAC0_SR     at 0x400CC020 $uint8 // DAC Status Register 
-register DAC0_C0     at 0x400CC021 $uint8 // DAC Control Register 
-let DAC_C0_DACEN  $uint8 = 0x80    // DAC Enable
-let DAC_C0_DACRFS $uint8 = 0x40    // DAC Reference Select
-let DAC_C0_DACTRGSEL $uint8 = 0x20    // DAC Trigger Select
-let DAC_C0_DACSWTRG  $uint8 = 0x10    // DAC Software Trigger
-let DAC_C0_LPEN  $uint8 = 0x08    // DAC Low Power Control
-let DAC_C0_DACBWIEN  $uint8 = 0x04    // DAC Buffer Watermark Interrupt Enable
-let DAC_C0_DACBTIEN $uint8 = 0x02    // DAC Buffer Read Pointer Top Flag Interrupt Enable
-let DAC_C0_DACBBIEN $uint8 = 0x01    // DAC Buffer Read Pointer Bottom Flag Interrupt Enable
 
-register DAC0_C1  at 0x400CC022 $uint8 // DAC Control Register 1 
-let DAC_C1_DMAEN $uint8 = 0x80    // DMA Enable Select
-//register DAC_C1_DACBFWM(n)  (((n) & 3) << 3)  // DAC Buffer Watermark Select
-//register DAC_C1_DACBFMD(n)  (((n) & 3) << 0)  // DAC Buffer Work Mode Select
-let DAC_C1_DACBFEN $uint8 = 0x00    // DAC Buffer Enable
-//
+
+register DAC0_DAT0L at 0x400CC000 $uint8 // DAC Data Low Register 
+
+register DAC0_DATH  at 0x400CC001 $uint8 // DAC Data High Register 
+
+register DAC0_DAT1L at 0x400CC002 $uint8 // DAC Data Low Register 
+
+register DAC0_DAT2L at 0x400CC004 $uint8 // DAC Data Low Register 
+
+register DAC0_DAT3L at 0x400CC006 $uint8 // DAC Data Low Register 
+
+register DAC0_DAT4L at 0x400CC008 $uint8 // DAC Data Low Register 
+
+register DAC0_DAT5L at 0x400CC00A $uint8 // DAC Data Low Register 
+
+register DAC0_DAT6L at 0x400CC00C $uint8 // DAC Data Low Register 
+
+register DAC0_DAT7L at 0x400CC00E $uint8 // DAC Data Low Register 
+
+register DAC0_DAT8L at 0x400CC010 $uint8 // DAC Data Low Register 
+
+register DAC0_DAT9L at 0x400CC012 $uint8 // DAC Data Low Register 
+
+register DAC0_DAT10L at 0x400CC014 $uint8 // DAC Data Low Register 
+
+register DAC0_DAT11L at 0x400CC016 $uint8 // DAC Data Low Register 
+
+register DAC0_DAT12L at 0x400CC018 $uint8 // DAC Data Low Register 
+
+register DAC0_DAT13L at 0x400CC01A $uint8 // DAC Data Low Register 
+
+register DAC0_DAT14L at 0x400CC01C $uint8 // DAC Data Low Register 
+
+register DAC0_DAT15L at 0x400CC01E $uint8 // DAC Data Low Register 
+
+register DAC0_SR     at 0x400CC020 $uint8 // DAC Status Register 
+
+register DAC0_C0     at 0x400CC021 $uint8 { // DAC Control Register 
+  DACEN,    // DAC Enable
+  DACRFS,   // DAC Reference Select
+  DACTRGSEL,// DAC Trigger Select
+  DACSWTRG, // DAC Software Trigger
+  LPEN,     // DAC Low Power Control
+  DACBWIEN, // DAC Buffer Watermark Interrupt Enable
+  DACBTIEN, // DAC Buffer Read Pointer Top Flag Interrupt Enable
+  DACBBIEN  // DAC Buffer Read Pointer Bottom Flag Interrupt Enable
+}
+
+register DAC0_C1  at 0x400CC022 $uint8 { // DAC Control Register 1 
+  DMAEN,    // DMA Enable Select
+  2,
+  DACBFWM [2],  // DAC Buffer Watermark Select
+  DACBFMD [2],  // DAC Buffer Work Mode Select
+  DACBFEN // DAC Buffer Enable
+}
+
 register DAC0_C2  at 0x400CC023 $uint8 // DAC Control Register 2 
 //register DAC_C2_DACBFRP(n)  (((n) & 15) << 4)  // DAC Buffer Read Pointer
 //register DAC_C2_DACBFUP(n)  (((n) & 15) << 0)  // DAC Buffer Upper Limit
@@ -1392,11 +1474,14 @@ register RTC_CR at  0x4003_D010 $uint32 {// RTC Control Register
   18, SC2P, SC4P, SC8P, SC16P, CKLO, OSCE, 4, UM, SUP, WPE, SWR
 }
  
-register RTC_SR at  0x4003D014 $uint32 // RTC Status Register
-let RTC_SR_TCE $uint32 = 0x00000010  
-let RTC_SR_TAF $uint32 = 0x00000004  // 
-let RTC_SR_TOF $uint32 = 0x00000002  // 
-let RTC_SR_TIF $uint32 = 0x00000001  // 
+register RTC_SR at  0x4003D014 $uint32 { // RTC Status Register
+  27,
+  TCE,
+  MOF, 
+  TAF, 
+  TOF,
+  TIF
+}
 
 register RTC_LR  at 0x4003D018 $uint32 // RTC Lock Register
 register RTC_IER at 0x4003D01C $uint32 // RTC Interrupt Enable Register

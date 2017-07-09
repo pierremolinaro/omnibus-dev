@@ -58,7 +58,6 @@ LL_FILES:
    "../ll-clear-bss.ll",
    "../ll-copy-data-section.ll",
    "../ll-configuration-on-boot.ll",
-   "../ll-create-task.ll",
    "ll-install-interrupts.ll"
 //--- Included PLM sources
 PLM_FILES:

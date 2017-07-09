@@ -53,51 +53,6 @@ syntax extension plm_syntax {
     @taskInitListAST taskInitListAST = {}
     @syncInstructionBranchListAST branchList = {}
     <taskBody> !?taskVarList !?taskProcList !?taskInitListAST !?branchList
-#    repeat
-#    while
-#      $var$
-#      $identifier$ ?let varName
-#      @lstring typeName
-#      select
-#        typeName = ["" nowhere]
-#      or
-#        $\$type$ ?typeName
-#      end
-#      $=$
-#      <expression> ?let initExpression
-#      taskVarList += !varName !typeName !initExpression
-#    while
-#      $func$
-#      $identifier$ ?let procName
-#      <procedure_formal_arguments> ?formalArguments:let @routineFormalArgumentList formalArgumentList
-#      @lstring returnTypeName
-#      select
-#        returnTypeName = ["" here]
-#      or
-#        $->$
-#        $\$type$ ?returnTypeName
-#      end
-#      ${$
-#      <instructionList> ?let instructionList
-#      let endOfProc = @location.here
-#      $}$
-#      taskProcList += !.userMode !false !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
-#    while
-#      $setup$
-#      $integer$ ?let @lbigint priority
-#      ${$
-#      <instructionList> ?let instructionList
-#      let endOfInit = @location.here
-#      $}$
-#      taskInitListAST += !priority !instructionList !endOfInit
-#    while
-#      <guarded_command> ?let @guardedCommand guardedCommand
-#      ${$
-#      <instructionList> ?let instructionList
-#      let endOfInstructions = @location.here
-#      $}$
-#      branchList += !guardedCommand !instructionList !endOfInstructions
-#    end
     let endOfTask = @location.here
     $}$
     ioAST.mTaskListAST +=
@@ -356,6 +311,8 @@ method @taskList-element semanticAnalysis
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   )
+#------------------------------------------- Task Name string constant index
+  [!?ioIntermediateCodeStruct.mStaticStringMap findOrAddStaticString !mTaskName.string ?let taskNameStringIndex]
 #------------------------------------------- Generate task
   [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
     !mTaskName
@@ -364,6 +321,7 @@ method @taskList-element semanticAnalysis
     !mStackSize.bigint
     !initAllocaList
     !initInstructionListIR
+    !taskNameStringIndex
   ]
 #------------------------------------------- Generate task var access
   generatePropertyAccess (!structureType:taskType !?intermediateCode:ioIntermediateCodeStruct)
@@ -379,6 +337,7 @@ map @taskMapIR {
   @bigint mStackSize
   @allocaList mAllocaList
   @instructionListIR mInitInstructionListIR
+  @uint mTaskNameStringIndex
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
@@ -392,6 +351,7 @@ sortedlist @taskSortedListIR {
   @bigint mStackSize
   @allocaList mAllocaList
   @instructionListIR mInitInstructionListIR
+  @uint mTaskNameStringIndex
 }{
   mPriority <
 }
@@ -428,9 +388,18 @@ method @taskMapIR generateCode
 #--- Build ordered task list
   @taskSortedListIR orderedTaskList = {}
   for task in self do
-    orderedTaskList += !task.lkey.string !task.mPriority !task.mStackSize  !task.mAllocaList !task.mInitInstructionListIR
+    orderedTaskList +=
+      !task.lkey.string
+      !task.mPriority
+      !task.mStackSize
+      !task.mAllocaList
+      !task.mInitInstructionListIR
+      !task.mTaskNameStringIndex
   end
 #--- Declare task stacks and main routine
+  ioLLVMcode += llvmTitleComment (!"Create task extern routine")
+  ioLLVMcode += "declare void @kernel_create_task (i32 %inTaskIndex, i8* %inTaskName, i32* %inStackBufferAddress, "
+  ioLLVMcode += "i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n\n"
   for task in orderedTaskList do
     ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
     let assemblerTaskName = ["$" + task.mTaskName assemblerRepresentation]
@@ -464,8 +433,10 @@ method @taskMapIR generateCode
     ioLLVMcode += " = getelementptr inbounds [" + (task.mStackSize / 4) + " x i32], "
     ioLLVMcode += "[" + (task.mStackSize / 4) + " x i32]* " + stackNameForTask (!task.mTaskName)
     ioLLVMcode += ", i32 0, i32 0\n"
+    ioLLVMcode += "  %task.name." + idx + " = load i8*, i8** " + literalStringName (!task.mTaskNameStringIndex) + "\n"
     ioLLVMcode += "  call void @kernel_create_task ("
     ioLLVMcode += "i32 " + idx
+    ioLLVMcode += ", i8* %task.name." + idx
     ioLLVMcode += ", i32* " + stackAddressForTask (!task.mTaskName)
     ioLLVMcode += ", i32 " + task.mStackSize
     ioLLVMcode += ", void ()* " + mainRoutineNameForTask (!task.mTaskName) + ")\n"
