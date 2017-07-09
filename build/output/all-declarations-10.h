@@ -290,7 +290,6 @@ extern const char * gWrapperFileContent_106_targetTemplates ;
 extern const char * gWrapperFileContent_107_targetTemplates ;
 extern const char * gWrapperFileContent_108_targetTemplates ;
 extern const char * gWrapperFileContent_109_targetTemplates ;
-extern const char * gWrapperFileContent_110_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -407,7 +406,6 @@ extern const cRegularFileWrapper gWrapperFile_106_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_107_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_108_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_109_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_110_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

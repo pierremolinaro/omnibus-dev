@@ -55,8 +55,7 @@ LL_FILES:
   "../ll-cortex-m4.ll",
   "../../ll-clear-bss.ll",
   "../../ll-copy-data-section.ll",
-  "../../ll-configuration-on-boot.ll",
-  "../../ll-create-task.ll"
+  "../../ll-configuration-on-boot.ll"
 //--- PLM included files
 PLM_FILES:
   "../plm-registers-mk20dx256.plm",

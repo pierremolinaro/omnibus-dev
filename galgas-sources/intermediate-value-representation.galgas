@@ -31,7 +31,7 @@ enum @objectIR {
   case llvmTemporaryValue (@PLMType type @lstring llvmName @sliceMap sliceMap)
   case literalInteger  (@PLMType type @bigint value)
   case llvmStructureConstant (@PLMType type @sortedOperandIRList values)
-  case literalString  (@uint size @uint index)
+  case literalString  (@uint utf8Size @uint index)
   case zero (@PLMType type)
 #--- Function
   case possibleFunction (@objectIR receiver @lstring functionName)
@@ -198,7 +198,7 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
   case llvmStructureConstant (* @sortedOperandIRList values) :
     result = .llvmStructureConstant {!type: inType !values: values}
   case literalString  (@uint size @uint index) :
-    result = .literalString {!size: size !index: index}
+    result = .literalString {!utf8Size: size !index: index}
   end
 }
 

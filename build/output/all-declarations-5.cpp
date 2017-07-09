@@ -2506,7 +2506,8 @@ mProperty_mTaskName (),
 mProperty_mPriority (),
 mProperty_mStackSize (),
 mProperty_mAllocaList (),
-mProperty_mInitInstructionListIR () {
+mProperty_mInitInstructionListIR (),
+mProperty_mTaskNameStringIndex () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2520,12 +2521,14 @@ GALGAS_taskSortedListIR_2D_element::GALGAS_taskSortedListIR_2D_element (const GA
                                                                         const GALGAS_bigint & inOperand1,
                                                                         const GALGAS_bigint & inOperand2,
                                                                         const GALGAS_allocaList & inOperand3,
-                                                                        const GALGAS_instructionListIR & inOperand4) :
+                                                                        const GALGAS_instructionListIR & inOperand4,
+                                                                        const GALGAS_uint & inOperand5) :
 mProperty_mTaskName (inOperand0),
 mProperty_mPriority (inOperand1),
 mProperty_mStackSize (inOperand2),
 mProperty_mAllocaList (inOperand3),
-mProperty_mInitInstructionListIR (inOperand4) {
+mProperty_mInitInstructionListIR (inOperand4),
+mProperty_mTaskNameStringIndex (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2535,7 +2538,8 @@ GALGAS_taskSortedListIR_2D_element GALGAS_taskSortedListIR_2D_element::construct
                                              GALGAS_bigint::constructor_zero (HERE),
                                              GALGAS_bigint::constructor_zero (HERE),
                                              GALGAS_allocaList::constructor_emptyList (HERE),
-                                             GALGAS_instructionListIR::constructor_emptyList (HERE)) ;
+                                             GALGAS_instructionListIR::constructor_emptyList (HERE),
+                                             GALGAS_uint::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2544,11 +2548,12 @@ GALGAS_taskSortedListIR_2D_element GALGAS_taskSortedListIR_2D_element::construct
                                                                                         const GALGAS_bigint & inOperand1,
                                                                                         const GALGAS_bigint & inOperand2,
                                                                                         const GALGAS_allocaList & inOperand3,
-                                                                                        const GALGAS_instructionListIR & inOperand4 
+                                                                                        const GALGAS_instructionListIR & inOperand4,
+                                                                                        const GALGAS_uint & inOperand5 
                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_taskSortedListIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_taskSortedListIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
+    result = GALGAS_taskSortedListIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
   }
   return result ;
 }
@@ -2572,13 +2577,16 @@ typeComparisonResult GALGAS_taskSortedListIR_2D_element::objectCompare (const GA
   if (result == kOperandEqual) {
     result = mProperty_mInitInstructionListIR.objectCompare (inOperand.mProperty_mInitInstructionListIR) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskNameStringIndex.objectCompare (inOperand.mProperty_mTaskNameStringIndex) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_taskSortedListIR_2D_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInitInstructionListIR.isValid () ;
+  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInitInstructionListIR.isValid () && mProperty_mTaskNameStringIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2589,6 +2597,7 @@ void GALGAS_taskSortedListIR_2D_element::drop (void) {
   mProperty_mStackSize.drop () ;
   mProperty_mAllocaList.drop () ;
   mProperty_mInitInstructionListIR.drop () ;
+  mProperty_mTaskNameStringIndex.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2608,6 +2617,8 @@ void GALGAS_taskSortedListIR_2D_element::description (C_String & ioString,
     mProperty_mAllocaList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mInitInstructionListIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskNameStringIndex.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -2640,6 +2651,12 @@ GALGAS_allocaList GALGAS_taskSortedListIR_2D_element::getter_mAllocaList (UNUSED
 
 GALGAS_instructionListIR GALGAS_taskSortedListIR_2D_element::getter_mInitInstructionListIR (UNUSED_LOCATION_ARGS) const {
   return mProperty_mInitInstructionListIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_taskSortedListIR_2D_element::getter_mTaskNameStringIndex (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskNameStringIndex ;
 }
 
 
