@@ -1376,6 +1376,43 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                    Extension method '@LValueWithoutSelfAST type'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_type (const class GALGAS_LValueWithoutSelfAST inObject,
+                           const class GALGAS_universalPropertyAndRoutineMapForContext constin_inUniversalMap,
+                           class GALGAS_PLMType & out_outType,
+                           class C_Compiler * inCompiler
+                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                 Extension method '@universalPropertyAndRoutineMapForContext searchValuedObjectType'                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_universalPropertyAndRoutineMapForContext_searchValuedObjectType) (const class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                                          const class GALGAS_lstring constinArgument0,
+                                                                                                          class GALGAS_PLMType & outArgument1,
+                                                                                                          class C_Compiler * inCompiler
+                                                                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_searchValuedObjectType (const int32_t inClassIndex,
+                                                  extensionMethodSignature_universalPropertyAndRoutineMapForContext_searchValuedObjectType inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_searchValuedObjectType (const class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                 const GALGAS_lstring constin_inValuedObjectName,
+                                                 GALGAS_PLMType & out_outType,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                            Extension method '@LValueWithoutSelfAST analyzeLValueNoSelf'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

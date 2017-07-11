@@ -80,6 +80,41 @@ enum @targetAccessKind {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+method @LValueWithoutSelfAST type
+  ?variableMap:let @universalPropertyAndRoutineMapForContext inUniversalMap
+  !@PLMType outType
+{
+  [inUniversalMap searchValuedObjectType !mIdentifier ?outType]
+
+#  if [inContext.mGlobalVariableMap hasKey !mIdentifier] then
+#    [inContext.mGlobalVariableMap searchKey !lkey:mIdentifier ?type:outType ?5*]
+#  elsif [inContext.mControlRegisterMap hasKey !mIdentifier] then
+#    [inContext.mControlRegisterMap searchKey !mIdentifier ?outType ?9*]
+#  elsif [inContext.mControlRegisterMap hasKey !mIdentifier] then
+#    [inContext.mControlRegisterMap searchKey !mIdentifier ?outType ?9*]
+#  else
+#    error mIdentifier : "???" :outType
+#  end
+  for (access) in mAccessList do
+    switch access
+    case property (@lstring propertyName) :
+      if [outType isStructure] then
+        [outType structure ?1* ?propertyMap:let propertyMap ?4*]
+        [propertyMap searchKey !propertyName ?* ?let propertyObject]
+        outType = [propertyObject type]
+      else
+        error propertyName : "receiver has no property" : outType
+      end
+    case arrayAccess (* *) :
+      if [outType isArrayType] then
+        [outType arrayType ?1* ?elementType:outType ?4*]
+      end
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 method @LValueWithoutSelfAST analyzeLValueNoSelf
   ?self:let @PLMType inSelfType
   ?targetAccessKind:let @targetAccessKind inSelfAccessKind

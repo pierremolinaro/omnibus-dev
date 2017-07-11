@@ -88,6 +88,22 @@ override method @varAssignmentNoSelfInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
+  [mAssignmentTargetAST type !variableMap:ioUniversalMap ?let expressionType]
+#--- Analyze source expression
+  [mSourceExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:expressionType # [currentObject type]
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR sourceOperandPossibleReference
+  ]
 #--- Analyze LValue
   [mAssignmentTargetAST analyzeLValueNoSelf
     !self: inSelfType
@@ -110,21 +126,6 @@ override method @varAssignmentNoSelfInstructionAST analyze
   if [currentObject isPossibleFunction] then
     error mAssignmentTargetAST.mIdentifier : "invalid assignment target" : currentObject
   end
-#--- Analyze source expression
-  [mSourceExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:[currentObject type]
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR sourceOperandPossibleReference
-  ]
 #---
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
@@ -134,7 +135,7 @@ override method @varAssignmentNoSelfInstructionAST analyze
   ]  
   let result = checkAssignmentCompatibility (
     !source:sourceOperand
-    !targetAnnotationType:[currentObject type]
+    !targetAnnotationType:expressionType # [currentObject type]
     !errorLocation:mAssignmentTargetAST.mIdentifier
     !staticTypeAllowed:false
   )

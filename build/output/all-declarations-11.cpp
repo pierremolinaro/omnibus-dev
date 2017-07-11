@@ -2203,7 +2203,7 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1/un
   "      total += \xC3""\xA9""l\xC3""\xA9""ment.a\n"
   "      total += \xC3""\xA9""l\xC3""\xA9""ment.b\n"
   "      total += \xC3""\xA9""l\xC3""\xA9""ment.f ()\n"
-  " //     \xC3""\xA9""l\xC3""\xA9""ment.p ()\n"
+  "      \xC3""\xA9""l\xC3""\xA9""ment.p ()\n"
   "    }\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.printUnsigned (!total)\n"
@@ -2216,7 +2216,7 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "13-static-list-example.plm",
   "plm",
   true, // Text file
-  2002, // Text length
+  2000, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 
