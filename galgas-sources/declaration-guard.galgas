@@ -303,7 +303,7 @@ abstract method @callInstructionAST baseGuardAnalyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @simpleCallInstructionAST baseGuardAnalyze
+override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?self:let @PLMType unused inSelfType
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext unused inContext

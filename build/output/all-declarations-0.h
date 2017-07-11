@@ -11258,22 +11258,22 @@ class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           @simpleCallInstructionAST class                                           *
+//                                    @standAloneProcedureCallInstructionAST class                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_simpleCallInstructionAST : public GALGAS_callInstructionAST {
+class GALGAS_standAloneProcedureCallInstructionAST : public GALGAS_callInstructionAST {
 //--- Constructor
-  public : GALGAS_simpleCallInstructionAST (void) ;
+  public : GALGAS_standAloneProcedureCallInstructionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_simpleCallInstructionAST constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_standAloneProcedureCallInstructionAST constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_simpleCallInstructionAST * ptr (void) const { return (const cPtr_simpleCallInstructionAST *) mObjectPtr ; }
+  public : inline const class cPtr_standAloneProcedureCallInstructionAST * ptr (void) const { return (const cPtr_standAloneProcedureCallInstructionAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_simpleCallInstructionAST (const cPtr_simpleCallInstructionAST * inSourcePtr) ;
+  public : GALGAS_standAloneProcedureCallInstructionAST (const cPtr_standAloneProcedureCallInstructionAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -11281,19 +11281,19 @@ class GALGAS_simpleCallInstructionAST : public GALGAS_callInstructionAST {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_simpleCallInstructionAST extractObject (const GALGAS_object & inObject,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_standAloneProcedureCallInstructionAST extractObject (const GALGAS_object & inObject,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_simpleCallInstructionAST constructor_new (const class GALGAS_location & inOperand0,
-                                                                         const class GALGAS_effectiveArgumentListAST & inOperand1,
-                                                                         const class GALGAS_location & inOperand2,
-                                                                         const class GALGAS_lstring & inOperand3
-                                                                         COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_standAloneProcedureCallInstructionAST constructor_new (const class GALGAS_location & inOperand0,
+                                                                                      const class GALGAS_effectiveArgumentListAST & inOperand1,
+                                                                                      const class GALGAS_location & inOperand2,
+                                                                                      const class GALGAS_lstring & inOperand3
+                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_simpleCallInstructionAST & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_standAloneProcedureCallInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -11307,29 +11307,29 @@ class GALGAS_simpleCallInstructionAST : public GALGAS_callInstructionAST {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_simpleCallInstructionAST class
+} ; // End of GALGAS_standAloneProcedureCallInstructionAST class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_simpleCallInstructionAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standAloneProcedureCallInstructionAST ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Pointer class for @simpleCallInstructionAST class                                  *
+//                           Pointer class for @standAloneProcedureCallInstructionAST class                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_simpleCallInstructionAST : public cPtr_callInstructionAST {
+class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mSandAloneRoutineName ;
 
 //--- Constructor
-  public : cPtr_simpleCallInstructionAST (const GALGAS_location & in_mInstructionLocation,
-                                          const GALGAS_effectiveArgumentListAST & in_mArguments,
-                                          const GALGAS_location & in_mEndOfArguments,
-                                          const GALGAS_lstring & in_mSandAloneRoutineName
-                                          COMMA_LOCATION_ARGS) ;
+  public : cPtr_standAloneProcedureCallInstructionAST (const GALGAS_location & in_mInstructionLocation,
+                                                       const GALGAS_effectiveArgumentListAST & in_mArguments,
+                                                       const GALGAS_location & in_mEndOfArguments,
+                                                       const GALGAS_lstring & in_mSandAloneRoutineName
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
