@@ -240,69 +240,6 @@ class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'handleRoutineCallInInstruction'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleRoutineCallInInstruction (const class GALGAS_internalRepresentation constinArgument0,
-                                             const class GALGAS_PLMType constinArgument1,
-                                             const class GALGAS_lstring constinArgument2,
-                                             const class GALGAS_semanticContext constinArgument3,
-                                             const class GALGAS_mode constinArgument4,
-                                             class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                             class GALGAS_staticStringMap & ioArgument6,
-                                             class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
-                                             class GALGAS_allocaList & ioArgument8,
-                                             const class GALGAS_effectiveArgumentListAST constinArgument9,
-                                             const class GALGAS_string constinArgument10,
-                                             class GALGAS_instructionListIR & ioArgument11,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Routine 'handleMethodCallInInstruction'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleMethodCallInInstruction (const class GALGAS_lstring constinArgument0,
-                                            const class GALGAS_objectIR constinArgument1,
-                                            const class GALGAS_PLMType constinArgument2,
-                                            const class GALGAS_lstring constinArgument3,
-                                            const class GALGAS_semanticContext constinArgument4,
-                                            const class GALGAS_mode constinArgument5,
-                                            class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                            class GALGAS_staticStringMap & ioArgument7,
-                                            class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
-                                            class GALGAS_allocaList & ioArgument9,
-                                            const class GALGAS_effectiveArgumentListAST constinArgument10,
-                                            const class GALGAS_string constinArgument11,
-                                            class GALGAS_instructionListIR & ioArgument12,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Routine 'handleStandAloneRoutineCallInInstruction'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleStandAloneRoutineCallInInstruction (const class GALGAS_lstring constinArgument0,
-                                                       const class GALGAS_PLMType constinArgument1,
-                                                       const class GALGAS_lstring constinArgument2,
-                                                       const class GALGAS_semanticContext constinArgument3,
-                                                       const class GALGAS_mode constinArgument4,
-                                                       class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                       class GALGAS_staticStringMap & ioArgument6,
-                                                       class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
-                                                       class GALGAS_allocaList & ioArgument8,
-                                                       const class GALGAS_effectiveArgumentListAST constinArgument9,
-                                                       class GALGAS_instructionListIR & ioArgument10,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                               Routine 'handleSubscriptArrayInAssignmentAndExpression'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
