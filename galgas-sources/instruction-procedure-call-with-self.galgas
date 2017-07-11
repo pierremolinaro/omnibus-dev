@@ -37,7 +37,7 @@ override method @complexCallSelfInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #---
-  var currentErrorLocation = mAssignmentTargetAST.mIdentifier.location
+  var currentErrorLocation = mAssignmentTargetAST.mSelfLocation
   @objectIR currentObject = .selfObject {!type:inSelfType}
   @universalPropertyAndRoutineMapForContext currentMap = .default
 #--- Insulate last access
