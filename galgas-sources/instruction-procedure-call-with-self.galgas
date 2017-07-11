@@ -24,57 +24,157 @@ override method @complexCallSelfInstructionAST noteInstructionTypesInPrecedenceG
 
 override method @complexCallSelfInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  [mAssignmentTargetAST analyzeAssignmentTarget
-    !self: inSelfType
-    !targetAccessKind:.write
-    !propertiesAreMutable: inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-    !context: inContext
-    !mode: inCurrentMode
-    !?temporary: ioTemporaries
-    !?staticStringMap: ioGlobalLiteralStringMap
-    !?variableMap: ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: ioInstructionGenerationList
-    ?@objectIR currentObject
-    ?globalVariableReceiverName:let globalVariableReceiverName
+#---
+  var currentErrorLocation = mAssignmentTargetAST.mIdentifier.location
+  @objectIR currentObject = .selfObject {!type:inSelfType}
+  @universalPropertyAndRoutineMapForContext currentMap = .default
+#--- Insulate last access
+  var accessList = mAssignmentTargetAST.mAccessList
+  [!?accessList insertAtIndex !.property {!name:mAssignmentTargetAST.mIdentifier} !0]
+  [!?accessList popLast ?let lastAccess]
+#---- Loop on access list
+  for (access) in accessList do
+    let currentType = [currentObject type]
+    switch access
+    case property (@lstring propertyName) :
+      if [currentType isStructure] then
+        [currentType structure ?2* ?universalMap:let universalMap ?3*]
+        [universalMap searchValuedObject !propertyName ?let propertyObject]
+        currentMap = universalMap
+        currentErrorLocation = propertyName.location
+        let newObject = @objectIR.temporaryReference {
+           !type:[propertyObject type]
+           !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+           !sliceMap:{}
+           !volatile:false
+        }
+        ioTemporaries.mTemporaryIndex ++
+        [!?ioInstructionGenerationList appendGetPropertyReference
+          !newObject
+          !currentObject
+          !propertyName
+        ]
+        currentObject = newObject
+      else
+        error currentErrorLocation : "this object has no property" :currentObject
+      end
+    case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
+      error endOfIndex : "not handled yet" : currentObject
+    end
+  end
+#--- Handle last access
+  @lstring methodName
+  switch lastAccess
+  case property (@lstring propertyName) :
+    methodName = propertyName
+    let currentType = [currentObject type]
+    if [currentType isStructure] then
+      [currentType structure ?2* ?universalMap:let universalMap ?3*]
+      currentMap = universalMap
+      currentErrorLocation = propertyName.location
+    else
+      error currentErrorLocation : "this object has no property" : currentObject, methodName
+    end
+  case arrayAccess (* @location endOfIndex) :
+    error endOfIndex : "a property access is required here" : currentObject, methodName
+  end
+#--- Get function name and map containing the function definition
+  let routineMangledName = routineMangledNameFromCall (!"$" + [[currentObject type] key] !methodName !mArguments)
+#--- Get called function signature
+  let signature = [mArguments routineSignature !methodName.location]
+#--- Search function in map
+  [currentMap searchRoutine
+    !methodName
+    !signature
+    ?let @lstring LLVMInvocationRoutineName
+    ?@routineDescriptor routineDescriptor
   ]
-#--- Analyze procedure call arguments
-  handleFunctionCallInExpression (
-    !self:inSelfType
-    !globalVariableReceiverName:globalVariableReceiverName
-    !propertiesAreMutable:inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !mArguments
-    !mEndOfArguments
-    !?ioInstructionGenerationList
-    !?currentObject
-    ?let returnedType
-  )
-  if returnedType != .void then
-    error mEndOfArguments : "the function cannot be called in instruction: lost return value"
+#--- Add receiver as first parameter
+  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+  switch routineDescriptor.mRoutineCallingScheme
+  case staticCall :
+    effectiveParameterListIR += !.outputInput !currentObject # Add receiver as first argument
+  case propertyIndirectCall (*) :
+  end
+#---
+#  let isPublic = routineDescriptor.mIsPublic
+  let routineKind = routineDescriptor.mRoutineKind
+  let calleeMode = [routineKind executionMode]
+  let formalSignature = routineDescriptor.mSignature
+#--- Check routine is actually a function
+  if routineDescriptor.mReturnTypeProxy != .null then
+    error methodName : "not a procedure (returns a value)" : routineDescriptor
+  else
+  #--- Check modes
+    let calleeKind = checkMode (
+      !callerMode:inCurrentMode
+      !calleeMode:calleeMode
+      !kind:routineKind
+      !error:methodName.location
+    )
+  #--- Analyze effective parameters
+    analyzeEffectiveParametersNew (
+      !self:inSelfType
+      !formal:formalSignature
+      !effective:mArguments
+      !errorLocation:methodName.location
+      !callerForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !requiredMode:inCurrentMode
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      !?effectiveIR:effectiveParameterListIR
+    )
+  #--- Generate call
+    switch routineDescriptor.mRoutineCallingScheme
+    case staticCall :
+    #--- Code generation
+      ioInstructionGenerationList += !@staticRoutineCallIR.new {
+        !mAssignmentTargetAST.mIdentifier
+        !.null # No result
+        !routineMangledName
+        !LLVMInvocationRoutineName
+        !calleeKind
+        !effectiveParameterListIR
+      }
+    #--- Enter in invocation graph
+      [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+    case propertyIndirectCall (type) :
+      let propertyReference = @objectIR.temporaryReference {
+         !type:type
+         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !methodName}
+         !sliceMap:{}
+         !volatile:false
+      }
+      ioTemporaries.mTemporaryIndex ++
+      [!?ioInstructionGenerationList appendGetPropertyReference
+        !propertyReference
+        !currentObject
+        !methodName
+      ]
+    #--- Code generation
+      ioInstructionGenerationList += !@indirectRoutineCallIR.new {
+        !propertyReference
+        !type
+        !.null # No result
+        !effectiveParameterListIR
+      }
+    end
   end
 }
 

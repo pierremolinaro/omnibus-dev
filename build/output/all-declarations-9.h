@@ -157,32 +157,6 @@ void routine_analyzeEffectiveParametersNew (const class GALGAS_PLMType constinAr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'handleFunctionCallInExpression'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleFunctionCallInExpression (const class GALGAS_PLMType constinArgument0,
-                                             const class GALGAS_string constinArgument1,
-                                             const class GALGAS_bool constinArgument2,
-                                             const class GALGAS_bool constinArgument3,
-                                             const class GALGAS_bool constinArgument4,
-                                             const class GALGAS_lstring constinArgument5,
-                                             const class GALGAS_semanticContext constinArgument6,
-                                             const class GALGAS_mode constinArgument7,
-                                             class GALGAS_semanticTemporariesStruct & ioArgument8,
-                                             class GALGAS_staticStringMap & ioArgument9,
-                                             class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument10,
-                                             class GALGAS_allocaList & ioArgument11,
-                                             const class GALGAS_effectiveArgumentListAST constinArgument12,
-                                             const class GALGAS_location constinArgument13,
-                                             class GALGAS_instructionListIR & ioArgument14,
-                                             class GALGAS_objectIR & ioArgument15,
-                                             class GALGAS_PLMType & outArgument16,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Routine 'analyzeEffectiveParameters'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
