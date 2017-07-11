@@ -85,16 +85,6 @@ method @LValueWithoutSelfAST type
   !@PLMType outType
 {
   [inUniversalMap searchValuedObjectType !mIdentifier ?outType]
-
-#  if [inContext.mGlobalVariableMap hasKey !mIdentifier] then
-#    [inContext.mGlobalVariableMap searchKey !lkey:mIdentifier ?type:outType ?5*]
-#  elsif [inContext.mControlRegisterMap hasKey !mIdentifier] then
-#    [inContext.mControlRegisterMap searchKey !mIdentifier ?outType ?9*]
-#  elsif [inContext.mControlRegisterMap hasKey !mIdentifier] then
-#    [inContext.mControlRegisterMap searchKey !mIdentifier ?outType ?9*]
-#  else
-#    error mIdentifier : "???" :outType
-#  end
   for (access) in mAccessList do
     switch access
     case property (@lstring propertyName) :
@@ -247,8 +237,7 @@ proc handlePropertyAccessInAssignment
     [[ioObject type] structure
       ?typeName:*
       ?propertyMap:let structureObjectMap
-      ?universalMap:let unused universalMap
-      ?3*
+      ?4*
     ]
     if [structureObjectMap hasKey !inPropertyName] then
       [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property]

@@ -1518,6 +1518,18 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Extension method '@LValueSelfAST type'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_type (const class GALGAS_LValueSelfAST inObject,
+                           const class GALGAS_PLMType constin_inSelfType,
+                           class GALGAS_PLMType & out_outType,
+                           class C_Compiler * inCompiler
+                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                              Extension method '@LValueSelfAST analyzeAssignmentTarget'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
