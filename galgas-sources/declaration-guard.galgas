@@ -326,42 +326,105 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   @allocaList baseGuardAllocaList = {}
   @instructionListIR baseGuardInstructionGenerationList = {}
-  [mAssignmentTargetAST analyzeLValueNoSelf
-    !self: inSelfType
-    !targetAccessKind:.readWrite
-    !propertiesAreMutable: false
-    !directAccessToPropertiesAllowed: false
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-    !context: inContext
-    !mode:.guardMode
-    !?temporary: ioTemporaries
-    !?staticStringMap: ioGlobalLiteralStringMap
-    !?variableMap: ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca: baseGuardAllocaList
-    !?instructionListIR: baseGuardInstructionGenerationList
-    ?@objectIR currentObject
-    ?*
-    ?globalVariableReceiverName: let unused globalVariableReceiverName
+#--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
+  [ioUniversalMap searchValuedObject !mAssignmentTargetAST.mIdentifier ?@objectIR currentObject]
+  var currentErrorLocation = mAssignmentTargetAST.mIdentifier.location
+  var currentMap = ioUniversalMap
+#--- Insulate last access
+  var accessList = mAssignmentTargetAST.mAccessList
+  [!?accessList popLast ?let lastAccess]
+#---- Loop on access list
+  for (access) in accessList do
+    let currentType = [currentObject type]
+    switch access
+    case property (@lstring propertyName) :
+      if [currentType isStructure] then
+        [currentType structure ?2* ?universalMap:let universalMap ?3*]
+        [universalMap searchValuedObject !propertyName ?let propertyObject]
+        currentMap = universalMap
+        currentErrorLocation = propertyName.location
+        let newObject = @objectIR.temporaryReference {
+           !type:[propertyObject type]
+           !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+           !sliceMap:{}
+           !volatile:false
+        }
+        ioTemporaries.mTemporaryIndex ++
+        [!?baseGuardInstructionGenerationList appendGetPropertyReference
+          !newObject
+          !currentObject
+          !propertyName
+        ]
+        currentObject = newObject
+      else
+        error currentErrorLocation : "this object has no property" :currentObject
+      end
+    case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
+      error endOfIndex : "not handled yet" : currentObject
+    end
+  end
+#--- Handle last access
+  @lstring methodName
+  switch lastAccess
+  case property (@lstring propertyName) :
+    methodName = propertyName
+    let currentType = [currentObject type]
+    if [currentType isStructure] then
+      [currentType structure ?2* ?universalMap:let universalMap ?3*]
+      currentMap = universalMap
+      currentErrorLocation = propertyName.location
+    else
+      error currentErrorLocation : "this object has no property" : currentObject, methodName
+    end
+  case arrayAccess (* @location endOfIndex) :
+    error endOfIndex : "a property access is required here" : currentObject, methodName
+  end
+#--- Get function name and map containing the function definition
+  let routineMangledName = routineMangledNameFromCall (!"$" + [[currentObject type] key] !methodName !mArguments)
+#--- Get called function signature
+  let signature = [mArguments routineSignature !methodName.location]
+#--- Search function in map
+  [currentMap searchRoutine
+    !methodName
+    !signature
+    ?* # let @lstring LLVMInvocationRoutineName
+    ?@routineDescriptor routineDescriptor
   ]
-#--- Analyze arguments
-  if not [currentObject isPossibleFunction] then
-    error .nowhere : "object is not a function" : outConvenienceGuardGenerationIR
+#--- Add receiver as first parameter
+  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+  switch routineDescriptor.mRoutineCallingScheme
+  case staticCall :
+    effectiveParameterListIR += !.outputInput !currentObject # Add receiver as first argument
+  case propertyIndirectCall (*) :
+  end
+#---
+#  let isPublic = routineDescriptor.mIsPublic
+#  let routineKind = routineDescriptor.mRoutineKind
+#  let calleeMode = [routineKind executionMode]
+  let formalSignature = routineDescriptor.mSignature
+#--- Check routine is actually a function
+  if routineDescriptor.mReturnTypeProxy != .null then
+    error methodName : "not a procedure (returns a value)" : routineDescriptor, outConvenienceGuardGenerationIR
   else
-    [currentObject possibleFunction ?receiver:let receiver ?functionName:let functionName]
-    analyzeFunctionCallInExpression (
+  #--- Check modes
+#    let calleeKind = checkMode (
+#      !callerMode:inMode
+#      !calleeMode:calleeMode
+#      !kind:routineKind
+#      !error:methodName.location
+#    )
+  #--- Analyze effective parameters
+    analyzeEffectiveParametersNew (
       !self:inSelfType
-      !propertiesAreMutable:false
-      !directAccessToPropertiesAllowed:true
-      !receiver:receiver
-      !routineName:functionName
+      !formal:formalSignature
       !effective:mArguments
+      !errorLocation:methodName.location
       !callerForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !requiredMode:inMode
@@ -370,22 +433,20 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
       !?variableMap:ioUniversalMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList
-      ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-      ?routineKind:let @calleeKindIR unused routineKind
-      ?routineMangledName:let @lstring functionMangledName
-      ?routineNameForGeneration:let @lstring unused functionNameForGeneration
-      ?returnType:let @PLMType returnedType
+      !?effectiveIR:effectiveParameterListIR
     )
-    if returnedType != .void then
-      error functionName : "<< internal guard error >>"
+  #--- Generate call
+    switch routineDescriptor.mRoutineCallingScheme
+    case staticCall :
+      outConvenienceGuardGenerationIR = .convenienceGuard {
+        !baseGuardAllocaList:baseGuardAllocaList
+        !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+        !baseGuardMangledName:routineMangledName.string
+        !baseGuardEffectiveParameterList:effectiveParameterListIR
+      }
+    case propertyIndirectCall (*) :
+      error .nowhere : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
     end
-  #--- Code generation
-    outConvenienceGuardGenerationIR = .convenienceGuard {
-      !baseGuardAllocaList:baseGuardAllocaList
-      !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-      !baseGuardMangledName:functionMangledName.string
-      !baseGuardEffectiveParameterList:effectiveParameterListIR
-    }
   end
 }
 
