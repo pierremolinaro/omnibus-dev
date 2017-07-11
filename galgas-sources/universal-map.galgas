@@ -384,6 +384,33 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteA
 
 #·······················································································································
 
+method @universalPropertyAndRoutineMapForContext searchValuedObjectType
+  ?let @lstring inValuedObjectName
+  !@PLMType outType
+{
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let property ?*]
+  switch property
+  case undefined :
+    error inValuedObjectName : "undefined in this context" : outType
+  case property (* * *) :
+    error inValuedObjectName : "undefined in this context" : outType
+  case module (*) :
+    error inValuedObjectName : "undefined in this context" : outType
+  case register (* * @objectIR objectIR) :
+    outType = [objectIR type]
+  case globalConstant (*) :
+    error inValuedObjectName : "undefined in this context" : outType
+  case localConstant (*) :
+    error inValuedObjectName : "undefined in this context" : outType
+  case globalVariableReference (* @objectIR objectIR) :
+    outType = [objectIR type]
+  case localVariableReference (@objectIR objectIR) :
+    outType = [objectIR type]
+  end
+}
+
+#·······················································································································
+
 method @universalPropertyAndRoutineMapForContext searchRoutine
   ?let @lstring inRoutineName
   ?let @lstring inArgumentSignature
