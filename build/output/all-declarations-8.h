@@ -548,34 +548,6 @@ void routine_analyzeEffectiveParametersNew (const class GALGAS_PLMType constinAr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'analyzeFunctionCallInExpression'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeFunctionCallInExpression (const class GALGAS_PLMType constinArgument0,
-                                              const class GALGAS_bool constinArgument1,
-                                              const class GALGAS_bool constinArgument2,
-                                              const class GALGAS_objectIR constinArgument3,
-                                              const class GALGAS_lstring constinArgument4,
-                                              const class GALGAS_effectiveArgumentListAST constinArgument5,
-                                              const class GALGAS_lstring constinArgument6,
-                                              const class GALGAS_semanticContext constinArgument7,
-                                              const class GALGAS_mode constinArgument8,
-                                              class GALGAS_semanticTemporariesStruct & ioArgument9,
-                                              class GALGAS_staticStringMap & ioArgument10,
-                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument11,
-                                              class GALGAS_allocaList & ioArgument12,
-                                              class GALGAS_instructionListIR & ioArgument13,
-                                              class GALGAS_procCallEffectiveParameterListIR & outArgument14,
-                                              class GALGAS_calleeKindIR & outArgument15,
-                                              class GALGAS_lstring & outArgument16,
-                                              class GALGAS_lstring & outArgument17,
-                                              class GALGAS_PLMType & outArgument18,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                           Function 'getInfixOperatorMap'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

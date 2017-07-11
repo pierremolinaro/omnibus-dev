@@ -123,30 +123,6 @@ void routine_handleStandAloneFunctionCallInExpression (class GALGAS_internalRepr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Routine 'analyzeEffectiveParameters'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeEffectiveParameters (const class GALGAS_PLMType constinArgument0,
-                                         const class GALGAS_bool constinArgument1,
-                                         const class GALGAS_bool constinArgument2,
-                                         const class GALGAS_routineTypedSignature constinArgument3,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument4,
-                                         const class GALGAS_location constinArgument5,
-                                         const class GALGAS_lstring constinArgument6,
-                                         const class GALGAS_semanticContext constinArgument7,
-                                         const class GALGAS_mode constinArgument8,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument9,
-                                         class GALGAS_staticStringMap & ioArgument10,
-                                         class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument11,
-                                         class GALGAS_allocaList & ioArgument12,
-                                         class GALGAS_instructionListIR & ioArgument13,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument14,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                             Routine 'analyzeGuardCall'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
