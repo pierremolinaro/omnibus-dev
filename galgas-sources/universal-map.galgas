@@ -296,6 +296,33 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
   end
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @universalPropertyAndRoutineMapForContext searchValuedObject
+  ?let @lstring inValuedObjectName
+  !@objectIR outObjectIR
+{
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let property ?*]
+  switch property
+  case undefined :
+    error inValuedObjectName : "undefined in this context" : outObjectIR
+  case property (* @bool unused isPublic @objectIR objectIR) :
+    outObjectIR = objectIR
+  case module (@PLMType type) :
+    outObjectIR = .globalVariableReference {!type:type !plmName:inValuedObjectName}
+  case register (* * @objectIR objectIR) :
+    outObjectIR = objectIR
+  case globalConstant (@objectIR objectIR) :
+    outObjectIR = objectIR
+  case localConstant (@objectIR objectIR) :
+    outObjectIR = objectIR
+  case globalVariableReference (* @objectIR objectIR) :
+    outObjectIR = objectIR
+  case localVariableReference (@objectIR objectIR) :
+    outObjectIR = objectIR
+  end
+}
+
 #·······················································································································
 
 setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAccess
@@ -558,7 +585,13 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
   end
 #--- For current scope objects, check their final state
   for (lkey) in mLocalObjectList do
-    [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?let objectShouldBeValuedAtEndOfScope ?let possibleValuedObject ?*]
+    [mInternalPropertyAndRoutineMapForContext searchKey
+      !lkey
+      ?let currentObjectState
+      ?let objectShouldBeValuedAtEndOfScope
+      ?let possibleValuedObject
+      ?*
+    ]
     switch possibleValuedObject
     case undefined :
     case property (* * *) :
@@ -576,7 +609,7 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
       end
     end
   end
-#--- Remove cuurent scope objets, by setting their kind to "undefined"
+#--- Remove current scope objets, by setting their kind to "undefined"
   for (lkey) in mLocalObjectList do
     [!?mInternalPropertyAndRoutineMapForContext setMPossibleValuedObjectForKey !.undefined !lkey]
   end
