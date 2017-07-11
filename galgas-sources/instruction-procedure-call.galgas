@@ -237,8 +237,7 @@ method @LValueSelfAST analyzeTargetForRoutineCall
 #--- object access, with ou without self
   outGlobalVariableReceiverName = "" # Receiver is not a global variable
   if [inSelfType isStructure] then
-    [inSelfType structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?3*]
- ##     [universalMap searchProperty !mIdentifier ?* ?let object]
+    [inSelfType structure ?typeName:* ?propertyMap:let structureObjectMap ?4*]
     if [structureObjectMap hasKey !mIdentifier] then
       [structureObjectMap searchKey
         !mIdentifier
@@ -411,28 +410,6 @@ override method @complexCallNoSelfInstructionAST analyze
     ?globalVariableReceiverName:let globalVariableReceiverName
   ]
 #--- Analyze procedure call arguments
-#  handleFunctionCallInExpression (
-#    !self:inSelfType
-#    !globalVariableReceiverName:globalVariableReceiverName
-#    !propertiesAreMutable:inRoutineCanMutateProperties
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !inGuard:false
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !mArguments
-#    !mEndOfArguments
-#    !?ioInstructionGenerationList
-#    !?currentObject
-#    ?let returnedType
-#  )
-#  if returnedType != .void then
-#    error mEndOfArguments : "the function cannot be called in instruction: lost return value"
-#  end
   handleRoutineCallInInstruction (
     !internalRepresentation
     !self:inSelfType
@@ -597,7 +574,7 @@ private proc handleMethodCallInInstruction
   ?let @string inGlobalVariableReceiverName
   ?!@instructionListIR ioInstructionGenerationList
 {
-  [[inCurrentPointerIR type] structure ?2* ?universalMap:var currentMap ?3*]
+  [[inCurrentPointerIR type] structure ?2* ?universalMap:let currentMap ?3*]
   let routineMangledName = routineMangledNameFromCall (!"$" + [[inCurrentPointerIR type] key] !inMethodName !inArguments)
 #--- Get called function signature
   let signature = [inArguments routineSignature !inMethodName.location]
@@ -698,7 +675,7 @@ override method @complexCallSelfInstructionAST analyze
 {
   [mAssignmentTargetAST analyzeAssignmentTarget
     !self: inSelfType
-    !targetAccessKind:.read # § .readWrite
+    !targetAccessKind:.write
     !propertiesAreMutable: inRoutineCanMutateProperties
     !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph

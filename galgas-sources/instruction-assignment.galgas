@@ -88,13 +88,13 @@ override method @varAssignmentNoSelfInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  [mAssignmentTargetAST type !variableMap:ioUniversalMap ?let expressionType]
+  [mAssignmentTargetAST type !variableMap:ioUniversalMap ?let targetType]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:expressionType # [currentObject type]
+    !optionalTargetType:targetType
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -120,7 +120,7 @@ override method @varAssignmentNoSelfInstructionAST analyze
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR currentObject
-    ?@internalRepresentation internalRepresentation
+    ?*
     ?globalVariableReceiverName:let unused globalVariableReceiverName
   ]
   if [currentObject isPossibleFunction] then
@@ -135,7 +135,7 @@ override method @varAssignmentNoSelfInstructionAST analyze
   ]  
   let result = checkAssignmentCompatibility (
     !source:sourceOperand
-    !targetAnnotationType:expressionType # [currentObject type]
+    !targetAnnotationType:targetType
     !errorLocation:mAssignmentTargetAST.mIdentifier
     !staticTypeAllowed:false
   )
@@ -158,6 +158,23 @@ override method @varAssignmentSelfInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
+  [mAssignmentTargetAST type !self: inSelfType ?let targetType]
+#--- Analyze source expression
+  [mSourceExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:targetType # [currentObject type]
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR sourceOperandPossibleReference
+  ]
+#--- Analyze target
   [mAssignmentTargetAST analyzeAssignmentTarget
     !self: inSelfType
     !targetAccessKind:.write
@@ -178,21 +195,6 @@ override method @varAssignmentSelfInstructionAST analyze
   if [currentObject isPossibleFunction] then
     error [mAssignmentTargetAST mIdentifier] : "invalid assignment target" : currentObject
   end
-#--- Analyze source expression
-  [mSourceExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:[currentObject type]
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR sourceOperandPossibleReference
-  ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !sourceOperandPossibleReference
@@ -201,7 +203,7 @@ override method @varAssignmentSelfInstructionAST analyze
   ]  
   let result = checkAssignmentCompatibility (
     !source:sourceOperand
-    !targetAnnotationType:[currentObject type]
+    !targetAnnotationType:targetType # [currentObject type]
     !errorLocation:[mAssignmentTargetAST mIdentifier]
     !staticTypeAllowed:false
   )

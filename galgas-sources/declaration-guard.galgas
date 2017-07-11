@@ -347,7 +347,7 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
     !?alloca: baseGuardAllocaList
     !?instructionListIR: baseGuardInstructionGenerationList
     ?@objectIR currentObject
-    ?@internalRepresentation internalRepresentation
+    ?*
     ?globalVariableReceiverName: let unused globalVariableReceiverName
   ]
 #--- Analyze arguments

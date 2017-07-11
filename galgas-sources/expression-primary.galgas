@@ -319,7 +319,7 @@ override method @primaryInExpressionAST analyzeExpression
       var m = structureMap
       [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
       let newObject = @objectIR.temporaryReference {
-         !type:[masterPropertyIR type] # [currentPointer type]
+         !type:[masterPropertyIR type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
          !sliceMap:{}
          !volatile:false
@@ -649,7 +649,7 @@ proc handleMethodCallInExpressionNew
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outCallReturnedResult
 {
-  [[inCurrentPointerIR type] structure ?2* ?universalMap:var currentMap ?3*]
+  [[inCurrentPointerIR type] structure ?2* ?universalMap:let currentMap ?3*]
   let routineMangledName = routineMangledNameFromCall (!"$" + [[inCurrentPointerIR type] key] !inMethodName !inArguments)
 #--- Get called function signature
   let signature = [inArguments routineSignature !inMethodName.location]
@@ -1074,7 +1074,7 @@ proc analyzeFunctionCallInExpression
 #--- Special case : call a function from a static array during enumeration
   var specialCase = [receiverType isStructure]
   if specialCase then
-    [receiverType structure ?1* ?propertyMap:let @propertyMap propertyMap ?universalMap:let unused universalMap ?3*]
+    [receiverType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
     if [propertyMap hasKey !inRoutineName] then
       [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
       [propertyObject property ?type:let type ?2*]

@@ -62,6 +62,37 @@ method @LValueSelfAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrece
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+method @LValueSelfAST type
+  ?self:let @PLMType inSelfType
+  !@PLMType outType
+{
+  if [inSelfType isStructure] then
+    [inSelfType structure ?typeName:* ?propertyMap:let structureObjectMap ?4*]
+    [structureObjectMap searchKey !mIdentifier ?* ?let object]
+    outType = [object type]
+  else
+    error mSelfLocation : "'self' not available in this context" : outType
+  end
+  for (access) in mAccessList do
+    switch access
+    case property (@lstring propertyName) :
+      if [outType isStructure] then
+        [outType structure ?1* ?propertyMap:let propertyMap ?4*]
+        [propertyMap searchKey !propertyName ?* ?let propertyObject]
+        outType = [propertyObject type]
+      else
+        error propertyName : "receiver has no property" : outType
+      end
+    case arrayAccess (* *) :
+      if [outType isArrayType] then
+        [outType arrayType ?1* ?elementType:outType ?4*]
+      end
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 method @LValueSelfAST analyzeAssignmentTarget
   ?self:let @PLMType inSelfType
   ?targetAccessKind:let @targetAccessKind unused inSelfAccessKind
@@ -82,8 +113,7 @@ method @LValueSelfAST analyzeAssignmentTarget
 #--- object access, with ou without self
   outGlobalVariableReceiverName = "" # Receiver is not a global variable
   if [inSelfType isStructure] then
-    [inSelfType structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?3*]
- ##     [universalMap searchProperty !mIdentifier ?* ?let object]
+    [inSelfType structure ?typeName:* ?propertyMap:let structureObjectMap ?4*]
     if [structureObjectMap hasKey !mIdentifier] then
       [structureObjectMap searchKey
         !mIdentifier
