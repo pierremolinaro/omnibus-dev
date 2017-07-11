@@ -16523,9 +16523,9 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i89_parse (C_Lexique_
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i90_ (GALGAS_instructionListAST & ioArgument_ioInstructionList,
                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_callInstructionAST var_routineCallInstruction_1787 ;
-  nt_procedure_5F_call_ (var_routineCallInstruction_1787, inCompiler) ;
-  ioArgument_ioInstructionList.addAssign_operation (var_routineCallInstruction_1787  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 38)) ;
+  GALGAS_callInstructionAST var_routineCallInstruction_1800 ;
+  nt_procedure_5F_call_ (var_routineCallInstruction_1800, inCompiler) ;
+  ioArgument_ioInstructionList.addAssign_operation (var_routineCallInstruction_1800  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 38)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -16540,17 +16540,17 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i90_parse (C_Lexique_
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_procedure_5F_call_i91_ (GALGAS_callInstructionAST & outArgument_outInstruction,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outInstruction.drop () ; // Release 'out' argument
-  GALGAS_location var_instructionLocation_2053 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 44)) ;
-  GALGAS_LValueWithoutSelfAST var_assignmentTargetAST_2121 ;
-  nt_lvalue_5F_without_5F_self_ (var_assignmentTargetAST_2121, inCompiler) ;
-  GALGAS_effectiveArgumentListAST var_arguments_2163 ;
-  GALGAS_location var_endOfArguments_2183 ;
-  nt_effective_5F_parameters_ (var_arguments_2163, var_endOfArguments_2183, inCompiler) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_assignmentTargetAST_2121.getter_mAccessList (SOURCE_FILE ("instruction-procedure-call.galgas", 47)).getter_length (SOURCE_FILE ("instruction-procedure-call.galgas", 47)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  GALGAS_location var_instructionLocation_2066 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 44)) ;
+  GALGAS_LValueWithoutSelfAST var_assignmentTargetAST_2134 ;
+  nt_lvalue_5F_without_5F_self_ (var_assignmentTargetAST_2134, inCompiler) ;
+  GALGAS_effectiveArgumentListAST var_arguments_2176 ;
+  GALGAS_location var_endOfArguments_2196 ;
+  nt_effective_5F_parameters_ (var_arguments_2176, var_endOfArguments_2196, inCompiler) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_assignmentTargetAST_2134.getter_mAccessList (SOURCE_FILE ("instruction-procedure-call.galgas", 47)).getter_length (SOURCE_FILE ("instruction-procedure-call.galgas", 47)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    outArgument_outInstruction = GALGAS_simpleCallInstructionAST::constructor_new (var_instructionLocation_2053, var_arguments_2163, var_endOfArguments_2183, var_assignmentTargetAST_2121.getter_mIdentifier (SOURCE_FILE ("instruction-procedure-call.galgas", 48))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 48)) ;
+    outArgument_outInstruction = GALGAS_standAloneProcedureCallInstructionAST::constructor_new (var_instructionLocation_2066, var_arguments_2176, var_endOfArguments_2196, var_assignmentTargetAST_2134.getter_mIdentifier (HERE)  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 48)) ;
   }else if (kBoolFalse == test_0) {
-    outArgument_outInstruction = GALGAS_complexCallNoSelfInstructionAST::constructor_new (var_instructionLocation_2053, var_arguments_2163, var_endOfArguments_2183, var_assignmentTargetAST_2121  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 50)) ;
+    outArgument_outInstruction = GALGAS_complexCallNoSelfInstructionAST::constructor_new (var_instructionLocation_2066, var_arguments_2176, var_endOfArguments_2196, var_assignmentTargetAST_2134  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 55)) ;
   }
 }
 
@@ -16567,13 +16567,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_procedure_5F_call_i91_parse (C_Le
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_procedure_5F_call_i92_ (GALGAS_callInstructionAST & outArgument_outInstruction,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outInstruction.drop () ; // Release 'out' argument
-  GALGAS_location var_instructionLocation_2746 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 57)) ;
-  GALGAS_LValueSelfAST var_assignmentTargetAST_2811 ;
-  nt_lvalue_5F_with_5F_self_ (var_assignmentTargetAST_2811, inCompiler) ;
-  GALGAS_effectiveArgumentListAST var_arguments_2853 ;
-  GALGAS_location var_endOfArguments_2873 ;
-  nt_effective_5F_parameters_ (var_arguments_2853, var_endOfArguments_2873, inCompiler) ;
-  outArgument_outInstruction = GALGAS_complexCallSelfInstructionAST::constructor_new (var_instructionLocation_2746, var_arguments_2853, var_endOfArguments_2873, var_assignmentTargetAST_2811  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 60)) ;
+  GALGAS_location var_instructionLocation_2810 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 62)) ;
+  GALGAS_LValueSelfAST var_assignmentTargetAST_2875 ;
+  nt_lvalue_5F_with_5F_self_ (var_assignmentTargetAST_2875, inCompiler) ;
+  GALGAS_effectiveArgumentListAST var_arguments_2917 ;
+  GALGAS_location var_endOfArguments_2937 ;
+  nt_effective_5F_parameters_ (var_arguments_2917, var_endOfArguments_2937, inCompiler) ;
+  outArgument_outInstruction = GALGAS_complexCallSelfInstructionAST::constructor_new (var_instructionLocation_2810, var_arguments_2917, var_endOfArguments_2937, var_assignmentTargetAST_2875  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 65)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

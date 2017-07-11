@@ -95,6 +95,9 @@ project (1:0:0) -> "plm" {
   "galgas-sources/instruction-for-in-do.galgas"
   "galgas-sources/instruction-for-in-lower-upper-bounds.galgas"
   "galgas-sources/instruction-procedure-call.galgas"
+  "galgas-sources/instruction-procedure-call-standalone.galgas"
+  "galgas-sources/instruction-procedure-call-complex-no-self.galgas"
+  "galgas-sources/instruction-procedure-call-with-self.galgas"
   "galgas-sources/instruction-switch.galgas"
 
 #--- Instruction and expression helpers
