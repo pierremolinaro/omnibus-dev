@@ -53,13 +53,13 @@ override method @complexCallNoSelfInstructionAST analyze
         [universalMap searchValuedObject !propertyName ?let propertyObject]
         currentMap = universalMap
         currentErrorLocation = propertyName.location
-        ioTemporaries.mTemporaryIndex ++
         let newObject = @objectIR.temporaryReference {
            !type:[propertyObject type]
            !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
            !sliceMap:{}
            !volatile:false
         }
+        ioTemporaries.mTemporaryIndex ++
         [!?ioInstructionGenerationList appendGetPropertyReference
           !newObject
           !currentObject
