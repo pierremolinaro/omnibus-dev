@@ -11660,7 +11660,7 @@ void extensionMethod_analyzeTargetForRoutineCall (const GALGAS_LValueWithoutSelf
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outCurrentObject.drop () ; // Release 'out' argument
   outArgument_outGlobalVariableReceiverName.drop () ; // Release 'out' argument
-  const enumGalgasBool test_0 = ioArgument_ioVariableMap.getter_hasKey (inObject.mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 44)) COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 44)).boolEnum () ;
+  const enumGalgasBool test_0 = ioArgument_ioVariableMap.getter_hasKey (inObject.mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 329)) COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 329)).boolEnum () ;
   if (kBoolTrue == test_0) {
     switch (constinArgument_inSelfAccessKind.enumValue ()) {
     case GALGAS_targetAccessKind::kNotBuilt:
@@ -11668,39 +11668,39 @@ void extensionMethod_analyzeTargetForRoutineCall (const GALGAS_LValueWithoutSelf
     case GALGAS_targetAccessKind::kEnum_read:
       {
         {
-        GALGAS_PLMType joker_2547_2 ; // Joker input parameter
-        GALGAS_bool joker_2547_1 ; // Joker input parameter
-        GALGAS_bool joker_2578_2 ; // Joker input parameter
-        GALGAS_bool joker_2578_1 ; // Joker input parameter
-        ioArgument_ioVariableMap.setter_searchForReadAccess (inObject.mProperty_mIdentifier, joker_2547_2, joker_2547_1, outArgument_outCurrentObject, joker_2578_2, joker_2578_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 47)) ;
+        GALGAS_PLMType joker_13637_2 ; // Joker input parameter
+        GALGAS_bool joker_13637_1 ; // Joker input parameter
+        GALGAS_bool joker_13668_2 ; // Joker input parameter
+        GALGAS_bool joker_13668_1 ; // Joker input parameter
+        ioArgument_ioVariableMap.setter_searchForReadAccess (inObject.mProperty_mIdentifier, joker_13637_2, joker_13637_1, outArgument_outCurrentObject, joker_13668_2, joker_13668_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 332)) ;
         }
       }
       break ;
     case GALGAS_targetAccessKind::kEnum_write:
       {
         {
-        GALGAS_PLMType joker_2662_2 ; // Joker input parameter
-        GALGAS_bool joker_2662_1 ; // Joker input parameter
-        GALGAS_bool joker_2693_2 ; // Joker input parameter
-        GALGAS_bool joker_2693_1 ; // Joker input parameter
-        ioArgument_ioVariableMap.setter_searchForWriteAccess (inObject.mProperty_mIdentifier, joker_2662_2, joker_2662_1, outArgument_outCurrentObject, joker_2693_2, joker_2693_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 49)) ;
+        GALGAS_PLMType joker_13752_2 ; // Joker input parameter
+        GALGAS_bool joker_13752_1 ; // Joker input parameter
+        GALGAS_bool joker_13783_2 ; // Joker input parameter
+        GALGAS_bool joker_13783_1 ; // Joker input parameter
+        ioArgument_ioVariableMap.setter_searchForWriteAccess (inObject.mProperty_mIdentifier, joker_13752_2, joker_13752_1, outArgument_outCurrentObject, joker_13783_2, joker_13783_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 334)) ;
         }
       }
       break ;
     case GALGAS_targetAccessKind::kEnum_readWrite:
       {
         {
-        GALGAS_PLMType joker_2785_2 ; // Joker input parameter
-        GALGAS_bool joker_2785_1 ; // Joker input parameter
-        GALGAS_bool joker_2816_2 ; // Joker input parameter
-        GALGAS_bool joker_2816_1 ; // Joker input parameter
-        ioArgument_ioVariableMap.setter_searchForReadWriteAccess (inObject.mProperty_mIdentifier, joker_2785_2, joker_2785_1, outArgument_outCurrentObject, joker_2816_2, joker_2816_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 51)) ;
+        GALGAS_PLMType joker_13875_2 ; // Joker input parameter
+        GALGAS_bool joker_13875_1 ; // Joker input parameter
+        GALGAS_bool joker_13906_2 ; // Joker input parameter
+        GALGAS_bool joker_13906_1 ; // Joker input parameter
+        ioArgument_ioVariableMap.setter_searchForReadWriteAccess (inObject.mProperty_mIdentifier, joker_13875_2, joker_13875_1, outArgument_outCurrentObject, joker_13906_2, joker_13906_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 336)) ;
         }
       }
       break ;
     }
     GALGAS_string temp_1 ;
-    const enumGalgasBool test_2 = outArgument_outCurrentObject.getter_isGlobalVariableReference (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 53)).boolEnum () ;
+    const enumGalgasBool test_2 = outArgument_outCurrentObject.getter_isGlobalVariableReference (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 338)).boolEnum () ;
     if (kBoolTrue == test_2) {
       temp_1 = inObject.mProperty_mIdentifier.getter_string (HERE) ;
     }else if (kBoolFalse == test_2) {
@@ -11708,43 +11708,43 @@ void extensionMethod_analyzeTargetForRoutineCall (const GALGAS_LValueWithoutSelf
     }
     outArgument_outGlobalVariableReceiverName = temp_1 ;
   }else if (kBoolFalse == test_0) {
-    outArgument_outCurrentObject = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_null (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 55)), inObject.mProperty_mIdentifier  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 55)) ;
+    outArgument_outCurrentObject = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_null (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 340)), inObject.mProperty_mIdentifier  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 340)) ;
     outArgument_outGlobalVariableReceiverName = GALGAS_string::makeEmptyString () ;
   }
-  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, inObject.mProperty_mAccessList.getter_length (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 59)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, inObject.mProperty_mAccessList.getter_length (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 344)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
     {
     ioArgument_ioUniversalMap.insulate (HERE) ;
-    cPtr_universalPropertyAndRoutineMapForContext * ptr_3211 = (cPtr_universalPropertyAndRoutineMapForContext *) ioArgument_ioUniversalMap.ptr () ;
-    callExtensionSetter_searchValuedObjectForWriteAccess ((cPtr_universalPropertyAndRoutineMapForContext *) ptr_3211, inObject.mProperty_mIdentifier, outArgument_outCurrentObject, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 60)) ;
+    cPtr_universalPropertyAndRoutineMapForContext * ptr_14301 = (cPtr_universalPropertyAndRoutineMapForContext *) ioArgument_ioUniversalMap.ptr () ;
+    callExtensionSetter_searchValuedObjectForWriteAccess ((cPtr_universalPropertyAndRoutineMapForContext *) ptr_14301, inObject.mProperty_mIdentifier, outArgument_outCurrentObject, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 345)) ;
     }
   }else if (kBoolFalse == test_3) {
-    cEnumerator_accessInAssignmentListAST enumerator_3315 (inObject.mProperty_mAccessList, kENUMERATION_UP) ;
-    while (enumerator_3315.hasCurrentObject ()) {
-      switch (enumerator_3315.current_mAccess (HERE).enumValue ()) {
+    cEnumerator_accessInAssignmentListAST enumerator_14405 (inObject.mProperty_mAccessList, kENUMERATION_UP) ;
+    while (enumerator_14405.hasCurrentObject ()) {
+      switch (enumerator_14405.current_mAccess (HERE).enumValue ()) {
       case GALGAS_accessInAssignmentAST::kNotBuilt:
         break ;
       case GALGAS_accessInAssignmentAST::kEnum_property:
         {
-          const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_3547 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_3315.current_mAccess (HERE).unsafePointer ()) ;
-          const GALGAS_lstring extractedValue_propertyName = extractPtr_3547->mAssociatedValue0 ;
+          const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_14637 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_14405.current_mAccess (HERE).unsafePointer ()) ;
+          const GALGAS_lstring extractedValue_propertyName = extractPtr_14637->mAssociatedValue0 ;
           {
-          routine_handlePropertyAccessInAssignment (outArgument_outCurrentObject, extractedValue_propertyName, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 65)) ;
+          routine_handlePropertyAccessInAssignment (outArgument_outCurrentObject, extractedValue_propertyName, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 350)) ;
           }
         }
         break ;
       case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
         {
-          const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_4248 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_3315.current_mAccess (HERE).unsafePointer ()) ;
-          const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_4248->mAssociatedValue0 ;
-          const GALGAS_location extractedValue_endOfExpression = extractPtr_4248->mAssociatedValue1 ;
+          const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_15338 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_14405.current_mAccess (HERE).unsafePointer ()) ;
+          const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_15338->mAssociatedValue0 ;
+          const GALGAS_location extractedValue_endOfExpression = extractPtr_15338->mAssociatedValue1 ;
           {
-          routine_handleSubscriptInAssignmentAndExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfExpression, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 72)) ;
+          routine_handleSubscriptInAssignmentAndExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfExpression, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 357)) ;
           }
         }
         break ;
       }
-      enumerator_3315.gotoNextObject () ;
+      enumerator_14405.gotoNextObject () ;
     }
   }
 }
@@ -11777,58 +11777,58 @@ void extensionMethod_analyzeTargetForRoutineCall (const GALGAS_LValueSelfAST inO
   outArgument_outCurrentObject.drop () ; // Release 'out' argument
   outArgument_outGlobalVariableReceiverName.drop () ; // Release 'out' argument
   outArgument_outGlobalVariableReceiverName = GALGAS_string::makeEmptyString () ;
-  const enumGalgasBool test_0 = constinArgument_inSelfType.getter_isStructure (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 115)).boolEnum () ;
+  const enumGalgasBool test_0 = constinArgument_inSelfType.getter_isStructure (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 400)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_propertyMap var_structureObjectMap_5513 ;
-    GALGAS_lstring joker_5476 ; // Joker input parameter
-    GALGAS_universalPropertyAndRoutineMapForContext joker_5515_4 ; // Joker input parameter
-    GALGAS_propertyList joker_5515_3 ; // Joker input parameter
-    GALGAS_uint joker_5515_2 ; // Joker input parameter
-    GALGAS_string joker_5515_1 ; // Joker input parameter
-    constinArgument_inSelfType.method_structure (joker_5476, var_structureObjectMap_5513, joker_5515_4, joker_5515_3, joker_5515_2, joker_5515_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 116)) ;
-    const enumGalgasBool test_1 = var_structureObjectMap_5513.getter_hasKey (inObject.mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 117)) COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 117)).boolEnum () ;
+    GALGAS_propertyMap var_structureObjectMap_16603 ;
+    GALGAS_lstring joker_16566 ; // Joker input parameter
+    GALGAS_universalPropertyAndRoutineMapForContext joker_16605_4 ; // Joker input parameter
+    GALGAS_propertyList joker_16605_3 ; // Joker input parameter
+    GALGAS_uint joker_16605_2 ; // Joker input parameter
+    GALGAS_string joker_16605_1 ; // Joker input parameter
+    constinArgument_inSelfType.method_structure (joker_16566, var_structureObjectMap_16603, joker_16605_4, joker_16605_3, joker_16605_2, joker_16605_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 401)) ;
+    const enumGalgasBool test_1 = var_structureObjectMap_16603.getter_hasKey (inObject.mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 402)) COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 402)).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_objectIR var_object_5659 ;
-      GALGAS_bool joker_5638 ; // Joker input parameter
-      var_structureObjectMap_5513.method_searchKey (inObject.mProperty_mIdentifier, joker_5638, var_object_5659, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 118)) ;
+      GALGAS_objectIR var_object_16749 ;
+      GALGAS_bool joker_16728 ; // Joker input parameter
+      var_structureObjectMap_16603.method_searchKey (inObject.mProperty_mIdentifier, joker_16728, var_object_16749, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 403)) ;
       {
-      routine_handleSelfAccessInAssignment (constinArgument_inSelfType, var_object_5659, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 123)) ;
+      routine_handleSelfAccessInAssignment (constinArgument_inSelfType, var_object_16749, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 408)) ;
       }
     }else if (kBoolFalse == test_1) {
-      outArgument_outCurrentObject = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_selfObject (constinArgument_inSelfType  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 131)), inObject.mProperty_mIdentifier  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 131)) ;
+      outArgument_outCurrentObject = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_selfObject (constinArgument_inSelfType  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 416)), inObject.mProperty_mIdentifier  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 416)) ;
     }
   }else if (kBoolFalse == test_0) {
     TC_Array <C_FixItDescription> fixItArray2 ;
-    inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 134)), GALGAS_string ("'self' should be a structure instance"), fixItArray2  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 134)) ;
+    inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 419)), GALGAS_string ("'self' should be a structure instance"), fixItArray2  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 419)) ;
     outArgument_outCurrentObject.drop () ; // Release error dropped variable
     outArgument_outGlobalVariableReceiverName.drop () ; // Release error dropped variable
   }
-  cEnumerator_accessInAssignmentListAST enumerator_6176 (inObject.mProperty_mAccessList, kENUMERATION_UP) ;
-  while (enumerator_6176.hasCurrentObject ()) {
-    switch (enumerator_6176.current_mAccess (HERE).enumValue ()) {
+  cEnumerator_accessInAssignmentListAST enumerator_17266 (inObject.mProperty_mAccessList, kENUMERATION_UP) ;
+  while (enumerator_17266.hasCurrentObject ()) {
+    switch (enumerator_17266.current_mAccess (HERE).enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_property:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_6392 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_6176.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_propertyName = extractPtr_6392->mAssociatedValue0 ;
+        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_17482 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_17266.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_propertyName = extractPtr_17482->mAssociatedValue0 ;
         {
-        routine_handlePropertyAccessInAssignment (outArgument_outCurrentObject, extractedValue_propertyName, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 140)) ;
+        routine_handlePropertyAccessInAssignment (outArgument_outCurrentObject, extractedValue_propertyName, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 425)) ;
         }
       }
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_7057 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_6176.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_7057->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfExpression = extractPtr_7057->mAssociatedValue1 ;
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_18147 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_17266.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_18147->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfExpression = extractPtr_18147->mAssociatedValue1 ;
         {
-        routine_handleSubscriptInAssignmentAndExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfExpression, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 147)) ;
+        routine_handleSubscriptInAssignmentAndExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfExpression, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 432)) ;
         }
       }
       break ;
     }
-    enumerator_6176.gotoNextObject () ;
+    enumerator_17266.gotoNextObject () ;
   }
 }
 
