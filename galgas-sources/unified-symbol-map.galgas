@@ -295,7 +295,7 @@ shared map @unifiedSymbolMapEx %selectors {
   }
 
 #--- Output formal parameter
-  state undefinedOutputFormalArgument error "the '%K' output formal parameter is undefined" {
+  state undefinedOutputFormalArgument { # error "the '%K' output formal parameter is undefined" {
     neutralAccess   -> undefinedOutputFormalArgument
     readAccess      -> undefinedOutputFormalArgument error "an undefined output formal parameter cannot be read"
     writeAccess     -> definedOutputFormalArgument

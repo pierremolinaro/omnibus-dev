@@ -787,7 +787,7 @@ static const cMapAutomatonFinalIssue kMapAutomatonFinalIssue_unifiedSymbolMapEx 
   {kMapAutomatonNoIssue, ""},// state 'definedLocalVariable' (index 6)
   {kMapAutomatonNoIssue, ""},// state 'usedLocalVariable' (index 7)
   {kMapAutomatonNoIssue, ""},// state 'droppedLocalVariable' (index 8)
-  {kMapAutomatonIssueError, "the '%K' output formal parameter is undefined"},// state 'undefinedOutputFormalArgument' (index 9)
+  {kMapAutomatonNoIssue, ""},// state 'undefinedOutputFormalArgument' (index 9)
   {kMapAutomatonNoIssue, ""},// state 'definedOutputFormalArgument' (index 10)
   {kMapAutomatonIssueWarning, "the '%K' input/output formal parameter is unused"},// state 'unusedInputOutputFormalArgument' (index 11)
   {kMapAutomatonNoIssue, ""},// state 'usedInputOutputFormalArgument' (index 12)

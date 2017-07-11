@@ -95,9 +95,54 @@ method @LValueWithoutSelfAST analyzeLValueNoSelf
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !@objectIR outCurrentObject
+  !@internalRepresentation outInternalRepresentation
   !globalVariableReceiverName:@string outGlobalVariableReceiverName
 {
 #--- object access, with ou without self
+  outInternalRepresentation = .standAloneIdentifier {!identifier:mIdentifier}
+  for (access) in mAccessList do
+    switch access
+    case property (@lstring propertyName) :
+      handlePropertyAccessInExpression (
+        !?outInternalRepresentation
+        !propertyName
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:.void
+        !context:inContext
+        !mode:inCurrentMode
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioUniversalMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+      )
+    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+      handleArrayAccessInExpression (
+        !?outInternalRepresentation
+        !indexExpression
+        !endOfIndex
+        !self:inSelfType
+        !inGuard:false
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:.void
+        !context:inContext
+        !mode:inCurrentMode
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioUniversalMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+      )
+    end
+  end
+
+
+
+
+
+
+
+#--------------------------------------------------- EX
   if [ioVariableMap hasKey !mIdentifier] then
     switch inSelfAccessKind
     case read :

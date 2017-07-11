@@ -21,7 +21,11 @@ enum $guardState {
 
 extern func user taskGuardState (?taskIndex: inIndex $uint32) -> $guardState : "taskGuardState"
 
+extern func user taskAllocatedStackSize (?taskIndex: inIndex $uint32) -> $uint32 : "taskAllocatedStackSize"
+
 extern func user taskFreeStackSize (?taskIndex: inIndex $uint32) -> $uint32 : "taskFreeStackSize"
+
+extern func user taskName (?taskIndex: inIndex $uint32) -> $staticString : "taskName"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   SYNCHRONIZATION TOOLS ROUTINES                                                                                     

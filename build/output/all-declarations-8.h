@@ -529,15 +529,14 @@ void routine_analyzeFunctionCallInExpression (const class GALGAS_PLMType constin
                                               const class GALGAS_mode constinArgument8,
                                               class GALGAS_semanticTemporariesStruct & ioArgument9,
                                               class GALGAS_staticStringMap & ioArgument10,
-                                              class GALGAS_unifiedSymbolMapEx & ioArgument11,
-                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument12,
-                                              class GALGAS_allocaList & ioArgument13,
-                                              class GALGAS_instructionListIR & ioArgument14,
-                                              class GALGAS_procCallEffectiveParameterListIR & outArgument15,
-                                              class GALGAS_calleeKindIR & outArgument16,
+                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument11,
+                                              class GALGAS_allocaList & ioArgument12,
+                                              class GALGAS_instructionListIR & ioArgument13,
+                                              class GALGAS_procCallEffectiveParameterListIR & outArgument14,
+                                              class GALGAS_calleeKindIR & outArgument15,
+                                              class GALGAS_lstring & outArgument16,
                                               class GALGAS_lstring & outArgument17,
-                                              class GALGAS_lstring & outArgument18,
-                                              class GALGAS_PLMType & outArgument19,
+                                              class GALGAS_PLMType & outArgument18,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
