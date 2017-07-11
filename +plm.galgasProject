@@ -7,7 +7,7 @@ project (1:0:0) -> "plm" {
 #  %makefile-win32-on-macosx
 #  %codeblocks-mac
   %SierraElCapitan
-  %applicationBundleBase : "fr.irccyn.ec-nantes"
+  %applicationBundleBase : "pierre.molinaro.name"
 
   %quietOutputByDefault
 

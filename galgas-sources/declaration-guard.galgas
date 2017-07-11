@@ -347,6 +347,7 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
     !?alloca: baseGuardAllocaList
     !?instructionListIR: baseGuardInstructionGenerationList
     ?@objectIR currentObject
+    ?@internalRepresentation internalRepresentation
     ?globalVariableReceiverName: let unused globalVariableReceiverName
   ]
 #--- Analyze arguments
@@ -366,7 +367,6 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
       !requiredMode:inMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList
@@ -438,7 +438,6 @@ override method @complexCallSelfInstructionAST baseGuardAnalyze
       !requiredMode:inMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList

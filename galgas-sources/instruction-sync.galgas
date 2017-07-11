@@ -357,19 +357,33 @@ proc analyzeGuardCall
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
 #--- Analyze effective parameters
-  analyzeEffectiveParameters (
+#  analyzeEffectiveParameters (
+#    !self:inSelfType
+#    !directAccessToPropertiesAllowed:true
+#    !propertiesAreMutable:true
+#    !formal:formalSignature
+#    !effective:inEffectiveParameterList
+#    !errorLocation:inGuardName.location
+#    !callerForInvocationGraph:outGuardMangledName
+#    !context:inContext
+#    !requiredMode:inRequiredMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    !?effectiveIR:outEffectiveParameterListIR
+#  )
+  analyzeEffectiveParametersNew (
     !self:inSelfType
-    !directAccessToPropertiesAllowed:true
-    !propertiesAreMutable:true
     !formal:formalSignature
     !effective:inEffectiveParameterList
     !errorLocation:inGuardName.location
-    !callerForInvocationGraph:outGuardMangledName
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
     !requiredMode:inRequiredMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList

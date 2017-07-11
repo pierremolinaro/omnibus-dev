@@ -215,6 +215,16 @@ extern GuardState taskGuardState (const unsigned inIndex) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+//  T A S K    N A M E                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const char * taskName (const unsigned inIndex)  asm ("!FUNC!taskName") ;
+
+extern const char * taskName (const unsigned inIndex) {
+  return gTaskDescriptorArray [inIndex].mTaskName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //  T A S K    F R E E   S T A S K    S I Z E                                                                          *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -222,6 +232,16 @@ extern unsigned taskFreeStackSize (const unsigned inIndex)  asm ("!FUNC!taskFree
 
 extern unsigned taskFreeStackSize (const unsigned inIndex) {
   return gTaskDescriptorArray [inIndex].mStackFreeSize ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  T A S K    A L L O C A T E D   S T A S K    S I Z E                                                                *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern unsigned taskAllocatedStackSize (const unsigned inIndex)  asm ("!FUNC!taskAllocatedStackSize") ;
+
+extern unsigned taskAllocatedStackSize (const unsigned inIndex) {
+  return gTaskDescriptorArray [inIndex].mStackBufferSize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

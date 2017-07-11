@@ -341,7 +341,7 @@ override method @primaryInExpressionAST analyzeExpression
 
 #·······················································································································
 
-private proc handlePropertyAccessInExpression
+proc handlePropertyAccessInExpression
   ?!@internalRepresentation ioInternalRepresentation
   ?let @lstring inPropertyName
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
@@ -477,7 +477,7 @@ private proc handlePropertyAccessInExpression
 
 #·······················································································································
 
-private proc handleArrayAccessInExpression
+proc handleArrayAccessInExpression
   ?!@internalRepresentation ioInternalRepresentation
   ?let @expressionAST inIndexExpression
   ?let @location inEndOfIndex
@@ -566,7 +566,7 @@ private proc handleArrayAccessInExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handleFunctionCallInExpressionNew
+proc handleFunctionCallInExpressionNew
   ?!@internalRepresentation ioInternalRepresentation
   ?self:let @PLMType inSelfType
   ?inGuard:let @bool inGuard
@@ -993,7 +993,6 @@ proc handleFunctionCallInExpression
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @effectiveArgumentListAST inArguments 
@@ -1021,7 +1020,6 @@ proc handleFunctionCallInExpression
       !requiredMode:inMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -1061,7 +1059,6 @@ proc analyzeFunctionCallInExpression
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -1147,7 +1144,6 @@ proc analyzeFunctionCallInExpression
     !requiredMode:inRequiredMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
@@ -1169,7 +1165,6 @@ proc analyzeEffectiveParameters
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -1190,24 +1185,24 @@ proc analyzeEffectiveParameters
       let objectIR = @objectIR.localVariableReference {!type:type !plmName:varLLVMName}
       if constant then
         [!?ioUniversalMap insertLocalConstant !name !objectIR]
-        [!?ioVariableMap insertConstant
-          !lkey:name
-          !type:type
-          !readAccessAllowed:true
-          !objectIR:objectIR
-          !copyable:true
-          !canBeUsedAsInputParameter:true
-        ]
+#        [!?ioVariableMap insertConstant
+#          !lkey:name
+#          !type:type
+#          !readAccessAllowed:true
+#          !objectIR:objectIR
+#          !copyable:true
+#          !canBeUsedAsInputParameter:true
+#        ]
       else
         [!?ioUniversalMap insertLocalVariable !name !objectIR !.hasUnreadValue !false]
-        [!?ioVariableMap insertDefinedVariable
-          !lkey:name
-          !type:type
-          !readAccessAllowed:true
-          !objectIR:objectIR
-          !copyable:true
-          !canBeUsedAsInputParameter:true
-        ]
+#        [!?ioVariableMap insertDefinedVariable
+#          !lkey:name
+#          !type:type
+#          !readAccessAllowed:true
+#          !objectIR:objectIR
+#          !copyable:true
+#          !canBeUsedAsInputParameter:true
+#        ]
       end
       ioAllocaList += !varLLVMName ![type llvmTypeName]
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
@@ -1215,24 +1210,25 @@ proc analyzeEffectiveParameters
         !.input
         !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!varLLVMName) !varLLVMName} !sliceMap:{}}
     case input (@lstring name) :
-      [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
-      [!?ioVariableMap searchForWriteAccess
-        !lkey:name
-        ?type:let type
-        ?readAccessAllowed:let accessIsAllowed
-        ?objectIR:* #let objectIR
-        ?copyable:let isCopyable                                                 
-        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
-      ]
-      if not accessIsAllowed then
-        error name : "routine has no access right on the this variable"
-      end
-      if not canBeUsedAsInputParameter then
-        error name : "this variable cannot be used as input parameter"
-      end
-      if not isCopyable then
-        error name : "an $" + [type key] + " instance is not copyable"
-      end
+      [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let @objectIR objectIR]
+      let type = [objectIR type]
+#      [!?ioVariableMap searchForWriteAccess
+#        !lkey:name
+#        ?type:*
+#        ?readAccessAllowed:let accessIsAllowed
+#        ?objectIR:* #let objectIR
+#        ?copyable:let isCopyable                                                 
+#        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
+#      ]
+#      if not accessIsAllowed then
+#        error name : "routine has no access right on the this variable"
+#      end
+#      if not canBeUsedAsInputParameter then
+#        error name : "this variable cannot be used as input parameter"
+#      end
+#      if not isCopyable then
+#        error name : "an $" + [type key] + " instance is not copyable"
+#      end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
@@ -1267,20 +1263,22 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![formal_mTypeProxy type]
       ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
-      [!?ioVariableMap searchForReadWriteAccess
-        !lkey:name
-        ?type:let type
-        ?readAccessAllowed:let accessIsAllowed
-        ?objectIR:let objectIR
-        ?1*
-        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
-      ]
-      if not canBeUsedAsInputParameter then
-        error name : "this variable cannot be used as output/input parameter"
-      end
-      if not accessIsAllowed then
-        error name : "routine has no access right on the this variable"
-      end
+      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !name ?let @objectIR objectIR]
+      let type = [objectIR type]
+#      [!?ioVariableMap searchForReadWriteAccess
+#        !lkey:name
+#        ?type:let type
+#        ?readAccessAllowed:let accessIsAllowed
+#        ?objectIR:let objectIR
+#        ?1*
+#        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
+#      ]
+#      if not canBeUsedAsInputParameter then
+#        error name : "this variable cannot be used as output/input parameter"
+#      end
+#      if not accessIsAllowed then
+#        error name : "routine has no access right on the this variable"
+#      end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       let argumentIR = @objectIR.llvmTemporaryValue {
         !type:type

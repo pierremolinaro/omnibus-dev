@@ -104,6 +104,7 @@ override method @varAssignmentNoSelfInstructionAST analyze
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR currentObject
+    ?@internalRepresentation internalRepresentation
     ?globalVariableReceiverName:let unused globalVariableReceiverName
   ]
   if [currentObject isPossibleFunction] then

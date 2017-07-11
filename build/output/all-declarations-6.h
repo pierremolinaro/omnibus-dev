@@ -1395,9 +1395,53 @@ void extensionMethod_analyzeLValueNoSelf (const class GALGAS_LValueWithoutSelfAS
                                           class GALGAS_allocaList & io_ioAllocaList,
                                           class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                           class GALGAS_objectIR & out_outCurrentObject,
+                                          class GALGAS_internalRepresentation & out_outInternalRepresentation,
                                           class GALGAS_string & out_outGlobalVariableReceiverName,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Routine 'handleArrayAccessInExpression'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleArrayAccessInExpression (class GALGAS_internalRepresentation & ioArgument0,
+                                            const class GALGAS_expressionAST constinArgument1,
+                                            const class GALGAS_location constinArgument2,
+                                            const class GALGAS_PLMType constinArgument3,
+                                            const class GALGAS_bool constinArgument4,
+                                            const class GALGAS_lstring constinArgument5,
+                                            const class GALGAS_PLMType constinArgument6,
+                                            const class GALGAS_semanticContext constinArgument7,
+                                            const class GALGAS_mode constinArgument8,
+                                            class GALGAS_semanticTemporariesStruct & ioArgument9,
+                                            class GALGAS_staticStringMap & ioArgument10,
+                                            class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument11,
+                                            class GALGAS_allocaList & ioArgument12,
+                                            class GALGAS_instructionListIR & ioArgument13,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Routine 'handlePropertyAccessInExpression'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handlePropertyAccessInExpression (class GALGAS_internalRepresentation & ioArgument0,
+                                               const class GALGAS_lstring constinArgument1,
+                                               const class GALGAS_lstring constinArgument2,
+                                               const class GALGAS_PLMType constinArgument3,
+                                               const class GALGAS_semanticContext constinArgument4,
+                                               const class GALGAS_mode constinArgument5,
+                                               class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                               class GALGAS_staticStringMap & ioArgument7,
+                                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
+                                               class GALGAS_allocaList & ioArgument9,
+                                               class GALGAS_instructionListIR & ioArgument10,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
