@@ -251,7 +251,6 @@ proc guardSemanticAnalysis
       !mode:.userMode # Convenience guards instructions are executed in user mode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-      !?variableMap:variableMap
       !?variableMap:universalMap
       ?convenienceGuardGenerationIR
     ]
@@ -297,7 +296,6 @@ abstract method @callInstructionAST baseGuardAnalyze
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 
@@ -310,7 +308,6 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?mode:let @mode unused inMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
@@ -326,7 +323,6 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
@@ -459,7 +455,6 @@ override method @complexCallSelfInstructionAST baseGuardAnalyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {

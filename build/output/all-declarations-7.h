@@ -428,9 +428,8 @@ typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (co
                                                                               const class GALGAS_mode constinArgument3,
                                                                               class GALGAS_semanticTemporariesStruct & ioArgument4,
                                                                               class GALGAS_staticStringMap & ioArgument5,
-                                                                              class GALGAS_unifiedSymbolMapEx & ioArgument6,
-                                                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
-                                                                              class GALGAS_guardKindGenerationIR & outArgument8,
+                                                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument6,
+                                                                              class GALGAS_guardKindGenerationIR & outArgument7,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -448,7 +447,6 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            const GALGAS_mode constin_inMode,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                           GALGAS_unifiedSymbolMapEx & io_ioVariableMap,
                                            GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
                                            GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
                                            C_Compiler * inCompiler
