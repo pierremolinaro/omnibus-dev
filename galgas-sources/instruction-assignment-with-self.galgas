@@ -2,13 +2,6 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @varAssignmentNoSelfInstructionAST : @instructionAST {
-  @LValueWithoutSelfAST mAssignmentTargetAST
-  @expressionAST mSourceExpression
-}
-
-#·······················································································································
-
 class @varAssignmentSelfInstructionAST : @instructionAST {
   @LValueSelfAST mAssignmentTargetAST
   @expressionAST mSourceExpression
@@ -19,21 +12,6 @@ class @varAssignmentSelfInstructionAST : @instructionAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
-
-  #·····················································································································
-
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-    <lvalue_without_self> ?let assignmentTargetAST
-  #--- Source expression
-    $=$
-    <expression> ?let sourceExpression
-  #--- AST
-    ioInstructionList += !@varAssignmentNoSelfInstructionAST.new {
-      !assignmentTargetAST.mIdentifier.location
-      !assignmentTargetAST
-      !sourceExpression
-    }
-  }
 
   #·····················································································································
 
@@ -58,13 +36,6 @@ syntax extension plm_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varAssignmentNoSelfInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
-}
-
-#·····················································································································
-
 override method @varAssignmentSelfInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
@@ -72,76 +43,6 @@ override method @varAssignmentSelfInstructionAST noteInstructionTypesInPrecedenc
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @varAssignmentNoSelfInstructionAST analyze
-  ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-  [mAssignmentTargetAST type !variableMap:ioUniversalMap ?let targetType]
-#--- Analyze source expression
-  [mSourceExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:targetType
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR sourceOperandPossibleReference
-  ]
-#--- Analyze LValue
-  [mAssignmentTargetAST analyzeLValueNoSelf
-    !self: inSelfType
-    !targetAccessKind:.write
-    !propertiesAreMutable: inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-    !context: inContext
-    !mode: inCurrentMode
-    !?temporary: ioTemporaries
-    !?staticStringMap: ioGlobalLiteralStringMap
-    !?variableMap: ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: ioInstructionGenerationList
-    ?@objectIR currentObject
-    ?*
-    ?globalVariableReceiverName:let unused globalVariableReceiverName
-  ]
-  if [currentObject isPossibleFunction] then
-    error mAssignmentTargetAST.mIdentifier : "invalid assignment target" : currentObject
-  end
-#---
-  [!?ioInstructionGenerationList appendLoadFromReference
-    !?ioTemporaries
-    !sourceOperandPossibleReference
-    ![mAssignmentTargetAST mIdentifier]
-    ?let sourceOperand
-  ]  
-  let result = checkAssignmentCompatibility (
-    !source:sourceOperand
-    !targetAnnotationType:targetType
-    !errorLocation:mAssignmentTargetAST.mIdentifier
-    !staticTypeAllowed:false
-  )
-  [!?ioInstructionGenerationList appendStoreFromReference !currentObject !mAssignmentTargetAST.mIdentifier !result]
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varAssignmentSelfInstructionAST analyze

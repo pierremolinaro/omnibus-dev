@@ -82,7 +82,8 @@ project (1:0:0) -> "plm" {
 #--- Instructions
   "galgas-sources/instructionList.galgas"
   "galgas-sources/directive-check.galgas"
-  "galgas-sources/instruction-assignment.galgas"
+  "galgas-sources/instruction-assignment-without-self.galgas"
+  "galgas-sources/instruction-assignment-with-self.galgas"
   "galgas-sources/instruction-assignment-operator.galgas"
   "galgas-sources/instruction-var.galgas"
   "galgas-sources/instruction-let.galgas"

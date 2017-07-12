@@ -15641,19 +15641,19 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i71_parse (C_Lexique_
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i72_ (GALGAS_instructionListAST & ioArgument_ioInstructionList,
                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_LValueWithoutSelfAST var_assignmentTargetAST_1394 ;
-  nt_lvalue_5F_without_5F_self_ (var_assignmentTargetAST_1394, inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("instruction-assignment.galgas", 28)) ;
-  GALGAS_expressionAST var_sourceExpression_1466 ;
-  nt_expression_ (var_sourceExpression_1466, inCompiler) ;
-  ioArgument_ioInstructionList.addAssign_operation (GALGAS_varAssignmentNoSelfInstructionAST::constructor_new (var_assignmentTargetAST_1394.getter_mIdentifier (HERE).getter_location (HERE), var_assignmentTargetAST_1394, var_sourceExpression_1466  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 31))  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 31)) ;
+  GALGAS_LValueWithoutSelfAST var_assignmentTargetAST_1137 ;
+  nt_lvalue_5F_without_5F_self_ (var_assignmentTargetAST_1137, inCompiler) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("instruction-assignment-without-self.galgas", 21)) ;
+  GALGAS_expressionAST var_sourceExpression_1209 ;
+  nt_expression_ (var_sourceExpression_1209, inCompiler) ;
+  ioArgument_ioInstructionList.addAssign_operation (GALGAS_varAssignmentNoSelfInstructionAST::constructor_new (var_assignmentTargetAST_1137.getter_mIdentifier (HERE).getter_location (HERE), var_assignmentTargetAST_1137, var_sourceExpression_1209  COMMA_SOURCE_FILE ("instruction-assignment-without-self.galgas", 24))  COMMA_SOURCE_FILE ("instruction-assignment-without-self.galgas", 24)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i72_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   nt_lvalue_5F_without_5F_self_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("instruction-assignment.galgas", 28)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("instruction-assignment-without-self.galgas", 21)) ;
   nt_expression_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -15662,19 +15662,19 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i72_parse (C_Lexique_
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i73_ (GALGAS_instructionListAST & ioArgument_ioInstructionList,
                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_LValueSelfAST var_assignmentTargetAST_1887 ;
-  nt_lvalue_5F_with_5F_self_ (var_assignmentTargetAST_1887, inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("instruction-assignment.galgas", 43)) ;
-  GALGAS_expressionAST var_sourceExpression_1959 ;
-  nt_expression_ (var_sourceExpression_1959, inCompiler) ;
-  ioArgument_ioInstructionList.addAssign_operation (GALGAS_varAssignmentSelfInstructionAST::constructor_new (var_assignmentTargetAST_1887.getter_mSelfLocation (HERE), var_assignmentTargetAST_1887, var_sourceExpression_1959  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 46))  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 46)) ;
+  GALGAS_LValueSelfAST var_assignmentTargetAST_1125 ;
+  nt_lvalue_5F_with_5F_self_ (var_assignmentTargetAST_1125, inCompiler) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("instruction-assignment-with-self.galgas", 21)) ;
+  GALGAS_expressionAST var_sourceExpression_1197 ;
+  nt_expression_ (var_sourceExpression_1197, inCompiler) ;
+  ioArgument_ioInstructionList.addAssign_operation (GALGAS_varAssignmentSelfInstructionAST::constructor_new (var_assignmentTargetAST_1125.getter_mSelfLocation (HERE), var_assignmentTargetAST_1125, var_sourceExpression_1197  COMMA_SOURCE_FILE ("instruction-assignment-with-self.galgas", 24))  COMMA_SOURCE_FILE ("instruction-assignment-with-self.galgas", 24)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i73_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   nt_lvalue_5F_with_5F_self_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("instruction-assignment.galgas", 43)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("instruction-assignment-with-self.galgas", 21)) ;
   nt_expression_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }

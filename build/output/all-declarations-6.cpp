@@ -6878,7 +6878,7 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
                                               GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 768)) ;
+  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 763)) ;
   switch (inObject.mProperty_mGuardKindGenerationIR.enumValue ()) {
   case GALGAS_guardKindGenerationIR::kNotBuilt:
     break ;
@@ -6888,11 +6888,11 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
     {
-      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_31365 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
-      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_31365->mAssociatedValue1 ;
-      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_31365->mAssociatedValue2 ;
-      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 772)) ;
-      ioArgument_ioAccessibleEntities.mProperty_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 773)) ;
+      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_31112 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
+      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_31112->mAssociatedValue1 ;
+      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_31112->mAssociatedValue2 ;
+      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 767)) ;
+      ioArgument_ioAccessibleEntities.mProperty_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 768)) ;
     }
     break ;
   }
