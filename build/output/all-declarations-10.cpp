@@ -18,7 +18,7 @@ GALGAS_string function_literalCharacterArrayName (const GALGAS_uint & constinArg
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("@str.array.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 74)) ;
+  result_result = GALGAS_string ("@str.array.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 66)) ;
 //---
   return result_result ;
 }
@@ -345,7 +345,7 @@ GALGAS_string function_llvmNameForFunction (const GALGAS_string & constinArgumen
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("func.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 108)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 108)) ;
+  result_result = GALGAS_string ("func.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 100)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 100)) ;
 //---
   return result_result ;
 }
@@ -392,8 +392,8 @@ GALGAS_lstring function_interruptNameForInvocationGraph (const GALGAS_lstring & 
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_s_4837 = GALGAS_string ("interrupt ").add_operation (constinArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 116)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 116)) ;
-  result_result = GALGAS_lstring::constructor_new (var_s_4837, constinArgument_inName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 117)) ;
+  GALGAS_string var_s_4401 = GALGAS_string ("interrupt ").add_operation (constinArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 108)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 108)) ;
+  result_result = GALGAS_lstring::constructor_new (var_s_4401, constinArgument_inName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 109)) ;
 //---
   return result_result ;
 }
@@ -440,7 +440,7 @@ GALGAS_lstring function_llvmNameForServiceInterrupt (const GALGAS_lstring & cons
                                                      C_Compiler * inCompiler
                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("isr.service.").add_operation (constinArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 123)), constinArgument_inName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 123)) ;
+  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("isr.service.").add_operation (constinArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 115)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 115)), constinArgument_inName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 115)) ;
 //---
   return result_result ;
 }
@@ -487,7 +487,7 @@ GALGAS_string function_llvmNameForSectionOrSafeInterrupt (const GALGAS_string & 
                                                           C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("isr.section.or.safe.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 129)) ;
+  result_result = GALGAS_string ("isr.section.or.safe.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 121)) ;
 //---
   return result_result ;
 }
@@ -540,28 +540,28 @@ GALGAS_string function_llvmNameForSVCCall (const GALGAS_lstring & constinArgumen
     break ;
   case GALGAS_routineKind::kEnum_primitive:
     {
-      result_result = function_llvmNameForPrimitiveCall (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 139)) ;
+      result_result = function_llvmNameForPrimitiveCall (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 131)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_service:
     {
-      result_result = function_llvmNameForServiceCall (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 141)) ;
+      result_result = function_llvmNameForServiceCall (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 133)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_section:
     {
-      result_result = function_llvmNameForSectionCall (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 143)) ;
+      result_result = function_llvmNameForSectionCall (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 135)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_safe:
     {
-      result_result = function_llvmNameForSafeCall (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 145)) ;
+      result_result = function_llvmNameForSafeCall (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 137)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
       TC_Array <C_FixItDescription> fixItArray0 ;
-      inCompiler->emitSemanticError (constinArgument_inName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 147)), GALGAS_string ("INTERNAL ERROR"), fixItArray0  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 147)) ;
+      inCompiler->emitSemanticError (constinArgument_inName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 139)), GALGAS_string ("INTERNAL ERROR"), fixItArray0  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 139)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -623,28 +623,28 @@ GALGAS_string function_llvmNameForSVCImplementation (const GALGAS_lstring & cons
     break ;
   case GALGAS_routineKind::kEnum_primitive:
     {
-      result_result = function_llvmNameForPrimitiveImplementation (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 156)) ;
+      result_result = function_llvmNameForPrimitiveImplementation (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 148)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_service:
     {
-      result_result = function_llvmNameForServiceImplementation (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 158)) ;
+      result_result = function_llvmNameForServiceImplementation (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 150)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_section:
     {
-      result_result = function_llvmNameForSectionImplementation (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 160)) ;
+      result_result = function_llvmNameForSectionImplementation (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 152)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_safe:
     {
-      result_result = function_llvmNameForSafeImplementation (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 162)) ;
+      result_result = function_llvmNameForSafeImplementation (constinArgument_inName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 154)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
       TC_Array <C_FixItDescription> fixItArray0 ;
-      inCompiler->emitSemanticError (constinArgument_inName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 164)), GALGAS_string ("INTERNAL ERROR"), fixItArray0  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 164)) ;
+      inCompiler->emitSemanticError (constinArgument_inName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 156)), GALGAS_string ("INTERNAL ERROR"), fixItArray0  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 156)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -700,7 +700,7 @@ GALGAS_string function_llvmNameForPrimitiveCall (const GALGAS_string & constinAr
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("primitive.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 173)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 173)) ;
+  result_result = GALGAS_string ("primitive.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 165)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 165)) ;
 //---
   return result_result ;
 }
@@ -747,7 +747,7 @@ GALGAS_string function_llvmNameForPrimitiveImplementation (const GALGAS_string &
                                                            C_Compiler * inCompiler
                                                            COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("primitive.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 179)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 179)) ;
+  result_result = GALGAS_string ("primitive.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 171)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 171)) ;
 //---
   return result_result ;
 }
@@ -794,7 +794,7 @@ GALGAS_string function_llvmNameForServiceCall (const GALGAS_string & constinArgu
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("service.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 187)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 187)) ;
+  result_result = GALGAS_string ("service.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 179)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 179)) ;
 //---
   return result_result ;
 }
@@ -841,7 +841,7 @@ GALGAS_string function_llvmNameForServiceImplementation (const GALGAS_string & c
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("service.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 193)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 193)) ;
+  result_result = GALGAS_string ("service.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 185)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 185)) ;
 //---
   return result_result ;
 }
@@ -888,7 +888,7 @@ GALGAS_string function_llvmNameForSectionCall (const GALGAS_string & constinArgu
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("section.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 201)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 201)) ;
+  result_result = GALGAS_string ("section.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 193)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 193)) ;
 //---
   return result_result ;
 }
@@ -935,7 +935,7 @@ GALGAS_string function_llvmNameForSectionImplementation (const GALGAS_string & c
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("section.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 207)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 207)) ;
+  result_result = GALGAS_string ("section.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 199)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 199)) ;
 //---
   return result_result ;
 }
@@ -982,7 +982,7 @@ GALGAS_string function_llvmNameForSafeCall (const GALGAS_string & constinArgumen
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("safe.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 215)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 215)) ;
+  result_result = GALGAS_string ("safe.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 207)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 207)) ;
 //---
   return result_result ;
 }
@@ -1029,7 +1029,7 @@ GALGAS_string function_llvmNameForSafeImplementation (const GALGAS_string & cons
                                                       C_Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("safe.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 221)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 221)) ;
+  result_result = GALGAS_string ("safe.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 213)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 213)) ;
 //---
   return result_result ;
 }
@@ -1146,7 +1146,7 @@ GALGAS_string function_llvmNameForGuardCall (const GALGAS_string & constinArgume
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("guard.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 235)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 235)) ;
+  result_result = GALGAS_string ("guard.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 227)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 227)) ;
 //---
   return result_result ;
 }
@@ -1193,7 +1193,7 @@ GALGAS_string function_llvmNameForGuardImplementation (const GALGAS_string & con
                                                        C_Compiler * inCompiler
                                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("guard.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 241)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 241)) ;
+  result_result = GALGAS_string ("guard.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 233)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 233)) ;
 //---
   return result_result ;
 }
@@ -1310,7 +1310,7 @@ GALGAS_string function_llvmNameForLocalVariable (const GALGAS_string & constinAr
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("var.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 255)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 255)) ;
+  result_result = GALGAS_string ("var.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 247)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 247)) ;
 //---
   return result_result ;
 }
@@ -1357,7 +1357,7 @@ GALGAS_string function_llvmNameForGlobalVariable (const GALGAS_string & constinA
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("gvar.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 261)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 261)) ;
+  result_result = GALGAS_string ("gvar.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 253)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 253)) ;
 //---
   return result_result ;
 }
@@ -1754,7 +1754,7 @@ GALGAS_string function_stackNameForTask (const GALGAS_string & constinArgument_i
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("@").add_operation (GALGAS_string ("task.stack.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 301)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 301)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 301)) ;
+  result_result = GALGAS_string ("@").add_operation (GALGAS_string ("task.stack.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 293)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 293)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 293)) ;
 //---
   return result_result ;
 }
@@ -1801,7 +1801,7 @@ GALGAS_string function_initNameForTaskType (const GALGAS_string & constinArgumen
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("@").add_operation (GALGAS_string ("task.init.$").add_operation (constinArgument_inTaskTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 307)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 307)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 307)) ;
+  result_result = GALGAS_string ("@").add_operation (GALGAS_string ("task.init.$").add_operation (constinArgument_inTaskTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 299)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 299)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 299)) ;
 //---
   return result_result ;
 }
@@ -1848,7 +1848,7 @@ GALGAS_string function_stackAddressForTask (const GALGAS_string & constinArgumen
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("%").add_operation (GALGAS_string ("task.stack.address.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 313)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 313)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 313)) ;
+  result_result = GALGAS_string ("%").add_operation (GALGAS_string ("task.stack.address.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 305)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 305)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 305)) ;
 //---
   return result_result ;
 }
@@ -1895,7 +1895,7 @@ GALGAS_string function_mainRoutineNameForTask (const GALGAS_string & constinArgu
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("@").add_operation (GALGAS_string ("task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 319)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 319)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 319)) ;
+  result_result = GALGAS_string ("@").add_operation (GALGAS_string ("task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 311)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 311)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 311)) ;
 //---
   return result_result ;
 }
@@ -1942,7 +1942,7 @@ GALGAS_string function_llvmNameForTaskGlobalVar (const GALGAS_string & constinAr
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("task.globalvar.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 325)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 325)) ;
+  result_result = GALGAS_string ("task.globalvar.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 317)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 317)) ;
 //---
   return result_result ;
 }
@@ -2129,7 +2129,7 @@ GALGAS_lstring function_plmNameForStaticListType (const GALGAS_lstring & constin
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 344)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 344)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 344))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 344)) ;
+  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 336)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 336)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 336))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 336)) ;
 //---
   return result_result ;
 }
@@ -2176,7 +2176,7 @@ GALGAS_lstring function_plmNameForStaticListElementType (const GALGAS_lstring & 
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.element.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 350)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 350)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 350))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 350)) ;
+  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.element.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 342)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 342)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 342))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 342)) ;
 //---
   return result_result ;
 }
@@ -2223,7 +2223,7 @@ GALGAS_string function_llvmNameForStaticListType (const GALGAS_string & constinA
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("static.list.type.").add_operation (constinArgument_inStaticListName.getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 356)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 356)) ;
+  result_result = GALGAS_string ("static.list.type.").add_operation (constinArgument_inStaticListName.getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 348)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 348)) ;
 //---
   return result_result ;
 }
@@ -2270,7 +2270,7 @@ GALGAS_lstring function_llvmNameForStaticListElementType (const GALGAS_lstring &
                                                           C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("static.list.element.type.").add_operation (constinArgument_inStaticListName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 362)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 362)), constinArgument_inStaticListName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 362)) ;
+  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("static.list.element.type.").add_operation (constinArgument_inStaticListName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 354)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 354)), constinArgument_inStaticListName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 354)) ;
 //---
   return result_result ;
 }
@@ -11888,7 +11888,7 @@ const char * gWrapperFileContent_45_targetTemplates = "\n"
   "    RTC_CR = $RTC_CR {SC16P, SC4P, OSCE}\n"
   "  }\n"
   "//--- Release I/O pins hold, if we woke up from VLLS mode\n"
-  "  if PMC_REGSC.ACKISO != 0 {\n"
+  "  if PMC_REGSC.ACKISO \xE2""\x89""\xA0"" 0 {\n"
   "    PMC_REGSC |= $PMC_REGSC {ACKISO}\n"
   "  }\n"
   "// TODO: do this while the PLL is waiting to lock....\n"
@@ -11906,9 +11906,9 @@ const char * gWrapperFileContent_45_targetTemplates = "\n"
   "//--- Wait for crystal oscillator to begin\n"
   "  loop while MCG_S.OSCINIT0 == 0 {}\n"
   "//--- Wait for FLL to use oscillator\n"
-  "  loop while MCG_S.IREFST != 0 {}\n"
+  "  loop while MCG_S.IREFST \xE2""\x89""\xA0"" 0 {}\n"
   "//--- Wait for MCGOUT to use oscillator\n"
-  "  loop while MCG_S.CLKST != $MCG_S {CLKST:2} {}\n"
+  "  loop while MCG_S.CLKST \xE2""\x89""\xA0"" $MCG_S {CLKST:2} {}\n"
   "//--- Now we're in FBE mode\n"
   "//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
   "  MCG_C5 = $MCG_C5 {PRDIV0:3}\n"
@@ -11924,7 +11924,7 @@ const char * gWrapperFileContent_45_targetTemplates = "\n"
   "//--- Switch to PLL as clock source, FLL input = 16 MHz / 512\n"
   "  MCG_C1 = $MCG_C1 {CLKS:0, FRDIV:4}\n"
   "//--- Wait for PLL clock to be used\n"
-  "  loop while MCG_S.CLKST != $MCG_S {CLKST:3} {}\n"
+  "  loop while MCG_S.CLKST \xE2""\x89""\xA0"" $MCG_S {CLKST:3} {}\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -11934,7 +11934,7 @@ const cRegularFileWrapper gWrapperFile_45_targetTemplates (
   "plm-teensy-3-1-boot.plm",
   "plm",
   true, // Text file
-  2346, // Text length
+  2342, // Text length
   gWrapperFileContent_45_targetTemplates
 ) ;
 
@@ -12513,53 +12513,53 @@ const char * gWrapperFileContent_46_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "public func digitalRead @noUnusedWarning (\?port:port $digitalPort) -> $bool {\n"
   "  switch port {\n"
   "  case D0 : // PTB16\n"
-  "    result = (GPIOB_PDIR & (1 << 16)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 16)) \xE2""\x89""\xA0"" 0\n"
   "  case D1 : // PTB17\n"
-  "    result = (GPIOB_PDIR & (1 << 17)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 17)) \xE2""\x89""\xA0"" 0\n"
   "  case D2 : // PTD0\n"
-  "    result = (GPIOD_PDIR & (1 << 0)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 0)) \xE2""\x89""\xA0"" 0\n"
   "  case D3 : // PTA12\n"
-  "    result = (GPIOA_PDIR & (1 << 12)) != 0\n"
+  "    result = (GPIOA_PDIR & (1 << 12)) \xE2""\x89""\xA0"" 0\n"
   "  case D4 : // PTA13\n"
-  "    result = (GPIOA_PDIR & (1 << 13)) != 0\n"
+  "    result = (GPIOA_PDIR & (1 << 13)) \xE2""\x89""\xA0"" 0\n"
   "  case D5 : // PTD7\n"
-  "    result = (GPIOD_PDIR & (1 << 7)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 7)) \xE2""\x89""\xA0"" 0\n"
   "  case D6 : // PTD4\n"
-  "    result = (GPIOD_PDIR & (1 << 4)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 4)) \xE2""\x89""\xA0"" 0\n"
   "  case D7 : // PTD2\n"
-  "    result = (GPIOD_PDIR & (1 << 2)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 2)) \xE2""\x89""\xA0"" 0\n"
   "  case D8 : // PTD3\n"
-  "    result = (GPIOD_PDIR & (1 << 3)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 3)) \xE2""\x89""\xA0"" 0\n"
   "  case D9  : // PTC3\n"
-  "    result = (GPIOC_PDIR & (1 << 3)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 3)) \xE2""\x89""\xA0"" 0\n"
   "  case D10 : // PTC4\n"
-  "    result = (GPIOC_PDIR & (1 << 4)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 4)) \xE2""\x89""\xA0"" 0\n"
   "  case D11 : // PTC6\n"
-  "    result = (GPIOC_PDIR & (1 << 6)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 6)) \xE2""\x89""\xA0"" 0\n"
   "  case D12 : // PTC7\n"
-  "    result = (GPIOC_PDIR & (1 << 7)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 7)) \xE2""\x89""\xA0"" 0\n"
   "  case D13 : // PTC5\n"
-  "    result = (GPIOC_PDIR & (1 << 5)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 5)) \xE2""\x89""\xA0"" 0\n"
   "  case D14 : // PTD1\n"
-  "    result = (GPIOD_PDIR & (1 << 1)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 1)) \xE2""\x89""\xA0"" 0\n"
   "  case D15 : // PTC0\n"
-  "    result = (GPIOC_PDIR & (1 << 0)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 0)) \xE2""\x89""\xA0"" 0\n"
   "  case D16 : // PTB0\n"
-  "    result = (GPIOB_PDIR & (1 << 0)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 0)) \xE2""\x89""\xA0"" 0\n"
   "  case D17 : // PTB1\n"
-  "    result = (GPIOB_PDIR & (1 << 1)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 1)) \xE2""\x89""\xA0"" 0\n"
   "  case D18 : // PTB3\n"
-  "    result = (GPIOB_PDIR & (1 << 3)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 3)) \xE2""\x89""\xA0"" 0\n"
   "  case D19 : // PTB2\n"
-  "    result = (GPIOB_PDIR & (1 << 2)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 2)) \xE2""\x89""\xA0"" 0\n"
   "  case D20 : // PTD5\n"
-  "    result = (GPIOD_PDIR & (1 << 5)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 5)) \xE2""\x89""\xA0"" 0\n"
   "  case D21 : // PTD6\n"
-  "    result = (GPIOD_PDIR & (1 << 6)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 6)) \xE2""\x89""\xA0"" 0\n"
   "  case D22 : // PTC1\n"
-  "    result = (GPIOC_PDIR & (1 << 1)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 1)) \xE2""\x89""\xA0"" 0\n"
   "  case D23 : // PTC2\n"
-  "    result = (GPIOC_PDIR & (1 << 2)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 2)) \xE2""\x89""\xA0"" 0\n"
   "  }\n"
   "}\n"
   "\n"
@@ -12569,7 +12569,7 @@ const cRegularFileWrapper gWrapperFile_46_targetTemplates (
   "plm-teensy-3-1-digital-io.plm",
   "plm",
   true, // Text file
-  16111, // Text length
+  16087, // Text length
   gWrapperFileContent_46_targetTemplates
 ) ;
 
@@ -12672,10 +12672,10 @@ const char * gWrapperFileContent_47_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  func programLcd4BitDataBusOutput @noUnusedWarning (\?inValue $uint8) {\n"
-  "    self.setD4 (!(inValue & 0x01) != 0)\n"
-  "    self.setD5 (!(inValue & 0x02) != 0)\n"
-  "    self.setD6 (!(inValue & 0x04) != 0)\n"
-  "    self.setD7 (!(inValue & 0x08) != 0)\n"
+  "    self.setD4 (!(inValue & 0x01) \xE2""\x89""\xA0"" 0)\n"
+  "    self.setD5 (!(inValue & 0x02) \xE2""\x89""\xA0"" 0)\n"
+  "    self.setD6 (!(inValue & 0x04) \xE2""\x89""\xA0"" 0)\n"
+  "    self.setD7 (!(inValue & 0x08) \xE2""\x89""\xA0"" 0)\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
@@ -13009,7 +13009,7 @@ const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   "plm-teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  14405, // Text length
+  14401, // Text length
   gWrapperFileContent_47_targetTemplates
 ) ;
 
@@ -17693,7 +17693,7 @@ const char * gWrapperFileContent_80_targetTemplates = "\n"
   "    RTC_CR = $RTC_CR {SC16P, SC4P, OSCE}\n"
   "  }\n"
   "//--- Release I/O pins hold, if we woke up from VLLS mode\n"
-  "  if PMC_REGSC.ACKISO != 0 {\n"
+  "  if PMC_REGSC.ACKISO \xE2""\x89""\xA0"" 0 {\n"
   "    PMC_REGSC |= $PMC_REGSC {ACKISO}\n"
   "  }\n"
   "//--- Since this is a write once register, make it visible to all F_CPU's\n"
@@ -17714,14 +17714,14 @@ const char * gWrapperFileContent_80_targetTemplates = "\n"
   "//--- Wait for crystal oscillator to begin\n"
   "  loop while MCG_S.OSCINIT0 == 0 {}\n"
   "//--- Wait for FLL to use oscillator\n"
-  "  loop while MCG_S.IREFST != 0 {}\n"
+  "  loop while MCG_S.IREFST \xE2""\x89""\xA0"" 0 {}\n"
   "//--- Wait for MCGOUT to use oscillator\n"
-  "  loop while MCG_S.CLKST != $MCG_S {CLKST:2} {}\n"
+  "  loop while MCG_S.CLKST \xE2""\x89""\xA0"" $MCG_S {CLKST:2} {}\n"
   "//--- Now we're in FBE mode\n"
   "//--- If we need faster than crystal, turn on the PLL\n"
   "  if @static F_CPU_MHZ > 120 {\n"
   "    SMC_PMCTRL = $SMC_PMCTRL {RUNM:3} // enter HSRUN mode\n"
-  "    loop while SMC_PMSTAT != $SMC_PMSTAT{RUN} {}\n"
+  "    loop while SMC_PMSTAT \xE2""\x89""\xA0"" $SMC_PMSTAT{RUN} {}\n"
   "  }\n"
   "  check (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)\n"
   "    or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24)\n"
@@ -17797,7 +17797,7 @@ const char * gWrapperFileContent_80_targetTemplates = "\n"
   "//--- Switch to PLL as clock source\n"
   "  MCG_C1 = $MCG_C1 {CLKS:0, FRDIV:4}\n"
   "//--- Wait for PLL clock to be used\n"
-  "  loop while MCG_S.CLKST != $MCG_S {CLKST:3} {}\n"
+  "  loop while MCG_S.CLKST \xE2""\x89""\xA0"" $MCG_S {CLKST:3} {}\n"
   "//--- USB clock\n"
   "  if @static (F_CPU_MHZ == 240) or (F_CPU_MHZ == 180) {\n"
   "    SIM_SOPT2 = $SIM_SOPT2 {USBSRC, PLLFLLSEL:3, TRACECLKSEL, CLKOUTSEL:6} // PLLFLLSEL:3 --> IRC48SEL\n"
@@ -17812,7 +17812,7 @@ const cRegularFileWrapper gWrapperFile_80_targetTemplates (
   "plm-teensy-3-6-boot.plm",
   "plm",
   true, // Text file
-  6684, // Text length
+  6679, // Text length
   gWrapperFileContent_80_targetTemplates
 ) ;
 
@@ -18391,53 +18391,53 @@ const char * gWrapperFileContent_81_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "public func digitalRead @noUnusedWarning (\?port:port $digitalPort) -> $bool {\n"
   "  switch port {\n"
   "  case D0 : // PTB16\n"
-  "    result = (GPIOB_PDIR & (1 << 16)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 16)) \xE2""\x89""\xA0"" 0\n"
   "  case D1 : // PTB17\n"
-  "    result = (GPIOB_PDIR & (1 << 17)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 17)) \xE2""\x89""\xA0"" 0\n"
   "  case D2 : // PTD0\n"
-  "    result = (GPIOD_PDIR & (1 << 0)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 0)) \xE2""\x89""\xA0"" 0\n"
   "  case D3 : // PTA12\n"
-  "    result = (GPIOA_PDIR & (1 << 12)) != 0\n"
+  "    result = (GPIOA_PDIR & (1 << 12)) \xE2""\x89""\xA0"" 0\n"
   "  case D4 : // PTA13\n"
-  "    result = (GPIOA_PDIR & (1 << 13)) != 0\n"
+  "    result = (GPIOA_PDIR & (1 << 13)) \xE2""\x89""\xA0"" 0\n"
   "  case D5 : // PTD7\n"
-  "    result = (GPIOD_PDIR & (1 << 7)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 7)) \xE2""\x89""\xA0"" 0\n"
   "  case D6 : // PTD4\n"
-  "    result = (GPIOD_PDIR & (1 << 4)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 4)) \xE2""\x89""\xA0"" 0\n"
   "  case D7 : // PTD2\n"
-  "    result = (GPIOD_PDIR & (1 << 2)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 2)) \xE2""\x89""\xA0"" 0\n"
   "  case D8 : // PTD3\n"
-  "    result = (GPIOD_PDIR & (1 << 3)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 3)) \xE2""\x89""\xA0"" 0\n"
   "  case D9  : // PTC3\n"
-  "    result = (GPIOC_PDIR & (1 << 3)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 3)) \xE2""\x89""\xA0"" 0\n"
   "  case D10 : // PTC4\n"
-  "    result = (GPIOC_PDIR & (1 << 4)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 4)) \xE2""\x89""\xA0"" 0\n"
   "  case D11 : // PTC6\n"
-  "    result = (GPIOC_PDIR & (1 << 6)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 6)) \xE2""\x89""\xA0"" 0\n"
   "  case D12 : // PTC7\n"
-  "    result = (GPIOC_PDIR & (1 << 7)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 7)) \xE2""\x89""\xA0"" 0\n"
   "  case D13 : // PTC5\n"
-  "    result = (GPIOC_PDIR & (1 << 5)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 5)) \xE2""\x89""\xA0"" 0\n"
   "  case D14 : // PTD1\n"
-  "    result = (GPIOD_PDIR & (1 << 1)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 1)) \xE2""\x89""\xA0"" 0\n"
   "  case D15 : // PTC0\n"
-  "    result = (GPIOC_PDIR & (1 << 0)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 0)) \xE2""\x89""\xA0"" 0\n"
   "  case D16 : // PTB0\n"
-  "    result = (GPIOB_PDIR & (1 << 0)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 0)) \xE2""\x89""\xA0"" 0\n"
   "  case D17 : // PTB1\n"
-  "    result = (GPIOB_PDIR & (1 << 1)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 1)) \xE2""\x89""\xA0"" 0\n"
   "  case D18 : // PTB3\n"
-  "    result = (GPIOB_PDIR & (1 << 3)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 3)) \xE2""\x89""\xA0"" 0\n"
   "  case D19 : // PTB2\n"
-  "    result = (GPIOB_PDIR & (1 << 2)) != 0\n"
+  "    result = (GPIOB_PDIR & (1 << 2)) \xE2""\x89""\xA0"" 0\n"
   "  case D20 : // PTD5\n"
-  "    result = (GPIOD_PDIR & (1 << 5)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 5)) \xE2""\x89""\xA0"" 0\n"
   "  case D21 : // PTD6\n"
-  "    result = (GPIOD_PDIR & (1 << 6)) != 0\n"
+  "    result = (GPIOD_PDIR & (1 << 6)) \xE2""\x89""\xA0"" 0\n"
   "  case D22 : // PTC1\n"
-  "    result = (GPIOC_PDIR & (1 << 1)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 1)) \xE2""\x89""\xA0"" 0\n"
   "  case D23 : // PTC2\n"
-  "    result = (GPIOC_PDIR & (1 << 2)) != 0\n"
+  "    result = (GPIOC_PDIR & (1 << 2)) \xE2""\x89""\xA0"" 0\n"
   "  }\n"
   "}\n"
   "\n"
@@ -18447,7 +18447,7 @@ const cRegularFileWrapper gWrapperFile_81_targetTemplates (
   "plm-teensy-3-6-digital-io.plm",
   "plm",
   true, // Text file
-  16111, // Text length
+  16087, // Text length
   gWrapperFileContent_81_targetTemplates
 ) ;
 
@@ -18544,10 +18544,10 @@ const char * gWrapperFileContent_82_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  func programLcd4BitDataBusOutput @noUnusedWarning (\?inValue $uint8) {\n"
-  "    self.setD4 (!(inValue & 0x01) != 0)\n"
-  "    self.setD5 (!(inValue & 0x02) != 0)\n"
-  "    self.setD6 (!(inValue & 0x04) != 0)\n"
-  "    self.setD7 (!(inValue & 0x08) != 0)\n"
+  "    self.setD4 (!(inValue & 0x01) \xE2""\x89""\xA0"" 0)\n"
+  "    self.setD5 (!(inValue & 0x02) \xE2""\x89""\xA0"" 0)\n"
+  "    self.setD6 (!(inValue & 0x04) \xE2""\x89""\xA0"" 0)\n"
+  "    self.setD7 (!(inValue & 0x08) \xE2""\x89""\xA0"" 0)\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
@@ -18881,7 +18881,7 @@ const cRegularFileWrapper gWrapperFile_82_targetTemplates (
   "plm-teensy-3-6-lcd.plm",
   "plm",
   true, // Text file
-  14151, // Text length
+  14147, // Text length
   gWrapperFileContent_82_targetTemplates
 ) ;
 

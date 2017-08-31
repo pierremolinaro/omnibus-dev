@@ -24,7 +24,7 @@ boot 0 {
     RTC_CR = $RTC_CR {SC16P, SC4P, OSCE}
   }
 //--- Release I/O pins hold, if we woke up from VLLS mode
-  if PMC_REGSC.ACKISO != 0 {
+  if PMC_REGSC.ACKISO ≠ 0 {
     PMC_REGSC |= $PMC_REGSC {ACKISO}
   }
 //--- Since this is a write once register, make it visible to all F_CPU's
@@ -45,14 +45,14 @@ boot 0 {
 //--- Wait for crystal oscillator to begin
   loop while MCG_S.OSCINIT0 == 0 {}
 //--- Wait for FLL to use oscillator
-  loop while MCG_S.IREFST != 0 {}
+  loop while MCG_S.IREFST ≠ 0 {}
 //--- Wait for MCGOUT to use oscillator
-  loop while MCG_S.CLKST != $MCG_S {CLKST:2} {}
+  loop while MCG_S.CLKST ≠ $MCG_S {CLKST:2} {}
 //--- Now we're in FBE mode
 //--- If we need faster than crystal, turn on the PLL
   if @static F_CPU_MHZ > 120 {
     SMC_PMCTRL = $SMC_PMCTRL {RUNM:3} // enter HSRUN mode
-    loop while SMC_PMSTAT != $SMC_PMSTAT{RUN} {}
+    loop while SMC_PMSTAT ≠ $SMC_PMSTAT{RUN} {}
   }
   check (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)
     or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24)
@@ -128,7 +128,7 @@ boot 0 {
 //--- Switch to PLL as clock source
   MCG_C1 = $MCG_C1 {CLKS:0, FRDIV:4}
 //--- Wait for PLL clock to be used
-  loop while MCG_S.CLKST != $MCG_S {CLKST:3} {}
+  loop while MCG_S.CLKST ≠ $MCG_S {CLKST:3} {}
 //--- USB clock
   if @static (F_CPU_MHZ == 240) or (F_CPU_MHZ == 180) {
     SIM_SOPT2 = $SIM_SOPT2 {USBSRC, PLLFLLSEL:3, TRACECLKSEL, CLKOUTSEL:6} // PLLFLLSEL:3 --> IRC48SEL

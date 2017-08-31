@@ -142,7 +142,7 @@ override method @typeArrayDeclarationAST enterInContext
         !elementType:elementType
         !size:arraySize
         !constantMap:classConstantMap
-        !flags: instanciableFlag () | copyableFlag ()
+        !flags: .instanciable | .copyable
         !plmTypeName:mArrayTypeName
       }
       !index:[ioContext.mTypeMap count]

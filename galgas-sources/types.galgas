@@ -4,6 +4,12 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+boolset @PLMTypeFlags {
+  instanciable, equatable, copyable
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 enum @PLMType {
   case void # No actual type, used for no annotation type, ...
   case boolean
@@ -13,16 +19,16 @@ enum @PLMType {
                   @propertyMap propertyMap
                   @universalPropertyAndRoutineMapForContext universalMap
                   @propertyList propertyList
-                  @uint flags
+                  @PLMTypeFlags flags
                   @string plmTypeName)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount @string plmTypeName)
   case staticInteger
-  case opaque (@bigint bitCount @uint flags @string plmTypeName)
+  case opaque (@bigint bitCount @PLMTypeFlags flags @string plmTypeName)
   case arrayType (@lstring typeName
                   @PLMType elementType
                   @bigint size
                   @constantMap constantMap
-                  @uint flags
+                  @PLMTypeFlags flags
                   @string plmTypeName)
   case function (@routineTypedSignature signature @mode mode @unifiedTypeMap-proxy returnTypeProxy)
   case pointer (@PLMType pointee)
@@ -39,7 +45,6 @@ shared map @unifiedTypeMap %selectors {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#func %once comparableFlag   -> @uint { result = 1 << 1 }
 
 getter @unifiedTypeMap-proxy equatable -> @bool {
   result = [[self type] equatable]
@@ -57,14 +62,14 @@ getter @PLMType equatable -> @bool {
     result = true
   case enumeration (* *) :
     result = true
-  case structure (* * * * @uint flags *) :
-    result = (flags & equatableFlag ()) != 0
+  case structure (* * * * flags *) :
+    result = [flags equatable]
   case integer (* * * * *) :
     result = true
-  case opaque (* @uint flags *) :
-    result = (flags & equatableFlag ()) != 0
-  case arrayType (* * * * @uint flags *) :
-    result = (flags & equatableFlag ()) != 0
+  case opaque (* flags *) :
+    result = [flags equatable]
+  case arrayType (* * * * flags *) :
+    result = [flags equatable]
   case function (* * *) :
     result = false
   case pointer (*) :
@@ -90,14 +95,14 @@ getter @PLMType instanciable -> @bool {
     result = true
   case enumeration (* *) :
     result = true
-  case structure (* * * * @uint flags *) :
-    result = (flags & instanciableFlag ()) != 0
+  case structure (* * * * flags *) :
+    result = [flags instanciable]
   case integer (* * * * *) :
     result = true
-  case opaque (* @uint flags *) :
-    result = (flags & instanciableFlag ()) != 0
-  case arrayType (* * * * @uint flags *) :
-    result = (flags & instanciableFlag ()) != 0
+  case opaque (* flags *) :
+    result = [flags instanciable]
+  case arrayType (* * * * flags *) :
+    result = [flags instanciable]
   case function (* * *) :
     result = false
   case pointer (*) :
@@ -123,14 +128,14 @@ getter @PLMType copyable -> @bool {
     result = true
   case enumeration (* *) :
     result = true
-  case structure (* * * * @uint flags *) :
-    result = (flags & copyableFlag ()) != 0
+  case structure (* * * * flags *) :
+    result = [flags copyable]
   case integer (* * * * *) :
     result = true
-  case opaque (* @uint flags *) :
-    result = (flags & copyableFlag ()) != 0
-  case arrayType (* * * * @uint flags *) :
-    result = (flags & copyableFlag ()) != 0
+  case opaque (* flags *) :
+    result = [flags copyable]
+  case arrayType (* * * * flags *) :
+    result = [flags copyable]
   case function (* * *) :
     result = false
   case pointer (*) :

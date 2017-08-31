@@ -84,19 +84,19 @@ override method @opaqueTypeDeclarationAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---
-  @uint flags = 0
+  @PLMTypeFlags flags = .none
   for (attribute) in mAttributeList do
     if attribute.string == "instantiable" then
-      if (flags & instanciableFlag ()) != 0 then
+      if [flags instanciable] then
         error attribute : "duplicated attribute"
       else
-        flags = flags | instanciableFlag ()
+        flags = flags | @PLMTypeFlags.instanciable
       end
     elsif attribute.string == "copyable" then
-      if (flags & copyableFlag ()) != 0 then
+      if [flags copyable] then
         error attribute : "duplicated attribute"
       else
-        flags = flags | copyableFlag ()
+        flags = flags | @PLMTypeFlags.copyable
       end
     else
       error attribute : "only @copyable and @instantiable attributes are allowed here"

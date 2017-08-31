@@ -190,7 +190,7 @@ method @taskList enterInContext
       !propertyMap:propertyMap 
       !universalMap:universalPropertyMap
       !propertyList:propertyList
-      !flags:0
+      !flags:.none
       !plmTypeName:task.mTaskName
     }
     [!?ioContext.mTypeMap insertType

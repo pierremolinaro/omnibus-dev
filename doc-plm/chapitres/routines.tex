@@ -7,14 +7,14 @@
 
 \chapter{Routines}
 
-Un \emph{routine} est une construction qui contient du code à exécuter. PLM définit plusieurs natures de routines :
+PLM définit plusieurs natures de routines~:
 \begin{itemize}
-  \item les \emph{procédures}, dont l'appel est une instruction (\refSubsectionPage{declarationProcedure}) ;
-  \item les \emph{fonctions}, dont l'appel est une instruction ou apparaît dans une expression (\refSectionPage{defFonction}) ;
-  \item les \emph{boot routines}, exécutées une fois avant l'initialisation des variables globales (\refSectionPage{bootRoutine}) ;
-  \item les \emph{init routines}, exécutées une fois après l'initialisation des variables globales (\refSectionPage{initRoutine}) ;
-  \item les \emph{routines de panique}, exécutées lors d'une panique (\refSectionPage{routinePanique}) ;
-  \item les routines \emph{système}, qui sont les points d'entrée des routines privilégiées à partir des routines utilisateur (\refSectionPage{declarationSystem}) ;
+  \item les \emph{procédures}, dont l'appel est une instruction (\refSubsectionPage{declarationProcedure})~;
+  \item les \emph{fonctions}, dont l'appel est une instruction ou apparaît dans une expression (\refSectionPage{defFonction})~;
+  \item les \emph{boot routines}, exécutées une fois avant l'initialisation des variables globales (\refSectionPage{bootRoutine})~;
+  \item les \emph{init routines}, exécutées une fois après l'initialisation des variables globales (\refSectionPage{initRoutine})~;
+  \item les \emph{routines de panique}, exécutées lors d'une panique (\refSectionPage{routinePanique})~;
+  \item les routines \emph{système}, qui sont les points d'entrée des routines privilégiées à partir des routines utilisateur (\refSectionPage{declarationSystem})~;
   \item les \emph{routines d'interruption}, qui sont des primitives de l'exécutif (\refSectionPage{declarationRoutineInterruption}).
 \end{itemize}
 
@@ -72,23 +72,23 @@ Cependant, un mode \emph{système} unique est trop sommaire pour reflèter toute
 %      system/.style ={rectangle, draw=black, thick, align=center},
 %      node distance=5mm
 %    ]
-%    \node [system] (primitive) {\texttt{primitive}} ;
-%    \node [system] (service) [right=of primitive] {\texttt{service}} ;
-%    \node [system] (section) [right=of service] {\texttt{section}} ;
-%    \node [system] (panic) [right=of section] {\texttt{panic}} ;
-%    \node [system] (init) [right=of panic] {\texttt{init}} ;
-%    \node [user] (user) [above=of primitive] {\texttt{user}} ;
-%    \node [system] (boot) [right=of user] {\texttt{boot}} ;
-%    \node [system] (safe) [below=of primitive] {\texttt{safe}} ;
-%    \node [system] (guard) [above=of panic] {\texttt{guard}} ;
+%    \node [system] (primitive) {\texttt{primitive}};
+%    \node [system] (service) [right=of primitive] {\texttt{service}};
+%    \node [system] (section) [right=of service] {\texttt{section}};
+%    \node [system] (panic) [right=of section] {\texttt{panic}};
+%    \node [system] (init) [right=of panic] {\texttt{init}};
+%    \node [user] (user) [above=of primitive] {\texttt{user}};
+%    \node [system] (boot) [right=of user] {\texttt{boot}};
+%    \node [system] (safe) [below=of primitive] {\texttt{safe}};
+%    \node [system] (guard) [above=of panic] {\texttt{guard}};
 %
-%    \draw [->] (primitive) -- (service) ;
-%    \draw [->] (service) -- (section) ;
-%    \draw [->] (service) -- (safe) ;
-%    \draw [->] (section) -- (safe) ;
-%    \draw [->] (primitive) -- (safe) ;
-%    \draw [->] (init) -- (safe) ;
-%    \draw [->] (guard) -- (safe) ;
+%    \draw [->] (primitive) -- (service);
+%    \draw [->] (service) -- (section);
+%    \draw [->] (service) -- (safe);
+%    \draw [->] (section) -- (safe);
+%    \draw [->] (primitive) -- (safe);
+%    \draw [->] (init) -- (safe);
+%    \draw [->] (guard) -- (safe);
 %  \end{tikzpicture}
   \caption{Graphe des changements de mode}
   \labelFigure{changementMode}
@@ -103,11 +103,11 @@ Tous les changements de modes décrits ci-après sont implémentés au moyen d'u
 
 Les modes \plm=primitive=, \plm=service=, \plm=section= et \plm=safe= sont des modes avec des privilèges décroissants. Aussi, les appels \plm=primitive= -> \plm=service= -> \plm=section= -> \plm=safe= sont valides.
 
-Le mode \plm=boot= est le mode des routines exécutés au démarrage du processeur ; ce mode est isolé.
+Le mode \plm=boot= est le mode des routines exécutés au démarrage du processeur~; ce mode est isolé.
 
-Le mode \plm=init= est le mode des routines d'initialisation ; le seul changement de mode autorisé est vers le mode \plm=safe=. 
+Le mode \plm=init= est le mode des routines d'initialisation~; le seul changement de mode autorisé est vers le mode \plm=safe=. 
 
-Le mode \plm=panic= est le mode des routines exécutées suite à une panique ; le seul changement de mode autorisé est vers le mode \plm=safe=, car les instructions pouvant engendrer la panique n'y sont pas autorisées. 
+Le mode \plm=panic= est le mode des routines exécutées suite à une panique~; le seul changement de mode autorisé est vers le mode \plm=safe=, car les instructions pouvant engendrer la panique n'y sont pas autorisées. 
 
 Enfin, le mode \plm=guard= est le mode d'évaluation des commandes gardées. On peut y appeler les routines \plm=section= et \plm=safe=.
 
@@ -128,7 +128,7 @@ Enfin, le mode \plm=guard= est le mode d'évaluation des commandes gardées. On 
 
 \subsection{Paramètres formels}
 
-Il existe trois natures de paramètres formels : \emph{entrée}, \emph{sortie} et \emph{entrée / sortie}, décrits dans le \refTableau{argumentsFormels}. Un sélecteur peut être \emph{anonyme} (par exemple \plm+?+ pour un paramètre formel en entrée), ou comporter un nom (le nom « \texttt{nom} » pour \plm+?nom:+).
+Il existe trois natures de paramètres formels~: \emph{entrée}, \emph{sortie} et \emph{entrée / sortie}, décrits dans le \refTableau{argumentsFormels}. Un sélecteur peut être \emph{anonyme} (par exemple \plm+?+ pour un paramètre formel en entrée), ou comporter un nom (le nom « \texttt{nom} » pour \plm+?nom:+).
 
 Une procédure déclare zéro, un ou plusieurs paramètres formels qui peuvent être en \emph{entrée}, en \emph{sortie} ou en \emph{entrée/sortie}. Une fonction déclare zéro, un ou plusieurs paramètres formels en \emph{entrée}.
 
@@ -229,23 +229,23 @@ Une fonction est appelable dans une expression et renvoie une valeur.
 
 \subsectionLabel{Déclaration d'une « vraie » fonction}{declarationFonction}\index{Fonction}
 
-La déclaration d'une fonction est la suivante :
+La déclaration d'une fonction est la suivante~:
 \begin{PLM}
 func mode nom @attribut (arguments_formels) -> $type {
   liste_instructions
 }
 \end{PLM}
-Où :
+Où~:
 \begin{itemize}
-  \item \plm=nom= est le nom de la fonction ;
-  \item \plm=mode= est le mode associé à la fonction, c'est l'un des mots réservés \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe= ;
-  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction ;
+  \item \plm=nom= est le nom de la fonction~;
+  \item \plm=mode= est le mode associé à la fonction, c'est l'un des mots réservés \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe=~;
+  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction~;
   \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels~;
   \item \plm=$type= est le type de la valeur renvoyée.
 \end{itemize}
 
 Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=$type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
-Par exemple :
+Par exemple~:
 
 \begin{PLM}
 func user maFonction @noUnusedWarning () -> $uint32 {
@@ -253,7 +253,7 @@ func user maFonction @noUnusedWarning () -> $uint32 {
 }
 \end{PLM}
 
-Ceci définit la fonction \plm=maFonction=, sans argument, appelable uniquement en mode \plm=user= ; l'attribut \plm=@noUnusedWarning= signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
+Ceci définit la fonction \plm=maFonction=, sans argument, appelable uniquement en mode \plm=user=~; l'attribut \plm=@noUnusedWarning= signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
 
 \begin{PLM}
 func user autreFonction (?arg:a $uint27 ?b $uint27) -> $uint27 {
@@ -268,17 +268,17 @@ Ceci définit la fonction \plm=autreFonction=, avec deux arguments, sans attribu
 
 \subsectionLabel{Déclaration d'une « procédure »}{declarationProcedure}\index{Procédure}
 
-La déclaration d'une « procédure » est la suivante :
+La déclaration d'une « procédure » est la suivante~:
 \begin{PLM}
 func mode nom @attribut (arguments_formels) {
   liste_instructions
 }
 \end{PLM}
-Où :
+Où~:
 \begin{itemize}
-  \item \plm=nom= est le nom de la fonction ;
-  \item \plm=mode= est le mode associé à la fonction, c'est l'un des mots réservés \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe= ;
-  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction ;
+  \item \plm=nom= est le nom de la fonction~;
+  \item \plm=mode= est le mode associé à la fonction, c'est l'un des mots réservés \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe=~;
+  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction~;
   \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels.
 \end{itemize}
 
@@ -297,12 +297,12 @@ Aucun type de retour n'est mentionné, aussi aucune variable nommée \plm=result
 
 La déclaration \plm+required func+ permet de signifier au compilateur qu'une procédure doit être définie, soit par la cible, soit par le programme utilisateur.
 
-Cette déclaration est la suivante :
+Cette déclaration est la suivante~:
 \begin{PLM}
 required func mode nom @attribut (arguments_formels) -> $type
 \end{PLM}
 
-ou :
+ou~:
 
 \begin{PLM}
 required func mode nom @attribut (arguments_formels)
@@ -320,20 +320,20 @@ Elle consiste en la déclaration de l'en-tête d'une fonction, précédée par l
 
 Une fonction externe est une procédure définie en C ou en assembleur et appelable en PLM.
 
-La déclaration d'une fonction externe est la suivante :
+La déclaration d'une fonction externe est la suivante~:
 
 \begin{PLM}
 extern func mode nom (arguments_formels) -> $type : "nom-assembleur"
 \end{PLM}
-Où :
+Où~:
 \begin{itemize}
-  \item \plm=nom= est le nom de la fonction externe ;
-  \item \plm=mode= est la liste non vide de l'ensemble des modes associés à la fonction ;
-  \item \plm=@type= est le type de la valeur renvoyée ;
+  \item \plm=nom= est le nom de la fonction externe~;
+  \item \plm=mode= est la liste non vide de l'ensemble des modes associés à la fonction~;
+  \item \plm=@type= est le type de la valeur renvoyée~;
   \item \plm="nom-assembleur"= est le nom qui sera engendré en assembleur, elle correspond à la directive \texttt{asm} de CLANG (et de GCC).
 \end{itemize}
 
-Si la fonction externe est en fait une \emph{procédure}, sa déclaration est la suivante :
+Si la fonction externe est en fait une \emph{procédure}, sa déclaration est la suivante~:
 
 \begin{PLM}
 extern func mode nom (arguments_formels) : "nom-assembleur"
@@ -341,7 +341,7 @@ extern func mode nom (arguments_formels) : "nom-assembleur"
 
 \subsubsection{Exemple de fonction externe}
 
-Prenons l'exemple de cette fonction, qui implémente le blocage de la tâche appelante dans une primitive :
+Prenons l'exemple de cette fonction, qui implémente le blocage de la tâche appelante dans une primitive~:
 
 \begin{PLM}
 extern func
@@ -352,7 +352,7 @@ La signature PLM de cette fonction est \plm=block(?!inList:)=.
 
 Elle est appelable en mode \plm=primitive=, c'est-à-dire dans une primitive. Dans l'instruction d'appel engendré en assembleur, le nom utilisé sera \texttt{func.blockInList}. Le préfixe \texttt{func.} est automatiquement ajouté par le compilateur.
 
-Dans le code C qui implémente cette fonction, la déclaration du prototype est :
+Dans le code C qui implémente cette fonction, la déclaration du prototype est~:
 
 \begin{SHELL}
 void block\_in\_list (TaskList * ioWaitingList) \\
@@ -361,7 +361,7 @@ asm ("!FUNC!blockInList") ;
 
 Le nom \texttt{block\_in\_list} est interne au code C.
 
-Le type C \texttt{TaskList} correspond au type PLM \plm=$taskList= ; ces deux types sont définis indépendemment, c'est au programmeur de s'assurer qu'ils ont des tailles identiques (ici, 32 bits).
+Le type C \texttt{TaskList} correspond au type PLM \plm=$taskList=~; ces deux types sont définis indépendemment, c'est au programmeur de s'assurer qu'ils ont des tailles identiques (ici, 32 bits).
 
 Le mode de passage de l'argument est spécifié par le sélecteur \plm=?!inList:=, c'est le mode \emph{entrée/sortie}, qui correspond au passage d'un pointeur en C. C'est au programmeur de s'assurer que les mode de passage spécifiés en PLM et C correspondent.
 
@@ -400,17 +400,17 @@ func nom @attribut (arguments_formels) {
   liste_instructions
 }
 \end{PLM}
-Où :
+Où~:
 \begin{itemize}
-  \item \plm=nom= est le nom de la fonction ;
-  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction ;
+  \item \plm=nom= est le nom de la fonction~;
+  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction~;
   \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels~;
   \item \plm=@type= est le type de la valeur renvoyée.
 \end{itemize}
 
-En conséquence, les contraintes sur l'écriture de leurs instructions sont importantes :
+En conséquence, les contraintes sur l'écriture de leurs instructions sont importantes~:
 \begin{itemize}
-  \item comme elles peuvent s'exécuter en mode \plm=user=, seuls les registres de contrôles accessibles dans ce mode sont autorisés ;
+  \item comme elles peuvent s'exécuter en mode \plm=user=, seuls les registres de contrôles accessibles dans ce mode sont autorisés~;
   \item comme elles peuvent s'exécuter en mode \plm=safe=, les instructions pouvant engendrer la panique ne sont pas autorisées.
 \end{itemize}
 
@@ -439,7 +439,7 @@ Voir \refSectionPage{restrictionUsageVariableGlobale}.
 
 %Les fonctions peuvent accéder aux variables globales en lecture, mais ne peuvent pas les modifier.
 %
-%L'accès en lecture à une variable globale est autorisé par la variable qui nomme la fonction parmi les routines autorisées :
+%L'accès en lecture à une variable globale est autorisé par la variable qui nomme la fonction parmi les routines autorisées~:
 %
 %\begin{PLM}
 %var gGlobalVar $uint56 {
@@ -473,9 +473,9 @@ Voir \refSectionPage{restrictionUsageVariableGlobale}.
 
 \sectionLabel{Routines système}{declarationSystem}\index{system}
 
-Une \emph{routine système} est une routine qui s'exécute dans un des modes \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe=. Elle est appelable à partir des modes :
+Une \emph{routine système} est une routine qui s'exécute dans un des modes \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe=. Elle est appelable à partir des modes~:
 \begin{itemize}
- \item \plm=user=, l'appel s'effectue alors à travers une instruction \emph{Supervisor Call} ;
+ \item \plm=user=, l'appel s'effectue alors à travers une instruction \emph{Supervisor Call}~;
   \item d'un autre mode privilégié, en respectant le graphe de la \refFigurePage{}{changementMode} (l'appel est alors une instruction d'appel de sous-programme).
 \end{itemize}
 
@@ -487,17 +487,17 @@ Comme une \emph{routine système} est exécutée par le processeur en mode privi
 \subsection{Déclaration d'une routine système}
 
 
-La déclaration d'une routine système est la suivante :
+La déclaration d'une routine système est la suivante~:
 \begin{PLM}
 system mode nom @attribut1 @attribut2 (arguments_formels) {
   liste_instructions
 }
 \end{PLM}
-Où :
+Où~:
 \begin{itemize}
-  \item \plm=nom= est le nom de la routine système ;
-  \item \plm=mode= est le mode associé à la routine, c'est l'un des mots réservés \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe= ;
-  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la routine système ; actuellement, seul l'attribut \plm!@noUnusedWarning! est défini (\refSubsectionPage{attributNoWarningIfUnusedSection}).
+  \item \plm=nom= est le nom de la routine système~;
+  \item \plm=mode= est le mode associé à la routine, c'est l'un des mots réservés \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe=~;
+  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la routine système~; actuellement, seul l'attribut \plm!@noUnusedWarning! est défini (\refSubsectionPage{attributNoWarningIfUnusedSection}).
 \end{itemize}
 
 
@@ -534,24 +534,24 @@ L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la s
 
 \sectionLabel{Routines d'interruption}{declarationRoutineInterruption}\index{Routine!Interruption}\index{Interruption!Routine}
 
-La déclaration d'une routine d'interruption est la suivante :
+La déclaration d'une routine d'interruption est la suivante~:
 \begin{PLM}
 system mode nom {
   liste_instructions
 }
 \end{PLM}
-Où :
+Où~:
 \begin{itemize}
-  \item \plm=nom= est le nom de la routine ;
+  \item \plm=nom= est le nom de la routine~;
   \item \plm=mode= est le mode associé à la routine, c'est l'un des mots réservés \plm=service=, \plm=section= ou \plm=safe=.
 \end{itemize}
 
 Le nom de la routine doit être un des noms de routines d'interruption déclarés par la déclaration \plm=target= (voir §§).
 
-Le mode d'exécution associé est l'un des trois modes suivants :
+Le mode d'exécution associé est l'un des trois modes suivants~:
 \begin{itemize}
-  \item \plm=service=, les routines de l'exécutif rendant des tâches prêtes peuvent être appelées ;
-  \item \plm=section=, la routine d'interruption n'interfère pas avec l'exécutif ;
+  \item \plm=service=, les routines de l'exécutif rendant des tâches prêtes peuvent être appelées~;
+  \item \plm=section=, la routine d'interruption n'interfère pas avec l'exécutif~;
   \item \plm=safe=, comme pour \plm=section=, et de plus les instructions pouvant engendrer la panique y sont interdites.
 \end{itemize}
 
