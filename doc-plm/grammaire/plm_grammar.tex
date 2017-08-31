@@ -695,8 +695,8 @@
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
     & & & & \node (p4-4) [terminal] {>}; & \node (p4-5) [nonterminal] {\nonTerminalSymbol{expression\_shift}{29}}; & \\
     & & & & \node (p3-4) [terminal] {<}; & \node (p3-5) [nonterminal] {\nonTerminalSymbol{expression\_shift}{29}}; & \\
-    & & & & \node (p2-4) [terminal] {>=}; & \node (p2-5) [nonterminal] {\nonTerminalSymbol{expression\_shift}{29}}; & \\
-    & & & & \node (p1-4) [terminal] {<=}; & \node (p1-5) [nonterminal] {\nonTerminalSymbol{expression\_shift}{29}}; & \\
+    & & & & \node (p2-4) [terminal] {≥}; & \node (p2-5) [nonterminal] {\nonTerminalSymbol{expression\_shift}{29}}; & \\
+    & & & & \node (p1-4) [terminal] {≤}; & \node (p1-5) [nonterminal] {\nonTerminalSymbol{expression\_shift}{29}}; & \\
     \node (P0start) [firstPoint] {}; & & \node (p0-2) [nonterminal] {\nonTerminalSymbol{expression\_shift}{29}}; & \node (p0-3) [point] {}; & \node (p0-4) [point] {}; & & \node (p0-6) [point] {}; & \node (p0-7) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
@@ -723,7 +723,7 @@
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & \node (p2-4) [terminal] {!=}; & \node (p2-5) [nonterminal] {\nonTerminalSymbol{expression\_comparison}{28}}; & \\
+    & & & & \node (p2-4) [terminal] {≠}; & \node (p2-5) [nonterminal] {\nonTerminalSymbol{expression\_comparison}{28}}; & \\
     & & & & \node (p1-4) [terminal] {==}; & \node (p1-5) [nonterminal] {\nonTerminalSymbol{expression\_comparison}{28}}; & \\
     \node (P0start) [firstPoint] {}; & & \node (p0-2) [nonterminal] {\nonTerminalSymbol{expression\_comparison}{28}}; & \node (p0-3) [point] {}; & \node (p0-4) [point] {}; & & \node (p0-6) [point] {}; & \node (p0-7) [lastPoint] {}; & \\
   };
@@ -1015,7 +1015,7 @@
   \draw[->] (p0-3) -- (p0-4) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{instruction-assignment}{25}
+\ruleSubsection{plm\_syntax}{instruction-assignment-without-self}{18}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -1027,7 +1027,7 @@
   \draw[->] (p0-4) -- (p0-5) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{instruction-assignment}{40}
+\ruleSubsection{plm\_syntax}{instruction-assignment-with-self}{18}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -1731,7 +1731,7 @@
   \draw[->] (p0-3) -- (p0-4) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{instruction-procedure-call}{56}
+\ruleSubsection{plm\_syntax}{instruction-procedure-call}{61}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {

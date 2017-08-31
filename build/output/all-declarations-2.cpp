@@ -12276,15 +12276,15 @@ static void extensionMethod_expressionAST_analyzeStaticExpression (const cPtr_ex
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_expressionAST * object = inObject ;
   macroValidSharedObject (object, cPtr_expressionAST) ;
-  GALGAS_instructionListIR var_instructionGenerationList_13987 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-operator-priority.galgas", 442)) ;
-  GALGAS_allocaList var_allocaList_14017 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("expression-operator-priority.galgas", 443)) ;
-  GALGAS_semanticTemporariesStruct joker_14229 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("expression-operator-priority.galgas", 451)) ;
-  GALGAS_universalPropertyAndRoutineMapForContext joker_14296 = GALGAS_universalPropertyAndRoutineMapForContext::constructor_default (SOURCE_FILE ("expression-operator-priority.galgas", 453)) ;
+  GALGAS_instructionListIR var_instructionGenerationList_13985 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-operator-priority.galgas", 442)) ;
+  GALGAS_allocaList var_allocaList_14015 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("expression-operator-priority.galgas", 443)) ;
+  GALGAS_semanticTemporariesStruct joker_14227 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("expression-operator-priority.galgas", 451)) ;
+  GALGAS_universalPropertyAndRoutineMapForContext joker_14294 = GALGAS_universalPropertyAndRoutineMapForContext::constructor_default (SOURCE_FILE ("expression-operator-priority.galgas", 453)) ;
   const GALGAS_expressionAST temp_0 = object ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) temp_0.ptr (), GALGAS_PLMType::constructor_void (SOURCE_FILE ("expression-operator-priority.galgas", 445)), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("expression-operator-priority.galgas", 447)), GALGAS_PLMType::constructor_void (SOURCE_FILE ("expression-operator-priority.galgas", 448)), constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("expression-operator-priority.galgas", 450)), joker_14229, ioArgument_ioGlobalLiteralStringMap, joker_14296, var_allocaList_14017, var_instructionGenerationList_13987, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 444)) ;
-  GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_allocaList_14017.getter_length (SOURCE_FILE ("expression-operator-priority.galgas", 458)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) temp_0.ptr (), GALGAS_PLMType::constructor_void (SOURCE_FILE ("expression-operator-priority.galgas", 445)), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("expression-operator-priority.galgas", 447)), GALGAS_PLMType::constructor_void (SOURCE_FILE ("expression-operator-priority.galgas", 448)), constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("expression-operator-priority.galgas", 450)), joker_14227, ioArgument_ioGlobalLiteralStringMap, joker_14294, var_allocaList_14015, var_instructionGenerationList_13985, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 444)) ;
+  GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_allocaList_14015.getter_length (SOURCE_FILE ("expression-operator-priority.galgas", 458)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_1.boolEnum ()) {
-    test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList_13987.getter_length (SOURCE_FILE ("expression-operator-priority.galgas", 458)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+    test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList_13985.getter_length (SOURCE_FILE ("expression-operator-priority.galgas", 458)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   }
   GALGAS_bool test_2 = test_1 ;
   if (kBoolTrue != test_2.boolEnum ()) {
