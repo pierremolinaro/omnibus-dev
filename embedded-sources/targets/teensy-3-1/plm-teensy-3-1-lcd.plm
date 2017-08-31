@@ -95,10 +95,10 @@ module lcd {
   //············································································
 
   func programLcd4BitDataBusOutput @noUnusedWarning (?inValue $uint8) {
-    self.setD4 (!(inValue & 0x01) != 0)
-    self.setD5 (!(inValue & 0x02) != 0)
-    self.setD6 (!(inValue & 0x04) != 0)
-    self.setD7 (!(inValue & 0x08) != 0)
+    self.setD4 (!(inValue & 0x01) ≠ 0)
+    self.setD5 (!(inValue & 0x02) ≠ 0)
+    self.setD6 (!(inValue & 0x04) ≠ 0)
+    self.setD7 (!(inValue & 0x08) ≠ 0)
   }
 
   //············································································

@@ -1283,6 +1283,109 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyList ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                @PLMTypeFlags struct                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_PLMTypeFlags : public AC_GALGAS_root {
+//--------------------------------- Properties
+  private : uint64_t mFlags ;
+  private : bool mIsValid ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_PLMTypeFlags (void) ;
+
+//--------------------------------- Private constructor
+  private : GALGAS_PLMTypeFlags (const uint64_t inFlags) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_PLMTypeFlags (void) ;
+
+//--------------------------------- Native constructors
+  public : GALGAS_PLMTypeFlags (const GALGAS_PLMTypeFlags & in_instanciable,
+                                const GALGAS_PLMTypeFlags & in_equatable,
+                                const GALGAS_PLMTypeFlags & in_copyable) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_PLMTypeFlags extractObject (const GALGAS_object & inObject,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_PLMTypeFlags constructor_all (LOCATION_ARGS) ;
+
+  public : static class GALGAS_PLMTypeFlags constructor_copyable (LOCATION_ARGS) ;
+
+  public : static class GALGAS_PLMTypeFlags constructor_equatable (LOCATION_ARGS) ;
+
+  public : static class GALGAS_PLMTypeFlags constructor_instanciable (LOCATION_ARGS) ;
+
+  public : static class GALGAS_PLMTypeFlags constructor_none (LOCATION_ARGS) ;
+
+//--------------------------------- & operator
+  public : VIRTUAL_IN_DEBUG GALGAS_PLMTypeFlags operator_and (const GALGAS_PLMTypeFlags & inOperand
+                                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- | operator
+  public : VIRTUAL_IN_DEBUG GALGAS_PLMTypeFlags operator_or (const GALGAS_PLMTypeFlags & inOperand
+                                                             COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ^ operator
+  public : VIRTUAL_IN_DEBUG GALGAS_PLMTypeFlags operator_xor (const GALGAS_PLMTypeFlags & inOperand
+                                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ~ operator
+  public : VIRTUAL_IN_DEBUG GALGAS_PLMTypeFlags operator_tilde (LOCATION_ARGS) const ;
+
+//--------------------------------- - operator
+  public : VIRTUAL_IN_DEBUG GALGAS_PLMTypeFlags substract_operation (const GALGAS_PLMTypeFlags & inOperand,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_PLMTypeFlags & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_all (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_copyable (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_equatable (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_instanciable (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_none (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_PLMTypeFlags class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_PLMTypeFlags ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                   @universalPropertyAndRoutineMapForContext class                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2123,7 +2226,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                               const class GALGAS_PLMType & inOperand1,
                                                               const class GALGAS_bigint & inOperand2,
                                                               const class GALGAS_constantMap & inOperand3,
-                                                              const class GALGAS_uint & inOperand4,
+                                                              const class GALGAS_PLMTypeFlags & inOperand4,
                                                               const class GALGAS_string & inOperand5
                                                               COMMA_LOCATION_ARGS) ;
 
@@ -2148,7 +2251,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
   public : static class GALGAS_PLMType constructor_literalString (LOCATION_ARGS) ;
 
   public : static class GALGAS_PLMType constructor_opaque (const class GALGAS_bigint & inOperand0,
-                                                           const class GALGAS_uint & inOperand1,
+                                                           const class GALGAS_PLMTypeFlags & inOperand1,
                                                            const class GALGAS_string & inOperand2
                                                            COMMA_LOCATION_ARGS) ;
 
@@ -2161,7 +2264,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                               const class GALGAS_propertyMap & inOperand1,
                                                               const class GALGAS_universalPropertyAndRoutineMapForContext & inOperand2,
                                                               const class GALGAS_propertyList & inOperand3,
-                                                              const class GALGAS_uint & inOperand4,
+                                                              const class GALGAS_PLMTypeFlags & inOperand4,
                                                               const class GALGAS_string & inOperand5
                                                               COMMA_LOCATION_ARGS) ;
 
@@ -2180,7 +2283,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                    class GALGAS_PLMType & outArgument1,
                                                    class GALGAS_bigint & outArgument2,
                                                    class GALGAS_constantMap & outArgument3,
-                                                   class GALGAS_uint & outArgument4,
+                                                   class GALGAS_PLMTypeFlags & outArgument4,
                                                    class GALGAS_string & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
@@ -2205,7 +2308,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_opaque (class GALGAS_bigint & outArgument0,
-                                                class GALGAS_uint & outArgument1,
+                                                class GALGAS_PLMTypeFlags & outArgument1,
                                                 class GALGAS_string & outArgument2,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
@@ -2218,7 +2321,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                    class GALGAS_propertyMap & outArgument1,
                                                    class GALGAS_universalPropertyAndRoutineMapForContext & outArgument2,
                                                    class GALGAS_propertyList & outArgument3,
-                                                   class GALGAS_uint & outArgument4,
+                                                   class GALGAS_PLMTypeFlags & outArgument4,
                                                    class GALGAS_string & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
@@ -2880,7 +2983,7 @@ class cEnumAssociatedValues_PLMType_structure : public cEnumAssociatedValues {
   public : const GALGAS_propertyMap mAssociatedValue1 ;
   public : const GALGAS_universalPropertyAndRoutineMapForContext mAssociatedValue2 ;
   public : const GALGAS_propertyList mAssociatedValue3 ;
-  public : const GALGAS_uint mAssociatedValue4 ;
+  public : const GALGAS_PLMTypeFlags mAssociatedValue4 ;
   public : const GALGAS_string mAssociatedValue5 ;
 
 //--- Constructor
@@ -2888,7 +2991,7 @@ class cEnumAssociatedValues_PLMType_structure : public cEnumAssociatedValues {
                                                     const GALGAS_propertyMap & inAssociatedValue1,
                                                     const GALGAS_universalPropertyAndRoutineMapForContext & inAssociatedValue2,
                                                     const GALGAS_propertyList & inAssociatedValue3,
-                                                    const GALGAS_uint & inAssociatedValue4,
+                                                    const GALGAS_PLMTypeFlags & inAssociatedValue4,
                                                     const GALGAS_string & inAssociatedValue5
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -2927,12 +3030,12 @@ class cEnumAssociatedValues_PLMType_integer : public cEnumAssociatedValues {
 
 class cEnumAssociatedValues_PLMType_opaque : public cEnumAssociatedValues {
   public : const GALGAS_bigint mAssociatedValue0 ;
-  public : const GALGAS_uint mAssociatedValue1 ;
+  public : const GALGAS_PLMTypeFlags mAssociatedValue1 ;
   public : const GALGAS_string mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_PLMType_opaque (const GALGAS_bigint & inAssociatedValue0,
-                                                 const GALGAS_uint & inAssociatedValue1,
+                                                 const GALGAS_PLMTypeFlags & inAssociatedValue1,
                                                  const GALGAS_string & inAssociatedValue2
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -2950,7 +3053,7 @@ class cEnumAssociatedValues_PLMType_arrayType : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue1 ;
   public : const GALGAS_bigint mAssociatedValue2 ;
   public : const GALGAS_constantMap mAssociatedValue3 ;
-  public : const GALGAS_uint mAssociatedValue4 ;
+  public : const GALGAS_PLMTypeFlags mAssociatedValue4 ;
   public : const GALGAS_string mAssociatedValue5 ;
 
 //--- Constructor
@@ -2958,7 +3061,7 @@ class cEnumAssociatedValues_PLMType_arrayType : public cEnumAssociatedValues {
                                                     const GALGAS_PLMType & inAssociatedValue1,
                                                     const GALGAS_bigint & inAssociatedValue2,
                                                     const GALGAS_constantMap & inAssociatedValue3,
-                                                    const GALGAS_uint & inAssociatedValue4,
+                                                    const GALGAS_PLMTypeFlags & inAssociatedValue4,
                                                     const GALGAS_string & inAssociatedValue5
                                                     COMMA_LOCATION_ARGS) ;
 

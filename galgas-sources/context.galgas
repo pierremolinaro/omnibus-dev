@@ -260,7 +260,7 @@ proc buildSemanticContext
         !elementType:elementType
         !size:[stringValueList length]
         !constantMap: {}
-        !flags:0
+        !flags:.none
         !plmTypeName:plmNameForStaticListType (!lkey)
       }
       !index:[outSemanticContext.mTypeMap count]

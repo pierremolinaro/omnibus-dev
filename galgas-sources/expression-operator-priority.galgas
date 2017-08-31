@@ -139,7 +139,7 @@ syntax extension plm_syntax {
         !rightExpression
       }
     or
-      $!=$
+      $≠$
       let operatorLocation = @location.here
       <expression_comparison> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {

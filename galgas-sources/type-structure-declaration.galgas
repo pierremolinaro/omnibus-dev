@@ -270,15 +270,15 @@ override method @structureDeclarationAST enterInContext
     !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Attribute "copyable"
-  var flags = instanciableFlag ()
+  var flags = @PLMTypeFlags.instanciable
   for (s) in mAttributeListAST do
     if s.string == "copyable" then
-      if (flags & instanciableFlag ()) != 0 then
+      if [flags copyable] then
         error s : "duplicated attribute"
       elsif not canBeCopied then
         error mStructureName : "this structure cannot be copied, one field is not copyable"
       else
-        flags = flags | instanciableFlag ()
+        flags = flags | @PLMTypeFlags.copyable
       end
     else
       error s : "only @copyable attribute is allowed here"

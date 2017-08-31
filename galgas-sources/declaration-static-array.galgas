@@ -213,7 +213,7 @@ override method @staticArrayAST enterInContext
     !propertyMap:staticlistPropertyMap
     !universalMap:universalMap
     !propertyList:propertyList
-    !flags:0
+    !flags:.none
     !plmTypeName:mStaticListName
   }
   [!?ioContext.mTypeMap insertType
