@@ -18,7 +18,7 @@ Les mots réservés \plm+true+ et \plm+false+ dénotent respectivement la valeur
 
 \section{Les opérateurs infix de comparaison}
 
-Les valeurs booléennes sont comparables, les six opérateurs \plm+==+, \plm+!=+, \plm+>=+, \plm+>+, \plm+<=+ et \plm+<+ sont acceptés, avec \plm=false= < \plm=true=.
+Les valeurs booléennes sont comparables, les six opérateurs \plm+==+, \plm+≠+, \plm+≥+, \plm+>+, \plm+≤+ et \plm+<+ sont acceptés, avec \plm=false < true=.
  
 \section{Les opérateurs infixes \texttt{and}, \texttt{or} et \texttt{xor}}
 
@@ -43,10 +43,10 @@ let result $uint8 = if x { 4 }else{ 2 }
 
 \section{Conversion d'une valeur entière en booléen}
 
-Il n'y a pas d'opérateur dédié à la conversion d'une valeur entière vers un booléen. Il suffit d'utiliser des opérateurs entre entiers comme \plm+==+ ou \plm+!=+ pour réaliser une conversion :
+Il n'y a pas d'opérateur dédié à la conversion d'une valeur entière vers un booléen. Il suffit d'utiliser des opérateurs entre entiers comme \plm+==+ ou \plm+≠+ pour réaliser une conversion :
 
 \begin{PLM}
-let result $bool = x != 0 // x est une expression entière
+let result $bool = x ≠ 0 // x est une expression entière
 \end{PLM}
 
 

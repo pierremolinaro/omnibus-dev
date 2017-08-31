@@ -8143,7 +8143,7 @@ const char * gWrapperFileContent_23_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public guard waitUntilMS @noUnusedWarning (\?deadline:inDeadline $uint32) {\n"
-  "    accept = inDeadline <= self.kernelMillis ()\n"
+  "    accept = inDeadline \xE2""\x89""\xA4"" self.kernelMillis ()\n"
   "    if not accept {\n"
   "      handle (!guardedDeadline:inDeadline)\n"
   "    }\n"
@@ -8159,7 +8159,7 @@ const cRegularFileWrapper gWrapperFile_23_targetTemplates (
   "plm-lpc2294-xtr.plm",
   "plm",
   true, // Text file
-  4811, // Text length
+  4810, // Text length
   gWrapperFileContent_23_targetTemplates
 ) ;
 
@@ -12841,7 +12841,7 @@ const char * gWrapperFileContent_47_targetTemplates = "\n"
   "    var value = inValue\n"
   "    var isPrinting = false\n"
   "    loop while divisor > 0 {\n"
-  "      if isPrinting or (value >= divisor) {\n"
+  "      if isPrinting or (value \xE2""\x89""\xA5"" divisor) {\n"
   "        let quotient = value / divisor\n"
   "        let remainder = value - quotient * divisor\n"
   "        self.writeData_inUserMode (!0x30 + convert quotient : $uint8)\n"
@@ -12927,7 +12927,7 @@ const char * gWrapperFileContent_47_targetTemplates = "\n"
   "    var value = inValue\n"
   "    var isPrinting = false\n"
   "    loop while divisor > 0 {\n"
-  "      if isPrinting or (value >= divisor) {\n"
+  "      if isPrinting or (value \xE2""\x89""\xA5"" divisor) {\n"
   "        let quotient = value !/ divisor\n"
   "        let remainder = value -% quotient *% divisor\n"
   "        self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)\n"
@@ -12944,7 +12944,7 @@ const char * gWrapperFileContent_47_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func panic printSignedInPanicMode @noUnusedWarning (\?inValue $int32) {\n"
-  "    if inValue >= 0 {\n"
+  "    if inValue \xE2""\x89""\xA5"" 0 {\n"
   "      self.printUnsignedInPanicMode (!truncate inValue : $uint32)\n"
   "    }else{\n"
   "      self.writeDataInPanicMode (!0x2D) // Signe -\n"
@@ -13009,7 +13009,7 @@ const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   "plm-teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  14401, // Text length
+  14398, // Text length
   gWrapperFileContent_47_targetTemplates
 ) ;
 
@@ -13201,7 +13201,7 @@ const char * gWrapperFileContent_49_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public guard waitUntilMS @noUnusedWarning (\?deadline:inDeadline $uint32) {\n"
-  "    accept = (inDeadline) <= self.mUptimeMS\n"
+  "    accept = (inDeadline) \xE2""\x89""\xA4"" self.mUptimeMS\n"
   "    if not accept {\n"
   "      handle (!guardedDeadline:inDeadline)\n"
   "    }\n"
@@ -13217,7 +13217,7 @@ const cRegularFileWrapper gWrapperFile_49_targetTemplates (
   "plm-teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
-  4642, // Text length
+  4641, // Text length
   gWrapperFileContent_49_targetTemplates
 ) ;
 
@@ -18713,7 +18713,7 @@ const char * gWrapperFileContent_82_targetTemplates = "\n"
   "    var value = inValue\n"
   "    var isPrinting = false\n"
   "    loop while divisor > 0 {\n"
-  "      if isPrinting or (value >= divisor) {\n"
+  "      if isPrinting or (value \xE2""\x89""\xA5"" divisor) {\n"
   "        let quotient = value / divisor\n"
   "        let remainder = value - quotient * divisor\n"
   "        self.writeData_inUserMode (!0x30 + convert quotient : $uint8)\n"
@@ -18799,7 +18799,7 @@ const char * gWrapperFileContent_82_targetTemplates = "\n"
   "    var value = inValue\n"
   "    var isPrinting = false\n"
   "    loop while divisor > 0 {\n"
-  "      if isPrinting or (value >= divisor) {\n"
+  "      if isPrinting or (value \xE2""\x89""\xA5"" divisor) {\n"
   "        let quotient = value !/ divisor\n"
   "        let remainder = value -% quotient *% divisor\n"
   "        self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)\n"
@@ -18816,7 +18816,7 @@ const char * gWrapperFileContent_82_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func panic printSignedInPanicMode @noUnusedWarning (\?inValue $int32) {\n"
-  "    if inValue >= 0 {\n"
+  "    if inValue \xE2""\x89""\xA5"" 0 {\n"
   "      self.printUnsignedInPanicMode (!truncate inValue : $uint32)\n"
   "    }else{\n"
   "      self.writeDataInPanicMode (!0x2D) // Signe -\n"
@@ -18881,7 +18881,7 @@ const cRegularFileWrapper gWrapperFile_82_targetTemplates (
   "plm-teensy-3-6-lcd.plm",
   "plm",
   true, // Text file
-  14147, // Text length
+  14144, // Text length
   gWrapperFileContent_82_targetTemplates
 ) ;
 
@@ -19023,7 +19023,7 @@ const char * gWrapperFileContent_84_targetTemplates = "\n"
   "\n"
   "  public guard waitUntilMS @noUnusedWarning (\?deadline:inDeadline $uint32) {\n"
   "    noteCurrentTaskFreeStackSize ()\n"
-  "    accept = (inDeadline) <= self.mUptimeMS\n"
+  "    accept = (inDeadline) \xE2""\x89""\xA4"" self.mUptimeMS\n"
   "    if not accept {\n"
   "      handle (!guardedDeadline:inDeadline)\n"
   "    }\n"
@@ -19039,7 +19039,7 @@ const cRegularFileWrapper gWrapperFile_84_targetTemplates (
   "plm-teensy-3-6-time.plm",
   "plm",
   true, // Text file
-  3618, // Text length
+  3617, // Text length
   gWrapperFileContent_84_targetTemplates
 ) ;
 

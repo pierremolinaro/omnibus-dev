@@ -264,7 +264,7 @@ module lcd {
     var value = inValue
     var isPrinting = false
     loop while divisor > 0 {
-      if isPrinting or (value >= divisor) {
+      if isPrinting or (value ≥ divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
         self.writeData_inUserMode (!0x30 + convert quotient : $uint8)
@@ -350,7 +350,7 @@ module lcd {
     var value = inValue
     var isPrinting = false
     loop while divisor > 0 {
-      if isPrinting or (value >= divisor) {
+      if isPrinting or (value ≥ divisor) {
         let quotient = value !/ divisor
         let remainder = value -% quotient *% divisor
         self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)
@@ -367,7 +367,7 @@ module lcd {
   //············································································
 
   public func panic printSignedInPanicMode @noUnusedWarning (?inValue $int32) {
-    if inValue >= 0 {
+    if inValue ≥ 0 {
       self.printUnsignedInPanicMode (!truncate inValue : $uint32)
     }else{
       self.writeDataInPanicMode (!0x2D) // Signe -

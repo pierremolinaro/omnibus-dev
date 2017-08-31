@@ -157,7 +157,7 @@ syntax extension plm_syntax {
     <expression_shift> ?outExpression
     select
     or
-      $<=$
+      $≤$
       let operatorLocation = @location.here
       <expression_shift> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
@@ -167,7 +167,7 @@ syntax extension plm_syntax {
         !rightExpression
       }
     or
-      $>=$
+      $≥$
       let operatorLocation = @location.here
       <expression_shift> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {

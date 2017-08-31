@@ -133,7 +133,7 @@ var x = t [i] // Vérification à l'exécution que i < 20
 
 La seconde possibilité est que ce type entier non signé présente une valeur maximum strictement inférieure à la taille du tableau : la compilation garantit que l'indice sera toujours valide, aucune vérification n'est effectuée à l'exécution. Par exemple :
 \begin{PLM}
-var i $uint4 = ... // Donc 0 <= i <= 15
+var i $uint4 = ... // Donc 0 ≤ i ≤ 15
 var x = t [i] // Aucune vérification à l'exécution car toujours i < 20
 \end{PLM}
 
@@ -151,13 +151,13 @@ La première vérification est toujours réalisée à l'exécution ; la seconde 
 
 \begin{PLM}
 var i $int32 = ...
-var x = t [i] // Vérification à l'exécution que 0 <= i < 20
+var x = t [i] // Vérification à l'exécution que 0 ≤ i < 20
 \end{PLM}
 
 
 \begin{PLM}
-var i $int4 = ... // Donc -16 <= i < 15
-var x = t [i] // Vérification à l'exécution que 0 <= i
+var i $int4 = ... // Donc -16 ≤ i < 15
+var x = t [i] // Vérification à l'exécution que 0 ≤ i
 \end{PLM}
 
 En cas d'échec de la vérification à l'exécution, la panique est déclenchée (\refTableauPage{tableauCodePanique}).

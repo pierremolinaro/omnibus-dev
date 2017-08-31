@@ -134,7 +134,7 @@ module time {
   //············································································
 
   public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
-    accept = (inDeadline) <= self.mUptimeMS
+    accept = (inDeadline) ≤ self.mUptimeMS
     if not accept {
       handle (!guardedDeadline:inDeadline)
     }

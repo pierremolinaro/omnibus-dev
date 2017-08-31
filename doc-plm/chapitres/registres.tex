@@ -61,7 +61,7 @@ Le type de la constante \plm+x+ est \plm+$uint32+, déduit du type du registre d
 
 Pour savoir si le bit \texttt{ODE} est activé, on réalise un masquage (l'annotation du type \plm+$bool+ est facultative)~:
 \begin{PLM}
-let ODEactivé $bool = (PORTA_PCR0 & (1 << 5)) != 0
+let ODEactivé $bool = (PORTA_PCR0 & (1 << 5)) ≠ 0
 \end{PLM}
 
 Pour obtenir la valeur du champ \texttt{MUX}, on effectue un décalage, suivi d'un masquage~:
@@ -142,7 +142,7 @@ L'expression \plm+PORTA_PCR0.MUX.shifted+ est équivalente à \plm+(PORTA_PCR0 >
 Pour le champ booléen \texttt{ODE}, on écrivait à la \refSection{simpleDeclarationRegistre}~:
 
 \begin{PLM}
-let ODEactivé $bool = (PORTA_PCR0 & (1 << 5)) != 0
+let ODEactivé $bool = (PORTA_PCR0 & (1 << 5)) ≠ 0
 \end{PLM}
 
 On peut maintenant écrire (noter que le type du résultat est \plm=$uint32=)~:
@@ -160,7 +160,7 @@ Pour obtenir la valeur valeur booléenne, on utilise l'accesseur \plm=bool= (not
 let ODEactivé $bool = PORTA_PCR0.ODE.bool // false ou true
 \end{PLM}
 
-L'expression \plm+PORTA_PCR0.ODE.bool+ est équivalente à \plm+(PORTA_PCR0 & (1 << 5)) != 0+.
+L'expression \plm+PORTA_PCR0.ODE.bool+ est équivalente à \plm+(PORTA_PCR0 & (1 << 5)) ≠ 0+.
 
 
 
