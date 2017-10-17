@@ -5,11 +5,11 @@ target "teensy-3-1/unprivileged"
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !true)
+  digitalWrite (!port:.D13 !yes)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !false)
+  digitalWrite (!port:.D13 !no)
 }
 
 //-----------------------------------------------------------------------------*
@@ -49,12 +49,12 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     sémaphore.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L1 !true)
+    digitalWrite (!port:LED_L1 !yes)
     let constanteAccentuée = self.top
     time.waitUntilMS (!deadline:constanteAccentuée)
     sémaphore.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L1 !false)
+    digitalWrite (!port:LED_L1 !no)
   }
 }
 
@@ -63,9 +63,9 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
 
   while sémaphore.wait () {
-    digitalWrite (!port:LED_L2 !true)
+    digitalWrite (!port:LED_L2 !yes)
     sémaphore.wait ()
-    digitalWrite (!port:LED_L2 !false)
+    digitalWrite (!port:LED_L2 !no)
   }
 }
 

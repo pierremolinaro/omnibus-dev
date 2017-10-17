@@ -28,7 +28,6 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "extend",
   "extension",
   "extern",
-  "false",
   "for",
   "func",
   "guard",
@@ -40,6 +39,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "let",
   "loop",
   "module",
+  "no",
   "nop",
   "not",
   "or",
@@ -62,7 +62,6 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "system",
   "target",
   "task",
-  "true",
   "truncate",
   "type",
   "until",
@@ -70,7 +69,8 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "user",
   "when",
   "while",
-  "xor"
+  "xor",
+  "yes"
 }
 
 rule isUnicodeLetter {

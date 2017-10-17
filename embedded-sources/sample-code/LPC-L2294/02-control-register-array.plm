@@ -39,7 +39,7 @@ system section ledOff () {
 //------------------------------------------------*
 
 var globalVar $uint32 = 0
-var globalBit $bool = false
+var globalBit $bool = no
 
 //------------------------------------------------*
 

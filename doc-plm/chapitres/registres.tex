@@ -157,7 +157,7 @@ let champODEdécalé $uint32 = PORTA_PCR0.ODE.shifted // 0 ou 1
 
 Pour obtenir la valeur valeur booléenne, on utilise l'accesseur \plm=bool= (noter que le type du résultat est maintenant \plm=$bool=)~:
 \begin{PLM}
-let ODEactivé $bool = PORTA_PCR0.ODE.bool // false ou true
+let ODEactivé $bool = PORTA_PCR0.ODE.bool // no ou yes
 \end{PLM}
 
 L'expression \plm+PORTA_PCR0.ODE.bool+ est équivalente à \plm+(PORTA_PCR0 & (1 << 5)) ≠ 0+.
@@ -181,7 +181,7 @@ L'expression \plm+PORTA_PCR0.ODE.bool+ est équivalente à \plm+(PORTA_PCR0 & (1
 
 \subsectionLabel{Construction à partir des valeurs de champs d'un registre de contrôle}{constructionChampEntierRegistre}
 
-La construction particulière \plm+$registre {champ:expression, ...}+ permet de définir facilement la valeur à affecter à un registre de contrôle. Prenons toujours l'exemple du regitre \texttt{PORTA\_PCR0} dont la composition est décrite à la \refFigurePage{}{definitionPORTxPCRn}.
+La construction particulière \plm+$registre {champ:expression, ...}+ permet de définir facilement la valeur à affecter à un registre de contrôle. Prenons toujours l'exemple du registre \texttt{PORTA\_PCR0} dont la composition est décrite à la \refFigurePage{}{definitionPORTxPCRn}.
 
 
 À la \refSection{simpleDeclarationRegistre}, pour écrire $1$ dans le champ \texttt{MUX} et zéro dans les autres champs on écrivait~:

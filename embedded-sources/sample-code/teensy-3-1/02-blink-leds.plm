@@ -5,11 +5,11 @@ target "teensy-3-1/privileged"
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !true)
+  digitalWrite (!port:.D13 !yes)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !false)
+  digitalWrite (!port:.D13 !no)
 }
 
 //——————————————————————————————————————————————————————————————————————————————
@@ -37,10 +37,10 @@ task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
   while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L0 !true)
+    digitalWrite (!port:LED_L0 !yes)
     self.compteur +%= 500
     time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L0 !false)
+    digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!time.millis ())
@@ -53,10 +53,10 @@ task T2 priority 2 stackSize 512 {
   var compteur $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L1 !true)
+    digitalWrite (!port:LED_L1 !yes)
     self.compteur +%= 499
     time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L1 !false)
+    digitalWrite (!port:LED_L1 !no)
     self.compteur +%= 499
   }
 }
@@ -67,10 +67,10 @@ task T3 priority 3 stackSize 512 {
   var compteur $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L2 !true)
+    digitalWrite (!port:LED_L2 !yes)
     self.compteur +%= 498
     time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L2 !false)
+    digitalWrite (!port:LED_L2 !no)
     self.compteur +%= 498
   }
 }
@@ -81,10 +81,10 @@ task T4 priority 4 stackSize 512 {
   var compteur $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L3 !true)
+    digitalWrite (!port:LED_L3 !yes)
     self.compteur +%= 497
     time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L3 !false)
+    digitalWrite (!port:LED_L3 !no)
     self.compteur +%= 497
   }
 }
@@ -95,10 +95,10 @@ task T5 priority 5 stackSize 512 {
   var compteur $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L4 !true)
+    digitalWrite (!port:LED_L4 !yes)
     self.compteur +%= 496
     time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L4 !false)
+    digitalWrite (!port:LED_L4 !no)
     self.compteur +%= 496
   }
 }

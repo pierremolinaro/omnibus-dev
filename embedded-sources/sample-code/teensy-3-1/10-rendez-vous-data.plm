@@ -5,11 +5,11 @@ target "teensy-3-1/unprivileged"
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !true)
+  digitalWrite (!port:.D13 !yes)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !false)
+  digitalWrite (!port:.D13 !no)
 }
 
 //-----------------------------------------------------------------------------*
