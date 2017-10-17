@@ -44,26 +44,26 @@ module lcd {
   //············································································
 
   func driveHighE @noUnusedWarning () {
-    digitalWrite (!port:ENABLE !true)
+    digitalWrite (!port:ENABLE !yes)
   }
 
   //············································································
 
   func driveLowE @noUnusedWarning () {
-    digitalWrite (!port:ENABLE !false)
+    digitalWrite (!port:ENABLE !no)
   }
 
   //············································································
 
 
   func driveHighRS @noUnusedWarning () {
-   digitalWrite (!port:RS !true)
+   digitalWrite (!port:RS !yes)
   }
 
   //············································································
 
   func driveLowRS @noUnusedWarning () {
-    digitalWrite (!port:RS !false)
+    digitalWrite (!port:RS !no)
   }
 
   //············································································
@@ -262,14 +262,14 @@ module lcd {
   public func user printUnsigned @noUnusedWarning (?inValue $uint32) {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
-    var isPrinting = false
+    var isPrinting = no
     loop while divisor > 0 {
       if isPrinting or (value ≥ divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
         self.writeData_inUserMode (!0x30 + convert quotient : $uint8)
         value = remainder
-        isPrinting = true
+        isPrinting = yes
       }
       divisor = divisor / 10
     }
@@ -348,14 +348,14 @@ module lcd {
   public func panic printUnsignedInPanicMode @noUnusedWarning (?inValue $uint32) {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
-    var isPrinting = false
+    var isPrinting = no
     loop while divisor > 0 {
       if isPrinting or (value ≥ divisor) {
         let quotient = value !/ divisor
         let remainder = value -% quotient *% divisor
         self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)
         value = remainder
-        isPrinting = true
+        isPrinting = yes
       }
       divisor = divisor !/ 10
     }

@@ -163,8 +163,8 @@ Aucun code n'est engendré. La directive \plm=check= peut donc apparaître dans 
 
 Exemples :
 \begin{PLM}
-check true  // Ok
-check false // Erreur, expression fausse
+check yes  // Ok
+check no // Erreur, expression fausse
 \end{PLM}
 
 
@@ -184,7 +184,7 @@ Si le programme est compilé avec l'option \texttt{-{}-no-panic-generation}, alo
 
 Noter que \plm=expression= ne doit pas être calculable statiquement. Si elle est calculable statiquement, il faut utiliser la directive \plm=check=, \refSectionPage{directiveCheck}. Par exemple, le code suivant provoque une erreur de compilation :
 \begin{PLM}
-assert true // Erreur de compilation, l'expression est calculable statiquement
+assert yes // Erreur de compilation, l'expression est calculable statiquement
 \end{PLM}
 
 

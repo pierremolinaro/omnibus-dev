@@ -139,9 +139,6 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_extension = "the 'extensi
 //--- Syntax error message for terminal '$extern$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_extern = "the 'extern' keyword" ;
 
-//--- Syntax error message for terminal '$false$' :
-static const char * gSyntaxErrorMessage_plm_5F_lexique_false = "the 'false' keyword" ;
-
 //--- Syntax error message for terminal '$for$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_for = "the 'for' keyword" ;
 
@@ -174,6 +171,9 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_loop = "the 'loop' keywor
 
 //--- Syntax error message for terminal '$module$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_module = "the 'module' keyword" ;
+
+//--- Syntax error message for terminal '$no$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_no = "the 'no' keyword" ;
 
 //--- Syntax error message for terminal '$nop$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_nop = "the 'nop' keyword" ;
@@ -241,9 +241,6 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_target = "the 'target' ke
 //--- Syntax error message for terminal '$task$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_task = "the 'task' keyword" ;
 
-//--- Syntax error message for terminal '$true$' :
-static const char * gSyntaxErrorMessage_plm_5F_lexique_true = "the 'true' keyword" ;
-
 //--- Syntax error message for terminal '$truncate$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_truncate = "the 'truncate' keyword" ;
 
@@ -267,6 +264,9 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_while = "the 'while' keyw
 
 //--- Syntax error message for terminal '$xor$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_xor = "the 'xor' keyword" ;
+
+//--- Syntax error message for terminal '$yes$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_yes = "the 'yes' keyword" ;
 
 //--- Syntax error message for terminal '$:$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique__3A_ = "the ':' delimitor" ;
@@ -444,7 +444,6 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_extend,
     gSyntaxErrorMessage_plm_5F_lexique_extension,
     gSyntaxErrorMessage_plm_5F_lexique_extern,
-    gSyntaxErrorMessage_plm_5F_lexique_false,
     gSyntaxErrorMessage_plm_5F_lexique_for,
     gSyntaxErrorMessage_plm_5F_lexique_func,
     gSyntaxErrorMessage_plm_5F_lexique_guard,
@@ -456,6 +455,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_let,
     gSyntaxErrorMessage_plm_5F_lexique_loop,
     gSyntaxErrorMessage_plm_5F_lexique_module,
+    gSyntaxErrorMessage_plm_5F_lexique_no,
     gSyntaxErrorMessage_plm_5F_lexique_nop,
     gSyntaxErrorMessage_plm_5F_lexique_not,
     gSyntaxErrorMessage_plm_5F_lexique_or,
@@ -478,7 +478,6 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_system,
     gSyntaxErrorMessage_plm_5F_lexique_target,
     gSyntaxErrorMessage_plm_5F_lexique_task,
-    gSyntaxErrorMessage_plm_5F_lexique_true,
     gSyntaxErrorMessage_plm_5F_lexique_truncate,
     gSyntaxErrorMessage_plm_5F_lexique_type,
     gSyntaxErrorMessage_plm_5F_lexique_until,
@@ -487,6 +486,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_when,
     gSyntaxErrorMessage_plm_5F_lexique_while,
     gSyntaxErrorMessage_plm_5F_lexique_xor,
+    gSyntaxErrorMessage_plm_5F_lexique_yes,
     gSyntaxErrorMessage_plm_5F_lexique__3A_,
     gSyntaxErrorMessage_plm_5F_lexique__2E_,
     gSyntaxErrorMessage_plm_5F_lexique__2C_,
@@ -972,16 +972,6 @@ static const utf32 kUnicodeString_plm_5F_lexique_extern [] = {
   TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$false$'
-static const utf32 kUnicodeString_plm_5F_lexique_false [] = {
-  TO_UNICODE ('f'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (0)
-} ;
-
 //--- Unicode string for '$for$'
 static const utf32 kUnicodeString_plm_5F_lexique_for [] = {
   TO_UNICODE ('f'),
@@ -1076,6 +1066,13 @@ static const utf32 kUnicodeString_plm_5F_lexique_module [] = {
   TO_UNICODE ('u'),
   TO_UNICODE ('l'),
   TO_UNICODE ('e'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$no$'
+static const utf32 kUnicodeString_plm_5F_lexique_no [] = {
+  TO_UNICODE ('n'),
+  TO_UNICODE ('o'),
   TO_UNICODE (0)
 } ;
 
@@ -1320,15 +1317,6 @@ static const utf32 kUnicodeString_plm_5F_lexique_task [] = {
   TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$true$'
-static const utf32 kUnicodeString_plm_5F_lexique_true [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (0)
-} ;
-
 //--- Unicode string for '$truncate$'
 static const utf32 kUnicodeString_plm_5F_lexique_truncate [] = {
   TO_UNICODE ('t'),
@@ -1402,6 +1390,14 @@ static const utf32 kUnicodeString_plm_5F_lexique_xor [] = {
   TO_UNICODE ('x'),
   TO_UNICODE ('o'),
   TO_UNICODE ('r'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$yes$'
+static const utf32 kUnicodeString_plm_5F_lexique_yes [] = {
+  TO_UNICODE ('y'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('s'),
   TO_UNICODE (0)
 } ;
 
@@ -1527,6 +1523,7 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_do, 2, C_Lexique_plm_5F_lexique::kToken_do),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_if, 2, C_Lexique_plm_5F_lexique::kToken_if),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_in, 2, C_Lexique_plm_5F_lexique::kToken_in),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_no, 2, C_Lexique_plm_5F_lexique::kToken_no),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_or, 2, C_Lexique_plm_5F_lexique::kToken_or),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_and, 3, C_Lexique_plm_5F_lexique::kToken_and),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_for, 3, C_Lexique_plm_5F_lexique::kToken_for),
@@ -1536,6 +1533,7 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_not, 3, C_Lexique_plm_5F_lexique::kToken_not),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_var, 3, C_Lexique_plm_5F_lexique::kToken_var),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_xor, 3, C_Lexique_plm_5F_lexique::kToken_xor),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_yes, 3, C_Lexique_plm_5F_lexique::kToken_yes),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_boot, 4, C_Lexique_plm_5F_lexique::kToken_boot),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_case, 4, C_Lexique_plm_5F_lexique::kToken_case),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_else, 4, C_Lexique_plm_5F_lexique::kToken_else),
@@ -1547,12 +1545,10 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_self, 4, C_Lexique_plm_5F_lexique::kToken_self),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_sync, 4, C_Lexique_plm_5F_lexique::kToken_sync),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_task, 4, C_Lexique_plm_5F_lexique::kToken_task),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_true, 4, C_Lexique_plm_5F_lexique::kToken_true),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_type, 4, C_Lexique_plm_5F_lexique::kToken_type),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_user, 4, C_Lexique_plm_5F_lexique::kToken_user),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_when, 4, C_Lexique_plm_5F_lexique::kToken_when),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_check, 5, C_Lexique_plm_5F_lexique::kToken_check),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_false, 5, C_Lexique_plm_5F_lexique::kToken_false),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_guard, 5, C_Lexique_plm_5F_lexique::kToken_guard),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_panic, 5, C_Lexique_plm_5F_lexique::kToken_panic),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_setup, 5, C_Lexique_plm_5F_lexique::kToken_setup),
@@ -1733,11 +1729,6 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("extern") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
-    case kToken_false:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("false") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
     case kToken_for:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("for") ;
@@ -1791,6 +1782,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_module:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("module") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_no:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("no") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_nop:
@@ -1903,11 +1899,6 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("task") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
-    case kToken_true:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("true") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
     case kToken_truncate:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("truncate") ;
@@ -1946,6 +1937,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_xor:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("xor") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_yes:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("yes") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3A_:
@@ -2730,7 +2726,6 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("extend") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("extension") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("extern") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("false") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("for") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("func") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("guard") COMMA_THERE) ;
@@ -2742,6 +2737,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("let") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("loop") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("module") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("no") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("nop") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("not") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("or") COMMA_THERE) ;
@@ -2764,7 +2760,6 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("system") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("target") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("task") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("true") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("truncate") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("type") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("until") COMMA_THERE) ;
@@ -2773,6 +2768,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("when") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("while") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("xor") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("yes") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (":") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (".") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (",") COMMA_THERE) ;
@@ -2896,6 +2892,7 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.appendObject ("do") ;
     ioList.appendObject ("if") ;
     ioList.appendObject ("in") ;
+    ioList.appendObject ("no") ;
     ioList.appendObject ("or") ;
     ioList.appendObject ("and") ;
     ioList.appendObject ("for") ;
@@ -2905,6 +2902,7 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.appendObject ("not") ;
     ioList.appendObject ("var") ;
     ioList.appendObject ("xor") ;
+    ioList.appendObject ("yes") ;
     ioList.appendObject ("boot") ;
     ioList.appendObject ("case") ;
     ioList.appendObject ("else") ;
@@ -2916,12 +2914,10 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.appendObject ("self") ;
     ioList.appendObject ("sync") ;
     ioList.appendObject ("task") ;
-    ioList.appendObject ("true") ;
     ioList.appendObject ("type") ;
     ioList.appendObject ("user") ;
     ioList.appendObject ("when") ;
     ioList.appendObject ("check") ;
-    ioList.appendObject ("false") ;
     ioList.appendObject ("guard") ;
     ioList.appendObject ("panic") ;
     ioList.appendObject ("setup") ;
@@ -2987,7 +2983,6 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_extend */,
     1 /* plm_lexique_1_extension */,
     1 /* plm_lexique_1_extern */,
-    1 /* plm_lexique_1_false */,
     1 /* plm_lexique_1_for */,
     1 /* plm_lexique_1_func */,
     1 /* plm_lexique_1_guard */,
@@ -2999,6 +2994,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_let */,
     1 /* plm_lexique_1_loop */,
     1 /* plm_lexique_1_module */,
+    1 /* plm_lexique_1_no */,
     1 /* plm_lexique_1_nop */,
     1 /* plm_lexique_1_not */,
     1 /* plm_lexique_1_or */,
@@ -3021,7 +3017,6 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_system */,
     1 /* plm_lexique_1_target */,
     1 /* plm_lexique_1_task */,
-    1 /* plm_lexique_1_true */,
     1 /* plm_lexique_1_truncate */,
     1 /* plm_lexique_1_type */,
     1 /* plm_lexique_1_until */,
@@ -3030,6 +3025,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_when */,
     1 /* plm_lexique_1_while */,
     1 /* plm_lexique_1_xor */,
+    1 /* plm_lexique_1_yes */,
     7 /* plm_lexique_1__3A_ */,
     7 /* plm_lexique_1__2E_ */,
     7 /* plm_lexique_1__2C_ */,
@@ -15246,14 +15242,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i64_parse (C_Lexique_plm_
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i65_ (GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_true) COMMA_SOURCE_FILE ("expression-true-false.galgas", 18)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_yes) COMMA_SOURCE_FILE ("expression-true-false.galgas", 18)) ;
   outArgument_outExpression = GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_bool (true)  COMMA_SOURCE_FILE ("expression-true-false.galgas", 19)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i65_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_true) COMMA_SOURCE_FILE ("expression-true-false.galgas", 18)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_yes) COMMA_SOURCE_FILE ("expression-true-false.galgas", 18)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -15262,14 +15258,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i65_parse (C_Lexique_plm_
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i66_ (GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_false) COMMA_SOURCE_FILE ("expression-true-false.galgas", 25)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_no) COMMA_SOURCE_FILE ("expression-true-false.galgas", 25)) ;
   outArgument_outExpression = GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_bool (false)  COMMA_SOURCE_FILE ("expression-true-false.galgas", 26)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i66_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_false) COMMA_SOURCE_FILE ("expression-true-false.galgas", 25)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_no) COMMA_SOURCE_FILE ("expression-true-false.galgas", 25)) ;
   inCompiler->resetTemplateString () ;
 }
 

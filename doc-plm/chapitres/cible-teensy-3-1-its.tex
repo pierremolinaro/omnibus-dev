@@ -458,7 +458,7 @@ Cette primitive effectue l'opération \texttt{wait} sur le sémaphore sur lequel
   public primitive wait (?untilDeadline:inDeadline $uint32) -> $bool
 \end{PLM}
 
-Cette primitive attend d'effectuer l'opération \texttt{wait}, jusqu'à l'échéance \plm=inDeadline=. Elle renvoie \plm=true= si la primitive \texttt{P} a été effectuée, ou \plm=false= si l'échéance est arrivée.
+Cette primitive attend d'effectuer l'opération \texttt{wait}, jusqu'à l'échéance \plm=inDeadline=. Elle renvoie \plm=yes= si la primitive \texttt{P} a été effectuée, ou \plm=no= si l'échéance est arrivée.
 
 
 
@@ -545,7 +545,7 @@ func primitive service guard
 makeTaskReady (?!fromList:waitingList $taskList) -> $bool
 \end{PLM}
 
-Si la liste \plm=waitingList= est vide, la fonction renvoie \plm=false=. Si la liste n'est pas vide, cette fonction retire de la liste la tâche de plus forte priorité, la rend prête, et la fonction renvoie \plm=true=.
+Si la liste \plm=waitingList= est vide, la fonction renvoie \plm=no=. Si la liste n'est pas vide, cette fonction retire de la liste la tâche de plus forte priorité, la rend prête, et la fonction renvoie \plm=yes=.
 
 Cette fonction est appelable en mode \plm=primitive=, c'est-à-dire par les primitives, et en mode \plm=service=, c'est-à-dire par les routines d'interruption.
 

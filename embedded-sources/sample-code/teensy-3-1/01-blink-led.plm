@@ -5,11 +5,11 @@ target "teensy-3-1/unprivileged"
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !true)
+  digitalWrite (!port:.D13 !yes)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !false)
+  digitalWrite (!port:.D13 !no)
 }
 
 let LED_L0 = $digitalPort.D3
@@ -27,10 +27,10 @@ task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
   while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L0 !true)
+    digitalWrite (!port:LED_L0 !yes)
     self.compteur +%= 500
     time.waitUntilMS (!deadline: self.compteur)
-    digitalWrite (!port:LED_L0 !false)
+    digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!time.millis ())

@@ -202,7 +202,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     rule.mCommand += linker
     rule.mCommand += objectList
     for library in linkerLibraries:
-      rule.mCommand += [toolDirectory + "/lib/" + library]
+      rule.mCommand += [toolDirectory + "/libgcc/" + library]
     rule.mCommand += ["-o", productELF]
     rule.mCommand += ["-Tsources/" + lkScript + ".ld"]
     rule.mDependences += ["sources/" + lkScript + ".ld"]

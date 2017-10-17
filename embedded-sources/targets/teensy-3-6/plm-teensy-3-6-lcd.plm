@@ -38,26 +38,26 @@ module lcd {
   //············································································
 
   func driveHighE @noUnusedWarning () {
-    digitalWrite (!port:self.ENABLE !true)
+    digitalWrite (!port:self.ENABLE !yes)
   }
 
   //············································································
 
   func driveLowE @noUnusedWarning () {
-    digitalWrite (!port:self.ENABLE !false)
+    digitalWrite (!port:self.ENABLE !no)
   }
 
   //············································································
 
 
   func driveHighRS @noUnusedWarning () {
-   digitalWrite (!port:self.RS !true)
+   digitalWrite (!port:self.RS !yes)
   }
 
   //············································································
 
   func driveLowRS @noUnusedWarning () {
-    digitalWrite (!port:self.RS !false)
+    digitalWrite (!port:self.RS !no)
   }
 
   //············································································
@@ -256,14 +256,14 @@ module lcd {
   public func user printUnsigned @noUnusedWarning (?inValue $uint32) {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
-    var isPrinting = false
+    var isPrinting = no
     loop while divisor > 0 {
       if isPrinting or (value ≥ divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
         self.writeData_inUserMode (!0x30 + convert quotient : $uint8)
         value = remainder
-        isPrinting = true
+        isPrinting = yes
       }
       divisor = divisor / 10
     }
@@ -342,14 +342,14 @@ module lcd {
   public func panic printUnsignedInPanicMode @noUnusedWarning (?inValue $uint32) {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
-    var isPrinting = false
+    var isPrinting = no
     loop while divisor > 0 {
       if isPrinting or (value ≥ divisor) {
         let quotient = value !/ divisor
         let remainder = value -% quotient *% divisor
         self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)
         value = remainder
-        isPrinting = true
+        isPrinting = yes
       }
       divisor = divisor !/ 10
     }

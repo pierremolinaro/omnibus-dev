@@ -5,11 +5,11 @@ target "teensy-3-1/unprivileged"
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !true)
+  digitalWrite (!port:.D13 !yes)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !false)
+  digitalWrite (!port:.D13 !no)
 }
 
 //-----------------------------------------------------------------------------*
@@ -59,11 +59,11 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s0.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L0 !true)
+    digitalWrite (!port:LED_L0 !yes)
     time.waitUntilMS (!deadline:self.top)
     s0.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L0 !false)
+    digitalWrite (!port:LED_L0 !no)
   }
 }
 
@@ -75,11 +75,11 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s1.signal ()
     self.top += 249
-    digitalWrite (!port:LED_L4 !true)
+    digitalWrite (!port:LED_L4 !yes)
     time.waitUntilMS (!deadline:self.top)
     s1.signal ()
     self.top += 249
-    digitalWrite (!port:LED_L4 !false)
+    digitalWrite (!port:LED_L4 !no)
   }
 }
 
