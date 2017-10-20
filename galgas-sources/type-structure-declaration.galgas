@@ -441,7 +441,8 @@ method @structurePropertyListAST-element enterInContext
         !mPropertyName
         !readOnly:mIsConstant
         !public:mIsPublic
-        !.property {!type:actualPropertyType !plmName:mPropertyName !access:constantProperty}
+        !type:actualPropertyType
+        !access:constantProperty
       ]
     else
       let propertyIndex = [propertyList length]
@@ -456,7 +457,8 @@ method @structurePropertyListAST-element enterInContext
         !mPropertyName
         !readOnly:mIsConstant
         !public:mIsPublic
-        !.property {!type:actualPropertyType !plmName:mPropertyName !access:indexedProperty}
+        !type:actualPropertyType
+        !access:indexedProperty
       ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     end
@@ -475,7 +477,8 @@ method @structurePropertyListAST-element enterInContext
       !mPropertyName
       !readOnly:mIsConstant
       !public:mIsPublic
-      !.property {!type:optionalPropertyType !plmName:mPropertyName !access:.indexed{!index:propertyIndex}}
+      !type:optionalPropertyType
+      !access:.indexed{!index:propertyIndex}
     ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
   end

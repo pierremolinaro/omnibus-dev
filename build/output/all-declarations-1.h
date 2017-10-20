@@ -1692,12 +1692,19 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
 
   public : static class GALGAS_possibleValuedObject constructor_property (const class GALGAS_bool & inOperand0,
                                                                           const class GALGAS_bool & inOperand1,
-                                                                          const class GALGAS_objectIR & inOperand2
+                                                                          const class GALGAS_PLMType & inOperand2,
+                                                                          const class GALGAS_lstring & inOperand3,
+                                                                          const class GALGAS_propertyAccessKind & inOperand4
                                                                           COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_possibleValuedObject constructor_register (const class GALGAS_bool & inOperand0,
                                                                           const class GALGAS_bool & inOperand1,
-                                                                          const class GALGAS_objectIR & inOperand2
+                                                                          const class GALGAS_PLMType & inOperand2,
+                                                                          const class GALGAS_lstring & inOperand3,
+                                                                          const class GALGAS_bigint & inOperand4,
+                                                                          const class GALGAS_sliceMap & inOperand5,
+                                                                          const class GALGAS_uint & inOperand6,
+                                                                          const class GALGAS_uint & inOperand7
                                                                           COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_possibleValuedObject constructor_undefined (LOCATION_ARGS) ;
@@ -1737,13 +1744,20 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_property (class GALGAS_bool & outArgument0,
                                                   class GALGAS_bool & outArgument1,
-                                                  class GALGAS_objectIR & outArgument2,
+                                                  class GALGAS_PLMType & outArgument2,
+                                                  class GALGAS_lstring & outArgument3,
+                                                  class GALGAS_propertyAccessKind & outArgument4,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_bool & outArgument0,
                                                   class GALGAS_bool & outArgument1,
-                                                  class GALGAS_objectIR & outArgument2,
+                                                  class GALGAS_PLMType & outArgument2,
+                                                  class GALGAS_lstring & outArgument3,
+                                                  class GALGAS_bigint & outArgument4,
+                                                  class GALGAS_sliceMap & outArgument5,
+                                                  class GALGAS_uint & outArgument6,
+                                                  class GALGAS_uint & outArgument7,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 

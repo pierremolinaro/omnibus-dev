@@ -22,21 +22,15 @@ proc initialVariableMap
   for register in inContext.mControlRegisterMap do
     let registerIsReadable = [inRequiredMode controlRegisterAccess !register.mIsAccessibleInUserMode]
     let registerIsWritable = registerIsReadable && not register.mIsReadOnly && not inGlobalsAreConstant
-    let objectReference = @objectIR.registerReference {
-      !type:register.mType
-      !plmName:register.lkey
-      !readable:registerIsReadable
-      !writable:registerIsWritable
-      !address:register.mAddress 
-      !sliceMap:register.mRegisterFieldAccessMap
-      !arraySize:register.mArraySize # 0 if not an array
-      !elementSize:register.mElementArraySize # 0 if not an array
-    }
     [!?outUniversalMap insertRegister
       !register.lkey
       !readable:registerIsReadable
       !writable:registerIsWritable
-      !objectReference
+      !type:register.mType
+      !address:register.mAddress 
+      !sliceMap:register.mRegisterFieldAccessMap
+      !arraySize:register.mArraySize # 0 if not an array
+      !elementSize:register.mElementArraySize # 0 if not an array
     ]
   end
 #------------------------------------------------------- Add global constants
@@ -45,7 +39,6 @@ proc initialVariableMap
   end
 #------------------------------------------------------- Add global variables
   for variable in inContext.mGlobalVariableMap do
-#    let objectIR = @objectIR.globalVariableReference {!type:variable.type !plmName:variable.lkey}
     [!?outUniversalMap insertGlobalVariable !variable.lkey !variable.type !not inGlobalsAreConstant]
     var writeAccess = variable.allowedAccessToAll
     var allowedAccess = writeAccess
