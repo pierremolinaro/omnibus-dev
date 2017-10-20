@@ -95,12 +95,6 @@ override method @forInstructionAST analyze
 {
 #--- Analyze iterated expression
   [!?ioUniversalMap searchValuedObjectForReadAccess !mIteratedObject ?let @objectIR iteratedObjectPointer]
-#  [!?ioVariableMap searchForReadAccess
-#    !lkey:mIteratedObject
-#    ?2*
-#    ?objectIR:* # let @objectIR iteratedObjectPointer
-#    ?2*
-#  ]
 #--- Type kind
   let iteratedTypeKind = [iteratedObjectPointer type]
 #--- Get iterated element type
@@ -113,22 +107,13 @@ override method @forInstructionAST analyze
     error mIteratedObject : "this object is not enumerable" : iteratedElementType
   end
 #---
-  let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
-  ioAllocaList += !enumeratedVarLLVMName ![iteratedElementType llvmTypeName]
+  ioAllocaList += !plmName ![iteratedElementType llvmTypeName]
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
-#  [!?ioVariableMap openOverrideForRepeatBlock]
-  let objectIR = @objectIR.localVariableReference {!type:iteratedElementType !plmName:enumeratedVarLLVMName}
-  [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
-#  [!?ioVariableMap insertUsedConstant
-#    !lkey:mVarName
-#    !type:iteratedElementType
-#    !readAccessAllowed:true # Read access ok
-#    !objectIR:objectIR
-#    !copyable:true
-#    !canBeUsedAsInputParameter:false
-#  ]
+#  let objectIR = @objectIR.localVariableReference {!type:iteratedElementType !plmName:plmName}
+  [!?ioUniversalMap insertLocalConstant !mVarName !iteratedElementType !plmName]
 #--- Analyze while expression
   @instructionListIR whileExpression_GenerationList = {}
   [mWhileExpression analyzeExpression
@@ -173,7 +158,7 @@ override method @forInstructionAST analyze
 #--- Code generation
   if iteratedTypeKind == .literalString then
     ioInstructionGenerationList += !@forInstructionOnStringIR.new {
-      !enumeratedVarLLVMName
+      !plmName
       !mIteratedObject.location
       !iteratedObjectPointer
       !whileExpression_GenerationList
@@ -187,7 +172,7 @@ override method @forInstructionAST analyze
       [ioTemporaries.mStaticArrayMap searchKey !mIteratedObject ?invokedFunctionSet]
     end
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
-      !enumeratedVarLLVMName
+      !plmName
       !mIteratedObject
       !iteratedObjectPointer
       !whileExpression_GenerationList

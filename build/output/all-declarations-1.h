@@ -1679,7 +1679,8 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
                                                                                 const class GALGAS_lstring & inOperand2
                                                                                 COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_possibleValuedObject constructor_localConstant (const class GALGAS_objectIR & inOperand0
+  public : static class GALGAS_possibleValuedObject constructor_localConstant (const class GALGAS_PLMType & inOperand0,
+                                                                               const class GALGAS_lstring & inOperand1
                                                                                COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_possibleValuedObject constructor_localVariable (const class GALGAS_PLMType & inOperand0,
@@ -1720,7 +1721,8 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_objectIR & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_PLMType & outArgument0,
+                                                       class GALGAS_lstring & outArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
