@@ -842,19 +842,17 @@ proc analyzeEffectiveParametersNew
       else
         [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName} type]
       end
-      let varLLVMName = @lstring.new {!name.string + "." + ioTemporaries.mTemporaryIndex !name}
-      ioTemporaries.mTemporaryIndex ++
-      let objectIR = @objectIR.localVariableReference {!type:type !plmName:varLLVMName}
+      let objectIR = @objectIR.localVariableReference {!type:type !plmName:name}
       if constant then
         [!?ioUniversalMap insertLocalConstant !name !objectIR]
       else
-        [!?ioUniversalMap insertLocalVariable !name !objectIR !.hasUnreadValue !false]
+        [!?ioUniversalMap insertLocalVariable !name !type !.hasUnreadValue !false]
       end
-      ioAllocaList += !varLLVMName ![type llvmTypeName]
+      ioAllocaList += !name ![type llvmTypeName]
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!varLLVMName) !varLLVMName} !sliceMap:{}}
+        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!name) !name} !sliceMap:{}}
     case input (@lstring name) :
       [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
 #      if not accessIsAllowed then

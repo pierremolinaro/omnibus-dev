@@ -67,8 +67,9 @@ method @LValueSelfAST type
   !@PLMType outType
 {
   if [inSelfType isStructure] then
-    [inSelfType structure ?typeName:* ?propertyMap:let structureObjectMap ?4*]
-    [structureObjectMap searchKey !mIdentifier ?* ?let object]
+    [inSelfType structure ?2* ?universalMap:let universalMap ?3*]
+    [universalMap searchValuedObject !mIdentifier ?let object]
+#    [structureObjectMap searchKey !mIdentifier ?* ?let object]
     outType = [object type]
   else
     error mSelfLocation : "'self' not available in this context" : outType
@@ -77,8 +78,9 @@ method @LValueSelfAST type
     switch access
     case property (@lstring propertyName) :
       if [outType isStructure] then
-        [outType structure ?1* ?propertyMap:let propertyMap ?4*]
-        [propertyMap searchKey !propertyName ?* ?let propertyObject]
+        [outType structure ?2* ?universalMap:let universalMap ?3*]
+        [universalMap searchValuedObject !propertyName ?let propertyObject]
+#        [propertyMap searchKey !propertyName ?* ?let propertyObject]
         outType = [propertyObject type]
       else
         error propertyName : "receiver has no property" : outType
@@ -112,12 +114,11 @@ method @LValueSelfAST analyzeAssignmentTarget
   outGlobalVariableReceiverName = "" # Receiver is not a global variable
   if [inSelfType isStructure] then
     [inSelfType structure ?typeName:* ?propertyMap:let structureObjectMap ?4*]
-    if [structureObjectMap hasKey !mIdentifier] then
+   if [structureObjectMap hasKey !mIdentifier] then
       outInternalRepresentation = .structureMember {
         !propertyName:mIdentifier
         !currentPointerIR:.selfObject {!type:inSelfType}
       }
-#---
     else # Function call ?
       outInternalRepresentation = .standAloneIdentifier {!identifier:mIdentifier}
     end

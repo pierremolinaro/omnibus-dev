@@ -1643,8 +1643,8 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
     kEnum_register,
     kEnum_globalConstant,
     kEnum_localConstant,
-    kEnum_globalVariableReference,
-    kEnum_localVariableReference
+    kEnum_globalVariable,
+    kEnum_localVariable
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -1674,15 +1674,16 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
   public : static class GALGAS_possibleValuedObject constructor_globalConstant (const class GALGAS_objectIR & inOperand0
                                                                                 COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_possibleValuedObject constructor_globalVariableReference (const class GALGAS_bool & inOperand0,
-                                                                                         const class GALGAS_objectIR & inOperand1
-                                                                                         COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_possibleValuedObject constructor_globalVariable (const class GALGAS_bool & inOperand0,
+                                                                                const class GALGAS_objectIR & inOperand1
+                                                                                COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_possibleValuedObject constructor_localConstant (const class GALGAS_objectIR & inOperand0
                                                                                COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_possibleValuedObject constructor_localVariableReference (const class GALGAS_objectIR & inOperand0
-                                                                                        COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_possibleValuedObject constructor_localVariable (const class GALGAS_PLMType & inOperand0,
+                                                                               const class GALGAS_lstring & inOperand1
+                                                                               COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_possibleValuedObject constructor_module (const class GALGAS_PLMType & inOperand0
                                                                         COMMA_LOCATION_ARGS) ;
@@ -1712,18 +1713,19 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_globalVariableReference (class GALGAS_bool & outArgument0,
-                                                                 class GALGAS_objectIR & outArgument1,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_globalVariable (class GALGAS_bool & outArgument0,
+                                                        class GALGAS_objectIR & outArgument1,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_objectIR & outArgument0,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_localVariableReference (class GALGAS_objectIR & outArgument0,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_PLMType & outArgument0,
+                                                       class GALGAS_lstring & outArgument1,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_module (class GALGAS_PLMType & outArgument0,
                                                 C_Compiler * inCompiler
@@ -1746,11 +1748,11 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalConstant (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalVariableReference (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalVariable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalConstant (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariableReference (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModule (LOCATION_ARGS) const ;
 

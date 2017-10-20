@@ -198,23 +198,14 @@ proc guardSemanticAnalysis
     allocaList += !resultVarName.string ![resultType llvmTypeName]
     [!?universalMap insertLocalVariable
       !resultVarName
-      !.localVariableReference {!type:resultType !plmName:resultVarName}
+      !resultType
       !.noValue
       !true
     ]
-#    [!?variableMap insertOutputFormalArgument
-#      !lkey:resultVarName
-#      !type:resultType
-#      !readAccessAllowed:true
-#      !objectIR:.localVariableReference {!type:resultType !plmName:resultVarName}
-#      !copyable:true
-#      !canBeUsedAsInputParameter:true
-#    ]
   #--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext
       !inRoutineFormalArgumentList
-#      !?variableMap
       !?universalMap
       !?formalArguments
     )
