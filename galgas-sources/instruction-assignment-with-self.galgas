@@ -80,23 +80,17 @@ override method @varAssignmentSelfInstructionAST analyze
     !self: inSelfType
     !targetAccessKind:.write
     !propertiesAreMutable: inRoutineCanMutateProperties
-#    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext
     !mode: inCurrentMode
     !?temporary: ioTemporaries
     !?staticStringMap: ioGlobalLiteralStringMap
-#    !?variableMap: ioVariableMap
     !?variableMap:ioUniversalMap
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
-#    ?@objectIR currentObject
     ?let @internalRepresentation internalRepresentation
     ?globalVariableReceiverName:let unused globalVariableReceiverName
   ]
-#  if [currentObject isPossibleFunction] then
-#    error [mAssignmentTargetAST mIdentifier] : "invalid assignment target" : currentObject
-#  end
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !sourceOperandPossibleReference
@@ -109,8 +103,6 @@ override method @varAssignmentSelfInstructionAST analyze
     !errorLocation:[mAssignmentTargetAST mIdentifier]
     !staticTypeAllowed:false
   )
-#  [!?ioInstructionGenerationList appendStoreFromReference !currentObject ![mAssignmentTargetAST mIdentifier] !result]
-#  [!?ioInstructionGenerationList appendStoreFromInternalRepresentation !?temporary: ioTemporaries !internalRepresentation ![mAssignmentTargetAST mIdentifier] !result]
   let errorLocation = mAssignmentTargetAST.mIdentifier
   switch internalRepresentation
   case standAloneIdentifier (*) :
