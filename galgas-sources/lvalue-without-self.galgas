@@ -196,14 +196,14 @@ method @LValueWithoutSelfAST analyzeLValueNoSelf
     for (access) in mAccessList do
       switch access
       case property (propertyName) :
-        handlePropertyAccessInAssignment (
+        handlePropertyAccessInAssignmentEX (
           !?outCurrentObject
           !propertyName
           !?ioTemporaries
           !?ioInstructionGenerationList
         )
       case arrayAccess (indexExpression endOfExpression) :
-        handleSubscriptInAssignmentAndExpression (
+        handleSubscriptInAssignmentAndExpressionEX (
           !self:inSelfType
           !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
           !inGuard:false
@@ -227,7 +227,7 @@ method @LValueWithoutSelfAST analyzeLValueNoSelf
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc handlePropertyAccessInAssignment
+proc handlePropertyAccessInAssignmentEX
   ?!@objectIR ioObject
   ?let @lstring inPropertyName
   ?!@semanticTemporariesStruct ioTemporaries

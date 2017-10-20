@@ -1,6 +1,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc handleSubscriptInAssignmentAndExpression
+proc handleSubscriptInAssignmentAndExpressionEX
   ?self:let @PLMType inSelfType
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
