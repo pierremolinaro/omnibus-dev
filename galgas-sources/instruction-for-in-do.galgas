@@ -105,7 +105,6 @@ override method @forInstructionAST analyze
 #--- Type kind
   let iteratedTypeKind = [iteratedObjectPointer type]
 #--- Get iterated element type
-#  let @unifiedTypeMap-proxy iteratedElementType = [[iteratedExpressionResult type] enumerationType]
   @PLMType iteratedElementType
   if iteratedTypeKind == .literalString then
     iteratedElementType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["uint8" nowhere]} type]
