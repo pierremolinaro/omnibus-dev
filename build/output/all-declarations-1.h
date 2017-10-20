@@ -2537,8 +2537,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
     kEnum_literalInteger,
     kEnum_llvmStructureConstant,
     kEnum_literalString,
-    kEnum_zero,
-    kEnum_possibleFunction
+    kEnum_zero
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -2591,10 +2590,6 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                             COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_null (LOCATION_ARGS) ;
-
-  public : static class GALGAS_objectIR constructor_possibleFunction (const class GALGAS_objectIR & inOperand0,
-                                                                      const class GALGAS_lstring & inOperand1
-                                                                      COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_property (const class GALGAS_PLMType & inOperand0,
                                                               const class GALGAS_lstring & inOperand1,
@@ -2663,11 +2658,6 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_possibleFunction (class GALGAS_objectIR & outArgument0,
-                                                          class GALGAS_lstring & outArgument1,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_property (class GALGAS_PLMType & outArgument0,
                                                   class GALGAS_lstring & outArgument1,
                                                   class GALGAS_propertyAccessKind & outArgument2,
@@ -2716,8 +2706,6 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariableReference (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNull (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPossibleFunction (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
 
@@ -4074,24 +4062,6 @@ class cEnumAssociatedValues_objectIR_zero : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_objectIR_zero (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectIR_possibleFunction : public cEnumAssociatedValues {
-  public : const GALGAS_objectIR mAssociatedValue0 ;
-  public : const GALGAS_lstring mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectIR_possibleFunction (const GALGAS_objectIR & inAssociatedValue0,
-                                                            const GALGAS_lstring & inAssociatedValue1
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectIR_possibleFunction (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
