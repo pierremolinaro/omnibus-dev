@@ -132,11 +132,13 @@ override method @varInstructionWithAssignmentAST analyze
   )
   drop expressionResult, targetType
 #--- Declare local variable
-  [!?ioUniversalMap insertLocalVariable !mVarName ![result type] !.hasUnreadValue !false]
+  let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  ioTemporaries.mTemporaryIndex ++
+  [!?ioUniversalMap insertLocalVariable !mVarName ![result type] !plmName !.hasUnreadValue !false]
 #--- Code generation
-  ioAllocaList += !mVarName ![[result type] llvmTypeName]
+  ioAllocaList += !plmName ![[result type] llvmTypeName]
   [!?ioInstructionGenerationList appendStoreLocalVariable
-    !mVarName
+    !plmName
     ![result type]
     !result
   ]
@@ -151,7 +153,7 @@ override method @varInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
@@ -163,9 +165,11 @@ override method @varInstructionAST analyze
     error mVarName : "$" + [targetType key] + " type is not instanciable"
   end
 #--- Declare local variable
-  [!?ioUniversalMap insertLocalVariable !mVarName !targetType !.noValue !true]
+  let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  ioTemporaries.mTemporaryIndex ++
+  [!?ioUniversalMap insertLocalVariable !mVarName !targetType !plmName !.noValue !true]
 #--- Code generation
-  ioAllocaList += !mVarName ![targetType llvmTypeName]
+  ioAllocaList += !plmName ![targetType llvmTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

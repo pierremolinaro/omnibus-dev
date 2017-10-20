@@ -199,6 +199,7 @@ proc guardSemanticAnalysis
     [!?universalMap insertLocalVariable
       !resultVarName
       !resultType
+      !resultVarName
       !.noValue
       !true
     ]
