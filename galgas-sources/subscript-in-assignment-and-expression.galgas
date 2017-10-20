@@ -1,154 +1,154 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc handleSubscriptInAssignmentAndExpressionEX
-  ?self:let @PLMType inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-
-  ?let @expressionAST inIndexExpression 
-  ?let @location inErrorLocation
-  ?!@instructionListIR ioInstructionGenerationList
-  ?!@objectIR ioObjectPtr
-{
-  if [[ioObjectPtr type] isArrayType] then
-    handleSubscriptArrayInAssignmentAndExpression (
-      !self: inSelfType
-      !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
-      !inGuard: inGuard
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-      !context: inContext
-      !mode: inCurrentMode
-      !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?variableMap:ioUniversalMap
-      !?alloca: ioAllocaList
-      !inIndexExpression 
-      !inErrorLocation
-      !?ioInstructionGenerationList
-      !?ioObjectPtr
-   )
-  elsif [ioObjectPtr isRegisterReference] then
-    handleSubscriptRegisterArrayInAssignmentAndExpression (
-      !self: inSelfType
-      !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
-      !inGuard: inGuard
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-      !context: inContext
-      !mode: inCurrentMode
-      !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?variableMap:ioUniversalMap
-      !?alloca: ioAllocaList
-      !inIndexExpression 
-      !inErrorLocation
-      !?ioInstructionGenerationList
-      !?ioObjectPtr
-   )
-  else
-    error inErrorLocation : "the receiver is not an array and does not accept subscripting" : ioObjectPtr
-  end
-}
+#proc handleSubscriptInAssignmentAndExpressionEX
+#  ?self:let @PLMType inSelfType
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?inGuard:let @bool inGuard
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#
+#  ?let @expressionAST inIndexExpression 
+#  ?let @location inErrorLocation
+#  ?!@instructionListIR ioInstructionGenerationList
+#  ?!@objectIR ioObjectPtr
+#{
+#  if [[ioObjectPtr type] isArrayType] then
+#    handleSubscriptArrayInAssignmentAndExpression (
+#      !self: inSelfType
+#      !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
+#      !inGuard: inGuard
+#      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+#      !context: inContext
+#      !mode: inCurrentMode
+#      !?temporary: ioTemporaries
+#      !?staticStringMap: ioGlobalLiteralStringMap
+#      !?variableMap:ioVariableMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca: ioAllocaList
+#      !inIndexExpression 
+#      !inErrorLocation
+#      !?ioInstructionGenerationList
+#      !?ioObjectPtr
+#   )
+#  elsif [ioObjectPtr isRegisterReference] then
+#    handleSubscriptRegisterArrayInAssignmentAndExpression (
+#      !self: inSelfType
+#      !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
+#      !inGuard: inGuard
+#      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+#      !context: inContext
+#      !mode: inCurrentMode
+#      !?temporary: ioTemporaries
+#      !?staticStringMap: ioGlobalLiteralStringMap
+#      !?variableMap:ioVariableMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca: ioAllocaList
+#      !inIndexExpression 
+#      !inErrorLocation
+#      !?ioInstructionGenerationList
+#      !?ioObjectPtr
+#   )
+#  else
+#    error inErrorLocation : "the receiver is not an array and does not accept subscripting" : ioObjectPtr
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handleSubscriptArrayInAssignmentAndExpression
-  ?self:let @PLMType inSelfType
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?let @expressionAST inIndexExpression 
-  ?let @location inErrorLocation
-  ?!@instructionListIR ioInstructionGenerationList
-  ?!@objectIR ioObjectPtr
-{
-#--- Analyze array type
-  [[ioObjectPtr type] arrayType ?typeName:* ?elementType:let type ?size:let @bigint arraySize ?3*]
-#--- Analyze index expression
-  [inIndexExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:inGuard
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.void
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR indexResultPossibleReference
-  ]
-  [!?ioInstructionGenerationList appendLoadFromReference
-    !?ioTemporaries
-    !indexResultPossibleReference
-    !inErrorLocation
-    ?let indexResult
-  ]  
-  if [indexResult isLiteralInteger] then # Static expression
-    [indexResult literalInteger ?1* ?value:let @bigint indexValue]
-    if (indexValue < 0G) || (indexValue >= arraySize) then
-      error inErrorLocation : "static index should be positive and < " + arraySize : ioObjectPtr
-    else
-      let result = @objectIR.temporaryReference {
-        !type:type
-        !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
-        !sliceMap:{}
-        !volatile:false
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetArrayElementReference
-        !result
-        !ioObjectPtr
-        ![indexValue uint]
-      ]
-      ioObjectPtr = result      
-    end
-  elsif [[indexResult type] isInteger] then
-    if not [option plm_options.noPanicGeneration value] then
-      [!?ioInstructionGenerationList testArrayIndex
-        !indexResult
-        !inErrorLocation
-        !arraySize
-        ?let @bool generatePanicInstruction
-      ]
-      if generatePanicInstruction && not [inCurrentMode panicAllowed] then
-        error inErrorLocation : "index computation can generate panic" : ioObjectPtr
-      end
-    end
-      let result = @objectIR.temporaryReference {
-        !type:type
-        !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
-        !sliceMap:{}
-        !volatile:false
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetArrayElementReference
-        !result
-        !ioObjectPtr
-        ![indexResult llvmName]
-      ]
-      ioObjectPtr = result      
-  else
-    error inErrorLocation : "index expression is not an integer" : ioObjectPtr
-  end
-}
+#private proc handleSubscriptArrayInAssignmentAndExpression
+#  ?self:let @PLMType inSelfType
+#  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+#  ?inGuard:let @bool inGuard
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?let @expressionAST inIndexExpression 
+#  ?let @location inErrorLocation
+#  ?!@instructionListIR ioInstructionGenerationList
+#  ?!@objectIR ioObjectPtr
+#{
+##--- Analyze array type
+#  [[ioObjectPtr type] arrayType ?typeName:* ?elementType:let type ?size:let @bigint arraySize ?3*]
+##--- Analyze index expression
+#  [inIndexExpression analyzeExpression
+#    !self:inSelfType
+#    !inGuard:inGuard
+#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#    !optionalTargetType:.void
+#    !context:inContext
+#    !mode:inCurrentMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    ?result:let @objectIR indexResultPossibleReference
+#  ]
+#  [!?ioInstructionGenerationList appendLoadFromReference
+#    !?ioTemporaries
+#    !indexResultPossibleReference
+#    !inErrorLocation
+#    ?let indexResult
+#  ]  
+#  if [indexResult isLiteralInteger] then # Static expression
+#    [indexResult literalInteger ?1* ?value:let @bigint indexValue]
+#    if (indexValue < 0G) || (indexValue >= arraySize) then
+#      error inErrorLocation : "static index should be positive and < " + arraySize : ioObjectPtr
+#    else
+#      let result = @objectIR.temporaryReference {
+#        !type:type
+#        !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
+#        !sliceMap:{}
+#        !volatile:false
+#      }
+#      ioTemporaries.mTemporaryIndex ++
+#      [!?ioInstructionGenerationList appendGetArrayElementReference
+#        !result
+#        !ioObjectPtr
+#        ![indexValue uint]
+#      ]
+#      ioObjectPtr = result      
+#    end
+#  elsif [[indexResult type] isInteger] then
+#    if not [option plm_options.noPanicGeneration value] then
+#      [!?ioInstructionGenerationList testArrayIndex
+#        !indexResult
+#        !inErrorLocation
+#        !arraySize
+#        ?let @bool generatePanicInstruction
+#      ]
+#      if generatePanicInstruction && not [inCurrentMode panicAllowed] then
+#        error inErrorLocation : "index computation can generate panic" : ioObjectPtr
+#      end
+#    end
+#      let result = @objectIR.temporaryReference {
+#        !type:type
+#        !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
+#        !sliceMap:{}
+#        !volatile:false
+#      }
+#      ioTemporaries.mTemporaryIndex ++
+#      [!?ioInstructionGenerationList appendGetArrayElementReference
+#        !result
+#        !ioObjectPtr
+#        ![indexResult llvmName]
+#      ]
+#      ioObjectPtr = result      
+#  else
+#    error inErrorLocation : "index expression is not an integer" : ioObjectPtr
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -241,107 +241,107 @@ proc handleSubscriptArrayInAssignmentAndExpressionNew
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handleSubscriptRegisterArrayInAssignmentAndExpression
-  ?self:let @PLMType inSelfType
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?let @expressionAST inIndexExpression 
-  ?let @location inErrorLocation
-  ?!@instructionListIR ioInstructionGenerationList
-  ?!@objectIR ioObjectPtr
-{
-  [ioObjectPtr registerReference
-    ?type:let registerType
-    ?plmName:let registerName
-    ?readable:let readable
-    ?writable:let writable
-    ?address:let @bigint registerAddress
-    ?sliceMap:@sliceMap registerBitSliceMap
-    ?arraySize:let @uint arraySize # 0 if not an array
-    ?elementSize:let @uint elementArraySize # 0 if not an array
-  ]
-  if arraySize == 0 then
-    error inErrorLocation : "register is not an array and does not support subscripting" : ioObjectPtr
-  elsif not readable then
-    error inErrorLocation : "register cannot be read in this context" : ioObjectPtr
-  else
-    [inIndexExpression analyzeExpression
-      !self:inSelfType
-      !inGuard:inGuard
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:.void
-      !context:inContext
-      !mode:inCurrentMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      ?result:let @objectIR indexResultPossibleReference
-    ]
-    [!?ioInstructionGenerationList appendLoadFromReference
-      !?ioTemporaries
-      !indexResultPossibleReference
-      !inErrorLocation
-      ?let indexResult
-    ]  
-  #--- Static expression ?
-    if [indexResult isLiteralInteger] then # Static expression
-      [indexResult literalInteger ?1* ?value:let @bigint indexValue]
-      if (indexValue < 0G) || (indexValue >= arraySize) then
-        error inErrorLocation : "static index should be positive and < " + arraySize : ioObjectPtr
-      else
-        ioObjectPtr = .registerReference {
-          !type:registerType
-          !plmName:registerName
-          !readable:readable
-          !writable:writable
-          !address:registerAddress + indexValue * elementArraySize
-          !sliceMap:registerBitSliceMap
-          !arraySize:0
-          !elementSize:0
-        }
-      end
-    #--- Dynamic expression
-    elsif [[indexResult type] isInteger] then
-      if not [option plm_options.noPanicGeneration value] then
-        [!?ioInstructionGenerationList testArrayIndex
-          !indexResult
-          !inErrorLocation
-          !arraySize
-          ?let @bool generatePanicInstruction
-        ]
-        if generatePanicInstruction && not [inCurrentMode panicAllowed] then
-          error inErrorLocation : "index computation can generated panic"
-        end
-      end
-      let registerAddressObject = @objectIR.temporaryReference {
-        !type:registerType
-        !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
-        !sliceMap:registerBitSliceMap
-        !volatile:true
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendComputeVolatileRegisterAddressWithSubscript
-        !registerAddressObject
-        !indexResult
-        !registerAddress
-        !elementArraySize
-      ]
-      ioObjectPtr = registerAddressObject
-    else
-      error inErrorLocation : "index expression is not an integer" : ioObjectPtr
-    end
-  end
-}
+#private proc handleSubscriptRegisterArrayInAssignmentAndExpression
+#  ?self:let @PLMType inSelfType
+#  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+#  ?inGuard:let @bool inGuard
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?let @expressionAST inIndexExpression 
+#  ?let @location inErrorLocation
+#  ?!@instructionListIR ioInstructionGenerationList
+#  ?!@objectIR ioObjectPtr
+#{
+#  [ioObjectPtr registerReference
+#    ?type:let registerType
+#    ?plmName:let registerName
+#    ?readable:let readable
+#    ?writable:let writable
+#    ?address:let @bigint registerAddress
+#    ?sliceMap:@sliceMap registerBitSliceMap
+#    ?arraySize:let @uint arraySize # 0 if not an array
+#    ?elementSize:let @uint elementArraySize # 0 if not an array
+#  ]
+#  if arraySize == 0 then
+#    error inErrorLocation : "register is not an array and does not support subscripting" : ioObjectPtr
+#  elsif not readable then
+#    error inErrorLocation : "register cannot be read in this context" : ioObjectPtr
+#  else
+#    [inIndexExpression analyzeExpression
+#      !self:inSelfType
+#      !inGuard:inGuard
+#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#      !optionalTargetType:.void
+#      !context:inContext
+#      !mode:inCurrentMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca:ioAllocaList
+#      !?instructionListIR:ioInstructionGenerationList
+#      ?result:let @objectIR indexResultPossibleReference
+#    ]
+#    [!?ioInstructionGenerationList appendLoadFromReference
+#      !?ioTemporaries
+#      !indexResultPossibleReference
+#      !inErrorLocation
+#      ?let indexResult
+#    ]  
+#  #--- Static expression ?
+#    if [indexResult isLiteralInteger] then # Static expression
+#      [indexResult literalInteger ?1* ?value:let @bigint indexValue]
+#      if (indexValue < 0G) || (indexValue >= arraySize) then
+#        error inErrorLocation : "static index should be positive and < " + arraySize : ioObjectPtr
+#      else
+#        ioObjectPtr = .registerReference {
+#          !type:registerType
+#          !plmName:registerName
+#          !readable:readable
+#          !writable:writable
+#          !address:registerAddress + indexValue * elementArraySize
+#          !sliceMap:registerBitSliceMap
+#          !arraySize:0
+#          !elementSize:0
+#        }
+#      end
+#    #--- Dynamic expression
+#    elsif [[indexResult type] isInteger] then
+#      if not [option plm_options.noPanicGeneration value] then
+#        [!?ioInstructionGenerationList testArrayIndex
+#          !indexResult
+#          !inErrorLocation
+#          !arraySize
+#          ?let @bool generatePanicInstruction
+#        ]
+#        if generatePanicInstruction && not [inCurrentMode panicAllowed] then
+#          error inErrorLocation : "index computation can generated panic"
+#        end
+#      end
+#      let registerAddressObject = @objectIR.temporaryReference {
+#        !type:registerType
+#        !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
+#        !sliceMap:registerBitSliceMap
+#        !volatile:true
+#      }
+#      ioTemporaries.mTemporaryIndex ++
+#      [!?ioInstructionGenerationList appendComputeVolatileRegisterAddressWithSubscript
+#        !registerAddressObject
+#        !indexResult
+#        !registerAddress
+#        !elementArraySize
+#      ]
+#      ioObjectPtr = registerAddressObject
+#    else
+#      error inErrorLocation : "index expression is not an integer" : ioObjectPtr
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

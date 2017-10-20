@@ -97,17 +97,14 @@ method @LValueSelfAST analyzeAssignmentTarget
   ?self:let @PLMType inSelfType
   ?targetAccessKind:let @targetAccessKind unused inSelfAccessKind
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !@objectIR outCurrentObject
   !@internalRepresentation outInternalRepresentation
   !globalVariableReceiverName:@string outGlobalVariableReceiverName
 {
@@ -121,21 +118,7 @@ method @LValueSelfAST analyzeAssignmentTarget
         !currentPointerIR:.selfObject {!type:inSelfType}
       }
 #---
-#      [structureObjectMap searchKey
-#        !mIdentifier
-#        ?*
-#        ?let object
-#      ]
-#      handleSelfAccessInAssignment (
-#        !inSelfType
-#        !object
-#        !?ioTemporaries
-#        !?ioInstructionGenerationList
-#        ?outCurrentObject
-#      )
-#---
     else # Function call ?
-#      outCurrentObject = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mIdentifier}
       outInternalRepresentation = .standAloneIdentifier {!identifier:mIdentifier}
     end
   else
@@ -160,12 +143,6 @@ method @LValueSelfAST analyzeAssignmentTarget
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
       )
-#      handlePropertyAccessInAssignmentEX (
-#        !?outCurrentObject
-#        !propertyName
-#        !?ioTemporaries
-#        !?ioInstructionGenerationList
-#      )
     case arrayAccess (indexExpression endOfExpression) :
       handleArrayAccessInExpression (
         !?outInternalRepresentation
@@ -183,53 +160,8 @@ method @LValueSelfAST analyzeAssignmentTarget
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
       )
-#      handleSubscriptInAssignmentAndExpressionEX (
-#        !self:inSelfType
-#        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#        !inGuard:false
-#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#        !context:inContext
-#        !mode:inCurrentMode
-#        !?temporary:ioTemporaries
-#        !?staticStringMap:ioGlobalLiteralStringMap
-#        !?variableMap:ioVariableMap
-#        !?variableMap:ioUniversalMap
-#        !?alloca:ioAllocaList
-#        !indexExpression
-#        !endOfExpression
-#        !?ioInstructionGenerationList
-#        !?outCurrentObject
-#      )
     end
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#proc handleSelfAccessInAssignment
-#  ?let @PLMType inSelfType
-#  ?let @objectIR inObject
-#  ?!@semanticTemporariesStruct ioTemporaries
-#  ?!@instructionListIR ioInstructionGenerationList
-#  !@objectIR outObjectPtr
-#{
-#  if [inObject isProperty] then
-#    [inObject property ?type:let type ?plmName:let name ?access:*]
-#    outObjectPtr = .temporaryReference {
-#      !type:type
-#      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !name}
-#      !sliceMap:{}
-#      !volatile:false
-#    }
-#    ioTemporaries.mTemporaryIndex ++
-#    [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
-#      !outObjectPtr
-#      !inSelfType
-#      !name
-#    ]
-#  else
-#    error [inObject location] : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
-#  end
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
