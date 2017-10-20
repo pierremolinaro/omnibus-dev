@@ -136,12 +136,11 @@ void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
                                const class GALGAS_mode constinArgument6,
                                class GALGAS_semanticTemporariesStruct & ioArgument7,
                                class GALGAS_staticStringMap & ioArgument8,
-                               class GALGAS_unifiedSymbolMapEx & ioArgument9,
-                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument10,
-                               class GALGAS_allocaList & ioArgument11,
-                               class GALGAS_instructionListIR & ioArgument12,
-                               class GALGAS_procCallEffectiveParameterListIR & outArgument13,
-                               class GALGAS_lstring & outArgument14,
+                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
+                               class GALGAS_allocaList & ioArgument10,
+                               class GALGAS_instructionListIR & ioArgument11,
+                               class GALGAS_procCallEffectiveParameterListIR & outArgument12,
+                               class GALGAS_lstring & outArgument13,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
