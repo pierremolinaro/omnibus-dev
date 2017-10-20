@@ -46,7 +46,6 @@ override method @panicInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList

@@ -413,1700 +413,6 @@ GALGAS_string extensionGetter_string (const GALGAS_valuedObjectState & inObject,
 
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_unifiedSymbolMapEx::cMapElement_unifiedSymbolMapEx (const GALGAS_lstring & inKey,
-                                                                const GALGAS_PLMType & in_type,
-                                                                const GALGAS_bool & in_readAccessAllowed,
-                                                                const GALGAS_objectIR & in_objectIR,
-                                                                const GALGAS_bool & in_copyable,
-                                                                const GALGAS_bool & in_canBeUsedAsInputParameter
-                                                                COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mProperty_type (in_type),
-mProperty_readAccessAllowed (in_readAccessAllowed),
-mProperty_objectIR (in_objectIR),
-mProperty_copyable (in_copyable),
-mProperty_canBeUsedAsInputParameter (in_canBeUsedAsInputParameter) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cMapElement_unifiedSymbolMapEx::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_type.isValid () && mProperty_readAccessAllowed.isValid () && mProperty_objectIR.isValid () && mProperty_copyable.isValid () && mProperty_canBeUsedAsInputParameter.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement * cMapElement_unifiedSymbolMapEx::copy (void) {
-  cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_unifiedSymbolMapEx (mProperty_lkey, mProperty_type, mProperty_readAccessAllowed, mProperty_objectIR, mProperty_copyable, mProperty_canBeUsedAsInputParameter COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cMapElement_unifiedSymbolMapEx::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "type" ":" ;
-  mProperty_type.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "readAccessAllowed" ":" ;
-  mProperty_readAccessAllowed.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "objectIR" ":" ;
-  mProperty_objectIR.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "copyable" ":" ;
-  mProperty_copyable.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "canBeUsedAsInputParameter" ":" ;
-  mProperty_canBeUsedAsInputParameter.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cMapElement_unifiedSymbolMapEx::compare (const cCollectionElement * inOperand) const {
-  cMapElement_unifiedSymbolMapEx * operand = (cMapElement_unifiedSymbolMapEx *) inOperand ;
-  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (kOperandEqual == result) {
-    result = mProperty_type.objectCompare (operand->mProperty_type) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_readAccessAllowed.objectCompare (operand->mProperty_readAccessAllowed) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_objectIR.objectCompare (operand->mProperty_objectIR) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_copyable.objectCompare (operand->mProperty_copyable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_canBeUsedAsInputParameter.objectCompare (operand->mProperty_canBeUsedAsInputParameter) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx::GALGAS_unifiedSymbolMapEx (void) :
-AC_GALGAS_uniqueMap (kMapAutomatonIssueWarning, "declaration of '%K' variable shadows a variable declared in %L") {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx::GALGAS_unifiedSymbolMapEx (const GALGAS_unifiedSymbolMapEx & inSource) :
-AC_GALGAS_uniqueMap (inSource) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx & GALGAS_unifiedSymbolMapEx::operator = (const GALGAS_unifiedSymbolMapEx & inSource) {
-  * ((AC_GALGAS_uniqueMap *) this) = inSource ;
-  return * this ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx GALGAS_unifiedSymbolMapEx::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton states                                                                                               *
-//---------------------------------------------------------------------------------------------------------------------*
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  static const uint32_t kMapStateCount_unifiedSymbolMapEx = 22 ;
-#endif
-static const uint32_t kMapState_unifiedSymbolMapEx_constantInputFormalArgument = 15 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused = 17 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_definedLocalVariable = 6 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_definedOutputFormalArgument = 10 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_droppedInputFormalArgument = 20 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument = 13 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_droppedLocalVariable = 8 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_inaccessibleControlRegister = 0 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused = 21 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_inputFormalParameter = 18 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused = 14 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_localConstant = 3 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_module = 1 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_undefinedLocalConstant = 4 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_undefinedLocalVariable = 5 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument = 9 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument = 11 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument = 16 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_usedInputFormalArgument = 19 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument = 12 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_usedLocalConstant = 2 ;
-static const uint32_t kMapState_unifiedSymbolMapEx_usedLocalVariable = 7 ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton state names                                                                                          *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * kMapStateNames_unifiedSymbolMapEx [22] = {
-  "inaccessibleControlRegister",
-  "module",
-  "usedLocalConstant",
-  "localConstant",
-  "undefinedLocalConstant",
-  "undefinedLocalVariable",
-  "definedLocalVariable",
-  "usedLocalVariable",
-  "droppedLocalVariable",
-  "undefinedOutputFormalArgument",
-  "definedOutputFormalArgument",
-  "unusedInputOutputFormalArgument",
-  "usedInputOutputFormalArgument",
-  "droppedInputOutputFormalArgument",
-  "inputOutputFormalArgumentDeclaredAsUnused",
-  "constantInputFormalArgument",
-  "usedConstantInputFormalArgument",
-  "constantInputFormalArgumentDeclaredAsUnused",
-  "inputFormalParameter",
-  "usedInputFormalArgument",
-  "droppedInputFormalArgument",
-  "inputFormalArgumentDeclaredAsUnused"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton actions                                                                                              *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const uint32_t kMapActionCount_unifiedSymbolMapEx = 7 ;
-static const uint32_t kMapAction_unifiedSymbolMapEx_constMethodCall = 4 ;
-static const uint32_t kMapAction_unifiedSymbolMapEx_dropAccess = 3 ;
-static const uint32_t kMapAction_unifiedSymbolMapEx_methodCall = 5 ;
-static const uint32_t kMapAction_unifiedSymbolMapEx_neutralAccess = 6 ;
-static const uint32_t kMapAction_unifiedSymbolMapEx_readAccess = 0 ;
-static const uint32_t kMapAction_unifiedSymbolMapEx_readWriteAccess = 2 ;
-static const uint32_t kMapAction_unifiedSymbolMapEx_writeAccess = 1 ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton transitions                                                                                          *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const cMapAutomatonTransition kMapTransitions_unifiedSymbolMapEx [22 * 7] = {
-// State 'inaccessibleControlRegister', index 0 
-  {kMapState_unifiedSymbolMapEx_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_inaccessibleControlRegister /* 0 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'module', index 1 
-  {kMapState_unifiedSymbolMapEx_module /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_module /* 1 */, kMapAutomatonIssueError, "a module cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_module /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_module /* 1 */, kMapAutomatonIssueError, "a module cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_module /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_module /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_module /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'usedLocalConstant', index 2 
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'localConstant', index 3 
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'undefinedLocalConstant', index 4 
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'undefinedLocalVariable', index 5 
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "an undefined local variable cannot be read"}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "an undefined local variable cannot be modified"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "an undefined local variable cannot be read"}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "an undefined local variable cannot be modified"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'definedLocalVariable', index 6 
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'usedLocalVariable', index 7 
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'droppedLocalVariable', index 8 
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonIssueError, "a dropped local variable cannot be read"}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "a dropped local variable cannot be read"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "the local variable is dropped"}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "the local variable is dropped"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'undefinedOutputFormalArgument', index 9 
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapAutomatonIssueError, "an undefined output formal parameter cannot be read"}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapAutomatonIssueError, "an undefined output formal parameter cannot be read"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'definedOutputFormalArgument', index 10 
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'unusedInputOutputFormalArgument', index 11 
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'usedInputOutputFormalArgument', index 12 
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'droppedInputOutputFormalArgument', index 13 
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueError, "a dropped input/output formal argument cannot be read"}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueError, "a dropped input/output formal argument cannot be read"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueError, "the input/output formal argument is dropped"}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueError, "the input/output formal argument is dropped"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'inputOutputFormalArgumentDeclaredAsUnused', index 14 
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'constantInputFormalArgument', index 15 
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgument /* 15 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'usedConstantInputFormalArgument', index 16 
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'constantInputFormalArgumentDeclaredAsUnused', index 17 
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'inputFormalParameter', index 18 
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'usedInputFormalArgument', index 19 
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'droppedInputFormalArgument', index 20 
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be read"}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is already dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is dropped"}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-// State 'inputFormalArgumentDeclaredAsUnused', index 21 
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'readAccess', (index 0)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'writeAccess', (index 1)
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'dropAccess', (index 3)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'constMethodCall', (index 4)
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'methodCall', (index 5)
-  {kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton final state issues                                                                                   *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const cMapAutomatonFinalIssue kMapAutomatonFinalIssue_unifiedSymbolMapEx [22] = {
-  {kMapAutomatonNoIssue, ""},// state 'inaccessibleControlRegister' (index 0)
-  {kMapAutomatonNoIssue, ""},// state 'module' (index 1)
-  {kMapAutomatonNoIssue, ""},// state 'usedLocalConstant' (index 2)
-  {kMapAutomatonNoIssue, ""},// state 'localConstant' (index 3)
-  {kMapAutomatonIssueWarning, "the '%K' constant value is unused"},// state 'undefinedLocalConstant' (index 4)
-  {kMapAutomatonIssueWarning, "the '%K' local variable is unused"},// state 'undefinedLocalVariable' (index 5)
-  {kMapAutomatonNoIssue, ""},// state 'definedLocalVariable' (index 6)
-  {kMapAutomatonNoIssue, ""},// state 'usedLocalVariable' (index 7)
-  {kMapAutomatonNoIssue, ""},// state 'droppedLocalVariable' (index 8)
-  {kMapAutomatonNoIssue, ""},// state 'undefinedOutputFormalArgument' (index 9)
-  {kMapAutomatonNoIssue, ""},// state 'definedOutputFormalArgument' (index 10)
-  {kMapAutomatonIssueWarning, "the '%K' input/output formal parameter is unused"},// state 'unusedInputOutputFormalArgument' (index 11)
-  {kMapAutomatonNoIssue, ""},// state 'usedInputOutputFormalArgument' (index 12)
-  {kMapAutomatonIssueError, "the '%K' input/ouput formal argument should be valuated at the end of the routine"},// state 'droppedInputOutputFormalArgument' (index 13)
-  {kMapAutomatonNoIssue, ""},// state 'inputOutputFormalArgumentDeclaredAsUnused' (index 14)
-  {kMapAutomatonNoIssue, ""},// state 'constantInputFormalArgument' (index 15)
-  {kMapAutomatonNoIssue, ""},// state 'usedConstantInputFormalArgument' (index 16)
-  {kMapAutomatonNoIssue, ""},// state 'constantInputFormalArgumentDeclaredAsUnused' (index 17)
-  {kMapAutomatonIssueWarning, "the '%K' input formal parameter is not used and is not declared as unused"},// state 'inputFormalParameter' (index 18)
-  {kMapAutomatonNoIssue, ""},// state 'usedInputFormalArgument' (index 19)
-  {kMapAutomatonNoIssue, ""},// state 'droppedInputFormalArgument' (index 20)
-  {kMapAutomatonNoIssue, ""},// state 'inputFormalArgumentDeclaredAsUnused' (index 21)
-} ;
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_closeBranch (GALGAS_location inErrorLocation,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  closeBranch (inErrorLocation,
-               kMapAutomatonFinalIssue_unifiedSymbolMapEx,
-               #ifndef DO_NOT_GENERATE_CHECKINGS
-                 kMapStateCount_unifiedSymbolMapEx,
-               #endif
-               inCompiler COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::method_checkAutomatonStates (GALGAS_location inErrorLocation,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const {
-  checkAutomatonStates (inErrorLocation, kMapAutomatonFinalIssue_unifiedSymbolMapEx, inCompiler COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                             map override 'selectBlock'                                              *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride_unifiedSymbolMapEx_selectBlock [28] = {
-  {kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgument /* 15 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused /* 17 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""},
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverride_unifiedSymbolMapEx_selectBlock [40] = {
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "this branch lets the '%K' variable undefined, while previous ones define it"},
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "this branch drops the '%K' variable, while previous ones let it defined"},
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonIssueError, "this branch lets the '%K' variable undefined, while previous defines let it"},
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonIssueError, "this branch drops the '%K' variable, while previous ones let it defined"},
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones drop it"},
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones drop it"},
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonIssueError, "this branch defines the '%K' output formal argument, while previous ones let it undefined"},
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonIssueError, "this branch lets the '%K' variable undefined, while previous ones define it"},
-  {kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueError, "this branch drops the '%K' input/output formal argument, while previous ones let it undefined"},
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonIssueError, "this branch drops the '%K' input/output formal argument, while previous ones let it defined"},
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueError, "this branch lets the '%K' input/output formal argument defined, while previous ones drop it"},
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonIssueError, "this branch lets the '%K' input/output formal argument defined, while previous ones drop it"},
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapAutomatonIssueError, "this branch lets the '%K' input formal argument defined, while previous ones drop it"},
-  {kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapAutomatonIssueError, "this branch drops the '%K' input formal argument defined, while previous ones let it defined"},
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgument /* 15 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_constantInputFormalArgument /* 15 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused /* 17 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused /* 17 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapAutomatonIssueError, "this branch drops the '%K' input formal argument, while previous let it defined"},
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonIssueError, "this branch drops the '%K' input formal argument, while previous ones let it defined"},
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "this branch drops the '%K' input formal argument, while previous ones let it defined"},
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonIssueError, "this branch defines the '%K' input formal argument, while previous ones let it dropped"},
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""},
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_openOverrideForSelectBlock (C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  openOverride (kBranchBehaviourForOverride_unifiedSymbolMapEx_selectBlock, 28,
-                kBranchCombinationForOverride_unifiedSymbolMapEx_selectBlock, 40,
-                "selectBlock",
-                inCompiler
-                COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                             map override 'repeatBlock'                                              *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride_unifiedSymbolMapEx_repeatBlock [28] = {
-  {kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapState_unifiedSymbolMapEx_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' variable"},
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' variable"},
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' variable"},
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonIssueError, "the repeated branch should not define the dropped '%K' variable"},
-  {kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' output formal argument"},
-  {kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument /* 9 */, kMapState_unifiedSymbolMapEx_definedOutputFormalArgument /* 10 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' output formal argument"},
-  {kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input/output formal argument"},
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input/output formal argument"},
-  {kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueError, "the repeated branch should define the '%K' input formal argument"},
-  {kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_droppedInputOutputFormalArgument /* 13 */, kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input/output formal argument"},
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgument /* 15 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused /* 17 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
-  {kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
-  {kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_droppedInputFormalArgument /* 20 */, kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverride_unifiedSymbolMapEx_repeatBlock [18] = {
-  {kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_localConstant /* 3 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapState_unifiedSymbolMapEx_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapState_unifiedSymbolMapEx_definedLocalVariable /* 6 */, kMapState_unifiedSymbolMapEx_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapState_unifiedSymbolMapEx_undefinedLocalVariable /* 5 */, kMapState_unifiedSymbolMapEx_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument /* 11 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapState_unifiedSymbolMapEx_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgument /* 15 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_constantInputFormalArgument /* 15 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused /* 17 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused /* 17 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_inputFormalParameter /* 18 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapState_unifiedSymbolMapEx_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_openOverrideForRepeatBlock (C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  openOverride (kBranchBehaviourForOverride_unifiedSymbolMapEx_repeatBlock, 28,
-                kBranchCombinationForOverride_unifiedSymbolMapEx_repeatBlock, 18,
-                "repeatBlock",
-                inCompiler
-                COMMA_THERE) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertInaccessibleControlRegister (GALGAS_lstring inKey,
-                                                                          GALGAS_PLMType inArgument0,
-                                                                          GALGAS_bool inArgument1,
-                                                                          GALGAS_objectIR inArgument2,
-                                                                          GALGAS_bool inArgument3,
-                                                                          GALGAS_bool inArgument4,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_inaccessibleControlRegister,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_inaccessibleControlRegister],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertModule (GALGAS_lstring inKey,
-                                                     GALGAS_PLMType inArgument0,
-                                                     GALGAS_bool inArgument1,
-                                                     GALGAS_objectIR inArgument2,
-                                                     GALGAS_bool inArgument3,
-                                                     GALGAS_bool inArgument4,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_module,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_module],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertUndefinedVariable (GALGAS_lstring inKey,
-                                                                GALGAS_PLMType inArgument0,
-                                                                GALGAS_bool inArgument1,
-                                                                GALGAS_objectIR inArgument2,
-                                                                GALGAS_bool inArgument3,
-                                                                GALGAS_bool inArgument4,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_undefinedLocalVariable,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_undefinedLocalVariable],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertDefinedVariable (GALGAS_lstring inKey,
-                                                              GALGAS_PLMType inArgument0,
-                                                              GALGAS_bool inArgument1,
-                                                              GALGAS_objectIR inArgument2,
-                                                              GALGAS_bool inArgument3,
-                                                              GALGAS_bool inArgument4,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_definedLocalVariable,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_definedLocalVariable],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertUndefinedConstant (GALGAS_lstring inKey,
-                                                                GALGAS_PLMType inArgument0,
-                                                                GALGAS_bool inArgument1,
-                                                                GALGAS_objectIR inArgument2,
-                                                                GALGAS_bool inArgument3,
-                                                                GALGAS_bool inArgument4,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_undefinedLocalConstant,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_undefinedLocalConstant],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertConstant (GALGAS_lstring inKey,
-                                                       GALGAS_PLMType inArgument0,
-                                                       GALGAS_bool inArgument1,
-                                                       GALGAS_objectIR inArgument2,
-                                                       GALGAS_bool inArgument3,
-                                                       GALGAS_bool inArgument4,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_localConstant,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_localConstant],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertUsedConstant (GALGAS_lstring inKey,
-                                                           GALGAS_PLMType inArgument0,
-                                                           GALGAS_bool inArgument1,
-                                                           GALGAS_objectIR inArgument2,
-                                                           GALGAS_bool inArgument3,
-                                                           GALGAS_bool inArgument4,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_usedLocalConstant,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_usedLocalConstant],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertInputFormalArgument (GALGAS_lstring inKey,
-                                                                  GALGAS_PLMType inArgument0,
-                                                                  GALGAS_bool inArgument1,
-                                                                  GALGAS_objectIR inArgument2,
-                                                                  GALGAS_bool inArgument3,
-                                                                  GALGAS_bool inArgument4,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_inputFormalParameter,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_inputFormalParameter],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertInputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
-                                                                                  GALGAS_PLMType inArgument0,
-                                                                                  GALGAS_bool inArgument1,
-                                                                                  GALGAS_objectIR inArgument2,
-                                                                                  GALGAS_bool inArgument3,
-                                                                                  GALGAS_bool inArgument4,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_inputFormalArgumentDeclaredAsUnused],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertConstantInputFormalArgument (GALGAS_lstring inKey,
-                                                                          GALGAS_PLMType inArgument0,
-                                                                          GALGAS_bool inArgument1,
-                                                                          GALGAS_objectIR inArgument2,
-                                                                          GALGAS_bool inArgument3,
-                                                                          GALGAS_bool inArgument4,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_constantInputFormalArgument,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_constantInputFormalArgument],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertUsedConstantInputFormalArgument (GALGAS_lstring inKey,
-                                                                              GALGAS_PLMType inArgument0,
-                                                                              GALGAS_bool inArgument1,
-                                                                              GALGAS_objectIR inArgument2,
-                                                                              GALGAS_bool inArgument3,
-                                                                              GALGAS_bool inArgument4,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_usedConstantInputFormalArgument],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertConstantInputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
-                                                                                          GALGAS_PLMType inArgument0,
-                                                                                          GALGAS_bool inArgument1,
-                                                                                          GALGAS_objectIR inArgument2,
-                                                                                          GALGAS_bool inArgument3,
-                                                                                          GALGAS_bool inArgument4,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_constantInputFormalArgumentDeclaredAsUnused],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertOutputFormalArgument (GALGAS_lstring inKey,
-                                                                   GALGAS_PLMType inArgument0,
-                                                                   GALGAS_bool inArgument1,
-                                                                   GALGAS_objectIR inArgument2,
-                                                                   GALGAS_bool inArgument3,
-                                                                   GALGAS_bool inArgument4,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_undefinedOutputFormalArgument],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertInputOutputFormalArgument (GALGAS_lstring inKey,
-                                                                        GALGAS_PLMType inArgument0,
-                                                                        GALGAS_bool inArgument1,
-                                                                        GALGAS_objectIR inArgument2,
-                                                                        GALGAS_bool inArgument3,
-                                                                        GALGAS_bool inArgument4,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_unusedInputOutputFormalArgument],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_insertInputOutputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
-                                                                                        GALGAS_PLMType inArgument0,
-                                                                                        GALGAS_bool inArgument1,
-                                                                                        GALGAS_objectIR inArgument2,
-                                                                                        GALGAS_bool inArgument3,
-                                                                                        GALGAS_bool inArgument4,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedSymbolMapEx (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused,
-                     kMapStateNames_unifiedSymbolMapEx [kMapState_unifiedSymbolMapEx_inputOutputFormalArgumentDeclaredAsUnused],
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_unifiedSymbolMapEx_searchForReadAccess = "the '%K' variable is not declared" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_searchForReadAccess (GALGAS_lstring inKey,
-                                                            GALGAS_PLMType & outArgument0,
-                                                            GALGAS_bool & outArgument1,
-                                                            GALGAS_objectIR & outArgument2,
-                                                            GALGAS_bool & outArgument3,
-                                                            GALGAS_bool & outArgument4,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) performSearch (inKey,
-                                                                                                       inCompiler,
-                                                                                                       kMapAction_unifiedSymbolMapEx_readAccess,
-                                                                                                       kMapTransitions_unifiedSymbolMapEx,
-                                                                                                       kMapActionCount_unifiedSymbolMapEx,
-                                                                                                       #ifndef DO_NOT_GENERATE_CHECKINGS
-                                                                                                         kMapStateCount_unifiedSymbolMapEx,
-                                                                                                       #endif
-                                                                                                       kSearchErrorMessage_unifiedSymbolMapEx_searchForReadAccess
-                                                                                                       COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-    outArgument4.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    outArgument0 = p->mProperty_type ;
-    outArgument1 = p->mProperty_readAccessAllowed ;
-    outArgument2 = p->mProperty_objectIR ;
-    outArgument3 = p->mProperty_copyable ;
-    outArgument4 = p->mProperty_canBeUsedAsInputParameter ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_unifiedSymbolMapEx_searchForWriteAccess = "the '%K' variable is not declared" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_searchForWriteAccess (GALGAS_lstring inKey,
-                                                             GALGAS_PLMType & outArgument0,
-                                                             GALGAS_bool & outArgument1,
-                                                             GALGAS_objectIR & outArgument2,
-                                                             GALGAS_bool & outArgument3,
-                                                             GALGAS_bool & outArgument4,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) performSearch (inKey,
-                                                                                                       inCompiler,
-                                                                                                       kMapAction_unifiedSymbolMapEx_writeAccess,
-                                                                                                       kMapTransitions_unifiedSymbolMapEx,
-                                                                                                       kMapActionCount_unifiedSymbolMapEx,
-                                                                                                       #ifndef DO_NOT_GENERATE_CHECKINGS
-                                                                                                         kMapStateCount_unifiedSymbolMapEx,
-                                                                                                       #endif
-                                                                                                       kSearchErrorMessage_unifiedSymbolMapEx_searchForWriteAccess
-                                                                                                       COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-    outArgument4.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    outArgument0 = p->mProperty_type ;
-    outArgument1 = p->mProperty_readAccessAllowed ;
-    outArgument2 = p->mProperty_objectIR ;
-    outArgument3 = p->mProperty_copyable ;
-    outArgument4 = p->mProperty_canBeUsedAsInputParameter ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_unifiedSymbolMapEx_searchForReadWriteAccess = "the '%K' variable is not declared" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_searchForReadWriteAccess (GALGAS_lstring inKey,
-                                                                 GALGAS_PLMType & outArgument0,
-                                                                 GALGAS_bool & outArgument1,
-                                                                 GALGAS_objectIR & outArgument2,
-                                                                 GALGAS_bool & outArgument3,
-                                                                 GALGAS_bool & outArgument4,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) performSearch (inKey,
-                                                                                                       inCompiler,
-                                                                                                       kMapAction_unifiedSymbolMapEx_readWriteAccess,
-                                                                                                       kMapTransitions_unifiedSymbolMapEx,
-                                                                                                       kMapActionCount_unifiedSymbolMapEx,
-                                                                                                       #ifndef DO_NOT_GENERATE_CHECKINGS
-                                                                                                         kMapStateCount_unifiedSymbolMapEx,
-                                                                                                       #endif
-                                                                                                       kSearchErrorMessage_unifiedSymbolMapEx_searchForReadWriteAccess
-                                                                                                       COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-    outArgument4.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    outArgument0 = p->mProperty_type ;
-    outArgument1 = p->mProperty_readAccessAllowed ;
-    outArgument2 = p->mProperty_objectIR ;
-    outArgument3 = p->mProperty_copyable ;
-    outArgument4 = p->mProperty_canBeUsedAsInputParameter ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_unifiedSymbolMapEx_searchForDropAccess = "the '%K' variable is not declared" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_searchForDropAccess (GALGAS_lstring inKey,
-                                                            GALGAS_PLMType & outArgument0,
-                                                            GALGAS_bool & outArgument1,
-                                                            GALGAS_objectIR & outArgument2,
-                                                            GALGAS_bool & outArgument3,
-                                                            GALGAS_bool & outArgument4,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) performSearch (inKey,
-                                                                                                       inCompiler,
-                                                                                                       kMapAction_unifiedSymbolMapEx_dropAccess,
-                                                                                                       kMapTransitions_unifiedSymbolMapEx,
-                                                                                                       kMapActionCount_unifiedSymbolMapEx,
-                                                                                                       #ifndef DO_NOT_GENERATE_CHECKINGS
-                                                                                                         kMapStateCount_unifiedSymbolMapEx,
-                                                                                                       #endif
-                                                                                                       kSearchErrorMessage_unifiedSymbolMapEx_searchForDropAccess
-                                                                                                       COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-    outArgument4.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    outArgument0 = p->mProperty_type ;
-    outArgument1 = p->mProperty_readAccessAllowed ;
-    outArgument2 = p->mProperty_objectIR ;
-    outArgument3 = p->mProperty_copyable ;
-    outArgument4 = p->mProperty_canBeUsedAsInputParameter ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_unifiedSymbolMapEx_searchForConstantMethodCall = "the '%K' object is not declared" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_searchForConstantMethodCall (GALGAS_lstring inKey,
-                                                                    GALGAS_PLMType & outArgument0,
-                                                                    GALGAS_bool & outArgument1,
-                                                                    GALGAS_objectIR & outArgument2,
-                                                                    GALGAS_bool & outArgument3,
-                                                                    GALGAS_bool & outArgument4,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) performSearch (inKey,
-                                                                                                       inCompiler,
-                                                                                                       kMapAction_unifiedSymbolMapEx_constMethodCall,
-                                                                                                       kMapTransitions_unifiedSymbolMapEx,
-                                                                                                       kMapActionCount_unifiedSymbolMapEx,
-                                                                                                       #ifndef DO_NOT_GENERATE_CHECKINGS
-                                                                                                         kMapStateCount_unifiedSymbolMapEx,
-                                                                                                       #endif
-                                                                                                       kSearchErrorMessage_unifiedSymbolMapEx_searchForConstantMethodCall
-                                                                                                       COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-    outArgument4.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    outArgument0 = p->mProperty_type ;
-    outArgument1 = p->mProperty_readAccessAllowed ;
-    outArgument2 = p->mProperty_objectIR ;
-    outArgument3 = p->mProperty_copyable ;
-    outArgument4 = p->mProperty_canBeUsedAsInputParameter ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_unifiedSymbolMapEx_searchForMethodCall = "the '%K' object is not declared" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_searchForMethodCall (GALGAS_lstring inKey,
-                                                            GALGAS_PLMType & outArgument0,
-                                                            GALGAS_bool & outArgument1,
-                                                            GALGAS_objectIR & outArgument2,
-                                                            GALGAS_bool & outArgument3,
-                                                            GALGAS_bool & outArgument4,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) performSearch (inKey,
-                                                                                                       inCompiler,
-                                                                                                       kMapAction_unifiedSymbolMapEx_methodCall,
-                                                                                                       kMapTransitions_unifiedSymbolMapEx,
-                                                                                                       kMapActionCount_unifiedSymbolMapEx,
-                                                                                                       #ifndef DO_NOT_GENERATE_CHECKINGS
-                                                                                                         kMapStateCount_unifiedSymbolMapEx,
-                                                                                                       #endif
-                                                                                                       kSearchErrorMessage_unifiedSymbolMapEx_searchForMethodCall
-                                                                                                       COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-    outArgument4.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    outArgument0 = p->mProperty_type ;
-    outArgument1 = p->mProperty_readAccessAllowed ;
-    outArgument2 = p->mProperty_objectIR ;
-    outArgument3 = p->mProperty_copyable ;
-    outArgument4 = p->mProperty_canBeUsedAsInputParameter ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_unifiedSymbolMapEx_neutralAccess = "the '%K' variable is not declared" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_neutralAccess (GALGAS_lstring inKey,
-                                                      GALGAS_PLMType & outArgument0,
-                                                      GALGAS_bool & outArgument1,
-                                                      GALGAS_objectIR & outArgument2,
-                                                      GALGAS_bool & outArgument3,
-                                                      GALGAS_bool & outArgument4,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) performSearch (inKey,
-                                                                                                       inCompiler,
-                                                                                                       kMapAction_unifiedSymbolMapEx_neutralAccess,
-                                                                                                       kMapTransitions_unifiedSymbolMapEx,
-                                                                                                       kMapActionCount_unifiedSymbolMapEx,
-                                                                                                       #ifndef DO_NOT_GENERATE_CHECKINGS
-                                                                                                         kMapStateCount_unifiedSymbolMapEx,
-                                                                                                       #endif
-                                                                                                       kSearchErrorMessage_unifiedSymbolMapEx_neutralAccess
-                                                                                                       COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-    outArgument4.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    outArgument0 = p->mProperty_type ;
-    outArgument1 = p->mProperty_readAccessAllowed ;
-    outArgument2 = p->mProperty_objectIR ;
-    outArgument3 = p->mProperty_copyable ;
-    outArgument4 = p->mProperty_canBeUsedAsInputParameter ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType GALGAS_unifiedSymbolMapEx::getter_typeForKey (const GALGAS_string & inKey,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) attributes ;
-  GALGAS_PLMType result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_type ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedSymbolMapEx::getter_readAccessAllowedForKey (const GALGAS_string & inKey,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_readAccessAllowed ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_unifiedSymbolMapEx::getter_objectIRForKey (const GALGAS_string & inKey,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) attributes ;
-  GALGAS_objectIR result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_objectIR ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedSymbolMapEx::getter_copyableForKey (const GALGAS_string & inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_copyable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedSymbolMapEx::getter_canBeUsedAsInputParameterForKey (const GALGAS_string & inKey,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_canBeUsedAsInputParameter ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_setTypeForKey (GALGAS_PLMType inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedSymbolMapEx * p = (cMapElement_unifiedSymbolMapEx *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    p->mProperty_type = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_setReadAccessAllowedForKey (GALGAS_bool inAttributeValue,
-                                                                   GALGAS_string inKey,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedSymbolMapEx * p = (cMapElement_unifiedSymbolMapEx *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    p->mProperty_readAccessAllowed = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_setObjectIRForKey (GALGAS_objectIR inAttributeValue,
-                                                          GALGAS_string inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedSymbolMapEx * p = (cMapElement_unifiedSymbolMapEx *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    p->mProperty_objectIR = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_setCopyableForKey (GALGAS_bool inAttributeValue,
-                                                          GALGAS_string inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedSymbolMapEx * p = (cMapElement_unifiedSymbolMapEx *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    p->mProperty_copyable = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx::setter_setCanBeUsedAsInputParameterForKey (GALGAS_bool inAttributeValue,
-                                                                           GALGAS_string inKey,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedSymbolMapEx * p = (cMapElement_unifiedSymbolMapEx *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    p->mProperty_canBeUsedAsInputParameter = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_unifiedSymbolMapEx * GALGAS_unifiedSymbolMapEx::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                               const GALGAS_string & inKey
-                                                                                               COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedSymbolMapEx * result = (cMapElement_unifiedSymbolMapEx *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_unifiedSymbolMapEx) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_unifiedSymbolMapEx::cEnumerator_unifiedSymbolMapEx (const GALGAS_unifiedSymbolMapEx & inEnumeratedObject,
-                                                                const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_unifiedSymbolMapEx::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mProperty_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType cEnumerator_unifiedSymbolMapEx::current_type (LOCATION_ARGS) const {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-  return p->mProperty_type ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_unifiedSymbolMapEx::current_readAccessAllowed (LOCATION_ARGS) const {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-  return p->mProperty_readAccessAllowed ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR cEnumerator_unifiedSymbolMapEx::current_objectIR (LOCATION_ARGS) const {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-  return p->mProperty_objectIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_unifiedSymbolMapEx::current_copyable (LOCATION_ARGS) const {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-  return p->mProperty_copyable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_unifiedSymbolMapEx::current_canBeUsedAsInputParameter (LOCATION_ARGS) const {
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-  return p->mProperty_canBeUsedAsInputParameter ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @unifiedSymbolMapEx type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_unifiedSymbolMapEx ("unifiedSymbolMapEx",
-                                           NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_unifiedSymbolMapEx::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_unifiedSymbolMapEx ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_unifiedSymbolMapEx::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_unifiedSymbolMapEx (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx GALGAS_unifiedSymbolMapEx::extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx result ;
-  const GALGAS_unifiedSymbolMapEx * p = (const GALGAS_unifiedSymbolMapEx *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_unifiedSymbolMapEx *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("unifiedSymbolMapEx", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy::GALGAS_unifiedSymbolMapEx_2D_proxy (void) :
-AC_GALGAS_uniqueMapProxy () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy GALGAS_unifiedSymbolMapEx_2D_proxy::constructor_null (LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx_2D_proxy result ;
-  result.makeNullProxy (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx_2D_proxy::class_method_makeOptionalProxy (GALGAS_unifiedSymbolMapEx & ioMap,
-                                                                         GALGAS_lstring inKey,
-                                                                         GALGAS_unifiedSymbolMapEx_2D_proxy & outProxy
-                                                                         COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeOptionalProxy (ioMap, inKey COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx_2D_proxy::class_method_makeProxy (GALGAS_unifiedSymbolMapEx & ioMap,
-                                                                 GALGAS_lstring inKey,
-                                                                 GALGAS_unifiedSymbolMapEx_2D_proxy & outProxy
-                                                                 COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeProxy (ioMap, inKey COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedSymbolMapEx_2D_proxy::class_method_makeProxyFromString (GALGAS_unifiedSymbolMapEx & ioMap,
-                                                                           GALGAS_string inKey,
-                                                                           GALGAS_unifiedSymbolMapEx_2D_proxy & outProxy
-                                                                           COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeProxyFromString (ioMap, inKey COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType GALGAS_unifiedSymbolMapEx_2D_proxy::getter_type (C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
-  GALGAS_PLMType result ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) getAttributeListPointer (inCompiler, "type" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_type;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedSymbolMapEx_2D_proxy::getter_readAccessAllowed (C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) getAttributeListPointer (inCompiler, "readAccessAllowed" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_readAccessAllowed;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_unifiedSymbolMapEx_2D_proxy::getter_objectIR (C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) const {
-  GALGAS_objectIR result ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) getAttributeListPointer (inCompiler, "objectIR" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_objectIR;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedSymbolMapEx_2D_proxy::getter_copyable (C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) getAttributeListPointer (inCompiler, "copyable" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_copyable;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedSymbolMapEx_2D_proxy::getter_canBeUsedAsInputParameter (C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  const cMapElement_unifiedSymbolMapEx * p = (const cMapElement_unifiedSymbolMapEx *) getAttributeListPointer (inCompiler, "canBeUsedAsInputParameter" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedSymbolMapEx) ;
-    result = p->mProperty_canBeUsedAsInputParameter;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy GALGAS_unifiedSymbolMapEx_2D_proxy::constructor_searchForReadAccess (const GALGAS_unifiedSymbolMapEx & inMap,
-                                                                                                        const GALGAS_lstring & inKey,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedSymbolMapEx_searchForReadAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy GALGAS_unifiedSymbolMapEx_2D_proxy::constructor_searchForWriteAccess (const GALGAS_unifiedSymbolMapEx & inMap,
-                                                                                                         const GALGAS_lstring & inKey,
-                                                                                                         C_Compiler * inCompiler
-                                                                                                         COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedSymbolMapEx_searchForWriteAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy GALGAS_unifiedSymbolMapEx_2D_proxy::constructor_searchForReadWriteAccess (const GALGAS_unifiedSymbolMapEx & inMap,
-                                                                                                             const GALGAS_lstring & inKey,
-                                                                                                             C_Compiler * inCompiler
-                                                                                                             COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedSymbolMapEx_searchForReadWriteAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy GALGAS_unifiedSymbolMapEx_2D_proxy::constructor_searchForDropAccess (const GALGAS_unifiedSymbolMapEx & inMap,
-                                                                                                        const GALGAS_lstring & inKey,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedSymbolMapEx_searchForDropAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy GALGAS_unifiedSymbolMapEx_2D_proxy::constructor_searchForConstantMethodCall (const GALGAS_unifiedSymbolMapEx & inMap,
-                                                                                                                const GALGAS_lstring & inKey,
-                                                                                                                C_Compiler * inCompiler
-                                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedSymbolMapEx_searchForConstantMethodCall, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy GALGAS_unifiedSymbolMapEx_2D_proxy::constructor_searchForMethodCall (const GALGAS_unifiedSymbolMapEx & inMap,
-                                                                                                        const GALGAS_lstring & inKey,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedSymbolMapEx_searchForMethodCall, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy GALGAS_unifiedSymbolMapEx_2D_proxy::constructor_neutralAccess (const GALGAS_unifiedSymbolMapEx & inMap,
-                                                                                                  const GALGAS_lstring & inKey,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedSymbolMapEx_neutralAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @unifiedSymbolMapEx-proxy type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_unifiedSymbolMapEx_2D_proxy ("unifiedSymbolMapEx-proxy",
-                                                    NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_unifiedSymbolMapEx_2D_proxy::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_unifiedSymbolMapEx_2D_proxy ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_unifiedSymbolMapEx_2D_proxy::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_unifiedSymbolMapEx_2D_proxy (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedSymbolMapEx_2D_proxy GALGAS_unifiedSymbolMapEx_2D_proxy::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedSymbolMapEx_2D_proxy result ;
-  const GALGAS_unifiedSymbolMapEx_2D_proxy * p = (const GALGAS_unifiedSymbolMapEx_2D_proxy *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_unifiedSymbolMapEx_2D_proxy *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("unifiedSymbolMapEx-proxy", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        '@semanticTypePrecedenceGraph' graph                                         *
 //                                                                                                                     *
@@ -6976,10 +5282,10 @@ void extensionMethod_llvmCodeGeneration (const GALGAS_routineMapIR inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineMapIR temp_0 = inObject ;
-  cEnumerator_routineMapIR enumerator_8967 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_8967.hasCurrentObject ()) {
-    extensionMethod_llvmCodeGeneration (enumerator_8967.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 239)) ;
-    enumerator_8967.gotoNextObject () ;
+  cEnumerator_routineMapIR enumerator_6672 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_6672.hasCurrentObject ()) {
+    extensionMethod_llvmCodeGeneration (enumerator_6672.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 175)) ;
+    enumerator_6672.gotoNextObject () ;
   }
 }
 
@@ -13698,4 +12004,2928 @@ void extensionSetter_appendUpperBoundCheck (GALGAS_instructionListIR & ioObject,
   ioObject.addAssign_operation (GALGAS_upperBoundCheckIR::constructor_new (constinArgument_inSource, constinArgument_inUpperBoundPlusOne, constinArgument_inPanicCode, constinArgument_inLocation  COMMA_SOURCE_FILE ("intermediate-upper-bound-check.galgas", 8))  COMMA_SOURCE_FILE ("intermediate-upper-bound-check.galgas", 8)) ;
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_upperBoundCheckIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mSource.objectCompare (p->mProperty_mSource) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mUpperBoundPlusOne.objectCompare (p->mProperty_mUpperBoundPlusOne) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mPanicCode.objectCompare (p->mProperty_mPanicCode) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mLocation.objectCompare (p->mProperty_mLocation) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_upperBoundCheckIR::objectCompare (const GALGAS_upperBoundCheckIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_upperBoundCheckIR::GALGAS_upperBoundCheckIR (void) :
+GALGAS_abstractInstructionIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_upperBoundCheckIR::GALGAS_upperBoundCheckIR (const cPtr_upperBoundCheckIR * inSourcePtr) :
+GALGAS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_upperBoundCheckIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_upperBoundCheckIR GALGAS_upperBoundCheckIR::constructor_new (const GALGAS_objectIR & inAttribute_mSource,
+                                                                    const GALGAS_bigint & inAttribute_mUpperBoundPlusOne,
+                                                                    const GALGAS_uint & inAttribute_mPanicCode,
+                                                                    const GALGAS_location & inAttribute_mLocation
+                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_upperBoundCheckIR result ;
+  if (inAttribute_mSource.isValid () && inAttribute_mUpperBoundPlusOne.isValid () && inAttribute_mPanicCode.isValid () && inAttribute_mLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_upperBoundCheckIR (inAttribute_mSource, inAttribute_mUpperBoundPlusOne, inAttribute_mPanicCode, inAttribute_mLocation COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
+    result = p->mProperty_mSource ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR cPtr_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSource ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint GALGAS_upperBoundCheckIR::getter_mUpperBoundPlusOne (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
+    result = p->mProperty_mUpperBoundPlusOne ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint cPtr_upperBoundCheckIR::getter_mUpperBoundPlusOne (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mUpperBoundPlusOne ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_upperBoundCheckIR::getter_mPanicCode (UNUSED_LOCATION_ARGS) const {
+  GALGAS_uint result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
+    result = p->mProperty_mPanicCode ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint cPtr_upperBoundCheckIR::getter_mPanicCode (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPanicCode ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_upperBoundCheckIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
+    result = p->mProperty_mLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_upperBoundCheckIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                     Pointer class for @upperBoundCheckIR class                                      *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_upperBoundCheckIR::cPtr_upperBoundCheckIR (const GALGAS_objectIR & in_mSource,
+                                                const GALGAS_bigint & in_mUpperBoundPlusOne,
+                                                const GALGAS_uint & in_mPanicCode,
+                                                const GALGAS_location & in_mLocation
+                                                COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (THERE),
+mProperty_mSource (in_mSource),
+mProperty_mUpperBoundPlusOne (in_mUpperBoundPlusOne),
+mProperty_mPanicCode (in_mPanicCode),
+mProperty_mLocation (in_mLocation) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_upperBoundCheckIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_upperBoundCheckIR ;
+}
+
+void cPtr_upperBoundCheckIR::description (C_String & ioString,
+                                          const int32_t inIndentation) const {
+  ioString << "[@upperBoundCheckIR:" ;
+  mProperty_mSource.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mUpperBoundPlusOne.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mPanicCode.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mLocation.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_upperBoundCheckIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_upperBoundCheckIR (mProperty_mSource, mProperty_mUpperBoundPlusOne, mProperty_mPanicCode, mProperty_mLocation COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @upperBoundCheckIR type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_upperBoundCheckIR ("upperBoundCheckIR",
+                                          & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_upperBoundCheckIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_upperBoundCheckIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_upperBoundCheckIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_upperBoundCheckIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_upperBoundCheckIR GALGAS_upperBoundCheckIR::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_upperBoundCheckIR result ;
+  const GALGAS_upperBoundCheckIR * p = (const GALGAS_upperBoundCheckIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_upperBoundCheckIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("upperBoundCheckIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension method '@instructionListIR appendSourceLineComment'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendSourceLineComment (GALGAS_instructionListIR & ioObject,
+                                              const GALGAS_location constinArgument_inSourceLocation,
+                                              C_Compiler * /* inCompiler */
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_sourceLocationIR::constructor_new (constinArgument_inSourceLocation  COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 3)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_sourceLocationIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_sourceLocationIR * p = (const cPtr_sourceLocationIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_sourceLocationIR) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mSourceLocation.objectCompare (p->mProperty_mSourceLocation) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_sourceLocationIR::objectCompare (const GALGAS_sourceLocationIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sourceLocationIR::GALGAS_sourceLocationIR (void) :
+GALGAS_abstractInstructionIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sourceLocationIR GALGAS_sourceLocationIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_sourceLocationIR::constructor_new (GALGAS_location::constructor_nowhere (HERE)
+                                                   COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sourceLocationIR::GALGAS_sourceLocationIR (const cPtr_sourceLocationIR * inSourcePtr) :
+GALGAS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_sourceLocationIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sourceLocationIR GALGAS_sourceLocationIR::constructor_new (const GALGAS_location & inAttribute_mSourceLocation
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_sourceLocationIR result ;
+  if (inAttribute_mSourceLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_sourceLocationIR (inAttribute_mSourceLocation COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_sourceLocationIR::getter_mSourceLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_sourceLocationIR * p = (const cPtr_sourceLocationIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_sourceLocationIR) ;
+    result = p->mProperty_mSourceLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_sourceLocationIR::getter_mSourceLocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSourceLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                      Pointer class for @sourceLocationIR class                                      *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_sourceLocationIR::cPtr_sourceLocationIR (const GALGAS_location & in_mSourceLocation
+                                              COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (THERE),
+mProperty_mSourceLocation (in_mSourceLocation) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_sourceLocationIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sourceLocationIR ;
+}
+
+void cPtr_sourceLocationIR::description (C_String & ioString,
+                                         const int32_t inIndentation) const {
+  ioString << "[@sourceLocationIR:" ;
+  mProperty_mSourceLocation.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_sourceLocationIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_sourceLocationIR (mProperty_mSourceLocation COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @sourceLocationIR type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_sourceLocationIR ("sourceLocationIR",
+                                         & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_sourceLocationIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sourceLocationIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_sourceLocationIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_sourceLocationIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sourceLocationIR GALGAS_sourceLocationIR::extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_sourceLocationIR result ;
+  const GALGAS_sourceLocationIR * p = (const GALGAS_sourceLocationIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_sourceLocationIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("sourceLocationIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessibleEntities::GALGAS_accessibleEntities (void) :
+mProperty_mRoutineSet (),
+mProperty_mGuardSet (),
+mProperty_mSectionSet (),
+mProperty_mGlobalVariableSet (),
+mProperty_mTaskVariableSet () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessibleEntities::~ GALGAS_accessibleEntities (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessibleEntities::GALGAS_accessibleEntities (const GALGAS_stringset & inOperand0,
+                                                      const GALGAS_stringset & inOperand1,
+                                                      const GALGAS_stringset & inOperand2,
+                                                      const GALGAS_stringset & inOperand3,
+                                                      const GALGAS_stringset & inOperand4) :
+mProperty_mRoutineSet (inOperand0),
+mProperty_mGuardSet (inOperand1),
+mProperty_mSectionSet (inOperand2),
+mProperty_mGlobalVariableSet (inOperand3),
+mProperty_mTaskVariableSet (inOperand4) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessibleEntities GALGAS_accessibleEntities::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_accessibleEntities (GALGAS_stringset::constructor_emptySet (HERE),
+                                    GALGAS_stringset::constructor_emptySet (HERE),
+                                    GALGAS_stringset::constructor_emptySet (HERE),
+                                    GALGAS_stringset::constructor_emptySet (HERE),
+                                    GALGAS_stringset::constructor_emptySet (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessibleEntities GALGAS_accessibleEntities::constructor_new (const GALGAS_stringset & inOperand0,
+                                                                      const GALGAS_stringset & inOperand1,
+                                                                      const GALGAS_stringset & inOperand2,
+                                                                      const GALGAS_stringset & inOperand3,
+                                                                      const GALGAS_stringset & inOperand4 
+                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_accessibleEntities result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_accessibleEntities (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_accessibleEntities::objectCompare (const GALGAS_accessibleEntities & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mRoutineSet.objectCompare (inOperand.mProperty_mRoutineSet) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mGuardSet.objectCompare (inOperand.mProperty_mGuardSet) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mSectionSet.objectCompare (inOperand.mProperty_mSectionSet) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mGlobalVariableSet.objectCompare (inOperand.mProperty_mGlobalVariableSet) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskVariableSet.objectCompare (inOperand.mProperty_mTaskVariableSet) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_accessibleEntities::isValid (void) const {
+  return mProperty_mRoutineSet.isValid () && mProperty_mGuardSet.isValid () && mProperty_mSectionSet.isValid () && mProperty_mGlobalVariableSet.isValid () && mProperty_mTaskVariableSet.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_accessibleEntities::drop (void) {
+  mProperty_mRoutineSet.drop () ;
+  mProperty_mGuardSet.drop () ;
+  mProperty_mSectionSet.drop () ;
+  mProperty_mGlobalVariableSet.drop () ;
+  mProperty_mTaskVariableSet.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_accessibleEntities::description (C_String & ioString,
+                                             const int32_t inIndentation) const {
+  ioString << "<struct @accessibleEntities:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mRoutineSet.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGuardSet.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mSectionSet.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGlobalVariableSet.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskVariableSet.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_accessibleEntities::getter_mRoutineSet (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineSet ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_accessibleEntities::getter_mGuardSet (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardSet ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_accessibleEntities::getter_mSectionSet (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSectionSet ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_accessibleEntities::getter_mGlobalVariableSet (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGlobalVariableSet ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_accessibleEntities::getter_mTaskVariableSet (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskVariableSet ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @accessibleEntities type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_accessibleEntities ("accessibleEntities",
+                                           NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_accessibleEntities::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_accessibleEntities ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_accessibleEntities::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_accessibleEntities (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessibleEntities GALGAS_accessibleEntities::extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_accessibleEntities result ;
+  const GALGAS_accessibleEntities * p = (const GALGAS_accessibleEntities *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_accessibleEntities *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("accessibleEntities", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Abstract extension method '@abstractInstructionIR enterAccessibleEntities'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities> gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_enterAccessibleEntities (const int32_t inClassIndex,
+                                                   extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) {
+  gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeExtensionMethod_abstractInstructionIR_enterAccessibleEntities (void) {
+  gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractInstructionIR_enterAccessibleEntities (NULL,
+                                                                          freeExtensionMethod_abstractInstructionIR_enterAccessibleEntities) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                  GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                                  GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractInstructionIR) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities f = NULL ;
+    if (classIndex < gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
+      f = gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+      while ((NULL == f) && (NULL != p)) {
+        if (p->mSlotID < gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
+          f = gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities (p->mSlotID COMMA_HERE) ;
+        }
+        p = p->mSuperclassDescriptor ;
+      }
+      gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioAccessibleEntities, io_ioMaxBranchOfOnInstructions, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension method '@instructionListIR enterAccessibleEntities'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_enterAccessibleEntities (const GALGAS_instructionListIR inObject,
+                                              GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
+                                              GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
+                                              C_Compiler * inCompiler
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_instructionListIR temp_0 = inObject ;
+  cEnumerator_instructionListIR enumerator_1321 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_1321.hasCurrentObject ()) {
+    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_1321.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 25)) ;
+    enumerator_1321.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationAdds::GALGAS_generationAdds (void) :
+mProperty_mUniqueIndex (),
+mProperty_mExternFunctionDeclarationSet (),
+mProperty_mStaticStringMap (),
+mProperty_mUsesGuards () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationAdds::~ GALGAS_generationAdds (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationAdds::GALGAS_generationAdds (const GALGAS_uint & inOperand0,
+                                              const GALGAS_stringset & inOperand1,
+                                              const GALGAS_staticStringMap & inOperand2,
+                                              const GALGAS_bool & inOperand3) :
+mProperty_mUniqueIndex (inOperand0),
+mProperty_mExternFunctionDeclarationSet (inOperand1),
+mProperty_mStaticStringMap (inOperand2),
+mProperty_mUsesGuards (inOperand3) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationAdds GALGAS_generationAdds::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_generationAdds (GALGAS_uint::constructor_default (HERE),
+                                GALGAS_stringset::constructor_emptySet (HERE),
+                                GALGAS_staticStringMap::constructor_emptyMap (HERE),
+                                GALGAS_bool::constructor_default (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationAdds GALGAS_generationAdds::constructor_new (const GALGAS_uint & inOperand0,
+                                                              const GALGAS_stringset & inOperand1,
+                                                              const GALGAS_staticStringMap & inOperand2,
+                                                              const GALGAS_bool & inOperand3 
+                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_generationAdds result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    result = GALGAS_generationAdds (inOperand0, inOperand1, inOperand2, inOperand3) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_generationAdds::objectCompare (const GALGAS_generationAdds & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mUniqueIndex.objectCompare (inOperand.mProperty_mUniqueIndex) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mExternFunctionDeclarationSet.objectCompare (inOperand.mProperty_mExternFunctionDeclarationSet) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mStaticStringMap.objectCompare (inOperand.mProperty_mStaticStringMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mUsesGuards.objectCompare (inOperand.mProperty_mUsesGuards) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_generationAdds::isValid (void) const {
+  return mProperty_mUniqueIndex.isValid () && mProperty_mExternFunctionDeclarationSet.isValid () && mProperty_mStaticStringMap.isValid () && mProperty_mUsesGuards.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_generationAdds::drop (void) {
+  mProperty_mUniqueIndex.drop () ;
+  mProperty_mExternFunctionDeclarationSet.drop () ;
+  mProperty_mStaticStringMap.drop () ;
+  mProperty_mUsesGuards.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_generationAdds::description (C_String & ioString,
+                                         const int32_t inIndentation) const {
+  ioString << "<struct @generationAdds:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mUniqueIndex.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mExternFunctionDeclarationSet.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mStaticStringMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mUsesGuards.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_generationAdds::getter_mUniqueIndex (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mUniqueIndex ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_generationAdds::getter_mExternFunctionDeclarationSet (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mExternFunctionDeclarationSet ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticStringMap GALGAS_generationAdds::getter_mStaticStringMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mStaticStringMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_generationAdds::getter_mUsesGuards (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mUsesGuards ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @generationAdds type                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_generationAdds ("generationAdds",
+                                       NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_generationAdds::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_generationAdds ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_generationAdds::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_generationAdds (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationAdds GALGAS_generationAdds::extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_generationAdds result ;
+  const GALGAS_generationAdds * p = (const GALGAS_generationAdds *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_generationAdds *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("generationAdds", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Abstract extension method '@abstractInstructionIR llvmInstructionCode'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <extensionMethodSignature_abstractInstructionIR_llvmInstructionCode> gExtensionMethodTable_abstractInstructionIR_llvmInstructionCode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_llvmInstructionCode (const int32_t inClassIndex,
+                                               extensionMethodSignature_abstractInstructionIR_llvmInstructionCode inMethod) {
+  gExtensionMethodTable_abstractInstructionIR_llvmInstructionCode.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeExtensionMethod_abstractInstructionIR_llvmInstructionCode (void) {
+  gExtensionMethodTable_abstractInstructionIR_llvmInstructionCode.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractInstructionIR_llvmInstructionCode (NULL,
+                                                                      freeExtensionMethod_abstractInstructionIR_llvmInstructionCode) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
+                                              GALGAS_string & io_ioLLVMcode,
+                                              const GALGAS_generationContext constin_inGenerationContext,
+                                              GALGAS_generationAdds & io_ioGenerationAdds,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractInstructionIR) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    extensionMethodSignature_abstractInstructionIR_llvmInstructionCode f = NULL ;
+    if (classIndex < gExtensionMethodTable_abstractInstructionIR_llvmInstructionCode.count ()) {
+      f = gExtensionMethodTable_abstractInstructionIR_llvmInstructionCode (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+      while ((NULL == f) && (NULL != p)) {
+        if (p->mSlotID < gExtensionMethodTable_abstractInstructionIR_llvmInstructionCode.count ()) {
+          f = gExtensionMethodTable_abstractInstructionIR_llvmInstructionCode (p->mSlotID COMMA_HERE) ;
+        }
+        p = p->mSuperclassDescriptor ;
+      }
+      gExtensionMethodTable_abstractInstructionIR_llvmInstructionCode.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioLLVMcode, constin_inGenerationContext, io_ioGenerationAdds, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationContext::GALGAS_generationContext (void) :
+mProperty_mPanicCodeLLVMType (),
+mProperty_mPanicLineLLVMType (),
+mProperty_mNopInstructionInLLVM (),
+mProperty_mGlobalTaskVariableList (),
+mProperty_mAvailableInterruptMap () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationContext::~ GALGAS_generationContext (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationContext::GALGAS_generationContext (const GALGAS_string & inOperand0,
+                                                    const GALGAS_string & inOperand1,
+                                                    const GALGAS_string & inOperand2,
+                                                    const GALGAS_globalTaskVariableList & inOperand3,
+                                                    const GALGAS_availableInterruptMap & inOperand4) :
+mProperty_mPanicCodeLLVMType (inOperand0),
+mProperty_mPanicLineLLVMType (inOperand1),
+mProperty_mNopInstructionInLLVM (inOperand2),
+mProperty_mGlobalTaskVariableList (inOperand3),
+mProperty_mAvailableInterruptMap (inOperand4) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationContext GALGAS_generationContext::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_generationContext (GALGAS_string::constructor_default (HERE),
+                                   GALGAS_string::constructor_default (HERE),
+                                   GALGAS_string::constructor_default (HERE),
+                                   GALGAS_globalTaskVariableList::constructor_emptyList (HERE),
+                                   GALGAS_availableInterruptMap::constructor_emptyMap (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationContext GALGAS_generationContext::constructor_new (const GALGAS_string & inOperand0,
+                                                                    const GALGAS_string & inOperand1,
+                                                                    const GALGAS_string & inOperand2,
+                                                                    const GALGAS_globalTaskVariableList & inOperand3,
+                                                                    const GALGAS_availableInterruptMap & inOperand4 
+                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_generationContext result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_generationContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_generationContext::objectCompare (const GALGAS_generationContext & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mPanicCodeLLVMType.objectCompare (inOperand.mProperty_mPanicCodeLLVMType) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mPanicLineLLVMType.objectCompare (inOperand.mProperty_mPanicLineLLVMType) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mNopInstructionInLLVM.objectCompare (inOperand.mProperty_mNopInstructionInLLVM) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mGlobalTaskVariableList.objectCompare (inOperand.mProperty_mGlobalTaskVariableList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mAvailableInterruptMap.objectCompare (inOperand.mProperty_mAvailableInterruptMap) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_generationContext::isValid (void) const {
+  return mProperty_mPanicCodeLLVMType.isValid () && mProperty_mPanicLineLLVMType.isValid () && mProperty_mNopInstructionInLLVM.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mAvailableInterruptMap.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_generationContext::drop (void) {
+  mProperty_mPanicCodeLLVMType.drop () ;
+  mProperty_mPanicLineLLVMType.drop () ;
+  mProperty_mNopInstructionInLLVM.drop () ;
+  mProperty_mGlobalTaskVariableList.drop () ;
+  mProperty_mAvailableInterruptMap.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_generationContext::description (C_String & ioString,
+                                            const int32_t inIndentation) const {
+  ioString << "<struct @generationContext:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mPanicCodeLLVMType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mPanicLineLLVMType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mNopInstructionInLLVM.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mAvailableInterruptMap.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_generationContext::getter_mPanicCodeLLVMType (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPanicCodeLLVMType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_generationContext::getter_mPanicLineLLVMType (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPanicLineLLVMType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_generationContext::getter_mNopInstructionInLLVM (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mNopInstructionInLLVM ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalTaskVariableList GALGAS_generationContext::getter_mGlobalTaskVariableList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGlobalTaskVariableList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_availableInterruptMap GALGAS_generationContext::getter_mAvailableInterruptMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAvailableInterruptMap ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @generationContext type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_generationContext ("generationContext",
+                                          NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_generationContext::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_generationContext ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_generationContext::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_generationContext (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_generationContext GALGAS_generationContext::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_generationContext result ;
+  const GALGAS_generationContext * p = (const GALGAS_generationContext *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_generationContext *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("generationContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Class for element of '@orderedTypeList' sorted list                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cSortedListElement_orderedTypeList : public cSortedListElement {
+  public : GALGAS_orderedTypeList_2D_element mObject ;
+
+//--- Constructor
+  public : cSortedListElement_orderedTypeList (const GALGAS_PLMType & in_mType,
+                                               const GALGAS_uint & in_mIndex
+                                               COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cSortedListElement * copy (void) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Description
+ public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+
+//--- Virtual method that comparing element for sorting
+  public : virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cSortedListElement_orderedTypeList::cSortedListElement_orderedTypeList (const GALGAS_PLMType & in_mType,
+                                                                        const GALGAS_uint & in_mIndex
+                                                                        COMMA_LOCATION_ARGS) :
+cSortedListElement (THERE),
+mObject (in_mType, in_mIndex) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cSortedListElement_orderedTypeList::isValid (void) const {
+  return mObject.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cSortedListElement * cSortedListElement_orderedTypeList::copy (void) {
+  cSortedListElement * result = NULL ;
+  macroMyNew (result, cSortedListElement_orderedTypeList (mObject.mProperty_mType, mObject.mProperty_mIndex COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cSortedListElement_orderedTypeList::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mType" ":" ;
+  mObject.mProperty_mType.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mIndex" ":" ;
+  mObject.mProperty_mIndex.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cSortedListElement_orderedTypeList::compare (const cCollectionElement * inOperand) const {
+  cSortedListElement_orderedTypeList * operand = (cSortedListElement_orderedTypeList *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_orderedTypeList) ;
+  return mObject.objectCompare (operand->mObject) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_orderedTypeList::GALGAS_orderedTypeList (void) :
+AC_GALGAS_sortedlist () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cSortedListElement_orderedTypeList::compareForSorting (const cSortedListElement * inOperand) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cSortedListElement_orderedTypeList * operand = (const cSortedListElement_orderedTypeList *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_orderedTypeList) ;
+  if (result == kOperandEqual) {
+    result = mObject.mProperty_mIndex.objectCompare (operand->mObject.mProperty_mIndex) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_orderedTypeList GALGAS_orderedTypeList::constructor_emptySortedList (LOCATION_ARGS) {
+  GALGAS_orderedTypeList result ;
+  result.createNewEmptySortedList (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_orderedTypeList GALGAS_orderedTypeList::constructor_sortedListWithValue (const GALGAS_PLMType & inOperand0,
+                                                                                const GALGAS_uint & inOperand1
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_orderedTypeList result = constructor_emptySortedList (THERE) ;
+  cSortedListElement * p = NULL ;
+  macroMyNew (p, cSortedListElement_orderedTypeList (inOperand0, inOperand1 COMMA_THERE)) ;
+  capSortedListElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  result.appendObject (attributes) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_orderedTypeList::addAssign_operation (const GALGAS_PLMType & inOperand0,
+                                                  const GALGAS_uint & inOperand1
+                                                  COMMA_LOCATION_ARGS) {
+  if (isValid ()) {
+    cSortedListElement * p = NULL ;
+    macroMyNew (p, cSortedListElement_orderedTypeList (inOperand0, inOperand1 COMMA_THERE)) ;
+    capSortedListElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    appendObject (attributes) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_orderedTypeList::plusAssign_operation (const GALGAS_orderedTypeList inOperand,
+                                                   C_Compiler * /* inCompiler */
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  if (isValid ()) {
+    appendSortedList (inOperand) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_orderedTypeList::setter_popSmallest (GALGAS_PLMType & outOperand0,
+                                                 GALGAS_uint & outOperand1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  capSortedListElement attributes ;
+  removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_orderedTypeList * p = (cSortedListElement_orderedTypeList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_orderedTypeList) ;
+    outOperand0 = p->mObject.mProperty_mType ;
+    outOperand1 = p->mObject.mProperty_mIndex ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_orderedTypeList::setter_popGreatest (GALGAS_PLMType & outOperand0,
+                                                 GALGAS_uint & outOperand1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  capSortedListElement attributes ;
+  removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_orderedTypeList * p = (cSortedListElement_orderedTypeList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_orderedTypeList) ;
+    outOperand0 = p->mObject.mProperty_mType ;
+    outOperand1 = p->mObject.mProperty_mIndex ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_orderedTypeList::method_smallest (GALGAS_PLMType & outOperand0,
+                                              GALGAS_uint & outOperand1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  capSortedListElement attributes ;
+  smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_orderedTypeList * p = (cSortedListElement_orderedTypeList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_orderedTypeList) ;
+    outOperand0 = p->mObject.mProperty_mType ;
+    outOperand1 = p->mObject.mProperty_mIndex ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_orderedTypeList::method_greatest (GALGAS_PLMType & outOperand0,
+                                              GALGAS_uint & outOperand1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  capSortedListElement attributes ;
+  greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_orderedTypeList * p = (cSortedListElement_orderedTypeList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_orderedTypeList) ;
+    outOperand0 = p->mObject.mProperty_mType ;
+    outOperand1 = p->mObject.mProperty_mIndex ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_orderedTypeList::cEnumerator_orderedTypeList (const GALGAS_orderedTypeList & inEnumeratedObject,
+                                                          const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_orderedTypeList_2D_element cEnumerator_orderedTypeList::current (LOCATION_ARGS) const {
+  const cSortedListElement_orderedTypeList * p = (const cSortedListElement_orderedTypeList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_orderedTypeList) ;
+  return p->mObject ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMType cEnumerator_orderedTypeList::current_mType (LOCATION_ARGS) const {
+  const cSortedListElement_orderedTypeList * p = (const cSortedListElement_orderedTypeList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_orderedTypeList) ;
+  return p->mObject.mProperty_mType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint cEnumerator_orderedTypeList::current_mIndex (LOCATION_ARGS) const {
+  const cSortedListElement_orderedTypeList * p = (const cSortedListElement_orderedTypeList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_orderedTypeList) ;
+  return p->mObject.mProperty_mIndex ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @orderedTypeList type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_orderedTypeList ("orderedTypeList",
+                                        NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_orderedTypeList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_orderedTypeList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_orderedTypeList::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_orderedTypeList (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_orderedTypeList GALGAS_orderedTypeList::extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_orderedTypeList result ;
+  const GALGAS_orderedTypeList * p = (const GALGAS_orderedTypeList *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_orderedTypeList *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("orderedTypeList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_declarationListAST_2D_element::GALGAS_declarationListAST_2D_element (void) :
+mProperty_mDeclaration () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_declarationListAST_2D_element::~ GALGAS_declarationListAST_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_declarationListAST_2D_element::GALGAS_declarationListAST_2D_element (const GALGAS_abstractDeclarationAST & inOperand0) :
+mProperty_mDeclaration (inOperand0) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_declarationListAST_2D_element GALGAS_declarationListAST_2D_element::constructor_new (const GALGAS_abstractDeclarationAST & inOperand0 
+                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_declarationListAST_2D_element result ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_declarationListAST_2D_element (inOperand0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_declarationListAST_2D_element::objectCompare (const GALGAS_declarationListAST_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mDeclaration.objectCompare (inOperand.mProperty_mDeclaration) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_declarationListAST_2D_element::isValid (void) const {
+  return mProperty_mDeclaration.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_declarationListAST_2D_element::drop (void) {
+  mProperty_mDeclaration.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_declarationListAST_2D_element::description (C_String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString << "<struct @declarationListAST-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mDeclaration.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_abstractDeclarationAST GALGAS_declarationListAST_2D_element::getter_mDeclaration (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mDeclaration ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @declarationListAST-element type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_declarationListAST_2D_element ("declarationListAST-element",
+                                                      NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_declarationListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_declarationListAST_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_declarationListAST_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_declarationListAST_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_declarationListAST_2D_element GALGAS_declarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_declarationListAST_2D_element result ;
+  const GALGAS_declarationListAST_2D_element * p = (const GALGAS_declarationListAST_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_declarationListAST_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("declarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element::GALGAS_checkTargetListAST_2D_element (void) :
+mProperty_mTargetConstructLocation (),
+mProperty_mAcceptedTargetList () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element::~ GALGAS_checkTargetListAST_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element::GALGAS_checkTargetListAST_2D_element (const GALGAS_location & inOperand0,
+                                                                            const GALGAS_lstringlist & inOperand1) :
+mProperty_mTargetConstructLocation (inOperand0),
+mProperty_mAcceptedTargetList (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element GALGAS_checkTargetListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_checkTargetListAST_2D_element (GALGAS_location::constructor_nowhere (HERE),
+                                               GALGAS_lstringlist::constructor_emptyList (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element GALGAS_checkTargetListAST_2D_element::constructor_new (const GALGAS_location & inOperand0,
+                                                                                            const GALGAS_lstringlist & inOperand1 
+                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_checkTargetListAST_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_checkTargetListAST_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_checkTargetListAST_2D_element::objectCompare (const GALGAS_checkTargetListAST_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mTargetConstructLocation.objectCompare (inOperand.mProperty_mTargetConstructLocation) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mAcceptedTargetList.objectCompare (inOperand.mProperty_mAcceptedTargetList) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_checkTargetListAST_2D_element::isValid (void) const {
+  return mProperty_mTargetConstructLocation.isValid () && mProperty_mAcceptedTargetList.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_checkTargetListAST_2D_element::drop (void) {
+  mProperty_mTargetConstructLocation.drop () ;
+  mProperty_mAcceptedTargetList.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_checkTargetListAST_2D_element::description (C_String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString << "<struct @checkTargetListAST-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mTargetConstructLocation.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mAcceptedTargetList.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_checkTargetListAST_2D_element::getter_mTargetConstructLocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTargetConstructLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_checkTargetListAST_2D_element::getter_mAcceptedTargetList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAcceptedTargetList ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @checkTargetListAST-element type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_checkTargetListAST_2D_element ("checkTargetListAST-element",
+                                                      NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_checkTargetListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_checkTargetListAST_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_checkTargetListAST_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_checkTargetListAST_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element GALGAS_checkTargetListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_checkTargetListAST_2D_element result ;
+  const GALGAS_checkTargetListAST_2D_element * p = (const GALGAS_checkTargetListAST_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_checkTargetListAST_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("checkTargetListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyList_2D_element::GALGAS_propertyList_2D_element (void) :
+mProperty_mPropertyName (),
+mProperty_mType () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyList_2D_element::~ GALGAS_propertyList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyList_2D_element::GALGAS_propertyList_2D_element (const GALGAS_string & inOperand0,
+                                                                const GALGAS_PLMType & inOperand1) :
+mProperty_mPropertyName (inOperand0),
+mProperty_mType (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyList_2D_element GALGAS_propertyList_2D_element::constructor_new (const GALGAS_string & inOperand0,
+                                                                                const GALGAS_PLMType & inOperand1 
+                                                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_propertyList_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_propertyList_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_propertyList_2D_element::objectCompare (const GALGAS_propertyList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mPropertyName.objectCompare (inOperand.mProperty_mPropertyName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mType.objectCompare (inOperand.mProperty_mType) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_propertyList_2D_element::isValid (void) const {
+  return mProperty_mPropertyName.isValid () && mProperty_mType.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_propertyList_2D_element::drop (void) {
+  mProperty_mPropertyName.drop () ;
+  mProperty_mType.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_propertyList_2D_element::description (C_String & ioString,
+                                                  const int32_t inIndentation) const {
+  ioString << "<struct @propertyList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mPropertyName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mType.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_propertyList_2D_element::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPropertyName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMType GALGAS_propertyList_2D_element::getter_mType (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mType ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @propertyList-element type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_propertyList_2D_element ("propertyList-element",
+                                                NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_propertyList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_propertyList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_propertyList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyList_2D_element GALGAS_propertyList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_propertyList_2D_element result ;
+  const GALGAS_propertyList_2D_element * p = (const GALGAS_propertyList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_propertyList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_constructorSignature_2D_element::GALGAS_constructorSignature_2D_element (void) :
+mProperty_mSelector (),
+mProperty_mType (),
+mProperty_mFieldIndex () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_constructorSignature_2D_element::~ GALGAS_constructorSignature_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_constructorSignature_2D_element::GALGAS_constructorSignature_2D_element (const GALGAS_string & inOperand0,
+                                                                                const GALGAS_PLMType & inOperand1,
+                                                                                const GALGAS_uint & inOperand2) :
+mProperty_mSelector (inOperand0),
+mProperty_mType (inOperand1),
+mProperty_mFieldIndex (inOperand2) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_constructorSignature_2D_element GALGAS_constructorSignature_2D_element::constructor_new (const GALGAS_string & inOperand0,
+                                                                                                const GALGAS_PLMType & inOperand1,
+                                                                                                const GALGAS_uint & inOperand2 
+                                                                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_constructorSignature_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+    result = GALGAS_constructorSignature_2D_element (inOperand0, inOperand1, inOperand2) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_constructorSignature_2D_element::objectCompare (const GALGAS_constructorSignature_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mSelector.objectCompare (inOperand.mProperty_mSelector) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mType.objectCompare (inOperand.mProperty_mType) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mFieldIndex.objectCompare (inOperand.mProperty_mFieldIndex) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_constructorSignature_2D_element::isValid (void) const {
+  return mProperty_mSelector.isValid () && mProperty_mType.isValid () && mProperty_mFieldIndex.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_constructorSignature_2D_element::drop (void) {
+  mProperty_mSelector.drop () ;
+  mProperty_mType.drop () ;
+  mProperty_mFieldIndex.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_constructorSignature_2D_element::description (C_String & ioString,
+                                                          const int32_t inIndentation) const {
+  ioString << "<struct @constructorSignature-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mSelector.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mFieldIndex.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_constructorSignature_2D_element::getter_mSelector (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSelector ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMType GALGAS_constructorSignature_2D_element::getter_mType (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_constructorSignature_2D_element::getter_mFieldIndex (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFieldIndex ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @constructorSignature-element type                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_constructorSignature_2D_element ("constructorSignature-element",
+                                                        NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_constructorSignature_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_constructorSignature_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_constructorSignature_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_constructorSignature_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_constructorSignature_2D_element GALGAS_constructorSignature_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_constructorSignature_2D_element result ;
+  const GALGAS_constructorSignature_2D_element * p = (const GALGAS_constructorSignature_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_constructorSignature_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("constructorSignature-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sortedOperandIRList_2D_element::GALGAS_sortedOperandIRList_2D_element (void) :
+mProperty_mOperand (),
+mProperty_mIndex () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sortedOperandIRList_2D_element::~ GALGAS_sortedOperandIRList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sortedOperandIRList_2D_element::GALGAS_sortedOperandIRList_2D_element (const GALGAS_objectIR & inOperand0,
+                                                                              const GALGAS_uint & inOperand1) :
+mProperty_mOperand (inOperand0),
+mProperty_mIndex (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sortedOperandIRList_2D_element GALGAS_sortedOperandIRList_2D_element::constructor_new (const GALGAS_objectIR & inOperand0,
+                                                                                              const GALGAS_uint & inOperand1 
+                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_sortedOperandIRList_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_sortedOperandIRList_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_sortedOperandIRList_2D_element::objectCompare (const GALGAS_sortedOperandIRList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mOperand.objectCompare (inOperand.mProperty_mOperand) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_sortedOperandIRList_2D_element::isValid (void) const {
+  return mProperty_mOperand.isValid () && mProperty_mIndex.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_sortedOperandIRList_2D_element::drop (void) {
+  mProperty_mOperand.drop () ;
+  mProperty_mIndex.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_sortedOperandIRList_2D_element::description (C_String & ioString,
+                                                         const int32_t inIndentation) const {
+  ioString << "<struct @sortedOperandIRList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mOperand.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mIndex.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_sortedOperandIRList_2D_element::getter_mOperand (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mOperand ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_sortedOperandIRList_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mIndex ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @sortedOperandIRList-element type                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_sortedOperandIRList_2D_element ("sortedOperandIRList-element",
+                                                       NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_sortedOperandIRList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sortedOperandIRList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_sortedOperandIRList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_sortedOperandIRList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sortedOperandIRList_2D_element GALGAS_sortedOperandIRList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                            C_Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_sortedOperandIRList_2D_element result ;
+  const GALGAS_sortedOperandIRList_2D_element * p = (const GALGAS_sortedOperandIRList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_sortedOperandIRList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("sortedOperandIRList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAccessRoutineList_2D_element::GALGAS_propertyAccessRoutineList_2D_element (void) :
+mProperty_mStructureKind (),
+mProperty_mPropertyType (),
+mProperty_mPropertyName (),
+mProperty_mAccessKind () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAccessRoutineList_2D_element::~ GALGAS_propertyAccessRoutineList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAccessRoutineList_2D_element::GALGAS_propertyAccessRoutineList_2D_element (const GALGAS_PLMType & inOperand0,
+                                                                                          const GALGAS_PLMType & inOperand1,
+                                                                                          const GALGAS_string & inOperand2,
+                                                                                          const GALGAS_propertyAccessKind & inOperand3) :
+mProperty_mStructureKind (inOperand0),
+mProperty_mPropertyType (inOperand1),
+mProperty_mPropertyName (inOperand2),
+mProperty_mAccessKind (inOperand3) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAccessRoutineList_2D_element GALGAS_propertyAccessRoutineList_2D_element::constructor_new (const GALGAS_PLMType & inOperand0,
+                                                                                                          const GALGAS_PLMType & inOperand1,
+                                                                                                          const GALGAS_string & inOperand2,
+                                                                                                          const GALGAS_propertyAccessKind & inOperand3 
+                                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_propertyAccessRoutineList_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    result = GALGAS_propertyAccessRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_propertyAccessRoutineList_2D_element::objectCompare (const GALGAS_propertyAccessRoutineList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mStructureKind.objectCompare (inOperand.mProperty_mStructureKind) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mPropertyType.objectCompare (inOperand.mProperty_mPropertyType) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mPropertyName.objectCompare (inOperand.mProperty_mPropertyName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mAccessKind.objectCompare (inOperand.mProperty_mAccessKind) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_propertyAccessRoutineList_2D_element::isValid (void) const {
+  return mProperty_mStructureKind.isValid () && mProperty_mPropertyType.isValid () && mProperty_mPropertyName.isValid () && mProperty_mAccessKind.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_propertyAccessRoutineList_2D_element::drop (void) {
+  mProperty_mStructureKind.drop () ;
+  mProperty_mPropertyType.drop () ;
+  mProperty_mPropertyName.drop () ;
+  mProperty_mAccessKind.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_propertyAccessRoutineList_2D_element::description (C_String & ioString,
+                                                               const int32_t inIndentation) const {
+  ioString << "<struct @propertyAccessRoutineList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mStructureKind.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mPropertyType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mPropertyName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mAccessKind.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMType GALGAS_propertyAccessRoutineList_2D_element::getter_mStructureKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mStructureKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMType GALGAS_propertyAccessRoutineList_2D_element::getter_mPropertyType (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPropertyType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_propertyAccessRoutineList_2D_element::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPropertyName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAccessKind GALGAS_propertyAccessRoutineList_2D_element::getter_mAccessKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAccessKind ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       @propertyAccessRoutineList-element type                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_propertyAccessRoutineList_2D_element ("propertyAccessRoutineList-element",
+                                                             NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_propertyAccessRoutineList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyAccessRoutineList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_propertyAccessRoutineList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_propertyAccessRoutineList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAccessRoutineList_2D_element GALGAS_propertyAccessRoutineList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                        C_Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_propertyAccessRoutineList_2D_element result ;
+  const GALGAS_propertyAccessRoutineList_2D_element * p = (const GALGAS_propertyAccessRoutineList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_propertyAccessRoutineList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyAccessRoutineList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList_2D_element::GALGAS_controlRegisterBitSliceList_2D_element (void) :
+mProperty_mRegisterBitSlice () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList_2D_element::~ GALGAS_controlRegisterBitSliceList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList_2D_element::GALGAS_controlRegisterBitSliceList_2D_element (const GALGAS_controlRegisterBitSlice & inOperand0) :
+mProperty_mRegisterBitSlice (inOperand0) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList_2D_element GALGAS_controlRegisterBitSliceList_2D_element::constructor_new (const GALGAS_controlRegisterBitSlice & inOperand0 
+                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSliceList_2D_element result ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_controlRegisterBitSliceList_2D_element (inOperand0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_controlRegisterBitSliceList_2D_element::objectCompare (const GALGAS_controlRegisterBitSliceList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mRegisterBitSlice.objectCompare (inOperand.mProperty_mRegisterBitSlice) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_controlRegisterBitSliceList_2D_element::isValid (void) const {
+  return mProperty_mRegisterBitSlice.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList_2D_element::drop (void) {
+  mProperty_mRegisterBitSlice.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList_2D_element::description (C_String & ioString,
+                                                                 const int32_t inIndentation) const {
+  ioString << "<struct @controlRegisterBitSliceList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mRegisterBitSlice.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSliceList_2D_element::getter_mRegisterBitSlice (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRegisterBitSlice ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      @controlRegisterBitSliceList-element type                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_controlRegisterBitSliceList_2D_element ("controlRegisterBitSliceList-element",
+                                                               NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_controlRegisterBitSliceList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterBitSliceList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_controlRegisterBitSliceList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_controlRegisterBitSliceList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList_2D_element GALGAS_controlRegisterBitSliceList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                            C_Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSliceList_2D_element result ;
+  const GALGAS_controlRegisterBitSliceList_2D_element * p = (const GALGAS_controlRegisterBitSliceList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_controlRegisterBitSliceList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterBitSliceList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element::GALGAS_controlRegisterFieldList_2D_element (void) :
+mProperty_mFieldBitCount (),
+mProperty_mFieldName () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element::~ GALGAS_controlRegisterFieldList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element::GALGAS_controlRegisterFieldList_2D_element (const GALGAS_uint & inOperand0,
+                                                                                        const GALGAS_string & inOperand1) :
+mProperty_mFieldBitCount (inOperand0),
+mProperty_mFieldName (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element GALGAS_controlRegisterFieldList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_controlRegisterFieldList_2D_element (GALGAS_uint::constructor_default (HERE),
+                                                     GALGAS_string::constructor_default (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element GALGAS_controlRegisterFieldList_2D_element::constructor_new (const GALGAS_uint & inOperand0,
+                                                                                                        const GALGAS_string & inOperand1 
+                                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_controlRegisterFieldList_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_controlRegisterFieldList_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_controlRegisterFieldList_2D_element::objectCompare (const GALGAS_controlRegisterFieldList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mFieldBitCount.objectCompare (inOperand.mProperty_mFieldBitCount) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mFieldName.objectCompare (inOperand.mProperty_mFieldName) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_controlRegisterFieldList_2D_element::isValid (void) const {
+  return mProperty_mFieldBitCount.isValid () && mProperty_mFieldName.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterFieldList_2D_element::drop (void) {
+  mProperty_mFieldBitCount.drop () ;
+  mProperty_mFieldName.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterFieldList_2D_element::description (C_String & ioString,
+                                                              const int32_t inIndentation) const {
+  ioString << "<struct @controlRegisterFieldList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mFieldBitCount.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mFieldName.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_controlRegisterFieldList_2D_element::getter_mFieldBitCount (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFieldBitCount ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_controlRegisterFieldList_2D_element::getter_mFieldName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFieldName ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       @controlRegisterFieldList-element type                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_controlRegisterFieldList_2D_element ("controlRegisterFieldList-element",
+                                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_controlRegisterFieldList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterFieldList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_controlRegisterFieldList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_controlRegisterFieldList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element GALGAS_controlRegisterFieldList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                      C_Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterFieldList_2D_element result ;
+  const GALGAS_controlRegisterFieldList_2D_element * p = (const GALGAS_controlRegisterFieldList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_controlRegisterFieldList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterFieldList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticArrayExpressionListAST_2D_element::GALGAS_extendStaticArrayExpressionListAST_2D_element (void) :
+mProperty_mExpression (),
+mProperty_mEndOfExpression () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticArrayExpressionListAST_2D_element::~ GALGAS_extendStaticArrayExpressionListAST_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticArrayExpressionListAST_2D_element::GALGAS_extendStaticArrayExpressionListAST_2D_element (const GALGAS_extendStaticArrayExpressionAST & inOperand0,
+                                                                                                            const GALGAS_location & inOperand1) :
+mProperty_mExpression (inOperand0),
+mProperty_mEndOfExpression (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticArrayExpressionListAST_2D_element GALGAS_extendStaticArrayExpressionListAST_2D_element::constructor_new (const GALGAS_extendStaticArrayExpressionAST & inOperand0,
+                                                                                                                            const GALGAS_location & inOperand1 
+                                                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_extendStaticArrayExpressionListAST_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_extendStaticArrayExpressionListAST_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_extendStaticArrayExpressionListAST_2D_element::objectCompare (const GALGAS_extendStaticArrayExpressionListAST_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mExpression.objectCompare (inOperand.mProperty_mExpression) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mEndOfExpression.objectCompare (inOperand.mProperty_mEndOfExpression) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_extendStaticArrayExpressionListAST_2D_element::isValid (void) const {
+  return mProperty_mExpression.isValid () && mProperty_mEndOfExpression.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_extendStaticArrayExpressionListAST_2D_element::drop (void) {
+  mProperty_mExpression.drop () ;
+  mProperty_mEndOfExpression.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_extendStaticArrayExpressionListAST_2D_element::description (C_String & ioString,
+                                                                        const int32_t inIndentation) const {
+  ioString << "<struct @extendStaticArrayExpressionListAST-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mExpression.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mEndOfExpression.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticArrayExpressionAST GALGAS_extendStaticArrayExpressionListAST_2D_element::getter_mExpression (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_extendStaticArrayExpressionListAST_2D_element::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mEndOfExpression ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  @extendStaticArrayExpressionListAST-element type                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_extendStaticArrayExpressionListAST_2D_element ("extendStaticArrayExpressionListAST-element",
+                                                                      NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_extendStaticArrayExpressionListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_extendStaticArrayExpressionListAST_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_extendStaticArrayExpressionListAST_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_extendStaticArrayExpressionListAST_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticArrayExpressionListAST_2D_element GALGAS_extendStaticArrayExpressionListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                                          C_Compiler * inCompiler
+                                                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_extendStaticArrayExpressionListAST_2D_element result ;
+  const GALGAS_extendStaticArrayExpressionListAST_2D_element * p = (const GALGAS_extendStaticArrayExpressionListAST_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_extendStaticArrayExpressionListAST_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("extendStaticArrayExpressionListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistValues_5F_listMap_2D_element::GALGAS_staticlistValues_5F_listMap_2D_element (void) :
+mProperty_key (),
+mProperty_mList () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistValues_5F_listMap_2D_element::~ GALGAS_staticlistValues_5F_listMap_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistValues_5F_listMap_2D_element::GALGAS_staticlistValues_5F_listMap_2D_element (const GALGAS_string & inOperand0,
+                                                                                              const GALGAS_stringlist & inOperand1) :
+mProperty_key (inOperand0),
+mProperty_mList (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistValues_5F_listMap_2D_element GALGAS_staticlistValues_5F_listMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_staticlistValues_5F_listMap_2D_element (GALGAS_string::constructor_default (HERE),
+                                                        GALGAS_stringlist::constructor_emptyList (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistValues_5F_listMap_2D_element GALGAS_staticlistValues_5F_listMap_2D_element::constructor_new (const GALGAS_string & inOperand0,
+                                                                                                              const GALGAS_stringlist & inOperand1 
+                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_staticlistValues_5F_listMap_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_staticlistValues_5F_listMap_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_staticlistValues_5F_listMap_2D_element::objectCompare (const GALGAS_staticlistValues_5F_listMap_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_key.objectCompare (inOperand.mProperty_key) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mList.objectCompare (inOperand.mProperty_mList) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_staticlistValues_5F_listMap_2D_element::isValid (void) const {
+  return mProperty_key.isValid () && mProperty_mList.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_staticlistValues_5F_listMap_2D_element::drop (void) {
+  mProperty_key.drop () ;
+  mProperty_mList.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_staticlistValues_5F_listMap_2D_element::description (C_String & ioString,
+                                                                 const int32_t inIndentation) const {
+  ioString << "<struct @staticlistValues_listMap-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_key.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mList.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_staticlistValues_5F_listMap_2D_element::getter_key (UNUSED_LOCATION_ARGS) const {
+  return mProperty_key ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringlist GALGAS_staticlistValues_5F_listMap_2D_element::getter_mList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mList ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       @staticlistValues_listMap-element type                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_staticlistValues_5F_listMap_2D_element ("staticlistValues_listMap-element",
+                                                               NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_staticlistValues_5F_listMap_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_staticlistValues_5F_listMap_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_staticlistValues_5F_listMap_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_staticlistValues_5F_listMap_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistValues_5F_listMap_2D_element GALGAS_staticlistValues_5F_listMap_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                            C_Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_staticlistValues_5F_listMap_2D_element result ;
+  const GALGAS_staticlistValues_5F_listMap_2D_element * p = (const GALGAS_staticlistValues_5F_listMap_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_staticlistValues_5F_listMap_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("staticlistValues_listMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_taskSortedListIR_2D_element::GALGAS_taskSortedListIR_2D_element (void) :
+mProperty_mTaskName (),
+mProperty_mPriority (),
+mProperty_mStackSize (),
+mProperty_mAllocaList (),
+mProperty_mInitInstructionListIR (),
+mProperty_mTaskNameStringIndex () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_taskSortedListIR_2D_element::~ GALGAS_taskSortedListIR_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_taskSortedListIR_2D_element::GALGAS_taskSortedListIR_2D_element (const GALGAS_string & inOperand0,
+                                                                        const GALGAS_bigint & inOperand1,
+                                                                        const GALGAS_bigint & inOperand2,
+                                                                        const GALGAS_allocaList & inOperand3,
+                                                                        const GALGAS_instructionListIR & inOperand4,
+                                                                        const GALGAS_uint & inOperand5) :
+mProperty_mTaskName (inOperand0),
+mProperty_mPriority (inOperand1),
+mProperty_mStackSize (inOperand2),
+mProperty_mAllocaList (inOperand3),
+mProperty_mInitInstructionListIR (inOperand4),
+mProperty_mTaskNameStringIndex (inOperand5) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_taskSortedListIR_2D_element GALGAS_taskSortedListIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_taskSortedListIR_2D_element (GALGAS_string::constructor_default (HERE),
+                                             GALGAS_bigint::constructor_zero (HERE),
+                                             GALGAS_bigint::constructor_zero (HERE),
+                                             GALGAS_allocaList::constructor_emptyList (HERE),
+                                             GALGAS_instructionListIR::constructor_emptyList (HERE),
+                                             GALGAS_uint::constructor_default (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_taskSortedListIR_2D_element GALGAS_taskSortedListIR_2D_element::constructor_new (const GALGAS_string & inOperand0,
+                                                                                        const GALGAS_bigint & inOperand1,
+                                                                                        const GALGAS_bigint & inOperand2,
+                                                                                        const GALGAS_allocaList & inOperand3,
+                                                                                        const GALGAS_instructionListIR & inOperand4,
+                                                                                        const GALGAS_uint & inOperand5 
+                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_taskSortedListIR_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
+    result = GALGAS_taskSortedListIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_taskSortedListIR_2D_element::objectCompare (const GALGAS_taskSortedListIR_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskName.objectCompare (inOperand.mProperty_mTaskName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mStackSize.objectCompare (inOperand.mProperty_mStackSize) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mAllocaList.objectCompare (inOperand.mProperty_mAllocaList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mInitInstructionListIR.objectCompare (inOperand.mProperty_mInitInstructionListIR) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskNameStringIndex.objectCompare (inOperand.mProperty_mTaskNameStringIndex) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_taskSortedListIR_2D_element::isValid (void) const {
+  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInitInstructionListIR.isValid () && mProperty_mTaskNameStringIndex.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_taskSortedListIR_2D_element::drop (void) {
+  mProperty_mTaskName.drop () ;
+  mProperty_mPriority.drop () ;
+  mProperty_mStackSize.drop () ;
+  mProperty_mAllocaList.drop () ;
+  mProperty_mInitInstructionListIR.drop () ;
+  mProperty_mTaskNameStringIndex.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_taskSortedListIR_2D_element::description (C_String & ioString,
+                                                      const int32_t inIndentation) const {
+  ioString << "<struct @taskSortedListIR-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mTaskName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mPriority.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mStackSize.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mAllocaList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mInitInstructionListIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskNameStringIndex.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_taskSortedListIR_2D_element::getter_mTaskName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint GALGAS_taskSortedListIR_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPriority ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint GALGAS_taskSortedListIR_2D_element::getter_mStackSize (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mStackSize ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allocaList GALGAS_taskSortedListIR_2D_element::getter_mAllocaList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAllocaList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_instructionListIR GALGAS_taskSortedListIR_2D_element::getter_mInitInstructionListIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mInitInstructionListIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_taskSortedListIR_2D_element::getter_mTaskNameStringIndex (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskNameStringIndex ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @taskSortedListIR-element type                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_taskSortedListIR_2D_element ("taskSortedListIR-element",
+                                                    NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_taskSortedListIR_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_taskSortedListIR_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_taskSortedListIR_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_taskSortedListIR_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_taskSortedListIR_2D_element GALGAS_taskSortedListIR_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_taskSortedListIR_2D_element result ;
+  const GALGAS_taskSortedListIR_2D_element * p = (const GALGAS_taskSortedListIR_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_taskSortedListIR_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("taskSortedListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
 

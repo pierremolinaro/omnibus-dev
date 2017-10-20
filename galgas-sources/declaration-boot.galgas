@@ -79,7 +79,7 @@ method @bootList-element bootSemanticAnalysis
     !mode:.bootMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMapEx variableMap
+#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Analyze instruction list
@@ -94,7 +94,7 @@ method @bootList-element bootSemanticAnalysis
     !mode:.bootMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
+#    !?variableMap:variableMap
     !?variableMap:universalMap
     !?alloca:bootAllocaList
     !?generatedCode:instructionGenerationList
@@ -102,8 +102,8 @@ method @bootList-element bootSemanticAnalysis
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
   [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !mEndOfBootLocation]
-  drop variableMap
+#  [variableMap checkAutomatonStates !mEndOfBootLocation]
+#  drop variableMap
 #--- Code generation
   ioIntermediateCodeStruct.mBootList +=
     !mPriority

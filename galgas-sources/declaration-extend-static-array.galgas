@@ -148,7 +148,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !mode:.bootMode
             !globalsAreConstant:true # Any value, there is no defined global variable at this stage
             !returnTypeName:["" nowhere]
-            ?*
+#            ?*
             ?@universalPropertyAndRoutineMapForContext universalMap
           )
           @semanticTemporariesStruct temporaries = .default

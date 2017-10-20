@@ -393,7 +393,7 @@ method @structurePropertyListAST-element enterInContext
 #--- Variable map (with constants)
   variableMapWithConstants (
     !context:ioContext
-    ?let @unifiedSymbolMapEx unused variableMap
+#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Init expression

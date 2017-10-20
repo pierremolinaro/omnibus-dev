@@ -91,7 +91,6 @@ override method @varInstructionWithAssignmentAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -137,14 +136,14 @@ override method @varInstructionWithAssignmentAST analyze
   ioTemporaries.mTemporaryIndex ++
   let objectIR = @objectIR.localVariableReference {!type:[result type] !plmName:varName}
   [!?ioUniversalMap insertLocalVariable !mVarName !objectIR !.hasUnreadValue !false]
-  [!?ioVariableMap insertDefinedVariable
-    !lkey:mVarName
-    !type:[result type]
-    !readAccessAllowed:true
-    !objectIR:objectIR
-    !copyable:[[result type] copyable]
-    !canBeUsedAsInputParameter:true
-  ]
+#  [!?ioVariableMap insertDefinedVariable
+#    !lkey:mVarName
+#    !type:[result type]
+#    !readAccessAllowed:true
+#    !objectIR:objectIR
+#    !copyable:[[result type] copyable]
+#    !canBeUsedAsInputParameter:true
+#  ]
 #--- Code generation
   ioAllocaList += !varName ![[result type] llvmTypeName]
   [!?ioInstructionGenerationList appendStoreLocalVariable
@@ -165,7 +164,6 @@ override method @varInstructionAST analyze
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
@@ -180,14 +178,14 @@ override method @varInstructionAST analyze
   ioTemporaries.mTemporaryIndex ++
   let objectIR = @objectIR.localVariableReference {!type:targetType !plmName:varLLVMName}
   [!?ioUniversalMap insertLocalVariable !mVarName !objectIR !.noValue !true]
-  [!?ioVariableMap insertUndefinedVariable
-    !lkey:mVarName
-    !type:targetType
-    !readAccessAllowed:true
-    !objectIR:objectIR
-    !copyable:[targetType copyable]
-    !canBeUsedAsInputParameter:true
-  ]
+#  [!?ioVariableMap insertUndefinedVariable
+#    !lkey:mVarName
+#    !type:targetType
+#    !readAccessAllowed:true
+#    !objectIR:objectIR
+#    !copyable:[targetType copyable]
+#    !canBeUsedAsInputParameter:true
+#  ]
 #--- Code generation
   ioAllocaList += !varLLVMName ![targetType llvmTypeName]
 }

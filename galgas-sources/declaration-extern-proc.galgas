@@ -131,7 +131,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !mode:mMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMapEx variableMap
+#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Analyse formal arguments
@@ -139,12 +139,10 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
   enterFormalArguments (
     !context:inContext
     !mProcFormalArgumentList
-    !?variableMap
+#    !?variableMap
     !?universalMap
     !?formalArguments
   )
-#--- End of variableMap
-  drop variableMap
 #--- Enter subprogram invocation graph
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode

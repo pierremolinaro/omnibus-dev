@@ -125,7 +125,7 @@ proc initSemanticAnalysis
   ?priority:let @lbigint inPriority
   ?mode:let @mode inCurrentMode
   ?instructionList:let @instructionListAST inInstructionListAST
-  ?endOfDeclaration:let @location inEndOfInitDeclaration
+  ?endOfDeclaration:let @location unused inEndOfInitDeclaration
   !@allocaList outAllocaList
   !@instructionListIR outInstructionGenerationList
 {
@@ -145,7 +145,7 @@ proc initSemanticAnalysis
     !mode:.initMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMapEx variableMap
+#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Analyze instruction list
@@ -160,7 +160,7 @@ proc initSemanticAnalysis
     !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
+#    !?variableMap:variableMap
     !?variableMap:universalMap
     !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList
@@ -168,8 +168,8 @@ proc initSemanticAnalysis
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
   [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !inEndOfInitDeclaration]
-  drop variableMap
+#  [variableMap checkAutomatonStates !inEndOfInitDeclaration]
+#  drop variableMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

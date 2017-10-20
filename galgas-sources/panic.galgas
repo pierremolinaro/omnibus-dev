@@ -110,41 +110,41 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !mode:.panicMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMapEx variableMap
+#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Insert predefined input arguments
   let StaticStringType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]} type]
   let codeArg = @lstring.new {!"CODE" !mPriority.location}
   [!?universalMap insertUsedLocalConstant !codeArg !.localVariableReference {!type:[inContext.mPanicCodeType type] !plmName:codeArg}]
-  [!?variableMap insertUsedConstantInputFormalArgument
-    !lkey:codeArg
-    !type:[inContext.mPanicCodeType type]
-    !readAccessAllowed:true
-    !objectIR:.localVariableReference {!type:[inContext.mPanicCodeType type] !plmName:codeArg}
-    !copyable:[inContext.mPanicCodeType copyable]
-    !canBeUsedAsInputParameter:false
-  ]
+#  [!?variableMap insertUsedConstantInputFormalArgument
+#    !lkey:codeArg
+#    !type:[inContext.mPanicCodeType type]
+#    !readAccessAllowed:true
+#    !objectIR:.localVariableReference {!type:[inContext.mPanicCodeType type] !plmName:codeArg}
+#    !copyable:[inContext.mPanicCodeType copyable]
+#    !canBeUsedAsInputParameter:false
+#  ]
   let fileArg = @lstring.new {!"FILE" !mPriority.location}
   [!?universalMap insertUsedLocalConstant !fileArg !.localVariableReference {!type:StaticStringType !plmName:fileArg}]
-  [!?variableMap insertUsedConstantInputFormalArgument
-    !lkey:fileArg
-    !type:StaticStringType
-    !readAccessAllowed:true
-    !objectIR:.localVariableReference {!type:StaticStringType !plmName:fileArg}
-    !copyable:[StaticStringType copyable]
-    !canBeUsedAsInputParameter:false
-  ]
+#  [!?variableMap insertUsedConstantInputFormalArgument
+#    !lkey:fileArg
+#    !type:StaticStringType
+#    !readAccessAllowed:true
+#    !objectIR:.localVariableReference {!type:StaticStringType !plmName:fileArg}
+#    !copyable:[StaticStringType copyable]
+#    !canBeUsedAsInputParameter:false
+#  ]
   let lineArg = @lstring.new {!"LINE" !mPriority.location}
   [!?universalMap insertUsedLocalConstant !lineArg !.localVariableReference {!type:[inContext.mPanicLineType type] !plmName:lineArg}]
-  [!?variableMap insertUsedConstantInputFormalArgument
-    !lkey:lineArg
-    !type:[inContext.mPanicLineType type]
-    !readAccessAllowed:true
-    !objectIR:.localVariableReference {!type:[inContext.mPanicLineType type] !plmName:lineArg}
-    !copyable:[inContext.mPanicLineType copyable]
-    !canBeUsedAsInputParameter:false
-  ]
+#  [!?variableMap insertUsedConstantInputFormalArgument
+#    !lkey:lineArg
+#    !type:[inContext.mPanicLineType type]
+#    !readAccessAllowed:true
+#    !objectIR:.localVariableReference {!type:[inContext.mPanicLineType type] !plmName:lineArg}
+#    !copyable:[inContext.mPanicLineType copyable]
+#    !canBeUsedAsInputParameter:false
+#  ]
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
@@ -164,7 +164,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !mode:.panicMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
+#    !?variableMap:variableMap
     !?variableMap:universalMap
     !?alloca:initAllocaList
     !?generatedCode:instructionGenerationList
@@ -172,8 +172,8 @@ method @panicClauseListAST-element panicSemanticAnalysis
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
   [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !mEndOfPanicInstructions]
-  drop variableMap
+#  [variableMap checkAutomatonStates !mEndOfPanicInstructions]
+#  drop variableMap
 #--- Code generation
   if mIsSetup then
     [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]

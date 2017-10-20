@@ -158,7 +158,7 @@ proc guardSemanticAnalysis
   ?let @routineFormalArgumentList inRoutineFormalArgumentList
   ?let @guardKind inGuardKind
   ?let @instructionListAST inRoutineInstructionList
-  ?let @location inEndOfRoutineDeclaration
+  ?let @location unused inEndOfRoutineDeclaration
   ?warnIfUnused:let @bool inWarnIfUnused
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -183,7 +183,7 @@ proc guardSemanticAnalysis
     !mode:.guardMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMapEx variableMap
+#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
   @routineFormalArgumentListForGeneration formalArguments = {}
@@ -202,19 +202,19 @@ proc guardSemanticAnalysis
       !.noValue
       !true
     ]
-    [!?variableMap insertOutputFormalArgument
-      !lkey:resultVarName
-      !type:resultType
-      !readAccessAllowed:true
-      !objectIR:.localVariableReference {!type:resultType !plmName:resultVarName}
-      !copyable:true
-      !canBeUsedAsInputParameter:true
-    ]
+#    [!?variableMap insertOutputFormalArgument
+#      !lkey:resultVarName
+#      !type:resultType
+#      !readAccessAllowed:true
+#      !objectIR:.localVariableReference {!type:resultType !plmName:resultVarName}
+#      !copyable:true
+#      !canBeUsedAsInputParameter:true
+#    ]
   #--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext
       !inRoutineFormalArgumentList
-      !?variableMap
+#      !?variableMap
       !?universalMap
       !?formalArguments
     )
@@ -229,7 +229,7 @@ proc guardSemanticAnalysis
       !mode:.guardMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-      !?variableMap:variableMap
+#      !?variableMap:variableMap
       !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
@@ -239,7 +239,7 @@ proc guardSemanticAnalysis
     enterFormalArguments (
       !context:inContext
       !inRoutineFormalArgumentList
-      !?variableMap
+#      !?variableMap
       !?universalMap
       !?formalArguments
     )
@@ -264,7 +264,7 @@ proc guardSemanticAnalysis
       !mode:.userMode # Convenience guards instructions are executed in user mode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-      !?variableMap:variableMap
+#      !?variableMap:variableMap
       !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
@@ -273,8 +273,8 @@ proc guardSemanticAnalysis
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
   [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
-  drop variableMap
+#  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
+#  drop variableMap
 #--- Code generation
   [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
     !guardMangledName
