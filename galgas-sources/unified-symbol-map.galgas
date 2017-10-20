@@ -45,8 +45,8 @@ proc initialVariableMap
   end
 #------------------------------------------------------- Add global variables
   for variable in inContext.mGlobalVariableMap do
-    let objectIR = @objectIR.globalVariableReference {!type:variable.type !plmName:variable.lkey}
-    [!?outUniversalMap insertGlobalVariable !variable.lkey !objectIR !not inGlobalsAreConstant]
+#    let objectIR = @objectIR.globalVariableReference {!type:variable.type !plmName:variable.lkey}
+    [!?outUniversalMap insertGlobalVariable !variable.lkey !variable.type !not inGlobalsAreConstant]
     var writeAccess = variable.allowedAccessToAll
     var allowedAccess = writeAccess
   end
