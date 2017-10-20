@@ -65,8 +65,7 @@ proc initialVariableMap
   if inReturnTypeName.string != "" then
     let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}
     let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName} type]
-    let objectIR = @objectIR.localVariableReference {!type:resultType !plmName:resultVarName}
-    [!?outUniversalMap insertLocalVariable !resultVarName !objectIR !.noValue !true]
+    [!?outUniversalMap insertLocalVariable !resultVarName !resultType !.noValue !true]
   end
 }
 

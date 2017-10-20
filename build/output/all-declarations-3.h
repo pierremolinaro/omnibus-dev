@@ -3616,36 +3616,38 @@ class cEnumAssociatedValues_possibleValuedObject_localConstant : public cEnumAss
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_possibleValuedObject_globalVariableReference : public cEnumAssociatedValues {
+class cEnumAssociatedValues_possibleValuedObject_globalVariable : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_objectIR mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_possibleValuedObject_globalVariableReference (const GALGAS_bool & inAssociatedValue0,
-                                                                               const GALGAS_objectIR & inAssociatedValue1
-                                                                               COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_possibleValuedObject_globalVariable (const GALGAS_bool & inAssociatedValue0,
+                                                                      const GALGAS_objectIR & inAssociatedValue1
+                                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_globalVariableReference (void) {}
+  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_globalVariable (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_possibleValuedObject_localVariableReference : public cEnumAssociatedValues {
-  public : const GALGAS_objectIR mAssociatedValue0 ;
+class cEnumAssociatedValues_possibleValuedObject_localVariable : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_lstring mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_possibleValuedObject_localVariableReference (const GALGAS_objectIR & inAssociatedValue0
-                                                                              COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_possibleValuedObject_localVariable (const GALGAS_PLMType & inAssociatedValue0,
+                                                                     const GALGAS_lstring & inAssociatedValue1
+                                                                     COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_localVariableReference (void) {}
+  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_localVariable (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

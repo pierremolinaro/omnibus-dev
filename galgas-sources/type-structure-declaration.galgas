@@ -393,7 +393,6 @@ method @structurePropertyListAST-element enterInContext
 #--- Variable map (with constants)
   variableMapWithConstants (
     !context:ioContext
-#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Init expression
@@ -609,7 +608,7 @@ proc generatePropertyAccess
   ?structureType:let @PLMType inType
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [inType structure ?1* ?propertyMap:let @propertyMap propertyMap ?1* ?propertyList:@propertyList propertyList ?2*]
+  [inType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
   for (propertyName * objectIR) in propertyMap do
     [objectIR property ?type:let propertyType ?plmName:* ?access:let access]
     ioIntermediateCodeStruct.mPropertyAccessRoutineList += 

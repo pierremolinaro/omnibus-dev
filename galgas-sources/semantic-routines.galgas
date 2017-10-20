@@ -29,34 +29,10 @@ proc enterFormalArguments
     switch argumentKind
     case input :
       [!?ioUniversalMap insertLocalConstant !formalArgumentName !objectIR]
-#      [!?ioVariableMap insertConstantInputFormalArgument
-#        !lkey:formalArgumentName
-#        !type:typeProxy
-#        !readAccessAllowed:true
-#        !objectIR:objectIR
-#        !copyable:[typeProxy copyable]
-#        !canBeUsedAsInputParameter:true
-#      ]
     case inputOutput :
-      [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.hasUnreadValue !true]
-#      [!?ioVariableMap insertInputOutputFormalArgument
-#        !lkey:formalArgumentName
-#        !type:typeProxy
-#        !readAccessAllowed:true
-#        !objectIR:objectIR
-#        !copyable:[typeProxy copyable]
-#        !canBeUsedAsInputParameter:true
-#      ]
+      [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !.hasUnreadValue !true]
     case output :
-      [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.noValue !true]
-#      [!?ioVariableMap insertOutputFormalArgument
-#        !lkey:formalArgumentName
-#        !type:typeProxy
-#        !readAccessAllowed:true
-#        !objectIR:objectIR
-#        !copyable:[typeProxy copyable]
-#        !canBeUsedAsInputParameter:true
-#      ]
+      [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !.noValue !true]
     end
   end
 }

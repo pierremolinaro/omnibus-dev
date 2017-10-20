@@ -209,7 +209,7 @@ setter @universalPropertyAndRoutineMapForContext insertGlobalVariable
   ?let @objectIR inObjectIR
   ?let @bool inWritable
 {
-  let newValue = @possibleValuedObject.globalVariableReference {!writable:inWritable !objectIR:inObjectIR}
+  let newValue = @possibleValuedObject.globalVariable {!writable:inWritable !objectIR:inObjectIR}
   with inGlobalVariableName.string in !?mInternalPropertyAndRoutineMapForContext do
     if [mPossibleValuedObject isUndefined] then
       mPossibleValuedObject = newValue
@@ -231,11 +231,11 @@ setter @universalPropertyAndRoutineMapForContext insertGlobalVariable
 
 setter @universalPropertyAndRoutineMapForContext insertLocalVariable
   ?let @lstring inLocalVariableName
-  ?let @objectIR inObjectIR
+  ?let @PLMType inType
   ?let @valuedObjectState inVariableInitialState
   ?let @bool inObjectShouldBeValuedAtEndOfScope
 {
-  let newValue = @possibleValuedObject.localVariableReference {!objectIR:inObjectIR}
+  let newValue = @possibleValuedObject.localVariable {!type:inType !plmName:inLocalVariableName}
   with inLocalVariableName.string in !?mInternalPropertyAndRoutineMapForContext do
     if [mPossibleValuedObject isUndefined] then
       mObjectState = inVariableInitialState
@@ -278,10 +278,10 @@ method @universalPropertyAndRoutineMapForContext searchValuedObject
     outObjectIR = objectIR
   case localConstant (@objectIR objectIR) :
     outObjectIR = objectIR
-  case globalVariableReference (* @objectIR objectIR) :
+  case globalVariable (* @objectIR objectIR) :
     outObjectIR = objectIR
-  case localVariableReference (@objectIR objectIR) :
-    outObjectIR = objectIR
+  case localVariable (@PLMType type @lstring plmName) :
+    outObjectIR = @objectIR.localVariableReference {!type:type !plmName:plmName}
   end
 }
 
@@ -300,8 +300,8 @@ setter @universalPropertyAndRoutineMapForContext readAccess ?let @lstring inValu
     if valueState == .hasUnreadValue then
       [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     end
-  case globalVariableReference (* *) :
-  case localVariableReference (*) :
+  case globalVariable (* *) :
+  case localVariable (* *) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "'" + inValuedObjectName + "' has no value"
@@ -331,11 +331,11 @@ setter @universalPropertyAndRoutineMapForContext writeAccess ?let @lstring inVal
     error inValuedObjectName : "a constant cannot be written"
   case localConstant (*) :
     error inValuedObjectName : "a constant cannot be written"
-  case globalVariableReference (@bool writable *) :
+  case globalVariable (@bool writable *) :
     if not writable then
       error inValuedObjectName : "a global variable cannot be written"
     end
-  case localVariableReference (*) :
+  case localVariable (* *) :
     switch valueState 
     case noValue, hasReadValue :
       [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
@@ -367,11 +367,11 @@ setter @universalPropertyAndRoutineMapForContext readWriteAccess ?let @lstring i
     error inValuedObjectName : "a constant cannot be written"
   case localConstant (*) :
     error inValuedObjectName : "a constant cannot be written"
-  case globalVariableReference (@bool writable *) :
+  case globalVariable (@bool writable *) :
     if not writable then
       error inValuedObjectName : "a global variable cannot be written"
     end
-  case localVariableReference (*) :
+  case localVariable (* *) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "object has no value"
@@ -405,17 +405,17 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
     if valueState == .hasUnreadValue then
       [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     end
-  case globalVariableReference (* @objectIR objectIR) :
+  case globalVariable (* @objectIR objectIR) :
     outObjectIR = objectIR
-  case localVariableReference (@objectIR objectIR) :
+  case localVariable (@PLMType type @lstring plmName) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "'" + inValuedObjectName + "' has no value" : outObjectIR
     case hasUnreadValue :
       [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
-      outObjectIR = objectIR
+      outObjectIR = @objectIR.localVariableReference {!type:type !plmName:plmName}
     case hasReadValue :
-      outObjectIR = objectIR
+      outObjectIR = @objectIR.localVariableReference {!type:type !plmName:plmName}
     end
   end
 }
@@ -444,14 +444,14 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAcces
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case localConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
-  case globalVariableReference (@bool writable @objectIR objectIR) :
+  case globalVariable (@bool writable @objectIR objectIR) :
     if writable then
       outObjectIR = objectIR
     else
       error inValuedObjectName : "a global variable cannot be written" : outObjectIR
     end
-  case localVariableReference (@objectIR objectIR) :
-    outObjectIR = objectIR
+  case localVariable (@PLMType type @lstring plmName) :
+    outObjectIR = @objectIR.localVariableReference {!type:type !plmName:plmName}
     switch valueState 
     case noValue, hasReadValue :
       [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
@@ -487,21 +487,21 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteA
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case localConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
-  case globalVariableReference (@bool writable @objectIR objectIR) :
+  case globalVariable (@bool writable @objectIR objectIR) :
     if writable then
       outObjectIR = objectIR
     else
       error inValuedObjectName : "a global variable cannot be written" : outObjectIR
     end
-  case localVariableReference (@objectIR objectIR) :
+  case localVariable (@PLMType type @lstring plmName) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "object has no value" : outObjectIR
     case hasUnreadValue :
-      outObjectIR = objectIR
+      outObjectIR = @objectIR.localVariableReference {!type:type !plmName:plmName}
     case hasReadValue :
       [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
-      outObjectIR = objectIR
+      outObjectIR = @objectIR.localVariableReference {!type:type !plmName:plmName}
     end
   end
 }
@@ -526,10 +526,10 @@ method @universalPropertyAndRoutineMapForContext searchValuedObjectType
     error inValuedObjectName : "undefined in this context" : outType
   case localConstant (*) :
     error inValuedObjectName : "undefined in this context" : outType
-  case globalVariableReference (* @objectIR objectIR) :
+  case globalVariable (* @objectIR objectIR) :
     outType = [objectIR type]
-  case localVariableReference (@objectIR objectIR) :
-    outType = [objectIR type]
+  case localVariable (@PLMType type *) :
+    outType = type
   end
 }
 
@@ -561,8 +561,8 @@ method @universalPropertyAndRoutineMapForContext checkLocalVariableFinalState {
       if entry.mObjectState == .hasUnreadValue then
         warning entry.lkey : "'" + entry.lkey + "' is never read"
       end
-    case globalVariableReference (* *) :
-    case localVariableReference (*) :
+    case globalVariable (* *) :
+    case localVariable (**) :
       if (entry.mObjectState == .noValue) && entry.mObjectShouldBeValuedAtEndOfScope then
         warning entry.lkey : "'" + entry.lkey + "' should be valued at the end of routine"
       end
@@ -583,8 +583,8 @@ setter @universalPropertyAndRoutineMapForContext openOverrideForSelectBlock {
     case globalConstant (*) :
     case localConstant (*) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
-    case globalVariableReference (* *) :
-    case localVariableReference (*) :
+    case globalVariable (* *) :
+    case localVariable (**) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
     end
   end
@@ -605,8 +605,8 @@ setter @universalPropertyAndRoutineMapForContext openOverrideForRepeatBlock {
     case globalConstant (*) :
     case localConstant (*) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
-    case globalVariableReference (* *) :
-    case localVariableReference (*) :
+    case globalVariable (* *) :
+    case localVariable (**) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
     end
   end
@@ -638,8 +638,8 @@ setter @universalPropertyAndRoutineMapForContext closeBranch ?let @location inEr
       case globalConstant (*) :
       case localConstant (*) :
         [!?newReferenceStateMap insertKey !entry.lkey !entry.mObjectState]
-      case globalVariableReference (* *) :
-      case localVariableReference (*) :
+      case globalVariable (* *) :
+      case localVariable (**) :
         [!?newReferenceStateMap insertKey !entry.lkey !entry.mObjectState]
       end
     end
@@ -699,8 +699,8 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
       if currentObjectState == .hasUnreadValue then
         warning inErrorLocation : "'" + lkey + "' is never read"
       end
-    case globalVariableReference (* *) :
-    case localVariableReference (*) :
+    case globalVariable (* *) :
+    case localVariable (**) :
       if (currentObjectState == .noValue) && objectShouldBeValuedAtEndOfScope then
         warning inErrorLocation : "'" + lkey + "' should be valued at the end of routine"
       end
@@ -774,8 +774,8 @@ enum @possibleValuedObject {
   case register (@bool readable @bool writable @objectIR objectIR)
   case globalConstant (@objectIR objectIR)
   case localConstant (@objectIR objectIR)
-  case globalVariableReference (@bool writable @objectIR objectIR)
-  case localVariableReference (@objectIR objectIR)
+  case globalVariable (@bool writable @objectIR objectIR)
+  case localVariable (@PLMType type @lstring plmName)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

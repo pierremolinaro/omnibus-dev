@@ -14062,9 +14062,9 @@ typeComparisonResult cEnumAssociatedValues_possibleValuedObject_localConstant::c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_possibleValuedObject_globalVariableReference::cEnumAssociatedValues_possibleValuedObject_globalVariableReference (const GALGAS_bool & inAssociatedValue0,
-                                                                                                                                        const GALGAS_objectIR & inAssociatedValue1
-                                                                                                                                        COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_possibleValuedObject_globalVariable::cEnumAssociatedValues_possibleValuedObject_globalVariable (const GALGAS_bool & inAssociatedValue0,
+                                                                                                                      const GALGAS_objectIR & inAssociatedValue1
+                                                                                                                      COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
@@ -14072,8 +14072,8 @@ mAssociatedValue1 (inAssociatedValue1) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_possibleValuedObject_globalVariableReference::description (C_String & ioString,
-                                                                                      const int32_t inIndentation) const {
+void cEnumAssociatedValues_possibleValuedObject_globalVariable::description (C_String & ioString,
+                                                                             const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
@@ -14082,8 +14082,8 @@ void cEnumAssociatedValues_possibleValuedObject_globalVariableReference::descrip
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_possibleValuedObject_globalVariableReference::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_possibleValuedObject_globalVariableReference * ptr = dynamic_cast<const cEnumAssociatedValues_possibleValuedObject_globalVariableReference *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_possibleValuedObject_globalVariable::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_possibleValuedObject_globalVariable * ptr = dynamic_cast<const cEnumAssociatedValues_possibleValuedObject_globalVariable *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -14097,29 +14097,35 @@ typeComparisonResult cEnumAssociatedValues_possibleValuedObject_globalVariableRe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_possibleValuedObject_localVariableReference::cEnumAssociatedValues_possibleValuedObject_localVariableReference (const GALGAS_objectIR & inAssociatedValue0
-                                                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_possibleValuedObject_localVariable::cEnumAssociatedValues_possibleValuedObject_localVariable (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                                    const GALGAS_lstring & inAssociatedValue1
+                                                                                                                    COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_possibleValuedObject_localVariableReference::description (C_String & ioString,
-                                                                                     const int32_t inIndentation) const {
+void cEnumAssociatedValues_possibleValuedObject_localVariable::description (C_String & ioString,
+                                                                            const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_possibleValuedObject_localVariableReference::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_possibleValuedObject_localVariableReference * ptr = dynamic_cast<const cEnumAssociatedValues_possibleValuedObject_localVariableReference *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_possibleValuedObject_localVariable::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_possibleValuedObject_localVariable * ptr = dynamic_cast<const cEnumAssociatedValues_possibleValuedObject_localVariable *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
   }
   return result ;
 }
@@ -14220,14 +14226,14 @@ GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_localConsta
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_globalVariableReference (const GALGAS_bool & inAssociatedValue0,
-                                                                                              const GALGAS_objectIR & inAssociatedValue1
-                                                                                              COMMA_LOCATION_ARGS) {
+GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_globalVariable (const GALGAS_bool & inAssociatedValue0,
+                                                                                     const GALGAS_objectIR & inAssociatedValue1
+                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_possibleValuedObject result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_globalVariableReference ;
+    result.mEnum = kEnum_globalVariable ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_globalVariableReference (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_globalVariable (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -14236,13 +14242,14 @@ GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_globalVaria
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_localVariableReference (const GALGAS_objectIR & inAssociatedValue0
-                                                                                             COMMA_LOCATION_ARGS) {
+GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_localVariable (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                    const GALGAS_lstring & inAssociatedValue1
+                                                                                    COMMA_LOCATION_ARGS) {
   GALGAS_possibleValuedObject result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_localVariableReference ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_localVariable ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_localVariableReference (inAssociatedValue0 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_localVariable (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -14343,18 +14350,18 @@ void GALGAS_possibleValuedObject::method_localConstant (GALGAS_objectIR & outAss
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_possibleValuedObject::method_globalVariableReference (GALGAS_bool & outAssociatedValue0,
-                                                                  GALGAS_objectIR & outAssociatedValue1,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_globalVariableReference) {
+void GALGAS_possibleValuedObject::method_globalVariable (GALGAS_bool & outAssociatedValue0,
+                                                         GALGAS_objectIR & outAssociatedValue1,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_globalVariable) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     C_String s ;
-    s << "method @possibleValuedObject globalVariableReference invoked with an invalid enum value" ;
+    s << "method @possibleValuedObject globalVariable invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_possibleValuedObject_globalVariableReference * ptr = (const cEnumAssociatedValues_possibleValuedObject_globalVariableReference *) unsafePointer () ;
+    const cEnumAssociatedValues_possibleValuedObject_globalVariable * ptr = (const cEnumAssociatedValues_possibleValuedObject_globalVariable *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
@@ -14362,17 +14369,20 @@ void GALGAS_possibleValuedObject::method_globalVariableReference (GALGAS_bool & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_possibleValuedObject::method_localVariableReference (GALGAS_objectIR & outAssociatedValue0,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_localVariableReference) {
+void GALGAS_possibleValuedObject::method_localVariable (GALGAS_PLMType & outAssociatedValue0,
+                                                        GALGAS_lstring & outAssociatedValue1,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_localVariable) {
     outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
     C_String s ;
-    s << "method @possibleValuedObject localVariableReference invoked with an invalid enum value" ;
+    s << "method @possibleValuedObject localVariable invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_possibleValuedObject_localVariableReference * ptr = (const cEnumAssociatedValues_possibleValuedObject_localVariableReference *) unsafePointer () ;
+    const cEnumAssociatedValues_possibleValuedObject_localVariable * ptr = (const cEnumAssociatedValues_possibleValuedObject_localVariable *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -14386,8 +14396,8 @@ static const char * gEnumNameArrayFor_possibleValuedObject [9] = {
   "register",
   "globalConstant",
   "localConstant",
-  "globalVariableReference",
-  "localVariableReference"
+  "globalVariable",
+  "localVariable"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14428,14 +14438,14 @@ GALGAS_bool GALGAS_possibleValuedObject::getter_isLocalConstant (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_possibleValuedObject::getter_isGlobalVariableReference (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalVariableReference == mEnum) ;
+GALGAS_bool GALGAS_possibleValuedObject::getter_isGlobalVariable (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalVariable == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_possibleValuedObject::getter_isLocalVariableReference (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_localVariableReference == mEnum) ;
+GALGAS_bool GALGAS_possibleValuedObject::getter_isLocalVariable (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_localVariable == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
