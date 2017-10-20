@@ -81,7 +81,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !mode:isr.mMode
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
-      ?@unifiedSymbolMapEx variableMap
+#      ?*
       ?@universalPropertyAndRoutineMapForContext universalMap
     )
   #--- Self type
@@ -102,15 +102,15 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !mode:isr.mMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-      !?variableMap:variableMap
+#      !?variableMap:variableMap
       !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]
   #--- End of variableMap
     [universalMap checkLocalVariableFinalState]
-    [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
-    drop variableMap
+#    [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
+#    drop variableMap
   #--- Code generation
     [inSemanticContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
     [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey

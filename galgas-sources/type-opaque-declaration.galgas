@@ -108,7 +108,7 @@ override method @opaqueTypeDeclarationAST enterInContext
   @semanticTemporariesStruct temporaries = .default
   variableMapWithConstants (
     !context:ioContext
-    ?@unifiedSymbolMapEx variableMap
+#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
   [mSizeExpression analyzeExpression

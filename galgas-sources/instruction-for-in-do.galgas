@@ -89,19 +89,18 @@ override method @forInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze iterated expression
   [!?ioUniversalMap searchValuedObjectForReadAccess !mIteratedObject ?let @objectIR iteratedObjectPointer]
-  [!?ioVariableMap searchForReadAccess
-    !lkey:mIteratedObject
-    ?2*
-    ?objectIR:* # let @objectIR iteratedObjectPointer
-    ?2*
-  ]
+#  [!?ioVariableMap searchForReadAccess
+#    !lkey:mIteratedObject
+#    ?2*
+#    ?objectIR:* # let @objectIR iteratedObjectPointer
+#    ?2*
+#  ]
 #--- Type kind
   let iteratedTypeKind = [iteratedObjectPointer type]
 #--- Get iterated element type
@@ -119,17 +118,17 @@ override method @forInstructionAST analyze
   ioAllocaList += !enumeratedVarLLVMName ![iteratedElementType llvmTypeName]
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
-  [!?ioVariableMap openOverrideForRepeatBlock]
+#  [!?ioVariableMap openOverrideForRepeatBlock]
   let objectIR = @objectIR.localVariableReference {!type:iteratedElementType !plmName:enumeratedVarLLVMName}
   [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
-  [!?ioVariableMap insertUsedConstant
-    !lkey:mVarName
-    !type:iteratedElementType
-    !readAccessAllowed:true # Read access ok
-    !objectIR:objectIR
-    !copyable:true
-    !canBeUsedAsInputParameter:false
-  ]
+#  [!?ioVariableMap insertUsedConstant
+#    !lkey:mVarName
+#    !type:iteratedElementType
+#    !readAccessAllowed:true # Read access ok
+#    !objectIR:objectIR
+#    !copyable:true
+#    !canBeUsedAsInputParameter:false
+#  ]
 #--- Analyze while expression
   @instructionListIR whileExpression_GenerationList = {}
   [mWhileExpression analyzeExpression
@@ -166,13 +165,11 @@ override method @forInstructionAST analyze
     !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:doInstructionList_GenerationList
   ]
   [!?ioUniversalMap closeOverride !mEndOf_for_instruction]
-  [!?ioVariableMap closeOverride !mEndOf_for_instruction]
 #--- Code generation
   if iteratedTypeKind == .literalString then
     ioInstructionGenerationList += !@forInstructionOnStringIR.new {

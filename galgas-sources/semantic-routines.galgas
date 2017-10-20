@@ -19,7 +19,6 @@ graph @subprogramInvocationGraph (@lstringlist) {
 proc enterFormalArguments
   ?context:let @semanticContext inContext
   ?let @routineFormalArgumentList inFormalArgumentPassingMode
-  ?!@unifiedSymbolMapEx ioVariableMap
   ?!@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!@routineFormalArgumentListForGeneration ioFormalArguments
 {
@@ -30,34 +29,34 @@ proc enterFormalArguments
     switch argumentKind
     case input :
       [!?ioUniversalMap insertLocalConstant !formalArgumentName !objectIR]
-      [!?ioVariableMap insertConstantInputFormalArgument
-        !lkey:formalArgumentName
-        !type:typeProxy
-        !readAccessAllowed:true
-        !objectIR:objectIR
-        !copyable:[typeProxy copyable]
-        !canBeUsedAsInputParameter:true
-      ]
+#      [!?ioVariableMap insertConstantInputFormalArgument
+#        !lkey:formalArgumentName
+#        !type:typeProxy
+#        !readAccessAllowed:true
+#        !objectIR:objectIR
+#        !copyable:[typeProxy copyable]
+#        !canBeUsedAsInputParameter:true
+#      ]
     case inputOutput :
       [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.hasUnreadValue !true]
-      [!?ioVariableMap insertInputOutputFormalArgument
-        !lkey:formalArgumentName
-        !type:typeProxy
-        !readAccessAllowed:true
-        !objectIR:objectIR
-        !copyable:[typeProxy copyable]
-        !canBeUsedAsInputParameter:true
-      ]
+#      [!?ioVariableMap insertInputOutputFormalArgument
+#        !lkey:formalArgumentName
+#        !type:typeProxy
+#        !readAccessAllowed:true
+#        !objectIR:objectIR
+#        !copyable:[typeProxy copyable]
+#        !canBeUsedAsInputParameter:true
+#      ]
     case output :
       [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.noValue !true]
-      [!?ioVariableMap insertOutputFormalArgument
-        !lkey:formalArgumentName
-        !type:typeProxy
-        !readAccessAllowed:true
-        !objectIR:objectIR
-        !copyable:[typeProxy copyable]
-        !canBeUsedAsInputParameter:true
-      ]
+#      [!?ioVariableMap insertOutputFormalArgument
+#        !lkey:formalArgumentName
+#        !type:typeProxy
+#        !readAccessAllowed:true
+#        !objectIR:objectIR
+#        !copyable:[typeProxy copyable]
+#        !canBeUsedAsInputParameter:true
+#      ]
     end
   end
 }
@@ -72,7 +71,7 @@ proc routineSemanticAnalysis
   ?let @routineFormalArgumentList inRoutineFormalArgumentList
   ?returnTypeName:let @lstring inReturnTypeName
   ?let @instructionListAST inRoutineInstructionList
-  ?let @location inEndOfRoutineDeclaration
+  ?let @location unused inEndOfRoutineDeclaration
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?warnIfUnused:let @bool inWarnIfUnused
@@ -93,7 +92,7 @@ proc routineSemanticAnalysis
     !mode:inRoutineMode
     !globalsAreConstant:false
     !returnTypeName:inReturnTypeName
-    ?@unifiedSymbolMapEx variableMap
+#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Analyse formal arguments
@@ -101,7 +100,7 @@ proc routineSemanticAnalysis
   enterFormalArguments (
     !context:inContext
     !inRoutineFormalArgumentList
-    !?variableMap
+#    !?variableMap
     !?universalMap
     !?formalArguments
   )
@@ -124,7 +123,6 @@ proc routineSemanticAnalysis
     !mode:inRoutineMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
     !?variableMap:universalMap
     !?alloca:allocaList
     !?generatedCode:instructionGenerationList
@@ -132,8 +130,8 @@ proc routineSemanticAnalysis
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
   [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
-  drop variableMap
+#  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
+#  drop variableMap
 #--- Code generation
   let returnType = if inReturnTypeName.string == "" then
     @PLMType.void
@@ -155,68 +153,6 @@ proc routineSemanticAnalysis
     !false
   ]
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#proc routineResolveEntities
-#  ?receiverType:let @PLMType inSelfType
-#  ?let @routineKind inRoutineKind
-#  ?let @mode inRoutineMode
-#  ?let @lstring inRoutineName
-#  ?let @routineFormalArgumentList inRoutineFormalArgumentList
-#  ?returnTypeName:let @lstring inReturnTypeName
-#  ?let @instructionListAST inRoutineInstructionList
-#  ?let @location inEndOfRoutineDeclaration
-#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-#  ?context:let @semanticContext inContext
-#{
-##--- Mangled routine name
-#  let routineMangledName = routineMangledNameFromAST (
-#    !if inSelfType == .null then "" else "$" + [inSelfType key] end
-#    !inRoutineName
-#    !inRoutineFormalArgumentList
-#  )
-##--- Variable map
-#  initialVariableMap (
-#    !context:inContext
-#    !mode:inRoutineMode
-#    !globalsAreConstant:false
-#    !returnTypeName:inReturnTypeName
-#    ?@unifiedSymbolMapEx variableMap
-#    ?@universalPropertyAndRoutineMapForContext universalMap
-#  )
-##--- Analyse formal arguments
-#  @routineFormalArgumentListForGeneration formalArguments = {}
-#  enterFormalArguments (
-#    !context:inContext
-#    !inRoutineFormalArgumentList
-#    !?variableMap
-#    !?universalMap
-#    !?formalArguments
-#  )
-##--- Analyze instruction list
-#  @allocaList allocaList = {}
-#  @instructionListIR instructionGenerationList = {}
-#  [inRoutineInstructionList analyzeRoutineInstructionList
-#    !self:inSelfType
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !propertiesAreMutable:inRoutineCanMutateProperties
-#    !routineNameForInvocationGraph:routineMangledName
-#    !context:inContext
-#    !mode:inRoutineMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-#    !?variableMap:variableMap
-#    !?variableMap:universalMap
-#    !?alloca:allocaList
-#    !?generatedCode:instructionGenerationList
-#  ]
-##--- End of variableMap
-#  [universalMap checkLocalVariableFinalState]
-#  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
-#  drop variableMap
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      

@@ -765,16 +765,6 @@ class GALGAS_lstring function_panicNameForInvocationGraph (const class GALGAS_st
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Extension getter '@unifiedTypeMap-proxy copyable' (as function)                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool extensionGetter_copyable (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                Extension setter '@universalPropertyAndRoutineMapForContext insertUsedLocalConstant'                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -899,9 +889,8 @@ void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArg
 
 void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
                                    const class GALGAS_routineFormalArgumentList constinArgument1,
-                                   class GALGAS_unifiedSymbolMapEx & ioArgument2,
-                                   class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument3,
-                                   class GALGAS_routineFormalArgumentListForGeneration & ioArgument4,
+                                   class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument2,
+                                   class GALGAS_routineFormalArgumentListForGeneration & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -1706,5 +1695,30 @@ void callExtensionSetter_readWriteAccess (class cPtr_universalPropertyAndRoutine
                                           const GALGAS_lstring constin_inValuedObjectName,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//            Extension setter '@universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess'             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_searchValuedObjectForReadAccess) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                                                   const class GALGAS_lstring constinArgument0,
+                                                                                                                   class GALGAS_objectIR & outArgument1,
+                                                                                                                   class C_Compiler * inCompiler
+                                                                                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_searchValuedObjectForReadAccess (const int32_t inClassIndex,
+                                                           extensionSetterSignature_universalPropertyAndRoutineMapForContext_searchValuedObjectForReadAccess inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_searchValuedObjectForReadAccess (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                          const GALGAS_lstring constin_inValuedObjectName,
+                                                          GALGAS_objectIR & out_outObjectIR,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 #endif
