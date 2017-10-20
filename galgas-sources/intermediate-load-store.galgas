@@ -35,8 +35,6 @@ setter @instructionListIR appendStoreFromReference
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue literalString>>"
   case zero (*) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue zero>>"
-  case possibleFunction (* *) :
-    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue possibleFunction>>"
   case null :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue null>>"
   end
@@ -53,8 +51,6 @@ setter @instructionListIR appendLoadFromReference
   switch inSource
   case null :
     error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
-  case possibleFunction (* functionName) :
-    error functionName : "undeclared object" : outResultingValue
   case selfObject (*) :
     outResultingValue = inSource
 #--- References

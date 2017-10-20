@@ -425,8 +425,6 @@ proc handlePropertyAccessInExpression
        error identifier : "a global string constant is invalid here" : ioInternalRepresentation
     case zero (*) :
       error identifier : "«zero» invalid here" : ioInternalRepresentation
-    case possibleFunction (* *) :
-      error identifier : "«possibleFunction» invalid here" : ioInternalRepresentation
     end
   case structureMember (masterPropertyName currentPointer) :
     if [[currentPointer type] isStructure] then
