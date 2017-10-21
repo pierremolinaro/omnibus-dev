@@ -3723,12 +3723,10 @@ class cEnumAssociatedValues_possibleValuedObject_localConstant : public cEnumAss
 class cEnumAssociatedValues_possibleValuedObject_globalVariable : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_PLMType mAssociatedValue1 ;
-  public : const GALGAS_lstring mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_possibleValuedObject_globalVariable (const GALGAS_bool & inAssociatedValue0,
-                                                                      const GALGAS_PLMType & inAssociatedValue1,
-                                                                      const GALGAS_lstring & inAssociatedValue2
+                                                                      const GALGAS_PLMType & inAssociatedValue1
                                                                       COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

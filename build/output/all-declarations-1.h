@@ -1675,8 +1675,7 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
                                                                                 COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_possibleValuedObject constructor_globalVariable (const class GALGAS_bool & inOperand0,
-                                                                                const class GALGAS_PLMType & inOperand1,
-                                                                                const class GALGAS_lstring & inOperand2
+                                                                                const class GALGAS_PLMType & inOperand1
                                                                                 COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_possibleValuedObject constructor_localConstant (const class GALGAS_PLMType & inOperand0,
@@ -1723,7 +1722,6 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_globalVariable (class GALGAS_bool & outArgument0,
                                                         class GALGAS_PLMType & outArgument1,
-                                                        class GALGAS_lstring & outArgument2,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
