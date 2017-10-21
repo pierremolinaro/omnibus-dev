@@ -304,11 +304,35 @@ private proc analyzeGloabalVariableInLValue
     [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
     outInternalRepresentation = .indirectReference {!type:inVariableType !plmName:inVariableName !isGlobalVariable:true}
   else
+    var currentType = inVariableType
     [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
     outInternalRepresentation = .standAloneIdentifier {!identifier:inVariableName}
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :
+        if [currentType isStructure] then
+#          [currentType structure ?2* ?universalMap:let structureMap ?3*]
+#          var m = structureMap
+#          [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR propertyIR]
+#          let newObject = @objectIR.temporaryReference {
+#             !type:[propertyIR type]
+#             !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+#             !sliceMap:{}
+#             !volatile:false
+#          }
+#          ioTemporaries.mTemporaryIndex ++
+#          [!?ioInstructionGenerationList appendGetPropertyReference
+#            !newObject
+#            !currentPointer
+#            !propertyName
+#          ]
+#          ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:newObject}
+#          currentType = [propertyIR type]
+
+
+        else
+          error propertyName : "this should be a structure instance"
+        end
         handlePropertyAccessInExpression (
           !?outInternalRepresentation
           !propertyName
