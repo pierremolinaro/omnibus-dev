@@ -1,0 +1,47 @@
+
+setter @instructionListIR appendStoreToIndirectReference
+  ?let @string inVarName
+  ?let @PLMType inTargetVarType
+  ?let @objectIR inSourceValue
+  ?global:let @bool inIsGlobalVariable
+{
+  self += !@storeToIndirectReferenceIR.new {!inVarName !inTargetVarType !inSourceValue !inIsGlobalVariable}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @storeToIndirectReferenceIR : @abstractInstructionIR {
+  @string mVarName
+  @PLMType mTargetVarType
+  @objectIR mSourceValue
+  @bool mIsGlobalVariable
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @storeToIndirectReferenceIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mTargetVarType llvmTypeName]
+  let target = if mIsGlobalVariable 
+    then "@" + llvmNameForGlobalVariable (!mVarName)
+    else "%" + llvmNameForLocalVariable (!mVarName)
+  end
+  ioLLVMcode += "  store "
+  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * " +target + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @storeToIndirectReferenceIR enterAccessibleEntities 
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  if mIsGlobalVariable then
+    ioAccessibleEntities.mGlobalVariableSet += !mVarName
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
