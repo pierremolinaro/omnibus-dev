@@ -2994,6 +2994,76 @@ typeComparisonResult cEnumAssociatedValues_internalRepresentation_bitField::comp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference::cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                                                                const GALGAS_uint & inAssociatedValue1
+                                                                                                                                                COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference::description (C_String & ioString,
+                                                                                          const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference * ptr = dynamic_cast<const cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_internalRepresentation_volatileIndirectReference::cEnumAssociatedValues_internalRepresentation_volatileIndirectReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                                                                const GALGAS_string & inAssociatedValue1
+                                                                                                                                                COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_internalRepresentation_volatileIndirectReference::description (C_String & ioString,
+                                                                                          const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_internalRepresentation_volatileIndirectReference::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_internalRepresentation_volatileIndirectReference * ptr = dynamic_cast<const cEnumAssociatedValues_internalRepresentation_volatileIndirectReference *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_internalRepresentation::GALGAS_internalRepresentation (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
@@ -3040,6 +3110,38 @@ GALGAS_internalRepresentation GALGAS_internalRepresentation::constructor_bitFiel
     result.mEnum = kEnum_bitField ;
     cEnumAssociatedValues * ptr = NULL ;
     macroMyNew (ptr, cEnumAssociatedValues_internalRepresentation_bitField (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_internalRepresentation GALGAS_internalRepresentation::constructor_volatileAbsoluteReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                    const GALGAS_uint & inAssociatedValue1
+                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_internalRepresentation result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_volatileAbsoluteReference ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_internalRepresentation GALGAS_internalRepresentation::constructor_volatileIndirectReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                    const GALGAS_string & inAssociatedValue1
+                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_internalRepresentation result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_volatileIndirectReference ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_internalRepresentation_volatileIndirectReference (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -3102,11 +3204,51 @@ void GALGAS_internalRepresentation::method_bitField (GALGAS_sliceMap & outAssoci
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_internalRepresentation [4] = {
+void GALGAS_internalRepresentation::method_volatileAbsoluteReference (GALGAS_PLMType & outAssociatedValue0,
+                                                                      GALGAS_uint & outAssociatedValue1,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_volatileAbsoluteReference) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @internalRepresentation volatileAbsoluteReference invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference * ptr = (const cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_internalRepresentation::method_volatileIndirectReference (GALGAS_PLMType & outAssociatedValue0,
+                                                                      GALGAS_string & outAssociatedValue1,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_volatileIndirectReference) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @internalRepresentation volatileIndirectReference invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_internalRepresentation_volatileIndirectReference * ptr = (const cEnumAssociatedValues_internalRepresentation_volatileIndirectReference *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_internalRepresentation [6] = {
   "(not built)",
   "standAloneIdentifier",
   "structureMember",
-  "bitField"
+  "bitField",
+  "volatileAbsoluteReference",
+  "volatileIndirectReference"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3125,6 +3267,18 @@ GALGAS_bool GALGAS_internalRepresentation::getter_isStructureMember (UNUSED_LOCA
 
 GALGAS_bool GALGAS_internalRepresentation::getter_isBitField (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_bitField == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_internalRepresentation::getter_isVolatileAbsoluteReference (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_volatileAbsoluteReference == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_internalRepresentation::getter_isVolatileIndirectReference (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_volatileIndirectReference == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

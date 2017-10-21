@@ -131,6 +131,8 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-load-global-variable.galgas"
   "galgas-sources/intermediate-load-local-variable.galgas"
   "galgas-sources/intermediate-load-from-temporary-reference.galgas"
+  "galgas-sources/intermediate-compute-subscripted-volatile-register-address.galgas"
+  "galgas-sources/intermediate-store-indirect-volatile-register.galgas"
   "galgas-sources/intermediate-store-volatile-register.galgas"
   "galgas-sources/intermediate-store-global-variable.galgas"
   "galgas-sources/intermediate-store-local-variable.galgas"

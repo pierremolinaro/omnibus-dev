@@ -106,7 +106,11 @@ override method @varAssignmentNoSelfInstructionAST analyze
   case standAloneIdentifier (identifier) :
     [!?ioUniversalMap searchValuedObjectForWriteAccess !identifier ?let objectIR]
     [!?ioInstructionGenerationList appendStoreFromReference !objectIR !errorLocation !result]
-  case bitField (* @objectIR currentPointerIR) :
+  case volatileAbsoluteReference (@PLMType type @uint address) :
+    [!?ioInstructionGenerationList appendStoreVolatileRegister !type !address !result]
+  case volatileIndirectReference (@PLMType type @string llvmName) :
+    [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !type !llvmName !result]
+  case bitField (* currentPointerIR) :
     [!?ioInstructionGenerationList appendStoreFromReference !currentPointerIR !errorLocation !result]
   case structureMember (@lstring propertyName @objectIR currentPointerIR) :
     if [[currentPointerIR type] isStructure] then

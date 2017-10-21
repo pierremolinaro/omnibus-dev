@@ -1,32 +1,31 @@
 
-setter @instructionListIR appendComputeVolatileRegisterAddressWithSubscript
-  ?let @objectIR inTarget
-  ?let @objectIR inIndexResult
+setter @instructionListIR appendComputeSubscriptedVolatileRegisterAddress
+  ?let @string inLLVMResultVarName
+  ?let @objectIR inIndexIR
   ?let @bigint inAddress
-  ?let @bigint inElementArraySize
+  ?let @uint inElementSize
 {
-  self += !@ComputeRegisterAddressWithSubscriptIR.new {!inTarget !inIndexResult !inAddress !inElementArraySize}
+  self += !@computeSubscriptedVolatileRegisterAddress.new {!inLLVMResultVarName !inIndexIR !inAddress !inElementSize}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @ComputeRegisterAddressWithSubscriptIR : @abstractInstructionIR {
-  @objectIR mTarget
+class @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
+  @string mLLVMResultVarName
   @objectIR mIndexResult
-  @bigint mRegisterAddress
-  @bigint mElementArraySize
+  @bigint mRegisterBaseAddress
+  @uint mElementSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ComputeRegisterAddressWithSubscriptIR llvmInstructionCode
+override method @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let registerOffsetName = "%register.offset." + ioGenerationAdds.mUniqueIndex
   let registerIndexName = "%register.index." + ioGenerationAdds.mUniqueIndex
-  let scriptedRegisterAddressValueName = "%register.truc." + ioGenerationAdds.mUniqueIndex
+  let scriptedRegisterOffsetName = "%register.offset." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
 #--- Needs to perform an extend to i32 ?
   [[mIndexResult type] integer ?min:* ?max:* ?unsigned:* ?bitCount:let bitCount ?1*]
@@ -35,19 +34,16 @@ override method @ComputeRegisterAddressWithSubscriptIR llvmInstructionCode
                + " " + [mIndexResult llvmName] + " to i32 ; extend index to i32\n"
   end
 #--- Generation
-  ioLLVMcode += "  " + registerOffsetName + " = mul i32 "
+  ioLLVMcode += "  " + scriptedRegisterOffsetName + " = mul i32 "
              + if bitCount < 32 then registerIndexName else [mIndexResult llvmName] end
-             + ", " + mElementArraySize + " ; " + [mElementArraySize hexString] + "\n"
-  ioLLVMcode += "  " + scriptedRegisterAddressValueName + " = add i32 " + registerOffsetName
-             + ", " + mRegisterAddress + " ; " + [mRegisterAddress hexString] + "\n"
-  let llvmType = [[mTarget type] llvmTypeName]
-  ioLLVMcode += "  " + [mTarget llvmName] + " = inttoptr i32 " + scriptedRegisterAddressValueName
-             + " to " + llvmType + " *\n"
+             + ", " + mElementSize + " ; multiply index by size " + mElementSize + "\n"
+  ioLLVMcode += "  %" + mLLVMResultVarName + " = add i32 " + scriptedRegisterOffsetName
+             + ", " + mRegisterBaseAddress + " ; Adding base address " + [mRegisterBaseAddress hexString] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ComputeRegisterAddressWithSubscriptIR enterAccessibleEntities 
+override method @computeSubscriptedVolatileRegisterAddress enterAccessibleEntities 
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

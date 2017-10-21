@@ -106,6 +106,10 @@ override method @varAssignmentSelfInstructionAST analyze
   switch internalRepresentation
   case standAloneIdentifier (*) :
     error errorLocation : "invalid assignment target"
+  case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
+    error errorLocation : "temporaryReference 6"
+  case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
+    error errorLocation : "volatileIndirectReference 6"
   case bitField (* @objectIR currentPointerIR) :
     [!?ioInstructionGenerationList appendStoreFromReference !currentPointerIR !errorLocation !result]
   case structureMember (@lstring propertyName @objectIR currentPointerIR) :
