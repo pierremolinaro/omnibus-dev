@@ -58,6 +58,13 @@ struct @semanticTemporariesStruct {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+setter @semanticTemporariesStruct newTempLLVMVar !@string outTempLLVMVar {
+  outTempLLVMVar = "%temp." + mTemporaryIndex
+  mTemporaryIndex ++
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 proc semanticAnalysis
   ?sourceFile:let @string inSourceFile
   ?ast:let @ast inAST

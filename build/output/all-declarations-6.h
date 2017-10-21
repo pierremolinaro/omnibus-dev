@@ -1555,25 +1555,26 @@ void routine_analyzeControlRegisterInLValue (const class GALGAS_PLMType constinA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'analyzeGloabalVariableInLValue'                                       *
+//                                          Routine 'analyzeVariableInLValue'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_analyzeGloabalVariableInLValue (const class GALGAS_PLMType constinArgument0,
-                                             const class GALGAS_lstring constinArgument1,
-                                             const class GALGAS_semanticContext constinArgument2,
-                                             const class GALGAS_mode constinArgument3,
-                                             class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                             class GALGAS_staticStringMap & ioArgument5,
-                                             class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument6,
-                                             class GALGAS_allocaList & ioArgument7,
-                                             class GALGAS_instructionListIR & ioArgument8,
-                                             const class GALGAS_lstring constinArgument9,
-                                             const class GALGAS_PLMType constinArgument10,
-                                             const class GALGAS_accessInAssignmentListAST constinArgument11,
-                                             class GALGAS_internalRepresentation & outArgument12,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument0,
+                                      const class GALGAS_lstring constinArgument1,
+                                      const class GALGAS_semanticContext constinArgument2,
+                                      const class GALGAS_mode constinArgument3,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                      class GALGAS_staticStringMap & ioArgument5,
+                                      class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument6,
+                                      class GALGAS_allocaList & ioArgument7,
+                                      class GALGAS_instructionListIR & ioArgument8,
+                                      const class GALGAS_lstring constinArgument9,
+                                      const class GALGAS_string constinArgument10,
+                                      const class GALGAS_PLMType constinArgument11,
+                                      const class GALGAS_accessInAssignmentListAST constinArgument12,
+                                      class GALGAS_internalRepresentation & outArgument13,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

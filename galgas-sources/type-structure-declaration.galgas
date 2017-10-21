@@ -215,6 +215,8 @@ list @propertyList {
 map @propertyMap {
   @bool mIsPublic
   @objectIR mPropertyObject
+  @PLMType mType
+  @propertyAccessKind mAccess
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"
 }
@@ -436,6 +438,8 @@ method @structurePropertyListAST-element enterInContext
         !mPropertyName
         !mIsPublic
         !.property {!type:actualPropertyType !plmName:mPropertyName !access:constantProperty}
+        !actualPropertyType
+        !constantProperty
       ]
       [!?universalPropertyAndRoutineMapForContext insertProperty
         !mPropertyName
@@ -452,6 +456,8 @@ method @structurePropertyListAST-element enterInContext
         !mPropertyName
         !mIsPublic
         !.property {!type:actualPropertyType !plmName:mPropertyName !access:indexedProperty}
+        !actualPropertyType
+        !indexedProperty
       ]
       [!?universalPropertyAndRoutineMapForContext insertProperty
         !mPropertyName
@@ -472,6 +478,8 @@ method @structurePropertyListAST-element enterInContext
       !mPropertyName
       !mIsPublic
       !.property {!type:optionalPropertyType !plmName:mPropertyName !access:.indexed{!index:propertyIndex}}
+      !optionalPropertyType
+      !.indexed{!index:propertyIndex}
     ]
     [!?universalPropertyAndRoutineMapForContext insertProperty
       !mPropertyName
@@ -612,7 +620,7 @@ proc generatePropertyAccess
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   [inType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
-  for (propertyName * objectIR) in propertyMap do
+  for (propertyName * objectIR * *) in propertyMap do
     [objectIR property ?type:let propertyType ?plmName:* ?access:let access]
     ioIntermediateCodeStruct.mPropertyAccessRoutineList += 
       !inType

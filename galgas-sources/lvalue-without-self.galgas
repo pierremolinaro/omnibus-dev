@@ -154,7 +154,8 @@ method @LValueWithoutSelfAST analyzeLValueNoSelf
     if not writable then
       error mIdentifier : "a global variable cannot be written in this context" : outInternalRepresentation
     else
-      analyzeGloabalVariableInLValue (
+      [!?ioInstructionGenerationList appendNoteGlobalVariableAccess !mIdentifier]
+      analyzeVariableInLValue (
         !self: inSelfType
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !context: inContext
@@ -165,48 +166,29 @@ method @LValueWithoutSelfAST analyzeLValueNoSelf
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
         !variableName: mIdentifier
-        !registerType: variableType
+        !llvmName:llvmNameForGlobalVariable (!mIdentifier)
+        !type: variableType
         !accessList: mAccessList
         ?outInternalRepresentation
       )
     end
-  case localVariable (@PLMType unused type @lstring unused plmName) :
-    outInternalRepresentation = .standAloneIdentifier {!identifier:mIdentifier}
-    for (access) in mAccessList do
-      switch access
-      case property (@lstring propertyName) :
-        handlePropertyAccessInExpression (
-          !?outInternalRepresentation
-          !propertyName
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-          !optionalTargetType:.void
-          !context:inContext
-          !mode:inCurrentMode
-          !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
-          !?variableMap:ioUniversalMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:ioInstructionGenerationList
-        )
-      case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-        handleArrayAccessInExpression (
-          !?outInternalRepresentation
-          !indexExpression
-          !endOfIndex
-          !self:inSelfType
-          !inGuard:false
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-          !optionalTargetType:.void
-          !context:inContext
-          !mode:inCurrentMode
-          !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
-          !?variableMap:ioUniversalMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:ioInstructionGenerationList
-        )
-      end
-    end
+  case localVariable (@PLMType variableType @lstring plmName) :
+    analyzeVariableInLValue (
+      !self: inSelfType
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !variableName: mIdentifier
+      !llvmName:llvmNameForLocalVariable (!plmName)
+      !type: variableType
+      !accessList: mAccessList
+      ?outInternalRepresentation
+    )
   end
 }
 
@@ -267,8 +249,7 @@ private proc analyzeControlRegisterInLValue
         let addr = inRegisterAddress + idx * inElementSize
         outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:addr}      
      else
-       let llvmName = "reg.addr." + ioTemporaries.mTemporaryIndex
-       ioTemporaries.mTemporaryIndex ++
+       [!?ioTemporaries newTempLLVMVar ?let llvmName]
        [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
          !llvmName
          !indexIR
@@ -285,7 +266,7 @@ private proc analyzeControlRegisterInLValue
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc analyzeGloabalVariableInLValue
+private proc analyzeVariableInLValue
   ?self:let @PLMType inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -296,77 +277,79 @@ private proc analyzeGloabalVariableInLValue
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableName:let @lstring inVariableName
-  ?registerType:let @PLMType inVariableType
+  ?llvmName:let @string inLLVMName
+  ?type:let @PLMType inVariableType
   ?accessList:let @accessInAssignmentListAST inAccessList
   !@internalRepresentation outInternalRepresentation
 {
-  [!?ioInstructionGenerationList appendNoteGlobalVariableAccess !inVariableName]
+  var currentType = inVariableType
+  var currentLLVMName = inLLVMName
   if [inAccessList length] == 0 then
     [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
-    outInternalRepresentation = .universalReference {!type:inVariableType !llvmName:llvmNameForGlobalVariable (!inVariableName)}
   else
-    var currentType = inVariableType
     [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
-    outInternalRepresentation = .standAloneIdentifier {!identifier:inVariableName}
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :
         if [currentType isStructure] then
-#          [currentType structure ?2* ?universalMap:let structureMap ?3*]
-#          var m = structureMap
-#          [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR propertyIR]
-#          let newObject = @objectIR.temporaryReference {
-#             !type:[propertyIR type]
-#             !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-#             !sliceMap:{}
-#             !volatile:false
-#          }
-#          ioTemporaries.mTemporaryIndex ++
-#          [!?ioInstructionGenerationList appendGetPropertyReference
-#            !newObject
-#            !currentPointer
-#            !propertyName
-#          ]
-#          ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:newObject}
-#          currentType = [propertyIR type]
-
-
+          [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+          [propertyMap searchKey !propertyName ?2* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
+          switch propertyAccess
+          case constant (*) :
+            error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
+          case indexed (@uint index) :
+            [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+            [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+              !currentType
+              !currentLLVMName
+              !propertyType
+              !newLLVMvariable
+              !index
+              !propertyName
+            ]
+            currentType = propertyType
+            currentLLVMName = newLLVMvariable
+          end
         else
           error propertyName : "this should be a structure instance"
         end
-        handlePropertyAccessInExpression (
-          !?outInternalRepresentation
-          !propertyName
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-          !optionalTargetType:.void
-          !context:inContext
-          !mode:inCurrentMode
-          !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
-          !?variableMap:ioUniversalMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:ioInstructionGenerationList
-        )
       case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-        handleArrayAccessInExpression (
-          !?outInternalRepresentation
-          !indexExpression
-          !endOfIndex
-          !self:inSelfType
-          !inGuard:false
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-          !optionalTargetType:.void
-          !context:inContext
-          !mode:inCurrentMode
-          !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
-          !?variableMap:ioUniversalMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:ioInstructionGenerationList
-        )
+        if [currentType isArrayType] then
+          [currentType arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
+          handleArraySubscriptNew (
+            !self: inSelfType
+            !inGuard: false
+            !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+            !context: inContext
+            !mode: inCurrentMode
+            !?temporary: ioTemporaries
+            !?staticStringMap: ioGlobalLiteralStringMap
+            !?variableMap:ioUniversalMap
+            !?alloca: ioAllocaList
+            !indexExpression 
+            !endOfIndex
+            !arraySize:arraySize
+            !elementType:elementType
+            !?ioInstructionGenerationList
+            ?let @objectIR indexIR
+         )
+         [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+         [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
+           !currentType
+           !currentLLVMName
+           !elementType
+           !newLLVMvariable
+           !indexIR
+         ]
+         currentType = elementType
+         currentLLVMName = newLLVMvariable
+        else
+          error endOfIndex : "cannot subscript, not an array" : currentType, currentLLVMName
+        end
       end
     end
   end
+  outInternalRepresentation = .universalReference {!type:currentType !llvmName:currentLLVMName}
  }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1,0 +1,45 @@
+
+setter @instructionListIR appendGetUniversalPropertyReference
+  ?let @PLMType inType
+  ?let @string inLLVMName
+  ?let @PLMType inElementType
+  ?let @string inElementLLVMName
+  ?let @uint inPropertyIndex
+  ?let @string inPropertyName
+{
+  self += !@getUniversalPropertyReferenceIR.new {!inType !inLLVMName !inElementType !inElementLLVMName !inPropertyIndex !inPropertyName}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @getUniversalPropertyReferenceIR : @abstractInstructionIR {
+  @PLMType mType
+  @string mLLVMName
+  @PLMType mElementType
+  @string mElementLLVMName
+  @uint mPropertyIndex
+  @string mPropertyName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @getUniversalPropertyReferenceIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mType llvmTypeName]
+  ioLLVMcode += "  " + mElementLLVMName + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + mLLVMName + ", i32 0, i32 " + mPropertyIndex
+  ioLLVMcode += " ; " + mPropertyName + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @getUniversalPropertyReferenceIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
