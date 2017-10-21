@@ -303,7 +303,7 @@ private proc analyzeGloabalVariableInLValue
   [!?ioInstructionGenerationList appendNoteGlobalVariableAccess !inVariableName]
   if [inAccessList length] == 0 then
     [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
-    outInternalRepresentation = .indirectReference {!type:inVariableType !plmName:inVariableName !isGlobalVariable:true}
+    outInternalRepresentation = .universalReference {!type:inVariableType !llvmName:llvmNameForGlobalVariable (!inVariableName)}
   else
     var currentType = inVariableType
     [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
