@@ -220,7 +220,7 @@ enum @internalRepresentation {
   case bitField (@sliceMap sliceMap @objectIR valueIR)
   case volatileAbsoluteReference (@PLMType type @uint address)
   case volatileIndirectReference (@PLMType type @string llvmName)
-  case indirectReference (@PLMType type @string plmName @bool isGlobalVariable)
+  case universalReference (@PLMType type @string llvmName)
 }
 
 #·······················································································································
@@ -385,7 +385,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     error mObjectName : "temporaryReference 1" : outResult
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error mObjectName : "volatileIndirectReference 1": outResult
-  case indirectReference (@PLMType unused type @string unused llvmName @bool unused isGlobalVariable) :
+  case universalReference (@PLMType unused type @string unused llvmName) :
     error mObjectName : "indirectReference 1": outResult
   end
 }
@@ -494,7 +494,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
     error mObjectName : "temporaryReference 2" : outResult
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error mObjectName : "volatileIndirectReference 2": outResult
-  case indirectReference (@PLMType unused type @string unused llvmName @bool unused isGlobalVariable) :
+  case universalReference (@PLMType unused type @string unused llvmName) :
     error mObjectName : "indirectReference 2": outResult
   end
 }
@@ -634,7 +634,7 @@ proc handlePropertyAccessInExpression
     error inPropertyName : "temporaryReference 3" : ioInternalRepresentation
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inPropertyName : "volatileIndirectReference 3": ioInternalRepresentation
-  case indirectReference (@PLMType unused type @string unused llvmName @bool unused isGlobalVariable) :
+  case universalReference (@PLMType unused type @string unused llvmName) :
     error inPropertyName : "indirectReference 3": ioInternalRepresentation
   end
 }
@@ -688,7 +688,7 @@ proc handleArrayAccessInExpression
     error inEndOfIndex : "temporaryReference 4" : variableIR, errorLocation
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inEndOfIndex : "volatileIndirectReference 4": variableIR, errorLocation
-  case indirectReference (@PLMType unused type @string unused llvmName @bool unused isGlobalVariable) :
+  case universalReference (@PLMType unused type @string unused llvmName) :
     error inEndOfIndex : "indirectReference 4": variableIR, errorLocation
   case bitField (@sliceMap unused sliceMap valueIR) :
     error [valueIR location] : "this object is not an array" : variableIR, errorLocation
@@ -768,7 +768,7 @@ proc handleFunctionCallInExpressionNew
     error inErrorLocation : "temporaryReference 5"
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inErrorLocation : "volatileIndirectReference 5"
-  case indirectReference (@PLMType unused type @string unused llvmName @bool unused isGlobalVariable) :
+  case universalReference (@PLMType unused type @string unused llvmName) :
     error inErrorLocation : "indirectReference 5"
   case standAloneIdentifier (@lstring identifier) : # This a call idf (....)
     handleStandAloneFunctionCallInExpression (

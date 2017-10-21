@@ -1,41 +1,34 @@
 
-setter @instructionListIR appendStoreToIndirectReference
-  ?let @string inVarName
+setter @instructionListIR appendStoreToUniversalReference
+  ?let @string inLLVMVarName
   ?let @PLMType inTargetVarType
   ?let @objectIR inSourceValue
-  ?global:let @bool inIsGlobalVariable
 {
-  self += !@storeToIndirectReferenceIR.new {!inVarName !inTargetVarType !inSourceValue !inIsGlobalVariable}
+  self += !@storeToUniversalReferenceIR.new {!inLLVMVarName !inTargetVarType !inSourceValue}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeToIndirectReferenceIR : @abstractInstructionIR {
-  @string mVarName
+class @storeToUniversalReferenceIR : @abstractInstructionIR {
+  @string mLLVMVarName
   @PLMType mTargetVarType
   @objectIR mSourceValue
-  @bool mIsGlobalVariable
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeToIndirectReferenceIR llvmInstructionCode
+override method @storeToUniversalReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
-  let target = if mIsGlobalVariable 
-    then llvmNameForGlobalVariable (!mVarName)
-    else llvmNameForLocalVariable (!mVarName)
-  end
-  ioLLVMcode += "  store "
-  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * " +target + "\n"
+  ioLLVMcode += "  store " +  llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * " + mLLVMVarName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeToIndirectReferenceIR enterAccessibleEntities 
+override method @storeToUniversalReferenceIR enterAccessibleEntities 
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

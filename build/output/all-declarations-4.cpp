@@ -10085,18 +10085,17 @@ GALGAS_noteGlobalVariableAccessIR GALGAS_noteGlobalVariableAccessIR::extractObje
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Extension method '@instructionListIR appendStoreToIndirectReference'                         *
+//                        Extension method '@instructionListIR appendStoreToUniversalReference'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendStoreToIndirectReference (GALGAS_instructionListIR & ioObject,
-                                                     const GALGAS_string constinArgument_inVarName,
-                                                     const GALGAS_PLMType constinArgument_inTargetVarType,
-                                                     const GALGAS_objectIR constinArgument_inSourceValue,
-                                                     const GALGAS_bool constinArgument_inIsGlobalVariable,
-                                                     C_Compiler * /* inCompiler */
-                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_storeToIndirectReferenceIR::constructor_new (constinArgument_inVarName, constinArgument_inTargetVarType, constinArgument_inSourceValue, constinArgument_inIsGlobalVariable  COMMA_SOURCE_FILE ("intermediate-store.galgas", 8))  COMMA_SOURCE_FILE ("intermediate-store.galgas", 8)) ;
+void extensionSetter_appendStoreToUniversalReference (GALGAS_instructionListIR & ioObject,
+                                                      const GALGAS_string constinArgument_inLLVMVarName,
+                                                      const GALGAS_PLMType constinArgument_inTargetVarType,
+                                                      const GALGAS_objectIR constinArgument_inSourceValue,
+                                                      C_Compiler * /* inCompiler */
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_storeToUniversalReferenceIR::constructor_new (constinArgument_inLLVMVarName, constinArgument_inTargetVarType, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-to-universal-reference.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-store-to-universal-reference.galgas", 7)) ;
 }
 
 
@@ -10104,12 +10103,12 @@ void extensionSetter_appendStoreToIndirectReference (GALGAS_instructionListIR & 
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_storeToIndirectReferenceIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+typeComparisonResult cPtr_storeToUniversalReferenceIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
-  const cPtr_storeToIndirectReferenceIR * p = (const cPtr_storeToIndirectReferenceIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_storeToIndirectReferenceIR) ;
+  const cPtr_storeToUniversalReferenceIR * p = (const cPtr_storeToUniversalReferenceIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_storeToUniversalReferenceIR) ;
   if (kOperandEqual == result) {
-    result = mProperty_mVarName.objectCompare (p->mProperty_mVarName) ;
+    result = mProperty_mLLVMVarName.objectCompare (p->mProperty_mLLVMVarName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mTargetVarType.objectCompare (p->mProperty_mTargetVarType) ;
@@ -10117,16 +10116,13 @@ typeComparisonResult cPtr_storeToIndirectReferenceIR::dynamicObjectCompare (cons
   if (kOperandEqual == result) {
     result = mProperty_mSourceValue.objectCompare (p->mProperty_mSourceValue) ;
   }
-  if (kOperandEqual == result) {
-    result = mProperty_mIsGlobalVariable.objectCompare (p->mProperty_mIsGlobalVariable) ;
-  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 
-typeComparisonResult GALGAS_storeToIndirectReferenceIR::objectCompare (const GALGAS_storeToIndirectReferenceIR & inOperand) const {
+typeComparisonResult GALGAS_storeToUniversalReferenceIR::objectCompare (const GALGAS_storeToUniversalReferenceIR & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -10144,56 +10140,55 @@ typeComparisonResult GALGAS_storeToIndirectReferenceIR::objectCompare (const GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_storeToIndirectReferenceIR::GALGAS_storeToIndirectReferenceIR (void) :
+GALGAS_storeToUniversalReferenceIR::GALGAS_storeToUniversalReferenceIR (void) :
 GALGAS_abstractInstructionIR () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_storeToIndirectReferenceIR::GALGAS_storeToIndirectReferenceIR (const cPtr_storeToIndirectReferenceIR * inSourcePtr) :
+GALGAS_storeToUniversalReferenceIR::GALGAS_storeToUniversalReferenceIR (const cPtr_storeToUniversalReferenceIR * inSourcePtr) :
 GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_storeToIndirectReferenceIR) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_storeToUniversalReferenceIR) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_storeToIndirectReferenceIR GALGAS_storeToIndirectReferenceIR::constructor_new (const GALGAS_string & inAttribute_mVarName,
-                                                                                      const GALGAS_PLMType & inAttribute_mTargetVarType,
-                                                                                      const GALGAS_objectIR & inAttribute_mSourceValue,
-                                                                                      const GALGAS_bool & inAttribute_mIsGlobalVariable
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_storeToIndirectReferenceIR result ;
-  if (inAttribute_mVarName.isValid () && inAttribute_mTargetVarType.isValid () && inAttribute_mSourceValue.isValid () && inAttribute_mIsGlobalVariable.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_storeToIndirectReferenceIR (inAttribute_mVarName, inAttribute_mTargetVarType, inAttribute_mSourceValue, inAttribute_mIsGlobalVariable COMMA_THERE)) ;
+GALGAS_storeToUniversalReferenceIR GALGAS_storeToUniversalReferenceIR::constructor_new (const GALGAS_string & inAttribute_mLLVMVarName,
+                                                                                        const GALGAS_PLMType & inAttribute_mTargetVarType,
+                                                                                        const GALGAS_objectIR & inAttribute_mSourceValue
+                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_storeToUniversalReferenceIR result ;
+  if (inAttribute_mLLVMVarName.isValid () && inAttribute_mTargetVarType.isValid () && inAttribute_mSourceValue.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_storeToUniversalReferenceIR (inAttribute_mLLVMVarName, inAttribute_mTargetVarType, inAttribute_mSourceValue COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_storeToIndirectReferenceIR::getter_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_storeToUniversalReferenceIR::getter_mLLVMVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
-    const cPtr_storeToIndirectReferenceIR * p = (const cPtr_storeToIndirectReferenceIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeToIndirectReferenceIR) ;
-    result = p->mProperty_mVarName ;
+    const cPtr_storeToUniversalReferenceIR * p = (const cPtr_storeToUniversalReferenceIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_storeToUniversalReferenceIR) ;
+    result = p->mProperty_mLLVMVarName ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_storeToIndirectReferenceIR::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mVarName ;
+GALGAS_string cPtr_storeToUniversalReferenceIR::getter_mLLVMVarName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLLVMVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_PLMType GALGAS_storeToIndirectReferenceIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+GALGAS_PLMType GALGAS_storeToUniversalReferenceIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
   GALGAS_PLMType result ;
   if (NULL != mObjectPtr) {
-    const cPtr_storeToIndirectReferenceIR * p = (const cPtr_storeToIndirectReferenceIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeToIndirectReferenceIR) ;
+    const cPtr_storeToUniversalReferenceIR * p = (const cPtr_storeToUniversalReferenceIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_storeToUniversalReferenceIR) ;
     result = p->mProperty_mTargetVarType ;
   }
   return result ;
@@ -10201,17 +10196,17 @@ GALGAS_PLMType GALGAS_storeToIndirectReferenceIR::getter_mTargetVarType (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_PLMType cPtr_storeToIndirectReferenceIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+GALGAS_PLMType cPtr_storeToUniversalReferenceIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
   return mProperty_mTargetVarType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_storeToIndirectReferenceIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR GALGAS_storeToUniversalReferenceIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR result ;
   if (NULL != mObjectPtr) {
-    const cPtr_storeToIndirectReferenceIR * p = (const cPtr_storeToIndirectReferenceIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeToIndirectReferenceIR) ;
+    const cPtr_storeToUniversalReferenceIR * p = (const cPtr_storeToUniversalReferenceIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_storeToUniversalReferenceIR) ;
     result = p->mProperty_mSourceValue ;
   }
   return result ;
@@ -10219,110 +10214,88 @@ GALGAS_objectIR GALGAS_storeToIndirectReferenceIR::getter_mSourceValue (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR cPtr_storeToIndirectReferenceIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR cPtr_storeToUniversalReferenceIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   return mProperty_mSourceValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_storeToIndirectReferenceIR::getter_mIsGlobalVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_storeToIndirectReferenceIR * p = (const cPtr_storeToIndirectReferenceIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeToIndirectReferenceIR) ;
-    result = p->mProperty_mIsGlobalVariable ;
-  }
-  return result ;
-}
-
+//                                Pointer class for @storeToUniversalReferenceIR class                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cPtr_storeToIndirectReferenceIR::getter_mIsGlobalVariable (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIsGlobalVariable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                 Pointer class for @storeToIndirectReferenceIR class                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_storeToIndirectReferenceIR::cPtr_storeToIndirectReferenceIR (const GALGAS_string & in_mVarName,
-                                                                  const GALGAS_PLMType & in_mTargetVarType,
-                                                                  const GALGAS_objectIR & in_mSourceValue,
-                                                                  const GALGAS_bool & in_mIsGlobalVariable
-                                                                  COMMA_LOCATION_ARGS) :
+cPtr_storeToUniversalReferenceIR::cPtr_storeToUniversalReferenceIR (const GALGAS_string & in_mLLVMVarName,
+                                                                    const GALGAS_PLMType & in_mTargetVarType,
+                                                                    const GALGAS_objectIR & in_mSourceValue
+                                                                    COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mProperty_mVarName (in_mVarName),
+mProperty_mLLVMVarName (in_mLLVMVarName),
 mProperty_mTargetVarType (in_mTargetVarType),
-mProperty_mSourceValue (in_mSourceValue),
-mProperty_mIsGlobalVariable (in_mIsGlobalVariable) {
+mProperty_mSourceValue (in_mSourceValue) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * cPtr_storeToIndirectReferenceIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_storeToIndirectReferenceIR ;
+const C_galgas_type_descriptor * cPtr_storeToUniversalReferenceIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_storeToUniversalReferenceIR ;
 }
 
-void cPtr_storeToIndirectReferenceIR::description (C_String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString << "[@storeToIndirectReferenceIR:" ;
-  mProperty_mVarName.description (ioString, inIndentation+1) ;
+void cPtr_storeToUniversalReferenceIR::description (C_String & ioString,
+                                                    const int32_t inIndentation) const {
+  ioString << "[@storeToUniversalReferenceIR:" ;
+  mProperty_mLLVMVarName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mTargetVarType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mSourceValue.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mIsGlobalVariable.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-acPtr_class * cPtr_storeToIndirectReferenceIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_storeToUniversalReferenceIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_storeToIndirectReferenceIR (mProperty_mVarName, mProperty_mTargetVarType, mProperty_mSourceValue, mProperty_mIsGlobalVariable COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_storeToUniversalReferenceIR (mProperty_mLLVMVarName, mProperty_mTargetVarType, mProperty_mSourceValue COMMA_THERE)) ;
   return ptr ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          @storeToIndirectReferenceIR type                                           *
+//                                          @storeToUniversalReferenceIR type                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_storeToIndirectReferenceIR ("storeToIndirectReferenceIR",
-                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+kTypeDescriptor_GALGAS_storeToUniversalReferenceIR ("storeToUniversalReferenceIR",
+                                                    & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_storeToIndirectReferenceIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_storeToIndirectReferenceIR ;
+const C_galgas_type_descriptor * GALGAS_storeToUniversalReferenceIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_storeToUniversalReferenceIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_storeToIndirectReferenceIR::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_storeToUniversalReferenceIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_storeToIndirectReferenceIR (*this)) ;
+    macroMyNew (result, GALGAS_storeToUniversalReferenceIR (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_storeToIndirectReferenceIR GALGAS_storeToIndirectReferenceIR::extractObject (const GALGAS_object & inObject,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_storeToIndirectReferenceIR result ;
-  const GALGAS_storeToIndirectReferenceIR * p = (const GALGAS_storeToIndirectReferenceIR *) inObject.embeddedObject () ;
+GALGAS_storeToUniversalReferenceIR GALGAS_storeToUniversalReferenceIR::extractObject (const GALGAS_object & inObject,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_storeToUniversalReferenceIR result ;
+  const GALGAS_storeToUniversalReferenceIR * p = (const GALGAS_storeToUniversalReferenceIR *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_storeToIndirectReferenceIR *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_storeToUniversalReferenceIR *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("storeToIndirectReferenceIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("storeToUniversalReferenceIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

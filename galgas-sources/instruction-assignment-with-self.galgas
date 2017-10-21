@@ -110,7 +110,7 @@ override method @varAssignmentSelfInstructionAST analyze
     error errorLocation : "temporaryReference 6"
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error errorLocation : "volatileIndirectReference 6"
-  case indirectReference (@PLMType unused type @string unused llvmName @bool unused isGlobalVariable) :
+  case universalReference (@PLMType unused type @string unused llvmName) :
     error errorLocation : "indirectReference 6"
   case bitField (* @objectIR currentPointerIR) :
     [!?ioInstructionGenerationList appendStoreFromReference !currentPointerIR !errorLocation !result]
