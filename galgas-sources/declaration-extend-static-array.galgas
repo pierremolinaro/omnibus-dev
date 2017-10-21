@@ -306,7 +306,7 @@ method @staticlistValues_listMap generateLLVM ?let @staticArrayMap inUsefulStati
         first = false
         ioLLVMcode += llvmTitleComment (!"Static Arraies")
       end
-      ioLLVMcode += "@" + llvmNameForGlobalVariable (!key) + " = private unnamed_addr constant ["
+      ioLLVMcode += llvmNameForGlobalVariable (!key) + " = private unnamed_addr constant ["
       ioLLVMcode += [[initList length] string] + " x %$" + llvmNameForStaticListElementType (![key nowhere]) + "] [\n"
       for (value) in initList
       do

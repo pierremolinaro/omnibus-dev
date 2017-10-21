@@ -416,7 +416,7 @@ method @globalVarDeclarationList-element semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVariableMapIR-element generateLLVM ?!@string ioLLVMcode {
-  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal global "
+  ioLLVMcode += llvmNameForGlobalVariable (!lkey.string) + " = internal global "
   ioLLVMcode += [mType llvmTypeName] + " "
   let initialString = [mInitialValue llvmName]
   if initialString == "" then

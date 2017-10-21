@@ -2863,7 +2863,6 @@ class cPtr_loadRegisterIR : public cPtr_abstractInstructionIR {
 void extensionSetter_appendLoadGlobalVariable (class GALGAS_instructionListIR & ioObject,
                                                const class GALGAS_objectIR constin_inTargetValue,
                                                const class GALGAS_string constin_inRegisterName,
-                                               class GALGAS_bool in_inIsVolatile,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
@@ -2895,8 +2894,7 @@ class GALGAS_loadGlobalVariableIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_loadGlobalVariableIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                     const class GALGAS_string & inOperand1,
-                                                                     const class GALGAS_bool & inOperand2
+                                                                     const class GALGAS_string & inOperand1
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2908,8 +2906,6 @@ class GALGAS_loadGlobalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsVolatile (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mVariableName (LOCATION_ARGS) const ;
@@ -2935,12 +2931,10 @@ class cPtr_loadGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectIR mProperty_mTargetValue ;
   public : GALGAS_string mProperty_mVariableName ;
-  public : GALGAS_bool mProperty_mIsVolatile ;
 
 //--- Constructor
   public : cPtr_loadGlobalVariableIR (const GALGAS_objectIR & in_mTargetValue,
-                                      const GALGAS_string & in_mVariableName,
-                                      const GALGAS_bool & in_mIsVolatile
+                                      const GALGAS_string & in_mVariableName
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -2949,7 +2943,6 @@ class cPtr_loadGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVariableName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsVolatile (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3275,6 +3268,101 @@ class cPtr_computeSubscriptedVolatileRegisterAddress : public cPtr_abstractInstr
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterBaseAddress (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mElementSize (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Extension setter '@instructionListIR appendNoteGlobalVariableAccess'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendNoteGlobalVariableAccess (class GALGAS_instructionListIR & ioObject,
+                                                     const class GALGAS_string constin_inGlobalVarName,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @noteGlobalVariableAccessIR class                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_noteGlobalVariableAccessIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_noteGlobalVariableAccessIR (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_noteGlobalVariableAccessIR constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_noteGlobalVariableAccessIR * ptr (void) const { return (const cPtr_noteGlobalVariableAccessIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_noteGlobalVariableAccessIR (const cPtr_noteGlobalVariableAccessIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_noteGlobalVariableAccessIR extractObject (const GALGAS_object & inObject,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_noteGlobalVariableAccessIR constructor_new (const class GALGAS_string & inOperand0
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_noteGlobalVariableAccessIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVarName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_noteGlobalVariableAccessIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_noteGlobalVariableAccessIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Pointer class for @noteGlobalVariableAccessIR class                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_noteGlobalVariableAccessIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_string mProperty_mGlobalVarName ;
+
+//--- Constructor
+  public : cPtr_noteGlobalVariableAccessIR (const GALGAS_string & in_mGlobalVarName
+                                            COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mGlobalVarName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3620,7 +3708,6 @@ void extensionSetter_appendStoreGlobalVariable (class GALGAS_instructionListIR &
                                                 const class GALGAS_string constin_inGlobalVarName,
                                                 const class GALGAS_PLMType constin_inTargetVarType,
                                                 const class GALGAS_objectIR constin_inSourceValue,
-                                                const class GALGAS_bool constin_inIsVolatile,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
@@ -3653,8 +3740,7 @@ class GALGAS_storeGlobalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_storeGlobalVariableIR constructor_new (const class GALGAS_string & inOperand0,
                                                                       const class GALGAS_PLMType & inOperand1,
-                                                                      const class GALGAS_objectIR & inOperand2,
-                                                                      const class GALGAS_bool & inOperand3
+                                                                      const class GALGAS_objectIR & inOperand2
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3667,8 +3753,6 @@ class GALGAS_storeGlobalVariableIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVarName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsVolatile (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
@@ -3696,13 +3780,11 @@ class cPtr_storeGlobalVariableIR : public cPtr_abstractInstructionIR {
   public : GALGAS_string mProperty_mGlobalVarName ;
   public : GALGAS_PLMType mProperty_mTargetVarType ;
   public : GALGAS_objectIR mProperty_mSourceValue ;
-  public : GALGAS_bool mProperty_mIsVolatile ;
 
 //--- Constructor
   public : cPtr_storeGlobalVariableIR (const GALGAS_string & in_mGlobalVarName,
                                        const GALGAS_PLMType & in_mTargetVarType,
-                                       const GALGAS_objectIR & in_mSourceValue,
-                                       const GALGAS_bool & in_mIsVolatile
+                                       const GALGAS_objectIR & in_mSourceValue
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -3712,7 +3794,6 @@ class cPtr_storeGlobalVariableIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mGlobalVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsVolatile (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

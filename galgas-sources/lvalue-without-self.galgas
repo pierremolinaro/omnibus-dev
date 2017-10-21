@@ -300,6 +300,7 @@ private proc analyzeGloabalVariableInLValue
   ?accessList:let @accessInAssignmentListAST inAccessList
   !@internalRepresentation outInternalRepresentation
 {
+  [!?ioInstructionGenerationList appendNoteGlobalVariableAccess !inVariableName]
   if [inAccessList length] == 0 then
     [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
     outInternalRepresentation = .indirectReference {!type:inVariableType !plmName:inVariableName !isGlobalVariable:true}
