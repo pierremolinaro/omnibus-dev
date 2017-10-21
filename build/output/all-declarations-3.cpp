@@ -14132,11 +14132,10 @@ typeComparisonResult cEnumAssociatedValues_possibleValuedObject_module::compare 
 cEnumAssociatedValues_possibleValuedObject_register::cEnumAssociatedValues_possibleValuedObject_register (const GALGAS_bool & inAssociatedValue0,
                                                                                                           const GALGAS_bool & inAssociatedValue1,
                                                                                                           const GALGAS_PLMType & inAssociatedValue2,
-                                                                                                          const GALGAS_lstring & inAssociatedValue3,
-                                                                                                          const GALGAS_bigint & inAssociatedValue4,
-                                                                                                          const GALGAS_sliceMap & inAssociatedValue5,
-                                                                                                          const GALGAS_uint & inAssociatedValue6,
-                                                                                                          const GALGAS_uint & inAssociatedValue7
+                                                                                                          const GALGAS_bigint & inAssociatedValue3,
+                                                                                                          const GALGAS_sliceMap & inAssociatedValue4,
+                                                                                                          const GALGAS_uint & inAssociatedValue5,
+                                                                                                          const GALGAS_uint & inAssociatedValue6
                                                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -14145,8 +14144,7 @@ mAssociatedValue2 (inAssociatedValue2),
 mAssociatedValue3 (inAssociatedValue3),
 mAssociatedValue4 (inAssociatedValue4),
 mAssociatedValue5 (inAssociatedValue5),
-mAssociatedValue6 (inAssociatedValue6),
-mAssociatedValue7 (inAssociatedValue7) {
+mAssociatedValue6 (inAssociatedValue6) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14161,7 +14159,6 @@ void cEnumAssociatedValues_possibleValuedObject_register::description (C_String 
   mAssociatedValue4.description (ioString, inIndentation) ;
   mAssociatedValue5.description (ioString, inIndentation) ;
   mAssociatedValue6.description (ioString, inIndentation) ;
-  mAssociatedValue7.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -14191,9 +14188,6 @@ typeComparisonResult cEnumAssociatedValues_possibleValuedObject_register::compar
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue6.objectCompare (ptr->mAssociatedValue6) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue7.objectCompare (ptr->mAssociatedValue7) ;
   }
   return result ;
 }
@@ -14392,17 +14386,16 @@ GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_module (con
 GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_register (const GALGAS_bool & inAssociatedValue0,
                                                                                const GALGAS_bool & inAssociatedValue1,
                                                                                const GALGAS_PLMType & inAssociatedValue2,
-                                                                               const GALGAS_lstring & inAssociatedValue3,
-                                                                               const GALGAS_bigint & inAssociatedValue4,
-                                                                               const GALGAS_sliceMap & inAssociatedValue5,
-                                                                               const GALGAS_uint & inAssociatedValue6,
-                                                                               const GALGAS_uint & inAssociatedValue7
+                                                                               const GALGAS_bigint & inAssociatedValue3,
+                                                                               const GALGAS_sliceMap & inAssociatedValue4,
+                                                                               const GALGAS_uint & inAssociatedValue5,
+                                                                               const GALGAS_uint & inAssociatedValue6
                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_possibleValuedObject result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid () && inAssociatedValue6.isValid () && inAssociatedValue7.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid () && inAssociatedValue6.isValid ()) {
     result.mEnum = kEnum_register ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_register (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5, inAssociatedValue6, inAssociatedValue7 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_register (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5, inAssociatedValue6 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -14522,11 +14515,10 @@ void GALGAS_possibleValuedObject::method_module (GALGAS_PLMType & outAssociatedV
 void GALGAS_possibleValuedObject::method_register (GALGAS_bool & outAssociatedValue0,
                                                    GALGAS_bool & outAssociatedValue1,
                                                    GALGAS_PLMType & outAssociatedValue2,
-                                                   GALGAS_lstring & outAssociatedValue3,
-                                                   GALGAS_bigint & outAssociatedValue4,
-                                                   GALGAS_sliceMap & outAssociatedValue5,
+                                                   GALGAS_bigint & outAssociatedValue3,
+                                                   GALGAS_sliceMap & outAssociatedValue4,
+                                                   GALGAS_uint & outAssociatedValue5,
                                                    GALGAS_uint & outAssociatedValue6,
-                                                   GALGAS_uint & outAssociatedValue7,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_register) {
@@ -14537,7 +14529,6 @@ void GALGAS_possibleValuedObject::method_register (GALGAS_bool & outAssociatedVa
     outAssociatedValue4.drop () ;
     outAssociatedValue5.drop () ;
     outAssociatedValue6.drop () ;
-    outAssociatedValue7.drop () ;
     C_String s ;
     s << "method @possibleValuedObject register invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -14550,7 +14541,6 @@ void GALGAS_possibleValuedObject::method_register (GALGAS_bool & outAssociatedVa
     outAssociatedValue4 = ptr->mAssociatedValue4 ;
     outAssociatedValue5 = ptr->mAssociatedValue5 ;
     outAssociatedValue6 = ptr->mAssociatedValue6 ;
-    outAssociatedValue7 = ptr->mAssociatedValue7 ;
   }
 }
 
