@@ -86,12 +86,12 @@ proc getNewTempVariable
   if inType == .void then
     outTempVariable = .null
   else
+    [!?ioTemporaries newTempLLVMVar ?let llvmName]
     outTempVariable = .llvmTemporaryValue {
       !type: inType
-      !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
+      !llvmName:.new {!llvmName !inErrorLocation}
       !sliceMap:{}
     }
-    ioTemporaries.mTemporaryIndex ++
   end
 }
 

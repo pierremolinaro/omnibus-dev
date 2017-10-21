@@ -254,6 +254,17 @@ class GALGAS_bool extensionGetter_copyable (const class GALGAS_unifiedTypeMap_2D
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Extension setter '@semanticTemporariesStruct newTempLLVMVar'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_newTempLLVMVar (class GALGAS_semanticTemporariesStruct & ioObject,
+                                     class GALGAS_string & out_outTempLLVMVar,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             @staticRoutineCallIR class                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

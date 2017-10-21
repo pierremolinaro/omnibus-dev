@@ -163,6 +163,8 @@ override method @staticArrayAST enterInContext
         !propertyName
         !true # Public
         !objectIR
+        !propertyType
+        !.indexed{!index:propertyIndex}
       ]
     case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnTypeName) :
     #--- Routine mangled name
@@ -209,6 +211,8 @@ override method @staticArrayAST enterInContext
         !propertyName
         !true # Public
         !.property {!type:propertyType !plmName:propertyName !access:.indexed{!index:propertyIndex}}
+        !propertyType
+        !.indexed{!index:propertyIndex}
       ]
     end
   end

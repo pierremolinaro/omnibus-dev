@@ -555,12 +555,12 @@ proc handlePropertyAccessInExpression
           ?let @sliceMap resultSliceMap
           ?let @PLMType resultType
         ]
+        [!?ioTemporaries newTempLLVMVar ?let llvmName]
         let resultObject = @objectIR.llvmTemporaryValue {
           !type:resultType
-          !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
+          !llvmName:.new {!llvmName !inPropertyName}
           !sliceMap:resultSliceMap
         }
-        ioTemporaries.mTemporaryIndex ++
         [!?ioInstructionGenerationList appendBinaryOperation
           !resultObject
           ![registerIR type]
@@ -615,12 +615,12 @@ proc handlePropertyAccessInExpression
       ?let @sliceMap resultSliceMap
       ?let @PLMType resultType
     ]
+    [!?ioTemporaries newTempLLVMVar ?let llvmName]
     let resultObject = @objectIR.llvmTemporaryValue {
       !type:resultType
-      !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
+      !llvmName:.new {!llvmName !inPropertyName}
       !sliceMap:resultSliceMap
     }
-    ioTemporaries.mTemporaryIndex ++
     [!?ioInstructionGenerationList appendBinaryOperation
       !resultObject
       ![currentObject type]
