@@ -119,7 +119,6 @@ setter @universalPropertyAndRoutineMapForContext insertRegister
     !readable:inReadable
     !writable:inWritable
     !type:inType
-    !plmName:inRegisterName
     !address:inAddress
     !sliceMap:inSliceMap
     !arraySize:inArraySize # 0 if not an array
@@ -300,10 +299,10 @@ method @universalPropertyAndRoutineMapForContext searchValuedObject
     outObjectIR = .property {!type:type !plmName:plmName !access:access}
   case module (@PLMType type) :
     outObjectIR = .globalVariableReference {!type:type !plmName:inValuedObjectName}
-  case register (readable writable type plmName address sliceMap arraySize elementSize) :
+  case register (readable writable type address sliceMap arraySize elementSize) :
     outObjectIR = @objectIR.registerReference {
       !type:type
-      !plmName:plmName
+      !plmName:inValuedObjectName
       !readable:readable
       !writable:writable
       !address:address
@@ -331,7 +330,7 @@ setter @universalPropertyAndRoutineMapForContext readAccess ?let @lstring inValu
     error inValuedObjectName : "undefined in this context"
   case property (* * * * *) :
   case module (*) :
-  case register (* * * * * * * *) :
+  case register (* * * * * * *) :
   case globalConstant (*) :
   case localConstant (* *) :
     if valueState == .hasUnreadValue then
@@ -360,7 +359,7 @@ setter @universalPropertyAndRoutineMapForContext writeAccess ?let @lstring inVal
     error inValuedObjectName : "a property cannot be written"
   case module (*) :
     error inValuedObjectName : "a module cannot be written"
-  case register (* @bool writable * * * * * *) :
+  case register (* @bool writable * * * * *) :
     if not writable then
       error inValuedObjectName : "the control register cannot be written"
     end
@@ -393,7 +392,7 @@ setter @universalPropertyAndRoutineMapForContext readWriteAccess ?let @lstring i
     error inValuedObjectName : "a property cannot be written"
   case module (*) :
     error inValuedObjectName : "a module cannot be written"
-  case register (@bool readable @bool writable * * * * * *) :
+  case register (@bool readable @bool writable * * * * *) :
     if writable & readable then
     elsif not readable then
       error inValuedObjectName : "the register cannot be read"
@@ -433,10 +432,10 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
     outObjectIR = .property {!type:type !plmName:plmName !access:access}
   case module (@PLMType type) :
     outObjectIR = .globalVariableReference {!type:type !plmName:inValuedObjectName}
-  case register (readable writable type plmName address sliceMap arraySize elementSize) :
+  case register (readable writable type address sliceMap arraySize elementSize) :
     outObjectIR = @objectIR.registerReference {
       !type:type
-      !plmName:plmName
+      !plmName:inValuedObjectName
       !readable:readable
       !writable:writable
       !address:address
@@ -480,11 +479,11 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAcces
     error inValuedObjectName : "a property cannot be written" : outObjectIR
   case module (*) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
-  case register (readable writable type plmName address sliceMap arraySize elementSize) :
+  case register (readable writable type address sliceMap arraySize elementSize) :
     if writable then
       outObjectIR = @objectIR.registerReference {
         !type:type
-        !plmName:plmName
+        !plmName:inValuedObjectName
         !readable:readable
         !writable:writable
         !address:address
@@ -530,11 +529,11 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteA
     error inValuedObjectName : "a property cannot be written" : outObjectIR
   case module (*) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
-  case register (readable writable type plmName address sliceMap arraySize elementSize) :
+  case register (readable writable type address sliceMap arraySize elementSize) :
     if writable & readable then
       outObjectIR = @objectIR.registerReference {
         !type:type
-        !plmName:plmName
+        !plmName:inValuedObjectName
         !readable:readable
         !writable:writable
         !address:address
@@ -584,7 +583,7 @@ method @universalPropertyAndRoutineMapForContext searchValuedObjectType
     error inValuedObjectName : "undefined in this context" : outType
   case module (*) :
     error inValuedObjectName : "undefined in this context" : outType
-  case register (* * @PLMType type * * * * *) :
+  case register (* * @PLMType type * * * *) :
     outType = type
   case globalConstant (*) :
     error inValuedObjectName : "undefined in this context" : outType
@@ -619,7 +618,7 @@ method @universalPropertyAndRoutineMapForContext checkLocalVariableFinalState {
     case undefined :
     case property (* * * * *) :
     case module (*) :
-    case register (* * * * * * * *) :
+    case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
       if entry.mObjectState == .hasUnreadValue then
@@ -643,7 +642,7 @@ setter @universalPropertyAndRoutineMapForContext openOverrideForSelectBlock {
     case undefined :
     case property (* * * * *) :
     case module (*) :
-    case register (* * * * * * * *) :
+    case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
@@ -665,7 +664,7 @@ setter @universalPropertyAndRoutineMapForContext openOverrideForRepeatBlock {
     case undefined :
     case property (* * * * *) :
     case module (*) :
-    case register (* * * * * * * *) :
+    case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
@@ -698,7 +697,7 @@ setter @universalPropertyAndRoutineMapForContext closeBranch ?let @location inEr
       case undefined :
       case property (* * * * *) :
       case module (*) :
-      case register (* * * * * * * *) :
+      case register (* * * * * * *) :
       case globalConstant (*) :
       case localConstant (* *) :
         [!?newReferenceStateMap insertKey !entry.lkey !entry.mObjectState]
@@ -757,7 +756,7 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
     case undefined :
     case property (* * * * *) :
     case module (*) :
-    case register (* * * * * * * *) :
+    case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
       if currentObjectState == .hasUnreadValue then
@@ -838,7 +837,6 @@ enum @possibleValuedObject {
   case register (@bool readable
                  @bool writable
                  @PLMType type
-                 @lstring plmName
                  @bigint address
                  @sliceMap sliceMap
                  @uint arraySize # 0 if not an array

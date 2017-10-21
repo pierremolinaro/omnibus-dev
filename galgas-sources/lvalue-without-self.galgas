@@ -126,7 +126,7 @@ method @LValueWithoutSelfAST analyzeLValueNoSelf
     error mIdentifier : "property ??" : outInternalRepresentation
   case module (*) :
     error mIdentifier : "a module cannot be written" : outInternalRepresentation
-  case register (* writable registerType * address * @uint arraySize elementSize) : # 0 if not an array
+  case register (* writable registerType address * @uint arraySize elementSize) : # 0 if not an array
    if not writable then
      error mIdentifier : "the control register is not writable in this context" : outInternalRepresentation
    elsif [mAccessList length] == 0 then # Simple access to a control register for writing

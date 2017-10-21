@@ -3632,21 +3632,19 @@ class cEnumAssociatedValues_possibleValuedObject_register : public cEnumAssociat
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_bool mAssociatedValue1 ;
   public : const GALGAS_PLMType mAssociatedValue2 ;
-  public : const GALGAS_lstring mAssociatedValue3 ;
-  public : const GALGAS_bigint mAssociatedValue4 ;
-  public : const GALGAS_sliceMap mAssociatedValue5 ;
+  public : const GALGAS_bigint mAssociatedValue3 ;
+  public : const GALGAS_sliceMap mAssociatedValue4 ;
+  public : const GALGAS_uint mAssociatedValue5 ;
   public : const GALGAS_uint mAssociatedValue6 ;
-  public : const GALGAS_uint mAssociatedValue7 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_possibleValuedObject_register (const GALGAS_bool & inAssociatedValue0,
                                                                 const GALGAS_bool & inAssociatedValue1,
                                                                 const GALGAS_PLMType & inAssociatedValue2,
-                                                                const GALGAS_lstring & inAssociatedValue3,
-                                                                const GALGAS_bigint & inAssociatedValue4,
-                                                                const GALGAS_sliceMap & inAssociatedValue5,
-                                                                const GALGAS_uint & inAssociatedValue6,
-                                                                const GALGAS_uint & inAssociatedValue7
+                                                                const GALGAS_bigint & inAssociatedValue3,
+                                                                const GALGAS_sliceMap & inAssociatedValue4,
+                                                                const GALGAS_uint & inAssociatedValue5,
+                                                                const GALGAS_uint & inAssociatedValue6
                                                                 COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
