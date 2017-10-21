@@ -211,7 +211,7 @@ method @initListIR generateLLVMinitCode
   for init in self do
     ioLLVMcode += "  call void @init." + init.mPriority + " ("
     if init.mSelfType != .void then
-      ioLLVMcode += [init.mSelfType llvmTypeName] + " * @" + llvmNameForGlobalVariable (!init.mGlobalVariable)
+      ioLLVMcode += [init.mSelfType llvmTypeName] + " * " + llvmNameForGlobalVariable (!init.mGlobalVariable)
     end
     ioLLVMcode += ")\n"
   end

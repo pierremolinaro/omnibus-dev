@@ -2,9 +2,8 @@
 setter @instructionListIR appendLoadGlobalVariable
   ?let @objectIR inTargetValue
   ?let @string inRegisterName
-  ?volatile:@bool inIsVolatile
 {
-  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inIsVolatile}
+  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -12,7 +11,6 @@ setter @instructionListIR appendLoadGlobalVariable
 class @loadGlobalVariableIR : @abstractInstructionIR {
   @objectIR mTargetValue
   @string mVariableName
-  @bool mIsVolatile
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,19 +22,15 @@ override method @loadGlobalVariableIR llvmInstructionCode
 {
   let llvmType = [mTargetValue llvmTypeName]
   ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
-  if mIsVolatile then
-    ioLLVMcode += "volatile "
-  end
-  ioLLVMcode += llvmType + ", " + llvmType + " * @" + llvmNameForGlobalVariable (!mVariableName) + "\n"
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + llvmNameForGlobalVariable (!mVariableName) + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @loadGlobalVariableIR enterAccessibleEntities 
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioAccessibleEntities.mGlobalVariableSet += !mVariableName
 }
 
 

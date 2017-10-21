@@ -250,7 +250,7 @@ func llvmNameForLocalVariable ?let @string inName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGlobalVariable ?let @string inName -> @string {
-  result = ["gvar." + inName assemblerRepresentation]
+  result = "@" + ["gvar." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -26,7 +26,7 @@ override method @storeToIndirectReferenceIR llvmInstructionCode
 {
   let llvmType = [mTargetVarType llvmTypeName]
   let target = if mIsGlobalVariable 
-    then "@" + llvmNameForGlobalVariable (!mVarName)
+    then llvmNameForGlobalVariable (!mVarName)
     else "%" + llvmNameForLocalVariable (!mVarName)
   end
   ioLLVMcode += "  store "
@@ -36,12 +36,9 @@ override method @storeToIndirectReferenceIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @storeToIndirectReferenceIR enterAccessibleEntities 
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  if mIsGlobalVariable then
-    ioAccessibleEntities.mGlobalVariableSet += !mVarName
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

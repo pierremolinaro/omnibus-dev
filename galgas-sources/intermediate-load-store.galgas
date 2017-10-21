@@ -11,7 +11,8 @@ setter @instructionListIR appendStoreFromReference
     error [inTargetReference location] : "<<@instructionListIR appendStoreFromReference selfObject>>"
 #--- References
   case globalVariableReference (@PLMType type @lstring plmName) :
-    [!?self appendStoreGlobalVariable !plmName !type !inValue !volatile:false]
+    [!?self appendNoteGlobalVariableAccess !plmName]
+    [!?self appendStoreGlobalVariable !plmName !type !inValue]
   case localVariableReference (@PLMType type plmName) :
     [!?self appendStoreLocalVariable !plmName !type !inValue]
   case temporaryReference (@PLMType type llvmName * @bool volatile) :
@@ -56,11 +57,8 @@ setter @instructionListIR appendLoadFromReference
 #--- References
   case globalVariableReference (@PLMType type @lstring name) :
     getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
-    [!?self appendLoadGlobalVariable
-      !outResultingValue
-      !name
-      !volatile:false
-    ]
+    [!?self appendNoteGlobalVariableAccess !name]
+    [!?self appendLoadGlobalVariable !outResultingValue !name]
   case localVariableReference (@PLMType type name) :
     getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
     [!?self appendLoadLocalVariable

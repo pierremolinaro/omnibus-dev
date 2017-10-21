@@ -163,7 +163,7 @@ method @interruptMapIR interruptCodeGeneration
     if interrupt.mSelfType != .void then
       let varName = llvmNameForGlobalVariable (!interrupt.mGlobalVariableName)
       let typeName = [interrupt.mSelfType llvmTypeName]
-      ioLLVMcode += "  %self = getelementptr inbounds " + typeName + ", " + typeName + " * @" + varName 
+      ioLLVMcode += "  %self = getelementptr inbounds " + typeName + ", " + typeName + " * " + varName 
       ioLLVMcode += ", i32 0 ; Perform %self = @" + varName + " \n"
     end
   #--- Instruction list
