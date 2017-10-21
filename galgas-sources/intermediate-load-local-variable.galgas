@@ -27,7 +27,7 @@ override method @loadLocalVariableIR llvmInstructionCode
   if mVolatile then
     ioLLVMcode += "volatile "
   end
-  ioLLVMcode += llvmType + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mVariableName) + "\n"
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + llvmNameForLocalVariable (!mVariableName) + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -234,15 +234,15 @@ override method @forLowerUpperBoundInstructionIR llvmInstructionCode
   let loopLabel = "for." + [mLocation locationIndex] + ".loop"
   let endLabel  = "for." + [mLocation locationIndex] + ".end"
   let testResult = "%for." + [mLocation locationIndex] + ".test.result"
-  let loadedVarName = "%" + llvmNameForLocalVariable (!mVarName + ".loaded")
-  let currentVarName = "%" + llvmNameForLocalVariable (!mVarName + ".current")
-  let nextVarName = "%" + llvmNameForLocalVariable (!mVarName + ".next")
+  let loadedVarName = "" + llvmNameForLocalVariable (!mVarName + ".loaded")
+  let currentVarName = "" + llvmNameForLocalVariable (!mVarName + ".current")
+  let nextVarName = "" + llvmNameForLocalVariable (!mVarName + ".next")
 #--- Store LOW in x
-  ioLLVMcode += "  store " + llvmType + " " + [mLowerExpressionResult llvmName] + ", " + llvmType + " * %" + llvmVarName + "\n"
+  ioLLVMcode += "  store " + llvmType + " " + [mLowerExpressionResult llvmName] + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
 #--- Test
   ioLLVMcode += testLabel + ":\n"
-  ioLLVMcode += "  " + loadedVarName + " = load " + llvmType + ", " + llvmType + " * %" + llvmVarName + "\n"
+  ioLLVMcode += "  " + loadedVarName + " = load " + llvmType + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  " + testResult + " = icmp "
   ioLLVMcode += if mUnsigned then "ult" else "slt" end
   ioLLVMcode += " " + llvmType + " " + loadedVarName + ", " + [mUpperExpressionResult llvmName] + "\n"
@@ -250,9 +250,9 @@ override method @forLowerUpperBoundInstructionIR llvmInstructionCode
 #--- Loop  
   ioLLVMcode += loopLabel + ":\n"
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  " + currentVarName + " = load " + llvmType + ", " + llvmType + " * %" + llvmVarName + "\n"
+  ioLLVMcode += "  " + currentVarName + " = load " + llvmType + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  " + nextVarName + " = add " + llvmType + " " + currentVarName + ", 1\n"
-  ioLLVMcode += "  store " + llvmType + " " + nextVarName + ", " + llvmType + " * %" + llvmVarName + "\n"
+  ioLLVMcode += "  store " + llvmType + " " + nextVarName + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
 #--- End
   ioLLVMcode += endLabel + ":\n"

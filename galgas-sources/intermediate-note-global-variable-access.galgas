@@ -1,38 +1,30 @@
 
-setter @instructionListIR appendStoreLocalVariable
-  ?let @string inLocalVarName
-  ?let @PLMType inTargetVarType
-  ?let @objectIR inSourceValue
-{
-  self += !@storeLocalVariableIR.new {!inLocalVarName !inTargetVarType !inSourceValue}
+setter @instructionListIR appendNoteGlobalVariableAccess ?let @string inGlobalVarName {
+  self += !@noteGlobalVariableAccessIR.new {!inGlobalVarName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeLocalVariableIR : @abstractInstructionIR {
-  @string mLocalVarName
-  @PLMType mTargetVarType
-  @objectIR mSourceValue
+class @noteGlobalVariableAccessIR : @abstractInstructionIR {
+  @string mGlobalVarName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeLocalVariableIR llvmInstructionCode
-  ?!@string ioLLVMcode
+override method @noteGlobalVariableAccessIR llvmInstructionCode
+  ?!@string unused ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetVarType llvmTypeName]
-  ioLLVMcode += "  store " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * "
-             + llvmNameForLocalVariable (!mLocalVarName) + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeLocalVariableIR enterAccessibleEntities 
-  ?!@accessibleEntities unused ioAccessibleEntities
+override method @noteGlobalVariableAccessIR enterAccessibleEntities 
+  ?!@accessibleEntities ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
+  ioAccessibleEntities.mGlobalVariableSet += !mGlobalVarName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

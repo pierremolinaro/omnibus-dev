@@ -557,7 +557,7 @@ proc handlePropertyAccessInExpression
         ]
         let resultObject = @objectIR.llvmTemporaryValue {
           !type:resultType
-          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
+          !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
           !sliceMap:resultSliceMap
         }
         ioTemporaries.mTemporaryIndex ++
@@ -617,7 +617,7 @@ proc handlePropertyAccessInExpression
     ]
     let resultObject = @objectIR.llvmTemporaryValue {
       !type:resultType
-      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
+      !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
       !sliceMap:resultSliceMap
     }
     ioTemporaries.mTemporaryIndex ++

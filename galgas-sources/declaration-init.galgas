@@ -200,7 +200,7 @@ method @initListIR generateLLVMinitCode
     end
     ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
     for (variable llvmTypeName) in init.mAllocaList do
-      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
+      ioLLVMcode += "  " + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
     end
     [init.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"

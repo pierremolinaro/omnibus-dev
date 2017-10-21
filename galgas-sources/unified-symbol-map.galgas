@@ -88,7 +88,7 @@ proc getNewTempVariable
   else
     outTempVariable = .llvmTemporaryValue {
       !type: inType
-      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
+      !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
       !sliceMap:{}
     }
     ioTemporaries.mTemporaryIndex ++

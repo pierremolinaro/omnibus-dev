@@ -201,7 +201,7 @@ private proc generateCodeFiles
     llvmCode += llvmSeparatorLine () + "\n"
     llvmCode += "define internal void @boot." + boot.mBootIndex + " ()" + llvmAttributeFunction () + "{\n"
     for (variable LLVMTypeName) in boot.mAllocaList do
-      llvmCode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + LLVMTypeName + "\n"
+      llvmCode += "  " + llvmNameForLocalVariable (!variable) + " = alloca " + LLVMTypeName + "\n"
     end
     [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
     llvmCode += "  ret void\n"
@@ -297,18 +297,18 @@ private proc generateCodeFiles
     llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
     llvmCode += "i8* %in.FILE)" + llvmAttributeFunction () + "noreturn {\n"
   #--- First argument: line
-    llvmCode += "  %" + llvmNameForLocalVariable (!"LINE") + " = alloca "
+    llvmCode += "  " + llvmNameForLocalVariable (!"LINE") + " = alloca "
     llvmCode += generationContext.mPanicLineLLVMType + "\n"
     llvmCode += "  store " + generationContext.mPanicLineLLVMType + " %in.LINE, "
-    llvmCode += generationContext.mPanicLineLLVMType + " * %" + llvmNameForLocalVariable (!"LINE") + "\n"
+    llvmCode += generationContext.mPanicLineLLVMType + " * " + llvmNameForLocalVariable (!"LINE") + "\n"
   #--- Second argument : code
-    llvmCode += "  %" + llvmNameForLocalVariable (!"CODE")
+    llvmCode += "  " + llvmNameForLocalVariable (!"CODE")
     llvmCode += " = alloca " + generationContext.mPanicCodeLLVMType + "\n"
     llvmCode += "  store " + generationContext.mPanicCodeLLVMType + " %in.CODE, "
-    llvmCode += generationContext.mPanicCodeLLVMType + " * %" + llvmNameForLocalVariable (!"CODE") + "\n"
+    llvmCode += generationContext.mPanicCodeLLVMType + " * " + llvmNameForLocalVariable (!"CODE") + "\n"
   #--- Third argument : file    
-    llvmCode += "  %" + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
-    llvmCode += "  store i8* %in.FILE, i8** %" + llvmNameForLocalVariable (!"FILE") + "\n"
+    llvmCode += "  " + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
+    llvmCode += "  store i8* %in.FILE, i8** " + llvmNameForLocalVariable (!"FILE") + "\n"
     [inIntermediateCodeStruct.mPanicSetupInstructionListIR instructionListLLVMCode
       !?llvmCode
       !generationContext

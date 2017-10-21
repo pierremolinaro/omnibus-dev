@@ -87,7 +87,8 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ioLLVMcode += "  " + [mTarget llvmName] + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
   ioLLVMcode += " (" + llvmType + " " + [mLeft llvmName] + ", " + llvmType + " " + [mRight llvmName] + ")\n"
   ioLLVMcode += "  " + [mTarget llvmName] + ".hasOvf = extractvalue {" + llvmType + ", i1} " + [mTarget llvmName] + ".r, 1\n"
-  let labelName = [mTarget name]
+  let labelName = "label." + ioGenerationAdds.mUniqueIndex
+  ioGenerationAdds.mUniqueIndex ++
   ioLLVMcode += "  br i1 " + [mTarget llvmName] + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
   ioLLVMcode += labelName + ".ovf:\n"
   ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
@@ -115,7 +116,8 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
   ]
   let llvmType = [mOperandType llvmTypeName]
   ioLLVMcode += "  " + [mRight llvmName] + ".isZero = icmp eq " + llvmType + " " + [mRight llvmName] + ", 0\n"
-  let labelName = [mTarget name]
+  let labelName = "label." + ioGenerationAdds.mUniqueIndex
+  ioGenerationAdds.mUniqueIndex ++
   ioLLVMcode += "  br i1 " + [mRight llvmName] + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
   ioLLVMcode += labelName + ".divideByZero:\n"
   ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
