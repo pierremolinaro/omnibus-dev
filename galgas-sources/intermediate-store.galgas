@@ -27,7 +27,7 @@ override method @storeToIndirectReferenceIR llvmInstructionCode
   let llvmType = [mTargetVarType llvmTypeName]
   let target = if mIsGlobalVariable 
     then llvmNameForGlobalVariable (!mVarName)
-    else "%" + llvmNameForLocalVariable (!mVarName)
+    else llvmNameForLocalVariable (!mVarName)
   end
   ioLLVMcode += "  store "
   ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * " +target + "\n"

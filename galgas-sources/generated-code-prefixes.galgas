@@ -244,7 +244,7 @@ func %once waitForGuardChangeFunctionName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForLocalVariable ?let @string inName -> @string {
-  result = ["var." + inName assemblerRepresentation]
+  result = "%" + ["var." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

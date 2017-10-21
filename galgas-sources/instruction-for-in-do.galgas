@@ -290,7 +290,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ioLLVMcode += "  %" + currentValue + " = load " + elementTypeLLVMName + ", "
   ioLLVMcode += elementTypeLLVMName + "* %" + ptrVar + "\n"
   ioLLVMcode += "  store " + elementTypeLLVMName + " %" + currentValue + ", " + elementTypeLLVMName
-             + "* %" + llvmNameForLocalVariable (!mEnumeratedValueName) + "\n"
+             + "* " + llvmNameForLocalVariable (!mEnumeratedValueName) + "\n"
 #--- Loop instructions
   [mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + nextLabel + "\n\n"
@@ -373,7 +373,7 @@ override method @forInstructionOnStringIR llvmInstructionCode
   ioLLVMcode += loopLabel + ":\n"
 #--- Get current value
   ioLLVMcode += "  store i8 %" + currentVar + ", "
-  ioLLVMcode += "i8 * %" + llvmNameForLocalVariable (!mVarName) + "\n"
+  ioLLVMcode += "i8 * " + llvmNameForLocalVariable (!mVarName) + "\n"
 #--- Loop body
   [mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + nextLabel + "\n\n"

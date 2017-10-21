@@ -230,9 +230,9 @@ func llvmFunctionPrototype ?let @PLMType inReturnType
     case input :
       result += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      result += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      result += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      result += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      result += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
   result += ")" + llvmAttributeFunction ()
@@ -261,9 +261,9 @@ func llvmFunctionCall ?let @PLMType inReturnType
     case input :
       result += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      result += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      result += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      result += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      result += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
   result += ")"

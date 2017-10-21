@@ -79,12 +79,12 @@ getter @objectIR llvmName -> @string {
   case null : error [self location] : "<<@objectIR llvmName null>>" : result
   case property (***) : error [self location] : "<<@objectIR property llvmName>>" : result
   case globalVariableReference (* plmName) : result = llvmNameForGlobalVariable (!plmName)
-  case localVariableReference (* plmName) : result = "%" + llvmNameForLocalVariable (!plmName)
+  case localVariableReference (* plmName)  : result = llvmNameForLocalVariable (!plmName)
   case registerReference (********): error [self location] : "<<@objectIR llvmName>>" : result
   case zero (*) : result = "zeroinitializer"
   case selfObject (*) : result = "%self"
   case literalInteger (* @bigint value) : result = [value string]
-  case llvmTemporaryValue (* llvmName *) : result = "%" + llvmName
+  case llvmTemporaryValue (* llvmName *) : result = llvmName
   case temporaryReference (* llvmName * *) : result = "%" + llvmName
   case llvmStructureConstant (* @sortedOperandIRList inValues) :
     result = "{"
