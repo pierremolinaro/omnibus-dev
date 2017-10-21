@@ -238,7 +238,9 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_standAloneIdentifier,
     kEnum_structureMember,
-    kEnum_bitField
+    kEnum_bitField,
+    kEnum_volatileAbsoluteReference,
+    kEnum_volatileIndirectReference
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -276,6 +278,14 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
                                                                                    const class GALGAS_objectIR & inOperand1
                                                                                    COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_internalRepresentation constructor_volatileAbsoluteReference (const class GALGAS_PLMType & inOperand0,
+                                                                                             const class GALGAS_uint & inOperand1
+                                                                                             COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_internalRepresentation constructor_volatileIndirectReference (const class GALGAS_PLMType & inOperand0,
+                                                                                             const class GALGAS_string & inOperand1
+                                                                                             COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -299,6 +309,16 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_volatileAbsoluteReference (class GALGAS_PLMType & outArgument0,
+                                                                   class GALGAS_uint & outArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_volatileIndirectReference (class GALGAS_PLMType & outArgument0,
+                                                                   class GALGAS_string & outArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
+
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
@@ -307,6 +327,10 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStandAloneIdentifier (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStructureMember (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVolatileAbsoluteReference (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVolatileIndirectReference (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -373,6 +397,42 @@ class cEnumAssociatedValues_internalRepresentation_bitField : public cEnumAssoci
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_internalRepresentation_bitField (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                   const GALGAS_uint & inAssociatedValue1
+                                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_internalRepresentation_volatileIndirectReference : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_internalRepresentation_volatileIndirectReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                   const GALGAS_string & inAssociatedValue1
+                                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_internalRepresentation_volatileIndirectReference (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -1,0 +1,39 @@
+
+setter @instructionListIR appendStoreIndirectVolatileRegister
+  ?let @PLMType inTargetVarType
+  ?let @string inLLVMName
+  ?let @objectIR inSourceValue
+{
+  self += !@storeIndirectVolatileIR.new {!inTargetVarType !inLLVMName !inSourceValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @storeIndirectVolatileIR : @abstractInstructionIR {
+  @PLMType mTargetVarType
+  @string mLLVMName
+  @objectIR mSourceValue
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @storeIndirectVolatileIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mTargetVarType llvmTypeName]
+  ioLLVMcode += "  %" + mLLVMName + ".ptr = inttoptr i32 %" + mLLVMName + " to " + llvmType + "* ; cast to i32*\n"
+              + "  store volatile " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType
+              + " * %" + mLLVMName + ".ptr ; indirect %" + mLLVMName + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @storeIndirectVolatileIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -11,47 +11,40 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Routine 'handleFunctionCallInExpressionNew'                                     *
+//                                           Function 'getInfixOperatorMap'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_handleFunctionCallInExpressionNew (class GALGAS_internalRepresentation & ioArgument0,
-                                                const class GALGAS_PLMType constinArgument1,
-                                                const class GALGAS_bool constinArgument2,
-                                                const class GALGAS_lstring constinArgument3,
-                                                const class GALGAS_semanticContext constinArgument4,
-                                                const class GALGAS_mode constinArgument5,
-                                                class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                class GALGAS_staticStringMap & ioArgument7,
-                                                class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
-                                                class GALGAS_allocaList & ioArgument9,
-                                                const class GALGAS_effectiveArgumentListAST constinArgument10,
-                                                const class GALGAS_location constinArgument11,
-                                                class GALGAS_instructionListIR & ioArgument12,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_infixOperator & constinArgument0,
+                                                            const class GALGAS_semanticContext & constinArgument1,
+                                                            const class GALGAS_mode & constinArgument2,
+                                                            const class GALGAS_location & constinArgument3,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Routine 'handleSubscriptArrayInAssignmentAndExpressionNew'                              *
+//                                           Routine 'handleArraySubscript'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_handleSubscriptArrayInAssignmentAndExpressionNew (const class GALGAS_PLMType constinArgument0,
-                                                               const class GALGAS_bool constinArgument1,
-                                                               const class GALGAS_lstring constinArgument2,
-                                                               const class GALGAS_semanticContext constinArgument3,
-                                                               const class GALGAS_mode constinArgument4,
-                                                               class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                               class GALGAS_staticStringMap & ioArgument6,
-                                                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
-                                                               class GALGAS_allocaList & ioArgument8,
-                                                               const class GALGAS_expressionAST constinArgument9,
-                                                               const class GALGAS_location constinArgument10,
-                                                               class GALGAS_instructionListIR & ioArgument11,
-                                                               class GALGAS_objectIR & ioArgument12,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+void routine_handleArraySubscript (const class GALGAS_PLMType constinArgument0,
+                                   const class GALGAS_bool constinArgument1,
+                                   const class GALGAS_lstring constinArgument2,
+                                   const class GALGAS_semanticContext constinArgument3,
+                                   const class GALGAS_mode constinArgument4,
+                                   class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                   class GALGAS_staticStringMap & ioArgument6,
+                                   class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
+                                   class GALGAS_allocaList & ioArgument8,
+                                   const class GALGAS_expressionAST constinArgument9,
+                                   const class GALGAS_location constinArgument10,
+                                   const class GALGAS_bigint constinArgument11,
+                                   const class GALGAS_PLMType constinArgument12,
+                                   class GALGAS_instructionListIR & ioArgument13,
+                                   class GALGAS_objectIR & ioArgument14,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -266,35 +259,5 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
                                class GALGAS_intermediateCodeStruct & outArgument5,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Function 'llvmNameForPrimitiveCall'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForPrimitiveCall (const class GALGAS_string & constinArgument0,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'llvmNameForSafeCall'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForSafeCall (const class GALGAS_string & constinArgument0,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'llvmNameForSectionCall'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
 
 #endif

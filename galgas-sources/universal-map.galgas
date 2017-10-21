@@ -279,6 +279,15 @@ setter @universalPropertyAndRoutineMapForContext insertLocalVariable
 #! SEARCH METHODS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+method @universalPropertyAndRoutineMapForContext searchEntity
+  ?let @lstring inValuedObjectName
+  !@possibleValuedObject outEntity
+{
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?outEntity ?*]
+}
+
+#·······················································································································
+
 method @universalPropertyAndRoutineMapForContext searchValuedObject
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
