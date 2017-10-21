@@ -23,9 +23,9 @@ override method @storeIndirectVolatileIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
-  ioLLVMcode += "  %" + mLLVMName + ".ptr = inttoptr i32 %" + mLLVMName + " to " + llvmType + "* ; cast to i32*\n"
+  ioLLVMcode += "  " + mLLVMName + ".ptr = inttoptr i32 " + mLLVMName + " to " + llvmType + "* ; cast to i32*\n"
               + "  store volatile " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType
-              + " * %" + mLLVMName + ".ptr ; indirect %" + mLLVMName + "\n"
+              + " * " + mLLVMName + ".ptr ; indirect access " + mLLVMName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

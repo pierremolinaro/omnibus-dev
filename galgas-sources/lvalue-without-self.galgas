@@ -150,7 +150,7 @@ method @LValueWithoutSelfAST analyzeLValueNoSelf
     error mIdentifier : "a global constant cannot be written" : outInternalRepresentation
   case localConstant (**) :
     error mIdentifier : "a local constant cannot be written" : outInternalRepresentation
-  case globalVariable (@bool writable @PLMType variableType @lstring unused plmName) :
+  case globalVariable (@bool writable @PLMType variableType) :
     if not writable then
       error mIdentifier : "a global variable cannot be written in this context" : outInternalRepresentation
     else
