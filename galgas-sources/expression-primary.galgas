@@ -217,7 +217,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 enum @internalRepresentation {
   case standAloneIdentifier (@lstring identifier)
   case structureMember (@lstring propertyName @objectIR currentPointerIR)
-  case bitField (@sliceMap sliceMap @objectIR valueIR)
+  case bitField (@objectIR valueIR)
   case volatileAbsoluteReference (@PLMType type @uint address)
   case volatileIndirectReference (@PLMType type @string llvmName)
   case universalReference (@PLMType type @string llvmName)
@@ -302,7 +302,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 {
   [ioUniversalMap searchEntity !mObjectName ?let entity]
   switch entity
-  case module (@PLMType type) :
+  case module (@PLMType unused type) :
     analyzePrimaryExpressionNoSelf (
       !self: inSelfType
       !inGuard: inGuard
@@ -347,7 +347,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     end
   case globalConstant (@objectIR objectIR) :
     outResult = objectIR
-  case localConstant (@PLMType type @lstring plmName) :
+  case localConstant (@PLMType unused type @lstring unused plmName) :
     analyzePrimaryExpressionNoSelf (
       !self: inSelfType
       !inGuard: inGuard
@@ -364,7 +364,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       ?result: outResult
     )
-  case globalVariable (@bool writable @PLMType type) :
+  case globalVariable (@bool unused writable @PLMType unused type) :
     analyzePrimaryExpressionNoSelf (
       !self: inSelfType
       !inGuard: inGuard
@@ -381,7 +381,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       ?result: outResult
     )
-  case localVariable (@PLMType type @lstring plmName) :
+  case localVariable (@PLMType unused type @lstring unused plmName) :
     analyzePrimaryExpressionNoSelf (
       !self: inSelfType
       !inGuard: inGuard
@@ -513,14 +513,15 @@ proc analyzePrimaryExpressionNoSelf
     else
       error [currentPointer location] : "this should be a structure instance" : outResult
     end
-  case bitField (@sliceMap unused sliceMap @objectIR valueIR) :
+  case bitField (@objectIR valueIR) :
     outResult = valueIR
   case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
     error inObjectName : "temporaryReference 1" : outResult
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inObjectName : "volatileIndirectReference 1": outResult
-  case universalReference (@PLMType unused type @string unused llvmName) :
-    error inObjectName : "indirectReference 1": outResult
+  case universalReference (@PLMType type @string llvmName) :
+#    error inObjectName : "indirectReference 1": outResult
+    outResult = .llvmTemporaryValue {!type:type !llvmName:[llvmName nowhere]}
   end
 }
 
@@ -717,14 +718,15 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
     else
       error [currentPointer location] : "this should be a structure instance" : outResult
     end
-  case bitField (@sliceMap unused sliceMap @objectIR valueIR) :
+  case bitField (@objectIR valueIR) :
     outResult = valueIR
   case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
     error mObjectName : "volatileAbsoluteReference 2" : outResult
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error mObjectName : "volatileIndirectReference 2": outResult
-  case universalReference (@PLMType unused type @string unused llvmName) :
-    error mObjectName : "indirectReference 2": outResult
+  case universalReference (@PLMType type @string llvmName) :
+#    error mObjectName : "indirectReference 2": outResult
+    outResult = .llvmTemporaryValue {!type:type !llvmName:[llvmName nowhere]}
   end
 }
 
@@ -801,7 +803,7 @@ proc handlePropertyAccessInExpression
     else
       error masterPropertyName : "'" + masterPropertyName + "' should be a structure" : ioInternalRepresentation
     end
-  case bitField (* *) :
+  case bitField (*) :
     error inPropertyName : "register slice not handled here" : ioInternalRepresentation
    case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
     error inPropertyName : "temporaryReference 3" : ioInternalRepresentation
@@ -860,7 +862,7 @@ proc handleArrayAccessInExpression
     error inEndOfIndex : "volatileIndirectReference 4": variableIR, errorLocation
   case universalReference (@PLMType unused type @string unused llvmName) :
     error inEndOfIndex : "indirectReference 4": variableIR, errorLocation
-  case bitField (@sliceMap unused sliceMap valueIR) :
+  case bitField (valueIR) :
     error [valueIR location] : "this object is not an array" : variableIR, errorLocation
   end
 #--- Check current object is an array
@@ -883,25 +885,10 @@ proc handleArrayAccessInExpression
       !?ioInstructionGenerationList
       !?variableIR
    )
-   ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:variableIR}
+   ioInternalRepresentation = .bitField {!valueIR:variableIR}
+#   ioInternalRepresentation = .universalReference {!type:[variableIR type] !llvmName:"%" + [variableIR name]}
   elsif [variableIR isRegisterReference] then
-    handleSubscriptRegisterArrayInAssignmentAndExpressionNew (
-      !self: inSelfType
-      !inGuard: inGuard
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-      !context: inContext
-      !mode: inCurrentMode
-      !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
-      !?variableMap:ioUniversalMap
-      !?alloca: ioAllocaList
-      !inIndexExpression 
-      !inEndOfIndex
-      !?ioInstructionGenerationList
-      !?variableIR
-      ?sliceMap:let sliceMap
-   )
-   ioInternalRepresentation = .bitField {!sliceMap:sliceMap !valueIR:variableIR}
+    error inEndOfIndex : "control register not handled here"
   else
     error errorLocation : "the receiver is not an array and does not accept subscripting"
   end
@@ -930,7 +917,7 @@ proc handleFunctionCallInExpressionNew
   end
 #--- Get function name and map containing the function definition
   switch ioInternalRepresentation
-  case bitField (* @objectIR valueIR) :
+  case bitField (@objectIR valueIR) :
     error [valueIR location]
       : "this is not a function"
       : ioInternalRepresentation
@@ -974,7 +961,7 @@ proc handleFunctionCallInExpressionNew
         !?ioInstructionGenerationList
         ?let @objectIR callReturnedResult
       )
-      ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:callReturnedResult}
+      ioInternalRepresentation = .universalReference {!type:[callReturnedResult type] !llvmName:[callReturnedResult name]}
     else
       error [currentPointerIR location] : "this object should be a structure" : ioInternalRepresentation
     end
@@ -1160,7 +1147,7 @@ private proc handleStandAloneFunctionCallInExpression
   #--- Enter in invocation graph
     [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
   #---
-    ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:functionResult}
+    ioInternalRepresentation = .universalReference {!type:[functionResult type] !llvmName:[functionResult name]}
   end
 }
 
