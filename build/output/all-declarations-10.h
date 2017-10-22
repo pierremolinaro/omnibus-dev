@@ -11,6 +11,21 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             Routine 'semanticAnalysis'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
+                               const class GALGAS_ast constinArgument1,
+                               const class GALGAS_semanticContext constinArgument2,
+                               const class GALGAS_location constinArgument3,
+                               const class GALGAS_staticStringMap constinArgument4,
+                               class GALGAS_intermediateCodeStruct & outArgument5,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                         Function 'llvmNameForPrimitiveCall'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

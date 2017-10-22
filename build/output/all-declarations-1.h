@@ -1637,14 +1637,14 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
-    kEnum_undefined,
-    kEnum_property,
     kEnum_module,
     kEnum_register,
     kEnum_globalConstant,
     kEnum_localConstant,
     kEnum_globalVariable,
-    kEnum_localVariable
+    kEnum_localVariable,
+    kEnum_undefined,
+    kEnum_property
   } enumeration ;
   
 //--------------------------------- Private data member
