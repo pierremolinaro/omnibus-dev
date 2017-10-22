@@ -328,7 +328,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       analyzeRegisterExpression (
         !self: inSelfType
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !optionalTargetType: inOptionalTargetType
         !context: inContext
         !mode: inCurrentMode
         !?temporary: ioTemporaries
@@ -532,7 +531,6 @@ proc analyzePrimaryExpressionNoSelf
 proc analyzeRegisterExpression
   ?self:let @PLMType inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -555,81 +553,84 @@ proc analyzeRegisterExpression
   else
     var accessList = inAccessList
     if [[accessList mAccessAtIndex !0] isArrayAccess] then
-    
+      [!?accessList popFirst ?let first]
+      [first arrayAccess ?index:let @expressionAST indexExpression ?endOfIndex:let @location endOfIndex]
+      handleArraySubscriptNew (
+         !self: inSelfType
+         !inGuard: false
+         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+         !context: inContext
+         !mode: inCurrentMode
+         !?temporary: ioTemporaries
+         !?staticStringMap: ioGlobalLiteralStringMap
+         !?variableMap: ioUniversalMap
+         !?alloca: ioAllocaList
+         !indexExpression 
+         !endOfIndex
+         !arraySize:inRegisterArraySize
+         !elementType:inRegisterType
+         !? ioInstructionGenerationList
+         ?let @objectIR indexIR
+      )
+      if [indexIR isLiteralInteger] then # subscript expression is constant
+        [indexIR literalInteger ?1* ?value:let @bigint idx]
+        let addr = inRegisterAddress + idx * inRegisterElementSize
+        getNewTempVariable (!inRegisterType !inRegisterName.location !?ioTemporaries ?outResult)
+        [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !addr]
+      else
+        getNewTempVariable (!inRegisterType !inRegisterName.location !?ioTemporaries ?outResult)
+        [!?ioInstructionGenerationList appendLoadVolatileRegisterWithSubscript
+          !outResult
+          !indexIR
+          !inRegisterAddress
+          !inRegisterElementSize
+        ]
+#setter @instructionListIR appendComputeVolatileRegisterAddressWithSubscript
+#  ?let @objectIR inTarget
+#  ?let @objectIR inIndexResult
+#  ?let @bigint inAddress
+#  ?let @bigint inElementArraySize
+#        [!?ioInstructionGenerationList appendLoadFromReference
+#          !?ioTemporaries
+#          !computedAddrIR
+#          !inRegisterName.location
+#          ?outResult
+#        ]
+      end
     else
-    
+      getNewTempVariable (!inRegisterType !inRegisterName.location !?ioTemporaries ?outResult)
+      [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !inRegisterAddress]
     end
-    @internalRepresentation internalRepresentation = .standAloneIdentifier {!identifier:inRegisterName}
   #--- Access list
-    for (access) in inAccessList do
+    var currentSliceMap = inRegisterSliceMap
+    var currentType = inRegisterType
+    for (access) in accessList do
       switch access
       case property (@lstring propertyName) :
-        handlePropertyAccessInExpression (
-          !?internalRepresentation
+        [currentSliceMap searchKey
           !propertyName
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-          !optionalTargetType:inOptionalTargetType
-          !context:inContext
-          !mode:inCurrentMode
-          !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
-          !?variableMap:ioUniversalMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:ioInstructionGenerationList
-        )
-      case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-        handleArrayAccessInExpression (
-          !?internalRepresentation
-          !indexExpression
-          !endOfIndex
-          !self:inSelfType
-          !inGuard:false
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-          !optionalTargetType:inOptionalTargetType
-          !context:inContext
-          !mode:inCurrentMode
-          !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
-          !?variableMap:ioUniversalMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:ioInstructionGenerationList
-        )
+          ?let @llvmBinaryOperation accessOperator
+          ?let @bigint accessRightOperand
+          ?let @sliceMap subMap
+          ?let @PLMType resultType
+        ]
+        getNewTempVariable (!resultType !propertyName.location !?ioTemporaries ?let resultIR)
+        [!?ioInstructionGenerationList appendBinaryOperation
+          !resultIR
+          ![outResult type]
+          !propertyName.location
+          !outResult
+          !accessOperator
+          !.literalInteger {!type:.staticInteger !value:accessRightOperand}
+        ]
+        currentSliceMap = subMap
+        currentType = resultType
+        outResult = resultIR
+      case arrayAccess (* @location endOfIndex) :
+        error endOfIndex : "receiver is a control register, subscripting is invalid here"
       case funcCall (* errorLocation) :
         error errorLocation : "receiver is a control register, cannot be used as a function"
       end
-    end
-  #--- Analyze current internal representation, in order to get result as @objectIR
-    switch internalRepresentation
-    case standAloneIdentifier (identifier) :
-      [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
-    case structureMember (propertyName @objectIR currentPointer) :
-      if [[currentPointer type] isStructure] then
-        [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
-        [propertyMap searchKey !propertyName ?2* ?let type ?*]
-        let newObject = @objectIR.temporaryReference {
-           !type:type
-           !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-           !sliceMap:{}
-           !volatile:false
-        }
-        ioTemporaries.mTemporaryIndex ++
-        [!?ioInstructionGenerationList appendGetPropertyReference
-          !newObject
-          !currentPointer
-          !propertyName
-        ]
-        outResult = newObject
-      else
-        error [currentPointer location] : "this should be a structure instance" : outResult
-      end
-    case bitField (@sliceMap unused sliceMap @objectIR valueIR) :
-      outResult = valueIR
-    case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
-      error inRegisterName : "temporaryReference 1" : outResult
-    case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
-      error inRegisterName : "volatileIndirectReference 1": outResult
-    case universalReference (@PLMType unused type @string unused llvmName) :
-      error inRegisterName : "indirectReference 1": outResult
     end
   end
 }
