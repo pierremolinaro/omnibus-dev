@@ -15,8 +15,8 @@ setter @instructionListIR appendStoreFromReference
     [!?self appendStoreGlobalVariable !plmName !type !inValue]
   case localVariableReference (@PLMType type plmName) :
     [!?self appendStoreLocalVariable !plmName !type !inValue]
-  case temporaryReference (@PLMType type llvmName * @bool volatile) :
-    [!?self appendStoreTemporaryReference !type !llvmName !inValue !volatile:volatile]
+  case temporaryReference (@PLMType type llvmName) :
+    [!?self appendStoreTemporaryReference !type !llvmName !inValue]
   case registerReference (type * * * address * arraySize *) :
     if arraySize > 0 then
       error inErrorLocation : "register array requires subscripting"
@@ -66,12 +66,12 @@ setter @instructionListIR appendLoadFromReference
       !name
       !false
     ]
-  case temporaryReference (@PLMType type llvmName * volatile) :
+  case temporaryReference (@PLMType type llvmName) :
     getNewTempVariable (!type !llvmName !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromTemporaryReference
       !outResultingValue
       !llvmName
-      !volatile
+      !false
     ]
   case registerReference (type registerName * * address * arraySize *) :
     if arraySize > 0 then

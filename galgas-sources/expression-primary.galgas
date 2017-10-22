@@ -502,8 +502,6 @@ proc analyzePrimaryExpressionNoSelf
       let newObject = @objectIR.temporaryReference {
          !type:type
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-         !sliceMap:{}
-         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -719,8 +717,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-         !sliceMap:{}
-         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -735,7 +731,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   case bitField (@sliceMap unused sliceMap @objectIR valueIR) :
     outResult = valueIR
   case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
-    error mObjectName : "temporaryReference 2" : outResult
+    error mObjectName : "volatileAbsoluteReference 2" : outResult
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error mObjectName : "volatileIndirectReference 2": outResult
   case universalReference (@PLMType unused type @string unused llvmName) :
@@ -814,7 +810,7 @@ proc handlePropertyAccessInExpression
         ]
         ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
       end
-    case temporaryReference (* * * *) :
+    case temporaryReference (* *) :
       error identifier : "«temporaryReference» invalid here" : ioInternalRepresentation
     case property (* * *) :
       error identifier : "«property» invalid here" : ioInternalRepresentation
@@ -836,8 +832,6 @@ proc handlePropertyAccessInExpression
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
-         !sliceMap:{}
-         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -912,8 +906,6 @@ proc handleArrayAccessInExpression
       variableIR = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-         !sliceMap:{}
-         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -1133,8 +1125,6 @@ proc handleMethodCallInExpressionNew
       let propertyReference = @objectIR.temporaryReference {
          !type:type
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inMethodName}
-         !sliceMap:{}
-         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference

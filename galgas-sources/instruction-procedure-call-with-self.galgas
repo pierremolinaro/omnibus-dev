@@ -56,8 +56,6 @@ override method @complexCallSelfInstructionAST analyze
         let newObject = @objectIR.temporaryReference {
            !type:[propertyObject type]
            !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-           !sliceMap:{}
-           !volatile:false
         }
         ioTemporaries.mTemporaryIndex ++
         [!?ioInstructionGenerationList appendGetPropertyReference
@@ -157,8 +155,6 @@ override method @complexCallSelfInstructionAST analyze
       let propertyReference = @objectIR.temporaryReference {
          !type:type
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !methodName}
-         !sliceMap:{}
-         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
