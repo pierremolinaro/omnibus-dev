@@ -2597,8 +2597,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                            COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_llvmTemporaryValue (const class GALGAS_PLMType & inOperand0,
-                                                                        const class GALGAS_lstring & inOperand1,
-                                                                        const class GALGAS_sliceMap & inOperand2
+                                                                        const class GALGAS_lstring & inOperand1
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_localVariableReference (const class GALGAS_PLMType & inOperand0,
@@ -2665,7 +2664,6 @@ class GALGAS_objectIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_llvmTemporaryValue (class GALGAS_PLMType & outArgument0,
                                                             class GALGAS_lstring & outArgument1,
-                                                            class GALGAS_sliceMap & outArgument2,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) const ;
 
@@ -4037,12 +4035,10 @@ class cEnumAssociatedValues_objectIR_property : public cEnumAssociatedValues {
 class cEnumAssociatedValues_objectIR_llvmTemporaryValue : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
-  public : const GALGAS_sliceMap mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_objectIR_llvmTemporaryValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                              const GALGAS_lstring & inAssociatedValue1,
-                                                              const GALGAS_sliceMap & inAssociatedValue2
+                                                              const GALGAS_lstring & inAssociatedValue1
                                                               COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

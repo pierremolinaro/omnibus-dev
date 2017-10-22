@@ -1668,17 +1668,6 @@ class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_objectIR & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Extension getter '@objectIR sliceMap' (as function)                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_sliceMap extensionGetter_sliceMap (const class GALGAS_objectIR & inObject,
-                                                const class GALGAS_location & constinArgument0,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                   Extension getter '@objectIR type' (as function)                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

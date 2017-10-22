@@ -26,7 +26,7 @@ setter @instructionListIR appendStoreFromReference
   case property (* * *) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue property>>"
 #--- Values
-  case llvmTemporaryValue (* llvmName *) :
+  case llvmTemporaryValue (* llvmName) :
     error llvmName : "<<@instructionListIR llvmGlobalObjectValue llvmTemporaryValue>>"
   case literalInteger  (* *) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue literalInteger>>"
@@ -94,7 +94,7 @@ setter @instructionListIR appendLoadFromReference
 #--- Values
   case literalInteger (**) :
     outResultingValue = inSource
-  case llvmTemporaryValue (***) :
+  case llvmTemporaryValue (**) :
     outResultingValue = inSource
   case llvmStructureConstant (* *) :
     outResultingValue = inSource
