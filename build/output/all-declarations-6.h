@@ -1618,9 +1618,43 @@ void extensionMethod_analyzeAssignmentTarget (const class GALGAS_LValueSelfAST i
                                               class GALGAS_allocaList & io_ioAllocaList,
                                               class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                               class GALGAS_internalRepresentation & out_outInternalRepresentation,
-                                              class GALGAS_string & out_outGlobalVariableReceiverName,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'handleArraySubscriptNew'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
+                                      const class GALGAS_bool constinArgument1,
+                                      const class GALGAS_lstring constinArgument2,
+                                      const class GALGAS_semanticContext constinArgument3,
+                                      const class GALGAS_mode constinArgument4,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                      class GALGAS_staticStringMap & ioArgument6,
+                                      class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
+                                      class GALGAS_allocaList & ioArgument8,
+                                      const class GALGAS_expressionAST constinArgument9,
+                                      const class GALGAS_location constinArgument10,
+                                      const class GALGAS_bigint constinArgument11,
+                                      const class GALGAS_PLMType constinArgument12,
+                                      class GALGAS_instructionListIR & ioArgument13,
+                                      class GALGAS_objectIR & outArgument14,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension setter '@semanticTemporariesStruct newTempLLVMVar'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_newTempLLVMVar (class GALGAS_semanticTemporariesStruct & ioObject,
+                                     class GALGAS_string & out_outTempLLVMVar,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1822,36 +1856,5 @@ void callExtensionSetter_insertGlobalVariable (class cPtr_universalPropertyAndRo
                                                const GALGAS_bool constin_inWritable,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                  Extension setter '@universalPropertyAndRoutineMapForContext insertLocalVariable'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_insertLocalVariable) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                                       const class GALGAS_lstring constinArgument0,
-                                                                                                       const class GALGAS_PLMType constinArgument1,
-                                                                                                       const class GALGAS_lstring constinArgument2,
-                                                                                                       const class GALGAS_valuedObjectState constinArgument3,
-                                                                                                       const class GALGAS_bool constinArgument4,
-                                                                                                       class C_Compiler * inCompiler
-                                                                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertLocalVariable (const int32_t inClassIndex,
-                                               extensionSetterSignature_universalPropertyAndRoutineMapForContext_insertLocalVariable inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertLocalVariable (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                              const GALGAS_lstring constin_inLocalVariableName,
-                                              const GALGAS_PLMType constin_inType,
-                                              const GALGAS_lstring constin_inPLMName,
-                                              const GALGAS_valuedObjectState constin_inVariableInitialState,
-                                              const GALGAS_bool constin_inObjectShouldBeValuedAtEndOfScope,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 
 #endif

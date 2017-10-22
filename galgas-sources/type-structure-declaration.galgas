@@ -647,9 +647,6 @@ method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
       ioLLVMcode += "  ret " + propTypeName + " * %result\n"
       ioLLVMcode += "}\n\n"
     case constant (value) :
-#      if [value isLiteralString] then
-#        propTypeName += "*"
-#      end
       let constantName = "@\"" + structTypeName + ".constant." + propertyName + "\""
       ioLLVMcode += constantName + " = private unnamed_addr constant " + propTypeName + " " + value + "\n\n"
       ioLLVMcode += "define internal " + propTypeName
