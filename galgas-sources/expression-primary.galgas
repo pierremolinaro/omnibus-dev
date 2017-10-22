@@ -583,17 +583,6 @@ proc analyzeRegisterExpression
           !inRegisterAddress
           !inRegisterElementSize
         ]
-#setter @instructionListIR appendComputeVolatileRegisterAddressWithSubscript
-#  ?let @objectIR inTarget
-#  ?let @objectIR inIndexResult
-#  ?let @bigint inAddress
-#  ?let @bigint inElementArraySize
-#        [!?ioInstructionGenerationList appendLoadFromReference
-#          !?ioTemporaries
-#          !computedAddrIR
-#          !inRegisterName.location
-#          ?outResult
-#        ]
       end
     else
       getNewTempVariable (!inRegisterType !inRegisterName.location !?ioTemporaries ?outResult)
@@ -777,39 +766,8 @@ proc handlePropertyAccessInExpression
       else
         error identifier : "this should be a structure instance" : ioInternalRepresentation
       end
-    case registerReference (@PLMType type
-                            @lstring plmRegisterName
-                            * *
-                            @bigint address
-                            @sliceMap sliceMap
-                            @uint arraySize *) : # 0 if not an array
-      if arraySize > 0 then
-        error inPropertyName : "register is an array, dot notation unavailable" : ioInternalRepresentation
-      else
-        getNewTempVariable (!type !plmRegisterName !?ioTemporaries ?let registerIR)
-        [!?ioInstructionGenerationList appendLoadVolatileRegister !registerIR !address]
-        [sliceMap searchKey
-          !inPropertyName
-          ?let @llvmBinaryOperation accessOperator
-          ?let @bigint accessRightOperand
-          ?let @sliceMap resultSliceMap
-          ?let @PLMType resultType
-        ]
-        [!?ioTemporaries newTempLLVMVar ?let llvmName]
-        let resultObject = @objectIR.llvmTemporaryValue {
-          !type:resultType
-          !llvmName:.new {!llvmName !inPropertyName}
-        }
-        [!?ioInstructionGenerationList appendBinaryOperation
-          !resultObject
-          ![registerIR type]
-          !inPropertyName.location
-          !registerIR
-          !accessOperator
-          !.literalInteger {!type:.staticInteger !value:accessRightOperand}
-        ]
-        ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
-      end
+    case registerReference (* * * * * * * *) :
+      error inPropertyName : "register is not handled here" : ioInternalRepresentation
     case temporaryReference (* *) :
       error identifier : "«temporaryReference» invalid here" : ioInternalRepresentation
     case property (* * *) :
@@ -843,29 +801,9 @@ proc handlePropertyAccessInExpression
     else
       error masterPropertyName : "'" + masterPropertyName + "' should be a structure" : ioInternalRepresentation
     end
-  case bitField (@sliceMap sliceMap @objectIR currentObject) :
-    [sliceMap searchKey
-      !inPropertyName
-      ?let @llvmBinaryOperation accessOperator
-      ?let @bigint accessRightOperand
-      ?let @sliceMap resultSliceMap
-      ?let @PLMType resultType
-    ]
-    [!?ioTemporaries newTempLLVMVar ?let llvmName]
-    let resultObject = @objectIR.llvmTemporaryValue {
-      !type:resultType
-      !llvmName:.new {!llvmName !inPropertyName}
-    }
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !resultObject
-      ![currentObject type]
-      !inPropertyName.location
-      !currentObject
-      !accessOperator
-      !.literalInteger {!type:.staticInteger !value:accessRightOperand}
-    ]
-    ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
-  case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
+  case bitField (* *) :
+    error inPropertyName : "register slice not handled here" : ioInternalRepresentation
+   case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
     error inPropertyName : "temporaryReference 3" : ioInternalRepresentation
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inPropertyName : "volatileIndirectReference 3": ioInternalRepresentation
