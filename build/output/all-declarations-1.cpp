@@ -4210,15 +4210,11 @@ typeComparisonResult cEnumAssociatedValues_objectIR_localVariableReference::comp
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_objectIR_temporaryReference::cEnumAssociatedValues_objectIR_temporaryReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                                      const GALGAS_lstring & inAssociatedValue1,
-                                                                                                      const GALGAS_sliceMap & inAssociatedValue2,
-                                                                                                      const GALGAS_bool & inAssociatedValue3
+                                                                                                      const GALGAS_lstring & inAssociatedValue1
                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2),
-mAssociatedValue3 (inAssociatedValue3) {
+mAssociatedValue1 (inAssociatedValue1) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4228,8 +4224,6 @@ void cEnumAssociatedValues_objectIR_temporaryReference::description (C_String & 
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  mAssociatedValue3.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -4244,12 +4238,6 @@ typeComparisonResult cEnumAssociatedValues_objectIR_temporaryReference::compare 
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
   }
   return result ;
 }
@@ -4600,15 +4588,13 @@ GALGAS_objectIR GALGAS_objectIR::constructor_localVariableReference (const GALGA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR GALGAS_objectIR::constructor_temporaryReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                                 const GALGAS_lstring & inAssociatedValue1,
-                                                                 const GALGAS_sliceMap & inAssociatedValue2,
-                                                                 const GALGAS_bool & inAssociatedValue3
+                                                                 const GALGAS_lstring & inAssociatedValue1
                                                                  COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_temporaryReference ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_temporaryReference (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectIR_temporaryReference (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -4791,15 +4777,11 @@ void GALGAS_objectIR::method_localVariableReference (GALGAS_PLMType & outAssocia
 
 void GALGAS_objectIR::method_temporaryReference (GALGAS_PLMType & outAssociatedValue0,
                                                  GALGAS_lstring & outAssociatedValue1,
-                                                 GALGAS_sliceMap & outAssociatedValue2,
-                                                 GALGAS_bool & outAssociatedValue3,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_temporaryReference) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    outAssociatedValue3.drop () ;
     C_String s ;
     s << "method @objectIR temporaryReference invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -4807,8 +4789,6 @@ void GALGAS_objectIR::method_temporaryReference (GALGAS_PLMType & outAssociatedV
     const cEnumAssociatedValues_objectIR_temporaryReference * ptr = (const cEnumAssociatedValues_objectIR_temporaryReference *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-    outAssociatedValue3 = ptr->mAssociatedValue3 ;
   }
 }
 

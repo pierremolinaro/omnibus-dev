@@ -16,7 +16,7 @@ enum @objectIR {
   case selfObject (@PLMType type)
   case globalVariableReference (@PLMType type @lstring plmName)
   case localVariableReference (@PLMType type @lstring plmName)
-  case temporaryReference (@PLMType type @lstring llvmName @sliceMap sliceMap @bool volatile)
+  case temporaryReference (@PLMType type @lstring llvmName)
   case registerReference (@PLMType type
                           @lstring plmName
                           @bool readable
@@ -57,7 +57,7 @@ getter @objectIR location -> @location {
     error .nowhere : "<<@objectIR location literalInteger>>" : result
   case llvmTemporaryValue (* llvmName) :
     result = llvmName
-  case temporaryReference (* llvmName * *) :
+  case temporaryReference (* llvmName) :
     result = llvmName
   case llvmStructureConstant (* *) :
     error .nowhere : "<<@objectIR location llvmStructureConstant>>" : result
@@ -85,7 +85,7 @@ getter @objectIR llvmName -> @string {
   case selfObject (*) : result = "%self"
   case literalInteger (* @bigint value) : result = [value string]
   case llvmTemporaryValue (* llvmName) : result = llvmName
-  case temporaryReference (* llvmName * *) : result = "%" + llvmName
+  case temporaryReference (* llvmName) : result = "%" + llvmName
   case llvmStructureConstant (* @sortedOperandIRList inValues) :
     result = "{"
     for () in inValues
@@ -106,7 +106,7 @@ getter @objectIR type -> @PLMType {
   switch self
   case null :
     error [self location] : "<<@objectIR type null>>" : result
-  case temporaryReference (type * * *) : result = type
+  case temporaryReference (type *) : result = type
   case property (type **) : result = type
   case registerReference (type *******) : result = type
   case globalVariableReference (type *) : result = type
@@ -137,8 +137,8 @@ getter @objectIR key -> @string {
 getter @objectIR withType ?let @PLMType inType -> @objectIR {
   switch self
   case null : error [self location] : "<<@objectIR withType null>>" : result
-  case temporaryReference (* llvmName sliceMap volatile) :
-    result = .temporaryReference {!type:inType !llvmName:llvmName !sliceMap:sliceMap !volatile:volatile}
+  case temporaryReference (* llvmName) :
+    result = .temporaryReference {!type:inType !llvmName:llvmName}
   case property (* plmName access) :
     result = .property {!type:inType !plmName:plmName !access:access}
   case registerReference (* plmName readable writable address sliceMap arraySize elementSize) :
@@ -176,7 +176,7 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
 getter @objectIR name -> @string {
   switch self
   case null : error [self location] : "<<@objectIR name null>>" : result
-  case temporaryReference (* llvmName **) : result = llvmName
+  case temporaryReference (* llvmName) : result = llvmName
   case property (* name *) : result = name
   case registerReference (* name ******) : result = name
   case localVariableReference (* name) : result = name
@@ -198,7 +198,7 @@ getter @objectIR name -> @string {
 getter @objectIR isStatic -> @bool {
   switch self
   case null : error [self location] : "<<@objectIR isStatic null>>" : result
-  case temporaryReference (****) : result = false
+  case temporaryReference (**) : result = false
   case property (***) : result = false
   case registerReference (* *******) : result = false
   case localVariableReference (* *) : result = false

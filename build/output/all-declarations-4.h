@@ -4015,7 +4015,6 @@ void extensionSetter_appendStoreTemporaryReference (class GALGAS_instructionList
                                                     const class GALGAS_PLMType constin_inTargetVarType,
                                                     const class GALGAS_string constin_inLLVMName,
                                                     const class GALGAS_objectIR constin_inSourceValue,
-                                                    const class GALGAS_bool constin_inVolatile,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -4048,8 +4047,7 @@ class GALGAS_storeFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_storeFromTemporaryReferenceIR constructor_new (const class GALGAS_PLMType & inOperand0,
                                                                               const class GALGAS_string & inOperand1,
-                                                                              const class GALGAS_objectIR & inOperand2,
-                                                                              const class GALGAS_bool & inOperand3
+                                                                              const class GALGAS_objectIR & inOperand2
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -4066,8 +4064,6 @@ class GALGAS_storeFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mVolatile (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -4091,13 +4087,11 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
   public : GALGAS_PLMType mProperty_mTargetVarType ;
   public : GALGAS_string mProperty_mLLVMName ;
   public : GALGAS_objectIR mProperty_mSourceValue ;
-  public : GALGAS_bool mProperty_mVolatile ;
 
 //--- Constructor
   public : cPtr_storeFromTemporaryReferenceIR (const GALGAS_PLMType & in_mTargetVarType,
                                                const GALGAS_string & in_mLLVMName,
-                                               const GALGAS_objectIR & in_mSourceValue,
-                                               const GALGAS_bool & in_mVolatile
+                                               const GALGAS_objectIR & in_mSourceValue
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -4107,7 +4101,6 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mVolatile (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

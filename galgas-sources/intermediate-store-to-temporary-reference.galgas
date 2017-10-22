@@ -4,9 +4,8 @@ setter @instructionListIR appendStoreTemporaryReference
   ?let @PLMType inTargetVarType
   ?let @string inLLVMName
   ?let @objectIR inSourceValue
-  ?volatile:let @bool inVolatile
 {
-  self += !@storeFromTemporaryReferenceIR.new {!inTargetVarType !inLLVMName !inSourceValue !inVolatile}
+  self += !@storeFromTemporaryReferenceIR.new {!inTargetVarType !inLLVMName !inSourceValue}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -15,7 +14,6 @@ class @storeFromTemporaryReferenceIR : @abstractInstructionIR {
   @PLMType mTargetVarType
   @string mLLVMName
   @objectIR mSourceValue
-  @bool mVolatile
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -26,11 +24,7 @@ override method @storeFromTemporaryReferenceIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
-  ioLLVMcode += "  store "
-  if mVolatile then
-    ioLLVMcode += "volatile "
-  end
-  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * %" + mLLVMName + "\n"
+  ioLLVMcode += "  store " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * %" + mLLVMName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

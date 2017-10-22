@@ -111,8 +111,6 @@ proc handleArraySubscript
       let result = @objectIR.temporaryReference {
         !type:inElementType
         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
-        !sliceMap:{}
-        !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetArrayElementReference
@@ -137,8 +135,6 @@ proc handleArraySubscript
       let result = @objectIR.temporaryReference {
         !type:inElementType
         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
-        !sliceMap:{}
-        !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetArrayElementReference
@@ -239,8 +235,6 @@ proc handleSubscriptRegisterArrayInAssignmentAndExpressionNew
       let registerAddressObject = @objectIR.temporaryReference {
         !type:registerType
         !llvmName:.new {!"zzz." + ioTemporaries.mTemporaryIndex !inErrorLocation}
-        !sliceMap:outSliceMap
-        !volatile:true
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendComputeVolatileRegisterAddressWithSubscript

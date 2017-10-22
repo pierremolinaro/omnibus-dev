@@ -340,8 +340,6 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
         let newObject = @objectIR.temporaryReference {
            !type:[propertyObject type]
            !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-           !sliceMap:{}
-           !volatile:false
         }
         ioTemporaries.mTemporaryIndex ++
         [!?baseGuardInstructionGenerationList appendGetPropertyReference
@@ -473,8 +471,6 @@ override method @complexCallSelfInstructionAST baseGuardAnalyze
         let newObject = @objectIR.temporaryReference {
            !type:[propertyObject type]
            !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-           !sliceMap:{}
-           !volatile:false
         }
         ioTemporaries.mTemporaryIndex ++
         [!?baseGuardInstructionGenerationList appendGetPropertyReference
