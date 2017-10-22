@@ -268,8 +268,7 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_internalRepresentation constructor_bitField (const class GALGAS_sliceMap & inOperand0,
-                                                                            const class GALGAS_objectIR & inOperand1
+  public : static class GALGAS_internalRepresentation constructor_bitField (const class GALGAS_objectIR & inOperand0
                                                                             COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_internalRepresentation constructor_standAloneIdentifier (const class GALGAS_lstring & inOperand0
@@ -300,8 +299,7 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_bitField (class GALGAS_sliceMap & outArgument0,
-                                                  class GALGAS_objectIR & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_bitField (class GALGAS_objectIR & outArgument0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -396,12 +394,10 @@ class cEnumAssociatedValues_internalRepresentation_structureMember : public cEnu
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_internalRepresentation_bitField : public cEnumAssociatedValues {
-  public : const GALGAS_sliceMap mAssociatedValue0 ;
-  public : const GALGAS_objectIR mAssociatedValue1 ;
+  public : const GALGAS_objectIR mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_internalRepresentation_bitField (const GALGAS_sliceMap & inAssociatedValue0,
-                                                                  const GALGAS_objectIR & inAssociatedValue1
+  public : cEnumAssociatedValues_internalRepresentation_bitField (const GALGAS_objectIR & inAssociatedValue0
                                                                   COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
