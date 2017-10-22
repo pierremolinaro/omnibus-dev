@@ -831,8 +831,6 @@ map @routineSignatureMapForContext { # argument signature is the key
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @possibleValuedObject {
-  case undefined
-  case property (@bool isReadOnly @bool isPublic @PLMType type @lstring plmName @propertyAccessKind access)
   case module (@PLMType type)
   case register (@bool readable
                  @bool writable
@@ -845,6 +843,11 @@ enum @possibleValuedObject {
   case localConstant (@PLMType type @lstring plmName)
   case globalVariable (@bool writable @PLMType type)
   case localVariable (@PLMType type @lstring plmName)
+
+#  case routine (@routineDescriptor descriptor @lstring llvmInvocationRoutineName)
+
+  case undefined
+  case property (@bool isReadOnly @bool isPublic @PLMType type @lstring plmName @propertyAccessKind access)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
