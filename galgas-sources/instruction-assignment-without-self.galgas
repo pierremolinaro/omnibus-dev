@@ -110,17 +110,16 @@ override method @varAssignmentNoSelfInstructionAST analyze
     [!?ioInstructionGenerationList appendStoreVolatileRegister !type !address !result]
   case volatileIndirectReference (@PLMType type @string llvmName) :
     [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !type !llvmName !result]
-  case bitField (* currentPointerIR) :
-    [!?ioInstructionGenerationList appendStoreFromReference !currentPointerIR !errorLocation !result]
+  case bitField (* *) :
+    error errorLocation : "bitField 8"
   case universalReference (@PLMType type @string llvmName) :
     [!?ioInstructionGenerationList appendStoreToUniversalReference !llvmName !type !result]
   case structureMember (@lstring propertyName @objectIR currentPointerIR) :
     if [[currentPointerIR type] isStructure] then
-      [[currentPointerIR type] structure ?2* ?universalMap:let structureMap ?3*]
-      var m = structureMap
-      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
+      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+      [propertyMap searchKey !propertyName ?2* ?let type ?*]
       let targetRef = @objectIR.temporaryReference {
-         !type:[masterPropertyIR type]
+         !type:type
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
          !sliceMap:{}
          !volatile:false

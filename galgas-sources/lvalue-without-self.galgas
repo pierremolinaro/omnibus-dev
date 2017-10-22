@@ -87,9 +87,9 @@ method @LValueWithoutSelfAST type
     switch access
     case property (@lstring propertyName) :
       if [outType isStructure] then
-        [outType structure ?2* ?universalMap:let universalMap ?3*]
-        [universalMap searchValuedObject !propertyName ?let propertyObject]
-        outType = [propertyObject type]
+        [outType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+        [propertyMap searchKey !propertyName ?2* ?let type ?*]
+        outType = type
       else
         error propertyName : "receiver has no property" : outType
       end

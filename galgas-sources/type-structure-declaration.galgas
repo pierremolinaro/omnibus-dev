@@ -365,7 +365,7 @@ override method @structureDeclarationAST enterInContext
     !type:.structure {
       !typeName:mStructureName
       !propertyMap:propertyMap
-      !universalMap:universalPropertyAndRoutineMapForContext
+      !universalMap2:universalPropertyAndRoutineMapForContext
       !propertyList:propertyList
       !flags:flags
       !plmTypeName:mStructureName

@@ -17,7 +17,7 @@ enum @PLMType {
   case enumeration (@constantMap constantMap @string plmTypeName)
   case structure (@lstring typeName
                   @propertyMap propertyMap
-                  @universalPropertyAndRoutineMapForContext universalMap
+                  @universalPropertyAndRoutineMapForContext universalMap2
                   @propertyList propertyList
                   @PLMTypeFlags flags
                   @string plmTypeName)
