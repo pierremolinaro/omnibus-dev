@@ -726,6 +726,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
     error mObjectName : "volatileIndirectReference 2": outResult
   case universalReference (@PLMType type @string llvmName) :
 #    error mObjectName : "indirectReference 2": outResult
+ #   outResult = .temporaryReference {!type:type !llvmName:[llvmName nowhere]}
     outResult = .llvmTemporaryValue {!type:type !llvmName:[llvmName nowhere]}
   end
 }
@@ -885,8 +886,14 @@ proc handleArrayAccessInExpression
       !?ioInstructionGenerationList
       !?variableIR
    )
-   ioInternalRepresentation = .bitField {!valueIR:variableIR}
-#   ioInternalRepresentation = .universalReference {!type:[variableIR type] !llvmName:"%" + [variableIR name]}
+   getNewTempVariable (![variableIR type] ![variableIR location] !?ioTemporaries ?let loadedObjectIR)
+   [!?ioInstructionGenerationList appendLoadFromTemporaryReference
+     !loadedObjectIR
+     ![variableIR llvmName]
+   ]
+#   ioInternalRepresentation = .bitField {!valueIR:variableIR}
+#   ioInternalRepresentation = .universalReference {!type:.pointer{!pointee:[variableIR type]} !llvmName:[variableIR name]}
+   ioInternalRepresentation = .universalReference {!type:[loadedObjectIR type] !llvmName:[loadedObjectIR name]}
   elsif [variableIR isRegisterReference] then
     error inEndOfIndex : "control register not handled here"
   else

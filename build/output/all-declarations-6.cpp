@@ -9548,10 +9548,10 @@ static void extensionMethod_primaryInExpressionAST_analyzePrimaryExpressionWithS
     break ;
   case GALGAS_internalRepresentation::kEnum_universalReference:
     {
-      const cEnumAssociatedValues_internalRepresentation_universalReference * extractPtr_28739 = (const cEnumAssociatedValues_internalRepresentation_universalReference *) (var_internalRepresentation_25249.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_28739->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_llvmName = extractPtr_28739->mAssociatedValue1 ;
-      outArgument_outResult = GALGAS_objectIR::constructor_llvmTemporaryValue (extractedValue_type, extractedValue_llvmName.getter_nowhere (SOURCE_FILE ("expression-primary.galgas", 729))  COMMA_SOURCE_FILE ("expression-primary.galgas", 729)) ;
+      const cEnumAssociatedValues_internalRepresentation_universalReference * extractPtr_28818 = (const cEnumAssociatedValues_internalRepresentation_universalReference *) (var_internalRepresentation_25249.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_28818->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_28818->mAssociatedValue1 ;
+      outArgument_outResult = GALGAS_objectIR::constructor_llvmTemporaryValue (extractedValue_type, extractedValue_llvmName.getter_nowhere (SOURCE_FILE ("expression-primary.galgas", 730))  COMMA_SOURCE_FILE ("expression-primary.galgas", 730)) ;
     }
     break ;
   }
