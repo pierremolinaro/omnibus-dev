@@ -2959,35 +2959,6 @@ typeComparisonResult cEnumAssociatedValues_internalRepresentation_structureMembe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_internalRepresentation_bitField::cEnumAssociatedValues_internalRepresentation_bitField (const GALGAS_objectIR & inAssociatedValue0
-                                                                                                              COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_internalRepresentation_bitField::description (C_String & ioString,
-                                                                         const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_internalRepresentation_bitField::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_internalRepresentation_bitField * ptr = dynamic_cast<const cEnumAssociatedValues_internalRepresentation_bitField *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference::cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference (const GALGAS_PLMType & inAssociatedValue0,
                                                                                                                                                 const GALGAS_uint & inAssociatedValue1
                                                                                                                                                 COMMA_LOCATION_ARGS) :
@@ -3131,21 +3102,6 @@ GALGAS_internalRepresentation GALGAS_internalRepresentation::constructor_structu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalRepresentation GALGAS_internalRepresentation::constructor_bitField (const GALGAS_objectIR & inAssociatedValue0
-                                                                                   COMMA_LOCATION_ARGS) {
-  GALGAS_internalRepresentation result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_bitField ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_internalRepresentation_bitField (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_internalRepresentation GALGAS_internalRepresentation::constructor_volatileAbsoluteReference (const GALGAS_PLMType & inAssociatedValue0,
                                                                                                     const GALGAS_uint & inAssociatedValue1
                                                                                                     COMMA_LOCATION_ARGS) {
@@ -3229,22 +3185,6 @@ void GALGAS_internalRepresentation::method_structureMember (GALGAS_lstring & out
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalRepresentation::method_bitField (GALGAS_objectIR & outAssociatedValue0,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_bitField) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @internalRepresentation bitField invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_internalRepresentation_bitField * ptr = (const cEnumAssociatedValues_internalRepresentation_bitField *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 void GALGAS_internalRepresentation::method_volatileAbsoluteReference (GALGAS_PLMType & outAssociatedValue0,
                                                                       GALGAS_uint & outAssociatedValue1,
                                                                       C_Compiler * inCompiler
@@ -3302,11 +3242,10 @@ void GALGAS_internalRepresentation::method_universalReference (GALGAS_PLMType & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_internalRepresentation [7] = {
+static const char * gEnumNameArrayFor_internalRepresentation [6] = {
   "(not built)",
   "standAloneIdentifier",
   "structureMember",
-  "bitField",
   "volatileAbsoluteReference",
   "volatileIndirectReference",
   "universalReference"
@@ -3322,12 +3261,6 @@ GALGAS_bool GALGAS_internalRepresentation::getter_isStandAloneIdentifier (UNUSED
 
 GALGAS_bool GALGAS_internalRepresentation::getter_isStructureMember (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_structureMember == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_internalRepresentation::getter_isBitField (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_bitField == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

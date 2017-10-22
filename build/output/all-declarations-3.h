@@ -238,7 +238,6 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_standAloneIdentifier,
     kEnum_structureMember,
-    kEnum_bitField,
     kEnum_volatileAbsoluteReference,
     kEnum_volatileIndirectReference,
     kEnum_universalReference
@@ -268,9 +267,6 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_internalRepresentation constructor_bitField (const class GALGAS_objectIR & inOperand0
-                                                                            COMMA_LOCATION_ARGS) ;
-
   public : static class GALGAS_internalRepresentation constructor_standAloneIdentifier (const class GALGAS_lstring & inOperand0
                                                                                         COMMA_LOCATION_ARGS) ;
 
@@ -299,10 +295,6 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_bitField (class GALGAS_objectIR & outArgument0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_standAloneIdentifier (class GALGAS_lstring & outArgument0,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const ;
@@ -330,8 +322,6 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitField (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStandAloneIdentifier (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStructureMember (LOCATION_ARGS) const ;
@@ -389,22 +379,6 @@ class cEnumAssociatedValues_internalRepresentation_structureMember : public cEnu
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_internalRepresentation_structureMember (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_internalRepresentation_bitField : public cEnumAssociatedValues {
-  public : const GALGAS_objectIR mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_internalRepresentation_bitField (const GALGAS_objectIR & inAssociatedValue0
-                                                                  COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_internalRepresentation_bitField (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
