@@ -217,7 +217,6 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 enum @internalRepresentation {
   case standAloneIdentifier (@lstring identifier)
   case structureMember (@lstring propertyName @objectIR currentPointerIR)
-  case bitField (@objectIR valueIR)
   case volatileAbsoluteReference (@PLMType type @uint address)
   case volatileIndirectReference (@PLMType type @string llvmName)
   case universalReference (@PLMType type @string llvmName)
@@ -513,8 +512,6 @@ proc analyzePrimaryExpressionNoSelf
     else
       error [currentPointer location] : "this should be a structure instance" : outResult
     end
-  case bitField (@objectIR valueIR) :
-    outResult = valueIR
   case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
     error inObjectName : "temporaryReference 1" : outResult
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
@@ -718,8 +715,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
     else
       error [currentPointer location] : "this should be a structure instance" : outResult
     end
-  case bitField (@objectIR valueIR) :
-    outResult = valueIR
   case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
     error mObjectName : "volatileAbsoluteReference 2" : outResult
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
@@ -804,8 +799,6 @@ proc handlePropertyAccessInExpression
     else
       error masterPropertyName : "'" + masterPropertyName + "' should be a structure" : ioInternalRepresentation
     end
-  case bitField (*) :
-    error inPropertyName : "register slice not handled here" : ioInternalRepresentation
    case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
     error inPropertyName : "temporaryReference 3" : ioInternalRepresentation
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
@@ -863,8 +856,6 @@ proc handleArrayAccessInExpression
     error inEndOfIndex : "volatileIndirectReference 4": variableIR, errorLocation
   case universalReference (@PLMType unused type @string unused llvmName) :
     error inEndOfIndex : "indirectReference 4": variableIR, errorLocation
-  case bitField (valueIR) :
-    error [valueIR location] : "this object is not an array" : variableIR, errorLocation
   end
 #--- Check current object is an array
   if [[variableIR type] isArrayType] then
@@ -924,11 +915,7 @@ proc handleFunctionCallInExpressionNew
   end
 #--- Get function name and map containing the function definition
   switch ioInternalRepresentation
-  case bitField (@objectIR valueIR) :
-    error [valueIR location]
-      : "this is not a function"
-      : ioInternalRepresentation
-  case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
+   case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
     error inErrorLocation : "temporaryReference 5"
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inErrorLocation : "volatileIndirectReference 5"

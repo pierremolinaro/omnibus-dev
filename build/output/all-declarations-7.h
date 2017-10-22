@@ -11,37 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Extension setter '@universalPropertyAndRoutineMapForContext insertLocalVariable'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_insertLocalVariable) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                                       const class GALGAS_lstring constinArgument0,
-                                                                                                       const class GALGAS_PLMType constinArgument1,
-                                                                                                       const class GALGAS_lstring constinArgument2,
-                                                                                                       const class GALGAS_valuedObjectState constinArgument3,
-                                                                                                       const class GALGAS_bool constinArgument4,
-                                                                                                       class C_Compiler * inCompiler
-                                                                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertLocalVariable (const int32_t inClassIndex,
-                                               extensionSetterSignature_universalPropertyAndRoutineMapForContext_insertLocalVariable inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertLocalVariable (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                              const GALGAS_lstring constin_inLocalVariableName,
-                                              const GALGAS_PLMType constin_inType,
-                                              const GALGAS_lstring constin_inPLMName,
-                                              const GALGAS_valuedObjectState constin_inVariableInitialState,
-                                              const GALGAS_bool constin_inObjectShouldBeValuedAtEndOfScope,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                   Extension method '@universalPropertyAndRoutineMapForContext searchValuedObject'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
