@@ -85,7 +85,7 @@ getter @objectIR llvmName -> @string {
   case selfObject (*) : result = "%self"
   case literalInteger (* @bigint value) : result = [value string]
   case llvmTemporaryValue (* llvmName) : result = llvmName
-  case temporaryReference (* llvmName) : result = "%" + llvmName
+  case temporaryReference (* llvmName) : result = llvmName
   case llvmStructureConstant (* @sortedOperandIRList inValues) :
     result = "{"
     for () in inValues

@@ -2,9 +2,8 @@
 setter @instructionListIR appendLoadFromTemporaryReference
   ?let @objectIR inTargetValue
   ?let @string inLLVMName
-  ?let @bool inVolatile
 {
-  self += !@loadFromTemporaryReferenceIR.new {!inTargetValue !inLLVMName !inVolatile}
+  self += !@loadFromTemporaryReferenceIR.new {!inTargetValue !inLLVMName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -12,7 +11,6 @@ setter @instructionListIR appendLoadFromTemporaryReference
 class @loadFromTemporaryReferenceIR : @abstractInstructionIR {
   @objectIR mTargetValue
   @string mLLVMName
-  @bool mVolatile
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,10 +22,7 @@ override method @loadFromTemporaryReferenceIR llvmInstructionCode
 {
   let llvmType = [mTargetValue llvmTypeName]
   ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
-  if mVolatile then
-    ioLLVMcode += "volatile "
-  end
-  ioLLVMcode += llvmType + ", " + llvmType + " * %" + mLLVMName + "\n"
+             + llvmType + ", " + llvmType + " * " + mLLVMName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

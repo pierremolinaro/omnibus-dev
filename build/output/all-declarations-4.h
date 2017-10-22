@@ -3170,7 +3170,6 @@ class cPtr_loadLocalVariableIR : public cPtr_abstractInstructionIR {
 void extensionSetter_appendLoadFromTemporaryReference (class GALGAS_instructionListIR & ioObject,
                                                        const class GALGAS_objectIR constin_inTargetValue,
                                                        const class GALGAS_string constin_inLLVMName,
-                                                       const class GALGAS_bool constin_inVolatile,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -3202,8 +3201,7 @@ class GALGAS_loadFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR 
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_loadFromTemporaryReferenceIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                             const class GALGAS_string & inOperand1,
-                                                                             const class GALGAS_bool & inOperand2
+                                                                             const class GALGAS_string & inOperand1
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3218,8 +3216,6 @@ class GALGAS_loadFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mVolatile (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -3242,12 +3238,10 @@ class cPtr_loadFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectIR mProperty_mTargetValue ;
   public : GALGAS_string mProperty_mLLVMName ;
-  public : GALGAS_bool mProperty_mVolatile ;
 
 //--- Constructor
   public : cPtr_loadFromTemporaryReferenceIR (const GALGAS_objectIR & in_mTargetValue,
-                                              const GALGAS_string & in_mLLVMName,
-                                              const GALGAS_bool & in_mVolatile
+                                              const GALGAS_string & in_mLLVMName
                                               COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -3256,7 +3250,6 @@ class cPtr_loadFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mVolatile (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

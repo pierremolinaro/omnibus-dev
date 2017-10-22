@@ -110,7 +110,7 @@ proc handleArraySubscript
     else
       let result = @objectIR.temporaryReference {
         !type:inElementType
-        !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
+        !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetArrayElementReference
@@ -134,7 +134,7 @@ proc handleArraySubscript
     end
       let result = @objectIR.temporaryReference {
         !type:inElementType
-        !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
+        !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetArrayElementReference

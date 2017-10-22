@@ -71,7 +71,6 @@ setter @instructionListIR appendLoadFromReference
     [!?self appendLoadFromTemporaryReference
       !outResultingValue
       !llvmName
-      !false
     ]
   case registerReference (type registerName * * address * arraySize *) :
     if arraySize > 0 then
