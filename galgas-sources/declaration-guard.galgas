@@ -339,7 +339,7 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
         currentErrorLocation = propertyName.location
         let newObject = @objectIR.temporaryReference {
            !type:[propertyObject type]
-           !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+           !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
         }
         ioTemporaries.mTemporaryIndex ++
         [!?baseGuardInstructionGenerationList appendGetPropertyReference
@@ -470,7 +470,7 @@ override method @complexCallSelfInstructionAST baseGuardAnalyze
         currentErrorLocation = propertyName.location
         let newObject = @objectIR.temporaryReference {
            !type:[propertyObject type]
-           !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+           !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
         }
         ioTemporaries.mTemporaryIndex ++
         [!?baseGuardInstructionGenerationList appendGetPropertyReference

@@ -501,7 +501,7 @@ proc analyzePrimaryExpressionNoSelf
       [propertyMap searchKey !propertyName ?2* ?let type ?*]
       let newObject = @objectIR.temporaryReference {
          !type:type
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -706,7 +706,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -791,7 +791,7 @@ proc handlePropertyAccessInExpression
       [propertyMap searchKey !masterPropertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
+         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -845,7 +845,7 @@ proc handleArrayAccessInExpression
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       variableIR = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -1049,7 +1049,7 @@ proc handleMethodCallInExpressionNew
     case propertyIndirectCall (type) :
       let propertyReference = @objectIR.temporaryReference {
          !type:type
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inMethodName}
+         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inMethodName}
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference

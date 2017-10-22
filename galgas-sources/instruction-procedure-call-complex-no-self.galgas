@@ -54,7 +54,7 @@ override method @complexCallNoSelfInstructionAST analyze
         currentErrorLocation = propertyName.location
         let newObject = @objectIR.temporaryReference {
            !type:[propertyObject type]
-           !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+           !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
         }
         ioTemporaries.mTemporaryIndex ++
         [!?ioInstructionGenerationList appendGetPropertyReference
@@ -153,7 +153,7 @@ override method @complexCallNoSelfInstructionAST analyze
     case propertyIndirectCall (type) :
       let propertyReference = @objectIR.temporaryReference {
          !type:type
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !methodName}
+         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !methodName}
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference

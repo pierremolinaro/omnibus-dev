@@ -119,7 +119,7 @@ override method @varAssignmentSelfInstructionAST analyze
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let targetRef = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference !targetRef !currentPointerIR !propertyName]
