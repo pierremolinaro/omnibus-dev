@@ -49,7 +49,7 @@ override method @complexCallSelfInstructionAST analyze
     switch access
     case property (@lstring propertyName) :
       if [currentType isStructure] then
-        [currentType structure ?2* ?universalMap:let universalMap ?3*]
+        [currentType structure ?2* ?universalMap2:let universalMap ?3*]
         [universalMap searchValuedObject !propertyName ?let propertyObject]
         currentMap = universalMap
         currentErrorLocation = propertyName.location
@@ -80,7 +80,7 @@ override method @complexCallSelfInstructionAST analyze
     methodName = propertyName
     let currentType = [currentObject type]
     if [currentType isStructure] then
-      [currentType structure ?2* ?universalMap:let universalMap ?3*]
+      [currentType structure ?2* ?universalMap2:let universalMap ?3*]
       currentMap = universalMap
       currentErrorLocation = propertyName.location
     else

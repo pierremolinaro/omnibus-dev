@@ -221,7 +221,7 @@ override method @staticArrayAST enterInContext
   let kind = @PLMType.structure {
     !typeName:llvmNameForStaticListElementType (!mStaticListName)
     !propertyMap:staticlistPropertyMap
-    !universalMap:universalMap
+    !universalMap2:universalMap
     !propertyList:propertyList
     !flags:.none
     !plmTypeName:mStaticListName

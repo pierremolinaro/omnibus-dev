@@ -360,11 +360,10 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
   case structureMember (propertyName @objectIR currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?2* ?universalMap:let structureMap ?3*]
-      var m = structureMap
-      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+      [propertyMap searchKey !propertyName ?2* ?let type ?*]
       let newObject = @objectIR.temporaryReference {
-         !type:[masterPropertyIR type]
+         !type:type
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
          !sliceMap:{}
          !volatile:false
@@ -469,9 +468,8 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
   case structureMember (propertyName @objectIR currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?2* ?universalMap:let structureMap ?3*]
-      var m = structureMap
-      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+      [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
@@ -588,9 +586,8 @@ proc handlePropertyAccessInExpression
     end
   case structureMember (masterPropertyName currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?2* ?universalMap:let structureMap ?3*]
-      var m = structureMap
-      [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR masterPropertyIR]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+      [propertyMap searchKey !masterPropertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
@@ -666,9 +663,8 @@ proc handleArrayAccessInExpression
   case structureMember (@lstring propertyName @objectIR currentPointerIR) :
     if [[currentPointerIR type] isStructure] then
       errorLocation = propertyName
-      [[currentPointerIR type] structure ?2* ?universalMap:let structureMap ?3*]
-      var m = structureMap
-      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
+      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+      [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       variableIR = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
@@ -828,7 +824,7 @@ proc handleMethodCallInExpressionNew
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outCallReturnedResult
 {
-  [[inCurrentPointerIR type] structure ?2* ?universalMap:let currentMap ?3*]
+  [[inCurrentPointerIR type] structure ?2* ?universalMap2:let currentMap ?3*]
   let routineMangledName = routineMangledNameFromCall (!"$" + [[inCurrentPointerIR type] key] !inMethodName !inArguments)
 #--- Get called function signature
   let signature = [inArguments routineSignature !inMethodName.location]

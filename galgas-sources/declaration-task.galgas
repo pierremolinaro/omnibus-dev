@@ -188,7 +188,7 @@ method @taskList enterInContext
     let taskType = @PLMType.structure {
       !typeName:task.mTaskName
       !propertyMap:propertyMap 
-      !universalMap:universalPropertyMap
+      !universalMap2:universalPropertyMap
       !propertyList:propertyList
       !flags:.none
       !plmTypeName:task.mTaskName
