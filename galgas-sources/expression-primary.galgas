@@ -775,7 +775,7 @@ proc handlePropertyAccessInExpression
       if [type isStructure] then
         let objectIR = @objectIR.llvmTemporaryValue {
           !type:type
-          !llvmName:.new {!llvmNameForLocalVariable (!plmName) !plmName} !sliceMap:{}
+          !llvmName:.new {!llvmNameForLocalVariable (!plmName) !plmName}
         }
         ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
       else
@@ -803,7 +803,6 @@ proc handlePropertyAccessInExpression
         let resultObject = @objectIR.llvmTemporaryValue {
           !type:resultType
           !llvmName:.new {!llvmName !inPropertyName}
-          !sliceMap:resultSliceMap
         }
         [!?ioInstructionGenerationList appendBinaryOperation
           !resultObject
@@ -819,7 +818,7 @@ proc handlePropertyAccessInExpression
       error identifier : "«temporaryReference» invalid here" : ioInternalRepresentation
     case property (* * *) :
       error identifier : "«property» invalid here" : ioInternalRepresentation
-    case llvmTemporaryValue (* * *) :
+    case llvmTemporaryValue (* *) :
       error identifier : "«llvmTemporaryValue» invalid here" : ioInternalRepresentation
     case literalInteger  (* *) :
       error identifier : "«literalInteger» invalid here" : ioInternalRepresentation
@@ -862,7 +861,6 @@ proc handlePropertyAccessInExpression
     let resultObject = @objectIR.llvmTemporaryValue {
       !type:resultType
       !llvmName:.new {!llvmName !inPropertyName}
-      !sliceMap:resultSliceMap
     }
     [!?ioInstructionGenerationList appendBinaryOperation
       !resultObject
@@ -1274,7 +1272,7 @@ proc analyzeEffectiveParametersNew
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!name) !name} !sliceMap:{}}
+        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!name) !name}}
     case input (@lstring name) :
       [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
 #      if not accessIsAllowed then
@@ -1293,7 +1291,6 @@ proc analyzeEffectiveParametersNew
           !type:[objectIR type]
           !llvmName:.new {!llvmNameForLocalVariable (![objectIR name])
           ![objectIR location]}
-          !sliceMap:{}
         }
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
@@ -1336,7 +1333,6 @@ proc analyzeEffectiveParametersNew
       let argumentIR = @objectIR.llvmTemporaryValue {
         !type:[objectIR type]
         !llvmName:.new {!llvmNameForLocalVariable (![objectIR llvmName]) ![objectIR location]}
-        !sliceMap:{}
       }
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :

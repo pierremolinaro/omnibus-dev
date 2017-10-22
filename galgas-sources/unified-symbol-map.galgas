@@ -90,7 +90,6 @@ proc getNewTempVariable
     outTempVariable = .llvmTemporaryValue {
       !type: inType
       !llvmName:.new {!llvmName !inErrorLocation}
-      !sliceMap:{}
     }
   end
 }
