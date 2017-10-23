@@ -496,7 +496,7 @@ proc analyzePrimaryExpressionNoSelf
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
   case structureMember (propertyName @objectIR currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
       [propertyMap searchKey !propertyName ?2* ?let type ?*]
       let newObject = @objectIR.temporaryReference {
          !type:type
@@ -699,7 +699,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
   case structureMember (propertyName @objectIR currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
@@ -783,7 +783,7 @@ proc handlePropertyAccessInExpression
     end
   case structureMember (masterPropertyName currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
       [propertyMap searchKey !masterPropertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
@@ -835,7 +835,7 @@ proc handleArrayAccessInExpression
   case structureMember (@lstring propertyName @objectIR currentPointerIR) :
     if [[currentPointerIR type] isStructure] then
       errorLocation = propertyName
-      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       variableIR = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
@@ -979,7 +979,7 @@ proc handleMethodCallInExpressionNew
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outCallReturnedResult
 {
-  [[inCurrentPointerIR type] structure ?2* ?universalMap2:let currentMap ?3*]
+  [[inCurrentPointerIR type] structure ?3* ?universalMap:let currentMap ?3*]
   let routineMangledName = routineMangledNameFromCall (!"$" + [[inCurrentPointerIR type] key] !inMethodName !inArguments)
 #--- Get called function signature
   let signature = [inArguments routineSignature !inMethodName.location]
@@ -1266,7 +1266,7 @@ proc analyzeEffectiveParametersNew
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case integer (* * * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case structure (* * universalMap * * *) :
+      case structure (* * * universalMap * * *) :
         var m = universalMap
         [!?m searchValuedObjectForReadAccess !name ?let propertyObject]
         getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)

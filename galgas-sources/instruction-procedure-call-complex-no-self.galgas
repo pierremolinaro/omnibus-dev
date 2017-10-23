@@ -35,11 +35,41 @@ override method @complexCallNoSelfInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
+#--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
   [ioUniversalMap searchValuedObject !mAssignmentTargetAST.mIdentifier ?@objectIR currentObject]
+#--- Check current object in a structure instance
+  if not [[currentObject type] isStructure] then
+    error mAssignmentTargetAST.mIdentifier : "receiver has no property"
+  else
+  #--- Get current object property map
+    [[currentObject type] structure ?1* ?propertyMap:@propertyMap propertyMap ?5*]
+  #--- Insulate last access (should be a "property", used as routine name
+    var accessList = mAssignmentTargetAST.mAccessList
+    [!?accessList popLast ?let lastAccess]
+    for (access) in accessList do
+      switch access
+      case property (@lstring propertyName) :
+        [propertyMap searchKey
+          !propertyName
+          ?let @bool isPublic
+          ?let @objectIR propertyObject
+          ?let @PLMType type
+          ?let@propertyAccessKind mAccess
+        ]
+      if not [type isStructure] then
+        error mAssignmentTargetAST.mIdentifier : "receiver has no property"
+      else
+        [type structure ?1* ?propertyMap:propertyMap ?5*]
+      end
+      case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
+        error endOfIndex : "not handled yet" : currentObject
+      end
+    end
+  end
+
   var currentErrorLocation = mAssignmentTargetAST.mIdentifier.location
   var currentMap = ioUniversalMap
-#--- Insulate last access
+#--- Insulate last access (should be a "property", used as routine name
   var accessList = mAssignmentTargetAST.mAccessList
   [!?accessList popLast ?let lastAccess]
 #---- Loop on access list
@@ -48,7 +78,7 @@ override method @complexCallNoSelfInstructionAST analyze
     switch access
     case property (@lstring propertyName) :
       if [currentType isStructure] then
-        [currentType structure ?2* ?universalMap2:let universalMap ?3*]
+        [currentType structure ?3* ?universalMap:let universalMap ?3*]
         [universalMap searchValuedObject !propertyName ?let propertyObject]
         currentMap = universalMap
         currentErrorLocation = propertyName.location
@@ -77,7 +107,7 @@ override method @complexCallNoSelfInstructionAST analyze
     methodName = propertyName
     let currentType = [currentObject type]
     if [currentType isStructure] then
-      [currentType structure ?2* ?universalMap2:let universalMap ?3*]
+      [currentType structure ?3* ?universalMap:let universalMap ?3*]
       currentMap = universalMap
       currentErrorLocation = propertyName.location
     else

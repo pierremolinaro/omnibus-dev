@@ -170,6 +170,7 @@ method @taskList enterInContext
     @propertyList propertyList = {}
     @propertyMap propertyMap = {}
     @universalPropertyAndRoutineMapForContext universalPropertyMap = .default
+    @routineMapForContext methodMap = .default
     @sortedOperandIRList initialValueList = {}
     for property in task.mVarList do
       [property enterInContext
@@ -187,8 +188,9 @@ method @taskList enterInContext
   #--- Enter task variable map as structure type in type map
     let taskType = @PLMType.structure {
       !typeName:task.mTaskName
-      !propertyMap:propertyMap 
-      !universalMap2:universalPropertyMap
+      !propertyMap:propertyMap
+      !methodMap:methodMap
+      !universalMap:universalPropertyMap
       !propertyList:propertyList
       !flags:.none
       !plmTypeName:task.mTaskName
