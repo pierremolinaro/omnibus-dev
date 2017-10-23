@@ -139,7 +139,7 @@ override method @staticArrayAST enterInContext
 {
   @propertyList propertyList = {}
   @propertyMap staticlistPropertyMap = {}
-  @universalPropertyAndRoutineMapForContext universalMap = .default
+#  @universalPropertyAndRoutineMapForContext universalMap = .default
   @stringset propertyNameSet = {}
   let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
   for (propertyName type) in mPropertyList do (propertyIndex)
@@ -152,13 +152,13 @@ override method @staticArrayAST enterInContext
       propertyNameSet += !propertyName
       propertyList += !propertyName !propertyType
       let objectIR = @objectIR.property {!type:propertyType !plmName:propertyName !access:.indexed{!index:propertyIndex}}
-      [!?universalMap insertProperty
-        !propertyName
-        !readOnly:true
-        !public:true
-        !type:propertyType
-        !access:.indexed{!index:propertyIndex}
-      ]
+#      [!?universalMap insertProperty
+#        !propertyName
+#        !readOnly:true
+#        !public:true
+#        !type:propertyType
+#        !access:.indexed{!index:propertyIndex}
+#      ]
       [!?staticlistPropertyMap insertKey
         !propertyName
         !true # Public
@@ -181,22 +181,22 @@ override method @staticArrayAST enterInContext
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
       let type = @PLMType.function {!signature:signature !mode:mode !returnTypeProxy:returnTypeProxy}
-      let descriptor = @routineDescriptor.new {
-        !true
-        !false
-        !.function {!executionMode:mode}
-        !signature
-        !returnTypeProxy
-        !false
-        !false
-        !.propertyIndirectCall {!type:type}
-      }
-      [!?universalMap insertRoutine
-        !propertyName
-        ![formalArgs routineSignature !propertyName]
-        !routineMangledName
-        !descriptor
-      ]
+#      let descriptor = @routineDescriptor.new {
+#        !true
+#        !false
+#        !.function {!executionMode:mode}
+#        !signature
+#        !returnTypeProxy
+#        !false
+#        !false
+#        !.propertyIndirectCall {!type:type}
+#      }
+#      [!?universalMap insertRoutine
+#        !propertyName
+#        ![formalArgs routineSignature !propertyName]
+#        !routineMangledName
+#        !descriptor
+#      ]
       if not [ioContext.mTypeMap hasKey !routineMangledName] then
         [!?ioContext.mTypeMap insertType
           !lkey:routineMangledName
@@ -221,7 +221,6 @@ override method @staticArrayAST enterInContext
   let kind = @PLMType.structure {
     !typeName:llvmNameForStaticListElementType (!mStaticListName)
     !propertyMap:staticlistPropertyMap
-    !universalMap:universalMap
     !propertyList:propertyList
     !flags:.none
     !plmTypeName:mStaticListName

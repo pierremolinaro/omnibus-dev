@@ -247,7 +247,7 @@ override method @structureDeclarationAST enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
 #---------------------------------------- Properties
-  @universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext = .default
+#  @universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext = .default
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
@@ -258,7 +258,7 @@ override method @structureDeclarationAST enterInContext
       !mStructureName
       !?context:ioContext
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?universalPropertyAndRoutineMapForContext
+#      !?universalPropertyAndRoutineMapForContext
       !?propertyList
       !?propertyMap
       !?sortedOperandIRList
@@ -294,34 +294,34 @@ override method @structureDeclarationAST enterInContext
       attributeSet += !attribute.mValue.string
     end
   #--- Signature
-    let signature = [function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
-    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let typedSignature)
+#    let signature = [function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
+#    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let typedSignature)
   #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
+#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
   #--- Function invocation name
-    let invocationName = routineMangledNameFromAST (
-      !"$" + mStructureName 
-      !function.mFunctionName
-      !function.mFunctionFormalArgumentList
-    )
+#    let invocationName = routineMangledNameFromAST (
+#      !"$" + mStructureName 
+#      !function.mFunctionName
+#      !function.mFunctionFormalArgumentList
+#    )
   #--- Function descriptor
-    let functionDescriptor = @routineDescriptor.new {
-      !function.mPublicFunction
-      ![attributeSet hasKey !exportedAttribute ()]
-      !.function {!executionMode:function.mMode}
-      !typedSignature
-      !returnTypeProxy
-      ![attributeSet hasKey !accessAttribute ()]
-      ![attributeSet hasKey !mutatingAttribute ()]
-      !.staticCall
-    }
+#    let functionDescriptor = @routineDescriptor.new {
+#      !function.mPublicFunction
+#      ![attributeSet hasKey !exportedAttribute ()]
+#      !.function {!executionMode:function.mMode}
+#      !typedSignature
+#      !returnTypeProxy
+#      ![attributeSet hasKey !accessAttribute ()]
+#      ![attributeSet hasKey !mutatingAttribute ()]
+#      !.staticCall
+#    }
   #---
-    [!?universalPropertyAndRoutineMapForContext insertRoutine
-      !function.mFunctionName
-      !signature
-      !invocationName
-      !functionDescriptor
-    ]
+#    [!?universalPropertyAndRoutineMapForContext insertRoutine
+#      !function.mFunctionName
+#      !signature
+#      !invocationName
+#      !functionDescriptor
+#    ]
   end
   for system in mSystemRoutineListAST do
   #--- Attribute set
@@ -330,34 +330,34 @@ override method @structureDeclarationAST enterInContext
       attributeSet += !attribute.mValue.string
     end
   #--- Signature
-    let signature = [system.mFormalArgumentList routineSignature !system.mName]
-    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature typedSignature)
+#    let signature = [system.mFormalArgumentList routineSignature !system.mName]
+#    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature typedSignature)
   #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
+#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
   #--- Function invocation name
-    let invocationName = routineMangledNameFromAST (
-      !"$" + mStructureName 
-      !system.mName
-      !system.mFormalArgumentList
-    )
+#    let invocationName = routineMangledNameFromAST (
+#      !"$" + mStructureName 
+#      !system.mName
+#      !system.mFormalArgumentList
+#    )
   #--- Function descriptor
-    let descriptor = @routineDescriptor.new {
-      !system.mPublic
-      ![attributeSet hasKey !exportedAttribute ()]
-      !system.mRoutineKind
-      !typedSignature
-      !returnTypeProxy
-      ![attributeSet hasKey !accessAttribute ()]
-      ![attributeSet hasKey !mutatingAttribute ()]
-      !.staticCall
-    }
+#    let descriptor = @routineDescriptor.new {
+#      !system.mPublic
+#      ![attributeSet hasKey !exportedAttribute ()]
+#      !system.mRoutineKind
+#      !typedSignature
+#      !returnTypeProxy
+#      ![attributeSet hasKey !accessAttribute ()]
+#      ![attributeSet hasKey !mutatingAttribute ()]
+#      !.staticCall
+#    }
   #---
-    [!?universalPropertyAndRoutineMapForContext insertRoutine
-      !system.mName
-      !signature
-      !invocationName
-      !descriptor
-    ]
+#    [!?universalPropertyAndRoutineMapForContext insertRoutine
+#      !system.mName
+#      !signature
+#      !invocationName
+#      !descriptor
+#    ]
   end
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
@@ -365,7 +365,6 @@ override method @structureDeclarationAST enterInContext
     !type:.structure {
       !typeName:mStructureName
       !propertyMap:propertyMap
-      !universalMap:universalPropertyAndRoutineMapForContext
       !propertyList:propertyList
       !flags:flags
       !plmTypeName:mStructureName
@@ -380,7 +379,7 @@ method @structurePropertyListAST-element enterInContext
   ?let @lstring inStructureName
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!@universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext
+#  ?!@universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext
   ?!@propertyList propertyList
   ?!@propertyMap propertyMap
   ?!@sortedOperandIRList sortedOperandIRList
@@ -441,13 +440,13 @@ method @structurePropertyListAST-element enterInContext
         !actualPropertyType
         !constantProperty
       ]
-      [!?universalPropertyAndRoutineMapForContext insertProperty
-        !mPropertyName
-        !readOnly:mIsConstant
-        !public:mIsPublic
-        !type:actualPropertyType
-        !access:constantProperty
-      ]
+#      [!?universalPropertyAndRoutineMapForContext insertProperty
+#        !mPropertyName
+#        !readOnly:mIsConstant
+#        !public:mIsPublic
+#        !type:actualPropertyType
+#        !access:constantProperty
+#      ]
     else
       let propertyIndex = [propertyList length]
       let indexedProperty = @propertyAccessKind.indexed{!index:propertyIndex}
@@ -459,13 +458,13 @@ method @structurePropertyListAST-element enterInContext
         !actualPropertyType
         !indexedProperty
       ]
-      [!?universalPropertyAndRoutineMapForContext insertProperty
-        !mPropertyName
-        !readOnly:mIsConstant
-        !public:mIsPublic
-        !type:actualPropertyType
-        !access:indexedProperty
-      ]
+#      [!?universalPropertyAndRoutineMapForContext insertProperty
+#        !mPropertyName
+#        !readOnly:mIsConstant
+#        !public:mIsPublic
+#        !type:actualPropertyType
+#        !access:indexedProperty
+#      ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     end
   case noExpression :
@@ -481,13 +480,13 @@ method @structurePropertyListAST-element enterInContext
       !optionalPropertyType
       !.indexed{!index:propertyIndex}
     ]
-    [!?universalPropertyAndRoutineMapForContext insertProperty
-      !mPropertyName
-      !readOnly:mIsConstant
-      !public:mIsPublic
-      !type:optionalPropertyType
-      !access:.indexed{!index:propertyIndex}
-    ]
+#    [!?universalPropertyAndRoutineMapForContext insertProperty
+#      !mPropertyName
+#      !readOnly:mIsConstant
+#      !public:mIsPublic
+#      !type:optionalPropertyType
+#      !access:.indexed{!index:propertyIndex}
+#    ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
   end
 }
@@ -619,7 +618,7 @@ proc generatePropertyAccess
   ?structureType:let @PLMType inType
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [inType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+  [inType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
   for (propertyName * objectIR * *) in propertyMap do
     [objectIR property ?type:let propertyType ?plmName:* ?access:let access]
     ioIntermediateCodeStruct.mPropertyAccessRoutineList += 
