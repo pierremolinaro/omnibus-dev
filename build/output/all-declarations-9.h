@@ -24,6 +24,30 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          Routine 'handleArraySubscriptNew'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
+                                      const class GALGAS_bool constinArgument1,
+                                      const class GALGAS_lstring constinArgument2,
+                                      const class GALGAS_semanticContext constinArgument3,
+                                      const class GALGAS_mode constinArgument4,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                      class GALGAS_staticStringMap & ioArgument6,
+                                      class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
+                                      class GALGAS_allocaList & ioArgument8,
+                                      const class GALGAS_expressionAST constinArgument9,
+                                      const class GALGAS_location constinArgument10,
+                                      const class GALGAS_bigint constinArgument11,
+                                      const class GALGAS_PLMType constinArgument12,
+                                      class GALGAS_instructionListIR & ioArgument13,
+                                      class GALGAS_objectIR & outArgument14,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Routine 'handleArraySubscript'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -221,5 +245,20 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class C_Compi
 class GALGAS_string function_linkForHTMLTypeMap (const class GALGAS_string & constinArgument0,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Routine 'semanticAnalysis'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
+                               const class GALGAS_ast constinArgument1,
+                               const class GALGAS_semanticContext constinArgument2,
+                               const class GALGAS_location constinArgument3,
+                               const class GALGAS_staticStringMap constinArgument4,
+                               class GALGAS_intermediateCodeStruct & outArgument5,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
 
 #endif

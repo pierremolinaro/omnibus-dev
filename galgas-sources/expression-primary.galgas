@@ -935,12 +935,11 @@ proc handlePropertyAccessInExpression
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inPropertyName : "volatileIndirectReference 3": ioInternalRepresentation
   case universalReference (@PLMType type @string unused llvmName) :
-#    error inPropertyName : "indirectReference 3": ioInternalRepresentation
     if [type isStructure] then
       [type structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
-      [propertyMap searchKey !inPropertyName ?* ?let @objectIR masterPropertyIR ?let propertyType ?let propertyAccess]
+      [propertyMap searchKey !inPropertyName ?2* ?let propertyType ?let propertyAccess]
       switch propertyAccess
-      case constant (@string llvmValue) :
+      case constant (@string unused llvmValue) :
         error inPropertyName : "constant property no handled yet" : ioInternalRepresentation
       case indexed (@uint index) :
         [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
