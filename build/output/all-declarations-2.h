@@ -8387,7 +8387,7 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
     kEnum_globalVariable,
     kEnum_localVariable,
     kEnum_undefined,
-    kEnum_property
+    kEnum_propertyEX
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -8432,12 +8432,12 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
   public : static class GALGAS_possibleValuedObject constructor_module (const class GALGAS_PLMType & inOperand0
                                                                         COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_possibleValuedObject constructor_property (const class GALGAS_bool & inOperand0,
-                                                                          const class GALGAS_bool & inOperand1,
-                                                                          const class GALGAS_PLMType & inOperand2,
-                                                                          const class GALGAS_lstring & inOperand3,
-                                                                          const class GALGAS_propertyAccessKind & inOperand4
-                                                                          COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_possibleValuedObject constructor_propertyEX (const class GALGAS_bool & inOperand0,
+                                                                            const class GALGAS_bool & inOperand1,
+                                                                            const class GALGAS_PLMType & inOperand2,
+                                                                            const class GALGAS_lstring & inOperand3,
+                                                                            const class GALGAS_propertyAccessKind & inOperand4
+                                                                            COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_possibleValuedObject constructor_register (const class GALGAS_bool & inOperand0,
                                                                           const class GALGAS_bool & inOperand1,
@@ -8482,13 +8482,13 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_property (class GALGAS_bool & outArgument0,
-                                                  class GALGAS_bool & outArgument1,
-                                                  class GALGAS_PLMType & outArgument2,
-                                                  class GALGAS_lstring & outArgument3,
-                                                  class GALGAS_propertyAccessKind & outArgument4,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_propertyEX (class GALGAS_bool & outArgument0,
+                                                    class GALGAS_bool & outArgument1,
+                                                    class GALGAS_PLMType & outArgument2,
+                                                    class GALGAS_lstring & outArgument3,
+                                                    class GALGAS_propertyAccessKind & outArgument4,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_bool & outArgument0,
                                                   class GALGAS_bool & outArgument1,
@@ -8513,7 +8513,7 @@ class GALGAS_possibleValuedObject : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModule (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPropertyEX (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegister (LOCATION_ARGS) const ;
 

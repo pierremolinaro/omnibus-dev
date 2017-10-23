@@ -2088,52 +2088,52 @@ static void extensionMethod_structureDeclarationAST_functionSemanticAnalysis (co
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_structureDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_structureDeclarationAST) ;
-  cEnumerator_functionDeclarationListAST enumerator_21331 (object->mProperty_mFunctionDeclarationListAST, kENUMERATION_UP) ;
-  while (enumerator_21331.hasCurrentObject ()) {
-    GALGAS_bool var_warnIfUnused_21355 = GALGAS_bool (true) ;
-    GALGAS_bool var_mutating_21379 = GALGAS_bool (false) ;
-    GALGAS_bool var_accessProperties_21412 = GALGAS_bool (false) ;
-    cEnumerator_lstringlist enumerator_21475 (enumerator_21331.current (HERE).getter_mFunctionAttributeList (HERE), kENUMERATION_UP) ;
-    while (enumerator_21475.hasCurrentObject ()) {
-      const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_21475.current_mValue (HERE).getter_string (HERE).objectCompare (function_noUnusedWarningAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 563)))).boolEnum () ;
+  cEnumerator_functionDeclarationListAST enumerator_19164 (object->mProperty_mFunctionDeclarationListAST, kENUMERATION_UP) ;
+  while (enumerator_19164.hasCurrentObject ()) {
+    GALGAS_bool var_warnIfUnused_19188 = GALGAS_bool (true) ;
+    GALGAS_bool var_mutating_19212 = GALGAS_bool (false) ;
+    GALGAS_bool var_accessProperties_19245 = GALGAS_bool (false) ;
+    cEnumerator_lstringlist enumerator_19308 (enumerator_19164.current (HERE).getter_mFunctionAttributeList (HERE), kENUMERATION_UP) ;
+    while (enumerator_19308.hasCurrentObject ()) {
+      const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_19308.current_mValue (HERE).getter_string (HERE).objectCompare (function_noUnusedWarningAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 505)))).boolEnum () ;
       if (kBoolTrue == test_0) {
-        const enumGalgasBool test_1 = var_warnIfUnused_21355.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 564)).boolEnum () ;
+        const enumGalgasBool test_1 = var_warnIfUnused_19188.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 506)).boolEnum () ;
         if (kBoolTrue == test_1) {
           TC_Array <C_FixItDescription> fixItArray2 ;
-          inCompiler->emitSemanticError (enumerator_21475.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 565)), GALGAS_string ("duplicated @").add_operation (function_noUnusedWarningAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 565)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 565)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 565)), fixItArray2  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 565)) ;
+          inCompiler->emitSemanticError (enumerator_19308.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 507)), GALGAS_string ("duplicated @").add_operation (function_noUnusedWarningAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 507)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 507)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 507)), fixItArray2  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 507)) ;
         }
-        var_warnIfUnused_21355 = GALGAS_bool (false) ;
+        var_warnIfUnused_19188 = GALGAS_bool (false) ;
       }else if (kBoolFalse == test_0) {
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_21475.current_mValue (HERE).getter_string (HERE).objectCompare (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 568)))).boolEnum () ;
+        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_19308.current_mValue (HERE).getter_string (HERE).objectCompare (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 510)))).boolEnum () ;
         if (kBoolTrue == test_3) {
-          const enumGalgasBool test_4 = var_accessProperties_21412.boolEnum () ;
+          const enumGalgasBool test_4 = var_accessProperties_19245.boolEnum () ;
           if (kBoolTrue == test_4) {
             TC_Array <C_FixItDescription> fixItArray5 ;
-            inCompiler->emitSemanticError (enumerator_21475.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 570)), GALGAS_string ("duplicated @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 570)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 570)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 570)), fixItArray5  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 570)) ;
+            inCompiler->emitSemanticError (enumerator_19308.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 512)), GALGAS_string ("duplicated @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 512)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 512)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 512)), fixItArray5  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 512)) ;
           }
-          var_accessProperties_21412 = GALGAS_bool (true) ;
+          var_accessProperties_19245 = GALGAS_bool (true) ;
         }else if (kBoolFalse == test_3) {
-          const enumGalgasBool test_6 = GALGAS_bool (kIsEqual, enumerator_21475.current_mValue (HERE).getter_string (HERE).objectCompare (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 573)))).boolEnum () ;
+          const enumGalgasBool test_6 = GALGAS_bool (kIsEqual, enumerator_19308.current_mValue (HERE).getter_string (HERE).objectCompare (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 515)))).boolEnum () ;
           if (kBoolTrue == test_6) {
-            const enumGalgasBool test_7 = var_mutating_21379.boolEnum () ;
+            const enumGalgasBool test_7 = var_mutating_19212.boolEnum () ;
             if (kBoolTrue == test_7) {
               TC_Array <C_FixItDescription> fixItArray8 ;
-              inCompiler->emitSemanticError (enumerator_21475.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 575)), GALGAS_string ("duplicated @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 575)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 575)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 575)), fixItArray8  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 575)) ;
+              inCompiler->emitSemanticError (enumerator_19308.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 517)), GALGAS_string ("duplicated @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 517)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 517)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 517)), fixItArray8  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 517)) ;
             }
-            var_mutating_21379 = GALGAS_bool (true) ;
+            var_mutating_19212 = GALGAS_bool (true) ;
           }else if (kBoolFalse == test_6) {
             TC_Array <C_FixItDescription> fixItArray9 ;
-            inCompiler->emitSemanticError (enumerator_21475.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 579)), GALGAS_string ("unknown attribute; available attributes are @").add_operation (function_noUnusedWarningAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 579)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 579)).add_operation (GALGAS_string (", @"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 579)).add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)).add_operation (GALGAS_string (" and @"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)).add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)), fixItArray9  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 579)) ;
+            inCompiler->emitSemanticError (enumerator_19308.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 521)), GALGAS_string ("unknown attribute; available attributes are @").add_operation (function_noUnusedWarningAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 521)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 521)).add_operation (GALGAS_string (", @"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 521)).add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 522)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 522)).add_operation (GALGAS_string (" and @"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 522)).add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 522)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 522)), fixItArray9  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 521)) ;
           }
         }
       }
-      enumerator_21475.gotoNextObject () ;
+      enumerator_19308.gotoNextObject () ;
     }
-    var_accessProperties_21412 = GALGAS_bool (kIsNotEqual, enumerator_21331.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("type-structure-declaration.galgas", 583)))) ;
+    var_accessProperties_19245 = GALGAS_bool (kIsNotEqual, enumerator_19164.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("type-structure-declaration.galgas", 525)))) ;
     {
-    routine_routineSemanticAnalysis (constinArgument_inStructureType, GALGAS_routineKind::constructor_function (enumerator_21331.current (HERE).getter_mMode (HERE)  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)), enumerator_21331.current (HERE).getter_mMode (HERE), enumerator_21331.current (HERE).getter_mFunctionName (HERE), enumerator_21331.current (HERE).getter_mFunctionFormalArgumentList (HERE), enumerator_21331.current (HERE).getter_mFunctionReturnTypeName (HERE), enumerator_21331.current (HERE).getter_mFunctionInstructionList (HERE), enumerator_21331.current (HERE).getter_mEndOfFunctionDeclaration (HERE), var_accessProperties_21412, var_mutating_21379, var_warnIfUnused_21355, GALGAS_bool (false), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)) ;
+    routine_routineSemanticAnalysis (constinArgument_inStructureType, GALGAS_routineKind::constructor_function (enumerator_19164.current (HERE).getter_mMode (HERE)  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 528)), enumerator_19164.current (HERE).getter_mMode (HERE), enumerator_19164.current (HERE).getter_mFunctionName (HERE), enumerator_19164.current (HERE).getter_mFunctionFormalArgumentList (HERE), enumerator_19164.current (HERE).getter_mFunctionReturnTypeName (HERE), enumerator_19164.current (HERE).getter_mFunctionInstructionList (HERE), enumerator_19164.current (HERE).getter_mEndOfFunctionDeclaration (HERE), var_accessProperties_19245, var_mutating_19212, var_warnIfUnused_19188, GALGAS_bool (false), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 526)) ;
     }
-    enumerator_21331.gotoNextObject () ;
+    enumerator_19164.gotoNextObject () ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9336,7 +9336,7 @@ static void extensionMethod_primaryInExpressionAST_analyzePrimaryExpressionNoSel
         }
       }
       break ;
-    case GALGAS_possibleValuedObject::kEnum_property:
+    case GALGAS_possibleValuedObject::kEnum_propertyEX:
       {
         TC_Array <C_FixItDescription> fixItArray5 ;
         inCompiler->emitSemanticError (object->mProperty_mObjectName.getter_location (SOURCE_FILE ("expression-primary.galgas", 436)), GALGAS_string ("\xC2""\xAB"" prpoerty undefined in this context"), fixItArray5  COMMA_SOURCE_FILE ("expression-primary.galgas", 436)) ;
@@ -9442,82 +9442,82 @@ static void extensionMethod_primaryInExpressionAST_analyzePrimaryExpressionWithS
                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_primaryInExpressionAST * object = inObject ;
   macroValidSharedObject (object, cPtr_primaryInExpressionAST) ;
-  GALGAS_internalRepresentation var_internalRepresentation_25952 = GALGAS_internalRepresentation::constructor_structureMember (object->mProperty_mObjectName, GALGAS_objectIR::constructor_selfObject (constinArgument_inSelfType  COMMA_SOURCE_FILE ("expression-primary.galgas", 661))  COMMA_SOURCE_FILE ("expression-primary.galgas", 659)) ;
-  cEnumerator_primaryInExpressionAccessListAST enumerator_26106 (object->mProperty_mAccessList, kENUMERATION_UP) ;
-  while (enumerator_26106.hasCurrentObject ()) {
-    switch (enumerator_26106.current_mAccess (HERE).enumValue ()) {
+  GALGAS_internalRepresentation var_internalRepresentation_25954 = GALGAS_internalRepresentation::constructor_structureMember (object->mProperty_mObjectName, GALGAS_objectIR::constructor_selfObject (constinArgument_inSelfType  COMMA_SOURCE_FILE ("expression-primary.galgas", 661))  COMMA_SOURCE_FILE ("expression-primary.galgas", 659)) ;
+  cEnumerator_primaryInExpressionAccessListAST enumerator_26108 (object->mProperty_mAccessList, kENUMERATION_UP) ;
+  while (enumerator_26108.hasCurrentObject ()) {
+    switch (enumerator_26108.current_mAccess (HERE).enumValue ()) {
     case GALGAS_primaryInExpressionAccessAST::kNotBuilt:
       break ;
     case GALGAS_primaryInExpressionAccessAST::kEnum_property:
       {
-        const cEnumAssociatedValues_primaryInExpressionAccessAST_property * extractPtr_26657 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_property *) (enumerator_26106.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_propertyName = extractPtr_26657->mAssociatedValue0 ;
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_property * extractPtr_26659 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_property *) (enumerator_26108.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_propertyName = extractPtr_26659->mAssociatedValue0 ;
         {
-        routine_handlePropertyAccessInExpression (var_internalRepresentation_25952, extractedValue_propertyName, constinArgument_inCallerNameForInvocationGraph, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 667)) ;
+        routine_handlePropertyAccessInExpression (var_internalRepresentation_25954, extractedValue_propertyName, constinArgument_inCallerNameForInvocationGraph, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 667)) ;
         }
       }
       break ;
     case GALGAS_primaryInExpressionAccessAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess * extractPtr_27290 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess *) (enumerator_26106.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_27290->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfIndex = extractPtr_27290->mAssociatedValue1 ;
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess * extractPtr_27292 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess *) (enumerator_26108.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_27292->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfIndex = extractPtr_27292->mAssociatedValue1 ;
         {
-        routine_handleArrayAccessInExpression (var_internalRepresentation_25952, extractedValue_indexExpression, extractedValue_endOfIndex, constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 681)) ;
+        routine_handleArrayAccessInExpression (var_internalRepresentation_25954, extractedValue_indexExpression, extractedValue_endOfIndex, constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 681)) ;
         }
       }
       break ;
     case GALGAS_primaryInExpressionAccessAST::kEnum_funcCall:
       {
-        const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * extractPtr_27860 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *) (enumerator_26106.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_effectiveArgumentListAST extractedValue_arguments = extractPtr_27860->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_errorLocation = extractPtr_27860->mAssociatedValue1 ;
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * extractPtr_27862 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *) (enumerator_26108.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_effectiveArgumentListAST extractedValue_arguments = extractPtr_27862->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_errorLocation = extractPtr_27862->mAssociatedValue1 ;
         {
-        routine_handleFunctionCallInExpression (var_internalRepresentation_25952, constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_arguments, extractedValue_errorLocation, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 698)) ;
+        routine_handleFunctionCallInExpression (var_internalRepresentation_25954, constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_arguments, extractedValue_errorLocation, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 698)) ;
         }
       }
       break ;
     }
-    enumerator_26106.gotoNextObject () ;
+    enumerator_26108.gotoNextObject () ;
   }
-  switch (var_internalRepresentation_25952.enumValue ()) {
+  switch (var_internalRepresentation_25954.enumValue ()) {
   case GALGAS_internalRepresentation::kNotBuilt:
     break ;
   case GALGAS_internalRepresentation::kEnum_standAloneIdentifier:
     {
-      const cEnumAssociatedValues_internalRepresentation_standAloneIdentifier * extractPtr_28109 = (const cEnumAssociatedValues_internalRepresentation_standAloneIdentifier *) (var_internalRepresentation_25952.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_identifier = extractPtr_28109->mAssociatedValue0 ;
+      const cEnumAssociatedValues_internalRepresentation_standAloneIdentifier * extractPtr_28111 = (const cEnumAssociatedValues_internalRepresentation_standAloneIdentifier *) (var_internalRepresentation_25954.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_identifier = extractPtr_28111->mAssociatedValue0 ;
       {
       ioArgument_ioUniversalMap.insulate (HERE) ;
-      cPtr_universalPropertyAndRoutineMapForContext * ptr_28053 = (cPtr_universalPropertyAndRoutineMapForContext *) ioArgument_ioUniversalMap.ptr () ;
-      callExtensionSetter_searchValuedObjectForReadAccess ((cPtr_universalPropertyAndRoutineMapForContext *) ptr_28053, extractedValue_identifier, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 718)) ;
+      cPtr_universalPropertyAndRoutineMapForContext * ptr_28055 = (cPtr_universalPropertyAndRoutineMapForContext *) ioArgument_ioUniversalMap.ptr () ;
+      callExtensionSetter_searchValuedObjectForReadAccess ((cPtr_universalPropertyAndRoutineMapForContext *) ptr_28055, extractedValue_identifier, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 718)) ;
       }
     }
     break ;
   case GALGAS_internalRepresentation::kEnum_structureMember:
     {
-      const cEnumAssociatedValues_internalRepresentation_structureMember * extractPtr_28888 = (const cEnumAssociatedValues_internalRepresentation_structureMember *) (var_internalRepresentation_25952.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_propertyName = extractPtr_28888->mAssociatedValue0 ;
-      const GALGAS_objectIR extractedValue_currentPointer = extractPtr_28888->mAssociatedValue1 ;
+      const cEnumAssociatedValues_internalRepresentation_structureMember * extractPtr_28890 = (const cEnumAssociatedValues_internalRepresentation_structureMember *) (var_internalRepresentation_25954.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_propertyName = extractPtr_28890->mAssociatedValue0 ;
+      const GALGAS_objectIR extractedValue_currentPointer = extractPtr_28890->mAssociatedValue1 ;
       const enumGalgasBool test_0 = extensionGetter_type (extractedValue_currentPointer, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 720)).getter_isStructure (SOURCE_FILE ("expression-primary.galgas", 720)).boolEnum () ;
       if (kBoolTrue == test_0) {
-        GALGAS_propertyMap var_propertyMap_28307 ;
-        GALGAS_lstring joker_28263_1 ; // Joker input parameter
-        GALGAS_propertyList joker_28309_3 ; // Joker input parameter
-        GALGAS_PLMTypeFlags joker_28309_2 ; // Joker input parameter
-        GALGAS_string joker_28309_1 ; // Joker input parameter
-        extensionGetter_type (extractedValue_currentPointer, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 721)).method_structure (joker_28263_1, var_propertyMap_28307, joker_28309_3, joker_28309_2, joker_28309_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 721)) ;
-        GALGAS_objectIR var_masterPropertyIR_28390 ;
-        GALGAS_bool joker_28357 ; // Joker input parameter
-        GALGAS_PLMType joker_28392_2 ; // Joker input parameter
-        GALGAS_propertyAccessKind joker_28392_1 ; // Joker input parameter
-        var_propertyMap_28307.method_searchKey (extractedValue_propertyName, joker_28357, var_masterPropertyIR_28390, joker_28392_2, joker_28392_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 722)) ;
-        GALGAS_objectIR var_newObject_28415 = GALGAS_objectIR::constructor_temporaryReference (extensionGetter_type (var_masterPropertyIR_28390, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 724)), GALGAS_lstring::constructor_new (GALGAS_string ("%temp.").add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("expression-primary.galgas", 725)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 725)), extractedValue_propertyName.getter_location (SOURCE_FILE ("expression-primary.galgas", 725))  COMMA_SOURCE_FILE ("expression-primary.galgas", 725))  COMMA_SOURCE_FILE ("expression-primary.galgas", 723)) ;
+        GALGAS_propertyMap var_propertyMap_28309 ;
+        GALGAS_lstring joker_28265_1 ; // Joker input parameter
+        GALGAS_propertyList joker_28311_3 ; // Joker input parameter
+        GALGAS_PLMTypeFlags joker_28311_2 ; // Joker input parameter
+        GALGAS_string joker_28311_1 ; // Joker input parameter
+        extensionGetter_type (extractedValue_currentPointer, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 721)).method_structure (joker_28265_1, var_propertyMap_28309, joker_28311_3, joker_28311_2, joker_28311_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 721)) ;
+        GALGAS_objectIR var_masterPropertyIR_28392 ;
+        GALGAS_bool joker_28359 ; // Joker input parameter
+        GALGAS_PLMType joker_28394_2 ; // Joker input parameter
+        GALGAS_propertyAccessKind joker_28394_1 ; // Joker input parameter
+        var_propertyMap_28309.method_searchKey (extractedValue_propertyName, joker_28359, var_masterPropertyIR_28392, joker_28394_2, joker_28394_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 722)) ;
+        GALGAS_objectIR var_newObject_28417 = GALGAS_objectIR::constructor_temporaryReference (extensionGetter_type (var_masterPropertyIR_28392, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 724)), GALGAS_lstring::constructor_new (GALGAS_string ("%temp.").add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("expression-primary.galgas", 725)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 725)), extractedValue_propertyName.getter_location (SOURCE_FILE ("expression-primary.galgas", 725))  COMMA_SOURCE_FILE ("expression-primary.galgas", 725))  COMMA_SOURCE_FILE ("expression-primary.galgas", 723)) ;
         ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 727)) ;
         {
-        extensionSetter_appendGetPropertyReference (ioArgument_ioInstructionGenerationList, var_newObject_28415, extractedValue_currentPointer, extractedValue_propertyName.getter_string (SOURCE_FILE ("expression-primary.galgas", 731)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 728)) ;
+        extensionSetter_appendGetPropertyReference (ioArgument_ioInstructionGenerationList, var_newObject_28417, extractedValue_currentPointer, extractedValue_propertyName.getter_string (SOURCE_FILE ("expression-primary.galgas", 731)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 728)) ;
         }
-        outArgument_outResult = var_newObject_28415 ;
+        outArgument_outResult = var_newObject_28417 ;
       }else if (kBoolFalse == test_0) {
         TC_Array <C_FixItDescription> fixItArray1 ;
         inCompiler->emitSemanticError (extensionGetter_location (extractedValue_currentPointer, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 735)), GALGAS_string ("this should be a structure instance"), fixItArray1  COMMA_SOURCE_FILE ("expression-primary.galgas", 735)) ;
@@ -9527,9 +9527,9 @@ static void extensionMethod_primaryInExpressionAST_analyzePrimaryExpressionWithS
     break ;
   case GALGAS_internalRepresentation::kEnum_volatileAbsoluteReference:
     {
-      const cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference * extractPtr_29033 = (const cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference *) (var_internalRepresentation_25952.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_29033->mAssociatedValue0 ;
-      const GALGAS_uint extractedValue_address = extractPtr_29033->mAssociatedValue1 ;
+      const cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference * extractPtr_29035 = (const cEnumAssociatedValues_internalRepresentation_volatileAbsoluteReference *) (var_internalRepresentation_25954.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_29035->mAssociatedValue0 ;
+      const GALGAS_uint extractedValue_address = extractPtr_29035->mAssociatedValue1 ;
       TC_Array <C_FixItDescription> fixItArray2 ;
       inCompiler->emitSemanticError (object->mProperty_mObjectName.getter_location (SOURCE_FILE ("expression-primary.galgas", 738)), GALGAS_string ("volatileAbsoluteReference 2"), fixItArray2  COMMA_SOURCE_FILE ("expression-primary.galgas", 738)) ;
       outArgument_outResult.drop () ; // Release error dropped variable
@@ -9537,9 +9537,9 @@ static void extensionMethod_primaryInExpressionAST_analyzePrimaryExpressionWithS
     break ;
   case GALGAS_internalRepresentation::kEnum_volatileIndirectReference:
     {
-      const cEnumAssociatedValues_internalRepresentation_volatileIndirectReference * extractPtr_29180 = (const cEnumAssociatedValues_internalRepresentation_volatileIndirectReference *) (var_internalRepresentation_25952.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_29180->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_llvmName = extractPtr_29180->mAssociatedValue1 ;
+      const cEnumAssociatedValues_internalRepresentation_volatileIndirectReference * extractPtr_29182 = (const cEnumAssociatedValues_internalRepresentation_volatileIndirectReference *) (var_internalRepresentation_25954.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_29182->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_29182->mAssociatedValue1 ;
       TC_Array <C_FixItDescription> fixItArray3 ;
       inCompiler->emitSemanticError (object->mProperty_mObjectName.getter_location (SOURCE_FILE ("expression-primary.galgas", 740)), GALGAS_string ("volatileIndirectReference 2"), fixItArray3  COMMA_SOURCE_FILE ("expression-primary.galgas", 740)) ;
       outArgument_outResult.drop () ; // Release error dropped variable
@@ -9547,9 +9547,9 @@ static void extensionMethod_primaryInExpressionAST_analyzePrimaryExpressionWithS
     break ;
   case GALGAS_internalRepresentation::kEnum_universalReference:
     {
-      const cEnumAssociatedValues_internalRepresentation_universalReference * extractPtr_29456 = (const cEnumAssociatedValues_internalRepresentation_universalReference *) (var_internalRepresentation_25952.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_29456->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_llvmName = extractPtr_29456->mAssociatedValue1 ;
+      const cEnumAssociatedValues_internalRepresentation_universalReference * extractPtr_29458 = (const cEnumAssociatedValues_internalRepresentation_universalReference *) (var_internalRepresentation_25954.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_29458->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_29458->mAssociatedValue1 ;
       outArgument_outResult = GALGAS_objectIR::constructor_llvmTemporaryValue (extractedValue_type, extractedValue_llvmName.getter_nowhere (SOURCE_FILE ("expression-primary.galgas", 744))  COMMA_SOURCE_FILE ("expression-primary.galgas", 744)) ;
     }
     break ;
@@ -11838,7 +11838,7 @@ void extensionMethod_analyzeLValueNoSelf (const GALGAS_LValueAST inObject,
         outArgument_outInternalRepresentation.drop () ; // Release error dropped variable
       }
       break ;
-    case GALGAS_possibleValuedObject::kEnum_property:
+    case GALGAS_possibleValuedObject::kEnum_propertyEX:
       {
         TC_Array <C_FixItDescription> fixItArray4 ;
         inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("lvalue.galgas", 147)), GALGAS_string ("property \?\?"), fixItArray4  COMMA_SOURCE_FILE ("lvalue.galgas", 147)) ;
@@ -11854,12 +11854,12 @@ void extensionMethod_analyzeLValueNoSelf (const GALGAS_LValueAST inObject,
       break ;
     case GALGAS_possibleValuedObject::kEnum_register:
       {
-        const cEnumAssociatedValues_possibleValuedObject_register * extractPtr_6726 = (const cEnumAssociatedValues_possibleValuedObject_register *) (var_entity_5608.unsafePointer ()) ;
-        const GALGAS_bool extractedValue_writable = extractPtr_6726->mAssociatedValue1 ;
-        const GALGAS_PLMType extractedValue_registerType = extractPtr_6726->mAssociatedValue2 ;
-        const GALGAS_bigint extractedValue_registerAddress = extractPtr_6726->mAssociatedValue3 ;
-        const GALGAS_uint extractedValue_arraySize = extractPtr_6726->mAssociatedValue5 ;
-        const GALGAS_uint extractedValue_elementSize = extractPtr_6726->mAssociatedValue6 ;
+        const cEnumAssociatedValues_possibleValuedObject_register * extractPtr_6728 = (const cEnumAssociatedValues_possibleValuedObject_register *) (var_entity_5608.unsafePointer ()) ;
+        const GALGAS_bool extractedValue_writable = extractPtr_6728->mAssociatedValue1 ;
+        const GALGAS_PLMType extractedValue_registerType = extractPtr_6728->mAssociatedValue2 ;
+        const GALGAS_bigint extractedValue_registerAddress = extractPtr_6728->mAssociatedValue3 ;
+        const GALGAS_uint extractedValue_arraySize = extractPtr_6728->mAssociatedValue5 ;
+        const GALGAS_uint extractedValue_elementSize = extractPtr_6728->mAssociatedValue6 ;
         {
         routine_analyzeControlRegisterInLValue (constinArgument_inSelfType, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inObject.mProperty_mIdentifier, extractedValue_registerType, extractedValue_writable, extractedValue_registerAddress.getter_uint (inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 164)), extractedValue_arraySize, extractedValue_elementSize, inObject.mProperty_mAccessList, outArgument_outInternalRepresentation, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 151)) ;
         }
@@ -11881,9 +11881,9 @@ void extensionMethod_analyzeLValueNoSelf (const GALGAS_LValueAST inObject,
       break ;
     case GALGAS_possibleValuedObject::kEnum_globalVariable:
       {
-        const cEnumAssociatedValues_possibleValuedObject_globalVariable * extractPtr_7905 = (const cEnumAssociatedValues_possibleValuedObject_globalVariable *) (var_entity_5608.unsafePointer ()) ;
-        const GALGAS_bool extractedValue_writable = extractPtr_7905->mAssociatedValue0 ;
-        const GALGAS_PLMType extractedValue_variableType = extractPtr_7905->mAssociatedValue1 ;
+        const cEnumAssociatedValues_possibleValuedObject_globalVariable * extractPtr_7907 = (const cEnumAssociatedValues_possibleValuedObject_globalVariable *) (var_entity_5608.unsafePointer ()) ;
+        const GALGAS_bool extractedValue_writable = extractPtr_7907->mAssociatedValue0 ;
+        const GALGAS_PLMType extractedValue_variableType = extractPtr_7907->mAssociatedValue1 ;
         const enumGalgasBool test_8 = extractedValue_writable.operator_not (SOURCE_FILE ("lvalue.galgas", 175)).boolEnum () ;
         if (kBoolTrue == test_8) {
           TC_Array <C_FixItDescription> fixItArray9 ;
@@ -11901,9 +11901,9 @@ void extensionMethod_analyzeLValueNoSelf (const GALGAS_LValueAST inObject,
       break ;
     case GALGAS_possibleValuedObject::kEnum_localVariable:
       {
-        const cEnumAssociatedValues_possibleValuedObject_localVariable * extractPtr_8563 = (const cEnumAssociatedValues_possibleValuedObject_localVariable *) (var_entity_5608.unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_variableType = extractPtr_8563->mAssociatedValue0 ;
-        const GALGAS_lstring extractedValue_plmName = extractPtr_8563->mAssociatedValue1 ;
+        const cEnumAssociatedValues_possibleValuedObject_localVariable * extractPtr_8565 = (const cEnumAssociatedValues_possibleValuedObject_localVariable *) (var_entity_5608.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_variableType = extractPtr_8565->mAssociatedValue0 ;
+        const GALGAS_lstring extractedValue_plmName = extractPtr_8565->mAssociatedValue1 ;
         {
         routine_analyzeVariableInLValue (constinArgument_inSelfType, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inObject.mProperty_mIdentifier, function_llvmNameForLocalVariable (extractedValue_plmName.getter_string (SOURCE_FILE ("lvalue.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 208)), extractedValue_variableType, inObject.mProperty_mAccessList, outArgument_outInternalRepresentation, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 197)) ;
         }
@@ -12646,102 +12646,6 @@ C_PrologueEpilogue gSetter_universalPropertyAndRoutineMapForContext_insertRoutin
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Extension setter '@universalPropertyAndRoutineMapForContext insertProperty'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <extensionSetterSignature_universalPropertyAndRoutineMapForContext_insertProperty> gExtensionModifierTable_universalPropertyAndRoutineMapForContext_insertProperty ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertProperty (const int32_t inClassIndex,
-                                          extensionSetterSignature_universalPropertyAndRoutineMapForContext_insertProperty inModifier) {
-  gExtensionModifierTable_universalPropertyAndRoutineMapForContext_insertProperty.forceObjectAtIndex (inClassIndex, inModifier, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertProperty (cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                         const GALGAS_lstring constin_inPropertyName,
-                                         const GALGAS_bool constin_inIsReadOnly,
-                                         const GALGAS_bool constin_inIsPublic,
-                                         const GALGAS_PLMType constin_inType,
-                                         const GALGAS_propertyAccessKind constin_inAccess,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find setter
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_universalPropertyAndRoutineMapForContext) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    extensionSetterSignature_universalPropertyAndRoutineMapForContext_insertProperty f = NULL ;
-    if (classIndex < gExtensionModifierTable_universalPropertyAndRoutineMapForContext_insertProperty.count ()) {
-      f = gExtensionModifierTable_universalPropertyAndRoutineMapForContext_insertProperty (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gExtensionModifierTable_universalPropertyAndRoutineMapForContext_insertProperty.count ()) {
-           f = gExtensionModifierTable_universalPropertyAndRoutineMapForContext_insertProperty (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gExtensionModifierTable_universalPropertyAndRoutineMapForContext_insertProperty.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    f (inObject, constin_inPropertyName, constin_inIsReadOnly, constin_inIsPublic, constin_inType, constin_inAccess, inCompiler COMMA_THERE) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionSetter_universalPropertyAndRoutineMapForContext_insertProperty (cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                     const GALGAS_lstring constinArgument_inPropertyName,
-                                                                                     const GALGAS_bool constinArgument_inIsReadOnly,
-                                                                                     const GALGAS_bool constinArgument_inIsPublic,
-                                                                                     const GALGAS_PLMType constinArgument_inType,
-                                                                                     const GALGAS_propertyAccessKind constinArgument_inAccess,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
-  macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_possibleValuedObject var_newValue_2411 = GALGAS_possibleValuedObject::constructor_property (constinArgument_inIsReadOnly, constinArgument_inIsPublic, constinArgument_inType, constinArgument_inPropertyName, constinArgument_inAccess  COMMA_SOURCE_FILE ("universal-map.galgas", 58)) ;
-  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_2577 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inPropertyName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 65)) ;
-  if (NULL != objectArray_2577) {
-      macroValidSharedObject (objectArray_2577, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    const enumGalgasBool test_0 = objectArray_2577->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 66)).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      objectArray_2577->mProperty_mPossibleValuedObject = var_newValue_2411 ;
-    }else if (kBoolFalse == test_0) {
-      TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inPropertyName.getter_location (SOURCE_FILE ("universal-map.galgas", 69)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 69)) ;
-    }
-  }else{
-    {
-    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inPropertyName, GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("universal-map.galgas", 74)), GALGAS_bool (false), var_newValue_2411, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 72)) ;
-    }
-  }
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionSetter_universalPropertyAndRoutineMapForContext_insertProperty (void) {
-  enterExtensionSetter_insertProperty (kTypeDescriptor_GALGAS_universalPropertyAndRoutineMapForContext.mSlotID,
-                                       extensionSetter_universalPropertyAndRoutineMapForContext_insertProperty) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeExtensionModifier_universalPropertyAndRoutineMapForContext_insertProperty (void) {
-  gExtensionModifierTable_universalPropertyAndRoutineMapForContext_insertProperty.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gSetter_universalPropertyAndRoutineMapForContext_insertProperty (defineExtensionSetter_universalPropertyAndRoutineMapForContext_insertProperty,
-                                                                                    freeExtensionModifier_universalPropertyAndRoutineMapForContext_insertProperty) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                      Extension setter '@universalPropertyAndRoutineMapForContext insertModule'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12795,20 +12699,20 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_insertModul
                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_possibleValuedObject var_newValue_3258 = GALGAS_possibleValuedObject::constructor_module (constinArgument_inModuleType  COMMA_SOURCE_FILE ("universal-map.galgas", 88)) ;
-  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_3317 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inModuleName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 89)) ;
-  if (NULL != objectArray_3317) {
-      macroValidSharedObject (objectArray_3317, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    const enumGalgasBool test_0 = objectArray_3317->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 90)).boolEnum () ;
+  GALGAS_possibleValuedObject var_newValue_2299 = GALGAS_possibleValuedObject::constructor_module (constinArgument_inModuleType  COMMA_SOURCE_FILE ("universal-map.galgas", 55)) ;
+  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_2358 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inModuleName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 56)) ;
+  if (NULL != objectArray_2358) {
+      macroValidSharedObject (objectArray_2358, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
+    const enumGalgasBool test_0 = objectArray_2358->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 57)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      objectArray_3317->mProperty_mPossibleValuedObject = var_newValue_3258 ;
+      objectArray_2358->mProperty_mPossibleValuedObject = var_newValue_2299 ;
     }else if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inModuleName.getter_location (SOURCE_FILE ("universal-map.galgas", 93)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 93)) ;
+      inCompiler->emitSemanticError (constinArgument_inModuleName.getter_location (SOURCE_FILE ("universal-map.galgas", 60)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 60)) ;
     }
   }else{
     {
-    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inModuleName, GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("universal-map.galgas", 98)), GALGAS_bool (false), var_newValue_3258, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 96)) ;
+    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inModuleName, GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("universal-map.galgas", 65)), GALGAS_bool (false), var_newValue_2299, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 68)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 63)) ;
     }
   }
 }
@@ -12897,20 +12801,20 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_insertRegis
                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
   cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_possibleValuedObject var_newValue_4225 = GALGAS_possibleValuedObject::constructor_register (constinArgument_inReadable, constinArgument_inWritable, constinArgument_inType, constinArgument_inAddress, constinArgument_inSliceMap, constinArgument_inArraySize, constinArgument_inElementSize  COMMA_SOURCE_FILE ("universal-map.galgas", 118)) ;
-  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_4464 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inRegisterName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 127)) ;
-  if (NULL != objectArray_4464) {
-      macroValidSharedObject (objectArray_4464, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    const enumGalgasBool test_0 = objectArray_4464->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 128)).boolEnum () ;
+  GALGAS_possibleValuedObject var_newValue_3266 = GALGAS_possibleValuedObject::constructor_register (constinArgument_inReadable, constinArgument_inWritable, constinArgument_inType, constinArgument_inAddress, constinArgument_inSliceMap, constinArgument_inArraySize, constinArgument_inElementSize  COMMA_SOURCE_FILE ("universal-map.galgas", 85)) ;
+  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_3505 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inRegisterName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 94)) ;
+  if (NULL != objectArray_3505) {
+      macroValidSharedObject (objectArray_3505, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
+    const enumGalgasBool test_0 = objectArray_3505->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 95)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      objectArray_4464->mProperty_mPossibleValuedObject = var_newValue_4225 ;
+      objectArray_3505->mProperty_mPossibleValuedObject = var_newValue_3266 ;
     }else if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inRegisterName.getter_location (SOURCE_FILE ("universal-map.galgas", 131)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 131)) ;
+      inCompiler->emitSemanticError (constinArgument_inRegisterName.getter_location (SOURCE_FILE ("universal-map.galgas", 98)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 98)) ;
     }
   }else{
     {
-    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inRegisterName, GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("universal-map.galgas", 136)), GALGAS_bool (false), var_newValue_4225, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 139)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 134)) ;
+    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inRegisterName, GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("universal-map.galgas", 103)), GALGAS_bool (false), var_newValue_3266, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 106)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 101)) ;
     }
   }
 }
@@ -12987,20 +12891,20 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_insertGloba
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_possibleValuedObject var_newValue_5162 = GALGAS_possibleValuedObject::constructor_globalConstant (constinArgument_inConstantObjectIR  COMMA_SOURCE_FILE ("universal-map.galgas", 150)) ;
-  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_5239 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inConstantName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 151)) ;
-  if (NULL != objectArray_5239) {
-      macroValidSharedObject (objectArray_5239, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    const enumGalgasBool test_0 = objectArray_5239->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 152)).boolEnum () ;
+  GALGAS_possibleValuedObject var_newValue_4203 = GALGAS_possibleValuedObject::constructor_globalConstant (constinArgument_inConstantObjectIR  COMMA_SOURCE_FILE ("universal-map.galgas", 117)) ;
+  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_4280 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inConstantName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 118)) ;
+  if (NULL != objectArray_4280) {
+      macroValidSharedObject (objectArray_4280, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
+    const enumGalgasBool test_0 = objectArray_4280->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 119)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      objectArray_5239->mProperty_mPossibleValuedObject = var_newValue_5162 ;
+      objectArray_4280->mProperty_mPossibleValuedObject = var_newValue_4203 ;
     }else if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inConstantName.getter_location (SOURCE_FILE ("universal-map.galgas", 155)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 155)) ;
+      inCompiler->emitSemanticError (constinArgument_inConstantName.getter_location (SOURCE_FILE ("universal-map.galgas", 122)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 122)) ;
     }
   }else{
     {
-    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inConstantName, GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("universal-map.galgas", 160)), GALGAS_bool (false), var_newValue_5162, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 163)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 158)) ;
+    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inConstantName, GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("universal-map.galgas", 127)), GALGAS_bool (false), var_newValue_4203, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 125)) ;
     }
   }
 }
@@ -13079,24 +12983,24 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_insertLocal
                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_possibleValuedObject var_newValue_5962 = GALGAS_possibleValuedObject::constructor_localConstant (constinArgument_inType, constinArgument_inPLMConstantName  COMMA_SOURCE_FILE ("universal-map.galgas", 175)) ;
-  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_6049 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inLocalConstantName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 176)) ;
-  if (NULL != objectArray_6049) {
-      macroValidSharedObject (objectArray_6049, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    const enumGalgasBool test_0 = objectArray_6049->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 177)).boolEnum () ;
+  GALGAS_possibleValuedObject var_newValue_5003 = GALGAS_possibleValuedObject::constructor_localConstant (constinArgument_inType, constinArgument_inPLMConstantName  COMMA_SOURCE_FILE ("universal-map.galgas", 142)) ;
+  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_5090 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inLocalConstantName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 143)) ;
+  if (NULL != objectArray_5090) {
+      macroValidSharedObject (objectArray_5090, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
+    const enumGalgasBool test_0 = objectArray_5090->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 144)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      objectArray_6049->mProperty_mObjectState = GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 178)) ;
-      objectArray_6049->mProperty_mPossibleValuedObject = var_newValue_5962 ;
+      objectArray_5090->mProperty_mObjectState = GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 145)) ;
+      objectArray_5090->mProperty_mPossibleValuedObject = var_newValue_5003 ;
     }else if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inLocalConstantName.getter_location (SOURCE_FILE ("universal-map.galgas", 181)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 181)) ;
+      inCompiler->emitSemanticError (constinArgument_inLocalConstantName.getter_location (SOURCE_FILE ("universal-map.galgas", 148)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 148)) ;
     }
   }else{
     {
-    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inLocalConstantName, GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 186)), GALGAS_bool (false), var_newValue_5962, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 189)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 184)) ;
+    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inLocalConstantName, GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 153)), GALGAS_bool (false), var_newValue_5003, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 156)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 151)) ;
     }
   }
-  object->mProperty_mLocalObjectList.addAssign_operation (constinArgument_inLocalConstantName  COMMA_SOURCE_FILE ("universal-map.galgas", 192)) ;
+  object->mProperty_mLocalObjectList.addAssign_operation (constinArgument_inLocalConstantName  COMMA_SOURCE_FILE ("universal-map.galgas", 159)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -13173,24 +13077,24 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_insertUsedL
                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_possibleValuedObject var_newValue_6878 = GALGAS_possibleValuedObject::constructor_localConstant (constinArgument_inType, constinArgument_inPLMConstantName  COMMA_SOURCE_FILE ("universal-map.galgas", 202)) ;
-  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_6965 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inLocalConstantName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 203)) ;
-  if (NULL != objectArray_6965) {
-      macroValidSharedObject (objectArray_6965, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    const enumGalgasBool test_0 = objectArray_6965->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 204)).boolEnum () ;
+  GALGAS_possibleValuedObject var_newValue_5919 = GALGAS_possibleValuedObject::constructor_localConstant (constinArgument_inType, constinArgument_inPLMConstantName  COMMA_SOURCE_FILE ("universal-map.galgas", 169)) ;
+  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_6006 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inLocalConstantName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 170)) ;
+  if (NULL != objectArray_6006) {
+      macroValidSharedObject (objectArray_6006, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
+    const enumGalgasBool test_0 = objectArray_6006->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 171)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      objectArray_6965->mProperty_mObjectState = GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("universal-map.galgas", 205)) ;
-      objectArray_6965->mProperty_mPossibleValuedObject = var_newValue_6878 ;
+      objectArray_6006->mProperty_mObjectState = GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("universal-map.galgas", 172)) ;
+      objectArray_6006->mProperty_mPossibleValuedObject = var_newValue_5919 ;
     }else if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inLocalConstantName.getter_location (SOURCE_FILE ("universal-map.galgas", 208)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 208)) ;
+      inCompiler->emitSemanticError (constinArgument_inLocalConstantName.getter_location (SOURCE_FILE ("universal-map.galgas", 175)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 175)) ;
     }
   }else{
     {
-    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inLocalConstantName, GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("universal-map.galgas", 213)), GALGAS_bool (false), var_newValue_6878, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 211)) ;
+    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inLocalConstantName, GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("universal-map.galgas", 180)), GALGAS_bool (false), var_newValue_5919, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 183)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 178)) ;
     }
   }
-  object->mProperty_mLocalObjectList.addAssign_operation (constinArgument_inLocalConstantName  COMMA_SOURCE_FILE ("universal-map.galgas", 219)) ;
+  object->mProperty_mLocalObjectList.addAssign_operation (constinArgument_inLocalConstantName  COMMA_SOURCE_FILE ("universal-map.galgas", 186)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -13267,20 +13171,20 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_insertGloba
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_possibleValuedObject var_newValue_7778 = GALGAS_possibleValuedObject::constructor_globalVariable (constinArgument_inWritable, constinArgument_inType  COMMA_SOURCE_FILE ("universal-map.galgas", 229)) ;
-  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_7860 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inGlobalVariableName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 230)) ;
-  if (NULL != objectArray_7860) {
-      macroValidSharedObject (objectArray_7860, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    const enumGalgasBool test_0 = objectArray_7860->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 231)).boolEnum () ;
+  GALGAS_possibleValuedObject var_newValue_6819 = GALGAS_possibleValuedObject::constructor_globalVariable (constinArgument_inWritable, constinArgument_inType  COMMA_SOURCE_FILE ("universal-map.galgas", 196)) ;
+  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_6901 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inGlobalVariableName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 197)) ;
+  if (NULL != objectArray_6901) {
+      macroValidSharedObject (objectArray_6901, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
+    const enumGalgasBool test_0 = objectArray_6901->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 198)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      objectArray_7860->mProperty_mPossibleValuedObject = var_newValue_7778 ;
+      objectArray_6901->mProperty_mPossibleValuedObject = var_newValue_6819 ;
     }else if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inGlobalVariableName.getter_location (SOURCE_FILE ("universal-map.galgas", 234)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 234)) ;
+      inCompiler->emitSemanticError (constinArgument_inGlobalVariableName.getter_location (SOURCE_FILE ("universal-map.galgas", 201)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 201)) ;
     }
   }else{
     {
-    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inGlobalVariableName, GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("universal-map.galgas", 239)), GALGAS_bool (false), var_newValue_7778, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 242)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 237)) ;
+    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inGlobalVariableName, GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("universal-map.galgas", 206)), GALGAS_bool (false), var_newValue_6819, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 204)) ;
     }
   }
 }
@@ -13363,25 +13267,25 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_insertLocal
                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_possibleValuedObject var_newValue_8690 = GALGAS_possibleValuedObject::constructor_localVariable (constinArgument_inType, constinArgument_inPLMName  COMMA_SOURCE_FILE ("universal-map.galgas", 256)) ;
-  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_8769 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inLocalVariableName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 257)) ;
-  if (NULL != objectArray_8769) {
-      macroValidSharedObject (objectArray_8769, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    const enumGalgasBool test_0 = objectArray_8769->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 258)).boolEnum () ;
+  GALGAS_possibleValuedObject var_newValue_7731 = GALGAS_possibleValuedObject::constructor_localVariable (constinArgument_inType, constinArgument_inPLMName  COMMA_SOURCE_FILE ("universal-map.galgas", 223)) ;
+  cMapElement_internalUniversalPropertyAndRoutineMapForContext * objectArray_7810 = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) object->mProperty_mInternalPropertyAndRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inLocalVariableName.getter_string (HERE)  COMMA_SOURCE_FILE ("universal-map.galgas", 224)) ;
+  if (NULL != objectArray_7810) {
+      macroValidSharedObject (objectArray_7810, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
+    const enumGalgasBool test_0 = objectArray_7810->mProperty_mPossibleValuedObject.getter_isUndefined (SOURCE_FILE ("universal-map.galgas", 225)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      objectArray_8769->mProperty_mObjectState = constinArgument_inVariableInitialState ;
-      objectArray_8769->mProperty_mObjectShouldBeValuedAtEndOfScope = constinArgument_inObjectShouldBeValuedAtEndOfScope ;
-      objectArray_8769->mProperty_mPossibleValuedObject = var_newValue_8690 ;
+      objectArray_7810->mProperty_mObjectState = constinArgument_inVariableInitialState ;
+      objectArray_7810->mProperty_mObjectShouldBeValuedAtEndOfScope = constinArgument_inObjectShouldBeValuedAtEndOfScope ;
+      objectArray_7810->mProperty_mPossibleValuedObject = var_newValue_7731 ;
     }else if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inLocalVariableName.getter_location (SOURCE_FILE ("universal-map.galgas", 263)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 263)) ;
+      inCompiler->emitSemanticError (constinArgument_inLocalVariableName.getter_location (SOURCE_FILE ("universal-map.galgas", 230)), GALGAS_string ("object already defined in this context"), fixItArray1  COMMA_SOURCE_FILE ("universal-map.galgas", 230)) ;
     }
   }else{
     {
-    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inLocalVariableName, constinArgument_inVariableInitialState, constinArgument_inObjectShouldBeValuedAtEndOfScope, var_newValue_8690, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 271)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 266)) ;
+    object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_insertKey (constinArgument_inLocalVariableName, constinArgument_inVariableInitialState, constinArgument_inObjectShouldBeValuedAtEndOfScope, var_newValue_7731, GALGAS_routineSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("universal-map.galgas", 238)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 233)) ;
     }
   }
-  object->mProperty_mLocalObjectList.addAssign_operation (constinArgument_inLocalVariableName  COMMA_SOURCE_FILE ("universal-map.galgas", 274)) ;
+  object->mProperty_mLocalObjectList.addAssign_operation (constinArgument_inLocalVariableName  COMMA_SOURCE_FILE ("universal-map.galgas", 241)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -13459,10 +13363,10 @@ static void extensionMethod_universalPropertyAndRoutineMapForContext_searchEntit
                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_valuedObjectState joker_9884_2 ; // Joker input parameter
-  GALGAS_bool joker_9884_1 ; // Joker input parameter
-  GALGAS_routineSignatureMapForContext joker_9899 ; // Joker input parameter
-  object->mProperty_mInternalPropertyAndRoutineMapForContext.method_searchKey (constinArgument_inValuedObjectName, joker_9884_2, joker_9884_1, outArgument_outEntity, joker_9899, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 285)) ;
+  GALGAS_valuedObjectState joker_8925_2 ; // Joker input parameter
+  GALGAS_bool joker_8925_1 ; // Joker input parameter
+  GALGAS_routineSignatureMapForContext joker_8940 ; // Joker input parameter
+  object->mProperty_mInternalPropertyAndRoutineMapForContext.method_searchKey (constinArgument_inValuedObjectName, joker_8925_2, joker_8925_1, outArgument_outEntity, joker_8940, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 252)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -13540,78 +13444,78 @@ static void extensionMethod_universalPropertyAndRoutineMapForContext_searchValue
                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_possibleValuedObject var_property_10248 ;
-  GALGAS_valuedObjectState joker_10232_2 ; // Joker input parameter
-  GALGAS_bool joker_10232_1 ; // Joker input parameter
-  GALGAS_routineSignatureMapForContext joker_10250 ; // Joker input parameter
-  object->mProperty_mInternalPropertyAndRoutineMapForContext.method_searchKey (constinArgument_inValuedObjectName, joker_10232_2, joker_10232_1, var_property_10248, joker_10250, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 294)) ;
-  switch (var_property_10248.enumValue ()) {
+  GALGAS_possibleValuedObject var_property_9289 ;
+  GALGAS_valuedObjectState joker_9273_2 ; // Joker input parameter
+  GALGAS_bool joker_9273_1 ; // Joker input parameter
+  GALGAS_routineSignatureMapForContext joker_9291 ; // Joker input parameter
+  object->mProperty_mInternalPropertyAndRoutineMapForContext.method_searchKey (constinArgument_inValuedObjectName, joker_9273_2, joker_9273_1, var_property_9289, joker_9291, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 261)) ;
+  switch (var_property_9289.enumValue ()) {
   case GALGAS_possibleValuedObject::kNotBuilt:
     break ;
   case GALGAS_possibleValuedObject::kEnum_undefined:
     {
       TC_Array <C_FixItDescription> fixItArray0 ;
-      inCompiler->emitSemanticError (constinArgument_inValuedObjectName.getter_location (SOURCE_FILE ("universal-map.galgas", 297)), GALGAS_string ("undefined in this context"), fixItArray0  COMMA_SOURCE_FILE ("universal-map.galgas", 297)) ;
+      inCompiler->emitSemanticError (constinArgument_inValuedObjectName.getter_location (SOURCE_FILE ("universal-map.galgas", 264)), GALGAS_string ("undefined in this context"), fixItArray0  COMMA_SOURCE_FILE ("universal-map.galgas", 264)) ;
       outArgument_outObjectIR.drop () ; // Release error dropped variable
     }
     break ;
-  case GALGAS_possibleValuedObject::kEnum_property:
+  case GALGAS_possibleValuedObject::kEnum_propertyEX:
     {
-      const cEnumAssociatedValues_possibleValuedObject_property * extractPtr_10517 = (const cEnumAssociatedValues_possibleValuedObject_property *) (var_property_10248.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_10517->mAssociatedValue2 ;
-      const GALGAS_lstring extractedValue_plmName = extractPtr_10517->mAssociatedValue3 ;
-      const GALGAS_propertyAccessKind extractedValue_access = extractPtr_10517->mAssociatedValue4 ;
-      outArgument_outObjectIR = GALGAS_objectIR::constructor_property (extractedValue_type, extractedValue_plmName, extractedValue_access  COMMA_SOURCE_FILE ("universal-map.galgas", 299)) ;
+      const cEnumAssociatedValues_possibleValuedObject_propertyEX * extractPtr_9560 = (const cEnumAssociatedValues_possibleValuedObject_propertyEX *) (var_property_9289.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_9560->mAssociatedValue2 ;
+      const GALGAS_lstring extractedValue_plmName = extractPtr_9560->mAssociatedValue3 ;
+      const GALGAS_propertyAccessKind extractedValue_access = extractPtr_9560->mAssociatedValue4 ;
+      outArgument_outObjectIR = GALGAS_objectIR::constructor_property (extractedValue_type, extractedValue_plmName, extractedValue_access  COMMA_SOURCE_FILE ("universal-map.galgas", 266)) ;
     }
     break ;
   case GALGAS_possibleValuedObject::kEnum_module:
     {
-      const cEnumAssociatedValues_possibleValuedObject_module * extractPtr_10633 = (const cEnumAssociatedValues_possibleValuedObject_module *) (var_property_10248.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_10633->mAssociatedValue0 ;
-      outArgument_outObjectIR = GALGAS_objectIR::constructor_globalVariableReference (extractedValue_type, constinArgument_inValuedObjectName  COMMA_SOURCE_FILE ("universal-map.galgas", 301)) ;
+      const cEnumAssociatedValues_possibleValuedObject_module * extractPtr_9676 = (const cEnumAssociatedValues_possibleValuedObject_module *) (var_property_9289.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_9676->mAssociatedValue0 ;
+      outArgument_outObjectIR = GALGAS_objectIR::constructor_globalVariableReference (extractedValue_type, constinArgument_inValuedObjectName  COMMA_SOURCE_FILE ("universal-map.galgas", 268)) ;
     }
     break ;
   case GALGAS_possibleValuedObject::kEnum_register:
     {
-      const cEnumAssociatedValues_possibleValuedObject_register * extractPtr_10976 = (const cEnumAssociatedValues_possibleValuedObject_register *) (var_property_10248.unsafePointer ()) ;
-      const GALGAS_bool extractedValue_readable = extractPtr_10976->mAssociatedValue0 ;
-      const GALGAS_bool extractedValue_writable = extractPtr_10976->mAssociatedValue1 ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_10976->mAssociatedValue2 ;
-      const GALGAS_bigint extractedValue_address = extractPtr_10976->mAssociatedValue3 ;
-      const GALGAS_sliceMap extractedValue_sliceMap = extractPtr_10976->mAssociatedValue4 ;
-      const GALGAS_uint extractedValue_arraySize = extractPtr_10976->mAssociatedValue5 ;
-      const GALGAS_uint extractedValue_elementSize = extractPtr_10976->mAssociatedValue6 ;
-      outArgument_outObjectIR = GALGAS_objectIR::constructor_registerReference (extractedValue_type, constinArgument_inValuedObjectName, extractedValue_readable, extractedValue_writable, extractedValue_address, extractedValue_sliceMap, extractedValue_arraySize, extractedValue_elementSize  COMMA_SOURCE_FILE ("universal-map.galgas", 303)) ;
+      const cEnumAssociatedValues_possibleValuedObject_register * extractPtr_10019 = (const cEnumAssociatedValues_possibleValuedObject_register *) (var_property_9289.unsafePointer ()) ;
+      const GALGAS_bool extractedValue_readable = extractPtr_10019->mAssociatedValue0 ;
+      const GALGAS_bool extractedValue_writable = extractPtr_10019->mAssociatedValue1 ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_10019->mAssociatedValue2 ;
+      const GALGAS_bigint extractedValue_address = extractPtr_10019->mAssociatedValue3 ;
+      const GALGAS_sliceMap extractedValue_sliceMap = extractPtr_10019->mAssociatedValue4 ;
+      const GALGAS_uint extractedValue_arraySize = extractPtr_10019->mAssociatedValue5 ;
+      const GALGAS_uint extractedValue_elementSize = extractPtr_10019->mAssociatedValue6 ;
+      outArgument_outObjectIR = GALGAS_objectIR::constructor_registerReference (extractedValue_type, constinArgument_inValuedObjectName, extractedValue_readable, extractedValue_writable, extractedValue_address, extractedValue_sliceMap, extractedValue_arraySize, extractedValue_elementSize  COMMA_SOURCE_FILE ("universal-map.galgas", 270)) ;
     }
     break ;
   case GALGAS_possibleValuedObject::kEnum_globalConstant:
     {
-      const cEnumAssociatedValues_possibleValuedObject_globalConstant * extractPtr_11048 = (const cEnumAssociatedValues_possibleValuedObject_globalConstant *) (var_property_10248.unsafePointer ()) ;
-      const GALGAS_objectIR extractedValue_objectIR = extractPtr_11048->mAssociatedValue0 ;
+      const cEnumAssociatedValues_possibleValuedObject_globalConstant * extractPtr_10091 = (const cEnumAssociatedValues_possibleValuedObject_globalConstant *) (var_property_9289.unsafePointer ()) ;
+      const GALGAS_objectIR extractedValue_objectIR = extractPtr_10091->mAssociatedValue0 ;
       outArgument_outObjectIR = extractedValue_objectIR ;
     }
     break ;
   case GALGAS_possibleValuedObject::kEnum_localConstant:
     {
-      const cEnumAssociatedValues_possibleValuedObject_localConstant * extractPtr_11185 = (const cEnumAssociatedValues_possibleValuedObject_localConstant *) (var_property_10248.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_11185->mAssociatedValue0 ;
-      const GALGAS_lstring extractedValue_plmName = extractPtr_11185->mAssociatedValue1 ;
-      outArgument_outObjectIR = GALGAS_objectIR::constructor_localVariableReference (extractedValue_type, extractedValue_plmName  COMMA_SOURCE_FILE ("universal-map.galgas", 316)) ;
+      const cEnumAssociatedValues_possibleValuedObject_localConstant * extractPtr_10228 = (const cEnumAssociatedValues_possibleValuedObject_localConstant *) (var_property_9289.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_10228->mAssociatedValue0 ;
+      const GALGAS_lstring extractedValue_plmName = extractPtr_10228->mAssociatedValue1 ;
+      outArgument_outObjectIR = GALGAS_objectIR::constructor_localVariableReference (extractedValue_type, extractedValue_plmName  COMMA_SOURCE_FILE ("universal-map.galgas", 283)) ;
     }
     break ;
   case GALGAS_possibleValuedObject::kEnum_globalVariable:
     {
-      const cEnumAssociatedValues_possibleValuedObject_globalVariable * extractPtr_11320 = (const cEnumAssociatedValues_possibleValuedObject_globalVariable *) (var_property_10248.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_11320->mAssociatedValue1 ;
-      outArgument_outObjectIR = GALGAS_objectIR::constructor_globalVariableReference (extractedValue_type, constinArgument_inValuedObjectName  COMMA_SOURCE_FILE ("universal-map.galgas", 318)) ;
+      const cEnumAssociatedValues_possibleValuedObject_globalVariable * extractPtr_10363 = (const cEnumAssociatedValues_possibleValuedObject_globalVariable *) (var_property_9289.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_10363->mAssociatedValue1 ;
+      outArgument_outObjectIR = GALGAS_objectIR::constructor_globalVariableReference (extractedValue_type, constinArgument_inValuedObjectName  COMMA_SOURCE_FILE ("universal-map.galgas", 285)) ;
     }
     break ;
   case GALGAS_possibleValuedObject::kEnum_localVariable:
     {
-      const cEnumAssociatedValues_possibleValuedObject_localVariable * extractPtr_11457 = (const cEnumAssociatedValues_possibleValuedObject_localVariable *) (var_property_10248.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_11457->mAssociatedValue0 ;
-      const GALGAS_lstring extractedValue_plmName = extractPtr_11457->mAssociatedValue1 ;
-      outArgument_outObjectIR = GALGAS_objectIR::constructor_localVariableReference (extractedValue_type, extractedValue_plmName  COMMA_SOURCE_FILE ("universal-map.galgas", 320)) ;
+      const cEnumAssociatedValues_possibleValuedObject_localVariable * extractPtr_10500 = (const cEnumAssociatedValues_possibleValuedObject_localVariable *) (var_property_9289.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_10500->mAssociatedValue0 ;
+      const GALGAS_lstring extractedValue_plmName = extractPtr_10500->mAssociatedValue1 ;
+      outArgument_outObjectIR = GALGAS_objectIR::constructor_localVariableReference (extractedValue_type, extractedValue_plmName  COMMA_SOURCE_FILE ("universal-map.galgas", 287)) ;
     }
     break ;
   }
@@ -13687,21 +13591,21 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_readAccess 
                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   cPtr_universalPropertyAndRoutineMapForContext * object = inObject ;
   macroValidSharedObject (object, cPtr_universalPropertyAndRoutineMapForContext) ;
-  GALGAS_valuedObjectState var_valueState_11773 ;
-  GALGAS_possibleValuedObject var_property_11790 ;
-  GALGAS_bool joker_11775 ; // Joker input parameter
-  GALGAS_routineSignatureMapForContext joker_11792 ; // Joker input parameter
-  object->mProperty_mInternalPropertyAndRoutineMapForContext.method_searchKey (constinArgument_inValuedObjectName, var_valueState_11773, joker_11775, var_property_11790, joker_11792, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 327)) ;
-  switch (var_property_11790.enumValue ()) {
+  GALGAS_valuedObjectState var_valueState_10816 ;
+  GALGAS_possibleValuedObject var_property_10833 ;
+  GALGAS_bool joker_10818 ; // Joker input parameter
+  GALGAS_routineSignatureMapForContext joker_10835 ; // Joker input parameter
+  object->mProperty_mInternalPropertyAndRoutineMapForContext.method_searchKey (constinArgument_inValuedObjectName, var_valueState_10816, joker_10818, var_property_10833, joker_10835, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 294)) ;
+  switch (var_property_10833.enumValue ()) {
   case GALGAS_possibleValuedObject::kNotBuilt:
     break ;
   case GALGAS_possibleValuedObject::kEnum_undefined:
     {
       TC_Array <C_FixItDescription> fixItArray0 ;
-      inCompiler->emitSemanticError (constinArgument_inValuedObjectName.getter_location (SOURCE_FILE ("universal-map.galgas", 330)), GALGAS_string ("undefined in this context"), fixItArray0  COMMA_SOURCE_FILE ("universal-map.galgas", 330)) ;
+      inCompiler->emitSemanticError (constinArgument_inValuedObjectName.getter_location (SOURCE_FILE ("universal-map.galgas", 297)), GALGAS_string ("undefined in this context"), fixItArray0  COMMA_SOURCE_FILE ("universal-map.galgas", 297)) ;
     }
     break ;
-  case GALGAS_possibleValuedObject::kEnum_property:
+  case GALGAS_possibleValuedObject::kEnum_propertyEX:
     {
     }
     break ;
@@ -13719,10 +13623,10 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_readAccess 
     break ;
   case GALGAS_possibleValuedObject::kEnum_localConstant:
     {
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_valueState_11773.objectCompare (GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 336)))).boolEnum () ;
+      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_valueState_10816.objectCompare (GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 303)))).boolEnum () ;
       if (kBoolTrue == test_1) {
         {
-        object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_setMObjectStateForKey (GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("universal-map.galgas", 337)), constinArgument_inValuedObjectName.getter_string (SOURCE_FILE ("universal-map.galgas", 337)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 337)) ;
+        object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_setMObjectStateForKey (GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("universal-map.galgas", 304)), constinArgument_inValuedObjectName.getter_string (SOURCE_FILE ("universal-map.galgas", 304)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 304)) ;
         }
       }
     }
@@ -13733,19 +13637,19 @@ static void extensionSetter_universalPropertyAndRoutineMapForContext_readAccess 
     break ;
   case GALGAS_possibleValuedObject::kEnum_localVariable:
     {
-      switch (var_valueState_11773.enumValue ()) {
+      switch (var_valueState_10816.enumValue ()) {
       case GALGAS_valuedObjectState::kNotBuilt:
         break ;
       case GALGAS_valuedObjectState::kEnum_noValue:
         {
           TC_Array <C_FixItDescription> fixItArray2 ;
-          inCompiler->emitSemanticError (constinArgument_inValuedObjectName.getter_location (SOURCE_FILE ("universal-map.galgas", 343)), GALGAS_string ("'").add_operation (constinArgument_inValuedObjectName.getter_string (SOURCE_FILE ("universal-map.galgas", 343)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 343)).add_operation (GALGAS_string ("' has no value"), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 343)), fixItArray2  COMMA_SOURCE_FILE ("universal-map.galgas", 343)) ;
+          inCompiler->emitSemanticError (constinArgument_inValuedObjectName.getter_location (SOURCE_FILE ("universal-map.galgas", 310)), GALGAS_string ("'").add_operation (constinArgument_inValuedObjectName.getter_string (SOURCE_FILE ("universal-map.galgas", 310)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 310)).add_operation (GALGAS_string ("' has no value"), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 310)), fixItArray2  COMMA_SOURCE_FILE ("universal-map.galgas", 310)) ;
         }
         break ;
       case GALGAS_valuedObjectState::kEnum_hasUnreadValue:
         {
           {
-          object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_setMObjectStateForKey (GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("universal-map.galgas", 345)), constinArgument_inValuedObjectName.getter_string (SOURCE_FILE ("universal-map.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 345)) ;
+          object->mProperty_mInternalPropertyAndRoutineMapForContext.setter_setMObjectStateForKey (GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("universal-map.galgas", 312)), constinArgument_inValuedObjectName.getter_string (SOURCE_FILE ("universal-map.galgas", 312)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 312)) ;
           }
         }
         break ;
