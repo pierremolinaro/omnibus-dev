@@ -16,29 +16,29 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <lvalue_with_self> !@LValueSelfAST outAssignmentTargetAST {
-  #--- Self
-    $self$
-    let selfLocation = @location.here
-    $.$
-  #--- Property name
-    $identifier$ ?let identifier
-  #--- Properties and subscript
-    @accessInAssignmentListAST accessListAST = {}
-    repeat
-    while
-      $.$
-      $identifier$ ?let propertyName
-      accessListAST += !.property {!name:propertyName}
-    while
-      $[$
-      <expression> ?let expression
-      let endOfIndex = @location.here
-      $]$
-      accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
-    end
-    outAssignmentTargetAST = .new {!identifier !accessListAST !selfLocation}
-  }
+#  rule <lvalue_with_self> !@LValueSelfAST outAssignmentTargetAST {
+#  #--- Self
+#    $self$
+#    let selfLocation = @location.here
+#    $.$
+#  #--- Property name
+#    $identifier$ ?let identifier
+#  #--- Properties and subscript
+#    @accessInAssignmentListAST accessListAST = {}
+#    repeat
+#    while
+#      $.$
+#      $identifier$ ?let propertyName
+#      accessListAST += !.property {!name:propertyName}
+#    while
+#      $[$
+#      <expression> ?let expression
+#      let endOfIndex = @location.here
+#      $]$
+#      accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+#    end
+#    outAssignmentTargetAST = .new {!identifier !accessListAST !selfLocation}
+#  }
 
   #·····················································································································
 

@@ -1194,6 +1194,29 @@ void routine_analyzePrimaryExpressionNoSelf (const class GALGAS_PLMType constinA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                     Routine 'analyzePrimaryExpressionWithSelf'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzePrimaryExpressionWithSelf (const class GALGAS_PLMType constinArgument0,
+                                               const class GALGAS_bool constinArgument1,
+                                               const class GALGAS_lstring constinArgument2,
+                                               const class GALGAS_PLMType constinArgument3,
+                                               const class GALGAS_semanticContext constinArgument4,
+                                               const class GALGAS_mode constinArgument5,
+                                               class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                               class GALGAS_staticStringMap & ioArgument7,
+                                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
+                                               class GALGAS_allocaList & ioArgument9,
+                                               class GALGAS_instructionListIR & ioArgument10,
+                                               const class GALGAS_primaryInExpressionAccessListAST constinArgument11,
+                                               const class GALGAS_location constinArgument12,
+                                               class GALGAS_objectIR & outArgument13,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                         Routine 'analyzeRegisterExpression'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1355,6 +1378,83 @@ void callExtensionSetter_searchValuedObjectForReadAccess (class cPtr_universalPr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                @LValueSelfAST struct                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_LValueSelfAST : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public : GALGAS_lstring mProperty_mIdentifier ;
+
+  public : GALGAS_accessInAssignmentListAST mProperty_mAccessList ;
+
+  public : GALGAS_location mProperty_mSelfLocation ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_LValueSelfAST constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_LValueSelfAST (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_LValueSelfAST (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_LValueSelfAST (const GALGAS_lstring & in_mIdentifier,
+                                 const GALGAS_accessInAssignmentListAST & in_mAccessList,
+                                 const GALGAS_location & in_mSelfLocation) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_LValueSelfAST extractObject (const GALGAS_object & inObject,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_LValueSelfAST constructor_new (const class GALGAS_lstring & inOperand0,
+                                                              const class GALGAS_accessInAssignmentListAST & inOperand1,
+                                                              const class GALGAS_location & inOperand2
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_LValueSelfAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_mAccessList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSelfLocation (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_LValueSelfAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueSelfAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           @forInstructionOnArrayIR class                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1484,6 +1584,96 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                        @complexCallSelfInstructionAST class                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_complexCallSelfInstructionAST : public GALGAS_callInstructionAST {
+//--- Constructor
+  public : GALGAS_complexCallSelfInstructionAST (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_complexCallSelfInstructionAST constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_complexCallSelfInstructionAST * ptr (void) const { return (const cPtr_complexCallSelfInstructionAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_complexCallSelfInstructionAST (const cPtr_complexCallSelfInstructionAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_complexCallSelfInstructionAST extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_complexCallSelfInstructionAST constructor_new (const class GALGAS_location & inOperand0,
+                                                                              const class GALGAS_effectiveArgumentListAST & inOperand1,
+                                                                              const class GALGAS_location & inOperand2,
+                                                                              const class GALGAS_LValueSelfAST & inOperand3
+                                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_complexCallSelfInstructionAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_LValueSelfAST getter_mAssignmentTargetAST (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_complexCallSelfInstructionAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_complexCallSelfInstructionAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Pointer class for @complexCallSelfInstructionAST class                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_complexCallSelfInstructionAST : public cPtr_callInstructionAST {
+//--- Attributes
+  public : GALGAS_LValueSelfAST mProperty_mAssignmentTargetAST ;
+
+//--- Constructor
+  public : cPtr_complexCallSelfInstructionAST (const GALGAS_location & in_mInstructionLocation,
+                                               const GALGAS_effectiveArgumentListAST & in_mArguments,
+                                               const GALGAS_location & in_mEndOfArguments,
+                                               const GALGAS_LValueSelfAST & in_mAssignmentTargetAST
+                                               COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_LValueSelfAST getter_mAssignmentTargetAST (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Extension method '@LValueWithoutSelfAST noteInstructionTypesInPrecedenceGraph'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1500,6 +1690,7 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_L
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionMethod_type (const class GALGAS_LValueWithoutSelfAST inObject,
+                           const class GALGAS_PLMType constin_inSelfType,
                            const class GALGAS_universalPropertyAndRoutineMapForContext constin_inUniversalMap,
                            class GALGAS_PLMType & out_outType,
                            class C_Compiler * inCompiler
@@ -1576,6 +1767,27 @@ void routine_analyzeControlRegisterInLValue (const class GALGAS_PLMType constinA
                                              class GALGAS_internalRepresentation & outArgument16,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Routine 'analyzeSelfAssignmentTarget'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgument0,
+                                          const class GALGAS_lstring constinArgument1,
+                                          const class GALGAS_semanticContext constinArgument2,
+                                          const class GALGAS_mode constinArgument3,
+                                          class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                          class GALGAS_staticStringMap & ioArgument5,
+                                          class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument6,
+                                          class GALGAS_allocaList & ioArgument7,
+                                          class GALGAS_instructionListIR & ioArgument8,
+                                          const class GALGAS_location constinArgument9,
+                                          const class GALGAS_accessInAssignmentListAST constinArgument10,
+                                          class GALGAS_internalRepresentation & outArgument11,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

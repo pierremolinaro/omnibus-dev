@@ -58,7 +58,7 @@ override method @varAssignmentNoSelfInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  [mAssignmentTargetAST type !variableMap:ioUniversalMap ?let targetType]
+  [mAssignmentTargetAST type !selfType:inSelfType !variableMap:ioUniversalMap ?let targetType]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType

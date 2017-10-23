@@ -292,14 +292,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                  const GALGAS_lstring inArgument1,
                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'lvalue_with_self' non terminal
-//--- 'parse' label
-  public : virtual void nt_lvalue_5F_with_5F_self_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_lvalue_5F_with_5F_self_ (GALGAS_LValueSelfAST & outArgument0,
-                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'lvalue_without_self' non terminal
 //--- 'parse' label
   public : virtual void nt_lvalue_5F_without_5F_self_parse (C_Lexique_plm_5F_lexique * inCompiler) ;

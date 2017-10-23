@@ -8173,120 +8173,132 @@ static void extensionMethod_complexCallNoSelfInstructionAST_baseGuardAnalyze (co
   macroValidSharedObject (object, cPtr_complexCallNoSelfInstructionAST) ;
   GALGAS_allocaList var_baseGuardAllocaList_11890 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 321)) ;
   GALGAS_instructionListIR var_baseGuardInstructionGenerationList_11951 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 322)) ;
-  GALGAS_objectIR var_currentObject_12152 ;
-  callExtensionMethod_searchValuedObject ((const cPtr_universalPropertyAndRoutineMapForContext *) ioArgument_ioUniversalMap.ptr (), object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE), var_currentObject_12152, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 324)) ;
-  GALGAS_location var_currentErrorLocation_12180 = object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE).getter_location (HERE) ;
-  GALGAS_universalPropertyAndRoutineMapForContext var_currentMap_12241 = ioArgument_ioUniversalMap ;
-  GALGAS_accessInAssignmentListAST var_accessList_12301 = object->mProperty_mAssignmentTargetAST.getter_mAccessList (HERE) ;
-  GALGAS_accessInAssignmentAST var_lastAccess_12376 ;
-  {
-  var_accessList_12301.setter_popLast (var_lastAccess_12376, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 329)) ;
+  GALGAS_objectIR var_currentObject_12082 ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, object->mProperty_mAssignmentTargetAST_32_.getter_mIdentifier (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_PLMType::constructor_void (SOURCE_FILE ("declaration-guard.galgas", 326)))).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      TC_Array <C_FixItDescription> fixItArray2 ;
+      inCompiler->emitSemanticError (object->mProperty_mAssignmentTargetAST_32_.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("declaration-guard.galgas", 327)), GALGAS_string ("self is not available in this context"), fixItArray2  COMMA_SOURCE_FILE ("declaration-guard.galgas", 327)) ;
+      var_currentObject_12082.drop () ; // Release error dropped variable
+    }else if (kBoolFalse == test_1) {
+      var_currentObject_12082 = GALGAS_objectIR::constructor_temporaryReference (constinArgument_inSelfType, GALGAS_lstring::constructor_new (GALGAS_string ("%self"), object->mProperty_mAssignmentTargetAST_32_.getter_mIdentifier (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 329))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 329)) ;
+    }
+  }else if (kBoolFalse == test_0) {
+    callExtensionMethod_searchValuedObject ((const cPtr_universalPropertyAndRoutineMapForContext *) ioArgument_ioUniversalMap.ptr (), object->mProperty_mAssignmentTargetAST_32_.getter_mIdentifier (HERE), var_currentObject_12082, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 332)) ;
   }
-  cEnumerator_accessInAssignmentListAST enumerator_12432 (var_accessList_12301, kENUMERATION_UP) ;
-  while (enumerator_12432.hasCurrentObject ()) {
-    GALGAS_PLMType var_currentType_12455 = extensionGetter_type (var_currentObject_12152, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 332)) ;
-    switch (enumerator_12432.current_mAccess (HERE).enumValue ()) {
+  GALGAS_location var_currentErrorLocation_12671 = object->mProperty_mAssignmentTargetAST_32_.getter_mIdentifier (HERE).getter_location (HERE) ;
+  GALGAS_universalPropertyAndRoutineMapForContext var_currentMap_12733 = ioArgument_ioUniversalMap ;
+  GALGAS_accessInAssignmentListAST var_accessList_12793 = object->mProperty_mAssignmentTargetAST_32_.getter_mAccessList (HERE) ;
+  GALGAS_accessInAssignmentAST var_lastAccess_12869 ;
+  {
+  var_accessList_12793.setter_popLast (var_lastAccess_12869, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 339)) ;
+  }
+  cEnumerator_accessInAssignmentListAST enumerator_12925 (var_accessList_12793, kENUMERATION_UP) ;
+  while (enumerator_12925.hasCurrentObject ()) {
+    GALGAS_PLMType var_currentType_12948 = extensionGetter_type (var_currentObject_12082, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 342)) ;
+    switch (enumerator_12925.current_mAccess (HERE).enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_property:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_13201 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_12432.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_propertyName = extractPtr_13201->mAssociatedValue0 ;
-        const enumGalgasBool test_0 = var_currentType_12455.getter_isStructure (SOURCE_FILE ("declaration-guard.galgas", 335)).boolEnum () ;
-        if (kBoolTrue == test_0) {
-          GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_12646 ;
-          GALGAS_lstring joker_12613_3 ; // Joker input parameter
-          GALGAS_propertyMap joker_12613_2 ; // Joker input parameter
-          GALGAS_routineMapForContext joker_12613_1 ; // Joker input parameter
-          GALGAS_propertyList joker_12648_3 ; // Joker input parameter
-          GALGAS_PLMTypeFlags joker_12648_2 ; // Joker input parameter
-          GALGAS_string joker_12648_1 ; // Joker input parameter
-          var_currentType_12455.method_structure (joker_12613_3, joker_12613_2, joker_12613_1, var_universalMap_12646, joker_12648_3, joker_12648_2, joker_12648_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 336)) ;
-          GALGAS_objectIR var_propertyObject_12726 ;
-          callExtensionMethod_searchValuedObject ((const cPtr_universalPropertyAndRoutineMapForContext *) var_universalMap_12646.ptr (), extractedValue_propertyName, var_propertyObject_12726, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 337)) ;
-          var_currentMap_12241 = var_universalMap_12646 ;
-          var_currentErrorLocation_12180 = extractedValue_propertyName.getter_location (HERE) ;
-          GALGAS_objectIR var_newObject_12910 ;
+        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_13694 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_12925.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_propertyName = extractPtr_13694->mAssociatedValue0 ;
+        const enumGalgasBool test_3 = var_currentType_12948.getter_isStructure (SOURCE_FILE ("declaration-guard.galgas", 345)).boolEnum () ;
+        if (kBoolTrue == test_3) {
+          GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_13139 ;
+          GALGAS_lstring joker_13106_3 ; // Joker input parameter
+          GALGAS_propertyMap joker_13106_2 ; // Joker input parameter
+          GALGAS_routineMapForContext joker_13106_1 ; // Joker input parameter
+          GALGAS_propertyList joker_13141_3 ; // Joker input parameter
+          GALGAS_PLMTypeFlags joker_13141_2 ; // Joker input parameter
+          GALGAS_string joker_13141_1 ; // Joker input parameter
+          var_currentType_12948.method_structure (joker_13106_3, joker_13106_2, joker_13106_1, var_universalMap_13139, joker_13141_3, joker_13141_2, joker_13141_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 346)) ;
+          GALGAS_objectIR var_propertyObject_13219 ;
+          callExtensionMethod_searchValuedObject ((const cPtr_universalPropertyAndRoutineMapForContext *) var_universalMap_13139.ptr (), extractedValue_propertyName, var_propertyObject_13219, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 347)) ;
+          var_currentMap_12733 = var_universalMap_13139 ;
+          var_currentErrorLocation_12671 = extractedValue_propertyName.getter_location (HERE) ;
+          GALGAS_objectIR var_newObject_13403 ;
           {
-          routine_getNewTempVariable (extensionGetter_type (var_propertyObject_12726, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 340)), extractedValue_propertyName.getter_location (SOURCE_FILE ("declaration-guard.galgas", 340)), ioArgument_ioTemporaries, var_newObject_12910, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 340)) ;
+          routine_getNewTempVariable (extensionGetter_type (var_propertyObject_13219, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 350)), extractedValue_propertyName.getter_location (SOURCE_FILE ("declaration-guard.galgas", 350)), ioArgument_ioTemporaries, var_newObject_13403, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 350)) ;
           }
           {
-          extensionSetter_appendGetPropertyReference (var_baseGuardInstructionGenerationList_11951, var_newObject_12910, var_currentObject_12152, extractedValue_propertyName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 344)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 341)) ;
+          extensionSetter_appendGetPropertyReference (var_baseGuardInstructionGenerationList_11951, var_newObject_13403, var_currentObject_12082, extractedValue_propertyName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 354)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 351)) ;
           }
-          var_currentObject_12152 = var_newObject_12910 ;
-        }else if (kBoolFalse == test_0) {
-          TC_Array <C_FixItDescription> fixItArray1 ;
-          inCompiler->emitSemanticError (var_currentErrorLocation_12180, GALGAS_string ("this object has no property"), fixItArray1  COMMA_SOURCE_FILE ("declaration-guard.galgas", 348)) ;
-          var_currentObject_12152.drop () ; // Release error dropped variable
+          var_currentObject_12082 = var_newObject_13403 ;
+        }else if (kBoolFalse == test_3) {
+          TC_Array <C_FixItDescription> fixItArray4 ;
+          inCompiler->emitSemanticError (var_currentErrorLocation_12671, GALGAS_string ("this object has no property"), fixItArray4  COMMA_SOURCE_FILE ("declaration-guard.galgas", 358)) ;
+          var_currentObject_12082.drop () ; // Release error dropped variable
         }
       }
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_13344 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_12432.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_13344->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfIndex = extractPtr_13344->mAssociatedValue1 ;
-        TC_Array <C_FixItDescription> fixItArray2 ;
-        inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("not handled yet"), fixItArray2  COMMA_SOURCE_FILE ("declaration-guard.galgas", 351)) ;
-        var_currentObject_12152.drop () ; // Release error dropped variable
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_13837 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_12925.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_13837->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfIndex = extractPtr_13837->mAssociatedValue1 ;
+        TC_Array <C_FixItDescription> fixItArray5 ;
+        inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("not handled yet"), fixItArray5  COMMA_SOURCE_FILE ("declaration-guard.galgas", 361)) ;
+        var_currentObject_12082.drop () ; // Release error dropped variable
       }
       break ;
     }
-    enumerator_12432.gotoNextObject () ;
+    enumerator_12925.gotoNextObject () ;
   }
-  GALGAS_lstring var_methodName_13404 ;
-  switch (var_lastAccess_12376.enumValue ()) {
+  GALGAS_lstring var_methodName_13897 ;
+  switch (var_lastAccess_12869.enumValue ()) {
   case GALGAS_accessInAssignmentAST::kNotBuilt:
     break ;
   case GALGAS_accessInAssignmentAST::kEnum_property:
     {
-      const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_13839 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_12376.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_propertyName = extractPtr_13839->mAssociatedValue0 ;
-      var_methodName_13404 = extractedValue_propertyName ;
-      GALGAS_PLMType var_currentType_13516 = extensionGetter_type (var_currentObject_12152, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 359)) ;
-      const enumGalgasBool test_3 = var_currentType_13516.getter_isStructure (SOURCE_FILE ("declaration-guard.galgas", 360)).boolEnum () ;
-      if (kBoolTrue == test_3) {
-        GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_13641 ;
-        GALGAS_lstring joker_13608_3 ; // Joker input parameter
-        GALGAS_propertyMap joker_13608_2 ; // Joker input parameter
-        GALGAS_routineMapForContext joker_13608_1 ; // Joker input parameter
-        GALGAS_propertyList joker_13643_3 ; // Joker input parameter
-        GALGAS_PLMTypeFlags joker_13643_2 ; // Joker input parameter
-        GALGAS_string joker_13643_1 ; // Joker input parameter
-        var_currentType_13516.method_structure (joker_13608_3, joker_13608_2, joker_13608_1, var_universalMap_13641, joker_13643_3, joker_13643_2, joker_13643_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 361)) ;
-        var_currentMap_12241 = var_universalMap_13641 ;
-        var_currentErrorLocation_12180 = extractedValue_propertyName.getter_location (HERE) ;
-      }else if (kBoolFalse == test_3) {
-        TC_Array <C_FixItDescription> fixItArray4 ;
-        inCompiler->emitSemanticError (var_currentErrorLocation_12180, GALGAS_string ("this object has no property"), fixItArray4  COMMA_SOURCE_FILE ("declaration-guard.galgas", 365)) ;
-        var_currentObject_12152.drop () ; // Release error dropped variable
-        var_methodName_13404.drop () ; // Release error dropped variable
+      const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_14332 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_12869.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_propertyName = extractPtr_14332->mAssociatedValue0 ;
+      var_methodName_13897 = extractedValue_propertyName ;
+      GALGAS_PLMType var_currentType_14009 = extensionGetter_type (var_currentObject_12082, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 369)) ;
+      const enumGalgasBool test_6 = var_currentType_14009.getter_isStructure (SOURCE_FILE ("declaration-guard.galgas", 370)).boolEnum () ;
+      if (kBoolTrue == test_6) {
+        GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_14134 ;
+        GALGAS_lstring joker_14101_3 ; // Joker input parameter
+        GALGAS_propertyMap joker_14101_2 ; // Joker input parameter
+        GALGAS_routineMapForContext joker_14101_1 ; // Joker input parameter
+        GALGAS_propertyList joker_14136_3 ; // Joker input parameter
+        GALGAS_PLMTypeFlags joker_14136_2 ; // Joker input parameter
+        GALGAS_string joker_14136_1 ; // Joker input parameter
+        var_currentType_14009.method_structure (joker_14101_3, joker_14101_2, joker_14101_1, var_universalMap_14134, joker_14136_3, joker_14136_2, joker_14136_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 371)) ;
+        var_currentMap_12733 = var_universalMap_14134 ;
+        var_currentErrorLocation_12671 = extractedValue_propertyName.getter_location (HERE) ;
+      }else if (kBoolFalse == test_6) {
+        TC_Array <C_FixItDescription> fixItArray7 ;
+        inCompiler->emitSemanticError (var_currentErrorLocation_12671, GALGAS_string ("this object has no property"), fixItArray7  COMMA_SOURCE_FILE ("declaration-guard.galgas", 375)) ;
+        var_currentObject_12082.drop () ; // Release error dropped variable
+        var_methodName_13897.drop () ; // Release error dropped variable
       }
     }
     break ;
   case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
     {
-      const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_13973 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_12376.unsafePointer ()) ;
-      const GALGAS_location extractedValue_endOfIndex = extractPtr_13973->mAssociatedValue1 ;
-      TC_Array <C_FixItDescription> fixItArray5 ;
-      inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("a property access is required here"), fixItArray5  COMMA_SOURCE_FILE ("declaration-guard.galgas", 368)) ;
-      var_currentObject_12152.drop () ; // Release error dropped variable
-      var_methodName_13404.drop () ; // Release error dropped variable
+      const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_14466 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_12869.unsafePointer ()) ;
+      const GALGAS_location extractedValue_endOfIndex = extractPtr_14466->mAssociatedValue1 ;
+      TC_Array <C_FixItDescription> fixItArray8 ;
+      inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("a property access is required here"), fixItArray8  COMMA_SOURCE_FILE ("declaration-guard.galgas", 378)) ;
+      var_currentObject_12082.drop () ; // Release error dropped variable
+      var_methodName_13897.drop () ; // Release error dropped variable
     }
     break ;
   }
-  GALGAS_lstring var_routineMangledName_14070 = function_routineMangledNameFromCall (GALGAS_string ("$").add_operation (extensionGetter_key (extensionGetter_type (var_currentObject_12152, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 371)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 371)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 371)), var_methodName_13404, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 371)) ;
-  GALGAS_lstring var_signature_14210 = extensionGetter_routineSignature (object->mProperty_mArguments, var_methodName_13404.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 373)) ;
-  GALGAS_routineDescriptor var_routineDescriptor_14440 ;
-  GALGAS_lstring joker_14356 ; // Joker input parameter
-  callExtensionMethod_searchRoutine ((const cPtr_universalPropertyAndRoutineMapForContext *) var_currentMap_12241.ptr (), var_methodName_13404, var_signature_14210, joker_14356, var_routineDescriptor_14440, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 375)) ;
-  GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_14542 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 382)) ;
-  switch (var_routineDescriptor_14440.getter_mRoutineCallingScheme (HERE).enumValue ()) {
+  GALGAS_lstring var_routineMangledName_14563 = function_routineMangledNameFromCall (GALGAS_string ("$").add_operation (extensionGetter_key (extensionGetter_type (var_currentObject_12082, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 381)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 381)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 381)), var_methodName_13897, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 381)) ;
+  GALGAS_lstring var_signature_14703 = extensionGetter_routineSignature (object->mProperty_mArguments, var_methodName_13897.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 383)) ;
+  GALGAS_routineDescriptor var_routineDescriptor_14933 ;
+  GALGAS_lstring joker_14849 ; // Joker input parameter
+  callExtensionMethod_searchRoutine ((const cPtr_universalPropertyAndRoutineMapForContext *) var_currentMap_12733.ptr (), var_methodName_13897, var_signature_14703, joker_14849, var_routineDescriptor_14933, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 385)) ;
+  GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_15035 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 392)) ;
+  switch (var_routineDescriptor_14933.getter_mRoutineCallingScheme (HERE).enumValue ()) {
   case GALGAS_routineCallingSheme::kNotBuilt:
     break ;
   case GALGAS_routineCallingSheme::kEnum_staticCall:
     {
-      var_effectiveParameterListIR_14542.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 385)), var_currentObject_12152  COMMA_SOURCE_FILE ("declaration-guard.galgas", 385)) ;
+      var_effectiveParameterListIR_15035.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 395)), var_currentObject_12082  COMMA_SOURCE_FILE ("declaration-guard.galgas", 395)) ;
     }
     break ;
   case GALGAS_routineCallingSheme::kEnum_propertyIndirectCall:
@@ -8294,29 +8306,29 @@ static void extensionMethod_complexCallNoSelfInstructionAST_baseGuardAnalyze (co
     }
     break ;
   }
-  GALGAS_routineTypedSignature var_formalSignature_14923 = var_routineDescriptor_14440.getter_mSignature (HERE) ;
-  const enumGalgasBool test_6 = GALGAS_bool (kIsNotEqual, var_routineDescriptor_14440.getter_mReturnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-guard.galgas", 394)))).boolEnum () ;
-  if (kBoolTrue == test_6) {
-    TC_Array <C_FixItDescription> fixItArray7 ;
-    inCompiler->emitSemanticError (var_methodName_13404.getter_location (SOURCE_FILE ("declaration-guard.galgas", 395)), GALGAS_string ("not a procedure (returns a value)"), fixItArray7  COMMA_SOURCE_FILE ("declaration-guard.galgas", 395)) ;
-    var_routineDescriptor_14440.drop () ; // Release error dropped variable
+  GALGAS_routineTypedSignature var_formalSignature_15416 = var_routineDescriptor_14933.getter_mSignature (HERE) ;
+  const enumGalgasBool test_9 = GALGAS_bool (kIsNotEqual, var_routineDescriptor_14933.getter_mReturnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-guard.galgas", 404)))).boolEnum () ;
+  if (kBoolTrue == test_9) {
+    TC_Array <C_FixItDescription> fixItArray10 ;
+    inCompiler->emitSemanticError (var_methodName_13897.getter_location (SOURCE_FILE ("declaration-guard.galgas", 405)), GALGAS_string ("not a procedure (returns a value)"), fixItArray10  COMMA_SOURCE_FILE ("declaration-guard.galgas", 405)) ;
+    var_routineDescriptor_14933.drop () ; // Release error dropped variable
     outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
-  }else if (kBoolFalse == test_6) {
+  }else if (kBoolFalse == test_9) {
     {
-    routine_analyzeEffectiveParametersNew (constinArgument_inSelfType, var_formalSignature_14923, object->mProperty_mArguments, var_methodName_13404.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, var_baseGuardAllocaList_11890, var_baseGuardInstructionGenerationList_11951, var_effectiveParameterListIR_14542, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 405)) ;
+    routine_analyzeEffectiveParametersNew (constinArgument_inSelfType, var_formalSignature_15416, object->mProperty_mArguments, var_methodName_13897.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, var_baseGuardAllocaList_11890, var_baseGuardInstructionGenerationList_11951, var_effectiveParameterListIR_15035, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 415)) ;
     }
-    switch (var_routineDescriptor_14440.getter_mRoutineCallingScheme (HERE).enumValue ()) {
+    switch (var_routineDescriptor_14933.getter_mRoutineCallingScheme (HERE).enumValue ()) {
     case GALGAS_routineCallingSheme::kNotBuilt:
       break ;
     case GALGAS_routineCallingSheme::kEnum_staticCall:
       {
-        outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList_11890, var_baseGuardInstructionGenerationList_11951, var_routineMangledName_14070.getter_string (HERE), var_effectiveParameterListIR_14542  COMMA_SOURCE_FILE ("declaration-guard.galgas", 423)) ;
+        outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList_11890, var_baseGuardInstructionGenerationList_11951, var_routineMangledName_14563.getter_string (HERE), var_effectiveParameterListIR_15035  COMMA_SOURCE_FILE ("declaration-guard.galgas", 433)) ;
       }
       break ;
     case GALGAS_routineCallingSheme::kEnum_propertyIndirectCall:
       {
-        TC_Array <C_FixItDescription> fixItArray8 ;
-        inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("declaration-guard.galgas", 430)), GALGAS_string ("NOT HANDLED YET"), fixItArray8  COMMA_SOURCE_FILE ("declaration-guard.galgas", 430)) ;
+        TC_Array <C_FixItDescription> fixItArray11 ;
+        inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("declaration-guard.galgas", 440)), GALGAS_string ("NOT HANDLED YET"), fixItArray11  COMMA_SOURCE_FILE ("declaration-guard.galgas", 440)) ;
         outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
       }
       break ;
@@ -8354,124 +8366,134 @@ static void extensionMethod_complexCallSelfInstructionAST_baseGuardAnalyze (cons
                                                                             COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_complexCallSelfInstructionAST * object = (const cPtr_complexCallSelfInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_complexCallSelfInstructionAST) ;
-  GALGAS_allocaList var_baseGuardAllocaList_17109 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 447)) ;
-  GALGAS_instructionListIR var_baseGuardInstructionGenerationList_17170 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 448)) ;
-  GALGAS_location var_currentErrorLocation_17207 = object->mProperty_mAssignmentTargetAST.getter_mSelfLocation (HERE) ;
-  GALGAS_objectIR var_currentObject_17270 = GALGAS_objectIR::constructor_selfObject (constinArgument_inSelfType  COMMA_SOURCE_FILE ("declaration-guard.galgas", 451)) ;
-  GALGAS_universalPropertyAndRoutineMapForContext var_currentMap_17358 = GALGAS_universalPropertyAndRoutineMapForContext::constructor_default (SOURCE_FILE ("declaration-guard.galgas", 452)) ;
-  GALGAS_accessInAssignmentListAST var_accessList_17412 = object->mProperty_mAssignmentTargetAST.getter_mAccessList (HERE) ;
-  {
-  var_accessList_17412.setter_insertAtIndex (GALGAS_accessInAssignmentAST::constructor_property (object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 455)), GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 455)) ;
+  GALGAS_allocaList var_baseGuardAllocaList_17602 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 457)) ;
+  GALGAS_instructionListIR var_baseGuardInstructionGenerationList_17663 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 458)) ;
+  GALGAS_location var_currentErrorLocation_17700 = object->mProperty_mAssignmentTargetAST.getter_mSelfLocation (HERE) ;
+  GALGAS_universalPropertyAndRoutineMapForContext var_currentMap_17852 = GALGAS_universalPropertyAndRoutineMapForContext::constructor_default (SOURCE_FILE ("declaration-guard.galgas", 462)) ;
+  GALGAS_objectIR var_currentObject_18059 ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_PLMType::constructor_void (SOURCE_FILE ("declaration-guard.galgas", 467)))).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      TC_Array <C_FixItDescription> fixItArray2 ;
+      inCompiler->emitSemanticError (object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("declaration-guard.galgas", 468)), GALGAS_string ("self is not available in this context"), fixItArray2  COMMA_SOURCE_FILE ("declaration-guard.galgas", 468)) ;
+      var_currentObject_18059.drop () ; // Release error dropped variable
+    }else if (kBoolFalse == test_1) {
+      var_currentObject_18059 = GALGAS_objectIR::constructor_temporaryReference (constinArgument_inSelfType, GALGAS_lstring::constructor_new (GALGAS_string ("%self"), object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 470))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 470)) ;
+    }
+  }else if (kBoolFalse == test_0) {
+    callExtensionMethod_searchValuedObject ((const cPtr_universalPropertyAndRoutineMapForContext *) ioArgument_ioUniversalMap.ptr (), object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE), var_currentObject_18059, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 473)) ;
   }
-  GALGAS_accessInAssignmentAST var_lastAccess_17573 ;
+  GALGAS_accessInAssignmentListAST var_accessList_18561 = object->mProperty_mAssignmentTargetAST.getter_mAccessList (HERE) ;
+  GALGAS_accessInAssignmentAST var_lastAccess_18723 ;
   {
-  var_accessList_17412.setter_popLast (var_lastAccess_17573, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 456)) ;
+  var_accessList_18561.setter_popLast (var_lastAccess_18723, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 478)) ;
   }
-  cEnumerator_accessInAssignmentListAST enumerator_17629 (var_accessList_17412, kENUMERATION_UP) ;
-  while (enumerator_17629.hasCurrentObject ()) {
-    GALGAS_PLMType var_currentType_17652 = extensionGetter_type (var_currentObject_17270, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 459)) ;
-    switch (enumerator_17629.current_mAccess (HERE).enumValue ()) {
+  cEnumerator_accessInAssignmentListAST enumerator_18779 (var_accessList_18561, kENUMERATION_UP) ;
+  while (enumerator_18779.hasCurrentObject ()) {
+    GALGAS_PLMType var_currentType_18802 = extensionGetter_type (var_currentObject_18059, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 481)) ;
+    switch (enumerator_18779.current_mAccess (HERE).enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_property:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_18398 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_17629.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_propertyName = extractPtr_18398->mAssociatedValue0 ;
-        const enumGalgasBool test_0 = var_currentType_17652.getter_isStructure (SOURCE_FILE ("declaration-guard.galgas", 462)).boolEnum () ;
-        if (kBoolTrue == test_0) {
-          GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_17843 ;
-          GALGAS_lstring joker_17810_3 ; // Joker input parameter
-          GALGAS_propertyMap joker_17810_2 ; // Joker input parameter
-          GALGAS_routineMapForContext joker_17810_1 ; // Joker input parameter
-          GALGAS_propertyList joker_17845_3 ; // Joker input parameter
-          GALGAS_PLMTypeFlags joker_17845_2 ; // Joker input parameter
-          GALGAS_string joker_17845_1 ; // Joker input parameter
-          var_currentType_17652.method_structure (joker_17810_3, joker_17810_2, joker_17810_1, var_universalMap_17843, joker_17845_3, joker_17845_2, joker_17845_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 463)) ;
-          GALGAS_objectIR var_propertyObject_17923 ;
-          callExtensionMethod_searchValuedObject ((const cPtr_universalPropertyAndRoutineMapForContext *) var_universalMap_17843.ptr (), extractedValue_propertyName, var_propertyObject_17923, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 464)) ;
-          var_currentMap_17358 = var_universalMap_17843 ;
-          var_currentErrorLocation_17207 = extractedValue_propertyName.getter_location (HERE) ;
-          GALGAS_objectIR var_newObject_18107 ;
+        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_19548 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_18779.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_propertyName = extractPtr_19548->mAssociatedValue0 ;
+        const enumGalgasBool test_3 = var_currentType_18802.getter_isStructure (SOURCE_FILE ("declaration-guard.galgas", 484)).boolEnum () ;
+        if (kBoolTrue == test_3) {
+          GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_18993 ;
+          GALGAS_lstring joker_18960_3 ; // Joker input parameter
+          GALGAS_propertyMap joker_18960_2 ; // Joker input parameter
+          GALGAS_routineMapForContext joker_18960_1 ; // Joker input parameter
+          GALGAS_propertyList joker_18995_3 ; // Joker input parameter
+          GALGAS_PLMTypeFlags joker_18995_2 ; // Joker input parameter
+          GALGAS_string joker_18995_1 ; // Joker input parameter
+          var_currentType_18802.method_structure (joker_18960_3, joker_18960_2, joker_18960_1, var_universalMap_18993, joker_18995_3, joker_18995_2, joker_18995_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 485)) ;
+          GALGAS_objectIR var_propertyObject_19073 ;
+          callExtensionMethod_searchValuedObject ((const cPtr_universalPropertyAndRoutineMapForContext *) var_universalMap_18993.ptr (), extractedValue_propertyName, var_propertyObject_19073, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 486)) ;
+          var_currentMap_17852 = var_universalMap_18993 ;
+          var_currentErrorLocation_17700 = extractedValue_propertyName.getter_location (HERE) ;
+          GALGAS_objectIR var_newObject_19257 ;
           {
-          routine_getNewTempVariable (extensionGetter_type (var_propertyObject_17923, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 467)), extractedValue_propertyName.getter_location (SOURCE_FILE ("declaration-guard.galgas", 467)), ioArgument_ioTemporaries, var_newObject_18107, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 467)) ;
+          routine_getNewTempVariable (extensionGetter_type (var_propertyObject_19073, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 489)), extractedValue_propertyName.getter_location (SOURCE_FILE ("declaration-guard.galgas", 489)), ioArgument_ioTemporaries, var_newObject_19257, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 489)) ;
           }
           {
-          extensionSetter_appendGetPropertyReference (var_baseGuardInstructionGenerationList_17170, var_newObject_18107, var_currentObject_17270, extractedValue_propertyName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 471)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 468)) ;
+          extensionSetter_appendGetPropertyReference (var_baseGuardInstructionGenerationList_17663, var_newObject_19257, var_currentObject_18059, extractedValue_propertyName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 493)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 490)) ;
           }
-          var_currentObject_17270 = var_newObject_18107 ;
-        }else if (kBoolFalse == test_0) {
-          TC_Array <C_FixItDescription> fixItArray1 ;
-          inCompiler->emitSemanticError (var_currentErrorLocation_17207, GALGAS_string ("this object has no property"), fixItArray1  COMMA_SOURCE_FILE ("declaration-guard.galgas", 475)) ;
-          var_currentObject_17270.drop () ; // Release error dropped variable
+          var_currentObject_18059 = var_newObject_19257 ;
+        }else if (kBoolFalse == test_3) {
+          TC_Array <C_FixItDescription> fixItArray4 ;
+          inCompiler->emitSemanticError (var_currentErrorLocation_17700, GALGAS_string ("this object has no property"), fixItArray4  COMMA_SOURCE_FILE ("declaration-guard.galgas", 497)) ;
+          var_currentObject_18059.drop () ; // Release error dropped variable
         }
       }
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_18541 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_17629.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_18541->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfIndex = extractPtr_18541->mAssociatedValue1 ;
-        TC_Array <C_FixItDescription> fixItArray2 ;
-        inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("not handled yet"), fixItArray2  COMMA_SOURCE_FILE ("declaration-guard.galgas", 478)) ;
-        var_currentObject_17270.drop () ; // Release error dropped variable
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_19691 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_18779.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_19691->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfIndex = extractPtr_19691->mAssociatedValue1 ;
+        TC_Array <C_FixItDescription> fixItArray5 ;
+        inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("not handled yet"), fixItArray5  COMMA_SOURCE_FILE ("declaration-guard.galgas", 500)) ;
+        var_currentObject_18059.drop () ; // Release error dropped variable
       }
       break ;
     }
-    enumerator_17629.gotoNextObject () ;
+    enumerator_18779.gotoNextObject () ;
   }
-  GALGAS_lstring var_methodName_18601 ;
-  switch (var_lastAccess_17573.enumValue ()) {
+  GALGAS_lstring var_methodName_19751 ;
+  switch (var_lastAccess_18723.enumValue ()) {
   case GALGAS_accessInAssignmentAST::kNotBuilt:
     break ;
   case GALGAS_accessInAssignmentAST::kEnum_property:
     {
-      const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_19036 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_17573.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_propertyName = extractPtr_19036->mAssociatedValue0 ;
-      var_methodName_18601 = extractedValue_propertyName ;
-      GALGAS_PLMType var_currentType_18713 = extensionGetter_type (var_currentObject_17270, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 486)) ;
-      const enumGalgasBool test_3 = var_currentType_18713.getter_isStructure (SOURCE_FILE ("declaration-guard.galgas", 487)).boolEnum () ;
-      if (kBoolTrue == test_3) {
-        GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_18838 ;
-        GALGAS_lstring joker_18805_3 ; // Joker input parameter
-        GALGAS_propertyMap joker_18805_2 ; // Joker input parameter
-        GALGAS_routineMapForContext joker_18805_1 ; // Joker input parameter
-        GALGAS_propertyList joker_18840_3 ; // Joker input parameter
-        GALGAS_PLMTypeFlags joker_18840_2 ; // Joker input parameter
-        GALGAS_string joker_18840_1 ; // Joker input parameter
-        var_currentType_18713.method_structure (joker_18805_3, joker_18805_2, joker_18805_1, var_universalMap_18838, joker_18840_3, joker_18840_2, joker_18840_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 488)) ;
-        var_currentMap_17358 = var_universalMap_18838 ;
-        var_currentErrorLocation_17207 = extractedValue_propertyName.getter_location (HERE) ;
-      }else if (kBoolFalse == test_3) {
-        TC_Array <C_FixItDescription> fixItArray4 ;
-        inCompiler->emitSemanticError (var_currentErrorLocation_17207, GALGAS_string ("this object has no property"), fixItArray4  COMMA_SOURCE_FILE ("declaration-guard.galgas", 492)) ;
-        var_currentObject_17270.drop () ; // Release error dropped variable
-        var_methodName_18601.drop () ; // Release error dropped variable
+      const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_20186 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_18723.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_propertyName = extractPtr_20186->mAssociatedValue0 ;
+      var_methodName_19751 = extractedValue_propertyName ;
+      GALGAS_PLMType var_currentType_19863 = extensionGetter_type (var_currentObject_18059, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 508)) ;
+      const enumGalgasBool test_6 = var_currentType_19863.getter_isStructure (SOURCE_FILE ("declaration-guard.galgas", 509)).boolEnum () ;
+      if (kBoolTrue == test_6) {
+        GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_19988 ;
+        GALGAS_lstring joker_19955_3 ; // Joker input parameter
+        GALGAS_propertyMap joker_19955_2 ; // Joker input parameter
+        GALGAS_routineMapForContext joker_19955_1 ; // Joker input parameter
+        GALGAS_propertyList joker_19990_3 ; // Joker input parameter
+        GALGAS_PLMTypeFlags joker_19990_2 ; // Joker input parameter
+        GALGAS_string joker_19990_1 ; // Joker input parameter
+        var_currentType_19863.method_structure (joker_19955_3, joker_19955_2, joker_19955_1, var_universalMap_19988, joker_19990_3, joker_19990_2, joker_19990_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 510)) ;
+        var_currentMap_17852 = var_universalMap_19988 ;
+        var_currentErrorLocation_17700 = extractedValue_propertyName.getter_location (HERE) ;
+      }else if (kBoolFalse == test_6) {
+        TC_Array <C_FixItDescription> fixItArray7 ;
+        inCompiler->emitSemanticError (var_currentErrorLocation_17700, GALGAS_string ("this object has no property"), fixItArray7  COMMA_SOURCE_FILE ("declaration-guard.galgas", 514)) ;
+        var_currentObject_18059.drop () ; // Release error dropped variable
+        var_methodName_19751.drop () ; // Release error dropped variable
       }
     }
     break ;
   case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
     {
-      const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_19170 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_17573.unsafePointer ()) ;
-      const GALGAS_location extractedValue_endOfIndex = extractPtr_19170->mAssociatedValue1 ;
-      TC_Array <C_FixItDescription> fixItArray5 ;
-      inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("a property access is required here"), fixItArray5  COMMA_SOURCE_FILE ("declaration-guard.galgas", 495)) ;
-      var_currentObject_17270.drop () ; // Release error dropped variable
-      var_methodName_18601.drop () ; // Release error dropped variable
+      const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_20320 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_18723.unsafePointer ()) ;
+      const GALGAS_location extractedValue_endOfIndex = extractPtr_20320->mAssociatedValue1 ;
+      TC_Array <C_FixItDescription> fixItArray8 ;
+      inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("a property access is required here"), fixItArray8  COMMA_SOURCE_FILE ("declaration-guard.galgas", 517)) ;
+      var_currentObject_18059.drop () ; // Release error dropped variable
+      var_methodName_19751.drop () ; // Release error dropped variable
     }
     break ;
   }
-  GALGAS_lstring var_routineMangledName_19267 = function_routineMangledNameFromCall (GALGAS_string ("$").add_operation (extensionGetter_key (extensionGetter_type (var_currentObject_17270, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 498)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 498)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 498)), var_methodName_18601, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 498)) ;
-  GALGAS_lstring var_signature_19407 = extensionGetter_routineSignature (object->mProperty_mArguments, var_methodName_18601.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 500)) ;
-  GALGAS_routineDescriptor var_routineDescriptor_19636 ;
-  GALGAS_lstring joker_19553 ; // Joker input parameter
-  callExtensionMethod_searchRoutine ((const cPtr_universalPropertyAndRoutineMapForContext *) var_currentMap_17358.ptr (), var_methodName_18601, var_signature_19407, joker_19553, var_routineDescriptor_19636, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 502)) ;
-  GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_19738 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 509)) ;
-  switch (var_routineDescriptor_19636.getter_mRoutineCallingScheme (HERE).enumValue ()) {
+  GALGAS_lstring var_routineMangledName_20417 = function_routineMangledNameFromCall (GALGAS_string ("$").add_operation (extensionGetter_key (extensionGetter_type (var_currentObject_18059, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 520)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 520)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 520)), var_methodName_19751, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 520)) ;
+  GALGAS_lstring var_signature_20557 = extensionGetter_routineSignature (object->mProperty_mArguments, var_methodName_19751.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 522)) ;
+  GALGAS_routineDescriptor var_routineDescriptor_20786 ;
+  GALGAS_lstring joker_20703 ; // Joker input parameter
+  callExtensionMethod_searchRoutine ((const cPtr_universalPropertyAndRoutineMapForContext *) var_currentMap_17852.ptr (), var_methodName_19751, var_signature_20557, joker_20703, var_routineDescriptor_20786, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 524)) ;
+  GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_20888 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 531)) ;
+  switch (var_routineDescriptor_20786.getter_mRoutineCallingScheme (HERE).enumValue ()) {
   case GALGAS_routineCallingSheme::kNotBuilt:
     break ;
   case GALGAS_routineCallingSheme::kEnum_staticCall:
     {
-      var_effectiveParameterListIR_19738.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 512)), var_currentObject_17270  COMMA_SOURCE_FILE ("declaration-guard.galgas", 512)) ;
+      var_effectiveParameterListIR_20888.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 534)), var_currentObject_18059  COMMA_SOURCE_FILE ("declaration-guard.galgas", 534)) ;
     }
     break ;
   case GALGAS_routineCallingSheme::kEnum_propertyIndirectCall:
@@ -8479,29 +8501,29 @@ static void extensionMethod_complexCallSelfInstructionAST_baseGuardAnalyze (cons
     }
     break ;
   }
-  GALGAS_routineTypedSignature var_formalSignature_20119 = var_routineDescriptor_19636.getter_mSignature (HERE) ;
-  const enumGalgasBool test_6 = GALGAS_bool (kIsNotEqual, var_routineDescriptor_19636.getter_mReturnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-guard.galgas", 521)))).boolEnum () ;
-  if (kBoolTrue == test_6) {
-    TC_Array <C_FixItDescription> fixItArray7 ;
-    inCompiler->emitSemanticError (var_methodName_18601.getter_location (SOURCE_FILE ("declaration-guard.galgas", 522)), GALGAS_string ("not a procedure (returns a value)"), fixItArray7  COMMA_SOURCE_FILE ("declaration-guard.galgas", 522)) ;
-    var_routineDescriptor_19636.drop () ; // Release error dropped variable
+  GALGAS_routineTypedSignature var_formalSignature_21269 = var_routineDescriptor_20786.getter_mSignature (HERE) ;
+  const enumGalgasBool test_9 = GALGAS_bool (kIsNotEqual, var_routineDescriptor_20786.getter_mReturnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-guard.galgas", 543)))).boolEnum () ;
+  if (kBoolTrue == test_9) {
+    TC_Array <C_FixItDescription> fixItArray10 ;
+    inCompiler->emitSemanticError (var_methodName_19751.getter_location (SOURCE_FILE ("declaration-guard.galgas", 544)), GALGAS_string ("not a procedure (returns a value)"), fixItArray10  COMMA_SOURCE_FILE ("declaration-guard.galgas", 544)) ;
+    var_routineDescriptor_20786.drop () ; // Release error dropped variable
     outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
-  }else if (kBoolFalse == test_6) {
+  }else if (kBoolFalse == test_9) {
     {
-    routine_analyzeEffectiveParametersNew (constinArgument_inSelfType, var_formalSignature_20119, object->mProperty_mArguments, var_methodName_18601.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, var_baseGuardAllocaList_17109, var_baseGuardInstructionGenerationList_17170, var_effectiveParameterListIR_19738, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 532)) ;
+    routine_analyzeEffectiveParametersNew (constinArgument_inSelfType, var_formalSignature_21269, object->mProperty_mArguments, var_methodName_19751.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, var_baseGuardAllocaList_17602, var_baseGuardInstructionGenerationList_17663, var_effectiveParameterListIR_20888, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 554)) ;
     }
-    switch (var_routineDescriptor_19636.getter_mRoutineCallingScheme (HERE).enumValue ()) {
+    switch (var_routineDescriptor_20786.getter_mRoutineCallingScheme (HERE).enumValue ()) {
     case GALGAS_routineCallingSheme::kNotBuilt:
       break ;
     case GALGAS_routineCallingSheme::kEnum_staticCall:
       {
-        outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList_17109, var_baseGuardInstructionGenerationList_17170, var_routineMangledName_19267.getter_string (HERE), var_effectiveParameterListIR_19738  COMMA_SOURCE_FILE ("declaration-guard.galgas", 550)) ;
+        outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList_17602, var_baseGuardInstructionGenerationList_17663, var_routineMangledName_20417.getter_string (HERE), var_effectiveParameterListIR_20888  COMMA_SOURCE_FILE ("declaration-guard.galgas", 572)) ;
       }
       break ;
     case GALGAS_routineCallingSheme::kEnum_propertyIndirectCall:
       {
-        TC_Array <C_FixItDescription> fixItArray8 ;
-        inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("declaration-guard.galgas", 557)), GALGAS_string ("NOT HANDLED YET"), fixItArray8  COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)) ;
+        TC_Array <C_FixItDescription> fixItArray11 ;
+        inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("declaration-guard.galgas", 579)), GALGAS_string ("NOT HANDLED YET"), fixItArray11  COMMA_SOURCE_FILE ("declaration-guard.galgas", 579)) ;
         outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
       }
       break ;
