@@ -320,7 +320,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     [ioUniversalMap searchEntity !mObjectName ?let entity]
     switch entity
     case module (@PLMType unused type) :
-      analyzePrimaryExpressionNoSelf (
+      analyzePrimaryExpression (
         !self: inSelfType
         !inGuard: inGuard
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -365,7 +365,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     case globalConstant (@objectIR objectIR) :
       outResult = objectIR
     case localConstant (@PLMType unused type @lstring unused plmName) :
-      analyzePrimaryExpressionNoSelf (
+      analyzePrimaryExpression (
         !self: inSelfType
         !inGuard: inGuard
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -382,7 +382,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
         ?result: outResult
       )
     case globalVariable (@bool unused writable @PLMType unused type) :
-      analyzePrimaryExpressionNoSelf (
+      analyzePrimaryExpression (
         !self: inSelfType
         !inGuard: inGuard
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -399,7 +399,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
         ?result: outResult
       )
     case localVariable (@PLMType unused type @lstring unused plmName) :
-      analyzePrimaryExpressionNoSelf (
+      analyzePrimaryExpression (
         !self: inSelfType
         !inGuard: inGuard
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -416,7 +416,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
         ?result: outResult
       )
     case undefined :
-      analyzePrimaryExpressionNoSelf (
+      analyzePrimaryExpression (
         !self: inSelfType
         !inGuard: inGuard
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -440,7 +440,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 
 #·······················································································································
 
-proc analyzePrimaryExpressionNoSelf
+proc analyzePrimaryExpression
   ?self:let @PLMType inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -492,7 +492,7 @@ proc analyzePrimaryExpressionNoSelf
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
-      handleFunctionCallInExpressionNew (
+      handleFunctionCallInExpression (
         !?internalRepresentation
         !self:inSelfType
         !inGuard:inGuard
@@ -695,7 +695,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
-      handleFunctionCallInExpressionNew (
+      handleFunctionCallInExpression (
         !?internalRepresentation
         !self:inSelfType
         !inGuard:inGuard
@@ -764,10 +764,6 @@ private proc analyzePrimaryExpressionWithSelf
   !result:@objectIR outResult
 {
 #--- object access, with self
-#  @internalRepresentation internalRepresentation= .structureMember {
-#    !propertyName:mObjectName
-#    !currentPointerIR:.selfObject {!type:inSelfType}
-#  }
   @internalRepresentation internalRepresentation= .universalReference {
     !type:inSelfType
     !llvmName:"%self"
@@ -807,7 +803,7 @@ private proc analyzePrimaryExpressionWithSelf
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
-      handleFunctionCallInExpressionNew (
+      handleFunctionCallInExpression (
         !?internalRepresentation
         !self:inSelfType
         !inGuard:inGuard
@@ -1034,8 +1030,6 @@ proc handleArrayAccessInExpression
      !loadedObjectIR
      ![variableIR llvmName]
    ]
-#   ioInternalRepresentation = .bitField {!valueIR:variableIR}
-#   ioInternalRepresentation = .universalReference {!type:.pointer{!pointee:[variableIR type]} !llvmName:[variableIR name]}
    ioInternalRepresentation = .universalReference {!type:[loadedObjectIR type] !llvmName:[loadedObjectIR name]}
   elsif [variableIR isRegisterReference] then
     error inEndOfIndex : "control register not handled here"
@@ -1046,7 +1040,7 @@ proc handleArrayAccessInExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc handleFunctionCallInExpressionNew
+proc handleFunctionCallInExpression
   ?!@internalRepresentation ioInternalRepresentation
   ?self:let @PLMType inSelfType
   ?inGuard:let @bool inGuard
@@ -1092,7 +1086,7 @@ proc handleFunctionCallInExpressionNew
     )
   case structureMember (@lstring propertyName @objectIR currentPointerIR) :
     if [[currentPointerIR type] isStructure] then
-      handleMethodCallInExpressionNew (
+      handleMethodCallInExpression (
         !propertyName
         !currentPointerIR
         !self:inSelfType
@@ -1116,7 +1110,7 @@ proc handleFunctionCallInExpressionNew
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc handleMethodCallInExpressionNew
+private proc handleMethodCallInExpression
   ?let @lstring inMethodName
   ?let @objectIR inCurrentPointerIR
   ?self:let @PLMType inSelfType
@@ -1131,16 +1125,16 @@ proc handleMethodCallInExpressionNew
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outCallReturnedResult
 {
-  [[inCurrentPointerIR type] structure ?3* ?universalMap:let currentMap ?3*]
   let routineMangledName = routineMangledNameFromCall (!"$" + [[inCurrentPointerIR type] key] !inMethodName !inArguments)
 #--- Get called function signature
   let signature = [inArguments routineSignature !inMethodName.location]
 #--- Search function in map
-  [currentMap searchRoutine
+  [inContext.mRoutineMapForContext searchKey
     !inMethodName
     !signature
     ?let @lstring LLVMInvocationRoutineName
     ?@routineDescriptor routineDescriptor
+    ?* # let @location outKeyLocation
   ]
 #--- Check routine is actually a function
   if [routineDescriptor.mReturnTypeProxy type] == .void then
@@ -1241,12 +1235,20 @@ private proc handleStandAloneFunctionCallInExpression
 #--- Get called function signature
   let signature = [inArguments routineSignature !inFunctionName.location]
 #--- Search function in map
-  [ioUniversalMap searchRoutine
+  [inContext.mRoutineMapForContext searchKey
     !inFunctionName
     !signature
     ?let @lstring LLVMInvocationRoutineName
     ?@routineDescriptor routineDescriptor
+    ?* # let @location outKeyLocation
   ]
+
+#  [ioUniversalMap searchRoutine
+#    !inFunctionName
+#    !signature
+#    ?let @lstring LLVMInvocationRoutineName
+#    ?@routineDescriptor routineDescriptor
+#  ]
 #  let isPublic = routineDescriptor.mIsPublic
   let routineKind = routineDescriptor.mRoutineKind
   let calleeMode = [routineKind executionMode]

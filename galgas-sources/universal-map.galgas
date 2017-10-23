@@ -598,15 +598,15 @@ method @universalPropertyAndRoutineMapForContext searchValuedObjectType
 
 #·······················································································································
 
-method @universalPropertyAndRoutineMapForContext searchRoutine
-  ?let @lstring inRoutineName
-  ?let @lstring inArgumentSignature
-  !@lstring outLLVMInvocationRoutineName
-  !@routineDescriptor outDescriptor
-{
-  [mInternalPropertyAndRoutineMapForContext searchKey !inRoutineName ?3* ?let @routineSignatureMapForContext routineMap]
-  [routineMap searchKey !inArgumentSignature ?outLLVMInvocationRoutineName ?outDescriptor]
-}
+#method @universalPropertyAndRoutineMapForContext searchRoutine
+#  ?let @lstring inRoutineName
+#  ?let @lstring inArgumentSignature
+#  !@lstring outLLVMInvocationRoutineName
+#  !@routineDescriptor outDescriptor
+#{
+#  [mInternalPropertyAndRoutineMapForContext searchKey !inRoutineName ?3* ?let @routineSignatureMapForContext routineMap]
+#  [routineMap searchKey !inArgumentSignature ?outLLVMInvocationRoutineName ?outDescriptor]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! STATE HANDLING

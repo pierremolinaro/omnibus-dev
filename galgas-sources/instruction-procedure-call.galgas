@@ -141,13 +141,6 @@ override method @standAloneProcedureCallInstructionAST analyze
     ?let @routineDescriptor routineDescriptor
     ?let @location unused keyLocation
   ]
-#--- Search routine in map
-#  [ioUniversalMap searchRoutine
-#    !mSandAloneRoutineName
-#    !calledRoutineSignature
-#    ?let @lstring LLVMInvocationRoutineName
-#    ?let @routineDescriptor routineDescriptor
-#  ]
 #--- Routine name for invocation graph
   let routineMangledName = routineMangledNameFromCall (
     !""

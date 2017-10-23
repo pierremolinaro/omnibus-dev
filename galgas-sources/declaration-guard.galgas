@@ -381,12 +381,19 @@ override method @procedureCallInstructionAST baseGuardAnalyze
 #--- Get called function signature
   let signature = [mArguments routineSignature !methodName.location]
 #--- Search function in map
-  [currentMap searchRoutine
+  [inContext.mRoutineMapForContext searchKey
     !methodName
     !signature
-    ?* # let @lstring LLVMInvocationRoutineName
+    ?let @lstring unused LLVMInvocationRoutineName
     ?@routineDescriptor routineDescriptor
+    ?* # let @location outKeyLocation
   ]
+#  [currentMap searchRoutine
+#    !methodName
+#    !signature
+#    ?* # let @lstring LLVMInvocationRoutineName
+#    ?@routineDescriptor routineDescriptor
+#  ]
 #--- Add receiver as first parameter
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   switch routineDescriptor.mRoutineCallingScheme
