@@ -293,35 +293,6 @@ override method @structureDeclarationAST enterInContext
     for attribute in function.mFunctionAttributeList do
       attributeSet += !attribute.mValue.string
     end
-  #--- Signature
-#    let signature = [function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
-#    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let typedSignature)
-  #--- Return type
-#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
-  #--- Function invocation name
-#    let invocationName = routineMangledNameFromAST (
-#      !"$" + mStructureName 
-#      !function.mFunctionName
-#      !function.mFunctionFormalArgumentList
-#    )
-  #--- Function descriptor
-#    let functionDescriptor = @routineDescriptor.new {
-#      !function.mPublicFunction
-#      ![attributeSet hasKey !exportedAttribute ()]
-#      !.function {!executionMode:function.mMode}
-#      !typedSignature
-#      !returnTypeProxy
-#      ![attributeSet hasKey !accessAttribute ()]
-#      ![attributeSet hasKey !mutatingAttribute ()]
-#      !.staticCall
-#    }
-  #---
-#    [!?universalPropertyAndRoutineMapForContext insertRoutine
-#      !function.mFunctionName
-#      !signature
-#      !invocationName
-#      !functionDescriptor
-#    ]
   end
   for system in mSystemRoutineListAST do
   #--- Attribute set
@@ -329,35 +300,6 @@ override method @structureDeclarationAST enterInContext
     for attribute in system.mAttributeList do
       attributeSet += !attribute.mValue.string
     end
-  #--- Signature
-#    let signature = [system.mFormalArgumentList routineSignature !system.mName]
-#    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature typedSignature)
-  #--- Return type
-#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
-  #--- Function invocation name
-#    let invocationName = routineMangledNameFromAST (
-#      !"$" + mStructureName 
-#      !system.mName
-#      !system.mFormalArgumentList
-#    )
-  #--- Function descriptor
-#    let descriptor = @routineDescriptor.new {
-#      !system.mPublic
-#      ![attributeSet hasKey !exportedAttribute ()]
-#      !system.mRoutineKind
-#      !typedSignature
-#      !returnTypeProxy
-#      ![attributeSet hasKey !accessAttribute ()]
-#      ![attributeSet hasKey !mutatingAttribute ()]
-#      !.staticCall
-#    }
-  #---
-#    [!?universalPropertyAndRoutineMapForContext insertRoutine
-#      !system.mName
-#      !signature
-#      !invocationName
-#      !descriptor
-#    ]
   end
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType

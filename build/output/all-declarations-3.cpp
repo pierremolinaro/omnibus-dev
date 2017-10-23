@@ -13930,12 +13930,12 @@ typeComparisonResult cEnumAssociatedValues_possibleValuedObject_localVariable::c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_possibleValuedObject_property::cEnumAssociatedValues_possibleValuedObject_property (const GALGAS_bool & inAssociatedValue0,
-                                                                                                          const GALGAS_bool & inAssociatedValue1,
-                                                                                                          const GALGAS_PLMType & inAssociatedValue2,
-                                                                                                          const GALGAS_lstring & inAssociatedValue3,
-                                                                                                          const GALGAS_propertyAccessKind & inAssociatedValue4
-                                                                                                          COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_possibleValuedObject_propertyEX::cEnumAssociatedValues_possibleValuedObject_propertyEX (const GALGAS_bool & inAssociatedValue0,
+                                                                                                              const GALGAS_bool & inAssociatedValue1,
+                                                                                                              const GALGAS_PLMType & inAssociatedValue2,
+                                                                                                              const GALGAS_lstring & inAssociatedValue3,
+                                                                                                              const GALGAS_propertyAccessKind & inAssociatedValue4
+                                                                                                              COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1),
@@ -13946,8 +13946,8 @@ mAssociatedValue4 (inAssociatedValue4) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_possibleValuedObject_property::description (C_String & ioString,
-                                                                       const int32_t inIndentation) const {
+void cEnumAssociatedValues_possibleValuedObject_propertyEX::description (C_String & ioString,
+                                                                         const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
@@ -13959,8 +13959,8 @@ void cEnumAssociatedValues_possibleValuedObject_property::description (C_String 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_possibleValuedObject_property::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_possibleValuedObject_property * ptr = dynamic_cast<const cEnumAssociatedValues_possibleValuedObject_property *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_possibleValuedObject_propertyEX::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_possibleValuedObject_propertyEX * ptr = dynamic_cast<const cEnumAssociatedValues_possibleValuedObject_propertyEX *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -14097,17 +14097,17 @@ GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_undefined (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_property (const GALGAS_bool & inAssociatedValue0,
-                                                                               const GALGAS_bool & inAssociatedValue1,
-                                                                               const GALGAS_PLMType & inAssociatedValue2,
-                                                                               const GALGAS_lstring & inAssociatedValue3,
-                                                                               const GALGAS_propertyAccessKind & inAssociatedValue4
-                                                                               COMMA_LOCATION_ARGS) {
+GALGAS_possibleValuedObject GALGAS_possibleValuedObject::constructor_propertyEX (const GALGAS_bool & inAssociatedValue0,
+                                                                                 const GALGAS_bool & inAssociatedValue1,
+                                                                                 const GALGAS_PLMType & inAssociatedValue2,
+                                                                                 const GALGAS_lstring & inAssociatedValue3,
+                                                                                 const GALGAS_propertyAccessKind & inAssociatedValue4
+                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_possibleValuedObject result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid ()) {
-    result.mEnum = kEnum_property ;
+    result.mEnum = kEnum_propertyEX ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_property (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_possibleValuedObject_propertyEX (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -14239,24 +14239,24 @@ void GALGAS_possibleValuedObject::method_localVariable (GALGAS_PLMType & outAsso
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_possibleValuedObject::method_property (GALGAS_bool & outAssociatedValue0,
-                                                   GALGAS_bool & outAssociatedValue1,
-                                                   GALGAS_PLMType & outAssociatedValue2,
-                                                   GALGAS_lstring & outAssociatedValue3,
-                                                   GALGAS_propertyAccessKind & outAssociatedValue4,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_property) {
+void GALGAS_possibleValuedObject::method_propertyEX (GALGAS_bool & outAssociatedValue0,
+                                                     GALGAS_bool & outAssociatedValue1,
+                                                     GALGAS_PLMType & outAssociatedValue2,
+                                                     GALGAS_lstring & outAssociatedValue3,
+                                                     GALGAS_propertyAccessKind & outAssociatedValue4,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_propertyEX) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     outAssociatedValue2.drop () ;
     outAssociatedValue3.drop () ;
     outAssociatedValue4.drop () ;
     C_String s ;
-    s << "method @possibleValuedObject property invoked with an invalid enum value" ;
+    s << "method @possibleValuedObject propertyEX invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_possibleValuedObject_property * ptr = (const cEnumAssociatedValues_possibleValuedObject_property *) unsafePointer () ;
+    const cEnumAssociatedValues_possibleValuedObject_propertyEX * ptr = (const cEnumAssociatedValues_possibleValuedObject_propertyEX *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
     outAssociatedValue2 = ptr->mAssociatedValue2 ;
@@ -14276,7 +14276,7 @@ static const char * gEnumNameArrayFor_possibleValuedObject [9] = {
   "globalVariable",
   "localVariable",
   "undefined",
-  "property"
+  "propertyEX"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14323,8 +14323,8 @@ GALGAS_bool GALGAS_possibleValuedObject::getter_isUndefined (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_possibleValuedObject::getter_isProperty (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_property == mEnum) ;
+GALGAS_bool GALGAS_possibleValuedObject::getter_isPropertyEX (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_propertyEX == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

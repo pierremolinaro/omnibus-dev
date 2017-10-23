@@ -3603,7 +3603,7 @@ class cEnumAssociatedValues_possibleValuedObject_localVariable : public cEnumAss
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_possibleValuedObject_property : public cEnumAssociatedValues {
+class cEnumAssociatedValues_possibleValuedObject_propertyEX : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_bool mAssociatedValue1 ;
   public : const GALGAS_PLMType mAssociatedValue2 ;
@@ -3611,18 +3611,18 @@ class cEnumAssociatedValues_possibleValuedObject_property : public cEnumAssociat
   public : const GALGAS_propertyAccessKind mAssociatedValue4 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_possibleValuedObject_property (const GALGAS_bool & inAssociatedValue0,
-                                                                const GALGAS_bool & inAssociatedValue1,
-                                                                const GALGAS_PLMType & inAssociatedValue2,
-                                                                const GALGAS_lstring & inAssociatedValue3,
-                                                                const GALGAS_propertyAccessKind & inAssociatedValue4
-                                                                COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_possibleValuedObject_propertyEX (const GALGAS_bool & inAssociatedValue0,
+                                                                  const GALGAS_bool & inAssociatedValue1,
+                                                                  const GALGAS_PLMType & inAssociatedValue2,
+                                                                  const GALGAS_lstring & inAssociatedValue3,
+                                                                  const GALGAS_propertyAccessKind & inAssociatedValue4
+                                                                  COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_property (void) {}
+  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_propertyEX (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

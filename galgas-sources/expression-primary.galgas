@@ -432,7 +432,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
         !mAccessList
         ?result: outResult
       )
-    case property (* * * * *) :
+    case propertyEX (* * * * *) :
       error mObjectName : "« prpoerty undefined in this context" : outResult
     end
   end
