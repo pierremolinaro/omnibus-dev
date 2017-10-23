@@ -332,7 +332,6 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     [ioUniversalMap searchValuedObject !mTargetAST.mIdentifier ?currentObject]
   end
   var currentErrorLocation = mTargetAST.mIdentifier.location
-  var currentMap = ioUniversalMap
 #--- Insulate last access
   var accessList = mTargetAST.mAccessList
   [!?accessList popLast ?let lastAccess]
@@ -342,9 +341,8 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     switch access
     case property (@lstring propertyName) :
       if [currentType isStructure] then
-        [currentType structure ?3* ?universalMap:let universalMap ?3*]
-        [universalMap searchValuedObject !propertyName ?let propertyObject]
-        currentMap = universalMap
+        [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+        [propertyMap searchKey !propertyName ?* ?let propertyObject ?2*]
         currentErrorLocation = propertyName.location
         getNewTempVariable (![propertyObject type] !propertyName !?ioTemporaries ?let newObject)
         [!?baseGuardInstructionGenerationList appendGetPropertyReference
@@ -367,8 +365,8 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     methodName = propertyName
     let currentType = [currentObject type]
     if [currentType isStructure] then
-      [currentType structure ?3* ?universalMap:let universalMap ?3*]
-      currentMap = universalMap
+#      [currentType structure ?1* ?propertyMap: let propertyMap ?5*]
+#      [propertyMap searchKey !methodName ?4*]
       currentErrorLocation = propertyName.location
     else
       error currentErrorLocation : "this object has no property" : currentObject, methodName
