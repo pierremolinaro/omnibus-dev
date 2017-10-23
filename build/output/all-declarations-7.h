@@ -107,35 +107,6 @@ void callExtensionSetter_searchValuedObjectForReadWriteAccess (class cPtr_univer
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Extension method '@universalPropertyAndRoutineMapForContext searchRoutine'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_universalPropertyAndRoutineMapForContext_searchRoutine) (const class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                                 const class GALGAS_lstring constinArgument0,
-                                                                                                 const class GALGAS_lstring constinArgument1,
-                                                                                                 class GALGAS_lstring & outArgument2,
-                                                                                                 class GALGAS_routineDescriptor & outArgument3,
-                                                                                                 class C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_searchRoutine (const int32_t inClassIndex,
-                                         extensionMethodSignature_universalPropertyAndRoutineMapForContext_searchRoutine inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_searchRoutine (const class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                        const GALGAS_lstring constin_inRoutineName,
-                                        const GALGAS_lstring constin_inArgumentSignature,
-                                        GALGAS_lstring & out_outLLVMInvocationRoutineName,
-                                        GALGAS_routineDescriptor & out_outDescriptor,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //               Extension setter '@universalPropertyAndRoutineMapForContext openOverrideForSelectBlock'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

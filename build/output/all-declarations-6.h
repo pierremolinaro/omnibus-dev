@@ -1171,26 +1171,26 @@ void callExtensionMethod_searchEntity (const class cPtr_universalPropertyAndRout
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'analyzePrimaryExpressionNoSelf'                                       *
+//                                         Routine 'analyzePrimaryExpression'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_analyzePrimaryExpressionNoSelf (const class GALGAS_PLMType constinArgument0,
-                                             const class GALGAS_bool constinArgument1,
-                                             const class GALGAS_lstring constinArgument2,
-                                             const class GALGAS_PLMType constinArgument3,
-                                             const class GALGAS_semanticContext constinArgument4,
-                                             const class GALGAS_mode constinArgument5,
-                                             class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                             class GALGAS_staticStringMap & ioArgument7,
-                                             class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
-                                             class GALGAS_allocaList & ioArgument9,
-                                             class GALGAS_instructionListIR & ioArgument10,
-                                             const class GALGAS_lstring constinArgument11,
-                                             const class GALGAS_primaryInExpressionAccessListAST constinArgument12,
-                                             class GALGAS_objectIR & outArgument13,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void routine_analyzePrimaryExpression (const class GALGAS_PLMType constinArgument0,
+                                       const class GALGAS_bool constinArgument1,
+                                       const class GALGAS_lstring constinArgument2,
+                                       const class GALGAS_PLMType constinArgument3,
+                                       const class GALGAS_semanticContext constinArgument4,
+                                       const class GALGAS_mode constinArgument5,
+                                       class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                       class GALGAS_staticStringMap & ioArgument7,
+                                       class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
+                                       class GALGAS_allocaList & ioArgument9,
+                                       class GALGAS_instructionListIR & ioArgument10,
+                                       const class GALGAS_lstring constinArgument11,
+                                       const class GALGAS_primaryInExpressionAccessListAST constinArgument12,
+                                       class GALGAS_objectIR & outArgument13,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1311,25 +1311,25 @@ void routine_handleArrayAccessInExpression (class GALGAS_internalRepresentation 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Routine 'handleFunctionCallInExpressionNew'                                     *
+//                                      Routine 'handleFunctionCallInExpression'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_handleFunctionCallInExpressionNew (class GALGAS_internalRepresentation & ioArgument0,
-                                                const class GALGAS_PLMType constinArgument1,
-                                                const class GALGAS_bool constinArgument2,
-                                                const class GALGAS_lstring constinArgument3,
-                                                const class GALGAS_semanticContext constinArgument4,
-                                                const class GALGAS_mode constinArgument5,
-                                                class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                class GALGAS_staticStringMap & ioArgument7,
-                                                class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
-                                                class GALGAS_allocaList & ioArgument9,
-                                                const class GALGAS_effectiveArgumentListAST constinArgument10,
-                                                const class GALGAS_location constinArgument11,
-                                                class GALGAS_instructionListIR & ioArgument12,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void routine_handleFunctionCallInExpression (class GALGAS_internalRepresentation & ioArgument0,
+                                             const class GALGAS_PLMType constinArgument1,
+                                             const class GALGAS_bool constinArgument2,
+                                             const class GALGAS_lstring constinArgument3,
+                                             const class GALGAS_semanticContext constinArgument4,
+                                             const class GALGAS_mode constinArgument5,
+                                             class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                             class GALGAS_staticStringMap & ioArgument7,
+                                             class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
+                                             class GALGAS_allocaList & ioArgument9,
+                                             const class GALGAS_effectiveArgumentListAST constinArgument10,
+                                             const class GALGAS_location constinArgument11,
+                                             class GALGAS_instructionListIR & ioArgument12,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

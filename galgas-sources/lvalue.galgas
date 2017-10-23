@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
+#!  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @accessInAssignmentAST {
@@ -21,7 +21,7 @@ struct @LValueAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
@@ -59,7 +59,7 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
+#!  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
@@ -73,7 +73,7 @@ method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenc
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
+#!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @LValueAST type
@@ -393,85 +393,69 @@ private proc analyzeSelfAssignmentTarget
   if not [inSelfType isStructure] then
     error inSelfLocation : "'self' should be a structure instance" : outInternalRepresentation
   else
-#    [inSelfType structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?5*]
-#    [propertyMap searchKey !mIdentifier ?2* ?let propertyType ?let propertyAccess]
-#    switch propertyAccess
-#    case constant (*) :
-#      error mIdentifier : "a constant property cannot be modified" : outInternalRepresentation
-#    case indexed (@uint propertyIndex) :
-#      [!?ioTemporaries newTempLLVMVar ?let newLLVMPropertyVar]
-#      [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-#        !inSelfType
-#        !"%self"
-#        !propertyType
-#        !newLLVMPropertyVar
-#        !propertyIndex
-#        !mIdentifier
-#      ]
-      var currentType = inSelfType
-      var currentLLVMName = "%self"
-      for (access) in inAccessList do
-        switch access
-        case property (@lstring propertyName) :
-          if [currentType isStructure] then
-            [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
-            [propertyMap searchKey !propertyName ?2* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
-            switch propertyAccess
-            case constant (*) :
-              error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
-            case indexed (@uint index) :
-              [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-              [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-                !currentType
-                !currentLLVMName
-                !propertyType
-                !newLLVMvariable
-                !index
-                !propertyName
-              ]
-              currentType = propertyType
-              currentLLVMName = newLLVMvariable
-            end
-          else
-            error propertyName : "this should be a structure instance"
+    var currentType = inSelfType
+    var currentLLVMName = "%self"
+    for (access) in inAccessList do
+      switch access
+      case property (@lstring propertyName) :
+        if [currentType isStructure] then
+          [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+          [propertyMap searchKey !propertyName ?2* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
+          switch propertyAccess
+          case constant (*) :
+            error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
+          case indexed (@uint index) :
+            [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+            [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+              !currentType
+              !currentLLVMName
+              !propertyType
+              !newLLVMvariable
+              !index
+              !propertyName
+            ]
+            currentType = propertyType
+            currentLLVMName = newLLVMvariable
           end
-        case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-          if [currentType isArrayType] then
-            [currentType arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
-            handleArraySubscriptNew (
-              !self: inSelfType
-              !inGuard: false
-              !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-              !context: inContext
-              !mode: inCurrentMode
-              !?temporary: ioTemporaries
-              !?staticStringMap: ioGlobalLiteralStringMap
-              !?variableMap:ioUniversalMap
-              !?alloca: ioAllocaList
-              !indexExpression 
-              !endOfIndex
-              !arraySize:arraySize
-              !elementType:elementType
-              !?ioInstructionGenerationList
-              ?let @objectIR indexIR
-           )
-           [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-           [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
-             !currentType
-             !currentLLVMName
-             !elementType
-             !newLLVMvariable
-             !indexIR
-           ]
-           currentType = elementType
-           currentLLVMName = newLLVMvariable
-          else
-            error endOfIndex : "cannot subscript, not an array" : currentType, currentLLVMName
-          end
+        else
+          error propertyName : "this should be a structure instance"
+        end
+      case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+        if [currentType isArrayType] then
+          [currentType arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
+          handleArraySubscriptNew (
+            !self: inSelfType
+            !inGuard: false
+            !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+            !context: inContext
+            !mode: inCurrentMode
+            !?temporary: ioTemporaries
+            !?staticStringMap: ioGlobalLiteralStringMap
+            !?variableMap:ioUniversalMap
+            !?alloca: ioAllocaList
+            !indexExpression 
+            !endOfIndex
+            !arraySize:arraySize
+            !elementType:elementType
+            !?ioInstructionGenerationList
+            ?let @objectIR indexIR
+         )
+         [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+         [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
+           !currentType
+           !currentLLVMName
+           !elementType
+           !newLLVMvariable
+           !indexIR
+         ]
+         currentType = elementType
+         currentLLVMName = newLLVMvariable
+        else
+          error endOfIndex : "cannot subscript, not an array" : currentType, currentLLVMName
         end
       end
-      outInternalRepresentation = .universalReference {!type:currentType !llvmName:currentLLVMName}
-#    end
+    end
+    outInternalRepresentation = .universalReference {!type:currentType !llvmName:currentLLVMName}
   end
 }
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
