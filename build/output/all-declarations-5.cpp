@@ -4661,7 +4661,7 @@ static const char * gNonTerminalNames_plm_grammar [130] = {
   "<if_instruction>",// Index 37
   "<guarded_command>",// Index 38
   "<procedure_call>",// Index 39
-  "<lvalue_without_self>",// Index 40
+  "<lvalue>",// Index 40
   "<select_plm_5F_syntax_0>",// Index 41
   "<select_plm_5F_syntax_1>",// Index 42
   "<select_plm_5F_syntax_2>",// Index 43
@@ -20951,14 +20951,14 @@ void cGrammar_plm_5F_grammar::nt_procedure_5F_call_ (GALGAS_callInstructionAST &
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
-//                                 'lvalue_without_self' non terminal implementation                                    
+//                                        'lvalue' non terminal implementation                                          
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cGrammar_plm_5F_grammar::nt_lvalue_5F_without_5F_self_parse (C_Lexique_plm_5F_lexique * inLexique) {
+void cGrammar_plm_5F_grammar::nt_lvalue_parse (C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 91 :
-      rule_plm_5F_syntax_lvalue_5F_without_5F_self_i91_parse(inLexique) ;
+      rule_plm_5F_syntax_lvalue_i91_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -20966,11 +20966,11 @@ void cGrammar_plm_5F_grammar::nt_lvalue_5F_without_5F_self_parse (C_Lexique_plm_
   }
 }
 
-void cGrammar_plm_5F_grammar::nt_lvalue_5F_without_5F_self_ (GALGAS_LValueWithoutSelfAST &  parameter_1,
+void cGrammar_plm_5F_grammar::nt_lvalue_ (GALGAS_LValueAST &  parameter_1,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 91 :
-      rule_plm_5F_syntax_lvalue_5F_without_5F_self_i91_(parameter_1, inLexique) ;
+      rule_plm_5F_syntax_lvalue_i91_(parameter_1, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;

@@ -308,7 +308,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @complexCallNoSelfInstructionAST baseGuardAnalyze
+override method @procedureCallInstructionAST baseGuardAnalyze
   ?self:let @PLMType inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
