@@ -82,7 +82,7 @@ project (1:0:0) -> "plm" {
 #--- Instructions
   "galgas-sources/instructionList.galgas"
   "galgas-sources/directive-check.galgas"
-  "galgas-sources/instruction-assignment-without-self.galgas"
+  "galgas-sources/instruction-assignment.galgas"
   "galgas-sources/instruction-assignment-operator.galgas"
   "galgas-sources/instruction-var.galgas"
   "galgas-sources/instruction-let.galgas"
@@ -95,13 +95,11 @@ project (1:0:0) -> "plm" {
   "galgas-sources/instruction-for-in-do.galgas"
   "galgas-sources/instruction-for-in-lower-upper-bounds.galgas"
   "galgas-sources/instruction-procedure-call.galgas"
-  "galgas-sources/instruction-procedure-call-standalone.galgas"
-  "galgas-sources/instruction-procedure-call-complex-no-self.galgas"
   "galgas-sources/instruction-switch.galgas"
 
 #--- Instruction and expression helpers
   "galgas-sources/subscript-in-assignment-and-expression.galgas"
-  "galgas-sources/lvalue-without-self.galgas"
+  "galgas-sources/lvalue.galgas"
 
 #--- Compilation phases
   "galgas-sources/context-routines.galgas"

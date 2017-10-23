@@ -15,7 +15,7 @@ list @accessInAssignmentListAST {
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct @LValueWithoutSelfAST {
+struct @LValueAST {
   @lstring mIdentifier
   @accessInAssignmentListAST mAccessList
 }
@@ -28,7 +28,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <lvalue_without_self> !@LValueWithoutSelfAST outAssignmentTargetAST {
+  rule <lvalue> !@LValueAST outAssignmentTargetAST {
     @lstring receiver
   #--- Receiver
     select
@@ -62,7 +62,7 @@ syntax extension plm_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueWithoutSelfAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (access) in mAccessList do
     switch access
     case property (*) :
@@ -76,7 +76,7 @@ method @LValueWithoutSelfAST noteInstructionTypesInPrecedenceGraph ?!@semanticTy
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueWithoutSelfAST type
+method @LValueAST type
   ?selfType: let @PLMType inSelfType
   ?variableMap:let @universalPropertyAndRoutineMapForContext inUniversalMap
   !@PLMType outType
@@ -106,7 +106,7 @@ method @LValueWithoutSelfAST type
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueWithoutSelfAST analyzeLValueNoSelf
+method @LValueAST analyzeLValueNoSelf
   ?self:let @PLMType inSelfType
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

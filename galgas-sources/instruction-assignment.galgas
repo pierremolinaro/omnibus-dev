@@ -2,8 +2,8 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @varAssignmentNoSelfInstructionAST : @instructionAST {
-  @LValueWithoutSelfAST mTargetAST
+class @assignmentInstructionAST : @instructionAST {
+  @LValueAST mTargetAST
   @expressionAST mSourceExpression
 }
 
@@ -16,12 +16,12 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    <lvalue_without_self> ?let assignmentTargetAST
+    <lvalue> ?let assignmentTargetAST
   #--- Source expression
     $=$
     <expression> ?let sourceExpression
   #--- AST
-    ioInstructionList += !@varAssignmentNoSelfInstructionAST.new {
+    ioInstructionList += !@assignmentInstructionAST.new {
       !assignmentTargetAST.mIdentifier.location
       !assignmentTargetAST
       !sourceExpression
@@ -36,7 +36,7 @@ syntax extension plm_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varAssignmentNoSelfInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
@@ -45,7 +45,7 @@ override method @varAssignmentNoSelfInstructionAST noteInstructionTypesInPrecede
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varAssignmentNoSelfInstructionAST analyze
+override method @assignmentInstructionAST analyze
   ?self:let @PLMType inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
