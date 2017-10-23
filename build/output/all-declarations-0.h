@@ -7911,7 +7911,7 @@ class GALGAS_complexCallNoSelfInstructionAST : public GALGAS_callInstructionAST 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_LValueWithoutSelfAST getter_mAssignmentTargetAST_32_ (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_LValueWithoutSelfAST getter_mTargetAST (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -8126,20 +8126,20 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueWithoutSelfAS
 
 class cPtr_complexCallNoSelfInstructionAST : public cPtr_callInstructionAST {
 //--- Attributes
-  public : GALGAS_LValueWithoutSelfAST mProperty_mAssignmentTargetAST_32_ ;
+  public : GALGAS_LValueWithoutSelfAST mProperty_mTargetAST ;
 
 //--- Constructor
   public : cPtr_complexCallNoSelfInstructionAST (const GALGAS_location & in_mInstructionLocation,
                                                  const GALGAS_effectiveArgumentListAST & in_mArguments,
                                                  const GALGAS_location & in_mEndOfArguments,
-                                                 const GALGAS_LValueWithoutSelfAST & in_mAssignmentTargetAST_32_
+                                                 const GALGAS_LValueWithoutSelfAST & in_mTargetAST
                                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_LValueWithoutSelfAST getter_mAssignmentTargetAST_32_ (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_LValueWithoutSelfAST getter_mTargetAST (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -12238,9 +12238,9 @@ class GALGAS_varAssignmentNoSelfInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_LValueWithoutSelfAST getter_mAssignmentTargetAST (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_LValueWithoutSelfAST getter_mTargetAST (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -12261,12 +12261,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varAssignmentNoSelf
 
 class cPtr_varAssignmentNoSelfInstructionAST : public cPtr_instructionAST {
 //--- Attributes
-  public : GALGAS_LValueWithoutSelfAST mProperty_mAssignmentTargetAST ;
+  public : GALGAS_LValueWithoutSelfAST mProperty_mTargetAST ;
   public : GALGAS_expressionAST mProperty_mSourceExpression ;
 
 //--- Constructor
   public : cPtr_varAssignmentNoSelfInstructionAST (const GALGAS_location & in_mInstructionLocation,
-                                                   const GALGAS_LValueWithoutSelfAST & in_mAssignmentTargetAST,
+                                                   const GALGAS_LValueWithoutSelfAST & in_mTargetAST,
                                                    const GALGAS_expressionAST & in_mSourceExpression
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -12274,7 +12274,7 @@ class cPtr_varAssignmentNoSelfInstructionAST : public cPtr_instructionAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_LValueWithoutSelfAST getter_mAssignmentTargetAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_LValueWithoutSelfAST getter_mTargetAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

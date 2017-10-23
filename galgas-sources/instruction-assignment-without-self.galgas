@@ -3,7 +3,7 @@
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @varAssignmentNoSelfInstructionAST : @instructionAST {
-  @LValueWithoutSelfAST mAssignmentTargetAST
+  @LValueWithoutSelfAST mTargetAST
   @expressionAST mSourceExpression
 }
 
@@ -38,7 +38,7 @@ syntax extension plm_syntax {
 
 override method @varAssignmentNoSelfInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+  [mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -58,7 +58,7 @@ override method @varAssignmentNoSelfInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  [mAssignmentTargetAST type !selfType:inSelfType !variableMap:ioUniversalMap ?let targetType]
+  [mTargetAST type !selfType:inSelfType !variableMap:ioUniversalMap ?let targetType]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
@@ -75,7 +75,7 @@ override method @varAssignmentNoSelfInstructionAST analyze
     ?result:@objectIR sourceOperandPossibleReference
   ]
 #--- Analyze LValue
-  [mAssignmentTargetAST analyzeLValueNoSelf
+  [mTargetAST analyzeLValueNoSelf
     !self: inSelfType
     !propertiesAreMutable: inRoutineCanMutateProperties
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -92,16 +92,16 @@ override method @varAssignmentNoSelfInstructionAST analyze
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !sourceOperandPossibleReference
-    ![mAssignmentTargetAST mIdentifier]
+    ![mTargetAST mIdentifier]
     ?let sourceOperand
   ]  
   let result = checkAssignmentCompatibility (
     !source:sourceOperand
     !targetAnnotationType:targetType
-    !errorLocation:mAssignmentTargetAST.mIdentifier
+    !errorLocation:mTargetAST.mIdentifier
     !staticTypeAllowed:false
   )
-  let errorLocation = mAssignmentTargetAST.mIdentifier
+  let errorLocation = mTargetAST.mIdentifier
   switch internalRepresentation
   case standAloneIdentifier (identifier) :
     [!?ioUniversalMap searchValuedObjectForWriteAccess !identifier ?let objectIR]

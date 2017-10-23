@@ -10,7 +10,7 @@ abstract class @callInstructionAST : @instructionAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @complexCallNoSelfInstructionAST : @callInstructionAST {
-  @LValueWithoutSelfAST mAssignmentTargetAST2
+  @LValueWithoutSelfAST mTargetAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

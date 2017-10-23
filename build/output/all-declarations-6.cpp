@@ -6864,7 +6864,7 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
                                               GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 626)) ;
+  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 625)) ;
   switch (inObject.mProperty_mGuardKindGenerationIR.enumValue ()) {
   case GALGAS_guardKindGenerationIR::kNotBuilt:
     break ;
@@ -6874,11 +6874,11 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
     {
-      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_25621 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
-      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_25621->mAssociatedValue1 ;
-      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_25621->mAssociatedValue2 ;
-      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 630)) ;
-      ioArgument_ioAccessibleEntities.mProperty_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)) ;
+      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_25456 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
+      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_25456->mAssociatedValue1 ;
+      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_25456->mAssociatedValue2 ;
+      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)) ;
+      ioArgument_ioAccessibleEntities.mProperty_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 630)) ;
     }
     break ;
   }
@@ -11350,7 +11350,7 @@ typeComparisonResult cPtr_complexCallNoSelfInstructionAST::dynamicObjectCompare 
     result = mProperty_mEndOfArguments.objectCompare (p->mProperty_mEndOfArguments) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mAssignmentTargetAST_32_.objectCompare (p->mProperty_mAssignmentTargetAST_32_) ;
+    result = mProperty_mTargetAST.objectCompare (p->mProperty_mTargetAST) ;
   }
   return result ;
 }
@@ -11402,31 +11402,31 @@ GALGAS_callInstructionAST (inSourcePtr) {
 GALGAS_complexCallNoSelfInstructionAST GALGAS_complexCallNoSelfInstructionAST::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation,
                                                                                                 const GALGAS_effectiveArgumentListAST & inAttribute_mArguments,
                                                                                                 const GALGAS_location & inAttribute_mEndOfArguments,
-                                                                                                const GALGAS_LValueWithoutSelfAST & inAttribute_mAssignmentTargetAST_32_
+                                                                                                const GALGAS_LValueWithoutSelfAST & inAttribute_mTargetAST
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_complexCallNoSelfInstructionAST result ;
-  if (inAttribute_mInstructionLocation.isValid () && inAttribute_mArguments.isValid () && inAttribute_mEndOfArguments.isValid () && inAttribute_mAssignmentTargetAST_32_.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_complexCallNoSelfInstructionAST (inAttribute_mInstructionLocation, inAttribute_mArguments, inAttribute_mEndOfArguments, inAttribute_mAssignmentTargetAST_32_ COMMA_THERE)) ;
+  if (inAttribute_mInstructionLocation.isValid () && inAttribute_mArguments.isValid () && inAttribute_mEndOfArguments.isValid () && inAttribute_mTargetAST.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_complexCallNoSelfInstructionAST (inAttribute_mInstructionLocation, inAttribute_mArguments, inAttribute_mEndOfArguments, inAttribute_mTargetAST COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_LValueWithoutSelfAST GALGAS_complexCallNoSelfInstructionAST::getter_mAssignmentTargetAST_32_ (UNUSED_LOCATION_ARGS) const {
+GALGAS_LValueWithoutSelfAST GALGAS_complexCallNoSelfInstructionAST::getter_mTargetAST (UNUSED_LOCATION_ARGS) const {
   GALGAS_LValueWithoutSelfAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_complexCallNoSelfInstructionAST * p = (const cPtr_complexCallNoSelfInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_complexCallNoSelfInstructionAST) ;
-    result = p->mProperty_mAssignmentTargetAST_32_ ;
+    result = p->mProperty_mTargetAST ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_LValueWithoutSelfAST cPtr_complexCallNoSelfInstructionAST::getter_mAssignmentTargetAST_32_ (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mAssignmentTargetAST_32_ ;
+GALGAS_LValueWithoutSelfAST cPtr_complexCallNoSelfInstructionAST::getter_mTargetAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTargetAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11436,10 +11436,10 @@ GALGAS_LValueWithoutSelfAST cPtr_complexCallNoSelfInstructionAST::getter_mAssign
 cPtr_complexCallNoSelfInstructionAST::cPtr_complexCallNoSelfInstructionAST (const GALGAS_location & in_mInstructionLocation,
                                                                             const GALGAS_effectiveArgumentListAST & in_mArguments,
                                                                             const GALGAS_location & in_mEndOfArguments,
-                                                                            const GALGAS_LValueWithoutSelfAST & in_mAssignmentTargetAST_32_
+                                                                            const GALGAS_LValueWithoutSelfAST & in_mTargetAST
                                                                             COMMA_LOCATION_ARGS) :
 cPtr_callInstructionAST (in_mInstructionLocation, in_mArguments, in_mEndOfArguments COMMA_THERE),
-mProperty_mAssignmentTargetAST_32_ (in_mAssignmentTargetAST_32_) {
+mProperty_mTargetAST (in_mTargetAST) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11457,7 +11457,7 @@ void cPtr_complexCallNoSelfInstructionAST::description (C_String & ioString,
   ioString << ", " ;
   mProperty_mEndOfArguments.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mAssignmentTargetAST_32_.description (ioString, inIndentation+1) ;
+  mProperty_mTargetAST.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -11465,7 +11465,7 @@ void cPtr_complexCallNoSelfInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_complexCallNoSelfInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_complexCallNoSelfInstructionAST (mProperty_mInstructionLocation, mProperty_mArguments, mProperty_mEndOfArguments, mProperty_mAssignmentTargetAST_32_ COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_complexCallNoSelfInstructionAST (mProperty_mInstructionLocation, mProperty_mArguments, mProperty_mEndOfArguments, mProperty_mTargetAST COMMA_THERE)) ;
   return ptr ;
 }
 
