@@ -143,8 +143,6 @@ method @LValueAST analyzeLValueNoSelf
     switch entity
     case undefined :
       error mIdentifier : "undefined identifier" :outInternalRepresentation
-    case propertyEX (*****) :
-      error mIdentifier : "property ??" : outInternalRepresentation
     case module (*) :
       error mIdentifier : "a module cannot be written" : outInternalRepresentation
     case register (* writable registerType registerAddress * arraySize elementSize) : # 0 if not an array
