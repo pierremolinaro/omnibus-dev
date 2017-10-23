@@ -76,14 +76,6 @@ method @LValueWithoutSelfAST noteInstructionTypesInPrecedenceGraph ?!@semanticTy
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @targetAccessKind {
-  case read
-  case write
-  case readWrite
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @LValueWithoutSelfAST type
   ?selfType: let @PLMType inSelfType
   ?variableMap:let @universalPropertyAndRoutineMapForContext inUniversalMap

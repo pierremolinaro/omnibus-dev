@@ -15,12 +15,6 @@ class @complexCallNoSelfInstructionAST : @callInstructionAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @complexCallSelfInstructionAST : @callInstructionAST {
-  @LValueSelfAST mAssignmentTargetAST
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 class @standAloneProcedureCallInstructionAST : @callInstructionAST {
   @lstring mSandAloneRoutineName
 }
@@ -55,15 +49,6 @@ syntax extension plm_syntax {
       outInstruction = @complexCallNoSelfInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
     end
   }
-
-  #·····················································································································
-
-#  rule <procedure_call> !@callInstructionAST outInstruction {
-#    let instructionLocation = @location.here
-#    <lvalue_with_self> ?let assignmentTargetAST
-#    <effective_parameters> ?let arguments ?let endOfArguments
-#    outInstruction = @complexCallSelfInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
-#  }
 
   #·····················································································································
 
