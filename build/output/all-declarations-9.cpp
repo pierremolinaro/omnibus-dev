@@ -5667,200 +5667,115 @@ static void extensionMethod_complexCallNoSelfInstructionAST_analyze (const cPtr_
     {
     var_accessList_2651.setter_popLast (var_lastAccess_2728, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 48)) ;
     }
-    cEnumerator_accessInAssignmentListAST enumerator_2760 (var_accessList_2651, kENUMERATION_UP) ;
-    while (enumerator_2760.hasCurrentObject ()) {
-      switch (enumerator_2760.current_mAccess (HERE).enumValue ()) {
+    cEnumerator_accessInAssignmentListAST enumerator_2787 (var_accessList_2651, kENUMERATION_UP) ;
+    while (enumerator_2787.hasCurrentObject ()) {
+      switch (enumerator_2787.current_mAccess (HERE).enumValue ()) {
       case GALGAS_accessInAssignmentAST::kNotBuilt:
         break ;
       case GALGAS_accessInAssignmentAST::kEnum_property:
         {
-          const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_3227 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_2760.current_mAccess (HERE).unsafePointer ()) ;
-          const GALGAS_lstring extractedValue_propertyName = extractPtr_3227->mAssociatedValue0 ;
-          GALGAS_bool var_isPublic_2914 ;
-          GALGAS_objectIR var_propertyObject_2954 ;
-          GALGAS_PLMType var_type_2983 ;
-          GALGAS_propertyAccessKind var_mAccess_3025 ;
-          var_propertyMap_2553.method_searchKey (extractedValue_propertyName, var_isPublic_2914, var_propertyObject_2954, var_type_2983, var_mAccess_3025, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 52)) ;
-          const enumGalgasBool test_2 = var_type_2983.getter_isStructure (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 59)).operator_not (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 59)).boolEnum () ;
+          const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_3702 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_2787.current_mAccess (HERE).unsafePointer ()) ;
+          const GALGAS_lstring extractedValue_propertyName = extractPtr_3702->mAssociatedValue0 ;
+          GALGAS_bool var_isPublic_2941 ;
+          GALGAS_objectIR var_propertyObject_2981 ;
+          GALGAS_PLMType var_type_3010 ;
+          GALGAS_propertyAccessKind var_propertyAccess_3059 ;
+          var_propertyMap_2553.method_searchKey (extractedValue_propertyName, var_isPublic_2941, var_propertyObject_2981, var_type_3010, var_propertyAccess_3059, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 53)) ;
+          const enumGalgasBool test_2 = var_type_3010.getter_isStructure (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 60)).operator_not (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 60)).boolEnum () ;
           if (kBoolTrue == test_2) {
             TC_Array <C_FixItDescription> fixItArray3 ;
-            inCompiler->emitSemanticError (object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 60)), GALGAS_string ("receiver has no property"), fixItArray3  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 60)) ;
+            inCompiler->emitSemanticError (object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 61)), GALGAS_string ("receiver has no property"), fixItArray3  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 61)) ;
           }else if (kBoolFalse == test_2) {
-            GALGAS_lstring joker_3185_1 ; // Joker input parameter
-            GALGAS_routineMapForContext joker_3214_5 ; // Joker input parameter
-            GALGAS_universalPropertyAndRoutineMapForContext joker_3214_4 ; // Joker input parameter
-            GALGAS_propertyList joker_3214_3 ; // Joker input parameter
-            GALGAS_PLMTypeFlags joker_3214_2 ; // Joker input parameter
-            GALGAS_string joker_3214_1 ; // Joker input parameter
-            var_type_2983.method_structure (joker_3185_1, var_propertyMap_2553, joker_3214_5, joker_3214_4, joker_3214_3, joker_3214_2, joker_3214_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 62)) ;
+            GALGAS_lstring joker_3227_1 ; // Joker input parameter
+            GALGAS_routineMapForContext joker_3256_5 ; // Joker input parameter
+            GALGAS_universalPropertyAndRoutineMapForContext joker_3256_4 ; // Joker input parameter
+            GALGAS_propertyList joker_3256_3 ; // Joker input parameter
+            GALGAS_PLMTypeFlags joker_3256_2 ; // Joker input parameter
+            GALGAS_string joker_3256_1 ; // Joker input parameter
+            var_type_3010.method_structure (joker_3227_1, var_propertyMap_2553, joker_3256_5, joker_3256_4, joker_3256_3, joker_3256_2, joker_3256_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 63)) ;
+            GALGAS_objectIR var_newObject_3283 = GALGAS_objectIR::constructor_temporaryReference (extensionGetter_type (var_propertyObject_2981, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 65)), GALGAS_lstring::constructor_new (GALGAS_string ("%temp.").add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 66)), extractedValue_propertyName.getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 66))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 66))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 64)) ;
+            ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 68)) ;
+            {
+            extensionSetter_appendGetPropertyReference (ioArgument_ioInstructionGenerationList, var_newObject_3283, var_currentObject_2257, extractedValue_propertyName.getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 72)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 69)) ;
+            }
+            var_currentObject_2257 = var_newObject_3283 ;
           }
         }
         break ;
       case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
         {
-          const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_3374 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_2760.current_mAccess (HERE).unsafePointer ()) ;
-          const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_3374->mAssociatedValue0 ;
-          const GALGAS_location extractedValue_endOfIndex = extractPtr_3374->mAssociatedValue1 ;
+          const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_3849 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_2787.current_mAccess (HERE).unsafePointer ()) ;
+          const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_3849->mAssociatedValue0 ;
+          const GALGAS_location extractedValue_endOfIndex = extractPtr_3849->mAssociatedValue1 ;
           TC_Array <C_FixItDescription> fixItArray4 ;
-          inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("not handled yet"), fixItArray4  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 65)) ;
+          inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("not handled yet"), fixItArray4  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 77)) ;
           var_currentObject_2257.drop () ; // Release error dropped variable
         }
         break ;
       }
-      enumerator_2760.gotoNextObject () ;
+      enumerator_2787.gotoNextObject () ;
     }
-  }
-  GALGAS_location var_currentErrorLocation_3426 = object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE).getter_location (HERE) ;
-  GALGAS_universalPropertyAndRoutineMapForContext var_currentMap_3487 = ioArgument_ioUniversalMap ;
-  GALGAS_accessInAssignmentListAST var_accessList_3593 = object->mProperty_mAssignmentTargetAST.getter_mAccessList (HERE) ;
-  GALGAS_accessInAssignmentAST var_lastAccess_3668 ;
-  {
-  var_accessList_3593.setter_popLast (var_lastAccess_3668, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 74)) ;
-  }
-  cEnumerator_accessInAssignmentListAST enumerator_3724 (var_accessList_3593, kENUMERATION_UP) ;
-  while (enumerator_3724.hasCurrentObject ()) {
-    GALGAS_PLMType var_currentType_3747 = extensionGetter_type (var_currentObject_2257, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 77)) ;
-    switch (enumerator_3724.current_mAccess (HERE).enumValue ()) {
+    switch (var_lastAccess_2728.enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
-      break ;
-    case GALGAS_accessInAssignmentAST::kEnum_property:
-      {
-        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_4618 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_3724.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_propertyName = extractPtr_4618->mAssociatedValue0 ;
-        const enumGalgasBool test_5 = var_currentType_3747.getter_isStructure (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 80)).boolEnum () ;
-        if (kBoolTrue == test_5) {
-          GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_3938 ;
-          GALGAS_lstring joker_3905_3 ; // Joker input parameter
-          GALGAS_propertyMap joker_3905_2 ; // Joker input parameter
-          GALGAS_routineMapForContext joker_3905_1 ; // Joker input parameter
-          GALGAS_propertyList joker_3940_3 ; // Joker input parameter
-          GALGAS_PLMTypeFlags joker_3940_2 ; // Joker input parameter
-          GALGAS_string joker_3940_1 ; // Joker input parameter
-          var_currentType_3747.method_structure (joker_3905_3, joker_3905_2, joker_3905_1, var_universalMap_3938, joker_3940_3, joker_3940_2, joker_3940_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 81)) ;
-          GALGAS_objectIR var_propertyObject_4018 ;
-          callExtensionMethod_searchValuedObject ((const cPtr_universalPropertyAndRoutineMapForContext *) var_universalMap_3938.ptr (), extractedValue_propertyName, var_propertyObject_4018, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 82)) ;
-          var_currentMap_3487 = var_universalMap_3938 ;
-          var_currentErrorLocation_3426 = extractedValue_propertyName.getter_location (HERE) ;
-          GALGAS_objectIR var_newObject_4128 = GALGAS_objectIR::constructor_temporaryReference (extensionGetter_type (var_propertyObject_4018, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 86)), GALGAS_lstring::constructor_new (GALGAS_string ("%temp.").add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 87)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 87)), extractedValue_propertyName.getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 87))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 87))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 85)) ;
-          ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 89)) ;
-          {
-          extensionSetter_appendGetPropertyReference (ioArgument_ioInstructionGenerationList, var_newObject_4128, var_currentObject_2257, extractedValue_propertyName.getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 93)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 90)) ;
-          }
-          var_currentObject_2257 = var_newObject_4128 ;
-        }else if (kBoolFalse == test_5) {
-          TC_Array <C_FixItDescription> fixItArray6 ;
-          inCompiler->emitSemanticError (var_currentErrorLocation_3426, GALGAS_string ("this object has no property"), fixItArray6  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 97)) ;
-          var_currentObject_2257.drop () ; // Release error dropped variable
-        }
-      }
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_4761 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_3724.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_4761->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfIndex = extractPtr_4761->mAssociatedValue1 ;
-        TC_Array <C_FixItDescription> fixItArray7 ;
-        inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("not handled yet"), fixItArray7  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 100)) ;
-        var_currentObject_2257.drop () ; // Release error dropped variable
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_4025 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_2728.unsafePointer ()) ;
+        const GALGAS_location extractedValue_endOfIndex = extractPtr_4025->mAssociatedValue1 ;
+        TC_Array <C_FixItDescription> fixItArray5 ;
+        inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("a property access is required here"), fixItArray5  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 83)) ;
       }
       break ;
-    }
-    enumerator_3724.gotoNextObject () ;
-  }
-  GALGAS_lstring var_methodName_4821 ;
-  switch (var_lastAccess_3668.enumValue ()) {
-  case GALGAS_accessInAssignmentAST::kNotBuilt:
-    break ;
-  case GALGAS_accessInAssignmentAST::kEnum_property:
-    {
-      const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_5256 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_3668.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_propertyName = extractPtr_5256->mAssociatedValue0 ;
-      var_methodName_4821 = extractedValue_propertyName ;
-      GALGAS_PLMType var_currentType_4933 = extensionGetter_type (var_currentObject_2257, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 108)) ;
-      const enumGalgasBool test_8 = var_currentType_4933.getter_isStructure (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 109)).boolEnum () ;
-      if (kBoolTrue == test_8) {
-        GALGAS_universalPropertyAndRoutineMapForContext var_universalMap_5058 ;
-        GALGAS_lstring joker_5025_3 ; // Joker input parameter
-        GALGAS_propertyMap joker_5025_2 ; // Joker input parameter
-        GALGAS_routineMapForContext joker_5025_1 ; // Joker input parameter
-        GALGAS_propertyList joker_5060_3 ; // Joker input parameter
-        GALGAS_PLMTypeFlags joker_5060_2 ; // Joker input parameter
-        GALGAS_string joker_5060_1 ; // Joker input parameter
-        var_currentType_4933.method_structure (joker_5025_3, joker_5025_2, joker_5025_1, var_universalMap_5058, joker_5060_3, joker_5060_2, joker_5060_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 110)) ;
-        var_currentMap_3487 = var_universalMap_5058 ;
-        var_currentErrorLocation_3426 = extractedValue_propertyName.getter_location (HERE) ;
-      }else if (kBoolFalse == test_8) {
-        TC_Array <C_FixItDescription> fixItArray9 ;
-        inCompiler->emitSemanticError (var_currentErrorLocation_3426, GALGAS_string ("this object has no property"), fixItArray9  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 114)) ;
-        var_currentObject_2257.drop () ; // Release error dropped variable
-        var_methodName_4821.drop () ; // Release error dropped variable
-      }
-    }
-    break ;
-  case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
-    {
-      const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_5390 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_3668.unsafePointer ()) ;
-      const GALGAS_location extractedValue_endOfIndex = extractPtr_5390->mAssociatedValue1 ;
-      TC_Array <C_FixItDescription> fixItArray10 ;
-      inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("a property access is required here"), fixItArray10  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 117)) ;
-      var_currentObject_2257.drop () ; // Release error dropped variable
-      var_methodName_4821.drop () ; // Release error dropped variable
-    }
-    break ;
-  }
-  GALGAS_lstring var_routineMangledName_5487 = function_routineMangledNameFromCall (GALGAS_string ("$").add_operation (extensionGetter_key (extensionGetter_type (var_currentObject_2257, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 120)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 120)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 120)), var_methodName_4821, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 120)) ;
-  GALGAS_lstring var_signature_5627 = extensionGetter_routineSignature (object->mProperty_mArguments, var_methodName_4821.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 122)) ;
-  GALGAS_lstring var_LLVMInvocationRoutineName_5811 ;
-  GALGAS_routineDescriptor var_routineDescriptor_5853 ;
-  callExtensionMethod_searchRoutine ((const cPtr_universalPropertyAndRoutineMapForContext *) var_currentMap_3487.ptr (), var_methodName_4821, var_signature_5627, var_LLVMInvocationRoutineName_5811, var_routineDescriptor_5853, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 124)) ;
-  GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_5955 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 131)) ;
-  switch (var_routineDescriptor_5853.getter_mRoutineCallingScheme (HERE).enumValue ()) {
-  case GALGAS_routineCallingSheme::kNotBuilt:
-    break ;
-  case GALGAS_routineCallingSheme::kEnum_staticCall:
-    {
-      var_effectiveParameterListIR_5955.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 134)), var_currentObject_2257  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 134)) ;
-    }
-    break ;
-  case GALGAS_routineCallingSheme::kEnum_propertyIndirectCall:
-    {
-    }
-    break ;
-  }
-  GALGAS_routineKind var_routineKind_6232 = var_routineDescriptor_5853.getter_mRoutineKind (HERE) ;
-  GALGAS_mode var_calleeMode_6282 = extensionGetter_executionMode (var_routineKind_6232, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 140)) ;
-  GALGAS_routineTypedSignature var_formalSignature_6334 = var_routineDescriptor_5853.getter_mSignature (HERE) ;
-  const enumGalgasBool test_11 = GALGAS_bool (kIsNotEqual, var_routineDescriptor_5853.getter_mReturnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 143)))).boolEnum () ;
-  if (kBoolTrue == test_11) {
-    TC_Array <C_FixItDescription> fixItArray12 ;
-    inCompiler->emitSemanticError (var_methodName_4821.getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 144)), GALGAS_string ("not a procedure (returns a value)"), fixItArray12  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 144)) ;
-    var_routineDescriptor_5853.drop () ; // Release error dropped variable
-  }else if (kBoolFalse == test_11) {
-    GALGAS_calleeKindIR var_calleeKind_6585 = function_checkMode (constinArgument_inCurrentMode, var_calleeMode_6282, var_routineKind_6232, var_methodName_4821.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 147)) ;
-    {
-    routine_analyzeEffectiveParametersNew (constinArgument_inSelfType, var_formalSignature_6334, object->mProperty_mArguments, var_methodName_4821.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_5955, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 154)) ;
-    }
-    switch (var_routineDescriptor_5853.getter_mRoutineCallingScheme (HERE).enumValue ()) {
-    case GALGAS_routineCallingSheme::kNotBuilt:
-      break ;
-    case GALGAS_routineCallingSheme::kEnum_staticCall:
+    case GALGAS_accessInAssignmentAST::kEnum_property:
       {
-        ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_staticRoutineCallIR::constructor_new (object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE).getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 174)), GALGAS_objectIR::constructor_null (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 175)), var_routineMangledName_5487, var_LLVMInvocationRoutineName_5811, var_calleeKind_6585, var_effectiveParameterListIR_5955  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 173))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 173)) ;
-        {
-        ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineMangledName_5487 COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 182)) ;
+        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_7509 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_2728.unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_methodName = extractPtr_7509->mAssociatedValue0 ;
+        GALGAS_lstring var_routineMangledName_4166 = function_routineMangledNameFromCall (GALGAS_string ("$").add_operation (extensionGetter_key (extensionGetter_type (var_currentObject_2257, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 86)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 86)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 86)), extractedValue_methodName, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 86)) ;
+        GALGAS_lstring var_signature_4314 = extensionGetter_routineSignature (object->mProperty_mArguments, extractedValue_methodName.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 88)) ;
+        GALGAS_lstring var_LLVMInvocationRoutineName_4535 ;
+        GALGAS_routineDescriptor var_routineDescriptor_4581 ;
+        GALGAS_location var_keyLocation_4616 ;
+        extensionMethod_searchKey (constinArgument_inContext.getter_mRoutineMapForContext (HERE), extractedValue_methodName, var_signature_4314, var_LLVMInvocationRoutineName_4535, var_routineDescriptor_4581, var_keyLocation_4616, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 90)) ;
+        GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_4730 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 98)) ;
+        var_effectiveParameterListIR_4730.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 101)), var_currentObject_2257  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 101)) ;
+        GALGAS_routineKind var_routineKind_5043 = var_routineDescriptor_4581.getter_mRoutineKind (HERE) ;
+        GALGAS_mode var_calleeMode_5097 = extensionGetter_executionMode (var_routineKind_5043, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 107)) ;
+        GALGAS_routineTypedSignature var_formalSignature_5153 = var_routineDescriptor_4581.getter_mSignature (HERE) ;
+        const enumGalgasBool test_6 = GALGAS_bool (kIsNotEqual, var_routineDescriptor_4581.getter_mReturnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 110)))).boolEnum () ;
+        if (kBoolTrue == test_6) {
+          TC_Array <C_FixItDescription> fixItArray7 ;
+          inCompiler->emitSemanticError (extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 111)), GALGAS_string ("not a procedure (returns a value)"), fixItArray7  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 111)) ;
+          var_routineDescriptor_4581.drop () ; // Release error dropped variable
+        }else if (kBoolFalse == test_6) {
+          GALGAS_calleeKindIR var_calleeKind_5457 = function_checkMode (constinArgument_inCurrentMode, var_calleeMode_5097, var_routineKind_5043, extractedValue_methodName.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 114)) ;
+          {
+          routine_analyzeEffectiveParametersNew (constinArgument_inSelfType, var_formalSignature_5153, object->mProperty_mArguments, extractedValue_methodName.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_4730, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 121)) ;
+          }
+          switch (var_routineDescriptor_4581.getter_mRoutineCallingScheme (HERE).enumValue ()) {
+          case GALGAS_routineCallingSheme::kNotBuilt:
+            break ;
+          case GALGAS_routineCallingSheme::kEnum_staticCall:
+            {
+              ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_staticRoutineCallIR::constructor_new (object->mProperty_mAssignmentTargetAST.getter_mIdentifier (HERE).getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 141)), GALGAS_objectIR::constructor_null (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 142)), var_routineMangledName_4166, var_LLVMInvocationRoutineName_4535, var_calleeKind_5457, var_effectiveParameterListIR_4730  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 140))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 140)) ;
+              {
+              ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineMangledName_4166 COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 149)) ;
+              }
+            }
+            break ;
+          case GALGAS_routineCallingSheme::kEnum_propertyIndirectCall:
+            {
+              const cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall * extractPtr_7487 = (const cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall *) (var_routineDescriptor_4581.getter_mRoutineCallingScheme (HERE).unsafePointer ()) ;
+              const GALGAS_PLMType extractedValue_type = extractPtr_7487->mAssociatedValue0 ;
+              GALGAS_objectIR var_propertyReference_6899 = GALGAS_objectIR::constructor_temporaryReference (extractedValue_type, GALGAS_lstring::constructor_new (GALGAS_string ("%temp.").add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 153)), extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 153))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 153))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 151)) ;
+              ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 155)) ;
+              {
+              extensionSetter_appendGetPropertyReference (ioArgument_ioInstructionGenerationList, var_propertyReference_6899, var_currentObject_2257, extractedValue_methodName.getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 159)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 156)) ;
+              }
+              ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_indirectRoutineCallIR::constructor_new (var_propertyReference_6899, extractedValue_type, GALGAS_objectIR::constructor_null (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 165)), var_effectiveParameterListIR_4730  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 162))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 162)) ;
+            }
+            break ;
+          }
         }
-      }
-      break ;
-    case GALGAS_routineCallingSheme::kEnum_propertyIndirectCall:
-      {
-        const cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall * extractPtr_8403 = (const cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall *) (var_routineDescriptor_5853.getter_mRoutineCallingScheme (HERE).unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_type = extractPtr_8403->mAssociatedValue0 ;
-        GALGAS_objectIR var_propertyReference_7879 = GALGAS_objectIR::constructor_temporaryReference (extractedValue_type, GALGAS_lstring::constructor_new (GALGAS_string ("%temp.").add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 186)), var_methodName_4821.getter_location (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 186))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 186))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 184)) ;
-        ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 188)) ;
-        {
-        extensionSetter_appendGetPropertyReference (ioArgument_ioInstructionGenerationList, var_propertyReference_7879, var_currentObject_2257, var_methodName_4821.getter_string (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 192)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 189)) ;
-        }
-        ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_indirectRoutineCallIR::constructor_new (var_propertyReference_7879, extractedValue_type, GALGAS_objectIR::constructor_null (SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 198)), var_effectiveParameterListIR_5955  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 195))  COMMA_SOURCE_FILE ("instruction-procedure-call-complex-no-self.galgas", 195)) ;
       }
       break ;
     }
@@ -7881,4 +7796,74 @@ void routine_routineSemanticAnalysis (const GALGAS_PLMType constinArgument_inSel
   }
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Once function 'llvmAttributeFunction'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_llvmAttributeFunction (C_Compiler * /* inCompiler */
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string (" nounwind ") ;
+//---
+  return result_result ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_llvmAttributeFunction = false ;
+static GALGAS_string gOnceFunctionResult_llvmAttributeFunction ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_llvmAttributeFunction) {
+    gOnceFunctionResult_llvmAttributeFunction = onceFunction_llvmAttributeFunction (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_llvmAttributeFunction = true ;
+  }
+  return gOnceFunctionResult_llvmAttributeFunction ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_llvmAttributeFunction (void) {
+  gOnceFunctionResult_llvmAttributeFunction.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmAttributeFunction (NULL,
+                                                                   releaseOnceFunctionResult_llvmAttributeFunction) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmAttributeFunction [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmAttributeFunction (C_Compiler * inCompiler,
+                                                                      const cObjectArray & /* inEffectiveParameterArray */,
+                                                                      const GALGAS_location & /* inErrorLocation */
+                                                                      COMMA_LOCATION_ARGS) {
+  return function_llvmAttributeFunction (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmAttributeFunction ("llvmAttributeFunction",
+                                                                       functionWithGenericHeader_llvmAttributeFunction,
+                                                                       & kTypeDescriptor_GALGAS_string,
+                                                                       0,
+                                                                       functionArgs_llvmAttributeFunction) ;
 
