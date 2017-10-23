@@ -341,7 +341,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     switch access
     case property (@lstring propertyName) :
       if [currentType isStructure] then
-        [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+        [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
         [propertyMap searchKey !propertyName ?* ?let propertyObject ?2*]
         currentErrorLocation = propertyName.location
         getNewTempVariable (![propertyObject type] !propertyName !?ioTemporaries ?let newObject)

@@ -114,7 +114,7 @@ override method @assignmentInstructionAST analyze
     [!?ioInstructionGenerationList appendStoreToUniversalReference !llvmName !type !result]
   case structureMember (@lstring propertyName @objectIR currentPointerIR) :
     if [[currentPointerIR type] isStructure] then
-      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
       [propertyMap searchKey !propertyName ?2* ?let type ?*]
       let targetRef = @objectIR.temporaryReference {
          !type:type

@@ -120,14 +120,7 @@ syntax extension plm_syntax {
 
 method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
-#    let taskTypeName = llvmRegularTypeMangledNameFromName (!mTaskName)
-#    [!?ioGraph noteNode !taskTypeName]
     for variable in mVarList do
-#      switch variable.mInitialisation
-#      case noExpression :
-#      case expression (initExpression) :
-#        [initExpression addDependenceEdgeForStaticExpression !taskTypeName !?ioGraph]
-#      end
       if variable.mPropertyTypeName.string != "" then
         let typeName = llvmRegularTypeMangledNameFromName (!variable.mPropertyTypeName)
         [!?ioGraph noteNode !typeName]
@@ -170,7 +163,6 @@ method @taskList enterInContext
     @propertyList propertyList = {}
     @propertyMap propertyMap = {}
     @universalPropertyAndRoutineMapForContext universalPropertyMap = .default
-    @routineMapForContext methodMap = .default
     @sortedOperandIRList initialValueList = {}
     for property in task.mVarList do
       [property enterInContext
@@ -189,7 +181,6 @@ method @taskList enterInContext
     let taskType = @PLMType.structure {
       !typeName:task.mTaskName
       !propertyMap:propertyMap
-      !methodMap:methodMap
       !universalMap:universalPropertyMap
       !propertyList:propertyList
       !flags:.none
