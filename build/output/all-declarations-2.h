@@ -2012,12 +2012,6 @@ class GALGAS_guardMapForContext : public AC_GALGAS_map {
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_bool & outArgument1,
-                                                   class GALGAS_routineTypedSignature & outArgument2,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
   public : VIRTUAL_IN_DEBUG void setter_setMIsPublicForKey (class GALGAS_bool constinArgument0,
                                                             class GALGAS_string constinArgument1,
                                                             C_Compiler * inCompiler
@@ -2597,7 +2591,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_internalRoutineMapF
 
 class GALGAS_routineMapForContext : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_internalRoutineMapForContext mProperty_mInternalRoutineMapForContext ;
+  public : GALGAS_internalRoutineMapForContext mProperty_mInternalRoutineMap ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2613,7 +2607,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_routineMapForContext (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_routineMapForContext (const GALGAS_internalRoutineMapForContext & in_mInternalRoutineMapForContext) ;
+  public : GALGAS_routineMapForContext (const GALGAS_internalRoutineMapForContext & in_mInternalRoutineMap) ;
 
 //-- Start of generic part --*
 
@@ -2641,7 +2635,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_internalRoutineMapForContext getter_mInternalRoutineMapForContext (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_internalRoutineMapForContext getter_mInternalRoutineMap (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

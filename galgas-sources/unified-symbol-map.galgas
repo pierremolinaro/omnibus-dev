@@ -44,7 +44,7 @@ proc initialVariableMap
     var allowedAccess = writeAccess
   end
 #------------------------------------------------------- Add stand-alone routines
-  for routines in inContext.mRoutineMapForContext.mInternalRoutineMapForContext do
+  for routines in inContext.mRoutineMapForContext.mInternalRoutineMap do
     for signature in routines.mRoutineArgumentSignatureMapForContext do
       [!?outUniversalMap insertRoutine
         !routines.lkey

@@ -142,79 +142,6 @@ proc routineSignature ?!@unifiedTypeMap ioTypeMap
 #! OLD
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @routineArgumentSignatureMapForContext { # argument signature is the key
-  @lstring mRoutineLLVMName
-  @routineDescriptor mDescriptor
-
-  insert insertKey error message "the '%K' routine signature is already declared in %L"
-  search searchKey %location error message "there is no '%K' routine signature"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @internalRoutineMapForContext { # Key is a mangled name
-  @routineArgumentSignatureMapForContext mRoutineArgumentSignatureMapForContext
-
-  insert insertKey error message "the '%K' routine is already declared in %L"
-  search searchKey error message "there is no '%K' routine"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-struct @routineMapForContext {
-  @internalRoutineMapForContext mInternalRoutineMapForContext
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-setter @routineMapForContext insertKey
-  ?let @lstring inRoutineName
-  ?let @lstring inArgumentSignature
-  ?let @lstring inRoutineLLVMName
-  ?let @routineDescriptor inDescriptor
-{
-  with inRoutineName.string in !?mInternalRoutineMapForContext do
-    [!?mRoutineArgumentSignatureMapForContext insertKey
-      !inArgumentSignature
-      !inRoutineLLVMName
-      !inDescriptor
-    ]
-  else
-    @routineArgumentSignatureMapForContext routineArgumentSignatureMapForContext = {}
-    [!?routineArgumentSignatureMapForContext insertKey
-      !inArgumentSignature
-      !inRoutineLLVMName
-      !inDescriptor
-    ]
-    [!?mInternalRoutineMapForContext insertKey !inRoutineName !routineArgumentSignatureMapForContext]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @routineMapForContext searchKey
-  ?let @lstring inRoutineName
-  ?let @lstring inArgumentSignature
-  !@lstring outRoutineLLVMName
-  !@routineDescriptor outDescriptor
-  !@location outKeyLocation
-{
-  [mInternalRoutineMapForContext searchKey !inRoutineName ?let routineArgumentSignatureMapForContext]
-  [routineArgumentSignatureMapForContext searchKey !inArgumentSignature ?outRoutineLLVMName ?outDescriptor ?outKeyLocation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-getter @routineMapForContext hasKey ?let @lstring inRoutineName ?let @lstring inArgumentSignature -> @bool {
-  result = [mInternalRoutineMapForContext hasKey !inRoutineName]
-  if result then
-    [mInternalRoutineMapForContext searchKey !inRoutineName ?let routineArgumentSignatureMapForContext]
-    result = [routineArgumentSignatureMapForContext hasKey !inArgumentSignature]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 # Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
 map @guardMapForContext {
   @bool mIsPublic
@@ -222,7 +149,6 @@ map @guardMapForContext {
 
   insert insertKey error message "the '%K' guard is already declared in %L"
   search searchKey error message "there is no '%K' guard"
-  remove removeKey error message "there is no '%K' guard"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

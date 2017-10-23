@@ -1241,7 +1241,7 @@ proc analyzeEffectiveParametersNew
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
       let argumentIR = @objectIR.llvmTemporaryValue {
         !type:[objectIR type]
-        !llvmName:.new {!llvmNameForLocalVariable (![objectIR llvmName]) ![objectIR location]}
+        !llvmName:.new {![objectIR llvmName] ![objectIR location]}
       }
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
