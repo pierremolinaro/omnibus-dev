@@ -10,7 +10,7 @@ abstract class @callInstructionAST : @instructionAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @complexCallNoSelfInstructionAST : @callInstructionAST {
-  @LValueWithoutSelfAST mAssignmentTargetAST
+  @LValueWithoutSelfAST mAssignmentTargetAST2
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -58,12 +58,12 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <procedure_call> !@callInstructionAST outInstruction {
-    let instructionLocation = @location.here
-    <lvalue_with_self> ?let assignmentTargetAST
-    <effective_parameters> ?let arguments ?let endOfArguments
-    outInstruction = @complexCallSelfInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
-  }
+#  rule <procedure_call> !@callInstructionAST outInstruction {
+#    let instructionLocation = @location.here
+#    <lvalue_with_self> ?let assignmentTargetAST
+#    <effective_parameters> ?let arguments ?let endOfArguments
+#    outInstruction = @complexCallSelfInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
+#  }
 
   #·····················································································································
 

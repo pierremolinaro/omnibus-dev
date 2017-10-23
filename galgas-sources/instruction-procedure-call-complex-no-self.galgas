@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @complexCallNoSelfInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+  [mAssignmentTargetAST2 noteInstructionTypesInPrecedenceGraph !?ioGraph]
   for () in mArguments do
     switch mEffectiveParameterKind
     case input (*):
@@ -36,15 +36,25 @@ override method @complexCallNoSelfInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
-  [ioUniversalMap searchValuedObject !mAssignmentTargetAST.mIdentifier ?@objectIR currentObject]
+#    If identifier is empty string, the receiver is "self"
+  @objectIR currentObject
+  if mAssignmentTargetAST2.mIdentifier.string == "" then # Receiver is self
+    if inSelfType == .void then
+      error mAssignmentTargetAST2.mIdentifier : "self is not available in this context" : currentObject
+    else
+      currentObject = .temporaryReference {!type:inSelfType !llvmName:.new {!"%self" !mAssignmentTargetAST2.mIdentifier.location}}
+    end
+  else
+    [ioUniversalMap searchValuedObject !mAssignmentTargetAST2.mIdentifier ?currentObject]
+  end
 #--- Check current object in a structure instance
   if not [[currentObject type] isStructure] then
-    error mAssignmentTargetAST.mIdentifier : "receiver has no property"
+    error mAssignmentTargetAST2.mIdentifier : "receiver has no property"
   else
   #--- Get current object property map
     [[currentObject type] structure ?1* ?propertyMap:@propertyMap propertyMap ?5*]
   #--- Insulate last access (should be a "property", used as routine name
-    var accessList = mAssignmentTargetAST.mAccessList
+    var accessList = mAssignmentTargetAST2.mAccessList
     [!?accessList popLast ?let lastAccess]
   #--- loop on access list
     for (access) in accessList do
@@ -58,7 +68,7 @@ override method @complexCallNoSelfInstructionAST analyze
           ?let@propertyAccessKind propertyAccess
         ]
         if not [type isStructure] then
-          error mAssignmentTargetAST.mIdentifier : "receiver has no property"
+          error mAssignmentTargetAST2.mIdentifier : "receiver has no property"
         else
           [type structure ?1* ?propertyMap:propertyMap ?5*]
           let newObject = @objectIR.temporaryReference {
@@ -138,7 +148,7 @@ override method @complexCallNoSelfInstructionAST analyze
         case staticCall :
         #--- Code generation
           ioInstructionGenerationList += !@staticRoutineCallIR.new {
-            !mAssignmentTargetAST.mIdentifier
+            !mAssignmentTargetAST2.mIdentifier
             !.null # No result
             !routineMangledName
             !LLVMInvocationRoutineName

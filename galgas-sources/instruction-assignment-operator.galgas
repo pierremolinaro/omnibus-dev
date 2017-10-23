@@ -76,43 +76,43 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-  #--- LValue
-    <lvalue_with_self> ?let lvalueWithSelf
-    let instructionLocation = @location.here
-  #--- Assignment operator
-    <assignment_operator> ?let infixOperator ?let operatorLocation
-  #--- Right expression
-    <expression> ?let @expressionAST rightExpression
-  #--- Build source expression
-    @primaryInExpressionAccessListAST accessList = {}
-    for (access) in lvalueWithSelf.mAccessList do
-      switch access
-      case property (@lstring name) :
-        accessList += !.property {!name:name}
-      case arrayAccess (@expressionAST index @location endOfIndex) :
-        accessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
-      end
-    end
-    let leftExpression = @primaryInExpressionAST.new {!.selfAt{
-      !location:lvalueWithSelf.mSelfLocation}
-      !lvalueWithSelf.mIdentifier
-      !accessList
-    }
-  #--- Build source expression
-    let expression = @infixOperatorExpressionAST.new {
-      !leftExpression
-      !operatorLocation
-      !infixOperator
-      !rightExpression
-    }
-  #--- Build assignment instruction
-    ioInstructionList += !@varAssignmentSelfInstructionAST.new {
-      !instructionLocation
-      !lvalueWithSelf
-      !expression
-    }
-  }
+#  rule <instruction> ?!@instructionListAST ioInstructionList {
+#  #--- LValue
+#    <lvalue_with_self> ?let lvalueWithSelf
+#    let instructionLocation = @location.here
+#  #--- Assignment operator
+#    <assignment_operator> ?let infixOperator ?let operatorLocation
+#  #--- Right expression
+#    <expression> ?let @expressionAST rightExpression
+#  #--- Build source expression
+#    @primaryInExpressionAccessListAST accessList = {}
+#    for (access) in lvalueWithSelf.mAccessList do
+#      switch access
+#      case property (@lstring name) :
+#        accessList += !.property {!name:name}
+#      case arrayAccess (@expressionAST index @location endOfIndex) :
+#        accessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
+#      end
+#    end
+#    let leftExpression = @primaryInExpressionAST.new {!.selfAt{
+#      !location:lvalueWithSelf.mSelfLocation}
+#      !lvalueWithSelf.mIdentifier
+#      !accessList
+#    }
+#  #--- Build source expression
+#    let expression = @infixOperatorExpressionAST.new {
+#      !leftExpression
+#      !operatorLocation
+#      !infixOperator
+#      !rightExpression
+#    }
+#  #--- Build assignment instruction
+#    ioInstructionList += !@varAssignmentSelfInstructionAST.new {
+#      !instructionLocation
+#      !lvalueWithSelf
+#      !expression
+#    }
+#  }
 
   #·····················································································································
 

@@ -15,18 +15,18 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-    <lvalue_with_self> ?let assignmentTargetAST
-  #--- Source expression
-    $=$
-    <expression> ?let sourceExpression
-  #--- AST
-    ioInstructionList += !@varAssignmentSelfInstructionAST.new {
-      !assignmentTargetAST.mSelfLocation
-      !assignmentTargetAST
-      !sourceExpression
-    }
-  }
+#  rule <instruction> ?!@instructionListAST ioInstructionList {
+#    <lvalue_with_self> ?let assignmentTargetAST
+#  #--- Source expression
+#    $=$
+#    <expression> ?let sourceExpression
+#  #--- AST
+#    ioInstructionList += !@varAssignmentSelfInstructionAST.new {
+#      !assignmentTargetAST.mSelfLocation
+#      !assignmentTargetAST
+#      !sourceExpression
+#    }
+#  }
 
   #·····················································································································
 

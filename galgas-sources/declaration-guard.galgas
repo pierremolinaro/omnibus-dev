@@ -321,11 +321,21 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
   @allocaList baseGuardAllocaList = {}
   @instructionListIR baseGuardInstructionGenerationList = {}
 #--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
-  [ioUniversalMap searchValuedObject !mAssignmentTargetAST.mIdentifier ?@objectIR currentObject]
-  var currentErrorLocation = mAssignmentTargetAST.mIdentifier.location
+  @objectIR currentObject
+  if mAssignmentTargetAST2.mIdentifier.string == "" then # Receiver is self
+    if inSelfType == .void then
+      error mAssignmentTargetAST2.mIdentifier : "self is not available in this context" : currentObject
+    else
+      currentObject = .temporaryReference {!type:inSelfType !llvmName:.new {!"%self" !mAssignmentTargetAST2.mIdentifier.location}}
+    end
+  else
+    [ioUniversalMap searchValuedObject !mAssignmentTargetAST2.mIdentifier ?currentObject]
+  end
+#  [ioUniversalMap searchValuedObject !mAssignmentTargetAST2.mIdentifier ?@objectIR currentObject]
+  var currentErrorLocation = mAssignmentTargetAST2.mIdentifier.location
   var currentMap = ioUniversalMap
 #--- Insulate last access
-  var accessList = mAssignmentTargetAST.mAccessList
+  var accessList = mAssignmentTargetAST2.mAccessList
   [!?accessList popLast ?let lastAccess]
 #---- Loop on access list
   for (access) in accessList do
@@ -448,11 +458,23 @@ override method @complexCallSelfInstructionAST baseGuardAnalyze
   @instructionListIR baseGuardInstructionGenerationList = {}
 #---
   var currentErrorLocation = mAssignmentTargetAST.mSelfLocation
-  @objectIR currentObject = .selfObject {!type:inSelfType}
+#  @objectIR currentObject = .selfObject {!type:inSelfType}
   @universalPropertyAndRoutineMapForContext currentMap = .default
+#--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
+#    If identifier is empty string, the receiver is "self"
+  @objectIR currentObject
+  if mAssignmentTargetAST.mIdentifier.string == "" then # Receiver is self
+    if inSelfType == .void then
+      error mAssignmentTargetAST.mIdentifier : "self is not available in this context" : currentObject
+    else
+      currentObject = .temporaryReference {!type:inSelfType !llvmName:.new {!"%self" !mAssignmentTargetAST.mIdentifier.location}}
+    end
+  else
+    [ioUniversalMap searchValuedObject !mAssignmentTargetAST.mIdentifier ?currentObject]
+  end
 #--- Insulate last access
   var accessList = mAssignmentTargetAST.mAccessList
-  [!?accessList insertAtIndex !.property {!name:mAssignmentTargetAST.mIdentifier} !0]
+#  [!?accessList insertAtIndex !.property {!name:mAssignmentTargetAST.mIdentifier} !0]
   [!?accessList popLast ?let lastAccess]
 #---- Loop on access list
   for (access) in accessList do
