@@ -37,12 +37,20 @@ override method @standAloneProcedureCallInstructionAST analyze
 #--- Called routine signature
   let calledRoutineSignature = [mArguments routineSignature !mSandAloneRoutineName.location]
 #--- Search routine in map
-  [ioUniversalMap searchRoutine
+  [inContext.mRoutineMapForContext searchKey
     !mSandAloneRoutineName
     !calledRoutineSignature
     ?let @lstring LLVMInvocationRoutineName
     ?let @routineDescriptor routineDescriptor
+    ?let @location unused keyLocation
   ]
+#--- Search routine in map
+#  [ioUniversalMap searchRoutine
+#    !mSandAloneRoutineName
+#    !calledRoutineSignature
+#    ?let @lstring LLVMInvocationRoutineName
+#    ?let @routineDescriptor routineDescriptor
+#  ]
 #--- Routine name for invocation graph
   let routineMangledName = routineMangledNameFromCall (
     !""

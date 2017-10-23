@@ -337,11 +337,7 @@ override method @complexCallNoSelfInstructionAST baseGuardAnalyze
         [universalMap searchValuedObject !propertyName ?let propertyObject]
         currentMap = universalMap
         currentErrorLocation = propertyName.location
-        let newObject = @objectIR.temporaryReference {
-           !type:[propertyObject type]
-           !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
-        }
-        ioTemporaries.mTemporaryIndex ++
+        getNewTempVariable (![propertyObject type] !propertyName !?ioTemporaries ?let newObject)
         [!?baseGuardInstructionGenerationList appendGetPropertyReference
           !newObject
           !currentObject
@@ -468,11 +464,7 @@ override method @complexCallSelfInstructionAST baseGuardAnalyze
         [universalMap searchValuedObject !propertyName ?let propertyObject]
         currentMap = universalMap
         currentErrorLocation = propertyName.location
-        let newObject = @objectIR.temporaryReference {
-           !type:[propertyObject type]
-           !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
-        }
-        ioTemporaries.mTemporaryIndex ++
+        getNewTempVariable (![propertyObject type] !propertyName !?ioTemporaries ?let newObject)
         [!?baseGuardInstructionGenerationList appendGetPropertyReference
           !newObject
           !currentObject
