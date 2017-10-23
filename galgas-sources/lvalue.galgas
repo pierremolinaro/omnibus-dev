@@ -90,7 +90,7 @@ method @LValueAST type
     switch access
     case property (@lstring propertyName) :
       if [outType isStructure] then
-        [outType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+        [outType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
         [propertyMap searchKey !propertyName ?2* ?let type ?*]
         outType = type
       else
@@ -314,7 +314,7 @@ private proc analyzeVariableInLValue
       switch access
       case property (@lstring propertyName) :
         if [currentType isStructure] then
-          [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+          [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
           [propertyMap searchKey !propertyName ?2* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
           switch propertyAccess
           case constant (*) :
@@ -399,7 +399,7 @@ private proc analyzeSelfAssignmentTarget
       switch access
       case property (@lstring propertyName) :
         if [currentType isStructure] then
-          [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+          [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
           [propertyMap searchKey !propertyName ?2* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
           switch propertyAccess
           case constant (*) :

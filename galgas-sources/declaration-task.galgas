@@ -162,14 +162,12 @@ method @taskList enterInContext
   #--- task variables
     @propertyList propertyList = {}
     @propertyMap propertyMap = {}
-    @universalPropertyAndRoutineMapForContext universalPropertyMap = .default
     @sortedOperandIRList initialValueList = {}
     for property in task.mVarList do
       [property enterInContext
         !task.mTaskName
         !?context:ioContext
         !?staticStringMap:ioGlobalLiteralStringMap
-        !?universalPropertyMap
         !?propertyList
         !?propertyMap
         !?initialValueList
@@ -181,7 +179,6 @@ method @taskList enterInContext
     let taskType = @PLMType.structure {
       !typeName:task.mTaskName
       !propertyMap:propertyMap
-      !universalMap:universalPropertyMap
       !propertyList:propertyList
       !flags:.none
       !plmTypeName:task.mTaskName

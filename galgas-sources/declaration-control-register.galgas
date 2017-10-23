@@ -230,7 +230,7 @@ method @controlRegisterDeclarationListAST-element controlRegisterType
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case staticInteger :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case structure (* * * * * *) :
+  case structure (* * * * *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case opaque (* * *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount

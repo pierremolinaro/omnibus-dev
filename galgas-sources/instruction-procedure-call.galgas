@@ -217,7 +217,7 @@ override method @procedureCallInstructionAST analyze
     error mTargetAST.mIdentifier : "receiver has no property"
   else
   #--- Get current object property map
-    [[currentObject type] structure ?1* ?propertyMap:@propertyMap propertyMap ?4*]
+    [[currentObject type] structure ?1* ?propertyMap:@propertyMap propertyMap ?3*]
   #--- Insulate last access (should be a "property", used as routine name
     var accessList = mTargetAST.mAccessList
     [!?accessList popLast ?let lastAccess]
@@ -235,7 +235,7 @@ override method @procedureCallInstructionAST analyze
         if not [type isStructure] then
           error mTargetAST.mIdentifier : "receiver has no property"
         else
-          [type structure ?1* ?propertyMap:propertyMap ?4*]
+          [type structure ?1* ?propertyMap:propertyMap ?3*]
           let newObject = @objectIR.temporaryReference {
              !type:[propertyObject type]
              !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}

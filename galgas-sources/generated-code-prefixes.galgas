@@ -269,12 +269,6 @@ func %once userAccessAttribute -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once accessAttribute -> @string {
-  result = "access"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func %once noUnusedWarningAttribute -> @string {
   result = "noUnusedWarning"
 }
