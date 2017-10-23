@@ -2481,6 +2481,175 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorMap ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          @internalRoutineMapForContext map                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cMapElement_internalRoutineMapForContext ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const char * kSearchErrorMessage_internalRoutineMapForContext_searchKey ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_internalRoutineMapForContext : public AC_GALGAS_map {
+//--------------------------------- Default constructor
+  public : GALGAS_internalRoutineMapForContext (void) ;
+
+//--------------------------------- Handle copy
+  public : GALGAS_internalRoutineMapForContext (const GALGAS_internalRoutineMapForContext & inSource) ;
+  public : GALGAS_internalRoutineMapForContext & operator = (const GALGAS_internalRoutineMapForContext & inSource) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_internalRoutineMapForContext extractObject (const GALGAS_object & inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_internalRoutineMapForContext constructor_emptyMap (LOCATION_ARGS) ;
+
+  public : static class GALGAS_internalRoutineMapForContext constructor_mapWithMapToOverride (const class GALGAS_internalRoutineMapForContext & inOperand0
+                                                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
+                                                      const class GALGAS_routineArgumentSignatureMapForContext & inOperand1,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
+                                                   class GALGAS_routineArgumentSignatureMapForContext constinArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRoutineArgumentSignatureMapForContextForKey (class GALGAS_routineArgumentSignatureMapForContext constinArgument0,
+                                                                                         class GALGAS_string constinArgument1,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
+                                                   class GALGAS_routineArgumentSignatureMapForContext & outArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineArgumentSignatureMapForContext getter_mRoutineArgumentSignatureMapForContextForKey (const class GALGAS_string & constinOperand0,
+                                                                                                                                    C_Compiler * inCompiler
+                                                                                                                                    COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_internalRoutineMapForContext getter_overriddenMap (C_Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+  public : VIRTUAL_IN_DEBUG cMapElement_internalRoutineMapForContext * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                          const GALGAS_string & inKey
+                                                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Friend
+
+  friend class cEnumerator_internalRoutineMapForContext ;
+ 
+} ; // End of GALGAS_internalRoutineMapForContext class
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Enumerator declaration                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumerator_internalRoutineMapForContext : public cGenericAbstractEnumerator {
+  public : cEnumerator_internalRoutineMapForContext (const GALGAS_internalRoutineMapForContext & inEnumeratedObject,
+                                                     const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_routineArgumentSignatureMapForContext current_mRoutineArgumentSignatureMapForContext (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_internalRoutineMapForContext_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_internalRoutineMapForContext ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @routineMapForContext struct                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_routineMapForContext : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public : GALGAS_internalRoutineMapForContext mProperty_mInternalRoutineMap ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_routineMapForContext constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_routineMapForContext (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_routineMapForContext (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_routineMapForContext (const GALGAS_internalRoutineMapForContext & in_mInternalRoutineMap) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_routineMapForContext extractObject (const GALGAS_object & inObject,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_routineMapForContext constructor_new (const class GALGAS_internalRoutineMapForContext & inOperand0
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_routineMapForContext & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_internalRoutineMapForContext getter_mInternalRoutineMap (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_routineMapForContext class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineMapForContext ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                               @semanticContext struct                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

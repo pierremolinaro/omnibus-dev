@@ -250,7 +250,6 @@ override method @structureDeclarationAST enterInContext
   @universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext = .default
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
-  @routineMapForContext methodMap = .default
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   var canBeCopied = true
@@ -366,7 +365,6 @@ override method @structureDeclarationAST enterInContext
     !type:.structure {
       !typeName:mStructureName
       !propertyMap:propertyMap
-      !methodMap:methodMap
       !universalMap:universalPropertyAndRoutineMapForContext
       !propertyList:propertyList
       !flags:flags
@@ -621,7 +619,7 @@ proc generatePropertyAccess
   ?structureType:let @PLMType inType
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [inType structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+  [inType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
   for (propertyName * objectIR * *) in propertyMap do
     [objectIR property ?type:let propertyType ?plmName:* ?access:let access]
     ioIntermediateCodeStruct.mPropertyAccessRoutineList += 

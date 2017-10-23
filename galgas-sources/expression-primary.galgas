@@ -515,7 +515,7 @@ proc analyzePrimaryExpression
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
   case structureMember (propertyName @objectIR currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
       [propertyMap searchKey !propertyName ?2* ?let type ?*]
       let newObject = @objectIR.temporaryReference {
          !type:type
@@ -718,7 +718,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
   case structureMember (propertyName @objectIR currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
@@ -826,7 +826,7 @@ private proc analyzePrimaryExpressionWithSelf
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
   case structureMember (propertyName @objectIR currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
@@ -908,7 +908,7 @@ proc handlePropertyAccessInExpression
     end
   case structureMember (masterPropertyName currentPointer) :
     if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
       [propertyMap searchKey !masterPropertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
@@ -930,7 +930,7 @@ proc handlePropertyAccessInExpression
     error inPropertyName : "volatileIndirectReference 3": ioInternalRepresentation
   case universalReference (@PLMType type @string unused llvmName) :
     if [type isStructure] then
-      [type structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+      [type structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
       [propertyMap searchKey !inPropertyName ?2* ?let propertyType ?let propertyAccess]
       switch propertyAccess
       case constant (@string unused llvmValue) :
@@ -981,7 +981,7 @@ proc handleArrayAccessInExpression
   case structureMember (@lstring propertyName @objectIR currentPointerIR) :
     if [[currentPointerIR type] isStructure] then
       errorLocation = propertyName
-      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?5*]
+      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       variableIR = @objectIR.temporaryReference {
          !type:[masterPropertyIR type]
@@ -1420,7 +1420,7 @@ proc analyzeEffectiveParametersNew
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case integer (* * * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case structure (* * * universalMap * * *) :
+      case structure (* * universalMap * * *) :
         var m = universalMap
         [!?m searchValuedObjectForReadAccess !name ?let propertyObject]
         getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
