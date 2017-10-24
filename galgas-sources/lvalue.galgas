@@ -76,6 +76,14 @@ method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenc
 #!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @LValueRepresentation {
+  case volatileAbsoluteReference (@PLMType type @uint address)
+  case volatileIndirectReference (@PLMType type @string llvmName)
+  case universalReference (@PLMType type @string llvmName)
+}
+
+#·······················································································································
+
 method @LValueAST type
   ?selfType: let @PLMType inSelfType
   ?variableMap:let @universalPropertyAndRoutineMapForContext inUniversalMap
@@ -104,9 +112,9 @@ method @LValueAST type
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-method @LValueAST analyzeLValueNoSelf
+method @LValueAST analyzeLValue
   ?self:let @PLMType inSelfType
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -117,7 +125,7 @@ method @LValueAST analyzeLValueNoSelf
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !@internalRepresentation outInternalRepresentation
+  !@LValueRepresentation outInternalRepresentation
 {
   if mIdentifier.string == "" then # Receiver is "self"
     if inSelfType == .void then
@@ -231,7 +239,7 @@ private proc analyzeControlRegisterInLValue
   ?registerArraySize:let @uint inArraySize
   ?elementSize:let @uint inElementSize
   ?accessList:let @accessInAssignmentListAST inAccessList
-  !@internalRepresentation outInternalRepresentation
+  !@LValueRepresentation outInternalRepresentation
 {
  if not inWritable then
    error inRegisterName : "the control register is not writable in this context" : outInternalRepresentation
@@ -300,7 +308,7 @@ private proc analyzeVariableInLValue
   ?llvmName:let @string inLLVMName
   ?type:let @PLMType inVariableType
   ?accessList:let @accessInAssignmentListAST inAccessList
-  !@internalRepresentation outInternalRepresentation
+  !@LValueRepresentation outInternalRepresentation
 {
   var currentType = inVariableType
   var currentLLVMName = inLLVMName
@@ -386,7 +394,7 @@ private proc analyzeSelfAssignmentTarget
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?let @location inSelfLocation
   ?let @accessInAssignmentListAST inAccessList
-  !@internalRepresentation outInternalRepresentation
+  !@LValueRepresentation outInternalRepresentation
 {
   if not [inSelfType isStructure] then
     error inSelfLocation : "'self' should be a structure instance" : outInternalRepresentation

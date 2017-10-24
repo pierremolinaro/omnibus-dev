@@ -75,7 +75,7 @@ override method @assignmentInstructionAST analyze
     ?result:@objectIR sourceOperandPossibleReference
   ]
 #--- Analyze LValue
-  [mTargetAST analyzeLValueNoSelf
+  [mTargetAST analyzeLValue
     !self: inSelfType
     !propertiesAreMutable: inRoutineCanMutateProperties
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -86,13 +86,13 @@ override method @assignmentInstructionAST analyze
     !?variableMap:ioUniversalMap
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
-    ?let @internalRepresentation internalRepresentation
+    ?let @LValueRepresentation internalRepresentation
   ]
 #---
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !sourceOperandPossibleReference
-    ![mTargetAST mIdentifier]
+    !mTargetAST.mIdentifier
     ?let sourceOperand
   ]  
   let result = checkAssignmentCompatibility (
@@ -101,31 +101,13 @@ override method @assignmentInstructionAST analyze
     !errorLocation:mTargetAST.mIdentifier
     !staticTypeAllowed:false
   )
-  let errorLocation = mTargetAST.mIdentifier
   switch internalRepresentation
-  case standAloneIdentifier (identifier) :
-    [!?ioUniversalMap searchValuedObjectForWriteAccess !identifier ?let objectIR]
-    [!?ioInstructionGenerationList appendStoreFromReference !objectIR !errorLocation !result]
   case volatileAbsoluteReference (@PLMType type @uint address) :
     [!?ioInstructionGenerationList appendStoreVolatileRegister !type !address !result]
   case volatileIndirectReference (@PLMType type @string llvmName) :
     [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !type !llvmName !result]
   case universalReference (@PLMType type @string llvmName) :
     [!?ioInstructionGenerationList appendStoreToUniversalReference !llvmName !type !result]
-  case structureMember (@lstring propertyName @objectIR currentPointerIR) :
-    if [[currentPointerIR type] isStructure] then
-      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-      [propertyMap searchKey !propertyName ?2* ?let type ?*]
-      let targetRef = @objectIR.temporaryReference {
-         !type:type
-         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference !targetRef !currentPointerIR !propertyName]
-      [!?ioInstructionGenerationList appendStoreFromReference !targetRef !errorLocation !result]
-    else
-      error [currentPointerIR location] : "this should be a structure instance"
-    end
   end
 }
 
