@@ -1556,24 +1556,24 @@ void callExtensionMethod_searchValuedObjectType (const class cPtr_universalPrope
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Extension method '@LValueAST analyzeLValueNoSelf'                                  *
+//                                     Extension method '@LValueAST analyzeLValue'                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_analyzeLValueNoSelf (const class GALGAS_LValueAST inObject,
-                                          const class GALGAS_PLMType constin_inSelfType,
-                                          const class GALGAS_bool constin_inRoutineCanMutateProperties,
-                                          const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                          const class GALGAS_semanticContext constin_inContext,
-                                          const class GALGAS_mode constin_inCurrentMode,
-                                          class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                          class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                          class GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
-                                          class GALGAS_allocaList & io_ioAllocaList,
-                                          class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                          class GALGAS_internalRepresentation & out_outInternalRepresentation,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
+void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
+                                    const class GALGAS_PLMType constin_inSelfType,
+                                    const class GALGAS_bool constin_inRoutineCanMutateProperties,
+                                    const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                    const class GALGAS_semanticContext constin_inContext,
+                                    const class GALGAS_mode constin_inCurrentMode,
+                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                    class GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
+                                    class GALGAS_allocaList & io_ioAllocaList,
+                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                    class GALGAS_LValueRepresentation & out_outInternalRepresentation,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1597,7 +1597,7 @@ void routine_analyzeControlRegisterInLValue (const class GALGAS_PLMType constinA
                                              const class GALGAS_uint constinArgument13,
                                              const class GALGAS_uint constinArgument14,
                                              const class GALGAS_accessInAssignmentListAST constinArgument15,
-                                             class GALGAS_internalRepresentation & outArgument16,
+                                             class GALGAS_LValueRepresentation & outArgument16,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -1618,7 +1618,7 @@ void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgu
                                           class GALGAS_instructionListIR & ioArgument8,
                                           const class GALGAS_location constinArgument9,
                                           const class GALGAS_accessInAssignmentListAST constinArgument10,
-                                          class GALGAS_internalRepresentation & outArgument11,
+                                          class GALGAS_LValueRepresentation & outArgument11,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
@@ -1641,7 +1641,7 @@ void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument
                                       const class GALGAS_string constinArgument10,
                                       const class GALGAS_PLMType constinArgument11,
                                       const class GALGAS_accessInAssignmentListAST constinArgument12,
-                                      class GALGAS_internalRepresentation & outArgument13,
+                                      class GALGAS_LValueRepresentation & outArgument13,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 

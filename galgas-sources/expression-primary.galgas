@@ -1240,13 +1240,6 @@ private proc handleStandAloneFunctionCallInExpression
     ?@routineDescriptor routineDescriptor
     ?* # let @location outKeyLocation
   ]
-
-#  [ioUniversalMap searchRoutine
-#    !inFunctionName
-#    !signature
-#    ?let @lstring LLVMInvocationRoutineName
-#    ?@routineDescriptor routineDescriptor
-#  ]
 #  let isPublic = routineDescriptor.mIsPublic
   let routineKind = routineDescriptor.mRoutineKind
   let calleeMode = [routineKind executionMode]
