@@ -211,18 +211,51 @@ override method @procedureCallInstructionAST analyze
 {
 #--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
 #    If identifier is empty string, the receiver is "self"
+  @PLMType currentType
+  @string currentLLVMAddressVar
   @objectIR currentObject
   if mTargetAST.mIdentifier.string == "" then # Receiver is self
     if inSelfType == .void then
-      error mTargetAST.mIdentifier : "self is not available in this context" : currentObject
+      error mTargetAST.mIdentifier : "self is not available in this context" : currentObject, currentType, currentLLVMAddressVar
     else
+      currentType = inSelfType
+      currentLLVMAddressVar = "%self"
       currentObject = .temporaryReference {!type:inSelfType !llvmName:.new {!"%self" !mTargetAST.mIdentifier.location}}
     end
   else
     [ioUniversalMap searchValuedObject !mTargetAST.mIdentifier ?currentObject]
+    [ioUniversalMap searchEntity !mTargetAST.mIdentifier ?let @possibleValuedObject entity]
+    switch entity
+    case undefined :
+      error mTargetAST.mIdentifier : "undefined in this context" : currentType, currentLLVMAddressVar
+    case module (@PLMType type) :
+      currentType = type
+      currentLLVMAddressVar = llvmNameForGlobalVariable (!mTargetAST.mIdentifier)
+    case register (* * * * * * *) :
+      error mTargetAST.mIdentifier
+        : "a control register constant cannot be used in this context"
+        : currentType, currentLLVMAddressVar
+    case globalConstant (*) :
+      error mTargetAST.mIdentifier
+        : "a global constant cannot be used in this context"
+        : currentType, currentLLVMAddressVar
+    case localConstant (* *) :
+      error mTargetAST.mIdentifier
+        : "a local constant cannot be used in this context"
+        : currentType, currentLLVMAddressVar
+    case globalVariable (* @PLMType type) :
+      currentType = type
+      currentLLVMAddressVar = llvmNameForGlobalVariable (!mTargetAST.mIdentifier)
+    case localVariable (@PLMType type @lstring plmName) :
+      currentType = type
+      currentLLVMAddressVar = llvmNameForLocalVariable (!plmName)
+    end
   end
 #--- Check current object in a structure instance
-  if not [[currentObject type] isStructure] then
+#  if not [[currentObject type] isStructure] then
+#    error mTargetAST.mIdentifier : "receiver has no property"
+#  end
+  if not [currentType isStructure] then
     error mTargetAST.mIdentifier : "receiver has no property"
   else
   #--- Get current object property map
@@ -238,24 +271,44 @@ override method @procedureCallInstructionAST analyze
           !propertyName
           ?let @bool unused isPublic
           ?let @objectIR propertyObject
-          ?let @PLMType type
-          ?let@propertyAccessKind unused propertyAccess
+          ?let @PLMType propertyType
+          ?let @propertyAccessKind propertyAccess
         ]
-        if not [type isStructure] then
+        if not [propertyType isStructure] then
           error mTargetAST.mIdentifier : "receiver has no property"
         else
-          [type structure ?1* ?propertyMap:propertyMap ?3*]
-          let newObject = @objectIR.temporaryReference {
-             !type:[propertyObject type]
-             !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
-          }
-          ioTemporaries.mTemporaryIndex ++
-          [!?ioInstructionGenerationList appendGetPropertyReference
-            !newObject
-            !currentObject
-            !propertyName
-          ]
-          currentObject = newObject
+          [propertyType structure ?1* ?propertyMap:propertyMap ?3*]
+          switch propertyAccess
+          case constant (*) :
+            error propertyName
+              : "a context property cannot be used in this context"
+              : currentObject, currentType, currentLLVMAddressVar
+          case indexed (@uint propertyIndex) :
+            [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
+            [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+              !currentType
+              !currentLLVMAddressVar
+              !propertyType
+              !llvmPropertyName
+              !propertyIndex
+              !propertyName
+            ]
+            currentType = propertyType
+            currentLLVMAddressVar = llvmPropertyName
+         #-------------
+            let newObject = @objectIR.temporaryReference {
+               !type:[propertyObject type]
+               !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
+            }
+            ioTemporaries.mTemporaryIndex ++
+            [!?ioInstructionGenerationList appendGetPropertyReference
+              !newObject
+              !currentObject
+              !propertyName
+            ]
+            currentObject = newObject
+          #-------------
+          end
         end
       case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
         error endOfIndex : "not handled yet" : currentObject
@@ -267,7 +320,8 @@ override method @procedureCallInstructionAST analyze
       error endOfIndex : "a property access is required here"
     case property (@lstring methodName) :
     #--- Get function name and map containing the function definition
-      let routineMangledName = routineMangledNameFromCall (!"$" + [[currentObject type] key] !methodName !mArguments)
+#      let routineMangledName = routineMangledNameFromCall (!"$" + [[currentObject type] key] !methodName !mArguments)
+      let routineMangledName = routineMangledNameFromCall (!"$" + [currentType key] !methodName !mArguments)
     #--- Get called function signature
       let signature = [mArguments routineSignature !methodName.location]
     #--- Search function in map
@@ -280,11 +334,15 @@ override method @procedureCallInstructionAST analyze
       ]
     #--- Add receiver as first parameter
       @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-#      switch routineDescriptor.mRoutineCallingScheme
-#      case staticCall :
-        effectiveParameterListIR += !.outputInput !currentObject # Add receiver as first argument
-#      case propertyIndirectCall (*) :
-#      end
+      switch routineDescriptor.mRoutineCallingScheme
+      case staticCall :
+    #    effectiveParameterListIR += !.outputInput !currentObject # Add receiver as first argument
+        effectiveParameterListIR +=
+          !.outputInput # Add receiver as first argument
+          !.temporaryReference {!type:currentType !llvmName:.new{!currentLLVMAddressVar !methodName.location}}
+      case propertyIndirectCall (*) :
+        error methodName : "not handled yet"
+      end
     #---
     #  let isPublic = routineDescriptor.mIsPublic
       let routineKind = routineDescriptor.mRoutineKind
@@ -339,7 +397,8 @@ override method @procedureCallInstructionAST analyze
           ioTemporaries.mTemporaryIndex ++
           [!?ioInstructionGenerationList appendGetPropertyReference
             !propertyReference
-            !currentObject
+            !.temporaryReference {!type:currentType !llvmName:.new{!currentLLVMAddressVar !methodName.location}}
+#            !currentObject
             !methodName
           ]
         #--- Code generation

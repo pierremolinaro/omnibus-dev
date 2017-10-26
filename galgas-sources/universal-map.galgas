@@ -258,8 +258,8 @@ method @universalPropertyAndRoutineMapForContext searchValuedObject
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let property ?*]
-  switch property
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let entity ?*]
+  switch entity
   case undefined :
     error inValuedObjectName : "undefined in this context" : outObjectIR
   case module (@PLMType type) :
