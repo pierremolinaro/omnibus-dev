@@ -416,7 +416,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
 #      !error:methodName.location
 #    )
   #--- Analyze effective parameters
-    analyzeEffectiveParametersNew (
+    analyzeEffectiveParameters (
       !self:inSelfType
       !formal:formalSignature
       !effective:mArguments

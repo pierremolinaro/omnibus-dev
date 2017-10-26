@@ -7664,7 +7664,7 @@ static void extensionMethod_procedureCallInstructionAST_baseGuardAnalyze (const 
     outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
   }else if (kBoolFalse == test_9) {
     {
-    routine_analyzeEffectiveParametersNew (constinArgument_inSelfType, var_formalSignature_15419, object->mProperty_mArguments, var_methodName_13668.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, var_baseGuardAllocaList_11886, var_baseGuardInstructionGenerationList_11947, var_effectiveParameterListIR_15038, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 419)) ;
+    routine_analyzeEffectiveParameters (constinArgument_inSelfType, var_formalSignature_15419, object->mProperty_mArguments, var_methodName_13668.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, var_baseGuardAllocaList_11886, var_baseGuardInstructionGenerationList_11947, var_effectiveParameterListIR_15038, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 419)) ;
     }
     switch (var_routineDescriptor_14739.getter_mRoutineCallingScheme (HERE).enumValue ()) {
     case GALGAS_routineCallingSheme::kNotBuilt:
