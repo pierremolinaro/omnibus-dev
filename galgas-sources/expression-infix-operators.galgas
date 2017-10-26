@@ -278,45 +278,45 @@ abstract method @infixOperatorDescription generateInfixOperatorCode
 getter @infixOperatorDescription performStaticOperation
   ?let @bigint inLeft
   ?let @bigint inRight
-  -> @bigint outResult
+  -> @bigint
 {
   switch mOperator
-  case addNoOVF : outResult = inLeft + inRight
-  case subNoOVF : outResult = inLeft - inRight
-  case mulNoOVF : outResult = inLeft * inRight
-  case udivNoOVF : outResult = inLeft / inRight
-  case sdivNoOVF : outResult = inLeft / inRight
-  case uremNoOVF : outResult = inLeft mod inRight
-  case sremNoOVF : outResult = inLeft mod inRight
+  case addNoOVF : result = inLeft + inRight
+  case subNoOVF : result = inLeft - inRight
+  case mulNoOVF : result = inLeft * inRight
+  case udivNoOVF : result = inLeft / inRight
+  case sdivNoOVF : result = inLeft / inRight
+  case uremNoOVF : result = inLeft mod inRight
+  case sremNoOVF : result = inLeft mod inRight
 
-  case uaddOVF : outResult = inLeft + inRight
-  case saddOVF : outResult = inLeft + inRight
-  case usubOVF : outResult = inLeft - inRight
-  case ssubOVF : outResult = inLeft - inRight
-  case umulOVF : outResult = inLeft * inRight
-  case smulOVF : outResult = inLeft * inRight
-  case udivOVF : outResult = inLeft / inRight
-  case sdivOVF : outResult = inLeft / inRight
-  case uremOVF : outResult = inLeft mod inRight
-  case sremOVF : outResult = inLeft mod inRight
+  case uaddOVF : result = inLeft + inRight
+  case saddOVF : result = inLeft + inRight
+  case usubOVF : result = inLeft - inRight
+  case ssubOVF : result = inLeft - inRight
+  case umulOVF : result = inLeft * inRight
+  case smulOVF : result = inLeft * inRight
+  case udivOVF : result = inLeft / inRight
+  case sdivOVF : result = inLeft / inRight
+  case uremOVF : result = inLeft mod inRight
+  case sremOVF : result = inLeft mod inRight
 
-  case and : outResult = inLeft & inRight
-  case ior : outResult = inLeft | inRight
-  case xor : outResult = inLeft ^ inRight
-  case shl : outResult = inLeft << [inRight uint]
-  case ashr : outResult = inLeft >> [inRight uint]
-  case lshr : outResult = inLeft >> [inRight uint]
+  case and : result = inLeft & inRight
+  case ior : result = inLeft | inRight
+  case xor : result = inLeft ^ inRight
+  case shl : result = inLeft << [inRight uint]
+  case ashr : result = inLeft >> [inRight uint]
+  case lshr : result = inLeft >> [inRight uint]
   
-  case icmp_eq : outResult = [inLeft == inRight bigint]
-  case icmp_ne : outResult = [inLeft != inRight bigint]
-  case icmp_ult : outResult = [inLeft < inRight bigint]
-  case icmp_ule : outResult = [inLeft <= inRight bigint]
-  case icmp_ugt : outResult = [inLeft > inRight bigint]
-  case icmp_uge : outResult = [inLeft >= inRight bigint]
-  case icmp_slt : outResult = [inLeft < inRight bigint]
-  case icmp_sle : outResult = [inLeft <= inRight bigint]
-  case icmp_sgt : outResult = [inLeft > inRight bigint]
-  case icmp_sge : outResult = [inLeft >= inRight bigint]
+  case icmp_eq : result = [inLeft == inRight bigint]
+  case icmp_ne : result = [inLeft != inRight bigint]
+  case icmp_ult : result = [inLeft < inRight bigint]
+  case icmp_ule : result = [inLeft <= inRight bigint]
+  case icmp_ugt : result = [inLeft > inRight bigint]
+  case icmp_uge : result = [inLeft >= inRight bigint]
+  case icmp_slt : result = [inLeft < inRight bigint]
+  case icmp_sle : result = [inLeft <= inRight bigint]
+  case icmp_sgt : result = [inLeft > inRight bigint]
+  case icmp_sge : result = [inLeft >= inRight bigint]
 
   end
 }

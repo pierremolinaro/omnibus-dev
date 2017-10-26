@@ -129,12 +129,12 @@ func routineMangledNameFromCall ?let @string inReceiverTypeName
 
 proc routineSignature ?!@unifiedTypeMap ioTypeMap
                       ?let @routineFormalArgumentList inFormalArgumentList
-                      !@routineTypedSignature outResult
+                      !@routineTypedSignature outSignature
 {
-  outResult = {}
+  outSignature = {}
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
     [@unifiedTypeMap-proxy makeProxy !?ioTypeMap !formalArgumentTypeName ?let typeProxy]
-    outResult += !formalArgumentPassingMode !selector !typeProxy
+    outSignature += !formalArgumentPassingMode !selector !typeProxy
   end
 }
 

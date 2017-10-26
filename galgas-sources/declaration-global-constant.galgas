@@ -200,8 +200,8 @@ filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func linkForGlobalConstant ?let @string inConstantName -> @string outResult {
-  outResult = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"
+func linkForGlobalConstant ?let @string inConstantName -> @string {
+  result = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

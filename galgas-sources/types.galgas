@@ -318,8 +318,8 @@ filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func linkForHTMLTypeMap ?let @string inTypeName -> @string outResult {
-  outResult = "<a class=\"header_link\" href=\"#" + inTypeName + "\">" + inTypeName + "</a>"
+func linkForHTMLTypeMap ?let @string inTypeName -> @string {
+  result = "<a class=\"header_link\" href=\"#" + inTypeName + "\">" + inTypeName + "</a>"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

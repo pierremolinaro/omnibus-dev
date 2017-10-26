@@ -488,25 +488,25 @@ filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" 
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-private func linkForControlRegister ?let @string inControlRegisterName -> @string outResult {
-  outResult = "<a class=\"header_link\" href=\"#" + inControlRegisterName + "\">" + inControlRegisterName + "</a>"
+private func linkForControlRegister ?let @string inControlRegisterName -> @string {
+  result = "<a class=\"header_link\" href=\"#" + inControlRegisterName + "\">" + inControlRegisterName + "</a>"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func fieldIndexColumns ?let @uint inBitCount -> @string outResult {
-  outResult = ""
+func fieldIndexColumns ?let @uint inBitCount -> @string  {
+  result = ""
   for > x in 0 ..< inBitCount do
-    outResult += "<td class=\"fields\">" + x + "</td>"
+    result += "<td class=\"fields\">" + x + "</td>"
   end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func arrayIndexListFor ?size:let @uint inSize -> @uintlist outResult {
-  outResult = {}
+func arrayIndexListFor ?size:let @uint inSize -> @uintlist {
+  result = {}
   for i in 0 ..< inSize do
-    outResult += !i
+    result += !i
   end
 }
 
