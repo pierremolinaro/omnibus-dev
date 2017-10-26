@@ -347,7 +347,7 @@ proc analyzeGuardCall
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
 #--- Analyze effective parameters
-  analyzeEffectiveParametersNew (
+  analyzeEffectiveParameters (
     !self:inSelfType
     !formal:formalSignature
     !effective:inEffectiveParameterList

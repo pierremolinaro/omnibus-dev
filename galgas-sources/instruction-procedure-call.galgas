@@ -167,7 +167,7 @@ override method @standAloneProcedureCallInstructionAST analyze
   )
 #--- Analyze effective parameters
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  analyzeEffectiveParametersNew (
+  analyzeEffectiveParameters (
     !self:inSelfType
     !formal:routineDescriptor.mSignature
     !effective:mArguments
@@ -339,7 +339,7 @@ override method @procedureCallInstructionAST analyze
           !error:methodName.location
         )
       #--- Analyze effective parameters
-        analyzeEffectiveParametersNew (
+        analyzeEffectiveParameters (
           !self:inSelfType
           !formal:formalSignature
           !effective:mArguments
