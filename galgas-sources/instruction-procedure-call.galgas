@@ -38,7 +38,7 @@ syntax extension plm_syntax {
     let instructionLocation = @location.here
     <lvalue> ?let assignmentTargetAST
     <effective_parameters> ?let arguments ?let endOfArguments
-    if [[assignmentTargetAST mAccessList] length] == 0 then
+    if ([[assignmentTargetAST mAccessList] length] == 0) & (assignmentTargetAST.mIdentifier.string != "") then
       outInstruction = @standAloneProcedureCallInstructionAST.new {
         !instructionLocation
         !arguments
@@ -46,7 +46,12 @@ syntax extension plm_syntax {
         !assignmentTargetAST.mIdentifier
       }
     else
-      outInstruction = @procedureCallInstructionAST.new {!instructionLocation !arguments !endOfArguments !assignmentTargetAST}
+      outInstruction = @procedureCallInstructionAST.new {
+        !instructionLocation
+        !arguments
+        !endOfArguments
+        !assignmentTargetAST
+      }
     end
   }
 
@@ -58,7 +63,9 @@ syntax extension plm_syntax {
 #!  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
   [mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
   for () in mArguments do
     switch mEffectiveParameterKind
@@ -76,7 +83,9 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
 
 #·······················································································································
 
-override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
   for () in mArguments do
     switch mEffectiveParameterKind
     case input (*):
@@ -95,16 +104,16 @@ override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPre
 #!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstring inSelector -> @string outResult {
+getter @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstring inSelector -> @string {
   switch self
-  case input (*) : outResult = "?"
-  case inputWithType (* * *) : outResult = "?"
-  case output (* *) : outResult = "!"
-  case outputInput (*) : outResult = "!?"
-  case outputInputSelfVariable (*) : outResult = "!?"
+  case input (*) : result = "?"
+  case inputWithType (* * *) : result = "?"
+  case output (* *) : result = "!"
+  case outputInput (*) : result = "!?"
+  case outputInputSelfVariable (*) : result = "!?"
   end
   if inSelector.string != "" then
-    outResult += inSelector.string + ":"
+    result += inSelector.string + ":"
   end
 }
 
@@ -347,7 +356,7 @@ override method @procedureCallInstructionAST analyze
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! Code Generation
+#! CODE GENERATION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @procEffectiveParameterPassingModeIR {
@@ -356,14 +365,14 @@ enum @procEffectiveParameterPassingModeIR {
   case outputInput
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @procCallEffectiveParameterListIR {
   @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
   @objectIR mParameter
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 enum @calleeKindIR {
   case function

@@ -1784,39 +1784,39 @@ GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::e
 GALGAS_string extensionGetter_matchingFormalArgument (const GALGAS_effectiveArgumentPassingModeAST & inObject,
                                                       C_Compiler * /* inCompiler */
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
+  GALGAS_string result_result ; // Returned variable
   const GALGAS_effectiveArgumentPassingModeAST temp_0 = inObject ;
   switch (temp_0.enumValue ()) {
   case GALGAS_effectiveArgumentPassingModeAST::kNotBuilt:
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_input:
     {
-      result_outResult = GALGAS_string ("!") ;
+      result_result = GALGAS_string ("!") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_inputWithType:
     {
-      result_outResult = GALGAS_string ("!") ;
+      result_result = GALGAS_string ("!") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_output:
     {
-      result_outResult = GALGAS_string ("\?") ;
+      result_result = GALGAS_string ("\?") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_outputInput:
     {
-      result_outResult = GALGAS_string ("\?!") ;
+      result_result = GALGAS_string ("\?!") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_outputInputSelfVariable:
     {
-      result_outResult = GALGAS_string ("\?!") ;
+      result_result = GALGAS_string ("\?!") ;
     }
     break ;
   }
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -7891,43 +7891,43 @@ GALGAS_string extensionGetter_passingModeForActualSelector (const GALGAS_effecti
                                                             const GALGAS_lstring & constinArgument_inSelector,
                                                             C_Compiler * inCompiler
                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
+  GALGAS_string result_result ; // Returned variable
   const GALGAS_effectiveArgumentPassingModeAST temp_0 = inObject ;
   switch (temp_0.enumValue ()) {
   case GALGAS_effectiveArgumentPassingModeAST::kNotBuilt:
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_input:
     {
-      result_outResult = GALGAS_string ("\?") ;
+      result_result = GALGAS_string ("\?") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_inputWithType:
     {
-      result_outResult = GALGAS_string ("\?") ;
+      result_result = GALGAS_string ("\?") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_output:
     {
-      result_outResult = GALGAS_string ("!") ;
+      result_result = GALGAS_string ("!") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_outputInput:
     {
-      result_outResult = GALGAS_string ("!\?") ;
+      result_result = GALGAS_string ("!\?") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_outputInputSelfVariable:
     {
-      result_outResult = GALGAS_string ("!\?") ;
+      result_result = GALGAS_string ("!\?") ;
     }
     break ;
   }
   const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, constinArgument_inSelector.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    result_outResult.plusAssign_operation(constinArgument_inSelector.getter_string (HERE).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 107)), inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 107)) ;
+    result_result.plusAssign_operation(constinArgument_inSelector.getter_string (HERE).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 116)), inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 116)) ;
   }
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 

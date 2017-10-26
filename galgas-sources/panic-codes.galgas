@@ -1,44 +1,44 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForAssertViolation -> @bigint outResult { outResult = 1G }
+func %once panicCodeForAssertViolation -> @bigint { result = 1G }
 
-func %once panicCodeForUnsignedAdditionOverflow -> @bigint outResult { outResult = 2G }
+func %once panicCodeForUnsignedAdditionOverflow -> @bigint { result = 2G }
 
-func %once panicCodeForSignedAdditionOverflow -> @bigint outResult { outResult = 3G }
+func %once panicCodeForSignedAdditionOverflow -> @bigint { result = 3G }
 
-func %once panicCodeForUnsignedSubtractOverflow -> @bigint outResult { outResult = 4G }
+func %once panicCodeForUnsignedSubtractOverflow -> @bigint { result = 4G }
 
-func %once panicCodeForSignedSubtractOverflow -> @bigint outResult { outResult = 5G }
+func %once panicCodeForSignedSubtractOverflow -> @bigint { result = 5G }
 
-func %once panicCodeForUnsignedMultiplicationOverflow -> @bigint outResult { outResult = 6G }
+func %once panicCodeForUnsignedMultiplicationOverflow -> @bigint { result = 6G }
 
-func %once panicCodeForSignedMultiplicationOverflow -> @bigint outResult { outResult = 7G }
+func %once panicCodeForSignedMultiplicationOverflow -> @bigint { result = 7G }
 
-func %once panicCodeForUnsignedDivisionByZero -> @bigint outResult { outResult = 8G }
+func %once panicCodeForUnsignedDivisionByZero -> @bigint { result = 8G }
 
-func %once panicCodeForSignedDivisionByZero -> @bigint outResult { outResult = 9G }
+func %once panicCodeForSignedDivisionByZero -> @bigint { result = 9G }
 
-func %once panicCodeForUnsignedRemainderByZero -> @bigint outResult { outResult = 10G }
+func %once panicCodeForUnsignedRemainderByZero -> @bigint { result = 10G }
 
-func %once panicCodeForSignedRemainderByZero -> @bigint outResult { outResult = 11G }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func %once panicCodeForConvertOverflow -> @bigint outResult { outResult = 12G }
+func %once panicCodeForSignedRemainderByZero -> @bigint { result = 11G }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForRegisterFieldOvf -> @bigint outResult { outResult = 13G }
+func %once panicCodeForConvertOverflow -> @bigint { result = 12G }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForNegativeArrayIndex -> @bigint outResult { outResult = 14G }
-
-func %once panicCodeForTooLargeArrayIndex -> @bigint outResult { outResult = 15G }
+func %once panicCodeForRegisterFieldOvf -> @bigint { result = 13G }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForClosedSync -> @bigint outResult { outResult = 16G }
+func %once panicCodeForNegativeArrayIndex -> @bigint { result = 14G }
+
+func %once panicCodeForTooLargeArrayIndex -> @bigint { result = 15G }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once panicCodeForClosedSync -> @bigint { result = 16G }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

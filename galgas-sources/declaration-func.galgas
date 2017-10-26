@@ -32,24 +32,24 @@ list @routineFormalArgumentList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @procFormalArgumentPassingMode formalPassingModeString -> @string outResult {
+getter @procFormalArgumentPassingMode formalPassingModeString -> @string {
   switch self
-  case input : outResult = "?"
-  case output : outResult = "!"
-  case inputOutput : outResult = "?!"
+  case input : result = "?"
+  case output : result = "!"
+  case inputOutput : result = "?!"
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let @string inSelector -> @string outResult {
+getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let @string inSelector -> @string {
   switch self
-  case input : outResult = "!"
-  case output : outResult = "?"
-  case inputOutput : outResult = "!?"
+  case input : result = "!"
+  case output : result = "?"
+  case inputOutput : result = "!?"
   end
   if inSelector != "" then
-    outResult += inSelector + ":"
+    result += inSelector + ":"
   end
 }
 

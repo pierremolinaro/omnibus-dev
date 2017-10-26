@@ -3884,10 +3884,10 @@ GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dump (C_
 GALGAS_string function_linkForControlRegister (const GALGAS_string & constinArgument_inControlRegisterName,
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("<a class=\"header_link\" href=\"#").add_operation (constinArgument_inControlRegisterName, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)).add_operation (GALGAS_string ("\">"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)).add_operation (constinArgument_inControlRegisterName, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)).add_operation (GALGAS_string ("</a>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)) ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("<a class=\"header_link\" href=\"#").add_operation (constinArgument_inControlRegisterName, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)).add_operation (GALGAS_string ("\">"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)).add_operation (constinArgument_inControlRegisterName, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)).add_operation (GALGAS_string ("</a>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -3931,15 +3931,15 @@ C_galgas_function_descriptor functionDescriptor_linkForControlRegister ("linkFor
 GALGAS_string function_fieldIndexColumns (const GALGAS_uint & constinArgument_inBitCount,
                                           C_Compiler * inCompiler
                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string::makeEmptyString () ;
-  cEnumerator_range enumerator_19271 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inBitCount.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 499))), kENUMERATION_DOWN) ;
-  while (enumerator_19271.hasCurrentObject ()) {
-    result_outResult.plusAssign_operation(GALGAS_string ("<td class=\"fields\">").add_operation (enumerator_19271.current (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 500)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 500)).add_operation (GALGAS_string ("</td>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 500)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 500)) ;
-    enumerator_19271.gotoNextObject () ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string::makeEmptyString () ;
+  cEnumerator_range enumerator_19246 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inBitCount.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 499))), kENUMERATION_DOWN) ;
+  while (enumerator_19246.hasCurrentObject ()) {
+    result_result.plusAssign_operation(GALGAS_string ("<td class=\"fields\">").add_operation (enumerator_19246.current (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 500)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 500)).add_operation (GALGAS_string ("</td>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 500)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 500)) ;
+    enumerator_19246.gotoNextObject () ;
   }
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -3983,15 +3983,15 @@ C_galgas_function_descriptor functionDescriptor_fieldIndexColumns ("fieldIndexCo
 GALGAS_uintlist function_arrayIndexListFor (const GALGAS_uint & constinArgument_inSize,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_uintlist result_outResult ; // Returned variable
-  result_outResult = GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("declaration-control-register.galgas", 507)) ;
-  cEnumerator_range enumerator_19572 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inSize.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 508))), kENUMERATION_UP) ;
-  while (enumerator_19572.hasCurrentObject ()) {
-    result_outResult.addAssign_operation (enumerator_19572.current (HERE)  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 509)) ;
-    enumerator_19572.gotoNextObject () ;
+  GALGAS_uintlist result_result ; // Returned variable
+  result_result = GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("declaration-control-register.galgas", 507)) ;
+  cEnumerator_range enumerator_19531 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inSize.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 508))), kENUMERATION_UP) ;
+  while (enumerator_19531.hasCurrentObject ()) {
+    result_result.addAssign_operation (enumerator_19531.current (HERE)  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 509)) ;
+    enumerator_19531.gotoNextObject () ;
   }
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -4439,10 +4439,10 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (C_Compile
 GALGAS_string function_linkForGlobalConstant (const GALGAS_string & constinArgument_inConstantName,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("<a class=\"header_link\" href=\"#").add_operation (constinArgument_inConstantName, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 204)).add_operation (GALGAS_string ("\">"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 204)).add_operation (constinArgument_inConstantName, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 204)).add_operation (GALGAS_string ("</a>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 204)) ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("<a class=\"header_link\" href=\"#").add_operation (constinArgument_inConstantName, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 204)).add_operation (GALGAS_string ("\">"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 204)).add_operation (constinArgument_inConstantName, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 204)).add_operation (GALGAS_string ("</a>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 204)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -5844,10 +5844,10 @@ C_galgas_function_descriptor functionDescriptor_panicModeName ("panicModeName",
 
 static GALGAS_bigint onceFunction_panicCodeForAssertViolation (C_Compiler * inCompiler
                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 3)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 3)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -5914,10 +5914,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForAssertViolation ("pa
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedAdditionOverflow (C_Compiler * inCompiler
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("2", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 5)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("2", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 5)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -5984,10 +5984,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedAdditionOver
 
 static GALGAS_bigint onceFunction_panicCodeForSignedAdditionOverflow (C_Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("3", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 7)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("3", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 7)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6054,10 +6054,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedAdditionOverfl
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedSubtractOverflow (C_Compiler * inCompiler
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("4", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 9)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("4", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 9)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6124,10 +6124,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedSubtractOver
 
 static GALGAS_bigint onceFunction_panicCodeForSignedSubtractOverflow (C_Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("5", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 11)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("5", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 11)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6194,10 +6194,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedSubtractOverfl
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedMultiplicationOverflow (C_Compiler * inCompiler
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("6", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 13)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("6", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 13)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6264,10 +6264,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedMultiplicati
 
 static GALGAS_bigint onceFunction_panicCodeForSignedMultiplicationOverflow (C_Compiler * inCompiler
                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("7", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 15)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("7", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 15)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6334,10 +6334,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedMultiplication
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedDivisionByZero (C_Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("8", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 17)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("8", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 17)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6404,10 +6404,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedDivisionByZe
 
 static GALGAS_bigint onceFunction_panicCodeForSignedDivisionByZero (C_Compiler * inCompiler
                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("9", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 19)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("9", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 19)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6474,10 +6474,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedDivisionByZero
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedRemainderByZero (C_Compiler * inCompiler
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("10", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 21)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("10", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 21)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6544,10 +6544,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedRemainderByZ
 
 static GALGAS_bigint onceFunction_panicCodeForSignedRemainderByZero (C_Compiler * inCompiler
                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("11", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 23)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("11", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 23)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6614,10 +6614,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedRemainderByZer
 
 static GALGAS_bigint onceFunction_panicCodeForConvertOverflow (C_Compiler * inCompiler
                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("12", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 27)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("12", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 27)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6684,10 +6684,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForConvertOverflow ("pa
 
 static GALGAS_bigint onceFunction_panicCodeForRegisterFieldOvf (C_Compiler * inCompiler
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("13", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 31)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("13", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 31)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6754,10 +6754,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForRegisterFieldOvf ("p
 
 static GALGAS_bigint onceFunction_panicCodeForNegativeArrayIndex (C_Compiler * inCompiler
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("14", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 35)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("14", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 35)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6824,10 +6824,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForNegativeArrayIndex (
 
 static GALGAS_bigint onceFunction_panicCodeForTooLargeArrayIndex (C_Compiler * inCompiler
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("15", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 37)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("15", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 37)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -6894,10 +6894,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForTooLargeArrayIndex (
 
 static GALGAS_bigint onceFunction_panicCodeForClosedSync (C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("16", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 41)) ;
+  GALGAS_bigint result_result ; // Returned variable
+  result_result = GALGAS_bigint ("16", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 41)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 

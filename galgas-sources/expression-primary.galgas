@@ -19,13 +19,13 @@ enum @effectiveArgumentPassingModeAST {
 
 #·······················································································································
 
-getter @effectiveArgumentPassingModeAST matchingFormalArgument -> @string outResult {
+getter @effectiveArgumentPassingModeAST matchingFormalArgument -> @string {
   switch self 
-  case input (*) : outResult = "!"
-  case inputWithType (* * *) : outResult = "!"
-  case output (* *) : outResult = "?"
-  case outputInput (*) : outResult = "?!"
-  case outputInputSelfVariable (*) : outResult = "?!"
+  case input (*) : result = "!"
+  case inputWithType (* * *) : result = "!"
+  case output (* *) : result = "?"
+  case outputInput (*) : result = "?!"
+  case outputInputSelfVariable (*) : result = "?!"
   end
 }
 
