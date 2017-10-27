@@ -4199,9 +4199,9 @@ typeComparisonResult cEnumAssociatedValues_objectIR_localVariableReference::comp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_objectIR_temporaryReference::cEnumAssociatedValues_objectIR_temporaryReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                                      const GALGAS_lstring & inAssociatedValue1
-                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_objectIR_llvmReference::cEnumAssociatedValues_objectIR_llvmReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                            const GALGAS_lstring & inAssociatedValue1
+                                                                                            COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
@@ -4209,8 +4209,8 @@ mAssociatedValue1 (inAssociatedValue1) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_objectIR_temporaryReference::description (C_String & ioString,
-                                                                     const int32_t inIndentation) const {
+void cEnumAssociatedValues_objectIR_llvmReference::description (C_String & ioString,
+                                                                const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
@@ -4219,8 +4219,8 @@ void cEnumAssociatedValues_objectIR_temporaryReference::description (C_String & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_objectIR_temporaryReference::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectIR_temporaryReference * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_temporaryReference *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_objectIR_llvmReference::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectIR_llvmReference * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_llvmReference *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -4234,10 +4234,10 @@ typeComparisonResult cEnumAssociatedValues_objectIR_temporaryReference::compare 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_objectIR_property::cEnumAssociatedValues_objectIR_property (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                  const GALGAS_lstring & inAssociatedValue1,
-                                                                                  const GALGAS_propertyAccessKind & inAssociatedValue2
-                                                                                  COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_objectIR_propertyRef::cEnumAssociatedValues_objectIR_propertyRef (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                        const GALGAS_lstring & inAssociatedValue1,
+                                                                                        const GALGAS_propertyAccessKind & inAssociatedValue2
+                                                                                        COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1),
@@ -4246,8 +4246,8 @@ mAssociatedValue2 (inAssociatedValue2) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_objectIR_property::description (C_String & ioString,
-                                                           const int32_t inIndentation) const {
+void cEnumAssociatedValues_objectIR_propertyRef::description (C_String & ioString,
+                                                              const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
@@ -4257,8 +4257,8 @@ void cEnumAssociatedValues_objectIR_property::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_objectIR_property::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectIR_property * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_property *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_objectIR_propertyRef::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectIR_propertyRef * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_propertyRef *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -4506,14 +4506,14 @@ GALGAS_objectIR GALGAS_objectIR::constructor_localVariableReference (const GALGA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_temporaryReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                                 const GALGAS_lstring & inAssociatedValue1
-                                                                 COMMA_LOCATION_ARGS) {
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                            const GALGAS_lstring & inAssociatedValue1
+                                                            COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_temporaryReference ;
+    result.mEnum = kEnum_llvmReference ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_temporaryReference (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectIR_llvmReference (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -4522,15 +4522,15 @@ GALGAS_objectIR GALGAS_objectIR::constructor_temporaryReference (const GALGAS_PL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_property (const GALGAS_PLMType & inAssociatedValue0,
-                                                       const GALGAS_lstring & inAssociatedValue1,
-                                                       const GALGAS_propertyAccessKind & inAssociatedValue2
-                                                       COMMA_LOCATION_ARGS) {
+GALGAS_objectIR GALGAS_objectIR::constructor_propertyRef (const GALGAS_PLMType & inAssociatedValue0,
+                                                          const GALGAS_lstring & inAssociatedValue1,
+                                                          const GALGAS_propertyAccessKind & inAssociatedValue2
+                                                          COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
-    result.mEnum = kEnum_property ;
+    result.mEnum = kEnum_propertyRef ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_property (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectIR_propertyRef (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -4672,18 +4672,18 @@ void GALGAS_objectIR::method_localVariableReference (GALGAS_PLMType & outAssocia
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_objectIR::method_temporaryReference (GALGAS_PLMType & outAssociatedValue0,
-                                                 GALGAS_lstring & outAssociatedValue1,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_temporaryReference) {
+void GALGAS_objectIR::method_llvmReference (GALGAS_PLMType & outAssociatedValue0,
+                                            GALGAS_lstring & outAssociatedValue1,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_llvmReference) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     C_String s ;
-    s << "method @objectIR temporaryReference invoked with an invalid enum value" ;
+    s << "method @objectIR llvmReference invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_objectIR_temporaryReference * ptr = (const cEnumAssociatedValues_objectIR_temporaryReference *) unsafePointer () ;
+    const cEnumAssociatedValues_objectIR_llvmReference * ptr = (const cEnumAssociatedValues_objectIR_llvmReference *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
@@ -4691,20 +4691,20 @@ void GALGAS_objectIR::method_temporaryReference (GALGAS_PLMType & outAssociatedV
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_objectIR::method_property (GALGAS_PLMType & outAssociatedValue0,
-                                       GALGAS_lstring & outAssociatedValue1,
-                                       GALGAS_propertyAccessKind & outAssociatedValue2,
-                                       C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_property) {
+void GALGAS_objectIR::method_propertyRef (GALGAS_PLMType & outAssociatedValue0,
+                                          GALGAS_lstring & outAssociatedValue1,
+                                          GALGAS_propertyAccessKind & outAssociatedValue2,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_propertyRef) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     outAssociatedValue2.drop () ;
     C_String s ;
-    s << "method @objectIR property invoked with an invalid enum value" ;
+    s << "method @objectIR propertyRef invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_objectIR_property * ptr = (const cEnumAssociatedValues_objectIR_property *) unsafePointer () ;
+    const cEnumAssociatedValues_objectIR_propertyRef * ptr = (const cEnumAssociatedValues_objectIR_propertyRef *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
     outAssociatedValue2 = ptr->mAssociatedValue2 ;
@@ -4811,8 +4811,8 @@ static const char * gEnumNameArrayFor_objectIR [12] = {
   "selfObject",
   "globalVariableReference",
   "localVariableReference",
-  "temporaryReference",
-  "property",
+  "llvmReference",
+  "propertyRef",
   "llvmTemporaryValue",
   "literalInteger",
   "llvmStructureConstant",
@@ -4846,14 +4846,14 @@ GALGAS_bool GALGAS_objectIR::getter_isLocalVariableReference (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_objectIR::getter_isTemporaryReference (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_temporaryReference == mEnum) ;
+GALGAS_bool GALGAS_objectIR::getter_isLlvmReference (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmReference == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_objectIR::getter_isProperty (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_property == mEnum) ;
+GALGAS_bool GALGAS_objectIR::getter_isPropertyRef (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_propertyRef == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6438,45 +6438,45 @@ void extensionMethod_generateCode (const GALGAS_propertyAccessRoutineList inObje
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_propertyAccessRoutineList temp_0 = inObject ;
-  cEnumerator_propertyAccessRoutineList enumerator_22234 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_22234.hasCurrentObject ()) {
-    GALGAS_string var_propTypeName_22258 = extensionGetter_llvmTypeName (enumerator_22234.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 578)) ;
-    GALGAS_string var_structTypeName_22311 = extensionGetter_llvmTypeName (enumerator_22234.current_mStructureKind (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 579)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Access property '").add_operation (enumerator_22234.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)).add_operation (GALGAS_string ("' of structure "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)).add_operation (var_structTypeName_22311, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)) ;
-    switch (enumerator_22234.current_mAccessKind (HERE).enumValue ()) {
+  cEnumerator_propertyAccessRoutineList enumerator_22246 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_22246.hasCurrentObject ()) {
+    GALGAS_string var_propTypeName_22270 = extensionGetter_llvmTypeName (enumerator_22246.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 578)) ;
+    GALGAS_string var_structTypeName_22323 = extensionGetter_llvmTypeName (enumerator_22246.current_mStructureKind (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 579)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Access property '").add_operation (enumerator_22246.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)).add_operation (GALGAS_string ("' of structure "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)).add_operation (var_structTypeName_22323, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 580)) ;
+    switch (enumerator_22246.current_mAccessKind (HERE).enumValue ()) {
     case GALGAS_propertyAccessKind::kNotBuilt:
       break ;
     case GALGAS_propertyAccessKind::kEnum_indexed:
       {
-        const cEnumAssociatedValues_propertyAccessKind_indexed * extractPtr_23001 = (const cEnumAssociatedValues_propertyAccessKind_indexed *) (enumerator_22234.current_mAccessKind (HERE).unsafePointer ()) ;
-        const GALGAS_uint extractedValue_index = extractPtr_23001->mAssociatedValue0 ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal ").add_operation (var_propTypeName_22258, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 583)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 583)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" * @\"").add_operation (var_structTypeName_22311, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)).add_operation (GALGAS_string (".access."), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)).add_operation (enumerator_22234.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_structTypeName_22311, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 585)).add_operation (GALGAS_string (" * %self) nounwind {\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 585)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 585)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %result = getelementptr inbounds ").add_operation (var_structTypeName_22311, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)).add_operation (var_structTypeName_22311, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)).add_operation (GALGAS_string (" * %self, "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("i32 0, i32 ").add_operation (extractedValue_index.getter_string (SOURCE_FILE ("type-structure-declaration.galgas", 587)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (GALGAS_string (" ; "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (enumerator_22234.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (GALGAS_string (", index "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (extractedValue_index.getter_string (SOURCE_FILE ("type-structure-declaration.galgas", 587)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret ").add_operation (var_propTypeName_22258, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 588)).add_operation (GALGAS_string (" * %result\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 588)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 588)) ;
+        const cEnumAssociatedValues_propertyAccessKind_indexed * extractPtr_23013 = (const cEnumAssociatedValues_propertyAccessKind_indexed *) (enumerator_22246.current_mAccessKind (HERE).unsafePointer ()) ;
+        const GALGAS_uint extractedValue_index = extractPtr_23013->mAssociatedValue0 ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal ").add_operation (var_propTypeName_22270, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 583)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 583)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" * @\"").add_operation (var_structTypeName_22323, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)).add_operation (GALGAS_string (".access."), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)).add_operation (enumerator_22246.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 584)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_structTypeName_22323, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 585)).add_operation (GALGAS_string (" * %self) nounwind {\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 585)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 585)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %result = getelementptr inbounds ").add_operation (var_structTypeName_22323, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)).add_operation (var_structTypeName_22323, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)).add_operation (GALGAS_string (" * %self, "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 586)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("i32 0, i32 ").add_operation (extractedValue_index.getter_string (SOURCE_FILE ("type-structure-declaration.galgas", 587)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (GALGAS_string (" ; "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (enumerator_22246.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (GALGAS_string (", index "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (extractedValue_index.getter_string (SOURCE_FILE ("type-structure-declaration.galgas", 587)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 587)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret ").add_operation (var_propTypeName_22270, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 588)).add_operation (GALGAS_string (" * %result\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 588)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 588)) ;
         ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
           "\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 589)) ;
       }
       break ;
     case GALGAS_propertyAccessKind::kEnum_constant:
       {
-        const cEnumAssociatedValues_propertyAccessKind_constant * extractPtr_23529 = (const cEnumAssociatedValues_propertyAccessKind_constant *) (enumerator_22234.current_mAccessKind (HERE).unsafePointer ()) ;
-        const GALGAS_string extractedValue_value = extractPtr_23529->mAssociatedValue0 ;
-        GALGAS_string var_constantName_23052 = GALGAS_string ("@\"").add_operation (var_structTypeName_22311, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 591)).add_operation (GALGAS_string (".constant."), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 591)).add_operation (enumerator_22234.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 591)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 591)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(var_constantName_23052.add_operation (GALGAS_string (" = private unnamed_addr constant "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)).add_operation (var_propTypeName_22258, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)).add_operation (extractedValue_value, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)).add_operation (GALGAS_string ("\n"
+        const cEnumAssociatedValues_propertyAccessKind_constant * extractPtr_23541 = (const cEnumAssociatedValues_propertyAccessKind_constant *) (enumerator_22246.current_mAccessKind (HERE).unsafePointer ()) ;
+        const GALGAS_string extractedValue_value = extractPtr_23541->mAssociatedValue0 ;
+        GALGAS_string var_constantName_23064 = GALGAS_string ("@\"").add_operation (var_structTypeName_22323, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 591)).add_operation (GALGAS_string (".constant."), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 591)).add_operation (enumerator_22246.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 591)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 591)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(var_constantName_23064.add_operation (GALGAS_string (" = private unnamed_addr constant "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)).add_operation (var_propTypeName_22270, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)).add_operation (extractedValue_value, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)).add_operation (GALGAS_string ("\n"
           "\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 592)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal ").add_operation (var_propTypeName_22258, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 593)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 593)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" * @\"").add_operation (var_structTypeName_22311, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)).add_operation (GALGAS_string (".access."), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)).add_operation (enumerator_22234.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_structTypeName_22311, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 595)).add_operation (GALGAS_string (" * %self) nounwind {\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 595)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 595)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret ").add_operation (var_propTypeName_22258, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)).add_operation (var_constantName_23052, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal ").add_operation (var_propTypeName_22270, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 593)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 593)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" * @\"").add_operation (var_structTypeName_22323, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)).add_operation (GALGAS_string (".access."), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)).add_operation (enumerator_22246.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 594)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_structTypeName_22323, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 595)).add_operation (GALGAS_string (" * %self) nounwind {\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 595)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 595)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret ").add_operation (var_propTypeName_22270, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)).add_operation (var_constantName_23064, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 596)) ;
         ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
           "\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 597)) ;
       }
       break ;
     }
-    enumerator_22234.gotoNextObject () ;
+    enumerator_22246.gotoNextObject () ;
   }
 }
 

@@ -150,7 +150,7 @@ override method @staticArrayAST enterInContext
       end
       propertyNameSet += !propertyName
       propertyList += !propertyName !propertyType
-      let objectIR = @objectIR.property {!type:propertyType !plmName:propertyName !access:.indexed{!index:propertyIndex}}
+      let objectIR = @objectIR.propertyRef {!type:propertyType !plmName:propertyName !access:.indexed{!index:propertyIndex}}
       [!?staticlistPropertyMap insertKey
         !propertyName
         !true # Public
@@ -186,7 +186,7 @@ override method @staticArrayAST enterInContext
       [!?staticlistPropertyMap insertKey
         !propertyName
         !true # Public
-        !.property {!type:propertyType !plmName:propertyName !access:.indexed{!index:propertyIndex}}
+        !.propertyRef {!type:propertyType !plmName:propertyName !access:.indexed{!index:propertyIndex}}
         !propertyType
         !.indexed{!index:propertyIndex}
       ]

@@ -16,9 +16,9 @@ enum @objectIR {
   case selfObject (@PLMType type)
   case globalVariableReference (@PLMType type @lstring plmName)
   case localVariableReference (@PLMType type @lstring plmName)
-  case temporaryReference (@PLMType type @lstring llvmName)
+  case llvmReference (@PLMType type @lstring llvmName)
 #--- Structure property
-  case property (@PLMType type @lstring plmName @propertyAccessKind access)
+  case propertyRef (@PLMType type @lstring plmName @propertyAccessKind access)
 #--- Values
   case llvmTemporaryValue (@PLMType type @lstring llvmName)
   case literalInteger  (@PLMType type @bigint value)
@@ -33,7 +33,7 @@ getter @objectIR location -> @location {
   switch self
   case null :
     error .nowhere : "<<@objectIR location null>>" : result
-  case property (* plmName *) :
+  case propertyRef (* plmName *) :
     result = plmName
   case globalVariableReference (* plmName) :
     result = plmName
@@ -47,7 +47,7 @@ getter @objectIR location -> @location {
     error .nowhere : "<<@objectIR location literalInteger>>" : result
   case llvmTemporaryValue (* llvmName) :
     result = llvmName
-  case temporaryReference (* llvmName) :
+  case llvmReference (* llvmName) :
     result = llvmName
   case llvmStructureConstant (* *) :
     error .nowhere : "<<@objectIR location llvmStructureConstant>>" : result
@@ -67,14 +67,14 @@ getter @objectIR isGlobalVariable -> @bool {
 getter @objectIR llvmName -> @string {
   switch self
   case null : error [self location] : "<<@objectIR llvmName null>>" : result
-  case property (***) : error [self location] : "<<@objectIR property llvmName>>" : result
+  case propertyRef (***) : error [self location] : "<<@objectIR property llvmName>>" : result
   case globalVariableReference (* plmName) : result = llvmNameForGlobalVariable (!plmName)
   case localVariableReference (* plmName)  : result = llvmNameForLocalVariable (!plmName)
   case zero (*) : result = "zeroinitializer"
   case selfObject (*) : result = "%self"
   case literalInteger (* @bigint value) : result = [value string]
   case llvmTemporaryValue (* llvmName) : result = llvmName
-  case temporaryReference (* llvmName) : result = llvmName
+  case llvmReference (* llvmName) : result = llvmName
   case llvmStructureConstant (* @sortedOperandIRList inValues) :
     result = "{"
     for () in inValues
@@ -95,8 +95,8 @@ getter @objectIR type -> @PLMType {
   switch self
   case null :
     error [self location] : "<<@objectIR type null>>" : result
-  case temporaryReference (type *) : result = type
-  case property (type **) : result = type
+  case llvmReference (type *) : result = type
+  case propertyRef (type **) : result = type
   case globalVariableReference (type *) : result = type
   case localVariableReference (type *) : result = type
   case zero (type) : result = type
@@ -125,10 +125,10 @@ getter @objectIR key -> @string {
 getter @objectIR withType ?let @PLMType inType -> @objectIR {
   switch self
   case null : error [self location] : "<<@objectIR withType null>>" : result
-  case temporaryReference (* llvmName) :
-    result = .temporaryReference {!type:inType !llvmName:llvmName}
-  case property (* plmName access) :
-    result = .property {!type:inType !plmName:plmName !access:access}
+  case llvmReference (* llvmName) :
+    result = .llvmReference {!type:inType !llvmName:llvmName}
+  case propertyRef (* plmName access) :
+    result = .propertyRef {!type:inType !plmName:plmName !access:access}
   case localVariableReference (* name) :
     result = .localVariableReference {!type: inType !plmName: name}
   case globalVariableReference (* name) :
@@ -153,8 +153,8 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
 getter @objectIR name -> @string {
   switch self
   case null : error [self location] : "<<@objectIR name null>>" : result
-  case temporaryReference (* llvmName) : result = llvmName
-  case property (* name *) : result = name
+  case llvmReference (* llvmName) : result = llvmName
+  case propertyRef (* name *) : result = name
   case localVariableReference (* name) : result = name
   case globalVariableReference (* name) : result = name
   case zero (*) : result = "zeroinitializer"
@@ -174,8 +174,8 @@ getter @objectIR name -> @string {
 getter @objectIR isStatic -> @bool {
   switch self
   case null : error [self location] : "<<@objectIR isStatic null>>" : result
-  case temporaryReference (**) : result = false
-  case property (***) : result = false
+  case llvmReference (**) : result = false
+  case propertyRef (***) : result = false
   case localVariableReference (* *) : result = false
   case globalVariableReference (* *) : result = false
   case zero (*) : result = true

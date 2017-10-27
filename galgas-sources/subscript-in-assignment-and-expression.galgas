@@ -106,7 +106,7 @@ proc handleArraySubscript
     if (indexValue < 0G) || (indexValue >= inArraySize) then
       error inErrorLocation : "static index should be positive and < " + inArraySize : ioObjectPtr
     else
-      let result = @objectIR.temporaryReference {
+      let result = @objectIR.llvmReference {
         !type:inElementType
         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
       }
@@ -130,7 +130,7 @@ proc handleArraySubscript
         error inErrorLocation : "index computation can generate panic" : ioObjectPtr
       end
     end
-      let result = @objectIR.temporaryReference {
+      let result = @objectIR.llvmReference {
         !type:inElementType
         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
       }

@@ -326,7 +326,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     if inSelfType == .void then
       error mIdentifier : "self is not available in this context" : currentObject
     else
-      currentObject = .temporaryReference {!type:inSelfType !llvmName:.new {!"%self" !mIdentifier.location}}
+      currentObject = .llvmReference {!type:inSelfType !llvmName:.new {!"%self" !mIdentifier.location}}
     end
   else
     [ioUniversalMap searchValuedObject !mIdentifier ?currentObject]

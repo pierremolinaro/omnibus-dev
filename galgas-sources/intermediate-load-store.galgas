@@ -14,10 +14,10 @@ setter @instructionListIR appendStoreFromReference
     [!?self appendStoreGlobalVariable !plmName !type !inValue]
   case localVariableReference (@PLMType type plmName) :
     [!?self appendStoreLocalVariable !plmName !type !inValue]
-  case temporaryReference (@PLMType type llvmName) :
+  case llvmReference (@PLMType type llvmName) :
     [!?self appendStoreTemporaryReference !type !llvmName !inValue]
 #--- Structure property
-  case property (* * *) :
+  case propertyRef (* * *) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue property>>"
 #--- Values
   case llvmTemporaryValue (* llvmName) :
@@ -59,14 +59,14 @@ setter @instructionListIR appendLoadFromReference
       !name
       !false
     ]
-  case temporaryReference (@PLMType type llvmName) :
+  case llvmReference (@PLMType type llvmName) :
     getNewTempVariable (!type !llvmName !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromTemporaryReference
       !outResultingValue
       !llvmName
     ]
 #--- Structure property
-  case property (type plmName *) :
+  case propertyRef (type plmName *) :
     getNewTempVariable (!type !plmName !?ioTemporaries ?outResultingValue)
     [!?self appendGetPropertyReference
       !outResultingValue
