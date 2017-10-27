@@ -6,9 +6,7 @@ setter @instructionListIR appendStoreFromReference
 {
   switch inTargetReference
 #--- References
-  case globalVariableRef (@PLMType type @lstring plmName) :
-    [!?self appendStoreGlobalVariable !plmName !type !inValue]
-  case llvmReference (@PLMType type llvmName) :
+  case reference (@PLMType type llvmName) :
     [!?self appendStoreTemporaryReference !type !llvmName !inValue]
 #--- Structure property
   case propertyRef (* * *) :
@@ -39,11 +37,7 @@ setter @instructionListIR appendLoadFromReference
   switch inSource
   case null :
     error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
-#--- References
-  case globalVariableRef (@PLMType type @lstring name) :
-    getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
-    [!?self appendLoadGlobalVariable !outResultingValue !name]
-  case llvmReference (@PLMType type llvmName) :
+  case reference (@PLMType type llvmName) :
     getNewTempVariable (!type !.nowhere !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromTemporaryReference
       !outResultingValue

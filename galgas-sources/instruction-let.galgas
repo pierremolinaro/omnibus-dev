@@ -109,7 +109,7 @@ override method @letInstructionWithAssignmentAST analyze
   ioTemporaries.mTemporaryIndex ++
   if [result key] != staticIntegerTypeName () then
     ioAllocaList += !plmName ![[result type] llvmTypeName]
-    let localConstant = @objectIR.llvmReference {!type:[result type] !llvmName:llvmNameForLocalVariable (!plmName)}
+    let localConstant = @objectIR.reference {!type:[result type] !llvmName:llvmNameForLocalVariable (!plmName)}
     [!?ioInstructionGenerationList appendStoreFromReference !localConstant !result]
   end
   [!?ioUniversalMap insertLocalConstant !mConstantName ![result type] !plmName]
