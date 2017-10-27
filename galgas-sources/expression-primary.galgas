@@ -439,7 +439,7 @@ private proc analyzePrimaryExpression
     if [[currentPointer type] isStructure] then
       [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
       [propertyMap searchKey !propertyName ?2* ?let type ?*]
-      let newObject = @objectIR.llvmReference {
+      let newObject = @objectIR.reference {
          !type:type
          !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
@@ -579,7 +579,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
 #--- object access, with self
   @internalRepresentation internalRepresentation= .structureMember {
     !propertyName:mObjectName
-    !currentPointerIR:.llvmReference {!type:inSelfType !llvmName:llvmNameForSelf ()}
+    !currentPointerIR:.reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
   }
 #--- Access list
   for (access) in mAccessList do
@@ -641,7 +641,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
     if [[currentPointer type] isStructure] then
       [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
-      let newObject = @objectIR.llvmReference {
+      let newObject = @objectIR.reference {
          !type:[masterPropertyIR type]
          !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
@@ -747,7 +747,7 @@ private proc analyzePrimaryExpressionWithSelf
     if [[currentPointer type] isStructure] then
       [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
-      let newObject = @objectIR.llvmReference {
+      let newObject = @objectIR.reference {
          !type:[masterPropertyIR type]
          !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
@@ -766,7 +766,7 @@ private proc analyzePrimaryExpressionWithSelf
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inSelfLocation : "volatileIndirectReference 2": outResult
   case universalReference (@PLMType type @string llvmName) :
-    outResult = .llvmReference {!type:type !llvmName:[llvmName nowhere]}
+    outResult = .reference {!type:type !llvmName:[llvmName nowhere]}
   end
 }
 
@@ -789,14 +789,14 @@ private proc handlePropertyAccessInExpression
   case standAloneIdentifier (identifier) :
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?let @objectIR objectIR]
     switch objectIR
-    case globalVariableRef (type *) :
-      if [type isStructure] then
-        ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
-      else
-        error identifier : "this should be a structure instance" : ioInternalRepresentation
-      end
+#    case globalVariableRef (type *) :
+#      if [type isStructure] then
+#        ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
+#      else
+#        error identifier : "this should be a structure instance" : ioInternalRepresentation
+#      end
     case null :
-    case llvmReference (type llvmName) :
+    case reference (type llvmName) :
       if [type isStructure] then
         let objectIR = @objectIR.llvmTemporaryValue {
           !type:type
@@ -823,7 +823,7 @@ private proc handlePropertyAccessInExpression
     if [[currentPointer type] isStructure] then
       [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
       [propertyMap searchKey !masterPropertyName ?* ?let @objectIR masterPropertyIR ?2*]
-      let newObject = @objectIR.llvmReference {
+      let newObject = @objectIR.reference {
          !type:[masterPropertyIR type]
          !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
@@ -896,7 +896,7 @@ private proc handleArrayAccessInExpression
       errorLocation = propertyName
       [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
-      variableIR = @objectIR.llvmReference {
+      variableIR = @objectIR.reference {
          !type:[masterPropertyIR type]
          !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
@@ -914,7 +914,7 @@ private proc handleArrayAccessInExpression
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inEndOfIndex : "volatileIndirectReference 4": variableIR, errorLocation
   case universalReference (@PLMType type @string llvmName) :
-    variableIR = @objectIR.llvmReference {!type:type !llvmName:[llvmName nowhere]}
+    variableIR = @objectIR.reference {!type:type !llvmName:[llvmName nowhere]}
     errorLocation = .nowhere
 #    error inEndOfIndex : "indirectReference 4": variableIR, errorLocation
   end
@@ -1098,7 +1098,7 @@ private proc handleMethodCallInExpression
     #--- Enter in invocation graph
       [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
     case propertyIndirectCall (type) :
-      let propertyReference = @objectIR.llvmReference {
+      let propertyReference = @objectIR.reference {
          !type:type
          !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }

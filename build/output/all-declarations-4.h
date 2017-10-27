@@ -1534,16 +1534,6 @@ class GALGAS_location extensionGetter_location (const class GALGAS_objectIR & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Extension getter '@objectIR isGlobalVariable' (as function)                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool extensionGetter_isGlobalVariable (const class GALGAS_objectIR & inObject,
-                                                    class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Function 'literalCharacterArrayName'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
