@@ -16,7 +16,7 @@ enum @objectIR {
   case selfObject (@PLMType type)
   case globalVariableReference (@PLMType type @lstring plmName)
   case localVariableReference (@PLMType type @lstring plmName)
-  case llvmReference (@PLMType type @lstring llvmName)
+  case llvmReference (@PLMType type @string llvmName)
 #--- Structure property
   case propertyRef (@PLMType type @lstring plmName @propertyAccessKind access)
 #--- Values
@@ -48,7 +48,7 @@ getter @objectIR location -> @location {
   case llvmTemporaryValue (* llvmName) :
     result = llvmName
   case llvmReference (* llvmName) :
-    result = llvmName
+    result = [llvmName nowhere]
   case llvmStructureConstant (* *) :
     error .nowhere : "<<@objectIR location llvmStructureConstant>>" : result
   case literalString  (* *) :

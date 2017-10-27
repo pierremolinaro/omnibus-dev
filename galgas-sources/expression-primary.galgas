@@ -441,7 +441,7 @@ private proc analyzePrimaryExpression
       [propertyMap searchKey !propertyName ?2* ?let type ?*]
       let newObject = @objectIR.llvmReference {
          !type:type
-         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -643,7 +643,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.llvmReference {
          !type:[masterPropertyIR type]
-         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -749,7 +749,7 @@ private proc analyzePrimaryExpressionWithSelf
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.llvmReference {
          !type:[masterPropertyIR type]
-         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -829,7 +829,7 @@ private proc handlePropertyAccessInExpression
       [propertyMap searchKey !masterPropertyName ?* ?let @objectIR masterPropertyIR ?2*]
       let newObject = @objectIR.llvmReference {
          !type:[masterPropertyIR type]
-         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
+         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -902,7 +902,7 @@ private proc handleArrayAccessInExpression
       [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
       variableIR = @objectIR.llvmReference {
          !type:[masterPropertyIR type]
-         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -1104,7 +1104,7 @@ private proc handleMethodCallInExpression
     case propertyIndirectCall (type) :
       let propertyReference = @objectIR.llvmReference {
          !type:type
-         !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !inMethodName}
+         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
