@@ -42,7 +42,7 @@ syntax extension plm_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
   #--- LValue
-    <lvalue> ?let lvalueNoSelf
+    <lvalue> ?let lvalue
     let instructionLocation = @location.here
   #--- Assignment operator
     <assignment_operator> ?let infixOperator ?let operatorLocation
@@ -50,7 +50,7 @@ syntax extension plm_syntax {
     <expression> ?let @expressionAST rightExpression
   #--- Build source expression
     @primaryInExpressionAccessListAST accessList = {}
-    for (access) in lvalueNoSelf.mAccessList do
+    for (access) in lvalue.mAccessList do
       switch access
       case property (@lstring name) :
         accessList += !.property {!name:name}
@@ -58,7 +58,16 @@ syntax extension plm_syntax {
         accessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
       end
     end
-    let leftExpression = @primaryInExpressionAST.new {!.noSelf !lvalueNoSelf.mIdentifier !accessList}
+    @expressionAST leftExpression
+    if lvalue.mIdentifier.string != "" then
+      leftExpression = @primaryInExpressionAST.new {!.noSelf !lvalue.mIdentifier !accessList}
+    elsif ([accessList length] > 0) && [[accessList mAccessAtIndex !0] isProperty] then
+      [!?accessList popFirst ?let access]
+      [access property ?name:let propertyName]
+      leftExpression = @primaryInExpressionAST.new {!.selfAt {!location:lvalue.mIdentifier} !propertyName !accessList}
+    else
+      error instructionLocation : "invalid lvalue" : leftExpression
+    end
   #--- Build source expression
     let expression = @infixOperatorExpressionAST.new {
       !leftExpression
@@ -69,7 +78,7 @@ syntax extension plm_syntax {
   #--- Build assignment instruction
     ioInstructionList += !@assignmentInstructionAST.new {
       !instructionLocation
-      !lvalueNoSelf
+      !lvalue
       !expression
     }
   }

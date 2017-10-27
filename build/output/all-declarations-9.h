@@ -81,29 +81,6 @@ void routine_handleMethodCallInExpression (const class GALGAS_lstring constinArg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Routine 'handleStandAloneFunctionCallInExpression'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleStandAloneFunctionCallInExpression (class GALGAS_internalRepresentation & ioArgument0,
-                                                       const class GALGAS_lstring constinArgument1,
-                                                       const class GALGAS_PLMType constinArgument2,
-                                                       const class GALGAS_bool constinArgument3,
-                                                       const class GALGAS_lstring constinArgument4,
-                                                       const class GALGAS_semanticContext constinArgument5,
-                                                       const class GALGAS_mode constinArgument6,
-                                                       class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                                       class GALGAS_staticStringMap & ioArgument8,
-                                                       class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
-                                                       class GALGAS_allocaList & ioArgument10,
-                                                       const class GALGAS_effectiveArgumentListAST constinArgument11,
-                                                       const class GALGAS_location constinArgument12,
-                                                       class GALGAS_instructionListIR & ioArgument13,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                             Routine 'analyzeGuardCall'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
