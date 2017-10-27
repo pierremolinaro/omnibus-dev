@@ -227,7 +227,7 @@ override method @procedureCallInstructionAST analyze
       error mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
     else
       currentType = inSelfType
-      currentLLVMAddressVar = "%self"
+      currentLLVMAddressVar = llvmNameForSelf ()
     end
   else
     [ioUniversalMap searchEntity !mIdentifier ?let @possibleValuedObject entity]

@@ -400,7 +400,7 @@ private proc analyzeSelfAssignmentTarget
     error inSelfLocation : "'self' should be a structure instance" : outInternalRepresentation
   else
     var currentType = inSelfType
-    var currentLLVMName = "%self"
+    var currentLLVMName = llvmNameForSelf ()
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :

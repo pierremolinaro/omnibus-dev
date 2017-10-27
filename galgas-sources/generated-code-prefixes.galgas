@@ -249,6 +249,12 @@ func llvmNameForLocalVariable ?let @string inName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once llvmNameForSelf -> @string {
+  result = "%self"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func llvmNameForGlobalVariable ?let @string inName -> @string {
   result = "@" + ["gvar." + inName assemblerRepresentation]
 }

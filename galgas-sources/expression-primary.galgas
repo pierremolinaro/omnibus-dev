@@ -685,7 +685,7 @@ private proc analyzePrimaryExpressionWithSelf
 #--- object access, with self
   @internalRepresentation internalRepresentation= .universalReference {
     !type:inSelfType
-    !llvmName:"%self"
+    !llvmName:llvmNameForSelf ()
   }
 #--- Access list
   for (access) in inAccessList do
