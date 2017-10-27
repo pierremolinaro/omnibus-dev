@@ -4200,7 +4200,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_localVariableReference::comp
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_objectIR_llvmReference::cEnumAssociatedValues_objectIR_llvmReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                            const GALGAS_lstring & inAssociatedValue1
+                                                                                            const GALGAS_string & inAssociatedValue1
                                                                                             COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -4507,7 +4507,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_localVariableReference (const GALGA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR GALGAS_objectIR::constructor_llvmReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                            const GALGAS_lstring & inAssociatedValue1
+                                                            const GALGAS_string & inAssociatedValue1
                                                             COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
@@ -4673,7 +4673,7 @@ void GALGAS_objectIR::method_localVariableReference (GALGAS_PLMType & outAssocia
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_objectIR::method_llvmReference (GALGAS_PLMType & outAssociatedValue0,
-                                            GALGAS_lstring & outAssociatedValue1,
+                                            GALGAS_string & outAssociatedValue1,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_llvmReference) {

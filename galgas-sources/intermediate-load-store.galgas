@@ -60,7 +60,7 @@ setter @instructionListIR appendLoadFromReference
       !false
     ]
   case llvmReference (@PLMType type llvmName) :
-    getNewTempVariable (!type !llvmName !?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !.nowhere !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromTemporaryReference
       !outResultingValue
       !llvmName
