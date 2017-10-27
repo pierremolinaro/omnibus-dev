@@ -71,7 +71,7 @@ getter @objectIR llvmName -> @string {
   case globalVariableReference (* plmName) : result = llvmNameForGlobalVariable (!plmName)
   case localVariableReference (* plmName)  : result = llvmNameForLocalVariable (!plmName)
   case zero (*) : result = "zeroinitializer"
-  case selfObject (*) : result = "%self"
+  case selfObject (*) : result = llvmNameForSelf ()
   case literalInteger (* @bigint value) : result = [value string]
   case llvmTemporaryValue (* llvmName) : result = llvmName
   case llvmReference (* llvmName) : result = llvmName
