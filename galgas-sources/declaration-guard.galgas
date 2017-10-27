@@ -322,18 +322,18 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   @instructionListIR baseGuardInstructionGenerationList = {}
 #--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
   @objectIR currentObject
-  if mTargetAST.mIdentifier.string == "" then # Receiver is self
+  if mIdentifier.string == "" then # Receiver is self
     if inSelfType == .void then
-      error mTargetAST.mIdentifier : "self is not available in this context" : currentObject
+      error mIdentifier : "self is not available in this context" : currentObject
     else
-      currentObject = .temporaryReference {!type:inSelfType !llvmName:.new {!"%self" !mTargetAST.mIdentifier.location}}
+      currentObject = .temporaryReference {!type:inSelfType !llvmName:.new {!"%self" !mIdentifier.location}}
     end
   else
-    [ioUniversalMap searchValuedObject !mTargetAST.mIdentifier ?currentObject]
+    [ioUniversalMap searchValuedObject !mIdentifier ?currentObject]
   end
-  var currentErrorLocation = mTargetAST.mIdentifier.location
+  var currentErrorLocation = mIdentifier.location
 #--- Insulate last access
-  var accessList = mTargetAST.mAccessList
+  var accessList = mAccessList
   [!?accessList popLast ?let lastAccess]
 #---- Loop on access list
   for (access) in accessList do

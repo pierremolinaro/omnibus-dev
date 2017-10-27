@@ -16,7 +16,8 @@ class @standAloneProcedureCallInstructionAST : @callInstructionAST {
 #·······················································································································
 
 class @procedureCallInstructionAST : @callInstructionAST {
-  @LValueAST mTargetAST
+  @lstring mIdentifier
+  @accessInAssignmentListAST mAccessList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -50,7 +51,8 @@ syntax extension plm_syntax {
         !instructionLocation
         !arguments
         !endOfArguments
-        !assignmentTargetAST
+        !assignmentTargetAST.mIdentifier
+        !assignmentTargetAST.mAccessList
       }
     end
   }
@@ -66,7 +68,14 @@ syntax extension plm_syntax {
 override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+  for (access) in mAccessList do
+    switch access
+    case property (*) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    end
+  end
+#  [mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
   for () in mArguments do
     switch mEffectiveParameterKind
     case input (*):
@@ -213,36 +222,36 @@ override method @procedureCallInstructionAST analyze
 #    If identifier is empty string, the receiver is "self"
   @PLMType currentType
   @string currentLLVMAddressVar
-  if mTargetAST.mIdentifier.string == "" then # Receiver is self
+  if mIdentifier.string == "" then # Receiver is self
     if inSelfType == .void then
-      error mTargetAST.mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
+      error mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
     else
       currentType = inSelfType
       currentLLVMAddressVar = "%self"
     end
   else
-    [ioUniversalMap searchEntity !mTargetAST.mIdentifier ?let @possibleValuedObject entity]
+    [ioUniversalMap searchEntity !mIdentifier ?let @possibleValuedObject entity]
     switch entity
     case undefined :
-      error mTargetAST.mIdentifier : "undefined in this context" : currentType, currentLLVMAddressVar
+      error mIdentifier : "undefined in this context" : currentType, currentLLVMAddressVar
     case module (@PLMType type) :
       currentType = type
-      currentLLVMAddressVar = llvmNameForGlobalVariable (!mTargetAST.mIdentifier)
+      currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
     case register (* * * * * * *) :
-      error mTargetAST.mIdentifier
+      error mIdentifier
         : "a control register constant cannot be used in this context"
         : currentType, currentLLVMAddressVar
     case globalConstant (*) :
-      error mTargetAST.mIdentifier
+      error mIdentifier
         : "a global constant cannot be used in this context"
         : currentType, currentLLVMAddressVar
     case localConstant (* *) :
-      error mTargetAST.mIdentifier
+      error mIdentifier
         : "a local constant cannot be used in this context"
         : currentType, currentLLVMAddressVar
     case globalVariable (* @PLMType type) :
       currentType = type
-      currentLLVMAddressVar = llvmNameForGlobalVariable (!mTargetAST.mIdentifier)
+      currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
     case localVariable (@PLMType type @lstring plmName) :
       currentType = type
       currentLLVMAddressVar = llvmNameForLocalVariable (!plmName)
@@ -250,12 +259,12 @@ override method @procedureCallInstructionAST analyze
   end
 #--- Check current object in a structure instance
   if not [currentType isStructure] then
-    error mTargetAST.mIdentifier : "receiver has no property"
+    error mIdentifier : "receiver has no property"
   else
   #--- Get current object property map
     [currentType structure ?1* ?propertyMap:@propertyMap propertyMap ?3*]
   #--- Insulate last access (should be a "property", used as routine name
-    var accessList = mTargetAST.mAccessList
+    var accessList = mAccessList
     [!?accessList popLast ?let lastAccess]
   #--- loop on access list
     for (access) in accessList do
@@ -269,7 +278,7 @@ override method @procedureCallInstructionAST analyze
           ?let @propertyAccessKind propertyAccess
         ]
         if not [propertyType isStructure] then
-          error mTargetAST.mIdentifier : "receiver has no property"
+          error mIdentifier : "receiver has no property"
         else
           [propertyType structure ?1* ?propertyMap:propertyMap ?3*]
           switch propertyAccess
@@ -359,7 +368,7 @@ override method @procedureCallInstructionAST analyze
         case staticCall :
         #--- Code generation
           ioInstructionGenerationList += !@staticRoutineCallIR.new {
-            !mTargetAST.mIdentifier
+            !mIdentifier
             !.null # No result
             !routineMangledName
             !LLVMInvocationRoutineName
