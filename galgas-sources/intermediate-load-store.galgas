@@ -5,15 +5,9 @@ setter @instructionListIR appendStoreFromReference
   ?let @objectIR inValue
 {
   switch inTargetReference
-#--- Temporary ?
-  case selfObject (*) :
-    error [inTargetReference location] : "<<@instructionListIR appendStoreFromReference selfObject>>"
 #--- References
-  case globalVariableReference (@PLMType type @lstring plmName) :
-    [!?self appendNoteGlobalVariableAccess !plmName]
+  case globalVariableRef (@PLMType type @lstring plmName) :
     [!?self appendStoreGlobalVariable !plmName !type !inValue]
-  case localVariableReference (@PLMType type plmName) :
-    [!?self appendStoreLocalVariable !plmName !type !inValue]
   case llvmReference (@PLMType type llvmName) :
     [!?self appendStoreTemporaryReference !type !llvmName !inValue]
 #--- Structure property
@@ -45,20 +39,10 @@ setter @instructionListIR appendLoadFromReference
   switch inSource
   case null :
     error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
-  case selfObject (*) :
-    outResultingValue = inSource
 #--- References
-  case globalVariableReference (@PLMType type @lstring name) :
+  case globalVariableRef (@PLMType type @lstring name) :
     getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
-    [!?self appendNoteGlobalVariableAccess !name]
     [!?self appendLoadGlobalVariable !outResultingValue !name]
-  case localVariableReference (@PLMType type name) :
-    getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
-    [!?self appendLoadLocalVariable
-      !outResultingValue
-      !name
-      !false
-    ]
   case llvmReference (@PLMType type llvmName) :
     getNewTempVariable (!type !.nowhere !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromTemporaryReference

@@ -268,7 +268,7 @@ proc buildSemanticContext
     let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
     [!?outSemanticContext.mGlobalConstantMap insertKey
       !lkey
-      !.globalVariableReference {!type:[staticListType type] !plmName:lkey}
+      !.globalVariableRef {!type:[staticListType type] !plmName:lkey}
     ]
   end
 #--- Check global var declaration

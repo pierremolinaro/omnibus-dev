@@ -4100,38 +4100,9 @@ GALGAS_propertyMap GALGAS_propertyMap::extractObject (const GALGAS_object & inOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_objectIR_selfObject::cEnumAssociatedValues_objectIR_selfObject (const GALGAS_PLMType & inAssociatedValue0
-                                                                                      COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectIR_selfObject::description (C_String & ioString,
-                                                             const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectIR_selfObject::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectIR_selfObject * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_selfObject *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_objectIR_globalVariableReference::cEnumAssociatedValues_objectIR_globalVariableReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                                                const GALGAS_lstring & inAssociatedValue1
-                                                                                                                COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_objectIR_globalVariableRef::cEnumAssociatedValues_objectIR_globalVariableRef (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                    const GALGAS_lstring & inAssociatedValue1
+                                                                                                    COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
@@ -4139,8 +4110,8 @@ mAssociatedValue1 (inAssociatedValue1) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_objectIR_globalVariableReference::description (C_String & ioString,
-                                                                          const int32_t inIndentation) const {
+void cEnumAssociatedValues_objectIR_globalVariableRef::description (C_String & ioString,
+                                                                    const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
@@ -4149,43 +4120,8 @@ void cEnumAssociatedValues_objectIR_globalVariableReference::description (C_Stri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_objectIR_globalVariableReference::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectIR_globalVariableReference * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_globalVariableReference *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_objectIR_localVariableReference::cEnumAssociatedValues_objectIR_localVariableReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                                              const GALGAS_lstring & inAssociatedValue1
-                                                                                                              COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectIR_localVariableReference::description (C_String & ioString,
-                                                                         const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectIR_localVariableReference::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectIR_localVariableReference * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_localVariableReference *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_objectIR_globalVariableRef::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectIR_globalVariableRef * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_globalVariableRef *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -4459,45 +4395,14 @@ GALGAS_objectIR GALGAS_objectIR::constructor_null (UNUSED_LOCATION_ARGS) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_selfObject (const GALGAS_PLMType & inAssociatedValue0
-                                                         COMMA_LOCATION_ARGS) {
-  GALGAS_objectIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_selfObject ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_selfObject (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_objectIR::constructor_globalVariableReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                                      const GALGAS_lstring & inAssociatedValue1
-                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_objectIR GALGAS_objectIR::constructor_globalVariableRef (const GALGAS_PLMType & inAssociatedValue0,
+                                                                const GALGAS_lstring & inAssociatedValue1
+                                                                COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_globalVariableReference ;
+    result.mEnum = kEnum_globalVariableRef ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_globalVariableReference (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_objectIR::constructor_localVariableReference (const GALGAS_PLMType & inAssociatedValue0,
-                                                                     const GALGAS_lstring & inAssociatedValue1
-                                                                     COMMA_LOCATION_ARGS) {
-  GALGAS_objectIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_localVariableReference ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_localVariableReference (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectIR_globalVariableRef (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -4618,53 +4523,18 @@ GALGAS_objectIR GALGAS_objectIR::constructor_zero (const GALGAS_PLMType & inAsso
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_objectIR::method_selfObject (GALGAS_PLMType & outAssociatedValue0,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_selfObject) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @objectIR selfObject invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectIR_selfObject * ptr = (const cEnumAssociatedValues_objectIR_selfObject *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_objectIR::method_globalVariableReference (GALGAS_PLMType & outAssociatedValue0,
-                                                      GALGAS_lstring & outAssociatedValue1,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_globalVariableReference) {
+void GALGAS_objectIR::method_globalVariableRef (GALGAS_PLMType & outAssociatedValue0,
+                                                GALGAS_lstring & outAssociatedValue1,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_globalVariableRef) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     C_String s ;
-    s << "method @objectIR globalVariableReference invoked with an invalid enum value" ;
+    s << "method @objectIR globalVariableRef invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_objectIR_globalVariableReference * ptr = (const cEnumAssociatedValues_objectIR_globalVariableReference *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_objectIR::method_localVariableReference (GALGAS_PLMType & outAssociatedValue0,
-                                                     GALGAS_lstring & outAssociatedValue1,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_localVariableReference) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    C_String s ;
-    s << "method @objectIR localVariableReference invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectIR_localVariableReference * ptr = (const cEnumAssociatedValues_objectIR_localVariableReference *) unsafePointer () ;
+    const cEnumAssociatedValues_objectIR_globalVariableRef * ptr = (const cEnumAssociatedValues_objectIR_globalVariableRef *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
@@ -4805,12 +4675,10 @@ void GALGAS_objectIR::method_zero (GALGAS_PLMType & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_objectIR [12] = {
+static const char * gEnumNameArrayFor_objectIR [10] = {
   "(not built)",
   "null",
-  "selfObject",
-  "globalVariableReference",
-  "localVariableReference",
+  "globalVariableRef",
   "llvmReference",
   "propertyRef",
   "llvmTemporaryValue",
@@ -4828,20 +4696,8 @@ GALGAS_bool GALGAS_objectIR::getter_isNull (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_objectIR::getter_isSelfObject (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_selfObject == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectIR::getter_isGlobalVariableReference (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalVariableReference == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectIR::getter_isLocalVariableReference (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_localVariableReference == mEnum) ;
+GALGAS_bool GALGAS_objectIR::getter_isGlobalVariableRef (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalVariableRef == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14771,6 +14627,264 @@ GALGAS_extendStaticArrayExpressionListAST GALGAS_extendStaticArrayExpressionList
       result = *p ;
     }else{
       inCompiler->castError ("extendStaticArrayExpressionListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_staticArrayMap::cMapElement_staticArrayMap (const GALGAS_lstring & inKey,
+                                                        const GALGAS_stringset & in_mInvokedFunctionSet
+                                                        COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mProperty_mInvokedFunctionSet (in_mInvokedFunctionSet) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_staticArrayMap::isValid (void) const {
+  return mProperty_lkey.isValid () && mProperty_mInvokedFunctionSet.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_staticArrayMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_staticArrayMap (mProperty_lkey, mProperty_mInvokedFunctionSet COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_staticArrayMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mInvokedFunctionSet" ":" ;
+  mProperty_mInvokedFunctionSet.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_staticArrayMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_staticArrayMap * operand = (cMapElement_staticArrayMap *) inOperand ;
+  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mInvokedFunctionSet.objectCompare (operand->mProperty_mInvokedFunctionSet) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticArrayMap::GALGAS_staticArrayMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticArrayMap::GALGAS_staticArrayMap (const GALGAS_staticArrayMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticArrayMap & GALGAS_staticArrayMap::operator = (const GALGAS_staticArrayMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticArrayMap GALGAS_staticArrayMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_staticArrayMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticArrayMap GALGAS_staticArrayMap::constructor_mapWithMapToOverride (const GALGAS_staticArrayMap & inMapToOverride
+                                                                               COMMA_LOCATION_ARGS) {
+  GALGAS_staticArrayMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticArrayMap GALGAS_staticArrayMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
+  GALGAS_staticArrayMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_staticArrayMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                 const GALGAS_stringset & inArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_staticArrayMap * p = NULL ;
+  macroMyNew (p, cMapElement_staticArrayMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@staticArrayMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_staticArrayMap::setter_insertKey (GALGAS_lstring inKey,
+                                              GALGAS_stringset inArgument0,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  cMapElement_staticArrayMap * p = NULL ;
+  macroMyNew (p, cMapElement_staticArrayMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "INTERNAL ERROR" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_staticArrayMap_searchKey = "INTERNAL ERROR" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_staticArrayMap::method_searchKey (GALGAS_lstring inKey,
+                                              GALGAS_stringset & outArgument0,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  const cMapElement_staticArrayMap * p = (const cMapElement_staticArrayMap *) performSearch (inKey,
+                                                                                             inCompiler,
+                                                                                             kSearchErrorMessage_staticArrayMap_searchKey
+                                                                                             COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_staticArrayMap) ;
+    outArgument0 = p->mProperty_mInvokedFunctionSet ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_staticArrayMap::getter_mInvokedFunctionSetForKey (const GALGAS_string & inKey,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_staticArrayMap * p = (const cMapElement_staticArrayMap *) attributes ;
+  GALGAS_stringset result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_staticArrayMap) ;
+    result = p->mProperty_mInvokedFunctionSet ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_staticArrayMap::setter_setMInvokedFunctionSetForKey (GALGAS_stringset inAttributeValue,
+                                                                 GALGAS_string inKey,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_staticArrayMap * p = (cMapElement_staticArrayMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_staticArrayMap) ;
+    p->mProperty_mInvokedFunctionSet = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_staticArrayMap * GALGAS_staticArrayMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                       const GALGAS_string & inKey
+                                                                                       COMMA_LOCATION_ARGS) {
+  cMapElement_staticArrayMap * result = (cMapElement_staticArrayMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_staticArrayMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_staticArrayMap::cEnumerator_staticArrayMap (const GALGAS_staticArrayMap & inEnumeratedObject,
+                                                        const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticArrayMap_2D_element cEnumerator_staticArrayMap::current (LOCATION_ARGS) const {
+  const cMapElement_staticArrayMap * p = (const cMapElement_staticArrayMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_staticArrayMap) ;
+  return GALGAS_staticArrayMap_2D_element (p->mProperty_lkey, p->mProperty_mInvokedFunctionSet) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_staticArrayMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mProperty_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset cEnumerator_staticArrayMap::current_mInvokedFunctionSet (LOCATION_ARGS) const {
+  const cMapElement_staticArrayMap * p = (const cMapElement_staticArrayMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_staticArrayMap) ;
+  return p->mProperty_mInvokedFunctionSet ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @staticArrayMap type                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_staticArrayMap ("staticArrayMap",
+                                       NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_staticArrayMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_staticArrayMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_staticArrayMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_staticArrayMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticArrayMap GALGAS_staticArrayMap::extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_staticArrayMap result ;
+  const GALGAS_staticArrayMap * p = (const GALGAS_staticArrayMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_staticArrayMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("staticArrayMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

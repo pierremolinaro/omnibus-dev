@@ -25,7 +25,6 @@ proc enterFormalArguments
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
     let typeProxy = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName} type]
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
-#    let objectIR = @objectIR.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
     switch argumentKind
     case input :
       [!?ioUniversalMap insertLocalConstant !formalArgumentName !typeProxy !formalArgumentName]

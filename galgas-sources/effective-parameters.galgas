@@ -143,8 +143,9 @@ proc analyzeEffectiveParameters
         !.input
         !.llvmTemporaryValue {
           !type:[objectIR type]
-          !llvmName:.new {!llvmNameForLocalVariable (![objectIR name])
-          ![objectIR location]}
+          !llvmName:[[objectIR llvmName] nowhere]
+#          !llvmName:.new {!llvmNameForLocalVariable (![objectIR name])
+#          ![objectIR location]}
         }
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
