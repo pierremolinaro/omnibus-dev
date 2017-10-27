@@ -327,7 +327,7 @@ override method @procedureCallInstructionAST analyze
       case staticCall :
         effectiveParameterListIR +=
           !.outputInput # Add receiver as first argument
-          !.temporaryReference {!type:currentType !llvmName:.new{!currentLLVMAddressVar !methodName.location}}
+          !.llvmReference {!type:currentType !llvmName:.new{!currentLLVMAddressVar !methodName.location}}
       case propertyIndirectCall (*) :
         error methodName : "not handled yet"
       end
@@ -378,14 +378,14 @@ override method @procedureCallInstructionAST analyze
         #--- Enter in invocation graph
           [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
         case propertyIndirectCall (type) :
-          let propertyReference = @objectIR.temporaryReference {
+          let propertyReference = @objectIR.llvmReference {
              !type:type
              !llvmName:.new {!"%temp." + ioTemporaries.mTemporaryIndex !methodName}
           }
           ioTemporaries.mTemporaryIndex ++
           [!?ioInstructionGenerationList appendGetPropertyReference
             !propertyReference
-            !.temporaryReference {!type:currentType !llvmName:.new{!currentLLVMAddressVar !methodName.location}}
+            !.llvmReference {!type:currentType !llvmName:.new{!currentLLVMAddressVar !methodName.location}}
             !methodName
           ]
         #--- Code generation
