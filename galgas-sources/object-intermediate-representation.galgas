@@ -10,7 +10,7 @@ enum @propertyAccessKind {
 #·······················································································································
 
 enum @objectIR {
-#--- No object
+#--- No object (for example, no return value for a procedure)
   case null
 #--- References
   case selfObject (@PLMType type)

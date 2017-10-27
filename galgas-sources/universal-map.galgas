@@ -264,17 +264,8 @@ method @universalPropertyAndRoutineMapForContext searchValuedObject
     error inValuedObjectName : "undefined in this context" : outObjectIR
   case module (@PLMType type) :
     outObjectIR = .globalVariableReference {!type:type !plmName:inValuedObjectName}
-  case register (readable writable type address sliceMap arraySize elementSize) :
-    outObjectIR = @objectIR.registerReference {
-      !type:type
-      !plmName:inValuedObjectName
-      !readable:readable
-      !writable:writable
-      !address:address
-      !sliceMap:sliceMap
-      !arraySize:arraySize
-      !elementSize:elementSize
-    }
+  case register (* * * * * * *) :
+    error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
   case localConstant (@PLMType type @lstring plmName) :
@@ -390,17 +381,8 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
     error inValuedObjectName : "undefined in this context" : outObjectIR
   case module (@PLMType type) :
     outObjectIR = .globalVariableReference {!type:type !plmName:inValuedObjectName}
-  case register (readable writable type address sliceMap arraySize elementSize) :
-    outObjectIR = @objectIR.registerReference {
-      !type:type
-      !plmName:inValuedObjectName
-      !readable:readable
-      !writable:writable
-      !address:address
-      !sliceMap:sliceMap
-      !arraySize:arraySize
-      !elementSize:elementSize
-    }
+  case register (* * * * * * *) :
+    error inValuedObjectName : "control register ??" : outObjectIR
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
   case localConstant (@PLMType type @lstring plmName) :
@@ -435,21 +417,8 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAcces
     error inValuedObjectName : "undefined in this context" : outObjectIR
   case module (*) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
-  case register (readable writable type address sliceMap arraySize elementSize) :
-    if writable then
-      outObjectIR = @objectIR.registerReference {
-        !type:type
-        !plmName:inValuedObjectName
-        !readable:readable
-        !writable:writable
-        !address:address
-        !sliceMap:sliceMap
-        !arraySize:arraySize
-        !elementSize:elementSize
-      }
-    else
-      error inValuedObjectName : "the register cannot be written" : outObjectIR
-    end
+  case register (* * * * * * *) :
+    error inValuedObjectName : "control register ???" : outObjectIR
   case globalConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case localConstant (* *) :
@@ -483,23 +452,8 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteA
     error inValuedObjectName : "undefined in this context" : outObjectIR
   case module (*) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
-  case register (readable writable type address sliceMap arraySize elementSize) :
-    if writable & readable then
-      outObjectIR = @objectIR.registerReference {
-        !type:type
-        !plmName:inValuedObjectName
-        !readable:readable
-        !writable:writable
-        !address:address
-        !sliceMap:sliceMap
-        !arraySize:arraySize
-        !elementSize:elementSize
-      }
-    elsif not readable then
-      error inValuedObjectName : "the register cannot be read" : outObjectIR
-    else
-      error inValuedObjectName : "the register cannot be written" : outObjectIR
-    end
+  case register (* * * * * * *) :
+    error inValuedObjectName : "control register ????" : outObjectIR
   case globalConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case localConstant (* *) :

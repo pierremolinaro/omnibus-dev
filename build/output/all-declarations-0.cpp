@@ -16305,9 +16305,9 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i86_parse (C_Lexique_
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i87_ (GALGAS_instructionListAST & ioArgument_ioInstructionList,
                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_callInstructionAST var_routineCallInstruction_1553 ;
-  nt_procedure_5F_call_ (var_routineCallInstruction_1553, inCompiler) ;
-  ioArgument_ioInstructionList.addAssign_operation (var_routineCallInstruction_1553  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 32)) ;
+  GALGAS_callInstructionAST var_routineCallInstruction_1593 ;
+  nt_procedure_5F_call_ (var_routineCallInstruction_1593, inCompiler) ;
+  ioArgument_ioInstructionList.addAssign_operation (var_routineCallInstruction_1593  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 33)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -16322,17 +16322,17 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i87_parse (C_Lexique_
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_procedure_5F_call_i88_ (GALGAS_callInstructionAST & outArgument_outInstruction,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outInstruction.drop () ; // Release 'out' argument
-  GALGAS_location var_instructionLocation_1819 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 38)) ;
-  GALGAS_LValueAST var_assignmentTargetAST_1874 ;
-  nt_lvalue_ (var_assignmentTargetAST_1874, inCompiler) ;
-  GALGAS_effectiveArgumentListAST var_arguments_1916 ;
-  GALGAS_location var_endOfArguments_1936 ;
-  nt_effective_5F_parameters_ (var_arguments_1916, var_endOfArguments_1936, inCompiler) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_assignmentTargetAST_1874.getter_mAccessList (SOURCE_FILE ("instruction-procedure-call.galgas", 41)).getter_length (SOURCE_FILE ("instruction-procedure-call.galgas", 41)).objectCompare (GALGAS_uint ((uint32_t) 0U))).operator_and (GALGAS_bool (kIsNotEqual, var_assignmentTargetAST_1874.getter_mIdentifier (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())) COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 41)).boolEnum () ;
+  GALGAS_location var_instructionLocation_1859 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 39)) ;
+  GALGAS_LValueAST var_assignmentTargetAST_1914 ;
+  nt_lvalue_ (var_assignmentTargetAST_1914, inCompiler) ;
+  GALGAS_effectiveArgumentListAST var_arguments_1956 ;
+  GALGAS_location var_endOfArguments_1976 ;
+  nt_effective_5F_parameters_ (var_arguments_1956, var_endOfArguments_1976, inCompiler) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_assignmentTargetAST_1914.getter_mAccessList (SOURCE_FILE ("instruction-procedure-call.galgas", 42)).getter_length (SOURCE_FILE ("instruction-procedure-call.galgas", 42)).objectCompare (GALGAS_uint ((uint32_t) 0U))).operator_and (GALGAS_bool (kIsNotEqual, var_assignmentTargetAST_1914.getter_mIdentifier (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())) COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 42)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    outArgument_outInstruction = GALGAS_standAloneProcedureCallInstructionAST::constructor_new (var_instructionLocation_1819, var_arguments_1916, var_endOfArguments_1936, var_assignmentTargetAST_1874.getter_mIdentifier (HERE)  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 42)) ;
+    outArgument_outInstruction = GALGAS_standAloneProcedureCallInstructionAST::constructor_new (var_instructionLocation_1859, var_arguments_1956, var_endOfArguments_1976, var_assignmentTargetAST_1914.getter_mIdentifier (HERE)  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 43)) ;
   }else if (kBoolFalse == test_0) {
-    outArgument_outInstruction = GALGAS_procedureCallInstructionAST::constructor_new (var_instructionLocation_1819, var_arguments_1916, var_endOfArguments_1936, var_assignmentTargetAST_1874  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 49)) ;
+    outArgument_outInstruction = GALGAS_procedureCallInstructionAST::constructor_new (var_instructionLocation_1859, var_arguments_1956, var_endOfArguments_1976, var_assignmentTargetAST_1914.getter_mIdentifier (HERE), var_assignmentTargetAST_1914.getter_mAccessList (HERE)  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 50)) ;
   }
 }
 

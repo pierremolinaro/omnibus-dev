@@ -458,7 +458,6 @@ private proc analyzePrimaryExpression
   case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
     error inObjectName : "volatileIndirectReference 1": outResult
   case universalReference (@PLMType type @string llvmName) :
-#    error inObjectName : "indirectReference 1": outResult
     outResult = .llvmTemporaryValue {!type:type !llvmName:[llvmName nowhere]}
   end
 }

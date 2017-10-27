@@ -10849,7 +10849,8 @@ class GALGAS_procedureCallInstructionAST : public GALGAS_callInstructionAST {
   public : static class GALGAS_procedureCallInstructionAST constructor_new (const class GALGAS_location & inOperand0,
                                                                             const class GALGAS_effectiveArgumentListAST & inOperand1,
                                                                             const class GALGAS_location & inOperand2,
-                                                                            const class GALGAS_LValueAST & inOperand3
+                                                                            const class GALGAS_lstring & inOperand3,
+                                                                            const class GALGAS_accessInAssignmentListAST & inOperand4
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -10861,7 +10862,9 @@ class GALGAS_procedureCallInstructionAST : public GALGAS_callInstructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_LValueAST getter_mTargetAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_mAccessList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -10882,20 +10885,23 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procedureCallInstru
 
 class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
 //--- Attributes
-  public : GALGAS_LValueAST mProperty_mTargetAST ;
+  public : GALGAS_lstring mProperty_mIdentifier ;
+  public : GALGAS_accessInAssignmentListAST mProperty_mAccessList ;
 
 //--- Constructor
   public : cPtr_procedureCallInstructionAST (const GALGAS_location & in_mInstructionLocation,
                                              const GALGAS_effectiveArgumentListAST & in_mArguments,
                                              const GALGAS_location & in_mEndOfArguments,
-                                             const GALGAS_LValueAST & in_mTargetAST
+                                             const GALGAS_lstring & in_mIdentifier,
+                                             const GALGAS_accessInAssignmentListAST & in_mAccessList
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_LValueAST getter_mTargetAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_accessInAssignmentListAST getter_mAccessList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
