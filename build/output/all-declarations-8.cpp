@@ -9,6 +9,432 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (void) :
+mProperty_mStaticStringMap (),
+mProperty_mGlobalVariableMap (),
+mProperty_mGlobalConstantMap (),
+mProperty_mRoutineMapIR (),
+mProperty_mGuardMapIR (),
+mProperty_mInterruptMapIR (),
+mProperty_mExternProcedureMapIR (),
+mProperty_mRequiredProcedureSet (),
+mProperty_mBootList (),
+mProperty_mInitList (),
+mProperty_mPanicSetupInstructionListIR (),
+mProperty_mPanicLoopInstructionListIR (),
+mProperty_mTaskMapIR (),
+mProperty_mGlobalTaskVariableList (),
+mProperty_mMaxBranchOfOnInstructions (),
+mProperty_mTargetParameters (),
+mProperty_mModuleList (),
+mProperty_mStaticArrayMap (),
+mProperty_mPropertyAccessRoutineList () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_intermediateCodeStruct::~ GALGAS_intermediateCodeStruct (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (const GALGAS_staticStringMap & inOperand0,
+                                                              const GALGAS_globalVariableMapIR & inOperand1,
+                                                              const GALGAS_globalConstantMapIR & inOperand2,
+                                                              const GALGAS_routineMapIR & inOperand3,
+                                                              const GALGAS_guardMapIR & inOperand4,
+                                                              const GALGAS_interruptMapIR & inOperand5,
+                                                              const GALGAS_externProcedureMapIR & inOperand6,
+                                                              const GALGAS_stringset & inOperand7,
+                                                              const GALGAS_bootListIR & inOperand8,
+                                                              const GALGAS_initListIR & inOperand9,
+                                                              const GALGAS_instructionListIR & inOperand10,
+                                                              const GALGAS_instructionListIR & inOperand11,
+                                                              const GALGAS_taskMapIR & inOperand12,
+                                                              const GALGAS_globalTaskVariableList & inOperand13,
+                                                              const GALGAS_uint & inOperand14,
+                                                              const GALGAS_targetParameters & inOperand15,
+                                                              const GALGAS_moduleListIR & inOperand16,
+                                                              const GALGAS_staticArrayMap & inOperand17,
+                                                              const GALGAS_propertyAccessRoutineList & inOperand18) :
+mProperty_mStaticStringMap (inOperand0),
+mProperty_mGlobalVariableMap (inOperand1),
+mProperty_mGlobalConstantMap (inOperand2),
+mProperty_mRoutineMapIR (inOperand3),
+mProperty_mGuardMapIR (inOperand4),
+mProperty_mInterruptMapIR (inOperand5),
+mProperty_mExternProcedureMapIR (inOperand6),
+mProperty_mRequiredProcedureSet (inOperand7),
+mProperty_mBootList (inOperand8),
+mProperty_mInitList (inOperand9),
+mProperty_mPanicSetupInstructionListIR (inOperand10),
+mProperty_mPanicLoopInstructionListIR (inOperand11),
+mProperty_mTaskMapIR (inOperand12),
+mProperty_mGlobalTaskVariableList (inOperand13),
+mProperty_mMaxBranchOfOnInstructions (inOperand14),
+mProperty_mTargetParameters (inOperand15),
+mProperty_mModuleList (inOperand16),
+mProperty_mStaticArrayMap (inOperand17),
+mProperty_mPropertyAccessRoutineList (inOperand18) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_intermediateCodeStruct (GALGAS_staticStringMap::constructor_emptyMap (HERE),
+                                        GALGAS_globalVariableMapIR::constructor_emptyMap (HERE),
+                                        GALGAS_globalConstantMapIR::constructor_emptyMap (HERE),
+                                        GALGAS_routineMapIR::constructor_emptyMap (HERE),
+                                        GALGAS_guardMapIR::constructor_emptyMap (HERE),
+                                        GALGAS_interruptMapIR::constructor_emptyMap (HERE),
+                                        GALGAS_externProcedureMapIR::constructor_emptyMap (HERE),
+                                        GALGAS_stringset::constructor_emptySet (HERE),
+                                        GALGAS_bootListIR::constructor_emptyList (HERE),
+                                        GALGAS_initListIR::constructor_emptyList (HERE),
+                                        GALGAS_instructionListIR::constructor_emptyList (HERE),
+                                        GALGAS_instructionListIR::constructor_emptyList (HERE),
+                                        GALGAS_taskMapIR::constructor_emptyMap (HERE),
+                                        GALGAS_globalTaskVariableList::constructor_emptyList (HERE),
+                                        GALGAS_uint::constructor_default (HERE),
+                                        GALGAS_targetParameters::constructor_default (HERE),
+                                        GALGAS_moduleListIR::constructor_emptyList (HERE),
+                                        GALGAS_staticArrayMap::constructor_emptyMap (HERE),
+                                        GALGAS_propertyAccessRoutineList::constructor_emptyList (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (const GALGAS_staticStringMap & inOperand0,
+                                                                              const GALGAS_globalVariableMapIR & inOperand1,
+                                                                              const GALGAS_globalConstantMapIR & inOperand2,
+                                                                              const GALGAS_routineMapIR & inOperand3,
+                                                                              const GALGAS_guardMapIR & inOperand4,
+                                                                              const GALGAS_interruptMapIR & inOperand5,
+                                                                              const GALGAS_externProcedureMapIR & inOperand6,
+                                                                              const GALGAS_stringset & inOperand7,
+                                                                              const GALGAS_bootListIR & inOperand8,
+                                                                              const GALGAS_initListIR & inOperand9,
+                                                                              const GALGAS_instructionListIR & inOperand10,
+                                                                              const GALGAS_instructionListIR & inOperand11,
+                                                                              const GALGAS_taskMapIR & inOperand12,
+                                                                              const GALGAS_globalTaskVariableList & inOperand13,
+                                                                              const GALGAS_uint & inOperand14,
+                                                                              const GALGAS_targetParameters & inOperand15,
+                                                                              const GALGAS_moduleListIR & inOperand16,
+                                                                              const GALGAS_staticArrayMap & inOperand17,
+                                                                              const GALGAS_propertyAccessRoutineList & inOperand18 
+                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_intermediateCodeStruct result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid ()) {
+    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_intermediateCodeStruct & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mStaticStringMap.objectCompare (inOperand.mProperty_mStaticStringMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mGlobalVariableMap.objectCompare (inOperand.mProperty_mGlobalVariableMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mGlobalConstantMap.objectCompare (inOperand.mProperty_mGlobalConstantMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mRoutineMapIR.objectCompare (inOperand.mProperty_mRoutineMapIR) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mGuardMapIR.objectCompare (inOperand.mProperty_mGuardMapIR) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mInterruptMapIR.objectCompare (inOperand.mProperty_mInterruptMapIR) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mExternProcedureMapIR.objectCompare (inOperand.mProperty_mExternProcedureMapIR) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mRequiredProcedureSet.objectCompare (inOperand.mProperty_mRequiredProcedureSet) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mBootList.objectCompare (inOperand.mProperty_mBootList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mInitList.objectCompare (inOperand.mProperty_mInitList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mPanicSetupInstructionListIR.objectCompare (inOperand.mProperty_mPanicSetupInstructionListIR) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mPanicLoopInstructionListIR.objectCompare (inOperand.mProperty_mPanicLoopInstructionListIR) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskMapIR.objectCompare (inOperand.mProperty_mTaskMapIR) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mGlobalTaskVariableList.objectCompare (inOperand.mProperty_mGlobalTaskVariableList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mMaxBranchOfOnInstructions.objectCompare (inOperand.mProperty_mMaxBranchOfOnInstructions) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mTargetParameters.objectCompare (inOperand.mProperty_mTargetParameters) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mModuleList.objectCompare (inOperand.mProperty_mModuleList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mStaticArrayMap.objectCompare (inOperand.mProperty_mStaticArrayMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mPropertyAccessRoutineList.objectCompare (inOperand.mProperty_mPropertyAccessRoutineList) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_intermediateCodeStruct::isValid (void) const {
+  return mProperty_mStaticStringMap.isValid () && mProperty_mGlobalVariableMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mRoutineMapIR.isValid () && mProperty_mGuardMapIR.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mRequiredProcedureSet.isValid () && mProperty_mBootList.isValid () && mProperty_mInitList.isValid () && mProperty_mPanicSetupInstructionListIR.isValid () && mProperty_mPanicLoopInstructionListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mModuleList.isValid () && mProperty_mStaticArrayMap.isValid () && mProperty_mPropertyAccessRoutineList.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_intermediateCodeStruct::drop (void) {
+  mProperty_mStaticStringMap.drop () ;
+  mProperty_mGlobalVariableMap.drop () ;
+  mProperty_mGlobalConstantMap.drop () ;
+  mProperty_mRoutineMapIR.drop () ;
+  mProperty_mGuardMapIR.drop () ;
+  mProperty_mInterruptMapIR.drop () ;
+  mProperty_mExternProcedureMapIR.drop () ;
+  mProperty_mRequiredProcedureSet.drop () ;
+  mProperty_mBootList.drop () ;
+  mProperty_mInitList.drop () ;
+  mProperty_mPanicSetupInstructionListIR.drop () ;
+  mProperty_mPanicLoopInstructionListIR.drop () ;
+  mProperty_mTaskMapIR.drop () ;
+  mProperty_mGlobalTaskVariableList.drop () ;
+  mProperty_mMaxBranchOfOnInstructions.drop () ;
+  mProperty_mTargetParameters.drop () ;
+  mProperty_mModuleList.drop () ;
+  mProperty_mStaticArrayMap.drop () ;
+  mProperty_mPropertyAccessRoutineList.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_intermediateCodeStruct::description (C_String & ioString,
+                                                 const int32_t inIndentation) const {
+  ioString << "<struct @intermediateCodeStruct:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mStaticStringMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGlobalVariableMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGlobalConstantMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mRoutineMapIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGuardMapIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mInterruptMapIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mExternProcedureMapIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mRequiredProcedureSet.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mBootList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mInitList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mPanicSetupInstructionListIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mPanicLoopInstructionListIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskMapIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mMaxBranchOfOnInstructions.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTargetParameters.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mModuleList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mStaticArrayMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mPropertyAccessRoutineList.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticStringMap GALGAS_intermediateCodeStruct::getter_mStaticStringMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mStaticStringMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMapIR GALGAS_intermediateCodeStruct::getter_mGlobalVariableMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGlobalVariableMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMapIR GALGAS_intermediateCodeStruct::getter_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGlobalConstantMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineMapIR GALGAS_intermediateCodeStruct::getter_mRoutineMapIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineMapIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardMapIR GALGAS_intermediateCodeStruct::getter_mGuardMapIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardMapIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_interruptMapIR GALGAS_intermediateCodeStruct::getter_mInterruptMapIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mInterruptMapIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_externProcedureMapIR GALGAS_intermediateCodeStruct::getter_mExternProcedureMapIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mExternProcedureMapIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_intermediateCodeStruct::getter_mRequiredProcedureSet (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRequiredProcedureSet ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_intermediateCodeStruct::getter_mBootList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mBootList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initListIR GALGAS_intermediateCodeStruct::getter_mInitList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mInitList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_instructionListIR GALGAS_intermediateCodeStruct::getter_mPanicSetupInstructionListIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPanicSetupInstructionListIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_instructionListIR GALGAS_intermediateCodeStruct::getter_mPanicLoopInstructionListIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPanicLoopInstructionListIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_taskMapIR GALGAS_intermediateCodeStruct::getter_mTaskMapIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskMapIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalTaskVariableList GALGAS_intermediateCodeStruct::getter_mGlobalTaskVariableList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGlobalTaskVariableList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_intermediateCodeStruct::getter_mMaxBranchOfOnInstructions (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mMaxBranchOfOnInstructions ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_targetParameters GALGAS_intermediateCodeStruct::getter_mTargetParameters (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTargetParameters ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_moduleListIR GALGAS_intermediateCodeStruct::getter_mModuleList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mModuleList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticArrayMap GALGAS_intermediateCodeStruct::getter_mStaticArrayMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mStaticArrayMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAccessRoutineList GALGAS_intermediateCodeStruct::getter_mPropertyAccessRoutineList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPropertyAccessRoutineList ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @intermediateCodeStruct type                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_intermediateCodeStruct ("intermediateCodeStruct",
+                                               NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_intermediateCodeStruct::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_intermediateCodeStruct ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_intermediateCodeStruct::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_intermediateCodeStruct (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::extractObject (const GALGAS_object & inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_intermediateCodeStruct result ;
+  const GALGAS_intermediateCodeStruct * p = (const GALGAS_intermediateCodeStruct *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_intermediateCodeStruct *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("intermediateCodeStruct", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               Bool options                                                                          *
 //                                                                                                                     *
@@ -9126,140 +9552,4 @@ C_galgas_function_descriptor functionDescriptor_getInfixOperatorMap ("getInfixOp
                                                                      & kTypeDescriptor_GALGAS_infixOperatorMap,
                                                                      4,
                                                                      functionArgs_getInfixOperatorMap) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//   Overriding extension method '@booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression'   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_booleanShortCircuitAndOperatorExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
-                                                                                                              const GALGAS_lstring constinArgument_inConstantName,
-                                                                                                              GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                                                              C_Compiler * inCompiler
-                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_booleanShortCircuitAndOperatorExpressionAST * object = (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_booleanShortCircuitAndOperatorExpressionAST) ;
-  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mLeftExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 19)) ;
-  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mRightExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 20)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_booleanShortCircuitAndOperatorExpressionAST_addDependenceEdgeForStaticExpression (void) {
-  enterExtensionMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_booleanShortCircuitAndOperatorExpressionAST.mSlotID,
-                                                             extensionMethod_booleanShortCircuitAndOperatorExpressionAST_addDependenceEdgeForStaticExpression) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_booleanShortCircuitAndOperatorExpressionAST_addDependenceEdgeForStaticExpression (defineExtensionMethod_booleanShortCircuitAndOperatorExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//   Overriding extension method '@booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph'   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_booleanShortCircuitAndOperatorExpressionAST_noteExpressionTypesInPrecedenceGraph (const cPtr_expressionAST * inObject,
-                                                                                                              GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                                                              C_Compiler * inCompiler
-                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_booleanShortCircuitAndOperatorExpressionAST * object = (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_booleanShortCircuitAndOperatorExpressionAST) ;
-  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mProperty_mLeftExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 28)) ;
-  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mProperty_mRightExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 29)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_booleanShortCircuitAndOperatorExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
-  enterExtensionMethod_noteExpressionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_booleanShortCircuitAndOperatorExpressionAST.mSlotID,
-                                                             extensionMethod_booleanShortCircuitAndOperatorExpressionAST_noteExpressionTypesInPrecedenceGraph) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_booleanShortCircuitAndOperatorExpressionAST_noteExpressionTypesInPrecedenceGraph (defineExtensionMethod_booleanShortCircuitAndOperatorExpressionAST_noteExpressionTypesInPrecedenceGraph, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//            Overriding extension method '@booleanShortCircuitAndOperatorExpressionAST analyzeExpression'             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_booleanShortCircuitAndOperatorExpressionAST_analyzeExpression (const cPtr_expressionAST * inObject,
-                                                                                           const GALGAS_PLMType constinArgument_inSelfType,
-                                                                                           const GALGAS_bool constinArgument_inGuard,
-                                                                                           const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
-                                                                                           const GALGAS_PLMType constinArgument_inOptionalTargetType,
-                                                                                           const GALGAS_semanticContext constinArgument_inContext,
-                                                                                           const GALGAS_mode constinArgument_inCurrentMode,
-                                                                                           GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                                                           GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
-                                                                                           GALGAS_universalPropertyAndRoutineMapForContext & ioArgument_ioUniversalMap,
-                                                                                           GALGAS_allocaList & ioArgument_ioAllocaList,
-                                                                                           GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                                                           GALGAS_objectIR & outArgument_outResult,
-                                                                                           C_Compiler * inCompiler
-                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_booleanShortCircuitAndOperatorExpressionAST * object = (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_booleanShortCircuitAndOperatorExpressionAST) ;
-  GALGAS_instructionListIR var_leftInstructionGenerationList_2997 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 51)) ;
-  GALGAS_objectIR var_leftOperandPossibleReference_3484 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mLeftExpression.ptr (), constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, var_leftInstructionGenerationList_2997, var_leftOperandPossibleReference_3484, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 52)) ;
-  GALGAS_objectIR var_leftOperand_3620 ;
-  {
-  extensionSetter_appendLoadFromReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_leftOperandPossibleReference_3484, var_leftOperand_3620, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 66)) ;
-  }
-  GALGAS_instructionListIR var_rightInstructionGenerationList_3708 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 72)) ;
-  GALGAS_objectIR var_rightOperandPossibleReference_4196 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mRightExpression.ptr (), constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, extensionGetter_type (var_leftOperand_3620, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 77)), constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, var_rightInstructionGenerationList_3708, var_rightOperandPossibleReference_4196, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 73)) ;
-  GALGAS_objectIR var_rightOperand_4334 ;
-  {
-  extensionSetter_appendLoadFromReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_rightOperandPossibleReference_4196, var_rightOperand_4334, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 87)) ;
-  }
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, extensionGetter_type (var_leftOperand_3620, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 93)).objectCompare (GALGAS_PLMType::constructor_boolean (SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 93)))).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (object->mProperty_mOperatorLocation, GALGAS_string ("left operand should be boolean"), fixItArray1  COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 94)) ;
-  }
-  const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, extensionGetter_type (var_rightOperand_4334, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 97)).objectCompare (GALGAS_PLMType::constructor_boolean (SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 97)))).boolEnum () ;
-  if (kBoolTrue == test_2) {
-    TC_Array <C_FixItDescription> fixItArray3 ;
-    inCompiler->emitSemanticError (object->mProperty_mOperatorLocation, GALGAS_string ("left operand should be boolean"), fixItArray3  COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 98)) ;
-  }
-  GALGAS_bool test_4 = var_leftOperandPossibleReference_3484.getter_isLiteralInteger (SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 101)) ;
-  if (kBoolTrue == test_4.boolEnum ()) {
-    test_4 = var_rightOperandPossibleReference_4196.getter_isLiteralInteger (SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 101)) ;
-  }
-  const enumGalgasBool test_5 = test_4.boolEnum () ;
-  if (kBoolTrue == test_5) {
-    GALGAS_bigint var_leftStaticValue_4872 ;
-    GALGAS_PLMType joker_4836 ; // Joker input parameter
-    var_leftOperandPossibleReference_3484.method_literalInteger (joker_4836, var_leftStaticValue_4872, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 102)) ;
-    GALGAS_bigint var_rightStaticValue_4967 ;
-    GALGAS_PLMType joker_4930 ; // Joker input parameter
-    var_rightOperandPossibleReference_4196.method_literalInteger (joker_4930, var_rightStaticValue_4967, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 103)) ;
-    outArgument_outResult = GALGAS_objectIR::constructor_literalInteger (extensionGetter_type (var_leftOperand_3620, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 104)), var_leftStaticValue_4872.operator_and (var_rightStaticValue_4967 COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 104))  COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 104)) ;
-  }else if (kBoolFalse == test_5) {
-    {
-    routine_getNewTempVariable (GALGAS_PLMType::constructor_boolean (SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 107)), object->mProperty_mOperatorLocation, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 107)) ;
-    }
-    {
-    extensionSetter_appendShortCircuitAndOperation (ioArgument_ioInstructionGenerationList, outArgument_outResult, var_leftOperand_3620, var_leftInstructionGenerationList_2997, var_rightOperand_4334, var_rightInstructionGenerationList_3708, object->mProperty_mOperatorLocation, inCompiler COMMA_SOURCE_FILE ("expression-boolean-short-circuit-and-operator.galgas", 109)) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_booleanShortCircuitAndOperatorExpressionAST_analyzeExpression (void) {
-  enterExtensionMethod_analyzeExpression (kTypeDescriptor_GALGAS_booleanShortCircuitAndOperatorExpressionAST.mSlotID,
-                                          extensionMethod_booleanShortCircuitAndOperatorExpressionAST_analyzeExpression) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_booleanShortCircuitAndOperatorExpressionAST_analyzeExpression (defineExtensionMethod_booleanShortCircuitAndOperatorExpressionAST_analyzeExpression, NULL) ;
 

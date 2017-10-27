@@ -29,6 +29,14 @@ class @primaryInExpressionAST : @expressionAST {
   @primaryInExpressionAccessListAST mAccessList
 }
 
+#·······················································································································
+
+class @standaloneFunctionInExpressionAST : @expressionAST {
+  @lstring mStandaloneFunctionName
+  @effectiveArgumentListAST mArguments
+  @location mEndOfArguments
+}
+
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! SYNTAX                                                                                                               
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -50,26 +58,33 @@ syntax extension plm_syntax {
   #--- Object
     $identifier$ ?let objectName
   #--- Properties and access
-    @primaryInExpressionAccessListAST accessListAST = {}
+    @primaryInExpressionAccessListAST accessList = {}
     repeat
     while
       $.$
       $identifier$ ?let propertyName
-      accessListAST += !.property {!name:propertyName}
+      accessList += !.property {!name:propertyName}
     while
       $[$
       <expression> ?let expression
       let endOfIndex = @location.here
       $]$
-      accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+      accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
     while
-#      $.$
-#      $identifier$ ?let functionName
       <effective_parameters> ?let arguments ?let endOfArguments
-      accessListAST += !.funcCall {!arguments:arguments !endOfArguments:endOfArguments}
+      accessList += !.funcCall {!arguments:arguments !endOfArguments:endOfArguments}
     end
   #--- AST
-    outExpression = @primaryInExpressionAST.new {!selfInExpression !objectName !accessListAST}
+    if (selfInExpression == .noSelf) && ([accessList length] == 1) && [[accessList mAccessAtIndex !0] isFuncCall] then
+      [[accessList mAccessAtIndex !0] funcCall ?arguments:let arguments ?endOfArguments:let endOfArguments]
+      outExpression = @standaloneFunctionInExpressionAST.new {
+        !objectName
+        !arguments
+        !endOfArguments
+      }
+    else
+      outExpression = @primaryInExpressionAST.new {!selfInExpression !objectName !accessList}
+    end
   }
 
   #·····················································································································
@@ -107,6 +122,27 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
   end
 }
 
+#·····················································································································
+
+override method @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addEdge !inConstantName !mStandaloneFunctionName]
+  for () in mArguments do
+    switch mEffectiveParameterKind
+    case input (*):
+    case inputWithType (* @lstring typeName *) :
+      if typeName.string != "" then
+        [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+      end
+    case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+    case outputInput (*) :
+    case outputInputSelfVariable (*) :
+    end 
+  end
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -134,6 +170,25 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
   end
 }
 
+#·····················································································································
+
+override method @standaloneFunctionInExpressionAST noteExpressionTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  for () in mArguments do
+    switch mEffectiveParameterKind
+    case input (*):
+    case inputWithType (* @lstring typeName *) :
+      if typeName.string != "" then
+        [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+      end
+    case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case outputInput (*) :
+    case outputInputSelfVariable (*) :
+    end 
+  end
+}
+
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -144,6 +199,86 @@ enum @internalRepresentation {
   case volatileAbsoluteReference (@PLMType type @uint address)
   case volatileIndirectReference (@PLMType type @string llvmName)
   case universalReference (@PLMType type @string llvmName)
+}
+
+#·······················································································································
+
+override method @standaloneFunctionInExpressionAST analyzeExpression
+  ?self:let @PLMType inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outFunctionCallReturnedValue
+{
+#--- Cannot call a function in guard
+  if inGuard then
+    error mStandaloneFunctionName.location : "a routine cannot be called in guard"
+  end
+#--- Get function name and map containing the function definition
+  let routineMangledName = routineMangledNameFromCall (!"" !mStandaloneFunctionName !mArguments)
+#--- Get called function signature
+  let signature = [mArguments routineSignature !mStandaloneFunctionName.location]
+#--- Search function in map
+  [inContext.mRoutineMapForContext searchKey
+    !mStandaloneFunctionName
+    !signature
+    ?let @lstring LLVMInvocationRoutineName
+    ?@routineDescriptor routineDescriptor
+    ?* # let @location outKeyLocation
+  ]
+#  let isPublic = routineDescriptor.mIsPublic
+  let routineKind = routineDescriptor.mRoutineKind
+  let calleeMode = [routineKind executionMode]
+  let formalSignature = routineDescriptor.mSignature
+#--- Check routine is actually a function
+  if [routineDescriptor.mReturnTypeProxy type] == .void then
+    error mStandaloneFunctionName : "not a function (returns no value)" : routineDescriptor, outFunctionCallReturnedValue
+  else
+  #--- Check modes
+    let calleeKind = checkMode (
+      !callerMode:inCurrentMode
+      !calleeMode:calleeMode
+      !kind:routineKind
+      !error:mStandaloneFunctionName.location
+    )
+  #--- Analyze effective parameters
+    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+    analyzeEffectiveParameters (
+      !self:inSelfType
+      !formal:formalSignature
+      !effective:mArguments
+      !errorLocation:mStandaloneFunctionName.location
+      !callerForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !requiredMode:inCurrentMode
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      !?effectiveIR:effectiveParameterListIR
+    )
+  #--- New LLVM variable for function call result
+    getNewTempVariable (![routineDescriptor.mReturnTypeProxy type] !routineMangledName !?ioTemporaries ?outFunctionCallReturnedValue)
+  #--- Code generation
+    ioInstructionGenerationList += !@staticRoutineCallIR.new {
+      !"" # globalVariableReceiverName
+      !outFunctionCallReturnedValue
+      !routineMangledName
+      !LLVMInvocationRoutineName
+      !calleeKind
+      !effectiveParameterListIR
+    }
+  #--- Enter in invocation graph
+    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+  end
 }
 
 #·······················································································································
@@ -223,8 +358,10 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  if mObjectName.string == "" then # Receiver is self
-    analyzePrimaryExpressionWithSelf (
+  [ioUniversalMap searchEntity !mObjectName ?let entity]
+  switch entity
+  case module (@PLMType unused type) :
+    procAnalyzePrimaryExpression (
       !self: inSelfType
       !inGuard: inGuard
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -236,19 +373,19 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
+      !mObjectName
       !mAccessList
-      !mObjectName.location
-      ?result:outResult
+      ?result: outResult
     )
-  else
-    [ioUniversalMap searchEntity !mObjectName ?let entity]
-    switch entity
-    case module (@PLMType unused type) :
-      analyzePrimaryExpression (
+  case register (readable * type address sliceMap arraySize elementSize) :
+    if not readable then
+      error mObjectName : "control register is not readable in this context" : outResult
+    elsif inGuard then
+      error mObjectName : "control register is not readable in guard" : outResult
+    else
+      analyzeRegisterExpression (
         !self: inSelfType
-        !inGuard: inGuard
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !optionalTargetType: inOptionalTargetType
         !context: inContext
         !mode: inCurrentMode
         !?temporary: ioTemporaries
@@ -257,112 +394,91 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
         !mObjectName
-        !mAccessList
-        ?result: outResult
-      )
-    case register (readable * type address sliceMap arraySize elementSize) :
-      if not readable then
-        error mObjectName : "control register is not readable in this context" : outResult
-      elsif inGuard then
-        error mObjectName : "control register is not readable in guard" : outResult
-      else
-        analyzeRegisterExpression (
-          !self: inSelfType
-          !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-          !context: inContext
-          !mode: inCurrentMode
-          !?temporary: ioTemporaries
-          !?staticStringMap: ioGlobalLiteralStringMap
-          !?variableMap: ioUniversalMap
-          !?alloca: ioAllocaList
-          !?instructionListIR: ioInstructionGenerationList
-          !mObjectName
-          !type
-          !address
-          !sliceMap
-          !arraySize # 0 if not an array
-          !elementSize # 0 if not an array
-          !mAccessList
-          ?result: outResult
-        )
-      end
-    case globalConstant (@objectIR objectIR) :
-      outResult = objectIR
-    case localConstant (@PLMType unused type @lstring unused plmName) :
-      analyzePrimaryExpression (
-        !self: inSelfType
-        !inGuard: inGuard
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !optionalTargetType: inOptionalTargetType
-        !context: inContext
-        !mode: inCurrentMode
-        !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !mObjectName
-        !mAccessList
-        ?result: outResult
-      )
-    case globalVariable (@bool unused writable @PLMType unused type) :
-      analyzePrimaryExpression (
-        !self: inSelfType
-        !inGuard: inGuard
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !optionalTargetType: inOptionalTargetType
-        !context: inContext
-        !mode: inCurrentMode
-        !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !mObjectName
-        !mAccessList
-        ?result: outResult
-      )
-    case localVariable (@PLMType unused type @lstring unused plmName) :
-      analyzePrimaryExpression (
-        !self: inSelfType
-        !inGuard: inGuard
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !optionalTargetType: inOptionalTargetType
-        !context: inContext
-        !mode: inCurrentMode
-        !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !mObjectName
-        !mAccessList
-        ?result: outResult
-      )
-    case undefined :
-      analyzePrimaryExpression (
-        !self: inSelfType
-        !inGuard: inGuard
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !optionalTargetType: inOptionalTargetType
-        !context: inContext
-        !mode: inCurrentMode
-        !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !mObjectName
+        !type
+        !address
+        !sliceMap
+        !arraySize # 0 if not an array
+        !elementSize # 0 if not an array
         !mAccessList
         ?result: outResult
       )
     end
+  case globalConstant (@objectIR objectIR) :
+    outResult = objectIR
+  case localConstant (@PLMType unused type @lstring unused plmName) :
+    procAnalyzePrimaryExpression (
+      !self: inSelfType
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !mObjectName
+      !mAccessList
+      ?result: outResult
+    )
+  case globalVariable (@bool unused writable @PLMType unused type) :
+    procAnalyzePrimaryExpression (
+      !self: inSelfType
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !mObjectName
+      !mAccessList
+      ?result: outResult
+    )
+  case localVariable (@PLMType unused type @lstring unused plmName) :
+    procAnalyzePrimaryExpression (
+      !self: inSelfType
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !mObjectName
+      !mAccessList
+      ?result: outResult
+    )
+  case undefined :
+    procAnalyzePrimaryExpression (
+      !self: inSelfType
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !mObjectName
+      !mAccessList
+      ?result: outResult
+    )
   end
 }
 
 #·······················································································································
 
-private proc analyzePrimaryExpression
+private proc procAnalyzePrimaryExpression
   ?self:let @PLMType inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -666,112 +782,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
 
 #·······················································································································
 
-private proc analyzePrimaryExpressionWithSelf
-  ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @PLMType inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?let @primaryInExpressionAccessListAST inAccessList
-  ?let @location inSelfLocation
-  !result:@objectIR outResult
-{
-#--- object access, with self
-  @internalRepresentation internalRepresentation= .universalReference {
-    !type:inSelfType
-    !llvmName:llvmNameForSelf ()
-  }
-#--- Access list
-  for (access) in inAccessList do
-    switch access
-    case property (@lstring propertyName) :
-      handlePropertyAccessInExpression (
-        !?internalRepresentation
-        !propertyName
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:inOptionalTargetType
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
-      )
-    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-      handleArrayAccessInExpression (
-        !?internalRepresentation
-        !indexExpression
-        !endOfIndex
-        !self:inSelfType
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:inOptionalTargetType
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
-      )
-    case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
-      handleFunctionCallInExpression (
-        !?internalRepresentation
-        !self:inSelfType
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !arguments 
-        !errorLocation
-        !?ioInstructionGenerationList
-      )
-    end
-  end
-#--- Analyze current internal representation, in order to get result as @objectIR
-  switch internalRepresentation
-  case standAloneIdentifier (identifier) :
-    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
-  case structureMember (propertyName @objectIR currentPointer) :
-    if [[currentPointer type] isStructure] then
-      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-      [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
-      let newObject = @objectIR.reference {
-         !type:[masterPropertyIR type]
-         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
-        !newObject
-        !currentPointer
-        !propertyName
-      ]
-      outResult = newObject
-    else
-      error [currentPointer location] : "this should be a structure instance" : outResult
-    end
-  case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
-    error inSelfLocation : "volatileAbsoluteReference 2" : outResult
-  case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
-    error inSelfLocation : "volatileIndirectReference 2": outResult
-  case universalReference (@PLMType type @string llvmName) :
-    outResult = .reference {!type:type !llvmName:[llvmName nowhere]}
-  end
-}
-
-#·······················································································································
-
 private proc handlePropertyAccessInExpression
   ?!@internalRepresentation ioInternalRepresentation
   ?let @lstring inPropertyName
@@ -789,12 +799,6 @@ private proc handlePropertyAccessInExpression
   case standAloneIdentifier (identifier) :
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?let @objectIR objectIR]
     switch objectIR
-#    case globalVariableRef (type *) :
-#      if [type isStructure] then
-#        ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
-#      else
-#        error identifier : "this should be a structure instance" : ioInternalRepresentation
-#      end
     case null :
     case reference (type llvmName) :
       if [type isStructure] then
@@ -979,22 +983,7 @@ private proc handleFunctionCallInExpression
   case universalReference (@PLMType unused type @string unused llvmName) :
     error inErrorLocation : "indirectReference 5"
   case standAloneIdentifier (@lstring identifier) : # This a call idf (....)
-    handleStandAloneFunctionCallInExpression (
-      !?ioInternalRepresentation
-      !identifier
-      !self:inSelfType
-      !inGuard:inGuard
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !inArguments 
-      !inErrorLocation
-      !?ioInstructionGenerationList
-    )
+     error identifier : "standAloneIdentifier 5"
   case structureMember (@lstring propertyName @objectIR currentPointerIR) :
     if [[currentPointerIR type] isStructure] then
       handleMethodCallInExpression (
@@ -1116,90 +1105,6 @@ private proc handleMethodCallInExpression
         !effectiveParameterListIR
       }
     end
-  end
-}
-
-#·······················································································································
-
-private proc handleStandAloneFunctionCallInExpression
-  ?!@internalRepresentation ioInternalRepresentation
-  ?let @lstring inFunctionName
-  ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?let @effectiveArgumentListAST inArguments 
-  ?let @location inErrorLocation
-  ?!@instructionListIR ioInstructionGenerationList
-{
-#--- Cannot call a function in guard
-  if inGuard then
-    error inErrorLocation : "a routine cannot be called in guard"
-  end
-#--- Get function name and map containing the function definition
-  let routineMangledName = routineMangledNameFromCall (!"" !inFunctionName !inArguments)
-#--- Get called function signature
-  let signature = [inArguments routineSignature !inFunctionName.location]
-#--- Search function in map
-  [inContext.mRoutineMapForContext searchKey
-    !inFunctionName
-    !signature
-    ?let @lstring LLVMInvocationRoutineName
-    ?@routineDescriptor routineDescriptor
-    ?* # let @location outKeyLocation
-  ]
-#  let isPublic = routineDescriptor.mIsPublic
-  let routineKind = routineDescriptor.mRoutineKind
-  let calleeMode = [routineKind executionMode]
-  let formalSignature = routineDescriptor.mSignature
-#--- Check routine is actually a function
-  if [routineDescriptor.mReturnTypeProxy type] == .void then
-    error inFunctionName : "not a function (returns no value)" : routineDescriptor
-  else
-  #--- Check modes
-    let calleeKind = checkMode (
-      !callerMode:inMode
-      !calleeMode:calleeMode
-      !kind:routineKind
-      !error:inFunctionName.location
-    )
-  #--- Analyze effective parameters
-    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-    analyzeEffectiveParameters (
-      !self:inSelfType
-      !formal:formalSignature
-      !effective:inArguments
-      !errorLocation:inFunctionName.location
-      !callerForInvocationGraph:inCallerNameForInvocationGraph
-      !context:inContext
-      !requiredMode:inMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      !?effectiveIR:effectiveParameterListIR
-    )
-  #--- New LLVM variable for function call result
-    getNewTempVariable (![routineDescriptor.mReturnTypeProxy type] !routineMangledName !?ioTemporaries ?let functionResult)
-  #--- Code generation
-    ioInstructionGenerationList += !@staticRoutineCallIR.new {
-      !"" # globalVariableReceiverName
-      !functionResult
-      !routineMangledName
-      !LLVMInvocationRoutineName
-      !calleeKind
-      !effectiveParameterListIR
-    }
-  #--- Enter in invocation graph
-    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-  #---
-    ioInternalRepresentation = .universalReference {!type:[functionResult type] !llvmName:[functionResult name]}
   end
 }
 
