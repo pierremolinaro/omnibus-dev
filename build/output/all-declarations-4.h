@@ -2856,19 +2856,19 @@ void extensionSetter_appendLoadFromTemporaryReference (class GALGAS_instructionL
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         @loadFromTemporaryReferenceIR class                                         *
+//                                             @loadFromReferenceIR class                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_loadFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR {
+class GALGAS_loadFromReferenceIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
-  public : GALGAS_loadFromTemporaryReferenceIR (void) ;
+  public : GALGAS_loadFromReferenceIR (void) ;
 
 //---
-  public : inline const class cPtr_loadFromTemporaryReferenceIR * ptr (void) const { return (const cPtr_loadFromTemporaryReferenceIR *) mObjectPtr ; }
+  public : inline const class cPtr_loadFromReferenceIR * ptr (void) const { return (const cPtr_loadFromReferenceIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_loadFromTemporaryReferenceIR (const cPtr_loadFromTemporaryReferenceIR * inSourcePtr) ;
+  public : GALGAS_loadFromReferenceIR (const cPtr_loadFromReferenceIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -2876,17 +2876,17 @@ class GALGAS_loadFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR 
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_loadFromTemporaryReferenceIR extractObject (const GALGAS_object & inObject,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_loadFromReferenceIR extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_loadFromTemporaryReferenceIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                             const class GALGAS_string & inOperand1
-                                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_loadFromReferenceIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                    const class GALGAS_string & inOperand1
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_loadFromTemporaryReferenceIR & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_loadFromReferenceIR & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2902,28 +2902,28 @@ class GALGAS_loadFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_loadFromTemporaryReferenceIR class
+} ; // End of GALGAS_loadFromReferenceIR class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadFromTemporaryReferenceIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadFromReferenceIR ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Pointer class for @loadFromTemporaryReferenceIR class                                *
+//                                    Pointer class for @loadFromReferenceIR class                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_loadFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
+class cPtr_loadFromReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectIR mProperty_mTargetValue ;
   public : GALGAS_string mProperty_mLLVMName ;
 
 //--- Constructor
-  public : cPtr_loadFromTemporaryReferenceIR (const GALGAS_objectIR & in_mTargetValue,
-                                              const GALGAS_string & in_mLLVMName
-                                              COMMA_LOCATION_ARGS) ;
+  public : cPtr_loadFromReferenceIR (const GALGAS_objectIR & in_mTargetValue,
+                                     const GALGAS_string & in_mLLVMName
+                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -3777,18 +3777,6 @@ class cPtr_indirectRoutineCallIR : public cPtr_abstractInstructionIR {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Extension setter '@instructionListIR appendStoreFromReference'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendStoreFromReference (class GALGAS_instructionListIR & ioObject,
-                                               const class GALGAS_objectIR constin_inTargetReference,
-                                               const class GALGAS_objectIR constin_inValue,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

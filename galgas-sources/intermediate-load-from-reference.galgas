@@ -3,19 +3,19 @@ setter @instructionListIR appendLoadFromTemporaryReference
   ?let @objectIR inTargetValue
   ?let @string inLLVMName
 {
-  self += !@loadFromTemporaryReferenceIR.new {!inTargetValue !inLLVMName}
+  self += !@loadFromReferenceIR.new {!inTargetValue !inLLVMName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @loadFromTemporaryReferenceIR : @abstractInstructionIR {
+class @loadFromReferenceIR : @abstractInstructionIR {
   @objectIR mTargetValue
   @string mLLVMName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadFromTemporaryReferenceIR llvmInstructionCode
+override method @loadFromReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -27,7 +27,7 @@ override method @loadFromTemporaryReferenceIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadFromTemporaryReferenceIR enterAccessibleEntities 
+override method @loadFromReferenceIR enterAccessibleEntities 
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
