@@ -140,7 +140,6 @@ override method @registerConstantExpressionAST analyzeExpression
     [!?ioInstructionGenerationList appendLoadFromReference
       !?ioTemporaries
       !expressionResultPossibleReference
-      !mRegisterName
       ?let expressionResult
     ]  
   #--- Check expression type

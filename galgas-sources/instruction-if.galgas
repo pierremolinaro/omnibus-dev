@@ -126,7 +126,6 @@ override method @ifInstructionAST analyze
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !testResultPossibleReference
-    !mTestExpressionEndLocation
     ?let testResult
   ]  
 #--- Check inferred type

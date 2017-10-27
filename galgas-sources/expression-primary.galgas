@@ -810,8 +810,6 @@ private proc handlePropertyAccessInExpression
       else
         error identifier : "this should be a structure instance" : ioInternalRepresentation
       end
-    case registerReference (* * * * * * * *) :
-      error inPropertyName : "register is not handled here" : ioInternalRepresentation
     case temporaryReference (* *) :
       error identifier : "«temporaryReference» invalid here" : ioInternalRepresentation
     case property (* * *) :
@@ -952,8 +950,6 @@ private proc handleArrayAccessInExpression
      ![variableIR llvmName]
    ]
    ioInternalRepresentation = .universalReference {!type:[loadedObjectIR type] !llvmName:[loadedObjectIR name]}
-  elsif [variableIR isRegisterReference] then
-    error inEndOfIndex : "control register not handled here"
   else
     error errorLocation : "the receiver is not an array and does not accept subscripting"
   end

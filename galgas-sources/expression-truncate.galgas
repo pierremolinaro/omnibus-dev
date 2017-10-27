@@ -94,7 +94,6 @@ override method @truncateExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !expressionResultPossibleReference
-    !mTypeName
     ?let expressionResult
   ]  
 #--- Analyze type
