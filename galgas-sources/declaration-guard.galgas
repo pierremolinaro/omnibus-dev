@@ -183,7 +183,6 @@ proc guardSemanticAnalysis
     !mode:.guardMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
   @routineFormalArgumentListForGeneration formalArguments = {}
@@ -193,7 +192,7 @@ proc guardSemanticAnalysis
   switch inGuardKind
   case baseGuard :
   #--- Add 'accept" output variable
-    let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
+    let resultVarName = @lstring.new {!acceptVariablePLMName() !inRoutineName.location}
     let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]} type]
     allocaList += !resultVarName.string ![resultType llvmTypeName]
     [!?universalMap insertLocalVariable
@@ -221,7 +220,6 @@ proc guardSemanticAnalysis
       !mode:.guardMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-#      !?variableMap:variableMap
       !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
@@ -573,10 +571,10 @@ method @guardMapIR-element llvmCodeGeneration
     end
   end
 #--- Declare "accept" variable 
-  let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableName ())
-  let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariableName () + ".loaded")
-  let accepted_llvmName_true =  acceptVariableName () + ".true"
-  let accepted_llvmName_false = acceptVariableName () + ".false"
+  let accepted_llvmName = llvmNameForLocalVariable (!acceptVariablePLMName ())
+  let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariablePLMName () + ".loaded")
+  let accepted_llvmName_true =  acceptVariablePLMName () + ".true"
+  let accepted_llvmName_false = acceptVariablePLMName () + ".false"
 #--- Base guard or convenience guard ?
   switch mGuardKindGenerationIR
   case baseGuard :

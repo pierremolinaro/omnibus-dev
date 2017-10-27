@@ -541,12 +541,12 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Function 'acceptVariableName'                                            *
+//                                          Function 'acceptVariablePLMName'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_acceptVariableName (class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_acceptVariablePLMName (class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

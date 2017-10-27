@@ -112,7 +112,6 @@ override method @forInstructionAST analyze
   ioAllocaList += !plmName ![iteratedElementType llvmTypeName]
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
-#  let objectIR = @objectIR.localVariableReference {!type:iteratedElementType !plmName:plmName}
   [!?ioUniversalMap insertLocalConstant !mVarName !iteratedElementType !plmName]
 #--- Analyze while expression
   @instructionListIR whileExpression_GenerationList = {}

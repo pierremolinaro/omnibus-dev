@@ -579,7 +579,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
 #--- object access, with self
   @internalRepresentation internalRepresentation= .structureMember {
     !propertyName:mObjectName
-    !currentPointerIR:.selfObject {!type:inSelfType}
+    !currentPointerIR:.llvmReference {!type:inSelfType !llvmName:llvmNameForSelf ()}
   }
 #--- Access list
   for (access) in mAccessList do
@@ -789,27 +789,23 @@ private proc handlePropertyAccessInExpression
   case standAloneIdentifier (identifier) :
     [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?let @objectIR objectIR]
     switch objectIR
-    case globalVariableReference (type *) :
+    case globalVariableRef (type *) :
       if [type isStructure] then
         ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
       else
         error identifier : "this should be a structure instance" : ioInternalRepresentation
       end
     case null :
-    case selfObject (*) :
-      error identifier : "«selfObject» invalid here" : ioInternalRepresentation
-    case localVariableReference (type @lstring plmName) :
+    case llvmReference (type llvmName) :
       if [type isStructure] then
         let objectIR = @objectIR.llvmTemporaryValue {
           !type:type
-          !llvmName:.new {!llvmNameForLocalVariable (!plmName) !plmName}
+          !llvmName:[llvmName nowhere]
         }
         ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
       else
         error identifier : "this should be a structure instance" : ioInternalRepresentation
       end
-    case llvmReference (* *) :
-      error identifier : "«llvmReference» invalid here" : ioInternalRepresentation
     case propertyRef (* * *) :
       error identifier : "«property» invalid here" : ioInternalRepresentation
     case llvmTemporaryValue (* *) :

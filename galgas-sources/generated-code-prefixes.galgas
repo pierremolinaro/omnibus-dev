@@ -217,7 +217,7 @@ func llvmNameForSafeImplementation ?let @string inName -> @string {
 #!   Guards
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once acceptVariableName -> @string {
+func %once acceptVariablePLMName -> @string {
   result = "accept"
 }
 
