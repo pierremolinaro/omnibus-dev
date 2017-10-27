@@ -72,7 +72,6 @@ override method @prefixOperatorExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !expressionResultPossibleReference
-    !mOperatorLocation
     ?let expressionResult
   ]  
 #--- Check expression type accepts prefix operator

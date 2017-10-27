@@ -128,7 +128,6 @@ override method @forLowerUpperBoundInstructionAST analyze
     [!?ioInstructionGenerationList appendLoadFromReference
       !?ioTemporaries
       !lowerBoundExpressionResultPossibleReference
-      !mEndOf_lowerBoundExpression_instruction
       ?let lowerBoundExpressionResult
     ]  
     [mUpperBoundExpression analyzeExpression
@@ -148,7 +147,6 @@ override method @forLowerUpperBoundInstructionAST analyze
     [!?ioInstructionGenerationList appendLoadFromReference
       !?ioTemporaries
       !upperBoundExpressionResultPossibleReference
-      !mEndOf_upperBoundExpression_instruction
       ?let upperBoundExpressionResult
     ]  
   #--- Check expression types

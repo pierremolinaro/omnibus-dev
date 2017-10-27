@@ -92,7 +92,6 @@ override method @assignmentInstructionAST analyze
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !sourceOperandPossibleReference
-    !mTargetAST.mIdentifier
     ?let sourceOperand
   ]  
   let result = checkAssignmentCompatibility (

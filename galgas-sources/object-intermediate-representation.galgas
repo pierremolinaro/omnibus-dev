@@ -17,14 +17,6 @@ enum @objectIR {
   case globalVariableReference (@PLMType type @lstring plmName)
   case localVariableReference (@PLMType type @lstring plmName)
   case temporaryReference (@PLMType type @lstring llvmName)
-  case registerReference (@PLMType type
-                          @lstring plmName
-                          @bool readable
-                          @bool writable
-                          @bigint address
-                          @sliceMap sliceMap
-                          @uint arraySize # 0 if not an array
-                          @uint elementSize) # 0 if not an array
 #--- Structure property
   case property (@PLMType type @lstring plmName @propertyAccessKind access)
 #--- Values
@@ -46,8 +38,6 @@ getter @objectIR location -> @location {
   case globalVariableReference (* plmName) :
     result = plmName
   case localVariableReference (* plmName) :
-    result = plmName
-  case registerReference (* plmName ******):
     result = plmName
   case zero (*) :
     error .nowhere : "<<@objectIR location zero>>" : result
@@ -80,7 +70,6 @@ getter @objectIR llvmName -> @string {
   case property (***) : error [self location] : "<<@objectIR property llvmName>>" : result
   case globalVariableReference (* plmName) : result = llvmNameForGlobalVariable (!plmName)
   case localVariableReference (* plmName)  : result = llvmNameForLocalVariable (!plmName)
-  case registerReference (********): error [self location] : "<<@objectIR llvmName>>" : result
   case zero (*) : result = "zeroinitializer"
   case selfObject (*) : result = "%self"
   case literalInteger (* @bigint value) : result = [value string]
@@ -108,7 +97,6 @@ getter @objectIR type -> @PLMType {
     error [self location] : "<<@objectIR type null>>" : result
   case temporaryReference (type *) : result = type
   case property (type **) : result = type
-  case registerReference (type *******) : result = type
   case globalVariableReference (type *) : result = type
   case localVariableReference (type *) : result = type
   case zero (type) : result = type
@@ -141,17 +129,6 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
     result = .temporaryReference {!type:inType !llvmName:llvmName}
   case property (* plmName access) :
     result = .property {!type:inType !plmName:plmName !access:access}
-  case registerReference (* plmName readable writable address sliceMap arraySize elementSize) :
-    result = .registerReference {
-      !type: inType
-      !plmName: plmName
-      !readable: readable
-      !writable: writable
-      !address: address
-      !sliceMap: sliceMap
-      !arraySize: arraySize
-      !elementSize: elementSize
-    }
   case localVariableReference (* name) :
     result = .localVariableReference {!type: inType !plmName: name}
   case globalVariableReference (* name) :
@@ -178,7 +155,6 @@ getter @objectIR name -> @string {
   case null : error [self location] : "<<@objectIR name null>>" : result
   case temporaryReference (* llvmName) : result = llvmName
   case property (* name *) : result = name
-  case registerReference (* name ******) : result = name
   case localVariableReference (* name) : result = name
   case globalVariableReference (* name) : result = name
   case zero (*) : result = "zeroinitializer"
@@ -200,7 +176,6 @@ getter @objectIR isStatic -> @bool {
   case null : error [self location] : "<<@objectIR isStatic null>>" : result
   case temporaryReference (**) : result = false
   case property (***) : result = false
-  case registerReference (* *******) : result = false
   case localVariableReference (* *) : result = false
   case globalVariableReference (* *) : result = false
   case zero (*) : result = true

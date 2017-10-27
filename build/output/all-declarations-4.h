@@ -4107,7 +4107,6 @@ class cPtr_indirectRoutineCallIR : public cPtr_abstractInstructionIR {
 
 void extensionSetter_appendStoreFromReference (class GALGAS_instructionListIR & ioObject,
                                                const class GALGAS_objectIR constin_inTargetReference,
-                                               const class GALGAS_location constin_inErrorLocation,
                                                const class GALGAS_objectIR constin_inValue,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
@@ -4121,7 +4120,6 @@ void extensionSetter_appendStoreFromReference (class GALGAS_instructionListIR & 
 void extensionSetter_appendLoadFromReference (class GALGAS_instructionListIR & ioObject,
                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                               const class GALGAS_objectIR constin_inSource,
-                                              const class GALGAS_location constin_inErrorLocation,
                                               class GALGAS_objectIR & out_outResultingValue,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;

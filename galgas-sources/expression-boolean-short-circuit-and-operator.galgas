@@ -66,7 +66,6 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !leftOperandPossibleReference
-    !mOperatorLocation
     ?let leftOperand
   ]  
 #--- Analyze right expression
@@ -88,7 +87,6 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !rightOperandPossibleReference
-    !mOperatorLocation
     ?let rightOperand
   ]  
 #--- Check left type is boolean

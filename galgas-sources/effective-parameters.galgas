@@ -164,7 +164,6 @@ proc analyzeEffectiveParameters
       [!?ioInstructionGenerationList appendLoadFromReference
         !?ioTemporaries
         !expressionResult
-        !endOfExp
         ?let expressionValue
       ]  
       let result = checkAssignmentCompatibility (

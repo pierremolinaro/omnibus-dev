@@ -85,7 +85,6 @@ override method @whileInstructionAST analyze
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !testValuePossibleReference
-    !mEndOf_test_expression
     ?let testValue
   ]  
 #--- Check inferred type

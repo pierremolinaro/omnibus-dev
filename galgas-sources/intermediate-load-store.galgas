@@ -2,7 +2,6 @@
 
 setter @instructionListIR appendStoreFromReference
   ?let @objectIR inTargetReference
-  ?let @location inErrorLocation
   ?let @objectIR inValue
 {
   switch inTargetReference
@@ -17,11 +16,6 @@ setter @instructionListIR appendStoreFromReference
     [!?self appendStoreLocalVariable !plmName !type !inValue]
   case temporaryReference (@PLMType type llvmName) :
     [!?self appendStoreTemporaryReference !type !llvmName !inValue]
-  case registerReference (type * * * address * arraySize *) :
-    if arraySize > 0 then
-      error inErrorLocation : "register array requires subscripting"
-    end
-    [!?self appendStoreVolatileRegister !type !address !inValue]
 #--- Structure property
   case property (* * *) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue property>>"
@@ -46,7 +40,6 @@ setter @instructionListIR appendStoreFromReference
 setter @instructionListIR appendLoadFromReference
   ?!@semanticTemporariesStruct ioTemporaries
   ?let @objectIR inSource
-  ?let @location inErrorLocation
   !@objectIR outResultingValue
 {
   switch inSource
@@ -72,16 +65,6 @@ setter @instructionListIR appendLoadFromReference
       !outResultingValue
       !llvmName
     ]
-  case registerReference (type registerName * * address * arraySize *) :
-    if arraySize > 0 then
-      error inErrorLocation : "register array requires subscripting" : outResultingValue
-    else
-      getNewTempVariable (!type !registerName !?ioTemporaries ?outResultingValue)
-      [!?self appendLoadVolatileRegister
-        !outResultingValue
-        !address
-      ]
-    end
 #--- Structure property
   case property (type plmName *) :
     getNewTempVariable (!type !plmName !?ioTemporaries ?outResultingValue)

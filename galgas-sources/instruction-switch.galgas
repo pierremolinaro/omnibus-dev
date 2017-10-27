@@ -107,7 +107,6 @@ override method @switchInstructionAST analyze
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !switchValueIRPossibleReference
-    !mEndOf_test_expression
     ?let switchValueIR
   ]  
 #--- Check inferred type

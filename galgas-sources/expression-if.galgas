@@ -102,7 +102,6 @@ override method @ifExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !ifExpressionResultPossibleReference
-    !mIfExpressionEndLocation
     ?let ifExpressionResult
   ]  
 #--- Check "if" expression type is boolean
@@ -127,7 +126,6 @@ override method @ifExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !thenExpressionPossibleReferenceResult
-    !mThenExpressionEndLocation
     ?let thenExpressionTempResult
   ]  
   let thenExpressionResult = checkAssignmentCompatibility (
@@ -154,7 +152,6 @@ override method @ifExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !elseExpressionPossibleReferenceResult
-    !mThenExpressionEndLocation
     ?let elseExpressionTempResult
   ]  
   let elseExpressionResult = checkAssignmentCompatibility (
