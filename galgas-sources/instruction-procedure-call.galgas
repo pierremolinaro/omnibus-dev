@@ -283,7 +283,7 @@ override method @procedureCallInstructionAST analyze
           switch propertyAccess
           case nonVirtualMethod :
              error propertyName : "a method cannot be used in this context" : currentType, currentLLVMAddressVar
-          case constantValue (*) :
+          case constant (*) :
             error propertyName
               : "a context property cannot be used in this context"
               : currentType, currentLLVMAddressVar

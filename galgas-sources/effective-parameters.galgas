@@ -214,7 +214,7 @@ proc analyzeEffectiveParameters
         switch propertyAccess
         case nonVirtualMethod :
           error inErrorLocation : "a method cannot be used in this context"
-        case constantValue (*) :
+        case constant (*) :
           error inErrorLocation : "a constant property cannot be used here"
         case indexed (@uint propertyIndex) :
           [!?ioTemporaries newTempLLVMVar ?let property_llvmName]

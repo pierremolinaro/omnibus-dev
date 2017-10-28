@@ -213,8 +213,9 @@ list @propertyList {
 #·······················································································································
 
 enum @propertyAccessKind {
-  case constantValue (@string llvmValue)
+  case constant (@string llvmValue)
   case indexed (@uint index)
+#  case nonVirtualMethod (@routineMapForContext routineMap)
   case nonVirtualMethod
 }
 
@@ -292,23 +293,23 @@ override method @structureDeclarationAST enterInContext
     end
   end
 #---------------------------------------- Enter routines in property map
-  for function in mFunctionDeclarationListAST do
-  #--- Get function name and map containing the function definition
-    let functionMangledName = routineMangledNameFromAST (!"$" + mStructureName !function.mFunctionName !function.mFunctionFormalArgumentList)
- 
-  #--- Attribute set
-    @stringset attributeSet = {}
-    for attribute in function.mFunctionAttributeList do
-      attributeSet += !attribute.mValue.string
-    end
-  end
-  for system in mSystemRoutineListAST do
-  #--- Attribute set
-    @stringset attributeSet = {}
-    for attribute in system.mAttributeList do
-      attributeSet += !attribute.mValue.string
-    end
-  end
+#  for function in mFunctionDeclarationListAST do
+#  #--- Get function name and map containing the function definition
+#    let functionMangledName = routineMangledNameFromAST (!"$" + mStructureName !function.mFunctionName !function.mFunctionFormalArgumentList)
+# 
+#  #--- Attribute set
+#    @stringset attributeSet = {}
+#    for attribute in function.mFunctionAttributeList do
+#      attributeSet += !attribute.mValue.string
+#    end
+#  end
+#  for system in mSystemRoutineListAST do
+#  #--- Attribute set
+#    @stringset attributeSet = {}
+#    for attribute in system.mAttributeList do
+#      attributeSet += !attribute.mValue.string
+#    end
+#  end
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
@@ -381,7 +382,7 @@ method @structurePropertyListAST-element enterInContext
       canBeCopied = false
     end
     if mIsConstant then
-     let constantProperty = @propertyAccessKind.constantValue {!llvmValue:[expressionIR name]}
+     let constantProperty = @propertyAccessKind.constant {!llvmValue:[expressionIR name]}
      [!?propertyMap insertKey
         !mPropertyName
         !mIsPublic
@@ -534,35 +535,6 @@ list @propertyAccessRoutineList {
   @string mPropertyName
   @propertyAccessKind mAccessKind
 }
-
-#·······················································································································
-
-#method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
-#  for (structureKind propertyType propertyName accessKind) in self do
-#    var propTypeName = [propertyType llvmTypeName]
-#    let structTypeName = [structureKind llvmTypeName]
-#    ioLLVMcode += llvmTitleComment (!"Access property '" + propertyName + "' of structure " + structTypeName)
-#    switch accessKind
-#    case nonVirtualMethod : # No code to generate
-#    case indexed (index) :
-##      ioLLVMcode += "define internal " + propTypeName
-##      ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
-##      ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
-##      ioLLVMcode += "  %result = getelementptr inbounds " + structTypeName + ", " + structTypeName + " * %self, "
-##      ioLLVMcode += "i32 0, i32 " + index + " ; " + propertyName + ", index " + index + "\n"
-##      ioLLVMcode += "  ret " + propTypeName + " * %result\n"
-##      ioLLVMcode += "}\n\n"
-#    case constantValue (value) :
-#      let constantName = "@\"" + structTypeName + ".constant." + propertyName + "\""
-#      ioLLVMcode += constantName + " = private unnamed_addr constant " + propTypeName + " " + value + "\n\n"
-#      ioLLVMcode += "define internal " + propTypeName
-#      ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
-#      ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
-#      ioLLVMcode += "  ret " + propTypeName + " * " + constantName + "\n"
-#      ioLLVMcode += "}\n\n"
-#    end
-#  end
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
