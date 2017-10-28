@@ -129,7 +129,6 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR rightExpressionResult
   ]
-  log rightExpressionResult
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !rightExpressionResult

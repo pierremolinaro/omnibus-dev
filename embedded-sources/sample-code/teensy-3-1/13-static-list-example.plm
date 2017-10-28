@@ -72,6 +72,7 @@ task T priority 12 stackSize 512 {
     toggle (!port:LED_L1)
     var total $uint32 = 0
     for élément in maListeStatique {
+      total = total + élément.a
       total += élément.a
       total += élément.b
       total += élément.f ()

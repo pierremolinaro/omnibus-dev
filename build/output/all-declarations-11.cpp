@@ -2205,6 +2205,7 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1/un
   "    toggle (!port:LED_L1)\n"
   "    var total $uint32 = 0\n"
   "    for \xC3""\xA9""l\xC3""\xA9""ment in maListeStatique {\n"
+  "      total = total + \xC3""\xA9""l\xC3""\xA9""ment.a\n"
   "      total += \xC3""\xA9""l\xC3""\xA9""ment.a\n"
   "      total += \xC3""\xA9""l\xC3""\xA9""ment.b\n"
   "      total += \xC3""\xA9""l\xC3""\xA9""ment.f ()\n"
@@ -2221,7 +2222,7 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "13-static-list-example.plm",
   "plm",
   true, // Text file
-  1996, // Text length
+  2028, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 
