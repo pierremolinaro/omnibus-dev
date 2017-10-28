@@ -323,7 +323,9 @@ private proc analyzeVariableInLValue
           [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
           [propertyMap searchKey !propertyName ?* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
           switch propertyAccess
-          case constant (*) :
+          case nonVirtualMethod :
+             error propertyName : "a method cannot be written" : currentType, currentLLVMName
+          case constantValue (*) :
             error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
           case indexed (@uint index) :
             [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
@@ -408,7 +410,9 @@ private proc analyzeSelfAssignmentTarget
           [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
           [propertyMap searchKey !propertyName ?* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
           switch propertyAccess
-          case constant (*) :
+          case nonVirtualMethod :
+             error propertyName : "a method cannot be written" : currentType, currentLLVMName
+          case constantValue (*) :
             error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
           case indexed (@uint index) :
             [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]

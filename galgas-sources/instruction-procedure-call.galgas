@@ -273,7 +273,6 @@ override method @procedureCallInstructionAST analyze
         [propertyMap searchKey
           !propertyName
           ?let @bool unused isPublic
-#          ?* # let @objectIR propertyObject
           ?let @PLMType propertyType
           ?let @propertyAccessKind propertyAccess
         ]
@@ -282,7 +281,9 @@ override method @procedureCallInstructionAST analyze
         else
           [propertyType structure ?1* ?propertyMap:propertyMap ?3*]
           switch propertyAccess
-          case constant (*) :
+          case nonVirtualMethod :
+             error propertyName : "a method cannot be used in this context" : currentType, currentLLVMAddressVar
+          case constantValue (*) :
             error propertyName
               : "a context property cannot be used in this context"
               : currentType, currentLLVMAddressVar
@@ -378,23 +379,23 @@ override method @procedureCallInstructionAST analyze
         #--- Enter in invocation graph
           [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
         case propertyIndirectCall (type index) :
-          let propertyReference = @objectIR.reference {
-             !type:type
-             !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
-          }
-          ioTemporaries.mTemporaryIndex ++
-          [!?ioInstructionGenerationList appendGetPropertyReference
-            !propertyReference
-            !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
-            !methodName
-          ]
-        #--- Code generation
-          ioInstructionGenerationList += !@indirectRoutineCallIR.new {
-            !propertyReference
-            !type
-            !.null # No result
-            !effectiveParameterListIR
-          }
+#          let propertyReference = @objectIR.reference {
+#             !type:type
+#             !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
+#          }
+#          ioTemporaries.mTemporaryIndex ++
+#          [!?ioInstructionGenerationList appendGetPropertyReference
+#            !propertyReference
+#            !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
+#            !methodName
+#          ]
+#        #--- Code generation
+#          ioInstructionGenerationList += !@indirectRoutineCallIR.new {
+#            !propertyReference
+#            !type
+#            !.null # No result
+#            !effectiveParameterListIR
+#          }
         end
       end
     end
