@@ -58,17 +58,17 @@ syntax extension plm_syntax {
         accessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
       end
     end
-    @expressionAST leftExpression
-    if lvalue.mIdentifier.string != "" then
-      leftExpression = @primaryInExpressionAST.new {!.noSelf !lvalue.mIdentifier !accessList}
-    elsif ([accessList length] > 0) && [[accessList mAccessAtIndex !0] isProperty] then
-      [!?accessList popFirst ?let access]
-      [access property ?name:let propertyName]
-      leftExpression = @primaryInExpressionAST.new {!.selfAt {!location:lvalue.mIdentifier} !propertyName !accessList}
-    else
-      error instructionLocation : "invalid lvalue" : leftExpression
-    end
-  #--- Build source expression
+    let leftExpression = @primaryInExpressionAST.new {!lvalue.mIdentifier !accessList}
+#    @expressionAST leftExpression
+#    if lvalue.mIdentifier.string != "" then
+#      leftExpression = @primaryInExpressionAST.new {!lvalue.mIdentifier !accessList}
+#    elsif ([accessList length] > 0) && [[accessList mAccessAtIndex !0] isProperty] then
+#      [!?accessList popFirst ?let access]
+#      [access property ?name:let propertyName]
+#      leftExpression = @primaryInExpressionAST.new {!.selfAt {!location:lvalue.mIdentifier} !propertyName !accessList}
+#    else
+#      error instructionLocation : "invalid lvalue" : leftExpression
+#    end
     let expression = @infixOperatorExpressionAST.new {
       !leftExpression
       !operatorLocation

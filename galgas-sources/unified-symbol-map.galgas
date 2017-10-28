@@ -79,7 +79,6 @@ proc variableMapWithConstants
 
 proc getNewTempVariable
   ?let @PLMType inType
-  ?@location inErrorLocation
   ?!@semanticTemporariesStruct ioTemporaries
   !@objectIR outTempVariable
 {
@@ -87,7 +86,7 @@ proc getNewTempVariable
     outTempVariable = .null
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]
-    outTempVariable = .llvmTemporaryValue {!type: inType !llvmName:.new {!llvmName !inErrorLocation}}
+    outTempVariable = .llvmTemporaryValue {!type: inType !llvmName:llvmName}
   end
 }
 

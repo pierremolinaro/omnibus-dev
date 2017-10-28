@@ -126,7 +126,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!name) !name}}
+        !.reference {!type:type !llvmName:llvmNameForLocalVariable (!name)}
     case input (@lstring name) :
       [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
 #      if not accessIsAllowed then
@@ -141,11 +141,9 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmTemporaryValue {
+        !.reference {
           !type:[objectIR type]
           !llvmName:[[objectIR llvmName] nowhere]
-#          !llvmName:.new {!llvmNameForLocalVariable (![objectIR name])
-#          ![objectIR location]}
         }
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
@@ -184,9 +182,9 @@ proc analyzeEffectiveParameters
 #        error name : "routine has no access right on the this variable"
 #      end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
-      let argumentIR = @objectIR.llvmTemporaryValue {
+      let argumentIR = @objectIR.reference {
         !type:[objectIR type]
-        !llvmName:.new {![objectIR llvmName] ![objectIR location]}
+        !llvmName:[objectIR llvmName]
       }
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
@@ -213,7 +211,7 @@ proc analyzeEffectiveParameters
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case structure (* propertyMap * * *) :
         [propertyMap searchKey !name ?* ?let propertyObject ?2*]
-        getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
+        getNewTempVariable (![propertyObject type] !?ioTemporaries ?let fieldObjectReference)
         [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
           !fieldObjectReference
           !inSelfType
