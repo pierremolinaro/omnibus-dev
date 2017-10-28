@@ -75,7 +75,7 @@ proc getNewTempVariable
     outTempVariable = .null
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]
-    outTempVariable = .llvmTemporaryValue {!type: inType !llvmName:llvmName}
+    outTempVariable = .llvmValue {!type: inType !llvmName:llvmName}
   end
 }
 

@@ -17,7 +17,7 @@ setter @instructionListIR appendLoadFromReference
 #--- Values
   case literalInteger (**) :
     outResultingValue = inSource
-  case llvmTemporaryValue (**) :
+  case llvmValue (**) :
     outResultingValue = inSource
   case llvmStructureConstant (* *) :
     outResultingValue = inSource

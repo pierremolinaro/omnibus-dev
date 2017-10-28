@@ -212,7 +212,9 @@ proc analyzeEffectiveParameters
       case structure (* propertyMap * * *) :
         [propertyMap searchKey !name ?* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
-        case constant (*) :
+        case nonVirtualMethod :
+          error inErrorLocation : "a method cannot be used in this context"
+        case constantValue (*) :
           error inErrorLocation : "a constant property cannot be used here"
         case indexed (@uint propertyIndex) :
           [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
