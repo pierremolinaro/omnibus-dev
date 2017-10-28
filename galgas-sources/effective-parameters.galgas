@@ -210,13 +210,13 @@ proc analyzeEffectiveParameters
       case integer (* * * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case structure (* propertyMap * * *) :
-        [propertyMap searchKey !name ?* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
+        [propertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
         case nonVirtualMethod :
           error inErrorLocation : "a method cannot be used in this context"
-        case constant (*) :
+        case constant (* *) :
           error inErrorLocation : "a constant property cannot be used here"
-        case indexed (@uint propertyIndex) :
+        case indexed (@PLMType propertyType @uint propertyIndex) :
           [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
           [!?ioInstructionGenerationList appendGetUniversalPropertyReference
             !inSelfType

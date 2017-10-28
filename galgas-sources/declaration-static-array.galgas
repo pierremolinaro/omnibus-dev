@@ -153,8 +153,8 @@ override method @staticArrayAST enterInContext
         [!?propertyMap insertKey
           !propertyName
           !true # Public
-          !propertyType
-          !.indexed{!index:propertyIndex}
+#          !propertyType
+          !.indexed{!type:propertyType !index:propertyIndex}
         ]
       end
     case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnTypeName) :
@@ -184,8 +184,8 @@ override method @staticArrayAST enterInContext
       [!?propertyMap insertKey
         !propertyName
         !true # Public
-        !propertyType
-        !.indexed{!index:propertyIndex}
+#        !propertyType
+        !.indexed{!type:propertyType !index:propertyIndex}
       ]
     end
   end

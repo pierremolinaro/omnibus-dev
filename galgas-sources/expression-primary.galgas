@@ -569,13 +569,13 @@ private proc handlePropertyAccessInExpression
     error inPropertyName : "receiver has no property" : ioResult
   else
     [type structure ?1* ?propertyMap:let propertyMap ?3*]
-    [propertyMap searchKey !inPropertyName ?* ?let @PLMType propertyType ?let @propertyAccessKind accessKind]
+    [propertyMap searchKey !inPropertyName ?* ?let @propertyAccessKind accessKind]
     switch accessKind
     case nonVirtualMethod :
       error inPropertyName : "a method cannot be used in this context" : ioResult
-    case constant (@string llvmValue) :
+    case constant (@PLMType propertyType @string llvmValue) :
       ioResult = .llvmValue {!type:propertyType !llvmName:llvmValue}
-    case indexed (@uint propertyIndex) :
+    case indexed (@PLMType propertyType @uint propertyIndex) :
       [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
       [!?ioInstructionGenerationList appendGetUniversalPropertyReference
         ![ioResult type]

@@ -213,8 +213,8 @@ list @propertyList {
 #·······················································································································
 
 enum @propertyAccessKind {
-  case constant (@string llvmValue)
-  case indexed (@uint index)
+  case constant (@PLMType type @string llvmValue)
+  case indexed  (@PLMType type @uint index)
 #  case nonVirtualMethod (@routineMapForContext routineMap)
   case nonVirtualMethod
 }
@@ -223,7 +223,7 @@ enum @propertyAccessKind {
 
 map @propertyMap {
   @bool mIsPublic
-  @PLMType mType
+#  @PLMType mType
   @propertyAccessKind mAccess
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"
@@ -382,22 +382,22 @@ method @structurePropertyListAST-element enterInContext
       canBeCopied = false
     end
     if mIsConstant then
-     let constantProperty = @propertyAccessKind.constant {!llvmValue:[expressionIR name]}
+#     let constantProperty = @propertyAccessKind.constant {!type:actualPropertyType !llvmValue:[expressionIR name]}
      [!?propertyMap insertKey
         !mPropertyName
         !mIsPublic
-        !actualPropertyType
-        !constantProperty
+#        !actualPropertyType
+        !.constant {!type:actualPropertyType !llvmValue:[expressionIR name]}
       ]
     else
       let propertyIndex = [propertyList length]
-      let indexedProperty = @propertyAccessKind.indexed{!index:propertyIndex}
+#      let indexedProperty = @propertyAccessKind.indexed{!index:propertyIndex}
       propertyList += !mPropertyName.string !actualPropertyType
       [!?propertyMap insertKey
         !mPropertyName
         !mIsPublic
-        !actualPropertyType
-        !indexedProperty
+#        !actualPropertyType
+        !.indexed{!type:actualPropertyType !index:propertyIndex}
       ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     end
@@ -410,8 +410,8 @@ method @structurePropertyListAST-element enterInContext
     [!?propertyMap insertKey
       !mPropertyName
       !mIsPublic
-      !optionalPropertyType
-      !.indexed{!index:propertyIndex}
+#      !optionalPropertyType
+      !.indexed{!type: optionalPropertyType!index:propertyIndex}
     ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
   end

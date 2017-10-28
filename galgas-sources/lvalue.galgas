@@ -99,8 +99,15 @@ method @LValueAST type
     case property (@lstring propertyName) :
       if [outType isStructure] then
         [outType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-        [propertyMap searchKey !propertyName ?* ?let type ?*]
-        outType = type
+        [propertyMap searchKey !propertyName ?* ?let accessKind]
+        switch accessKind
+        case constant (type *) :
+          outType = type
+        case indexed  (type *) :
+          outType = type
+        case nonVirtualMethod :
+          error propertyName : "a method cannot be used in this context" : outType
+        end
       else
         error propertyName : "receiver has no property" : outType
       end
@@ -321,13 +328,13 @@ private proc analyzeVariableInLValue
       case property (@lstring propertyName) :
         if [currentType isStructure] then
           [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-          [propertyMap searchKey !propertyName ?* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
+          [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
           switch propertyAccess
           case nonVirtualMethod :
              error propertyName : "a method cannot be written" : currentType, currentLLVMName
-          case constant (*) :
+          case constant (* *) :
             error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
-          case indexed (@uint index) :
+          case indexed (@PLMType propertyType @uint index) :
             [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
             [!?ioInstructionGenerationList appendGetUniversalPropertyReference
               !currentType
@@ -408,13 +415,13 @@ private proc analyzeSelfAssignmentTarget
       case property (@lstring propertyName) :
         if [currentType isStructure] then
           [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-          [propertyMap searchKey !propertyName ?* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
+          [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
           switch propertyAccess
           case nonVirtualMethod :
              error propertyName : "a method cannot be written" : currentType, currentLLVMName
-          case constant (*) :
+          case constant (* *) :
             error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
-          case indexed (@uint index) :
+          case indexed (@PLMType propertyType @uint index) :
             [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
             [!?ioInstructionGenerationList appendGetUniversalPropertyReference
               !currentType

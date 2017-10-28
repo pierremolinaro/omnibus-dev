@@ -273,21 +273,20 @@ override method @procedureCallInstructionAST analyze
         [propertyMap searchKey
           !propertyName
           ?let @bool unused isPublic
-          ?let @PLMType propertyType
           ?let @propertyAccessKind propertyAccess
         ]
-        if not [propertyType isStructure] then
-          error mIdentifier : "receiver has no property"
-        else
-          [propertyType structure ?1* ?propertyMap:propertyMap ?3*]
+#        if not [propertyType isStructure] then
+#          error mIdentifier : "receiver has no property"
+#        else
+#          [propertyType structure ?1* ?propertyMap:propertyMap ?3*]
           switch propertyAccess
           case nonVirtualMethod :
              error propertyName : "a method cannot be used in this context" : currentType, currentLLVMAddressVar
-          case constant (*) :
+          case constant (* *) :
             error propertyName
               : "a context property cannot be used in this context"
               : currentType, currentLLVMAddressVar
-          case indexed (@uint propertyIndex) :
+          case indexed (@PLMType propertyType @uint propertyIndex) :
             [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
             [!?ioInstructionGenerationList appendGetUniversalPropertyReference
               !currentType
@@ -299,7 +298,7 @@ override method @procedureCallInstructionAST analyze
             ]
             currentType = propertyType
             currentLLVMAddressVar = llvmPropertyName
-          end
+#          end
         end
       case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
         error endOfIndex : "not handled yet" : currentType, currentLLVMAddressVar
