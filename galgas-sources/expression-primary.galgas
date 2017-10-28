@@ -250,6 +250,21 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   case localConstant (@PLMType type @lstring plmName) :
     [!?ioUniversalMap readAccess !mReceiverName]
     outResult = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+    procAnalyzePrimaryExpression (
+      !self: inSelfType
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !mAccessList
+      !?result: outResult
+    )
   case globalVariable (* @PLMType type) :
     [!?ioUniversalMap readAccess !mReceiverName]
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}

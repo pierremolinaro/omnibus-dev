@@ -32,7 +32,6 @@ setter @universalPropertyAndRoutineMapForContext insertModule
       !.noValue
       !false
       !newValue
-      !{} # empty routine map
     ]
   end
 }
@@ -70,7 +69,6 @@ setter @universalPropertyAndRoutineMapForContext insertRegister
       !.noValue
       !false
       !newValue
-      !{} # empty routine map
     ]
   end
 }
@@ -94,7 +92,6 @@ setter @universalPropertyAndRoutineMapForContext insertGlobalConstant
       !.noValue
       !false
       !newValue
-      !{} # empty routine map
     ]
   end
 }
@@ -120,7 +117,6 @@ setter @universalPropertyAndRoutineMapForContext insertLocalConstant
       !.hasUnreadValue
       !false
       !newValue
-      !{} # empty routine map
     ]
   end
   mLocalObjectList += !inLocalConstantName
@@ -147,7 +143,6 @@ setter @universalPropertyAndRoutineMapForContext insertUsedLocalConstant
       !.hasReadValue
       !false
       !newValue
-      !{} # empty routine map
     ]
   end
   mLocalObjectList += !inLocalConstantName
@@ -173,7 +168,6 @@ setter @universalPropertyAndRoutineMapForContext insertGlobalVariable
       !.noValue
       !false
       !newValue
-      !{} # empty routine map
     ]
   end
 }
@@ -202,7 +196,6 @@ setter @universalPropertyAndRoutineMapForContext insertLocalVariable
       !inVariableInitialState
       !inObjectShouldBeValuedAtEndOfScope
       !newValue
-      !{} # empty routine map
     ]
   end
   mLocalObjectList += !inLocalVariableName
@@ -216,7 +209,7 @@ method @universalPropertyAndRoutineMapForContext searchEntity
   ?let @lstring inValuedObjectName
   !@possibleValuedObject outEntity
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?outEntity ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?outEntity]
 }
 
 #·······················································································································
@@ -225,7 +218,7 @@ method @universalPropertyAndRoutineMapForContext searchValuedObject
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let entity ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let entity]
   switch entity
   case undefined :
     error inValuedObjectName : "undefined in this context" : outObjectIR
@@ -247,7 +240,7 @@ method @universalPropertyAndRoutineMapForContext searchValuedObject
 #·······················································································································
 
 setter @universalPropertyAndRoutineMapForContext readAccess ?let @lstring inValuedObjectName {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context"
@@ -273,7 +266,7 @@ setter @universalPropertyAndRoutineMapForContext readAccess ?let @lstring inValu
 #·······················································································································
 
 setter @universalPropertyAndRoutineMapForContext writeAccess ?let @lstring inValuedObjectName {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context"
@@ -304,7 +297,7 @@ setter @universalPropertyAndRoutineMapForContext writeAccess ?let @lstring inVal
 #·······················································································································
 
 setter @universalPropertyAndRoutineMapForContext readWriteAccess ?let @lstring inValuedObjectName {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context"
@@ -342,7 +335,7 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outObjectIR
@@ -378,7 +371,7 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAcces
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outObjectIR
@@ -413,7 +406,7 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteA
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outObjectIR
@@ -450,7 +443,7 @@ method @universalPropertyAndRoutineMapForContext searchValuedObjectType
   ?let @lstring inValuedObjectName
   !@PLMType outType
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let property]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outType
@@ -568,7 +561,7 @@ setter @universalPropertyAndRoutineMapForContext closeBranch ?let @location inEr
     switch scopeKind
     case selectScope :
       for (lkey referenceState) in referenceStateMap do
-        [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?3*]
+        [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?2*]
         if referenceState == currentObjectState then # Ok
         elsif (currentObjectState == .hasUnreadValue) & (referenceState == .hasReadValue) then # Ok
         elsif (currentObjectState == .hasReadValue) & (referenceState == .hasUnreadValue) then # Ok, modify refence state
@@ -581,7 +574,7 @@ setter @universalPropertyAndRoutineMapForContext closeBranch ?let @location inEr
       mScopeStack += !scopeKind !false !initialStateMap !referenceStateMap !localObjectList
     case repeatScope :
      for (lkey objectState) in referenceStateMap do
-        [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?3*]
+        [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?2*]
         if objectState != currentObjectState then
           error inErrorLocation
             : "invalid state for object '" + lkey + "': found " + currentObjectState + ", required " + objectState
@@ -607,7 +600,6 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
       ?let currentObjectState
       ?let objectShouldBeValuedAtEndOfScope
       ?let possibleValuedObject
-      ?*
     ]
     switch possibleValuedObject
     case undefined :
@@ -641,7 +633,6 @@ map @internalUniversalPropertyAndRoutineMapForContext { # Key is a variable, pro
   @valuedObjectState mObjectState
   @bool mObjectShouldBeValuedAtEndOfScope
   @possibleValuedObject mPossibleValuedObject
-  @routineSignatureMapForContext mRoutineSignatureMapForContext
 
   insert insertKey error message "the '%K' entity is already declared in %L"
   search searchKey error message "there is no '%K' entity"
@@ -670,16 +661,6 @@ map @referenceStateMap {
   @valuedObjectState mState
   insert insertKey error message "INTERNAL ERROR"
   search searchKey error message "INTERNAL ERROR"
-}
-
-#·······················································································································
-
-map @routineSignatureMapForContext { # argument signature is the key
-  @lstring mLLVMInvocationRoutineName # Name used in LLVM for calling this routine
-  @routineDescriptor mDescriptor
-
-  insert insertKey error message "the '%K' routine signature is already declared in %L"
-  search searchKey error message "there is no '%K' routine signature"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
