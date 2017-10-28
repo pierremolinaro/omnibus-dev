@@ -89,7 +89,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
       !returnTypeProxy
       !false # canMutateProperties
       !false # canAccessPropertiesInUserMode
-      !.staticCall
+#      !.staticCall
     }
   ]
 }

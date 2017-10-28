@@ -1773,7 +1773,8 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
                                                                        const class GALGAS_uint & inOperand1
                                                                        COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_propertyAccessKind constructor_nonVirtualMethod (LOCATION_ARGS) ;
+  public : static class GALGAS_propertyAccessKind constructor_nonVirtualMethod (const class GALGAS_routineDescriptor & inOperand0
+                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -1793,6 +1794,10 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
                                                  class GALGAS_uint & outArgument1,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_nonVirtualMethod (class GALGAS_routineDescriptor & outArgument0,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
@@ -2250,6 +2255,104 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyList_2D_ele
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                              @routineDescriptor struct                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_routineDescriptor : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public : GALGAS_bool mProperty_mIsPublic ;
+
+  public : GALGAS_bool mProperty_mExported ;
+
+  public : GALGAS_routineKind mProperty_mRoutineKind ;
+
+  public : GALGAS_routineTypedSignature mProperty_mSignature ;
+
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnTypeProxy ;
+
+  public : GALGAS_bool mProperty_mCanAccessProperties ;
+
+  public : GALGAS_bool mProperty_mCanMutateProperties ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_routineDescriptor (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_routineDescriptor (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_routineDescriptor (const GALGAS_bool & in_mIsPublic,
+                                     const GALGAS_bool & in_mExported,
+                                     const GALGAS_routineKind & in_mRoutineKind,
+                                     const GALGAS_routineTypedSignature & in_mSignature,
+                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
+                                     const GALGAS_bool & in_mCanAccessProperties,
+                                     const GALGAS_bool & in_mCanMutateProperties) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_routineDescriptor extractObject (const GALGAS_object & inObject,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_routineDescriptor constructor_new (const class GALGAS_bool & inOperand0,
+                                                                  const class GALGAS_bool & inOperand1,
+                                                                  const class GALGAS_routineKind & inOperand2,
+                                                                  const class GALGAS_routineTypedSignature & inOperand3,
+                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
+                                                                  const class GALGAS_bool & inOperand5,
+                                                                  const class GALGAS_bool & inOperand6
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_routineDescriptor & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCanAccessProperties (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCanMutateProperties (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mExported (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeProxy (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mRoutineKind (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineTypedSignature getter_mSignature (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_routineDescriptor class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineDescriptor ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                     @propertyAccessKind enum, associated values                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2286,6 +2389,22 @@ class cEnumAssociatedValues_propertyAccessKind_indexed : public cEnumAssociatedV
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_propertyAccessKind_indexed (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod : public cEnumAssociatedValues {
+  public : const GALGAS_routineDescriptor mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod (const GALGAS_routineDescriptor & inAssociatedValue0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

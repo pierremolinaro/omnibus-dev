@@ -105,7 +105,7 @@ method @LValueAST type
           outType = type
         case indexed  (type *) :
           outType = type
-        case nonVirtualMethod :
+        case nonVirtualMethod (*) :
           error propertyName : "a method cannot be used in this context" : outType
         end
       else
@@ -330,7 +330,7 @@ private proc analyzeVariableInLValue
           [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
           [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
           switch propertyAccess
-          case nonVirtualMethod :
+          case nonVirtualMethod (*) :
              error propertyName : "a method cannot be written" : currentType, currentLLVMName
           case constant (* *) :
             error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
@@ -417,7 +417,7 @@ private proc analyzeSelfAssignmentTarget
           [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
           [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
           switch propertyAccess
-          case nonVirtualMethod :
+          case nonVirtualMethod (*) :
              error propertyName : "a method cannot be written" : currentType, currentLLVMName
           case constant (* *) :
             error propertyName : "a constant property cannot be written" : currentType, currentLLVMName

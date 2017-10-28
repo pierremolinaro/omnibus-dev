@@ -254,7 +254,6 @@ method @functionDeclarationListAST enterFunctionInContext
         !returnTypeProxy
         !canMutateProperties
         !canAccessProperties
-        !.staticCall
       }
     ]
   end

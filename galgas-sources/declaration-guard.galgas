@@ -342,7 +342,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
         [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
         [propertyMap searchKey !propertyName ?* ?let propertyAccess]
         switch propertyAccess
-        case nonVirtualMethod :
+        case nonVirtualMethod (*) :
           error propertyName : "a method cannot be used in this context" : currentObject
         case constant (* *) :
           error propertyName: "a constant property not available in this context" : currentObject
@@ -401,11 +401,11 @@ override method @procedureCallInstructionAST baseGuardAnalyze
 #  ]
 #--- Add receiver as first parameter
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  switch routineDescriptor.mRoutineCallingScheme
-  case staticCall :
+#  switch routineDescriptor.mRoutineCallingScheme
+#  case staticCall :
     effectiveParameterListIR += !.outputInput !currentObject # Add receiver as first argument
-  case propertyIndirectCall (* *) :
-  end
+#  case propertyIndirectCall (* *) :
+#  end
 #---
 #  let isPublic = routineDescriptor.mIsPublic
 #  let routineKind = routineDescriptor.mRoutineKind
@@ -439,17 +439,17 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       !?effectiveIR:effectiveParameterListIR
     )
   #--- Generate call
-    switch routineDescriptor.mRoutineCallingScheme
-    case staticCall :
+#    switch routineDescriptor.mRoutineCallingScheme
+#    case staticCall :
       outConvenienceGuardGenerationIR = .convenienceGuard {
         !baseGuardAllocaList:baseGuardAllocaList
         !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
         !baseGuardMangledName:routineMangledName.string
         !baseGuardEffectiveParameterList:effectiveParameterListIR
       }
-    case propertyIndirectCall (* *) :
-      error .nowhere : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
-    end
+#    case propertyIndirectCall (* *) :
+#      error .nowhere : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+#    end
   end
 }
 
