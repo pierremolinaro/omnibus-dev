@@ -340,13 +340,13 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     case property (@lstring propertyName) :
       if [currentType isStructure] then
         [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-        [propertyMap searchKey !propertyName ?* ?let propertyType ?let propertyAccess]
+        [propertyMap searchKey !propertyName ?* ?let propertyAccess]
         switch propertyAccess
         case nonVirtualMethod :
           error propertyName : "a method cannot be used in this context" : currentObject
-        case constant (*) :
+        case constant (* *) :
           error propertyName: "a constant property not available in this context" : currentObject
-        case indexed (propertyIndex) :
+        case indexed (@PLMType propertyType @uint propertyIndex) :
           [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
           [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
             !currentType
