@@ -340,15 +340,22 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     case property (@lstring propertyName) :
       if [currentType isStructure] then
         [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-        [propertyMap searchKey !propertyName ?* ?let propertyObject ?2*]
-        currentErrorLocation = propertyName.location
-        getNewTempVariable (![propertyObject type] !?ioTemporaries ?let newObject)
-        [!?baseGuardInstructionGenerationList appendGetPropertyReference
-          !newObject
-          !currentObject
-          !propertyName
-        ]
-        currentObject = newObject
+        [propertyMap searchKey !propertyName ?2* ?let propertyType ?let propertyAccess]
+        switch propertyAccess
+        case constant (*) :
+          error propertyName: "a constant property not available in this context" : currentObject
+        case indexed (propertyIndex) :
+          [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
+          [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
+            !currentType
+            ![currentObject llvmName]
+            !propertyType
+            !property_llvmName
+            !propertyIndex
+            !propertyName
+          ]
+          currentObject = .reference {!type:propertyType !llvmName:property_llvmName}
+        end
       else
         error currentErrorLocation : "this object has no property" :currentObject
       end
@@ -395,7 +402,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch routineDescriptor.mRoutineCallingScheme
   case staticCall :
     effectiveParameterListIR += !.outputInput !currentObject # Add receiver as first argument
-  case propertyIndirectCall (*) :
+  case propertyIndirectCall (* *) :
   end
 #---
 #  let isPublic = routineDescriptor.mIsPublic
@@ -438,7 +445,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
         !baseGuardMangledName:routineMangledName.string
         !baseGuardEffectiveParameterList:effectiveParameterListIR
       }
-    case propertyIndirectCall (*) :
+    case propertyIndirectCall (* *) :
       error .nowhere : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
     end
   end

@@ -205,7 +205,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   switch entity
   case module (@PLMType unused type) :
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
-    procAnalyzePrimaryExpressionNew (
+    procAnalyzePrimaryExpression (
       !self: inSelfType
       !inGuard: inGuard
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -253,7 +253,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   case globalVariable (* @PLMType type) :
     [!?ioUniversalMap readAccess !mReceiverName]
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
-    procAnalyzePrimaryExpressionNew (
+    procAnalyzePrimaryExpression (
       !self: inSelfType
       !inGuard: inGuard
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -271,7 +271,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   case localVariable (@PLMType type @lstring plmName) :
     outResult = .reference {!type: type !llvmName:llvmNameForLocalVariable (!plmName)}
     [!?ioUniversalMap readAccess !mReceiverName]
-    procAnalyzePrimaryExpressionNew (
+    procAnalyzePrimaryExpression (
       !self: inSelfType
       !inGuard: inGuard
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -293,7 +293,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 
 #·······················································································································
 
-private proc procAnalyzePrimaryExpressionNew
+private proc procAnalyzePrimaryExpression
   ?self:let @PLMType inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -312,7 +312,7 @@ private proc procAnalyzePrimaryExpressionNew
   for (access) in inAccessList do
     switch access
     case property (@lstring propertyName) :
-      handlePropertyAccessInExpressionNew (
+      handlePropertyAccessInExpression (
         !?ioResult
         !propertyName
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -483,7 +483,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   for (access) in mAccessList do
     switch access
     case property (@lstring propertyName) :
-      handlePropertyAccessInExpressionNew (
+      handlePropertyAccessInExpression (
         !?outResult
         !propertyName
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -537,7 +537,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
 
 #·······················································································································
 
-private proc handlePropertyAccessInExpressionNew
+private proc handlePropertyAccessInExpression
   ?!@objectIR ioResult
   ?let @lstring inPropertyName
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
@@ -557,7 +557,7 @@ private proc handlePropertyAccessInExpressionNew
     [propertyMap searchKey !inPropertyName ?2* ?let @PLMType propertyType ?let @propertyAccessKind accessKind]
     switch accessKind
     case constant (@string llvmValue) :
-      ioResult = .reference {!type:propertyType !llvmName:llvmValue}
+      ioResult = .llvmTemporaryValue {!type:propertyType !llvmName:llvmValue}
     case indexed (@uint propertyIndex) :
       [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
       [!?ioInstructionGenerationList appendGetUniversalPropertyReference
@@ -664,7 +664,7 @@ private proc handleMethodCallInExpression
     switch routineDescriptor.mRoutineCallingScheme
     case staticCall :
       effectiveParameterListIR += !.outputInput !ioObjectIR # Add receiver as first argument
-    case propertyIndirectCall (*) :
+    case propertyIndirectCall (* index) :
     end
   #--- Analyze effective parameters
     analyzeEffectiveParameters (
@@ -698,24 +698,44 @@ private proc handleMethodCallInExpression
       }
     #--- Enter in invocation graph
       [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-    case propertyIndirectCall (type) :
-      let propertyReference = @objectIR.reference {
-         !type:type
-         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
-        !propertyReference
-        !ioObjectIR
+    case propertyIndirectCall (propertyType propertyIndex) :
+      [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
+      [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+        ![ioObjectIR type]
+        ![ioObjectIR llvmName]
+        !propertyType
+        !property_llvmName
+        !propertyIndex
         !inMethodName
       ]
     #--- Code generation
       ioInstructionGenerationList += !@indirectRoutineCallIR.new {
-        !propertyReference
-        !type
+        !.reference {!type:propertyType !llvmName:property_llvmName}
+        !propertyType
         !callReturnedResult
         !effectiveParameterListIR
       }
+#
+#
+#
+#
+#      let propertyReference = @objectIR.reference {
+#         !type:propertyType
+#         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
+#      }
+#      ioTemporaries.mTemporaryIndex ++
+#      [!?ioInstructionGenerationList appendGetPropertyReference
+#        !propertyReference
+#        !ioObjectIR
+#        !inMethodName
+#      ]
+    #--- Code generation
+#      ioInstructionGenerationList += !@indirectRoutineCallIR.new {
+#        !propertyReference
+#        !propertyType
+#        !callReturnedResult
+#        !effectiveParameterListIR
+#      }
     end
     ioObjectIR = callReturnedResult
   end

@@ -11018,10 +11018,12 @@ GALGAS_mode extensionGetter_executionMode (const GALGAS_routineKind & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall::cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall (const GALGAS_PLMType & inAssociatedValue0
+cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall::cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                                                const GALGAS_uint & inAssociatedValue1
                                                                                                                                 COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11030,6 +11032,7 @@ void cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall::description
                                                                                   const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -11041,6 +11044,9 @@ typeComparisonResult cEnumAssociatedValues_routineCallingSheme_propertyIndirectC
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
   }
   return result ;
 }
@@ -11062,13 +11068,14 @@ GALGAS_routineCallingSheme GALGAS_routineCallingSheme::constructor_staticCall (U
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineCallingSheme GALGAS_routineCallingSheme::constructor_propertyIndirectCall (const GALGAS_PLMType & inAssociatedValue0
+GALGAS_routineCallingSheme GALGAS_routineCallingSheme::constructor_propertyIndirectCall (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                         const GALGAS_uint & inAssociatedValue1
                                                                                          COMMA_LOCATION_ARGS) {
   GALGAS_routineCallingSheme result ;
-  if (inAssociatedValue0.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_propertyIndirectCall ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall (inAssociatedValue0 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -11078,16 +11085,19 @@ GALGAS_routineCallingSheme GALGAS_routineCallingSheme::constructor_propertyIndir
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineCallingSheme::method_propertyIndirectCall (GALGAS_PLMType & outAssociatedValue0,
+                                                              GALGAS_uint & outAssociatedValue1,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_propertyIndirectCall) {
     outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
     C_String s ;
     s << "method @routineCallingSheme propertyIndirectCall invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall * ptr = (const cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
