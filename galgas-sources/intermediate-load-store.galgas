@@ -9,14 +9,14 @@ setter @instructionListIR appendLoadFromReference
   case null :
     error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
   case reference (@PLMType type llvmName) :
-    getNewTempVariable (!type !.nowhere !?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromTemporaryReference
       !outResultingValue
       !llvmName
     ]
 #--- Structure property
   case propertyRef (type plmName *) :
-    getNewTempVariable (!type !plmName !?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?self appendGetPropertyReference
       !outResultingValue
       !inSource

@@ -17,7 +17,7 @@ enum @objectIR {
 #--- Structure property
   case propertyRef (@PLMType type @lstring plmName @propertyAccessKind access)
 #--- Values
-  case llvmTemporaryValue (@PLMType type @lstring llvmName)
+  case llvmTemporaryValue (@PLMType type @string llvmName)
   case literalInteger  (@PLMType type @bigint value)
   case llvmStructureConstant (@PLMType type @sortedOperandIRList values)
   case literalString  (@uint utf8Size @uint index)
@@ -37,7 +37,7 @@ getter @objectIR location -> @location {
   case literalInteger (* *) :
     error .nowhere : "<<@objectIR location literalInteger>>" : result
   case llvmTemporaryValue (* llvmName) :
-    result = llvmName
+    result = [llvmName nowhere]
   case reference (* llvmName) :
     result = [llvmName nowhere]
   case llvmStructureConstant (* *) :

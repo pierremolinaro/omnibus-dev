@@ -11,29 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Extension setter '@universalPropertyAndRoutineMapForContext readAccess'                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_readAccess) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                              const class GALGAS_lstring constinArgument0,
-                                                                                              class C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_readAccess (const int32_t inClassIndex,
-                                      extensionSetterSignature_universalPropertyAndRoutineMapForContext_readAccess inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_readAccess (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                     const GALGAS_lstring constin_inValuedObjectName,
-                                     C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                      Extension setter '@universalPropertyAndRoutineMapForContext writeAccess'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -77,6 +54,31 @@ void callExtensionSetter_readWriteAccess (class cPtr_universalPropertyAndRoutine
                                           const GALGAS_lstring constin_inValuedObjectName,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//            Extension setter '@universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess'             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_searchValuedObjectForReadAccess) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                                                   const class GALGAS_lstring constinArgument0,
+                                                                                                                   class GALGAS_objectIR & outArgument1,
+                                                                                                                   class C_Compiler * inCompiler
+                                                                                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_searchValuedObjectForReadAccess (const int32_t inClassIndex,
+                                                           extensionSetterSignature_universalPropertyAndRoutineMapForContext_searchValuedObjectForReadAccess inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_searchValuedObjectForReadAccess (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                          const GALGAS_lstring constin_inValuedObjectName,
+                                                          GALGAS_objectIR & out_outObjectIR,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

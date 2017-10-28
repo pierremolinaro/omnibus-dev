@@ -1783,7 +1783,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                            COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_llvmTemporaryValue (const class GALGAS_PLMType & inOperand0,
-                                                                        const class GALGAS_lstring & inOperand1
+                                                                        const class GALGAS_string & inOperand1
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_null (LOCATION_ARGS) ;
@@ -1825,7 +1825,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_llvmTemporaryValue (class GALGAS_PLMType & outArgument0,
-                                                            class GALGAS_lstring & outArgument1,
+                                                            class GALGAS_string & outArgument1,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) const ;
 
@@ -2679,11 +2679,11 @@ class cEnumAssociatedValues_objectIR_propertyRef : public cEnumAssociatedValues 
 
 class cEnumAssociatedValues_objectIR_llvmTemporaryValue : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
-  public : const GALGAS_lstring mAssociatedValue1 ;
+  public : const GALGAS_string mAssociatedValue1 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_objectIR_llvmTemporaryValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                              const GALGAS_lstring & inAssociatedValue1
+                                                              const GALGAS_string & inAssociatedValue1
                                                               COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

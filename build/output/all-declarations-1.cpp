@@ -4177,7 +4177,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_propertyRef::compare (const 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_objectIR_llvmTemporaryValue::cEnumAssociatedValues_objectIR_llvmTemporaryValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                                      const GALGAS_lstring & inAssociatedValue1
+                                                                                                      const GALGAS_string & inAssociatedValue1
                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -4394,7 +4394,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_propertyRef (const GALGAS_PLMType &
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR GALGAS_objectIR::constructor_llvmTemporaryValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                                 const GALGAS_lstring & inAssociatedValue1
+                                                                 const GALGAS_string & inAssociatedValue1
                                                                  COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
@@ -4514,7 +4514,7 @@ void GALGAS_objectIR::method_propertyRef (GALGAS_PLMType & outAssociatedValue0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_objectIR::method_llvmTemporaryValue (GALGAS_PLMType & outAssociatedValue0,
-                                                 GALGAS_lstring & outAssociatedValue1,
+                                                 GALGAS_string & outAssociatedValue1,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_llvmTemporaryValue) {

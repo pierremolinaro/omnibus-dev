@@ -3798,9 +3798,8 @@ void extensionSetter_appendLoadFromReference (class GALGAS_instructionListIR & i
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_getNewTempVariable (const class GALGAS_PLMType constinArgument0,
-                                 class GALGAS_location inArgument1,
-                                 class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                 class GALGAS_objectIR & outArgument3,
+                                 class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                 class GALGAS_objectIR & outArgument2,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 

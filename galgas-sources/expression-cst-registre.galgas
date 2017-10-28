@@ -189,16 +189,16 @@ override method @registerConstantExpressionAST analyzeExpression
       #--- Perform an bit extend to register type or a trunc
         var partialResult = expressionResult
         if expressionBitCount < registerBitCount then
-          getNewTempVariable (!registerType !expressionLocation !?ioTemporaries ?let extendedResult)
+          getNewTempVariable (!registerType !?ioTemporaries ?let extendedResult)
           [!?ioInstructionGenerationList appendExtend !extendedResult !partialResult]
           partialResult = extendedResult
         elsif expressionBitCount > registerBitCount then
-          getNewTempVariable (!registerType !expressionLocation !?ioTemporaries ?let truncatedResult)
+          getNewTempVariable (!registerType !?ioTemporaries ?let truncatedResult)
           [!?ioInstructionGenerationList appendTrunc !truncatedResult !partialResult]
           partialResult = truncatedResult
         end
       #--- Perform left shift
-        getNewTempVariable (!registerType !expressionLocation !?ioTemporaries ?let shiftedResult)
+        getNewTempVariable (!registerType !?ioTemporaries ?let shiftedResult)
         [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !partialResult !fieldBitIndex]
       #---- Accumulate 
         operandList += !shiftedResult
@@ -208,7 +208,7 @@ override method @registerConstantExpressionAST analyzeExpression
 #------------------------------------------------------ Result
   outResult = .literalInteger {!type: registerType!value:accumulatedFieldStaticValues}
   for (operand) in operandList do
-    getNewTempVariable (!registerType !mRegisterName !?ioTemporaries ?let newResult)
+    getNewTempVariable (!registerType !?ioTemporaries ?let newResult)
     [!?ioInstructionGenerationList appendBinaryOperation
       !newResult
       ![newResult type]
