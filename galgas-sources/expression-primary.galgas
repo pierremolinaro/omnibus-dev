@@ -360,7 +360,7 @@ private proc procAnalyzePrimaryExpression
       if inGuard then
         error errorLocation : "a method cannot be called in guard" : ioResult
       else
-        handleMethodCallInExpression (
+        handleFunctionCallInExpression (
           !methodName
           !?ioResult
           !self:inSelfType
@@ -531,7 +531,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       if inGuard then
         error errorLocation : "a method cannot be called in guard" : outResult
       else
-        handleMethodCallInExpression (
+        handleFunctionCallInExpression (
           !methodName
           !?outResult
           !self:inSelfType
@@ -640,7 +640,7 @@ private proc handleArrayAccessInExpression
 
 #·······················································································································
 
-private proc handleMethodCallInExpression
+private proc handleFunctionCallInExpression
   ?let @lstring inMethodName
   ?!@objectIR ioObjectIR
   ?self:let @PLMType inSelfType

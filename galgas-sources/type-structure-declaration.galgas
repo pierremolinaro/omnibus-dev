@@ -223,7 +223,6 @@ enum @propertyAccessKind {
 
 map @propertyMap {
   @bool mIsPublic
-#  @PLMType mType
   @propertyAccessKind mAccess
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"
@@ -293,23 +292,33 @@ override method @structureDeclarationAST enterInContext
     end
   end
 #---------------------------------------- Enter routines in property map
-#  for function in mFunctionDeclarationListAST do
-#  #--- Get function name and map containing the function definition
-#    let functionMangledName = routineMangledNameFromAST (!"$" + mStructureName !function.mFunctionName !function.mFunctionFormalArgumentList)
-# 
-#  #--- Attribute set
-#    @stringset attributeSet = {}
-#    for attribute in function.mFunctionAttributeList do
-#      attributeSet += !attribute.mValue.string
-#    end
-#  end
-#  for system in mSystemRoutineListAST do
-#  #--- Attribute set
-#    @stringset attributeSet = {}
-#    for attribute in system.mAttributeList do
-#      attributeSet += !attribute.mValue.string
-#    end
-#  end
+  for function in mFunctionDeclarationListAST do
+  #--- Get function name and map containing the function definition
+    let functionMangledName = routineMangledNameFromAST (!"$" + mStructureName !function.mFunctionName !function.mFunctionFormalArgumentList)
+   #--- Attribute set
+    @stringset attributeSet = {}
+    for attribute in function.mFunctionAttributeList do
+      attributeSet += !attribute.mValue.string
+    end
+
+#  @bool mIsPublic # Routine is declared with "public"
+#  @bool mExported # Routine is declared with @exported attribute
+#  @routineKind mRoutineKind
+#  @routineTypedSignature mSignature
+#  @unifiedTypeMap-proxy mReturnTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
+#  @bool mCanAccessProperties # Routine is declared with @access attribute
+#  @bool mCanMutateProperties # Routine is declared with @mutating attribute
+#  @routineCallingSheme mRoutineCallingScheme
+
+
+  end
+  for system in mSystemRoutineListAST do
+  #--- Attribute set
+    @stringset attributeSet = {}
+    for attribute in system.mAttributeList do
+      attributeSet += !attribute.mValue.string
+    end
+  end
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
