@@ -43,17 +43,6 @@ proc initialVariableMap
     var writeAccess = variable.allowedAccessToAll
     var allowedAccess = writeAccess
   end
-#------------------------------------------------------- Add stand-alone routines
-  for routines in inContext.mRoutineMapForContext.mInternalRoutineMap do
-    for signature in routines.mRoutineArgumentSignatureMapForContext do
-      [!?outUniversalMap insertRoutine
-        !routines.lkey
-        !signature.lkey
-        !signature.mRoutineLLVMName
-        !signature.mDescriptor
-       ]
-     end
-  end
 #------------------------------------------------------- Add result variable ?
   if inReturnTypeName.string != "" then
     let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}

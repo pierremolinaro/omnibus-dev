@@ -14,8 +14,6 @@ enum @objectIR {
   case null
 #--- Reference
   case reference (@PLMType type @string llvmName)
-#--- Structure property
-  case propertyRef (@PLMType type @lstring plmName @propertyAccessKind access)
 #--- Values
   case llvmTemporaryValue (@PLMType type @string llvmName)
   case literalInteger  (@PLMType type @bigint value)
@@ -30,8 +28,6 @@ getter @objectIR location -> @location {
   switch self
   case null :
     error .nowhere : "<<@objectIR location null>>" : result
-  case propertyRef (* plmName *) :
-    result = plmName
   case zero (*) :
     error .nowhere : "<<@objectIR location zero>>" : result
   case literalInteger (* *) :
@@ -52,7 +48,6 @@ getter @objectIR location -> @location {
 getter @objectIR llvmName -> @string {
   switch self
   case null : error [self location] : "<<@objectIR llvmName null>>" : result
-  case propertyRef (***) : error [self location] : "<<@objectIR property llvmName>>" : result
   case zero (*) : result = "zeroinitializer"
   case literalInteger (* @bigint value) : result = [value string]
   case llvmTemporaryValue (* llvmName) : result = llvmName
@@ -78,7 +73,6 @@ getter @objectIR type -> @PLMType {
   case null :
     error [self location] : "<<@objectIR type null>>" : result
   case reference (type *) : result = type
-  case propertyRef (type **) : result = type
   case zero (type) : result = type
   case literalInteger (type *) : result = type
   case llvmTemporaryValue (type *) : result = type
@@ -106,8 +100,6 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
   case null : error [self location] : "<<@objectIR withType null>>" : result
   case reference (* llvmName) :
     result = .reference {!type:inType !llvmName:llvmName}
-  case propertyRef (* plmName access) :
-    result = .propertyRef {!type:inType !plmName:plmName !access:access}
   case literalInteger (* @bigint value) :
     result = .literalInteger {!type: inType !value: value}
   case llvmTemporaryValue (* llvmName) :
@@ -127,7 +119,6 @@ getter @objectIR name -> @string {
   switch self
   case null : error [self location] : "<<@objectIR name null>>" : result
   case reference (* llvmName) : result = llvmName
-  case propertyRef (* name *) : result = name
   case zero (*) : result = "zeroinitializer"
   case literalInteger (* @bigint value) : result = [value string]
   case llvmTemporaryValue (* name) : result = name
@@ -145,7 +136,6 @@ getter @objectIR isStatic -> @bool {
   switch self
   case null : error [self location] : "<<@objectIR isStatic null>>" : result
   case reference (**) : result = false
-  case propertyRef (***) : result = false
   case zero (*) : result = true
   case literalInteger (* *) : result = true
   case llvmTemporaryValue (* *) : result = false

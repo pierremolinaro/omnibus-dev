@@ -5050,47 +5050,6 @@ typeComparisonResult cEnumAssociatedValues_objectIR_reference::compare (const cE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_objectIR_propertyRef::cEnumAssociatedValues_objectIR_propertyRef (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                        const GALGAS_lstring & inAssociatedValue1,
-                                                                                        const GALGAS_propertyAccessKind & inAssociatedValue2
-                                                                                        COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectIR_propertyRef::description (C_String & ioString,
-                                                              const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectIR_propertyRef::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectIR_propertyRef * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_propertyRef *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 cEnumAssociatedValues_objectIR_llvmTemporaryValue::cEnumAssociatedValues_objectIR_llvmTemporaryValue (const GALGAS_PLMType & inAssociatedValue0,
                                                                                                       const GALGAS_string & inAssociatedValue1
                                                                                                       COMMA_LOCATION_ARGS) :
@@ -5291,23 +5250,6 @@ GALGAS_objectIR GALGAS_objectIR::constructor_reference (const GALGAS_PLMType & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_propertyRef (const GALGAS_PLMType & inAssociatedValue0,
-                                                          const GALGAS_lstring & inAssociatedValue1,
-                                                          const GALGAS_propertyAccessKind & inAssociatedValue2
-                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_objectIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
-    result.mEnum = kEnum_propertyRef ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_propertyRef (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_objectIR GALGAS_objectIR::constructor_llvmTemporaryValue (const GALGAS_PLMType & inAssociatedValue0,
                                                                  const GALGAS_string & inAssociatedValue1
                                                                  COMMA_LOCATION_ARGS) {
@@ -5406,28 +5348,6 @@ void GALGAS_objectIR::method_reference (GALGAS_PLMType & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_objectIR::method_propertyRef (GALGAS_PLMType & outAssociatedValue0,
-                                          GALGAS_lstring & outAssociatedValue1,
-                                          GALGAS_propertyAccessKind & outAssociatedValue2,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_propertyRef) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    C_String s ;
-    s << "method @objectIR propertyRef invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectIR_propertyRef * ptr = (const cEnumAssociatedValues_objectIR_propertyRef *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 void GALGAS_objectIR::method_llvmTemporaryValue (GALGAS_PLMType & outAssociatedValue0,
                                                  GALGAS_string & outAssociatedValue1,
                                                  C_Compiler * inCompiler
@@ -5520,11 +5440,10 @@ void GALGAS_objectIR::method_zero (GALGAS_PLMType & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_objectIR [9] = {
+static const char * gEnumNameArrayFor_objectIR [8] = {
   "(not built)",
   "null",
   "reference",
-  "propertyRef",
   "llvmTemporaryValue",
   "literalInteger",
   "llvmStructureConstant",
@@ -5542,12 +5461,6 @@ GALGAS_bool GALGAS_objectIR::getter_isNull (UNUSED_LOCATION_ARGS) const {
 
 GALGAS_bool GALGAS_objectIR::getter_isReference (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_reference == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectIR::getter_isPropertyRef (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_propertyRef == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

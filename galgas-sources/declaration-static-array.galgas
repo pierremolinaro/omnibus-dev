@@ -141,21 +141,22 @@ override method @staticArrayAST enterInContext
   @propertyMap propertyMap = {}
   @stringset propertyNameSet = {}
   let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
-  for (propertyName type) in mPropertyList do (propertyIndex)
-    switch type
+  for (propertyName kind) in mPropertyList do (propertyIndex)
+    switch kind
     case valueType (@lstring propertyTypeName) :
       let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !propertyTypeName} type]
       if [propertyNameSet hasKey !propertyName] then
         error propertyName : "duplicated property name"
+      else
+        propertyNameSet += !propertyName
+        propertyList += !propertyName !propertyType
+        [!?propertyMap insertKey
+          !propertyName
+          !true # Public
+          !propertyType
+          !.indexed{!index:propertyIndex}
+        ]
       end
-      propertyNameSet += !propertyName
-      propertyList += !propertyName !propertyType
-      [!?propertyMap insertKey
-        !propertyName
-        !true # Public
-        !propertyType
-        !.indexed{!index:propertyIndex}
-      ]
     case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnTypeName) :
     #--- Routine mangled name
       let routineMangledName = routineMangledNameFromAST (
@@ -180,7 +181,6 @@ override method @staticArrayAST enterInContext
       end
       let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName} type]
       propertyList += !propertyName !propertyType
-      let propertyIndex = [propertyMap count]
       [!?propertyMap insertKey
         !propertyName
         !true # Public

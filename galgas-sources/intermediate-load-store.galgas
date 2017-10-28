@@ -14,14 +14,6 @@ setter @instructionListIR appendLoadFromReference
       !outResultingValue
       !llvmName
     ]
-#--- Structure property
-  case propertyRef (type plmName *) :
-    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?self appendGetPropertyReference
-      !outResultingValue
-      !inSource
-      !plmName
-    ]
 #--- Values
   case literalInteger (**) :
     outResultingValue = inSource
