@@ -215,8 +215,7 @@ list @propertyList {
 enum @propertyAccessKind {
   case constant (@PLMType type @string llvmValue)
   case indexed  (@PLMType type @uint index)
-#  case nonVirtualMethod (@routineMapForContext routineMap)
-  case nonVirtualMethod
+  case nonVirtualMethod (@routineDescriptor descriptor)
 }
 
 #·······················································································································
@@ -291,33 +290,77 @@ override method @structureDeclarationAST enterInContext
       error s : "only @copyable attribute is allowed here"
     end
   end
-#---------------------------------------- Enter routines in property map
+#---------------------------------------- Enter functions in property map
   for function in mFunctionDeclarationListAST do
-  #--- Get function name and map containing the function definition
-    let functionMangledName = routineMangledNameFromAST (!"$" + mStructureName !function.mFunctionName !function.mFunctionFormalArgumentList)
-   #--- Attribute set
+  #--- Attributes
     @stringset attributeSet = {}
     for attribute in function.mFunctionAttributeList do
       attributeSet += !attribute.mValue.string
     end
-
-#  @bool mIsPublic # Routine is declared with "public"
-#  @bool mExported # Routine is declared with @exported attribute
-#  @routineKind mRoutineKind
-#  @routineTypedSignature mSignature
-#  @unifiedTypeMap-proxy mReturnTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
-#  @bool mCanAccessProperties # Routine is declared with @access attribute
-#  @bool mCanMutateProperties # Routine is declared with @mutating attribute
-#  @routineCallingSheme mRoutineCallingScheme
-
-
+    let exportedFunction = [attributeSet hasKey !exportedAttribute ()]
+    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
+    let canAccessProperties = function.mMode != .userMode
+  #--- Signature
+    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
+  #--- Routine mangled name
+    let routineMangledName = routineMangledNameFromAST (
+      !"" # mStructureName 
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+    )
+  #--- Routine descriptor
+    let descriptor = @routineDescriptor.new {
+      !function.mPublicFunction
+      !exportedFunction
+      !.function {!executionMode:function.mMode}
+      !signature
+      !returnTypeProxy
+      !canMutateProperties
+      !canAccessProperties
+    }
+  #--- Enter in structure map
+    [!?propertyMap insertKey !routineMangledName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
   end
+#---------------------------------------- Enter system routines in property map
   for system in mSystemRoutineListAST do
-  #--- Attribute set
+  #--- Attributes
     @stringset attributeSet = {}
     for attribute in system.mAttributeList do
       attributeSet += !attribute.mValue.string
     end
+    let exportedRoutine = [attributeSet hasKey !exportedAttribute ()]
+    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
+  #--- Routine mangled name
+    let routineMangledName = routineMangledNameFromAST (
+      !"" # mStructureName 
+      !system.mName
+      !system.mFormalArgumentList
+    )
+  #--- Signature
+    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let signature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
+  #--- Attributes
+    var mutating = false
+    for (attribute) in system.mAttributeList do
+      if attribute.string == mutatingAttribute () then
+        mutating = true    
+      end
+    end
+  #--- Routine descriptor
+    let descriptor = @routineDescriptor.new {
+      !system.mPublic
+      !exportedRoutine
+      !system.mRoutineKind
+      !signature
+      !returnTypeProxy
+      !canMutateProperties
+      !true # canAccessProperties
+    }
+  #--- Enter in structure map
+    [!?propertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
   end
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
@@ -437,7 +480,7 @@ override method @structureDeclarationAST enterRoutinesInContext
     !selfTypeName:llvmRegularTypeMangledNameFromName (!mStructureName).string
     !?context:ioContext
   ]
-  [mSystemRoutineListAST enterInContext
+  [mSystemRoutineListAST enterSystemRoutineInContext
     !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string
     !?context:ioContext
   ]

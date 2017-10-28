@@ -182,9 +182,8 @@ override method @staticArrayAST enterInContext
       let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName} type]
       propertyList += !propertyName !propertyType
       [!?propertyMap insertKey
-        !propertyName
+        !routineMangledName # propertyName
         !true # Public
-#        !propertyType
         !.indexed{!type:propertyType !index:propertyIndex}
       ]
     end

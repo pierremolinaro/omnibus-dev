@@ -95,7 +95,7 @@ method @systemRoutineDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTy
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @systemRoutineDeclarationListAST enterInContext
+method @systemRoutineDeclarationListAST enterSystemRoutineInContext
   ?receiverType:let @string inReceiverTypeName
   ?!context:@semanticContext ioContext
 {
@@ -130,7 +130,6 @@ method @systemRoutineDeclarationListAST enterInContext
         !returnTypeProxy
         !mutating # canMutateProperties
         !true # canAccessPropertiesInUserMode
-        !.staticCall
       }
     ]
   end

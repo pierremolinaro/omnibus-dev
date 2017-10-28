@@ -71,13 +71,6 @@ getter @routineKind executionMode -> @mode {
 
 #·······················································································································
 
-enum @routineCallingSheme {
-  case staticCall
-  case propertyIndirectCall (@PLMType type @uint index)
-}
-
-#·······················································································································
-
 struct @routineDescriptor {
   @bool mIsPublic # Routine is declared with "public"
   @bool mExported # Routine is declared with @exported attribute
@@ -86,7 +79,6 @@ struct @routineDescriptor {
   @unifiedTypeMap-proxy mReturnTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
   @bool mCanAccessProperties # Routine is declared with @access attribute
   @bool mCanMutateProperties # Routine is declared with @mutating attribute
-  @routineCallingSheme mRoutineCallingScheme
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

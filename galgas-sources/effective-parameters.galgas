@@ -212,7 +212,7 @@ proc analyzeEffectiveParameters
       case structure (* propertyMap * * *) :
         [propertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
-        case nonVirtualMethod :
+        case nonVirtualMethod (*) :
           error inErrorLocation : "a method cannot be used in this context"
         case constant (* *) :
           error inErrorLocation : "a constant property cannot be used here"
