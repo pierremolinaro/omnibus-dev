@@ -664,11 +664,7 @@ private proc handleFunctionCallInExpression
     switch propertyAccess
     case constant (* *) :
       error inMethodName : "a constant cannot be used as method" : ioObjectIR
-    case indexed  (* *) :
-      error inMethodName : "an indexed property cannot be used as method" : ioObjectIR
     case nonVirtualMethod (@routineDescriptor routineDescriptor) :
-    #--- Get called function signature
-#      let signature = [inArguments routineSignature !inMethodName.location]
     #--- Check routine is actually a function
       if [routineDescriptor.mReturnTypeProxy type] == .void then
         error inMethodName : "not a function (returns no value)" : ioObjectIR
@@ -715,6 +711,61 @@ private proc handleFunctionCallInExpression
         [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
       #---
         ioObjectIR = callReturnedResult
+      end
+    case indexed  (@PLMType propertyType @uint propertyIndex) :
+      if not [propertyType isFunction] then
+        error inMethodName : "an indexed property cannot be used as method" : ioObjectIR
+      else
+        [propertyType function ?signature:let signature ?mode:let mode ?returnTypeProxy:let returnTypeProxy]
+      #--- Check routine is actually a function
+        if [returnTypeProxy type] == .void then
+          error inMethodName : "not a function (returns no value)" : ioObjectIR
+        else
+        #--- Check modes
+#          let calleeKind = checkMode (
+#            !callerMode:inMode
+#            !calleeMode:mode
+#            !kind:routineDescriptor.mRoutineKind
+#            !error:inMethodName.location
+#          )
+        #--- Analyze effective parameters
+          @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+          analyzeEffectiveParameters (
+            !self:inSelfType
+            !formal:signature
+            !effective:inArguments
+            !errorLocation:inMethodName.location
+            !callerForInvocationGraph:inCallerNameForInvocationGraph
+            !context:inContext
+            !requiredMode:inMode
+            !?temporary:ioTemporaries
+            !?staticStringMap:ioGlobalLiteralStringMap
+            !?variableMap:ioUniversalMap
+            !?alloca:ioAllocaList
+            !?instructionListIR:ioInstructionGenerationList
+            !?effectiveIR:effectiveParameterListIR
+          )
+        #--- Load routine reference
+          [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
+          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+            ![ioObjectIR type]
+            ![ioObjectIR llvmName]
+            !propertyType
+            !property_llvmName
+            !propertyIndex
+            !inMethodName
+          ]
+        #--- New LLVM variable for function call result
+          getNewTempVariable (![returnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
+        #--- Code generation
+          ioInstructionGenerationList += !@indirectRoutineCallIR.new {
+            !.reference {!type:propertyType !llvmName:property_llvmName}
+            !propertyType
+            !callReturnedResult
+            !effectiveParameterListIR
+          }
+          ioObjectIR = callReturnedResult
+        end
       end
     end
   end
