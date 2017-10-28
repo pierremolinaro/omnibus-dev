@@ -273,7 +273,7 @@ override method @procedureCallInstructionAST analyze
         [propertyMap searchKey
           !propertyName
           ?let @bool unused isPublic
-          ?* # let @objectIR propertyObject
+#          ?* # let @objectIR propertyObject
           ?let @PLMType propertyType
           ?let @propertyAccessKind propertyAccess
         ]

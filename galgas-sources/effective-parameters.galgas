@@ -210,7 +210,7 @@ proc analyzeEffectiveParameters
       case integer (* * * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case structure (* propertyMap * * *) :
-        [propertyMap searchKey !name ?2* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
+        [propertyMap searchKey !name ?* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
         case constant (*) :
           error inErrorLocation : "a constant property cannot be used here"

@@ -496,17 +496,6 @@ void extensionMethod_generateLLVM (const class GALGAS_moduleListIR_2D_element in
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Routine 'generatePropertyAccess'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_generatePropertyAccess (const class GALGAS_PLMType constinArgument0,
-                                     class GALGAS_intermediateCodeStruct & ioArgument1,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                            Extension method '@panicClauseListAST-element enterInContext'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

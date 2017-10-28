@@ -138,7 +138,7 @@ override method @staticArrayAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   @propertyList propertyList = {}
-  @propertyMap staticlistPropertyMap = {}
+  @propertyMap propertyMap = {}
   @stringset propertyNameSet = {}
   let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
   for (propertyName type) in mPropertyList do (propertyIndex)
@@ -150,11 +150,9 @@ override method @staticArrayAST enterInContext
       end
       propertyNameSet += !propertyName
       propertyList += !propertyName !propertyType
-      let objectIR = @objectIR.propertyRef {!type:propertyType !plmName:propertyName !access:.indexed{!index:propertyIndex}}
-      [!?staticlistPropertyMap insertKey
+      [!?propertyMap insertKey
         !propertyName
         !true # Public
-        !objectIR
         !propertyType
         !.indexed{!index:propertyIndex}
       ]
@@ -182,11 +180,10 @@ override method @staticArrayAST enterInContext
       end
       let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName} type]
       propertyList += !propertyName !propertyType
-      let propertyIndex = [staticlistPropertyMap count]
-      [!?staticlistPropertyMap insertKey
+      let propertyIndex = [propertyMap count]
+      [!?propertyMap insertKey
         !propertyName
         !true # Public
-        !.propertyRef {!type:propertyType !plmName:propertyName !access:.indexed{!index:propertyIndex}}
         !propertyType
         !.indexed{!index:propertyIndex}
       ]
@@ -196,7 +193,7 @@ override method @staticArrayAST enterInContext
 #--- Enter element type in type map
   let kind = @PLMType.structure {
     !typeName:llvmNameForStaticListElementType (!mStaticListName)
-    !propertyMap:staticlistPropertyMap
+    !propertyMap:propertyMap
     !propertyList:propertyList
     !flags:.none
     !plmTypeName:mStaticListName
@@ -222,14 +219,10 @@ override method @staticArrayAST enterRoutinesInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @staticArrayAST semanticAnalysis
-  ?context:let @semanticContext inContext
+  ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
-#--- Generate property access
-  let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
-  [inContext.mTypeMap searchKey !lkey:plmTypeName ?type:let type ?1*]
-  generatePropertyAccess (!structureType:type !?intermediateCode:ioIntermediateCodeStruct)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

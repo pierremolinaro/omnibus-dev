@@ -313,8 +313,6 @@ method @taskList-element semanticAnalysis
     !initInstructionListIR
     !taskNameStringIndex
   ]
-#------------------------------------------- Generate task var access
-  generatePropertyAccess (!structureType:taskType !?intermediateCode:ioIntermediateCodeStruct)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

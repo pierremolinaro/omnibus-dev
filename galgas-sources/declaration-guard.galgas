@@ -340,7 +340,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     case property (@lstring propertyName) :
       if [currentType isStructure] then
         [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-        [propertyMap searchKey !propertyName ?2* ?let propertyType ?let propertyAccess]
+        [propertyMap searchKey !propertyName ?* ?let propertyType ?let propertyAccess]
         switch propertyAccess
         case constant (*) :
           error propertyName: "a constant property not available in this context" : currentObject
