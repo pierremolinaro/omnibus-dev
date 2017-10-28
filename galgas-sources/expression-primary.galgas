@@ -554,7 +554,7 @@ private proc handlePropertyAccessInExpression
     error inPropertyName : "receiver has no property" : ioResult
   else
     [type structure ?1* ?propertyMap:let propertyMap ?3*]
-    [propertyMap searchKey !inPropertyName ?2* ?let @PLMType propertyType ?let @propertyAccessKind accessKind]
+    [propertyMap searchKey !inPropertyName ?* ?let @PLMType propertyType ?let @propertyAccessKind accessKind]
     switch accessKind
     case constant (@string llvmValue) :
       ioResult = .llvmTemporaryValue {!type:propertyType !llvmName:llvmValue}
@@ -715,27 +715,6 @@ private proc handleMethodCallInExpression
         !callReturnedResult
         !effectiveParameterListIR
       }
-#
-#
-#
-#
-#      let propertyReference = @objectIR.reference {
-#         !type:propertyType
-#         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
-#      }
-#      ioTemporaries.mTemporaryIndex ++
-#      [!?ioInstructionGenerationList appendGetPropertyReference
-#        !propertyReference
-#        !ioObjectIR
-#        !inMethodName
-#      ]
-    #--- Code generation
-#      ioInstructionGenerationList += !@indirectRoutineCallIR.new {
-#        !propertyReference
-#        !propertyType
-#        !callReturnedResult
-#        !effectiveParameterListIR
-#      }
     end
     ioObjectIR = callReturnedResult
   end
