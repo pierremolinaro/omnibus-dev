@@ -210,17 +210,23 @@ proc analyzeEffectiveParameters
       case integer (* * * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case structure (* propertyMap * * *) :
-        [propertyMap searchKey !name ?* ?let propertyObject ?2*]
-        getNewTempVariable (![propertyObject type] !?ioTemporaries ?let fieldObjectReference)
-        [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
-          !fieldObjectReference
-          !inSelfType
-          !name
-        ]        
-        parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![propertyObject type]
-        ioEffectiveParameterListIR +=
-          !.outputInput
-          !fieldObjectReference
+        [propertyMap searchKey !name ?2* ?let @PLMType propertyType ?let @propertyAccessKind propertyAccess]
+        switch propertyAccess
+        case constant (*) :
+          error inErrorLocation : "a constant property cannot be used here"
+        case indexed (@uint propertyIndex) :
+          [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
+          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+            !inSelfType
+            !llvmNameForSelf ()
+            !propertyType
+            !property_llvmName
+            !propertyIndex
+            !name
+          ]
+          parameterList += !effective_mEffectiveParameterKind !effective_mSelector !propertyType
+          ioEffectiveParameterListIR += !.outputInput !.reference {!type:propertyType !llvmName:property_llvmName}
+        end
       end    
     end
   end

@@ -328,7 +328,7 @@ override method @procedureCallInstructionAST analyze
         effectiveParameterListIR +=
           !.outputInput # Add receiver as first argument
           !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
-      case propertyIndirectCall (*) :
+      case propertyIndirectCall (* *) :
         error methodName : "not handled yet"
       end
     #---
@@ -377,7 +377,7 @@ override method @procedureCallInstructionAST analyze
           }
         #--- Enter in invocation graph
           [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-        case propertyIndirectCall (type) :
+        case propertyIndirectCall (type index) :
           let propertyReference = @objectIR.reference {
              !type:type
              !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
