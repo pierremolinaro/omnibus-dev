@@ -1,9 +1,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! UNIVERSAL PROPERTY - ROUTINE MAP
+#! UNIVERSAL VARIABLE MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-# Cette table contient routines et variables. La clé est le nom de la variable ou le nom de la routine. Il est valide
-# d'avoir plusieurs routines de même nom, du moment qu'elle se distinguent par leur signature. Il est valide d'avoir une
-# variable de même nom qu'une routine : la syntaxe permet de savoir si une routine ou une variable est attendue.
+# Cette table contient les variables.
 
 #·······················································································································
 
@@ -16,37 +14,6 @@ shared class @universalPropertyAndRoutineMapForContext {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! INSERT SETTERS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-setter @universalPropertyAndRoutineMapForContext insertRoutine
-  ?let @lstring inRoutineName
-  ?let @lstring inArgumentSignature
-  ?let @lstring inLLVMInvocationRoutineName
-  ?let @routineDescriptor inDescriptor
-{
-  with inRoutineName.string in !?mInternalPropertyAndRoutineMapForContext do
-    [!?mRoutineSignatureMapForContext insertKey
-      !inArgumentSignature
-      !inLLVMInvocationRoutineName
-      !inDescriptor
-    ]
-  else
-    @routineSignatureMapForContext routineSignatureMapForContext = {}
-    [!?routineSignatureMapForContext insertKey
-      !inArgumentSignature
-      !inLLVMInvocationRoutineName
-      !inDescriptor
-    ]
-    [!?mInternalPropertyAndRoutineMapForContext insertKey
-      !inRoutineName
-      !.noValue
-      !false
-      !.undefined
-      !routineSignatureMapForContext
-    ]
-  end
-}
-
-#·······················································································································
 
 setter @universalPropertyAndRoutineMapForContext insertModule
   ?let @lstring inModuleName

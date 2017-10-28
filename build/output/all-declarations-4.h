@@ -3727,19 +3727,6 @@ void routine_getNewTempVariable (const class GALGAS_PLMType constinArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Extension setter '@instructionListIR appendGetPropertyReference'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendGetPropertyReference (class GALGAS_instructionListIR & ioObject,
-                                                 const class GALGAS_objectIR constin_inTarget,
-                                                 const class GALGAS_objectIR constin_inSource,
-                                                 const class GALGAS_string constin_inPLMname,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                      Extension setter '@instructionListIR appendGetUniversalPropertyReference'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3984,6 +3971,19 @@ class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstruction
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Extension setter '@instructionListIR appendGetPropertyReference'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendGetPropertyReference (class GALGAS_instructionListIR & ioObject,
+                                                 const class GALGAS_objectIR constin_inTarget,
+                                                 const class GALGAS_objectIR constin_inSource,
+                                                 const class GALGAS_string constin_inPLMname,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

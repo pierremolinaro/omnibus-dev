@@ -68,12 +68,6 @@ method @infixOperatorMap checkBinaryOperationWith
   !resultType: @PLMType outResultType
   !op:@infixOperatorDescription outOperation
 {
-#  if inLeftType == .null then
-#    error inOperatorLocation : "left type is null"
-#  end
-#  if inRightType == .null then
-#    error inOperatorLocation : "right type is null"
-#  end
   let lkey = combineTypeNamesForInfixOperator (![inLeftType key] ![inRightType key])
   if [self hasKey !lkey.string] then
     [self searchKey !lkey ?outResultType ?outOperation]
@@ -133,11 +127,12 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR rightOperandPossibleReference
+    ?result:let @objectIR rightExpressionResult
   ]
+  log rightExpressionResult
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
-    !rightOperandPossibleReference
+    !rightExpressionResult
     ?let rightOperand
   ]  
 #------------------- Get operator map
