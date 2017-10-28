@@ -129,16 +129,6 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 #! SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @internalRepresentation {
-  case standAloneIdentifier (@lstring identifier)
-  case structureMember (@lstring propertyName @objectIR currentPointerIR)
-  case volatileAbsoluteReference (@PLMType type @uint address)
-  case volatileIndirectReference (@PLMType type @string llvmName)
-  case universalReference (@PLMType type @string llvmName)
-}
-
-#·······················································································································
-
 override method @primaryInExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?inGuard:let @bool inGuard
@@ -335,29 +325,29 @@ private proc procAnalyzePrimaryExpressionNew
         !?instructionListIR:ioInstructionGenerationList
       )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-#      handleArrayAccessInExpression (
-#        !?internalRepresentation
-#        !indexExpression
-#        !endOfIndex
-#        !self:inSelfType
-#        !inGuard:inGuard
-#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#        !optionalTargetType:inOptionalTargetType
-#        !context:inContext
-#        !mode:inCurrentMode
-#        !?temporary:ioTemporaries
-#        !?staticStringMap:ioGlobalLiteralStringMap
-#        !?variableMap:ioUniversalMap
-#        !?alloca:ioAllocaList
-#        !?instructionListIR:ioInstructionGenerationList
-#      )
+      handleArrayAccessInExpression (
+        !?ioResult
+        !indexExpression
+        !endOfIndex
+        !self:inSelfType
+        !inGuard:inGuard
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:inOptionalTargetType
+        !context:inContext
+        !mode:inCurrentMode
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioUniversalMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+      )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
       if inGuard then
         error errorLocation : "a method cannot be called in guard" : ioResult
       else
         handleMethodCallInExpression (
           !methodName
-          !ioResult
+          !?ioResult
           !self:inSelfType
           !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
@@ -368,41 +358,10 @@ private proc procAnalyzePrimaryExpressionNew
           !?alloca:ioAllocaList
           !arguments 
           !?ioInstructionGenerationList
-          ?let methodCallResult
         )
-        ioResult = methodCallResult
       end
     end
   end
-#--- Analyze current internal representation, in order to get result as @objectIR
-#  switch internalRepresentation
-#  case standAloneIdentifier (identifier) :
-#    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
-#  case structureMember (propertyName @objectIR currentPointer) :
-#    if [[currentPointer type] isStructure] then
-#      [[currentPointer type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-#      [propertyMap searchKey !propertyName ?2* ?let type ?*]
-#      let newObject = @objectIR.reference {
-#         !type:type
-#         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
-#      }
-#      ioTemporaries.mTemporaryIndex ++
-#      [!?ioInstructionGenerationList appendGetPropertyReference
-#        !newObject
-#        !currentPointer
-#        !propertyName
-#      ]
-#      outResult = newObject
-#    else
-#      error [currentPointer location] : "this should be a structure instance" : outResult
-#    end
-#  case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
-#    error inObjectName : "llvmReference 1" : outResult
-#  case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
-#    error inObjectName : "volatileIndirectReference 1": outResult
-#  case universalReference (@PLMType type @string llvmName) :
-#    outResult = .llvmTemporaryValue {!type:type !llvmName:[llvmName nowhere]}
-#  end
 }
 
 #·······················································································································
@@ -519,10 +478,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   !result:@objectIR outResult
 {
 #--- object access, with self
-  @internalRepresentation internalRepresentation= .structureMember {
-    !propertyName:mReceiverName
-    !currentPointerIR:.reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
-  }
   outResult = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
 #--- Access list
   for (access) in mAccessList do
@@ -542,7 +497,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
       handleArrayAccessInExpression (
-        !?internalRepresentation
+        !?outResult
         !indexExpression
         !endOfIndex
         !self:inSelfType
@@ -558,21 +513,24 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
-      handleFunctionCallInExpression (
-        !?internalRepresentation
-        !self:inSelfType
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !arguments 
-        !errorLocation
-        !?ioInstructionGenerationList
-      )
+      if inGuard then
+        error errorLocation : "a method cannot be called in guard" : outResult
+      else
+        handleMethodCallInExpression (
+          !methodName
+          !?outResult
+          !self:inSelfType
+          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+          !context:inContext
+          !mode:inCurrentMode
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioUniversalMap
+          !?alloca:ioAllocaList
+          !arguments 
+          !?ioInstructionGenerationList
+        )
+      end
     end
   end
 }
@@ -618,7 +576,7 @@ private proc handlePropertyAccessInExpressionNew
 #·······················································································································
 
 private proc handleArrayAccessInExpression
-  ?!@internalRepresentation ioInternalRepresentation
+  ?!@objectIR ioResult
   ?let @expressionAST inIndexExpression
   ?let @location inEndOfIndex
   ?self:let @PLMType inSelfType
@@ -633,42 +591,9 @@ private proc handleArrayAccessInExpression
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  @objectIR variableIR
-  @location errorLocation
-  switch ioInternalRepresentation
-  case standAloneIdentifier (@lstring identifier) :
-    errorLocation = identifier
-    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?variableIR]
-  case structureMember (@lstring propertyName @objectIR currentPointerIR) :
-    if [[currentPointerIR type] isStructure] then
-      errorLocation = propertyName
-      [[currentPointerIR type] structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-      [propertyMap searchKey !propertyName ?* ?let @objectIR masterPropertyIR ?2*]
-      variableIR = @objectIR.reference {
-         !type:[masterPropertyIR type]
-         !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
-        !variableIR
-        !currentPointerIR
-        !propertyName
-      ]
-    else
-      error [currentPointerIR location] : "this should be a structure instance" : variableIR, errorLocation
-    end
-  case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
-    error inEndOfIndex : "volatileAbsoluteReference 4" : variableIR, errorLocation
-  case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
-    error inEndOfIndex : "volatileIndirectReference 4": variableIR, errorLocation
-  case universalReference (@PLMType type @string llvmName) :
-    variableIR = @objectIR.reference {!type:type !llvmName:[llvmName nowhere]}
-    errorLocation = .nowhere
-#    error inEndOfIndex : "indirectReference 4": variableIR, errorLocation
-  end
 #--- Check current object is an array
-  if [[variableIR type] isArrayType] then
-    [[variableIR type] arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
+  if [[ioResult type] isArrayType] then
+    [[ioResult type] arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
     handleArraySubscript (
       !self: inSelfType
       !inGuard: inGuard
@@ -684,71 +609,15 @@ private proc handleArrayAccessInExpression
       !arraySize:arraySize
       !elementType:elementType
       !?ioInstructionGenerationList
-      !?variableIR
+      !?ioResult
    )
-   getNewTempVariable (![variableIR type] !?ioTemporaries ?let loadedObjectIR)
+   getNewTempVariable (![ioResult type] !?ioTemporaries ?let loadedObjectIR)
    [!?ioInstructionGenerationList appendLoadFromTemporaryReference
      !loadedObjectIR
-     ![variableIR llvmName]
+     ![ioResult llvmName]
    ]
-   ioInternalRepresentation = .universalReference {!type:[loadedObjectIR type] !llvmName:[loadedObjectIR name]}
   else
-    error errorLocation : "the receiver is not an array and does not accept subscripting"
-  end
-}
-
-#·······················································································································
-
-private proc handleFunctionCallInExpression
-  ?!@internalRepresentation ioInternalRepresentation
-  ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?let @effectiveArgumentListAST inArguments 
-  ?let @location inErrorLocation
-  ?!@instructionListIR ioInstructionGenerationList
-{
-#--- Cannot call a function in guard
-  if inGuard then
-    error inErrorLocation : "a routine cannot be called in guard"
-  end
-#--- Get function name and map containing the function definition
-  switch ioInternalRepresentation
-   case volatileAbsoluteReference (@PLMType unused type @uint unused address) :
-    error inErrorLocation : "volatileAbsoluteReference 5"
-  case volatileIndirectReference (@PLMType unused type @string unused llvmName) :
-    error inErrorLocation : "volatileIndirectReference 5"
-  case universalReference (@PLMType unused type @string unused llvmName) :
-    error inErrorLocation : "indirectReference 5"
-  case standAloneIdentifier (@lstring identifier) : # This a call idf (....)
-     error identifier : "standAloneIdentifier 5"
-  case structureMember (@lstring propertyName @objectIR currentPointerIR) :
-    if [[currentPointerIR type] isStructure] then
-      handleMethodCallInExpression (
-        !propertyName
-        !currentPointerIR
-        !self:inSelfType
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !inArguments 
-        !?ioInstructionGenerationList
-        ?let @objectIR callReturnedResult
-      )
-      ioInternalRepresentation = .universalReference {!type:[callReturnedResult type] !llvmName:[callReturnedResult name]}
-    else
-      error [currentPointerIR location] : "this object should be a structure" : ioInternalRepresentation
-    end
+    error inEndOfIndex : "the receiver is not an array and does not accept subscripting"
   end
 }
 
@@ -756,7 +625,7 @@ private proc handleFunctionCallInExpression
 
 private proc handleMethodCallInExpression
   ?let @lstring inMethodName
-  ?let @objectIR inCurrentPointerIR
+  ?!@objectIR ioObjectIR
   ?self:let @PLMType inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -767,9 +636,8 @@ private proc handleMethodCallInExpression
   ?!alloca:@allocaList ioAllocaList
   ?let @effectiveArgumentListAST inArguments 
   ?!@instructionListIR ioInstructionGenerationList
-  !@objectIR outCallReturnedResult
 {
-  let routineMangledName = routineMangledNameFromCall (!"$" + [[inCurrentPointerIR type] key] !inMethodName !inArguments)
+  let routineMangledName = routineMangledNameFromCall (!"$" + [[ioObjectIR type] key] !inMethodName !inArguments)
 #--- Get called function signature
   let signature = [inArguments routineSignature !inMethodName.location]
 #--- Search function in map
@@ -782,7 +650,7 @@ private proc handleMethodCallInExpression
   ]
 #--- Check routine is actually a function
   if [routineDescriptor.mReturnTypeProxy type] == .void then
-    error inMethodName : "not a function (returns no value)" : routineDescriptor, outCallReturnedResult
+    error inMethodName : "not a function (returns no value)" : routineDescriptor, ioObjectIR
   else
   #--- Check modes
     let calleeKind = checkMode (
@@ -795,7 +663,7 @@ private proc handleMethodCallInExpression
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     switch routineDescriptor.mRoutineCallingScheme
     case staticCall :
-      effectiveParameterListIR += !.outputInput !inCurrentPointerIR # Add receiver as first argument
+      effectiveParameterListIR += !.outputInput !ioObjectIR # Add receiver as first argument
     case propertyIndirectCall (*) :
     end
   #--- Analyze effective parameters
@@ -815,14 +683,14 @@ private proc handleMethodCallInExpression
       !?effectiveIR:effectiveParameterListIR
     )
   #--- New LLVM variable for function call result
-    getNewTempVariable (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?outCallReturnedResult)
+    getNewTempVariable (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
   #--- Generate call
     switch routineDescriptor.mRoutineCallingScheme
     case staticCall :
     #--- Code generation
       ioInstructionGenerationList += !@staticRoutineCallIR.new {
         !"" # globalVariableReceiverName
-        !outCallReturnedResult
+        !callReturnedResult
         !routineMangledName
         !LLVMInvocationRoutineName
         !calleeKind
@@ -838,17 +706,18 @@ private proc handleMethodCallInExpression
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
         !propertyReference
-        !inCurrentPointerIR
+        !ioObjectIR
         !inMethodName
       ]
     #--- Code generation
       ioInstructionGenerationList += !@indirectRoutineCallIR.new {
         !propertyReference
         !type
-        !outCallReturnedResult
+        !callReturnedResult
         !effectiveParameterListIR
       }
     end
+    ioObjectIR = callReturnedResult
   end
 }
 
