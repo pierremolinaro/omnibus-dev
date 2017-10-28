@@ -325,7 +325,7 @@ private proc analyzeVariableInLValue
           switch propertyAccess
           case nonVirtualMethod :
              error propertyName : "a method cannot be written" : currentType, currentLLVMName
-          case constantValue (*) :
+          case constant (*) :
             error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
           case indexed (@uint index) :
             [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
@@ -412,7 +412,7 @@ private proc analyzeSelfAssignmentTarget
           switch propertyAccess
           case nonVirtualMethod :
              error propertyName : "a method cannot be written" : currentType, currentLLVMName
-          case constantValue (*) :
+          case constant (*) :
             error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
           case indexed (@uint index) :
             [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]

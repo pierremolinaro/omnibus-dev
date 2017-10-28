@@ -1736,7 +1736,7 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
-    kEnum_constantValue,
+    kEnum_constant,
     kEnum_indexed,
     kEnum_nonVirtualMethod
   } enumeration ;
@@ -1765,8 +1765,8 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_propertyAccessKind constructor_constantValue (const class GALGAS_string & inOperand0
-                                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_propertyAccessKind constructor_constant (const class GALGAS_string & inOperand0
+                                                                        COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_propertyAccessKind constructor_indexed (const class GALGAS_uint & inOperand0
                                                                        COMMA_LOCATION_ARGS) ;
@@ -1782,9 +1782,9 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_constantValue (class GALGAS_string & outArgument0,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_constant (class GALGAS_string & outArgument0,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_indexed (class GALGAS_uint & outArgument0,
                                                  C_Compiler * inCompiler
@@ -1793,7 +1793,7 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConstantValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIndexed (LOCATION_ARGS) const ;
 
@@ -2265,18 +2265,18 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyList_2D_ele
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_propertyAccessKind_constantValue : public cEnumAssociatedValues {
+class cEnumAssociatedValues_propertyAccessKind_constant : public cEnumAssociatedValues {
   public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_propertyAccessKind_constantValue (const GALGAS_string & inAssociatedValue0
-                                                                   COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_propertyAccessKind_constant (const GALGAS_string & inAssociatedValue0
+                                                              COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_constantValue (void) {}
+  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_constant (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

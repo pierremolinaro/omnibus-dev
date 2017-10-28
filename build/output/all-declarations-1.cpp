@@ -3689,16 +3689,16 @@ GALGAS_PLMType GALGAS_PLMType::extractObject (const GALGAS_object & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_propertyAccessKind_constantValue::cEnumAssociatedValues_propertyAccessKind_constantValue (const GALGAS_string & inAssociatedValue0
-                                                                                                                COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_propertyAccessKind_constant::cEnumAssociatedValues_propertyAccessKind_constant (const GALGAS_string & inAssociatedValue0
+                                                                                                      COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_propertyAccessKind_constantValue::description (C_String & ioString,
-                                                                          const int32_t inIndentation) const {
+void cEnumAssociatedValues_propertyAccessKind_constant::description (C_String & ioString,
+                                                                     const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   ioString << ")" ;
@@ -3706,8 +3706,8 @@ void cEnumAssociatedValues_propertyAccessKind_constantValue::description (C_Stri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_propertyAccessKind_constantValue::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_propertyAccessKind_constantValue * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_constantValue *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_propertyAccessKind_constant::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyAccessKind_constant * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_constant *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -3754,13 +3754,13 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_constantValue (const GALGAS_string & inAssociatedValue0
-                                                                                COMMA_LOCATION_ARGS) {
+GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_constant (const GALGAS_string & inAssociatedValue0
+                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_propertyAccessKind result ;
   if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_constantValue ;
+    result.mEnum = kEnum_constant ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_constantValue (inAssociatedValue0 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_constant (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -3792,16 +3792,16 @@ GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_nonVirtualMetho
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessKind::method_constantValue (GALGAS_string & outAssociatedValue0,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_constantValue) {
+void GALGAS_propertyAccessKind::method_constant (GALGAS_string & outAssociatedValue0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_constant) {
     outAssociatedValue0.drop () ;
     C_String s ;
-    s << "method @propertyAccessKind constantValue invoked with an invalid enum value" ;
+    s << "method @propertyAccessKind constant invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_propertyAccessKind_constantValue * ptr = (const cEnumAssociatedValues_propertyAccessKind_constantValue *) unsafePointer () ;
+    const cEnumAssociatedValues_propertyAccessKind_constant * ptr = (const cEnumAssociatedValues_propertyAccessKind_constant *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
@@ -3826,15 +3826,15 @@ void GALGAS_propertyAccessKind::method_indexed (GALGAS_uint & outAssociatedValue
 
 static const char * gEnumNameArrayFor_propertyAccessKind [4] = {
   "(not built)",
-  "constantValue",
+  "constant",
   "indexed",
   "nonVirtualMethod"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_propertyAccessKind::getter_isConstantValue (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_constantValue == mEnum) ;
+GALGAS_bool GALGAS_propertyAccessKind::getter_isConstant (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_constant == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

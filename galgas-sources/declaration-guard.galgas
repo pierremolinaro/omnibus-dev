@@ -344,7 +344,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
         switch propertyAccess
         case nonVirtualMethod :
           error propertyName : "a method cannot be used in this context" : currentObject
-        case constantValue (*) :
+        case constant (*) :
           error propertyName: "a constant property not available in this context" : currentObject
         case indexed (propertyIndex) :
           [!?ioTemporaries newTempLLVMVar ?let property_llvmName]

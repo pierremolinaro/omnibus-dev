@@ -573,7 +573,7 @@ private proc handlePropertyAccessInExpression
     switch accessKind
     case nonVirtualMethod :
       error inPropertyName : "a method cannot be used in this context" : ioResult
-    case constantValue (@string llvmValue) :
+    case constant (@string llvmValue) :
       ioResult = .llvmValue {!type:propertyType !llvmName:llvmValue}
     case indexed (@uint propertyIndex) :
       [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
