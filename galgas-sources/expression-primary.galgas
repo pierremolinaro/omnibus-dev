@@ -629,7 +629,7 @@ private proc handleArrayAccessInExpression
       !?ioResult
    )
    getNewTempVariable (![ioResult type] !?ioTemporaries ?let loadedObjectIR)
-   [!?ioInstructionGenerationList appendLoadFromTemporaryReference
+   [!?ioInstructionGenerationList appendLoadFromReference
      !loadedObjectIR
      ![ioResult llvmName]
    ]

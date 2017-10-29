@@ -311,15 +311,6 @@ override getter @configurationDeclarationAST keyRepresentationForErrorSignaling 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @configurationDeclarationAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 # Duplicate configuration is detected in noteTypesInPrecedenceGraph

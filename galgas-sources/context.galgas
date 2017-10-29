@@ -179,13 +179,6 @@ abstract method @abstractDeclarationAST enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractDeclarationAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc buildSemanticContext
   ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
   ?sourceFile:let @lstring inSourceFile
@@ -240,14 +233,6 @@ proc buildSemanticContext
   )
 #--- Enter tasks
   [inAST.mTaskListAST enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
-#---
-  for (declaration) in inDeclarationListAST do
-    [declaration enterRoutinesInContext
-      !procedureDeclarationList:inAST.mStandAloneFunctionDeclarationListAST
-      !?context:outSemanticContext
-      !?staticStringMap:ioGlobalLiteralStringMap
-    ]
-  end
 #--- Enter static lists in constant map
   for (key stringValueList) in ioStaticListValueMap do
     let lkey = @lstring.new {!key !.nowhere}

@@ -1,19 +1,16 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendLoadFromReference
+setter @instructionListIR appendLoadWhenReference
   ?!@semanticTemporariesStruct ioTemporaries
   ?let @objectIR inSource
   !@objectIR outResultingValue
 {
   switch inSource
   case null :
-    error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
+    error .nowhere : "<<@instructionListIR appendLoadWhenReference null>>" : outResultingValue
   case reference (@PLMType type llvmName) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?self appendLoadFromTemporaryReference
-      !outResultingValue
-      !llvmName
-    ]
+    [!?self appendLoadFromReference !outResultingValue !llvmName]
 #--- Values
   case literalInteger (**) :
     outResultingValue = inSource

@@ -207,30 +207,6 @@ method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrece
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @allowedRoutineMap {
-#  @bool mHasWriteAccess
-#  insert insertKey error message "the '%K' routine is already declared in %L"
-#  search searchKey error message "there is no '%K' routine"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#map @allowedISRMap {
-#  @bool mHasWriteAccess
-#  insert insertKey error message "the '%K' routine is already declared in %L"
-#  search searchKey error message "there is no '%K' routine"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#map @allowedTaskMap {
-#  @bool mHasWriteAccess
-#  insert insertKey error message "the '%K' task is already declared in %L"
-#  search searchKey error message "there is no '%K' task"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @globalVarDeclarationList-element enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap

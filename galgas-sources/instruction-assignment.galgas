@@ -89,7 +89,7 @@ override method @assignmentInstructionAST analyze
     ?let @LValueRepresentation internalRepresentation
   ]
 #---
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !sourceOperandPossibleReference
     ?let sourceOperand

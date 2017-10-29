@@ -91,7 +91,7 @@ override method @extendExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR expressionResultPossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !expressionResultPossibleReference
     ?let expressionResult

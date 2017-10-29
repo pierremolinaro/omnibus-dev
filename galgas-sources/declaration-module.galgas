@@ -280,15 +280,6 @@ override method @requiredModuleAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @requiredModuleAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

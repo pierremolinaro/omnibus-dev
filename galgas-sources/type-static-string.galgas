@@ -45,15 +45,6 @@ override getter @literalStringDeclarationAST keyRepresentationForErrorSignaling 
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclarationAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @literalStringDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext

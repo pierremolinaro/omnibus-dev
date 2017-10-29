@@ -99,7 +99,7 @@ override method @ifExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR ifExpressionResultPossibleReference 
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !ifExpressionResultPossibleReference
     ?let ifExpressionResult
@@ -123,7 +123,7 @@ override method @ifExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR thenExpressionPossibleReferenceResult
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !thenExpressionPossibleReferenceResult
     ?let thenExpressionTempResult
@@ -149,7 +149,7 @@ override method @ifExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR elseExpressionPossibleReferenceResult
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !elseExpressionPossibleReferenceResult
     ?let elseExpressionTempResult

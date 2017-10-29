@@ -109,7 +109,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR leftOperandPossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !leftOperandPossibleReference
     ?let leftOperand
@@ -129,7 +129,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR rightExpressionResult
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !rightExpressionResult
     ?let rightOperand

@@ -2454,68 +2454,6 @@ void callExtensionMethod_enterInContext (const cPtr_abstractDeclarationAST * inO
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                     Abstract extension method '@abstractDeclarationAST enterRoutinesInContext'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <extensionMethodSignature_abstractDeclarationAST_enterRoutinesInContext> gExtensionMethodTable_abstractDeclarationAST_enterRoutinesInContext ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_enterRoutinesInContext (const int32_t inClassIndex,
-                                                  extensionMethodSignature_abstractDeclarationAST_enterRoutinesInContext inMethod) {
-  gExtensionMethodTable_abstractDeclarationAST_enterRoutinesInContext.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeExtensionMethod_abstractDeclarationAST_enterRoutinesInContext (void) {
-  gExtensionMethodTable_abstractDeclarationAST_enterRoutinesInContext.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractDeclarationAST_enterRoutinesInContext (NULL,
-                                                                          freeExtensionMethod_abstractDeclarationAST_enterRoutinesInContext) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_enterRoutinesInContext (const cPtr_abstractDeclarationAST * inObject,
-                                                 const GALGAS_functionDeclarationListAST constin_inProcedureListAST,
-                                                 GALGAS_semanticContext & io_ioContext,
-                                                 GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclarationAST) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    extensionMethodSignature_abstractDeclarationAST_enterRoutinesInContext f = NULL ;
-    if (classIndex < gExtensionMethodTable_abstractDeclarationAST_enterRoutinesInContext.count ()) {
-      f = gExtensionMethodTable_abstractDeclarationAST_enterRoutinesInContext (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-      while ((NULL == f) && (NULL != p)) {
-        if (p->mSlotID < gExtensionMethodTable_abstractDeclarationAST_enterRoutinesInContext.count ()) {
-          f = gExtensionMethodTable_abstractDeclarationAST_enterRoutinesInContext (p->mSlotID COMMA_HERE) ;
-        }
-        p = p->mSuperclassDescriptor ;
-      }
-      gExtensionMethodTable_abstractDeclarationAST_enterRoutinesInContext.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, constin_inProcedureListAST, io_ioContext, io_ioGlobalLiteralStringMap, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_PLMTypeFlags::GALGAS_PLMTypeFlags (void) :
 mFlags (0),
@@ -6914,15 +6852,15 @@ GALGAS_loadRegisterIR GALGAS_loadRegisterIR::extractObject (const GALGAS_object 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Extension method '@instructionListIR appendLoadFromTemporaryReference'                        *
+//                            Extension method '@instructionListIR appendLoadFromReference'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendLoadFromTemporaryReference (GALGAS_instructionListIR & ioObject,
-                                                       const GALGAS_objectIR constinArgument_inTargetValue,
-                                                       const GALGAS_string constinArgument_inLLVMName,
-                                                       C_Compiler * /* inCompiler */
-                                                       COMMA_UNUSED_LOCATION_ARGS) {
+void extensionSetter_appendLoadFromReference (GALGAS_instructionListIR & ioObject,
+                                              const GALGAS_objectIR constinArgument_inTargetValue,
+                                              const GALGAS_string constinArgument_inLLVMName,
+                                              C_Compiler * /* inCompiler */
+                                              COMMA_UNUSED_LOCATION_ARGS) {
   ioObject.addAssign_operation (GALGAS_loadFromReferenceIR::constructor_new (constinArgument_inTargetValue, constinArgument_inLLVMName  COMMA_SOURCE_FILE ("intermediate-load-from-reference.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-load-from-reference.galgas", 6)) ;
 }
 
@@ -8839,11 +8777,11 @@ GALGAS_indirectRoutineCallIR GALGAS_indirectRoutineCallIR::extractObject (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Extension method '@instructionListIR appendLoadFromReference'                            *
+//                            Extension method '@instructionListIR appendLoadWhenReference'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendLoadFromReference (GALGAS_instructionListIR & ioObject,
+void extensionSetter_appendLoadWhenReference (GALGAS_instructionListIR & ioObject,
                                               GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
                                               const GALGAS_objectIR constinArgument_inSource,
                                               GALGAS_objectIR & outArgument_outResultingValue,
@@ -8856,20 +8794,20 @@ void extensionSetter_appendLoadFromReference (GALGAS_instructionListIR & ioObjec
   case GALGAS_objectIR::kEnum_null:
     {
       TC_Array <C_FixItDescription> fixItArray0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 10)), GALGAS_string ("<<@instructionListIR appendLoadFromReference null>>"), fixItArray0  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 10)) ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-when-reference.galgas", 10)), GALGAS_string ("<<@instructionListIR appendLoadWhenReference null>>"), fixItArray0  COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 10)) ;
       outArgument_outResultingValue.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_objectIR::kEnum_reference:
     {
-      const cEnumAssociatedValues_objectIR_reference * extractPtr_603 = (const cEnumAssociatedValues_objectIR_reference *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_603->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_llvmName = extractPtr_603->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectIR_reference * extractPtr_577 = (const cEnumAssociatedValues_objectIR_reference *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_577->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_577->mAssociatedValue1 ;
       {
-      routine_getNewTempVariable (extractedValue_type, ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 12)) ;
+      routine_getNewTempVariable (extractedValue_type, ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 12)) ;
       }
       {
-      extensionSetter_appendLoadFromTemporaryReference (ioObject, outArgument_outResultingValue, extractedValue_llvmName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 13)) ;
+      extensionSetter_appendLoadFromReference (ioObject, outArgument_outResultingValue, extractedValue_llvmName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 13)) ;
       }
     }
     break ;
@@ -14961,6 +14899,120 @@ GALGAS_operandList_2D_element GALGAS_operandList_2D_element::extractObject (cons
       result = *p ;
     }else{
       inCompiler->castError ("operandList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIRList_2D_element::GALGAS_operandIRList_2D_element (void) :
+mProperty_mOperand () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIRList_2D_element::~ GALGAS_operandIRList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIRList_2D_element::GALGAS_operandIRList_2D_element (const GALGAS_objectIR & inOperand0) :
+mProperty_mOperand (inOperand0) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIRList_2D_element GALGAS_operandIRList_2D_element::constructor_new (const GALGAS_objectIR & inOperand0 
+                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_operandIRList_2D_element result ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_operandIRList_2D_element (inOperand0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_operandIRList_2D_element::objectCompare (const GALGAS_operandIRList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mOperand.objectCompare (inOperand.mProperty_mOperand) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_operandIRList_2D_element::isValid (void) const {
+  return mProperty_mOperand.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_operandIRList_2D_element::drop (void) {
+  mProperty_mOperand.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_operandIRList_2D_element::description (C_String & ioString,
+                                                   const int32_t inIndentation) const {
+  ioString << "<struct @operandIRList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mOperand.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_operandIRList_2D_element::getter_mOperand (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mOperand ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @operandIRList-element type                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_operandIRList_2D_element ("operandIRList-element",
+                                                 NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_operandIRList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_operandIRList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_operandIRList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_operandIRList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIRList_2D_element GALGAS_operandIRList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_operandIRList_2D_element result ;
+  const GALGAS_operandIRList_2D_element * p = (const GALGAS_operandIRList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_operandIRList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("operandIRList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

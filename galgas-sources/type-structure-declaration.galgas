@@ -452,21 +452,17 @@ method @structurePropertyListAST-element enterInContext
       canBeCopied = false
     end
     if mIsConstant then
-#     let constantProperty = @propertyAccessKind.constant {!type:actualPropertyType !llvmValue:[expressionIR name]}
      [!?propertyMap insertKey
         !mPropertyName
         !mIsPublic
-#        !actualPropertyType
         !.constant {!type:actualPropertyType !llvmValue:[expressionIR name]}
       ]
     else
       let propertyIndex = [propertyList length]
-#      let indexedProperty = @propertyAccessKind.indexed{!index:propertyIndex}
       propertyList += !mPropertyName.string !actualPropertyType
       [!?propertyMap insertKey
         !mPropertyName
         !mIsPublic
-#        !actualPropertyType
         !.indexed{!type:actualPropertyType !index:propertyIndex}
       ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
@@ -480,20 +476,10 @@ method @structurePropertyListAST-element enterInContext
     [!?propertyMap insertKey
       !mPropertyName
       !mIsPublic
-#      !optionalPropertyType
       !.indexed{!type: optionalPropertyType!index:propertyIndex}
     ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
   end
-}
-
-#·······················································································································
-
-override method @structureDeclarationAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -32,7 +32,7 @@ proc handleArraySubscriptNew
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR indexResultPossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !indexResultPossibleReference
     ?let indexResult
@@ -96,7 +96,7 @@ proc handleArraySubscript
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR indexResultPossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !indexResultPossibleReference
     ?let indexResult
