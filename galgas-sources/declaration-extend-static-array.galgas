@@ -148,7 +148,6 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !mode:.bootMode
             !globalsAreConstant:true # Any value, there is no defined global variable at this stage
             !returnTypeName:["" nowhere]
-#            ?*
             ?@universalPropertyAndRoutineMapForContext universalMap
           )
           @semanticTemporariesStruct temporaries = .default
@@ -196,7 +195,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           ]
           let candidateIsPublic = routineDescriptor.mIsPublic
           let candidateRoutineKind = routineDescriptor.mRoutineKind
-          let candidateMode = [routineDescriptor.mRoutineKind executionMode] # routineDescriptor.mExecutionMode
+          let candidateMode = [routineDescriptor.mRoutineKind executionMode]
           let candidateSignature = routineDescriptor.mSignature
           let candidateReturnTypeProxy = routineDescriptor.mReturnTypeProxy
         #--- Check accessibility
