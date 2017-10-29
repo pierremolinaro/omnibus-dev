@@ -181,7 +181,7 @@ method @taskList enterInContext
       !propertyMap:propertyMap
       !propertyList:propertyList
       !flags:.none
-      !plmTypeName:task.mTaskName
+      !guardMap:{}
     }
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName

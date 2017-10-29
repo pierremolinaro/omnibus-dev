@@ -203,7 +203,7 @@ override method @staticArrayAST enterInContext
     !propertyMap:propertyMap
     !propertyList:propertyList
     !flags:.none
-    !plmTypeName:mStaticListName
+    !guardMap:{}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmTypeName
