@@ -494,18 +494,6 @@ override method @structureDeclarationAST enterRoutinesInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-#  [mFunctionDeclarationListAST enterFunctionInContext
-#    !selfTypeName:llvmRegularTypeMangledNameFromName (!mStructureName).string
-#    !?context:ioContext
-#  ]
-#  [mSystemRoutineListAST enterSystemRoutineInContext
-#    !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string
-#    !?context:ioContext
-#  ]
-  [mGuardListAST enterInContext
-    !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string
-    !?context:ioContext
-  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

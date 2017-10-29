@@ -22,7 +22,6 @@ func llvmRegularTypeMangledNameFromName ?let @lstring inName -> @lstring {
 
 func moduleMangledNameFromModuleName ?let @lstring inModuleName -> @lstring {
   result = .new {!inModuleName.string + "$" !inModuleName.location}
-#  result = .new {!"$" + inModuleName.string !inModuleName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
