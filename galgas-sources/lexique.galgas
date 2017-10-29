@@ -15,6 +15,7 @@ style keywordsStyle -> "Keywords"
 $identifier$ ! tokenString error message "an identifier"
 
 list keyWordList style keywordsStyle error message "the '%K' keyword" {
+  "addressof",
   "and",
   "assert",
   "at",

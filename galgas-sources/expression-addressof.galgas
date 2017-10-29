@@ -1,0 +1,132 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @addressofExpressionAST : @expressionAST {
+  @expressionAST mExpression
+  @location mEndOfExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <primary> !@expressionAST outExpression {
+    $addressof$
+    $($
+    <expression> ?let expressionAST
+    let endOfExpression = @location.here
+    $)$
+    outExpression = @addressofExpressionAST.new {!expressionAST !endOfExpression}
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @addressofExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring unused inConstantName
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! @addressofExpressionAST
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @addressofExpressionAST analyzeExpression
+  ?self:let @PLMType inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze expression
+  [mExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.void
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR expressionResultPossibleReference
+  ]
+#--- Analyze expression result
+  if not [expressionResultPossibleReference isReference] then
+    error mEndOfExpression : "this expression is a constant value" : outResult
+  else   
+    let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
+      !inContext.mTypeMap
+      !["uint" + inContext.mPointerSize nowhere]
+    }
+    let resultType = [resultTypeProxy type]
+    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    ioInstructionGenerationList += !@addressofInstructionIR.new {
+      !outResult
+      !expressionResultPossibleReference
+    }
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! @addressofInstructionIR
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @addressofInstructionIR : @abstractInstructionIR {
+  @objectIR mTarget
+  @objectIR mOperand
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @addressofInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @addressofInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + [mOperand llvmTypeName] + "* " + [mOperand llvmName]
+              + " to " + [mTarget llvmTypeName] + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
