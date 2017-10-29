@@ -718,7 +718,7 @@ private proc handleFunctionCallInExpression
       else
         [propertyType function ?descriptor:let descriptor]
       #--- Check routine is actually a function
-        if [descriptor.mReturnTypeProxy type] == .void then
+        if descriptor.mReturnTypeProxy == .null then
           error inMethodName : "not a function (returns no value)" : ioObjectIR
         else
         #--- Check modes

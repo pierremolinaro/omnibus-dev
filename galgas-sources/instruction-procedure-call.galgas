@@ -274,30 +274,25 @@ override method @procedureCallInstructionAST analyze
           ?let @bool unused isPublic
           ?let @propertyAccessKind propertyAccess
         ]
-#        if not [propertyType isStructure] then
-#          error mIdentifier : "receiver has no property"
-#        else
-#          [propertyType structure ?1* ?propertyMap:propertyMap ?3*]
-          switch propertyAccess
-          case nonVirtualMethod (*) :
-             error propertyName : "a method cannot be used in this context" : currentType, currentLLVMAddressVar
-          case constant (* *) :
-            error propertyName
-              : "a context property cannot be used in this context"
-              : currentType, currentLLVMAddressVar
-          case indexed (@PLMType propertyType @uint propertyIndex) :
-            [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
-            [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-              !currentType
-              !currentLLVMAddressVar
-              !propertyType
-              !llvmPropertyName
-              !propertyIndex
-              !propertyName
-            ]
-            currentType = propertyType
-            currentLLVMAddressVar = llvmPropertyName
-#          end
+        switch propertyAccess
+        case nonVirtualMethod (*) :
+           error propertyName : "a method cannot be used in this context" : currentType, currentLLVMAddressVar
+        case constant (* *) :
+          error propertyName
+            : "a context property cannot be used in this context"
+            : currentType, currentLLVMAddressVar
+        case indexed (@PLMType propertyType @uint propertyIndex) :
+          [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
+          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+            !currentType
+            !currentLLVMAddressVar
+            !propertyType
+            !llvmPropertyName
+            !propertyIndex
+            !propertyName
+          ]
+          currentType = propertyType
+          currentLLVMAddressVar = llvmPropertyName
         end
       case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
         error endOfIndex : "not handled yet" : currentType, currentLLVMAddressVar
@@ -308,93 +303,116 @@ override method @procedureCallInstructionAST analyze
     case arrayAccess (* @location endOfIndex) :
       error endOfIndex : "a property access is required here"
     case property (@lstring methodName) :
-    #--- Get function name and map containing the function definition
-      let routineMangledName = routineMangledNameFromCall (!"$" + [currentType key] !methodName !mArguments)
-    #--- Get called function signature
-      let signature = [mArguments routineSignature !methodName.location]
-    #--- Search function in map
-      [inContext.mRoutineMapForContext searchKey
-        !methodName
-        !signature
-        ?let @lstring LLVMInvocationRoutineName
-        ?@routineDescriptor routineDescriptor
-        ?let @location unused keyLocation
-      ]
-    #--- Add receiver as first parameter
-      @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-#      switch routineDescriptor.mRoutineCallingScheme
-#      case staticCall :
-        effectiveParameterListIR +=
-          !.outputInput # Add receiver as first argument
+      [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
+      let key = routineMangledNameFromCall (!"" !methodName !mArguments)
+      [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
+      switch propertyAccess
+      case constant (* *) :
+        error methodName : "a constant cannot be used as method"
+      case nonVirtualMethod (@routineDescriptor routineDescriptor) :
+      #--- Add receiver as first parameter
+        @procCallEffectiveParameterListIR effectiveParameterListIR = {
+          !.outputInput
           !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
-#      case propertyIndirectCall (* *) :
-#        error methodName : "not handled yet"
-#      end
-    #---
-    #  let isPublic = routineDescriptor.mIsPublic
-      let routineKind = routineDescriptor.mRoutineKind
-      let calleeMode = [routineKind executionMode]
-      let formalSignature = routineDescriptor.mSignature
-    #--- Check routine is actually a procedure (does not return any value)
-      if routineDescriptor.mReturnTypeProxy != .null then
-        error methodName : "not a procedure (returns a value)" : routineDescriptor
-      else
-      #--- Check modes
-        let calleeKind = checkMode (
-          !callerMode:inCurrentMode
-          !calleeMode:calleeMode
-          !kind:routineKind
-          !error:methodName.location
-        )
-      #--- Analyze effective parameters
-        analyzeEffectiveParameters (
-          !self:inSelfType
-          !formal:formalSignature
-          !effective:mArguments
-          !errorLocation:methodName.location
-          !callerForInvocationGraph:inCallerNameForInvocationGraph
-          !context:inContext
-          !requiredMode:inCurrentMode
-          !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
-          !?variableMap:ioUniversalMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:ioInstructionGenerationList
-          !?effectiveIR:effectiveParameterListIR
-        )
-      #--- Generate call
-#        switch routineDescriptor.mRoutineCallingScheme
-#        case staticCall :
+        }
+      #---
+      #  let isPublic = routineDescriptor.mIsPublic
+        let routineKind = routineDescriptor.mRoutineKind
+        let calleeMode = [routineKind executionMode]
+        let formalSignature = routineDescriptor.mSignature
+      #--- Check routine is actually a procedure (does not return any value)
+        if routineDescriptor.mReturnTypeProxy != .null then
+          error methodName : "not a procedure (returns a value)"
+        else
+        #--- Check modes
+          let calleeKind = checkMode (
+            !callerMode:inCurrentMode
+            !calleeMode:calleeMode
+            !kind:routineKind
+            !error:methodName.location
+          )
+        #--- Analyze effective parameters
+          analyzeEffectiveParameters (
+            !self:inSelfType
+            !formal:formalSignature
+            !effective:mArguments
+            !errorLocation:methodName.location
+            !callerForInvocationGraph:inCallerNameForInvocationGraph
+            !context:inContext
+            !requiredMode:inCurrentMode
+            !?temporary:ioTemporaries
+            !?staticStringMap:ioGlobalLiteralStringMap
+            !?variableMap:ioUniversalMap
+            !?alloca:ioAllocaList
+            !?instructionListIR:ioInstructionGenerationList
+            !?effectiveIR:effectiveParameterListIR
+          )
+        #--- Get function name and map containing the function definition
+          let routineMangledName = routineMangledNameFromCall (!"$" + [currentType key] !methodName !mArguments)
         #--- Code generation
           ioInstructionGenerationList += !@staticRoutineCallIR.new {
             !mIdentifier
             !.null # No result
             !routineMangledName
-            !LLVMInvocationRoutineName
+            !routineMangledName # LLVMInvocationRoutineName
             !calleeKind
             !effectiveParameterListIR
           }
         #--- Enter in invocation graph
           [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-#        case propertyIndirectCall (type index) :
-#          let propertyReference = @objectIR.reference {
-#             !type:type
-#             !llvmName:"%temp." + ioTemporaries.mTemporaryIndex
-#          }
-#          ioTemporaries.mTemporaryIndex ++
-#          [!?ioInstructionGenerationList appendGetPropertyReference
-#            !propertyReference
-#            !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
-#            !methodName
-#          ]
-#        #--- Code generation
-#          ioInstructionGenerationList += !@indirectRoutineCallIR.new {
-#            !propertyReference
-#            !type
-#            !.null # No result
-#            !effectiveParameterListIR
-#          }
-#        end
+        end
+      case indexed  (@PLMType propertyType @uint propertyIndex) :
+        if not [propertyType isFunction] then
+          error methodName : "an indexed property cannot be used as method"
+        else
+          [propertyType function ?descriptor:let descriptor]
+        #--- Check routine is actually a function
+          if descriptor.mReturnTypeProxy != .null then
+            error methodName : "a function returns a value and cannot be called as a procedure"
+          else
+          #--- Check modes
+  #          let calleeKind = checkMode (
+  #            !callerMode:inMode
+  #            !calleeMode:mode
+  #            !kind:routineDescriptor.mRoutineKind
+  #            !error:inMethodName.location
+  #          )
+          #--- Analyze effective parameters
+            @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+            analyzeEffectiveParameters (
+              !self:inSelfType
+              !formal:descriptor.mSignature
+              !effective:mArguments
+              !errorLocation:methodName.location
+              !callerForInvocationGraph:inCallerNameForInvocationGraph
+              !context:inContext
+              !requiredMode:inCurrentMode
+              !?temporary:ioTemporaries
+              !?staticStringMap:ioGlobalLiteralStringMap
+              !?variableMap:ioUniversalMap
+              !?alloca:ioAllocaList
+              !?instructionListIR:ioInstructionGenerationList
+              !?effectiveIR:effectiveParameterListIR
+            )
+          #--- Load routine reference
+            [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
+            [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+              !currentType
+              !currentLLVMAddressVar
+              !propertyType
+              !property_llvmName
+              !propertyIndex
+              !methodName
+            ]
+          #--- Code generation
+            ioInstructionGenerationList += !@indirectRoutineCallIR.new {
+              !.reference {!type:propertyType !llvmName:property_llvmName}
+              !propertyType
+              !.null # Function does not return any value
+              !effectiveParameterListIR
+            }
+          end
+        end
       end
     end
   end
