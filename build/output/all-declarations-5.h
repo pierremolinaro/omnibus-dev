@@ -298,7 +298,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_registerDeclaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_registerDeclaration_ (GALGAS_controlRegisterNameList & ioArgument0,
+  public : virtual void nt_registerDeclaration_ (GALGAS_controlRegisterList & ioArgument0,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'start_symbol' non terminal

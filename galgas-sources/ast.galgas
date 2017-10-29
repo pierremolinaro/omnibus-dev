@@ -28,7 +28,7 @@ struct @ast {
   @globalVarDeclarationList mGlobalVarDeclarationListAST
   @declarationListAST mDeclarationListAST
   @extensionDeclarationListAST mExtensionDeclarationListAST
-  @controlRegisterDeclarationListAST mControlRegisterDeclarationListAST
+#  @controlRegisterDeclarationListAST mControlRegisterDeclarationListAST
   @functionDeclarationListAST mStandAloneFunctionDeclarationListAST
   @requiredProcedureDeclarationListAST mRequiredProcListAST
   @externProcedureDeclarationListAST mExternProcListAST

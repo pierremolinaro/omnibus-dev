@@ -289,8 +289,14 @@ override method @configurationDeclarationAST addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once configurationNodeNaleForPrecedenceGraph -> @string {
+  result = "config"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let rootNode =  @lstring.new {!"config" !mPanicCodeTypeName.location}
+  let rootNode =  @lstring.new {!configurationNodeNaleForPrecedenceGraph () !mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
   let panicCodeTypeName = llvmRegularTypeMangledNameFromName (!mPanicCodeTypeName)
   [!?ioGraph addEdge !rootNode !panicCodeTypeName]
@@ -307,7 +313,7 @@ override getter @configurationDeclarationAST location -> @location outLocation {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @configurationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "config" 
+  outRepresentation = configurationNodeNaleForPrecedenceGraph ()
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

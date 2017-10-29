@@ -222,11 +222,6 @@ proc buildSemanticContext
     !sourceFile:inSourceFile
   )
 #--- Enter control registers in context
-  enterControlRegistersInContext (
-    !inAST.mControlRegisterDeclarationListAST
-    !?context: outSemanticContext
-    !?staticStringMap:ioGlobalLiteralStringMap
-  )
   buildControlRegisterMapHTMLFile (
     !outSemanticContext.mControlRegisterMap
     !sourceFile:inSourceFile

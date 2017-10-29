@@ -237,7 +237,6 @@ private proc addTargetSpecificFiles
   end
   ioAST.mDeclarationListAST = ast.mDeclarationListAST + ioAST.mDeclarationListAST
   ioAST.mGlobalVarDeclarationListAST = ast.mGlobalVarDeclarationListAST + ioAST.mGlobalVarDeclarationListAST
-  ioAST.mControlRegisterDeclarationListAST = ast.mControlRegisterDeclarationListAST + ioAST.mControlRegisterDeclarationListAST
   ioAST.mExtensionDeclarationListAST = ast.mExtensionDeclarationListAST + ioAST.mExtensionDeclarationListAST
   ioAST.mStandAloneFunctionDeclarationListAST = ast.mStandAloneFunctionDeclarationListAST + ioAST.mStandAloneFunctionDeclarationListAST
   ioAST.mRequiredProcListAST = ast.mRequiredProcListAST + ioAST.mRequiredProcListAST

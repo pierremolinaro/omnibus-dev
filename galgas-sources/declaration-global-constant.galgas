@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
+#!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @globalConstantDeclarationAST : @abstractDeclarationAST {
@@ -15,7 +15,7 @@ override getter @globalConstantDeclarationAST location -> @location outLocation 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
@@ -56,14 +56,14 @@ override method @globalConstantDeclarationAST addExtension
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @expressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add 'constant name' node
@@ -77,14 +77,14 @@ override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semantic
   [mSourceExpression addDependenceEdgeForStaticExpression !mConstantName !?ioGraph]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override getter @globalConstantDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "global constant " + mConstantName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @globalConstantDeclarationAST enterInContext
@@ -98,7 +98,6 @@ override method @globalConstantDeclarationAST enterInContext
     !mode:.bootMode
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
     !returnTypeName:["" nowhere]
-#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Get destination type
@@ -142,7 +141,7 @@ override method @globalConstantDeclarationAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  BUILD CONSTANT MAP HTML FILE                                                                                                      
+#!  BUILD CONSTANT MAP HTML FILE                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildGlobalConstantMapHTMLFile

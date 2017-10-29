@@ -3712,11 +3712,11 @@ class cPtr_literalIntegerDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     @controlRegisterNameList_2D_element struct                                      *
+//                                       @controlRegisterList_2D_element struct                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
+class GALGAS_controlRegisterList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_mRegisterName ;
 
@@ -3733,17 +3733,17 @@ class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_controlRegisterNameList_2D_element (void) ;
+  public : GALGAS_controlRegisterList_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_controlRegisterNameList_2D_element (void) ;
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_controlRegisterList_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_controlRegisterNameList_2D_element (const GALGAS_lstring & in_mRegisterName,
-                                                      const GALGAS_controlRegisterKind & in_mControlRegisterKind,
-                                                      const GALGAS_lstringlist & in_mAttributeList,
-                                                      const GALGAS_expressionAST & in_mRegisterAddress,
-                                                      const GALGAS_location & in_mRegisterAddressLocation) ;
+  public : GALGAS_controlRegisterList_2D_element (const GALGAS_lstring & in_mRegisterName,
+                                                  const GALGAS_controlRegisterKind & in_mControlRegisterKind,
+                                                  const GALGAS_lstringlist & in_mAttributeList,
+                                                  const GALGAS_expressionAST & in_mRegisterAddress,
+                                                  const GALGAS_location & in_mRegisterAddressLocation) ;
 
 //-- Start of generic part --*
 
@@ -3751,23 +3751,23 @@ class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_controlRegisterNameList_2D_element extractObject (const GALGAS_object & inObject,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_controlRegisterList_2D_element extractObject (const GALGAS_object & inObject,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_controlRegisterNameList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                   const class GALGAS_controlRegisterKind & inOperand1,
-                                                                                   const class GALGAS_lstringlist & inOperand2,
-                                                                                   const class GALGAS_expressionAST & inOperand3,
-                                                                                   const class GALGAS_location & inOperand4
-                                                                                   COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_controlRegisterList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                               const class GALGAS_controlRegisterKind & inOperand1,
+                                                                               const class GALGAS_lstringlist & inOperand2,
+                                                                               const class GALGAS_expressionAST & inOperand3,
+                                                                               const class GALGAS_location & inOperand4
+                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_controlRegisterNameList_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_controlRegisterList_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3789,12 +3789,12 @@ class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_controlRegisterNameList_2D_element class
+} ; // End of GALGAS_controlRegisterList_2D_element class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterNameList_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterList_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -5166,24 +5166,28 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterMap_
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Extension method '@controlRegisterDeclarationListAST noteTypesInPrecedenceGraph'                   *
+//                   Abstract extension method '@expressionAST addDependenceEdgeForStaticExpression'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_controlRegisterDeclarationListAST inObject,
-                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_expressionAST_addDependenceEdgeForStaticExpression) (const class cPtr_expressionAST * inObject,
+                                                                                             const class GALGAS_lstring constinArgument0,
+                                                                                             class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
+                                                                                             class C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Function 'llvmRegularTypeMangledNameFromName'                                    *
-//                                                                                                                     *
+
+void enterExtensionMethod_addDependenceEdgeForStaticExpression (const int32_t inClassIndex,
+                                                                extensionMethodSignature_expressionAST_addDependenceEdgeForStaticExpression inMethod) ;
+
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_llvmRegularTypeMangledNameFromName (const class GALGAS_lstring & constinArgument0,
-                                                                  class C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_addDependenceEdgeForStaticExpression (const class cPtr_expressionAST * inObject,
+                                                               const GALGAS_lstring constin_inConstantName,
+                                                               GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -5271,31 +5275,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticTypePrecede
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Abstract extension method '@expressionAST addDependenceEdgeForStaticExpression'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_expressionAST_addDependenceEdgeForStaticExpression) (const class cPtr_expressionAST * inObject,
-                                                                                             const class GALGAS_lstring constinArgument0,
-                                                                                             class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
-                                                                                             class C_Compiler * inCompiler
-                                                                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_addDependenceEdgeForStaticExpression (const int32_t inClassIndex,
-                                                                extensionMethodSignature_expressionAST_addDependenceEdgeForStaticExpression inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_addDependenceEdgeForStaticExpression (const class cPtr_expressionAST * inObject,
-                                                               const GALGAS_lstring constin_inConstantName,
-                                                               GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                       Extension method '@globalVarDeclarationList noteTypesInPrecedenceGraph'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5304,6 +5283,16 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_globalVarDec
                                                  class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Function 'llvmRegularTypeMangledNameFromName'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_llvmRegularTypeMangledNameFromName (const class GALGAS_lstring & constinArgument0,
+                                                                  class C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
