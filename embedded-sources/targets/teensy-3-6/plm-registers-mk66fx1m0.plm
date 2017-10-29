@@ -339,78 +339,92 @@ register AXBS_MGPCR0 at 0x40004800 // Master 0 General Purpose Control Register
 
 
 
-// Chapter 20: Direct Memory Access Multiplexer (DMAMUX)
-register DMAMUX0_CHCFG0  at 0x40021000        // Channel Configuration register
-         DMAMUX0_CHCFG1  at 0x40021001        // Channel Configuration register
-         DMAMUX0_CHCFG2  at 0x40021002        // Channel Configuration register
-         DMAMUX0_CHCFG3  at 0x40021003        // Channel Configuration register
-         DMAMUX0_CHCFG4  at 0x40021004        // Channel Configuration register
-         DMAMUX0_CHCFG5  at 0x40021005        // Channel Configuration register
-         DMAMUX0_CHCFG6  at 0x40021006        // Channel Configuration register
-         DMAMUX0_CHCFG7  at 0x40021007        // Channel Configuration register
-         DMAMUX0_CHCFG8  at 0x40021008        // Channel Configuration register
-         DMAMUX0_CHCFG9  at 0x40021009        // Channel Configuration register
-         DMAMUX0_CHCFG10 at 0x4002100A        // Channel Configuration register
-         DMAMUX0_CHCFG11 at 0x4002100B        // Channel Configuration register
-         DMAMUX0_CHCFG12 at 0x4002100C        // Channel Configuration register
-         DMAMUX0_CHCFG13 at 0x4002100D        // Channel Configuration register
-         DMAMUX0_CHCFG14 at 0x4002100E        // Channel Configuration register
-         DMAMUX0_CHCFG15 at 0x4002100F $uint8 { // Channel Configuration register
-  ENBL,
-  TRIG,
-  SOURCE [6]
+// Chapter 23: Direct Memory Access Multiplexer (DMAMUX)
+
+let DMA_CHANNEL_COUNT = 32
+
+register DMAMUX0_CHCFG [DMA_CHANNEL_COUNT] at 0x4002_1000 : 1 $uint8 {
+  ENABLE, TRIG, SOURCE [6]
 }
 
-//let DMAMUX_SOURCE_UART0_RX $uint8 = 2
-//let DMAMUX_SOURCE_UART0_TX $uint8 = 3
-//let DMAMUX_SOURCE_UART1_RX $uint8 = 4
-//let DMAMUX_SOURCE_UART1_TX $uint8 = 5
-//let DMAMUX_SOURCE_UART2_RX $uint8 = 6
-//let DMAMUX_SOURCE_UART2_TX $uint8 = 7
-//let DMAMUX_SOURCE_I2S0_RX  $uint8 =14
-//let DMAMUX_SOURCE_I2S0_TX  $uint8 =15
-//let DMAMUX_SOURCE_SPI0_RX  $uint8 =16
-//let DMAMUX_SOURCE_SPI0_TX  $uint8 =17
-//let DMAMUX_SOURCE_I2C0  $uint8 =22
-//let DMAMUX_SOURCE_I2C1  $uint8 =23
-//let DMAMUX_SOURCE_FTM0_CH0 $uint8 = 24
-//let DMAMUX_SOURCE_FTM0_CH1 $uint8 = 25
-//let DMAMUX_SOURCE_FTM0_CH2 $uint8 = 26
-//let DMAMUX_SOURCE_FTM0_CH3 $uint8 = 27
-//let DMAMUX_SOURCE_FTM0_CH4 $uint8 = 28
-//let DMAMUX_SOURCE_FTM0_CH5 $uint8 = 29
-//let DMAMUX_SOURCE_FTM0_CH6 $uint8 = 30
-//let DMAMUX_SOURCE_FTM0_CH7 $uint8 = 31
-//let DMAMUX_SOURCE_FTM1_CH0 $uint8 = 32
-//let DMAMUX_SOURCE_FTM1_CH1 $uint8 = 33
-//let DMAMUX_SOURCE_FTM2_CH0 $uint8 = 34
-//let DMAMUX_SOURCE_FTM2_CH1 $uint8 = 35
-//let DMAMUX_SOURCE_ADC0 $uint8 = 40
-//let DMAMUX_SOURCE_ADC1 $uint8 = 41
-//let DMAMUX_SOURCE_CMP0 $uint8 = 42
-//let DMAMUX_SOURCE_CMP1 $uint8 = 43
-//let DMAMUX_SOURCE_CMP2 $uint8 = 44
-//let DMAMUX_SOURCE_DAC0 $uint8 = 45
-//let DMAMUX_SOURCE_CMT  $uint8 = 47
-//let DMAMUX_SOURCE_PDB  $uint8 = 48
-//let DMAMUX_SOURCE_PORTA $uint8 = 49
-//let DMAMUX_SOURCE_PORTB $uint8 = 50
-//let DMAMUX_SOURCE_PORTC $uint8 = 51
-//let DMAMUX_SOURCE_PORTD $uint8 = 52
-//let DMAMUX_SOURCE_PORTE $uint8 = 53
-//let DMAMUX_SOURCE_ALWAYS0 $uint8 = 54
-//let DMAMUX_SOURCE_ALWAYS1 $uint8 = 55
-//let DMAMUX_SOURCE_ALWAYS2 $uint8 = 56
-//let DMAMUX_SOURCE_ALWAYS3 $uint8 = 57
-//let DMAMUX_SOURCE_ALWAYS4 $uint8 = 58
-//let DMAMUX_SOURCE_ALWAYS5 $uint8 = 59
-//let DMAMUX_SOURCE_ALWAYS6 $uint8 = 60
-//let DMAMUX_SOURCE_ALWAYS7 $uint8 = 61
-//let DMAMUX_SOURCE_ALWAYS8 $uint8 = 62
-//let DMAMUX_SOURCE_ALWAYS9 $uint8 = 63
+let DMAMUX_SOURCE_TSI      $uint6 = 1
+let DMAMUX_SOURCE_UART0_RX $uint6 = 2
+let DMAMUX_SOURCE_UART0_TX $uint6 = 3
+let DMAMUX_SOURCE_UART1_RX $uint6 = 4
+let DMAMUX_SOURCE_UART1_TX $uint6 = 5
+let DMAMUX_SOURCE_UART2_RX $uint6 = 6
+let DMAMUX_SOURCE_UART2_TX $uint6 = 7
+let DMAMUX_SOURCE_UART3_RX $uint6 = 8
+let DMAMUX_SOURCE_UART3_TX $uint6 = 9
+let DMAMUX_SOURCE_UART4_RXTX $uint6 = 10
+let DMAMUX_SOURCE_I2S0_RX $uint6 = 12
+let DMAMUX_SOURCE_I2S0_TX $uint6 = 13
+let DMAMUX_SOURCE_SPI0_RX $uint6 = 14
+let DMAMUX_SOURCE_SPI0_TX $uint6 = 15
+let DMAMUX_SOURCE_SPI1_RX $uint6 = 16
+let DMAMUX_SOURCE_SPI1_TX $uint6 = 17
+let DMAMUX_SOURCE_I2C0 $uint6 = 18
+let DMAMUX_SOURCE_I2C3 $uint6 = 18
+let DMAMUX_SOURCE_I2C1 $uint6 = 19
+let DMAMUX_SOURCE_I2C2 $uint6 = 19
+let DMAMUX_SOURCE_FTM0_CH0 $uint6 = 20
+let DMAMUX_SOURCE_FTM0_CH1 $uint6 = 21
+let DMAMUX_SOURCE_FTM0_CH2 $uint6 = 22
+let DMAMUX_SOURCE_FTM0_CH3 $uint6 = 23
+let DMAMUX_SOURCE_FTM0_CH4 $uint6 = 24
+let DMAMUX_SOURCE_FTM0_CH5 $uint6 = 25
+let DMAMUX_SOURCE_FTM0_CH6 $uint6 = 26
+let DMAMUX_SOURCE_FTM0_CH7 $uint6 = 27
+let DMAMUX_SOURCE_FTM1_CH0 $uint6 = 28
+let DMAMUX_SOURCE_TPM1_CH0 $uint6 = 28
+let DMAMUX_SOURCE_FTM1_CH1 $uint6 = 29
+let DMAMUX_SOURCE_TPM1_CH1 $uint6 = 29
+let DMAMUX_SOURCE_FTM2_CH0 $uint6 = 30
+let DMAMUX_SOURCE_TPM2_CH0 $uint6 = 30
+let DMAMUX_SOURCE_FTM2_CH1 $uint6 = 31
+let DMAMUX_SOURCE_TPM2_CH1 $uint6 = 31
+let DMAMUX_SOURCE_FTM3_CH0 $uint6 = 32
+let DMAMUX_SOURCE_FTM3_CH1 $uint6 = 33
+let DMAMUX_SOURCE_FTM3_CH2 $uint6 = 34
+let DMAMUX_SOURCE_FTM3_CH3 $uint6 = 35
+let DMAMUX_SOURCE_FTM3_CH4 $uint6 = 36
+let DMAMUX_SOURCE_FTM3_CH5 $uint6 = 37
+let DMAMUX_SOURCE_FTM3_CH6 $uint6 = 38
+let DMAMUX_SOURCE_SPI2_RX $uint6 = 38
+let DMAMUX_SOURCE_FTM3_CH7 $uint6 = 39
+let DMAMUX_SOURCE_SPI2_TX $uint6 = 39
+let DMAMUX_SOURCE_ADC0 $uint6 = 40
+let DMAMUX_SOURCE_ADC1 $uint6 = 41
+let DMAMUX_SOURCE_CMP0 $uint6 = 42
+let DMAMUX_SOURCE_CMP1 $uint6 = 43
+let DMAMUX_SOURCE_CMP2 $uint6 = 44
+let DMAMUX_SOURCE_CMP3 $uint6 = 44
+let DMAMUX_SOURCE_DAC0 $uint6 = 45
+let DMAMUX_SOURCE_DAC1 $uint6 = 46
+let DMAMUX_SOURCE_CMT $uint6 = 47
+let DMAMUX_SOURCE_PDB $uint6 = 48
+let DMAMUX_SOURCE_PORTA $uint6 = 49
+let DMAMUX_SOURCE_PORTB $uint6 = 50
+let DMAMUX_SOURCE_PORTC $uint6 = 51
+let DMAMUX_SOURCE_PORTD $uint6 = 52
+let DMAMUX_SOURCE_PORTE $uint6 = 53
+let DMAMUX_SOURCE_IEEE1588_T0 $uint6 = 54
+let DMAMUX_SOURCE_IEEE1588_T1 $uint6 = 55
+let DMAMUX_SOURCE_FTM1_OV $uint6 = 55
+let DMAMUX_SOURCE_IEEE1588_T2 $uint6 = 56
+let DMAMUX_SOURCE_FTM2_OV $uint6 = 56
+let DMAMUX_SOURCE_IEEE1588_T3 $uint6 = 57
+let DMAMUX_SOURCE_LPUART0_RX $uint6 = 58
+let DMAMUX_SOURCE_LPUART0_TX $uint6 = 59
+let DMAMUX_SOURCE_ALWAYS0 $uint6 = 60
+let DMAMUX_SOURCE_ALWAYS1 $uint6 = 61
+let DMAMUX_SOURCE_ALWAYS2 $uint6 = 62
+let DMAMUX_SOURCE_ALWAYS3 $uint6 = 63
 
 // Chapter 21: Direct Memory Access Controller (eDMA)
-register DMA_CR at 0x40008000 $uint32 { // Control Register
+
+// Control Register
+register DMA_CR at 0x4000_8000 $uint32 {
   14,
   CX, // Cancel Transfer
   ECX, // Error Cancel Transfer
@@ -428,421 +442,129 @@ register DMA_CR at 0x40008000 $uint32 { // Control Register
   1
 }
 
+// Error Status Register
+register DMA_ES  at 0x4000_8004 $uint32 {
+  VLD, 14, ECX, 1, CPE, 2, ERRCHN [4],
+  SAE, SOE, DAE, DOE, NCE, SGE, SBE, DBE
+}
 
-register DMA_ES  at 0x40008004 $uint32 // Error Status Register
-
-register DMA_ERQ at 0x4000800C $uint32 { // Enable Request Register
-  ERQ31,
-  ERQ30,
-  ERQ29,
-  ERQ28,
-  ERQ27,
-  ERQ26,
-  ERQ25,
-  ERQ24,
-  ERQ23,
-  ERQ22,
-  ERQ21,
-  ERQ20,
-  ERQ19,
-  ERQ18,
-  ERQ17,
-  ERQ16,
-  ERQ15,
-  ERQ14,
-  ERQ13,
-  ERQ12,
-  ERQ11,
-  ERQ10,
-  ERQ9,
-  ERQ8,
-  ERQ7,
-  ERQ6,
-  ERQ5,
-  ERQ4,
-  ERQ3,
-  ERQ2,
-  ERQ1,
-  ERQ0
+register DMA_ERQ at 0x4000_800C $uint32 { // Enable Request Register
+ ERQ31, ERQ30, ERQ29, ERQ28, ERQ27, ERQ26, ERQ25, ERQ24,
+ ERQ23, ERQ22, ERQ21, ERQ20, ERQ19, ERQ18, ERQ17, ERQ16,
+ ERQ15, ERQ14, ERQ13, ERQ12, ERQ11, ERQ10, INT9,  ERQ8,
+ ERQ7,  ERQ6,  ERQ5,  ERQ4,  ERQ3,  ERQ2,  ERQ1,  ERQ0
 }
 
 register DMA_EEI at 0x40008014 $uint32 { // Enable Error Interrupt Register
-  EEI31,
-  EEI30,
-  EEI29,
-  EEI28,
-  EEI27,
-  EEI26,
-  EEI25,
-  EEI24,
-  EEI23,
-  EEI22,
-  EEI21,
-  EEI20,
-  EEI19,
-  EEI18,
-  EEI17,
-  EEI16,
-  EEI15,
-  EEI14,
-  EEI13,
-  EEI12,
-  EEI11,
-  EEI10,
-  EEI9,
-  EEI8,
-  EEI7,
-  EEI6,
-  EEI5,
-  EEI4,
-  EEI3,
-  EEI2,
-  EEI1,
-  EEI0
+ EEI31, EEI30, EEI29, EEI28, EEI27, EEI26, EEI25, EEI24,
+ EEI23, EEI22, EEI21, EEI20, EEI19, EEI18, EEI17, EEI16,
+ EEI15, EEI14, EEI13, EEI12, EEI11, EEI10, INT9,  EEI8,
+ EEI7,  EEI6,  EEI5,  EEI4,  EEI3,  EEI2,  EEI1,  EEI0
 }
 
-//register $uint8 DMA_CEEI  *(volatile $uint8_t  *)0x40008018 // Clear Enable Error Interrupt Register
-//register $uint32 DMA_CEEI_CEEI(n)  (($uint8_t)(n & 3)<<0) // Clear Enable Error Interrupt
-//register $uint32 DMA_CEEI_CAEE   (($uint8_t)1<<6)  // Clear All Enable Error Interrupts
-//register $uint32 DMA_CEEI_NOP   (($uint8_t)1<<7)  // NOP
-//register $uint32 DMA_SEEI  *(volatile $uint8_t  *)0x40008019 // Set Enable Error Interrupt Register
-//register $uint32 DMA_SEEI_SEEI(n)  (($uint8_t)(n & 3)<<0) // Set Enable Error Interrupt
-//register $uint32 DMA_SEEI_SAEE   (($uint8_t)1<<6)  // Set All Enable Error Interrupts
-//register $uint32 DMA_SEEI_NOP   (($uint8_t)1<<7)  // NOP
-//register $uint32 DMA_CERQ  *(volatile $uint8_t  *)0x4000801A // Clear Enable Request Register
-//register $uint32 DMA_CERQ_CERQ(n)  (($uint8_t)(n & 3)<<0) // Clear Enable Request
-//register $uint32 DMA_CERQ_CAER   (($uint8_t)1<<6)  // Clear All Enable Requests
-//register $uint32 DMA_CERQ_NOP   (($uint8_t)1<<7)  // NOP
-//register $uint32 DMA_SERQ  *(volatile $uint8_t  *)0x4000801B // Set Enable Request Register
-//register $uint32 DMA_SERQ_SERQ(n)  (($uint8_t)(n & 3)<<0) // Set Enable Request
-//register $uint32 DMA_SERQ_SAER   (($uint8_t)1<<6)  // Set All Enable Requests
-//register $uint32 DMA_SERQ_NOP   (($uint8_t)1<<7)  // NOP
-//register $uint32 DMA_CDNE  *(volatile $uint8_t  *)0x4000801C // Clear DONE Status Bit Register
-//register $uint32 DMA_CDNE_CDNE(n)  (($uint8_t)(n & 3)<<0) // Clear Done Bit
-//register $uint32 DMA_CDNE_CADN   (($uint8_t)1<<6)  // Clear All Done Bits
-//register $uint32 DMA_CDNE_NOP   (($uint8_t)1<<7)  // NOP
-//register $uint32 DMA_SSRT  *(volatile $uint8_t  *)0x4000801D // Set START Bit Register
-//register $uint32 DMA_SSRT_SSRT(n)  (($uint8_t)(n & 3)<<0) // Set Start Bit
-//register $uint32 DMA_SSRT_SAST   (($uint8_t)1<<6)  // Set All Start Bits
-//register $uint32 DMA_SSRT_NOP   (($uint8_t)1<<7)  // NOP
-//register $uint32 DMA_CERR  *(volatile $uint8_t  *)0x4000801E // Clear Error Register
-//register $uint32 DMA_CERR_CERR(n)  (($uint8_t)(n & 3)<<0) // Clear Error Indicator
-//register $uint32 DMA_CERR_CAEI   (($uint8_t)1<<6)  // Clear All Error Indicators
-//register $uint32 DMA_CERR_NOP   (($uint8_t)1<<7)  // NOP
-//register $uint32 DMA_CINT  *(volatile $uint8_t  *)0x4000801F // Clear Interrupt Request Register
-//register $uint32 DMA_CINT_CINT(n)  (($uint8_t)(n & 3)<<0) // Clear Interrupt Request
-//register $uint32 DMA_CINT_CAIR   (($uint8_t)1<<6)  // Clear All Interrupt Requests
-//register $uint32 DMA_CINT_NOP   (($uint8_t)1<<7)  // NOP
-//register $uint32 DMA_INT    0x40008024 // Interrupt Request Register
-//register $uint32 DMA_INT_INT0   ( 1<<0) // Interrupt Request 0
-//register $uint32 DMA_INT_INT1   ( 1<<1) // Interrupt Request 1
-//register $uint32 DMA_INT_INT2   ( 1<<2) // Interrupt Request 2
-//register $uint32 DMA_INT_INT3   ( 1<<3) // Interrupt Request 3
-//register $uint32 DMA_ERR    0x4000802C // Error Register
-//register $uint32 DMA_ERR_ERR0   ( 1<<0) // Error in Channel 0
-//register $uint32 DMA_ERR_ERR1   ( 1<<1) // Error in Channel 1
-//register $uint32 DMA_ERR_ERR2   ( 1<<2) // Error in Channel 2
-//register $uint32 DMA_ERR_ERR3   ( 1<<3) // Error in Channel 3
-//register $uint32 DMA_HRS    0x40008034 // Hardware Request Status Register
-//register $uint32 DMA_HRS_HRS0   ( 1<<0) // Hardware Request Status Channel 0
-//register $uint32 DMA_HRS_HRS1   ( 1<<1) // Hardware Request Status Channel 1
-//register $uint32 DMA_HRS_HRS2   ( 1<<2) // Hardware Request Status Channel 2
-//register $uint32 DMA_HRS_HRS3   ( 1<<3) // Hardware Request Status Channel 3
-//register $uint32 DMA_DCHPRI3  *(volatile $uint8_t  *)0x40008100 // Channel n Priority Register
-//register $uint32 DMA_DCHPRI2  *(volatile $uint8_t  *)0x40008101 // Channel n Priority Register
-//register $uint32 DMA_DCHPRI1  *(volatile $uint8_t  *)0x40008102 // Channel n Priority Register
-//register $uint32 DMA_DCHPRI0  *(volatile $uint8_t  *)0x40008103 // Channel n Priority Register
-//register $uint32 DMA_DCHPRI_CHPRI(n)  (($uint8_t)(n & 3)<<0) // Channel Arbitration Priority
-//register $uint32 DMA_DCHPRI_DPA   (($uint8_t)1<<6)  // Disable PreEmpt Ability
-//register $uint32 DMA_DCHPRI_ECP   (($uint8_t)1<<7)  // Enable PreEmption
-//
-//
-//register DMA_TCD_ATTR_SMOD(n)  (((n) & 0x1F) << 11)
-//register DMA_TCD_ATTR_SSIZE(n)  (((n) & 0x7) << 8)
-//register DMA_TCD_ATTR_DMOD(n)  (((n) & 0x1F) << 3)
-//register DMA_TCD_ATTR_DSIZE(n)  (((n) & 0x7) << 0)
-//register DMA_TCD_ATTR_SIZE_8BIT  0
-//register DMA_TCD_ATTR_SIZE_16BIT  1
-//register DMA_TCD_ATTR_SIZE_32BIT  2
-//register DMA_TCD_ATTR_SIZE_16BYTE 4
-//register DMA_TCD_ATTR_SIZE_32BYTE 5
-//register DMA_TCD_CSR_BWC(n)  (((n) & 0x3) << 14)
-//register DMA_TCD_CSR_MAJORLINKCH(n) (((n) & 0x3) << 8)
-//register DMA_TCD_CSR_DONE  0x0080
-//register DMA_TCD_CSR_ACTIVE  0x0040
-//register DMA_TCD_CSR_MAJORELINK  0x0020
-//register DMA_TCD_CSR_ESG   0x0010
-//register DMA_TCD_CSR_DREQ  0x0008
-//register DMA_TCD_CSR_INTHALF  0x0004
-//register DMA_TCD_CSR_INTMAJOR  0x0002
-//register DMA_TCD_CSR_START  0x0001
-//register DMA_TCD_CITER_MASK      (($uint16_t)0x7FFF)    // Loop count mask
-//register DMA_TCD_CITER_ELINK      (($uint16_t)1<<15)    // Enable channel linking on minor-loop complete
-//register DMA_TCD_BITER_MASK      (($uint16_t)0x7FFF)    // Loop count mask
-//register DMA_TCD_BITER_ELINK      (($uint16_t)1<<15)    // Enable channel linking on minor-loop complete
-//register DMA_TCD_NBYTES_SMLOE      ( 1<<31)      // Source Minor Loop Offset Enable
-//register DMA_TCD_NBYTES_DMLOE      ( 1<<30)      // Destination Minor Loop Offset Enable
-//register DMA_TCD_NBYTES_MLOFFNO_NBYTES(n)    ( (n))      // NBytes transfer count when minor loop disabled
-//register DMA_TCD_NBYTES_MLOFFYES_NBYTES(n)   ( (n & 0x1F))     // NBytes transfer count when minor loop enabled
-//register DMA_TCD_NBYTES_MLOFFYES_MLOFF(n)    ( (n & 0xFFFFF)<<10)   // Offset 
-//
-//register DMA_TCD0_SADDR  *(volatile const void * volatile *)0x40009000 // TCD Source Address
-//register DMA_TCD0_SOFF  *(volatile int16_t *)0x40009004  // TCD Signed Source Address Offset
-//register DMA_TCD0_ATTR  *(volatile $uint16_t *)0x40009006 // TCD Transfer Attributes
-//register DMA_TCD0_NBYTES_MLNO  0x40009008 // TCD Minor Byte Count (Minor Loop Disabled)
-//register DMA_TCD0_NBYTES_MLOFFNO  0x40009008 // TCD Signed Minor Loop Offset (Minor Loop Enabled and Offset Disabled)
-//register DMA_TCD0_NBYTES_MLOFFYES  0x40009008 // TCD Signed Minor Loop Offset (Minor Loop and Offset Enabled)
-//register DMA_TCD0_SLAST  *(volatile int32_t *)0x4000900C  // TCD Last Source Address Adjustment
-//register DMA_TCD0_DADDR  *(volatile void * volatile *)0x40009010 // TCD Destination Address
-//register DMA_TCD0_DOFF  *(volatile int16_t *)0x40009014  // TCD Signed Destination Address Offset
-//register DMA_TCD0_CITER_ELINKYES *(volatile $uint16_t *)0x40009016 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled
-//register DMA_TCD0_CITER_ELINKNO *(volatile $uint16_t *)0x40009016 // ??
-//register DMA_TCD0_DLASTSGA *(volatile int32_t *)0x40009018  // TCD Last Destination Address Adjustment/Scatter Gather Address
-//register DMA_TCD0_CSR  *(volatile $uint16_t *)0x4000901C // TCD Control and Status
-//register DMA_TCD0_BITER_ELINKYES *(volatile $uint16_t *)0x4000901E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Enabled
-//register DMA_TCD0_BITER_ELINKNO *(volatile $uint16_t *)0x4000901E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled
-//
-//register DMA_TCD1_SADDR  *(volatile const void * volatile *)0x40009020 // TCD Source Address
-//register DMA_TCD1_SOFF  *(volatile int16_t *)0x40009024  // TCD Signed Source Address Offset
-//register DMA_TCD1_ATTR  *(volatile $uint16_t *)0x40009026 // TCD Transfer Attributes
-//register DMA_TCD1_NBYTES_MLNO  0x40009028 // TCD Minor Byte Count, Minor Loop Disabled
-//register DMA_TCD1_NBYTES_MLOFFNO  0x40009028 // TCD Signed Minor Loop Offset, Minor Loop Enabled and Offset Disabled
-//register DMA_TCD1_NBYTES_MLOFFYES  0x40009028 // TCD Signed Minor Loop Offset, Minor Loop and Offset Enabled
-//register DMA_TCD1_SLAST  *(volatile int32_t *)0x4000902C  // TCD Last Source Address Adjustment
-//register DMA_TCD1_DADDR  *(volatile void * volatile *)0x40009030 // TCD Destination Address
-//register DMA_TCD1_DOFF  *(volatile int16_t *)0x40009034  // TCD Signed Destination Address Offset
-//register DMA_TCD1_CITER_ELINKYES *(volatile $uint16_t *)0x40009036 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled
-//register DMA_TCD1_CITER_ELINKNO *(volatile $uint16_t *)0x40009036 // ??
-//register DMA_TCD1_DLASTSGA *(volatile int32_t *)0x40009038  // TCD Last Destination Address Adjustment/Scatter Gather Address
-//register DMA_TCD1_CSR  *(volatile $uint16_t *)0x4000903C // TCD Control and Status
-//register DMA_TCD1_BITER_ELINKYES *(volatile $uint16_t *)0x4000903E // TCD Beginning Minor Loop Link, Major Loop Count Channel Linking Enabled
-//register DMA_TCD1_BITER_ELINKNO *(volatile $uint16_t *)0x4000903E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled
-//
-//register DMA_TCD2_SADDR  *(volatile const void * volatile *)0x40009040 // TCD Source Address
-//register DMA_TCD2_SOFF  *(volatile int16_t *)0x40009044  // TCD Signed Source Address Offset
-//register DMA_TCD2_ATTR  *(volatile $uint16_t *)0x40009046 // TCD Transfer Attributes
-//register DMA_TCD2_NBYTES_MLNO  0x40009048 // TCD Minor Byte Count, Minor Loop Disabled
-//register DMA_TCD2_NBYTES_MLOFFNO  0x40009048 // TCD Signed Minor Loop Offset, Minor Loop Enabled and Offset Disabled
-//register DMA_TCD2_NBYTES_MLOFFYES  0x40009048 // TCD Signed Minor Loop Offset, Minor Loop and Offset Enabled
-//register DMA_TCD2_SLAST  *(volatile int32_t *)0x4000904C  // TCD Last Source Address Adjustment
-//register DMA_TCD2_DADDR  *(volatile void * volatile *)0x40009050 // TCD Destination Address
-//register DMA_TCD2_DOFF  *(volatile int16_t *)0x40009054  // TCD Signed Destination Address Offset
-//register DMA_TCD2_CITER_ELINKYES *(volatile $uint16_t *)0x40009056 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled
-//register DMA_TCD2_CITER_ELINKNO *(volatile $uint16_t *)0x40009056 // ??
-//register DMA_TCD2_DLASTSGA *(volatile int32_t *)0x40009058  // TCD Last Destination Address Adjustment/Scatter Gather Address
-//register DMA_TCD2_CSR  *(volatile $uint16_t *)0x4000905C // TCD Control and Status
-//register DMA_TCD2_BITER_ELINKYES *(volatile $uint16_t *)0x4000905E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Enabled
-//register DMA_TCD2_BITER_ELINKNO *(volatile $uint16_t *)0x4000905E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled
-//
-//register DMA_TCD3_SADDR  *(volatile const void * volatile *)0x40009060 // TCD Source Address
-//register DMA_TCD3_SOFF  *(volatile int16_t *)0x40009064  // TCD Signed Source Address Offset
-//register DMA_TCD3_ATTR  *(volatile $uint16_t *)0x40009066 // TCD Transfer Attributes
-//register DMA_TCD3_NBYTES_MLNO  0x40009068 // TCD Minor Byte Count, Minor Loop Disabled
-//register DMA_TCD3_NBYTES_MLOFFNO  0x40009068 // TCD Signed Minor Loop Offset, Minor Loop Enabled and Offset Disabled
-//register DMA_TCD3_NBYTES_MLOFFYES  0x40009068 // TCD Signed Minor Loop Offset, Minor Loop and Offset Enabled
-//register DMA_TCD3_SLAST  *(volatile int32_t *)0x4000906C  // TCD Last Source Address Adjustment
-//register DMA_TCD3_DADDR  *(volatile void * volatile *)0x40009070 // TCD Destination Address
-//register DMA_TCD3_DOFF  *(volatile int16_t *)0x40009074  // TCD Signed Destination Address Offset
-//register DMA_TCD3_CITER_ELINKYES *(volatile $uint16_t *)0x40009076 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled
-//register DMA_TCD3_CITER_ELINKNO *(volatile $uint16_t *)0x40009076 // ??
-//register DMA_TCD3_DLASTSGA *(volatile int32_t *)0x40009078  // TCD Last Destination Address Adjustment/Scatter Gather Address
-//register DMA_TCD3_CSR  *(volatile $uint16_t *)0x4000907C // TCD Control and Status
-//register DMA_TCD3_BITER_ELINKYES *(volatile $uint16_t *)0x4000907E // TCD Beginning Minor Loop Link, Major Loop Count ,Channel Linking Enabled
-//register DMA_TCD3_BITER_ELINKNO *(volatile $uint16_t *)0x4000907E // TCD Beginning Minor Loop Link, Major Loop Count ,Channel Linking Disabled
-//
-//register DMA_TCD4_SADDR  *(volatile const void * volatile *)0x40009080 // TCD Source Addr
-//register DMA_TCD4_SOFF  *(volatile int16_t *)0x40009084  // TCD Signed Source Address Offset
-//register DMA_TCD4_ATTR  *(volatile $uint16_t *)0x40009086 // TCD Transfer Attributes
-//register DMA_TCD4_NBYTES_MLNO  0x40009088 // TCD Minor Byte Count
-//register DMA_TCD4_NBYTES_MLOFFNO  0x40009088 // TCD Signed Minor Loop Offset
-//register DMA_TCD4_NBYTES_MLOFFYES  0x40009088 // TCD Signed Minor Loop Offset
-//register DMA_TCD4_SLAST  *(volatile int32_t *)0x4000908C  // TCD Last Source Addr Adj.
-//register DMA_TCD4_DADDR  *(volatile void * volatile *)0x40009090 // TCD Destination Address
-//register DMA_TCD4_DOFF  *(volatile int16_t *)0x40009094  // TCD Signed Dest Address Offset
-//register DMA_TCD4_CITER_ELINKYES *(volatile $uint16_t *)0x40009096 // TCD Current Minor Loop Link
-//register DMA_TCD4_CITER_ELINKNO *(volatile $uint16_t *)0x40009096 // ??
-//register DMA_TCD4_DLASTSGA *(volatile int32_t *)0x40009098  // TCD Last Destination Addr Adj
-//register DMA_TCD4_CSR  *(volatile $uint16_t *)0x4000909C // TCD Control and Status
-//register DMA_TCD4_BITER_ELINKYES *(volatile $uint16_t *)0x4000909E // TCD Beginning Minor Loop Link
-//register DMA_TCD4_BITER_ELINKNO *(volatile $uint16_t *)0x4000909E // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD5_SADDR  *(volatile const void * volatile *)0x400090A0 // TCD Source Addr
-//register DMA_TCD5_SOFF  *(volatile int16_t *)0x400090A4  // TCD Signed Source Address Offset
-//register DMA_TCD5_ATTR  *(volatile $uint16_t *)0x400090A6 // TCD Transfer Attributes
-//register DMA_TCD5_NBYTES_MLNO  0x400090A8 // TCD Minor Byte Count
-//register DMA_TCD5_NBYTES_MLOFFNO  0x400090A8 // TCD Signed Minor Loop Offset
-//register DMA_TCD5_NBYTES_MLOFFYES  0x400090A8 // TCD Signed Minor Loop Offset
-//register DMA_TCD5_SLAST  *(volatile int32_t *)0x400090AC  // TCD Last Source Addr Adj.
-//register DMA_TCD5_DADDR  *(volatile void * volatile *)0x400090B0 // TCD Destination Address
-//register DMA_TCD5_DOFF  *(volatile int16_t *)0x400090B4  // TCD Signed Dest Address Offset
-//register DMA_TCD5_CITER_ELINKYES *(volatile $uint16_t *)0x400090B6 // TCD Current Minor Loop Link
-//register DMA_TCD5_CITER_ELINKNO *(volatile $uint16_t *)0x400090B6 // ??
-//register DMA_TCD5_DLASTSGA *(volatile int32_t *)0x400090B8  // TCD Last Destination Addr Adj
-//register DMA_TCD5_CSR  *(volatile $uint16_t *)0x400090BC // TCD Control and Status
-//register DMA_TCD5_BITER_ELINKYES *(volatile $uint16_t *)0x400090BE // TCD Beginning Minor Loop Link
-//register DMA_TCD5_BITER_ELINKNO *(volatile $uint16_t *)0x400090BE // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD6_SADDR  *(volatile const void * volatile *)0x400090C0 // TCD Source Addr
-//register DMA_TCD6_SOFF  *(volatile int16_t *)0x400090C4  // TCD Signed Source Address Offset
-//register DMA_TCD6_ATTR  *(volatile $uint16_t *)0x400090C6 // TCD Transfer Attributes
-//register DMA_TCD6_NBYTES_MLNO  0x400090C8 // TCD Minor Byte Count
-//register DMA_TCD6_NBYTES_MLOFFNO  0x400090C8 // TCD Signed Minor Loop Offset
-//register DMA_TCD6_NBYTES_MLOFFYES  0x400090C8 // TCD Signed Minor Loop Offset
-//register DMA_TCD6_SLAST  *(volatile int32_t *)0x400090CC  // TCD Last Source Addr Adj.
-//register DMA_TCD6_DADDR  *(volatile void * volatile *)0x400090D0 // TCD Destination Address
-//register DMA_TCD6_DOFF  *(volatile int16_t *)0x400090D4  // TCD Signed Dest Address Offset
-//register DMA_TCD6_CITER_ELINKYES *(volatile $uint16_t *)0x400090D6 // TCD Current Minor Loop Link
-//register DMA_TCD6_CITER_ELINKNO *(volatile $uint16_t *)0x400090D6 // ??
-//register DMA_TCD6_DLASTSGA *(volatile int32_t *)0x400090D8  // TCD Last Destination Addr Adj
-//register DMA_TCD6_CSR  *(volatile $uint16_t *)0x400090DC // TCD Control and Status
-//register DMA_TCD6_BITER_ELINKYES *(volatile $uint16_t *)0x400090DE // TCD Beginning Minor Loop Link
-//register DMA_TCD6_BITER_ELINKNO *(volatile $uint16_t *)0x400090DE // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD7_SADDR  *(volatile const void * volatile *)0x400090E0 // TCD Source Addr
-//register DMA_TCD7_SOFF  *(volatile int16_t *)0x400090E4  // TCD Signed Source Address Offset
-//register DMA_TCD7_ATTR  *(volatile $uint16_t *)0x400090E6 // TCD Transfer Attributes
-//register DMA_TCD7_NBYTES_MLNO  0x400090E8 // TCD Minor Byte Count
-//register DMA_TCD7_NBYTES_MLOFFNO  0x400090E8 // TCD Signed Minor Loop Offset
-//register DMA_TCD7_NBYTES_MLOFFYES  0x400090E8 // TCD Signed Minor Loop Offset
-//register DMA_TCD7_SLAST  *(volatile int32_t *)0x400090EC  // TCD Last Source Addr Adj.
-//register DMA_TCD7_DADDR  *(volatile void * volatile *)0x400090F0 // TCD Destination Address
-//register DMA_TCD7_DOFF  *(volatile int16_t *)0x400090F4  // TCD Signed Dest Address Offset
-//register DMA_TCD7_CITER_ELINKYES *(volatile $uint16_t *)0x400090F6 // TCD Current Minor Loop Link
-//register DMA_TCD7_CITER_ELINKNO *(volatile $uint16_t *)0x400090F6 // ??
-//register DMA_TCD7_DLASTSGA *(volatile int32_t *)0x400090F8  // TCD Last Destination Addr Adj
-//register DMA_TCD7_CSR  *(volatile $uint16_t *)0x400090FC // TCD Control and Status
-//register DMA_TCD7_BITER_ELINKYES *(volatile $uint16_t *)0x400090FE // TCD Beginning Minor Loop Link
-//register DMA_TCD7_BITER_ELINKNO *(volatile $uint16_t *)0x400090FE // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD8_SADDR  *(volatile const void * volatile *)0x40009100 // TCD Source Addr
-//register DMA_TCD8_SOFF  *(volatile int16_t *)0x40009104  // TCD Signed Source Address Offset
-//register DMA_TCD8_ATTR  *(volatile $uint16_t *)0x40009106 // TCD Transfer Attributes
-//register DMA_TCD8_NBYTES_MLNO  0x40009108 // TCD Minor Byte Count
-//register DMA_TCD8_NBYTES_MLOFFNO  0x40009108 // TCD Signed Minor Loop Offset
-//register DMA_TCD8_NBYTES_MLOFFYES  0x40009108 // TCD Signed Minor Loop Offset
-//register DMA_TCD8_SLAST  *(volatile int32_t *)0x4000910C  // TCD Last Source Addr Adj.
-//register DMA_TCD8_DADDR  *(volatile void * volatile *)0x40009110 // TCD Destination Address
-//register DMA_TCD8_DOFF  *(volatile int16_t *)0x40009114  // TCD Signed Dest Address Offset
-//register DMA_TCD8_CITER_ELINKYES *(volatile $uint16_t *)0x40009116 // TCD Current Minor Loop Link
-//register DMA_TCD8_CITER_ELINKNO *(volatile $uint16_t *)0x40009116 // ??
-//register DMA_TCD8_DLASTSGA *(volatile int32_t *)0x40009118  // TCD Last Destination Addr Adj
-//register DMA_TCD8_CSR  *(volatile $uint16_t *)0x4000911C // TCD Control and Status
-//register DMA_TCD8_BITER_ELINKYES *(volatile $uint16_t *)0x4000911E // TCD Beginning Minor Loop Link
-//register DMA_TCD8_BITER_ELINKNO *(volatile $uint16_t *)0x4000911E // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD9_SADDR  *(volatile const void * volatile *)0x40009120 // TCD Source Addr
-//register DMA_TCD9_SOFF  *(volatile int16_t *)0x40009124  // TCD Signed Source Address Offset
-//register DMA_TCD9_ATTR  *(volatile $uint16_t *)0x40009126 // TCD Transfer Attributes
-//register DMA_TCD9_NBYTES_MLNO  0x40009128 // TCD Minor Byte Count
-//register DMA_TCD9_NBYTES_MLOFFNO  0x40009128 // TCD Signed Minor Loop Offset
-//register DMA_TCD9_NBYTES_MLOFFYES  0x40009128 // TCD Signed Minor Loop Offset
-//register DMA_TCD9_SLAST  *(volatile int32_t *)0x4000912C  // TCD Last Source Addr Adj.
-//register DMA_TCD9_DADDR  *(volatile void * volatile *)0x40009130 // TCD Destination Address
-//register DMA_TCD9_DOFF  *(volatile int16_t *)0x40009134  // TCD Signed Dest Address Offset
-//register DMA_TCD9_CITER_ELINKYES *(volatile $uint16_t *)0x40009136 // TCD Current Minor Loop Link
-//register DMA_TCD9_CITER_ELINKNO *(volatile $uint16_t *)0x40009136 // ??
-//register DMA_TCD9_DLASTSGA *(volatile int32_t *)0x40009138  // TCD Last Destination Addr Adj
-//register DMA_TCD9_CSR  *(volatile $uint16_t *)0x4000913C // TCD Control and Status
-//register DMA_TCD9_BITER_ELINKYES *(volatile $uint16_t *)0x4000913E // TCD Beginning Minor Loop Link
-//register DMA_TCD9_BITER_ELINKNO *(volatile $uint16_t *)0x4000913E // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD10_SADDR  *(volatile const void * volatile *)0x40009140 // TCD Source Addr
-//register DMA_TCD10_SOFF  *(volatile int16_t *)0x40009144  // TCD Signed Source Address Offset
-//register DMA_TCD10_ATTR  *(volatile $uint16_t *)0x40009146 // TCD Transfer Attributes
-//register DMA_TCD10_NBYTES_MLNO  0x40009148 // TCD Minor Byte Count
-//register DMA_TCD10_NBYTES_MLOFFNO  0x40009148 // TCD Signed Minor Loop Offset
-//register DMA_TCD10_NBYTES_MLOFFYES  0x40009148 // TCD Signed Minor Loop Offset
-//register DMA_TCD10_SLAST  *(volatile int32_t *)0x4000914C  // TCD Last Source Addr Adj.
-//register DMA_TCD10_DADDR  *(volatile void * volatile *)0x40009150 // TCD Destination Address
-//register DMA_TCD10_DOFF  *(volatile int16_t *)0x40009154  // TCD Signed Dest Address Offset
-//register DMA_TCD10_CITER_ELINKYES *(volatile $uint16_t *)0x40009156 // TCD Current Minor Loop Link
-//register DMA_TCD10_CITER_ELINKNO *(volatile $uint16_t *)0x40009156 // ??
-//register DMA_TCD10_DLASTSGA *(volatile int32_t *)0x40009158  // TCD Last Destination Addr Adj
-//register DMA_TCD10_CSR  *(volatile $uint16_t *)0x4000915C // TCD Control and Status
-//register DMA_TCD10_BITER_ELINKYES *(volatile $uint16_t *)0x4000915E // TCD Beginning Minor Loop Link
-//register DMA_TCD10_BITER_ELINKNO *(volatile $uint16_t *)0x4000915E // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD11_SADDR  *(volatile const void * volatile *)0x40009160 // TCD Source Addr
-//register DMA_TCD11_SOFF  *(volatile int16_t *)0x40009164  // TCD Signed Source Address Offset
-//register DMA_TCD11_ATTR  *(volatile $uint16_t *)0x40009166 // TCD Transfer Attributes
-//register DMA_TCD11_NBYTES_MLNO  0x40009168 // TCD Minor Byte Count
-//register DMA_TCD11_NBYTES_MLOFFNO  0x40009168 // TCD Signed Minor Loop Offset
-//register DMA_TCD11_NBYTES_MLOFFYES  0x40009168 // TCD Signed Minor Loop Offset
-//register DMA_TCD11_SLAST  *(volatile int32_t *)0x4000916C  // TCD Last Source Addr Adj.
-//register DMA_TCD11_DADDR  *(volatile void * volatile *)0x40009170 // TCD Destination Address
-//register DMA_TCD11_DOFF  *(volatile int16_t *)0x40009174  // TCD Signed Dest Address Offset
-//register DMA_TCD11_CITER_ELINKYES *(volatile $uint16_t *)0x40009176 // TCD Current Minor Loop Link
-//register DMA_TCD11_CITER_ELINKNO *(volatile $uint16_t *)0x40009176 // ??
-//register DMA_TCD11_DLASTSGA *(volatile int32_t *)0x40009178  // TCD Last Destination Addr Adj
-//register DMA_TCD11_CSR  *(volatile $uint16_t *)0x4000917C // TCD Control and Status
-//register DMA_TCD11_BITER_ELINKYES *(volatile $uint16_t *)0x4000917E // TCD Beginning Minor Loop Link
-//register DMA_TCD11_BITER_ELINKNO *(volatile $uint16_t *)0x4000917E // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD12_SADDR  *(volatile const void * volatile *)0x40009180 // TCD Source Addr
-//register DMA_TCD12_SOFF  *(volatile int16_t *)0x40009184  // TCD Signed Source Address Offset
-//register DMA_TCD12_ATTR  *(volatile $uint16_t *)0x40009186 // TCD Transfer Attributes
-//register DMA_TCD12_NBYTES_MLNO  0x40009188 // TCD Minor Byte Count
-//register DMA_TCD12_NBYTES_MLOFFNO  0x40009188 // TCD Signed Minor Loop Offset
-//register DMA_TCD12_NBYTES_MLOFFYES  0x40009188 // TCD Signed Minor Loop Offset
-//register DMA_TCD12_SLAST  *(volatile int32_t *)0x4000918C  // TCD Last Source Addr Adj.
-//register DMA_TCD12_DADDR  *(volatile void * volatile *)0x40009190 // TCD Destination Address
-//register DMA_TCD12_DOFF  *(volatile int16_t *)0x40009194  // TCD Signed Dest Address Offset
-//register DMA_TCD12_CITER_ELINKYES *(volatile $uint16_t *)0x40009196 // TCD Current Minor Loop Link
-//register DMA_TCD12_CITER_ELINKNO *(volatile $uint16_t *)0x40009196 // ??
-//register DMA_TCD12_DLASTSGA *(volatile int32_t *)0x40009198  // TCD Last Destination Addr Adj
-//register DMA_TCD12_CSR  *(volatile $uint16_t *)0x4000919C // TCD Control and Status
-//register DMA_TCD12_BITER_ELINKYES *(volatile $uint16_t *)0x4000919E // TCD Beginning Minor Loop Link
-//register DMA_TCD12_BITER_ELINKNO *(volatile $uint16_t *)0x4000919E // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD13_SADDR  *(volatile const void * volatile *)0x400091A0 // TCD Source Addr
-//register DMA_TCD13_SOFF  *(volatile int16_t *)0x400091A4  // TCD Signed Source Address Offset
-//register DMA_TCD13_ATTR  *(volatile $uint16_t *)0x400091A6 // TCD Transfer Attributes
-//register DMA_TCD13_NBYTES_MLNO  0x400091A8 // TCD Minor Byte Count
-//register DMA_TCD13_NBYTES_MLOFFNO  0x400091A8 // TCD Signed Minor Loop Offset
-//register DMA_TCD13_NBYTES_MLOFFYES  0x400091A8 // TCD Signed Minor Loop Offset
-//register DMA_TCD13_SLAST  *(volatile int32_t *)0x400091AC  // TCD Last Source Addr Adj.
-//register DMA_TCD13_DADDR  *(volatile void * volatile *)0x400091B0 // TCD Destination Address
-//register DMA_TCD13_DOFF  *(volatile int16_t *)0x400091B4  // TCD Signed Dest Address Offset
-//register DMA_TCD13_CITER_ELINKYES *(volatile $uint16_t *)0x400091B6 // TCD Current Minor Loop Link
-//register DMA_TCD13_CITER_ELINKNO *(volatile $uint16_t *)0x400091B6 // ??
-//register DMA_TCD13_DLASTSGA *(volatile int32_t *)0x400091B8  // TCD Last Destination Addr Adj
-//register DMA_TCD13_CSR  *(volatile $uint16_t *)0x400091BC // TCD Control and Status
-//register DMA_TCD13_BITER_ELINKYES *(volatile $uint16_t *)0x400091BE // TCD Beginning Minor Loop Link
-//register DMA_TCD13_BITER_ELINKNO *(volatile $uint16_t *)0x400091BE // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD14_SADDR  *(volatile const void * volatile *)0x400091C0 // TCD Source Addr
-//register DMA_TCD14_SOFF  *(volatile int16_t *)0x400091C4  // TCD Signed Source Address Offset
-//register DMA_TCD14_ATTR  *(volatile $uint16_t *)0x400091C6 // TCD Transfer Attributes
-//register DMA_TCD14_NBYTES_MLNO  0x400091C8 // TCD Minor Byte Count
-//register DMA_TCD14_NBYTES_MLOFFNO  0x400091C8 // TCD Signed Minor Loop Offset
-//register DMA_TCD14_NBYTES_MLOFFYES  0x400091C8 // TCD Signed Minor Loop Offset
-//register DMA_TCD14_SLAST  *(volatile int32_t *)0x400091CC  // TCD Last Source Addr Adj.
-//register DMA_TCD14_DADDR  *(volatile void * volatile *)0x400091D0 // TCD Destination Address
-//register DMA_TCD14_DOFF  *(volatile int16_t *)0x400091D4  // TCD Signed Dest Address Offset
-//register DMA_TCD14_CITER_ELINKYES *(volatile $uint16_t *)0x400091D6 // TCD Current Minor Loop Link
-//register DMA_TCD14_CITER_ELINKNO *(volatile $uint16_t *)0x400091D6 // ??
-//register DMA_TCD14_DLASTSGA *(volatile int32_t *)0x400091D8  // TCD Last Destination Addr Adj
-//register DMA_TCD14_CSR  *(volatile $uint16_t *)0x400091DC // TCD Control and Status
-//register DMA_TCD14_BITER_ELINKYES *(volatile $uint16_t *)0x400091DE // TCD Beginning Minor Loop Link
-//register DMA_TCD14_BITER_ELINKNO *(volatile $uint16_t *)0x400091DE // TCD Beginning Minor Loop Link
-//
-//register DMA_TCD15_SADDR  *(volatile const void * volatile *)0x400091E0 // TCD Source Addr
-//register DMA_TCD15_SOFF  *(volatile int16_t *)0x400091E4  // TCD Signed Source Address Offset
-//register DMA_TCD15_ATTR  *(volatile $uint16_t *)0x400091E6 // TCD Transfer Attributes
-//register DMA_TCD15_NBYTES_MLNO  0x400091E8 // TCD Minor Byte Count
-//register DMA_TCD15_NBYTES_MLOFFNO  0x400091E8 // TCD Signed Minor Loop Offset
-//register DMA_TCD15_NBYTES_MLOFFYES  0x400091E8 // TCD Signed Minor Loop Offset
-//register DMA_TCD15_SLAST  *(volatile int32_t *)0x400091EC  // TCD Last Source Addr Adj.
-//register DMA_TCD15_DADDR  *(volatile void * volatile *)0x400091F0 // TCD Destination Address
-//register DMA_TCD15_DOFF  *(volatile int16_t *)0x400091F4  // TCD Signed Dest Address Offset
-//register DMA_TCD15_CITER_ELINKYES *(volatile $uint16_t *)0x400091F6 // TCD Current Minor Loop Link
-//register DMA_TCD15_CITER_ELINKNO *(volatile $uint16_t *)0x400091F6 // ??
-//register DMA_TCD15_DLASTSGA *(volatile int32_t *)0x400091F8  // TCD Last Destination Addr Adj
-//register DMA_TCD15_CSR  *(volatile $uint16_t *)0x400091FC // TCD Control and Status
-//register DMA_TCD15_BITER_ELINKYES *(volatile $uint16_t *)0x400091FE // TCD Beginning Minor Loop Link
-//register DMA_TCD15_BITER_ELINKNO *(volatile $uint16_t *)0x400091FE // TCD Beginning Minor Loop Link
-//
-//
+register DMA_CEEI at 0x4000_8018 $uint8 { // Clear Enable Error Interrupt Register
+ NOP, CAAE, 1, CEEI [5]
+}
+
+register DMA_SEEI at 0x4000_8019 $uint8 { // Set Enable Error Interrupt Register
+ NOP, SAAE, 1, SEEI [5]
+}
+
+register DMA_CERQ at 0x4000_801A $uint8 { // Clear Enable Request Register
+ NOP, CAER, 1, CERQ [5]
+}
+
+register DMA_SERQ at 0x4000_801B $uint8 { // Set Enable Request Register
+ NOP, SAER, 1, SERQ [5]
+}
+
+register DMA_CDNE at 0x4000_801C $uint8 { // Clear DONE Status Bit Register
+ NOP, CADN, 1, CDNE [5]
+}
+
+register DMA_SSRT at 0x4000_801D $uint8 { // Set START Bit Register
+ NOP, SAST, 2, SSRT [4]
+}
+
+register DMA_CERR at 0x4000_801E $uint8 { // Clear Error Register
+ NOP, CAEI, 1, CERR [5]
+}
+
+register DMA_CINT at 0x4000_801F $uint8 { // Clear Interrupt Request Register
+ NOP, CAIR, 1, CINT [5]
+}
+
+register DMA_INT at 0x4000_8024 $uint32 { // Interrupt Request Register
+ INT31, INT30, INT29, INT28, INT27, INT26, INT25, INT24,
+ INT23, INT22, INT21, INT20, INT19, INT18, INT17, INT16,
+ INT15, INT14, INT13, INT12, INT11, INT10, INT9,  INT8,
+ INT7,  INT6,  INT5,  INT4,  INT3,  INT2,  INT1,  INT0
+}
+
+register DMA_ERR at 0x4000_802C $uint32 { // Error Register
+ ERR31, ERR30, ERR29, ERR28, ERR27, ERR26, ERR25, ERR24,
+ ERR23, ERR22, ERR21, ERR20, ERR19, ERR18, ERR17, ERR16,
+ ERR15, ERR14, ERR13, ERR12, ERR11, ERR10, ERR9,  ERR8,
+ ERR7,  ERR6,  ERR5,  ERR4,  ERR3,  ERR2,  ERR1,  ERR0
+}
+
+register DMA_HRS at 0x4000_8034 $uint32 { // Hardware Request Status Register
+ HRS31, HRS30, HRS29, HRS28, HRS27, HRS26, HRS25, HRS24,
+ HRS23, HRS22, HRS21, HRS20, HRS19, HRS18, HRS17, HRS16,
+ HRS15, HRS14, HRS13, HRS12, HRS11, HRS10, HRS9,  HRS8,
+ HRS7,  HRS6,  HRS5,  HRS4,  HRS3,  HRS2,  HRS1,  HRS0
+}
+
+register DMA_DCHPRI [DMA_CHANNEL_COUNT] at 0x4000_8100 : 1 $uint8 { // Channel n Priority Register
+ ECP, DPA, 1, CHPRI [5]
+}
+
+register DMA_TCD_SADDR [DMA_CHANNEL_COUNT] at 0x4000_9000 : 32 $uint32 // TCD Source Address
+
+register DMA_TCD_SOFF [DMA_CHANNEL_COUNT] at 0x4000_9004 : 32 $int16 // TCD Signed Source Address Offset
+
+register DMA_TCD_ATTR [DMA_CHANNEL_COUNT] at 0x4000_9006 : 32 $uint16 { // TCD Transfer Attributes
+  SMOD [4], SSIZE [4], DMOD [4], DSIZE [4]
+}
+
+let DMA_TCD_ATTR_SIZE_8BIT   $uint4 = 0
+let DMA_TCD_ATTR_SIZE_16BIT  $uint4 = 1
+let DMA_TCD_ATTR_SIZE_32BIT  $uint4 = 2
+let DMA_TCD_ATTR_SIZE_16BYTE $uint4 = 4
+let DMA_TCD_ATTR_SIZE_32BYTE $uint4 = 5
+
+// TCD Minor Byte Count (Minor Loop Disabled)
+register DMA_TCD_NBYTES_MLNO [DMA_CHANNEL_COUNT] at 0x4000_9008 : 32 $uint32
+
+// TCD Last Source Address Adjustment
+register DMA_TCD_SLAST [DMA_CHANNEL_COUNT] at 0x4000_900C : 32 $int32
+
+// TCD Destination Address
+register DMA_TCD_DADDR [DMA_CHANNEL_COUNT] at 0x4000_9010 : 32 $uint32
+
+// TCD Signed Destination Address Offset
+register DMA_TCD_DOFF [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $int16
+
+// TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)
+register DMA_TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $uint16 {
+  ELINK, CITER [15]
+}
+
+// TCD Last Destination Address Adjustment/Scatter Gather Address
+register DMA_TCD_DLASTSGA [DMA_CHANNEL_COUNT] at 0x4000_9018 : 32 $int32
+
+// TCD Control and Status 
+register DMA_TCD_CSR [DMA_CHANNEL_COUNT] at 0x4000_901C : 32 $uint16 {
+  BWC [2], 2, MAJORLINKCH [4],
+  DONE, ACTIVE, MAJORLINK, ESG, DREQ, INTHALF, INTMAJOR, START
+}
+
+// TCD Beginning Minor Loop Link, Major Loop Count (Channel Linking Disabled) 
+register DMA_TCD_BITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_901E : 32 $uint16 {
+  ELINK, BITER [15]
+}
+
+
 //// Chapter 22: External Watchdog Monitor (EWM)
 //register EWM_CTRL  *(volatile $uint8_t  *)0x40061000 // Control Register
 //register EWM_SERV  *(volatile $uint8_t  *)0x40061001 // Service Register
@@ -1420,26 +1142,34 @@ register VREF_SC   at 0x40074001 $uint8 // VREF Status and Control Register
 //register FTM2_INVCTRL   0x400B8090 // FTM Inverting Control
 //register FTM2_SWOCTRL   0x400B8094 // FTM Software Output Control
 //register FTM2_PWMLOAD   0x400B8098 // FTM PWM Load
-//
-//// Chapter 36: Periodic Interrupt Timer (PIT)
-register PIT_MCR    at 0x40037000 $uint32 // PIT Module Control Register
-register PIT_LDVAL0 at 0x40037100 $uint32 // Timer Load Value Register
-register PIT_CVAL0  at 0x40037104 $uint32 // Current Timer Value Register
-register PIT_TCTRL0 at 0x40037108 $uint32 // Timer Control Register
-register PIT_TFLG0  at 0x4003710C $uint32 // Timer Flag Register
-register PIT_LDVAL1 at 0x40037110 $uint32 // Timer Load Value Register
-register PIT_CVAL1  at 0x40037114 $uint32 // Current Timer Value Register
-register PIT_TCTRL1 at 0x40037118 $uint32 // Timer Control Register
-register PIT_TFLG1  at 0x4003711C $uint32 // Timer Flag Register
-register PIT_LDVAL2 at 0x40037120 $uint32 // Timer Load Value Register
-register PIT_CVAL2  at 0x40037124 $uint32 // Current Timer Value Register
-register PIT_TCTRL2 at 0x40037128 $uint32 // Timer Control Register
-register PIT_TFLG2  at 0x4003712C $uint32 // Timer Flag Register
-register PIT_LDVAL3 at 0x40037130 $uint32 // Timer Load Value Register
-register PIT_CVAL3  at 0x40037134 $uint32 // Current Timer Value Register
-register PIT_TCTRL3 at 0x40037138 $uint32 // Timer Control Register
-register PIT_TFLG3  at 0x4003713C $uint32 // Timer Flag Register
-//
+
+
+// Chapter 36: Periodic Interrupt Timer (PIT)
+
+// PIT Module Control Register
+register PIT_MCR at 0x4003_7000 $uint32 {
+  30, MDIS, FRZ
+}
+
+let PIT_COUNT = 4
+
+// Timer Load Value Register
+register PIT_LDVAL [PIT_COUNT] at 0x4003_7100 : 16 $uint32
+
+// Current Timer Value Register
+register PIT_LCVAL [PIT_COUNT] at 0x4003_7104 : 16 $uint32
+
+// Timer Control Register
+register PIT_TCTRL [PIT_COUNT] at 0x4003_7108 : 16 $uint32 {
+  29, CHN, TIE, TEN
+}
+
+// Timer Flag Register
+register PIT_TFLG [PIT_COUNT] at 0x4003_710C : 16 $uint32 {
+  31, TIF
+}
+
+
 //// Chapter 37: Low-Power Timer (LPTMR)
 //register LPTMR0_CSR   0x40040000 // Low Power Timer Control Status Register
 //register LPTMR0_PSR   0x40040004 // Low Power Timer Prescale Register

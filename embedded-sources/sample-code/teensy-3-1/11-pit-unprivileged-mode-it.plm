@@ -39,8 +39,8 @@ init 100_000 {
 
 system section setupPIT () {
   PIT_MCR = 0
-  PIT_LDVAL0 = 200000
-  PIT_TCTRL0 = 3 // Interrupt, enabled
+  PIT_LDVAL [0] = 200000
+  PIT_TCTRL [0] = $PIT_TCTRL {TIE:1, TEN:1} // Interrupt, enabled
 }
 
 //------------------------------------------------*
@@ -57,7 +57,7 @@ var gPITValue $uint32 = 0
 
 isr safe PITChannel0 {
 //--- Acquitter l'interruption
-  PIT_TFLG0 = 1
+  PIT_TFLG [0] = $PIT_TFLG {TIF:1}
 //--- Incrémenter le compteur
   gPITValue += 1
 }
