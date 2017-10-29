@@ -313,55 +313,84 @@ proc analyzeGuardCall
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !guardMangledName:@lstring outGuardMangledName
 {
-  outEffectiveParameterListIR = {}
-  @PLMType receiverType
   if inReceiverName.string != "" then
     [ioUniversalMap searchValuedObject !inReceiverName ?let @objectIR objectIR]
-    receiverType = [objectIR type] # type
-    outEffectiveParameterListIR += !.outputInput !objectIR
-  else
-    receiverType = .void
-  end
-  outGuardMangledName = routineMangledNameFromCall (
-    !if inReceiverName.string == "" then "" else "$" + [receiverType key] end
-    !inGuardName
-    !inEffectiveParameterList
-  )
-  [inContext.mGuardMapForContext searchKey
-    !outGuardMangledName
-    ?let isPublic
-    ?let @routineTypedSignature formalSignature
-  ]
-#--- Check accessibility
-  if not isPublic then
-    if inReceiverName.string == "" then # Standalone function
+    let receiverType = [objectIR type] # type
+    if not [receiverType isStructure] then
+      error inReceiverName : "receiver is not a structure" : outGuardMangledName, outEffectiveParameterListIR
+    else
+      [receiverType structure ?4* ?guardMap:let guardMap]
+      let guardMangledName = routineMangledNameFromCall (!"" !inGuardName !inEffectiveParameterList)
+      [guardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature]
+    #--- Check accessibility
+      if not isPublic then
+        error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
+      else  
+        outGuardMangledName = routineMangledNameFromCall (
+          !"$" + [receiverType key]
+          !inGuardName
+          !inEffectiveParameterList
+        )
+      #--- Enter in invocation graph
+        [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
+      #--- Analyze effective parameters
+        outEffectiveParameterListIR = {!.outputInput !objectIR}
+        analyzeEffectiveParameters (
+          !self:inSelfType
+          !formal:formalSignature
+          !effective:inEffectiveParameterList
+          !errorLocation:inGuardName.location
+          !callerForInvocationGraph:inCallerNameForInvocationGraph
+          !context:inContext
+          !requiredMode:inRequiredMode
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioUniversalMap
+          !?alloca:ioAllocaList
+          !?instructionListIR:ioInstructionGenerationList
+          !?effectiveIR:outEffectiveParameterListIR
+        )
+      end
+    end
+  else # Standalone guard
+    outGuardMangledName = routineMangledNameFromCall (
+      !""
+      !inGuardName
+      !inEffectiveParameterList
+    )
+    [inContext.mGuardMapForContext searchKey
+      !outGuardMangledName
+      ?let isPublic
+      ?let @routineTypedSignature formalSignature
+    ]
+  #--- Check accessibility
+    if not isPublic then
       let @string declarationFile = [[inContext.mGuardMapForContext locationForKey !outGuardMangledName.string] file]
       let invocationFile = [inGuardName.location file]
       if invocationFile != declarationFile then
         error inGuardName : "this guard is not public"
       end
-    else
-      error inGuardName : "this guard is not public"
     end  
-  end  
-#--- Enter in invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
-#--- Analyze effective parameters
-  analyzeEffectiveParameters (
-    !self:inSelfType
-    !formal:formalSignature
-    !effective:inEffectiveParameterList
-    !errorLocation:inGuardName.location
-    !callerForInvocationGraph:inCallerNameForInvocationGraph
-    !context:inContext
-    !requiredMode:inRequiredMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    !?effectiveIR:outEffectiveParameterListIR
-  )
+  #--- Enter in invocation graph
+    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
+  #--- Analyze effective parameters
+    outEffectiveParameterListIR = {}
+    analyzeEffectiveParameters (
+      !self:inSelfType
+      !formal:formalSignature
+      !effective:inEffectiveParameterList
+      !errorLocation:inGuardName.location
+      !callerForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !requiredMode:inRequiredMode
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      !?effectiveIR:outEffectiveParameterListIR
+    )
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
