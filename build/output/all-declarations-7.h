@@ -11,6 +11,29 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                      Extension setter '@universalPropertyAndRoutineMapForContext writeAccess'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_writeAccess) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                               const class GALGAS_lstring constinArgument0,
+                                                                                               class C_Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_writeAccess (const int32_t inClassIndex,
+                                       extensionSetterSignature_universalPropertyAndRoutineMapForContext_writeAccess inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_writeAccess (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                      const GALGAS_lstring constin_inValuedObjectName,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                    Extension setter '@universalPropertyAndRoutineMapForContext readWriteAccess'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

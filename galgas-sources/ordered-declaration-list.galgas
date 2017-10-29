@@ -36,7 +36,7 @@ proc buildOrderedDeclarationList
   [inAST.mExternProcListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mStandAloneSystemRoutineListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGuardListAST noteTypesInPrecedenceGraph !?precedenceGraph]
-  [inAST.mControlRegisterDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+#  [inAST.mControlRegisterDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGlobalVarDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed $uintXX and $intXX types

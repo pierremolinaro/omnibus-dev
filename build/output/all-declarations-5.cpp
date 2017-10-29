@@ -687,7 +687,6 @@ GALGAS_ast::GALGAS_ast (void) :
 mProperty_mGlobalVarDeclarationListAST (),
 mProperty_mDeclarationListAST (),
 mProperty_mExtensionDeclarationListAST (),
-mProperty_mControlRegisterDeclarationListAST (),
 mProperty_mStandAloneFunctionDeclarationListAST (),
 mProperty_mRequiredProcListAST (),
 mProperty_mExternProcListAST (),
@@ -714,39 +713,37 @@ GALGAS_ast::~ GALGAS_ast (void) {
 GALGAS_ast::GALGAS_ast (const GALGAS_globalVarDeclarationList & inOperand0,
                         const GALGAS_declarationListAST & inOperand1,
                         const GALGAS_extensionDeclarationListAST & inOperand2,
-                        const GALGAS_controlRegisterDeclarationListAST & inOperand3,
-                        const GALGAS_functionDeclarationListAST & inOperand4,
-                        const GALGAS_requiredProcedureDeclarationListAST & inOperand5,
-                        const GALGAS_externProcedureDeclarationListAST & inOperand6,
-                        const GALGAS_isrDeclarationListAST & inOperand7,
-                        const GALGAS_systemRoutineDeclarationListAST & inOperand8,
-                        const GALGAS_guardDeclarationListAST & inOperand9,
-                        const GALGAS_lstringlist & inOperand10,
-                        const GALGAS_bootList & inOperand11,
-                        const GALGAS_initList & inOperand12,
-                        const GALGAS_panicClauseListAST & inOperand13,
-                        const GALGAS_taskList & inOperand14,
-                        const GALGAS_checkTargetListAST & inOperand15,
-                        const GALGAS_moduleDeclarationListAST & inOperand16,
-                        const GALGAS_moduleInstanciationListAST & inOperand17) :
+                        const GALGAS_functionDeclarationListAST & inOperand3,
+                        const GALGAS_requiredProcedureDeclarationListAST & inOperand4,
+                        const GALGAS_externProcedureDeclarationListAST & inOperand5,
+                        const GALGAS_isrDeclarationListAST & inOperand6,
+                        const GALGAS_systemRoutineDeclarationListAST & inOperand7,
+                        const GALGAS_guardDeclarationListAST & inOperand8,
+                        const GALGAS_lstringlist & inOperand9,
+                        const GALGAS_bootList & inOperand10,
+                        const GALGAS_initList & inOperand11,
+                        const GALGAS_panicClauseListAST & inOperand12,
+                        const GALGAS_taskList & inOperand13,
+                        const GALGAS_checkTargetListAST & inOperand14,
+                        const GALGAS_moduleDeclarationListAST & inOperand15,
+                        const GALGAS_moduleInstanciationListAST & inOperand16) :
 mProperty_mGlobalVarDeclarationListAST (inOperand0),
 mProperty_mDeclarationListAST (inOperand1),
 mProperty_mExtensionDeclarationListAST (inOperand2),
-mProperty_mControlRegisterDeclarationListAST (inOperand3),
-mProperty_mStandAloneFunctionDeclarationListAST (inOperand4),
-mProperty_mRequiredProcListAST (inOperand5),
-mProperty_mExternProcListAST (inOperand6),
-mProperty_mISRDeclarationListAST (inOperand7),
-mProperty_mStandAloneSystemRoutineListAST (inOperand8),
-mProperty_mGuardListAST (inOperand9),
-mProperty_mTargetListAST (inOperand10),
-mProperty_mBootListAST (inOperand11),
-mProperty_mInitListAST (inOperand12),
-mProperty_mPanicClauseListAST (inOperand13),
-mProperty_mTaskListAST (inOperand14),
-mProperty_mCheckTargetListAST (inOperand15),
-mProperty_mModuleDeclarationListAST (inOperand16),
-mProperty_mRequiredModuleListAST (inOperand17) {
+mProperty_mStandAloneFunctionDeclarationListAST (inOperand3),
+mProperty_mRequiredProcListAST (inOperand4),
+mProperty_mExternProcListAST (inOperand5),
+mProperty_mISRDeclarationListAST (inOperand6),
+mProperty_mStandAloneSystemRoutineListAST (inOperand7),
+mProperty_mGuardListAST (inOperand8),
+mProperty_mTargetListAST (inOperand9),
+mProperty_mBootListAST (inOperand10),
+mProperty_mInitListAST (inOperand11),
+mProperty_mPanicClauseListAST (inOperand12),
+mProperty_mTaskListAST (inOperand13),
+mProperty_mCheckTargetListAST (inOperand14),
+mProperty_mModuleDeclarationListAST (inOperand15),
+mProperty_mRequiredModuleListAST (inOperand16) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -755,7 +752,6 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_ast (GALGAS_globalVarDeclarationList::constructor_emptyList (HERE),
                      GALGAS_declarationListAST::constructor_emptyList (HERE),
                      GALGAS_extensionDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_controlRegisterDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_requiredProcedureDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_externProcedureDeclarationListAST::constructor_emptyList (HERE),
@@ -777,25 +773,24 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
 GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_globalVarDeclarationList & inOperand0,
                                         const GALGAS_declarationListAST & inOperand1,
                                         const GALGAS_extensionDeclarationListAST & inOperand2,
-                                        const GALGAS_controlRegisterDeclarationListAST & inOperand3,
-                                        const GALGAS_functionDeclarationListAST & inOperand4,
-                                        const GALGAS_requiredProcedureDeclarationListAST & inOperand5,
-                                        const GALGAS_externProcedureDeclarationListAST & inOperand6,
-                                        const GALGAS_isrDeclarationListAST & inOperand7,
-                                        const GALGAS_systemRoutineDeclarationListAST & inOperand8,
-                                        const GALGAS_guardDeclarationListAST & inOperand9,
-                                        const GALGAS_lstringlist & inOperand10,
-                                        const GALGAS_bootList & inOperand11,
-                                        const GALGAS_initList & inOperand12,
-                                        const GALGAS_panicClauseListAST & inOperand13,
-                                        const GALGAS_taskList & inOperand14,
-                                        const GALGAS_checkTargetListAST & inOperand15,
-                                        const GALGAS_moduleDeclarationListAST & inOperand16,
-                                        const GALGAS_moduleInstanciationListAST & inOperand17 
+                                        const GALGAS_functionDeclarationListAST & inOperand3,
+                                        const GALGAS_requiredProcedureDeclarationListAST & inOperand4,
+                                        const GALGAS_externProcedureDeclarationListAST & inOperand5,
+                                        const GALGAS_isrDeclarationListAST & inOperand6,
+                                        const GALGAS_systemRoutineDeclarationListAST & inOperand7,
+                                        const GALGAS_guardDeclarationListAST & inOperand8,
+                                        const GALGAS_lstringlist & inOperand9,
+                                        const GALGAS_bootList & inOperand10,
+                                        const GALGAS_initList & inOperand11,
+                                        const GALGAS_panicClauseListAST & inOperand12,
+                                        const GALGAS_taskList & inOperand13,
+                                        const GALGAS_checkTargetListAST & inOperand14,
+                                        const GALGAS_moduleDeclarationListAST & inOperand15,
+                                        const GALGAS_moduleInstanciationListAST & inOperand16 
                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_ast result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid ()) {
-    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid ()) {
+    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16) ;
   }
   return result ;
 }
@@ -812,9 +807,6 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
   }
   if (result == kOperandEqual) {
     result = mProperty_mExtensionDeclarationListAST.objectCompare (inOperand.mProperty_mExtensionDeclarationListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mControlRegisterDeclarationListAST.objectCompare (inOperand.mProperty_mControlRegisterDeclarationListAST) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mStandAloneFunctionDeclarationListAST.objectCompare (inOperand.mProperty_mStandAloneFunctionDeclarationListAST) ;
@@ -864,7 +856,7 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_ast::isValid (void) const {
-  return mProperty_mGlobalVarDeclarationListAST.isValid () && mProperty_mDeclarationListAST.isValid () && mProperty_mExtensionDeclarationListAST.isValid () && mProperty_mControlRegisterDeclarationListAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mGuardListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mBootListAST.isValid () && mProperty_mInitListAST.isValid () && mProperty_mPanicClauseListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mModuleDeclarationListAST.isValid () && mProperty_mRequiredModuleListAST.isValid () ;
+  return mProperty_mGlobalVarDeclarationListAST.isValid () && mProperty_mDeclarationListAST.isValid () && mProperty_mExtensionDeclarationListAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mGuardListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mBootListAST.isValid () && mProperty_mInitListAST.isValid () && mProperty_mPanicClauseListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mModuleDeclarationListAST.isValid () && mProperty_mRequiredModuleListAST.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -873,7 +865,6 @@ void GALGAS_ast::drop (void) {
   mProperty_mGlobalVarDeclarationListAST.drop () ;
   mProperty_mDeclarationListAST.drop () ;
   mProperty_mExtensionDeclarationListAST.drop () ;
-  mProperty_mControlRegisterDeclarationListAST.drop () ;
   mProperty_mStandAloneFunctionDeclarationListAST.drop () ;
   mProperty_mRequiredProcListAST.drop () ;
   mProperty_mExternProcListAST.drop () ;
@@ -903,8 +894,6 @@ void GALGAS_ast::description (C_String & ioString,
     mProperty_mDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mExtensionDeclarationListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mControlRegisterDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mStandAloneFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -953,12 +942,6 @@ GALGAS_declarationListAST GALGAS_ast::getter_mDeclarationListAST (UNUSED_LOCATIO
 
 GALGAS_extensionDeclarationListAST GALGAS_ast::getter_mExtensionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mExtensionDeclarationListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterDeclarationListAST GALGAS_ast::getter_mControlRegisterDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mControlRegisterDeclarationListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -16632,7 +16615,7 @@ void cGrammar_plm_5F_grammar::nt_registerDeclaration_parse (C_Lexique_plm_5F_lex
   }
 }
 
-void cGrammar_plm_5F_grammar::nt_registerDeclaration_ (GALGAS_controlRegisterNameList &  parameter_1,
+void cGrammar_plm_5F_grammar::nt_registerDeclaration_ (GALGAS_controlRegisterList &  parameter_1,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 14 :
