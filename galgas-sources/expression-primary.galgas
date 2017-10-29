@@ -716,9 +716,9 @@ private proc handleFunctionCallInExpression
       if not [propertyType isFunction] then
         error inMethodName : "an indexed property cannot be used as method" : ioObjectIR
       else
-        [propertyType function ?signature:let signature ?mode:let mode ?returnTypeProxy:let returnTypeProxy]
+        [propertyType function ?descriptor:let descriptor]
       #--- Check routine is actually a function
-        if [returnTypeProxy type] == .void then
+        if [descriptor.mReturnTypeProxy type] == .void then
           error inMethodName : "not a function (returns no value)" : ioObjectIR
         else
         #--- Check modes
@@ -732,7 +732,7 @@ private proc handleFunctionCallInExpression
           @procCallEffectiveParameterListIR effectiveParameterListIR = {}
           analyzeEffectiveParameters (
             !self:inSelfType
-            !formal:signature
+            !formal:descriptor.mSignature
             !effective:inArguments
             !errorLocation:inMethodName.location
             !callerForInvocationGraph:inCallerNameForInvocationGraph
@@ -756,7 +756,7 @@ private proc handleFunctionCallInExpression
             !inMethodName
           ]
         #--- New LLVM variable for function call result
-          getNewTempVariable (![returnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
+          getNewTempVariable (![descriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
         #--- Code generation
           ioInstructionGenerationList += !@indirectRoutineCallIR.new {
             !.reference {!type:propertyType !llvmName:property_llvmName}
@@ -769,85 +769,6 @@ private proc handleFunctionCallInExpression
       end
     end
   end
-##--- Search function in map
-#  [inContext.mRoutineMapForContext searchKey
-#    !inMethodName
-#    !signature
-#    ?let @lstring LLVMInvocationRoutineName
-#    ?@routineDescriptor routineDescriptor
-#    ?* # let @location outKeyLocation
-#  ]
-##--- Check routine is actually a function
-#  if [routineDescriptor.mReturnTypeProxy type] == .void then
-#    error inMethodName : "not a function (returns no value)" : routineDescriptor, ioObjectIR
-#  else
-#  #--- Check modes
-#    let calleeKind = checkMode (
-#      !callerMode:inMode
-#      !calleeMode:[routineDescriptor.mRoutineKind executionMode]
-#      !kind:routineDescriptor.mRoutineKind
-#      !error:inMethodName.location
-#    )
-#  #--- Add receiver as first parameter ?
-#    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-##    switch routineDescriptor.mRoutineCallingScheme
-##    case staticCall :
-#      effectiveParameterListIR += !.outputInput !ioObjectIR # Add receiver as first argument
-##    case propertyIndirectCall (* index) :
-##    end
-#  #--- Analyze effective parameters
-#    analyzeEffectiveParameters (
-#      !self:inSelfType
-#      !formal:routineDescriptor.mSignature
-#      !effective:inArguments
-#      !errorLocation:inMethodName.location
-#      !callerForInvocationGraph:inCallerNameForInvocationGraph
-#      !context:inContext
-#      !requiredMode:inMode
-#      !?temporary:ioTemporaries
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#      !?variableMap:ioUniversalMap
-#      !?alloca:ioAllocaList
-#      !?instructionListIR:ioInstructionGenerationList
-#      !?effectiveIR:effectiveParameterListIR
-#    )
-#  #--- New LLVM variable for function call result
-#    getNewTempVariable (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
-#  #--- Generate call
-##    switch routineDescriptor.mRoutineCallingScheme
-##    case staticCall :
-#    #--- Code generation
-#      let routineMangledName = routineMangledNameFromCall (!"$" + [[ioObjectIR type] key] !inMethodName !inArguments)
-#      ioInstructionGenerationList += !@staticRoutineCallIR.new {
-#        !"" # globalVariableReceiverName
-#        !callReturnedResult
-#        !routineMangledName
-#        !LLVMInvocationRoutineName
-#        !calleeKind
-#        !effectiveParameterListIR
-#      }
-#    #--- Enter in invocation graph
-#      [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-##    case propertyIndirectCall (propertyType propertyIndex) :
-##      [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
-##      [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-##        ![ioObjectIR type]
-##        ![ioObjectIR llvmName]
-##        !propertyType
-##        !property_llvmName
-##        !propertyIndex
-##        !inMethodName
-##      ]
-##    #--- Code generation
-##      ioInstructionGenerationList += !@indirectRoutineCallIR.new {
-##        !.reference {!type:propertyType !llvmName:property_llvmName}
-##        !propertyType
-##        !callReturnedResult
-##        !effectiveParameterListIR
-##      }
-##    end
-#    ioObjectIR = callReturnedResult
-#  end
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

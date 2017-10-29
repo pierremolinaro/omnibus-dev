@@ -236,7 +236,7 @@ method @controlRegisterDeclarationListAST-element controlRegisterType
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case arrayType (* * * * * *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case function (* * *) :
+  case function (*) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case pointer (*) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount

@@ -3696,14 +3696,14 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_PLMType::kEnum_pointer:
       {
-        const cEnumAssociatedValues_PLMType_pointer * extractPtr_22801 = (const cEnumAssociatedValues_PLMType_pointer *) (enumerator_22132.current_mType (HERE).unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_pointee = extractPtr_22801->mAssociatedValue0 ;
+        const cEnumAssociatedValues_PLMType_pointer * extractPtr_22792 = (const cEnumAssociatedValues_PLMType_pointer *) (enumerator_22132.current_mType (HERE).unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_pointee = extractPtr_22792->mAssociatedValue0 ;
       }
       break ;
     }
     enumerator_22132.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 519)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 518)) ;
 }
 
 
