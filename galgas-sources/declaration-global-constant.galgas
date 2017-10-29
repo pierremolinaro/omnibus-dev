@@ -142,15 +142,6 @@ override method @globalConstantDeclarationAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @globalConstantDeclarationAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  BUILD CONSTANT MAP HTML FILE                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

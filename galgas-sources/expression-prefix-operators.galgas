@@ -69,7 +69,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR expressionResultPossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !expressionResultPossibleReference
     ?let expressionResult

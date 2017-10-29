@@ -114,7 +114,7 @@ override method @varInstructionWithAssignmentAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR sourcePossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !sourcePossibleReference
     ?let expressionResult

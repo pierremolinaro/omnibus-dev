@@ -104,7 +104,7 @@ override method @switchInstructionAST analyze
     !?instructionListIR:switchExpressionGenerationList
     ?result:let @objectIR switchValueIRPossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !switchValueIRPossibleReference
     ?let switchValueIR

@@ -791,33 +791,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticlistValues_5F
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Abstract extension method '@abstractDeclarationAST enterRoutinesInContext'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_abstractDeclarationAST_enterRoutinesInContext) (const class cPtr_abstractDeclarationAST * inObject,
-                                                                                        const class GALGAS_functionDeclarationListAST constinArgument0,
-                                                                                        class GALGAS_semanticContext & ioArgument1,
-                                                                                        class GALGAS_staticStringMap & ioArgument2,
-                                                                                        class C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_enterRoutinesInContext (const int32_t inClassIndex,
-                                                  extensionMethodSignature_abstractDeclarationAST_enterRoutinesInContext inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_enterRoutinesInContext (const class cPtr_abstractDeclarationAST * inObject,
-                                                 const GALGAS_functionDeclarationListAST constin_inProcedureListAST,
-                                                 GALGAS_semanticContext & io_ioContext,
-                                                 GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                 Extension getter '@PLMType equatable' (as function)                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2260,15 +2233,15 @@ class cPtr_loadRegisterIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Extension setter '@instructionListIR appendLoadFromTemporaryReference'                        *
+//                            Extension setter '@instructionListIR appendLoadFromReference'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendLoadFromTemporaryReference (class GALGAS_instructionListIR & ioObject,
-                                                       const class GALGAS_objectIR constin_inTargetValue,
-                                                       const class GALGAS_string constin_inLLVMName,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+void extensionSetter_appendLoadFromReference (class GALGAS_instructionListIR & ioObject,
+                                              const class GALGAS_objectIR constin_inTargetValue,
+                                              const class GALGAS_string constin_inLLVMName,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3196,11 +3169,11 @@ class cPtr_indirectRoutineCallIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Extension setter '@instructionListIR appendLoadFromReference'                            *
+//                            Extension setter '@instructionListIR appendLoadWhenReference'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendLoadFromReference (class GALGAS_instructionListIR & ioObject,
+void extensionSetter_appendLoadWhenReference (class GALGAS_instructionListIR & ioObject,
                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                               const class GALGAS_objectIR constin_inSource,
                                               class GALGAS_objectIR & out_outResultingValue,

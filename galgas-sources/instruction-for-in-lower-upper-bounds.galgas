@@ -125,7 +125,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?instructionListIR:ioInstructionGenerationList
       ?result:let @objectIR lowerBoundExpressionResultPossibleReference
     ]
-    [!?ioInstructionGenerationList appendLoadFromReference
+    [!?ioInstructionGenerationList appendLoadWhenReference
       !?ioTemporaries
       !lowerBoundExpressionResultPossibleReference
       ?let lowerBoundExpressionResult
@@ -144,7 +144,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?instructionListIR:ioInstructionGenerationList
       ?result:let @objectIR upperBoundExpressionResultPossibleReference
     ]
-    [!?ioInstructionGenerationList appendLoadFromReference
+    [!?ioInstructionGenerationList appendLoadWhenReference
       !?ioTemporaries
       !upperBoundExpressionResultPossibleReference
       ?let upperBoundExpressionResult

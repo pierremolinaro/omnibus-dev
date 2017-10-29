@@ -160,7 +160,7 @@ proc analyzeEffectiveParameters
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @objectIR expressionResult
       ]
-      [!?ioInstructionGenerationList appendLoadFromReference
+      [!?ioInstructionGenerationList appendLoadWhenReference
         !?ioTemporaries
         !expressionResult
         ?let expressionValue

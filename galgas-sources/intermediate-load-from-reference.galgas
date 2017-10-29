@@ -1,5 +1,5 @@
 
-setter @instructionListIR appendLoadFromTemporaryReference
+setter @instructionListIR appendLoadFromReference
   ?let @objectIR inTargetValue
   ?let @string inLLVMName
 {

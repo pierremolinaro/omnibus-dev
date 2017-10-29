@@ -63,7 +63,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?instructionListIR:leftInstructionGenerationList
     ?result:let @objectIR leftOperandPossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !leftOperandPossibleReference
     ?let leftOperand
@@ -84,7 +84,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?instructionListIR:rightInstructionGenerationList
     ?result:let @objectIR rightOperandPossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !rightOperandPossibleReference
     ?let rightOperand

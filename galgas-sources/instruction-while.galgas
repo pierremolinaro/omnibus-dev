@@ -82,7 +82,7 @@ override method @whileInstructionAST analyze
     !?instructionListIR:testInstructionGenerationList
     ?result:let @objectIR testValuePossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadFromReference
+  [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !testValuePossibleReference
     ?let testValue
