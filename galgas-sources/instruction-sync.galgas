@@ -57,29 +57,22 @@ syntax extension plm_syntax {
         isWhileCommand = true
       end
       $identifier$ ?let name
+      @lstring guardName
       select
-        <effective_parameters> ?let effectiveParameterList ?*
-        outGuardedCommand = .boolAndSync {
-          !isWhileCommand:isWhileCommand
-          !expression:expression
-          !endOfExpression:endOfExp
-          !optionalReceiverName:["" here]
-          !guardName:name
-          !effectiveParameterListAST:effectiveParameterList
-        }
+        guardName = ["" here]
       or
         $.$
-        $identifier$ ?let guardName
-        <effective_parameters> ?let effectiveParameterList ?*
-        outGuardedCommand = .boolAndSync {
-          !isWhileCommand:isWhileCommand
-          !expression:expression
-          !endOfExpression:endOfExp
-          !optionalReceiverName:name
-          !guardName:guardName
-          !effectiveParameterListAST:effectiveParameterList
-        }
+        $identifier$ ?guardName
       end
+      <effective_parameters> ?let effectiveParameterList ?*
+      outGuardedCommand = .boolAndSync {
+        !isWhileCommand:isWhileCommand
+        !expression:expression
+        !endOfExpression:endOfExp
+        !optionalReceiverName:name
+        !guardName:guardName
+        !effectiveParameterListAST:effectiveParameterList
+      }
     or
       @bool isWhileCommand
       select
