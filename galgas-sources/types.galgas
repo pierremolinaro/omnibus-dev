@@ -19,7 +19,7 @@ enum @PLMType {
                   @propertyMap propertyMap
                   @propertyList propertyList
                   @PLMTypeFlags flags
-                  @string plmTypeName)
+                  @guardMapForContext guardMap)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount @string plmTypeName)
   case staticInteger
   case opaque (@bigint bitCount @PLMTypeFlags flags @string plmTypeName)
@@ -222,7 +222,7 @@ getter @PLMType key -> @string {
     result = staticStringTypeName ()
   case enumeration (* plmTypeName) :
     result = plmTypeName
-  case structure (* * * * plmTypeName) :
+  case structure (plmTypeName * * * *) :
     result = plmTypeName
   case integer (* * * * plmTypeName) :
     result = plmTypeName

@@ -1316,7 +1316,7 @@ void routine_handlePropertyAccessInExpression (GALGAS_objectIR & ioArgument_ioRe
     GALGAS_lstring joker_22685_1 ; // Joker input parameter
     GALGAS_propertyList joker_22718_3 ; // Joker input parameter
     GALGAS_PLMTypeFlags joker_22718_2 ; // Joker input parameter
-    GALGAS_string joker_22718_1 ; // Joker input parameter
+    GALGAS_guardMapForContext joker_22718_1 ; // Joker input parameter
     var_type_22540.method_structure (joker_22685_1, var_propertyMap_22716, joker_22718_3, joker_22718_2, joker_22718_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 571)) ;
     GALGAS_propertyAccessKind var_accessKind_22803 ;
     GALGAS_bool joker_22766 ; // Joker input parameter
@@ -1438,7 +1438,7 @@ void routine_handleFunctionCallInExpression (const GALGAS_lstring constinArgumen
     GALGAS_lstring joker_26239_1 ; // Joker input parameter
     GALGAS_propertyList joker_26285_3 ; // Joker input parameter
     GALGAS_PLMTypeFlags joker_26285_2 ; // Joker input parameter
-    GALGAS_string joker_26285_1 ; // Joker input parameter
+    GALGAS_guardMapForContext joker_26285_1 ; // Joker input parameter
     var_receiverType_26073.method_structure (joker_26239_1, var_propertyMap_26283, joker_26285_3, joker_26285_2, joker_26285_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 661)) ;
     GALGAS_lstring var_key_26300 = function_routineMangledNameFromCall (GALGAS_string::makeEmptyString (), constinArgument_inMethodName, constinArgument_inArguments, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 662)) ;
     GALGAS_propertyAccessKind var_propertyAccess_26437 ;
@@ -4335,7 +4335,7 @@ static void extensionMethod_procedureCallInstructionAST_analyze (const cPtr_inst
     GALGAS_lstring joker_10810_1 ; // Joker input parameter
     GALGAS_propertyList joker_10852_3 ; // Joker input parameter
     GALGAS_PLMTypeFlags joker_10852_2 ; // Joker input parameter
-    GALGAS_string joker_10852_1 ; // Joker input parameter
+    GALGAS_guardMapForContext joker_10852_1 ; // Joker input parameter
     var_currentType_9140.method_structure (joker_10810_1, var_propertyMap_10850, joker_10852_3, joker_10852_2, joker_10852_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 264)) ;
     GALGAS_accessInAssignmentListAST var_accessList_10948 = object->mProperty_mAccessList ;
     GALGAS_accessInAssignmentAST var_lastAccess_11004 ;
@@ -4425,7 +4425,7 @@ static void extensionMethod_procedureCallInstructionAST_analyze (const cPtr_inst
         GALGAS_lstring joker_12542_1 ; // Joker input parameter
         GALGAS_propertyList joker_12588_3 ; // Joker input parameter
         GALGAS_PLMTypeFlags joker_12588_2 ; // Joker input parameter
-        GALGAS_string joker_12588_1 ; // Joker input parameter
+        GALGAS_guardMapForContext joker_12588_1 ; // Joker input parameter
         var_currentType_9140.method_structure (joker_12542_1, var_propertyMap_12586, joker_12588_3, joker_12588_2, joker_12588_1, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 306)) ;
         GALGAS_lstring var_key_12605 = function_routineMangledNameFromCall (GALGAS_string::makeEmptyString (), extractedValue_methodName, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 307)) ;
         GALGAS_propertyAccessKind var_propertyAccess_12741 ;
@@ -5054,7 +5054,7 @@ void routine_analyzeVariableInLValue (const GALGAS_PLMType constinArgument_inSel
             GALGAS_lstring joker_13569_1 ; // Joker input parameter
             GALGAS_propertyList joker_13615_3 ; // Joker input parameter
             GALGAS_PLMTypeFlags joker_13615_2 ; // Joker input parameter
-            GALGAS_string joker_13615_1 ; // Joker input parameter
+            GALGAS_guardMapForContext joker_13615_1 ; // Joker input parameter
             var_currentType_13140.method_structure (joker_13569_1, var_propertyMap_13613, joker_13615_3, joker_13615_2, joker_13615_1, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 330)) ;
             GALGAS_propertyAccessKind var_propertyAccess_13708 ;
             GALGAS_bool joker_13667 ; // Joker input parameter
@@ -5188,7 +5188,7 @@ void routine_analyzeSelfAssignmentTarget (const GALGAS_PLMType constinArgument_i
             GALGAS_lstring joker_17194_1 ; // Joker input parameter
             GALGAS_propertyList joker_17240_3 ; // Joker input parameter
             GALGAS_PLMTypeFlags joker_17240_2 ; // Joker input parameter
-            GALGAS_string joker_17240_1 ; // Joker input parameter
+            GALGAS_guardMapForContext joker_17240_1 ; // Joker input parameter
             var_currentType_16957.method_structure (joker_17194_1, var_propertyMap_17238, joker_17240_3, joker_17240_2, joker_17240_1, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 417)) ;
             GALGAS_propertyAccessKind var_propertyAccess_17333 ;
             GALGAS_bool joker_17292 ; // Joker input parameter
@@ -6087,33 +6087,33 @@ void routine_buildTypeMapHTMLFile (GALGAS_unifiedTypeMap inArgument_inTypeMap,
                                    const GALGAS_lstring constinArgument_inSourceFile,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_typeDumpFilePath_9238 = constinArgument_inSourceFile.getter_string (HERE).add_operation (GALGAS_string (".types.html"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)) ;
+  GALGAS_string var_typeDumpFilePath_9247 = constinArgument_inSourceFile.getter_string (HERE).add_operation (GALGAS_string (".types.html"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)) ;
   const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_emitTypeMap.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_stringset var_firstLetterSet_9355 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("types.galgas", 283)) ;
-    cEnumerator_unifiedTypeMap enumerator_9384 (inArgument_inTypeMap, kENUMERATION_UP) ;
-    while (enumerator_9384.hasCurrentObject ()) {
-      var_firstLetterSet_9355.addAssign_operation (enumerator_9384.current_lkey (HERE).getter_string (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("types.galgas", 285)).getter_string (SOURCE_FILE ("types.galgas", 285))  COMMA_SOURCE_FILE ("types.galgas", 285)) ;
-      enumerator_9384.gotoNextObject () ;
+    GALGAS_stringset var_firstLetterSet_9364 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("types.galgas", 283)) ;
+    cEnumerator_unifiedTypeMap enumerator_9393 (inArgument_inTypeMap, kENUMERATION_UP) ;
+    while (enumerator_9393.hasCurrentObject ()) {
+      var_firstLetterSet_9364.addAssign_operation (enumerator_9393.current_lkey (HERE).getter_string (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("types.galgas", 285)).getter_string (SOURCE_FILE ("types.galgas", 285))  COMMA_SOURCE_FILE ("types.galgas", 285)) ;
+      enumerator_9393.gotoNextObject () ;
     }
-    GALGAS_string var_tableOfTypeString_9492 = GALGAS_string::makeEmptyString () ;
-    GALGAS_char var_currentFirstLetter_9526 = GALGAS_char (TO_UNICODE (32)) ;
-    cEnumerator_unifiedTypeMap enumerator_9562 (inArgument_inTypeMap, kENUMERATION_UP) ;
-    while (enumerator_9562.hasCurrentObject ()) {
-      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter_9526.objectCompare (enumerator_9562.current_lkey (HERE).getter_string (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("types.galgas", 290)))).boolEnum () ;
+    GALGAS_string var_tableOfTypeString_9501 = GALGAS_string::makeEmptyString () ;
+    GALGAS_char var_currentFirstLetter_9535 = GALGAS_char (TO_UNICODE (32)) ;
+    cEnumerator_unifiedTypeMap enumerator_9571 (inArgument_inTypeMap, kENUMERATION_UP) ;
+    while (enumerator_9571.hasCurrentObject ()) {
+      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter_9535.objectCompare (enumerator_9571.current_lkey (HERE).getter_string (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("types.galgas", 290)))).boolEnum () ;
       if (kBoolTrue == test_1) {
-        var_currentFirstLetter_9526 = enumerator_9562.current_lkey (HERE).getter_string (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("types.galgas", 291)) ;
-        var_tableOfTypeString_9492.plusAssign_operation(GALGAS_string ("<br><a name=\"").add_operation (var_currentFirstLetter_9526.getter_uint (SOURCE_FILE ("types.galgas", 292)).getter_string (SOURCE_FILE ("types.galgas", 292)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)).add_operation (GALGAS_string ("\"><b>"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)).add_operation (var_currentFirstLetter_9526.getter_string (SOURCE_FILE ("types.galgas", 292)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)).add_operation (GALGAS_string ("</b></a><br>"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 292)) ;
+        var_currentFirstLetter_9535 = enumerator_9571.current_lkey (HERE).getter_string (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("types.galgas", 291)) ;
+        var_tableOfTypeString_9501.plusAssign_operation(GALGAS_string ("<br><a name=\"").add_operation (var_currentFirstLetter_9535.getter_uint (SOURCE_FILE ("types.galgas", 292)).getter_string (SOURCE_FILE ("types.galgas", 292)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)).add_operation (GALGAS_string ("\"><b>"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)).add_operation (var_currentFirstLetter_9535.getter_string (SOURCE_FILE ("types.galgas", 292)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)).add_operation (GALGAS_string ("</b></a><br>"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 292)) ;
       }
-      var_tableOfTypeString_9492.plusAssign_operation(function_linkForHTMLTypeMap (enumerator_9562.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 294)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 294)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 294)) ;
-      enumerator_9562.gotoNextObject () ;
+      var_tableOfTypeString_9501.plusAssign_operation(function_linkForHTMLTypeMap (enumerator_9571.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 294)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 294)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 294)) ;
+      enumerator_9571.gotoNextObject () ;
     }
-    GALGAS_string var_typeDumpString_9955 = GALGAS_string (filewrapperTemplate_typeDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.getter_string (HERE).getter_lastPathComponent (SOURCE_FILE ("types.galgas", 297)), inArgument_inTypeMap, var_firstLetterSet_9355, var_tableOfTypeString_9492 COMMA_SOURCE_FILE ("types.galgas", 296))) ;
-    GALGAS_bool joker_10185 ; // Joker input parameter
-    var_typeDumpString_9955.method_writeToFileWhenDifferentContents (var_typeDumpFilePath_9238, joker_10185, inCompiler COMMA_SOURCE_FILE ("types.galgas", 302)) ;
+    GALGAS_string var_typeDumpString_9964 = GALGAS_string (filewrapperTemplate_typeDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.getter_string (HERE).getter_lastPathComponent (SOURCE_FILE ("types.galgas", 297)), inArgument_inTypeMap, var_firstLetterSet_9364, var_tableOfTypeString_9501 COMMA_SOURCE_FILE ("types.galgas", 296))) ;
+    GALGAS_bool joker_10194 ; // Joker input parameter
+    var_typeDumpString_9964.method_writeToFileWhenDifferentContents (var_typeDumpFilePath_9247, joker_10194, inCompiler COMMA_SOURCE_FILE ("types.galgas", 302)) ;
   }else if (kBoolFalse == test_0) {
     {
-    GALGAS_string::class_method_deleteFileIfExists (var_typeDumpFilePath_9238, inCompiler COMMA_SOURCE_FILE ("types.galgas", 304)) ;
+    GALGAS_string::class_method_deleteFileIfExists (var_typeDumpFilePath_9247, inCompiler COMMA_SOURCE_FILE ("types.galgas", 304)) ;
     }
   }
 }

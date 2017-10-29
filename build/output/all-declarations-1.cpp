@@ -2938,7 +2938,7 @@ cEnumAssociatedValues_PLMType_structure::cEnumAssociatedValues_PLMType_structure
                                                                                   const GALGAS_propertyMap & inAssociatedValue1,
                                                                                   const GALGAS_propertyList & inAssociatedValue2,
                                                                                   const GALGAS_PLMTypeFlags & inAssociatedValue3,
-                                                                                  const GALGAS_string & inAssociatedValue4
+                                                                                  const GALGAS_guardMapForContext & inAssociatedValue4
                                                                                   COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -3249,7 +3249,7 @@ GALGAS_PLMType GALGAS_PLMType::constructor_structure (const GALGAS_lstring & inA
                                                       const GALGAS_propertyMap & inAssociatedValue1,
                                                       const GALGAS_propertyList & inAssociatedValue2,
                                                       const GALGAS_PLMTypeFlags & inAssociatedValue3,
-                                                      const GALGAS_string & inAssociatedValue4
+                                                      const GALGAS_guardMapForContext & inAssociatedValue4
                                                       COMMA_LOCATION_ARGS) {
   GALGAS_PLMType result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid ()) {
@@ -3381,7 +3381,7 @@ void GALGAS_PLMType::method_structure (GALGAS_lstring & outAssociatedValue0,
                                        GALGAS_propertyMap & outAssociatedValue1,
                                        GALGAS_propertyList & outAssociatedValue2,
                                        GALGAS_PLMTypeFlags & outAssociatedValue3,
-                                       GALGAS_string & outAssociatedValue4,
+                                       GALGAS_guardMapForContext & outAssociatedValue4,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_structure) {
