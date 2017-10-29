@@ -511,8 +511,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     case opaque (* * *) :
     case arrayType (* elementType arraySize * * *) :
       ioLLVMcode += [type llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
-    case function (* *
-     *) :
+    case function (*) :
     case pointer (unused pointee) :
     end
   end

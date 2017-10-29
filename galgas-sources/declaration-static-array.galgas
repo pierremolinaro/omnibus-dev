@@ -153,7 +153,6 @@ override method @staticArrayAST enterInContext
         [!?propertyMap insertKey
           !propertyName
           !true # Public
-#          !propertyType
           !.indexed{!type:propertyType !index:propertyIndex}
         ]
       end
@@ -171,7 +170,16 @@ override method @staticArrayAST enterInContext
       else
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
-      let type = @PLMType.function {!signature:signature !mode:mode !returnTypeProxy:returnTypeProxy}
+      let descriptor = @routineDescriptor.new {
+        !true # Routine is declared with "public"
+        !false # Routine is declared with @exported attribute
+        !.function {!executionMode:mode} # @routineKind mRoutineKind
+        !signature
+        !returnTypeProxy 
+        !true # mCanAccessProperties # Routine is declared with @access attribute
+        !true # mCanMutateProperties # Routine is declared with @mutating attribute
+     }
+     let type = @PLMType.function {!descriptor:descriptor}
       if not [ioContext.mTypeMap hasKey !routineMangledName] then
         [!?ioContext.mTypeMap insertType
           !lkey:routineMangledName

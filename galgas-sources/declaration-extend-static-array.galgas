@@ -185,7 +185,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
         if not [type isFunction] then
           error endOfExp : "a static expression is expected here"
         else
-          [type function ?signature:let signature ?mode:let currentMode ?returnTypeProxy:let returnTypeProxy]
+          [type function ?descriptor:let descriptor]
           let argumentSignature = [formalArgs routineSignature !functionName]
           [ioContext.mRoutineMapForContext searchKey
             !functionName
@@ -210,21 +210,21 @@ override method @extendStaticArrayDeclarationAST enterInContext
           if not [candidateRoutineKind isFunction] then
             error functionName : "this routine is not a function"
           end
-#          let currentMode = [functionDescriptor.mRoutineKind executionMode]
+          let currentMode = [descriptor.mRoutineKind executionMode]
           if currentMode != candidateMode then
             error functionName : "this function runs in " + candidateMode + " mode, but " + currentMode + " is required"
           end
-          if (returnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
+          if (descriptor.mReturnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
             error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
-          elsif (returnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
+          elsif (descriptor.mReturnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
             error functionName : "this function should return no object"
           end
-          if [signature length] != [candidateSignature length] then
+          if [descriptor.mSignature length] != [candidateSignature length] then
             error functionName
             : "this function has " + [candidateSignature length] + " argument(s) ("
-            + [signature length] + " required)"
+            + [descriptor.mSignature length] + " required)"
           else
-            for required in signature, candidate in candidateSignature do
+            for required in descriptor.mSignature, candidate in candidateSignature do
               if required.mTypeProxy != candidate.mTypeProxy then
                 error candidate.mSelector : "argument type should be $" + [required.mTypeProxy key]
               end
