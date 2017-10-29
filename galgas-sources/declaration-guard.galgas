@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
+#!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardKind {
@@ -20,7 +20,7 @@ list @guardDeclarationListAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
@@ -76,6 +76,8 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
@@ -88,7 +90,7 @@ method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePreced
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#    CONTEXT                                                                                                            
+#!   CONTEXT                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @guardDeclarationListAST enterInContext
@@ -114,7 +116,7 @@ method @guardDeclarationListAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
+#!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @guardDeclarationListAST guardSemanticAnalysis
@@ -444,87 +446,10 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   case arrayAccess (* @location endOfIndex) :
     error endOfIndex : "a property access is required here" : outConvenienceGuardGenerationIR
   end
-
-
-
-
-
-
-
-##--- Get function name and map containing the function definition
-#  let routineMangledName = routineMangledNameFromCall (!"$" + [[currentObject type] key] !methodName !mArguments)
-##--- Get called function signature
-#  let signature = [mArguments routineSignature !methodName.location]
-##--- Search function in map
-#  [inContext.mRoutineMapForContext searchKey
-#    !methodName
-#    !signature
-#    ?let @lstring unused LLVMInvocationRoutineName
-#    ?@routineDescriptor routineDescriptor
-#    ?* # let @location outKeyLocation
-#  ]
-##  [currentMap searchRoutine
-##    !methodName
-##    !signature
-##    ?* # let @lstring LLVMInvocationRoutineName
-##    ?@routineDescriptor routineDescriptor
-##  ]
-##--- Add receiver as first parameter
-#  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-##  switch routineDescriptor.mRoutineCallingScheme
-##  case staticCall :
-#    effectiveParameterListIR += !.outputInput !currentObject # Add receiver as first argument
-##  case propertyIndirectCall (* *) :
-##  end
-##---
-##  let isPublic = routineDescriptor.mIsPublic
-##  let routineKind = routineDescriptor.mRoutineKind
-##  let calleeMode = [routineKind executionMode]
-#  let formalSignature = routineDescriptor.mSignature
-##--- Check routine is actually a function
-#  if routineDescriptor.mReturnTypeProxy != .null then
-#    error methodName : "not a procedure (returns a value)" : routineDescriptor, outConvenienceGuardGenerationIR
-#  else
-#  #--- Check modes
-##    let calleeKind = checkMode (
-##      !callerMode:inCurrentMode
-##      !calleeMode:calleeMode
-##      !kind:routineKind
-##      !error:methodName.location
-##    )
-#  #--- Analyze effective parameters
-#    analyzeEffectiveParameters (
-#      !self:inSelfType
-#      !formal:formalSignature
-#      !effective:mArguments
-#      !errorLocation:methodName.location
-#      !callerForInvocationGraph:inCallerNameForInvocationGraph
-#      !context:inContext
-#      !requiredMode:inCurrentMode
-#      !?temporary:ioTemporaries
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#      !?variableMap:ioUniversalMap
-#      !?alloca:baseGuardAllocaList
-#      !?instructionListIR:baseGuardInstructionGenerationList
-#      !?effectiveIR:effectiveParameterListIR
-#    )
-#  #--- Generate call
-##    switch routineDescriptor.mRoutineCallingScheme
-##    case staticCall :
-#      outConvenienceGuardGenerationIR = .convenienceGuard {
-#        !baseGuardAllocaList:baseGuardAllocaList
-#        !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-#        !baseGuardMangledName:routineMangledName.string
-#        !baseGuardEffectiveParameterList:effectiveParameterListIR
-#      }
-##    case propertyIndirectCall (* *) :
-##      error .nowhere : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
-##    end
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
+#!  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardKindGenerationIR {

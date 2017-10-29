@@ -14198,56 +14198,56 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_isr_i38_parse (C_Lexique_plm_5F_l
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_guard_i39_ (GALGAS_guardDeclarationListAST & ioArgument_ioGuardListAST,
                                                            C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_bool var_public_1433 ;
+  GALGAS_bool var_public_1435 ;
   switch (select_plm_5F_syntax_45 (inCompiler)) {
   case 1: {
-    var_public_1433 = GALGAS_bool (false) ;
+    var_public_1435 = GALGAS_bool (false) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_public) COMMA_SOURCE_FILE ("declaration-guard.galgas", 35)) ;
-    var_public_1433 = GALGAS_bool (true) ;
+    var_public_1435 = GALGAS_bool (true) ;
   } break ;
   default:
     break ;
   }
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_guard) COMMA_SOURCE_FILE ("declaration-guard.galgas", 38)) ;
-  GALGAS_lstring var_guardName_1559 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_guardName_1561 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-guard.galgas", 39)) ;
-  GALGAS_lstringlist var_attributeList_1590 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 40)) ;
+  GALGAS_lstringlist var_attributeList_1592 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 40)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_46 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_attribute_1650 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_attribute_1652 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__40_attribute) COMMA_SOURCE_FILE ("declaration-guard.galgas", 43)) ;
-      var_attributeList_1590.addAssign_operation (var_attribute_1650  COMMA_SOURCE_FILE ("declaration-guard.galgas", 44)) ;
+      var_attributeList_1592.addAssign_operation (var_attribute_1652  COMMA_SOURCE_FILE ("declaration-guard.galgas", 44)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  GALGAS_routineFormalArgumentList var_guardFormalArgumentList_1770 ;
-  nt_procedure_5F_formal_5F_arguments_ (var_guardFormalArgumentList_1770, inCompiler) ;
-  GALGAS_guardKind var_guardKind_1795 ;
+  GALGAS_routineFormalArgumentList var_guardFormalArgumentList_1772 ;
+  nt_procedure_5F_formal_5F_arguments_ (var_guardFormalArgumentList_1772, inCompiler) ;
+  GALGAS_guardKind var_guardKind_1797 ;
   switch (select_plm_5F_syntax_47 (inCompiler)) {
   case 1: {
-    var_guardKind_1795 = GALGAS_guardKind::constructor_baseGuard (SOURCE_FILE ("declaration-guard.galgas", 49)) ;
+    var_guardKind_1797 = GALGAS_guardKind::constructor_baseGuard (SOURCE_FILE ("declaration-guard.galgas", 49)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("declaration-guard.galgas", 51)) ;
-    GALGAS_callInstructionAST var_instruction_1892 ;
-    nt_procedure_5F_call_ (var_instruction_1892, inCompiler) ;
-    var_guardKind_1795 = GALGAS_guardKind::constructor_convenienceGuard (var_instruction_1892  COMMA_SOURCE_FILE ("declaration-guard.galgas", 53)) ;
+    GALGAS_callInstructionAST var_instruction_1894 ;
+    nt_procedure_5F_call_ (var_instruction_1894, inCompiler) ;
+    var_guardKind_1797 = GALGAS_guardKind::constructor_convenienceGuard (var_instruction_1894  COMMA_SOURCE_FILE ("declaration-guard.galgas", 53)) ;
   } break ;
   default:
     break ;
   }
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-guard.galgas", 55)) ;
-  GALGAS_instructionListAST var_instructionList_2007 ;
-  nt_instructionList_ (var_instructionList_2007, inCompiler) ;
+  GALGAS_instructionListAST var_instructionList_2009 ;
+  nt_instructionList_ (var_instructionList_2009, inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-guard.galgas", 57)) ;
-  ioArgument_ioGuardListAST.addAssign_operation (var_guardName_1559, var_public_1433, var_attributeList_1590, var_guardFormalArgumentList_1770, var_guardKind_1795, var_instructionList_2007, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 65))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 58)) ;
+  ioArgument_ioGuardListAST.addAssign_operation (var_guardName_1561, var_public_1435, var_attributeList_1592, var_guardFormalArgumentList_1772, var_guardKind_1797, var_instructionList_2009, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 65))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 58)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
