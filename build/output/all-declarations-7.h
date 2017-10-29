@@ -522,7 +522,7 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            const GALGAS_PLMType constin_inSelfType,
                                            const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                            const GALGAS_semanticContext constin_inContext,
-                                           const GALGAS_mode constin_inMode,
+                                           const GALGAS_mode constin_inCurrentMode,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                            GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,

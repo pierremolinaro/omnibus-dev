@@ -188,7 +188,7 @@ getter @PLMType llvmTypeName -> @string {
     result = "i" + bitCount
   case arrayType (@lstring typeName * * * * *) :
     result = "%" + [typeName assemblerRepresentation]
-  case function (descriptor) :
+  case function (@routineDescriptor descriptor) :
     if descriptor.mReturnTypeProxy == .null then
       result = "void"
     else
