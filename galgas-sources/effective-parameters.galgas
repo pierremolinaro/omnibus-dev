@@ -201,7 +201,7 @@ proc analyzeEffectiveParameters
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
        case literalString :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case enumeration (* *) :
+      case enumeration (* * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case function (*) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR

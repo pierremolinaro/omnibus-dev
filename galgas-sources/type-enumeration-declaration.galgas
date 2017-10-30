@@ -65,6 +65,19 @@ override method @enumerationDeclaration enterInPrecedenceGraph
   let typeName = llvmRegularTypeMangledNameFromName (!mEnumerationName)
   [!?ioGraph addNode !typeName !self]
   [!?ioGraph addEdge !typeName !llvmRegularTypeMangledNameFromName (![boolTypeName () nowhere])]
+#--- Mark dependance from $uintN used for value property
+  @bigint maxValue = 0G
+  for (* value) in mCaseNameList do
+    if maxValue < value then
+      maxValue = value
+    end
+  end
+  @uint representationBitCount = 0
+  loop (@uint.max) while maxValue > 0G do
+    representationBitCount ++ ;
+    maxValue = maxValue / 2G
+  end
+  [!?ioGraph addEdge !typeName !llvmRegularTypeMangledNameFromName (!["uint" + representationBitCount nowhere])]
 }
 
 #·······················································································································
@@ -98,14 +111,48 @@ override method @enumerationDeclaration enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-#---
+#--- Build constant map
   @constantMap enumConstantMap = {}
+  @bigint maxValue = 0G
   for (name value) in mCaseNameList do
     [!?enumConstantMap insertKey !name !value !mEnumerationName]
+    if maxValue < value then
+      maxValue = value
+    end
   end
+#--- Compute representation bit count
+  @uint representationBitCount = 0
+  loop (@uint.max) while maxValue > 0G do
+    representationBitCount ++ ;
+    maxValue = maxValue / 2G
+  end
+#--- Build property map
+  let integerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !.new {!"uint" + representationBitCount !mEnumerationName}}
+  @propertyMap propertyMap = {}
+  let accessorMangledName = routineMangledNameFromCall (!"" !.new {!"uint" !mEnumerationName} !{})
+  let routineDescriptor = @routineDescriptor.new {
+    !true # Routine is declared with "public"
+    !false # Routine is declared with @exported attribute
+    !.function {!executionMode:.anyMode}
+    !{} # Signature
+    !integerType # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
+    !true # Routine is declared with @access attribute
+    !false # Routine is declared with @mutating attribute
+  }
+  [!?propertyMap insertKey
+    !accessorMangledName
+    !true # Public
+    !.nonVirtualMethod {!descriptor:routineDescriptor}
+  ]
+#--- Insert enumeration in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName
-    !type:.enumeration {!constantMap:enumConstantMap !plmTypeName:mEnumerationName}
+    !type:.enumeration {
+      !constantMap:enumConstantMap
+      !propertyMap:propertyMap
+      !bitCount:representationBitCount
+      !plmTypeName:mEnumerationName
+    }
     !index:[ioContext.mTypeMap count]
   ]
 #--- Infix operators
@@ -157,9 +204,63 @@ proc enterEnumerationComparisonOperators
 
 override method @enumerationDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+  @bigint maxValue = 0G
+  for (* value) in mCaseNameList do
+    if maxValue < value then
+      maxValue = value
+    end
+  end
+#--- Compute representation bit count
+  @uint representationBitCount = 0
+  loop (@uint.max) while maxValue > 0G do
+    representationBitCount ++ ;
+    maxValue = maxValue / 2G
+  end
+#--- Mangled routine name
+  let routineMangledName = routineMangledNameFromAST (
+    !"$" + mEnumerationName
+    !.new {!"uint" !mEnumerationName}
+    !{}
+  )
+#--- Enter subprogram invocation graph
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !routineMangledName
+      !routineMangledName
+    ]
+  end
+  ioIntermediateCodeStruct.mUIntFunctionForEnumerationList += !mEnumerationName !representationBitCount
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  GENERATE PROPERTY ACCESS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @uintFunctionForEnumerationList {
+  @lstring mEnumerationName
+  @uint mBitCount
+}
+
+#·······················································································································
+
+method @uintFunctionForEnumerationList generateLLVMcode ?!@string ioLLVMcode {
+  for (enumerationName bitCount) in self do
+    let routineMangledName = routineMangledNameFromAST (
+      !"$" + enumerationName
+      !.new {!"uint" !enumerationName}
+      !{}
+    )
+    let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
+    let type = "i" + bitCount
+    ioLLVMcode += llvmTitleComment (!routineMangledName)
+    ioLLVMcode += "define internal " + type + "  @" + routineLLVMName + " (" + type + "* %inValue) nounwind {\n"
+    ioLLVMcode += "  %r = load " + type + ", " + type + "* %inValue\n"
+    ioLLVMcode += "  ret " + type + " %r\n"
+    ioLLVMcode += "}\n\n"
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

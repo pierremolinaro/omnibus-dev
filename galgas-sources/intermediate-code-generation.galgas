@@ -23,7 +23,7 @@ struct @intermediateCodeStruct {
   @targetParameters mTargetParameters
   @moduleListIR mModuleList
   @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
-  @propertyAccessRoutineList mPropertyAccessRoutineList
+  @uintFunctionForEnumerationList mUIntFunctionForEnumerationList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
