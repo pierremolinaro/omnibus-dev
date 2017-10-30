@@ -3082,11 +3082,12 @@ typeComparisonResult cEnumAssociatedValues_PLMType_opaque::compare (const cEnumA
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_PLMType_arrayType::cEnumAssociatedValues_PLMType_arrayType (const GALGAS_lstring & inAssociatedValue0,
-                                                                                  const GALGAS_PLMType & inAssociatedValue1,
-                                                                                  const GALGAS_bigint & inAssociatedValue2,
-                                                                                  const GALGAS_constantMap & inAssociatedValue3,
-                                                                                  const GALGAS_PLMTypeFlags & inAssociatedValue4,
-                                                                                  const GALGAS_string & inAssociatedValue5
+                                                                                  const GALGAS_propertyMap & inAssociatedValue1,
+                                                                                  const GALGAS_PLMType & inAssociatedValue2,
+                                                                                  const GALGAS_bigint & inAssociatedValue3,
+                                                                                  const GALGAS_constantMap & inAssociatedValue4,
+                                                                                  const GALGAS_PLMTypeFlags & inAssociatedValue5,
+                                                                                  const GALGAS_string & inAssociatedValue6
                                                                                   COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -3094,7 +3095,8 @@ mAssociatedValue1 (inAssociatedValue1),
 mAssociatedValue2 (inAssociatedValue2),
 mAssociatedValue3 (inAssociatedValue3),
 mAssociatedValue4 (inAssociatedValue4),
-mAssociatedValue5 (inAssociatedValue5) {
+mAssociatedValue5 (inAssociatedValue5),
+mAssociatedValue6 (inAssociatedValue6) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3108,6 +3110,7 @@ void cEnumAssociatedValues_PLMType_arrayType::description (C_String & ioString,
   mAssociatedValue3.description (ioString, inIndentation) ;
   mAssociatedValue4.description (ioString, inIndentation) ;
   mAssociatedValue5.description (ioString, inIndentation) ;
+  mAssociatedValue6.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -3134,6 +3137,9 @@ typeComparisonResult cEnumAssociatedValues_PLMType_arrayType::compare (const cEn
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue5.objectCompare (ptr->mAssociatedValue5) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue6.objectCompare (ptr->mAssociatedValue6) ;
   }
   return result ;
 }
@@ -3309,17 +3315,18 @@ GALGAS_PLMType GALGAS_PLMType::constructor_opaque (const GALGAS_bigint & inAssoc
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_PLMType GALGAS_PLMType::constructor_arrayType (const GALGAS_lstring & inAssociatedValue0,
-                                                      const GALGAS_PLMType & inAssociatedValue1,
-                                                      const GALGAS_bigint & inAssociatedValue2,
-                                                      const GALGAS_constantMap & inAssociatedValue3,
-                                                      const GALGAS_PLMTypeFlags & inAssociatedValue4,
-                                                      const GALGAS_string & inAssociatedValue5
+                                                      const GALGAS_propertyMap & inAssociatedValue1,
+                                                      const GALGAS_PLMType & inAssociatedValue2,
+                                                      const GALGAS_bigint & inAssociatedValue3,
+                                                      const GALGAS_constantMap & inAssociatedValue4,
+                                                      const GALGAS_PLMTypeFlags & inAssociatedValue5,
+                                                      const GALGAS_string & inAssociatedValue6
                                                       COMMA_LOCATION_ARGS) {
   GALGAS_PLMType result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid () && inAssociatedValue6.isValid ()) {
     result.mEnum = kEnum_arrayType ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_PLMType_arrayType (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_PLMType_arrayType (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5, inAssociatedValue6 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -3456,11 +3463,12 @@ void GALGAS_PLMType::method_opaque (GALGAS_bigint & outAssociatedValue0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_PLMType::method_arrayType (GALGAS_lstring & outAssociatedValue0,
-                                       GALGAS_PLMType & outAssociatedValue1,
-                                       GALGAS_bigint & outAssociatedValue2,
-                                       GALGAS_constantMap & outAssociatedValue3,
-                                       GALGAS_PLMTypeFlags & outAssociatedValue4,
-                                       GALGAS_string & outAssociatedValue5,
+                                       GALGAS_propertyMap & outAssociatedValue1,
+                                       GALGAS_PLMType & outAssociatedValue2,
+                                       GALGAS_bigint & outAssociatedValue3,
+                                       GALGAS_constantMap & outAssociatedValue4,
+                                       GALGAS_PLMTypeFlags & outAssociatedValue5,
+                                       GALGAS_string & outAssociatedValue6,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_arrayType) {
@@ -3470,6 +3478,7 @@ void GALGAS_PLMType::method_arrayType (GALGAS_lstring & outAssociatedValue0,
     outAssociatedValue3.drop () ;
     outAssociatedValue4.drop () ;
     outAssociatedValue5.drop () ;
+    outAssociatedValue6.drop () ;
     C_String s ;
     s << "method @PLMType arrayType invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -3481,6 +3490,7 @@ void GALGAS_PLMType::method_arrayType (GALGAS_lstring & outAssociatedValue0,
     outAssociatedValue3 = ptr->mAssociatedValue3 ;
     outAssociatedValue4 = ptr->mAssociatedValue4 ;
     outAssociatedValue5 = ptr->mAssociatedValue5 ;
+    outAssociatedValue6 = ptr->mAssociatedValue6 ;
   }
 }
 
@@ -3669,35 +3679,29 @@ GALGAS_PLMType GALGAS_PLMType::extractObject (const GALGAS_object & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_propertyAccessKind_constant::cEnumAssociatedValues_propertyAccessKind_constant (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                                      const GALGAS_string & inAssociatedValue1
-                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_propertyAccessKind_constantProperty::cEnumAssociatedValues_propertyAccessKind_constantProperty (const GALGAS_objectIR & inAssociatedValue0
+                                                                                                                      COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
+mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_propertyAccessKind_constant::description (C_String & ioString,
-                                                                     const int32_t inIndentation) const {
+void cEnumAssociatedValues_propertyAccessKind_constantProperty::description (C_String & ioString,
+                                                                             const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_propertyAccessKind_constant::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_propertyAccessKind_constant * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_constant *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_propertyAccessKind_constantProperty::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyAccessKind_constantProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_constantProperty *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
   }
   return result ;
 }
@@ -3775,14 +3779,13 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_constant (const GALGAS_PLMType & inAssociatedValue0,
-                                                                           const GALGAS_string & inAssociatedValue1
-                                                                           COMMA_LOCATION_ARGS) {
+GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_constantProperty (const GALGAS_objectIR & inAssociatedValue0
+                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_propertyAccessKind result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_constant ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_constantProperty ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_constant (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_constantProperty (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -3822,20 +3825,17 @@ GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_nonVirtualMetho
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessKind::method_constant (GALGAS_PLMType & outAssociatedValue0,
-                                                 GALGAS_string & outAssociatedValue1,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_constant) {
+void GALGAS_propertyAccessKind::method_constantProperty (GALGAS_objectIR & outAssociatedValue0,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_constantProperty) {
     outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
     C_String s ;
-    s << "method @propertyAccessKind constant invoked with an invalid enum value" ;
+    s << "method @propertyAccessKind constantProperty invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_propertyAccessKind_constant * ptr = (const cEnumAssociatedValues_propertyAccessKind_constant *) unsafePointer () ;
+    const cEnumAssociatedValues_propertyAccessKind_constantProperty * ptr = (const cEnumAssociatedValues_propertyAccessKind_constantProperty *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -3878,15 +3878,15 @@ void GALGAS_propertyAccessKind::method_nonVirtualMethod (GALGAS_routineDescripto
 
 static const char * gEnumNameArrayFor_propertyAccessKind [4] = {
   "(not built)",
-  "constant",
+  "constantProperty",
   "indexed",
   "nonVirtualMethod"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_propertyAccessKind::getter_isConstant (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_constant == mEnum) ;
+GALGAS_bool GALGAS_propertyAccessKind::getter_isConstantProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_constantProperty == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

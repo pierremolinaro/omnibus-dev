@@ -197,16 +197,6 @@ void callExtensionSetter_closeOverride (class cPtr_universalPropertyAndRoutineMa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Extension getter '@unifiedTypeMap-proxy equatable' (as function)                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool extensionGetter_equatable (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                         Extension getter '@unifiedTypeMap-proxy instanciable' (as function)                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

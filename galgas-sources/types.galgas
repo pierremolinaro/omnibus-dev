@@ -24,30 +24,41 @@ enum @PLMType {
   case staticInteger
   case opaque (@bigint bitCount @PLMTypeFlags flags @string plmTypeName)
   case arrayType (@lstring typeName
+                  @propertyMap propertyMap
                   @PLMType elementType
                   @bigint size
                   @constantMap constantMap
                   @PLMTypeFlags flags
                   @string plmTypeName)
   case function (@routineDescriptor descriptor)
-#  case function (@routineDescriptor @routineTypedSignature signature @mode mode @unifiedTypeMap-proxy returnTypeProxy)
   case pointer (@PLMType pointee)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared map @unifiedTypeMap %selectors {
-  @PLMType type
-  @uint index
-
-  insert insertType error message "the '%K' type is already declared in %L"
-  search searchKey error message "there is no '%K' type"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-getter @unifiedTypeMap-proxy equatable -> @bool {
-  result = [[self type] equatable]
+getter @PLMType propertyMap -> @propertyMap {
+  switch self
+  case void :
+    result = {}
+  case boolean :
+    result = {}
+  case literalString, staticInteger :
+    result = {}
+  case enumeration (* *) :
+    result = {}
+  case structure (* propertyMap * * *) :
+    result = propertyMap
+  case integer (* * * * *) :
+    result = {}
+  case opaque (* * *) :
+    result = {}
+  case arrayType (* propertyMap * * * * *) :
+    result = propertyMap
+  case function (*) :
+    result = {}
+  case pointer (*) :
+    result = {}
+  end  
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -68,7 +79,7 @@ getter @PLMType equatable -> @bool {
     result = true
   case opaque (* flags *) :
     result = [flags equatable]
-  case arrayType (* * * * flags *) :
+  case arrayType (* * * * * flags *) :
     result = [flags equatable]
   case function (*) :
     result = false
@@ -101,7 +112,7 @@ getter @PLMType instanciable -> @bool {
     result = true
   case opaque (* flags *) :
     result = [flags instanciable]
-  case arrayType (* * * * flags *) :
+  case arrayType (* * * * * flags *) :
     result = [flags instanciable]
   case function (*) :
     result = false
@@ -134,7 +145,7 @@ getter @PLMType copyable -> @bool {
     result = true
   case opaque (* flags *) :
     result = [flags copyable]
-  case arrayType (* * * * flags *) :
+  case arrayType (* * * * * flags *) :
     result = [flags copyable]
   case function (*) :
     result = false
@@ -157,7 +168,7 @@ getter @PLMType classConstantMap -> @constantMap {
     result = {}
   case opaque (* * *) :
     result = {}
-  case arrayType (* * * @constantMap constantMap * *) :
+  case arrayType (* * * * @constantMap constantMap * *) :
     result = constantMap
   case function (*) :
     result = {}
@@ -186,7 +197,7 @@ getter @PLMType llvmTypeName -> @string {
     result = "—"
   case opaque (@bigint bitCount * *) :
     result = "i" + bitCount
-  case arrayType (@lstring typeName * * * * *) :
+  case arrayType (@lstring typeName * * * * * *) :
     result = "%" + [typeName assemblerRepresentation]
   case function (@routineDescriptor descriptor) :
     if descriptor.mReturnTypeProxy == .null then
@@ -230,7 +241,7 @@ getter @PLMType key -> @string {
     result = staticIntegerTypeName ()
   case opaque (* * plmTypeName) :
     result = plmTypeName
-  case arrayType (* * * * * plmTypeName) :
+  case arrayType (* * * * * * plmTypeName) :
     result = plmTypeName
   case function (*) :
     error ["" nowhere] : "«internal error @PLMType key function»" : result
@@ -260,7 +271,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Static Integer"
   case opaque (@bigint bitCount * *) :
     result = "Opaque (" + bitCount + " bits)"
-  case arrayType (* * * * * *) :
+  case arrayType (* * * * * * *) :
     result = "Array"
   case function (*) :
     result = "Function"
@@ -270,7 +281,17 @@ getter @PLMType descriptionForHTMLFile -> @string {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  BUILD TYPE MAP HTML FILE                                                                                                      
+
+shared map @unifiedTypeMap %selectors {
+  @PLMType type
+  @uint index
+
+  insert insertType error message "the '%K' type is already declared in %L"
+  search searchKey error message "there is no '%K' type"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  BUILD TYPE MAP HTML FILE                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildTypeMapHTMLFile

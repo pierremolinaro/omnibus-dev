@@ -58,19 +58,19 @@ task T priority 12 stackSize 512 {
     if self.index == SIZE {
       self.index = 0
     }
-    for i $uint32 in 0 ..< $A.size {
+    for i $uint32 in 0 ..< $A.count {
       self.array [i] +%= 1
     }
     self.array2 = self.array 
     lcd.goto (!line:0 !column:0)
-    for i $uint32 in 0 ..< $A.size {
+    for i $uint32 in 0 ..< $A.count {
       lcd.printUnsigned (!self.array2 [i])
       lcd.printSpaces (!1)
     }
     
     var a = $A ()
     var x $uint32 = 0
-    for i $uint32 in 0 ..< $A.size {
+    for i $uint32 in 0 ..< $A.count {
       a [i] = 9
       a [i] += 9
       x += a [i]

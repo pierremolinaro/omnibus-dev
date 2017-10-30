@@ -214,7 +214,7 @@ list @propertyList {
 #·······················································································································
 
 enum @propertyAccessKind {
-  case constant (@PLMType type @string llvmValue)
+  case constantProperty (@objectIR value)
   case indexed  (@PLMType type @uint index)
   case nonVirtualMethod (@routineDescriptor descriptor)
 }
@@ -418,9 +418,6 @@ method @structurePropertyListAST-element enterInContext
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Init expression
-  @instructionListIR initInstructionGenerationList = {}
-  @allocaList allocaList = {}
-  @semanticTemporariesStruct temporaries = .default
   switch mInitialisation
   case expression (initExpression) :
     [initExpression analyzeExpression
@@ -430,14 +427,14 @@ method @structurePropertyListAST-element enterInContext
       !optionalTargetType:optionalPropertyType
       !context:ioContext
       !mode:.bootMode
-      !?temporary:temporaries
+      !?temporary:*
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:universalMap
-      !?alloca:allocaList
-      !?instructionListIR:initInstructionGenerationList
+      !?alloca:*
+      !?instructionListIR:*
       ?result:let @objectIR expressionIR
     ]
-    if (([initInstructionGenerationList length] + [allocaList length]) > 0) || not [expressionIR isStatic] then
+    if not [expressionIR isStatic] then
       error mPropertyName : "initialization expression cannot be computed statically"
     end
     @PLMType actualPropertyType
@@ -456,7 +453,7 @@ method @structurePropertyListAST-element enterInContext
      [!?propertyMap insertKey
         !mPropertyName
         !mIsPublic
-        !.constant {!type:actualPropertyType !llvmValue:[expressionIR name]}
+        !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
       ]
     else
       let propertyIndex = [propertyList length]

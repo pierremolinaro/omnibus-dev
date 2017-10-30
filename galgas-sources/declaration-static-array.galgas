@@ -422,12 +422,20 @@ override method @staticListAST enterInContext
     end
   end
   [!?ioStaticListValueMap insertKey !mStaticListName !stringValueList]
+#-------------------------------------------------------------------- List type property map
+  @propertyMap listTypePropertyMap = {}
+  [!?listTypePropertyMap insertKey # "count" property
+    !.new {!"count" !mStaticListName.location}
+    !true # public
+    !.constantProperty {!value:.literalInteger {!type:.staticInteger !value:[mValueList length]}}
+  ]
 #-------------------------------------------------------------------- Enter list type in type map
   let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmElementTypeName} type]
   [!?ioContext.mTypeMap insertType
     !lkey:plmNameForStaticListType (!mStaticListName)
     !type:.arrayType {
-      !typeName:[llvmNameForStaticListType (!mStaticListName) nowhere]
+      !typeName:.new {!llvmNameForStaticListType (!mStaticListName) !mStaticListName.location}
+      !propertyMap: listTypePropertyMap
       !elementType:elementType
       !size:[stringValueList length]
       !constantMap: {}

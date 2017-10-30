@@ -281,7 +281,7 @@ method @controlRegisterDeclarationAST controlRegisterType
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case opaque (* * *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case arrayType (* * * * * *) :
+  case arrayType (* * * * * * *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case function (*) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount

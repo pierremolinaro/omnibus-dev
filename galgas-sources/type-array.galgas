@@ -101,7 +101,6 @@ override method @typeArrayDeclarationAST enterInContext
   @semanticTemporariesStruct temporaries = .default
   variableMapWithConstants (
     !context:ioContext
-#    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
   [mSizeExpression analyzeExpression
@@ -118,19 +117,27 @@ override method @typeArrayDeclarationAST enterInContext
     !?instructionListIR:initInstructionGenerationList
     ?result:let @objectIR sizeExpressionIR
   ]
-  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
+  if not [sizeExpressionIR isLiteralInteger] then
     error mSizeExpressionLocation : "array size expression is not static"
   else
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
     let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName} type]
-  #--- Class method map : add "size" method
+  #--- Class method map : add "count" constructor
     @constantMap classConstantMap = {}
-    [!?classConstantMap insertKey !["size" nowhere] !arraySize ![staticIntegerTypeName () nowhere]]
+   [!?classConstantMap insertKey !.new {!"count" !mArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
+  #-------------------------------------------------------------------- List type property map
+    @propertyMap arrayTypePropertyMap = {}
+    [!?arrayTypePropertyMap insertKey # "count" property
+      !.new {!"count" !mArrayTypeName.location}
+      !true # public
+      !.constantProperty {!value:.literalInteger {!type:.staticInteger !value:arraySize}}
+    ]
   #--- Enter in type map
     [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName
       !type:.arrayType {
         !typeName:mArrayTypeName
+        !propertyMap:arrayTypePropertyMap
         !elementType:elementType
         !size:arraySize
         !constantMap:classConstantMap
