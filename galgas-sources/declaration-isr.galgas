@@ -184,10 +184,10 @@ method @interruptMapIR interruptCodeGeneration
   for (lkey panicCode) in inGenerationContext.mAvailableInterruptMap do
     if not [definedInterrupts hasKey !lkey.string] then
       switch panicCode
-      case noPanicCode :
+      case noCode :
         let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
         ioAScode += s
-      case panicCode (@lbigint value) :
+      case code (@lbigint value) :
         if [option plm_options.noPanicGeneration value] then
           let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
           ioAScode += s

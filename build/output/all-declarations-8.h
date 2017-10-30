@@ -11,11 +11,11 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Function 'configurationNodeNaleForPrecedenceGraph'                                  *
+//                                 Function 'configurationNodeNameForPrecedenceGraph'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_configurationNodeNaleForPrecedenceGraph (class C_Compiler * inCompiler
+class GALGAS_string function_configurationNodeNameForPrecedenceGraph (class C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -31,14 +31,14 @@ void routine_enterBooleanOperators (class GALGAS_lstring inArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Routine 'enterEnumerationOperators'                                         *
+//                                    Routine 'enterEnumerationComparisonOperators'                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_enterEnumerationOperators (class GALGAS_lstring inArgument0,
-                                        class GALGAS_semanticContext & ioArgument1,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgument0,
+                                                  class GALGAS_semanticContext & ioArgument1,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

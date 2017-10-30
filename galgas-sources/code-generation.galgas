@@ -446,8 +446,8 @@ private proc generateCodeFiles
     for (lkey panicCode) in inAvailableInterruptMap do
       if not [inIntermediateCodeStruct.mInterruptMapIR hasKey !lkey.string] then
         switch panicCode
-        case noPanicCode :
-        case panicCode (*) :
+        case noCode :
+        case code (*) :
           if first then
             first = false
           else

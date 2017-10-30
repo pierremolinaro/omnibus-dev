@@ -58,6 +58,7 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specif
 
 //----------- '' label
   public : virtual void nt_interruptConfigList_ (GALGAS_interruptionConfigurationList & outArgument0,
+                                                 GALGAS_enumerationConstantList & outArgument1,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'key' non terminal
