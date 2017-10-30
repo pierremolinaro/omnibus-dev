@@ -38,7 +38,7 @@ struct $semaphore {
 
   //············································································
 
-  public guard wait @noUnusedWarning() {
+  public guard wait @noUnusedWarning () {
     accept = self.value > 0
     if accept {
       self.value -= 1
