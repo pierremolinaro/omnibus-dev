@@ -193,10 +193,10 @@ PORTA_PCR0 = 1 << 8
 En utilisant la notation dédiée, on écrit maintenant~: 
 
 \begin{PLM}
-PORTA_PCR0 = $PORTA_PCR0 {MUX:1}
+PORTA_PCR0 = {PORTA_PCR0 !MUX:1}
 \end{PLM}
 
-L'expression \plm+$PORTA_PCR0 {MUX:1}+ est équivalente à \plm+1 << 8+.
+L'expression \plm+{PORTA_PCR0 !MUX:1}+ est équivalente à \plm+1 << 8+.
 
 Si l'on veut que ce port soit un \emph{collecteur ouvert} si il est programmé en sortie, il faut mettre le champ \texttt{ODE} à $1$, et on écrivait~:
 \begin{PLM}
@@ -206,7 +206,7 @@ PORTA_PCR0 = (1 << 8) | (1 << 5)
 On peut maintenant écrire~:
 
 \begin{PLM}
-PORTA_PCR0 = $PORTA_PCR0 {MUX:1, ODE:1}
+PORTA_PCR0 = {PORTA_PCR0 !MUX:1 !ODE:1}
 \end{PLM}
 
 
@@ -217,8 +217,8 @@ Examinons maintenant les conditions de validité de l'\plm=expression= dans la c
 {\bf Expression entière statique.} Le compilateur vérifie qu'elle est comprise entre $0$ et $2^n-1$, $n$ étant le nombre de bits du champ~: par exemple, pour le champ \texttt{MUX} de $3$ bits, une valeur entre $0$ et $7$. Ainsi~:
 
 \begin{PLM}
-PORTA_PCR0 = $PORTA_PCR0 {MUX:1-2} // Erreur de compilation, exp. < 0
-PORTA_PCR0 = $PORTA_PCR0 {MUX:8} // Erreur de compilation, exp. > 7
+PORTA_PCR0 = {PORTA_PCR0 !MUX:1-2} // Erreur de compilation, exp. < 0
+PORTA_PCR0 = {PORTA_PCR0 !MUX:8} // Erreur de compilation, exp. > 7
 \end{PLM}
 
 {\bf Expression entière non statique signée.} Le compilateur considère que c'est une erreur~: uniquement une expression entière non statique non signée est acceptable.
@@ -232,54 +232,24 @@ Par exemple, le champ \texttt{MUX} s'étendant sur $3$ bits, une expression de t
 
 \begin{PLM}
 let x $uint2 = 1
-PORTA_PCR0 = $PORTA_PCR0 {MUX:x} // Ok
+PORTA_PCR0 = {PORTA_PCR0 !MUX:x} // Ok
 \end{PLM}
 
 Dans le cas contraire, c'est-à-dire si l'\plm=expression= est d'un type entier non signé dont le nombre de bits est strictement supérieur au nombre de bits du champ, une vérification de la valeur à l'exécution est effectuée~: si la valeur de l'\plm+expression+ est trop grande, la panique (code~: voir \refTableauPage{tableauCodePanique}) est déclenchée. Si la génération de code panique n'est pas activée, le débordement est silencieusement ignoré. Par exemple~:
 
 \begin{PLM}
 let x $uint8 = ... 
-PORTA_PCR0 = $PORTA_PCR0 {MUX:x} // Vérification à l'exécution
+PORTA_PCR0 = {PORTA_PCR0 !MUX:x} // Vérification à l'exécution
 \end{PLM}
 
 Si le code ci-dessus apparaît dans une routine où la génération de panique est interdite (par exemple, dans une routine \plm=boot=), alors il déclenche une erreur de compilation. Il faut ajouter une troncature explicite pour le code soit accepté~:
 
 \begin{PLM}
 let x $uint8 = ... 
-PORTA_PCR0 = $PORTA_PCR0 {MUX:truncate x : $uint3}
+PORTA_PCR0 = {PORTA_PCR0 !MUX:truncate x : $uint3}
 \end{PLM}
 
 Ce code n'effectue aucune vérification à l'exécution.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Constantes associées aux champs}
-
-Il y a une variante de la construction précédente, qui consiste à ommettre l'expression associée à chaque champ. Dans ce cas, c'est la valeur maximum du champ est utilisée. Par exemple, pour le registre \texttt{PORTA\_PCR0} décrit à la \refFigurePage{}{definitionPORTxPCRn}, comme le champ \texttt{MUX} s'étend sur $3$ bits, \plm+$PORTA_PCR0 {MUX}+ est équivalent à  \plm+$PORTA_PCR0 {MUX:7}+. De même, \texttt{ODE} étant un champ booléen, \plm+$PORTA_PCR0 {ODE}+ est équivalent à \plm+$PORTA_PCR0 {ODE:1}+.
-
-Les deux variantes peuvent être utilisées dans la même construction~; au lieu de~:
-\begin{PLM}
-PORTA_PCR0 = $PORTA_PCR0 {MUX:1, ODE:1}
-\end{PLM}
-
-On peut écrire~:
-\begin{PLM}
-PORTA_PCR0 = $PORTA_PCR0 {MUX:1, ODE}
-\end{PLM}
 
 
 

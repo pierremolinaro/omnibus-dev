@@ -128,7 +128,7 @@ syntax extension plm_syntax {
     @moduleInstanciationArgumentListAST moduleInstanciationArgumentList = {}
     repeat
     while
-      $!$ ?let selector
+      $!selector:$ ?let selector
       <expression> ?let expression
       moduleInstanciationArgumentList += !selector !expression
     end

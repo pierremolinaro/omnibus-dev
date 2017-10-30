@@ -53,7 +53,7 @@ override method @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
 
 override method @addressofExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool unused inGuard
+  ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -65,30 +65,34 @@ override method @addressofExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze LValue
-  [mLValue analyzeLValue
-    !self: inSelfType
-    !propertiesAreMutable: true
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-    !context: inContext
-    !mode: inCurrentMode
-    !?temporary: ioTemporaries
-    !?staticStringMap: ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: ioInstructionGenerationList
-    ?let @LValueRepresentation lvalueIR
-  ]
-  let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
-    !inContext.mTypeMap
-    !["uint" + inContext.mPointerSize nowhere]
-  }
-  let resultType = [resultTypeProxy type]
-  getNewTempVariable (!resultType !?ioTemporaries ?outResult)
-  ioInstructionGenerationList += !@addressofInstructionIR.new {
-    !outResult
-    !lvalueIR
-  }
+  if inGuard then
+    error mLValue.mIdentifier : "addressof () cannot be used in guard" : outResult
+  else
+  #--- Analyze LValue
+    [mLValue analyzeLValue
+      !self: inSelfType
+      !propertiesAreMutable: true
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      ?let @LValueRepresentation lvalueIR
+    ]
+    let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
+      !inContext.mTypeMap
+      !["uint" + inContext.mPointerSize nowhere]
+    }
+    let resultType = [resultTypeProxy type]
+    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    ioInstructionGenerationList += !@addressofInstructionIR.new {
+      !outResult
+      !lvalueIR
+    }
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

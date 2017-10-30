@@ -32,7 +32,7 @@ system section ledOff () {
   var index $uint32 = 5
   globalBit = PIPO [index].bit.bool
   PIPO [2] = globalVar
-  PIPO [index] = $PIPO {fields:5, bit}
+  PIPO [index] = {PIPO !fields:5 !bit:1}
   IO1SET = 1 << 23 // Led Off
 }
 

@@ -42,25 +42,25 @@ syntax extension plm_syntax {
     $($
     repeat
     while
-      $!$ ?let selector
+      $!selector:$ ?let selector
       <expression> ?let expression
       outEffectiveParameterList += !.output{!exp:expression !endOfExp:.here} !selector
     while
-      $!?$ ?let selector
+      $!?selector:$ ?let selector
       $identifier$ ?let effectiveParameterName
       outEffectiveParameterList += !.outputInput{!name:effectiveParameterName} !selector
     while
-      $!?$ ?let selector
+      $!?selector:$ ?let selector
       $self$
       $.$
       $identifier$ ?let effectiveParameterName
       outEffectiveParameterList += !.outputInputSelfVariable{!name:effectiveParameterName} !selector
     while
-      $?$ ?let selector
+      $?selector:$ ?let selector
       $identifier$ ?let effectiveParameterName
       outEffectiveParameterList += !.input{!name:effectiveParameterName} !selector
     while
-      $?$ ?let selector
+      $?selector:$ ?let selector
       @bool constant
       select
         $var$

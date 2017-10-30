@@ -403,14 +403,14 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
           }while (mLoop && scanningOk) ;
           mLoop = YES ;
           if (scanningOk && ([self testForInputChar:58])) {
-            mTokenCode = plm_lexique_1__3F__21_ ;
+            mTokenCode = plm_lexique_1__3F__21_selector_3A_ ;
           }else{
             scanner_cocoa_routine_resetString (& scanningOk, mLexicalAttribute_tokenString) ;
             [self restoreScanningPoint: & locationForTag_onlyExclamationInterrogationMark] ;
-            mTokenCode = plm_lexique_1__3F__21_ ;
+            mTokenCode = plm_lexique_1__3F__21_selector_3A_ ;
           }
         }else{
-          mTokenCode = plm_lexique_1__3F__21_ ;
+          mTokenCode = plm_lexique_1__3F__21_selector_3A_ ;
         }
       }else if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
         do {
@@ -422,14 +422,14 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
         }while (mLoop && scanningOk) ;
         mLoop = YES ;
         if (scanningOk && ([self testForInputChar:58])) {
-          mTokenCode = plm_lexique_1__3F_ ;
+          mTokenCode = plm_lexique_1__3F_selector_3A_ ;
         }else{
           scanner_cocoa_routine_resetString (& scanningOk, mLexicalAttribute_tokenString) ;
           [self restoreScanningPoint: & locationForTag_onlyInterrogationMark] ;
-          mTokenCode = plm_lexique_1__3F_ ;
+          mTokenCode = plm_lexique_1__3F_selector_3A_ ;
         }
       }else{
-        mTokenCode = plm_lexique_1__3F_ ;
+        mTokenCode = plm_lexique_1__3F_selector_3A_ ;
       }
     }else if (scanningOk && ([self testForInputChar:33])) {
       scanningPointStructForCocoa locationForTag_onlyExclamationMark ;
@@ -447,14 +447,14 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
           }while (mLoop && scanningOk) ;
           mLoop = YES ;
           if (scanningOk && ([self testForInputChar:58])) {
-            mTokenCode = plm_lexique_1__21__3F_ ;
+            mTokenCode = plm_lexique_1__21__3F_selector_3A_ ;
           }else{
             scanner_cocoa_routine_resetString (& scanningOk, mLexicalAttribute_tokenString) ;
             [self restoreScanningPoint: & locationForTag_onlyInterrogationExclamationMark] ;
-            mTokenCode = plm_lexique_1__21__3F_ ;
+            mTokenCode = plm_lexique_1__21__3F_selector_3A_ ;
           }
         }else{
-          mTokenCode = plm_lexique_1__21__3F_ ;
+          mTokenCode = plm_lexique_1__21__3F_selector_3A_ ;
         }
       }else if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
         do {
@@ -466,14 +466,14 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
         }while (mLoop && scanningOk) ;
         mLoop = YES ;
         if (scanningOk && ([self testForInputChar:58])) {
-          mTokenCode = plm_lexique_1__21_ ;
+          mTokenCode = plm_lexique_1__21_selector_3A_ ;
         }else{
           scanner_cocoa_routine_resetString (& scanningOk, mLexicalAttribute_tokenString) ;
           [self restoreScanningPoint: & locationForTag_onlyExclamationMark] ;
-          mTokenCode = plm_lexique_1__21_ ;
+          mTokenCode = plm_lexique_1__21_selector_3A_ ;
         }
       }else{
-        mTokenCode = plm_lexique_1__21_ ;
+        mTokenCode = plm_lexique_1__21_selector_3A_ ;
       }
     }else if (scanningOk && ([self testForInputFromChar:1 toChar:32])) {
     }else if ([self testForInputChar:'\0']) { // End of source text ? 
@@ -533,10 +533,10 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     4 /* plm_lexique_1_integer */,
     5 /* plm_lexique_1__22_string_22_ */,
     6 /* plm_lexique_1_comment */,
-    8 /* plm_lexique_1__3F_ */,
-    8 /* plm_lexique_1__3F__21_ */,
-    8 /* plm_lexique_1__21_ */,
-    8 /* plm_lexique_1__21__3F_ */,
+    8 /* plm_lexique_1__3F_selector_3A_ */,
+    8 /* plm_lexique_1__3F__21_selector_3A_ */,
+    8 /* plm_lexique_1__21_selector_3A_ */,
+    8 /* plm_lexique_1__21__3F_selector_3A_ */,
     1 /* plm_lexique_1_addressof */,
     1 /* plm_lexique_1_and */,
     1 /* plm_lexique_1_assert */,
@@ -661,10 +661,10 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_integer */,
     NO /* plm_lexique_1__22_string_22_ */,
     NO /* plm_lexique_1_comment */,
-    YES /* plm_lexique_1__3F_ */,
-    YES /* plm_lexique_1__3F__21_ */,
-    YES /* plm_lexique_1__21_ */,
-    YES /* plm_lexique_1__21__3F_ */,
+    YES /* plm_lexique_1__3F_selector_3A_ */,
+    YES /* plm_lexique_1__3F__21_selector_3A_ */,
+    YES /* plm_lexique_1__21_selector_3A_ */,
+    YES /* plm_lexique_1__21__3F_selector_3A_ */,
     YES /* plm_lexique_1_addressof */,
     YES /* plm_lexique_1_and */,
     YES /* plm_lexique_1_assert */,

@@ -12004,13 +12004,13 @@ void extensionMethod_generateLLVM (const GALGAS_moduleListIR_2D_element inObject
                                    COMMA_UNUSED_LOCATION_ARGS) {
   ioArgument_ioLLVMcode.plusAssign_operation(function_llvmNameForGlobalVariable (inObject.mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 318)).add_operation (GALGAS_string (" = internal global "), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 318)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 318)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (inObject.mProperty_mType.getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 319)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 319)).add_operation (GALGAS_string (" {"), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 319)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 319)) ;
-  cEnumerator_operandIRList enumerator_13492 (inObject.mProperty_mInitialValueList, kENUMERATION_UP) ;
-  while (enumerator_13492.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_13492.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 321)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 321)).add_operation (extensionGetter_llvmName (enumerator_13492.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 321)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 321)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 321)) ;
-    if (enumerator_13492.hasNextObject ()) {
+  cEnumerator_operandIRList enumerator_13501 (inObject.mProperty_mInitialValueList, kENUMERATION_UP) ;
+  while (enumerator_13501.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_13501.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 321)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 321)).add_operation (extensionGetter_llvmName (enumerator_13501.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 321)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 321)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 321)) ;
+    if (enumerator_13501.hasNextObject ()) {
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 322)) ;
     }
-    enumerator_13492.gotoNextObject () ;
+    enumerator_13501.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 324)) ;
 }
