@@ -10,6 +10,194 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          Function 'llvmNameForSectionCall'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmNameForSectionCall (const GALGAS_string & constinArgument_inName,
+                                               C_Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("section.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 193)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 193)) ;
+//---
+  return result_result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmNameForSectionCall [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmNameForSectionCall (C_Compiler * inCompiler,
+                                                                       const cObjectArray & inEffectiveParameterArray,
+                                                                       const GALGAS_location & /* inErrorLocation */
+                                                                       COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_llvmNameForSectionCall (operand0,
+                                          inCompiler
+                                          COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmNameForSectionCall ("llvmNameForSectionCall",
+                                                                        functionWithGenericHeader_llvmNameForSectionCall,
+                                                                        & kTypeDescriptor_GALGAS_string,
+                                                                        1,
+                                                                        functionArgs_llvmNameForSectionCall) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'llvmNameForSectionImplementation'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmNameForSectionImplementation (const GALGAS_string & constinArgument_inName,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("section.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 199)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 199)) ;
+//---
+  return result_result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmNameForSectionImplementation [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmNameForSectionImplementation (C_Compiler * inCompiler,
+                                                                                 const cObjectArray & inEffectiveParameterArray,
+                                                                                 const GALGAS_location & /* inErrorLocation */
+                                                                                 COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_llvmNameForSectionImplementation (operand0,
+                                                    inCompiler
+                                                    COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmNameForSectionImplementation ("llvmNameForSectionImplementation",
+                                                                                  functionWithGenericHeader_llvmNameForSectionImplementation,
+                                                                                  & kTypeDescriptor_GALGAS_string,
+                                                                                  1,
+                                                                                  functionArgs_llvmNameForSectionImplementation) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'llvmNameForSafeCall'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmNameForSafeCall (const GALGAS_string & constinArgument_inName,
+                                            C_Compiler * inCompiler
+                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("safe.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 207)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 207)) ;
+//---
+  return result_result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmNameForSafeCall [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmNameForSafeCall (C_Compiler * inCompiler,
+                                                                    const cObjectArray & inEffectiveParameterArray,
+                                                                    const GALGAS_location & /* inErrorLocation */
+                                                                    COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_llvmNameForSafeCall (operand0,
+                                       inCompiler
+                                       COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmNameForSafeCall ("llvmNameForSafeCall",
+                                                                     functionWithGenericHeader_llvmNameForSafeCall,
+                                                                     & kTypeDescriptor_GALGAS_string,
+                                                                     1,
+                                                                     functionArgs_llvmNameForSafeCall) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Function 'llvmNameForSafeImplementation'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmNameForSafeImplementation (const GALGAS_string & constinArgument_inName,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("safe.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 213)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 213)) ;
+//---
+  return result_result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmNameForSafeImplementation [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmNameForSafeImplementation (C_Compiler * inCompiler,
+                                                                              const cObjectArray & inEffectiveParameterArray,
+                                                                              const GALGAS_location & /* inErrorLocation */
+                                                                              COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_llvmNameForSafeImplementation (operand0,
+                                                 inCompiler
+                                                 COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmNameForSafeImplementation ("llvmNameForSafeImplementation",
+                                                                               functionWithGenericHeader_llvmNameForSafeImplementation,
+                                                                               & kTypeDescriptor_GALGAS_string,
+                                                                               1,
+                                                                               functionArgs_llvmNameForSafeImplementation) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        Once function 'acceptVariablePLMName'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9301,7 +9489,7 @@ const char * gWrapperFileContent_44_targetTemplates = "\n"
   "register DMA_TCD_DOFF [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $int16\n"
   "\n"
   "// TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)\n"
-  "register DMA_TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $uint16 {\n"
+  "register DMA_TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_9016 : 32 $uint16 {\n"
   "  ELINK, CITER [15]\n"
   "}\n"
   "\n"
@@ -14503,7 +14691,7 @@ const char * gWrapperFileContent_79_targetTemplates = "check target \"teensy-3-6
   "\n"
   "let DMA_CHANNEL_COUNT = 32\n"
   "\n"
-  "register DMAMUX0_CHCFG [DMA_CHANNEL_COUNT] at 0x4002_1000 : 1 $uint8 {\n"
+  "register DMAMUX_CHCFG [DMA_CHANNEL_COUNT] at 0x4002_1000 : 1 $uint8 {\n"
   "  ENABLE, TRIG, SOURCE [6]\n"
   "}\n"
   "\n"
@@ -14604,7 +14792,7 @@ const char * gWrapperFileContent_79_targetTemplates = "check target \"teensy-3-6
   "\n"
   "// Error Status Register\n"
   "register DMA_ES  at 0x4000_8004 $uint32 {\n"
-  "  VLD, 14, ECX, 1, CPE, 2, ERRCHN [4],\n"
+  "  VLD, 14, ECX, GPE, CPE, 1, ERRCHN [5],\n"
   "  SAE, SOE, DAE, DOE, NCE, SGE, SBE, DBE\n"
   "}\n"
   "\n"
@@ -14615,7 +14803,7 @@ const char * gWrapperFileContent_79_targetTemplates = "check target \"teensy-3-6
   " ERQ7,  ERQ6,  ERQ5,  ERQ4,  ERQ3,  ERQ2,  ERQ1,  ERQ0\n"
   "}\n"
   "\n"
-  "register DMA_EEI at 0x40008014 $uint32 { // Enable Error Interrupt Register\n"
+  "register DMA_EEI at 0x4000_8014 $uint32 { // Enable Error Interrupt Register\n"
   " EEI31, EEI30, EEI29, EEI28, EEI27, EEI26, EEI25, EEI24,\n"
   " EEI23, EEI22, EEI21, EEI20, EEI19, EEI18, EEI17, EEI16,\n"
   " EEI15, EEI14, EEI13, EEI12, EEI11, EEI10, INT9,  EEI8,\n"
@@ -14675,8 +14863,17 @@ const char * gWrapperFileContent_79_targetTemplates = "check target \"teensy-3-6
   " HRS7,  HRS6,  HRS5,  HRS4,  HRS3,  HRS2,  HRS1,  HRS0\n"
   "}\n"
   "\n"
-  "register DMA_DCHPRI [DMA_CHANNEL_COUNT] at 0x4000_8100 : 1 $uint8 { // Channel n Priority Register\n"
-  " ECP, DPA, 1, CHPRI [5]\n"
+  "// Enable Asynchronous Request in Stop Register \n"
+  "register DMA_EARS at 0x4000_8044 $uint32 {\n"
+  " EDREQ_31, EDREQ_30, EDREQ_29, EDREQ_28, EDREQ_27, EDREQ_26, EDREQ_25, EDREQ_24,\n"
+  " EDREQ_23, EDREQ_22, EDREQ_21, EDREQ_20, EDREQ_19, EDREQ_18, EDREQ_17, EDREQ_16,\n"
+  " EDREQ_15, EDREQ_14, EDREQ_13, EDREQ_12, EDREQ_11, EDREQ_10, EDREQ_9,  EDREQ_8,\n"
+  " EDREQ_7,  EDREQ_6,  EDREQ_5,  EDREQ_4,  EDREQ_3,  EDREQ_2,  EDREQ_1,  EDREQ_0\n"
+  "}\n"
+  "\n"
+  "// Channel n Priority Register\n"
+  "register DMA_DCHPRI [DMA_CHANNEL_COUNT] at 0x4000_8100 : 1 $uint8 {\n"
+  "  ECP, DPA, 1, CHPRI [5]\n"
   "}\n"
   "\n"
   "register DMA_TCD_SADDR [DMA_CHANNEL_COUNT] at 0x4000_9000 : 32 $uint32 // TCD Source Address\n"
@@ -14706,7 +14903,7 @@ const char * gWrapperFileContent_79_targetTemplates = "check target \"teensy-3-6
   "register DMA_TCD_DOFF [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $int16\n"
   "\n"
   "// TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)\n"
-  "register DMA_TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $uint16 {\n"
+  "register DMA_TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_9016 : 32 $uint16 {\n"
   "  ELINK, CITER [15]\n"
   "}\n"
   "\n"
@@ -15305,7 +15502,7 @@ const char * gWrapperFileContent_79_targetTemplates = "check target \"teensy-3-6
   "//register FTM2_PWMLOAD   0x400B8098 // FTM PWM Load\n"
   "\n"
   "\n"
-  "// Chapter 36: Periodic Interrupt Timer (PIT)\n"
+  "// Chapter 46: Periodic Interrupt Timer (PIT)\n"
   "\n"
   "// PIT Module Control Register\n"
   "register PIT_MCR at 0x4003_7000 $uint32 {\n"
@@ -16210,7 +16407,7 @@ const cRegularFileWrapper gWrapperFile_79_targetTemplates (
   "plm-registers-mk66fx1m0.plm",
   "plm",
   true, // Text file
-  100753, // Text length
+  101172, // Text length
   gWrapperFileContent_79_targetTemplates
 ) ;
 

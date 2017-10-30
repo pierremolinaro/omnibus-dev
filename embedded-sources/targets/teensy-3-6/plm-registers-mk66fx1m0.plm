@@ -343,7 +343,7 @@ register AXBS_MGPCR0 at 0x40004800 // Master 0 General Purpose Control Register
 
 let DMA_CHANNEL_COUNT = 32
 
-register DMAMUX0_CHCFG [DMA_CHANNEL_COUNT] at 0x4002_1000 : 1 $uint8 {
+register DMAMUX_CHCFG [DMA_CHANNEL_COUNT] at 0x4002_1000 : 1 $uint8 {
   ENABLE, TRIG, SOURCE [6]
 }
 
@@ -444,7 +444,7 @@ register DMA_CR at 0x4000_8000 $uint32 {
 
 // Error Status Register
 register DMA_ES  at 0x4000_8004 $uint32 {
-  VLD, 14, ECX, 1, CPE, 2, ERRCHN [4],
+  VLD, 14, ECX, GPE, CPE, 1, ERRCHN [5],
   SAE, SOE, DAE, DOE, NCE, SGE, SBE, DBE
 }
 
@@ -455,7 +455,7 @@ register DMA_ERQ at 0x4000_800C $uint32 { // Enable Request Register
  ERQ7,  ERQ6,  ERQ5,  ERQ4,  ERQ3,  ERQ2,  ERQ1,  ERQ0
 }
 
-register DMA_EEI at 0x40008014 $uint32 { // Enable Error Interrupt Register
+register DMA_EEI at 0x4000_8014 $uint32 { // Enable Error Interrupt Register
  EEI31, EEI30, EEI29, EEI28, EEI27, EEI26, EEI25, EEI24,
  EEI23, EEI22, EEI21, EEI20, EEI19, EEI18, EEI17, EEI16,
  EEI15, EEI14, EEI13, EEI12, EEI11, EEI10, INT9,  EEI8,
@@ -515,8 +515,17 @@ register DMA_HRS at 0x4000_8034 $uint32 { // Hardware Request Status Register
  HRS7,  HRS6,  HRS5,  HRS4,  HRS3,  HRS2,  HRS1,  HRS0
 }
 
-register DMA_DCHPRI [DMA_CHANNEL_COUNT] at 0x4000_8100 : 1 $uint8 { // Channel n Priority Register
- ECP, DPA, 1, CHPRI [5]
+// Enable Asynchronous Request in Stop Register 
+register DMA_EARS at 0x4000_8044 $uint32 {
+ EDREQ_31, EDREQ_30, EDREQ_29, EDREQ_28, EDREQ_27, EDREQ_26, EDREQ_25, EDREQ_24,
+ EDREQ_23, EDREQ_22, EDREQ_21, EDREQ_20, EDREQ_19, EDREQ_18, EDREQ_17, EDREQ_16,
+ EDREQ_15, EDREQ_14, EDREQ_13, EDREQ_12, EDREQ_11, EDREQ_10, EDREQ_9,  EDREQ_8,
+ EDREQ_7,  EDREQ_6,  EDREQ_5,  EDREQ_4,  EDREQ_3,  EDREQ_2,  EDREQ_1,  EDREQ_0
+}
+
+// Channel n Priority Register
+register DMA_DCHPRI [DMA_CHANNEL_COUNT] at 0x4000_8100 : 1 $uint8 {
+  ECP, DPA, 1, CHPRI [5]
 }
 
 register DMA_TCD_SADDR [DMA_CHANNEL_COUNT] at 0x4000_9000 : 32 $uint32 // TCD Source Address
@@ -546,7 +555,7 @@ register DMA_TCD_DADDR [DMA_CHANNEL_COUNT] at 0x4000_9010 : 32 $uint32
 register DMA_TCD_DOFF [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $int16
 
 // TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)
-register DMA_TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $uint16 {
+register DMA_TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_9016 : 32 $uint16 {
   ELINK, CITER [15]
 }
 
@@ -1144,7 +1153,7 @@ register VREF_SC   at 0x40074001 $uint8 // VREF Status and Control Register
 //register FTM2_PWMLOAD   0x400B8098 // FTM PWM Load
 
 
-// Chapter 36: Periodic Interrupt Timer (PIT)
+// Chapter 46: Periodic Interrupt Timer (PIT)
 
 // PIT Module Control Register
 register PIT_MCR at 0x4003_7000 $uint32 {

@@ -15,7 +15,7 @@
 //    This results in the DMA request remaining asserted continuously after the first trigger.
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-target "teensy-3-6/unprivileged"
+target "teensy-3-6/privileged"
 let F_CPU_MHZ = 180
 let F_BUS_MHZ = 60
 
@@ -93,7 +93,7 @@ task Tâche priority 1 stackSize 512 {
         gOutputPattern [index] = (1 << 2)
       }
       index += 1
-      current = élément.x
+      current = b
     }
   //--- Set up LED_BUILTIN digital output at LOW level
     pinMode (!port:LED_L4 !mode:.OUTPUT)
@@ -116,7 +116,7 @@ task Tâche priority 1 stackSize 512 {
     PIT_TFLG [0] = 1
   
   //--- Disable DMA Channel 0: it is required for configuring it
-    DMAMUX0_CHCFG [0] = 0
+    DMAMUX_CHCFG [0] = 0
   
   //--- Initial source address: the gOutputPattern array address
     DMA_TCD_SADDR [0] = addressof (gOutputPattern)
@@ -158,7 +158,7 @@ task Tâche priority 1 stackSize 512 {
     }
 
   //--- Configure DMA Channel
-    DMAMUX0_CHCFG [0] = $DMAMUX0_CHCFG {
+    DMAMUX_CHCFG [0] = $DMAMUX_CHCFG {
       ENABLE:1, // DMA Channel 0 is enabled
       TRIG:1,   // DMA Channel 0 is triggered by PIT 0
       SOURCE:DMAMUX_SOURCE_ALWAYS0 // Trigger is always active
@@ -177,8 +177,6 @@ task Tâche priority 1 stackSize 512 {
     time.waitUntilMS (!deadline: self.compteur)
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
-    lcd.goto (!line:0 !column:0)
-    lcd.printHex8 (!addressof (self.compteur))
   }
 }
 

@@ -10,6 +10,234 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Function 'getInfixOperatorMap'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator & constinArgument_inOp,
+                                                      const GALGAS_semanticContext & constinArgument_inContext,
+                                                      const GALGAS_mode & constinArgument_inCurrentMode,
+                                                      const GALGAS_location & constinArgument_inOperatorLocation,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_infixOperatorMap result_outOperatorMap ; // Returned variable
+  switch (constinArgument_inOp.enumValue ()) {
+  case GALGAS_infixOperator::kNotBuilt:
+    break ;
+  case GALGAS_infixOperator::kEnum_equal:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mEqualOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_nonEqual:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mNonEqualOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_strictInf:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mStrictInfOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_infEqual:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mInfEqualOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_strictSup:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mStrictSupOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_supEqual:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mSupEqualOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_andOp:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mAndOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_orOp:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mOrOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_xorOp:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mXorOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_booleanXorOp:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mBooleanXorOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_addOp:
+    {
+      const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inCurrentMode.objectCompare (GALGAS_mode::constructor_panicMode (SOURCE_FILE ("expression-infix-operators.galgas", 190)))).boolEnum () ;
+      if (kBoolTrue == test_0) {
+        TC_Array <C_FixItDescription> fixItArray1 ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 191)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 191)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 191)), fixItArray1  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 191)) ;
+      }
+      const enumGalgasBool test_2 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
+      if (kBoolTrue == test_2) {
+        result_outOperatorMap = constinArgument_inContext.getter_mAddNoOvfOperatorMap (HERE) ;
+      }else if (kBoolFalse == test_2) {
+        result_outOperatorMap = constinArgument_inContext.getter_mAddOperatorMap (HERE) ;
+      }
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_addOpNoOvf:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mAddNoOvfOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_subOp:
+    {
+      const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, constinArgument_inCurrentMode.objectCompare (GALGAS_mode::constructor_panicMode (SOURCE_FILE ("expression-infix-operators.galgas", 201)))).boolEnum () ;
+      if (kBoolTrue == test_3) {
+        TC_Array <C_FixItDescription> fixItArray4 ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 202)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 202)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 202)), fixItArray4  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 202)) ;
+      }
+      const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
+      if (kBoolTrue == test_5) {
+        result_outOperatorMap = constinArgument_inContext.getter_mSubNoOvfOperatorMap (HERE) ;
+      }else if (kBoolFalse == test_5) {
+        result_outOperatorMap = constinArgument_inContext.getter_mSubOperatorMap (HERE) ;
+      }
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_subOpNoOvf:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mSubNoOvfOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_mulOp:
+    {
+      const enumGalgasBool test_6 = GALGAS_bool (kIsEqual, constinArgument_inCurrentMode.objectCompare (GALGAS_mode::constructor_panicMode (SOURCE_FILE ("expression-infix-operators.galgas", 212)))).boolEnum () ;
+      if (kBoolTrue == test_6) {
+        TC_Array <C_FixItDescription> fixItArray7 ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213)), fixItArray7  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213)) ;
+      }
+      const enumGalgasBool test_8 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
+      if (kBoolTrue == test_8) {
+        result_outOperatorMap = constinArgument_inContext.getter_mMulNoOvfOperatorMap (HERE) ;
+      }else if (kBoolFalse == test_8) {
+        result_outOperatorMap = constinArgument_inContext.getter_mMulOperatorMap (HERE) ;
+      }
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_mulOpNoOvf:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mMulNoOvfOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_divOp:
+    {
+      const enumGalgasBool test_9 = GALGAS_bool (kIsEqual, constinArgument_inCurrentMode.objectCompare (GALGAS_mode::constructor_panicMode (SOURCE_FILE ("expression-infix-operators.galgas", 223)))).boolEnum () ;
+      if (kBoolTrue == test_9) {
+        TC_Array <C_FixItDescription> fixItArray10 ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224)), fixItArray10  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224)) ;
+      }
+      const enumGalgasBool test_11 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
+      if (kBoolTrue == test_11) {
+        result_outOperatorMap = constinArgument_inContext.getter_mDivNoOvfOperatorMap (HERE) ;
+      }else if (kBoolFalse == test_11) {
+        result_outOperatorMap = constinArgument_inContext.getter_mDivOperatorMap (HERE) ;
+      }
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_divOpNoOvf:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mDivNoOvfOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_modOp:
+    {
+      const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, constinArgument_inCurrentMode.objectCompare (GALGAS_mode::constructor_panicMode (SOURCE_FILE ("expression-infix-operators.galgas", 234)))).boolEnum () ;
+      if (kBoolTrue == test_12) {
+        TC_Array <C_FixItDescription> fixItArray13 ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 235)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 235)), fixItArray13  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 235)) ;
+      }
+      const enumGalgasBool test_14 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
+      if (kBoolTrue == test_14) {
+        result_outOperatorMap = constinArgument_inContext.getter_mModNoOvfOperatorMap (HERE) ;
+      }else if (kBoolFalse == test_14) {
+        result_outOperatorMap = constinArgument_inContext.getter_mModOperatorMap (HERE) ;
+      }
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_modOpNoOvf:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mModNoOvfOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_leftShiftOp:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mLeftShiftOperatorMap (HERE) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_rightShiftOp:
+    {
+      result_outOperatorMap = constinArgument_inContext.getter_mRightShiftOperatorMap (HERE) ;
+    }
+    break ;
+  }
+//---
+  return result_outOperatorMap ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_getInfixOperatorMap [5] = {
+  & kTypeDescriptor_GALGAS_infixOperator,
+  & kTypeDescriptor_GALGAS_semanticContext,
+  & kTypeDescriptor_GALGAS_mode,
+  & kTypeDescriptor_GALGAS_location,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_getInfixOperatorMap (C_Compiler * inCompiler,
+                                                                    const cObjectArray & inEffectiveParameterArray,
+                                                                    const GALGAS_location & /* inErrorLocation */
+                                                                    COMMA_LOCATION_ARGS) {
+  const GALGAS_infixOperator operand0 = GALGAS_infixOperator::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                                             inCompiler
+                                                                             COMMA_THERE) ;
+  const GALGAS_semanticContext operand1 = GALGAS_semanticContext::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                                                 inCompiler
+                                                                                 COMMA_THERE) ;
+  const GALGAS_mode operand2 = GALGAS_mode::extractObject (inEffectiveParameterArray.objectAtIndex (2 COMMA_HERE),
+                                                           inCompiler
+                                                           COMMA_THERE) ;
+  const GALGAS_location operand3 = GALGAS_location::extractObject (inEffectiveParameterArray.objectAtIndex (3 COMMA_HERE),
+                                                                   inCompiler
+                                                                   COMMA_THERE) ;
+  return function_getInfixOperatorMap (operand0,
+                                       operand1,
+                                       operand2,
+                                       operand3,
+                                       inCompiler
+                                       COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_getInfixOperatorMap ("getInfixOperatorMap",
+                                                                     functionWithGenericHeader_getInfixOperatorMap,
+                                                                     & kTypeDescriptor_GALGAS_infixOperatorMap,
+                                                                     4,
+                                                                     functionArgs_getInfixOperatorMap) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //   Overriding extension method '@booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression'   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2029,43 +2257,43 @@ static void extensionMethod_assignmentInstructionAST_analyze (const cPtr_instruc
   extensionMethod_type (object->mProperty_mTargetAST, constinArgument_inSelfType, ioArgument_ioUniversalMap, var_targetType_3217, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 61)) ;
   GALGAS_objectIR var_sourceOperandPossibleReference_3717 ;
   callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSourceExpression.ptr (), constinArgument_inSelfType, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, var_targetType_3217, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperandPossibleReference_3717, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 63)) ;
-  GALGAS_LValueRepresentation var_internalRepresentation_4209 ;
-  extensionMethod_analyzeLValue (object->mProperty_mTargetAST, constinArgument_inSelfType, constinArgument_inRoutineCanMutateProperties, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_internalRepresentation_4209, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 78)) ;
-  GALGAS_objectIR var_sourceOperand_4354 ;
+  GALGAS_LValueRepresentation var_lvalueIR_4195 ;
+  extensionMethod_analyzeLValue (object->mProperty_mTargetAST, constinArgument_inSelfType, constinArgument_inRoutineCanMutateProperties, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_lvalueIR_4195, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 78)) ;
+  GALGAS_objectIR var_sourceOperand_4340 ;
   {
-  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_sourceOperandPossibleReference_3717, var_sourceOperand_4354, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 92)) ;
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_sourceOperandPossibleReference_3717, var_sourceOperand_4340, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 92)) ;
   }
-  GALGAS_objectIR var_result_4373 = function_checkAssignmentCompatibility (var_sourceOperand_4354, var_targetType_3217, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 100)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 97)) ;
-  switch (var_internalRepresentation_4209.enumValue ()) {
+  GALGAS_objectIR var_result_4359 = function_checkAssignmentCompatibility (var_sourceOperand_4340, var_targetType_3217, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 100)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 97)) ;
+  switch (var_lvalueIR_4195.enumValue ()) {
   case GALGAS_LValueRepresentation::kNotBuilt:
     break ;
   case GALGAS_LValueRepresentation::kEnum_volatileAbsoluteReference:
     {
-      const cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference * extractPtr_4728 = (const cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference *) (var_internalRepresentation_4209.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_4728->mAssociatedValue0 ;
-      const GALGAS_uint extractedValue_address = extractPtr_4728->mAssociatedValue1 ;
+      const cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference * extractPtr_4700 = (const cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference *) (var_lvalueIR_4195.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_4700->mAssociatedValue0 ;
+      const GALGAS_uint extractedValue_address = extractPtr_4700->mAssociatedValue1 ;
       {
-      extensionSetter_appendStoreVolatileRegister (ioArgument_ioInstructionGenerationList, extractedValue_type, extractedValue_address.getter_bigint (SOURCE_FILE ("instruction-assignment.galgas", 105)), var_result_4373, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 105)) ;
+      extensionSetter_appendStoreVolatileRegister (ioArgument_ioInstructionGenerationList, extractedValue_type, extractedValue_address.getter_bigint (SOURCE_FILE ("instruction-assignment.galgas", 105)), var_result_4359, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 105)) ;
       }
     }
     break ;
   case GALGAS_LValueRepresentation::kEnum_volatileIndirectReference:
     {
-      const cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference * extractPtr_4892 = (const cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference *) (var_internalRepresentation_4209.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_4892->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_llvmName = extractPtr_4892->mAssociatedValue1 ;
+      const cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference * extractPtr_4864 = (const cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference *) (var_lvalueIR_4195.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_4864->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_4864->mAssociatedValue1 ;
       {
-      extensionSetter_appendStoreIndirectVolatileRegister (ioArgument_ioInstructionGenerationList, extractedValue_type, extractedValue_llvmName, var_result_4373, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 107)) ;
+      extensionSetter_appendStoreIndirectVolatileRegister (ioArgument_ioInstructionGenerationList, extractedValue_type, extractedValue_llvmName, var_result_4359, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 107)) ;
       }
     }
     break ;
   case GALGAS_LValueRepresentation::kEnum_universalReference:
     {
-      const cEnumAssociatedValues_LValueRepresentation_universalReference * extractPtr_5045 = (const cEnumAssociatedValues_LValueRepresentation_universalReference *) (var_internalRepresentation_4209.unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_type = extractPtr_5045->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_llvmName = extractPtr_5045->mAssociatedValue1 ;
+      const cEnumAssociatedValues_LValueRepresentation_universalReference * extractPtr_5017 = (const cEnumAssociatedValues_LValueRepresentation_universalReference *) (var_lvalueIR_4195.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_5017->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_5017->mAssociatedValue1 ;
       {
-      extensionSetter_appendStoreToUniversalReference (ioArgument_ioInstructionGenerationList, extractedValue_llvmName, extractedValue_type, var_result_4373, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 109)) ;
+      extensionSetter_appendStoreToUniversalReference (ioArgument_ioInstructionGenerationList, extractedValue_llvmName, extractedValue_type, var_result_4359, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 109)) ;
       }
     }
     break ;
@@ -8169,192 +8397,4 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForServiceImplementation
                                                                                   & kTypeDescriptor_GALGAS_string,
                                                                                   1,
                                                                                   functionArgs_llvmNameForServiceImplementation) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'llvmNameForSectionCall'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_llvmNameForSectionCall (const GALGAS_string & constinArgument_inName,
-                                               C_Compiler * inCompiler
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("section.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 193)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 193)) ;
-//---
-  return result_result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_llvmNameForSectionCall [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_llvmNameForSectionCall (C_Compiler * inCompiler,
-                                                                       const cObjectArray & inEffectiveParameterArray,
-                                                                       const GALGAS_location & /* inErrorLocation */
-                                                                       COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_llvmNameForSectionCall (operand0,
-                                          inCompiler
-                                          COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_llvmNameForSectionCall ("llvmNameForSectionCall",
-                                                                        functionWithGenericHeader_llvmNameForSectionCall,
-                                                                        & kTypeDescriptor_GALGAS_string,
-                                                                        1,
-                                                                        functionArgs_llvmNameForSectionCall) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Function 'llvmNameForSectionImplementation'                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_llvmNameForSectionImplementation (const GALGAS_string & constinArgument_inName,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("section.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 199)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 199)) ;
-//---
-  return result_result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_llvmNameForSectionImplementation [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_llvmNameForSectionImplementation (C_Compiler * inCompiler,
-                                                                                 const cObjectArray & inEffectiveParameterArray,
-                                                                                 const GALGAS_location & /* inErrorLocation */
-                                                                                 COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_llvmNameForSectionImplementation (operand0,
-                                                    inCompiler
-                                                    COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_llvmNameForSectionImplementation ("llvmNameForSectionImplementation",
-                                                                                  functionWithGenericHeader_llvmNameForSectionImplementation,
-                                                                                  & kTypeDescriptor_GALGAS_string,
-                                                                                  1,
-                                                                                  functionArgs_llvmNameForSectionImplementation) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'llvmNameForSafeCall'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_llvmNameForSafeCall (const GALGAS_string & constinArgument_inName,
-                                            C_Compiler * inCompiler
-                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("safe.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 207)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 207)) ;
-//---
-  return result_result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_llvmNameForSafeCall [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_llvmNameForSafeCall (C_Compiler * inCompiler,
-                                                                    const cObjectArray & inEffectiveParameterArray,
-                                                                    const GALGAS_location & /* inErrorLocation */
-                                                                    COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_llvmNameForSafeCall (operand0,
-                                       inCompiler
-                                       COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_llvmNameForSafeCall ("llvmNameForSafeCall",
-                                                                     functionWithGenericHeader_llvmNameForSafeCall,
-                                                                     & kTypeDescriptor_GALGAS_string,
-                                                                     1,
-                                                                     functionArgs_llvmNameForSafeCall) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Function 'llvmNameForSafeImplementation'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_llvmNameForSafeImplementation (const GALGAS_string & constinArgument_inName,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("safe.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 213)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 213)) ;
-//---
-  return result_result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_llvmNameForSafeImplementation [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_llvmNameForSafeImplementation (C_Compiler * inCompiler,
-                                                                              const cObjectArray & inEffectiveParameterArray,
-                                                                              const GALGAS_location & /* inErrorLocation */
-                                                                              COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_llvmNameForSafeImplementation (operand0,
-                                                 inCompiler
-                                                 COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_llvmNameForSafeImplementation ("llvmNameForSafeImplementation",
-                                                                               functionWithGenericHeader_llvmNameForSafeImplementation,
-                                                                               & kTypeDescriptor_GALGAS_string,
-                                                                               1,
-                                                                               functionArgs_llvmNameForSafeImplementation) ;
 
