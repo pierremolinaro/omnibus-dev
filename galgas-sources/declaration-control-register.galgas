@@ -205,7 +205,7 @@ override method @controlRegisterDeclarationAST enterInPrecedenceGraph ?!@semanti
   let typeName = llvmRegularTypeMangledNameFromName (!mRegisterTypeName)
   [!?ioGraph addEdge !nodeName !typeName]
 #--- Add dependency from config node
-  let rootNode =  @lstring.new {!configurationNodeNaleForPrecedenceGraph () !nodeName.location}
+  let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !nodeName.location}
   [!?ioGraph addEdge !nodeName !rootNode]
 #--- Add dependency from source expression
   for register in mRegisterArrayList do

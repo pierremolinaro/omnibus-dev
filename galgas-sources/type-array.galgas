@@ -63,7 +63,7 @@ override method @typeArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
   [!?ioGraph addNode !newTypeName !self]
   [!?ioGraph addEdge !newTypeName !elementTypeName]
   [mSizeExpression addDependenceEdgeForStaticExpression !newTypeName !?ioGraph]
-  let rootNode = @lstring.new {!configurationNodeNaleForPrecedenceGraph () !mArrayTypeName.location}
+  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !mArrayTypeName.location}
   [!?ioGraph addEdge !newTypeName !rootNode]
 }
 

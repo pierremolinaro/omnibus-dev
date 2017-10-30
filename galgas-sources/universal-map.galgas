@@ -480,7 +480,7 @@ method @universalPropertyAndRoutineMapForContext checkLocalVariableFinalState {
     case globalVariable (* *) :
     case localVariable (**) :
       if (entry.mObjectState == .noValue) && entry.mObjectShouldBeValuedAtEndOfScope then
-        warning entry.lkey : "'" + entry.lkey + "' should be valued at the end of routine"
+        error entry.lkey : "'" + entry.lkey + "' should be valued at the end of routine"
       end
     end
   end
@@ -613,7 +613,7 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
     case globalVariable (**) :
     case localVariable (**) :
       if (currentObjectState == .noValue) && objectShouldBeValuedAtEndOfScope then
-        warning inErrorLocation : "'" + lkey + "' should be valued at the end of routine"
+        error inErrorLocation : "'" + lkey + "' should be valued at the end of routine"
       end
     end
   end

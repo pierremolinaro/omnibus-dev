@@ -855,10 +855,11 @@ void cGrammar_plm_5F_target_5F_grammar::nt_interruptConfigList_parse (C_Lexique_
 }
 
 void cGrammar_plm_5F_target_5F_grammar::nt_interruptConfigList_ (GALGAS_interruptionConfigurationList &  parameter_1,
+                                GALGAS_enumerationConstantList &  parameter_2,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 4 :
-      rule_plm_5F_target_5F_specific_5F_syntax_interruptConfigList_i4_(parameter_1, inLexique) ;
+      rule_plm_5F_target_5F_specific_5F_syntax_interruptConfigList_i4_(parameter_1, parameter_2, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -1419,7 +1420,7 @@ GALGAS_abstractDeclarationAST () {
 
 GALGAS_enumerationDeclaration GALGAS_enumerationDeclaration::constructor_default (LOCATION_ARGS) {
   return GALGAS_enumerationDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                         GALGAS_lstringlist::constructor_emptyList (HERE)
+                                                         GALGAS_enumerationConstantList::constructor_emptyList (HERE)
                                                          COMMA_THERE) ;
 }
 
@@ -1433,7 +1434,7 @@ GALGAS_abstractDeclarationAST (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumerationDeclaration GALGAS_enumerationDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mEnumerationName,
-                                                                              const GALGAS_lstringlist & inAttribute_mCaseNameList
+                                                                              const GALGAS_enumerationConstantList & inAttribute_mCaseNameList
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_enumerationDeclaration result ;
   if (inAttribute_mEnumerationName.isValid () && inAttribute_mCaseNameList.isValid ()) {
@@ -1462,8 +1463,8 @@ GALGAS_lstring cPtr_enumerationDeclaration::getter_mEnumerationName (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist GALGAS_enumerationDeclaration::getter_mCaseNameList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstringlist result ;
+GALGAS_enumerationConstantList GALGAS_enumerationDeclaration::getter_mCaseNameList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_enumerationConstantList result ;
   if (NULL != mObjectPtr) {
     const cPtr_enumerationDeclaration * p = (const cPtr_enumerationDeclaration *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_enumerationDeclaration) ;
@@ -1474,7 +1475,7 @@ GALGAS_lstringlist GALGAS_enumerationDeclaration::getter_mCaseNameList (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist cPtr_enumerationDeclaration::getter_mCaseNameList (UNUSED_LOCATION_ARGS) const {
+GALGAS_enumerationConstantList cPtr_enumerationDeclaration::getter_mCaseNameList (UNUSED_LOCATION_ARGS) const {
   return mProperty_mCaseNameList ;
 }
 
@@ -1483,7 +1484,7 @@ GALGAS_lstringlist cPtr_enumerationDeclaration::getter_mCaseNameList (UNUSED_LOC
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_enumerationDeclaration::cPtr_enumerationDeclaration (const GALGAS_lstring & in_mEnumerationName,
-                                                          const GALGAS_lstringlist & in_mCaseNameList
+                                                          const GALGAS_enumerationConstantList & in_mCaseNameList
                                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclarationAST (THERE),
 mProperty_mEnumerationName (in_mEnumerationName),

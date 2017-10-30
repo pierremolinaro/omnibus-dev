@@ -1,10 +1,10 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
+#!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @interruptionPanicCode {
-  case noPanicCode
-  case panicCode (@lbigint value)
+  case noCode
+  case code (@lbigint value)
 }
 
 #·······················································································································
@@ -77,7 +77,7 @@ class @configurationDeclarationAST : @abstractDeclarationAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_target_specific_syntax {
@@ -218,7 +218,7 @@ syntax extension plm_target_specific_syntax {
     $integer$ ?let stackedUserRegisterOnInterruptByteSize
     $;$
     $"string"$ ?let undefinedInterruptHandler
-    <interruptConfigList> ?let interruptionConfigurationList
+    <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
      let parameters = @targetParameters.new {
       !python_utilityToolList
       !python_build
@@ -247,12 +247,20 @@ syntax extension plm_target_specific_syntax {
       !interruptionConfigurationList
     }
     outEndOfSourceFile = .here
+    ioAST.mDeclarationListAST += !@enumerationDeclaration.new {
+      !.new {!isrSlotTypeName () !xtrInterruptHandler.location}
+      !interruptConstantList
+    }
   }
 
  #·····················································································································
 
-  rule <interruptConfigList> !@interruptionConfigurationList interruptionConfigurationList {
+  rule <interruptConfigList>
+    !@interruptionConfigurationList interruptionConfigurationList
+    !@enumerationConstantList outEnumerationConstantList
+  {
     interruptionConfigurationList = {}
+    outEnumerationConstantList = {}
     <key> !"INTERRUPTS"
     select
     or
@@ -260,11 +268,12 @@ syntax extension plm_target_specific_syntax {
         $identifier$ ?let interruptName
         @interruptionPanicCode interruptionPanicCode
         select
-          interruptionPanicCode = .noPanicCode
+          interruptionPanicCode = .noCode
         or
           $->$
           $integer$ ?let panicCode
-          interruptionPanicCode = .panicCode {!value:panicCode}
+          interruptionPanicCode = .code {!value:panicCode}
+          outEnumerationConstantList += !interruptName !panicCode
         end
         interruptionConfigurationList += !interruptName !interruptionPanicCode
       while
@@ -287,17 +296,23 @@ override method @configurationDeclarationAST addExtension
   outNewDeclaration = self
 }
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once configurationNodeNaleForPrecedenceGraph -> @string {
+func %once configurationNodeNameForPrecedenceGraph -> @string {
   result = "config"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
+
+func %once isrSlotTypeName -> @string {
+  result = "isrSlot"
+}
+
+#·······················································································································
 
 override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let rootNode =  @lstring.new {!configurationNodeNaleForPrecedenceGraph () !mPanicCodeTypeName.location}
+  let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
   let panicCodeTypeName = llvmRegularTypeMangledNameFromName (!mPanicCodeTypeName)
   [!?ioGraph addEdge !rootNode !panicCodeTypeName]
@@ -305,20 +320,20 @@ override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticT
   [!?ioGraph addEdge !rootNode !panicLineTypeName]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override getter @configurationDeclarationAST location -> @location outLocation {
   outLocation = mPanicCodeTypeName.location
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override getter @configurationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = configurationNodeNaleForPrecedenceGraph ()
+  outRepresentation = configurationNodeNameForPrecedenceGraph ()
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 # Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
@@ -328,7 +343,6 @@ override method @configurationDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  @stringset panicCodeSet = {}
   if ioContext.mPointerSize != 0 then
     error mTargetParameters.mPointerSize : "duplicate configuration"
   elsif mTargetParameters.mPointerSize.bigint == 0G then
@@ -357,23 +371,43 @@ override method @configurationDeclarationAST enterInContext
   else
     error mPanicLineTypeName : "this type should be an unsigned integer type"
   end
-#--- Interrupt panic codes
+#--------------------------------- Interrupt panic codes
+  @stringset panicCodeSet = {}
   for (name panicCode) in mInterruptionConfigurationList do
     [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
     switch panicCode
-    case noPanicCode :
-    case panicCode (value) :
+    case noCode :
+    case code (value) :
       let s = [value.bigint string]
       if [panicCodeSet hasKey !s] then
-        error value : "duplicate panic code"
+        error value : "duplicate interrupt code"
       end
       panicCodeSet += !s
     end
   end
+#--------------------------------- Generate @isrSlot enumeration
+#  if hasInterruptCode && ok then
+#    @constantMap enumConstantMap = {}
+#    let isrSlotTypeName = isrSlotTypeName ()
+#    for (interruptName interruptCode) in mInterruptionConfigurationList do
+#      switch interruptCode
+#      case noCode :
+#      case code (@lbigint value) :
+#        [!?enumConstantMap insertKey !interruptName !value.bigint !isrSlotTypeName]
+#      end
+#    end
+#    [!?ioContext.mTypeMap insertType
+#      !lkey:isrSlotTypeName
+#      !type:.enumeration {!constantMap:enumConstantMap !plmTypeName:isrSlotTypeName}
+#      !index:[ioContext.mTypeMap count]
+#    ]
+#  #--- Infix operators
+#    enterEnumerationComparisonOperators (!typeName:isrSlotTypeName !?context:ioContext)
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
+#!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @configurationDeclarationAST semanticAnalysis
