@@ -129,7 +129,7 @@ override method @registerConstantExpressionAST analyzeExpression
       ]  
     #--- Check expression type
       switch [expressionResult type]
-      case arrayType (* * * * * *) :
+      case arrayType (* * * * * * *) :
         error expressionLocation: "an unsigned integer expression is required here"
       case opaque (* * *) :
         error expressionLocation: "an unsigned integer expression is required here"

@@ -99,7 +99,7 @@ override method @forInstructionAST analyze
   if iteratedTypeKind == .literalString then
     iteratedElementType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["uint8" nowhere]} type]
   elsif [iteratedTypeKind isArrayType] then
-    [iteratedTypeKind arrayType ?typeName:* ?elementType:iteratedElementType ?4*]
+    [iteratedTypeKind arrayType ?2* ?elementType:iteratedElementType ?4*]
   else
     error mIteratedObject : "this object is not enumerable" : iteratedElementType
   end
@@ -162,7 +162,7 @@ override method @forInstructionAST analyze
       !doInstructionList_GenerationList
     }
   elsif [iteratedTypeKind isArrayType] then
-    [iteratedTypeKind arrayType ?typeName:* ?elementType:let elementType ?size:let size ?3*]
+    [iteratedTypeKind arrayType ?2* ?elementType:let elementType ?size:let size ?3*]
     @stringset invokedFunctionSet = {}
   #--- Static array map ? If yes, enter invoked function set
     if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !mIteratedObject] then

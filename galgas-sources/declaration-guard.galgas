@@ -340,28 +340,24 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     let currentType = [currentObject type]
     switch access
     case property (@lstring propertyName) :
-      if [currentType isStructure] then
-        [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-        [propertyMap searchKey !propertyName ?* ?let propertyAccess]
-        switch propertyAccess
-        case nonVirtualMethod (*) :
-          error propertyName : "a method cannot be used in this context" : currentObject
-        case constant (* *) :
-          error propertyName: "a constant property not available in this context" : currentObject
-        case indexed (@PLMType propertyType @uint propertyIndex) :
-          [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
-          [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
-            !currentType
-            ![currentObject llvmName]
-            !propertyType
-            !property_llvmName
-            !propertyIndex
-            !propertyName
-          ]
-          currentObject = .reference {!type:propertyType !llvmName:property_llvmName}
-        end
-      else
-        error currentErrorLocation : "this object has no property" :currentObject
+      let @propertyMap propertyMap = [currentType propertyMap]
+      [propertyMap searchKey !propertyName ?* ?let propertyAccess]
+      switch propertyAccess
+      case nonVirtualMethod (*) :
+        error propertyName : "a method cannot be used in this context" : currentObject
+      case constantProperty (*) :
+        error propertyName: "a constant property not available in this context" : currentObject
+      case indexed (@PLMType propertyType @uint propertyIndex) :
+        [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
+        [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
+          !currentType
+          ![currentObject llvmName]
+          !propertyType
+          !property_llvmName
+          !propertyIndex
+          !propertyName
+        ]
+        currentObject = .reference {!type:propertyType !llvmName:property_llvmName}
       end
     case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
       error endOfIndex : "not handled yet" : currentObject
@@ -371,76 +367,72 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
-    if not [currentType isStructure] then
-      error currentErrorLocation : "this object has no property" : outConvenienceGuardGenerationIR
-    else
-      [currentType structure ?1* ?propertyMap: let propertyMap ?3*]
-      let key = routineMangledNameFromCall (!"" !methodName !mArguments)
-      [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
-      switch propertyAccess
-      case constant (* *) :
-        error methodName : "a constant cannot be used as method" : outConvenienceGuardGenerationIR
-      case indexed (* *) :
-        error methodName : "a property cannot be used as method" : outConvenienceGuardGenerationIR
-      case nonVirtualMethod (@routineDescriptor routineDescriptor) :
-      #--- Add receiver as first parameter
-        @procCallEffectiveParameterListIR effectiveParameterListIR = {
-          !.outputInput
-          !.reference {!type:currentType !llvmName:[currentObject llvmName]}
+    let @propertyMap propertyMap = [currentType propertyMap]
+    let key = routineMangledNameFromCall (!"" !methodName !mArguments)
+    [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
+    switch propertyAccess
+    case constantProperty (*) :
+      error methodName : "a constant cannot be used as method" : outConvenienceGuardGenerationIR
+    case indexed (* *) :
+      error methodName : "a property cannot be used as method" : outConvenienceGuardGenerationIR
+    case nonVirtualMethod (@routineDescriptor routineDescriptor) :
+    #--- Add receiver as first parameter
+      @procCallEffectiveParameterListIR effectiveParameterListIR = {
+        !.outputInput
+        !.reference {!type:currentType !llvmName:[currentObject llvmName]}
+      }
+    #---
+    #  let isPublic = routineDescriptor.mIsPublic
+      let routineKind = routineDescriptor.mRoutineKind
+      let calleeMode = [routineKind executionMode]
+      let formalSignature = routineDescriptor.mSignature
+    #--- Check routine is actually a procedure (does not return any value)
+      if routineDescriptor.mReturnTypeProxy != .null then
+        error methodName : "not a procedure (returns a value)" : outConvenienceGuardGenerationIR
+      else
+      #--- Check modes
+        let calleeKind = checkMode (
+          !callerMode:inCurrentMode
+          !calleeMode:calleeMode
+          !kind:routineKind
+          !error:methodName.location
+        )
+      #--- Analyze effective parameters
+        analyzeEffectiveParameters (
+          !self:inSelfType
+          !formal:formalSignature
+          !effective:mArguments
+          !errorLocation:methodName.location
+          !callerForInvocationGraph:inCallerNameForInvocationGraph
+          !context:inContext
+          !requiredMode:inCurrentMode
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioUniversalMap
+          !?alloca:baseGuardAllocaList
+          !?instructionListIR:baseGuardInstructionGenerationList
+          !?effectiveIR:effectiveParameterListIR
+        )
+      #--- Get function name and map containing the function definition
+        let routineMangledName = routineMangledNameFromCall (!"$" + [currentType key] !methodName !mArguments)
+      #--- Code generation
+        baseGuardInstructionGenerationList += !@staticRoutineCallIR.new {
+          !mIdentifier
+          !.null # No result
+          !routineMangledName
+          !routineMangledName # LLVMInvocationRoutineName
+          !calleeKind
+          !effectiveParameterListIR
         }
-      #---
-      #  let isPublic = routineDescriptor.mIsPublic
-        let routineKind = routineDescriptor.mRoutineKind
-        let calleeMode = [routineKind executionMode]
-        let formalSignature = routineDescriptor.mSignature
-      #--- Check routine is actually a procedure (does not return any value)
-        if routineDescriptor.mReturnTypeProxy != .null then
-          error methodName : "not a procedure (returns a value)" : outConvenienceGuardGenerationIR
-        else
-        #--- Check modes
-          let calleeKind = checkMode (
-            !callerMode:inCurrentMode
-            !calleeMode:calleeMode
-            !kind:routineKind
-            !error:methodName.location
-          )
-        #--- Analyze effective parameters
-          analyzeEffectiveParameters (
-            !self:inSelfType
-            !formal:formalSignature
-            !effective:mArguments
-            !errorLocation:methodName.location
-            !callerForInvocationGraph:inCallerNameForInvocationGraph
-            !context:inContext
-            !requiredMode:inCurrentMode
-            !?temporary:ioTemporaries
-            !?staticStringMap:ioGlobalLiteralStringMap
-            !?variableMap:ioUniversalMap
-            !?alloca:baseGuardAllocaList
-            !?instructionListIR:baseGuardInstructionGenerationList
-            !?effectiveIR:effectiveParameterListIR
-          )
-        #--- Get function name and map containing the function definition
-          let routineMangledName = routineMangledNameFromCall (!"$" + [currentType key] !methodName !mArguments)
-        #--- Code generation
-          baseGuardInstructionGenerationList += !@staticRoutineCallIR.new {
-            !mIdentifier
-            !.null # No result
-            !routineMangledName
-            !routineMangledName # LLVMInvocationRoutineName
-            !calleeKind
-            !effectiveParameterListIR
-          }
-        #--- Enter in invocation graph
-          [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-        #--- Generate guards
-          outConvenienceGuardGenerationIR = .convenienceGuard {
-            !baseGuardAllocaList:baseGuardAllocaList
-            !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-            !baseGuardMangledName:routineMangledName.string
-            !baseGuardEffectiveParameterList:effectiveParameterListIR
-          }
-        end
+      #--- Enter in invocation graph
+        [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+      #--- Generate guards
+        outConvenienceGuardGenerationIR = .convenienceGuard {
+          !baseGuardAllocaList:baseGuardAllocaList
+          !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+          !baseGuardMangledName:routineMangledName.string
+          !baseGuardEffectiveParameterList:effectiveParameterListIR
+        }
       end
     end
   case arrayAccess (* @location endOfIndex) :

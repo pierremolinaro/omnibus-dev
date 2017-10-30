@@ -2528,7 +2528,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "// are not the kPATTERN values, but the toggles we need to output the given pattern.\n"
   "// Building the gOutputPattern array is done at the beginning of the setup function.\n"
   "\n"
-  "let PATTERN_LENGTH = kPATTERN.count // 12\n"
+  "let PATTERN_LENGTH = kPATTERN.count\n"
   "type $patternArray : $uint32 [PATTERN_LENGTH]\n"
   "\n"
   "var gOutputPattern = $patternArray ()\n"
@@ -2630,6 +2630,10 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    time.waitUntilMS (!deadline: self.compteur)\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
+  "    lcd.goto (!line:0 !column:0)\n"
+  "    lcd.printUnsigned (!gOutputPattern.count)\n"
+  "    lcd.printString (!\" \")\n"
+  "    lcd.printUnsigned (!$patternArray.count)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2639,7 +2643,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  7326, // Text length
+  7471, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 

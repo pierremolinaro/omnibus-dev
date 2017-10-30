@@ -71,7 +71,8 @@ extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
 // are not the kPATTERN values, but the toggles we need to output the given pattern.
 // Building the gOutputPattern array is done at the beginning of the setup function.
 
-let PATTERN_LENGTH = kPATTERN.count // 12
+let PATTERN_LENGTH = kPATTERN.count
+
 type $patternArray : $uint32 [PATTERN_LENGTH]
 
 var gOutputPattern = $patternArray ()
@@ -173,6 +174,10 @@ task Tâche priority 1 stackSize 512 {
     time.waitUntilMS (!deadline: self.compteur)
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
+    lcd.goto (!line:0 !column:0)
+    lcd.printUnsigned (!gOutputPattern.count)
+    lcd.printString (!" ")
+    lcd.printUnsigned (!$patternArray.count)
   }
 }
 

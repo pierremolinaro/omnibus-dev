@@ -83,7 +83,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     prefixOperatorMap = inContext.mUnsignedComplementOperatorMap
     binaryOperator = .xor
     switch [expressionResult type]
-    case arrayType (* * * * * *) :
+    case arrayType (* * * * * * *) :
       error mOperatorLocation : "internal error" : leftOperand
     case opaque (* * *) :
       error mOperatorLocation : "internal error" : leftOperand

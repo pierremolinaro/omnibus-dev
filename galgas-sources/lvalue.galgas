@@ -97,23 +97,19 @@ method @LValueAST type
   for (access) in mAccessList do
     switch access
     case property (@lstring propertyName) :
-      if [outType isStructure] then
-        [outType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-        [propertyMap searchKey !propertyName ?* ?let accessKind]
-        switch accessKind
-        case constant (type *) :
-          outType = type
-        case indexed  (type *) :
-          outType = type
-        case nonVirtualMethod (*) :
-          error propertyName : "a method cannot be used in this context" : outType
-        end
-      else
-        error propertyName : "receiver has no property" : outType
+      let @propertyMap propertyMap = [outType propertyMap]
+      [propertyMap searchKey !propertyName ?* ?let accessKind]
+      switch accessKind
+      case constantProperty (value) :
+        outType = [value type]
+      case indexed  (type *) :
+        outType = type
+      case nonVirtualMethod (*) :
+        error propertyName : "a method cannot be used in this context" : outType
       end
     case arrayAccess (* *) :
       if [outType isArrayType] then
-        [outType arrayType ?1* ?elementType:outType ?4*]
+        [outType arrayType ?2* ?elementType:outType ?4*]
       end
     end
   end
@@ -326,33 +322,29 @@ private proc analyzeVariableInLValue
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :
-        if [currentType isStructure] then
-          [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-          [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
-          switch propertyAccess
-          case nonVirtualMethod (*) :
-             error propertyName : "a method cannot be written" : currentType, currentLLVMName
-          case constant (* *) :
-            error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
-          case indexed (@PLMType propertyType @uint index) :
-            [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-            [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-              !currentType
-              !currentLLVMName
-              !propertyType
-              !newLLVMvariable
-              !index
-              !propertyName
-            ]
-            currentType = propertyType
-            currentLLVMName = newLLVMvariable
-          end
-        else
-          error propertyName : "this should be a structure instance"
+        let @propertyMap propertyMap = [currentType propertyMap]
+        [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
+        switch propertyAccess
+        case nonVirtualMethod (*) :
+           error propertyName : "a method cannot be written" : currentType, currentLLVMName
+        case constantProperty (*) :
+          error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
+        case indexed (@PLMType propertyType @uint index) :
+          [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+            !currentType
+            !currentLLVMName
+            !propertyType
+            !newLLVMvariable
+            !index
+            !propertyName
+          ]
+          currentType = propertyType
+          currentLLVMName = newLLVMvariable
         end
       case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
         if [currentType isArrayType] then
-          [currentType arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
+          [currentType arrayType ?2* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
           handleArraySubscriptNew (
             !self: inSelfType
             !inGuard: false
@@ -413,33 +405,29 @@ private proc analyzeSelfAssignmentTarget
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :
-        if [currentType isStructure] then
-          [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
-          [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
-          switch propertyAccess
-          case nonVirtualMethod (*) :
-             error propertyName : "a method cannot be written" : currentType, currentLLVMName
-          case constant (* *) :
-            error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
-          case indexed (@PLMType propertyType @uint index) :
-            [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-            [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-              !currentType
-              !currentLLVMName
-              !propertyType
-              !newLLVMvariable
-              !index
-              !propertyName
-            ]
-            currentType = propertyType
-            currentLLVMName = newLLVMvariable
-          end
-        else
-          error propertyName : "this should be a structure instance"
+        let @propertyMap propertyMap = [currentType propertyMap]
+        [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
+        switch propertyAccess
+        case nonVirtualMethod (*) :
+           error propertyName : "a method cannot be written" : currentType, currentLLVMName
+        case constantProperty (*) :
+          error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
+        case indexed (@PLMType propertyType @uint index) :
+          [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+            !currentType
+            !currentLLVMName
+            !propertyType
+            !newLLVMvariable
+            !index
+            !propertyName
+          ]
+          currentType = propertyType
+          currentLLVMName = newLLVMvariable
         end
       case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
         if [currentType isArrayType] then
-          [currentType arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
+          [currentType arrayType ?2* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
           handleArraySubscriptNew (
             !self: inSelfType
             !inGuard: false

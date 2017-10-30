@@ -109,9 +109,6 @@ override method @globalConstantDeclarationAST enterInContext
     annotationType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mConstantTypeName} type]
   end
 #--- Analyze source expression
-  @semanticTemporariesStruct temporaries = .default
-  @instructionListIR instructionGenerationList = {}
-  @allocaList allocaList = {}
   [mSourceExpression analyzeExpression
     !self:.void
     !inGuard:false
@@ -119,11 +116,11 @@ override method @globalConstantDeclarationAST enterInContext
     !optionalTargetType:annotationType
     !context:ioContext
     !mode:.bootMode
-    !?temporary:temporaries
+    !?temporary:*
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:universalMap
-    !?alloca:allocaList
-    !?instructionListIR:instructionGenerationList
+    !?alloca:*
+    !?instructionListIR:*
     ?result:@objectIR expressionResult
   ]
 #--- Check assignment compatibility
@@ -134,7 +131,7 @@ override method @globalConstantDeclarationAST enterInContext
     !staticTypeAllowed:true
   )
   drop annotationType, expressionResult
-  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
+  if not [result isStatic] then
     error mConstantName : "source expression cannot be statically computed"
   end
 #--- Enter in context
