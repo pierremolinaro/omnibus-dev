@@ -20,6 +20,13 @@ syntax extension plm_syntax {
   #·····················································································································
   
   rule <primary> !@expressionAST outExpression {
+    <expression_if> ?let if_expression
+    outExpression = if_expression
+  }
+  
+  #·····················································································································
+  
+  rule <expression_if> !@ifExpressionAST outExpression {
     $if$
     <expression> ?let ifExpression
     let @location ifExpressionEndLocation = .here
@@ -28,10 +35,16 @@ syntax extension plm_syntax {
     let @location thenExpressionEndLocation = .here
     $}$
     $else$
-    ${$
-    <expression> ?let elseExpression
+    @expressionAST elseExpression
+    select
+      ${$
+      <expression> ?elseExpression
+      $}$
+    or
+      <expression_if> ?let else_if_expression
+      elseExpression = else_if_expression
+    end
     let @location elseExpressionEndLocation = .here
-    $}$
     outExpression = @ifExpressionAST.new {
       !ifExpression !ifExpressionEndLocation
       !thenExpression !thenExpressionEndLocation

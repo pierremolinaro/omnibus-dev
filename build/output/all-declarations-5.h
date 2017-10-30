@@ -113,6 +113,14 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_equality_ (GALGAS_expressionAST & outArgument0,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'expression_if' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F_if_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F_if_ (GALGAS_ifExpressionAST & outArgument0,
+                                              C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'expression_logical_and' non terminal
 //--- 'parse' label
   public : virtual void nt_expression_5F_logical_5F_and_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -556,6 +564,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_85 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_86 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_plm_5F_syntax_87 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

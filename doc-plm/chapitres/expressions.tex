@@ -63,3 +63,20 @@ let t $uint16 = ~ 1 // Ok, z = 0xFFFE
 
 \section{Expression \texttt{if}}
 
+
+
+
+
+
+\section{Expression \texttt{addressof}}
+
+
+L'expression \plm=addressof= permet d'obtenir l'adresse de toute \emph{lvalue}. La valeur retournée a pour type l'entier non signé de la taille d'un pointeur (sur Cortex, c'est donc \plm=$uint32=).
+
+Par exemple~:
+\begin{PLM}
+var x = yes // x est booléen
+let adresse $uint32 = addressof (x)
+let adresse_registre_controle $uint32 = addressof (PORTA_PCR0)
+\end{PLM}
+
