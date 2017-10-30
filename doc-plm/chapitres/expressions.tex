@@ -63,8 +63,29 @@ let t $uint16 = ~ 1 // Ok, z = 0xFFFE
 
 \section{Expression \texttt{if}}
 
+\begin{PLM}
+let x = if expression_1 { expression_2 } else { expression_3 }
+\end{PLM}
 
+L'expression \plm=if= fonctionne comme suit~:
+\begin{itemize}
+  \item l'\plm=expression_1= est une expression booléenne~;
+  \item si l'\plm=expression_1= est vraie, l'\plm=expression_2= est calculée et sa valeur est celle renvoyée par l'expression \plm=if=~;
+  \item si l'\plm=expression_1= est fausse, l'\plm=expression_3= est calculée et sa valeur est celle renvoyée par l'expression \plm=if=.
+\end{itemize}
 
+Les expressions \plm=if= peuvent se succéder, dans tous les cas il faut terminer par une clause \plm=else=~:
+
+\begin{PLM}
+let x =
+  if expression_1 {
+    expression_2
+  }else if expression_3 {
+    expression_4
+  }else{
+    expression_5
+  }
+\end{PLM}
 
 
 
