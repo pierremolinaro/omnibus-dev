@@ -2466,7 +2466,33 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "\n"
   "target \"teensy-3-6/privileged\"\n"
   "let F_CPU_MHZ = 180\n"
-  "let F_BUS_MHZ = 60\n"
+  "\n"
+  "let F_BUS_MHZ2 $uint32 =\n"
+  "  if F_CPU_MHZ == 240 {\n"
+  "    60\n"
+  "  }else if F_CPU_MHZ == 216 {\n"
+  "    54\n"
+  "  }else if F_CPU_MHZ == 192 {\n"
+  "    48\n"
+  "  }else if F_CPU_MHZ == 180 {\n"
+  "    60\n"
+  "  }else if F_CPU_MHZ == 168 {\n"
+  "    56\n"
+  "  }else if F_CPU_MHZ == 144 {\n"
+  "    48\n"
+  "  }else if F_CPU_MHZ == 120 {\n"
+  "    60\n"
+  "  }else if F_CPU_MHZ == 96 {\n"
+  "    48\n"
+  "  }else if F_CPU_MHZ == 72 {\n"
+  "    36\n"
+  "  }else if F_CPU_MHZ == 48 {\n"
+  "    48\n"
+  "  }else if F_CPU_MHZ == 24 {\n"
+  "    24\n"
+  "  }else{\n"
+  "    0 // Any value, an error is raised \n"
+  "  }\n"
   "\n"
   "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
@@ -2537,10 +2563,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    var index $uint32 = 0\n"
   "    for \xC3""\xA9""l\xC3""\xA9""ment in kPATTERN {\n"
   "      let b = \xC3""\xA9""l\xC3""\xA9""ment.x\n"
-  "      gOutputPattern [index] = 0\n"
-  "      if current \xE2""\x89""\xA0"" b {\n"
-  "        gOutputPattern [index] = (1 << 2)\n"
-  "      }\n"
+  "      gOutputPattern [index] = if current \xE2""\x89""\xA0"" b { 0 } else { 1 << 2 }\n"
   "      index += 1\n"
   "      current = b\n"
   "    }\n"
@@ -2635,7 +2658,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  7365, // Text length
+  7784, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 

@@ -17,7 +17,33 @@
 
 target "teensy-3-6/privileged"
 let F_CPU_MHZ = 180
-let F_BUS_MHZ = 60
+
+let F_BUS_MHZ2 $uint32 =
+  if F_CPU_MHZ == 240 {
+    60
+  }else if F_CPU_MHZ == 216 {
+    54
+  }else if F_CPU_MHZ == 192 {
+    48
+  }else if F_CPU_MHZ == 180 {
+    60
+  }else if F_CPU_MHZ == 168 {
+    56
+  }else if F_CPU_MHZ == 144 {
+    48
+  }else if F_CPU_MHZ == 120 {
+    60
+  }else if F_CPU_MHZ == 96 {
+    48
+  }else if F_CPU_MHZ == 72 {
+    36
+  }else if F_CPU_MHZ == 48 {
+    48
+  }else if F_CPU_MHZ == 24 {
+    24
+  }else{
+    0 // Any value, an error is raised 
+  }
 
 module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
@@ -88,10 +114,7 @@ task Tâche priority 1 stackSize 512 {
     var index $uint32 = 0
     for élément in kPATTERN {
       let b = élément.x
-      gOutputPattern [index] = 0
-      if current ≠ b {
-        gOutputPattern [index] = (1 << 2)
-      }
+      gOutputPattern [index] = if current ≠ b { 0 } else { 1 << 2 }
       index += 1
       current = b
     }
