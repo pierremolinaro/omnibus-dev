@@ -79,7 +79,7 @@ proc codeGeneration
   ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
   ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
-  ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
+  ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
   ?targetParameters:let @targetParameters inTargetParameters
 {
@@ -136,7 +136,7 @@ private proc generateCodeFiles
   ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
   ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
-  ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
+  ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
   ?targetParameters:let @targetParameters inTargetParameters
 {
@@ -176,7 +176,7 @@ private proc generateCodeFiles
 #----------------------------------------- Structure types declaration
   declareLLVMTypes (!inTypeMap !?llvmCode)
 #----------------------------------------- Static array type declaration
-  [inStaticListValueMap generateLLVM !inIntermediateCodeStruct.mStaticArrayMap !?llvmCode]
+  [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]
 #----------------------------------------- Global variables
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
     before llvmCode += llvmTitleComment (!"Global variables")

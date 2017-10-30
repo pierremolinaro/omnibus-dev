@@ -71,7 +71,7 @@ extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
 // are not the kPATTERN values, but the toggles we need to output the given pattern.
 // Building the gOutputPattern array is done at the beginning of the setup function.
 
-let PATTERN_LENGTH = 12
+let PATTERN_LENGTH = kPATTERN.count // 12
 type $patternArray : $uint32 [PATTERN_LENGTH]
 
 var gOutputPattern = $patternArray ()

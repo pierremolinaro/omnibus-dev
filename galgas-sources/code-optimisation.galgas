@@ -216,14 +216,14 @@ private proc suppressInaccessibleSubprograms
     ioOptimizing = true
   end
 #--- Static arraies
-  @staticArrayMap currentStaticArrayMap = {}
-  for (staticArrayMame value) in ioIntermediateCodeStruct.mStaticArrayMap do
+  @staticListInvokedFunctionSetMap currentStaticArrayMap = {}
+  for (staticArrayMame value) in ioIntermediateCodeStruct.mStaticArrayMapForIntermediate do
     if [outAccessibleEntities.mGlobalVariableSet hasKey !staticArrayMame] then
      [!?currentStaticArrayMap insertKey !staticArrayMame !value]
     end
   end
-  if currentStaticArrayMap != ioIntermediateCodeStruct.mStaticArrayMap then
-    ioIntermediateCodeStruct.mStaticArrayMap = currentStaticArrayMap
+  if currentStaticArrayMap != ioIntermediateCodeStruct.mStaticArrayMapForIntermediate then
+    ioIntermediateCodeStruct.mStaticArrayMapForIntermediate = currentStaticArrayMap
     ioOptimizing = true
   end
 }

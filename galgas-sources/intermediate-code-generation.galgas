@@ -22,7 +22,7 @@ struct @intermediateCodeStruct {
   @uint mMaxBranchOfOnInstructions
   @targetParameters mTargetParameters
   @moduleListIR mModuleList
-  @staticArrayMap mStaticArrayMap
+  @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
   @propertyAccessRoutineList mPropertyAccessRoutineList
 }
 

@@ -569,6 +569,21 @@ GALGAS_double GALGAS_uint_36__34_::getter_double (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_string GALGAS_uint_36__34_::getter_alphaString (UNUSED_LOCATION_ARGS) const {
+  C_String s = "aaaaaaaaaaaaaa" ; // 2**64 values needs 14 characters (base 26) : n = 64 * log (2) / log (26)
+  uint64_t v = mUInt64Value ;
+  int32_t idx = 13 ;
+  while (v > 0) {
+    const utf32 c = TO_UNICODE ((uint32_t) ((v % 26) + 'a')) ;
+    s.setUnicodeCharacterAtIndex (c, idx COMMA_HERE) ;
+    idx -= 1 ;
+    v /= 26 ;
+  }
+  return GALGAS_string (s) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_string GALGAS_uint_36__34_::getter_string (UNUSED_LOCATION_ARGS) const {
   C_String s ;
   s.appendUnsigned (mUInt64Value) ;

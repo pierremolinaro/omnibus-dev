@@ -164,8 +164,9 @@ override method @forInstructionAST analyze
   elsif [iteratedTypeKind isArrayType] then
     [iteratedTypeKind arrayType ?typeName:* ?elementType:let elementType ?size:let size ?3*]
     @stringset invokedFunctionSet = {}
-    if [ioTemporaries.mStaticArrayMap hasKey !mIteratedObject] then
-      [ioTemporaries.mStaticArrayMap searchKey !mIteratedObject ?invokedFunctionSet]
+  #--- Static array map ? If yes, enter invoked function set
+    if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !mIteratedObject] then
+      [ioTemporaries.mStaticArrayMapForTemporaries searchKey !mIteratedObject ?invokedFunctionSet]
     end
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
       !plmName

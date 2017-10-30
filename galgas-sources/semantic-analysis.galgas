@@ -53,7 +53,7 @@ struct @semanticTemporariesStruct {
   @initRoutinePriorityMap mInitRoutinePriorityMap
   @bootRoutinePriorityMap mBootRoutinePriorityMap
   @subprogramInvocationGraph mSubprogramInvocationGraph
-  @staticArrayMap mStaticArrayMap
+  @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

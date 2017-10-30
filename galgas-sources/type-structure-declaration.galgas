@@ -136,6 +136,7 @@ syntax extension plm_syntax {
 
 override method @structureDeclarationAST addExtension
   ?!@extensionDeclarationListAST ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
 {
   @structureDeclarationAST newDeclaration = self
@@ -249,7 +250,7 @@ sortedlist @sortedOperandIRList {
 override method @structureDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
 #---------------------------------------- Properties

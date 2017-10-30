@@ -57,6 +57,7 @@ syntax extension plm_syntax {
 
 override method @enumerationDeclaration addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
@@ -96,7 +97,7 @@ map @constantMap {
 override method @enumerationDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---

@@ -134,7 +134,7 @@ struct @semanticContext {
   @globalVariableMap mGlobalVariableMap
   @moduleMap mModuleMap
   @constructorMap mConstructorMap
-  @staticlistMap mStaticlistMap
+  @staticlistMap mStaticListMap
 #--- Interrupts
   @stringset mDefinedInterruptSet
   @availableInterruptMap mAvailableInterruptMap
@@ -174,7 +174,7 @@ struct @semanticContext {
 abstract method @abstractDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
+  ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -184,7 +184,7 @@ proc buildSemanticContext
   ?sourceFile:let @lstring inSourceFile
   ?ast:let @ast inAST
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
+  ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   !context:@semanticContext outSemanticContext
 {
   outSemanticContext = .default
@@ -229,28 +229,28 @@ proc buildSemanticContext
 #--- Enter tasks
   [inAST.mTaskListAST enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
 #--- Enter static lists in constant map
-  for (key stringValueList) in ioStaticListValueMap do
-    let lkey = @lstring.new {!key !.nowhere}
-    let elementTypePLMName = plmNameForStaticListElementType (!lkey)
-    let elementType = [@unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !elementTypePLMName} type]
-    [!?outSemanticContext.mTypeMap insertType
-      !lkey:plmNameForStaticListType (!lkey)
-      !type:.arrayType {
-        !typeName:[llvmNameForStaticListType (!key) nowhere]
-        !elementType:elementType
-        !size:[stringValueList length]
-        !constantMap: {}
-        !flags:.none
-        !plmTypeName:plmNameForStaticListType (!lkey)
-      }
-      !index:[outSemanticContext.mTypeMap count]
-    ]
-    let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
-    [!?outSemanticContext.mGlobalConstantMap insertKey
-      !lkey
-      !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!lkey)}
-    ]
-  end
+#  for (key stringValueList) in ioStaticListValueMap do
+#    let lkey = @lstring.new {!key !.nowhere}
+#    let elementTypePLMName = plmNameForStaticListElementType (!lkey)
+#    let elementType = [@unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !elementTypePLMName} type]
+#    [!?outSemanticContext.mTypeMap insertType
+#      !lkey:plmNameForStaticListType (!lkey)
+#      !type:.arrayType {
+#        !typeName:[llvmNameForStaticListType (!key) nowhere]
+#        !elementType:elementType
+#        !size:[stringValueList length]
+#        !constantMap: {}
+#        !flags:.none
+#        !plmTypeName:plmNameForStaticListType (!lkey)
+#      }
+#      !index:[outSemanticContext.mTypeMap count]
+#    ]
+#    let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
+#    [!?outSemanticContext.mGlobalConstantMap insertKey
+#      !lkey
+#      !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!lkey)}
+#    ]
+#  end
 #--- Check global var declaration
   if @uint.errorCount == 0 then
     for globalVar in inAST.mGlobalVarDeclarationListAST do
