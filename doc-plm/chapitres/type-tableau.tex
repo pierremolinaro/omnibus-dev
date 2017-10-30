@@ -66,28 +66,33 @@ var t = $monTypeTableau ()
 
 \sectionLabel{Obtention de la taille d'un tableau}{ObtentionTailleTableau}
 
-L'expression \plm=$monTypeTableau.size= renvoie la taille du tableau, sous la forme d'un entier statique (c'est-à-dire de type \plm=$staticInt=, voir \refChapterPage{chapitreTypeEntierStatique}).
+L'expression \plm=$monTypeTableau.count= renvoie la taille du tableau, sous la forme d'un entier statique (c'est-à-dire de type \plm=$staticInt=, voir \refChapterPage{chapitreTypeEntierStatique}). Ou peut aussi appliquer \plm=count= à une instance de tableau.
+
+On peut donc utiliser les expressions \plm=$t.count= et \plm=$monTypeTableau.count= pour itérer sur tous les élements d'un tableau :
+\begin{PLM}
+var t = $monTypeTableau ()
+for i $uint32 in 0 ..< t.count {
+  t [i] = i
+}
+for i $uint32 in 0 ..< $monTypeTableau.count {
+  t [i] = i
+}
+\end{PLM}
+
 
 Une erreur de compilation est déclenchée si on écrit :
 \begin{PLM}
-var s = $monTypeTableau.size // ERREUR
+var s = $monTypeTableau.count // ERREUR
 \end{PLM}
 
-En effet, \plm=$monTypeTableau.size= est un entier statique et le type \emph{entier statique} ne peut pas être attribué à une variable. Il faut préciser obligatoirement un type d'entier :
+En effet, \plm=$monTypeTableau.count= est un entier statique et le type \emph{entier statique} ne peut pas être attribué à une variable. Il faut préciser obligatoirement un type d'entier :
 
 \begin{PLM}
-var s $uint32 = $monTypeTableau.size // Ok
+var s $uint32 = $monTypeTableau.count // Ok
 \end{PLM}
 
 Ce type peut être signé ou non signé, du moment que sa plage de valeur permet de représenter la valeur statique.
 
-On peut utiliser l'expression \plm=$monTypeTableau.size= pour itérer sur tous les élements d'un tableau :
-\begin{PLM}
-var t = $monTypeTableau ()
-for i $uint32 in 0 ..< $monTypeTableau.size {
-  t [i] = i
-}
-\end{PLM}
 
 
 

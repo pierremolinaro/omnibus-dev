@@ -34,21 +34,26 @@ func safe activityLedOff @exported () {
 
 let LED_L0 = $digitalPort.D3
 let LED_L4 = $digitalPort.D7
+let LED_L3 = $digitalPort.D6
+let LED_L2 = $digitalPort.D5
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 init 1000 {
   pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
   pinMode (!port:LED_L0 !mode:.OUTPUT)
+  pinMode (!port:LED_L3 !mode:.OUTPUT)
+  pinMode (!port:LED_L2 !mode:.OUTPUT)
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let PATTERN_FREQUENCY = 5 // In Hertz
-// So D3 frequency is PATTERN_FREQUENCY / 2
+// So LED_L3 frequency is PATTERN_FREQUENCY / 2
 // So D4 frequency is PATTERN_FREQUENCY / 2 / PATTERN_LENGTH
 
 staticArray kPATTERN {let x $bool }
+
 extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
   yes; no; yes; no; yes; // 3 dots : letter S
   no; no; no; no; no; no; no // Medium gap betwween words
@@ -79,6 +84,24 @@ var gOutputPattern = $patternArray ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+isr safe PITChannel0 {
+//--- Acquitter l'interruption
+  PIT_TFLG [0] = {PIT_TFLG !TIF:1}
+//--- Toggle LED_L3
+  toggle (!port:LED_L3)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+isr safe DMAChannel_0_16_TranfertComplete {
+//--- Acquitter l'interruption
+  DMA_CINT = 0
+//--- Toggle LED_L2
+  toggle (!port:LED_L2)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
@@ -99,6 +122,12 @@ task Tâche priority 1 stackSize 512 {
   //--- Power on DMA_MUX, PIT, DMA
     SIM_SCGC6 |= {SIM_SCGC6 !DMAMUX:1 !PIT:1}
     SIM_SCGC7 |= {SIM_SCGC7 !DMA:1}
+  
+  //--- Unmask PIT0 interrupt
+    NVIC_ISER1 = 1 << ((64 - 16) & 31)
+  
+  //--- Unmask DMAChannel_0_16_TranfertComplete interrupt
+    NVIC_ISER0 = 1 << ((16 - 16) & 31)
   
   //--- Enable PIT module
     PIT_MCR = 0
@@ -164,8 +193,8 @@ task Tâche priority 1 stackSize 512 {
   //--- Start DMA Channel 0
     DMA_SERQ = 0
   
-  //--- Enable PIT 0 : it starts counting
-    PIT_TCTRL [0] = {PIT_TCTRL !TEN:1}
+  //--- Enable PIT 0 : it starts counting, enable interrupt
+    PIT_TCTRL [0] = {PIT_TCTRL !TEN:1 !TIE:1}
   }
   
   while time.waitUntilMS (!deadline:self.compteur) {
