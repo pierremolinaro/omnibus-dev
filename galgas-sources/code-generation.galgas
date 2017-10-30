@@ -207,6 +207,8 @@ private proc generateCodeFiles
     llvmCode += "  ret void\n"
     llvmCode += "}\n\n"
   end
+#----------------------------------------- Enumeration uint() methods
+  [inIntermediateCodeStruct.mUIntFunctionForEnumerationList generateLLVMcode !?llvmCode]
 #----------------------------------------- Init
   [inIntermediateCodeStruct.mInitList generateLLVMinitCode
     !?llvmCode
@@ -497,7 +499,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     switch type
     case void :
     case boolean :
-    case enumeration (* *) :
+    case enumeration (* * * *) :
     case integer (* * * * *) :
     case structure (* * propertyList * *) :
       ioLLVMcode += [type llvmTypeName] + " = type {"

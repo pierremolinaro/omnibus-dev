@@ -206,14 +206,16 @@ task Tâche priority 1 stackSize 512 {
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!gOutputPattern.count)
     lcd.printString (!" ")
-    lcd.printUnsigned (!$patternArray.count)
+    let c = $isrSlot.PITChannel0
+    let cc = c.uint ()
+    lcd.printUnsigned (!extend cc : $uint32)
   }
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func unmask (?interrupt: code $isrSlot) {
-
-}
+//func unmask (?interrupt: code $isrSlot) {
+//
+//}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

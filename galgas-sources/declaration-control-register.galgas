@@ -271,7 +271,7 @@ method @controlRegisterDeclarationAST controlRegisterType
     outRegisterBitCount = bitCount
   case boolean, void :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case enumeration (* *) :
+  case enumeration (* * * *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case literalString :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount

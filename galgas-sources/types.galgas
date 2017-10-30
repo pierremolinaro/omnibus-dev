@@ -14,7 +14,7 @@ enum @PLMType {
   case void # No actual type, used for no annotation type, ...
   case boolean
   case literalString
-  case enumeration (@constantMap constantMap @string plmTypeName)
+  case enumeration (@constantMap constantMap @propertyMap propertyMap @uint bitCount @string plmTypeName)
   case structure (@lstring typeName
                   @propertyMap propertyMap
                   @propertyList propertyList
@@ -44,8 +44,8 @@ getter @PLMType propertyMap -> @propertyMap {
     result = {}
   case literalString, staticInteger :
     result = {}
-  case enumeration (* *) :
-    result = {}
+  case enumeration (* propertyMap * *) :
+    result = propertyMap
   case structure (* propertyMap * * *) :
     result = propertyMap
   case integer (* * * * *) :
@@ -71,7 +71,7 @@ getter @PLMType equatable -> @bool {
     result = true
   case literalString, staticInteger :
     result = true
-  case enumeration (* *) :
+  case enumeration (* * * *) :
     result = true
   case structure (* * * flags *) :
     result = [flags equatable]
@@ -104,7 +104,7 @@ getter @PLMType instanciable -> @bool {
     result = true
   case literalString, staticInteger :
     result = true
-  case enumeration (* *) :
+  case enumeration (* * * *) :
     result = true
   case structure (* * * flags *) :
     result = [flags instanciable]
@@ -137,7 +137,7 @@ getter @PLMType copyable -> @bool {
     result = true
   case literalString, staticInteger :
     result = true
-  case enumeration (* *) :
+  case enumeration (* * * *) :
     result = true
   case structure (* * * flags *) :
     result = [flags copyable]
@@ -160,7 +160,7 @@ getter @PLMType classConstantMap -> @constantMap {
   switch self
   case boolean, literalString, staticInteger, void :
     result = {}
-  case enumeration (constantMap *) :
+  case enumeration (constantMap * * *) :
     result = constantMap
   case structure (* * * * *) :
     result = {}
@@ -187,8 +187,8 @@ getter @PLMType llvmTypeName -> @string {
     result = "i1"
   case literalString :
     result = "i8*"
-  case enumeration (@constantMap constantMap *) :
-    result = "i" + [[constantMap count] - 1 significantBitCount]
+  case enumeration (* * bitCount *) :
+    result = "i" + bitCount
   case structure (@lstring typeName * * * *) :
     result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
   case integer (@bigint unused min @bigint unused max @bool unused unsigned @uint bitCount *) :
@@ -231,7 +231,7 @@ getter @PLMType key -> @string {
     result = boolTypeName ()
   case literalString :
     result = staticStringTypeName ()
-  case enumeration (* plmTypeName) :
+  case enumeration (* * * plmTypeName) :
     result = plmTypeName
   case structure (plmTypeName * * * *) :
     result = plmTypeName
@@ -260,7 +260,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Boolean"
   case literalString :
     result = "Literal String"
-  case enumeration (* *) :
+  case enumeration (* * * *) :
     result = "Enumeration"
   case structure (* * * * *) :
     result = "Structure"

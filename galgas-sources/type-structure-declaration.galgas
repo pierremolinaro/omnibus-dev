@@ -568,15 +568,4 @@ method @structureDeclarationAST functionSemanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  GENERATE PROPERTY ACCESS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @propertyAccessRoutineList {
-  @PLMType mStructureKind
-  @PLMType mPropertyType
-  @string mPropertyName
-  @propertyAccessKind mAccessKind
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
