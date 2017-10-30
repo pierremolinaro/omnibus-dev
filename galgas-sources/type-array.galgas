@@ -47,6 +47,7 @@ syntax extension plm_syntax {
 
 override method @typeArrayDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
@@ -79,7 +80,7 @@ override getter @typeArrayDeclarationAST keyRepresentationForErrorSignaling -> @
 override method @typeArrayDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Get element type

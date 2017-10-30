@@ -18,6 +18,7 @@ override getter @literalStringDeclarationAST location -> @location outLocation {
 
 override method @literalStringDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
@@ -48,7 +49,7 @@ override getter @literalStringDeclarationAST keyRepresentationForErrorSignaling 
 override method @literalStringDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Enter in type map

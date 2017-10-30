@@ -258,6 +258,21 @@ GALGAS_string GALGAS_uint::getter_xString (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_string GALGAS_uint::getter_alphaString (UNUSED_LOCATION_ARGS) const {
+  C_String s = "aaaaaaa" ; // 2**32 values needs 7 characters (base 26) : n = 32 * log (2) / log (26)
+  uint32_t v = mUIntValue ;
+  int32_t idx = 6 ;
+  while (v > 0) {
+    const utf32 c = TO_UNICODE ((v % 26) + 'a') ;
+    s.setUnicodeCharacterAtIndex (c, idx COMMA_HERE) ;
+    idx -= 1 ;
+    v /= 26 ;
+  }
+  return GALGAS_string (s) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_uint::description (C_String & ioString,
                                const int32_t /* inIndentation */) const {
   ioString << "<@uint:" ;

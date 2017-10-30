@@ -80,6 +80,7 @@ syntax extension plm_syntax {
 
 abstract method @abstractDeclarationAST addExtension
   ?!@extensionDeclarationListAST ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -25,6 +25,7 @@ getter @integerDeclarationAST typeName -> @string outName {
 
 override method @integerDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
 {
   outNewDeclaration = self
@@ -55,7 +56,7 @@ override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @st
 override method @integerDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   let integerTypeName = [[self typeName] nowhere]

@@ -752,28 +752,6 @@ class cPtr_requiredModuleAST : public cPtr_abstractDeclarationAST {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Extension method '@staticlistValues_listMap generateLLVM'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_generateLLVM (const class GALGAS_staticlistValues_5F_listMap inObject,
-                                   const class GALGAS_staticArrayMap constin_inUsefulStaticArrayMap,
-                                   class GALGAS_string & io_ioLLVMcode,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Function 'llvmNameForStaticListElementType'                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_llvmNameForStaticListElementType (const class GALGAS_lstring & constinArgument0,
-                                                                class C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                        Extension method '@panicClauseListAST-element panicSemanticAnalysis'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1954,5 +1932,30 @@ void callExtensionSetter_insertLocalVariable (class cPtr_universalPropertyAndRou
                                               const GALGAS_bool constin_inObjectShouldBeValuedAtEndOfScope,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                   Extension method '@universalPropertyAndRoutineMapForContext searchValuedObject'                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_universalPropertyAndRoutineMapForContext_searchValuedObject) (const class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                                      const class GALGAS_lstring constinArgument0,
+                                                                                                      class GALGAS_objectIR & outArgument1,
+                                                                                                      class C_Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_searchValuedObject (const int32_t inClassIndex,
+                                              extensionMethodSignature_universalPropertyAndRoutineMapForContext_searchValuedObject inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_searchValuedObject (const class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                             const GALGAS_lstring constin_inValuedObjectName,
+                                             GALGAS_objectIR & out_outObjectIR,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 #endif

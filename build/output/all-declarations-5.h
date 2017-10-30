@@ -352,7 +352,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_staticArrayProperty_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_staticArrayProperty_ (GALGAS_staticArrayPropertyListAST & ioArgument0,
+  public : virtual void nt_staticArrayProperty_ (GALGAS_staticListPropertyListAST & ioArgument0,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'staticArray_exp' non terminal
@@ -360,7 +360,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_staticArray_5F_exp_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_staticArray_5F_exp_ (GALGAS_extendStaticArrayExpressionListAST & ioArgument0,
+  public : virtual void nt_staticArray_5F_exp_ (GALGAS_extendStaticListElementListAST & ioArgument0,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'struct_property_declaration' non terminal
