@@ -3,8 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @addressofExpressionAST : @expressionAST {
-  @expressionAST mExpression
-  @location mEndOfExpression
+  @LValueAST mLValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -18,10 +17,9 @@ syntax extension plm_syntax {
   rule <primary> !@expressionAST outExpression {
     $addressof$
     $($
-    <expression> ?let expressionAST
-    let endOfExpression = @location.here
+    <lvalue> ?let lvalue
     $)$
-    outExpression = @addressofExpressionAST.new {!expressionAST !endOfExpression}
+    outExpression = @addressofExpressionAST.new {!lvalue}
   }
 
   #·····················································································································
@@ -55,7 +53,7 @@ override method @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
 
 override method @addressofExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -67,36 +65,30 @@ override method @addressofExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze expression
-  [mExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:inGuard
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.void
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
+#--- Analyze LValue
+  [mLValue analyzeLValue
+    !self: inSelfType
+    !propertiesAreMutable: true
+    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+    !context: inContext
+    !mode: inCurrentMode
+    !?temporary: ioTemporaries
+    !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR expressionResultPossibleReference
+    !?alloca: ioAllocaList
+    !?instructionListIR: ioInstructionGenerationList
+    ?let @LValueRepresentation lvalueIR
   ]
-#--- Analyze expression result
-  if not [expressionResultPossibleReference isReference] then
-    error mEndOfExpression : "this expression is a constant value" : outResult
-  else   
-    let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
-      !inContext.mTypeMap
-      !["uint" + inContext.mPointerSize nowhere]
-    }
-    let resultType = [resultTypeProxy type]
-    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
-    ioInstructionGenerationList += !@addressofInstructionIR.new {
-      !outResult
-      !expressionResultPossibleReference
-    }
-  end
+  let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
+    !inContext.mTypeMap
+    !["uint" + inContext.mPointerSize nowhere]
+  }
+  let resultType = [resultTypeProxy type]
+  getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+  ioInstructionGenerationList += !@addressofInstructionIR.new {
+    !outResult
+    !lvalueIR
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -107,7 +99,7 @@ override method @addressofExpressionAST analyzeExpression
 
 class @addressofInstructionIR : @abstractInstructionIR {
   @objectIR mTarget
-  @objectIR mOperand
+  @LValueRepresentation mLValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -125,8 +117,17 @@ override method @addressofInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + [mOperand llvmTypeName] + "* " + [mOperand llvmName]
-              + " to " + [mTarget llvmTypeName] + "\n"
+  switch mLValue
+  case volatileAbsoluteReference (@PLMType type @uint address) :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = add " + [type llvmTypeName] + " " + address
+                + ", 0 ; addressof (" + [address hexString] + ")\n"
+  case volatileIndirectReference (@PLMType type @string llvmName) :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = add " + [type llvmTypeName] + " " + llvmName
+                + ", 0 ; addressof (" + llvmName + ")\n"
+  case universalReference (@PLMType type @string llvmName) :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + [type llvmTypeName] + "* " + llvmName
+                + " to " + [mTarget llvmTypeName] + " ; addressof\n"
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

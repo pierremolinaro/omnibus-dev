@@ -404,7 +404,7 @@ register DMA_TCD_DADDR [DMA_CHANNEL_COUNT] at 0x4000_9010 : 32 $uint32
 register DMA_TCD_DOFF [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $int16
 
 // TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)
-register DMA_TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_9014 : 32 $uint16 {
+register DMA_TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] at 0x4000_9016 : 32 $uint16 {
   ELINK, CITER [15]
 }
 

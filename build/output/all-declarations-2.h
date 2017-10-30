@@ -9229,19 +9229,34 @@ class cPtr_truncateInstructionIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            @addressofInstructionIR class                                            *
+//                                             @LValueRepresentation enum                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_addressofInstructionIR : public GALGAS_abstractInstructionIR {
-//--- Constructor
-  public : GALGAS_addressofInstructionIR (void) ;
+class GALGAS_LValueRepresentation : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_LValueRepresentation (void) ;
 
-//---
-  public : inline const class cPtr_addressofInstructionIR * ptr (void) const { return (const cPtr_addressofInstructionIR *) mObjectPtr ; }
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_volatileAbsoluteReference,
+    kEnum_volatileIndirectReference,
+    kEnum_universalReference
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
 
-//--------------------------------- Constructor from pointer
-  public : GALGAS_addressofInstructionIR (const cPtr_addressofInstructionIR * inSourcePtr) ;
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of generic part --*
 
@@ -9249,69 +9264,123 @@ class GALGAS_addressofInstructionIR : public GALGAS_abstractInstructionIR {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_addressofInstructionIR extractObject (const GALGAS_object & inObject,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_LValueRepresentation extractObject (const GALGAS_object & inObject,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_addressofInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                       const class GALGAS_objectIR & inOperand1
-                                                                       COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_LValueRepresentation constructor_universalReference (const class GALGAS_PLMType & inOperand0,
+                                                                                    const class GALGAS_string & inOperand1
+                                                                                    COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_LValueRepresentation constructor_volatileAbsoluteReference (const class GALGAS_PLMType & inOperand0,
+                                                                                           const class GALGAS_uint & inOperand1
+                                                                                           COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_LValueRepresentation constructor_volatileIndirectReference (const class GALGAS_PLMType & inOperand0,
+                                                                                           const class GALGAS_string & inOperand1
+                                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_addressofInstructionIR & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_LValueRepresentation & inOperand) const ;
 
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_universalReference (class GALGAS_PLMType & outArgument0,
+                                                            class GALGAS_string & outArgument1,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_volatileAbsoluteReference (class GALGAS_PLMType & outArgument0,
+                                                                   class GALGAS_uint & outArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_volatileIndirectReference (class GALGAS_PLMType & outArgument0,
+                                                                   class GALGAS_string & outArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
+
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUniversalReference (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVolatileAbsoluteReference (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVolatileIndirectReference (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_addressofInstructionIR class
+} ; // End of GALGAS_LValueRepresentation class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_addressofInstructionIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueRepresentation ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Pointer class for @addressofInstructionIR class                                   *
+//                                    @LValueRepresentation enum, associated values                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_addressofInstructionIR : public cPtr_abstractInstructionIR {
-//--- Attributes
-  public : GALGAS_objectIR mProperty_mTarget ;
-  public : GALGAS_objectIR mProperty_mOperand ;
+class cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
 
 //--- Constructor
-  public : cPtr_addressofInstructionIR (const GALGAS_objectIR & in_mTarget,
-                                        const GALGAS_objectIR & in_mOperand
-                                        COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                 const GALGAS_uint & inAssociatedValue1
+                                                                                 COMMA_LOCATION_ARGS) ;
 
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mOperand (LOCATION_ARGS) const ;
-//--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public : virtual ~ cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference (void) {}
+} ;
 
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+//---------------------------------------------------------------------------------------------------------------------*
 
+class cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                 const GALGAS_string & inAssociatedValue1
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_LValueRepresentation_universalReference : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_LValueRepresentation_universalReference (const GALGAS_PLMType & inAssociatedValue0,
+                                                                          const GALGAS_string & inAssociatedValue1
+                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_LValueRepresentation_universalReference (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

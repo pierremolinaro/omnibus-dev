@@ -86,7 +86,7 @@ override method @assignmentInstructionAST analyze
     !?variableMap:ioUniversalMap
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
-    ?let @LValueRepresentation internalRepresentation
+    ?let @LValueRepresentation lvalueIR
   ]
 #---
   [!?ioInstructionGenerationList appendLoadWhenReference
@@ -100,7 +100,7 @@ override method @assignmentInstructionAST analyze
     !errorLocation:mTargetAST.mIdentifier
     !staticTypeAllowed:false
   )
-  switch internalRepresentation
+  switch lvalueIR
   case volatileAbsoluteReference (@PLMType type @uint address) :
     [!?ioInstructionGenerationList appendStoreVolatileRegister !type !address !result]
   case volatileIndirectReference (@PLMType type @string llvmName) :
