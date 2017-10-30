@@ -15,11 +15,11 @@ boot 0 {
 //--- If the RTC oscillator isn't enabled, get it started early
   if not RTC_CR.OSCE.bool {
     RTC_SR = 0
-    RTC_CR = $RTC_CR {SC16P, SC4P, OSCE}
+    RTC_CR = {RTC_CR !SC16P:1 !SC4P:1 !OSCE:1}
   }
 //--- Release I/O pins hold, if we woke up from VLLS mode
   if PMC_REGSC.ACKISO ≠ 0 {
-    PMC_REGSC |= $PMC_REGSC {ACKISO}
+    PMC_REGSC |= {PMC_REGSC !ACKISO:1}
   }
 // TODO: do this while the PLL is waiting to lock....
   VTOR = 0  // use vector table in flash
@@ -28,33 +28,33 @@ boot 0 {
 //---------2- Initialisation de la PLL
 // start in FEI mode
 //--- Enable capacitors for crystal
-  OSC_CR = $OSC_CR {SC8P, SC2P}
+  OSC_CR = {OSC_CR !SC8P:1 !SC2P:1}
 //--- Enable osc, 8-32 MHz range, low power mode
-  MCG_C2 = $MCG_C2 {RANGE0:2, EREFS}
+  MCG_C2 = {MCG_C2 !RANGE0:2 !EREFS:1}
 //--- Switch to crystal as clock source, FLL input = 16 MHz / 512
-  MCG_C1 = $MCG_C1 {CLKS:2, FRDIV:4}
+  MCG_C1 = {MCG_C1 !CLKS:2 !FRDIV:4}
 //--- Wait for crystal oscillator to begin
   loop while MCG_S.OSCINIT0 == 0 {}
 //--- Wait for FLL to use oscillator
   loop while MCG_S.IREFST ≠ 0 {}
 //--- Wait for MCGOUT to use oscillator
-  loop while MCG_S.CLKST ≠ $MCG_S {CLKST:2} {}
+  loop while MCG_S.CLKST ≠ {MCG_S !CLKST:2} {}
 //--- Now we're in FBE mode
 //    Config PLL input for 16 MHz Crystal / 4 = 4 MHz
-  MCG_C5 = $MCG_C5 {PRDIV0:3}
+  MCG_C5 = {MCG_C5 !PRDIV0:3}
 //--- Config PLL for 96 MHz output
-  MCG_C6 = $MCG_C6 {PLLS, VDIV0:0}
+  MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:0}
 //--- Wait for PLL to start using xtal as its input
   loop while MCG_S.PLLST == 0 {}
 //--- Wait for PLL to lock
   loop while MCG_S.LOCK0 == 0 {}
 //--- Now we're in PBE mode
 //    Config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash
-  SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:3}
+  SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:3}
 //--- Switch to PLL as clock source, FLL input = 16 MHz / 512
-  MCG_C1 = $MCG_C1 {CLKS:0, FRDIV:4}
+  MCG_C1 = {MCG_C1 !CLKS:0 !FRDIV:4}
 //--- Wait for PLL clock to be used
-  loop while MCG_S.CLKST ≠ $MCG_S {CLKST:3} {}
+  loop while MCG_S.CLKST ≠ {MCG_S !CLKST:3} {}
 }
 
 //-----------------------------------------------------------------------------*

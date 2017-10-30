@@ -70,10 +70,10 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_integer,
    kToken__22_string_22_,
    kToken_comment,
-   kToken__3F_,
-   kToken__3F__21_,
-   kToken__21_,
-   kToken__21__3F_,
+   kToken__3F_selector_3A_,
+   kToken__3F__21_selector_3A_,
+   kToken__21_selector_3A_,
+   kToken__21__3F_selector_3A_,
    kToken_addressof,
    kToken_and,
    kToken_assert,
@@ -7063,8 +7063,6 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_86 (C_Lexique_plm_5F_lexique *) = 0 ;
 
-  protected : virtual int32_t select_plm_5F_syntax_87 (C_Lexique_plm_5F_lexique *) = 0 ;
-
 
 } ;
 
@@ -10792,8 +10790,7 @@ class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_registerConstantExpressionAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                              const class GALGAS_lstringlist & inOperand1,
-                                                                              const class GALGAS_registerIntegerFieldListAST & inOperand2
+                                                                              const class GALGAS_registerIntegerFieldListAST & inOperand1
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -10806,8 +10803,6 @@ class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_registerIntegerFieldListAST getter_mFieldValues (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mMaskFieldNames (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
 
@@ -10982,12 +10977,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIntegerFiel
 class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mRegisterName ;
-  public : GALGAS_lstringlist mProperty_mMaskFieldNames ;
   public : GALGAS_registerIntegerFieldListAST mProperty_mFieldValues ;
 
 //--- Constructor
   public : cPtr_registerConstantExpressionAST (const GALGAS_lstring & in_mRegisterName,
-                                               const GALGAS_lstringlist & in_mMaskFieldNames,
                                                const GALGAS_registerIntegerFieldListAST & in_mFieldValues
                                                COMMA_LOCATION_ARGS) ;
 
@@ -10996,7 +10989,6 @@ class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mMaskFieldNames (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_registerIntegerFieldListAST getter_mFieldValues (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

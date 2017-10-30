@@ -60,7 +60,7 @@ required func safe activityLedOff @exported ()
 init 0 { // Configure Systick interrupt every ms
   SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
   SYST_CVR = 0
-  SYST_CSR = $SYST_CSR {CLKSOURCE, ENABLE, TICKINT}
+  SYST_CSR = {SYST_CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
 }
 
 module time ()

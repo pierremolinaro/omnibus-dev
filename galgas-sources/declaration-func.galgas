@@ -159,7 +159,7 @@ syntax extension plm_syntax {
     $($
     repeat
     while
-      $!$ ?let selector
+      $!selector:$ ?let selector
       $identifier$ ?let formalArgumentName
       $\$type$ ?let formalArgumentTypeName
       outProcFormalArgumentList +=
@@ -168,7 +168,7 @@ syntax extension plm_syntax {
         !formalArgumentTypeName
         !formalArgumentName
     while
-      $?!$ ?let selector
+      $?!selector:$ ?let selector
       $identifier$ ?let formalArgumentName
       $\$type$ ?let formalArgumentTypeName
       outProcFormalArgumentList +=
@@ -177,7 +177,7 @@ syntax extension plm_syntax {
         !formalArgumentTypeName
         !formalArgumentName
     while
-      $?$ ?let selector
+      $?selector:$ ?let selector
       $identifier$ ?let formalArgumentName
       $\$type$ ?let formalArgumentTypeName
       outProcFormalArgumentList +=
