@@ -124,10 +124,12 @@ task Tâche priority 1 stackSize 512 {
     SIM_SCGC7 |= {SIM_SCGC7 !DMA:1}
   
   //--- Unmask PIT0 interrupt
-    NVIC_ISER1 = 1 << ((64 - 16) & 31)
+//    NVIC_ISER [1] = 1 << ((64 - 16) & 31)
+    enable (!interrupt:.PITChannel0)
   
   //--- Unmask DMAChannel_0_16_TranfertComplete interrupt
-    NVIC_ISER0 = 1 << ((16 - 16) & 31)
+//    NVIC_ISER [0] = 1 << ((16 - 16) & 31)
+    enable (!interrupt:.DMAChannel_0_16_TranfertComplete)
   
   //--- Enable PIT module
     PIT_MCR = 0
@@ -203,19 +205,13 @@ task Tâche priority 1 stackSize 512 {
     time.waitUntilMS (!deadline: self.compteur)
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
-    lcd.goto (!line:0 !column:0)
-    lcd.printUnsigned (!gOutputPattern.count)
-    lcd.printString (!" ")
-    let c = $isrSlot.PITChannel0
-    let cc = c.uint ()
-    lcd.printUnsigned (!extend cc : $uint32)
+//    lcd.goto (!line:0 !column:0)
+//    lcd.printUnsigned (!gOutputPattern.count)
+//    lcd.printString (!" ")
+//    let c = $isrSlot.PITChannel0
+//    let cc = c.uint ()
+//    lcd.printUnsigned (!extend cc : $uint32)
   }
 }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//func unmask (?interrupt: code $isrSlot) {
-//
-//}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

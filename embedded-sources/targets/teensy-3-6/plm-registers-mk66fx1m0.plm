@@ -1861,19 +1861,16 @@ register GPIOD_PDDR @user at 0x400FF0D4 $uint32 // Port Data Direction Register
 //register TSI0_CNTR13   0x40045118 // Counter Register
 //register TSI0_CNTR15   0x4004511C // Counter Register
 //register TSI0_THRESHOLD   0x40045120 // Low Power Channel Threshold Register
-//
-//// Nested Vectored Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)
-//register NVIC_ENABLE_IRQ(n) (*((volatile $uint32_t *)0xE000E100 + (n >> 5)) = (1 << (n & 31)))
-register NVIC_ISER0  at 0xE000_E100 $uint32
-register NVIC_ISER1  at 0xE000_E104 $uint32
-register NVIC_ISER2  at 0xE000_E108 $uint32
-
-//register NVIC_ISER at 0xE000_E100 $uint96
 
 
-//register NVIC_DISABLE_IRQ(n) (*((volatile $uint32_t *)0xE000E180 + (n >> 5)) = (1 << (n & 31)))
-//register NVIC_SET_PENDING(n) (*((volatile $uint32_t *)0xE000E200 + (n >> 5)) = (1 << (n & 31)))
-//register NVIC_CLEAR_PENDING(n) (*((volatile $uint32_t *)0xE000E280 + (n >> 5)) = (1 << (n & 31)))
+// Nested Vectored Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)
+
+// Interrupt Set-enable Registers 
+register NVIC_ISER [4]  at 0xE000_E100 : 4 $uint32
+
+//Interrupt Clear-enable Registers 
+register NVIC_ICER [4]  at 0xE000_E180 : 4 $uint32
+
 
 //
 //// 0 = highest priority
@@ -1881,78 +1878,6 @@ register NVIC_ISER2  at 0xE000_E108 $uint32
 //// Cortex-M0: 0,64,128,192
 //register NVIC_SET_PRIORITY(irqnum, priority)  (*((volatile $uint8_t *)0xE000E400 + (irqnum)) = ($uint8_t)(priority))
 //register NVIC_GET_PRIORITY(irqnum) (*(($uint8_t *)0xE000E400 + (irqnum)))
-//
-//register IRQ_DMA_CH0  0
-//register IRQ_DMA_CH1  1
-//register IRQ_DMA_CH2  2
-//register IRQ_DMA_CH3  3
-//register IRQ_DMA_CH4  4
-//register IRQ_DMA_CH5  5
-//register IRQ_DMA_CH6  6
-//register IRQ_DMA_CH7  7
-//register IRQ_DMA_CH8  8
-//register IRQ_DMA_CH9  9
-//register IRQ_DMA_CH10  10
-//register IRQ_DMA_CH11  11
-//register IRQ_DMA_CH12  12
-//register IRQ_DMA_CH13  13
-//register IRQ_DMA_CH14  14
-//register IRQ_DMA_CH15  15
-//register IRQ_DMA_ERROR  16
-//register IRQ_FTFL_COMPLETE 18
-//register IRQ_FTFL_COLLISION 19
-//register IRQ_LOW_VOLTAGE  20
-//register IRQ_LLWU  21
-//register IRQ_WDOG  22
-//register IRQ_I2C0  24
-//register IRQ_I2C1  25
-//register IRQ_SPI0  26
-//register IRQ_SPI1  27
-//register IRQ_CAN_MESSAGE  29
-//register IRQ_CAN_BUS_OFF  30
-//register IRQ_CAN_ERROR  31
-//register IRQ_CAN_TX_WARN  32
-//register IRQ_CAN_RX_WARN  33
-//register IRQ_CAN_WAKEUP  34
-//register IRQ_I2S0_TX  35
-//register IRQ_I2S0_RX  36
-//register IRQ_UART0_LON  44
-//register IRQ_UART0_STATUS 45
-//register IRQ_UART0_ERROR  46
-//register IRQ_UART1_STATUS 47
-//register IRQ_UART1_ERROR  48
-//register IRQ_UART2_STATUS 49
-//register IRQ_UART2_ERROR  50
-//register IRQ_ADC0  57
-//register IRQ_ADC1  58
-//register IRQ_CMP0  59
-//register IRQ_CMP1  60
-//register IRQ_CMP2  61
-//register IRQ_FTM0  62
-//register IRQ_FTM1  63
-//register IRQ_FTM2  64
-//register IRQ_CMT   65
-//register IRQ_RTC_ALARM  66
-//register IRQ_RTC_SECOND  67
-//register IRQ_PIT_CH0  68
-//register IRQ_PIT_CH1  69
-//register IRQ_PIT_CH2  70
-//register IRQ_PIT_CH3  71
-//register IRQ_PDB   72
-//register IRQ_USBOTG  73
-//register IRQ_USBDCD  74
-//register IRQ_DAC0  81
-//register IRQ_TSI   83
-//register IRQ_MCG   84
-//register IRQ_LPTMR  85
-//register IRQ_PORTA  87
-//register IRQ_PORTB  88
-//register IRQ_PORTC  89
-//register IRQ_PORTD  90
-//register IRQ_PORTE  91
-//register IRQ_SOFTWARE  94
-//register NVIC_NUM_INTERRUPTS 95
-//
 
 //System Control Space (SCS), ARMv7 ref manual, B3.2, page 708
 //register SCB_CPUID  *(const    $uint32_t *)0xE000ED00 // CPUID Base Register

@@ -62,6 +62,7 @@ LL_FILES:
 //--- PLM included files
 PLM_FILES:
   "../plm-registers-mk66fx1m0.plm",
+  "../plm-teensy-3-6-nvic-interrupts.plm",
   "../plm-teensy-3-6-boot.plm",
   "../plm-teensy-3-6-time.plm",
   "../plm-teensy-3-6-xtr.plm",
