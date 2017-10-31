@@ -1,0 +1,18 @@
+
+system section enable @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) {
+  let idx = extend inInterruptCode.uint () - 16 : $uint32
+  let bitIndex = idx & 0x1F
+  let registerIndex = idx >> 5
+  NVIC_ISER [registerIndex] = 1 << bitIndex
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+system section disable @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) {
+  let idx = extend inInterruptCode.uint () - 16 : $uint32
+  let bitIndex = idx & 0x1F
+  let registerIndex = idx >> 5
+  NVIC_ICER [registerIndex] = 1 << bitIndex
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
