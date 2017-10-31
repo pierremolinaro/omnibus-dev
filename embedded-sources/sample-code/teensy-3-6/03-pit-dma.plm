@@ -205,12 +205,12 @@ task Tâche priority 1 stackSize 512 {
     time.waitUntilMS (!deadline: self.compteur)
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
-//    lcd.goto (!line:0 !column:0)
-//    lcd.printUnsigned (!gOutputPattern.count)
-//    lcd.printString (!" ")
-//    let c = $isrSlot.PITChannel0
+    lcd.goto (!line:0 !column:0)
+    lcd.printUnsigned (!gOutputPattern.count)
+    lcd.printString (!" ")
+    let cc = $isrSlot.PITChannel0.uint ()
 //    let cc = c.uint ()
-//    lcd.printUnsigned (!extend cc : $uint32)
+    lcd.printUnsigned (!extend $uint32 (cc))
   }
 }
 

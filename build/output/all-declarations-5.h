@@ -65,6 +65,14 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_ (GALGAS_expressionAST & outArgument0,
                                         C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'expression_access_list' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F_access_5F_list_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F_access_5F_list_ (GALGAS_primaryInExpressionAccessListAST & outArgument0,
+                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'expression_addition' non terminal
 //--- 'parse' label
   public : virtual void nt_expression_5F_addition_parse (C_Lexique_plm_5F_lexique * inCompiler) ;

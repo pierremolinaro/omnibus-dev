@@ -399,7 +399,7 @@ method @taskMapIR generateCode
     ioLLVMcode += "\n"
     ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
     for (variable LLVMTypeName) in task.mAllocaList do
-      ioLLVMcode += "  " + llvmNameForLocalVariable (!variable) + " = alloca " + LLVMTypeName + "\n"
+      ioLLVMcode += "  " + variable + " = alloca " + LLVMTypeName + "\n"
     end
     [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"

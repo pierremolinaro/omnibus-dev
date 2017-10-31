@@ -5,6 +5,7 @@
 class @typedConstantCallAST : @expressionAST {
   @lstring mOptionalTypeName
   @lstring mConstructorName
+  @primaryInExpressionAccessListAST mAccessList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,7 +25,10 @@ syntax extension plm_syntax {
     end
     $.$
     $identifier$ ?let constantName
-    outExpression = @typedConstantCallAST.new {!optionalTypeName !constantName}
+  #--- Properties and access
+    <expression_access_list> ?let accessList
+  #---
+    outExpression = @typedConstantCallAST.new {!optionalTypeName !constantName !accessList}
   }
 
   #·····················································································································
@@ -41,6 +45,26 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
   if mOptionalTypeName.string != "" then
     [!?ioGraph addEdge !inConstantName !llvmRegularTypeMangledNameFromName (!mOptionalTypeName)]
   end
+  for (access) in mAccessList do
+    switch access
+    case property (@lstring unused name) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+    case funcCall (* @effectiveArgumentListAST arguments *) :
+      for () in arguments do
+        switch mEffectiveParameterKind
+        case input (*):
+        case inputWithType (* @lstring typeName *) :
+          if typeName.string != "" then
+            [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+          end
+        case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+        case outputInput (*) :
+        case outputInputSelfVariable (*) :
+        end 
+      end
+    end
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -51,6 +75,26 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
   if mOptionalTypeName.string != "" then
     [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!mOptionalTypeName)]
   end
+  for (access) in mAccessList do
+    switch access
+    case property (@lstring unused name) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case funcCall (* @effectiveArgumentListAST arguments *) :
+      for () in arguments do
+        switch mEffectiveParameterKind
+        case input (*):
+        case inputWithType (* @lstring typeName *) :
+          if typeName.string != "" then
+            [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+          end
+        case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+        case outputInput (*) :
+        case outputInputSelfVariable (*) :
+        end 
+      end
+    end
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -58,17 +102,17 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typedConstantCallAST analyzeExpression
-  ?self:let @PLMType unused inSelfType
-  ?inGuard:let @bool unused inGuard
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?self:let @PLMType inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode unused inCurrentMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
 #--- Analyze constructor source type
@@ -85,6 +129,37 @@ override method @typedConstantCallAST analyzeExpression
     [classConstantMap searchKey !mConstructorName ?let @bigint value ?let classTypeName]
     let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !classTypeName} type]
     outResult = .literalInteger {!type:resultType !value:value}
+  end
+#--- Analyze access list
+  if [mAccessList length] > 0 then
+  #--- procAnalyzeAccesListInExpression works on reference, not value
+  #    So we create articially a temporary reference for resulting value
+    getNewTempVariable (![outResult type] !?ioTemporaries ?let newTemporaryReference)
+  #--- ... add it into alloc list...
+    ioAllocaList += ![newTemporaryReference llvmName] ![newTemporaryReference llvmTypeName]
+  #--- ... and store resulting value into it
+    [!?ioInstructionGenerationList appendStoreTemporaryReference
+      ![newTemporaryReference type]
+      ![newTemporaryReference llvmName]
+      !outResult
+    ]
+    outResult = newTemporaryReference
+  #---
+    procAnalyzeAccesListInExpression (
+      !self: inSelfType
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !mAccessList
+      !?result: outResult
+    )
   end
 }
 

@@ -132,7 +132,7 @@ proc routineSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @allocaList {
-  @string mVarName
+  @string mVarLLVMName
   @string mLLVMTypeName
 }
 
@@ -206,7 +206,7 @@ method @routineMapIR-element llvmCodeGeneration
                 + " = alloca " + [mReturnType llvmTypeName] + "\n"
   end
   for (variable llvmTypeName) in mAllocaList do
-    ioLLVMcode += "  " + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
+    ioLLVMcode += "  " + variable + " = alloca " + llvmTypeName + "\n"
   end
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do
