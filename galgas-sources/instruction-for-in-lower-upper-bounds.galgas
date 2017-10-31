@@ -165,11 +165,11 @@ override method @forLowerUpperBoundInstructionAST analyze
   #---
     [!?ioUniversalMap openOverrideForRepeatBlock]
   #--- Enter iteration variable name
-    let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+    let enumeratedVarName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
     ioTemporaries.mTemporaryIndex ++
-    ioAllocaList += !enumeratedVarLLVMName ![type llvmTypeName]
+    ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) ![type llvmTypeName]
     if mVarName.string != "" then
-     [!?ioUniversalMap insertLocalConstant !mVarName !type !enumeratedVarLLVMName]
+     [!?ioUniversalMap insertLocalConstant !mVarName !type !enumeratedVarName]
     end
   #--- Analyze instruction list
     @instructionListIR instructionGenerationList = {}
@@ -190,7 +190,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     [!?ioUniversalMap closeOverride !mEndOf_do_instruction]
   #--- Code generation
     ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR.new {
-      !enumeratedVarLLVMName
+      !enumeratedVarName
       !type
       !unsigned
       !mEndOf_do_instruction

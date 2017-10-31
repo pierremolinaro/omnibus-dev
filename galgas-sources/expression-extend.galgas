@@ -18,10 +18,11 @@ syntax extension plm_syntax {
 
   rule <primary> !@expressionAST outExpression {
     $extend$
+    $\$type$ ?let typeIdentifier
+    $($
     <expression> ?outExpression
     let endOfExpression = @location.here
-    $:$
-    $\$type$ ?let typeIdentifier
+    $)$
     outExpression = @extendExpressionAST.new {
       !outExpression
       !typeIdentifier

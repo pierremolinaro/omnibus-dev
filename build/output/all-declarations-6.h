@@ -1295,25 +1295,25 @@ void routine_analyzeRegisterExpression (const class GALGAS_PLMType constinArgume
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'procAnalyzePrimaryExpression'                                        *
+//                                     Routine 'procAnalyzeAccesListInExpression'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_procAnalyzePrimaryExpression (const class GALGAS_PLMType constinArgument0,
-                                           const class GALGAS_bool constinArgument1,
-                                           const class GALGAS_lstring constinArgument2,
-                                           const class GALGAS_PLMType constinArgument3,
-                                           const class GALGAS_semanticContext constinArgument4,
-                                           const class GALGAS_mode constinArgument5,
-                                           class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                           class GALGAS_staticStringMap & ioArgument7,
-                                           class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
-                                           class GALGAS_allocaList & ioArgument9,
-                                           class GALGAS_instructionListIR & ioArgument10,
-                                           const class GALGAS_primaryInExpressionAccessListAST constinArgument11,
-                                           class GALGAS_objectIR & ioArgument12,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
+void routine_procAnalyzeAccesListInExpression (const class GALGAS_PLMType constinArgument0,
+                                               const class GALGAS_bool constinArgument1,
+                                               const class GALGAS_lstring constinArgument2,
+                                               const class GALGAS_PLMType constinArgument3,
+                                               const class GALGAS_semanticContext constinArgument4,
+                                               const class GALGAS_mode constinArgument5,
+                                               class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                               class GALGAS_staticStringMap & ioArgument7,
+                                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
+                                               class GALGAS_allocaList & ioArgument9,
+                                               class GALGAS_instructionListIR & ioArgument10,
+                                               const class GALGAS_primaryInExpressionAccessListAST constinArgument11,
+                                               class GALGAS_objectIR & ioArgument12,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

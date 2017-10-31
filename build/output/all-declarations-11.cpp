@@ -1967,13 +1967,7 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/pr
   "\n"
   "init 1000 {\n"
   "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "init 100_000 {\n"
   "  SIM_SCGC6 |= SIM_SCGC6_PIT\n"
-  "  NVIC_ISER2 = 1 << ((84 - 16) & 31)\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -1982,6 +1976,7 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/pr
   "  PIT_MCR = 0\n"
   "  PIT_LDVAL [0] = 200000\n"
   "  PIT_TCTRL [0] = {PIT_TCTRL !TIE:1 !TEN:1} // Interrupt, enabled\n"
+  "  enable (!interrupt: .PITChannel0)\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -2033,7 +2028,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  2177, // Text length
+  2105, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 
@@ -2662,12 +2657,12 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    time.waitUntilMS (!deadline: self.compteur)\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
-  "//    lcd.goto (!line:0 !column:0)\n"
-  "//    lcd.printUnsigned (!gOutputPattern.count)\n"
-  "//    lcd.printString (!\" \")\n"
-  "//    let c = $isrSlot.PITChannel0\n"
+  "    lcd.goto (!line:0 !column:0)\n"
+  "    lcd.printUnsigned (!gOutputPattern.count)\n"
+  "    lcd.printString (!\" \")\n"
+  "    let cc = $isrSlot.PITChannel0.uint ()\n"
   "//    let cc = c.uint ()\n"
-  "//    lcd.printUnsigned (!extend cc : $uint32)\n"
+  "    lcd.printUnsigned (!extend $uint32 (cc))\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2677,7 +2672,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  8500, // Text length
+  8499, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 

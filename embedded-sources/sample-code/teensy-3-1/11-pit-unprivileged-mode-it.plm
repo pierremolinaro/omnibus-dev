@@ -26,13 +26,7 @@ let LED_L1 = $digitalPort.D4
 
 init 1000 {
   pinMode (!port:LED_L1 !mode:.OUTPUT)
-}
-
-//------------------------------------------------*
-
-init 100_000 {
   SIM_SCGC6 |= SIM_SCGC6_PIT
-  NVIC_ISER2 = 1 << ((84 - 16) & 31)
 }
 
 //------------------------------------------------*
@@ -41,6 +35,7 @@ system section setupPIT () {
   PIT_MCR = 0
   PIT_LDVAL [0] = 200000
   PIT_TCTRL [0] = {PIT_TCTRL !TIE:1 !TEN:1} // Interrupt, enabled
+  enable (!interrupt: .PITChannel0)
 }
 
 //------------------------------------------------*

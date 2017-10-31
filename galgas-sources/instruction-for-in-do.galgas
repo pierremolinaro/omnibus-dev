@@ -106,7 +106,7 @@ override method @forInstructionAST analyze
 #---
   let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
-  ioAllocaList += !plmName ![iteratedElementType llvmTypeName]
+  ioAllocaList += !llvmNameForLocalVariable (!plmName) ![iteratedElementType llvmTypeName]
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
   [!?ioUniversalMap insertLocalConstant !mVarName !iteratedElementType !plmName]

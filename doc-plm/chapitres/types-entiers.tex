@@ -9,7 +9,7 @@
 
 Sont définis implicitement les types entiers signés et non signés d'une taille variant entre $1$ bit et $32768$ bits, et sont notés :
 \begin{itemize}
-  \item \plm!$uint1! à \plm!$uint32768! pour les types entiers non signés de $1$ à $32768$ bits ;
+  \item \plm!$uint1! à \plm!$uint32768! pour les types entiers non signés de $1$ à $32768$ bits~;
   \item \plm!$int1! à \plm!$int32768! pour les types entiers signés de $1$ à $32768$ bits.
 \end{itemize}
 
@@ -42,8 +42,8 @@ var v $int32 = 28 // Ok
 
 Il y a trois types de conversion entre objets de type entier :
 \begin{itemize}
-  \item les conversions toujours possibles \plm+extend exp : $type+ (\refSubsectionPage{conversionsToujoursPossibles}) ;
-  \item les conversions pouvant échouer \plm+convert exp : $type+ (\refSubsectionPage{conversionsPouvantEchouer}) ;
+  \item les conversions toujours possibles \plm+extend $type (exp)+ (\refSubsectionPage{conversionsToujoursPossibles})~;
+  \item les conversions pouvant échouer \plm+convert exp : $type+ (\refSubsectionPage{conversionsPouvantEchouer})~;
   \item les troncatures \plm+truncate exp : $type+  (\refSubsectionPage{conversionsTroncature}).
 \end{itemize}
 
@@ -53,15 +53,15 @@ Il y a trois types de conversion entre objets de type entier :
 Les conversions qui sont toujours possibles sont exprimées par le mot réservé \plm=extend=. Par exemple :
 \begin{PLM}
 let v $uint8 = ...
-let x $uint9 = extend v : $uint9
-let y $int9 =  extend v : $int9
-let z $int10 = extend y : $int10
+let x $uint9 = extend $uint9 (v)
+let y $int9 =  extend $int9 (v)
+let z $int10 = extend $int10 (y)
 \end{PLM}
 
 D'une manière générale :
 \begin{itemize}
-\item un entier non signé peut être étendu en un entier non signé de taille strictement supérieure ;
-\item un entier non signé peut être étendu en un entier signé de taille strictement supérieure ;
+\item un entier non signé peut être étendu en un entier non signé de taille strictement supérieure~;
+\item un entier non signé peut être étendu en un entier signé de taille strictement supérieure~;
 \item un entier signé peut être étendu en un entier signé de taille strictement supérieure.
 \end{itemize}
 
