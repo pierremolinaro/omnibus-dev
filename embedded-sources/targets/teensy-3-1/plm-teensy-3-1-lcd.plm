@@ -267,7 +267,7 @@ module lcd {
       if isPrinting or (value ≥ divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
-        self.writeData_inUserMode (!0x30 + convert quotient : $uint8)
+        self.writeData_inUserMode (!0x30 + convert $uint8 (quotient))
         value = remainder
         isPrinting = yes
       }
