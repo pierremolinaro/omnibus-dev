@@ -8659,10 +8659,10 @@ static void extensionMethod_truncateExpressionAST_addDependenceEdgeForStaticExpr
                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_truncateExpressionAST * object = (const cPtr_truncateExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_truncateExpressionAST) ;
-  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 44)) ;
-  GALGAS_lstring var_typeName_2046 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mTypeName, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 45)) ;
+  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 45)) ;
+  GALGAS_lstring var_typeName_2054 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mTypeName, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 46)) ;
   {
-  ioArgument_ioGraph.setter_noteNode (var_typeName_2046 COMMA_SOURCE_FILE ("expression-truncate.galgas", 46)) ;
+  ioArgument_ioGraph.setter_noteNode (var_typeName_2054 COMMA_SOURCE_FILE ("expression-truncate.galgas", 47)) ;
   }
 }
 
@@ -8689,10 +8689,10 @@ static void extensionMethod_truncateExpressionAST_noteExpressionTypesInPrecedenc
                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_truncateExpressionAST * object = (const cPtr_truncateExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_truncateExpressionAST) ;
-  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 54)) ;
-  GALGAS_lstring var_typeName_2691 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mTypeName, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 55)) ;
+  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 55)) ;
+  GALGAS_lstring var_typeName_2699 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mTypeName, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 56)) ;
   {
-  ioArgument_ioGraph.setter_noteNode (var_typeName_2691 COMMA_SOURCE_FILE ("expression-truncate.galgas", 56)) ;
+  ioArgument_ioGraph.setter_noteNode (var_typeName_2699 COMMA_SOURCE_FILE ("expression-truncate.galgas", 57)) ;
   }
 }
 
@@ -8730,55 +8730,55 @@ static void extensionMethod_truncateExpressionAST_analyzeExpression (const cPtr_
                                                                      COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_truncateExpressionAST * object = (const cPtr_truncateExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_truncateExpressionAST) ;
-  GALGAS_objectIR var_expressionResultPossibleReference_4433 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, GALGAS_PLMType::constructor_void (SOURCE_FILE ("expression-truncate.galgas", 84)), constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResultPossibleReference_4433, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 80)) ;
-  GALGAS_objectIR var_expressionResult_4579 ;
+  GALGAS_objectIR var_expressionResultPossibleReference_4441 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, GALGAS_PLMType::constructor_void (SOURCE_FILE ("expression-truncate.galgas", 85)), constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResultPossibleReference_4441, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 81)) ;
+  GALGAS_objectIR var_expressionResult_4587 ;
   {
-  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_expressionResultPossibleReference_4433, var_expressionResult_4579, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 94)) ;
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_expressionResultPossibleReference_4441, var_expressionResult_4587, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 95)) ;
   }
-  GALGAS_PLMType var_resultType_4620 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), object->mProperty_mTypeName, inCompiler  COMMA_SOURCE_FILE ("expression-truncate.galgas", 100)).getter_type (inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 100)) ;
-  const enumGalgasBool test_0 = var_resultType_4620.getter_isInteger (SOURCE_FILE ("expression-truncate.galgas", 102)).operator_not (SOURCE_FILE ("expression-truncate.galgas", 102)).boolEnum () ;
+  GALGAS_PLMType var_resultType_4628 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), object->mProperty_mTypeName, inCompiler  COMMA_SOURCE_FILE ("expression-truncate.galgas", 101)).getter_type (inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 101)) ;
+  const enumGalgasBool test_0 = var_resultType_4628.getter_isInteger (SOURCE_FILE ("expression-truncate.galgas", 103)).operator_not (SOURCE_FILE ("expression-truncate.galgas", 103)).boolEnum () ;
   if (kBoolTrue == test_0) {
     TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-truncate.galgas", 103)), GALGAS_string ("this type is not an integer type"), fixItArray1  COMMA_SOURCE_FILE ("expression-truncate.galgas", 103)) ;
+    inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-truncate.galgas", 104)), GALGAS_string ("this type is not an integer type"), fixItArray1  COMMA_SOURCE_FILE ("expression-truncate.galgas", 104)) ;
     outArgument_outResult.drop () ; // Release error dropped variable
   }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_2 = extensionGetter_type (var_expressionResult_4579, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 104)).getter_isInteger (SOURCE_FILE ("expression-truncate.galgas", 104)).operator_not (SOURCE_FILE ("expression-truncate.galgas", 104)).boolEnum () ;
+    const enumGalgasBool test_2 = extensionGetter_type (var_expressionResult_4587, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 105)).getter_isInteger (SOURCE_FILE ("expression-truncate.galgas", 105)).operator_not (SOURCE_FILE ("expression-truncate.galgas", 105)).boolEnum () ;
     if (kBoolTrue == test_2) {
       TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (object->mProperty_mEndOfExpression, GALGAS_string ("expression type is not an integer type"), fixItArray3  COMMA_SOURCE_FILE ("expression-truncate.galgas", 105)) ;
+      inCompiler->emitSemanticError (object->mProperty_mEndOfExpression, GALGAS_string ("expression type is not an integer type"), fixItArray3  COMMA_SOURCE_FILE ("expression-truncate.galgas", 106)) ;
       outArgument_outResult.drop () ; // Release error dropped variable
     }else if (kBoolFalse == test_2) {
-      GALGAS_bigint var_minSource_5015 ;
-      GALGAS_bigint var_maxSource_5034 ;
-      GALGAS_uint var_expSize_5068 ;
-      GALGAS_bool joker_5045 ; // Joker input parameter
-      GALGAS_string joker_5070_1 ; // Joker input parameter
-      extensionGetter_type (var_expressionResult_4579, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 107)).method_integer (var_minSource_5015, var_maxSource_5034, joker_5045, var_expSize_5068, joker_5070_1, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 107)) ;
-      GALGAS_bigint var_minTarget_5116 ;
-      GALGAS_bigint var_maxTarget_5135 ;
-      GALGAS_uint var_resultSize_5172 ;
-      GALGAS_bool joker_5146 ; // Joker input parameter
-      GALGAS_string joker_5174_1 ; // Joker input parameter
-      var_resultType_4620.method_integer (var_minTarget_5116, var_maxTarget_5135, joker_5146, var_resultSize_5172, joker_5174_1, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 108)) ;
-      GALGAS_bool test_4 = GALGAS_bool (kIsInfOrEqual, var_minTarget_5116.objectCompare (var_minSource_5015)) ;
+      GALGAS_bigint var_minSource_5023 ;
+      GALGAS_bigint var_maxSource_5042 ;
+      GALGAS_uint var_expSize_5076 ;
+      GALGAS_bool joker_5053 ; // Joker input parameter
+      GALGAS_string joker_5078_1 ; // Joker input parameter
+      extensionGetter_type (var_expressionResult_4587, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 108)).method_integer (var_minSource_5023, var_maxSource_5042, joker_5053, var_expSize_5076, joker_5078_1, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 108)) ;
+      GALGAS_bigint var_minTarget_5124 ;
+      GALGAS_bigint var_maxTarget_5143 ;
+      GALGAS_uint var_resultSize_5180 ;
+      GALGAS_bool joker_5154 ; // Joker input parameter
+      GALGAS_string joker_5182_1 ; // Joker input parameter
+      var_resultType_4628.method_integer (var_minTarget_5124, var_maxTarget_5143, joker_5154, var_resultSize_5180, joker_5182_1, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 109)) ;
+      GALGAS_bool test_4 = GALGAS_bool (kIsInfOrEqual, var_minTarget_5124.objectCompare (var_minSource_5023)) ;
       if (kBoolTrue == test_4.boolEnum ()) {
-        test_4 = GALGAS_bool (kIsSupOrEqual, var_maxTarget_5135.objectCompare (var_maxSource_5034)) ;
+        test_4 = GALGAS_bool (kIsSupOrEqual, var_maxTarget_5143.objectCompare (var_maxSource_5042)) ;
       }
-      GALGAS_bool var_alwaysPossible_5200 = test_4 ;
-      const enumGalgasBool test_5 = var_alwaysPossible_5200.boolEnum () ;
+      GALGAS_bool var_alwaysPossible_5208 = test_4 ;
+      const enumGalgasBool test_5 = var_alwaysPossible_5208.boolEnum () ;
       if (kBoolTrue == test_5) {
         TC_Array <C_FixItDescription> fixItArray6 ;
-        inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-truncate.galgas", 111)), GALGAS_string ("useless explicit conversion"), fixItArray6  COMMA_SOURCE_FILE ("expression-truncate.galgas", 111)) ;
+        inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-truncate.galgas", 112)), GALGAS_string ("useless explicit conversion"), fixItArray6  COMMA_SOURCE_FILE ("expression-truncate.galgas", 112)) ;
       }
-      const enumGalgasBool test_7 = GALGAS_bool (kIsStrictInf, var_resultSize_5172.objectCompare (var_expSize_5068)).boolEnum () ;
+      const enumGalgasBool test_7 = GALGAS_bool (kIsStrictInf, var_resultSize_5180.objectCompare (var_expSize_5076)).boolEnum () ;
       if (kBoolTrue == test_7) {
         {
-        routine_getNewTempVariable (var_resultType_4620, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-truncate.galgas", 114)) ;
+        routine_getNewTempVariable (var_resultType_4628, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-truncate.galgas", 115)) ;
         }
-        ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_truncateInstructionIR::constructor_new (outArgument_outResult, var_expressionResult_4579  COMMA_SOURCE_FILE ("expression-truncate.galgas", 115))  COMMA_SOURCE_FILE ("expression-truncate.galgas", 115)) ;
+        ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_truncateInstructionIR::constructor_new (outArgument_outResult, var_expressionResult_4587  COMMA_SOURCE_FILE ("expression-truncate.galgas", 116))  COMMA_SOURCE_FILE ("expression-truncate.galgas", 116)) ;
       }else if (kBoolFalse == test_7) {
-        outArgument_outResult = extensionGetter_withType (var_expressionResult_4579, var_resultType_4620, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 120)) ;
+        outArgument_outResult = extensionGetter_withType (var_expressionResult_4587, var_resultType_4628, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 121)) ;
       }
     }
   }
@@ -8833,8 +8833,8 @@ static void extensionMethod_truncateInstructionIR_llvmInstructionCode (const cPt
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_truncateInstructionIR * object = (const cPtr_truncateInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_truncateInstructionIR) ;
-  GALGAS_string var_operandType_6864 = extensionGetter_llvmTypeName (object->mProperty_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 151)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (GALGAS_string (" = trunc "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (var_operandType_6864, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (extensionGetter_llvmName (object->mProperty_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (extensionGetter_llvmTypeName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)), inCompiler  COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)) ;
+  GALGAS_string var_operandType_6872 = extensionGetter_llvmTypeName (object->mProperty_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)).add_operation (GALGAS_string (" = trunc "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)).add_operation (var_operandType_6872, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)).add_operation (extensionGetter_llvmName (object->mProperty_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)).add_operation (extensionGetter_llvmTypeName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 154)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 154)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 154)), inCompiler  COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

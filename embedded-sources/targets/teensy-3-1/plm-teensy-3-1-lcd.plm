@@ -289,7 +289,7 @@ module lcd {
   //············································································
 
   public func user printHex1 @noUnusedWarning (?inValue $uint32) {
-    let v = truncate inValue & 0xF : $uint8
+    let v = truncate $uint8 (inValue & 0xF)
     if v < 10 {
       self.writeData_inUserMode (!v + 0x30)
     }else{
@@ -321,8 +321,8 @@ module lcd {
   //············································································
 
   public func user printHex16 @noUnusedWarning (?inValue $uint64) {
-    self.printHex8 (!truncate inValue >> 32 : $uint32)
-    self.printHex8 (!truncate inValue : $uint32)
+    self.printHex8 (!truncate $uint32 (inValue >> 32))
+    self.printHex8 (!truncate $uint32 (inValue))
   }
 
   //············································································
@@ -353,7 +353,7 @@ module lcd {
       if isPrinting or (value ≥ divisor) {
         let quotient = value !/ divisor
         let remainder = value -% quotient *% divisor
-        self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)
+        self.writeDataInPanicMode (!0x30 +% truncate $uint8 (quotient))
         value = remainder
         isPrinting = yes
       }
@@ -368,10 +368,10 @@ module lcd {
 
   public func panic printSignedInPanicMode @noUnusedWarning (?inValue $int32) {
     if inValue ≥ 0 {
-      self.printUnsignedInPanicMode (!truncate inValue : $uint32)
+      self.printUnsignedInPanicMode (!truncate $uint32 (inValue))
     }else{
       self.writeDataInPanicMode (!0x2D) // Signe -
-      self.printUnsignedInPanicMode (!truncate -% inValue : $uint32)
+      self.printUnsignedInPanicMode (!truncate $uint32 (-% inValue))
     }
   }
 

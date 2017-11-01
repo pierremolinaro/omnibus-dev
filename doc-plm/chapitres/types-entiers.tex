@@ -44,7 +44,7 @@ Il y a trois types de conversion entre objets de type entier :
 \begin{itemize}
   \item les conversions toujours possibles \plm+extend $type (exp)+ (\refSubsectionPage{conversionsToujoursPossibles})~;
   \item les conversions pouvant échouer \plm+convert exp : $type+ (\refSubsectionPage{conversionsPouvantEchouer})~;
-  \item les troncatures \plm+truncate exp : $type+  (\refSubsectionPage{conversionsTroncature}).
+  \item les troncatures \plm+truncate $type+ (exp)  (\refSubsectionPage{conversionsTroncature}).
 \end{itemize}
 
 
@@ -99,7 +99,7 @@ L'opérateur \plm+truncate+ permet de spécifier une conversion explicite silenc
 
 \begin{PLM}
 let s $int8 = -10
-let x $uint16 = truncate x : $uint16
+let x $uint16 = truncate $uint16 (x)
 \end{PLM}
 
 L'opérateur \plm+truncate+ ne peut pas apparaître dans une expression statique.
@@ -107,7 +107,7 @@ L'opérateur \plm+truncate+ ne peut pas apparaître dans une expression statique
 De plus, une erreur de compilation est déclenchée si l'opérateur \plm+truncate+ est utilisé alors qu'une conversion implicite est possible :
 \begin{PLM}
 let v $uint8 = ...
-let y = truncate v : $int16 // Erreur, conversion toujours possible
+let y = truncate $int16 (v) // Erreur, conversion toujours possible
 \end{PLM}
 
 \section{Opérateurs infixes de comparaison}

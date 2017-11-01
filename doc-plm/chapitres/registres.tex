@@ -246,7 +246,7 @@ Si le code ci-dessus apparaît dans une routine où la génération de panique e
 
 \begin{PLM}
 let x $uint8 = ... 
-PORTA_PCR0 = {PORTA_PCR0 !MUX:truncate x : $uint3}
+PORTA_PCR0 = {PORTA_PCR0 !MUX:truncate $uint3 (x)}
 \end{PLM}
 
 Ce code n'effectue aucune vérification à l'exécution.
