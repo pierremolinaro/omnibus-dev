@@ -71,7 +71,12 @@ let s $int8 = ...
 let x $uint16 = x // Erreur de compilation
 \end{PLM}
 
-
+L'annotation de type après le mot-clé \plm=extend= est optionnel~: par défaut, le type est inféré par le contexte. Par exemple, on peut écrire~:
+\begin{PLM}
+let y $int9 =  ...
+let z $int10 = extend (y) // Le type $int10 est inféré du contexte
+let z = extend (y) // Invalide : aucun type ne peut être inféré.
+\end{PLM}
 
 
 \subsectionLabel{Conversions pouvant échouer : \texttt{convert}}{conversionsPouvantEchouer}
