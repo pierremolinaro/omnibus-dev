@@ -210,7 +210,7 @@ task Tâche priority 1 stackSize 512 {
     lcd.printString (!" ")
     let cc = $isrSlot.PITChannel0.uint ()
 //    let cc = c.uint ()
-    lcd.printUnsigned (!extend $uint32 (cc))
+    lcd.printUnsigned (!extend (cc))
   }
 }
 

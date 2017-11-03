@@ -2662,7 +2662,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    lcd.printString (!\" \")\n"
   "    let cc = $isrSlot.PITChannel0.uint ()\n"
   "//    let cc = c.uint ()\n"
-  "    lcd.printUnsigned (!extend $uint32 (cc))\n"
+  "    lcd.printUnsigned (!extend (cc))\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2672,7 +2672,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  8499, // Text length
+  8491, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 

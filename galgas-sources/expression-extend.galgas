@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
+#!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @extendExpressionAST : @expressionAST {
@@ -9,33 +9,38 @@ class @extendExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
 
-  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+  #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
     $extend$
-    $\$type$ ?let typeIdentifier
+    @lstring typeName
+    select
+      typeName = ["" here]
+    or
+      $\$type$ ?typeName
+    end
     $($
     <expression> ?outExpression
     let endOfExpression = @location.here
     $)$
     outExpression = @extendExpressionAST.new {
       !outExpression
-      !typeIdentifier
+      !typeName
       !endOfExpression
     }
   }
 
-  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+  #·····················································································································
 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+#!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @extendExpressionAST addDependenceEdgeForStaticExpression
@@ -43,24 +48,26 @@ override method @extendExpressionAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
-  [!?ioGraph noteNode !typeName]
+  if mTypeName.string != "" then
+    let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+    [!?ioGraph noteNode !typeName]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
+#!  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
-  [!?ioGraph noteNode !typeName]
+  if mTypeName.string != "" then
+    let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+    [!?ioGraph noteNode !typeName]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @extendExpressionAST
+#!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @extendExpressionAST analyzeExpression
@@ -98,7 +105,10 @@ override method @extendExpressionAST analyzeExpression
     ?let expressionResult
   ]  
 #--- Analyze type
-  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  let @PLMType resultType = if mTypeName.string == ""
+    then inOptionalTargetType
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  end
 #--- Check types
   if not [resultType isInteger] then
     error mTypeName : "this type is not an integer type" : outResult
@@ -109,19 +119,19 @@ override method @extendExpressionAST analyzeExpression
     [resultType integer ?min:* ?max:* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize ?1*]
     if sourceIsUnsigned && targetIsUnsigned then # unsigned -> unsigned
       if sourceSize > targetSize then
-        error mTypeName: "cannot extend, use convert or trunc"
+        error mTypeName: "cannot extend, use convert or truncate"
       elsif sourceSize == targetSize then
         error mTypeName: "same size: useless extend operation"
       end
     elsif sourceIsUnsigned && not targetIsUnsigned then # unsigned -> signed
       if sourceSize >= targetSize then
-        error mTypeName: "cannot extend, use convert or trunc"
+        error mTypeName: "cannot extend, use convert or truncate"
       end
     elsif not sourceIsUnsigned && targetIsUnsigned then # signed -> unsigned
-      error mTypeName: "cannot extend, use convert or trunc"
+      error mTypeName: "cannot extend, use convert or truncate"
     else # signed -> signed
       if sourceSize > targetSize then
-        error mTypeName: "cannot extend, use convert or trunc"
+        error mTypeName: "cannot extend, use convert or truncate"
       elsif sourceSize == targetSize then
         error mTypeName: "same size: useless extend operation"
       end

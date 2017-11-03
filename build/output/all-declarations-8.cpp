@@ -8470,10 +8470,13 @@ static void extensionMethod_extendExpressionAST_addDependenceEdgeForStaticExpres
                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_extendExpressionAST * object = (const cPtr_extendExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_extendExpressionAST) ;
-  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 45)) ;
-  GALGAS_lstring var_typeName_2046 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mTypeName, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 46)) ;
-  {
-  ioArgument_ioGraph.setter_noteNode (var_typeName_2046 COMMA_SOURCE_FILE ("expression-extend.galgas", 47)) ;
+  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 50)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, object->mProperty_mTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_lstring var_typeName_2145 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mTypeName, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 52)) ;
+    {
+    ioArgument_ioGraph.setter_noteNode (var_typeName_2145 COMMA_SOURCE_FILE ("expression-extend.galgas", 53)) ;
+    }
   }
 }
 
@@ -8500,10 +8503,13 @@ static void extensionMethod_extendExpressionAST_noteExpressionTypesInPrecedenceG
                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_extendExpressionAST * object = (const cPtr_extendExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_extendExpressionAST) ;
-  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 55)) ;
-  GALGAS_lstring var_typeName_2689 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mTypeName, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 56)) ;
-  {
-  ioArgument_ioGraph.setter_noteNode (var_typeName_2689 COMMA_SOURCE_FILE ("expression-extend.galgas", 57)) ;
+  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 62)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, object->mProperty_mTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_lstring var_typeName_2832 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mTypeName, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 64)) ;
+    {
+    ioArgument_ioGraph.setter_noteNode (var_typeName_2832 COMMA_SOURCE_FILE ("expression-extend.galgas", 65)) ;
+    }
   }
 }
 
@@ -8541,95 +8547,102 @@ static void extensionMethod_extendExpressionAST_analyzeExpression (const cPtr_ex
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_extendExpressionAST * object = (const cPtr_extendExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_extendExpressionAST) ;
-  GALGAS_objectIR var_expressionResultPossibleReference_4435 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResultPossibleReference_4435, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 81)) ;
-  GALGAS_objectIR var_expressionResult_4581 ;
+  GALGAS_objectIR var_expressionResultPossibleReference_4442 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mExpression.ptr (), constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResultPossibleReference_4442, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 88)) ;
+  GALGAS_objectIR var_expressionResult_4588 ;
   {
-  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_expressionResultPossibleReference_4435, var_expressionResult_4581, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 95)) ;
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_expressionResultPossibleReference_4442, var_expressionResult_4588, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 102)) ;
   }
-  GALGAS_PLMType var_resultType_4622 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), object->mProperty_mTypeName, inCompiler  COMMA_SOURCE_FILE ("expression-extend.galgas", 101)).getter_type (inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 101)) ;
-  const enumGalgasBool test_0 = var_resultType_4622.getter_isInteger (SOURCE_FILE ("expression-extend.galgas", 103)).operator_not (SOURCE_FILE ("expression-extend.galgas", 103)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 104)), GALGAS_string ("this type is not an integer type"), fixItArray1  COMMA_SOURCE_FILE ("expression-extend.galgas", 104)) ;
+  GALGAS_PLMType temp_0 ;
+  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, object->mProperty_mTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    temp_0 = constinArgument_inOptionalTargetType ;
+  }else if (kBoolFalse == test_1) {
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), object->mProperty_mTypeName, inCompiler  COMMA_SOURCE_FILE ("expression-extend.galgas", 110)).getter_type (inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 110)) ;
+  }
+  GALGAS_PLMType var_resultType_4638 = temp_0 ;
+  const enumGalgasBool test_2 = var_resultType_4638.getter_isInteger (SOURCE_FILE ("expression-extend.galgas", 113)).operator_not (SOURCE_FILE ("expression-extend.galgas", 113)).boolEnum () ;
+  if (kBoolTrue == test_2) {
+    TC_Array <C_FixItDescription> fixItArray3 ;
+    inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 114)), GALGAS_string ("this type is not an integer type"), fixItArray3  COMMA_SOURCE_FILE ("expression-extend.galgas", 114)) ;
     outArgument_outResult.drop () ; // Release error dropped variable
-  }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_2 = extensionGetter_type (var_expressionResult_4581, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 105)).getter_isInteger (SOURCE_FILE ("expression-extend.galgas", 105)).operator_not (SOURCE_FILE ("expression-extend.galgas", 105)).boolEnum () ;
-    if (kBoolTrue == test_2) {
-      TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (object->mProperty_mEndOfExpression, GALGAS_string ("expression type is not an integer type"), fixItArray3  COMMA_SOURCE_FILE ("expression-extend.galgas", 106)) ;
+  }else if (kBoolFalse == test_2) {
+    const enumGalgasBool test_4 = extensionGetter_type (var_expressionResult_4588, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 115)).getter_isInteger (SOURCE_FILE ("expression-extend.galgas", 115)).operator_not (SOURCE_FILE ("expression-extend.galgas", 115)).boolEnum () ;
+    if (kBoolTrue == test_4) {
+      TC_Array <C_FixItDescription> fixItArray5 ;
+      inCompiler->emitSemanticError (object->mProperty_mEndOfExpression, GALGAS_string ("expression type is not an integer type"), fixItArray5  COMMA_SOURCE_FILE ("expression-extend.galgas", 116)) ;
       outArgument_outResult.drop () ; // Release error dropped variable
-    }else if (kBoolFalse == test_2) {
-      GALGAS_bool var_sourceIsUnsigned_5043 ;
-      GALGAS_uint var_sourceSize_5068 ;
-      GALGAS_bigint joker_5004 ; // Joker input parameter
-      GALGAS_bigint joker_5011 ; // Joker input parameter
-      GALGAS_string joker_5070_1 ; // Joker input parameter
-      extensionGetter_type (var_expressionResult_4581, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 108)).method_integer (joker_5004, joker_5011, var_sourceIsUnsigned_5043, var_sourceSize_5068, joker_5070_1, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 108)) ;
-      GALGAS_bool var_targetIsUnsigned_5142 ;
-      GALGAS_uint var_targetSize_5167 ;
-      GALGAS_bigint joker_5103 ; // Joker input parameter
-      GALGAS_bigint joker_5110 ; // Joker input parameter
-      GALGAS_string joker_5169_1 ; // Joker input parameter
-      var_resultType_4622.method_integer (joker_5103, joker_5110, var_targetIsUnsigned_5142, var_targetSize_5167, joker_5169_1, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 109)) ;
-      GALGAS_bool test_4 = var_sourceIsUnsigned_5043 ;
-      if (kBoolTrue == test_4.boolEnum ()) {
-        test_4 = var_targetIsUnsigned_5142 ;
+    }else if (kBoolFalse == test_4) {
+      GALGAS_bool var_sourceIsUnsigned_5130 ;
+      GALGAS_uint var_sourceSize_5155 ;
+      GALGAS_bigint joker_5091 ; // Joker input parameter
+      GALGAS_bigint joker_5098 ; // Joker input parameter
+      GALGAS_string joker_5157_1 ; // Joker input parameter
+      extensionGetter_type (var_expressionResult_4588, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 118)).method_integer (joker_5091, joker_5098, var_sourceIsUnsigned_5130, var_sourceSize_5155, joker_5157_1, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 118)) ;
+      GALGAS_bool var_targetIsUnsigned_5229 ;
+      GALGAS_uint var_targetSize_5254 ;
+      GALGAS_bigint joker_5190 ; // Joker input parameter
+      GALGAS_bigint joker_5197 ; // Joker input parameter
+      GALGAS_string joker_5256_1 ; // Joker input parameter
+      var_resultType_4638.method_integer (joker_5190, joker_5197, var_targetIsUnsigned_5229, var_targetSize_5254, joker_5256_1, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 119)) ;
+      GALGAS_bool test_6 = var_sourceIsUnsigned_5130 ;
+      if (kBoolTrue == test_6.boolEnum ()) {
+        test_6 = var_targetIsUnsigned_5229 ;
       }
-      const enumGalgasBool test_5 = test_4.boolEnum () ;
-      if (kBoolTrue == test_5) {
-        const enumGalgasBool test_6 = GALGAS_bool (kIsStrictSup, var_sourceSize_5068.objectCompare (var_targetSize_5167)).boolEnum () ;
-        if (kBoolTrue == test_6) {
-          TC_Array <C_FixItDescription> fixItArray7 ;
-          inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 112)), GALGAS_string ("cannot extend, use convert or trunc"), fixItArray7  COMMA_SOURCE_FILE ("expression-extend.galgas", 112)) ;
-        }else if (kBoolFalse == test_6) {
-          const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, var_sourceSize_5068.objectCompare (var_targetSize_5167)).boolEnum () ;
-          if (kBoolTrue == test_8) {
-            TC_Array <C_FixItDescription> fixItArray9 ;
-            inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 114)), GALGAS_string ("same size: useless extend operation"), fixItArray9  COMMA_SOURCE_FILE ("expression-extend.galgas", 114)) ;
+      const enumGalgasBool test_7 = test_6.boolEnum () ;
+      if (kBoolTrue == test_7) {
+        const enumGalgasBool test_8 = GALGAS_bool (kIsStrictSup, var_sourceSize_5155.objectCompare (var_targetSize_5254)).boolEnum () ;
+        if (kBoolTrue == test_8) {
+          TC_Array <C_FixItDescription> fixItArray9 ;
+          inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 122)), GALGAS_string ("cannot extend, use convert or truncate"), fixItArray9  COMMA_SOURCE_FILE ("expression-extend.galgas", 122)) ;
+        }else if (kBoolFalse == test_8) {
+          const enumGalgasBool test_10 = GALGAS_bool (kIsEqual, var_sourceSize_5155.objectCompare (var_targetSize_5254)).boolEnum () ;
+          if (kBoolTrue == test_10) {
+            TC_Array <C_FixItDescription> fixItArray11 ;
+            inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 124)), GALGAS_string ("same size: useless extend operation"), fixItArray11  COMMA_SOURCE_FILE ("expression-extend.galgas", 124)) ;
           }
         }
-      }else if (kBoolFalse == test_5) {
-        GALGAS_bool test_10 = var_sourceIsUnsigned_5043 ;
-        if (kBoolTrue == test_10.boolEnum ()) {
-          test_10 = var_targetIsUnsigned_5142.operator_not (SOURCE_FILE ("expression-extend.galgas", 116)) ;
+      }else if (kBoolFalse == test_7) {
+        GALGAS_bool test_12 = var_sourceIsUnsigned_5130 ;
+        if (kBoolTrue == test_12.boolEnum ()) {
+          test_12 = var_targetIsUnsigned_5229.operator_not (SOURCE_FILE ("expression-extend.galgas", 126)) ;
         }
-        const enumGalgasBool test_11 = test_10.boolEnum () ;
-        if (kBoolTrue == test_11) {
-          const enumGalgasBool test_12 = GALGAS_bool (kIsSupOrEqual, var_sourceSize_5068.objectCompare (var_targetSize_5167)).boolEnum () ;
-          if (kBoolTrue == test_12) {
-            TC_Array <C_FixItDescription> fixItArray13 ;
-            inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 118)), GALGAS_string ("cannot extend, use convert or trunc"), fixItArray13  COMMA_SOURCE_FILE ("expression-extend.galgas", 118)) ;
+        const enumGalgasBool test_13 = test_12.boolEnum () ;
+        if (kBoolTrue == test_13) {
+          const enumGalgasBool test_14 = GALGAS_bool (kIsSupOrEqual, var_sourceSize_5155.objectCompare (var_targetSize_5254)).boolEnum () ;
+          if (kBoolTrue == test_14) {
+            TC_Array <C_FixItDescription> fixItArray15 ;
+            inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 128)), GALGAS_string ("cannot extend, use convert or truncate"), fixItArray15  COMMA_SOURCE_FILE ("expression-extend.galgas", 128)) ;
           }
-        }else if (kBoolFalse == test_11) {
-          GALGAS_bool test_14 = var_sourceIsUnsigned_5043.operator_not (SOURCE_FILE ("expression-extend.galgas", 120)) ;
-          if (kBoolTrue == test_14.boolEnum ()) {
-            test_14 = var_targetIsUnsigned_5142 ;
+        }else if (kBoolFalse == test_13) {
+          GALGAS_bool test_16 = var_sourceIsUnsigned_5130.operator_not (SOURCE_FILE ("expression-extend.galgas", 130)) ;
+          if (kBoolTrue == test_16.boolEnum ()) {
+            test_16 = var_targetIsUnsigned_5229 ;
           }
-          const enumGalgasBool test_15 = test_14.boolEnum () ;
-          if (kBoolTrue == test_15) {
-            TC_Array <C_FixItDescription> fixItArray16 ;
-            inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 121)), GALGAS_string ("cannot extend, use convert or trunc"), fixItArray16  COMMA_SOURCE_FILE ("expression-extend.galgas", 121)) ;
-          }else if (kBoolFalse == test_15) {
-            const enumGalgasBool test_17 = GALGAS_bool (kIsStrictSup, var_sourceSize_5068.objectCompare (var_targetSize_5167)).boolEnum () ;
-            if (kBoolTrue == test_17) {
-              TC_Array <C_FixItDescription> fixItArray18 ;
-              inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 124)), GALGAS_string ("cannot extend, use convert or trunc"), fixItArray18  COMMA_SOURCE_FILE ("expression-extend.galgas", 124)) ;
-            }else if (kBoolFalse == test_17) {
-              const enumGalgasBool test_19 = GALGAS_bool (kIsEqual, var_sourceSize_5068.objectCompare (var_targetSize_5167)).boolEnum () ;
-              if (kBoolTrue == test_19) {
-                TC_Array <C_FixItDescription> fixItArray20 ;
-                inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 126)), GALGAS_string ("same size: useless extend operation"), fixItArray20  COMMA_SOURCE_FILE ("expression-extend.galgas", 126)) ;
+          const enumGalgasBool test_17 = test_16.boolEnum () ;
+          if (kBoolTrue == test_17) {
+            TC_Array <C_FixItDescription> fixItArray18 ;
+            inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 131)), GALGAS_string ("cannot extend, use convert or truncate"), fixItArray18  COMMA_SOURCE_FILE ("expression-extend.galgas", 131)) ;
+          }else if (kBoolFalse == test_17) {
+            const enumGalgasBool test_19 = GALGAS_bool (kIsStrictSup, var_sourceSize_5155.objectCompare (var_targetSize_5254)).boolEnum () ;
+            if (kBoolTrue == test_19) {
+              TC_Array <C_FixItDescription> fixItArray20 ;
+              inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 134)), GALGAS_string ("cannot extend, use convert or truncate"), fixItArray20  COMMA_SOURCE_FILE ("expression-extend.galgas", 134)) ;
+            }else if (kBoolFalse == test_19) {
+              const enumGalgasBool test_21 = GALGAS_bool (kIsEqual, var_sourceSize_5155.objectCompare (var_targetSize_5254)).boolEnum () ;
+              if (kBoolTrue == test_21) {
+                TC_Array <C_FixItDescription> fixItArray22 ;
+                inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("expression-extend.galgas", 136)), GALGAS_string ("same size: useless extend operation"), fixItArray22  COMMA_SOURCE_FILE ("expression-extend.galgas", 136)) ;
               }
             }
           }
         }
       }
       {
-      routine_getNewTempVariable (var_resultType_4622, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-extend.galgas", 129)) ;
+      routine_getNewTempVariable (var_resultType_4638, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-extend.galgas", 139)) ;
       }
       {
-      extensionSetter_appendExtend (ioArgument_ioInstructionGenerationList, outArgument_outResult, var_expressionResult_4581, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 130)) ;
+      extensionSetter_appendExtend (ioArgument_ioInstructionGenerationList, outArgument_outResult, var_expressionResult_4588, inCompiler COMMA_SOURCE_FILE ("expression-extend.galgas", 140)) ;
       }
     }
   }
