@@ -5,8 +5,8 @@
 
 #·······················································································································
 
-shared class @universalPropertyAndRoutineMapForContext {
-  @internalUniversalPropertyAndRoutineMapForContext mInternalPropertyAndRoutineMapForContext
+shared class @universalValuedObjectMapForContext {
+  @internalValuedObjectMapMapForContext mInternalPropertyAndRoutineMapForContext
   @scopeStack mScopeStack
   @lstringlist mLocalObjectList
 }
@@ -15,30 +15,22 @@ shared class @universalPropertyAndRoutineMapForContext {
 #! INSERT SETTERS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @universalPropertyAndRoutineMapForContext insertModule
+setter @universalValuedObjectMapForContext insertModule
   ?let @lstring inModuleName
   ?let @PLMType inModuleType
 {
-  let newValue = @possibleValuedObject.module {!type:inModuleType}
-  with inModuleName.string in !?mInternalPropertyAndRoutineMapForContext do
-    if [mPossibleValuedObject isUndefined] then
-      mPossibleValuedObject = newValue
-    else
-      error inModuleName : "object already defined in this context"
-    end
-  else
-    [!?mInternalPropertyAndRoutineMapForContext insertKey
-      !inModuleName
-      !.noValue
-      !false
-      !newValue
-    ]
-  end
+  let newValue = @valuedObject.module {!type:inModuleType}
+  [!?mInternalPropertyAndRoutineMapForContext insertKey
+    !inModuleName
+    !.noValue
+    !false
+    !newValue
+  ]
 }
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext insertRegister
+setter @universalValuedObjectMapForContext insertRegister
   ?let @lstring inRegisterName
   ?readable:let @bool inReadable
   ?writable:let @bool inWritable
@@ -48,7 +40,7 @@ setter @universalPropertyAndRoutineMapForContext insertRegister
   ?arraySize:let @uint inArraySize # 0 if not an array
   ?elementSize:let @uint inElementSize
 {
-  let newValue = @possibleValuedObject.register {
+  let newValue = @valuedObject.register {
     !readable:inReadable
     !writable:inWritable
     !type:inType
@@ -57,147 +49,95 @@ setter @universalPropertyAndRoutineMapForContext insertRegister
     !arraySize:inArraySize # 0 if not an array
     !elementSize:inElementSize
   }
-  with inRegisterName.string in !?mInternalPropertyAndRoutineMapForContext do
-    if [mPossibleValuedObject isUndefined] then
-      mPossibleValuedObject = newValue
-    else
-      error inRegisterName : "object already defined in this context"
-    end
-  else
-    [!?mInternalPropertyAndRoutineMapForContext insertKey
-      !inRegisterName
-      !.noValue
-      !false
-      !newValue
-    ]
-  end
+  [!?mInternalPropertyAndRoutineMapForContext insertKey
+    !inRegisterName
+    !.noValue
+    !false
+    !newValue
+  ]
 }
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext insertGlobalConstant
+setter @universalValuedObjectMapForContext insertGlobalConstant
   ?let @lstring inConstantName
   ?let @objectIR inConstantObjectIR
 {
-  let newValue = @possibleValuedObject.globalConstant {!objectIR:inConstantObjectIR}
-  with inConstantName.string in !?mInternalPropertyAndRoutineMapForContext do
-    if [mPossibleValuedObject isUndefined] then
-      mPossibleValuedObject = newValue
-    else
-      error inConstantName : "object already defined in this context"
-    end
-  else
-    [!?mInternalPropertyAndRoutineMapForContext insertKey
-      !inConstantName
-      !.noValue
-      !false
-      !newValue
-    ]
-  end
+  let newValue = @valuedObject.globalConstant {!objectIR:inConstantObjectIR}
+  [!?mInternalPropertyAndRoutineMapForContext insertKey
+    !inConstantName
+    !.noValue
+    !false
+    !newValue
+  ]
 }
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext insertLocalConstant
+setter @universalValuedObjectMapForContext insertLocalConstant
   ?let @lstring inLocalConstantName
   ?let @PLMType inType
   ?let @lstring inPLMConstantName
 {
-  let newValue = @possibleValuedObject.localConstant {!type:inType !plmName:inPLMConstantName}
-  with inLocalConstantName.string in !?mInternalPropertyAndRoutineMapForContext do
-    if [mPossibleValuedObject isUndefined] then
-      mObjectState = .hasUnreadValue
-      mPossibleValuedObject = newValue
-    else
-      error inLocalConstantName : "object already defined in this context"
-    end
-  else
-    [!?mInternalPropertyAndRoutineMapForContext insertKey
-      !inLocalConstantName
-      !.hasUnreadValue
-      !false
-      !newValue
-    ]
-  end
+  let newValue = @valuedObject.localConstant {!type:inType !plmName:inPLMConstantName}
+  [!?mInternalPropertyAndRoutineMapForContext insertKey
+    !inLocalConstantName
+    !.hasUnreadValue
+    !false
+    !newValue
+  ]
   mLocalObjectList += !inLocalConstantName
 }
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext insertUsedLocalConstant
+setter @universalValuedObjectMapForContext insertUsedLocalConstant
   ?let @lstring inLocalConstantName
   ?let @PLMType inType
   ?let @lstring inPLMConstantName
 {
-  let newValue = @possibleValuedObject.localConstant {!type:inType !plmName:inPLMConstantName}
-  with inLocalConstantName.string in !?mInternalPropertyAndRoutineMapForContext do
-    if [mPossibleValuedObject isUndefined] then
-      mObjectState = .hasReadValue
-      mPossibleValuedObject = newValue
-    else
-      error inLocalConstantName : "object already defined in this context"
-    end
-  else
-    [!?mInternalPropertyAndRoutineMapForContext insertKey
-      !inLocalConstantName
-      !.hasReadValue
-      !false
-      !newValue
-    ]
-  end
+  let newValue = @valuedObject.localConstant {!type:inType !plmName:inPLMConstantName}
+  [!?mInternalPropertyAndRoutineMapForContext insertKey
+    !inLocalConstantName
+    !.hasReadValue
+    !false
+    !newValue
+  ]
   mLocalObjectList += !inLocalConstantName
 }
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext insertGlobalVariable
+setter @universalValuedObjectMapForContext insertGlobalVariable
   ?let @lstring inGlobalVariableName
   ?let @PLMType inType
   ?let @bool inWritable
 {
-  let newValue = @possibleValuedObject.globalVariable {!writable:inWritable !type:inType}
-  with inGlobalVariableName.string in !?mInternalPropertyAndRoutineMapForContext do
-    if [mPossibleValuedObject isUndefined] then
-      mPossibleValuedObject = newValue
-    else
-      error inGlobalVariableName : "object already defined in this context"
-    end
-  else
-    [!?mInternalPropertyAndRoutineMapForContext insertKey
-      !inGlobalVariableName
-      !.noValue
-      !false
-      !newValue
-    ]
-  end
+  let newValue = @valuedObject.globalVariable {!writable:inWritable !type:inType}
+  [!?mInternalPropertyAndRoutineMapForContext insertKey
+    !inGlobalVariableName
+    !.noValue
+    !false
+    !newValue
+  ]
 }
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext insertLocalVariable
+setter @universalValuedObjectMapForContext insertLocalVariable
   ?let @lstring inLocalVariableName
   ?let @PLMType inType
   ?let @lstring inPLMName
   ?let @valuedObjectState inVariableInitialState
   ?let @bool inObjectShouldBeValuedAtEndOfScope
 {
-  let newValue = @possibleValuedObject.localVariable {!type:inType !plmName:inPLMName}
-  with inLocalVariableName.string in !?mInternalPropertyAndRoutineMapForContext do
-    if [mPossibleValuedObject isUndefined] then
-      mObjectState = inVariableInitialState
-      mObjectShouldBeValuedAtEndOfScope = inObjectShouldBeValuedAtEndOfScope
-      mPossibleValuedObject = newValue
-    else
-      error inLocalVariableName : "object already defined in this context"
-    end
-  else
-    [!?mInternalPropertyAndRoutineMapForContext insertKey
-      !inLocalVariableName
-      !inVariableInitialState
-      !inObjectShouldBeValuedAtEndOfScope
-      !newValue
-    ]
-  end
+  let newValue = @valuedObject.localVariable {!type:inType !plmName:inPLMName}
+  [!?mInternalPropertyAndRoutineMapForContext insertKey
+    !inLocalVariableName
+    !inVariableInitialState
+    !inObjectShouldBeValuedAtEndOfScope
+    !newValue
+  ]
   mLocalObjectList += !inLocalVariableName
 }
 
@@ -205,23 +145,21 @@ setter @universalPropertyAndRoutineMapForContext insertLocalVariable
 #! SEARCH METHODS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @universalPropertyAndRoutineMapForContext searchEntity
+method @universalValuedObjectMapForContext searchEntity
   ?let @lstring inValuedObjectName
-  !@possibleValuedObject outEntity
+  !@valuedObject outEntity
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?outEntity]
 }
 
 #·······················································································································
 
-method @universalPropertyAndRoutineMapForContext searchValuedObject
+method @universalValuedObjectMapForContext searchValuedObject
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let entity]
   switch entity
-  case undefined :
-    error inValuedObjectName : "undefined in this context" : outObjectIR
   case module (@PLMType type) :
     outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
   case register (* * * * * * *) :
@@ -239,11 +177,9 @@ method @universalPropertyAndRoutineMapForContext searchValuedObject
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext readAccess ?let @lstring inValuedObjectName {
+setter @universalValuedObjectMapForContext readAccess ?let @lstring inValuedObjectName {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context"
   case module (*) :
   case register (* * * * * * *) :
   case globalConstant (*) :
@@ -265,80 +201,74 @@ setter @universalPropertyAndRoutineMapForContext readAccess ?let @lstring inValu
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext writeAccess ?let @lstring inValuedObjectName {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
-  switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context"
-  case module (*) :
-    error inValuedObjectName : "a module cannot be written"
-  case register (* @bool writable * * * * *) :
-    if not writable then
-      error inValuedObjectName : "the control register cannot be written"
-    end
-  case globalConstant (*) :
-    error inValuedObjectName : "a constant cannot be written"
-  case localConstant (* *) :
-    error inValuedObjectName : "a constant cannot be written"
-  case globalVariable (@bool writable *) :
-    if not writable then
-      error inValuedObjectName : "a global variable cannot be written"
-    end
-  case localVariable (* *) :
-    switch valueState 
-    case noValue, hasReadValue :
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
-    case hasUnreadValue :
-      warning inValuedObjectName : "previous '" + inValuedObjectName + "' value has not been read"
-    end
-  end
-}
+#setter @universalValuedObjectMapForContext writeAccess1 ?let @lstring inValuedObjectName {
+#  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
+#  switch property
+#  case module (*) :
+#    error inValuedObjectName : "a module cannot be written"
+#  case register (* @bool writable * * * * *) :
+#    if not writable then
+#      error inValuedObjectName : "the control register cannot be written"
+#    end
+#  case globalConstant (*) :
+#    error inValuedObjectName : "a constant cannot be written"
+#  case localConstant (* *) :
+#    error inValuedObjectName : "a constant cannot be written"
+#  case globalVariable (@bool writable *) :
+#    if not writable then
+#      error inValuedObjectName : "a global variable cannot be written"
+#    end
+#  case localVariable (* *) :
+#    switch valueState 
+#    case noValue, hasReadValue :
+#      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
+#    case hasUnreadValue :
+#      warning inValuedObjectName : "previous '" + inValuedObjectName + "' value has not been read"
+#    end
+#  end
+#}
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext readWriteAccess ?let @lstring inValuedObjectName {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
-  switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context"
-  case module (*) :
-    error inValuedObjectName : "a module cannot be written"
-  case register (@bool readable @bool writable * * * * *) :
-    if writable & readable then
-    elsif not readable then
-      error inValuedObjectName : "the register cannot be read"
-    else
-      error inValuedObjectName : "the register cannot be written"
-    end
-  case globalConstant (*) :
-    error inValuedObjectName : "a constant cannot be written"
-  case localConstant (* *) :
-    error inValuedObjectName : "a constant cannot be written"
-  case globalVariable (@bool writable *) :
-    if not writable then
-      error inValuedObjectName : "a global variable cannot be written"
-    end
-  case localVariable (* *) :
-    switch valueState 
-    case noValue :
-      error inValuedObjectName : "object has no value"
-    case hasUnreadValue :
-    case hasReadValue :
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
-    end
-  end
-}
+#setter @universalValuedObjectMapForContext readWriteAccess ?let @lstring inValuedObjectName {
+#  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
+#  switch property
+#  case module (*) :
+#    error inValuedObjectName : "a module cannot be written"
+#  case register (@bool readable @bool writable * * * * *) :
+#    if writable & readable then
+#    elsif not readable then
+#      error inValuedObjectName : "the register cannot be read"
+#    else
+#      error inValuedObjectName : "the register cannot be written"
+#    end
+#  case globalConstant (*) :
+#    error inValuedObjectName : "a constant cannot be written"
+#  case localConstant (* *) :
+#    error inValuedObjectName : "a constant cannot be written"
+#  case globalVariable (@bool writable *) :
+#    if not writable then
+#      error inValuedObjectName : "a global variable cannot be written"
+#    end
+#  case localVariable (* *) :
+#    switch valueState 
+#    case noValue :
+#      error inValuedObjectName : "object has no value"
+#    case hasUnreadValue :
+#    case hasReadValue :
+#      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
+#    end
+#  end
+#}
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
+setter @universalValuedObjectMapForContext searchValuedObjectForReadAccess
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context" : outObjectIR
   case module (@PLMType type) :
     outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
   case register (* * * * * * *) :
@@ -367,14 +297,12 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAccess
+setter @universalValuedObjectMapForContext searchValuedObjectForWriteAccess
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context" : outObjectIR
   case module (*) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
   case register (* * * * * * *) :
@@ -402,14 +330,12 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAcces
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteAccess
+setter @universalValuedObjectMapForContext searchValuedObjectForReadWriteAccess
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context" : outObjectIR
   case module (*) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
   case register (* * * * * * *) :
@@ -439,14 +365,12 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteA
 
 #·······················································································································
 
-method @universalPropertyAndRoutineMapForContext searchValuedObjectType
+method @universalValuedObjectMapForContext searchValuedObjectType
   ?let @lstring inValuedObjectName
   !@PLMType outType
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let property]
   switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context" : outType
   case module (*) :
     error inValuedObjectName : "undefined in this context" : outType
   case register (* * @PLMType type * * * *) :
@@ -466,10 +390,9 @@ method @universalPropertyAndRoutineMapForContext searchValuedObjectType
 #! STATE HANDLING
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @universalPropertyAndRoutineMapForContext checkLocalVariableFinalState {
+method @universalValuedObjectMapForContext checkLocalVariableFinalState {
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
-    case undefined :
     case module (*) :
     case register (* * * * * * *) :
     case globalConstant (*) :
@@ -488,11 +411,10 @@ method @universalPropertyAndRoutineMapForContext checkLocalVariableFinalState {
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext openOverrideForSelectBlock {
+setter @universalValuedObjectMapForContext openOverrideForSelectBlock {
   @referenceStateMap initialStateMap = {}
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
-    case undefined :
     case module (*) :
     case register (* * * * * * *) :
     case globalConstant (*) :
@@ -509,11 +431,10 @@ setter @universalPropertyAndRoutineMapForContext openOverrideForSelectBlock {
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext openOverrideForRepeatBlock {
+setter @universalValuedObjectMapForContext openOverrideForRepeatBlock {
   @referenceStateMap initialStateMap = {}
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
-    case undefined :
     case module (*) :
     case register (* * * * * * *) :
     case globalConstant (*) :
@@ -530,7 +451,7 @@ setter @universalPropertyAndRoutineMapForContext openOverrideForRepeatBlock {
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext openBranch {
+setter @universalValuedObjectMapForContext openBranch {
   [mScopeStack last ?* ?* ?let initialStateMap ?2*]
   for (key objectState) in initialStateMap do
     [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !objectState !key]
@@ -539,13 +460,12 @@ setter @universalPropertyAndRoutineMapForContext openBranch {
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext closeBranch ?let @location inErrorLocation {
+setter @universalValuedObjectMapForContext closeBranch ?let @location inErrorLocation {
   [!?mScopeStack popLast ?let scopeKind ?let firstBranch ?let initialStateMap ?var referenceStateMap ?let localObjectList]
   if firstBranch then
     @referenceStateMap newReferenceStateMap = {}
     for entry in mInternalPropertyAndRoutineMapForContext do
       switch entry.mPossibleValuedObject
-      case undefined :
       case module (*) :
       case register (* * * * * * *) :
       case globalConstant (*) :
@@ -587,7 +507,7 @@ setter @universalPropertyAndRoutineMapForContext closeBranch ?let @location inEr
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location inErrorLocation {
+setter @universalValuedObjectMapForContext closeOverride ?let @location inErrorLocation {
   [!?mScopeStack popLast ?* ?* ?* ?let referenceStateMap ?let localObjectList]
 #--- Restore value object state
   for (key objectState) in referenceStateMap do
@@ -602,7 +522,6 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
       ?let possibleValuedObject
     ]
     switch possibleValuedObject
-    case undefined :
     case module (*) :
     case register (* * * * * * *) :
     case globalConstant (*) :
@@ -617,9 +536,9 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
       end
     end
   end
-#--- Remove current scope objets, by setting their kind to "undefined"
+#--- Remove current scope objets
   for (lkey) in mLocalObjectList do
-    [!?mInternalPropertyAndRoutineMapForContext setMPossibleValuedObjectForKey !.undefined !lkey]
+    [!?mInternalPropertyAndRoutineMapForContext removeKey !lkey ?3*]
   end
 #--- Restore current scope objects
   mLocalObjectList = localObjectList
@@ -629,13 +548,14 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
 #! INTERNAL MAPS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @internalUniversalPropertyAndRoutineMapForContext { # Key is a variable, property, routine name
+map @internalValuedObjectMapMapForContext { # Key is a valued object
   @valuedObjectState mObjectState
   @bool mObjectShouldBeValuedAtEndOfScope
-  @possibleValuedObject mPossibleValuedObject
+  @valuedObject mPossibleValuedObject
 
   insert insertKey error message "the '%K' entity is already declared in %L"
   search searchKey error message "there is no '%K' entity"
+  remove removeKey error message "there is no '%K' entity"
 }
 
 #·······················································································································
@@ -667,7 +587,7 @@ map @referenceStateMap {
 #! VALUED OBJECT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @possibleValuedObject {
+enum @valuedObject {
   case module (@PLMType type)
   case register (@bool readable
                  @bool writable
@@ -680,8 +600,6 @@ enum @possibleValuedObject {
   case localConstant (@PLMType type @lstring plmName)
   case globalVariable (@bool writable @PLMType type)
   case localVariable (@PLMType type @lstring plmName)
-
-  case undefined
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

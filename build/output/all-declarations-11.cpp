@@ -2576,11 +2576,9 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    SIM_SCGC7 |= {SIM_SCGC7 !DMA:1}\n"
   "  \n"
   "  //--- Unmask PIT0 interrupt\n"
-  "//    NVIC_ISER [1] = 1 << ((64 - 16) & 31)\n"
   "    enable (!interrupt:.PITChannel0)\n"
   "  \n"
   "  //--- Unmask DMAChannel_0_16_TranfertComplete interrupt\n"
-  "//    NVIC_ISER [0] = 1 << ((16 - 16) & 31)\n"
   "    enable (!interrupt:.DMAChannel_0_16_TranfertComplete)\n"
   "  \n"
   "  //--- Enable PIT module\n"
@@ -2672,7 +2670,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  8491, // Text length
+  8403, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 

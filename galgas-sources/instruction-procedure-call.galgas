@@ -145,7 +145,7 @@ override method @standAloneProcedureCallInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -214,7 +214,7 @@ override method @procedureCallInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -230,10 +230,8 @@ override method @procedureCallInstructionAST analyze
       currentLLVMAddressVar = llvmNameForSelf ()
     end
   else
-    [ioUniversalMap searchEntity !mIdentifier ?let @possibleValuedObject entity]
+    [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
     switch entity
-    case undefined :
-      error mIdentifier : "undefined in this context" : currentType, currentLLVMAddressVar
     case module (@PLMType type) :
       currentType = type
       currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)

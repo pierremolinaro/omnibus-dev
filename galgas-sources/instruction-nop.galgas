@@ -42,7 +42,7 @@ override method @letInstructionNOP analyze
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext unused ioUniversalMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {

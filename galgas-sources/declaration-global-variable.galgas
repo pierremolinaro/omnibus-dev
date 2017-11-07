@@ -225,7 +225,7 @@ method @globalVarDeclarationList-element enterInContext
   variableMapWithConstants (
     !context:ioContext
 #    ?*
-    ?@universalPropertyAndRoutineMapForContext universalMap
+    ?@universalValuedObjectMapForContext universalMap
   )
   [mSourceExpression analyzeExpression
      !self:.void

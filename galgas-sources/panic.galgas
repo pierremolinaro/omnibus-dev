@@ -110,7 +110,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !mode:.panicMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@universalPropertyAndRoutineMapForContext universalMap
+    ?@universalValuedObjectMapForContext universalMap
   )
 #--- Insert predefined input arguments
   let codeArg = @lstring.new {!"CODE" !mPriority.location}

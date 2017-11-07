@@ -82,7 +82,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
 #      ?*
-      ?@universalPropertyAndRoutineMapForContext universalMap
+      ?@universalValuedObjectMapForContext universalMap
     )
   #--- Self type
     let @PLMType selfType = if isr.mModuleName.string == "" then

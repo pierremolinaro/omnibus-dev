@@ -8,7 +8,7 @@ proc handleArraySubscriptNew
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
@@ -72,7 +72,7 @@ proc handleArraySubscript
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
