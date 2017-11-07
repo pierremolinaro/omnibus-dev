@@ -132,7 +132,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
 #    ?*
-    ?@universalPropertyAndRoutineMapForContext universalMap
+    ?@universalValuedObjectMapForContext universalMap
   )
 #--- Analyse formal arguments
   @routineFormalArgumentListForGeneration formalArguments = {}

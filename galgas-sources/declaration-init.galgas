@@ -146,7 +146,7 @@ proc initSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
 #    ?*
-    ?@universalPropertyAndRoutineMapForContext universalMap
+    ?@universalValuedObjectMapForContext universalMap
   )
 #--- Analyze instruction list
   outInstructionGenerationList = {}

@@ -86,7 +86,7 @@ enum @LValueRepresentation {
 
 method @LValueAST type
   ?selfType: let @PLMType inSelfType
-  ?variableMap:let @universalPropertyAndRoutineMapForContext inUniversalMap
+  ?variableMap:let @universalValuedObjectMapForContext inUniversalMap
   !@PLMType outType
 {
   if mIdentifier.string == "" then # Receiver is self
@@ -125,7 +125,7 @@ method @LValueAST analyzeLValue
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !@LValueRepresentation outInternalRepresentation
@@ -150,10 +150,8 @@ method @LValueAST analyzeLValue
       )
     end
   else
-    [ioUniversalMap searchEntity !mIdentifier ?let @possibleValuedObject entity]
+    [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
     switch entity
-    case undefined :
-      error mIdentifier : "undefined identifier" :outInternalRepresentation
     case module (*) :
       error mIdentifier : "a module cannot be written" : outInternalRepresentation
     case register (* writable registerType registerAddress * arraySize elementSize) : # 0 if not an array
@@ -232,7 +230,7 @@ private proc analyzeControlRegisterInLValue
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?registerName:let @lstring inRegisterName
@@ -304,7 +302,7 @@ private proc analyzeVariableInLValue
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableName:let @lstring inVariableName
@@ -390,7 +388,7 @@ private proc analyzeSelfAssignmentTarget
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?let @location inSelfLocation

@@ -341,7 +341,7 @@ typedef void (*extensionMethodSignature_instructionAST_analyze) (const class cPt
                                                                  const class GALGAS_mode constinArgument5,
                                                                  class GALGAS_semanticTemporariesStruct & ioArgument6,
                                                                  class GALGAS_staticStringMap & ioArgument7,
-                                                                 class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
+                                                                 class GALGAS_universalValuedObjectMapForContext & ioArgument8,
                                                                  class GALGAS_allocaList & ioArgument9,
                                                                  class GALGAS_instructionListIR & ioArgument10,
                                                                  class C_Compiler * inCompiler
@@ -363,7 +363,7 @@ void callExtensionMethod_analyze (const class cPtr_instructionAST * inObject,
                                   const GALGAS_mode constin_inCurrentMode,
                                   GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                   GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                  GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
+                                  GALGAS_universalValuedObjectMapForContext & io_ioUniversalMap,
                                   GALGAS_allocaList & io_ioAllocaList,
                                   GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                   C_Compiler * inCompiler
@@ -385,7 +385,7 @@ void extensionMethod_analyzeBranchInstructionList (const class GALGAS_instructio
                                                    const class GALGAS_mode constin_inCurrentMode,
                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                   class GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
+                                                   class GALGAS_universalValuedObjectMapForContext & io_ioUniversalMap,
                                                    class GALGAS_allocaList & io_ioAllocaList,
                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler
@@ -404,45 +404,45 @@ void extensionSetter_appendSourceLineComment (class GALGAS_instructionListIR & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Extension setter '@universalPropertyAndRoutineMapForContext closeBranch'                       *
+//                         Extension setter '@universalValuedObjectMapForContext closeBranch'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_closeBranch) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                               const class GALGAS_location constinArgument0,
-                                                                                               class C_Compiler * inCompiler
-                                                                                               COMMA_LOCATION_ARGS) ;
+typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_closeBranch) (class cPtr_universalValuedObjectMapForContext * inObject,
+                                                                                         const class GALGAS_location constinArgument0,
+                                                                                         class C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void enterExtensionSetter_closeBranch (const int32_t inClassIndex,
-                                       extensionSetterSignature_universalPropertyAndRoutineMapForContext_closeBranch inModifier) ;
+                                       extensionSetterSignature_universalValuedObjectMapForContext_closeBranch inModifier) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionSetter_closeBranch (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+void callExtensionSetter_closeBranch (class cPtr_universalValuedObjectMapForContext * inObject,
                                       const GALGAS_location constin_inErrorLocation,
                                       C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Extension setter '@universalPropertyAndRoutineMapForContext openBranch'                       *
+//                          Extension setter '@universalValuedObjectMapForContext openBranch'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_openBranch) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                              class C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) ;
+typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_openBranch) (class cPtr_universalValuedObjectMapForContext * inObject,
+                                                                                        class C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void enterExtensionSetter_openBranch (const int32_t inClassIndex,
-                                      extensionSetterSignature_universalPropertyAndRoutineMapForContext_openBranch inModifier) ;
+                                      extensionSetterSignature_universalValuedObjectMapForContext_openBranch inModifier) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionSetter_openBranch (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+void callExtensionSetter_openBranch (class cPtr_universalValuedObjectMapForContext * inObject,
                                      C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
@@ -2981,11 +2981,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineArgumentSign
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         @internalUniversalPropertyAndRoutineMapForContext_2D_element struct                         *
+//                               @internalValuedObjectMapMapForContext_2D_element struct                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element : public AC_GALGAS_root {
+class GALGAS_internalValuedObjectMapMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
 
@@ -2993,23 +2993,23 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element : publi
 
   public : GALGAS_bool mProperty_mObjectShouldBeValuedAtEndOfScope ;
 
-  public : GALGAS_possibleValuedObject mProperty_mPossibleValuedObject ;
+  public : GALGAS_valuedObject mProperty_mPossibleValuedObject ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element (void) ;
+  public : GALGAS_internalValuedObjectMapMapForContext_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element (void) ;
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_internalValuedObjectMapMapForContext_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element (const GALGAS_lstring & in_lkey,
-                                                                               const GALGAS_valuedObjectState & in_mObjectState,
-                                                                               const GALGAS_bool & in_mObjectShouldBeValuedAtEndOfScope,
-                                                                               const GALGAS_possibleValuedObject & in_mPossibleValuedObject) ;
+  public : GALGAS_internalValuedObjectMapMapForContext_2D_element (const GALGAS_lstring & in_lkey,
+                                                                   const GALGAS_valuedObjectState & in_mObjectState,
+                                                                   const GALGAS_bool & in_mObjectShouldBeValuedAtEndOfScope,
+                                                                   const GALGAS_valuedObject & in_mPossibleValuedObject) ;
 
 //-- Start of generic part --*
 
@@ -3017,22 +3017,22 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element : publi
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element extractObject (const GALGAS_object & inObject,
-                                                                                                    C_Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_internalValuedObjectMapMapForContext_2D_element extractObject (const GALGAS_object & inObject,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                                            const class GALGAS_valuedObjectState & inOperand1,
-                                                                                                            const class GALGAS_bool & inOperand2,
-                                                                                                            const class GALGAS_possibleValuedObject & inOperand3
-                                                                                                            COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_internalValuedObjectMapMapForContext_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                                const class GALGAS_valuedObjectState & inOperand1,
+                                                                                                const class GALGAS_bool & inOperand2,
+                                                                                                const class GALGAS_valuedObject & inOperand3
+                                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_internalValuedObjectMapMapForContext_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3046,18 +3046,18 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element : publi
 
   public : VIRTUAL_IN_DEBUG class GALGAS_valuedObjectState getter_mObjectState (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_possibleValuedObject getter_mPossibleValuedObject (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valuedObject getter_mPossibleValuedObject (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element class
+} ; // End of GALGAS_internalValuedObjectMapMapForContext_2D_element class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_internalValuedObjectMapMapForContext_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3346,27 +3346,27 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_scopeStack_2D_eleme
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                    @possibleValuedObject enum, associated values                                    *
+//                                        @valuedObject enum, associated values                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_possibleValuedObject_module : public cEnumAssociatedValues {
+class cEnumAssociatedValues_valuedObject_module : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_possibleValuedObject_module (const GALGAS_PLMType & inAssociatedValue0
-                                                              COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_valuedObject_module (const GALGAS_PLMType & inAssociatedValue0
+                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_module (void) {}
+  public : virtual ~ cEnumAssociatedValues_valuedObject_module (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_possibleValuedObject_register : public cEnumAssociatedValues {
+class cEnumAssociatedValues_valuedObject_register : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_bool mAssociatedValue1 ;
   public : const GALGAS_PLMType mAssociatedValue2 ;
@@ -3376,90 +3376,90 @@ class cEnumAssociatedValues_possibleValuedObject_register : public cEnumAssociat
   public : const GALGAS_uint mAssociatedValue6 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_possibleValuedObject_register (const GALGAS_bool & inAssociatedValue0,
-                                                                const GALGAS_bool & inAssociatedValue1,
-                                                                const GALGAS_PLMType & inAssociatedValue2,
-                                                                const GALGAS_bigint & inAssociatedValue3,
-                                                                const GALGAS_sliceMap & inAssociatedValue4,
-                                                                const GALGAS_uint & inAssociatedValue5,
-                                                                const GALGAS_uint & inAssociatedValue6
-                                                                COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_valuedObject_register (const GALGAS_bool & inAssociatedValue0,
+                                                        const GALGAS_bool & inAssociatedValue1,
+                                                        const GALGAS_PLMType & inAssociatedValue2,
+                                                        const GALGAS_bigint & inAssociatedValue3,
+                                                        const GALGAS_sliceMap & inAssociatedValue4,
+                                                        const GALGAS_uint & inAssociatedValue5,
+                                                        const GALGAS_uint & inAssociatedValue6
+                                                        COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_register (void) {}
+  public : virtual ~ cEnumAssociatedValues_valuedObject_register (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_possibleValuedObject_globalConstant : public cEnumAssociatedValues {
+class cEnumAssociatedValues_valuedObject_globalConstant : public cEnumAssociatedValues {
   public : const GALGAS_objectIR mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_possibleValuedObject_globalConstant (const GALGAS_objectIR & inAssociatedValue0
-                                                                      COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_valuedObject_globalConstant (const GALGAS_objectIR & inAssociatedValue0
+                                                              COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_globalConstant (void) {}
+  public : virtual ~ cEnumAssociatedValues_valuedObject_globalConstant (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_possibleValuedObject_localConstant : public cEnumAssociatedValues {
+class cEnumAssociatedValues_valuedObject_localConstant : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_possibleValuedObject_localConstant (const GALGAS_PLMType & inAssociatedValue0,
-                                                                     const GALGAS_lstring & inAssociatedValue1
-                                                                     COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_valuedObject_localConstant (const GALGAS_PLMType & inAssociatedValue0,
+                                                             const GALGAS_lstring & inAssociatedValue1
+                                                             COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_localConstant (void) {}
+  public : virtual ~ cEnumAssociatedValues_valuedObject_localConstant (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_possibleValuedObject_globalVariable : public cEnumAssociatedValues {
+class cEnumAssociatedValues_valuedObject_globalVariable : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_PLMType mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_possibleValuedObject_globalVariable (const GALGAS_bool & inAssociatedValue0,
-                                                                      const GALGAS_PLMType & inAssociatedValue1
-                                                                      COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_valuedObject_globalVariable (const GALGAS_bool & inAssociatedValue0,
+                                                              const GALGAS_PLMType & inAssociatedValue1
+                                                              COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_globalVariable (void) {}
+  public : virtual ~ cEnumAssociatedValues_valuedObject_globalVariable (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_possibleValuedObject_localVariable : public cEnumAssociatedValues {
+class cEnumAssociatedValues_valuedObject_localVariable : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_possibleValuedObject_localVariable (const GALGAS_PLMType & inAssociatedValue0,
-                                                                     const GALGAS_lstring & inAssociatedValue1
-                                                                     COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_valuedObject_localVariable (const GALGAS_PLMType & inAssociatedValue0,
+                                                             const GALGAS_lstring & inAssociatedValue1
+                                                             COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_localVariable (void) {}
+  public : virtual ~ cEnumAssociatedValues_valuedObject_localVariable (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

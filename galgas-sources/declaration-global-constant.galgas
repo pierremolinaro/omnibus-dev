@@ -99,7 +99,7 @@ override method @globalConstantDeclarationAST enterInContext
     !mode:.bootMode
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
     !returnTypeName:["" nowhere]
-    ?@universalPropertyAndRoutineMapForContext universalMap
+    ?@universalValuedObjectMapForContext universalMap
   )
 #--- Get destination type
   @PLMType annotationType

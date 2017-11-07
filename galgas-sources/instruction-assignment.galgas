@@ -54,7 +54,7 @@ override method @assignmentInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {

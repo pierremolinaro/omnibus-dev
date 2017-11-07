@@ -9,7 +9,7 @@ proc initialVariableMap
   ?mode:let @mode inRequiredMode
   ?globalsAreConstant:@bool inGlobalsAreConstant
   ?returnTypeName:let @lstring inReturnTypeName
-  !@universalPropertyAndRoutineMapForContext outUniversalMap
+  !@universalValuedObjectMapForContext outUniversalMap
 {
   outUniversalMap = .default
 #------------------------------------------------------- Add modules
@@ -55,27 +55,12 @@ proc initialVariableMap
 
 proc variableMapWithConstants
   ?context:let @semanticContext inContext
-  !@universalPropertyAndRoutineMapForContext outUniversalMap
+  !@universalValuedObjectMapForContext outUniversalMap
 {
   outUniversalMap = .default
 #--- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outUniversalMap insertGlobalConstant !constantName !constantValue]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc getNewTempVariable
-  ?let @PLMType inType
-  ?!@semanticTemporariesStruct ioTemporaries
-  !@objectIR outTempVariable
-{
-  if inType == .void then
-    outTempVariable = .null
-  else
-    [!?ioTemporaries newTempLLVMVar ?let llvmName]
-    outTempVariable = .llvmValue {!type: inType !llvmName:llvmName}
   end
 }
 

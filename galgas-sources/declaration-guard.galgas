@@ -185,7 +185,7 @@ proc guardSemanticAnalysis
     !mode:.guardMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@universalPropertyAndRoutineMapForContext universalMap
+    ?@universalValuedObjectMapForContext universalMap
   )
   @routineFormalArgumentListForGeneration formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
@@ -288,7 +288,7 @@ abstract method @callInstructionAST baseGuardAnalyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -300,7 +300,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext unused ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   error mSandAloneRoutineName : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
@@ -315,7 +315,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   @allocaList baseGuardAllocaList = {}
