@@ -73,9 +73,9 @@ let x $uint16 = x // Erreur de compilation
 
 L'annotation de type après le mot-clé \plm=extend= est optionnel~: par défaut, le type est inféré par le contexte. Par exemple, on peut écrire~:
 \begin{PLM}
-let y $int9 =  ...
-let z $int10 = extend (y) // Le type $int10 est inféré du contexte
-let z = extend (y) // Invalide : aucun type ne peut être inféré.
+let x $int9 =  ...
+let y $int10 = extend (x) // Le type $int10 est inféré du contexte
+let z = extend (x) // Invalide : aucun type ne peut être inféré.
 \end{PLM}
 
 
@@ -85,10 +85,17 @@ Les conversions pouvant échouer sont exprimées par le mot réservé \plm=conve
 
 \begin{PLM}
 let s $int8 = ...
-let x $uint16 = convert $uint16 (x)
+let x $uint16 = convert $uint16 (s)
 \end{PLM}
 
 L'opérateur \plm+convert+ engendre un code qui vérifie à l'exécution que l'expression source (ici \plm+x+) peut être convertie dans le type cible (ici \plm+$uint16+) sans débordement. En cas de débordement détecté à l'exécution, la panique dont le code est donné dans le \refTableauPage{tableauCodePanique} est déclenchée. L'opérateur \plm+convert+ est donc interdit dans les constructions où la panique ne peut être déclenchée : il faut alors utiliser l'opérateur \plm=truncate=.
+
+L'annotation de type après le mot-clé \plm=convert= est optionnel~: par défaut, le type est inféré par le contexte. Par exemple, on peut écrire~:
+\begin{PLM}
+let s $int8 = ...
+let x $uint16 = convert (s) // Le type $uint16 est inféré du contexte
+let y = convert (s) // Invalide : aucun type ne peut être inféré
+\end{PLM}
 
 L'opérateur \plm+convert+ ne peut pas apparaître dans une expression statique.
 
@@ -106,6 +113,14 @@ L'opérateur \plm+truncate+ permet de spécifier une conversion explicite silenc
 let s $int8 = -10
 let x $uint16 = truncate $uint16 (x)
 \end{PLM}
+
+L'annotation de type après le mot-clé \plm=truncate= est optionnel~: par défaut, le type est inféré par le contexte. Par exemple, on peut écrire~:
+\begin{PLM}
+let s $int8 = -10
+let x $uint16 = truncate (s) // Le type $uint16 est inféré du contexte
+let y = truncate (s) // Invalide : aucun type ne peut être inféré
+\end{PLM}
+
 
 L'opérateur \plm+truncate+ ne peut pas apparaître dans une expression statique.
 
