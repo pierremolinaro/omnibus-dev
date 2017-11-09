@@ -14,23 +14,28 @@ class @convertExpressionAST : @expressionAST {
 
 syntax extension plm_syntax {
 
-  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+  #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
     $convert$
-    $\$type$ ?let typeIdentifier
+    @lstring typeName
+    select
+      typeName = ["" here]
+    or
+      $\$type$ ?typeName
+    end
     $($
     <expression> ?outExpression
     let endOfExpression = @location.here
     $)$
     outExpression = @convertExpressionAST.new {
       !outExpression
-      !typeIdentifier
+      !typeName
       !endOfExpression
     }
   }
 
-  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+  #·····················································································································
 
 }
 
@@ -43,8 +48,10 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
-  [!?ioGraph noteNode !typeName]
+  if mTypeName.string != "" then
+    let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+    [!?ioGraph noteNode !typeName]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -53,8 +60,10 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
 
 override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  let typeName =llvmRegularTypeMangledNameFromName (!mTypeName)
-  [!?ioGraph noteNode !typeName]
+  if mTypeName.string != "" then
+    let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+    [!?ioGraph noteNode !typeName]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -102,7 +111,10 @@ override method @convertExpressionAST analyzeExpression
     error mTypeName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze type
-  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  let @PLMType resultType = if mTypeName.string == ""
+    then inOptionalTargetType
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  end
 #--- Check types
   if not [resultType isInteger] then
     error mTypeName : "this type is not an integer type" : outResult

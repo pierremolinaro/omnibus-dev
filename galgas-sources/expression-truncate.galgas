@@ -18,14 +18,19 @@ syntax extension plm_syntax {
 
   rule <primary> !@expressionAST outExpression {
     $truncate$
-    $\$type$ ?let typeIdentifier
+    @lstring typeName
+    select
+      typeName = ["" here]
+    or
+      $\$type$ ?typeName
+    end
     $($
     <expression> ?outExpression
     let endOfExpression = @location.here
     $)$
     outExpression = @truncateExpressionAST.new {
       !outExpression
-      !typeIdentifier
+      !typeName
       !endOfExpression
     }
   }
@@ -43,8 +48,10 @@ override method @truncateExpressionAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
-  [!?ioGraph noteNode !typeName]
+  if mTypeName.string != "" then
+    let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+    [!?ioGraph noteNode !typeName]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -53,8 +60,10 @@ override method @truncateExpressionAST addDependenceEdgeForStaticExpression
 
 override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
-  [!?ioGraph noteNode !typeName]
+  if mTypeName.string != "" then
+    let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+    [!?ioGraph noteNode !typeName]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -67,7 +76,7 @@ override method @truncateExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -98,7 +107,10 @@ override method @truncateExpressionAST analyzeExpression
     ?let expressionResult
   ]  
 #--- Analyze type
-  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  let @PLMType resultType = if mTypeName.string == ""
+    then inOptionalTargetType
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  end
 #--- Check types
   if not [resultType isInteger] then
     error mTypeName : "this type is not an integer type" : outResult
