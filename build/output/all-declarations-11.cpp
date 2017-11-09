@@ -803,6 +803,8 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
 
 const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
+  "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -862,13 +864,15 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-structure-example.plm",
   "plm",
   true, // Text file
-  1368, // Text length
+  1444, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/01-blink-led.plm'
 
 const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -908,7 +912,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unp
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.printUnsigned (!time.millis ())\n"
+  "    lcd.print (!unsigned:time.millis ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -918,13 +922,15 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  1298, // Text length
+  1375, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/02-blink-leds.plm'
 
 const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1/privileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -969,7 +975,7 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1/pri
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.printUnsigned (!time.millis ())\n"
+  "    lcd.print (!unsigned:time.millis ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1035,13 +1041,15 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3024, // Text length
+  3101, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/03-push-buttons.plm'
 
 const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -1114,13 +1122,15 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "03-push-buttons.plm",
   "plm",
   true, // Text file
-  2257, // Text length
+  2333, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/04-section-service-duration.plm'
 
 const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/privileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -1174,8 +1184,8 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/pri
   "      let t0 = getSysTick ()\n"
   "      let t1 = getSysTick ()\n"
   "      cumul += t0 - t1\n"
-  "      lcd.printUnsigned (!t0 - t1)\n"
-  "      lcd.printSpaces (!1)\n"
+  "      lcd.print (!unsigned:t0 - t1)\n"
+  "      lcd.print (!spaces:1)\n"
   "    }\n"
   "    let systickDuration = cumul / ITERATIONS\n"
   "  //--- Compute emptySection duration\n"
@@ -1185,8 +1195,8 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/pri
   "      let t0 = getSysTick ()\n"
   "      emptySection ()\n"
   "      let t1 = getSysTick ()\n"
-  "      lcd.printUnsigned (!t0 - t1 - systickDuration)\n"
-  "      lcd.printSpaces (!1)\n"
+  "      lcd.print (!unsigned:t0 - t1 - systickDuration)\n"
+  "      lcd.print (!spaces:1)\n"
   "    }\n"
   "  //--- Compute emptyService duration\n"
   "    lcd.goto (!line:2 !column:0)\n"
@@ -1195,8 +1205,8 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/pri
   "      let t0 = getSysTick ()\n"
   "      emptyService ()\n"
   "      let t1 = getSysTick ()\n"
-  "      lcd.printUnsigned (!t0 - t1 - systickDuration)\n"
-  "      lcd.printSpaces (!1)\n"
+  "      lcd.print (!unsigned:t0 - t1 - systickDuration)\n"
+  "      lcd.print (!spaces:1)\n"
   "    }\n"
   "  }\n"
   "  \n"
@@ -1211,13 +1221,15 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  2376, // Text length
+  2458, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/05-semaphore.plm'
 
 const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -1294,13 +1306,15 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "05-semaphore.plm",
   "plm",
   true, // Text file
-  1677, // Text length
+  1753, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/06-semaphore-P-until.plm'
 
 const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -1402,13 +1416,15 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "06-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  2278, // Text length
+  2354, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/07-guarded-semaphore.plm'
 
 const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -1545,13 +1561,15 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "07-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  3158, // Text length
+  3234, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/08-guarded-semaphore2.plm'
 
 const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -1661,13 +1679,15 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "08-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  2662, // Text length
+  2738, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/09-rendez-vous.plm'
 
 const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -1796,13 +1816,15 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "09-rendez-vous.plm",
   "plm",
   true, // Text file
-  3599, // Text length
+  3675, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/10-rendez-vous-data.plm'
 
 const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -1903,7 +1925,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "    toggle (!port:LED_L1)\n"
   "    s.wait ()\n"
   "      lcd.goto (!line:0 !column:0)\n"
-  "      lcd.printUnsigned (!x)\n"
+  "      lcd.print (!unsigned:x)\n"
   "    s.signal ()\n"
   "  }\n"
   "}\n"
@@ -1917,7 +1939,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "    toggle (!port:LED_L2)\n"
   "    s.wait ()\n"
   "      lcd.goto (!line:1 !column:0)\n"
-  "      lcd.printUnsigned (!x)\n"
+  "      lcd.print (!unsigned:x)\n"
   "    s.signal ()\n"
   "  }\n"
   "  \n"
@@ -1933,13 +1955,15 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "10-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  3329, // Text length
+  3407, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/11-pit-unprivileged-mode-it.plm'
 
 const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/privileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -2014,11 +2038,11 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/pr
   "    self.deadline +%= 250\n"
   "    digitalWrite (!port:LED_L1 !no)  // \xC3""\x89""teindre la led\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    lcd.printSpaces (!10)\n"
+  "    lcd.print (!spaces:10)\n"
   "    lcd.goto (!line:1 !column:0)\n"
   "    var value $uint32\n"
   "    getPITValue (\?value)\n"
-  "    lcd.printUnsigned (!value)\n"
+  "    lcd.print (!unsigned:value)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2028,13 +2052,15 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  2105, // Text length
+  2183, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/12-array-example.plm'
 
 const char * gWrapperFileContent_14_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -2100,8 +2126,8 @@ const char * gWrapperFileContent_14_embeddedSampleCode = "target \"teensy-3-1/un
   "    self.array2 = self.array \n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    for i $uint32 in 0 ..< $A.count {\n"
-  "      lcd.printUnsigned (!self.array2 [i])\n"
-  "      lcd.printSpaces (!1)\n"
+  "      lcd.print (!unsigned:self.array2 [i])\n"
+  "      lcd.print (!spaces:1)\n"
   "    }\n"
   "    \n"
   "    var a = $A ()\n"
@@ -2127,13 +2153,15 @@ const cRegularFileWrapper gWrapperFile_14_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1963, // Text length
+  2041, // Text length
   gWrapperFileContent_14_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1/13-static-list-example.plm'
 
 const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
+  "\n"
+  "module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   ACTIVITY LED                                                               \n"
@@ -2216,7 +2244,7 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1/un
   "      \xC3""\xA9""l\xC3""\xA9""ment.p (!\?par: total)\n"
   "    }\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.printUnsigned (!total)\n"
+  "    lcd.print (!unsigned:total)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2226,7 +2254,7 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "13-static-list-example.plm",
   "plm",
   true, // Text file
-  2228, // Text length
+  2305, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 
@@ -2366,7 +2394,7 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/pr
   "  let titre = \"Hello\"\n"
   "\n"
   "  setup 0 {\n"
-  "    lcd.printString (!self.titre)\n"
+  "    lcd.print (!string:self.titre)\n"
   "  }\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
@@ -2376,9 +2404,9 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/pr
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    lcd.printUnsigned (!time.millis ())\n"
+  "    lcd.print (!unsigned:time.millis ())\n"
   "    lcd.goto (!line:2 !column:0)\n"
-  "    lcd.printUnsigned (!freeStackSize ())\n"
+  "    lcd.print (!unsigned:freeStackSize ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2444,7 +2472,7 @@ const cRegularFileWrapper gWrapperFile_17_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3269, // Text length
+  3272, // Text length
   gWrapperFileContent_17_embeddedSampleCode
 ) ;
 
@@ -2545,7 +2573,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "isr safe DMAChannel_0_16_TranfertComplete {\n"
+  "isr safe DMAChannel_0_16_TransferComplete {\n"
   "//--- Acquitter l'interruption\n"
   "  DMA_CINT = 0\n"
   "//--- Toggle LED_L2\n"
@@ -2554,99 +2582,105 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
+  "system section initializeDMA () {\n"
+  "//--- Transform pattern for encoding level changes\n"
+  "  var current = no ;\n"
+  "  var index $uint32 = 0\n"
+  "  for \xC3""\xA9""l\xC3""\xA9""ment in kPATTERN {\n"
+  "    let b = \xC3""\xA9""l\xC3""\xA9""ment.x\n"
+  "    gOutputPattern [index] = if current \xE2""\x89""\xA0"" b { 0 } else { 1 << 2 }\n"
+  "    index += 1\n"
+  "    current = b\n"
+  "  }\n"
+  "//--- Set up LED_BUILTIN digital output at LOW level\n"
+  "  pinMode (!port:LED_L4 !mode:.OUTPUT)\n"
+  "  digitalWrite (!port:LED_L4 !no)\n"
+  "\n"
+  "//--- Power on DMA_MUX, PIT, DMA\n"
+  "  SIM_SCGC6 |= {SIM_SCGC6 !DMAMUX:1 !PIT:1}\n"
+  "  SIM_SCGC7 |= {SIM_SCGC7 !DMA:1}\n"
+  "\n"
+  "//--- Unmask PIT0 interrupt\n"
+  "  enable (!interrupt:.PITChannel0)\n"
+  "\n"
+  "//--- Unmask DMAChannel_0_16_TransferComplete interrupt\n"
+  "  enable (!interrupt:.DMAChannel_0_16_TransferComplete)\n"
+  "\n"
+  "//--- Enable PIT module\n"
+  "  PIT_MCR = 0\n"
+  "\n"
+  "//--- Disable PIT0\n"
+  "  PIT_TCTRL [0] = 0\n"
+  "\n"
+  "//--- PIT0 clock frequency is F_BUS (in Hertz): PIT_LDVAL0 sets the request period of DMA 0\n"
+  "  PIT_LDVAL [0] = ((F_BUS_MHZ * 1_000_000) / PATTERN_FREQUENCY) - 1\n"
+  "\n"
+  "//--- Clear PIT 0 interrupt flag\n"
+  "  PIT_TFLG [0] = 1\n"
+  "\n"
+  "//--- Disable DMA Channel 0: it is required for configuring it\n"
+  "  DMAMUX_CHCFG [0] = 0\n"
+  "\n"
+  "//--- Initial source address: the gOutputPattern array address\n"
+  "  DMA_TCD_SADDR [0] = addressof (gOutputPattern)\n"
+  "\n"
+  "//--- After every request, source address is incremented by 4\n"
+  "  DMA_TCD_SOFF [0] = 4\n"
+  "\n"
+  "//--- At the end of a major loop, source address is decremented to gOutputPattern array address\n"
+  "  DMA_TCD_SLAST [0] = - 4 * PATTERN_LENGTH // - transfert_size * major_loop_count\n"
+  "\n"
+  "//--- Destination address: the address of the GPIOC_PTOR control register\n"
+  "  DMA_TCD_DADDR [0] = addressof (GPIOD_PTOR)\n"
+  "\n"
+  "//--- After every request, destination address is not modified\n"
+  "  DMA_TCD_DOFF [0] = 0\n"
+  "\n"
+  "//--- At the end of a major loop, destination address is not modified\n"
+  "  DMA_TCD_DLASTSGA [0] = 0\n"
+  "\n"
+  "//--- Set major loop count\n"
+  "  DMA_TCD_CITER_ELINKNO [0] = PATTERN_LENGTH\n"
+  "  DMA_TCD_BITER_ELINKNO [0] = PATTERN_LENGTH\n"
+  "\n"
+  "//--- Source and destination are 32-bit\n"
+  "  DMA_TCD_ATTR [0] = {DMA_TCD_ATTR\n"
+  "    !SSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer source size is 32-bit\n"
+  "    !DSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer destination size is 32-bit\n"
+  "  }\n"
+  " \n"
+  "//--- Number of bytes to transfer per request: 4\n"
+  "  DMA_TCD_NBYTES_MLNO [0] = 4\n"
+  "\n"
+  "//--- Set repetition and DMA interrupt\n"
+  "// if DREQ bit is set, the DMA performs PATTERN_LENGTH transfers and stops)\n"
+  "// Otherwise, the DMA performs PATTERN_LENGTH transfers repetitively\n"
+  "  DMA_TCD_CSR [0] = {DMA_TCD_CSR\n"
+  "    !INTMAJOR:1 // Generate an interrupt at the end of major loop count transfert (for toggling D4)\n"
+  "   // | DMA_TCD_CSR_DREQ // For setting DREQ bit\n"
+  "  }\n"
+  "\n"
+  "//--- Configure DMA Channel\n"
+  "  DMAMUX_CHCFG [0] = {DMAMUX_CHCFG\n"
+  "    !ENABLE:1 // DMA Channel 0 is enabled\n"
+  "    !TRIG:1   // DMA Channel 0 is triggered by PIT 0\n"
+  "    !SOURCE:DMAMUX_SOURCE_ALWAYS0 // Trigger is always active\n"
+  "  }\n"
+  "\n"
+  "//--- Start DMA Channel 0\n"
+  "  DMA_SERQ = 0\n"
+  "\n"
+  "//--- Enable PIT 0 : it starts counting, enable interrupt\n"
+  "  PIT_TCTRL [0] = {PIT_TCTRL !TEN:1 !TIE:1}\n"
+  "}\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
   "task T\xC3""\xA2""che priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
-  "  \n"
+  " \n"
   "  setup 1 {\n"
-  "  //--- Transform pattern for encoding level changes\n"
-  "    var current = no ;\n"
-  "    var index $uint32 = 0\n"
-  "    for \xC3""\xA9""l\xC3""\xA9""ment in kPATTERN {\n"
-  "      let b = \xC3""\xA9""l\xC3""\xA9""ment.x\n"
-  "      gOutputPattern [index] = if current \xE2""\x89""\xA0"" b { 0 } else { 1 << 2 }\n"
-  "      index += 1\n"
-  "      current = b\n"
-  "    }\n"
-  "  //--- Set up LED_BUILTIN digital output at LOW level\n"
-  "    pinMode (!port:LED_L4 !mode:.OUTPUT)\n"
-  "    digitalWrite (!port:LED_L4 !no)\n"
-  "  \n"
-  "  //--- Power on DMA_MUX, PIT, DMA\n"
-  "    SIM_SCGC6 |= {SIM_SCGC6 !DMAMUX:1 !PIT:1}\n"
-  "    SIM_SCGC7 |= {SIM_SCGC7 !DMA:1}\n"
-  "  \n"
-  "  //--- Unmask PIT0 interrupt\n"
-  "    enable (!interrupt:.PITChannel0)\n"
-  "  \n"
-  "  //--- Unmask DMAChannel_0_16_TranfertComplete interrupt\n"
-  "    enable (!interrupt:.DMAChannel_0_16_TranfertComplete)\n"
-  "  \n"
-  "  //--- Enable PIT module\n"
-  "    PIT_MCR = 0\n"
-  "  \n"
-  "  //--- Disable PIT0\n"
-  "    PIT_TCTRL [0] = 0\n"
-  "  \n"
-  "  //--- PIT0 clock frequency is F_BUS (in Hertz): PIT_LDVAL0 sets the request period of DMA 0\n"
-  "    PIT_LDVAL [0] = ((F_BUS_MHZ * 1_000_000) / PATTERN_FREQUENCY) - 1\n"
-  "  \n"
-  "  //--- Clear PIT 0 interrupt flag\n"
-  "    PIT_TFLG [0] = 1\n"
-  "  \n"
-  "  //--- Disable DMA Channel 0: it is required for configuring it\n"
-  "    DMAMUX_CHCFG [0] = 0\n"
-  "  \n"
-  "  //--- Initial source address: the gOutputPattern array address\n"
-  "    DMA_TCD_SADDR [0] = addressof (gOutputPattern)\n"
-  "  \n"
-  "  //--- After every request, source address is incremented by 4\n"
-  "    DMA_TCD_SOFF [0] = 4\n"
-  "  \n"
-  "  //--- At the end of a major loop, source address is decremented to gOutputPattern array address\n"
-  "    DMA_TCD_SLAST [0] = - 4 * PATTERN_LENGTH // - transfert_size * major_loop_count\n"
-  "  \n"
-  "  //--- Destination address: the address of the GPIOC_PTOR control register\n"
-  "    DMA_TCD_DADDR [0] = addressof (GPIOD_PTOR)\n"
-  "  \n"
-  "  //--- After every request, destination address is not modified\n"
-  "    DMA_TCD_DOFF [0] = 0\n"
-  "  \n"
-  "  //--- At the end of a major loop, destination address is not modified\n"
-  "    DMA_TCD_DLASTSGA [0] = 0\n"
-  "  \n"
-  "  //--- Set major loop count\n"
-  "    DMA_TCD_CITER_ELINKNO [0] = PATTERN_LENGTH\n"
-  "    DMA_TCD_BITER_ELINKNO [0] = PATTERN_LENGTH\n"
-  "  \n"
-  "  //--- Source and destination are 32-bit\n"
-  "    DMA_TCD_ATTR [0] = {DMA_TCD_ATTR\n"
-  "      !SSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer source size is 32-bit\n"
-  "      !DSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer destination size is 32-bit\n"
-  "    }\n"
-  "   \n"
-  "  //--- Number of bytes to transfer per request: 4\n"
-  "    DMA_TCD_NBYTES_MLNO [0] = 4\n"
-  "  \n"
-  "  //--- Set repetition and DMA interrupt\n"
-  "  // if DREQ bit is set, the DMA performs PATTERN_LENGTH transfers and stops)\n"
-  "  // Otherwise, the DMA performs PATTERN_LENGTH transfers repetitively\n"
-  "    DMA_TCD_CSR [0] = {DMA_TCD_CSR\n"
-  "      !INTMAJOR:1 // Generate an interrupt at the end of major loop count transfert (for toggling D4)\n"
-  "     // | DMA_TCD_CSR_DREQ // For setting DREQ bit\n"
-  "    }\n"
-  "\n"
-  "  //--- Configure DMA Channel\n"
-  "    DMAMUX_CHCFG [0] = {DMAMUX_CHCFG\n"
-  "      !ENABLE:1 // DMA Channel 0 is enabled\n"
-  "      !TRIG:1   // DMA Channel 0 is triggered by PIT 0\n"
-  "      !SOURCE:DMAMUX_SOURCE_ALWAYS0 // Trigger is always active\n"
-  "    }\n"
-  "\n"
-  "  //--- Start DMA Channel 0\n"
-  "    DMA_SERQ = 0\n"
-  "  \n"
-  "  //--- Enable PIT 0 : it starts counting, enable interrupt\n"
-  "    PIT_TCTRL [0] = {PIT_TCTRL !TEN:1 !TIE:1}\n"
+  "    initializeDMA ()\n"
   "  }\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
@@ -2656,11 +2690,10 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.printUnsigned (!gOutputPattern.count)\n"
-  "    lcd.printString (!\" \")\n"
+  "    lcd.print (!unsigned:gOutputPattern.count)\n"
+  "    lcd.print (!string:\" \")\n"
   "    let cc = $isrSlot.PITChannel0.uint ()\n"
-  "//    let cc = c.uint ()\n"
-  "    lcd.printUnsigned (!extend (cc))\n"
+  "    lcd.print (!unsigned:extend (cc))\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2670,7 +2703,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  8403, // Text length
+  8386, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 

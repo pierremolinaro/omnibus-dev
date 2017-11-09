@@ -22,22 +22,22 @@
   .word !ISR!PendSV @ 14
   .word !ISR!systick @ 15
 @--- Non-Core Vectors
-  .word !ISR!DMAChannel0TranfertComplete @ 16
-  .word !ISR!DMAChannel1TranfertComplete @ 17
-  .word !ISR!DMAChannel2TranfertComplete @ 18
-  .word !ISR!DMAChannel3TranfertComplete @ 19
-  .word !ISR!DMAChannel4TranfertComplete @ 20
-  .word !ISR!DMAChannel5TranfertComplete @ 21
-  .word !ISR!DMAChannel6TranfertComplete @ 22
-  .word !ISR!DMAChannel7TranfertComplete @ 23
-  .word !ISR!DMAChannel8TranfertComplete @ 24
-  .word !ISR!DMAChannel9TranfertComplete @ 25
-  .word !ISR!DMAChannel10TranfertComplete @ 26
-  .word !ISR!DMAChannel11TranfertComplete @ 27
-  .word !ISR!DMAChannel12TranfertComplete @ 28
-  .word !ISR!DMAChannel13TranfertComplete @ 29
-  .word !ISR!DMAChannel14TranfertComplete @ 30
-  .word !ISR!DMAChannel15TranfertComplete @ 31
+  .word !ISR!DMAChannel0TransferComplete @ 16
+  .word !ISR!DMAChannel1TransferComplete @ 17
+  .word !ISR!DMAChannel2TransferComplete @ 18
+  .word !ISR!DMAChannel3TransferComplete @ 19
+  .word !ISR!DMAChannel4TransferComplete @ 20
+  .word !ISR!DMAChannel5TransferComplete @ 21
+  .word !ISR!DMAChannel6TransferComplete @ 22
+  .word !ISR!DMAChannel7TransferComplete @ 23
+  .word !ISR!DMAChannel8TransferComplete @ 24
+  .word !ISR!DMAChannel9TransferComplete @ 25
+  .word !ISR!DMAChannel10TransferComplete @ 26
+  .word !ISR!DMAChannel11TransferComplete @ 27
+  .word !ISR!DMAChannel12TransferComplete @ 28
+  .word !ISR!DMAChannel13TransferComplete @ 29
+  .word !ISR!DMAChannel14TransferComplete @ 30
+  .word !ISR!DMAChannel15TransferComplete @ 31
   .word !ISR!DMAError @ 32
   .word -1 @ 33
   .word !ISR!flashMemoryCommandComplete @ 34

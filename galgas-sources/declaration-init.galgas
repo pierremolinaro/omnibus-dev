@@ -142,10 +142,9 @@ proc initSemanticAnalysis
 #--- Variable map
   initialVariableMap (
     !context:inContext
-    !mode:.initMode
+    !mode:inCurrentMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-#    ?*
     ?@universalValuedObjectMapForContext universalMap
   )
 #--- Analyze instruction list
@@ -160,7 +159,6 @@ proc initSemanticAnalysis
     !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-#    !?variableMap:variableMap
     !?variableMap:universalMap
     !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList

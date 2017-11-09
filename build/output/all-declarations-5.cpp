@@ -18459,7 +18459,7 @@ void cGrammar_plm_5F_grammar::nt_taskBody_parse (C_Lexique_plm_5F_lexique * inLe
 
 void cGrammar_plm_5F_grammar::nt_taskBody_ (GALGAS_structurePropertyListAST &  parameter_1,
                                 GALGAS_functionDeclarationListAST &  parameter_2,
-                                GALGAS_taskInitListAST &  parameter_3,
+                                GALGAS_taskSetupListAST &  parameter_3,
                                 GALGAS_syncInstructionBranchListAST &  parameter_4,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {

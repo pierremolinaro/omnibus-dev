@@ -1,5 +1,7 @@
 target "teensy-3-1/privileged"
 
+module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
 //——————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
@@ -73,11 +75,11 @@ task T priority 12 stackSize 512 {
     self.deadline +%= 250
     digitalWrite (!port:LED_L1 !no)  // Éteindre la led
     lcd.goto (!line:1 !column:0)
-    lcd.printSpaces (!10)
+    lcd.print (!spaces:10)
     lcd.goto (!line:1 !column:0)
     var value $uint32
     getPITValue (?value)
-    lcd.printUnsigned (!value)
+    lcd.print (!unsigned:value)
   }
 }
 
