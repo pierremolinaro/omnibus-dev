@@ -16,3 +16,17 @@ system section disable @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+// 0 = highest priority
+// Cortex-M4: 0,16,32,48,64,80,96,112,128,144,160,176,192,208,224,240
+system section set @noUnusedWarning (?interrupt: inInterruptCode $isrSlot ?priority:inPriority $uint8) {
+  NVIC_IPR [inInterruptCode.uint ()] = inPriority
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+system section getPriorityOf @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) -> $uint8 {
+  result = NVIC_IPR [inInterruptCode.uint ()]
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
