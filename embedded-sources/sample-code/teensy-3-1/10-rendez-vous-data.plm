@@ -1,5 +1,7 @@
 target "teensy-3-1/unprivileged"
 
+module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
 //——————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
@@ -99,7 +101,7 @@ task T1 priority 1 stackSize 1024 {
     toggle (!port:LED_L1)
     s.wait ()
       lcd.goto (!line:0 !column:0)
-      lcd.printUnsigned (!x)
+      lcd.print (!unsigned:x)
     s.signal ()
   }
 }
@@ -113,7 +115,7 @@ task T2 priority 2 stackSize 1024 {
     toggle (!port:LED_L2)
     s.wait ()
       lcd.goto (!line:1 !column:0)
-      lcd.printUnsigned (!x)
+      lcd.print (!unsigned:x)
     s.signal ()
   }
   

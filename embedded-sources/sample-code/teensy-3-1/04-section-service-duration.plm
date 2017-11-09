@@ -1,5 +1,7 @@
 target "teensy-3-1/privileged"
 
+module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
 //——————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
@@ -52,8 +54,8 @@ task T priority 0 stackSize 512 {
       let t0 = getSysTick ()
       let t1 = getSysTick ()
       cumul += t0 - t1
-      lcd.printUnsigned (!t0 - t1)
-      lcd.printSpaces (!1)
+      lcd.print (!unsigned:t0 - t1)
+      lcd.print (!spaces:1)
     }
     let systickDuration = cumul / ITERATIONS
   //--- Compute emptySection duration
@@ -63,8 +65,8 @@ task T priority 0 stackSize 512 {
       let t0 = getSysTick ()
       emptySection ()
       let t1 = getSysTick ()
-      lcd.printUnsigned (!t0 - t1 - systickDuration)
-      lcd.printSpaces (!1)
+      lcd.print (!unsigned:t0 - t1 - systickDuration)
+      lcd.print (!spaces:1)
     }
   //--- Compute emptyService duration
     lcd.goto (!line:2 !column:0)
@@ -73,8 +75,8 @@ task T priority 0 stackSize 512 {
       let t0 = getSysTick ()
       emptyService ()
       let t1 = getSysTick ()
-      lcd.printUnsigned (!t0 - t1 - systickDuration)
-      lcd.printSpaces (!1)
+      lcd.print (!unsigned:t0 - t1 - systickDuration)
+      lcd.print (!spaces:1)
     }
   }
   

@@ -1,93 +1,87 @@
 
-check target "teensy-3-1/unprivileged", "teensy-3-1/privileged"
+check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
 
 //——————————————————————————————————————————————————————————————————————————————
 
 // http://esd.cs.ucr.edu/labs/interface/interface.html
 
-//——————————————————————————————————————————————————————————————————————————————
-//   PORT CONFIGURATION
-//——————————————————————————————————————————————————————————————————————————————
+let LCD_BUFFER_SIZE = 20
 
-//   DB4 : PTB0 --> $digitalPort.D16
-//   DB5 : PTC0 --> $digitalPort.D15
-//   DB6 : PTD1 --> $digitalPort.D14
-//   DB7 : PTB2 --> $digitalPort.D19
-//   RS  : PTB3 --> $digitalPort.D18
-//   E   : PTB1 --> $digitalPort.D17
-
-let DATA_4 = $digitalPort.D16
-let DATA_5 = $digitalPort.D15
-let DATA_6 = $digitalPort.D14
-let DATA_7 = $digitalPort.D19
-
-let RS = $digitalPort.D18
-let ENABLE = $digitalPort.D17
-
-module lcd ()
+type $lcdBuffer : $uint8 [LCD_BUFFER_SIZE]
 
 //——————————————————————————————————————————————————————————————————————————————
 
 module lcd {
+  let DB4 $digitalPort
+  let DB5 $digitalPort
+  let DB6 $digitalPort
+  let DB7 $digitalPort
+  
+  let RS $digitalPort
+  let ENABLE $digitalPort
 
+  var buffer = $lcdBuffer ()
+  var sEntree = $semaphore (!value:0)
+  var sSortie = $semaphore (!value:LCD_BUFFER_SIZE)
+  
   //············································································
 
   func init configurePorts @noUnusedWarning () {
-    pinMode (!port:DATA_4 !mode:.OUTPUT)
-    pinMode (!port:DATA_5 !mode:.OUTPUT)
-    pinMode (!port:DATA_6 !mode:.OUTPUT)
-    pinMode (!port:DATA_7 !mode:.OUTPUT)
-    pinMode (!port:RS     !mode:.OUTPUT)
-    pinMode (!port:ENABLE !mode:.OUTPUT)
+    pinMode (!port:self.DB4 !mode:.OUTPUT)
+    pinMode (!port:self.DB5 !mode:.OUTPUT)
+    pinMode (!port:self.DB6 !mode:.OUTPUT)
+    pinMode (!port:self.DB7 !mode:.OUTPUT)
+    pinMode (!port:self.RS     !mode:.OUTPUT)
+    pinMode (!port:self.ENABLE !mode:.OUTPUT)
   }
 
   //············································································
 
   func driveHighE @noUnusedWarning () {
-    digitalWrite (!port:ENABLE !yes)
+    digitalWrite (!port:self.ENABLE !yes)
   }
 
   //············································································
 
   func driveLowE @noUnusedWarning () {
-    digitalWrite (!port:ENABLE !no)
+    digitalWrite (!port:self.ENABLE !no)
   }
 
   //············································································
 
 
   func driveHighRS @noUnusedWarning () {
-   digitalWrite (!port:RS !yes)
+   digitalWrite (!port:self.RS !yes)
   }
 
   //············································································
 
   func driveLowRS @noUnusedWarning () {
-    digitalWrite (!port:RS !no)
+    digitalWrite (!port:self.RS !no)
   }
 
   //············································································
 
-  func setD4 @noUnusedWarning (?inValue $bool) { // PTB0
-    digitalWrite (!port:DATA_4 !inValue)
+  func setD4 @noUnusedWarning (?inValue $bool) {
+    digitalWrite (!port:self.DB4 !inValue)
   }
 
   //············································································
 
-  func setD5 @noUnusedWarning (?inValue $bool) { // PTC0
-    digitalWrite (!port:DATA_5 !inValue)
+  func setD5 @noUnusedWarning (?inValue $bool) {
+    digitalWrite (!port:self.DB5 !inValue)
   }
 
   //············································································
 
-  func setD6 @noUnusedWarning (?inValue $bool) { // PTD1
-    digitalWrite (!port:DATA_6 !inValue)
+  func setD6 @noUnusedWarning (?inValue $bool) {
+    digitalWrite (!port:self.DB6 !inValue)
   }
 
   //············································································
 
-  func setD7 @noUnusedWarning (?inValue $bool) { // PTB2
-    digitalWrite (!port:DATA_7 !inValue)
+  func setD7 @noUnusedWarning (?inValue $bool) {
+    digitalWrite (!port:self.DB7 !inValue)
   }
 
   //············································································
@@ -249,7 +243,7 @@ module lcd {
 
   //············································································
 
-  public func user printSpaces @noUnusedWarning (?inCount $uint32) {
+  public func user print @noUnusedWarning (?spaces:inCount $uint32) {
     var count = inCount
     loop while (count > 0) {
       self.writeData_inUserMode (!0x20)
@@ -259,7 +253,7 @@ module lcd {
 
   //············································································
 
-  public func user printUnsigned @noUnusedWarning (?inValue $uint32) {
+  public func user print @noUnusedWarning (?unsigned:inValue $uint32) {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
@@ -280,7 +274,7 @@ module lcd {
 
   //············································································
 
-  public func user printString @noUnusedWarning (?inValue $staticString) {
+  public func user print @noUnusedWarning (?string:inValue $staticString) {
     for c in inValue {
       self.writeData_inUserMode (!c)
     }
@@ -288,7 +282,7 @@ module lcd {
 
   //············································································
 
-  public func user printHex1 @noUnusedWarning (?inValue $uint32) {
+  public func user print @noUnusedWarning (?hex1:inValue $uint32) {
     let v = truncate $uint8 (inValue & 0xF)
     if v < 10 {
       self.writeData_inUserMode (!v + 0x30)
@@ -299,30 +293,30 @@ module lcd {
 
   //············································································
 
-  public func user printHex2 @noUnusedWarning (?inValue $uint32) {
-    self.printHex1 (!inValue >> 4)
-    self.printHex1 (!inValue)
+  public func user print @noUnusedWarning (?hex2:inValue $uint32) {
+    self.print (!hex1:inValue >> 4)
+    self.print (!hex1:inValue)
   }
 
   //············································································
 
-  public func user printHex4 @noUnusedWarning (?inValue $uint32) {
-    self.printHex2 (!inValue >> 8)
-    self.printHex2 (!inValue)
+  public func user print @noUnusedWarning (?hex4:inValue $uint32) {
+    self.print (!hex2:inValue >> 8)
+    self.print (!hex2:inValue)
   }
 
   //············································································
 
-  public func user printHex8 @noUnusedWarning (?inValue $uint32) {
-    self.printHex4 (!inValue >> 16)
-    self.printHex4 (!inValue)
+  public func user print @noUnusedWarning (?hex8:inValue $uint32) {
+    self.print (!hex4:inValue >> 16)
+    self.print (!hex4:inValue)
   }
 
   //············································································
 
-  public func user printHex16 @noUnusedWarning (?inValue $uint64) {
-    self.printHex8 (!truncate $uint32 (inValue >> 32))
-    self.printHex8 (!truncate $uint32 (inValue))
+  public func user print @noUnusedWarning (?hex16:inValue $uint64) {
+    self.print (!hex8:truncate $uint32 (inValue >> 32))
+    self.print (!hex8:truncate $uint32 (inValue))
   }
 
   //············································································

@@ -1682,12 +1682,11 @@ void routine_analyzeControlRegisterInLValue (const class GALGAS_PLMType constinA
                                              class GALGAS_instructionListIR & ioArgument8,
                                              const class GALGAS_lstring constinArgument9,
                                              const class GALGAS_PLMType constinArgument10,
-                                             const class GALGAS_bool constinArgument11,
+                                             const class GALGAS_uint constinArgument11,
                                              const class GALGAS_uint constinArgument12,
                                              const class GALGAS_uint constinArgument13,
-                                             const class GALGAS_uint constinArgument14,
-                                             const class GALGAS_accessInAssignmentListAST constinArgument15,
-                                             class GALGAS_LValueRepresentation & outArgument16,
+                                             const class GALGAS_accessInAssignmentListAST constinArgument14,
+                                             class GALGAS_LValueRepresentation & outArgument15,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 

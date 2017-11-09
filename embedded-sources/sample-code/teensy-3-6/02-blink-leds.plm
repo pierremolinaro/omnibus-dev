@@ -42,7 +42,7 @@ task T1 priority 1 stackSize 512 {
   let titre = "Hello"
 
   setup 0 {
-    lcd.printString (!self.titre)
+    lcd.print (!string:self.titre)
   }
   
   while time.waitUntilMS (!deadline:self.compteur) {
@@ -52,9 +52,9 @@ task T1 priority 1 stackSize 512 {
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
     lcd.goto (!line:1 !column:0)
-    lcd.printUnsigned (!time.millis ())
+    lcd.print (!unsigned:time.millis ())
     lcd.goto (!line:2 !column:0)
-    lcd.printUnsigned (!freeStackSize ())
+    lcd.print (!unsigned:freeStackSize ())
   }
 }
 

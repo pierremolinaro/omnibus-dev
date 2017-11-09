@@ -1,5 +1,7 @@
 target "teensy-3-1/privileged"
 
+module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
 //——————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
@@ -43,7 +45,7 @@ task T1 priority 1 stackSize 512 {
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.printUnsigned (!time.millis ())
+    lcd.print (!unsigned:time.millis ())
   }
 }
 

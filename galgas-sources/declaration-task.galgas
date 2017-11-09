@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
+#!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @taskList {
@@ -8,32 +8,32 @@ list @taskList {
   @lbigint mStackSize
   @structurePropertyListAST mVarList
   @functionDeclarationListAST mTaskProcList
-  @taskInitListAST mTaskInitListAST
+  @taskSetupListAST mTaskSetupListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @location mEndOfTaskDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @taskInitListAST {
-  @lbigint mTaskInitPriority
-  @instructionListAST mTaskInitInstructionList
-  @location mEndOfTaskInitDeclaration
+list @taskSetupListAST {
+  @lbigint mTaskSetupPriority
+  @instructionListAST mTaskSetupInstructionList
+  @location mEndOfTaskSetupDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @taskInitSortedListAST {
-  @lbigint mTaskInitPriority
-  @instructionListAST mTaskInitInstructionList
-  @location mEndOfTaskInitDeclaration
-  @bigint mPriority
+sortedlist @taskSetupSortedListAST {
+  @lbigint mTaskSetupPriority
+  @instructionListAST mTaskSetupInstructionList
+  @location mEndOfTaskSetupDeclaration
+  @bigint mSetupPriority
 }{
-  mPriority <
+  mSetupPriority <
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
@@ -50,7 +50,7 @@ syntax extension plm_syntax {
     ${$
     @structurePropertyListAST taskVarList = {}
     @functionDeclarationListAST taskProcList = {}
-    @taskInitListAST taskInitListAST = {}
+    @taskSetupListAST taskInitListAST = {}
     @syncInstructionBranchListAST branchList = {}
     <taskBody> !?taskVarList !?taskProcList !?taskInitListAST !?branchList
     let endOfTask = @location.here
@@ -70,7 +70,7 @@ syntax extension plm_syntax {
 
   rule <taskBody> ?!@structurePropertyListAST taskVarList
                   ?!@functionDeclarationListAST taskProcList
-                  ?!@taskInitListAST taskInitListAST
+                  ?!@taskSetupListAST taskInitListAST
                   ?!@syncInstructionBranchListAST branchList
 {
     repeat
@@ -115,7 +115,7 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
@@ -136,7 +136,7 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @taskProcedureMap {
@@ -198,7 +198,7 @@ method @taskList enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
+#!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @taskList semanticAnalysis
@@ -254,13 +254,13 @@ method @taskList-element semanticAnalysis
       !?intermediateCode:ioIntermediateCodeStruct
     )
   end
-#------------------------------------------- Analyze task init routines
-  @taskInitSortedListAST taskInitSortedListAST = {}
-  for (priority instructionList endOfDeclaration) in mTaskInitListAST do
+#------------------------------------------- Analyze task setup routines
+  @taskSetupSortedListAST taskInitSortedListAST = {}
+  for (priority instructionList endOfDeclaration) in mTaskSetupListAST do
     taskInitSortedListAST += !priority !instructionList !endOfDeclaration !priority.bigint
   end
-  @instructionListIR initInstructionListIR = {}
-  @allocaList initAllocaList = {}
+  @instructionListIR setupInstructionListIR = {}
+  @allocaList setupAllocaList = {}
   for (taskInitPriority taskInitInstructionList endOfTaskInitDeclaration *) in taskInitSortedListAST do
     initSemanticAnalysis (
       !context:inContext
@@ -274,8 +274,8 @@ method @taskList-element semanticAnalysis
       ?let partialAllocaList
       ?let @instructionListIR partialInstructionGenerationList
     )
-    initInstructionListIR += partialInstructionGenerationList
-    initAllocaList += partialAllocaList
+    setupInstructionListIR += partialInstructionGenerationList
+    setupAllocaList += partialAllocaList
   end
 #------------------------------------------- Analyze task guarded command
 #  Build a "task.loop" function that contains a sync instruction
@@ -309,8 +309,8 @@ method @taskList-element semanticAnalysis
     !taskType
     !mPriority.bigint
     !mStackSize.bigint
-    !initAllocaList
-    !initInstructionListIR
+    !setupAllocaList
+    !setupInstructionListIR
     !taskNameStringIndex
   ]
 }
@@ -338,7 +338,7 @@ sortedlist @taskSortedListIR {
   @bigint mPriority
   @bigint mStackSize
   @allocaList mAllocaList
-  @instructionListIR mInitInstructionListIR
+  @instructionListIR mSetupInstructionListIR
   @uint mTaskNameStringIndex
 }{
   mPriority <
@@ -401,7 +401,7 @@ method @taskMapIR generateCode
     for (variable LLVMTypeName) in task.mAllocaList do
       ioLLVMcode += "  " + variable + " = alloca " + LLVMTypeName + "\n"
     end
-    [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    [task.mSetupInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
     ioLLVMcode += llvmSeparatorLine ()

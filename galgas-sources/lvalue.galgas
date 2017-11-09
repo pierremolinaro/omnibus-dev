@@ -155,25 +155,28 @@ method @LValueAST analyzeLValue
     case module (*) :
       error mIdentifier : "a module cannot be written" : outInternalRepresentation
     case register (* writable registerType registerAddress * arraySize elementSize) : # 0 if not an array
-      analyzeControlRegisterInLValue (
-        !self: inSelfType
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !context: inContext
-        !mode: inCurrentMode
-        !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !registerName: mIdentifier
-        !registerType: registerType
-        !writable: writable
-        !registerAddress: registerAddress
-        !registerArraySize: arraySize
-        !elementSize: elementSize
-        !accessList: mAccessList
-        ?outInternalRepresentation
-      )
+      if not writable then
+         error mIdentifier : "the control register is not writable in this context" : outInternalRepresentation
+      else
+        analyzeControlRegisterInLValue (
+          !self: inSelfType
+          !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+          !context: inContext
+          !mode: inCurrentMode
+          !?temporary: ioTemporaries
+          !?staticStringMap: ioGlobalLiteralStringMap
+          !?variableMap: ioUniversalMap
+          !?alloca: ioAllocaList
+          !?instructionListIR: ioInstructionGenerationList
+          !registerName: mIdentifier
+          !registerType: registerType
+          !registerAddress: registerAddress
+          !registerArraySize: arraySize
+          !elementSize: elementSize
+          !accessList: mAccessList
+          ?outInternalRepresentation
+        )
+      end
     case globalConstant (*) :
       error mIdentifier : "a global constant cannot be written" : outInternalRepresentation
     case localConstant (**) :
@@ -235,16 +238,13 @@ private proc analyzeControlRegisterInLValue
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?registerName:let @lstring inRegisterName
   ?registerType:let @PLMType inRegisterType
-  ?writable:let @bool inWritable
   ?registerAddress:let @uint inRegisterAddress
   ?registerArraySize:let @uint inArraySize
   ?elementSize:let @uint inElementSize
   ?accessList:let @accessInAssignmentListAST inAccessList
   !@LValueRepresentation outInternalRepresentation
 {
- if not inWritable then
-   error inRegisterName : "the control register is not writable in this context" : outInternalRepresentation
- elsif [inAccessList length] == 0 then # Simple access to a control register for writing
+ if [inAccessList length] == 0 then # Simple access to a control register for writing
    if inArraySize == 0 then
      outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:inRegisterAddress}
    else

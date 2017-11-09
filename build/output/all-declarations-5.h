@@ -395,7 +395,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_taskBody_ (GALGAS_structurePropertyListAST & ioArgument0,
                                       GALGAS_functionDeclarationListAST & ioArgument1,
-                                      GALGAS_taskInitListAST & ioArgument2,
+                                      GALGAS_taskSetupListAST & ioArgument2,
                                       GALGAS_syncInstructionBranchListAST & ioArgument3,
                                       C_Lexique_plm_5F_lexique * inCompiler) ;
 
