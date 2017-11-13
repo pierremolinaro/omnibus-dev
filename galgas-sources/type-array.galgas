@@ -133,8 +133,8 @@ override method @typeArrayDeclarationAST enterInContext
       !.constantProperty {!value:.literalInteger {!type:.staticInteger !value:arraySize}}
     ]
   #-------------------------------------------- Constructor map
-    @constructorMapEX constructorMap = {}
-    [!?constructorMap insertKey !mArrayTypeName !.zero]
+    @constructorMap constructorMap = {}
+    [!?constructorMap insertKey !["()" nowhere] !{} !{} !.zero]
   #-------------------------------------------- Enter in type map
     [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName
@@ -149,11 +149,6 @@ override method @typeArrayDeclarationAST enterInContext
         !constructorMap:constructorMap
       }
       !index:[ioContext.mTypeMap count]
-    ]
-  #-------------------------------------------- Enter array constructor
-    [!?ioContext.mConstructorMapEX insertKey
-      !mArrayTypeName
-      !.zero
     ]
   end
 }

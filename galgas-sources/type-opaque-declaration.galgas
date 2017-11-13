@@ -129,18 +129,13 @@ override method @opaqueTypeDeclarationAST enterInContext
   if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
     error mSizeExpressionLocation : "array size expression is not static"
   else
-    @constructorMapEX constructorMap = {}
-    [!?constructorMap insertKey !mOpaqueTypeName !.simple {!value:0G}]
+    @constructorMap constructorMap = {}
+    [!?constructorMap insertKey !["()" nowhere] !{} !{} !.simple {!value:0G}]
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
       !type:.opaque {!bitCount:bitSize !flags:flags !plmTypeName:mOpaqueTypeName !constructorMap:constructorMap}
       !index:[ioContext.mTypeMap count]
-    ]
-  #--- Constructor
-    [!?ioContext.mConstructorMapEX insertKey
-      !mOpaqueTypeName
-      !.simple {!value:0G}
     ]
   end
 }

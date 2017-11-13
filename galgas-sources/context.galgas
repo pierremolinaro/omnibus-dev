@@ -85,22 +85,6 @@ list @operandIRList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @constructorValue {
-  case zero
-  case simple (@bigint value)
-  case structure (@constructorSignature constructorSignature @sortedOperandIRList sortedOperandList)
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @constructorMapEX {
-  @constructorValue mInitValue
-  insert insertKey error message "-- internal error --"
-  search searchKey error message "-- internal error --"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 map @availableInterruptMap {
   @interruptionPanicCode mInterruptionPanicCode
   insert insertKey error message "interrupt '%K' is already defined"
@@ -133,7 +117,6 @@ struct @semanticContext {
   @globalConstantMap mGlobalConstantMap
   @globalVariableMap mGlobalVariableMap
   @moduleMap mModuleMap
-  @constructorMapEX mConstructorMapEX
   @staticlistMap mStaticListMap
 #--- Interrupts
   @stringset mDefinedInterruptSet

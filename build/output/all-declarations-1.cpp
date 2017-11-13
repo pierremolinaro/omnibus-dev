@@ -3802,7 +3802,7 @@ cEnumAssociatedValues_PLMType_structure::cEnumAssociatedValues_PLMType_structure
                                                                                   const GALGAS_propertyList & inAssociatedValue2,
                                                                                   const GALGAS_PLMTypeFlags & inAssociatedValue3,
                                                                                   const GALGAS_guardMapForContext & inAssociatedValue4,
-                                                                                  const GALGAS_constructorMapEX & inAssociatedValue5
+                                                                                  const GALGAS_constructorMap & inAssociatedValue5
                                                                                   COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -3912,7 +3912,7 @@ typeComparisonResult cEnumAssociatedValues_PLMType_integer::compare (const cEnum
 cEnumAssociatedValues_PLMType_opaque::cEnumAssociatedValues_PLMType_opaque (const GALGAS_bigint & inAssociatedValue0,
                                                                             const GALGAS_PLMTypeFlags & inAssociatedValue1,
                                                                             const GALGAS_string & inAssociatedValue2,
-                                                                            const GALGAS_constructorMapEX & inAssociatedValue3
+                                                                            const GALGAS_constructorMap & inAssociatedValue3
                                                                             COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -3963,7 +3963,7 @@ cEnumAssociatedValues_PLMType_arrayType::cEnumAssociatedValues_PLMType_arrayType
                                                                                   const GALGAS_constantMap & inAssociatedValue4,
                                                                                   const GALGAS_PLMTypeFlags & inAssociatedValue5,
                                                                                   const GALGAS_string & inAssociatedValue6,
-                                                                                  const GALGAS_constructorMapEX & inAssociatedValue7
+                                                                                  const GALGAS_constructorMap & inAssociatedValue7
                                                                                   COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -4139,7 +4139,7 @@ GALGAS_PLMType GALGAS_PLMType::constructor_structure (const GALGAS_lstring & inA
                                                       const GALGAS_propertyList & inAssociatedValue2,
                                                       const GALGAS_PLMTypeFlags & inAssociatedValue3,
                                                       const GALGAS_guardMapForContext & inAssociatedValue4,
-                                                      const GALGAS_constructorMapEX & inAssociatedValue5
+                                                      const GALGAS_constructorMap & inAssociatedValue5
                                                       COMMA_LOCATION_ARGS) {
   GALGAS_PLMType result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid ()) {
@@ -4184,7 +4184,7 @@ GALGAS_PLMType GALGAS_PLMType::constructor_staticInteger (UNUSED_LOCATION_ARGS) 
 GALGAS_PLMType GALGAS_PLMType::constructor_opaque (const GALGAS_bigint & inAssociatedValue0,
                                                    const GALGAS_PLMTypeFlags & inAssociatedValue1,
                                                    const GALGAS_string & inAssociatedValue2,
-                                                   const GALGAS_constructorMapEX & inAssociatedValue3
+                                                   const GALGAS_constructorMap & inAssociatedValue3
                                                    COMMA_LOCATION_ARGS) {
   GALGAS_PLMType result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
@@ -4206,7 +4206,7 @@ GALGAS_PLMType GALGAS_PLMType::constructor_arrayType (const GALGAS_lstring & inA
                                                       const GALGAS_constantMap & inAssociatedValue4,
                                                       const GALGAS_PLMTypeFlags & inAssociatedValue5,
                                                       const GALGAS_string & inAssociatedValue6,
-                                                      const GALGAS_constructorMapEX & inAssociatedValue7
+                                                      const GALGAS_constructorMap & inAssociatedValue7
                                                       COMMA_LOCATION_ARGS) {
   GALGAS_PLMType result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid () && inAssociatedValue6.isValid () && inAssociatedValue7.isValid ()) {
@@ -4281,7 +4281,7 @@ void GALGAS_PLMType::method_structure (GALGAS_lstring & outAssociatedValue0,
                                        GALGAS_propertyList & outAssociatedValue2,
                                        GALGAS_PLMTypeFlags & outAssociatedValue3,
                                        GALGAS_guardMapForContext & outAssociatedValue4,
-                                       GALGAS_constructorMapEX & outAssociatedValue5,
+                                       GALGAS_constructorMap & outAssociatedValue5,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_structure) {
@@ -4338,7 +4338,7 @@ void GALGAS_PLMType::method_integer (GALGAS_bigint & outAssociatedValue0,
 void GALGAS_PLMType::method_opaque (GALGAS_bigint & outAssociatedValue0,
                                     GALGAS_PLMTypeFlags & outAssociatedValue1,
                                     GALGAS_string & outAssociatedValue2,
-                                    GALGAS_constructorMapEX & outAssociatedValue3,
+                                    GALGAS_constructorMap & outAssociatedValue3,
                                     C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_opaque) {
@@ -4367,7 +4367,7 @@ void GALGAS_PLMType::method_arrayType (GALGAS_lstring & outAssociatedValue0,
                                        GALGAS_constantMap & outAssociatedValue4,
                                        GALGAS_PLMTypeFlags & outAssociatedValue5,
                                        GALGAS_string & outAssociatedValue6,
-                                       GALGAS_constructorMapEX & outAssociatedValue7,
+                                       GALGAS_constructorMap & outAssociatedValue7,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_arrayType) {

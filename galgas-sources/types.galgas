@@ -10,6 +10,24 @@ boolset @PLMTypeFlags {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @constructorValue {
+  case zero
+  case simple (@bigint value)
+  case structure
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @constructorMap { # Key is (!selector!selector)
+  @constructorSignature mSignature
+  @sortedOperandIRList mSortedOperandList
+  @constructorValue mInitValue
+  insert insertKey error message "-- internal error --"
+  search searchKey error message "-- internal error --"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 enum @PLMType {
   case void # No actual type, used for no annotation type, ...
   case boolean
@@ -20,10 +38,10 @@ enum @PLMType {
                   @propertyList propertyList
                   @PLMTypeFlags flags
                   @guardMapForContext guardMap
-                  @constructorMapEX constructorMap)
+                  @constructorMap constructorMap)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount @string plmTypeName)
   case staticInteger
-  case opaque (@bigint bitCount @PLMTypeFlags flags @string plmTypeName @constructorMapEX constructorMap)
+  case opaque (@bigint bitCount @PLMTypeFlags flags @string plmTypeName @constructorMap constructorMap)
   case arrayType (@lstring typeName
                   @propertyMap propertyMap
                   @PLMType elementType
@@ -31,14 +49,14 @@ enum @PLMType {
                   @constantMap constantMap
                   @PLMTypeFlags flags
                   @string plmTypeName
-                  @constructorMapEX constructorMap)
+                  @constructorMap constructorMap)
   case function (@routineDescriptor descriptor)
   case pointer (@PLMType pointee)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @PLMType constructorMap -> @constructorMapEX {
+getter @PLMType constructorMap -> @constructorMap {
   switch self
   case void :
     result = {}

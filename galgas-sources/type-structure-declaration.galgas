@@ -258,6 +258,7 @@ override method @structureDeclarationAST enterInContext
   @propertyMap propertyMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
+  @string constructorKey = "("
   var canBeCopied = true
   for property in mStructurePropertyListAST do
     [property enterInContext
@@ -268,19 +269,18 @@ override method @structureDeclarationAST enterInContext
       !?propertyMap
       !?sortedOperandIRList
       !?constructorSignature
+      !?constructorKey
       !?canBeCopied
     ]
   end
+  constructorKey += ")"
 #---------------------------------------- Constructor map
-  @constructorMapEX constructorMap = {}
+  @constructorMap constructorMap = {}
   [!?constructorMap insertKey
-    !mStructureName
-    !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
-  ]
-#--- Enter in constructor map
-  [!?ioContext.mConstructorMapEX insertKey
-    !mStructureName
-    !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
+    !.new {!constructorKey !mStructureName.location}
+    !constructorSignature
+    !sortedOperandIRList
+    !.structure
   ]
 #---------------------------------------- Attribute "copyable"
   var flags = @PLMTypeFlags.instanciable
@@ -412,6 +412,7 @@ method @structurePropertyListAST-element enterInContext
   ?!@propertyMap propertyMap
   ?!@sortedOperandIRList sortedOperandIRList
   ?!@constructorSignature constructorSignature
+  ?!@string ioConstructorKey
   ?!@bool canBeCopied
 {
 #--- Property type
@@ -484,6 +485,7 @@ method @structurePropertyListAST-element enterInContext
       !.indexed{!type: optionalPropertyType!index:propertyIndex}
     ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
+    ioConstructorKey += "!" + mPropertyName
   end
 }
 
