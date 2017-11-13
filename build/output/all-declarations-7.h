@@ -520,4 +520,13 @@ class GALGAS_string function_llvmNameForSectionImplementation (const class GALGA
                                                                class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Function 'configurationNodeNameForPrecedenceGraph'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_configurationNodeNameForPrecedenceGraph (class C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
 #endif

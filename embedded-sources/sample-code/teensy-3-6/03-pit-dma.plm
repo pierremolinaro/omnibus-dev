@@ -80,7 +80,7 @@ let PATTERN_LENGTH = kPATTERN.count
 
 type $patternArray : $uint32 [PATTERN_LENGTH]
 
-var gOutputPattern = $patternArray ()
+var gOutputPattern = $patternArray (!repeated:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

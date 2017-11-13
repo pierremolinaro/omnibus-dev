@@ -90,25 +90,56 @@ override method @constructorCallAST analyzeExpression
     constructorKey += "!" + selector
   end
   constructorKey += ")"
-#--- Analyze constructor source type
+#--- Analyze constructor signature and init value
   let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
   let constructorMap = [resultType constructorMap]
-  [constructorMap searchKey
-    !.new {!constructorKey !mErrorLocation}
-    ?let constructorSignature
-    ?let sortedOperandList
-    ?let initValue
-  ]
+  [constructorMap searchKey !.new {!constructorKey !mErrorLocation} ?let constructorSignature ?let initValue]
+#--- Examine init value
   switch initValue
   case zero :
-    outResult = .zero {!type: resultType}
+    if [mParameterList length] != 0 then
+      error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult
+    else
+      outResult = .zero {!type: resultType}
+    end
+  case arrayValue (elementType size) :
+    if [mParameterList length] != 1 then
+      error mErrorLocation : "$" + [resultType key] + " array constructor should have one parameter" : outResult
+    else
+      let expression = [mParameterList mExpressionAtIndex !0]
+      [expression analyzeExpression
+        !self:inSelfType
+        !inGuard:inGuard
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:elementType
+        !context:inContext
+        !mode:inCurrentMode
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioUniversalMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+        ?result:let @objectIR expressionResult
+      ]
+      let result = checkAssignmentCompatibility (
+        !source:expressionResult
+        !targetAnnotationType:elementType
+        !errorLocation:[mParameterList mSelectorAtIndex !0].location
+        !staticTypeAllowed:false
+      )
+      @sortedOperandIRList sortedOperandIRList = {}
+      for i in 0 ..< size do
+        sortedOperandIRList += !result !i
+      end
+      outResult = .llvmStructureConstant {!type:resultType !values:sortedOperandIRList}
+    end
   case simple (value) :
     if [mParameterList length] != 0 then
       error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end
-  case structure :
+  case structure (sortedOperandList) :
     var sortedOperandIRList = sortedOperandList
     if [mParameterList length] != [constructorSignature length] then
       error mErrorLocation : "this constructor call should name " + [constructorSignature length] + " parameter"

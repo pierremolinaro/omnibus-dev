@@ -130,7 +130,7 @@ override method @opaqueTypeDeclarationAST enterInContext
     error mSizeExpressionLocation : "array size expression is not static"
   else
     @constructorMap constructorMap = {}
-    [!?constructorMap insertKey !["()" nowhere] !{} !{} !.simple {!value:0G}]
+    [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
