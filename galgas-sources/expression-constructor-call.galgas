@@ -84,10 +84,21 @@ override method @constructorCallAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
+#--- Analyze effective argument list
+  var constructorKey = "("
+  for (selector *) in mParameterList do
+    constructorKey += "!" + selector
+  end
+  constructorKey += ")"
 #--- Analyze constructor source type
   let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
   let constructorMap = [resultType constructorMap]
-  [constructorMap searchKey ![[resultType key] nowhere] ?let initValue]
+  [constructorMap searchKey
+    !.new {!constructorKey !mErrorLocation}
+    ?let constructorSignature
+    ?let sortedOperandList
+    ?let initValue
+  ]
   switch initValue
   case zero :
     outResult = .zero {!type: resultType}
@@ -97,7 +108,7 @@ override method @constructorCallAST analyzeExpression
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end
-  case structure (constructorSignature sortedOperandList) :
+  case structure :
     var sortedOperandIRList = sortedOperandList
     if [mParameterList length] != [constructorSignature length] then
       error mErrorLocation : "this constructor call should name " + [constructorSignature length] + " parameter"
@@ -131,10 +142,6 @@ override method @constructorCallAST analyzeExpression
         )
         sortedOperandIRList += !result !formal_mFieldIndex
       end
-#        @operandIRList initialValueList = {}
-#        for (initialValue *) in sortedOperandIRList do
-#          initialValueList += !initialValue
-#        end
       outResult = .llvmStructureConstant {!type: resultType !values:sortedOperandIRList}
     end
   end

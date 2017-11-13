@@ -173,6 +173,7 @@ method @taskList enterInContext
         !?initialValueList
         !?*
         !?*
+        !?*
       ]
     end
   #--- Enter task variable map as structure type in type map
