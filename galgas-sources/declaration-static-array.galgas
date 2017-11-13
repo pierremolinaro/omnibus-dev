@@ -304,6 +304,7 @@ override method @staticListAST enterInContext
     !propertyList:propertyList
     !flags:.none
     !guardMap:{}
+    !constructorMap:{}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmElementTypeName
@@ -441,6 +442,7 @@ override method @staticListAST enterInContext
       !constantMap: {}
       !flags:.none
       !plmTypeName:plmNameForStaticListType (!mStaticListName)
+      !constructorMap:{}
     }
     !index:[ioContext.mTypeMap count]
   ]

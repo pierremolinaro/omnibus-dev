@@ -122,17 +122,20 @@ override method @typeArrayDeclarationAST enterInContext
   else
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
     let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName} type]
-  #--- Class method map : add "count" constructor
+  #-------------------------------------------- Class method map : add "count" constructor
     @constantMap classConstantMap = {}
    [!?classConstantMap insertKey !.new {!"count" !mArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
-  #-------------------------------------------------------------------- List type property map
+  #-------------------------------------------- List type property map
     @propertyMap arrayTypePropertyMap = {}
     [!?arrayTypePropertyMap insertKey # "count" property
       !.new {!"count" !mArrayTypeName.location}
       !true # public
       !.constantProperty {!value:.literalInteger {!type:.staticInteger !value:arraySize}}
     ]
-  #--- Enter in type map
+  #-------------------------------------------- Constructor map
+    @constructorMapEX constructorMap = {}
+    [!?constructorMap insertKey !mArrayTypeName !.zero]
+  #-------------------------------------------- Enter in type map
     [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName
       !type:.arrayType {
@@ -143,11 +146,12 @@ override method @typeArrayDeclarationAST enterInContext
         !constantMap:classConstantMap
         !flags: .instanciable | .copyable
         !plmTypeName:mArrayTypeName
+        !constructorMap:constructorMap
       }
       !index:[ioContext.mTypeMap count]
     ]
-  #--- Enter array constructor
-    [!?ioContext.mConstructorMap insertKey
+  #-------------------------------------------- Enter array constructor
+    [!?ioContext.mConstructorMapEX insertKey
       !mArrayTypeName
       !.zero
     ]
