@@ -97,7 +97,7 @@ override method @registerConstantExpressionAST analyzeExpression
   ]
 #------------------------------------------------------ Valuated fields
   @bigint accumulatedFieldStaticValues = 0G
-  @operandList operandList = {}
+  @operandIRList operandList = {}
   for (fieldName expression expressionLocation) in mFieldValues do
     if fieldName.string == "" then
       error fieldName : "anonymous selector not allowed here" : operandList

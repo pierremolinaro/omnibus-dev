@@ -18,6 +18,8 @@ setter @instructionListIR appendLoadWhenReference
     outResultingValue = inSource
   case llvmStructureConstant (* *) :
     outResultingValue = inSource
+  case llvmArrayConstant (* *) :
+    outResultingValue = inSource
   case literalString (**) :
     outResultingValue = inSource
   case zero (*) :

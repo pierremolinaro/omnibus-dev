@@ -6072,6 +6072,41 @@ typeComparisonResult cEnumAssociatedValues_objectIR_llvmStructureConstant::compa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+cEnumAssociatedValues_objectIR_llvmArrayConstant::cEnumAssociatedValues_objectIR_llvmArrayConstant (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                    const GALGAS_operandIRList & inAssociatedValue1
+                                                                                                    COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_objectIR_llvmArrayConstant::description (C_String & ioString,
+                                                                    const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_objectIR_llvmArrayConstant::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectIR_llvmArrayConstant * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_llvmArrayConstant *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cEnumAssociatedValues_objectIR_literalString::cEnumAssociatedValues_objectIR_literalString (const GALGAS_uint & inAssociatedValue0,
                                                                                             const GALGAS_uint & inAssociatedValue1
                                                                                             COMMA_LOCATION_ARGS) :
@@ -6215,6 +6250,22 @@ GALGAS_objectIR GALGAS_objectIR::constructor_llvmStructureConstant (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayConstant (const GALGAS_PLMType & inAssociatedValue0,
+                                                                const GALGAS_operandIRList & inAssociatedValue1
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_objectIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_llvmArrayConstant ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectIR_llvmArrayConstant (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_objectIR GALGAS_objectIR::constructor_literalString (const GALGAS_uint & inAssociatedValue0,
                                                             const GALGAS_uint & inAssociatedValue1
                                                             COMMA_LOCATION_ARGS) {
@@ -6322,6 +6373,25 @@ void GALGAS_objectIR::method_llvmStructureConstant (GALGAS_PLMType & outAssociat
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_objectIR::method_llvmArrayConstant (GALGAS_PLMType & outAssociatedValue0,
+                                                GALGAS_operandIRList & outAssociatedValue1,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_llvmArrayConstant) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @objectIR llvmArrayConstant invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_objectIR_llvmArrayConstant * ptr = (const cEnumAssociatedValues_objectIR_llvmArrayConstant *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_objectIR::method_literalString (GALGAS_uint & outAssociatedValue0,
                                             GALGAS_uint & outAssociatedValue1,
                                             C_Compiler * inCompiler
@@ -6357,13 +6427,14 @@ void GALGAS_objectIR::method_zero (GALGAS_PLMType & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_objectIR [8] = {
+static const char * gEnumNameArrayFor_objectIR [9] = {
   "(not built)",
   "null",
   "reference",
   "llvmValue",
   "literalInteger",
   "llvmStructureConstant",
+  "llvmArrayConstant",
   "literalString",
   "zero"
 } ;
@@ -6396,6 +6467,12 @@ GALGAS_bool GALGAS_objectIR::getter_isLiteralInteger (UNUSED_LOCATION_ARGS) cons
 
 GALGAS_bool GALGAS_objectIR::getter_isLlvmStructureConstant (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmStructureConstant == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_objectIR::getter_isLlvmArrayConstant (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmArrayConstant == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

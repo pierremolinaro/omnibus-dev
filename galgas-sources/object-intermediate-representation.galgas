@@ -11,6 +11,7 @@ enum @objectIR {
   case llvmValue (@PLMType type @string llvmName)
   case literalInteger  (@PLMType type @bigint value)
   case llvmStructureConstant (@PLMType type @sortedOperandIRList values)
+  case llvmArrayConstant (@PLMType type @operandIRList values)
   case literalString  (@uint utf8Size @uint index)
   case zero (@PLMType type)
 }
@@ -31,6 +32,13 @@ getter @objectIR llvmName -> @string {
       between result += ", "
     end
     result += "}"
+  case llvmArrayConstant (* @operandIRList inValues) :
+    result = "["
+    for () in inValues
+      do result += [mOperand llvmTypeName] + " " + [mOperand llvmName]
+      between result += ", "
+    end
+    result += "]"
   case literalString  (@uint size @uint index) :
     let sizeStr = [size string]
     result = "getelementptr inbounds ([" + sizeStr + " x i8], [" + sizeStr + " x i8]* "
@@ -49,6 +57,7 @@ getter @objectIR type -> @PLMType {
   case literalInteger (type *) : result = type
   case llvmValue (type *) : result = type
   case llvmStructureConstant (type *) : result = type
+  case llvmArrayConstant (type *) : result = type
   case literalString  (* *) : result = .literalString
   end
 }
@@ -80,6 +89,8 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
     result = .zero {!type: inType}
   case llvmStructureConstant (* @sortedOperandIRList values) :
     result = .llvmStructureConstant {!type: inType !values: values}
+  case llvmArrayConstant (* @operandIRList values) :
+    result = .llvmArrayConstant {!type: inType !values: values}
   case literalString  (@uint size @uint index) :
     result = .literalString {!utf8Size: size !index: index}
   end
@@ -95,6 +106,7 @@ getter @objectIR name -> @string {
   case literalInteger (* @bigint value) : result = [value string]
   case llvmValue (* name) : result = name
   case llvmStructureConstant (* *) : result = "{...}"
+  case llvmArrayConstant (* *) : result = "[...]"
   case literalString  (@uint size @uint index) :
     let sizeStr = [size string]
     result = "getelementptr inbounds ([" + sizeStr + " x i8], [" + sizeStr + " x i8]* "
@@ -112,6 +124,7 @@ getter @objectIR isStatic -> @bool {
   case literalInteger (* *) : result = true
   case llvmValue (* *) : result = false
   case llvmStructureConstant (* *) : result = true
+  case llvmArrayConstant (* *) : result = true
   case literalString  (* *) : result = true
   end
 }
