@@ -11524,7 +11524,7 @@ const char * gWrapperFileContent_47_targetTemplates = "\n"
   "  let RS $digitalPort\n"
   "  let ENABLE $digitalPort\n"
   "\n"
-  "  var buffer = $lcdBuffer ()\n"
+  "  var buffer = $lcdBuffer (!repeated:0)\n"
   "  var sEntree = $semaphore (!value:0)\n"
   "  var sSortie = $semaphore (!value:LCD_BUFFER_SIZE)\n"
   "  \n"
@@ -11930,7 +11930,7 @@ const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   "plm-teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  14105, // Text length
+  14116, // Text length
   gWrapperFileContent_47_targetTemplates
 ) ;
 
@@ -17141,7 +17141,7 @@ const char * gWrapperFileContent_83_targetTemplates = "\n"
   "  let RS $digitalPort\n"
   "  let ENABLE $digitalPort\n"
   "\n"
-  "  var buffer = $lcdBuffer ()\n"
+  "  var buffer = $lcdBuffer (!repeated:0)\n"
   "  var sEntree = $semaphore (!value:0)\n"
   "  var sSortie = $semaphore (!value:LCD_BUFFER_SIZE)\n"
   "  \n"
@@ -17547,7 +17547,7 @@ const cRegularFileWrapper gWrapperFile_83_targetTemplates (
   "plm-teensy-3-6-lcd.plm",
   "plm",
   true, // Text file
-  14098, // Text length
+  14109, // Text length
   gWrapperFileContent_83_targetTemplates
 ) ;
 

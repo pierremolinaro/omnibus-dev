@@ -1018,6 +1018,40 @@ class cEnumAssociatedValues_constructorValue_simple : public cEnumAssociatedValu
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_constructorValue_structure : public cEnumAssociatedValues {
+  public : const GALGAS_sortedOperandIRList mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_constructorValue_structure (const GALGAS_sortedOperandIRList & inAssociatedValue0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_constructorValue_structure (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_constructorValue_arrayValue : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_constructorValue_arrayValue (const GALGAS_PLMType & inAssociatedValue0,
+                                                              const GALGAS_uint & inAssociatedValue1
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_constructorValue_arrayValue (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          @constructorMap_2D_element struct                                          *
 //                                                                                                                     *
@@ -1028,8 +1062,6 @@ class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_lstring mProperty_lkey ;
 
   public : GALGAS_constructorSignature mProperty_mSignature ;
-
-  public : GALGAS_sortedOperandIRList mProperty_mSortedOperandList ;
 
   public : GALGAS_constructorValue mProperty_mInitValue ;
 
@@ -1046,7 +1078,6 @@ class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_constructorMap_2D_element (const GALGAS_lstring & in_lkey,
                                              const GALGAS_constructorSignature & in_mSignature,
-                                             const GALGAS_sortedOperandIRList & in_mSortedOperandList,
                                              const GALGAS_constructorValue & in_mInitValue) ;
 
 //-- Start of generic part --*
@@ -1062,8 +1093,7 @@ class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_constructorMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                           const class GALGAS_constructorSignature & inOperand1,
-                                                                          const class GALGAS_sortedOperandIRList & inOperand2,
-                                                                          const class GALGAS_constructorValue & inOperand3
+                                                                          const class GALGAS_constructorValue & inOperand2
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1083,8 +1113,6 @@ class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_constructorValue getter_mInitValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_constructorSignature getter_mSignature (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_sortedOperandIRList getter_mSortedOperandList (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

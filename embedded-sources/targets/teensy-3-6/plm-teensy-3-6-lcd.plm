@@ -20,7 +20,7 @@ module lcd {
   let RS $digitalPort
   let ENABLE $digitalPort
 
-  var buffer = $lcdBuffer ()
+  var buffer = $lcdBuffer (!repeated:0)
   var sEntree = $semaphore (!value:0)
   var sSortie = $semaphore (!value:LCD_BUFFER_SIZE)
   

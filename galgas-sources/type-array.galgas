@@ -134,7 +134,7 @@ override method @typeArrayDeclarationAST enterInContext
     ]
   #-------------------------------------------- Constructor map
     @constructorMap constructorMap = {}
-    [!?constructorMap insertKey !["()" nowhere] !{} !{} !.zero]
+    [!?constructorMap insertKey !["(!repeated)" nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
   #-------------------------------------------- Enter in type map
     [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName

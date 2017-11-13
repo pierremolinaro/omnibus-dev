@@ -13,14 +13,14 @@ boolset @PLMTypeFlags {
 enum @constructorValue {
   case zero
   case simple (@bigint value)
-  case structure
+  case structure (@sortedOperandIRList sortedOperandList)
+  case arrayValue (@PLMType elementType @uint size)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @constructorMap { # Key is (!selector!selector)
   @constructorSignature mSignature
-  @sortedOperandIRList mSortedOperandList
   @constructorValue mInitValue
   insert insertKey error message "-- internal error --"
   search searchKey error message "-- internal error --"

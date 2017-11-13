@@ -279,8 +279,7 @@ override method @structureDeclarationAST enterInContext
   [!?constructorMap insertKey
     !.new {!constructorKey !mStructureName.location}
     !constructorSignature
-    !sortedOperandIRList
-    !.structure
+    !.structure {!sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Attribute "copyable"
   var flags = @PLMTypeFlags.instanciable

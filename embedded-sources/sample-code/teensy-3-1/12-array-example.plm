@@ -48,8 +48,8 @@ struct $C {
 
 task T priority 12 stackSize 512 {
   var deadline $uint32 = 0
-  var array = $A ()
-  var array2 = $A ()
+  var array = $A (!repeated:0)
+  var array2 = $A (!repeated:1)
   var index $int32 = 0
 
   while time.waitUntilMS (!deadline:self.deadline) {
@@ -70,7 +70,7 @@ task T priority 12 stackSize 512 {
       lcd.print (!spaces:1)
     }
     
-    var a = $A ()
+    var a = $A (!repeated:2)
     var x $uint32 = 0
     for i $uint32 in 0 ..< $A.count {
       a [i] = 9
