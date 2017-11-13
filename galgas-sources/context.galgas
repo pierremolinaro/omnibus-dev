@@ -93,7 +93,7 @@ enum @constructorValue {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @constructorMap {
+map @constructorMapEX {
   @constructorValue mInitValue
   insert insertKey error message "-- internal error --"
   search searchKey error message "-- internal error --"
@@ -133,7 +133,7 @@ struct @semanticContext {
   @globalConstantMap mGlobalConstantMap
   @globalVariableMap mGlobalVariableMap
   @moduleMap mModuleMap
-  @constructorMap mConstructorMap
+  @constructorMapEX mConstructorMapEX
   @staticlistMap mStaticListMap
 #--- Interrupts
   @stringset mDefinedInterruptSet

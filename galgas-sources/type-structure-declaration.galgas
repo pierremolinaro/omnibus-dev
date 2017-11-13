@@ -271,8 +271,14 @@ override method @structureDeclarationAST enterInContext
       !?canBeCopied
     ]
   end
+#---------------------------------------- Constructor map
+  @constructorMapEX constructorMap = {}
+  [!?constructorMap insertKey
+    !mStructureName
+    !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
+  ]
 #--- Enter in constructor map
-  [!?ioContext.mConstructorMap insertKey
+  [!?ioContext.mConstructorMapEX insertKey
     !mStructureName
     !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
   ]
@@ -390,6 +396,7 @@ override method @structureDeclarationAST enterInContext
       !propertyList:propertyList
       !flags:flags
       !guardMap:guardMap
+      !constructorMap:constructorMap
     }
     !index:[ioContext.mTypeMap count]
   ]

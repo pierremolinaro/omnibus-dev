@@ -298,8 +298,9 @@ override method @requiredModuleAST semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let moduleTypeName = moduleMangledNameFromModuleName (!mModuleName)
-  let moduleType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
-  [inContext.mConstructorMap searchKey !moduleTypeName ?let constructorValue]
+  let moduleTypeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
+  let constructorMap = [[moduleTypeProxy type] constructorMap]
+  [constructorMap  searchKey !moduleTypeName ?let constructorValue]
   [constructorValue structure ?constructorSignature:* ?sortedOperandList:let sortedOperandList]
   @operandIRList initialValueList = {}
   for (initialValue *) in sortedOperandList do
@@ -307,7 +308,7 @@ override method @requiredModuleAST semanticAnalysis
   end
   ioIntermediateCodeStruct.mModuleList += 
     !mModuleName.string
-    !moduleType
+    !moduleTypeProxy
     !initialValueList
 }
 

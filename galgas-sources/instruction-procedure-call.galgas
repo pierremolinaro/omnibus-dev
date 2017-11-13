@@ -297,7 +297,7 @@ override method @procedureCallInstructionAST analyze
   case arrayAccess (* @location endOfIndex) :
     error endOfIndex : "a property access is required here"
   case property (@lstring methodName) :
-    [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?3*]
+    [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
     let key = routineMangledNameFromCall (!"" !methodName !mArguments)
     [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     switch propertyAccess

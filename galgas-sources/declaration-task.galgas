@@ -182,6 +182,7 @@ method @taskList enterInContext
       !propertyList:propertyList
       !flags:.none
       !guardMap:{}
+      !constructorMap:{}
     }
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName

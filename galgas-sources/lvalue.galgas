@@ -109,7 +109,7 @@ method @LValueAST type
       end
     case arrayAccess (* *) :
       if [outType isArrayType] then
-        [outType arrayType ?2* ?elementType:outType ?4*]
+        [outType arrayType ?2* ?elementType:outType ?5*]
       end
     end
   end
@@ -342,7 +342,7 @@ private proc analyzeVariableInLValue
         end
       case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
         if [currentType isArrayType] then
-          [currentType arrayType ?2* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
+          [currentType arrayType ?2* ?elementType:let elementType ?size:let @bigint arraySize ?4*]
           handleArraySubscriptNew (
             !self: inSelfType
             !inGuard: false
@@ -425,7 +425,7 @@ private proc analyzeSelfAssignmentTarget
         end
       case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
         if [currentType isArrayType] then
-          [currentType arrayType ?2* ?elementType:let elementType ?size:let @bigint arraySize ?3*]
+          [currentType arrayType ?2* ?elementType:let elementType ?size:let @bigint arraySize ?4*]
           handleArraySubscriptNew (
             !self: inSelfType
             !inGuard: false

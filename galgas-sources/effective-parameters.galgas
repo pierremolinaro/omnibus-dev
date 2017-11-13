@@ -191,9 +191,9 @@ proc analyzeEffectiveParameters
       switch inSelfType
       case void :
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
-      case opaque (* * *) :
+      case opaque (* * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case arrayType (* * * * * * *) :
+      case arrayType (* * * * * * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case boolean :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
@@ -209,7 +209,7 @@ proc analyzeEffectiveParameters
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case integer (* * * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case structure (* propertyMap * * *) :
+      case structure (* propertyMap * * * *) :
         [propertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
         case nonVirtualMethod (*) :
