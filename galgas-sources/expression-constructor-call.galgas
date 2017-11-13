@@ -127,11 +127,11 @@ override method @constructorCallAST analyzeExpression
         !errorLocation:[mParameterList mSelectorAtIndex !0].location
         !staticTypeAllowed:false
       )
-      @sortedOperandIRList sortedOperandIRList = {}
+      @operandIRList operandIRList = {}
       for i in 0 ..< size do
-        sortedOperandIRList += !result !i
+        operandIRList += !result
       end
-      outResult = .llvmStructureConstant {!type:resultType !values:sortedOperandIRList}
+      outResult = .llvmArrayConstant {!type:resultType !values:operandIRList}
     end
   case simple (value) :
     if [mParameterList length] != 0 then
