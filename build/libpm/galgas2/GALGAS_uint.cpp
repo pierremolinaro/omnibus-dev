@@ -6,9 +6,9 @@
 //                                                                                                                     *
 //  Copyright (C) 2009, ..., 2015 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
-//  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
+//  e-mail : pierre.molinaro@ec-nantes.fr                                                                              *
 //                                                                                                                     *
-//  IRCCyN, Institut de Recherche en Communications et Cybernétique de Nantes, ECN, École Centrale de Nantes (France)  *
+//  LS2N, Laboratoire des Sciences du Numérique de Nantes, ECN, École Centrale de Nantes (France)                      *
 //                                                                                                                     *
 //  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General  *
 //  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)  *
@@ -223,6 +223,21 @@ GALGAS_double GALGAS_uint::getter_double (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_string GALGAS_uint::getter_alphaString (UNUSED_LOCATION_ARGS) const {
+  C_String s = "aaaaaaa" ; // 2**32 values needs 7 characters (base 26) : n = 32 * log (2) / log (26)
+  uint32_t v = mUIntValue ;
+  int32_t idx = 6 ;
+  while (v > 0) {
+    const utf32 c = TO_UNICODE ((v % 26) + 'a') ;
+    s.setUnicodeCharacterAtIndex (c, idx COMMA_HERE) ;
+    idx -= 1 ;
+    v /= 26 ;
+  }
+  return GALGAS_string (s) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_bigint GALGAS_uint::getter_bigint (UNUSED_LOCATION_ARGS) const {
   GALGAS_bigint result ;
   if (isValid ()) {
@@ -253,21 +268,6 @@ GALGAS_string GALGAS_uint::getter_hexString (UNUSED_LOCATION_ARGS) const {
 GALGAS_string GALGAS_uint::getter_xString (UNUSED_LOCATION_ARGS) const {
   C_String s ;
   s.appendUnsignedHex (mUIntValue) ;
-  return GALGAS_string (s) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_uint::getter_alphaString (UNUSED_LOCATION_ARGS) const {
-  C_String s = "aaaaaaa" ; // 2**32 values needs 7 characters (base 26) : n = 32 * log (2) / log (26)
-  uint32_t v = mUIntValue ;
-  int32_t idx = 6 ;
-  while (v > 0) {
-    const utf32 c = TO_UNICODE ((v % 26) + 'a') ;
-    s.setUnicodeCharacterAtIndex (c, idx COMMA_HERE) ;
-    idx -= 1 ;
-    v /= 26 ;
-  }
   return GALGAS_string (s) ;
 }
 
