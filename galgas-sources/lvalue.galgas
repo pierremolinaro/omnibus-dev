@@ -84,6 +84,19 @@ enum @LValueRepresentation {
 
 #·······················································································································
 
+getter @LValueRepresentation type -> @PLMType {
+  switch self
+  case volatileAbsoluteReference (@PLMType type *) :
+    result = type
+  case volatileIndirectReference (@PLMType type *) :
+    result = type
+  case universalReference (@PLMType type *) :
+    result = type
+  end
+}
+
+#·······················································································································
+
 method @LValueAST type
   ?selfType: let @PLMType inSelfType
   ?variableMap:let @universalValuedObjectMapForContext inUniversalMap

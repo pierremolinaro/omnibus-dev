@@ -1926,7 +1926,6 @@ class GALGAS_constructorValue : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
-    kEnum_zero,
     kEnum_simple,
     kEnum_structure,
     kEnum_arrayValue
@@ -1966,8 +1965,6 @@ class GALGAS_constructorValue : public AC_GALGAS_root {
   public : static class GALGAS_constructorValue constructor_structure (const class GALGAS_sortedOperandIRList & inOperand0
                                                                        COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_constructorValue constructor_zero (LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -1998,8 +1995,6 @@ class GALGAS_constructorValue : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSimple (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStructure (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isZero (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

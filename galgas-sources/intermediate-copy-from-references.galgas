@@ -1,0 +1,145 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+setter @instructionListIR appendCopyFromReferences
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?errorLocation:let @location inErrorLocation
+  ?source:let @objectIR inSourcePossibleReference
+  ?target:let @LValueRepresentation inTargetReference
+{
+#--- Perform load / store, or call a copy routine ?
+  let performLoadStore = [inTargetReference isVolatileAbsoluteReference]
+   || [inTargetReference isVolatileIndirectReference]
+   || not [inSourcePossibleReference isReference]
+#---
+  if performLoadStore then
+    [!?self appendLoadWhenReference
+      !?ioTemporaries
+      !inSourcePossibleReference
+      ?let loadedResultValue
+    ]
+    let result = checkAssignmentCompatibility (
+      !source:loadedResultValue
+      !targetAnnotationType:[inTargetReference type]
+      !errorLocation:inErrorLocation
+      !staticTypeAllowed:false
+    )
+    switch inTargetReference
+    case volatileAbsoluteReference (@PLMType type @uint address) :
+      [!?self appendStoreVolatileRegister !type !address !result]
+    case volatileIndirectReference (@PLMType type @string llvmName) :
+      [!?self appendStoreIndirectVolatileRegister !type !llvmName !result]
+    case universalReference (@PLMType type @string llvmName) :
+      [!?self appendStoreToUniversalReference !llvmName !type !result]
+    end
+  else # Call a copy routine
+    [inTargetReference universalReference ?type:let targetType ?llvmName: let targetLLVMName]
+    [inSourcePossibleReference reference ?type:let sourceType ?llvmName:let sourceLLVMName]
+    if sourceType != targetType then
+      error inErrorLocation
+      : "object of type $" + [targetType key]
+        + " cannot be assigned from expression of type $" + [sourceType key]
+    end
+     self += !@copyFromReferencesIR.new {!sourceType !targetLLVMName !sourceLLVMName}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @copyFromReferencesIR : @abstractInstructionIR {
+  @PLMType mType
+  @string mTargetLLVMName
+  @string mSourceLLVMName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @copyFromReferencesIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mType llvmTypeName]
+  ioLLVMcode += "  call void @plm.assign." + [[mType key] identifierRepresentation]
+              + " (" + llvmType + "* " + mTargetLLVMName + ", " + llvmType + "* " + mSourceLLVMName + ")\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @copyFromReferencesIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
+  let typeName = [self llvmTypeName]
+  @bool generate
+  switch self
+  case void :
+    generate = false
+  case boolean :
+    generate = true
+  case literalString :
+    generate = true
+  case enumeration (* * * *) :
+    generate = true
+  case structure (* * * flags * *) :
+    generate = [flags copyable]
+  case integer (* * * * *) :
+    generate = true
+  case staticInteger :
+    generate = false
+  case opaque (* @PLMTypeFlags flags * *) :
+    generate = [flags copyable]
+  case arrayType (* * * * * @PLMTypeFlags flags * *) :
+    generate = [flags copyable]
+  case function (*) :
+    generate = false
+  case pointer (*) :
+    generate = false
+  end
+#---
+  if generate then
+    ioLLVMCode += llvmSeparatorLine () + "\n"
+    ioLLVMCode += "define internal void @plm.assign." + [[self key] identifierRepresentation]
+                + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) optsize {\n"
+    ioLLVMCode += "entry:\n"
+    ioLLVMCode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
+    ioLLVMCode += "  %size = ptrtoint " + typeName + "* %sizeAsPtr to i32\n"
+    ioLLVMCode += "  %useLoadStore = icmp ule i32 %size, 12\n"
+    ioLLVMCode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
+    ioLLVMCode += "loadStore: ; Perform copy using load - store\n"
+    ioLLVMCode += "  %v = load " + typeName + ", " + typeName + "* %inSource\n" 
+    ioLLVMCode += "  store " + typeName + " %v, " + typeName + "* %inTarget\n" 
+    ioLLVMCode += "  ret void\n"
+    ioLLVMCode += "copyBytesOrCopyWords:\n"
+    ioLLVMCode += "  %sizeAnd3 = and i32 %size, 3\n"
+    ioLLVMCode += "  %sizeIsMutipleOf4 = icmp eq i32 %sizeAnd3, 0\n"
+    ioLLVMCode += "  br i1 %sizeIsMutipleOf4, label %testTarget, label %copyBytes\n"
+    ioLLVMCode += "testTarget:\n"
+    ioLLVMCode += "  %targetAsUnsigned = ptrtoint " + typeName + "* %inTarget to i32\n"
+    ioLLVMCode += "  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"
+    ioLLVMCode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq  i32%targetAsUnsignedAnd3, 0\n"
+    ioLLVMCode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"
+    ioLLVMCode += "testSource:\n"
+    ioLLVMCode += "  %sourceAsUnsigned = ptrtoint " + typeName + "* %inSource to i32\n"
+    ioLLVMCode += "  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"
+    ioLLVMCode += "  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"
+    ioLLVMCode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"
+    ioLLVMCode += "copyWords:\n"
+    ioLLVMCode += "  %target32 = bitcast " + typeName + "* %inTarget to i32*\n"
+    ioLLVMCode += "  %source32 = bitcast " + typeName + "* %inSource to i32*\n"
+    ioLLVMCode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %size)\n"
+    ioLLVMCode += "  ret void\n"
+    ioLLVMCode += "copyBytes:\n"
+    ioLLVMCode += "  %target8 = bitcast " + typeName + "* %inTarget to i8*\n"
+    ioLLVMCode += "  %source8 = bitcast " + typeName + "* %inSource to i8*\n"
+    ioLLVMCode += "  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %size)\n"
+    ioLLVMCode += "  ret void\n"
+    ioLLVMCode += "}\n\n"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

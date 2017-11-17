@@ -356,6 +356,16 @@ private proc generateCodeFiles
       llvmCode += "}\n\n"
     end
   end
+#----------------------------------------- Copy routines
+  let keyList = [inTypeMap allKeyList]
+  llvmCode += llvmTitleComment (!"PLM Copy Functions")
+  llvmCode += "declare void @copy.byte.array (i8* %dest, i8* %src, i32 %byteCount)\n\n"
+  llvmCode += llvmSeparatorLine () + "\n"
+  llvmCode += "declare void @copy.word.array (i32* %dest, i32* %src, i32 %byteCount)\n\n"
+  for (key) in keyList do
+    [inTypeMap searchKey !lkey:key ?type:let type ?index:*]
+    [type generateCopyRoutine !?llvmCode]
+  end
 #----------------------------------------- Intrinsics
   if [generationAdds.mExternFunctionDeclarationSet count] > 0 then
     llvmCode += llvmTitleComment (!"LLVM extern functions")

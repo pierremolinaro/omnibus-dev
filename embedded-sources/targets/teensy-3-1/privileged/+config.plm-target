@@ -44,7 +44,8 @@ C_FILES:
   "../../c-real-time-kernel-types.c",
   "../c-cortex-m4-context-code.c",
   "../../c-real-time-kernel-code.c",
-  "../c-countTrainingZeros.c"
+  "../c-countTrainingZeros.c",
+  "../../memory-copy.c"
 //--- Assembler Source files
 S_FILES:
   "../s-cortex-m4-header.s",

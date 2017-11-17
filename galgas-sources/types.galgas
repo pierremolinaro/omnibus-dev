@@ -11,7 +11,7 @@ boolset @PLMTypeFlags {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @constructorValue {
-  case zero
+#  case zero
   case simple (@bigint value)
   case structure (@sortedOperandIRList sortedOperandList)
   case arrayValue (@PLMType elementType @uint size)

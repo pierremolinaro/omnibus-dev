@@ -114,33 +114,52 @@ override method @varInstructionWithAssignmentAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR sourcePossibleReference
   ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
-    !sourcePossibleReference
-    ?let expressionResult
-  ]  
-#--- Check type compatibility
-  if targetType == .void then
-    targetType = [expressionResult type]
-  end
   let result = checkAssignmentCompatibility (
-    !source:expressionResult
+    !source:sourcePossibleReference
     !targetAnnotationType:targetType
     !errorLocation:mVarName.location
     !staticTypeAllowed:false
   )
-  drop expressionResult, targetType
 #--- Declare local variable
-  let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  let plmLocalVariableName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
-  [!?ioUniversalMap insertLocalVariable !mVarName ![result type] !plmName !.hasUnreadValue !false]
+  [!?ioUniversalMap insertLocalVariable !mVarName ![result type] !plmLocalVariableName !.hasUnreadValue !false]
 #--- Code generation
-  ioAllocaList += !llvmNameForLocalVariable (!plmName) ![[result type] llvmTypeName]
-  [!?ioInstructionGenerationList appendStoreLocalVariable
-    !plmName
-    ![result type]
-    !result
-  ]
+  ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) ![[result type] llvmTypeName]
+#--- Assignment generation
+  [!?ioInstructionGenerationList appendCopyFromReferences
+    !?ioTemporaries
+    !errorLocation:mVarName
+    !source:sourcePossibleReference
+    !target:.universalReference {!type:[result type] !llvmName:llvmNameForLocalVariable (!plmLocalVariableName)}
+  ]  
+#  [!?ioInstructionGenerationList appendLoadWhenReference
+#    !?ioTemporaries
+#    !sourcePossibleReference
+#    ?let expressionResult
+#  ]  
+##--- Check type compatibility
+#  if targetType == .void then
+#    targetType = [expressionResult type]
+#  end
+#  let result = checkAssignmentCompatibility (
+#    !source:expressionResult
+#    !targetAnnotationType:targetType
+#    !errorLocation:mVarName.location
+#    !staticTypeAllowed:false
+#  )
+#  drop expressionResult, targetType
+##--- Declare local variable
+#  let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+#  ioTemporaries.mTemporaryIndex ++
+#  [!?ioUniversalMap insertLocalVariable !mVarName ![result type] !plmName !.hasUnreadValue !false]
+##--- Code generation
+#  ioAllocaList += !llvmNameForLocalVariable (!plmName) ![[result type] llvmTypeName]
+#  [!?ioInstructionGenerationList appendStoreLocalVariable
+#    !plmName
+#    ![result type]
+#    !result
+#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

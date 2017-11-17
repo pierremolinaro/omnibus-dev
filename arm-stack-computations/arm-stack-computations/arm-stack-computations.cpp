@@ -234,10 +234,10 @@ void analyzeLine (const std::string & inLine, const int inLineNumber) {
           const int n = decodeNumberFromLine (inLine, inLineNumber, column) ;
           if ((n % 4) != 0) {
             errorForLine (inLine, inLineNumber, column, "pad with is not a multiple of 4") ;
-          }else if (gPadWordCount != 0) {
-            errorForLine (inLine, inLineNumber, column, "duplicated .pad") ;
+//          }else if (gPadWordCount != 0) {
+//            errorForLine (inLine, inLineNumber, column, "duplicated .pad") ;
           }else{
-            gPadWordCount = n ;
+            gPadWordCount += n ;
           }
         }else{
           errorForLine (inLine, inLineNumber, column, "'#' expected") ;

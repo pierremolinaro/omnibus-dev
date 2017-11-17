@@ -2478,6 +2478,16 @@ class cPtr_switchInstructionIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Extension getter '@LValueRepresentation type' (as function)                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_PLMType extensionGetter_type (const class GALGAS_LValueRepresentation & inObject,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //              Extension getter '@effectiveArgumentPassingModeAST matchingFormalArgument' (as function)               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

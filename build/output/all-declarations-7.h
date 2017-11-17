@@ -380,19 +380,6 @@ void extensionMethod_enterInContext (const class GALGAS_globalVarDeclarationList
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Function 'checkAssignmentCompatibility'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_objectIR function_checkAssignmentCompatibility (const class GALGAS_objectIR & constinArgument0,
-                                                             const class GALGAS_PLMType & constinArgument1,
-                                                             const class GALGAS_location & constinArgument2,
-                                                             const class GALGAS_bool & constinArgument3,
-                                                             class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                            Extension method '@globalVariableMapIR-element generateLLVM'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
