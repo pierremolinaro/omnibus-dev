@@ -1,0 +1,182 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @sizeofExpressionAST : @expressionAST {
+  @LValueAST mLValue
+}
+
+#·······················································································································
+
+class @sizeofTypeAST : @expressionAST {
+  @lstring mTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <primary> !@expressionAST outExpression {
+    $sizeof$
+    $($
+    <lvalue> ?let lvalue
+    $)$
+    outExpression = @sizeofExpressionAST.new {!lvalue}
+  }
+
+  #·····················································································································
+
+  rule <primary> !@expressionAST outExpression {
+    $sizeof$
+    $($
+    $\$type$ ?let typeName
+    $)$
+    outExpression = @sizeofTypeAST.new {!typeName}
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @sizeofExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring unused inConstantName
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+}
+
+#·······················································································································
+
+override method @sizeofTypeAST addDependenceEdgeForStaticExpression
+  ?let @lstring unused inConstantName
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @sizeofExpressionAST noteExpressionTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+}
+
+#·······················································································································
+
+override method @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+  [!?ioGraph noteNode !typeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! @sizeofExpressionAST
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @sizeofExpressionAST analyzeExpression
+  ?self:let @PLMType inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode unused inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
+  ?!alloca:@allocaList unused ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+  if inGuard then
+    error mLValue.mIdentifier : "sizeof () cannot be used in guard" : outResult
+  else
+  #--- Analyze LValue
+    [mLValue type !selfType:inSelfType !variableMap:ioUniversalMap ?let type]
+    let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
+      !inContext.mTypeMap
+      !["uint" + inContext.mPointerSize nowhere]
+    }
+    let resultType = [resultTypeProxy type]
+    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    ioInstructionGenerationList += !@sizeofInstructionIR.new {
+      !outResult
+      !type
+    }
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! @sizeofTypeAST
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @sizeofTypeAST analyzeExpression
+  ?self:let @PLMType unused inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode unused inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@universalValuedObjectMapForContext unused  ioUniversalMap
+  ?!alloca:@allocaList unused ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+  if inGuard then
+    error mTypeName : "sizeof () cannot be used in guard" : outResult
+  else
+    let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+    let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
+      !inContext.mTypeMap
+      !["uint" + inContext.mPointerSize nowhere]
+    }
+    let resultType = [resultTypeProxy type]
+    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    ioInstructionGenerationList += !@sizeofInstructionIR.new {!outResult!type}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! @sizeofInstructionIR
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @sizeofInstructionIR : @abstractInstructionIR {
+  @objectIR mTarget
+  @PLMType mSourceType
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @sizeofInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @sizeofInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let typeName = [mSourceType llvmTypeName]
+  ioLLVMcode += "  " + [mTarget llvmName] + ".asPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
+  ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + typeName + "* " + [mTarget llvmName] + ".asPtr to i32\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

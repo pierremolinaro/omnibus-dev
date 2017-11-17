@@ -41,6 +41,12 @@ struct $C {
   var c = $B ()
 }
 
+struct $toto {
+  var a $uint16 = 0
+  var c = no
+  var b = no
+}
+
 //-----------------------------------------------------------------------------*
 
 task T priority 12 stackSize 512 {
@@ -52,6 +58,8 @@ task T priority 12 stackSize 512 {
     toggle (!port:LED_L1)
     let n = self.acc.c.a +% self.deadline
     self.acc.c.a = n
+    lcd.goto (!line:0 !column:0)
+    lcd.print (!unsigned:sizeof ($toto))
   }
 }
 

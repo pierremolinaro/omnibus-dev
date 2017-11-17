@@ -55,6 +55,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "self",
   "service",
   "setup",
+  "sizeof",
   "struct",
   "stackSize",
   "staticArray",
