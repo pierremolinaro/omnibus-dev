@@ -101,3 +101,18 @@ let adresse $uint32 = addressof (x)
 let adresse_registre_controle $uint32 = addressof (PORTA_PCR0)
 \end{PLM}
 
+
+
+
+\section{Expression \texttt{sizeof}}
+
+
+L'expression \plm=sizeof= permet d'obtenir la taille (en nombre d'octets) de toute \emph{lvalue}, ou de tout type. La valeur retournée a pour type l'entier non signé de la taille d'un pointeur (sur Cortex, c'est donc \plm=$uint32=).
+
+Par exemple~:
+\begin{PLM}
+var x = yes // x est booléen
+let s1 $uint32 = sizeof (x) // 1
+let s2 $uint32 = sizeof ($bool) // 1
+\end{PLM}
+

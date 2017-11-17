@@ -844,6 +844,12 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1/unp
   "  var c = $B ()\n"
   "}\n"
   "\n"
+  "struct $toto {\n"
+  "  var a $uint16 = 0\n"
+  "  var c = no\n"
+  "  var b = no\n"
+  "}\n"
+  "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
@@ -856,7 +862,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1/unp
   "    let n = self.acc.c.a +% self.deadline\n"
   "    self.acc.c.a = n\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:sizeof ($uint17))\n"
+  "    lcd.print (!unsigned:sizeof ($toto))\n"
   "  }\n"
   "}\n"
   "\n"
@@ -866,7 +872,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-structure-example.plm",
   "plm",
   true, // Text file
-  1520, // Text length
+  1582, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
