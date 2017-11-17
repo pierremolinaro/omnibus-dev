@@ -154,7 +154,7 @@ Trois constantes sont prédéfinies~:
 \begin{itemize}
   \item \plm=CODE=, qui contient le code de panique, et dont le type est défini par la construction \plm=panic:= (\refSubsectionPage{configurationPanic})~;
   \item \plm=FILE=, qui contient le nom du fichier source de l'instruction qui a déclenché la panique, et dont le type est \plm=$staticString=~;
-  \item \plm=LINE=, qui contient le numéro de ligne du fichier source de l'instruction qui a déclenché la panique, et dont le type est défini par la construction \plm=panique:= (\refSubsectionPage{configurationPanic}).
+  \item \plm=LINE=, qui contient le numéro de ligne du fichier source de l'instruction qui a déclenché la panique, et dont le type est défini par la construction \plm=PANIC:= (\refSubsectionPage{configurationPanic}).
 \end{itemize}
 
 Les trois constantes \plm=CODE=, \plm=FILE= et \plm=LINE= permettent de signaler les caractéristiques de la panique.
@@ -165,6 +165,6 @@ Les trois constantes \plm=CODE=, \plm=FILE= et \plm=LINE= permettent de signaler
 Pour redémarrer un processeur ARMv7 lors d'une panique, on peut écrire la routine \plm=panic setup= suivante~:
 \begin{PLM}
 panic setup 255 {
-  AIRCR = $AIRCR {VECTKEY:0x5FA, SYSRESETREQ}
+  AIRCR = {AIRCR !VECTKEY:0x5FA !SYSRESETREQ:1}
 }
 \end{PLM}
