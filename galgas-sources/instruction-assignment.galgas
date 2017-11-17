@@ -89,25 +89,12 @@ override method @assignmentInstructionAST analyze
     ?let @LValueRepresentation lvalueIR
   ]
 #---
-  [!?ioInstructionGenerationList appendLoadWhenReference
+  [!?ioInstructionGenerationList appendCopyFromReferences
     !?ioTemporaries
-    !sourceOperandPossibleReference
-    ?let sourceOperand
-  ]  
-  let result = checkAssignmentCompatibility (
-    !source:sourceOperand
-    !targetAnnotationType:targetType
     !errorLocation:mTargetAST.mIdentifier
-    !staticTypeAllowed:false
-  )
-  switch lvalueIR
-  case volatileAbsoluteReference (@PLMType type @uint address) :
-    [!?ioInstructionGenerationList appendStoreVolatileRegister !type !address !result]
-  case volatileIndirectReference (@PLMType type @string llvmName) :
-    [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !type !llvmName !result]
-  case universalReference (@PLMType type @string llvmName) :
-    [!?ioInstructionGenerationList appendStoreToUniversalReference !llvmName !type !result]
-  end
+    !source:sourceOperandPossibleReference
+    !target:lvalueIR
+  ]  
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -11164,6 +11164,49 @@ GALGAS_accessInAssignmentAST GALGAS_accessInAssignmentAST::extractObject (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                    Extension Getter '@LValueRepresentation type'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMType extensionGetter_type (const GALGAS_LValueRepresentation & inObject,
+                                     C_Compiler * /* inCompiler */
+                                     COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_PLMType result_result ; // Returned variable
+  const GALGAS_LValueRepresentation temp_0 = inObject ;
+  switch (temp_0.enumValue ()) {
+  case GALGAS_LValueRepresentation::kNotBuilt:
+    break ;
+  case GALGAS_LValueRepresentation::kEnum_volatileAbsoluteReference:
+    {
+      const cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference * extractPtr_3694 = (const cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference *) (temp_0.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_3694->mAssociatedValue0 ;
+      result_result = extractedValue_type ;
+    }
+    break ;
+  case GALGAS_LValueRepresentation::kEnum_volatileIndirectReference:
+    {
+      const cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference * extractPtr_3765 = (const cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference *) (temp_0.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_3765->mAssociatedValue0 ;
+      result_result = extractedValue_type ;
+    }
+    break ;
+  case GALGAS_LValueRepresentation::kEnum_universalReference:
+    {
+      const cEnumAssociatedValues_LValueRepresentation_universalReference * extractPtr_3829 = (const cEnumAssociatedValues_LValueRepresentation_universalReference *) (temp_0.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_3829->mAssociatedValue0 ;
+      result_result = extractedValue_type ;
+    }
+    break ;
+  }
+//---
+  return result_result ;
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                     Extension Getter '@effectiveArgumentPassingModeAST matchingFormalArgument'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
