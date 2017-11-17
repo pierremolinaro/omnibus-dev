@@ -22,14 +22,14 @@ void copyByteArray (unsigned char * inTargetPtr,
 
 void copyWordArray (unsigned * inTargetPtr,
                     unsigned * inSourcePtr,
-                    const unsigned inByteCount) asm ("copy.word.array") ;
+                    const unsigned inWordCount) asm ("copy.word.array") ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void copyWordArray (unsigned * inTargetPtr,
                     unsigned * inSourcePtr,
-                    const unsigned inByteCount) {
-  unsigned wordCount = inByteCount / 4 ;
+                    const unsigned inWordCount) {
+  unsigned wordCount = inWordCount ;
   do {
     *inTargetPtr = *inSourcePtr ;
     inTargetPtr ++ ;
