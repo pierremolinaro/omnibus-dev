@@ -4,7 +4,7 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-boolset @PLMTypeFlags {
+boolset @PLMTypeAttributes {
   instanciable, equatable, copyable
 }
 
@@ -36,18 +36,23 @@ enum @PLMType {
   case structure (@lstring typeName
                   @propertyMap propertyMap
                   @propertyList propertyList
-                  @PLMTypeFlags flags
+                  @PLMTypeAttributes attributes
                   @guardMapForContext guardMap
                   @constructorMap constructorMap)
-  case integer (@bigint min @bigint max @bool unsigned @uint bitCount @string plmTypeName)
+  case integer (@propertyMap propertyMap
+                @bigint min
+                @bigint max
+                @bool unsigned
+                @uint bitCount
+                @string plmTypeName)
   case staticInteger
-  case opaque (@bigint bitCount @PLMTypeFlags flags @string plmTypeName @constructorMap constructorMap)
+  case opaque (@bigint bitCount @PLMTypeAttributes attributes @string plmTypeName @constructorMap constructorMap)
   case arrayType (@lstring typeName
                   @propertyMap propertyMap
                   @PLMType elementType
                   @bigint size
                   @constantMap constantMap
-                  @PLMTypeFlags flags
+                  @PLMTypeAttributes flags
                   @string plmTypeName
                   @constructorMap constructorMap)
   case function (@routineDescriptor descriptor)
@@ -68,7 +73,7 @@ getter @PLMType constructorMap -> @constructorMap {
     result = {}
   case structure (* * * * * contructorMap) :
     result = contructorMap
-  case integer (* * * * *) :
+  case integer (* * * * * *) :
     result = {}
   case opaque (* * * contructorMap) :
     result = contructorMap
@@ -95,8 +100,8 @@ getter @PLMType propertyMap -> @propertyMap {
     result = propertyMap
   case structure (* propertyMap * * * *) :
     result = propertyMap
-  case integer (* * * * *) :
-    result = {}
+  case integer (propertyMap * * * * *) :
+    result = propertyMap
   case opaque (* * * *) :
     result = {}
   case arrayType (* propertyMap * * * * * *) :
@@ -122,7 +127,7 @@ getter @PLMType equatable -> @bool {
     result = true
   case structure (* * * flags * *) :
     result = [flags equatable]
-  case integer (* * * * *) :
+  case integer (* * * * * *) :
     result = true
   case opaque (* flags * *) :
     result = [flags equatable]
@@ -155,7 +160,7 @@ getter @PLMType instanciable -> @bool {
     result = true
   case structure (* * * flags * *) :
     result = [flags instanciable]
-  case integer (* * * * *) :
+  case integer (* * * * * *) :
     result = true
   case opaque (* flags * *) :
     result = [flags instanciable]
@@ -188,7 +193,7 @@ getter @PLMType copyable -> @bool {
     result = true
   case structure (* * * flags * *) :
     result = [flags copyable]
-  case integer (* * * * *) :
+  case integer (* * * * * *) :
     result = true
   case opaque (* flags * *) :
     result = [flags copyable]
@@ -211,7 +216,7 @@ getter @PLMType classConstantMap -> @constantMap {
     result = constantMap
   case structure (* * * * * *) :
     result = {}
-  case integer (* * * * *) :
+  case integer (* * * * * *) :
     result = {}
   case opaque (* * * *) :
     result = {}
@@ -238,7 +243,7 @@ getter @PLMType llvmTypeName -> @string {
     result = "i" + bitCount
   case structure (@lstring typeName * * * * *) :
     result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
-  case integer (@bigint unused min @bigint unused max @bool unused unsigned @uint bitCount *) :
+  case integer (* * * * @uint bitCount *) :
     result = "i" + bitCount
   case staticInteger :
     result = "—"
@@ -282,7 +287,7 @@ getter @PLMType key -> @string {
     result = plmTypeName
   case structure (plmTypeName * * * * *) :
     result = plmTypeName
-  case integer (* * * * plmTypeName) :
+  case integer (* * * * * plmTypeName) :
     result = plmTypeName
   case staticInteger :
     result = staticIntegerTypeName ()
@@ -311,7 +316,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Enumeration"
   case structure (* * * * * *) :
     result = "Structure"
-  case integer (* * @bool unsigned @uint bitCount *) :
+  case integer (* * * @bool unsigned @uint bitCount *) :
     result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
            + ", " + if unsigned then "unsigned" else "signed" end + ")"
   case staticInteger :

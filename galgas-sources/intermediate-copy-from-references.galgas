@@ -85,16 +85,16 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
     generate = true
   case enumeration (* * * *) :
     generate = true
-  case structure (* * * flags * *) :
-    generate = [flags copyable]
-  case integer (* * * * *) :
+  case structure (* * * attributes * *) :
+    generate = [attributes copyable]
+  case integer (* * * * * *) :
     generate = true
   case staticInteger :
     generate = false
-  case opaque (* @PLMTypeFlags flags * *) :
-    generate = [flags copyable]
-  case arrayType (* * * * * @PLMTypeFlags flags * *) :
-    generate = [flags copyable]
+  case opaque (* @PLMTypeAttributes attributes * *) :
+    generate = [attributes copyable]
+  case arrayType (* * * * * @PLMTypeAttributes attributes * *) :
+    generate = [attributes copyable]
   case function (*) :
     generate = false
   case pointer (*) :
@@ -104,7 +104,7 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
   if generate then
     ioLLVMCode += llvmSeparatorLine () + "\n"
     ioLLVMCode += "define internal void @plm.assign." + [[self key] identifierRepresentation]
-                + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) optsize {\n"
+                + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
     ioLLVMCode += "entry:\n"
     ioLLVMCode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
     ioLLVMCode += "  %size = ptrtoint " + typeName + "* %sizeAsPtr to i32\n"

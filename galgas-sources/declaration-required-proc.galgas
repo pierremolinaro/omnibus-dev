@@ -6,7 +6,7 @@ list @requiredProcedureDeclarationListAST {
   @lstring mName
   @mode mExecutionMode
   @bool mIsExported
-  @routineFormalArgumentList mFormalArgumentList
+  @routineFormalArgumentListAST mFormalArgumentList
   @location mEndOfProcLocation
 }
 

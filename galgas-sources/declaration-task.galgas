@@ -79,7 +79,7 @@ syntax extension plm_syntax {
     while
       $func$
       $identifier$ ?let procName
-      <procedure_formal_arguments> ?formalArguments:let @routineFormalArgumentList formalArgumentList
+      <procedure_formal_arguments> ?formalArguments:let @routineFormalArgumentListAST formalArgumentList
       @lstring returnTypeName
       select
         returnTypeName = ["" here]
@@ -181,7 +181,7 @@ method @taskList enterInContext
       !typeName:task.mTaskName
       !propertyMap:propertyMap
       !propertyList:propertyList
-      !flags:.none
+      !attributes:.none
       !guardMap:{}
       !constructorMap:{}
     }

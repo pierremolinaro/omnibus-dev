@@ -7,7 +7,7 @@ list @systemRoutineDeclarationListAST {
   @routineKind mRoutineKind
   @bool mPublic
   @lstringlist mAttributeList
-  @routineFormalArgumentList mFormalArgumentList
+  @routineFormalArgumentListAST mFormalArgumentList
   @lstring mReturnTypeName
   @instructionListAST mInstructionList
   @location mEndOfInstructionListLocation
@@ -118,7 +118,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       end
     end
   #--- Enter in context
-    [!?ioContext.mRoutineMapForContext insertKey
+    [!?ioContext.mRoutineMapForContext insertRoutine
       !svc.mName
       ![svc.mFormalArgumentList routineSignature !svc.mName]
       !routineMangledName

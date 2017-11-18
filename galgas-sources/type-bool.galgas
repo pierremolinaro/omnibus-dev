@@ -48,6 +48,7 @@ override getter @booleanDeclarationAST keyRepresentationForErrorSignaling -> @st
 override method @booleanDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -130,6 +131,11 @@ override method @booleanDeclarationAST semanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+#override method @booleanDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
+#}
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -25,9 +25,8 @@ list @routineTypedSignature {
 
 #·······················································································································
 
-getter @routineFormalArgumentList routineSignature ?let @location inRoutineNameLocation -> @lstring {
-  var key = ""
-  key += "("
+getter @routineFormalArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
+  var key = "("
   for (formalArgumentPassingMode selector * *) in self do
     key += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
@@ -85,7 +84,7 @@ struct @routineDescriptor {
 
 func routineMangledNameFromAST ?let @string inReceiverTypeName
                                ?let @lstring inRoutineName
-                               ?let @routineFormalArgumentList inFormalArgumentList -> @lstring
+                               ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
 {
   result = if inReceiverTypeName == "" then
     inRoutineName
@@ -120,7 +119,7 @@ func routineMangledNameFromCall ?let @string inReceiverTypeName
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc routineSignature ?!@unifiedTypeMap ioTypeMap
-                      ?let @routineFormalArgumentList inFormalArgumentList
+                      ?let @routineFormalArgumentListAST inFormalArgumentList
                       !@routineTypedSignature outSignature
 {
   outSignature = {}

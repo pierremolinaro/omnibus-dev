@@ -151,18 +151,19 @@ struct @semanticContext {
 abstract method @abstractDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildSemanticContext
-  ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
   ?sourceFile:let @lstring inSourceFile
   ?ast:let @ast inAST
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   !context:@semanticContext outSemanticContext
+  !@subprogramInvocationGraph outSubprogramInvocationGraph
 {
   outSemanticContext = .default
 #--- Enter init routines
@@ -180,10 +181,12 @@ proc buildSemanticContext
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #---
-  for (declaration) in inDeclarationListAST do
+  outSubprogramInvocationGraph = .emptyGraph
+  for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext
       !procedureDeclarationList:inAST.mStandAloneFunctionDeclarationListAST
       !?context:outSemanticContext
+      !?outSubprogramInvocationGraph
       !?staticlistValues:ioStaticListValueMap
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
@@ -205,29 +208,6 @@ proc buildSemanticContext
   )
 #--- Enter tasks
   [inAST.mTaskListAST enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
-#--- Enter static lists in constant map
-#  for (key stringValueList) in ioStaticListValueMap do
-#    let lkey = @lstring.new {!key !.nowhere}
-#    let elementTypePLMName = plmNameForStaticListElementType (!lkey)
-#    let elementType = [@unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !elementTypePLMName} type]
-#    [!?outSemanticContext.mTypeMap insertType
-#      !lkey:plmNameForStaticListType (!lkey)
-#      !type:.arrayType {
-#        !typeName:[llvmNameForStaticListType (!key) nowhere]
-#        !elementType:elementType
-#        !size:[stringValueList length]
-#        !constantMap: {}
-#        !flags:.none
-#        !plmTypeName:plmNameForStaticListType (!lkey)
-#      }
-#      !index:[outSemanticContext.mTypeMap count]
-#    ]
-#    let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
-#    [!?outSemanticContext.mGlobalConstantMap insertKey
-#      !lkey
-#      !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!lkey)}
-#    ]
-#  end
 #--- Check global var declaration
   if @uint.errorCount == 0 then
     for globalVar in inAST.mGlobalVarDeclarationListAST do

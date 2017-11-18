@@ -4,7 +4,7 @@
 
 enum @staticListPropertyTypeAST {
   case valueType (@lstring type)
-  case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnType)
+  case function (@mode mode @routineFormalArgumentListAST formalArgs @lstring returnType)
 }
 
 #·······················································································································
@@ -32,7 +32,7 @@ list @staticListValueListAST {
 
 enum @extendStaticListExpressionAST {
   case expression (@expressionAST exp)
-  case function (@lstring functionName @routineFormalArgumentList formalArgs)
+  case function (@lstring functionName @routineFormalArgumentListAST formalArgs)
 }
 
 #·······················································································································
@@ -171,7 +171,7 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
     case valueType (@lstring propertyTypeName) :
       let typeName = llvmRegularTypeMangledNameFromName (!propertyTypeName)
       [!?ioGraph addEdge !mStaticListName !typeName]
-    case function (* @routineFormalArgumentList formalArgs @lstring returnType) :
+    case function (* @routineFormalArgumentListAST formalArgs @lstring returnType) :
       for (* * formalArgumentTypeName *) in formalArgs do
         let typeName = llvmRegularTypeMangledNameFromName(!formalArgumentTypeName)
         [!?ioGraph noteNode !typeName]
@@ -188,7 +188,7 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
       switch operand
       case expression (@expressionAST exp) :
         [exp addDependenceEdgeForStaticExpression !mStaticListName !?ioGraph]
-      case function (* @routineFormalArgumentList formalArgs) :
+      case function (* @routineFormalArgumentListAST formalArgs) :
         for (* * formalArgumentTypeName *) in formalArgs do
           let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
           [!?ioGraph noteNode !typeName]
@@ -233,6 +233,7 @@ map @staticListInitializationMap {
 override method @staticListAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
@@ -256,7 +257,7 @@ override method @staticListAST enterInContext
           !.indexed{!type:propertyType !index:propertyIndex}
         ]
       end
-    case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnTypeName) :
+    case function (@mode mode @routineFormalArgumentListAST formalArgs @lstring returnTypeName) :
     #--- Routine mangled name
       let routineMangledName = routineMangledNameFromAST (
         !"" 
@@ -302,7 +303,7 @@ override method @staticListAST enterInContext
     !typeName:llvmNameForStaticListElementType (!mStaticListName)
     !propertyMap:propertyMap
     !propertyList:propertyList
-    !flags:.none
+    !attributes:.none
     !guardMap:{}
     !constructorMap:{}
   }
@@ -363,7 +364,7 @@ override method @staticListAST enterInContext
           #--- Enter in static value
             staticValue += [type llvmTypeName] + " " + [expressionResult llvmName]
           end      
-        case function (@lstring functionName @routineFormalArgumentList formalArgs) :
+        case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
           if not [type isFunction] then
             error endOfExp : "a static expression is expected here"
           else
@@ -477,7 +478,7 @@ override method @staticListAST semanticAnalysis
     for (operand endOfExp) in value.mExpressions do
       switch operand
       case expression (@expressionAST unused exp) :
-      case function (@lstring functionName @routineFormalArgumentList formalArgs) :
+      case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
       #--- Routine mangled name
         let routineMangledName = routineMangledNameFromAST (
           !"" 
@@ -494,6 +495,11 @@ override method @staticListAST semanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @staticListAST generateLLVMcode ?!@string unused ioLLVMcode {
+#}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @staticListInitializationMap generateLLVMForStaticLists

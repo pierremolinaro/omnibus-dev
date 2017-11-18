@@ -121,12 +121,12 @@ void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_buildSemanticContext (const class GALGAS_declarationListAST constinArgument0,
-                                   const class GALGAS_lstring constinArgument1,
-                                   const class GALGAS_ast constinArgument2,
-                                   class GALGAS_staticStringMap & ioArgument3,
-                                   class GALGAS_staticListInitializationMap & ioArgument4,
-                                   class GALGAS_semanticContext & outArgument5,
+void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
+                                   const class GALGAS_ast constinArgument1,
+                                   class GALGAS_staticStringMap & ioArgument2,
+                                   class GALGAS_staticListInitializationMap & ioArgument3,
+                                   class GALGAS_semanticContext & outArgument4,
+                                   class GALGAS_subprogramInvocationGraph & outArgument5,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -190,9 +190,10 @@ class GALGAS_string function_linkForHTMLTypeMap (const class GALGAS_string & con
 void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
                                const class GALGAS_ast constinArgument1,
                                const class GALGAS_semanticContext constinArgument2,
-                               const class GALGAS_location constinArgument3,
-                               const class GALGAS_staticStringMap constinArgument4,
-                               class GALGAS_intermediateCodeStruct & outArgument5,
+                               class GALGAS_subprogramInvocationGraph inArgument3,
+                               const class GALGAS_location constinArgument4,
+                               const class GALGAS_staticStringMap constinArgument5,
+                               class GALGAS_intermediateCodeStruct & outArgument6,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 

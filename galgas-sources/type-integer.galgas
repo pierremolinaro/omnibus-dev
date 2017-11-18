@@ -56,11 +56,12 @@ override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @st
 override method @integerDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   let integerTypeName = [[self typeName] nowhere]
-#--- Get min and max
+#--------------------------------------- Get min and max
   @bigint min
   @bigint max
   if mIsSigned then
@@ -70,25 +71,54 @@ override method @integerDeclarationAST enterInContext
     min = 0G
     max = (1G << mSize) - 1G
   end
- #---
+#--------------------------------------- Property map
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]
+  @propertyMap propertyMap = {}
+  if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
+    let @routineDescriptor descriptor = .new {
+      !true # mIsPublic # Routine is declared with "public"
+      !false # mExported # Routine is declared with @exported attribute
+      !.function {!executionMode:.anyMode} # @routineKind mRoutineKind
+      !{} # @routineTypedSignature mSignature
+      !selfTypeProxy # Return type 
+      !false # @bool mCanAccessProperties # Routine is declared with @access attribute
+      !false # @bool mCanMutateProperties # Routine is declared with @mutating attribute
+    }
+    [!?propertyMap insertKey
+      !["byteSwapped()" nowhere]
+      !true
+      !.nonVirtualMethod {!descriptor:descriptor}
+    ]
+  #--- Routine mangled name
+    let routineNameForInvocationGraph = routineMangledNameFromAST (
+      !"$" + integerTypeName
+      !["byteSwapped" nowhere]
+      !{}
+    )
+    [!?ioSubprogramInvocationGraph addNode
+      !routineNameForInvocationGraph
+      !routineNameForInvocationGraph
+    ]
+  end
+#--------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
-    !type:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize !plmTypeName:integerTypeName}
+    !type:.integer {!propertyMap:propertyMap !min:min !max:max !unsigned:not mIsSigned !bitCount:mSize !plmTypeName:integerTypeName}
     !index:[ioContext.mTypeMap count]
   ]
-#--- Enter integer <-> integer operators
+#--------------------------------------- Enter integer <-> integer operators
   enter_integer_integer_operators (
     !integerTypeName:integerTypeName
     !signed:mIsSigned
     !?context:ioContext
   )
-#--- Enter integer <-> literal operators
+#--------------------------------------- Enter integer <-> literal operators
   enter_integer_literal_operators (
     !integerTypeName:integerTypeName
     !signed:mIsSigned
     !?context:ioContext
   )
-#--- Enter literal <-> integer operators
+#--------------------------------------- Enter literal <-> integer operators
   enter_literal_integer_operators (
     !integerTypeName:integerTypeName
     !signed:mIsSigned
@@ -97,20 +127,50 @@ override method @integerDeclarationAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
+#!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+  ioIntermediateCodeStruct.mGenerationListIR += !@integerIR.new {![self typeName] !mSize !mIsSigned}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  INFIX OPERATION BETWEEN INTEGERS                                                                                     
+#! CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! object <-> object
+
+class @integerIR : @abstractGenerationIR {
+  @string mTypeName
+  @uint mSize
+  @bool mIsSigned
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
+  let llvmTypeName = "i" + mSize
+  let routineMangledName = routineMangledNameFromAST (
+    !"$" + mTypeName
+    !["byteSwapped" nowhere]
+    !{}
+  )
+  let functionName = llvmNameForFunction (!routineMangledName)
+  ioLLVMcode += llvmTitleComment (!"INTEGER TYPE $" + mTypeName)
+  if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
+    ioLLVMcode += "define internal " + llvmTypeName + " @" + functionName + " (" + llvmTypeName + "* %inValue) {\n"
+    ioLLVMcode += "  %value = load " + llvmTypeName + ", " + llvmTypeName + "* %inValue\n"
+    ioLLVMcode += "  %result = call " + llvmTypeName + " @llvm.bswap." + llvmTypeName + " (" + llvmTypeName + " %value)\n"
+    ioLLVMcode += "  ret " + llvmTypeName + " %result\n"
+    ioLLVMcode += "}\n\n"
+    ioGenerationAdds.mExternFunctionDeclarationSet += !"declare " + llvmTypeName + " @llvm.bswap." + llvmTypeName + " (" + llvmTypeName + ")"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! INFIX OPERATION BETWEEN INTEGERS object <-> object
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc enter_integer_integer_operators
@@ -281,9 +341,7 @@ override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  INFIX OPERATION BETWEEN AN INTEGER AND A LITERAL INTEGER                                                             
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! object <-> literal integer
+#! INFIX OPERATION BETWEEN AN INTEGER AND A LITERAL INTEGER object <-> literal integer
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc enter_integer_literal_operators
@@ -426,7 +484,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
 #  message "INFIX OP2 " + "\n"
 #--- Check right literal integer can be extented to left integer type, ans is not zero
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[inLeftOperand type] integer ?min:let @bigint min ?max:let @bigint max ?3*]
+  [[inLeftOperand type] integer ?1* ?min:let @bigint min ?max:let @bigint max ?3*]
   if literalValue < min then
     error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
@@ -445,9 +503,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  INFIX OPERATION BETWEEN A LITERAL INTEGER AND AN INTEGER                                                             
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! literal integer <-> object
+#! INFIX OPERATION BETWEEN A LITERAL INTEGER AND AN INTEGER literal integer <-> object
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc enter_literal_integer_operators
@@ -590,7 +646,7 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
 #  message "INFIX OP3 " + "\n"
 #--- Check left literal integer can be extented to right integer type
   [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[inRightOperand type] integer ?min:let @bigint min ?max:let @bigint max ?3*]
+  [[inRightOperand type] integer ?1* ?min:let @bigint min ?max:let @bigint max ?3*]
   if literalValue < min then
     error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then

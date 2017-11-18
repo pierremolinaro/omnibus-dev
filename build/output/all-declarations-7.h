@@ -11,6 +11,31 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                      Extension method '@universalValuedObjectMapForContext searchValuedObject'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_universalValuedObjectMapForContext_searchValuedObject) (const class cPtr_universalValuedObjectMapForContext * inObject,
+                                                                                                const class GALGAS_lstring constinArgument0,
+                                                                                                class GALGAS_objectIR & outArgument1,
+                                                                                                class C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_searchValuedObject (const int32_t inClassIndex,
+                                              extensionMethodSignature_universalValuedObjectMapForContext_searchValuedObject inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_searchValuedObject (const class cPtr_universalValuedObjectMapForContext * inObject,
+                                             const GALGAS_lstring constin_inValuedObjectName,
+                                             GALGAS_objectIR & out_outObjectIR,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //               Extension setter '@universalValuedObjectMapForContext searchValuedObjectForReadAccess'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

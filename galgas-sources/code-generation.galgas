@@ -28,6 +28,23 @@ abstract method @abstractInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! @abstractGenerationIR
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract class @abstractGenerationIR {
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract method @abstractGenerationIR generateLLVMcode ?!@string ioLLVMcode  ?!@generationAdds ioGenerationAdds
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @generationListIR {
+  @abstractGenerationIR mGeneration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @instructionListIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -208,7 +225,9 @@ private proc generateCodeFiles
     llvmCode += "}\n\n"
   end
 #----------------------------------------- Enumeration uint() methods
-  [inIntermediateCodeStruct.mUIntFunctionForEnumerationList generateLLVMcode !?llvmCode]
+  for (generation) in inIntermediateCodeStruct.mGenerationListIR do
+    [generation generateLLVMcode !?llvmCode !?generationAdds]
+  end
 #----------------------------------------- Init
   [inIntermediateCodeStruct.mInitList generateLLVMinitCode
     !?llvmCode
@@ -244,7 +263,7 @@ private proc generateCodeFiles
     primitiveAndServiceList +=
       !llvmNameForServiceCall (!waitForGuardChange)
       !llvmNameForServiceImplementation (!waitForGuardChange)
-    generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
+    generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
 #----------------------------------------- SVC
   @sectionIRlist sectionIRlist = {}
@@ -510,7 +529,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     case void :
     case boolean :
     case enumeration (* * * *) :
-    case integer (* * * * *) :
+    case integer (* * * * * *) :
     case structure (* * propertyList * * *) :
       ioLLVMcode += [type llvmTypeName] + " = type {"
       for () in propertyList

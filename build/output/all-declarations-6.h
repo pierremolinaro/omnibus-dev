@@ -195,6 +195,96 @@ class cPtr_booleanDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                @enumerationIR class                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_enumerationIR : public GALGAS_abstractGenerationIR {
+//--- Constructor
+  public : GALGAS_enumerationIR (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_enumerationIR constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_enumerationIR * ptr (void) const { return (const cPtr_enumerationIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_enumerationIR (const cPtr_enumerationIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_enumerationIR extractObject (const GALGAS_object & inObject,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_enumerationIR constructor_new (const class GALGAS_lstring & inOperand0,
+                                                              const class GALGAS_uint & inOperand1
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_enumerationIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mBitCount (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mEnumerationName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_enumerationIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumerationIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Pointer class for @enumerationIR class                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_enumerationIR : public cPtr_abstractGenerationIR {
+//--- Attributes
+  public : GALGAS_lstring mProperty_mEnumerationName ;
+  public : GALGAS_uint mProperty_mBitCount ;
+
+//--- Constructor
+  public : cPtr_enumerationIR (const GALGAS_lstring & in_mEnumerationName,
+                               const GALGAS_uint & in_mBitCount
+                               COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mEnumerationName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mBitCount (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                        Extension method '@structureDeclarationAST functionSemanticAnalysis'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -902,7 +992,7 @@ void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArg
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
-                                   const class GALGAS_routineFormalArgumentList constinArgument1,
+                                   const class GALGAS_routineFormalArgumentListAST constinArgument1,
                                    class GALGAS_universalValuedObjectMapForContext & ioArgument2,
                                    class GALGAS_routineFormalArgumentListForGeneration & ioArgument3,
                                    class C_Compiler * inCompiler
@@ -1932,30 +2022,5 @@ void callExtensionSetter_insertLocalVariable (class cPtr_universalValuedObjectMa
                                               const GALGAS_bool constin_inObjectShouldBeValuedAtEndOfScope,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                      Extension method '@universalValuedObjectMapForContext searchValuedObject'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_universalValuedObjectMapForContext_searchValuedObject) (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                const class GALGAS_lstring constinArgument0,
-                                                                                                class GALGAS_objectIR & outArgument1,
-                                                                                                class C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_searchValuedObject (const int32_t inClassIndex,
-                                              extensionMethodSignature_universalValuedObjectMapForContext_searchValuedObject inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_searchValuedObject (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                             const GALGAS_lstring constin_inValuedObjectName,
-                                             GALGAS_objectIR & out_outObjectIR,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
 
 #endif

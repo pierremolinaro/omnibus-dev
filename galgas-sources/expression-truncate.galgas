@@ -117,8 +117,8 @@ override method @truncateExpressionAST analyzeExpression
   elsif not [[expressionResult type] isInteger] then
     error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[expressionResult type] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:let expSize ?1*]
-    [resultType integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize ?1*]
+    [[expressionResult type] integer ?1* ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:let expSize ?1*]
+    [resultType integer ?1* ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize ?1*]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
       error mTypeName:"useless explicit conversion"

@@ -207,7 +207,7 @@ proc analyzeEffectiveParameters
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case pointer (*) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case integer (* * * * *) :
+      case integer (* * * * * *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case structure (* propertyMap * * * *) :
         [propertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]

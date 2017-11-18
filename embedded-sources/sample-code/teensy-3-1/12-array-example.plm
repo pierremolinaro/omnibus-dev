@@ -40,6 +40,7 @@ struct $B {
   var a $uint32 = 0
   var b $uint32 = 0
 }
+
 struct $C {
   var c = $B ()
 }

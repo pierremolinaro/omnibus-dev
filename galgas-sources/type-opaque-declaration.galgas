@@ -81,23 +81,24 @@ override getter @opaqueTypeDeclarationAST keyRepresentationForErrorSignaling -> 
 override method @opaqueTypeDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---
-  @PLMTypeFlags flags = .none
+  @PLMTypeAttributes flags = .none
   for (attribute) in mAttributeList do
     if attribute.string == "instantiable" then
       if [flags instanciable] then
         error attribute : "duplicated attribute"
       else
-        flags = flags | @PLMTypeFlags.instanciable
+        flags = flags | .instanciable
       end
     elsif attribute.string == "copyable" then
       if [flags copyable] then
         error attribute : "duplicated attribute"
       else
-        flags = flags | @PLMTypeFlags.copyable
+        flags = flags | .copyable
       end
     else
       error attribute : "only @copyable and @instantiable attributes are allowed here"
@@ -134,7 +135,7 @@ override method @opaqueTypeDeclarationAST enterInContext
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
-      !type:.opaque {!bitCount:bitSize !flags:flags !plmTypeName:mOpaqueTypeName !constructorMap:constructorMap}
+      !type:.opaque {!bitCount:bitSize !attributes:flags !plmTypeName:mOpaqueTypeName !constructorMap:constructorMap}
       !index:[ioContext.mTypeMap count]
     ]
   end
@@ -150,6 +151,13 @@ override method @opaqueTypeDeclarationAST semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @opaqueTypeDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
