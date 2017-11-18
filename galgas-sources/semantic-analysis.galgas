@@ -18,7 +18,7 @@ func checkAssignmentCompatibility
     result = inSourceValue
   elsif [sourceType isStaticInteger] && [inOptionalTargetAnnotationType isInteger] then
     [inSourceValue literalInteger ?1* ?value:let value]
-    [inOptionalTargetAnnotationType integer ?min:let minTarget ?max:let maxTarget ?3*]
+    [inOptionalTargetAnnotationType integer ?1* ?min:let minTarget ?max:let maxTarget ?3*]
     if (value < minTarget) || (maxTarget < value) then
       error inErrorLocation : "literal integer too large" : result
     else
@@ -84,6 +84,7 @@ proc semanticAnalysis
   ?sourceFile:let @string inSourceFile
   ?ast:let @ast inAST
   ?context:let @semanticContext inSemanticContext
+  ?@subprogramInvocationGraph inSubprogramInvocationGraph
   ?endOfSourceFile:let @location inEndOfSourceFile
   ?staticStringMap:let @staticStringMap inGlobalLiteralStringMap
   !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct
@@ -105,6 +106,7 @@ proc semanticAnalysis
   end
 #---
   @semanticTemporariesStruct temporaries = .default
+  temporaries.mSubprogramInvocationGraph = inSubprogramInvocationGraph
   for (declaration) in inAST.mDeclarationListAST do
     [declaration semanticAnalysis
       !context:inSemanticContext

@@ -274,6 +274,7 @@ map @moduleMap {
 override method @requiredModuleAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -313,7 +314,12 @@ override method @requiredModuleAST semanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
+#! CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @requiredModuleAST generateLLVMcode ?!@string unused ioLLVMcode {
+#}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @moduleListIR-element generateLLVM ?!@string ioLLVMcode {

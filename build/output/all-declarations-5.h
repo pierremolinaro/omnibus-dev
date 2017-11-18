@@ -177,7 +177,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_function_5F_header_ (GALGAS_mode & outArgument0,
                                                 GALGAS_lstring & outArgument1,
                                                 GALGAS_lstringlist & outArgument2,
-                                                GALGAS_routineFormalArgumentList & outArgument3,
+                                                GALGAS_routineFormalArgumentListAST & outArgument3,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'guard' non terminal
@@ -298,7 +298,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_procedure_5F_formal_5F_arguments_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_procedure_5F_formal_5F_arguments_ (GALGAS_routineFormalArgumentList & outArgument0,
+  public : virtual void nt_procedure_5F_formal_5F_arguments_ (GALGAS_routineFormalArgumentListAST & outArgument0,
                                                               C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'property_in_extension' non terminal

@@ -144,14 +144,16 @@ private proc compileProject
   @semanticContext semanticContext = .default
   @staticStringMap globalLiteralStringMap = {}
   @staticListInitializationMap staticListValueMap = {}
+  ast.mDeclarationListAST = orderedDeclarationListAST
+  @subprogramInvocationGraph subprogramInvocationGraph = .emptyGraph
   if @uint.errorCount == 0 then
     buildSemanticContext (
-      !orderedDeclarationList:orderedDeclarationListAST
       !sourceFile:inSourceFile
       !ast:ast
       !?staticStringMap:globalLiteralStringMap
       !?staticlistValues:staticListValueMap
       ?context:semanticContext
+      ?subprogramInvocationGraph
     )
   end
 #------------------------------------------------------------ Semantic analysis
@@ -161,6 +163,7 @@ private proc compileProject
       !sourceFile:inSourceFile.string
       !ast:ast
       !context:semanticContext
+      !subprogramInvocationGraph
       !endOfSourceFile:inEndOfSourceFile
       !staticStringMap:globalLiteralStringMap
       ?intermediateCode:intermediateCodeStruct

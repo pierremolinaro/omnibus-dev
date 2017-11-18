@@ -102,7 +102,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
     !signature
     ?let @lstring LLVMInvocationRoutineName
     ?@routineDescriptor routineDescriptor
-    ?* # let @location outKeyLocation
+    ?*
   ]
 #  let isPublic = routineDescriptor.mIsPublic
   let routineKind = routineDescriptor.mRoutineKind

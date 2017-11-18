@@ -7,7 +7,7 @@ list @functionDeclarationListAST {
   @bool mPublicFunction
   @lstring mFunctionName
   @lstringlist mFunctionAttributeList
-  @routineFormalArgumentList mFunctionFormalArgumentList
+  @routineFormalArgumentListAST mFunctionFormalArgumentList
   @lstring mFunctionReturnTypeName # Empty string if no return value
   @instructionListAST mFunctionInstructionList
   @location mEndOfFunctionDeclaration
@@ -23,7 +23,7 @@ enum @procFormalArgumentPassingMode {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @routineFormalArgumentList {
+list @routineFormalArgumentListAST {
   @procFormalArgumentPassingMode mFormalArgumentPassingMode
   @lstring mSelector
   @lstring mFormalArgumentTypeName
@@ -137,7 +137,7 @@ syntax extension plm_syntax {
     !mode:@mode outMode
     !name:@lstring outProcName
     !attributes:@lstringlist outAttributeList
-    !formalArguments:@routineFormalArgumentList outProcFormalArgumentList
+    !formalArguments:@routineFormalArgumentListAST outProcFormalArgumentList
   {
   #---
     $func$
@@ -154,7 +154,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <procedure_formal_arguments> !formalArguments:@routineFormalArgumentList outProcFormalArgumentList {
+  rule <procedure_formal_arguments> !formalArguments:@routineFormalArgumentListAST outProcFormalArgumentList {
     outProcFormalArgumentList = {}
     $($
     repeat
@@ -242,7 +242,7 @@ method @functionDeclarationListAST enterFunctionInContext
       !function.mFunctionFormalArgumentList
     )
   #--- Enter in context
-    [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
+    [!?ioContext.mRoutineMapForContext insertRoutine # Raises a redefinition error
       !function.mFunctionName
       ![function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
       !routineMangledName

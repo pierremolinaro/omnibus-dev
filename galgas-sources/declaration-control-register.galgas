@@ -267,7 +267,7 @@ method @controlRegisterDeclarationAST controlRegisterType
 {
   outRegisterType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mRegisterTypeName} type]
   switch outRegisterType
-  case integer (*** bitCount *):
+  case integer (**** bitCount *):
     outRegisterBitCount = bitCount
   case boolean, void :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
@@ -361,6 +361,7 @@ method @controlRegisterDeclarationAST buildControlRegisterSliceMap
 override method @controlRegisterDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
@@ -515,6 +516,13 @@ override method @controlRegisterDeclarationAST semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @controlRegisterDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  BUILD HTML FILE                                                                                                      

@@ -88,13 +88,17 @@ override method @assignmentInstructionAST analyze
     !?instructionListIR: ioInstructionGenerationList
     ?let @LValueRepresentation lvalueIR
   ]
-#---
-  [!?ioInstructionGenerationList appendCopyFromReferences
-    !?ioTemporaries
-    !errorLocation:mTargetAST.mIdentifier
-    !source:sourceOperandPossibleReference
-    !target:lvalueIR
-  ]  
+#--- Is source copyable ?
+  if not [[sourceOperandPossibleReference type] copyable] then
+    error mTargetAST.mIdentifier : "source expression is not copyable"
+  else
+    [!?ioInstructionGenerationList appendCopyFromReferences
+      !?ioTemporaries
+      !errorLocation:mTargetAST.mIdentifier
+      !source:sourceOperandPossibleReference
+      !target:lvalueIR
+    ]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

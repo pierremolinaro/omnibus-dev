@@ -108,6 +108,7 @@ map @constantMap {
 override method @enumerationDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -232,35 +233,33 @@ override method @enumerationDeclaration semanticAnalysis
       !routineMangledName
     ]
   end
-  ioIntermediateCodeStruct.mUIntFunctionForEnumerationList += !mEnumerationName !representationBitCount
+  ioIntermediateCodeStruct.mGenerationListIR += !@enumerationIR.new {!mEnumerationName !representationBitCount}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  GENERATE PROPERTY ACCESS                                                                                                    
+#!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @uintFunctionForEnumerationList {
+class @enumerationIR : @abstractGenerationIR {
   @lstring mEnumerationName
   @uint mBitCount
 }
 
-#·······················································································································
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @uintFunctionForEnumerationList generateLLVMcode ?!@string ioLLVMcode {
-  for (enumerationName bitCount) in self do
-    let routineMangledName = routineMangledNameFromAST (
-      !"$" + enumerationName
-      !.new {!"uint" !enumerationName}
-      !{}
-    )
-    let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
-    let type = "i" + bitCount
-    ioLLVMcode += llvmTitleComment (!routineMangledName)
-    ioLLVMcode += "define internal " + type + "  @" + routineLLVMName + " (" + type + "* %inValue) nounwind {\n"
-    ioLLVMcode += "  %r = load " + type + ", " + type + "* %inValue\n"
-    ioLLVMcode += "  ret " + type + " %r\n"
-    ioLLVMcode += "}\n\n"
-  end
+override method @enumerationIR generateLLVMcode ?!@string ioLLVMcode  ?!@generationAdds unused ioGenerationAdds {
+  let routineMangledName = routineMangledNameFromAST (
+    !"$" + mEnumerationName
+    !.new {!"uint" !mEnumerationName}
+    !{}
+  )
+  let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
+  let type = "i" + mBitCount
+  ioLLVMcode += llvmTitleComment (!routineMangledName)
+  ioLLVMcode += "define internal " + type + "  @" + routineLLVMName + " (" + type + "* %inValue) nounwind {\n"
+  ioLLVMcode += "  %r = load " + type + ", " + type + "* %inValue\n"
+  ioLLVMcode += "  ret " + type + " %r\n"
+  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

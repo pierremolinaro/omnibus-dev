@@ -49,6 +49,7 @@ override getter @literalStringDeclarationAST keyRepresentationForErrorSignaling 
 override method @literalStringDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -70,5 +71,12 @@ override method @literalStringDeclarationAST semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @literalStringDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

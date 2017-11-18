@@ -250,6 +250,7 @@ sortedlist @sortedOperandIRList {
 override method @structureDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
@@ -282,7 +283,7 @@ override method @structureDeclarationAST enterInContext
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Attribute "copyable"
-  var flags = @PLMTypeFlags.instanciable
+  var flags = @PLMTypeAttributes.instanciable
   for (s) in mAttributeListAST do
     if s.string == "copyable" then
       if [flags copyable] then
@@ -290,7 +291,7 @@ override method @structureDeclarationAST enterInContext
       elsif not canBeCopied then
         error mStructureName : "this structure cannot be copied, one field is not copyable"
       else
-        flags = flags | @PLMTypeFlags.copyable
+        flags = flags | .copyable
       end
     else
       error s : "only @copyable attribute is allowed here"
@@ -393,7 +394,7 @@ override method @structureDeclarationAST enterInContext
       !typeName:mStructureName
       !propertyMap:propertyMap
       !propertyList:propertyList
-      !flags:flags
+      !attributes:flags
       !guardMap:guardMap
       !constructorMap:constructorMap
     }
@@ -574,6 +575,13 @@ method @structureDeclarationAST functionSemanticAnalysis
     )
   end
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @structureDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -34,7 +34,7 @@ map @routineArgumentSignatureMapForContext { # argument signature is the key
 #! INSERT SETTER
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @routineMapForContext insertKey
+setter @routineMapForContext insertRoutine
   ?let @lstring inRoutineName
   ?let @lstring inArgumentSignature
   ?let @lstring inRoutineLLVMName

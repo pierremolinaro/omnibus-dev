@@ -80,6 +80,7 @@ override getter @typeArrayDeclarationAST keyRepresentationForErrorSignaling -> @
 override method @typeArrayDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -135,6 +136,11 @@ override method @typeArrayDeclarationAST enterInContext
   #-------------------------------------------- Constructor map
     @constructorMap constructorMap = {}
     [!?constructorMap insertKey !["(!repeated)" nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
+  #-------------------------------------------- Type attributes
+    @PLMTypeAttributes typeAttributes = .instanciable
+    if [elementType copyable] then
+      typeAttributes = typeAttributes | .copyable
+    end
   #-------------------------------------------- Enter in type map
     [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName
@@ -144,7 +150,7 @@ override method @typeArrayDeclarationAST enterInContext
         !elementType:elementType
         !size:arraySize
         !constantMap:classConstantMap
-        !flags: .instanciable | .copyable
+        !flags:typeAttributes
         !plmTypeName:mArrayTypeName
         !constructorMap:constructorMap
       }
@@ -163,5 +169,12 @@ override method @typeArrayDeclarationAST semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @typeArrayDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

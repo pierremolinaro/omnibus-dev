@@ -18,7 +18,7 @@ graph @subprogramInvocationGraph (@lstringlist) {
 
 proc enterFormalArguments
   ?context:let @semanticContext inContext
-  ?let @routineFormalArgumentList inFormalArgumentPassingMode
+  ?let @routineFormalArgumentListAST inFormalArgumentPassingMode
   ?!@universalValuedObjectMapForContext ioUniversalMap
   ?!@routineFormalArgumentListForGeneration ioFormalArguments
 {
@@ -43,7 +43,7 @@ proc routineSemanticAnalysis
   ?let @routineKind inRoutineKind
   ?let @mode inRoutineMode
   ?let @lstring inRoutineName
-  ?let @routineFormalArgumentList inRoutineFormalArgumentList
+  ?let @routineFormalArgumentListAST inRoutineFormalArgumentList
   ?returnTypeName:let @lstring inReturnTypeName
   ?let @instructionListAST inRoutineInstructionList
   ?let @location unused inEndOfRoutineDeclaration
