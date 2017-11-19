@@ -1,0 +1,40 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+setter @instructionListIR referenceFromPossibleValue # Turn a value to a reference
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@allocaList ioAllocaList
+  ?!@objectIR ioObjectIR
+{
+  @bool performStore
+  switch ioObjectIR
+  case null : # Do nothing
+    performStore = false
+  case reference (* *) : # Already a reference: do nothing
+    performStore = false
+  case llvmValue (* *) :
+    performStore = true
+  case literalInteger  (* *) :
+    performStore = true
+  case llvmStructureConstant (* *) :
+    performStore = true
+  case llvmArrayConstant (* *) :
+    performStore = true
+  case literalString  (* *) :
+    performStore = true
+  case zero (*) :
+    performStore = true
+  end
+#--- Perform strore ?
+  if performStore then
+  #--- Declare new temporary variable
+    let llvmTemporaryName = llvmNameForLocalVariable (!"tempz." + ioTemporaries.mTemporaryIndex)
+    ioTemporaries.mTemporaryIndex ++
+  #--- Add temporary reference to allocation list
+    ioAllocaList += !llvmTemporaryName ![[ioObjectIR type] llvmTypeName]
+  #--- Store value to temporary reference
+    [!?self appendStoreTemporaryReference ![ioObjectIR type] !llvmTemporaryName !ioObjectIR]
+    ioObjectIR = .reference {!type:[ioObjectIR type] !llvmName:llvmTemporaryName}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
