@@ -137,7 +137,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
       !?effectiveIR:effectiveParameterListIR
     )
   #--- New LLVM variable for function call result
-    getNewTempVariable (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
+    getNewTempValue (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
   #--- Code generation
     ioInstructionGenerationList += !@staticRoutineCallIR.new {
       !"" # globalVariableReceiverName

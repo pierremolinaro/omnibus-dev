@@ -134,7 +134,7 @@ override method @typedConstantCallAST analyzeExpression
   if [mAccessList length] > 0 then
   #--- procAnalyzeAccesListInExpression works on reference, not value
   #    So we create articially a temporary reference for resulting value
-    getNewTempVariable (![outResult type] !?ioTemporaries ?let newTemporaryReference)
+    getNewTempReference (![outResult type] !?ioTemporaries ?let newTemporaryReference)
   #--- ... add it into alloc list...
     ioAllocaList += ![newTemporaryReference llvmName] ![newTemporaryReference llvmTypeName]
   #--- ... and store resulting value into it

@@ -9,7 +9,7 @@ setter @instructionListIR appendLoadWhenReference
   case null :
     error .nowhere : "<<@instructionListIR appendLoadWhenReference null>>" : outResultingValue
   case reference (@PLMType type llvmName) :
-    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
+    getNewTempValue (!type !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromReference !outResultingValue !llvmName]
 #--- Values
   case literalInteger (**) :

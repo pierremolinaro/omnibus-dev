@@ -124,7 +124,7 @@ override method @truncateExpressionAST analyzeExpression
       error mTypeName:"useless explicit conversion"
     end
     if resultSize < expSize then
-      getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+      getNewTempValue (!resultType !?ioTemporaries ?outResult)
       ioInstructionGenerationList += !@truncateInstructionIR.new {
         !outResult
         !expressionResult

@@ -3417,15 +3417,15 @@ void extensionSetter_appendLoadWhenReference (class GALGAS_instructionListIR & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Routine 'getNewTempVariable'                                             *
+//                                              Routine 'getNewTempValue'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_getNewTempVariable (const class GALGAS_PLMType constinArgument0,
-                                 class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                 class GALGAS_objectIR & outArgument2,
-                                 class C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
+void routine_getNewTempValue (const class GALGAS_PLMType constinArgument0,
+                              class GALGAS_semanticTemporariesStruct & ioArgument1,
+                              class GALGAS_objectIR & outArgument2,
+                              class C_Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3557,6 +3557,19 @@ void extensionMethod_generateCopyRoutine (const class GALGAS_PLMType inObject,
                                           class GALGAS_string & io_ioLLVMCode,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Extension setter '@instructionListIR referenceFromPossibleValue'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_referenceFromPossibleValue (class GALGAS_instructionListIR & ioObject,
+                                                 class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                 class GALGAS_allocaList & io_ioAllocaList,
+                                                 class GALGAS_objectIR & io_ioObjectIR,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
