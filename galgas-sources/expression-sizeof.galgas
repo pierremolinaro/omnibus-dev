@@ -108,7 +108,7 @@ override method @sizeofExpressionAST analyzeExpression
       !["uint" + inContext.mPointerSize nowhere]
     }
     let resultType = [resultTypeProxy type]
-    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    getNewTempValue (!resultType !?ioTemporaries ?outResult)
     ioInstructionGenerationList += !@sizeofInstructionIR.new {
       !outResult
       !type
@@ -143,7 +143,7 @@ override method @sizeofTypeAST analyzeExpression
       !["uint" + inContext.mPointerSize nowhere]
     }
     let resultType = [resultTypeProxy type]
-    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    getNewTempValue (!resultType !?ioTemporaries ?outResult)
     ioInstructionGenerationList += !@sizeofInstructionIR.new {!outResult!type}
   end
 }

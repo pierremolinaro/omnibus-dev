@@ -128,7 +128,10 @@ override method @enumerationDeclaration enterInContext
     maxValue = maxValue / 2G
   end
 #--- Build property map
-  let integerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !.new {!"uint" + representationBitCount !mEnumerationName}}
+  let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
+    !ioContext.mTypeMap
+    !.new {!"uint" + representationBitCount !mEnumerationName}
+  }
   @propertyMap propertyMap = {}
   let accessorMangledName = routineMangledNameFromCall (!"" !.new {!"uint" !mEnumerationName} !{})
   let routineDescriptor = @routineDescriptor.new {
@@ -136,7 +139,7 @@ override method @enumerationDeclaration enterInContext
     !false # Routine is declared with @exported attribute
     !.function {!executionMode:.anyMode}
     !{} # Signature
-    !integerType # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
+    !integerTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
     !true # Routine is declared with @access attribute
     !false # Routine is declared with @mutating attribute
   }

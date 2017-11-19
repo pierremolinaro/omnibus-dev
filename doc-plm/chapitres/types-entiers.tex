@@ -270,3 +270,24 @@ Les opérateurs infixes \plm!&=!, \plm!|=! et \plm!^=! sont décrits à la \refS
 
 Les opérateurs infixes \plm!+!, \plm!+%!, \plm!-!, \plm!-%!, \plm!*! et \plm!*%! sont décrits à la \refSectionPage{operateursInfixArithmétiques}.
 
+
+
+
+
+
+
+
+\sectionLabel{Accesseurs}{accesseursEntiers}
+
+
+\subsection{Accesseur \texttt{byteSwapped}}
+
+L'accesseur \plm=byteSwapped= est implémenté pour tout type entier dont la taille est un multiple de 16 bits, qu'il soit signé ou non (\plm=$int16=, \plm=$uint16=, \plm=$int32=, \plm=$uint32=, \plm=$int48=, \plm=$uint48=, \plm=$int64=, \plm=$uint64=, …). Il réalise la conversion \emph{big endian} $\leftrightarrow$ \emph{little endian}. Par exemple~:
+
+\begin{PLM}
+let x $uint32 = 0x_1234_5678
+let y = x.byteSwapped () // 0x_8756_3412
+let z $uint48 = 0x_1234_5678_ABCD
+let t = z.byteSwapped () // 0x_CDAB_8756_3412
+\end{PLM}
+

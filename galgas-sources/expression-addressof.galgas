@@ -87,7 +87,7 @@ override method @addressofExpressionAST analyzeExpression
       !["uint" + inContext.mPointerSize nowhere]
     }
     let resultType = [resultTypeProxy type]
-    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    getNewTempValue (!resultType !?ioTemporaries ?outResult)
     ioInstructionGenerationList += !@addressofInstructionIR.new {
       !outResult
       !lvalueIR

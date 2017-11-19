@@ -327,7 +327,7 @@ override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
     outResult = .literalInteger {!type: inResultType !value:resultValue}
   else
 #    message "INFIX OP COMPUTE\n"
-    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
+    getNewTempValue (!inResultType !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult
@@ -490,7 +490,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
   elsif literalValue > max then
     error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResult
   else
-    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
+    getNewTempValue (!inResultType !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult
       ![inLeftOperand type]
@@ -652,7 +652,7 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
   elsif literalValue > max then
     error inOperatorLocation : "literal left integer expression too large (should be <= " + max + ")" : outResult
   else
-    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
+    getNewTempValue (!inResultType !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult
       ![inRightOperand type]

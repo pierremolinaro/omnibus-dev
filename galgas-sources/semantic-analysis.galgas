@@ -65,7 +65,7 @@ setter @semanticTemporariesStruct newTempLLVMVar !@string outTempLLVMVar {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc getNewTempVariable
+proc getNewTempValue
   ?let @PLMType inType
   ?!@semanticTemporariesStruct ioTemporaries
   !@objectIR outTempVariable
@@ -75,6 +75,21 @@ proc getNewTempVariable
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]
     outTempVariable = .llvmValue {!type: inType !llvmName:llvmName}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc getNewTempReference
+  ?let @PLMType inType
+  ?!@semanticTemporariesStruct ioTemporaries
+  !@objectIR outTempVariable
+{
+  if inType == .void then
+    outTempVariable = .null
+  else
+    [!?ioTemporaries newTempLLVMVar ?let llvmName]
+    outTempVariable = .reference {!type: inType !llvmName:llvmName}
   end
 }
 

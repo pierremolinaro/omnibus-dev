@@ -417,7 +417,7 @@ private proc analyzeRegisterExpression
   !result:@objectIR outResult
 {
   if [inAccessList length] == 0 then # No subscript, no slice
-    getNewTempVariable (!inRegisterType !?ioTemporaries ?outResult)
+    getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !inRegisterAddress]
   else
     var accessList = inAccessList
@@ -444,10 +444,10 @@ private proc analyzeRegisterExpression
       if [indexIR isLiteralInteger] then # subscript expression is constant
         [indexIR literalInteger ?1* ?value:let @bigint idx]
         let addr = inRegisterAddress + idx * inRegisterElementSize
-        getNewTempVariable (!inRegisterType !?ioTemporaries ?outResult)
+        getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
         [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !addr]
       else
-        getNewTempVariable (!inRegisterType  !?ioTemporaries ?outResult)
+        getNewTempValue (!inRegisterType  !?ioTemporaries ?outResult)
         [!?ioInstructionGenerationList appendLoadVolatileRegisterWithSubscript
           !outResult
           !indexIR
@@ -456,7 +456,7 @@ private proc analyzeRegisterExpression
         ]
       end
     else
-      getNewTempVariable (!inRegisterType !?ioTemporaries ?outResult)
+      getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
       [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !inRegisterAddress]
     end
   #--- Access list
@@ -472,7 +472,7 @@ private proc analyzeRegisterExpression
           ?let @sliceMap subMap
           ?let @PLMType resultType
         ]
-        getNewTempVariable (!resultType !?ioTemporaries ?let resultIR)
+        getNewTempValue (!resultType !?ioTemporaries ?let resultIR)
         [!?ioInstructionGenerationList appendBinaryOperation
           !resultIR
           ![outResult type]
@@ -641,7 +641,7 @@ private proc handleArrayAccessInExpression
       !?ioInstructionGenerationList
       !?ioResult
    )
-   getNewTempVariable (![ioResult type] !?ioTemporaries ?let loadedObjectIR)
+   getNewTempValue (![ioResult type] !?ioTemporaries ?let loadedObjectIR)
    [!?ioInstructionGenerationList appendLoadFromReference
      !loadedObjectIR
      ![ioResult llvmName]
@@ -686,7 +686,9 @@ private proc handleFunctionCallInExpression
         !kind:routineDescriptor.mRoutineKind
         !error:inMethodName.location
       )
-    #--- Add receiver as first parameter ?
+    #--- If receiver is a value, create a reference
+      [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?ioObjectIR]
+    #--- Add receiver as first parameter
       @procCallEffectiveParameterListIR effectiveParameterListIR = {}
       effectiveParameterListIR += !.outputInput !ioObjectIR # Add receiver as first argument
     #--- Analyze effective parameters
@@ -706,7 +708,7 @@ private proc handleFunctionCallInExpression
         !?effectiveIR:effectiveParameterListIR
       )
     #--- New LLVM variable for function call result
-      getNewTempVariable (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
+      getNewTempValue (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
     #--- Generate call
       let routineMangledName = routineMangledNameFromCall (!"$" + [[ioObjectIR type] key] !inMethodName !inArguments)
       ioInstructionGenerationList += !@staticRoutineCallIR.new {
@@ -766,7 +768,7 @@ private proc handleFunctionCallInExpression
           !inMethodName
         ]
       #--- New LLVM variable for function call result
-        getNewTempVariable (![descriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
+        getNewTempValue (![descriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
       #--- Code generation
         ioInstructionGenerationList += !@indirectRoutineCallIR.new {
           !.reference {!type:propertyType !llvmName:property_llvmName}

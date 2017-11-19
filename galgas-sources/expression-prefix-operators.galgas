@@ -164,7 +164,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     outResult = .literalInteger {!type:resultType !value:result}
   else
   #--- Temp var
-    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    getNewTempValue (!resultType !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult

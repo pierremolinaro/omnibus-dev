@@ -865,7 +865,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1/unp
   "    self.acc.c.a = n\n"
   "    let x $uint32 = 0x1234_5678\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:x.byteSwapped ())\n"
+  "    lcd.print (!unsigned:x.byteSwapped ().byteSwapped ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -875,7 +875,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-structure-example.plm",
   "plm",
   true, // Text file
-  1616, // Text length
+  1631, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
