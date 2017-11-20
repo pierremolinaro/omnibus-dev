@@ -10,6 +10,80 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                      @globalTaskVariableList_2D_element struct                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_globalTaskVariableList_2D_element : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public : GALGAS_string mProperty_mTaskName ;
+
+  public : GALGAS_string mProperty_mTaskTypeName ;
+
+  public : GALGAS_objectIR mProperty_mInitialValue ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_globalTaskVariableList_2D_element (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_globalTaskVariableList_2D_element (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_globalTaskVariableList_2D_element (const GALGAS_string & in_mTaskName,
+                                                     const GALGAS_string & in_mTaskTypeName,
+                                                     const GALGAS_objectIR & in_mInitialValue) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_globalTaskVariableList_2D_element extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_globalTaskVariableList_2D_element constructor_new (const class GALGAS_string & inOperand0,
+                                                                                  const class GALGAS_string & inOperand1,
+                                                                                  const class GALGAS_objectIR & inOperand2
+                                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_globalTaskVariableList_2D_element & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mInitialValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mTaskName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mTaskTypeName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_globalTaskVariableList_2D_element class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalTaskVariableList_2D_element ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                         Abstract extension method '@abstractDeclarationAST enterInContext'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -17,9 +91,10 @@
 typedef void (*extensionMethodSignature_abstractDeclarationAST_enterInContext) (const class cPtr_abstractDeclarationAST * inObject,
                                                                                 const class GALGAS_functionDeclarationListAST constinArgument0,
                                                                                 class GALGAS_semanticContext & ioArgument1,
-                                                                                class GALGAS_subprogramInvocationGraph & ioArgument2,
-                                                                                class GALGAS_staticListInitializationMap & ioArgument3,
-                                                                                class GALGAS_staticStringMap & ioArgument4,
+                                                                                class GALGAS_declarationDecorationList & ioArgument2,
+                                                                                class GALGAS_subprogramInvocationGraph & ioArgument3,
+                                                                                class GALGAS_staticListInitializationMap & ioArgument4,
+                                                                                class GALGAS_staticStringMap & ioArgument5,
                                                                                 class C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -33,6 +108,7 @@ void enterExtensionMethod_enterInContext (const int32_t inClassIndex,
 void callExtensionMethod_enterInContext (const class cPtr_abstractDeclarationAST * inObject,
                                          const GALGAS_functionDeclarationListAST constin_inProcedureListAST,
                                          GALGAS_semanticContext & io_ioContext,
+                                         GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
                                          GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
                                          GALGAS_staticListInitializationMap & io_ioStaticListValueMap,
                                          GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
@@ -385,25 +461,25 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorSignatur
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Abstract extension method '@abstractDeclarationAST semanticAnalysis'                         *
+//                     Abstract extension method '@abstractDecoratedDeclaration semanticAnalysis'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_abstractDeclarationAST_semanticAnalysis) (const class cPtr_abstractDeclarationAST * inObject,
-                                                                                  const class GALGAS_semanticContext constinArgument0,
-                                                                                  class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                                                                  class GALGAS_intermediateCodeStruct & ioArgument2,
-                                                                                  class C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_abstractDecoratedDeclaration_semanticAnalysis) (const class cPtr_abstractDecoratedDeclaration * inObject,
+                                                                                        const class GALGAS_semanticContext constinArgument0,
+                                                                                        class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                                                                        class GALGAS_intermediateCodeStruct & ioArgument2,
+                                                                                        class C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void enterExtensionMethod_semanticAnalysis (const int32_t inClassIndex,
-                                            extensionMethodSignature_abstractDeclarationAST_semanticAnalysis inMethod) ;
+                                            extensionMethodSignature_abstractDecoratedDeclaration_semanticAnalysis inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionMethod_semanticAnalysis (const class cPtr_abstractDeclarationAST * inObject,
+void callExtensionMethod_semanticAnalysis (const class cPtr_abstractDecoratedDeclaration * inObject,
                                            const GALGAS_semanticContext constin_inContext,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,

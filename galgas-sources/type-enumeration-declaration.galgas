@@ -9,7 +9,7 @@ list @enumerationConstantList {
 
 #·······················································································································
 
-class @enumerationDeclaration : @abstractDeclarationAST {
+class @enumerationDeclarationAST : @abstractDeclarationAST {
   @lstring mEnumerationName
   @enumerationConstantList mCaseNameList
 }
@@ -36,7 +36,7 @@ syntax extension plm_syntax {
     while
     end
     $}$
-    ioAST.mDeclarationListAST += !@enumerationDeclaration.new {!enumName !enumCaseList}
+    ioAST.mDeclarationListAST += !@enumerationDeclarationAST.new {!enumName !enumCaseList}
   }
 
   #·····················································································································
@@ -47,7 +47,7 @@ syntax extension plm_syntax {
 #!  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @enumerationDeclaration addExtension
+override method @enumerationDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
@@ -59,7 +59,7 @@ override method @enumerationDeclaration addExtension
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @enumerationDeclaration enterInPrecedenceGraph
+override method @enumerationDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let typeName = llvmRegularTypeMangledNameFromName (!mEnumerationName)
@@ -82,13 +82,13 @@ override method @enumerationDeclaration enterInPrecedenceGraph
 
 #·······················································································································
 
-override getter @enumerationDeclaration location -> @location outLocation {
+override getter @enumerationDeclarationAST location -> @location outLocation {
   outLocation = mEnumerationName.location
 }
 
 #·······················································································································
 
-override getter @enumerationDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @enumerationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "enum $" + mEnumerationName 
 }
 
@@ -104,7 +104,7 @@ func integerEnumAccessorName ?forBitCount:let @uint inBitCount -> @string {
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @constantMap {
+map @classConstantMap {
   @bigint mIndex
   @lstring mClassTypeName
   insert insertKey error message "the '%K' constant is already declared"
@@ -113,15 +113,16 @@ map @constantMap {
 
 #·······················································································································
 
-override method @enumerationDeclaration enterInContext
+override method @enumerationDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-#--- Build constant map
-  @constantMap enumConstantMap = {}
+#---------------- Build constant map
+  @classConstantMap enumConstantMap = {}
   @bigint maxValue = 0G
   for (name value) in mCaseNameList do
     [!?enumConstantMap insertKey !name !value !mEnumerationName]
@@ -129,13 +130,13 @@ override method @enumerationDeclaration enterInContext
       maxValue = value
     end
   end
-#--- Compute representation bit count
+#---------------- Compute representation bit count
   @uint representationBitCount = 0
   loop (@uint.max) while maxValue > 0G do
     representationBitCount ++ ;
     maxValue = maxValue / 2G
   end
-#---------------- Property map
+#---------------- Property map: add uintN() accessor
   @propertyMap propertyMap = {}
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
@@ -147,7 +148,7 @@ override method @enumerationDeclaration enterInContext
     !resultTypeProxy:integerTypeProxy
     !?ioSubprogramInvocationGraph
   ]
-#--- Insert enumeration in type map
+#---------------- Insert enumeration in type map
   let enumerationType = @PLMType.new {
     !propertyMap
     !enumConstantMap
@@ -161,8 +162,10 @@ override method @enumerationDeclaration enterInContext
     !type:enumerationType
     !index:[ioContext.mTypeMap count]
   ]
-#--- Infix operators
+#---------------- Infix operators
   enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@enumerationDecoratedDeclaration.new {!mEnumerationName !representationBitCount}
 }
 
 #·······················································································································
@@ -208,37 +211,20 @@ proc enterEnumerationComparisonOperators
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @enumerationDeclaration semanticAnalysis
+class @enumerationDecoratedDeclaration : @abstractDecoratedDeclaration {
+  @lstring mEnumerationName
+  @uint mRepresentationBitCount
+}
+
+#·······················································································································
+
+override method @enumerationDecoratedDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  @bigint maxValue = 0G
-  for (* value) in mCaseNameList do
-    if maxValue < value then
-      maxValue = value
-    end
-  end
-#--- Compute representation bit count
-  @uint representationBitCount = 0
-  loop (@uint.max) while maxValue > 0G do
-    representationBitCount ++ ;
-    maxValue = maxValue / 2G
-  end
-#--- Mangled routine name
-  let routineMangledName = routineMangledNameFromAST (
-    !"$" + mEnumerationName
-    !.new {!"uint" !mEnumerationName}
-    !{}
-  )
-#--- Enter subprogram invocation graph
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineMangledName
-      !routineMangledName
-    ]
-  end
-  ioIntermediateCodeStruct.mGenerationListIR += !@enumerationIR.new {!mEnumerationName !representationBitCount}
+#----------- Generate enumeration specific code
+  ioIntermediateCodeStruct.mGenerationListIR += !@enumerationIR.new {!mEnumerationName !mRepresentationBitCount}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -250,9 +236,9 @@ class @enumerationIR : @abstractGenerationIR {
   @uint mBitCount
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-override method @enumerationIR generateLLVMcode ?!@string ioLLVMcode  ?!@generationAdds unused ioGenerationAdds {
+override method @enumerationIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
   let routineMangledName = routineMangledNameFromAST (
     !"$" + mEnumerationName
     !.new {!integerEnumAccessorName (!forBitCount:mBitCount) !mEnumerationName}

@@ -233,6 +233,7 @@ map @staticListInitializationMap {
 override method @staticListAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -439,11 +440,7 @@ override method @staticListAST enterInContext
     !{} # Constructor map
     !.all
     !plmNameForStaticListType (!mStaticListName)
-    !.arrayType {
-#      !typeName2:.new {!llvmNameForStaticListType (!mStaticListName) !mStaticListName.location}
-      !elementType:elementType
-      !size:[stringValueList length]
-    }
+    !.arrayType {!elementType:elementType !size:[stringValueList length]}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmNameForStaticListType (!mStaticListName)
@@ -456,6 +453,8 @@ override method @staticListAST enterInContext
     !mStaticListName
     !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!mStaticListName)}
   ]
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedStaticList.new {!mStaticListName !mValueList}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -469,9 +468,16 @@ map @staticListInvokedFunctionSetMap {
   search searchKey error message "INTERNAL ERROR"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-override method @staticListAST semanticAnalysis
+class @decoratedStaticList : @abstractDecoratedDeclaration {
+  @lstring mStaticListName
+  @staticListValueListAST mValueList
+}
+
+#·······················································································································
+
+override method @decoratedStaticList semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -498,11 +504,6 @@ override method @staticListAST semanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @staticListAST generateLLVMcode ?!@string unused ioLLVMcode {
-#}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @staticListInitializationMap generateLLVMForStaticLists

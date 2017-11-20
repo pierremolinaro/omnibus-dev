@@ -39,7 +39,7 @@ func checkAssignmentCompatibility
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractDeclarationAST semanticAnalysis
+abstract method @abstractDecoratedDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -98,6 +98,7 @@ proc getNewTempReference
 proc semanticAnalysis
   ?sourceFile:let @string inSourceFile
   ?ast:let @ast inAST
+  ?decoratedDeclarationList:let @declarationDecorationList inDecoratedDeclarationList
   ?context:let @semanticContext inSemanticContext
   ?@subprogramInvocationGraph inSubprogramInvocationGraph
   ?endOfSourceFile:let @location inEndOfSourceFile
@@ -122,7 +123,7 @@ proc semanticAnalysis
 #---
   @semanticTemporariesStruct temporaries = .default
   temporaries.mSubprogramInvocationGraph = inSubprogramInvocationGraph
-  for (declaration) in inAST.mDeclarationListAST do
+  for (declaration) in inDecoratedDeclarationList do
     [declaration semanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaries

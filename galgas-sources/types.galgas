@@ -12,7 +12,7 @@ boolset @PLMTypeAttributes {
 
 struct @PLMType {
   @propertyMap mPropertyMap # Properties and methods
-  @constantMap mConstantMap # $type.cst, as enumeration values
+  @classConstantMap mConstantMap # $type.cst, as enumeration values
   @constructorMap mConstructorMap # $type (!... !...)
   @PLMTypeAttributes mAttributes # as instanciable, copyable, ...
   @string mPLMTypeName # Without le leading '$'; empty string for void type kind

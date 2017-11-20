@@ -146,6 +146,7 @@ private proc compileProject
   @staticListInitializationMap staticListValueMap = {}
   ast.mDeclarationListAST = orderedDeclarationListAST
   @subprogramInvocationGraph subprogramInvocationGraph = .emptyGraph
+  @declarationDecorationList decoratedDeclarationList = {}
   if @uint.errorCount == 0 then
     buildSemanticContext (
       !sourceFile:inSourceFile
@@ -154,6 +155,7 @@ private proc compileProject
       !?staticlistValues:staticListValueMap
       ?context:semanticContext
       ?subprogramInvocationGraph
+      ?decoratedDeclarationList
     )
   end
 #------------------------------------------------------------ Semantic analysis
@@ -162,6 +164,7 @@ private proc compileProject
     semanticAnalysis (
       !sourceFile:inSourceFile.string
       !ast:ast
+      !decoratedDeclarationList:decoratedDeclarationList
       !context:semanticContext
       !subprogramInvocationGraph
       !endOfSourceFile:inEndOfSourceFile

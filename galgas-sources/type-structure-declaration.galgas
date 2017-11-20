@@ -225,6 +225,7 @@ sortedlist @sortedOperandIRList {
 override method @structureDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -376,6 +377,13 @@ override method @structureDeclarationAST enterInContext
     !type:structureType
     !index:[ioContext.mTypeMap count]
   ]
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {
+    !mStructureName
+    !mFunctionDeclarationListAST
+    !mSystemRoutineListAST
+    !mGuardListAST
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -469,7 +477,16 @@ method @structurePropertyListAST-element enterInContext
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @structureDeclarationAST semanticAnalysis
+class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
+  @lstring mStructureName
+  @functionDeclarationListAST mFunctionDeclarationListAST
+  @systemRoutineDeclarationListAST mSystemRoutineListAST
+  @guardDeclarationListAST mGuardListAST
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @decoratedStructureDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -500,7 +517,7 @@ override method @structureDeclarationAST semanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @structureDeclarationAST functionSemanticAnalysis
+method @decoratedStructureDeclaration functionSemanticAnalysis
   ?structureType:let @PLMType inStructureType
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries

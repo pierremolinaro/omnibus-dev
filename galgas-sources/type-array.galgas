@@ -80,6 +80,7 @@ override getter @typeArrayDeclarationAST keyRepresentationForErrorSignaling -> @
 override method @typeArrayDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -124,10 +125,17 @@ override method @typeArrayDeclarationAST enterInContext
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
     let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName} type]
   #-------------------------------------------- Class method map : add "count" constructor
-    @constantMap classConstantMap = {}
+    @classConstantMap classConstantMap = {}
    [!?classConstantMap insertKey !.new {!"count" !mArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
-  #-------------------------------------------- List type property map
+  #-------------------------------------------- Property map
     @propertyMap arrayTypePropertyMap = {}
+#    [!?propertyMap addFunction
+#      !receiverTypeName:integerTypeName
+#      !methodName:byteSwappedMethoName ()
+#      !resultTypeProxy:selfTypeProxy
+#      !?ioSubprogramInvocationGraph
+#    ]
+
     [!?arrayTypePropertyMap insertKey # "count" property
       !.new {!"count" !mArrayTypeName.location}
       !true # public
@@ -148,17 +156,15 @@ override method @typeArrayDeclarationAST enterInContext
       !constructorMap
       !typeAttributes
       !mArrayTypeName
-      !.arrayType {
-#        !typeName2:mArrayTypeName
-        !elementType:elementType
-        !size:arraySize
-      }
+      !.arrayType {!elementType:elementType !size:arraySize}
     }
     [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName
       !type:arrayType
       !index:[ioContext.mTypeMap count]
     ]
+  #---------------- Add decorated declaration
+    ioDecoratedDeclarationList += !@decoratedTypeArrayDeclaration.new {!mArrayTypeName !arraySize}
   end
 }
 
@@ -166,18 +172,44 @@ override method @typeArrayDeclarationAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclarationAST semanticAnalysis
+class @decoratedTypeArrayDeclaration : @abstractDecoratedDeclaration {
+  @lstring mArrayTypeName
+  @uint mArraySize
+}
+
+#·······················································································································
+
+override method @decoratedTypeArrayDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+#----------- Generate enumeration specific code
+  ioIntermediateCodeStruct.mGenerationListIR += !@arrayIR.new {!mArrayTypeName !mArraySize}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @typeArrayDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
-#}
+class @arrayIR : @abstractGenerationIR {
+  @string mArrayTypePLMName
+  @bigint mArraySize
+}
+
+#·······················································································································
+
+override method @arrayIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
+  let routineMangledName = routineMangledNameFromAST (
+    !"$" + mArrayTypePLMName
+    !["count" nowhere]
+    !{}
+  )
+  let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
+  ioLLVMcode += llvmTitleComment (!routineMangledName)
+  ioLLVMcode += "define internal i32  @" + routineLLVMName + " (%$" + mArrayTypePLMName + "* %inUnusedValue) nounwind {\n"
+  ioLLVMcode += "  ret i32 " + mArraySize + "\n"
+  ioLLVMcode += "}\n\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
