@@ -51,7 +51,7 @@ enum @typeKind {
                 @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
-  case arrayType (@lstring typeName2 # ????
+  case arrayType (# @lstring typeName2 # ????
                   @PLMType elementType
                   @bigint size)
   case function (@routineDescriptor descriptor)
@@ -152,8 +152,10 @@ getter @PLMType llvmTypeName -> @string {
     result = "—"
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
-  case arrayType (@lstring typeName * *) :
-    result = "%" + [typeName assemblerRepresentation]
+#  case arrayType (@lstring typeName * *) :
+#    result = "%" + [typeName assemblerRepresentation]
+  case arrayType (* *) :
+    result = "%" + [llvmRegularTypeMangledNameFromName (![mPLMTypeName nowhere]) assemblerRepresentation]
   case function (@routineDescriptor descriptor) :
     if descriptor.mReturnTypeProxy == .null then
       result = "void"
@@ -178,35 +180,6 @@ getter @PLMType llvmTypeName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#getter @PLMType plmTypeName -> @string {
-#  switch [self mKind]
-#  case void :
-#    result = "void"
-#  case boolean :
-#    result = boolTypeName ()
-#  case literalString :
-#    result = staticStringTypeName ()
-#  case enumeration (* plmTypeName) :
-#    result = plmTypeName
-#  case structure (plmTypeName * *) :
-#    result = plmTypeName
-#  case integer (* * * * plmTypeName) :
-#    result = plmTypeName
-#  case staticInteger :
-#    result = staticIntegerTypeName ()
-#  case opaque (* plmTypeName) :
-#    result = plmTypeName
-#  case arrayType (* * * plmTypeName) :
-#    result = plmTypeName
-#  case function (*) :
-#    error ["" nowhere] : "«internal error @PLMType key function»" : result
-#  case pointer (*) :
-#    error ["" nowhere] : "«internal error @PLMType key pointer»" : result
-#  end
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 getter @PLMType descriptionForHTMLFile -> @string {
   switch [self mKind]
   case void :
@@ -226,7 +199,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Static Integer"
   case opaque (@bigint bitCount) :
     result = "Opaque (" + bitCount + " bits)"
-  case arrayType (* * *) :
+  case arrayType (* *) :
     result = "Array"
   case function (*) :
     result = "Function"

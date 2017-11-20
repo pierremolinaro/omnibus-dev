@@ -977,14 +977,12 @@ class cEnumAssociatedValues_typeKind_opaque : public cEnumAssociatedValues {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_typeKind_arrayType : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-  public : const GALGAS_PLMType mAssociatedValue1 ;
-  public : const GALGAS_bigint mAssociatedValue2 ;
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_bigint mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_arrayType (const GALGAS_lstring & inAssociatedValue0,
-                                                     const GALGAS_PLMType & inAssociatedValue1,
-                                                     const GALGAS_bigint & inAssociatedValue2
+  public : cEnumAssociatedValues_typeKind_arrayType (const GALGAS_PLMType & inAssociatedValue0,
+                                                     const GALGAS_bigint & inAssociatedValue1
                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

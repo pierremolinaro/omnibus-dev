@@ -1589,9 +1589,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_typeKind constructor_arrayType (const class GALGAS_lstring & inOperand0,
-                                                               const class GALGAS_PLMType & inOperand1,
-                                                               const class GALGAS_bigint & inOperand2
+  public : static class GALGAS_typeKind constructor_arrayType (const class GALGAS_PLMType & inOperand0,
+                                                               const class GALGAS_bigint & inOperand1
                                                                COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_boolean (LOCATION_ARGS) ;
@@ -1633,9 +1632,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_arrayType (class GALGAS_lstring & outArgument0,
-                                                   class GALGAS_PLMType & outArgument1,
-                                                   class GALGAS_bigint & outArgument2,
+  public : VIRTUAL_IN_DEBUG void method_arrayType (class GALGAS_PLMType & outArgument0,
+                                                   class GALGAS_bigint & outArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 

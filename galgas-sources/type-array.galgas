@@ -149,7 +149,7 @@ override method @typeArrayDeclarationAST enterInContext
       !typeAttributes
       !mArrayTypeName
       !.arrayType {
-        !typeName2:mArrayTypeName
+#        !typeName2:mArrayTypeName
         !elementType:elementType
         !size:arraySize
       }

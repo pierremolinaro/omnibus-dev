@@ -527,16 +527,6 @@ class GALGAS_PLMType function_functionType (const class GALGAS_routineDescriptor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Function 'llvmNameForStaticListType'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForStaticListType (const class GALGAS_string & constinArgument0,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                     Function 'plmNameForStaticListElementType'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

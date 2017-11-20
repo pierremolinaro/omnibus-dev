@@ -344,12 +344,6 @@ func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring 
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForStaticListType ?let @string inStaticListName -> @string {
-  result = "static.list.type." + [inStaticListName assemblerRepresentation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
   result = .new{!"static.list.element.type." + [inStaticListName assemblerRepresentation] !inStaticListName.location}
 }
