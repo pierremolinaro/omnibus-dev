@@ -92,7 +92,7 @@ override method @constructorCallAST analyzeExpression
   constructorKey += ")"
 #--- Analyze constructor signature and init value
   let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
-  let constructorMap = [resultType constructorMap]
+  let constructorMap = resultType.mConstructorMap
   [constructorMap searchKey !.new {!constructorKey !mErrorLocation} ?let constructorSignature ?let initValue]
 #--- Examine init value
   switch initValue
@@ -104,7 +104,7 @@ override method @constructorCallAST analyzeExpression
 #    end
   case arrayValue (elementType size) :
     if [mParameterList length] != 1 then
-      error mErrorLocation : "$" + [resultType key] + " array constructor should have one parameter" : outResult
+      error mErrorLocation : "$" + [resultType plmTypeName] + " array constructor should have one parameter" : outResult
     else
       let expression = [mParameterList mExpressionAtIndex !0]
       [expression analyzeExpression
@@ -135,7 +135,7 @@ override method @constructorCallAST analyzeExpression
     end
   case simple (value) :
     if [mParameterList length] != 0 then
-      error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult
+      error mErrorLocation : "$" + [resultType plmTypeName] + " constructor should have no parameter" : outResult
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end

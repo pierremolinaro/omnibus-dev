@@ -202,7 +202,7 @@ override method @syncInstructionAST analyze
         !?instructionListIR:guardInstructionGenerationList
         ?result:let @objectIR sourceOperand
       ]
-      if [sourceOperand key] != boolTypeName () then
+      if [sourceOperand plmTypeName] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
       elsif [sourceOperand isStatic] then
         warning endOfExpression : "guarded expression is static"
@@ -228,7 +228,7 @@ override method @syncInstructionAST analyze
         !?instructionListIR:boolExpInstructionGenerationList
         ?result:let @objectIR boolExpressionResult
       ]
-      if [boolExpressionResult key] != boolTypeName () then
+      if [boolExpressionResult plmTypeName] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
       elsif [boolExpressionResult isStatic] then
         warning endOfExpression : "guarded expression is static"
@@ -312,7 +312,7 @@ proc analyzeGuardCall
     if not [[receiverType mKind] isStructure] then
       error inReceiverName : "receiver is not a structure" : outGuardMangledName, outEffectiveParameterListIR
     else
-      [[receiverType mKind] structure ?3* ?guardMap:let guardMap ?1*]
+      [[receiverType mKind] structure ?2* ?guardMap:let guardMap]
       let guardMangledName = routineMangledNameFromCall (!"" !inGuardName !inEffectiveParameterList)
       [guardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature]
     #--- Check accessibility
@@ -320,7 +320,7 @@ proc analyzeGuardCall
         error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
       else  
         outGuardMangledName = routineMangledNameFromCall (
-          !"$" + [receiverType key]
+          !"$" + [receiverType plmTypeName]
           !inGuardName
           !inEffectiveParameterList
         )

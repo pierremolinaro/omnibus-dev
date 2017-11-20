@@ -271,17 +271,17 @@ method @controlRegisterDeclarationAST controlRegisterType
     outRegisterBitCount = bitCount
   case boolean, void :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case enumeration (* * *) :
+  case enumeration (* *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case literalString :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case staticInteger :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case structure (* * * * *) :
+  case structure (* * *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case opaque (* * * *) :
+  case opaque (* *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case arrayType (* * * * * * *) :
+  case arrayType (* * * *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case function (*) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount

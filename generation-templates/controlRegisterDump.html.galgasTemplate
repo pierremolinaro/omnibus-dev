@@ -86,7 +86,7 @@ for () in CONTROL_REGISTER_MAP do
       %<a name="%!lkey.string% [%![mValue string]%]">%!lkey.string% [%![mValue string]%]</a><br/>%
     end
   end
-  %</td><td class="address">$%![mType key]%</td><td class="address">%
+  %</td><td class="address">$%![mType plmTypeName]%</td><td class="address">%
   if mArraySize == 0 then
   ![mAddress hexString]
   else

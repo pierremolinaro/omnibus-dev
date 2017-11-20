@@ -130,7 +130,7 @@ override method @ifInstructionAST analyze
   ]  
 #--- Check inferred type
   if [[testResult type] mKind] != .boolean then
-    error mTestExpressionEndLocation : "test expression type is '" + [testResult key] + "', it should be boolean"
+    error mTestExpressionEndLocation : "test expression type is '" + [testResult plmTypeName] + "', it should be boolean"
   elsif mStaticIfExpression && not [testResult isStatic] then
     error mTestExpressionEndLocation : "'if' expression is not static"
   elsif [testResult isStatic] && not mStaticIfExpression then

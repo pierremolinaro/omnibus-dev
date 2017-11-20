@@ -390,13 +390,10 @@ override method @structureDeclarationAST enterInContext
 #---------------------------------------- Enter in type map
   let structureType = @PLMType.new {
     !propertyMap
-    !.structure {
-      !typeName:mStructureName
-      !propertyList:propertyList
-      !attributes:flags
-      !guardMap:guardMap
-      !constructorMap:constructorMap
-    }
+    !{} # Class constant map
+    !constructorMap
+    !flags
+    !.structure {!typeName:mStructureName !propertyList:propertyList !guardMap:guardMap}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
@@ -455,7 +452,7 @@ method @structurePropertyListAST-element enterInContext
       actualPropertyType = [expressionIR type]
     end
     if not [actualPropertyType instanciable] then
-      error mPropertyName : "$" + [actualPropertyType key] + " type is not instanciable"
+      error mPropertyName : "$" + [actualPropertyType plmTypeName] + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then
       canBeCopied = false
@@ -478,7 +475,7 @@ method @structurePropertyListAST-element enterInContext
     end
   case noExpression :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : "$" + [optionalPropertyType key] + " type is not instanciable"
+      error mPropertyName : "$" + [optionalPropertyType plmTypeName] + " type is not instanciable"
     end
     let propertyIndex = [propertyList length]
     propertyList += !mPropertyName.string !optionalPropertyType

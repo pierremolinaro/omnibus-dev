@@ -300,7 +300,7 @@ override method @requiredModuleAST semanticAnalysis
 {
   let moduleTypeName = moduleMangledNameFromModuleName (!mModuleName)
   let moduleTypeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
-  let constructorMap = [[moduleTypeProxy type] constructorMap]
+  let constructorMap = [moduleTypeProxy type].mConstructorMap
   [constructorMap  searchKey !.new {!"()" !moduleTypeName.location} ?* ?let constructorValue]
   [constructorValue structure ?sortedOperandList:let sortedOperandList]
   @operandIRList initialValueList = {}

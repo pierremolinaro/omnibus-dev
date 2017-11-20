@@ -36,8 +36,8 @@ setter @instructionListIR appendCopyFromReferences
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName:let sourceLLVMName]
     if sourceType != targetType then
       error inErrorLocation
-      : "object of type $" + [targetType key]
-        + " cannot be assigned from expression of type $" + [sourceType key]
+      : "object of type $" + [targetType plmTypeName]
+        + " cannot be assigned from expression of type $" + [sourceType plmTypeName]
     end
      self += !@copyFromReferencesIR.new {!sourceType !targetLLVMName !sourceLLVMName}
   end
@@ -59,7 +59,7 @@ override method @copyFromReferencesIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mType llvmTypeName]
-  ioLLVMcode += "  call void @plm.assign." + [[mType key] identifierRepresentation]
+  ioLLVMcode += "  call void @plm.assign." + [[mType plmTypeName] identifierRepresentation]
               + " (" + llvmType + "* " + mTargetLLVMName + ", " + llvmType + "* " + mSourceLLVMName + ")\n"
 }
 
@@ -74,36 +74,10 @@ override method @copyFromReferencesIR enterAccessibleEntities
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
-  let typeName = [self llvmTypeName]
-  @bool generate
-  switch [self mKind]
-  case void :
-    generate = false
-  case boolean :
-    generate = true
-  case literalString :
-    generate = true
-  case enumeration (* * *) :
-    generate = true
-  case structure (* * attributes * *) :
-    generate = [attributes copyable]
-  case integer (* * * * *) :
-    generate = true
-  case staticInteger :
-    generate = false
-  case opaque (* @PLMTypeAttributes attributes * *) :
-    generate = [attributes copyable]
-  case arrayType (* * * * @PLMTypeAttributes attributes * *) :
-    generate = [attributes copyable]
-  case function (*) :
-    generate = false
-  case pointer (*) :
-    generate = false
-  end
-#---
-  if generate then
+  if [mAttributes generateAssignmentRoutine] then
+    let typeName = [self llvmTypeName]
     ioLLVMCode += llvmSeparatorLine () + "\n"
-    ioLLVMCode += "define internal void @plm.assign." + [[self key] identifierRepresentation]
+    ioLLVMCode += "define internal void @plm.assign." + [[self plmTypeName] identifierRepresentation]
                 + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
     ioLLVMCode += "entry:\n"
     ioLLVMCode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"

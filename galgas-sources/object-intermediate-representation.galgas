@@ -70,8 +70,8 @@ getter @objectIR llvmTypeName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @objectIR key -> @string {
-  result = [[self type] key]
+getter @objectIR plmTypeName -> @string {
+  result = [[self type] plmTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
