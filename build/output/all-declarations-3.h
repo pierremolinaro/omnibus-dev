@@ -577,6 +577,27 @@ void callExtensionSetter_openBranch (class cPtr_universalValuedObjectMapForConte
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                        Extension method '@instructionListAST analyzeRoutineInstructionList'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
+                                                    const class GALGAS_PLMType constin_inSelfType,
+                                                    const class GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
+                                                    const class GALGAS_bool constin_inRoutineCanMutateProperties,
+                                                    const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                                    const class GALGAS_semanticContext constin_inContext,
+                                                    const class GALGAS_mode constin_inCurrentMode,
+                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                    class GALGAS_universalValuedObjectMapForContext & io_ioUniversalMap,
+                                                    class GALGAS_allocaList & io_ioAllocaList,
+                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                       Abstract extension method '@abstractInstructionIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

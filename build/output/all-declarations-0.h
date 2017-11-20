@@ -1195,8 +1195,7 @@ class GALGAS_bootList : public AC_GALGAS_sortedlist {
   public : static class GALGAS_bootList constructor_sortedListWithValue (const class GALGAS_location & inOperand0,
                                                                          const class GALGAS_instructionListAST & inOperand1,
                                                                          const class GALGAS_location & inOperand2,
-                                                                         const class GALGAS_bigint & inOperand3,
-                                                                         const class GALGAS_location & inOperand4
+                                                                         const class GALGAS_lbigint & inOperand3
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -1208,24 +1207,21 @@ class GALGAS_bootList : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_location & inOperand0,
                                                       const class GALGAS_instructionListAST & inOperand1,
                                                       const class GALGAS_location & inOperand2,
-                                                      const class GALGAS_bigint & inOperand3,
-                                                      const class GALGAS_location & inOperand4
+                                                      const class GALGAS_lbigint & inOperand3
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_popGreatest (class GALGAS_location & outArgument0,
                                                      class GALGAS_instructionListAST & outArgument1,
                                                      class GALGAS_location & outArgument2,
-                                                     class GALGAS_bigint & outArgument3,
-                                                     class GALGAS_location & outArgument4,
+                                                     class GALGAS_lbigint & outArgument3,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popSmallest (class GALGAS_location & outArgument0,
                                                      class GALGAS_instructionListAST & outArgument1,
                                                      class GALGAS_location & outArgument2,
-                                                     class GALGAS_bigint & outArgument3,
-                                                     class GALGAS_location & outArgument4,
+                                                     class GALGAS_lbigint & outArgument3,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -1234,16 +1230,14 @@ class GALGAS_bootList : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG void method_greatest (class GALGAS_location & outArgument0,
                                                   class GALGAS_instructionListAST & outArgument1,
                                                   class GALGAS_location & outArgument2,
-                                                  class GALGAS_bigint & outArgument3,
-                                                  class GALGAS_location & outArgument4,
+                                                  class GALGAS_lbigint & outArgument3,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_smallest (class GALGAS_location & outArgument0,
                                                   class GALGAS_instructionListAST & outArgument1,
                                                   class GALGAS_location & outArgument2,
-                                                  class GALGAS_bigint & outArgument3,
-                                                  class GALGAS_location & outArgument4,
+                                                  class GALGAS_lbigint & outArgument3,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -1271,8 +1265,7 @@ class cEnumerator_bootList : public cGenericAbstractEnumerator {
   public : class GALGAS_location current_mBootLocation (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListAST current_mInstructionList (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfBootLocation (LOCATION_ARGS) const ;
-  public : class GALGAS_bigint current_mPriority (LOCATION_ARGS) const ;
-  public : class GALGAS_location current_mPriorityLocation (LOCATION_ARGS) const ;
+  public : class GALGAS_lbigint current_mPriority (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_bootList_2D_element current (LOCATION_ARGS) const ;
 } ;

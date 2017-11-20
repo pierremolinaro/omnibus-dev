@@ -140,18 +140,6 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  [inAST.mISRDeclarationListAST isrSemanticAnalysis
-    !context:inSemanticContext
-    !?temporary:temporaries
-    !?intermediateCode:outIntermediateCodeStruct
-  ]
-  for boot in inAST.mBootListAST do
-    [boot bootSemanticAnalysis
-      !context:inSemanticContext
-      !?temporary:temporaries
-      !?intermediateCode:outIntermediateCodeStruct
-    ]
-  end
   for init in inAST.mInitListAST do
     [init initSemanticAnalysis
       !context:inSemanticContext

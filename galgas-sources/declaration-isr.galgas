@@ -51,22 +51,33 @@ syntax extension plm_syntax {
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @isrDeclarationListAST enterInContext ?!@semanticContext ioSemanticContext {
+method @isrDeclarationListAST enterInContext
+  ?!@semanticContext ioSemanticContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
+{
   for isr in self do
     ioSemanticContext.mDefinedInterruptSet += !isr.mISRName.string
   end
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedISRDeclarations.new {!self}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @isrDeclarationListAST isrSemanticAnalysis
+class @decoratedISRDeclarations : @abstractDecoratedDeclaration {
+  @isrDeclarationListAST mISRDeclarationList
+}
+
+#·······················································································································
+
+override method @decoratedISRDeclarations semanticAnalysis
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for isr in self do
+  for isr in mISRDeclarationList do
   #--- Invocation graph
     let routineNameForInvocationGraph = interruptNameForInvocationGraph (!isr.mISRName)
     if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then

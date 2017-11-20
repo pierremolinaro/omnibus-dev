@@ -550,11 +550,11 @@ class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Routine 'retainRequiredModules'                                           *
+//                                     Function 'moduleMangledNameFromModuleName'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_retainRequiredModules (class GALGAS_ast & ioArgument0,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_moduleMangledNameFromModuleName (const class GALGAS_lstring & constinArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
