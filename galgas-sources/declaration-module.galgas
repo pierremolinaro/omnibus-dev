@@ -274,26 +274,27 @@ map @moduleMap {
 override method @requiredModuleAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   [!?ioContext.mModuleMap insertKey !mModuleName]
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedRequiredModule.new {!mModuleName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @moduleListIR {
-  @string mModuleName
-  @unifiedTypeMap-proxy mType
-  @operandIRList mInitialValueList
+class @decoratedRequiredModule : @abstractDecoratedDeclaration {
+  @lstring mModuleName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-override method @requiredModuleAST semanticAnalysis
+override method @decoratedRequiredModule semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -316,6 +317,14 @@ override method @requiredModuleAST semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @moduleListIR {
+  @string mModuleName
+  @unifiedTypeMap-proxy mType
+  @operandIRList mInitialValueList
+}
+
+#·······················································································································
 
 #override method @requiredModuleAST generateLLVMcode ?!@string unused ioLLVMcode {
 #}

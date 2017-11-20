@@ -84,6 +84,7 @@ func %once byteSwappedMethoName -> @string {
 override method @integerDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -104,7 +105,7 @@ override method @integerDeclarationAST enterInContext
     ]
   end
 #--------------------------------------- Class constant map
-  @constantMap classConstantMap = {}
+  @classConstantMap classConstantMap = {}
   [!?classConstantMap insertKey !["min" nowhere] !min !integerTypeName]
   [!?classConstantMap insertKey !["max" nowhere] !max !integerTypeName]
 #--------------------------------------- Enter in type map
@@ -139,18 +140,28 @@ override method @integerDeclarationAST enterInContext
     !signed:mIsSigned
     !?context:ioContext
   )
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@integerDecoratedDeclaration.new {!integerTypeName !mSize !mIsSigned}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerDeclarationAST semanticAnalysis
+class @integerDecoratedDeclaration : @abstractDecoratedDeclaration {
+  @string mTypeName
+  @uint mSize
+  @bool mIsSigned
+}
+
+#·······················································································································
+
+override method @integerDecoratedDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  ioIntermediateCodeStruct.mGenerationListIR += !@integerIR.new {![self typeName] !mSize !mIsSigned}
+  ioIntermediateCodeStruct.mGenerationListIR += !@integerIR.new {!mTypeName !mSize !mIsSigned}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -163,7 +174,7 @@ class @integerIR : @abstractGenerationIR {
   @bool mIsSigned
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
   let llvmTypeName = "i" + mSize

@@ -247,7 +247,7 @@ syntax extension plm_target_specific_syntax {
       !interruptionConfigurationList
     }
     outEndOfSourceFile = .here
-    ioAST.mDeclarationListAST += !@enumerationDeclaration.new {
+    ioAST.mDeclarationListAST += !@enumerationDeclarationAST.new {
       !.new {!isrSlotTypeName () !xtrInterruptHandler.location}
       !interruptConstantList
     }
@@ -340,6 +340,7 @@ override getter @configurationDeclarationAST keyRepresentationForErrorSignaling 
 override method @configurationDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -386,37 +387,18 @@ override method @configurationDeclarationAST enterInContext
       panicCodeSet += !s
     end
   end
-#--------------------------------- Generate @isrSlot enumeration
-#  if hasInterruptCode && ok then
-#    @constantMap enumConstantMap = {}
-#    let isrSlotTypeName = isrSlotTypeName ()
-#    for (interruptName interruptCode) in mInterruptionConfigurationList do
-#      switch interruptCode
-#      case noCode :
-#      case code (@lbigint value) :
-#        [!?enumConstantMap insertKey !interruptName !value.bigint !isrSlotTypeName]
-#      end
-#    end
-#    [!?ioContext.mTypeMap insertType
-#      !lkey:isrSlotTypeName
-#      !type:.enumeration {!constantMap:enumConstantMap !plmTypeName:isrSlotTypeName}
-#      !index:[ioContext.mTypeMap count]
-#    ]
-#  #--- Infix operators
-#    enterEnumerationComparisonOperators (!typeName:isrSlotTypeName !?context:ioContext)
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @configurationDeclarationAST semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
+#override method @configurationDeclarationAST semanticAnalysis
+#  ?context:let @semanticContext unused inContext
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION                                                                                                    

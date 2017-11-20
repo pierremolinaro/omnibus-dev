@@ -361,6 +361,7 @@ method @controlRegisterDeclarationAST buildControlRegisterSliceMap
 override method @controlRegisterDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -510,12 +511,12 @@ override method @controlRegisterDeclarationAST enterInContext
 #!  SEMANTIC ANALYSIS                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @controlRegisterDeclarationAST semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
+#override method @controlRegisterDeclarationAST semanticAnalysis
+#  ?context:let @semanticContext unused inContext
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION                                                                                                    

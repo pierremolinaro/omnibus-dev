@@ -91,6 +91,7 @@ override getter @globalConstantDeclarationAST keyRepresentationForErrorSignaling
 override method @globalConstantDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -204,11 +205,11 @@ func linkForGlobalConstant ?let @string inConstantName -> @string {
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclarationAST semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
+#override method @globalConstantDeclarationAST semanticAnalysis
+#  ?context:let @semanticContext unused inContext
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -151,6 +151,7 @@ struct @semanticContext {
 abstract method @abstractDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -164,6 +165,7 @@ proc buildSemanticContext
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   !context:@semanticContext outSemanticContext
   !@subprogramInvocationGraph outSubprogramInvocationGraph
+  !@declarationDecorationList outDecoratedDeclarationList
 {
   outSemanticContext = .default
 #--- Enter init routines
@@ -182,10 +184,12 @@ proc buildSemanticContext
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #---
   outSubprogramInvocationGraph = .emptyGraph
+  outDecoratedDeclarationList = {}
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext
       !procedureDeclarationList:inAST.mStandAloneFunctionDeclarationListAST
       !?context:outSemanticContext
+      !?outDecoratedDeclarationList
       !?outSubprogramInvocationGraph
       !?staticlistValues:ioStaticListValueMap
       !?staticStringMap:ioGlobalLiteralStringMap
