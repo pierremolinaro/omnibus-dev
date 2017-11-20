@@ -112,6 +112,8 @@ project (1:0:0) -> "plm" {
   "galgas-sources/ordered-declaration-list.galgas"
   "galgas-sources/context.galgas"
   "galgas-sources/types.galgas"
+  "galgas-sources/property-map.galgas"
+  "galgas-sources/constructor-map.galgas"
   "galgas-sources/semantic-analysis.galgas"
   "galgas-sources/semantic-routines.galgas"
 

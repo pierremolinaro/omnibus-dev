@@ -1,0 +1,54 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PROPERTY MAP                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @propertyAccessKind {
+  case constantProperty (@objectIR value)
+  case indexed  (@PLMType type @uint index)
+  case nonVirtualMethod (@routineDescriptor descriptor)
+}
+
+#·······················································································································
+
+map @propertyMap {
+  @bool mIsPublic
+  @propertyAccessKind mAccess
+  insert insertKey error message "the '%K' property is already declared"
+  search searchKey error message "there is no '%K' property"
+}
+
+#·······················································································································
+
+setter @propertyMap addFunction
+  ?receiverTypeName:let @string inReceiverTypeName
+  ?methodName:let @string inMethodName
+  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+{
+  let @routineDescriptor descriptor = .new {
+    !true # mIsPublic # Routine is declared with "public"
+    !false # mExported # Routine is declared with @exported attribute
+    !.function {!executionMode:.anyMode} # @routineKind mRoutineKind
+    !{} # @routineTypedSignature mSignature
+    !inResultType # Return type 
+    !false # @bool mCanAccessProperties # Routine is declared with @access attribute
+    !false # @bool mCanMutateProperties # Routine is declared with @mutating attribute
+  }
+  [!?self insertKey
+    ![inMethodName + "()" nowhere]
+    !true
+    !.nonVirtualMethod {!descriptor:descriptor}
+  ]
+#--- Routine mangled name
+  let routineNameForInvocationGraph = routineMangledNameFromAST (
+    !"$" + inReceiverTypeName
+    ![inMethodName nowhere]
+    !{}
+  )
+  [!?ioSubprogramInvocationGraph addNode
+    !routineNameForInvocationGraph
+    !routineNameForInvocationGraph
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
