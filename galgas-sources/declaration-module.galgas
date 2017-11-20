@@ -141,7 +141,7 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @requiredModuleAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
@@ -163,7 +163,7 @@ override getter @requiredModuleAST location -> @location outLocation {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
+#!  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @requiredModuleAST addExtension
@@ -325,11 +325,6 @@ list @moduleListIR {
 }
 
 #·······················································································································
-
-#override method @requiredModuleAST generateLLVMcode ?!@string unused ioLLVMcode {
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @moduleListIR-element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalVariable (!mModuleName) + " = internal global "

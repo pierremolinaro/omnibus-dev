@@ -558,3 +558,13 @@ class GALGAS_lstring function_moduleMangledNameFromModuleName (const class GALGA
                                                                class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Routine 'retainRequiredModules'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_retainRequiredModules (class GALGAS_ast & ioArgument0,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+

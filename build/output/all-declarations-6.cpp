@@ -7438,13 +7438,296 @@ void extensionMethod_svcCodeGeneration (const GALGAS_routineMapIR inObject,
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
+typeComparisonResult cPtr_bootAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_bootAST * p = (const cPtr_bootAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_bootAST) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mInstructionList.objectCompare (p->mProperty_mInstructionList) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mEndOfBootLocation.objectCompare (p->mProperty_mEndOfBootLocation) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mPriority.objectCompare (p->mProperty_mPriority) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_bootAST::objectCompare (const GALGAS_bootAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootAST::GALGAS_bootAST (void) :
+GALGAS_abstractDeclarationAST () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootAST GALGAS_bootAST::constructor_default (LOCATION_ARGS) {
+  return GALGAS_bootAST::constructor_new (GALGAS_instructionListAST::constructor_emptyList (HERE),
+                                          GALGAS_location::constructor_nowhere (HERE),
+                                          GALGAS_lbigint::constructor_default (HERE)
+                                          COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootAST::GALGAS_bootAST (const cPtr_bootAST * inSourcePtr) :
+GALGAS_abstractDeclarationAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_bootAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootAST GALGAS_bootAST::constructor_new (const GALGAS_instructionListAST & inAttribute_mInstructionList,
+                                                const GALGAS_location & inAttribute_mEndOfBootLocation,
+                                                const GALGAS_lbigint & inAttribute_mPriority
+                                                COMMA_LOCATION_ARGS) {
+  GALGAS_bootAST result ;
+  if (inAttribute_mInstructionList.isValid () && inAttribute_mEndOfBootLocation.isValid () && inAttribute_mPriority.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_bootAST (inAttribute_mInstructionList, inAttribute_mEndOfBootLocation, inAttribute_mPriority COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_instructionListAST GALGAS_bootAST::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_instructionListAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_bootAST * p = (const cPtr_bootAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_bootAST) ;
+    result = p->mProperty_mInstructionList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_instructionListAST cPtr_bootAST::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mInstructionList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_bootAST::getter_mEndOfBootLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_bootAST * p = (const cPtr_bootAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_bootAST) ;
+    result = p->mProperty_mEndOfBootLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_bootAST::getter_mEndOfBootLocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mEndOfBootLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint GALGAS_bootAST::getter_mPriority (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lbigint result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_bootAST * p = (const cPtr_bootAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_bootAST) ;
+    result = p->mProperty_mPriority ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint cPtr_bootAST::getter_mPriority (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPriority ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                          Pointer class for @bootAST class                                           *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_bootAST::cPtr_bootAST (const GALGAS_instructionListAST & in_mInstructionList,
+                            const GALGAS_location & in_mEndOfBootLocation,
+                            const GALGAS_lbigint & in_mPriority
+                            COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (THERE),
+mProperty_mInstructionList (in_mInstructionList),
+mProperty_mEndOfBootLocation (in_mEndOfBootLocation),
+mProperty_mPriority (in_mPriority) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_bootAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_bootAST ;
+}
+
+void cPtr_bootAST::description (C_String & ioString,
+                                const int32_t inIndentation) const {
+  ioString << "[@bootAST:" ;
+  mProperty_mInstructionList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mEndOfBootLocation.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mPriority.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_bootAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_bootAST (mProperty_mInstructionList, mProperty_mEndOfBootLocation, mProperty_mPriority COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                    @bootAST type                                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_bootAST ("bootAST",
+                                & kTypeDescriptor_GALGAS_abstractDeclarationAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_bootAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_bootAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_bootAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_bootAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootAST GALGAS_bootAST::extractObject (const GALGAS_object & inObject,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  GALGAS_bootAST result ;
+  const GALGAS_bootAST * p = (const GALGAS_bootAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_bootAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("bootAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Extension method '@bootAST noteTypesInPrecedenceGraph'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <extensionMethodSignature_bootAST_noteTypesInPrecedenceGraph> gExtensionMethodTable_bootAST_noteTypesInPrecedenceGraph ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_noteTypesInPrecedenceGraph (const int32_t inClassIndex,
+                                                      extensionMethodSignature_bootAST_noteTypesInPrecedenceGraph inMethod) {
+  gExtensionMethodTable_bootAST_noteTypesInPrecedenceGraph.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_noteTypesInPrecedenceGraph (const cPtr_bootAST * inObject,
+                                                     GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_bootAST) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    extensionMethodSignature_bootAST_noteTypesInPrecedenceGraph f = NULL ;
+    if (classIndex < gExtensionMethodTable_bootAST_noteTypesInPrecedenceGraph.count ()) {
+      f = gExtensionMethodTable_bootAST_noteTypesInPrecedenceGraph (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gExtensionMethodTable_bootAST_noteTypesInPrecedenceGraph.count ()) {
+           f = gExtensionMethodTable_bootAST_noteTypesInPrecedenceGraph (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gExtensionMethodTable_bootAST_noteTypesInPrecedenceGraph.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioGraph, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_bootAST_noteTypesInPrecedenceGraph (const cPtr_bootAST * inObject,
+                                                                GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_bootAST * object = inObject ;
+  macroValidSharedObject (object, cPtr_bootAST) ;
+  extensionMethod_noteInstructionListTypesInPrecedenceGraph (object->mProperty_mInstructionList, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 42)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_bootAST_noteTypesInPrecedenceGraph (void) {
+  enterExtensionMethod_noteTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_bootAST.mSlotID,
+                                                   extensionMethod_bootAST_noteTypesInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeExtensionMethod_bootAST_noteTypesInPrecedenceGraph (void) {
+  gExtensionMethodTable_bootAST_noteTypesInPrecedenceGraph.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_bootAST_noteTypesInPrecedenceGraph (defineExtensionMethod_bootAST_noteTypesInPrecedenceGraph,
+                                                               freeExtensionMethod_bootAST_noteTypesInPrecedenceGraph) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
 typeComparisonResult cPtr_decoratedBootRoutine::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_decoratedBootRoutine * p = (const cPtr_decoratedBootRoutine *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_decoratedBootRoutine) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mBootLocation.objectCompare (p->mProperty_mBootLocation) ;
-  }
   if (kOperandEqual == result) {
     result = mProperty_mInstructionList.objectCompare (p->mProperty_mInstructionList) ;
   }
@@ -7485,8 +7768,7 @@ GALGAS_abstractDecoratedDeclaration () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_decoratedBootRoutine GALGAS_decoratedBootRoutine::constructor_default (LOCATION_ARGS) {
-  return GALGAS_decoratedBootRoutine::constructor_new (GALGAS_location::constructor_nowhere (HERE),
-                                                       GALGAS_instructionListAST::constructor_emptyList (HERE),
+  return GALGAS_decoratedBootRoutine::constructor_new (GALGAS_instructionListAST::constructor_emptyList (HERE),
                                                        GALGAS_location::constructor_nowhere (HERE),
                                                        GALGAS_lbigint::constructor_default (HERE)
                                                        COMMA_THERE) ;
@@ -7501,34 +7783,15 @@ GALGAS_abstractDecoratedDeclaration (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_decoratedBootRoutine GALGAS_decoratedBootRoutine::constructor_new (const GALGAS_location & inAttribute_mBootLocation,
-                                                                          const GALGAS_instructionListAST & inAttribute_mInstructionList,
+GALGAS_decoratedBootRoutine GALGAS_decoratedBootRoutine::constructor_new (const GALGAS_instructionListAST & inAttribute_mInstructionList,
                                                                           const GALGAS_location & inAttribute_mEndOfBootLocation,
                                                                           const GALGAS_lbigint & inAttribute_mPriority
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_decoratedBootRoutine result ;
-  if (inAttribute_mBootLocation.isValid () && inAttribute_mInstructionList.isValid () && inAttribute_mEndOfBootLocation.isValid () && inAttribute_mPriority.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_decoratedBootRoutine (inAttribute_mBootLocation, inAttribute_mInstructionList, inAttribute_mEndOfBootLocation, inAttribute_mPriority COMMA_THERE)) ;
+  if (inAttribute_mInstructionList.isValid () && inAttribute_mEndOfBootLocation.isValid () && inAttribute_mPriority.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_decoratedBootRoutine (inAttribute_mInstructionList, inAttribute_mEndOfBootLocation, inAttribute_mPriority COMMA_THERE)) ;
   }
   return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_decoratedBootRoutine::getter_mBootLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_decoratedBootRoutine * p = (const cPtr_decoratedBootRoutine *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_decoratedBootRoutine) ;
-    result = p->mProperty_mBootLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_decoratedBootRoutine::getter_mBootLocation (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mBootLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7589,13 +7852,11 @@ GALGAS_lbigint cPtr_decoratedBootRoutine::getter_mPriority (UNUSED_LOCATION_ARGS
 //                                    Pointer class for @decoratedBootRoutine class                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_decoratedBootRoutine::cPtr_decoratedBootRoutine (const GALGAS_location & in_mBootLocation,
-                                                      const GALGAS_instructionListAST & in_mInstructionList,
+cPtr_decoratedBootRoutine::cPtr_decoratedBootRoutine (const GALGAS_instructionListAST & in_mInstructionList,
                                                       const GALGAS_location & in_mEndOfBootLocation,
                                                       const GALGAS_lbigint & in_mPriority
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractDecoratedDeclaration (THERE),
-mProperty_mBootLocation (in_mBootLocation),
 mProperty_mInstructionList (in_mInstructionList),
 mProperty_mEndOfBootLocation (in_mEndOfBootLocation),
 mProperty_mPriority (in_mPriority) {
@@ -7610,8 +7871,6 @@ const C_galgas_type_descriptor * cPtr_decoratedBootRoutine::classDescriptor (voi
 void cPtr_decoratedBootRoutine::description (C_String & ioString,
                                              const int32_t inIndentation) const {
   ioString << "[@decoratedBootRoutine:" ;
-  mProperty_mBootLocation.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
   mProperty_mInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mEndOfBootLocation.description (ioString, inIndentation+1) ;
@@ -7624,7 +7883,7 @@ void cPtr_decoratedBootRoutine::description (C_String & ioString,
 
 acPtr_class * cPtr_decoratedBootRoutine::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_decoratedBootRoutine (mProperty_mBootLocation, mProperty_mInstructionList, mProperty_mEndOfBootLocation, mProperty_mPriority COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_decoratedBootRoutine (mProperty_mInstructionList, mProperty_mEndOfBootLocation, mProperty_mPriority COMMA_THERE)) ;
   return ptr ;
 }
 
