@@ -1487,98 +1487,128 @@ class cPtr_decoratedStaticList : public cPtr_abstractDecoratedDeclaration {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Extension method '@panicClauseListAST-element panicSemanticAnalysis'                         *
+//                               Extension method '@panicAST noteTypesInPrecedenceGraph'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_panicSemanticAnalysis (const class GALGAS_panicClauseListAST_2D_element inObject,
-                                            const class GALGAS_semanticContext constin_inContext,
-                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                            class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_panicAST_noteTypesInPrecedenceGraph) (const class cPtr_panicAST * inObject,
+                                                                              class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
+                                                                              class C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_noteTypesInPrecedenceGraph (const int32_t inClassIndex,
+                                                      extensionMethodSignature_panicAST_noteTypesInPrecedenceGraph inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_panicAST * inObject,
+                                                     GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Function 'panicNameForInvocationGraph'                                        *
+//                                            @decoratedPanicRoutine class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_panicNameForInvocationGraph (const class GALGAS_string & constinArgument0,
-                                                           const class GALGAS_lbigint & constinArgument1,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
+class GALGAS_decoratedPanicRoutine : public GALGAS_abstractDecoratedDeclaration {
+//--- Constructor
+  public : GALGAS_decoratedPanicRoutine (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_decoratedPanicRoutine constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_decoratedPanicRoutine * ptr (void) const { return (const cPtr_decoratedPanicRoutine *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_decoratedPanicRoutine (const cPtr_decoratedPanicRoutine * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_decoratedPanicRoutine extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_decoratedPanicRoutine constructor_new (const class GALGAS_bool & inOperand0,
+                                                                      const class GALGAS_instructionListAST & inOperand1,
+                                                                      const class GALGAS_location & inOperand2,
+                                                                      const class GALGAS_lbigint & inOperand3
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_decoratedPanicRoutine & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfPanicInstructions (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSetup (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mPanicInstructionList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_decoratedPanicRoutine class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedPanicRoutine ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Function 'staticStringTypeName'                                           *
+//                                   Pointer class for @decoratedPanicRoutine class                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+class cPtr_decoratedPanicRoutine : public cPtr_abstractDecoratedDeclaration {
+//--- Attributes
+  public : GALGAS_bool mProperty_mIsSetup ;
+  public : GALGAS_instructionListAST mProperty_mPanicInstructionList ;
+  public : GALGAS_location mProperty_mEndOfPanicInstructions ;
+  public : GALGAS_lbigint mProperty_mPriority ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                 Extension method '@universalValuedObjectMapForContext checkLocalVariableFinalState'                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//--- Constructor
+  public : cPtr_decoratedPanicRoutine (const GALGAS_bool & in_mIsSetup,
+                                       const GALGAS_instructionListAST & in_mPanicInstructionList,
+                                       const GALGAS_location & in_mEndOfPanicInstructions,
+                                       const GALGAS_lbigint & in_mPriority
+                                       COMMA_LOCATION_ARGS) ;
 
-typedef void (*extensionMethodSignature_universalValuedObjectMapForContext_checkLocalVariableFinalState) (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                          class C_Compiler * inCompiler
-                                                                                                          COMMA_LOCATION_ARGS) ;
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsSetup (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mPanicInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfPanicInstructions (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
 
-void enterExtensionMethod_checkLocalVariableFinalState (const int32_t inClassIndex,
-                                                        extensionMethodSignature_universalValuedObjectMapForContext_checkLocalVariableFinalState inMethod) ;
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
-void callExtensionMethod_checkLocalVariableFinalState (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Routine 'initialVariableMap'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_initialVariableMap (const class GALGAS_semanticContext constinArgument0,
-                                 const class GALGAS_mode constinArgument1,
-                                 class GALGAS_bool inArgument2,
-                                 const class GALGAS_lstring constinArgument3,
-                                 class GALGAS_universalValuedObjectMapForContext & outArgument4,
-                                 class C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Extension setter '@universalValuedObjectMapForContext insertUsedLocalConstant'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertUsedLocalConstant) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                     const class GALGAS_lstring constinArgument0,
-                                                                                                     const class GALGAS_PLMType constinArgument1,
-                                                                                                     const class GALGAS_lstring constinArgument2,
-                                                                                                     class C_Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertUsedLocalConstant (const int32_t inClassIndex,
-                                                   extensionSetterSignature_universalValuedObjectMapForContext_insertUsedLocalConstant inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertUsedLocalConstant (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                  const GALGAS_lstring constin_inLocalConstantName,
-                                                  const GALGAS_PLMType constin_inType,
-                                                  const GALGAS_lstring constin_inPLMConstantName,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1884,6 +1914,20 @@ void routine_enterFormalArguments (const class GALGAS_semanticContext constinArg
                                    class GALGAS_routineFormalArgumentListForGeneration & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Routine 'initialVariableMap'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_initialVariableMap (const class GALGAS_semanticContext constinArgument0,
+                                 const class GALGAS_mode constinArgument1,
+                                 class GALGAS_bool inArgument2,
+                                 const class GALGAS_lstring constinArgument3,
+                                 class GALGAS_universalValuedObjectMapForContext & outArgument4,
+                                 class C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

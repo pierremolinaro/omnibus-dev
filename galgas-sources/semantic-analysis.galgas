@@ -140,21 +140,6 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-#  for init in inAST.mInitListAST do
-#    [init initSemanticAnalysis
-#      !context:inSemanticContext
-#      !?temporary:temporaries
-#      !?intermediateCode:outIntermediateCodeStruct
-#    ]
-#  end
-#--- Generate panic clauses
-  for panic in inAST.mPanicClauseListAST do
-    [panic panicSemanticAnalysis
-      !context:inSemanticContext
-      !?temporary:temporaries
-      !?intermediateCode:outIntermediateCodeStruct
-    ]
-  end
 #--- Check required procedure are defined
   checkRequiredProcedures (
     !ast:inAST

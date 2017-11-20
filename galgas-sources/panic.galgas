@@ -2,13 +2,11 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @panicClauseListAST {
+class @panicAST : @abstractDeclarationAST {
   @bool mIsSetup # true: setup, false: loop
   @instructionListAST mPanicInstructionList
   @location mEndOfPanicInstructions
   @lbigint mPriority
-}{
-  mPriority <
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -27,11 +25,12 @@ syntax extension plm_syntax {
     <instructionList> ?let instructionList
     let endOfInstructionList = @location.here
     $}$
-    ioAST.mPanicClauseListAST +=
+    ioAST.mDeclarationListAST += !@panicAST.new {
       !true
       !instructionList
       !endOfInstructionList
       !priority
+    }
   }
 
   #·····················································································································
@@ -44,11 +43,12 @@ syntax extension plm_syntax {
     <instructionList> ?let instructionList
     let endOfInstructionList = @location.here
     $}$
-    ioAST.mPanicClauseListAST +=
+    ioAST.mDeclarationListAST += !@panicAST.new {
       !false
       !instructionList
       !endOfInstructionList
       !priority
+    }
   }
 
   #·····················································································································
@@ -56,37 +56,49 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @panicClauseListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
-    [mPanicInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
+method @panicAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mPanicInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+}
+
+#·······················································································································
+
+override method @panicAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+ let nodeName = @lstring.new {
+   !"panic " + if mIsSetup then "setup" else "loop" end + " " + mPriority.bigint
+   !mPriority.location
+ }
+ [!?ioGraph addNode !nodeName !self]
+}
+
+#·······················································································································
+
+override getter @panicAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "panic " + if mIsSetup then "setup" else "loop" end + " " + mPriority.bigint
+}
+
+#·······················································································································
+
+override getter @panicAST location -> @location outLocation {
+  outLocation = mPriority.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @panicAST addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
+  !@abstractDeclarationAST outNewDeclaration
+{
+  outNewDeclaration = self
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @panicClauseListAST-element enterInContext
-  ?!context:@semanticContext ioContext
-{
-  if mIsSetup then
-    [!?ioContext.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
-  else
-    [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mPriority.location}]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func %once panicModeName -> @string {
-  result = "panic"
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @panicRoutinePriorityMap {
@@ -96,9 +108,53 @@ map @panicRoutinePriorityMap {
   search searchLoopKey error message "there is no panic loop routine with priority %K"
 }
 
+#·······················································································································
+
+override method @panicAST enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+  if mIsSetup then
+    [!?ioContext.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
+  else
+    [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mPriority.location}]
+  end
+#---------------- Invocation graph
+  let routineNameForInvocationGraph = panicNameForInvocationGraph (!if mIsSetup then "setup" else "loop" end !mPriority)
+  [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedPanicRoutine.new {
+    !mIsSetup
+    !mPanicInstructionList
+    !mEndOfPanicInstructions
+    !mPriority
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @panicClauseListAST-element panicSemanticAnalysis
+func %once panicModeName -> @string {
+  result = "panic"
+}
+
+#·······················································································································
+
+class @decoratedPanicRoutine : @abstractDecoratedDeclaration {
+  @bool mIsSetup # true: setup, false: loop
+  @instructionListAST mPanicInstructionList
+  @location mEndOfPanicInstructions
+  @lbigint mPriority
+}
+
+#·······················································································································
+
+override method @decoratedPanicRoutine semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -120,13 +176,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
   [!?universalMap insertUsedLocalConstant !fileArg !StaticStringType !fileArg]
   let lineArg = @lstring.new {!"LINE" !mPriority.location}
   [!?universalMap insertUsedLocalConstant !lineArg ![inContext.mPanicLineType type] !lineArg]
-#---
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineNameForInvocationGraph
-      !routineNameForInvocationGraph
-    ]
-  end
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   @allocaList initAllocaList = {}
@@ -151,12 +200,112 @@ method @panicClauseListAST-element panicSemanticAnalysis
 #--- Code generation
   if mIsSetup then
     [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
-    ioIntermediateCodeStruct.mPanicSetupInstructionListIR += instructionGenerationList
+    ioIntermediateCodeStruct.mPanicSetupInstructionListIR += !instructionGenerationList !mPriority.bigint
   else
     [!?ioTemporaries.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mPriority.location}]
-    ioIntermediateCodeStruct.mPanicLoopInstructionListIR += instructionGenerationList
+    ioIntermediateCodeStruct.mPanicLoopInstructionListIR += !instructionGenerationList !mPriority.bigint
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+sortedlist @instructionListSortedListIR {
+  @instructionListIR mInstructionList
+  @bigint mPriority
+}{
+  mPriority <
+}
+
+#·······················································································································
+
+proc generatePanicCode
+  ?!@string ioLLVMcode
+  ?currentDir:let @string inCurrentDirectory
+  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
+  ?targetParameters:let @targetParameters inTargetParameters
+  ?targetName:let @string inTargetName
+  ?generationContext:let @generationContext inGenerationContext
+  ?!generationAdds:@generationAdds ioGenerationAdds
+  ?setup:let @instructionListSortedListIR inPanicSetupInstructionListIR
+  ?loop:let @instructionListSortedListIR inPanicLoopInstructionListIR
+{
+  if not [option plm_options.noPanicGeneration value] then
+    let s = getTargetTextFile (
+       !currentDir:inCurrentDirectory
+       !from:inTargetName + "/" + inTargetParameters.mTargetPanic_LL_filePath
+    )
+    let s1 = [s stringByReplacingStringByString !"!PANICCODE!" !inGenerationContext.mPanicCodeLLVMType]
+    let s2 = [s1 stringByReplacingStringByString !"!PANICLINE!" !inGenerationContext.mPanicLineLLVMType]
+    ioLLVMcode += s2
+    ioLLVMcode += llvmTitleComment (!"Raise Panic internal")
+    ioLLVMcode += "define internal void @raise.panic.internal ("
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " %in.LINE, "
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " %in.CODE, "
+    ioLLVMcode += "i8* %in.FILE)" + llvmAttributeFunction () + "noreturn {\n"
+  #--- First argument: line
+    ioLLVMcode += "  " + llvmNameForLocalVariable (!"LINE") + " = alloca "
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + "\n"
+    ioLLVMcode += "  store " + inGenerationContext.mPanicLineLLVMType + " %in.LINE, "
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " * " + llvmNameForLocalVariable (!"LINE") + "\n"
+  #--- Second argument : code
+    ioLLVMcode += "  " + llvmNameForLocalVariable (!"CODE")
+    ioLLVMcode += " = alloca " + inGenerationContext.mPanicCodeLLVMType + "\n"
+    ioLLVMcode += "  store " + inGenerationContext.mPanicCodeLLVMType + " %in.CODE, "
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " * " + llvmNameForLocalVariable (!"CODE") + "\n"
+  #--- Third argument : file    
+    ioLLVMcode += "  " + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
+    ioLLVMcode += "  store i8* %in.FILE, i8** " + llvmNameForLocalVariable (!"FILE") + "\n"
+    for (instructionList *) in inPanicSetupInstructionListIR do
+      [instructionList instructionListLLVMCode
+        !?ioLLVMcode
+        !inGenerationContext
+        !?ioGenerationAdds
+      ]
+    end
+    ioLLVMcode += "  br label %panic.loop\n\n"
+    ioLLVMcode += "panic.loop:\n"
+    for (instructionList *) in inPanicLoopInstructionListIR do
+      [instructionList instructionListLLVMCode
+        !?ioLLVMcode
+        !inGenerationContext
+        !?ioGenerationAdds
+      ]
+    end
+    ioLLVMcode += "  br label %panic.loop\n"
+    ioLLVMcode += "}\n\n"
+  #--- Panic for isr
+    [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString !"" ?let emptyStringIndex]
+    ioLLVMcode += llvmTitleComment (!"Panic for ISR")
+    ioLLVMcode += "define internal void @panic.isr (" + inGenerationContext.mPanicCodeLLVMType + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
+    ioLLVMcode += "  %str.FILE = load i8*, i8** " + literalStringName (!emptyStringIndex) + "\n"
+    ioLLVMcode += "  call void @raise.panic.internal ("    
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " 0, "
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " %in.CODE, "
+    ioLLVMcode += "i8* %str.FILE"
+    ioLLVMcode += " )\n"    
+    ioLLVMcode += "  unreachable\n"    
+    ioLLVMcode += "}\n\n"    
+  #--- File specific routines
+    for (filePath) in inSourceFileAbsolutePathSet do
+      [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+        ![[filePath lastPathComponent] stringByDeletingPathExtension]
+        ?let staticStringIndex
+      ]
+      let routineName = "@raise.panic." + staticStringIndex
+      ioLLVMcode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
+      ioLLVMcode += "define internal void " + routineName + " ("
+      ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " %inSourceLine, "
+      ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " %inCode)" + llvmAttributeFunction () + "noreturn {\n"
+      ioLLVMcode += "  %str.FILE = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
+      ioLLVMcode += "  call void @raise.panic ("
+      ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " %inSourceLine, "
+      ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " %inCode, i8* %str.FILE)\n"
+      ioLLVMcode += "  unreachable\n"
+      ioLLVMcode += "}\n\n"
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

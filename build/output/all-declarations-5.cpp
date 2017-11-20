@@ -10,6 +10,184 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_scopeStack_2D_element::GALGAS_scopeStack_2D_element (void) :
+mProperty_mScopeKind (),
+mProperty_mFirstBranch (),
+mProperty_mInitialStateMap (),
+mProperty_mReferenceStateMap (),
+mProperty_mObjectList () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_scopeStack_2D_element::~ GALGAS_scopeStack_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_scopeStack_2D_element::GALGAS_scopeStack_2D_element (const GALGAS_scopeKind & inOperand0,
+                                                            const GALGAS_bool & inOperand1,
+                                                            const GALGAS_referenceStateMap & inOperand2,
+                                                            const GALGAS_referenceStateMap & inOperand3,
+                                                            const GALGAS_lstringlist & inOperand4) :
+mProperty_mScopeKind (inOperand0),
+mProperty_mFirstBranch (inOperand1),
+mProperty_mInitialStateMap (inOperand2),
+mProperty_mReferenceStateMap (inOperand3),
+mProperty_mObjectList (inOperand4) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_scopeStack_2D_element GALGAS_scopeStack_2D_element::constructor_new (const GALGAS_scopeKind & inOperand0,
+                                                                            const GALGAS_bool & inOperand1,
+                                                                            const GALGAS_referenceStateMap & inOperand2,
+                                                                            const GALGAS_referenceStateMap & inOperand3,
+                                                                            const GALGAS_lstringlist & inOperand4 
+                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_scopeStack_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_scopeStack_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_scopeStack_2D_element::objectCompare (const GALGAS_scopeStack_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mScopeKind.objectCompare (inOperand.mProperty_mScopeKind) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mFirstBranch.objectCompare (inOperand.mProperty_mFirstBranch) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mInitialStateMap.objectCompare (inOperand.mProperty_mInitialStateMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mReferenceStateMap.objectCompare (inOperand.mProperty_mReferenceStateMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mObjectList.objectCompare (inOperand.mProperty_mObjectList) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_scopeStack_2D_element::isValid (void) const {
+  return mProperty_mScopeKind.isValid () && mProperty_mFirstBranch.isValid () && mProperty_mInitialStateMap.isValid () && mProperty_mReferenceStateMap.isValid () && mProperty_mObjectList.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_scopeStack_2D_element::drop (void) {
+  mProperty_mScopeKind.drop () ;
+  mProperty_mFirstBranch.drop () ;
+  mProperty_mInitialStateMap.drop () ;
+  mProperty_mReferenceStateMap.drop () ;
+  mProperty_mObjectList.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_scopeStack_2D_element::description (C_String & ioString,
+                                                const int32_t inIndentation) const {
+  ioString << "<struct @scopeStack-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mScopeKind.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mFirstBranch.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mInitialStateMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mReferenceStateMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mObjectList.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_scopeKind GALGAS_scopeStack_2D_element::getter_mScopeKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mScopeKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_scopeStack_2D_element::getter_mFirstBranch (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFirstBranch ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap GALGAS_scopeStack_2D_element::getter_mInitialStateMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mInitialStateMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap GALGAS_scopeStack_2D_element::getter_mReferenceStateMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mReferenceStateMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_scopeStack_2D_element::getter_mObjectList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mObjectList ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @scopeStack-element type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_scopeStack_2D_element ("scopeStack-element",
+                                              NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_scopeStack_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_scopeStack_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_scopeStack_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_scopeStack_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_scopeStack_2D_element GALGAS_scopeStack_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_scopeStack_2D_element result ;
+  const GALGAS_scopeStack_2D_element * p = (const GALGAS_scopeStack_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_scopeStack_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("scopeStack-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_declarationDecorationList_2D_element::GALGAS_declarationDecorationList_2D_element (void) :
 mProperty_mDeclaration () {
 }

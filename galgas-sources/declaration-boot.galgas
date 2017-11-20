@@ -85,15 +85,15 @@ override method @bootAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
+#--- Enter in invocation graph
+  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority.bigint !mPriority.location}
+  [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedBootRoutine.new {
     !mInstructionList
     !mEndOfBootLocation
     !mPriority
   }
-#--- Enter in invocation graph
-  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority.bigint !mPriority.location}
-  [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

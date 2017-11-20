@@ -180,14 +180,10 @@ proc buildSemanticContext
 {
   outSemanticContext = .default
   outDecoratedDeclarationList = {}
-#--- Enter init routines
-#  for initRoutine in inAST.mInitListAST do
-#    [initRoutine enterInContext !?context:outSemanticContext !?outDecoratedDeclarationList]
-#  end
 #--- Enter panic routines
-  for panicRoutine in inAST.mPanicClauseListAST do
-    [panicRoutine enterInContext !?context:outSemanticContext]
-  end
+#  for panicRoutine in inAST.mPanicClauseListAST do
+#    [panicRoutine enterInContext !?context:outSemanticContext]
+#  end
 #--- Enter standalone procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext !?outDecoratedDeclarationList]
   [inAST.mStandAloneFunctionDeclarationListAST enterFunctionInContext

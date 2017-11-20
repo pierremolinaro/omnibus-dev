@@ -38,7 +38,7 @@ struct @ast {
   @lstringlist mTargetListAST
 #  @bootList mBootListAST
 #  @initList mInitListAST
-  @panicClauseListAST mPanicClauseListAST
+#  @panicClauseListAST mPanicClauseListAST
   @taskListAST mTaskListAST
   @checkTargetListAST mCheckTargetListAST
   @moduleDeclarationListAST mModuleDeclarationListAST

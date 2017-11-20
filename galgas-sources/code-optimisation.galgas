@@ -172,14 +172,18 @@ private proc suppressInaccessibleSubprograms
   end
 #--- Panic clauses (if panic code is generated)
   if not [option plm_options.noPanicGeneration value] then
-    [ioIntermediateCodeStruct.mPanicSetupInstructionListIR enterAccessibleEntities
-      !?outAccessibleEntities
-      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-    ]
-    [ioIntermediateCodeStruct.mPanicLoopInstructionListIR enterAccessibleEntities
-      !?outAccessibleEntities
-      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-    ]
+    for (instructionList *) in ioIntermediateCodeStruct.mPanicSetupInstructionListIR do
+      [instructionList enterAccessibleEntities
+        !?outAccessibleEntities
+        !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+      ]
+    end
+    for (instructionList *) in ioIntermediateCodeStruct.mPanicLoopInstructionListIR do
+      [instructionList enterAccessibleEntities
+        !?outAccessibleEntities
+        !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+      ]
+    end
   end
 #--- interrupts
   [ioIntermediateCodeStruct.mInterruptMapIR enterAccessibleEntities

@@ -29,7 +29,7 @@ proc buildOrderedDeclarationList
   for () in inAST.mDeclarationListAST do
     [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
   end
-  [inAST.mPanicClauseListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+#  [inAST.mPanicClauseListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mStandAloneFunctionDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mExternProcListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mStandAloneSystemRoutineListAST noteTypesInPrecedenceGraph !?precedenceGraph]
