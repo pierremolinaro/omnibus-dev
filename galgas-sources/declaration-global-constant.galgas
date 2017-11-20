@@ -141,13 +141,6 @@ override method @globalConstantDeclarationAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @globalConstantDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  BUILD CONSTANT MAP HTML FILE                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -200,16 +193,5 @@ filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
 func linkForGlobalConstant ?let @string inConstantName -> @string {
   result = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @globalConstantDeclarationAST semanticAnalysis
-#  ?context:let @semanticContext unused inContext
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-#{
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

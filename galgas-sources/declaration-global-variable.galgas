@@ -379,7 +379,7 @@ override method @decoratedGlobalVariable semanticAnalysis
 {
   [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
     !mVarName
-    ![mExpressionGeneratedCode type]
+#    ![mExpressionGeneratedCode type]
     ![mExecutionModeSet count] > 1
     !mExpressionGeneratedCode
   ]
@@ -391,7 +391,7 @@ override method @decoratedGlobalVariable semanticAnalysis
 
 method @globalVariableMapIR-element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalVariable (!lkey.string) + " = internal global "
-  ioLLVMcode += [mType llvmTypeName] + " "
+  ioLLVMcode += [[mInitialValue type] llvmTypeName] + " "
   let initialString = [mInitialValue llvmName]
   if initialString == "" then
     ioLLVMcode += "zeroinitializer"

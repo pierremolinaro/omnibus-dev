@@ -12850,23 +12850,23 @@ void extensionMethod_generateLLVMForStaticLists (const GALGAS_staticListInitiali
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Class for element of '@taskList' list                                        *
+//                                      Class for element of '@taskListAST' list                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cCollectionElement_taskList : public cCollectionElement {
-  public : GALGAS_taskList_2D_element mObject ;
+class cCollectionElement_taskListAST : public cCollectionElement {
+  public : GALGAS_taskListAST_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_taskList (const GALGAS_lstring & in_mTaskName,
-                                        const GALGAS_lbigint & in_mPriority,
-                                        const GALGAS_lbigint & in_mStackSize,
-                                        const GALGAS_structurePropertyListAST & in_mVarList,
-                                        const GALGAS_functionDeclarationListAST & in_mTaskProcList,
-                                        const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
-                                        const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
-                                        const GALGAS_location & in_mEndOfTaskDeclaration
-                                        COMMA_LOCATION_ARGS) ;
+  public : cCollectionElement_taskListAST (const GALGAS_lstring & in_mTaskName,
+                                           const GALGAS_lbigint & in_mPriority,
+                                           const GALGAS_lbigint & in_mStackSize,
+                                           const GALGAS_structurePropertyListAST & in_mVarList,
+                                           const GALGAS_functionDeclarationListAST & in_mTaskProcList,
+                                           const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
+                                           const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
+                                           const GALGAS_location & in_mEndOfTaskDeclaration
+                                           COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -12883,36 +12883,36 @@ class cCollectionElement_taskList : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_taskList::cCollectionElement_taskList (const GALGAS_lstring & in_mTaskName,
-                                                          const GALGAS_lbigint & in_mPriority,
-                                                          const GALGAS_lbigint & in_mStackSize,
-                                                          const GALGAS_structurePropertyListAST & in_mVarList,
-                                                          const GALGAS_functionDeclarationListAST & in_mTaskProcList,
-                                                          const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
-                                                          const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
-                                                          const GALGAS_location & in_mEndOfTaskDeclaration
-                                                          COMMA_LOCATION_ARGS) :
+cCollectionElement_taskListAST::cCollectionElement_taskListAST (const GALGAS_lstring & in_mTaskName,
+                                                                const GALGAS_lbigint & in_mPriority,
+                                                                const GALGAS_lbigint & in_mStackSize,
+                                                                const GALGAS_structurePropertyListAST & in_mVarList,
+                                                                const GALGAS_functionDeclarationListAST & in_mTaskProcList,
+                                                                const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
+                                                                const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
+                                                                const GALGAS_location & in_mEndOfTaskDeclaration
+                                                                COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mTaskName, in_mPriority, in_mStackSize, in_mVarList, in_mTaskProcList, in_mTaskSetupListAST, in_mGuardedCommandList, in_mEndOfTaskDeclaration) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cCollectionElement_taskList::isValid (void) const {
+bool cCollectionElement_taskListAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement * cCollectionElement_taskList::copy (void) {
+cCollectionElement * cCollectionElement_taskListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_taskList (mObject.mProperty_mTaskName, mObject.mProperty_mPriority, mObject.mProperty_mStackSize, mObject.mProperty_mVarList, mObject.mProperty_mTaskProcList, mObject.mProperty_mTaskSetupListAST, mObject.mProperty_mGuardedCommandList, mObject.mProperty_mEndOfTaskDeclaration COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_taskListAST (mObject.mProperty_mTaskName, mObject.mProperty_mPriority, mObject.mProperty_mStackSize, mObject.mProperty_mVarList, mObject.mProperty_mTaskProcList, mObject.mProperty_mTaskSetupListAST, mObject.mProperty_mGuardedCommandList, mObject.mProperty_mEndOfTaskDeclaration COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cCollectionElement_taskList::description (C_String & ioString, const int32_t inIndentation) const {
+void cCollectionElement_taskListAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mTaskName" ":" ;
@@ -12949,46 +12949,46 @@ void cCollectionElement_taskList::description (C_String & ioString, const int32_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cCollectionElement_taskList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_taskList * operand = (cCollectionElement_taskList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_taskList) ;
+typeComparisonResult cCollectionElement_taskListAST::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_taskListAST * operand = (cCollectionElement_taskListAST *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_taskListAST) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList::GALGAS_taskList (void) :
+GALGAS_taskListAST::GALGAS_taskListAST (void) :
 AC_GALGAS_list () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList::GALGAS_taskList (const capCollectionElementArray & inSharedArray) :
+GALGAS_taskListAST::GALGAS_taskListAST (const capCollectionElementArray & inSharedArray) :
 AC_GALGAS_list (inSharedArray) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList GALGAS_taskList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_taskList  (capCollectionElementArray ()) ;
+GALGAS_taskListAST GALGAS_taskListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+  return GALGAS_taskListAST  (capCollectionElementArray ()) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList GALGAS_taskList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                            const GALGAS_lbigint & inOperand1,
-                                                            const GALGAS_lbigint & inOperand2,
-                                                            const GALGAS_structurePropertyListAST & inOperand3,
-                                                            const GALGAS_functionDeclarationListAST & inOperand4,
-                                                            const GALGAS_taskSetupListAST & inOperand5,
-                                                            const GALGAS_syncInstructionBranchListAST & inOperand6,
-                                                            const GALGAS_location & inOperand7
-                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_taskList result ;
+GALGAS_taskListAST GALGAS_taskListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                  const GALGAS_lbigint & inOperand1,
+                                                                  const GALGAS_lbigint & inOperand2,
+                                                                  const GALGAS_structurePropertyListAST & inOperand3,
+                                                                  const GALGAS_functionDeclarationListAST & inOperand4,
+                                                                  const GALGAS_taskSetupListAST & inOperand5,
+                                                                  const GALGAS_syncInstructionBranchListAST & inOperand6,
+                                                                  const GALGAS_location & inOperand7
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_taskListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
-    result = GALGAS_taskList (capCollectionElementArray ()) ;
+    result = GALGAS_taskListAST (capCollectionElementArray ()) ;
     capCollectionElement attributes ;
-    GALGAS_taskList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7 COMMA_THERE) ;
+    GALGAS_taskListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7 COMMA_THERE) ;
     result.appendObject (attributes) ;
   }
   return result ;
@@ -12996,43 +12996,43 @@ GALGAS_taskList GALGAS_taskList::constructor_listWithValue (const GALGAS_lstring
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_taskList::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                 const GALGAS_lstring & in_mTaskName,
-                                                 const GALGAS_lbigint & in_mPriority,
-                                                 const GALGAS_lbigint & in_mStackSize,
-                                                 const GALGAS_structurePropertyListAST & in_mVarList,
-                                                 const GALGAS_functionDeclarationListAST & in_mTaskProcList,
-                                                 const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
-                                                 const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
-                                                 const GALGAS_location & in_mEndOfTaskDeclaration
-                                                 COMMA_LOCATION_ARGS) {
-  cCollectionElement_taskList * p = NULL ;
-  macroMyNew (p, cCollectionElement_taskList (in_mTaskName,
-                                              in_mPriority,
-                                              in_mStackSize,
-                                              in_mVarList,
-                                              in_mTaskProcList,
-                                              in_mTaskSetupListAST,
-                                              in_mGuardedCommandList,
-                                              in_mEndOfTaskDeclaration COMMA_THERE)) ;
+void GALGAS_taskListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                    const GALGAS_lstring & in_mTaskName,
+                                                    const GALGAS_lbigint & in_mPriority,
+                                                    const GALGAS_lbigint & in_mStackSize,
+                                                    const GALGAS_structurePropertyListAST & in_mVarList,
+                                                    const GALGAS_functionDeclarationListAST & in_mTaskProcList,
+                                                    const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
+                                                    const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
+                                                    const GALGAS_location & in_mEndOfTaskDeclaration
+                                                    COMMA_LOCATION_ARGS) {
+  cCollectionElement_taskListAST * p = NULL ;
+  macroMyNew (p, cCollectionElement_taskListAST (in_mTaskName,
+                                                 in_mPriority,
+                                                 in_mStackSize,
+                                                 in_mVarList,
+                                                 in_mTaskProcList,
+                                                 in_mTaskSetupListAST,
+                                                 in_mGuardedCommandList,
+                                                 in_mEndOfTaskDeclaration COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_taskList::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                           const GALGAS_lbigint & inOperand1,
-                                           const GALGAS_lbigint & inOperand2,
-                                           const GALGAS_structurePropertyListAST & inOperand3,
-                                           const GALGAS_functionDeclarationListAST & inOperand4,
-                                           const GALGAS_taskSetupListAST & inOperand5,
-                                           const GALGAS_syncInstructionBranchListAST & inOperand6,
-                                           const GALGAS_location & inOperand7
-                                           COMMA_LOCATION_ARGS) {
+void GALGAS_taskListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
+                                              const GALGAS_lbigint & inOperand1,
+                                              const GALGAS_lbigint & inOperand2,
+                                              const GALGAS_structurePropertyListAST & inOperand3,
+                                              const GALGAS_functionDeclarationListAST & inOperand4,
+                                              const GALGAS_taskSetupListAST & inOperand5,
+                                              const GALGAS_syncInstructionBranchListAST & inOperand6,
+                                              const GALGAS_location & inOperand7
+                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_taskList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_taskListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -13042,20 +13042,20 @@ void GALGAS_taskList::addAssign_operation (const GALGAS_lstring & inOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_taskList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
-                                            const GALGAS_lbigint inOperand1,
-                                            const GALGAS_lbigint inOperand2,
-                                            const GALGAS_structurePropertyListAST inOperand3,
-                                            const GALGAS_functionDeclarationListAST inOperand4,
-                                            const GALGAS_taskSetupListAST inOperand5,
-                                            const GALGAS_syncInstructionBranchListAST inOperand6,
-                                            const GALGAS_location inOperand7,
-                                            const GALGAS_uint inInsertionIndex,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
+void GALGAS_taskListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                               const GALGAS_lbigint inOperand1,
+                                               const GALGAS_lbigint inOperand2,
+                                               const GALGAS_structurePropertyListAST inOperand3,
+                                               const GALGAS_functionDeclarationListAST inOperand4,
+                                               const GALGAS_taskSetupListAST inOperand5,
+                                               const GALGAS_syncInstructionBranchListAST inOperand6,
+                                               const GALGAS_location inOperand7,
+                                               const GALGAS_uint inInsertionIndex,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_taskList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_taskListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -13065,21 +13065,21 @@ void GALGAS_taskList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_taskList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
-                                            GALGAS_lbigint & outOperand1,
-                                            GALGAS_lbigint & outOperand2,
-                                            GALGAS_structurePropertyListAST & outOperand3,
-                                            GALGAS_functionDeclarationListAST & outOperand4,
-                                            GALGAS_taskSetupListAST & outOperand5,
-                                            GALGAS_syncInstructionBranchListAST & outOperand6,
-                                            GALGAS_location & outOperand7,
-                                            const GALGAS_uint inRemoveIndex,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
+void GALGAS_taskListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                               GALGAS_lbigint & outOperand1,
+                                               GALGAS_lbigint & outOperand2,
+                                               GALGAS_structurePropertyListAST & outOperand3,
+                                               GALGAS_functionDeclarationListAST & outOperand4,
+                                               GALGAS_taskSetupListAST & outOperand5,
+                                               GALGAS_syncInstructionBranchListAST & outOperand6,
+                                               GALGAS_location & outOperand7,
+                                               const GALGAS_uint inRemoveIndex,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+    cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
     if (NULL == p) {
       outOperand0.drop () ;
       outOperand1.drop () ;
@@ -13090,7 +13090,7 @@ void GALGAS_taskList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
       outOperand6.drop () ;
       outOperand7.drop () ;
     }else{
-      macroValidSharedObject (p, cCollectionElement_taskList) ;
+      macroValidSharedObject (p, cCollectionElement_taskListAST) ;
       outOperand0 = p->mObject.mProperty_mTaskName ;
       outOperand1 = p->mObject.mProperty_mPriority ;
       outOperand2 = p->mObject.mProperty_mStackSize ;
@@ -13105,7 +13105,81 @@ void GALGAS_taskList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_taskList::setter_popFirst (GALGAS_lstring & outOperand0,
+void GALGAS_taskListAST::setter_popFirst (GALGAS_lstring & outOperand0,
+                                          GALGAS_lbigint & outOperand1,
+                                          GALGAS_lbigint & outOperand2,
+                                          GALGAS_structurePropertyListAST & outOperand3,
+                                          GALGAS_functionDeclarationListAST & outOperand4,
+                                          GALGAS_taskSetupListAST & outOperand5,
+                                          GALGAS_syncInstructionBranchListAST & outOperand6,
+                                          GALGAS_location & outOperand7,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+    outOperand4.drop () ;
+    outOperand5.drop () ;
+    outOperand6.drop () ;
+    outOperand7.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
+    outOperand0 = p->mObject.mProperty_mTaskName ;
+    outOperand1 = p->mObject.mProperty_mPriority ;
+    outOperand2 = p->mObject.mProperty_mStackSize ;
+    outOperand3 = p->mObject.mProperty_mVarList ;
+    outOperand4 = p->mObject.mProperty_mTaskProcList ;
+    outOperand5 = p->mObject.mProperty_mTaskSetupListAST ;
+    outOperand6 = p->mObject.mProperty_mGuardedCommandList ;
+    outOperand7 = p->mObject.mProperty_mEndOfTaskDeclaration ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_taskListAST::setter_popLast (GALGAS_lstring & outOperand0,
+                                         GALGAS_lbigint & outOperand1,
+                                         GALGAS_lbigint & outOperand2,
+                                         GALGAS_structurePropertyListAST & outOperand3,
+                                         GALGAS_functionDeclarationListAST & outOperand4,
+                                         GALGAS_taskSetupListAST & outOperand5,
+                                         GALGAS_syncInstructionBranchListAST & outOperand6,
+                                         GALGAS_location & outOperand7,
+                                         C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+    outOperand4.drop () ;
+    outOperand5.drop () ;
+    outOperand6.drop () ;
+    outOperand7.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
+    outOperand0 = p->mObject.mProperty_mTaskName ;
+    outOperand1 = p->mObject.mProperty_mPriority ;
+    outOperand2 = p->mObject.mProperty_mStackSize ;
+    outOperand3 = p->mObject.mProperty_mVarList ;
+    outOperand4 = p->mObject.mProperty_mTaskProcList ;
+    outOperand5 = p->mObject.mProperty_mTaskSetupListAST ;
+    outOperand6 = p->mObject.mProperty_mGuardedCommandList ;
+    outOperand7 = p->mObject.mProperty_mEndOfTaskDeclaration ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_taskListAST::method_first (GALGAS_lstring & outOperand0,
                                        GALGAS_lbigint & outOperand1,
                                        GALGAS_lbigint & outOperand2,
                                        GALGAS_structurePropertyListAST & outOperand3,
@@ -13114,10 +13188,10 @@ void GALGAS_taskList::setter_popFirst (GALGAS_lstring & outOperand0,
                                        GALGAS_syncInstructionBranchListAST & outOperand6,
                                        GALGAS_location & outOperand7,
                                        C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) {
+                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
@@ -13128,7 +13202,7 @@ void GALGAS_taskList::setter_popFirst (GALGAS_lstring & outOperand0,
     outOperand6.drop () ;
     outOperand7.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     outOperand0 = p->mObject.mProperty_mTaskName ;
     outOperand1 = p->mObject.mProperty_mPriority ;
     outOperand2 = p->mObject.mProperty_mStackSize ;
@@ -13142,7 +13216,7 @@ void GALGAS_taskList::setter_popFirst (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_taskList::setter_popLast (GALGAS_lstring & outOperand0,
+void GALGAS_taskListAST::method_last (GALGAS_lstring & outOperand0,
                                       GALGAS_lbigint & outOperand1,
                                       GALGAS_lbigint & outOperand2,
                                       GALGAS_structurePropertyListAST & outOperand3,
@@ -13151,84 +13225,10 @@ void GALGAS_taskList::setter_popLast (GALGAS_lstring & outOperand0,
                                       GALGAS_syncInstructionBranchListAST & outOperand6,
                                       GALGAS_location & outOperand7,
                                       C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-    outOperand3.drop () ;
-    outOperand4.drop () ;
-    outOperand5.drop () ;
-    outOperand6.drop () ;
-    outOperand7.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
-    outOperand0 = p->mObject.mProperty_mTaskName ;
-    outOperand1 = p->mObject.mProperty_mPriority ;
-    outOperand2 = p->mObject.mProperty_mStackSize ;
-    outOperand3 = p->mObject.mProperty_mVarList ;
-    outOperand4 = p->mObject.mProperty_mTaskProcList ;
-    outOperand5 = p->mObject.mProperty_mTaskSetupListAST ;
-    outOperand6 = p->mObject.mProperty_mGuardedCommandList ;
-    outOperand7 = p->mObject.mProperty_mEndOfTaskDeclaration ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_taskList::method_first (GALGAS_lstring & outOperand0,
-                                    GALGAS_lbigint & outOperand1,
-                                    GALGAS_lbigint & outOperand2,
-                                    GALGAS_structurePropertyListAST & outOperand3,
-                                    GALGAS_functionDeclarationListAST & outOperand4,
-                                    GALGAS_taskSetupListAST & outOperand5,
-                                    GALGAS_syncInstructionBranchListAST & outOperand6,
-                                    GALGAS_location & outOperand7,
-                                    C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-    outOperand3.drop () ;
-    outOperand4.drop () ;
-    outOperand5.drop () ;
-    outOperand6.drop () ;
-    outOperand7.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
-    outOperand0 = p->mObject.mProperty_mTaskName ;
-    outOperand1 = p->mObject.mProperty_mPriority ;
-    outOperand2 = p->mObject.mProperty_mStackSize ;
-    outOperand3 = p->mObject.mProperty_mVarList ;
-    outOperand4 = p->mObject.mProperty_mTaskProcList ;
-    outOperand5 = p->mObject.mProperty_mTaskSetupListAST ;
-    outOperand6 = p->mObject.mProperty_mGuardedCommandList ;
-    outOperand7 = p->mObject.mProperty_mEndOfTaskDeclaration ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_taskList::method_last (GALGAS_lstring & outOperand0,
-                                   GALGAS_lbigint & outOperand1,
-                                   GALGAS_lbigint & outOperand2,
-                                   GALGAS_structurePropertyListAST & outOperand3,
-                                   GALGAS_functionDeclarationListAST & outOperand4,
-                                   GALGAS_taskSetupListAST & outOperand5,
-                                   GALGAS_syncInstructionBranchListAST & outOperand6,
-                                   GALGAS_location & outOperand7,
-                                   C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) const {
+                                      COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
@@ -13239,7 +13239,7 @@ void GALGAS_taskList::method_last (GALGAS_lstring & outOperand0,
     outOperand6.drop () ;
     outOperand7.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     outOperand0 = p->mObject.mProperty_mTaskName ;
     outOperand1 = p->mObject.mProperty_mPriority ;
     outOperand2 = p->mObject.mProperty_mStackSize ;
@@ -13253,10 +13253,10 @@ void GALGAS_taskList::method_last (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList GALGAS_taskList::add_operation (const GALGAS_taskList & inOperand,
-                                                C_Compiler * /* inCompiler */
-                                                COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_taskList result ;
+GALGAS_taskListAST GALGAS_taskListAST::add_operation (const GALGAS_taskListAST & inOperand,
+                                                      C_Compiler * /* inCompiler */
+                                                      COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_taskListAST result ;
   if (isValid () && inOperand.isValid ()) {
     result = *this ;
     result.appendList (inOperand) ;
@@ -13266,52 +13266,52 @@ GALGAS_taskList GALGAS_taskList::add_operation (const GALGAS_taskList & inOperan
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList GALGAS_taskList::getter_subListWithRange (const GALGAS_range & inRange,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_taskList result = GALGAS_taskList::constructor_emptyList (THERE) ;
+GALGAS_taskListAST GALGAS_taskListAST::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  GALGAS_taskListAST result = GALGAS_taskListAST::constructor_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList GALGAS_taskList::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_taskList result = GALGAS_taskList::constructor_emptyList (THERE) ;
+GALGAS_taskListAST GALGAS_taskListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  GALGAS_taskListAST result = GALGAS_taskListAST::constructor_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList GALGAS_taskList::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
-  GALGAS_taskList result = GALGAS_taskList::constructor_emptyList (THERE) ;
+GALGAS_taskListAST GALGAS_taskListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_taskListAST result = GALGAS_taskListAST::constructor_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_taskList::plusAssign_operation (const GALGAS_taskList inOperand,
-                                            C_Compiler * /* inCompiler */
-                                            COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_taskListAST::plusAssign_operation (const GALGAS_taskListAST inOperand,
+                                               C_Compiler * /* inCompiler */
+                                               COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_taskList::getter_mTaskNameAtIndex (const GALGAS_uint & inIndex,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_taskListAST::getter_mTaskNameAtIndex (const GALGAS_uint & inIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   GALGAS_lstring result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     result = p->mObject.mProperty_mTaskName ;
   }
   return result ;
@@ -13319,14 +13319,14 @@ GALGAS_lstring GALGAS_taskList::getter_mTaskNameAtIndex (const GALGAS_uint & inI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint GALGAS_taskList::getter_mPriorityAtIndex (const GALGAS_uint & inIndex,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_lbigint GALGAS_taskListAST::getter_mPriorityAtIndex (const GALGAS_uint & inIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   GALGAS_lbigint result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     result = p->mObject.mProperty_mPriority ;
   }
   return result ;
@@ -13334,14 +13334,14 @@ GALGAS_lbigint GALGAS_taskList::getter_mPriorityAtIndex (const GALGAS_uint & inI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint GALGAS_taskList::getter_mStackSizeAtIndex (const GALGAS_uint & inIndex,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_lbigint GALGAS_taskListAST::getter_mStackSizeAtIndex (const GALGAS_uint & inIndex,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   GALGAS_lbigint result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     result = p->mObject.mProperty_mStackSize ;
   }
   return result ;
@@ -13349,14 +13349,14 @@ GALGAS_lbigint GALGAS_taskList::getter_mStackSizeAtIndex (const GALGAS_uint & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structurePropertyListAST GALGAS_taskList::getter_mVarListAtIndex (const GALGAS_uint & inIndex,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_structurePropertyListAST GALGAS_taskListAST::getter_mVarListAtIndex (const GALGAS_uint & inIndex,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   GALGAS_structurePropertyListAST result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     result = p->mObject.mProperty_mVarList ;
   }
   return result ;
@@ -13364,14 +13364,14 @@ GALGAS_structurePropertyListAST GALGAS_taskList::getter_mVarListAtIndex (const G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_functionDeclarationListAST GALGAS_taskList::getter_mTaskProcListAtIndex (const GALGAS_uint & inIndex,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) const {
+GALGAS_functionDeclarationListAST GALGAS_taskListAST::getter_mTaskProcListAtIndex (const GALGAS_uint & inIndex,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   GALGAS_functionDeclarationListAST result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     result = p->mObject.mProperty_mTaskProcList ;
   }
   return result ;
@@ -13379,14 +13379,14 @@ GALGAS_functionDeclarationListAST GALGAS_taskList::getter_mTaskProcListAtIndex (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskSetupListAST GALGAS_taskList::getter_mTaskSetupListASTAtIndex (const GALGAS_uint & inIndex,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_taskSetupListAST GALGAS_taskListAST::getter_mTaskSetupListASTAtIndex (const GALGAS_uint & inIndex,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   GALGAS_taskSetupListAST result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     result = p->mObject.mProperty_mTaskSetupListAST ;
   }
   return result ;
@@ -13394,14 +13394,14 @@ GALGAS_taskSetupListAST GALGAS_taskList::getter_mTaskSetupListASTAtIndex (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_syncInstructionBranchListAST GALGAS_taskList::getter_mGuardedCommandListAtIndex (const GALGAS_uint & inIndex,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) const {
+GALGAS_syncInstructionBranchListAST GALGAS_taskListAST::getter_mGuardedCommandListAtIndex (const GALGAS_uint & inIndex,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   GALGAS_syncInstructionBranchListAST result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     result = p->mObject.mProperty_mGuardedCommandList ;
   }
   return result ;
@@ -13409,14 +13409,14 @@ GALGAS_syncInstructionBranchListAST GALGAS_taskList::getter_mGuardedCommandListA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_taskList::getter_mEndOfTaskDeclarationAtIndex (const GALGAS_uint & inIndex,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) const {
+GALGAS_location GALGAS_taskListAST::getter_mEndOfTaskDeclarationAtIndex (const GALGAS_uint & inIndex,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  cCollectionElement_taskListAST * p = (cCollectionElement_taskListAST *) attributes.ptr () ;
   GALGAS_location result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    macroValidSharedObject (p, cCollectionElement_taskListAST) ;
     result = p->mObject.mProperty_mEndOfTaskDeclaration ;
   }
   return result ;
@@ -13426,82 +13426,82 @@ GALGAS_location GALGAS_taskList::getter_mEndOfTaskDeclarationAtIndex (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_taskList::cEnumerator_taskList (const GALGAS_taskList & inEnumeratedObject,
-                                            const typeEnumerationOrder inOrder) :
+cEnumerator_taskListAST::cEnumerator_taskListAST (const GALGAS_taskListAST & inEnumeratedObject,
+                                                  const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList_2D_element cEnumerator_taskList::current (LOCATION_ARGS) const {
-  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_taskList) ;
+GALGAS_taskListAST_2D_element cEnumerator_taskListAST::current (LOCATION_ARGS) const {
+  const cCollectionElement_taskListAST * p = (const cCollectionElement_taskListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskListAST) ;
   return p->mObject ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_taskList::current_mTaskName (LOCATION_ARGS) const {
-  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_taskList) ;
+GALGAS_lstring cEnumerator_taskListAST::current_mTaskName (LOCATION_ARGS) const {
+  const cCollectionElement_taskListAST * p = (const cCollectionElement_taskListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskListAST) ;
   return p->mObject.mProperty_mTaskName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint cEnumerator_taskList::current_mPriority (LOCATION_ARGS) const {
-  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_taskList) ;
+GALGAS_lbigint cEnumerator_taskListAST::current_mPriority (LOCATION_ARGS) const {
+  const cCollectionElement_taskListAST * p = (const cCollectionElement_taskListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskListAST) ;
   return p->mObject.mProperty_mPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint cEnumerator_taskList::current_mStackSize (LOCATION_ARGS) const {
-  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_taskList) ;
+GALGAS_lbigint cEnumerator_taskListAST::current_mStackSize (LOCATION_ARGS) const {
+  const cCollectionElement_taskListAST * p = (const cCollectionElement_taskListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskListAST) ;
   return p->mObject.mProperty_mStackSize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structurePropertyListAST cEnumerator_taskList::current_mVarList (LOCATION_ARGS) const {
-  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_taskList) ;
+GALGAS_structurePropertyListAST cEnumerator_taskListAST::current_mVarList (LOCATION_ARGS) const {
+  const cCollectionElement_taskListAST * p = (const cCollectionElement_taskListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskListAST) ;
   return p->mObject.mProperty_mVarList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_functionDeclarationListAST cEnumerator_taskList::current_mTaskProcList (LOCATION_ARGS) const {
-  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_taskList) ;
+GALGAS_functionDeclarationListAST cEnumerator_taskListAST::current_mTaskProcList (LOCATION_ARGS) const {
+  const cCollectionElement_taskListAST * p = (const cCollectionElement_taskListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskListAST) ;
   return p->mObject.mProperty_mTaskProcList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskSetupListAST cEnumerator_taskList::current_mTaskSetupListAST (LOCATION_ARGS) const {
-  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_taskList) ;
+GALGAS_taskSetupListAST cEnumerator_taskListAST::current_mTaskSetupListAST (LOCATION_ARGS) const {
+  const cCollectionElement_taskListAST * p = (const cCollectionElement_taskListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskListAST) ;
   return p->mObject.mProperty_mTaskSetupListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_syncInstructionBranchListAST cEnumerator_taskList::current_mGuardedCommandList (LOCATION_ARGS) const {
-  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_taskList) ;
+GALGAS_syncInstructionBranchListAST cEnumerator_taskListAST::current_mGuardedCommandList (LOCATION_ARGS) const {
+  const cCollectionElement_taskListAST * p = (const cCollectionElement_taskListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskListAST) ;
   return p->mObject.mProperty_mGuardedCommandList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cEnumerator_taskList::current_mEndOfTaskDeclaration (LOCATION_ARGS) const {
-  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_taskList) ;
+GALGAS_location cEnumerator_taskListAST::current_mEndOfTaskDeclaration (LOCATION_ARGS) const {
+  const cCollectionElement_taskListAST * p = (const cCollectionElement_taskListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskListAST) ;
   return p->mObject.mProperty_mEndOfTaskDeclaration ;
 }
 
@@ -13510,42 +13510,42 @@ GALGAS_location cEnumerator_taskList::current_mEndOfTaskDeclaration (LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                   @taskList type                                                    *
+//                                                  @taskListAST type                                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_taskList ("taskList",
-                                 NULL) ;
+kTypeDescriptor_GALGAS_taskListAST ("taskListAST",
+                                    NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_taskList::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_taskList ;
+const C_galgas_type_descriptor * GALGAS_taskListAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_taskListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_taskList::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_taskListAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_taskList (*this)) ;
+    macroMyNew (result, GALGAS_taskListAST (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList GALGAS_taskList::extractObject (const GALGAS_object & inObject,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  GALGAS_taskList result ;
-  const GALGAS_taskList * p = (const GALGAS_taskList *) inObject.embeddedObject () ;
+GALGAS_taskListAST GALGAS_taskListAST::extractObject (const GALGAS_object & inObject,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_taskListAST result ;
+  const GALGAS_taskListAST * p = (const GALGAS_taskListAST *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_taskList *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_taskListAST *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("taskList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("taskListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

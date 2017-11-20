@@ -30,7 +30,7 @@ struct @intermediateCodeStruct {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalVariableMapIR {
-  @PLMType mType
+#  @PLMType mType
   @bool mGenerateVolatile
   @objectIR mInitialValue
   insert insertKey error message "** internal error **"

@@ -179,6 +179,7 @@ proc buildSemanticContext
   !@declarationDecorationList outDecoratedDeclarationList
 {
   outSemanticContext = .default
+  outDecoratedDeclarationList = {}
 #--- Enter init routines
   for initRoutine in inAST.mInitListAST do
     [initRoutine enterInContext !?context:outSemanticContext]
@@ -189,13 +190,16 @@ proc buildSemanticContext
   end
 #--- Enter standalone procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
-  [inAST.mStandAloneFunctionDeclarationListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
+  [inAST.mStandAloneFunctionDeclarationListAST enterFunctionInContext
+     !selfTypeName:"" 
+     !?context:outSemanticContext
+     !?outDecoratedDeclarationList
+   ]
   [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #---
   outSubprogramInvocationGraph = .emptyGraph
-  outDecoratedDeclarationList = {}
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext
       !procedureDeclarationList:inAST.mStandAloneFunctionDeclarationListAST
@@ -222,7 +226,11 @@ proc buildSemanticContext
     !sourceFile:inSourceFile
   )
 #--- Enter tasks
-  [inAST.mTaskListAST enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
+  [inAST.mTaskListAST enterInContext
+     !?context: outSemanticContext
+     !?outDecoratedDeclarationList
+     !?staticStringMap:ioGlobalLiteralStringMap
+   ]
 #--- Check global var declaration
   if @uint.errorCount == 0 then
     for globalVar in inAST.mGlobalVarDeclarationListAST do

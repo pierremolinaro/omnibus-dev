@@ -123,17 +123,6 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
-  [inAST.mStandAloneFunctionDeclarationListAST functionSemanticAnalysis
-    !receiverType:voidType ()
-    !context:inSemanticContext
-    !?temporary:temporaries
-    !?intermediateCode:outIntermediateCodeStruct
-  ]
-  [inAST.mTaskListAST semanticAnalysis
-    !context:inSemanticContext
-    !?temporary:temporaries
-    !?intermediateCode:outIntermediateCodeStruct
-  ]
   [inAST.mStandAloneSystemRoutineListAST systemRoutineSemanticAnalysis
     !receiverType:voidType ()
     !context:inSemanticContext
