@@ -62,7 +62,7 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
       ?@accessibleEntities accessibleEntities
       !?optimizing
     )
-  #--- Suppress global constant
+  #--- Suppress unused global constants
     @globalConstantMapIR globalConstantMap = {}
     for constant in ioIntermediateCodeStruct.mGlobalConstantMap do
       if [accessibleEntities.mGlobalVariableSet hasKey !constant.lkey.string] then
@@ -78,7 +78,6 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
       if [accessibleEntities.mGlobalVariableSet hasKey !globalVariable.lkey.string] then
         [!?globalVariableMap insertKey
           !globalVariable.lkey
-          !globalVariable.mType
           !globalVariable.mGenerateVolatile
           !globalVariable.mInitialValue
         ]

@@ -12588,7 +12588,7 @@ GALGAS_ast::GALGAS_ast (const GALGAS_globalVarDeclarationList & inOperand0,
                         const GALGAS_bootList & inOperand11,
                         const GALGAS_initList & inOperand12,
                         const GALGAS_panicClauseListAST & inOperand13,
-                        const GALGAS_taskList & inOperand14,
+                        const GALGAS_taskListAST & inOperand14,
                         const GALGAS_checkTargetListAST & inOperand15,
                         const GALGAS_moduleDeclarationListAST & inOperand16,
                         const GALGAS_moduleInstanciationListAST & inOperand17) :
@@ -12629,7 +12629,7 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
                      GALGAS_bootList::constructor_emptySortedList (HERE),
                      GALGAS_initList::constructor_emptySortedList (HERE),
                      GALGAS_panicClauseListAST::constructor_emptySortedList (HERE),
-                     GALGAS_taskList::constructor_emptyList (HERE),
+                     GALGAS_taskListAST::constructor_emptyList (HERE),
                      GALGAS_checkTargetListAST::constructor_emptyList (HERE),
                      GALGAS_moduleDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_moduleInstanciationListAST::constructor_emptyList (HERE)) ;
@@ -12651,7 +12651,7 @@ GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_globalVarDeclarationList & 
                                         const GALGAS_bootList & inOperand11,
                                         const GALGAS_initList & inOperand12,
                                         const GALGAS_panicClauseListAST & inOperand13,
-                                        const GALGAS_taskList & inOperand14,
+                                        const GALGAS_taskListAST & inOperand14,
                                         const GALGAS_checkTargetListAST & inOperand15,
                                         const GALGAS_moduleDeclarationListAST & inOperand16,
                                         const GALGAS_moduleInstanciationListAST & inOperand17 
@@ -12886,7 +12886,7 @@ GALGAS_panicClauseListAST GALGAS_ast::getter_mPanicClauseListAST (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskList GALGAS_ast::getter_mTaskListAST (UNUSED_LOCATION_ARGS) const {
+GALGAS_taskListAST GALGAS_ast::getter_mTaskListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mTaskListAST ;
 }
 

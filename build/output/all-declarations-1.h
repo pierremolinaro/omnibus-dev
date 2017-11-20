@@ -4389,11 +4389,11 @@ class GALGAS_string function_llvmTitleComment (const class GALGAS_string & const
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             @taskList_2D_element struct                                             *
+//                                           @taskListAST_2D_element struct                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_taskList_2D_element : public AC_GALGAS_root {
+class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_mTaskName ;
 
@@ -4416,23 +4416,23 @@ class GALGAS_taskList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_taskList_2D_element constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_taskListAST_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_taskList_2D_element (void) ;
+  public : GALGAS_taskListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_taskList_2D_element (void) ;
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_taskListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_taskList_2D_element (const GALGAS_lstring & in_mTaskName,
-                                       const GALGAS_lbigint & in_mPriority,
-                                       const GALGAS_lbigint & in_mStackSize,
-                                       const GALGAS_structurePropertyListAST & in_mVarList,
-                                       const GALGAS_functionDeclarationListAST & in_mTaskProcList,
-                                       const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
-                                       const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
-                                       const GALGAS_location & in_mEndOfTaskDeclaration) ;
+  public : GALGAS_taskListAST_2D_element (const GALGAS_lstring & in_mTaskName,
+                                          const GALGAS_lbigint & in_mPriority,
+                                          const GALGAS_lbigint & in_mStackSize,
+                                          const GALGAS_structurePropertyListAST & in_mVarList,
+                                          const GALGAS_functionDeclarationListAST & in_mTaskProcList,
+                                          const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
+                                          const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
+                                          const GALGAS_location & in_mEndOfTaskDeclaration) ;
 
 //-- Start of generic part --*
 
@@ -4440,26 +4440,26 @@ class GALGAS_taskList_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_taskList_2D_element extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_taskListAST_2D_element extractObject (const GALGAS_object & inObject,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_taskList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                    const class GALGAS_lbigint & inOperand1,
-                                                                    const class GALGAS_lbigint & inOperand2,
-                                                                    const class GALGAS_structurePropertyListAST & inOperand3,
-                                                                    const class GALGAS_functionDeclarationListAST & inOperand4,
-                                                                    const class GALGAS_taskSetupListAST & inOperand5,
-                                                                    const class GALGAS_syncInstructionBranchListAST & inOperand6,
-                                                                    const class GALGAS_location & inOperand7
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_taskListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                       const class GALGAS_lbigint & inOperand1,
+                                                                       const class GALGAS_lbigint & inOperand2,
+                                                                       const class GALGAS_structurePropertyListAST & inOperand3,
+                                                                       const class GALGAS_functionDeclarationListAST & inOperand4,
+                                                                       const class GALGAS_taskSetupListAST & inOperand5,
+                                                                       const class GALGAS_syncInstructionBranchListAST & inOperand6,
+                                                                       const class GALGAS_location & inOperand7
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_taskList_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_taskListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4487,12 +4487,12 @@ class GALGAS_taskList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_taskList_2D_element class
+} ; // End of GALGAS_taskListAST_2D_element class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskList_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskListAST_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

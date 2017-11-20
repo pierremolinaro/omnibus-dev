@@ -218,6 +218,7 @@ method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePre
 method @functionDeclarationListAST enterFunctionInContext 
   ?selfTypeName:let @string inSelfTypeName
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
 {
   for function in self do
   #--- Signature
@@ -225,13 +226,28 @@ method @functionDeclarationListAST enterFunctionInContext
   #--- Return type
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
   #--- Attributes
+    var warnIfUnused = true
     var globalFunction = false
     var canMutateProperties = false
     for (attribute) in function.mFunctionAttributeList do
-      if attribute.string == exportedAttribute () then
+      if attribute.string == noUnusedWarningAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
+        end
+        warnIfUnused = false    
+      elsif attribute.string == exportedAttribute () then
+        if globalFunction then
+          error attribute : "duplicated @" + exportedAttribute () + " attribute"
+        end
         globalFunction = true
       elsif attribute.string == mutatingAttribute () then
+        if canMutateProperties then
+          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+        end
         canMutateProperties = true
+      else
+        error attribute : "unknown attribute; available attributes are @"
+          + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + ", @" + exportedAttribute ()
       end
     end
     let canAccessProperties = function.mMode != .userMode
@@ -256,6 +272,20 @@ method @functionDeclarationListAST enterFunctionInContext
         !canAccessProperties
       }
     ]
+  #---------------- Add decorated declaration
+    ioDecoratedDeclarationList += !@decoratedFunction.new {
+      !inSelfTypeName
+      !function.mMode
+      !function.mPublicFunction
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+      !function.mFunctionReturnTypeName
+      !function.mFunctionInstructionList
+      !function.mEndOfFunctionDeclaration
+      !warnIfUnused
+      !globalFunction
+      
+    }
   end
 }
 
@@ -263,49 +293,48 @@ method @functionDeclarationListAST enterFunctionInContext
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionDeclarationListAST functionSemanticAnalysis
-  ?receiverType:@PLMType inReceiverType
+class @decoratedFunction : @abstractDecoratedDeclaration {
+  @string mSelfTypeName
+  @mode mMode
+  @bool mPublicFunction
+  @lstring mFunctionName
+  @routineFormalArgumentListAST mFunctionFormalArgumentList
+  @lstring mFunctionReturnTypeName # Empty string if no return value
+  @instructionListAST mFunctionInstructionList
+  @location mEndOfFunctionDeclaration
+  @bool mWarnIfUnused
+  @bool misGlobalProcedure
+}
+
+#·······················································································································
+
+override method @decoratedFunction semanticAnalysis
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for procedure in self do
-    var warnIfUnused = true
-    var globalProcedure = false
-    for (attribute) in procedure.mFunctionAttributeList do
-      if attribute.string == noUnusedWarningAttribute () then
-        if not warnIfUnused then
-          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
-        end
-        warnIfUnused = false    
-      elsif attribute.string == exportedAttribute () then
-        if globalProcedure then
-          error attribute : "duplicated @" + exportedAttribute () + " attribute"
-        end
-        globalProcedure = true    
-      else
-        error attribute : "unknown attribute; available attributes are @"
-          + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + ", @" + exportedAttribute ()
-      end
-    end
-    routineSemanticAnalysis (
-      !receiverType:inReceiverType
-      !.function {!executionMode:procedure.mMode}
-      !procedure.mMode
-      !procedure.mFunctionName
-      !procedure.mFunctionFormalArgumentList
-      !returnTypeName:procedure.mFunctionReturnTypeName
-      !procedure.mFunctionInstructionList
-      !procedure.mEndOfFunctionDeclaration
-      !directAccessToPropertiesAllowed:true
-      !propertiesAreMutable:true
-      !warnIfUnused:warnIfUnused
-      !globalFunction:globalProcedure
-      !context:inSemanticContext
-      !?temporary:ioTemporaries
-      !?intermediateCode:ioIntermediateCodeStruct
-    )
+  let @PLMType receiverType = if mSelfTypeName == "" then
+    voidType ()
+  else
+    [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap ![mSelfTypeName nowhere]} type]
   end
+  routineSemanticAnalysis (
+    !receiverType:receiverType
+    !.function {!executionMode:mMode}
+    !mMode
+    !mFunctionName
+    !mFunctionFormalArgumentList
+    !returnTypeName:mFunctionReturnTypeName
+    !mFunctionInstructionList
+    !mEndOfFunctionDeclaration
+    !directAccessToPropertiesAllowed:true
+    !propertiesAreMutable:true
+    !warnIfUnused:mWarnIfUnused
+    !globalFunction:misGlobalProcedure
+    !context:inSemanticContext
+    !?temporary:ioTemporaries
+    !?intermediateCode:ioIntermediateCodeStruct
+  )
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

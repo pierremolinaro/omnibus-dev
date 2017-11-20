@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @taskList {
+list @taskListAST {
   @lstring mTaskName
   @lbigint mPriority
   @lbigint mStackSize
@@ -118,7 +118,7 @@ syntax extension plm_syntax {
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for variable in mVarList do
       if variable.mPropertyTypeName.string != "" then
@@ -154,8 +154,9 @@ map @taskMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskList enterInContext
+method @taskListAST enterInContext
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
   for task in self do
@@ -195,21 +196,33 @@ method @taskList enterInContext
       !task.mTaskName.string
       !.llvmStructureConstant{!type:taskType !values:initialValueList}
   #--- Task procedures
-    [task.mTaskProcList enterFunctionInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
+    [task.mTaskProcList enterFunctionInContext
+      !selfTypeName:"$" + task.mTaskName
+      !?context:ioContext
+      !?ioDecoratedDeclarationList
+    ]
   end
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedTaskList.new {!self}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskList semanticAnalysis
+class @decoratedTaskList : @abstractDecoratedDeclaration {
+  @taskListAST mTaskList
+}
+
+#·······················································································································
+
+override method @decoratedTaskList semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   @stringset prioritySet = {}
-  for task in self do
+  for task in mTaskList do
     [task semanticAnalysis
       !context:inContext
       !?temporary:ioTemporaries
@@ -225,7 +238,7 @@ method @taskList semanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskList-element semanticAnalysis
+method @taskListAST-element semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
