@@ -15,8 +15,8 @@ struct @intermediateCodeStruct {
   @stringset mRequiredProcedureSet
   @bootListIR mBootList
   @initListIR mInitList
-  @instructionListIR mPanicSetupInstructionListIR
-  @instructionListIR mPanicLoopInstructionListIR
+  @instructionListSortedListIR mPanicSetupInstructionListIR
+  @instructionListSortedListIR mPanicLoopInstructionListIR
   @taskMapIR mTaskMapIR
   @globalTaskVariableList mGlobalTaskVariableList
   @uint mMaxBranchOfOnInstructions

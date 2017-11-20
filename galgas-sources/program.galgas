@@ -256,7 +256,7 @@ private proc addTargetSpecificFiles
   ioAST.mStandAloneSystemRoutineListAST = ast.mStandAloneSystemRoutineListAST + ioAST.mStandAloneSystemRoutineListAST
   ioAST.mGuardListAST = ast.mGuardListAST + ioAST.mGuardListAST
   ioAST.mTargetListAST += ast.mTargetListAST
-  ioAST.mPanicClauseListAST += ast.mPanicClauseListAST
+#  ioAST.mPanicClauseListAST += ast.mPanicClauseListAST
   ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
   ioAST.mTaskListAST = ast.mTaskListAST + ioAST.mTaskListAST
   ioAST.mModuleDeclarationListAST = ast.mModuleDeclarationListAST + ioAST.mModuleDeclarationListAST

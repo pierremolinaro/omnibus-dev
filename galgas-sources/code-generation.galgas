@@ -288,77 +288,88 @@ private proc generateCodeFiles
     !sectionIRlist
   )
 #----------------------------------------- Panic
-  if not [option plm_options.noPanicGeneration value] then
-    let s = getTargetTextFile (
-       !currentDir:inCurrentDirectory
-       !from:inTargetName.string + "/" + inTargetParameters.mTargetPanic_LL_filePath
-    )
-    let s1 = [s stringByReplacingStringByString !"!PANICCODE!" !generationContext.mPanicCodeLLVMType]
-    let s2 = [s1 stringByReplacingStringByString !"!PANICLINE!" !generationContext.mPanicLineLLVMType]
-    llvmCode += s2
-    llvmCode += llvmTitleComment (!"Raise Panic internal")
-    llvmCode += "define internal void @raise.panic.internal ("
-    llvmCode += generationContext.mPanicLineLLVMType + " %in.LINE, "
-    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
-    llvmCode += "i8* %in.FILE)" + llvmAttributeFunction () + "noreturn {\n"
-  #--- First argument: line
-    llvmCode += "  " + llvmNameForLocalVariable (!"LINE") + " = alloca "
-    llvmCode += generationContext.mPanicLineLLVMType + "\n"
-    llvmCode += "  store " + generationContext.mPanicLineLLVMType + " %in.LINE, "
-    llvmCode += generationContext.mPanicLineLLVMType + " * " + llvmNameForLocalVariable (!"LINE") + "\n"
-  #--- Second argument : code
-    llvmCode += "  " + llvmNameForLocalVariable (!"CODE")
-    llvmCode += " = alloca " + generationContext.mPanicCodeLLVMType + "\n"
-    llvmCode += "  store " + generationContext.mPanicCodeLLVMType + " %in.CODE, "
-    llvmCode += generationContext.mPanicCodeLLVMType + " * " + llvmNameForLocalVariable (!"CODE") + "\n"
-  #--- Third argument : file    
-    llvmCode += "  " + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
-    llvmCode += "  store i8* %in.FILE, i8** " + llvmNameForLocalVariable (!"FILE") + "\n"
-    [inIntermediateCodeStruct.mPanicSetupInstructionListIR instructionListLLVMCode
-      !?llvmCode
-      !generationContext
-      !?generationAdds
-    ]
-    llvmCode += "  br label %panic.loop\n\n"
-    llvmCode += "panic.loop:\n"
-    [inIntermediateCodeStruct.mPanicLoopInstructionListIR instructionListLLVMCode
-      !?llvmCode
-      !generationContext
-      !?generationAdds
-    ]
-    llvmCode += "  br label %panic.loop\n"
-    llvmCode += "}\n\n"
-  #--- Panic for isr
-    [!?generationAdds.mStaticStringMap findOrAddStaticString !"" ?let emptyStringIndex]
-    llvmCode += llvmTitleComment (!"Panic for ISR")
-    llvmCode += "define internal void @panic.isr (" + generationContext.mPanicCodeLLVMType + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
-    llvmCode += "  %str.FILE = load i8*, i8** " + literalStringName (!emptyStringIndex) + "\n"
-    llvmCode += "  call void @raise.panic.internal ("    
-    llvmCode += generationContext.mPanicLineLLVMType + " 0, "
-    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
-    llvmCode += "i8* %str.FILE"
-    llvmCode += " )\n"    
-    llvmCode += "  unreachable\n"    
-    llvmCode += "}\n\n"    
-  #--- File specific routines
-    for (filePath) in inSourceFileAbsolutePathSet do
-      [!?generationAdds.mStaticStringMap findOrAddStaticString
-        ![[filePath lastPathComponent] stringByDeletingPathExtension]
-        ?let staticStringIndex
-      ]
-      let routineName = "@raise.panic." + staticStringIndex
-      llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
-      llvmCode += "define internal void " + routineName + " ("
-      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
-      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode)" + llvmAttributeFunction () + "noreturn {\n"
-      llvmCode += "  %str.FILE = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
-      llvmCode += "  call void @raise.panic ("
-      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
-      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode, i8* %str.FILE)\n"
-      llvmCode += "  unreachable\n"
-      llvmCode += "}\n\n"
-    end
-  end
+  generatePanicCode (
+    !? llvmCode
+    !currentDir: inCurrentDirectory
+    !sourceFileSet: inSourceFileAbsolutePathSet
+    !targetParameters: inTargetParameters
+    !targetName: inTargetName
+    !generationContext: generationContext
+    !?generationAdds: generationAdds
+    !setup: inIntermediateCodeStruct.mPanicSetupInstructionListIR
+    !loop: inIntermediateCodeStruct.mPanicLoopInstructionListIR
+  )
+#  if not [option plm_options.noPanicGeneration value] then
+#    let s = getTargetTextFile (
+#       !currentDir:inCurrentDirectory
+#       !from:inTargetName.string + "/" + inTargetParameters.mTargetPanic_LL_filePath
+#    )
+#    let s1 = [s stringByReplacingStringByString !"!PANICCODE!" !generationContext.mPanicCodeLLVMType]
+#    let s2 = [s1 stringByReplacingStringByString !"!PANICLINE!" !generationContext.mPanicLineLLVMType]
+#    llvmCode += s2
+#    llvmCode += llvmTitleComment (!"Raise Panic internal")
+#    llvmCode += "define internal void @raise.panic.internal ("
+#    llvmCode += generationContext.mPanicLineLLVMType + " %in.LINE, "
+#    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
+#    llvmCode += "i8* %in.FILE)" + llvmAttributeFunction () + "noreturn {\n"
+#  #--- First argument: line
+#    llvmCode += "  " + llvmNameForLocalVariable (!"LINE") + " = alloca "
+#    llvmCode += generationContext.mPanicLineLLVMType + "\n"
+#    llvmCode += "  store " + generationContext.mPanicLineLLVMType + " %in.LINE, "
+#    llvmCode += generationContext.mPanicLineLLVMType + " * " + llvmNameForLocalVariable (!"LINE") + "\n"
+#  #--- Second argument : code
+#    llvmCode += "  " + llvmNameForLocalVariable (!"CODE")
+#    llvmCode += " = alloca " + generationContext.mPanicCodeLLVMType + "\n"
+#    llvmCode += "  store " + generationContext.mPanicCodeLLVMType + " %in.CODE, "
+#    llvmCode += generationContext.mPanicCodeLLVMType + " * " + llvmNameForLocalVariable (!"CODE") + "\n"
+#  #--- Third argument : file    
+#    llvmCode += "  " + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
+#    llvmCode += "  store i8* %in.FILE, i8** " + llvmNameForLocalVariable (!"FILE") + "\n"
+#    [inIntermediateCodeStruct.mPanicSetupInstructionListIR instructionListLLVMCode
+#      !?llvmCode
+#      !generationContext
+#      !?generationAdds
+#    ]
+#    llvmCode += "  br label %panic.loop\n\n"
+#    llvmCode += "panic.loop:\n"
+#    [inIntermediateCodeStruct.mPanicLoopInstructionListIR instructionListLLVMCode
+#      !?llvmCode
+#      !generationContext
+#      !?generationAdds
+#    ]
+#    llvmCode += "  br label %panic.loop\n"
+#    llvmCode += "}\n\n"
+#  #--- Panic for isr
+#    [!?generationAdds.mStaticStringMap findOrAddStaticString !"" ?let emptyStringIndex]
+#    llvmCode += llvmTitleComment (!"Panic for ISR")
+#    llvmCode += "define internal void @panic.isr (" + generationContext.mPanicCodeLLVMType + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
+#    llvmCode += "  %str.FILE = load i8*, i8** " + literalStringName (!emptyStringIndex) + "\n"
+#    llvmCode += "  call void @raise.panic.internal ("    
+#    llvmCode += generationContext.mPanicLineLLVMType + " 0, "
+#    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
+#    llvmCode += "i8* %str.FILE"
+#    llvmCode += " )\n"    
+#    llvmCode += "  unreachable\n"    
+#    llvmCode += "}\n\n"    
+#  #--- File specific routines
+#    for (filePath) in inSourceFileAbsolutePathSet do
+#      [!?generationAdds.mStaticStringMap findOrAddStaticString
+#        ![[filePath lastPathComponent] stringByDeletingPathExtension]
+#        ?let staticStringIndex
+#      ]
+#      let routineName = "@raise.panic." + staticStringIndex
+#      llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
+#      llvmCode += "define internal void " + routineName + " ("
+#      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
+#      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode)" + llvmAttributeFunction () + "noreturn {\n"
+#      llvmCode += "  %str.FILE = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
+#      llvmCode += "  call void @raise.panic ("
+#      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
+#      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode, i8* %str.FILE)\n"
+#      llvmCode += "  unreachable\n"
+#      llvmCode += "}\n\n"
+#    end
+#  end
 #----------------------------------------- Copy routines
   let keyList = [inTypeMap allKeyList]
   llvmCode += llvmTitleComment (!"PLM Copy Functions")
