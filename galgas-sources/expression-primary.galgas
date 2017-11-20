@@ -623,7 +623,7 @@ private proc handleArrayAccessInExpression
 {
 #--- Check current object is an array
   if [[[ioResult type] mKind] isArrayType] then
-    [[[ioResult type] mKind] arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize]
+    [[[ioResult type] mKind] arrayType ?elementType:let elementType ?size:let @bigint arraySize]
     handleArraySubscript (
       !self: inSelfType
       !inGuard: inGuard

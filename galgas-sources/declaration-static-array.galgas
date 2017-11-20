@@ -440,7 +440,7 @@ override method @staticListAST enterInContext
     !.all
     !plmNameForStaticListType (!mStaticListName)
     !.arrayType {
-      !typeName2:.new {!llvmNameForStaticListType (!mStaticListName) !mStaticListName.location}
+#      !typeName2:.new {!llvmNameForStaticListType (!mStaticListName) !mStaticListName.location}
       !elementType:elementType
       !size:[stringValueList length]
     }
