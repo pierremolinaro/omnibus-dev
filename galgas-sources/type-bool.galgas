@@ -53,7 +53,7 @@ override method @booleanDeclarationAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !type:.boolean !index:[ioContext.mTypeMap count]]
+  [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !type:booleanType () !index:[ioContext.mTypeMap count]]
 #--- Enter boolean operators
   enterBooleanOperators (
     !boolTypeName:mBooleanTypeName

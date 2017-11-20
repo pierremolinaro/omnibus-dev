@@ -188,47 +188,24 @@ proc analyzeEffectiveParameters
       }
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
-      switch inSelfType
-      case void :
-        error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
-      case opaque (* * * *) :
-        error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case arrayType (* * * * * * * *) :
-        error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case boolean :
-        error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case staticInteger :
-        error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-       case literalString :
-        error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case enumeration (* * * *) :
-        error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case function (*) :
-        error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case pointer (*) :
-        error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case integer (* * * * * *) :
-        error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case structure (* propertyMap * * * *) :
-        [propertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]
-        switch propertyAccess
-        case nonVirtualMethod (*) :
-          error inErrorLocation : "a method cannot be used in this context"
-        case constantProperty (*) :
-          error inErrorLocation : "a constant property cannot be used here"
-        case indexed (@PLMType propertyType @uint propertyIndex) :
-          [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
-          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-            !inSelfType
-            !llvmNameForSelf ()
-            !propertyType
-            !property_llvmName
-            !propertyIndex
-            !name
-          ]
-          parameterList += !effective_mEffectiveParameterKind !effective_mSelector !propertyType
-          ioEffectiveParameterListIR += !.outputInput !.reference {!type:propertyType !llvmName:property_llvmName}
-        end
+      [inSelfType.mPropertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]
+      switch propertyAccess
+      case nonVirtualMethod (*) :
+        error inErrorLocation : "a method cannot be used in this context"
+      case constantProperty (*) :
+        error inErrorLocation : "a constant property cannot be used here"
+      case indexed (@PLMType propertyType @uint propertyIndex) :
+        [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
+        [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+          !inSelfType
+          !llvmNameForSelf ()
+          !propertyType
+          !property_llvmName
+          !propertyIndex
+          !name
+        ]
+        parameterList += !effective_mEffectiveParameterKind !effective_mSelector !propertyType
+        ioEffectiveParameterListIR += !.outputInput !.reference {!type:propertyType !llvmName:property_llvmName}
       end    
     end
   end

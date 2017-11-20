@@ -110,14 +110,13 @@ override method @opaqueTypeDeclarationAST enterInContext
   @semanticTemporariesStruct temporaries = .default
   variableMapWithConstants (
     !context:ioContext
-#    ?*
     ?@universalValuedObjectMapForContext universalMap
   )
   [mSizeExpression analyzeExpression
-    !self:.void
+    !self:voidType ()
     !inGuard:false
     !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:ioContext
     !mode:.bootMode
     !?temporary:temporaries
@@ -135,7 +134,7 @@ override method @opaqueTypeDeclarationAST enterInContext
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
-      !type:.opaque {!bitCount:bitSize !attributes:flags !plmTypeName:mOpaqueTypeName !constructorMap:constructorMap}
+      !type:.new{!{}!.opaque {!bitCount:bitSize !attributes:flags !plmTypeName:mOpaqueTypeName !constructorMap:constructorMap}}
       !index:[ioContext.mTypeMap count]
     ]
   end

@@ -76,24 +76,24 @@ override method @copyFromReferencesIR enterAccessibleEntities
 method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
   let typeName = [self llvmTypeName]
   @bool generate
-  switch self
+  switch [self mKind]
   case void :
     generate = false
   case boolean :
     generate = true
   case literalString :
     generate = true
-  case enumeration (* * * *) :
+  case enumeration (* * *) :
     generate = true
-  case structure (* * * attributes * *) :
+  case structure (* * attributes * *) :
     generate = [attributes copyable]
-  case integer (* * * * * *) :
+  case integer (* * * * *) :
     generate = true
   case staticInteger :
     generate = false
   case opaque (* @PLMTypeAttributes attributes * *) :
     generate = [attributes copyable]
-  case arrayType (* * * * * @PLMTypeAttributes attributes * *) :
+  case arrayType (* * * * @PLMTypeAttributes attributes * *) :
     generate = [attributes copyable]
   case function (*) :
     generate = false

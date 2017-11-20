@@ -280,7 +280,7 @@ override method @staticListAST enterInContext
         !true # mCanAccessProperties # Routine is declared with @access attribute
         !true # mCanMutateProperties # Routine is declared with @mutating attribute
      }
-     let type = @PLMType.function {!descriptor:descriptor}
+     let type = functionType (!descriptor)
       if not [ioContext.mTypeMap hasKey !routineMangledName] then
         [!?ioContext.mTypeMap insertType
           !lkey:routineMangledName
@@ -299,17 +299,19 @@ override method @staticListAST enterInContext
   end
   [!?ioContext.mStaticListMap insertKey !mStaticListName !propertyList]
 #-------------------------------------------------------------------- Enter element type in type map
-  let kind = @PLMType.structure {
-    !typeName:llvmNameForStaticListElementType (!mStaticListName)
-    !propertyMap:propertyMap
-    !propertyList:propertyList
-    !attributes:.none
-    !guardMap:{}
-    !constructorMap:{}
+  let type = @PLMType.new {
+    !propertyMap
+    !.structure {
+      !typeName:llvmNameForStaticListElementType (!mStaticListName)
+      !propertyList:propertyList
+      !attributes:.none
+      !guardMap:{}
+      !constructorMap:{}
+    }
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmElementTypeName
-    !type:kind
+    !type:type
     !index:[ioContext.mTypeMap count]
   ]
 #-------------------------------------------------------------------- Enter static list values
@@ -324,7 +326,7 @@ override method @staticListAST enterInContext
       for (operand endOfExp) in value.mExpressions, (* type) in propertyList do
         switch operand
         case expression (@expressionAST exp) :
-          if [type isFunction] then
+          if [[type mKind] isFunction] then
             error endOfExp : "a function name is expected here"
           else
             initialVariableMap (
@@ -338,7 +340,7 @@ override method @staticListAST enterInContext
             @instructionListIR instructionGenerationList = {}
             @allocaList allocaList = {}
             [exp analyzeExpression
-              !self:.void
+              !self:voidType ()
               !inGuard:false
               !routineNameForInvocationGraph:["compiler" nowhere]
               !optionalTargetType:type
@@ -365,10 +367,10 @@ override method @staticListAST enterInContext
             staticValue += [type llvmTypeName] + " " + [expressionResult llvmName]
           end      
         case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
-          if not [type isFunction] then
+          if not [[type mKind] isFunction] then
             error endOfExp : "a static expression is expected here"
           else
-            [type function ?descriptor:let descriptor]
+            [[type mKind] function ?descriptor:let descriptor]
             let argumentSignature = [formalArgs routineSignature !functionName]
             [ioContext.mRoutineMapForContext searchKey
               !functionName
@@ -429,15 +431,14 @@ override method @staticListAST enterInContext
   [!?listTypePropertyMap insertKey # "count" property
     !.new {!"count" !mStaticListName.location}
     !true # public
-    !.constantProperty {!value:.literalInteger {!type:.staticInteger !value:[mValueList length]}}
+    !.constantProperty {!value:.literalInteger {!type:staticIntegerType () !value:[mValueList length]}}
   ]
 #-------------------------------------------------------------------- Enter list type in type map
   let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmElementTypeName} type]
-  [!?ioContext.mTypeMap insertType
-    !lkey:plmNameForStaticListType (!mStaticListName)
-    !type:.arrayType {
+  let arrayType = @PLMType.new {
+    !listTypePropertyMap
+    !.arrayType {
       !typeName:.new {!llvmNameForStaticListType (!mStaticListName) !mStaticListName.location}
-      !propertyMap: listTypePropertyMap
       !elementType:elementType
       !size:[stringValueList length]
       !constantMap: {}
@@ -445,6 +446,10 @@ override method @staticListAST enterInContext
       !plmTypeName:plmNameForStaticListType (!mStaticListName)
       !constructorMap:{}
     }
+  }
+  [!?ioContext.mTypeMap insertType
+    !lkey:plmNameForStaticListType (!mStaticListName)
+    !type:arrayType
     !index:[ioContext.mTypeMap count]
   ]
 #-------------------------------------------------------------------- Enter list in constant map

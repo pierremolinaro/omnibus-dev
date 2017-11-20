@@ -214,7 +214,7 @@ method @globalVarDeclarationList-element enterInContext
 #--- Get destination type
   @PLMType variableAnnotationType
   if mTypeName.string == "" then
-    variableAnnotationType = .void
+    variableAnnotationType = voidType ()
   else
     variableAnnotationType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mTypeName} type]
   end
@@ -228,7 +228,7 @@ method @globalVarDeclarationList-element enterInContext
     ?@universalValuedObjectMapForContext universalMap
   )
   [mSourceExpression analyzeExpression
-     !self:.void
+     !self:voidType ()
      !inGuard:false
      !routineNameForInvocationGraph:["compiler" nowhere]
      !optionalTargetType:variableAnnotationType
@@ -245,7 +245,7 @@ method @globalVarDeclarationList-element enterInContext
     error mVarName : "source expression cannot be statically computed"
   end
 #--- Check variable type and expression type
-  if variableAnnotationType == .void && [[expressionResult type] isStaticInteger] then
+  if [variableAnnotationType mKind] == .void && [[[expressionResult type] mKind] isStaticInteger] then
     error mVarName : "cannot infer type"
   end
   let result = checkAssignmentCompatibility (

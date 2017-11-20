@@ -96,10 +96,10 @@ override method @forInstructionAST analyze
   let iteratedTypeKind = [iteratedObjectPointer type]
 #--- Get iterated element type
   @PLMType iteratedElementType
-  if iteratedTypeKind == .literalString then
+  if [iteratedTypeKind mKind] == .literalString then
     iteratedElementType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["uint8" nowhere]} type]
-  elsif [iteratedTypeKind isArrayType] then
-    [iteratedTypeKind arrayType ?2* ?elementType:iteratedElementType ?5*]
+  elsif [[iteratedTypeKind mKind] isArrayType] then
+    [[iteratedTypeKind mKind] arrayType ?1* ?elementType:iteratedElementType ?5*]
   else
     error mIteratedObject : "this object is not enumerable" : iteratedElementType
   end
@@ -116,7 +116,7 @@ override method @forInstructionAST analyze
     !self:inSelfType
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -127,7 +127,7 @@ override method @forInstructionAST analyze
     ?result:let @objectIR whileExpressionResult
   ]
 #--- Check "while" expression type is boolean
-  if not [[whileExpressionResult type] isBoolean] then
+  if not [[[whileExpressionResult type] mKind] isBoolean] then
     error mEndOf_whileExpression : "'while' expression should be boolean"
   elsif mStaticWhileExpression && not [whileExpressionResult isStatic] then
     error mEndOf_whileExpression : "'while' expression is not static"
@@ -152,7 +152,7 @@ override method @forInstructionAST analyze
   ]
   [!?ioUniversalMap closeOverride !mEndOf_for_instruction]
 #--- Code generation
-  if iteratedTypeKind == .literalString then
+  if [iteratedTypeKind mKind] == .literalString then
     ioInstructionGenerationList += !@forInstructionOnStringIR.new {
       !plmName
       !mIteratedObject.location
@@ -161,8 +161,8 @@ override method @forInstructionAST analyze
       !whileExpressionResult
       !doInstructionList_GenerationList
     }
-  elsif [iteratedTypeKind isArrayType] then
-    [iteratedTypeKind arrayType ?2* ?elementType:let elementType ?size:let size ?4*]
+  elsif [[iteratedTypeKind mKind] isArrayType] then
+    [[iteratedTypeKind mKind] arrayType ?1* ?elementType:let elementType ?size:let size ?4*]
     @stringset invokedFunctionSet = {}
   #--- Static array map ? If yes, enter invoked function set
     if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !mIteratedObject] then
@@ -344,7 +344,7 @@ override method @forInstructionOnStringIR llvmInstructionCode
   let endLabel  = "for.label.end." + [mLocation locationIndex]
   let ptrVar    = "for.ptr." + [mLocation locationIndex]
   let currentVar = "for.current." + [mLocation locationIndex]
-  let stringLLVMTypeName = [@PLMType.literalString llvmTypeName]
+  let stringLLVMTypeName = [literalStringType () llvmTypeName]
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
 

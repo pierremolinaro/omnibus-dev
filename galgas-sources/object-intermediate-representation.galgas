@@ -58,7 +58,7 @@ getter @objectIR type -> @PLMType {
   case llvmValue (type *) : result = type
   case llvmStructureConstant (type *) : result = type
   case llvmArrayConstant (type *) : result = type
-  case literalString  (* *) : result = .literalString
+  case literalString  (* *) : result = literalStringType ()
   end
 }
 

@@ -69,7 +69,7 @@ override method @letInstructionWithAssignmentAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let @PLMType targetType = if mOptionalTypeName.string == ""
-    then .void
+    then voidType ()
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mOptionalTypeName} type]
   end
 #--- Analyze source expression

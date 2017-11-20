@@ -90,7 +90,7 @@ method @initList-element initSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let @PLMType selfType = if mSelfTypeName.string == "" then
-    .void
+    voidType ()
   else
     [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mSelfTypeName} type]
   end
@@ -193,7 +193,7 @@ method @initListIR generateLLVMinitCode
   ioLLVMcode += llvmTitleComment (!"Init")
   for init in self do
     ioLLVMcode += "define internal void @init." + init.mPriority + " ("
-    if init.mSelfType != .void then
+    if [init.mSelfType mKind] != .void then
       ioLLVMcode += [init.mSelfType llvmTypeName] + " * %self"
     end
     ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
@@ -208,7 +208,7 @@ method @initListIR generateLLVMinitCode
   ioLLVMcode += "define internal void @init ()" + llvmAttributeFunction () + "{\n"
   for init in self do
     ioLLVMcode += "  call void @init." + init.mPriority + " ("
-    if init.mSelfType != .void then
+    if [init.mSelfType mKind] != .void then
       ioLLVMcode += [init.mSelfType llvmTypeName] + " * " + llvmNameForGlobalVariable (!init.mGlobalVariable)
     end
     ioLLVMcode += ")\n"

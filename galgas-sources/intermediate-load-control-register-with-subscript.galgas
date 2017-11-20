@@ -30,7 +30,7 @@ override method @loadRegisterWithSubscriptIR llvmInstructionCode
   let registerSubscriptedAddr = "%register.addr." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
 #--- Needs to perform an extend to i32 ?
-  [[mIndexResult type] integer ?4* ?bitCount:let bitCount ?1*]
+  [[[mIndexResult type] mKind] integer ?3* ?bitCount:let bitCount ?1*]
   if bitCount < 32 then
     ioLLVMcode += "  " + registerIndexName + " = zext " + [mIndexResult  llvmTypeName]
                + " " + [mIndexResult llvmName] + " to i32 ; extend index to i32\n"

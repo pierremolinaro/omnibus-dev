@@ -91,7 +91,7 @@ override method @truncateExpressionAST analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -112,13 +112,13 @@ override method @truncateExpressionAST analyzeExpression
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
   end
 #--- Check types
-  if not [resultType isInteger] then
+  if not [[resultType mKind] isInteger] then
     error mTypeName : "this type is not an integer type" : outResult
-  elsif not [[expressionResult type] isInteger] then
+  elsif not [[[expressionResult type] mKind] isInteger] then
     error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[expressionResult type] integer ?1* ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:let expSize ?1*]
-    [resultType integer ?1* ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize ?1*]
+    [[[expressionResult type] mKind] integer ?min:let minSource ?max:let maxSource ?1* ?bitCount:let expSize ?1*]
+    [[resultType mKind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize ?1*]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
       error mTypeName:"useless explicit conversion"

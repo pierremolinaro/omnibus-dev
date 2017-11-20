@@ -5,7 +5,7 @@ setter @instructionListIR testArrayIndex
   ?let @bigint inSize
   !@bool outGeneratePanicInstruction
 {
-  [[inIndex type] integer ?2* ?max:let max ?unsigned:let isUnsigned ?2*]
+  [[[inIndex type] mKind] integer ?1* ?max:let max ?unsigned:let isUnsigned ?2*]
   outGeneratePanicInstruction = (not isUnsigned) || (max >= inSize)
   self += !@testArrayIndexIR.new {!inIndex !inErrorLocation !inSize}
 }
@@ -29,7 +29,7 @@ override method @testArrayIndexIR llvmInstructionCode
     ![[[mErrorLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
-  [[mIndex type] integer ?2* ?max:let max ?unsigned:let isUnsigned ?2*]
+  [[[mIndex type] mKind] integer ?1* ?max:let max ?unsigned:let isUnsigned ?2*]
 #--- Test index >= 0 (for signed index)
   if not isUnsigned then
     let testToZero = "%test.index.zero." + ioGenerationAdds.mUniqueIndex

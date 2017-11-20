@@ -22,7 +22,7 @@ proc handleArraySubscriptNew
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -44,7 +44,7 @@ proc handleArraySubscriptNew
     else
       outIndexIR = @objectIR.literalInteger {!type:inElementType !value:indexValue}
     end
-  elsif [[indexResult type] isInteger] then
+  elsif [[[indexResult type] mKind] isInteger] then
     if not [option plm_options.noPanicGeneration value] then
       [!?ioInstructionGenerationList testArrayIndex
         !indexResult
@@ -86,7 +86,7 @@ proc handleArraySubscript
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -115,7 +115,7 @@ proc handleArraySubscript
       ]
       ioObjectPtr = result      
     end
-  elsif [[indexResult type] isInteger] then
+  elsif [[[indexResult type] mKind] isInteger] then
     if not [option plm_options.noPanicGeneration value] then
       [!?ioInstructionGenerationList testArrayIndex
         !indexResult

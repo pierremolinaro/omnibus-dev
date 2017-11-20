@@ -169,7 +169,7 @@ override method @primaryInExpressionAST analyzeExpression
         ?result: outResult
       ]
     end
-  elsif inSelfType == .void then
+  elsif [inSelfType mKind] == .void then
     error mReceiverName : "'self' is not available in this context" : outResult
   else
     [self analyzePrimaryExpressionWithSelf
@@ -479,7 +479,7 @@ private proc analyzeRegisterExpression
           !propertyName.location
           !outResult
           !accessOperator
-          !.literalInteger {!type:.staticInteger !value:accessRightOperand}
+          !.literalInteger {!type:staticIntegerType () !value:accessRightOperand}
         ]
         currentSliceMap = subMap
         currentType = resultType
@@ -582,7 +582,7 @@ private proc handlePropertyAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let type = [ioResult type]
-  let @propertyMap propertyMap = [type propertyMap]
+  let @propertyMap propertyMap = type.mPropertyMap
   [propertyMap searchKey !inPropertyName ?* ?let @propertyAccessKind accessKind]
   switch accessKind
   case nonVirtualMethod (*) :
@@ -622,8 +622,8 @@ private proc handleArrayAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Check current object is an array
-  if [[ioResult type] isArrayType] then
-    [[ioResult type] arrayType ?2* ?elementType:let elementType ?size:let @bigint arraySize ?4*]
+  if [[[ioResult type] mKind] isArrayType] then
+    [[[ioResult type] mKind] arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize ?4*]
     handleArraySubscript (
       !self: inSelfType
       !inGuard: inGuard
@@ -668,7 +668,7 @@ private proc handleFunctionCallInExpression
   ?!@instructionListIR ioInstructionGenerationList
 {
   let receiverType = [ioObjectIR type]
-  let @propertyMap propertyMap = [receiverType propertyMap]
+  let @propertyMap propertyMap = receiverType.mPropertyMap
   let key = routineMangledNameFromCall (!"" !inMethodName !inArguments)
   [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
   switch propertyAccess
@@ -676,7 +676,7 @@ private proc handleFunctionCallInExpression
     error inMethodName : "a constant cannot be used as method" : ioObjectIR
   case nonVirtualMethod (@routineDescriptor routineDescriptor) :
   #--- Check routine is actually a function
-    if [routineDescriptor.mReturnTypeProxy type] == .void then
+    if [[routineDescriptor.mReturnTypeProxy type] mKind] == .void then
       error inMethodName : "not a function (returns no value)" : ioObjectIR
     else
     #--- Check modes
@@ -725,10 +725,10 @@ private proc handleFunctionCallInExpression
       ioObjectIR = callReturnedResult
     end
   case indexed  (@PLMType propertyType @uint propertyIndex) :
-    if not [propertyType isFunction] then
+    if not [[propertyType mKind] isFunction] then
       error inMethodName : "an indexed property cannot be used as method" : ioObjectIR
     else
-      [propertyType function ?descriptor:let descriptor]
+      [[propertyType mKind] function ?descriptor:let descriptor]
     #--- Check routine is actually a function
       if descriptor.mReturnTypeProxy == .null then
         error inMethodName : "not a function (returns no value)" : ioObjectIR

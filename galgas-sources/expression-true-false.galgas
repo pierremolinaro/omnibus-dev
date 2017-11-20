@@ -67,7 +67,7 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  outResult = .literalInteger {!type:.boolean !value:if mValue then 1G else 0G end}
+  outResult = .literalInteger {!type:booleanType () !value:if mValue then 1G else 0G end}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -81,12 +81,11 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !mode:isr.mMode
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
-#      ?*
       ?@universalValuedObjectMapForContext universalMap
     )
   #--- Self type
     let @PLMType selfType = if isr.mModuleName.string == "" then
-      .void
+      voidType ()
     else
       [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !moduleMangledNameFromModuleName (!isr.mModuleName)} type]
     end
@@ -160,7 +159,7 @@ method @interruptMapIR interruptCodeGeneration
       ioLLVMcode += "  " + variable + " = alloca " + llvmTypeName + "\n"
     end
   #--- Define self
-    if interrupt.mSelfType != .void then
+    if [interrupt.mSelfType mKind] != .void then
       let varName = llvmNameForGlobalVariable (!interrupt.mGlobalVariableName)
       let typeName = [interrupt.mSelfType llvmTypeName]
       ioLLVMcode += "  %self = getelementptr inbounds " + typeName + ", " + typeName + " * " + varName 

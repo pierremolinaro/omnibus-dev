@@ -94,7 +94,7 @@ override method @switchInstructionAST analyze
     !self:inSelfType
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -111,8 +111,8 @@ override method @switchInstructionAST analyze
   ]  
 #--- Check inferred type
   @constantMap enumConstantMap
-  if [[switchValueIR type] isEnumeration] then
-    [[switchValueIR type] enumeration ?constantMap:enumConstantMap ?3*]
+  if [[[switchValueIR type] mKind] isEnumeration] then
+    [[[switchValueIR type] mKind] enumeration ?constantMap:enumConstantMap ?2*]
   else
     error mEndOf_test_expression
       : "test expression type is '" + [switchValueIR key] + "', it should be boolean"
