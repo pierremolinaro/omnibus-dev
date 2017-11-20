@@ -1,5 +1,4 @@
-#ifndef all_2D_declarations_2D__35__ENTITIES_DEFINED
-#define all_2D_declarations_2D__35__ENTITIES_DEFINED
+#pragma once
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -583,4 +582,3 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-#endif
