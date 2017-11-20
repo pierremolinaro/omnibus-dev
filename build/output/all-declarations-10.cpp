@@ -865,7 +865,9 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1/unp
   "    self.acc.c.a = n\n"
   "    let x $uint32 = 0x1234_5678\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:x.byteSwapped ())\n"
+  "    lcd.print (!hex8:x.byteSwapped ())\n"
+  "    lcd.goto (!line:1 !column:0)\n"
+  "    lcd.print (!unsigned:$uint32.max)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -875,7 +877,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-structure-example.plm",
   "plm",
   true, // Text file
-  1616, // Text length
+  1683, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -2704,7 +2706,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.print (!unsigned:gOutputPattern.count)\n"
   "    lcd.print (!string:\" \")\n"
-  "    let cc = $isrSlot.PITChannel0.uint ()\n"
+  "    let cc = $isrSlot.PITChannel0.uint7 ()\n"
   "    lcd.print (!unsigned:extend (cc))\n"
   "  }\n"
   "}\n"
@@ -2715,7 +2717,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  8397, // Text length
+  8398, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 

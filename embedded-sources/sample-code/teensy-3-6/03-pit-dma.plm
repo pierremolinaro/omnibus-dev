@@ -212,7 +212,7 @@ task Tâche priority 1 stackSize 512 {
     lcd.goto (!line:0 !column:0)
     lcd.print (!unsigned:gOutputPattern.count)
     lcd.print (!string:" ")
-    let cc = $isrSlot.PITChannel0.uint ()
+    let cc = $isrSlot.PITChannel0.uint7 ()
     lcd.print (!unsigned:extend (cc))
   }
 }

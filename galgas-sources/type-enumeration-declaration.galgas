@@ -93,6 +93,14 @@ override getter @enumerationDeclaration keyRepresentationForErrorSignaling -> @s
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  UTILITIES                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func integerEnumAccessorName ?forBitCount:let @uint inBitCount -> @string {
+  result = "uint" + inBitCount
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -108,7 +116,7 @@ map @constantMap {
 override method @enumerationDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -127,26 +135,17 @@ override method @enumerationDeclaration enterInContext
     representationBitCount ++ ;
     maxValue = maxValue / 2G
   end
-#--- Build property map
+#---------------- Property map
+  @propertyMap propertyMap = {}
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
     !.new {!"uint" + representationBitCount !mEnumerationName}
   }
-  @propertyMap propertyMap = {}
-  let accessorMangledName = routineMangledNameFromCall (!"" !.new {!"uint" !mEnumerationName} !{})
-  let routineDescriptor = @routineDescriptor.new {
-    !true # Routine is declared with "public"
-    !false # Routine is declared with @exported attribute
-    !.function {!executionMode:.anyMode}
-    !{} # Signature
-    !integerTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
-    !true # Routine is declared with @access attribute
-    !false # Routine is declared with @mutating attribute
-  }
-  [!?propertyMap insertKey
-    !accessorMangledName
-    !true # Public
-    !.nonVirtualMethod {!descriptor:routineDescriptor}
+  [!?propertyMap addFunction
+    !receiverTypeName:mEnumerationName
+    !methodName:integerEnumAccessorName (!forBitCount:representationBitCount)
+    !resultTypeProxy:integerTypeProxy
+    !?ioSubprogramInvocationGraph
   ]
 #--- Insert enumeration in type map
   let enumerationType = @PLMType.new {
@@ -256,7 +255,7 @@ class @enumerationIR : @abstractGenerationIR {
 override method @enumerationIR generateLLVMcode ?!@string ioLLVMcode  ?!@generationAdds unused ioGenerationAdds {
   let routineMangledName = routineMangledNameFromAST (
     !"$" + mEnumerationName
-    !.new {!"uint" !mEnumerationName}
+    !.new {!integerEnumAccessorName (!forBitCount:mBitCount) !mEnumerationName}
     !{}
   )
   let routineLLVMName = llvmNameForFunction (!routineMangledName.string)

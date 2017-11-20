@@ -1,0 +1,32 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CONSTRUCTOR MAP                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @constructorValue {
+#  case zero
+  case simple (@bigint value)
+  case structure (@sortedOperandIRList sortedOperandList)
+  case arrayValue (@PLMType elementType @uint size)
+}
+
+#·······················································································································
+
+list @constructorSignature {
+  @string mSelector
+  @PLMType mType
+  @uint mFieldIndex
+}
+
+#·······················································································································
+
+map @constructorMap { # Key is (!selector!selector)
+  @constructorSignature mSignature
+  @constructorValue mInitValue
+  insert insertKey error message "-- internal error --"
+  search searchKey error message "-- internal error --"
+}
+
+#·······················································································································
+
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -50,7 +50,35 @@ override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @st
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#!  UTILITIES                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func minValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
+  if inIsUnsigned then
+    result = 0G
+  else # Signed
+    result = - (1G << (inBitCount - 1))
+  end
+}
+
+#·······················································································································
+
+func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
+  if inIsUnsigned then
+    result = (1G << inBitCount) - 1G
+  else # Signed
+    result = (1G << (inBitCount - 1)) - 1G
+  end
+}
+
+#·······················································································································
+
+func %once byteSwappedMethoName -> @string {
+  result = "byteSwapped"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclarationAST enterInContext
@@ -61,49 +89,28 @@ override method @integerDeclarationAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   let integerTypeName = [[self typeName] nowhere]
-#--------------------------------------- Get min and max
-  @bigint min
-  @bigint max
-  if mIsSigned then
-    min = - (1G << (mSize - 1))
-    max = (1G << (mSize - 1)) - 1G
-  else # Unsigned
-    min = 0G
-    max = (1G << mSize) - 1G
-  end
-#--------------------------------------- Property map
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]
+#--------------------------------------- Get min and max
+  let min = minValueForInteger (!not mIsSigned !mSize)
+  let max = maxValueForInteger (!not mIsSigned !mSize)
+#--------------------------------------- Property map
   @propertyMap propertyMap = {}
   if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
-    let @routineDescriptor descriptor = .new {
-      !true # mIsPublic # Routine is declared with "public"
-      !false # mExported # Routine is declared with @exported attribute
-      !.function {!executionMode:.anyMode} # @routineKind mRoutineKind
-      !{} # @routineTypedSignature mSignature
-      !selfTypeProxy # Return type 
-      !false # @bool mCanAccessProperties # Routine is declared with @access attribute
-      !false # @bool mCanMutateProperties # Routine is declared with @mutating attribute
-    }
-    [!?propertyMap insertKey
-      !["byteSwapped()" nowhere]
-      !true
-      !.nonVirtualMethod {!descriptor:descriptor}
-    ]
-  #--- Routine mangled name
-    let routineNameForInvocationGraph = routineMangledNameFromAST (
-      !"$" + integerTypeName
-      !["byteSwapped" nowhere]
-      !{}
-    )
-    [!?ioSubprogramInvocationGraph addNode
-      !routineNameForInvocationGraph
-      !routineNameForInvocationGraph
+    [!?propertyMap addFunction
+      !receiverTypeName:integerTypeName
+      !methodName:byteSwappedMethoName ()
+      !resultTypeProxy:selfTypeProxy
+      !?ioSubprogramInvocationGraph
     ]
   end
+#--------------------------------------- Class constant map
+  @constantMap classConstantMap = {}
+  [!?classConstantMap insertKey !["min" nowhere] !min !integerTypeName]
+  [!?classConstantMap insertKey !["max" nowhere] !max !integerTypeName]
 #--------------------------------------- Enter in type map
   let integerType = @PLMType.new {
     !propertyMap
-    !{} # Class constant map
+    !classConstantMap
     !{} # Constructor map
     !.all
     !integerTypeName
@@ -162,7 +169,7 @@ override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAd
   let llvmTypeName = "i" + mSize
   let routineMangledName = routineMangledNameFromAST (
     !"$" + mTypeName
-    !["byteSwapped" nowhere]
+    ![byteSwappedMethoName () nowhere]
     !{}
   )
   let functionName = llvmNameForFunction (!routineMangledName)

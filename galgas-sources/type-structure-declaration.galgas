@@ -213,31 +213,6 @@ list @propertyList {
 
 #·······················································································································
 
-enum @propertyAccessKind {
-  case constantProperty (@objectIR value)
-  case indexed  (@PLMType type @uint index)
-  case nonVirtualMethod (@routineDescriptor descriptor)
-}
-
-#·······················································································································
-
-map @propertyMap {
-  @bool mIsPublic
-  @propertyAccessKind mAccess
-  insert insertKey error message "the '%K' property is already declared"
-  search searchKey error message "there is no '%K' property"
-}
-
-#·······················································································································
-
-list @constructorSignature {
-  @string mSelector
-  @PLMType mType
-  @uint mFieldIndex
-}
-
-#·······················································································································
-
 sortedlist @sortedOperandIRList {
   @objectIR mOperand
   @uint mIndex

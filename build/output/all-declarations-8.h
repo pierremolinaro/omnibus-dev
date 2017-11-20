@@ -10,6 +10,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   Function 'panicCodeForUnsignedAdditionOverflow'                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bigint function_panicCodeForUnsignedAdditionOverflow (class C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                    Function 'panicCodeForSignedAdditionOverflow'                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -209,6 +218,18 @@ void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
                                       const class GALGAS_location constinArgument2,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Function 'routineMangledNameFromCall'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_routineMangledNameFromCall (const class GALGAS_string & constinArgument0,
+                                                          const class GALGAS_lstring & constinArgument1,
+                                                          const class GALGAS_effectiveArgumentListAST & constinArgument2,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

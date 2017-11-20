@@ -60,7 +60,9 @@ task T priority 12 stackSize 512 {
     self.acc.c.a = n
     let x $uint32 = 0x1234_5678
     lcd.goto (!line:0 !column:0)
-    lcd.print (!unsigned:x.byteSwapped ())
+    lcd.print (!hex8:x.byteSwapped ())
+    lcd.goto (!line:1 !column:0)
+    lcd.print (!unsigned:$uint32.max)
   }
 }
 

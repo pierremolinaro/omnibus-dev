@@ -10,24 +10,6 @@ boolset @PLMTypeAttributes {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @constructorValue {
-#  case zero
-  case simple (@bigint value)
-  case structure (@sortedOperandIRList sortedOperandList)
-  case arrayValue (@PLMType elementType @uint size)
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @constructorMap { # Key is (!selector!selector)
-  @constructorSignature mSignature
-  @constructorValue mInitValue
-  insert insertKey error message "-- internal error --"
-  search searchKey error message "-- internal error --"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 struct @PLMType {
   @propertyMap mPropertyMap # Properties and methods
   @constantMap mConstantMap # $type.cst, as enumeration values
@@ -45,15 +27,10 @@ enum @typeKind {
   case literalString
   case enumeration (@uint bitCount)
   case structure (@propertyList propertyList @guardMapForContext guardMap)
-  case integer (@bigint min
-                @bigint max
-                @bool unsigned
-                @uint bitCount)
+  case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
-  case arrayType (# @lstring typeName2 # ????
-                  @PLMType elementType
-                  @bigint size)
+  case arrayType (@PLMType elementType @bigint size)
   case function (@routineDescriptor descriptor)
   case pointer (@PLMType pointee)
 }
@@ -152,8 +129,6 @@ getter @PLMType llvmTypeName -> @string {
     result = "—"
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
-#  case arrayType (@lstring typeName * *) :
-#    result = "%" + [typeName assemblerRepresentation]
   case arrayType (* *) :
     result = "%" + [llvmRegularTypeMangledNameFromName (![mPLMTypeName nowhere]) assemblerRepresentation]
   case function (@routineDescriptor descriptor) :
