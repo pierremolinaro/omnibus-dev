@@ -103,6 +103,9 @@ override method @integerDeclarationAST enterInContext
 #--------------------------------------- Enter in type map
   let integerType = @PLMType.new {
     !propertyMap
+    !{} # Class constant map
+    !{} # Constructor map
+    !.all
     !.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize !plmTypeName:integerTypeName}
   }
   [!?ioContext.mTypeMap insertType

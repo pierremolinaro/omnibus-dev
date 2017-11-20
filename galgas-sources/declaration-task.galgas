@@ -179,13 +179,10 @@ method @taskList enterInContext
   #--- Enter task variable map as structure type in type map
     let taskType = @PLMType.new {
       !propertyMap
-      !.structure {
-        !typeName:task.mTaskName
-        !propertyList:propertyList
-        !attributes:.none
-        !guardMap:{}
-        !constructorMap:{}
-      }
+      !{} # Class constant map
+      !{} # Constructor map
+      !.none
+      !.structure {!typeName:task.mTaskName !propertyList:propertyList !guardMap:{}}
     }
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName

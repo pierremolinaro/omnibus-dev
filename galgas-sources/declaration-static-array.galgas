@@ -301,13 +301,10 @@ override method @staticListAST enterInContext
 #-------------------------------------------------------------------- Enter element type in type map
   let type = @PLMType.new {
     !propertyMap
-    !.structure {
-      !typeName:llvmNameForStaticListElementType (!mStaticListName)
-      !propertyList:propertyList
-      !attributes:.none
-      !guardMap:{}
-      !constructorMap:{}
-    }
+    !{} # Class constant map
+    !{} # Constructor map
+    !.none
+    !.structure {!typeName:llvmNameForStaticListElementType (!mStaticListName) !propertyList:propertyList !guardMap:{}}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmElementTypeName
@@ -437,14 +434,14 @@ override method @staticListAST enterInContext
   let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmElementTypeName} type]
   let arrayType = @PLMType.new {
     !listTypePropertyMap
+    !{} # class constant map
+    !{} # Constructor map
+    !.all
     !.arrayType {
       !typeName:.new {!llvmNameForStaticListType (!mStaticListName) !mStaticListName.location}
       !elementType:elementType
       !size:[stringValueList length]
-      !constantMap: {}
-      !flags:.none
       !plmTypeName:plmNameForStaticListType (!mStaticListName)
-      !constructorMap:{}
     }
   }
   [!?ioContext.mTypeMap insertType

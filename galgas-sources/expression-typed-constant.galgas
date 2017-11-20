@@ -125,7 +125,7 @@ override method @typedConstantCallAST analyzeExpression
   if [inferredResultType mKind] == .void then
     error mConstructorName : "cannot infer type" : outResult
   else
-    let classConstantMap = [inferredResultType classConstantMap]
+    let classConstantMap = inferredResultType.mConstantMap
     [classConstantMap searchKey !mConstructorName ?let @bigint value ?let classTypeName]
     let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !classTypeName} type]
     outResult = .literalInteger {!type:resultType !value:value}

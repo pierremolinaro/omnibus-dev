@@ -168,7 +168,7 @@ proc guardSemanticAnalysis
 {
 #--- Guard mangled name
   let guardMangledName = routineMangledNameFromAST (
-    !if [inSelfType mKind] == .void then "" else "$" + [inSelfType key] end
+    !if [inSelfType mKind] == .void then "" else "$" + [inSelfType plmTypeName] end
     !inRoutineName
     !inRoutineFormalArgumentList
   )
@@ -414,7 +414,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !?effectiveIR:effectiveParameterListIR
         )
       #--- Get function name and map containing the function definition
-        let routineMangledName = routineMangledNameFromCall (!"$" + [currentType key] !methodName !mArguments)
+        let routineMangledName = routineMangledNameFromCall (!"$" + [currentType plmTypeName] !methodName !mArguments)
       #--- Code generation
         baseGuardInstructionGenerationList += !@staticRoutineCallIR.new {
           !mIdentifier
@@ -484,7 +484,7 @@ method @guardMapIR guardCodeGeneration
       ioServiceList += !guardCallName !guardImplementationName
       ioLLVMcode += llvmTitleComment (!guardImplementationName)
       ioLLVMcode += "declare i1 @" + guardCallName + " ("
-      let typeName = if [guard.mReceiverType mKind] == .void then "" else "$" + [guard.mReceiverType key] end
+      let typeName = if [guard.mReceiverType mKind] == .void then "" else "$" + [guard.mReceiverType plmTypeName] end
       var first = typeName == ""
       if not first then
         ioLLVMcode += "%" + [typeName assemblerRepresentation] + " * %self"  
@@ -522,7 +522,7 @@ method @guardMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += llvmTitleComment (!guardRoutineName)
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
-  let receiverTypeName = if [mReceiverType mKind] == .void then "" else "$" + [mReceiverType key] end
+  let receiverTypeName = if [mReceiverType mKind] == .void then "" else "$" + [mReceiverType plmTypeName] end
   var first = true
   if receiverTypeName != "" then
     ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"

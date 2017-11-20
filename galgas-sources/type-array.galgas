@@ -137,21 +137,21 @@ override method @typeArrayDeclarationAST enterInContext
     @constructorMap constructorMap = {}
     [!?constructorMap insertKey !["(!repeated)" nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
   #-------------------------------------------- Type attributes
-    @PLMTypeAttributes typeAttributes = .instanciable
+    @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine
     if [elementType copyable] then
       typeAttributes = typeAttributes | .copyable
     end
   #-------------------------------------------- Enter in type map
     let arrayType = @PLMType.new {
       !arrayTypePropertyMap
+      !classConstantMap
+      !constructorMap
+      !typeAttributes
       !.arrayType {
         !typeName:mArrayTypeName
         !elementType:elementType
         !size:arraySize
-        !constantMap:classConstantMap
-        !flags:typeAttributes
         !plmTypeName:mArrayTypeName
-        !constructorMap:constructorMap
       }
     }
     [!?ioContext.mTypeMap insertType
