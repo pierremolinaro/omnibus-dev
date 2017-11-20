@@ -6,8 +6,7 @@ sortedlist @bootList {
   @location mBootLocation
   @instructionListAST mInstructionList
   @location mEndOfBootLocation
-  @bigint mPriority
-  @location mPriorityLocation
+  @lbigint mPriority
 }{
   mPriority <
 }
@@ -31,8 +30,7 @@ syntax extension plm_syntax {
       !priority.location
       !instructionList
       !endOfInit
-      !priority.bigint
-      !priority.location
+      !priority
   }
 
   #·····················································································································
@@ -40,7 +38,7 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @bootList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
@@ -50,23 +48,50 @@ method @bootList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
+#!  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @bootList enterInContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
+{
+#---------------- Add decorated declaration
+  for boot in self do
+    ioDecoratedDeclarationList += !@decoratedBootRoutine.new {
+      !boot.mBootLocation
+      !boot.mInstructionList
+      !boot.mEndOfBootLocation
+      !boot.mPriority
+    }
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @bootRoutinePriorityMap {
   insert insertKey error message "a boot routine with priority %K has been already declared"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-method @bootList-element bootSemanticAnalysis
+class @decoratedBootRoutine : @abstractDecoratedDeclaration {
+  @location mBootLocation
+  @instructionListAST mInstructionList
+  @location mEndOfBootLocation
+  @lbigint mPriority
+}
+
+#·······················································································································
+
+override method @decoratedBootRoutine semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
+  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority.bigint string] !mPriority.location}]
 #---
-  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority !mPriorityLocation}
+  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority.bigint !mPriority.location}
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !routineNameForInvocationGraph

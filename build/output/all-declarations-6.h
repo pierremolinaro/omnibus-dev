@@ -1520,6 +1520,41 @@ class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                 Extension method '@universalValuedObjectMapForContext checkLocalVariableFinalState'                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_universalValuedObjectMapForContext_checkLocalVariableFinalState) (const class cPtr_universalValuedObjectMapForContext * inObject,
+                                                                                                          class C_Compiler * inCompiler
+                                                                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_checkLocalVariableFinalState (const int32_t inClassIndex,
+                                                        extensionMethodSignature_universalValuedObjectMapForContext_checkLocalVariableFinalState inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_checkLocalVariableFinalState (const class cPtr_universalValuedObjectMapForContext * inObject,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Routine 'initialVariableMap'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_initialVariableMap (const class GALGAS_semanticContext constinArgument0,
+                                 const class GALGAS_mode constinArgument1,
+                                 class GALGAS_bool inArgument2,
+                                 const class GALGAS_lstring constinArgument3,
+                                 class GALGAS_universalValuedObjectMapForContext & outArgument4,
+                                 class C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Extension setter '@universalValuedObjectMapForContext insertUsedLocalConstant'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1592,19 +1627,6 @@ class GALGAS_string function_llvmNameForSVCImplementation (const class GALGAS_ls
                                                            const class GALGAS_routineKind & constinArgument1,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Extension method '@bootList-element bootSemanticAnalysis'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_bootSemanticAnalysis (const class GALGAS_bootList_2D_element inObject,
-                                           const class GALGAS_semanticContext constin_inContext,
-                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
