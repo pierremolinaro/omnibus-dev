@@ -14,7 +14,6 @@ project (1:0:0) -> "plm" {
 #--- Source files
   "galgas-sources/lexique.galgas"
   "galgas-sources/options.galgas"
-  "galgas-sources/ast.galgas"
   "galgas-sources/syntax-grammar.galgas"
   "galgas-sources/cocoa.galgas"
 
@@ -105,6 +104,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/effective-parameters.galgas"
 
 #--- Compilation phases
+  "galgas-sources/ast.galgas"
   "galgas-sources/context-routines.galgas"
   "galgas-sources/routine-map.galgas"
   "galgas-sources/universal-map.galgas"
