@@ -35,7 +35,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_declaration_5F_init_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_declaration_5F_init_ (GALGAS_initList & ioArgument0,
+  public : virtual void nt_declaration_5F_init_ (GALGAS_initAST & outArgument0,
+                                                 const GALGAS_lstring inArgument1,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'declaration_type' non terminal

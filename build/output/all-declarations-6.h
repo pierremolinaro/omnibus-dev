@@ -1749,6 +1749,29 @@ class cPtr_decoratedBootRoutine : public cPtr_abstractDecoratedDeclaration {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                               Extension method '@initAST noteTypesInPrecedenceGraph'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_initAST_noteTypesInPrecedenceGraph) (const class cPtr_initAST * inObject,
+                                                                             class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
+                                                                             class C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_noteTypesInPrecedenceGraph (const int32_t inClassIndex,
+                                                      extensionMethodSignature_initAST_noteTypesInPrecedenceGraph inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_initAST * inObject,
+                                                     GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             @decoratedInitRoutine class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1778,10 +1801,9 @@ class GALGAS_decoratedInitRoutine : public GALGAS_abstractDecoratedDeclaration {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_decoratedInitRoutine constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                     const class GALGAS_string & inOperand1,
-                                                                     const class GALGAS_instructionListAST & inOperand2,
-                                                                     const class GALGAS_location & inOperand3,
-                                                                     const class GALGAS_lbigint & inOperand4
+                                                                     const class GALGAS_instructionListAST & inOperand1,
+                                                                     const class GALGAS_location & inOperand2,
+                                                                     const class GALGAS_lbigint & inOperand3
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1795,13 +1817,11 @@ class GALGAS_decoratedInitRoutine : public GALGAS_abstractDecoratedDeclaration {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfInitLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVarName (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSelfTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1822,15 +1842,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedInitRoutin
 
 class cPtr_decoratedInitRoutine : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mSelfTypeName ;
-  public : GALGAS_string mProperty_mGlobalVarName ;
+  public : GALGAS_lstring mProperty_mModuleName ;
   public : GALGAS_instructionListAST mProperty_mInstructionList ;
   public : GALGAS_location mProperty_mEndOfInitLocation ;
   public : GALGAS_lbigint mProperty_mPriority ;
 
 //--- Constructor
-  public : cPtr_decoratedInitRoutine (const GALGAS_lstring & in_mSelfTypeName,
-                                      const GALGAS_string & in_mGlobalVarName,
+  public : cPtr_decoratedInitRoutine (const GALGAS_lstring & in_mModuleName,
                                       const GALGAS_instructionListAST & in_mInstructionList,
                                       const GALGAS_location & in_mEndOfInitLocation,
                                       const GALGAS_lbigint & in_mPriority
@@ -1840,8 +1858,7 @@ class cPtr_decoratedInitRoutine : public cPtr_abstractDecoratedDeclaration {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSelfTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mGlobalVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfInitLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;

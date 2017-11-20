@@ -17,7 +17,7 @@ struct @moduleDeclarationAST {
   @functionDeclarationListAST mFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
-  @initList mModuleInitListAST
+  @initListAST mModuleInitListAST
 }
 
 #·······················································································································
@@ -90,10 +90,11 @@ syntax extension plm_syntax {
     @modulePropertyListAST modulePropertyListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @systemRoutineDeclarationListAST svcListAST = {}
-    @initList initList = {}
+    @initListAST initList = {}
     repeat
     while
-      <declaration_init> !?initList
+      <declaration_init> ?let init !moduleName
+      initList += !init
     while
       <isr> !?ioAST.mISRDeclarationListAST !moduleName
     while
@@ -243,13 +244,15 @@ proc retainRequiredModules ?!@ast ioAST {
         !declaration.mSystemRoutineListAST
         !declaration.mGuardListAST
       }
-      for init in declaration.mModuleInitListAST do
-        ioAST.mInitListAST +=
-         !moduleTypeName
-         !declaration.mModuleName
-         !init.mInstructionList
-         !init.mEndOfInitLocation
-         !init.mPriority
+      for (init) in declaration.mModuleInitListAST do
+        ioAST.mDeclarationListAST += !init
+#        !@initAST.new {
+#          !moduleTypeName
+#          !declaration.mModuleName
+#          !init.mInstructionList
+#          !init.mEndOfInitLocation
+#          !init.mPriority
+#        }
       end
     end
   end

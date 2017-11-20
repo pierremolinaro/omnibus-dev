@@ -2,12 +2,17 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @initList {
-  @lstring mSelfTypeName
-  @string mGlobalVarName # "" if mSelfTypeName is empty
+class @initAST : @abstractDeclarationAST {
+  @lstring mModuleName # "" if no module name
   @instructionListAST mInstructionList
   @location mEndOfInitLocation
   @lbigint mPriority
+}
+
+#·······················································································································
+
+list @initListAST {
+  @initAST mInit
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,24 +24,25 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    <declaration_init> !?ioAST.mInitListAST
+    <declaration_init> ?let init !["" here]
+    ioAST.mDeclarationListAST += !init
   }
   
   #·····················································································································
 
-  rule <declaration_init> ?!@initList ioInitList {
+  rule <declaration_init> !@initAST outInit ?let @lstring inModuleName {
     $init$
     $integer$ ?let @lbigint priority
     ${$
     <instructionList> ?let instructionList
     let endOfInit = @location.here
     $}$
-    ioInitList +=
-      !["" nowhere]
-      !""
+    outInit = .new {
+      !inModuleName
       !instructionList
       !endOfInit
       !priority
+    }
   }
 
   #·····················································································································
@@ -44,17 +50,46 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @initList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
-    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
+method @initAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+}
+
+#·······················································································································
+
+override method @initAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+ let nodeName = @lstring.new {!"init " + mModuleName + " " + mPriority.bigint !mPriority.location}
+ [!?ioGraph addNode !nodeName !self]
+}
+
+#·······················································································································
+
+override getter @initAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "init " + mModuleName + " " +  + mPriority.bigint 
+}
+
+#·······················································································································
+
+override getter @initAST location -> @location outLocation {
+  outLocation = mPriority.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#!  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @initAST addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
+  !@abstractDeclarationAST outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @initRoutineMap {
@@ -62,17 +97,30 @@ map @initRoutineMap {
   search searchKey error message "there is no '%%%K' init routine"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-method @initList-element enterInContext
+override method @initAST enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   [!?ioContext.mInitRoutineMap insertKey !.new {![mPriority string] !mPriority.location}]
+#----------------
+  @lstring routineNameForInvocationGraph 
+  if mModuleName.string == "" then
+    routineNameForInvocationGraph = initNameForInvocationGraph (!mModuleName !mPriority)
+  else
+    var name = mModuleName
+    name.string += "$"
+    routineNameForInvocationGraph = initNameForInvocationGraph (!name !mPriority)
+  end
+  [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedInitRoutine.new {
-    !mSelfTypeName
-    !mGlobalVarName
+    !mModuleName
     !mInstructionList
     !mEndOfInitLocation
     !mPriority
@@ -90,8 +138,7 @@ map @initRoutinePriorityMap {
 #·······················································································································
 
 class @decoratedInitRoutine : @abstractDecoratedDeclaration {
-  @lstring mSelfTypeName
-  @string mGlobalVarName
+  @lstring mModuleName
   @instructionListAST mInstructionList
   @location mEndOfInitLocation
   @lbigint mPriority
@@ -104,10 +151,10 @@ override method @decoratedInitRoutine semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let @PLMType selfType = if mSelfTypeName.string == "" then
+  let @PLMType selfType = if mModuleName.string == "" then
     voidType ()
   else
-    [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mSelfTypeName} type]
+    [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !.new{!mModuleName.string + "$" !mModuleName}} type]
   end
   initSemanticAnalysis (
     !context:inContext
@@ -124,7 +171,7 @@ override method @decoratedInitRoutine semanticAnalysis
 #--- Code generation
   ioIntermediateCodeStruct.mInitList +=
     !selfType
-    !mGlobalVarName
+    !mModuleName
     !mPriority.bigint
     !allocaList
     !instructionGenerationList
@@ -145,14 +192,11 @@ proc initSemanticAnalysis
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
-  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType !inPriority)
+  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.mPLMTypeName !inPriority)
   [!?ioTemporaries.mInitRoutinePriorityMap insertKey !routineNameForInvocationGraph]
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineNameForInvocationGraph
-      !routineNameForInvocationGraph
-    ]
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
   end
 #--- Variable map
   initialVariableMap (

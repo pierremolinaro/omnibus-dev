@@ -176,18 +176,6 @@ void extensionMethod_enterInContext (const class GALGAS_panicClauseListAST_2D_el
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Extension method '@initList-element enterInContext'                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_enterInContext (const class GALGAS_initList_2D_element inObject,
-                                     class GALGAS_semanticContext & io_ioContext,
-                                     class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                          Abstract extension method '@callInstructionAST baseGuardAnalyze'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
