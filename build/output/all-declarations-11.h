@@ -1,5 +1,4 @@
-#ifndef all_2D_declarations_2D__31__31__ENTITIES_DEFINED
-#define all_2D_declarations_2D__31__31__ENTITIES_DEFINED
+#pragma once
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -184,4 +183,3 @@ extern const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode ;
 extern const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode ;
 extern const cDirectoryWrapper gWrapperDirectory_3_embeddedSampleCode ;
 
-#endif

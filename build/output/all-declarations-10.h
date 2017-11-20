@@ -1,5 +1,4 @@
-#ifndef all_2D_declarations_2D__31__30__ENTITIES_DEFINED
-#define all_2D_declarations_2D__31__30__ENTITIES_DEFINED
+#pragma once
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -424,4 +423,3 @@ extern const cDirectoryWrapper gWrapperDirectory_5_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_6_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_7_targetTemplates ;
 
-#endif
