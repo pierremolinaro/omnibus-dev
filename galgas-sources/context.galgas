@@ -4,6 +4,17 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+abstract class @abstractDecoratedDeclaration {
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @declarationDecorationList {
+  @abstractDecoratedDeclaration mDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 map @infixOperatorMap {
   @PLMType mResultType
   @infixOperatorDescription mOperation
@@ -217,6 +228,7 @@ proc buildSemanticContext
     for globalVar in inAST.mGlobalVarDeclarationListAST do
       [globalVar enterInContext
         !?context:outSemanticContext
+        !?outDecoratedDeclarationList
         !?staticStringMap:ioGlobalLiteralStringMap
       ]
     end

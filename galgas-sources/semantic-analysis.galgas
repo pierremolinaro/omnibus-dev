@@ -113,13 +113,6 @@ proc semanticAnalysis
     let requiredProcedureMangledName = routineMangledNameFromAST (!"" !requiredProc.mName !requiredProc.mFormalArgumentList)
     outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProcedureMangledName.string
   end 
-#--- Global variables
-  for globalVar in inAST.mGlobalVarDeclarationListAST do
-    [globalVar semanticAnalysis
-      !context:inSemanticContext
-      !?intermediateCode:outIntermediateCodeStruct
-     ]
-  end
 #---
   @semanticTemporariesStruct temporaries = .default
   temporaries.mSubprogramInvocationGraph = inSubprogramInvocationGraph

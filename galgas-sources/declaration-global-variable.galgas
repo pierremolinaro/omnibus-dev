@@ -209,6 +209,7 @@ method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrece
 
 method @globalVarDeclarationList-element enterInContext
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
 #--- Get destination type
@@ -224,7 +225,6 @@ method @globalVarDeclarationList-element enterInContext
   @allocaList allocaList = {}
   variableMapWithConstants (
     !context:ioContext
-#    ?*
     ?@universalValuedObjectMapForContext universalMap
   )
   [mSourceExpression analyzeExpression
@@ -356,34 +356,32 @@ method @globalVarDeclarationList-element enterInContext
     !isConstant:false # Is not constant
     !allowedAccessToAll:mAllowedAccessToAll
   ]
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedGlobalVariable.new {!mVarName !executionModes !result}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @globalVarDeclarationList-element semanticAnalysis
-  ?context:let @semanticContext inContext
+class @decoratedGlobalVariable : @abstractDecoratedDeclaration {
+  @lstring mVarName
+  @stringset mExecutionModeSet
+  @objectIR mExpressionGeneratedCode
+}
+
+#·······················································································································
+
+override method @decoratedGlobalVariable semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Code generation
-  [inContext.mGlobalVariableMap searchKey
-    !lkey:mVarName
-    ?type:let inferredType
-    ?executionModeSet:let executionModeSet
-#    ?allowedRoutineMap:let unused allowedProcedureMap
-    ?allowedGuardMap:let unused allowedGuardMap
-#    ?allowedISRMap:let unused allowedISRMap
-#    ?allowedTaskMap:let unused allowedTaskMap 
-    ?initialValue:let expressionGeneratedCode
-    ?isConstant:let unused isConstant
-    ?allowedAccessToAll:*
-  ]
   [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
     !mVarName
-    !inferredType
-    ![executionModeSet count] > 1
-    !expressionGeneratedCode
+    ![mExpressionGeneratedCode type]
+    ![mExecutionModeSet count] > 1
+    !mExpressionGeneratedCode
   ]
 }
 
