@@ -223,7 +223,7 @@ override method @procedureCallInstructionAST analyze
   @PLMType currentType
   @string currentLLVMAddressVar
   if mIdentifier.string == "" then # Receiver is self
-    if inSelfType == .void then
+    if [inSelfType mKind] == .void then
       error mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
     else
       currentType = inSelfType
@@ -255,7 +255,7 @@ override method @procedureCallInstructionAST analyze
     end
   end
 #--- Get current object property map
-  let @propertyMap propertyMap = [currentType propertyMap]
+  let @propertyMap propertyMap = currentType.mPropertyMap
 #--- Insulate last access (should be a "property", used as routine name
   var accessList = mAccessList
   [!?accessList popLast ?let lastAccess]
@@ -297,7 +297,8 @@ override method @procedureCallInstructionAST analyze
   case arrayAccess (* @location endOfIndex) :
     error endOfIndex : "a property access is required here"
   case property (@lstring methodName) :
-    [currentType structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
+    let @propertyMap propertyMap = currentType.mPropertyMap
+#    [[currentType mKind] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
     let key = routineMangledNameFromCall (!"" !methodName !mArguments)
     [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     switch propertyAccess
@@ -356,10 +357,10 @@ override method @procedureCallInstructionAST analyze
         [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
       end
     case indexed  (@PLMType propertyType @uint propertyIndex) :
-      if not [propertyType isFunction] then
+      if not [[propertyType mKind] isFunction] then
         error methodName : "an indexed property cannot be used as method"
       else
-        [propertyType function ?descriptor:let descriptor]
+        [[propertyType mKind] function ?descriptor:let descriptor]
       #--- Check routine is actually a function
         if descriptor.mReturnTypeProxy != .null then
           error methodName : "a function returns a value and cannot be called as a procedure"

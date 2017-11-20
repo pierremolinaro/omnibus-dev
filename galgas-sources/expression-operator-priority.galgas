@@ -442,10 +442,10 @@ method @expressionAST analyzeStaticExpression
   @instructionListIR instructionGenerationList = {}
   @allocaList allocaList = {}
   [self analyzeExpression
-    !self:.void
+    !self:voidType ()
     !inGuard:false
     !routineNameForInvocationGraph:["compiler" nowhere]
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:inContext
     !mode:.bootMode
     !?temporary:*

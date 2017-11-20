@@ -101,9 +101,13 @@ override method @integerDeclarationAST enterInContext
     ]
   end
 #--------------------------------------- Enter in type map
+  let integerType = @PLMType.new {
+    !propertyMap
+    !.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize !plmTypeName:integerTypeName}
+  }
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
-    !type:.integer {!propertyMap:propertyMap !min:min !max:max !unsigned:not mIsSigned !bitCount:mSize !plmTypeName:integerTypeName}
+    !type:integerType
     !index:[ioContext.mTypeMap count]
   ]
 #--------------------------------------- Enter integer <-> integer operators
@@ -183,32 +187,32 @@ private proc enter_integer_integer_operators
   let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
   ]
 #--- Bit Wise operators (for unsigned integers)
@@ -355,32 +359,32 @@ private proc enter_integer_literal_operators
   let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !staticIntegerTypeName ())
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@integerObject_literal_infixOperator.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@integerObject_literal_infixOperator.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
   ]
 #--- Bit Wise operators (for unsigned integers)
@@ -484,7 +488,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
 #  message "INFIX OP2 " + "\n"
 #--- Check right literal integer can be extented to left integer type, ans is not zero
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[inLeftOperand type] integer ?1* ?min:let @bigint min ?max:let @bigint max ?3*]
+  [[[inLeftOperand type] mKind] integer ?min:let @bigint min ?max:let @bigint max ?3*]
   if literalValue < min then
     error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
@@ -517,32 +521,32 @@ private proc enter_literal_integer_operators
   let intLiteralOp = combineTypeNamesForInfixOperator (!staticIntegerTypeName () !inIntegerTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@literal_integerObject_infixOperator.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@literal_integerObject_infixOperator.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intLiteralOp
-    !.boolean
+    !booleanType ()
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
   ]
 #--- Bit Wise operators (for unsigned integers)
@@ -646,7 +650,7 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
 #  message "INFIX OP3 " + "\n"
 #--- Check left literal integer can be extented to right integer type
   [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[inRightOperand type] integer ?1* ?min:let @bigint min ?max:let @bigint max ?3*]
+  [[[inRightOperand type] mKind] integer ?min:let @bigint min ?max:let @bigint max ?3*]
   if literalValue < min then
     error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then

@@ -192,7 +192,7 @@ override method @syncInstructionAST analyze
         !self:inSelfType
         !inGuard:true
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:.void
+        !optionalTargetType:voidType ()
         !context:inContext
         !mode:inCurrentMode
         !?temporary:ioTemporaries
@@ -218,7 +218,7 @@ override method @syncInstructionAST analyze
         !self:inSelfType
         !inGuard:true
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:.void
+        !optionalTargetType:voidType ()
         !context:inContext
         !mode:inCurrentMode
         !?temporary:ioTemporaries
@@ -309,10 +309,10 @@ proc analyzeGuardCall
   if inReceiverName.string != "" then
     [ioUniversalMap searchValuedObject !inReceiverName ?let @objectIR objectIR]
     let receiverType = [objectIR type] # type
-    if not [receiverType isStructure] then
+    if not [[receiverType mKind] isStructure] then
       error inReceiverName : "receiver is not a structure" : outGuardMangledName, outEffectiveParameterListIR
     else
-      [receiverType structure ?4* ?guardMap:let guardMap ?1*]
+      [[receiverType mKind] structure ?3* ?guardMap:let guardMap ?1*]
       let guardMangledName = routineMangledNameFromCall (!"" !inGuardName !inEffectiveParameterList)
       [guardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature]
     #--- Check accessibility

@@ -60,7 +60,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  outResult = .literalInteger {!type:.staticInteger !value:mLiteralInteger.bigint}
+  outResult = .literalInteger {!type:staticIntegerType () !value:mLiteralInteger.bigint}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

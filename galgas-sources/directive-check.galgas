@@ -59,7 +59,7 @@ override method @checkInstructionAST analyze
     !self:inSelfType
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -70,7 +70,7 @@ override method @checkInstructionAST analyze
     ?result:@objectIR expressionResult
   ]
 #--- Check inferred type
-  if not [[expressionResult type] isBoolean] then
+  if not [[[expressionResult type] mKind] isBoolean] then
     error mInstructionLocation : "expression is not boolean"
   end
 #--- Check expression is static, and true

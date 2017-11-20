@@ -14,11 +14,11 @@ func checkAssignmentCompatibility
   let sourceType = [inSourceValue type]
   if inOptionalTargetAnnotationType == sourceType then
     result = inSourceValue
-  elsif [inOptionalTargetAnnotationType isVoid] then
+  elsif [[inOptionalTargetAnnotationType mKind] isVoid] then
     result = inSourceValue
-  elsif [sourceType isStaticInteger] && [inOptionalTargetAnnotationType isInteger] then
+  elsif [[sourceType mKind] isStaticInteger] && [[inOptionalTargetAnnotationType mKind] isInteger] then
     [inSourceValue literalInteger ?1* ?value:let value]
-    [inOptionalTargetAnnotationType integer ?1* ?min:let minTarget ?max:let maxTarget ?3*]
+    [[inOptionalTargetAnnotationType mKind] integer ?min:let minTarget ?max:let maxTarget ?3*]
     if (value < minTarget) || (maxTarget < value) then
       error inErrorLocation : "literal integer too large" : result
     else
@@ -70,7 +70,7 @@ proc getNewTempValue
   ?!@semanticTemporariesStruct ioTemporaries
   !@objectIR outTempVariable
 {
-  if inType == .void then
+  if [inType mKind] == .void then
     outTempVariable = .null
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]
@@ -85,7 +85,7 @@ proc getNewTempReference
   ?!@semanticTemporariesStruct ioTemporaries
   !@objectIR outTempVariable
 {
-  if inType == .void then
+  if [inType mKind] == .void then
     outTempVariable = .null
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]
@@ -130,7 +130,7 @@ proc semanticAnalysis
      ]
   end
   [inAST.mStandAloneFunctionDeclarationListAST functionSemanticAnalysis
-    !receiverType:.void
+    !receiverType:voidType ()
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
@@ -141,13 +141,13 @@ proc semanticAnalysis
     !?intermediateCode:outIntermediateCodeStruct
   ]
   [inAST.mStandAloneSystemRoutineListAST systemRoutineSemanticAnalysis
-    !receiverType:.void
+    !receiverType:voidType ()
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
   [inAST.mGuardListAST guardSemanticAnalysis
-    !receiverType:.void
+    !receiverType:voidType ()
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct

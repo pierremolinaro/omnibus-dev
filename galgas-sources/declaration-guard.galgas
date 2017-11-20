@@ -168,7 +168,7 @@ proc guardSemanticAnalysis
 {
 #--- Guard mangled name
   let guardMangledName = routineMangledNameFromAST (
-    !if inSelfType == .void then "" else "$" + [inSelfType key] end
+    !if [inSelfType mKind] == .void then "" else "$" + [inSelfType key] end
     !inRoutineName
     !inRoutineFormalArgumentList
   )
@@ -323,7 +323,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
 #--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
   @objectIR currentObject
   if mIdentifier.string == "" then # Receiver is self
-    if inSelfType == .void then
+    if [inSelfType mKind] == .void then
       error mIdentifier : "self is not available in this context" : currentObject
     else
       currentObject = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
@@ -340,7 +340,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     let currentType = [currentObject type]
     switch access
     case property (@lstring propertyName) :
-      let @propertyMap propertyMap = [currentType propertyMap]
+      let @propertyMap propertyMap = currentType.mPropertyMap
       [propertyMap searchKey !propertyName ?* ?let propertyAccess]
       switch propertyAccess
       case nonVirtualMethod (*) :
@@ -367,7 +367,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
-    let @propertyMap propertyMap = [currentType propertyMap]
+    let @propertyMap propertyMap = currentType.mPropertyMap
     let key = routineMangledNameFromCall (!"" !methodName !mArguments)
     [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     switch propertyAccess
@@ -484,7 +484,7 @@ method @guardMapIR guardCodeGeneration
       ioServiceList += !guardCallName !guardImplementationName
       ioLLVMcode += llvmTitleComment (!guardImplementationName)
       ioLLVMcode += "declare i1 @" + guardCallName + " ("
-      let typeName = if guard.mReceiverType == .void then "" else "$" + [guard.mReceiverType key] end
+      let typeName = if [guard.mReceiverType mKind] == .void then "" else "$" + [guard.mReceiverType key] end
       var first = typeName == ""
       if not first then
         ioLLVMcode += "%" + [typeName assemblerRepresentation] + " * %self"  
@@ -522,7 +522,7 @@ method @guardMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += llvmTitleComment (!guardRoutineName)
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
-  let receiverTypeName = if mReceiverType == .void then "" else "$" + [mReceiverType key] end
+  let receiverTypeName = if [mReceiverType mKind] == .void then "" else "$" + [mReceiverType key] end
   var first = true
   if receiverTypeName != "" then
     ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"

@@ -110,13 +110,13 @@ override method @extendExpressionAST analyzeExpression
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
   end
 #--- Check types
-  if not [resultType isInteger] then
+  if not [[resultType mKind] isInteger] then
     error mTypeName : "this type is not an integer type" : outResult
-  elsif not [[expressionResult type] isInteger] then
+  elsif not [[[expressionResult type] mKind] isInteger] then
     error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[expressionResult type] integer ?3* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize ?1*]
-    [resultType integer ?3* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize ?1*]
+    [[[expressionResult type] mKind] integer ?2* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize ?1*]
+    [[resultType mKind] integer ?2* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize ?1*]
     if sourceIsUnsigned && targetIsUnsigned then # unsigned -> unsigned
       if sourceSize > targetSize then
         error mTypeName: "cannot extend, use convert or truncate"

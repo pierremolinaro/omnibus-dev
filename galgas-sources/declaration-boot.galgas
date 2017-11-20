@@ -85,7 +85,7 @@ method @bootList-element bootSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   @allocaList bootAllocaList = {}
   [mInstructionList analyzeRoutineInstructionList
-    !self:.void
+    !self:voidType ()
     !directAccessToPropertiesAllowed:false
     !propertiesAreMutable:false
     !routineNameForInvocationGraph:routineNameForInvocationGraph

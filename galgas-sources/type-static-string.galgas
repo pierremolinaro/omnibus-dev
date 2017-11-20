@@ -56,7 +56,7 @@ override method @literalStringDeclarationAST enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mLiteralStringTypeName
-    !type:.literalString
+    !type:literalStringType ()
     !index:[ioContext.mTypeMap count]
   ]
 }

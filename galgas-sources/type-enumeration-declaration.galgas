@@ -149,14 +149,17 @@ override method @enumerationDeclaration enterInContext
     !.nonVirtualMethod {!descriptor:routineDescriptor}
   ]
 #--- Insert enumeration in type map
-  [!?ioContext.mTypeMap insertType
-    !lkey:mEnumerationName
-    !type:.enumeration {
+  let enumerationType = @PLMType.new {
+    !propertyMap
+    !.enumeration {
       !constantMap:enumConstantMap
-      !propertyMap:propertyMap
       !bitCount:representationBitCount
       !plmTypeName:mEnumerationName
     }
+  }
+  [!?ioContext.mTypeMap insertType
+    !lkey:mEnumerationName
+    !type:enumerationType
     !index:[ioContext.mTypeMap count]
   ]
 #--- Infix operators
@@ -172,32 +175,32 @@ proc enterEnumerationComparisonOperators
   let key = combineTypeNamesForInfixOperator (!inTypeName.string !inTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey
     !key
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !key
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !key
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !key
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !key
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !key
-    !.boolean
+    !booleanType ()
     !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
   ]
 }

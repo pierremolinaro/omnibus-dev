@@ -105,10 +105,10 @@ override method @typeArrayDeclarationAST enterInContext
     ?@universalValuedObjectMapForContext universalMap
   )
   [mSizeExpression analyzeExpression
-    !self:.void
+    !self:voidType ()
     !inGuard:false
     !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:ioContext
     !mode:.bootMode
     !?temporary:temporaries
@@ -131,7 +131,7 @@ override method @typeArrayDeclarationAST enterInContext
     [!?arrayTypePropertyMap insertKey # "count" property
       !.new {!"count" !mArrayTypeName.location}
       !true # public
-      !.constantProperty {!value:.literalInteger {!type:.staticInteger !value:arraySize}}
+      !.constantProperty {!value:.literalInteger {!type:staticIntegerType () !value:arraySize}}
     ]
   #-------------------------------------------- Constructor map
     @constructorMap constructorMap = {}
@@ -142,11 +142,10 @@ override method @typeArrayDeclarationAST enterInContext
       typeAttributes = typeAttributes | .copyable
     end
   #-------------------------------------------- Enter in type map
-    [!?ioContext.mTypeMap insertType
-      !lkey:mArrayTypeName
-      !type:.arrayType {
+    let arrayType = @PLMType.new {
+      !arrayTypePropertyMap
+      !.arrayType {
         !typeName:mArrayTypeName
-        !propertyMap:arrayTypePropertyMap
         !elementType:elementType
         !size:arraySize
         !constantMap:classConstantMap
@@ -154,6 +153,10 @@ override method @typeArrayDeclarationAST enterInContext
         !plmTypeName:mArrayTypeName
         !constructorMap:constructorMap
       }
+    }
+    [!?ioContext.mTypeMap insertType
+      !lkey:mArrayTypeName
+      !type:arrayType
       !index:[ioContext.mTypeMap count]
     ]
   end

@@ -38,7 +38,7 @@ func %once userModeName -> @string {
 
 func initNameForInvocationGraph ?let @PLMType inReceiverType ?let @lbigint inPriority -> @lstring {
   var s = "init"
-  if inReceiverType != .void then
+  if [inReceiverType mKind] != .void then
     s += " $" + [inReceiverType key]
   end
   s += " " + inPriority.bigint

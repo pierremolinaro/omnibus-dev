@@ -388,16 +388,19 @@ override method @structureDeclarationAST enterInContext
     ]
   end
 #---------------------------------------- Enter in type map
-  [!?ioContext.mTypeMap insertType
-    !lkey:mStructureName
-    !type:.structure {
+  let structureType = @PLMType.new {
+    !propertyMap
+    !.structure {
       !typeName:mStructureName
-      !propertyMap:propertyMap
       !propertyList:propertyList
       !attributes:flags
       !guardMap:guardMap
       !constructorMap:constructorMap
     }
+  }
+  [!?ioContext.mTypeMap insertType
+    !lkey:mStructureName
+    !type:structureType
     !index:[ioContext.mTypeMap count]
   ]
 }
@@ -417,7 +420,7 @@ method @structurePropertyListAST-element enterInContext
 {
 #--- Property type
   let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
-    then .void
+    then voidType ()
     else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
   end
 #--- Variable map (with constants)
@@ -429,7 +432,7 @@ method @structurePropertyListAST-element enterInContext
   switch mInitialisation
   case expression (initExpression) :
     [initExpression analyzeExpression
-      !self:.void
+      !self:voidType ()
       !inGuard:false
       !routineNameForInvocationGraph:.new {!inStructureName.string + " init" !inStructureName.location}
       !optionalTargetType:optionalPropertyType
@@ -446,7 +449,7 @@ method @structurePropertyListAST-element enterInContext
       error mPropertyName : "initialization expression cannot be computed statically"
     end
     @PLMType actualPropertyType
-    if optionalPropertyType != .void then
+    if [optionalPropertyType mKind] != .void then
       actualPropertyType = optionalPropertyType
     else
       actualPropertyType = [expressionIR type]

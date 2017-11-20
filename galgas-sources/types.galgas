@@ -28,19 +28,24 @@ map @constructorMap { # Key is (!selector!selector)
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @PLMType {
+struct @PLMType {
+  @propertyMap mPropertyMap
+  @typeKind mKind
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @typeKind {
   case void # No actual type, used for no annotation type, ...
   case boolean
   case literalString
-  case enumeration (@constantMap constantMap @propertyMap propertyMap @uint bitCount @string plmTypeName)
+  case enumeration (@constantMap constantMap @uint bitCount @string plmTypeName)
   case structure (@lstring typeName
-                  @propertyMap propertyMap
                   @propertyList propertyList
                   @PLMTypeAttributes attributes
                   @guardMapForContext guardMap
                   @constructorMap constructorMap)
-  case integer (@propertyMap propertyMap
-                @bigint min
+  case integer (@bigint min
                 @bigint max
                 @bool unsigned
                 @uint bitCount
@@ -48,7 +53,6 @@ enum @PLMType {
   case staticInteger
   case opaque (@bigint bitCount @PLMTypeAttributes attributes @string plmTypeName @constructorMap constructorMap)
   case arrayType (@lstring typeName
-                  @propertyMap propertyMap
                   @PLMType elementType
                   @bigint size
                   @constantMap constantMap
@@ -61,23 +65,53 @@ enum @PLMType {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func booleanType -> @PLMType {
+  result = .new {!{} !.boolean}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func staticIntegerType -> @PLMType {
+  result = .new {!{} !.staticInteger}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func literalStringType -> @PLMType {
+  result = .new {!{} !.literalString}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func voidType -> @PLMType {
+  result = .new {!{} !.void}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
+  result = .new{!{} !.function {!descriptor:inDescriptor}}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 getter @PLMType constructorMap -> @constructorMap {
-  switch self
+  switch [self mKind]
   case void :
     result = {}
   case boolean :
     result = {}
   case literalString, staticInteger :
     result = {}
-  case enumeration (* * * *) :
+  case enumeration (* * *) :
     result = {}
-  case structure (* * * * * contructorMap) :
+  case structure (* * * * contructorMap) :
     result = contructorMap
-  case integer (* * * * * *) :
+  case integer (* * * * *) :
     result = {}
   case opaque (* * * contructorMap) :
     result = contructorMap
-  case arrayType (* * * * * * * contructorMap) :
+  case arrayType (* * * * * * contructorMap) :
     result = contructorMap
   case function (*) :
     result = {}
@@ -88,50 +122,50 @@ getter @PLMType constructorMap -> @constructorMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @PLMType propertyMap -> @propertyMap {
-  switch self
-  case void :
-    result = {}
-  case boolean :
-    result = {}
-  case literalString, staticInteger :
-    result = {}
-  case enumeration (* propertyMap * *) :
-    result = propertyMap
-  case structure (* propertyMap * * * *) :
-    result = propertyMap
-  case integer (propertyMap * * * * *) :
-    result = propertyMap
-  case opaque (* * * *) :
-    result = {}
-  case arrayType (* propertyMap * * * * * *) :
-    result = propertyMap
-  case function (*) :
-    result = {}
-  case pointer (*) :
-    result = {}
-  end  
-}
+#getter @PLMType propertyMap -> @propertyMap {
+#  switch [self mKind]
+#  case void :
+#    result = {}
+#  case boolean :
+#    result = {}
+#  case literalString, staticInteger :
+#    result = {}
+#  case enumeration (* propertyMap * *) :
+#    result = propertyMap
+#  case structure (* propertyMap * * * *) :
+#    result = propertyMap
+#  case integer (propertyMap * * * * *) :
+#    result = propertyMap
+#  case opaque (* * * *) :
+#    result = {}
+#  case arrayType (* propertyMap * * * * * *) :
+#    result = propertyMap
+#  case function (*) :
+#    result = {}
+#  case pointer (*) :
+#    result = {}
+#  end  
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType equatable -> @bool {
-  switch self
+  switch [self mKind]
   case void :
     result = true
   case boolean :
     result = true
   case literalString, staticInteger :
     result = true
-  case enumeration (* * * *) :
+  case enumeration (* * *) :
     result = true
-  case structure (* * * flags * *) :
+  case structure (* * flags * *) :
     result = [flags equatable]
-  case integer (* * * * * *) :
+  case integer (* * * * *) :
     result = true
   case opaque (* flags * *) :
     result = [flags equatable]
-  case arrayType (* * * * * flags * *) :
+  case arrayType (* * * * flags * *) :
     result = [flags equatable]
   case function (*) :
     result = false
@@ -149,22 +183,22 @@ getter @unifiedTypeMap-proxy instanciable -> @bool {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType instanciable -> @bool {
-  switch self
+  switch [self mKind]
   case void :
     result = true
   case boolean :
     result = true
   case literalString, staticInteger :
     result = true
-  case enumeration (* * * *) :
+  case enumeration (* * *) :
     result = true
-  case structure (* * * flags * *) :
+  case structure (* * flags * *) :
     result = [flags instanciable]
-  case integer (* * * * * *) :
+  case integer (* * * * *) :
     result = true
   case opaque (* flags * *) :
     result = [flags instanciable]
-  case arrayType (* * * * * flags * *) :
+  case arrayType (* * * * flags * *) :
     result = [flags instanciable]
   case function (*) :
     result = false
@@ -182,22 +216,22 @@ getter @unifiedTypeMap-proxy copyable -> @bool {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType copyable -> @bool {
-  switch self
+  switch [self mKind]
   case void :
     result = true
   case boolean :
     result = true
   case literalString, staticInteger :
     result = true
-  case enumeration (* * * *) :
+  case enumeration (* * *) :
     result = true
-  case structure (* * * flags * *) :
+  case structure (* * flags * *) :
     result = [flags copyable]
-  case integer (* * * * * *) :
+  case integer (* * * * *) :
     result = true
   case opaque (* flags * *) :
     result = [flags copyable]
-  case arrayType (* * * * * flags * *) :
+  case arrayType (* * * * flags * *) :
     result = [flags copyable]
   case function (*) :
     result = false
@@ -209,18 +243,18 @@ getter @PLMType copyable -> @bool {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType classConstantMap -> @constantMap {
-  switch self
+  switch [self mKind]
   case boolean, literalString, staticInteger, void :
     result = {}
-  case enumeration (constantMap * * *) :
+  case enumeration (constantMap * *) :
     result = constantMap
-  case structure (* * * * * *) :
+  case structure (* * * * *) :
     result = {}
-  case integer (* * * * * *) :
+  case integer (* * * * *) :
     result = {}
   case opaque (* * * *) :
     result = {}
-  case arrayType (* * * * @constantMap constantMap * * *) :
+  case arrayType (* * * @constantMap constantMap * * *) :
     result = constantMap
   case function (*) :
     result = {}
@@ -232,24 +266,24 @@ getter @PLMType classConstantMap -> @constantMap {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType llvmTypeName -> @string {
-  switch self
+  switch [self mKind]
   case void :
     result = "void"
   case boolean :
     result = "i1"
   case literalString :
     result = "i8*"
-  case enumeration (* * bitCount *) :
+  case enumeration (* @uint bitCount *) :
     result = "i" + bitCount
-  case structure (@lstring typeName * * * * *) :
+  case structure (@lstring typeName * * * *) :
     result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
-  case integer (* * * * @uint bitCount *) :
+  case integer (* * * @uint bitCount *) :
     result = "i" + bitCount
   case staticInteger :
     result = "—"
   case opaque (@bigint bitCount * * *) :
     result = "i" + bitCount
-  case arrayType (@lstring typeName * * * * * * *) :
+  case arrayType (@lstring typeName * * * * * *) :
     result = "%" + [typeName assemblerRepresentation]
   case function (@routineDescriptor descriptor) :
     if descriptor.mReturnTypeProxy == .null then
@@ -276,24 +310,24 @@ getter @PLMType llvmTypeName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType key -> @string {
-  switch self
+  switch [self mKind]
   case void :
     result = "void"
   case boolean :
     result = boolTypeName ()
   case literalString :
     result = staticStringTypeName ()
-  case enumeration (* * * plmTypeName) :
+  case enumeration (* * plmTypeName) :
     result = plmTypeName
-  case structure (plmTypeName * * * * *) :
+  case structure (plmTypeName * * * *) :
     result = plmTypeName
-  case integer (* * * * * plmTypeName) :
+  case integer (* * * * plmTypeName) :
     result = plmTypeName
   case staticInteger :
     result = staticIntegerTypeName ()
   case opaque (* * plmTypeName *) :
     result = plmTypeName
-  case arrayType (* * * * * * plmTypeName *) :
+  case arrayType (* * * * * plmTypeName *) :
     result = plmTypeName
   case function (*) :
     error ["" nowhere] : "«internal error @PLMType key function»" : result
@@ -305,25 +339,25 @@ getter @PLMType key -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType descriptionForHTMLFile -> @string {
-  switch self
+  switch [self mKind]
   case void :
     result = "Void"
   case boolean :
     result = "Boolean"
   case literalString :
     result = "Literal String"
-  case enumeration (* * * *) :
+  case enumeration (* * *) :
     result = "Enumeration"
-  case structure (* * * * * *) :
+  case structure (* * * * *) :
     result = "Structure"
-  case integer (* * * @bool unsigned @uint bitCount *) :
+  case integer (* * @bool unsigned @uint bitCount *) :
     result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
            + ", " + if unsigned then "unsigned" else "signed" end + ")"
   case staticInteger :
     result = "Static Integer"
   case opaque (@bigint bitCount * * *) :
     result = "Opaque (" + bitCount + " bits)"
-  case arrayType (* * * * * * * *) :
+  case arrayType (* * * * * * *) :
     result = "Array"
   case function (*) :
     result = "Function"

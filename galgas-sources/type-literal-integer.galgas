@@ -56,7 +56,7 @@ override method @literalIntegerDeclarationAST enterInContext
  #---
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
-    !type:.staticInteger
+    !type:staticIntegerType ()
     !index:[ioContext.mTypeMap count]
   ]
 #--- Enter integer operators
@@ -78,32 +78,32 @@ private proc enterLiteralIntegerOperators
 #--- Comparison infix operator
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@literal_literal_integerInfixOperation.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@literal_literal_integerInfixOperation.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@literal_literal_integerInfixOperation.new {!.icmp_slt}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@literal_literal_integerInfixOperation.new {!.icmp_sle}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@literal_literal_integerInfixOperation.new {!.icmp_sgt}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
-    !.boolean
+    !booleanType ()
     !@literal_literal_integerInfixOperation.new {!.icmp_sge}
   ]
 #--- Bit Wise operators (for unsigned integers)

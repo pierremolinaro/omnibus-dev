@@ -90,11 +90,11 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     ?let rightOperand
   ]  
 #--- Check left type is boolean
-  if [leftOperand type] != .boolean then
+  if [[leftOperand type] mKind] != .boolean then
     error mOperatorLocation : "left operand should be boolean"
   end
 #--- Check right type is boolean
-  if [rightOperand type] != .boolean then
+  if [[rightOperand type] mKind] != .boolean then
     error mOperatorLocation : "left operand should be boolean"
   end
 #--- Static operation, or dynamic operation
@@ -104,7 +104,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     outResult = .literalInteger {!type:[leftOperand type] !value:leftStaticValue & rightStaticValue}
   else
   #--- Result type : bool 
-    getNewTempValue (!.boolean !?ioTemporaries ?outResult)
+    getNewTempValue (!booleanType () !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendShortCircuitAndOperation
       !outResult

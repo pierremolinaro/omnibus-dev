@@ -113,7 +113,7 @@ override method @ifInstructionAST analyze
     !self:inSelfType
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.void
+    !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -129,7 +129,7 @@ override method @ifInstructionAST analyze
     ?let testResult
   ]  
 #--- Check inferred type
-  if [testResult type] != .boolean then
+  if [[testResult type] mKind] != .boolean then
     error mTestExpressionEndLocation : "test expression type is '" + [testResult key] + "', it should be boolean"
   elsif mStaticIfExpression && not [testResult isStatic] then
     error mTestExpressionEndLocation : "'if' expression is not static"

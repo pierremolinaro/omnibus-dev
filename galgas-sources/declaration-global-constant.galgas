@@ -105,13 +105,13 @@ override method @globalConstantDeclarationAST enterInContext
 #--- Get destination type
   @PLMType annotationType
   if mConstantTypeName.string == "" then
-    annotationType = .void
+    annotationType = voidType ()
   else
     annotationType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mConstantTypeName} type]
   end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
-    !self:.void
+    !self:voidType ()
     !inGuard:false
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:annotationType

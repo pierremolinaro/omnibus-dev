@@ -112,7 +112,7 @@ override method @registerConstantExpressionAST analyzeExpression
         !self:inSelfType
         !inGuard:inGuard
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:.void
+        !optionalTargetType:voidType ()
         !context:inContext
         !mode:inCurrentMode
         !?temporary:ioTemporaries
@@ -128,14 +128,14 @@ override method @registerConstantExpressionAST analyzeExpression
         ?let expressionResult
       ]  
     #--- Check expression type
-      switch [expressionResult type]
-      case arrayType (* * * * * * * *) :
+      switch [[expressionResult type] mKind]
+      case arrayType (* * * * * * *) :
         error expressionLocation: "an unsigned integer expression is required here"
       case opaque (* * * *) :
         error expressionLocation: "an unsigned integer expression is required here"
-      case enumeration (* * * *) :
+      case enumeration (* * *) :
         error expressionLocation: "an unsigned integer expression is required here"
-      case structure (* * * * * *) :
+      case structure (* * * * *) :
         error expressionLocation: "an unsigned integer expression is required here"
       case boolean, void :
         error expressionLocation: "an unsigned integer expression is required here"
@@ -154,7 +154,7 @@ override method @registerConstantExpressionAST analyzeExpression
         else
           error expressionLocation: "expression too large (should be < " + (1G << fieldBitCount)
         end
-      case integer (* @bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount *) :
+      case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount *) :
         if not unsigned then
           error expressionLocation: "an unsigned integer expression is required here"
         else
