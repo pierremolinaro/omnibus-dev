@@ -147,11 +147,11 @@ override method @typeArrayDeclarationAST enterInContext
       !classConstantMap
       !constructorMap
       !typeAttributes
+      !mArrayTypeName
       !.arrayType {
-        !typeName:mArrayTypeName
+        !typeName2:mArrayTypeName
         !elementType:elementType
         !size:arraySize
-        !plmTypeName:mArrayTypeName
       }
     }
     [!?ioContext.mTypeMap insertType

@@ -121,8 +121,8 @@ override method @convertExpressionAST analyzeExpression
   elsif not [[[expressionResult type] mKind] isInteger] then
     error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[[expressionResult type] mKind] integer ?min:let minSource ?max:let maxSource ?3*]
-    [[resultType mKind] integer ?min:let minTarget ?max:let maxTarget ?3*]
+    [[[expressionResult type] mKind] integer ?min:let minSource ?max:let maxSource ?2*]
+    [[resultType mKind] integer ?min:let minTarget ?max:let maxTarget ?2*]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
       error mTypeName:"useless explicit conversion"
@@ -180,8 +180,8 @@ override method @convertInstructionIR llvmInstructionCode
   let convertFailLabel  = "fail." + lbl
   let compareMinVar     = "cmp." + lbl + ".min"
   let compareMaxVar     = "cmp." + lbl + ".max"
-  [[[mTarget type] mKind] integer ?min:let minTarget ?max:let maxTarget ?3*]
-  [[[mOperand type] mKind] integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?2*]
+  [[[mTarget type] mKind] integer ?min:let minTarget ?max:let maxTarget ?2*]
+  [[[mOperand type] mKind] integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?1*]
   let operandType = [mOperand llvmTypeName]
   if minTarget != minSource then
     ioLLVMcode += "  %" + compareMinVar + " = icmp "

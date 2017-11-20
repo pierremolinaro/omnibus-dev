@@ -18,7 +18,7 @@ func checkAssignmentCompatibility
     result = inSourceValue
   elsif [[sourceType mKind] isStaticInteger] && [[inOptionalTargetAnnotationType mKind] isInteger] then
     [inSourceValue literalInteger ?1* ?value:let value]
-    [[inOptionalTargetAnnotationType mKind] integer ?min:let minTarget ?max:let maxTarget ?3*]
+    [[inOptionalTargetAnnotationType mKind] integer ?min:let minTarget ?max:let maxTarget ?2*]
     if (value < minTarget) || (maxTarget < value) then
       error inErrorLocation : "literal integer too large" : result
     else
@@ -26,7 +26,7 @@ func checkAssignmentCompatibility
     end
   else
     error inErrorLocation
-    : "object of type $" + [inOptionalTargetAnnotationType plmTypeName]
+    : "object of type $" + inOptionalTargetAnnotationType.mPLMTypeName
       + " cannot be assigned from expression of type $" + [inSourceValue plmTypeName]
     : result
   end

@@ -355,7 +355,7 @@ override method @configurationDeclarationAST enterInContext
 #--- Panic code type
   ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}
   if [[[ioContext.mPanicCodeType type] mKind] isInteger] then
-    [[[ioContext.mPanicCodeType type] mKind] integer ?2* ?unsigned:let unsigned ?2*]
+    [[[ioContext.mPanicCodeType type] mKind] integer ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
       error mPanicCodeTypeName : "this type should be an unsigned integer type"
     end
@@ -365,7 +365,7 @@ override method @configurationDeclarationAST enterInContext
 #--- Panic line type
   ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicLineTypeName}
   if [[[ioContext.mPanicLineType type] mKind] isInteger] then
-    [[[ioContext.mPanicLineType type] mKind] integer ?2* ?unsigned:let unsigned ?2*]
+    [[[ioContext.mPanicLineType type] mKind] integer ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
       error mPanicLineTypeName : "this type should be an unsigned integer type"
     end

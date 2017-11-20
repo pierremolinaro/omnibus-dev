@@ -182,7 +182,8 @@ method @taskList enterInContext
       !{} # Class constant map
       !{} # Constructor map
       !.none
-      !.structure {!typeName:task.mTaskName !propertyList:propertyList !guardMap:{}}
+      !task.mTaskName
+      !.structure {!propertyList:propertyList !guardMap:{}}
     }
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName

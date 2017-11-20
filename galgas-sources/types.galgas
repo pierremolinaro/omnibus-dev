@@ -33,6 +33,7 @@ struct @PLMType {
   @constantMap mConstantMap # $type.cst, as enumeration values
   @constructorMap mConstructorMap # $type (!... !...)
   @PLMTypeAttributes mAttributes # as instanciable, copyable, ...
+  @string mPLMTypeName # Without le leading '$'; empty string for void type kind
   @typeKind mKind
 }
 
@@ -42,21 +43,17 @@ enum @typeKind {
   case void # No actual type, used for no annotation type, ...
   case boolean
   case literalString
-  case enumeration (@uint bitCount @string plmTypeName)
-  case structure (@lstring typeName
-                  @propertyList propertyList
-                  @guardMapForContext guardMap)
+  case enumeration (@uint bitCount)
+  case structure (@propertyList propertyList @guardMapForContext guardMap)
   case integer (@bigint min
                 @bigint max
                 @bool unsigned
-                @uint bitCount
-                @string plmTypeName)
+                @uint bitCount)
   case staticInteger
-  case opaque (@bigint bitCount @string plmTypeName)
-  case arrayType (@lstring typeName
+  case opaque (@bigint bitCount)
+  case arrayType (@lstring typeName2 # ????
                   @PLMType elementType
-                  @bigint size
-                  @string plmTypeName)
+                  @bigint size)
   case function (@routineDescriptor descriptor)
   case pointer (@PLMType pointee)
 }
@@ -64,7 +61,14 @@ enum @typeKind {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func booleanType -> @PLMType {
-  result = .new {!{} !{} !{} !.all !.boolean}
+  result = .new {
+    !{}
+    !{}
+    !{}
+    !.all
+    !boolTypeName ()
+    !.boolean
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -75,6 +79,7 @@ func staticIntegerType -> @PLMType {
     !{}
     !{}
     !.equatable | .copyable
+    !staticIntegerTypeName ()
     !.staticInteger
   }
 }
@@ -82,19 +87,19 @@ func staticIntegerType -> @PLMType {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func literalStringType -> @PLMType {
-  result = .new {!{} !{} !{} !.all !.literalString}
+  result = .new {!{} !{} !{} !.all !staticStringTypeName () !.literalString}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func voidType -> @PLMType {
-  result = .new {!{} !{} !{} !.none !.void}
+  result = .new {!{} !{} !{} !.none !"" !.void}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
-  result = .new{!{} !{} !{} !.none !.function {!descriptor:inDescriptor}}
+  result = .new{!{} !{} !{} !.none !"" !.function {!descriptor:inDescriptor}}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -137,17 +142,17 @@ getter @PLMType llvmTypeName -> @string {
     result = "i1"
   case literalString :
     result = "i8*"
-  case enumeration (@uint bitCount *) :
+  case enumeration (@uint bitCount) :
     result = "i" + bitCount
-  case structure (@lstring typeName * *) :
-    result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
-  case integer (* * * @uint bitCount *) :
+  case structure (* *) :
+    result = "%" + [llvmRegularTypeMangledNameFromName (![mPLMTypeName nowhere]) assemblerRepresentation]
+  case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case staticInteger :
     result = "—"
-  case opaque (@bigint bitCount *) :
+  case opaque (@bigint bitCount) :
     result = "i" + bitCount
-  case arrayType (@lstring typeName * * *) :
+  case arrayType (@lstring typeName * *) :
     result = "%" + [typeName assemblerRepresentation]
   case function (@routineDescriptor descriptor) :
     if descriptor.mReturnTypeProxy == .null then
@@ -173,32 +178,32 @@ getter @PLMType llvmTypeName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @PLMType plmTypeName -> @string {
-  switch [self mKind]
-  case void :
-    result = "void"
-  case boolean :
-    result = boolTypeName ()
-  case literalString :
-    result = staticStringTypeName ()
-  case enumeration (* plmTypeName) :
-    result = plmTypeName
-  case structure (plmTypeName * *) :
-    result = plmTypeName
-  case integer (* * * * plmTypeName) :
-    result = plmTypeName
-  case staticInteger :
-    result = staticIntegerTypeName ()
-  case opaque (* plmTypeName) :
-    result = plmTypeName
-  case arrayType (* * * plmTypeName) :
-    result = plmTypeName
-  case function (*) :
-    error ["" nowhere] : "«internal error @PLMType key function»" : result
-  case pointer (*) :
-    error ["" nowhere] : "«internal error @PLMType key pointer»" : result
-  end
-}
+#getter @PLMType plmTypeName -> @string {
+#  switch [self mKind]
+#  case void :
+#    result = "void"
+#  case boolean :
+#    result = boolTypeName ()
+#  case literalString :
+#    result = staticStringTypeName ()
+#  case enumeration (* plmTypeName) :
+#    result = plmTypeName
+#  case structure (plmTypeName * *) :
+#    result = plmTypeName
+#  case integer (* * * * plmTypeName) :
+#    result = plmTypeName
+#  case staticInteger :
+#    result = staticIntegerTypeName ()
+#  case opaque (* plmTypeName) :
+#    result = plmTypeName
+#  case arrayType (* * * plmTypeName) :
+#    result = plmTypeName
+#  case function (*) :
+#    error ["" nowhere] : "«internal error @PLMType key function»" : result
+#  case pointer (*) :
+#    error ["" nowhere] : "«internal error @PLMType key pointer»" : result
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -210,18 +215,18 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Boolean"
   case literalString :
     result = "Literal String"
-  case enumeration (* *) :
+  case enumeration (*) :
     result = "Enumeration"
-  case structure (* * *) :
+  case structure (* *) :
     result = "Structure"
-  case integer (* * @bool unsigned @uint bitCount *) :
+  case integer (* * @bool unsigned @uint bitCount) :
     result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
            + ", " + if unsigned then "unsigned" else "signed" end + ")"
   case staticInteger :
     result = "Static Integer"
-  case opaque (@bigint bitCount *) :
+  case opaque (@bigint bitCount) :
     result = "Opaque (" + bitCount + " bits)"
-  case arrayType (* * * *) :
+  case arrayType (* * *) :
     result = "Array"
   case function (*) :
     result = "Function"

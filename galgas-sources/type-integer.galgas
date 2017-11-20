@@ -106,7 +106,8 @@ override method @integerDeclarationAST enterInContext
     !{} # Class constant map
     !{} # Constructor map
     !.all
-    !.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize !plmTypeName:integerTypeName}
+    !integerTypeName
+    !.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
@@ -491,7 +492,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
 #  message "INFIX OP2 " + "\n"
 #--- Check right literal integer can be extented to left integer type, ans is not zero
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[[inLeftOperand type] mKind] integer ?min:let @bigint min ?max:let @bigint max ?3*]
+  [[[inLeftOperand type] mKind] integer ?min:let @bigint min ?max:let @bigint max ?2*]
   if literalValue < min then
     error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
@@ -653,7 +654,7 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
 #  message "INFIX OP3 " + "\n"
 #--- Check left literal integer can be extented to right integer type
   [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[[inRightOperand type] mKind] integer ?min:let @bigint min ?max:let @bigint max ?3*]
+  [[[inRightOperand type] mKind] integer ?min:let @bigint min ?max:let @bigint max ?2*]
   if literalValue < min then
     error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then

@@ -83,17 +83,17 @@ override method @prefixOperatorExpressionAST analyzeExpression
     prefixOperatorMap = inContext.mUnsignedComplementOperatorMap
     binaryOperator = .xor
     switch [[expressionResult type] mKind]
-    case arrayType (* * * *) :
+    case arrayType (* * *) :
       error mOperatorLocation : "internal error" : leftOperand
-    case opaque (* *) :
+    case opaque (*) :
       error mOperatorLocation : "internal error" : leftOperand
     case boolean, void :
       error mOperatorLocation : "internal error" : leftOperand
     case literalString :
       error mOperatorLocation : "internal error" : leftOperand
-    case enumeration (* *) :
+    case enumeration (*) :
       error mOperatorLocation : "internal error" : leftOperand
-    case structure (* * *) :
+    case structure (* *) :
       error mOperatorLocation : "internal error" : leftOperand
     case function (*) :
       error mOperatorLocation : "internal error" : leftOperand
@@ -101,7 +101,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "internal error" : leftOperand
     case staticInteger :
       if [[inOptionalTargetType mKind] isInteger] then
-        [[inOptionalTargetType mKind] integer ?min:let minTarget ?max:let maxTarget ?3*]
+        [[inOptionalTargetType mKind] integer ?min:let minTarget ?max:let maxTarget ?2*]
         if minTarget < 0G then
           error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : leftOperand
         else
@@ -110,7 +110,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
       else
         error mOperatorLocation : "for the ~ operator, the inferred type should be an unsigned integer" : leftOperand
       end
-    case integer (* * * @uint bitCount *) :
+    case integer (* * * @uint bitCount) :
       leftOperand = .literalInteger {!type:staticIntegerType () !value:(1G << bitCount) - 1G}
     end
   case notOperator :
@@ -147,7 +147,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
       result = - value
     case unsignedComplement :
       if [[inOptionalTargetType mKind] isInteger] then
-        [[inOptionalTargetType mKind] integer ?min:let minTarget ?max:let maxTarget ?3*]
+        [[inOptionalTargetType mKind] integer ?min:let minTarget ?max:let maxTarget ?2*]
         if minTarget < 0G then
           error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : result
         else

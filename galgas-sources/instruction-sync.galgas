@@ -312,7 +312,7 @@ proc analyzeGuardCall
     if not [[receiverType mKind] isStructure] then
       error inReceiverName : "receiver is not a structure" : outGuardMangledName, outEffectiveParameterListIR
     else
-      [[receiverType mKind] structure ?2* ?guardMap:let guardMap]
+      [[receiverType mKind] structure ?1* ?guardMap:let guardMap]
       let guardMangledName = routineMangledNameFromCall (!"" !inGuardName !inEffectiveParameterList)
       [guardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature]
     #--- Check accessibility
@@ -320,7 +320,7 @@ proc analyzeGuardCall
         error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
       else  
         outGuardMangledName = routineMangledNameFromCall (
-          !"$" + [receiverType plmTypeName]
+          !"$" + receiverType.mPLMTypeName
           !inGuardName
           !inEffectiveParameterList
         )
