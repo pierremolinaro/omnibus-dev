@@ -245,7 +245,6 @@ proc retainRequiredModules ?!@ast ioAST {
       }
       for init in declaration.mModuleInitListAST do
         ioAST.mInitListAST +=
-         !init.mInitLocation
          !moduleTypeName
          !declaration.mModuleName
          !init.mInstructionList

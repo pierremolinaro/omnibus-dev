@@ -146,6 +146,25 @@ void extensionMethod_semanticAnalysis (const class GALGAS_taskListAST_2D_element
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Routine 'initSemanticAnalysis'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArgument0,
+                                   class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                   class GALGAS_intermediateCodeStruct & ioArgument2,
+                                   const class GALGAS_PLMType constinArgument3,
+                                   const class GALGAS_lbigint constinArgument4,
+                                   const class GALGAS_mode constinArgument5,
+                                   const class GALGAS_instructionListAST constinArgument6,
+                                   const class GALGAS_location constinArgument7,
+                                   class GALGAS_allocaList & outArgument8,
+                                   class GALGAS_instructionListIR & outArgument9,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                            Extension method '@panicClauseListAST-element enterInContext'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -163,6 +182,7 @@ void extensionMethod_enterInContext (const class GALGAS_panicClauseListAST_2D_el
 
 void extensionMethod_enterInContext (const class GALGAS_initList_2D_element inObject,
                                      class GALGAS_semanticContext & io_ioContext,
+                                     class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
@@ -547,24 +567,4 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class C_C
 class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & constinArgument0,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Function 'moduleMangledNameFromModuleName'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_moduleMangledNameFromModuleName (const class GALGAS_lstring & constinArgument0,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Routine 'retainRequiredModules'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_retainRequiredModules (class GALGAS_ast & ioArgument0,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
 

@@ -182,7 +182,7 @@ proc buildSemanticContext
   outDecoratedDeclarationList = {}
 #--- Enter init routines
   for initRoutine in inAST.mInitListAST do
-    [initRoutine enterInContext !?context:outSemanticContext]
+    [initRoutine enterInContext !?context:outSemanticContext !?outDecoratedDeclarationList]
   end
 #--- Enter panic routines
   for panicRoutine in inAST.mPanicClauseListAST do
