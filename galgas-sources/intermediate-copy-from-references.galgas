@@ -36,8 +36,8 @@ setter @instructionListIR appendCopyFromReferences
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName:let sourceLLVMName]
     if sourceType != targetType then
       error inErrorLocation
-      : "object of type $" + [targetType plmTypeName]
-        + " cannot be assigned from expression of type $" + [sourceType plmTypeName]
+      : "object of type $" + targetType.mPLMTypeName
+        + " cannot be assigned from expression of type $" + sourceType.mPLMTypeName
     end
      self += !@copyFromReferencesIR.new {!sourceType !targetLLVMName !sourceLLVMName}
   end
@@ -59,7 +59,7 @@ override method @copyFromReferencesIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mType llvmTypeName]
-  ioLLVMcode += "  call void @plm.assign." + [[mType plmTypeName] identifierRepresentation]
+  ioLLVMcode += "  call void @plm.assign." + [mType.mPLMTypeName identifierRepresentation]
               + " (" + llvmType + "* " + mTargetLLVMName + ", " + llvmType + "* " + mSourceLLVMName + ")\n"
 }
 
@@ -77,7 +77,7 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
   if [mAttributes generateAssignmentRoutine] then
     let typeName = [self llvmTypeName]
     ioLLVMCode += llvmSeparatorLine () + "\n"
-    ioLLVMCode += "define internal void @plm.assign." + [[self plmTypeName] identifierRepresentation]
+    ioLLVMCode += "define internal void @plm.assign." + [self.mPLMTypeName identifierRepresentation]
                 + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
     ioLLVMCode += "entry:\n"
     ioLLVMCode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"

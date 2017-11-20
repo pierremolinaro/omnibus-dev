@@ -310,15 +310,6 @@ class GALGAS_bool extensionGetter_copyable (const class GALGAS_PLMType & inObjec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'staticIntegerTypeName'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                          Extension getter '@PLMType descriptionForHTMLFile' (as function)                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

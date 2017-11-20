@@ -215,9 +215,9 @@ proc analyzeEffectiveParameters
       + [inEffectiveParameterList length] + " argument(s)"
   else
     for () formal_ in inFormalSignature, () actual_ in parameterList do
-      if [formal_mTypeProxy key] != [actual_mParameterType plmTypeName] then
-        error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType plmTypeName] +
-           "', and is incompatible with the formal type '" + [formal_mTypeProxy key] + "'"
+      if [formal_mTypeProxy key] != actual_mParameterType.mPLMTypeName then
+        error actual_mSelector : "the actual parameter type is $'" + actual_mParameterType.mPLMTypeName +
+           "', and is incompatible with the formal type $'" + [formal_mTypeProxy key] + "'"
       end
       let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
       let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]

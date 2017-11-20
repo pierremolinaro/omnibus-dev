@@ -623,7 +623,7 @@ private proc handleArrayAccessInExpression
 {
 #--- Check current object is an array
   if [[[ioResult type] mKind] isArrayType] then
-    [[[ioResult type] mKind] arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize ?1*]
+    [[[ioResult type] mKind] arrayType ?1* ?elementType:let elementType ?size:let @bigint arraySize]
     handleArraySubscript (
       !self: inSelfType
       !inGuard: inGuard
@@ -710,7 +710,7 @@ private proc handleFunctionCallInExpression
     #--- New LLVM variable for function call result
       getNewTempValue (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
     #--- Generate call
-      let routineMangledName = routineMangledNameFromCall (!"$" + [[ioObjectIR type] plmTypeName] !inMethodName !inArguments)
+      let routineMangledName = routineMangledNameFromCall (!"$" + [ioObjectIR type].mPLMTypeName !inMethodName !inArguments)
       ioInstructionGenerationList += !@staticRoutineCallIR.new {
         !""
         !callReturnedResult

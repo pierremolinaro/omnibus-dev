@@ -154,7 +154,8 @@ override method @enumerationDeclaration enterInContext
     !enumConstantMap
     !{}
     !.all
-    !.enumeration {!bitCount:representationBitCount!plmTypeName:mEnumerationName}
+    !mEnumerationName
+    !.enumeration {!bitCount:representationBitCount}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName

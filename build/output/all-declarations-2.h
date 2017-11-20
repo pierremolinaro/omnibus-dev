@@ -906,11 +906,9 @@ class cMapElement_guardMapForContext : public cMapElement {
 
 class cEnumAssociatedValues_typeKind_enumeration : public cEnumAssociatedValues {
   public : const GALGAS_uint mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_enumeration (const GALGAS_uint & inAssociatedValue0,
-                                                       const GALGAS_string & inAssociatedValue1
+  public : cEnumAssociatedValues_typeKind_enumeration (const GALGAS_uint & inAssociatedValue0
                                                        COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -923,14 +921,12 @@ class cEnumAssociatedValues_typeKind_enumeration : public cEnumAssociatedValues 
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-  public : const GALGAS_propertyList mAssociatedValue1 ;
-  public : const GALGAS_guardMapForContext mAssociatedValue2 ;
+  public : const GALGAS_propertyList mAssociatedValue0 ;
+  public : const GALGAS_guardMapForContext mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_lstring & inAssociatedValue0,
-                                                     const GALGAS_propertyList & inAssociatedValue1,
-                                                     const GALGAS_guardMapForContext & inAssociatedValue2
+  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyList & inAssociatedValue0,
+                                                     const GALGAS_guardMapForContext & inAssociatedValue1
                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -947,14 +943,12 @@ class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
   public : const GALGAS_bigint mAssociatedValue1 ;
   public : const GALGAS_bool mAssociatedValue2 ;
   public : const GALGAS_uint mAssociatedValue3 ;
-  public : const GALGAS_string mAssociatedValue4 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_typeKind_integer (const GALGAS_bigint & inAssociatedValue0,
                                                    const GALGAS_bigint & inAssociatedValue1,
                                                    const GALGAS_bool & inAssociatedValue2,
-                                                   const GALGAS_uint & inAssociatedValue3,
-                                                   const GALGAS_string & inAssociatedValue4
+                                                   const GALGAS_uint & inAssociatedValue3
                                                    COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -968,11 +962,9 @@ class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
 
 class cEnumAssociatedValues_typeKind_opaque : public cEnumAssociatedValues {
   public : const GALGAS_bigint mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_opaque (const GALGAS_bigint & inAssociatedValue0,
-                                                  const GALGAS_string & inAssociatedValue1
+  public : cEnumAssociatedValues_typeKind_opaque (const GALGAS_bigint & inAssociatedValue0
                                                   COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -988,13 +980,11 @@ class cEnumAssociatedValues_typeKind_arrayType : public cEnumAssociatedValues {
   public : const GALGAS_lstring mAssociatedValue0 ;
   public : const GALGAS_PLMType mAssociatedValue1 ;
   public : const GALGAS_bigint mAssociatedValue2 ;
-  public : const GALGAS_string mAssociatedValue3 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_typeKind_arrayType (const GALGAS_lstring & inAssociatedValue0,
                                                      const GALGAS_PLMType & inAssociatedValue1,
-                                                     const GALGAS_bigint & inAssociatedValue2,
-                                                     const GALGAS_string & inAssociatedValue3
+                                                     const GALGAS_bigint & inAssociatedValue2
                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9422,16 +9412,6 @@ class GALGAS_string function_llvmNameForGuardImplementation (const class GALGAS_
 class GALGAS_string function_llvmNameForLocalVariable (const class GALGAS_string & constinArgument0,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                Extension getter '@PLMType plmTypeName' (as function)                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_plmTypeName (const class GALGAS_PLMType & inObject,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
