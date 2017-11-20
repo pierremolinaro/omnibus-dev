@@ -21,7 +21,11 @@ func llvmRegularTypeMangledNameFromName ?let @lstring inName -> @lstring {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func moduleMangledNameFromModuleName ?let @lstring inModuleName -> @lstring {
-  result = .new {!inModuleName.string + "$" !inModuleName.location}
+  result = if inModuleName.string == "" then
+    inModuleName
+  else
+    .new {!inModuleName.string + "$" !inModuleName.location}
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -36,10 +40,10 @@ func %once userModeName -> @string {
 #! Names for invocation graph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func initNameForInvocationGraph ?let @PLMType inReceiverType ?let @lbigint inPriority -> @lstring {
+func initNameForInvocationGraph ?let @string inReceiverTypeName ?let @lbigint inPriority -> @lstring {
   var s = "init"
-  if [inReceiverType mKind] != .void then
-    s += " $" + inReceiverType.mPLMTypeName
+  if inReceiverTypeName != "" then
+    s += " $" + inReceiverTypeName
   end
   s += " " + inPriority.bigint
   result = .new {!s !inPriority.location}

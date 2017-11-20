@@ -17508,11 +17508,12 @@ void cGrammar_plm_5F_grammar::nt_declaration_5F_init_parse (C_Lexique_plm_5F_lex
   }
 }
 
-void cGrammar_plm_5F_grammar::nt_declaration_5F_init_ (GALGAS_initList &  parameter_1,
+void cGrammar_plm_5F_grammar::nt_declaration_5F_init_ (GALGAS_initAST &  parameter_1,
+                                const GALGAS_lstring  parameter_2,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 31 :
-      rule_plm_5F_syntax_declaration_5F_init_i31_(parameter_1, inLexique) ;
+      rule_plm_5F_syntax_declaration_5F_init_i31_(parameter_1, parameter_2, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;

@@ -283,7 +283,7 @@ void routine_generatePrimitiveAndServiceDispatcher (const class GALGAS_string co
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_initNameForInvocationGraph (const class GALGAS_PLMType & constinArgument0,
+class GALGAS_lstring function_initNameForInvocationGraph (const class GALGAS_string & constinArgument0,
                                                           const class GALGAS_lbigint & constinArgument1,
                                                           class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
@@ -439,13 +439,4 @@ void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
                                class GALGAS_lstring & outArgument13,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Function 'waitForGuardChangeFunctionName'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
 

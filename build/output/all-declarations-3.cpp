@@ -11789,7 +11789,6 @@ mProperty_mISRDeclarationListAST (),
 mProperty_mStandAloneSystemRoutineListAST (),
 mProperty_mGuardListAST (),
 mProperty_mTargetListAST (),
-mProperty_mInitListAST (),
 mProperty_mPanicClauseListAST (),
 mProperty_mTaskListAST (),
 mProperty_mCheckTargetListAST (),
@@ -11815,12 +11814,11 @@ GALGAS_ast::GALGAS_ast (const GALGAS_globalVarDeclarationList & inOperand0,
                         const GALGAS_systemRoutineDeclarationListAST & inOperand8,
                         const GALGAS_guardDeclarationListAST & inOperand9,
                         const GALGAS_lstringlist & inOperand10,
-                        const GALGAS_initList & inOperand11,
-                        const GALGAS_panicClauseListAST & inOperand12,
-                        const GALGAS_taskListAST & inOperand13,
-                        const GALGAS_checkTargetListAST & inOperand14,
-                        const GALGAS_moduleDeclarationListAST & inOperand15,
-                        const GALGAS_moduleInstanciationListAST & inOperand16) :
+                        const GALGAS_panicClauseListAST & inOperand11,
+                        const GALGAS_taskListAST & inOperand12,
+                        const GALGAS_checkTargetListAST & inOperand13,
+                        const GALGAS_moduleDeclarationListAST & inOperand14,
+                        const GALGAS_moduleInstanciationListAST & inOperand15) :
 mProperty_mGlobalVarDeclarationListAST (inOperand0),
 mProperty_mDeclarationListAST (inOperand1),
 mProperty_mExtensionDeclarationListAST (inOperand2),
@@ -11832,12 +11830,11 @@ mProperty_mISRDeclarationListAST (inOperand7),
 mProperty_mStandAloneSystemRoutineListAST (inOperand8),
 mProperty_mGuardListAST (inOperand9),
 mProperty_mTargetListAST (inOperand10),
-mProperty_mInitListAST (inOperand11),
-mProperty_mPanicClauseListAST (inOperand12),
-mProperty_mTaskListAST (inOperand13),
-mProperty_mCheckTargetListAST (inOperand14),
-mProperty_mModuleDeclarationListAST (inOperand15),
-mProperty_mRequiredModuleListAST (inOperand16) {
+mProperty_mPanicClauseListAST (inOperand11),
+mProperty_mTaskListAST (inOperand12),
+mProperty_mCheckTargetListAST (inOperand13),
+mProperty_mModuleDeclarationListAST (inOperand14),
+mProperty_mRequiredModuleListAST (inOperand15) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11854,7 +11851,6 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
                      GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_guardDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_lstringlist::constructor_emptyList (HERE),
-                     GALGAS_initList::constructor_emptyList (HERE),
                      GALGAS_panicClauseListAST::constructor_emptySortedList (HERE),
                      GALGAS_taskListAST::constructor_emptyList (HERE),
                      GALGAS_checkTargetListAST::constructor_emptyList (HERE),
@@ -11875,16 +11871,15 @@ GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_globalVarDeclarationList & 
                                         const GALGAS_systemRoutineDeclarationListAST & inOperand8,
                                         const GALGAS_guardDeclarationListAST & inOperand9,
                                         const GALGAS_lstringlist & inOperand10,
-                                        const GALGAS_initList & inOperand11,
-                                        const GALGAS_panicClauseListAST & inOperand12,
-                                        const GALGAS_taskListAST & inOperand13,
-                                        const GALGAS_checkTargetListAST & inOperand14,
-                                        const GALGAS_moduleDeclarationListAST & inOperand15,
-                                        const GALGAS_moduleInstanciationListAST & inOperand16 
+                                        const GALGAS_panicClauseListAST & inOperand11,
+                                        const GALGAS_taskListAST & inOperand12,
+                                        const GALGAS_checkTargetListAST & inOperand13,
+                                        const GALGAS_moduleDeclarationListAST & inOperand14,
+                                        const GALGAS_moduleInstanciationListAST & inOperand15 
                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_ast result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid ()) {
-    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid ()) {
+    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15) ;
   }
   return result ;
 }
@@ -11927,9 +11922,6 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
     result = mProperty_mTargetListAST.objectCompare (inOperand.mProperty_mTargetListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mInitListAST.objectCompare (inOperand.mProperty_mInitListAST) ;
-  }
-  if (result == kOperandEqual) {
     result = mProperty_mPanicClauseListAST.objectCompare (inOperand.mProperty_mPanicClauseListAST) ;
   }
   if (result == kOperandEqual) {
@@ -11950,7 +11942,7 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_ast::isValid (void) const {
-  return mProperty_mGlobalVarDeclarationListAST.isValid () && mProperty_mDeclarationListAST.isValid () && mProperty_mExtensionDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mGuardListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mInitListAST.isValid () && mProperty_mPanicClauseListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mModuleDeclarationListAST.isValid () && mProperty_mRequiredModuleListAST.isValid () ;
+  return mProperty_mGlobalVarDeclarationListAST.isValid () && mProperty_mDeclarationListAST.isValid () && mProperty_mExtensionDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mGuardListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mPanicClauseListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mModuleDeclarationListAST.isValid () && mProperty_mRequiredModuleListAST.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11967,7 +11959,6 @@ void GALGAS_ast::drop (void) {
   mProperty_mStandAloneSystemRoutineListAST.drop () ;
   mProperty_mGuardListAST.drop () ;
   mProperty_mTargetListAST.drop () ;
-  mProperty_mInitListAST.drop () ;
   mProperty_mPanicClauseListAST.drop () ;
   mProperty_mTaskListAST.drop () ;
   mProperty_mCheckTargetListAST.drop () ;
@@ -12004,8 +11995,6 @@ void GALGAS_ast::description (C_String & ioString,
     mProperty_mGuardListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mTargetListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mInitListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mPanicClauseListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -12084,12 +12073,6 @@ GALGAS_guardDeclarationListAST GALGAS_ast::getter_mGuardListAST (UNUSED_LOCATION
 
 GALGAS_lstringlist GALGAS_ast::getter_mTargetListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mTargetListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initList GALGAS_ast::getter_mInitListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInitListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
