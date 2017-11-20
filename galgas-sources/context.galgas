@@ -188,8 +188,6 @@ proc buildSemanticContext
   for panicRoutine in inAST.mPanicClauseListAST do
     [panicRoutine enterInContext !?context:outSemanticContext]
   end
-#--- Enter boot routines
-  [inAST.mBootListAST enterInContext !?outDecoratedDeclarationList]
 #--- Enter standalone procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext !?outDecoratedDeclarationList]
   [inAST.mStandAloneFunctionDeclarationListAST enterFunctionInContext
@@ -243,6 +241,11 @@ proc buildSemanticContext
       ]
     end
   end
+#--- Enter boot routines
+#  [inAST.mBootListAST enterInContext
+#    !?outDecoratedDeclarationList
+#    !?outSubprogramInvocationGraph
+#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

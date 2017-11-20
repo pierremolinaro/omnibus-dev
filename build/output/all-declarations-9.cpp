@@ -10,178 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 Overriding extension getter '@requiredModuleAST keyRepresentationForErrorSignaling'                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_string extensionGetter_requiredModuleAST_keyRepresentationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
-                                                                                           C_Compiler * inCompiler
-                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outRepresentation ; // Returned variable
-  const cPtr_requiredModuleAST * object = (const cPtr_requiredModuleAST *) inObject ;
-  macroValidSharedObject (object, cPtr_requiredModuleAST) ;
-  result_outRepresentation = GALGAS_string ("module ").add_operation (object->mProperty_mModuleName.getter_string (SOURCE_FILE ("declaration-module.galgas", 156)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 156)) ;
-//---
-  return result_outRepresentation ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionGetter_requiredModuleAST_keyRepresentationForErrorSignaling (void) {
-  enterExtensionGetter_keyRepresentationForErrorSignaling (kTypeDescriptor_GALGAS_requiredModuleAST.mSlotID,
-                                                           extensionGetter_requiredModuleAST_keyRepresentationForErrorSignaling) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gGetter_requiredModuleAST_keyRepresentationForErrorSignaling (defineExtensionGetter_requiredModuleAST_keyRepresentationForErrorSignaling, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Overriding extension getter '@requiredModuleAST location'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_location extensionGetter_requiredModuleAST_location (const cPtr_abstractDeclarationAST * inObject,
-                                                                   C_Compiler * /* inCompiler */
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_location result_outLocation ; // Returned variable
-  const cPtr_requiredModuleAST * object = (const cPtr_requiredModuleAST *) inObject ;
-  macroValidSharedObject (object, cPtr_requiredModuleAST) ;
-  result_outLocation = object->mProperty_mModuleName.getter_location (HERE) ;
-//---
-  return result_outLocation ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionGetter_requiredModuleAST_location (void) {
-  enterExtensionGetter_location (kTypeDescriptor_GALGAS_requiredModuleAST.mSlotID,
-                                 extensionGetter_requiredModuleAST_location) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gGetter_requiredModuleAST_location (defineExtensionGetter_requiredModuleAST_location, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Overriding extension method '@requiredModuleAST addExtension'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_requiredModuleAST_addExtension (const cPtr_abstractDeclarationAST * inObject,
-                                                            GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
-                                                            GALGAS_extendStaticArrayDeclarationAST & /* ioArgument_ioExtendStaticArrayDeclarationAST */,
-                                                            GALGAS_abstractDeclarationAST & outArgument_outNewDeclaration,
-                                                            C_Compiler * /* inCompiler */
-                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_requiredModuleAST * object = (const cPtr_requiredModuleAST *) inObject ;
-  macroValidSharedObject (object, cPtr_requiredModuleAST) ;
-  const GALGAS_requiredModuleAST temp_0 = object ;
-  outArgument_outNewDeclaration = temp_0 ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_requiredModuleAST_addExtension (void) {
-  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_requiredModuleAST.mSlotID,
-                                     extensionMethod_requiredModuleAST_addExtension) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_requiredModuleAST_addExtension (defineExtensionMethod_requiredModuleAST_addExtension, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Routine 'retainRequiredModules'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_retainRequiredModules (GALGAS_ast & ioArgument_ioAST,
-                                    C_Compiler * inCompiler
-                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_instanciedModuleMap var_instanciedModuleMap_7739 = GALGAS_instanciedModuleMap::constructor_emptyMap (SOURCE_FILE ("declaration-module.galgas", 198)) ;
-  GALGAS_stringset var_validModuleNames_7774 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-module.galgas", 199)) ;
-  cEnumerator_moduleInstanciationListAST enumerator_7890 (ioArgument_ioAST.getter_mRequiredModuleListAST (HERE), kENUMERATION_UP) ;
-  while (enumerator_7890.hasCurrentObject ()) {
-    GALGAS_moduleInstanciationArgumentMap var_moduleInstanciationArgumentMap_7961 = GALGAS_moduleInstanciationArgumentMap::constructor_emptyMap (SOURCE_FILE ("declaration-module.galgas", 201)) ;
-    cEnumerator_moduleInstanciationArgumentListAST enumerator_8005 (enumerator_7890.current_mModuleInstanciationArgumentList (HERE), kENUMERATION_UP) ;
-    while (enumerator_8005.hasCurrentObject ()) {
-      {
-      var_moduleInstanciationArgumentMap_7961.setter_insertKey (enumerator_8005.current_mSelector (HERE), enumerator_8005.current_mExpression (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 203)) ;
-      }
-      enumerator_8005.gotoNextObject () ;
-    }
-    {
-    var_instanciedModuleMap_7739.setter_insertKey (enumerator_7890.current_mModuleName (HERE), var_moduleInstanciationArgumentMap_7961, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 205)) ;
-    }
-    enumerator_7890.gotoNextObject () ;
-  }
-  cEnumerator_moduleDeclarationListAST enumerator_8307 (ioArgument_ioAST.getter_mModuleDeclarationListAST (HERE), kENUMERATION_UP) ;
-  while (enumerator_8307.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = var_instanciedModuleMap_7739.getter_hasKey (enumerator_8307.current_mModule (HERE).getter_mModuleName (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("declaration-module.galgas", 209)).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      var_validModuleNames_7774.addAssign_operation (enumerator_8307.current_mModule (HERE).getter_mModuleName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 210)) ;
-      GALGAS_moduleInstanciationArgumentMap var_moduleInstanciationArgumentMap_8539 ;
-      var_instanciedModuleMap_7739.method_searchKey (enumerator_8307.current_mModule (HERE).getter_mModuleName (HERE), var_moduleInstanciationArgumentMap_8539, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 211)) ;
-      GALGAS_stringset var_validArgumentSet_8634 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-module.galgas", 213)) ;
-      GALGAS_structurePropertyListAST var_modulePropertyListAST_8693 = GALGAS_structurePropertyListAST::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 214)) ;
-      cEnumerator_modulePropertyListAST enumerator_8812 (enumerator_8307.current_mModule (HERE).getter_mPropertyListAST (HERE), kENUMERATION_UP) ;
-      while (enumerator_8812.hasCurrentObject ()) {
-        GALGAS_expressionAST var_initExpression_8853 ;
-        switch (enumerator_8812.current_mOptionalExpression (HERE).enumValue ()) {
-        case GALGAS_structurePropertyInitOptionalExpressionAST::kNotBuilt:
-          break ;
-        case GALGAS_structurePropertyInitOptionalExpressionAST::kEnum_noExpression:
-          {
-            var_moduleInstanciationArgumentMap_8539.method_searchKey (enumerator_8812.current_mPropertyName (HERE), var_initExpression_8853, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 219)) ;
-            var_validArgumentSet_8634.addAssign_operation (enumerator_8812.current_mPropertyName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 220)) ;
-          }
-          break ;
-        case GALGAS_structurePropertyInitOptionalExpressionAST::kEnum_expression:
-          {
-            const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression * extractPtr_9131 = (const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression *) (enumerator_8812.current_mOptionalExpression (HERE).unsafePointer ()) ;
-            const GALGAS_expressionAST extractedValue_expression = extractPtr_9131->mAssociatedValue0 ;
-            var_initExpression_8853 = extractedValue_expression ;
-          }
-          break ;
-        }
-        var_modulePropertyListAST_8693.addAssign_operation (enumerator_8812.current_mPropertyName (HERE), enumerator_8812.current_mIsConstant (HERE), GALGAS_bool (false), enumerator_8812.current_mTypeName (HERE), GALGAS_structurePropertyInitOptionalExpressionAST::constructor_expression (var_initExpression_8853  COMMA_SOURCE_FILE ("declaration-module.galgas", 229))  COMMA_SOURCE_FILE ("declaration-module.galgas", 224)) ;
-        enumerator_8812.gotoNextObject () ;
-      }
-      cEnumerator_stringset enumerator_9491 (var_moduleInstanciationArgumentMap_8539.getter_keySet (SOURCE_FILE ("declaration-module.galgas", 232)).substract_operation (var_validArgumentSet_8634, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 232)), kENUMERATION_UP) ;
-      while (enumerator_9491.hasCurrentObject ()) {
-        TC_Array <C_FixItDescription> fixItArray1 ;
-        inCompiler->emitSemanticError (var_moduleInstanciationArgumentMap_8539.getter_locationForKey (enumerator_9491.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 233)), GALGAS_string ("invalid selector"), fixItArray1  COMMA_SOURCE_FILE ("declaration-module.galgas", 233)) ;
-        enumerator_9491.gotoNextObject () ;
-      }
-      GALGAS_lstring var_moduleTypeName_9637 = function_moduleMangledNameFromModuleName (enumerator_8307.current_mModule (HERE).getter_mModuleName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 236)) ;
-      ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_requiredModuleAST::constructor_new (enumerator_8307.current_mModule (HERE).getter_mModuleName (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 237))  COMMA_SOURCE_FILE ("declaration-module.galgas", 237)) ;
-      ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_structureDeclarationAST::constructor_new (var_moduleTypeName_9637, GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 240)), var_modulePropertyListAST_8693, enumerator_8307.current_mModule (HERE).getter_mFunctionDeclarationListAST (HERE), enumerator_8307.current_mModule (HERE).getter_mSystemRoutineListAST (HERE), enumerator_8307.current_mModule (HERE).getter_mGuardListAST (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 238))  COMMA_SOURCE_FILE ("declaration-module.galgas", 238)) ;
-      cEnumerator_initList enumerator_10102 (enumerator_8307.current_mModule (HERE).getter_mModuleInitListAST (HERE), kENUMERATION_UP) ;
-      while (enumerator_10102.hasCurrentObject ()) {
-        ioArgument_ioAST.mProperty_mInitListAST.addAssign_operation (enumerator_10102.current (HERE).getter_mInitLocation (HERE), var_moduleTypeName_9637, enumerator_8307.current_mModule (HERE).getter_mModuleName (HERE).getter_string (SOURCE_FILE ("declaration-module.galgas", 250)), enumerator_10102.current (HERE).getter_mInstructionList (HERE), enumerator_10102.current (HERE).getter_mEndOfInitLocation (HERE), enumerator_10102.current (HERE).getter_mPriority (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 247)) ;
-        enumerator_10102.gotoNextObject () ;
-      }
-    }
-    enumerator_8307.gotoNextObject () ;
-  }
-  ioArgument_ioAST.mProperty_mModuleDeclarationListAST = GALGAS_moduleDeclarationListAST::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 257)) ;
-  cEnumerator_stringset enumerator_10532 (var_instanciedModuleMap_7739.getter_keySet (SOURCE_FILE ("declaration-module.galgas", 259)).substract_operation (var_validModuleNames_7774, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 259)), kENUMERATION_UP) ;
-  while (enumerator_10532.hasCurrentObject ()) {
-    TC_Array <C_FixItDescription> fixItArray2 ;
-    inCompiler->emitSemanticError (var_instanciedModuleMap_7739.getter_locationForKey (enumerator_10532.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 260)), GALGAS_string ("undefined module"), fixItArray2  COMMA_SOURCE_FILE ("declaration-module.galgas", 260)) ;
-    enumerator_10532.gotoNextObject () ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                           Overriding extension method '@requiredModuleAST enterInContext'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -228,21 +56,21 @@ static void extensionMethod_decoratedRequiredModule_semanticAnalysis (const cPtr
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_decoratedRequiredModule * object = (const cPtr_decoratedRequiredModule *) inObject ;
   macroValidSharedObject (object, cPtr_decoratedRequiredModule) ;
-  GALGAS_lstring var_moduleTypeName_12668 = function_moduleMangledNameFromModuleName (object->mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 302)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_moduleTypeProxy_12739 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), var_moduleTypeName_12668, inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 303)) ;
-  GALGAS_constructorMap var_constructorMap_12832 = var_moduleTypeProxy_12739.getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 304)).getter_mConstructorMap (HERE) ;
-  GALGAS_constructorValue var_constructorValue_12966 ;
-  GALGAS_constructorSignature joker_12943 ; // Joker input parameter
-  var_constructorMap_12832.method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("()"), var_moduleTypeName_12668.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 305)), joker_12943, var_constructorValue_12966, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 305)) ;
-  GALGAS_sortedOperandIRList var_sortedOperandList_13038 ;
-  var_constructorValue_12966.method_structure (var_sortedOperandList_13038, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 306)) ;
-  GALGAS_operandIRList var_initialValueList_13073 = GALGAS_operandIRList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 307)) ;
-  cEnumerator_sortedOperandIRList enumerator_13122 (var_sortedOperandList_13038, kENUMERATION_UP) ;
-  while (enumerator_13122.hasCurrentObject ()) {
-    var_initialValueList_13073.addAssign_operation (enumerator_13122.current_mOperand (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 309)) ;
-    enumerator_13122.gotoNextObject () ;
+  GALGAS_lstring var_moduleTypeName_12670 = function_moduleMangledNameFromModuleName (object->mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 302)) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_moduleTypeProxy_12741 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), var_moduleTypeName_12670, inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 303)) ;
+  GALGAS_constructorMap var_constructorMap_12834 = var_moduleTypeProxy_12741.getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 304)).getter_mConstructorMap (HERE) ;
+  GALGAS_constructorValue var_constructorValue_12968 ;
+  GALGAS_constructorSignature joker_12945 ; // Joker input parameter
+  var_constructorMap_12834.method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("()"), var_moduleTypeName_12670.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 305)), joker_12945, var_constructorValue_12968, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 305)) ;
+  GALGAS_sortedOperandIRList var_sortedOperandList_13040 ;
+  var_constructorValue_12968.method_structure (var_sortedOperandList_13040, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 306)) ;
+  GALGAS_operandIRList var_initialValueList_13075 = GALGAS_operandIRList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 307)) ;
+  cEnumerator_sortedOperandIRList enumerator_13124 (var_sortedOperandList_13040, kENUMERATION_UP) ;
+  while (enumerator_13124.hasCurrentObject ()) {
+    var_initialValueList_13075.addAssign_operation (enumerator_13124.current_mOperand (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 309)) ;
+    enumerator_13124.gotoNextObject () ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mModuleList.addAssign_operation (object->mProperty_mModuleName.getter_string (HERE), var_moduleTypeProxy_12739, var_initialValueList_13073  COMMA_SOURCE_FILE ("declaration-module.galgas", 311)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mModuleList.addAssign_operation (object->mProperty_mModuleName.getter_string (HERE), var_moduleTypeProxy_12741, var_initialValueList_13075  COMMA_SOURCE_FILE ("declaration-module.galgas", 311)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2593,6 +2421,151 @@ void routine_generatePrimitiveAndServiceDispatcher (const GALGAS_string constinA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Overriding extension method '@bootAST enterInPrecedenceGraph'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_bootAST_enterInPrecedenceGraph (const cPtr_abstractDeclarationAST * /* inObject */,
+                                                            GALGAS_semanticTypePrecedenceGraph & /* ioArgument_ioGraph */,
+                                                            C_Compiler * /* inCompiler */
+                                                            COMMA_UNUSED_LOCATION_ARGS) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_bootAST_enterInPrecedenceGraph (void) {
+  enterExtensionMethod_enterInPrecedenceGraph (kTypeDescriptor_GALGAS_bootAST.mSlotID,
+                                               extensionMethod_bootAST_enterInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_bootAST_enterInPrecedenceGraph (defineExtensionMethod_bootAST_enterInPrecedenceGraph, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Overriding extension getter '@bootAST keyRepresentationForErrorSignaling'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string extensionGetter_bootAST_keyRepresentationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outRepresentation ; // Returned variable
+  const cPtr_bootAST * object = (const cPtr_bootAST *) inObject ;
+  macroValidSharedObject (object, cPtr_bootAST) ;
+  result_outRepresentation = GALGAS_string ("boot ").add_operation (object->mProperty_mPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 53)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 53)) ;
+//---
+  return result_outRepresentation ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionGetter_bootAST_keyRepresentationForErrorSignaling (void) {
+  enterExtensionGetter_keyRepresentationForErrorSignaling (kTypeDescriptor_GALGAS_bootAST.mSlotID,
+                                                           extensionGetter_bootAST_keyRepresentationForErrorSignaling) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gGetter_bootAST_keyRepresentationForErrorSignaling (defineExtensionGetter_bootAST_keyRepresentationForErrorSignaling, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Overriding extension getter '@bootAST location'                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_location extensionGetter_bootAST_location (const cPtr_abstractDeclarationAST * inObject,
+                                                         C_Compiler * /* inCompiler */
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_location result_outLocation ; // Returned variable
+  const cPtr_bootAST * object = (const cPtr_bootAST *) inObject ;
+  macroValidSharedObject (object, cPtr_bootAST) ;
+  result_outLocation = object->mProperty_mPriority.getter_location (HERE) ;
+//---
+  return result_outLocation ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionGetter_bootAST_location (void) {
+  enterExtensionGetter_location (kTypeDescriptor_GALGAS_bootAST.mSlotID,
+                                 extensionGetter_bootAST_location) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gGetter_bootAST_location (defineExtensionGetter_bootAST_location, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Overriding extension method '@bootAST addExtension'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_bootAST_addExtension (const cPtr_abstractDeclarationAST * inObject,
+                                                  GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
+                                                  GALGAS_extendStaticArrayDeclarationAST & /* ioArgument_ioExtendStaticArrayDeclarationAST */,
+                                                  GALGAS_abstractDeclarationAST & outArgument_outNewDeclaration,
+                                                  C_Compiler * /* inCompiler */
+                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_bootAST * object = (const cPtr_bootAST *) inObject ;
+  macroValidSharedObject (object, cPtr_bootAST) ;
+  const GALGAS_bootAST temp_0 = object ;
+  outArgument_outNewDeclaration = temp_0 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_bootAST_addExtension (void) {
+  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_bootAST.mSlotID,
+                                     extensionMethod_bootAST_addExtension) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_bootAST_addExtension (defineExtensionMethod_bootAST_addExtension, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                Overriding extension method '@bootAST enterInContext'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_bootAST_enterInContext (const cPtr_abstractDeclarationAST * inObject,
+                                                    const GALGAS_functionDeclarationListAST /* constinArgument_inProcedureListAST */,
+                                                    GALGAS_semanticContext & /* ioArgument_ioContext */,
+                                                    GALGAS_declarationDecorationList & ioArgument_ioDecoratedDeclarationList,
+                                                    GALGAS_subprogramInvocationGraph & ioArgument_ioSubprogramInvocationGraph,
+                                                    GALGAS_staticListInitializationMap & /* ioArgument_ioStaticListValueMap */,
+                                                    GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_bootAST * object = (const cPtr_bootAST *) inObject ;
+  macroValidSharedObject (object, cPtr_bootAST) ;
+  ioArgument_ioDecoratedDeclarationList.addAssign_operation (GALGAS_decoratedBootRoutine::constructor_new (object->mProperty_mInstructionList, object->mProperty_mEndOfBootLocation, object->mProperty_mPriority  COMMA_SOURCE_FILE ("declaration-boot.galgas", 87))  COMMA_SOURCE_FILE ("declaration-boot.galgas", 87)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph_4336 = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (object->mProperty_mPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 93)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 93)), object->mProperty_mPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 93)) ;
+  {
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_4336, var_routineNameForInvocationGraph_4336, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 94)) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_bootAST_enterInContext (void) {
+  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_bootAST.mSlotID,
+                                       extensionMethod_bootAST_enterInContext) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_bootAST_enterInContext (defineExtensionMethod_bootAST_enterInContext, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                        Overriding extension method '@decoratedBootRoutine semanticAnalysis'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2606,24 +2579,18 @@ static void extensionMethod_decoratedBootRoutine_semanticAnalysis (const cPtr_ab
   const cPtr_decoratedBootRoutine * object = (const cPtr_decoratedBootRoutine *) inObject ;
   macroValidSharedObject (object, cPtr_decoratedBootRoutine) ;
   {
-  ioArgument_ioTemporaries.mProperty_mBootRoutinePriorityMap.setter_insertKey (GALGAS_lstring::constructor_new (object->mProperty_mPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 92)), object->mProperty_mPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 92)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 92)) ;
+  ioArgument_ioTemporaries.mProperty_mBootRoutinePriorityMap.setter_insertKey (GALGAS_lstring::constructor_new (object->mProperty_mPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 120)), object->mProperty_mPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 120)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 120)) ;
   }
-  GALGAS_lstring var_routineNameForInvocationGraph_4007 = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (object->mProperty_mPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 94)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 94)), object->mProperty_mPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 94)) ;
-  const enumGalgasBool test_0 = ioArgument_ioTemporaries.getter_mSubprogramInvocationGraph (HERE).getter_isNodeDefined (var_routineNameForInvocationGraph_4007.getter_string (HERE) COMMA_SOURCE_FILE ("declaration-boot.galgas", 95)).operator_not (SOURCE_FILE ("declaration-boot.galgas", 95)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    {
-    ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_4007, var_routineNameForInvocationGraph_4007, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 96)) ;
-    }
-  }
-  GALGAS_universalValuedObjectMapForContext var_universalMap_4525 ;
+  GALGAS_lstring var_routineNameForInvocationGraph_5773 = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (object->mProperty_mPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 122)), object->mProperty_mPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 122)) ;
+  GALGAS_universalValuedObjectMapForContext var_universalMap_6040 ;
   {
-  routine_initialVariableMap (constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-boot.galgas", 104)), GALGAS_bool (false), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-boot.galgas", 106)), var_universalMap_4525, inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 102)) ;
+  routine_initialVariableMap (constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-boot.galgas", 126)), GALGAS_bool (false), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-boot.galgas", 128)), var_universalMap_6040, inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 124)) ;
   }
-  GALGAS_instructionListIR var_instructionGenerationList_4606 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-boot.galgas", 110)) ;
-  GALGAS_allocaList var_bootAllocaList_4640 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-boot.galgas", 111)) ;
-  extensionMethod_analyzeRoutineInstructionList (object->mProperty_mInstructionList, function_voidType (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 113)), GALGAS_bool (false), GALGAS_bool (false), var_routineNameForInvocationGraph_4007, constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-boot.galgas", 118)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mProperty_mStaticStringMap, var_universalMap_4525, var_bootAllocaList_4640, var_instructionGenerationList_4606, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 112)) ;
-  callExtensionMethod_checkLocalVariableFinalState ((const cPtr_universalValuedObjectMapForContext *) var_universalMap_4525.ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 126)) ;
-  ioArgument_ioIntermediateCodeStruct.mProperty_mBootList.addAssign_operation (object->mProperty_mPriority.getter_bigint (SOURCE_FILE ("declaration-boot.galgas", 129)), object->mProperty_mBootLocation, var_bootAllocaList_4640, var_instructionGenerationList_4606, object->mProperty_mEndOfBootLocation  COMMA_SOURCE_FILE ("declaration-boot.galgas", 128)) ;
+  GALGAS_instructionListIR var_instructionGenerationList_6121 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-boot.galgas", 132)) ;
+  GALGAS_allocaList var_bootAllocaList_6155 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-boot.galgas", 133)) ;
+  extensionMethod_analyzeRoutineInstructionList (object->mProperty_mInstructionList, function_voidType (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 135)), GALGAS_bool (false), GALGAS_bool (false), var_routineNameForInvocationGraph_5773, constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-boot.galgas", 140)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mProperty_mStaticStringMap, var_universalMap_6040, var_bootAllocaList_6155, var_instructionGenerationList_6121, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 134)) ;
+  callExtensionMethod_checkLocalVariableFinalState ((const cPtr_universalValuedObjectMapForContext *) var_universalMap_6040.ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 148)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mBootList.addAssign_operation (object->mProperty_mPriority.getter_bigint (HERE), object->mProperty_mPriority.getter_location (HERE), var_bootAllocaList_6155, var_instructionGenerationList_6121, object->mProperty_mEndOfBootLocation  COMMA_SOURCE_FILE ("declaration-boot.galgas", 150)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

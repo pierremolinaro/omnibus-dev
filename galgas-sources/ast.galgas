@@ -36,7 +36,7 @@ struct @ast {
   @systemRoutineDeclarationListAST mStandAloneSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
   @lstringlist mTargetListAST
-  @bootList mBootListAST
+#  @bootList mBootListAST
   @initList mInitListAST
   @panicClauseListAST mPanicClauseListAST
   @taskListAST mTaskListAST

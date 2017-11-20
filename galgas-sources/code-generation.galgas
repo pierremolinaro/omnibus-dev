@@ -207,23 +207,7 @@ private proc generateCodeFiles
     after llvmCode += "\n"
   end
 #----------------------------------------- Boot
-  llvmCode += llvmTitleComment (!"Boot routines")
-  llvmCode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
-  for boot in inIntermediateCodeStruct.mBootList do
-    llvmCode += "  call void @boot." + boot.mBootIndex + " ()\n"
-  end
-  llvmCode += "  ret void\n"
-  llvmCode += "}\n\n"
-  for boot in inIntermediateCodeStruct.mBootList do
-    llvmCode += llvmSeparatorLine () + "\n"
-    llvmCode += "define internal void @boot." + boot.mBootIndex + " ()" + llvmAttributeFunction () + "{\n"
-    for (variable LLVMTypeName) in boot.mAllocaList do
-      llvmCode += "  " + variable + " = alloca " + LLVMTypeName + "\n"
-    end
-    [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
-    llvmCode += "  ret void\n"
-    llvmCode += "}\n\n"
-  end
+  [inIntermediateCodeStruct.mBootList generateCode !?llvmCode !generationContext !?generationAdds]
 #----------------------------------------- Enumeration uint() methods
   for (generation) in inIntermediateCodeStruct.mGenerationListIR do
     [generation generateLLVMcode !?llvmCode !?generationAdds]
