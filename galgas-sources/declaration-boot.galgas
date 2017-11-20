@@ -44,7 +44,9 @@ method @bootAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGrap
 
 #·······················································································································
 
-override method @bootAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+override method @bootAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+ let nodeName = @lstring.new {!"boot " + mPriority.bigint !mPriority.location}
+ [!?ioGraph addNode !nodeName !self]
 }
 
 #·······················································································································

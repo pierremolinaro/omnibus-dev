@@ -2,15 +2,12 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @initList {
-  @location mInitLocation
+list @initList {
   @lstring mSelfTypeName
   @string mGlobalVarName # "" if mSelfTypeName is empty
   @instructionListAST mInstructionList
   @location mEndOfInitLocation
   @lbigint mPriority
-}{
-  mPriority <
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -35,7 +32,6 @@ syntax extension plm_syntax {
     let endOfInit = @location.here
     $}$
     ioInitList +=
-      !priority.location
       !["" nowhere]
       !""
       !instructionList
@@ -70,8 +66,17 @@ map @initRoutineMap {
 
 method @initList-element enterInContext
   ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
 {
   [!?ioContext.mInitRoutineMap insertKey !.new {![mPriority string] !mPriority.location}]
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedInitRoutine.new {
+    !mSelfTypeName
+    !mGlobalVarName
+    !mInstructionList
+    !mEndOfInitLocation
+    !mPriority
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -82,9 +87,19 @@ map @initRoutinePriorityMap {
   insert insertKey error message "an init routine with priority %K has been already declared"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-method @initList-element initSemanticAnalysis
+class @decoratedInitRoutine : @abstractDecoratedDeclaration {
+  @lstring mSelfTypeName
+  @string mGlobalVarName
+  @instructionListAST mInstructionList
+  @location mEndOfInitLocation
+  @lbigint mPriority
+}
+
+#·······················································································································
+
+override method @decoratedInitRoutine semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -174,12 +189,14 @@ proc initSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @initListIR {
+sortedlist @initListIR {
   @PLMType mSelfType
   @string mGlobalVariable # "" if mSelfType is null
   @bigint mPriority
   @allocaList mAllocaList
   @instructionListIR mInstructionListIR
+}{
+  mPriority <
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -191,7 +208,18 @@ method @initListIR generateLLVMinitCode
   ?!@generationAdds ioGenerationAdds
 {
   ioLLVMcode += llvmTitleComment (!"Init")
+  ioLLVMcode += "define internal void @init ()" + llvmAttributeFunction () + "{\n"
   for init in self do
+    ioLLVMcode += "  call void @init." + init.mPriority + " ("
+    if [init.mSelfType mKind] != .void then
+      ioLLVMcode += [init.mSelfType llvmTypeName] + " * " + llvmNameForGlobalVariable (!init.mGlobalVariable)
+    end
+    ioLLVMcode += ")\n"
+  end
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+  for init in self do
+    ioLLVMcode += llvmSeparatorLine () + "\n"
     ioLLVMcode += "define internal void @init." + init.mPriority + " ("
     if [init.mSelfType mKind] != .void then
       ioLLVMcode += [init.mSelfType llvmTypeName] + " * %self"
@@ -203,16 +231,5 @@ method @initListIR generateLLVMinitCode
     [init.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
-    ioLLVMcode += llvmSeparatorLine () + "\n"
   end
-  ioLLVMcode += "define internal void @init ()" + llvmAttributeFunction () + "{\n"
-  for init in self do
-    ioLLVMcode += "  call void @init." + init.mPriority + " ("
-    if [init.mSelfType mKind] != .void then
-      ioLLVMcode += [init.mSelfType llvmTypeName] + " * " + llvmNameForGlobalVariable (!init.mGlobalVariable)
-    end
-    ioLLVMcode += ")\n"
-  end
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
 }

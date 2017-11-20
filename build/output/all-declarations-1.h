@@ -2257,8 +2257,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_modulePropertyListA
 
 class GALGAS_initList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_location mProperty_mInitLocation ;
-
   public : GALGAS_lstring mProperty_mSelfTypeName ;
 
   public : GALGAS_string mProperty_mGlobalVarName ;
@@ -2283,8 +2281,7 @@ class GALGAS_initList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_initList_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_initList_2D_element (const GALGAS_location & in_mInitLocation,
-                                       const GALGAS_lstring & in_mSelfTypeName,
+  public : GALGAS_initList_2D_element (const GALGAS_lstring & in_mSelfTypeName,
                                        const GALGAS_string & in_mGlobalVarName,
                                        const GALGAS_instructionListAST & in_mInstructionList,
                                        const GALGAS_location & in_mEndOfInitLocation,
@@ -2301,12 +2298,11 @@ class GALGAS_initList_2D_element : public AC_GALGAS_root {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_initList_2D_element constructor_new (const class GALGAS_location & inOperand0,
-                                                                    const class GALGAS_lstring & inOperand1,
-                                                                    const class GALGAS_string & inOperand2,
-                                                                    const class GALGAS_instructionListAST & inOperand3,
-                                                                    const class GALGAS_location & inOperand4,
-                                                                    const class GALGAS_lbigint & inOperand5
+  public : static class GALGAS_initList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                    const class GALGAS_string & inOperand1,
+                                                                    const class GALGAS_instructionListAST & inOperand2,
+                                                                    const class GALGAS_location & inOperand3,
+                                                                    const class GALGAS_lbigint & inOperand4
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2324,8 +2320,6 @@ class GALGAS_initList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfInitLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVarName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mInitLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
 
