@@ -98,7 +98,7 @@ override method @decoratedISRDeclarations semanticAnalysis
     let @PLMType selfType = if isr.mModuleName.string == "" then
       voidType ()
     else
-      [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !moduleMangledNameFromModuleName (!isr.mModuleName)} type]
+      [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !llvmModuleNameFromName (!isr.mModuleName)} type]
     end
   #--- Analyze instruction list
     @allocaList allocaList = {}
@@ -112,7 +112,6 @@ override method @decoratedISRDeclarations semanticAnalysis
       !mode:isr.mMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-#      !?variableMap:variableMap
       !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
