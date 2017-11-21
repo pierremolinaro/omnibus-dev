@@ -147,7 +147,7 @@ syntax extension plm_syntax {
 
 override method @requiredModuleAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  [!?ioGraph addNode !mModuleName !self]
-  let moduleTypeName = llvmTypeNameFromPLMname (!moduleMangledNameFromModuleName (!mModuleName))
+  let moduleTypeName = llvmTypeNameFromPLMname (!llvmModuleNameFromName (!mModuleName))
  [!?ioGraph addEdge !mModuleName !moduleTypeName]
 }
 
@@ -234,7 +234,7 @@ proc retainRequiredModules ?!@ast ioAST {
         error [moduleInstanciationArgumentMap locationForKey !unusedSelector] : "invalid selector"
       end
     #---
-      let moduleTypeName = moduleMangledNameFromModuleName (!declaration.mModuleName)
+      let moduleTypeName = llvmModuleNameFromName (!declaration.mModuleName)
       ioAST.mDeclarationListAST += !@requiredModuleAST.new {!declaration.mModuleName}
       ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
         !moduleTypeName
@@ -301,7 +301,7 @@ override method @decoratedRequiredModule semanticAnalysis
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let moduleTypeName = moduleMangledNameFromModuleName (!mModuleName)
+  let moduleTypeName = llvmModuleNameFromName (!mModuleName)
   let moduleTypeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
   let constructorMap = [moduleTypeProxy type].mConstructorMap
   [constructorMap  searchKey !.new {!"()" !moduleTypeName.location} ?* ?let constructorValue]

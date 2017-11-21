@@ -14,7 +14,7 @@ proc initialVariableMap
   outUniversalMap = .default
 #------------------------------------------------------- Add modules
   for (moduleName) in inContext.mModuleMap do
-    let moduleTypeName = moduleMangledNameFromModuleName (!moduleName)
+    let moduleTypeName = llvmModuleNameFromName (!moduleName)
     let moduleType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName} type]
     [!?outUniversalMap insertModule !moduleName !moduleType]
   end

@@ -111,11 +111,9 @@ override method @initAST enterInContext
 #----------------
   @lstring routineNameForInvocationGraph 
   if mModuleName.string == "" then
-    routineNameForInvocationGraph = initNameForInvocationGraph (!mModuleName !mPriority)
+    routineNameForInvocationGraph = initNameForInvocationGraph (!"" !mPriority)
   else
-    var name = mModuleName
-    name.string += "$"
-    routineNameForInvocationGraph = initNameForInvocationGraph (!name !mPriority)
+    routineNameForInvocationGraph = initNameForInvocationGraph (!llvmModuleNameFromName (!mModuleName) !mPriority)
   end
   [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
 #---------------- Add decorated declaration
@@ -154,7 +152,7 @@ override method @decoratedInitRoutine semanticAnalysis
   let @PLMType selfType = if mModuleName.string == "" then
     voidType ()
   else
-    [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !.new{!mModuleName.string + "$" !mModuleName}} type]
+    [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !llvmModuleNameFromName (!mModuleName)} type]
   end
   initSemanticAnalysis (
     !context:inContext
