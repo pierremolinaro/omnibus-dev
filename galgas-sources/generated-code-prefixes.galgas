@@ -32,7 +32,6 @@ func llvmModuleStringFromName ?let @string inModuleName -> @string {
   result = if inModuleName == "" then
     inModuleName
   else
-#   inModuleName + "$"
     "module." + inModuleName
   end
 }
@@ -315,7 +314,7 @@ func stackNameForTask ?let @string inTaskName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func initNameForTaskType ?let @string inTaskTypeName -> @string {
-  result = "@" + ["task.init.$" + inTaskTypeName assemblerRepresentation]
+  result = "@" + ["task.init." + inTaskTypeName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -339,7 +338,7 @@ func llvmNameForTaskGlobalVar ?let @string inTaskName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once llvmNameForTaskLoopFunction -> @string {
-  result = "task$loop"
+  result = "task.loop"
 }
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
