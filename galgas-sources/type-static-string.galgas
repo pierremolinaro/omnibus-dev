@@ -31,9 +31,9 @@ override method @literalStringDeclarationAST addExtension
 override method @literalStringDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let literalStringTypeName = llvmRegularTypeMangledNameFromName (!mLiteralStringTypeName)
+  let literalStringTypeName = llvmTypeNameFromPLMname (!mLiteralStringTypeName)
   [!?ioGraph addNode !literalStringTypeName !self]
-  [!?ioGraph addEdge !literalStringTypeName !llvmRegularTypeMangledNameFromName (!["uint8" nowhere])]
+  [!?ioGraph addEdge !literalStringTypeName !llvmTypeNameFromPLMname (!["uint8" nowhere])]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

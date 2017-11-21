@@ -81,7 +81,7 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
     case input (*):
     case inputWithType (* @lstring typeName *) :
       if typeName.string != "" then
-        [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
       end
     case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case outputInput (*) :
@@ -100,7 +100,7 @@ override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPre
     case input (*):
     case inputWithType (* @lstring typeName *) :
       if typeName.string != "" then
-        [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
       end
     case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case outputInput (*) :
@@ -343,7 +343,7 @@ override method @procedureCallInstructionAST analyze
           !?effectiveIR:effectiveParameterListIR
         )
       #--- Get function name and map containing the function definition
-        let routineMangledName = routineMangledNameFromCall (!"$" + currentType.mPLMTypeName !methodName !mArguments)
+        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.mPLMTypeName) !methodName !mArguments)
       #--- Code generation
         ioInstructionGenerationList += !@staticRoutineCallIR.new {
           !mIdentifier

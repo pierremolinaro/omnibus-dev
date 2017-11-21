@@ -122,7 +122,7 @@ getter @PLMType llvmTypeName -> @string {
   case enumeration (@uint bitCount) :
     result = "i" + bitCount
   case structure (* *) :
-    result = "%" + [llvmRegularTypeMangledNameFromName (![mPLMTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![mPLMTypeName nowhere]) assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case staticInteger :
@@ -130,7 +130,7 @@ getter @PLMType llvmTypeName -> @string {
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case arrayType (* *) :
-    result = "%" + [llvmRegularTypeMangledNameFromName (![mPLMTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![mPLMTypeName nowhere]) assemblerRepresentation]
   case function (@routineDescriptor descriptor) :
     if descriptor.mReturnTypeProxy == .null then
       result = "void"

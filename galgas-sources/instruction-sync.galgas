@@ -320,7 +320,7 @@ proc analyzeGuardCall
         error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
       else  
         outGuardMangledName = routineMangledNameFromCall (
-          !"$" + receiverType.mPLMTypeName
+          !llvmTypeStringFromPLMname (!receiverType.mPLMTypeName)
           !inGuardName
           !inEffectiveParameterList
         )

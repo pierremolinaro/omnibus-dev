@@ -58,8 +58,8 @@ override method @typeArrayDeclarationAST addExtension
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let newTypeName = llvmRegularTypeMangledNameFromName (!mArrayTypeName)
-  let elementTypeName = llvmRegularTypeMangledNameFromName (!mElementTypeName)
+  let newTypeName = llvmTypeNameFromPLMname (!mArrayTypeName)
+  let elementTypeName = llvmTypeNameFromPLMname (!mElementTypeName)
   [!?ioGraph addNode !newTypeName !self]
   [!?ioGraph addEdge !newTypeName !elementTypeName]
   [mSizeExpression addDependenceEdgeForStaticExpression !newTypeName !?ioGraph]
@@ -201,13 +201,13 @@ class @arrayIR : @abstractGenerationIR {
 
 override method @arrayIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
   let routineMangledName = routineMangledNameFromAST (
-    !"$" + mArrayTypePLMName
+    !llvmTypeStringFromPLMname (!mArrayTypePLMName)
     !["count" nowhere]
     !{}
   )
   let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
   ioLLVMcode += llvmTitleComment (!routineMangledName)
-  ioLLVMcode += "define internal i32  @" + routineLLVMName + " (%$" + mArrayTypePLMName + "* %inUnusedValue) nounwind {\n"
+  ioLLVMcode += "define internal i32  @" + routineLLVMName + " (%" + llvmTypeStringFromPLMname (!mArrayTypePLMName) + "* %inUnusedValue) nounwind {\n"
   ioLLVMcode += "  ret i32 " + mArraySize + "\n"
   ioLLVMcode += "}\n\n"
 }

@@ -38,7 +38,7 @@ override method @literalBooleanInExpressionAST addDependenceEdgeForStaticExpress
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !llvmRegularTypeMangledNameFromName (![boolTypeName () nowhere])]
+  [!?ioGraph addEdge !inConstantName !llvmTypeNameFromPLMname (![boolTypeName () nowhere])]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -46,7 +46,7 @@ override method @literalBooleanInExpressionAST addDependenceEdgeForStaticExpress
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalBooleanInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (![boolTypeName () nowhere])]
+  [!?ioGraph noteNode !llvmTypeNameFromPLMname (![boolTypeName () nowhere])]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

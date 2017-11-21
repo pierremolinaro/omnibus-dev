@@ -41,7 +41,7 @@ setter @propertyMap addFunction
   ]
 #--- Routine mangled name
   let routineNameForInvocationGraph = routineMangledNameFromAST (
-    !"$" + inReceiverTypeName
+    !llvmTypeStringFromPLMname (!inReceiverTypeName)
     ![inMethodName nowhere]
     !{}
   )

@@ -30,9 +30,9 @@ override method @literalIntegerDeclarationAST addExtension
 override method @literalIntegerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let staticIntegerTypeName = llvmRegularTypeMangledNameFromName (![staticIntegerTypeName () nowhere])
+  let staticIntegerTypeName = llvmTypeNameFromPLMname (![staticIntegerTypeName () nowhere])
   [!?ioGraph addNode !staticIntegerTypeName !self]
-  [!?ioGraph addEdge !staticIntegerTypeName !llvmRegularTypeMangledNameFromName (![boolTypeName () nowhere])]
+  [!?ioGraph addEdge !staticIntegerTypeName !llvmTypeNameFromPLMname (![boolTypeName () nowhere])]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -122,7 +122,7 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
   for () in self do
     for variable in mVarList do
       if variable.mPropertyTypeName.string != "" then
-        let typeName = llvmRegularTypeMangledNameFromName (!variable.mPropertyTypeName)
+        let typeName = llvmTypeNameFromPLMname (!variable.mPropertyTypeName)
         [!?ioGraph noteNode !typeName]
       end
     end
@@ -197,7 +197,7 @@ method @taskListAST enterInContext
       !.llvmStructureConstant{!type:taskType !values:initialValueList}
   #--- Task procedures
     [task.mTaskProcList enterFunctionInContext
-      !selfTypeName:"$" + task.mTaskName
+      !selfTypeName:llvmTypeStringFromPLMname (!task.mTaskName)
       !?context:ioContext
       !?ioDecoratedDeclarationList
     ]
@@ -378,7 +378,7 @@ method @taskMapIR generateCode
   for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
     ioLLVMcode += "@" + llvmNameForTaskGlobalVar (!taskName)
     ioLLVMcode += " = internal global %"
-    ioLLVMcode += ["$" + taskTypeName assemblerRepresentation] + " "
+    ioLLVMcode += [llvmTypeStringFromPLMname (!taskTypeName) assemblerRepresentation] + " "
     let initialString = [initValueList llvmName]
     if initialString == "" then
       ioLLVMcode += "zeroinitializer"
@@ -405,7 +405,7 @@ method @taskMapIR generateCode
   ioLLVMcode += "i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n\n"
   for task in orderedTaskList do
     ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
-    let assemblerTaskName = ["$" + task.mTaskName assemblerRepresentation]
+    let assemblerTaskName = [llvmTypeStringFromPLMname (!task.mTaskName) assemblerRepresentation]
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     ioLLVMcode += "\n"
     let effectiveParameter = "(%" + assemblerTaskName + " * @" + llvmNameForTaskGlobalVar (!task.mTaskName) + ")"
@@ -423,7 +423,7 @@ method @taskMapIR generateCode
     ioLLVMcode += "\n"
     ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " ()" + llvmAttributeFunction () + "noreturn {\n"
     ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
-    ioLLVMcode += "  call void @" + llvmNameForFunction (!"$" + task.mTaskName + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
+    ioLLVMcode += "  call void @" + llvmNameForFunction (!llvmTypeStringFromPLMname (!task.mTaskName) + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void @" + selfTerminateCallName + " ()\n"
     ioLLVMcode += "  unreachable\n"
     ioLLVMcode += "}\n\n"
