@@ -62,7 +62,8 @@ task T priority 12 stackSize 512 {
     lcd.goto (!line:0 !column:0)
     lcd.print (!hex8:x.byteSwapped ())
     lcd.goto (!line:1 !column:0)
-    lcd.print (!unsigned:$uint32.max)
+    let y $uint15 = 0x1234
+    lcd.print (!hex4:extend (y.bitReversed ()))
   }
 }
 
