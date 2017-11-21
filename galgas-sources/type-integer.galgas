@@ -77,6 +77,24 @@ func %once byteSwappedMethoName -> @string {
   result = "byteSwapped"
 }
 
+#·······················································································································
+
+func %once bitReversedMethoName -> @string {
+  result = "bitReversed"
+}
+
+#·······················································································································
+
+func %once countLeadingZerosMethoName -> @string {
+  result = "leadingZeroCount"
+}
+
+#·······················································································································
+
+func %once countTrainingZerosMethoName -> @string {
+  result = "trainingZeroCount"
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -104,6 +122,24 @@ override method @integerDeclarationAST enterInContext
       !?ioSubprogramInvocationGraph
     ]
   end
+  [!?propertyMap addFunction
+    !receiverTypeName:integerTypeName
+    !methodName:bitReversedMethoName ()
+    !resultTypeProxy:selfTypeProxy
+    !?ioSubprogramInvocationGraph
+  ]
+  [!?propertyMap addFunction
+    !receiverTypeName:integerTypeName
+    !methodName:countLeadingZerosMethoName ()
+    !resultTypeProxy:selfTypeProxy
+    !?ioSubprogramInvocationGraph
+  ]
+  [!?propertyMap addFunction
+    !receiverTypeName:integerTypeName
+    !methodName:countTrainingZerosMethoName ()
+    !resultTypeProxy:selfTypeProxy
+    !?ioSubprogramInvocationGraph
+  ]
 #--------------------------------------- Class constant map
   @classConstantMap classConstantMap = {}
   [!?classConstantMap insertKey !["min" nowhere] !min !integerTypeName]
@@ -176,23 +212,72 @@ class @integerIR : @abstractGenerationIR {
 
 #·······················································································································
 
-override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
-  let llvmTypeName = "i" + mSize
+private proc generateIntegerIntrinsicFunction
+  ?PLMTypeName:let @string inPLMtypeName
+  ?!@string ioLLVMcode
+  ?method:let @string inPLMMethodName
+  ?intrinsic:let @string inIntrinsicName
+  ?!@generationAdds ioGenerationAdds
+  ?LLVMTypeName:let @string inLLVMtypeName
+{
   let routineMangledName = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!mTypeName)
-    ![byteSwappedMethoName () nowhere]
+    !llvmTypeStringFromPLMname (!inPLMtypeName)
+    ![inPLMMethodName nowhere]
     !{}
   )
   let functionName = llvmNameForFunction (!routineMangledName)
+  ioLLVMcode += "define internal " + inLLVMtypeName + " @" + functionName + " (" + inLLVMtypeName + "* %inValue) {\n"
+  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inValue\n"
+  ioLLVMcode += "  %result = call " + inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + " %value)\n"
+  ioLLVMcode += "  ret " + inLLVMtypeName + " %result\n"
+  ioLLVMcode += "}\n\n"
+  ioGenerationAdds.mExternFunctionDeclarationSet +=
+    !"declare " + inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + ")"
+}
+
+#·······················································································································
+
+override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
+  let llvmTypeName = "i" + mSize
   ioLLVMcode += llvmTitleComment (!"INTEGER TYPE $" + mTypeName)
-  if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
-    ioLLVMcode += "define internal " + llvmTypeName + " @" + functionName + " (" + llvmTypeName + "* %inValue) {\n"
-    ioLLVMcode += "  %value = load " + llvmTypeName + ", " + llvmTypeName + "* %inValue\n"
-    ioLLVMcode += "  %result = call " + llvmTypeName + " @llvm.bswap." + llvmTypeName + " (" + llvmTypeName + " %value)\n"
-    ioLLVMcode += "  ret " + llvmTypeName + " %result\n"
-    ioLLVMcode += "}\n\n"
-    ioGenerationAdds.mExternFunctionDeclarationSet += !"declare " + llvmTypeName + " @llvm.bswap." + llvmTypeName + " (" + llvmTypeName + ")"
+#--- Add "byteSwapped" intrinsic function
+  if (mSize mod 16) == 0 then
+    generateIntegerIntrinsicFunction (
+      !PLMTypeName:mTypeName
+      !?ioLLVMcode
+      !method:byteSwappedMethoName ()
+      !intrinsic:"bswap"
+      !?ioGenerationAdds
+      !LLVMTypeName:llvmTypeName
+    )
   end
+#--- Add "bitReversed" intrinsic function
+  generateIntegerIntrinsicFunction (
+    !PLMTypeName:mTypeName
+    !?ioLLVMcode
+    !method:bitReversedMethoName ()
+    !intrinsic:"bitreverse"
+    !?ioGenerationAdds
+    !LLVMTypeName:llvmTypeName
+  )
+#--- Add "count leading zeros" intrinsic function
+  generateIntegerIntrinsicFunction (
+    !PLMTypeName:mTypeName
+    !?ioLLVMcode
+    !method:countLeadingZerosMethoName ()
+    !intrinsic:"ctlz"
+    !?ioGenerationAdds
+    !LLVMTypeName:llvmTypeName
+  )
+#--- Add "count training zeros" intrinsic function
+  generateIntegerIntrinsicFunction (
+    !PLMTypeName:mTypeName
+    !?ioLLVMcode
+    !method:countTrainingZerosMethoName ()
+    !intrinsic:"cttz"
+    !?ioGenerationAdds
+    !LLVMTypeName:llvmTypeName
+  )
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
