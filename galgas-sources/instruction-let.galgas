@@ -45,7 +45,7 @@ syntax extension plm_syntax {
 
 override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if mOptionalTypeName.string != "" then
-    let typeName = llvmRegularTypeMangledNameFromName (!mOptionalTypeName)
+    let typeName = llvmTypeNameFromPLMname (!mOptionalTypeName)
     [!?ioGraph noteNode !typeName]
   end
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]

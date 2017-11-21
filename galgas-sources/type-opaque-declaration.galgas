@@ -62,9 +62,9 @@ override method @opaqueTypeDeclarationAST addExtension
 override method @opaqueTypeDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let typeName = llvmRegularTypeMangledNameFromName (!mOpaqueTypeName)
+  let typeName = llvmTypeNameFromPLMname (!mOpaqueTypeName)
   [!?ioGraph addNode !typeName !self]
-  [!?ioGraph addEdge !typeName !llvmRegularTypeMangledNameFromName (![staticIntegerTypeName () nowhere])]
+  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (![staticIntegerTypeName () nowhere])]
   [mSizeExpression addDependenceEdgeForStaticExpression !typeName !?ioGraph]
 }
 

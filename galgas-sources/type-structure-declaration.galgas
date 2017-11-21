@@ -164,13 +164,13 @@ override method @structureDeclarationAST addExtension
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let structureTypeName = llvmRegularTypeMangledNameFromName (!mStructureName)
+  let structureTypeName = llvmTypeNameFromPLMname (!mStructureName)
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- Add property types
   for (* * * fieldTypeName initExpression) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
-      let typeName = llvmRegularTypeMangledNameFromName (!fieldTypeName)
+      let typeName = llvmTypeNameFromPLMname (!fieldTypeName)
       [!?ioGraph addEdge !structureTypeName !typeName]
     end
     switch initExpression
@@ -182,11 +182,11 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
 #--- Add structure functions
   for () in mFunctionDeclarationListAST do
     for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-      let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
+      let typeName = llvmTypeNameFromPLMname (!formalArgumentTypeName)
       [!?ioGraph noteNode !typeName]
     end
     if mFunctionReturnTypeName.string != "" then
-      let typeName = llvmRegularTypeMangledNameFromName (!mFunctionReturnTypeName)
+      let typeName = llvmTypeNameFromPLMname (!mFunctionReturnTypeName)
       [!?ioGraph noteNode !typeName]
     end
     [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]

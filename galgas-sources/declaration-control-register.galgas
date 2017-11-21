@@ -191,7 +191,7 @@ map @controlRegisterMap {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let typeName = llvmRegularTypeMangledNameFromName (!mRegisterTypeName)
+  let typeName = llvmTypeNameFromPLMname (!mRegisterTypeName)
   [!?ioGraph noteNode !typeName]
 }
 
@@ -202,7 +202,7 @@ override method @controlRegisterDeclarationAST enterInPrecedenceGraph ?!@semanti
 #--- Add node
   [!?ioGraph addNode !nodeName !self]
 #--- Add dependency from type name
-  let typeName = llvmRegularTypeMangledNameFromName (!mRegisterTypeName)
+  let typeName = llvmTypeNameFromPLMname (!mRegisterTypeName)
   [!?ioGraph addEdge !nodeName !typeName]
 #--- Add dependency from config node
   let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !nodeName.location}

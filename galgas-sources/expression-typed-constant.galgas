@@ -43,7 +43,7 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   if mOptionalTypeName.string != "" then
-    [!?ioGraph addEdge !inConstantName !llvmRegularTypeMangledNameFromName (!mOptionalTypeName)]
+    [!?ioGraph addEdge !inConstantName !llvmTypeNameFromPLMname (!mOptionalTypeName)]
   end
   for (access) in mAccessList do
     switch access
@@ -56,7 +56,7 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
         case input (*):
         case inputWithType (* @lstring typeName *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+            [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
           end
         case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
         case outputInput (*) :
@@ -73,7 +73,7 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
 
 override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if mOptionalTypeName.string != "" then
-    [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!mOptionalTypeName)]
+    [!?ioGraph noteNode !llvmTypeNameFromPLMname (!mOptionalTypeName)]
   end
   for (access) in mAccessList do
     switch access
@@ -86,7 +86,7 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
         case input (*):
         case inputWithType (* @lstring typeName *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+            [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
           end
         case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
         case outputInput (*) :

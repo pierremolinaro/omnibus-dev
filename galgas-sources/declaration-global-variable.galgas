@@ -197,7 +197,7 @@ syntax extension plm_syntax {
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (globalVariableTypeName 3*) in self do
     if globalVariableTypeName.string != "" then
-      let typeName = llvmRegularTypeMangledNameFromName (!globalVariableTypeName)
+      let typeName = llvmTypeNameFromPLMname (!globalVariableTypeName)
       [!?ioGraph noteNode !typeName]
     end
   end
@@ -290,7 +290,7 @@ method @globalVarDeclarationList-element enterInContext
 #      routineMangledName = procedure.mRoutineName
 #      receiverType = .null
 #    else
-#      routineMangledName = .new {!"$" + procedure.mReceiverTypeName + "." + procedure.mRoutineName !procedure.mRoutineName.location}
+#      routineMangledName = .new {!llvmTypeNameFromPLMname (procedure.mReceiverTypeName) + "." + procedure.mRoutineName !procedure.mRoutineName.location}
 #      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mReceiverTypeName}
 #    end
 #    [ioContext.mRoutineMapForContext searchKey
@@ -316,7 +316,7 @@ method @globalVarDeclarationList-element enterInContext
 ##      guardMangledName = .new {!"." + guard.mGuardName !guard.mGuardName.location}
 #      receiverType = .null
 #    else
-#      guardMangledName = .new {!"$" + guard.mOptionalTypeName + "." + guard.mGuardName !guard.mGuardName.location}
+#      guardMangledName = .new {!llvmTypeNameFromPLMname (!guard.mOptionalTypeName) + "." + guard.mGuardName !guard.mGuardName.location}
 #      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !guard.mOptionalTypeName}
 #    end
 #    [ioContext.mGuardMapForContext searchKey

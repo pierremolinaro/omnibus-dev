@@ -147,7 +147,7 @@ syntax extension plm_syntax {
 
 override method @requiredModuleAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  [!?ioGraph addNode !mModuleName !self]
-  let moduleTypeName = llvmRegularTypeMangledNameFromName (!moduleMangledNameFromModuleName (!mModuleName))
+  let moduleTypeName = llvmTypeNameFromPLMname (!moduleMangledNameFromModuleName (!mModuleName))
  [!?ioGraph addEdge !mModuleName !moduleTypeName]
 }
 

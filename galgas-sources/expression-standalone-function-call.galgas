@@ -40,7 +40,7 @@ override method @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExp
     case input (*):
     case inputWithType (* @lstring typeName *) :
       if typeName.string != "" then
-        [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
       end
     case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
     case outputInput (*) :
@@ -61,7 +61,7 @@ override method @standaloneFunctionInExpressionAST noteExpressionTypesInPreceden
     case input (*):
     case inputWithType (* @lstring typeName *) :
       if typeName.string != "" then
-        [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
       end
     case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case outputInput (*) :

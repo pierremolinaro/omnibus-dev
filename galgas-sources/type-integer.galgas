@@ -38,15 +38,15 @@ override method @integerDeclarationAST addExtension
 override method @integerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let integerTypeName = llvmRegularTypeMangledNameFromName (![[self typeName] nowhere])
+  let integerTypeName = llvmTypeNameFromPLMname (![[self typeName] nowhere])
   [!?ioGraph addNode !integerTypeName !self]
-  [!?ioGraph addEdge !integerTypeName !llvmRegularTypeMangledNameFromName (![staticIntegerTypeName () nowhere])]
+  [!?ioGraph addEdge !integerTypeName !llvmTypeNameFromPLMname (![staticIntegerTypeName () nowhere])]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "integer " + llvmRegularTypeMangledNameFromName (![[self typeName] nowhere])
+  outRepresentation = "integer " + llvmTypeNameFromPLMname (![[self typeName] nowhere])
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -179,7 +179,7 @@ class @integerIR : @abstractGenerationIR {
 override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
   let llvmTypeName = "i" + mSize
   let routineMangledName = routineMangledNameFromAST (
-    !"$" + mTypeName
+    !llvmTypeStringFromPLMname (!mTypeName)
     ![byteSwappedMethoName () nowhere]
     !{}
   )

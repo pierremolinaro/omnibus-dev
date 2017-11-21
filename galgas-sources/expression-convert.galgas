@@ -49,7 +49,7 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
 {
   [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   if mTypeName.string != "" then
-    let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+    let typeName = llvmTypeNameFromPLMname (!mTypeName)
     [!?ioGraph noteNode !typeName]
   end
 }
@@ -61,7 +61,7 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
 override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   if mTypeName.string != "" then
-    let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+    let typeName = llvmTypeNameFromPLMname (!mTypeName)
     [!?ioGraph noteNode !typeName]
   end
 }

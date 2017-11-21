@@ -74,7 +74,7 @@ override method @sizeofExpressionAST noteExpressionTypesInPrecedenceGraph
 override method @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+  let typeName = llvmTypeNameFromPLMname (!mTypeName)
   [!?ioGraph noteNode !typeName]
 }
 

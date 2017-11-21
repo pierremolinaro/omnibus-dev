@@ -46,7 +46,7 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+  let typeName = llvmTypeNameFromPLMname (!mTypeName)
   [!?ioGraph addEdge !inConstantName !typeName]
   
   for () in mParameterList do
@@ -59,7 +59,7 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
+  let typeName = llvmTypeNameFromPLMname (!mTypeName)
   [!?ioGraph noteNode !typeName]
   for () in mParameterList do
     [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]

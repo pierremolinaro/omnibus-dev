@@ -93,7 +93,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
         case input (*):
         case inputWithType (* @lstring typeName *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+            [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
           end
         case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
         case outputInput (*) :
@@ -120,7 +120,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
         case input (*):
         case inputWithType (* @lstring typeName *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
+            [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
           end
         case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
         case outputInput (*) :
@@ -710,7 +710,7 @@ private proc handleFunctionCallInExpression
     #--- New LLVM variable for function call result
       getNewTempValue (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
     #--- Generate call
-      let routineMangledName = routineMangledNameFromCall (!"$" + [ioObjectIR type].mPLMTypeName !inMethodName !inArguments)
+      let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (![ioObjectIR type].mPLMTypeName) !inMethodName !inArguments)
       ioInstructionGenerationList += !@staticRoutineCallIR.new {
         !""
         !callReturnedResult

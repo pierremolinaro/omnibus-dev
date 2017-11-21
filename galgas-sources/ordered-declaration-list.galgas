@@ -40,11 +40,11 @@ proc buildOrderedDeclarationList
   for () in [precedenceGraph undefinedNodeKeyList] do
     let split = [mValue componentsSeparatedByString !"int"]
     if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
-      if [split mValueAtIndex !0] == "$u" then
+      if [split mValueAtIndex !0] == llvmTypeStringFromPLMname (!"u") then
         let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
         let declaration = @integerDeclarationAST.new {!false !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
-      elsif [split mValueAtIndex !0] == "$" then
+      elsif [split mValueAtIndex !0] == llvmTypeStringFromPLMname (!"") then
         let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
         let declaration = @integerDeclarationAST.new {!true !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]

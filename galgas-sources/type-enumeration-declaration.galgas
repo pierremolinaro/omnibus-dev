@@ -62,9 +62,9 @@ override method @enumerationDeclarationAST addExtension
 override method @enumerationDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let typeName = llvmRegularTypeMangledNameFromName (!mEnumerationName)
+  let typeName = llvmTypeNameFromPLMname (!mEnumerationName)
   [!?ioGraph addNode !typeName !self]
-  [!?ioGraph addEdge !typeName !llvmRegularTypeMangledNameFromName (![boolTypeName () nowhere])]
+  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (![boolTypeName () nowhere])]
 #--- Mark dependance from $uintN used for value property
   @bigint maxValue = 0G
   for (* value) in mCaseNameList do
@@ -77,7 +77,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
     representationBitCount ++ ;
     maxValue = maxValue / 2G
   end
-  [!?ioGraph addEdge !typeName !llvmRegularTypeMangledNameFromName (!["uint" + representationBitCount nowhere])]
+  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (!["uint" + representationBitCount nowhere])]
 }
 
 #·······················································································································
@@ -240,7 +240,7 @@ class @enumerationIR : @abstractGenerationIR {
 
 override method @enumerationIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
   let routineMangledName = routineMangledNameFromAST (
-    !"$" + mEnumerationName
+    !llvmTypeStringFromPLMname (!mEnumerationName)
     !.new {!integerEnumAccessorName (!forBitCount:mBitCount) !mEnumerationName}
     !{}
   )

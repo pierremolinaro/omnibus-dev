@@ -14,8 +14,14 @@ func %once staticAttribute -> @string {
 #!   Type
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmRegularTypeMangledNameFromName ?let @lstring inName -> @lstring {
-  result = .new {!"$" + inName !inName.location}
+func llvmTypeNameFromPLMname ?let @lstring inName -> @lstring {
+  result = .new {!llvmTypeStringFromPLMname (!inName.string) !inName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmTypeStringFromPLMname ?let @string inName -> @string {
+  result = "type." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
