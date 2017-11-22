@@ -1,0 +1,72 @@
+target "teensy-3-6/privileged"
+let F_CPU_MHZ = 192
+
+module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func safe activityLedOn @exported () {
+  digitalWrite (!port:.D13 !yes)
+}
+
+func safe activityLedOff @exported () {
+  digitalWrite (!port:.D13 !no)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let LED_L0 = $digitalPort.D3
+
+init 1000 {
+  pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
+  pinMode (!port:LED_L0 !mode:.OUTPUT)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//module date {
+ 
+  init 100 {
+  //--- Power on DMA_MUX, PIT, DMA
+    SIM_SCGC6 |= {SIM_SCGC6 !PIT:1}
+   //--- Enable PIT module
+    PIT_MCR = 0
+  //--- Disable PIT0 and PIT1
+    PIT_TCTRL [0] = 0
+    PIT_TCTRL [1] = 0
+  //--- PIT0 clock frequency is F_BUS (in Hertz)
+    PIT_LDVAL [0] = $uint32.max
+    PIT_LDVAL [1] = $uint32.max
+  //--- Enable PIT0 and PIT1 : start counting, no interrupt
+    PIT_TCTRL [1] = {PIT_TCTRL !CHN:1 !TEN:1}
+    PIT_TCTRL [0] = {PIT_TCTRL !TEN:1}
+  }
+  
+  system safe current () -> $uint64 {
+    result = extend (PIT_LTMR64H)
+    result = result << 32
+    result |= extend (PIT_LTMR64L)
+    result = ~ result
+    result +%= 1
+  } 
+//}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche priority 1 stackSize 512 {
+  var compteur $uint32 = 0
+  
+  on time.waitUntilMS (!deadline:self.compteur) continue {
+    let c = current ()
+    toggle (!port:LED_L0)
+    lcd.goto (!line:0 !column:0)
+    lcd.print (!unsigned:self.compteur)
+    lcd.goto (!line:1 !column:0)
+    lcd.print (!u64:c / F_BUS_MHZ)
+    self.compteur +%= 1_000
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

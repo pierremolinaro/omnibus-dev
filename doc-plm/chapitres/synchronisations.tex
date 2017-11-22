@@ -7,9 +7,314 @@
 
 \chapterLabel{Synchronisation et communication}{chapitreSynchros}
 
+PLM ne définit pas d'outils de synchronisation particulier, mais propose des briques permettant de les construire. Ces briques sont des types opaques et des fonctions.
+
+Ce chapitre présente~:
+\begin{itemize}
+  \item les types et fonctions constituant ces briques élémentaires (\refSection{typeFonctionsBriqueSynchro})~;
+  \item comment écrire un module de gestion du temps sur un processeur Cortex-M4 (\refSectionPage{moduleTimeCortex}).
+\end{itemize}
 
 
-%\sectionLabel{Instruction \texttt{sync}}{instructionSync}
+
+
+
+
+
+
+
+\sectionLabel{Types et fonctions prédéfinis}{typeFonctionsBriqueSynchro}
+
+
+PLM définit deux types opaques et neuf fonctions externes\footnote{Externes à PLM, car écrites en C.} qui permettent d'écrire outils de synchronisation et gardes.
+
+\subsection{Type opaque \texttt{\$taskList}}
+
+Le type opaque \plm=$taskList= est utilisé pour maintenir la liste des tâches bloquées sur un outil de synchronisation.
+
+
+\subsection{Type opaque \texttt{\$guardList}}
+
+Le type opaque \plm=$guardList= est utilisé pour maintenir la liste des tâches qui ont invoqué une garde d'un outil de synchronisation.
+
+
+
+\subsection{Fonction \texttt{block(?!inList{}:)}}
+
+\begin{PLM}
+func primitive block (?!inList:ioWaitingList $taskList)
+\end{PLM}
+
+Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= passée en argument. Elle est appelable en mode \plm=primitive=.
+
+
+
+
+\subsection{Fonction \texttt{block(?onDeadline{}:)}}
+
+\begin{PLM}
+func primitive block (?onDeadline:deadline $uint32) 
+\end{PLM}
+
+Cette fonction bloque la tâche en cours jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=primitive=.
+
+
+
+
+
+
+
+\subsection{Fonction \texttt{block(?!inList{}:?onDeadline{}:)}}
+
+\begin{PLM}
+func primitive block (?!inList:waitingList $taskList 
+                      ?onDeadline:deadline $uint32) 
+\end{PLM}
+
+Cette fonction bloque la tâche en cours dans la liste \plm=waitingList= jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=primitive=.
+
+
+
+
+
+
+
+
+\subsection{Fonction \texttt{makeTaskReady(?!fromList{}:)}}
+
+\begin{PLM}
+func service
+makeTaskReady (?!fromList:ioWaitingList $taskList
+               !found: outFound $bool)
+\end{PLM}
+
+Si la liste \plm=waitingList= est vide, la fonction renvoie \plm=outFound= à \plm=no=. Si la liste n'est pas vide, cette fonction retire de la liste la tâche de plus forte priorité, la rend prête, et la fonction renvoie \plm=outFound= à \plm=yes=.
+
+Cette fonction est appelable en mode \plm=primitive=, c'est-à-dire par les primitives, et en mode \plm=service=, c'est-à-dire par les routines d'interruption.
+
+
+
+
+
+
+
+
+
+
+\subsection{Fonction \texttt{makeTasksReady(?fromCurrentDate{}:)}}
+
+\begin{PLM}
+func service makeTasksReady (?fromCurrentDate:inCurrentDate $uint32)
+\end{PLM}
+
+Cette fonction rend prête toutes les tâches en attente d'échéance dont l'échéance est atteinte.
+
+Cette fonction est appelable mode \plm=service=, c'est-à-dire par les routines d'interruption.
+
+
+
+
+
+
+\subsection{Fonction \texttt{handleGuardedCommand}}
+
+\begin{PLM}
+func guard handle (?!guard:ioGuard $guardList)
+\end{PLM}
+
+Cette fonction enregistre la tâche courante dans la liste \plm=ioGuard=. Cette fonction est appelable mode \plm=guard=, c'est-à-dire par les gardes.
+
+
+
+
+
+
+
+
+\subsection{Fonction \texttt{handle (?guardedDeadline{}:)}}
+
+\begin{PLM}
+func guard handle (?guardedDeadline:inDeadline $uint32)
+\end{PLM}
+
+Cette fonction enregistre la tâche courante pour une attente en garde jusqu'à la date \plm=inDeadline=. Cette fonction est appelable mode \plm=guard=, c'est-à-dire par les gardes.
+
+
+
+
+
+
+
+
+
+
+\subsection{Fonction \texttt{notifyChange}}
+
+\begin{PLM}
+func service notifyChange (?!forGuard:ioGuard $guardList)
+\end{PLM}
+
+Cette fonction signifie aux tâches enregistrées dans \plm=ioGuard= que les gardes doivent être re-évaluées. Cette fonction est appelable en mode \plm=primitive= et en mode \plm=service=.
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Fonction \texttt{notifyChangeForGuardedWaitUntil((?withCurrentDate{}:)}}
+
+\begin{PLM}
+func service
+notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
+\end{PLM}
+
+Cette fonction signifie aux tâches en attente d'échéance en garde que l'instant \plm=inCurrentDate= est atteint, et qu'elles doivent re-évaluer leur gardes. Cette fonction est appelable en mode \plm=service= (et aussi en mode \plm=primitive=, bien qu'en pratique c'est la routine d'interruption périodique qui l'appelle).
+
+
+
+\sectionLabel{Le module \texttt{time} pour un Cortex-M4}{moduleTimeCortex}
+
+Le module \plm=time= décrit ici permet une gestion élémentaire du temps, c'est-à-dire :
+\begin{itemize}
+  \item maintenir une date courante, incrémentée sur interruption~;
+  \item une fonction permettant d'acquérir la date courante~;
+  \item une primitive d'attente d'échéance de la date courante~;
+  \item la définition d'une garde exprimant l'attente d'échéance en garde.
+\end{itemize}
+
+Les Cortex-M4 implémentent le timer \emph{Systick} qui permet de programmer très simplement des interruptions périodiques. La période choisie est $1~ms$. Le comptage du temps est initialisé à $0$ au démarrage du micro-contrôleur. Il est mémorisé dans une variable de type \plm=$uint32=, ce qui signifie qu'il retombe à $0$ au bout de $2^{32}~ms$, c'est-à-dire un peu de $49$ jours\footnote{Il n'y a pas d'impossiblité technique de passer à une variable plus large, par exemple un entier 64 bits. Il faut uniquement que les routines concernées de l'exécutif, écrites en C, prennent en charge ce type. Ces fonctions sont~: \texttt{makeTasksReady(?fromCurrentDate{}:)}, \texttt{handle (?guardedDeadline{}:)} et \texttt{notifyChangeForGuardedWaitUntil((?withCurrentDate{}:)}.}.
+
+
+
+\subsection{En-tête}
+
+L'en-tête du module \plm=time= déclare la variable privée \plm=mUptimeMS= qui est utilisée pour détenir la date courante.
+
+\begin{PLM}
+module time {
+  var mUptimeMS $uint32 = 0
+\end{PLM}
+
+
+
+\subsection{Initialisation}
+
+La routine \plm=init 0= est exécutée durant la phase d'initialisation, c'est-à-dire après les routines de \plm=boot= et l'initialisation des variables globales (\refSectionPage{sequenceDemarrage}). Elle programme simplement le timer \emph{SysTick} de façon qu'il engendre une interruption toutes les millisecondes. La constante \plm=F_CPU_MHZ= contient la fréquence du processeur, exprimée en nombre de MHz : l'horloge du processeur est aussi l'horloge du timer \emph{SysTick}. Il faut noter que les interruptions sont toujours masquées durant la phase d'initialisation, aussi, bien que le timer tourne, la première interruption sera prise en compte au moment du démarrage des tâches.
+
+\begin{PLM}
+init 0 { // Configure Systick interrupt every ms
+  SYST_RVR = F_CPU_MHZ * 1000 - 1 // Interrupt every ms
+  SYST_CVR = 0
+  SYST_CSR = {SYST_CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
+}
+\end{PLM}
+
+
+\subsection{La routine d'interruption}
+
+La routine d'interruption est \plm=systick=. Son nom est défini par le fichier de configuration de la cible (\refSubsectionPage{configurationInterrupts}). Le mot réservé \plm=service= dans son en-tête signifie qu'elle peut appeler les fonctions déclarées dans ce mode. L'appel de la fonction \plm=noteCurrentTaskFreeStackSize= permet de maintenir une information de remplissable de la tâche en cours d'exécution au moment où l'interruption est survenue. Ensuite, la variable \plm=self.mUptimeMS= est incrémentée. Noter l'utilisation de l'opérateur \plm=+%=, qui réalise une incrémentation sans détection de débordement. La fonction \plm=makeTasksReady (!fromCurrentDate:)= libère toutes les tâches bloquées en attente d'échéance, dont l'échéance est atteinte (c'est-à-dire dont l'échéance est inférieure ou égale à la valeur de \plm=now=). La fonction  \plm=notifyChangeForGuardedWaitUntil (!withCurrentDate:)= fait de même pour les tâches en attente d'échéance en garde.
+
+\begin{PLM}
+isr service systick {
+  noteCurrentTaskFreeStackSize ()
+  let now = self.mUptimeMS +% 1
+  self.mUptimeMS = now
+  makeTasksReady (!fromCurrentDate:now)
+  notifyChangeForGuardedWaitUntil (!withCurrentDate:now)
+}
+\end{PLM}
+
+
+
+
+\subsection{Attente d'échéance}
+
+Cette primitive système exprime l'attente d'échéance~:
+\begin{itemize}
+  \item \plm=public= signifie qu'elle peut être appelée en dehors du module~;
+  \item \plm=system= qu'elle est appelable à partir d'une tâche, et s'exécute interruptions masquées via un \emph{system call}~;
+  \item \plm=primitive= que la tâche appelante peut être bloquée~;
+  \item \plm=@noUnusedWarning= qu'aucune alerte ne sera engendrée par la compilation si cette fonction n'est pas appelée.
+\end{itemize}
+
+Si la date fournie par la valeur \plm=inDate= est postérieure à la date courante, la tâche appelante est bloquée.
+
+\begin{PLM}
+public system primitive
+waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
+  if inDate > self.mUptimeMS {
+    block (!onDeadline:inDate)
+  }
+}
+\end{PLM}
+
+L'appel de la primitive a pour syntaxe~:
+\begin{PLM}
+var échéance $uint32 = ...
+time.waitUntilMS (!deadline:échéance)
+\end{PLM}
+
+
+\begin{PLM}
+public func init oneMillisecondBusyWait @noUnusedWarning () {
+  while not SYST_CSR.COUNTFLAG.bool {}
+}
+
+
+public func panic panicOneMillisecondBusyWait @noUnusedWarning () {
+  while not SYST_CSR.COUNTFLAG.bool {}
+}
+
+public system safe millis @noUnusedWarning () -> $uint32 {
+  result = self.mUptimeMS
+}
+
+public func init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+  for _ $uint32 in 0 ..< inDelay {
+    self.oneMillisecondBusyWait ()
+  }
+}
+
+public func panic panicBusyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+  for _ $uint32 in 0 ..< inDelay {
+    self.panicOneMillisecondBusyWait ()
+  }
+}
+
+
+public system primitive waitDuringMS @noUnusedWarning (?delay: inDelay $uint32) {
+  if inDelay > 0 {
+    block (!onDeadline:self.mUptimeMS +% inDelay)
+  }
+}
+
+
+public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
+  noteCurrentTaskFreeStackSize ()
+  accept = (inDeadline) ≤ self.mUptimeMS
+  if not accept {
+    handle (!guardedDeadline:inDeadline)
+  }
+}
+}
+
+\end{PLM}
+
+
+
+
+
+
+
+
+
+
+
 
 
 \sectionLabel{Sémaphore de Dijkstra}{semaphore}
@@ -19,44 +324,58 @@ struct $semaphore {
   var value $uint32
   var list = $taskList ()
   var guardList = $guardList ()
-
-  public service V @noUnusedWarning () {
-    makeTaskReady (!?list:self.list ?found:let found)
+  
+  public system service signal @noUnusedWarning @mutating () {
+    makeTaskReady (!?fromList:self.list ?found:let found)
     if not found {
       self.value += 1
-      guardDidChange (!?guard:self.guardList)
+      notifyChange (!?forGuard:self.guardList)
     }
   }
 
-  public primitive P @noUnusedWarning () {
+  public system primitive wait @noUnusedWarning @mutating () {
     if self.value > 0 {
       self.value -= 1
     }else{
-      blockInList (!?list:self.list)
+      block (!?inList:self.list)
     }
   }
 
-  public primitive P_until @noUnusedWarning (?deadline:inDeadline $uint32) -> $bool {
+  public system primitive wait
+  @noUnusedWarning @mutating (?untilDeadline:inDeadline $uint32) -> $bool {
     result = self.value > 0
     if result {
       self.value -= 1
     }else if inDeadline > time.millis () { 
-      blockInListAndOnDeadline (!?list:self.list !deadline:inDeadline)
+      block (!?inList:self.list !onDeadline:inDeadline)
     }
   }
 
-  public guard P @noUnusedWarning () {
+  public guard wait @noUnusedWarning () {
     accept = self.value > 0
     if accept {
       self.value -= 1
     }else{
-      handleGuardedCommand (!?guard:self.guardList)
+      handle (!?guard:self.guardList)
     }
   }
 
 }
 \end{PLM}
 
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Instruction \texttt{sync}}{instructionSync}
 
 
 

@@ -274,6 +274,27 @@ module lcd {
 
   //············································································
 
+  public func user print @noUnusedWarning (?u64:inValue $uint64) {
+    var divisor $uint64 = 1_0000__00000__00000__00000
+    var value = inValue
+    var isPrinting = no
+    while divisor > 0 {
+      if isPrinting or (value ≥ divisor) {
+        let quotient = value / divisor
+        let remainder = value - quotient * divisor
+        self.writeData_inUserMode (!convert (quotient) + 0x30)
+        value = remainder
+        isPrinting = yes
+      }
+      divisor = divisor / 10
+    }
+    if not isPrinting {
+      self.writeData_inUserMode (!0x30)
+    }
+  }
+
+  //············································································
+
   public func user print @noUnusedWarning (?string:inValue $staticString) {
     for c in inValue {
       self.writeData_inUserMode (!c)

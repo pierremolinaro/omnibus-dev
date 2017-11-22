@@ -92,31 +92,31 @@ boot 0 {
   while MCG_S.LOCK0 == 0 {}
 //------------------------------------ Now we're in PBE mode : now program the clock dividers
   if @static F_CPU_MHZ == 240 {
-    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // Bus 60 MHz, Flash 30 MHz
+    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // Bus 120 MHz, Flash 30 MHz
     SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:4} // USB clock = 240 MHz / 5
   }else if @static F_CPU_MHZ == 216 {
-    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // bus = 54 MHz, Flash 27 MHz
+    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // bus = 108 MHz, Flash 27 MHz
     SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:0} // USB clock = IRC48M
   }else if @static F_CPU_MHZ == 192 {
-    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 48 MHz, Flash 27.4 MHz
+    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 96 MHz, Flash 27.4 MHz
     SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:3} // USB clock = 192 MHz / 4
   }else if @static F_CPU_MHZ == 180 {
-    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 60 MHz, Flash 25.7 MHz
+    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 90 MHz, Flash 25.7 MHz
     SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:0} // USB clock = IRC48M
   }else if @static F_CPU_MHZ == 168 {
     SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:2 !OUTDIV4:5} // bus = 56 MHz, Flash 28 MHz
     SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:6 !USBFRAC:1} // USB clock = 168 MHz * 2 / 7
   }else if @static F_CPU_MHZ == 144 {
-    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:4} // bus = 48 MHz, Flash 28.8 MHz
+    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:4} // bus = 72 MHz, Flash 28.8 MHz
     SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:2} // USB clock = 144 MHz / 3
   }else if @static F_CPU_MHZ == 120 {
-    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:4} // bus = 60 MHz, Flash 24 MHz
+    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:4} // bus = 120 MHz, Flash 24 MHz
     SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:4 !USBFRAC:1} // USB clock = 120 MHz * 2 / 5
   }else if @static F_CPU_MHZ == 96 {
-    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:3} // bus = 48 MHz, Flash 24 MHz
-    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:2} // USB clock = 96 MHz / 2
+    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:3} // bus = 96 MHz, Flash 24 MHz
+    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:1} // USB clock = 96 MHz / 2
   }else if @static F_CPU_MHZ == 72 {
-    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:2} // bus = 36 MHz, Flash 24 MHz
+    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:2} // bus = 72 MHz, Flash 24 MHz
     SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:2 !USBFRAC:1} // USB clock = 72 MHz * 2 / 3
   }else if @static F_CPU_MHZ == 48 {
     SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:1 !OUTDIV2:1 !OUTDIV3:1 !OUTDIV4:3} // bus = 48 MHz, Flash 24 MHz
@@ -143,23 +143,23 @@ boot 0 {
 
 let F_BUS_MHZ =
   if F_CPU_MHZ == 240 {
-    60
+    120
   }else if F_CPU_MHZ == 216 {
-    54
+    108
   }else if F_CPU_MHZ == 192 {
-    48
+    96
   }else if F_CPU_MHZ == 180 {
-    60
+    90
   }else if F_CPU_MHZ == 168 {
     56
   }else if F_CPU_MHZ == 144 {
-    48
+    72
   }else if F_CPU_MHZ == 120 {
-    60
+    120
   }else if F_CPU_MHZ == 96 {
-    48
+    96
   }else if F_CPU_MHZ == 72 {
-    36
+    72
   }else if F_CPU_MHZ == 48 {
     48
   }else if F_CPU_MHZ == 24 {
