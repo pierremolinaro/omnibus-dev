@@ -7,3 +7,41 @@
 
 \chapterLabel{Tâches}{chapitreTache}
 
+En PLM, la tâche est l'unité d'exécution. Une tâche est déclarée statiquement, de priorité fixe. Une tâche peut déclarer des variables privées et du code à exécuter.
+
+
+\section{Déclaration d'une tâche}
+
+L'en-tête de la déclaration d'une tâche définit~:
+\begin{itemize}
+  \item son nom~;
+  \item sa priorité~;
+  \item la taille de sa pile.
+\end{itemize}
+
+Toutes les priorités doivent être différentes~; $0$ est la plus forte priorité.
+
+Par exemple~:
+\begin{PLM}
+task T priority 12 stackSize 512 {
+  ...
+}
+\end{PLM}
+
+Peuvent être déclarés dans le corps d'une tâche~:
+\begin{itemize}
+  \item des variables privées~;
+  \item des routines d'initialisation (\plm=setup=)~;
+  \item des fonctions~;
+  \item des commandes gardées.
+\end{itemize}
+
+La déclaration d'une variable privée doit comporter une expression qui fixe sa valeur initiale (ainsi toutes les variables privées d'une tâche sont initialisées lorsqu'elle démarre)~; cette expression doit être calculable statiquement. Ces variables sont privées, c'est-à-dire qu'aucune autre entité extérieure (comme par exemple une autre tâche) ne peut y accéder. L'accès aux variables privées doit être obligatoirement préfixé par \plm=self.=.
+
+Une tâche peut déclarer zéro, une ou plusieurs routines d'initialisation. Chacune présente une priorité (exprimée sous la forme d'un nombre positif ou nul). Deux routines d'initialisation d'une même tâche ne peuvent pas avoir la même priorité. Les routines d'initialisation sont exécutées dans l'ordre croissant de leur priorité, et en mode utilisateur (\refSectionPage{modesLogiques}). Une routine d'initialisation peut servir par exemple à donner une valeur initiale calculée dynamiquement à une variable privée, ou encore à réaliser des initialisations matérielles.
+
+
+\section{Exécution des tâches}
+
+Les tâches sont toutes démarrées à la fin de la phase d'initialisation (\refFigurePage{}{sequenceDemarrage}). Si aucune tâche n'est déclarée, l'exécution s'arrête à la fin de l'exécution des routines \plm=init=.
+
