@@ -87,15 +87,21 @@ nom = expression
 
 Où~:
 \begin{itemize}
-  \item \plm=nom= est le nom d'une variable glogale ou locale, ou le nom d'un registre de contrôle ;
+  \item \plm=nom= est le nom d'une variable globale, d'une variable locale, ou d'un registre de contrôle ;
   \item \plm=expression= est l'expression qui fournit la valeur.
 \end{itemize}
 
+On peut aussi accéder à une propriété d'une variable instance de structure~:
+\begin{PLM}
+nom.propriété = expression
+\end{PLM}
 
+Ainsi qu'à un élément de tableau~:
+\begin{PLM}
+nom [expression_indice] = expression
+\end{PLM}
 
-
-
-
+Ou encore toute combinaison de propriétés et d'éléments de tableau.
 
 
 
