@@ -41,70 +41,73 @@ syntax extension plm_syntax {
 
   rule <guarded_command> !@guardedCommandAST outGuardedCommand {
     $on$
+    @expressionAST expression
+    @location endOfExp
+    @bool warnsOnStaticExpression
     select
-      @expressionAST expression
-      @location endOfExp
-      @bool warnsOnStaticExpression
-      select
-        expression = @literalBooleanInExpressionAST.new {!true}
-        endOfExp = .here
-        warnsOnStaticExpression = false
-      or
-        $($
-        <expression> ?expression
-        endOfExp = .here
-        warnsOnStaticExpression = true
-        $)$
-      end
-      $identifier$ ?var receiverName
-      @lstring guardName
-      select
-        guardName = receiverName 
-        receiverName = ["" here]
-      or
-        $.$
-        $identifier$ ?guardName
-      end
-      <effective_parameters> ?let effectiveParameterList ?*
-      @bool isWhileCommand
-      select
-        $exit$
-        isWhileCommand = false
-      or
-        $continue$
-        isWhileCommand = true
-      end
-      outGuardedCommand = .boolAndSync {
-        !isWhileCommand:isWhileCommand
-        !expression:expression
-        !warnsOnStaticExpression:warnsOnStaticExpression
-        !endOfExpression:endOfExp
-        !optionalReceiverName:receiverName
-        !guardName:guardName
-        !effectiveParameterListAST:effectiveParameterList
-      }
-    or
       $($
-      <expression> ?let expression
-      let endOfExp = @location.here
+      <expression> ?expression
+      endOfExp = .here
       $)$
-      @bool isWhileCommand
-      select
-        $exit$
-        isWhileCommand = false
-      or
-        $continue$
-        isWhileCommand = true
-      end
-      outGuardedCommand = .boolean {
-        !isWhileCommand:isWhileCommand
-        !expression:expression
-        !endOfExpression:endOfExp
-      }
+      warnsOnStaticExpression = true
+    or
+      expression = @literalBooleanInExpressionAST.new {!true}
+      endOfExp = .here
+      warnsOnStaticExpression = false
     end
- }
+    $identifier$ ?var receiverName
+    @lstring guardName
+    select
+      guardName = receiverName 
+      receiverName = ["" here]
+    or
+      $.$
+      $identifier$ ?guardName
+    end
+    <effective_parameters> ?let effectiveParameterList ?*
+    @bool isWhileCommand
+    select
+      $exit$
+      isWhileCommand = false
+    or
+      $continue$
+      isWhileCommand = true
+    end
+    outGuardedCommand = .boolAndSync {
+      !isWhileCommand:isWhileCommand
+      !expression:expression
+      !warnsOnStaticExpression:warnsOnStaticExpression
+      !endOfExpression:endOfExp
+      !optionalReceiverName:receiverName
+      !guardName:guardName
+      !effectiveParameterListAST:effectiveParameterList
+    }
+  }
   
- #·····················································································································
+  #·····················································································································
+
+  rule <guarded_command> !@guardedCommandAST outGuardedCommand {
+    $on$
+    $($
+    <expression> ?let expression
+    let endOfExp = @location.here
+    $)$
+    @bool isWhileCommand
+    select
+      $exit$
+      isWhileCommand = false
+    or
+      $continue$
+      isWhileCommand = true
+    end
+    outGuardedCommand = .boolean {
+      !isWhileCommand:isWhileCommand
+      !expression:expression
+      !endOfExpression:endOfExp
+    }
+  }
+  
+  #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $sync$
@@ -159,7 +162,7 @@ override method @syncInstructionAST analyze
   #--- Guard
     @guardedCommandIR guardedCommandIR
     switch guardedCommand
-    case boolean (isWhileCommand expression endOfExpression) :
+    case boolean (isContinue expression endOfExpression) :
       @instructionListIR guardInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
@@ -186,7 +189,7 @@ override method @syncInstructionAST analyze
         ?let sourceValue
       ]
       guardedCommandIR = .booleanGuard {
-        !isWhileCommand:isWhileCommand
+        !isWhileCommand:isContinue
         !instructionGenerationList:guardInstructionGenerationList
         !result:sourceValue
       }
