@@ -69,7 +69,7 @@ task T1 priority 1 stackSize 512 {
     self.top += 2
   }
   
-  while time.waitUntilMS (!deadline:self.top) {
+  on time.waitUntilMS (!deadline:self.top) continue {
     s.V ()
     self.top += 300
     digitalWrite (!port:LED_L0 !yes)
@@ -85,7 +85,7 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var top $uint32 = 0
 
-  while time.waitUntilMS (!deadline:0) { // no wait...
+  on time.waitUntilMS (!deadline:0) continue { // no wait...
     let r = s.P_until (!deadline:self.top)
     if r {
       toggle (!port:LED_L1)

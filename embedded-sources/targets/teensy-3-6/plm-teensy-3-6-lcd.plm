@@ -245,7 +245,7 @@ module lcd {
 
   public func user print @noUnusedWarning (?spaces:inCount $uint32) {
     var count = inCount
-    loop while (count > 0) {
+    while (count > 0) {
       self.writeData_inUserMode (!0x20)
       count -= 1
     }
@@ -257,7 +257,7 @@ module lcd {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
-    loop while divisor > 0 {
+    while divisor > 0 {
       if isPrinting or (value ≥ divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
@@ -343,7 +343,7 @@ module lcd {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
-    loop while divisor > 0 {
+    while divisor > 0 {
       if isPrinting or (value ≥ divisor) {
         let quotient = value !/ divisor
         let remainder = value -% quotient *% divisor

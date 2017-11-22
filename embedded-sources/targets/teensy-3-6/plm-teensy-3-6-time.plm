@@ -23,13 +23,13 @@ module time {
   //····················································································································
 
   public func init oneMillisecondBusyWait @noUnusedWarning () {
-    loop while not SYST_CSR.COUNTFLAG.bool {}
+    while not SYST_CSR.COUNTFLAG.bool {}
   }
 
   //····················································································································
 
   public func panic panicOneMillisecondBusyWait @noUnusedWarning () {
-    loop while not SYST_CSR.COUNTFLAG.bool {}
+    while not SYST_CSR.COUNTFLAG.bool {}
   }
 
   //····················································································································

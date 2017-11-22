@@ -84,7 +84,7 @@ task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
   var n $uint32 = 1
 
-  while time.waitUntilMS (!deadline:self.top) {
+  on time.waitUntilMS (!deadline:self.top) continue {
     rdvs.output (!data:self.n)
     rdvs2.output (!data:self.n)
     toggle (!port:LED_L0)
@@ -97,7 +97,7 @@ task T0 priority 0 stackSize 512 {
 
 task T1 priority 1 stackSize 1024 {
 
-  while rdvs.entrée (?data:let x) {
+  on rdvs.entrée (?data:let x) continue {
     toggle (!port:LED_L1)
     s.wait ()
       lcd.goto (!line:0 !column:0)
@@ -111,7 +111,7 @@ task T1 priority 1 stackSize 1024 {
 task T2 priority 2 stackSize 1024 {
   var deadline $uint32 = 0
 
-  while rdvs2.entrée (?data:let x) {
+  on rdvs2.entrée (?data:let x) continue {
     toggle (!port:LED_L2)
     s.wait ()
       lcd.goto (!line:1 !column:0)
@@ -119,7 +119,7 @@ task T2 priority 2 stackSize 1024 {
     s.signal ()
   }
   
-  while time.waitUntilMS (!deadline:self.deadline) {
+  on time.waitUntilMS (!deadline:self.deadline) continue {
     self.deadline += 200
     toggle (!port:LED_L4)
   }
