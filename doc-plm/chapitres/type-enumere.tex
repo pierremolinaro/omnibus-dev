@@ -64,6 +64,39 @@ var unFeu = $feu.vert
 Les opérateurs \plm!==!, \plm+≠+, \plm!<!, \plm!≤!, \plm!>! et \plm!≥! permettent de comparer les valeurs d'un type énuméré ; la relation d'ordre est donnée par l'ordre de déclaration des constantes, c'est-à-dire que \plm!$feu.vert < $feu.orange! et \plm!$feu.orange < $feu.rouge!.
 
 
+
+
+
+
+
+\section{Accesseur}
+
+\subsection{Accesseur \texttt{uint$N$}}
+
+Tout type énuméré implémente un accesseur qui retourne la valeur entière non signée associée à la valeur du récepteur. Le type de la valeur retournée est \plm=$uintN=, où $N$ est le nombre de bits nécessaires pour coder la valeur de ce type.
+
+Par exemple, avec le type énuméré~:
+\begin{PLM}
+enum $feu {
+  case vert
+  case orange
+  case rouge
+}
+\end{PLM}
+
+L'accesseur est \plm=uint3=, et~:
+\begin{PLM}
+let x = $feu.orange
+let y $uint3 = x.uint3 () // 1
+\end{PLM}
+
+
+
+
+
+
+
+
 \sectionLabel{Représentation d'un type énuméré}{representation-type-enumere}
 
 Un type énuméré est représenté dans le code engendré par une valeur codée sur le plus petit nombre de bits nécessaire. Par exemple, le type énuméré suivant code trois valeurs.

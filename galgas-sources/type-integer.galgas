@@ -95,6 +95,12 @@ func %once countTrainingZerosMethoName -> @string {
   result = "trainingZeroCount"
 }
 
+#·······················································································································
+
+func %once setBitCountMethoName -> @string {
+  result = "setBitCount"
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -137,6 +143,12 @@ override method @integerDeclarationAST enterInContext
   [!?propertyMap addFunction
     !receiverTypeName:integerTypeName
     !methodName:countTrainingZerosMethoName ()
+    !resultTypeProxy:selfTypeProxy
+    !?ioSubprogramInvocationGraph
+  ]
+  [!?propertyMap addFunction
+    !receiverTypeName:integerTypeName
+    !methodName:setBitCountMethoName ()
     !resultTypeProxy:selfTypeProxy
     !?ioSubprogramInvocationGraph
   ]
@@ -275,6 +287,15 @@ override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAd
     !?ioLLVMcode
     !method:countTrainingZerosMethoName ()
     !intrinsic:"cttz"
+    !?ioGenerationAdds
+    !LLVMTypeName:llvmTypeName
+  )
+#--- Add "count training zeros" intrinsic function
+  generateIntegerIntrinsicFunction (
+    !PLMTypeName:mTypeName
+    !?ioLLVMcode
+    !method:setBitCountMethoName ()
+    !intrinsic:"ctpop"
     !?ioGenerationAdds
     !LLVMTypeName:llvmTypeName
   )

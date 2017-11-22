@@ -280,6 +280,19 @@ Les opérateurs infixes \plm!+!, \plm!+%!, \plm!-!, \plm!-%!, \plm!*! et \plm!*%
 \sectionLabel{Accesseurs}{accesseursEntiers}
 
 
+\subsection{Accesseur \texttt{bitReversed}}
+
+L'accesseur \plm=bitReversed= est implémenté pour tout type entier. Pour un entier sur $n$ bits, il retourne une valeur dont le bit d'indice $i$ (avec $0 \leqslant i < n$) a la valeur du bit $n-i-1$ du récepteur. Par exemple~:
+
+\begin{PLM}
+let x $uint3 = 0x_3
+let y = x.bitReversed () // 0x_6
+let z $uint16 = 0x_1234
+let t = z.bitReversed () // 0x_2C48
+\end{PLM}
+
+
+
 \subsection{Accesseur \texttt{byteSwapped}}
 
 L'accesseur \plm=byteSwapped= est implémenté pour tout type entier dont la taille est un multiple de 16 bits, qu'il soit signé ou non (\plm=$int16=, \plm=$uint16=, \plm=$int32=, \plm=$uint32=, \plm=$int48=, \plm=$uint48=, \plm=$int64=, \plm=$uint64=, …). Il réalise la conversion \emph{big endian} $\leftrightarrow$ \emph{little endian}. Par exemple~:
@@ -289,5 +302,38 @@ let x $uint32 = 0x_1234_5678
 let y = x.byteSwapped () // 0x_8756_3412
 let z $uint48 = 0x_1234_5678_ABCD
 let t = z.byteSwapped () // 0x_CDAB_8756_3412
+\end{PLM}
+
+
+
+\subsection{Accesseur \texttt{leadingZeroCount}}
+
+L'accesseur \plm=leadingZeroCount= est implémenté pour tout type entier. Il retourne le nombre de bits à zéro à partir du bit le plus significatif. Par exemple~:
+
+\begin{PLM}
+let x $uint32 = 0x_1234_5678
+let y = x.leadingZeroCount () // 3
+\end{PLM}
+
+
+
+\subsection{Accesseur \texttt{setBitCount}}
+
+L'accesseur \plm=setBitCount= est implémenté pour tout type entier. Il retourne le nombre de bits à un dans la valeur du récepteur. Par exemple~:
+
+\begin{PLM}
+let x $uint16 = 0x_1234
+let y = x.setBitCount () // 5
+\end{PLM}
+
+
+
+\subsection{Accesseur \texttt{trainingZeroCount}}
+
+L'accesseur \plm=trainingZeroCount= est implémenté pour tout type entier. Il retourne le nombre de bits à zéro à partir du bit le moins significatif. Par exemple~:
+
+\begin{PLM}
+let x $uint16 = 0x_1234
+let y = x.trainingZeroCount () // 2
 \end{PLM}
 
