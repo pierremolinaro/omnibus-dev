@@ -45,7 +45,7 @@ task T1 priority 1 stackSize 512 {
     lcd.print (!string:self.titre)
   }
   
-  while time.waitUntilMS (!deadline:self.compteur) {
+  on time.waitUntilMS (!deadline:self.compteur) continue {
     digitalWrite (!port:LED_L0 !yes)
     self.compteur +%= 500
     time.waitUntilMS (!deadline:self.compteur)
@@ -63,7 +63,7 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var compteur $uint32 = 0
 
-  while time.waitUntilMS (!deadline:self.compteur) {
+  on time.waitUntilMS (!deadline:self.compteur) continue {
     digitalWrite (!port:LED_L1 !yes)
     self.compteur +%= 499
     time.waitUntilMS (!deadline:self.compteur)
@@ -77,7 +77,7 @@ task T2 priority 2 stackSize 512 {
 task T3 priority 3 stackSize 512 {
   var compteur $uint32 = 0
 
-  while time.waitUntilMS (!deadline:self.compteur) {
+  on time.waitUntilMS (!deadline:self.compteur) continue {
     digitalWrite (!port:LED_L2 !yes)
     self.compteur +%= 498
     time.waitUntilMS (!deadline:self.compteur)
@@ -91,7 +91,7 @@ task T3 priority 3 stackSize 512 {
 task T4 priority 4 stackSize 512 {
   var compteur $uint32 = 0
 
-  while time.waitUntilMS (!deadline:self.compteur) {
+  on time.waitUntilMS (!deadline:self.compteur) continue {
     digitalWrite (!port:LED_L3 !yes)
     self.compteur +%= 497
     time.waitUntilMS (!deadline:self.compteur)
@@ -105,7 +105,7 @@ task T4 priority 4 stackSize 512 {
 task T5 priority 5 stackSize 512 {
   var compteur $uint32 = 0
 
-  while time.waitUntilMS (!deadline:self.compteur) {
+  on time.waitUntilMS (!deadline:self.compteur) continue {
     digitalWrite (!port:LED_L4 !yes)
     self.compteur +%= 496
     time.waitUntilMS (!deadline:self.compteur)

@@ -29,7 +29,7 @@ init 1000 {
 task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
-  while time.waitUntilMS (!deadline:self.compteur) {
+  on time.waitUntilMS (!deadline:self.compteur) continue {
     digitalWrite (!port:LED_L0 !yes)
     self.compteur +%= 500
     time.waitUntilMS (!deadline: self.compteur)

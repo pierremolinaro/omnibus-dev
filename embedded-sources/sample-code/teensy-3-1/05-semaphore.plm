@@ -48,7 +48,7 @@ task T1 priority 1 stackSize 512 {
     self.top += π
   }
   
-  while time.waitUntilMS (!deadline:self.top) {
+  on time.waitUntilMS (!deadline:self.top) continue {
     sémaphore.signal ()
     self.top += 250
     digitalWrite (!port:LED_L1 !yes)
@@ -64,7 +64,7 @@ task T1 priority 1 stackSize 512 {
 
 task T2 priority 2 stackSize 512 {
 
-  while sémaphore.wait () {
+  on sémaphore.wait () continue {
     digitalWrite (!port:LED_L2 !yes)
     sémaphore.wait ()
     digitalWrite (!port:LED_L2 !no)

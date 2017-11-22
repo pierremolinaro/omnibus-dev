@@ -68,7 +68,7 @@ task T priority 12 stackSize 512 {
     setupPIT ()
   }
   
-  while time.waitUntilMS (!deadline:self.deadline) {
+  on time.waitUntilMS (!deadline:self.deadline) continue {
     self.deadline +%= 250
     digitalWrite (!port:LED_L1 !yes) // Allumer la led
     time.waitUntilMS (!deadline:self.deadline)
