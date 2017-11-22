@@ -256,12 +256,12 @@ if condition {
 \end{PLM}
 
 
-\section{Instruction \texttt{loop}}
-\index{if@\plm=loop=}
+\section{Instruction \texttt{while}}
+\index{if@\plm=while=}
 
-L'instruction \plm=loop= permet d'exprimer une répétition, où la \plm=condition= est testée avant l'exécution des instructions de la boucle :
+L'instruction \plm=while= permet d'exprimer une répétition, où la \plm=condition= est testée avant l'exécution des instructions de la boucle :
 \begin{PLM}
-loop while condition {
+while condition {
   instructions_while
 }
 \end{PLM}
@@ -342,7 +342,12 @@ for nom in objet while expression {
 
 
 
-\sectionLabel{Instruction \texttt{sync}}{instructionSync}
+\section{Instruction \texttt{sync}}
+
+L'instruction \plm=sync= est décrite à la \refSectionPage{instructionSync}.
+
+
+
 
 
 \sectionLabel{Instruction \texttt{nop}}{instructionNop}

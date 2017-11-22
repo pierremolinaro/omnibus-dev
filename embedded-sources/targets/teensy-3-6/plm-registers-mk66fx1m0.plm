@@ -1162,6 +1162,10 @@ register PIT_MCR at 0x4003_7000 $uint32 {
   30, MDIS, FRZ
 }
 
+// PIT Lifetime Timer Registers
+register PIT_LTMR64H @ro at 0x4003_70E0 $uint32
+register PIT_LTMR64L @ro at 0x4003_70E4 $uint32
+
 let PIT_COUNT = 4
 
 // Timer Load Value Register

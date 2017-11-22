@@ -81,7 +81,7 @@ def downloadArchive (archiveURL, archivePath):
   except:
     print makefile.BOLD_RED () + "Error: no network connection" + makefile.ENDC ()
     sys.exit (1)
-    
+
 #----------------------------------------------------------------------------------------------------------------------*
 
 def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceList, \
@@ -218,36 +218,38 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     rule.mCommand += [productHEX]
     make.addRule (rule)
   #---------------------------------------------- Add stack computation rule
-  stackComputationResultFile = objectDir + "/stack-computations.json"
-  rule = makefile.Rule ([stackComputationResultFile], "Stack requirements")
-  rule.mCommand += arm_stack_computations
-  for source in assemblerSourceList:
-    rule.mDependences.append ("sources/" + source)
-    rule.mCommand += ["sources/" + source]
-  for source in LLVMsourceList:
-    src = objectDir + "/opt." + source + ".s"
-    rule.mDependences.append (src)
-    rule.mCommand += [src]
-  rule.mCommand += ["-o", stackComputationResultFile]
-  make.addRule (rule)
-#   objectList.append (object)
+#  stackComputationResultFile = objectDir + "/stack-computations.json"
+#  rule = makefile.Rule ([stackComputationResultFile], "Stack requirements")
+#  rule.mCommand += arm_stack_computations
+#  for source in assemblerSourceList:
+#    rule.mDependences.append ("sources/" + source)
+#    rule.mCommand += ["sources/" + source]
+#  for source in LLVMsourceList:
+#    src = objectDir + "/opt." + source + ".s"
+#    rule.mDependences.append (src)
+#    rule.mCommand += [src]
+#  rule.mCommand += ["-o", stackComputationResultFile]
+#  make.addRule (rule)
   #---------------------------------------------- Add stacks check rule
-  checkStackResultFile = productDir + "/check-stacks-result.txt"
-  rule = makefile.Rule ([checkStackResultFile], "Check stacks")
-  rule.mCommand.append ("python")
-  rule.mCommand += check_stack_utility
-  rule.mDependences.append ("sources/provided-stacks.json")
-  rule.mCommand += ["sources/provided-stacks.json"]
-  rule.mDependences.append (stackComputationResultFile)
-  rule.mCommand += [stackComputationResultFile]
-  rule.mCommand += [checkStackResultFile]
-  make.addRule (rule)
-#   objectList.append (object)
+#  checkStackResultFile = productDir + "/check-stacks-result.txt"
+#  rule = makefile.Rule ([checkStackResultFile], "Check stacks")
+#  rule.mCommand.append ("python")
+#  rule.mCommand += check_stack_utility
+#  rule.mDependences.append ("sources/provided-stacks.json")
+#  rule.mCommand += ["sources/provided-stacks.json"]
+#  rule.mDependences.append (stackComputationResultFile)
+#  rule.mCommand += [stackComputationResultFile]
+#  rule.mCommand += [checkStackResultFile]
+#  make.addRule (rule)
   #---------------------------------------------- Add goals
-  make.addGoal ("run", [productHEX, checkStackResultFile], "Building all and run")
-  make.addGoal ("all", [productHEX, checkStackResultFile], "Building all")
-  make.addGoal ("display-object-size", [productHEX, checkStackResultFile], "Display Object Size")
-  make.addGoal ("object-dump", [productHEX, checkStackResultFile], "Dump Object Code")
+#  make.addGoal ("run", [productHEX, checkStackResultFile], "Building all and run")
+#  make.addGoal ("all", [productHEX, checkStackResultFile], "Building all")
+#  make.addGoal ("display-object-size", [productHEX, checkStackResultFile], "Display Object Size")
+#  make.addGoal ("object-dump", [productHEX, checkStackResultFile], "Dump Object Code")
+  make.addGoal ("run", [productHEX], "Building all and run")
+  make.addGoal ("all", [productHEX], "Building all")
+  make.addGoal ("display-object-size", [productHEX], "Display Object Size")
+  make.addGoal ("object-dump", [productHEX], "Dump Object Code")
   #---------------------------------------------- Build
   #make.printRules ()
   make.doNotShowProgressString ()

@@ -10,6 +10,27 @@
 En PLM, la tâche est l'unité d'exécution. Une tâche est déclarée statiquement, de priorité fixe. Une tâche peut déclarer des variables privées et du code à exécuter.
 
 
+\section{Un exemple de tâche}
+
+
+\begin{PLM}
+task T1 priority 1 stackSize 512 {
+  var compteur $uint32 = 0
+
+  setup 0 {
+    lcd.print (!string:"Hello")
+  }
+  
+  on time.waitUntilMS (!deadline:self.compteur) continue {
+    digitalWrite (!port:LED_L0 !yes)
+    self.compteur +%= 500
+    time.waitUntilMS (!deadline:self.compteur)
+    digitalWrite (!port:LED_L0 !no)
+    self.compteur +%= 500
+  }
+}
+\end{PLM}
+
 \section{Déclaration d'une tâche}
 
 L'en-tête de la déclaration d'une tâche définit~:
@@ -40,8 +61,56 @@ La déclaration d'une variable privée doit comporter une expression qui fixe sa
 
 Une tâche peut déclarer zéro, une ou plusieurs routines d'initialisation. Chacune présente une priorité (exprimée sous la forme d'un nombre positif ou nul). Deux routines d'initialisation d'une même tâche ne peuvent pas avoir la même priorité. Les routines d'initialisation sont exécutées dans l'ordre croissant de leur priorité, et en mode utilisateur (\refSectionPage{modesLogiques}). Une routine d'initialisation peut servir par exemple à donner une valeur initiale calculée dynamiquement à une variable privée, ou encore à réaliser des initialisations matérielles.
 
+Une tâche peut déclarer zéro, une ou plusieurs gardes. Une garde exprime l'attente qu'une condition de synchronisation se réalise. Si une tâche ne définit aucune garde, alors son exécution se termine à la fin de l'exécution des routines d'initialisation \plm=setup=.
+
+Enfin, une tâche peut déclarer des fonctions privées.
+
+
+
+
+
 
 \section{Exécution des tâches}
 
-Les tâches sont toutes démarrées à la fin de la phase d'initialisation (\refFigurePage{}{sequenceDemarrage}). Si aucune tâche n'est déclarée, l'exécution s'arrête à la fin de l'exécution des routines \plm=init=.
+Les tâches sont toutes démarrées à la fin de la phase d'initialisation (\refFigurePage{}{sequenceDemarrage}). Si aucune tâche n'est déclarée, l'exécution s'arrête à la fin de l'exécution des routines \plm=init=. Sinon, la tâche se met en attente des gardes tant qu'aucune n'est vraie. Dès que l'une d'elles devient vraie, sa liste d'instructions est exécutée~; si la garde nomme le qualificatif \plm=continue=, la tâche se remet en attente de l'évolution des gardes. Si la garde nomme le qualificatif \plm=exit=, l'exécution est terminée.
 
+La \refFigure{}{executionTache} illustre l'exécution de la tâche \plm=T= suivante~: 
+\begin{PLM}
+task T priority 1 stackSize 512 {
+  on G1 exit { L1 }
+  on G2 continue { L2 }
+}
+\end{PLM}
+
+\begin{figure}[ht]
+  \centering
+  \small
+  \begin{tikzpicture}[
+      cloud/.style ={draw=red, thick, chamfered rectangle,fill=red!20, minimum height=2em},
+      block/.style ={rectangle, draw=blue, thick, fill=green!20, align=center},
+      decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
+      node distance=5mm
+    ]
+    \node [cloud] (start) {\textsc{Démarrage de la tâche}};
+    \node [block] (setup) [below=of start] {Routines \bf\texttt{setup $n$}};
+    \node [block] (loop) [below=of setup] {Attente évolution gardes};
+    \node [block] (G1) [below left=of loop] {Garde \texttt{G1 \bf exit}};
+    \node [block] (L1) [below=of G1] {Liste d'instructions \texttt{L1}};
+    \node [cloud] (fin) [below=of L1] {Fin de la tâche};
+    \node [block] (G2) [below right=of loop] {Garde \texttt{G2 \bf continue}};
+    \node [block] (L2) [below=of G2] {Liste d'instructions \texttt{L2}};
+
+    \draw [-stealth, thick] (start) -- (setup);
+    \draw [-stealth, thick] (setup) -- (loop);
+    \draw [-stealth, thick] (loop) -- (G1);
+    \draw [-stealth, thick] (G1) -- (L1);
+    \draw [-stealth, thick] (L1) -- (fin);
+    \draw [-stealth, thick] (loop) -- (G2);
+    \draw [-stealth, thick] (G2) -- (L2);
+    \draw [-stealth, thick] (G2) -- (L2);
+    \draw [-stealth, thick] (L2) -- + (0, -.5) -- + (2, -.5) |- (loop);
+  \end{tikzpicture}
+  \caption{Organigramme d'exécution d'une tâche}
+  \labelFigure{executionTache}
+  \ligne
+\end{figure}

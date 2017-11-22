@@ -39,10 +39,8 @@ init 1000 {
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
-  let titre = "Hello"
-
   setup 0 {
-    lcd.print (!string:self.titre)
+    lcd.print (!string:"Hello")
   }
   
   on time.waitUntilMS (!deadline:self.compteur) continue {
