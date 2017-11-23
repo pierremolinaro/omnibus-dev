@@ -1356,6 +1356,26 @@ void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_elem
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Extension getter '@objectIR isConstantValue' (as function)                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_isConstantValue (const class GALGAS_objectIR & inObject,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Extension getter '@objectIR isStructuredNonConstantValue' (as function)                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_isStructuredNonConstantValue (const class GALGAS_objectIR & inObject,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        Function 'literalCharacterArrayName'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3026,7 +3046,7 @@ class GALGAS_storeToUniversalReferenceIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMTargetVarName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
@@ -3051,12 +3071,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeToUniversalRef
 
 class cPtr_storeToUniversalReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_string mProperty_mLLVMVarName ;
+  public : GALGAS_string mProperty_mLLVMTargetVarName ;
   public : GALGAS_PLMType mProperty_mTargetVarType ;
   public : GALGAS_objectIR mProperty_mSourceValue ;
 
 //--- Constructor
-  public : cPtr_storeToUniversalReferenceIR (const GALGAS_string & in_mLLVMVarName,
+  public : cPtr_storeToUniversalReferenceIR (const GALGAS_string & in_mLLVMTargetVarName,
                                              const GALGAS_PLMType & in_mTargetVarType,
                                              const GALGAS_objectIR & in_mSourceValue
                                              COMMA_LOCATION_ARGS) ;
@@ -3065,7 +3085,7 @@ class cPtr_storeToUniversalReferenceIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMTargetVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 //--- Description

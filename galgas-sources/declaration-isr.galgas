@@ -173,7 +173,7 @@ method @interruptMapIR interruptCodeGeneration
       let varName = llvmNameForGlobalVariable (!interrupt.mGlobalVariableName)
       let typeName = [interrupt.mSelfType llvmTypeName]
       ioLLVMcode += "  %self = getelementptr inbounds " + typeName + ", " + typeName + " * " + varName 
-      ioLLVMcode += ", i32 0 ; Perform %self = @" + varName + " \n"
+      ioLLVMcode += ", i32 0 ; Perform %self = " + varName + " \n"
     end
   #--- Instruction list
     [interrupt.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]

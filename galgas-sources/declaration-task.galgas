@@ -194,7 +194,7 @@ method @taskListAST enterInContext
     ioContext.mGlobalTaskVariableList +=
       !task.mTaskName.string 
       !task.mTaskName.string
-      !.llvmStructureConstant{!type:taskType !values:initialValueList}
+      !.llvmStructureValue{!type:taskType !values:initialValueList}
   #--- Task procedures
     [task.mTaskProcList enterFunctionInContext
       !selfTypeName:llvmTypeStringFromPLMname (!task.mTaskName)

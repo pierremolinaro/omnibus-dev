@@ -10,6 +10,143 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_checkTargetListAST_2D_element::GALGAS_checkTargetListAST_2D_element (void) :
+mProperty_mTargetConstructLocation (),
+mProperty_mAcceptedTargetList () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element::~ GALGAS_checkTargetListAST_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element::GALGAS_checkTargetListAST_2D_element (const GALGAS_location & inOperand0,
+                                                                            const GALGAS_lstringlist & inOperand1) :
+mProperty_mTargetConstructLocation (inOperand0),
+mProperty_mAcceptedTargetList (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element GALGAS_checkTargetListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_checkTargetListAST_2D_element (GALGAS_location::constructor_nowhere (HERE),
+                                               GALGAS_lstringlist::constructor_emptyList (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element GALGAS_checkTargetListAST_2D_element::constructor_new (const GALGAS_location & inOperand0,
+                                                                                            const GALGAS_lstringlist & inOperand1 
+                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_checkTargetListAST_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_checkTargetListAST_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_checkTargetListAST_2D_element::objectCompare (const GALGAS_checkTargetListAST_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mTargetConstructLocation.objectCompare (inOperand.mProperty_mTargetConstructLocation) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mAcceptedTargetList.objectCompare (inOperand.mProperty_mAcceptedTargetList) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_checkTargetListAST_2D_element::isValid (void) const {
+  return mProperty_mTargetConstructLocation.isValid () && mProperty_mAcceptedTargetList.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_checkTargetListAST_2D_element::drop (void) {
+  mProperty_mTargetConstructLocation.drop () ;
+  mProperty_mAcceptedTargetList.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_checkTargetListAST_2D_element::description (C_String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString << "<struct @checkTargetListAST-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mTargetConstructLocation.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mAcceptedTargetList.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_checkTargetListAST_2D_element::getter_mTargetConstructLocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTargetConstructLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_checkTargetListAST_2D_element::getter_mAcceptedTargetList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAcceptedTargetList ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @checkTargetListAST-element type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_checkTargetListAST_2D_element ("checkTargetListAST-element",
+                                                      NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_checkTargetListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_checkTargetListAST_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_checkTargetListAST_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_checkTargetListAST_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_checkTargetListAST_2D_element GALGAS_checkTargetListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_checkTargetListAST_2D_element result ;
+  const GALGAS_checkTargetListAST_2D_element * p = (const GALGAS_checkTargetListAST_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_checkTargetListAST_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("checkTargetListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_scopeStack_2D_element::GALGAS_scopeStack_2D_element (void) :
 mProperty_mScopeKind (),
 mProperty_mFirstBranch (),

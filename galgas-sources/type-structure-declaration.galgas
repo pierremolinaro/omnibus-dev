@@ -5,6 +5,7 @@
 class @structureDeclarationAST : @abstractDeclarationAST {
   @lstring mStructureName
   @lstringlist mAttributeListAST
+  @bool mGenerateAssignmentRoutine
   @structurePropertyListAST mStructurePropertyListAST
   @functionDeclarationListAST mFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mSystemRoutineListAST
@@ -119,6 +120,7 @@ syntax extension plm_syntax {
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
       !structureName
       !attributeList
+      !true # Generate assignment routine
       !fieldList
       !procedureDeclarationListAST
       !systemRoutineListAST
@@ -147,6 +149,7 @@ override method @structureDeclarationAST addExtension
       newDeclaration = .new {
         ![newDeclaration mStructureName]
         ![newDeclaration mAttributeListAST]
+        ![newDeclaration mGenerateAssignmentRoutine]
         ![newDeclaration mStructurePropertyListAST] + properties
         ![newDeclaration mFunctionDeclarationListAST] + functions
         ![newDeclaration mSystemRoutineListAST] + svcs
@@ -259,15 +262,18 @@ override method @structureDeclarationAST enterInContext
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Attribute "copyable"
-  var flags = @PLMTypeAttributes.instanciable
+  var attributes = @PLMTypeAttributes.instanciable
+  if mGenerateAssignmentRoutine then
+    attributes = attributes | .generateAssignmentRoutine
+  end
   for (s) in mAttributeListAST do
     if s.string == "copyable" then
-      if [flags copyable] then
+      if [attributes copyable] then
         error s : "duplicated attribute"
       elsif not canBeCopied then
         error mStructureName : "this structure cannot be copied, one field is not copyable"
       else
-        flags = flags | .copyable
+        attributes = attributes | .copyable
       end
     else
       error s : "only @copyable attribute is allowed here"
@@ -368,7 +374,7 @@ override method @structureDeclarationAST enterInContext
     !propertyMap
     !{} # Class constant map
     !constructorMap
-    !flags
+    !attributes
     !mStructureName
     !.structure {!propertyList:propertyList !guardMap:guardMap}
   }

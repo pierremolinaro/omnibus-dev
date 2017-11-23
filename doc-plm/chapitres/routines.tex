@@ -63,36 +63,12 @@ Cependant, un mode \emph{système} unique est trop sommaire pour reflèter toute
 
 \subsection{Changement de mode}
 
-\begin{figure}[t]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=10cm]{chapitres/changement-modes.pdf}
-%  \small
-%  \begin{tikzpicture}[
-%      user/.style ={rectangle, draw=blue, thick, align=center},
-%      system/.style ={rectangle, draw=black, thick, align=center},
-%      node distance=5mm
-%    ]
-%    \node [system] (primitive) {\texttt{primitive}};
-%    \node [system] (service) [right=of primitive] {\texttt{service}};
-%    \node [system] (section) [right=of service] {\texttt{section}};
-%    \node [system] (panic) [right=of section] {\texttt{panic}};
-%    \node [system] (init) [right=of panic] {\texttt{init}};
-%    \node [user] (user) [above=of primitive] {\texttt{user}};
-%    \node [system] (boot) [right=of user] {\texttt{boot}};
-%    \node [system] (safe) [below=of primitive] {\texttt{safe}};
-%    \node [system] (guard) [above=of panic] {\texttt{guard}};
-%
-%    \draw [->] (primitive) -- (service);
-%    \draw [->] (service) -- (section);
-%    \draw [->] (service) -- (safe);
-%    \draw [->] (section) -- (safe);
-%    \draw [->] (primitive) -- (safe);
-%    \draw [->] (init) -- (safe);
-%    \draw [->] (guard) -- (safe);
-%  \end{tikzpicture}
   \caption{Graphe des changements de mode}
   \labelFigure{changementMode}
-  \ligne
+%  \ligne
 \end{figure}
 
 Les possibilités de changements de mode sont illustrés par la \refFigure{}{changementMode}.

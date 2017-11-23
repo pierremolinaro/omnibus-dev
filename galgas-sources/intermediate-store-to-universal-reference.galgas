@@ -10,7 +10,7 @@ setter @instructionListIR appendStoreToUniversalReference
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @storeToUniversalReferenceIR : @abstractInstructionIR {
-  @string mLLVMVarName
+  @string mLLVMTargetVarName
   @PLMType mTargetVarType
   @objectIR mSourceValue
 }
@@ -20,10 +20,40 @@ class @storeToUniversalReferenceIR : @abstractInstructionIR {
 override method @storeToUniversalReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?!@generationAdds ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
-  ioLLVMcode += "  store " +  llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * " + mLLVMVarName + "\n"
+  switch mSourceValue
+  case null :
+    ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode NULL >>\n"
+  case reference (* *) :
+    ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode reference >>\n"
+  case llvmValue (* @string llvmName) :
+    ioLLVMcode += "  store " +  llvmType + " " + llvmName + ", " + llvmType + "* " + mLLVMTargetVarName + "\n"
+  case literalInteger  (* @bigint value) :
+    ioLLVMcode += "  store " +  llvmType + " " + value + ", " + llvmType + "* " + mLLVMTargetVarName + "\n"
+  case llvmStructureValue (* @sortedOperandIRList operands) :
+    for (value index) in operands do
+      let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
+      ioGenerationAdds.mUniqueIndex ++
+      ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
+                 + llvmType + " * " + mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
+      let valueType = [value llvmTypeName]
+      ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
+    end
+  case llvmArrayValue (* @operandIRList operands) :
+    for (value) in operands do (index)
+      let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
+      ioGenerationAdds.mUniqueIndex ++
+      ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
+                 + llvmType + " * " + mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
+      let valueType = [value llvmTypeName]
+      ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
+    end
+  case literalString  (* *) :
+  case zero (*) :
+    ioLLVMcode += "  store " +  llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + "* " + mLLVMTargetVarName + "\n"
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -25,7 +25,6 @@ let постоянная $uint8 = 200
 
 
 
-
 \section{Mots réservés}\index{Mots réservés}
 
 %Certains identificateurs sont réservés (\refSubsectionPage{motsReservesLangage}) .
@@ -34,16 +33,22 @@ let постоянная $uint8 = 200
 
 Les mots réservés correspondant aux éléments du langage sont listés dans le \refTableau{motReservesLangage}.
 
-\begin{table}[!t]
+\begin{table}[htbp]
   \centering
   \begin{tabular}{llllll}
     \input{chapitres/keywordList.tex}
   \end{tabular}
   \caption{Mots réservés du langage PLM}
   \labelTableau{motReservesLangage}
-  \ligne
+%  \ligne
 \end{table}
 
+
+
+
+\section{Nom de type}
+
+En PLM, le nom d'un type commence toujours par le préfixe «~\$~»~: \plm=$bool=, \plm=$uint8=, \plm=$monType=, \dots
 
 
 
@@ -67,15 +72,15 @@ Vous pouvez écrire les constantes entières en décimal, en hexadécimal ou en 
 
 \textbf{Décimal.} Une constante entière décimale commence par un chiffre décimal, et est suivie par zéro, un ou plusieurs chiffres décimaux, ou caractères «~\texttt{\_}~».
 
+Contrairement au C, un nombre qui commence par un zéro est un nombre écrit en décimal.
+
 \textbf{Hexadécimal.} Un chiffre hexadécimal est soit un chiffre décimal, soit une lettre entre «~\texttt{a}~» et «~\texttt{f}~», écrite indifféremment en minuscule ou en majuscule. Une constante hexadécimale commence par la séquence «~\texttt{0x}~», et est suivie par un ou plusieurs chiffres hexadécimal, ou caractères « \texttt{\_} ».
 
 \textbf{Binaire.} Une constante entière binaire commence par la séquence «~\texttt{0b}~» suivie par un ou plusieurs chiffres binaires, \texttt{0} ou \texttt{1}, ou caractères « \texttt{\_} ».
 
-Dans une constante entière, écrite en binaire, décimal ou en hexadécimal, le caractère «~\texttt{\_}~» peut servir de séparateur~; on peut ainsi écrire indifféremment : \plm!123!, \plm!1_23!, \plm!1_2_3!, \plm!1___23!, \dots
+\textbf{Le caractère «~\_~».} Dans une constante entière, écrite en binaire, décimal ou en hexadécimal, le caractère «~\texttt{\_}~» peut servir de séparateur~; on peut ainsi écrire indifféremment : \plm!123!, \plm!1_23!, \plm!1_2_3!, \plm!1___23!, \plm!1___2__3__!, \dots
 
-Contrairement au C, un nombre qui commence par un zéro est un nombre écrit en décimal.
-
-Une constante entière n'est pas limitée en taille : vous pouvez écrire des constantes entières avec un nombre quelconque de chiffres :
+\textbf{Taille.} Une constante entière n'est pas limitée en taille : vous pouvez écrire des constantes entières avec un nombre quelconque de chiffres :
 
 \begin{PLM}
 let a = 123_456_789_123_456_789_123_456_789_123_456_789_123_456_789
@@ -89,17 +94,17 @@ let a = 123_456_789_123_456_789_123_456_789_123_456_789_123_456_789
 
 PLM définit les délimiteurs listés dans le \refTableau{delimiteursLangage}.
 
-\begin{table}[!t]
+\begin{table}[htbp]
   \centering
   \begin{tabular}{llllllllllllll}
     \input{chapitres/delimiterList.tex}
   \end{tabular}
   \caption{Délimiteurs du langage PLM}
   \labelTableau{delimiteursLangage}
-  \ligne
+%  \ligne
 \end{table}
 
-%\begin{table}[!ht]
+%\begin{table}[htbp]
 %  \centering
 %  \begin{tabular}{ccccccccccccccccc}
 %    \plm!:!  & \plm!.! & \plm!,!  & \plm+!=+ & \plm!<=! & \plm!>=! & \plm!;! & \plm!==! & \plm!<! & \plm!>! & \plm![! & \plm!]! \\

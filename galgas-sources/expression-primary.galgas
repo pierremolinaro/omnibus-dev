@@ -285,6 +285,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !?result: outResult
     )
   case globalVariable (* @PLMType type) :
+    [!?ioInstructionGenerationList appendNoteGlobalVariableAccess !mReceiverName]
     [!?ioUniversalMap readAccess !mReceiverName]
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
     procAnalyzeAccesListInExpression (

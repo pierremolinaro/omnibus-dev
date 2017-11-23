@@ -116,8 +116,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
     kEnum_reference,
     kEnum_llvmValue,
     kEnum_literalInteger,
-    kEnum_llvmStructureConstant,
-    kEnum_llvmArrayConstant,
+    kEnum_llvmStructureValue,
+    kEnum_llvmArrayValue,
     kEnum_literalString,
     kEnum_zero
   } enumeration ;
@@ -154,13 +154,13 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                    const class GALGAS_uint & inOperand1
                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_objectIR constructor_llvmArrayConstant (const class GALGAS_PLMType & inOperand0,
-                                                                       const class GALGAS_operandIRList & inOperand1
-                                                                       COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_objectIR constructor_llvmArrayValue (const class GALGAS_PLMType & inOperand0,
+                                                                    const class GALGAS_operandIRList & inOperand1
+                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_objectIR constructor_llvmStructureConstant (const class GALGAS_PLMType & inOperand0,
-                                                                           const class GALGAS_sortedOperandIRList & inOperand1
-                                                                           COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_objectIR constructor_llvmStructureValue (const class GALGAS_PLMType & inOperand0,
+                                                                        const class GALGAS_sortedOperandIRList & inOperand1
+                                                                        COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_llvmValue (const class GALGAS_PLMType & inOperand0,
                                                                const class GALGAS_string & inOperand1
@@ -194,15 +194,15 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_llvmArrayConstant (class GALGAS_PLMType & outArgument0,
-                                                           class GALGAS_operandIRList & outArgument1,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_llvmArrayValue (class GALGAS_PLMType & outArgument0,
+                                                        class GALGAS_operandIRList & outArgument1,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_llvmStructureConstant (class GALGAS_PLMType & outArgument0,
-                                                               class GALGAS_sortedOperandIRList & outArgument1,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_llvmStructureValue (class GALGAS_PLMType & outArgument0,
+                                                            class GALGAS_sortedOperandIRList & outArgument1,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_llvmValue (class GALGAS_PLMType & outArgument0,
                                                    class GALGAS_string & outArgument1,
@@ -225,9 +225,9 @@ class GALGAS_objectIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmArrayConstant (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmArrayValue (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmStructureConstant (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmStructureValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmValue (LOCATION_ARGS) const ;
 
@@ -431,38 +431,38 @@ class cEnumAssociatedValues_objectIR_literalInteger : public cEnumAssociatedValu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_objectIR_llvmStructureConstant : public cEnumAssociatedValues {
+class cEnumAssociatedValues_objectIR_llvmStructureValue : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_sortedOperandIRList mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_objectIR_llvmStructureConstant (const GALGAS_PLMType & inAssociatedValue0,
-                                                                 const GALGAS_sortedOperandIRList & inAssociatedValue1
-                                                                 COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_objectIR_llvmStructureValue (const GALGAS_PLMType & inAssociatedValue0,
+                                                              const GALGAS_sortedOperandIRList & inAssociatedValue1
+                                                              COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_objectIR_llvmStructureConstant (void) {}
+  public : virtual ~ cEnumAssociatedValues_objectIR_llvmStructureValue (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_objectIR_llvmArrayConstant : public cEnumAssociatedValues {
+class cEnumAssociatedValues_objectIR_llvmArrayValue : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_operandIRList mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_objectIR_llvmArrayConstant (const GALGAS_PLMType & inAssociatedValue0,
-                                                             const GALGAS_operandIRList & inAssociatedValue1
-                                                             COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_objectIR_llvmArrayValue (const GALGAS_PLMType & inAssociatedValue0,
+                                                          const GALGAS_operandIRList & inAssociatedValue1
+                                                          COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_objectIR_llvmArrayConstant (void) {}
+  public : virtual ~ cEnumAssociatedValues_objectIR_llvmArrayValue (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
