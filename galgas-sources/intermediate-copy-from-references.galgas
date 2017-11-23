@@ -28,8 +28,8 @@ setter @instructionListIR appendCopyFromReferences
       [!?self appendStoreVolatileRegister !type !address !result]
     case volatileIndirectReference (@PLMType type @string llvmName) :
       [!?self appendStoreIndirectVolatileRegister !type !llvmName !result]
-    case universalReference (@PLMType type @string llvmName) :
-      [!?self appendStoreToUniversalReference !llvmName !type !result]
+    case universalReference (@PLMType type @string targetLLVMname) :
+      [!?self appendStoreToUniversalReference !targetLLVMname !type !result]
     end
   else # Call a copy routine
     [inTargetReference universalReference ?type:let targetType ?llvmName: let targetLLVMName]

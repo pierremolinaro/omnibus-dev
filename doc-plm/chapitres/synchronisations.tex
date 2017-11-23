@@ -232,6 +232,18 @@ isr service systick {
 
 
 
+\subsection{Obtenir la date courante}
+
+L'appel système \plm=millis= retourne la date courante.
+
+\begin{PLM}
+public system safe millis @noUnusedWarning () -> $uint32 {
+  result = self.mUptimeMS
+}
+\end{PLM}
+
+
+
 \subsection{Attente d'échéance}
 
 Cette primitive système exprime l'attente d'échéance~:
@@ -260,40 +272,31 @@ time.waitUntilMS (!deadline:échéance)
 \end{PLM}
 
 
+
+
+\subsection{Attente de délai}
+
+L'implémentation de l'attente de délai est similaire à l'attente d'échéance~: le délai est ajouté à la date courante pour former une date absolue.
+
 \begin{PLM}
-public func init oneMillisecondBusyWait @noUnusedWarning () {
-  while not SYST_CSR.COUNTFLAG.bool {}
-}
-
-
-public func panic panicOneMillisecondBusyWait @noUnusedWarning () {
-  while not SYST_CSR.COUNTFLAG.bool {}
-}
-
-public system safe millis @noUnusedWarning () -> $uint32 {
-  result = self.mUptimeMS
-}
-
-public func init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
-  for _ $uint32 in 0 ..< inDelay {
-    self.oneMillisecondBusyWait ()
-  }
-}
-
-public func panic panicBusyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
-  for _ $uint32 in 0 ..< inDelay {
-    self.panicOneMillisecondBusyWait ()
-  }
-}
-
-
-public system primitive waitDuringMS @noUnusedWarning (?delay: inDelay $uint32) {
+public system primitive
+waitDuringMS @noUnusedWarning (?delay: inDelay $uint32) {
   if inDelay > 0 {
     block (!onDeadline:self.mUptimeMS +% inDelay)
   }
 }
+\end{PLM}
 
 
+\subsection{Commande gardée d'attente d'échéance}
+
+L'implémentation d'une commande gardée prédéfinit la variable booléenne \plm=accept=. Celle-ci doit être valuée par la liste d'instructions, et à l'issue de l'exécution de celle-ci~:
+\begin{itemize}
+  \item si la valeur de \plm=accept= est \plm=yes=, la condition d'attente est considérée comme satisfaite (c'est-à-dire ici, que la date d'échéance \plm=inDeadline= est postérieure à la date courante)~;
+  \item si la valeur de \plm=accept= est \plm=no=, la condition d'attente est considérée comme non satisfaite (c'est-à-dire ici, que la date d'échéance \plm=inDeadline= est antérieure à la date courante), et que la tâche appelante a été enregistrée par un appel à la fonction \plm=handle (!guardedDeadline:)=. 
+\end{itemize}
+
+\begin{PLM}
 public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
   noteCurrentTaskFreeStackSize ()
   accept = (inDeadline) ≤ self.mUptimeMS
@@ -301,8 +304,43 @@ public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
     handle (!guardedDeadline:inDeadline)
   }
 }
+\end{PLM}
+
+\subsection{Attente en mode \texttt{init}}
+
+Le module \plm=time= est configuré par la routine \plm=init= de priorité $0$, elle est donc la première à s'exécuter dans ce mode. Les autres routines \plm=init= s'exécutent donc ensuite, dans le module \plm=time= est configuré. Dans le mode \plm=init=, l'exécutif n'est pas démarré, on ne peut pas appeler les routines d'attente d'échéance et de délai, mais uniquement exécuter que des attentes actives.
+
+Les fonctions suivantes réalisent des attentes actives, et, comme elles sont déclarées dans le mode \plm=init=, elles ne peuvent pas être appelées par les tâches.
+
+\begin{PLM}
+public func init oneMillisecondBusyWait @noUnusedWarning () {
+  while not SYST_CSR.COUNTFLAG.bool {}
 }
 
+public func panic panicOneMillisecondBusyWait @noUnusedWarning () {
+  while not SYST_CSR.COUNTFLAG.bool {}
+}
+
+public func init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+  for _ $uint32 in 0 ..< inDelay {
+    self.oneMillisecondBusyWait ()
+  }
+}
+\end{PLM}
+
+
+
+\subsection{Attente en mode \texttt{panic}}
+
+En mode \plm=panic=, l'exécutif n'est plus actif, on ne peut qu'exécuter des attentes actives.
+
+\begin{PLM}
+public func panic
+panicBusyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+  for _ $uint32 in 0 ..< inDelay {
+    self.panicOneMillisecondBusyWait ()
+  }
+}
 \end{PLM}
 
 
@@ -381,7 +419,7 @@ struct $semaphore {
 
 \section{Implémentation des commandes gardées}
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
   \centering
   \small
   \begin{tikzpicture}[
@@ -411,6 +449,6 @@ struct $semaphore {
   \end{tikzpicture}
   \caption{Graphe d'état des gardes d'une tâche}
   \labelFigure{commandeGardee}
-  \ligne
+%  \ligne
 \end{figure}
 

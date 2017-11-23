@@ -2,6 +2,7 @@ target "teensy-3-6/privileged"
 let F_CPU_MHZ = 192
 
 module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+module timer ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                                                                       
@@ -26,9 +27,9 @@ init 1000 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//module date {
+module timer {
  
-  init 100 {
+  init 1 {
   //--- Power on DMA_MUX, PIT, DMA
     SIM_SCGC6 |= {SIM_SCGC6 !PIT:1}
    //--- Enable PIT module
@@ -44,14 +45,23 @@ init 1000 {
     PIT_TCTRL [0] = {PIT_TCTRL !TEN:1}
   }
   
-  system safe current () -> $uint64 {
-    result = extend (PIT_LTMR64H)
-    result <<= 32
-    result |= extend (PIT_LTMR64L)
-    result = ~ result
-    result +%= 1
+  public system safe now @noUnusedWarning () -> $timerTick {
+    var r $uint64 = extend (PIT_LTMR64H)
+    r <<= 32
+    r |= extend (PIT_LTMR64L)
+    r = ~ r
+    r +%= 1
+    result = $timerTick (!rawValue: r)
   } 
-//}
+}
+
+struct $timerTick @copyable {
+  let rawValue $uint64
+  
+  public func raw @noUnusedWarning () -> $uint64 {
+    result = self.rawValue
+  }
+}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -59,12 +69,12 @@ task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
   on time.waitUntilMS (!deadline:self.compteur) continue {
-    let c = current ()
+    let rawTick = timer.now ().raw ()
     toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!unsigned:self.compteur)
     lcd.goto (!line:1 !column:0)
-    lcd.print (!u64:c / F_BUS_MHZ)
+    lcd.print (!u64:rawTick / F_BUS_MHZ)
     self.compteur +%= 1_000
   }
 }

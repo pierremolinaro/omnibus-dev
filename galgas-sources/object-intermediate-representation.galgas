@@ -10,10 +10,68 @@ enum @objectIR {
 #--- Values
   case llvmValue (@PLMType type @string llvmName)
   case literalInteger  (@PLMType type @bigint value)
-  case llvmStructureConstant (@PLMType type @sortedOperandIRList values)
-  case llvmArrayConstant (@PLMType type @operandIRList values)
+  case llvmStructureValue (@PLMType type @sortedOperandIRList values)
+  case llvmArrayValue (@PLMType type @operandIRList values)
   case literalString  (@uint utf8Size @uint index)
   case zero (@PLMType type)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @objectIR isConstantValue -> @bool {
+  switch self
+  case null :
+    result = true
+  case zero (*) :
+    result = true
+  case literalInteger (* *) :
+    result = true
+  case llvmValue (* *) :
+    result = false
+  case reference (* *) :
+    result = false
+  case llvmStructureValue (* @sortedOperandIRList inValues) :
+    result = true
+    for () in inValues while result do
+      result = [mOperand isConstantValue]
+    end
+  case llvmArrayValue (* @operandIRList inValues) :
+    result = true
+    for () in inValues while result do
+      result = [mOperand isConstantValue]
+    end
+  case literalString  (* *) :
+    result = true
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @objectIR isStructuredNonConstantValue -> @bool {
+  switch self
+  case null :
+    result = false
+  case zero (*) :
+    result = false
+  case literalInteger (* *) :
+    result = false
+  case llvmValue (* *) :
+    result = false
+  case reference (* *) :
+    result = false
+  case llvmStructureValue (* @sortedOperandIRList inValues) :
+    result = true
+    for () in inValues while result do
+      result = [mOperand isConstantValue]
+    end
+  case llvmArrayValue (* @operandIRList inValues) :
+    result = true
+    for () in inValues while result do
+      result = [mOperand isConstantValue]
+    end
+  case literalString  (* *) :
+    result = false
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -25,14 +83,14 @@ getter @objectIR llvmName -> @string {
   case literalInteger (* @bigint value) : result = [value string]
   case llvmValue (* llvmName) : result = llvmName
   case reference (* llvmName) : result = llvmName
-  case llvmStructureConstant (* @sortedOperandIRList inValues) :
+  case llvmStructureValue (* @sortedOperandIRList inValues) :
     result = "{"
     for () in inValues
       do result += [mOperand llvmTypeName] + " " + [mOperand llvmName]
       between result += ", "
     end
     result += "}"
-  case llvmArrayConstant (* @operandIRList inValues) :
+  case llvmArrayValue (* @operandIRList inValues) :
     result = "["
     for () in inValues
       do result += [mOperand llvmTypeName] + " " + [mOperand llvmName]
@@ -56,8 +114,8 @@ getter @objectIR type -> @PLMType {
   case zero (type) : result = type
   case literalInteger (type *) : result = type
   case llvmValue (type *) : result = type
-  case llvmStructureConstant (type *) : result = type
-  case llvmArrayConstant (type *) : result = type
+  case llvmStructureValue (type *) : result = type
+  case llvmArrayValue (type *) : result = type
   case literalString  (* *) : result = literalStringType ()
   end
 }
@@ -87,10 +145,10 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
     result = .llvmValue {!type: inType !llvmName:llvmName}
   case zero (*) :
     result = .zero {!type: inType}
-  case llvmStructureConstant (* @sortedOperandIRList values) :
-    result = .llvmStructureConstant {!type: inType !values: values}
-  case llvmArrayConstant (* @operandIRList values) :
-    result = .llvmArrayConstant {!type: inType !values: values}
+  case llvmStructureValue (* @sortedOperandIRList values) :
+    result = .llvmStructureValue {!type: inType !values: values}
+  case llvmArrayValue (* @operandIRList values) :
+    result = .llvmArrayValue {!type: inType !values: values}
   case literalString  (@uint size @uint index) :
     result = .literalString {!utf8Size: size !index: index}
   end
@@ -105,8 +163,8 @@ getter @objectIR name -> @string {
   case zero (*) : result = "zeroinitializer"
   case literalInteger (* @bigint value) : result = [value string]
   case llvmValue (* name) : result = name
-  case llvmStructureConstant (* *) : result = "{...}"
-  case llvmArrayConstant (* *) : result = "[...]"
+  case llvmStructureValue (* *) : result = "{...}"
+  case llvmArrayValue (* *) : result = "[...]"
   case literalString  (@uint size @uint index) :
     let sizeStr = [size string]
     result = "getelementptr inbounds ([" + sizeStr + " x i8], [" + sizeStr + " x i8]* "
@@ -123,8 +181,8 @@ getter @objectIR isStatic -> @bool {
   case zero (*) : result = true
   case literalInteger (* *) : result = true
   case llvmValue (* *) : result = false
-  case llvmStructureConstant (* *) : result = true
-  case llvmArrayConstant (* *) : result = true
+  case llvmStructureValue (* *) : result = true
+  case llvmArrayValue (* *) : result = true
   case literalString  (* *) : result = true
   end
 }

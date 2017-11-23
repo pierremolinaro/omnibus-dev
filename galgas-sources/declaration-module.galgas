@@ -239,6 +239,7 @@ proc retainRequiredModules ?!@ast ioAST {
       ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
         !moduleTypeName
         !{}
+        !false # Do not generate assignment routine
         !modulePropertyListAST
         !declaration.mFunctionDeclarationListAST
         !declaration.mSystemRoutineListAST
@@ -246,13 +247,6 @@ proc retainRequiredModules ?!@ast ioAST {
       }
       for (init) in declaration.mModuleInitListAST do
         ioAST.mDeclarationListAST += !init
-#        !@initAST.new {
-#          !moduleTypeName
-#          !declaration.mModuleName
-#          !init.mInstructionList
-#          !init.mEndOfInitLocation
-#          !init.mPriority
-#        }
       end
     end
   end

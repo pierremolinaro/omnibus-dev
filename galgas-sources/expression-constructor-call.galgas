@@ -131,7 +131,7 @@ override method @constructorCallAST analyzeExpression
       for i in 0 ..< size do
         operandIRList += !result
       end
-      outResult = .llvmArrayConstant {!type:resultType !values:operandIRList}
+      outResult = .llvmArrayValue {!type:resultType !values:operandIRList}
     end
   case simple (value) :
     if [mParameterList length] != 0 then
@@ -171,9 +171,10 @@ override method @constructorCallAST analyzeExpression
           !errorLocation:effective_mSelector.location
           !staticTypeAllowed:false
         )
-        sortedOperandIRList += !result !formal_mFieldIndex
+        [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !result ?let resultAsValue]
+        sortedOperandIRList += !resultAsValue !formal_mFieldIndex
       end
-      outResult = .llvmStructureConstant {!type: resultType !values:sortedOperandIRList}
+      outResult = .llvmStructureValue {!type:resultType !values:sortedOperandIRList}
     end
   end
 }
