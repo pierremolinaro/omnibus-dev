@@ -273,7 +273,8 @@ list delimitorsList style delimitersStyle error message "the '%K' delimitor" {
   "-", "-%", "-=", "-%=",
   "*", "*%", "*=", "*%=",
   "/", "!/", "/=", "!/=",
-  "%", "!%",  "%=", "!%="
+  "%", "!%",  "%=", "!%=",
+  "<<=", ">>="
 }
 
 rule list delimitorsList
