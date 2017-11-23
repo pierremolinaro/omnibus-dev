@@ -1229,22 +1229,22 @@ class cPtr_decoratedGlobalVariable : public cPtr_abstractDecoratedDeclaration {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              @requiredModuleAST class                                               *
+//                                             @implementedModuleAST class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_requiredModuleAST : public GALGAS_abstractDeclarationAST {
+class GALGAS_implementedModuleAST : public GALGAS_abstractDeclarationAST {
 //--- Constructor
-  public : GALGAS_requiredModuleAST (void) ;
+  public : GALGAS_implementedModuleAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_requiredModuleAST constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_implementedModuleAST constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_requiredModuleAST * ptr (void) const { return (const cPtr_requiredModuleAST *) mObjectPtr ; }
+  public : inline const class cPtr_implementedModuleAST * ptr (void) const { return (const cPtr_implementedModuleAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_requiredModuleAST (const cPtr_requiredModuleAST * inSourcePtr) ;
+  public : GALGAS_implementedModuleAST (const cPtr_implementedModuleAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -1252,16 +1252,17 @@ class GALGAS_requiredModuleAST : public GALGAS_abstractDeclarationAST {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_requiredModuleAST extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_implementedModuleAST extractObject (const GALGAS_object & inObject,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_requiredModuleAST constructor_new (const class GALGAS_lstring & inOperand0
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_implementedModuleAST constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                     const class GALGAS_bool & inOperand1
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_requiredModuleAST & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_implementedModuleAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1269,38 +1270,43 @@ class GALGAS_requiredModuleAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_requiredModuleAST class
+} ; // End of GALGAS_implementedModuleAST class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_requiredModuleAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implementedModuleAST ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Pointer class for @requiredModuleAST class                                      *
+//                                    Pointer class for @implementedModuleAST class                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_requiredModuleAST : public cPtr_abstractDeclarationAST {
+class cPtr_implementedModuleAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mModuleName ;
+  public : GALGAS_bool mProperty_mIsInstancied ;
 
 //--- Constructor
-  public : cPtr_requiredModuleAST (const GALGAS_lstring & in_mModuleName
-                                   COMMA_LOCATION_ARGS) ;
+  public : cPtr_implementedModuleAST (const GALGAS_lstring & in_mModuleName,
+                                      const GALGAS_bool & in_mIsInstancied
+                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

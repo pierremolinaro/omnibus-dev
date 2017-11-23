@@ -165,7 +165,7 @@ method @LValueAST analyzeLValue
   else
     [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
     switch entity
-    case module (*) :
+    case module (* *) :
       error mIdentifier : "a module cannot be written" : outInternalRepresentation
     case register (* writable registerType registerAddress * arraySize elementSize) : # 0 if not an array
       if not writable then

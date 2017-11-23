@@ -55,11 +55,28 @@ module timer {
   } 
 }
 
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 struct $timerTick @copyable {
   let rawValue $uint64
   
   public func raw @noUnusedWarning () -> $uint64 {
     result = self.rawValue
+  }
+
+  public func µs @noUnusedWarning () -> $uint32 {
+    let r = (self.rawValue / F_BUS_MHZ) % 1_000
+    result = truncate (r)
+  }
+
+  public func ms @noUnusedWarning () -> $uint32 {
+    let r = (self.rawValue / (F_BUS_MHZ * 1_000)) % 1_000
+    result = truncate (r)
+  }
+
+  public func s @noUnusedWarning () -> $uint32 {
+    let r = self.rawValue / (F_BUS_MHZ * 1_000_000)
+    result = truncate (r)
   }
 }
 
@@ -69,13 +86,19 @@ task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
   on time.waitUntilMS (!deadline:self.compteur) continue {
-    let rawTick = timer.now ().raw ()
+    let tick = timer.now ()
     toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!unsigned:self.compteur)
     lcd.goto (!line:1 !column:0)
-    lcd.print (!u64:rawTick / F_BUS_MHZ)
-    self.compteur +%= 1_000
+    lcd.print (!u64:tick.raw () / F_BUS_MHZ)
+    lcd.goto (!line:2 !column:0)
+    lcd.print (!unsigned:tick.s ())
+    lcd.print (!string:" ")
+    lcd.print (!unsigned:tick.ms ())
+    lcd.print (!string:" ")
+    lcd.print (!unsigned:tick.µs ())
+    self.compteur +%= 1_001
   }
 }
 

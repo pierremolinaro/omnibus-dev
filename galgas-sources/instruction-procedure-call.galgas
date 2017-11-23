@@ -232,9 +232,13 @@ override method @procedureCallInstructionAST analyze
   else
     [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
     switch entity
-    case module (@PLMType type) :
-      currentType = type
-      currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
+    case module (@PLMType type instancied) :
+      if instancied then
+        currentType = type
+        currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
+      else
+        error mIdentifier : "the module should be instancied" : currentType, currentLLVMAddressVar
+      end
     case register (* * * * * * *) :
       error mIdentifier
         : "a control register constant cannot be used in this context"

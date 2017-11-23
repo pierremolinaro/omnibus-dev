@@ -207,7 +207,10 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 {
   [ioUniversalMap searchEntity !mReceiverName ?let entity]
   switch entity
-  case module (@PLMType unused type) :
+  case module (type instancied) :
+    if not instancied then
+      error mReceiverName : "the module should be instancied"
+    end
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
