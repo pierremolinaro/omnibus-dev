@@ -1,4 +1,6 @@
 //---------------------------------------------------------------------------------------------------------------------*
+//   COPY BYTE ARRAY
+//---------------------------------------------------------------------------------------------------------------------*
 
 void copyByteArray (unsigned char * inTargetPtr,
                     unsigned char * inSourcePtr,
@@ -19,6 +21,8 @@ void copyByteArray (unsigned char * inTargetPtr,
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+//   COPY WORD ARRAY
+//---------------------------------------------------------------------------------------------------------------------*
 
 void copyWordArray (unsigned * inTargetPtr,
                     unsigned * inSourcePtr,
@@ -36,6 +40,25 @@ void copyWordArray (unsigned * inTargetPtr,
     inSourcePtr ++ ;
     wordCount -= 1 ;
   }while (wordCount > 0) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   CLEAR WORD ARRAY
+//---------------------------------------------------------------------------------------------------------------------*
+
+void clearWordArray (unsigned * inTargetPtr,
+                     const unsigned inWordCount) asm ("clear.word.array") ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void clearWordArray (unsigned * inTargetPtr,
+                     const unsigned inWordCount) {
+  unsigned wordCount = inWordCount ;
+  while (wordCount > 0) {
+    *inTargetPtr = 0 ;
+    inTargetPtr ++ ;
+    wordCount -= 1 ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

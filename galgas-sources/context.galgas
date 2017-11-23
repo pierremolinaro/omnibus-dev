@@ -237,11 +237,6 @@ proc buildSemanticContext
       ]
     end
   end
-#--- Enter boot routines
-#  [inAST.mBootListAST enterInContext
-#    !?outDecoratedDeclarationList
-#    !?outSubprogramInvocationGraph
-#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

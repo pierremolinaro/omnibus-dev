@@ -85,7 +85,7 @@ struct $timerTick @copyable {
 task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
-  on time.waitUntilMS (!deadline:self.compteur) continue {
+  on time.waitUntilMS (!deadline:self.compteur) {
     let tick = timer.now ()
     toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)

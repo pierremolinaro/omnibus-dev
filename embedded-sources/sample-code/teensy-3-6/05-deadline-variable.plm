@@ -62,12 +62,12 @@ task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   var deadline = $deadline (!period:500)
    
-  on time.waitUntilMS (!deadline:self.compteur) continue {
+  on time.waitUntilMS (!deadline:self.compteur) {
     toggle (!port:LED_L0)
     self.compteur +%= 500
   }
 
-//  on self.deadline.wait () continue {
+//  on self.deadline.wait () {
 //    toggle (!port:LED_L1)
 //  }
 }

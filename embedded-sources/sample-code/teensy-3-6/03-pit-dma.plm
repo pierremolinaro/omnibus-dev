@@ -203,7 +203,7 @@ task Tâche priority 1 stackSize 512 {
     initializeDMA ()
   }
   
-  on time.waitUntilMS (!deadline:self.compteur) continue {
+  on time.waitUntilMS (!deadline:self.compteur) {
     digitalWrite (!port:LED_L0 !yes)
     self.compteur +%= 500
     time.waitUntilMS (!deadline: self.compteur)

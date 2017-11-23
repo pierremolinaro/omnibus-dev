@@ -2416,17 +2416,14 @@ const char * gWrapperFileContent_2_targetTemplates = ";-------------------------
   "  %startPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_start, i32 0, i32 0\n"
   "  %endPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_end, i32 0, i32 0\n"
   "  br label %bssLoopTest\n"
-  "\n"
   "bssLoopTest:\n"
   "  %p = phi i32* [%startPtr, %entry], [%p.next, %bssLoop]\n"
   "  %completed = icmp eq i32* %p, %endPtr\n"
   "  br i1 %completed, label %clearCompleted, label %bssLoop\n"
-  "\n"
   "bssLoop:\n"
   "  store i32 0, i32* %p, align 4\n"
   "  %p.next = getelementptr inbounds i32, i32* %p, i32 1\n"
   "  br label %bssLoopTest\n"
-  "\n"
   "clearCompleted:\n"
   "  ret void\n"
   "}\n"
@@ -2436,7 +2433,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "ll-clear-bss.ll",
   "ll",
   true, // Text file
-  1440, // Text length
+  1437, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
@@ -2521,9 +2518,11 @@ const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   gWrapperFileContent_4_targetTemplates
 ) ;
 
-//--- File '/memory-copy.c'
+//--- File '/memory-utilities.c'
 
 const char * gWrapperFileContent_5_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   COPY BYTE ARRAY\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "void copyByteArray (unsigned char * inTargetPtr,\n"
   "                    unsigned char * inSourcePtr,\n"
@@ -2544,6 +2543,8 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   COPY WORD ARRAY\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "void copyWordArray (unsigned * inTargetPtr,\n"
   "                    unsigned * inSourcePtr,\n"
@@ -2563,13 +2564,32 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "  }while (wordCount > 0) ;\n"
   "}\n"
   "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   CLEAR WORD ARRAY\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void clearWordArray (unsigned * inTargetPtr,\n"
+  "                     const unsigned inWordCount) asm (\"clear.word.array\") ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void clearWordArray (unsigned * inTargetPtr,\n"
+  "                     const unsigned inWordCount) {\n"
+  "  unsigned wordCount = inWordCount ;\n"
+  "  while (wordCount > 0) {\n"
+  "    *inTargetPtr = 0 ;\n"
+  "    inTargetPtr ++ ;\n"
+  "    wordCount -= 1 ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_5_targetTemplates (
-  "memory-copy.c",
+  "memory-utilities.c",
   "c",
   true, // Text file
-  1573, // Text length
+  2597, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -4281,7 +4301,7 @@ const char * gWrapperFileContent_15_targetTemplates = "//--- Python tool list\n"
   "  \"c-arm7tdmi-context-code.c\",\n"
   "  \"../c-real-time-kernel-code.c\",\n"
   "  \"c-countTrainingZeros.c\",\n"
-  "  \"../memory-copy.c\"\n"
+  "  \"../memory-utilities.c\"\n"
   "//--- Assembler Source files\n"
   "S_FILES:\n"
   "  \"s-target.s\"\n"
@@ -4340,7 +4360,7 @@ const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  2370, // Text length
+  2375, // Text length
   gWrapperFileContent_15_targetTemplates
 ) ;
 
@@ -10287,7 +10307,7 @@ const char * gWrapperFileContent_58_targetTemplates = "//--- Python tool list\n"
   "  \"../c-cortex-m4-context-code.c\",\n"
   "  \"../../c-real-time-kernel-code.c\",\n"
   "  \"../c-countTrainingZeros.c\",\n"
-  "  \"../../memory-copy.c\"\n"
+  "  \"../../memory-utilities.c\"\n"
   "//--- Assembler Source files\n"
   "S_FILES:\n"
   "  \"../s-cortex-m4-header.s\",\n"
@@ -10398,7 +10418,7 @@ const cRegularFileWrapper gWrapperFile_58_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4071, // Text length
+  4076, // Text length
   gWrapperFileContent_58_targetTemplates
 ) ;
 
@@ -10898,7 +10918,7 @@ const char * gWrapperFileContent_65_targetTemplates = "//--- Python tool list\n"
   "  \"../c-cortex-m4-context-code.c\",\n"
   "  \"../../c-real-time-kernel-code.c\",\n"
   "  \"../c-countTrainingZeros.c\",\n"
-  "  \"../../memory-copy.c\"\n"
+  "  \"../../memory-utilities.c\"\n"
   "//--- Assembler Source files\n"
   "S_FILES:\n"
   "  \"../s-cortex-m4-header.s\",\n"
@@ -11008,7 +11028,7 @@ const cRegularFileWrapper gWrapperFile_65_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4087, // Text length
+  4092, // Text length
   gWrapperFileContent_65_targetTemplates
 ) ;
 
@@ -15974,7 +15994,7 @@ const char * gWrapperFileContent_95_targetTemplates = "//--- Python tool list\n"
   "  \"../c-cortex-m4-context-code.c\",\n"
   "  \"../../c-real-time-kernel-code.c\",\n"
   "  \"../c-countTrainingZeros.c\",\n"
-  "  \"../../memory-copy.c\"\n"
+  "  \"../../memory-utilities.c\"\n"
   "//--- Assembler Source files\n"
   "S_FILES:\n"
   "  \"../s-cortex-m4-header.s\",\n"
@@ -16113,7 +16133,7 @@ const cRegularFileWrapper gWrapperFile_95_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4747, // Text length
+  4752, // Text length
   gWrapperFileContent_95_targetTemplates
 ) ;
 
@@ -16618,7 +16638,7 @@ const char * gWrapperFileContent_102_targetTemplates = "//--- Python tool list\n
   "  \"../c-cortex-m4-context-code.c\",\n"
   "  \"../../c-real-time-kernel-code.c\",\n"
   "  \"../c-countTrainingZeros.c\",\n"
-  "  \"../../memory-copy.c\"\n"
+  "  \"../../memory-utilities.c\"\n"
   "//--- Assembler Source files\n"
   "S_FILES:\n"
   "  \"../s-cortex-m4-header.s\",\n"
@@ -16756,7 +16776,7 @@ const cRegularFileWrapper gWrapperFile_102_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4763, // Text length
+  4768, // Text length
   gWrapperFileContent_102_targetTemplates
 ) ;
 

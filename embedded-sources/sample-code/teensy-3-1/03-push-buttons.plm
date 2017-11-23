@@ -53,7 +53,7 @@ task T priority 0 stackSize 512 {
 
   //············································································
   
-  on time.waitUntilMS (!deadline:self.compteur) continue {
+  on time.waitUntilMS (!deadline:self.compteur) {
     self.compteur +%= 50
     digitalWrite (!port:LED_L0 !not digitalRead (!port:PUSH_P0))
     digitalWrite (!port:LED_L1 !not digitalRead (!port:PUSH_P1))

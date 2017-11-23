@@ -85,7 +85,7 @@ var s1 = $monSemaphore (!value:0)
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.top) continue {
+  on time.waitUntilMS (!deadline:self.top) {
     s0.V ()
     self.top += 250
     digitalWrite (!port:LED_L0 !yes)
@@ -101,7 +101,7 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.top) continue {
+  on time.waitUntilMS (!deadline:self.top) {
     s1.V ()
     self.top += 249
     digitalWrite (!port:LED_L4 !yes)
@@ -117,15 +117,15 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   
-  on s0.PP () continue {
+  on s0.PP () {
     toggle (!port:LED_L1)
   }
   
-  on s1.P () continue {
+  on s1.P () {
     toggle (!port:LED_L3)
   }
   
-  on time.waitUntilMS (!deadline:self.deadline) continue {
+  on time.waitUntilMS (!deadline:self.deadline) {
     self.deadline += 200
     toggle (!port:LED_L2)
   }
