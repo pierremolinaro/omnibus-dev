@@ -49,7 +49,7 @@ C_FILES:
   "c-arm7tdmi-context-code.c",
   "../c-real-time-kernel-code.c",
   "c-countTrainingZeros.c",
-  "../memory-copy.c"
+  "../memory-utilities.c"
 //--- Assembler Source files
 S_FILES:
   "s-target.s"

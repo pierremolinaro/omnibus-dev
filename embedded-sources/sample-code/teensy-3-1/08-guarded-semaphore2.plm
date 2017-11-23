@@ -58,7 +58,7 @@ guard convenienceWaitUntilMS (?deadline:inDeadline $uint32)
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.top) continue {
+  on time.waitUntilMS (!deadline:self.top) {
     s0.signal ()
     self.top += 250
     digitalWrite (!port:LED_L0 !yes)
@@ -74,7 +74,7 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.top) continue {
+  on time.waitUntilMS (!deadline:self.top) {
     s1.signal ()
     self.top += 249
     digitalWrite (!port:LED_L4 !yes)
@@ -91,20 +91,20 @@ task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   var toggleD3 = no
   
-  on s0.wait () continue {
+  on s0.wait () {
     self.toggleD3 = yes // Just for having a boolean guard
   }
   
-  on (self.toggleD3) continue {
+  on (self.toggleD3) {
     toggle (!port:LED_L1)
     self.toggleD3 = no
   }
   
-  on PP () continue {
+  on PP () {
     toggle (!port:LED_L3)
   }
   
-  on convenienceWaitUntilMS (!deadline:self.deadline) continue {
+  on convenienceWaitUntilMS (!deadline:self.deadline) {
     self.deadline += 200
     toggle (!port:LED_L2)
   }

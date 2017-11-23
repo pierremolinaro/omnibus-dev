@@ -231,7 +231,6 @@ proc guardSemanticAnalysis
     enterFormalArguments (
       !context:inContext
       !inRoutineFormalArgumentList
-#      !?variableMap
       !?universalMap
       !?formalArguments
     )
@@ -256,17 +255,13 @@ proc guardSemanticAnalysis
       !mode:.userMode # Convenience guards instructions are executed in user mode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-#      !?variableMap:variableMap
       !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]
   end 
 #--- End of variableMap
-#  [variableMap deinitTopLevelVariables]
   [universalMap checkLocalVariableFinalState]
-#  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
-#  drop variableMap
 #--- Code generation
   [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
     !guardMangledName
@@ -522,7 +517,11 @@ method @guardMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += llvmTitleComment (!guardRoutineName)
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
-  let receiverTypeName = if [mReceiverType mKind] == .void then "" else llvmTypeStringFromPLMname (!mReceiverType.mPLMTypeName) end
+  let receiverTypeName = if [mReceiverType mKind] == .void then
+    ""
+  else
+    llvmTypeStringFromPLMname (!mReceiverType.mPLMTypeName)
+  end
   var first = true
   if receiverTypeName != "" then
     ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"

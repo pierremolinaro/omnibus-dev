@@ -101,7 +101,7 @@ var rdvs = $rendezVous ()
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.top) continue {
+  on time.waitUntilMS (!deadline:self.top) {
     rdvs.output ()
     self.top += 250
     digitalWrite (!port:LED_L0 !yes)
@@ -116,7 +116,7 @@ task T0 priority 0 stackSize 512 {
 
 task T1 priority 1 stackSize 512 {
 
-  on rdvs.input () continue {
+  on rdvs.input () {
     digitalWrite (!port:LED_L1 !yes)
     rdvs.input ()
     digitalWrite (!port:LED_L1 !no)

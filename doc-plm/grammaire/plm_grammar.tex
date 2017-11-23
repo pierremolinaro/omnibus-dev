@@ -76,7 +76,7 @@
   \draw[->] (p0-10) -- (p0-11) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{type-structure-declaration}{92}
+\ruleSubsection{plm\_syntax}{type-structure-declaration}{93}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -214,7 +214,7 @@
   \draw[->] (p0-8) -- (p0-9) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{declaration-module}{85}
+\ruleSubsection{plm\_syntax}{declaration-module}{86}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -251,7 +251,7 @@
   \draw[->] (p0-10) -- (p0-11) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{declaration-module}{125}
+\ruleSubsection{plm\_syntax}{declaration-module}{126}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -981,7 +981,7 @@
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & \node (p1-4) [point] {}; & & & & & & \node (p1-10) [terminal] {.}; & \node (p1-11) [terminal] {identifier}; & & & & \node (p1-15) [terminal] {continue}; & \\
+    & & & & \node (p1-4) [point] {}; & & & & & & \node (p1-10) [terminal] {.}; & \node (p1-11) [terminal] {identifier}; & & & & \node (p1-15) [point] {}; & \\
     \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {on}; & \node (p0-3) [point] {}; & \node (p0-4) [terminal] {(}; & \node (p0-5) [nonterminal] {\nonTerminalSymbol{expression}{21}}; & \node (p0-6) [terminal] {)}; & \node (p0-7) [point] {}; & \node (p0-8) [terminal] {identifier}; & \node (p0-9) [point] {}; & \node (p0-10) [point] {}; & & \node (p0-12) [point] {}; & \node (p0-13) [nonterminal] {\nonTerminalSymbol{effective\_parameters}{42}}; & \node (p0-14) [point] {}; & \node (p0-15) [terminal] {exit}; & \node (p0-16) [point] {}; & \node (p0-17) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
@@ -999,17 +999,17 @@
   \draw[->] (p1-11) -| (p0-12) ;
   \draw[->] (p0-12) -- (p0-13) ;
   \draw[->] (p0-13) -- (p0-15) ;
-  \draw[->] (p0-14) |- (p1-15) ;
+  \draw (p0-14) |- (p1-15) ;
   \draw (p0-15) -- (p0-16) ;
   \draw[->] (p1-15) -| (p0-16) ;
   \draw[->] (p0-16) -- (p0-17) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{instruction-sync}{89}
+\ruleSubsection{plm\_syntax}{instruction-sync}{88}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & & & & \node (p1-7) [terminal] {continue}; & \\
+    & & & & & & & \node (p1-7) [point] {}; & \\
     \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {on}; & \node (p0-3) [terminal] {(}; & \node (p0-4) [nonterminal] {\nonTerminalSymbol{expression}{21}}; & \node (p0-5) [terminal] {)}; & \node (p0-6) [point] {}; & \node (p0-7) [terminal] {exit}; & \node (p0-8) [point] {}; & \node (p0-9) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
@@ -1017,7 +1017,7 @@
   \draw[->] (p0-3) -- (p0-4) ;
   \draw[->] (p0-4) -- (p0-5) ;
   \draw[->] (p0-5) -- (p0-7) ;
-  \draw[->] (p0-6) |- (p1-7) ;
+  \draw (p0-6) |- (p1-7) ;
   \draw (p0-7) -- (p0-8) ;
   \draw[->] (p1-7) -| (p0-8) ;
   \draw[->] (p0-8) -- (p0-9) ;
@@ -1195,7 +1195,7 @@
   \draw[->] (p0-2) -- (p0-3) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{instruction-sync}{112}
+\ruleSubsection{plm\_syntax}{instruction-sync}{110}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -1429,7 +1429,7 @@
 
 \nonTerminalSection{module\_property}{11}
 
-\ruleSubsection{plm\_syntax}{declaration-module}{57}
+\ruleSubsection{plm\_syntax}{declaration-module}{58}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -1737,7 +1737,7 @@
 
 \nonTerminalSection{private\_or\_public\_struct\_property\_declaration}{6}
 
-\ruleSubsection{plm\_syntax}{type-structure-declaration}{45}
+\ruleSubsection{plm\_syntax}{type-structure-declaration}{46}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -1754,7 +1754,7 @@
 
 \nonTerminalSection{private\_struct\_property\_declaration}{7}
 
-\ruleSubsection{plm\_syntax}{type-structure-declaration}{58}
+\ruleSubsection{plm\_syntax}{type-structure-declaration}{59}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -1936,7 +1936,7 @@
 
 \nonTerminalSection{struct\_property\_declaration}{8}
 
-\ruleSubsection{plm\_syntax}{type-structure-declaration}{64}
+\ruleSubsection{plm\_syntax}{type-structure-declaration}{65}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
