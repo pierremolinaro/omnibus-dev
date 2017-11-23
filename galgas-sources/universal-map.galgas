@@ -17,9 +17,10 @@ shared class @universalValuedObjectMapForContext {
 
 setter @universalValuedObjectMapForContext insertModule
   ?let @lstring inModuleName
+  ?let @bool inIsInstancied
   ?let @PLMType inModuleType
 {
-  let newValue = @valuedObject.module {!type:inModuleType}
+  let newValue = @valuedObject.module {!type:inModuleType !instancied:inIsInstancied}
   [!?mInternalPropertyAndRoutineMapForContext insertKey
     !inModuleName
     !.noValue
@@ -160,8 +161,12 @@ method @universalValuedObjectMapForContext searchValuedObject
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let entity]
   switch entity
-  case module (@PLMType type) :
-    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
+  case module (@PLMType type instancied) :
+    if instancied then
+      outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
+    else
+      error inValuedObjectName : "the module should be instancied" : outObjectIR
+    end
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (@objectIR objectIR) :
@@ -180,7 +185,7 @@ method @universalValuedObjectMapForContext searchValuedObject
 setter @universalValuedObjectMapForContext readAccess ?let @lstring inValuedObjectName {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
-  case module (*) :
+  case module (* *) :
   case register (* * * * * * *) :
   case globalConstant (*) :
   case localConstant (* *) :
@@ -201,76 +206,18 @@ setter @universalValuedObjectMapForContext readAccess ?let @lstring inValuedObje
 
 #·······················································································································
 
-#setter @universalValuedObjectMapForContext writeAccess1 ?let @lstring inValuedObjectName {
-#  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
-#  switch property
-#  case module (*) :
-#    error inValuedObjectName : "a module cannot be written"
-#  case register (* @bool writable * * * * *) :
-#    if not writable then
-#      error inValuedObjectName : "the control register cannot be written"
-#    end
-#  case globalConstant (*) :
-#    error inValuedObjectName : "a constant cannot be written"
-#  case localConstant (* *) :
-#    error inValuedObjectName : "a constant cannot be written"
-#  case globalVariable (@bool writable *) :
-#    if not writable then
-#      error inValuedObjectName : "a global variable cannot be written"
-#    end
-#  case localVariable (* *) :
-#    switch valueState 
-#    case noValue, hasReadValue :
-#      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
-#    case hasUnreadValue :
-#      warning inValuedObjectName : "previous '" + inValuedObjectName + "' value has not been read"
-#    end
-#  end
-#}
-
-#·······················································································································
-
-#setter @universalValuedObjectMapForContext readWriteAccess ?let @lstring inValuedObjectName {
-#  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
-#  switch property
-#  case module (*) :
-#    error inValuedObjectName : "a module cannot be written"
-#  case register (@bool readable @bool writable * * * * *) :
-#    if writable & readable then
-#    elsif not readable then
-#      error inValuedObjectName : "the register cannot be read"
-#    else
-#      error inValuedObjectName : "the register cannot be written"
-#    end
-#  case globalConstant (*) :
-#    error inValuedObjectName : "a constant cannot be written"
-#  case localConstant (* *) :
-#    error inValuedObjectName : "a constant cannot be written"
-#  case globalVariable (@bool writable *) :
-#    if not writable then
-#      error inValuedObjectName : "a global variable cannot be written"
-#    end
-#  case localVariable (* *) :
-#    switch valueState 
-#    case noValue :
-#      error inValuedObjectName : "object has no value"
-#    case hasUnreadValue :
-#    case hasReadValue :
-#      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
-#    end
-#  end
-#}
-
-#·······················································································································
-
 setter @universalValuedObjectMapForContext searchValuedObjectForReadAccess
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
-  case module (@PLMType type) :
-    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
+  case module (@PLMType type instancied) :
+    if instancied then
+      outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
+    else
+      error inValuedObjectName : "the module should be instancied" : outObjectIR
+    end
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ??" : outObjectIR
   case globalConstant (@objectIR objectIR) :
@@ -303,7 +250,7 @@ setter @universalValuedObjectMapForContext searchValuedObjectForWriteAccess
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
-  case module (*) :
+  case module (* *) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ???" : outObjectIR
@@ -336,7 +283,7 @@ setter @universalValuedObjectMapForContext searchValuedObjectForReadWriteAccess
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
-  case module (*) :
+  case module (* *) :
     error inValuedObjectName : "a module cannot be written" : outObjectIR
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ????" : outObjectIR
@@ -371,7 +318,7 @@ method @universalValuedObjectMapForContext searchValuedObjectType
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let property]
   switch property
-  case module (*) :
+  case module (* *) :
     error inValuedObjectName : "undefined in this context" : outType
   case register (* * @PLMType type * * * *) :
     outType = type
@@ -393,7 +340,7 @@ method @universalValuedObjectMapForContext searchValuedObjectType
 method @universalValuedObjectMapForContext checkLocalVariableFinalState {
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
-    case module (*) :
+    case module (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -415,7 +362,7 @@ setter @universalValuedObjectMapForContext openOverrideForSelectBlock {
   @referenceStateMap initialStateMap = {}
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
-    case module (*) :
+    case module (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -435,7 +382,7 @@ setter @universalValuedObjectMapForContext openOverrideForRepeatBlock {
   @referenceStateMap initialStateMap = {}
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
-    case module (*) :
+    case module (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -466,7 +413,7 @@ setter @universalValuedObjectMapForContext closeBranch ?let @location inErrorLoc
     @referenceStateMap newReferenceStateMap = {}
     for entry in mInternalPropertyAndRoutineMapForContext do
       switch entry.mPossibleValuedObject
-      case module (*) :
+      case module (* *) :
       case register (* * * * * * *) :
       case globalConstant (*) :
       case localConstant (* *) :
@@ -522,7 +469,7 @@ setter @universalValuedObjectMapForContext closeOverride ?let @location inErrorL
       ?let possibleValuedObject
     ]
     switch possibleValuedObject
-    case module (*) :
+    case module (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -588,7 +535,7 @@ map @referenceStateMap {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @valuedObject {
-  case module (@PLMType type)
+  case module (@PLMType type @bool instancied)
   case register (@bool readable
                  @bool writable
                  @PLMType type

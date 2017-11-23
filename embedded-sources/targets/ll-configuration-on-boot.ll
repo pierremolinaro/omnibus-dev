@@ -10,4 +10,3 @@ define void @configuration.on.boot () nounwind minsize optsize {
   call void @start.tasks ()
   ret  void
 }
-

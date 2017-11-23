@@ -42,8 +42,9 @@ list @moduleInstanciationListAST {
 
 #·······················································································································
 
-class @requiredModuleAST : @abstractDeclarationAST {
+class @implementedModuleAST : @abstractDeclarationAST {
   @lstring mModuleName
+  @bool mIsInstancied
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -145,7 +146,7 @@ syntax extension plm_syntax {
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @requiredModuleAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @implementedModuleAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  [!?ioGraph addNode !mModuleName !self]
   let moduleTypeName = llvmTypeNameFromPLMname (!llvmModuleNameFromName (!mModuleName))
  [!?ioGraph addEdge !mModuleName !moduleTypeName]
@@ -153,13 +154,13 @@ override method @requiredModuleAST enterInPrecedenceGraph ?!@semanticTypePrecede
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @requiredModuleAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @implementedModuleAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "module " + mModuleName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @requiredModuleAST location -> @location outLocation {
+override getter @implementedModuleAST location -> @location outLocation {
   outLocation = mModuleName.location
 }
 
@@ -167,7 +168,7 @@ override getter @requiredModuleAST location -> @location outLocation {
 #!  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @requiredModuleAST addExtension
+override method @implementedModuleAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
@@ -197,7 +198,7 @@ map @instanciedModuleMap {
 
 proc retainRequiredModules ?!@ast ioAST {
   @instanciedModuleMap instanciedModuleMap = {}
-  @stringset validModuleNames = {} # For checking alk required modules have been declared
+  @stringset validModuleNames = {} # For checking all required modules have been declared
   for (moduleName args) in ioAST.mRequiredModuleListAST do
      @moduleInstanciationArgumentMap moduleInstanciationArgumentMap = {}
      for (selector expression) in args do
@@ -207,12 +208,14 @@ proc retainRequiredModules ?!@ast ioAST {
   end
 #--- Append required modules to declaration list AST (and init list AST)
   for (declaration) in ioAST.mModuleDeclarationListAST do
-    if [instanciedModuleMap hasKey !declaration.mModuleName.string] then
-      validModuleNames += !declaration.mModuleName.string
+    validModuleNames += !declaration.mModuleName.string
+    let moduleIsInstancied = [instanciedModuleMap hasKey !declaration.mModuleName.string]
+  #--- Build module instanciation property list
+    @structurePropertyListAST modulePropertyListAST = {}
+    if moduleIsInstancied then
       [instanciedModuleMap searchKey !declaration.mModuleName ?let moduleInstanciationArgumentMap]
     #--- Build module property list, adding init expression
       @stringset validArgumentSet = {}
-      @structurePropertyListAST modulePropertyListAST = {}
       for (propertyName constant optionalPropertyTypeName optionalInitExpression) in declaration.mPropertyListAST do
         @expressionAST initExpression
         switch optionalInitExpression 
@@ -233,21 +236,21 @@ proc retainRequiredModules ?!@ast ioAST {
       for (unusedSelector) in [moduleInstanciationArgumentMap keySet] - validArgumentSet do
         error [moduleInstanciationArgumentMap locationForKey !unusedSelector] : "invalid selector"
       end
-    #---
-      let moduleTypeName = llvmModuleNameFromName (!declaration.mModuleName)
-      ioAST.mDeclarationListAST += !@requiredModuleAST.new {!declaration.mModuleName}
-      ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
-        !moduleTypeName
-        !{}
-        !false # Do not generate assignment routine
-        !modulePropertyListAST
-        !declaration.mFunctionDeclarationListAST
-        !declaration.mSystemRoutineListAST
-        !declaration.mGuardListAST
-      }
-      for (init) in declaration.mModuleInitListAST do
-        ioAST.mDeclarationListAST += !init
-      end
+    end
+  #---
+    let moduleTypeName = llvmModuleNameFromName (!declaration.mModuleName)
+    ioAST.mDeclarationListAST += !@implementedModuleAST.new {!declaration.mModuleName !moduleIsInstancied}
+    ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
+      !moduleTypeName
+      !{}
+      !false # Do not generate assignment routine
+      !modulePropertyListAST
+      !declaration.mFunctionDeclarationListAST
+      !declaration.mSystemRoutineListAST
+      !declaration.mGuardListAST
+    }
+    for (init) in declaration.mModuleInitListAST do
+      ioAST.mDeclarationListAST += !init
     end
   end
   ioAST.mModuleDeclarationListAST = {}
@@ -262,12 +265,13 @@ proc retainRequiredModules ?!@ast ioAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @moduleMap {
+  @bool mIsInstancied
   insert insertKey error message "the '%K' module is already declared in %L"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @requiredModuleAST enterInContext
+override method @implementedModuleAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
@@ -275,7 +279,7 @@ override method @requiredModuleAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  [!?ioContext.mModuleMap insertKey !mModuleName]
+  [!?ioContext.mModuleMap insertKey !mModuleName !mIsInstancied]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedRequiredModule.new {!mModuleName}
 }

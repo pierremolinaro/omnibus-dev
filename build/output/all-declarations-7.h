@@ -310,7 +310,8 @@ class GALGAS_bool extensionGetter_hasKey (const class GALGAS_routineMapForContex
 
 typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertModule) (class cPtr_universalValuedObjectMapForContext * inObject,
                                                                                           const class GALGAS_lstring constinArgument0,
-                                                                                          const class GALGAS_PLMType constinArgument1,
+                                                                                          const class GALGAS_bool constinArgument1,
+                                                                                          const class GALGAS_PLMType constinArgument2,
                                                                                           class C_Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -323,6 +324,7 @@ void enterExtensionSetter_insertModule (const int32_t inClassIndex,
 
 void callExtensionSetter_insertModule (class cPtr_universalValuedObjectMapForContext * inObject,
                                        const GALGAS_lstring constin_inModuleName,
+                                       const GALGAS_bool constin_inIsInstancied,
                                        const GALGAS_PLMType constin_inModuleType,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;

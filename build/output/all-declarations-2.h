@@ -10136,7 +10136,8 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                                        const class GALGAS_lstring & inOperand1
                                                                        COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valuedObject constructor_module (const class GALGAS_PLMType & inOperand0
+  public : static class GALGAS_valuedObject constructor_module (const class GALGAS_PLMType & inOperand0,
+                                                                const class GALGAS_bool & inOperand1
                                                                 COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_valuedObject constructor_register (const class GALGAS_bool & inOperand0,
@@ -10177,6 +10178,7 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_module (class GALGAS_PLMType & outArgument0,
+                                                class GALGAS_bool & outArgument1,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
 

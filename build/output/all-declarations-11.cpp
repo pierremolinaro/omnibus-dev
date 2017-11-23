@@ -2453,14 +2453,13 @@ const char * gWrapperFileContent_3_targetTemplates = ";-------------------------
   "  call void @init ()\n"
   "  call void @start.tasks ()\n"
   "  ret  void\n"
-  "}\n"
-  "\n" ;
+  "}\n" ;
 
 const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "ll-configuration-on-boot.ll",
   "ll",
   true, // Text file
-  564, // Text length
+  563, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 

@@ -9274,28 +9274,34 @@ GALGAS_instanciedModuleMap GALGAS_instanciedModuleMap::extractObject (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_moduleMap::cMapElement_moduleMap (const GALGAS_lstring & inKey
+cMapElement_moduleMap::cMapElement_moduleMap (const GALGAS_lstring & inKey,
+                                              const GALGAS_bool & in_mIsInstancied
                                               COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE) {
+cMapElement (inKey COMMA_THERE),
+mProperty_mIsInstancied (in_mIsInstancied) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_moduleMap::isValid (void) const {
-  return mProperty_lkey.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mIsInstancied.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_moduleMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_moduleMap (mProperty_lkey COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_moduleMap (mProperty_lkey, mProperty_mIsInstancied COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cMapElement_moduleMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
+void cMapElement_moduleMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mIsInstancied" ":" ;
+  mProperty_mIsInstancied.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9303,6 +9309,9 @@ void cMapElement_moduleMap::description (C_String & /* ioString */, const int32_
 typeComparisonResult cMapElement_moduleMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_moduleMap * operand = (cMapElement_moduleMap *) inOperand ;
   typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mIsInstancied.objectCompare (operand->mProperty_mIsInstancied) ;
+  }
   return result ;
 }
 
@@ -9354,10 +9363,11 @@ GALGAS_moduleMap GALGAS_moduleMap::getter_overriddenMap (C_Compiler * inCompiler
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                            const GALGAS_bool & inArgument0,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
   cMapElement_moduleMap * p = NULL ;
-  macroMyNew (p, cMapElement_moduleMap (inKey COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_moduleMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -9369,16 +9379,46 @@ void GALGAS_moduleMap::addAssign_operation (const GALGAS_lstring & inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleMap::setter_insertKey (GALGAS_lstring inKey,
+                                         GALGAS_bool inArgument0,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
   cMapElement_moduleMap * p = NULL ;
-  macroMyNew (p, cMapElement_moduleMap (inKey COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_moduleMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "the '%K' module is already declared in %L" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_moduleMap::getter_mIsInstanciedForKey (const GALGAS_string & inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_moduleMap * p = (const cMapElement_moduleMap *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_moduleMap) ;
+    result = p->mProperty_mIsInstancied ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_moduleMap::setter_setMIsInstanciedForKey (GALGAS_bool inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_moduleMap * p = (cMapElement_moduleMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_moduleMap) ;
+    p->mProperty_mIsInstancied = inAttributeValue ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9404,7 +9444,7 @@ cGenericAbstractEnumerator (inOrder) {
 GALGAS_moduleMap_2D_element cEnumerator_moduleMap::current (LOCATION_ARGS) const {
   const cMapElement_moduleMap * p = (const cMapElement_moduleMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_moduleMap) ;
-  return GALGAS_moduleMap_2D_element (p->mProperty_lkey) ;
+  return GALGAS_moduleMap_2D_element (p->mProperty_lkey, p->mProperty_mIsInstancied) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9413,6 +9453,14 @@ GALGAS_lstring cEnumerator_moduleMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_moduleMap::current_mIsInstancied (LOCATION_ARGS) const {
+  const cMapElement_moduleMap * p = (const cMapElement_moduleMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_moduleMap) ;
+  return p->mProperty_mIsInstancied ;
 }
 
 

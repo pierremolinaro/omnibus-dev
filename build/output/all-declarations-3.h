@@ -3439,9 +3439,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_scopeStack_2D_eleme
 
 class cEnumAssociatedValues_valuedObject_module : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_bool mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_valuedObject_module (const GALGAS_PLMType & inAssociatedValue0
+  public : cEnumAssociatedValues_valuedObject_module (const GALGAS_PLMType & inAssociatedValue0,
+                                                      const GALGAS_bool & inAssociatedValue1
                                                       COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
