@@ -2924,7 +2924,7 @@ const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/pr
   "  \n"
   "  system safe current () -> $uint64 {\n"
   "    result = extend (PIT_LTMR64H)\n"
-  "    result = result << 32\n"
+  "    result <<= 32\n"
   "    result |= extend (PIT_LTMR64L)\n"
   "    result = ~ result\n"
   "    result +%= 1\n"
@@ -2953,7 +2953,7 @@ const cRegularFileWrapper gWrapperFile_21_embeddedSampleCode (
   "06-pit-0-1-chaines.plm",
   "plm",
   true, // Text file
-  2282, // Text length
+  2274, // Text length
   gWrapperFileContent_21_embeddedSampleCode
 ) ;
 

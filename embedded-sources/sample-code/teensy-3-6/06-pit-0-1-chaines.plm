@@ -46,7 +46,7 @@ init 1000 {
   
   system safe current () -> $uint64 {
     result = extend (PIT_LTMR64H)
-    result = result << 32
+    result <<= 32
     result |= extend (PIT_LTMR64L)
     result = ~ result
     result +%= 1
