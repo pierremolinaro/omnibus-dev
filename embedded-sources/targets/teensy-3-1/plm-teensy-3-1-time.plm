@@ -1,0 +1,94 @@
+check target "teensy-3-1/unprivileged", "teensy-3-1/privileged"
+
+//——————————————————————————————————————————————————————————————————————————————
+
+module time ()
+
+//——————————————————————————————————————————————————————————————————————————————
+//   TIME
+//——————————————————————————————————————————————————————————————————————————————
+
+module time {
+  var mUptime $uint32 = 0
+
+  //············································································
+
+  init 0 { // Configure Systick interrupt every ms
+    SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
+    SYST_CVR = 0
+    SYST_CSR = {SYST_CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
+  }
+
+  //············································································
+
+  public func init oneMillisecondBusyWait @noUnusedWarning () {
+    while not SYST_CSR.COUNTFLAG.bool {}
+  }
+
+  //············································································
+
+  public func panic panicOneMillisecondBusyWait @noUnusedWarning () {
+    while not SYST_CSR.COUNTFLAG.bool {}
+  }
+
+  //············································································
+
+  public system safe now @noUnusedWarning () -> $uint32 {
+    result = self.mUptime
+  }
+
+  //············································································
+
+  public func init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+    for _ $uint32 in 0 ..< inDelay {
+      self.oneMillisecondBusyWait ()
+    }
+  }
+
+  //············································································
+
+  public func panic panicBusyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+    for _ $uint32 in 0 ..< inDelay {
+      self.panicOneMillisecondBusyWait ()
+    }
+  }
+
+  //············································································
+
+  isr service systick {
+    let now = self.mUptime +% 1
+    self.mUptime = now
+    makeTasksReady (!fromCurrentDate:now)
+    notifyChangeForGuardedWaitUntil (!withCurrentDate:now)
+  }
+
+  //············································································
+
+  public system primitive wait @noUnusedWarning (?untilDeadline: inDate $uint32) {
+    if inDate > self.mUptime {
+      block (!onDeadline:inDate)
+    }
+  }
+
+  //············································································
+
+  public system primitive wait @noUnusedWarning (?duringDelay: inDelay $uint32) {
+    if inDelay > 0 {
+      block (!onDeadline:self.mUptime +% inDelay)
+    }
+  }
+
+  //············································································
+
+  public guard wait @noUnusedWarning (?untilDeadline:inDeadline $uint32) {
+    accept = (inDeadline) ≤ self.mUptime
+    if not accept {
+      handle (!guardedDeadline:inDeadline)
+    }
+  }
+
+  //············································································
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————

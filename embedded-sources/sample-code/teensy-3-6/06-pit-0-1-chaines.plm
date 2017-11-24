@@ -45,19 +45,19 @@ module timer {
     PIT_TCTRL [0] = {PIT_TCTRL !TEN:1}
   }
   
-  public system safe now @noUnusedWarning () -> $timerTick {
+  public system safe now @noUnusedWarning () -> $uptime {
     var r $uint64 = extend (PIT_LTMR64H)
     r <<= 32
     r |= extend (PIT_LTMR64L)
     r = ~ r
     r +%= 1
-    result = $timerTick (!rawValue: r)
+    result = $uptime (!rawValue: r)
   } 
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct $timerTick @copyable {
+struct $uptime @copyable {
   let rawValue $uint64
   
   public func raw @noUnusedWarning () -> $uint64 {
@@ -85,7 +85,7 @@ struct $timerTick @copyable {
 task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
-  on time.waitUntilMS (!deadline:self.compteur) {
+  on time.wait (!untilDeadline:self.compteur) {
     let tick = timer.now ()
     toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)

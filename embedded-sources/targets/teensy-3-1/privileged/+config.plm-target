@@ -63,6 +63,7 @@ PLM_FILES:
   "../plm-teensy-3-1-boot.plm",
   "../plm-teensy-3-1-nvic-interrupts.plm",
   "../plm-teensy-3-1-xtr.plm",
+  "../plm-teensy-3-1-time.plm",
   "../plm-teensy-3-1-digital-io.plm",
   "../plm-teensy-3-1-lcd.plm",
   "../plm-teensy-3-1-panic.plm",

@@ -49,8 +49,8 @@ var s1 = $semaphore (!value:0)
 guard PP () : s1.wait () {
 }
 
-guard convenienceWaitUntilMS (?deadline:inDeadline $uint32)
-: time.waitUntilMS (!deadline:inDeadline) {
+guard convenienceWait (?untilDeadline:inDeadline $uint32)
+: time.wait (!untilDeadline:inDeadline) {
 }
 
 //-----------------------------------------------------------------------------*
@@ -58,11 +58,11 @@ guard convenienceWaitUntilMS (?deadline:inDeadline $uint32)
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.top) {
+  on time.wait (!untilDeadline:self.top) {
     s0.signal ()
     self.top += 250
     digitalWrite (!port:LED_L0 !yes)
-    time.waitUntilMS (!deadline:self.top)
+    time.wait (!untilDeadline:self.top)
     s0.signal ()
     self.top += 250
     digitalWrite (!port:LED_L0 !no)
@@ -74,11 +74,11 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.top) {
+  on time.wait (!untilDeadline:self.top) {
     s1.signal ()
     self.top += 249
     digitalWrite (!port:LED_L4 !yes)
-    time.waitUntilMS (!deadline:self.top)
+    time.wait (!untilDeadline:self.top)
     s1.signal ()
     self.top += 249
     digitalWrite (!port:LED_L4 !no)
@@ -104,7 +104,7 @@ task T2 priority 2 stackSize 512 {
     toggle (!port:LED_L3)
   }
   
-  on convenienceWaitUntilMS (!deadline:self.deadline) {
+  on convenienceWait (!untilDeadline:self.deadline) {
     self.deadline += 200
     toggle (!port:LED_L2)
   }

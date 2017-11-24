@@ -10,7 +10,7 @@ module time ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 module time {
-  var mUptimeMS $uint32 = 0
+  var mUptime $uint32 = 0
 
   //····················································································································
 
@@ -34,8 +34,8 @@ module time {
 
   //····················································································································
 
-  public system safe millis @noUnusedWarning () -> $uint32 {
-    result = self.mUptimeMS
+  public system safe now @noUnusedWarning () -> $uint32 {
+    result = self.mUptime
   }
 
   //····················································································································
@@ -58,33 +58,33 @@ module time {
 
   isr service systick {
     noteCurrentTaskFreeStackSize ()
-    let now = self.mUptimeMS +% 1
-    self.mUptimeMS = now
+    let now = self.mUptime +% 1
+    self.mUptime = now
     makeTasksReady (!fromCurrentDate:now)
     notifyChangeForGuardedWaitUntil (!withCurrentDate:now)
   }
 
   //····················································································································
 
-  public system primitive waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
-    if inDate > self.mUptimeMS {
+  public system primitive wait @noUnusedWarning (?untilDeadline: inDate $uint32) {
+    if inDate > self.mUptime {
       block (!onDeadline:inDate)
     }
   }
 
   //····················································································································
 
-  public system primitive waitDuringMS @noUnusedWarning (?delay: inDelay $uint32) {
+  public system primitive wait @noUnusedWarning (?duringDelay: inDelay $uint32) {
     if inDelay > 0 {
-      block (!onDeadline:self.mUptimeMS +% inDelay)
+      block (!onDeadline:self.mUptime +% inDelay)
     }
   }
 
   //····················································································································
 
-  public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
+  public guard wait @noUnusedWarning (?untilDeadline:inDeadline $uint32) {
     noteCurrentTaskFreeStackSize ()
-    accept = (inDeadline) ≤ self.mUptimeMS
+    accept = (inDeadline) ≤ self.mUptime
     if not accept {
       handle (!guardedDeadline:inDeadline)
     }

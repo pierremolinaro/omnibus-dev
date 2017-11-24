@@ -68,10 +68,10 @@ task T priority 12 stackSize 512 {
     setupPIT ()
   }
   
-  on time.waitUntilMS (!deadline:self.deadline) {
+  on time.wait (!untilDeadline:self.deadline) {
     self.deadline +%= 250
     digitalWrite (!port:LED_L1 !yes) // Allumer la led
-    time.waitUntilMS (!deadline:self.deadline)
+    time.wait (!untilDeadline:self.deadline)
     self.deadline +%= 250
     digitalWrite (!port:LED_L1 !no)  // Éteindre la led
     lcd.goto (!line:1 !column:0)

@@ -64,14 +64,14 @@ struct $rendezVous {
 
   public system primitive inputUntil @noUnusedWarning @mutating (?deadline:inDeadline $uint32) -> $bool {
     makeTaskReady (!?fromList:self.outputWaitList ?found:result)
-    if (not result) and (inDeadline > time.millis ()) { 
+    if (not result) and (inDeadline > time.now ()) { 
       block (!?inList:self.inputWaitList !onDeadline:inDeadline)
     }
   }
 
   public system primitive outputUntil @noUnusedWarning @mutating (?deadline:inDeadline $uint32) -> $bool {
     makeTaskReady (!?fromList:self.inputWaitList ?found:result)
-    if (not result) and (inDeadline > time.millis ()) { 
+    if (not result) and (inDeadline > time.now ()) { 
       block (!?inList:self.outputWaitList !onDeadline:inDeadline)
     }
   }
@@ -101,11 +101,11 @@ var rdvs = $rendezVous ()
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.top) {
+  on time.wait (!untilDeadline:self.top) {
     rdvs.output ()
     self.top += 250
     digitalWrite (!port:LED_L0 !yes)
-    time.waitUntilMS (!deadline:self.top)
+    time.wait (!untilDeadline:self.top)
     rdvs.output ()
     self.top += 250
     digitalWrite (!port:LED_L0 !no)

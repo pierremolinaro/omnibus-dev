@@ -45,7 +45,7 @@ struct $monSemaphore {
     result = self.value > 0
     if result {
       self.value -= 1
-    }else if inDeadline > time.millis () {
+    }else if inDeadline > time.now () {
       block (!?inList:self.list !onDeadline:inDeadline)
     }
   }
@@ -69,11 +69,11 @@ task T1 priority 1 stackSize 512 {
     self.top += 2
   }
   
-  on time.waitUntilMS (!deadline:self.top) {
+  on time.wait (!untilDeadline:self.top) {
     s.V ()
     self.top += 300
     digitalWrite (!port:LED_L0 !yes)
-    time.waitUntilMS (!deadline:self.top)
+    time.wait (!untilDeadline:self.top)
     s.V ()
     self.top += 700
     digitalWrite (!port:LED_L0 !no)
@@ -85,7 +85,7 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var top $uint32 = 0
 
-  on time.waitUntilMS (!deadline:0) { // no wait...
+  on time.wait (!untilDeadline:0) { // no wait...
     let r = s.P_until (!deadline:self.top)
     if r {
       toggle (!port:LED_L1)

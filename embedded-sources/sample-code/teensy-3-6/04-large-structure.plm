@@ -35,14 +35,14 @@ task Tâche priority 1 stackSize 5512 {
   var x = $patternArray (!repeated:0)
   var y = $patternArray (!repeated:0)
    
-  on time.waitUntilMS (!deadline:self.compteur) {
+  on time.wait (!untilDeadline:self.compteur) {
     self.y = self.x
     for i $uint32 in 0 ..< self.x.count {
       self.y [i] += self.compteur
     }
     digitalWrite (!port:LED_L0 !yes)
     self.compteur +%= 500
-    time.waitUntilMS (!deadline: self.compteur)
+    time.wait (!untilDeadline: self.compteur)
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)

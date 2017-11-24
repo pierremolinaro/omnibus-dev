@@ -48,12 +48,12 @@ task T1 priority 1 stackSize 512 {
     self.top += π
   }
   
-  on time.waitUntilMS (!deadline:self.top) {
+  on time.wait (!untilDeadline:self.top) {
     sémaphore.signal ()
     self.top += 250
     digitalWrite (!port:LED_L1 !yes)
     let constanteAccentuée = self.top
-    time.waitUntilMS (!deadline:constanteAccentuée)
+    time.wait (!untilDeadline:constanteAccentuée)
     sémaphore.signal ()
     self.top += 250
     digitalWrite (!port:LED_L1 !no)

@@ -50,7 +50,7 @@ task T priority 0 stackSize 512 {
     var cumul $uint32 = 0
   //--- Compute getSysTick duration
     for _ $uint32 in 0 ..< ITERATIONS {
-      time.waitDuringMS (!delay:1)
+      time.wait (!duringDelay:1)
       let t0 = getSysTick ()
       let t1 = getSysTick ()
       cumul += t0 - t1
@@ -61,7 +61,7 @@ task T priority 0 stackSize 512 {
   //--- Compute emptySection duration
     lcd.goto (!line:1 !column:0)
     for _ $uint32 in 0 ..< ITERATIONS {
-      time.waitDuringMS (!delay:1)
+      time.wait (!duringDelay:1)
       let t0 = getSysTick ()
       emptySection ()
       let t1 = getSysTick ()
@@ -71,7 +71,7 @@ task T priority 0 stackSize 512 {
   //--- Compute emptyService duration
     lcd.goto (!line:2 !column:0)
     for _ $uint32 in 0 ..< 4 {
-      time.waitDuringMS (!delay:1)
+      time.wait (!duringDelay:1)
       let t0 = getSysTick ()
       emptyService ()
       let t1 = getSysTick ()

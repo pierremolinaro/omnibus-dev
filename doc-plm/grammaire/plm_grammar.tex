@@ -981,8 +981,9 @@
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & \node (p1-4) [point] {}; & & & & & & \node (p1-10) [terminal] {.}; & \node (p1-11) [terminal] {identifier}; & & & & \node (p1-15) [point] {}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {on}; & \node (p0-3) [point] {}; & \node (p0-4) [terminal] {(}; & \node (p0-5) [nonterminal] {\nonTerminalSymbol{expression}{21}}; & \node (p0-6) [terminal] {)}; & \node (p0-7) [point] {}; & \node (p0-8) [terminal] {identifier}; & \node (p0-9) [point] {}; & \node (p0-10) [point] {}; & & \node (p0-12) [point] {}; & \node (p0-13) [nonterminal] {\nonTerminalSymbol{effective\_parameters}{42}}; & \node (p0-14) [point] {}; & \node (p0-15) [terminal] {exit}; & \node (p0-16) [point] {}; & \node (p0-17) [lastPoint] {}; & \\
+    & & & & & & & & & & & & & & & & \node (p2-16) [point] {}; & \\
+    & & & & \node (p1-4) [point] {}; & & & & & \node (p1-9) [terminal] {self}; & \node (p1-10) [terminal] {.}; & & & & & \node (p1-15) [terminal] {.}; & & & & \node (p1-19) [point] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {on}; & \node (p0-3) [point] {}; & \node (p0-4) [terminal] {(}; & \node (p0-5) [nonterminal] {\nonTerminalSymbol{expression}{21}}; & \node (p0-6) [terminal] {)}; & \node (p0-7) [point] {}; & \node (p0-8) [point] {}; & \node (p0-9) [point] {}; & & \node (p0-11) [point] {}; & \node (p0-12) [point] {}; & \node (p0-13) [terminal] {identifier}; & \node (p0-14) [point] {}; & & & \node (p0-17) [nonterminal] {\nonTerminalSymbol{effective\_parameters}{42}}; & \node (p0-18) [point] {}; & \node (p0-19) [terminal] {exit}; & \node (p0-20) [point] {}; & \node (p0-21) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-4) ;
@@ -991,21 +992,24 @@
   \draw (p0-3) |- (p1-4) ;
   \draw (p0-6) -- (p0-7) ;
   \draw[->] (p1-4) -| (p0-7) ;
-  \draw[->] (p0-7) -- (p0-8) ;
-  \draw (p0-8) -- (p0-10) ;
-  \draw[->] (p0-9) |- (p1-10) ;
-  \draw[->] (p1-10) -- (p1-11) ;
-  \draw (p0-10) -- (p0-12) ;
-  \draw[->] (p1-11) -| (p0-12) ;
-  \draw[->] (p0-12) -- (p0-13) ;
-  \draw[->] (p0-13) -- (p0-15) ;
-  \draw (p0-14) |- (p1-15) ;
-  \draw (p0-15) -- (p0-16) ;
-  \draw[->] (p1-15) -| (p0-16) ;
-  \draw[->] (p0-16) -- (p0-17) ;
+  \draw (p0-7) -- (p0-9) ;
+  \draw[->] (p0-8) |- (p1-9) ;
+  \draw[->] (p1-9) -- (p1-10) ;
+  \draw (p0-9) -- (p0-11) ;
+  \draw[->] (p1-10) -| (p0-11) ;
+  \draw[->] (p0-11) -- (p0-13) ;
+  \draw[->] (p0-14) |- (p1-15) ;
+  \draw[->] (p2-16) -| (p0-12) ;
+  \draw[->] (p1-15) -| (p2-16) ;
+  \draw[->] (p0-13) -- (p0-17) ;
+  \draw[->] (p0-17) -- (p0-19) ;
+  \draw (p0-18) |- (p1-19) ;
+  \draw (p0-19) -- (p0-20) ;
+  \draw[->] (p1-19) -| (p0-20) ;
+  \draw[->] (p0-20) -- (p0-21) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{instruction-sync}{88}
+\ruleSubsection{plm\_syntax}{instruction-sync}{94}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -1195,7 +1199,7 @@
   \draw[->] (p0-2) -- (p0-3) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{instruction-sync}{110}
+\ruleSubsection{plm\_syntax}{instruction-sync}{116}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
