@@ -84,48 +84,42 @@ module time {
 
   //············································································
 
-  var mUptimeMS $uint32 = 0
+  var mUptime $uint32 = 0
 
   //············································································
 
-  public func safe kernelMillis @noUnusedWarning () -> $uint32 {
-    result = self.mUptimeMS
-  }
-
-  //············································································
-
-  public system section millis @noUnusedWarning () -> $uint32 {
-    result = self.mUptimeMS
+  public system safe now @noUnusedWarning () -> $uint32 {
+    result = self.mUptime
   }
 
   //············································································
 
   isr service TIMER1 {
     TIMER1_IR = 1 // Clears MR0 interrupt
-    let now = self.mUptimeMS +% 1
-    self.mUptimeMS = now
+    let now = self.mUptime +% 1
+    self.mUptime = now
     makeTasksReady (!fromCurrentDate:now)
     notifyChangeForGuardedWaitUntil (!withCurrentDate:now)
   }
 
   //············································································
 
-  public system primitive waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
-    if inDate > self.kernelMillis () {
+  public system primitive wait @noUnusedWarning (?untilDeadline: inDate $uint32) {
+    if inDate > self.now () {
       block (!onDeadline:inDate)
     }
   }
 
   //············································································
 
-  public func user waitDuringMS @noUnusedWarning @mutating @userAccess (?delay: inDelay $uint32) {
-    self.waitUntilMS (!deadline:self.millis () + inDelay)
+  public func user wait @noUnusedWarning @mutating @userAccess (?duringDelay: inDelay $uint32) {
+    self.wait (!untilDeadline:self.now () + inDelay)
   }
 
   //············································································
 
-  public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
-    accept = inDeadline ≤ self.kernelMillis ()
+  public guard wait @noUnusedWarning (?untilDeadline:inDeadline $uint32) {
+    accept = inDeadline ≤ self.now ()
     if not accept {
       handle (!guardedDeadline:inDeadline)
     }

@@ -17,10 +17,10 @@ system section ledOff () {
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.compteur) {
+  on time.wait (!untilDeadline:self.compteur) {
     ledOn ()
     self.compteur +%= 500
-    time.waitUntilMS (!deadline:self.compteur)
+    time.wait (!untilDeadline:self.compteur)
     ledOff ()
     self.compteur +%= 500
   }

@@ -193,11 +193,11 @@ Les Cortex-M4 implémentent le timer \emph{Systick} qui permet de programmer tr�
 
 \subsection{En-tête}
 
-L'en-tête du module \plm=time= déclare la variable privée \plm=mUptimeMS= qui est utilisée pour détenir la date courante.
+L'en-tête du module \plm=time= déclare la variable privée \plm=mUptime= qui est utilisée pour détenir la date courante.
 
 \begin{PLM}
 module time {
-  var mUptimeMS $uint32 = 0
+  var mUptime $uint32 = 0
 \end{PLM}
 
 
@@ -217,13 +217,13 @@ init 0 { // Configure Systick interrupt every ms
 
 \subsection{La routine d'interruption}
 
-La routine d'interruption est \plm=systick=. Son nom est défini par le fichier de configuration de la cible (\refSubsectionPage{configurationInterrupts}). Le mot réservé \plm=service= dans son en-tête signifie qu'elle peut appeler les fonctions déclarées dans ce mode. L'appel de la fonction \plm=noteCurrentTaskFreeStackSize= permet de maintenir une information de remplissable de la tâche en cours d'exécution au moment où l'interruption est survenue. Ensuite, la variable \plm=self.mUptimeMS= est incrémentée. Noter l'utilisation de l'opérateur \plm=+%=, qui réalise une incrémentation sans détection de débordement. La fonction \plm=makeTasksReady (!fromCurrentDate:)= libère toutes les tâches bloquées en attente d'échéance, dont l'échéance est atteinte (c'est-à-dire dont l'échéance est inférieure ou égale à la valeur de \plm=now=). La fonction  \plm=notifyChangeForGuardedWaitUntil (!withCurrentDate:)= fait de même pour les tâches en attente d'échéance en garde.
+La routine d'interruption est \plm=systick=. Son nom est défini par le fichier de configuration de la cible (\refSubsectionPage{configurationInterrupts}). Le mot réservé \plm=service= dans son en-tête signifie qu'elle peut appeler les fonctions déclarées dans ce mode. L'appel de la fonction \plm=noteCurrentTaskFreeStackSize= permet de maintenir une information de remplissable de la tâche en cours d'exécution au moment où l'interruption est survenue. Ensuite, la variable \plm=self.mUptime= est incrémentée. Noter l'utilisation de l'opérateur \plm=+%=, qui réalise une incrémentation sans détection de débordement. La fonction \plm=makeTasksReady (!fromCurrentDate:)= libère toutes les tâches bloquées en attente d'échéance, dont l'échéance est atteinte (c'est-à-dire dont l'échéance est inférieure ou égale à la valeur de \plm=now=). La fonction  \plm=notifyChangeForGuardedWaitUntil (!withCurrentDate:)= fait de même pour les tâches en attente d'échéance en garde.
 
 \begin{PLM}
 isr service systick {
   noteCurrentTaskFreeStackSize ()
-  let now = self.mUptimeMS +% 1
-  self.mUptimeMS = now
+  let now = self.mUptime +% 1
+  self.mUptime = now
   makeTasksReady (!fromCurrentDate:now)
   notifyChangeForGuardedWaitUntil (!withCurrentDate:now)
 }
@@ -234,11 +234,11 @@ isr service systick {
 
 \subsection{Obtenir la date courante}
 
-L'appel système \plm=millis= retourne la date courante.
+L'appel système \plm=now= retourne la date courante.
 
 \begin{PLM}
-public system safe millis @noUnusedWarning () -> $uint32 {
-  result = self.mUptimeMS
+public system safe now @noUnusedWarning () -> $uint32 {
+  result = self.mUptime
 }
 \end{PLM}
 
@@ -258,8 +258,8 @@ Si la date fournie par la valeur \plm=inDate= est postérieure à la date couran
 
 \begin{PLM}
 public system primitive
-waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
-  if inDate > self.mUptimeMS {
+wait @noUnusedWarning (?untilDeadline: inDate $uint32) {
+  if inDate > self.mUptime {
     block (!onDeadline:inDate)
   }
 }
@@ -268,7 +268,7 @@ waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
 L'appel de la primitive a pour syntaxe~:
 \begin{PLM}
 var échéance $uint32 = ...
-time.waitUntilMS (!deadline:échéance)
+time.wait (!untilDeadline:échéance)
 \end{PLM}
 
 
@@ -280,9 +280,9 @@ L'implémentation de l'attente de délai est similaire à l'attente d'échéance
 
 \begin{PLM}
 public system primitive
-waitDuringMS @noUnusedWarning (?delay: inDelay $uint32) {
+wait @noUnusedWarning (?duringDelay: inDelay $uint32) {
   if inDelay > 0 {
-    block (!onDeadline:self.mUptimeMS +% inDelay)
+    block (!onDeadline:self.mUptime +% inDelay)
   }
 }
 \end{PLM}
@@ -297,9 +297,9 @@ L'implémentation d'une commande gardée prédéfinit la variable booléenne \pl
 \end{itemize}
 
 \begin{PLM}
-public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
+public guard wait @noUnusedWarning (?untilDeadline:inDeadline $uint32) {
   noteCurrentTaskFreeStackSize ()
-  accept = (inDeadline) ≤ self.mUptimeMS
+  accept = (inDeadline) ≤ self.mUptime
   if not accept {
     handle (!guardedDeadline:inDeadline)
   }

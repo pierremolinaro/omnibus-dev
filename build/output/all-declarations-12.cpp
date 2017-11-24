@@ -685,10 +685,10 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    ledOn ()\n"
   "    self.compteur +%= 500\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    ledOff ()\n"
   "    self.compteur +%= 500\n"
   "  }\n"
@@ -700,7 +700,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  597, // Text length
+  593, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -754,10 +754,10 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   " \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    ledOn ()\n"
   "    self.compteur +%= 500\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    ledOff ()\n"
   "    let x = self.compteur +% 500\n"
   "    self.compteur = x\n"
@@ -771,7 +771,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-control-register-array.plm",
   "plm",
   true, // Text file
-  1384, // Text length
+  1380, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -856,7 +856,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1/unp
   "  var deadline $uint32 = 0\n"
   "  var acc = $C ()\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.deadline) {\n"
+  "  on time.wait (!untilDeadline:self.deadline) {\n"
   "    self.deadline +%= 1000\n"
   "    toggle (!port:LED_L1)\n"
   "    let n = self.acc.c.a +% self.deadline\n"
@@ -876,7 +876,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-structure-example.plm",
   "plm",
   true, // Text file
-  1717, // Text length
+  1715, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -915,16 +915,16 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unp
   "task T\xC3""\xA2""che priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
   "//    var x $uint32 = 250\n"
   "//    activityLedOn (!\?toto: x)\n"
   "    self.compteur +%= 500\n"
-  "    time.waitUntilMS (!deadline: self.compteur)\n"
+  "    time.wait (!untilDeadline: self.compteur)\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:time.millis ())\n"
+  "    lcd.print (!unsigned:time.now ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -934,7 +934,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  1372, // Text length
+  1365, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -980,14 +980,14 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1/pri
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
   "    self.compteur +%= 500\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:time.millis ())\n"
+  "    lcd.print (!unsigned:time.now ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -996,10 +996,10 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1/pri
   "task T2 priority 2 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L1 !yes)\n"
   "    self.compteur +%= 499\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L1 !no)\n"
   "    self.compteur +%= 499\n"
   "  }\n"
@@ -1010,10 +1010,10 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1/pri
   "task T3 priority 3 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L2 !yes)\n"
   "    self.compteur +%= 498\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L2 !no)\n"
   "    self.compteur +%= 498\n"
   "  }\n"
@@ -1024,10 +1024,10 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1/pri
   "task T4 priority 4 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L3 !yes)\n"
   "    self.compteur +%= 497\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L3 !no)\n"
   "    self.compteur +%= 497\n"
   "  }\n"
@@ -1038,10 +1038,10 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1/pri
   "task T5 priority 5 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L4 !yes)\n"
   "    self.compteur +%= 496\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L4 !no)\n"
   "    self.compteur +%= 496\n"
   "  }\n"
@@ -1053,7 +1053,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3086, // Text length
+  3063, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1114,7 +1114,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    self.compteur +%= 50\n"
   "    digitalWrite (!port:LED_L0 !not digitalRead (!port:PUSH_P0))\n"
   "    digitalWrite (!port:LED_L1 !not digitalRead (!port:PUSH_P1))\n"
@@ -1134,7 +1134,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "03-push-buttons.plm",
   "plm",
   true, // Text file
-  2330, // Text length
+  2328, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1192,7 +1192,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/pri
   "    var cumul $uint32 = 0\n"
   "  //--- Compute getSysTick duration\n"
   "    for _ $uint32 in 0 ..< ITERATIONS {\n"
-  "      time.waitDuringMS (!delay:1)\n"
+  "      time.wait (!duringDelay:1)\n"
   "      let t0 = getSysTick ()\n"
   "      let t1 = getSysTick ()\n"
   "      cumul += t0 - t1\n"
@@ -1203,7 +1203,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/pri
   "  //--- Compute emptySection duration\n"
   "    lcd.goto (!line:1 !column:0)\n"
   "    for _ $uint32 in 0 ..< ITERATIONS {\n"
-  "      time.waitDuringMS (!delay:1)\n"
+  "      time.wait (!duringDelay:1)\n"
   "      let t0 = getSysTick ()\n"
   "      emptySection ()\n"
   "      let t1 = getSysTick ()\n"
@@ -1213,7 +1213,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/pri
   "  //--- Compute emptyService duration\n"
   "    lcd.goto (!line:2 !column:0)\n"
   "    for _ $uint32 in 0 ..< 4 {\n"
-  "      time.waitDuringMS (!delay:1)\n"
+  "      time.wait (!duringDelay:1)\n"
   "      let t0 = getSysTick ()\n"
   "      emptyService ()\n"
   "      let t1 = getSysTick ()\n"
@@ -1233,7 +1233,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  2458, // Text length
+  2452, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1289,12 +1289,12 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unp
   "    self.top += \xCF""\x80""\n"
   "  }\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.top) {\n"
+  "  on time.wait (!untilDeadline:self.top) {\n"
   "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
   "    digitalWrite (!port:LED_L1 !yes)\n"
   "    let constanteAccentu\xC3""\xA9""e = self.top\n"
-  "    time.waitUntilMS (!deadline:constanteAccentu\xC3""\xA9""e)\n"
+  "    time.wait (!untilDeadline:constanteAccentu\xC3""\xA9""e)\n"
   "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
   "    digitalWrite (!port:LED_L1 !no)\n"
@@ -1318,7 +1318,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "05-semaphore.plm",
   "plm",
   true, // Text file
-  1747, // Text length
+  1743, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1371,7 +1371,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1/unp
   "    result = self.value > 0\n"
   "    if result {\n"
   "      self.value -= 1\n"
-  "    }else if inDeadline > time.millis () {\n"
+  "    }else if inDeadline > time.now () {\n"
   "      block (!\?inList:self.list !onDeadline:inDeadline)\n"
   "    }\n"
   "  }\n"
@@ -1395,11 +1395,11 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1/unp
   "    self.top += 2\n"
   "  }\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.top) {\n"
+  "  on time.wait (!untilDeadline:self.top) {\n"
   "    s.V ()\n"
   "    self.top += 300\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "    time.wait (!untilDeadline:self.top)\n"
   "    s.V ()\n"
   "    self.top += 700\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
@@ -1411,7 +1411,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1/unp
   "task T2 priority 2 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:0) { // no wait...\n"
+  "  on time.wait (!untilDeadline:0) { // no wait...\n"
   "    let r = s.P_until (!deadline:self.top)\n"
   "    if r {\n"
   "      toggle (!port:LED_L1)\n"
@@ -1428,7 +1428,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "06-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  2348, // Text length
+  2339, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1521,11 +1521,11 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1/unp
   "task T0 priority 0 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.top) {\n"
+  "  on time.wait (!untilDeadline:self.top) {\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "    time.wait (!untilDeadline:self.top)\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
@@ -1537,11 +1537,11 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1/unp
   "task T1 priority 1 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.top) {\n"
+  "  on time.wait (!untilDeadline:self.top) {\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
   "    digitalWrite (!port:LED_L4 !yes)\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "    time.wait (!untilDeadline:self.top)\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
   "    digitalWrite (!port:LED_L4 !no)\n"
@@ -1561,7 +1561,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1/unp
   "    toggle (!port:LED_L3)\n"
   "  }\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.deadline) {\n"
+  "  on time.wait (!untilDeadline:self.deadline) {\n"
   "    self.deadline += 200\n"
   "    toggle (!port:LED_L2)\n"
   "  }\n"
@@ -1573,7 +1573,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "07-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  3219, // Text length
+  3209, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -1630,8 +1630,8 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1/un
   "guard PP () : s1.wait () {\n"
   "}\n"
   "\n"
-  "guard convenienceWaitUntilMS (\?deadline:inDeadline $uint32)\n"
-  ": time.waitUntilMS (!deadline:inDeadline) {\n"
+  "guard convenienceWait (\?untilDeadline:inDeadline $uint32)\n"
+  ": time.wait (!untilDeadline:inDeadline) {\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1639,11 +1639,11 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1/un
   "task T0 priority 0 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.top) {\n"
+  "  on time.wait (!untilDeadline:self.top) {\n"
   "    s0.signal ()\n"
   "    self.top += 250\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "    time.wait (!untilDeadline:self.top)\n"
   "    s0.signal ()\n"
   "    self.top += 250\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
@@ -1655,11 +1655,11 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1/un
   "task T1 priority 1 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.top) {\n"
+  "  on time.wait (!untilDeadline:self.top) {\n"
   "    s1.signal ()\n"
   "    self.top += 249\n"
   "    digitalWrite (!port:LED_L4 !yes)\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "    time.wait (!untilDeadline:self.top)\n"
   "    s1.signal ()\n"
   "    self.top += 249\n"
   "    digitalWrite (!port:LED_L4 !no)\n"
@@ -1685,7 +1685,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1/un
   "    toggle (!port:LED_L3)\n"
   "  }\n"
   "  \n"
-  "  on convenienceWaitUntilMS (!deadline:self.deadline) {\n"
+  "  on convenienceWait (!untilDeadline:self.deadline) {\n"
   "    self.deadline += 200\n"
   "    toggle (!port:LED_L2)\n"
   "  }\n"
@@ -1697,7 +1697,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "08-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  2855, // Text length
+  2841, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
@@ -1769,14 +1769,14 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/un
   "\n"
   "  public system primitive inputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    makeTaskReady (!\?fromList:self.outputWaitList \?found:result)\n"
-  "    if (not result) and (inDeadline > time.millis ()) { \n"
+  "    if (not result) and (inDeadline > time.now ()) { \n"
   "      block (!\?inList:self.inputWaitList !onDeadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  public system primitive outputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    makeTaskReady (!\?fromList:self.inputWaitList \?found:result)\n"
-  "    if (not result) and (inDeadline > time.millis ()) { \n"
+  "    if (not result) and (inDeadline > time.now ()) { \n"
   "      block (!\?inList:self.outputWaitList !onDeadline:inDeadline)\n"
   "    }\n"
   "  }\n"
@@ -1806,11 +1806,11 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/un
   "task T0 priority 0 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.top) {\n"
+  "  on time.wait (!untilDeadline:self.top) {\n"
   "    rdvs.output ()\n"
   "    self.top += 250\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "    time.wait (!untilDeadline:self.top)\n"
   "    rdvs.output ()\n"
   "    self.top += 250\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
@@ -1834,7 +1834,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "09-rendez-vous.plm",
   "plm",
   true, // Text file
-  3669, // Text length
+  3659, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
@@ -1926,7 +1926,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "  var top $uint32 = 0\n"
   "  var n $uint32 = 1\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.top) {\n"
+  "  on time.wait (!untilDeadline:self.top) {\n"
   "    rdvs.output (!data:self.n)\n"
   "    rdvs2.output (!data:self.n)\n"
   "    toggle (!port:LED_L0)\n"
@@ -1961,7 +1961,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "    s.signal ()\n"
   "  }\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.deadline) {\n"
+  "  on time.wait (!untilDeadline:self.deadline) {\n"
   "    self.deadline += 200\n"
   "    toggle (!port:LED_L4)\n"
   "  }\n"
@@ -1973,7 +1973,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "10-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  3395, // Text length
+  3391, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -2049,10 +2049,10 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/pr
   "    setupPIT ()\n"
   "  }\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.deadline) {\n"
+  "  on time.wait (!untilDeadline:self.deadline) {\n"
   "    self.deadline +%= 250\n"
   "    digitalWrite (!port:LED_L1 !yes) // Allumer la led\n"
-  "    time.waitUntilMS (!deadline:self.deadline)\n"
+  "    time.wait (!untilDeadline:self.deadline)\n"
   "    self.deadline +%= 250\n"
   "    digitalWrite (!port:LED_L1 !no)  // \xC3""\x89""teindre la led\n"
   "    lcd.goto (!line:1 !column:0)\n"
@@ -2070,7 +2070,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  2180, // Text length
+  2176, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 
@@ -2131,7 +2131,7 @@ const char * gWrapperFileContent_14_embeddedSampleCode = "target \"teensy-3-1/un
   "  var array2 = $A (!repeated:1)\n"
   "  var index $int32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.deadline) {\n"
+  "  on time.wait (!untilDeadline:self.deadline) {\n"
   "    self.deadline +%= 1000\n"
   "//    toggle (!port:LED_L1)\n"
   "    self.array [self.index] = 0\n"
@@ -2172,7 +2172,7 @@ const cRegularFileWrapper gWrapperFile_14_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  2072, // Text length
+  2070, // Text length
   gWrapperFileContent_14_embeddedSampleCode
 ) ;
 
@@ -2251,7 +2251,7 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1/un
   "task T priority 12 stackSize 512 {\n"
   "  var deadline $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.deadline) {\n"
+  "  on time.wait (!untilDeadline:self.deadline) {\n"
   "    self.deadline +%= 250\n"
   "    toggle (!port:LED_L1)\n"
   "    var total $uint32 = 0\n"
@@ -2273,7 +2273,7 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "13-static-list-example.plm",
   "plm",
   true, // Text file
-  2302, // Text length
+  2300, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 
@@ -2346,14 +2346,14 @@ const char * gWrapperFileContent_16_embeddedSampleCode = "target \"teensy-3-6/un
   "task T\xC3""\xA2""che priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
   "    self.compteur +%= 500\n"
-  "    time.waitUntilMS (!deadline: self.compteur)\n"
+  "    time.wait (!untilDeadline: self.compteur)\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "//    lcd.goto (!line:0 !column:0)\n"
-  "//    lcd.printUnsigned (!time.millis ())\n"
+  "//    lcd.printUnsigned (!time.now ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2363,7 +2363,7 @@ const cRegularFileWrapper gWrapperFile_16_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  1519, // Text length
+  1512, // Text length
   gWrapperFileContent_16_embeddedSampleCode
 ) ;
 
@@ -2414,14 +2414,14 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/pr
   "    lcd.print (!string:\"Hello\")\n"
   "  }\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
   "    self.compteur +%= 500\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    lcd.print (!unsigned:time.millis ())\n"
+  "    lcd.print (!unsigned:time.now ())\n"
   "    lcd.goto (!line:2 !column:0)\n"
   "    lcd.print (!unsigned:freeStackSize ())\n"
   "  }\n"
@@ -2432,10 +2432,10 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/pr
   "task T2 priority 2 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L1 !yes)\n"
   "    self.compteur +%= 499\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L1 !no)\n"
   "    self.compteur +%= 499\n"
   "  }\n"
@@ -2446,10 +2446,10 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/pr
   "task T3 priority 3 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L2 !yes)\n"
   "    self.compteur +%= 498\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L2 !no)\n"
   "    self.compteur +%= 498\n"
   "  }\n"
@@ -2460,10 +2460,10 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/pr
   "task T4 priority 4 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L3 !yes)\n"
   "    self.compteur +%= 497\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L3 !no)\n"
   "    self.compteur +%= 497\n"
   "  }\n"
@@ -2474,10 +2474,10 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/pr
   "task T5 priority 5 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L4 !yes)\n"
   "    self.compteur +%= 496\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    time.wait (!untilDeadline:self.compteur)\n"
   "    digitalWrite (!port:LED_L4 !no)\n"
   "    self.compteur +%= 496\n"
   "  }\n"
@@ -2489,7 +2489,7 @@ const cRegularFileWrapper gWrapperFile_17_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3231, // Text length
+  3208, // Text length
   gWrapperFileContent_17_embeddedSampleCode
 ) ;
 
@@ -2700,10 +2700,10 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    initializeDMA ()\n"
   "  }\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
   "    self.compteur +%= 500\n"
-  "    time.waitUntilMS (!deadline: self.compteur)\n"
+  "    time.wait (!untilDeadline: self.compteur)\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
@@ -2720,7 +2720,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  8395, // Text length
+  8391, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 
@@ -2763,14 +2763,14 @@ const char * gWrapperFileContent_19_embeddedSampleCode = "target \"teensy-3-6/pr
   "  var x = $patternArray (!repeated:0)\n"
   "  var y = $patternArray (!repeated:0)\n"
   "   \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    self.y = self.x\n"
   "    for i $uint32 in 0 ..< self.x.count {\n"
   "      self.y [i] += self.compteur\n"
   "    }\n"
   "    digitalWrite (!port:LED_L0 !yes)\n"
   "    self.compteur +%= 500\n"
-  "    time.waitUntilMS (!deadline: self.compteur)\n"
+  "    time.wait (!untilDeadline: self.compteur)\n"
   "    digitalWrite (!port:LED_L0 !no)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
@@ -2784,7 +2784,7 @@ const cRegularFileWrapper gWrapperFile_19_embeddedSampleCode (
   "04-large-structure.plm",
   "plm",
   true, // Text file
-  1773, // Text length
+  1769, // Text length
   gWrapperFileContent_19_embeddedSampleCode
 ) ;
 
@@ -2821,21 +2821,23 @@ const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/pr
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "struct $timer {\n"
-  "  var deadline $uint32\n"
+  "  var deadline $uint32 = 0\n"
   "  let period $uint32\n"
   "  var guardList = $guardList ()\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
   "  public system primitive wait @noUnusedWarning @mutating () {\n"
-  "    block (!onDeadline:self.deadline)\n"
+  "    if self.deadline \xE2""\x89""\xA4"" time.now () {\n"
+  "      block (!onDeadline:self.deadline)\n"
+  "    }\n"
   "    self.deadline += self.period\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public guard wait @noUnusedWarning () {\n"
-  "    accept = self.deadline \xE2""\x89""\xA4"" time.millis ()\n"
+  "    accept = self.deadline \xE2""\x89""\xA4"" time.now ()\n"
   "    if accept {\n"
   "      self.deadline += self.period\n"
   "    }else{\n"
@@ -2854,7 +2856,7 @@ const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/pr
   "  var compteur $uint32 = 0\n"
   "  var deadline = $timer (!period:500)\n"
   "   \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    toggle (!port:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "  }\n"
@@ -2870,7 +2872,7 @@ const cRegularFileWrapper gWrapperFile_20_embeddedSampleCode (
   "05-deadline-variable.plm",
   "plm",
   true, // Text file
-  2295, // Text length
+  2339, // Text length
   gWrapperFileContent_20_embeddedSampleCode
 ) ;
 
@@ -2923,19 +2925,19 @@ const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/pr
   "    PIT_TCTRL [0] = {PIT_TCTRL !TEN:1}\n"
   "  }\n"
   "  \n"
-  "  public system safe now @noUnusedWarning () -> $timerTick {\n"
+  "  public system safe now @noUnusedWarning () -> $uptime {\n"
   "    var r $uint64 = extend (PIT_LTMR64H)\n"
   "    r <<= 32\n"
   "    r |= extend (PIT_LTMR64L)\n"
   "    r = ~ r\n"
   "    r +%= 1\n"
-  "    result = $timerTick (!rawValue: r)\n"
+  "    result = $uptime (!rawValue: r)\n"
   "  } \n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "struct $timerTick @copyable {\n"
+  "struct $uptime @copyable {\n"
   "  let rawValue $uint64\n"
   "  \n"
   "  public func raw @noUnusedWarning () -> $uint64 {\n"
@@ -2963,7 +2965,7 @@ const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/pr
   "task T\xC3""\xA2""che priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "  \n"
-  "  on time.waitUntilMS (!deadline:self.compteur) {\n"
+  "  on time.wait (!untilDeadline:self.compteur) {\n"
   "    let tick = timer.now ()\n"
   "    toggle (!port:LED_L0)\n"
   "    lcd.goto (!line:0 !column:0)\n"
@@ -2986,7 +2988,7 @@ const cRegularFileWrapper gWrapperFile_21_embeddedSampleCode (
   "06-pit-0-1-chaines.plm",
   "plm",
   true, // Text file
-  3197, // Text length
+  3186, // Text length
   gWrapperFileContent_21_embeddedSampleCode
 ) ;
 

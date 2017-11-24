@@ -84,7 +84,7 @@ task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
   var n $uint32 = 1
 
-  on time.waitUntilMS (!deadline:self.top) {
+  on time.wait (!untilDeadline:self.top) {
     rdvs.output (!data:self.n)
     rdvs2.output (!data:self.n)
     toggle (!port:LED_L0)
@@ -119,7 +119,7 @@ task T2 priority 2 stackSize 1024 {
     s.signal ()
   }
   
-  on time.waitUntilMS (!deadline:self.deadline) {
+  on time.wait (!untilDeadline:self.deadline) {
     self.deadline += 200
     toggle (!port:LED_L4)
   }

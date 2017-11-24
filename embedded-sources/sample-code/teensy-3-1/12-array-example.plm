@@ -53,7 +53,7 @@ task T priority 12 stackSize 512 {
   var array2 = $A (!repeated:1)
   var index $int32 = 0
 
-  on time.waitUntilMS (!deadline:self.deadline) {
+  on time.wait (!untilDeadline:self.deadline) {
     self.deadline +%= 1000
 //    toggle (!port:LED_L1)
     self.array [self.index] = 0

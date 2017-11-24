@@ -38,14 +38,14 @@ init 1000 {
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
-  on time.waitUntilMS (!deadline:self.compteur) {
+  on time.wait (!untilDeadline:self.compteur) {
     digitalWrite (!port:LED_L0 !yes)
     self.compteur +%= 500
-    time.waitUntilMS (!deadline:self.compteur)
+    time.wait (!untilDeadline:self.compteur)
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.print (!unsigned:time.millis ())
+    lcd.print (!unsigned:time.now ())
   }
 }
 
@@ -54,10 +54,10 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var compteur $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.compteur) {
+  on time.wait (!untilDeadline:self.compteur) {
     digitalWrite (!port:LED_L1 !yes)
     self.compteur +%= 499
-    time.waitUntilMS (!deadline:self.compteur)
+    time.wait (!untilDeadline:self.compteur)
     digitalWrite (!port:LED_L1 !no)
     self.compteur +%= 499
   }
@@ -68,10 +68,10 @@ task T2 priority 2 stackSize 512 {
 task T3 priority 3 stackSize 512 {
   var compteur $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.compteur) {
+  on time.wait (!untilDeadline:self.compteur) {
     digitalWrite (!port:LED_L2 !yes)
     self.compteur +%= 498
-    time.waitUntilMS (!deadline:self.compteur)
+    time.wait (!untilDeadline:self.compteur)
     digitalWrite (!port:LED_L2 !no)
     self.compteur +%= 498
   }
@@ -82,10 +82,10 @@ task T3 priority 3 stackSize 512 {
 task T4 priority 4 stackSize 512 {
   var compteur $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.compteur) {
+  on time.wait (!untilDeadline:self.compteur) {
     digitalWrite (!port:LED_L3 !yes)
     self.compteur +%= 497
-    time.waitUntilMS (!deadline:self.compteur)
+    time.wait (!untilDeadline:self.compteur)
     digitalWrite (!port:LED_L3 !no)
     self.compteur +%= 497
   }
@@ -96,10 +96,10 @@ task T4 priority 4 stackSize 512 {
 task T5 priority 5 stackSize 512 {
   var compteur $uint32 = 0
 
-  on time.waitUntilMS (!deadline:self.compteur) {
+  on time.wait (!untilDeadline:self.compteur) {
     digitalWrite (!port:LED_L4 !yes)
     self.compteur +%= 496
-    time.waitUntilMS (!deadline:self.compteur)
+    time.wait (!untilDeadline:self.compteur)
     digitalWrite (!port:LED_L4 !no)
     self.compteur +%= 496
   }
