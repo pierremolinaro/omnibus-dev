@@ -882,9 +882,8 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
                                                                          const class GALGAS_instructionListIR & inOperand1,
                                                                          const class GALGAS_objectIR & inOperand2,
                                                                          const class GALGAS_string & inOperand3,
-                                                                         const class GALGAS_string & inOperand4,
-                                                                         const class GALGAS_instructionListIR & inOperand5,
-                                                                         const class GALGAS_procCallEffectiveParameterListIR & inOperand6
+                                                                         const class GALGAS_instructionListIR & inOperand4,
+                                                                         const class GALGAS_procCallEffectiveParameterListIR & inOperand5
                                                                          COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_guardedCommandIR constructor_booleanGuard (const class GALGAS_bool & inOperand0,
@@ -905,9 +904,8 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
                                                      class GALGAS_instructionListIR & outArgument1,
                                                      class GALGAS_objectIR & outArgument2,
                                                      class GALGAS_string & outArgument3,
-                                                     class GALGAS_string & outArgument4,
-                                                     class GALGAS_instructionListIR & outArgument5,
-                                                     class GALGAS_procCallEffectiveParameterListIR & outArgument6,
+                                                     class GALGAS_instructionListIR & outArgument4,
+                                                     class GALGAS_procCallEffectiveParameterListIR & outArgument5,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
@@ -966,18 +964,16 @@ class cEnumAssociatedValues_guardedCommandIR_boolAndSync : public cEnumAssociate
   public : const GALGAS_instructionListIR mAssociatedValue1 ;
   public : const GALGAS_objectIR mAssociatedValue2 ;
   public : const GALGAS_string mAssociatedValue3 ;
-  public : const GALGAS_string mAssociatedValue4 ;
-  public : const GALGAS_instructionListIR mAssociatedValue5 ;
-  public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue6 ;
+  public : const GALGAS_instructionListIR mAssociatedValue4 ;
+  public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue5 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_guardedCommandIR_boolAndSync (const GALGAS_bool & inAssociatedValue0,
                                                                const GALGAS_instructionListIR & inAssociatedValue1,
                                                                const GALGAS_objectIR & inAssociatedValue2,
                                                                const GALGAS_string & inAssociatedValue3,
-                                                               const GALGAS_string & inAssociatedValue4,
-                                                               const GALGAS_instructionListIR & inAssociatedValue5,
-                                                               const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue6
+                                                               const GALGAS_instructionListIR & inAssociatedValue4,
+                                                               const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
                                                                COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

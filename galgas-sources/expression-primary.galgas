@@ -351,13 +351,7 @@ proc procAnalyzeAccesListInExpression
       handlePropertyAccessInExpression (
         !?ioResult
         !propertyName
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:inOptionalTargetType
-        !context:inContext
-        !mode:inCurrentMode
         !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
       )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
@@ -522,13 +516,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       handlePropertyAccessInExpression (
         !?outResult
         !propertyName
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:inOptionalTargetType
-        !context:inContext
-        !mode:inCurrentMode
         !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
       )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
@@ -573,16 +561,10 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
 
 #·······················································································································
 
-private proc handlePropertyAccessInExpression
+proc handlePropertyAccessInExpression
   ?!@objectIR ioResult
   ?let @lstring inPropertyName
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let type = [ioResult type]

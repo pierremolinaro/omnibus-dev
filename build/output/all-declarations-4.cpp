@@ -4317,7 +4317,7 @@ void GALGAS_constructorMap::setter_insertKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_constructorMap_searchKey = "-- internal error --" ;
+const char * kSearchErrorMessage_constructorMap_searchKey = "constructor is not defined" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

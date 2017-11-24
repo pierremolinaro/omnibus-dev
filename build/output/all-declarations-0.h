@@ -1174,6 +1174,8 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_89 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_syntax_90 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -9668,8 +9670,8 @@ class GALGAS_guardedCommandAST : public AC_GALGAS_root {
                                                                           const class GALGAS_expressionAST & inOperand1,
                                                                           const class GALGAS_bool & inOperand2,
                                                                           const class GALGAS_location & inOperand3,
-                                                                          const class GALGAS_lstring & inOperand4,
-                                                                          const class GALGAS_lstring & inOperand5,
+                                                                          const class GALGAS_lbool & inOperand4,
+                                                                          const class GALGAS_lstringlist & inOperand5,
                                                                           const class GALGAS_effectiveArgumentListAST & inOperand6
                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -9691,8 +9693,8 @@ class GALGAS_guardedCommandAST : public AC_GALGAS_root {
                                                      class GALGAS_expressionAST & outArgument1,
                                                      class GALGAS_bool & outArgument2,
                                                      class GALGAS_location & outArgument3,
-                                                     class GALGAS_lstring & outArgument4,
-                                                     class GALGAS_lstring & outArgument5,
+                                                     class GALGAS_lbool & outArgument4,
+                                                     class GALGAS_lstringlist & outArgument5,
                                                      class GALGAS_effectiveArgumentListAST & outArgument6,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
@@ -9752,8 +9754,8 @@ class cEnumAssociatedValues_guardedCommandAST_boolAndSync : public cEnumAssociat
   public : const GALGAS_expressionAST mAssociatedValue1 ;
   public : const GALGAS_bool mAssociatedValue2 ;
   public : const GALGAS_location mAssociatedValue3 ;
-  public : const GALGAS_lstring mAssociatedValue4 ;
-  public : const GALGAS_lstring mAssociatedValue5 ;
+  public : const GALGAS_lbool mAssociatedValue4 ;
+  public : const GALGAS_lstringlist mAssociatedValue5 ;
   public : const GALGAS_effectiveArgumentListAST mAssociatedValue6 ;
 
 //--- Constructor
@@ -9761,8 +9763,8 @@ class cEnumAssociatedValues_guardedCommandAST_boolAndSync : public cEnumAssociat
                                                                 const GALGAS_expressionAST & inAssociatedValue1,
                                                                 const GALGAS_bool & inAssociatedValue2,
                                                                 const GALGAS_location & inAssociatedValue3,
-                                                                const GALGAS_lstring & inAssociatedValue4,
-                                                                const GALGAS_lstring & inAssociatedValue5,
+                                                                const GALGAS_lbool & inAssociatedValue4,
+                                                                const GALGAS_lstringlist & inAssociatedValue5,
                                                                 const GALGAS_effectiveArgumentListAST & inAssociatedValue6
                                                                 COMMA_LOCATION_ARGS) ;
 

@@ -5434,8 +5434,8 @@ cEnumAssociatedValues_guardedCommandAST_boolAndSync::cEnumAssociatedValues_guard
                                                                                                           const GALGAS_expressionAST & inAssociatedValue1,
                                                                                                           const GALGAS_bool & inAssociatedValue2,
                                                                                                           const GALGAS_location & inAssociatedValue3,
-                                                                                                          const GALGAS_lstring & inAssociatedValue4,
-                                                                                                          const GALGAS_lstring & inAssociatedValue5,
+                                                                                                          const GALGAS_lbool & inAssociatedValue4,
+                                                                                                          const GALGAS_lstringlist & inAssociatedValue5,
                                                                                                           const GALGAS_effectiveArgumentListAST & inAssociatedValue6
                                                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -5523,8 +5523,8 @@ GALGAS_guardedCommandAST GALGAS_guardedCommandAST::constructor_boolAndSync (cons
                                                                             const GALGAS_expressionAST & inAssociatedValue1,
                                                                             const GALGAS_bool & inAssociatedValue2,
                                                                             const GALGAS_location & inAssociatedValue3,
-                                                                            const GALGAS_lstring & inAssociatedValue4,
-                                                                            const GALGAS_lstring & inAssociatedValue5,
+                                                                            const GALGAS_lbool & inAssociatedValue4,
+                                                                            const GALGAS_lstringlist & inAssociatedValue5,
                                                                             const GALGAS_effectiveArgumentListAST & inAssociatedValue6
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandAST result ;
@@ -5566,8 +5566,8 @@ void GALGAS_guardedCommandAST::method_boolAndSync (GALGAS_bool & outAssociatedVa
                                                    GALGAS_expressionAST & outAssociatedValue1,
                                                    GALGAS_bool & outAssociatedValue2,
                                                    GALGAS_location & outAssociatedValue3,
-                                                   GALGAS_lstring & outAssociatedValue4,
-                                                   GALGAS_lstring & outAssociatedValue5,
+                                                   GALGAS_lbool & outAssociatedValue4,
+                                                   GALGAS_lstringlist & outAssociatedValue5,
                                                    GALGAS_effectiveArgumentListAST & outAssociatedValue6,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
@@ -5921,9 +5921,8 @@ cEnumAssociatedValues_guardedCommandIR_boolAndSync::cEnumAssociatedValues_guarde
                                                                                                         const GALGAS_instructionListIR & inAssociatedValue1,
                                                                                                         const GALGAS_objectIR & inAssociatedValue2,
                                                                                                         const GALGAS_string & inAssociatedValue3,
-                                                                                                        const GALGAS_string & inAssociatedValue4,
-                                                                                                        const GALGAS_instructionListIR & inAssociatedValue5,
-                                                                                                        const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue6
+                                                                                                        const GALGAS_instructionListIR & inAssociatedValue4,
+                                                                                                        const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
                                                                                                         COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -5931,8 +5930,7 @@ mAssociatedValue1 (inAssociatedValue1),
 mAssociatedValue2 (inAssociatedValue2),
 mAssociatedValue3 (inAssociatedValue3),
 mAssociatedValue4 (inAssociatedValue4),
-mAssociatedValue5 (inAssociatedValue5),
-mAssociatedValue6 (inAssociatedValue6) {
+mAssociatedValue5 (inAssociatedValue5) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5946,7 +5944,6 @@ void cEnumAssociatedValues_guardedCommandIR_boolAndSync::description (C_String &
   mAssociatedValue3.description (ioString, inIndentation) ;
   mAssociatedValue4.description (ioString, inIndentation) ;
   mAssociatedValue5.description (ioString, inIndentation) ;
-  mAssociatedValue6.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -5973,9 +5970,6 @@ typeComparisonResult cEnumAssociatedValues_guardedCommandIR_boolAndSync::compare
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue5.objectCompare (ptr->mAssociatedValue5) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue6.objectCompare (ptr->mAssociatedValue6) ;
   }
   return result ;
 }
@@ -6010,15 +6004,14 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_boolAndSync (const 
                                                                           const GALGAS_instructionListIR & inAssociatedValue1,
                                                                           const GALGAS_objectIR & inAssociatedValue2,
                                                                           const GALGAS_string & inAssociatedValue3,
-                                                                          const GALGAS_string & inAssociatedValue4,
-                                                                          const GALGAS_instructionListIR & inAssociatedValue5,
-                                                                          const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue6
+                                                                          const GALGAS_instructionListIR & inAssociatedValue4,
+                                                                          const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid () && inAssociatedValue6.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid ()) {
     result.mEnum = kEnum_boolAndSync ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_boolAndSync (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5, inAssociatedValue6 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_boolAndSync (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -6053,9 +6046,8 @@ void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedVal
                                                   GALGAS_instructionListIR & outAssociatedValue1,
                                                   GALGAS_objectIR & outAssociatedValue2,
                                                   GALGAS_string & outAssociatedValue3,
-                                                  GALGAS_string & outAssociatedValue4,
-                                                  GALGAS_instructionListIR & outAssociatedValue5,
-                                                  GALGAS_procCallEffectiveParameterListIR & outAssociatedValue6,
+                                                  GALGAS_instructionListIR & outAssociatedValue4,
+                                                  GALGAS_procCallEffectiveParameterListIR & outAssociatedValue5,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_boolAndSync) {
@@ -6065,7 +6057,6 @@ void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedVal
     outAssociatedValue3.drop () ;
     outAssociatedValue4.drop () ;
     outAssociatedValue5.drop () ;
-    outAssociatedValue6.drop () ;
     C_String s ;
     s << "method @guardedCommandIR boolAndSync invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -6077,7 +6068,6 @@ void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedVal
     outAssociatedValue3 = ptr->mAssociatedValue3 ;
     outAssociatedValue4 = ptr->mAssociatedValue4 ;
     outAssociatedValue5 = ptr->mAssociatedValue5 ;
-    outAssociatedValue6 = ptr->mAssociatedValue6 ;
   }
 }
 

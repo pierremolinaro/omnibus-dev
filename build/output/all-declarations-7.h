@@ -691,6 +691,16 @@ void callExtensionSetter_closeOverride (class cPtr_universalValuedObjectMapForCo
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 Extension getter '@PLMType guardMap' (as function)                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_guardMapForContext extensionGetter_guardMap (const class GALGAS_PLMType & inObject,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                 Extension getter '@PLMType equatable' (as function)                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

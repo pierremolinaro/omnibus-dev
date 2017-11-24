@@ -81,6 +81,29 @@ func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+getter @PLMType guardMap -> @guardMapForContext {
+  switch mKind
+  case void, boolean, literalString, staticInteger :
+    result = {}
+  case enumeration (*) :
+    result = {}
+  case structure (* @guardMapForContext guardMap) :
+    result = guardMap
+  case integer (* * * *) :
+    result = {}
+  case opaque (*) :
+    result = {}
+  case arrayType (* *) :
+    result = {}
+  case function (*) :
+    result = {}
+  case pointer (*) :
+    result = {}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 getter @PLMType equatable -> @bool {
   result = [mAttributes equatable]
 }

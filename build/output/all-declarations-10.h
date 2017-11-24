@@ -15,7 +15,7 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
-                               const class GALGAS_lstring constinArgument1,
+                               const class GALGAS_objectIR constinArgument1,
                                const class GALGAS_lstring constinArgument2,
                                const class GALGAS_effectiveArgumentListAST constinArgument3,
                                const class GALGAS_lstring constinArgument4,
@@ -30,6 +30,28 @@ void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
                                class GALGAS_lstring & outArgument13,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Routine 'analyzeStandaloneGuardCall'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzeStandaloneGuardCall (const class GALGAS_PLMType constinArgument0,
+                                         const class GALGAS_lstring constinArgument1,
+                                         const class GALGAS_effectiveArgumentListAST constinArgument2,
+                                         const class GALGAS_lstring constinArgument3,
+                                         const class GALGAS_semanticContext constinArgument4,
+                                         const class GALGAS_mode constinArgument5,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                         class GALGAS_staticStringMap & ioArgument7,
+                                         class GALGAS_universalValuedObjectMapForContext & ioArgument8,
+                                         class GALGAS_allocaList & ioArgument9,
+                                         class GALGAS_instructionListIR & ioArgument10,
+                                         class GALGAS_procCallEffectiveParameterListIR & outArgument11,
+                                         class GALGAS_lstring & outArgument12,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

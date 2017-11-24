@@ -23,7 +23,7 @@ map @constructorMap { # Key is (!selector!selector)
   @constructorSignature mSignature
   @constructorValue mInitValue
   insert insertKey error message "-- internal error --"
-  search searchKey error message "-- internal error --"
+  search searchKey error message "constructor is not defined"
 }
 
 #·······················································································································
