@@ -2558,14 +2558,8 @@ void routine_handleFunctionCallInExpression (const class GALGAS_lstring constinA
 
 void routine_handlePropertyAccessInExpression (class GALGAS_objectIR & ioArgument0,
                                                const class GALGAS_lstring constinArgument1,
-                                               const class GALGAS_lstring constinArgument2,
-                                               const class GALGAS_PLMType constinArgument3,
-                                               const class GALGAS_semanticContext constinArgument4,
-                                               const class GALGAS_mode constinArgument5,
-                                               class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                               class GALGAS_staticStringMap & ioArgument7,
-                                               class GALGAS_allocaList & ioArgument8,
-                                               class GALGAS_instructionListIR & ioArgument9,
+                                               class GALGAS_semanticTemporariesStruct & ioArgument2,
+                                               class GALGAS_instructionListIR & ioArgument3,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
