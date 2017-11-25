@@ -30,7 +30,7 @@ syntax extension plm_syntax {
     select
       optionalTypeName = ["" nowhere]
     or
-      $\$type$ ?optionalTypeName
+      <type_definition> ?optionalTypeName
     end
     $=$
     <expression> ?let @expressionAST expression
@@ -47,7 +47,7 @@ syntax extension plm_syntax {
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $var$
     $identifier$ ?let varName
-    $\$type$ ?let typeName
+    <type_definition> ?let typeName
     ioInstructionList += !@varInstructionAST.new {
       !varName.location
       !varName

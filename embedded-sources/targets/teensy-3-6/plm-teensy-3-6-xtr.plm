@@ -42,7 +42,8 @@ block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
 
 extern func primitive
 block (?!inList:ioWaitingList $taskList
-       ?onDeadline:inDeadline $uint32) : "blockInListAndOnDeadline"
+       ?onDeadline:inDeadline $uint32
+       ?!result: ioResult $bool) : "block.in.list.and.on.deadline"
 
 //--- Make task Ready
 extern func service
@@ -65,11 +66,11 @@ extern func guard
 handle (?guardedDeadline:inDeadlineMS $uint32) : "handleGuardedWaitUntil"
 
 extern func service
-notifyChange (?!forGuard:ioGuard $guardList) : "guardDidChange"
+notifyChange (?!forGuard:ioGuard $guardList) : "notify.change.from.guard.list"
 
 extern func service
 notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
-: "tickHandlerForGuardedWaitUntil"
+: "notify.change.for.guarded.wait.until"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                                                                       

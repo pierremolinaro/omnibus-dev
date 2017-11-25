@@ -254,7 +254,7 @@ func llvmNameForGuardImplementation ?let @string inName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once waitForGuardChangeFunctionName -> @string {
-  result = "waitForGuardChange"
+  result = "wait.for.guard.change"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

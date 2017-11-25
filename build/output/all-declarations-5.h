@@ -399,6 +399,14 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                       GALGAS_syncInstructionBranchListAST & ioArgument3,
                                       C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'type_definition' non terminal
+//--- 'parse' label
+  public : virtual void nt_type_5F_definition_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_type_5F_definition_ (GALGAS_lstring & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
   public : virtual int32_t select_plm_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;

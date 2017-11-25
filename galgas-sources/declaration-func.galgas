@@ -80,7 +80,7 @@ syntax extension plm_syntax {
       returnTypeName = ["" here]
     or
       $->$
-      $\$type$ ?returnTypeName
+      <type_definition> ?returnTypeName
     end
     ${$
     <instructionList> ?let instructionList
@@ -161,7 +161,7 @@ syntax extension plm_syntax {
     while
       $!selector:$ ?let selector
       $identifier$ ?let formalArgumentName
-      $\$type$ ?let formalArgumentTypeName
+      <type_definition> ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.output
         !selector
@@ -170,7 +170,7 @@ syntax extension plm_syntax {
     while
       $?!selector:$ ?let selector
       $identifier$ ?let formalArgumentName
-      $\$type$ ?let formalArgumentTypeName
+      <type_definition> ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.inputOutput
         !selector
@@ -179,7 +179,7 @@ syntax extension plm_syntax {
     while
       $?selector:$ ?let selector
       $identifier$ ?let formalArgumentName
-      $\$type$ ?let formalArgumentTypeName
+      <type_definition> ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.input
         !selector

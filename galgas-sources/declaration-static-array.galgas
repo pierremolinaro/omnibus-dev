@@ -76,7 +76,7 @@ syntax extension plm_syntax {
     $let$
     $identifier$ ?let propertyName
     select
-      $\$type$ ?let typeName
+      <type_definition> ?let typeName
       ioPropertyList += !propertyName !.valueType{!type:typeName}
     or
       $func$
@@ -87,7 +87,7 @@ syntax extension plm_syntax {
         returnType = ["" here]
       or
         $->$
-        $\$type$ ?returnType
+        <type_definition> ?returnType
       end
       ioPropertyList += !propertyName !.function{!mode:mode !formalArgs:formalArgs !returnType:returnType}
     end

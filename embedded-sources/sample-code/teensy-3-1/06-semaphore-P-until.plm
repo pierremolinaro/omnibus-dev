@@ -41,12 +41,13 @@ struct $monSemaphore {
     }
   }
 
-  public system primitive P_until @mutating (?deadline:inDeadline $uint32) -> $bool {
+  public system primitive P_until @mutating (?deadline:inDeadline $uint32
+                                             !result: result $bool) {
     result = self.value > 0
     if result {
       self.value -= 1
     }else if inDeadline > time.now () {
-      block (!?inList:self.list !onDeadline:inDeadline)
+      block (!?inList:self.list !onDeadline:inDeadline !?result:result)
     }
   }
 
@@ -60,14 +61,6 @@ var s = $monSemaphore (!value:0)
 
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
-
-  setup 123 {
-    self.top = 1
-  }
-  
-  setup 256 {
-    self.top += 2
-  }
   
   on time.wait (!untilDeadline:self.top) {
     s.V ()
@@ -84,14 +77,22 @@ task T1 priority 1 stackSize 512 {
 
 task T2 priority 2 stackSize 512 {
   var top $uint32 = 0
+  var deadlineReachedCount $uint32 = 0
+  var semaphoreMatchCount $uint32 = 0
 
   on time.wait (!untilDeadline:0) { // no wait...
-    let r = s.P_until (!deadline:self.top)
+    s.P_until (!deadline:self.top ?result:let r)
     if r {
       toggle (!port:LED_L1)
+      self.deadlineReachedCount += 1
+      lcd.goto (!line:0 !column:0)
+      lcd.print (!unsigned:self.deadlineReachedCount)
     }else{
       self.top += 400
       toggle (!port:LED_L1)
+      self.semaphoreMatchCount += 1
+      lcd.goto (!line:1 !column:0)
+      lcd.print (!unsigned:self.semaphoreMatchCount)
     }
   }
 }

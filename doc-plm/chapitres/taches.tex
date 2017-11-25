@@ -70,15 +70,23 @@ Enfin, une tâche peut déclarer des fonctions privées.
 
 
 
+\section{Extensions}
+
+
+
+
+
+
 \section{Exécution des tâches}
 
-Les tâches sont toutes démarrées à la fin de la phase d'initialisation (\refFigurePage{}{sequenceDemarrage}). Si aucune tâche n'est déclarée, l'exécution s'arrête à la fin de l'exécution des routines \plm=init=. Sinon, la tâche se met en attente des gardes tant qu'aucune n'est vraie. Dès que l'une d'elles devient vraie, sa liste d'instructions est exécutée~; si la garde nomme le qualificatif \plm=continue=, la tâche se remet en attente de l'évolution des gardes. Si la garde nomme le qualificatif \plm=exit=, l'exécution est terminée.
+Les tâches sont toutes démarrées à la fin de la phase d'initialisation (\refFigurePage{}{sequenceDemarrage})\footnote{Si aucune tâche n'est déclarée, l'exécution s'arrête à la fin de l'exécution des routines \texttt{\bf init}.}. Après avoir exécuté ses routines \plm=setup= (dans l'ordre croissant des valeurs associées), la tâche se met en attente des gardes tant qu'aucune n'est vraie. Dès que l'une d'elles devient vraie, sa liste d'instructions est exécutée~; par défaut, la tâche se remet en attente de l'évolution des gardes. Si la garde nomme le qualificatif \plm=exit=, l'exécution est terminée.
 
 La \refFigure{}{executionTache} illustre l'exécution de la tâche \plm=T= suivante~: 
 \begin{PLM}
 task T priority 1 stackSize 512 {
+  setup 1 { ... }
   on G1 exit { L1 }
-  on G2 continue { L2 }
+  on G2 { L2 }
 }
 \end{PLM}
 
@@ -97,7 +105,7 @@ task T priority 1 stackSize 512 {
     \node [block] (G1) [below left=of loop] {Garde \texttt{G1 \bf exit}};
     \node [block] (L1) [below=of G1] {Liste d'instructions \texttt{L1}};
     \node [cloud] (fin) [below=of L1] {Fin de la tâche};
-    \node [block] (G2) [below right=of loop] {Garde \texttt{G2 \bf continue}};
+    \node [block] (G2) [below right=of loop] {Garde \texttt{G2}};
     \node [block] (L2) [below=of G2] {Liste d'instructions \texttt{L2}};
 
     \draw [-stealth, thick] (start) -- (setup);

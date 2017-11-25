@@ -29,7 +29,7 @@ syntax extension plm_syntax {
     select
       typeName = ["" nowhere]
     or
-      $\$type$ ?typeName
+      <type_definition> ?typeName
     end
     $=$
     <expression> ?let @expressionAST expression
