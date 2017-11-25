@@ -87,19 +87,19 @@ override method @opaqueTypeDeclarationAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---
-  @PLMTypeAttributes flags = .none
+  @PLMTypeAttributes attributes = .none
   for (attribute) in mAttributeList do
     if attribute.string == "instantiable" then
-      if [flags instanciable] then
+      if [attributes instanciable] then
         error attribute : "duplicated attribute"
       else
-        flags = flags | .instanciable
+        attributes = attributes | .instanciable
       end
     elsif attribute.string == "copyable" then
-      if [flags copyable] then
+      if [attributes copyable] then
         error attribute : "duplicated attribute"
       else
-        flags = flags | .copyable
+        attributes = attributes | .copyable
       end
     else
       error attribute : "only @copyable and @instantiable attributes are allowed here"
@@ -131,13 +131,15 @@ override method @opaqueTypeDeclarationAST enterInContext
     error mSizeExpressionLocation : "array size expression is not static"
   else
     @constructorMap constructorMap = {}
-    [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
+    if [attributes instanciable] then
+      [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
+    end
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     let opaqueType = @PLMType.new {
       !{}
       !{}
       !constructorMap
-      !flags
+      !attributes
       !mOpaqueTypeName
       !.opaque {!bitCount:bitSize}
     }

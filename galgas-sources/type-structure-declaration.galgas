@@ -73,7 +73,7 @@ syntax extension plm_syntax {
     end
     $identifier$ ?let fieldName
     select
-      $\$type$ ?let typeName
+      <type_definition> ?let typeName
       select
         ioFieldListAST += !fieldName !constant !isPublic !typeName !.noExpression
       or

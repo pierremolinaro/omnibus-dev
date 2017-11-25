@@ -1367,12 +1367,13 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1/unp
   "    }\n"
   "  }\n"
   "\n"
-  "  public system primitive P_until @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public system primitive P_until @mutating (\?deadline:inDeadline $uint32\n"
+  "                                             !result: result $bool) {\n"
   "    result = self.value > 0\n"
   "    if result {\n"
   "      self.value -= 1\n"
   "    }else if inDeadline > time.now () {\n"
-  "      block (!\?inList:self.list !onDeadline:inDeadline)\n"
+  "      block (!\?inList:self.list !onDeadline:inDeadline !\?result:result)\n"
   "    }\n"
   "  }\n"
   "\n"
@@ -1412,7 +1413,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1/unp
   "  var top $uint32 = 0\n"
   "\n"
   "  on time.wait (!untilDeadline:0) { // no wait...\n"
-  "    let r = s.P_until (!deadline:self.top)\n"
+  "    s.P_until (!deadline:self.top \?result:let r)\n"
   "    if r {\n"
   "      toggle (!port:LED_L1)\n"
   "    }else{\n"
@@ -1428,7 +1429,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "06-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  2339, // Text length
+  2419, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1767,17 +1768,19 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/un
   "    }\n"
   "  }\n"
   "\n"
-  "  public system primitive inputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public system primitive inputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32\n"
+  "                                                                 !result: result $bool) {\n"
   "    makeTaskReady (!\?fromList:self.outputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.now ()) { \n"
-  "      block (!\?inList:self.inputWaitList !onDeadline:inDeadline)\n"
+  "      block (!\?inList:self.inputWaitList !onDeadline:inDeadline !\?result:result)\n"
   "    }\n"
   "  }\n"
   "\n"
-  "  public system primitive outputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public system primitive outputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32\n"
+  "                                                                  !result: result $bool) {\n"
   "    makeTaskReady (!\?fromList:self.inputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.now ()) { \n"
-  "      block (!\?inList:self.outputWaitList !onDeadline:inDeadline)\n"
+  "      block (!\?inList:self.outputWaitList !onDeadline:inDeadline !\?result:result)\n"
   "    }\n"
   "  }\n"
   "\n"
@@ -1834,7 +1837,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "09-rendez-vous.plm",
   "plm",
   true, // Text file
-  3659, // Text length
+  3848, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 

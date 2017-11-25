@@ -62,17 +62,19 @@ struct $rendezVous {
     }
   }
 
-  public system primitive inputUntil @noUnusedWarning @mutating (?deadline:inDeadline $uint32) -> $bool {
+  public system primitive inputUntil @noUnusedWarning @mutating (?deadline:inDeadline $uint32
+                                                                 !result: result $bool) {
     makeTaskReady (!?fromList:self.outputWaitList ?found:result)
     if (not result) and (inDeadline > time.now ()) { 
-      block (!?inList:self.inputWaitList !onDeadline:inDeadline)
+      block (!?inList:self.inputWaitList !onDeadline:inDeadline !?result:result)
     }
   }
 
-  public system primitive outputUntil @noUnusedWarning @mutating (?deadline:inDeadline $uint32) -> $bool {
+  public system primitive outputUntil @noUnusedWarning @mutating (?deadline:inDeadline $uint32
+                                                                  !result: result $bool) {
     makeTaskReady (!?fromList:self.inputWaitList ?found:result)
     if (not result) and (inDeadline > time.now ()) { 
-      block (!?inList:self.outputWaitList !onDeadline:inDeadline)
+      block (!?inList:self.outputWaitList !onDeadline:inDeadline !?result:result)
     }
   }
 

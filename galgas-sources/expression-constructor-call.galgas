@@ -22,7 +22,7 @@ class @constructorCallAST : @expressionAST {
 syntax extension plm_syntax {
 
   rule <primary> !@expressionAST outExpression {
-    $\$type$ ?let typeName
+    <type_definition> ?let typeName
     $($
     @functionCallEffectiveParameterListAST parameterList = {}
     repeat

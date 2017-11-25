@@ -30,7 +30,7 @@ syntax extension plm_syntax {
     or
       $identifier$ ?varName
     end
-    $\$type$ ?let typeName
+    <type_definition> ?let typeName
     $in$
     <expression> ?let @expressionAST lowerBoundExpression
     let endOf_lowerBoundExpression_instruction = @location.here

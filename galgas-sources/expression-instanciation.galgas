@@ -15,7 +15,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
-    $\$type$ ?let typeName
+    <type_definition> ?let typeName
     $($
     $)$
     outExpression = @instanciationAST.new {!typeName}

@@ -247,7 +247,8 @@ private proc generateCodeFiles
     primitiveAndServiceList +=
       !llvmNameForServiceCall (!waitForGuardChange)
       !llvmNameForServiceImplementation (!waitForGuardChange)
-    generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
+    generationAdds.mExternFunctionDeclarationSet +=
+      !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
 #----------------------------------------- SVC
   @sectionIRlist sectionIRlist = {}

@@ -33,7 +33,7 @@ syntax extension plm_syntax {
   rule <primary> !@expressionAST outExpression {
     $sizeof$
     $($
-    $\$type$ ?let typeName
+    <type_definition> ?let typeName
     $)$
     outExpression = @sizeofTypeAST.new {!typeName}
   }

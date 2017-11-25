@@ -57,7 +57,7 @@ syntax extension plm_syntax {
       returnTypeName = ["" here]
     or
       $->$
-      $\$type$ ?returnTypeName
+      <type_definition> ?returnTypeName
     end
     ${$
     <instructionList> ?let instructionList

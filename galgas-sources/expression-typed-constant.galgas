@@ -21,7 +21,7 @@ syntax extension plm_syntax {
     select
       optionalTypeName = .new {!"" !.here}
     or
-      $\$type$ ?optionalTypeName
+      <type_definition> ?optionalTypeName
     end
     $.$
     $identifier$ ?let constantName

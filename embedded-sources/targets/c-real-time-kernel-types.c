@@ -40,6 +40,8 @@ typedef struct {
   unsigned mTaskDeadline ;
 //---
   TaskList * mWaitingList ;
+//--- Result code pointer
+  bool * mResultPointer ;
 //--- Stack buffer parameters
   unsigned * mStackBufferAddress ;
   unsigned mStackBufferSize ; // In bytes

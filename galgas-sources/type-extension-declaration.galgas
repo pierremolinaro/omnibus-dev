@@ -66,7 +66,7 @@ syntax extension plm_syntax {
       constant = true
     end
     $identifier$ ?let fieldName
-    $\$type$ ?let typeName
+    <type_definition> ?let typeName
     $=$
     <expression> ?let initExpression
     ioPropertyList += !fieldName !constant !public !typeName !.expression{!initExpression:initExpression}
