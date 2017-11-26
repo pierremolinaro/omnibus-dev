@@ -306,8 +306,8 @@ override method @structureDeclarationAST enterInContext
       !.function {!executionMode:function.mMode}
       !signature
       !returnTypeProxy
-      !canMutateProperties
       !canAccessProperties
+      !canMutateProperties
     }
   #--- Enter in structure map
     [!?propertyMap insertKey !routineMangledName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]

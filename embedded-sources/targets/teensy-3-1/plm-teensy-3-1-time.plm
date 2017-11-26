@@ -39,7 +39,7 @@ module time {
 
   //············································································
 
-  public func init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+  public func init busyWaitingDuringMS @noUnusedWarning @mutating (?inDelay $uint32) {
     for _ $uint32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }
@@ -47,7 +47,7 @@ module time {
 
   //············································································
 
-  public func panic panicBusyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+  public func panic panicBusyWaitingDuringMS @noUnusedWarning @mutating (?inDelay $uint32) {
     for _ $uint32 in 0 ..< inDelay {
       self.panicOneMillisecondBusyWait ()
     }

@@ -207,7 +207,7 @@ override method @standAloneProcedureCallInstructionAST analyze
 
 override method @procedureCallInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -223,7 +223,7 @@ override method @procedureCallInstructionAST analyze
   @PLMType currentType
   @string currentLLVMAddressVar
   if mIdentifier.string == "" then # Receiver is self
-    if [inSelfType mKind] == .void then
+    if inSelfType.mKind == .void then
       error mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
     else
       currentType = inSelfType
@@ -302,7 +302,6 @@ override method @procedureCallInstructionAST analyze
     error endOfIndex : "a property access is required here"
   case property (@lstring methodName) :
     let @propertyMap propertyMap = currentType.mPropertyMap
-#    [[currentType mKind] structure ?1* ?propertyMap:let @propertyMap propertyMap ?4*]
     let key = routineMangledNameFromCall (!"" !methodName !mArguments)
     [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     switch propertyAccess
@@ -319,6 +318,12 @@ override method @procedureCallInstructionAST analyze
       let routineKind = routineDescriptor.mRoutineKind
       let calleeMode = [routineKind executionMode]
       let formalSignature = routineDescriptor.mSignature
+    #--- If method mutates its properties, check it is allowed 
+    #    note that mIdentifier.string is empty string if call instruction is self. ...
+      if (mIdentifier.string == "") && routineDescriptor.mCanMutateProperties && not inRoutineCanMutateProperties then
+        error methodName
+        : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
+      end
     #--- Check routine is actually a procedure (does not return any value)
       if routineDescriptor.mReturnTypeProxy != .null then
         error methodName : "not a procedure (returns a value)"

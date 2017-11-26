@@ -13,10 +13,10 @@ list @modulePropertyListAST {
 
 struct @moduleDeclarationAST {
   @lstring mModuleName
-  @modulePropertyListAST mPropertyListAST
-  @functionDeclarationListAST mFunctionDeclarationListAST
-  @systemRoutineDeclarationListAST mSystemRoutineListAST
-  @guardDeclarationListAST mGuardListAST
+  @modulePropertyListAST mModulePropertyListAST
+  @functionDeclarationListAST mModuleFunctionDeclarationListAST
+  @systemRoutineDeclarationListAST mModuleSystemRoutineListAST
+  @guardDeclarationListAST mModuleGuardListAST
   @initListAST mModuleInitListAST
 }
 
@@ -216,7 +216,7 @@ proc retainRequiredModules ?!@ast ioAST {
       [instanciedModuleMap searchKey !declaration.mModuleName ?let moduleInstanciationArgumentMap]
     #--- Build module property list, adding init expression
       @stringset validArgumentSet = {}
-      for (propertyName constant optionalPropertyTypeName optionalInitExpression) in declaration.mPropertyListAST do
+      for (propertyName constant optionalPropertyTypeName optionalInitExpression) in declaration.mModulePropertyListAST do
         @expressionAST initExpression
         switch optionalInitExpression 
         case noExpression :
@@ -245,9 +245,9 @@ proc retainRequiredModules ?!@ast ioAST {
       !{}
       !false # Do not generate assignment routine
       !modulePropertyListAST
-      !declaration.mFunctionDeclarationListAST
-      !declaration.mSystemRoutineListAST
-      !declaration.mGuardListAST
+      !declaration.mModuleFunctionDeclarationListAST
+      !declaration.mModuleSystemRoutineListAST
+      !declaration.mModuleGuardListAST
     }
     for (init) in declaration.mModuleInitListAST do
       ioAST.mDeclarationListAST += !init

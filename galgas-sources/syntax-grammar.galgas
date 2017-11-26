@@ -4,10 +4,6 @@
 
 syntax plm_syntax (plm_lexique) {
 
-  rule <function> ?!@functionDeclarationListAST ioProcListAST
-
-  rule <system_routine> ?!@systemRoutineDeclarationListAST ioSVCListAST
-
   #·····················································································································
 
   rule <import_file> ?!@lstringlist ioImportedFileList {

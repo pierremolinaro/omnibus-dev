@@ -38,41 +38,37 @@ init 1000 {
 
 //-----------------------------------------------------------------------------*
 
-struct $rendezVousDataé {
-  var autoriserLecture  = $semaphore (!value:0)
-  var autoriserEcriture = $semaphore (!value:1)
-  var signalerDonneeLue = $semaphore (!value:0)
-  var donnée $uint32 = 0
+struct $rendezVousData {
+  var readBarrier  = $semaphore (!value:0)
+  var writeBarrier = $semaphore (!value:1)
+  var data $uint32 = 0
 
-  public func user output @mutating (?data:inData $uint32) {
-    self.autoriserEcriture.wait ()
-    self.donnée = inData
-    self.autoriserLecture.signal ()
-    self.signalerDonneeLue.wait ()
+  public func user output @mutating @noUnusedWarning (?data:inData $uint32) {
+    self.writeBarrier.wait ()
+    self.data = inData
+    self.readBarrier.signal ()
   }
 
-//  public func user input (!data:outData $uint32) {
-//    self.autoriserLecture.P ()
-//    outData = self.data
-//    self.signalerDonneeLue.V ()
-//    self.autoriserEcriture.V ()
-//  }
+  public func user input @mutating @noUnusedWarning (!data:outData $uint32) {
+    self.readBarrier.wait ()
+    outData = self.data
+    self.writeBarrier.signal ()
+  }
 
-  public guard entrée (!data:outData $uint32) : self.autoriserLecture.wait () {
-    outData = self.donnée
-    self.signalerDonneeLue.signal ()
-    self.autoriserEcriture.signal ()
+  public guard input @noUnusedWarning (!data:outData $uint32) : self.readBarrier.wait () {
+    outData = self.data
+    self.writeBarrier.signal ()
   }
 
 }
 
 //-----------------------------------------------------------------------------*
 
-var rdvs = $rendezVousDataé ()
+var rdvs = $rendezVousData ()
 
 //-----------------------------------------------------------------------------*
 
-var rdvs2 = $rendezVousDataé ()
+var rdvs2 = $rendezVousData ()
 
 //-----------------------------------------------------------------------------*
 
@@ -82,7 +78,7 @@ var s = $semaphore (!value:1)
 
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
-  var n $uint32 = 1
+  var n $uint32 = 0
 
   on time.wait (!untilDeadline:self.top) {
     rdvs.output (!data:self.n)
@@ -97,7 +93,7 @@ task T0 priority 0 stackSize 512 {
 
 task T1 priority 1 stackSize 1024 {
 
-  on rdvs.entrée (?data:let x) {
+  on rdvs.input (?data:let x) {
     toggle (!port:LED_L1)
     s.wait ()
       lcd.goto (!line:0 !column:0)
@@ -111,7 +107,7 @@ task T1 priority 1 stackSize 1024 {
 task T2 priority 2 stackSize 1024 {
   var deadline $uint32 = 0
 
-  on rdvs2.entrée (?data:let x) {
+  on rdvs2.input (?data:let x) {
     toggle (!port:LED_L2)
     s.wait ()
       lcd.goto (!line:1 !column:0)
