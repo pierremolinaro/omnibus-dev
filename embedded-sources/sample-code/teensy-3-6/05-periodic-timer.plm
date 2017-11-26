@@ -1,0 +1,77 @@
+target "teensy-3-6/privileged"
+let F_CPU_MHZ = 180
+
+module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func safe activityLedOn @exported () {
+  digitalWrite (!port:.D13 !yes)
+}
+
+func safe activityLedOff @exported () {
+  digitalWrite (!port:.D13 !no)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let LED_L0 = $digitalPort.D3
+let LED_L1 = $digitalPort.D4
+
+init 1000 {
+  pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
+  pinMode (!port:LED_L0 !mode:.OUTPUT)
+  pinMode (!port:LED_L1 !mode:.OUTPUT)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct $periodicTimer {
+  var deadline $uint32 = 0
+  let period $uint32
+  var guardList = $guardList ()
+
+  //············································································
+  
+  public system primitive wait @noUnusedWarning @mutating () {
+    if self.deadline ≤ time.now () {
+      block (!onDeadline:self.deadline)
+    }
+    self.deadline += self.period
+  }
+
+  //············································································
+
+  public guard wait @noUnusedWarning () {
+    accept = self.deadline ≤ time.now ()
+    if accept {
+      self.deadline += self.period
+    }else{
+      handle (!?guard:self.guardList)
+    }
+  }
+  
+  public system section deadline @noUnusedWarning () -> $uint32 {
+    result = self.deadline
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche priority 1 stackSize 512 {
+  var compteur $uint32 = 0
+  var deadline = $periodicTimer (!period:500)
+   
+  on time.wait (!untilDeadline:self.compteur) {
+    toggle (!port:LED_L0)
+    self.compteur +%= 500
+  }
+
+  on self.deadline.wait () {
+    toggle (!port:LED_L1)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

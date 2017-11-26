@@ -2226,7 +2226,6 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "      *(taskControlBlockPtr->mResultPointer) = 1 ;\n"
   "      taskControlBlockPtr->mResultPointer = (bool *) 0 ;\n"
   "    }\n"
-  "    kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
   "  //--- Make task ready\n"
   "    kernel_makeTaskReady (taskIndex) ;\n"
   "  }\n"
@@ -2255,7 +2254,6 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "      *(taskControlBlockPtr->mResultPointer) = 0 ;\n"
   "      taskControlBlockPtr->mResultPointer = (bool *) 0 ;\n"
   "    }\n"
-  "    kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 0) ;\n"
   "  //--- Make task ready\n"
   "      kernel_makeTaskReady (taskIndex) ;\n"
   "    }\n"
@@ -2411,6 +2409,7 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "    result = gRunningTaskControlBlock->mHaveDeadlineGuard || (gRunningTaskControlBlock->mGuardCount > 0) ;\n"
   "    if (result) {\n"
   "      gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
+  "      kernel_set_return_code (& gRunningTaskControlBlock->mTaskContext, 1) ;\n"
   "      kernel_makeNoTaskRunning () ;\n"
   "    }\n"
   "  }\n"
@@ -2428,7 +2427,7 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
   "    removeTaskFromGuards (taskControlBlockPtr) ;\n"
   "    if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
-  "      kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
+  "     // kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
   "      kernel_makeTaskReady (taskIndex) ;\n"
   "      taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "    }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
@@ -2454,7 +2453,7 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "      removeTaskFromGuards (taskControlBlockPtr) ;\n"
   "      if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
   "        taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
-  "        kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
+  "      //  kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
   "        kernel_makeTaskReady (taskIndex) ;\n"
   "      }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "        taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
@@ -2471,7 +2470,7 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   "c-real-time-kernel-code.c",
   "c",
   true, // Text file
-  18949, // Text length
+  18890, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
