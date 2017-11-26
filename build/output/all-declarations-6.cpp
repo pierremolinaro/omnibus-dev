@@ -5746,10 +5746,10 @@ GALGAS_globalVariableMapIR_2D_element GALGAS_globalVariableMapIR_2D_element::ext
 
 GALGAS_moduleDeclarationAST::GALGAS_moduleDeclarationAST (void) :
 mProperty_mModuleName (),
-mProperty_mPropertyListAST (),
-mProperty_mFunctionDeclarationListAST (),
-mProperty_mSystemRoutineListAST (),
-mProperty_mGuardListAST (),
+mProperty_mModulePropertyListAST (),
+mProperty_mModuleFunctionDeclarationListAST (),
+mProperty_mModuleSystemRoutineListAST (),
+mProperty_mModuleGuardListAST (),
 mProperty_mModuleInitListAST () {
 }
 
@@ -5767,10 +5767,10 @@ GALGAS_moduleDeclarationAST::GALGAS_moduleDeclarationAST (const GALGAS_lstring &
                                                           const GALGAS_guardDeclarationListAST & inOperand4,
                                                           const GALGAS_initListAST & inOperand5) :
 mProperty_mModuleName (inOperand0),
-mProperty_mPropertyListAST (inOperand1),
-mProperty_mFunctionDeclarationListAST (inOperand2),
-mProperty_mSystemRoutineListAST (inOperand3),
-mProperty_mGuardListAST (inOperand4),
+mProperty_mModulePropertyListAST (inOperand1),
+mProperty_mModuleFunctionDeclarationListAST (inOperand2),
+mProperty_mModuleSystemRoutineListAST (inOperand3),
+mProperty_mModuleGuardListAST (inOperand4),
 mProperty_mModuleInitListAST (inOperand5) {
 }
 
@@ -5809,16 +5809,16 @@ typeComparisonResult GALGAS_moduleDeclarationAST::objectCompare (const GALGAS_mo
     result = mProperty_mModuleName.objectCompare (inOperand.mProperty_mModuleName) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mPropertyListAST.objectCompare (inOperand.mProperty_mPropertyListAST) ;
+    result = mProperty_mModulePropertyListAST.objectCompare (inOperand.mProperty_mModulePropertyListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mFunctionDeclarationListAST.objectCompare (inOperand.mProperty_mFunctionDeclarationListAST) ;
+    result = mProperty_mModuleFunctionDeclarationListAST.objectCompare (inOperand.mProperty_mModuleFunctionDeclarationListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mSystemRoutineListAST.objectCompare (inOperand.mProperty_mSystemRoutineListAST) ;
+    result = mProperty_mModuleSystemRoutineListAST.objectCompare (inOperand.mProperty_mModuleSystemRoutineListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mGuardListAST.objectCompare (inOperand.mProperty_mGuardListAST) ;
+    result = mProperty_mModuleGuardListAST.objectCompare (inOperand.mProperty_mModuleGuardListAST) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mModuleInitListAST.objectCompare (inOperand.mProperty_mModuleInitListAST) ;
@@ -5829,17 +5829,17 @@ typeComparisonResult GALGAS_moduleDeclarationAST::objectCompare (const GALGAS_mo
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_moduleDeclarationAST::isValid (void) const {
-  return mProperty_mModuleName.isValid () && mProperty_mPropertyListAST.isValid () && mProperty_mFunctionDeclarationListAST.isValid () && mProperty_mSystemRoutineListAST.isValid () && mProperty_mGuardListAST.isValid () && mProperty_mModuleInitListAST.isValid () ;
+  return mProperty_mModuleName.isValid () && mProperty_mModulePropertyListAST.isValid () && mProperty_mModuleFunctionDeclarationListAST.isValid () && mProperty_mModuleSystemRoutineListAST.isValid () && mProperty_mModuleGuardListAST.isValid () && mProperty_mModuleInitListAST.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleDeclarationAST::drop (void) {
   mProperty_mModuleName.drop () ;
-  mProperty_mPropertyListAST.drop () ;
-  mProperty_mFunctionDeclarationListAST.drop () ;
-  mProperty_mSystemRoutineListAST.drop () ;
-  mProperty_mGuardListAST.drop () ;
+  mProperty_mModulePropertyListAST.drop () ;
+  mProperty_mModuleFunctionDeclarationListAST.drop () ;
+  mProperty_mModuleSystemRoutineListAST.drop () ;
+  mProperty_mModuleGuardListAST.drop () ;
   mProperty_mModuleInitListAST.drop () ;
 }
 
@@ -5853,13 +5853,13 @@ void GALGAS_moduleDeclarationAST::description (C_String & ioString,
   }else{
     mProperty_mModuleName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mPropertyListAST.description (ioString, inIndentation+1) ;
+    mProperty_mModulePropertyListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
+    mProperty_mModuleFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mSystemRoutineListAST.description (ioString, inIndentation+1) ;
+    mProperty_mModuleSystemRoutineListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mGuardListAST.description (ioString, inIndentation+1) ;
+    mProperty_mModuleGuardListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mModuleInitListAST.description (ioString, inIndentation+1) ;
   }
@@ -5874,26 +5874,26 @@ GALGAS_lstring GALGAS_moduleDeclarationAST::getter_mModuleName (UNUSED_LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_modulePropertyListAST GALGAS_moduleDeclarationAST::getter_mPropertyListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mPropertyListAST ;
+GALGAS_modulePropertyListAST GALGAS_moduleDeclarationAST::getter_mModulePropertyListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mModulePropertyListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_functionDeclarationListAST GALGAS_moduleDeclarationAST::getter_mFunctionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mFunctionDeclarationListAST ;
+GALGAS_functionDeclarationListAST GALGAS_moduleDeclarationAST::getter_mModuleFunctionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mModuleFunctionDeclarationListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_systemRoutineDeclarationListAST GALGAS_moduleDeclarationAST::getter_mSystemRoutineListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSystemRoutineListAST ;
+GALGAS_systemRoutineDeclarationListAST GALGAS_moduleDeclarationAST::getter_mModuleSystemRoutineListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mModuleSystemRoutineListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_guardDeclarationListAST GALGAS_moduleDeclarationAST::getter_mGuardListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mGuardListAST ;
+GALGAS_guardDeclarationListAST GALGAS_moduleDeclarationAST::getter_mModuleGuardListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mModuleGuardListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

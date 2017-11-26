@@ -13118,13 +13118,13 @@ class GALGAS_moduleDeclarationAST : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_mModuleName ;
 
-  public : GALGAS_modulePropertyListAST mProperty_mPropertyListAST ;
+  public : GALGAS_modulePropertyListAST mProperty_mModulePropertyListAST ;
 
-  public : GALGAS_functionDeclarationListAST mProperty_mFunctionDeclarationListAST ;
+  public : GALGAS_functionDeclarationListAST mProperty_mModuleFunctionDeclarationListAST ;
 
-  public : GALGAS_systemRoutineDeclarationListAST mProperty_mSystemRoutineListAST ;
+  public : GALGAS_systemRoutineDeclarationListAST mProperty_mModuleSystemRoutineListAST ;
 
-  public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
+  public : GALGAS_guardDeclarationListAST mProperty_mModuleGuardListAST ;
 
   public : GALGAS_initListAST mProperty_mModuleInitListAST ;
 
@@ -13143,10 +13143,10 @@ class GALGAS_moduleDeclarationAST : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_moduleDeclarationAST (const GALGAS_lstring & in_mModuleName,
-                                        const GALGAS_modulePropertyListAST & in_mPropertyListAST,
-                                        const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
-                                        const GALGAS_systemRoutineDeclarationListAST & in_mSystemRoutineListAST,
-                                        const GALGAS_guardDeclarationListAST & in_mGuardListAST,
+                                        const GALGAS_modulePropertyListAST & in_mModulePropertyListAST,
+                                        const GALGAS_functionDeclarationListAST & in_mModuleFunctionDeclarationListAST,
+                                        const GALGAS_systemRoutineDeclarationListAST & in_mModuleSystemRoutineListAST,
+                                        const GALGAS_guardDeclarationListAST & in_mModuleGuardListAST,
                                         const GALGAS_initListAST & in_mModuleInitListAST) ;
 
 //-- Start of generic part --*
@@ -13180,17 +13180,17 @@ class GALGAS_moduleDeclarationAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mModuleFunctionDeclarationListAST (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_guardDeclarationListAST getter_mModuleGuardListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_initListAST getter_mModuleInitListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_modulePropertyListAST getter_mPropertyListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_modulePropertyListAST getter_mModulePropertyListAST (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mModuleSystemRoutineListAST (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
