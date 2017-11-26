@@ -334,7 +334,7 @@ struct $exemple {
 
 \sectionLabel{Services}{servicesStructure}
 
-Une structure peut définir des \emph{services}. Un service s'exécute en mode \plm=service=\index{service}, c'est-à-dire interruptions matérielles masquées ; seules les fonctions de l'exécutif pouvant libérer des tâches sont accessibles dans ce mode, qui est celui des routines d'interruption. Un exemple de service est la primitive \plm=V= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
+Une structure peut définir des \emph{services}. Un service s'exécute en mode \plm=service=\index{service}, c'est-à-dire interruptions matérielles masquées ; seules les fonctions de l'exécutif pouvant libérer des tâches sont accessibles dans ce mode, qui est celui des routines d'interruption. Un exemple de service est la primitive \plm=V= du sémaphore de Dijkstra (\refSectionPage{semaphoreDijskstra}).
 
 Par défaut, un service défini dans une structure a accès aux propriétés en lecture et en écriture (l'attribut \plm=@mutating= est inutile).
 
@@ -350,7 +350,7 @@ Par défaut, un service défini dans une structure est privé. Pour le rendre pu
 
 \sectionLabel{Primitives}{primitivesStructure}
 
-Une structure peut définir des \emph{primitives}. Une primitive s'exécute en mode \plm=primitive=\index{primitive}, c'est-à-dire interruptions matérielles masquées ; les fonctions de l'exécutif pouvant bloquer ou libérer des tâches sont accessibles dans ce mode. Un exemple de service est la primitive \plm=P= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
+Une structure peut définir des \emph{primitives}. Une primitive s'exécute en mode \plm=primitive=\index{primitive}, c'est-à-dire interruptions matérielles masquées ; les fonctions de l'exécutif pouvant bloquer ou libérer des tâches sont accessibles dans ce mode. Un exemple de service est la primitive \plm=P= du sémaphore de Dijkstra (\refSectionPage{semaphoreDijskstra}).
 
 Par défaut, une primitive définie dans une structure a accès aux propriétés en lecture et en écriture (l'attribut \plm=@mutating= est inutile).
 
@@ -366,7 +366,7 @@ Par défaut, une primitive définie dans une structure est privée. Pour la rend
 
 \sectionLabel{Gardes}{gardesStructure}
 
-Une structure peut définir des \emph{gardes}. Une garde permet d'exprimer une attente élémentaire dans une instruction \plm=sync= (\refSectionPage{instructionSync}). Un exemple est la garde \plm=P= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
+Une structure peut définir des \emph{gardes}. Une garde permet d'exprimer une attente élémentaire dans une instruction \plm=sync= (\refSectionPage{instructionSync}). Un exemple est la garde \plm=P= du sémaphore de Dijkstra (\refSectionPage{semaphoreDijskstra}).
 
 Par défaut, une garde définie dans une structure a accès aux propriétés en lecture et en écriture (l'attribut \plm=@mutating= est inutile).
 

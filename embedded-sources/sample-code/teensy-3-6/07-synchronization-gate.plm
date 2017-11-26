@@ -19,58 +19,106 @@ func safe activityLedOff @exported () {
 
 let LED_L0 = $digitalPort.D3
 let LED_L1 = $digitalPort.D4
+let LED_L2 = $digitalPort.D5
 
 init 1000 {
   pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
   pinMode (!port:LED_L0 !mode:.OUTPUT)
   pinMode (!port:LED_L1 !mode:.OUTPUT)
+  pinMode (!port:LED_L2 !mode:.OUTPUT)
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct $timer {
-  var deadline $uint32 = 0
-  let period $uint32
+struct $synchronizationGate {
+  var isOpen $bool
+  var taskList = $taskList ()
   var guardList = $guardList ()
 
   //············································································
   
-  public system primitive wait @noUnusedWarning @mutating () {
-    if self.deadline ≤ time.now () {
-      block (!onDeadline:self.deadline)
+  public system service close @noUnusedWarning @mutating () {
+    self.isOpen = no
+  }
+
+  //············································································
+  
+  public system service open @noUnusedWarning @mutating () {
+    if not self.isOpen {
+      var continue = yes
+      while continue {
+        makeTaskReady (!?fromList:self.taskList ?found:continue)
+      }
+      notifyChange (!?forGuard:self.guardList)
+      self.isOpen = yes
     }
-    self.deadline += self.period
+  }
+
+  //············································································
+  
+  public system primitive wait @noUnusedWarning @mutating () {
+    if not self.isOpen {
+      block (!?inList:self.taskList)
+    }
+  }
+
+  //············································································
+  
+  public system primitive wait @noUnusedWarning @mutating (?untilDeadline:deadline $uint32
+                                                           !result: result $bool) {
+    result = self.isOpen
+    if result {
+    }else if deadline > time.now () {
+      block (!?inList:self.taskList !onDeadline:deadline !?result:result)
+    }
   }
 
   //············································································
 
   public guard wait @noUnusedWarning () {
-    accept = self.deadline ≤ time.now ()
-    if accept {
-      self.deadline += self.period
-    }else{
+    accept = self.isOpen
+    if not accept {
       handle (!?guard:self.guardList)
     }
-  }
-  
-  public func deadline @noUnusedWarning () -> $uint32 {
-    result = self.deadline
   }
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche priority 1 stackSize 512 {
+var gate = $synchronizationGate (!isOpen:no)
+var s1 = $semaphore (!value:0)
+var s2 = $semaphore (!value:0)
+
+task Tâche1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
-  var deadline = $timer (!period:500)
    
   on time.wait (!untilDeadline:self.compteur) {
     toggle (!port:LED_L0)
     self.compteur +%= 500
+    gate.open ()
+    s1.wait ()
+    s1.wait ()
+    gate.close ()
+    s2.signal ()
+    s2.signal ()
   }
+}
 
-  on self.deadline.wait () {
+task Tâche2 priority 2 stackSize 512 {
+   
+  on gate.wait () {
     toggle (!port:LED_L1)
+    s1.signal ()
+    s2.wait ()
+  }
+}
+
+task Tâche3 priority 3 stackSize 512 {
+   
+  on gate.wait () {
+    toggle (!port:LED_L2)
+    s1.signal ()
+    s2.wait ()
   }
 }
 

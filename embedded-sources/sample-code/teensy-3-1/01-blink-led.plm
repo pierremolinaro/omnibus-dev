@@ -23,24 +23,21 @@ init 1000 {
   pinMode (!port:LED_L0 !mode:.OUTPUT)
 }
 
-//func activityLedOn (?!toto: x $uint32) {
-//  x *= 2
-//}
 //——————————————————————————————————————————————————————————————————————————————
 
 task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
+  var continue = yes
   
-  on time.wait (!untilDeadline:self.compteur) {
+  on (self.continue) time.wait (!untilDeadline:self.compteur) {
     digitalWrite (!port:LED_L0 !yes)
-//    var x $uint32 = 250
-//    activityLedOn (!?toto: x)
     self.compteur +%= 500
     time.wait (!untilDeadline: self.compteur)
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
     lcd.print (!unsigned:time.now ())
+    self.continue = time.now () < 10_000
   }
 }
 
