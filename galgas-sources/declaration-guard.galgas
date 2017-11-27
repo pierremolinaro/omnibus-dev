@@ -380,20 +380,20 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       }
     #---
     #  let isPublic = routineDescriptor.mIsPublic
-      let routineKind = routineDescriptor.routineKind
-      let calleeMode = [routineKind executionMode]
+#      let routineKind = routineDescriptor.routineKind
+#      let calleeMode = [routineKind executionMode]
       let formalSignature = routineDescriptor.signature
     #--- Check routine is actually a procedure (does not return any value)
       if routineDescriptor.returnTypeProxy != .null then
         error methodName : "not a procedure (returns a value)" : outConvenienceGuardGenerationIR
       else
       #--- Check modes
-        let calleeKind = checkMode (
-          !callerMode:inCurrentMode
-          !calleeMode:calleeMode
-          !kind:routineKind
-          !error:methodName.location
-        )
+#        let calleeKind = checkMode (
+#          !callerMode:inCurrentMode
+#          !calleeMode:calleeMode
+#          !kind:routineKind
+#          !error:methodName.location
+#        )
       #--- Analyze effective parameters
         analyzeEffectiveParameters (
           !self:inSelfType
@@ -413,14 +413,14 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       #--- Get function name and map containing the function definition
         let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.plmTypeName) !methodName !mArguments)
       #--- Code generation
-        baseGuardInstructionGenerationList += !@staticRoutineCallIR.new {
-          !mIdentifier
-          !.null # No result
-          !routineMangledName
-          !routineMangledName # LLVMInvocationRoutineName
-          !calleeKind
-          !effectiveParameterListIR
-        }
+#        baseGuardInstructionGenerationList += !@staticRoutineCallIR.new {
+#          !mIdentifier
+#          !.null # No result
+#          !routineMangledName
+#          !routineMangledName # LLVMInvocationRoutineName
+#          !calleeKind
+#          !effectiveParameterListIR
+#        }
       #--- Enter in invocation graph
         [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
       #--- Generate guards
@@ -589,7 +589,7 @@ method @guardMapIR-element llvmCodeGeneration
     for (variable  llvmTypeName) in baseGuardAllocaList do
       ioLLVMcode += "  " + variable + " = alloca " + llvmTypeName + "\n"
     end
-    [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+   [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  %baseGuard.result = call i1 @" + llvmNameForGuardCall (!baseGuardMangledName)
     ioLLVMcode += " ("
     for () in baseGuardEffectiveParameterList do
