@@ -36,7 +36,7 @@ struct $synchronizationBuffer {
   var data = $uint32 [SIZE] (!repeated:0)
   var readIndex $uint32 = 0
   var writeIndex $uint32 = 0
-  var readSemaphore = $semaphore (!value:0)
+  var readSemaphore = $semaphore (!value: $uint32 ())
   var writeSemaphore = $semaphore (!value:SIZE)
 
   //············································································

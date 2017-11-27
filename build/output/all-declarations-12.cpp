@@ -3147,7 +3147,7 @@ const char * gWrapperFileContent_23_embeddedSampleCode = "target \"teensy-3-6/pr
   "  var data = $uint32 [SIZE] (!repeated:0)\n"
   "  var readIndex $uint32 = 0\n"
   "  var writeIndex $uint32 = 0\n"
-  "  var readSemaphore = $semaphore (!value:0)\n"
+  "  var readSemaphore = $semaphore (!value: $uint32 ())\n"
   "  var writeSemaphore = $semaphore (!value:SIZE)\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
@@ -3219,7 +3219,7 @@ const cRegularFileWrapper gWrapperFile_23_embeddedSampleCode (
   "08-synchronization-buffer.plm",
   "plm",
   true, // Text file
-  3215, // Text length
+  3225, // Text length
   gWrapperFileContent_23_embeddedSampleCode
 ) ;
 
