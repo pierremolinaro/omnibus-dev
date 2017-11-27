@@ -10,362 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureDeclarationListAST_2D_element (void) :
-mProperty_mName (),
-mProperty_mExecutionMode (),
-mProperty_mIsExported (),
-mProperty_mFormalArgumentList (),
-mProperty_mEndOfProcLocation () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_requiredProcedureDeclarationListAST_2D_element::~ GALGAS_requiredProcedureDeclarationListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                                              const GALGAS_mode & inOperand1,
-                                                                                                              const GALGAS_bool & inOperand2,
-                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand3,
-                                                                                                              const GALGAS_location & inOperand4) :
-mProperty_mName (inOperand0),
-mProperty_mExecutionMode (inOperand1),
-mProperty_mIsExported (inOperand2),
-mProperty_mFormalArgumentList (inOperand3),
-mProperty_mEndOfProcLocation (inOperand4) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                                              const GALGAS_mode & inOperand1,
-                                                                                                                              const GALGAS_bool & inOperand2,
-                                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand3,
-                                                                                                                              const GALGAS_location & inOperand4 
-                                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_requiredProcedureDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_requiredProcedureDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_requiredProcedureDeclarationListAST_2D_element::objectCompare (const GALGAS_requiredProcedureDeclarationListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mName.objectCompare (inOperand.mProperty_mName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mExecutionMode.objectCompare (inOperand.mProperty_mExecutionMode) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mIsExported.objectCompare (inOperand.mProperty_mIsExported) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mFormalArgumentList.objectCompare (inOperand.mProperty_mFormalArgumentList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mEndOfProcLocation.objectCompare (inOperand.mProperty_mEndOfProcLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_requiredProcedureDeclarationListAST_2D_element::isValid (void) const {
-  return mProperty_mName.isValid () && mProperty_mExecutionMode.isValid () && mProperty_mIsExported.isValid () && mProperty_mFormalArgumentList.isValid () && mProperty_mEndOfProcLocation.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_requiredProcedureDeclarationListAST_2D_element::drop (void) {
-  mProperty_mName.drop () ;
-  mProperty_mExecutionMode.drop () ;
-  mProperty_mIsExported.drop () ;
-  mProperty_mFormalArgumentList.drop () ;
-  mProperty_mEndOfProcLocation.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_requiredProcedureDeclarationListAST_2D_element::description (C_String & ioString,
-                                                                         const int32_t inIndentation) const {
-  ioString << "<struct @requiredProcedureDeclarationListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mExecutionMode.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mIsExported.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mFormalArgumentList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mEndOfProcLocation.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_mode GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mExecutionMode (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mExecutionMode ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mIsExported (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIsExported ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineFormalArgumentListAST GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mFormalArgumentList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mEndOfProcLocation (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEndOfProcLocation ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  @requiredProcedureDeclarationListAST-element type                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_requiredProcedureDeclarationListAST_2D_element ("requiredProcedureDeclarationListAST-element",
-                                                                       NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_requiredProcedureDeclarationListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_requiredProcedureDeclarationListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_requiredProcedureDeclarationListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_requiredProcedureDeclarationListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDeclarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                                            C_Compiler * inCompiler
-                                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_requiredProcedureDeclarationListAST_2D_element result ;
-  const GALGAS_requiredProcedureDeclarationListAST_2D_element * p = (const GALGAS_requiredProcedureDeclarationListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_requiredProcedureDeclarationListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("requiredProcedureDeclarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_isrDeclarationListAST_2D_element::GALGAS_isrDeclarationListAST_2D_element (void) :
-mProperty_mISRName (),
-mProperty_mMode (),
-mProperty_mModuleName (),
-mProperty_mISRInstructionList (),
-mProperty_mEndOfISRDeclaration () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_isrDeclarationListAST_2D_element::~ GALGAS_isrDeclarationListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_isrDeclarationListAST_2D_element::GALGAS_isrDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                  const GALGAS_mode & inOperand1,
-                                                                                  const GALGAS_lstring & inOperand2,
-                                                                                  const GALGAS_instructionListAST & inOperand3,
-                                                                                  const GALGAS_location & inOperand4) :
-mProperty_mISRName (inOperand0),
-mProperty_mMode (inOperand1),
-mProperty_mModuleName (inOperand2),
-mProperty_mISRInstructionList (inOperand3),
-mProperty_mEndOfISRDeclaration (inOperand4) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_isrDeclarationListAST_2D_element GALGAS_isrDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                  const GALGAS_mode & inOperand1,
-                                                                                                  const GALGAS_lstring & inOperand2,
-                                                                                                  const GALGAS_instructionListAST & inOperand3,
-                                                                                                  const GALGAS_location & inOperand4 
-                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_isrDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_isrDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_isrDeclarationListAST_2D_element::objectCompare (const GALGAS_isrDeclarationListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mISRName.objectCompare (inOperand.mProperty_mISRName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mModuleName.objectCompare (inOperand.mProperty_mModuleName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mISRInstructionList.objectCompare (inOperand.mProperty_mISRInstructionList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mEndOfISRDeclaration.objectCompare (inOperand.mProperty_mEndOfISRDeclaration) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_isrDeclarationListAST_2D_element::isValid (void) const {
-  return mProperty_mISRName.isValid () && mProperty_mMode.isValid () && mProperty_mModuleName.isValid () && mProperty_mISRInstructionList.isValid () && mProperty_mEndOfISRDeclaration.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_isrDeclarationListAST_2D_element::drop (void) {
-  mProperty_mISRName.drop () ;
-  mProperty_mMode.drop () ;
-  mProperty_mModuleName.drop () ;
-  mProperty_mISRInstructionList.drop () ;
-  mProperty_mEndOfISRDeclaration.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_isrDeclarationListAST_2D_element::description (C_String & ioString,
-                                                           const int32_t inIndentation) const {
-  ioString << "<struct @isrDeclarationListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mISRName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mMode.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mModuleName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mISRInstructionList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mEndOfISRDeclaration.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_isrDeclarationListAST_2D_element::getter_mISRName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mISRName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_mode GALGAS_isrDeclarationListAST_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mMode ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_isrDeclarationListAST_2D_element::getter_mModuleName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mModuleName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST GALGAS_isrDeclarationListAST_2D_element::getter_mISRInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mISRInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_isrDeclarationListAST_2D_element::getter_mEndOfISRDeclaration (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEndOfISRDeclaration ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         @isrDeclarationListAST-element type                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_isrDeclarationListAST_2D_element ("isrDeclarationListAST-element",
-                                                         NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_isrDeclarationListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_isrDeclarationListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_isrDeclarationListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_isrDeclarationListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_isrDeclarationListAST_2D_element GALGAS_isrDeclarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_isrDeclarationListAST_2D_element result ;
-  const GALGAS_isrDeclarationListAST_2D_element * p = (const GALGAS_isrDeclarationListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_isrDeclarationListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("isrDeclarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_guardDeclarationListAST_2D_element::GALGAS_guardDeclarationListAST_2D_element (void) :
 mProperty_mGuardName (),
 mProperty_mIsPublic (),
@@ -7582,106 +7226,17 @@ C_PrologueEpilogue gMethod_configurationDeclarationAST_enterInContext (defineExt
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding extension method '@typeOpaqueDefinitionDeclaration addExtension'                     *
+//                             Overriding extension getter '@newTypeDeclaration location'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void extensionMethod_typeOpaqueDefinitionDeclaration_addExtension (const cPtr_abstractDeclarationAST * inObject,
-                                                                          GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
-                                                                          GALGAS_extendStaticArrayDeclarationAST & /* ioArgument_ioExtendStaticArrayDeclarationAST */,
-                                                                          GALGAS_abstractDeclarationAST & outArgument_outNewDeclaration,
-                                                                          C_Compiler * /* inCompiler */
-                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
-  const GALGAS_typeOpaqueDefinitionDeclaration temp_0 = object ;
-  outArgument_outNewDeclaration = temp_0 ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_typeOpaqueDefinitionDeclaration_addExtension (void) {
-  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
-                                     extensionMethod_typeOpaqueDefinitionDeclaration_addExtension) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_typeOpaqueDefinitionDeclaration_addExtension (defineExtensionMethod_typeOpaqueDefinitionDeclaration_addExtension, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                Overriding extension method '@typeOpaqueDefinitionDeclaration enterInPrecedenceGraph'                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph (const cPtr_abstractDeclarationAST * inObject,
-                                                                                    GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
-  GALGAS_lstring var_internalTypeName_4251 = function_llvmTypeNameFromPLMname (object->mProperty_mAnonymousOpaqueTypeName, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 99)) ;
-  {
-  const GALGAS_typeOpaqueDefinitionDeclaration temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (var_internalTypeName_4251, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 101)) ;
-  }
-  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), var_internalTypeName_4251, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 103)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph (void) {
-  enterExtensionMethod_enterInPrecedenceGraph (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
-                                               extensionMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph (defineExtensionMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//          Overriding extension getter '@typeOpaqueDefinitionDeclaration keyRepresentationForErrorSignaling'          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_string extensionGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
-                                                                                                         C_Compiler * inCompiler
-                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outRepresentation ; // Returned variable
-  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
-  result_outRepresentation = GALGAS_string ("anonymous $").add_operation (object->mProperty_mAnonymousOpaqueTypeName.getter_string (SOURCE_FILE ("declaration-type.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 109)) ;
-//---
-  return result_outRepresentation ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling (void) {
-  enterExtensionGetter_keyRepresentationForErrorSignaling (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
-                                                           extensionGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling (defineExtensionGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                       Overriding extension getter '@typeOpaqueDefinitionDeclaration location'                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_location extensionGetter_typeOpaqueDefinitionDeclaration_location (const cPtr_abstractDeclarationAST * inObject,
-                                                                                 C_Compiler * /* inCompiler */
-                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+static GALGAS_location extensionGetter_newTypeDeclaration_location (const cPtr_abstractDeclarationAST * inObject,
+                                                                    C_Compiler * /* inCompiler */
+                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_location result_outLocation ; // Returned variable
-  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
-  result_outLocation = object->mProperty_mAnonymousOpaqueTypeName.getter_location (HERE) ;
+  const cPtr_newTypeDeclaration * object = (const cPtr_newTypeDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_newTypeDeclaration) ;
+  result_outLocation = object->mProperty_mNewTypeName.getter_location (HERE) ;
 //---
   return result_outLocation ;
 }
@@ -7689,107 +7244,306 @@ static GALGAS_location extensionGetter_typeOpaqueDefinitionDeclaration_location 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void defineExtensionGetter_typeOpaqueDefinitionDeclaration_location (void) {
-  enterExtensionGetter_location (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
-                                 extensionGetter_typeOpaqueDefinitionDeclaration_location) ;
+static void defineExtensionGetter_newTypeDeclaration_location (void) {
+  enterExtensionGetter_location (kTypeDescriptor_GALGAS_newTypeDeclaration.mSlotID,
+                                 extensionGetter_newTypeDeclaration_location) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gGetter_typeOpaqueDefinitionDeclaration_location (defineExtensionGetter_typeOpaqueDefinitionDeclaration_location, NULL) ;
+C_PrologueEpilogue gGetter_newTypeDeclaration_location (defineExtensionGetter_newTypeDeclaration_location, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding extension method '@typeOpaqueDefinitionDeclaration enterInContext'                    *
+//                           Overriding extension method '@newTypeDeclaration addExtension'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void extensionMethod_typeOpaqueDefinitionDeclaration_enterInContext (const cPtr_abstractDeclarationAST * inObject,
-                                                                            const GALGAS_functionDeclarationListAST /* constinArgument_inProcedureListAST */,
-                                                                            GALGAS_semanticContext & ioArgument_ioContext,
-                                                                            GALGAS_declarationDecorationList & /* ioArgument_ioDecoratedDeclarationList */,
-                                                                            GALGAS_subprogramInvocationGraph & /* ioArgument_ioSubprogramInvocationGraph */,
-                                                                            GALGAS_staticListInitializationMap & /* ioArgument_ioStaticListValueMap */,
-                                                                            GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
-  GALGAS_PLMTypeAttributes var_attributes_5931 = GALGAS_PLMTypeAttributes::constructor_none (SOURCE_FILE ("declaration-type.galgas", 130)) ;
-  cEnumerator_lstringlist enumerator_5975 (object->mProperty_mAttributeList, kENUMERATION_UP) ;
-  while (enumerator_5975.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_5975.current_mValue (HERE).getter_string (HERE).objectCompare (GALGAS_string ("instantiable"))).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = var_attributes_5931.getter_instanciable (SOURCE_FILE ("declaration-type.galgas", 133)).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        TC_Array <C_FixItDescription> fixItArray2 ;
-        inCompiler->emitSemanticError (enumerator_5975.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-type.galgas", 134)), GALGAS_string ("duplicated attribute"), fixItArray2  COMMA_SOURCE_FILE ("declaration-type.galgas", 134)) ;
-      }else if (kBoolFalse == test_1) {
-        var_attributes_5931 = var_attributes_5931.operator_or (GALGAS_PLMTypeAttributes::constructor_instanciable (SOURCE_FILE ("declaration-type.galgas", 136)) COMMA_SOURCE_FILE ("declaration-type.galgas", 136)) ;
-      }
-    }else if (kBoolFalse == test_0) {
-      const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_5975.current_mValue (HERE).getter_string (HERE).objectCompare (GALGAS_string ("copyable"))).boolEnum () ;
-      if (kBoolTrue == test_3) {
-        const enumGalgasBool test_4 = var_attributes_5931.getter_copyable (SOURCE_FILE ("declaration-type.galgas", 139)).boolEnum () ;
-        if (kBoolTrue == test_4) {
-          TC_Array <C_FixItDescription> fixItArray5 ;
-          inCompiler->emitSemanticError (enumerator_5975.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-type.galgas", 140)), GALGAS_string ("duplicated attribute"), fixItArray5  COMMA_SOURCE_FILE ("declaration-type.galgas", 140)) ;
-        }else if (kBoolFalse == test_4) {
-          var_attributes_5931 = var_attributes_5931.operator_or (GALGAS_PLMTypeAttributes::constructor_copyable (SOURCE_FILE ("declaration-type.galgas", 142)) COMMA_SOURCE_FILE ("declaration-type.galgas", 142)) ;
-        }
-      }else if (kBoolFalse == test_3) {
-        TC_Array <C_FixItDescription> fixItArray6 ;
-        inCompiler->emitSemanticError (enumerator_5975.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-type.galgas", 145)), GALGAS_string ("only @copyable and @instantiable attributes are allowed here"), fixItArray6  COMMA_SOURCE_FILE ("declaration-type.galgas", 145)) ;
-      }
-    }
-    enumerator_5975.gotoNextObject () ;
-  }
-  GALGAS_instructionListIR var_initInstructionGenerationList_6564 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-type.galgas", 149)) ;
-  GALGAS_allocaList var_allocaList_6594 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-type.galgas", 150)) ;
-  GALGAS_semanticTemporariesStruct var_temporaries_6640 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("declaration-type.galgas", 151)) ;
-  GALGAS_universalValuedObjectMapForContext var_universalMap_6757 ;
+static void extensionMethod_newTypeDeclaration_addExtension (const cPtr_abstractDeclarationAST * inObject,
+                                                             GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
+                                                             GALGAS_extendStaticArrayDeclarationAST & /* ioArgument_ioExtendStaticArrayDeclarationAST */,
+                                                             GALGAS_abstractDeclarationAST & outArgument_outNewDeclaration,
+                                                             C_Compiler * /* inCompiler */
+                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_newTypeDeclaration * object = (const cPtr_newTypeDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_newTypeDeclaration) ;
+  const GALGAS_newTypeDeclaration temp_0 = object ;
+  outArgument_outNewDeclaration = temp_0 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_newTypeDeclaration_addExtension (void) {
+  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_newTypeDeclaration.mSlotID,
+                                     extensionMethod_newTypeDeclaration_addExtension) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_newTypeDeclaration_addExtension (defineExtensionMethod_newTypeDeclaration_addExtension, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Overriding extension method '@newTypeDeclaration enterInPrecedenceGraph'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_newTypeDeclaration_enterInPrecedenceGraph (const cPtr_abstractDeclarationAST * inObject,
+                                                                       GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_newTypeDeclaration * object = (const cPtr_newTypeDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_newTypeDeclaration) ;
+  GALGAS_lstring var_newTypeName_3277 = function_llvmTypeNameFromPLMname (object->mProperty_mNewTypeName, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 74)) ;
+  GALGAS_lstring var_aliasedTypeName_3341 = function_llvmTypeNameFromPLMname (object->mProperty_mAliasedTypeName, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 75)) ;
   {
-  routine_variableMapWithConstants (ioArgument_ioContext, var_universalMap_6757, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 152)) ;
+  const GALGAS_newTypeDeclaration temp_0 = object ;
+  ioArgument_ioGraph.setter_addNode (var_newTypeName_3277, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 76)) ;
   }
-  GALGAS_staticStringMap joker_7089 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("declaration-type.galgas", 164)) ;
-  GALGAS_objectIR var_sizeExpressionIR_7242 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), function_voidType (inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 157)), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mProperty_mAnonymousOpaqueTypeName.getter_string (HERE).add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 159)), object->mProperty_mAnonymousOpaqueTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-type.galgas", 159)), function_voidType (inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 160)), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-type.galgas", 162)), var_temporaries_6640, joker_7089, var_universalMap_6757, var_allocaList_6594, var_initInstructionGenerationList_6564, var_sizeExpressionIR_7242, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 156)) ;
-  GALGAS_bool test_7 = GALGAS_bool (kIsStrictSup, var_allocaList_6594.getter_length (SOURCE_FILE ("declaration-type.galgas", 170)).add_operation (var_initInstructionGenerationList_6564.getter_length (SOURCE_FILE ("declaration-type.galgas", 170)), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 170)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
-  if (kBoolTrue != test_7.boolEnum ()) {
-    test_7 = var_sizeExpressionIR_7242.getter_isLiteralInteger (SOURCE_FILE ("declaration-type.galgas", 170)).operator_not (SOURCE_FILE ("declaration-type.galgas", 170)) ;
+  {
+  ioArgument_ioGraph.setter_addEdge (var_newTypeName_3277, var_aliasedTypeName_3341 COMMA_SOURCE_FILE ("declaration-type.galgas", 77)) ;
   }
-  const enumGalgasBool test_8 = test_7.boolEnum () ;
-  if (kBoolTrue == test_8) {
-    TC_Array <C_FixItDescription> fixItArray9 ;
-    inCompiler->emitSemanticError (object->mProperty_mSizeExpressionLocation, GALGAS_string ("array size expression is not static"), fixItArray9  COMMA_SOURCE_FILE ("declaration-type.galgas", 171)) ;
-  }else if (kBoolFalse == test_8) {
-    GALGAS_constructorMap var_constructorMap_7484 = GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("declaration-type.galgas", 173)) ;
-    const enumGalgasBool test_10 = var_attributes_5931.getter_instanciable (SOURCE_FILE ("declaration-type.galgas", 174)).boolEnum () ;
-    if (kBoolTrue == test_10) {
-      {
-      var_constructorMap_7484.setter_insertKey (GALGAS_string ("()").getter_nowhere (SOURCE_FILE ("declaration-type.galgas", 175)), GALGAS_constructorSignature::constructor_emptyList (SOURCE_FILE ("declaration-type.galgas", 175)), GALGAS_constructorValue::constructor_simple (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 175))  COMMA_SOURCE_FILE ("declaration-type.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 175)) ;
-      }
-    }
-    GALGAS_bigint var_bitSize_7671 ;
-    GALGAS_PLMType joker_7650_1 ; // Joker input parameter
-    var_sizeExpressionIR_7242.method_literalInteger (joker_7650_1, var_bitSize_7671, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 177)) ;
-    GALGAS_PLMType var_opaqueType_7691 = GALGAS_PLMType::constructor_new (GALGAS_propertyMap::constructor_emptyMap (SOURCE_FILE ("declaration-type.galgas", 179)), GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("declaration-type.galgas", 180)), var_constructorMap_7484, var_attributes_5931, object->mProperty_mAnonymousOpaqueTypeName.getter_string (SOURCE_FILE ("declaration-type.galgas", 183)), GALGAS_typeKind::constructor_opaque (var_bitSize_7671  COMMA_SOURCE_FILE ("declaration-type.galgas", 184))  COMMA_SOURCE_FILE ("declaration-type.galgas", 178)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_newTypeDeclaration_enterInPrecedenceGraph (void) {
+  enterExtensionMethod_enterInPrecedenceGraph (kTypeDescriptor_GALGAS_newTypeDeclaration.mSlotID,
+                                               extensionMethod_newTypeDeclaration_enterInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_newTypeDeclaration_enterInPrecedenceGraph (defineExtensionMethod_newTypeDeclaration_enterInPrecedenceGraph, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                Overriding extension getter '@newTypeDeclaration keyRepresentationForErrorSignaling'                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string extensionGetter_newTypeDeclaration_keyRepresentationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
+                                                                                            C_Compiler * inCompiler
+                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outRepresentation ; // Returned variable
+  const cPtr_newTypeDeclaration * object = (const cPtr_newTypeDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_newTypeDeclaration) ;
+  result_outRepresentation = GALGAS_string ("newtype $").add_operation (object->mProperty_mNewTypeName.getter_string (SOURCE_FILE ("declaration-type.galgas", 83)), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 83)) ;
+//---
+  return result_outRepresentation ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionGetter_newTypeDeclaration_keyRepresentationForErrorSignaling (void) {
+  enterExtensionGetter_keyRepresentationForErrorSignaling (kTypeDescriptor_GALGAS_newTypeDeclaration.mSlotID,
+                                                           extensionGetter_newTypeDeclaration_keyRepresentationForErrorSignaling) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gGetter_newTypeDeclaration_keyRepresentationForErrorSignaling (defineExtensionGetter_newTypeDeclaration_keyRepresentationForErrorSignaling, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Overriding extension method '@newTypeDeclaration enterInContext'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_newTypeDeclaration_enterInContext (const cPtr_abstractDeclarationAST * inObject,
+                                                               const GALGAS_functionDeclarationListAST /* constinArgument_inProcedureListAST */,
+                                                               GALGAS_semanticContext & ioArgument_ioContext,
+                                                               GALGAS_declarationDecorationList & /* ioArgument_ioDecoratedDeclarationList */,
+                                                               GALGAS_subprogramInvocationGraph & /* ioArgument_ioSubprogramInvocationGraph */,
+                                                               GALGAS_staticListInitializationMap & /* ioArgument_ioStaticListValueMap */,
+                                                               GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_newTypeDeclaration * object = (const cPtr_newTypeDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_newTypeDeclaration) ;
+  GALGAS_PLMType var_type_4673 ;
+  GALGAS_uint joker_4675_1 ; // Joker input parameter
+  ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (object->mProperty_mAliasedTypeName, var_type_4673, joker_4675_1, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 99)) ;
+  var_type_4673.mProperty_plmTypeName = object->mProperty_mNewTypeName.getter_string (HERE) ;
+  {
+  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mNewTypeName, var_type_4673, ioArgument_ioContext.getter_mTypeMap (HERE).getter_count (SOURCE_FILE ("declaration-type.galgas", 103)), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 103)) ;
+  }
+  GALGAS_lstring var_newNewInfixKey_4914 = function_combineTypeNamesForInfixOperator (object->mProperty_mNewTypeName.getter_string (HERE), object->mProperty_mNewTypeName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 106)) ;
+  GALGAS_lstring var_aliasAliasInfixKey_5018 = function_combineTypeNamesForInfixOperator (object->mProperty_mAliasedTypeName.getter_string (HERE), object->mProperty_mAliasedTypeName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 107)) ;
+  GALGAS_lstring var_newLiteralIntegerInfixKey_5137 = function_combineTypeNamesForInfixOperator (object->mProperty_mNewTypeName.getter_string (HERE), function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 108)), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 108)) ;
+  GALGAS_lstring var_aliasLiteralIntegerInfixKey_5255 = function_combineTypeNamesForInfixOperator (object->mProperty_mAliasedTypeName.getter_string (HERE), function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 109)) ;
+  GALGAS_lstring var_literalIntegerNewInfixKey_5375 = function_combineTypeNamesForInfixOperator (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 110)), object->mProperty_mNewTypeName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 110)) ;
+  GALGAS_lstring var_literalIntegerAliasInfixKey_5492 = function_combineTypeNamesForInfixOperator (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 111)), object->mProperty_mAliasedTypeName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 111)) ;
+  GALGAS_PLMType var_newType_5593 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mNewTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 112)).getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 112)) ;
+  GALGAS_PLMType var_oldType_5684 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mAliasedTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 113)).getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 113)) ;
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mEqualOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 114)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mNonEqualOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 125)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mStrictInfOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 136)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mInfEqualOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 147)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mStrictSupOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 158)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mSupEqualOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 169)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mAndOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 180)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mOrOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 191)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mXorOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 202)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mBooleanXorOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 213)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mAddOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 224)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mAddNoOvfOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 235)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mSubOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 246)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mSubNoOvfOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 257)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mMulOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 268)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mMulNoOvfOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 279)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mDivOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 290)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mDivNoOvfOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 301)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mModOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 312)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mModNoOvfOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 323)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mLeftShiftOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 334)) ;
+  }
+  {
+  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mRightShiftOperatorMap, var_newNewInfixKey_4914, var_aliasAliasInfixKey_5018, var_newLiteralIntegerInfixKey_5137, var_aliasLiteralIntegerInfixKey_5255, var_literalIntegerNewInfixKey_5375, var_literalIntegerAliasInfixKey_5492, var_newType_5593, var_oldType_5684, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 345)) ;
+  }
+  {
+  routine_enterAliasPrefixOperator (ioArgument_ioContext.mProperty_mUnaryMinusOperatorMap, object->mProperty_mNewTypeName, object->mProperty_mAliasedTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 356)) ;
+  }
+  {
+  routine_enterAliasPrefixOperator (ioArgument_ioContext.mProperty_mNotOperatorMap, object->mProperty_mNewTypeName, object->mProperty_mAliasedTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 357)) ;
+  }
+  {
+  routine_enterAliasPrefixOperator (ioArgument_ioContext.mProperty_mUnsignedComplementOperatorMap, object->mProperty_mNewTypeName, object->mProperty_mAliasedTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-type.galgas", 358)) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_newTypeDeclaration_enterInContext (void) {
+  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_newTypeDeclaration.mSlotID,
+                                       extensionMethod_newTypeDeclaration_enterInContext) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_newTypeDeclaration_enterInContext (defineExtensionMethod_newTypeDeclaration_enterInContext, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Routine 'enterAliasPrefixOperator'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterAliasPrefixOperator (GALGAS_prefixOperatorMap & ioArgument_ioInfixOperatorMap,
+                                       const GALGAS_lstring constinArgument_inNewTypeName,
+                                       const GALGAS_lstring constinArgument_inAliasedTypeName,
+                                       C_Compiler * inCompiler
+                                       COMMA_UNUSED_LOCATION_ARGS) {
+  const enumGalgasBool test_0 = ioArgument_ioInfixOperatorMap.getter_hasKey (constinArgument_inAliasedTypeName.getter_string (HERE) COMMA_SOURCE_FILE ("declaration-type.galgas", 368)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inAliasedTypeName, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 369)) ;
     {
-    ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mAnonymousOpaqueTypeName, var_opaqueType_7691, ioArgument_ioContext.getter_mTypeMap (HERE).getter_count (SOURCE_FILE ("declaration-type.galgas", 189)), inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 186)) ;
+    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inNewTypeName, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 373)) ;
     }
   }
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'enterAliasInfixOperator'                                          *
+//                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void defineExtensionMethod_typeOpaqueDefinitionDeclaration_enterInContext (void) {
-  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
-                                       extensionMethod_typeOpaqueDefinitionDeclaration_enterInContext) ;
+void routine_enterAliasInfixOperator (GALGAS_infixOperatorMap & ioArgument_ioInfixOperatorMap,
+                                      const GALGAS_lstring constinArgument_inNewNewInfixKey,
+                                      const GALGAS_lstring constinArgument_inAliasedAliasedInfixKey,
+                                      const GALGAS_lstring constinArgument_inNewLiteralIntegerInfixKey,
+                                      const GALGAS_lstring constinArgument_inAliasedLiteralIntegerInfixKey,
+                                      const GALGAS_lstring constinArgument_inLiteralIntegerNewInfixKey,
+                                      const GALGAS_lstring constinArgument_inLiteralIntegerAliasInfixKey,
+                                      const GALGAS_PLMType constinArgument_inNewType,
+                                      const GALGAS_PLMType constinArgument_inOldType,
+                                      C_Compiler * inCompiler
+                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const enumGalgasBool test_0 = ioArgument_ioInfixOperatorMap.getter_hasKey (constinArgument_inAliasedAliasedInfixKey.getter_string (HERE) COMMA_SOURCE_FILE ("declaration-type.galgas", 393)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_PLMType var_resultType_13097 ;
+    GALGAS_infixOperatorDescription var_operation_13144 ;
+    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inAliasedAliasedInfixKey, var_resultType_13097, var_operation_13144, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 394)) ;
+    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_resultType_13097.objectCompare (constinArgument_inOldType)).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      var_resultType_13097 = constinArgument_inNewType ;
+    }
+    {
+    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inNewNewInfixKey, var_resultType_13097, var_operation_13144, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 402)) ;
+    }
+  }
+  const enumGalgasBool test_2 = ioArgument_ioInfixOperatorMap.getter_hasKey (constinArgument_inAliasedLiteralIntegerInfixKey.getter_string (HERE) COMMA_SOURCE_FILE ("declaration-type.galgas", 408)).boolEnum () ;
+  if (kBoolTrue == test_2) {
+    GALGAS_PLMType var_resultType_13508 ;
+    GALGAS_infixOperatorDescription var_operation_13555 ;
+    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inAliasedLiteralIntegerInfixKey, var_resultType_13508, var_operation_13555, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 409)) ;
+    const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_resultType_13508.objectCompare (constinArgument_inOldType)).boolEnum () ;
+    if (kBoolTrue == test_3) {
+      var_resultType_13508 = constinArgument_inNewType ;
+    }
+    {
+    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inNewLiteralIntegerInfixKey, var_resultType_13508, var_operation_13555, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 417)) ;
+    }
+  }
+  const enumGalgasBool test_4 = ioArgument_ioInfixOperatorMap.getter_hasKey (constinArgument_inLiteralIntegerAliasInfixKey.getter_string (HERE) COMMA_SOURCE_FILE ("declaration-type.galgas", 423)).boolEnum () ;
+  if (kBoolTrue == test_4) {
+    GALGAS_PLMType var_resultType_13926 ;
+    GALGAS_infixOperatorDescription var_operation_13973 ;
+    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inLiteralIntegerAliasInfixKey, var_resultType_13926, var_operation_13973, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 424)) ;
+    const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, var_resultType_13926.objectCompare (constinArgument_inOldType)).boolEnum () ;
+    if (kBoolTrue == test_5) {
+      var_resultType_13926 = constinArgument_inNewType ;
+    }
+    {
+    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inLiteralIntegerNewInfixKey, var_resultType_13926, var_operation_13973, inCompiler COMMA_SOURCE_FILE ("declaration-type.galgas", 432)) ;
+    }
+  }
 }
 
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_typeOpaqueDefinitionDeclaration_enterInContext (defineExtensionMethod_typeOpaqueDefinitionDeclaration_enterInContext, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -8992,327 +8746,6 @@ static void defineExtensionMethod_decoratedStructureDeclaration_semanticAnalysis
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_decoratedStructureDeclaration_semanticAnalysis (defineExtensionMethod_decoratedStructureDeclaration_semanticAnalysis, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Overriding extension getter '@typeAliasDeclaration location'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_location extensionGetter_typeAliasDeclaration_location (const cPtr_abstractDeclarationAST * inObject,
-                                                                      C_Compiler * /* inCompiler */
-                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_location result_outLocation ; // Returned variable
-  const cPtr_typeAliasDeclaration * object = (const cPtr_typeAliasDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeAliasDeclaration) ;
-  result_outLocation = object->mProperty_mNewTypeName.getter_location (HERE) ;
-//---
-  return result_outLocation ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionGetter_typeAliasDeclaration_location (void) {
-  enterExtensionGetter_location (kTypeDescriptor_GALGAS_typeAliasDeclaration.mSlotID,
-                                 extensionGetter_typeAliasDeclaration_location) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gGetter_typeAliasDeclaration_location (defineExtensionGetter_typeAliasDeclaration_location, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Overriding extension method '@typeAliasDeclaration addExtension'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_typeAliasDeclaration_addExtension (const cPtr_abstractDeclarationAST * inObject,
-                                                               GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
-                                                               GALGAS_extendStaticArrayDeclarationAST & /* ioArgument_ioExtendStaticArrayDeclarationAST */,
-                                                               GALGAS_abstractDeclarationAST & outArgument_outNewDeclaration,
-                                                               C_Compiler * /* inCompiler */
-                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_typeAliasDeclaration * object = (const cPtr_typeAliasDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeAliasDeclaration) ;
-  const GALGAS_typeAliasDeclaration temp_0 = object ;
-  outArgument_outNewDeclaration = temp_0 ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_typeAliasDeclaration_addExtension (void) {
-  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_typeAliasDeclaration.mSlotID,
-                                     extensionMethod_typeAliasDeclaration_addExtension) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_typeAliasDeclaration_addExtension (defineExtensionMethod_typeAliasDeclaration_addExtension, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                     Overriding extension method '@typeAliasDeclaration enterInPrecedenceGraph'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_typeAliasDeclaration_enterInPrecedenceGraph (const cPtr_abstractDeclarationAST * inObject,
-                                                                         GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_typeAliasDeclaration * object = (const cPtr_typeAliasDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeAliasDeclaration) ;
-  GALGAS_lstring var_newTypeName_2739 = function_llvmTypeNameFromPLMname (object->mProperty_mNewTypeName, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 55)) ;
-  GALGAS_lstring var_aliasedTypeName_2803 = function_llvmTypeNameFromPLMname (object->mProperty_mAliasedTypeName, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 56)) ;
-  {
-  const GALGAS_typeAliasDeclaration temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (var_newTypeName_2739, temp_0, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 57)) ;
-  }
-  {
-  ioArgument_ioGraph.setter_addEdge (var_newTypeName_2739, var_aliasedTypeName_2803 COMMA_SOURCE_FILE ("type-alias.galgas", 58)) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_typeAliasDeclaration_enterInPrecedenceGraph (void) {
-  enterExtensionMethod_enterInPrecedenceGraph (kTypeDescriptor_GALGAS_typeAliasDeclaration.mSlotID,
-                                               extensionMethod_typeAliasDeclaration_enterInPrecedenceGraph) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_typeAliasDeclaration_enterInPrecedenceGraph (defineExtensionMethod_typeAliasDeclaration_enterInPrecedenceGraph, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//               Overriding extension getter '@typeAliasDeclaration keyRepresentationForErrorSignaling'                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_string extensionGetter_typeAliasDeclaration_keyRepresentationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outRepresentation ; // Returned variable
-  const cPtr_typeAliasDeclaration * object = (const cPtr_typeAliasDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeAliasDeclaration) ;
-  result_outRepresentation = GALGAS_string ("typealias $").add_operation (object->mProperty_mNewTypeName.getter_string (SOURCE_FILE ("type-alias.galgas", 64)), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 64)) ;
-//---
-  return result_outRepresentation ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionGetter_typeAliasDeclaration_keyRepresentationForErrorSignaling (void) {
-  enterExtensionGetter_keyRepresentationForErrorSignaling (kTypeDescriptor_GALGAS_typeAliasDeclaration.mSlotID,
-                                                           extensionGetter_typeAliasDeclaration_keyRepresentationForErrorSignaling) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gGetter_typeAliasDeclaration_keyRepresentationForErrorSignaling (defineExtensionGetter_typeAliasDeclaration_keyRepresentationForErrorSignaling, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Overriding extension method '@typeAliasDeclaration enterInContext'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_typeAliasDeclaration_enterInContext (const cPtr_abstractDeclarationAST * inObject,
-                                                                 const GALGAS_functionDeclarationListAST /* constinArgument_inProcedureListAST */,
-                                                                 GALGAS_semanticContext & ioArgument_ioContext,
-                                                                 GALGAS_declarationDecorationList & /* ioArgument_ioDecoratedDeclarationList */,
-                                                                 GALGAS_subprogramInvocationGraph & /* ioArgument_ioSubprogramInvocationGraph */,
-                                                                 GALGAS_staticListInitializationMap & /* ioArgument_ioStaticListValueMap */,
-                                                                 GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_typeAliasDeclaration * object = (const cPtr_typeAliasDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_typeAliasDeclaration) ;
-  GALGAS_PLMType var_type_4141 ;
-  GALGAS_uint joker_4143_1 ; // Joker input parameter
-  ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (object->mProperty_mAliasedTypeName, var_type_4141, joker_4143_1, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 80)) ;
-  var_type_4141.mProperty_plmTypeName = object->mProperty_mNewTypeName.getter_string (HERE) ;
-  {
-  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mNewTypeName, var_type_4141, ioArgument_ioContext.getter_mTypeMap (HERE).getter_count (SOURCE_FILE ("type-alias.galgas", 84)), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 84)) ;
-  }
-  GALGAS_lstring var_newNewInfixKey_4382 = function_combineTypeNamesForInfixOperator (object->mProperty_mNewTypeName.getter_string (HERE), object->mProperty_mNewTypeName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 87)) ;
-  GALGAS_lstring var_aliasAliasInfixKey_4486 = function_combineTypeNamesForInfixOperator (object->mProperty_mAliasedTypeName.getter_string (HERE), object->mProperty_mAliasedTypeName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 88)) ;
-  GALGAS_lstring var_newLiteralIntegerInfixKey_4605 = function_combineTypeNamesForInfixOperator (object->mProperty_mNewTypeName.getter_string (HERE), function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 89)), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 89)) ;
-  GALGAS_lstring var_aliasLiteralIntegerInfixKey_4723 = function_combineTypeNamesForInfixOperator (object->mProperty_mAliasedTypeName.getter_string (HERE), function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 90)), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 90)) ;
-  GALGAS_lstring var_literalIntegerNewInfixKey_4843 = function_combineTypeNamesForInfixOperator (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 91)), object->mProperty_mNewTypeName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 91)) ;
-  GALGAS_lstring var_literalIntegerAliasInfixKey_4960 = function_combineTypeNamesForInfixOperator (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 92)), object->mProperty_mAliasedTypeName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 92)) ;
-  GALGAS_PLMType var_newType_5061 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mNewTypeName, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 93)).getter_type (inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 93)) ;
-  GALGAS_PLMType var_oldType_5152 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mAliasedTypeName, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 94)).getter_type (inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 94)) ;
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mEqualOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 95)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mNonEqualOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 106)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mStrictInfOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 117)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mInfEqualOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 128)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mStrictSupOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 139)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mSupEqualOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 150)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mAndOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 161)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mOrOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 172)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mXorOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 183)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mBooleanXorOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 194)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mAddOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 205)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mAddNoOvfOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 216)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mSubOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 227)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mSubNoOvfOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 238)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mMulOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 249)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mMulNoOvfOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 260)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mDivOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 271)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mDivNoOvfOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 282)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mModOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 293)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mModNoOvfOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 304)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mLeftShiftOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 315)) ;
-  }
-  {
-  routine_enterAliasInfixOperator (ioArgument_ioContext.mProperty_mRightShiftOperatorMap, var_newNewInfixKey_4382, var_aliasAliasInfixKey_4486, var_newLiteralIntegerInfixKey_4605, var_aliasLiteralIntegerInfixKey_4723, var_literalIntegerNewInfixKey_4843, var_literalIntegerAliasInfixKey_4960, var_newType_5061, var_oldType_5152, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 326)) ;
-  }
-  {
-  routine_enterAliasPrefixOperator (ioArgument_ioContext.mProperty_mUnaryMinusOperatorMap, object->mProperty_mNewTypeName, object->mProperty_mAliasedTypeName, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 337)) ;
-  }
-  {
-  routine_enterAliasPrefixOperator (ioArgument_ioContext.mProperty_mNotOperatorMap, object->mProperty_mNewTypeName, object->mProperty_mAliasedTypeName, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 338)) ;
-  }
-  {
-  routine_enterAliasPrefixOperator (ioArgument_ioContext.mProperty_mUnsignedComplementOperatorMap, object->mProperty_mNewTypeName, object->mProperty_mAliasedTypeName, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 339)) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_typeAliasDeclaration_enterInContext (void) {
-  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_typeAliasDeclaration.mSlotID,
-                                       extensionMethod_typeAliasDeclaration_enterInContext) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_typeAliasDeclaration_enterInContext (defineExtensionMethod_typeAliasDeclaration_enterInContext, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Routine 'enterAliasPrefixOperator'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterAliasPrefixOperator (GALGAS_prefixOperatorMap & ioArgument_ioInfixOperatorMap,
-                                       const GALGAS_lstring constinArgument_inNewTypeName,
-                                       const GALGAS_lstring constinArgument_inAliasedTypeName,
-                                       C_Compiler * inCompiler
-                                       COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = ioArgument_ioInfixOperatorMap.getter_hasKey (constinArgument_inAliasedTypeName.getter_string (HERE) COMMA_SOURCE_FILE ("type-alias.galgas", 349)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inAliasedTypeName, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 350)) ;
-    {
-    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inNewTypeName, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 354)) ;
-    }
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Routine 'enterAliasInfixOperator'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterAliasInfixOperator (GALGAS_infixOperatorMap & ioArgument_ioInfixOperatorMap,
-                                      const GALGAS_lstring constinArgument_inNewNewInfixKey,
-                                      const GALGAS_lstring constinArgument_inAliasedAliasedInfixKey,
-                                      const GALGAS_lstring constinArgument_inNewLiteralIntegerInfixKey,
-                                      const GALGAS_lstring constinArgument_inAliasedLiteralIntegerInfixKey,
-                                      const GALGAS_lstring constinArgument_inLiteralIntegerNewInfixKey,
-                                      const GALGAS_lstring constinArgument_inLiteralIntegerAliasInfixKey,
-                                      const GALGAS_PLMType constinArgument_inNewType,
-                                      const GALGAS_PLMType constinArgument_inOldType,
-                                      C_Compiler * inCompiler
-                                      COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = ioArgument_ioInfixOperatorMap.getter_hasKey (constinArgument_inAliasedAliasedInfixKey.getter_string (HERE) COMMA_SOURCE_FILE ("type-alias.galgas", 374)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    GALGAS_PLMType var_resultType_12565 ;
-    GALGAS_infixOperatorDescription var_operation_12612 ;
-    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inAliasedAliasedInfixKey, var_resultType_12565, var_operation_12612, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 375)) ;
-    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_resultType_12565.objectCompare (constinArgument_inOldType)).boolEnum () ;
-    if (kBoolTrue == test_1) {
-      var_resultType_12565 = constinArgument_inNewType ;
-    }
-    {
-    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inNewNewInfixKey, var_resultType_12565, var_operation_12612, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 383)) ;
-    }
-  }
-  const enumGalgasBool test_2 = ioArgument_ioInfixOperatorMap.getter_hasKey (constinArgument_inAliasedLiteralIntegerInfixKey.getter_string (HERE) COMMA_SOURCE_FILE ("type-alias.galgas", 389)).boolEnum () ;
-  if (kBoolTrue == test_2) {
-    GALGAS_PLMType var_resultType_12976 ;
-    GALGAS_infixOperatorDescription var_operation_13023 ;
-    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inAliasedLiteralIntegerInfixKey, var_resultType_12976, var_operation_13023, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 390)) ;
-    const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_resultType_12976.objectCompare (constinArgument_inOldType)).boolEnum () ;
-    if (kBoolTrue == test_3) {
-      var_resultType_12976 = constinArgument_inNewType ;
-    }
-    {
-    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inNewLiteralIntegerInfixKey, var_resultType_12976, var_operation_13023, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 398)) ;
-    }
-  }
-  const enumGalgasBool test_4 = ioArgument_ioInfixOperatorMap.getter_hasKey (constinArgument_inLiteralIntegerAliasInfixKey.getter_string (HERE) COMMA_SOURCE_FILE ("type-alias.galgas", 404)).boolEnum () ;
-  if (kBoolTrue == test_4) {
-    GALGAS_PLMType var_resultType_13394 ;
-    GALGAS_infixOperatorDescription var_operation_13441 ;
-    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inLiteralIntegerAliasInfixKey, var_resultType_13394, var_operation_13441, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 405)) ;
-    const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, var_resultType_13394.objectCompare (constinArgument_inOldType)).boolEnum () ;
-    if (kBoolTrue == test_5) {
-      var_resultType_13394 = constinArgument_inNewType ;
-    }
-    {
-    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inLiteralIntegerNewInfixKey, var_resultType_13394, var_operation_13441, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 413)) ;
-    }
-  }
-}
-
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -11187,109 +10620,77 @@ C_PrologueEpilogue gMethod_literalStringDeclarationAST_enterInContext (defineExt
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding extension getter '@opaqueTypeDeclarationAST location'                           *
+//                     Overriding extension method '@typeOpaqueDefinitionDeclaration addExtension'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_location extensionGetter_opaqueTypeDeclarationAST_location (const cPtr_abstractDeclarationAST * inObject,
+static void extensionMethod_typeOpaqueDefinitionDeclaration_addExtension (const cPtr_abstractDeclarationAST * inObject,
+                                                                          GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
+                                                                          GALGAS_extendStaticArrayDeclarationAST & /* ioArgument_ioExtendStaticArrayDeclarationAST */,
+                                                                          GALGAS_abstractDeclarationAST & outArgument_outNewDeclaration,
                                                                           C_Compiler * /* inCompiler */
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_location result_outLocation ; // Returned variable
-  const cPtr_opaqueTypeDeclarationAST * object = (const cPtr_opaqueTypeDeclarationAST *) inObject ;
-  macroValidSharedObject (object, cPtr_opaqueTypeDeclarationAST) ;
-  result_outLocation = object->mProperty_mOpaqueTypeName.getter_location (HERE) ;
-//---
-  return result_outLocation ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionGetter_opaqueTypeDeclarationAST_location (void) {
-  enterExtensionGetter_location (kTypeDescriptor_GALGAS_opaqueTypeDeclarationAST.mSlotID,
-                                 extensionGetter_opaqueTypeDeclarationAST_location) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gGetter_opaqueTypeDeclarationAST_location (defineExtensionGetter_opaqueTypeDeclarationAST_location, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Overriding extension method '@opaqueTypeDeclarationAST addExtension'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_opaqueTypeDeclarationAST_addExtension (const cPtr_abstractDeclarationAST * inObject,
-                                                                   GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
-                                                                   GALGAS_extendStaticArrayDeclarationAST & /* ioArgument_ioExtendStaticArrayDeclarationAST */,
-                                                                   GALGAS_abstractDeclarationAST & outArgument_outNewDeclaration,
-                                                                   C_Compiler * /* inCompiler */
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_opaqueTypeDeclarationAST * object = (const cPtr_opaqueTypeDeclarationAST *) inObject ;
-  macroValidSharedObject (object, cPtr_opaqueTypeDeclarationAST) ;
-  const GALGAS_opaqueTypeDeclarationAST temp_0 = object ;
+  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
+  const GALGAS_typeOpaqueDefinitionDeclaration temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void defineExtensionMethod_opaqueTypeDeclarationAST_addExtension (void) {
-  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_opaqueTypeDeclarationAST.mSlotID,
-                                     extensionMethod_opaqueTypeDeclarationAST_addExtension) ;
+static void defineExtensionMethod_typeOpaqueDefinitionDeclaration_addExtension (void) {
+  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
+                                     extensionMethod_typeOpaqueDefinitionDeclaration_addExtension) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gMethod_opaqueTypeDeclarationAST_addExtension (defineExtensionMethod_opaqueTypeDeclarationAST_addExtension, NULL) ;
+C_PrologueEpilogue gMethod_typeOpaqueDefinitionDeclaration_addExtension (defineExtensionMethod_typeOpaqueDefinitionDeclaration_addExtension, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Overriding extension method '@opaqueTypeDeclarationAST enterInPrecedenceGraph'                    *
+//                Overriding extension method '@typeOpaqueDefinitionDeclaration enterInPrecedenceGraph'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void extensionMethod_opaqueTypeDeclarationAST_enterInPrecedenceGraph (const cPtr_abstractDeclarationAST * inObject,
-                                                                             GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_opaqueTypeDeclarationAST * object = (const cPtr_opaqueTypeDeclarationAST *) inObject ;
-  macroValidSharedObject (object, cPtr_opaqueTypeDeclarationAST) ;
-  GALGAS_lstring var_typeName_3064 = function_llvmTypeNameFromPLMname (object->mProperty_mOpaqueTypeName, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 65)) ;
+static void extensionMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph (const cPtr_abstractDeclarationAST * inObject,
+                                                                                    GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
+  GALGAS_lstring var_internalTypeName_3369 = function_llvmTypeNameFromPLMname (object->mProperty_mAnonymousOpaqueTypeName, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 72)) ;
   {
-  const GALGAS_opaqueTypeDeclarationAST temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (var_typeName_3064, temp_0, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 66)) ;
+  const GALGAS_typeOpaqueDefinitionDeclaration temp_0 = object ;
+  ioArgument_ioGraph.setter_addNode (var_internalTypeName_3369, temp_0, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 74)) ;
   }
-  {
-  ioArgument_ioGraph.setter_addEdge (var_typeName_3064, function_llvmTypeNameFromPLMname (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 67)).getter_nowhere (SOURCE_FILE ("type-opaque-declaration.galgas", 67)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 67)) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 67)) ;
-  }
-  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), var_typeName_3064, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 68)) ;
+  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), var_internalTypeName_3369, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 76)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void defineExtensionMethod_opaqueTypeDeclarationAST_enterInPrecedenceGraph (void) {
-  enterExtensionMethod_enterInPrecedenceGraph (kTypeDescriptor_GALGAS_opaqueTypeDeclarationAST.mSlotID,
-                                               extensionMethod_opaqueTypeDeclarationAST_enterInPrecedenceGraph) ;
+static void defineExtensionMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph (void) {
+  enterExtensionMethod_enterInPrecedenceGraph (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
+                                               extensionMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gMethod_opaqueTypeDeclarationAST_enterInPrecedenceGraph (defineExtensionMethod_opaqueTypeDeclarationAST_enterInPrecedenceGraph, NULL) ;
+C_PrologueEpilogue gMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph (defineExtensionMethod_typeOpaqueDefinitionDeclaration_enterInPrecedenceGraph, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//             Overriding extension getter '@opaqueTypeDeclarationAST keyRepresentationForErrorSignaling'              *
+//          Overriding extension getter '@typeOpaqueDefinitionDeclaration keyRepresentationForErrorSignaling'          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string extensionGetter_opaqueTypeDeclarationAST_keyRepresentationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+static GALGAS_string extensionGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
+                                                                                                         C_Compiler * inCompiler
+                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outRepresentation ; // Returned variable
-  const cPtr_opaqueTypeDeclarationAST * object = (const cPtr_opaqueTypeDeclarationAST *) inObject ;
-  macroValidSharedObject (object, cPtr_opaqueTypeDeclarationAST) ;
-  result_outRepresentation = GALGAS_string ("opaqueType $").add_operation (object->mProperty_mOpaqueTypeName.getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 74)) ;
+  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
+  result_outRepresentation = GALGAS_string ("anonymous $").add_operation (object->mProperty_mAnonymousOpaqueTypeName.getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 82)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 82)) ;
 //---
   return result_outRepresentation ;
 }
@@ -11297,105 +10698,492 @@ static GALGAS_string extensionGetter_opaqueTypeDeclarationAST_keyRepresentationF
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void defineExtensionGetter_opaqueTypeDeclarationAST_keyRepresentationForErrorSignaling (void) {
-  enterExtensionGetter_keyRepresentationForErrorSignaling (kTypeDescriptor_GALGAS_opaqueTypeDeclarationAST.mSlotID,
-                                                           extensionGetter_opaqueTypeDeclarationAST_keyRepresentationForErrorSignaling) ;
+static void defineExtensionGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling (void) {
+  enterExtensionGetter_keyRepresentationForErrorSignaling (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
+                                                           extensionGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gGetter_opaqueTypeDeclarationAST_keyRepresentationForErrorSignaling (defineExtensionGetter_opaqueTypeDeclarationAST_keyRepresentationForErrorSignaling, NULL) ;
+C_PrologueEpilogue gGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling (defineExtensionGetter_typeOpaqueDefinitionDeclaration_keyRepresentationForErrorSignaling, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding extension method '@opaqueTypeDeclarationAST enterInContext'                        *
+//                       Overriding extension getter '@typeOpaqueDefinitionDeclaration location'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void extensionMethod_opaqueTypeDeclarationAST_enterInContext (const cPtr_abstractDeclarationAST * inObject,
-                                                                     const GALGAS_functionDeclarationListAST /* constinArgument_inProcedureListAST */,
-                                                                     GALGAS_semanticContext & ioArgument_ioContext,
-                                                                     GALGAS_declarationDecorationList & /* ioArgument_ioDecoratedDeclarationList */,
-                                                                     GALGAS_subprogramInvocationGraph & /* ioArgument_ioSubprogramInvocationGraph */,
-                                                                     GALGAS_staticListInitializationMap & /* ioArgument_ioStaticListValueMap */,
-                                                                     GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_opaqueTypeDeclarationAST * object = (const cPtr_opaqueTypeDeclarationAST *) inObject ;
-  macroValidSharedObject (object, cPtr_opaqueTypeDeclarationAST) ;
-  GALGAS_PLMTypeAttributes var_attributes_4474 = GALGAS_PLMTypeAttributes::constructor_none (SOURCE_FILE ("type-opaque-declaration.galgas", 90)) ;
-  cEnumerator_lstringlist enumerator_4518 (object->mProperty_mAttributeList, kENUMERATION_UP) ;
-  while (enumerator_4518.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_4518.current_mValue (HERE).getter_string (HERE).objectCompare (GALGAS_string ("instantiable"))).boolEnum () ;
+static GALGAS_location extensionGetter_typeOpaqueDefinitionDeclaration_location (const cPtr_abstractDeclarationAST * inObject,
+                                                                                 C_Compiler * /* inCompiler */
+                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_location result_outLocation ; // Returned variable
+  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
+  result_outLocation = object->mProperty_mAnonymousOpaqueTypeName.getter_location (HERE) ;
+//---
+  return result_outLocation ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionGetter_typeOpaqueDefinitionDeclaration_location (void) {
+  enterExtensionGetter_location (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
+                                 extensionGetter_typeOpaqueDefinitionDeclaration_location) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gGetter_typeOpaqueDefinitionDeclaration_location (defineExtensionGetter_typeOpaqueDefinitionDeclaration_location, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                    Overriding extension method '@typeOpaqueDefinitionDeclaration enterInContext'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_typeOpaqueDefinitionDeclaration_enterInContext (const cPtr_abstractDeclarationAST * inObject,
+                                                                            const GALGAS_functionDeclarationListAST /* constinArgument_inProcedureListAST */,
+                                                                            GALGAS_semanticContext & ioArgument_ioContext,
+                                                                            GALGAS_declarationDecorationList & /* ioArgument_ioDecoratedDeclarationList */,
+                                                                            GALGAS_subprogramInvocationGraph & /* ioArgument_ioSubprogramInvocationGraph */,
+                                                                            GALGAS_staticListInitializationMap & /* ioArgument_ioStaticListValueMap */,
+                                                                            GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_typeOpaqueDefinitionDeclaration * object = (const cPtr_typeOpaqueDefinitionDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
+  GALGAS_PLMTypeAttributes var_attributes_5049 = GALGAS_PLMTypeAttributes::constructor_none (SOURCE_FILE ("type-opaque-declaration.galgas", 103)) ;
+  cEnumerator_lstringlist enumerator_5093 (object->mProperty_mAttributeList, kENUMERATION_UP) ;
+  while (enumerator_5093.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_5093.current_mValue (HERE).getter_string (HERE).objectCompare (GALGAS_string ("instantiable"))).boolEnum () ;
     if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = var_attributes_4474.getter_instanciable (SOURCE_FILE ("type-opaque-declaration.galgas", 93)).boolEnum () ;
+      const enumGalgasBool test_1 = var_attributes_5049.getter_instanciable (SOURCE_FILE ("type-opaque-declaration.galgas", 106)).boolEnum () ;
       if (kBoolTrue == test_1) {
         TC_Array <C_FixItDescription> fixItArray2 ;
-        inCompiler->emitSemanticError (enumerator_4518.current_mValue (HERE).getter_location (SOURCE_FILE ("type-opaque-declaration.galgas", 94)), GALGAS_string ("duplicated attribute"), fixItArray2  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 94)) ;
+        inCompiler->emitSemanticError (enumerator_5093.current_mValue (HERE).getter_location (SOURCE_FILE ("type-opaque-declaration.galgas", 107)), GALGAS_string ("duplicated attribute"), fixItArray2  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 107)) ;
       }else if (kBoolFalse == test_1) {
-        var_attributes_4474 = var_attributes_4474.operator_or (GALGAS_PLMTypeAttributes::constructor_instanciable (SOURCE_FILE ("type-opaque-declaration.galgas", 96)) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 96)) ;
+        var_attributes_5049 = var_attributes_5049.operator_or (GALGAS_PLMTypeAttributes::constructor_instanciable (SOURCE_FILE ("type-opaque-declaration.galgas", 109)) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 109)) ;
       }
     }else if (kBoolFalse == test_0) {
-      const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_4518.current_mValue (HERE).getter_string (HERE).objectCompare (GALGAS_string ("copyable"))).boolEnum () ;
+      const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_5093.current_mValue (HERE).getter_string (HERE).objectCompare (GALGAS_string ("copyable"))).boolEnum () ;
       if (kBoolTrue == test_3) {
-        const enumGalgasBool test_4 = var_attributes_4474.getter_copyable (SOURCE_FILE ("type-opaque-declaration.galgas", 99)).boolEnum () ;
+        const enumGalgasBool test_4 = var_attributes_5049.getter_copyable (SOURCE_FILE ("type-opaque-declaration.galgas", 112)).boolEnum () ;
         if (kBoolTrue == test_4) {
           TC_Array <C_FixItDescription> fixItArray5 ;
-          inCompiler->emitSemanticError (enumerator_4518.current_mValue (HERE).getter_location (SOURCE_FILE ("type-opaque-declaration.galgas", 100)), GALGAS_string ("duplicated attribute"), fixItArray5  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 100)) ;
+          inCompiler->emitSemanticError (enumerator_5093.current_mValue (HERE).getter_location (SOURCE_FILE ("type-opaque-declaration.galgas", 113)), GALGAS_string ("duplicated attribute"), fixItArray5  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 113)) ;
         }else if (kBoolFalse == test_4) {
-          var_attributes_4474 = var_attributes_4474.operator_or (GALGAS_PLMTypeAttributes::constructor_copyable (SOURCE_FILE ("type-opaque-declaration.galgas", 102)) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 102)) ;
+          var_attributes_5049 = var_attributes_5049.operator_or (GALGAS_PLMTypeAttributes::constructor_copyable (SOURCE_FILE ("type-opaque-declaration.galgas", 115)) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 115)) ;
         }
       }else if (kBoolFalse == test_3) {
         TC_Array <C_FixItDescription> fixItArray6 ;
-        inCompiler->emitSemanticError (enumerator_4518.current_mValue (HERE).getter_location (SOURCE_FILE ("type-opaque-declaration.galgas", 105)), GALGAS_string ("only @copyable and @instantiable attributes are allowed here"), fixItArray6  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 105)) ;
+        inCompiler->emitSemanticError (enumerator_5093.current_mValue (HERE).getter_location (SOURCE_FILE ("type-opaque-declaration.galgas", 118)), GALGAS_string ("only @copyable and @instantiable attributes are allowed here"), fixItArray6  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 118)) ;
       }
     }
-    enumerator_4518.gotoNextObject () ;
+    enumerator_5093.gotoNextObject () ;
   }
-  GALGAS_instructionListIR var_initInstructionGenerationList_5107 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 109)) ;
-  GALGAS_allocaList var_allocaList_5137 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 110)) ;
-  GALGAS_semanticTemporariesStruct var_temporaries_5183 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("type-opaque-declaration.galgas", 111)) ;
-  GALGAS_universalValuedObjectMapForContext var_universalMap_5300 ;
+  GALGAS_instructionListIR var_initInstructionGenerationList_5682 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 122)) ;
+  GALGAS_allocaList var_allocaList_5712 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 123)) ;
+  GALGAS_semanticTemporariesStruct var_temporaries_5758 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("type-opaque-declaration.galgas", 124)) ;
+  GALGAS_universalValuedObjectMapForContext var_universalMap_5875 ;
   {
-  routine_variableMapWithConstants (ioArgument_ioContext, var_universalMap_5300, inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 112)) ;
+  routine_variableMapWithConstants (ioArgument_ioContext, var_universalMap_5875, inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 125)) ;
   }
-  GALGAS_staticStringMap joker_5614 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 124)) ;
-  GALGAS_objectIR var_sizeExpressionIR_5767 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), function_voidType (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mProperty_mOpaqueTypeName.getter_string (HERE).add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 119)), object->mProperty_mOpaqueTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 119)), function_voidType (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 120)), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("type-opaque-declaration.galgas", 122)), var_temporaries_5183, joker_5614, var_universalMap_5300, var_allocaList_5137, var_initInstructionGenerationList_5107, var_sizeExpressionIR_5767, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 116)) ;
-  GALGAS_bool test_7 = GALGAS_bool (kIsStrictSup, var_allocaList_5137.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 130)).add_operation (var_initInstructionGenerationList_5107.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 130)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  GALGAS_staticStringMap joker_6207 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 137)) ;
+  GALGAS_objectIR var_sizeExpressionIR_6360 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), function_voidType (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 130)), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mProperty_mAnonymousOpaqueTypeName.getter_string (HERE).add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 132)), object->mProperty_mAnonymousOpaqueTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 132)), function_voidType (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 133)), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("type-opaque-declaration.galgas", 135)), var_temporaries_5758, joker_6207, var_universalMap_5875, var_allocaList_5712, var_initInstructionGenerationList_5682, var_sizeExpressionIR_6360, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 129)) ;
+  GALGAS_bool test_7 = GALGAS_bool (kIsStrictSup, var_allocaList_5712.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 143)).add_operation (var_initInstructionGenerationList_5682.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 143)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_7.boolEnum ()) {
-    test_7 = var_sizeExpressionIR_5767.getter_isLiteralInteger (SOURCE_FILE ("type-opaque-declaration.galgas", 130)).operator_not (SOURCE_FILE ("type-opaque-declaration.galgas", 130)) ;
+    test_7 = var_sizeExpressionIR_6360.getter_isLiteralInteger (SOURCE_FILE ("type-opaque-declaration.galgas", 143)).operator_not (SOURCE_FILE ("type-opaque-declaration.galgas", 143)) ;
   }
   const enumGalgasBool test_8 = test_7.boolEnum () ;
   if (kBoolTrue == test_8) {
     TC_Array <C_FixItDescription> fixItArray9 ;
-    inCompiler->emitSemanticError (object->mProperty_mSizeExpressionLocation, GALGAS_string ("array size expression is not static"), fixItArray9  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 131)) ;
+    inCompiler->emitSemanticError (object->mProperty_mSizeExpressionLocation, GALGAS_string ("array size expression is not static"), fixItArray9  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 144)) ;
   }else if (kBoolFalse == test_8) {
-    GALGAS_constructorMap var_constructorMap_6009 = GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 133)) ;
-    const enumGalgasBool test_10 = var_attributes_4474.getter_instanciable (SOURCE_FILE ("type-opaque-declaration.galgas", 134)).boolEnum () ;
+    GALGAS_constructorMap var_constructorMap_6602 = GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 146)) ;
+    const enumGalgasBool test_10 = var_attributes_5049.getter_instanciable (SOURCE_FILE ("type-opaque-declaration.galgas", 147)).boolEnum () ;
     if (kBoolTrue == test_10) {
       {
-      var_constructorMap_6009.setter_insertKey (GALGAS_string ("()").getter_nowhere (SOURCE_FILE ("type-opaque-declaration.galgas", 135)), GALGAS_constructorSignature::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 135)), GALGAS_constructorValue::constructor_simple (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 135))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 135)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 135)) ;
+      var_constructorMap_6602.setter_insertKey (GALGAS_string ("()").getter_nowhere (SOURCE_FILE ("type-opaque-declaration.galgas", 148)), GALGAS_constructorSignature::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 148)), GALGAS_constructorValue::constructor_simple (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 148))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 148)) ;
       }
     }
-    GALGAS_bigint var_bitSize_6196 ;
-    GALGAS_PLMType joker_6175_1 ; // Joker input parameter
-    var_sizeExpressionIR_5767.method_literalInteger (joker_6175_1, var_bitSize_6196, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 137)) ;
-    GALGAS_PLMType var_opaqueType_6216 = GALGAS_PLMType::constructor_new (GALGAS_propertyMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 139)), GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 140)), var_constructorMap_6009, var_attributes_4474, object->mProperty_mOpaqueTypeName.getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 143)), GALGAS_typeKind::constructor_opaque (var_bitSize_6196  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 144))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 138)) ;
+    GALGAS_bigint var_bitSize_6789 ;
+    GALGAS_PLMType joker_6768_1 ; // Joker input parameter
+    var_sizeExpressionIR_6360.method_literalInteger (joker_6768_1, var_bitSize_6789, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 150)) ;
+    GALGAS_PLMType var_opaqueType_6809 = GALGAS_PLMType::constructor_new (GALGAS_propertyMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 152)), GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 153)), var_constructorMap_6602, var_attributes_5049, object->mProperty_mAnonymousOpaqueTypeName.getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 156)), GALGAS_typeKind::constructor_opaque (var_bitSize_6789  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 157))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 151)) ;
     {
-    ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mOpaqueTypeName, var_opaqueType_6216, ioArgument_ioContext.getter_mTypeMap (HERE).getter_count (SOURCE_FILE ("type-opaque-declaration.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 146)) ;
+    ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mAnonymousOpaqueTypeName, var_opaqueType_6809, ioArgument_ioContext.getter_mTypeMap (HERE).getter_count (SOURCE_FILE ("type-opaque-declaration.galgas", 162)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 159)) ;
     }
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void defineExtensionMethod_opaqueTypeDeclarationAST_enterInContext (void) {
-  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_opaqueTypeDeclarationAST.mSlotID,
-                                       extensionMethod_opaqueTypeDeclarationAST_enterInContext) ;
+static void defineExtensionMethod_typeOpaqueDefinitionDeclaration_enterInContext (void) {
+  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration.mSlotID,
+                                       extensionMethod_typeOpaqueDefinitionDeclaration_enterInContext) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gMethod_opaqueTypeDeclarationAST_enterInContext (defineExtensionMethod_opaqueTypeDeclarationAST_enterInContext, NULL) ;
+C_PrologueEpilogue gMethod_typeOpaqueDefinitionDeclaration_enterInContext (defineExtensionMethod_typeOpaqueDefinitionDeclaration_enterInContext, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                 Overriding extension method '@controlRegisterDeclarationAST enterInPrecedenceGraph'                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_controlRegisterDeclarationAST_enterInPrecedenceGraph (const cPtr_abstractDeclarationAST * inObject,
+                                                                                  GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_controlRegisterDeclarationAST * object = (const cPtr_controlRegisterDeclarationAST *) inObject ;
+  macroValidSharedObject (object, cPtr_controlRegisterDeclarationAST) ;
+  GALGAS_lstring var_nodeName_7507 = object->mProperty_mRegisterArrayList.getter_mRegisterNameAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 201)) ;
+  {
+  const GALGAS_controlRegisterDeclarationAST temp_0 = object ;
+  ioArgument_ioGraph.setter_addNode (var_nodeName_7507, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 203)) ;
+  }
+  GALGAS_lstring var_typeName_7656 = function_llvmTypeNameFromPLMname (object->mProperty_mRegisterTypeName, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 205)) ;
+  {
+  ioArgument_ioGraph.setter_addEdge (var_nodeName_7507, var_typeName_7656 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 206)) ;
+  }
+  GALGAS_lstring var_rootNode_7797 = GALGAS_lstring::constructor_new (function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 208)), var_nodeName_7507.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 208)) ;
+  {
+  ioArgument_ioGraph.setter_addEdge (var_nodeName_7507, var_rootNode_7797 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 209)) ;
+  }
+  cEnumerator_controlRegisterList enumerator_8000 (object->mProperty_mRegisterArrayList, kENUMERATION_UP) ;
+  while (enumerator_8000.hasCurrentObject ()) {
+    switch (enumerator_8000.current (HERE).getter_mControlRegisterKind (HERE).enumValue ()) {
+    case GALGAS_controlRegisterKind::kNotBuilt:
+      break ;
+    case GALGAS_controlRegisterKind::kEnum_scalar:
+      {
+      }
+      break ;
+    case GALGAS_controlRegisterKind::kEnum_registerArray:
+      {
+        const cEnumAssociatedValues_controlRegisterKind_registerArray * extractPtr_8307 = (const cEnumAssociatedValues_controlRegisterKind_registerArray *) (enumerator_8000.current (HERE).getter_mControlRegisterKind (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_arraySize = extractPtr_8307->mAssociatedValue0 ;
+        const GALGAS_expressionAST extractedValue_arrayElementSize = extractPtr_8307->mAssociatedValue2 ;
+        callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) extractedValue_arraySize.ptr (), var_nodeName_7507, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 215)) ;
+        callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) extractedValue_arrayElementSize.ptr (), var_nodeName_7507, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 216)) ;
+      }
+      break ;
+    }
+    enumerator_8000.gotoNextObject () ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_controlRegisterDeclarationAST_enterInPrecedenceGraph (void) {
+  enterExtensionMethod_enterInPrecedenceGraph (kTypeDescriptor_GALGAS_controlRegisterDeclarationAST.mSlotID,
+                                               extensionMethod_controlRegisterDeclarationAST_enterInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_controlRegisterDeclarationAST_enterInPrecedenceGraph (defineExtensionMethod_controlRegisterDeclarationAST_enterInPrecedenceGraph, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//           Overriding extension getter '@controlRegisterDeclarationAST keyRepresentationForErrorSignaling'           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string extensionGetter_controlRegisterDeclarationAST_keyRepresentationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
+                                                                                                       C_Compiler * inCompiler
+                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outRepresentation ; // Returned variable
+  const cPtr_controlRegisterDeclarationAST * object = (const cPtr_controlRegisterDeclarationAST *) inObject ;
+  macroValidSharedObject (object, cPtr_controlRegisterDeclarationAST) ;
+  GALGAS_lstring var_nodeName_8574 = object->mProperty_mRegisterArrayList.getter_mRegisterNameAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 224)) ;
+  result_outRepresentation = GALGAS_string ("control register ").add_operation (var_nodeName_8574.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 225)) ;
+//---
+  return result_outRepresentation ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionGetter_controlRegisterDeclarationAST_keyRepresentationForErrorSignaling (void) {
+  enterExtensionGetter_keyRepresentationForErrorSignaling (kTypeDescriptor_GALGAS_controlRegisterDeclarationAST.mSlotID,
+                                                           extensionGetter_controlRegisterDeclarationAST_keyRepresentationForErrorSignaling) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gGetter_controlRegisterDeclarationAST_keyRepresentationForErrorSignaling (defineExtensionGetter_controlRegisterDeclarationAST_keyRepresentationForErrorSignaling, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Overriding extension getter '@controlRegisterDeclarationAST location'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_location extensionGetter_controlRegisterDeclarationAST_location (const cPtr_abstractDeclarationAST * inObject,
+                                                                               C_Compiler * /* inCompiler */
+                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_location result_result ; // Returned variable
+  const cPtr_controlRegisterDeclarationAST * object = (const cPtr_controlRegisterDeclarationAST *) inObject ;
+  macroValidSharedObject (object, cPtr_controlRegisterDeclarationAST) ;
+  result_result = object->mProperty_mRegisterTypeName.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 234)) ;
+//---
+  return result_result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionGetter_controlRegisterDeclarationAST_location (void) {
+  enterExtensionGetter_location (kTypeDescriptor_GALGAS_controlRegisterDeclarationAST.mSlotID,
+                                 extensionGetter_controlRegisterDeclarationAST_location) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gGetter_controlRegisterDeclarationAST_location (defineExtensionGetter_controlRegisterDeclarationAST_location, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Overriding extension method '@controlRegisterDeclarationAST addExtension'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_controlRegisterDeclarationAST_addExtension (const cPtr_abstractDeclarationAST * inObject,
+                                                                        GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
+                                                                        GALGAS_extendStaticArrayDeclarationAST & /* ioArgument_ioExtendStaticArrayDeclarationAST */,
+                                                                        GALGAS_abstractDeclarationAST & outArgument_outNewDeclaration,
+                                                                        C_Compiler * /* inCompiler */
+                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_controlRegisterDeclarationAST * object = (const cPtr_controlRegisterDeclarationAST *) inObject ;
+  macroValidSharedObject (object, cPtr_controlRegisterDeclarationAST) ;
+  const GALGAS_controlRegisterDeclarationAST temp_0 = object ;
+  outArgument_outNewDeclaration = temp_0 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_controlRegisterDeclarationAST_addExtension (void) {
+  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_controlRegisterDeclarationAST.mSlotID,
+                                     extensionMethod_controlRegisterDeclarationAST_addExtension) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_controlRegisterDeclarationAST_addExtension (defineExtensionMethod_controlRegisterDeclarationAST_addExtension, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Overriding extension method '@controlRegisterDeclarationAST enterInContext'                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_controlRegisterDeclarationAST_enterInContext (const cPtr_abstractDeclarationAST * inObject,
+                                                                          const GALGAS_functionDeclarationListAST /* constinArgument_inProcedureListAST */,
+                                                                          GALGAS_semanticContext & ioArgument_ioContext,
+                                                                          GALGAS_declarationDecorationList & /* ioArgument_ioDecoratedDeclarationList */,
+                                                                          GALGAS_subprogramInvocationGraph & /* ioArgument_ioSubprogramInvocationGraph */,
+                                                                          GALGAS_staticListInitializationMap & /* ioArgument_ioStaticListValueMap */,
+                                                                          GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_controlRegisterDeclarationAST * object = (const cPtr_controlRegisterDeclarationAST *) inObject ;
+  macroValidSharedObject (object, cPtr_controlRegisterDeclarationAST) ;
+  GALGAS_PLMType var_registerType_13932 ;
+  GALGAS_uint var_registerBitCount_13963 ;
+  const GALGAS_controlRegisterDeclarationAST temp_0 = object ;
+  callExtensionMethod_controlRegisterType ((const cPtr_controlRegisterDeclarationAST *) temp_0.ptr (), ioArgument_ioContext, var_registerType_13932, var_registerBitCount_13963, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 357)) ;
+  GALGAS_controlRegisterFieldMap var_registerFieldMap_14131 ;
+  GALGAS_sliceMap var_registerBitSliceMap_14160 ;
+  GALGAS_controlRegisterFieldList var_controlRegisterFieldList_14194 ;
+  const GALGAS_controlRegisterDeclarationAST temp_1 = object ;
+  callExtensionMethod_buildControlRegisterSliceMap ((const cPtr_controlRegisterDeclarationAST *) temp_1.ptr (), ioArgument_ioContext, var_registerType_13932, var_registerBitCount_13963, var_registerFieldMap_14131, var_registerBitSliceMap_14160, var_controlRegisterFieldList_14194, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 359)) ;
+  GALGAS_bigint var_maxRegisterAddress_14260 = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 368)).left_shift_operation (ioArgument_ioContext.getter_mPointerSize (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 368)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 368)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 368)) ;
+  cEnumerator_controlRegisterList enumerator_14335 (object->mProperty_mRegisterArrayList, kENUMERATION_UP) ;
+  while (enumerator_14335.hasCurrentObject ()) {
+    GALGAS_bool var_isReadOnly_14383 = GALGAS_bool (false) ;
+    GALGAS_bool var_isAccessibleInUserMode_14422 = GALGAS_bool (false) ;
+    cEnumerator_lstringlist enumerator_14471 (enumerator_14335.current (HERE).getter_mAttributeList (HERE), kENUMERATION_UP) ;
+    while (enumerator_14471.hasCurrentObject ()) {
+      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_14471.current_mValue (HERE).getter_string (HERE).objectCompare (GALGAS_string ("ro"))).boolEnum () ;
+      if (kBoolTrue == test_2) {
+        const enumGalgasBool test_3 = var_isReadOnly_14383.boolEnum () ;
+        if (kBoolTrue == test_3) {
+          TC_Array <C_FixItDescription> fixItArray4 ;
+          inCompiler->emitSemanticError (enumerator_14471.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-control-register.galgas", 376)), GALGAS_string ("duplicated attribute"), fixItArray4  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 376)) ;
+        }else if (kBoolFalse == test_3) {
+          var_isReadOnly_14383 = GALGAS_bool (true) ;
+        }
+      }else if (kBoolFalse == test_2) {
+        const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, enumerator_14471.current_mValue (HERE).getter_string (HERE).objectCompare (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 380)))).boolEnum () ;
+        if (kBoolTrue == test_5) {
+          const enumGalgasBool test_6 = var_isAccessibleInUserMode_14422.boolEnum () ;
+          if (kBoolTrue == test_6) {
+            TC_Array <C_FixItDescription> fixItArray7 ;
+            inCompiler->emitSemanticError (enumerator_14471.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-control-register.galgas", 382)), GALGAS_string ("duplicated attribute"), fixItArray7  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 382)) ;
+          }else if (kBoolFalse == test_6) {
+            var_isAccessibleInUserMode_14422 = GALGAS_bool (true) ;
+          }
+        }else if (kBoolFalse == test_5) {
+          TC_Array <C_FixItDescription> fixItArray8 ;
+          inCompiler->emitSemanticError (enumerator_14471.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-control-register.galgas", 387)), GALGAS_string ("only @ro (read only) and @user (accessible in `user mode) attributes are accepted here"), fixItArray8  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 387)) ;
+        }
+      }
+      enumerator_14471.gotoNextObject () ;
+    }
+    GALGAS_objectIR var_addressExpressionResult_15245 ;
+    callExtensionMethod_analyzeStaticExpression ((const cPtr_expressionAST *) enumerator_14335.current (HERE).getter_mRegisterAddress (HERE).ptr (), enumerator_14335.current (HERE).getter_mRegisterAddressLocation (HERE), ioArgument_ioContext, ioArgument_ioGlobalLiteralStringMap, var_addressExpressionResult_15245, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 391)) ;
+    GALGAS_bigint var_registerAddress_15279 ;
+    const enumGalgasBool test_9 = var_addressExpressionResult_15245.getter_isLiteralInteger (SOURCE_FILE ("declaration-control-register.galgas", 398)).operator_not (SOURCE_FILE ("declaration-control-register.galgas", 398)).boolEnum () ;
+    if (kBoolTrue == test_9) {
+      TC_Array <C_FixItDescription> fixItArray10 ;
+      inCompiler->emitSemanticError (enumerator_14335.current (HERE).getter_mRegisterAddressLocation (HERE), GALGAS_string ("control register address is not a static integer expression"), fixItArray10  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 399)) ;
+      var_registerAddress_15279.drop () ; // Release error dropped variable
+    }else if (kBoolFalse == test_9) {
+      GALGAS_PLMType joker_15539_1 ; // Joker input parameter
+      var_addressExpressionResult_15245.method_literalInteger (joker_15539_1, var_registerAddress_15279, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 403)) ;
+      const enumGalgasBool test_11 = GALGAS_bool (kIsStrictSup, var_registerAddress_15279.objectCompare (var_maxRegisterAddress_14260)).boolEnum () ;
+      if (kBoolTrue == test_11) {
+        TC_Array <C_FixItDescription> fixItArray12 ;
+        inCompiler->emitSemanticError (enumerator_14335.current (HERE).getter_mRegisterAddressLocation (HERE), GALGAS_string ("register address should be lower or equal to ").add_operation (var_maxRegisterAddress_14260.getter_hexString (SOURCE_FILE ("declaration-control-register.galgas", 407)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 407)), fixItArray12  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 406)) ;
+      }
+    }
+    GALGAS_bigint var_arraySize_15824 ;
+    GALGAS_uint var_elementArraySize_15851 ;
+    switch (enumerator_14335.current (HERE).getter_mControlRegisterKind (HERE).enumValue ()) {
+    case GALGAS_controlRegisterKind::kNotBuilt:
+      break ;
+    case GALGAS_controlRegisterKind::kEnum_scalar:
+      {
+        var_arraySize_15824 = GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 414)) ;
+        var_elementArraySize_15851 = GALGAS_uint ((uint32_t) 0U) ;
+      }
+      break ;
+    case GALGAS_controlRegisterKind::kEnum_registerArray:
+      {
+        const cEnumAssociatedValues_controlRegisterKind_registerArray * extractPtr_18853 = (const cEnumAssociatedValues_controlRegisterKind_registerArray *) (enumerator_14335.current (HERE).getter_mControlRegisterKind (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_arraySizeExpression = extractPtr_18853->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_arraySizeLocation = extractPtr_18853->mAssociatedValue1 ;
+        const GALGAS_expressionAST extractedValue_arrayElementSizeExpression = extractPtr_18853->mAssociatedValue2 ;
+        const GALGAS_location extractedValue_arrayElementSizeLocation = extractPtr_18853->mAssociatedValue3 ;
+        GALGAS_universalValuedObjectMapForContext var_universalMap_16466 ;
+        {
+        routine_initialVariableMap (ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-control-register.galgas", 421)), GALGAS_bool (true), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-control-register.galgas", 423)), var_universalMap_16466, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 419)) ;
+        }
+        GALGAS_semanticTemporariesStruct var_temporaries_16754 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("declaration-control-register.galgas", 432)) ;
+        GALGAS_instructionListIR var_instructionGenerationList_16816 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-control-register.galgas", 433)) ;
+        GALGAS_allocaList var_allocaList_16850 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-control-register.galgas", 434)) ;
+        GALGAS_objectIR var_sizeExpressionResult_17347 ;
+        callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_arraySizeExpression.ptr (), function_voidType (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 436)), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-control-register.galgas", 438)), function_voidType (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 439)), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-control-register.galgas", 441)), var_temporaries_16754, ioArgument_ioGlobalLiteralStringMap, var_universalMap_16466, var_allocaList_16850, var_instructionGenerationList_16816, var_sizeExpressionResult_17347, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 435)) ;
+        const enumGalgasBool test_13 = var_sizeExpressionResult_17347.getter_isLiteralInteger (SOURCE_FILE ("declaration-control-register.galgas", 449)).operator_not (SOURCE_FILE ("declaration-control-register.galgas", 449)).boolEnum () ;
+        if (kBoolTrue == test_13) {
+          TC_Array <C_FixItDescription> fixItArray14 ;
+          inCompiler->emitSemanticError (extractedValue_arraySizeLocation, GALGAS_string ("control register address is not a static integer expression"), fixItArray14  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 450)) ;
+          var_arraySize_15824.drop () ; // Release error dropped variable
+        }else if (kBoolFalse == test_13) {
+          GALGAS_PLMType joker_17579_1 ; // Joker input parameter
+          var_sizeExpressionResult_17347.method_literalInteger (joker_17579_1, var_arraySize_15824, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 452)) ;
+          const enumGalgasBool test_15 = GALGAS_bool (kIsStrictInf, var_arraySize_15824.objectCompare (GALGAS_bigint ("2", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 453)))).boolEnum () ;
+          if (kBoolTrue == test_15) {
+            TC_Array <C_FixItDescription> fixItArray16 ;
+            inCompiler->emitSemanticError (extractedValue_arraySizeLocation, GALGAS_string ("control register array size should be a static integer expression >= 2, equal to a power of 2"), fixItArray16  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 454)) ;
+            var_arraySize_15824.drop () ; // Release error dropped variable
+          }else if (kBoolFalse == test_15) {
+            GALGAS_uint var_powerOfTwoForArraySize_17848 = var_arraySize_15824.substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 458)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 458)).getter_bitCountForUnsignedRepresentation (SOURCE_FILE ("declaration-control-register.galgas", 458)) ;
+            const enumGalgasBool test_17 = GALGAS_bool (kIsNotEqual, var_arraySize_15824.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 459)).left_shift_operation (var_powerOfTwoForArraySize_17848 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 459)))).boolEnum () ;
+            if (kBoolTrue == test_17) {
+              TC_Array <C_FixItDescription> fixItArray18 ;
+              inCompiler->emitSemanticError (extractedValue_arraySizeLocation, GALGAS_string ("control register array size should be a static integer expression >= 2, equal to a power of 2"), fixItArray18  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 460)) ;
+              var_arraySize_15824.drop () ; // Release error dropped variable
+            }
+          }
+        }
+        GALGAS_objectIR var_elementArraySizeExpressionResult_18467 ;
+        callExtensionMethod_analyzeStaticExpression ((const cPtr_expressionAST *) extractedValue_arrayElementSizeExpression.ptr (), extractedValue_arrayElementSizeLocation, ioArgument_ioContext, ioArgument_ioGlobalLiteralStringMap, var_elementArraySizeExpressionResult_18467, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 467)) ;
+        const enumGalgasBool test_19 = var_elementArraySizeExpressionResult_18467.getter_isLiteralInteger (SOURCE_FILE ("declaration-control-register.galgas", 473)).operator_not (SOURCE_FILE ("declaration-control-register.galgas", 473)).boolEnum () ;
+        if (kBoolTrue == test_19) {
+          TC_Array <C_FixItDescription> fixItArray20 ;
+          inCompiler->emitSemanticError (extractedValue_arrayElementSizeLocation, GALGAS_string ("element size is not a static integer expression"), fixItArray20  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 474)) ;
+          var_elementArraySize_15851.drop () ; // Release error dropped variable
+        }else if (kBoolFalse == test_19) {
+          GALGAS_bigint var_elementArraySizeAsBigInt_18783 ;
+          GALGAS_PLMType joker_18745_1 ; // Joker input parameter
+          var_elementArraySizeExpressionResult_18467.method_literalInteger (joker_18745_1, var_elementArraySizeAsBigInt_18783, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 478)) ;
+          var_elementArraySize_15851 = var_elementArraySizeAsBigInt_18783.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 479)) ;
+        }
+      }
+      break ;
+    }
+    {
+    ioArgument_ioContext.mProperty_mControlRegisterMap.setter_insertKey (enumerator_14335.current (HERE).getter_mRegisterName (HERE), var_registerType_13932, var_isReadOnly_14383, var_isAccessibleInUserMode_14422, var_registerBitSliceMap_14160, var_registerFieldMap_14131, var_registerAddress_15279, var_controlRegisterFieldList_14194, var_registerBitCount_13963, var_arraySize_15824.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)), var_elementArraySize_15851, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 482)) ;
+    }
+    enumerator_14335.gotoNextObject () ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_controlRegisterDeclarationAST_enterInContext (void) {
+  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_controlRegisterDeclarationAST.mSlotID,
+                                       extensionMethod_controlRegisterDeclarationAST_enterInContext) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_controlRegisterDeclarationAST_enterInContext (defineExtensionMethod_controlRegisterDeclarationAST_enterInContext, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'buildControlRegisterMapHTMLFile'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildControlRegisterMapHTMLFile (const GALGAS_controlRegisterMap constinArgument_inControlRegisterMap,
+                                              const GALGAS_lstring constinArgument_inSourceFile,
+                                              C_Compiler * inCompiler
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string var_typeDumpFilePath_20906 = constinArgument_inSourceFile.getter_string (HERE).add_operation (GALGAS_string (".control-registers.html"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 525)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_writeControlRegisterHTMLDumpFile.getter_value ()).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_stringset var_firstLetterSet_21056 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-control-register.galgas", 527)) ;
+    cEnumerator_controlRegisterMap enumerator_21096 (constinArgument_inControlRegisterMap, kENUMERATION_UP) ;
+    while (enumerator_21096.hasCurrentObject ()) {
+      var_firstLetterSet_21056.addAssign_operation (enumerator_21096.current_lkey (HERE).getter_string (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 529)).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 529))  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 529)) ;
+      enumerator_21096.gotoNextObject () ;
+    }
+    GALGAS_string var_tableOfTypeString_21204 = GALGAS_string::makeEmptyString () ;
+    GALGAS_char var_currentFirstLetter_21238 = GALGAS_char (TO_UNICODE (32)) ;
+    cEnumerator_controlRegisterMap enumerator_21285 (constinArgument_inControlRegisterMap, kENUMERATION_UP) ;
+    while (enumerator_21285.hasCurrentObject ()) {
+      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter_21238.objectCompare (enumerator_21285.current_lkey (HERE).getter_string (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 534)))).boolEnum () ;
+      if (kBoolTrue == test_1) {
+        var_currentFirstLetter_21238 = enumerator_21285.current_lkey (HERE).getter_string (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 535)) ;
+        var_tableOfTypeString_21204.plusAssign_operation(GALGAS_string ("<br><a name=\"").add_operation (var_currentFirstLetter_21238.getter_uint (SOURCE_FILE ("declaration-control-register.galgas", 536)).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 536)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 536)).add_operation (GALGAS_string ("\"><b>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 536)).add_operation (var_currentFirstLetter_21238.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 536)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 536)).add_operation (GALGAS_string ("</b></a><br>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 536)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 536)) ;
+      }
+      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_21285.current_mArraySize (HERE).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      if (kBoolTrue == test_2) {
+        var_tableOfTypeString_21204.plusAssign_operation(function_linkForControlRegister (enumerator_21285.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 539)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 539)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 539)) ;
+      }else if (kBoolFalse == test_2) {
+        cEnumerator_range enumerator_21730 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), enumerator_21285.current_mArraySize (HERE).substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 541))), kENUMERATION_UP) ;
+        while (enumerator_21730.hasCurrentObject ()) {
+          var_tableOfTypeString_21204.plusAssign_operation(function_linkForControlRegister (enumerator_21285.current_lkey (HERE).getter_string (HERE).add_operation (GALGAS_string (" ["), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 542)).add_operation (enumerator_21730.current (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 542)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 542)).add_operation (GALGAS_string ("]"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 542)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 542)).add_operation (GALGAS_string ("<br/>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 542)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 542)) ;
+          enumerator_21730.gotoNextObject () ;
+        }
+      }
+      enumerator_21285.gotoNextObject () ;
+    }
+    GALGAS_string var_typeDumpString_21895 = GALGAS_string (filewrapperTemplate_controlRegisterDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.getter_string (HERE).getter_lastPathComponent (SOURCE_FILE ("declaration-control-register.galgas", 547)), constinArgument_inControlRegisterMap, var_firstLetterSet_21056, var_tableOfTypeString_21204 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 546))) ;
+    GALGAS_bool joker_22147 ; // Joker input parameter
+    var_typeDumpString_21895.method_writeToFileWhenDifferentContents (var_typeDumpFilePath_20906, joker_22147, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 552)) ;
+  }else if (kBoolFalse == test_0) {
+    {
+    GALGAS_string::class_method_deleteFileIfExists (var_typeDumpFilePath_20906, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 554)) ;
+    }
+  }
+}
+
 

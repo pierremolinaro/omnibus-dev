@@ -541,92 +541,90 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_type_5F_definition_i4_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_type_5F_definition_i5_ (GALGAS_ast & ioArgument0,
-                                                              GALGAS_lstring & outArgument1,
-                                                              C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_type_5F_definition_i5_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_5F_type_i6_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_5F_type_i5_ (GALGAS_ast & ioArgument0,
                                                                const GALGAS_lstring constinArgument1,
                                                                GALGAS_abstractDeclarationAST & outArgument2,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_5F_type_i6_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_5F_type_i5_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i7_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_i6_ (GALGAS_ast & ioArgument0,
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i7_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i6_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i8_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_ (GALGAS_ast & ioArgument0,
                                                                                                         GALGAS_structurePropertyListAST & ioArgument1,
                                                                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i8_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i9_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_ (GALGAS_ast & ioArgument0,
                                                                                         GALGAS_structurePropertyListAST & ioArgument1,
                                                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i9_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_struct_5F_property_5F_declaration_i10_ (GALGAS_ast & ioArgument0,
-                                                                              const GALGAS_bool constinArgument1,
-                                                                              GALGAS_structurePropertyListAST & ioArgument2,
-                                                                              C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_struct_5F_property_5F_declaration_i9_ (GALGAS_ast & ioArgument0,
+                                                                             const GALGAS_bool constinArgument1,
+                                                                             GALGAS_structurePropertyListAST & ioArgument2,
+                                                                             C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_struct_5F_property_5F_declaration_i10_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_struct_5F_property_5F_declaration_i9_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i10_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i10_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i11_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i11_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i12_ (GALGAS_ast & ioArgument0,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i12_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_property_5F_in_5F_extension_i13_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_property_5F_in_5F_extension_i12_ (GALGAS_ast & ioArgument0,
                                                                         GALGAS_structurePropertyListAST & ioArgument1,
                                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_property_5F_in_5F_extension_i13_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_property_5F_in_5F_extension_i12_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_5F_type_i14_ (GALGAS_ast & ioArgument0,
-                                                                const GALGAS_lstring constinArgument1,
-                                                                GALGAS_abstractDeclarationAST & outArgument2,
-                                                                C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_type_5F_definition_i13_ (GALGAS_ast & ioArgument0,
+                                                               GALGAS_lstring & outArgument1,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_5F_type_i14_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_type_5F_definition_i13_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i15_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_i14_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i15_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i14_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_registerDeclaration_i16_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_registerDeclaration_i15_ (GALGAS_ast & ioArgument0,
                                                                 GALGAS_controlRegisterList & ioArgument1,
                                                                 C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_registerDeclaration_i16_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_registerDeclaration_i15_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i16_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i16_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i17_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i17_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i18_ (GALGAS_ast & ioArgument0,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i18_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_module_5F_property_i19_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_module_5F_property_i18_ (GALGAS_ast & ioArgument0,
                                                                GALGAS_modulePropertyListAST & ioArgument1,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_module_5F_property_i19_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_module_5F_property_i18_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i19_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i19_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i20_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
@@ -638,193 +636,194 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_declaration_i21_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i22_ (GALGAS_ast & ioArgument0,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i22_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_staticArrayProperty_i23_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_staticArrayProperty_i22_ (GALGAS_ast & ioArgument0,
                                                                 GALGAS_staticListPropertyListAST & ioArgument1,
                                                                 C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_staticArrayProperty_i23_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_staticArrayProperty_i22_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i24_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_i23_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i24_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i23_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_staticArray_5F_exp_i25_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_staticArray_5F_exp_i24_ (GALGAS_ast & ioArgument0,
                                                                GALGAS_extendStaticListElementListAST & ioArgument1,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_staticArray_5F_exp_i25_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_staticArray_5F_exp_i24_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i26_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_i25_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i26_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i25_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_taskBody_i27_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_taskBody_i26_ (GALGAS_ast & ioArgument0,
                                                      GALGAS_structurePropertyListAST & ioArgument1,
                                                      GALGAS_functionDeclarationListAST & ioArgument2,
                                                      GALGAS_taskSetupListAST & ioArgument3,
                                                      GALGAS_syncInstructionBranchListAST & ioArgument4,
                                                      C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_taskBody_i27_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_taskBody_i26_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i27_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i27_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i28_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i28_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i29_ (GALGAS_ast & ioArgument0,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i29_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_system_5F_routine_i30_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_system_5F_routine_i29_ (GALGAS_ast & ioArgument0,
                                                               GALGAS_systemRoutineDeclarationListAST & ioArgument1,
                                                               C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_system_5F_routine_i30_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_system_5F_routine_i29_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i30_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i30_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i31_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i31_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i32_ (GALGAS_ast & ioArgument0,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i32_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_5F_init_i33_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_5F_init_i32_ (GALGAS_ast & ioArgument0,
                                                                 GALGAS_initAST & outArgument1,
                                                                 const GALGAS_lstring constinArgument2,
                                                                 C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_5F_init_i33_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_5F_init_i32_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_function_i34_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_function_i33_ (GALGAS_ast & ioArgument0,
                                                      GALGAS_functionDeclarationListAST & ioArgument1,
                                                      C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_function_i34_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_function_i33_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_mode_i35_ (GALGAS_mode & outArgument0,
+  protected : void rule_plm_5F_syntax_mode_i34_ (GALGAS_mode & outArgument0,
                                                  C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_mode_i35_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_mode_i34_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_function_5F_header_i36_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_function_5F_header_i35_ (GALGAS_ast & ioArgument0,
                                                                GALGAS_mode & outArgument1,
                                                                GALGAS_lstring & outArgument2,
                                                                GALGAS_lstringlist & outArgument3,
                                                                GALGAS_routineFormalArgumentListAST & outArgument4,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_function_5F_header_i36_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_function_5F_header_i35_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_i37_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_i36_ (GALGAS_ast & ioArgument0,
                                                                              GALGAS_routineFormalArgumentListAST & outArgument1,
                                                                              C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_i37_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_i36_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i37_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i37_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i38_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i38_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i39_ (GALGAS_ast & ioArgument0,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i39_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_isr_i40_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_isr_i39_ (GALGAS_ast & ioArgument0,
                                                 const GALGAS_lstring constinArgument1,
                                                 C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_isr_i40_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_isr_i39_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_guard_i41_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_guard_i40_ (GALGAS_ast & ioArgument0,
                                                   GALGAS_guardDeclarationListAST & ioArgument1,
                                                   C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_guard_i41_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_guard_i40_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i42_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_i41_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i42_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i41_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_i43_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_i42_ (GALGAS_ast & ioArgument0,
                                                        GALGAS_expressionAST & outArgument1,
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_i43_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_i42_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_logical_5F_xor_i44_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_logical_5F_xor_i43_ (GALGAS_ast & ioArgument0,
                                                                          GALGAS_expressionAST & outArgument1,
                                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_logical_5F_xor_i44_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_logical_5F_xor_i43_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_logical_5F_and_i45_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_logical_5F_and_i44_ (GALGAS_ast & ioArgument0,
                                                                          GALGAS_expressionAST & outArgument1,
                                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_logical_5F_and_i45_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_logical_5F_and_i44_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_or_i46_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_or_i45_ (GALGAS_ast & ioArgument0,
                                                                         GALGAS_expressionAST & outArgument1,
                                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_or_i46_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_or_i45_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_xor_i47_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_xor_i46_ (GALGAS_ast & ioArgument0,
                                                                          GALGAS_expressionAST & outArgument1,
                                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_xor_i47_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_xor_i46_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_and_i48_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_and_i47_ (GALGAS_ast & ioArgument0,
                                                                          GALGAS_expressionAST & outArgument1,
                                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_and_i48_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_bitwise_5F_and_i47_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_equality_i49_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_equality_i48_ (GALGAS_ast & ioArgument0,
                                                                    GALGAS_expressionAST & outArgument1,
                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_equality_i49_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_equality_i48_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_comparison_i50_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_comparison_i49_ (GALGAS_ast & ioArgument0,
                                                                      GALGAS_expressionAST & outArgument1,
                                                                      C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_comparison_i50_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_comparison_i49_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_shift_i51_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_shift_i50_ (GALGAS_ast & ioArgument0,
                                                                 GALGAS_expressionAST & outArgument1,
                                                                 C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_shift_i51_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_shift_i50_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_addition_i52_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_addition_i51_ (GALGAS_ast & ioArgument0,
                                                                    GALGAS_expressionAST & outArgument1,
                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_addition_i52_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_addition_i51_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_product_i53_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_product_i52_ (GALGAS_ast & ioArgument0,
                                                                   GALGAS_expressionAST & outArgument1,
                                                                   C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_product_i53_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_product_i52_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_primary_i53_ (GALGAS_ast & ioArgument0,
+                                                    GALGAS_expressionAST & outArgument1,
+                                                    C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_primary_i53_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_primary_i54_ (GALGAS_ast & ioArgument0,
                                                     GALGAS_expressionAST & outArgument1,
@@ -904,17 +903,17 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_primary_i66_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_primary_i67_ (GALGAS_ast & ioArgument0,
-                                                    GALGAS_expressionAST & outArgument1,
-                                                    C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_primary_i67_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_expression_5F_if_i68_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_if_i67_ (GALGAS_ast & ioArgument0,
                                                              GALGAS_ifExpressionAST & outArgument1,
                                                              C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_if_i68_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_if_i67_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_primary_i68_ (GALGAS_ast & ioArgument0,
+                                                    GALGAS_expressionAST & outArgument1,
+                                                    C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_primary_i68_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_primary_i69_ (GALGAS_ast & ioArgument0,
                                                     GALGAS_expressionAST & outArgument1,
@@ -946,29 +945,29 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_primary_i73_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_primary_i74_ (GALGAS_ast & ioArgument0,
-                                                    GALGAS_expressionAST & outArgument1,
-                                                    C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_primary_i74_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_expression_5F_access_5F_list_i75_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F_access_5F_list_i74_ (GALGAS_ast & ioArgument0,
                                                                          GALGAS_primaryInExpressionAccessListAST & outArgument1,
                                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F_access_5F_list_i75_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F_access_5F_list_i74_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_primary_i76_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_primary_i75_ (GALGAS_ast & ioArgument0,
                                                     GALGAS_expressionAST & outArgument1,
                                                     C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_primary_i76_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_primary_i75_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instructionList_i77_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_instructionList_i76_ (GALGAS_ast & ioArgument0,
                                                             GALGAS_instructionListAST & outArgument1,
                                                             C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instructionList_i77_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instructionList_i76_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_instruction_i77_ (GALGAS_ast & ioArgument0,
+                                                        GALGAS_instructionListAST & ioArgument1,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_instruction_i77_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i78_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_instructionListAST & ioArgument1,
@@ -976,17 +975,17 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i78_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i79_ (GALGAS_ast & ioArgument0,
-                                                        GALGAS_instructionListAST & ioArgument1,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i79_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_assignment_5F_operator_i80_ (GALGAS_infixOperator & outArgument0,
+  protected : void rule_plm_5F_syntax_assignment_5F_operator_i79_ (GALGAS_infixOperator & outArgument0,
                                                                    GALGAS_location & outArgument1,
                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_assignment_5F_operator_i80_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_assignment_5F_operator_i79_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_instruction_i80_ (GALGAS_ast & ioArgument0,
+                                                        GALGAS_instructionListAST & ioArgument1,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_instruction_i80_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i81_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_instructionListAST & ioArgument1,
@@ -1030,17 +1029,17 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i87_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i88_ (GALGAS_ast & ioArgument0,
-                                                        GALGAS_instructionListAST & ioArgument1,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i88_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_if_5F_instruction_i89_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_if_5F_instruction_i88_ (GALGAS_ast & ioArgument0,
                                                               GALGAS_ifInstructionAST & outArgument1,
                                                               C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_if_5F_instruction_i89_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_if_5F_instruction_i88_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_guarded_5F_command_i89_ (GALGAS_ast & ioArgument0,
+                                                               GALGAS_guardedCommandAST & outArgument1,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_guarded_5F_command_i89_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_guarded_5F_command_i90_ (GALGAS_ast & ioArgument0,
                                                                GALGAS_guardedCommandAST & outArgument1,
@@ -1048,11 +1047,11 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_guarded_5F_command_i90_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_guarded_5F_command_i91_ (GALGAS_ast & ioArgument0,
-                                                               GALGAS_guardedCommandAST & outArgument1,
-                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i91_ (GALGAS_ast & ioArgument0,
+                                                        GALGAS_instructionListAST & ioArgument1,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_guarded_5F_command_i91_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i91_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i92_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_instructionListAST & ioArgument1,
@@ -1078,46 +1077,40 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i95_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i96_ (GALGAS_ast & ioArgument0,
-                                                        GALGAS_instructionListAST & ioArgument1,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i96_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_procedure_5F_call_i97_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_procedure_5F_call_i96_ (GALGAS_ast & ioArgument0,
                                                               GALGAS_callInstructionAST & outArgument1,
                                                               C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_call_i97_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_procedure_5F_call_i96_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i98_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i97_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_instructionListAST & ioArgument1,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i98_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i97_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_lvalue_i99_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_lvalue_i98_ (GALGAS_ast & ioArgument0,
                                                    GALGAS_LValueAST & outArgument1,
                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_lvalue_i99_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_lvalue_i98_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i100_ (GALGAS_ast & ioArgument0,
-                                                                     GALGAS_effectiveArgumentListAST & outArgument1,
-                                                                     GALGAS_location & outArgument2,
-                                                                     C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i99_ (GALGAS_ast & ioArgument0,
+                                                                    GALGAS_effectiveArgumentListAST & outArgument1,
+                                                                    GALGAS_location & outArgument2,
+                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i100_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i99_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i100_ (GALGAS_ast & ioArgument0,
+                                                         C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i100_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i101_ (GALGAS_ast & ioArgument0,
                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i101_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i102_ (GALGAS_ast & ioArgument0,
-                                                         C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i102_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -1303,8 +1296,6 @@ class cParser_plm_5F_syntax {
   protected : virtual int32_t select_plm_5F_syntax_89 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_plm_5F_syntax_90 (C_Lexique_plm_5F_lexique *) = 0 ;
-
-  protected : virtual int32_t select_plm_5F_syntax_91 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;
@@ -5003,19 +4994,22 @@ class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           @opaqueTypeDeclarationAST class                                           *
+//                                              @newTypeDeclaration class                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_opaqueTypeDeclarationAST : public GALGAS_abstractDeclarationAST {
+class GALGAS_newTypeDeclaration : public GALGAS_abstractDeclarationAST {
 //--- Constructor
-  public : GALGAS_opaqueTypeDeclarationAST (void) ;
+  public : GALGAS_newTypeDeclaration (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_newTypeDeclaration constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_opaqueTypeDeclarationAST * ptr (void) const { return (const cPtr_opaqueTypeDeclarationAST *) mObjectPtr ; }
+  public : inline const class cPtr_newTypeDeclaration * ptr (void) const { return (const cPtr_newTypeDeclaration *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_opaqueTypeDeclarationAST (const cPtr_opaqueTypeDeclarationAST * inSourcePtr) ;
+  public : GALGAS_newTypeDeclaration (const cPtr_newTypeDeclaration * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -5023,19 +5017,17 @@ class GALGAS_opaqueTypeDeclarationAST : public GALGAS_abstractDeclarationAST {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_opaqueTypeDeclarationAST extractObject (const GALGAS_object & inObject,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_newTypeDeclaration extractObject (const GALGAS_object & inObject,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_opaqueTypeDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                         const class GALGAS_lstringlist & inOperand1,
-                                                                         const class GALGAS_expressionAST & inOperand2,
-                                                                         const class GALGAS_location & inOperand3
-                                                                         COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_newTypeDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                   const class GALGAS_lstring & inOperand1
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_opaqueTypeDeclarationAST & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_newTypeDeclaration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5043,53 +5035,43 @@ class GALGAS_opaqueTypeDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mAliasedTypeName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOpaqueTypeName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNewTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_opaqueTypeDeclarationAST class
+} ; // End of GALGAS_newTypeDeclaration class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_opaqueTypeDeclarationAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_newTypeDeclaration ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Pointer class for @opaqueTypeDeclarationAST class                                  *
+//                                     Pointer class for @newTypeDeclaration class                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_opaqueTypeDeclarationAST : public cPtr_abstractDeclarationAST {
+class cPtr_newTypeDeclaration : public cPtr_abstractDeclarationAST {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mOpaqueTypeName ;
-  public : GALGAS_lstringlist mProperty_mAttributeList ;
-  public : GALGAS_expressionAST mProperty_mSizeExpression ;
-  public : GALGAS_location mProperty_mSizeExpressionLocation ;
+  public : GALGAS_lstring mProperty_mNewTypeName ;
+  public : GALGAS_lstring mProperty_mAliasedTypeName ;
 
 //--- Constructor
-  public : cPtr_opaqueTypeDeclarationAST (const GALGAS_lstring & in_mOpaqueTypeName,
-                                          const GALGAS_lstringlist & in_mAttributeList,
-                                          const GALGAS_expressionAST & in_mSizeExpression,
-                                          const GALGAS_location & in_mSizeExpressionLocation
-                                          COMMA_LOCATION_ARGS) ;
+  public : cPtr_newTypeDeclaration (const GALGAS_lstring & in_mNewTypeName,
+                                    const GALGAS_lstring & in_mAliasedTypeName
+                                    COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOpaqueTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mNewTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mAliasedTypeName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -8227,96 +8209,6 @@ class cPtr_truncateExpressionAST : public cPtr_expressionAST {
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @typeAliasDeclaration class                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_typeAliasDeclaration : public GALGAS_abstractDeclarationAST {
-//--- Constructor
-  public : GALGAS_typeAliasDeclaration (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_typeAliasDeclaration constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_typeAliasDeclaration * ptr (void) const { return (const cPtr_typeAliasDeclaration *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_typeAliasDeclaration (const cPtr_typeAliasDeclaration * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_typeAliasDeclaration extractObject (const GALGAS_object & inObject,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_typeAliasDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                     const class GALGAS_lstring & inOperand1
-                                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_typeAliasDeclaration & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mAliasedTypeName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNewTypeName (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_typeAliasDeclaration class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeAliasDeclaration ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Pointer class for @typeAliasDeclaration class                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_typeAliasDeclaration : public cPtr_abstractDeclarationAST {
-//--- Attributes
-  public : GALGAS_lstring mProperty_mNewTypeName ;
-  public : GALGAS_lstring mProperty_mAliasedTypeName ;
-
-//--- Constructor
-  public : cPtr_typeAliasDeclaration (const GALGAS_lstring & in_mNewTypeName,
-                                      const GALGAS_lstring & in_mAliasedTypeName
-                                      COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mNewTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mAliasedTypeName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

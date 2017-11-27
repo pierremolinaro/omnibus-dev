@@ -626,8 +626,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_89 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_90 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_syntax_91 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

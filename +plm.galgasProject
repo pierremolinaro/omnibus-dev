@@ -26,7 +26,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/type-bool.galgas"
   "galgas-sources/type-enumeration-declaration.galgas"
   "galgas-sources/type-structure-declaration.galgas"
-  "galgas-sources/type-alias.galgas"
   "galgas-sources/type-extension-declaration.galgas"
   "galgas-sources/type-integer.galgas"
   "galgas-sources/type-literal-integer.galgas"

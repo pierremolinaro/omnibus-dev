@@ -12,364 +12,6 @@
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_forInstructionOnArrayIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mEnumeratedValueName.objectCompare (p->mProperty_mEnumeratedValueName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mIteratedObjectName.objectCompare (p->mProperty_mIteratedObjectName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mIteratedObject.objectCompare (p->mProperty_mIteratedObject) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mWhileInstructionList.objectCompare (p->mProperty_mWhileInstructionList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mWhileExpressionResult.objectCompare (p->mProperty_mWhileExpressionResult) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mDoInstructionList.objectCompare (p->mProperty_mDoInstructionList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mElementType.objectCompare (p->mProperty_mElementType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mArraySize.objectCompare (p->mProperty_mArraySize) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mInvokedFunctionSet.objectCompare (p->mProperty_mInvokedFunctionSet) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_forInstructionOnArrayIR::objectCompare (const GALGAS_forInstructionOnArrayIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forInstructionOnArrayIR::GALGAS_forInstructionOnArrayIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forInstructionOnArrayIR::GALGAS_forInstructionOnArrayIR (const cPtr_forInstructionOnArrayIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_forInstructionOnArrayIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forInstructionOnArrayIR GALGAS_forInstructionOnArrayIR::constructor_new (const GALGAS_string & inAttribute_mEnumeratedValueName,
-                                                                                const GALGAS_lstring & inAttribute_mIteratedObjectName,
-                                                                                const GALGAS_objectIR & inAttribute_mIteratedObject,
-                                                                                const GALGAS_instructionListIR & inAttribute_mWhileInstructionList,
-                                                                                const GALGAS_objectIR & inAttribute_mWhileExpressionResult,
-                                                                                const GALGAS_instructionListIR & inAttribute_mDoInstructionList,
-                                                                                const GALGAS_PLMType & inAttribute_mElementType,
-                                                                                const GALGAS_uint & inAttribute_mArraySize,
-                                                                                const GALGAS_stringset & inAttribute_mInvokedFunctionSet
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_forInstructionOnArrayIR result ;
-  if (inAttribute_mEnumeratedValueName.isValid () && inAttribute_mIteratedObjectName.isValid () && inAttribute_mIteratedObject.isValid () && inAttribute_mWhileInstructionList.isValid () && inAttribute_mWhileExpressionResult.isValid () && inAttribute_mDoInstructionList.isValid () && inAttribute_mElementType.isValid () && inAttribute_mArraySize.isValid () && inAttribute_mInvokedFunctionSet.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_forInstructionOnArrayIR (inAttribute_mEnumeratedValueName, inAttribute_mIteratedObjectName, inAttribute_mIteratedObject, inAttribute_mWhileInstructionList, inAttribute_mWhileExpressionResult, inAttribute_mDoInstructionList, inAttribute_mElementType, inAttribute_mArraySize, inAttribute_mInvokedFunctionSet COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_forInstructionOnArrayIR::getter_mEnumeratedValueName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mProperty_mEnumeratedValueName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_forInstructionOnArrayIR::getter_mEnumeratedValueName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEnumeratedValueName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_forInstructionOnArrayIR::getter_mIteratedObjectName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mProperty_mIteratedObjectName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_forInstructionOnArrayIR::getter_mIteratedObjectName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIteratedObjectName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_forInstructionOnArrayIR::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
-  GALGAS_objectIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mProperty_mIteratedObject ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR cPtr_forInstructionOnArrayIR::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIteratedObject ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_forInstructionOnArrayIR::getter_mWhileInstructionList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mProperty_mWhileInstructionList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR cPtr_forInstructionOnArrayIR::getter_mWhileInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mWhileInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_forInstructionOnArrayIR::getter_mWhileExpressionResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_objectIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mProperty_mWhileExpressionResult ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR cPtr_forInstructionOnArrayIR::getter_mWhileExpressionResult (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mWhileExpressionResult ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_forInstructionOnArrayIR::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mProperty_mDoInstructionList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR cPtr_forInstructionOnArrayIR::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mDoInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType GALGAS_forInstructionOnArrayIR::getter_mElementType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_PLMType result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mProperty_mElementType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType cPtr_forInstructionOnArrayIR::getter_mElementType (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mElementType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint GALGAS_forInstructionOnArrayIR::getter_mArraySize (UNUSED_LOCATION_ARGS) const {
-  GALGAS_uint result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mProperty_mArraySize ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint cPtr_forInstructionOnArrayIR::getter_mArraySize (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mArraySize ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_forInstructionOnArrayIR::getter_mInvokedFunctionSet (UNUSED_LOCATION_ARGS) const {
-  GALGAS_stringset result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mProperty_mInvokedFunctionSet ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset cPtr_forInstructionOnArrayIR::getter_mInvokedFunctionSet (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInvokedFunctionSet ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                  Pointer class for @forInstructionOnArrayIR class                                   *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_forInstructionOnArrayIR::cPtr_forInstructionOnArrayIR (const GALGAS_string & in_mEnumeratedValueName,
-                                                            const GALGAS_lstring & in_mIteratedObjectName,
-                                                            const GALGAS_objectIR & in_mIteratedObject,
-                                                            const GALGAS_instructionListIR & in_mWhileInstructionList,
-                                                            const GALGAS_objectIR & in_mWhileExpressionResult,
-                                                            const GALGAS_instructionListIR & in_mDoInstructionList,
-                                                            const GALGAS_PLMType & in_mElementType,
-                                                            const GALGAS_uint & in_mArraySize,
-                                                            const GALGAS_stringset & in_mInvokedFunctionSet
-                                                            COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mProperty_mEnumeratedValueName (in_mEnumeratedValueName),
-mProperty_mIteratedObjectName (in_mIteratedObjectName),
-mProperty_mIteratedObject (in_mIteratedObject),
-mProperty_mWhileInstructionList (in_mWhileInstructionList),
-mProperty_mWhileExpressionResult (in_mWhileExpressionResult),
-mProperty_mDoInstructionList (in_mDoInstructionList),
-mProperty_mElementType (in_mElementType),
-mProperty_mArraySize (in_mArraySize),
-mProperty_mInvokedFunctionSet (in_mInvokedFunctionSet) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_forInstructionOnArrayIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_forInstructionOnArrayIR ;
-}
-
-void cPtr_forInstructionOnArrayIR::description (C_String & ioString,
-                                                const int32_t inIndentation) const {
-  ioString << "[@forInstructionOnArrayIR:" ;
-  mProperty_mEnumeratedValueName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mIteratedObjectName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mIteratedObject.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mWhileInstructionList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mWhileExpressionResult.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mDoInstructionList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mElementType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mArraySize.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mInvokedFunctionSet.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_forInstructionOnArrayIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forInstructionOnArrayIR (mProperty_mEnumeratedValueName, mProperty_mIteratedObjectName, mProperty_mIteratedObject, mProperty_mWhileInstructionList, mProperty_mWhileExpressionResult, mProperty_mDoInstructionList, mProperty_mElementType, mProperty_mArraySize, mProperty_mInvokedFunctionSet COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @forInstructionOnArrayIR type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_forInstructionOnArrayIR ("forInstructionOnArrayIR",
-                                                & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_forInstructionOnArrayIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_forInstructionOnArrayIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_forInstructionOnArrayIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_forInstructionOnArrayIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forInstructionOnArrayIR GALGAS_forInstructionOnArrayIR::extractObject (const GALGAS_object & inObject,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_forInstructionOnArrayIR result ;
-  const GALGAS_forInstructionOnArrayIR * p = (const GALGAS_forInstructionOnArrayIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_forInstructionOnArrayIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("forInstructionOnArrayIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
 typeComparisonResult cPtr_forLowerUpperBoundInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) inOperandPtr ;
@@ -13795,6 +13437,362 @@ GALGAS_routineFormalArgumentListAST_2D_element GALGAS_routineFormalArgumentListA
       result = *p ;
     }else{
       inCompiler->castError ("routineFormalArgumentListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureDeclarationListAST_2D_element (void) :
+mProperty_mName (),
+mProperty_mExecutionMode (),
+mProperty_mIsExported (),
+mProperty_mFormalArgumentList (),
+mProperty_mEndOfProcLocation () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_requiredProcedureDeclarationListAST_2D_element::~ GALGAS_requiredProcedureDeclarationListAST_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
+                                                                                                              const GALGAS_mode & inOperand1,
+                                                                                                              const GALGAS_bool & inOperand2,
+                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand3,
+                                                                                                              const GALGAS_location & inOperand4) :
+mProperty_mName (inOperand0),
+mProperty_mExecutionMode (inOperand1),
+mProperty_mIsExported (inOperand2),
+mProperty_mFormalArgumentList (inOperand3),
+mProperty_mEndOfProcLocation (inOperand4) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                                                              const GALGAS_mode & inOperand1,
+                                                                                                                              const GALGAS_bool & inOperand2,
+                                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand3,
+                                                                                                                              const GALGAS_location & inOperand4 
+                                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_requiredProcedureDeclarationListAST_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_requiredProcedureDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_requiredProcedureDeclarationListAST_2D_element::objectCompare (const GALGAS_requiredProcedureDeclarationListAST_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mName.objectCompare (inOperand.mProperty_mName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mExecutionMode.objectCompare (inOperand.mProperty_mExecutionMode) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mIsExported.objectCompare (inOperand.mProperty_mIsExported) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mFormalArgumentList.objectCompare (inOperand.mProperty_mFormalArgumentList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mEndOfProcLocation.objectCompare (inOperand.mProperty_mEndOfProcLocation) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_requiredProcedureDeclarationListAST_2D_element::isValid (void) const {
+  return mProperty_mName.isValid () && mProperty_mExecutionMode.isValid () && mProperty_mIsExported.isValid () && mProperty_mFormalArgumentList.isValid () && mProperty_mEndOfProcLocation.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_requiredProcedureDeclarationListAST_2D_element::drop (void) {
+  mProperty_mName.drop () ;
+  mProperty_mExecutionMode.drop () ;
+  mProperty_mIsExported.drop () ;
+  mProperty_mFormalArgumentList.drop () ;
+  mProperty_mEndOfProcLocation.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_requiredProcedureDeclarationListAST_2D_element::description (C_String & ioString,
+                                                                         const int32_t inIndentation) const {
+  ioString << "<struct @requiredProcedureDeclarationListAST-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mExecutionMode.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mIsExported.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mFormalArgumentList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mEndOfProcLocation.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_mode GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mExecutionMode (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mExecutionMode ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mIsExported (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mIsExported ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineFormalArgumentListAST GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mFormalArgumentList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFormalArgumentList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mEndOfProcLocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mEndOfProcLocation ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  @requiredProcedureDeclarationListAST-element type                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_requiredProcedureDeclarationListAST_2D_element ("requiredProcedureDeclarationListAST-element",
+                                                                       NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_requiredProcedureDeclarationListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_requiredProcedureDeclarationListAST_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_requiredProcedureDeclarationListAST_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_requiredProcedureDeclarationListAST_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDeclarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                                            C_Compiler * inCompiler
+                                                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_requiredProcedureDeclarationListAST_2D_element result ;
+  const GALGAS_requiredProcedureDeclarationListAST_2D_element * p = (const GALGAS_requiredProcedureDeclarationListAST_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_requiredProcedureDeclarationListAST_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("requiredProcedureDeclarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_isrDeclarationListAST_2D_element::GALGAS_isrDeclarationListAST_2D_element (void) :
+mProperty_mISRName (),
+mProperty_mMode (),
+mProperty_mModuleName (),
+mProperty_mISRInstructionList (),
+mProperty_mEndOfISRDeclaration () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_isrDeclarationListAST_2D_element::~ GALGAS_isrDeclarationListAST_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_isrDeclarationListAST_2D_element::GALGAS_isrDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
+                                                                                  const GALGAS_mode & inOperand1,
+                                                                                  const GALGAS_lstring & inOperand2,
+                                                                                  const GALGAS_instructionListAST & inOperand3,
+                                                                                  const GALGAS_location & inOperand4) :
+mProperty_mISRName (inOperand0),
+mProperty_mMode (inOperand1),
+mProperty_mModuleName (inOperand2),
+mProperty_mISRInstructionList (inOperand3),
+mProperty_mEndOfISRDeclaration (inOperand4) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_isrDeclarationListAST_2D_element GALGAS_isrDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                                  const GALGAS_mode & inOperand1,
+                                                                                                  const GALGAS_lstring & inOperand2,
+                                                                                                  const GALGAS_instructionListAST & inOperand3,
+                                                                                                  const GALGAS_location & inOperand4 
+                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_isrDeclarationListAST_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_isrDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_isrDeclarationListAST_2D_element::objectCompare (const GALGAS_isrDeclarationListAST_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mISRName.objectCompare (inOperand.mProperty_mISRName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mModuleName.objectCompare (inOperand.mProperty_mModuleName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mISRInstructionList.objectCompare (inOperand.mProperty_mISRInstructionList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mEndOfISRDeclaration.objectCompare (inOperand.mProperty_mEndOfISRDeclaration) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_isrDeclarationListAST_2D_element::isValid (void) const {
+  return mProperty_mISRName.isValid () && mProperty_mMode.isValid () && mProperty_mModuleName.isValid () && mProperty_mISRInstructionList.isValid () && mProperty_mEndOfISRDeclaration.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_isrDeclarationListAST_2D_element::drop (void) {
+  mProperty_mISRName.drop () ;
+  mProperty_mMode.drop () ;
+  mProperty_mModuleName.drop () ;
+  mProperty_mISRInstructionList.drop () ;
+  mProperty_mEndOfISRDeclaration.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_isrDeclarationListAST_2D_element::description (C_String & ioString,
+                                                           const int32_t inIndentation) const {
+  ioString << "<struct @isrDeclarationListAST-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mISRName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mMode.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mModuleName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mISRInstructionList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mEndOfISRDeclaration.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_isrDeclarationListAST_2D_element::getter_mISRName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mISRName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_mode GALGAS_isrDeclarationListAST_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mMode ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_isrDeclarationListAST_2D_element::getter_mModuleName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mModuleName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_instructionListAST GALGAS_isrDeclarationListAST_2D_element::getter_mISRInstructionList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mISRInstructionList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_isrDeclarationListAST_2D_element::getter_mEndOfISRDeclaration (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mEndOfISRDeclaration ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @isrDeclarationListAST-element type                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_isrDeclarationListAST_2D_element ("isrDeclarationListAST-element",
+                                                         NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_isrDeclarationListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_isrDeclarationListAST_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_isrDeclarationListAST_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_isrDeclarationListAST_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_isrDeclarationListAST_2D_element GALGAS_isrDeclarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_isrDeclarationListAST_2D_element result ;
+  const GALGAS_isrDeclarationListAST_2D_element * p = (const GALGAS_isrDeclarationListAST_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_isrDeclarationListAST_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("isrDeclarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
