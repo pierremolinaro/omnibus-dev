@@ -32,11 +32,11 @@ syntax plm_syntax (plm_lexique) {
       <function> !?ioAST !?standAloneFunctionDeclarationListAST
       ioAST.mStandAloneFunctionDeclarationListAST += standAloneFunctionDeclarationListAST
     while
-     @systemRoutineDeclarationListAST standAloneSystemRoutineListAST = {}
+      @systemRoutineDeclarationListAST standAloneSystemRoutineListAST = {}
       <system_routine> !?ioAST !?standAloneSystemRoutineListAST
       ioAST.mStandAloneSystemRoutineListAST += standAloneSystemRoutineListAST
-    while
-      <isr> !?ioAST !["" nowhere] # No module name
+#    while
+#      <isr> !?ioAST !["" nowhere] # No module name
     while
       <import_file> !?outImportedFileList
     end

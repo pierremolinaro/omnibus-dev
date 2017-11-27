@@ -3266,14 +3266,11 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_start_5F_symbol_i1_ (GALGAS_ast &
       ioArgument_ioAST.mProperty_mStandAloneFunctionDeclarationListAST.plusAssign_operation(var_standAloneFunctionDeclarationListAST_1223, inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 33)) ;
     } break ;
     case 4: {
-      GALGAS_systemRoutineDeclarationListAST var_standAloneSystemRoutineListAST_1461 = GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 35)) ;
-      nt_system_5F_routine_ (ioArgument_ioAST, var_standAloneSystemRoutineListAST_1461, inCompiler) ;
-      ioArgument_ioAST.mProperty_mStandAloneSystemRoutineListAST.plusAssign_operation(var_standAloneSystemRoutineListAST_1461, inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 37)) ;
+      GALGAS_systemRoutineDeclarationListAST var_standAloneSystemRoutineListAST_1462 = GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 35)) ;
+      nt_system_5F_routine_ (ioArgument_ioAST, var_standAloneSystemRoutineListAST_1462, inCompiler) ;
+      ioArgument_ioAST.mProperty_mStandAloneSystemRoutineListAST.plusAssign_operation(var_standAloneSystemRoutineListAST_1462, inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 37)) ;
     } break ;
     case 5: {
-      nt_isr_ (ioArgument_ioAST, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("syntax-grammar.galgas", 39)), inCompiler) ;
-    } break ;
-    case 6: {
       nt_import_5F_file_ (outArgument_outImportedFileList, inCompiler) ;
     } break ;
     default:
@@ -3300,9 +3297,6 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_start_5F_symbol_i1_parse (C_Lexiq
       nt_system_5F_routine_parse (inCompiler) ;
     } break ;
     case 5: {
-      nt_isr_parse (inCompiler) ;
-    } break ;
-    case 6: {
       nt_import_5F_file_parse (inCompiler) ;
     } break ;
     default:

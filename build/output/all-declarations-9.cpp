@@ -4357,22 +4357,15 @@ static void extensionMethod_decoratedISRDeclarations_semanticAnalysis (const cPt
     {
     routine_initialVariableMap (constinArgument_inSemanticContext, enumerator_3232.current (HERE).getter_mMode (HERE), GALGAS_bool (false), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-isr.galgas", 94)), var_universalMap_3833, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 90)) ;
     }
-    GALGAS_PLMType temp_1 ;
-    const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_3232.current (HERE).getter_mModuleName (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
-    if (kBoolTrue == test_2) {
-      temp_1 = function_voidType (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 99)) ;
-    }else if (kBoolFalse == test_2) {
-      temp_1 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inSemanticContext.getter_mTypeMap (HERE), function_llvmModuleNameFromName (enumerator_3232.current (HERE).getter_mModuleName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 101)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 101)).getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 101)) ;
-    }
-    GALGAS_PLMType var_selfType_3882 = temp_1 ;
-    GALGAS_allocaList var_allocaList_4133 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 104)) ;
-    GALGAS_instructionListIR var_instructionGenerationList_4187 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 105)) ;
-    extensionMethod_analyzeRoutineInstructionList (enumerator_3232.current (HERE).getter_mISRInstructionList (HERE), var_selfType_3882, GALGAS_bool (true), GALGAS_bool (true), var_routineNameForInvocationGraph_3297, constinArgument_inSemanticContext, enumerator_3232.current (HERE).getter_mMode (HERE), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mProperty_mStaticStringMap, var_universalMap_3833, var_allocaList_4133, var_instructionGenerationList_4187, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 106)) ;
+    GALGAS_PLMType var_selfType_3967 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inSemanticContext.getter_mTypeMap (HERE), function_llvmModuleNameFromName (enumerator_3232.current (HERE).getter_mModuleName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 101)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 101)).getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 101)) ;
+    GALGAS_allocaList var_allocaList_4149 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 104)) ;
+    GALGAS_instructionListIR var_instructionGenerationList_4203 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 105)) ;
+    extensionMethod_analyzeRoutineInstructionList (enumerator_3232.current (HERE).getter_mISRInstructionList (HERE), var_selfType_3967, GALGAS_bool (true), GALGAS_bool (true), var_routineNameForInvocationGraph_3297, constinArgument_inSemanticContext, enumerator_3232.current (HERE).getter_mMode (HERE), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mProperty_mStaticStringMap, var_universalMap_3833, var_allocaList_4149, var_instructionGenerationList_4203, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 106)) ;
     callExtensionMethod_checkLocalVariableFinalState ((const cPtr_universalValuedObjectMapForContext *) var_universalMap_3833.ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 120)) ;
-    GALGAS_interruptionPanicCode joker_4939 ; // Joker input parameter
-    constinArgument_inSemanticContext.getter_mAvailableInterruptMap (HERE).method_searchKey (enumerator_3232.current (HERE).getter_mISRName (HERE), joker_4939, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 124)) ;
+    GALGAS_interruptionPanicCode joker_4867 ; // Joker input parameter
+    constinArgument_inSemanticContext.getter_mAvailableInterruptMap (HERE).method_searchKey (enumerator_3232.current (HERE).getter_mISRName (HERE), joker_4867, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 122)) ;
     {
-    ioArgument_ioIntermediateCodeStruct.mProperty_mInterruptMapIR.setter_insertKey (enumerator_3232.current (HERE).getter_mISRName (HERE), var_selfType_3882, enumerator_3232.current (HERE).getter_mModuleName (HERE).getter_string (SOURCE_FILE ("declaration-isr.galgas", 128)), var_allocaList_4133, var_instructionGenerationList_4187, enumerator_3232.current (HERE).getter_mMode (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 125)) ;
+    ioArgument_ioIntermediateCodeStruct.mProperty_mInterruptMapIR.setter_insertKey (enumerator_3232.current (HERE).getter_mISRName (HERE), var_selfType_3967, enumerator_3232.current (HERE).getter_mModuleName (HERE).getter_string (SOURCE_FILE ("declaration-isr.galgas", 126)), var_allocaList_4149, var_instructionGenerationList_4203, enumerator_3232.current (HERE).getter_mMode (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 123)) ;
     }
     enumerator_3232.gotoNextObject () ;
   }

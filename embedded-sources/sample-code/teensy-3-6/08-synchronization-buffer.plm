@@ -33,10 +33,10 @@ init 1000 {
 let SIZE = 10
 
 struct $synchronizationBuffer {
-  var data = $uint32 [SIZE] (!repeated:0)
+  var data = $uint32 [SIZE] (!repeated:$uint32 ())
   var readIndex $uint32 = 0
   var writeIndex $uint32 = 0
-  var readSemaphore = $semaphore (!value: $uint32 ())
+  var readSemaphore = $semaphore (!value:0)
   var writeSemaphore = $semaphore (!value:SIZE)
 
   //············································································
