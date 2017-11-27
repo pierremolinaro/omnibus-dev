@@ -3,16 +3,10 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @typeArrayDeclarationAST : @abstractDeclarationAST {
-  @lstring mArrayTypeName
+  @lstring mAnonymousArrayTypeName
   @lstring mElementTypeName
   @expressionAST mSizeExpression
   @location mSizeExpressionLocation
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @typeArrayDeclarationAST location -> @location outLocation {
-  outLocation = mArrayTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -23,14 +17,16 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_type> ?!@ast ioAST ?let @lstring inNewTypeName !@abstractDeclarationAST outDeclaration {
+  rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
     $\$type$ ?let elementTypeName
     $[$
     <expression> !?ioAST ?let sizeExpression
     let sizeExpressionLocation = @location.here
     $]$
-    outDeclaration = @typeArrayDeclarationAST.new {
-      !inNewTypeName
+    outTypeName = ["anonymous.array." + ioAST.mTypeDeclarationIndex here]
+    ioAST.mTypeDeclarationIndex ++
+    ioAST.mDeclarationListAST += !@typeArrayDeclarationAST.new {
+      !outTypeName
       !elementTypeName
       !sizeExpression
       !sizeExpressionLocation
@@ -58,19 +54,25 @@ override method @typeArrayDeclarationAST addExtension
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let newTypeName = llvmTypeNameFromPLMname (!mArrayTypeName)
+  let newTypeName = llvmTypeNameFromPLMname (!mAnonymousArrayTypeName)
   let elementTypeName = llvmTypeNameFromPLMname (!mElementTypeName)
   [!?ioGraph addNode !newTypeName !self]
   [!?ioGraph addEdge !newTypeName !elementTypeName]
   [mSizeExpression addDependenceEdgeForStaticExpression !newTypeName !?ioGraph]
-  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !mArrayTypeName.location}
+  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !mAnonymousArrayTypeName.location}
   [!?ioGraph addEdge !newTypeName !rootNode]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override getter @typeArrayDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "arraytype $" + mArrayTypeName 
+  outRepresentation = "anonymous $" + mAnonymousArrayTypeName 
+}
+
+#·······················································································································
+
+override getter @typeArrayDeclarationAST location -> @location outLocation {
+  outLocation = mAnonymousArrayTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -108,7 +110,7 @@ override method @typeArrayDeclarationAST enterInContext
   [mSizeExpression analyzeExpression
     !self:voidType ()
     !inGuard:false
-    !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}
+    !routineNameForInvocationGraph:.new {!mAnonymousArrayTypeName.string + " init" !mAnonymousArrayTypeName.location}
     !optionalTargetType:voidType ()
     !context:ioContext
     !mode:.bootMode
@@ -126,18 +128,11 @@ override method @typeArrayDeclarationAST enterInContext
     let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName} type]
   #-------------------------------------------- Class method map : add "count" constructor
     @classConstantMap classConstantMap = {}
-   [!?classConstantMap insertKey !.new {!"count" !mArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
+   [!?classConstantMap insertKey !.new {!"count" !mAnonymousArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
   #-------------------------------------------- Property map
     @propertyMap arrayTypePropertyMap = {}
-#    [!?propertyMap addFunction
-#      !receiverTypeName:integerTypeName
-#      !methodName:byteSwappedMethoName ()
-#      !resultTypeProxy:selfTypeProxy
-#      !?ioSubprogramInvocationGraph
-#    ]
-
     [!?arrayTypePropertyMap insertKey # "count" property
-      !.new {!"count" !mArrayTypeName.location}
+      !.new {!"count" !mAnonymousArrayTypeName.location}
       !true # public
       !.constantProperty {!value:.literalInteger {!type:staticIntegerType () !value:arraySize}}
     ]
@@ -155,16 +150,16 @@ override method @typeArrayDeclarationAST enterInContext
       !classConstantMap:classConstantMap
       !constructorMap:constructorMap
       !typeAttributes:typeAttributes
-      !plmTypeName:mArrayTypeName
+      !plmTypeName:mAnonymousArrayTypeName
       !kind:.arrayType {!elementType:elementType !size:arraySize}
     }
     [!?ioContext.mTypeMap insertType
-      !lkey:mArrayTypeName
+      !lkey:mAnonymousArrayTypeName
       !type:arrayType
       !index:[ioContext.mTypeMap count]
     ]
   #---------------- Add decorated declaration
-    ioDecoratedDeclarationList += !@decoratedTypeArrayDeclaration.new {!mArrayTypeName !arraySize}
+    ioDecoratedDeclarationList += !@decoratedTypeArrayDeclaration.new {!mAnonymousArrayTypeName !arraySize}
   end
 }
 
@@ -173,7 +168,7 @@ override method @typeArrayDeclarationAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedTypeArrayDeclaration : @abstractDecoratedDeclaration {
-  @lstring mArrayTypeName
+  @lstring mAnonymousArrayTypeName
   @uint mArraySize
 }
 
@@ -185,7 +180,7 @@ override method @decoratedTypeArrayDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #----------- Generate enumeration specific code
-  ioIntermediateCodeStruct.mGenerationListIR += !@arrayIR.new {!mArrayTypeName !mArraySize}
+  ioIntermediateCodeStruct.mGenerationListIR += !@arrayIR.new {!mAnonymousArrayTypeName !mArraySize}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

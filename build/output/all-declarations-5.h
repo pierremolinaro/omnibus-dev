@@ -40,16 +40,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                                  const GALGAS_lstring inArgument2,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'declaration_type' non terminal
-//--- 'parse' label
-  public : virtual void nt_declaration_5F_type_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_declaration_5F_type_ (GALGAS_ast & ioArgument0,
-                                                 const GALGAS_lstring inArgument1,
-                                                 GALGAS_abstractDeclarationAST & outArgument2,
-                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'effective_parameters' non terminal
 //--- 'parse' label
   public : virtual void nt_effective_5F_parameters_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
