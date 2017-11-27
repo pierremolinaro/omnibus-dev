@@ -170,7 +170,7 @@ Cette fonction signifie aux tâches enregistrées dans \plm=ioGuard= que les gar
 
 
 
-\subsection{Fonction \texttt{notifyChangeForGuardedWaitUntil((?withCurrentDate{}:)}}
+\subsection{Fonction \texttt{notifyChangeForGuardedWaitUntil(?withCurrentDate{}:)}}
 
 \begin{PLM}
 func service
@@ -191,7 +191,7 @@ Le module \plm=time= décrit ici permet une gestion élémentaire du temps, c'es
   \item la définition d'une garde exprimant l'attente d'échéance en garde.
 \end{itemize}
 
-Les Cortex-M4 implémentent le timer \emph{Systick} qui permet de programmer très simplement des interruptions périodiques. La période choisie est $1~ms$. Le comptage du temps est initialisé à $0$ au démarrage du micro-contrôleur. Il est mémorisé dans une variable de type \plm=$uint32=, ce qui signifie qu'il retombe à $0$ au bout de $2^{32}~ms$, c'est-à-dire un peu de $49$ jours\footnote{Il n'y a pas d'impossiblité technique de passer à une variable plus large, par exemple un entier 64 bits. Il faut uniquement que les routines concernées de l'exécutif, écrites en C, prennent en charge ce type. Ces fonctions sont~: \texttt{makeTasksReady(?fromCurrentDate{}:)}, \texttt{handle (?guardedDeadline{}:)} et \texttt{notifyChangeForGuardedWaitUntil((?withCurrentDate{}:)}.}.
+Les Cortex-M4 implémentent le timer \emph{Systick} qui permet de programmer très simplement des interruptions périodiques. La période choisie est $1~ms$. Le comptage du temps est initialisé à $0$ au démarrage du micro-contrôleur. Il est mémorisé dans une variable de type \plm=$uint32=, ce qui signifie qu'il retombe à $0$ au bout de $2^{32}~ms$, c'est-à-dire un peu de $49$ jours\footnote{Il n'y a pas d'impossiblité technique de passer à une variable plus large, par exemple un entier 64 bits. Il faut uniquement que les routines concernées de l'exécutif, écrites en C, prennent en charge ce type. Ces fonctions sont~: \texttt{makeTasksReady(?fromCurrentDate{}:)}, \texttt{handle (?guardedDeadline{}:)} et \texttt{notifyChangeForGuardedWaitUntil(?withCurrentDate{}:)}.}.
 
 
 

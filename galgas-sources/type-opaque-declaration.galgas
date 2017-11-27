@@ -2,17 +2,11 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @opaqueTypeDeclarationAST : @abstractDeclarationAST {
-  @lstring mOpaqueTypeName
-  @lstringlist mAttributeList
+class @typeOpaqueDefinitionDeclaration : @abstractDeclarationAST {
+  @lstring mAnonymousOpaqueTypeName
   @expressionAST mSizeExpression
   @location mSizeExpressionLocation
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @opaqueTypeDeclarationAST location -> @location outLocation {
-  outLocation = mOpaqueTypeName.location
+  @lstringlist mAttributeList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -23,20 +17,27 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_type> ?!@ast ioAST ?let @lstring inNewTypeName !@abstractDeclarationAST outDeclaration {
-    $($
-    $($
-    <expression> !?ioAST  ?let sizeExpression
+  rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
+    $[$
+    $[$
+    <expression> !?ioAST ?let sizeExpression
     let sizeExpressionLocation = @location.here
-    $)$
-    $)$
+    $]$   
+    $]$   
+    outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]
+    ioAST.mTypeDeclarationIndex ++
     @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
-    outDeclaration = @opaqueTypeDeclarationAST.new {!inNewTypeName !attributeList !sizeExpression !sizeExpressionLocation}
+    ioAST.mDeclarationListAST += !@typeOpaqueDefinitionDeclaration.new {
+      !outTypeName
+      !sizeExpression
+      !sizeExpressionLocation
+      !attributeList
+    }
   }
 
   #·····················································································································
@@ -44,10 +45,10 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
+#!  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclarationAST addExtension
+override method @typeOpaqueDefinitionDeclaration addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
@@ -56,29 +57,42 @@ override method @opaqueTypeDeclarationAST addExtension
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclarationAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  let typeName = llvmTypeNameFromPLMname (!mOpaqueTypeName)
-  [!?ioGraph addNode !typeName !self]
-  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (![staticIntegerTypeName () nowhere])]
-  [mSizeExpression addDependenceEdgeForStaticExpression !typeName !?ioGraph]
+method @typeOpaqueDefinitionDeclaration noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let typeName = llvmTypeNameFromPLMname (!mAnonymousOpaqueTypeName)
+  [!?ioGraph noteNode !typeName]
+  [mSizeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#·······················································································································
+
+override method @typeOpaqueDefinitionDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let internalTypeName = llvmTypeNameFromPLMname (!mAnonymousOpaqueTypeName)
+#--- Add structure type name as node
+  [!?ioGraph addNode !internalTypeName !self]
+#--- Add size expression
+  [mSizeExpression addDependenceEdgeForStaticExpression !internalTypeName !?ioGraph]
+}
+
+#·······················································································································
+
+override getter @typeOpaqueDefinitionDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "anonymous $" + mAnonymousOpaqueTypeName 
+}
+
+#·······················································································································
+
+override getter @typeOpaqueDefinitionDeclaration location -> @location outLocation {
+  outLocation = mAnonymousOpaqueTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @opaqueTypeDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "opaqueType $" + mOpaqueTypeName 
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclarationAST enterInContext
+override method @typeOpaqueDefinitionDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
@@ -86,7 +100,6 @@ override method @opaqueTypeDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-#---
   @PLMTypeAttributes attributes = .none
   for (attribute) in mAttributeList do
     if attribute.string == "instantiable" then
@@ -116,7 +129,7 @@ override method @opaqueTypeDeclarationAST enterInContext
   [mSizeExpression analyzeExpression
     !self:voidType ()
     !inGuard:false
-    !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}
+    !routineNameForInvocationGraph:.new {!mAnonymousOpaqueTypeName.string + " init" !mAnonymousOpaqueTypeName.location}
     !optionalTargetType:voidType ()
     !context:ioContext
     !mode:.bootMode
@@ -140,11 +153,11 @@ override method @opaqueTypeDeclarationAST enterInContext
       !classConstantMap:{}
       !constructorMap:constructorMap
       !typeAttributes:attributes
-      !plmTypeName:mOpaqueTypeName
+      !plmTypeName:mAnonymousOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}
     }
     [!?ioContext.mTypeMap insertType
-      !lkey:mOpaqueTypeName
+      !lkey:mAnonymousOpaqueTypeName
       !type:opaqueType
       !index:[ioContext.mTypeMap count]
     ]
