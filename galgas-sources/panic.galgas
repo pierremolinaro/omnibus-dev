@@ -22,7 +22,7 @@ syntax extension plm_syntax {
     $setup$
     $integer$ ?let priority
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     let endOfInstructionList = @location.here
     $}$
     ioAST.mDeclarationListAST += !@panicAST.new {
@@ -40,7 +40,7 @@ syntax extension plm_syntax {
     $loop$
     $integer$ ?let priority
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     let endOfInstructionList = @location.here
     $}$
     ioAST.mDeclarationListAST += !@panicAST.new {

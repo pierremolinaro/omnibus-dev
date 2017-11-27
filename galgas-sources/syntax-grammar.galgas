@@ -19,20 +19,24 @@ syntax plm_syntax (plm_lexique) {
   #·····················································································································
 
   rule <start_symbol>
-    ?!@ast ioAst
+    ?!@ast ioAST
     !importClauseList:@lstringlist outImportedFileList
     !endOfSourceFile:@location outEndOfSourceFile
   {
     outImportedFileList = {}
     repeat
     while
-      <declaration> !?ioAst
+      <declaration> !?ioAST
     while
-      <function> !?ioAst.mStandAloneFunctionDeclarationListAST
+     @functionDeclarationListAST standAloneFunctionDeclarationListAST = {}
+      <function> !?ioAST !?standAloneFunctionDeclarationListAST
+      ioAST.mStandAloneFunctionDeclarationListAST += standAloneFunctionDeclarationListAST
     while
-      <system_routine> !?ioAst.mStandAloneSystemRoutineListAST
+     @systemRoutineDeclarationListAST standAloneSystemRoutineListAST = {}
+      <system_routine> !?ioAST !?standAloneSystemRoutineListAST
+      ioAST.mStandAloneSystemRoutineListAST += standAloneSystemRoutineListAST
     while
-      <isr> !?ioAst.mISRDeclarationListAST !["" nowhere] # No module name
+      <isr> !?ioAST !["" nowhere] # No module name
     while
       <import_file> !?outImportedFileList
     end

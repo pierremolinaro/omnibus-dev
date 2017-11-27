@@ -14,12 +14,6 @@ class @structureDeclarationAST : @abstractDeclarationAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @structureDeclarationAST location -> @location outLocation {
-  outLocation = mStructureName.location
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 enum @structurePropertyInitOptionalExpressionAST {
   case expression (@expressionAST initExpression)
   case noExpression
@@ -43,7 +37,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <private_or_public_struct_property_declaration> ?!@structurePropertyListAST ioFieldListAST {
+  rule <private_or_public_struct_property_declaration> ?!@ast ioAST ?!@structurePropertyListAST ioFieldListAST {
     @bool public
     select
       public = false
@@ -51,18 +45,18 @@ syntax extension plm_syntax {
       $public$
       public = true
     end
-    <struct_property_declaration> !public !?ioFieldListAST
+    <struct_property_declaration> !?ioAST !public !?ioFieldListAST
   }
   
   #·····················································································································
 
-  rule <private_struct_property_declaration> ?!@structurePropertyListAST ioFieldListAST {
-    <struct_property_declaration> !false !?ioFieldListAST
+  rule <private_struct_property_declaration> ?!@ast ioAST ?!@structurePropertyListAST ioFieldListAST {
+    <struct_property_declaration> !?ioAST !false !?ioFieldListAST
   }
 
   #·····················································································································
 
-  rule <struct_property_declaration> ?let @bool isPublic ?!@structurePropertyListAST ioFieldListAST {
+  rule <struct_property_declaration> ?!@ast ioAST ?let @bool isPublic ?!@structurePropertyListAST ioFieldListAST {
     @bool constant
     select
       $var$
@@ -73,17 +67,17 @@ syntax extension plm_syntax {
     end
     $identifier$ ?let fieldName
     select
-      <type_definition> ?let typeName
+      <type_definition> !?ioAST  ?let typeName
       select
         ioFieldListAST += !fieldName !constant !isPublic !typeName !.noExpression
       or
         $=$
-        <expression> ?let initExpression
+        <expression> !?ioAST ?let initExpression
         ioFieldListAST += !fieldName !constant !isPublic !typeName !.expression{!initExpression:initExpression}
       end
     or
       $=$
-      <expression> ?let initExpression
+      <expression> !?ioAST ?let initExpression
       ioFieldListAST += !fieldName !constant !isPublic !["" nowhere] !.expression{!initExpression:initExpression}
     end
   }
@@ -106,13 +100,13 @@ syntax extension plm_syntax {
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
-      <private_or_public_struct_property_declaration> !?fieldList
+      <private_or_public_struct_property_declaration> !?ioAST !?fieldList
     while
-      <function> !?procedureDeclarationListAST
+      <function> !?ioAST !?procedureDeclarationListAST
     while
-      <system_routine> !?systemRoutineListAST
+      <system_routine> !?ioAST !?systemRoutineListAST
     while
-      <guard> !?guardListAST
+      <guard> !?ioAST !?guardListAST
     while
       $;$
     end
@@ -199,10 +193,16 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override getter @structureDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "struct $" + mStructureName 
+}
+
+#·······················································································································
+
+override getter @structureDeclarationAST location -> @location outLocation {
+  outLocation = mStructureName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -574,13 +574,6 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
     )
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @structureDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

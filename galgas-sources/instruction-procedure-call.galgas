@@ -28,17 +28,17 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-    <procedure_call> ?let routineCallInstruction
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+    <procedure_call> !?ioAST ?let routineCallInstruction
     ioInstructionList += !routineCallInstruction
   }
 
   #·····················································································································
 
-  rule <procedure_call> !@callInstructionAST outInstruction {
+  rule <procedure_call> ?!@ast ioAST !@callInstructionAST outInstruction {
     let instructionLocation = @location.here
-    <lvalue> ?let assignmentTargetAST
-    <effective_parameters> ?let arguments ?let endOfArguments
+    <lvalue> !?ioAST ?let assignmentTargetAST
+    <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
     if ([[assignmentTargetAST mAccessList] length] == 0) & (assignmentTargetAST.mIdentifier.string != "") then
       outInstruction = @standAloneProcedureCallInstructionAST.new {
         !instructionLocation

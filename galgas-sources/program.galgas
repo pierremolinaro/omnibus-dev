@@ -203,7 +203,7 @@ private proc addTargetSpecificFiles
   ?currentDirectory:let @string inCurrentDirectory
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
-  @ast ast = .default
+#  @ast ast = .default
   if [option plm_options.useDirAsTargetDir value] != "" then # Target is defined in files
     let targetDirectory = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     if [targetDirectory directoryExists] then
@@ -214,7 +214,7 @@ private proc addTargetSpecificFiles
           ?importClauseList:let importedFileList
           ?endOfSourceFile:*
         recursiveImportFileSystemTargetFiles (
-          !?ast:ast
+          !?ast:ioAST
           !targetDirectory:targetDirectory + "/" + inTargetName.string
           !importClauseList:importedFileList
           !?importedFilePathSet:ioImportedFileAbsolutePathSet
@@ -236,7 +236,7 @@ private proc addTargetSpecificFiles
         ?importClauseList:let importedFileList
         ?endOfSourceFile:*
       recursiveImportEmbeddedTargetFiles (
-        !?ast:ast
+        !?ast:ioAST
         !currentDirectory:inTargetName.string
         !importClauseList:importedFileList
         !?importedFilePathSet:ioImportedFileAbsolutePathSet
@@ -246,22 +246,21 @@ private proc addTargetSpecificFiles
         : "This target is not defined in embedded targets"
     end
   end
-  ioAST.mDeclarationListAST = ast.mDeclarationListAST + ioAST.mDeclarationListAST
-  ioAST.mGlobalVarDeclarationListAST = ast.mGlobalVarDeclarationListAST + ioAST.mGlobalVarDeclarationListAST
-  ioAST.mExtensionDeclarationListAST = ast.mExtensionDeclarationListAST + ioAST.mExtensionDeclarationListAST
-  ioAST.mExtendStaticArrayDeclarationAST = ast.mExtendStaticArrayDeclarationAST + ioAST.mExtendStaticArrayDeclarationAST
-  ioAST.mStandAloneFunctionDeclarationListAST = ast.mStandAloneFunctionDeclarationListAST + ioAST.mStandAloneFunctionDeclarationListAST
-  ioAST.mRequiredProcListAST = ast.mRequiredProcListAST + ioAST.mRequiredProcListAST
-  ioAST.mExternProcListAST = ast.mExternProcListAST + ioAST.mExternProcListAST
-  ioAST.mStandAloneSystemRoutineListAST = ast.mStandAloneSystemRoutineListAST + ioAST.mStandAloneSystemRoutineListAST
-  ioAST.mGuardListAST = ast.mGuardListAST + ioAST.mGuardListAST
-  ioAST.mTargetListAST += ast.mTargetListAST
-#  ioAST.mPanicClauseListAST += ast.mPanicClauseListAST
-  ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
-  ioAST.mTaskListAST = ast.mTaskListAST + ioAST.mTaskListAST
-  ioAST.mModuleDeclarationListAST = ast.mModuleDeclarationListAST + ioAST.mModuleDeclarationListAST
-  ioAST.mRequiredModuleListAST = ast.mRequiredModuleListAST + ioAST.mRequiredModuleListAST
-  ioAST.mCheckTargetListAST = ast.mCheckTargetListAST + ioAST.mCheckTargetListAST
+#  ioAST.mDeclarationListAST = ast.mDeclarationListAST + ioAST.mDeclarationListAST
+#  ioAST.mGlobalVarDeclarationListAST = ast.mGlobalVarDeclarationListAST + ioAST.mGlobalVarDeclarationListAST
+#  ioAST.mExtensionDeclarationListAST = ast.mExtensionDeclarationListAST + ioAST.mExtensionDeclarationListAST
+#  ioAST.mExtendStaticArrayDeclarationAST = ast.mExtendStaticArrayDeclarationAST + ioAST.mExtendStaticArrayDeclarationAST
+#  ioAST.mStandAloneFunctionDeclarationListAST = ast.mStandAloneFunctionDeclarationListAST + ioAST.mStandAloneFunctionDeclarationListAST
+#  ioAST.mRequiredProcListAST = ast.mRequiredProcListAST + ioAST.mRequiredProcListAST
+#  ioAST.mExternProcListAST = ast.mExternProcListAST + ioAST.mExternProcListAST
+#  ioAST.mStandAloneSystemRoutineListAST = ast.mStandAloneSystemRoutineListAST + ioAST.mStandAloneSystemRoutineListAST
+#  ioAST.mGuardListAST = ast.mGuardListAST + ioAST.mGuardListAST
+#  ioAST.mTargetListAST += ast.mTargetListAST
+#  ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
+#  ioAST.mTaskListAST = ast.mTaskListAST + ioAST.mTaskListAST
+#  ioAST.mModuleDeclarationListAST = ast.mModuleDeclarationListAST + ioAST.mModuleDeclarationListAST
+#  ioAST.mRequiredModuleListAST = ast.mRequiredModuleListAST + ioAST.mRequiredModuleListAST
+#  ioAST.mCheckTargetListAST = ast.mCheckTargetListAST + ioAST.mCheckTargetListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

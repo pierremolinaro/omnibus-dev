@@ -35,8 +35,9 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_declaration_5F_init_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_declaration_5F_init_ (GALGAS_initAST & outArgument0,
-                                                 const GALGAS_lstring inArgument1,
+  public : virtual void nt_declaration_5F_init_ (GALGAS_ast & ioArgument0,
+                                                 GALGAS_initAST & outArgument1,
+                                                 const GALGAS_lstring inArgument2,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'declaration_type' non terminal
@@ -44,8 +45,9 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_declaration_5F_type_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_declaration_5F_type_ (const GALGAS_lstring inArgument0,
-                                                 GALGAS_abstractDeclarationAST & outArgument1,
+  public : virtual void nt_declaration_5F_type_ (GALGAS_ast & ioArgument0,
+                                                 const GALGAS_lstring inArgument1,
+                                                 GALGAS_abstractDeclarationAST & outArgument2,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'effective_parameters' non terminal
@@ -53,8 +55,9 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_effective_5F_parameters_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_effective_5F_parameters_ (GALGAS_effectiveArgumentListAST & outArgument0,
-                                                     GALGAS_location & outArgument1,
+  public : virtual void nt_effective_5F_parameters_ (GALGAS_ast & ioArgument0,
+                                                     GALGAS_effectiveArgumentListAST & outArgument1,
+                                                     GALGAS_location & outArgument2,
                                                      C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression' non terminal
@@ -62,7 +65,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_ (GALGAS_ast & ioArgument0,
+                                        GALGAS_expressionAST & outArgument1,
                                         C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_access_list' non terminal
@@ -70,7 +74,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_access_5F_list_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_access_5F_list_ (GALGAS_primaryInExpressionAccessListAST & outArgument0,
+  public : virtual void nt_expression_5F_access_5F_list_ (GALGAS_ast & ioArgument0,
+                                                          GALGAS_primaryInExpressionAccessListAST & outArgument1,
                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_addition' non terminal
@@ -78,7 +83,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_addition_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_addition_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_addition_ (GALGAS_ast & ioArgument0,
+                                                    GALGAS_expressionAST & outArgument1,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_bitwise_and' non terminal
@@ -86,7 +92,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_bitwise_5F_and_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_bitwise_5F_and_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_bitwise_5F_and_ (GALGAS_ast & ioArgument0,
+                                                          GALGAS_expressionAST & outArgument1,
                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_bitwise_or' non terminal
@@ -94,7 +101,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_bitwise_5F_or_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_bitwise_5F_or_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_bitwise_5F_or_ (GALGAS_ast & ioArgument0,
+                                                         GALGAS_expressionAST & outArgument1,
                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_bitwise_xor' non terminal
@@ -102,7 +110,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_bitwise_5F_xor_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_bitwise_5F_xor_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_bitwise_5F_xor_ (GALGAS_ast & ioArgument0,
+                                                          GALGAS_expressionAST & outArgument1,
                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_comparison' non terminal
@@ -110,7 +119,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_comparison_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_comparison_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_comparison_ (GALGAS_ast & ioArgument0,
+                                                      GALGAS_expressionAST & outArgument1,
                                                       C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_equality' non terminal
@@ -118,7 +128,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_equality_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_equality_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_equality_ (GALGAS_ast & ioArgument0,
+                                                    GALGAS_expressionAST & outArgument1,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_if' non terminal
@@ -126,7 +137,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_if_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_if_ (GALGAS_ifExpressionAST & outArgument0,
+  public : virtual void nt_expression_5F_if_ (GALGAS_ast & ioArgument0,
+                                              GALGAS_ifExpressionAST & outArgument1,
                                               C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_logical_and' non terminal
@@ -134,7 +146,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_logical_5F_and_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_logical_5F_and_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_logical_5F_and_ (GALGAS_ast & ioArgument0,
+                                                          GALGAS_expressionAST & outArgument1,
                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_logical_xor' non terminal
@@ -142,7 +155,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_logical_5F_xor_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_logical_5F_xor_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_logical_5F_xor_ (GALGAS_ast & ioArgument0,
+                                                          GALGAS_expressionAST & outArgument1,
                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_product' non terminal
@@ -150,7 +164,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_product_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_product_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_product_ (GALGAS_ast & ioArgument0,
+                                                   GALGAS_expressionAST & outArgument1,
                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression_shift' non terminal
@@ -158,7 +173,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F_shift_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F_shift_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_shift_ (GALGAS_ast & ioArgument0,
+                                                 GALGAS_expressionAST & outArgument1,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'function' non terminal
@@ -166,7 +182,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_function_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_function_ (GALGAS_functionDeclarationListAST & ioArgument0,
+  public : virtual void nt_function_ (GALGAS_ast & ioArgument0,
+                                      GALGAS_functionDeclarationListAST & ioArgument1,
                                       C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'function_header' non terminal
@@ -174,10 +191,11 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_function_5F_header_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_function_5F_header_ (GALGAS_mode & outArgument0,
-                                                GALGAS_lstring & outArgument1,
-                                                GALGAS_lstringlist & outArgument2,
-                                                GALGAS_routineFormalArgumentListAST & outArgument3,
+  public : virtual void nt_function_5F_header_ (GALGAS_ast & ioArgument0,
+                                                GALGAS_mode & outArgument1,
+                                                GALGAS_lstring & outArgument2,
+                                                GALGAS_lstringlist & outArgument3,
+                                                GALGAS_routineFormalArgumentListAST & outArgument4,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'guard' non terminal
@@ -185,7 +203,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_guard_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_guard_ (GALGAS_guardDeclarationListAST & ioArgument0,
+  public : virtual void nt_guard_ (GALGAS_ast & ioArgument0,
+                                   GALGAS_guardDeclarationListAST & ioArgument1,
                                    C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'guarded_command' non terminal
@@ -193,7 +212,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_guarded_5F_command_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_guarded_5F_command_ (GALGAS_guardedCommandAST & outArgument0,
+  public : virtual void nt_guarded_5F_command_ (GALGAS_ast & ioArgument0,
+                                                GALGAS_guardedCommandAST & outArgument1,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'if_instruction' non terminal
@@ -201,7 +221,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_if_5F_instruction_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_if_5F_instruction_ (GALGAS_ifInstructionAST & outArgument0,
+  public : virtual void nt_if_5F_instruction_ (GALGAS_ast & ioArgument0,
+                                               GALGAS_ifInstructionAST & outArgument1,
                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'import_file' non terminal
@@ -217,7 +238,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_instruction_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_instruction_ (GALGAS_instructionListAST & ioArgument0,
+  public : virtual void nt_instruction_ (GALGAS_ast & ioArgument0,
+                                         GALGAS_instructionListAST & ioArgument1,
                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'instructionList' non terminal
@@ -225,7 +247,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_instructionList_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_instructionList_ (GALGAS_instructionListAST & outArgument0,
+  public : virtual void nt_instructionList_ (GALGAS_ast & ioArgument0,
+                                             GALGAS_instructionListAST & outArgument1,
                                              C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'isr' non terminal
@@ -233,7 +256,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_isr_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_isr_ (GALGAS_isrDeclarationListAST & ioArgument0,
+  public : virtual void nt_isr_ (GALGAS_ast & ioArgument0,
                                  const GALGAS_lstring inArgument1,
                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
@@ -242,7 +265,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_lvalue_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_lvalue_ (GALGAS_LValueAST & outArgument0,
+  public : virtual void nt_lvalue_ (GALGAS_ast & ioArgument0,
+                                    GALGAS_LValueAST & outArgument1,
                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'mode' non terminal
@@ -258,7 +282,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_module_5F_property_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_module_5F_property_ (GALGAS_modulePropertyListAST & ioArgument0,
+  public : virtual void nt_module_5F_property_ (GALGAS_ast & ioArgument0,
+                                                GALGAS_modulePropertyListAST & ioArgument1,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'primary' non terminal
@@ -266,7 +291,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_primary_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_primary_ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_primary_ (GALGAS_ast & ioArgument0,
+                                     GALGAS_expressionAST & outArgument1,
                                      C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'private_or_public_struct_property_declaration' non terminal
@@ -274,7 +300,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (GALGAS_structurePropertyListAST & ioArgument0,
+  public : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                                                          GALGAS_structurePropertyListAST & ioArgument1,
                                                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'private_struct_property_declaration' non terminal
@@ -282,7 +309,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_private_5F_struct_5F_property_5F_declaration_ (GALGAS_structurePropertyListAST & ioArgument0,
+  public : virtual void nt_private_5F_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                                          GALGAS_structurePropertyListAST & ioArgument1,
                                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'procedure_call' non terminal
@@ -290,7 +318,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_procedure_5F_call_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_procedure_5F_call_ (GALGAS_callInstructionAST & outArgument0,
+  public : virtual void nt_procedure_5F_call_ (GALGAS_ast & ioArgument0,
+                                               GALGAS_callInstructionAST & outArgument1,
                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'procedure_formal_arguments' non terminal
@@ -298,7 +327,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_procedure_5F_formal_5F_arguments_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_procedure_5F_formal_5F_arguments_ (GALGAS_routineFormalArgumentListAST & outArgument0,
+  public : virtual void nt_procedure_5F_formal_5F_arguments_ (GALGAS_ast & ioArgument0,
+                                                              GALGAS_routineFormalArgumentListAST & outArgument1,
                                                               C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'property_in_extension' non terminal
@@ -306,7 +336,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_property_5F_in_5F_extension_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_property_5F_in_5F_extension_ (GALGAS_structurePropertyListAST & ioArgument0,
+  public : virtual void nt_property_5F_in_5F_extension_ (GALGAS_ast & ioArgument0,
+                                                         GALGAS_structurePropertyListAST & ioArgument1,
                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'registerDeclaration' non terminal
@@ -314,7 +345,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_registerDeclaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_registerDeclaration_ (GALGAS_controlRegisterList & ioArgument0,
+  public : virtual void nt_registerDeclaration_ (GALGAS_ast & ioArgument0,
+                                                 GALGAS_controlRegisterList & ioArgument1,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'start_symbol' non terminal
@@ -360,7 +392,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_staticArrayProperty_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_staticArrayProperty_ (GALGAS_staticListPropertyListAST & ioArgument0,
+  public : virtual void nt_staticArrayProperty_ (GALGAS_ast & ioArgument0,
+                                                 GALGAS_staticListPropertyListAST & ioArgument1,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'staticArray_exp' non terminal
@@ -368,7 +401,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_staticArray_5F_exp_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_staticArray_5F_exp_ (GALGAS_extendStaticListElementListAST & ioArgument0,
+  public : virtual void nt_staticArray_5F_exp_ (GALGAS_ast & ioArgument0,
+                                                GALGAS_extendStaticListElementListAST & ioArgument1,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'struct_property_declaration' non terminal
@@ -376,8 +410,9 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_struct_5F_property_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_struct_5F_property_5F_declaration_ (const GALGAS_bool inArgument0,
-                                                               GALGAS_structurePropertyListAST & ioArgument1,
+  public : virtual void nt_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                               const GALGAS_bool inArgument1,
+                                                               GALGAS_structurePropertyListAST & ioArgument2,
                                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'system_routine' non terminal
@@ -385,7 +420,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_system_5F_routine_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_system_5F_routine_ (GALGAS_systemRoutineDeclarationListAST & ioArgument0,
+  public : virtual void nt_system_5F_routine_ (GALGAS_ast & ioArgument0,
+                                               GALGAS_systemRoutineDeclarationListAST & ioArgument1,
                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'taskBody' non terminal
@@ -393,10 +429,11 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_taskBody_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_taskBody_ (GALGAS_structurePropertyListAST & ioArgument0,
-                                      GALGAS_functionDeclarationListAST & ioArgument1,
-                                      GALGAS_taskSetupListAST & ioArgument2,
-                                      GALGAS_syncInstructionBranchListAST & ioArgument3,
+  public : virtual void nt_taskBody_ (GALGAS_ast & ioArgument0,
+                                      GALGAS_structurePropertyListAST & ioArgument1,
+                                      GALGAS_functionDeclarationListAST & ioArgument2,
+                                      GALGAS_taskSetupListAST & ioArgument3,
+                                      GALGAS_syncInstructionBranchListAST & ioArgument4,
                                       C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'type_definition' non terminal
@@ -404,7 +441,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_type_5F_definition_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_type_5F_definition_ (GALGAS_lstring & outArgument0,
+  public : virtual void nt_type_5F_definition_ (GALGAS_ast & ioArgument0,
+                                                GALGAS_lstring & outArgument1,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
   public : virtual int32_t select_plm_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
@@ -588,6 +626,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_89 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_90 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_plm_5F_syntax_91 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

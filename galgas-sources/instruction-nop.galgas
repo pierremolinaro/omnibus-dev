@@ -13,7 +13,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@ast unused ioAST ?!@instructionListAST ioInstructionList {
     $nop$
     ioInstructionList += !@letInstructionNOP.new {!.here}
   }

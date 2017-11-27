@@ -16,16 +16,16 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $truncate$
     @lstring typeName
     select
       typeName = ["" here]
     or
-      <type_definition> ?typeName
+      <type_definition> !?ioAST ?typeName
     end
     $($
-    <expression> ?outExpression
+    <expression> !?ioAST ?outExpression
     let endOfExpression = @location.here
     $)$
     outExpression = @truncateExpressionAST.new {

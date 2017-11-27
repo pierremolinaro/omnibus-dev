@@ -28,13 +28,13 @@ syntax extension plm_syntax {
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
-      <property_in_extension> !?propertyList
+      <property_in_extension> !?ioAST !?propertyList
     while
-      <function> !?procedureDeclarationListAST
+      <function> !?ioAST !?procedureDeclarationListAST
     while
-     <system_routine> !?svcListAST
+     <system_routine> !?ioAST !?svcListAST
     while
-      <guard> !?guardListAST
+      <guard> !?ioAST !?guardListAST
     while
       $;$
     end
@@ -49,7 +49,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <property_in_extension> ?!@structurePropertyListAST ioPropertyList {
+  rule <property_in_extension> ?!@ast ioAST ?!@structurePropertyListAST ioPropertyList {
     @bool public
     select
       public = false
@@ -66,9 +66,9 @@ syntax extension plm_syntax {
       constant = true
     end
     $identifier$ ?let fieldName
-    <type_definition> ?let typeName
+    <type_definition> !?ioAST ?let typeName
     $=$
-    <expression> ?let initExpression
+    <expression> !?ioAST ?let initExpression
     ioPropertyList += !fieldName !constant !public !typeName !.expression{!initExpression:initExpression}
   }
 

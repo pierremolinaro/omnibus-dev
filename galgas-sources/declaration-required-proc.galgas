@@ -21,6 +21,7 @@ syntax extension plm_syntax {
   rule <declaration> ?!@ast ioAST {
     $required$
     <function_header>
+      !?ioAST
       ?mode:let @mode mode
       ?name:let procName
       ?attributes:let attributeList

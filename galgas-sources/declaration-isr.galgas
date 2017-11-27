@@ -18,7 +18,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <isr> ?!@isrDeclarationListAST ioISRListAST ?let @lstring inModuleName {
+  rule <isr> ?!@ast ioAST ?let @lstring inModuleName {
     $isr$
     @mode mode
     select
@@ -33,9 +33,9 @@ syntax extension plm_syntax {
     end 
     $identifier$ ?let isrName
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     $}$
-    ioISRListAST +=
+    ioAST.mISRDeclarationListAST +=
       !isrName
       !mode
       !inModuleName

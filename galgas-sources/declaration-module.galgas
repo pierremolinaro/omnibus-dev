@@ -55,7 +55,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <module_property> ?!@modulePropertyListAST ioPropertyList {
+  rule <module_property> ?!@ast ioAST ?!@modulePropertyListAST ioPropertyList {
     @bool constant
     select
       $var$
@@ -66,17 +66,17 @@ syntax extension plm_syntax {
     end
     $identifier$ ?let fieldName
     select
-      <type_definition> ?let typeName
+      <type_definition> !?ioAST ?let typeName
       select
         ioPropertyList += !fieldName !constant !typeName !.noExpression
       or
         $=$
-        <expression> ?let initExpression
+        <expression> !?ioAST ?let initExpression
         ioPropertyList += !fieldName !constant !typeName !.expression {!initExpression:initExpression}
       end
     or
       $=$
-      <expression> ?let initExpression
+      <expression> !?ioAST ?let initExpression
       ioPropertyList += !fieldName !constant !["" nowhere] !.expression {!initExpression:initExpression}
     end
   }
@@ -94,18 +94,18 @@ syntax extension plm_syntax {
     @initListAST initList = {}
     repeat
     while
-      <declaration_init> ?let init !moduleName
+      <declaration_init>!?ioAST ?let init !moduleName
       initList += !init
     while
-      <isr> !?ioAST.mISRDeclarationListAST !moduleName
+      <isr> !?ioAST !moduleName
     while
-      <module_property> !?modulePropertyListAST
+      <module_property>!?ioAST !?modulePropertyListAST
     while
-      <function> !?functionDeclarationListAST
+      <function> !?ioAST!?functionDeclarationListAST
     while
-     <system_routine> !?svcListAST
+     <system_routine>!?ioAST !?svcListAST
     while
-      <guard> !?guardListAST
+      <guard> !?ioAST !?guardListAST
     while
       $;$
     end
@@ -131,7 +131,7 @@ syntax extension plm_syntax {
     repeat
     while
       $!selector:$ ?let selector
-      <expression> ?let expression
+      <expression> !?ioAST ?let expression
       moduleInstanciationArgumentList += !selector !expression
     end
     $)$

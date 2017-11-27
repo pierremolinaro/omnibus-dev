@@ -27,7 +27,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <guard> ?!@guardDeclarationListAST ioGuardListAST {
+  rule <guard> ?!@ast ioAST ?!@guardDeclarationListAST ioGuardList {
     @bool public
     select
       public = false
@@ -43,19 +43,19 @@ syntax extension plm_syntax {
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
-    <procedure_formal_arguments> ?formalArguments:let guardFormalArgumentList
+    <procedure_formal_arguments> !?ioAST ?let guardFormalArgumentList
     @guardKind guardKind
     select
       guardKind = .baseGuard
     or
       $:$
-      <procedure_call> ?let instruction
+      <procedure_call> !?ioAST ?let instruction
       guardKind = .convenienceGuard {!base:instruction}
     end
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     $}$
-    ioGuardListAST +=
+    ioGuardList +=
       !guardName
       !public
       !attributeList
@@ -68,7 +68,9 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    <guard> !?ioAST.mGuardListAST
+    @guardDeclarationListAST guardListAST = {}
+    <guard> !?ioAST !?guardListAST
+    ioAST.mGuardListAST += guardListAST
   }
  
   #·····················································································································

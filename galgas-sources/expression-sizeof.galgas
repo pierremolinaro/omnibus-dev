@@ -20,20 +20,20 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $sizeof$
     $($
-    <lvalue> ?let lvalue
+    <lvalue> !?ioAST ?let lvalue
     $)$
     outExpression = @sizeofExpressionAST.new {!lvalue}
   }
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $sizeof$
     $($
-    <type_definition> ?let typeName
+    <type_definition> !?ioAST ?let typeName
     $)$
     outExpression = @sizeofTypeAST.new {!typeName}
   }

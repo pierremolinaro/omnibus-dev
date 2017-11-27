@@ -20,7 +20,7 @@ syntax extension plm_syntax {
     $boot$
     $integer$ ?let @lbigint priority
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     let endOfInit = @location.here
     $}$
     ioAST.mDeclarationListAST += !@bootAST.new {

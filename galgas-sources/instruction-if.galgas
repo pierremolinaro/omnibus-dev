@@ -21,14 +21,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-    <if_instruction> ?let ifInstruction
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+    <if_instruction> !?ioAST ?let ifInstruction
     ioInstructionList += !ifInstruction
   }
   
   #·····················································································································
 
-  rule <if_instruction> !@ifInstructionAST outIfInstruction {
+  rule <if_instruction> ?!@ast ioAST !@ifInstructionAST outIfInstruction {
     $if$
     let instructionLocation = @location.here
     @bool staticIfExpression
@@ -44,10 +44,10 @@ syntax extension plm_syntax {
     or
      staticIfExpression = false
     end
-    <expression> ?let @expressionAST testExpression
+    <expression> !?ioAST ?let @expressionAST testExpression
     let testExpressionEndLocation = @location.here
     ${$
-    <instructionList> ?let thenInstructionList
+    <instructionList> !?ioAST ?let thenInstructionList
     $}$
     let endOfThenBranch = @location.here
     @instructionListAST elseInstructionList
@@ -56,11 +56,11 @@ syntax extension plm_syntax {
     or
       $else$
       ${$
-      <instructionList> ?elseInstructionList
+      <instructionList> !?ioAST ?elseInstructionList
       $}$
     or
       $else$
-      <if_instruction> ?let ifInstruction
+      <if_instruction> !?ioAST ?let ifInstruction
       elseInstructionList = {!ifInstruction}
     end
     let endOfElseBranch = @location.here

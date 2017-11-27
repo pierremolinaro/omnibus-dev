@@ -39,14 +39,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <guarded_command> !@guardedCommandAST outGuardedCommand {
+  rule <guarded_command> ?!@ast ioAST !@guardedCommandAST outGuardedCommand {
     $on$
     @expressionAST expression
     @location endOfExp
     @bool warnsOnStaticExpression
     select
       $($
-      <expression> ?expression
+      <expression> !?ioAST ?expression
       endOfExp = .here
       $)$
       warnsOnStaticExpression = true
@@ -70,7 +70,7 @@ syntax extension plm_syntax {
     while
       $.$
     end
-    <effective_parameters> ?let effectiveParameterList ?*
+    <effective_parameters> !?ioAST ?let effectiveParameterList ?*
     @bool isWhileCommand
     select
       $exit$
@@ -91,10 +91,10 @@ syntax extension plm_syntax {
   
   #·····················································································································
 
-  rule <guarded_command> !@guardedCommandAST outGuardedCommand {
+  rule <guarded_command> ?!@ast ioAST !@guardedCommandAST outGuardedCommand {
     $on$
     $($
-    <expression> ?let expression
+    <expression> !?ioAST ?let expression
     let endOfExp = @location.here
     $)$
     @bool isWhileCommand
@@ -113,15 +113,15 @@ syntax extension plm_syntax {
   
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $sync$
     let startLocation = @location.here
     ${$
     @syncInstructionBranchListAST onInstructionBranchList = {}
     repeat
-      <guarded_command> ?let @guardedCommandAST guardedCommand
+      <guarded_command> !?ioAST ?let @guardedCommandAST guardedCommand
       $:$
-      <instructionList> ?let instructionList
+      <instructionList> !?ioAST ?let instructionList
       onInstructionBranchList += !guardedCommand !instructionList !.here
     while
     end

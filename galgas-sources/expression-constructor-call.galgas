@@ -21,14 +21,14 @@ class @constructorCallAST : @expressionAST {
 
 syntax extension plm_syntax {
 
-  rule <primary> !@expressionAST outExpression {
-    <type_definition> ?let typeName
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+    <type_definition> !?ioAST ?let typeName
     $($
     @functionCallEffectiveParameterListAST parameterList = {}
     repeat
     while
       $!selector:$ ?let selector
-      <expression> ?let expression
+      <expression> !?ioAST ?let expression
       parameterList += !selector !expression
     end
     let errorLocation = @location.here

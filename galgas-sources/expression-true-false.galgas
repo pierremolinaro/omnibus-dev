@@ -14,14 +14,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
     $yes$
     outExpression = @literalBooleanInExpressionAST.new {!true}
   }
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
     $no$
     outExpression = @literalBooleanInExpressionAST.new {!false}
   }

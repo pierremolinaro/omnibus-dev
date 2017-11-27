@@ -23,13 +23,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     ${$
     $identifier$ ?let registerName
     @registerIntegerFieldListAST integerFieldValues = {}
     repeat
       $!selector:$ ?let registerFieldName
-      <expression> ?let expression
+      <expression> !?ioAST ?let expression
       integerFieldValues += !registerFieldName !expression !.here
     while
     end

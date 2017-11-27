@@ -28,7 +28,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <lvalue> !@LValueAST outAssignmentTargetAST {
+  rule <lvalue> ?!@ast ioAST !@LValueAST outAssignmentTargetAST {
     @lstring receiver
   #--- Receiver
     select
@@ -46,7 +46,7 @@ syntax extension plm_syntax {
       accessList += !.property {!name:propertyName}
     while
       $[$
-      <expression> ?let expression
+      <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
       $]$
       accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}

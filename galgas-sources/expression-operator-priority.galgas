@@ -13,13 +13,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression> !@expressionAST outExpression {
-    <expression_logical_xor> ?outExpression
+  rule <expression> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_logical_xor> !?ioAST ?outExpression
     repeat
     while
       $or$
       let operatorLocation = @location.here
-      <expression_logical_xor> ?let rightExpression
+      <expression_logical_xor> !?ioAST ?let rightExpression
     #--- x or y equivalent to not (not x and not y)
       let andExpression = @booleanShortCircuitAndOperatorExpressionAST.new {
         !@prefixOperatorExpressionAST.new {!operatorLocation !.notOperator !outExpression}
@@ -36,13 +36,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_logical_xor> !@expressionAST outExpression {
-    <expression_logical_and> ?outExpression
+  rule <expression_logical_xor> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_logical_and> !?ioAST ?outExpression
     repeat
     while
       $xor$
       let operatorLocation = @location.here
-      <expression_logical_and> ?let rightExpression
+      <expression_logical_and> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -54,13 +54,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_logical_and> !@expressionAST outExpression {
-    <expression_bitwise_or> ?outExpression
+  rule <expression_logical_and> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_bitwise_or> !?ioAST ?outExpression
     repeat
     while
       $and$
       let operatorLocation = @location.here
-      <expression_bitwise_or> ?let rightExpression
+      <expression_bitwise_or> !?ioAST ?let rightExpression
       outExpression = @booleanShortCircuitAndOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -71,13 +71,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_bitwise_or> !@expressionAST outExpression {
-    <expression_bitwise_xor> ?outExpression
+  rule <expression_bitwise_or> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_bitwise_xor> !?ioAST ?outExpression
     repeat
     while
       $|$
       let operatorLocation = @location.here
-      <expression_bitwise_xor> ?let rightExpression
+      <expression_bitwise_xor> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -89,13 +89,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_bitwise_xor> !@expressionAST outExpression {
-    <expression_bitwise_and> ?outExpression
+  rule <expression_bitwise_xor> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_bitwise_and> !?ioAST ?outExpression
     repeat
     while
       $^$
       let operatorLocation = @location.here
-      <expression_bitwise_and> ?let rightExpression
+      <expression_bitwise_and> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -107,13 +107,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_bitwise_and> !@expressionAST outExpression {
-    <expression_equality> ?outExpression
+  rule <expression_bitwise_and> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_equality> !?ioAST ?outExpression
     repeat
     while
       $&$
       let operatorLocation = @location.here
-      <expression_equality> ?let rightExpression
+      <expression_equality> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -125,13 +125,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_equality> !@expressionAST outExpression {
-    <expression_comparison> ?outExpression
+  rule <expression_equality> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_comparison> !?ioAST ?outExpression
     select
     or
       $==$
       let operatorLocation = @location.here
-      <expression_comparison> ?let rightExpression
+      <expression_comparison> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -141,7 +141,7 @@ syntax extension plm_syntax {
     or
       $≠$
       let operatorLocation = @location.here
-      <expression_comparison> ?let rightExpression
+      <expression_comparison> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -153,13 +153,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_comparison> !@expressionAST outExpression {
-    <expression_shift> ?outExpression
+  rule <expression_comparison> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_shift> !?ioAST ?outExpression
     select
     or
       $≤$
       let operatorLocation = @location.here
-      <expression_shift> ?let rightExpression
+      <expression_shift> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -169,7 +169,7 @@ syntax extension plm_syntax {
     or
       $≥$
       let operatorLocation = @location.here
-      <expression_shift> ?let rightExpression
+      <expression_shift> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -179,7 +179,7 @@ syntax extension plm_syntax {
     or
       $<$
       let operatorLocation = @location.here
-      <expression_shift> ?let rightExpression
+      <expression_shift> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -189,7 +189,7 @@ syntax extension plm_syntax {
     or
       $>$
       let operatorLocation = @location.here
-      <expression_shift> ?let rightExpression
+      <expression_shift> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -201,13 +201,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_shift> !@expressionAST outExpression {
-    <expression_addition> ?outExpression
+  rule <expression_shift> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_addition> !?ioAST ?outExpression
     repeat
     while
       $<<$
       let operatorLocation = @location.here
-      <expression_addition> ?let rightExpression
+      <expression_addition> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -217,7 +217,7 @@ syntax extension plm_syntax {
     while
       $>>$
       let operatorLocation = @location.here
-      <expression_addition> ?let rightExpression
+      <expression_addition> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -229,13 +229,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_addition> !@expressionAST outExpression {
-    <expression_product> ?outExpression
+  rule <expression_addition> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_product> !?ioAST ?outExpression
     repeat
     while
       $+$
       let operatorLocation = @location.here
-      <expression_product> ?let rightExpression
+      <expression_product> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -245,7 +245,7 @@ syntax extension plm_syntax {
     while
       $+%$
       let operatorLocation = @location.here
-      <expression_product> ?let rightExpression
+      <expression_product> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -255,7 +255,7 @@ syntax extension plm_syntax {
     while
       $-$
       let operatorLocation = @location.here
-      <expression_product> ?let rightExpression
+      <expression_product> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -265,7 +265,7 @@ syntax extension plm_syntax {
     while
       $-%$
       let operatorLocation = @location.here
-      <expression_product> ?let rightExpression
+      <expression_product> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -277,13 +277,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <expression_product> !@expressionAST outExpression {
-    <primary> ?outExpression
+  rule <expression_product> ?!@ast ioAST !@expressionAST outExpression {
+    <primary> !?ioAST ?outExpression
     repeat
     while
       $*$
       let operatorLocation = @location.here
-      <primary> ?let rightExpression
+      <primary> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -293,7 +293,7 @@ syntax extension plm_syntax {
     while
       $*%$
       let operatorLocation = @location.here
-      <primary> ?let rightExpression
+      <primary> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -303,7 +303,7 @@ syntax extension plm_syntax {
     while
       $%$
       let operatorLocation = @location.here
-      <primary> ?let rightExpression
+      <primary> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -313,7 +313,7 @@ syntax extension plm_syntax {
     while
       $!%$
       let operatorLocation = @location.here
-      <primary> ?let rightExpression
+      <primary> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -323,7 +323,7 @@ syntax extension plm_syntax {
     while
       $/$
       let operatorLocation = @location.here
-      <primary> ?let rightExpression
+      <primary> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -333,7 +333,7 @@ syntax extension plm_syntax {
     while
       $!/$
       let operatorLocation = @location.here
-      <primary> ?let rightExpression
+      <primary> !?ioAST ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -345,10 +345,10 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $~$
     let operatorLocation = @location.here
-    <primary> ?let expression
+    <primary> !?ioAST ?let expression
     outExpression = @prefixOperatorExpressionAST.new {
       !operatorLocation
       !.unsignedComplement
@@ -358,10 +358,10 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $not$
     let operatorLocation = @location.here
-    <primary> ?let expression
+    <primary> !?ioAST ?let expression
     outExpression = @prefixOperatorExpressionAST.new {
       !operatorLocation
       !.notOperator
@@ -371,10 +371,10 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $-$
     let operatorLocation = @location.here
-    <primary> ?let expression
+    <primary> !?ioAST ?let expression
     outExpression = @prefixOperatorExpressionAST.new {
       !operatorLocation
       !.minus
@@ -384,10 +384,10 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $-%$
     let operatorLocation = @location.here
-    <primary> ?let expression
+    <primary> !?ioAST ?let expression
     outExpression = @prefixOperatorExpressionAST.new {
       !operatorLocation
       !.minusNoOvf
@@ -397,9 +397,9 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $($
-    <expression> ?outExpression
+    <expression> !?ioAST ?outExpression
     $)$
   }
 

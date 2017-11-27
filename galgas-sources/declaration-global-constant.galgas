@@ -29,10 +29,10 @@ syntax extension plm_syntax {
     select
       typeName = ["" nowhere]
     or
-      <type_definition> ?typeName
+      <type_definition> !?ioAST ?typeName
     end
     $=$
-    <expression> ?let @expressionAST expression
+    <expression> !?ioAST ?let @expressionAST expression
     ioAST.mDeclarationListAST += !@globalConstantDeclarationAST.new {
       !constantName
       !typeName
