@@ -14,10 +14,10 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $panic$
     let loc = @location.here
-    <expression> ?let @expressionAST codeExpression
+    <expression> !?ioAST ?let @expressionAST codeExpression
     ioInstructionList += !@panicInstructionAST.new {!loc !codeExpression}
   }
 

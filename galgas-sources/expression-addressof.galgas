@@ -14,10 +14,10 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $addressof$
     $($
-    <lvalue> ?let lvalue
+    <lvalue> !?ioAST ?let lvalue
     $)$
     outExpression = @addressofExpressionAST.new {!lvalue}
   }

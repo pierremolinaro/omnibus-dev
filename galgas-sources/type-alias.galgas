@@ -21,13 +21,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclarationAST outDeclaration {
-    $\$type$ ?let aliasedTypeName
-    outDeclaration = @typeAliasDeclaration.new {
-      !inNewTypeName
-      !aliasedTypeName
-    }
-  }
+#  rule <declaration_type> ?!@ast unused ioAST ?let @lstring inNewTypeName !@abstractDeclarationAST outDeclaration {
+#    $\$type$ ?let aliasedTypeName
+#    outDeclaration = @typeAliasDeclaration.new {
+#      !inNewTypeName
+#      !aliasedTypeName
+#    }
+#  }
 
   #·····················································································································
 
@@ -77,9 +77,11 @@ override method @typeAliasDeclaration enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Enter in type map
-  [ioContext.mTypeMap searchKey !lkey:mAliasedTypeName ?type:let kind ?1*]
+  [ioContext.mTypeMap searchKey !lkey:mAliasedTypeName ?type:var type ?1*]
+#--- Set new type name
+  type.plmTypeName = mNewTypeName.string
 #--- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:kind !index:[ioContext.mTypeMap count]
+  [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:type !index:[ioContext.mTypeMap count]
 ]
 #--- Enter infix operators
   let newNewInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !mNewTypeName.string)

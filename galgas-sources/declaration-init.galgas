@@ -24,17 +24,17 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    <declaration_init> ?let init !["" here]
+    <declaration_init> !?ioAST ?let init !["" here]
     ioAST.mDeclarationListAST += !init
   }
   
   #·····················································································································
 
-  rule <declaration_init> !@initAST outInit ?let @lstring inModuleName {
+  rule <declaration_init> ?!@ast ioAST !@initAST outInit ?let @lstring inModuleName {
     $init$
     $integer$ ?let @lbigint priority
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     let endOfInit = @location.here
     $}$
     outInit = .new {

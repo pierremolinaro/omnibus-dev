@@ -19,29 +19,29 @@ syntax extension plm_syntax {
 
   #·····················································································································
   
-  rule <primary> !@expressionAST outExpression {
-    <expression_if> ?let if_expression
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+    <expression_if> !?ioAST ?let if_expression
     outExpression = if_expression
   }
   
   #·····················································································································
   
-  rule <expression_if> !@ifExpressionAST outExpression {
+  rule <expression_if> ?!@ast ioAST !@ifExpressionAST outExpression {
     $if$
-    <expression> ?let ifExpression
+    <expression> !?ioAST ?let ifExpression
     let @location ifExpressionEndLocation = .here
     ${$
-    <expression> ?let thenExpression
+    <expression> !?ioAST ?let thenExpression
     let @location thenExpressionEndLocation = .here
     $}$
     $else$
     @expressionAST elseExpression
     select
       ${$
-      <expression> ?elseExpression
+      <expression> !?ioAST ?elseExpression
       $}$
     or
-      <expression_if> ?let else_if_expression
+      <expression_if> !?ioAST ?let else_if_expression
       elseExpression = else_if_expression
     end
     let @location elseExpressionEndLocation = .here

@@ -63,7 +63,7 @@ syntax extension plm_syntax {
     ${$
     @staticListPropertyListAST propertyList = {}
     repeat
-      <staticArrayProperty> !?propertyList
+      <staticArrayProperty>!?ioAST !?propertyList
     while
     end
     $}$
@@ -72,22 +72,22 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <staticArrayProperty> ?!@staticListPropertyListAST ioPropertyList {
+  rule <staticArrayProperty> ?!@ast ioAST ?!@staticListPropertyListAST ioPropertyList {
     $let$
     $identifier$ ?let propertyName
     select
-      <type_definition> ?let typeName
+      <type_definition> !?ioAST ?let typeName
       ioPropertyList += !propertyName !.valueType{!type:typeName}
     or
       $func$
       <mode> ?let mode
-      <procedure_formal_arguments> ?formalArguments:let formalArgs
+      <procedure_formal_arguments> !?ioAST ?let formalArgs
       @lstring returnType
       select
         returnType = ["" here]
       or
         $->$
-        <type_definition> ?returnType
+        <type_definition>!?ioAST ?returnType
       end
       ioPropertyList += !propertyName !.function{!mode:mode !formalArgs:formalArgs !returnType:returnType}
     end
@@ -105,7 +105,7 @@ syntax extension plm_syntax {
     repeat
       @extendStaticListElementListAST expressions = {}
       repeat
-        <staticArray_exp> !?expressions
+        <staticArray_exp> !?ioAST !?expressions
       while
         $,$
       end
@@ -118,14 +118,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <staticArray_exp> ?!@extendStaticListElementListAST ioExpressions {
+  rule <staticArray_exp> ?!@ast ioAST ?!@extendStaticListElementListAST ioExpressions {
     select
-      <expression> ?let exp
+      <expression> !?ioAST ?let exp
       ioExpressions += !.expression {!exp:exp} !.here
     or
       $func$
       $identifier$ ?let functionName
-      <procedure_formal_arguments> ?formalArguments:let formalArgs
+      <procedure_formal_arguments> !?ioAST ?let formalArgs
       ioExpressions +=
         !.function {!functionName:functionName !formalArgs:formalArgs}
         !.here

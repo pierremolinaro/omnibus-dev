@@ -20,7 +20,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $for$
     $identifier$ ?let varName
     $in$
@@ -42,11 +42,11 @@ syntax extension plm_syntax {
         end
       or
       end
-      <expression> ?whileExpression
+      <expression> !?ioAST ?whileExpression
     end
     let endOf_whileExpression_instruction = @location.here
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     let endOfInstruction = @location.here
     $}$
     ioInstructionList += !@forInstructionAST.new {

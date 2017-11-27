@@ -21,7 +21,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <system_routine> ?!@systemRoutineDeclarationListAST ioSVCListAST {
+  rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
     @bool public
     select
       public = false
@@ -51,16 +51,16 @@ syntax extension plm_syntax {
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
-    <procedure_formal_arguments> ?formalArguments:let formalArgumentList
+    <procedure_formal_arguments> !?ioAST ?let formalArgumentList
     @lstring returnTypeName
     select
       returnTypeName = ["" here]
     or
       $->$
-      <type_definition> ?returnTypeName
+      <type_definition> !?ioAST ?returnTypeName
     end
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     $}$
     ioSVCListAST +=
       !name

@@ -46,14 +46,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
   #--- LValue
-    <lvalue> ?let lvalue
+    <lvalue> !?ioAST ?let lvalue
     let instructionLocation = @location.here
   #--- Assignment operator
     <assignment_operator> ?let infixOperator ?let operatorLocation
   #--- Right expression
-    <expression> ?let @expressionAST rightExpression
+    <expression> !?ioAST ?let @expressionAST rightExpression
   #--- Build source expression
     @primaryInExpressionAccessListAST accessList = {}
     for (access) in lvalue.mAccessList do

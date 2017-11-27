@@ -5,7 +5,7 @@ check target "teensy-3-1/unprivileged", "teensy-3-1/privileged"
 //   SYNCHRONIZATION TOOLS ROUTINES
 //——————————————————————————————————————————————————————————————————————————————
 
-type $taskList : ((32)) @instantiable
+type $taskList : [32] @instantiable
 
 //--- Block running task
 extern func primitive

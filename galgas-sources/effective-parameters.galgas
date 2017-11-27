@@ -37,13 +37,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <effective_parameters> !@effectiveArgumentListAST outEffectiveParameterList !@location outEndOfArgs {
+  rule <effective_parameters> ?!@ast ioAST !@effectiveArgumentListAST outEffectiveParameterList !@location outEndOfArgs {
     outEffectiveParameterList = {}
     $($
     repeat
     while
       $!selector:$ ?let selector
-      <expression> ?let expression
+      <expression> !?ioAST ?let expression
       outEffectiveParameterList += !.output{!exp:expression !endOfExp:.here} !selector
     while
       $!?selector:$ ?let selector
@@ -74,7 +74,7 @@ syntax extension plm_syntax {
       select
         typeName = ["" nowhere]
       or
-        <type_definition> ?typeName
+        <type_definition> !?ioAST ?typeName
       end
       outEffectiveParameterList += 
         !.inputWithType{!constant:constant !typeName:typeName !name:effectiveParameterName}
@@ -216,8 +216,8 @@ proc analyzeEffectiveParameters
   else
     for () formal_ in inFormalSignature, () actual_ in parameterList do
       if [formal_mTypeProxy key] != actual_mParameterType.plmTypeName then
-        error actual_mSelector : "the actual parameter type is $'" + actual_mParameterType.plmTypeName +
-           "', and is incompatible with the formal type $'" + [formal_mTypeProxy key] + "'"
+        error actual_mSelector : "the actual parameter type is $" + actual_mParameterType.plmTypeName +
+           ", and is incompatible with the formal type $" + [formal_mTypeProxy key]
       end
       let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
       let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]

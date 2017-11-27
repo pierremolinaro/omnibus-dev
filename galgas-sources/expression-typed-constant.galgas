@@ -16,17 +16,17 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     @lstring optionalTypeName
     select
       optionalTypeName = .new {!"" !.here}
     or
-      <type_definition> ?optionalTypeName
+      <type_definition> !?ioAST ?optionalTypeName
     end
     $.$
     $identifier$ ?let constantName
   #--- Properties and access
-    <expression_access_list> ?let accessList
+    <expression_access_list> !?ioAST ?let accessList
   #---
     outExpression = @typedConstantCallAST.new {!optionalTypeName !constantName !accessList}
   }

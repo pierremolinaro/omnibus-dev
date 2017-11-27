@@ -29,7 +29,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     @lstring receiver
   #--- Self or identifier ?
     select
@@ -39,14 +39,14 @@ syntax extension plm_syntax {
       receiver = ["" here]
     end
   #--- Properties and access
-    <expression_access_list> ?let accessList
+    <expression_access_list> !?ioAST ?let accessList
   #--- AST
     outExpression = @primaryInExpressionAST.new {!receiver !accessList}
   }
 
   #·····················································································································
 
-  rule <expression_access_list> !@primaryInExpressionAccessListAST outAccessList {
+  rule <expression_access_list> ?!@ast ioAST !@primaryInExpressionAccessListAST outAccessList {
      outAccessList = {}
     repeat
     while
@@ -55,14 +55,14 @@ syntax extension plm_syntax {
       outAccessList += !.property {!name:propertyName}
     while
       $[$
-      <expression> ?let expression
+      <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
       $]$
       outAccessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
     while
       $.$
       $identifier$ ?let methodName
-      <effective_parameters> ?let arguments ?let endOfArguments
+      <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
       outAccessList += !.funcCall {!methodName:methodName !arguments:arguments !endOfArguments:endOfArguments}
     end
   }

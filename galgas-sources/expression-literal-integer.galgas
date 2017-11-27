@@ -14,7 +14,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
+  rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
     $integer$ ?let @lbigint integerLiteral
     outExpression = @literalIntegerInExpressionAST.new {!integerLiteral}
   }

@@ -24,10 +24,10 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList  {
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList  {
     $switch$
     let instructionLocation = @location.here
-    <expression> ?let @expressionAST switchExpression
+    <expression> !?ioAST ?let @expressionAST switchExpression
     let switchExpressionEndLocation = @location.here
     ${$
     @switchCaseListAST switchCaseList = {}
@@ -41,7 +41,7 @@ syntax extension plm_syntax {
         $,$
       end
       $:$
-      <instructionList> ?let instructionList
+      <instructionList> !?ioAST ?let instructionList
       switchCaseList += !caseIdentifiers !instructionList
     while
     end

@@ -61,7 +61,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <function> ?!@functionDeclarationListAST ioProcListAST {
+  rule <function> ?!@ast ioAST ?!@functionDeclarationListAST ioProcListAST {
   #--- Public ?
     @bool public
     select
@@ -71,6 +71,7 @@ syntax extension plm_syntax {
       public = true
     end
     <function_header>
+      !?ioAST
       ?mode:let @mode mode
       ?name:let procName
       ?attributes:let attributeList
@@ -80,10 +81,10 @@ syntax extension plm_syntax {
       returnTypeName = ["" here]
     or
       $->$
-      <type_definition> ?returnTypeName
+      <type_definition>!?ioAST  ?returnTypeName
     end
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     $}$
     ioProcListAST +=
       !mode
@@ -134,6 +135,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <function_header>
+    ?!@ast ioAST
     !mode:@mode outMode
     !name:@lstring outProcName
     !attributes:@lstringlist outAttributeList
@@ -149,19 +151,19 @@ syntax extension plm_syntax {
       $@attribute$ ?let attribute
       outAttributeList += !attribute
     end
-    <procedure_formal_arguments> ?formalArguments:outProcFormalArgumentList
+    <procedure_formal_arguments>  !?ioAST ?outProcFormalArgumentList
   }
 
   #·····················································································································
 
-  rule <procedure_formal_arguments> !formalArguments:@routineFormalArgumentListAST outProcFormalArgumentList {
+  rule <procedure_formal_arguments> ?!@ast ioAST !@routineFormalArgumentListAST outProcFormalArgumentList {
     outProcFormalArgumentList = {}
     $($
     repeat
     while
       $!selector:$ ?let selector
       $identifier$ ?let formalArgumentName
-      <type_definition> ?let formalArgumentTypeName
+      <type_definition> !?ioAST  ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.output
         !selector
@@ -170,7 +172,7 @@ syntax extension plm_syntax {
     while
       $?!selector:$ ?let selector
       $identifier$ ?let formalArgumentName
-      <type_definition> ?let formalArgumentTypeName
+      <type_definition> !?ioAST ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.inputOutput
         !selector
@@ -179,7 +181,7 @@ syntax extension plm_syntax {
     while
       $?selector:$ ?let selector
       $identifier$ ?let formalArgumentName
-      <type_definition> ?let formalArgumentTypeName
+      <type_definition> !?ioAST  ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.input
         !selector

@@ -21,7 +21,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $for$
     @lstring varName
     select
@@ -30,15 +30,15 @@ syntax extension plm_syntax {
     or
       $identifier$ ?varName
     end
-    <type_definition> ?let typeName
+    <type_definition> !?ioAST ?let typeName
     $in$
-    <expression> ?let @expressionAST lowerBoundExpression
+    <expression> !?ioAST  ?let @expressionAST lowerBoundExpression
     let endOf_lowerBoundExpression_instruction = @location.here
     $..<$
-    <expression> ?let @expressionAST upperBoundExpression
+    <expression> !?ioAST  ?let @expressionAST upperBoundExpression
     let endOf_upperBoundExpression_instruction = @location.here
     ${$
-    <instructionList> ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     let endOfInstruction = @location.here
     $}$
     ioInstructionList += !@forLowerUpperBoundInstructionAST.new {

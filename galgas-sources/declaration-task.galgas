@@ -52,7 +52,7 @@ syntax extension plm_syntax {
     @functionDeclarationListAST taskProcList = {}
     @taskSetupListAST taskInitListAST = {}
     @syncInstructionBranchListAST branchList = {}
-    <taskBody> !?taskVarList !?taskProcList !?taskInitListAST !?branchList
+    <taskBody> !?ioAST !?taskVarList !?taskProcList !?taskInitListAST !?branchList
     let endOfTask = @location.here
     $}$
     ioAST.mTaskListAST +=
@@ -68,27 +68,29 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <taskBody> ?!@structurePropertyListAST taskVarList
-                  ?!@functionDeclarationListAST taskProcList
-                  ?!@taskSetupListAST taskInitListAST
-                  ?!@syncInstructionBranchListAST branchList
+  rule <taskBody>
+    ?!@ast ioAST
+    ?!@structurePropertyListAST taskVarList
+    ?!@functionDeclarationListAST taskProcList
+    ?!@taskSetupListAST taskInitListAST
+    ?!@syncInstructionBranchListAST branchList
 {
     repeat
     while
-      <private_struct_property_declaration> !?taskVarList
+      <private_struct_property_declaration> !?ioAST !?taskVarList
     while
       $func$
       $identifier$ ?let procName
-      <procedure_formal_arguments> ?formalArguments:let @routineFormalArgumentListAST formalArgumentList
+      <procedure_formal_arguments> !?ioAST ?let @routineFormalArgumentListAST formalArgumentList
       @lstring returnTypeName
       select
         returnTypeName = ["" here]
       or
         $->$
-        <type_definition> ?returnTypeName
+        <type_definition> !?ioAST ?returnTypeName
       end
       ${$
-      <instructionList> ?let instructionList
+      <instructionList> !?ioAST ?let instructionList
       let endOfProc = @location.here
       $}$
       taskProcList += !.userMode !false !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
@@ -96,14 +98,14 @@ syntax extension plm_syntax {
       $setup$
       $integer$ ?let @lbigint priority
       ${$
-      <instructionList> ?let instructionList
+      <instructionList> !?ioAST ?let instructionList
       let endOfInit = @location.here
       $}$
       taskInitListAST += !priority !instructionList !endOfInit
     while
-      <guarded_command> ?let @guardedCommandAST guardedCommand
+      <guarded_command> !?ioAST ?let @guardedCommandAST guardedCommand
       ${$
-      <instructionList> ?let instructionList
+      <instructionList> !?ioAST ?let instructionList
       let endOfInstructions = @location.here
       $}$
       branchList += !guardedCommand !instructionList !endOfInstructions

@@ -23,10 +23,10 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclarationAST outDeclaration {
+  rule <declaration_type> ?!@ast ioAST ?let @lstring inNewTypeName !@abstractDeclarationAST outDeclaration {
     $\$type$ ?let elementTypeName
     $[$
-    <expression> ?let sizeExpression
+    <expression> !?ioAST ?let sizeExpression
     let sizeExpressionLocation = @location.here
     $]$
     outDeclaration = @typeArrayDeclarationAST.new {

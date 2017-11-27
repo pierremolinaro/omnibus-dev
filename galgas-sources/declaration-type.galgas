@@ -1,5 +1,16 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#!  AST                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @typeOpaqueDefinitionDeclaration : @abstractDeclarationAST {
+  @lstring mAnonymousOpaqueTypeName
+  @expressionAST mSizeExpression
+  @location mSizeExpressionLocation
+  @lstringlist mAttributeList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
@@ -10,18 +21,174 @@ syntax extension plm_syntax {
     $type$
     $\$type$ ?let newTypeName
     $:$
-    <declaration_type> !newTypeName ?let declaration
+    <declaration_type> !?ioAST !newTypeName ?let declaration
     ioAST.mDeclarationListAST += !declaration
   }
 
   #·····················································································································
 
-  rule <type_definition> !@lstring outTypeName {
+  rule <declaration> ?!@ast ioAST {
+    $type$
+    $\$type$ ?let newTypeName
+    $:$
+    <type_definition> !?ioAST ?let typeName
+    ioAST.mDeclarationListAST += !@typeAliasDeclaration.new {
+      !newTypeName
+      !typeName
+    }
+  }
+
+  #·····················································································································
+
+  rule <type_definition> ?!@ast unused ioAST !@lstring outTypeName {
     $\$type$ ?outTypeName
   }
   
   #·····················································································································
 
+  rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
+    $[$
+    <expression> !?ioAST ?let sizeExpression
+    let sizeExpressionLocation = @location.here
+    $]$   
+    outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]
+    ioAST.mTypeDeclarationIndex ++
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $@attribute$ ?let attribute
+      attributeList += !attribute
+    end
+    ioAST.mDeclarationListAST += !@typeOpaqueDefinitionDeclaration.new {
+      !outTypeName
+      !sizeExpression
+      !sizeExpressionLocation
+      !attributeList
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeOpaqueDefinitionDeclaration addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
+  !@abstractDeclarationAST outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @typeOpaqueDefinitionDeclaration noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let typeName = llvmTypeNameFromPLMname (!mAnonymousOpaqueTypeName)
+  [!?ioGraph noteNode !typeName]
+  [mSizeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#·······················································································································
+
+override method @typeOpaqueDefinitionDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let internalTypeName = llvmTypeNameFromPLMname (!mAnonymousOpaqueTypeName)
+#--- Add structure type name as node
+  [!?ioGraph addNode !internalTypeName !self]
+#--- Add size expression
+  [mSizeExpression addDependenceEdgeForStaticExpression !internalTypeName !?ioGraph]
+}
+
+#·······················································································································
+
+override getter @typeOpaqueDefinitionDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "anonymous $" + mAnonymousOpaqueTypeName 
+}
+
+#·······················································································································
+
+override getter @typeOpaqueDefinitionDeclaration location -> @location outLocation {
+  outLocation = mAnonymousOpaqueTypeName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeOpaqueDefinitionDeclaration enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+  @PLMTypeAttributes attributes = .none
+  for (attribute) in mAttributeList do
+    if attribute.string == "instantiable" then
+      if [attributes instanciable] then
+        error attribute : "duplicated attribute"
+      else
+        attributes = attributes | .instanciable
+      end
+    elsif attribute.string == "copyable" then
+      if [attributes copyable] then
+        error attribute : "duplicated attribute"
+      else
+        attributes = attributes | .copyable
+      end
+    else
+      error attribute : "only @copyable and @instantiable attributes are allowed here"
+    end
+  end
+#--- Compute array size
+  @instructionListIR initInstructionGenerationList = {}
+  @allocaList allocaList = {}
+  @semanticTemporariesStruct temporaries = .default
+  variableMapWithConstants (
+    !context:ioContext
+    ?@universalValuedObjectMapForContext universalMap
+  )
+  [mSizeExpression analyzeExpression
+    !self:voidType ()
+    !inGuard:false
+    !routineNameForInvocationGraph:.new {!mAnonymousOpaqueTypeName.string + " init" !mAnonymousOpaqueTypeName.location}
+    !optionalTargetType:voidType ()
+    !context:ioContext
+    !mode:.bootMode
+    !?temporary:temporaries
+    !?staticStringMap:*
+    !?variableMap:universalMap
+    !?alloca:allocaList
+    !?instructionListIR:initInstructionGenerationList
+    ?result:let @objectIR sizeExpressionIR
+  ]
+  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
+    error mSizeExpressionLocation : "array size expression is not static"
+  else
+    @constructorMap constructorMap = {}
+    if [attributes instanciable] then
+      [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
+    end
+    [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
+    let opaqueType = @PLMType.new {
+      !propertyMap:{}
+      !classConstantMap:{}
+      !constructorMap:constructorMap
+      !typeAttributes:attributes
+      !plmTypeName:mAnonymousOpaqueTypeName
+      !kind:.opaque {!bitCount:bitSize}
+    }
+    [!?ioContext.mTypeMap insertType
+      !lkey:mAnonymousOpaqueTypeName
+      !type:opaqueType
+      !index:[ioContext.mTypeMap count]
+    ]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
