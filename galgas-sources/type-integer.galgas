@@ -156,11 +156,14 @@ override method @integerDeclarationAST enterInContext
   @classConstantMap classConstantMap = {}
   [!?classConstantMap insertKey !["min" nowhere] !min !integerTypeName]
   [!?classConstantMap insertKey !["max" nowhere] !max !integerTypeName]
+#--------------------------------------- Constructor map
+  @constructorMap constructorMap = {} 
+  [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0}]
 #--------------------------------------- Enter in type map
   let integerType = @PLMType.new {
     !propertyMap:propertyMap
     !classConstantMap:classConstantMap
-    !constructorMap:{}
+    !constructorMap:constructorMap
     !typeAttributes:.all
     !plmTypeName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
