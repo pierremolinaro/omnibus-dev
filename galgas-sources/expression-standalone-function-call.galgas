@@ -105,11 +105,11 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
     ?*
   ]
 #  let isPublic = routineDescriptor.mIsPublic
-  let routineKind = routineDescriptor.mRoutineKind
+  let routineKind = routineDescriptor.routineKind
   let calleeMode = [routineKind executionMode]
-  let formalSignature = routineDescriptor.mSignature
+  let formalSignature = routineDescriptor.signature
 #--- Check routine is actually a function
-  if [[routineDescriptor.mReturnTypeProxy type] mKind] == .void then
+  if [routineDescriptor.returnTypeProxy type].kind == .void then
     error mStandaloneFunctionName : "not a function (returns no value)" : routineDescriptor, outFunctionCallReturnedValue
   else
   #--- Check modes
@@ -137,7 +137,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
       !?effectiveIR:effectiveParameterListIR
     )
   #--- New LLVM variable for function call result
-    getNewTempValue (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
+    getNewTempValue (![routineDescriptor.returnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
   #--- Code generation
     ioInstructionGenerationList += !@staticRoutineCallIR.new {
       !"" # globalVariableReceiverName

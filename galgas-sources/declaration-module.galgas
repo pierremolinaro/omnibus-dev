@@ -301,7 +301,7 @@ override method @decoratedRequiredModule semanticAnalysis
 {
   let moduleTypeName = llvmModuleNameFromName (!mModuleName)
   let moduleTypeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
-  let constructorMap = [moduleTypeProxy type].mConstructorMap
+  let constructorMap = [moduleTypeProxy type].constructorMap
   [constructorMap  searchKey !.new {!"()" !moduleTypeName.location} ?* ?let constructorValue]
   [constructorValue structure ?sortedOperandList:let sortedOperandList]
   @operandIRList initialValueList = {}

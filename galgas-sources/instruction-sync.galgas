@@ -229,7 +229,7 @@ override method @syncInstructionAST analyze
       @procCallEffectiveParameterListIR guardEffectiveParameterListIR
       @lstring guardMangledName
       if usesSelf.bool then # self.p1.p2. … (…)
-        if [inSelfType.mKind isVoid] then
+        if [inSelfType.kind isVoid] then
           error usesSelf : "'self' is not available in this context" : guardEffectiveParameterListIR, guardMangledName
         else
           var propertyList = nameList
@@ -367,7 +367,7 @@ proc analyzeGuardCall
     error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
   else  
     outGuardMangledName = routineMangledNameFromCall (
-      !llvmTypeStringFromPLMname (![inReceiver type].mPLMTypeName)
+      !llvmTypeStringFromPLMname (![inReceiver type].plmTypeName)
       !inGuardName
       !inEffectiveParameterList
     )

@@ -521,7 +521,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
 # Unsing forward type is allowed for pointers
   ioLLVMcode += llvmTitleComment (!"Types (structures and static arraies)")
   for (type *) in orderedTypeList do
-    switch [type mKind]
+    switch type.kind
     case void :
     case boolean :
     case enumeration (*) :

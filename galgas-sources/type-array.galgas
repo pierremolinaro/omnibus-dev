@@ -151,12 +151,12 @@ override method @typeArrayDeclarationAST enterInContext
     end
   #-------------------------------------------- Enter in type map
     let arrayType = @PLMType.new {
-      !arrayTypePropertyMap
-      !classConstantMap
-      !constructorMap
-      !typeAttributes
-      !mArrayTypeName
-      !.arrayType {!elementType:elementType !size:arraySize}
+      !propertyMap:arrayTypePropertyMap
+      !classConstantMap:classConstantMap
+      !constructorMap:constructorMap
+      !typeAttributes:typeAttributes
+      !plmTypeName:mArrayTypeName
+      !kind:.arrayType {!elementType:elementType !size:arraySize}
     }
     [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName

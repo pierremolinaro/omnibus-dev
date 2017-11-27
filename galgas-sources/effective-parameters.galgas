@@ -188,7 +188,7 @@ proc analyzeEffectiveParameters
       }
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
-      [inSelfType.mPropertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]
+      [inSelfType.propertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]
       switch propertyAccess
       case nonVirtualMethod (*) :
         error inErrorLocation : "a method cannot be used in this context"
@@ -215,8 +215,8 @@ proc analyzeEffectiveParameters
       + [inEffectiveParameterList length] + " argument(s)"
   else
     for () formal_ in inFormalSignature, () actual_ in parameterList do
-      if [formal_mTypeProxy key] != actual_mParameterType.mPLMTypeName then
-        error actual_mSelector : "the actual parameter type is $'" + actual_mParameterType.mPLMTypeName +
+      if [formal_mTypeProxy key] != actual_mParameterType.plmTypeName then
+        error actual_mSelector : "the actual parameter type is $'" + actual_mParameterType.plmTypeName +
            "', and is incompatible with the formal type $'" + [formal_mTypeProxy key] + "'"
       end
       let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]

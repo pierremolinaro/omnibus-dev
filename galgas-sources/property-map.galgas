@@ -26,13 +26,13 @@ setter @propertyMap addFunction
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
 {
   let @routineDescriptor descriptor = .new {
-    !true # mIsPublic # Routine is declared with "public"
-    !false # mExported # Routine is declared with @exported attribute
-    !.function {!executionMode:.anyMode} # @routineKind mRoutineKind
-    !{} # @routineTypedSignature mSignature
-    !inResultType # Return type 
-    !false # @bool mCanAccessProperties # Routine is declared with @access attribute
-    !false # @bool mCanMutateProperties # Routine is declared with @mutating attribute
+    !isPublic:true
+    !exported:false
+    !routineKind:.function {!executionMode:.anyMode} # @routineKind mRoutineKind
+    !signature:{}
+    !returnTypeProxy:inResultType # Return type 
+    !canAccessProperties:false # Routine is declared with @access attribute
+    !canMutateProperties:false # Routine is declared with @mutating attribute
   }
   [!?self insertKey
     ![inMethodName + "()" nowhere]

@@ -118,7 +118,7 @@ override method @ifExpressionAST analyzeExpression
     ?let ifExpressionResult
   ]  
 #--- Check "if" expression type is boolean
-  if not [[[ifExpressionResult type] mKind] isBoolean] then
+  if not [[ifExpressionResult type].kind isBoolean] then
     error mIfExpressionEndLocation : "'if' expression should be boolean"
   end
 #--- Analyze 'then' expression

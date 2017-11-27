@@ -96,10 +96,10 @@ override method @forInstructionAST analyze
   let iteratedTypeKind = [iteratedObjectPointer type]
 #--- Get iterated element type
   @PLMType iteratedElementType
-  if [iteratedTypeKind mKind] == .literalString then
+  if iteratedTypeKind.kind == .literalString then
     iteratedElementType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["uint8" nowhere]} type]
-  elsif [[iteratedTypeKind mKind] isArrayType] then
-    [[iteratedTypeKind mKind] arrayType ?elementType:iteratedElementType ?1*]
+  elsif [iteratedTypeKind.kind isArrayType] then
+    [iteratedTypeKind.kind arrayType ?elementType:iteratedElementType ?1*]
   else
     error mIteratedObject : "this object is not enumerable" : iteratedElementType
   end
@@ -127,7 +127,7 @@ override method @forInstructionAST analyze
     ?result:let @objectIR whileExpressionResult
   ]
 #--- Check "while" expression type is boolean
-  if not [[[whileExpressionResult type] mKind] isBoolean] then
+  if not [[whileExpressionResult type].kind isBoolean] then
     error mEndOf_whileExpression : "'while' expression should be boolean"
   elsif mStaticWhileExpression && not [whileExpressionResult isStatic] then
     error mEndOf_whileExpression : "'while' expression is not static"
@@ -152,7 +152,7 @@ override method @forInstructionAST analyze
   ]
   [!?ioUniversalMap closeOverride !mEndOf_for_instruction]
 #--- Code generation
-  if [iteratedTypeKind mKind] == .literalString then
+  if iteratedTypeKind.kind == .literalString then
     ioInstructionGenerationList += !@forInstructionOnStringIR.new {
       !plmName
       !mIteratedObject.location
@@ -161,8 +161,8 @@ override method @forInstructionAST analyze
       !whileExpressionResult
       !doInstructionList_GenerationList
     }
-  elsif [[iteratedTypeKind mKind] isArrayType] then
-    [[iteratedTypeKind mKind] arrayType ?elementType:let elementType ?size:let size]
+  elsif [iteratedTypeKind.kind isArrayType] then
+    [iteratedTypeKind.kind arrayType ?elementType:let elementType ?size:let size]
     @stringset invokedFunctionSet = {}
   #--- Static array map ? If yes, enter invoked function set
     if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !mIteratedObject] then

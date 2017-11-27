@@ -1891,7 +1891,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "    self.readBarrier.signal ()\n"
   "  }\n"
   "\n"
-  "  public func user input @noUnusedWarning (!data:outData $uint32) {\n"
+  "  public func user input @mutating @noUnusedWarning (!data:outData $uint32) {\n"
   "    self.readBarrier.wait ()\n"
   "    outData = self.data\n"
   "    self.writeBarrier.signal ()\n"
@@ -1969,7 +1969,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "10-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  3234, // Text length
+  3244, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 

@@ -82,13 +82,13 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
     ![mProcFormalArgumentList routineSignature !mExternProcedureName]
     !mRoutineNameForGeneration
     !.new {
-      !true # isPublic
-      !false # Global
-      !.function {!executionMode:mMode}
-      !signature
-      !returnTypeProxy
-      !false # canMutateProperties
-      !false # canAccessPropertiesInUserMode
+      !isPublic:true
+      !exported:false
+      !routineKind:.function {!executionMode:mMode}
+      !signature:signature
+      !returnTypeProxy:returnTypeProxy
+      !canAccessProperties:false
+      !canMutateProperties:false
     }
   ]
 }

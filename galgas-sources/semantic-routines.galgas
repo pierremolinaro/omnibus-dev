@@ -57,7 +57,7 @@ proc routineSemanticAnalysis
 {
 #--- Mangled routine name
   let routineMangledName = routineMangledNameFromAST (
-    !if [inSelfType mKind] == .void then "" else llvmTypeStringFromPLMname (!inSelfType.mPLMTypeName) end
+    !if inSelfType.kind == .void then "" else llvmTypeStringFromPLMname (!inSelfType.plmTypeName) end
     !inRoutineName
     !inRoutineFormalArgumentList
   )
@@ -172,7 +172,10 @@ method @routineMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += " " + [mReturnType llvmTypeName]
   ioLLVMcode += " @" + routineName + " ("
-  let receiverTypeName = if [mReceiverType mKind] == .void then "" else llvmTypeStringFromPLMname (!mReceiverType.mPLMTypeName) end
+  let receiverTypeName = if mReceiverType.kind == .void
+    then ""
+    else llvmTypeStringFromPLMname (!mReceiverType.plmTypeName)
+  end
   var first = true
   if receiverTypeName != "" then
     ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"
@@ -201,7 +204,7 @@ method @routineMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Add result variable ?
-  if [mReturnType mKind] != .void then
+  if mReturnType.kind != .void then
     ioLLVMcode += "  " + llvmNameForLocalVariable (!functionResultVariableName ())
                 + " = alloca " + [mReturnType llvmTypeName] + "\n"
   end
@@ -229,7 +232,7 @@ method @routineMapIR-element llvmCodeGeneration
 #--- Instruction list
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
 #--- Epilog
-  if [mReturnType mKind] == .void then
+  if mReturnType.kind == .void then
     ioLLVMcode += "  ret void\n"
   else
     let resultVarLLVMName = llvmNameForLocalVariable (!functionResultVariableName ())

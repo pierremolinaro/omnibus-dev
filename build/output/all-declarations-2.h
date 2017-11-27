@@ -1006,19 +1006,19 @@ class cMapElement_guardMapForContext : public cMapElement {
 
 class GALGAS_routineDescriptor : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_bool mProperty_mIsPublic ;
+  public : GALGAS_bool mProperty_isPublic ;
 
-  public : GALGAS_bool mProperty_mExported ;
+  public : GALGAS_bool mProperty_exported ;
 
-  public : GALGAS_routineKind mProperty_mRoutineKind ;
+  public : GALGAS_routineKind mProperty_routineKind ;
 
-  public : GALGAS_routineTypedSignature mProperty_mSignature ;
+  public : GALGAS_routineTypedSignature mProperty_signature ;
 
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnTypeProxy ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_returnTypeProxy ;
 
-  public : GALGAS_bool mProperty_mCanAccessProperties ;
+  public : GALGAS_bool mProperty_canAccessProperties ;
 
-  public : GALGAS_bool mProperty_mCanMutateProperties ;
+  public : GALGAS_bool mProperty_canMutateProperties ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1031,13 +1031,13 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_routineDescriptor (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_routineDescriptor (const GALGAS_bool & in_mIsPublic,
-                                     const GALGAS_bool & in_mExported,
-                                     const GALGAS_routineKind & in_mRoutineKind,
-                                     const GALGAS_routineTypedSignature & in_mSignature,
-                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
-                                     const GALGAS_bool & in_mCanAccessProperties,
-                                     const GALGAS_bool & in_mCanMutateProperties) ;
+  public : GALGAS_routineDescriptor (const GALGAS_bool & in_isPublic,
+                                     const GALGAS_bool & in_exported,
+                                     const GALGAS_routineKind & in_routineKind,
+                                     const GALGAS_routineTypedSignature & in_signature,
+                                     const GALGAS_unifiedTypeMap_2D_proxy & in_returnTypeProxy,
+                                     const GALGAS_bool & in_canAccessProperties,
+                                     const GALGAS_bool & in_canMutateProperties) ;
 
 //-- Start of generic part --*
 
@@ -1071,19 +1071,19 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCanAccessProperties (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_canAccessProperties (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCanMutateProperties (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_canMutateProperties (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mExported (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_exported (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPublic (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeProxy (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_returnTypeProxy (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mRoutineKind (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_routineKind (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineTypedSignature getter_mSignature (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineTypedSignature getter_signature (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

@@ -170,15 +170,15 @@ override method @standAloneProcedureCallInstructionAST analyze
 #--- Check modes
   let routineKindIR = checkMode (
     !callerMode:inCurrentMode
-    !calleeMode:[routineDescriptor.mRoutineKind executionMode]
-    !kind:routineDescriptor.mRoutineKind
+    !calleeMode:[routineDescriptor.routineKind executionMode]
+    !kind:routineDescriptor.routineKind
     !error:mSandAloneRoutineName.location
   )
 #--- Analyze effective parameters
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   analyzeEffectiveParameters (
     !self:inSelfType
-    !formal:routineDescriptor.mSignature
+    !formal:routineDescriptor.signature
     !effective:mArguments
     !errorLocation:mSandAloneRoutineName.location
     !callerForInvocationGraph:inCallerNameForInvocationGraph
@@ -223,7 +223,7 @@ override method @procedureCallInstructionAST analyze
   @PLMType currentType
   @string currentLLVMAddressVar
   if mIdentifier.string == "" then # Receiver is self
-    if inSelfType.mKind == .void then
+    if inSelfType.kind == .void then
       error mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
     else
       currentType = inSelfType
@@ -259,7 +259,7 @@ override method @procedureCallInstructionAST analyze
     end
   end
 #--- Get current object property map
-  let @propertyMap propertyMap = currentType.mPropertyMap
+  let @propertyMap propertyMap = currentType.propertyMap
 #--- Insulate last access (should be a "property", used as routine name
   var accessList = mAccessList
   [!?accessList popLast ?let lastAccess]
@@ -301,7 +301,7 @@ override method @procedureCallInstructionAST analyze
   case arrayAccess (* @location endOfIndex) :
     error endOfIndex : "a property access is required here"
   case property (@lstring methodName) :
-    let @propertyMap propertyMap = currentType.mPropertyMap
+    let @propertyMap propertyMap = currentType.propertyMap
     let key = routineMangledNameFromCall (!"" !methodName !mArguments)
     [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     switch propertyAccess
@@ -315,17 +315,17 @@ override method @procedureCallInstructionAST analyze
       }
     #---
     #  let isPublic = routineDescriptor.mIsPublic
-      let routineKind = routineDescriptor.mRoutineKind
+      let routineKind = routineDescriptor.routineKind
       let calleeMode = [routineKind executionMode]
-      let formalSignature = routineDescriptor.mSignature
+      let formalSignature = routineDescriptor.signature
     #--- If method mutates its properties, check it is allowed 
     #    note that mIdentifier.string is empty string if call instruction is self. ...
-      if (mIdentifier.string == "") && routineDescriptor.mCanMutateProperties && not inRoutineCanMutateProperties then
+      if (mIdentifier.string == "") && routineDescriptor.canMutateProperties && not inRoutineCanMutateProperties then
         error methodName
         : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
       end
     #--- Check routine is actually a procedure (does not return any value)
-      if routineDescriptor.mReturnTypeProxy != .null then
+      if routineDescriptor.returnTypeProxy != .null then
         error methodName : "not a procedure (returns a value)"
       else
       #--- Check modes
@@ -352,7 +352,7 @@ override method @procedureCallInstructionAST analyze
           !?effectiveIR:effectiveParameterListIR
         )
       #--- Get function name and map containing the function definition
-        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.mPLMTypeName) !methodName !mArguments)
+        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.plmTypeName) !methodName !mArguments)
       #--- Code generation
         ioInstructionGenerationList += !@staticRoutineCallIR.new {
           !mIdentifier
@@ -366,12 +366,12 @@ override method @procedureCallInstructionAST analyze
         [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
       end
     case indexed  (@PLMType propertyType @uint propertyIndex) :
-      if not [[propertyType mKind] isFunction] then
+      if not [propertyType.kind isFunction] then
         error methodName : "an indexed property cannot be used as method"
       else
-        [[propertyType mKind] function ?descriptor:let descriptor]
+        [propertyType.kind function ?descriptor:let descriptor]
       #--- Check routine is actually a function
-        if descriptor.mReturnTypeProxy != .null then
+        if descriptor.returnTypeProxy != .null then
           error methodName : "a function returns a value and cannot be called as a procedure"
         else
         #--- Check modes
@@ -385,7 +385,7 @@ override method @procedureCallInstructionAST analyze
           @procCallEffectiveParameterListIR effectiveParameterListIR = {}
           analyzeEffectiveParameters (
             !self:inSelfType
-            !formal:descriptor.mSignature
+            !formal:descriptor.signature
             !effective:mArguments
             !errorLocation:methodName.location
             !callerForInvocationGraph:inCallerNameForInvocationGraph

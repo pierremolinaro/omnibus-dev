@@ -11,12 +11,12 @@ boolset @PLMTypeAttributes {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @PLMType {
-  @propertyMap mPropertyMap # Properties and methods
-  @classConstantMap mConstantMap # $type.cst, as enumeration values
-  @constructorMap mConstructorMap # $type (!... !...)
-  @PLMTypeAttributes mAttributes # as instanciable, copyable, ...
-  @string mPLMTypeName # Without le leading '$'; empty string for void type kind
-  @typeKind mKind
+  @propertyMap propertyMap %selector # Properties and methods
+  @classConstantMap classConstantMap %selector # $type.cst, as enumeration values
+  @constructorMap constructorMap %selector # $type (!... !...)
+  @PLMTypeAttributes typeAttributes %selector # as instanciable, copyable, ...
+  @string plmTypeName %selector # Without le leading '$'; empty string for void type kind
+  @typeKind kind %selector
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -39,12 +39,12 @@ enum @typeKind {
 
 func booleanType -> @PLMType {
   result = .new {
-    !{}
-    !{}
-    !{}
-    !.all
-    !boolTypeName ()
-    !.boolean
+    !propertyMap:{}
+    !classConstantMap:{}
+    !constructorMap:{}
+    !typeAttributes:.all
+    !plmTypeName:boolTypeName ()
+    !kind:.boolean
   }
 }
 
@@ -52,37 +52,58 @@ func booleanType -> @PLMType {
 
 func staticIntegerType -> @PLMType {
   result = .new {
-    !{}
-    !{}
-    !{}
-    !.equatable | .copyable
-    !staticIntegerTypeName ()
-    !.staticInteger
+    !propertyMap:{}
+    !classConstantMap:{}
+    !constructorMap:{}
+    !typeAttributes:.equatable | .copyable
+    !plmTypeName:staticIntegerTypeName ()
+    !kind:.staticInteger
   }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func literalStringType -> @PLMType {
-  result = .new {!{} !{} !{} !.all !staticStringTypeName () !.literalString}
+  result = .new {
+    !propertyMap:{}
+    !classConstantMap:{}
+    !constructorMap:{}
+    !typeAttributes:.all
+    !plmTypeName:staticStringTypeName () 
+    !kind:.literalString
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func voidType -> @PLMType {
-  result = .new {!{} !{} !{} !.none !"" !.void}
+  result = .new {
+    !propertyMap:{}
+    !classConstantMap:{}
+    !constructorMap:{}
+    !typeAttributes:.none
+    !plmTypeName:""
+    !kind:.void
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
-  result = .new{!{} !{} !{} !.none !"" !.function {!descriptor:inDescriptor}}
+  result = .new{
+    !propertyMap:{}
+    !classConstantMap:{}
+    !constructorMap:{}
+    !typeAttributes:.none
+    !plmTypeName:""
+    !kind:.function {!descriptor:inDescriptor}
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType guardMap -> @guardMapForContext {
-  switch mKind
+  switch kind
   case void, boolean, literalString, staticInteger :
     result = {}
   case enumeration (*) :
@@ -105,7 +126,7 @@ getter @PLMType guardMap -> @guardMapForContext {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType equatable -> @bool {
-  result = [mAttributes equatable]
+  result = [typeAttributes equatable]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -117,7 +138,7 @@ getter @unifiedTypeMap-proxy instanciable -> @bool {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType instanciable -> @bool {
-  result = [mAttributes instanciable]
+  result = [typeAttributes instanciable]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -129,13 +150,13 @@ getter @unifiedTypeMap-proxy copyable -> @bool {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType copyable -> @bool {
-  result = [mAttributes copyable]
+  result = [typeAttributes copyable]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType llvmTypeName -> @string {
-  switch [self mKind]
+  switch self.kind
   case void :
     result = "void"
   case boolean :
@@ -145,7 +166,7 @@ getter @PLMType llvmTypeName -> @string {
   case enumeration (@uint bitCount) :
     result = "i" + bitCount
   case structure (* *) :
-    result = "%" + [llvmTypeNameFromPLMname (![mPLMTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![plmTypeName nowhere]) assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case staticInteger :
@@ -153,15 +174,15 @@ getter @PLMType llvmTypeName -> @string {
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case arrayType (* *) :
-    result = "%" + [llvmTypeNameFromPLMname (![mPLMTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![plmTypeName nowhere]) assemblerRepresentation]
   case function (@routineDescriptor descriptor) :
-    if descriptor.mReturnTypeProxy == .null then
+    if descriptor.returnTypeProxy == .null then
       result = "void"
     else
-      result = [[descriptor.mReturnTypeProxy type] llvmTypeName]
+      result = [[descriptor.returnTypeProxy type] llvmTypeName]
     end
     result += "("
-    for () in descriptor.mSignature 
+    for () in descriptor.signature 
     do
       result += [[mTypeProxy type] llvmTypeName]
       switch mFormalArgumentPassingMode
@@ -179,7 +200,7 @@ getter @PLMType llvmTypeName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType descriptionForHTMLFile -> @string {
-  switch [self mKind]
+  switch self.kind
   case void :
     result = "Void"
   case boolean :

@@ -15513,17 +15513,17 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyMap ;
 
 class GALGAS_PLMType : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_propertyMap mProperty_mPropertyMap ;
+  public : GALGAS_propertyMap mProperty_propertyMap ;
 
-  public : GALGAS_classConstantMap mProperty_mConstantMap ;
+  public : GALGAS_classConstantMap mProperty_classConstantMap ;
 
-  public : GALGAS_constructorMap mProperty_mConstructorMap ;
+  public : GALGAS_constructorMap mProperty_constructorMap ;
 
-  public : GALGAS_PLMTypeAttributes mProperty_mAttributes ;
+  public : GALGAS_PLMTypeAttributes mProperty_typeAttributes ;
 
-  public : GALGAS_string mProperty_mPLMTypeName ;
+  public : GALGAS_string mProperty_plmTypeName ;
 
-  public : GALGAS_typeKind mProperty_mKind ;
+  public : GALGAS_typeKind mProperty_kind ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -15536,12 +15536,12 @@ class GALGAS_PLMType : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_PLMType (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_PLMType (const GALGAS_propertyMap & in_mPropertyMap,
-                           const GALGAS_classConstantMap & in_mConstantMap,
-                           const GALGAS_constructorMap & in_mConstructorMap,
-                           const GALGAS_PLMTypeAttributes & in_mAttributes,
-                           const GALGAS_string & in_mPLMTypeName,
-                           const GALGAS_typeKind & in_mKind) ;
+  public : GALGAS_PLMType (const GALGAS_propertyMap & in_propertyMap,
+                           const GALGAS_classConstantMap & in_classConstantMap,
+                           const GALGAS_constructorMap & in_constructorMap,
+                           const GALGAS_PLMTypeAttributes & in_typeAttributes,
+                           const GALGAS_string & in_plmTypeName,
+                           const GALGAS_typeKind & in_kind) ;
 
 //-- Start of generic part --*
 
@@ -15574,17 +15574,17 @@ class GALGAS_PLMType : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMTypeAttributes getter_mAttributes (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_classConstantMap getter_classConstantMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_classConstantMap getter_mConstantMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_constructorMap getter_constructorMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_constructorMap getter_mConstructorMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_typeKind getter_kind (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_typeKind getter_mKind (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_plmTypeName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPLMTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_propertyMap getter_propertyMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_propertyMap getter_mPropertyMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMTypeAttributes getter_typeAttributes (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

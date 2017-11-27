@@ -273,13 +273,13 @@ override method @staticListAST enterInContext
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
       let descriptor = @routineDescriptor.new {
-        !true # Routine is declared with "public"
-        !false # Routine is declared with @exported attribute
-        !.function {!executionMode:mode} # @routineKind mRoutineKind
-        !signature
-        !returnTypeProxy 
-        !true # mCanAccessProperties # Routine is declared with @access attribute
-        !true # mCanMutateProperties # Routine is declared with @mutating attribute
+        !isPublic:true # Routine is declared with "public"
+        !exported:false # Routine is declared with @exported attribute
+        !routineKind:.function {!executionMode:mode} # @routineKind mRoutineKind
+        !signature:signature
+        !returnTypeProxy:returnTypeProxy 
+        !canAccessProperties:true # Routine is declared with @access attribute
+        !canMutateProperties:true # Routine is declared with @mutating attribute
      }
      let type = functionType (!descriptor)
       if not [ioContext.mTypeMap hasKey !routineMangledName] then
@@ -301,12 +301,12 @@ override method @staticListAST enterInContext
   [!?ioContext.mStaticListMap insertKey !mStaticListName !propertyList]
 #-------------------------------------------------------------------- Enter element type in type map
   let type = @PLMType.new {
-    !propertyMap
-    !{} # Class constant map
-    !{} # Constructor map
-    !.none
-    !llvmNameForStaticListElementType (!mStaticListName)
-    !.structure {!propertyList:propertyList !guardMap:{}}
+    !propertyMap:propertyMap
+    !classConstantMap:{}
+    !constructorMap:{}
+    !typeAttributes:.none
+    !plmTypeName:llvmNameForStaticListElementType (!mStaticListName)
+    !kind:.structure {!propertyList:propertyList !guardMap:{}}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmElementTypeName
@@ -325,7 +325,7 @@ override method @staticListAST enterInContext
       for (operand endOfExp) in value.mExpressions, (* type) in propertyList do
         switch operand
         case expression (@expressionAST exp) :
-          if [[type mKind] isFunction] then
+          if [type.kind isFunction] then
             error endOfExp : "a function name is expected here"
           else
             initialVariableMap (
@@ -366,10 +366,10 @@ override method @staticListAST enterInContext
             staticValue += [type llvmTypeName] + " " + [expressionResult llvmName]
           end      
         case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
-          if not [[type mKind] isFunction] then
+          if not [type.kind isFunction] then
             error endOfExp : "a static expression is expected here"
           else
-            [[type mKind] function ?descriptor:let descriptor]
+            [type.kind function ?descriptor:let descriptor]
             let argumentSignature = [formalArgs routineSignature !functionName]
             [ioContext.mRoutineMapForContext searchKey
               !functionName
@@ -378,11 +378,11 @@ override method @staticListAST enterInContext
               ?let @routineDescriptor routineDescriptor
               ?let functionDefinitionLocation
             ]
-            let candidateIsPublic = routineDescriptor.mIsPublic
-            let candidateRoutineKind = routineDescriptor.mRoutineKind
-            let candidateMode = [routineDescriptor.mRoutineKind executionMode]
-            let candidateSignature = routineDescriptor.mSignature
-            let candidateReturnTypeProxy = routineDescriptor.mReturnTypeProxy
+            let candidateIsPublic = routineDescriptor.isPublic
+            let candidateRoutineKind = routineDescriptor.routineKind
+            let candidateMode = [routineDescriptor.routineKind executionMode]
+            let candidateSignature = routineDescriptor.signature
+            let candidateReturnTypeProxy = routineDescriptor.returnTypeProxy
           #--- Check accessibility
             if not candidateIsPublic then
               let declarationFile = [functionDefinitionLocation file]
@@ -394,21 +394,21 @@ override method @staticListAST enterInContext
             if not [candidateRoutineKind isFunction] then
               error functionName : "this routine is not a function"
             end
-            let currentMode = [descriptor.mRoutineKind executionMode]
+            let currentMode = [descriptor.routineKind executionMode]
             if currentMode != candidateMode then
               error functionName : "this function runs in " + candidateMode + " mode, but " + currentMode + " is required"
             end
-            if (descriptor.mReturnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
+            if (descriptor.returnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
               error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
-            elsif (descriptor.mReturnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
+            elsif (descriptor.returnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
               error functionName : "this function should return no object"
             end
-            if [descriptor.mSignature length] != [candidateSignature length] then
+            if [descriptor.signature length] != [candidateSignature length] then
               error functionName
               : "this function has " + [candidateSignature length] + " argument(s) ("
-              + [descriptor.mSignature length] + " required)"
+              + [descriptor.signature length] + " required)"
             else
-              for required in descriptor.mSignature, candidate in candidateSignature do
+              for required in descriptor.signature, candidate in candidateSignature do
                 if required.mTypeProxy != candidate.mTypeProxy then
                   error candidate.mSelector : "argument type should be $" + [required.mTypeProxy key]
                 end
@@ -435,12 +435,12 @@ override method @staticListAST enterInContext
 #-------------------------------------------------------------------- Enter list type in type map
   let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmElementTypeName} type]
   let arrayType = @PLMType.new {
-    !listTypePropertyMap
-    !{} # class constant map
-    !{} # Constructor map
-    !.all
-    !plmNameForStaticListType (!mStaticListName)
-    !.arrayType {!elementType:elementType !size:[stringValueList length]}
+    !propertyMap:listTypePropertyMap
+    !classConstantMap:{}
+    !constructorMap:{}
+    !typeAttributes:.all
+    !plmTypeName:plmNameForStaticListType (!mStaticListName)
+    !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmNameForStaticListType (!mStaticListName)

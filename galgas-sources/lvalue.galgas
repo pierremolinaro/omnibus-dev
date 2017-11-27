@@ -110,7 +110,7 @@ method @LValueAST type
   for (access) in mAccessList do
     switch access
     case property (@lstring propertyName) :
-      let @propertyMap propertyMap = outType.mPropertyMap
+      let @propertyMap propertyMap = outType.propertyMap
       [propertyMap searchKey !propertyName ?* ?let accessKind]
       switch accessKind
       case constantProperty (value) :
@@ -121,8 +121,8 @@ method @LValueAST type
         error propertyName : "a method cannot be used in this context" : outType
       end
     case arrayAccess (* *) :
-      if [[outType mKind] isArrayType] then
-        [[outType mKind] arrayType ?elementType:outType ?1*]
+      if [outType.kind isArrayType] then
+        [outType.kind arrayType ?elementType:outType ?1*]
       end
     end
   end
@@ -144,7 +144,7 @@ method @LValueAST analyzeLValue
   !@LValueRepresentation outInternalRepresentation
 {
   if mIdentifier.string == "" then # Receiver is "self"
-    if [inSelfType mKind] == .void then
+    if inSelfType.kind == .void then
       error mIdentifier : "self is not available in this context" : outInternalRepresentation
     elsif not inRoutineCanMutateProperties then
       error mIdentifier
@@ -337,7 +337,7 @@ private proc analyzeVariableInLValue
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :
-        let @propertyMap propertyMap = currentType.mPropertyMap
+        let @propertyMap propertyMap = currentType.propertyMap
         [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
         case nonVirtualMethod (*) :
@@ -358,8 +358,8 @@ private proc analyzeVariableInLValue
           currentLLVMName = newLLVMvariable
         end
       case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-        if [[currentType mKind] isArrayType] then
-          [[currentType mKind] arrayType ?elementType:let elementType ?size:let @bigint arraySize]
+        if [currentType.kind isArrayType] then
+          [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
           handleArraySubscriptNew (
             !self: inSelfType
             !inGuard: false
@@ -412,7 +412,7 @@ private proc analyzeSelfAssignmentTarget
   ?let @accessInAssignmentListAST inAccessList
   !@LValueRepresentation outInternalRepresentation
 {
-  if not [[inSelfType mKind] isStructure] then
+  if not [inSelfType.kind isStructure] then
     error inSelfLocation : "'self' should be a structure instance" : outInternalRepresentation
   else
     var currentType = inSelfType
@@ -420,7 +420,7 @@ private proc analyzeSelfAssignmentTarget
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :
-        let @propertyMap propertyMap = currentType.mPropertyMap
+        let @propertyMap propertyMap = currentType.propertyMap
         [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
         case nonVirtualMethod (*) :
@@ -441,8 +441,8 @@ private proc analyzeSelfAssignmentTarget
           currentLLVMName = newLLVMvariable
         end
       case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-        if [[currentType mKind] isArrayType] then
-          [[currentType mKind] arrayType ?elementType:let elementType ?size:let @bigint arraySize]
+        if [currentType.kind isArrayType] then
+          [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
           handleArraySubscriptNew (
             !self: inSelfType
             !inGuard: false

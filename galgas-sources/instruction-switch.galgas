@@ -110,9 +110,9 @@ override method @switchInstructionAST analyze
     ?let switchValueIR
   ]  
 #--- Check inferred type
-  let enumConstantMap = [switchValueIR type].mConstantMap
-  if not [[[switchValueIR type] mKind] isEnumeration] then
-#    [[[switchValueIR type] mKind] enumeration ?constantMap:enumConstantMap ?2*]
+  let enumConstantMap = [switchValueIR type].classConstantMap
+  if not [[switchValueIR type].kind isEnumeration] then
+#    [[switchValueIR type].kind enumeration ?constantMap:enumConstantMap ?2*]
 #  else
     error mEndOf_test_expression
       : "test expression type is '" + [switchValueIR plmTypeName] + "', it should be boolean"

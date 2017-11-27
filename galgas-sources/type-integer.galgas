@@ -158,12 +158,12 @@ override method @integerDeclarationAST enterInContext
   [!?classConstantMap insertKey !["max" nowhere] !max !integerTypeName]
 #--------------------------------------- Enter in type map
   let integerType = @PLMType.new {
-    !propertyMap
-    !classConstantMap
-    !{} # Constructor map
-    !.all
-    !integerTypeName
-    !.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
+    !propertyMap:propertyMap
+    !classConstantMap:classConstantMap
+    !constructorMap:{}
+    !typeAttributes:.all
+    !plmTypeName:integerTypeName
+    !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
@@ -616,7 +616,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
 #  message "INFIX OP2 " + "\n"
 #--- Check right literal integer can be extented to left integer type, ans is not zero
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[[inLeftOperand type] mKind] integer ?min:let @bigint min ?max:let @bigint max ?2*]
+  [[inLeftOperand type].kind integer ?min:let @bigint min ?max:let @bigint max ?2*]
   if literalValue < min then
     error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
@@ -775,10 +775,9 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
   ?let @PLMType inResultType
   !@objectIR outResult
 {
-#  message "INFIX OP3 " + "\n"
 #--- Check left literal integer can be extented to right integer type
   [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[[inRightOperand type] mKind] integer ?min:let @bigint min ?max:let @bigint max ?2*]
+  [[inRightOperand type].kind integer ?min:let @bigint min ?max:let @bigint max ?2*]
   if literalValue < min then
     error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
