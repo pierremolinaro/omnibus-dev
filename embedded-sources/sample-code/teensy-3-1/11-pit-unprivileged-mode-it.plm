@@ -42,22 +42,22 @@ system section setupPIT () {
 
 //------------------------------------------------*
 
-system section getPITValue (!outValue $uint32) {
-  outValue = gPITValue
+module pit {
+  var gPITValue $uint32 = 0
+
+  system section getPITValue (!outValue $uint32) {
+    outValue = self.gPITValue
+  }
+
+  isr safe PITChannel0 {
+  //--- Acquitter l'interruption
+    PIT_TFLG [0] = {PIT_TFLG !TIF:1}
+  //--- Incrémenter le compteur
+    self.gPITValue += 1
+  }
 }
 
-//------------------------------------------------*
-
-var gPITValue $uint32 = 0
-
-//------------------------------------------------*
-
-isr safe PITChannel0 {
-//--- Acquitter l'interruption
-  PIT_TFLG [0] = {PIT_TFLG !TIF:1}
-//--- Incrémenter le compteur
-  gPITValue += 1
-}
+module pit ()
 
 //------------------------------------------------*
 
@@ -78,7 +78,7 @@ task T priority 12 stackSize 512 {
     lcd.print (!spaces:10)
     lcd.goto (!line:1 !column:0)
     var value $uint32
-    getPITValue (?value)
+    pit.getPITValue (?value)
     lcd.print (!unsigned:value)
   }
 }

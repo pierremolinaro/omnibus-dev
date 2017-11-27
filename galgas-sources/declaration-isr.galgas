@@ -95,11 +95,11 @@ override method @decoratedISRDeclarations semanticAnalysis
       ?@universalValuedObjectMapForContext universalMap
     )
   #--- Self type
-    let @PLMType selfType = if isr.mModuleName.string == "" then
-      voidType ()
-    else
-      [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !llvmModuleNameFromName (!isr.mModuleName)} type]
-    end
+#    let @PLMType selfType = if isr.mModuleName.string == "" then
+#      voidType ()
+#    else
+   let selfType = [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !llvmModuleNameFromName (!isr.mModuleName)} type]
+#    end
   #--- Analyze instruction list
     @allocaList allocaList = {}
     @instructionListIR instructionGenerationList = {}
@@ -118,8 +118,6 @@ override method @decoratedISRDeclarations semanticAnalysis
     ]
   #--- End of variableMap
     [universalMap checkLocalVariableFinalState]
-#    [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
-#    drop variableMap
   #--- Code generation
     [inSemanticContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
     [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey

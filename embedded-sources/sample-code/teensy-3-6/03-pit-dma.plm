@@ -84,21 +84,23 @@ var gOutputPattern = $patternArray (!repeated:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-isr safe PITChannel3 {
-//--- Acquitter l'interruption
-  PIT_TFLG [3] = {PIT_TFLG !TIF:1}
-//--- Toggle LED_L3
-  toggle (!port:LED_L3)
+module pit {
+  isr safe PITChannel3 {
+  //--- Acquitter l'interruption
+    PIT_TFLG [3] = {PIT_TFLG !TIF:1}
+  //--- Toggle LED_L3
+    toggle (!port:LED_L3)
+  }
+  
+  isr safe DMAChannel_0_16_TransferComplete {
+  //--- Acquitter l'interruption
+    DMA_CINT = 0
+  //--- Toggle LED_L2
+    toggle (!port:LED_L2)
+  }
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-isr safe DMAChannel_0_16_TransferComplete {
-//--- Acquitter l'interruption
-  DMA_CINT = 0
-//--- Toggle LED_L2
-  toggle (!port:LED_L2)
-}
+module pit ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
