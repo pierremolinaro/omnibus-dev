@@ -169,7 +169,7 @@ override method @primaryInExpressionAST analyzeExpression
         ?result: outResult
       ]
     end
-  elsif [inSelfType mKind] == .void then
+  elsif inSelfType.kind == .void then
     error mReceiverName : "'self' is not available in this context" : outResult
   else
     [self analyzePrimaryExpressionWithSelf
@@ -568,7 +568,7 @@ proc handlePropertyAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let type = [ioResult type]
-  let @propertyMap propertyMap = type.mPropertyMap
+  let @propertyMap propertyMap = type.propertyMap
   [propertyMap searchKey !inPropertyName ?* ?let @propertyAccessKind accessKind]
   switch accessKind
   case nonVirtualMethod (*) :
@@ -608,8 +608,8 @@ private proc handleArrayAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Check current object is an array
-  if [[[ioResult type] mKind] isArrayType] then
-    [[[ioResult type] mKind] arrayType ?elementType:let elementType ?size:let @bigint arraySize]
+  if [[ioResult type].kind isArrayType] then
+    [[ioResult type].kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
     handleArraySubscript (
       !self: inSelfType
       !inGuard: inGuard
@@ -654,7 +654,7 @@ private proc handleFunctionCallInExpression
   ?!@instructionListIR ioInstructionGenerationList
 {
   let receiverType = [ioObjectIR type]
-  let @propertyMap propertyMap = receiverType.mPropertyMap
+  let @propertyMap propertyMap = receiverType.propertyMap
   let key = routineMangledNameFromCall (!"" !inMethodName !inArguments)
   [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
   switch propertyAccess
@@ -662,14 +662,14 @@ private proc handleFunctionCallInExpression
     error inMethodName : "a constant cannot be used as method" : ioObjectIR
   case nonVirtualMethod (@routineDescriptor routineDescriptor) :
   #--- Check routine is actually a function
-    if [[routineDescriptor.mReturnTypeProxy type] mKind] == .void then
+    if [routineDescriptor.returnTypeProxy type].kind == .void then
       error inMethodName : "not a function (returns no value)" : ioObjectIR
     else
     #--- Check modes
       let calleeKind = checkMode (
         !callerMode:inMode
-        !calleeMode:[routineDescriptor.mRoutineKind executionMode]
-        !kind:routineDescriptor.mRoutineKind
+        !calleeMode:[routineDescriptor.routineKind executionMode]
+        !kind:routineDescriptor.routineKind
         !error:inMethodName.location
       )
     #--- If receiver is a value, create a reference
@@ -680,7 +680,7 @@ private proc handleFunctionCallInExpression
     #--- Analyze effective parameters
       analyzeEffectiveParameters (
         !self:inSelfType
-        !formal:routineDescriptor.mSignature
+        !formal:routineDescriptor.signature
         !effective:inArguments
         !errorLocation:inMethodName.location
         !callerForInvocationGraph:inCallerNameForInvocationGraph
@@ -694,9 +694,9 @@ private proc handleFunctionCallInExpression
         !?effectiveIR:effectiveParameterListIR
       )
     #--- New LLVM variable for function call result
-      getNewTempValue (![routineDescriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
+      getNewTempValue (![routineDescriptor.returnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
     #--- Generate call
-      let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (![ioObjectIR type].mPLMTypeName) !inMethodName !inArguments)
+      let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (![ioObjectIR type].plmTypeName) !inMethodName !inArguments)
       ioInstructionGenerationList += !@staticRoutineCallIR.new {
         !""
         !callReturnedResult
@@ -711,12 +711,12 @@ private proc handleFunctionCallInExpression
       ioObjectIR = callReturnedResult
     end
   case indexed  (@PLMType propertyType @uint propertyIndex) :
-    if not [[propertyType mKind] isFunction] then
+    if not [propertyType.kind isFunction] then
       error inMethodName : "an indexed property cannot be used as method" : ioObjectIR
     else
-      [[propertyType mKind] function ?descriptor:let descriptor]
+      [propertyType.kind function ?descriptor:let descriptor]
     #--- Check routine is actually a function
-      if descriptor.mReturnTypeProxy == .null then
+      if descriptor.returnTypeProxy == .null then
         error inMethodName : "not a function (returns no value)" : ioObjectIR
       else
       #--- Check modes
@@ -730,7 +730,7 @@ private proc handleFunctionCallInExpression
         @procCallEffectiveParameterListIR effectiveParameterListIR = {}
         analyzeEffectiveParameters (
           !self:inSelfType
-          !formal:descriptor.mSignature
+          !formal:descriptor.signature
           !effective:inArguments
           !errorLocation:inMethodName.location
           !callerForInvocationGraph:inCallerNameForInvocationGraph
@@ -754,7 +754,7 @@ private proc handleFunctionCallInExpression
           !inMethodName
         ]
       #--- New LLVM variable for function call result
-        getNewTempValue (![descriptor.mReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
+        getNewTempValue (![descriptor.returnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
       #--- Code generation
         ioInstructionGenerationList += !@indirectRoutineCallIR.new {
           !.reference {!type:propertyType !llvmName:property_llvmName}

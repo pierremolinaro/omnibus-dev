@@ -263,13 +263,13 @@ method @functionDeclarationListAST enterFunctionInContext
       ![function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
       !routineMangledName
       !.new{
-        !function.mPublicFunction
-        !globalFunction
-        !.function {!executionMode:function.mMode}
-        !signature
-        !returnTypeProxy
-        !canMutateProperties
-        !canAccessProperties
+        !isPublic:function.mPublicFunction
+        !exported:globalFunction
+        !routineKind:.function {!executionMode:function.mMode}
+        !signature:signature
+        !returnTypeProxy:returnTypeProxy
+        !canAccessProperties:canAccessProperties
+        !canMutateProperties:canMutateProperties
       }
     ]
   #---------------- Add decorated declaration

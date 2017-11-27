@@ -28,7 +28,7 @@ override method @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
   let scriptedRegisterOffsetName = "%register.offset." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
 #--- Needs to perform an extend to i32 ?
-  [[[mIndexResult type] mKind] integer ?3* ?bitCount:let bitCount]
+  [[mIndexResult type].kind integer ?3* ?bitCount:let bitCount]
   if bitCount < 32 then
     ioLLVMcode += "  " + registerIndexName + " = zext " + [mIndexResult  llvmTypeName]
                + " " + [mIndexResult llvmName] + " to i32 ; extend index to i32\n"

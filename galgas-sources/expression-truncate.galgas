@@ -112,13 +112,13 @@ override method @truncateExpressionAST analyzeExpression
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
   end
 #--- Check types
-  if not [[resultType mKind] isInteger] then
+  if not [resultType.kind isInteger] then
     error mTypeName : "this type is not an integer type" : outResult
-  elsif not [[[expressionResult type] mKind] isInteger] then
+  elsif not [[expressionResult type].kind isInteger] then
     error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[[expressionResult type] mKind] integer ?min:let minSource ?max:let maxSource ?1* ?bitCount:let expSize]
-    [[resultType mKind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize]
+    [[expressionResult type].kind integer ?min:let minSource ?max:let maxSource ?1* ?bitCount:let expSize]
+    [resultType.kind integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
       error mTypeName:"useless explicit conversion"

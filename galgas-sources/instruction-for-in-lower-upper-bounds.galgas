@@ -91,7 +91,7 @@ override method @forLowerUpperBoundInstructionAST analyze
 {
 #--- Get iterated element type
   let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
-  switch [type mKind]
+  switch type.kind
   case boolean, void :
     error mTypeName : "an integer type is required here"
   case arrayType (* *) :

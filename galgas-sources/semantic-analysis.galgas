@@ -14,11 +14,11 @@ func checkAssignmentCompatibility
   let sourceType = [inSourceValue type]
   if inOptionalTargetAnnotationType == sourceType then
     result = inSourceValue
-  elsif [[inOptionalTargetAnnotationType mKind] isVoid] then
+  elsif [inOptionalTargetAnnotationType.kind isVoid] then
     result = inSourceValue
-  elsif [[sourceType mKind] isStaticInteger] && [[inOptionalTargetAnnotationType mKind] isInteger] then
+  elsif [sourceType.kind isStaticInteger] && [inOptionalTargetAnnotationType.kind isInteger] then
     [inSourceValue literalInteger ?1* ?value:let value]
-    [[inOptionalTargetAnnotationType mKind] integer ?min:let minTarget ?max:let maxTarget ?2*]
+    [inOptionalTargetAnnotationType.kind integer ?min:let minTarget ?max:let maxTarget ?2*]
     if (value < minTarget) || (maxTarget < value) then
       error inErrorLocation : "literal integer too large" : result
     else
@@ -26,7 +26,7 @@ func checkAssignmentCompatibility
     end
   else
     error inErrorLocation
-    : "object of type $" + inOptionalTargetAnnotationType.mPLMTypeName
+    : "object of type $" + inOptionalTargetAnnotationType.plmTypeName
       + " cannot be assigned from expression of type $" + [inSourceValue plmTypeName]
     : result
   end
@@ -70,7 +70,7 @@ proc getNewTempValue
   ?!@semanticTemporariesStruct ioTemporaries
   !@objectIR outTempVariable
 {
-  if [inType mKind] == .void then
+  if inType.kind == .void then
     outTempVariable = .null
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]
@@ -85,7 +85,7 @@ proc getNewTempReference
   ?!@semanticTemporariesStruct ioTemporaries
   !@objectIR outTempVariable
 {
-  if [inType mKind] == .void then
+  if inType.kind == .void then
     outTempVariable = .null
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]

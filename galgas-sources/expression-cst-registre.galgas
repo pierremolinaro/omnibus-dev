@@ -128,7 +128,7 @@ override method @registerConstantExpressionAST analyzeExpression
         ?let expressionResult
       ]  
     #--- Check expression type
-      switch [[expressionResult type] mKind]
+      switch [expressionResult type].kind
       case arrayType (* *) :
         error expressionLocation: "an unsigned integer expression is required here"
       case opaque (*) :

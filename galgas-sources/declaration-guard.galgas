@@ -168,7 +168,7 @@ proc guardSemanticAnalysis
 {
 #--- Guard mangled name
   let guardMangledName = routineMangledNameFromAST (
-    !if [inSelfType mKind] == .void then "" else llvmTypeStringFromPLMname (!inSelfType.mPLMTypeName) end
+    !if inSelfType.kind == .void then "" else llvmTypeStringFromPLMname (!inSelfType.plmTypeName) end
     !inRoutineName
     !inRoutineFormalArgumentList
   )
@@ -318,7 +318,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
 #--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
   @objectIR currentObject
   if mIdentifier.string == "" then # Receiver is self
-    if [inSelfType mKind] == .void then
+    if inSelfType.kind == .void then
       error mIdentifier : "self is not available in this context" : currentObject
     else
       currentObject = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
@@ -335,7 +335,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     let currentType = [currentObject type]
     switch access
     case property (@lstring propertyName) :
-      let @propertyMap propertyMap = currentType.mPropertyMap
+      let @propertyMap propertyMap = currentType.propertyMap
       [propertyMap searchKey !propertyName ?* ?let propertyAccess]
       switch propertyAccess
       case nonVirtualMethod (*) :
@@ -362,7 +362,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
-    let @propertyMap propertyMap = currentType.mPropertyMap
+    let @propertyMap propertyMap = currentType.propertyMap
     let key = routineMangledNameFromCall (!"" !methodName !mArguments)
     [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     switch propertyAccess
@@ -378,11 +378,11 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       }
     #---
     #  let isPublic = routineDescriptor.mIsPublic
-      let routineKind = routineDescriptor.mRoutineKind
+      let routineKind = routineDescriptor.routineKind
       let calleeMode = [routineKind executionMode]
-      let formalSignature = routineDescriptor.mSignature
+      let formalSignature = routineDescriptor.signature
     #--- Check routine is actually a procedure (does not return any value)
-      if routineDescriptor.mReturnTypeProxy != .null then
+      if routineDescriptor.returnTypeProxy != .null then
         error methodName : "not a procedure (returns a value)" : outConvenienceGuardGenerationIR
       else
       #--- Check modes
@@ -409,7 +409,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !?effectiveIR:effectiveParameterListIR
         )
       #--- Get function name and map containing the function definition
-        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.mPLMTypeName) !methodName !mArguments)
+        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.plmTypeName) !methodName !mArguments)
       #--- Code generation
         baseGuardInstructionGenerationList += !@staticRoutineCallIR.new {
           !mIdentifier
@@ -479,7 +479,7 @@ method @guardMapIR guardCodeGeneration
       ioServiceList += !guardCallName !guardImplementationName
       ioLLVMcode += llvmTitleComment (!guardImplementationName)
       ioLLVMcode += "declare i1 @" + guardCallName + " ("
-      let typeName = if [guard.mReceiverType mKind] == .void then "" else llvmTypeStringFromPLMname (!guard.mReceiverType.mPLMTypeName) end
+      let typeName = if guard.mReceiverType.kind == .void then "" else llvmTypeStringFromPLMname (!guard.mReceiverType.plmTypeName) end
       var first = typeName == ""
       if not first then
         ioLLVMcode += "%" + [typeName assemblerRepresentation] + " * %self"  
@@ -517,10 +517,10 @@ method @guardMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += llvmTitleComment (!guardRoutineName)
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
-  let receiverTypeName = if [mReceiverType mKind] == .void then
+  let receiverTypeName = if mReceiverType.kind == .void then
     ""
   else
-    llvmTypeStringFromPLMname (!mReceiverType.mPLMTypeName)
+    llvmTypeStringFromPLMname (!mReceiverType.plmTypeName)
   end
   var first = true
   if receiverTypeName != "" then

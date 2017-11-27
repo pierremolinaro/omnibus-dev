@@ -248,25 +248,13 @@ override method @controlRegisterDeclarationAST addExtension
 #!   CONTEXT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc enterControlRegistersInContext
-#  ?let @controlRegisterDeclarationListAST inRegisterDeclarationListAST
-#  ?!context:@semanticContext ioContext
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#{
-#  for register in inRegisterDeclarationListAST do
-#    [register enterControlRegistersInContext !?context:ioContext !?staticStringMap:ioGlobalLiteralStringMap]
-#  end
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @controlRegisterDeclarationAST controlRegisterType
   ?!context:@semanticContext ioContext
   !type:@PLMType outRegisterType
   !bitCount:@uint outRegisterBitCount
 {
   outRegisterType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mRegisterTypeName} type]
-  switch [outRegisterType mKind]
+  switch outRegisterType.kind
   case integer (* * * bitCount):
     outRegisterBitCount = bitCount
   case boolean, void :

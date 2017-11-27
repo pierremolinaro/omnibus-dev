@@ -90,11 +90,11 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     ?let rightOperand
   ]  
 #--- Check left type is boolean
-  if [[leftOperand type] mKind] != .boolean then
+  if [leftOperand type].kind != .boolean then
     error mOperatorLocation : "left operand should be boolean"
   end
 #--- Check right type is boolean
-  if [[rightOperand type] mKind] != .boolean then
+  if [rightOperand type].kind != .boolean then
     error mOperatorLocation : "left operand should be boolean"
   end
 #--- Static operation, or dynamic operation

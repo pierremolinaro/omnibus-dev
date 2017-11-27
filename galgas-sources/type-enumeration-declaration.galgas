@@ -150,12 +150,12 @@ override method @enumerationDeclarationAST enterInContext
   ]
 #---------------- Insert enumeration in type map
   let enumerationType = @PLMType.new {
-    !propertyMap
-    !enumConstantMap
-    !{}
-    !.all
-    !mEnumerationName
-    !.enumeration {!bitCount:representationBitCount}
+    !propertyMap:propertyMap
+    !classConstantMap:enumConstantMap
+    !constructorMap:{}
+    !typeAttributes:.all
+    !plmTypeName:mEnumerationName
+    !kind:.enumeration {!bitCount:representationBitCount}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName

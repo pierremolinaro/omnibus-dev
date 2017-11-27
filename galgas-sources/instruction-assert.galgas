@@ -73,7 +73,7 @@ override method @assertInstructionAST analyze
     ?result:let @objectIR expressionValue
   ]
 #--- Check inferred type
-  if not [[[expressionValue type] mKind] isBoolean] then
+  if not [[expressionValue type].kind isBoolean] then
     error mInstructionLocation : "expression is not boolean"
   end
 #--- Check expression is not static

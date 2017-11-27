@@ -301,13 +301,13 @@ override method @structureDeclarationAST enterInContext
     )
   #--- Routine descriptor
     let descriptor = @routineDescriptor.new {
-      !function.mPublicFunction
-      !exportedFunction
-      !.function {!executionMode:function.mMode}
-      !signature
-      !returnTypeProxy
-      !canAccessProperties
-      !canMutateProperties
+      !isPublic:function.mPublicFunction
+      !exported:exportedFunction
+      !routineKind:.function {!executionMode:function.mMode}
+      !signature:signature
+      !returnTypeProxy:returnTypeProxy
+      !canAccessProperties:canAccessProperties
+      !canMutateProperties:canMutateProperties
     }
   #--- Enter in structure map
     [!?propertyMap insertKey !routineMangledName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
@@ -340,13 +340,13 @@ override method @structureDeclarationAST enterInContext
     end
   #--- Routine descriptor
     let descriptor = @routineDescriptor.new {
-      !system.mPublic
-      !exportedRoutine
-      !system.mRoutineKind
-      !signature
-      !returnTypeProxy
-      !canMutateProperties
-      !true # canAccessProperties
+      !isPublic:system.mPublic
+      !exported:exportedRoutine
+      !routineKind:system.mRoutineKind
+      !signature:signature
+      !returnTypeProxy:returnTypeProxy
+      !canAccessProperties:true
+      !canMutateProperties:canMutateProperties
     }
   #--- Enter in structure map
     [!?propertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
@@ -371,12 +371,12 @@ override method @structureDeclarationAST enterInContext
   end
 #---------------------------------------- Enter in type map
   let structureType = @PLMType.new {
-    !propertyMap
-    !{} # Class constant map
-    !constructorMap
-    !attributes
-    !mStructureName
-    !.structure {!propertyList:propertyList !guardMap:guardMap}
+    !propertyMap:propertyMap
+    !classConstantMap:{} # Class constant map
+    !constructorMap:constructorMap
+    !typeAttributes:attributes
+    !plmTypeName:mStructureName
+    !kind:.structure {!propertyList:propertyList !guardMap:guardMap}
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
@@ -436,13 +436,13 @@ method @structurePropertyListAST-element enterInContext
       error mPropertyName : "initialization expression cannot be computed statically"
     end
     @PLMType actualPropertyType
-    if [optionalPropertyType mKind] != .void then
+    if optionalPropertyType.kind != .void then
       actualPropertyType = optionalPropertyType
     else
       actualPropertyType = [expressionIR type]
     end
     if not [actualPropertyType instanciable] then
-      error mPropertyName : "$" + actualPropertyType.mPLMTypeName + " type is not instanciable"
+      error mPropertyName : "$" + actualPropertyType.plmTypeName + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then
       canBeCopied = false
@@ -465,7 +465,7 @@ method @structurePropertyListAST-element enterInContext
     end
   case noExpression :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : "$" + optionalPropertyType.mPLMTypeName + " type is not instanciable"
+      error mPropertyName : "$" + optionalPropertyType.plmTypeName + " type is not instanciable"
     end
     let propertyIndex = [propertyList length]
     propertyList += !mPropertyName.string !optionalPropertyType

@@ -123,13 +123,13 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       ![svc.mFormalArgumentList routineSignature !svc.mName]
       !routineMangledName
       !.new {
-        !svc.mPublic
-        !false
-        !svc.mRoutineKind
-        !signature
-        !returnTypeProxy
-        !mutating # canMutateProperties
-        !true # canAccessPropertiesInUserMode
+        !isPublic:svc.mPublic
+        !exported:false
+        !routineKind:svc.mRoutineKind
+        !signature:signature
+        !returnTypeProxy:returnTypeProxy
+        !canAccessProperties:true
+        !canMutateProperties:mutating
       }
     ]
   end
@@ -215,7 +215,7 @@ func llvmFunctionPrototype ?let @PLMType inReturnType
   result = [inReturnType llvmTypeName]
   result += " @" + inFunctionName + " ("
   var first = true
-  if [inReceiverType mKind] != .void then
+  if inReceiverType.kind != .void then
     result += [inReceiverType llvmTypeName] + " * %receiver"
     first = false
   end
@@ -246,7 +246,7 @@ func llvmFunctionCall ?let @PLMType inReturnType
                       -> @string {
   result = "call " + [inReturnType llvmTypeName] + " @" + inFunctionName + " ("
   var first = true
-  if [inReceiverType mKind] != .void then
+  if inReceiverType.kind != .void then
     result += [inReceiverType llvmTypeName] + " * %receiver"
     first = false
   end
@@ -371,13 +371,13 @@ proc generateSectionAndSafeDispatcher
       ioLLVMcode += "define " + prototype + " {\n"
       ioLLVMcode += "  " + disableInterruptInLLVM + " ; Disable interrupt\n"
       ioLLVMcode += "  "
-      if [resultType mKind] != .void then
+      if resultType.kind != .void then
         ioLLVMcode += "%result = "
       end
       ioLLVMcode += llvmFunctionCall (!resultType !implementationName !receiverType !formalArguments) + "\n"
       ioLLVMcode += "  " + enableInterruptInLLVM + " ; Enable interrupt\n"
       ioLLVMcode += "  ret " + resultTypeName
-      if [resultType mKind] != .void then
+      if resultType.kind != .void then
         ioLLVMcode += " %result"
       end
       ioLLVMcode += "\n"
