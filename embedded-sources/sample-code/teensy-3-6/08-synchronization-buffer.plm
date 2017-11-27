@@ -1,0 +1,105 @@
+target "teensy-3-6/privileged"
+let F_CPU_MHZ = 180
+
+module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func safe activityLedOn @exported () {
+  digitalWrite (!port:.D13 !yes)
+}
+
+func safe activityLedOff @exported () {
+  digitalWrite (!port:.D13 !no)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let LED_L0 = $digitalPort.D3
+let LED_L1 = $digitalPort.D4
+let LED_L2 = $digitalPort.D5
+
+init 1000 {
+  pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
+  pinMode (!port:LED_L0 !mode:.OUTPUT)
+  pinMode (!port:LED_L1 !mode:.OUTPUT)
+  pinMode (!port:LED_L2 !mode:.OUTPUT)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let SIZE = 10
+
+struct $synchronizationBuffer {
+  var data = $uint32 [SIZE] (!repeated:0)
+  var readIndex $uint32 = 0
+  var writeIndex $uint32 = 0
+  var readSemaphore = $semaphore (!value:0)
+  var writeSemaphore = $semaphore (!value:SIZE)
+
+  //············································································
+  
+  public func user write @mutating @noUnusedWarning (? value $uint32) {
+    self.writeSemaphore.wait ()
+    self.data [self.writeIndex] = value
+    self.writeIndex += 1
+    if self.writeIndex == SIZE {
+      self.writeIndex = 0
+    }
+    self.readSemaphore.signal ()
+  }
+  
+  //············································································
+  
+  public func user read @mutating @noUnusedWarning (! value $uint32) {
+    self.readSemaphore.wait ()
+    value = self.data [self.readIndex]
+    self.readIndex += 1
+    if self.readIndex == SIZE {
+      self.readIndex = 0
+    }
+    self.writeSemaphore.signal ()
+  }
+
+  //············································································
+  
+  public guard read @noUnusedWarning (! value $uint32) : self.readSemaphore.wait () {
+    value = self.data [self.readIndex]
+    self.readIndex += 1
+    if self.readIndex == SIZE {
+      self.readIndex = 0
+    }
+    self.writeSemaphore.signal ()
+  }
+
+  //············································································
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+var buffer = $synchronizationBuffer ()
+
+task Tâche1 priority 1 stackSize 512 {
+  var compteur $uint32 = 0
+  var index $uint32 = 0
+   
+  on time.wait (!untilDeadline:self.compteur) {
+    toggle (!port:LED_L0)
+    self.compteur +%= 500
+    self.index += 1
+    buffer.write (!self.index)
+  }
+}
+
+task Tâche2 priority 2 stackSize 512 {
+   
+  on buffer.read (?var value $uint32) {
+    lcd.goto (!line:0 !column:0)
+    lcd.print (!unsigned:value)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
