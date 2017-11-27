@@ -12,14 +12,14 @@ class @structureDeclarationAST : @abstractDeclarationAST {
   @guardDeclarationListAST mGuardListAST
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 enum @structurePropertyInitOptionalExpressionAST {
   case expression (@expressionAST initExpression)
   case noExpression
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @structurePropertyListAST {
   @lstring mPropertyName
@@ -392,7 +392,7 @@ override method @structureDeclarationAST enterInContext
   }
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 method @structurePropertyListAST-element enterInContext
   ?let @lstring inStructureName
@@ -490,7 +490,7 @@ class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
   @guardDeclarationListAST mGuardListAST
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override method @decoratedStructureDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
@@ -521,7 +521,7 @@ override method @decoratedStructureDeclaration semanticAnalysis
   ]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 method @decoratedStructureDeclaration functionSemanticAnalysis
   ?structureType:let @PLMType inStructureType

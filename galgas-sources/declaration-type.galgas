@@ -21,13 +21,13 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
-    $type$
-    $\$type$ ?let newTypeName
-    $:$
-    <declaration_type> !?ioAST !newTypeName ?let declaration
-    ioAST.mDeclarationListAST += !declaration
-  }
+#  rule <declaration> ?!@ast ioAST {
+#    $type$
+#    $\$type$ ?let newTypeName
+#    $:$
+#    <declaration_type> !?ioAST !newTypeName ?let declaration
+#    ioAST.mDeclarationListAST += !declaration
+#  }
 
   #·····················································································································
 
@@ -65,7 +65,7 @@ override method @newTypeDeclaration addExtension
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @newTypeDeclaration enterInPrecedenceGraph
@@ -77,14 +77,14 @@ override method @newTypeDeclaration enterInPrecedenceGraph
   [!?ioGraph addEdge !newTypeName !aliasedTypeName]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override getter @newTypeDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "newtype $" + mNewTypeName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @newTypeDeclaration enterInContext
@@ -358,7 +358,7 @@ override method @newTypeDeclaration enterInContext
   enterAliasPrefixOperator (!?ioContext.mUnsignedComplementOperatorMap !mNewTypeName !mAliasedTypeName)
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 private proc enterAliasPrefixOperator
   ?!@prefixOperatorMap ioInfixOperatorMap
@@ -368,16 +368,14 @@ private proc enterAliasPrefixOperator
   if [ioInfixOperatorMap hasKey !inAliasedTypeName.string] then
     [ioInfixOperatorMap searchKey
       !inAliasedTypeName
-#      ?@unifiedTypeMap-proxy resultType
     ]
     [!?ioInfixOperatorMap insertKey
       !inNewTypeName
-#      !resultType
     ]
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 private proc enterAliasInfixOperator
   ?!@infixOperatorMap ioInfixOperatorMap
