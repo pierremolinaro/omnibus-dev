@@ -2,7 +2,7 @@
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @routineFormalArgumentListForGeneration {
+list @routineFormalArgumentListIR {
   @procFormalArgumentPassingMode mFormalArgumentKind
   @PLMType mFormalArgumentType
   @string mFormalArgumentName
@@ -20,7 +20,7 @@ proc enterFormalArguments
   ?context:let @semanticContext inContext
   ?let @routineFormalArgumentListAST inFormalArgumentPassingMode
   ?!@universalValuedObjectMapForContext ioUniversalMap
-  ?!@routineFormalArgumentListForGeneration ioFormalArguments
+  ?!@routineFormalArgumentListIR ioFormalArguments
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
     let typeProxy = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName} type]
@@ -70,7 +70,7 @@ proc routineSemanticAnalysis
     ?@universalValuedObjectMapForContext universalMap
   )
 #--- Analyse formal arguments
-  @routineFormalArgumentListForGeneration formalArguments = {}
+  @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (
     !context:inContext
     !inRoutineFormalArgumentList

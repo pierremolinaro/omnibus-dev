@@ -1661,7 +1661,7 @@ void extensionMethod_svcCodeGeneration (const class GALGAS_routineMapIR inObject
 class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_PLMType & constinArgument0,
                                                     const class GALGAS_string & constinArgument1,
                                                     const class GALGAS_PLMType & constinArgument2,
-                                                    const class GALGAS_routineFormalArgumentListForGeneration & constinArgument3,
+                                                    const class GALGAS_routineFormalArgumentListIR & constinArgument3,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -1940,7 +1940,7 @@ class cPtr_decoratedInitRoutine : public cPtr_abstractDecoratedDeclaration {
 void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
                                    const class GALGAS_routineFormalArgumentListAST constinArgument1,
                                    class GALGAS_universalValuedObjectMapForContext & ioArgument2,
-                                   class GALGAS_routineFormalArgumentListForGeneration & ioArgument3,
+                                   class GALGAS_routineFormalArgumentListIR & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 

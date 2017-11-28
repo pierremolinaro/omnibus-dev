@@ -189,7 +189,7 @@ proc guardSemanticAnalysis
     !returnTypeName:["" nowhere]
     ?@universalValuedObjectMapForContext universalMap
   )
-  @routineFormalArgumentListForGeneration formalArguments = {}
+  @routineFormalArgumentListIR formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
@@ -452,7 +452,7 @@ enum @guardKindGenerationIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @guardMapIR {
-  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @PLMType mReceiverType
   @guardKindGenerationIR mGuardKindGenerationIR
   @allocaList mAllocaList

@@ -9,6 +9,16 @@ list @routineTypedSignature {
   @unifiedTypeMap-proxy mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction
 }
 
+#·······················································································································
+
+getter @routineTypedSignature string -> @string {
+  result = "("
+  for (formalArgumentPassingMode selector *) in self do
+    result += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  result += ")"
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! ROUTINE SIGNATURE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -80,7 +90,7 @@ struct @routineDescriptor {
   @bool canMutateProperties %selector # Routine is declared with @mutating attribute
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 func routineMangledNameFromAST ?let @string inReceiverTypeName
                                ?let @lstring inRoutineName
@@ -98,7 +108,7 @@ func routineMangledNameFromAST ?let @string inReceiverTypeName
   result.string += ")"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 func routineMangledNameFromCall ?let @string inReceiverTypeName
                                 ?let @lstring inRoutineName
@@ -116,7 +126,7 @@ func routineMangledNameFromCall ?let @string inReceiverTypeName
   result.string += ")"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 proc routineSignature ?!@unifiedTypeMap ioTypeMap
                       ?let @routineFormalArgumentListAST inFormalArgumentList

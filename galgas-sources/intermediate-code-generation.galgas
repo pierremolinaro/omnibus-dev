@@ -51,7 +51,7 @@ map @globalConstantMapIR {
 map @routineMapIR {
   @PLMType mReceiverType # .void if standalone function
   @lstring mRoutineNameForGeneration
-  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
   @bool mIsRequired

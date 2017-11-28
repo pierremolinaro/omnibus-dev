@@ -201,7 +201,7 @@ list @sectionIRlist {
   @string mSectionCallName
   @string mSectionImplementationName
   @PLMType mReceiverType # .void if standalone function
-  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @PLMType mReturnType # .void if no return value
 }
 
@@ -210,7 +210,7 @@ list @sectionIRlist {
 func llvmFunctionPrototype ?let @PLMType inReturnType
                            ?let @string inFunctionName
                            ?let @PLMType inReceiverType
-                           ?let @routineFormalArgumentListForGeneration inFormalArgumentListForGeneration
+                           ?let @routineFormalArgumentListIR inFormalArgumentListForGeneration
                            -> @string {
   result = [inReturnType llvmTypeName]
   result += " @" + inFunctionName + " ("
@@ -242,7 +242,7 @@ func llvmFunctionPrototype ?let @PLMType inReturnType
 func llvmFunctionCall ?let @PLMType inReturnType
                       ?let @string inFunctionName
                       ?let @PLMType inReceiverType
-                      ?let @routineFormalArgumentListForGeneration inFormalArgumentListForGeneration
+                      ?let @routineFormalArgumentListIR inFormalArgumentListForGeneration
                       -> @string {
   result = "call " + [inReturnType llvmTypeName] + " @" + inFunctionName + " ("
   var first = true
