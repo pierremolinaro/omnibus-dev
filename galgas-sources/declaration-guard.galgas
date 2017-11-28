@@ -349,7 +349,6 @@ override method @procedureCallInstructionAST baseGuardAnalyze
         [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
           !currentType
           ![currentObject llvmName]
-          !propertyType
           !property_llvmName
           !propertyIndex
           !propertyName

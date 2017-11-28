@@ -207,6 +207,23 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 {
   [ioUniversalMap searchEntity !mReceiverName ?let entity]
   switch entity
+  case task (type) :
+    outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
+    procAnalyzeAccesListInExpression (
+      !self: inSelfType
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !mAccessList
+      !?result: outResult
+    )
   case module (type instancied) :
     if not instancied then
       error mReceiverName : "the module should be instancied"
@@ -580,7 +597,6 @@ proc handlePropertyAccessInExpression
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference
       ![ioResult type]
       ![ioResult llvmName]
-      !propertyType
       !property_llvmName
       !propertyIndex
       !inPropertyName
@@ -748,7 +764,6 @@ private proc handleFunctionCallInExpression
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
           ![ioObjectIR type]
           ![ioObjectIR llvmName]
-          !propertyType
           !property_llvmName
           !propertyIndex
           !inMethodName

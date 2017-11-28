@@ -15,6 +15,21 @@ shared class @universalValuedObjectMapForContext {
 #! INSERT SETTERS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+setter @universalValuedObjectMapForContext insertTask
+  ?let @lstring inTaskName
+  ?let @PLMType inTaskType
+{
+  let newValue = @valuedObject.task {!type:inTaskType}
+  [!?mInternalPropertyAndRoutineMapForContext insertKey
+    !inTaskName
+    !.noValue
+    !false
+    !newValue
+  ]
+}
+
+#·······················································································································
+
 setter @universalValuedObjectMapForContext insertModule
   ?let @lstring inModuleName
   ?let @bool inIsInstancied
@@ -161,6 +176,8 @@ method @universalValuedObjectMapForContext searchValuedObject
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let entity]
   switch entity
+  case task (@PLMType type) :
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
   case module (@PLMType type instancied) :
     if instancied then
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
@@ -185,6 +202,7 @@ method @universalValuedObjectMapForContext searchValuedObject
 setter @universalValuedObjectMapForContext readAccess ?let @lstring inValuedObjectName {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
+  case task (*) :
   case module (* *) :
   case register (* * * * * * *) :
   case globalConstant (*) :
@@ -212,6 +230,8 @@ setter @universalValuedObjectMapForContext searchValuedObjectForReadAccess
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
+  case task (@PLMType type) :
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
   case module (@PLMType type instancied) :
     if instancied then
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
@@ -250,8 +270,10 @@ setter @universalValuedObjectMapForContext searchValuedObjectForWriteAccess
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
+  case task (*) :
+    error inValuedObjectName : "a task has no value" : outObjectIR
   case module (* *) :
-    error inValuedObjectName : "a module cannot be written" : outObjectIR
+    error inValuedObjectName : "a module has no value" : outObjectIR
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ???" : outObjectIR
   case globalConstant (*) :
@@ -283,8 +305,10 @@ setter @universalValuedObjectMapForContext searchValuedObjectForReadWriteAccess
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
+  case task (*) :
+    error inValuedObjectName : "a task has no value" : outObjectIR
   case module (* *) :
-    error inValuedObjectName : "a module cannot be written" : outObjectIR
+    error inValuedObjectName : "a module has no value" : outObjectIR
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ????" : outObjectIR
   case globalConstant (*) :
@@ -318,6 +342,8 @@ method @universalValuedObjectMapForContext searchValuedObjectType
 {
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let property]
   switch property
+  case task (*) :
+    error inValuedObjectName : "undefined in this context" : outType
   case module (* *) :
     error inValuedObjectName : "undefined in this context" : outType
   case register (* * @PLMType type * * * *) :
@@ -340,6 +366,7 @@ method @universalValuedObjectMapForContext searchValuedObjectType
 method @universalValuedObjectMapForContext checkLocalVariableFinalState {
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
+    case task (*) :
     case module (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
@@ -362,6 +389,7 @@ setter @universalValuedObjectMapForContext openOverrideForSelectBlock {
   @referenceStateMap initialStateMap = {}
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
+    case task (*) :
     case module (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
@@ -382,6 +410,7 @@ setter @universalValuedObjectMapForContext openOverrideForRepeatBlock {
   @referenceStateMap initialStateMap = {}
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
+    case task (*) :
     case module (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
@@ -413,6 +442,7 @@ setter @universalValuedObjectMapForContext closeBranch ?let @location inErrorLoc
     @referenceStateMap newReferenceStateMap = {}
     for entry in mInternalPropertyAndRoutineMapForContext do
       switch entry.mPossibleValuedObject
+      case task (*) :
       case module (* *) :
       case register (* * * * * * *) :
       case globalConstant (*) :
@@ -469,6 +499,7 @@ setter @universalValuedObjectMapForContext closeOverride ?let @location inErrorL
       ?let possibleValuedObject
     ]
     switch possibleValuedObject
+    case task (*) :
     case module (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
@@ -536,6 +567,7 @@ map @referenceStateMap {
 
 enum @valuedObject {
   case module (@PLMType type @bool instancied)
+  case task (@PLMType type)
   case register (@bool readable
                  @bool writable
                  @PLMType type
@@ -566,6 +598,74 @@ getter @valuedObjectState string -> @string {
   case noValue : result = "no value"
   case hasUnreadValue : result = "unread value"
   case hasReadValue : result = "read value"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! VARIABLE MAP                                                                                          
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc initialVariableMap
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inRequiredMode
+  ?globalsAreConstant:@bool inGlobalsAreConstant
+  ?returnTypeName:let @lstring inReturnTypeName
+  !@universalValuedObjectMapForContext outUniversalMap
+{
+  outUniversalMap = .default
+#------------------------------------------------------- Add tasks
+  for (taskName taskType) in inContext.mTaskMap do
+   [!?outUniversalMap insertTask !taskName !taskType]
+  end
+#------------------------------------------------------- Add modules
+  for (moduleName isInstancied) in inContext.mModuleMap do
+    let moduleTypeName = llvmModuleNameFromName (!moduleName)
+    let moduleType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName} type]
+    [!?outUniversalMap insertModule !moduleName !isInstancied !moduleType]
+  end
+#------------------------------------------------------- Add registers
+  for register in inContext.mControlRegisterMap do
+    let registerIsReadable = [inRequiredMode controlRegisterAccess !register.mIsAccessibleInUserMode]
+    let registerIsWritable = registerIsReadable && not register.mIsReadOnly && not inGlobalsAreConstant
+    [!?outUniversalMap insertRegister
+      !register.lkey
+      !readable:registerIsReadable
+      !writable:registerIsWritable
+      !type:register.mType
+      !address:register.mAddress 
+      !sliceMap:register.mRegisterFieldAccessMap
+      !arraySize:register.mArraySize # 0 if not an array
+      !elementSize:register.mElementArraySize # 0 if not an array
+    ]
+  end
+#------------------------------------------------------- Add global constants
+  for (constantName constantValue) in inContext.mGlobalConstantMap do
+    [!?outUniversalMap insertGlobalConstant !constantName !constantValue]
+  end
+#------------------------------------------------------- Add global variables
+  for variable in inContext.mGlobalVariableMap do
+    [!?outUniversalMap insertGlobalVariable !variable.lkey !variable.type !not inGlobalsAreConstant]
+    var writeAccess = variable.allowedAccessToAll
+    var allowedAccess = writeAccess
+  end
+#------------------------------------------------------- Add result variable ?
+  if inReturnTypeName.string != "" then
+    let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}
+    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName} type]
+    [!?outUniversalMap insertLocalVariable !resultVarName !resultType !resultVarName !.noValue !true]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc variableMapWithConstants
+  ?context:let @semanticContext inContext
+  !@universalValuedObjectMapForContext outUniversalMap
+{
+  outUniversalMap = .default
+#--- Add global constants
+  for (constantName constantValue) in inContext.mGlobalConstantMap do
+    [!?outUniversalMap insertGlobalConstant !constantName !constantValue]
   end
 }
 

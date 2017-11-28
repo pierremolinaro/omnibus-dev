@@ -2,12 +2,11 @@
 setter @instructionListIR appendGetUniversalPropertyReference
   ?let @PLMType inType
   ?let @string inLLVMName
-  ?let @PLMType inElementType
   ?let @string inElementLLVMName
   ?let @uint inPropertyIndex
   ?let @string inPropertyName
 {
-  self += !@getUniversalPropertyReferenceIR.new {!inType !inLLVMName !inElementType !inElementLLVMName !inPropertyIndex !inPropertyName}
+  self += !@getUniversalPropertyReferenceIR.new {!inType !inLLVMName !inElementLLVMName !inPropertyIndex !inPropertyName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -15,7 +14,6 @@ setter @instructionListIR appendGetUniversalPropertyReference
 class @getUniversalPropertyReferenceIR : @abstractInstructionIR {
   @PLMType mType
   @string mLLVMName
-  @PLMType mElementType
   @string mElementLLVMName
   @uint mPropertyIndex
   @string mPropertyName

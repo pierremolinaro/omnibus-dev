@@ -146,6 +146,19 @@ void extensionMethod_semanticAnalysis (const class GALGAS_decoratedLaskList_2D_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                Function 'checkMode'                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_calleeKindIR function_checkMode (const class GALGAS_mode & constinArgument0,
+                                              const class GALGAS_mode & constinArgument1,
+                                              const class GALGAS_routineKind & constinArgument2,
+                                              const class GALGAS_location & constinArgument3,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Routine 'initSemanticAnalysis'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

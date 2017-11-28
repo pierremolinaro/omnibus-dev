@@ -168,7 +168,8 @@ private proc suppressInaccessibleSubprograms
       !?outAccessibleEntities
       !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
     ]
-    outAccessibleEntities.mRoutineSet += !llvmTypeNameFromPLMname (!task.lkey).string + "." + llvmNameForTaskLoopFunction () + "()"
+    let loopName = llvmTypeNameFromPLMname (!task.lkey).string + "." + llvmNameForTaskLoopFunction () + "()"
+    outAccessibleEntities.mRoutineSet += !loopName
   end
 #--- Panic clauses (if panic code is generated)
   if not [option plm_options.noPanicGeneration value] then

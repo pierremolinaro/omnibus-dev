@@ -199,7 +199,6 @@ proc analyzeEffectiveParameters
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
           !inSelfType
           !llvmNameForSelf ()
-          !propertyType
           !property_llvmName
           !propertyIndex
           !name

@@ -169,8 +169,10 @@ method @LValueAST analyzeLValue
   else
     [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
     switch entity
+    case task (*) :
+      error mIdentifier : "a task has no value" : outInternalRepresentation
     case module (* *) :
-      error mIdentifier : "a module cannot be written" : outInternalRepresentation
+      error mIdentifier : "a module has no value" : outInternalRepresentation
     case register (* writable registerType registerAddress * arraySize elementSize) : # 0 if not an array
       if not writable then
          error mIdentifier : "the control register is not writable in this context" : outInternalRepresentation
@@ -349,7 +351,6 @@ private proc analyzeVariableInLValue
           [!?ioInstructionGenerationList appendGetUniversalPropertyReference
             !currentType
             !currentLLVMName
-            !propertyType
             !newLLVMvariable
             !index
             !propertyName
@@ -432,7 +433,6 @@ private proc analyzeSelfAssignmentTarget
           [!?ioInstructionGenerationList appendGetUniversalPropertyReference
             !currentType
             !currentLLVMName
-            !propertyType
             !newLLVMvariable
             !index
             !propertyName
