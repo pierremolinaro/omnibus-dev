@@ -134,7 +134,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     ?@universalValuedObjectMapForContext universalMap
   )
 #--- Analyse formal arguments
-  @routineFormalArgumentListForGeneration formalArguments = {}
+  @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (
     !context:inContext
     !mProcFormalArgumentList
@@ -167,7 +167,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @externProcedureMapIR {
-  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @unifiedTypeMap-proxy mReturnType
   insert insertKey error message "extern procedure %K is already declared"
 }

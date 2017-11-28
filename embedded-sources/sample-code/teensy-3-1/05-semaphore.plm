@@ -14,7 +14,7 @@ func safe activityLedOff @exported () {
   digitalWrite (!port:.D13 !no)
 }
 
-//-----------------------------------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————
 
 init 100 {
   pinMode (!port:.D13 !mode:.OUTPUT)
@@ -23,7 +23,7 @@ init 100 {
 let LED_L1 = $digitalPort.D4
 let LED_L2 = $digitalPort.D5
 
-//------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————
 
 var sémaphore = $semaphore (!value:0)
 
@@ -34,7 +34,7 @@ init 1000 {
   pinMode (!port:LED_L2 !mode:.OUTPUT)
 }
 
-//------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————
 
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
@@ -60,15 +60,18 @@ task T1 priority 1 stackSize 512 {
   }
 }
 
-//------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————
 
 task T2 priority 2 stackSize 512 {
+  var sémaphore = $semaphore (!value:0)
 
-  on sémaphore.wait () {
+  entry signal () : self.sémaphore.signal
+
+  on self.sémaphore.wait () {
     digitalWrite (!port:LED_L2 !yes)
-    sémaphore.wait ()
+    self.sémaphore.wait ()
     digitalWrite (!port:LED_L2 !no)
   }
 }
 
-//------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————

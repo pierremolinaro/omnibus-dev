@@ -25,6 +25,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "convert",
   "do",
   "else",
+  "entry",
   "enum",
   "exit",
   "extend",
