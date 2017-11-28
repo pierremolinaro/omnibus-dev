@@ -232,6 +232,9 @@ override method @procedureCallInstructionAST analyze
   else
     [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
     switch entity
+    case task (@PLMType type) :
+      currentType = type
+      currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
     case module (@PLMType type instancied) :
       if instancied then
         currentType = type
@@ -284,7 +287,6 @@ override method @procedureCallInstructionAST analyze
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
           !currentType
           !currentLLVMAddressVar
-          !propertyType
           !llvmPropertyName
           !propertyIndex
           !propertyName
@@ -403,7 +405,6 @@ override method @procedureCallInstructionAST analyze
           [!?ioInstructionGenerationList appendGetUniversalPropertyReference
             !currentType
             !currentLLVMAddressVar
-            !propertyType
             !property_llvmName
             !propertyIndex
             !methodName

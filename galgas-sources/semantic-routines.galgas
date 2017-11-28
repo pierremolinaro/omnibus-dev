@@ -101,10 +101,7 @@ proc routineSemanticAnalysis
     !?generatedCode:instructionGenerationList
   ]
 #--- End of variableMap
-#  [variableMap deinitTopLevelVariables]
   [universalMap checkLocalVariableFinalState]
-#  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
-#  drop variableMap
 #--- Code generation
   let returnType = if inReturnTypeName.string == "" then
     voidType ()

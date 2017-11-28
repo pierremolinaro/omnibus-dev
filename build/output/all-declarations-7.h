@@ -304,6 +304,31 @@ class GALGAS_bool extensionGetter_hasKey (const class GALGAS_routineMapForContex
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                          Extension setter '@universalValuedObjectMapForContext insertTask'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertTask) (class cPtr_universalValuedObjectMapForContext * inObject,
+                                                                                        const class GALGAS_lstring constinArgument0,
+                                                                                        const class GALGAS_PLMType constinArgument1,
+                                                                                        class C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_insertTask (const int32_t inClassIndex,
+                                      extensionSetterSignature_universalValuedObjectMapForContext_insertTask inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_insertTask (class cPtr_universalValuedObjectMapForContext * inObject,
+                                     const GALGAS_lstring constin_inTaskName,
+                                     const GALGAS_PLMType constin_inTaskType,
+                                     C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                         Extension setter '@universalValuedObjectMapForContext insertModule'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

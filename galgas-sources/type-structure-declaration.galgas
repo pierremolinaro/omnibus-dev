@@ -372,7 +372,7 @@ override method @structureDeclarationAST enterInContext
 #---------------------------------------- Enter in type map
   let structureType = @PLMType.new {
     !propertyMap:propertyMap
-    !classConstantMap:{} # Class constant map
+    !classConstantMap:{}
     !constructorMap:constructorMap
     !typeAttributes:attributes
     !plmTypeName:mStructureName

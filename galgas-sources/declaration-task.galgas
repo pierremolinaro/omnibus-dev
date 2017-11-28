@@ -163,15 +163,8 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @taskProcedureMap {
-  insert insertKey error message "the '%K' proc is already declared in %L"
-  search searchKey error message "there is no '%K' proc"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 map @taskMap {
-  @taskProcedureMap mTaskProcedureMap
+  @PLMType mTaskType
   insert insertKey error message "the '%K' task is already declared in %L"
   search searchKey error message "there is no '%K' task"
 }
@@ -181,6 +174,7 @@ map @taskMap {
 method @taskListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
   @decoratedLaskList decoratedLaskList = {}
@@ -237,6 +231,13 @@ method @taskListAST enterInContext
         !returnTypeProxy
         !propertyAccessPath
         !methodName
+    #--- Invocation graph
+      let entryMangledNameForInvocationGraph = routineMangledNameFromAST (
+        !llvmTypeStringFromPLMname (!task.mTaskName)
+        !mEntryName
+        !mEntryFormalArgumentList
+      )
+      [!?ioSubprogramInvocationGraph addNode !entryMangledNameForInvocationGraph !entryMangledNameForInvocationGraph]
     end
   #---------------- Enter task variable map as structure type in type map
     let taskType = @PLMType.new {
@@ -252,6 +253,7 @@ method @taskListAST enterInContext
       !type:taskType
       !index:[ioContext.mTypeMap count]
     ]
+    [!?ioContext.mTaskMap insertKey !task.mTaskName !taskType]
     ioContext.mGlobalTaskVariableList +=
       !task.mTaskName.string 
       !task.mTaskName.string
@@ -367,19 +369,27 @@ method @decoratedLaskList-element semanticAnalysis
     )
   end
 #------------------------------------------- Analyze task entries
-  @taskEntryListIR taskEntryListIR = {}
   for entry in mDecoratedTaskEntryList do
   #--- Analyze property path
-    @entryPathIR entryPathIR = {}
+    @instructionListIR instructionGenerationList = {}
     var currentType = taskType
+    var currentLLVMName = "%self"
     for (propertyName) in entry.mEntryPath do
       [currentType.propertyMap searchKey !propertyName ?let @bool unused isPublic ?let propertyAccessKind]
       switch propertyAccessKind
       case constantProperty (*) :
         error propertyName : "a constant property is not allowed here"
       case indexed (@PLMType type @uint index) :
+        [!?ioTemporaries newTempLLVMVar ?let llvmName]
+        [!?instructionGenerationList appendGetUniversalPropertyReference
+          !currentType
+          !currentLLVMName
+          !llvmName
+          !index
+          !propertyName
+        ]
         currentType = type
-        entryPathIR += !propertyName !type !index
+        currentLLVMName = llvmName
       case nonVirtualMethod (*) :
         error propertyName : "a non virtual method is not allowed here"
       end
@@ -403,13 +413,67 @@ method @decoratedLaskList-element semanticAnalysis
         error entry.mEntryName
         : "entry return type does not conform to invoked method return type"
       end
-      taskEntryListIR +=
-        !routineMangledNameFromAST (!mTaskName !entry.mEntryName !entry.mEntryFormalArgumentList)
-        !entry.mEntrySignature
-        !entry.mEntryReturnTypeProxy
-        !entryPathIR
-        !descriptor.routineKind
-        !routineMangledNameFromAST (!llvmTypeStringFromPLMname (!currentType.plmTypeName) !entry.mInvokedMethodName !entry.mEntryFormalArgumentList)
+    #--- Invocation graph
+      let entryMangledNameForInvocationGraph = routineMangledNameFromAST (
+        !llvmTypeStringFromPLMname (!mTaskName)
+        !entry.mEntryName
+        !entry.mEntryFormalArgumentList
+      )
+      let returnType = if entry.mEntryReturnTypeProxy == .null then
+        voidType ()
+      else
+        [entry.mEntryReturnTypeProxy type]
+      end
+      let invokedMethodMangledNameForInvocationGraph = routineMangledNameFromAST (
+        !llvmTypeStringFromPLMname (!currentType.plmTypeName)
+        !entry.mInvokedMethodName
+        !entry.mEntryFormalArgumentList
+      )
+      [!?ioTemporaries.mSubprogramInvocationGraph addEdge
+        !entryMangledNameForInvocationGraph
+        !invokedMethodMangledNameForInvocationGraph
+      ]
+    #--- Analyse formal arguments
+      @routineFormalArgumentListIR formalArguments = {}
+      enterFormalArguments (
+        !context:inContext
+        !entry.mEntryFormalArgumentList
+        !?*
+        !?formalArguments
+      )
+    #--- Check modes
+      let calleeKind = checkMode (
+        !callerMode:.userMode
+        !calleeMode:.userMode
+        !kind:descriptor.routineKind
+        !error:entry.mInvokedMethodName.location
+      )
+      @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+      effectiveParameterListIR += !.outputInput !.reference {!type:currentType !llvmName:currentLLVMName}
+    #--- Generate call instruction
+      instructionGenerationList += !@staticRoutineCallIR.new {
+        !entry.mInvokedMethodName
+        !.null # No result
+        !invokedMethodMangledNameForInvocationGraph
+        !invokedMethodMangledNameForInvocationGraph # LLVMInvocationRoutineName
+        !calleeKind
+        !effectiveParameterListIR
+      }
+      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
+        !entryMangledNameForInvocationGraph
+        !taskType
+        !entryMangledNameForInvocationGraph
+        !formalArguments
+        !{} # allocaList
+        !instructionGenerationList
+        !false # [ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
+        !true # inWarnIfUnused
+        !false # inGlobalFunction
+        !.function {!executionMode:.userMode}
+        !returnType
+        !false
+      ]
+
     end
   end
 #------------------------------------------- Analyze task setup routines
@@ -469,7 +533,6 @@ method @decoratedLaskList-element semanticAnalysis
     !mStackSize.bigint
     !setupAllocaList
     !setupInstructionListIR
-    !taskEntryListIR
     !taskNameStringIndex
   ]
 }
@@ -478,32 +541,12 @@ method @decoratedLaskList-element semanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @entryPathIR {
-  @string mPropertyName
-  @PLMType mPropertyType
-  @uint mPropertyIndex
-}
-
-#·······················································································································
-
-list @taskEntryListIR {
-  @string mEntryMangledName
-  @routineTypedSignature mEntrySignature
-  @unifiedTypeMap-proxy mEntryReturnTypeProxy
-  @entryPathIR mEntryPathIR
-  @routineKind mInvokedRoutineKind
-  @string mInvokedMethodMangledName
-}
-
-#·······················································································································
-
 map @taskMapIR {
   @PLMType mTaskType
   @bigint mPriority
   @bigint mStackSize
   @allocaList mAllocaList
   @instructionListIR mInitInstructionListIR
-  @taskEntryListIR mTaskEntryListIR
   @uint mTaskNameStringIndex
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
@@ -518,7 +561,6 @@ sortedlist @taskSortedListIR {
   @bigint mStackSize
   @allocaList mAllocaList
   @instructionListIR mSetupInstructionListIR
-  @taskEntryListIR mTaskEntryListIR
   @uint mTaskNameStringIndex
 }{
   mPriority <
@@ -541,7 +583,7 @@ method @taskMapIR generateCode
 #--- Declare task variables
   ioLLVMcode += llvmTitleComment (!"Task variables")
   for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
-    ioLLVMcode += "@" + llvmNameForTaskGlobalVar (!taskName)
+    ioLLVMcode += llvmNameForGlobalVariable (!taskName)
     ioLLVMcode += " = internal global %"
     ioLLVMcode += [llvmTypeStringFromPLMname (!taskTypeName) assemblerRepresentation] + " "
     let initialString = [initValueList llvmName]
@@ -562,7 +604,7 @@ method @taskMapIR generateCode
       !task.mStackSize
       !task.mAllocaList
       !task.mInitInstructionListIR
-      !task.mTaskEntryListIR
+#      !task.mTaskEntryListIR
       !task.mTaskNameStringIndex
   end
 #--- Declare task stacks and main routine
@@ -574,71 +616,9 @@ method @taskMapIR generateCode
     let assemblerTaskName = [llvmTypeStringFromPLMname (!task.mTaskName) assemblerRepresentation]
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     ioLLVMcode += "\n"
-    let effectiveParameter = "(%" + assemblerTaskName + " * @" + llvmNameForTaskGlobalVar (!task.mTaskName) + ")"
+    let effectiveParameter = "(%" + assemblerTaskName + " * " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
     let formalArgument = "(%" + assemblerTaskName + " * %self)"
     ioLLVMcode += llvmSeparatorLine () + "\n"
-  #--- Entries
-    for entry in task.mTaskEntryListIR do
-      let returnTypeName = if entry.mEntryReturnTypeProxy == .null then
-        "void"
-      else
-       [[entry.mEntryReturnTypeProxy type] llvmTypeName]
-      end
-      ioLLVMcode += "define internal " + returnTypeName
-      ioLLVMcode +=  " @" + llvmNameForFunction (!entry.mEntryMangledName)
-      ioLLVMcode += " (%" + assemblerTaskName + " * %self"
-      for () in entry.mEntrySignature do (idx)
-        ioLLVMcode += ", " + [[mTypeProxy type] llvmTypeName]
-        switch mFormalArgumentPassingMode
-        case inputOutput, output : ioLLVMcode += "*"
-        case input :
-        end
-        ioLLVMcode += " %argument." + idx
-      end
-      ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-      var ptrName = "%self"
-      var typeName = "%" + assemblerTaskName
-      for (propertyName propertyType propertyIndex) in entry.mEntryPathIR do (idx)
-        let newPtrName = "%ptr." + idx
-        let llvmType = [propertyType llvmTypeName]
-        ioLLVMcode += "  " + newPtrName + " = getelementptr inbounds "
-        ioLLVMcode += typeName + ", " + typeName + " * " + ptrName + ", i32 0, i32 " + propertyIndex
-        ioLLVMcode += " ; Property " + propertyName + "\n"
-        ptrName = newPtrName
-        typeName = llvmType
-      end
-      if entry.mEntryReturnTypeProxy == .null then
-        ioLLVMcode += "  call void"
-      else
-        ioLLVMcode += "  %result = call " + returnTypeName
-      end
-      ioLLVMcode += " @" 
-      switch entry.mInvokedRoutineKind
-      case function (*) :
-        ioLLVMcode += llvmNameForFunction (!entry.mInvokedMethodMangledName)
-      case section :
-        ioLLVMcode += llvmNameForSectionCall (!entry.mInvokedMethodMangledName)
-      case primitive :
-        ioLLVMcode += llvmNameForPrimitiveCall (!entry.mInvokedMethodMangledName)
-      case service :
-        ioLLVMcode += llvmNameForServiceCall (!entry.mInvokedMethodMangledName)
-      case safe :
-        ioLLVMcode += llvmNameForSafeCall (!entry.mInvokedMethodMangledName)
-      end
-      ioLLVMcode += " (" + typeName + "* " + ptrName
-      for () in entry.mEntrySignature do (idx)
-        ioLLVMcode += ", " + [[mTypeProxy type] llvmTypeName]
-        switch mFormalArgumentPassingMode
-        case inputOutput, output : ioLLVMcode += "*"
-        case input :
-        end
-        ioLLVMcode += " %argument." + idx
-      end
-      ioLLVMcode += ")\n"
-      ioLLVMcode += "  ret " + if entry.mEntryReturnTypeProxy == .null then "void" else "%result" end + "\n"
-      ioLLVMcode += "}\n\n"
-      ioLLVMcode += llvmSeparatorLine () + "\n"
-    end
   #--- Init
     ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
     for (variable LLVMTypeName) in task.mAllocaList do

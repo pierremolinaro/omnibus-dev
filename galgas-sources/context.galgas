@@ -225,6 +225,7 @@ proc buildSemanticContext
   [inAST.mTaskListAST enterInContext
      !?context: outSemanticContext
      !?outDecoratedDeclarationList
+     !?outSubprogramInvocationGraph
      !?staticStringMap:ioGlobalLiteralStringMap
    ]
 #--- Check global var declaration

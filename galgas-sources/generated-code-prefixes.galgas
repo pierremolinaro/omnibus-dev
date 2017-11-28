@@ -331,12 +331,6 @@ func mainRoutineNameForTask ?let @string inTaskName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForTaskGlobalVar ?let @string inTaskName -> @string {
-  result = ["task.globalvar." + inTaskName assemblerRepresentation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func %once llvmNameForTaskLoopFunction -> @string {
   result = "task.loop"
 }

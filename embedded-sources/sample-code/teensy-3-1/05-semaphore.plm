@@ -25,10 +25,6 @@ let LED_L2 = $digitalPort.D5
 
 //——————————————————————————————————————————————————————————————————————————————
 
-var sémaphore = $semaphore (!value:0)
-
-//——————————————————————————————————————————————————————————————————————————————
-
 init 1000 {
   pinMode (!port:LED_L1 !mode:.OUTPUT)
   pinMode (!port:LED_L2 !mode:.OUTPUT)
@@ -39,22 +35,13 @@ init 1000 {
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
-  setup 123 {
-    self.top = 1
-  }
-  
-  setup 256 {
-    let π = self.top + 2
-    self.top += π
-  }
-  
   on time.wait (!untilDeadline:self.top) {
-    sémaphore.signal ()
+    T2.signal ()
     self.top += 250
     digitalWrite (!port:LED_L1 !yes)
     let constanteAccentuée = self.top
     time.wait (!untilDeadline:constanteAccentuée)
-    sémaphore.signal ()
+    T2.signal ()
     self.top += 250
     digitalWrite (!port:LED_L1 !no)
   }
