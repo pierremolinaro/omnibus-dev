@@ -1,6 +1,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @staticRoutineCallIR : @abstractInstructionIR {
+class @standaloneRoutineCallIR : @abstractInstructionIR {
   @string mGlobalVariableName
   @objectIR mResult
   @lstring mFunctionMangledName
@@ -11,7 +11,7 @@ class @staticRoutineCallIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticRoutineCallIR llvmInstructionCode
+override method @standaloneRoutineCallIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -61,7 +61,7 @@ override method @staticRoutineCallIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticRoutineCallIR enterAccessibleEntities
+override method @standaloneRoutineCallIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
  {

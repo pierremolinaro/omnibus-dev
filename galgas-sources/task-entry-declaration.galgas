@@ -209,7 +209,7 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
       end
     end
   #--- Generate call instruction
-    instructionGenerationList += !@staticRoutineCallIR.new {
+    instructionGenerationList += !@standaloneRoutineCallIR.new {
       !mInvokedMethodName
       !.null # No result
       !invokedMethodMangledNameForInvocationGraph

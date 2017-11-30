@@ -4836,8 +4836,8 @@ void extensionMethod_taskEntrySemanticAnalysis (const GALGAS_decoratedTaskEntryL
     break ;
   case GALGAS_propertyAccessKind::kEnum_nonVirtualMethod:
     {
-      const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod * extractPtr_9338 = (const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod *) (var_methodAccessKind_6313.unsafePointer ()) ;
-      const GALGAS_routineDescriptor extractedValue_descriptor = extractPtr_9338->mAssociatedValue0 ;
+      const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod * extractPtr_9342 = (const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod *) (var_methodAccessKind_6313.unsafePointer ()) ;
+      const GALGAS_routineDescriptor extractedValue_descriptor = extractPtr_9342->mAssociatedValue0 ;
       const enumGalgasBool test_6 = GALGAS_bool (kIsNotEqual, inObject.mProperty_mEntryReturnTypeProxy.objectCompare (extractedValue_descriptor.getter_returnTypeProxy (HERE))).boolEnum () ;
       if (kBoolTrue == test_6) {
         TC_Array <C_FixItDescription> fixItArray7 ;
@@ -4887,7 +4887,7 @@ void extensionMethod_taskEntrySemanticAnalysis (const GALGAS_decoratedTaskEntryL
         }
         enumerator_8111.gotoNextObject () ;
       }
-      var_instructionGenerationList_5106.addAssign_operation (GALGAS_staticRoutineCallIR::constructor_new (inObject.mProperty_mInvokedMethodName.getter_string (SOURCE_FILE ("task-entry-declaration.galgas", 213)), GALGAS_objectIR::constructor_null (SOURCE_FILE ("task-entry-declaration.galgas", 214)), var_invokedMethodMangledNameForInvocationGraph_7164, var_invokedMethodMangledNameForInvocationGraph_7164, var_calleeKind_7720, var_effectiveParameterListIR_7958  COMMA_SOURCE_FILE ("task-entry-declaration.galgas", 212))  COMMA_SOURCE_FILE ("task-entry-declaration.galgas", 212)) ;
+      var_instructionGenerationList_5106.addAssign_operation (GALGAS_standaloneRoutineCallIR::constructor_new (inObject.mProperty_mInvokedMethodName.getter_string (SOURCE_FILE ("task-entry-declaration.galgas", 213)), GALGAS_objectIR::constructor_null (SOURCE_FILE ("task-entry-declaration.galgas", 214)), var_invokedMethodMangledNameForInvocationGraph_7164, var_invokedMethodMangledNameForInvocationGraph_7164, var_calleeKind_7720, var_effectiveParameterListIR_7958  COMMA_SOURCE_FILE ("task-entry-declaration.galgas", 212))  COMMA_SOURCE_FILE ("task-entry-declaration.galgas", 212)) ;
       {
       ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineMapIR.setter_insertKey (var_entryMangledNameForInvocationGraph_6825, constinArgument_inTaskType, var_entryMangledNameForInvocationGraph_6825, var_formalArguments_7553, GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("task-entry-declaration.galgas", 225)), var_instructionGenerationList_5106, GALGAS_bool (false), GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_userMode (SOURCE_FILE ("task-entry-declaration.galgas", 230))  COMMA_SOURCE_FILE ("task-entry-declaration.galgas", 230)), var_returnType_7002, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("task-entry-declaration.galgas", 220)) ;
       }

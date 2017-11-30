@@ -193,7 +193,7 @@ override method @standAloneProcedureCallInstructionAST analyze
   )
 
 #--- Code generation
-  ioInstructionGenerationList += !@staticRoutineCallIR.new {
+  ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
     !""
     !.null
     !routineMangledName
@@ -353,7 +353,7 @@ override method @procedureCallInstructionAST analyze
       #--- Get function name and map containing the function definition
         let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.plmTypeName) !methodName !mArguments)
       #--- Code generation
-        ioInstructionGenerationList += !@staticRoutineCallIR.new {
+        ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
           !mIdentifier
           !.null # No result
           !routineMangledName

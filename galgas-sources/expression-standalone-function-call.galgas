@@ -139,7 +139,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   #--- New LLVM variable for function call result
     getNewTempValue (![routineDescriptor.returnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
   #--- Code generation
-    ioInstructionGenerationList += !@staticRoutineCallIR.new {
+    ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
       !"" # globalVariableReceiverName
       !outFunctionCallReturnedValue
       !routineMangledName

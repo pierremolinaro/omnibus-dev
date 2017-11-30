@@ -72,20 +72,6 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
       end
     end
     ioIntermediateCodeStruct.mGlobalConstantMap = globalConstantMap
-#  #--- Suppress unused global variables
-#    @globalVariableMapIR globalVariableMap = {}
-#    for globalVariable in ioIntermediateCodeStruct.mGlobalVariableMap do
-#      if [accessibleEntities.mGlobalVariableSet hasKey !globalVariable.lkey.string] then
-#        [!?globalVariableMap insertKey
-#          !globalVariable.lkey
-#          !globalVariable.mGenerateVolatile
-#          !globalVariable.mInitialValue
-#        ]
-#      else
-#        optimizing = true
-#      end
-#    end
-#    ioIntermediateCodeStruct.mGlobalVariableMap = globalVariableMap
   end
 #--- Warn on unused routines
   for () in initialProcedureMap do
