@@ -113,7 +113,7 @@ override method @globalConstantDeclarationAST enterInContext
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:voidType ()
-    !inGuard:false
+    !contextFlags:.none
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:annotationType
     !context:ioContext
@@ -176,7 +176,7 @@ proc buildGlobalConstantMapHTMLFile
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
 }{
@@ -188,7 +188,7 @@ filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
     ?@string TABLE_OF_TYPES_STRING
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#·······················································································································
 
 func linkForGlobalConstant ?let @string inConstantName -> @string {
   result = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"

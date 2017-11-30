@@ -72,7 +72,7 @@ override method @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@sem
 
 override method @extendExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -87,7 +87,7 @@ override method @extendExpressionAST analyzeExpression
 #--- Analyze expression
   [mExpression analyzeExpression
     !self:inSelfType
-    !inGuard:inGuard
+    !contextFlags:inContextFlags
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext

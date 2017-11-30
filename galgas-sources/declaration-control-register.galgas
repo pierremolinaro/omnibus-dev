@@ -434,7 +434,7 @@ override method @controlRegisterDeclarationAST enterInContext
       @allocaList allocaList = {}
       [arraySizeExpression analyzeExpression
         !self:voidType ()
-        !inGuard:false
+        !contextFlags:.none
         !routineNameForInvocationGraph:["compiler" nowhere]
         !optionalTargetType:voidType ()
         !context:ioContext

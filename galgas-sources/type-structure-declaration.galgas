@@ -421,7 +421,7 @@ method @structurePropertyListAST-element enterInContext
   case expression (initExpression) :
     [initExpression analyzeExpression
       !self:voidType ()
-      !inGuard:false
+      !contextFlags:.none
       !routineNameForInvocationGraph:.new {!inStructureName.string + " init" !inStructureName.location}
       !optionalTargetType:optionalPropertyType
       !context:ioContext

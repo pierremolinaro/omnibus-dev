@@ -128,7 +128,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
   )
   [mSizeExpression analyzeExpression
     !self:voidType ()
-    !inGuard:false
+    !contextFlags:.none
     !routineNameForInvocationGraph:.new {!mAnonymousOpaqueTypeName.string + " init" !mAnonymousOpaqueTypeName.location}
     !optionalTargetType:voidType ()
     !context:ioContext

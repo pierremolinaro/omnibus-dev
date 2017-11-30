@@ -255,7 +255,7 @@ private proc analyzeControlRegisterInLValue
    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
      handleArraySubscriptNew (
        !self: inSelfType
-       !inGuard: false
+       !contextFlags:.none
        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
        !context: inContext
        !mode: inCurrentMode
@@ -341,7 +341,7 @@ private proc analyzeVariableInLValue
           [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
           handleArraySubscriptNew (
             !self: inSelfType
-            !inGuard: false
+            !contextFlags:.none
             !routineNameForInvocationGraph: inCallerNameForInvocationGraph
             !context: inContext
             !mode: inCurrentMode
@@ -423,7 +423,7 @@ private proc analyzeSelfAssignmentTarget
           [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
           handleArraySubscriptNew (
             !self: inSelfType
-            !inGuard: false
+            !contextFlags:.none
             !routineNameForInvocationGraph: inCallerNameForInvocationGraph
             !context: inContext
             !mode: inCurrentMode

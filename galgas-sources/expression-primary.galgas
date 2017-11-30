@@ -137,7 +137,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 
 override method @primaryInExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -151,12 +151,12 @@ override method @primaryInExpressionAST analyzeExpression
 {
 #--- object access, with ou without self
   if mReceiverName.string != "" then
-    if inGuard then
+    if [inContextFlags guard] then
       error mReceiverName : "in guard, only 'self' properties may be accessed" : outResult
     else 
       [self analyzePrimaryExpressionNoSelf
         !self: inSelfType
-        !inGuard: inGuard
+        !contextFlags:inContextFlags
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !optionalTargetType: inOptionalTargetType
         !context: inContext
@@ -174,7 +174,7 @@ override method @primaryInExpressionAST analyzeExpression
   else
     [self analyzePrimaryExpressionWithSelf
       !self: inSelfType
-      !inGuard: inGuard
+      !contextFlags:inContextFlags
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
@@ -193,7 +193,7 @@ override method @primaryInExpressionAST analyzeExpression
 
 method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -211,7 +211,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !inGuard: inGuard
+      !contextFlags:inContextFlags
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
@@ -231,7 +231,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !inGuard: inGuard
+      !contextFlags:inContextFlags
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
@@ -247,7 +247,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   case register (readable * type address sliceMap arraySize elementSize) :
     if not readable then
       error mReceiverName : "control register is not readable in this context" : outResult
-    elsif inGuard then
+    elsif [inContextFlags guard] then
       error mReceiverName : "control register is not readable in guard" : outResult
     else
       analyzeRegisterExpression (
@@ -273,7 +273,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     outResult = objectIR
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !inGuard: inGuard
+      !contextFlags:inContextFlags
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
@@ -291,7 +291,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     outResult = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !inGuard: inGuard
+      !contextFlags:inContextFlags
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
@@ -309,7 +309,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     [!?ioUniversalMap readAccess !mReceiverName]
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !inGuard: inGuard
+      !contextFlags:inContextFlags
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
@@ -329,7 +329,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 
 proc procAnalyzeAccesListInExpression
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -358,7 +358,7 @@ proc procAnalyzeAccesListInExpression
         !indexExpression
         !endOfIndex
         !self:inSelfType
-        !inGuard:inGuard
+        !contextFlags:inContextFlags
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:inOptionalTargetType
         !context:inContext
@@ -370,7 +370,7 @@ proc procAnalyzeAccesListInExpression
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
-      if inGuard then
+      if [inContextFlags guard] then
         error errorLocation : "a method cannot be called in guard" : ioResult
       else
         handleFunctionCallInExpression (
@@ -422,7 +422,7 @@ private proc analyzeRegisterExpression
       [first arrayAccess ?index:let @expressionAST indexExpression ?endOfIndex:let @location endOfIndex]
       handleArraySubscriptNew (
          !self: inSelfType
-         !inGuard: false
+         !contextFlags:.none
          !routineNameForInvocationGraph: inCallerNameForInvocationGraph
          !context: inContext
          !mode: inCurrentMode
@@ -493,7 +493,7 @@ private proc analyzeRegisterExpression
 
 method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -523,7 +523,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !indexExpression
         !endOfIndex
         !self:inSelfType
-        !inGuard:inGuard
+        !contextFlags:inContextFlags
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:inOptionalTargetType
         !context:inContext
@@ -535,7 +535,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
-      if inGuard then
+      if [inContextFlags guard] then
         error errorLocation : "a method cannot be called in guard" : outResult
       else
         handleFunctionCallInExpression (
@@ -593,7 +593,7 @@ private proc handleArrayAccessInExpression
   ?let @expressionAST inIndexExpression
   ?let @location inEndOfIndex
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -609,7 +609,7 @@ private proc handleArrayAccessInExpression
     [[ioResult type].kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
     handleArraySubscript (
       !self: inSelfType
-      !inGuard: inGuard
+      !contextFlags:inContextFlags
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !context: inContext
       !mode: inCurrentMode

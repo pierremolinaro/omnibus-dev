@@ -5539,6 +5539,7 @@ void callExtensionMethod_enterInContext (const cPtr_abstractDeclarationAST * inO
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_PLMTypeAttributes::GALGAS_PLMTypeAttributes (void) :
+AC_GALGAS_root (),
 mFlags (0),
 mIsValid (false) {
 }
@@ -5546,6 +5547,7 @@ mIsValid (false) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_PLMTypeAttributes::GALGAS_PLMTypeAttributes (const uint64_t inFlags) :
+AC_GALGAS_root (),
 mFlags (inFlags),
 mIsValid (true) {
 }
@@ -5584,11 +5586,6 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_copyable (UNUSED_
 
 GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_generateAssignmentRoutine (UNUSED_LOCATION_ARGS) {
   return GALGAS_PLMTypeAttributes (((uint64_t) 1) << 3) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMTypeAttributes::~ GALGAS_PLMTypeAttributes (void) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

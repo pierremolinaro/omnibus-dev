@@ -53,7 +53,7 @@ override method @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
 
 override method @addressofExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -65,7 +65,7 @@ override method @addressofExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  if inGuard then
+  if [inContextFlags guard] then
     error mLValue.mIdentifier : "addressof () cannot be used in guard" : outResult
   else
   #--- Analyze LValue

@@ -109,7 +109,7 @@ override method @typeArrayDeclarationAST enterInContext
   )
   [mSizeExpression analyzeExpression
     !self:voidType ()
-    !inGuard:false
+    !contextFlags:.none
     !routineNameForInvocationGraph:.new {!mAnonymousArrayTypeName.string + " init" !mAnonymousArrayTypeName.location}
     !optionalTargetType:voidType ()
     !context:ioContext

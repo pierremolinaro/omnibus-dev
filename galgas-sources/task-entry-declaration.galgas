@@ -122,7 +122,7 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
 #--- Analyze property path
   @instructionListIR instructionGenerationList = {}
   var currentType = inTaskType
-  var currentLLVMName = "%self"
+  var currentLLVMName = llvmNameForSelf ()
   for (propertyName) in mEntryPath do
     [currentType.propertyMap searchKey !propertyName ?let @bool unused isPublic ?let propertyAccessKind]
     switch propertyAccessKind

@@ -475,7 +475,7 @@ method @guardMapIR guardCodeGeneration
       let typeName = llvmTypeStringFromPLMname (!guard.mReceiverType.plmTypeName)
       var first = typeName == ""
       if not first then
-        ioLLVMcode += "%" + [typeName assemblerRepresentation] + " * %self"  
+        ioLLVMcode += "%" + [typeName assemblerRepresentation] + "* " + llvmNameForSelf ()
       end
       for () in guard.mFormalArgumentListForGeneration do
         if first then first = false else ioLLVMcode += ", " end
@@ -483,9 +483,9 @@ method @guardMapIR guardCodeGeneration
         case input :
           ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
         case output :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* " + llvmNameForLocalVariable (!mFormalArgumentName)
        case inputOutput :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* " + llvmNameForLocalVariable (!mFormalArgumentName)
         end
       end
       ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
@@ -517,7 +517,7 @@ method @guardMapIR-element llvmCodeGeneration
   end
   var first = true
   if receiverTypeName != "" then
-    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"
+    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + "* " + llvmNameForSelf ()
     first = false
   end
   for () in mFormalArgumentListForGeneration do
@@ -530,9 +530,9 @@ method @guardMapIR-element llvmCodeGeneration
     case input :
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* " + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* " + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"

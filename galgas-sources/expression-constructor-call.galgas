@@ -72,7 +72,7 @@ override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@sema
 
 override method @constructorCallAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -109,7 +109,7 @@ override method @constructorCallAST analyzeExpression
       let expression = [mParameterList mExpressionAtIndex !0]
       [expression analyzeExpression
         !self:inSelfType
-        !inGuard:inGuard
+        !contextFlags:inContextFlags
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:elementType
         !context:inContext
@@ -153,7 +153,7 @@ override method @constructorCallAST analyzeExpression
         end
         [effective_mExpression analyzeExpression
           !self:inSelfType
-          !inGuard:inGuard
+          !contextFlags:inContextFlags
           !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !optionalTargetType:formal_mType
           !context:inContext
