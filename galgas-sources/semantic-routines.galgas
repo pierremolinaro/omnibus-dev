@@ -175,7 +175,7 @@ method @routineMapIR-element llvmCodeGeneration
   end
   var first = true
   if receiverTypeName != "" then
-    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"
+    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + "* " + llvmNameForSelf ()
     first = false
   end
   for () in mFormalArgumentListForGeneration do

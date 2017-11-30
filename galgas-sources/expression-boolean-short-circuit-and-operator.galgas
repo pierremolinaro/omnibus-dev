@@ -35,7 +35,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypes
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -51,7 +51,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   @instructionListIR leftInstructionGenerationList = {}
   [mLeftExpression analyzeExpression
     !self:inSelfType
-    !inGuard:inGuard
+    !contextFlags:inContextFlags
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
@@ -72,7 +72,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   @instructionListIR rightInstructionGenerationList = {}
   [mRightExpression analyzeExpression
     !self:inSelfType
-    !inGuard:inGuard
+    !contextFlags:inContextFlags
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[leftOperand type]
     !context:inContext

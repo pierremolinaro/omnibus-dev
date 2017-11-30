@@ -2,7 +2,7 @@
 
 proc handleArraySubscriptNew
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -20,7 +20,7 @@ proc handleArraySubscriptNew
 #--- Analyze index expression
   [inIndexExpression analyzeExpression
     !self:inSelfType
-    !inGuard:inGuard
+    !contextFlags:inContextFlags
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext
@@ -66,7 +66,7 @@ proc handleArraySubscriptNew
 
 proc handleArraySubscript
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -84,7 +84,7 @@ proc handleArraySubscript
 #--- Analyze index expression
   [inIndexExpression analyzeExpression
     !self:inSelfType
-    !inGuard:inGuard
+    !contextFlags:inContextFlags
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext

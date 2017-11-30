@@ -92,7 +92,7 @@ override method @switchInstructionAST analyze
   @instructionListIR switchExpressionGenerationList = {}
   [mSwitchExpression analyzeExpression
     !self:inSelfType
-    !inGuard:false
+    !contextFlags:.none
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext

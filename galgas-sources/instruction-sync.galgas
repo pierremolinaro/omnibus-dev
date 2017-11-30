@@ -170,7 +170,7 @@ override method @syncInstructionAST analyze
       @instructionListIR guardInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
-        !inGuard:true
+        !contextFlags:.guard
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:voidType ()
         !context:inContext
@@ -202,7 +202,7 @@ override method @syncInstructionAST analyze
     #--- Analyze guard boolean expression
       [exp analyzeExpression
         !self:inSelfType
-        !inGuard:true
+        !contextFlags:.guard
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:voidType ()
         !context:inContext

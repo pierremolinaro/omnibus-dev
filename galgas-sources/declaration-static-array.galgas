@@ -341,7 +341,7 @@ override method @staticListAST enterInContext
             @allocaList allocaList = {}
             [exp analyzeExpression
               !self:voidType ()
-              !inGuard:false
+              !contextFlags:.none
               !routineNameForInvocationGraph:["compiler" nowhere]
               !optionalTargetType:type
               !context:ioContext

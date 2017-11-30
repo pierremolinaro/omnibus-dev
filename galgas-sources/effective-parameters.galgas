@@ -148,7 +148,7 @@ proc analyzeEffectiveParameters
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
-        !inGuard:false
+        !contextFlags:.none
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:[formal_mTypeProxy type]
         !context:inContext

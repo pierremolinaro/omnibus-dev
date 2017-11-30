@@ -97,7 +97,7 @@ method @decoratedTaskGuardList-element taskGuardSemanticAnalysis
 #--- Analyze property path
   @instructionListIR instructionGenerationList = {}
   var currentType = inTaskType
-  var currentLLVMName = "%self"
+  var currentLLVMName = llvmNameForSelf ()
   for (propertyName) in mGuardPath do
     [currentType.propertyMap searchKey !propertyName ?let @bool unused isPublic ?let propertyAccessKind]
     switch propertyAccessKind

@@ -15294,15 +15294,6 @@ class GALGAS_PLMTypeAttributes : public AC_GALGAS_root {
 //--------------------------------- Private constructor
   private : GALGAS_PLMTypeAttributes (const uint64_t inFlags) ;
 
-//--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_PLMTypeAttributes (void) ;
-
-//--------------------------------- Native constructors
-  public : GALGAS_PLMTypeAttributes (const GALGAS_PLMTypeAttributes & in_instanciable,
-                                     const GALGAS_PLMTypeAttributes & in_equatable,
-                                     const GALGAS_PLMTypeAttributes & in_copyable,
-                                     const GALGAS_PLMTypeAttributes & in_generateAssignmentRoutine) ;
-
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning

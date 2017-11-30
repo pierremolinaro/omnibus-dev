@@ -69,7 +69,7 @@ override method @whileInstructionAST analyze
   @instructionListIR testInstructionGenerationList = {}
   [m_while_Expression analyzeExpression
     !self:inSelfType
-    !inGuard:false
+    !contextFlags:.none
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext

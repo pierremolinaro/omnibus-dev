@@ -659,13 +659,100 @@ void callExtensionMethod_noteExpressionTypesInPrecedenceGraph (const class cPtr_
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                @contextFlags struct                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_contextFlags : public AC_GALGAS_root {
+//--------------------------------- Properties
+  private : uint64_t mFlags ;
+  private : bool mIsValid ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_contextFlags (void) ;
+
+//--------------------------------- Private constructor
+  private : GALGAS_contextFlags (const uint64_t inFlags) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_contextFlags extractObject (const GALGAS_object & inObject,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_contextFlags constructor_all (LOCATION_ARGS) ;
+
+  public : static class GALGAS_contextFlags constructor_guard (LOCATION_ARGS) ;
+
+  public : static class GALGAS_contextFlags constructor_none (LOCATION_ARGS) ;
+
+//--------------------------------- & operator
+  public : VIRTUAL_IN_DEBUG GALGAS_contextFlags operator_and (const GALGAS_contextFlags & inOperand
+                                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- | operator
+  public : VIRTUAL_IN_DEBUG GALGAS_contextFlags operator_or (const GALGAS_contextFlags & inOperand
+                                                             COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ^ operator
+  public : VIRTUAL_IN_DEBUG GALGAS_contextFlags operator_xor (const GALGAS_contextFlags & inOperand
+                                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ~ operator
+  public : VIRTUAL_IN_DEBUG GALGAS_contextFlags operator_tilde (LOCATION_ARGS) const ;
+
+//--------------------------------- - operator
+  public : VIRTUAL_IN_DEBUG GALGAS_contextFlags substract_operation (const GALGAS_contextFlags & inOperand,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_contextFlags & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_all (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_guard (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_none (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_contextFlags class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_contextFlags ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                            Abstract extension method '@expressionAST analyzeExpression'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef void (*extensionMethodSignature_expressionAST_analyzeExpression) (const class cPtr_expressionAST * inObject,
                                                                           const class GALGAS_PLMType constinArgument0,
-                                                                          const class GALGAS_bool constinArgument1,
+                                                                          const class GALGAS_contextFlags constinArgument1,
                                                                           const class GALGAS_lstring constinArgument2,
                                                                           const class GALGAS_PLMType constinArgument3,
                                                                           const class GALGAS_semanticContext constinArgument4,
@@ -688,7 +775,7 @@ void enterExtensionMethod_analyzeExpression (const int32_t inClassIndex,
 
 void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inObject,
                                             const GALGAS_PLMType constin_inSelfType,
-                                            const GALGAS_bool constin_inGuard,
+                                            const GALGAS_contextFlags constin_inContextFlags,
                                             const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                             const GALGAS_PLMType constin_inTargetType,
                                             const GALGAS_semanticContext constin_inContext,

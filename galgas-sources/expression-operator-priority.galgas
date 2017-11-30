@@ -417,9 +417,15 @@ abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticT
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+boolset @contextFlags {
+  guard
+}
+
+#·······················································································································
+
 abstract method @expressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?inGuard:let @bool inGuard
+  ?contextFlags:let @contextFlags inContextFlags
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inTargetType
   ?context:let @semanticContext inContext
@@ -431,7 +437,7 @@ abstract method @expressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 method @expressionAST analyzeStaticExpression
   ?errorLocation:let @location inErrorLocation
@@ -443,7 +449,7 @@ method @expressionAST analyzeStaticExpression
   @allocaList allocaList = {}
   [self analyzeExpression
     !self:voidType ()
-    !inGuard:false
+    !contextFlags:.none
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:voidType ()
     !context:inContext

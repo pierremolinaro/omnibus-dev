@@ -474,8 +474,8 @@ method @taskMapIR generateCode
     let assemblerTaskName = [llvmTypeStringFromPLMname (!task.mTaskName) assemblerRepresentation]
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     ioLLVMcode += "\n"
-    let effectiveParameter = "(%" + assemblerTaskName + " * " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
-    let formalArgument = "(%" + assemblerTaskName + " * %self)"
+    let effectiveParameter = "(%" + assemblerTaskName + "* " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
+    let formalArgument = "(%" + assemblerTaskName + "* " + llvmNameForSelf () + ")"
     ioLLVMcode += llvmSeparatorLine () + "\n"
   #--- Init
     ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"

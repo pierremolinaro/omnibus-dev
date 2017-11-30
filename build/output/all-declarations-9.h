@@ -532,7 +532,7 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
-                                      const class GALGAS_bool constinArgument1,
+                                      const class GALGAS_contextFlags constinArgument1,
                                       const class GALGAS_lstring constinArgument2,
                                       const class GALGAS_semanticContext constinArgument3,
                                       const class GALGAS_mode constinArgument4,
@@ -556,7 +556,7 @@ void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_handleArraySubscript (const class GALGAS_PLMType constinArgument0,
-                                   const class GALGAS_bool constinArgument1,
+                                   const class GALGAS_contextFlags constinArgument1,
                                    const class GALGAS_lstring constinArgument2,
                                    const class GALGAS_semanticContext constinArgument3,
                                    const class GALGAS_mode constinArgument4,

@@ -2250,7 +2250,7 @@ class GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infix
 
 typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionNoSelf) (const class cPtr_primaryInExpressionAST * inObject,
                                                                                                 const class GALGAS_PLMType constinArgument0,
-                                                                                                const class GALGAS_bool constinArgument1,
+                                                                                                const class GALGAS_contextFlags constinArgument1,
                                                                                                 const class GALGAS_lstring constinArgument2,
                                                                                                 const class GALGAS_PLMType constinArgument3,
                                                                                                 const class GALGAS_semanticContext constinArgument4,
@@ -2273,7 +2273,7 @@ void enterExtensionMethod_analyzePrimaryExpressionNoSelf (const int32_t inClassI
 
 void callExtensionMethod_analyzePrimaryExpressionNoSelf (const class cPtr_primaryInExpressionAST * inObject,
                                                          const GALGAS_PLMType constin_inSelfType,
-                                                         const GALGAS_bool constin_inGuard,
+                                                         const GALGAS_contextFlags constin_inContextFlags,
                                                          const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                                          const GALGAS_PLMType constin_inOptionalTargetType,
                                                          const GALGAS_semanticContext constin_inContext,
@@ -2344,7 +2344,7 @@ void routine_analyzeRegisterExpression (const class GALGAS_PLMType constinArgume
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_procAnalyzeAccesListInExpression (const class GALGAS_PLMType constinArgument0,
-                                               const class GALGAS_bool constinArgument1,
+                                               const class GALGAS_contextFlags constinArgument1,
                                                const class GALGAS_lstring constinArgument2,
                                                const class GALGAS_PLMType constinArgument3,
                                                const class GALGAS_semanticContext constinArgument4,
@@ -2390,7 +2390,7 @@ void callExtensionSetter_readAccess (class cPtr_universalValuedObjectMapForConte
 
 typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionWithSelf) (const class cPtr_primaryInExpressionAST * inObject,
                                                                                                   const class GALGAS_PLMType constinArgument0,
-                                                                                                  const class GALGAS_bool constinArgument1,
+                                                                                                  const class GALGAS_contextFlags constinArgument1,
                                                                                                   const class GALGAS_lstring constinArgument2,
                                                                                                   const class GALGAS_PLMType constinArgument3,
                                                                                                   const class GALGAS_semanticContext constinArgument4,
@@ -2413,7 +2413,7 @@ void enterExtensionMethod_analyzePrimaryExpressionWithSelf (const int32_t inClas
 
 void callExtensionMethod_analyzePrimaryExpressionWithSelf (const class cPtr_primaryInExpressionAST * inObject,
                                                            const GALGAS_PLMType constin_inSelfType,
-                                                           const GALGAS_bool constin_inGuard,
+                                                           const GALGAS_contextFlags constin_inContextFlags,
                                                            const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                                            const GALGAS_PLMType constin_inOptionalTargetType,
                                                            const GALGAS_semanticContext constin_inContext,
@@ -2429,15 +2429,6 @@ void callExtensionMethod_analyzePrimaryExpressionWithSelf (const class cPtr_prim
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             Function 'llvmNameForSelf'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForSelf (class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                       Routine 'handleArrayAccessInExpression'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2446,7 +2437,7 @@ void routine_handleArrayAccessInExpression (class GALGAS_objectIR & ioArgument0,
                                             const class GALGAS_expressionAST constinArgument1,
                                             const class GALGAS_location constinArgument2,
                                             const class GALGAS_PLMType constinArgument3,
-                                            const class GALGAS_bool constinArgument4,
+                                            const class GALGAS_contextFlags constinArgument4,
                                             const class GALGAS_lstring constinArgument5,
                                             const class GALGAS_PLMType constinArgument6,
                                             const class GALGAS_semanticContext constinArgument7,
