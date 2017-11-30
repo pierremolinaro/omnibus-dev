@@ -573,6 +573,15 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                                GALGAS_systemRoutineDeclarationListAST & ioArgument1,
                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'task_entry_declaration' non terminal
+//--- 'parse' label
+  public : virtual void nt_task_5F_entry_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_task_5F_entry_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                          GALGAS_taskEntryListAST & ioArgument1,
+                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'type_definition' non terminal
 //--- 'parse' label
   public : virtual void nt_type_5F_definition_parse (C_Lexique_plm_5F_lexique * inCompiler) ;

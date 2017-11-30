@@ -80,8 +80,6 @@ struct $synchronizationBuffer {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-var buffer = $synchronizationBuffer ()
-
 task Tâche1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
   var index $uint32 = 0
@@ -90,13 +88,15 @@ task Tâche1 priority 1 stackSize 512 {
     toggle (!port:LED_L0)
     self.compteur +%= 500
     self.index += 1
-    buffer.write (!self.index)
+    Tâche2.write (!self.index)
   }
 }
 
 task Tâche2 priority 2 stackSize 512 {
+  entry write : self.buffer.write (? value $uint32)
+  var buffer = $synchronizationBuffer ()
    
-  on buffer.read (?var value $uint32) {
+  on self.buffer.read (?var value $uint32) {
     lcd.goto (!line:0 !column:0)
     lcd.print (!unsigned:value)
   }

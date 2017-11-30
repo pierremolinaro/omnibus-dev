@@ -40,7 +40,8 @@ project (1:0:0) -> "plm" {
   "galgas-sources/declaration-static-array.galgas"
 
 #--- Tasks
-  "galgas-sources/declaration-task.galgas"
+  "galgas-sources/task-declaration.galgas"
+  "galgas-sources/task-entry-declaration.galgas"
 
 #--- Modes
   "galgas-sources/logical-modes.galgas"

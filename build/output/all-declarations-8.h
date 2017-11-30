@@ -146,16 +146,17 @@ void extensionMethod_semanticAnalysis (const class GALGAS_decoratedLaskList_2D_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                Function 'checkMode'                                                 *
+//                    Extension method '@decoratedTaskEntryList-element taskEntrySemanticAnalysis'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_calleeKindIR function_checkMode (const class GALGAS_mode & constinArgument0,
-                                              const class GALGAS_mode & constinArgument1,
-                                              const class GALGAS_routineKind & constinArgument2,
-                                              const class GALGAS_location & constinArgument3,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
+void extensionMethod_taskEntrySemanticAnalysis (const class GALGAS_decoratedTaskEntryList_2D_element inObject,
+                                                const class GALGAS_PLMType constin_inTaskType,
+                                                const class GALGAS_semanticContext constin_inContext,
+                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -175,6 +176,19 @@ void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArg
                                    class GALGAS_instructionListIR & outArgument9,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                Function 'checkMode'                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_calleeKindIR function_checkMode (const class GALGAS_mode & constinArgument0,
+                                              const class GALGAS_mode & constinArgument1,
+                                              const class GALGAS_routineKind & constinArgument2,
+                                              const class GALGAS_location & constinArgument3,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

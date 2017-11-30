@@ -16,15 +16,6 @@ list @taskListAST {
 
 #·······················································································································
 
-list @taskEntryListAST {
-  @lstring mEntryName
-  @routineFormalArgumentListAST mEntryFormalArgumentList
-  @lstring mEntryReturnTypeName
-  @lstringlist mEntryPath
-}
-
-#·······················································································································
-
 list @taskSetupListAST {
   @lbigint mTaskSetupPriority
   @instructionListAST mTaskSetupInstructionList
@@ -98,27 +89,7 @@ syntax extension plm_syntax {
       $}$
       branchList += !guardedCommand !instructionList !endOfInstructions
     while
-      $entry$
-      $identifier$ ?let entryName
-      <procedure_formal_arguments> !?ioAST ?let @routineFormalArgumentListAST formalArgumentList
-      @lstring returnTypeName
-      select
-        returnTypeName = ["" here]
-      or
-        $->$
-        <type_definition> !?ioAST ?returnTypeName
-      end
-      $:$
-      $self$
-      $.$
-      @lstringlist entryPath = {}
-      repeat
-        $identifier$ ?let propertyName
-        entryPath += !propertyName
-      while
-        $.$
-      end
-      taskEntryListAST += !entryName !formalArgumentList !returnTypeName !entryPath
+      <task_entry_declaration> !?ioAST !?taskEntryListAST
     end
     let endOfTask = @location.here
     $}$
@@ -284,17 +255,6 @@ method @taskListAST enterInContext
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @decoratedTaskEntryList {
-  @lstring mEntryName
-  @routineFormalArgumentListAST mEntryFormalArgumentList
-  @routineTypedSignature mEntrySignature
-  @unifiedTypeMap-proxy mEntryReturnTypeProxy
-  @lstringlist mEntryPath
-  @lstring mInvokedMethodName
-}
-
-#·······················································································································
-
 list @decoratedLaskList {
   @lstring mTaskName
   @lbigint mPriority
@@ -370,111 +330,12 @@ method @decoratedLaskList-element semanticAnalysis
   end
 #------------------------------------------- Analyze task entries
   for entry in mDecoratedTaskEntryList do
-  #--- Analyze property path
-    @instructionListIR instructionGenerationList = {}
-    var currentType = taskType
-    var currentLLVMName = "%self"
-    for (propertyName) in entry.mEntryPath do
-      [currentType.propertyMap searchKey !propertyName ?let @bool unused isPublic ?let propertyAccessKind]
-      switch propertyAccessKind
-      case constantProperty (*) :
-        error propertyName : "a constant property is not allowed here"
-      case indexed (@PLMType type @uint index) :
-        [!?ioTemporaries newTempLLVMVar ?let llvmName]
-        [!?instructionGenerationList appendGetUniversalPropertyReference
-          !currentType
-          !currentLLVMName
-          !llvmName
-          !index
-          !propertyName
-        ]
-        currentType = type
-        currentLLVMName = llvmName
-      case nonVirtualMethod (*) :
-        error propertyName : "a non virtual method is not allowed here"
-      end
-    end
-  #--- Invoked method mangled name
-    let invokedMethodMangledName = routineMangledNameFromAST (!"" !entry.mInvokedMethodName !entry.mEntryFormalArgumentList)
-  #--- Analyze invoked method
-    [currentType.propertyMap searchKey !invokedMethodMangledName ?let @bool unused isPublic ?let methodAccessKind]
-    switch methodAccessKind
-    case constantProperty (*) :
-      error entry.mInvokedMethodName : "a constant property is not allowed here"
-    case indexed (* *) :
-      error entry.mInvokedMethodName : "a property is not allowed here"
-    case nonVirtualMethod (@routineDescriptor descriptor) :
-    #--- Compare signatures
-      if entry.mEntrySignature != descriptor.signature then
-        error entry.mEntryName
-        : "entry signature does not conform to invoked method signature: " + descriptor.signature
-      end
-      if entry.mEntryReturnTypeProxy != descriptor.returnTypeProxy then
-        error entry.mEntryName
-        : "entry return type does not conform to invoked method return type"
-      end
-    #--- Invocation graph
-      let entryMangledNameForInvocationGraph = routineMangledNameFromAST (
-        !llvmTypeStringFromPLMname (!mTaskName)
-        !entry.mEntryName
-        !entry.mEntryFormalArgumentList
-      )
-      let returnType = if entry.mEntryReturnTypeProxy == .null then
-        voidType ()
-      else
-        [entry.mEntryReturnTypeProxy type]
-      end
-      let invokedMethodMangledNameForInvocationGraph = routineMangledNameFromAST (
-        !llvmTypeStringFromPLMname (!currentType.plmTypeName)
-        !entry.mInvokedMethodName
-        !entry.mEntryFormalArgumentList
-      )
-      [!?ioTemporaries.mSubprogramInvocationGraph addEdge
-        !entryMangledNameForInvocationGraph
-        !invokedMethodMangledNameForInvocationGraph
-      ]
-    #--- Analyse formal arguments
-      @routineFormalArgumentListIR formalArguments = {}
-      enterFormalArguments (
-        !context:inContext
-        !entry.mEntryFormalArgumentList
-        !?*
-        !?formalArguments
-      )
-    #--- Check modes
-      let calleeKind = checkMode (
-        !callerMode:.userMode
-        !calleeMode:.userMode
-        !kind:descriptor.routineKind
-        !error:entry.mInvokedMethodName.location
-      )
-      @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-      effectiveParameterListIR += !.outputInput !.reference {!type:currentType !llvmName:currentLLVMName}
-    #--- Generate call instruction
-      instructionGenerationList += !@staticRoutineCallIR.new {
-        !entry.mInvokedMethodName
-        !.null # No result
-        !invokedMethodMangledNameForInvocationGraph
-        !invokedMethodMangledNameForInvocationGraph # LLVMInvocationRoutineName
-        !calleeKind
-        !effectiveParameterListIR
-      }
-      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
-        !entryMangledNameForInvocationGraph
-        !taskType
-        !entryMangledNameForInvocationGraph
-        !formalArguments
-        !{} # allocaList
-        !instructionGenerationList
-        !false # [ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-        !true # inWarnIfUnused
-        !false # inGlobalFunction
-        !.function {!executionMode:.userMode}
-        !returnType
-        !false
-      ]
-
-    end
+    [entry taskEntrySemanticAnalysis
+       !taskType:taskType
+       !context:inContext
+       !?temporary:ioTemporaries
+       !?intermediateCode:ioIntermediateCodeStruct
+     ]
   end
 #------------------------------------------- Analyze task setup routines
   @taskSetupSortedListAST taskInitSortedListAST = {}
@@ -604,7 +465,6 @@ method @taskMapIR generateCode
       !task.mStackSize
       !task.mAllocaList
       !task.mInitInstructionListIR
-#      !task.mTaskEntryListIR
       !task.mTaskNameStringIndex
   end
 #--- Declare task stacks and main routine

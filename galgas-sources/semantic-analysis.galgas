@@ -110,8 +110,8 @@ proc semanticAnalysis
   outIntermediateCodeStruct.mStaticStringMap = inGlobalLiteralStringMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
   for requiredProc in inAST.mRequiredProcListAST do
-    let requiredProcedureMangledName = routineMangledNameFromAST (!"" !requiredProc.mName !requiredProc.mFormalArgumentList)
-    outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProcedureMangledName.string
+    let procedureMangledName = routineMangledNameFromAST (!"" !requiredProc.mName !requiredProc.mFormalArgumentList)
+    outIntermediateCodeStruct.mRequiredProcedureSet += !procedureMangledName.string
   end 
 #---
   @semanticTemporariesStruct temporaries = .default
@@ -129,12 +129,12 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  [inAST.mGuardListAST guardSemanticAnalysis
-    !receiverType:voidType ()
-    !context:inSemanticContext
-    !?temporary:temporaries
-    !?intermediateCode:outIntermediateCodeStruct
-  ]
+#  [inAST.mGuardListAST guardSemanticAnalysis
+#    !receiverType:voidType ()
+#    !context:inSemanticContext
+#    !?temporary:temporaries
+#    !?intermediateCode:outIntermediateCodeStruct
+#  ]
   [inAST.mExternProcListAST externProcedureSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries

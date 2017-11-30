@@ -80,8 +80,6 @@ let PATTERN_LENGTH = kPATTERN.count
 
 type $patternArray : $uint32 [PATTERN_LENGTH]
 
-var gOutputPattern = $patternArray (!repeated:0)
-
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 module pit {
@@ -104,13 +102,13 @@ module pit ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-system section initializeDMA () {
+system section initializeDMA (?!pattern $patternArray) {
 //--- Transform pattern for encoding level changes
   var current = no ;
   var index $uint32 = 0
   for élément in kPATTERN {
     let b = élément.x
-    gOutputPattern [index] = if current ≠ b { 0 } else { 1 << 2 }
+    pattern [index] = if current ≠ b { 0 } else { 1 << 2 }
     index += 1
     current = b
   }
@@ -143,13 +141,13 @@ system section initializeDMA () {
 //--- Disable DMA Channel 0: it is required for configuring it
   DMAMUX_CHCFG [3] = 0
 
-//--- Initial source address: the gOutputPattern array address
-  DMA_TCD_SADDR [3] = addressof (gOutputPattern)
+//--- Initial source address: the pattern array address
+  DMA_TCD_SADDR [3] = addressof (pattern)
 
 //--- After every request, source address is incremented by 4
   DMA_TCD_SOFF [3] = 4
 
-//--- At the end of a major loop, source address is decremented to gOutputPattern array address
+//--- At the end of a major loop, source address is decremented to pattern array address
   DMA_TCD_SLAST [3] = - 4 * PATTERN_LENGTH // - transfert_size * major_loop_count
 
 //--- Destination address: the address of the GPIOC_PTOR control register
@@ -199,9 +197,10 @@ system section initializeDMA () {
 
 task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
+  var pattern = $patternArray (!repeated:0)
  
   setup 1 {
-    initializeDMA ()
+    initializeDMA (!?self.pattern)
   }
   
   on time.wait (!untilDeadline:self.compteur) {
@@ -211,7 +210,7 @@ task Tâche priority 1 stackSize 512 {
     digitalWrite (!port:LED_L0 !no)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.print (!unsigned:gOutputPattern.count)
+    lcd.print (!unsigned:self.pattern.count)
     lcd.print (!string:" ")
     let cc = $isrSlot.PITChannel3.uint7 ()
     lcd.print (!unsigned:extend (cc))

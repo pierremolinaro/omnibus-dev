@@ -193,7 +193,7 @@ proc buildSemanticContext
    ]
   [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext !receiverType:"" !?context: outSemanticContext]
-  [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
+#  [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #---
   outSubprogramInvocationGraph = .emptyGraph
   for (declaration) in inAST.mDeclarationListAST do

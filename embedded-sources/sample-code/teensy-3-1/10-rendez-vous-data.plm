@@ -49,6 +49,11 @@ struct $rendezVousData {
     self.readBarrier.signal ()
   }
 
+  public guard output @noUnusedWarning (?data:inData $uint32) : self.writeBarrier.wait () {
+    self.data = inData
+    self.readBarrier.signal ()
+  }
+
   public func user input @mutating @noUnusedWarning (!data:outData $uint32) {
     self.readBarrier.wait ()
     outData = self.data
@@ -64,55 +69,53 @@ struct $rendezVousData {
 
 //-----------------------------------------------------------------------------*
 
-var rdvs = $rendezVousData ()
-
-//-----------------------------------------------------------------------------*
-
-var rdvs2 = $rendezVousData ()
-
-//-----------------------------------------------------------------------------*
-
-var s = $semaphore (!value:1)
-
-//-----------------------------------------------------------------------------*
-
 task T0 priority 0 stackSize 512 {
+  entry P : self.s.wait ()
+  entry V : self.s.signal ()
+
+  var s = $semaphore (!value:1)
   var top $uint32 = 0
-  var n $uint32 = 0
 
   on time.wait (!untilDeadline:self.top) {
-    rdvs.output (!data:self.n)
-    rdvs2.output (!data:self.n)
+    T2.input (?data:let n)
+    T1.output (!data:n)
     toggle (!port:LED_L0)
     self.top += 500
-    self.n += 1
   }
 }
 
 //-----------------------------------------------------------------------------*
 
 task T1 priority 1 stackSize 1024 {
+  entry output : self.rdvs.output (?data:inData $uint32)
 
-  on rdvs.input (?data:let x) {
+  var rdvs = $rendezVousData ()
+
+  on self.rdvs.input (?data:let x) {
     toggle (!port:LED_L1)
-    s.wait ()
+    T0.P ()
       lcd.goto (!line:0 !column:0)
       lcd.print (!unsigned:x)
-    s.signal ()
+    T0.V ()
   }
 }
 
 //-----------------------------------------------------------------------------*
 
 task T2 priority 2 stackSize 1024 {
-  var deadline $uint32 = 0
+  entry input : self.rdvs2.input (!data:inData $uint32)
 
-  on rdvs2.input (?data:let x) {
+  var rdvs2 = $rendezVousData ()
+  var deadline $uint32 = 0
+  var n $uint32 = 0
+
+  on self.rdvs2.output (!data:self.n) {
     toggle (!port:LED_L2)
-    s.wait ()
+    T0.P ()
       lcd.goto (!line:1 !column:0)
-      lcd.print (!unsigned:x)
-    s.signal ()
+      lcd.print (!unsigned:self.n)
+    T0.V ()
+    self.n += 1
   }
   
   on time.wait (!untilDeadline:self.deadline) {
