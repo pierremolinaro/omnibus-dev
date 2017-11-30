@@ -60,30 +60,6 @@ map @globalConstantMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @allowedGuardMap {
-  insert insertKey error message "the '%K' guard is already declared in %L"
-  search searchKey error message "there is no '%K' guard"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @globalVariableMap %selectors {
-  @PLMType type
-  @stringset executionModeSet
-#  @allowedRoutineMap allowedRoutineMap
-  @allowedGuardMap allowedGuardMap
-#  @allowedISRMap allowedISRMap
-#  @allowedTaskMap allowedTaskMap
-  @objectIR initialValue
-  @bool isConstant
-  @bool allowedAccessToAll
-
-  insert insertKey error message "the '%K' global variable is already declared in %L"
-  search searchKey error message "there is no '%K' global variable"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 list @operandIRList {
   @objectIR mOperand
 }
@@ -120,7 +96,7 @@ struct @semanticContext {
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
   @controlRegisterMap mControlRegisterMap
   @globalConstantMap mGlobalConstantMap
-  @globalVariableMap mGlobalVariableMap
+#  @globalVariableMap mGlobalVariableMap
   @moduleMap mModuleMap
   @staticlistMap mStaticListMap
 #--- Interrupts
@@ -228,16 +204,6 @@ proc buildSemanticContext
      !?outSubprogramInvocationGraph
      !?staticStringMap:ioGlobalLiteralStringMap
    ]
-#--- Check global var declaration
-  if @uint.errorCount == 0 then
-    for globalVar in inAST.mGlobalVarDeclarationListAST do
-      [globalVar enterInContext
-        !?context:outSemanticContext
-        !?outDecoratedDeclarationList
-        !?staticStringMap:ioGlobalLiteralStringMap
-      ]
-    end
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

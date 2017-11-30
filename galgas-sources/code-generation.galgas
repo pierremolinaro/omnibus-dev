@@ -194,12 +194,6 @@ private proc generateCodeFiles
   declareLLVMTypes (!inTypeMap !?llvmCode)
 #----------------------------------------- Static array type declaration
   [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]
-#----------------------------------------- Global variables
-  for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
-    before llvmCode += llvmTitleComment (!"Global variables")
-    do [globalVariable generateLLVM !?llvmCode]
-    after llvmCode += "\n"
-  end
 #----------------------------------------- Modules
   for module in inIntermediateCodeStruct.mModuleList
     before llvmCode += llvmTitleComment (!"Modules")

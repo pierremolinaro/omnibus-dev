@@ -601,33 +601,6 @@ void callExtensionSetter_insertUsedLocalConstant (class cPtr_universalValuedObje
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Extension setter '@universalValuedObjectMapForContext insertGlobalVariable'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertGlobalVariable) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                  const class GALGAS_lstring constinArgument0,
-                                                                                                  const class GALGAS_PLMType constinArgument1,
-                                                                                                  const class GALGAS_bool constinArgument2,
-                                                                                                  class C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertGlobalVariable (const int32_t inClassIndex,
-                                                extensionSetterSignature_universalValuedObjectMapForContext_insertGlobalVariable inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertGlobalVariable (class cPtr_universalValuedObjectMapForContext * inObject,
-                                               const GALGAS_lstring constin_inGlobalVariableName,
-                                               const GALGAS_PLMType constin_inType,
-                                               const GALGAS_bool constin_inWritable,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                     Extension setter '@universalValuedObjectMapForContext insertLocalVariable'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
