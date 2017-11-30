@@ -253,9 +253,6 @@ override method @procedureCallInstructionAST analyze
     case localConstant (@PLMType type @lstring plmName) :
       currentType = type
       currentLLVMAddressVar = llvmNameForLocalVariable (!plmName)
-    case globalVariable (* @PLMType type) :
-      currentType = type
-      currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
     case localVariable (@PLMType type @lstring plmName) :
       currentType = type
       currentLLVMAddressVar = llvmNameForLocalVariable (!plmName)

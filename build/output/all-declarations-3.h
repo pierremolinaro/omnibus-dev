@@ -960,7 +960,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
     kEnum_register,
     kEnum_globalConstant,
     kEnum_localConstant,
-    kEnum_globalVariable,
     kEnum_localVariable
   } enumeration ;
   
@@ -989,10 +988,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_valuedObject constructor_globalConstant (const class GALGAS_objectIR & inOperand0
-                                                                        COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_valuedObject constructor_globalVariable (const class GALGAS_bool & inOperand0,
-                                                                        const class GALGAS_PLMType & inOperand1
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_valuedObject constructor_localConstant (const class GALGAS_PLMType & inOperand0,
@@ -1032,11 +1027,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_globalVariable (class GALGAS_bool & outArgument0,
-                                                        class GALGAS_PLMType & outArgument1,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_PLMType & outArgument0,
                                                        class GALGAS_lstring & outArgument1,
                                                        C_Compiler * inCompiler
@@ -1070,8 +1060,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalConstant (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalVariable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalConstant (LOCATION_ARGS) const ;
 
