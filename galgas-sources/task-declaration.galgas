@@ -11,6 +11,7 @@ list @taskListAST {
   @taskSetupListAST mTaskSetupListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @taskEntryListAST mTaskEntryListAST
+  @taskGuardListAST mTaskGuardListAST
   @location mEndOfTaskDeclaration
 }
 
@@ -54,6 +55,7 @@ syntax extension plm_syntax {
     @taskSetupListAST taskInitListAST = {}
     @syncInstructionBranchListAST branchList = {}
     @taskEntryListAST taskEntryListAST = {}
+    @taskGuardListAST taskGuardListAST = {}
     repeat
     while
       <private_struct_property_declaration> !?ioAST !?taskVarList
@@ -90,6 +92,8 @@ syntax extension plm_syntax {
       branchList += !guardedCommand !instructionList !endOfInstructions
     while
       <task_entry_declaration> !?ioAST !?taskEntryListAST
+    while
+      <task_guard_declaration> !?ioAST !?taskGuardListAST
     end
     let endOfTask = @location.here
     $}$
@@ -102,6 +106,7 @@ syntax extension plm_syntax {
       !taskInitListAST
       !branchList
       !taskEntryListAST
+      !taskGuardListAST
       !endOfTask
   }
 
@@ -140,7 +145,7 @@ map @taskMap {
   search searchKey error message "there is no '%K' task"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 method @taskListAST enterInContext
   ?!context:@semanticContext ioContext
@@ -169,46 +174,25 @@ method @taskListAST enterInContext
     end
   #------------------------- Enter task entries
     @decoratedTaskEntryList decoratedTaskEntryList = {}
-    for () in task.mTaskEntryListAST do
-    #--- Attributes
-      let exportedRoutine = true # [attributeSet hasKey !exportedAttribute ()]
-      let canMutateProperties = true # [attributeSet hasKey !mutatingAttribute ()]
-    #--- Entry mangled name
-      let entryMangledName = routineMangledNameFromAST (!"" !mEntryName !mEntryFormalArgumentList)
-    #--- Entry signature
-      routineSignature (!?ioContext.mTypeMap !mEntryFormalArgumentList ?let entrySignature)
-    #--- Return type
-      [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mEntryReturnTypeName ?let returnTypeProxy]
-    #--- Routine descriptor
-      let descriptor = @routineDescriptor.new {
-        !isPublic:true
-        !exported:exportedRoutine
-        !routineKind:.function {!executionMode:.userMode}
-        !signature:entrySignature
-        !returnTypeProxy:returnTypeProxy
-        !canAccessProperties:true
-        !canMutateProperties:canMutateProperties
-      }
-    #--- Enter in structure map
-      [!?propertyMap insertKey !entryMangledName !true !.nonVirtualMethod {!descriptor:descriptor}]
-    #--- Extract method name
-       var propertyAccessPath = mEntryPath
-       [!?propertyAccessPath popLast ?let methodName]
-    #--- Enter in decorated entry list
-      decoratedTaskEntryList +=
-        !mEntryName
-        !mEntryFormalArgumentList
-        !entrySignature
-        !returnTypeProxy
-        !propertyAccessPath
-        !methodName
-    #--- Invocation graph
-      let entryMangledNameForInvocationGraph = routineMangledNameFromAST (
-        !llvmTypeStringFromPLMname (!task.mTaskName)
-        !mEntryName
-        !mEntryFormalArgumentList
-      )
-      [!?ioSubprogramInvocationGraph addNode !entryMangledNameForInvocationGraph !entryMangledNameForInvocationGraph]
+    for entry in task.mTaskEntryListAST do
+      [entry enterInContext
+        !taskName:task.mTaskName
+        !?context:ioContext
+        !?ioSubprogramInvocationGraph
+        !?decoratedTaskEntryList 
+        !?propertyMap
+      ]
+    end
+  #------------------------- Enter task entries
+    @decoratedTaskGuardList decoratedTaskGuardList = {}
+    for guard in task.mTaskGuardListAST do
+      [guard enterInContext
+        !taskName:task.mTaskName
+        !?context:ioContext
+        !?ioSubprogramInvocationGraph
+        !?decoratedTaskGuardList 
+        !?propertyMap
+      ]
     end
   #---------------- Enter task variable map as structure type in type map
     let taskType = @PLMType.new {
@@ -245,6 +229,7 @@ method @taskListAST enterInContext
       !task.mTaskSetupListAST
       !task.mGuardedCommandList
       !decoratedTaskEntryList
+      !decoratedTaskGuardList
       !task.mEndOfTaskDeclaration
   end
 #---------------- Add decorated declaration
@@ -264,6 +249,7 @@ list @decoratedLaskList {
   @taskSetupListAST mTaskSetupListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @decoratedTaskEntryList mDecoratedTaskEntryList
+  @decoratedTaskGuardList mDecoratedTaskGuardList
   @location mEndOfTaskDeclaration
 }
 
@@ -331,6 +317,15 @@ method @decoratedLaskList-element semanticAnalysis
 #------------------------------------------- Analyze task entries
   for entry in mDecoratedTaskEntryList do
     [entry taskEntrySemanticAnalysis
+       !taskType:taskType
+       !context:inContext
+       !?temporary:ioTemporaries
+       !?intermediateCode:ioIntermediateCodeStruct
+     ]
+  end
+#------------------------------------------- Analyze task guards
+  for guard in mDecoratedTaskGuardList do
+    [guard taskGuardSemanticAnalysis
        !taskType:taskType
        !context:inContext
        !?temporary:ioTemporaries

@@ -160,6 +160,20 @@ void extensionMethod_taskEntrySemanticAnalysis (const class GALGAS_decoratedTask
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                    Extension method '@decoratedTaskGuardList-element taskGuardSemanticAnalysis'                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_taskGuardSemanticAnalysis (const class GALGAS_decoratedTaskGuardList_2D_element inObject,
+                                                const class GALGAS_PLMType constin_inTaskType,
+                                                const class GALGAS_semanticContext constin_inContext,
+                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Routine 'initSemanticAnalysis'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -481,14 +495,4 @@ void routine_generateIntegerIntrinsicFunction (const class GALGAS_string constin
                                                const class GALGAS_string constinArgument5,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Routine 'enterLiteralIntegerOperators'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterLiteralIntegerOperators (class GALGAS_semanticContext & ioArgument0,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 

@@ -42,6 +42,7 @@ project (1:0:0) -> "plm" {
 #--- Tasks
   "galgas-sources/task-declaration.galgas"
   "galgas-sources/task-entry-declaration.galgas"
+  "galgas-sources/task-guard-declaration.galgas"
 
 #--- Modes
   "galgas-sources/logical-modes.galgas"

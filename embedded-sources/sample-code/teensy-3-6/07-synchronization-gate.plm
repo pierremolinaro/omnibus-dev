@@ -108,6 +108,7 @@ task Tâche1 priority 1 stackSize 512 {
 task Tâche2 priority 2 stackSize 512 {
   var gate = $synchronizationGate (!isOpen:no)
   entry openGate : self.gate.open ()
+  guard waitOnGate : self.gate.wait ()
  
   on self.gate.wait () {
     toggle (!port:LED_L1)
@@ -118,7 +119,7 @@ task Tâche2 priority 2 stackSize 512 {
 
 task Tâche3 priority 3 stackSize 512 {
    
-  on gate.wait () {
+  on Tâche2.waitOnGate () {
     toggle (!port:LED_L2)
     Tâche1.signal ()
     Tâche1.wait ()
