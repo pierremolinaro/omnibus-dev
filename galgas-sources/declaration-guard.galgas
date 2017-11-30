@@ -440,7 +440,7 @@ enum @guardKindGenerationIR {
                          @procCallEffectiveParameterListIR baseGuardEffectiveParameterList)
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 map @guardMapIR {
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
@@ -455,7 +455,7 @@ map @guardMapIR {
   remove removeKey error message "** internal error **"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 method @guardMapIR guardCodeGeneration
   ?!@string ioLLVMcode
@@ -472,7 +472,7 @@ method @guardMapIR guardCodeGeneration
       ioServiceList += !guardCallName !guardImplementationName
       ioLLVMcode += llvmTitleComment (!guardImplementationName)
       ioLLVMcode += "declare i1 @" + guardCallName + " ("
-      let typeName = if guard.mReceiverType.kind == .void then "" else llvmTypeStringFromPLMname (!guard.mReceiverType.plmTypeName) end
+      let typeName = llvmTypeStringFromPLMname (!guard.mReceiverType.plmTypeName)
       var first = typeName == ""
       if not first then
         ioLLVMcode += "%" + [typeName assemblerRepresentation] + " * %self"  
@@ -494,7 +494,7 @@ method @guardMapIR guardCodeGeneration
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 method @guardMapIR-element llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -581,7 +581,7 @@ method @guardMapIR-element llvmCodeGeneration
       ioLLVMcode += "  " + variable + " = alloca " + llvmTypeName + "\n"
     end
    [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-    ioLLVMcode += "  %baseGuard.result = call i1 @" + llvmNameForGuardCall (!baseGuardMangledName)
+    ioLLVMcode += "  %invoked.guard.result = call i1 @" + llvmNameForGuardCall (!baseGuardMangledName)
     ioLLVMcode += " ("
     for () in baseGuardEffectiveParameterList do
       switch mEffectiveParameterPassingMode
@@ -596,18 +596,18 @@ method @guardMapIR-element llvmCodeGeneration
       ioLLVMcode += ", "
     end
     ioLLVMcode += ")\n"
-    ioLLVMcode += "  br i1 %baseGuard.result, label %baseGuard.true, label %baseGuard.exit\n\n"
-    ioLLVMcode += "baseGuard.true:\n"
+    ioLLVMcode += "  br i1 %invoked.guard.result, label %invoked.guard.acceptation, label %invoked.guard.rejection\n\n"
+    ioLLVMcode += "invoked.guard.acceptation:\n"
     [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret i1 true\n\n"
-    ioLLVMcode += "baseGuard.exit:\n"
+    ioLLVMcode += "invoked.guard.rejection:\n"
     ioLLVMcode += "  ret i1 false\n"
     ioLLVMcode += "}\n\n"
   end
   ioGenerationAdds.mExternFunctionDeclarationSet += !"declare void @noteGuardHasBeenAccepted ()"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 method @guardMapIR-element enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
@@ -623,4 +623,3 @@ method @guardMapIR-element enterAccessibleEntities
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-

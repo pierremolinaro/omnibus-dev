@@ -23,7 +23,6 @@ struct @intermediateCodeStruct {
   @targetParameters mTargetParameters
   @moduleListIR mModuleList
   @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
-#  @uintFunctionForEnumerationList mUIntFunctionForEnumerationList
   @generationListIR mGenerationListIR
 }
 

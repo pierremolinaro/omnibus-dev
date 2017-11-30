@@ -81,11 +81,11 @@ def runCommand (command) :
 
 def compileSource (source) :
   print MAGENTA() + BOLD () + "********** Compile " + os.path.basename (os.getcwd ()) + "/" + source + ENDC ()
-  command = ["../../../makefile-macosx/plm", "--no-panic-generation", "-v", "--Oz", source]
+  command = ["time", "../../../makefile-macosx/plm", "--no-panic-generation", "-v", "--Oz", source]
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)
-  command = ["../../../makefile-macosx/plm", "-v", "--Oz", source]
+  command = ["time", "../../../makefile-macosx/plm", "-v", "--Oz", source]
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)

@@ -152,6 +152,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
       !propertyMap:{}
       !classConstantMap:{}
       !constructorMap:constructorMap
+      !guardMap:{}
       !typeAttributes:attributes
       !plmTypeName:mAnonymousOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}

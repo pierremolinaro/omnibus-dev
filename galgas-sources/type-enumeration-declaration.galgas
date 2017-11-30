@@ -153,6 +153,7 @@ override method @enumerationDeclarationAST enterInContext
     !propertyMap:propertyMap
     !classConstantMap:enumConstantMap
     !constructorMap:{}
+    !guardMap:{}
     !typeAttributes:.all
     !plmTypeName:mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}

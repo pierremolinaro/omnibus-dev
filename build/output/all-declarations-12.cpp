@@ -2834,6 +2834,7 @@ const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/pr
   "task T\xC3""\xA2""che2 priority 2 stackSize 512 {\n"
   "  var gate = $synchronizationGate (!isOpen:no)\n"
   "  entry openGate : self.gate.open ()\n"
+  "  guard waitOnGate : self.gate.wait ()\n"
   " \n"
   "  on self.gate.wait () {\n"
   "    toggle (!port:LED_L1)\n"
@@ -2844,7 +2845,7 @@ const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/pr
   "\n"
   "task T\xC3""\xA2""che3 priority 3 stackSize 512 {\n"
   "   \n"
-  "  on gate.wait () {\n"
+  "  on T\xC3""\xA2""che2.waitOnGate () {\n"
   "    toggle (!port:LED_L2)\n"
   "    T\xC3""\xA2""che1.signal ()\n"
   "    T\xC3""\xA2""che1.wait ()\n"
@@ -2857,7 +2858,7 @@ const cRegularFileWrapper gWrapperFile_20_embeddedSampleCode (
   "07-synchronization-gate.plm",
   "plm",
   true, // Text file
-  3719, // Text length
+  3766, // Text length
   gWrapperFileContent_20_embeddedSampleCode
 ) ;
 
