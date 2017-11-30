@@ -14,6 +14,7 @@ struct @PLMType {
   @propertyMap propertyMap %selector # Properties and methods
   @classConstantMap classConstantMap %selector # $type.cst, as enumeration values
   @constructorMap constructorMap %selector # $type (!... !...)
+  @guardMapForContext guardMap %selector
   @PLMTypeAttributes typeAttributes %selector # as instanciable, copyable, ...
   @string plmTypeName %selector # Without le leading '$'; empty string for void type kind
   @typeKind kind %selector
@@ -26,7 +27,7 @@ enum @typeKind {
   case boolean
   case literalString
   case enumeration (@uint bitCount)
-  case structure (@propertyList propertyList @guardMapForContext guardMap)
+  case structure (@propertyList propertyList)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
@@ -42,6 +43,7 @@ func booleanType -> @PLMType {
     !propertyMap:{}
     !classConstantMap:{}
     !constructorMap:{}
+    !guardMap:{}
     !typeAttributes:.all
     !plmTypeName:boolTypeName ()
     !kind:.boolean
@@ -55,6 +57,7 @@ func staticIntegerType -> @PLMType {
     !propertyMap:{}
     !classConstantMap:{}
     !constructorMap:{}
+    !guardMap:{}
     !typeAttributes:.equatable | .copyable
     !plmTypeName:staticIntegerTypeName ()
     !kind:.staticInteger
@@ -68,6 +71,7 @@ func literalStringType -> @PLMType {
     !propertyMap:{}
     !classConstantMap:{}
     !constructorMap:{}
+    !guardMap:{}
     !typeAttributes:.all
     !plmTypeName:staticStringTypeName () 
     !kind:.literalString
@@ -81,6 +85,7 @@ func voidType -> @PLMType {
     !propertyMap:{}
     !classConstantMap:{}
     !constructorMap:{}
+    !guardMap:{}
     !typeAttributes:.none
     !plmTypeName:""
     !kind:.void
@@ -94,33 +99,11 @@ func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
     !propertyMap:{}
     !classConstantMap:{}
     !constructorMap:{}
+    !guardMap:{}
     !typeAttributes:.none
     !plmTypeName:""
     !kind:.function {!descriptor:inDescriptor}
   }
-}
-
-#·······················································································································
-
-getter @PLMType guardMap -> @guardMapForContext {
-  switch kind
-  case void, boolean, literalString, staticInteger :
-    result = {}
-  case enumeration (*) :
-    result = {}
-  case structure (* @guardMapForContext guardMap) :
-    result = guardMap
-  case integer (* * * *) :
-    result = {}
-  case opaque (*) :
-    result = {}
-  case arrayType (* *) :
-    result = {}
-  case function (*) :
-    result = {}
-  case pointer (*) :
-    result = {}
-  end
 }
 
 #·······················································································································
@@ -165,7 +148,7 @@ getter @PLMType llvmTypeName -> @string {
     result = "i8*"
   case enumeration (@uint bitCount) :
     result = "i" + bitCount
-  case structure (* *) :
+  case structure (*) :
     result = "%" + [llvmTypeNameFromPLMname (![plmTypeName nowhere]) assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
@@ -209,7 +192,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Literal String"
   case enumeration (*) :
     result = "Enumeration"
-  case structure (* *) :
+  case structure (*) :
     result = "Structure"
   case integer (* * @bool unsigned @uint bitCount) :
     result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end

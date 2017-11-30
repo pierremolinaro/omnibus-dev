@@ -7604,12 +7604,10 @@ typeComparisonResult cEnumAssociatedValues_typeKind_enumeration::compare (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_typeKind_structure::cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyList & inAssociatedValue0,
-                                                                                    const GALGAS_guardMapForContext & inAssociatedValue1
+cEnumAssociatedValues_typeKind_structure::cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyList & inAssociatedValue0
                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
+mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7618,7 +7616,6 @@ void cEnumAssociatedValues_typeKind_structure::description (C_String & ioString,
                                                             const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -7630,9 +7627,6 @@ typeComparisonResult cEnumAssociatedValues_typeKind_structure::compare (const cE
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
   }
   return result ;
 }
@@ -7854,14 +7848,13 @@ GALGAS_typeKind GALGAS_typeKind::constructor_enumeration (const GALGAS_uint & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typeKind GALGAS_typeKind::constructor_structure (const GALGAS_propertyList & inAssociatedValue0,
-                                                        const GALGAS_guardMapForContext & inAssociatedValue1
+GALGAS_typeKind GALGAS_typeKind::constructor_structure (const GALGAS_propertyList & inAssociatedValue0
                                                         COMMA_LOCATION_ARGS) {
   GALGAS_typeKind result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+  if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_structure ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_typeKind_structure (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_typeKind_structure (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -7974,19 +7967,16 @@ void GALGAS_typeKind::method_enumeration (GALGAS_uint & outAssociatedValue0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_typeKind::method_structure (GALGAS_propertyList & outAssociatedValue0,
-                                        GALGAS_guardMapForContext & outAssociatedValue1,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_structure) {
     outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
     C_String s ;
     s << "method @typeKind structure invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_typeKind_structure * ptr = (const cEnumAssociatedValues_typeKind_structure *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 

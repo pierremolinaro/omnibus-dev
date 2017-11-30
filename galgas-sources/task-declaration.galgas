@@ -184,6 +184,7 @@ method @taskListAST enterInContext
       ]
     end
   #------------------------- Enter task entries
+    @guardMapForContext guardMap = {}
     @decoratedTaskGuardList decoratedTaskGuardList = {}
     for guard in task.mTaskGuardListAST do
       [guard enterInContext
@@ -191,7 +192,7 @@ method @taskListAST enterInContext
         !?context:ioContext
         !?ioSubprogramInvocationGraph
         !?decoratedTaskGuardList 
-        !?propertyMap
+        !?guardMap
       ]
     end
   #---------------- Enter task variable map as structure type in type map
@@ -199,9 +200,10 @@ method @taskListAST enterInContext
       !propertyMap:propertyMap
       !classConstantMap:{}
       !constructorMap:{}
+      !guardMap:guardMap
       !typeAttributes:.none
       !plmTypeName:task.mTaskName
-      !kind:.structure {!propertyList:propertyList !guardMap:{}}
+      !kind:.structure {!propertyList:propertyList}
     }
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
@@ -389,6 +391,7 @@ method @decoratedLaskList-element semanticAnalysis
     !mStackSize.bigint
     !setupAllocaList
     !setupInstructionListIR
+#    !taskGuardListIR
     !taskNameStringIndex
   ]
 }

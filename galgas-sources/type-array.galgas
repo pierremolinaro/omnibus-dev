@@ -149,6 +149,7 @@ override method @typeArrayDeclarationAST enterInContext
       !propertyMap:arrayTypePropertyMap
       !classConstantMap:classConstantMap
       !constructorMap:constructorMap
+      !guardMap:{}
       !typeAttributes:typeAttributes
       !plmTypeName:mAnonymousArrayTypeName
       !kind:.arrayType {!elementType:elementType !size:arraySize}

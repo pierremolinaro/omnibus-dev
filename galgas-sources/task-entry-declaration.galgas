@@ -129,6 +129,9 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
     case constantProperty (*) :
       error propertyName : "a constant property is not allowed here"
     case indexed (@PLMType type @uint index) :
+      if [type copyable] then
+        error propertyName : "the property type $" + type.plmTypeName + " is copyable"
+      end
       [!?ioTemporaries newTempLLVMVar ?let llvmName]
       [!?instructionGenerationList appendGetUniversalPropertyReference
         !currentType
@@ -195,14 +198,14 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
   #--- Build arguments
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     effectiveParameterListIR += !.outputInput !.reference {!type:currentType !llvmName:currentLLVMName}
-    for () in formalArguments do
-      switch mFormalArgumentKind
+    for (kind type name) in formalArguments do
+      switch kind
       case input :
-        effectiveParameterListIR += !.output !.reference {!type:mFormalArgumentType !llvmName:"%in." + mFormalArgumentName}
+        effectiveParameterListIR += !.output !.reference {!type:type !llvmName:"%in." + name}
       case output :
-         effectiveParameterListIR += !.input !.llvmValue {!type:mFormalArgumentType !llvmName:"%var." + mFormalArgumentName}
+         effectiveParameterListIR += !.input !.llvmValue {!type:type !llvmName:"%var." + name}
      case inputOutput :
-        effectiveParameterListIR += !.outputInput !.reference {!type:mFormalArgumentType !llvmName:"%var." + mFormalArgumentName}
+        effectiveParameterListIR += !.outputInput !.reference {!type:type !llvmName:"%var." + name}
       end
     end
   #--- Generate call instruction
@@ -231,10 +234,5 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
 
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

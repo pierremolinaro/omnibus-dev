@@ -164,6 +164,7 @@ override method @integerDeclarationAST enterInContext
     !propertyMap:propertyMap
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap
+    !guardMap:{}
     !typeAttributes:.all
     !plmTypeName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}

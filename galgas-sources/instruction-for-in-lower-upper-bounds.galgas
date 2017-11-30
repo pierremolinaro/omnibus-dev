@@ -103,7 +103,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     error mTypeName : "an integer type is required here"
   case staticInteger :
     error mTypeName : "an integer type is required here"
-  case structure (* *) :
+  case structure (*) :
     error mTypeName : "an integer type is required here"
   case pointer (*) :
     error mTypeName : "an integer type is required here"
