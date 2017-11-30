@@ -4970,6 +4970,8 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_taskEntryListAST mProperty_mTaskEntryListAST ;
 
+  public : GALGAS_taskGuardListAST mProperty_mTaskGuardListAST ;
+
   public : GALGAS_location mProperty_mEndOfTaskDeclaration ;
 
 //--------------------------------- Accessors
@@ -4994,6 +4996,7 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
                                           const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
                                           const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
                                           const GALGAS_taskEntryListAST & in_mTaskEntryListAST,
+                                          const GALGAS_taskGuardListAST & in_mTaskGuardListAST,
                                           const GALGAS_location & in_mEndOfTaskDeclaration) ;
 
 //-- Start of generic part --*
@@ -5015,7 +5018,8 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
                                                                        const class GALGAS_taskSetupListAST & inOperand5,
                                                                        const class GALGAS_syncInstructionBranchListAST & inOperand6,
                                                                        const class GALGAS_taskEntryListAST & inOperand7,
-                                                                       const class GALGAS_location & inOperand8
+                                                                       const class GALGAS_taskGuardListAST & inOperand8,
+                                                                       const class GALGAS_location & inOperand9
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -5039,6 +5043,8 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mStackSize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskEntryListAST getter_mTaskEntryListAST (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_taskGuardListAST getter_mTaskGuardListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTaskName (LOCATION_ARGS) const ;
 

@@ -10,6 +10,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Routine 'enterLiteralIntegerOperators'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterLiteralIntegerOperators (class GALGAS_semanticContext & ioArgument0,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                               Function 'userModeName'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -524,52 +534,4 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
                                                             const class GALGAS_location & constinArgument3,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Routine 'handleArraySubscriptNew'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
-                                      const class GALGAS_bool constinArgument1,
-                                      const class GALGAS_lstring constinArgument2,
-                                      const class GALGAS_semanticContext constinArgument3,
-                                      const class GALGAS_mode constinArgument4,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                      class GALGAS_staticStringMap & ioArgument6,
-                                      class GALGAS_universalValuedObjectMapForContext & ioArgument7,
-                                      class GALGAS_allocaList & ioArgument8,
-                                      const class GALGAS_expressionAST constinArgument9,
-                                      const class GALGAS_location constinArgument10,
-                                      const class GALGAS_bigint constinArgument11,
-                                      const class GALGAS_PLMType constinArgument12,
-                                      class GALGAS_instructionListIR & ioArgument13,
-                                      class GALGAS_objectIR & outArgument14,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Routine 'handleArraySubscript'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleArraySubscript (const class GALGAS_PLMType constinArgument0,
-                                   const class GALGAS_bool constinArgument1,
-                                   const class GALGAS_lstring constinArgument2,
-                                   const class GALGAS_semanticContext constinArgument3,
-                                   const class GALGAS_mode constinArgument4,
-                                   class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                   class GALGAS_staticStringMap & ioArgument6,
-                                   class GALGAS_universalValuedObjectMapForContext & ioArgument7,
-                                   class GALGAS_allocaList & ioArgument8,
-                                   const class GALGAS_expressionAST constinArgument9,
-                                   const class GALGAS_location constinArgument10,
-                                   const class GALGAS_bigint constinArgument11,
-                                   const class GALGAS_PLMType constinArgument12,
-                                   class GALGAS_instructionListIR & ioArgument13,
-                                   class GALGAS_objectIR & ioArgument14,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
 

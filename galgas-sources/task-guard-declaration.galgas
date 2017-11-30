@@ -2,11 +2,10 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @taskEntryListAST {
-  @lstring mEntryName
-  @routineFormalArgumentListAST mEntryFormalArgumentList
-  @lstring mEntryReturnTypeName
-  @lstringlist mEntryPath
+list @taskGuardListAST {
+  @lstring mGuardName
+  @routineFormalArgumentListAST mGuardFormalArgumentList
+  @lstringlist mGuardPath
 }
 
 
@@ -18,28 +17,21 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <task_entry_declaration> ?!@ast ioAST ?!@taskEntryListAST ioTaskEntryListAST {
-    $entry$
-    $identifier$ ?let entryName
+  rule <task_guard_declaration> ?!@ast ioAST ?!@taskGuardListAST ioTaskEntryListAST {
+    $guard$
+    $identifier$ ?let guardName
     $:$
     $self$
     $.$
-    @lstringlist entryPath = {}
+    @lstringlist guardPath = {}
     repeat
       $identifier$ ?let propertyName
-      entryPath += !propertyName
+      guardPath += !propertyName
     while
       $.$
     end
     <procedure_formal_arguments> !?ioAST ?let @routineFormalArgumentListAST formalArgumentList
-    @lstring returnTypeName
-    select
-      returnTypeName = ["" here]
-    or
-      $->$
-      <type_definition> !?ioAST ?returnTypeName
-    end
-    ioTaskEntryListAST += !entryName !formalArgumentList !returnTypeName !entryPath
+    ioTaskEntryListAST += !guardName !formalArgumentList !guardPath
   }
 
   #·····················································································································
@@ -50,50 +42,47 @@ syntax extension plm_syntax {
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskEntryListAST-element enterInContext
+method @taskGuardListAST-element enterInContext
   ?taskName:let @lstring inTaskName
   ?!context:@semanticContext ioContext
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
-  ?!@decoratedTaskEntryList ioDecoratedTaskEntryList 
+  ?!@decoratedTaskGuardList ioDecoratedTaskGuardList 
   ?!@propertyMap ioTaskPropertyMap
 {
 #--- Attributes
   let exportedRoutine = true # [attributeSet hasKey !exportedAttribute ()]
   let canMutateProperties = true # [attributeSet hasKey !mutatingAttribute ()]
 #--- Entry mangled name
-  let entryMangledName = routineMangledNameFromAST (!"" !mEntryName !mEntryFormalArgumentList)
+  let entryMangledName = routineMangledNameFromAST (!"" !mGuardName !mGuardFormalArgumentList)
 #--- Entry signature
-  routineSignature (!?ioContext.mTypeMap !mEntryFormalArgumentList ?let entrySignature)
-#--- Return type
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mEntryReturnTypeName ?let returnTypeProxy]
+  routineSignature (!?ioContext.mTypeMap !mGuardFormalArgumentList ?let entrySignature)
 #--- Routine descriptor
   let descriptor = @routineDescriptor.new {
     !isPublic:true
     !exported:exportedRoutine
     !routineKind:.function {!executionMode:.userMode}
     !signature:entrySignature
-    !returnTypeProxy:returnTypeProxy
+    !returnTypeProxy:.null
     !canAccessProperties:true
     !canMutateProperties:canMutateProperties
   }
 #--- Enter in structure map
   [!?ioTaskPropertyMap insertKey !entryMangledName !true !.nonVirtualMethod {!descriptor:descriptor}]
 #--- Extract method name
-   var propertyAccessPath = mEntryPath
+   var propertyAccessPath = mGuardPath
    [!?propertyAccessPath popLast ?let methodName]
 #--- Enter in decorated entry list
-  ioDecoratedTaskEntryList +=
-    !mEntryName
-    !mEntryFormalArgumentList
+  ioDecoratedTaskGuardList +=
+    !mGuardName
+    !mGuardFormalArgumentList
     !entrySignature
-    !returnTypeProxy
     !propertyAccessPath
     !methodName
 #--- Invocation graph
   let entryMangledNameForInvocationGraph = routineMangledNameFromAST (
     !llvmTypeStringFromPLMname (!inTaskName)
-    !mEntryName
-    !mEntryFormalArgumentList
+    !mGuardName
+    !mGuardFormalArgumentList
   )
   [!?ioSubprogramInvocationGraph addNode !entryMangledNameForInvocationGraph !entryMangledNameForInvocationGraph]
 }
@@ -102,18 +91,17 @@ method @taskEntryListAST-element enterInContext
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @decoratedTaskEntryList {
-  @lstring mEntryName
-  @routineFormalArgumentListAST mEntryFormalArgumentList
-  @routineTypedSignature mEntrySignature
-  @unifiedTypeMap-proxy mEntryReturnTypeProxy
-  @lstringlist mEntryPath
-  @lstring mInvokedMethodName
+list @decoratedTaskGuardList {
+  @lstring mGuardName
+  @routineFormalArgumentListAST mGuardFormalArgumentList
+  @routineTypedSignature mGuardSignature
+  @lstringlist mGuardPath
+  @lstring mInvokedGuardName
 }
 
 #·······················································································································
 
-method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
+method @decoratedTaskGuardList-element taskGuardSemanticAnalysis
   ?taskType:let @PLMType inTaskType
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -123,7 +111,7 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   var currentType = inTaskType
   var currentLLVMName = "%self"
-  for (propertyName) in mEntryPath do
+  for (propertyName) in mGuardPath do
     [currentType.propertyMap searchKey !propertyName ?let @bool unused isPublic ?let propertyAccessKind]
     switch propertyAccessKind
     case constantProperty (*) :
@@ -144,34 +132,25 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
     end
   end
 #--- Invoked method mangled name
-  let invokedMethodMangledName = routineMangledNameFromAST (!"" !mInvokedMethodName !mEntryFormalArgumentList)
+  let invokedMethodMangledName = routineMangledNameFromAST (!"" !mInvokedGuardName !mGuardFormalArgumentList)
 #--- Analyze invoked method
   [currentType.propertyMap searchKey !invokedMethodMangledName ?let @bool unused isPublic ?let methodAccessKind]
   switch methodAccessKind
   case constantProperty (*) :
-    error mInvokedMethodName : "a constant property is not allowed here"
+    error mInvokedGuardName : "a constant property is not allowed here"
   case indexed (* *) :
-    error mInvokedMethodName : "a property is not allowed here"
+    error mInvokedGuardName : "a property is not allowed here"
   case nonVirtualMethod (@routineDescriptor descriptor) :
-    if mEntryReturnTypeProxy != descriptor.returnTypeProxy then
-      error mEntryName
-      : "entry return type does not conform to invoked method return type"
-    end
   #--- Invocation graph
     let entryMangledNameForInvocationGraph = routineMangledNameFromAST (
       !llvmTypeStringFromPLMname (!inTaskType.plmTypeName) # mTaskName)
-      !mEntryName
-      !mEntryFormalArgumentList
+      !mGuardName
+      !mGuardFormalArgumentList
     )
-    let returnType = if mEntryReturnTypeProxy == .null then
-      voidType ()
-    else
-      [mEntryReturnTypeProxy type]
-    end
     let invokedMethodMangledNameForInvocationGraph = routineMangledNameFromAST (
       !llvmTypeStringFromPLMname (!currentType.plmTypeName)
-      !mInvokedMethodName
-      !mEntryFormalArgumentList
+      !mInvokedGuardName
+      !mGuardFormalArgumentList
     )
     [!?ioTemporaries.mSubprogramInvocationGraph addEdge
       !entryMangledNameForInvocationGraph
@@ -181,7 +160,7 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
     @routineFormalArgumentListIR formalArguments = {}
     enterFormalArguments (
       !context:inContext
-      !mEntryFormalArgumentList
+      !mGuardFormalArgumentList
       !?*
       !?formalArguments
     )
@@ -190,7 +169,7 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
       !callerMode:.userMode
       !calleeMode:.userMode
       !kind:descriptor.routineKind
-      !error:mInvokedMethodName.location
+      !error:mInvokedGuardName.location
     )
   #--- Build arguments
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
@@ -207,7 +186,7 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
     end
   #--- Generate call instruction
     instructionGenerationList += !@staticRoutineCallIR.new {
-      !mInvokedMethodName
+      !mInvokedGuardName
       !.null # No result
       !invokedMethodMangledNameForInvocationGraph
       !invokedMethodMangledNameForInvocationGraph # LLVMInvocationRoutineName
@@ -225,7 +204,7 @@ method @decoratedTaskEntryList-element taskEntrySemanticAnalysis
       !true # inWarnIfUnused
       !false # inGlobalFunction
       !.function {!executionMode:.userMode}
-      !returnType
+      !voidType ()
       !false
     ]
 
