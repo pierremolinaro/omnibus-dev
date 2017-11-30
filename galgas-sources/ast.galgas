@@ -34,7 +34,7 @@ struct @ast {
   @externProcedureDeclarationListAST mExternProcListAST
   @isrDeclarationListAST mISRDeclarationListAST
   @systemRoutineDeclarationListAST mStandAloneSystemRoutineListAST
-  @guardDeclarationListAST mGuardListAST
+#  @guardDeclarationListAST mGuardListAST
   @lstringlist mTargetListAST
   @taskListAST mTaskListAST
   @checkTargetListAST mCheckTargetListAST

@@ -52,7 +52,7 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var sémaphore = $semaphore (!value:0)
 
-  entry signal () : self.sémaphore.signal
+  entry signal : self.sémaphore.signal ()
 
   on self.sémaphore.wait () {
     digitalWrite (!port:LED_L2 !yes)

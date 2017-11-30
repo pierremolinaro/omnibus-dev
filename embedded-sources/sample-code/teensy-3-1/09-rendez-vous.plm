@@ -96,19 +96,15 @@ struct $rendezVous {
 
 //-----------------------------------------------------------------------------*
 
-var rdvs = $rendezVous ()
-
-//-----------------------------------------------------------------------------*
-
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
   on time.wait (!untilDeadline:self.top) {
-    rdvs.output ()
+    T1.enter ()
     self.top += 250
     digitalWrite (!port:LED_L0 !yes)
     time.wait (!untilDeadline:self.top)
-    rdvs.output ()
+    T1.enter ()
     self.top += 250
     digitalWrite (!port:LED_L0 !no)
   }
@@ -117,10 +113,13 @@ task T0 priority 0 stackSize 512 {
 //-----------------------------------------------------------------------------*
 
 task T1 priority 1 stackSize 512 {
+  var rdvs = $rendezVous ()
 
-  on rdvs.input () {
+  entry enter : self.rdvs.output ()
+ 
+  on self.rdvs.input () {
     digitalWrite (!port:LED_L1 !yes)
-    rdvs.input ()
+    self.rdvs.input ()
     digitalWrite (!port:LED_L1 !no)
   }
 }
