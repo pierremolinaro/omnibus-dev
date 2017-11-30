@@ -590,9 +590,6 @@ override method @syncInstructionIR enterAccessibleEntities
       [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioAccessibleEntities.mGuardSet += !guardMangledName
-#      if optionalReceiverName != "" then
-#        ioAccessibleEntities.mGlobalVariableSet += !optionalReceiverName
-#      end
     end
   end
 }

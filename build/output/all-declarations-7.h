@@ -951,19 +951,19 @@ void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const class c
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             @staticRoutineCallIR class                                              *
+//                                           @standaloneRoutineCallIR class                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_staticRoutineCallIR : public GALGAS_abstractInstructionIR {
+class GALGAS_standaloneRoutineCallIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
-  public : GALGAS_staticRoutineCallIR (void) ;
+  public : GALGAS_standaloneRoutineCallIR (void) ;
 
 //---
-  public : inline const class cPtr_staticRoutineCallIR * ptr (void) const { return (const cPtr_staticRoutineCallIR *) mObjectPtr ; }
+  public : inline const class cPtr_standaloneRoutineCallIR * ptr (void) const { return (const cPtr_standaloneRoutineCallIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_staticRoutineCallIR (const cPtr_staticRoutineCallIR * inSourcePtr) ;
+  public : GALGAS_standaloneRoutineCallIR (const cPtr_standaloneRoutineCallIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -971,21 +971,21 @@ class GALGAS_staticRoutineCallIR : public GALGAS_abstractInstructionIR {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_staticRoutineCallIR extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_standaloneRoutineCallIR extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_staticRoutineCallIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                    const class GALGAS_objectIR & inOperand1,
-                                                                    const class GALGAS_lstring & inOperand2,
-                                                                    const class GALGAS_lstring & inOperand3,
-                                                                    const class GALGAS_calleeKindIR & inOperand4,
-                                                                    const class GALGAS_procCallEffectiveParameterListIR & inOperand5
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_standaloneRoutineCallIR constructor_new (const class GALGAS_string & inOperand0,
+                                                                        const class GALGAS_objectIR & inOperand1,
+                                                                        const class GALGAS_lstring & inOperand2,
+                                                                        const class GALGAS_lstring & inOperand3,
+                                                                        const class GALGAS_calleeKindIR & inOperand4,
+                                                                        const class GALGAS_procCallEffectiveParameterListIR & inOperand5
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_staticRoutineCallIR & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_standaloneRoutineCallIR & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1009,20 +1009,20 @@ class GALGAS_staticRoutineCallIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_staticRoutineCallIR class
+} ; // End of GALGAS_standaloneRoutineCallIR class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticRoutineCallIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standaloneRoutineCallIR ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                    Pointer class for @staticRoutineCallIR class                                     *
+//                                  Pointer class for @standaloneRoutineCallIR class                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_staticRoutineCallIR : public cPtr_abstractInstructionIR {
+class cPtr_standaloneRoutineCallIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mProperty_mGlobalVariableName ;
   public : GALGAS_objectIR mProperty_mResult ;
@@ -1032,13 +1032,13 @@ class cPtr_staticRoutineCallIR : public cPtr_abstractInstructionIR {
   public : GALGAS_procCallEffectiveParameterListIR mProperty_mArgumentList ;
 
 //--- Constructor
-  public : cPtr_staticRoutineCallIR (const GALGAS_string & in_mGlobalVariableName,
-                                     const GALGAS_objectIR & in_mResult,
-                                     const GALGAS_lstring & in_mFunctionMangledName,
-                                     const GALGAS_lstring & in_mFunctionNameForGeneration,
-                                     const GALGAS_calleeKindIR & in_mKind,
-                                     const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList
-                                     COMMA_LOCATION_ARGS) ;
+  public : cPtr_standaloneRoutineCallIR (const GALGAS_string & in_mGlobalVariableName,
+                                         const GALGAS_objectIR & in_mResult,
+                                         const GALGAS_lstring & in_mFunctionMangledName,
+                                         const GALGAS_lstring & in_mFunctionNameForGeneration,
+                                         const GALGAS_calleeKindIR & in_mKind,
+                                         const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList
+                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;

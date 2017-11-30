@@ -11839,177 +11839,6 @@ GALGAS_computeSubscriptedVolatileRegisterAddress GALGAS_computeSubscriptedVolati
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Extension method '@instructionListIR appendNoteGlobalVariableAccess'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendNoteGlobalVariableAccess (GALGAS_instructionListIR & ioObject,
-                                                     const GALGAS_string constinArgument_inGlobalVarName,
-                                                     C_Compiler * /* inCompiler */
-                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_noteGlobalVariableAccessIR::constructor_new (constinArgument_inGlobalVarName  COMMA_SOURCE_FILE ("intermediate-note-global-variable-access.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-note-global-variable-access.galgas", 3)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_noteGlobalVariableAccessIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_noteGlobalVariableAccessIR * p = (const cPtr_noteGlobalVariableAccessIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_noteGlobalVariableAccessIR) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mGlobalVarName.objectCompare (p->mProperty_mGlobalVarName) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_noteGlobalVariableAccessIR::objectCompare (const GALGAS_noteGlobalVariableAccessIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_noteGlobalVariableAccessIR::GALGAS_noteGlobalVariableAccessIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_noteGlobalVariableAccessIR GALGAS_noteGlobalVariableAccessIR::constructor_default (LOCATION_ARGS) {
-  return GALGAS_noteGlobalVariableAccessIR::constructor_new (GALGAS_string::constructor_default (HERE)
-                                                             COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_noteGlobalVariableAccessIR::GALGAS_noteGlobalVariableAccessIR (const cPtr_noteGlobalVariableAccessIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_noteGlobalVariableAccessIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_noteGlobalVariableAccessIR GALGAS_noteGlobalVariableAccessIR::constructor_new (const GALGAS_string & inAttribute_mGlobalVarName
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_noteGlobalVariableAccessIR result ;
-  if (inAttribute_mGlobalVarName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_noteGlobalVariableAccessIR (inAttribute_mGlobalVarName COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_noteGlobalVariableAccessIR::getter_mGlobalVarName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_noteGlobalVariableAccessIR * p = (const cPtr_noteGlobalVariableAccessIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_noteGlobalVariableAccessIR) ;
-    result = p->mProperty_mGlobalVarName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_noteGlobalVariableAccessIR::getter_mGlobalVarName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mGlobalVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                 Pointer class for @noteGlobalVariableAccessIR class                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_noteGlobalVariableAccessIR::cPtr_noteGlobalVariableAccessIR (const GALGAS_string & in_mGlobalVarName
-                                                                  COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mProperty_mGlobalVarName (in_mGlobalVarName) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_noteGlobalVariableAccessIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_noteGlobalVariableAccessIR ;
-}
-
-void cPtr_noteGlobalVariableAccessIR::description (C_String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString << "[@noteGlobalVariableAccessIR:" ;
-  mProperty_mGlobalVarName.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_noteGlobalVariableAccessIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_noteGlobalVariableAccessIR (mProperty_mGlobalVarName COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @noteGlobalVariableAccessIR type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_noteGlobalVariableAccessIR ("noteGlobalVariableAccessIR",
-                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_noteGlobalVariableAccessIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_noteGlobalVariableAccessIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_noteGlobalVariableAccessIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_noteGlobalVariableAccessIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_noteGlobalVariableAccessIR GALGAS_noteGlobalVariableAccessIR::extractObject (const GALGAS_object & inObject,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_noteGlobalVariableAccessIR result ;
-  const GALGAS_noteGlobalVariableAccessIR * p = (const GALGAS_noteGlobalVariableAccessIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_noteGlobalVariableAccessIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("noteGlobalVariableAccessIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                        Extension method '@instructionListIR appendStoreToUniversalReference'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14993,6 +14822,136 @@ GALGAS_staticListValueListAST_2D_element GALGAS_staticListValueListAST_2D_elemen
       result = *p ;
     }else{
       inCompiler->castError ("staticListValueListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticListElementListAST_2D_element::GALGAS_extendStaticListElementListAST_2D_element (void) :
+mProperty_mExpression (),
+mProperty_mEndOfExpression () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticListElementListAST_2D_element::~ GALGAS_extendStaticListElementListAST_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticListElementListAST_2D_element::GALGAS_extendStaticListElementListAST_2D_element (const GALGAS_extendStaticListExpressionAST & inOperand0,
+                                                                                                    const GALGAS_location & inOperand1) :
+mProperty_mExpression (inOperand0),
+mProperty_mEndOfExpression (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticListElementListAST_2D_element GALGAS_extendStaticListElementListAST_2D_element::constructor_new (const GALGAS_extendStaticListExpressionAST & inOperand0,
+                                                                                                                    const GALGAS_location & inOperand1 
+                                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_extendStaticListElementListAST_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_extendStaticListElementListAST_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_extendStaticListElementListAST_2D_element::objectCompare (const GALGAS_extendStaticListElementListAST_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mExpression.objectCompare (inOperand.mProperty_mExpression) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mEndOfExpression.objectCompare (inOperand.mProperty_mEndOfExpression) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_extendStaticListElementListAST_2D_element::isValid (void) const {
+  return mProperty_mExpression.isValid () && mProperty_mEndOfExpression.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_extendStaticListElementListAST_2D_element::drop (void) {
+  mProperty_mExpression.drop () ;
+  mProperty_mEndOfExpression.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_extendStaticListElementListAST_2D_element::description (C_String & ioString,
+                                                                    const int32_t inIndentation) const {
+  ioString << "<struct @extendStaticListElementListAST-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mExpression.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mEndOfExpression.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticListExpressionAST GALGAS_extendStaticListElementListAST_2D_element::getter_mExpression (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_extendStaticListElementListAST_2D_element::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mEndOfExpression ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    @extendStaticListElementListAST-element type                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_extendStaticListElementListAST_2D_element ("extendStaticListElementListAST-element",
+                                                                  NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_extendStaticListElementListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_extendStaticListElementListAST_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_extendStaticListElementListAST_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_extendStaticListElementListAST_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_extendStaticListElementListAST_2D_element GALGAS_extendStaticListElementListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                                  C_Compiler * inCompiler
+                                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_extendStaticListElementListAST_2D_element result ;
+  const GALGAS_extendStaticListElementListAST_2D_element * p = (const GALGAS_extendStaticListElementListAST_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_extendStaticListElementListAST_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("extendStaticListElementListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
