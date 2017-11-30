@@ -6,7 +6,6 @@
 
 struct @intermediateCodeStruct {
   @staticStringMap mStaticStringMap
-  @globalVariableMapIR mGlobalVariableMap
   @globalConstantMapIR mGlobalConstantMap
   @routineMapIR mRoutineMapIR
   @guardMapIR mGuardMapIR
@@ -28,13 +27,12 @@ struct @intermediateCodeStruct {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @globalVariableMapIR {
-#  @PLMType mType
-  @bool mGenerateVolatile
-  @objectIR mInitialValue
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
-}
+#map @globalVariableMapIR {
+#  @bool mGenerateVolatile
+#  @objectIR mInitialValue
+#  insert insertKey error message "** internal error **"
+#  search searchKey error message "** internal error **"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

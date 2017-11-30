@@ -25,7 +25,6 @@ list @checkTargetListAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @ast {
-  @globalVarDeclarationList mGlobalVarDeclarationListAST
   @declarationListAST mDeclarationListAST
   @extensionDeclarationListAST mExtensionDeclarationListAST
   @extendStaticArrayDeclarationAST mExtendStaticArrayDeclarationAST
@@ -34,7 +33,6 @@ struct @ast {
   @externProcedureDeclarationListAST mExternProcListAST
   @isrDeclarationListAST mISRDeclarationListAST
   @systemRoutineDeclarationListAST mStandAloneSystemRoutineListAST
-#  @guardDeclarationListAST mGuardListAST
   @lstringlist mTargetListAST
   @taskListAST mTaskListAST
   @checkTargetListAST mCheckTargetListAST

@@ -124,22 +124,6 @@ setter @universalValuedObjectMapForContext insertUsedLocalConstant
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext insertGlobalVariable
-  ?let @lstring inGlobalVariableName
-  ?let @PLMType inType
-  ?let @bool inWritable
-{
-  let newValue = @valuedObject.globalVariable {!writable:inWritable !type:inType}
-  [!?mInternalPropertyAndRoutineMapForContext insertKey
-    !inGlobalVariableName
-    !.noValue
-    !false
-    !newValue
-  ]
-}
-
-#·······················································································································
-
 setter @universalValuedObjectMapForContext insertLocalVariable
   ?let @lstring inLocalVariableName
   ?let @PLMType inType
@@ -641,12 +625,6 @@ proc initialVariableMap
 #------------------------------------------------------- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outUniversalMap insertGlobalConstant !constantName !constantValue]
-  end
-#------------------------------------------------------- Add global variables
-  for variable in inContext.mGlobalVariableMap do
-    [!?outUniversalMap insertGlobalVariable !variable.lkey !variable.type !not inGlobalsAreConstant]
-    var writeAccess = variable.allowedAccessToAll
-    var allowedAccess = writeAccess
   end
 #------------------------------------------------------- Add result variable ?
   if inReturnTypeName.string != "" then

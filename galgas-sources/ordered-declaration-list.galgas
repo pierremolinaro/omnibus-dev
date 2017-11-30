@@ -32,8 +32,6 @@ proc buildOrderedDeclarationList
   [inAST.mStandAloneFunctionDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mExternProcListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mStandAloneSystemRoutineListAST noteTypesInPrecedenceGraph !?precedenceGraph]
-#  [inAST.mGuardListAST noteTypesInPrecedenceGraph !?precedenceGraph]
-  [inAST.mGlobalVarDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed $uintXX and $intXX types
   for () in [precedenceGraph undefinedNodeKeyList] do
