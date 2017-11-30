@@ -304,25 +304,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       !?result: outResult
     )
-  case globalVariable (* @PLMType type) :
-    [!?ioInstructionGenerationList appendNoteGlobalVariableAccess !mReceiverName]
-    [!?ioUniversalMap readAccess !mReceiverName]
-    outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
-    procAnalyzeAccesListInExpression (
-      !self: inSelfType
-      !inGuard: inGuard
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-      !optionalTargetType: inOptionalTargetType
-      !context: inContext
-      !mode: inCurrentMode
-      !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
-      !mAccessList
-      !?result: outResult
-    )
   case localVariable (@PLMType type @lstring plmName) :
     outResult = .reference {!type: type !llvmName:llvmNameForLocalVariable (!plmName)}
     [!?ioUniversalMap readAccess !mReceiverName]

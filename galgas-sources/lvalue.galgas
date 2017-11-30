@@ -200,28 +200,6 @@ method @LValueAST analyzeLValue
       error mIdentifier : "a global constant cannot be written" : outInternalRepresentation
     case localConstant (**) :
       error mIdentifier : "a local constant cannot be written" : outInternalRepresentation
-    case globalVariable (@bool writable @PLMType variableType) :
-      if not writable then
-        error mIdentifier : "a global variable cannot be written in this context" : outInternalRepresentation
-      else
-        [!?ioInstructionGenerationList appendNoteGlobalVariableAccess !mIdentifier]
-        analyzeVariableInLValue (
-          !self: inSelfType
-          !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-          !context: inContext
-          !mode: inCurrentMode
-          !?temporary: ioTemporaries
-          !?staticStringMap: ioGlobalLiteralStringMap
-          !?variableMap: ioUniversalMap
-          !?alloca: ioAllocaList
-          !?instructionListIR: ioInstructionGenerationList
-          !variableName: mIdentifier
-          !llvmName:llvmNameForGlobalVariable (!mIdentifier)
-          !type: variableType
-          !accessList: mAccessList
-          ?outInternalRepresentation
-        )
-      end
     case localVariable (@PLMType variableType @lstring plmName) :
       analyzeVariableInLValue (
         !self: inSelfType

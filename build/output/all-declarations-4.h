@@ -904,24 +904,6 @@ class cEnumAssociatedValues_valuedObject_localConstant : public cEnumAssociatedV
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_valuedObject_globalVariable : public cEnumAssociatedValues {
-  public : const GALGAS_bool mAssociatedValue0 ;
-  public : const GALGAS_PLMType mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_valuedObject_globalVariable (const GALGAS_bool & inAssociatedValue0,
-                                                              const GALGAS_PLMType & inAssociatedValue1
-                                                              COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_valuedObject_globalVariable (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 class cEnumAssociatedValues_valuedObject_localVariable : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
