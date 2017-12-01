@@ -13,7 +13,7 @@ list @functionDeclarationListAST {
   @location mEndOfFunctionDeclaration
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 enum @procFormalArgumentPassingMode {
   case input
@@ -21,7 +21,7 @@ enum @procFormalArgumentPassingMode {
   case inputOutput
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @routineFormalArgumentListAST {
   @procFormalArgumentPassingMode mFormalArgumentPassingMode
@@ -30,7 +30,7 @@ list @routineFormalArgumentListAST {
   @lstring mFormalArgumentName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 getter @procFormalArgumentPassingMode formalPassingModeString -> @string {
   switch self
@@ -40,7 +40,7 @@ getter @procFormalArgumentPassingMode formalPassingModeString -> @string {
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let @string inSelector -> @string {
   switch self
