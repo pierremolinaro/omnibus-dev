@@ -56,7 +56,6 @@ Où \plm=priorité= est la priorité de la routine. C'est une constante entière
 
 Les routines \plm=boot= s'exécutent dans le mode \plm=boot=.\index{boot}
 
-Comme les routines \plm=boot= s'exécutent avant que les variables globales soient initialisées, l'accès aux variables globales y est interdit. L'interdiction est mise en place de la façon suivante : il n'est pas possible d'associer une routine \plm=boot= à une variable globale lors de sa déclaration (\refSectionPage{declarationVariableGlobale}).
 
 Par contre, l'accès aux registres de contrôle est autorisé dans une routine \plm=boot= (d'ailleurs, elle sert à cela : configurer le micro-contrôleur au démarrage).
 
@@ -79,8 +78,6 @@ init priorité {
 Où \plm=priorité= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
 
 Les routines \plm=init= s'exécutent dans le mode \plm=init=.\index{init}
-
-Comme les routines \plm=init= s'exécutent après l'initialisation des variables globales, l'accès aux variables globales y est autorisé, du moment que la variable globale cite le mode \plm=init= dans sa déclaration (\refSectionPage{declarationVariableGlobale}).
 
 
 

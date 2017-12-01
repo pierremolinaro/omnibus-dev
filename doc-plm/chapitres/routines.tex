@@ -409,25 +409,6 @@ En conséquence, les contraintes sur l'écriture de leurs instructions sont impo
 Si la fonction est déclarée avec le mode \plm!user!, seuls les registres de contrôle déclarés \plm!@user! sont accessibles. Dans les autres modes, tous les registres de contrôle sont accessibles.
 
 
-\subsectionLabel{Fonctions et variables globales}{fonctionEtVariableGlobale}
-
-Voir \refSectionPage{restrictionUsageVariableGlobale}.
-
-%Les fonctions peuvent accéder aux variables globales en lecture, mais ne peuvent pas les modifier.
-%
-%L'accès en lecture à une variable globale est autorisé par la variable qui nomme la fonction parmi les routines autorisées~:
-%
-%\begin{PLM}
-%var gGlobalVar $uint56 {
-%  ...
-%  func getGlobalVar
-%}
-%
-%func getGlobalVar user () -> $uint56 {
-%  result = getGlobalVar
-%}
-%\end{PLM}
-%
 
 
 
