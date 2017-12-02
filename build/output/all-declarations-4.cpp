@@ -1359,34 +1359,34 @@ GALGAS_routineArgumentSignatureMapForContext GALGAS_routineArgumentSignatureMapF
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_internalValuedObjectMapMapForContext::cMapElement_internalValuedObjectMapMapForContext (const GALGAS_lstring & inKey,
-                                                                                                    const GALGAS_valuedObjectState & in_mObjectState,
-                                                                                                    const GALGAS_bool & in_mObjectShouldBeValuedAtEndOfScope,
-                                                                                                    const GALGAS_valuedObject & in_mPossibleValuedObject
-                                                                                                    COMMA_LOCATION_ARGS) :
+cMapElement_flatValuedObjectMap::cMapElement_flatValuedObjectMap (const GALGAS_lstring & inKey,
+                                                                  const GALGAS_valuedObjectState & in_mObjectState,
+                                                                  const GALGAS_bool & in_mObjectShouldBeValuedAtEndOfScope,
+                                                                  const GALGAS_valuedObject & in_mValuedObject
+                                                                  COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mObjectState (in_mObjectState),
 mProperty_mObjectShouldBeValuedAtEndOfScope (in_mObjectShouldBeValuedAtEndOfScope),
-mProperty_mPossibleValuedObject (in_mPossibleValuedObject) {
+mProperty_mValuedObject (in_mValuedObject) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cMapElement_internalValuedObjectMapMapForContext::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mObjectState.isValid () && mProperty_mObjectShouldBeValuedAtEndOfScope.isValid () && mProperty_mPossibleValuedObject.isValid () ;
+bool cMapElement_flatValuedObjectMap::isValid (void) const {
+  return mProperty_lkey.isValid () && mProperty_mObjectState.isValid () && mProperty_mObjectShouldBeValuedAtEndOfScope.isValid () && mProperty_mValuedObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement * cMapElement_internalValuedObjectMapMapForContext::copy (void) {
+cMapElement * cMapElement_flatValuedObjectMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_internalValuedObjectMapMapForContext (mProperty_lkey, mProperty_mObjectState, mProperty_mObjectShouldBeValuedAtEndOfScope, mProperty_mPossibleValuedObject COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_flatValuedObjectMap (mProperty_lkey, mProperty_mObjectState, mProperty_mObjectShouldBeValuedAtEndOfScope, mProperty_mValuedObject COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cMapElement_internalValuedObjectMapMapForContext::description (C_String & ioString, const int32_t inIndentation) const {
+void cMapElement_flatValuedObjectMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mObjectState" ":" ;
@@ -1397,14 +1397,14 @@ void cMapElement_internalValuedObjectMapMapForContext::description (C_String & i
   mProperty_mObjectShouldBeValuedAtEndOfScope.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mPossibleValuedObject" ":" ;
-  mProperty_mPossibleValuedObject.description (ioString, inIndentation) ;
+  ioString << "mValuedObject" ":" ;
+  mProperty_mValuedObject.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cMapElement_internalValuedObjectMapMapForContext::compare (const cCollectionElement * inOperand) const {
-  cMapElement_internalValuedObjectMapMapForContext * operand = (cMapElement_internalValuedObjectMapMapForContext *) inOperand ;
+typeComparisonResult cMapElement_flatValuedObjectMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_flatValuedObjectMap * operand = (cMapElement_flatValuedObjectMap *) inOperand ;
   typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
   if (kOperandEqual == result) {
     result = mProperty_mObjectState.objectCompare (operand->mProperty_mObjectState) ;
@@ -1413,84 +1413,84 @@ typeComparisonResult cMapElement_internalValuedObjectMapMapForContext::compare (
     result = mProperty_mObjectShouldBeValuedAtEndOfScope.objectCompare (operand->mProperty_mObjectShouldBeValuedAtEndOfScope) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mPossibleValuedObject.objectCompare (operand->mProperty_mPossibleValuedObject) ;
+    result = mProperty_mValuedObject.objectCompare (operand->mProperty_mValuedObject) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalValuedObjectMapMapForContext::GALGAS_internalValuedObjectMapMapForContext (void) :
+GALGAS_flatValuedObjectMap::GALGAS_flatValuedObjectMap (void) :
 AC_GALGAS_map () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalValuedObjectMapMapForContext::GALGAS_internalValuedObjectMapMapForContext (const GALGAS_internalValuedObjectMapMapForContext & inSource) :
+GALGAS_flatValuedObjectMap::GALGAS_flatValuedObjectMap (const GALGAS_flatValuedObjectMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalValuedObjectMapMapForContext & GALGAS_internalValuedObjectMapMapForContext::operator = (const GALGAS_internalValuedObjectMapMapForContext & inSource) {
+GALGAS_flatValuedObjectMap & GALGAS_flatValuedObjectMap::operator = (const GALGAS_flatValuedObjectMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalValuedObjectMapMapForContext GALGAS_internalValuedObjectMapMapForContext::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_internalValuedObjectMapMapForContext result ;
+GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_flatValuedObjectMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalValuedObjectMapMapForContext GALGAS_internalValuedObjectMapMapForContext::constructor_mapWithMapToOverride (const GALGAS_internalValuedObjectMapMapForContext & inMapToOverride
-                                                                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_internalValuedObjectMapMapForContext result ;
+GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::constructor_mapWithMapToOverride (const GALGAS_flatValuedObjectMap & inMapToOverride
+                                                                                         COMMA_LOCATION_ARGS) {
+  GALGAS_flatValuedObjectMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalValuedObjectMapMapForContext GALGAS_internalValuedObjectMapMapForContext::getter_overriddenMap (C_Compiler * inCompiler
-                                                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_internalValuedObjectMapMapForContext result ;
+GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_flatValuedObjectMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalValuedObjectMapMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
-                                                                       const GALGAS_valuedObjectState & inArgument0,
-                                                                       const GALGAS_bool & inArgument1,
-                                                                       const GALGAS_valuedObject & inArgument2,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_internalValuedObjectMapMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_internalValuedObjectMapMapForContext (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+void GALGAS_flatValuedObjectMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                      const GALGAS_valuedObjectState & inArgument0,
+                                                      const GALGAS_bool & inArgument1,
+                                                      const GALGAS_valuedObject & inArgument2,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cMapElement_flatValuedObjectMap * p = NULL ;
+  macroMyNew (p, cMapElement_flatValuedObjectMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@internalValuedObjectMapMapForContext insert error: '%K' already in map" ;
+  const char * kInsertErrorMessage = "@flatValuedObjectMap insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalValuedObjectMapMapForContext::setter_insertKey (GALGAS_lstring inKey,
-                                                                    GALGAS_valuedObjectState inArgument0,
-                                                                    GALGAS_bool inArgument1,
-                                                                    GALGAS_valuedObject inArgument2,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  cMapElement_internalValuedObjectMapMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_internalValuedObjectMapMapForContext (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+void GALGAS_flatValuedObjectMap::setter_insertKey (GALGAS_lstring inKey,
+                                                   GALGAS_valuedObjectState inArgument0,
+                                                   GALGAS_bool inArgument1,
+                                                   GALGAS_valuedObject inArgument2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
+  cMapElement_flatValuedObjectMap * p = NULL ;
+  macroMyNew (p, cMapElement_flatValuedObjectMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -1501,66 +1501,66 @@ void GALGAS_internalValuedObjectMapMapForContext::setter_insertKey (GALGAS_lstri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_internalValuedObjectMapMapForContext_searchKey = "there is no '%K' entity" ;
+const char * kSearchErrorMessage_flatValuedObjectMap_searchKey = "there is no '%K' entity" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalValuedObjectMapMapForContext::method_searchKey (GALGAS_lstring inKey,
-                                                                    GALGAS_valuedObjectState & outArgument0,
-                                                                    GALGAS_bool & outArgument1,
-                                                                    GALGAS_valuedObject & outArgument2,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  const cMapElement_internalValuedObjectMapMapForContext * p = (const cMapElement_internalValuedObjectMapMapForContext *) performSearch (inKey,
-                                                                                                                                         inCompiler,
-                                                                                                                                         kSearchErrorMessage_internalValuedObjectMapMapForContext_searchKey
-                                                                                                                                         COMMA_THERE) ;
+void GALGAS_flatValuedObjectMap::method_searchKey (GALGAS_lstring inKey,
+                                                   GALGAS_valuedObjectState & outArgument0,
+                                                   GALGAS_bool & outArgument1,
+                                                   GALGAS_valuedObject & outArgument2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
+  const cMapElement_flatValuedObjectMap * p = (const cMapElement_flatValuedObjectMap *) performSearch (inKey,
+                                                                                                       inCompiler,
+                                                                                                       kSearchErrorMessage_flatValuedObjectMap_searchKey
+                                                                                                       COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
   }else{
-    macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
+    macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
     outArgument0 = p->mProperty_mObjectState ;
     outArgument1 = p->mProperty_mObjectShouldBeValuedAtEndOfScope ;
-    outArgument2 = p->mProperty_mPossibleValuedObject ;
+    outArgument2 = p->mProperty_mValuedObject ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalValuedObjectMapMapForContext::setter_removeKey (GALGAS_lstring inKey,
-                                                                    GALGAS_valuedObjectState & outArgument0,
-                                                                    GALGAS_bool & outArgument1,
-                                                                    GALGAS_valuedObject & outArgument2,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_flatValuedObjectMap::setter_removeKey (GALGAS_lstring inKey,
+                                                   GALGAS_valuedObjectState & outArgument0,
+                                                   GALGAS_bool & outArgument1,
+                                                   GALGAS_valuedObject & outArgument2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   const char * kRemoveErrorMessage = "there is no '%K' entity" ;
   capCollectionElement attributes ;
   performRemove (inKey, attributes, inCompiler, kRemoveErrorMessage COMMA_THERE) ;
-  cMapElement_internalValuedObjectMapMapForContext * p = (cMapElement_internalValuedObjectMapMapForContext *) attributes.ptr () ;
+  cMapElement_flatValuedObjectMap * p = (cMapElement_flatValuedObjectMap *) attributes.ptr () ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
   }else{
-    macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
+    macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
     outArgument0 = p->mProperty_mObjectState ;
     outArgument1 = p->mProperty_mObjectShouldBeValuedAtEndOfScope ;
-    outArgument2 = p->mProperty_mPossibleValuedObject ;
+    outArgument2 = p->mProperty_mValuedObject ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectState GALGAS_internalValuedObjectMapMapForContext::getter_mObjectStateForKey (const GALGAS_string & inKey,
-                                                                                                 C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) const {
+GALGAS_valuedObjectState GALGAS_flatValuedObjectMap::getter_mObjectStateForKey (const GALGAS_string & inKey,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_internalValuedObjectMapMapForContext * p = (const cMapElement_internalValuedObjectMapMapForContext *) attributes ;
+  const cMapElement_flatValuedObjectMap * p = (const cMapElement_flatValuedObjectMap *) attributes ;
   GALGAS_valuedObjectState result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
+    macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
     result = p->mProperty_mObjectState ;
   }
   return result ;
@@ -1568,14 +1568,14 @@ GALGAS_valuedObjectState GALGAS_internalValuedObjectMapMapForContext::getter_mOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_internalValuedObjectMapMapForContext::getter_mObjectShouldBeValuedAtEndOfScopeForKey (const GALGAS_string & inKey,
-                                                                                                         C_Compiler * inCompiler
-                                                                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_flatValuedObjectMap::getter_mObjectShouldBeValuedAtEndOfScopeForKey (const GALGAS_string & inKey,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_internalValuedObjectMapMapForContext * p = (const cMapElement_internalValuedObjectMapMapForContext *) attributes ;
+  const cMapElement_flatValuedObjectMap * p = (const cMapElement_flatValuedObjectMap *) attributes ;
   GALGAS_bool result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
+    macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
     result = p->mProperty_mObjectShouldBeValuedAtEndOfScope ;
   }
   return result ;
@@ -1583,90 +1583,90 @@ GALGAS_bool GALGAS_internalValuedObjectMapMapForContext::getter_mObjectShouldBeV
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObject GALGAS_internalValuedObjectMapMapForContext::getter_mPossibleValuedObjectForKey (const GALGAS_string & inKey,
-                                                                                                     C_Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) const {
+GALGAS_valuedObject GALGAS_flatValuedObjectMap::getter_mValuedObjectForKey (const GALGAS_string & inKey,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_internalValuedObjectMapMapForContext * p = (const cMapElement_internalValuedObjectMapMapForContext *) attributes ;
+  const cMapElement_flatValuedObjectMap * p = (const cMapElement_flatValuedObjectMap *) attributes ;
   GALGAS_valuedObject result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
-    result = p->mProperty_mPossibleValuedObject ;
+    macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
+    result = p->mProperty_mValuedObject ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalValuedObjectMapMapForContext::setter_setMObjectStateForKey (GALGAS_valuedObjectState inAttributeValue,
-                                                                                GALGAS_string inKey,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
+void GALGAS_flatValuedObjectMap::setter_setMObjectStateForKey (GALGAS_valuedObjectState inAttributeValue,
+                                                               GALGAS_string inKey,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_internalValuedObjectMapMapForContext * p = (cMapElement_internalValuedObjectMapMapForContext *) attributes ;
+  cMapElement_flatValuedObjectMap * p = (cMapElement_flatValuedObjectMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
+    macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
     p->mProperty_mObjectState = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalValuedObjectMapMapForContext::setter_setMObjectShouldBeValuedAtEndOfScopeForKey (GALGAS_bool inAttributeValue,
-                                                                                                     GALGAS_string inKey,
-                                                                                                     C_Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_flatValuedObjectMap::setter_setMObjectShouldBeValuedAtEndOfScopeForKey (GALGAS_bool inAttributeValue,
+                                                                                    GALGAS_string inKey,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_internalValuedObjectMapMapForContext * p = (cMapElement_internalValuedObjectMapMapForContext *) attributes ;
+  cMapElement_flatValuedObjectMap * p = (cMapElement_flatValuedObjectMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
+    macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
     p->mProperty_mObjectShouldBeValuedAtEndOfScope = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalValuedObjectMapMapForContext::setter_setMPossibleValuedObjectForKey (GALGAS_valuedObject inAttributeValue,
-                                                                                         GALGAS_string inKey,
-                                                                                         C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_flatValuedObjectMap::setter_setMValuedObjectForKey (GALGAS_valuedObject inAttributeValue,
+                                                                GALGAS_string inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_internalValuedObjectMapMapForContext * p = (cMapElement_internalValuedObjectMapMapForContext *) attributes ;
+  cMapElement_flatValuedObjectMap * p = (cMapElement_flatValuedObjectMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
-    p->mProperty_mPossibleValuedObject = inAttributeValue ;
+    macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
+    p->mProperty_mValuedObject = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_internalValuedObjectMapMapForContext * GALGAS_internalValuedObjectMapMapForContext::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                                                   const GALGAS_string & inKey
-                                                                                                                                   COMMA_LOCATION_ARGS) {
-  cMapElement_internalValuedObjectMapMapForContext * result = (cMapElement_internalValuedObjectMapMapForContext *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_internalValuedObjectMapMapForContext) ;
+cMapElement_flatValuedObjectMap * GALGAS_flatValuedObjectMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                 const GALGAS_string & inKey
+                                                                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_flatValuedObjectMap * result = (cMapElement_flatValuedObjectMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_flatValuedObjectMap) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_internalValuedObjectMapMapForContext::cEnumerator_internalValuedObjectMapMapForContext (const GALGAS_internalValuedObjectMapMapForContext & inEnumeratedObject,
-                                                                                                    const typeEnumerationOrder inOrder) :
+cEnumerator_flatValuedObjectMap::cEnumerator_flatValuedObjectMap (const GALGAS_flatValuedObjectMap & inEnumeratedObject,
+                                                                  const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalValuedObjectMapMapForContext_2D_element cEnumerator_internalValuedObjectMapMapForContext::current (LOCATION_ARGS) const {
-  const cMapElement_internalValuedObjectMapMapForContext * p = (const cMapElement_internalValuedObjectMapMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
-  return GALGAS_internalValuedObjectMapMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mObjectState, p->mProperty_mObjectShouldBeValuedAtEndOfScope, p->mProperty_mPossibleValuedObject) ;
+GALGAS_flatValuedObjectMap_2D_element cEnumerator_flatValuedObjectMap::current (LOCATION_ARGS) const {
+  const cMapElement_flatValuedObjectMap * p = (const cMapElement_flatValuedObjectMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
+  return GALGAS_flatValuedObjectMap_2D_element (p->mProperty_lkey, p->mProperty_mObjectState, p->mProperty_mObjectShouldBeValuedAtEndOfScope, p->mProperty_mValuedObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_internalValuedObjectMapMapForContext::current_lkey (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_flatValuedObjectMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
@@ -1674,68 +1674,68 @@ GALGAS_lstring cEnumerator_internalValuedObjectMapMapForContext::current_lkey (L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectState cEnumerator_internalValuedObjectMapMapForContext::current_mObjectState (LOCATION_ARGS) const {
-  const cMapElement_internalValuedObjectMapMapForContext * p = (const cMapElement_internalValuedObjectMapMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
+GALGAS_valuedObjectState cEnumerator_flatValuedObjectMap::current_mObjectState (LOCATION_ARGS) const {
+  const cMapElement_flatValuedObjectMap * p = (const cMapElement_flatValuedObjectMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
   return p->mProperty_mObjectState ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cEnumerator_internalValuedObjectMapMapForContext::current_mObjectShouldBeValuedAtEndOfScope (LOCATION_ARGS) const {
-  const cMapElement_internalValuedObjectMapMapForContext * p = (const cMapElement_internalValuedObjectMapMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
+GALGAS_bool cEnumerator_flatValuedObjectMap::current_mObjectShouldBeValuedAtEndOfScope (LOCATION_ARGS) const {
+  const cMapElement_flatValuedObjectMap * p = (const cMapElement_flatValuedObjectMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
   return p->mProperty_mObjectShouldBeValuedAtEndOfScope ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObject cEnumerator_internalValuedObjectMapMapForContext::current_mPossibleValuedObject (LOCATION_ARGS) const {
-  const cMapElement_internalValuedObjectMapMapForContext * p = (const cMapElement_internalValuedObjectMapMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_internalValuedObjectMapMapForContext) ;
-  return p->mProperty_mPossibleValuedObject ;
+GALGAS_valuedObject cEnumerator_flatValuedObjectMap::current_mValuedObject (LOCATION_ARGS) const {
+  const cMapElement_flatValuedObjectMap * p = (const cMapElement_flatValuedObjectMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_flatValuedObjectMap) ;
+  return p->mProperty_mValuedObject ;
 }
 
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     @internalValuedObjectMapMapForContext type                                      *
+//                                              @flatValuedObjectMap type                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_internalValuedObjectMapMapForContext ("internalValuedObjectMapMapForContext",
-                                                             NULL) ;
+kTypeDescriptor_GALGAS_flatValuedObjectMap ("flatValuedObjectMap",
+                                            NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_internalValuedObjectMapMapForContext::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_internalValuedObjectMapMapForContext ;
+const C_galgas_type_descriptor * GALGAS_flatValuedObjectMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_flatValuedObjectMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_internalValuedObjectMapMapForContext::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_flatValuedObjectMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_internalValuedObjectMapMapForContext (*this)) ;
+    macroMyNew (result, GALGAS_flatValuedObjectMap (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalValuedObjectMapMapForContext GALGAS_internalValuedObjectMapMapForContext::extractObject (const GALGAS_object & inObject,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_internalValuedObjectMapMapForContext result ;
-  const GALGAS_internalValuedObjectMapMapForContext * p = (const GALGAS_internalValuedObjectMapMapForContext *) inObject.embeddedObject () ;
+GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_flatValuedObjectMap result ;
+  const GALGAS_flatValuedObjectMap * p = (const GALGAS_flatValuedObjectMap *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_internalValuedObjectMapMapForContext *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_flatValuedObjectMap *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("internalValuedObjectMapMapForContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("flatValuedObjectMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -8721,10 +8721,10 @@ void extensionMethod_llvmCodeGeneration (const GALGAS_routineMapIR inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineMapIR temp_0 = inObject ;
-  cEnumerator_routineMapIR enumerator_6142 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_6142.hasCurrentObject ()) {
-    extensionMethod_llvmCodeGeneration (enumerator_6142.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 153)) ;
-    enumerator_6142.gotoNextObject () ;
+  cEnumerator_routineMapIR enumerator_5917 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_5917.hasCurrentObject ()) {
+    extensionMethod_llvmCodeGeneration (enumerator_5917.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 146)) ;
+    enumerator_5917.gotoNextObject () ;
   }
 }
 
@@ -14903,6 +14903,143 @@ GALGAS_controlRegisterBitSliceList_2D_element GALGAS_controlRegisterBitSliceList
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterBitSliceList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element::GALGAS_controlRegisterFieldList_2D_element (void) :
+mProperty_mFieldBitCount (),
+mProperty_mFieldName () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element::~ GALGAS_controlRegisterFieldList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element::GALGAS_controlRegisterFieldList_2D_element (const GALGAS_uint & inOperand0,
+                                                                                        const GALGAS_string & inOperand1) :
+mProperty_mFieldBitCount (inOperand0),
+mProperty_mFieldName (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element GALGAS_controlRegisterFieldList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_controlRegisterFieldList_2D_element (GALGAS_uint::constructor_default (HERE),
+                                                     GALGAS_string::constructor_default (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element GALGAS_controlRegisterFieldList_2D_element::constructor_new (const GALGAS_uint & inOperand0,
+                                                                                                        const GALGAS_string & inOperand1 
+                                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_controlRegisterFieldList_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_controlRegisterFieldList_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_controlRegisterFieldList_2D_element::objectCompare (const GALGAS_controlRegisterFieldList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mFieldBitCount.objectCompare (inOperand.mProperty_mFieldBitCount) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mFieldName.objectCompare (inOperand.mProperty_mFieldName) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_controlRegisterFieldList_2D_element::isValid (void) const {
+  return mProperty_mFieldBitCount.isValid () && mProperty_mFieldName.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterFieldList_2D_element::drop (void) {
+  mProperty_mFieldBitCount.drop () ;
+  mProperty_mFieldName.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterFieldList_2D_element::description (C_String & ioString,
+                                                              const int32_t inIndentation) const {
+  ioString << "<struct @controlRegisterFieldList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mFieldBitCount.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mFieldName.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_controlRegisterFieldList_2D_element::getter_mFieldBitCount (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFieldBitCount ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_controlRegisterFieldList_2D_element::getter_mFieldName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFieldName ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       @controlRegisterFieldList-element type                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_controlRegisterFieldList_2D_element ("controlRegisterFieldList-element",
+                                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_controlRegisterFieldList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterFieldList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_controlRegisterFieldList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_controlRegisterFieldList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterFieldList_2D_element GALGAS_controlRegisterFieldList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                      C_Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterFieldList_2D_element result ;
+  const GALGAS_controlRegisterFieldList_2D_element * p = (const GALGAS_controlRegisterFieldList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_controlRegisterFieldList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterFieldList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

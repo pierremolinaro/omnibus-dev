@@ -147,6 +147,7 @@ private proc compileProject
   ast.mDeclarationListAST = orderedDeclarationListAST
   @subprogramInvocationGraph subprogramInvocationGraph = .emptyGraph
   @declarationDecorationList decoratedDeclarationList = {}
+  var @timer t = .start 
   if @uint.errorCount == 0 then
     buildSemanticContext (
       !sourceFile:inSourceFile
@@ -158,6 +159,7 @@ private proc compileProject
       ?decoratedDeclarationList
     )
   end
+  message "Contexte : " + [t string] + "\n" 
 #------------------------------------------------------------ Semantic analysis
   @intermediateCodeStruct intermediateCodeStruct = .default
   if @uint.errorCount == 0 then
@@ -172,10 +174,12 @@ private proc compileProject
       ?intermediateCode:intermediateCodeStruct
     )
   end
+  message "Sémantique : " + [t string] + "\n" 
 #------------------------------------------------------------ Code optimisation
   if @uint.errorCount == 0 then
     codeOptimisation (!?intermediateCode:intermediateCodeStruct)
   end
+  message "Optimisation : " + [t string] + "\n" 
 #------------------------------------------------------------ Code generation
   if @uint.errorCount == 0 then
     codeGeneration (
@@ -193,6 +197,7 @@ private proc compileProject
       !targetParameters:semanticContext.mTargetParameters
     )
   end
+  message "Génération : " + [t string] + "\n" 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

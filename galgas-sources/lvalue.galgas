@@ -99,7 +99,7 @@ getter @LValueRepresentation type -> @PLMType {
 
 method @LValueAST type
   ?selfType: let @PLMType inSelfType
-  ?variableMap:let @universalValuedObjectMapForContext inUniversalMap
+  ?variableMap:let @universalValuedObjectMap inUniversalMap
   !@PLMType outType
 {
   if mIdentifier.string == "" then # Receiver is self
@@ -138,7 +138,7 @@ method @LValueAST analyzeLValue
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !@LValueRepresentation outInternalRepresentation
@@ -230,7 +230,7 @@ private proc analyzeControlRegisterInLValue
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?registerName:let @lstring inRegisterName
@@ -299,7 +299,7 @@ private proc analyzeVariableInLValue
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableName:let @lstring inVariableName
@@ -384,7 +384,7 @@ private proc analyzeSelfAssignmentTarget
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?let @location inSelfLocation

@@ -93,7 +93,7 @@ override method @sizeofExpressionAST analyzeExpression
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
@@ -129,7 +129,7 @@ override method @sizeofTypeAST analyzeExpression
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext unused  ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap unused  ioUniversalMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult

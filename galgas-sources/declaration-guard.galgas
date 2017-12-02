@@ -174,14 +174,7 @@ proc guardSemanticAnalysis
     ]
   end
 #--- Variable map
-  var universalMap = inContext.mValuedObjectMapForContext
-#  initialVariableMap (
-#    !context:inContext
-##    !mode:.guardMode
-##    !globalsAreConstant:false
-##    !returnTypeName:["" nowhere]
-#    ?@universalValuedObjectMapForContext universalMap
-#  )
+  var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
   @routineFormalArgumentListIR formalArguments = {}
@@ -280,7 +273,7 @@ abstract method @callInstructionAST baseGuardAnalyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -292,7 +285,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext unused ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   error mSandAloneRoutineName : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
@@ -307,7 +300,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   @allocaList baseGuardAllocaList = {}

@@ -414,7 +414,7 @@ method @structurePropertyListAST-element enterInContext
 #--- Variable map (with constants)
 #  variableMapWithConstants (
 #    !context:ioContext
-#    ?@universalValuedObjectMapForContext universalMap
+#    ?@universalValuedObjectMap universalMap
 #  )
 #--- Init expression
   switch mInitialisation
@@ -428,7 +428,7 @@ method @structurePropertyListAST-element enterInContext
       !mode:.bootMode
       !?temporary:*
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioContext.mValuedObjectMapForContext # universalMap
+      !?variableMap:ioContext.mValuedObjectMap # universalMap
       !?alloca:*
       !?instructionListIR:*
       ?result:let @objectIR expressionIR

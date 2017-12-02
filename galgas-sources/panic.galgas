@@ -161,14 +161,7 @@ override method @decoratedPanicRoutine semanticAnalysis
 {
   let routineNameForInvocationGraph = panicNameForInvocationGraph (!if mIsSetup then "setup" else "loop" end !mPriority)
 #--- Variable map
-  var universalMap = inContext.mValuedObjectMapForContext
-#  initialVariableMap (
-#    !context:inContext
-##    !mode:.panicMode
-##    !globalsAreConstant:false
-##    !returnTypeName:["" nowhere]
-#    ?@universalValuedObjectMapForContext universalMap
-#  )
+  var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
 #--- Insert predefined input arguments

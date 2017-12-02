@@ -101,7 +101,7 @@ override method @globalConstantDeclarationAST enterInContext
 #    !mode:.bootMode
 #    !globalsAreConstant:true # Any value, there is no defined global variable at this stage
 #    !returnTypeName:["" nowhere]
-#    ?@universalValuedObjectMapForContext universalMap
+#    ?@universalValuedObjectMap universalMap
 #  )
 #--- Get destination type
   @PLMType annotationType
@@ -120,7 +120,7 @@ override method @globalConstantDeclarationAST enterInContext
     !mode:.bootMode
     !?temporary:*
     !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioContext.mValuedObjectMapForContext # universalMap
+    !?variableMap:ioContext.mValuedObjectMap # universalMap
     !?alloca:*
     !?instructionListIR:*
     ?result:@objectIR expressionResult
@@ -138,7 +138,7 @@ override method @globalConstantDeclarationAST enterInContext
   end
 #--- Enter in context
   [!?ioContext.mGlobalConstantMap insertKey !mConstantName !result]
-  [!?ioContext.mValuedObjectMapForContext insertGlobalConstant !mConstantName !result]
+  [!?ioContext.mValuedObjectMap insertGlobalConstant !mConstantName !result]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

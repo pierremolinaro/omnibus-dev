@@ -281,7 +281,7 @@ override method @implementedDriverAST enterInContext
 {
   [!?ioContext.mDriverMap insertKey !mDriverName !mIsInstancied]
   let driverType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !llvmDriverNameFromName (!mDriverName)} type]
-  [!?ioContext.mValuedObjectMapForContext insertDriver !mDriverName !mIsInstancied !driverType]
+  [!?ioContext.mValuedObjectMap insertDriver !mDriverName !mIsInstancied !driverType]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
 }

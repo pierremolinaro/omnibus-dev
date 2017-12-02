@@ -5,8 +5,8 @@
 
 #·······················································································································
 
-shared class @universalValuedObjectMapForContext {
-  @internalValuedObjectMapMapForContext mInternalPropertyAndRoutineMapForContext
+struct @universalValuedObjectMap {
+  @flatValuedObjectMap mInternalPropertyAndRoutineMap
   @scopeStack mScopeStack
   @lstringlist mLocalObjectList
 }
@@ -15,38 +15,36 @@ shared class @universalValuedObjectMapForContext {
 #! INSERT SETTERS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @universalValuedObjectMapForContext insertTask
+setter @universalValuedObjectMap insertTask
   ?let @lstring inTaskName
   ?let @PLMType inTaskType
 {
-  let newValue = @valuedObject.task {!type:inTaskType}
-  [!?mInternalPropertyAndRoutineMapForContext insertKey
+  [!?mInternalPropertyAndRoutineMap insertKey
     !inTaskName
     !.noValue
     !false
-    !newValue
+    !.task {!type:inTaskType}
   ]
 }
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext insertDriver
+setter @universalValuedObjectMap insertDriver
   ?let @lstring inDriverName
   ?let @bool inIsInstancied
   ?let @PLMType inDriverType
 {
-  let newValue = @valuedObject.driver {!type:inDriverType !instancied:inIsInstancied}
-  [!?mInternalPropertyAndRoutineMapForContext insertKey
+  [!?mInternalPropertyAndRoutineMap insertKey
     !inDriverName
     !.noValue
     !false
-    !newValue
+    !.driver {!type:inDriverType !instancied:inIsInstancied}
   ]
 }
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext insertRegister
+setter @universalValuedObjectMap insertRegister
   ?let @lstring inRegisterName
   ?readable:let @bool inReadable
   ?writable:let @bool inWritable
@@ -65,7 +63,7 @@ setter @universalValuedObjectMapForContext insertRegister
     !arraySize:inArraySize # 0 if not an array
     !elementSize:inElementSize
   }
-  [!?mInternalPropertyAndRoutineMapForContext insertKey
+  [!?mInternalPropertyAndRoutineMap insertKey
     !inRegisterName
     !.noValue
     !false
@@ -75,68 +73,64 @@ setter @universalValuedObjectMapForContext insertRegister
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext insertGlobalConstant
+setter @universalValuedObjectMap insertGlobalConstant
   ?let @lstring inConstantName
   ?let @objectIR inConstantObjectIR
 {
-  let newValue = @valuedObject.globalConstant {!objectIR:inConstantObjectIR}
-  [!?mInternalPropertyAndRoutineMapForContext insertKey
+  [!?mInternalPropertyAndRoutineMap insertKey
     !inConstantName
     !.noValue
     !false
-    !newValue
+    !.globalConstant {!objectIR:inConstantObjectIR}
   ]
 }
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext insertLocalConstant
+setter @universalValuedObjectMap insertLocalConstant
   ?let @lstring inLocalConstantName
   ?let @PLMType inType
   ?let @lstring inPLMConstantName
 {
-  let newValue = @valuedObject.localConstant {!type:inType !plmName:inPLMConstantName}
-  [!?mInternalPropertyAndRoutineMapForContext insertKey
+  [!?mInternalPropertyAndRoutineMap insertKey
     !inLocalConstantName
     !.hasUnreadValue
     !false
-    !newValue
+    !.localConstant {!type:inType !plmName:inPLMConstantName}
   ]
   mLocalObjectList += !inLocalConstantName
 }
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext insertUsedLocalConstant
+setter @universalValuedObjectMap insertUsedLocalConstant
   ?let @lstring inLocalConstantName
   ?let @PLMType inType
   ?let @lstring inPLMConstantName
 {
-  let newValue = @valuedObject.localConstant {!type:inType !plmName:inPLMConstantName}
-  [!?mInternalPropertyAndRoutineMapForContext insertKey
+  [!?mInternalPropertyAndRoutineMap insertKey
     !inLocalConstantName
     !.hasReadValue
     !false
-    !newValue
+    !.localConstant {!type:inType !plmName:inPLMConstantName}
   ]
   mLocalObjectList += !inLocalConstantName
 }
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext insertLocalVariable
+setter @universalValuedObjectMap insertLocalVariable
   ?let @lstring inLocalVariableName
   ?let @PLMType inType
   ?let @lstring inPLMName
   ?let @valuedObjectState inVariableInitialState
   ?let @bool inObjectShouldBeValuedAtEndOfScope
 {
-  let newValue = @valuedObject.localVariable {!type:inType !plmName:inPLMName}
-  [!?mInternalPropertyAndRoutineMapForContext insertKey
+  [!?mInternalPropertyAndRoutineMap insertKey
     !inLocalVariableName
     !inVariableInitialState
     !inObjectShouldBeValuedAtEndOfScope
-    !newValue
+    !.localVariable {!type:inType !plmName:inPLMName}
   ]
   mLocalObjectList += !inLocalVariableName
 }
@@ -145,26 +139,20 @@ setter @universalValuedObjectMapForContext insertLocalVariable
 #! SEARCH METHODS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @universalValuedObjectMapForContext searchEntity
+method @universalValuedObjectMap searchEntity
   ?let @lstring inValuedObjectName
   !@valuedObject outEntity
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?outEntity]
+  [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?outEntity]
 }
 
 #·······················································································································
 
-getter @universalValuedObjectMapForContext hasKey ?let @string inValuedObjectName -> @bool {
-  result = [mInternalPropertyAndRoutineMapForContext hasKey !inValuedObjectName]
-}
-
-#·······················································································································
-
-method @universalValuedObjectMapForContext searchValuedObject
+method @universalValuedObjectMap searchValuedObject
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let entity]
+  [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?let entity]
   switch entity
   case task (@PLMType type) :
     outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
@@ -187,8 +175,8 @@ method @universalValuedObjectMapForContext searchValuedObject
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext readAccess ?let @lstring inValuedObjectName {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
+setter @universalValuedObjectMap readAccess ?let @lstring inValuedObjectName {
+  [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case task (*) :
   case driver (* *) :
@@ -196,14 +184,14 @@ setter @universalValuedObjectMapForContext readAccess ?let @lstring inValuedObje
   case globalConstant (*) :
   case localConstant (* *) :
     if valueState == .hasUnreadValue then
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
+      [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     end
   case localVariable (* *) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "'" + inValuedObjectName + "' has no value"
     case hasUnreadValue :
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
+      [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     case hasReadValue :
     end
   end
@@ -211,11 +199,11 @@ setter @universalValuedObjectMapForContext readAccess ?let @lstring inValuedObje
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext searchValuedObjectForReadAccess
+setter @universalValuedObjectMap searchValuedObjectForReadAccess
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
+  [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case task (@PLMType type) :
     outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
@@ -232,14 +220,14 @@ setter @universalValuedObjectMapForContext searchValuedObjectForReadAccess
   case localConstant (@PLMType type @lstring plmName) :
     outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     if valueState == .hasUnreadValue then
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
+      [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     end
   case localVariable (@PLMType type @lstring plmName) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "'" + inValuedObjectName + "' has no value" : outObjectIR
     case hasUnreadValue :
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
+      [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
       outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     case hasReadValue :
       outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
@@ -249,11 +237,11 @@ setter @universalValuedObjectMapForContext searchValuedObjectForReadAccess
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext searchValuedObjectForWriteAccess
+setter @universalValuedObjectMap searchValuedObjectForWriteAccess
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
+  [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case task (*) :
     error inValuedObjectName : "a task has no value" : outObjectIR
@@ -269,7 +257,7 @@ setter @universalValuedObjectMapForContext searchValuedObjectForWriteAccess
     outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     switch valueState 
     case noValue, hasReadValue :
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
+      [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
     case hasUnreadValue :
       warning inValuedObjectName : "previous '" + inValuedObjectName + "' value has not been read"
     end
@@ -278,11 +266,11 @@ setter @universalValuedObjectMapForContext searchValuedObjectForWriteAccess
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext searchValuedObjectForReadWriteAccess
+setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
   ?let @lstring inValuedObjectName
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
+  [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case task (*) :
     error inValuedObjectName : "a task has no value" : outObjectIR
@@ -301,7 +289,7 @@ setter @universalValuedObjectMapForContext searchValuedObjectForReadWriteAccess
     case hasUnreadValue :
       outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     case hasReadValue :
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
+      [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
       outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     end
   end
@@ -309,11 +297,11 @@ setter @universalValuedObjectMapForContext searchValuedObjectForReadWriteAccess
 
 #·······················································································································
 
-method @universalValuedObjectMapForContext searchValuedObjectType
+method @universalValuedObjectMap searchValuedObjectType
   ?let @lstring inValuedObjectName
   !@PLMType outType
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?2* ?let property]
+  [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?let property]
   switch property
   case task (*) :
     error inValuedObjectName : "undefined in this context" : outType
@@ -334,9 +322,9 @@ method @universalValuedObjectMapForContext searchValuedObjectType
 #! STATE HANDLING
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @universalValuedObjectMapForContext checkLocalVariableFinalState {
-  for entry in mInternalPropertyAndRoutineMapForContext do
-    switch entry.mPossibleValuedObject
+method @universalValuedObjectMap checkLocalVariableFinalState {
+  for entry in mInternalPropertyAndRoutineMap do
+    switch entry.mValuedObject
     case task (*) :
     case driver (* *) :
     case register (* * * * * * *) :
@@ -355,10 +343,10 @@ method @universalValuedObjectMapForContext checkLocalVariableFinalState {
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext openOverrideForSelectBlock {
+setter @universalValuedObjectMap openOverrideForSelectBlock {
   @referenceStateMap initialStateMap = {}
-  for entry in mInternalPropertyAndRoutineMapForContext do
-    switch entry.mPossibleValuedObject
+  for entry in mInternalPropertyAndRoutineMap do
+    switch entry.mValuedObject
     case task (*) :
     case driver (* *) :
     case register (* * * * * * *) :
@@ -375,10 +363,10 @@ setter @universalValuedObjectMapForContext openOverrideForSelectBlock {
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext openOverrideForRepeatBlock {
+setter @universalValuedObjectMap openOverrideForRepeatBlock {
   @referenceStateMap initialStateMap = {}
-  for entry in mInternalPropertyAndRoutineMapForContext do
-    switch entry.mPossibleValuedObject
+  for entry in mInternalPropertyAndRoutineMap do
+    switch entry.mValuedObject
     case task (*) :
     case driver (* *) :
     case register (* * * * * * *) :
@@ -395,21 +383,21 @@ setter @universalValuedObjectMapForContext openOverrideForRepeatBlock {
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext openBranch {
+setter @universalValuedObjectMap openBranch {
   [mScopeStack last ?* ?* ?let initialStateMap ?2*]
   for (key objectState) in initialStateMap do
-    [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !objectState !key]
+    [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !objectState !key]
   end
 }
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext closeBranch ?let @location inErrorLocation {
+setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
   [!?mScopeStack popLast ?let scopeKind ?let firstBranch ?let initialStateMap ?var referenceStateMap ?let localObjectList]
   if firstBranch then
     @referenceStateMap newReferenceStateMap = {}
-    for entry in mInternalPropertyAndRoutineMapForContext do
-      switch entry.mPossibleValuedObject
+    for entry in mInternalPropertyAndRoutineMap do
+      switch entry.mValuedObject
       case task (*) :
       case driver (* *) :
       case register (* * * * * * *) :
@@ -425,7 +413,7 @@ setter @universalValuedObjectMapForContext closeBranch ?let @location inErrorLoc
     switch scopeKind
     case selectScope :
       for (lkey referenceState) in referenceStateMap do
-        [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?2*]
+        [mInternalPropertyAndRoutineMap searchKey !lkey ?let currentObjectState ?2*]
         if referenceState == currentObjectState then # Ok
         elsif (currentObjectState == .hasUnreadValue) & (referenceState == .hasReadValue) then # Ok
         elsif (currentObjectState == .hasReadValue) & (referenceState == .hasUnreadValue) then # Ok, modify refence state
@@ -438,7 +426,7 @@ setter @universalValuedObjectMapForContext closeBranch ?let @location inErrorLoc
       mScopeStack += !scopeKind !false !initialStateMap !referenceStateMap !localObjectList
     case repeatScope :
      for (lkey objectState) in referenceStateMap do
-        [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?2*]
+        [mInternalPropertyAndRoutineMap searchKey !lkey ?let currentObjectState ?2*]
         if objectState != currentObjectState then
           error inErrorLocation
             : "invalid state for object '" + lkey + "': found " + currentObjectState + ", required " + objectState
@@ -451,15 +439,15 @@ setter @universalValuedObjectMapForContext closeBranch ?let @location inErrorLoc
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext closeOverride ?let @location inErrorLocation {
+setter @universalValuedObjectMap closeOverride ?let @location inErrorLocation {
   [!?mScopeStack popLast ?* ?* ?* ?let referenceStateMap ?let localObjectList]
 #--- Restore value object state
   for (key objectState) in referenceStateMap do
-    [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !objectState !key]
+    [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !objectState !key]
   end
 #--- For current scope objects, check their final state
   for (lkey) in mLocalObjectList do
-    [mInternalPropertyAndRoutineMapForContext searchKey
+    [mInternalPropertyAndRoutineMap searchKey
       !lkey
       ?let currentObjectState
       ?let objectShouldBeValuedAtEndOfScope
@@ -482,7 +470,7 @@ setter @universalValuedObjectMapForContext closeOverride ?let @location inErrorL
   end
 #--- Remove current scope objets
   for (lkey) in mLocalObjectList do
-    [!?mInternalPropertyAndRoutineMapForContext removeKey !lkey ?3*]
+    [!?mInternalPropertyAndRoutineMap removeKey !lkey ?3*]
   end
 #--- Restore current scope objects
   mLocalObjectList = localObjectList
@@ -492,10 +480,10 @@ setter @universalValuedObjectMapForContext closeOverride ?let @location inErrorL
 #! INTERNAL MAPS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @internalValuedObjectMapMapForContext { # Key is a valued object
+map @flatValuedObjectMap { # Key is a valued object
   @valuedObjectState mObjectState
   @bool mObjectShouldBeValuedAtEndOfScope
-  @valuedObject mPossibleValuedObject
+  @valuedObject mValuedObject
 
   insert insertKey error message "the '%K' entity is already declared in %L"
   search searchKey error message "there is no '%K' entity"

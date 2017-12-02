@@ -192,14 +192,7 @@ proc initSemanticAnalysis
     [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
   end
 #--- Variable map
-  var universalMap = inContext.mValuedObjectMapForContext
-#  initialVariableMap (
-#    !context:inContext
-##    !mode:inCurrentMode
-##    !globalsAreConstant:false
-##    !returnTypeName:["" nowhere]
-#    ?@universalValuedObjectMapForContext universalMap
-#  )
+  var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
 #--- Analyze instruction list

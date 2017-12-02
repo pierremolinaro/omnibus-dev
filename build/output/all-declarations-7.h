@@ -284,35 +284,22 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_L
 
 void extensionMethod_type (const class GALGAS_LValueAST inObject,
                            const class GALGAS_PLMType constin_inSelfType,
-                           const class GALGAS_universalValuedObjectMapForContext constin_inUniversalMap,
+                           const class GALGAS_universalValuedObjectMap constin_inUniversalMap,
                            class GALGAS_PLMType & out_outType,
                            class C_Compiler * inCompiler
                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Extension method '@universalValuedObjectMapForContext searchValuedObjectType'                    *
+//                         Extension method '@universalValuedObjectMap searchValuedObjectType'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_universalValuedObjectMapForContext_searchValuedObjectType) (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                    const class GALGAS_lstring constinArgument0,
-                                                                                                    class GALGAS_PLMType & outArgument1,
-                                                                                                    class C_Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_searchValuedObjectType (const int32_t inClassIndex,
-                                                  extensionMethodSignature_universalValuedObjectMapForContext_searchValuedObjectType inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_searchValuedObjectType (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                 const GALGAS_lstring constin_inValuedObjectName,
-                                                 GALGAS_PLMType & out_outType,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedObjectMap inObject,
+                                             const class GALGAS_lstring constin_inValuedObjectName,
+                                             class GALGAS_PLMType & out_outType,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -328,7 +315,7 @@ void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
                                     const class GALGAS_mode constin_inCurrentMode,
                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                    class GALGAS_universalValuedObjectMapForContext & io_ioUniversalMap,
+                                    class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
                                     class GALGAS_allocaList & io_ioAllocaList,
                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                     class GALGAS_LValueRepresentation & out_outInternalRepresentation,
@@ -347,7 +334,7 @@ void routine_analyzeControlRegisterInLValue (const class GALGAS_PLMType constinA
                                              const class GALGAS_mode constinArgument3,
                                              class GALGAS_semanticTemporariesStruct & ioArgument4,
                                              class GALGAS_staticStringMap & ioArgument5,
-                                             class GALGAS_universalValuedObjectMapForContext & ioArgument6,
+                                             class GALGAS_universalValuedObjectMap & ioArgument6,
                                              class GALGAS_allocaList & ioArgument7,
                                              class GALGAS_instructionListIR & ioArgument8,
                                              const class GALGAS_lstring constinArgument9,
@@ -372,7 +359,7 @@ void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgu
                                           const class GALGAS_mode constinArgument3,
                                           class GALGAS_semanticTemporariesStruct & ioArgument4,
                                           class GALGAS_staticStringMap & ioArgument5,
-                                          class GALGAS_universalValuedObjectMapForContext & ioArgument6,
+                                          class GALGAS_universalValuedObjectMap & ioArgument6,
                                           class GALGAS_allocaList & ioArgument7,
                                           class GALGAS_instructionListIR & ioArgument8,
                                           const class GALGAS_location constinArgument9,
@@ -393,7 +380,7 @@ void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument
                                       const class GALGAS_mode constinArgument3,
                                       class GALGAS_semanticTemporariesStruct & ioArgument4,
                                       class GALGAS_staticStringMap & ioArgument5,
-                                      class GALGAS_universalValuedObjectMapForContext & ioArgument6,
+                                      class GALGAS_universalValuedObjectMap & ioArgument6,
                                       class GALGAS_allocaList & ioArgument7,
                                       class GALGAS_instructionListIR & ioArgument8,
                                       const class GALGAS_lstring constinArgument9,
@@ -433,386 +420,176 @@ class GALGAS_bool extensionGetter_hasKey (const class GALGAS_routineMapForContex
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Extension setter '@universalValuedObjectMapForContext insertDriver'                         *
+//                              Extension setter '@universalValuedObjectMap insertDriver'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertDriver) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                          const class GALGAS_lstring constinArgument0,
-                                                                                          const class GALGAS_bool constinArgument1,
-                                                                                          const class GALGAS_PLMType constinArgument2,
-                                                                                          class C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertDriver (const int32_t inClassIndex,
-                                        extensionSetterSignature_universalValuedObjectMapForContext_insertDriver inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertDriver (class cPtr_universalValuedObjectMapForContext * inObject,
-                                       const GALGAS_lstring constin_inDriverName,
-                                       const GALGAS_bool constin_inIsInstancied,
-                                       const GALGAS_PLMType constin_inDriverType,
-                                       C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
+void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObject,
+                                   const class GALGAS_lstring constin_inDriverName,
+                                   const class GALGAS_bool constin_inIsInstancied,
+                                   const class GALGAS_PLMType constin_inDriverType,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Extension setter '@universalValuedObjectMapForContext insertRegister'                        *
+//                             Extension setter '@universalValuedObjectMap insertRegister'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertRegister) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                            const class GALGAS_lstring constinArgument0,
-                                                                                            const class GALGAS_bool constinArgument1,
-                                                                                            const class GALGAS_bool constinArgument2,
-                                                                                            const class GALGAS_PLMType constinArgument3,
-                                                                                            const class GALGAS_bigint constinArgument4,
-                                                                                            const class GALGAS_sliceMap constinArgument5,
-                                                                                            const class GALGAS_uint constinArgument6,
-                                                                                            const class GALGAS_uint constinArgument7,
-                                                                                            class C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertRegister (const int32_t inClassIndex,
-                                          extensionSetterSignature_universalValuedObjectMapForContext_insertRegister inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertRegister (class cPtr_universalValuedObjectMapForContext * inObject,
-                                         const GALGAS_lstring constin_inRegisterName,
-                                         const GALGAS_bool constin_inReadable,
-                                         const GALGAS_bool constin_inWritable,
-                                         const GALGAS_PLMType constin_inType,
-                                         const GALGAS_bigint constin_inAddress,
-                                         const GALGAS_sliceMap constin_inSliceMap,
-                                         const GALGAS_uint constin_inArraySize,
-                                         const GALGAS_uint constin_inElementSize,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
+void extensionSetter_insertRegister (class GALGAS_universalValuedObjectMap & ioObject,
+                                     const class GALGAS_lstring constin_inRegisterName,
+                                     const class GALGAS_bool constin_inReadable,
+                                     const class GALGAS_bool constin_inWritable,
+                                     const class GALGAS_PLMType constin_inType,
+                                     const class GALGAS_bigint constin_inAddress,
+                                     const class GALGAS_sliceMap constin_inSliceMap,
+                                     const class GALGAS_uint constin_inArraySize,
+                                     const class GALGAS_uint constin_inElementSize,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Extension setter '@universalValuedObjectMapForContext insertGlobalConstant'                     *
+//                          Extension setter '@universalValuedObjectMap insertGlobalConstant'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertGlobalConstant) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                  const class GALGAS_lstring constinArgument0,
-                                                                                                  const class GALGAS_objectIR constinArgument1,
-                                                                                                  class C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertGlobalConstant (const int32_t inClassIndex,
-                                                extensionSetterSignature_universalValuedObjectMapForContext_insertGlobalConstant inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertGlobalConstant (class cPtr_universalValuedObjectMapForContext * inObject,
-                                               const GALGAS_lstring constin_inConstantName,
-                                               const GALGAS_objectIR constin_inConstantObjectIR,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+void extensionSetter_insertGlobalConstant (class GALGAS_universalValuedObjectMap & ioObject,
+                                           const class GALGAS_lstring constin_inConstantName,
+                                           const class GALGAS_objectIR constin_inConstantObjectIR,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Extension setter '@universalValuedObjectMapForContext insertLocalConstant'                      *
+//                          Extension setter '@universalValuedObjectMap insertLocalConstant'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertLocalConstant) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                 const class GALGAS_lstring constinArgument0,
-                                                                                                 const class GALGAS_PLMType constinArgument1,
-                                                                                                 const class GALGAS_lstring constinArgument2,
-                                                                                                 class C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertLocalConstant (const int32_t inClassIndex,
-                                               extensionSetterSignature_universalValuedObjectMapForContext_insertLocalConstant inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertLocalConstant (class cPtr_universalValuedObjectMapForContext * inObject,
-                                              const GALGAS_lstring constin_inLocalConstantName,
-                                              const GALGAS_PLMType constin_inType,
-                                              const GALGAS_lstring constin_inPLMConstantName,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
+void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
+                                          const class GALGAS_lstring constin_inLocalConstantName,
+                                          const class GALGAS_PLMType constin_inType,
+                                          const class GALGAS_lstring constin_inPLMConstantName,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Extension setter '@universalValuedObjectMapForContext insertUsedLocalConstant'                    *
+//                        Extension setter '@universalValuedObjectMap insertUsedLocalConstant'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertUsedLocalConstant) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                     const class GALGAS_lstring constinArgument0,
-                                                                                                     const class GALGAS_PLMType constinArgument1,
-                                                                                                     const class GALGAS_lstring constinArgument2,
-                                                                                                     class C_Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertUsedLocalConstant (const int32_t inClassIndex,
-                                                   extensionSetterSignature_universalValuedObjectMapForContext_insertUsedLocalConstant inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertUsedLocalConstant (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                  const GALGAS_lstring constin_inLocalConstantName,
-                                                  const GALGAS_PLMType constin_inType,
-                                                  const GALGAS_lstring constin_inPLMConstantName,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                     Extension setter '@universalValuedObjectMapForContext insertLocalVariable'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertLocalVariable) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                 const class GALGAS_lstring constinArgument0,
-                                                                                                 const class GALGAS_PLMType constinArgument1,
-                                                                                                 const class GALGAS_lstring constinArgument2,
-                                                                                                 const class GALGAS_valuedObjectState constinArgument3,
-                                                                                                 const class GALGAS_bool constinArgument4,
-                                                                                                 class C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertLocalVariable (const int32_t inClassIndex,
-                                               extensionSetterSignature_universalValuedObjectMapForContext_insertLocalVariable inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertLocalVariable (class cPtr_universalValuedObjectMapForContext * inObject,
-                                              const GALGAS_lstring constin_inLocalVariableName,
-                                              const GALGAS_PLMType constin_inType,
-                                              const GALGAS_lstring constin_inPLMName,
-                                              const GALGAS_valuedObjectState constin_inVariableInitialState,
-                                              const GALGAS_bool constin_inObjectShouldBeValuedAtEndOfScope,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Extension getter '@universalValuedObjectMapForContext hasKey'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef class GALGAS_bool (*enterExtensionGetter_universalValuedObjectMapForContext_hasKey) (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                             const class GALGAS_string constinArgument0,
-                                                                                             C_Compiler * inCompiler
-                                                                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionGetter_hasKey (const int32_t inClassIndex,
-                                  enterExtensionGetter_universalValuedObjectMapForContext_hasKey inGetter) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool callExtensionGetter_hasKey (const cPtr_universalValuedObjectMapForContext * inObject,
-                                              const GALGAS_string constin_inValuedObjectName,
+void extensionSetter_insertUsedLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
+                                              const class GALGAS_lstring constin_inLocalConstantName,
+                                              const class GALGAS_PLMType constin_inType,
+                                              const class GALGAS_lstring constin_inPLMConstantName,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Extension method '@universalValuedObjectMapForContext searchValuedObject'                      *
+//                          Extension setter '@universalValuedObjectMap insertLocalVariable'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_universalValuedObjectMapForContext_searchValuedObject) (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                const class GALGAS_lstring constinArgument0,
-                                                                                                class GALGAS_objectIR & outArgument1,
-                                                                                                class C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_searchValuedObject (const int32_t inClassIndex,
-                                              extensionMethodSignature_universalValuedObjectMapForContext_searchValuedObject inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_searchValuedObject (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                             const GALGAS_lstring constin_inValuedObjectName,
-                                             GALGAS_objectIR & out_outObjectIR,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionSetter_insertLocalVariable (class GALGAS_universalValuedObjectMap & ioObject,
+                                          const class GALGAS_lstring constin_inLocalVariableName,
+                                          const class GALGAS_PLMType constin_inType,
+                                          const class GALGAS_lstring constin_inPLMName,
+                                          const class GALGAS_valuedObjectState constin_inVariableInitialState,
+                                          const class GALGAS_bool constin_inObjectShouldBeValuedAtEndOfScope,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Extension setter '@universalValuedObjectMapForContext searchValuedObjectForReadAccess'                *
+//                           Extension method '@universalValuedObjectMap searchValuedObject'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_searchValuedObjectForReadAccess) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                             const class GALGAS_lstring constinArgument0,
-                                                                                                             class GALGAS_objectIR & outArgument1,
-                                                                                                             class C_Compiler * inCompiler
-                                                                                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_searchValuedObjectForReadAccess (const int32_t inClassIndex,
-                                                           extensionSetterSignature_universalValuedObjectMapForContext_searchValuedObjectForReadAccess inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_searchValuedObjectForReadAccess (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                          const GALGAS_lstring constin_inValuedObjectName,
-                                                          GALGAS_objectIR & out_outObjectIR,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+void extensionMethod_searchValuedObject (const class GALGAS_universalValuedObjectMap inObject,
+                                         const class GALGAS_lstring constin_inValuedObjectName,
+                                         class GALGAS_objectIR & out_outObjectIR,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Extension setter '@universalValuedObjectMapForContext searchValuedObjectForWriteAccess'               *
+//                    Extension setter '@universalValuedObjectMap searchValuedObjectForReadAccess'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_searchValuedObjectForWriteAccess) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                              const class GALGAS_lstring constinArgument0,
-                                                                                                              class GALGAS_objectIR & outArgument1,
-                                                                                                              class C_Compiler * inCompiler
-                                                                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_searchValuedObjectForWriteAccess (const int32_t inClassIndex,
-                                                            extensionSetterSignature_universalValuedObjectMapForContext_searchValuedObjectForWriteAccess inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_searchValuedObjectForWriteAccess (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                           const GALGAS_lstring constin_inValuedObjectName,
-                                                           GALGAS_objectIR & out_outObjectIR,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
+void extensionSetter_searchValuedObjectForReadAccess (class GALGAS_universalValuedObjectMap & ioObject,
+                                                      const class GALGAS_lstring constin_inValuedObjectName,
+                                                      class GALGAS_objectIR & out_outObjectIR,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//             Extension setter '@universalValuedObjectMapForContext searchValuedObjectForReadWriteAccess'             *
+//                    Extension setter '@universalValuedObjectMap searchValuedObjectForWriteAccess'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_searchValuedObjectForReadWriteAccess) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                                  const class GALGAS_lstring constinArgument0,
-                                                                                                                  class GALGAS_objectIR & outArgument1,
-                                                                                                                  class C_Compiler * inCompiler
-                                                                                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_searchValuedObjectForReadWriteAccess (const int32_t inClassIndex,
-                                                                extensionSetterSignature_universalValuedObjectMapForContext_searchValuedObjectForReadWriteAccess inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_searchValuedObjectForReadWriteAccess (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                               const GALGAS_lstring constin_inValuedObjectName,
-                                                               GALGAS_objectIR & out_outObjectIR,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                 Extension method '@universalValuedObjectMapForContext checkLocalVariableFinalState'                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_universalValuedObjectMapForContext_checkLocalVariableFinalState) (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                          class C_Compiler * inCompiler
-                                                                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_checkLocalVariableFinalState (const int32_t inClassIndex,
-                                                        extensionMethodSignature_universalValuedObjectMapForContext_checkLocalVariableFinalState inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_checkLocalVariableFinalState (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                       C_Compiler * inCompiler
+void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalValuedObjectMap & ioObject,
+                                                       const class GALGAS_lstring constin_inValuedObjectName,
+                                                       class GALGAS_objectIR & out_outObjectIR,
+                                                       class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Extension setter '@universalValuedObjectMapForContext openOverrideForSelectBlock'                  *
+//                  Extension setter '@universalValuedObjectMap searchValuedObjectForReadWriteAccess'                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_openOverrideForSelectBlock) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                        class C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_openOverrideForSelectBlock (const int32_t inClassIndex,
-                                                      extensionSetterSignature_universalValuedObjectMapForContext_openOverrideForSelectBlock inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_openOverrideForSelectBlock (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universalValuedObjectMap & ioObject,
+                                                           const class GALGAS_lstring constin_inValuedObjectName,
+                                                           class GALGAS_objectIR & out_outObjectIR,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Extension setter '@universalValuedObjectMapForContext openOverrideForRepeatBlock'                  *
+//                      Extension method '@universalValuedObjectMap checkLocalVariableFinalState'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_openOverrideForRepeatBlock) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                                        class C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_openOverrideForRepeatBlock (const int32_t inClassIndex,
-                                                      extensionSetterSignature_universalValuedObjectMapForContext_openOverrideForRepeatBlock inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_openOverrideForRepeatBlock (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+void extensionMethod_checkLocalVariableFinalState (const class GALGAS_universalValuedObjectMap inObject,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Extension setter '@universalValuedObjectMapForContext closeOverride'                         *
+//                       Extension setter '@universalValuedObjectMap openOverrideForSelectBlock'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_closeOverride) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                           const class GALGAS_location constinArgument0,
-                                                                                           class C_Compiler * inCompiler
-                                                                                           COMMA_LOCATION_ARGS) ;
+void extensionSetter_openOverrideForSelectBlock (class GALGAS_universalValuedObjectMap & ioObject,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_closeOverride (const int32_t inClassIndex,
-                                         extensionSetterSignature_universalValuedObjectMapForContext_closeOverride inModifier) ;
-
+//                                                                                                                     *
+//                       Extension setter '@universalValuedObjectMap openOverrideForRepeatBlock'                       *
+//                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionSetter_closeOverride (class cPtr_universalValuedObjectMapForContext * inObject,
-                                        const GALGAS_location constin_inErrorLocation,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+void extensionSetter_openOverrideForRepeatBlock (class GALGAS_universalValuedObjectMap & ioObject,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Extension setter '@universalValuedObjectMap closeOverride'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_closeOverride (class GALGAS_universalValuedObjectMap & ioObject,
+                                    const class GALGAS_location constin_inErrorLocation,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
