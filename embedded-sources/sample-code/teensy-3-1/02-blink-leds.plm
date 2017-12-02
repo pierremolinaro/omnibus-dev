@@ -1,6 +1,6 @@
 target "teensy-3-1/privileged"
 
-module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
 //——————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                               

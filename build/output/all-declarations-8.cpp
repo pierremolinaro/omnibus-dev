@@ -4613,25 +4613,25 @@ GALGAS_infixObjectObjectOperatorDescription GALGAS_infixObjectObjectOperatorDesc
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Extension method '@moduleListIR-element generateLLVM'                                *
+//                                Extension method '@driverListIR-element generateLLVM'                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_generateLLVM (const GALGAS_moduleListIR_2D_element inObject,
+void extensionMethod_generateLLVM (const GALGAS_driverListIR_2D_element inObject,
                                    GALGAS_string & ioArgument_ioLLVMcode,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmNameForGlobalVariable (inObject.mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 330)).add_operation (GALGAS_string (" = internal global "), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 330)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 330)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (inObject.mProperty_mType.getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 331)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 331)).add_operation (GALGAS_string (" {"), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 331)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 331)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmNameForGlobalVariable (inObject.mProperty_mDriverName, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 330)).add_operation (GALGAS_string (" = internal global "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 330)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 330)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (inObject.mProperty_mType.getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 331)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 331)).add_operation (GALGAS_string (" {"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 331)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 331)) ;
   cEnumerator_operandIRList enumerator_14278 (inObject.mProperty_mInitialValueList, kENUMERATION_UP) ;
   while (enumerator_14278.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_14278.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 333)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 333)).add_operation (extensionGetter_llvmName (enumerator_14278.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 333)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 333)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 333)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_14278.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 333)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 333)).add_operation (extensionGetter_llvmName (enumerator_14278.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 333)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 333)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 333)) ;
     if (enumerator_14278.hasNextObject ()) {
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 334)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 334)) ;
     }
     enumerator_14278.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 336)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 336)) ;
 }
 
 
@@ -5552,7 +5552,7 @@ mProperty_mPanicSetupRoutinePriorityMap (),
 mProperty_mPanicLoopRoutinePriorityMap (),
 mProperty_mControlRegisterMap (),
 mProperty_mGlobalConstantMap (),
-mProperty_mModuleMap (),
+mProperty_mDriverMap (),
 mProperty_mStaticListMap (),
 mProperty_mDefinedInterruptSet (),
 mProperty_mAvailableInterruptMap (),
@@ -5604,7 +5604,7 @@ GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_targetParameters & 
                                                 const GALGAS_panicRoutinePriorityMap & inOperand9,
                                                 const GALGAS_controlRegisterMap & inOperand10,
                                                 const GALGAS_globalConstantMap & inOperand11,
-                                                const GALGAS_moduleMap & inOperand12,
+                                                const GALGAS_driverMap & inOperand12,
                                                 const GALGAS_staticlistMap & inOperand13,
                                                 const GALGAS_stringset & inOperand14,
                                                 const GALGAS_availableInterruptMap & inOperand15,
@@ -5647,7 +5647,7 @@ mProperty_mPanicSetupRoutinePriorityMap (inOperand8),
 mProperty_mPanicLoopRoutinePriorityMap (inOperand9),
 mProperty_mControlRegisterMap (inOperand10),
 mProperty_mGlobalConstantMap (inOperand11),
-mProperty_mModuleMap (inOperand12),
+mProperty_mDriverMap (inOperand12),
 mProperty_mStaticListMap (inOperand13),
 mProperty_mDefinedInterruptSet (inOperand14),
 mProperty_mAvailableInterruptMap (inOperand15),
@@ -5695,7 +5695,7 @@ GALGAS_semanticContext GALGAS_semanticContext::constructor_default (UNUSED_LOCAT
                                  GALGAS_panicRoutinePriorityMap::constructor_emptyMap (HERE),
                                  GALGAS_controlRegisterMap::constructor_emptyMap (HERE),
                                  GALGAS_globalConstantMap::constructor_emptyMap (HERE),
-                                 GALGAS_moduleMap::constructor_emptyMap (HERE),
+                                 GALGAS_driverMap::constructor_emptyMap (HERE),
                                  GALGAS_staticlistMap::constructor_emptyMap (HERE),
                                  GALGAS_stringset::constructor_emptySet (HERE),
                                  GALGAS_availableInterruptMap::constructor_emptyMap (HERE),
@@ -5742,7 +5742,7 @@ GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_tar
                                                                 const GALGAS_panicRoutinePriorityMap & inOperand9,
                                                                 const GALGAS_controlRegisterMap & inOperand10,
                                                                 const GALGAS_globalConstantMap & inOperand11,
-                                                                const GALGAS_moduleMap & inOperand12,
+                                                                const GALGAS_driverMap & inOperand12,
                                                                 const GALGAS_staticlistMap & inOperand13,
                                                                 const GALGAS_stringset & inOperand14,
                                                                 const GALGAS_availableInterruptMap & inOperand15,
@@ -5822,7 +5822,7 @@ typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanti
     result = mProperty_mGlobalConstantMap.objectCompare (inOperand.mProperty_mGlobalConstantMap) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mModuleMap.objectCompare (inOperand.mProperty_mModuleMap) ;
+    result = mProperty_mDriverMap.objectCompare (inOperand.mProperty_mDriverMap) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mStaticListMap.objectCompare (inOperand.mProperty_mStaticListMap) ;
@@ -5920,7 +5920,7 @@ typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanti
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_semanticContext::isValid (void) const {
-  return mProperty_mTargetParameters.isValid () && mProperty_mPointerSize.isValid () && mProperty_mPanicCodeType.isValid () && mProperty_mPanicLineType.isValid () && mProperty_mTypeMap.isValid () && mProperty_mRoutineMapForContext.isValid () && mProperty_mGuardMapForContext.isValid () && mProperty_mInitRoutineMap.isValid () && mProperty_mPanicSetupRoutinePriorityMap.isValid () && mProperty_mPanicLoopRoutinePriorityMap.isValid () && mProperty_mControlRegisterMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mModuleMap.isValid () && mProperty_mStaticListMap.isValid () && mProperty_mDefinedInterruptSet.isValid () && mProperty_mAvailableInterruptMap.isValid () && mProperty_mEqualOperatorMap.isValid () && mProperty_mNonEqualOperatorMap.isValid () && mProperty_mStrictInfOperatorMap.isValid () && mProperty_mInfEqualOperatorMap.isValid () && mProperty_mStrictSupOperatorMap.isValid () && mProperty_mSupEqualOperatorMap.isValid () && mProperty_mAndOperatorMap.isValid () && mProperty_mOrOperatorMap.isValid () && mProperty_mXorOperatorMap.isValid () && mProperty_mBooleanXorOperatorMap.isValid () && mProperty_mAddOperatorMap.isValid () && mProperty_mAddNoOvfOperatorMap.isValid () && mProperty_mSubOperatorMap.isValid () && mProperty_mSubNoOvfOperatorMap.isValid () && mProperty_mMulOperatorMap.isValid () && mProperty_mMulNoOvfOperatorMap.isValid () && mProperty_mDivOperatorMap.isValid () && mProperty_mDivNoOvfOperatorMap.isValid () && mProperty_mModOperatorMap.isValid () && mProperty_mModNoOvfOperatorMap.isValid () && mProperty_mLeftShiftOperatorMap.isValid () && mProperty_mRightShiftOperatorMap.isValid () && mProperty_mUnaryMinusOperatorMap.isValid () && mProperty_mNotOperatorMap.isValid () && mProperty_mUnsignedComplementOperatorMap.isValid () && mProperty_mTaskMap.isValid () && mProperty_mGlobalTaskVariableList.isValid () ;
+  return mProperty_mTargetParameters.isValid () && mProperty_mPointerSize.isValid () && mProperty_mPanicCodeType.isValid () && mProperty_mPanicLineType.isValid () && mProperty_mTypeMap.isValid () && mProperty_mRoutineMapForContext.isValid () && mProperty_mGuardMapForContext.isValid () && mProperty_mInitRoutineMap.isValid () && mProperty_mPanicSetupRoutinePriorityMap.isValid () && mProperty_mPanicLoopRoutinePriorityMap.isValid () && mProperty_mControlRegisterMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mDriverMap.isValid () && mProperty_mStaticListMap.isValid () && mProperty_mDefinedInterruptSet.isValid () && mProperty_mAvailableInterruptMap.isValid () && mProperty_mEqualOperatorMap.isValid () && mProperty_mNonEqualOperatorMap.isValid () && mProperty_mStrictInfOperatorMap.isValid () && mProperty_mInfEqualOperatorMap.isValid () && mProperty_mStrictSupOperatorMap.isValid () && mProperty_mSupEqualOperatorMap.isValid () && mProperty_mAndOperatorMap.isValid () && mProperty_mOrOperatorMap.isValid () && mProperty_mXorOperatorMap.isValid () && mProperty_mBooleanXorOperatorMap.isValid () && mProperty_mAddOperatorMap.isValid () && mProperty_mAddNoOvfOperatorMap.isValid () && mProperty_mSubOperatorMap.isValid () && mProperty_mSubNoOvfOperatorMap.isValid () && mProperty_mMulOperatorMap.isValid () && mProperty_mMulNoOvfOperatorMap.isValid () && mProperty_mDivOperatorMap.isValid () && mProperty_mDivNoOvfOperatorMap.isValid () && mProperty_mModOperatorMap.isValid () && mProperty_mModNoOvfOperatorMap.isValid () && mProperty_mLeftShiftOperatorMap.isValid () && mProperty_mRightShiftOperatorMap.isValid () && mProperty_mUnaryMinusOperatorMap.isValid () && mProperty_mNotOperatorMap.isValid () && mProperty_mUnsignedComplementOperatorMap.isValid () && mProperty_mTaskMap.isValid () && mProperty_mGlobalTaskVariableList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5938,7 +5938,7 @@ void GALGAS_semanticContext::drop (void) {
   mProperty_mPanicLoopRoutinePriorityMap.drop () ;
   mProperty_mControlRegisterMap.drop () ;
   mProperty_mGlobalConstantMap.drop () ;
-  mProperty_mModuleMap.drop () ;
+  mProperty_mDriverMap.drop () ;
   mProperty_mStaticListMap.drop () ;
   mProperty_mDefinedInterruptSet.drop () ;
   mProperty_mAvailableInterruptMap.drop () ;
@@ -6003,7 +6003,7 @@ void GALGAS_semanticContext::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mGlobalConstantMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mModuleMap.description (ioString, inIndentation+1) ;
+    mProperty_mDriverMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mStaticListMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -6142,8 +6142,8 @@ GALGAS_globalConstantMap GALGAS_semanticContext::getter_mGlobalConstantMap (UNUS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_moduleMap GALGAS_semanticContext::getter_mModuleMap (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mModuleMap ;
+GALGAS_driverMap GALGAS_semanticContext::getter_mDriverMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mDriverMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6557,7 +6557,7 @@ mProperty_mTaskMapIR (),
 mProperty_mGlobalTaskVariableList (),
 mProperty_mMaxBranchOfOnInstructions (),
 mProperty_mTargetParameters (),
-mProperty_mModuleList (),
+mProperty_mDriverList (),
 mProperty_mStaticArrayMapForIntermediate (),
 mProperty_mGenerationListIR () {
 }
@@ -6584,7 +6584,7 @@ GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (const GALGAS_stati
                                                               const GALGAS_globalTaskVariableList & inOperand12,
                                                               const GALGAS_uint & inOperand13,
                                                               const GALGAS_targetParameters & inOperand14,
-                                                              const GALGAS_moduleListIR & inOperand15,
+                                                              const GALGAS_driverListIR & inOperand15,
                                                               const GALGAS_staticListInvokedFunctionSetMap & inOperand16,
                                                               const GALGAS_generationListIR & inOperand17) :
 mProperty_mStaticStringMap (inOperand0),
@@ -6602,7 +6602,7 @@ mProperty_mTaskMapIR (inOperand11),
 mProperty_mGlobalTaskVariableList (inOperand12),
 mProperty_mMaxBranchOfOnInstructions (inOperand13),
 mProperty_mTargetParameters (inOperand14),
-mProperty_mModuleList (inOperand15),
+mProperty_mDriverList (inOperand15),
 mProperty_mStaticArrayMapForIntermediate (inOperand16),
 mProperty_mGenerationListIR (inOperand17) {
 }
@@ -6625,7 +6625,7 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default
                                         GALGAS_globalTaskVariableList::constructor_emptyList (HERE),
                                         GALGAS_uint::constructor_default (HERE),
                                         GALGAS_targetParameters::constructor_default (HERE),
-                                        GALGAS_moduleListIR::constructor_emptyList (HERE),
+                                        GALGAS_driverListIR::constructor_emptyList (HERE),
                                         GALGAS_staticListInvokedFunctionSetMap::constructor_emptyMap (HERE),
                                         GALGAS_generationListIR::constructor_emptyList (HERE)) ;
 }
@@ -6647,7 +6647,7 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (co
                                                                               const GALGAS_globalTaskVariableList & inOperand12,
                                                                               const GALGAS_uint & inOperand13,
                                                                               const GALGAS_targetParameters & inOperand14,
-                                                                              const GALGAS_moduleListIR & inOperand15,
+                                                                              const GALGAS_driverListIR & inOperand15,
                                                                               const GALGAS_staticListInvokedFunctionSetMap & inOperand16,
                                                                               const GALGAS_generationListIR & inOperand17 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
@@ -6708,7 +6708,7 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
     result = mProperty_mTargetParameters.objectCompare (inOperand.mProperty_mTargetParameters) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mModuleList.objectCompare (inOperand.mProperty_mModuleList) ;
+    result = mProperty_mDriverList.objectCompare (inOperand.mProperty_mDriverList) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mStaticArrayMapForIntermediate.objectCompare (inOperand.mProperty_mStaticArrayMapForIntermediate) ;
@@ -6722,7 +6722,7 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_intermediateCodeStruct::isValid (void) const {
-  return mProperty_mStaticStringMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mRoutineMapIR.isValid () && mProperty_mGuardMapIR.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mRequiredProcedureSet.isValid () && mProperty_mBootList.isValid () && mProperty_mInitList.isValid () && mProperty_mPanicSetupInstructionListIR.isValid () && mProperty_mPanicLoopInstructionListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mModuleList.isValid () && mProperty_mStaticArrayMapForIntermediate.isValid () && mProperty_mGenerationListIR.isValid () ;
+  return mProperty_mStaticStringMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mRoutineMapIR.isValid () && mProperty_mGuardMapIR.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mRequiredProcedureSet.isValid () && mProperty_mBootList.isValid () && mProperty_mInitList.isValid () && mProperty_mPanicSetupInstructionListIR.isValid () && mProperty_mPanicLoopInstructionListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mDriverList.isValid () && mProperty_mStaticArrayMapForIntermediate.isValid () && mProperty_mGenerationListIR.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6743,7 +6743,7 @@ void GALGAS_intermediateCodeStruct::drop (void) {
   mProperty_mGlobalTaskVariableList.drop () ;
   mProperty_mMaxBranchOfOnInstructions.drop () ;
   mProperty_mTargetParameters.drop () ;
-  mProperty_mModuleList.drop () ;
+  mProperty_mDriverList.drop () ;
   mProperty_mStaticArrayMapForIntermediate.drop () ;
   mProperty_mGenerationListIR.drop () ;
 }
@@ -6786,7 +6786,7 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mTargetParameters.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mModuleList.description (ioString, inIndentation+1) ;
+    mProperty_mDriverList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mStaticArrayMapForIntermediate.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -6887,8 +6887,8 @@ GALGAS_targetParameters GALGAS_intermediateCodeStruct::getter_mTargetParameters 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_moduleListIR GALGAS_intermediateCodeStruct::getter_mModuleList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mModuleList ;
+GALGAS_driverListIR GALGAS_intermediateCodeStruct::getter_mDriverList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mDriverList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -235,12 +235,12 @@ override method @procedureCallInstructionAST analyze
     case task (@PLMType type) :
       currentType = type
       currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
-    case module (@PLMType type instancied) :
+    case driver (@PLMType type instancied) :
       if instancied then
         currentType = type
         currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
       else
-        error mIdentifier : "the module should be instancied" : currentType, currentLLVMAddressVar
+        error mIdentifier : "the driver should be instancied" : currentType, currentLLVMAddressVar
       end
     case register (* * * * * * *) :
       error mIdentifier

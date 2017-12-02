@@ -195,9 +195,9 @@ private proc generateCodeFiles
 #----------------------------------------- Static array type declaration
   [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]
 #----------------------------------------- Modules
-  for module in inIntermediateCodeStruct.mModuleList
-    before llvmCode += llvmTitleComment (!"Modules")
-    do [module generateLLVM !?llvmCode]
+  for driver in inIntermediateCodeStruct.mDriverList
+    before llvmCode += llvmTitleComment (!"Drivers")
+    do [driver generateLLVM !?llvmCode]
     after llvmCode += "\n"
   end
 #----------------------------------------- Boot

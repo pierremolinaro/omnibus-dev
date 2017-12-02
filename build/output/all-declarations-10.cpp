@@ -2362,9 +2362,9 @@ static void extensionMethod_procedureCallInstructionAST_analyze (const cPtr_inst
         var_currentLLVMAddressVar_9182 = function_llvmNameForGlobalVariable (object->mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 237)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 237)) ;
       }
       break ;
-    case GALGAS_valuedObject::kEnum_module:
+    case GALGAS_valuedObject::kEnum_driver:
       {
-        const cEnumAssociatedValues_valuedObject_module * extractPtr_9989 = (const cEnumAssociatedValues_valuedObject_module *) (var_entity_9552.unsafePointer ()) ;
+        const cEnumAssociatedValues_valuedObject_driver * extractPtr_9989 = (const cEnumAssociatedValues_valuedObject_driver *) (var_entity_9552.unsafePointer ()) ;
         const GALGAS_PLMType extractedValue_type = extractPtr_9989->mAssociatedValue0 ;
         const GALGAS_bool extractedValue_instancied = extractPtr_9989->mAssociatedValue1 ;
         const enumGalgasBool test_3 = extractedValue_instancied.boolEnum () ;
@@ -2373,7 +2373,7 @@ static void extensionMethod_procedureCallInstructionAST_analyze (const cPtr_inst
           var_currentLLVMAddressVar_9182 = function_llvmNameForGlobalVariable (object->mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 241)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 241)) ;
         }else if (kBoolFalse == test_3) {
           TC_Array <C_FixItDescription> fixItArray4 ;
-          inCompiler->emitSemanticError (object->mProperty_mIdentifier.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 243)), GALGAS_string ("the module should be instancied"), fixItArray4  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 243)) ;
+          inCompiler->emitSemanticError (object->mProperty_mIdentifier.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 243)), GALGAS_string ("the driver should be instancied"), fixItArray4  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 243)) ;
           var_currentType_9150.drop () ; // Release error dropped variable
           var_currentLLVMAddressVar_9182.drop () ; // Release error dropped variable
         }
@@ -3701,14 +3701,14 @@ void routine_initialVariableMap (const GALGAS_semanticContext constinArgument_in
     }
     enumerator_22959.gotoNextObject () ;
   }
-  cEnumerator_moduleMap enumerator_23147 (constinArgument_inContext.getter_mModuleMap (HERE), kENUMERATION_UP) ;
+  cEnumerator_driverMap enumerator_23147 (constinArgument_inContext.getter_mDriverMap (HERE), kENUMERATION_UP) ;
   while (enumerator_23147.hasCurrentObject ()) {
-    GALGAS_lstring var_moduleTypeName_23173 = function_llvmModuleNameFromName (enumerator_23147.current_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 581)) ;
-    GALGAS_PLMType var_moduleType_23231 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), var_moduleTypeName_23173, inCompiler  COMMA_SOURCE_FILE ("universal-map.galgas", 582)).getter_type (inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 582)) ;
+    GALGAS_lstring var_driverTypeName_23173 = function_llvmDriverNameFromName (enumerator_23147.current_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 581)) ;
+    GALGAS_PLMType var_driverType_23231 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), var_driverTypeName_23173, inCompiler  COMMA_SOURCE_FILE ("universal-map.galgas", 582)).getter_type (inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 582)) ;
     {
     outArgument_outUniversalMap.insulate (HERE) ;
     cPtr_universalValuedObjectMapForContext * ptr_23333 = (cPtr_universalValuedObjectMapForContext *) outArgument_outUniversalMap.ptr () ;
-    callExtensionSetter_insertModule ((cPtr_universalValuedObjectMapForContext *) ptr_23333, enumerator_23147.current_lkey (HERE), enumerator_23147.current_mIsInstancied (HERE), var_moduleType_23231, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 583)) ;
+    callExtensionSetter_insertDriver ((cPtr_universalValuedObjectMapForContext *) ptr_23333, enumerator_23147.current_lkey (HERE), enumerator_23147.current_mIsInstancied (HERE), var_driverType_23231, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 583)) ;
     }
     enumerator_23147.gotoNextObject () ;
   }
@@ -3890,28 +3890,28 @@ void routine_buildSemanticContext (const GALGAS_lstring constinArgument_inSource
   outArgument_outSemanticContext.drop () ; // Release 'out' argument
   outArgument_outSubprogramInvocationGraph.drop () ; // Release 'out' argument
   outArgument_outDecoratedDeclarationList.drop () ; // Release 'out' argument
-  outArgument_outSemanticContext = GALGAS_semanticContext::constructor_default (SOURCE_FILE ("context.galgas", 157)) ;
-  outArgument_outDecoratedDeclarationList = GALGAS_declarationDecorationList::constructor_emptyList (SOURCE_FILE ("context.galgas", 158)) ;
-  extensionMethod_enterInContext (constinArgument_inAST.getter_mISRDeclarationListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 164)) ;
-  extensionMethod_enterFunctionInContext (constinArgument_inAST.getter_mStandAloneFunctionDeclarationListAST (HERE), GALGAS_string::makeEmptyString (), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 165)) ;
-  extensionMethod_enterExternProcInContext (constinArgument_inAST.getter_mExternProcListAST (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 170)) ;
-  extensionMethod_enterSystemRoutineInContext (constinArgument_inAST.getter_mStandAloneSystemRoutineListAST (HERE), GALGAS_string::makeEmptyString (), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 171)) ;
-  outArgument_outSubprogramInvocationGraph = GALGAS_subprogramInvocationGraph::constructor_emptyGraph (SOURCE_FILE ("context.galgas", 174)) ;
-  cEnumerator_declarationListAST enumerator_7570 (constinArgument_inAST.getter_mDeclarationListAST (HERE), kENUMERATION_UP) ;
-  while (enumerator_7570.hasCurrentObject ()) {
-    callExtensionMethod_enterInContext ((const cPtr_abstractDeclarationAST *) enumerator_7570.current_mDeclaration (HERE).ptr (), constinArgument_inAST.getter_mStandAloneFunctionDeclarationListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outSubprogramInvocationGraph, ioArgument_ioStaticListValueMap, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("context.galgas", 176)) ;
-    enumerator_7570.gotoNextObject () ;
+  outArgument_outSemanticContext = GALGAS_semanticContext::constructor_default (SOURCE_FILE ("context.galgas", 156)) ;
+  outArgument_outDecoratedDeclarationList = GALGAS_declarationDecorationList::constructor_emptyList (SOURCE_FILE ("context.galgas", 157)) ;
+  extensionMethod_enterInContext (constinArgument_inAST.getter_mISRDeclarationListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 163)) ;
+  extensionMethod_enterFunctionInContext (constinArgument_inAST.getter_mStandAloneFunctionDeclarationListAST (HERE), GALGAS_string::makeEmptyString (), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 164)) ;
+  extensionMethod_enterExternProcInContext (constinArgument_inAST.getter_mExternProcListAST (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 169)) ;
+  extensionMethod_enterSystemRoutineInContext (constinArgument_inAST.getter_mStandAloneSystemRoutineListAST (HERE), GALGAS_string::makeEmptyString (), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 170)) ;
+  outArgument_outSubprogramInvocationGraph = GALGAS_subprogramInvocationGraph::constructor_emptyGraph (SOURCE_FILE ("context.galgas", 173)) ;
+  cEnumerator_declarationListAST enumerator_7529 (constinArgument_inAST.getter_mDeclarationListAST (HERE), kENUMERATION_UP) ;
+  while (enumerator_7529.hasCurrentObject ()) {
+    callExtensionMethod_enterInContext ((const cPtr_abstractDeclarationAST *) enumerator_7529.current_mDeclaration (HERE).ptr (), constinArgument_inAST.getter_mStandAloneFunctionDeclarationListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outSubprogramInvocationGraph, ioArgument_ioStaticListValueMap, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("context.galgas", 175)) ;
+    enumerator_7529.gotoNextObject () ;
   }
   {
-  routine_buildGlobalConstantMapHTMLFile (outArgument_outSemanticContext.getter_mGlobalConstantMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 186)) ;
+  routine_buildGlobalConstantMapHTMLFile (outArgument_outSemanticContext.getter_mGlobalConstantMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 185)) ;
   }
   {
-  routine_buildTypeMapHTMLFile (outArgument_outSemanticContext.getter_mTypeMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 191)) ;
+  routine_buildTypeMapHTMLFile (outArgument_outSemanticContext.getter_mTypeMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 190)) ;
   }
   {
-  routine_buildControlRegisterMapHTMLFile (outArgument_outSemanticContext.getter_mControlRegisterMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 196)) ;
+  routine_buildControlRegisterMapHTMLFile (outArgument_outSemanticContext.getter_mControlRegisterMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 195)) ;
   }
-  extensionMethod_enterInContext (constinArgument_inAST.getter_mTaskListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outSubprogramInvocationGraph, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("context.galgas", 201)) ;
+  extensionMethod_enterInContext (constinArgument_inAST.getter_mTaskListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outSubprogramInvocationGraph, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("context.galgas", 200)) ;
 }
 
 
@@ -3926,7 +3926,7 @@ GALGAS_lstring function_combineTypeNamesForInfixOperator (const GALGAS_string & 
                                                           C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_string ("{").add_operation (constinArgument_inLeftTypeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 212)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("context.galgas", 212)).add_operation (constinArgument_inRightTypeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 212)).add_operation (GALGAS_string ("}"), inCompiler COMMA_SOURCE_FILE ("context.galgas", 212)).getter_nowhere (SOURCE_FILE ("context.galgas", 212)) ;
+  result_result = GALGAS_string ("{").add_operation (constinArgument_inLeftTypeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 211)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("context.galgas", 211)).add_operation (constinArgument_inRightTypeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 211)).add_operation (GALGAS_string ("}"), inCompiler COMMA_SOURCE_FILE ("context.galgas", 211)).getter_nowhere (SOURCE_FILE ("context.galgas", 211)) ;
 //---
   return result_result ;
 }
@@ -5018,20 +5018,20 @@ C_galgas_function_descriptor functionDescriptor_llvmTypeNameFromPLMname ("llvmTy
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Function 'llvmModuleStringFromName'                                         *
+//                                         Function 'llvmDriverStringFromName'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string function_llvmModuleStringFromName (const GALGAS_string & constinArgument_inModuleName,
+GALGAS_string function_llvmDriverStringFromName (const GALGAS_string & constinArgument_inDriverName,
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
   GALGAS_string temp_0 ;
-  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inModuleName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inDriverName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    temp_0 = constinArgument_inModuleName ;
+    temp_0 = constinArgument_inDriverName ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_string ("module.").add_operation (constinArgument_inModuleName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 35)) ;
+    temp_0 = GALGAS_string ("driver.").add_operation (constinArgument_inDriverName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 35)) ;
   }
   result_result = temp_0 ;
 //---
@@ -5043,44 +5043,44 @@ GALGAS_string function_llvmModuleStringFromName (const GALGAS_string & constinAr
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_llvmModuleStringFromName [2] = {
+static const C_galgas_type_descriptor * functionArgs_llvmDriverStringFromName [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_llvmModuleStringFromName (C_Compiler * inCompiler,
+static GALGAS_object functionWithGenericHeader_llvmDriverStringFromName (C_Compiler * inCompiler,
                                                                          const cObjectArray & inEffectiveParameterArray,
                                                                          const GALGAS_location & /* inErrorLocation */
                                                                          COMMA_LOCATION_ARGS) {
   const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
                                                                inCompiler
                                                                COMMA_THERE) ;
-  return function_llvmModuleStringFromName (operand0,
+  return function_llvmDriverStringFromName (operand0,
                                             inCompiler
                                             COMMA_THERE).getter_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_llvmModuleStringFromName ("llvmModuleStringFromName",
-                                                                          functionWithGenericHeader_llvmModuleStringFromName,
+C_galgas_function_descriptor functionDescriptor_llvmDriverStringFromName ("llvmDriverStringFromName",
+                                                                          functionWithGenericHeader_llvmDriverStringFromName,
                                                                           & kTypeDescriptor_GALGAS_string,
                                                                           1,
-                                                                          functionArgs_llvmModuleStringFromName) ;
+                                                                          functionArgs_llvmDriverStringFromName) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'llvmModuleNameFromName'                                          *
+//                                          Function 'llvmDriverNameFromName'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring function_llvmModuleNameFromName (const GALGAS_lstring & constinArgument_inModuleName,
+GALGAS_lstring function_llvmDriverNameFromName (const GALGAS_lstring & constinArgument_inDriverName,
                                                 C_Compiler * inCompiler
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_lstring::constructor_new (function_llvmModuleStringFromName (constinArgument_inModuleName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 42)), constinArgument_inModuleName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 42)) ;
+  result_result = GALGAS_lstring::constructor_new (function_llvmDriverStringFromName (constinArgument_inDriverName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 42)), constinArgument_inDriverName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 42)) ;
 //---
   return result_result ;
 }
@@ -5090,32 +5090,32 @@ GALGAS_lstring function_llvmModuleNameFromName (const GALGAS_lstring & constinAr
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_llvmModuleNameFromName [2] = {
+static const C_galgas_type_descriptor * functionArgs_llvmDriverNameFromName [2] = {
   & kTypeDescriptor_GALGAS_lstring,
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_llvmModuleNameFromName (C_Compiler * inCompiler,
+static GALGAS_object functionWithGenericHeader_llvmDriverNameFromName (C_Compiler * inCompiler,
                                                                        const cObjectArray & inEffectiveParameterArray,
                                                                        const GALGAS_location & /* inErrorLocation */
                                                                        COMMA_LOCATION_ARGS) {
   const GALGAS_lstring operand0 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
                                                                  inCompiler
                                                                  COMMA_THERE) ;
-  return function_llvmModuleNameFromName (operand0,
+  return function_llvmDriverNameFromName (operand0,
                                           inCompiler
                                           COMMA_THERE).getter_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_llvmModuleNameFromName ("llvmModuleNameFromName",
-                                                                        functionWithGenericHeader_llvmModuleNameFromName,
+C_galgas_function_descriptor functionDescriptor_llvmDriverNameFromName ("llvmDriverNameFromName",
+                                                                        functionWithGenericHeader_llvmDriverNameFromName,
                                                                         & kTypeDescriptor_GALGAS_lstring,
                                                                         1,
-                                                                        functionArgs_llvmModuleNameFromName) ;
+                                                                        functionArgs_llvmDriverNameFromName) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

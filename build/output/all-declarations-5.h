@@ -36,9 +36,18 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 
 //----------- '' label
   public : virtual void nt_declaration_5F_init_ (GALGAS_ast & ioArgument0,
-                                                 GALGAS_initAST & outArgument1,
-                                                 const GALGAS_lstring inArgument2,
+                                                 const GALGAS_lstring inArgument1,
+                                                 GALGAS_initAST & outArgument2,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'driver_property' non terminal
+//--- 'parse' label
+  public : virtual void nt_driver_5F_property_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_driver_5F_property_ (GALGAS_ast & ioArgument0,
+                                                GALGAS_driverPropertyListAST & ioArgument1,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'effective_parameters' non terminal
 //--- 'parse' label
@@ -266,15 +275,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_mode_ (GALGAS_mode & outArgument0,
                                   C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'module_property' non terminal
-//--- 'parse' label
-  public : virtual void nt_module_5F_property_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_module_5F_property_ (GALGAS_ast & ioArgument0,
-                                                GALGAS_modulePropertyListAST & ioArgument1,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'primary' non terminal
 //--- 'parse' label

@@ -224,9 +224,9 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       !?result: outResult
     )
-  case module (type instancied) :
+  case driver (type instancied) :
     if not instancied then
-      error mReceiverName : "the module should be instancied"
+      error mReceiverName : "the driver should be instancied"
     end
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
     procAnalyzeAccesListInExpression (

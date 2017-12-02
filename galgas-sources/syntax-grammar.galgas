@@ -35,8 +35,6 @@ syntax plm_syntax (plm_lexique) {
       @systemRoutineDeclarationListAST standAloneSystemRoutineListAST = {}
       <system_routine> !?ioAST !?standAloneSystemRoutineListAST
       ioAST.mStandAloneSystemRoutineListAST += standAloneSystemRoutineListAST
-#    while
-#      <isr> !?ioAST !["" nowhere] # No module name
     while
       <import_file> !?outImportedFileList
     end

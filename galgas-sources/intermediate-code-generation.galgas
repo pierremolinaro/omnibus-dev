@@ -20,19 +20,10 @@ struct @intermediateCodeStruct {
   @globalTaskVariableList mGlobalTaskVariableList
   @uint mMaxBranchOfOnInstructions
   @targetParameters mTargetParameters
-  @moduleListIR mModuleList
+  @driverListIR mDriverList
   @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
   @generationListIR mGenerationListIR
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#map @globalVariableMapIR {
-#  @bool mGenerateVolatile
-#  @objectIR mInitialValue
-#  insert insertKey error message "** internal error **"
-#  search searchKey error message "** internal error **"
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

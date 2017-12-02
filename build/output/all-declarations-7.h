@@ -458,11 +458,11 @@ void callExtensionSetter_insertTask (class cPtr_universalValuedObjectMapForConte
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Extension setter '@universalValuedObjectMapForContext insertModule'                         *
+//                         Extension setter '@universalValuedObjectMapForContext insertDriver'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertModule) (class cPtr_universalValuedObjectMapForContext * inObject,
+typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertDriver) (class cPtr_universalValuedObjectMapForContext * inObject,
                                                                                           const class GALGAS_lstring constinArgument0,
                                                                                           const class GALGAS_bool constinArgument1,
                                                                                           const class GALGAS_PLMType constinArgument2,
@@ -471,15 +471,15 @@ typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_inser
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterExtensionSetter_insertModule (const int32_t inClassIndex,
-                                        extensionSetterSignature_universalValuedObjectMapForContext_insertModule inModifier) ;
+void enterExtensionSetter_insertDriver (const int32_t inClassIndex,
+                                        extensionSetterSignature_universalValuedObjectMapForContext_insertDriver inModifier) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionSetter_insertModule (class cPtr_universalValuedObjectMapForContext * inObject,
-                                       const GALGAS_lstring constin_inModuleName,
+void callExtensionSetter_insertDriver (class cPtr_universalValuedObjectMapForContext * inObject,
+                                       const GALGAS_lstring constin_inDriverName,
                                        const GALGAS_bool constin_inIsInstancied,
-                                       const GALGAS_PLMType constin_inModuleType,
+                                       const GALGAS_PLMType constin_inDriverType,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 

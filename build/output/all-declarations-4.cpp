@@ -2082,7 +2082,7 @@ GALGAS_valuedObjectState GALGAS_valuedObjectState::extractObject (const GALGAS_o
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_valuedObject_module::cEnumAssociatedValues_valuedObject_module (const GALGAS_PLMType & inAssociatedValue0,
+cEnumAssociatedValues_valuedObject_driver::cEnumAssociatedValues_valuedObject_driver (const GALGAS_PLMType & inAssociatedValue0,
                                                                                       const GALGAS_bool & inAssociatedValue1
                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -2092,7 +2092,7 @@ mAssociatedValue1 (inAssociatedValue1) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_valuedObject_module::description (C_String & ioString,
+void cEnumAssociatedValues_valuedObject_driver::description (C_String & ioString,
                                                              const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
@@ -2102,8 +2102,8 @@ void cEnumAssociatedValues_valuedObject_module::description (C_String & ioString
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_valuedObject_module::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_valuedObject_module * ptr = dynamic_cast<const cEnumAssociatedValues_valuedObject_module *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_valuedObject_driver::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_valuedObject_driver * ptr = dynamic_cast<const cEnumAssociatedValues_valuedObject_driver *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -2317,14 +2317,14 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObject GALGAS_valuedObject::constructor_module (const GALGAS_PLMType & inAssociatedValue0,
+GALGAS_valuedObject GALGAS_valuedObject::constructor_driver (const GALGAS_PLMType & inAssociatedValue0,
                                                              const GALGAS_bool & inAssociatedValue1
                                                              COMMA_LOCATION_ARGS) {
   GALGAS_valuedObject result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_module ;
+    result.mEnum = kEnum_driver ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_valuedObject_module (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_valuedObject_driver (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -2416,18 +2416,18 @@ GALGAS_valuedObject GALGAS_valuedObject::constructor_localVariable (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObject::method_module (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_valuedObject::method_driver (GALGAS_PLMType & outAssociatedValue0,
                                          GALGAS_bool & outAssociatedValue1,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_module) {
+  if (mEnum != kEnum_driver) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     C_String s ;
-    s << "method @valuedObject module invoked with an invalid enum value" ;
+    s << "method @valuedObject driver invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_valuedObject_module * ptr = (const cEnumAssociatedValues_valuedObject_module *) unsafePointer () ;
+    const cEnumAssociatedValues_valuedObject_driver * ptr = (const cEnumAssociatedValues_valuedObject_driver *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
@@ -2541,7 +2541,7 @@ void GALGAS_valuedObject::method_localVariable (GALGAS_PLMType & outAssociatedVa
 
 static const char * gEnumNameArrayFor_valuedObject [7] = {
   "(not built)",
-  "module",
+  "driver",
   "task",
   "register",
   "globalConstant",
@@ -2551,8 +2551,8 @@ static const char * gEnumNameArrayFor_valuedObject [7] = {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_valuedObject::getter_isModule (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_module == mEnum) ;
+GALGAS_bool GALGAS_valuedObject::getter_isDriver (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_driver == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

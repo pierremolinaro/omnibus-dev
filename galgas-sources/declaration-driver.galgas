@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @modulePropertyListAST {
+list @driverPropertyListAST {
   @lstring mPropertyName
   @bool mIsConstant # true if declared with "let"
   @lstring mTypeName # Empty string if no type annotation
@@ -11,39 +11,39 @@ list @modulePropertyListAST {
 
 #·······················································································································
 
-struct @moduleDeclarationAST {
-  @lstring mModuleName
-  @modulePropertyListAST mModulePropertyListAST
-  @functionDeclarationListAST mModuleFunctionDeclarationListAST
-  @systemRoutineDeclarationListAST mModuleSystemRoutineListAST
-  @guardDeclarationListAST mModuleGuardListAST
-  @initListAST mModuleInitListAST
+struct @driverDeclarationAST {
+  @lstring mDriverName
+  @driverPropertyListAST mDriverPropertyListAST
+  @functionDeclarationListAST mDriverFunctionDeclarationListAST
+  @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
+  @guardDeclarationListAST mDriverGuardListAST
+  @initListAST mDriverInitListAST
 }
 
 #·······················································································································
 
-list @moduleDeclarationListAST {
-  @moduleDeclarationAST mModule
+list @driverDeclarationListAST {
+  @driverDeclarationAST mDriver
 }
 
 #·······················································································································
 
-list @moduleInstanciationArgumentListAST {
+list @driverInstanciationArgumentListAST {
   @lstring mSelector
   @expressionAST mExpression
 }
 
 #·······················································································································
 
-list @moduleInstanciationListAST {
-  @lstring mModuleName
-  @moduleInstanciationArgumentListAST mModuleInstanciationArgumentList
+list @driverInstanciationListAST {
+  @lstring mDriverName
+  @driverInstanciationArgumentListAST mDriverInstanciationArgumentList
 }
 
 #·······················································································································
 
-class @implementedModuleAST : @abstractDeclarationAST {
-  @lstring mModuleName
+class @implementedDriverAST : @abstractDeclarationAST {
+  @lstring mDriverName
   @bool mIsInstancied
 }
 
@@ -55,7 +55,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <module_property> ?!@ast ioAST ?!@modulePropertyListAST ioPropertyList {
+  rule <driver_property> ?!@ast ioAST ?!@driverPropertyListAST ioPropertyList {
     @bool constant
     select
       $var$
@@ -84,22 +84,22 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    $module$
-    $identifier$ ?let moduleName
+    $driver$
+    $identifier$ ?let driverName
     ${$
     @functionDeclarationListAST functionDeclarationListAST = {}
-    @modulePropertyListAST modulePropertyListAST = {}
+    @driverPropertyListAST driverPropertyListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @systemRoutineDeclarationListAST svcListAST = {}
     @initListAST initList = {}
     repeat
     while
-      <declaration_init>!?ioAST ?let init !moduleName
+      <declaration_init>!?ioAST !driverName ?let init
       initList += !init
     while
-      <isr> !?ioAST !moduleName
+      <isr> !?ioAST !driverName
     while
-      <module_property>!?ioAST !?modulePropertyListAST
+      <driver_property>!?ioAST !?driverPropertyListAST
     while
       <function> !?ioAST!?functionDeclarationListAST
     while
@@ -110,10 +110,10 @@ syntax extension plm_syntax {
       $;$
     end
     $}$
-  #--- Declare module
-    ioAST.mModuleDeclarationListAST += !@moduleDeclarationAST.new {
-      !moduleName
-      !modulePropertyListAST
+  #--- Declare driver
+    ioAST.mDriverDeclarationListAST += !@driverDeclarationAST.new {
+      !driverName
+      !driverPropertyListAST
       !functionDeclarationListAST
       !svcListAST
       !guardListAST
@@ -124,18 +124,18 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    $module$
-    $identifier$ ?let moduleName
+    $driver$
+    $identifier$ ?let driverName
     $($
-    @moduleInstanciationArgumentListAST moduleInstanciationArgumentList = {}
+    @driverInstanciationArgumentListAST driverInstanciationArgumentList = {}
     repeat
     while
       $!selector:$ ?let selector
       <expression> !?ioAST ?let expression
-      moduleInstanciationArgumentList += !selector !expression
+      driverInstanciationArgumentList += !selector !expression
     end
     $)$
-    ioAST.mRequiredModuleListAST += !moduleName !moduleInstanciationArgumentList
+    ioAST.mRequiredDriverListAST += !driverName !driverInstanciationArgumentList
   }
  
   #·····················································································································
@@ -146,29 +146,29 @@ syntax extension plm_syntax {
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @implementedModuleAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
- [!?ioGraph addNode !mModuleName !self]
-  let moduleTypeName = llvmTypeNameFromPLMname (!llvmModuleNameFromName (!mModuleName))
- [!?ioGraph addEdge !mModuleName !moduleTypeName]
+override method @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+ [!?ioGraph addNode !mDriverName !self]
+  let driverTypeName = llvmTypeNameFromPLMname (!llvmDriverNameFromName (!mDriverName))
+ [!?ioGraph addEdge !mDriverName !driverTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @implementedModuleAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "module " + mModuleName 
+override getter @implementedDriverAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "driver " + mDriverName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @implementedModuleAST location -> @location outLocation {
-  outLocation = mModuleName.location
+override getter @implementedDriverAST location -> @location outLocation {
+  outLocation = mDriverName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @implementedModuleAST addExtension
+override method @implementedDriverAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
@@ -177,10 +177,10 @@ override method @implementedModuleAST addExtension
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  RETAIN REQUIRED MODULES IN DECLARATION LIST AST                                                                                                  
+#  RETAIN REQUIRED DRIVERS IN DECLARATION LIST AST                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @moduleInstanciationArgumentMap {
+map @driverInstanciationArgumentMap {
   @expressionAST mExpression
   insert insertKey error message "duplicated '%K' selector"
   search searchKey error message "uninitialized '%K' property"
@@ -188,75 +188,75 @@ map @moduleInstanciationArgumentMap {
 
 #·······················································································································
 
-map @instanciedModuleMap {
-  @moduleInstanciationArgumentMap mModuleInstanciationArgumentMap
-  insert insertKey error message "the '%K' module is already instancied in %L"
+map @instanciedDriverMap {
+  @driverInstanciationArgumentMap mDriverInstanciationArgumentMap
+  insert insertKey error message "the '%K' driver is already instancied in %L"
   search searchKey error message "internal error %K"
 }
 
 #·······················································································································
 
-proc retainRequiredModules ?!@ast ioAST {
-  @instanciedModuleMap instanciedModuleMap = {}
-  @stringset validModuleNames = {} # For checking all required modules have been declared
-  for (moduleName args) in ioAST.mRequiredModuleListAST do
-     @moduleInstanciationArgumentMap moduleInstanciationArgumentMap = {}
+proc retainRequiredDrivers ?!@ast ioAST {
+  @instanciedDriverMap instanciedDriverMap = {}
+  @stringset validDriverNames = {} # For checking all required drivers have been declared
+  for (driverName args) in ioAST.mRequiredDriverListAST do
+     @driverInstanciationArgumentMap driverInstanciationArgumentMap = {}
      for (selector expression) in args do
-       [!?moduleInstanciationArgumentMap insertKey !selector !expression]
+       [!?driverInstanciationArgumentMap insertKey !selector !expression]
      end
-    [!?instanciedModuleMap insertKey !moduleName !moduleInstanciationArgumentMap]
+    [!?instanciedDriverMap insertKey !driverName !driverInstanciationArgumentMap]
   end
-#--- Append required modules to declaration list AST (and init list AST)
-  for (declaration) in ioAST.mModuleDeclarationListAST do
-    validModuleNames += !declaration.mModuleName.string
-    let moduleIsInstancied = [instanciedModuleMap hasKey !declaration.mModuleName.string]
-  #--- Build module instanciation property list
-    @structurePropertyListAST modulePropertyListAST = {}
-    if moduleIsInstancied then
-      [instanciedModuleMap searchKey !declaration.mModuleName ?let moduleInstanciationArgumentMap]
-    #--- Build module property list, adding init expression
+#--- Append required drivers to declaration list AST (and init list AST)
+  for (declaration) in ioAST.mDriverDeclarationListAST do
+    validDriverNames += !declaration.mDriverName.string
+    let driverIsInstancied = [instanciedDriverMap hasKey !declaration.mDriverName.string]
+  #--- Build driver instanciation property list
+    @structurePropertyListAST driverPropertyListAST = {}
+    if driverIsInstancied then
+      [instanciedDriverMap searchKey !declaration.mDriverName ?let driverInstanciationArgumentMap]
+    #--- Build driver property list, adding init expression
       @stringset validArgumentSet = {}
-      for (propertyName constant optionalPropertyTypeName optionalInitExpression) in declaration.mModulePropertyListAST do
+      for (propertyName constant optionalPropertyTypeName optionalInitExpression) in declaration.mDriverPropertyListAST do
         @expressionAST initExpression
         switch optionalInitExpression 
         case noExpression :
-          [moduleInstanciationArgumentMap searchKey !propertyName ?initExpression]
+          [driverInstanciationArgumentMap searchKey !propertyName ?initExpression]
           validArgumentSet += !propertyName.string
         case expression (expression) :
           initExpression = expression
         end
-        modulePropertyListAST += 
+        driverPropertyListAST += 
          !propertyName
          !constant
          !false
          !optionalPropertyTypeName
          !.expression{!initExpression:initExpression}
       end
-    #--- Check all arguments of module instanciation have been used
-      for (unusedSelector) in [moduleInstanciationArgumentMap keySet] - validArgumentSet do
-        error [moduleInstanciationArgumentMap locationForKey !unusedSelector] : "invalid selector"
+    #--- Check all arguments of driver instanciation have been used
+      for (unusedSelector) in [driverInstanciationArgumentMap keySet] - validArgumentSet do
+        error [driverInstanciationArgumentMap locationForKey !unusedSelector] : "invalid selector"
       end
     end
   #---
-    let moduleTypeName = llvmModuleNameFromName (!declaration.mModuleName)
-    ioAST.mDeclarationListAST += !@implementedModuleAST.new {!declaration.mModuleName !moduleIsInstancied}
+    let driverTypeName = llvmDriverNameFromName (!declaration.mDriverName)
+    ioAST.mDeclarationListAST += !@implementedDriverAST.new {!declaration.mDriverName !driverIsInstancied}
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
-      !moduleTypeName
+      !driverTypeName
       !{}
       !false # Do not generate assignment routine
-      !modulePropertyListAST
-      !declaration.mModuleFunctionDeclarationListAST
-      !declaration.mModuleSystemRoutineListAST
-      !declaration.mModuleGuardListAST
+      !driverPropertyListAST
+      !declaration.mDriverFunctionDeclarationListAST
+      !declaration.mDriverSystemRoutineListAST
+      !declaration.mDriverGuardListAST
     }
-    for (init) in declaration.mModuleInitListAST do
+    for (init) in declaration.mDriverInitListAST do
       ioAST.mDeclarationListAST += !init
     end
   end
-  ioAST.mModuleDeclarationListAST = {}
-#--- Check all modules named in instanciation constructs have been implemented
-  for (unusedModuleName) in [instanciedModuleMap keySet] - validModuleNames do
-    error [instanciedModuleMap locationForKey !unusedModuleName] : "undefined module"
+  ioAST.mDriverDeclarationListAST = {}
+#--- Check all drivers named in instanciation constructs have been implemented
+  for (unusedDriverName) in [instanciedDriverMap keySet] - validDriverNames do
+    error [instanciedDriverMap locationForKey !unusedDriverName] : "undefined driver"
   end
 }
 
@@ -264,14 +264,14 @@ proc retainRequiredModules ?!@ast ioAST {
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @moduleMap {
+map @driverMap {
   @bool mIsInstancied
-  insert insertKey error message "the '%K' module is already declared in %L"
+  insert insertKey error message "the '%K' driver is already declared in %L"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @implementedModuleAST enterInContext
+override method @implementedDriverAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
@@ -279,38 +279,38 @@ override method @implementedModuleAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  [!?ioContext.mModuleMap insertKey !mModuleName !mIsInstancied]
+  [!?ioContext.mDriverMap insertKey !mDriverName !mIsInstancied]
 #---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedRequiredModule.new {!mModuleName}
+  ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @decoratedRequiredModule : @abstractDecoratedDeclaration {
-  @lstring mModuleName
+class @decoratedRequiredDriver : @abstractDecoratedDeclaration {
+  @lstring mDriverName
 }
 
 #·······················································································································
 
-override method @decoratedRequiredModule semanticAnalysis
+override method @decoratedRequiredDriver semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let moduleTypeName = llvmModuleNameFromName (!mModuleName)
-  let moduleTypeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
-  let constructorMap = [moduleTypeProxy type].constructorMap
-  [constructorMap  searchKey !.new {!"()" !moduleTypeName.location} ?* ?let constructorValue]
+  let driverTypeName = llvmDriverNameFromName (!mDriverName)
+  let driverTypeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !driverTypeName}
+  let constructorMap = [driverTypeProxy type].constructorMap
+  [constructorMap  searchKey !.new {!"()" !driverTypeName.location} ?* ?let constructorValue]
   [constructorValue structure ?sortedOperandList:let sortedOperandList]
   @operandIRList initialValueList = {}
   for (initialValue *) in sortedOperandList do
     initialValueList += !initialValue
   end
-  ioIntermediateCodeStruct.mModuleList += 
-    !mModuleName.string
-    !moduleTypeProxy
+  ioIntermediateCodeStruct.mDriverList += 
+    !mDriverName.string
+    !driverTypeProxy
     !initialValueList
 }
 
@@ -318,16 +318,16 @@ override method @decoratedRequiredModule semanticAnalysis
 #! CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @moduleListIR {
-  @string mModuleName
+list @driverListIR {
+  @string mDriverName
   @unifiedTypeMap-proxy mType
   @operandIRList mInitialValueList
 }
 
 #·······················································································································
 
-method @moduleListIR-element generateLLVM ?!@string ioLLVMcode {
-  ioLLVMcode += llvmNameForGlobalVariable (!mModuleName) + " = internal global "
+method @driverListIR-element generateLLVM ?!@string ioLLVMcode {
+  ioLLVMcode += llvmNameForGlobalVariable (!mDriverName) + " = internal global "
   ioLLVMcode += [[mType type] llvmTypeName] + " {"
   for (value) in mInitialValueList
     do ioLLVMcode += [value llvmTypeName] + " " + [value llvmName]

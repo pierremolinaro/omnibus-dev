@@ -30,14 +30,14 @@ setter @universalValuedObjectMapForContext insertTask
 
 #·······················································································································
 
-setter @universalValuedObjectMapForContext insertModule
-  ?let @lstring inModuleName
+setter @universalValuedObjectMapForContext insertDriver
+  ?let @lstring inDriverName
   ?let @bool inIsInstancied
-  ?let @PLMType inModuleType
+  ?let @PLMType inDriverType
 {
-  let newValue = @valuedObject.module {!type:inModuleType !instancied:inIsInstancied}
+  let newValue = @valuedObject.driver {!type:inDriverType !instancied:inIsInstancied}
   [!?mInternalPropertyAndRoutineMapForContext insertKey
-    !inModuleName
+    !inDriverName
     !.noValue
     !false
     !newValue
@@ -162,11 +162,11 @@ method @universalValuedObjectMapForContext searchValuedObject
   switch entity
   case task (@PLMType type) :
     outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
-  case module (@PLMType type instancied) :
+  case driver (@PLMType type instancied) :
     if instancied then
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
     else
-      error inValuedObjectName : "the module should be instancied" : outObjectIR
+      error inValuedObjectName : "the driver should be instancied" : outObjectIR
     end
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ?" : outObjectIR
@@ -185,7 +185,7 @@ setter @universalValuedObjectMapForContext readAccess ?let @lstring inValuedObje
   [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case task (*) :
-  case module (* *) :
+  case driver (* *) :
   case register (* * * * * * *) :
   case globalConstant (*) :
   case localConstant (* *) :
@@ -213,11 +213,11 @@ setter @universalValuedObjectMapForContext searchValuedObjectForReadAccess
   switch property
   case task (@PLMType type) :
     outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
-  case module (@PLMType type instancied) :
+  case driver (@PLMType type instancied) :
     if instancied then
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
     else
-      error inValuedObjectName : "the module should be instancied" : outObjectIR
+      error inValuedObjectName : "the driver should be instancied" : outObjectIR
     end
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ??" : outObjectIR
@@ -251,8 +251,8 @@ setter @universalValuedObjectMapForContext searchValuedObjectForWriteAccess
   switch property
   case task (*) :
     error inValuedObjectName : "a task has no value" : outObjectIR
-  case module (* *) :
-    error inValuedObjectName : "a module has no value" : outObjectIR
+  case driver (* *) :
+    error inValuedObjectName : "a driver has no value" : outObjectIR
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ???" : outObjectIR
   case globalConstant (*) :
@@ -280,8 +280,8 @@ setter @universalValuedObjectMapForContext searchValuedObjectForReadWriteAccess
   switch property
   case task (*) :
     error inValuedObjectName : "a task has no value" : outObjectIR
-  case module (* *) :
-    error inValuedObjectName : "a module has no value" : outObjectIR
+  case driver (* *) :
+    error inValuedObjectName : "a driver has no value" : outObjectIR
   case register (* * * * * * *) :
     error inValuedObjectName : "control register ????" : outObjectIR
   case globalConstant (*) :
@@ -311,7 +311,7 @@ method @universalValuedObjectMapForContext searchValuedObjectType
   switch property
   case task (*) :
     error inValuedObjectName : "undefined in this context" : outType
-  case module (* *) :
+  case driver (* *) :
     error inValuedObjectName : "undefined in this context" : outType
   case register (* * @PLMType type * * * *) :
     outType = type
@@ -332,7 +332,7 @@ method @universalValuedObjectMapForContext checkLocalVariableFinalState {
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
     case task (*) :
-    case module (* *) :
+    case driver (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -354,7 +354,7 @@ setter @universalValuedObjectMapForContext openOverrideForSelectBlock {
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
     case task (*) :
-    case module (* *) :
+    case driver (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -374,7 +374,7 @@ setter @universalValuedObjectMapForContext openOverrideForRepeatBlock {
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
     case task (*) :
-    case module (* *) :
+    case driver (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -405,7 +405,7 @@ setter @universalValuedObjectMapForContext closeBranch ?let @location inErrorLoc
     for entry in mInternalPropertyAndRoutineMapForContext do
       switch entry.mPossibleValuedObject
       case task (*) :
-      case module (* *) :
+      case driver (* *) :
       case register (* * * * * * *) :
       case globalConstant (*) :
       case localConstant (* *) :
@@ -461,7 +461,7 @@ setter @universalValuedObjectMapForContext closeOverride ?let @location inErrorL
     ]
     switch possibleValuedObject
     case task (*) :
-    case module (* *) :
+    case driver (* *) :
     case register (* * * * * * *) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -526,7 +526,7 @@ map @referenceStateMap {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @valuedObject {
-  case module (@PLMType type @bool instancied)
+  case driver (@PLMType type @bool instancied)
   case task (@PLMType type)
   case register (@bool readable
                  @bool writable
@@ -576,11 +576,11 @@ proc initialVariableMap
   for (taskName taskType) in inContext.mTaskMap do
    [!?outUniversalMap insertTask !taskName !taskType]
   end
-#------------------------------------------------------- Add modules
-  for (moduleName isInstancied) in inContext.mModuleMap do
-    let moduleTypeName = llvmModuleNameFromName (!moduleName)
-    let moduleType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName} type]
-    [!?outUniversalMap insertModule !moduleName !isInstancied !moduleType]
+#------------------------------------------------------- Add drivers
+  for (driverName isInstancied) in inContext.mDriverMap do
+    let driverTypeName = llvmDriverNameFromName (!driverName)
+    let driverType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !driverTypeName} type]
+    [!?outUniversalMap insertDriver !driverName !isInstancied !driverType]
   end
 #------------------------------------------------------- Add registers
   for register in inContext.mControlRegisterMap do

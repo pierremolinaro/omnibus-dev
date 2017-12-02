@@ -141,21 +141,21 @@ class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'llvmModuleNameFromName'                                          *
+//                                          Function 'llvmDriverNameFromName'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_llvmModuleNameFromName (const class GALGAS_lstring & constinArgument0,
+class GALGAS_lstring function_llvmDriverNameFromName (const class GALGAS_lstring & constinArgument0,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Routine 'retainRequiredModules'                                           *
+//                                           Routine 'retainRequiredDrivers'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_retainRequiredModules (class GALGAS_ast & ioArgument0,
+void routine_retainRequiredDrivers (class GALGAS_ast & ioArgument0,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 

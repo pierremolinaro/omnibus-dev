@@ -35,7 +35,7 @@ project (1:0:0) -> "plm" {
 #--- Global declarations
   "galgas-sources/declaration-control-register.galgas"
   "galgas-sources/declaration-global-constant.galgas"
-  "galgas-sources/declaration-module.galgas"
+  "galgas-sources/declaration-driver.galgas"
   "galgas-sources/declaration-static-array.galgas"
 
 #--- Tasks

@@ -11,7 +11,7 @@ type $lcdBuffer : $uint8 [LCD_BUFFER_SIZE]
 
 //——————————————————————————————————————————————————————————————————————————————
 
-module lcd {
+driver lcd {
   let DB4 $digitalPort
   let DB5 $digitalPort
   let DB6 $digitalPort
