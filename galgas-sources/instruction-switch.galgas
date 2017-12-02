@@ -77,8 +77,7 @@ override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 
 override method @switchInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -138,8 +137,7 @@ override method @switchInstructionAST analyze
     @instructionListIR instructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
-      !propertiesAreMutable:inRoutineCanMutateProperties
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !instructionAttributes:inInstructionAttributes
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:mEndOf_switch_instruction
       !context:inContext

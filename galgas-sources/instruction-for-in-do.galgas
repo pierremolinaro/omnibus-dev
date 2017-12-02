@@ -79,8 +79,7 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 
 override method @forInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -138,8 +137,7 @@ override method @forInstructionAST analyze
   @instructionListIR doInstructionList_GenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !propertiesAreMutable:inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !instructionAttributes:inInstructionAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_for_instruction
     !context:inContext

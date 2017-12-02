@@ -149,8 +149,7 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 
 override method @syncInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -319,8 +318,7 @@ override method @syncInstructionAST analyze
     @instructionListIR branchInstructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
-      !propertiesAreMutable:inRoutineCanMutateProperties
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !instructionAttributes:inInstructionAttributes
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:endOfBranch
       !context:inContext

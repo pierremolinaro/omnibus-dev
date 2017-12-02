@@ -181,8 +181,7 @@ override method @decoratedPanicRoutine semanticAnalysis
   @allocaList initAllocaList = {}
   [mPanicInstructionList analyzeRoutineInstructionList
     !self:voidType ()
-    !directAccessToPropertiesAllowed:false
-    !propertiesAreMutable:false
+    !instructionAttributes:.none
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !mode:.panicMode
