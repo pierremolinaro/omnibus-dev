@@ -171,8 +171,8 @@ method @LValueAST analyzeLValue
     switch entity
     case task (*) :
       error mIdentifier : "a task has no value" : outInternalRepresentation
-    case module (* *) :
-      error mIdentifier : "a module has no value" : outInternalRepresentation
+    case driver (* *) :
+      error mIdentifier : "a driver has no value" : outInternalRepresentation
     case register (* writable registerType registerAddress * arraySize elementSize) : # 0 if not an array
       if not writable then
          error mIdentifier : "the control register is not writable in this context" : outInternalRepresentation

@@ -1159,22 +1159,22 @@ class GALGAS_PLMType function_booleanType (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             @implementedModuleAST class                                             *
+//                                             @implementedDriverAST class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_implementedModuleAST : public GALGAS_abstractDeclarationAST {
+class GALGAS_implementedDriverAST : public GALGAS_abstractDeclarationAST {
 //--- Constructor
-  public : GALGAS_implementedModuleAST (void) ;
+  public : GALGAS_implementedDriverAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_implementedModuleAST constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_implementedDriverAST constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_implementedModuleAST * ptr (void) const { return (const cPtr_implementedModuleAST *) mObjectPtr ; }
+  public : inline const class cPtr_implementedDriverAST * ptr (void) const { return (const cPtr_implementedDriverAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_implementedModuleAST (const cPtr_implementedModuleAST * inSourcePtr) ;
+  public : GALGAS_implementedDriverAST (const cPtr_implementedDriverAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -1182,17 +1182,17 @@ class GALGAS_implementedModuleAST : public GALGAS_abstractDeclarationAST {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_implementedModuleAST extractObject (const GALGAS_object & inObject,
+  public : static GALGAS_implementedDriverAST extractObject (const GALGAS_object & inObject,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_implementedModuleAST constructor_new (const class GALGAS_lstring & inOperand0,
+  public : static class GALGAS_implementedDriverAST constructor_new (const class GALGAS_lstring & inOperand0,
                                                                      const class GALGAS_bool & inOperand1
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_implementedModuleAST & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_implementedDriverAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1200,34 +1200,34 @@ class GALGAS_implementedModuleAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_implementedModuleAST class
+} ; // End of GALGAS_implementedDriverAST class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implementedModuleAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implementedDriverAST ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                    Pointer class for @implementedModuleAST class                                    *
+//                                    Pointer class for @implementedDriverAST class                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_implementedModuleAST : public cPtr_abstractDeclarationAST {
+class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mModuleName ;
+  public : GALGAS_lstring mProperty_mDriverName ;
   public : GALGAS_bool mProperty_mIsInstancied ;
 
 //--- Constructor
-  public : cPtr_implementedModuleAST (const GALGAS_lstring & in_mModuleName,
+  public : cPtr_implementedDriverAST (const GALGAS_lstring & in_mDriverName,
                                       const GALGAS_bool & in_mIsInstancied
                                       COMMA_LOCATION_ARGS) ;
 
@@ -1235,7 +1235,7 @@ class cPtr_implementedModuleAST : public cPtr_abstractDeclarationAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -1249,22 +1249,22 @@ class cPtr_implementedModuleAST : public cPtr_abstractDeclarationAST {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           @decoratedRequiredModule class                                            *
+//                                           @decoratedRequiredDriver class                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_decoratedRequiredModule : public GALGAS_abstractDecoratedDeclaration {
+class GALGAS_decoratedRequiredDriver : public GALGAS_abstractDecoratedDeclaration {
 //--- Constructor
-  public : GALGAS_decoratedRequiredModule (void) ;
+  public : GALGAS_decoratedRequiredDriver (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_decoratedRequiredModule constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_decoratedRequiredDriver constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_decoratedRequiredModule * ptr (void) const { return (const cPtr_decoratedRequiredModule *) mObjectPtr ; }
+  public : inline const class cPtr_decoratedRequiredDriver * ptr (void) const { return (const cPtr_decoratedRequiredDriver *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_decoratedRequiredModule (const cPtr_decoratedRequiredModule * inSourcePtr) ;
+  public : GALGAS_decoratedRequiredDriver (const cPtr_decoratedRequiredDriver * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -1272,16 +1272,16 @@ class GALGAS_decoratedRequiredModule : public GALGAS_abstractDecoratedDeclaratio
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_decoratedRequiredModule extractObject (const GALGAS_object & inObject,
+  public : static GALGAS_decoratedRequiredDriver extractObject (const GALGAS_object & inObject,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_decoratedRequiredModule constructor_new (const class GALGAS_lstring & inOperand0
+  public : static class GALGAS_decoratedRequiredDriver constructor_new (const class GALGAS_lstring & inOperand0
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_decoratedRequiredModule & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_decoratedRequiredDriver & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1289,38 +1289,38 @@ class GALGAS_decoratedRequiredModule : public GALGAS_abstractDecoratedDeclaratio
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_decoratedRequiredModule class
+} ; // End of GALGAS_decoratedRequiredDriver class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRequiredModule ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRequiredDriver ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Pointer class for @decoratedRequiredModule class                                   *
+//                                  Pointer class for @decoratedRequiredDriver class                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_decoratedRequiredModule : public cPtr_abstractDecoratedDeclaration {
+class cPtr_decoratedRequiredDriver : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mModuleName ;
+  public : GALGAS_lstring mProperty_mDriverName ;
 
 //--- Constructor
-  public : cPtr_decoratedRequiredModule (const GALGAS_lstring & in_mModuleName
+  public : cPtr_decoratedRequiredDriver (const GALGAS_lstring & in_mDriverName
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -1781,11 +1781,11 @@ class GALGAS_decoratedInitRoutine : public GALGAS_abstractDecoratedDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfInitLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
 
@@ -1808,13 +1808,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedInitRoutin
 
 class cPtr_decoratedInitRoutine : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mModuleName ;
+  public : GALGAS_lstring mProperty_mDriverName ;
   public : GALGAS_instructionListAST mProperty_mInstructionList ;
   public : GALGAS_location mProperty_mEndOfInitLocation ;
   public : GALGAS_lbigint mProperty_mPriority ;
 
 //--- Constructor
-  public : cPtr_decoratedInitRoutine (const GALGAS_lstring & in_mModuleName,
+  public : cPtr_decoratedInitRoutine (const GALGAS_lstring & in_mDriverName,
                                       const GALGAS_instructionListAST & in_mInstructionList,
                                       const GALGAS_location & in_mEndOfInitLocation,
                                       const GALGAS_lbigint & in_mPriority
@@ -1824,7 +1824,7 @@ class cPtr_decoratedInitRoutine : public cPtr_abstractDecoratedDeclaration {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfInitLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;

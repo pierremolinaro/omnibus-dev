@@ -161,11 +161,11 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Function 'llvmModuleStringFromName'                                         *
+//                                         Function 'llvmDriverStringFromName'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmModuleStringFromName (const class GALGAS_string & constinArgument0,
+class GALGAS_string function_llvmDriverStringFromName (const class GALGAS_string & constinArgument0,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 

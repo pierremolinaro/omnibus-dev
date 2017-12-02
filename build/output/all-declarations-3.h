@@ -1042,7 +1042,7 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
-    kEnum_module,
+    kEnum_driver,
     kEnum_task,
     kEnum_register,
     kEnum_globalConstant,
@@ -1074,6 +1074,10 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static class GALGAS_valuedObject constructor_driver (const class GALGAS_PLMType & inOperand0,
+                                                                const class GALGAS_bool & inOperand1
+                                                                COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_valuedObject constructor_globalConstant (const class GALGAS_objectIR & inOperand0
                                                                         COMMA_LOCATION_ARGS) ;
 
@@ -1084,10 +1088,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
   public : static class GALGAS_valuedObject constructor_localVariable (const class GALGAS_PLMType & inOperand0,
                                                                        const class GALGAS_lstring & inOperand1
                                                                        COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_valuedObject constructor_module (const class GALGAS_PLMType & inOperand0,
-                                                                const class GALGAS_bool & inOperand1
-                                                                COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_valuedObject constructor_register (const class GALGAS_bool & inOperand0,
                                                                   const class GALGAS_bool & inOperand1,
@@ -1110,6 +1110,11 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_driver (class GALGAS_PLMType & outArgument0,
+                                                class GALGAS_bool & outArgument1,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_globalConstant (class GALGAS_objectIR & outArgument0,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
@@ -1123,11 +1128,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                        class GALGAS_lstring & outArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_module (class GALGAS_PLMType & outArgument0,
-                                                class GALGAS_bool & outArgument1,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_bool & outArgument0,
                                                   class GALGAS_bool & outArgument1,
@@ -1146,13 +1146,13 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDriver (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModule (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegister (LOCATION_ARGS) const ;
 

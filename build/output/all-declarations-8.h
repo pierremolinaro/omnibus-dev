@@ -98,11 +98,11 @@ class cPtr_infixObjectObjectOperatorDescription : public cPtr_infixOperatorDescr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Extension method '@moduleListIR-element generateLLVM'                                *
+//                                Extension method '@driverListIR-element generateLLVM'                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_generateLLVM (const class GALGAS_moduleListIR_2D_element inObject,
+void extensionMethod_generateLLVM (const class GALGAS_driverListIR_2D_element inObject,
                                    class GALGAS_string & io_ioLLVMcode,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;

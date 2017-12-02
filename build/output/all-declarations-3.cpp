@@ -14534,8 +14534,8 @@ mProperty_mStandAloneSystemRoutineListAST (),
 mProperty_mTargetListAST (),
 mProperty_mTaskListAST (),
 mProperty_mCheckTargetListAST (),
-mProperty_mModuleDeclarationListAST (),
-mProperty_mRequiredModuleListAST (),
+mProperty_mDriverDeclarationListAST (),
+mProperty_mRequiredDriverListAST (),
 mProperty_mTypeDeclarationIndex () {
 }
 
@@ -14557,8 +14557,8 @@ GALGAS_ast::GALGAS_ast (const GALGAS_declarationListAST & inOperand0,
                         const GALGAS_lstringlist & inOperand8,
                         const GALGAS_taskListAST & inOperand9,
                         const GALGAS_checkTargetListAST & inOperand10,
-                        const GALGAS_moduleDeclarationListAST & inOperand11,
-                        const GALGAS_moduleInstanciationListAST & inOperand12,
+                        const GALGAS_driverDeclarationListAST & inOperand11,
+                        const GALGAS_driverInstanciationListAST & inOperand12,
                         const GALGAS_uint & inOperand13) :
 mProperty_mDeclarationListAST (inOperand0),
 mProperty_mExtensionDeclarationListAST (inOperand1),
@@ -14571,8 +14571,8 @@ mProperty_mStandAloneSystemRoutineListAST (inOperand7),
 mProperty_mTargetListAST (inOperand8),
 mProperty_mTaskListAST (inOperand9),
 mProperty_mCheckTargetListAST (inOperand10),
-mProperty_mModuleDeclarationListAST (inOperand11),
-mProperty_mRequiredModuleListAST (inOperand12),
+mProperty_mDriverDeclarationListAST (inOperand11),
+mProperty_mRequiredDriverListAST (inOperand12),
 mProperty_mTypeDeclarationIndex (inOperand13) {
 }
 
@@ -14590,8 +14590,8 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
                      GALGAS_lstringlist::constructor_emptyList (HERE),
                      GALGAS_taskListAST::constructor_emptyList (HERE),
                      GALGAS_checkTargetListAST::constructor_emptyList (HERE),
-                     GALGAS_moduleDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_moduleInstanciationListAST::constructor_emptyList (HERE),
+                     GALGAS_driverDeclarationListAST::constructor_emptyList (HERE),
+                     GALGAS_driverInstanciationListAST::constructor_emptyList (HERE),
                      GALGAS_uint::constructor_default (HERE)) ;
 }
 
@@ -14608,8 +14608,8 @@ GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_declarationListAST & inOper
                                         const GALGAS_lstringlist & inOperand8,
                                         const GALGAS_taskListAST & inOperand9,
                                         const GALGAS_checkTargetListAST & inOperand10,
-                                        const GALGAS_moduleDeclarationListAST & inOperand11,
-                                        const GALGAS_moduleInstanciationListAST & inOperand12,
+                                        const GALGAS_driverDeclarationListAST & inOperand11,
+                                        const GALGAS_driverInstanciationListAST & inOperand12,
                                         const GALGAS_uint & inOperand13 
                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_ast result ;
@@ -14657,10 +14657,10 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
     result = mProperty_mCheckTargetListAST.objectCompare (inOperand.mProperty_mCheckTargetListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mModuleDeclarationListAST.objectCompare (inOperand.mProperty_mModuleDeclarationListAST) ;
+    result = mProperty_mDriverDeclarationListAST.objectCompare (inOperand.mProperty_mDriverDeclarationListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mRequiredModuleListAST.objectCompare (inOperand.mProperty_mRequiredModuleListAST) ;
+    result = mProperty_mRequiredDriverListAST.objectCompare (inOperand.mProperty_mRequiredDriverListAST) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mTypeDeclarationIndex.objectCompare (inOperand.mProperty_mTypeDeclarationIndex) ;
@@ -14671,7 +14671,7 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_ast::isValid (void) const {
-  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtensionDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mModuleDeclarationListAST.isValid () && mProperty_mRequiredModuleListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () ;
+  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtensionDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14688,8 +14688,8 @@ void GALGAS_ast::drop (void) {
   mProperty_mTargetListAST.drop () ;
   mProperty_mTaskListAST.drop () ;
   mProperty_mCheckTargetListAST.drop () ;
-  mProperty_mModuleDeclarationListAST.drop () ;
-  mProperty_mRequiredModuleListAST.drop () ;
+  mProperty_mDriverDeclarationListAST.drop () ;
+  mProperty_mRequiredDriverListAST.drop () ;
   mProperty_mTypeDeclarationIndex.drop () ;
 }
 
@@ -14723,9 +14723,9 @@ void GALGAS_ast::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mCheckTargetListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mModuleDeclarationListAST.description (ioString, inIndentation+1) ;
+    mProperty_mDriverDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mRequiredModuleListAST.description (ioString, inIndentation+1) ;
+    mProperty_mRequiredDriverListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mTypeDeclarationIndex.description (ioString, inIndentation+1) ;
   }
@@ -14800,14 +14800,14 @@ GALGAS_checkTargetListAST GALGAS_ast::getter_mCheckTargetListAST (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_moduleDeclarationListAST GALGAS_ast::getter_mModuleDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mModuleDeclarationListAST ;
+GALGAS_driverDeclarationListAST GALGAS_ast::getter_mDriverDeclarationListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mDriverDeclarationListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_moduleInstanciationListAST GALGAS_ast::getter_mRequiredModuleListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRequiredModuleListAST ;
+GALGAS_driverInstanciationListAST GALGAS_ast::getter_mRequiredDriverListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRequiredDriverListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -36,8 +36,8 @@ struct @ast {
   @lstringlist mTargetListAST
   @taskListAST mTaskListAST
   @checkTargetListAST mCheckTargetListAST
-  @moduleDeclarationListAST mModuleDeclarationListAST
-  @moduleInstanciationListAST mRequiredModuleListAST
+  @driverDeclarationListAST mDriverDeclarationListAST
+  @driverInstanciationListAST mRequiredDriverListAST
   @uint mTypeDeclarationIndex
 }
 

@@ -808,12 +808,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_scopeStack_2D_eleme
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_valuedObject_module : public cEnumAssociatedValues {
+class cEnumAssociatedValues_valuedObject_driver : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_bool mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_valuedObject_module (const GALGAS_PLMType & inAssociatedValue0,
+  public : cEnumAssociatedValues_valuedObject_driver (const GALGAS_PLMType & inAssociatedValue0,
                                                       const GALGAS_bool & inAssociatedValue1
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -821,7 +821,7 @@ class cEnumAssociatedValues_valuedObject_module : public cEnumAssociatedValues {
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_valuedObject_module (void) {}
+  public : virtual ~ cEnumAssociatedValues_valuedObject_driver (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

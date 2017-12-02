@@ -25,21 +25,21 @@ func llvmTypeNameFromPLMname ?let @lstring inName -> @lstring {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!   Module
+#!   Driver
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmModuleStringFromName ?let @string inModuleName -> @string {
-  result = if inModuleName == "" then
-    inModuleName
+func llvmDriverStringFromName ?let @string inDriverName -> @string {
+  result = if inDriverName == "" then
+    inDriverName
   else
-    "module." + inModuleName
+    "driver." + inDriverName
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmModuleNameFromName ?let @lstring inModuleName -> @lstring {
-  result = .new {!llvmModuleStringFromName (!inModuleName.string) !inModuleName.location}
+func llvmDriverNameFromName ?let @lstring inDriverName -> @lstring {
+  result = .new {!llvmDriverStringFromName (!inDriverName.string) !inDriverName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

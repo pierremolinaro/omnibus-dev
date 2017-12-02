@@ -3584,7 +3584,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : GALGAS_globalConstantMap mProperty_mGlobalConstantMap ;
 
-  public : GALGAS_moduleMap mProperty_mModuleMap ;
+  public : GALGAS_driverMap mProperty_mDriverMap ;
 
   public : GALGAS_staticlistMap mProperty_mStaticListMap ;
 
@@ -3672,7 +3672,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
                                    const GALGAS_controlRegisterMap & in_mControlRegisterMap,
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
-                                   const GALGAS_moduleMap & in_mModuleMap,
+                                   const GALGAS_driverMap & in_mDriverMap,
                                    const GALGAS_staticlistMap & in_mStaticListMap,
                                    const GALGAS_stringset & in_mDefinedInterruptSet,
                                    const GALGAS_availableInterruptMap & in_mAvailableInterruptMap,
@@ -3727,7 +3727,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_panicRoutinePriorityMap & inOperand9,
                                                                 const class GALGAS_controlRegisterMap & inOperand10,
                                                                 const class GALGAS_globalConstantMap & inOperand11,
-                                                                const class GALGAS_moduleMap & inOperand12,
+                                                                const class GALGAS_driverMap & inOperand12,
                                                                 const class GALGAS_staticlistMap & inOperand13,
                                                                 const class GALGAS_stringset & inOperand14,
                                                                 const class GALGAS_availableInterruptMap & inOperand15,
@@ -3790,6 +3790,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mDivOperatorMap (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_driverMap getter_mDriverMap (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mEqualOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMap getter_mGlobalConstantMap (LOCATION_ARGS) const ;
@@ -3807,8 +3809,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mModNoOvfOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mModOperatorMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_moduleMap getter_mModuleMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mMulNoOvfOperatorMap (LOCATION_ARGS) const ;
 
@@ -6275,7 +6275,7 @@ class cEnumerator_initListIR : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_PLMType current_mSelfType (LOCATION_ARGS) const ;
-  public : class GALGAS_string current_mGlobalVariable (LOCATION_ARGS) const ;
+  public : class GALGAS_string current_mDriverName (LOCATION_ARGS) const ;
   public : class GALGAS_bigint current_mPriority (LOCATION_ARGS) const ;
   public : class GALGAS_allocaList current_mAllocaList (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListIR current_mInstructionListIR (LOCATION_ARGS) const ;
@@ -7265,7 +7265,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
   public : GALGAS_targetParameters mProperty_mTargetParameters ;
 
-  public : GALGAS_moduleListIR mProperty_mModuleList ;
+  public : GALGAS_driverListIR mProperty_mDriverList ;
 
   public : GALGAS_staticListInvokedFunctionSetMap mProperty_mStaticArrayMapForIntermediate ;
 
@@ -7300,7 +7300,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
                                           const GALGAS_uint & in_mMaxBranchOfOnInstructions,
                                           const GALGAS_targetParameters & in_mTargetParameters,
-                                          const GALGAS_moduleListIR & in_mModuleList,
+                                          const GALGAS_driverListIR & in_mDriverList,
                                           const GALGAS_staticListInvokedFunctionSetMap & in_mStaticArrayMapForIntermediate,
                                           const GALGAS_generationListIR & in_mGenerationListIR) ;
 
@@ -7330,7 +7330,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                        const class GALGAS_globalTaskVariableList & inOperand12,
                                                                        const class GALGAS_uint & inOperand13,
                                                                        const class GALGAS_targetParameters & inOperand14,
-                                                                       const class GALGAS_moduleListIR & inOperand15,
+                                                                       const class GALGAS_driverListIR & inOperand15,
                                                                        const class GALGAS_staticListInvokedFunctionSetMap & inOperand16,
                                                                        const class GALGAS_generationListIR & inOperand17
                                                                        COMMA_LOCATION_ARGS) ;
@@ -7349,6 +7349,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bootListIR getter_mBootList (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_driverListIR getter_mDriverList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_externProcedureMapIR getter_mExternProcedureMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_generationListIR getter_mGenerationListIR (LOCATION_ARGS) const ;
@@ -7364,8 +7366,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_interruptMapIR getter_mInterruptMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMaxBranchOfOnInstructions (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_moduleListIR getter_mModuleList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListSortedListIR getter_mPanicLoopInstructionListIR (LOCATION_ARGS) const ;
 
@@ -8712,7 +8712,7 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_PLMType mProperty_mSelfType ;
 
-  public : GALGAS_string mProperty_mGlobalVariable ;
+  public : GALGAS_string mProperty_mDriverName ;
 
   public : GALGAS_bigint mProperty_mPriority ;
 
@@ -8732,7 +8732,7 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_initListIR_2D_element (const GALGAS_PLMType & in_mSelfType,
-                                         const GALGAS_string & in_mGlobalVariable,
+                                         const GALGAS_string & in_mDriverName,
                                          const GALGAS_bigint & in_mPriority,
                                          const GALGAS_allocaList & in_mAllocaList,
                                          const GALGAS_instructionListIR & in_mInstructionListIR) ;
@@ -8769,7 +8769,7 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_allocaList getter_mAllocaList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mDriverName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionListIR (LOCATION_ARGS) const ;
 

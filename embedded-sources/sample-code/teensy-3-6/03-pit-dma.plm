@@ -18,7 +18,7 @@
 target "teensy-3-6/privileged"
 let F_CPU_MHZ = 180
 
-module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                                                                       
@@ -82,7 +82,7 @@ type $patternArray : $uint32 [PATTERN_LENGTH]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-module pit {
+driver pit {
   isr safe PITChannel3 {
   //--- Acquitter l'interruption
     PIT_TFLG [3] = {PIT_TFLG !TIF:1}
@@ -98,7 +98,7 @@ module pit {
   }
 }
 
-module pit ()
+driver pit ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

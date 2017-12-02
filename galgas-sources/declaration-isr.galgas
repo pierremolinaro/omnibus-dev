@@ -98,7 +98,7 @@ override method @decoratedISRDeclarations semanticAnalysis
 #    let @PLMType selfType = if isr.mModuleName.string == "" then
 #      voidType ()
 #    else
-   let selfType = [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !llvmModuleNameFromName (!isr.mModuleName)} type]
+   let selfType = [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !llvmDriverNameFromName (!isr.mModuleName)} type]
 #    end
   #--- Analyze instruction list
     @allocaList allocaList = {}

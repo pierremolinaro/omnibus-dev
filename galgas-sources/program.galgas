@@ -114,9 +114,9 @@ private proc compileProject
       error staticListName : "this static list is not defined"
     end
   end
-#------------------------------------------------------------ Retain required modules
+#------------------------------------------------------------ Retain required drivers
   if @uint.errorCount == 0 then
-    retainRequiredModules (!?ast)
+    retainRequiredDrivers (!?ast)
   end
 #------------------------------------------------------------ Ordered declaration list
   @declarationListAST orderedDeclarationListAST = .default
