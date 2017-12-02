@@ -1853,20 +1853,6 @@ void routine_enterFormalArguments (const class GALGAS_semanticContext constinArg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Routine 'initialVariableMap'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_initialVariableMap (const class GALGAS_semanticContext constinArgument0,
-                                 const class GALGAS_mode constinArgument1,
-                                 class GALGAS_bool inArgument2,
-                                 const class GALGAS_lstring constinArgument3,
-                                 class GALGAS_universalValuedObjectMapForContext & outArgument4,
-                                 class C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                             Extension method '@interruptMapIR enterAccessibleEntities'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

@@ -433,31 +433,6 @@ class GALGAS_bool extensionGetter_hasKey (const class GALGAS_routineMapForContex
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Extension setter '@universalValuedObjectMapForContext insertTask'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertTask) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                        const class GALGAS_lstring constinArgument0,
-                                                                                        const class GALGAS_PLMType constinArgument1,
-                                                                                        class C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_insertTask (const int32_t inClassIndex,
-                                      extensionSetterSignature_universalValuedObjectMapForContext_insertTask inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_insertTask (class cPtr_universalValuedObjectMapForContext * inObject,
-                                     const GALGAS_lstring constin_inTaskName,
-                                     const GALGAS_PLMType constin_inTaskType,
-                                     C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                         Extension setter '@universalValuedObjectMapForContext insertDriver'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -628,6 +603,29 @@ void callExtensionSetter_insertLocalVariable (class cPtr_universalValuedObjectMa
                                               const GALGAS_valuedObjectState constin_inVariableInitialState,
                                               const GALGAS_bool constin_inObjectShouldBeValuedAtEndOfScope,
                                               C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension getter '@universalValuedObjectMapForContext hasKey'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef class GALGAS_bool (*enterExtensionGetter_universalValuedObjectMapForContext_hasKey) (const class cPtr_universalValuedObjectMapForContext * inObject,
+                                                                                             const class GALGAS_string constinArgument0,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionGetter_hasKey (const int32_t inClassIndex,
+                                  enterExtensionGetter_universalValuedObjectMapForContext_hasKey inGetter) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool callExtensionGetter_hasKey (const cPtr_universalValuedObjectMapForContext * inObject,
+                                              const GALGAS_string constin_inValuedObjectName,
+                                              class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*

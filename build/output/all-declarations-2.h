@@ -2642,6 +2642,31 @@ void extensionMethod_enterInContext (const class GALGAS_taskGuardListAST_2D_elem
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                          Extension setter '@universalValuedObjectMapForContext insertTask'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_insertTask) (class cPtr_universalValuedObjectMapForContext * inObject,
+                                                                                        const class GALGAS_lstring constinArgument0,
+                                                                                        const class GALGAS_PLMType constinArgument1,
+                                                                                        class C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_insertTask (const int32_t inClassIndex,
+                                      extensionSetterSignature_universalValuedObjectMapForContext_insertTask inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_insertTask (class cPtr_universalValuedObjectMapForContext * inObject,
+                                     const GALGAS_lstring constin_inTaskName,
+                                     const GALGAS_PLMType constin_inTaskType,
+                                     C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             @unifiedTypeMap unique map                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2772,6 +2797,67 @@ class cMapElement_unifiedTypeMap : public cMapElement {
 //--- Description
  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      @universalValuedObjectMapForContext class                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_universalValuedObjectMapForContext : public AC_GALGAS_class {
+//--- Constructor
+  public : GALGAS_universalValuedObjectMapForContext (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_universalValuedObjectMapForContext constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_universalValuedObjectMapForContext * ptr (void) const { return (const cPtr_universalValuedObjectMapForContext *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_universalValuedObjectMapForContext (const cPtr_universalValuedObjectMapForContext * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_universalValuedObjectMapForContext extractObject (const GALGAS_object & inObject,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_universalValuedObjectMapForContext constructor_new (const class GALGAS_internalValuedObjectMapMapForContext & inOperand0,
+                                                                                   const class GALGAS_scopeStack & inOperand1,
+                                                                                   const class GALGAS_lstringlist & inOperand2
+                                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_universalValuedObjectMapForContext & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_internalValuedObjectMapMapForContext getter_mInternalPropertyAndRoutineMapForContext (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mLocalObjectList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_scopeStack getter_mScopeStack (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_universalValuedObjectMapForContext class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_universalValuedObjectMapForContext ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3646,6 +3732,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : GALGAS_globalTaskVariableList mProperty_mGlobalTaskVariableList ;
 
+  public : GALGAS_universalValuedObjectMapForContext mProperty_mValuedObjectMapForContext ;
+
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -3702,7 +3790,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_prefixOperatorMap & in_mNotOperatorMap,
                                    const GALGAS_prefixOperatorMap & in_mUnsignedComplementOperatorMap,
                                    const GALGAS_taskMap & in_mTaskMap,
-                                   const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
+                                   const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
+                                   const GALGAS_universalValuedObjectMapForContext & in_mValuedObjectMapForContext) ;
 
 //-- Start of generic part --*
 
@@ -3757,7 +3846,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_prefixOperatorMap & inOperand39,
                                                                 const class GALGAS_prefixOperatorMap & inOperand40,
                                                                 const class GALGAS_taskMap & inOperand41,
-                                                                const class GALGAS_globalTaskVariableList & inOperand42
+                                                                const class GALGAS_globalTaskVariableList & inOperand42,
+                                                                const class GALGAS_universalValuedObjectMapForContext & inOperand43
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -3855,6 +3945,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap getter_mUnaryMinusOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap getter_mUnsignedComplementOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_universalValuedObjectMapForContext getter_mValuedObjectMapForContext (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mXorOperatorMap (LOCATION_ARGS) const ;
 

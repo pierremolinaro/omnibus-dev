@@ -211,6 +211,7 @@ method @taskListAST enterInContext
       !index:[ioContext.mTypeMap count]
     ]
     [!?ioContext.mTaskMap insertKey !task.mTaskName !taskType]
+    [!?ioContext.mValuedObjectMapForContext insertTask !task.mTaskName !taskType]
     ioContext.mGlobalTaskVariableList +=
       !task.mTaskName.string 
       !task.mTaskName.string

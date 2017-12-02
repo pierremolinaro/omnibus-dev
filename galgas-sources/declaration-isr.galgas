@@ -73,7 +73,7 @@ class @decoratedISRDeclarations : @abstractDecoratedDeclaration {
 #·······················································································································
 
 override method @decoratedISRDeclarations semanticAnalysis
-  ?context:let @semanticContext inSemanticContext
+  ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -87,18 +87,21 @@ override method @decoratedISRDeclarations semanticAnalysis
       ]
     end
   #--- Variable map
-    initialVariableMap (
-      !context:inSemanticContext
-      !mode:isr.mMode
-      !globalsAreConstant:false
-      !returnTypeName:["" nowhere]
-      ?@universalValuedObjectMapForContext universalMap
-    )
+  var universalMap = inContext.mValuedObjectMapForContext
+#    initialVariableMap (
+#      !context:inSemanticContext
+##      !mode:isr.mMode
+##      !globalsAreConstant:false
+##      !returnTypeName:["" nowhere]
+#      ?@universalValuedObjectMapForContext universalMap
+#    )
+  [!?universalMap openOverrideForSelectBlock]
+  [!?universalMap openBranch]
   #--- Self type
 #    let @PLMType selfType = if isr.mModuleName.string == "" then
 #      voidType ()
 #    else
-   let selfType = [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !llvmDriverNameFromName (!isr.mModuleName)} type]
+   let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !llvmDriverNameFromName (!isr.mModuleName)} type]
 #    end
   #--- Analyze instruction list
     @allocaList allocaList = {}
@@ -107,7 +110,7 @@ override method @decoratedISRDeclarations semanticAnalysis
       !self:selfType
       !instructionAttributes:.mutating | .directPropertyAccess
       !routineNameForInvocationGraph:routineNameForInvocationGraph
-      !context:inSemanticContext
+      !context:inContext
       !mode:isr.mMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
@@ -117,8 +120,10 @@ override method @decoratedISRDeclarations semanticAnalysis
     ]
   #--- End of variableMap
     [universalMap checkLocalVariableFinalState]
+    [!?universalMap closeBranch !isr.mEndOfISRDeclaration]
+    [!?universalMap closeOverride !isr.mEndOfISRDeclaration]
   #--- Code generation
-    [inSemanticContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
+    [inContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
     [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
       !isr.mISRName
       !selfType

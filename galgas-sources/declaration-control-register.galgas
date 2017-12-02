@@ -416,19 +416,13 @@ override method @controlRegisterDeclarationAST enterInContext
     case registerArray (@expressionAST arraySizeExpression @location arraySizeLocation
                         @expressionAST arrayElementSizeExpression @location arrayElementSizeLocation) :
     #--- Analyse register array size expression
-      initialVariableMap (
-        !context:ioContext
-        !mode:.bootMode
-        !globalsAreConstant:true # Any value, there is no defined global variable at this stage
-        !returnTypeName:["" nowhere]
-        ?@universalValuedObjectMapForContext universalMap
-      )
-#      [arraySizeExpression analyzeStaticExpression
-#        !errorLocation:arraySizeLocation
+#      initialVariableMap (
 #        !context:ioContext
-#        !?staticStringMap:ioGlobalLiteralStringMap
-#        ?result:let @objectIR sizeExpressionResult
-#      ]
+#        !mode:.bootMode
+#        !globalsAreConstant:true # Any value, there is no defined global variable at this stage
+#        !returnTypeName:["" nowhere]
+#        ?@universalValuedObjectMapForContext universalMap
+#      )
       @semanticTemporariesStruct temporaries = .default
       @instructionListIR instructionGenerationList = {}
       @allocaList allocaList = {}
@@ -441,7 +435,7 @@ override method @controlRegisterDeclarationAST enterInContext
         !mode:.bootMode
         !?temporary:temporaries
         !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:universalMap
+        !?variableMap:ioContext.mValuedObjectMapForContext # universalMap
         !?alloca:allocaList
         !?instructionListIR:instructionGenerationList
         ?result:@objectIR sizeExpressionResult
@@ -491,6 +485,16 @@ override method @controlRegisterDeclarationAST enterInContext
       !registerBitCount
       ![arraySize uint]
       !elementArraySize
+    ]
+    [!?ioContext.mValuedObjectMapForContext insertRegister
+      !register.mRegisterName
+      !readable:true # registerIsReadable
+      !writable:not isReadOnly
+      !type:registerType
+      !address:registerAddress 
+      !sliceMap:registerBitSliceMap
+      !arraySize:[arraySize uint] # 0 if not an array
+      !elementSize:elementArraySize # 0 if not an array
     ]
   end
 }
