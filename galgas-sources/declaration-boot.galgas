@@ -123,14 +123,7 @@ override method @decoratedBootRoutine semanticAnalysis
 #---
   let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority.bigint !mPriority.location}
 #--- Variable map
-  var universalMap = inContext.mValuedObjectMapForContext
-#  initialVariableMap (
-#    !context:inContext
-##    !mode:.bootMode
-##    !globalsAreConstant:false
-##    !returnTypeName:["" nowhere]
-#    ?@universalValuedObjectMapForContext universalMap
-#  )
+  var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
 #--- Analyze instruction list

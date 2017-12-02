@@ -334,7 +334,7 @@ override method @staticListAST enterInContext
 #              !mode:.bootMode
 #              !globalsAreConstant:true # Any value, there is no defined global variable at this stage
 #              !returnTypeName:["" nowhere]
-#              ?@universalValuedObjectMapForContext universalMap
+#              ?@universalValuedObjectMap universalMap
 #            )
             @semanticTemporariesStruct temporaries = .default
             @instructionListIR instructionGenerationList = {}
@@ -348,7 +348,7 @@ override method @staticListAST enterInContext
               !mode:.bootMode
               !?temporary:temporaries
               !?staticStringMap:ioGlobalLiteralStringMap
-              !?variableMap:ioContext.mValuedObjectMapForContext # universalMap
+              !?variableMap:ioContext.mValuedObjectMap # universalMap
               !?alloca:allocaList
               !?instructionListIR:instructionGenerationList
               ?result:let @objectIR expressionResult
@@ -455,7 +455,7 @@ override method @staticListAST enterInContext
     !mStaticListName
     !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!mStaticListName)}
   ]
-  [!?ioContext.mValuedObjectMapForContext insertGlobalConstant
+  [!?ioContext.mValuedObjectMap insertGlobalConstant
     !mStaticListName
     !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!mStaticListName)}
   ]

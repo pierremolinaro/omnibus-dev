@@ -421,7 +421,7 @@ override method @controlRegisterDeclarationAST enterInContext
 #        !mode:.bootMode
 #        !globalsAreConstant:true # Any value, there is no defined global variable at this stage
 #        !returnTypeName:["" nowhere]
-#        ?@universalValuedObjectMapForContext universalMap
+#        ?@universalValuedObjectMap universalMap
 #      )
       @semanticTemporariesStruct temporaries = .default
       @instructionListIR instructionGenerationList = {}
@@ -435,7 +435,7 @@ override method @controlRegisterDeclarationAST enterInContext
         !mode:.bootMode
         !?temporary:temporaries
         !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioContext.mValuedObjectMapForContext # universalMap
+        !?variableMap:ioContext.mValuedObjectMap # universalMap
         !?alloca:allocaList
         !?instructionListIR:instructionGenerationList
         ?result:@objectIR sizeExpressionResult
@@ -486,7 +486,7 @@ override method @controlRegisterDeclarationAST enterInContext
       ![arraySize uint]
       !elementArraySize
     ]
-    [!?ioContext.mValuedObjectMapForContext insertRegister
+    [!?ioContext.mValuedObjectMap insertRegister
       !register.mRegisterName
       !readable:true # registerIsReadable
       !writable:not isReadOnly

@@ -19,7 +19,7 @@ graph @subprogramInvocationGraph (@lstringlist) {
 proc enterFormalArguments
   ?context:let @semanticContext inContext
   ?let @routineFormalArgumentListAST inFormalArgumentPassingMode
-  ?!@universalValuedObjectMapForContext ioUniversalMap
+  ?!@universalValuedObjectMap ioUniversalMap
   ?!@routineFormalArgumentListIR ioFormalArguments
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
@@ -61,14 +61,7 @@ proc routineSemanticAnalysis
     !inRoutineFormalArgumentList
   )
 #--- Variable map
-  var universalMap = inContext.mValuedObjectMapForContext
-#  initialVariableMap (
-#    !context:inContext
-##    !mode:inRoutineMode
-##    !globalsAreConstant:false
-##    !returnTypeName:inReturnTypeName
-#    ?@universalValuedObjectMapForContext universalMap
-#  )
+  var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
   if inReturnTypeName.string != "" then

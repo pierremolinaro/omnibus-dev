@@ -124,7 +124,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
   @semanticTemporariesStruct temporaries = .default
 #  variableMapWithConstants (
 #    !context:ioContext
-#    ?@universalValuedObjectMapForContext universalMap
+#    ?@universalValuedObjectMap universalMap
 #  )
   [mSizeExpression analyzeExpression
     !self:voidType ()
@@ -135,7 +135,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
     !mode:.bootMode
     !?temporary:temporaries
     !?staticStringMap:*
-    !?variableMap:ioContext.mValuedObjectMapForContext # universalMap
+    !?variableMap:ioContext.mValuedObjectMap # universalMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
     ?result:let @objectIR sizeExpressionIR

@@ -87,22 +87,11 @@ override method @decoratedISRDeclarations semanticAnalysis
       ]
     end
   #--- Variable map
-  var universalMap = inContext.mValuedObjectMapForContext
-#    initialVariableMap (
-#      !context:inSemanticContext
-##      !mode:isr.mMode
-##      !globalsAreConstant:false
-##      !returnTypeName:["" nowhere]
-#      ?@universalValuedObjectMapForContext universalMap
-#    )
+  var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
   #--- Self type
-#    let @PLMType selfType = if isr.mModuleName.string == "" then
-#      voidType ()
-#    else
    let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !llvmDriverNameFromName (!isr.mModuleName)} type]
-#    end
   #--- Analyze instruction list
     @allocaList allocaList = {}
     @instructionListIR instructionGenerationList = {}

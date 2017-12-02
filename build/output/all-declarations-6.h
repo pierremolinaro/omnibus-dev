@@ -1846,7 +1846,7 @@ class cPtr_decoratedInitRoutine : public cPtr_abstractDecoratedDeclaration {
 
 void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
                                    const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                                   class GALGAS_universalValuedObjectMapForContext & ioArgument2,
+                                   class GALGAS_universalValuedObjectMap & ioArgument2,
                                    class GALGAS_routineFormalArgumentListIR & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
@@ -2243,7 +2243,7 @@ typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExp
                                                                                                 const class GALGAS_mode constinArgument5,
                                                                                                 class GALGAS_semanticTemporariesStruct & ioArgument6,
                                                                                                 class GALGAS_staticStringMap & ioArgument7,
-                                                                                                class GALGAS_universalValuedObjectMapForContext & ioArgument8,
+                                                                                                class GALGAS_universalValuedObjectMap & ioArgument8,
                                                                                                 class GALGAS_allocaList & ioArgument9,
                                                                                                 class GALGAS_instructionListIR & ioArgument10,
                                                                                                 class GALGAS_objectIR & outArgument11,
@@ -2266,7 +2266,7 @@ void callExtensionMethod_analyzePrimaryExpressionNoSelf (const class cPtr_primar
                                                          const GALGAS_mode constin_inCurrentMode,
                                                          GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                          GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                         GALGAS_universalValuedObjectMapForContext & io_ioUniversalMap,
+                                                         GALGAS_universalValuedObjectMap & io_ioUniversalMap,
                                                          GALGAS_allocaList & io_ioAllocaList,
                                                          GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                          GALGAS_objectIR & out_outResult,
@@ -2275,28 +2275,15 @@ void callExtensionMethod_analyzePrimaryExpressionNoSelf (const class cPtr_primar
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Extension method '@universalValuedObjectMapForContext searchEntity'                         *
+//                              Extension method '@universalValuedObjectMap searchEntity'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_universalValuedObjectMapForContext_searchEntity) (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                          const class GALGAS_lstring constinArgument0,
-                                                                                          class GALGAS_valuedObject & outArgument1,
-                                                                                          class C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_searchEntity (const int32_t inClassIndex,
-                                        extensionMethodSignature_universalValuedObjectMapForContext_searchEntity inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_searchEntity (const class cPtr_universalValuedObjectMapForContext * inObject,
-                                       const GALGAS_lstring constin_inValuedObjectName,
-                                       GALGAS_valuedObject & out_outEntity,
-                                       C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
+void extensionMethod_searchEntity (const class GALGAS_universalValuedObjectMap inObject,
+                                   const class GALGAS_lstring constin_inValuedObjectName,
+                                   class GALGAS_valuedObject & out_outEntity,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2310,7 +2297,7 @@ void routine_analyzeRegisterExpression (const class GALGAS_PLMType constinArgume
                                         const class GALGAS_mode constinArgument3,
                                         class GALGAS_semanticTemporariesStruct & ioArgument4,
                                         class GALGAS_staticStringMap & ioArgument5,
-                                        class GALGAS_universalValuedObjectMapForContext & ioArgument6,
+                                        class GALGAS_universalValuedObjectMap & ioArgument6,
                                         class GALGAS_allocaList & ioArgument7,
                                         class GALGAS_instructionListIR & ioArgument8,
                                         const class GALGAS_PLMType constinArgument9,
@@ -2337,7 +2324,7 @@ void routine_procAnalyzeAccesListInExpression (const class GALGAS_PLMType consti
                                                const class GALGAS_mode constinArgument5,
                                                class GALGAS_semanticTemporariesStruct & ioArgument6,
                                                class GALGAS_staticStringMap & ioArgument7,
-                                               class GALGAS_universalValuedObjectMapForContext & ioArgument8,
+                                               class GALGAS_universalValuedObjectMap & ioArgument8,
                                                class GALGAS_allocaList & ioArgument9,
                                                class GALGAS_instructionListIR & ioArgument10,
                                                const class GALGAS_primaryInExpressionAccessListAST constinArgument11,
@@ -2347,26 +2334,14 @@ void routine_procAnalyzeAccesListInExpression (const class GALGAS_PLMType consti
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Extension setter '@universalValuedObjectMapForContext readAccess'                          *
+//                               Extension setter '@universalValuedObjectMap readAccess'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionSetterSignature_universalValuedObjectMapForContext_readAccess) (class cPtr_universalValuedObjectMapForContext * inObject,
-                                                                                        const class GALGAS_lstring constinArgument0,
-                                                                                        class C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_readAccess (const int32_t inClassIndex,
-                                      extensionSetterSignature_universalValuedObjectMapForContext_readAccess inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_readAccess (class cPtr_universalValuedObjectMapForContext * inObject,
-                                     const GALGAS_lstring constin_inValuedObjectName,
-                                     C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
+void extensionSetter_readAccess (class GALGAS_universalValuedObjectMap & ioObject,
+                                 const class GALGAS_lstring constin_inValuedObjectName,
+                                 class C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2383,7 +2358,7 @@ typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExp
                                                                                                   const class GALGAS_mode constinArgument5,
                                                                                                   class GALGAS_semanticTemporariesStruct & ioArgument6,
                                                                                                   class GALGAS_staticStringMap & ioArgument7,
-                                                                                                  class GALGAS_universalValuedObjectMapForContext & ioArgument8,
+                                                                                                  class GALGAS_universalValuedObjectMap & ioArgument8,
                                                                                                   class GALGAS_allocaList & ioArgument9,
                                                                                                   class GALGAS_instructionListIR & ioArgument10,
                                                                                                   class GALGAS_objectIR & outArgument11,
@@ -2406,7 +2381,7 @@ void callExtensionMethod_analyzePrimaryExpressionWithSelf (const class cPtr_prim
                                                            const GALGAS_mode constin_inCurrentMode,
                                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                           GALGAS_universalValuedObjectMapForContext & io_ioUniversalMap,
+                                                           GALGAS_universalValuedObjectMap & io_ioUniversalMap,
                                                            GALGAS_allocaList & io_ioAllocaList,
                                                            GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                            GALGAS_objectIR & out_outResult,
@@ -2430,7 +2405,7 @@ void routine_handleArrayAccessInExpression (class GALGAS_objectIR & ioArgument0,
                                             const class GALGAS_mode constinArgument8,
                                             class GALGAS_semanticTemporariesStruct & ioArgument9,
                                             class GALGAS_staticStringMap & ioArgument10,
-                                            class GALGAS_universalValuedObjectMapForContext & ioArgument11,
+                                            class GALGAS_universalValuedObjectMap & ioArgument11,
                                             class GALGAS_allocaList & ioArgument12,
                                             class GALGAS_instructionListIR & ioArgument13,
                                             class C_Compiler * inCompiler
@@ -2450,7 +2425,7 @@ void routine_handleFunctionCallInExpression (const class GALGAS_lstring constinA
                                              const class GALGAS_mode constinArgument5,
                                              class GALGAS_semanticTemporariesStruct & ioArgument6,
                                              class GALGAS_staticStringMap & ioArgument7,
-                                             class GALGAS_universalValuedObjectMapForContext & ioArgument8,
+                                             class GALGAS_universalValuedObjectMap & ioArgument8,
                                              class GALGAS_allocaList & ioArgument9,
                                              const class GALGAS_effectiveArgumentListAST constinArgument10,
                                              class GALGAS_instructionListIR & ioArgument11,

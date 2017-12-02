@@ -103,7 +103,7 @@ override method @ifInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMapForContext ioUniversalMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -136,7 +136,6 @@ override method @ifInstructionAST analyze
     warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
   end
   [!?ioUniversalMap openOverrideForSelectBlock]
-#  [!?ioVariableMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
   @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
@@ -168,7 +167,6 @@ override method @ifInstructionAST analyze
     !?instructionListIR:elseInstructionGenerationList
   ]
   [!?ioUniversalMap closeOverride !mEndOf_if_instruction]
-#  [!?ioVariableMap closeOverride !mEndOf_if_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@ifInstructionIR.new {
     !testResult
