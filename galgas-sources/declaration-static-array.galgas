@@ -329,13 +329,13 @@ override method @staticListAST enterInContext
           if [type.kind isFunction] then
             error endOfExp : "a function name is expected here"
           else
-            initialVariableMap (
-              !context:ioContext
-              !mode:.bootMode
-              !globalsAreConstant:true # Any value, there is no defined global variable at this stage
-              !returnTypeName:["" nowhere]
-              ?@universalValuedObjectMapForContext universalMap
-            )
+#            initialVariableMap (
+#              !context:ioContext
+#              !mode:.bootMode
+#              !globalsAreConstant:true # Any value, there is no defined global variable at this stage
+#              !returnTypeName:["" nowhere]
+#              ?@universalValuedObjectMapForContext universalMap
+#            )
             @semanticTemporariesStruct temporaries = .default
             @instructionListIR instructionGenerationList = {}
             @allocaList allocaList = {}
@@ -348,7 +348,7 @@ override method @staticListAST enterInContext
               !mode:.bootMode
               !?temporary:temporaries
               !?staticStringMap:ioGlobalLiteralStringMap
-              !?variableMap:universalMap
+              !?variableMap:ioContext.mValuedObjectMapForContext # universalMap
               !?alloca:allocaList
               !?instructionListIR:instructionGenerationList
               ?result:let @objectIR expressionResult
@@ -452,6 +452,10 @@ override method @staticListAST enterInContext
 #-------------------------------------------------------------------- Enter list in constant map
   let staticListType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmNameForStaticListType (!mStaticListName)}
   [!?ioContext.mGlobalConstantMap insertKey
+    !mStaticListName
+    !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!mStaticListName)}
+  ]
+  [!?ioContext.mValuedObjectMapForContext insertGlobalConstant
     !mStaticListName
     !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!mStaticListName)}
   ]

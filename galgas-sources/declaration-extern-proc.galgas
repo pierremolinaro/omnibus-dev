@@ -125,20 +125,12 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !mExternProcedureName
     !mProcFormalArgumentList
   )
-#--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:mMode
-    !globalsAreConstant:false
-    !returnTypeName:["" nowhere]
-    ?@universalValuedObjectMapForContext universalMap
-  )
 #--- Analyse formal arguments
   @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (
     !context:inContext
     !mProcFormalArgumentList
-    !?universalMap
+    !?* # universalMap
     !?formalArguments
   )
 #--- Enter subprogram invocation graph

@@ -123,13 +123,16 @@ override method @decoratedBootRoutine semanticAnalysis
 #---
   let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority.bigint !mPriority.location}
 #--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:.bootMode
-    !globalsAreConstant:false
-    !returnTypeName:["" nowhere]
-    ?@universalValuedObjectMapForContext universalMap
-  )
+  var universalMap = inContext.mValuedObjectMapForContext
+#  initialVariableMap (
+#    !context:inContext
+##    !mode:.bootMode
+##    !globalsAreConstant:false
+##    !returnTypeName:["" nowhere]
+#    ?@universalValuedObjectMapForContext universalMap
+#  )
+  [!?universalMap openOverrideForSelectBlock]
+  [!?universalMap openBranch]
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   @allocaList bootAllocaList = {}
@@ -147,6 +150,8 @@ override method @decoratedBootRoutine semanticAnalysis
   ]
 #--- End of variableMap
   [universalMap checkLocalVariableFinalState]
+  [!?universalMap closeBranch !mEndOfBootLocation]
+  [!?universalMap closeOverride !mEndOfBootLocation]
 #--- Code generation
   ioIntermediateCodeStruct.mBootList +=
     !mPriority.bigint

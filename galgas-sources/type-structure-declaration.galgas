@@ -412,10 +412,10 @@ method @structurePropertyListAST-element enterInContext
     else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
   end
 #--- Variable map (with constants)
-  variableMapWithConstants (
-    !context:ioContext
-    ?@universalValuedObjectMapForContext universalMap
-  )
+#  variableMapWithConstants (
+#    !context:ioContext
+#    ?@universalValuedObjectMapForContext universalMap
+#  )
 #--- Init expression
   switch mInitialisation
   case expression (initExpression) :
@@ -428,7 +428,7 @@ method @structurePropertyListAST-element enterInContext
       !mode:.bootMode
       !?temporary:*
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:universalMap
+      !?variableMap:ioContext.mValuedObjectMapForContext # universalMap
       !?alloca:*
       !?instructionListIR:*
       ?result:let @objectIR expressionIR

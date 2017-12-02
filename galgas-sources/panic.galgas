@@ -161,13 +161,16 @@ override method @decoratedPanicRoutine semanticAnalysis
 {
   let routineNameForInvocationGraph = panicNameForInvocationGraph (!if mIsSetup then "setup" else "loop" end !mPriority)
 #--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:.panicMode
-    !globalsAreConstant:false
-    !returnTypeName:["" nowhere]
-    ?@universalValuedObjectMapForContext universalMap
-  )
+  var universalMap = inContext.mValuedObjectMapForContext
+#  initialVariableMap (
+#    !context:inContext
+##    !mode:.panicMode
+##    !globalsAreConstant:false
+##    !returnTypeName:["" nowhere]
+#    ?@universalValuedObjectMapForContext universalMap
+#  )
+  [!?universalMap openOverrideForSelectBlock]
+  [!?universalMap openBranch]
 #--- Insert predefined input arguments
   let codeArg = @lstring.new {!"CODE" !mPriority.location}
   [!?universalMap insertUsedLocalConstant !codeArg ![inContext.mPanicCodeType type] !codeArg]
@@ -192,10 +195,9 @@ override method @decoratedPanicRoutine semanticAnalysis
     !?generatedCode:instructionGenerationList
   ]
 #--- End of variableMap
-#  [variableMap deinitTopLevelVariables]
   [universalMap checkLocalVariableFinalState]
-#  [variableMap checkAutomatonStates !mEndOfPanicInstructions]
-#  drop variableMap
+  [!?universalMap closeBranch !mEndOfPanicInstructions]
+  [!?universalMap closeOverride !mEndOfPanicInstructions]
 #--- Code generation
   if mIsSetup then
     [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]

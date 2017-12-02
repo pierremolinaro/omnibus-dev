@@ -46,7 +46,7 @@ proc routineSemanticAnalysis
   ?let @routineFormalArgumentListAST inRoutineFormalArgumentList
   ?returnTypeName:let @lstring inReturnTypeName
   ?let @instructionListAST inRoutineInstructionList
-  ?let @location unused inEndOfRoutineDeclaration
+  ?let @location inEndOfRoutineDeclaration
   ?instructionAttributes:let @instructionAttributes inInstructionAttributes
   ?warnIfUnused:let @bool inWarnIfUnused
   ?globalFunction:let @bool inGlobalFunction
@@ -61,13 +61,21 @@ proc routineSemanticAnalysis
     !inRoutineFormalArgumentList
   )
 #--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:inRoutineMode
-    !globalsAreConstant:false
-    !returnTypeName:inReturnTypeName
-    ?@universalValuedObjectMapForContext universalMap
-  )
+  var universalMap = inContext.mValuedObjectMapForContext
+#  initialVariableMap (
+#    !context:inContext
+##    !mode:inRoutineMode
+##    !globalsAreConstant:false
+##    !returnTypeName:inReturnTypeName
+#    ?@universalValuedObjectMapForContext universalMap
+#  )
+  [!?universalMap openOverrideForSelectBlock]
+  [!?universalMap openBranch]
+  if inReturnTypeName.string != "" then
+    let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}
+    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName} type]
+    [!?universalMap insertLocalVariable !resultVarName !resultType !resultVarName !.noValue !true]
+  end
 #--- Analyse formal arguments
   @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (
@@ -100,6 +108,8 @@ proc routineSemanticAnalysis
   ]
 #--- End of variableMap
   [universalMap checkLocalVariableFinalState]
+  [!?universalMap closeBranch !inEndOfRoutineDeclaration]
+  [!?universalMap closeOverride !inEndOfRoutineDeclaration]
 #--- Code generation
   let returnType = if inReturnTypeName.string == "" then
     voidType ()

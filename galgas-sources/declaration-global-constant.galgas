@@ -96,13 +96,13 @@ override method @globalConstantDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
-  initialVariableMap (
-    !context:ioContext
-    !mode:.bootMode
-    !globalsAreConstant:true # Any value, there is no defined global variable at this stage
-    !returnTypeName:["" nowhere]
-    ?@universalValuedObjectMapForContext universalMap
-  )
+#  initialVariableMap (
+#    !context:ioContext
+#    !mode:.bootMode
+#    !globalsAreConstant:true # Any value, there is no defined global variable at this stage
+#    !returnTypeName:["" nowhere]
+#    ?@universalValuedObjectMapForContext universalMap
+#  )
 #--- Get destination type
   @PLMType annotationType
   if mConstantTypeName.string == "" then
@@ -120,7 +120,7 @@ override method @globalConstantDeclarationAST enterInContext
     !mode:.bootMode
     !?temporary:*
     !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:universalMap
+    !?variableMap:ioContext.mValuedObjectMapForContext # universalMap
     !?alloca:*
     !?instructionListIR:*
     ?result:@objectIR expressionResult
@@ -138,6 +138,7 @@ override method @globalConstantDeclarationAST enterInContext
   end
 #--- Enter in context
   [!?ioContext.mGlobalConstantMap insertKey !mConstantName !result]
+  [!?ioContext.mValuedObjectMapForContext insertGlobalConstant !mConstantName !result]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

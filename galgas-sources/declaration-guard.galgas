@@ -154,7 +154,7 @@ proc guardSemanticAnalysis
   ?let @routineFormalArgumentListAST inRoutineFormalArgumentList
   ?let @guardKind inGuardKind
   ?let @instructionListAST inRoutineInstructionList
-  ?let @location unused inEndOfRoutineDeclaration
+  ?let @location inEndOfRoutineDeclaration
   ?warnIfUnused:let @bool inWarnIfUnused
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -174,13 +174,16 @@ proc guardSemanticAnalysis
     ]
   end
 #--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:.guardMode
-    !globalsAreConstant:false
-    !returnTypeName:["" nowhere]
-    ?@universalValuedObjectMapForContext universalMap
-  )
+  var universalMap = inContext.mValuedObjectMapForContext
+#  initialVariableMap (
+#    !context:inContext
+##    !mode:.guardMode
+##    !globalsAreConstant:false
+##    !returnTypeName:["" nowhere]
+#    ?@universalValuedObjectMapForContext universalMap
+#  )
+  [!?universalMap openOverrideForSelectBlock]
+  [!?universalMap openBranch]
   @routineFormalArgumentListIR formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
   @allocaList allocaList = {}
@@ -254,6 +257,8 @@ proc guardSemanticAnalysis
   end 
 #--- End of variableMap
   [universalMap checkLocalVariableFinalState]
+  [!?universalMap closeBranch !inEndOfRoutineDeclaration]
+  [!?universalMap closeOverride !inEndOfRoutineDeclaration]
 #--- Code generation
   [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
     !guardMangledName
