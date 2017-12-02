@@ -209,8 +209,7 @@ proc guardSemanticAnalysis
   #--- Analyze instruction list
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
-      !directAccessToPropertiesAllowed:true
-      !propertiesAreMutable:true
+      !instructionAttributes:.mutating | .directPropertyAccess
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.guardMode
@@ -242,8 +241,7 @@ proc guardSemanticAnalysis
   #--- Analyze instruction list
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
-      !directAccessToPropertiesAllowed:true
-      !propertiesAreMutable:true
+      !instructionAttributes: .mutating | .directPropertyAccess
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.userMode # Convenience guards instructions are executed in user mode

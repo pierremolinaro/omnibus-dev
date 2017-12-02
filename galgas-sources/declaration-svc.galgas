@@ -182,8 +182,7 @@ method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis
       !returnTypeName:svc.mReturnTypeName
       !svc.mInstructionList
       !svc.mEndOfInstructionListLocation
-      !directAccessToPropertiesAllowed:true
-      !propertiesAreMutable:mutating
+      !instructionAttributes:.mutating | .directPropertyAccess
       !warnIfUnused:not noUnusedWarning
       !globalFunction:true
       !context:inSemanticContext

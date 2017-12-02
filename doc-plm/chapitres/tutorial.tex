@@ -137,7 +137,7 @@ Déclaration d'une variable \plm=compteur=, de type \plm=$uint32= (entier non si
   while time.waitUntilMS (!deadline:self.compteur) {
 \end{PLM}
 
-Appel de la commande gardée \plm=waitUntilMS= du module \plm=time=, avec un argument, la variable de tâche \plm=compteur=. L'utilisation de \plm=self= est obligatoire pour accéder aux variables de tâche\footnote{Sans \texttt{self}, ce serait un accès à une variable locale à la fonction, ou à une constante globale.}. Cette appel effectue l'attente jusqu'à la date exprimée par l'argument \plm=self.compteur=. Cette date est comptée en millisecondes depuis le démarrage du micro-contrôleur.
+Appel de la commande gardée \plm=waitUntilMS= du pilote \plm=time=, avec un argument, la variable de tâche \plm=compteur=. L'utilisation de \plm=self= est obligatoire pour accéder aux variables de tâche\footnote{Sans \texttt{self}, ce serait un accès à une variable locale à la fonction, ou à une constante globale.}. Cette appel effectue l'attente jusqu'à la date exprimée par l'argument \plm=self.compteur=. Cette date est comptée en millisecondes depuis le démarrage du micro-contrôleur.
 
 
 
@@ -145,7 +145,7 @@ Appel de la commande gardée \plm=waitUntilMS= du module \plm=time=, avec un arg
     leds.on (!LED_L0)
 \end{PLM}
 
-Appel de la fonction \plm=on= du module \plm=leds=, avec un argument, la constante \plm=LED_L0=. L'effet de l'exécution de cet appel est d'allumer la led n°0.
+Appel de la fonction \plm=on= du pilote \plm=leds=, avec un argument, la constante \plm=LED_L0=. L'effet de l'exécution de cet appel est d'allumer la led n°0.
 
 
 
@@ -169,7 +169,7 @@ Attente de la nouvelle échéance, extinction de la led n°0, incrémentation de
     lcd.goto (!line:0 !column:0)
 \end{PLM}
 
-Appel de la fonction \plm=goto= du module \plm=lcd=, avec deux arguments. L'effet de l'exécution de cet appel est de positionner le curseur de l'afficheur LCD au début de la première ligne.
+Appel de la fonction \plm=goto= du pilote \plm=lcd=, avec deux arguments. L'effet de l'exécution de cet appel est de positionner le curseur de l'afficheur LCD au début de la première ligne.
 
 
 

@@ -57,8 +57,7 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 
 override method @letInstructionWithAssignmentAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode

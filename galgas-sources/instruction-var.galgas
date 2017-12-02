@@ -84,8 +84,7 @@ override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 
 override method @varInstructionWithAssignmentAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -139,8 +138,7 @@ override method @varInstructionWithAssignmentAST analyze
 
 override method @varInstructionAST analyze
   ?self:let @PLMType unused inSelfType
-  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode

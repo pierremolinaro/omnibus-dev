@@ -130,6 +130,8 @@ struct @semanticContext {
 #--- Tasks
   @taskMap mTaskMap
   @globalTaskVariableList mGlobalTaskVariableList
+#--- Entity map
+#  @universalValuedObjectMapForContext mValuedObjectMapForContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

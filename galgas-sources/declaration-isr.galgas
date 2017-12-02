@@ -105,8 +105,7 @@ override method @decoratedISRDeclarations semanticAnalysis
     @instructionListIR instructionGenerationList = {}
     [isr.mISRInstructionList analyzeRoutineInstructionList
       !self:selfType
-      !directAccessToPropertiesAllowed:true
-      !propertiesAreMutable:true
+      !instructionAttributes:.mutating | .directPropertyAccess
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inSemanticContext
       !mode:isr.mMode

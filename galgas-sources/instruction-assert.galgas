@@ -42,8 +42,7 @@ override method @assertInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 
 override method @assertInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode

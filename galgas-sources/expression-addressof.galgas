@@ -71,7 +71,7 @@ override method @addressofExpressionAST analyzeExpression
   #--- Analyze LValue
     [mLValue analyzeLValue
       !self: inSelfType
-      !propertiesAreMutable: true
+      !instructionAttributes: .mutating
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !context: inContext
       !mode: inCurrentMode

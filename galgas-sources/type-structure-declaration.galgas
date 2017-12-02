@@ -532,8 +532,7 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
 {
   for function in mFunctionDeclarationListAST do
     var warnIfUnused = true
-    var mutating = false
-    var accessProperties = false
+    var functionAttributes = @instructionAttributes.none
     for (attribute) in function.mFunctionAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
@@ -541,21 +540,21 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
         end
         warnIfUnused = false    
       elsif attribute.string == userAccessAttribute () then
-        if accessProperties then
+        if [functionAttributes directPropertyAccess] then
           error attribute : "duplicated @" + userAccessAttribute () + " attribute"
         end
-        accessProperties = true    
+        functionAttributes = functionAttributes | .directPropertyAccess   
       elsif attribute.string == mutatingAttribute () then
-        if mutating then
+        if [functionAttributes mutating] then
           error attribute : "duplicated @" + mutatingAttribute () + " attribute"
         end
-        mutating = true    
+        functionAttributes = functionAttributes | .mutating    
       else
         error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
           + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
       end
     end
-    accessProperties = function.mMode != .userMode
+#    accessProperties = function.mMode != .userMode
     routineSemanticAnalysis (
       !receiverType:inStructureType
       !.function {!executionMode:function.mMode}
@@ -565,8 +564,7 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
       !returnTypeName:function.mFunctionReturnTypeName
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
-      !directAccessToPropertiesAllowed:accessProperties
-      !propertiesAreMutable:mutating
+      !instructionAttributes:functionAttributes
       !warnIfUnused:warnIfUnused
       !globalFunction:false
       !context:inContext

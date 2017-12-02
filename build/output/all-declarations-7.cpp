@@ -1566,7 +1566,7 @@ void extensionMethod_type (const GALGAS_LValueAST inObject,
 
 void extensionMethod_analyzeLValue (const GALGAS_LValueAST inObject,
                                     const GALGAS_PLMType constinArgument_inSelfType,
-                                    const GALGAS_bool constinArgument_inRoutineCanMutateProperties,
+                                    const GALGAS_instructionAttributes constinArgument_inInstructionAttributes,
                                     const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
                                     const GALGAS_semanticContext constinArgument_inContext,
                                     const GALGAS_mode constinArgument_inCurrentMode,
@@ -1587,7 +1587,7 @@ void extensionMethod_analyzeLValue (const GALGAS_LValueAST inObject,
       inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("lvalue.galgas", 148)), GALGAS_string ("self is not available in this context"), fixItArray2  COMMA_SOURCE_FILE ("lvalue.galgas", 148)) ;
       outArgument_outInternalRepresentation.drop () ; // Release error dropped variable
     }else if (kBoolFalse == test_1) {
-      const enumGalgasBool test_3 = constinArgument_inRoutineCanMutateProperties.operator_not (SOURCE_FILE ("lvalue.galgas", 149)).boolEnum () ;
+      const enumGalgasBool test_3 = constinArgument_inInstructionAttributes.getter_mutating (SOURCE_FILE ("lvalue.galgas", 149)).operator_not (SOURCE_FILE ("lvalue.galgas", 149)).boolEnum () ;
       if (kBoolTrue == test_3) {
         TC_Array <C_FixItDescription> fixItArray4 ;
         inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("lvalue.galgas", 150)), GALGAS_string ("cannot mutate properties, current method is not declared with @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 151)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 151)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 151)), fixItArray4  COMMA_SOURCE_FILE ("lvalue.galgas", 150)) ;
@@ -1599,9 +1599,9 @@ void extensionMethod_analyzeLValue (const GALGAS_LValueAST inObject,
       }
     }
   }else if (kBoolFalse == test_0) {
-    GALGAS_valuedObject var_entity_6669 ;
-    callExtensionMethod_searchEntity ((const cPtr_universalValuedObjectMapForContext *) ioArgument_ioUniversalMap.ptr (), inObject.mProperty_mIdentifier, var_entity_6669, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 170)) ;
-    switch (var_entity_6669.enumValue ()) {
+    GALGAS_valuedObject var_entity_6688 ;
+    callExtensionMethod_searchEntity ((const cPtr_universalValuedObjectMapForContext *) ioArgument_ioUniversalMap.ptr (), inObject.mProperty_mIdentifier, var_entity_6688, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 170)) ;
+    switch (var_entity_6688.enumValue ()) {
     case GALGAS_valuedObject::kNotBuilt:
       break ;
     case GALGAS_valuedObject::kEnum_task:
@@ -1620,12 +1620,12 @@ void extensionMethod_analyzeLValue (const GALGAS_LValueAST inObject,
       break ;
     case GALGAS_valuedObject::kEnum_register:
       {
-        const cEnumAssociatedValues_valuedObject_register * extractPtr_7855 = (const cEnumAssociatedValues_valuedObject_register *) (var_entity_6669.unsafePointer ()) ;
-        const GALGAS_bool extractedValue_writable = extractPtr_7855->mAssociatedValue1 ;
-        const GALGAS_PLMType extractedValue_registerType = extractPtr_7855->mAssociatedValue2 ;
-        const GALGAS_bigint extractedValue_registerAddress = extractPtr_7855->mAssociatedValue3 ;
-        const GALGAS_uint extractedValue_arraySize = extractPtr_7855->mAssociatedValue5 ;
-        const GALGAS_uint extractedValue_elementSize = extractPtr_7855->mAssociatedValue6 ;
+        const cEnumAssociatedValues_valuedObject_register * extractPtr_7874 = (const cEnumAssociatedValues_valuedObject_register *) (var_entity_6688.unsafePointer ()) ;
+        const GALGAS_bool extractedValue_writable = extractPtr_7874->mAssociatedValue1 ;
+        const GALGAS_PLMType extractedValue_registerType = extractPtr_7874->mAssociatedValue2 ;
+        const GALGAS_bigint extractedValue_registerAddress = extractPtr_7874->mAssociatedValue3 ;
+        const GALGAS_uint extractedValue_arraySize = extractPtr_7874->mAssociatedValue5 ;
+        const GALGAS_uint extractedValue_elementSize = extractPtr_7874->mAssociatedValue6 ;
         const enumGalgasBool test_7 = extractedValue_writable.operator_not (SOURCE_FILE ("lvalue.galgas", 177)).boolEnum () ;
         if (kBoolTrue == test_7) {
           TC_Array <C_FixItDescription> fixItArray8 ;
@@ -1654,9 +1654,9 @@ void extensionMethod_analyzeLValue (const GALGAS_LValueAST inObject,
       break ;
     case GALGAS_valuedObject::kEnum_localVariable:
       {
-        const cEnumAssociatedValues_valuedObject_localVariable * extractPtr_8756 = (const cEnumAssociatedValues_valuedObject_localVariable *) (var_entity_6669.unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_variableType = extractPtr_8756->mAssociatedValue0 ;
-        const GALGAS_lstring extractedValue_plmName = extractPtr_8756->mAssociatedValue1 ;
+        const cEnumAssociatedValues_valuedObject_localVariable * extractPtr_8775 = (const cEnumAssociatedValues_valuedObject_localVariable *) (var_entity_6688.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_variableType = extractPtr_8775->mAssociatedValue0 ;
+        const GALGAS_lstring extractedValue_plmName = extractPtr_8775->mAssociatedValue1 ;
         {
         routine_analyzeVariableInLValue (constinArgument_inSelfType, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inObject.mProperty_mIdentifier, function_llvmNameForLocalVariable (extractedValue_plmName.getter_string (SOURCE_FILE ("lvalue.galgas", 215)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 215)), extractedValue_variableType, inObject.mProperty_mAccessList, outArgument_outInternalRepresentation, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 204)) ;
         }

@@ -322,7 +322,7 @@ void callExtensionMethod_searchValuedObjectType (const class cPtr_universalValue
 
 void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
                                     const class GALGAS_PLMType constin_inSelfType,
-                                    const class GALGAS_bool constin_inRoutineCanMutateProperties,
+                                    const class GALGAS_instructionAttributes constin_inInstructionAttributes,
                                     const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                     const class GALGAS_semanticContext constin_inContext,
                                     const class GALGAS_mode constin_inCurrentMode,

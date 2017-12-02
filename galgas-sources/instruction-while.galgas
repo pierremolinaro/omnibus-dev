@@ -54,8 +54,7 @@ override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 
 override method @whileInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -97,8 +96,7 @@ override method @whileInstructionAST analyze
   [!?ioUniversalMap openOverrideForRepeatBlock]
   [mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !propertiesAreMutable:inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !instructionAttributes:inInstructionAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_while_instruction
     !context:inContext

@@ -6032,6 +6032,97 @@ void extensionMethod_systemRoutineSemanticAnalysis (const class GALGAS_systemRou
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                            @instructionAttributes struct                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_instructionAttributes : public AC_GALGAS_root {
+//--------------------------------- Properties
+  private : uint64_t mFlags ;
+  private : bool mIsValid ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_instructionAttributes (void) ;
+
+//--------------------------------- Private constructor
+  private : GALGAS_instructionAttributes (const uint64_t inFlags) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_instructionAttributes extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_instructionAttributes constructor_all (LOCATION_ARGS) ;
+
+  public : static class GALGAS_instructionAttributes constructor_directPropertyAccess (LOCATION_ARGS) ;
+
+  public : static class GALGAS_instructionAttributes constructor_mutating (LOCATION_ARGS) ;
+
+  public : static class GALGAS_instructionAttributes constructor_none (LOCATION_ARGS) ;
+
+//--------------------------------- & operator
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionAttributes operator_and (const GALGAS_instructionAttributes & inOperand
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- | operator
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionAttributes operator_or (const GALGAS_instructionAttributes & inOperand
+                                                                      COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ^ operator
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionAttributes operator_xor (const GALGAS_instructionAttributes & inOperand
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ~ operator
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionAttributes operator_tilde (LOCATION_ARGS) const ;
+
+//--------------------------------- - operator
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionAttributes substract_operation (const GALGAS_instructionAttributes & inOperand,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_instructionAttributes & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_all (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_directPropertyAccess (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mutating (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_none (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_instructionAttributes class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionAttributes ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                         Function 'noUnusedWarningAttribute'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6053,13 +6144,12 @@ void routine_routineSemanticAnalysis (const class GALGAS_PLMType constinArgument
                                       const class GALGAS_lstring constinArgument5,
                                       const class GALGAS_instructionListAST constinArgument6,
                                       const class GALGAS_location constinArgument7,
-                                      const class GALGAS_bool constinArgument8,
+                                      const class GALGAS_instructionAttributes constinArgument8,
                                       const class GALGAS_bool constinArgument9,
                                       const class GALGAS_bool constinArgument10,
-                                      const class GALGAS_bool constinArgument11,
-                                      const class GALGAS_semanticContext constinArgument12,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument13,
-                                      class GALGAS_intermediateCodeStruct & ioArgument14,
+                                      const class GALGAS_semanticContext constinArgument11,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument12,
+                                      class GALGAS_intermediateCodeStruct & ioArgument13,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 

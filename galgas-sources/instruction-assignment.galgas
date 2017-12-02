@@ -47,8 +47,7 @@ override method @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph 
 
 override method @assignmentInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -77,7 +76,7 @@ override method @assignmentInstructionAST analyze
 #--- Analyze LValue
   [mTargetAST analyzeLValue
     !self: inSelfType
-    !propertiesAreMutable: inRoutineCanMutateProperties
+    !instructionAttributes:inInstructionAttributes
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext
     !mode: inCurrentMode

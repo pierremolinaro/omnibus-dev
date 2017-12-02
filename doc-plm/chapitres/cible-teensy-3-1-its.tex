@@ -108,17 +108,17 @@ Vous pouvez ajouter vos propres routines \plm+init+. À chaque routine \plm+init
 
 \section{API}
 
-L'API de la cible \texttt{teensy-3-1-it} regroupe les fonctions disponibles dans des modules et des types~:
+L'API de la cible \texttt{teensy-3-1-it} regroupe les fonctions disponibles dans des pilotes et des types~:
 \begin{itemize}
-  \item le module \plm=time=, la gestion du temps (\refSubsectionPage{moduleTime})~;
-  \item le module \plm=leds=, la gestion des leds (\refSubsectionPage{moduleLeds})~;
-  \item le module \plm=lcd=, la gestion de l'afficheur LCD (\refSubsectionPage{moduleLCD})~;
+  \item le pilote \plm=time=, la gestion du temps (\refSubsectionPage{piloteTime})~;
+  \item le pilote \plm=leds=, la gestion des leds (\refSubsectionPage{piloteLeds})~;
+  \item le pilote \plm=lcd=, la gestion de l'afficheur LCD (\refSubsectionPage{piloteLCD})~;
   \item le type \plm=$semaphore=, le sémaphore de Dijkstra (\refSubsectionPage{typeSemaphore})~;
 \end{itemize}
 
-\subsectionLabel{Module \texttt{time}}{moduleTime}
+\subsectionLabel{Pilote \texttt{time}}{piloteTime}
 
-Le module \plm=time= regroupe des fonctions dédiées à la gestion du temps. Pour la cible \texttt{teensy-3-1-it}, le temps est compté en nombre de milli-secondes écoulées depuis le démarrage du micro-contrôleur. 
+Le pilote \plm=time= regroupe des fonctions dédiées à la gestion du temps. Pour la cible \texttt{teensy-3-1-it}, le temps est compté en nombre de milli-secondes écoulées depuis le démarrage du micro-contrôleur. 
 
 \subsubsection{Fonction \texttt{oneMillisecondBusyWait}}
 
@@ -186,7 +186,7 @@ Cette fonction exprime l'attente passive en garde pendant \plm=inDelay= milli-se
 
 
 
-\subsectionLabel{Module \texttt{leds}}{moduleLeds}
+\subsectionLabel{Pilote \texttt{leds}}{piloteLeds}
 
 
 \subsubsection{Constantes}
@@ -259,7 +259,7 @@ Pour complémenter plusieurs leds, utiliser l'opérateur \plm=|=~:
 
 
 
-\subsectionLabel{Module \texttt{lcd}}{moduleLCD}
+\subsectionLabel{Pilote \texttt{lcd}}{piloteLCD}
 
 
 \subsubsection{Fonction \texttt{clearScreen}}

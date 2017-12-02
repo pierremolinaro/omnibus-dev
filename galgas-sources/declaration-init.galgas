@@ -204,8 +204,7 @@ proc initSemanticAnalysis
   outAllocaList = {}
   [inInstructionListAST analyzeRoutineInstructionList
     !self:inSelfType
-    !directAccessToPropertiesAllowed:true
-    !propertiesAreMutable:true
+    !instructionAttributes:.mutating | .directPropertyAccess
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !mode:inCurrentMode

@@ -12,7 +12,7 @@ PLM ne définit pas d'outils de synchronisation particulier, mais propose des br
 Ce chapitre présente~:
 \begin{itemize}
   \item les types et fonctions constituant ces briques élémentaires (\refSection{typeFonctionsBriqueSynchro})~;
-  \item comment écrire un module de gestion du temps sur un processeur Cortex-M4 (\refSectionPage{moduleTimeCortex})~;
+  \item comment écrire un pilote de gestion du temps sur un processeur Cortex-M4 (\refSectionPage{piloteTimeCortex})~;
   \item l'implémentation du sémaphore de Dijkstra (\refSectionPage{semaphoreDijskstra})~;
   \item l'implémentation d'un rendez-vous (\refSectionPage{structureRendezVous})~;
   \item l'implémentation d'un chronomètre permettant d'exprimer simplement une exécution périodique (\refSectionPage{chronoPeriodique})~;
@@ -181,9 +181,9 @@ Cette fonction signifie aux tâches en attente d'échéance en garde que l'insta
 
 
 
-\sectionLabel{Le module \texttt{time} pour un Cortex-M4}{moduleTimeCortex}
+\sectionLabel{Le pilote \texttt{time} pour un Cortex-M4}{piloteTimeCortex}
 
-Le module \plm=time= décrit ici permet une gestion élémentaire du temps, c'est-à-dire :
+Le pilote \plm=time= décrit ici permet une gestion élémentaire du temps, c'est-à-dire :
 \begin{itemize}
   \item maintenir une date courante, incrémentée sur interruption~;
   \item une fonction permettant d'acquérir la date courante~;
@@ -197,10 +197,10 @@ Les Cortex-M4 implémentent le timer \emph{Systick} qui permet de programmer tr�
 
 \subsection{En-tête}
 
-L'en-tête du module \plm=time= déclare la variable privée \plm=mUptime= qui est utilisée pour détenir la date courante.
+L'en-tête du pilote \plm=time= déclare la variable privée \plm=mUptime= qui est utilisée pour détenir la date courante.
 
 \begin{PLM}
-module time {
+driver time {
   var mUptime $uint32 = 0
 \end{PLM}
 
@@ -252,7 +252,7 @@ public system safe now @noUnusedWarning () -> $uint32 {
 
 Cette primitive système exprime l'attente d'échéance~:
 \begin{itemize}
-  \item \plm=public= signifie qu'elle peut être appelée en dehors du module~;
+  \item \plm=public= signifie qu'elle peut être appelée en dehors du pilote~;
   \item \plm=system= qu'elle est appelable à partir d'une tâche, et s'exécute interruptions masquées via un \emph{system call}~;
   \item \plm=primitive= que la tâche appelante peut être bloquée~;
   \item \plm=@noUnusedWarning= qu'aucune alerte ne sera engendrée par la compilation si cette fonction n'est pas appelée.
@@ -312,7 +312,7 @@ public guard wait @noUnusedWarning (?untilDeadline:deadline $uint32) {
 
 \subsection{Attente en mode \texttt{init}}
 
-Le module \plm=time= est configuré par la routine \plm=init= de priorité $0$, elle est donc la première à s'exécuter dans ce mode. Les autres routines \plm=init= s'exécutent donc ensuite, dans le module \plm=time= est configuré. Dans le mode \plm=init=, l'exécutif n'est pas démarré, on ne peut pas appeler les routines d'attente d'échéance et de délai, mais uniquement exécuter que des attentes actives.
+Le pilote \plm=time= est configuré par la routine \plm=init= de priorité $0$, elle est donc la première à s'exécuter dans ce mode. Les autres routines \plm=init= s'exécutent donc ensuite, dans le pilote \plm=time= est configuré. Dans le mode \plm=init=, l'exécutif n'est pas démarré, on ne peut pas appeler les routines d'attente d'échéance et de délai, mais uniquement exécuter que des attentes actives.
 
 Les fonctions suivantes réalisent des attentes actives, et, comme elles sont déclarées dans le mode \plm=init=, elles ne peuvent pas être appelées par les tâches.
 

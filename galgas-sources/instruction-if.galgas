@@ -97,8 +97,7 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 
 override method @ifInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -142,15 +141,13 @@ override method @ifInstructionAST analyze
   @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !propertiesAreMutable:inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !instructionAttributes:inInstructionAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfThenInstructionList
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:thenInstructionGenerationList
@@ -159,15 +156,13 @@ override method @ifInstructionAST analyze
   @instructionListIR elseInstructionGenerationList = {}
   [mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !propertiesAreMutable:inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !instructionAttributes:inInstructionAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfElseInstructionList
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:elseInstructionGenerationList

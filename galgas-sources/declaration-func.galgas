@@ -329,8 +329,7 @@ override method @decoratedFunction semanticAnalysis
     !returnTypeName:mFunctionReturnTypeName
     !mFunctionInstructionList
     !mEndOfFunctionDeclaration
-    !directAccessToPropertiesAllowed:true
-    !propertiesAreMutable:true
+    !instructionAttributes:.mutating | .directPropertyAccess
     !warnIfUnused:mWarnIfUnused
     !globalFunction:misGlobalProcedure
     !context:inSemanticContext

@@ -132,7 +132,7 @@ method @LValueAST type
 
 method @LValueAST analyzeLValue
   ?self:let @PLMType inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -146,7 +146,7 @@ method @LValueAST analyzeLValue
   if mIdentifier.string == "" then # Receiver is "self"
     if inSelfType.kind == .void then
       error mIdentifier : "self is not available in this context" : outInternalRepresentation
-    elsif not inRoutineCanMutateProperties then
+    elsif not [inInstructionAttributes mutating] then
       error mIdentifier
       : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
       : outInternalRepresentation
