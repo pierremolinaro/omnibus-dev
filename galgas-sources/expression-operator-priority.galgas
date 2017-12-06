@@ -417,15 +417,9 @@ abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticT
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-boolset @contextFlags {
-  guard
-}
-
-#·······················································································································
-
 abstract method @expressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inTargetType
   ?context:let @semanticContext inContext
@@ -449,7 +443,7 @@ method @expressionAST analyzeStaticExpression
   @allocaList allocaList = {}
   [self analyzeExpression
     !self:voidType ()
-    !contextFlags:.none
+    !routineAttributes:.none
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:voidType ()
     !context:inContext

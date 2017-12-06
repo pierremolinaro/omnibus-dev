@@ -77,7 +77,7 @@ override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 
 override method @switchInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -91,7 +91,7 @@ override method @switchInstructionAST analyze
   @instructionListIR switchExpressionGenerationList = {}
   [mSwitchExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:.none
+    !routineAttributes:.none
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext
@@ -137,7 +137,7 @@ override method @switchInstructionAST analyze
     @instructionListIR instructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
-      !instructionAttributes:inInstructionAttributes
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:mEndOf_switch_instruction
       !context:inContext

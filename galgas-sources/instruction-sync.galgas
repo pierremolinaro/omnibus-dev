@@ -149,7 +149,7 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 
 override method @syncInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -169,7 +169,7 @@ override method @syncInstructionAST analyze
       @instructionListIR guardInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
-        !contextFlags:.guard
+        !routineAttributes: inRoutineAttributes | .guard
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:voidType ()
         !context:inContext
@@ -201,7 +201,7 @@ override method @syncInstructionAST analyze
     #--- Analyze guard boolean expression
       [exp analyzeExpression
         !self:inSelfType
-        !contextFlags:.guard
+        !routineAttributes:.guard
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:voidType ()
         !context:inContext
@@ -279,7 +279,7 @@ override method @syncInstructionAST analyze
         var propertyList = nameList
         [!?propertyList popFirst ?let globalReceiverName]
         [!?propertyList popLast ?let guardName]
-        [ioUniversalMap searchValuedObject !globalReceiverName ?var currentObjectIR]
+        [ioUniversalMap searchValuedObject !globalReceiverName !inRoutineAttributes ?var currentObjectIR]
         for (propertyName) in propertyList do
           handlePropertyAccessInExpression (
             !?currentObjectIR
@@ -318,7 +318,7 @@ override method @syncInstructionAST analyze
     @instructionListIR branchInstructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
-      !instructionAttributes:inInstructionAttributes
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:endOfBranch
       !context:inContext

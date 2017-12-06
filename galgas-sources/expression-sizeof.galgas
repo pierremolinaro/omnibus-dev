@@ -86,7 +86,7 @@ override method @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
 
 override method @sizeofExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -98,7 +98,7 @@ override method @sizeofExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  if [inContextFlags guard] then
+  if [inRoutineAttributes guard] then
     error mLValue.mIdentifier : "sizeof () cannot be used in guard" : outResult
   else
   #--- Analyze LValue
@@ -122,7 +122,7 @@ override method @sizeofExpressionAST analyzeExpression
 
 override method @sizeofTypeAST analyzeExpression
   ?self:let @PLMType unused inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -134,7 +134,7 @@ override method @sizeofTypeAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  if [inContextFlags guard] then
+  if [inRoutineAttributes guard] then
     error mTypeName : "sizeof () cannot be used in guard" : outResult
   else
     let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]

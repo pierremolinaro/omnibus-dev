@@ -1661,11 +1661,11 @@ class GALGAS_decoratedBootRoutine : public GALGAS_abstractDecoratedDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mBootPriority (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfBootLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1688,12 +1688,12 @@ class cPtr_decoratedBootRoutine : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
   public : GALGAS_instructionListAST mProperty_mInstructionList ;
   public : GALGAS_location mProperty_mEndOfBootLocation ;
-  public : GALGAS_lbigint mProperty_mPriority ;
+  public : GALGAS_lbigint mProperty_mBootPriority ;
 
 //--- Constructor
   public : cPtr_decoratedBootRoutine (const GALGAS_instructionListAST & in_mInstructionList,
                                       const GALGAS_location & in_mEndOfBootLocation,
-                                      const GALGAS_lbigint & in_mPriority
+                                      const GALGAS_lbigint & in_mBootPriority
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -1702,7 +1702,7 @@ class cPtr_decoratedBootRoutine : public cPtr_abstractDecoratedDeclaration {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfBootLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mBootPriority (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2236,7 +2236,7 @@ class GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infix
 
 typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionNoSelf) (const class cPtr_primaryInExpressionAST * inObject,
                                                                                                 const class GALGAS_PLMType constinArgument0,
-                                                                                                const class GALGAS_contextFlags constinArgument1,
+                                                                                                const class GALGAS_routineAttributes constinArgument1,
                                                                                                 const class GALGAS_lstring constinArgument2,
                                                                                                 const class GALGAS_PLMType constinArgument3,
                                                                                                 const class GALGAS_semanticContext constinArgument4,
@@ -2259,11 +2259,11 @@ void enterExtensionMethod_analyzePrimaryExpressionNoSelf (const int32_t inClassI
 
 void callExtensionMethod_analyzePrimaryExpressionNoSelf (const class cPtr_primaryInExpressionAST * inObject,
                                                          const GALGAS_PLMType constin_inSelfType,
-                                                         const GALGAS_contextFlags constin_inContextFlags,
+                                                         const GALGAS_routineAttributes constin_inRoutineAttributes,
                                                          const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                                          const GALGAS_PLMType constin_inOptionalTargetType,
                                                          const GALGAS_semanticContext constin_inContext,
-                                                         const GALGAS_mode constin_inCurrentMode,
+                                                         const GALGAS_mode constin_inMode,
                                                          GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                          GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                          GALGAS_universalValuedObjectMap & io_ioUniversalMap,
@@ -2292,21 +2292,22 @@ void extensionMethod_searchEntity (const class GALGAS_universalValuedObjectMap i
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeRegisterExpression (const class GALGAS_PLMType constinArgument0,
-                                        const class GALGAS_lstring constinArgument1,
-                                        const class GALGAS_semanticContext constinArgument2,
-                                        const class GALGAS_mode constinArgument3,
-                                        class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                        class GALGAS_staticStringMap & ioArgument5,
-                                        class GALGAS_universalValuedObjectMap & ioArgument6,
-                                        class GALGAS_allocaList & ioArgument7,
-                                        class GALGAS_instructionListIR & ioArgument8,
-                                        const class GALGAS_PLMType constinArgument9,
-                                        const class GALGAS_bigint constinArgument10,
-                                        const class GALGAS_sliceMap constinArgument11,
-                                        const class GALGAS_uint constinArgument12,
+                                        const class GALGAS_routineAttributes constinArgument1,
+                                        const class GALGAS_lstring constinArgument2,
+                                        const class GALGAS_semanticContext constinArgument3,
+                                        const class GALGAS_mode constinArgument4,
+                                        class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                        class GALGAS_staticStringMap & ioArgument6,
+                                        class GALGAS_universalValuedObjectMap & ioArgument7,
+                                        class GALGAS_allocaList & ioArgument8,
+                                        class GALGAS_instructionListIR & ioArgument9,
+                                        const class GALGAS_PLMType constinArgument10,
+                                        const class GALGAS_bigint constinArgument11,
+                                        const class GALGAS_sliceMap constinArgument12,
                                         const class GALGAS_uint constinArgument13,
-                                        const class GALGAS_primaryInExpressionAccessListAST constinArgument14,
-                                        class GALGAS_objectIR & outArgument15,
+                                        const class GALGAS_uint constinArgument14,
+                                        const class GALGAS_primaryInExpressionAccessListAST constinArgument15,
+                                        class GALGAS_objectIR & outArgument16,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
@@ -2317,7 +2318,7 @@ void routine_analyzeRegisterExpression (const class GALGAS_PLMType constinArgume
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_procAnalyzeAccesListInExpression (const class GALGAS_PLMType constinArgument0,
-                                               const class GALGAS_contextFlags constinArgument1,
+                                               const class GALGAS_routineAttributes constinArgument1,
                                                const class GALGAS_lstring constinArgument2,
                                                const class GALGAS_PLMType constinArgument3,
                                                const class GALGAS_semanticContext constinArgument4,
@@ -2351,7 +2352,7 @@ void extensionSetter_readAccess (class GALGAS_universalValuedObjectMap & ioObjec
 
 typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionWithSelf) (const class cPtr_primaryInExpressionAST * inObject,
                                                                                                   const class GALGAS_PLMType constinArgument0,
-                                                                                                  const class GALGAS_contextFlags constinArgument1,
+                                                                                                  const class GALGAS_routineAttributes constinArgument1,
                                                                                                   const class GALGAS_lstring constinArgument2,
                                                                                                   const class GALGAS_PLMType constinArgument3,
                                                                                                   const class GALGAS_semanticContext constinArgument4,
@@ -2374,11 +2375,11 @@ void enterExtensionMethod_analyzePrimaryExpressionWithSelf (const int32_t inClas
 
 void callExtensionMethod_analyzePrimaryExpressionWithSelf (const class cPtr_primaryInExpressionAST * inObject,
                                                            const GALGAS_PLMType constin_inSelfType,
-                                                           const GALGAS_contextFlags constin_inContextFlags,
+                                                           const GALGAS_routineAttributes constin_inRoutineAttributes,
                                                            const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                                            const GALGAS_PLMType constin_inOptionalTargetType,
                                                            const GALGAS_semanticContext constin_inContext,
-                                                           const GALGAS_mode constin_inCurrentMode,
+                                                           const GALGAS_mode constin_inMode,
                                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                            GALGAS_universalValuedObjectMap & io_ioUniversalMap,
@@ -2398,7 +2399,7 @@ void routine_handleArrayAccessInExpression (class GALGAS_objectIR & ioArgument0,
                                             const class GALGAS_expressionAST constinArgument1,
                                             const class GALGAS_location constinArgument2,
                                             const class GALGAS_PLMType constinArgument3,
-                                            const class GALGAS_contextFlags constinArgument4,
+                                            const class GALGAS_routineAttributes constinArgument4,
                                             const class GALGAS_lstring constinArgument5,
                                             const class GALGAS_PLMType constinArgument6,
                                             const class GALGAS_semanticContext constinArgument7,

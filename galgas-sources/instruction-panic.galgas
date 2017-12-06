@@ -39,7 +39,7 @@ override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 
 override method @panicInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -57,7 +57,7 @@ override method @panicInstructionAST analyze
   @instructionListIR unusedInstructionListIR = {}
   [mCodeExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:.none
+    !routineAttributes:.none
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[inContext.mPanicCodeType type]
     !context:inContext

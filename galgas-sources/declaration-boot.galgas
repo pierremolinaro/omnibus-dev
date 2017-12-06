@@ -5,7 +5,7 @@
 class @bootAST : @abstractDeclarationAST {
   @instructionListAST mInstructionList
   @location mEndOfBootLocation
-  @lbigint mPriority
+  @lbigint mBootPriority
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -45,20 +45,20 @@ method @bootAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGrap
 #·······················································································································
 
 override method @bootAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
- let nodeName = @lstring.new {!"boot " + mPriority.bigint !mPriority.location}
+ let nodeName = @lstring.new {!"boot " + mBootPriority.bigint !mBootPriority.location}
  [!?ioGraph addNode !nodeName !self]
 }
 
 #·······················································································································
 
 override getter @bootAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "boot " + mPriority.bigint 
+  outRepresentation = "boot " + mBootPriority.bigint 
 }
 
 #·······················································································································
 
 override getter @bootAST location -> @location outLocation {
-  outLocation = mPriority.location
+  outLocation = mBootPriority.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -86,13 +86,13 @@ override method @bootAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Enter in invocation graph
-  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority.bigint !mPriority.location}
+  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mBootPriority.bigint !mBootPriority.location}
   [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedBootRoutine.new {
     !mInstructionList
     !mEndOfBootLocation
-    !mPriority
+    !mBootPriority
   }
 }
 
@@ -109,7 +109,7 @@ map @bootRoutinePriorityMap {
 class @decoratedBootRoutine : @abstractDecoratedDeclaration {
   @instructionListAST mInstructionList
   @location mEndOfBootLocation
-  @lbigint mPriority
+  @lbigint mBootPriority
 }
 
 #·······················································································································
@@ -119,9 +119,9 @@ override method @decoratedBootRoutine semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority.bigint string] !mPriority.location}]
+  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mBootPriority.bigint string] !mBootPriority.location}]
 #---
-  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority.bigint !mPriority.location}
+  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mBootPriority.bigint !mBootPriority.location}
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -131,7 +131,7 @@ override method @decoratedBootRoutine semanticAnalysis
   @allocaList bootAllocaList = {}
   [mInstructionList analyzeRoutineInstructionList
     !self:voidType ()
-    !instructionAttributes:.none
+    !routineAttributes:.boot | .controlRegisterReadable
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !mode:.bootMode
@@ -147,8 +147,7 @@ override method @decoratedBootRoutine semanticAnalysis
   [!?universalMap closeOverride !mEndOfBootLocation]
 #--- Code generation
   ioIntermediateCodeStruct.mBootList +=
-    !mPriority.bigint
-    !mPriority.location
+    !mBootPriority.bigint
     !bootAllocaList
     !instructionGenerationList
     !mEndOfBootLocation
@@ -160,7 +159,6 @@ override method @decoratedBootRoutine semanticAnalysis
 
 sortedlist @bootListIR {
   @bigint mBootIndex
-  @location mInitLocation
   @allocaList mAllocaList
   @instructionListIR mInstructionListIR
   @location mEndOfInitLocation

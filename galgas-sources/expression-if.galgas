@@ -85,7 +85,7 @@ override method @ifExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanti
 
 override method @ifExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -100,7 +100,7 @@ override method @ifExpressionAST analyzeExpression
 #--- Analyze if expression
   [mIfExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:inContextFlags
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
@@ -124,7 +124,7 @@ override method @ifExpressionAST analyzeExpression
 #--- Analyze 'then' expression
   [mThenExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:inContextFlags
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
@@ -150,7 +150,7 @@ override method @ifExpressionAST analyzeExpression
 #--- Analyze 'else' expression
   [mElseExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:inContextFlags
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext

@@ -177,13 +177,14 @@ class GALGAS_calleeKindIR function_checkMode (const class GALGAS_mode & constinA
 
 typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (const class cPtr_callInstructionAST * inObject,
                                                                               const class GALGAS_PLMType constinArgument0,
-                                                                              const class GALGAS_lstring constinArgument1,
-                                                                              const class GALGAS_semanticContext constinArgument2,
-                                                                              const class GALGAS_mode constinArgument3,
-                                                                              class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                                                              class GALGAS_staticStringMap & ioArgument5,
-                                                                              class GALGAS_universalValuedObjectMap & ioArgument6,
-                                                                              class GALGAS_guardKindGenerationIR & outArgument7,
+                                                                              const class GALGAS_routineAttributes constinArgument1,
+                                                                              const class GALGAS_lstring constinArgument2,
+                                                                              const class GALGAS_semanticContext constinArgument3,
+                                                                              const class GALGAS_mode constinArgument4,
+                                                                              class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                                                              class GALGAS_staticStringMap & ioArgument6,
+                                                                              class GALGAS_universalValuedObjectMap & ioArgument7,
+                                                                              class GALGAS_guardKindGenerationIR & outArgument8,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -196,6 +197,7 @@ void enterExtensionMethod_baseGuardAnalyze (const int32_t inClassIndex,
 
 void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST * inObject,
                                            const GALGAS_PLMType constin_inSelfType,
+                                           const GALGAS_routineAttributes constin_inRoutineAttributes,
                                            const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                            const GALGAS_semanticContext constin_inContext,
                                            const GALGAS_mode constin_inCurrentMode,

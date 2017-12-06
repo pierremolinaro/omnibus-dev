@@ -79,7 +79,7 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 
 override method @forInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -113,7 +113,7 @@ override method @forInstructionAST analyze
   @instructionListIR whileExpression_GenerationList = {}
   [mWhileExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:.none
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext
@@ -137,7 +137,7 @@ override method @forInstructionAST analyze
   @instructionListIR doInstructionList_GenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !instructionAttributes:inInstructionAttributes
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_for_instruction
     !context:inContext

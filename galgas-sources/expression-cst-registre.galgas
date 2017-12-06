@@ -69,7 +69,7 @@ override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGr
 
 override method @registerConstantExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -110,7 +110,7 @@ override method @registerConstantExpressionAST analyzeExpression
     #--- Analyze expression
       [expression analyzeExpression
         !self:inSelfType
-        !contextFlags:inContextFlags
+        !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:voidType ()
         !context:inContext

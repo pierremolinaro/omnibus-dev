@@ -76,7 +76,7 @@ override method @standaloneFunctionInExpressionAST noteExpressionTypesInPreceden
 
 override method @standaloneFunctionInExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -89,7 +89,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   !result:@objectIR outFunctionCallReturnedValue
 {
 #--- Cannot call a function in guard
-  if [inContextFlags guard] then
+  if [inRoutineAttributes guard] then
     error mStandaloneFunctionName.location : "a routine cannot be called in guard"
   end
 #--- Get function name and map containing the function definition

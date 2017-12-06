@@ -2087,11 +2087,11 @@ class GALGAS_bootAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mBootPriority (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfBootLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2237,12 +2237,12 @@ class cPtr_bootAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_instructionListAST mProperty_mInstructionList ;
   public : GALGAS_location mProperty_mEndOfBootLocation ;
-  public : GALGAS_lbigint mProperty_mPriority ;
+  public : GALGAS_lbigint mProperty_mBootPriority ;
 
 //--- Constructor
   public : cPtr_bootAST (const GALGAS_instructionListAST & in_mInstructionList,
                          const GALGAS_location & in_mEndOfBootLocation,
-                         const GALGAS_lbigint & in_mPriority
+                         const GALGAS_lbigint & in_mBootPriority
                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -2251,7 +2251,7 @@ class cPtr_bootAST : public cPtr_abstractDeclarationAST {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfBootLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mBootPriority (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

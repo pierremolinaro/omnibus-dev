@@ -122,13 +122,9 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
   @instructionListIR initInstructionGenerationList = {}
   @allocaList allocaList = {}
   @semanticTemporariesStruct temporaries = .default
-#  variableMapWithConstants (
-#    !context:ioContext
-#    ?@universalValuedObjectMap universalMap
-#  )
   [mSizeExpression analyzeExpression
     !self:voidType ()
-    !contextFlags:.none
+    !routineAttributes:.none
     !routineNameForInvocationGraph:.new {!mAnonymousOpaqueTypeName.string + " init" !mAnonymousOpaqueTypeName.location}
     !optionalTargetType:voidType ()
     !context:ioContext

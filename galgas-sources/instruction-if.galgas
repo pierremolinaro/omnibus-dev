@@ -97,7 +97,7 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 
 override method @ifInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -110,7 +110,7 @@ override method @ifInstructionAST analyze
 #--- Analyze test expression
   [mTestExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:.none
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext
@@ -140,7 +140,7 @@ override method @ifInstructionAST analyze
   @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !instructionAttributes:inInstructionAttributes
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfThenInstructionList
     !context:inContext
@@ -155,7 +155,7 @@ override method @ifInstructionAST analyze
   @instructionListIR elseInstructionGenerationList = {}
   [mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !instructionAttributes:inInstructionAttributes
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfElseInstructionList
     !context:inContext
