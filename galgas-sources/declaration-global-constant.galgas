@@ -113,7 +113,7 @@ override method @globalConstantDeclarationAST enterInContext
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:voidType ()
-    !contextFlags:.none
+    !routineAttributes:.none
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:annotationType
     !context:ioContext

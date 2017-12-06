@@ -82,7 +82,7 @@ method @infixOperatorMap checkBinaryOperationWith
 
 override method @infixOperatorExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -97,7 +97,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 #------------------- Analyze left expression
   [mLeftExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:inContextFlags
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
@@ -117,7 +117,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:inContextFlags
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[leftOperand type]
     !context:inContext

@@ -42,7 +42,7 @@ override method @assertInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 
 override method @assertInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -59,7 +59,7 @@ override method @assertInstructionAST analyze
   @instructionListIR instructionGenerationList = {}
   [mExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:.none
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext

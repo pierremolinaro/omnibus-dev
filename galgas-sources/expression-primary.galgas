@@ -137,11 +137,11 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 
 override method @primaryInExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -151,16 +151,16 @@ override method @primaryInExpressionAST analyzeExpression
 {
 #--- object access, with ou without self
   if mReceiverName.string != "" then
-    if [inContextFlags guard] then
+    if [inRoutineAttributes guard] then
       error mReceiverName : "in guard, only 'self' properties may be accessed" : outResult
     else 
       [self analyzePrimaryExpressionNoSelf
         !self: inSelfType
-        !contextFlags:inContextFlags
+        !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !optionalTargetType: inOptionalTargetType
         !context: inContext
-        !mode: inCurrentMode
+        !mode: inMode
         !?temporary: ioTemporaries
         !?staticStringMap: ioGlobalLiteralStringMap
         !?variableMap: ioUniversalMap
@@ -174,11 +174,11 @@ override method @primaryInExpressionAST analyzeExpression
   else
     [self analyzePrimaryExpressionWithSelf
       !self: inSelfType
-      !contextFlags:inContextFlags
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
-      !mode: inCurrentMode
+      !mode: inMode
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioUniversalMap
@@ -193,11 +193,11 @@ override method @primaryInExpressionAST analyzeExpression
 
 method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -211,11 +211,11 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !contextFlags:inContextFlags
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
-      !mode: inCurrentMode
+      !mode: inMode
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioUniversalMap
@@ -231,11 +231,11 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !contextFlags:inContextFlags
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
-      !mode: inCurrentMode
+      !mode: inMode
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioUniversalMap
@@ -244,17 +244,20 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       !?result: outResult
     )
-  case register (readable * type address sliceMap arraySize elementSize) :
-    if not readable then
-      error mReceiverName : "control register is not readable in this context" : outResult
-    elsif [inContextFlags guard] then
+  case register (* accessibleInUserMode type address sliceMap arraySize elementSize) :
+    if [inRoutineAttributes guard] then
       error mReceiverName : "control register is not readable in guard" : outResult
+    elsif not [inRoutineAttributes controlRegisterReadable] then
+      error mReceiverName : "control register is not readable in this context" : outResult
+    elsif ([inMode isUserMode] || [inMode isAnyMode]) && not accessibleInUserMode then
+      error mReceiverName : "control register is not readable in user mode" : outResult
     else
       analyzeRegisterExpression (
         !self: inSelfType
+        !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !context: inContext
-        !mode: inCurrentMode
+        !mode: inMode
         !?temporary: ioTemporaries
         !?staticStringMap: ioGlobalLiteralStringMap
         !?variableMap: ioUniversalMap
@@ -273,11 +276,11 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     outResult = objectIR
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !contextFlags:inContextFlags
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
-      !mode: inCurrentMode
+      !mode: inMode
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioUniversalMap
@@ -291,11 +294,11 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     outResult = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !contextFlags:inContextFlags
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
-      !mode: inCurrentMode
+      !mode: inMode
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioUniversalMap
@@ -309,11 +312,11 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     [!?ioUniversalMap readAccess !mReceiverName]
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !contextFlags:inContextFlags
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
-      !mode: inCurrentMode
+      !mode: inMode
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioUniversalMap
@@ -329,11 +332,11 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 
 proc procAnalyzeAccesListInExpression
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -358,11 +361,11 @@ proc procAnalyzeAccesListInExpression
         !indexExpression
         !endOfIndex
         !self:inSelfType
-        !contextFlags:inContextFlags
+        !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:inOptionalTargetType
         !context:inContext
-        !mode:inCurrentMode
+        !mode:inMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioUniversalMap
@@ -370,7 +373,7 @@ proc procAnalyzeAccesListInExpression
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
-      if [inContextFlags guard] then
+      if [inRoutineAttributes guard] then
         error errorLocation : "a method cannot be called in guard" : ioResult
       else
         handleFunctionCallInExpression (
@@ -379,7 +382,7 @@ proc procAnalyzeAccesListInExpression
           !self:inSelfType
           !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
-          !mode:inCurrentMode
+          !mode:inMode
           !?temporary:ioTemporaries
           !?staticStringMap:ioGlobalLiteralStringMap
           !?variableMap:ioUniversalMap
@@ -396,9 +399,10 @@ proc procAnalyzeAccesListInExpression
 
 private proc analyzeRegisterExpression
   ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -422,10 +426,10 @@ private proc analyzeRegisterExpression
       [first arrayAccess ?index:let @expressionAST indexExpression ?endOfIndex:let @location endOfIndex]
       handleArraySubscriptNew (
          !self: inSelfType
-         !contextFlags:.none
+         !routineAttributes:inRoutineAttributes
          !routineNameForInvocationGraph: inCallerNameForInvocationGraph
          !context: inContext
-         !mode: inCurrentMode
+         !mode: inMode
          !?temporary: ioTemporaries
          !?staticStringMap: ioGlobalLiteralStringMap
          !?variableMap: ioUniversalMap
@@ -493,11 +497,11 @@ private proc analyzeRegisterExpression
 
 method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -523,11 +527,11 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !indexExpression
         !endOfIndex
         !self:inSelfType
-        !contextFlags:inContextFlags
+        !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:inOptionalTargetType
         !context:inContext
-        !mode:inCurrentMode
+        !mode:inMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioUniversalMap
@@ -535,7 +539,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
-      if [inContextFlags guard] then
+      if [inRoutineAttributes guard] then
         error errorLocation : "a method cannot be called in guard" : outResult
       else
         handleFunctionCallInExpression (
@@ -544,7 +548,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
           !self:inSelfType
           !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
-          !mode:inCurrentMode
+          !mode:inMode
           !?temporary:ioTemporaries
           !?staticStringMap:ioGlobalLiteralStringMap
           !?variableMap:ioUniversalMap
@@ -593,11 +597,11 @@ private proc handleArrayAccessInExpression
   ?let @expressionAST inIndexExpression
   ?let @location inEndOfIndex
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -609,10 +613,10 @@ private proc handleArrayAccessInExpression
     [[ioResult type].kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
     handleArraySubscript (
       !self: inSelfType
-      !contextFlags:inContextFlags
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !context: inContext
-      !mode: inCurrentMode
+      !mode: inMode
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap:ioUniversalMap

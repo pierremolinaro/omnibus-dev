@@ -308,7 +308,7 @@ method @decoratedLaskList-element semanticAnalysis
       !returnTypeName:procedure.mFunctionReturnTypeName
       !procedure.mFunctionInstructionList
       !procedure.mEndOfFunctionDeclaration
-      !instructionAttributes:.mutating | .directPropertyAccess
+      !routineAttributes:.mutating | .directPropertyAccess
       !warnIfUnused:true
       !globalFunction:false
       !context:inContext
@@ -373,7 +373,7 @@ method @decoratedLaskList-element semanticAnalysis
     !returnTypeName:["" nowhere]
     !taskListInstructionList
     !mTaskName.location
-    !instructionAttributes:.mutating | .directPropertyAccess
+    !routineAttributes:.mutating | .directPropertyAccess
     !warnIfUnused:true
     !globalFunction:false
     !context:inContext

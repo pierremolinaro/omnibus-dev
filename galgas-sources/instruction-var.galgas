@@ -84,7 +84,7 @@ override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 
 override method @varInstructionWithAssignmentAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -101,7 +101,7 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:.none
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext
@@ -138,7 +138,7 @@ override method @varInstructionWithAssignmentAST analyze
 
 override method @varInstructionAST analyze
   ?self:let @PLMType unused inSelfType
-  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode

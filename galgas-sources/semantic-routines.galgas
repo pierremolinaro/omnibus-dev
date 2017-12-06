@@ -47,7 +47,7 @@ proc routineSemanticAnalysis
   ?returnTypeName:let @lstring inReturnTypeName
   ?let @instructionListAST inRoutineInstructionList
   ?let @location inEndOfRoutineDeclaration
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?warnIfUnused:let @bool inWarnIfUnused
   ?globalFunction:let @bool inGlobalFunction
   ?context:let @semanticContext inContext
@@ -89,7 +89,7 @@ proc routineSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   [inRoutineInstructionList analyzeRoutineInstructionList
     !self:inSelfType
-    !instructionAttributes:inInstructionAttributes
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:routineMangledName
     !context:inContext
     !mode:inRoutineMode

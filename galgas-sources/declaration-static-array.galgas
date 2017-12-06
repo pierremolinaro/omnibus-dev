@@ -329,19 +329,12 @@ override method @staticListAST enterInContext
           if [type.kind isFunction] then
             error endOfExp : "a function name is expected here"
           else
-#            initialVariableMap (
-#              !context:ioContext
-#              !mode:.bootMode
-#              !globalsAreConstant:true # Any value, there is no defined global variable at this stage
-#              !returnTypeName:["" nowhere]
-#              ?@universalValuedObjectMap universalMap
-#            )
             @semanticTemporariesStruct temporaries = .default
             @instructionListIR instructionGenerationList = {}
             @allocaList allocaList = {}
             [exp analyzeExpression
               !self:voidType ()
-              !contextFlags:.none
+              !routineAttributes:.none
               !routineNameForInvocationGraph:["compiler" nowhere]
               !optionalTargetType:type
               !context:ioContext

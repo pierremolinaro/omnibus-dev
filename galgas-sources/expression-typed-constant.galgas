@@ -103,7 +103,7 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
 
 override method @typedConstantCallAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?contextFlags:let @contextFlags inContextFlags
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -147,7 +147,7 @@ override method @typedConstantCallAST analyzeExpression
   #---
     procAnalyzeAccesListInExpression (
       !self: inSelfType
-      !contextFlags:inContextFlags
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext

@@ -57,7 +57,7 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 
 override method @letInstructionWithAssignmentAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -74,7 +74,7 @@ override method @letInstructionWithAssignmentAST analyze
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:.none
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext

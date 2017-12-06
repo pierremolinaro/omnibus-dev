@@ -54,16 +54,15 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
 #!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-boolset @instructionAttributes {
-  mutating, directPropertyAccess
+boolset @routineAttributes {
+  mutating, directPropertyAccess, guard, boot, controlRegisterReadable
 }
 
 #·······················································································································
 
-
 abstract method @instructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -77,7 +76,7 @@ abstract method @instructionAST analyze
 
 method @instructionListAST analyzeBranchInstructionList
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?endOfInstructionList:@location inEndOfInstructionList
   ?context:let @semanticContext inContext
@@ -94,7 +93,7 @@ method @instructionListAST analyzeBranchInstructionList
     [!?ioInstructionGenerationList appendSourceLineComment ![mInstruction mInstructionLocation]]
     [mInstruction analyze 
       !self:inSelfType
-      !instructionAttributes:inInstructionAttributes
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !mode:inCurrentMode
@@ -113,7 +112,7 @@ method @instructionListAST analyzeBranchInstructionList
 
 method @instructionListAST analyzeRoutineInstructionList
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -127,7 +126,7 @@ method @instructionListAST analyzeRoutineInstructionList
     [!?ioInstructionGenerationList appendSourceLineComment ![mInstruction mInstructionLocation]]
     [mInstruction analyze 
       !self:inSelfType
-      !instructionAttributes:inInstructionAttributes
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !mode:inCurrentMode

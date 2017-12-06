@@ -47,7 +47,7 @@ override method @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph 
 
 override method @assignmentInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -61,7 +61,7 @@ override method @assignmentInstructionAST analyze
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
-    !contextFlags:.none
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext
@@ -76,7 +76,7 @@ override method @assignmentInstructionAST analyze
 #--- Analyze LValue
   [mTargetAST analyzeLValue
     !self: inSelfType
-    !instructionAttributes:inInstructionAttributes
+    !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext
     !mode: inCurrentMode

@@ -132,10 +132,10 @@ method @LValueAST type
 
 method @LValueAST analyzeLValue
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -146,16 +146,17 @@ method @LValueAST analyzeLValue
   if mIdentifier.string == "" then # Receiver is "self"
     if inSelfType.kind == .void then
       error mIdentifier : "self is not available in this context" : outInternalRepresentation
-    elsif not [inInstructionAttributes mutating] then
+    elsif not [inRoutineAttributes mutating] then
       error mIdentifier
       : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
       : outInternalRepresentation
     else
       analyzeSelfAssignmentTarget (
         !self:inSelfType
+        !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
-        !mode:inCurrentMode
+        !mode:inMode
         !?temporary: ioTemporaries
         !?staticStringMap: ioGlobalLiteralStringMap
         !?variableMap: ioUniversalMap
@@ -173,15 +174,18 @@ method @LValueAST analyzeLValue
       error mIdentifier : "a task has no value" : outInternalRepresentation
     case driver (* *) :
       error mIdentifier : "a driver has no value" : outInternalRepresentation
-    case register (* writable registerType registerAddress * arraySize elementSize) : # 0 if not an array
+    case register (writable accessibleInUserMode registerType registerAddress * arraySize elementSize) :
       if not writable then
          error mIdentifier : "the control register is not writable in this context" : outInternalRepresentation
+      elsif ([inMode isUserMode] || [inMode isAnyMode]) && not accessibleInUserMode then
+         error mIdentifier : "the control register is not accessible in user mode" : outInternalRepresentation
       else
         analyzeControlRegisterInLValue (
           !self: inSelfType
+          !routineAttributes:inRoutineAttributes
           !routineNameForInvocationGraph: inCallerNameForInvocationGraph
           !context: inContext
-          !mode: inCurrentMode
+          !mode: inMode
           !?temporary: ioTemporaries
           !?staticStringMap: ioGlobalLiteralStringMap
           !?variableMap: ioUniversalMap
@@ -203,9 +207,10 @@ method @LValueAST analyzeLValue
     case localVariable (@PLMType variableType @lstring plmName) :
       analyzeVariableInLValue (
         !self: inSelfType
+        !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !context: inContext
-        !mode: inCurrentMode
+        !mode: inMode
         !?temporary: ioTemporaries
         !?staticStringMap: ioGlobalLiteralStringMap
         !?variableMap: ioUniversalMap
@@ -225,9 +230,10 @@ method @LValueAST analyzeLValue
 
 private proc analyzeControlRegisterInLValue
   ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -255,10 +261,10 @@ private proc analyzeControlRegisterInLValue
    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
      handleArraySubscriptNew (
        !self: inSelfType
-       !contextFlags:.none
+       !routineAttributes:inRoutineAttributes
        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
        !context: inContext
-       !mode: inCurrentMode
+       !mode: inMode
        !?temporary: ioTemporaries
        !?staticStringMap: ioGlobalLiteralStringMap
        !?variableMap: ioUniversalMap
@@ -294,9 +300,10 @@ private proc analyzeControlRegisterInLValue
 
 private proc analyzeVariableInLValue
   ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -341,10 +348,10 @@ private proc analyzeVariableInLValue
           [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
           handleArraySubscriptNew (
             !self: inSelfType
-            !contextFlags:.none
+            !routineAttributes:inRoutineAttributes
             !routineNameForInvocationGraph: inCallerNameForInvocationGraph
             !context: inContext
-            !mode: inCurrentMode
+            !mode: inMode
             !?temporary: ioTemporaries
             !?staticStringMap: ioGlobalLiteralStringMap
             !?variableMap:ioUniversalMap
@@ -379,9 +386,10 @@ private proc analyzeVariableInLValue
 
 private proc analyzeSelfAssignmentTarget
   ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -423,10 +431,10 @@ private proc analyzeSelfAssignmentTarget
           [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
           handleArraySubscriptNew (
             !self: inSelfType
-            !contextFlags:.none
+            !routineAttributes:inRoutineAttributes
             !routineNameForInvocationGraph: inCallerNameForInvocationGraph
             !context: inContext
-            !mode: inCurrentMode
+            !mode: inMode
             !?temporary: ioTemporaries
             !?staticStringMap: ioGlobalLiteralStringMap
             !?variableMap:ioUniversalMap

@@ -391,7 +391,7 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
-                                      const class GALGAS_contextFlags constinArgument1,
+                                      const class GALGAS_routineAttributes constinArgument1,
                                       const class GALGAS_lstring constinArgument2,
                                       const class GALGAS_semanticContext constinArgument3,
                                       const class GALGAS_mode constinArgument4,
@@ -415,7 +415,7 @@ void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_handleArraySubscript (const class GALGAS_PLMType constinArgument0,
-                                   const class GALGAS_contextFlags constinArgument1,
+                                   const class GALGAS_routineAttributes constinArgument1,
                                    const class GALGAS_lstring constinArgument2,
                                    const class GALGAS_semanticContext constinArgument3,
                                    const class GALGAS_mode constinArgument4,
@@ -431,49 +431,4 @@ void routine_handleArraySubscript (const class GALGAS_PLMType constinArgument0,
                                    class GALGAS_objectIR & ioArgument14,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             Routine 'analyzeGuardCall'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
-                               const class GALGAS_objectIR constinArgument1,
-                               const class GALGAS_lstring constinArgument2,
-                               const class GALGAS_effectiveArgumentListAST constinArgument3,
-                               const class GALGAS_lstring constinArgument4,
-                               const class GALGAS_semanticContext constinArgument5,
-                               const class GALGAS_mode constinArgument6,
-                               class GALGAS_semanticTemporariesStruct & ioArgument7,
-                               class GALGAS_staticStringMap & ioArgument8,
-                               class GALGAS_universalValuedObjectMap & ioArgument9,
-                               class GALGAS_allocaList & ioArgument10,
-                               class GALGAS_instructionListIR & ioArgument11,
-                               class GALGAS_procCallEffectiveParameterListIR & outArgument12,
-                               class GALGAS_lstring & outArgument13,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Routine 'analyzeStandaloneGuardCall'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeStandaloneGuardCall (const class GALGAS_PLMType constinArgument0,
-                                         const class GALGAS_lstring constinArgument1,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument2,
-                                         const class GALGAS_lstring constinArgument3,
-                                         const class GALGAS_semanticContext constinArgument4,
-                                         const class GALGAS_mode constinArgument5,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                         class GALGAS_staticStringMap & ioArgument7,
-                                         class GALGAS_universalValuedObjectMap & ioArgument8,
-                                         class GALGAS_allocaList & ioArgument9,
-                                         class GALGAS_instructionListIR & ioArgument10,
-                                         class GALGAS_procCallEffectiveParameterListIR & outArgument11,
-                                         class GALGAS_lstring & outArgument12,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
 

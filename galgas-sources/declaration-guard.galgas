@@ -205,7 +205,7 @@ proc guardSemanticAnalysis
   #--- Analyze instruction list
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
-      !instructionAttributes:.mutating | .directPropertyAccess
+      !routineAttributes:.mutating | .directPropertyAccess
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.guardMode
@@ -226,6 +226,7 @@ proc guardSemanticAnalysis
   #--- Analyze base guard
     [baseGuardInstruction baseGuardAnalyze 
       !self:inSelfType
+      !routineAttributes:.mutating | .directPropertyAccess
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.userMode # Convenience guards instructions are executed in user mode
@@ -237,7 +238,7 @@ proc guardSemanticAnalysis
   #--- Analyze instruction list
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
-      !instructionAttributes: .mutating | .directPropertyAccess
+      !routineAttributes: .mutating | .directPropertyAccess
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.userMode # Convenience guards instructions are executed in user mode
@@ -268,6 +269,7 @@ proc guardSemanticAnalysis
 
 abstract method @callInstructionAST baseGuardAnalyze
   ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -280,6 +282,7 @@ abstract method @callInstructionAST baseGuardAnalyze
 
 override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?self:let @PLMType unused inSelfType
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inCurrentMode
@@ -295,6 +298,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
 
 override method @procedureCallInstructionAST baseGuardAnalyze
   ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -314,7 +318,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       currentObject = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
     end
   else
-    [ioUniversalMap searchValuedObject !mIdentifier ?currentObject]
+    [ioUniversalMap searchValuedObject !mIdentifier !inRoutineAttributes ?currentObject]
   end
   var currentErrorLocation = mIdentifier.location
 #--- Insulate last access

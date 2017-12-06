@@ -138,7 +138,7 @@ list @procEffectiveParameterList {
 
 override method @standAloneProcedureCallInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes unused inInstructionAttributes
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -206,7 +206,7 @@ override method @standAloneProcedureCallInstructionAST analyze
 
 override method @procedureCallInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -240,7 +240,7 @@ override method @procedureCallInstructionAST analyze
       else
         error mIdentifier : "the driver should be instancied" : currentType, currentLLVMAddressVar
       end
-    case register (* * * * * * *) :
+    case register (7*) :
       error mIdentifier
         : "a control register constant cannot be used in this context"
         : currentType, currentLLVMAddressVar
@@ -317,7 +317,7 @@ override method @procedureCallInstructionAST analyze
       let formalSignature = routineDescriptor.signature
     #--- If method mutates its properties, check it is allowed 
     #    note that mIdentifier.string is empty string if call instruction is self. ...
-      if (mIdentifier.string == "") && routineDescriptor.canMutateProperties && not [inInstructionAttributes mutating] then
+      if (mIdentifier.string == "") && routineDescriptor.canMutateProperties && not [inRoutineAttributes mutating] then
         error methodName
         : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
       end

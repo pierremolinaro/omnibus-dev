@@ -78,7 +78,7 @@ override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPreceden
 
 override method @forLowerUpperBoundInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?instructionAttributes:let @instructionAttributes inInstructionAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -112,7 +112,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   #--- Analyze expressions
     [mLowerBoundExpression analyzeExpression
       !self:inSelfType
-      !contextFlags:.none
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:type
       !context:inContext
@@ -131,7 +131,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     ]  
     [mUpperBoundExpression analyzeExpression
       !self:inSelfType
-      !contextFlags:.none
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:type
       !context:inContext
@@ -174,7 +174,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     @instructionListIR instructionGenerationList = {}
     [mDoInstructionList analyzeBranchInstructionList
       !self:inSelfType
-      !instructionAttributes:inInstructionAttributes
+      !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:mEndOf_do_instruction
       !context:inContext

@@ -406,29 +406,24 @@ method @structurePropertyListAST-element enterInContext
   ?!@string ioConstructorKey
   ?!@bool canBeCopied
 {
-#--- Property type
+#---------- Property type
   let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
     then voidType ()
     else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
   end
-#--- Variable map (with constants)
-#  variableMapWithConstants (
-#    !context:ioContext
-#    ?@universalValuedObjectMap universalMap
-#  )
-#--- Init expression
+#---------- Init expression
   switch mInitialisation
   case expression (initExpression) :
     [initExpression analyzeExpression
       !self:voidType ()
-      !contextFlags:.none
+      !routineAttributes:.none
       !routineNameForInvocationGraph:.new {!inStructureName.string + " init" !inStructureName.location}
       !optionalTargetType:optionalPropertyType
       !context:ioContext
       !mode:.bootMode
       !?temporary:*
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioContext.mValuedObjectMap # universalMap
+      !?variableMap:ioContext.mValuedObjectMap
       !?alloca:*
       !?instructionListIR:*
       ?result:let @objectIR expressionIR
@@ -532,7 +527,7 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
 {
   for function in mFunctionDeclarationListAST do
     var warnIfUnused = true
-    var functionAttributes = @instructionAttributes.none
+    var functionAttributes = @routineAttributes.none
     for (attribute) in function.mFunctionAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
@@ -564,7 +559,7 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
       !returnTypeName:function.mFunctionReturnTypeName
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
-      !instructionAttributes:functionAttributes
+      !routineAttributes:functionAttributes | .controlRegisterReadable
       !warnIfUnused:warnIfUnused
       !globalFunction:false
       !context:inContext

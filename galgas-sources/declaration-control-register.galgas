@@ -416,19 +416,12 @@ override method @controlRegisterDeclarationAST enterInContext
     case registerArray (@expressionAST arraySizeExpression @location arraySizeLocation
                         @expressionAST arrayElementSizeExpression @location arrayElementSizeLocation) :
     #--- Analyse register array size expression
-#      initialVariableMap (
-#        !context:ioContext
-#        !mode:.bootMode
-#        !globalsAreConstant:true # Any value, there is no defined global variable at this stage
-#        !returnTypeName:["" nowhere]
-#        ?@universalValuedObjectMap universalMap
-#      )
       @semanticTemporariesStruct temporaries = .default
       @instructionListIR instructionGenerationList = {}
       @allocaList allocaList = {}
       [arraySizeExpression analyzeExpression
         !self:voidType ()
-        !contextFlags:.none
+        !routineAttributes:.none
         !routineNameForInvocationGraph:["compiler" nowhere]
         !optionalTargetType:voidType ()
         !context:ioContext
@@ -488,8 +481,8 @@ override method @controlRegisterDeclarationAST enterInContext
     ]
     [!?ioContext.mValuedObjectMap insertRegister
       !register.mRegisterName
-      !readable:true # registerIsReadable
       !writable:not isReadOnly
+      !accessibleInUserMode:isAccessibleInUserMode
       !type:registerType
       !address:registerAddress 
       !sliceMap:registerBitSliceMap

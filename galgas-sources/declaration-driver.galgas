@@ -101,7 +101,7 @@ syntax extension plm_syntax {
     while
       <driver_property>!?ioAST !?driverPropertyListAST
     while
-      <function> !?ioAST!?functionDeclarationListAST
+      <function> !?ioAST !?functionDeclarationListAST
     while
      <system_routine>!?ioAST !?svcListAST
     while
