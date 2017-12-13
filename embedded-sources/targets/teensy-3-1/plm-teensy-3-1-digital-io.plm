@@ -41,7 +41,7 @@ enum $digitalMode {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-driver digital {
+driver digital > root {
 
   //··············································································
   // By default, the 32 PORTA_PCR registers are not accessible in user mode

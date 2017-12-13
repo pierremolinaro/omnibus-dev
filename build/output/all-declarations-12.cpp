@@ -1783,7 +1783,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/pr
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "driver pit {\n"
+  "driver pit > digital {\n"
   "  var gPITValue $uint32 = 0\n"
   "\n"
   "  init 100 {\n"
@@ -1836,7 +1836,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  1994, // Text length
+  2004, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 

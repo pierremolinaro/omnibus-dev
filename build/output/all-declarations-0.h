@@ -1287,6 +1287,10 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_92 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_syntax_93 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_94 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -13515,6 +13519,8 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_mDriverName ;
 
+  public : GALGAS_lstringlist mProperty_mDriverDependanceList ;
+
   public : GALGAS_driverPropertyListAST mProperty_mDriverPropertyListAST ;
 
   public : GALGAS_functionDeclarationListAST mProperty_mDriverFunctionDeclarationListAST ;
@@ -13542,6 +13548,7 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_driverDeclarationAST (const GALGAS_lstring & in_mDriverName,
+                                        const GALGAS_lstringlist & in_mDriverDependanceList,
                                         const GALGAS_driverPropertyListAST & in_mDriverPropertyListAST,
                                         const GALGAS_functionDeclarationListAST & in_mDriverFunctionDeclarationListAST,
                                         const GALGAS_systemRoutineDeclarationListAST & in_mDriverSystemRoutineListAST,
@@ -13561,12 +13568,13 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_driverDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                     const class GALGAS_driverPropertyListAST & inOperand1,
-                                                                     const class GALGAS_functionDeclarationListAST & inOperand2,
-                                                                     const class GALGAS_systemRoutineDeclarationListAST & inOperand3,
-                                                                     const class GALGAS_guardDeclarationListAST & inOperand4,
-                                                                     const class GALGAS_initListAST & inOperand5,
-                                                                     const class GALGAS_bootListAST & inOperand6
+                                                                     const class GALGAS_lstringlist & inOperand1,
+                                                                     const class GALGAS_driverPropertyListAST & inOperand2,
+                                                                     const class GALGAS_functionDeclarationListAST & inOperand3,
+                                                                     const class GALGAS_systemRoutineDeclarationListAST & inOperand4,
+                                                                     const class GALGAS_guardDeclarationListAST & inOperand5,
+                                                                     const class GALGAS_initListAST & inOperand6,
+                                                                     const class GALGAS_bootListAST & inOperand7
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -13582,6 +13590,8 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bootListAST getter_mDriverBootListAST (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mDriverFunctionDeclarationListAST (LOCATION_ARGS) const ;
 

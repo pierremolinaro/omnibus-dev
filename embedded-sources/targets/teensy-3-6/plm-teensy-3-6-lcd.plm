@@ -9,7 +9,7 @@ let LCD_BUFFER_SIZE = 20
 
 //——————————————————————————————————————————————————————————————————————————————
 
-driver lcd {
+driver lcd > digital {
   let DB4 $digitalPort
   let DB5 $digitalPort
   let DB6 $digitalPort

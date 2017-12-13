@@ -1188,7 +1188,8 @@ class GALGAS_implementedDriverAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_implementedDriverAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                     const class GALGAS_bool & inOperand1
+                                                                     const class GALGAS_lstringlist & inOperand1,
+                                                                     const class GALGAS_bool & inOperand2
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1200,6 +1201,8 @@ class GALGAS_implementedDriverAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
@@ -1224,10 +1227,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implementedDriverAS
 class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mDriverName ;
+  public : GALGAS_lstringlist mProperty_mDriverDependanceList ;
   public : GALGAS_bool mProperty_mIsInstancied ;
 
 //--- Constructor
   public : cPtr_implementedDriverAST (const GALGAS_lstring & in_mDriverName,
+                                      const GALGAS_lstringlist & in_mDriverDependanceList,
                                       const GALGAS_bool & in_mIsInstancied
                                       COMMA_LOCATION_ARGS) ;
 
@@ -1236,6 +1241,7 @@ class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
