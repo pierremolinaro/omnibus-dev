@@ -259,7 +259,8 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_declaration_5F_init_ (class GALGAS_ast & ioArgument0,
                                                     const class GALGAS_lstring constinArgument1,
-                                                    class GALGAS_initAST & outArgument2,
+                                                    const class GALGAS_lstringlist constinArgument2,
+                                                    class GALGAS_initAST & outArgument3,
                                                     class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_declaration_5F_init_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
@@ -686,7 +687,8 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_declaration_5F_init_i30_ (GALGAS_ast & ioArgument0,
                                                                 const GALGAS_lstring constinArgument1,
-                                                                GALGAS_initAST & outArgument2,
+                                                                const GALGAS_lstringlist constinArgument2,
+                                                                GALGAS_initAST & outArgument3,
                                                                 C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_5F_init_i30_parse (C_Lexique_plm_5F_lexique * inLexique) ;
@@ -4488,9 +4490,10 @@ class GALGAS_initAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_initAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                        const class GALGAS_instructionListAST & inOperand1,
+                                                        const class GALGAS_lstringlist & inOperand1,
                                                         const class GALGAS_location & inOperand2,
-                                                        const class GALGAS_lbigint & inOperand3
+                                                        const class GALGAS_instructionListAST & inOperand3,
+                                                        const class GALGAS_location & inOperand4
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -4502,13 +4505,15 @@ class GALGAS_initAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfInitLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mInitLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -4530,15 +4535,17 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_initAST ;
 class cPtr_initAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mDriverName ;
+  public : GALGAS_lstringlist mProperty_mDriverDependanceList ;
+  public : GALGAS_location mProperty_mInitLocation ;
   public : GALGAS_instructionListAST mProperty_mInstructionList ;
   public : GALGAS_location mProperty_mEndOfInitLocation ;
-  public : GALGAS_lbigint mProperty_mPriority ;
 
 //--- Constructor
   public : cPtr_initAST (const GALGAS_lstring & in_mDriverName,
+                         const GALGAS_lstringlist & in_mDriverDependanceList,
+                         const GALGAS_location & in_mInitLocation,
                          const GALGAS_instructionListAST & in_mInstructionList,
-                         const GALGAS_location & in_mEndOfInitLocation,
-                         const GALGAS_lbigint & in_mPriority
+                         const GALGAS_location & in_mEndOfInitLocation
                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -4546,9 +4553,10 @@ class cPtr_initAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mInitLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfInitLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

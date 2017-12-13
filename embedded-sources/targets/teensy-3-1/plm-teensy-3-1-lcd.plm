@@ -142,7 +142,7 @@ driver lcd > digital {
   //   LCD INIT
   //············································································
 
-  init 10 {
+  init {
     self.configurePorts () ;
   //--- Étape 1 : attendre 15 ms
     time.busyWaitingDuringMS (!15) ;

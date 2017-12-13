@@ -1786,7 +1786,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/pr
   "driver pit > digital {\n"
   "  var gPITValue $uint32 = 0\n"
   "\n"
-  "  init 100 {\n"
+  "  init {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
   "    digital.set (!mode:.OUTPUT !toPort:LED_L1)\n"
   "    SIM_SCGC6 |= SIM_SCGC6_PIT\n"
@@ -1836,7 +1836,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  2028, // Text length
+  2024, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -2550,7 +2550,7 @@ const char * gWrapperFileContent_19_embeddedSampleCode = "target \"teensy-3-6/pr
   "\n"
   "driver timer > root {\n"
   " \n"
-  "  init 1 {\n"
+  "  init {\n"
   "  //--- Power on DMA_MUX, PIT, DMA\n"
   "    SIM_SCGC6 |= {SIM_SCGC6 !PIT:1}\n"
   "   //--- Enable PIT module\n"
@@ -2634,7 +2634,7 @@ const cRegularFileWrapper gWrapperFile_19_embeddedSampleCode (
   "06-pit-0-1-chaines.plm",
   "plm",
   true, // Text file
-  3229, // Text length
+  3227, // Text length
   gWrapperFileContent_19_embeddedSampleCode
 ) ;
 

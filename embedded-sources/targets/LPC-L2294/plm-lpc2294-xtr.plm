@@ -50,7 +50,7 @@ driver time {
 
   //············································································
 
-  init 100 {
+  init {
   //--- Program pin P1.23 as an output (STAT led)
     IO1DIR |= 1 << 23
     IO1CLR  = 1 << 23 // Led On

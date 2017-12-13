@@ -121,9 +121,9 @@ syntax extension plm_syntax {
       end
       bootListAST += !boot
     while
-      <declaration_init>!?ioAST !driverName ?let init
+      <declaration_init>!?ioAST !driverName !driverDependenceList ?let init
       if [initList length] != 0 then
-        error [init mPriority] : "a driver supports at most one init routine" 
+        error [init mInitLocation] : "a driver supports at most one init routine" 
       end
       initList += !init
     while
@@ -303,6 +303,15 @@ proc retainRequiredDrivers ?!@ast ioAST {
     }
     for (init) in declaration.mDriverInitListAST do
       ioAST.mDeclarationListAST += !init
+    end
+    if [declaration.mDriverInitListAST length] == 0 then
+      ioAST.mDeclarationListAST += !@initAST.new {
+        !declaration.mDriverName
+        !declaration.mDriverDependanceList
+        !declaration.mDriverName.location
+        !{}
+        !declaration.mDriverName.location
+      }
     end
     for (boot) in declaration.mDriverBootListAST do
       ioAST.mDeclarationListAST += !boot
