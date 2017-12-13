@@ -11,6 +11,12 @@ list @driverPropertyListAST {
 
 #·······················································································································
 
+list @bootListAST {
+  @bootAST mBoot
+}
+
+#·······················································································································
+
 struct @driverDeclarationAST {
   @lstring mDriverName
   @driverPropertyListAST mDriverPropertyListAST
@@ -18,6 +24,7 @@ struct @driverDeclarationAST {
   @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
   @guardDeclarationListAST mDriverGuardListAST
   @initListAST mDriverInitListAST
+  @bootListAST mDriverBootListAST
 }
 
 #·······················································································································
@@ -92,7 +99,11 @@ syntax extension plm_syntax {
     @guardDeclarationListAST guardListAST = {}
     @systemRoutineDeclarationListAST svcListAST = {}
     @initListAST initList = {}
+    @bootListAST bootListAST = {}
     repeat
+    while
+      <declaration_boot>  !?ioAST ?let @bootAST boot
+      bootListAST += !boot
     while
       <declaration_init>!?ioAST !driverName ?let init
       initList += !init
@@ -118,6 +129,7 @@ syntax extension plm_syntax {
       !svcListAST
       !guardListAST
       !initList
+      !bootListAST
     }
   }
 
@@ -251,6 +263,9 @@ proc retainRequiredDrivers ?!@ast ioAST {
     }
     for (init) in declaration.mDriverInitListAST do
       ioAST.mDeclarationListAST += !init
+    end
+    for (boot) in declaration.mDriverBootListAST do
+      ioAST.mDeclarationListAST += !boot
     end
   end
   ioAST.mDriverDeclarationListAST = {}

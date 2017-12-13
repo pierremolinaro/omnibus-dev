@@ -17,13 +17,20 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
+    <declaration_boot>  !?ioAST ?let @bootAST boot
+    ioAST.mDeclarationListAST += !boot
+  }
+  
+  #·····················································································································
+
+  rule <declaration_boot> ?!@ast ioAST !@bootAST outBoot {
     $boot$
     $integer$ ?let @lbigint priority
     ${$
     <instructionList> !?ioAST ?let instructionList
     let endOfInit = @location.here
     $}$
-    ioAST.mDeclarationListAST += !@bootAST.new {
+    outBoot = .new {
       !instructionList
       !endOfInit
       !priority

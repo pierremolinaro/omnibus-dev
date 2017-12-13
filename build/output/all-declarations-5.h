@@ -30,6 +30,15 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_declaration_ (GALGAS_ast & ioArgument0,
                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'declaration_boot' non terminal
+//--- 'parse' label
+  public : virtual void nt_declaration_5F_boot_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_declaration_5F_boot_ (GALGAS_ast & ioArgument0,
+                                                 GALGAS_bootAST & outArgument1,
+                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'declaration_init' non terminal
 //--- 'parse' label
   public : virtual void nt_declaration_5F_init_parse (C_Lexique_plm_5F_lexique * inCompiler) ;

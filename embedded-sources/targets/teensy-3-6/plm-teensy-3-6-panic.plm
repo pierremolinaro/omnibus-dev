@@ -4,11 +4,11 @@ check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
 //——————————————————————————————————————————————————————————————————————————————
 
 panic setup 0 {
-  pinMode (!port:.D3 !mode:.OUTPUT)
-  pinMode (!port:.D4 !mode:.OUTPUT)
-  pinMode (!port:.D5 !mode:.OUTPUT)
-  pinMode (!port:.D6 !mode:.OUTPUT)
-  pinMode (!port:.D7 !mode:.OUTPUT)
+  digital.set (!mode:.OUTPUT !toPort:.D3)
+  digital.set (!mode:.OUTPUT !toPort:.D4)
+  digital.set (!mode:.OUTPUT !toPort:.D5)
+  digital.set (!mode:.OUTPUT !toPort:.D6)
+  digital.set (!mode:.OUTPUT !toPort:.D7)
   lcd.clearScreenInPanicMode ()
   lcd.gotoInPanicMode (!line:0 !column:0)
   if LINE == 0 { // ISR Panic
@@ -28,11 +28,11 @@ panic setup 0 {
 
 panic loop 0 {
   time.panicBusyWaitingDuringMS (!50)
-  toggle (!port:.D3)
-  toggle (!port:.D4)
-  toggle (!port:.D5)
-  toggle (!port:.D6)
-  toggle (!port:.D7)
+  digital.toggle (!port:.D3)
+  digital.toggle (!port:.D4)
+  digital.toggle (!port:.D5)
+  digital.toggle (!port:.D6)
+  digital.toggle (!port:.D7)
 }
 
 //——————————————————————————————————————————————————————————————————————————————

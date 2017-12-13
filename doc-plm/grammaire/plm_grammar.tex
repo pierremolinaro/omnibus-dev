@@ -45,11 +45,11 @@
 
 \nonTerminalSection{declaration}{2}
 
-\ruleSubsection{plm\_syntax}{declaration-type}{34}
+\ruleSubsection{plm\_syntax}{declaration-type}{24}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {type}; & \node (p0-3) [terminal] {\$type}; & \node (p0-4) [terminal] {:}; & \node (p0-5) [nonterminal] {\nonTerminalSymbol{type\_definition}{3}}; & \node (p0-6) [lastPoint] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {newtype}; & \node (p0-3) [terminal] {\$type}; & \node (p0-4) [terminal] {:}; & \node (p0-5) [nonterminal] {\nonTerminalSymbol{type\_definition}{3}}; & \node (p0-6) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
@@ -2014,7 +2014,7 @@
 
 \nonTerminalSection{type\_definition}{3}
 
-\ruleSubsection{plm\_syntax}{declaration-type}{47}
+\ruleSubsection{plm\_syntax}{declaration-type}{37}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {

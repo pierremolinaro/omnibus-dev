@@ -18,17 +18,15 @@ let LED_L0 = $digitalPort.D3
 
 //——————————————————————————————————————————————————————————————————————————————
 
-init 1000 {
-  pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
-  pinMode (!port:LED_L0 !mode:.OUTPUT)
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
 task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   var continue = yes
-  
+ 
+  setup 1000 {
+    pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
+    pinMode (!port:LED_L0 !mode:.OUTPUT)
+  }
+ 
   on (self.continue) time.wait (!untilDeadline:self.compteur) {
     digitalWrite (!port:LED_L0 !yes)
     self.compteur +%= 500

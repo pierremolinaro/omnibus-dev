@@ -16,22 +16,9 @@ func safe activityLedOff @exported () {
 
 //-----------------------------------------------------------------------------*
 
-init 100 {
-  pinMode (!port:.D13 !mode:.OUTPUT)
-}
-
-//-----------------------------------------------------------------------------*
-
 let LED_L1 = $digitalPort.D4
 
 //-----------------------------------------------------------------------------*
-
-init 1000 {
-  pinMode (!port:LED_L1 !mode:.OUTPUT)
-  SIM_SCGC6 |= SIM_SCGC6_PIT
-}
-
-//------------------------------------------------*
 
 system section setupPIT () {
   PIT_MCR = 0
@@ -44,6 +31,12 @@ system section setupPIT () {
 
 driver pit {
   var gPITValue $uint32 = 0
+
+  init 100 {
+    pinMode (!port:.D13 !mode:.OUTPUT)
+    pinMode (!port:LED_L1 !mode:.OUTPUT)
+    SIM_SCGC6 |= SIM_SCGC6_PIT
+  }
 
   system section getPITValue (!outValue $uint32) {
     outValue = self.gPITValue

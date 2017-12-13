@@ -8,11 +8,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !yes)
+  digital.write (!yes !toPort:.D13)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !no)
+  digital.write (!no !toPort:.D13)
 }
 
 //——————————————————————————————————————————————————————————————————————————————
@@ -25,29 +25,24 @@ let LED_L4 = $digitalPort.D7
 
 //——————————————————————————————————————————————————————————————————————————————
 
-init 1000 {
-  pinMode (!port:LED_L0 !mode:.OUTPUT)
-  pinMode (!port:LED_L1 !mode:.OUTPUT)
-  pinMode (!port:LED_L2 !mode:.OUTPUT)
-  pinMode (!port:LED_L3 !mode:.OUTPUT)
-  pinMode (!port:LED_L4 !mode:.OUTPUT)
-  pinMode (!port:.D13 !mode:.OUTPUT)
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
   setup 0 {
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.OUTPUT !toPort:LED_L2)
+    digital.set (!mode:.OUTPUT !toPort:LED_L3)
+    digital.set (!mode:.OUTPUT !toPort:LED_L4)
+    digital.set (!mode:.OUTPUT !toPort:.D13)
     lcd.print (!string:"Hello")
   }
   
   on time.wait (!untilDeadline:self.compteur) {
-    digitalWrite (!port:LED_L0 !yes)
+    digital.write (!yes !toPort:LED_L0)
     self.compteur +%= 500
     time.wait (!untilDeadline:self.compteur)
-    digitalWrite (!port:LED_L0 !no)
+    digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:1 !column:0)
     lcd.print (!unsigned:time.now ())
@@ -62,10 +57,10 @@ task T2 priority 2 stackSize 512 {
   var compteur $uint32 = 0
 
   on time.wait (!untilDeadline:self.compteur) {
-    digitalWrite (!port:LED_L1 !yes)
+    digital.write (!yes !toPort:LED_L1)
     self.compteur +%= 499
     time.wait (!untilDeadline:self.compteur)
-    digitalWrite (!port:LED_L1 !no)
+    digital.write (!no !toPort:LED_L1)
     self.compteur +%= 499
   }
 }
@@ -76,10 +71,10 @@ task T3 priority 3 stackSize 512 {
   var compteur $uint32 = 0
 
   on time.wait (!untilDeadline:self.compteur) {
-    digitalWrite (!port:LED_L2 !yes)
+    digital.write (!yes !toPort:LED_L2)
     self.compteur +%= 498
     time.wait (!untilDeadline:self.compteur)
-    digitalWrite (!port:LED_L2 !no)
+    digital.write (!yes !toPort:LED_L2)
     self.compteur +%= 498
   }
 }
@@ -90,10 +85,10 @@ task T4 priority 4 stackSize 512 {
   var compteur $uint32 = 0
 
   on time.wait (!untilDeadline:self.compteur) {
-    digitalWrite (!port:LED_L3 !yes)
+    digital.write (!yes !toPort:LED_L3)
     self.compteur +%= 497
     time.wait (!untilDeadline:self.compteur)
-    digitalWrite (!port:LED_L3 !no)
+    digital.write (!no !toPort:LED_L3)
     self.compteur +%= 497
   }
 }
@@ -104,10 +99,10 @@ task T5 priority 5 stackSize 512 {
   var compteur $uint32 = 0
 
   on time.wait (!untilDeadline:self.compteur) {
-    digitalWrite (!port:LED_L4 !yes)
+    digital.write (!yes !toPort:LED_L4)
     self.compteur +%= 496
     time.wait (!untilDeadline:self.compteur)
-    digitalWrite (!port:LED_L4 !no)
+    digital.write (!no !toPort:LED_L4)
     self.compteur +%= 496
   }
 }

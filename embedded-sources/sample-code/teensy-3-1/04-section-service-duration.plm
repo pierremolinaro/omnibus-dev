@@ -16,12 +16,6 @@ func safe activityLedOff @exported () {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-init 1000 {
-  pinMode (!port:.D13 !mode:.OUTPUT)
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
 system section emptySection () {
 }
 
@@ -47,6 +41,7 @@ task T priority 0 stackSize 512 {
   //············································································
 
   setup 1 {
+    pinMode (!port:.D13 !mode:.OUTPUT)
     var cumul $uint32 = 0
   //--- Compute getSysTick duration
     for _ $uint32 in 0 ..< ITERATIONS {

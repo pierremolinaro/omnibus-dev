@@ -16,12 +16,6 @@ func safe activityLedOff @exported () {
 
 //-----------------------------------------------------------------------------*
 
-init 100 {
-  pinMode (!port:.D13 !mode:.OUTPUT)
-}
-
-//-----------------------------------------------------------------------------*
-
 let LED_L0 = $digitalPort.D3
 let LED_L1 = $digitalPort.D4
 let LED_L2 = $digitalPort.D5
@@ -30,30 +24,17 @@ let LED_L4 = $digitalPort.D7
 
 //-----------------------------------------------------------------------------*
 
-init 1000 {
-  pinMode (!port:LED_L0 !mode:.OUTPUT)
-  pinMode (!port:LED_L1 !mode:.OUTPUT)
-  pinMode (!port:LED_L2 !mode:.OUTPUT)
-  pinMode (!port:LED_L3 !mode:.OUTPUT)
-  pinMode (!port:LED_L4 !mode:.OUTPUT)
-}
-
-//-----------------------------------------------------------------------------*
-
-//-----------------------------------------------------------------------------*
-
-
-//guard PP () : s1.wait () {
-//}
-
-//guard convenienceWait (?untilDeadline:inDeadline $uint32)
-//: time.wait (!untilDeadline:inDeadline) {
-//}
-
-//-----------------------------------------------------------------------------*
-
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
+
+  setup 1000 {
+    pinMode (!port:.D13 !mode:.OUTPUT)
+    pinMode (!port:LED_L0 !mode:.OUTPUT)
+    pinMode (!port:LED_L1 !mode:.OUTPUT)
+    pinMode (!port:LED_L2 !mode:.OUTPUT)
+    pinMode (!port:LED_L3 !mode:.OUTPUT)
+    pinMode (!port:LED_L4 !mode:.OUTPUT)
+  }
 
   on time.wait (!untilDeadline:self.top) {
     T2.signal0 ()

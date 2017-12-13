@@ -24,19 +24,17 @@ let LED_L4 = $digitalPort.D7
 
 //——————————————————————————————————————————————————————————————————————————————
 
-init 1000 {
-  pinMode (!port:LED_L0 !mode:.OUTPUT)
-  pinMode (!port:LED_L1 !mode:.OUTPUT)
-  pinMode (!port:LED_L2 !mode:.OUTPUT)
-  pinMode (!port:LED_L3 !mode:.OUTPUT)
-  pinMode (!port:LED_L4 !mode:.OUTPUT)
-  pinMode (!port:.D13 !mode:.OUTPUT)
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
+
+  setup 1000 {
+    pinMode (!port:LED_L0 !mode:.OUTPUT)
+    pinMode (!port:LED_L1 !mode:.OUTPUT)
+    pinMode (!port:LED_L2 !mode:.OUTPUT)
+    pinMode (!port:LED_L3 !mode:.OUTPUT)
+    pinMode (!port:LED_L4 !mode:.OUTPUT)
+    pinMode (!port:.D13 !mode:.OUTPUT)
+  }
   
   on time.wait (!untilDeadline:self.compteur) {
     digitalWrite (!port:LED_L0 !yes)
