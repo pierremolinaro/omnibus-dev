@@ -2998,10 +2998,10 @@ static void extensionMethod_bootAST_enterInPrecedenceGraph (const cPtr_abstractD
                                                             COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_bootAST * object = (const cPtr_bootAST *) inObject ;
   macroValidSharedObject (object, cPtr_bootAST) ;
-  GALGAS_lstring var_nodeName_2447 = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (object->mProperty_mBootPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 55)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 55)), object->mProperty_mBootPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 55)) ;
+  GALGAS_lstring var_nodeName_2451 = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (object->mProperty_mBootPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 55)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 55)), object->mProperty_mBootPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 55)) ;
   {
   const GALGAS_bootAST temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (var_nodeName_2447, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 56)) ;
+  ioArgument_ioGraph.setter_addNode (var_nodeName_2451, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 56)) ;
   }
 }
 
@@ -3120,9 +3120,9 @@ static void extensionMethod_bootAST_enterInContext (const cPtr_abstractDeclarati
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_bootAST * object = (const cPtr_bootAST *) inObject ;
   macroValidSharedObject (object, cPtr_bootAST) ;
-  GALGAS_lstring var_routineNameForInvocationGraph_4553 = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (object->mProperty_mBootPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 96)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 96)), object->mProperty_mBootPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 96)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph_4557 = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (object->mProperty_mBootPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 96)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 96)), object->mProperty_mBootPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 96)) ;
   {
-  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_4553, var_routineNameForInvocationGraph_4553, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 97)) ;
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_4557, var_routineNameForInvocationGraph_4557, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 97)) ;
   }
   ioArgument_ioDecoratedDeclarationList.addAssign_operation (GALGAS_decoratedBootRoutine::constructor_new (object->mProperty_mInstructionList, object->mProperty_mEndOfBootLocation, object->mProperty_mBootPriority  COMMA_SOURCE_FILE ("declaration-boot.galgas", 99))  COMMA_SOURCE_FILE ("declaration-boot.galgas", 99)) ;
 }
@@ -3155,25 +3155,25 @@ static void extensionMethod_decoratedBootRoutine_semanticAnalysis (const cPtr_ab
   {
   ioArgument_ioTemporaries.mProperty_mBootRoutinePriorityMap.setter_insertKey (GALGAS_lstring::constructor_new (object->mProperty_mBootPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 129)), object->mProperty_mBootPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 129)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 129)) ;
   }
-  GALGAS_lstring var_routineNameForInvocationGraph_6184 = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (object->mProperty_mBootPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 131)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 131)), object->mProperty_mBootPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 131)) ;
-  GALGAS_universalValuedObjectMap var_universalMap_6295 = constinArgument_inContext.getter_mValuedObjectMap (HERE) ;
+  GALGAS_lstring var_routineNameForInvocationGraph_6188 = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (object->mProperty_mBootPriority.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 131)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 131)), object->mProperty_mBootPriority.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-boot.galgas", 131)) ;
+  GALGAS_universalValuedObjectMap var_universalMap_6299 = constinArgument_inContext.getter_mValuedObjectMap (HERE) ;
   {
-  extensionSetter_openOverrideForSelectBlock (var_universalMap_6295, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 134)) ;
+  extensionSetter_openOverrideForSelectBlock (var_universalMap_6299, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 134)) ;
   }
   {
-  extensionSetter_openBranch (var_universalMap_6295, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 135)) ;
+  extensionSetter_openBranch (var_universalMap_6299, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 135)) ;
   }
-  GALGAS_instructionListIR var_instructionGenerationList_6477 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-boot.galgas", 137)) ;
-  GALGAS_allocaList var_bootAllocaList_6511 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-boot.galgas", 138)) ;
-  extensionMethod_analyzeRoutineInstructionList (object->mProperty_mInstructionList, function_voidType (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 140)), GALGAS_routineAttributes::constructor_boot (SOURCE_FILE ("declaration-boot.galgas", 141)).operator_or (GALGAS_routineAttributes::constructor_controlRegisterReadable (SOURCE_FILE ("declaration-boot.galgas", 141)) COMMA_SOURCE_FILE ("declaration-boot.galgas", 141)), var_routineNameForInvocationGraph_6184, constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-boot.galgas", 144)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mProperty_mStaticStringMap, var_universalMap_6295, var_bootAllocaList_6511, var_instructionGenerationList_6477, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 139)) ;
-  extensionMethod_checkLocalVariableFinalState (var_universalMap_6295, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 152)) ;
+  GALGAS_instructionListIR var_instructionGenerationList_6481 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-boot.galgas", 137)) ;
+  GALGAS_allocaList var_bootAllocaList_6515 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-boot.galgas", 138)) ;
+  extensionMethod_analyzeRoutineInstructionList (object->mProperty_mInstructionList, function_voidType (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 140)), GALGAS_routineAttributes::constructor_boot (SOURCE_FILE ("declaration-boot.galgas", 141)).operator_or (GALGAS_routineAttributes::constructor_controlRegisterReadable (SOURCE_FILE ("declaration-boot.galgas", 141)) COMMA_SOURCE_FILE ("declaration-boot.galgas", 141)), var_routineNameForInvocationGraph_6188, constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-boot.galgas", 144)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mProperty_mStaticStringMap, var_universalMap_6299, var_bootAllocaList_6515, var_instructionGenerationList_6481, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 139)) ;
+  extensionMethod_checkLocalVariableFinalState (var_universalMap_6299, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 152)) ;
   {
-  extensionSetter_closeBranch (var_universalMap_6295, object->mProperty_mEndOfBootLocation, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 153)) ;
+  extensionSetter_closeBranch (var_universalMap_6299, object->mProperty_mEndOfBootLocation, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 153)) ;
   }
   {
-  extensionSetter_closeOverride (var_universalMap_6295, object->mProperty_mEndOfBootLocation, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 154)) ;
+  extensionSetter_closeOverride (var_universalMap_6299, object->mProperty_mEndOfBootLocation, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 154)) ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mBootList.addAssign_operation (object->mProperty_mBootPriority.getter_bigint (HERE), var_bootAllocaList_6511, var_instructionGenerationList_6477, object->mProperty_mEndOfBootLocation  COMMA_SOURCE_FILE ("declaration-boot.galgas", 156)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mBootList.addAssign_operation (object->mProperty_mBootPriority.getter_bigint (HERE), var_bootAllocaList_6515, var_instructionGenerationList_6481, object->mProperty_mEndOfBootLocation  COMMA_SOURCE_FILE ("declaration-boot.galgas", 156)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

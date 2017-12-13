@@ -40,27 +40,35 @@ enum $digitalMode {
 }
 
 //——————————————————————————————————————————————————————————————————————————————
-// By default, the 32 PORTA_PCR registers are not accessible in user mode
-// Their adresses : 0x4004_9000 --> 0x4004_907C
-// This corresponds to AIPS slot 73 (§4.5.1)
-// By default, the 32 PORTB_PCR registers are not accessible in user mode
-// Their adresses : 0x4004_A000 --> 0x4004_A07C
-// This corresponds to AIPS slot 74 (§4.5.1)
-// By default, the 32 PORTC_PCR registers are not accessible in user mode
-// Their adresses : 0x4004_B000 --> 0x4004_B07C
-// This corresponds to AIPS slot 75 (§4.5.1)
-// By default, the 32 PORTD_PCR registers are not accessible in user mode
-// Their adresses : 0x4004_C000 --> 0x4004_C07C
-// This corresponds to AIPS slot 76 (§4.5.1)
+
+driver digital {
+
+  //··············································································
+  // By default, the 32 PORTA_PCR registers are not accessible in user mode
+  // Their adresses : 0x4004_9000 --> 0x4004_907C
+  // This corresponds to AIPS slot 73 (§4.5.1)
+  // By default, the 32 PORTB_PCR registers are not accessible in user mode
+  // Their adresses : 0x4004_A000 --> 0x4004_A07C
+  // This corresponds to AIPS slot 74 (§4.5.1)
+  // By default, the 32 PORTC_PCR registers are not accessible in user mode
+  // Their adresses : 0x4004_B000 --> 0x4004_B07C
+  // This corresponds to AIPS slot 75 (§4.5.1)
+  // By default, the 32 PORTD_PCR registers are not accessible in user mode
+  // Their adresses : 0x4004_C000 --> 0x4004_C07C
+  // This corresponds to AIPS slot 76 (§4.5.1)
+  //··············································································
+  
+  boot 50 { // See §19.2.2 page 351
+  // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0_PACRJ
+  // Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0_PACRJ
+  // Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0_PACRJ
+  // Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0_PACRJ
+  // Simplification: all bits of AIPS0_PACRJ are reseted
+    AIPS0_PACRJ = 0
+  }
+
 //··············································································
 
-boot 50 { // See §19.2.2 page 351
-// Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0_PACRJ
-// Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0_PACRJ
-// Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0_PACRJ
-// Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0_PACRJ
-// Simplification: all bits of AIPS0_PACRJ are reseted
-  AIPS0_PACRJ = 0
 }
 
 //··············································································
