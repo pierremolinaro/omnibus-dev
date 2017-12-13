@@ -16,25 +16,13 @@ func safe activityLedOff @exported () {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-init 100 {
-  pinMode (!port:.D13 !mode:.OUTPUT)
-}
-
-//-----------------------------------------------------------------------------*
-
 let LED_L1 = $digitalPort.D4
-
-//-----------------------------------------------------------------------------*
-
-init 1000 {
-  pinMode (!port:LED_L1 !mode:.OUTPUT)
-}
 
 //-----------------------------------------------------------------------------*
 
 let SIZE = 9
 
-type $A : $uint32 [SIZE]
+newtype $A : $uint32 [SIZE]
 
 struct $B {
   var a $uint32 = 0
@@ -52,6 +40,11 @@ task T priority 12 stackSize 512 {
   var array = $A (!repeated:0)
   var array2 = $A (!repeated:1)
   var index $int32 = 0
+
+  setup 1000 {
+    pinMode (!port:.D13 !mode:.OUTPUT)
+    pinMode (!port:LED_L1 !mode:.OUTPUT)
+  }
 
   on time.wait (!untilDeadline:self.deadline) {
     self.deadline +%= 1000

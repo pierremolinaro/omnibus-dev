@@ -7,7 +7,7 @@ check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
 
 let LCD_BUFFER_SIZE = 20
 
-type $lcdBuffer : $uint8 [LCD_BUFFER_SIZE]
+newtype $lcdBuffer : $uint8 [LCD_BUFFER_SIZE]
 
 //——————————————————————————————————————————————————————————————————————————————
 

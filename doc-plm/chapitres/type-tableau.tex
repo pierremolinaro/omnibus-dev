@@ -18,10 +18,10 @@ PLM implémente les tableaux de taille fixe. La déclaration d'un type tableau u
 
 \sectionLabel{Déclaration d'un type tableau}{DecTypeTableau}
 
-La déclaration d'un type tableau est réalisée par la construction \plm=type=~:
+La déclaration d'un type tableau est réalisée par la construction \plm=newtype=~:
 
 \begin{PLM}
-type $monTypeTableau : $uint32 [20]
+newtype $monTypeTableau : $uint32 [20]
 \end{PLM}
 
 Cette construction déclare le type \plm=$monTypeTableau= comme tableau de $20$ instances de \plm=$uint32=.
@@ -32,7 +32,7 @@ La taille du tableau est une expression statique, de type entier. Il est donc po
 
 \begin{PLM}
 let SIZE = 20
-type $monTypeTableau : $uint32 [SIZE]
+newtype $monTypeTableau : $uint32 [SIZE]
 \end{PLM}
 
 

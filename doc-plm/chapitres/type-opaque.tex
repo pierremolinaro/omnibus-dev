@@ -11,10 +11,10 @@ Un \emph{type opaque} est un type dont la définition est externe à PLM, dans l
 
 \section{Déclaration d'un type opaque}
 
-La déclaration d'un type opaque est introduite par le mot réservé \plm!type! :
+La déclaration d'un type opaque est introduite par le mot réservé \plm!newtype! :
 
 \begin{PLM}
-type $monTypeOpaque : [[32]]
+newtype $monTypeOpaque : [[32]]
 \end{PLM}
 
 La séquence \plm![[expression]]! caractérise la déclaration d'un type opaque. Les deux niveaux de parenthèses sont obligatoires. Le nombre associé (ici \plm!32!) est le nombre de bits pour représenter un objet de ce type.
@@ -23,8 +23,8 @@ L'\plm!expression! doit être une expression statique (c'est-à-dire calculée �
 
 \begin{PLM}
 let TAILLE = 32
-type $monTypeOpaque : [[TAILLE]] // 32 bits
-type $autreTypeOpaque : [[TAILLE * 2]] // 64 bits
+newtype $monTypeOpaque : [[TAILLE]] // 32 bits
+newtype $autreTypeOpaque : [[TAILLE * 2]] // 64 bits
 \end{PLM}
 
 
@@ -46,7 +46,7 @@ Ces deux attributs sont cumulables.
 L'attribut \plm=@instantiable= est spécifié après l'indication de taille du type :
 
 \begin{PLM}
-type $monTypeOpaque : [[32]] @instantiable
+newtype $monTypeOpaque : [[32]] @instantiable
 \end{PLM}
 
 
@@ -74,7 +74,7 @@ L'expression \plm=$monTypeOpaque ()= est à une instance de \plm=$monTypeOpaque=
 L'attribut \plm=@copyable= est spécifié après l'indication de taille du type :
 
 \begin{PLM}
-type $monTypeOpaque : [[32]] @copyable
+newtype $monTypeOpaque : [[32]] @copyable
 \end{PLM}
 
 

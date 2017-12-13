@@ -9,21 +9,17 @@ driver timer ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !yes)
+  digital.write (!yes !toPort:.D13)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !no)
+  digital.write (!no !toPort:.D13)
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let LED_L0 = $digitalPort.D3
 
-init 1000 {
-  pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
-  pinMode (!port:LED_L0 !mode:.OUTPUT)
-}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -84,10 +80,15 @@ struct $uptime @copyable {
 
 task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
+
+  setup 1000 {
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+  }
   
   on time.wait (!untilDeadline:self.compteur) {
     let tick = timer.now ()
-    toggle (!port:LED_L0)
+    digital.toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!unsigned:self.compteur)
     lcd.goto (!line:1 !column:0)

@@ -32,24 +32,22 @@ let PUSH_P4 = $digitalPort.D12
 
 //——————————————————————————————————————————————————————————————————————————————
 
-init 1000 {
-  pinMode (!port:LED_L0 !mode:.OUTPUT)
-  pinMode (!port:LED_L1 !mode:.OUTPUT)
-  pinMode (!port:LED_L2 !mode:.OUTPUT)
-  pinMode (!port:LED_L3 !mode:.OUTPUT)
-  pinMode (!port:LED_L4 !mode:.OUTPUT)
-  pinMode (!port:.D13 !mode:.OUTPUT)
-  pinMode (!port:PUSH_P0 !mode:.INPUT_PULLUP)
-  pinMode (!port:PUSH_P1 !mode:.INPUT_PULLUP)
-  pinMode (!port:PUSH_P2 !mode:.INPUT_PULLUP)
-  pinMode (!port:PUSH_P3 !mode:.INPUT_PULLUP)
-  pinMode (!port:PUSH_P4 !mode:.INPUT_PULLUP)
-}
-
-///——————————————————————————————————————————————————————————————————————————————
-
 task T priority 0 stackSize 512 {
   var compteur $uint32 = 0
+
+  setup 1000 {
+    pinMode (!port:LED_L0 !mode:.OUTPUT)
+    pinMode (!port:LED_L1 !mode:.OUTPUT)
+    pinMode (!port:LED_L2 !mode:.OUTPUT)
+    pinMode (!port:LED_L3 !mode:.OUTPUT)
+    pinMode (!port:LED_L4 !mode:.OUTPUT)
+    pinMode (!port:.D13 !mode:.OUTPUT)
+    pinMode (!port:PUSH_P0 !mode:.INPUT_PULLUP)
+    pinMode (!port:PUSH_P1 !mode:.INPUT_PULLUP)
+    pinMode (!port:PUSH_P2 !mode:.INPUT_PULLUP)
+    pinMode (!port:PUSH_P3 !mode:.INPUT_PULLUP)
+    pinMode (!port:PUSH_P4 !mode:.INPUT_PULLUP)
+  }
 
   //············································································
   

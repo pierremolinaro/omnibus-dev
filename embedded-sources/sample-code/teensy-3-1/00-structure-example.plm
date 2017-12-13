@@ -14,21 +14,9 @@ func safe activityLedOff @exported () {
   digitalWrite (!port:.D13 !no)
 }
 
-//——————————————————————————————————————————————————————————————————————————————
-
-init 100 {
-  pinMode (!port:.D13 !mode:.OUTPUT)
-}
-
 //-----------------------------------------------------------------------------*
 
 let LED_L1 = $digitalPort.D4
-
-//-----------------------------------------------------------------------------*
-
-init 1000 {
-  pinMode (!port:LED_L1 !mode:.OUTPUT)
-}
 
 //-----------------------------------------------------------------------------*
 
@@ -53,6 +41,11 @@ task T priority 12 stackSize 512 {
   var deadline $uint32 = 0
   var acc = $C ()
 
+  setup  0 {
+    pinMode (!port:.D13 !mode:.OUTPUT)
+    pinMode (!port:LED_L1 !mode:.OUTPUT)
+  }
+  
   on time.wait (!untilDeadline:self.deadline) {
     self.deadline +%= 1000
     toggle (!port:LED_L1)
