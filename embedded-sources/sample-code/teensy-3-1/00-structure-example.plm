@@ -7,11 +7,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !yes)
+  digital.write (!yes !toPort:.D13)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !no)
+  digital.write (!no !toPort:.D13)
 }
 
 //-----------------------------------------------------------------------------*
@@ -42,13 +42,13 @@ task T priority 12 stackSize 512 {
   var acc = $C ()
 
   setup  0 {
-    pinMode (!port:.D13 !mode:.OUTPUT)
-    pinMode (!port:LED_L1 !mode:.OUTPUT)
+    digital.set (!mode:.OUTPUT !toPort:.D13)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
   }
   
   on time.wait (!untilDeadline:self.deadline) {
     self.deadline +%= 1000
-    toggle (!port:LED_L1)
+    digital.toggle (!port:LED_L1)
     let n = self.acc.c.a +% self.deadline
     self.acc.c.a = n
     let x $uint32 = 0x1234_5678

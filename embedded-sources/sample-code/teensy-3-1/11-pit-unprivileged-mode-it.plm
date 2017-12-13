@@ -7,11 +7,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !yes)
+  digital.write (!yes !toPort:.D13)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !no)
+  digital.write (!no !toPort:.D13)
 }
 
 //-----------------------------------------------------------------------------*
@@ -33,8 +33,8 @@ driver pit > digital {
   var gPITValue $uint32 = 0
 
   init 100 {
-    pinMode (!port:.D13 !mode:.OUTPUT)
-    pinMode (!port:LED_L1 !mode:.OUTPUT)
+    digital.set (!mode:.OUTPUT !toPort:.D13)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
     SIM_SCGC6 |= SIM_SCGC6_PIT
   }
 
@@ -63,10 +63,10 @@ task T priority 12 stackSize 512 {
   
   on time.wait (!untilDeadline:self.deadline) {
     self.deadline +%= 250
-    digitalWrite (!port:LED_L1 !yes) // Allumer la led
+    digital.write (!yes !toPort:LED_L1) // Allumer la led
     time.wait (!untilDeadline:self.deadline)
     self.deadline +%= 250
-    digitalWrite (!port:LED_L1 !no)  // Éteindre la led
+    digital.write (!no !toPort:LED_L1)  // Éteindre la led
     lcd.goto (!line:1 !column:0)
     lcd.print (!spaces:10)
     lcd.goto (!line:1 !column:0)

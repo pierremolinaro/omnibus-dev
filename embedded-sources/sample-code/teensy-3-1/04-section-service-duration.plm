@@ -7,11 +7,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !yes)
+  digital.write (!yes !toPort:.D13)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !no)
+  digital.write (!no !toPort:.D13)
 }
 
 //——————————————————————————————————————————————————————————————————————————————
@@ -41,7 +41,7 @@ task T priority 0 stackSize 512 {
   //············································································
 
   setup 1 {
-    pinMode (!port:.D13 !mode:.OUTPUT)
+    digital.set (!mode:.OUTPUT !toPort:.D13)
     var cumul $uint32 = 0
   //--- Compute getSysTick duration
     for _ $uint32 in 0 ..< ITERATIONS {
