@@ -7,11 +7,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !yes)
+  digital.write (!yes !toPort:.D13)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !no)
+  digital.write (!no !toPort:.D13)
 }
 
 let LED_L0 = $digitalPort.D3
@@ -23,15 +23,15 @@ task Tâche priority 1 stackSize 512 {
   var continue = yes
  
   setup 1000 {
-    pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
-    pinMode (!port:LED_L0 !mode:.OUTPUT)
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
  
   on (self.continue) time.wait (!untilDeadline:self.compteur) {
-    digitalWrite (!port:LED_L0 !yes)
+    digital.write (!yes !toPort:LED_L0)
     self.compteur +%= 500
     time.wait (!untilDeadline: self.compteur)
-    digitalWrite (!port:LED_L0 !no)
+    digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
     lcd.print (!unsigned:time.now ())

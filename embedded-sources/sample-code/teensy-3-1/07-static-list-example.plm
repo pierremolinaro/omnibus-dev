@@ -7,11 +7,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !yes)
+  digital.write (!yes !toPort:.D13)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !no)
+  digital.write (!no !toPort:.D13)
 }
 
 //-----------------------------------------------------------------------------*
@@ -31,7 +31,7 @@ staticArray maListeStatique {
 }
 
 func user toggleL2 (?!par: y $uint32) {
-  toggle (!port:LED_L2)
+  digital.toggle (!port:LED_L2)
   y += 1
 }
 
@@ -40,7 +40,7 @@ func user p2 (?arg: x $uint32) -> $uint32 {
 }
 
 func user toggleL3 (?!par: y $uint32) {
-  toggle (!port:LED_L3)
+  digital.toggle (!port:LED_L3)
   y += 1
 }
 
@@ -59,15 +59,15 @@ task T priority 12 stackSize 512 {
   var deadline $uint32 = 0
 
   setup 1000 {
-    pinMode (!port:.D13 !mode:.OUTPUT)
-    pinMode (!port:LED_L1 !mode:.OUTPUT)
-    pinMode (!port:LED_L2 !mode:.OUTPUT)
-    pinMode (!port:LED_L3 !mode:.OUTPUT)
+    digital.set (!mode:.OUTPUT !toPort:.D13)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.OUTPUT !toPort:LED_L2)
+    digital.set (!mode:.OUTPUT !toPort:LED_L3)
   }
 
   on time.wait (!untilDeadline:self.deadline) {
     self.deadline +%= 250
-    toggle (!port:LED_L1)
+    digital.toggle (!port:LED_L1)
     var total $uint32 = 0
     for élément in maListeStatique {
       total = total + élément.a

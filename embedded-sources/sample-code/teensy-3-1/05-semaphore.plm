@@ -7,11 +7,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !yes)
+  digital.write (!yes !toPort:.D13)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !no)
+  digital.write (!no !toPort:.D13)
 }
 
 //——————————————————————————————————————————————————————————————————————————————
@@ -25,20 +25,20 @@ task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
   setup 1000 {
-    pinMode (!port:.D13 !mode:.OUTPUT)
-    pinMode (!port:LED_L1 !mode:.OUTPUT)
-    pinMode (!port:LED_L2 !mode:.OUTPUT)
+    digital.set (!mode:.OUTPUT !toPort:.D13)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.OUTPUT !toPort:LED_L2)
   }
 
   on time.wait (!untilDeadline:self.top) {
     T2.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L1 !yes)
+    digital.write (!yes !toPort:LED_L1)
     let constanteAccentuée = self.top
     time.wait (!untilDeadline:constanteAccentuée)
     T2.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L1 !no)
+    digital.write (!no !toPort:LED_L1)
   }
 }
 
@@ -50,9 +50,9 @@ task T2 priority 2 stackSize 512 {
   entry signal : self.sémaphore.signal ()
 
   on self.sémaphore.wait () {
-    digitalWrite (!port:LED_L2 !yes)
+    digital.write (!yes !toPort:LED_L2)
     self.sémaphore.wait ()
-    digitalWrite (!port:LED_L2 !no)
+    digital.write (!no !toPort:LED_L2)
   }
 }
 

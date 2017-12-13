@@ -7,11 +7,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //——————————————————————————————————————————————————————————————————————————————
 
 func safe activityLedOn @exported () {
-  digitalWrite (!port:.D13 !yes)
+  digital.write (!yes !toPort:.D13)
 }
 
 func safe activityLedOff @exported () {
-  digitalWrite (!port:.D13 !no)
+  digital.write (!no !toPort:.D13)
 }
 
 //-----------------------------------------------------------------------------*
@@ -62,17 +62,17 @@ task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
   setup 100 {
-    pinMode (!port:.D13 !mode:.OUTPUT)
-    pinMode (!port:LED_L0 !mode:.OUTPUT)
-    pinMode (!port:LED_L1 !mode:.OUTPUT)
-    pinMode (!port:LED_L2 !mode:.OUTPUT)
-    pinMode (!port:LED_L4 !mode:.OUTPUT)
+    digital.set (!mode:.OUTPUT !toPort:.D13)
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.OUTPUT !toPort:LED_L2)
+    digital.set (!mode:.OUTPUT !toPort:LED_L4)
   }
 
   on time.wait (!untilDeadline:self.top) {
     T2.input (?data:let n)
     T1.output (!data:n)
-    toggle (!port:LED_L0)
+    digital.toggle (!port:LED_L0)
     self.top += 500
   }
 }
@@ -85,7 +85,7 @@ task T1 priority 1 stackSize 1024 {
   var rdvs = $rendezVousData ()
 
   on self.rdvs.input (?data:let x) {
-    toggle (!port:LED_L1)
+    digital.toggle (!port:LED_L1)
     T0.P ()
       lcd.goto (!line:0 !column:0)
       lcd.print (!unsigned:x)
@@ -103,7 +103,7 @@ task T2 priority 2 stackSize 1024 {
   var n $uint32 = 0
 
   on self.rdvs2.output (!data:self.n) {
-    toggle (!port:LED_L2)
+    digital.toggle (!port:LED_L2)
     T0.P ()
       lcd.goto (!line:1 !column:0)
       lcd.print (!unsigned:self.n)
@@ -113,7 +113,7 @@ task T2 priority 2 stackSize 1024 {
   
   on time.wait (!untilDeadline:self.deadline) {
     self.deadline += 200
-    toggle (!port:LED_L4)
+    digital.toggle (!port:LED_L4)
   }
 }
 
