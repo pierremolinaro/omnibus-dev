@@ -342,7 +342,7 @@ method @decoratedLaskList-element semanticAnalysis
   @instructionListIR setupInstructionListIR = {}
   @allocaList setupAllocaList = {}
   for (taskInitPriority taskInitInstructionList endOfTaskInitDeclaration *) in taskInitSortedListAST do
-    initSemanticAnalysis (
+    setupSemanticAnalysis (
       !context:inContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
@@ -393,6 +393,52 @@ method @decoratedLaskList-element semanticAnalysis
 #    !taskGuardListIR
     !taskNameStringIndex
   ]
+}
+
+#·······················································································································
+
+private proc setupSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  ?selfType:let @PLMType inSelfType
+  ?priority:let @lbigint inPriority
+  ?mode:let @mode inCurrentMode
+  ?instructionList:let @instructionListAST inInstructionListAST
+  ?endOfDeclaration:let @location inEndOfInitDeclaration
+  !@allocaList outAllocaList
+  !@instructionListIR outInstructionGenerationList
+{
+#--- Check init routine is unique
+  let routineNameForInvocationGraph = setupNameForInvocationGraph (!inSelfType.plmTypeName !inPriority)
+  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !routineNameForInvocationGraph]
+#---
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
+  end
+#--- Variable map
+  var universalMap = inContext.mValuedObjectMap
+  [!?universalMap openOverrideForSelectBlock]
+  [!?universalMap openBranch]
+#--- Analyze instruction list
+  outInstructionGenerationList = {}
+  outAllocaList = {}
+  [inInstructionListAST analyzeRoutineInstructionList
+    !self:inSelfType
+    !routineAttributes:.mutating | .directPropertyAccess | .controlRegisterReadable
+    !routineNameForInvocationGraph:routineNameForInvocationGraph
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?variableMap:universalMap
+    !?alloca:outAllocaList
+    !?generatedCode:outInstructionGenerationList
+  ]
+#--- End of variableMap
+  [universalMap checkLocalVariableFinalState]
+  [!?universalMap closeBranch !inEndOfInitDeclaration]
+  [!?universalMap closeOverride !inEndOfInitDeclaration]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

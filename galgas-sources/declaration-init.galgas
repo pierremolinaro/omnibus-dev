@@ -3,10 +3,11 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @initAST : @abstractDeclarationAST {
-  @lstring mDriverName # "" if no driver name
+  @lstring mDriverName
+  @lstringlist mDriverDependanceList
+  @location mInitLocation
   @instructionListAST mInstructionList
   @location mEndOfInitLocation
-  @lbigint mPriority
 }
 
 #·······················································································································
@@ -23,14 +24,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_init> ?!@ast ioAST ?let @lstring inDriverName !@initAST outInit {
+  rule <declaration_init> ?!@ast ioAST ?let @lstring inDriverName  ?let @lstringlist inDependanceList !@initAST outInit {
     $init$
-    $integer$ ?let @lbigint priority
+    let initLocation = @location.here
     ${$
     <instructionList> !?ioAST ?let instructionList
     let endOfInit = @location.here
     $}$
-    outInit = .new {!inDriverName !instructionList !endOfInit !priority}
+    outInit = .new {!inDriverName !inDependanceList !initLocation !instructionList !endOfInit}
   }
 
   #·····················································································································
@@ -48,20 +49,25 @@ method @initAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGrap
 #·······················································································································
 
 override method @initAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
- let nodeName = @lstring.new {!"init " + mDriverName + " " + mPriority.bigint !mPriority.location}
+ let nodeName = @lstring.new {!"init " + mDriverName !mInitLocation}
  [!?ioGraph addNode !nodeName !self]
+ [!?ioGraph addEdge !nodeName !mDriverName]
+ for (dependanceDriverName) in mDriverDependanceList do
+   let dependanceNodeName = @lstring.new {!"init " + dependanceDriverName !dependanceDriverName}
+   [!?ioGraph addEdge !nodeName !dependanceNodeName]
+ end
 }
 
 #·······················································································································
 
 override getter @initAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "init " + mDriverName + " " +  + mPriority.bigint 
+  outRepresentation = "init " + mDriverName 
 }
 
 #·······················································································································
 
 override getter @initAST location -> @location outLocation {
-  outLocation = mPriority.location
+  outLocation = mInitLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -80,36 +86,22 @@ override method @initAST addExtension
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @initRoutineMap {
-  insert insertKey error message "the '%%%K' init routine is already declared"
-  search searchKey error message "there is no '%%%K' init routine"
-}
-
-#·······················································································································
-
 override method @initAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
+  ?!context:@semanticContext unused ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  [!?ioContext.mInitRoutineMap insertKey !.new {![mPriority string] !mPriority.location}]
-#----------------
-  @lstring routineNameForInvocationGraph 
-  if mDriverName.string == "" then
-    routineNameForInvocationGraph = initNameForInvocationGraph (!"" !mPriority)
-  else
-    routineNameForInvocationGraph = initNameForInvocationGraph (!llvmDriverNameFromName (!mDriverName) !mPriority)
-  end
+   let routineNameForInvocationGraph = initNameForInvocationGraph (!llvmDriverNameFromName (!mDriverName) !mInitLocation)
   [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedInitRoutine.new {
     !mDriverName
+    !mDriverDependanceList
     !mInstructionList
     !mEndOfInitLocation
-    !mPriority
   }
 }
 
@@ -125,9 +117,9 @@ map @initRoutinePriorityMap {
 
 class @decoratedInitRoutine : @abstractDecoratedDeclaration {
   @lstring mDriverName
+  @lstringlist mDriverDependanceList
   @instructionListAST mInstructionList
   @location mEndOfInitLocation
-  @lbigint mPriority
 }
 
 #·······················································································································
@@ -137,18 +129,13 @@ override method @decoratedInitRoutine semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let @PLMType selfType = if mDriverName.string == "" then
-    voidType ()
-  else
-    [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !llvmDriverNameFromName (!mDriverName)} type]
-  end
+  let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !llvmDriverNameFromName (!mDriverName)} type]
   initSemanticAnalysis (
     !context:inContext
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
     !selfType:selfType
-    !priority:mPriority
-    !mode:.initMode
+    !location:mDriverName.location
     !instructionList:mInstructionList
     !endOfDeclaration:mEndOfInitLocation
     ?let @allocaList allocaList
@@ -158,27 +145,25 @@ override method @decoratedInitRoutine semanticAnalysis
   ioIntermediateCodeStruct.mInitList +=
     !selfType
     !mDriverName
-    !mPriority.bigint
     !allocaList
     !instructionGenerationList
 }
 
 #·······················································································································
 
-proc initSemanticAnalysis
+private proc initSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
   ?selfType:let @PLMType inSelfType
-  ?priority:let @lbigint inPriority
-  ?mode:let @mode inCurrentMode
+  ?location:let @location inLocation
   ?instructionList:let @instructionListAST inInstructionListAST
   ?endOfDeclaration:let @location inEndOfInitDeclaration
   !@allocaList outAllocaList
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
-  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.plmTypeName !inPriority)
+  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.plmTypeName !inLocation)
   [!?ioTemporaries.mInitRoutinePriorityMap insertKey !routineNameForInvocationGraph]
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
@@ -196,7 +181,7 @@ proc initSemanticAnalysis
     !routineAttributes:.mutating | .directPropertyAccess | .controlRegisterReadable
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
-    !mode:inCurrentMode
+    !mode:.initMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:universalMap
@@ -213,14 +198,11 @@ proc initSemanticAnalysis
 #!  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @initListIR {
-  @PLMType mSelfType # .void if outside of a driver
-  @string mDriverName # "" if outside of a driver
-  @bigint mPriority
+list @initListIR {
+  @PLMType mSelfType
+  @string mDriverName
   @allocaList mAllocaList
   @instructionListIR mInstructionListIR
-}{
-  mPriority <
 }
 
 #·······················································································································
@@ -234,17 +216,15 @@ method @initListIR generateLLVMinitCode
   ioLLVMcode += llvmTitleComment (!"Init")
   ioLLVMcode += "define internal void @init ()" + llvmAttributeFunction () + "{\n"
   for init in self do
-    ioLLVMcode += "  call void @init." + init.mPriority + " ("
-    if init.mSelfType.kind != .void then
-      ioLLVMcode += [init.mSelfType llvmTypeName] + "* " + llvmNameForGlobalVariable (!init.mDriverName)
-    end
+    ioLLVMcode += "  call void @init." + init.mDriverName + " ("
+    ioLLVMcode += [init.mSelfType llvmTypeName] + "* " + llvmNameForGlobalVariable (!init.mDriverName)
     ioLLVMcode += ")\n"
   end
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
   for init in self do
     ioLLVMcode += llvmSeparatorLine () + "\n"
-    ioLLVMcode += "define internal void @init." + init.mPriority + " ("
+    ioLLVMcode += "define internal void @init." + init.mDriverName + " ("
     if init.mSelfType.kind != .void then
       ioLLVMcode += [init.mSelfType llvmTypeName] + "* " + llvmNameForSelf ()
     end

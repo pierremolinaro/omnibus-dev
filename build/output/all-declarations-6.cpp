@@ -8705,13 +8705,16 @@ typeComparisonResult cPtr_initAST::dynamicObjectCompare (const acPtr_class * inO
     result = mProperty_mDriverName.objectCompare (p->mProperty_mDriverName) ;
   }
   if (kOperandEqual == result) {
+    result = mProperty_mDriverDependanceList.objectCompare (p->mProperty_mDriverDependanceList) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mInitLocation.objectCompare (p->mProperty_mInitLocation) ;
+  }
+  if (kOperandEqual == result) {
     result = mProperty_mInstructionList.objectCompare (p->mProperty_mInstructionList) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mEndOfInitLocation.objectCompare (p->mProperty_mEndOfInitLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mPriority.objectCompare (p->mProperty_mPriority) ;
   }
   return result ;
 }
@@ -8745,9 +8748,10 @@ GALGAS_abstractDeclarationAST () {
 
 GALGAS_initAST GALGAS_initAST::constructor_default (LOCATION_ARGS) {
   return GALGAS_initAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                          GALGAS_instructionListAST::constructor_emptyList (HERE),
+                                          GALGAS_lstringlist::constructor_emptyList (HERE),
                                           GALGAS_location::constructor_nowhere (HERE),
-                                          GALGAS_lbigint::constructor_default (HERE)
+                                          GALGAS_instructionListAST::constructor_emptyList (HERE),
+                                          GALGAS_location::constructor_nowhere (HERE)
                                           COMMA_THERE) ;
 }
 
@@ -8761,13 +8765,14 @@ GALGAS_abstractDeclarationAST (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initAST GALGAS_initAST::constructor_new (const GALGAS_lstring & inAttribute_mDriverName,
+                                                const GALGAS_lstringlist & inAttribute_mDriverDependanceList,
+                                                const GALGAS_location & inAttribute_mInitLocation,
                                                 const GALGAS_instructionListAST & inAttribute_mInstructionList,
-                                                const GALGAS_location & inAttribute_mEndOfInitLocation,
-                                                const GALGAS_lbigint & inAttribute_mPriority
+                                                const GALGAS_location & inAttribute_mEndOfInitLocation
                                                 COMMA_LOCATION_ARGS) {
   GALGAS_initAST result ;
-  if (inAttribute_mDriverName.isValid () && inAttribute_mInstructionList.isValid () && inAttribute_mEndOfInitLocation.isValid () && inAttribute_mPriority.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_initAST (inAttribute_mDriverName, inAttribute_mInstructionList, inAttribute_mEndOfInitLocation, inAttribute_mPriority COMMA_THERE)) ;
+  if (inAttribute_mDriverName.isValid () && inAttribute_mDriverDependanceList.isValid () && inAttribute_mInitLocation.isValid () && inAttribute_mInstructionList.isValid () && inAttribute_mEndOfInitLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_initAST (inAttribute_mDriverName, inAttribute_mDriverDependanceList, inAttribute_mInitLocation, inAttribute_mInstructionList, inAttribute_mEndOfInitLocation COMMA_THERE)) ;
   }
   return result ;
 }
@@ -8788,6 +8793,42 @@ GALGAS_lstring GALGAS_initAST::getter_mDriverName (UNUSED_LOCATION_ARGS) const {
 
 GALGAS_lstring cPtr_initAST::getter_mDriverName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mDriverName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_initAST::getter_mDriverDependanceList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_initAST * p = (const cPtr_initAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_initAST) ;
+    result = p->mProperty_mDriverDependanceList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist cPtr_initAST::getter_mDriverDependanceList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mDriverDependanceList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_initAST::getter_mInitLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_initAST * p = (const cPtr_initAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_initAST) ;
+    result = p->mProperty_mInitLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_initAST::getter_mInitLocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mInitLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8827,37 +8868,21 @@ GALGAS_location cPtr_initAST::getter_mEndOfInitLocation (UNUSED_LOCATION_ARGS) c
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lbigint GALGAS_initAST::getter_mPriority (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lbigint result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_initAST * p = (const cPtr_initAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_initAST) ;
-    result = p->mProperty_mPriority ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lbigint cPtr_initAST::getter_mPriority (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mPriority ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //                                          Pointer class for @initAST class                                           *
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_initAST::cPtr_initAST (const GALGAS_lstring & in_mDriverName,
+                            const GALGAS_lstringlist & in_mDriverDependanceList,
+                            const GALGAS_location & in_mInitLocation,
                             const GALGAS_instructionListAST & in_mInstructionList,
-                            const GALGAS_location & in_mEndOfInitLocation,
-                            const GALGAS_lbigint & in_mPriority
+                            const GALGAS_location & in_mEndOfInitLocation
                             COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclarationAST (THERE),
 mProperty_mDriverName (in_mDriverName),
+mProperty_mDriverDependanceList (in_mDriverDependanceList),
+mProperty_mInitLocation (in_mInitLocation),
 mProperty_mInstructionList (in_mInstructionList),
-mProperty_mEndOfInitLocation (in_mEndOfInitLocation),
-mProperty_mPriority (in_mPriority) {
+mProperty_mEndOfInitLocation (in_mEndOfInitLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8871,11 +8896,13 @@ void cPtr_initAST::description (C_String & ioString,
   ioString << "[@initAST:" ;
   mProperty_mDriverName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mProperty_mDriverDependanceList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mInitLocation.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mProperty_mInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mEndOfInitLocation.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mPriority.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -8883,7 +8910,7 @@ void cPtr_initAST::description (C_String & ioString,
 
 acPtr_class * cPtr_initAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_initAST (mProperty_mDriverName, mProperty_mInstructionList, mProperty_mEndOfInitLocation, mProperty_mPriority COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_initAST (mProperty_mDriverName, mProperty_mDriverDependanceList, mProperty_mInitLocation, mProperty_mInstructionList, mProperty_mEndOfInitLocation COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -8986,7 +9013,7 @@ static void extensionMethod_initAST_noteTypesInPrecedenceGraph (const cPtr_initA
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_initAST * object = inObject ;
   macroValidSharedObject (object, cPtr_initAST) ;
-  extensionMethod_noteInstructionListTypesInPrecedenceGraph (object->mProperty_mInstructionList, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 45)) ;
+  extensionMethod_noteInstructionListTypesInPrecedenceGraph (object->mProperty_mInstructionList, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 46)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -9018,13 +9045,13 @@ typeComparisonResult cPtr_decoratedInitRoutine::dynamicObjectCompare (const acPt
     result = mProperty_mDriverName.objectCompare (p->mProperty_mDriverName) ;
   }
   if (kOperandEqual == result) {
+    result = mProperty_mDriverDependanceList.objectCompare (p->mProperty_mDriverDependanceList) ;
+  }
+  if (kOperandEqual == result) {
     result = mProperty_mInstructionList.objectCompare (p->mProperty_mInstructionList) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mEndOfInitLocation.objectCompare (p->mProperty_mEndOfInitLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mPriority.objectCompare (p->mProperty_mPriority) ;
   }
   return result ;
 }
@@ -9058,9 +9085,9 @@ GALGAS_abstractDecoratedDeclaration () {
 
 GALGAS_decoratedInitRoutine GALGAS_decoratedInitRoutine::constructor_default (LOCATION_ARGS) {
   return GALGAS_decoratedInitRoutine::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                       GALGAS_lstringlist::constructor_emptyList (HERE),
                                                        GALGAS_instructionListAST::constructor_emptyList (HERE),
-                                                       GALGAS_location::constructor_nowhere (HERE),
-                                                       GALGAS_lbigint::constructor_default (HERE)
+                                                       GALGAS_location::constructor_nowhere (HERE)
                                                        COMMA_THERE) ;
 }
 
@@ -9074,13 +9101,13 @@ GALGAS_abstractDecoratedDeclaration (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_decoratedInitRoutine GALGAS_decoratedInitRoutine::constructor_new (const GALGAS_lstring & inAttribute_mDriverName,
+                                                                          const GALGAS_lstringlist & inAttribute_mDriverDependanceList,
                                                                           const GALGAS_instructionListAST & inAttribute_mInstructionList,
-                                                                          const GALGAS_location & inAttribute_mEndOfInitLocation,
-                                                                          const GALGAS_lbigint & inAttribute_mPriority
+                                                                          const GALGAS_location & inAttribute_mEndOfInitLocation
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_decoratedInitRoutine result ;
-  if (inAttribute_mDriverName.isValid () && inAttribute_mInstructionList.isValid () && inAttribute_mEndOfInitLocation.isValid () && inAttribute_mPriority.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_decoratedInitRoutine (inAttribute_mDriverName, inAttribute_mInstructionList, inAttribute_mEndOfInitLocation, inAttribute_mPriority COMMA_THERE)) ;
+  if (inAttribute_mDriverName.isValid () && inAttribute_mDriverDependanceList.isValid () && inAttribute_mInstructionList.isValid () && inAttribute_mEndOfInitLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_decoratedInitRoutine (inAttribute_mDriverName, inAttribute_mDriverDependanceList, inAttribute_mInstructionList, inAttribute_mEndOfInitLocation COMMA_THERE)) ;
   }
   return result ;
 }
@@ -9101,6 +9128,24 @@ GALGAS_lstring GALGAS_decoratedInitRoutine::getter_mDriverName (UNUSED_LOCATION_
 
 GALGAS_lstring cPtr_decoratedInitRoutine::getter_mDriverName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mDriverName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_decoratedInitRoutine::getter_mDriverDependanceList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_decoratedInitRoutine * p = (const cPtr_decoratedInitRoutine *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedInitRoutine) ;
+    result = p->mProperty_mDriverDependanceList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist cPtr_decoratedInitRoutine::getter_mDriverDependanceList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mDriverDependanceList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9140,37 +9185,19 @@ GALGAS_location cPtr_decoratedInitRoutine::getter_mEndOfInitLocation (UNUSED_LOC
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lbigint GALGAS_decoratedInitRoutine::getter_mPriority (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lbigint result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_decoratedInitRoutine * p = (const cPtr_decoratedInitRoutine *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_decoratedInitRoutine) ;
-    result = p->mProperty_mPriority ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lbigint cPtr_decoratedInitRoutine::getter_mPriority (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mPriority ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //                                    Pointer class for @decoratedInitRoutine class                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_decoratedInitRoutine::cPtr_decoratedInitRoutine (const GALGAS_lstring & in_mDriverName,
+                                                      const GALGAS_lstringlist & in_mDriverDependanceList,
                                                       const GALGAS_instructionListAST & in_mInstructionList,
-                                                      const GALGAS_location & in_mEndOfInitLocation,
-                                                      const GALGAS_lbigint & in_mPriority
+                                                      const GALGAS_location & in_mEndOfInitLocation
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractDecoratedDeclaration (THERE),
 mProperty_mDriverName (in_mDriverName),
+mProperty_mDriverDependanceList (in_mDriverDependanceList),
 mProperty_mInstructionList (in_mInstructionList),
-mProperty_mEndOfInitLocation (in_mEndOfInitLocation),
-mProperty_mPriority (in_mPriority) {
+mProperty_mEndOfInitLocation (in_mEndOfInitLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9184,11 +9211,11 @@ void cPtr_decoratedInitRoutine::description (C_String & ioString,
   ioString << "[@decoratedInitRoutine:" ;
   mProperty_mDriverName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mProperty_mDriverDependanceList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mProperty_mInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mEndOfInitLocation.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mPriority.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -9196,7 +9223,7 @@ void cPtr_decoratedInitRoutine::description (C_String & ioString,
 
 acPtr_class * cPtr_decoratedInitRoutine::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_decoratedInitRoutine (mProperty_mDriverName, mProperty_mInstructionList, mProperty_mEndOfInitLocation, mProperty_mPriority COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_decoratedInitRoutine (mProperty_mDriverName, mProperty_mDriverDependanceList, mProperty_mInstructionList, mProperty_mEndOfInitLocation COMMA_THERE)) ;
   return ptr ;
 }
 

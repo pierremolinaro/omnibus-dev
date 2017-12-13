@@ -91,7 +91,6 @@ struct @semanticContext {
   @unifiedTypeMap mTypeMap
   @routineMapForContext mRoutineMapForContext
   @guardMapForContext mGuardMapForContext
-  @initRoutineMap mInitRoutineMap
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
   @controlRegisterMap mControlRegisterMap

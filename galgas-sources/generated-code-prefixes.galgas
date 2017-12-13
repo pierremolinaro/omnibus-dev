@@ -54,11 +54,14 @@ func %once userModeName -> @string {
 #! Names for invocation graph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func initNameForInvocationGraph ?let @string inReceiverTypeName ?let @lbigint inPriority -> @lstring {
-  var s = "init"
-  if inReceiverTypeName != "" then
-    s += " $" + inReceiverTypeName
-  end
+func initNameForInvocationGraph ?let @string inReceiverTypeName ?let @location inLocation -> @lstring {
+  result = .new {!"init " + inReceiverTypeName !inLocation}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func setupNameForInvocationGraph ?let @string inReceiverTypeName ?let @lbigint inPriority -> @lstring {
+  var s = "setup " + inReceiverTypeName
   s += " " + inPriority.bigint
   result = .new {!s !inPriority.location}
 }
