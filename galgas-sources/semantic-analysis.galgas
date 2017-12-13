@@ -51,7 +51,7 @@ struct @semanticTemporariesStruct {
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
   @initRoutinePriorityMap mInitRoutinePriorityMap
-  @bootRoutinePriorityMap mBootRoutinePriorityMap # For checking unicity of boot routine
+  @bootRoutinePriorityMap mBootRoutinePriorityMap
   @subprogramInvocationGraph mSubprogramInvocationGraph
   @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries
 }

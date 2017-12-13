@@ -3,9 +3,11 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @bootAST : @abstractDeclarationAST {
+  @lstring mDriverName
+  @lstringlist mDriverDependanceList
+  @location mBootLocation
   @instructionListAST mInstructionList
   @location mEndOfBootLocation
-  @lbigint mBootPriority
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -16,17 +18,19 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_boot> ?!@ast ioAST !@bootAST outBoot {
+  rule <declaration_boot> ?!@ast ioAST ?let @lstring inDriverName  ?let @lstringlist inDependanceList !@bootAST outBoot {
     $boot$
-    $integer$ ?let @lbigint priority
+    let bootLocation = @location.here
     ${$
     <instructionList> !?ioAST ?let instructionList
     let endOfInit = @location.here
     $}$
     outBoot = .new {
+      !inDriverName
+      !inDependanceList
+      !bootLocation
       !instructionList
       !endOfInit
-      !priority
     }
   }
 
@@ -45,20 +49,25 @@ method @bootAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGrap
 #·······················································································································
 
 override method @bootAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
- let nodeName = @lstring.new {!"boot " + mBootPriority.bigint !mBootPriority.location}
+ let nodeName = @lstring.new {!"boot " + mDriverName !mDriverName.location}
  [!?ioGraph addNode !nodeName !self]
+ [!?ioGraph addEdge !nodeName !mDriverName]
+ for (dependanceDriverName) in mDriverDependanceList do
+   let dependanceNodeName = @lstring.new {!"boot " + dependanceDriverName !dependanceDriverName}
+   [!?ioGraph addEdge !nodeName !dependanceNodeName]
+ end
 }
 
 #·······················································································································
 
 override getter @bootAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "boot " + mBootPriority.bigint 
+  outRepresentation = "boot " + mDriverName 
 }
 
 #·······················································································································
 
 override getter @bootAST location -> @location outLocation {
-  outLocation = mBootPriority.location
+  outLocation = mBootLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -86,13 +95,15 @@ override method @bootAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Enter in invocation graph
-  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mBootPriority.bigint !mBootPriority.location}
+  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mDriverName !mDriverName}
   [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedBootRoutine.new {
+    !mDriverName
+    !mDriverDependanceList
+    !mBootLocation
     !mInstructionList
     !mEndOfBootLocation
-    !mBootPriority
   }
 }
 
@@ -107,9 +118,11 @@ map @bootRoutinePriorityMap {
 #·······················································································································
 
 class @decoratedBootRoutine : @abstractDecoratedDeclaration {
+  @lstring mDriverName
+  @lstringlist mDriverDependanceList
+  @location mBootLocation
   @instructionListAST mInstructionList
   @location mEndOfBootLocation
-  @lbigint mBootPriority
 }
 
 #·······················································································································
@@ -119,9 +132,9 @@ override method @decoratedBootRoutine semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mBootPriority.bigint string] !mBootPriority.location}]
 #---
-  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mBootPriority.bigint !mBootPriority.location}
+  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mDriverName !mDriverName.location}
+  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !routineNameForInvocationGraph]
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -147,7 +160,7 @@ override method @decoratedBootRoutine semanticAnalysis
   [!?universalMap closeOverride !mEndOfBootLocation]
 #--- Code generation
   ioIntermediateCodeStruct.mBootList +=
-    !mBootPriority.bigint
+    !mDriverName.string
     !bootAllocaList
     !instructionGenerationList
     !mEndOfBootLocation
@@ -157,13 +170,11 @@ override method @decoratedBootRoutine semanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @bootListIR {
-  @bigint mBootIndex
+list @bootListIR {
+  @string mDriverName
   @allocaList mAllocaList
   @instructionListIR mInstructionListIR
   @location mEndOfInitLocation
-}{
-  mBootIndex <
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -176,13 +187,13 @@ method @bootListIR generateCode
   ioLLVMcode += llvmTitleComment (!"Boot routines")
   ioLLVMcode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
   for boot in self do
-    ioLLVMcode += "  call void @boot." + boot.mBootIndex + " ()\n"
+    ioLLVMcode += "  call void @boot." + boot.mDriverName + " ()\n"
   end
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
   for boot in self do
     ioLLVMcode += llvmSeparatorLine () + "\n"
-    ioLLVMcode += "define internal void @boot." + boot.mBootIndex + " ()" + llvmAttributeFunction () + "{\n"
+    ioLLVMcode += "define internal void @boot." + boot.mDriverName + " ()" + llvmAttributeFunction () + "{\n"
     for (variable LLVMTypeName) in boot.mAllocaList do
       ioLLVMcode += "  " + variable + " = alloca " + LLVMTypeName + "\n"
     end

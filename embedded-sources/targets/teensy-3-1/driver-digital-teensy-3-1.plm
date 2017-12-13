@@ -63,7 +63,7 @@ driver digital > root {
   // This corresponds to AIPS slot 76 (§4.5.1)
   //··············································································
   
-  boot 50 { // See §19.2.2 page 351
+  boot { // See §19.2.2 page 351
   // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0_PACRJ
   // Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0_PACRJ
   // Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0_PACRJ
