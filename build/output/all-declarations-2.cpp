@@ -10134,29 +10134,29 @@ void extensionMethod_generateCode (const GALGAS_bootListIR inObject,
   ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Boot routines"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 183)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 183)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 184)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 184)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 184)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 184)) ;
   const GALGAS_bootListIR temp_0 = inObject ;
-  cEnumerator_bootListIR enumerator_8239 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_8239.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @boot.").add_operation (enumerator_8239.current (HERE).getter_mBootIndex (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 186)).add_operation (GALGAS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 186)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 186)) ;
-    enumerator_8239.gotoNextObject () ;
+  cEnumerator_bootListIR enumerator_8243 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_8243.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @boot.").add_operation (enumerator_8243.current (HERE).getter_mBootIndex (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 186)).add_operation (GALGAS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 186)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 186)) ;
+    enumerator_8243.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 188)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
     "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 189)) ;
   const GALGAS_bootListIR temp_1 = inObject ;
-  cEnumerator_bootListIR enumerator_8389 (temp_1, kENUMERATION_UP) ;
-  while (enumerator_8389.hasCurrentObject ()) {
+  cEnumerator_bootListIR enumerator_8393 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_8393.hasCurrentObject ()) {
     ioArgument_ioLLVMcode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 191)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 191)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 191)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot.").add_operation (enumerator_8389.current (HERE).getter_mBootIndex (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 192)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)) ;
-    cEnumerator_allocaList enumerator_8599 (enumerator_8389.current (HERE).getter_mAllocaList (HERE), kENUMERATION_UP) ;
-    while (enumerator_8599.hasCurrentObject ()) {
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_8599.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)).add_operation (enumerator_8599.current_mLLVMTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)) ;
-      enumerator_8599.gotoNextObject () ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot.").add_operation (enumerator_8393.current (HERE).getter_mBootIndex (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 192)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)) ;
+    cEnumerator_allocaList enumerator_8603 (enumerator_8393.current (HERE).getter_mAllocaList (HERE), kENUMERATION_UP) ;
+    while (enumerator_8603.hasCurrentObject ()) {
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_8603.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)).add_operation (enumerator_8603.current_mLLVMTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 194)) ;
+      enumerator_8603.gotoNextObject () ;
     }
-    extensionMethod_instructionListLLVMCode (enumerator_8389.current (HERE).getter_mInstructionListIR (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 196)) ;
+    extensionMethod_instructionListLLVMCode (enumerator_8393.current (HERE).getter_mInstructionListIR (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 196)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 197)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
       "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 198)) ;
-    enumerator_8389.gotoNextObject () ;
+    enumerator_8393.gotoNextObject () ;
   }
 }
 

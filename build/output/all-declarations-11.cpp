@@ -6002,9 +6002,86 @@ const cRegularFileWrapper gWrapperFile_42_targetTemplates (
   gWrapperFileContent_42_targetTemplates
 ) ;
 
+//--- File 'teensy-3-1/driver-root-teensy-3-1.plm'
+
+const char * gWrapperFileContent_43_targetTemplates = "\n"
+  "check target \"teensy-3-1/unprivileged\", \"teensy-3-1/privileged\"\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "driver root {\n"
+  "  boot 0 {\n"
+  "  //---------1- Inhiber le chien de garde\n"
+  "    WDOG_UNLOCK = WDOG_UNLOCK_SEQ1\n"
+  "    WDOG_UNLOCK = WDOG_UNLOCK_SEQ2\n"
+  "    WDOG_STCTRLH = 0x0010\n"
+  "  //--- Enable clocks to always-used peripherals\n"
+  "    SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2\n"
+  "    SIM_SCGC5 = 0x00043F82    // clocks active to all GPIO\n"
+  "    SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL\n"
+  "  //--- If the RTC oscillator isn't enabled, get it started early\n"
+  "    if not RTC_CR.OSCE.bool {\n"
+  "      RTC_SR = 0\n"
+  "      RTC_CR = {RTC_CR !SC16P:1 !SC4P:1 !OSCE:1}\n"
+  "    }\n"
+  "  //--- Release I/O pins hold, if we woke up from VLLS mode\n"
+  "    if PMC_REGSC.ACKISO \xE2""\x89""\xA0"" 0 {\n"
+  "      PMC_REGSC |= {PMC_REGSC !ACKISO:1}\n"
+  "    }\n"
+  "  // TODO: do this while the PLL is waiting to lock....\n"
+  "    VTOR = 0  // use vector table in flash\n"
+  "  //  // default all interrupts to medium priority level\n"
+  "  ////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);\n"
+  "  //---------2- Initialisation de la PLL\n"
+  "  // start in FEI mode\n"
+  "  //--- Enable capacitors for crystal\n"
+  "    OSC_CR = {OSC_CR !SC8P:1 !SC2P:1}\n"
+  "  //--- Enable osc, 8-32 MHz range, low power mode\n"
+  "    MCG_C2 = {MCG_C2 !RANGE0:2 !EREFS:1}\n"
+  "  //--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
+  "    MCG_C1 = {MCG_C1 !CLKS:2 !FRDIV:4}\n"
+  "  //--- Wait for crystal oscillator to begin\n"
+  "    while MCG_S.OSCINIT0 == 0 {}\n"
+  "  //--- Wait for FLL to use oscillator\n"
+  "    while MCG_S.IREFST \xE2""\x89""\xA0"" 0 {}\n"
+  "  //--- Wait for MCGOUT to use oscillator\n"
+  "    while MCG_S.CLKST \xE2""\x89""\xA0"" {MCG_S !CLKST:2} {}\n"
+  "  //--- Now we're in FBE mode\n"
+  "  //    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
+  "    MCG_C5 = {MCG_C5 !PRDIV0:3}\n"
+  "  //--- Config PLL for 96 MHz output\n"
+  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:0}\n"
+  "  //--- Wait for PLL to start using xtal as its input\n"
+  "    while MCG_S.PLLST == 0 {}\n"
+  "  //--- Wait for PLL to lock\n"
+  "    while MCG_S.LOCK0 == 0 {}\n"
+  "  //--- Now we're in PBE mode\n"
+  "  //    Config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
+  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:3}\n"
+  "  //--- Switch to PLL as clock source, FLL input = 16 MHz / 512\n"
+  "    MCG_C1 = {MCG_C1 !CLKS:0 !FRDIV:4}\n"
+  "  //--- Wait for PLL clock to be used\n"
+  "    while MCG_S.CLKST \xE2""\x89""\xA0"" {MCG_S !CLKST:3} {}\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "driver root ()\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_43_targetTemplates (
+  "driver-root-teensy-3-1.plm",
+  "plm",
+  true, // Text file
+  2547, // Text length
+  gWrapperFileContent_43_targetTemplates
+) ;
+
 //--- File 'teensy-3-1/ld-linker.txt'
 
-const char * gWrapperFileContent_43_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_44_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -6143,31 +6220,31 @@ const char * gWrapperFileContent_43_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_43_targetTemplates (
+const cRegularFileWrapper gWrapperFile_44_targetTemplates (
   "ld-linker.txt",
   "txt",
   true, // Text file
   4558, // Text length
-  gWrapperFileContent_43_targetTemplates
+  gWrapperFileContent_44_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/ll-cortex-m4.ll'
 
-const char * gWrapperFileContent_44_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_45_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_44_targetTemplates (
+const cRegularFileWrapper gWrapperFile_45_targetTemplates (
   "ll-cortex-m4.ll",
   "ll",
   true, // Text file
   110, // Text length
-  gWrapperFileContent_44_targetTemplates
+  gWrapperFileContent_45_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/plm-registers-mk20dx256.plm'
 
-const char * gWrapperFileContent_45_targetTemplates = "\n"
+const char * gWrapperFileContent_46_targetTemplates = "\n"
   "let f_cpu $uint32 = 96_000_000\n"
   "let f_bus $uint32 = 48_000_000\n"
   "let f_mem $uint32 = 24_000_000\n"
@@ -7868,83 +7945,11 @@ const char * gWrapperFileContent_45_targetTemplates = "\n"
   "//register ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//register ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_45_targetTemplates (
+const cRegularFileWrapper gWrapperFile_46_targetTemplates (
   "plm-registers-mk20dx256.plm",
   "plm",
   true, // Text file
   101344, // Text length
-  gWrapperFileContent_45_targetTemplates
-) ;
-
-//--- File 'teensy-3-1/plm-teensy-3-1-boot.plm'
-
-const char * gWrapperFileContent_46_targetTemplates = "\n"
-  "check target \"teensy-3-1/unprivileged\", \"teensy-3-1/privileged\"\n"
-  "\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
-  "\n"
-  "boot 0 {\n"
-  "//---------1- Inhiber le chien de garde\n"
-  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1\n"
-  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2\n"
-  "  WDOG_STCTRLH = 0x0010\n"
-  "//--- Enable clocks to always-used peripherals\n"
-  "  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2\n"
-  "  SIM_SCGC5 = 0x00043F82    // clocks active to all GPIO\n"
-  "  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL\n"
-  "//--- If the RTC oscillator isn't enabled, get it started early\n"
-  "  if not RTC_CR.OSCE.bool {\n"
-  "    RTC_SR = 0\n"
-  "    RTC_CR = {RTC_CR !SC16P:1 !SC4P:1 !OSCE:1}\n"
-  "  }\n"
-  "//--- Release I/O pins hold, if we woke up from VLLS mode\n"
-  "  if PMC_REGSC.ACKISO \xE2""\x89""\xA0"" 0 {\n"
-  "    PMC_REGSC |= {PMC_REGSC !ACKISO:1}\n"
-  "  }\n"
-  "// TODO: do this while the PLL is waiting to lock....\n"
-  "  VTOR = 0  // use vector table in flash\n"
-  "//  // default all interrupts to medium priority level\n"
-  "////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);\n"
-  "//---------2- Initialisation de la PLL\n"
-  "// start in FEI mode\n"
-  "//--- Enable capacitors for crystal\n"
-  "  OSC_CR = {OSC_CR !SC8P:1 !SC2P:1}\n"
-  "//--- Enable osc, 8-32 MHz range, low power mode\n"
-  "  MCG_C2 = {MCG_C2 !RANGE0:2 !EREFS:1}\n"
-  "//--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
-  "  MCG_C1 = {MCG_C1 !CLKS:2 !FRDIV:4}\n"
-  "//--- Wait for crystal oscillator to begin\n"
-  "  while MCG_S.OSCINIT0 == 0 {}\n"
-  "//--- Wait for FLL to use oscillator\n"
-  "  while MCG_S.IREFST \xE2""\x89""\xA0"" 0 {}\n"
-  "//--- Wait for MCGOUT to use oscillator\n"
-  "  while MCG_S.CLKST \xE2""\x89""\xA0"" {MCG_S !CLKST:2} {}\n"
-  "//--- Now we're in FBE mode\n"
-  "//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
-  "  MCG_C5 = {MCG_C5 !PRDIV0:3}\n"
-  "//--- Config PLL for 96 MHz output\n"
-  "  MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:0}\n"
-  "//--- Wait for PLL to start using xtal as its input\n"
-  "  while MCG_S.PLLST == 0 {}\n"
-  "//--- Wait for PLL to lock\n"
-  "  while MCG_S.LOCK0 == 0 {}\n"
-  "//--- Now we're in PBE mode\n"
-  "//    Config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
-  "  SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:3}\n"
-  "//--- Switch to PLL as clock source, FLL input = 16 MHz / 512\n"
-  "  MCG_C1 = {MCG_C1 !CLKS:0 !FRDIV:4}\n"
-  "//--- Wait for PLL clock to be used\n"
-  "  while MCG_S.CLKST \xE2""\x89""\xA0"" {MCG_S !CLKST:3} {}\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n" ;
-
-const cRegularFileWrapper gWrapperFile_46_targetTemplates (
-  "plm-teensy-3-1-boot.plm",
-  "plm",
-  true, // Text file
-  2328, // Text length
   gWrapperFileContent_46_targetTemplates
 ) ;
 
@@ -7992,27 +7997,35 @@ const char * gWrapperFileContent_47_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
-  "// By default, the 32 PORTA_PCR registers are not accessible in user mode\n"
-  "// Their adresses : 0x4004_9000 --> 0x4004_907C\n"
-  "// This corresponds to AIPS slot 73 (\xC2""\xA7""4.5.1)\n"
-  "// By default, the 32 PORTB_PCR registers are not accessible in user mode\n"
-  "// Their adresses : 0x4004_A000 --> 0x4004_A07C\n"
-  "// This corresponds to AIPS slot 74 (\xC2""\xA7""4.5.1)\n"
-  "// By default, the 32 PORTC_PCR registers are not accessible in user mode\n"
-  "// Their adresses : 0x4004_B000 --> 0x4004_B07C\n"
-  "// This corresponds to AIPS slot 75 (\xC2""\xA7""4.5.1)\n"
-  "// By default, the 32 PORTD_PCR registers are not accessible in user mode\n"
-  "// Their adresses : 0x4004_C000 --> 0x4004_C07C\n"
-  "// This corresponds to AIPS slot 76 (\xC2""\xA7""4.5.1)\n"
+  "\n"
+  "driver digital {\n"
+  "\n"
+  "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
+  "  // By default, the 32 PORTA_PCR registers are not accessible in user mode\n"
+  "  // Their adresses : 0x4004_9000 --> 0x4004_907C\n"
+  "  // This corresponds to AIPS slot 73 (\xC2""\xA7""4.5.1)\n"
+  "  // By default, the 32 PORTB_PCR registers are not accessible in user mode\n"
+  "  // Their adresses : 0x4004_A000 --> 0x4004_A07C\n"
+  "  // This corresponds to AIPS slot 74 (\xC2""\xA7""4.5.1)\n"
+  "  // By default, the 32 PORTC_PCR registers are not accessible in user mode\n"
+  "  // Their adresses : 0x4004_B000 --> 0x4004_B07C\n"
+  "  // This corresponds to AIPS slot 75 (\xC2""\xA7""4.5.1)\n"
+  "  // By default, the 32 PORTD_PCR registers are not accessible in user mode\n"
+  "  // Their adresses : 0x4004_C000 --> 0x4004_C07C\n"
+  "  // This corresponds to AIPS slot 76 (\xC2""\xA7""4.5.1)\n"
+  "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
+  "  \n"
+  "  boot 50 { // See \xC2""\xA7""19.2.2 page 351\n"
+  "  // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0_PACRJ\n"
+  "  // Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0_PACRJ\n"
+  "  // Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0_PACRJ\n"
+  "  // Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0_PACRJ\n"
+  "  // Simplification: all bits of AIPS0_PACRJ are reseted\n"
+  "    AIPS0_PACRJ = 0\n"
+  "  }\n"
+  "\n"
   "//\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "boot 50 { // See \xC2""\xA7""19.2.2 page 351\n"
-  "// Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0_PACRJ\n"
-  "// Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0_PACRJ\n"
-  "// Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0_PACRJ\n"
-  "// Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0_PACRJ\n"
-  "// Simplification: all bits of AIPS0_PACRJ are reseted\n"
-  "  AIPS0_PACRJ = 0\n"
   "}\n"
   "\n"
   "//\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
@@ -8579,7 +8592,7 @@ const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   "plm-teensy-3-1-digital-io.plm",
   "plm",
   true, // Text file
-  16183, // Text length
+  16414, // Text length
   gWrapperFileContent_47_targetTemplates
 ) ;
 
@@ -9718,7 +9731,7 @@ const char * gWrapperFileContent_59_targetTemplates = "//--- Python tool list\n"
   "//--- PLM included files\n"
   "PLM_FILES:\n"
   "  \"../plm-registers-mk20dx256.plm\",\n"
-  "  \"../plm-teensy-3-1-boot.plm\",\n"
+  "  \"../driver-root-teensy-3-1.plm\",\n"
   "  \"../plm-teensy-3-1-nvic-interrupts.plm\",\n"
   "  \"../plm-teensy-3-1-xtr.plm\",\n"
   "  \"../plm-teensy-3-1-time.plm\",\n"
@@ -9815,7 +9828,7 @@ const cRegularFileWrapper gWrapperFile_59_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4108, // Text length
+  4111, // Text length
   gWrapperFileContent_59_targetTemplates
 ) ;
 
@@ -10330,7 +10343,7 @@ const char * gWrapperFileContent_66_targetTemplates = "//--- Python tool list\n"
   "//--- PLM included files\n"
   "PLM_FILES:\n"
   "  \"../plm-registers-mk20dx256.plm\",\n"
-  "  \"../plm-teensy-3-1-boot.plm\",\n"
+  "  \"../driver-root-teensy-3-1.plm\",\n"
   "  \"../plm-teensy-3-1-nvic-interrupts.plm\",\n"
   "  \"../plm-teensy-3-1-xtr.plm\",\n"
   "  \"../plm-teensy-3-1-time.plm\",\n"
@@ -10426,7 +10439,7 @@ const cRegularFileWrapper gWrapperFile_66_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4124, // Text length
+  4127, // Text length
   gWrapperFileContent_66_targetTemplates
 ) ;
 
@@ -11960,9 +11973,199 @@ const cRegularFileWrapper gWrapperFile_80_targetTemplates (
   gWrapperFileContent_80_targetTemplates
 ) ;
 
+//--- File 'teensy-3-6/driver-root-teensy-3-6.plm'
+
+const char * gWrapperFileContent_81_targetTemplates = "\n"
+  "check target \"teensy-3-6/unprivileged\", \"teensy-3-6/privileged\"\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "// BUS FREQUENCY\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
+  "let F_BUS_MHZ =\n"
+  "  if F_CPU_MHZ == 240 {\n"
+  "    120\n"
+  "  }else if F_CPU_MHZ == 216 {\n"
+  "    108\n"
+  "  }else if F_CPU_MHZ == 192 {\n"
+  "    96\n"
+  "  }else if F_CPU_MHZ == 180 {\n"
+  "    90\n"
+  "  }else if F_CPU_MHZ == 168 {\n"
+  "    56\n"
+  "  }else if F_CPU_MHZ == 144 {\n"
+  "    72\n"
+  "  }else if F_CPU_MHZ == 120 {\n"
+  "    120\n"
+  "  }else if F_CPU_MHZ == 96 {\n"
+  "    96\n"
+  "  }else if F_CPU_MHZ == 72 {\n"
+  "    72\n"
+  "  }else if F_CPU_MHZ == 48 {\n"
+  "    48\n"
+  "  }else if F_CPU_MHZ == 24 {\n"
+  "    24\n"
+  "  }else{\n"
+  "    0 // Any value, an error is raised in \"check\" instruction above\n"
+  "  }\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
+  "driver root {\n"
+  "  boot 0 {\n"
+  "  //--------------------------------------------------- Disable watchdog timer\n"
+  "  // These two instructions are required for unlocking watchdog timer\n"
+  "    WDOG_UNLOCK = WDOG_UNLOCK_SEQ1\n"
+  "    WDOG_UNLOCK = WDOG_UNLOCK_SEQ2\n"
+  "  //--- Disable watchdog timer\n"
+  "    WDOG_STCTRLH = 0\n"
+  "    nop\n"
+  "    nop\n"
+  "  //--------------------------------------------------- Enable clocks to always-used peripherals\n"
+  "    SIM_SCGC3 = {SIM_SCGC3 !ADC1:1 !FTM2:1 !FTM3:1}\n"
+  "    SIM_SCGC5 = {SIM_SCGC5 !PORTA:1 !PORTB:1 !PORTC:1 !PORTD:1 !PORTE:1}    // clocks active to all GPIO\n"
+  "    SIM_SCGC6 = {SIM_SCGC6 !RTC:1 !FTM0:1 !FTM1:1 !ADC0:1 !FTF:1}\n"
+  "  //  SCB_CPACR = 0x00F0_0000; // Enable floating point unit\n"
+  "    LMEM_PCCCR = {LMEM_PCCCR !GO:1 !INVW1:1 !INVW0:1 !ENWRBUF:1 !ENCACHE:1} // 0x8500_0003\n"
+  "  //--- If the RTC oscillator isn't enabled, get it started early\n"
+  "    if not RTC_CR.OSCE.bool {\n"
+  "      RTC_SR = 0\n"
+  "      RTC_CR = {RTC_CR !SC16P:1 !SC4P:1 !OSCE:1}\n"
+  "    }\n"
+  "  //--- Release I/O pins hold, if we woke up from VLLS mode\n"
+  "    if PMC_REGSC.ACKISO \xE2""\x89""\xA0"" 0 {\n"
+  "      PMC_REGSC |= {PMC_REGSC !ACKISO:1}\n"
+  "    }\n"
+  "  //--- Since this is a write once register, make it visible to all F_CPU's\n"
+  "  //    so we can into other sleep modes in the future at any speed\n"
+  "    SMC_PMPROT = {SMC_PMPROT !AHSRUN:1 !AVLP:1 !ALLS:1 !AVLLS:1}\n"
+  "  // TODO: do this while the PLL is waiting to lock....\n"
+  "    SCB_VTOR = 0  // use vector table in flash\n"
+  "  //  // default all interrupts to medium priority level\n"
+  "  ////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);\n"
+  "  //---------2- Initialisation de la PLL\n"
+  "  // start in FEI mode\n"
+  "  //--- Enable capacitors for crystal\n"
+  "    OSC_CR = {OSC_CR !SC8P:1 !SC2P:1 !ERCLKEN:1}\n"
+  "  //--- Enable osc, 8-32 MHz range, low power mode\n"
+  "    MCG_C2 = {MCG_C2 !RANGE0:2 !EREFS:1}\n"
+  "  //--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
+  "    MCG_C1 = {MCG_C1 !CLKS:2 !FRDIV:4}\n"
+  "  //--- Wait for crystal oscillator to begin\n"
+  "    while MCG_S.OSCINIT0 == 0 {}\n"
+  "  //--- Wait for FLL to use oscillator\n"
+  "    while MCG_S.IREFST \xE2""\x89""\xA0"" 0 {}\n"
+  "  //--- Wait for MCGOUT to use oscillator\n"
+  "    while MCG_S.CLKST \xE2""\x89""\xA0"" {MCG_S !CLKST:2} {}\n"
+  "  //--- Now we're in FBE mode\n"
+  "  //--- If we need faster than crystal, turn on the PLL\n"
+  "    if @static F_CPU_MHZ > 120 {\n"
+  "      SMC_PMCTRL = {SMC_PMCTRL !RUNM:3} // enter HSRUN mode\n"
+  "      while SMC_PMSTAT \xE2""\x89""\xA0"" {SMC_PMSTAT !RUN:1} {}\n"
+  "    }\n"
+  "    check (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)\n"
+  "      or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24)\n"
+  "      or (F_CPU_MHZ == 72)\n"
+  "  //--- Configure CPU clock\n"
+  "    if @static F_CPU_MHZ == 240 {\n"
+  "      MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
+  "      MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:14}\n"
+  "    }else if @static F_CPU_MHZ == 216 {\n"
+  "      MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
+  "      MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:11}\n"
+  "    }else if @static F_CPU_MHZ == 192 {\n"
+  "      MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
+  "      MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:8}\n"
+  "    }else if @static F_CPU_MHZ == 180 {\n"
+  "      MCG_C5 = {MCG_C5 !PRDIV0:1}\n"
+  "      MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:29}\n"
+  "    }else if @static F_CPU_MHZ == 168 {\n"
+  "      MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
+  "      MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:5}\n"
+  "    }else if @static F_CPU_MHZ == 144 {\n"
+  "      MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
+  "      MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:2}\n"
+  "    }else if @static F_CPU_MHZ == 120 {\n"
+  "      MCG_C5 = {MCG_C5 !PRDIV0:1}\n"
+  "      MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:14}\n"
+  "    }else if @static (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24) {\n"
+  "      MCG_C5 = {MCG_C5 !PRDIV0:1}\n"
+  "      MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:8}\n"
+  "    }else if @static F_CPU_MHZ == 72 {\n"
+  "      MCG_C5 = {MCG_C5 !PRDIV0:1}\n"
+  "      MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:2}\n"
+  "    }\n"
+  "  //--- Wait for PLL to start using xtal as its input\n"
+  "    while MCG_S.PLLST == 0 {}\n"
+  "  //--- Wait for PLL to lock\n"
+  "    while MCG_S.LOCK0 == 0 {}\n"
+  "  //------------------------------------ Now we're in PBE mode : now program the clock dividers\n"
+  "    if @static F_CPU_MHZ == 240 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // Bus 120 MHz, Flash 30 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:4} // USB clock = 240 MHz / 5\n"
+  "    }else if @static F_CPU_MHZ == 216 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // bus = 108 MHz, Flash 27 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:0} // USB clock = IRC48M\n"
+  "    }else if @static F_CPU_MHZ == 192 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 96 MHz, Flash 27.4 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:3} // USB clock = 192 MHz / 4\n"
+  "    }else if @static F_CPU_MHZ == 180 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 90 MHz, Flash 25.7 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:0} // USB clock = IRC48M\n"
+  "    }else if @static F_CPU_MHZ == 168 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:2 !OUTDIV4:5} // bus = 56 MHz, Flash 28 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:6 !USBFRAC:1} // USB clock = 168 MHz * 2 / 7\n"
+  "    }else if @static F_CPU_MHZ == 144 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:4} // bus = 72 MHz, Flash 28.8 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:2} // USB clock = 144 MHz / 3\n"
+  "    }else if @static F_CPU_MHZ == 120 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:4} // bus = 120 MHz, Flash 24 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:4 !USBFRAC:1} // USB clock = 120 MHz * 2 / 5\n"
+  "    }else if @static F_CPU_MHZ == 96 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:3} // bus = 96 MHz, Flash 24 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:1} // USB clock = 96 MHz / 2\n"
+  "    }else if @static F_CPU_MHZ == 72 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:2} // bus = 72 MHz, Flash 24 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:2 !USBFRAC:1} // USB clock = 72 MHz * 2 / 3\n"
+  "    }else if @static F_CPU_MHZ == 48 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:1 !OUTDIV2:1 !OUTDIV3:1 !OUTDIV4:3} // bus = 48 MHz, Flash 24 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2\n"
+  "    }else if @static F_CPU_MHZ == 24 {\n"
+  "      SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:3 !OUTDIV2:3 !OUTDIV3:3 !OUTDIV4:3} // bus = 24 MHz, Flash 24 MHz\n"
+  "      SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2\n"
+  "    }\n"
+  "  //--- Switch to PLL as clock source\n"
+  "    MCG_C1 = {MCG_C1 !CLKS:0 !FRDIV:4}\n"
+  "  //--- Wait for PLL clock to be used\n"
+  "    while MCG_S.CLKST \xE2""\x89""\xA0"" {MCG_S !CLKST:3} {}\n"
+  "  //--- USB clock\n"
+  "    if @static (F_CPU_MHZ == 240) or (F_CPU_MHZ == 180) {\n"
+  "      SIM_SOPT2 = {SIM_SOPT2 !USBSRC:1 !PLLFLLSEL:3 !TRACECLKSEL:1 !CLKOUTSEL:6} // PLLFLLSEL:3 --> IRC48SEL\n"
+  "    }else{\n"
+  "      SIM_SOPT2 = {SIM_SOPT2 !USBSRC:1 !PLLFLLSEL:1 !TRACECLKSEL:1 !CLKOUTSEL:6}\n"
+  "    }\n"
+  "  }\n"
+  "\n"
+  "}\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
+  "driver root ()\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_81_targetTemplates (
+  "driver-root-teensy-3-6.plm",
+  "plm",
+  true, // Text file
+  7962, // Text length
+  gWrapperFileContent_81_targetTemplates
+) ;
+
 //--- File 'teensy-3-6/ld-linker.txt'
 
-const char * gWrapperFileContent_81_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_82_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -12101,31 +12304,31 @@ const char * gWrapperFileContent_81_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_81_targetTemplates (
+const cRegularFileWrapper gWrapperFile_82_targetTemplates (
   "ld-linker.txt",
   "txt",
   true, // Text file
   4560, // Text length
-  gWrapperFileContent_81_targetTemplates
+  gWrapperFileContent_82_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/ll-cortex-m4.ll'
 
-const char * gWrapperFileContent_82_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_83_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_82_targetTemplates (
+const cRegularFileWrapper gWrapperFile_83_targetTemplates (
   "ll-cortex-m4.ll",
   "ll",
   true, // Text file
   110, // Text length
-  gWrapperFileContent_82_targetTemplates
+  gWrapperFileContent_83_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/plm-registers-mk66fx1m0.plm'
 
-const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6/unprivileged\", \"teensy-3-6/privileged\"\n"
+const char * gWrapperFileContent_84_targetTemplates = "check target \"teensy-3-6/unprivileged\", \"teensy-3-6/privileged\"\n"
   "\n"
   "// chapter 11: Port control and interrupts (PORT) Pin Control Register n\n"
   "register\n"
@@ -14114,194 +14317,11 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "//register ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//register ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_83_targetTemplates (
+const cRegularFileWrapper gWrapperFile_84_targetTemplates (
   "plm-registers-mk66fx1m0.plm",
   "plm",
   true, // Text file
   99075, // Text length
-  gWrapperFileContent_83_targetTemplates
-) ;
-
-//--- File 'teensy-3-6/plm-teensy-3-6-boot.plm'
-
-const char * gWrapperFileContent_84_targetTemplates = "\n"
-  "check target \"teensy-3-6/unprivileged\", \"teensy-3-6/privileged\"\n"
-  "\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
-  "\n"
-  "boot 0 {\n"
-  "//--------------------------------------------------- Disable watchdog timer\n"
-  "// These two instructions are required for unlocking watchdog timer\n"
-  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1\n"
-  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2\n"
-  "//--- Disable watchdog timer\n"
-  "  WDOG_STCTRLH = 0\n"
-  "  nop\n"
-  "  nop\n"
-  "//--------------------------------------------------- Enable clocks to always-used peripherals\n"
-  "  SIM_SCGC3 = {SIM_SCGC3 !ADC1:1 !FTM2:1 !FTM3:1}\n"
-  "  SIM_SCGC5 = {SIM_SCGC5 !PORTA:1 !PORTB:1 !PORTC:1 !PORTD:1 !PORTE:1}    // clocks active to all GPIO\n"
-  "  SIM_SCGC6 = {SIM_SCGC6 !RTC:1 !FTM0:1 !FTM1:1 !ADC0:1 !FTF:1}\n"
-  "//  SCB_CPACR = 0x00F0_0000; // Enable floating point unit\n"
-  "  LMEM_PCCCR = {LMEM_PCCCR !GO:1 !INVW1:1 !INVW0:1 !ENWRBUF:1 !ENCACHE:1} // 0x8500_0003\n"
-  "//--- If the RTC oscillator isn't enabled, get it started early\n"
-  "  if not RTC_CR.OSCE.bool {\n"
-  "    RTC_SR = 0\n"
-  "    RTC_CR = {RTC_CR !SC16P:1 !SC4P:1 !OSCE:1}\n"
-  "  }\n"
-  "//--- Release I/O pins hold, if we woke up from VLLS mode\n"
-  "  if PMC_REGSC.ACKISO \xE2""\x89""\xA0"" 0 {\n"
-  "    PMC_REGSC |= {PMC_REGSC !ACKISO:1}\n"
-  "  }\n"
-  "//--- Since this is a write once register, make it visible to all F_CPU's\n"
-  "//    so we can into other sleep modes in the future at any speed\n"
-  "  SMC_PMPROT = {SMC_PMPROT !AHSRUN:1 !AVLP:1 !ALLS:1 !AVLLS:1}\n"
-  "// TODO: do this while the PLL is waiting to lock....\n"
-  "  SCB_VTOR = 0  // use vector table in flash\n"
-  "//  // default all interrupts to medium priority level\n"
-  "////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);\n"
-  "//---------2- Initialisation de la PLL\n"
-  "// start in FEI mode\n"
-  "//--- Enable capacitors for crystal\n"
-  "  OSC_CR = {OSC_CR !SC8P:1 !SC2P:1 !ERCLKEN:1}\n"
-  "//--- Enable osc, 8-32 MHz range, low power mode\n"
-  "  MCG_C2 = {MCG_C2 !RANGE0:2 !EREFS:1}\n"
-  "//--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
-  "  MCG_C1 = {MCG_C1 !CLKS:2 !FRDIV:4}\n"
-  "//--- Wait for crystal oscillator to begin\n"
-  "  while MCG_S.OSCINIT0 == 0 {}\n"
-  "//--- Wait for FLL to use oscillator\n"
-  "  while MCG_S.IREFST \xE2""\x89""\xA0"" 0 {}\n"
-  "//--- Wait for MCGOUT to use oscillator\n"
-  "  while MCG_S.CLKST \xE2""\x89""\xA0"" {MCG_S !CLKST:2} {}\n"
-  "//--- Now we're in FBE mode\n"
-  "//--- If we need faster than crystal, turn on the PLL\n"
-  "  if @static F_CPU_MHZ > 120 {\n"
-  "    SMC_PMCTRL = {SMC_PMCTRL !RUNM:3} // enter HSRUN mode\n"
-  "    while SMC_PMSTAT \xE2""\x89""\xA0"" {SMC_PMSTAT !RUN:1} {}\n"
-  "  }\n"
-  "  check (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)\n"
-  "    or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24)\n"
-  "    or (F_CPU_MHZ == 72)\n"
-  "//--- Configure CPU clock\n"
-  "  if @static F_CPU_MHZ == 240 {\n"
-  "    MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
-  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:14}\n"
-  "  }else if @static F_CPU_MHZ == 216 {\n"
-  "    MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
-  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:11}\n"
-  "  }else if @static F_CPU_MHZ == 192 {\n"
-  "    MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
-  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:8}\n"
-  "  }else if @static F_CPU_MHZ == 180 {\n"
-  "    MCG_C5 = {MCG_C5 !PRDIV0:1}\n"
-  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:29}\n"
-  "  }else if @static F_CPU_MHZ == 168 {\n"
-  "    MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
-  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:5}\n"
-  "  }else if @static F_CPU_MHZ == 144 {\n"
-  "    MCG_C5 = {MCG_C5 !PRDIV0:0}\n"
-  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:2}\n"
-  "  }else if @static F_CPU_MHZ == 120 {\n"
-  "    MCG_C5 = {MCG_C5 !PRDIV0:1}\n"
-  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:14}\n"
-  "  }else if @static (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24) {\n"
-  "    MCG_C5 = {MCG_C5 !PRDIV0:1}\n"
-  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:8}\n"
-  "  }else if @static F_CPU_MHZ == 72 {\n"
-  "    MCG_C5 = {MCG_C5 !PRDIV0:1}\n"
-  "    MCG_C6 = {MCG_C6 !PLLS:1 !VDIV0:2}\n"
-  "  }\n"
-  "//--- Wait for PLL to start using xtal as its input\n"
-  "  while MCG_S.PLLST == 0 {}\n"
-  "//--- Wait for PLL to lock\n"
-  "  while MCG_S.LOCK0 == 0 {}\n"
-  "//------------------------------------ Now we're in PBE mode : now program the clock dividers\n"
-  "  if @static F_CPU_MHZ == 240 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // Bus 120 MHz, Flash 30 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:4} // USB clock = 240 MHz / 5\n"
-  "  }else if @static F_CPU_MHZ == 216 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // bus = 108 MHz, Flash 27 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:0} // USB clock = IRC48M\n"
-  "  }else if @static F_CPU_MHZ == 192 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 96 MHz, Flash 27.4 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:3} // USB clock = 192 MHz / 4\n"
-  "  }else if @static F_CPU_MHZ == 180 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 90 MHz, Flash 25.7 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:0} // USB clock = IRC48M\n"
-  "  }else if @static F_CPU_MHZ == 168 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:2 !OUTDIV4:5} // bus = 56 MHz, Flash 28 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:6 !USBFRAC:1} // USB clock = 168 MHz * 2 / 7\n"
-  "  }else if @static F_CPU_MHZ == 144 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:4} // bus = 72 MHz, Flash 28.8 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:2} // USB clock = 144 MHz / 3\n"
-  "  }else if @static F_CPU_MHZ == 120 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:4} // bus = 120 MHz, Flash 24 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:4 !USBFRAC:1} // USB clock = 120 MHz * 2 / 5\n"
-  "  }else if @static F_CPU_MHZ == 96 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:3} // bus = 96 MHz, Flash 24 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:1} // USB clock = 96 MHz / 2\n"
-  "  }else if @static F_CPU_MHZ == 72 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:2} // bus = 72 MHz, Flash 24 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:2 !USBFRAC:1} // USB clock = 72 MHz * 2 / 3\n"
-  "  }else if @static F_CPU_MHZ == 48 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:1 !OUTDIV2:1 !OUTDIV3:1 !OUTDIV4:3} // bus = 48 MHz, Flash 24 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2\n"
-  "  }else if @static F_CPU_MHZ == 24 {\n"
-  "    SIM_CLKDIV1 = {SIM_CLKDIV1 !OUTDIV1:3 !OUTDIV2:3 !OUTDIV3:3 !OUTDIV4:3} // bus = 24 MHz, Flash 24 MHz\n"
-  "    SIM_CLKDIV2 = {SIM_CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2\n"
-  "  }\n"
-  "//--- Switch to PLL as clock source\n"
-  "  MCG_C1 = {MCG_C1 !CLKS:0 !FRDIV:4}\n"
-  "//--- Wait for PLL clock to be used\n"
-  "  while MCG_S.CLKST \xE2""\x89""\xA0"" {MCG_S !CLKST:3} {}\n"
-  "//--- USB clock\n"
-  "  if @static (F_CPU_MHZ == 240) or (F_CPU_MHZ == 180) {\n"
-  "    SIM_SOPT2 = {SIM_SOPT2 !USBSRC:1 !PLLFLLSEL:3 !TRACECLKSEL:1 !CLKOUTSEL:6} // PLLFLLSEL:3 --> IRC48SEL\n"
-  "  }else{\n"
-  "    SIM_SOPT2 = {SIM_SOPT2 !USBSRC:1 !PLLFLLSEL:1 !TRACECLKSEL:1 !CLKOUTSEL:6}\n"
-  "  }\n"
-  "}\n"
-  "\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
-  "// BUS FREQUENCY\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
-  "\n"
-  "let F_BUS_MHZ =\n"
-  "  if F_CPU_MHZ == 240 {\n"
-  "    120\n"
-  "  }else if F_CPU_MHZ == 216 {\n"
-  "    108\n"
-  "  }else if F_CPU_MHZ == 192 {\n"
-  "    96\n"
-  "  }else if F_CPU_MHZ == 180 {\n"
-  "    90\n"
-  "  }else if F_CPU_MHZ == 168 {\n"
-  "    56\n"
-  "  }else if F_CPU_MHZ == 144 {\n"
-  "    72\n"
-  "  }else if F_CPU_MHZ == 120 {\n"
-  "    120\n"
-  "  }else if F_CPU_MHZ == 96 {\n"
-  "    96\n"
-  "  }else if F_CPU_MHZ == 72 {\n"
-  "    72\n"
-  "  }else if F_CPU_MHZ == 48 {\n"
-  "    48\n"
-  "  }else if F_CPU_MHZ == 24 {\n"
-  "    24\n"
-  "  }else{\n"
-  "    0 // Any value, an error is raised in \"check\" instruction above\n"
-  "  }\n"
-  "\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
-  "\n" ;
-
-const cRegularFileWrapper gWrapperFile_84_targetTemplates (
-  "plm-teensy-3-6-boot.plm",
-  "plm",
-  true, // Text file
-  7541, // Text length
   gWrapperFileContent_84_targetTemplates
 ) ;
 
@@ -15488,7 +15508,7 @@ const char * gWrapperFileContent_96_targetTemplates = "//--- Python tool list\n"
   "PLM_FILES:\n"
   "  \"../plm-registers-mk66fx1m0.plm\",\n"
   "  \"../plm-teensy-3-6-nvic-interrupts.plm\",\n"
-  "  \"../plm-teensy-3-6-boot.plm\",\n"
+  "  \"../driver-root-teensy-3-6.plm\",\n"
   "  \"../plm-teensy-3-6-time.plm\",\n"
   "  \"../plm-teensy-3-6-xtr.plm\",\n"
   "  \"../driver-digital-teensy-3-6.plm\",\n"
@@ -15611,7 +15631,7 @@ const cRegularFileWrapper gWrapperFile_96_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4752, // Text length
+  4755, // Text length
   gWrapperFileContent_96_targetTemplates
 ) ;
 
@@ -16132,7 +16152,7 @@ const char * gWrapperFileContent_103_targetTemplates = "//--- Python tool list\n
   "PLM_FILES:\n"
   "  \"../plm-registers-mk66fx1m0.plm\",\n"
   "  \"../plm-teensy-3-6-nvic-interrupts.plm\",\n"
-  "  \"../plm-teensy-3-6-boot.plm\",\n"
+  "  \"../driver-root-teensy-3-6.plm\",\n"
   "  \"../plm-teensy-3-6-time.plm\",\n"
   "  \"../plm-teensy-3-6-xtr.plm\",\n"
   "  \"../driver-digital-teensy-3-6.plm\",\n"
@@ -16254,7 +16274,7 @@ const cRegularFileWrapper gWrapperFile_103_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4768, // Text length
+  4771, // Text length
   gWrapperFileContent_103_targetTemplates
 ) ;
 

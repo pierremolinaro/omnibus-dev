@@ -60,7 +60,7 @@ LL_FILES:
 //--- PLM included files
 PLM_FILES:
   "../plm-registers-mk20dx256.plm",
-  "../plm-teensy-3-1-boot.plm",
+  "../driver-root-teensy-3-1.plm",
   "../plm-teensy-3-1-nvic-interrupts.plm",
   "../plm-teensy-3-1-xtr.plm",
   "../plm-teensy-3-1-time.plm",
