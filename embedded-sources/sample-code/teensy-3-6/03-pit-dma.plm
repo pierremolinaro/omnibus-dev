@@ -73,7 +73,7 @@ newtype $patternArray : $uint32 [PATTERN_LENGTH]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-driver pit {
+driver pit > root {
   isr safe PITChannel3 {
   //--- Acquitter l'interruption
     PIT_TFLG [3] = {PIT_TFLG !TIF:1}

@@ -23,7 +23,7 @@ let LED_L0 = $digitalPort.D3
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-driver timer {
+driver timer > root {
  
   init 1 {
   //--- Power on DMA_MUX, PIT, DMA

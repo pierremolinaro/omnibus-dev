@@ -19,6 +19,7 @@ list @bootListAST {
 
 struct @driverDeclarationAST {
   @lstring mDriverName
+  @lstringlist mDriverDependanceList
   @driverPropertyListAST mDriverPropertyListAST
   @functionDeclarationListAST mDriverFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
@@ -51,6 +52,7 @@ list @driverInstanciationListAST {
 
 class @implementedDriverAST : @abstractDeclarationAST {
   @lstring mDriverName
+  @lstringlist mDriverDependanceList
   @bool mIsInstancied
 }
 
@@ -93,6 +95,17 @@ syntax extension plm_syntax {
   rule <declaration> ?!@ast ioAST {
     $driver$
     $identifier$ ?let driverName
+    @lstringlist driverDependenceList = {}
+    select
+    or
+      $>$
+      repeat
+        $identifier$ ?let dependenceName
+        driverDependenceList += !dependenceName
+      while
+        $,$
+      end       
+    end
     ${$
     @functionDeclarationListAST functionDeclarationListAST = {}
     @driverPropertyListAST driverPropertyListAST = {}
@@ -103,9 +116,15 @@ syntax extension plm_syntax {
     repeat
     while
       <declaration_boot>  !?ioAST ?let @bootAST boot
+      if [bootListAST length] != 0 then
+        error [boot mBootPriority] : "a driver supports at most one boot routine" 
+      end
       bootListAST += !boot
     while
       <declaration_init>!?ioAST !driverName ?let init
+      if [initList length] != 0 then
+        error [init mPriority] : "a driver supports at most one init routine" 
+      end
       initList += !init
     while
       <isr> !?ioAST !driverName
@@ -124,6 +143,7 @@ syntax extension plm_syntax {
   #--- Declare driver
     ioAST.mDriverDeclarationListAST += !@driverDeclarationAST.new {
       !driverName
+      !driverDependenceList
       !driverPropertyListAST
       !functionDeclarationListAST
       !svcListAST
@@ -162,6 +182,9 @@ override method @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrec
  [!?ioGraph addNode !mDriverName !self]
   let driverTypeName = llvmTypeNameFromPLMname (!llvmDriverNameFromName (!mDriverName))
  [!?ioGraph addEdge !mDriverName !driverTypeName]
+ for (driver) in mDriverDependanceList do
+   [!?ioGraph addEdge !mDriverName !driver]
+ end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -209,8 +232,20 @@ map @instanciedDriverMap {
 #·······················································································································
 
 proc retainRequiredDrivers ?!@ast ioAST {
+#--- Check at most one drive has no dependence
+  @lstringlist driverWithNoDependenceList = {}
+  for (declaration) in ioAST.mDriverDeclarationListAST do
+     if [declaration.mDriverDependanceList length] == 0 then
+       driverWithNoDependenceList += !declaration.mDriverName
+     end
+  end
+  if [driverWithNoDependenceList length] > 1 then
+    for (driverName) in driverWithNoDependenceList do
+      error driverName : "almost one driver can have no dependence"
+    end
+  end
+#--- Build instancied driver map
   @instanciedDriverMap instanciedDriverMap = {}
-  @stringset validDriverNames = {} # For checking all required drivers have been declared
   for (driverName args) in ioAST.mRequiredDriverListAST do
      @driverInstanciationArgumentMap driverInstanciationArgumentMap = {}
      for (selector expression) in args do
@@ -219,6 +254,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
     [!?instanciedDriverMap insertKey !driverName !driverInstanciationArgumentMap]
   end
 #--- Append required drivers to declaration list AST (and init list AST)
+  @stringset validDriverNames = {} # For checking all required drivers have been declared
   for (declaration) in ioAST.mDriverDeclarationListAST do
     validDriverNames += !declaration.mDriverName.string
     let driverIsInstancied = [instanciedDriverMap hasKey !declaration.mDriverName.string]
@@ -251,7 +287,11 @@ proc retainRequiredDrivers ?!@ast ioAST {
     end
   #---
     let driverTypeName = llvmDriverNameFromName (!declaration.mDriverName)
-    ioAST.mDeclarationListAST += !@implementedDriverAST.new {!declaration.mDriverName !driverIsInstancied}
+    ioAST.mDeclarationListAST += !@implementedDriverAST.new {
+      !declaration.mDriverName
+      !declaration.mDriverDependanceList
+      !driverIsInstancied
+    }
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
       !driverTypeName
       !{}
