@@ -1653,9 +1653,11 @@ class GALGAS_decoratedBootRoutine : public GALGAS_abstractDecoratedDeclaration {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_decoratedBootRoutine constructor_new (const class GALGAS_instructionListAST & inOperand0,
-                                                                     const class GALGAS_location & inOperand1,
-                                                                     const class GALGAS_lbigint & inOperand2
+  public : static class GALGAS_decoratedBootRoutine constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                     const class GALGAS_lstringlist & inOperand1,
+                                                                     const class GALGAS_location & inOperand2,
+                                                                     const class GALGAS_instructionListAST & inOperand3,
+                                                                     const class GALGAS_location & inOperand4
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1667,7 +1669,11 @@ class GALGAS_decoratedBootRoutine : public GALGAS_abstractDecoratedDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mBootPriority (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mBootLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfBootLocation (LOCATION_ARGS) const ;
 
@@ -1692,23 +1698,29 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedBootRoutin
 
 class cPtr_decoratedBootRoutine : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
+  public : GALGAS_lstring mProperty_mDriverName ;
+  public : GALGAS_lstringlist mProperty_mDriverDependanceList ;
+  public : GALGAS_location mProperty_mBootLocation ;
   public : GALGAS_instructionListAST mProperty_mInstructionList ;
   public : GALGAS_location mProperty_mEndOfBootLocation ;
-  public : GALGAS_lbigint mProperty_mBootPriority ;
 
 //--- Constructor
-  public : cPtr_decoratedBootRoutine (const GALGAS_instructionListAST & in_mInstructionList,
-                                      const GALGAS_location & in_mEndOfBootLocation,
-                                      const GALGAS_lbigint & in_mBootPriority
+  public : cPtr_decoratedBootRoutine (const GALGAS_lstring & in_mDriverName,
+                                      const GALGAS_lstringlist & in_mDriverDependanceList,
+                                      const GALGAS_location & in_mBootLocation,
+                                      const GALGAS_instructionListAST & in_mInstructionList,
+                                      const GALGAS_location & in_mEndOfBootLocation
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mBootLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfBootLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mBootPriority (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

@@ -9772,68 +9772,65 @@ GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::extractObject (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Class for element of '@bootListIR' sorted list                                    *
+//                                       Class for element of '@bootListIR' list                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cSortedListElement_bootListIR : public cSortedListElement {
+class cCollectionElement_bootListIR : public cCollectionElement {
   public : GALGAS_bootListIR_2D_element mObject ;
 
 //--- Constructor
-  public : cSortedListElement_bootListIR (const GALGAS_bigint & in_mBootIndex,
+  public : cCollectionElement_bootListIR (const GALGAS_string & in_mDriverName,
                                           const GALGAS_allocaList & in_mAllocaList,
                                           const GALGAS_instructionListIR & in_mInstructionListIR,
                                           const GALGAS_location & in_mEndOfInitLocation
                                           COMMA_LOCATION_ARGS) ;
 
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
 //--- Virtual method that checks that all attributes are valid
   public : virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cSortedListElement * copy (void) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public : virtual cCollectionElement * copy (void) ;
 
 //--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-
-//--- Virtual method that comparing element for sorting
-  public : virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
+  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cSortedListElement_bootListIR::cSortedListElement_bootListIR (const GALGAS_bigint & in_mBootIndex,
+cCollectionElement_bootListIR::cCollectionElement_bootListIR (const GALGAS_string & in_mDriverName,
                                                               const GALGAS_allocaList & in_mAllocaList,
                                                               const GALGAS_instructionListIR & in_mInstructionListIR,
                                                               const GALGAS_location & in_mEndOfInitLocation
                                                               COMMA_LOCATION_ARGS) :
-cSortedListElement (THERE),
-mObject (in_mBootIndex, in_mAllocaList, in_mInstructionListIR, in_mEndOfInitLocation) {
+cCollectionElement (THERE),
+mObject (in_mDriverName, in_mAllocaList, in_mInstructionListIR, in_mEndOfInitLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cSortedListElement_bootListIR::isValid (void) const {
+bool cCollectionElement_bootListIR::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cSortedListElement * cSortedListElement_bootListIR::copy (void) {
-  cSortedListElement * result = NULL ;
-  macroMyNew (result, cSortedListElement_bootListIR (mObject.mProperty_mBootIndex, mObject.mProperty_mAllocaList, mObject.mProperty_mInstructionListIR, mObject.mProperty_mEndOfInitLocation COMMA_HERE)) ;
+cCollectionElement * cCollectionElement_bootListIR::copy (void) {
+  cCollectionElement * result = NULL ;
+  macroMyNew (result, cCollectionElement_bootListIR (mObject.mProperty_mDriverName, mObject.mProperty_mAllocaList, mObject.mProperty_mInstructionListIR, mObject.mProperty_mEndOfInitLocation COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cSortedListElement_bootListIR::description (C_String & ioString, const int32_t inIndentation) const {
+void cCollectionElement_bootListIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mBootIndex" ":" ;
-  mObject.mProperty_mBootIndex.description (ioString, inIndentation) ;
+  ioString << "mDriverName" ":" ;
+  mObject.mProperty_mDriverName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mAllocaList" ":" ;
@@ -9850,66 +9847,75 @@ void cSortedListElement_bootListIR::description (C_String & ioString, const int3
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cSortedListElement_bootListIR::compare (const cCollectionElement * inOperand) const {
-  cSortedListElement_bootListIR * operand = (cSortedListElement_bootListIR *) inOperand ;
-  macroValidSharedObject (operand, cSortedListElement_bootListIR) ;
+typeComparisonResult cCollectionElement_bootListIR::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_bootListIR * operand = (cCollectionElement_bootListIR *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_bootListIR) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootListIR::GALGAS_bootListIR (void) :
-AC_GALGAS_sortedlist () {
+AC_GALGAS_list () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cSortedListElement_bootListIR::compareForSorting (const cSortedListElement * inOperand) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cSortedListElement_bootListIR * operand = (const cSortedListElement_bootListIR *) inOperand ;
-  macroValidSharedObject (operand, cSortedListElement_bootListIR) ;
-  if (result == kOperandEqual) {
-    result = mObject.mProperty_mBootIndex.objectCompare (operand->mObject.mProperty_mBootIndex) ;
+GALGAS_bootListIR::GALGAS_bootListIR (const capCollectionElementArray & inSharedArray) :
+AC_GALGAS_list (inSharedArray) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+  return GALGAS_bootListIR  (capCollectionElementArray ()) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::constructor_listWithValue (const GALGAS_string & inOperand0,
+                                                                const GALGAS_allocaList & inOperand1,
+                                                                const GALGAS_instructionListIR & inOperand2,
+                                                                const GALGAS_location & inOperand3
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_bootListIR result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    result = GALGAS_bootListIR (capCollectionElementArray ()) ;
+    capCollectionElement attributes ;
+    GALGAS_bootListIR::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE) ;
+    result.appendObject (attributes) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bootListIR GALGAS_bootListIR::constructor_emptySortedList (LOCATION_ARGS) {
-  GALGAS_bootListIR result ;
-  result.createNewEmptySortedList (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootListIR GALGAS_bootListIR::constructor_sortedListWithValue (const GALGAS_bigint & inOperand0,
-                                                                      const GALGAS_allocaList & inOperand1,
-                                                                      const GALGAS_instructionListIR & inOperand2,
-                                                                      const GALGAS_location & inOperand3
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_bootListIR result = constructor_emptySortedList (THERE) ;
-  cSortedListElement * p = NULL ;
-  macroMyNew (p, cSortedListElement_bootListIR (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
-  capSortedListElement attributes ;
-  attributes.setPointer (p) ;
+void GALGAS_bootListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                   const GALGAS_string & in_mDriverName,
+                                                   const GALGAS_allocaList & in_mAllocaList,
+                                                   const GALGAS_instructionListIR & in_mInstructionListIR,
+                                                   const GALGAS_location & in_mEndOfInitLocation
+                                                   COMMA_LOCATION_ARGS) {
+  cCollectionElement_bootListIR * p = NULL ;
+  macroMyNew (p, cCollectionElement_bootListIR (in_mDriverName,
+                                                in_mAllocaList,
+                                                in_mInstructionListIR,
+                                                in_mEndOfInitLocation COMMA_THERE)) ;
+  outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  result.appendObject (attributes) ;
-  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootListIR::addAssign_operation (const GALGAS_bigint & inOperand0,
+void GALGAS_bootListIR::addAssign_operation (const GALGAS_string & inOperand0,
                                              const GALGAS_allocaList & inOperand1,
                                              const GALGAS_instructionListIR & inOperand2,
                                              const GALGAS_location & inOperand3
                                              COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    cSortedListElement * p = NULL ;
-    macroMyNew (p, cSortedListElement_bootListIR (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
-    capSortedListElement attributes ;
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_bootListIR (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
     appendObject (attributes) ;
@@ -9918,113 +9924,263 @@ void GALGAS_bootListIR::addAssign_operation (const GALGAS_bigint & inOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_bootListIR::setter_insertAtIndex (const GALGAS_string inOperand0,
+                                              const GALGAS_allocaList inOperand1,
+                                              const GALGAS_instructionListIR inOperand2,
+                                              const GALGAS_location inOperand3,
+                                              const GALGAS_uint inInsertionIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_bootListIR (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::setter_removeAtIndex (GALGAS_string & outOperand0,
+                                              GALGAS_allocaList & outOperand1,
+                                              GALGAS_instructionListIR & outOperand2,
+                                              GALGAS_location & outOperand3,
+                                              const GALGAS_uint inRemoveIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  if (isValid () && inRemoveIndex.isValid ()) {
+    capCollectionElement attributes ;
+    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
+    cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+    if (NULL == p) {
+      outOperand0.drop () ;
+      outOperand1.drop () ;
+      outOperand2.drop () ;
+      outOperand3.drop () ;
+    }else{
+      macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+      outOperand0 = p->mObject.mProperty_mDriverName ;
+      outOperand1 = p->mObject.mProperty_mAllocaList ;
+      outOperand2 = p->mObject.mProperty_mInstructionListIR ;
+      outOperand3 = p->mObject.mProperty_mEndOfInitLocation ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::setter_popFirst (GALGAS_string & outOperand0,
+                                         GALGAS_allocaList & outOperand1,
+                                         GALGAS_instructionListIR & outOperand2,
+                                         GALGAS_location & outOperand3,
+                                         C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    outOperand0 = p->mObject.mProperty_mDriverName ;
+    outOperand1 = p->mObject.mProperty_mAllocaList ;
+    outOperand2 = p->mObject.mProperty_mInstructionListIR ;
+    outOperand3 = p->mObject.mProperty_mEndOfInitLocation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::setter_popLast (GALGAS_string & outOperand0,
+                                        GALGAS_allocaList & outOperand1,
+                                        GALGAS_instructionListIR & outOperand2,
+                                        GALGAS_location & outOperand3,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    outOperand0 = p->mObject.mProperty_mDriverName ;
+    outOperand1 = p->mObject.mProperty_mAllocaList ;
+    outOperand2 = p->mObject.mProperty_mInstructionListIR ;
+    outOperand3 = p->mObject.mProperty_mEndOfInitLocation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::method_first (GALGAS_string & outOperand0,
+                                      GALGAS_allocaList & outOperand1,
+                                      GALGAS_instructionListIR & outOperand2,
+                                      GALGAS_location & outOperand3,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    outOperand0 = p->mObject.mProperty_mDriverName ;
+    outOperand1 = p->mObject.mProperty_mAllocaList ;
+    outOperand2 = p->mObject.mProperty_mInstructionListIR ;
+    outOperand3 = p->mObject.mProperty_mEndOfInitLocation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::method_last (GALGAS_string & outOperand0,
+                                     GALGAS_allocaList & outOperand1,
+                                     GALGAS_instructionListIR & outOperand2,
+                                     GALGAS_location & outOperand3,
+                                     C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    outOperand0 = p->mObject.mProperty_mDriverName ;
+    outOperand1 = p->mObject.mProperty_mAllocaList ;
+    outOperand2 = p->mObject.mProperty_mInstructionListIR ;
+    outOperand3 = p->mObject.mProperty_mEndOfInitLocation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::add_operation (const GALGAS_bootListIR & inOperand,
+                                                    C_Compiler * /* inCompiler */
+                                                    COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_bootListIR result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = *this ;
+    result.appendList (inOperand) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::getter_subListWithRange (const GALGAS_range & inRange,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_bootListIR result = GALGAS_bootListIR::constructor_emptyList (THERE) ;
+  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_bootListIR result = GALGAS_bootListIR::constructor_emptyList (THERE) ;
+  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
+  GALGAS_bootListIR result = GALGAS_bootListIR::constructor_emptyList (THERE) ;
+  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_bootListIR::plusAssign_operation (const GALGAS_bootListIR inOperand,
                                               C_Compiler * /* inCompiler */
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  if (isValid ()) {
-    appendSortedList (inOperand) ;
-  }
+  appendList (inOperand) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootListIR::setter_popSmallest (GALGAS_bigint & outOperand0,
-                                            GALGAS_allocaList & outOperand1,
-                                            GALGAS_instructionListIR & outOperand2,
-                                            GALGAS_location & outOperand3,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
-  capSortedListElement attributes ;
-  removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_bootListIR * p = (cSortedListElement_bootListIR *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-    outOperand3.drop () ;
-  }else{
-    macroValidSharedObject (p, cSortedListElement_bootListIR) ;
-    outOperand0 = p->mObject.mProperty_mBootIndex ;
-    outOperand1 = p->mObject.mProperty_mAllocaList ;
-    outOperand2 = p->mObject.mProperty_mInstructionListIR ;
-    outOperand3 = p->mObject.mProperty_mEndOfInitLocation ;
+GALGAS_string GALGAS_bootListIR::getter_mDriverNameAtIndex (const GALGAS_uint & inIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  GALGAS_string result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    result = p->mObject.mProperty_mDriverName ;
   }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootListIR::setter_popGreatest (GALGAS_bigint & outOperand0,
-                                            GALGAS_allocaList & outOperand1,
-                                            GALGAS_instructionListIR & outOperand2,
-                                            GALGAS_location & outOperand3,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
-  capSortedListElement attributes ;
-  removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_bootListIR * p = (cSortedListElement_bootListIR *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-    outOperand3.drop () ;
-  }else{
-    macroValidSharedObject (p, cSortedListElement_bootListIR) ;
-    outOperand0 = p->mObject.mProperty_mBootIndex ;
-    outOperand1 = p->mObject.mProperty_mAllocaList ;
-    outOperand2 = p->mObject.mProperty_mInstructionListIR ;
-    outOperand3 = p->mObject.mProperty_mEndOfInitLocation ;
+GALGAS_allocaList GALGAS_bootListIR::getter_mAllocaListAtIndex (const GALGAS_uint & inIndex,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  GALGAS_allocaList result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    result = p->mObject.mProperty_mAllocaList ;
   }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootListIR::method_smallest (GALGAS_bigint & outOperand0,
-                                         GALGAS_allocaList & outOperand1,
-                                         GALGAS_instructionListIR & outOperand2,
-                                         GALGAS_location & outOperand3,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const {
-  capSortedListElement attributes ;
-  smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_bootListIR * p = (cSortedListElement_bootListIR *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-    outOperand3.drop () ;
-  }else{
-    macroValidSharedObject (p, cSortedListElement_bootListIR) ;
-    outOperand0 = p->mObject.mProperty_mBootIndex ;
-    outOperand1 = p->mObject.mProperty_mAllocaList ;
-    outOperand2 = p->mObject.mProperty_mInstructionListIR ;
-    outOperand3 = p->mObject.mProperty_mEndOfInitLocation ;
+GALGAS_instructionListIR GALGAS_bootListIR::getter_mInstructionListIRAtIndex (const GALGAS_uint & inIndex,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  GALGAS_instructionListIR result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    result = p->mObject.mProperty_mInstructionListIR ;
   }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootListIR::method_greatest (GALGAS_bigint & outOperand0,
-                                         GALGAS_allocaList & outOperand1,
-                                         GALGAS_instructionListIR & outOperand2,
-                                         GALGAS_location & outOperand3,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const {
-  capSortedListElement attributes ;
-  greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_bootListIR * p = (cSortedListElement_bootListIR *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-    outOperand3.drop () ;
-  }else{
-    macroValidSharedObject (p, cSortedListElement_bootListIR) ;
-    outOperand0 = p->mObject.mProperty_mBootIndex ;
-    outOperand1 = p->mObject.mProperty_mAllocaList ;
-    outOperand2 = p->mObject.mProperty_mInstructionListIR ;
-    outOperand3 = p->mObject.mProperty_mEndOfInitLocation ;
+GALGAS_location GALGAS_bootListIR::getter_mEndOfInitLocationAtIndex (const GALGAS_uint & inIndex,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  GALGAS_location result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    result = p->mObject.mProperty_mEndOfInitLocation ;
   }
+  return result ;
 }
+
+
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10037,42 +10193,44 @@ cGenericAbstractEnumerator (inOrder) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootListIR_2D_element cEnumerator_bootListIR::current (LOCATION_ARGS) const {
-  const cSortedListElement_bootListIR * p = (const cSortedListElement_bootListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_bootListIR) ;
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
   return p->mObject ;
 }
 
+
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cEnumerator_bootListIR::current_mBootIndex (LOCATION_ARGS) const {
-  const cSortedListElement_bootListIR * p = (const cSortedListElement_bootListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_bootListIR) ;
-  return p->mObject.mProperty_mBootIndex ;
+GALGAS_string cEnumerator_bootListIR::current_mDriverName (LOCATION_ARGS) const {
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+  return p->mObject.mProperty_mDriverName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList cEnumerator_bootListIR::current_mAllocaList (LOCATION_ARGS) const {
-  const cSortedListElement_bootListIR * p = (const cSortedListElement_bootListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_bootListIR) ;
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
   return p->mObject.mProperty_mAllocaList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR cEnumerator_bootListIR::current_mInstructionListIR (LOCATION_ARGS) const {
-  const cSortedListElement_bootListIR * p = (const cSortedListElement_bootListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_bootListIR) ;
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
   return p->mObject.mProperty_mInstructionListIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cEnumerator_bootListIR::current_mEndOfInitLocation (LOCATION_ARGS) const {
-  const cSortedListElement_bootListIR * p = (const cSortedListElement_bootListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_bootListIR) ;
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
   return p->mObject.mProperty_mEndOfInitLocation ;
 }
+
 
 
 
@@ -10131,32 +10289,32 @@ void extensionMethod_generateCode (const GALGAS_bootListIR inObject,
                                    GALGAS_generationAdds & ioArgument_ioGenerationAdds,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Boot routines"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 176)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 176)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 177)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 177)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 177)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Boot routines"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 187)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 187)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 188)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 188)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 188)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 188)) ;
   const GALGAS_bootListIR temp_0 = inObject ;
-  cEnumerator_bootListIR enumerator_7984 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_7984.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @boot.").add_operation (enumerator_7984.current (HERE).getter_mBootIndex (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 179)).add_operation (GALGAS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 179)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 179)) ;
-    enumerator_7984.gotoNextObject () ;
+  cEnumerator_bootListIR enumerator_8401 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_8401.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @boot.").add_operation (enumerator_8401.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 190)).add_operation (GALGAS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 190)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 190)) ;
+    enumerator_8401.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 181)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 192)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 182)) ;
+    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 193)) ;
   const GALGAS_bootListIR temp_1 = inObject ;
-  cEnumerator_bootListIR enumerator_8134 (temp_1, kENUMERATION_UP) ;
-  while (enumerator_8134.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 184)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 184)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 184)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot.").add_operation (enumerator_8134.current (HERE).getter_mBootIndex (HERE).getter_string (SOURCE_FILE ("declaration-boot.galgas", 185)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 185)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 185)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 185)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 185)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 185)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 185)) ;
-    cEnumerator_allocaList enumerator_8344 (enumerator_8134.current (HERE).getter_mAllocaList (HERE), kENUMERATION_UP) ;
-    while (enumerator_8344.hasCurrentObject ()) {
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_8344.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 187)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 187)).add_operation (enumerator_8344.current_mLLVMTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 187)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 187)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 187)) ;
-      enumerator_8344.gotoNextObject () ;
+  cEnumerator_bootListIR enumerator_8552 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_8552.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 195)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 195)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 195)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot.").add_operation (enumerator_8552.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 196)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 196)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 196)), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 196)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 196)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 196)) ;
+    cEnumerator_allocaList enumerator_8763 (enumerator_8552.current (HERE).getter_mAllocaList (HERE), kENUMERATION_UP) ;
+    while (enumerator_8763.hasCurrentObject ()) {
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_8763.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 198)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 198)).add_operation (enumerator_8763.current_mLLVMTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 198)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 198)), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 198)) ;
+      enumerator_8763.gotoNextObject () ;
     }
-    extensionMethod_instructionListLLVMCode (enumerator_8134.current (HERE).getter_mInstructionListIR (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 189)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 190)) ;
+    extensionMethod_instructionListLLVMCode (enumerator_8552.current (HERE).getter_mInstructionListIR (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-boot.galgas", 200)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 201)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-      "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 191)) ;
-    enumerator_8134.gotoNextObject () ;
+      "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-boot.galgas", 202)) ;
+    enumerator_8552.gotoNextObject () ;
   }
 }
 

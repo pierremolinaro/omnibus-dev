@@ -115,9 +115,9 @@ syntax extension plm_syntax {
     @bootListAST bootListAST = {}
     repeat
     while
-      <declaration_boot>  !?ioAST ?let @bootAST boot
+      <declaration_boot>  !?ioAST !driverName !driverDependenceList ?let @bootAST boot
       if [bootListAST length] != 0 then
-        error [boot mBootPriority] : "a driver supports at most one boot routine" 
+        error [boot mBootLocation] : "a driver supports at most one boot routine" 
       end
       bootListAST += !boot
     while
@@ -315,6 +315,15 @@ proc retainRequiredDrivers ?!@ast ioAST {
     end
     for (boot) in declaration.mDriverBootListAST do
       ioAST.mDeclarationListAST += !boot
+    end
+    if [declaration.mDriverBootListAST length] == 0 then
+      ioAST.mDeclarationListAST += !@bootAST.new {
+        !declaration.mDriverName
+        !declaration.mDriverDependanceList
+        !declaration.mDriverName.location
+        !{}
+        !declaration.mDriverName.location
+      }
     end
   end
   ioAST.mDriverDeclarationListAST = {}

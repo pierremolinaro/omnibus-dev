@@ -35,7 +35,7 @@ let F_BUS_MHZ =
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver root {
-  boot 0 {
+  boot {
   //--------------------------------------------------- Disable watchdog timer
   // These two instructions are required for unlocking watchdog timer
     WDOG_UNLOCK = WDOG_UNLOCK_SEQ1
