@@ -162,32 +162,6 @@ method @LValueAST analyzeLValue
           ?outInternalRepresentation
         )
       end
-    case register (writable registerType registerAddress * arraySize elementSize) :
-      if not writable then
-         error mIdentifier : "the control register is not writable in this context" : outInternalRepresentation
-      elsif [inMode isUserMode] || [inMode isAnyMode] then
-         error mIdentifier : "a control register is not accessible in user mode" : outInternalRepresentation
-      else
-        analyzeControlRegisterInLValueEX (
-          !self: inSelfType
-          !routineAttributes:inRoutineAttributes
-          !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-          !context: inContext
-          !mode: inMode
-          !?temporary: ioTemporaries
-          !?staticStringMap: ioGlobalLiteralStringMap
-          !?variableMap: ioUniversalMap
-          !?alloca: ioAllocaList
-          !?instructionListIR: ioInstructionGenerationList
-          !registerName: mIdentifier
-          !registerType: registerType
-          !registerAddress: registerAddress
-          !registerArraySize: arraySize
-          !elementSize: elementSize
-          !accessList: mAccessList
-          ?outInternalRepresentation
-        )
-      end
     case globalConstant (*) :
       error mIdentifier : "a global constant cannot be written" : outInternalRepresentation
     case localConstant (**) :
@@ -304,76 +278,6 @@ private proc analyzeControlRegisterInLValue
         : "only subscripting is allowed in control register assignment" : outInternalRepresentation
       end
     end
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-private proc analyzeControlRegisterInLValueEX
-  ?self:let @PLMType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?registerName:let @lstring inRegisterName
-  ?registerType:let @PLMType inRegisterType
-  ?registerAddress:let @uint inRegisterAddress
-  ?registerArraySize:let @uint inArraySize
-  ?elementSize:let @uint inElementSize
-  ?accessList:let @accessInAssignmentListAST inAccessList
-  !@LValueRepresentation outInternalRepresentation
-{
- if [inAccessList length] == 0 then # Simple access to a control register for writing
-   if inArraySize == 0 then
-     outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:inRegisterAddress}
-   else
-     error inRegisterName : "the control register is an array" : outInternalRepresentation
-   end
- elsif [inAccessList length] == 1 then # Simple access to a control register for writing
-   [inAccessList first ?let access]
-   switch access
-   case property (@lstring propertyName) :
-     error propertyName : "writing a slice of a control register is not allowed" : outInternalRepresentation
-   case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-     handleArraySubscriptNew (
-       !self: inSelfType
-       !routineAttributes:inRoutineAttributes
-       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-       !context: inContext
-       !mode: inMode
-       !?temporary: ioTemporaries
-       !?staticStringMap: ioGlobalLiteralStringMap
-       !?variableMap: ioUniversalMap
-       !?alloca: ioAllocaList
-       !indexExpression 
-       !endOfIndex
-       !arraySize:inArraySize
-       !elementType:inRegisterType
-       !? ioInstructionGenerationList
-       ?let @objectIR indexIR
-     )
-     if [indexIR isLiteralInteger] then # subscript expression is constant
-        [indexIR literalInteger ?1* ?value:let @bigint idx]
-        let addr = inRegisterAddress + idx * inElementSize
-        outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:addr}      
-     else
-       [!?ioTemporaries newTempLLVMVar ?let llvmName]
-       [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
-         !llvmName
-         !indexIR
-         !inRegisterAddress
-         !inElementSize
-       ]
-       outInternalRepresentation = .volatileIndirectReference {!type:inRegisterType !llvmName:llvmName}      
-     end
-    end
-  else
-    error inRegisterName : "only subscripting is allowed in control register assignment" : outInternalRepresentation
   end
 }
 

@@ -65,7 +65,7 @@ tr.result_line {
 <body>
 <div>
 <h1>Control Registers of %!PROJECT_NAME%</h1>
-<p>This document lists all %![[CONTROL_REGISTER_MAP count] string]% defined control registers, sorted by name.</p>
+<p>This document lists all %![CONTROL_REGISTER_COUNT string]% defined control registers, sorted by name.</p>
 <p>%
 for () in FIRST_LETTER_SET
 do %<a class="header_link" href="#%![[[key characterAtIndex!0] uint] string]%">%!key%</a>%
@@ -77,35 +77,37 @@ end
 </p>
 <table class="result">
 <tr><td class="result_title">Control Register Name</td><td class="result_title">PLM Type</td><td class="result_title">Address</td><td class="result_title">Value</td></tr>\n%
-for () in CONTROL_REGISTER_MAP do
-  %<tr class="result_line"><td>%
-  if mArraySize == 0 then
-    %<a name="%!lkey.string%">%!lkey.string%</a>%
-  else 
-    for () in arrayIndexListFor (!size:mArraySize) do
-      %<a name="%!lkey.string% [%![mValue string]%]">%!lkey.string% [%![mValue string]%]</a><br/>%
-    end
-  end
-  %</td><td class="address">$%!mType.plmTypeName%</td><td class="address">%
-  if mArraySize == 0 then
-  ![mAddress hexString]
-  else
-    for () in arrayIndexListFor (!size:mArraySize) do
-      ![mAddress + mValue * mElementArraySize hexString] + "<br/>"
-    end
-  end
-  %</td><td>%
-  if [mControlRegisterFieldList length] > 0 then
-    %<table class="fields">%
-      %<tr>%!fieldIndexColumns (!mRegisterBitCount) %</tr>%
-      %<tr>%
-      for > () in mControlRegisterFieldList do
-        %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
+for () in CONTROL_REGISTER_GROUP_MAP : group_ do
+  for () in group_mControlRegisterMap do
+    %<tr class="result_line"><td>%
+    if mArraySize == 0 then
+      %<a name="%!group_lkey.string + "." + lkey%">%!group_lkey.string + "." + lkey%</a>%
+    else 
+      for () in arrayIndexListFor (!size:mArraySize) do
+        %<a name="%!group_lkey.string + "." + lkey% [%![mValue string]%]">%!group_lkey.string + "." + lkey% [%![mValue string]%]</a><br/>%
       end
-      %</tr>%
-    %</table>%
-  end  
-%</td></tr>\n%
+    end
+    %</td><td class="address">$%!mType.plmTypeName%</td><td class="address">%
+    if mArraySize == 0 then
+    ![mAddress hexString]
+    else
+      for () in arrayIndexListFor (!size:mArraySize) do
+        ![mAddress + mValue * mElementArraySize hexString] + "<br/>"
+      end
+    end
+    %</td><td>%
+    if [mControlRegisterFieldList length] > 0 then
+      %<table class="fields">%
+        %<tr>%!fieldIndexColumns (!mRegisterBitCount) %</tr>%
+        %<tr>%
+        for > () in mControlRegisterFieldList do
+          %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
+        end
+        %</tr>%
+      %</table>%
+    end  
+  %</td></tr>\n%
+  end
 end%
 </table>
 </div>

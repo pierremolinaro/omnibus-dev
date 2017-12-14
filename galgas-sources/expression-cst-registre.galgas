@@ -16,13 +16,6 @@ class @registerConstantExpressionAST : @expressionAST {
   @registerIntegerFieldListAST mFieldValues
 }
 
-#·······················································································································
-
-class @registerConstantExpressionAST_EX : @expressionAST {
-  @lstring mRegisterName
-  @registerIntegerFieldListAST mFieldValues
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -49,22 +42,6 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    ${$
-    $identifier$ ?let registerName
-    @registerIntegerFieldListAST integerFieldValues = {}
-    repeat
-      $!selector:$ ?let registerFieldName
-      <expression> !?ioAST ?let expression
-      integerFieldValues += !registerFieldName !expression !.here
-    while
-    end
-    $}$
-    outExpression = @registerConstantExpressionAST_EX.new {!registerName !integerFieldValues}
-  }
-
-  #·····················································································································
-
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -77,25 +54,11 @@ override method @registerConstantExpressionAST addDependenceEdgeForStaticExpress
 {
 }
 
-override method @registerConstantExpressionAST_EX addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
-  ?!@semanticTypePrecedenceGraph unused ioGraph
-{
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  for (* expression *) in mFieldValues do
-    [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  end
-}
-
-override method @registerConstantExpressionAST_EX noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   for (* expression *) in mFieldValues do
@@ -128,147 +91,6 @@ override method @registerConstantExpressionAST analyzeExpression
   ]
 #--- Search Control register
   [controlRegisterMap searchKey
-    !mRegisterName
-    ?let registerType
-    ?*
-    ?let @sliceMap unused registerBitSliceMap
-    ?let @controlRegisterFieldMap registerFieldMap
-    ?let @bigint unused registerAddress
-    ?*
-    ?let registerBitCount
-    ?let unused powerOfTwoForArraySize
-    ?let unused elementArraySize
-  ]
-#------------------------------------------------------ Valuated fields
-  @bigint accumulatedFieldStaticValues = 0G
-  @operandIRList operandList = {}
-  for (fieldName expression expressionLocation) in mFieldValues do
-    if fieldName.string == "" then
-      error fieldName : "anonymous selector not allowed here" : operandList
-    else
-      [registerFieldMap searchKey
-        !fieldName
-        ?let @uint fieldBitIndex
-        ?let @uint fieldBitCount
-      ]
-    #--- Analyze expression
-      [expression analyzeExpression
-        !self:inSelfType
-        !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:voidType ()
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
-        ?result:let @objectIR expressionResultPossibleReference
-      ]
-      [!?ioInstructionGenerationList appendLoadWhenReference
-        !?ioTemporaries
-        !expressionResultPossibleReference
-        ?let expressionResult
-      ]  
-    #--- Check expression type
-      switch [expressionResult type].kind
-      case arrayType (* *) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case opaque (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case enumeration (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case structure (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case boolean, void :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case literalString :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case pointer (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case function (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case staticInteger :
-        [expressionResult literalInteger ?1* ?value:let @bigint value]
-        if value < 0G then
-          error expressionLocation: "this integer expression should be positive"
-        elsif value < (1G << fieldBitCount) then
-          accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << fieldBitIndex)
-        else
-          error expressionLocation: "expression too large (should be < " + (1G << fieldBitCount)
-        end
-      case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
-        if not unsigned then
-          error expressionLocation: "an unsigned integer expression is required here"
-        else
-          if (expressionBitCount > fieldBitCount) && not [inCurrentMode panicAllowed] then
-            error expressionLocation
-              : "operations that can generate panic are not allowed here: the expression should be an $uint" + fieldBitCount
-          end
-        #--- Generate an upper bound check
-          if (expressionBitCount > fieldBitCount) && [inCurrentMode panicAllowed] && not [option plm_options.noPanicGeneration value] then
-            [!?ioInstructionGenerationList appendUpperBoundCheck
-              !expressionResult
-              !1G << fieldBitCount
-              !panicCode:panicCodeForRegisterFieldOvf ()
-              !expressionLocation
-            ]
-          end
-        #--- Perform an bit extend to register type or a trunc
-          var partialResult = expressionResult
-          if expressionBitCount < registerBitCount then
-            getNewTempValue (!registerType !?ioTemporaries ?let extendedResult)
-            [!?ioInstructionGenerationList appendExtend !extendedResult !partialResult]
-            partialResult = extendedResult
-          elsif expressionBitCount > registerBitCount then
-            getNewTempValue (!registerType !?ioTemporaries ?let truncatedResult)
-            [!?ioInstructionGenerationList appendTrunc !truncatedResult !partialResult]
-            partialResult = truncatedResult
-          end
-        #--- Perform left shift
-          getNewTempValue (!registerType !?ioTemporaries ?let shiftedResult)
-          [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !partialResult !fieldBitIndex]
-        #---- Accumulate 
-          operandList += !shiftedResult
-        end
-      end
-    end
-  end
-#------------------------------------------------------ Result
-  outResult = .literalInteger {!type: registerType!value:accumulatedFieldStaticValues}
-  for (operand) in operandList do
-    getNewTempValue (!registerType !?ioTemporaries ?let newResult)
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !newResult
-      ![newResult type]
-      !.here
-      !outResult
-      !.ior
-      !operand
-    ] 
-    outResult = newResult
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @registerConstantExpressionAST_EX analyzeExpression
-  ?self:let @PLMType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@objectIR outResult
-{
-#--- Search variable
-  [inContext.mControlRegisterMap searchKey
     !mRegisterName
     ?let registerType
     ?*

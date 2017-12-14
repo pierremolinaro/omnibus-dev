@@ -9,169 +9,6 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression::cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression (const GALGAS_expressionAST & inAssociatedValue0
-                                                                                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression::description (C_String & ioString,
-                                                                                               const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression * ptr = dynamic_cast<const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_structurePropertyInitOptionalExpressionAST::GALGAS_structurePropertyInitOptionalExpressionAST (void) :
-mAssociatedValues (),
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyInitOptionalExpressionAST::constructor_expression (const GALGAS_expressionAST & inAssociatedValue0
-                                                                                                                             COMMA_LOCATION_ARGS) {
-  GALGAS_structurePropertyInitOptionalExpressionAST result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_expression ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyInitOptionalExpressionAST::constructor_noExpression (UNUSED_LOCATION_ARGS) {
-  GALGAS_structurePropertyInitOptionalExpressionAST result ;
-  result.mEnum = kEnum_noExpression ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_structurePropertyInitOptionalExpressionAST::method_expression (GALGAS_expressionAST & outAssociatedValue0,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_expression) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @structurePropertyInitOptionalExpressionAST expression invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression * ptr = (const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_structurePropertyInitOptionalExpressionAST [3] = {
-  "(not built)",
-  "expression",
-  "noExpression"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_structurePropertyInitOptionalExpressionAST::getter_isExpression (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_expression == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_structurePropertyInitOptionalExpressionAST::getter_isNoExpression (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_noExpression == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_structurePropertyInitOptionalExpressionAST::description (C_String & ioString,
-                                                                     const int32_t inIndentation) const {
-  ioString << "<enum @structurePropertyInitOptionalExpressionAST: " << gEnumNameArrayFor_structurePropertyInitOptionalExpressionAST [mEnum] ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_structurePropertyInitOptionalExpressionAST::objectCompare (const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  @structurePropertyInitOptionalExpressionAST type                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_structurePropertyInitOptionalExpressionAST ("structurePropertyInitOptionalExpressionAST",
-                                                                   NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_structurePropertyInitOptionalExpressionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_structurePropertyInitOptionalExpressionAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_structurePropertyInitOptionalExpressionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_structurePropertyInitOptionalExpressionAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyInitOptionalExpressionAST::extractObject (const GALGAS_object & inObject,
-                                                                                                                    C_Compiler * inCompiler
-                                                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_structurePropertyInitOptionalExpressionAST result ;
-  const GALGAS_structurePropertyInitOptionalExpressionAST * p = (const GALGAS_structurePropertyInitOptionalExpressionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_structurePropertyInitOptionalExpressionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("structurePropertyInitOptionalExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Class for element of '@propertyList' list                                      *
 //                                                                                                                     *
@@ -3687,366 +3524,6 @@ GALGAS_controlRegisterNameListAST GALGAS_controlRegisterNameListAST::extractObje
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Class for element of '@controlRegisterBitSliceList' list                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cCollectionElement_controlRegisterBitSliceList : public cCollectionElement {
-  public : GALGAS_controlRegisterBitSliceList_2D_element mObject ;
-
-//--- Constructor
-  public : cCollectionElement_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
-
-//--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cCollectionElement_controlRegisterBitSliceList::cCollectionElement_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
-                                                                                                COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (in_mRegisterBitSlice) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cCollectionElement_controlRegisterBitSliceList::isValid (void) const {
-  return mObject.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cCollectionElement * cCollectionElement_controlRegisterBitSliceList::copy (void) {
-  cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_controlRegisterBitSliceList (mObject.mProperty_mRegisterBitSlice COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cCollectionElement_controlRegisterBitSliceList::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mRegisterBitSlice" ":" ;
-  mObject.mProperty_mRegisterBitSlice.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cCollectionElement_controlRegisterBitSliceList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_controlRegisterBitSliceList * operand = (cCollectionElement_controlRegisterBitSliceList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_controlRegisterBitSliceList) ;
-  return mObject.objectCompare (operand->mObject) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList::GALGAS_controlRegisterBitSliceList (void) :
-AC_GALGAS_list () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList::GALGAS_controlRegisterBitSliceList (const capCollectionElementArray & inSharedArray) :
-AC_GALGAS_list (inSharedArray) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_controlRegisterBitSliceList  (capCollectionElementArray ()) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::constructor_listWithValue (const GALGAS_controlRegisterBitSlice & inOperand0
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_controlRegisterBitSliceList result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_controlRegisterBitSliceList (capCollectionElementArray ()) ;
-    capCollectionElement attributes ;
-    GALGAS_controlRegisterBitSliceList::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
-    result.appendObject (attributes) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterBitSliceList::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                                    const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
-                                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement_controlRegisterBitSliceList * p = NULL ;
-  macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (in_mRegisterBitSlice COMMA_THERE)) ;
-  outAttributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterBitSliceList::addAssign_operation (const GALGAS_controlRegisterBitSlice & inOperand0
-                                                              COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (inOperand0 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    appendObject (attributes) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterBitSliceList::setter_insertAtIndex (const GALGAS_controlRegisterBitSlice inOperand0,
-                                                               const GALGAS_uint inInsertionIndex,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (inOperand0 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterBitSliceList::setter_removeAtIndex (GALGAS_controlRegisterBitSlice & outOperand0,
-                                                               const GALGAS_uint inRemoveIndex,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) {
-  if (isValid () && inRemoveIndex.isValid ()) {
-    capCollectionElement attributes ;
-    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-    if (NULL == p) {
-      outOperand0.drop () ;
-    }else{
-      macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
-      outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterBitSliceList::setter_popFirst (GALGAS_controlRegisterBitSlice & outOperand0,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
-    outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterBitSliceList::setter_popLast (GALGAS_controlRegisterBitSlice & outOperand0,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
-    outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterBitSliceList::method_first (GALGAS_controlRegisterBitSlice & outOperand0,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
-    outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterBitSliceList::method_last (GALGAS_controlRegisterBitSlice & outOperand0,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
-    outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::add_operation (const GALGAS_controlRegisterBitSliceList & inOperand,
-                                                                                      C_Compiler * /* inCompiler */
-                                                                                      COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_controlRegisterBitSliceList result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                                                C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) const {
-  GALGAS_controlRegisterBitSliceList result = GALGAS_controlRegisterBitSliceList::constructor_emptyList (THERE) ;
-  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                                                C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) const {
-  GALGAS_controlRegisterBitSliceList result = GALGAS_controlRegisterBitSliceList::constructor_emptyList (THERE) ;
-  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) const {
-  GALGAS_controlRegisterBitSliceList result = GALGAS_controlRegisterBitSliceList::constructor_emptyList (THERE) ;
-  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterBitSliceList::plusAssign_operation (const GALGAS_controlRegisterBitSliceList inOperand,
-                                                               C_Compiler * /* inCompiler */
-                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  appendList (inOperand) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSliceList::getter_mRegisterBitSliceAtIndex (const GALGAS_uint & inIndex,
-                                                                                                    C_Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-  GALGAS_controlRegisterBitSlice result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
-    result = p->mObject.mProperty_mRegisterBitSlice ;
-  }
-  return result ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_controlRegisterBitSliceList::cEnumerator_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSliceList & inEnumeratedObject,
-                                                                                  const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList_2D_element cEnumerator_controlRegisterBitSliceList::current (LOCATION_ARGS) const {
-  const cCollectionElement_controlRegisterBitSliceList * p = (const cCollectionElement_controlRegisterBitSliceList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
-  return p->mObject ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSlice cEnumerator_controlRegisterBitSliceList::current_mRegisterBitSlice (LOCATION_ARGS) const {
-  const cCollectionElement_controlRegisterBitSliceList * p = (const cCollectionElement_controlRegisterBitSliceList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
-  return p->mObject.mProperty_mRegisterBitSlice ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @controlRegisterBitSliceList type                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_controlRegisterBitSliceList ("controlRegisterBitSliceList",
-                                                    NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_controlRegisterBitSliceList::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterBitSliceList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_controlRegisterBitSliceList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_controlRegisterBitSliceList (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_controlRegisterBitSliceList result ;
-  const GALGAS_controlRegisterBitSliceList * p = (const GALGAS_controlRegisterBitSliceList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterBitSliceList *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterBitSliceList", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                             Class for element of '@controlRegisterDeclarationList' list                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4547,6 +4024,366 @@ GALGAS_controlRegisterDeclarationList GALGAS_controlRegisterDeclarationList::ext
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterDeclarationList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Class for element of '@controlRegisterBitSliceList' list                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cCollectionElement_controlRegisterBitSliceList : public cCollectionElement {
+  public : GALGAS_controlRegisterBitSliceList_2D_element mObject ;
+
+//--- Constructor
+  public : cCollectionElement_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cCollectionElement * copy (void) ;
+
+//--- Description
+  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement_controlRegisterBitSliceList::cCollectionElement_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
+                                                                                                COMMA_LOCATION_ARGS) :
+cCollectionElement (THERE),
+mObject (in_mRegisterBitSlice) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cCollectionElement_controlRegisterBitSliceList::isValid (void) const {
+  return mObject.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement * cCollectionElement_controlRegisterBitSliceList::copy (void) {
+  cCollectionElement * result = NULL ;
+  macroMyNew (result, cCollectionElement_controlRegisterBitSliceList (mObject.mProperty_mRegisterBitSlice COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cCollectionElement_controlRegisterBitSliceList::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mRegisterBitSlice" ":" ;
+  mObject.mProperty_mRegisterBitSlice.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cCollectionElement_controlRegisterBitSliceList::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_controlRegisterBitSliceList * operand = (cCollectionElement_controlRegisterBitSliceList *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_controlRegisterBitSliceList) ;
+  return mObject.objectCompare (operand->mObject) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList::GALGAS_controlRegisterBitSliceList (void) :
+AC_GALGAS_list () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList::GALGAS_controlRegisterBitSliceList (const capCollectionElementArray & inSharedArray) :
+AC_GALGAS_list (inSharedArray) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+  return GALGAS_controlRegisterBitSliceList  (capCollectionElementArray ()) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::constructor_listWithValue (const GALGAS_controlRegisterBitSlice & inOperand0
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSliceList result ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_controlRegisterBitSliceList (capCollectionElementArray ()) ;
+    capCollectionElement attributes ;
+    GALGAS_controlRegisterBitSliceList::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
+    result.appendObject (attributes) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                                    const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
+                                                                    COMMA_LOCATION_ARGS) {
+  cCollectionElement_controlRegisterBitSliceList * p = NULL ;
+  macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (in_mRegisterBitSlice COMMA_THERE)) ;
+  outAttributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList::addAssign_operation (const GALGAS_controlRegisterBitSlice & inOperand0
+                                                              COMMA_LOCATION_ARGS) {
+  if (isValid () && inOperand0.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (inOperand0 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    appendObject (attributes) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList::setter_insertAtIndex (const GALGAS_controlRegisterBitSlice inOperand0,
+                                                               const GALGAS_uint inInsertionIndex,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (inOperand0 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList::setter_removeAtIndex (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                               const GALGAS_uint inRemoveIndex,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
+  if (isValid () && inRemoveIndex.isValid ()) {
+    capCollectionElement attributes ;
+    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
+    cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
+    if (NULL == p) {
+      outOperand0.drop () ;
+    }else{
+      macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
+      outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList::setter_popFirst (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
+    outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList::setter_popLast (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
+    outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList::method_first (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
+    outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList::method_last (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
+    outOperand0 = p->mObject.mProperty_mRegisterBitSlice ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::add_operation (const GALGAS_controlRegisterBitSliceList & inOperand,
+                                                                                      C_Compiler * /* inCompiler */
+                                                                                      COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_controlRegisterBitSliceList result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = *this ;
+    result.appendList (inOperand) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) const {
+  GALGAS_controlRegisterBitSliceList result = GALGAS_controlRegisterBitSliceList::constructor_emptyList (THERE) ;
+  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) const {
+  GALGAS_controlRegisterBitSliceList result = GALGAS_controlRegisterBitSliceList::constructor_emptyList (THERE) ;
+  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_controlRegisterBitSliceList result = GALGAS_controlRegisterBitSliceList::constructor_emptyList (THERE) ;
+  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterBitSliceList::plusAssign_operation (const GALGAS_controlRegisterBitSliceList inOperand,
+                                                               C_Compiler * /* inCompiler */
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  appendList (inOperand) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSliceList::getter_mRegisterBitSliceAtIndex (const GALGAS_uint & inIndex,
+                                                                                                    C_Compiler * inCompiler
+                                                                                                    COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
+  GALGAS_controlRegisterBitSlice result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
+    result = p->mObject.mProperty_mRegisterBitSlice ;
+  }
+  return result ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_controlRegisterBitSliceList::cEnumerator_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSliceList & inEnumeratedObject,
+                                                                                  const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList_2D_element cEnumerator_controlRegisterBitSliceList::current (LOCATION_ARGS) const {
+  const cCollectionElement_controlRegisterBitSliceList * p = (const cCollectionElement_controlRegisterBitSliceList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
+  return p->mObject ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSlice cEnumerator_controlRegisterBitSliceList::current_mRegisterBitSlice (LOCATION_ARGS) const {
+  const cCollectionElement_controlRegisterBitSliceList * p = (const cCollectionElement_controlRegisterBitSliceList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
+  return p->mObject.mProperty_mRegisterBitSlice ;
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @controlRegisterBitSliceList type                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_controlRegisterBitSliceList ("controlRegisterBitSliceList",
+                                                    NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_controlRegisterBitSliceList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterBitSliceList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_controlRegisterBitSliceList::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_controlRegisterBitSliceList (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::extractObject (const GALGAS_object & inObject,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSliceList result ;
+  const GALGAS_controlRegisterBitSliceList * p = (const GALGAS_controlRegisterBitSliceList *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_controlRegisterBitSliceList *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterBitSliceList", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

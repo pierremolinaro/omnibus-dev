@@ -22,15 +22,6 @@ list @controlRegisterNameListAST {
 
 #·······················································································································
 
-class @controlRegisterDeclarationAST  : @abstractDeclarationAST {
-  @controlRegisterNameListAST mRegisterArrayList
-  @lstring mRegisterTypeName
-  @controlRegisterBitSliceList mRegisterBitSliceList
-  @location mRegisterBitSliceListLocation
-}
-
-#·······················································································································
-
 list @controlRegisterDeclarationList {
   @controlRegisterNameListAST mRegisterArrayList
   @lstring mRegisterTypeName
@@ -110,50 +101,6 @@ syntax extension plm_syntax {
     end
     ioAST.mDeclarationListAST += !@controlRegisterGroupDeclarationAST.new {!registerGroupName !controlRegisterDeclarationList}
     $}$
-  }
-
-  #·····················································································································
-
-  rule <declaration> ?!@ast ioAST {
-    $register$
-    @controlRegisterNameListAST registerDeclarationList = {}
-    repeat
-      <registerDeclaration> !?ioAST !?registerDeclarationList
-    while
-    end
-    $\$type$ ?let registerTypeName
-    @controlRegisterBitSliceList registerBitSliceList = {}
-    select
-    or
-      ${$
-      repeat
-        @controlRegisterBitSlice registerBitSlice
-        select
-          $integer$ ?let @lbigint unusedBitCount
-          registerBitSlice = .unusedBits {!count:unusedBitCount}
-        or
-          $identifier$ ?let bitName
-          select
-            registerBitSlice = .namedBit {!name:bitName !count:.new{!1G !.here}}
-          or
-            $[$
-            $integer$ ?let @lbigint bitCount
-            $]$
-            registerBitSlice = .namedBit {!name:bitName !count:bitCount}
-          end
-        end
-        registerBitSliceList += !registerBitSlice
-      while
-        $,$
-      end
-      $}$
-    end
-    ioAST.mDeclarationListAST += !@controlRegisterDeclarationAST.new {
-      !registerDeclarationList
-      !registerTypeName
-      !registerBitSliceList
-      !.here
-    }
   }
 
   #·····················································································································
@@ -314,60 +261,6 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
       end
     end
   end
-}
-
-#·······················································································································
-#·······················································································································
-
-method @controlRegisterDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let typeName = llvmTypeNameFromPLMname (!mRegisterTypeName)
-  [!?ioGraph noteNode !typeName]
-}
-
-#·······················································································································
-
-override method @controlRegisterDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let nodeName = [mRegisterArrayList mRegisterNameAtIndex !0]
-#--- Add node
-  [!?ioGraph addNode !nodeName !self]
-#--- Add dependency from type name
-  let typeName = llvmTypeNameFromPLMname (!mRegisterTypeName)
-  [!?ioGraph addEdge !nodeName !typeName]
-#--- Add dependency from config node
-  let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !nodeName.location}
-  [!?ioGraph addEdge !nodeName !rootNode]
-#--- Add dependency from source expression
-  for register in mRegisterArrayList do
-    switch register.mControlRegisterKind
-    case scalar :
-    case registerArray (@expressionAST arraySize * @expressionAST arrayElementSize *) :
-      [arraySize addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
-      [arrayElementSize addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
-    end
-  end
-}
-
-#·······················································································································
-
-override getter @controlRegisterDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  let nodeName = [mRegisterArrayList mRegisterNameAtIndex !0]
-  outRepresentation = "control register " + nodeName
-}
-
-#·······················································································································
-
-override getter @controlRegisterDeclarationAST location -> @location {
-  result = mRegisterTypeName
-}
-
-#·······················································································································
-
-override method @controlRegisterDeclarationAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -620,180 +513,45 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   [!?ioContext.mValuedObjectMap insertRegisterGroup !mRegisterGroupName !controlRegisterMap]
 }
 
-#·······················································································································
-
-override method @controlRegisterDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-{
-  controlRegisterType (!mRegisterTypeName !?context:ioContext ?type:var registerType ?bitCount:let registerBitCount)
-#--- Build bit slice map
-  buildControlRegisterSliceMap (
-    !mRegisterBitSliceList
-    !mRegisterBitSliceListLocation
-    !?context:ioContext
-    !?type:registerType
-    !bitCount:registerBitCount
-    ?let registerFieldMap
-    ?let registerBitSliceMap
-    ?let controlRegisterFieldList  # Used for HTML file
-  )
-#---  
-  let @bigint maxRegisterAddress = (1G << ioContext.mPointerSize) - 1G
-  for register in mRegisterArrayList do
-  #--- Analyze attributes
-    var isReadOnly = false
-    for (att) in register.mAttributeList do
-      if att.string == "ro" then
-        if isReadOnly then
-          error att : "duplicated attribute"
-        else
-          isReadOnly = true
-        end
-      else
-        error att : "only @ro (read only) attributes is accepted here"
-      end
-    end
-  #--- Analyse register address expression
-    [register.mRegisterAddress analyzeStaticExpression
-      !errorLocation:register.mRegisterAddressLocation
-      !context:ioContext
-      !?staticStringMap:ioGlobalLiteralStringMap
-      ?result:let @objectIR addressExpressionResult
-    ]
-    @bigint registerAddress
-    if not [addressExpressionResult isLiteralInteger] then
-      error register.mRegisterAddressLocation
-        : "control register address is not a static integer expression"
-        : registerAddress
-    else
-      [addressExpressionResult literalInteger ?1* ?value:registerAddress]
-   #--- Check address value
-      if registerAddress > maxRegisterAddress then
-        error register.mRegisterAddressLocation
-         : "register address should be lower or equal to " + [maxRegisterAddress hexString]
-      end
-    end
-    @bigint arraySize
-    @uint elementArraySize
-    switch register.mControlRegisterKind
-    case scalar :
-      arraySize = 0G
-      elementArraySize = 0
-    case registerArray (@expressionAST arraySizeExpression @location arraySizeLocation
-                        @expressionAST arrayElementSizeExpression @location arrayElementSizeLocation) :
-    #--- Analyse register array size expression
-      @semanticTemporariesStruct temporaries = .default
-      @instructionListIR instructionGenerationList = {}
-      @allocaList allocaList = {}
-      [arraySizeExpression analyzeExpression
-        !self:voidType ()
-        !routineAttributes:.none
-        !routineNameForInvocationGraph:["compiler" nowhere]
-        !optionalTargetType:voidType ()
-        !context:ioContext
-        !mode:.bootMode
-        !?temporary:temporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioContext.mValuedObjectMap # universalMap
-        !?alloca:allocaList
-        !?instructionListIR:instructionGenerationList
-        ?result:@objectIR sizeExpressionResult
-      ]
-      if not [sizeExpressionResult isLiteralInteger] then
-        error arraySizeLocation : "control register address is not a static integer expression" : arraySize
-      else
-        [sizeExpressionResult literalInteger ?1* ?value:arraySize]
-        if arraySize < 2G then
-          error arraySizeLocation
-            : "control register array size should be a static integer expression >= 2, equal to a power of 2"
-            : arraySize
-        else
-          let powerOfTwoForArraySize = [arraySize - 1G bitCountForUnsignedRepresentation]
-          if arraySize != (1G << powerOfTwoForArraySize) then
-            error arraySizeLocation
-              : "control register array size should be a static integer expression >= 2, equal to a power of 2"
-              : arraySize
-          end
-        end
-      end
-    #--- Analyse element array size expression
-      [arrayElementSizeExpression analyzeStaticExpression
-        !errorLocation:arrayElementSizeLocation
-        !context:ioContext
-        !?staticStringMap:ioGlobalLiteralStringMap
-        ?result:let @objectIR elementArraySizeExpressionResult
-      ]
-      if not [elementArraySizeExpressionResult isLiteralInteger] then
-        error arrayElementSizeLocation
-          : "element size is not a static integer expression"
-          : elementArraySize
-      else
-        [elementArraySizeExpressionResult literalInteger ?1* ?value:let elementArraySizeAsBigInt]
-        elementArraySize = [elementArraySizeAsBigInt uint]
-      end
-    end
-    [!?ioContext.mControlRegisterMap insertKey
-      !register.mRegisterName
-      !registerType
-      !isReadOnly
-      !registerBitSliceMap
-      !registerFieldMap
-      !registerAddress
-      !controlRegisterFieldList
-      !registerBitCount
-      ![arraySize uint]
-      !elementArraySize
-    ]
-    [!?ioContext.mValuedObjectMap insertRegister
-      !register.mRegisterName
-      !writable:not isReadOnly
-      !type:registerType
-      !address:registerAddress 
-      !sliceMap:registerBitSliceMap
-      !arraySize:[arraySize uint] # 0 if not an array
-      !elementSize:elementArraySize # 0 if not an array
-    ]
-  end
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  BUILD HTML FILE                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildControlRegisterMapHTMLFile
-  ?let @controlRegisterMap inControlRegisterMap
+  ?let @controlRegisterGroupMap inControlRegisterGroupMap
   ?sourceFile:let @lstring inSourceFile
 {
 #------------------------------------ Build an HTML file that contains all declared constants
   let @string typeDumpFilePath = inSourceFile.string + ".control-registers.html"
   if [option plm_options.writeControlRegisterHTMLDumpFile value] then
     @stringset firstLetterSet = {}
-    for () in inControlRegisterMap do
+    for () in inControlRegisterGroupMap do
       firstLetterSet += ![[lkey.string characterAtIndex!0] string]
     end
     @string tableOfTypeString = ""
     @char currentFirstLetter = ' '
-    for () type_ in inControlRegisterMap do
-      if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
-        currentFirstLetter = [type_lkey.string characterAtIndex !0]
-        tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
-      end
-      if type_mArraySize == 0 then
-        tableOfTypeString += linkForControlRegister (!type_lkey.string) + "<br>"
-      else
-        for i in 0 ..< type_mArraySize do
-          tableOfTypeString += linkForControlRegister (!type_lkey.string + " [" + i + "]") + "<br/>"
+    @uint controlRegisterCount = 0
+    for () group_ in inControlRegisterGroupMap do
+      controlRegisterCount = controlRegisterCount + [group_mControlRegisterMap count]
+      for () type_ in group_mControlRegisterMap do
+        let registerName = group_lkey.string + "." + type_lkey
+        if currentFirstLetter != [registerName characterAtIndex !0] then
+          currentFirstLetter = [registerName characterAtIndex !0]
+          tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
+        end
+        if type_mArraySize == 0 then
+          tableOfTypeString += linkForControlRegister (!registerName) + "<br>"
+        else
+          for i in 0 ..< type_mArraySize do
+            tableOfTypeString += linkForControlRegister (!registerName + " [" + i + "]") + "<br/>"
+          end
         end
       end
     end
     let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dump
       ![inSourceFile lastPathComponent]
-      !inControlRegisterMap
+      !controlRegisterCount
+      !inControlRegisterGroupMap
       !firstLetterSet
       !tableOfTypeString
     ]
@@ -810,7 +568,8 @@ filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" 
 }{
   template dump "controlRegisterDump.html.galgasTemplate"
     ?@string PROJECT_NAME
-    ?@controlRegisterMap CONTROL_REGISTER_MAP
+    ?@uint CONTROL_REGISTER_COUNT
+    ?@controlRegisterGroupMap CONTROL_REGISTER_GROUP_MAP
     ?@stringset FIRST_LETTER_SET
     ?@string TABLE_OF_TYPES_STRING
 }

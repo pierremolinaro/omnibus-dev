@@ -322,32 +322,6 @@ void routine_analyzeControlRegisterInLValue (const class GALGAS_PLMType constinA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Routine 'analyzeControlRegisterInLValueEX'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeControlRegisterInLValueEX (const class GALGAS_PLMType constinArgument0,
-                                               const class GALGAS_routineAttributes constinArgument1,
-                                               const class GALGAS_lstring constinArgument2,
-                                               const class GALGAS_semanticContext constinArgument3,
-                                               const class GALGAS_mode constinArgument4,
-                                               class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                               class GALGAS_staticStringMap & ioArgument6,
-                                               class GALGAS_universalValuedObjectMap & ioArgument7,
-                                               class GALGAS_allocaList & ioArgument8,
-                                               class GALGAS_instructionListIR & ioArgument9,
-                                               const class GALGAS_lstring constinArgument10,
-                                               const class GALGAS_PLMType constinArgument11,
-                                               const class GALGAS_uint constinArgument12,
-                                               const class GALGAS_uint constinArgument13,
-                                               const class GALGAS_uint constinArgument14,
-                                               const class GALGAS_accessInAssignmentListAST constinArgument15,
-                                               class GALGAS_LValueRepresentation & outArgument16,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Routine 'analyzeSelfAssignmentTarget'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -431,23 +405,6 @@ void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObj
                                    const class GALGAS_PLMType constin_inDriverType,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Extension setter '@universalValuedObjectMap insertRegister'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_insertRegister (class GALGAS_universalValuedObjectMap & ioObject,
-                                     const class GALGAS_lstring constin_inRegisterName,
-                                     const class GALGAS_bool constin_inWritable,
-                                     const class GALGAS_PLMType constin_inType,
-                                     const class GALGAS_bigint constin_inAddress,
-                                     const class GALGAS_sliceMap constin_inSliceMap,
-                                     const class GALGAS_uint constin_inArraySize,
-                                     const class GALGAS_uint constin_inElementSize,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
