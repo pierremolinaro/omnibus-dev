@@ -339,14 +339,37 @@ void routine_analyzeControlRegisterInLValue (const class GALGAS_PLMType constinA
                                              class GALGAS_allocaList & ioArgument8,
                                              class GALGAS_instructionListIR & ioArgument9,
                                              const class GALGAS_lstring constinArgument10,
-                                             const class GALGAS_PLMType constinArgument11,
-                                             const class GALGAS_uint constinArgument12,
-                                             const class GALGAS_uint constinArgument13,
-                                             const class GALGAS_uint constinArgument14,
-                                             const class GALGAS_accessInAssignmentListAST constinArgument15,
-                                             class GALGAS_LValueRepresentation & outArgument16,
+                                             const class GALGAS_controlRegisterMap constinArgument11,
+                                             const class GALGAS_accessInAssignmentListAST constinArgument12,
+                                             class GALGAS_LValueRepresentation & outArgument13,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Routine 'analyzeControlRegisterInLValueEX'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzeControlRegisterInLValueEX (const class GALGAS_PLMType constinArgument0,
+                                               const class GALGAS_routineAttributes constinArgument1,
+                                               const class GALGAS_lstring constinArgument2,
+                                               const class GALGAS_semanticContext constinArgument3,
+                                               const class GALGAS_mode constinArgument4,
+                                               class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                               class GALGAS_staticStringMap & ioArgument6,
+                                               class GALGAS_universalValuedObjectMap & ioArgument7,
+                                               class GALGAS_allocaList & ioArgument8,
+                                               class GALGAS_instructionListIR & ioArgument9,
+                                               const class GALGAS_lstring constinArgument10,
+                                               const class GALGAS_PLMType constinArgument11,
+                                               const class GALGAS_uint constinArgument12,
+                                               const class GALGAS_uint constinArgument13,
+                                               const class GALGAS_uint constinArgument14,
+                                               const class GALGAS_accessInAssignmentListAST constinArgument15,
+                                               class GALGAS_LValueRepresentation & outArgument16,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -450,6 +473,18 @@ void extensionSetter_insertRegister (class GALGAS_universalValuedObjectMap & ioO
                                      const class GALGAS_uint constin_inElementSize,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Extension setter '@universalValuedObjectMap insertRegisterGroup'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertRegisterGroup (class GALGAS_universalValuedObjectMap & ioObject,
+                                          const class GALGAS_lstring constin_inRegisterGroupName,
+                                          const class GALGAS_controlRegisterMap constin_inControlRegisterMap,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

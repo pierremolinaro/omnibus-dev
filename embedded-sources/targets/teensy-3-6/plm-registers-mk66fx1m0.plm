@@ -1157,6 +1157,33 @@ register VREF_SC   at 0x40074001 $uint8 // VREF Status and Control Register
 
 // Chapter 46: Periodic Interrupt Timer (PIT)
 
+register PIT {
+  MCR at 0x4003_7000 $uint32 {
+    30, MDIS, FRZ
+  }
+  
+  // PIT Lifetime Timer Registers
+  LTMR64H @ro at 0x4003_70E0 $uint32
+  LTMR64L @ro at 0x4003_70E4 $uint32
+    
+  // Timer Load Value Register
+  LDVAL [PIT_COUNT] at 0x4003_7100 : 16 $uint32
+  
+  // Current Timer Value Register
+  LCVAL [PIT_COUNT] at 0x4003_7104 : 16 $uint32
+  
+  // Timer Control Register
+  TCTRL [PIT_COUNT] at 0x4003_7108 : 16 $uint32 {
+    29, CHN, TIE, TEN
+  }
+  
+  // Timer Flag Register
+  TFLG [PIT_COUNT] at 0x4003_710C : 16 $uint32 {
+    31, TIF
+  }
+
+}
+
 // PIT Module Control Register
 register PIT_MCR at 0x4003_7000 $uint32 {
   30, MDIS, FRZ

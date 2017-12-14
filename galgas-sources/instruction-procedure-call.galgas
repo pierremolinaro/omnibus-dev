@@ -244,6 +244,10 @@ override method @procedureCallInstructionAST analyze
       error mIdentifier
         : "a control register constant cannot be used in this context"
         : currentType, currentLLVMAddressVar
+    case registerGroup (*) :
+      error mIdentifier
+        : "a control register constant cannot be used in this context"
+        : currentType, currentLLVMAddressVar
     case globalConstant (*) :
       error mIdentifier
         : "a global constant cannot be used in this context"

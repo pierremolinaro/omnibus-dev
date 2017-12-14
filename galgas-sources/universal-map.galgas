@@ -71,6 +71,21 @@ setter @universalValuedObjectMap insertRegister
 
 #·······················································································································
 
+setter @universalValuedObjectMap insertRegisterGroup
+  ?let @lstring inRegisterGroupName
+  ?let @controlRegisterMap inControlRegisterMap
+{
+  let newValue = @valuedObject.registerGroup {!registerMap:inControlRegisterMap}
+  [!?mInternalPropertyAndRoutineMap insertKey
+    !inRegisterGroupName
+    !.noValue
+    !false
+    !newValue
+  ]
+}
+
+#·······················································································································
+
 setter @universalValuedObjectMap insertGlobalConstant
   ?let @lstring inConstantName
   ?let @objectIR inConstantObjectIR
@@ -172,6 +187,8 @@ method @universalValuedObjectMap searchValuedObject
     end
   case register (6*) :
     error inValuedObjectName : "control register ?" : outObjectIR
+  case registerGroup (*) :
+    error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
   case localConstant (@PLMType type @lstring plmName) :
@@ -191,6 +208,7 @@ setter @universalValuedObjectMap readAccess
   case task (*) :
   case driver (* *) :
   case register (6*) :
+  case registerGroup (*) :
   case globalConstant (*) :
   case localConstant (* *) :
     if valueState == .hasUnreadValue then
@@ -225,6 +243,8 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
     end
   case register (6*) :
     error inValuedObjectName : "control register ??" : outObjectIR
+  case registerGroup (*) :
+    error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
   case localConstant (@PLMType type @lstring plmName) :
@@ -259,6 +279,8 @@ setter @universalValuedObjectMap searchValuedObjectForWriteAccess
     error inValuedObjectName : "a driver has no value" : outObjectIR
   case register (6*) :
     error inValuedObjectName : "control register ???" : outObjectIR
+  case registerGroup (*) :
+    error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case localConstant (* *) :
@@ -288,6 +310,8 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
     error inValuedObjectName : "a driver has no value" : outObjectIR
   case register (6*) :
     error inValuedObjectName : "control register ????" : outObjectIR
+  case registerGroup (*) :
+    error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case localConstant (* *) :
@@ -319,6 +343,8 @@ method @universalValuedObjectMap searchValuedObjectType
     error inValuedObjectName : "undefined in this context" : outType
   case register (* @PLMType type * * * *) :
     outType = type
+  case registerGroup (*) :
+    error inValuedObjectName : "undefined in this context" : outType
   case globalConstant (*) :
     error inValuedObjectName : "undefined in this context" : outType
   case localConstant (* *) :
@@ -338,6 +364,7 @@ method @universalValuedObjectMap checkLocalVariableFinalState {
     case task (*) :
     case driver (* *) :
     case register (6*) :
+    case registerGroup (*) :
     case globalConstant (*) :
     case localConstant (* *) :
       if entry.mObjectState == .hasUnreadValue then
@@ -360,6 +387,7 @@ setter @universalValuedObjectMap openOverrideForSelectBlock {
     case task (*) :
     case driver (* *) :
     case register (6*) :
+    case registerGroup (*) :
     case globalConstant (*) :
     case localConstant (* *) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
@@ -380,6 +408,7 @@ setter @universalValuedObjectMap openOverrideForRepeatBlock {
     case task (*) :
     case driver (* *) :
     case register (6*) :
+    case registerGroup (*) :
     case globalConstant (*) :
     case localConstant (* *) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
@@ -411,6 +440,7 @@ setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
       case task (*) :
       case driver (* *) :
       case register (6*) :
+      case registerGroup (*) :
       case globalConstant (*) :
       case localConstant (* *) :
         [!?newReferenceStateMap insertKey !entry.lkey !entry.mObjectState]
@@ -467,6 +497,7 @@ setter @universalValuedObjectMap closeOverride ?let @location inErrorLocation {
     case task (*) :
     case driver (* *) :
     case register (6*) :
+    case registerGroup (*) :
     case globalConstant (*) :
     case localConstant (* *) :
       if currentObjectState == .hasUnreadValue then
@@ -538,6 +569,7 @@ enum @valuedObject {
                  @sliceMap sliceMap
                  @uint arraySize # 0 if not an array
                  @uint elementSize) # 0 if not an array
+  case registerGroup (@controlRegisterMap registerMap)
   case globalConstant (@objectIR objectIR)
   case localConstant (@PLMType type @lstring plmName)
   case localVariable (@PLMType type @lstring plmName)
