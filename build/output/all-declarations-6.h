@@ -1081,29 +1081,6 @@ void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_controlReg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Extension method '@controlRegisterDeclarationAST noteTypesInPrecedenceGraph'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_controlRegisterDeclarationAST_noteTypesInPrecedenceGraph) (const class cPtr_controlRegisterDeclarationAST * inObject,
-                                                                                                   class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
-                                                                                                   class C_Compiler * inCompiler
-                                                                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_noteTypesInPrecedenceGraph (const int32_t inClassIndex,
-                                                      extensionMethodSignature_controlRegisterDeclarationAST_noteTypesInPrecedenceGraph inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_controlRegisterDeclarationAST * inObject,
-                                                     GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                             @implementedDriverAST class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2270,32 +2247,6 @@ void routine_analyzeRegisterExpression (const class GALGAS_PLMType constinArgume
                                         class GALGAS_objectIR & outArgument13,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Routine 'analyzeRegisterExpressionEX'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeRegisterExpressionEX (const class GALGAS_PLMType constinArgument0,
-                                          const class GALGAS_routineAttributes constinArgument1,
-                                          const class GALGAS_lstring constinArgument2,
-                                          const class GALGAS_semanticContext constinArgument3,
-                                          const class GALGAS_mode constinArgument4,
-                                          class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                          class GALGAS_staticStringMap & ioArgument6,
-                                          class GALGAS_universalValuedObjectMap & ioArgument7,
-                                          class GALGAS_allocaList & ioArgument8,
-                                          class GALGAS_instructionListIR & ioArgument9,
-                                          const class GALGAS_PLMType constinArgument10,
-                                          const class GALGAS_bigint constinArgument11,
-                                          const class GALGAS_sliceMap constinArgument12,
-                                          const class GALGAS_uint constinArgument13,
-                                          const class GALGAS_uint constinArgument14,
-                                          const class GALGAS_primaryInExpressionAccessListAST constinArgument15,
-                                          class GALGAS_objectIR & outArgument16,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

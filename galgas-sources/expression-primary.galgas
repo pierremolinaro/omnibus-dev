@@ -269,34 +269,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
         ?result: outResult
       )
     end
-  case register (* type address sliceMap arraySize elementSize) :
-    if [inRoutineAttributes guard] then
-      error mReceiverName : "control register is not readable in guard" : outResult
-    elsif not [inRoutineAttributes controlRegisterReadable] then
-      error mReceiverName : "control register is not readable in this context" : outResult
-    elsif [inMode isUserMode] || [inMode isAnyMode] then
-      error mReceiverName : "a control register is not accessible in user mode" : outResult
-    else
-      analyzeRegisterExpressionEX (
-        !self: inSelfType
-        !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !context: inContext
-        !mode: inMode
-        !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !type
-        !address
-        !sliceMap
-        !arraySize # 0 if not an array
-        !elementSize # 0 if not an array
-        !mAccessList
-        ?result: outResult
-      )
-    end
   case globalConstant (@objectIR objectIR) :
     outResult = objectIR
     procAnalyzeAccesListInExpression (
@@ -530,104 +502,6 @@ private proc analyzeRegisterExpression
         case funcCall (* * errorLocation) :
           error errorLocation : "receiver is a control register, cannot be used as a function"
         end
-      end
-    end
-  end
-}
-
-#·······················································································································
-
-private proc analyzeRegisterExpressionEX
-  ?self:let @PLMType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?let @PLMType inRegisterType
-  ?let @bigint inRegisterAddress
-  ?let @sliceMap inRegisterSliceMap
-  ?let @uint inRegisterArraySize # 0 if not an array
-  ?let @uint inRegisterElementSize # 0 if not an array
-  ?let @primaryInExpressionAccessListAST inAccessList
-  !result:@objectIR outResult
-{
-  if [inAccessList length] == 0 then # No subscript, no slice
-    getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
-    [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !inRegisterAddress]
-  else
-    var accessList = inAccessList
-    if [[accessList mAccessAtIndex !0] isArrayAccess] then
-      [!?accessList popFirst ?let first]
-      [first arrayAccess ?index:let @expressionAST indexExpression ?endOfIndex:let @location endOfIndex]
-      handleArraySubscriptNew (
-         !self: inSelfType
-         !routineAttributes:inRoutineAttributes
-         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-         !context: inContext
-         !mode: inMode
-         !?temporary: ioTemporaries
-         !?staticStringMap: ioGlobalLiteralStringMap
-         !?variableMap: ioUniversalMap
-         !?alloca: ioAllocaList
-         !indexExpression 
-         !endOfIndex
-         !arraySize:inRegisterArraySize
-         !elementType:inRegisterType
-         !? ioInstructionGenerationList
-         ?let @objectIR indexIR
-      )
-      if [indexIR isLiteralInteger] then # subscript expression is constant
-        [indexIR literalInteger ?1* ?value:let @bigint idx]
-        let addr = inRegisterAddress + idx * inRegisterElementSize
-        getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
-        [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !addr]
-      else
-        getNewTempValue (!inRegisterType  !?ioTemporaries ?outResult)
-        [!?ioInstructionGenerationList appendLoadVolatileRegisterWithSubscript
-          !outResult
-          !indexIR
-          !inRegisterAddress
-          !inRegisterElementSize
-        ]
-      end
-    else
-      getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
-      [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !inRegisterAddress]
-    end
-  #--- Access list
-    var currentSliceMap = inRegisterSliceMap
-    var currentType = inRegisterType
-    for (access) in accessList do
-      switch access
-      case property (@lstring propertyName) :
-        [currentSliceMap searchKey
-          !propertyName
-          ?let @llvmBinaryOperation accessOperator
-          ?let @bigint accessRightOperand
-          ?let @sliceMap subMap
-          ?let @PLMType resultType
-        ]
-        getNewTempValue (!resultType !?ioTemporaries ?let resultIR)
-        [!?ioInstructionGenerationList appendBinaryOperation
-          !resultIR
-          ![outResult type]
-          !propertyName.location
-          !outResult
-          !accessOperator
-          !.literalInteger {!type:staticIntegerType () !value:accessRightOperand}
-        ]
-        currentSliceMap = subMap
-        currentType = resultType
-        outResult = resultIR
-      case arrayAccess (* @location endOfIndex) :
-        error endOfIndex : "receiver is a control register, subscripting is invalid here"
-      case funcCall (* * errorLocation) :
-        error errorLocation : "receiver is a control register, cannot be used as a function"
       end
     end
   end

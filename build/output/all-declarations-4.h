@@ -626,7 +626,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_driver,
     kEnum_task,
-    kEnum_register,
     kEnum_registerGroup,
     kEnum_globalConstant,
     kEnum_localConstant,
@@ -672,14 +671,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                                        const class GALGAS_lstring & inOperand1
                                                                        COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valuedObject constructor_register (const class GALGAS_bool & inOperand0,
-                                                                  const class GALGAS_PLMType & inOperand1,
-                                                                  const class GALGAS_bigint & inOperand2,
-                                                                  const class GALGAS_sliceMap & inOperand3,
-                                                                  const class GALGAS_uint & inOperand4,
-                                                                  const class GALGAS_uint & inOperand5
-                                                                  COMMA_LOCATION_ARGS) ;
-
   public : static class GALGAS_valuedObject constructor_registerGroup (const class GALGAS_controlRegisterMap & inOperand0
                                                                        COMMA_LOCATION_ARGS) ;
 
@@ -714,15 +705,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_bool & outArgument0,
-                                                  class GALGAS_PLMType & outArgument1,
-                                                  class GALGAS_bigint & outArgument2,
-                                                  class GALGAS_sliceMap & outArgument3,
-                                                  class GALGAS_uint & outArgument4,
-                                                  class GALGAS_uint & outArgument5,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_registerGroup (class GALGAS_controlRegisterMap & outArgument0,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
@@ -741,8 +723,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegister (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterGroup (LOCATION_ARGS) const ;
 
@@ -1264,32 +1244,6 @@ class cEnumAssociatedValues_valuedObject_task : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_valuedObject_task (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_valuedObject_register : public cEnumAssociatedValues {
-  public : const GALGAS_bool mAssociatedValue0 ;
-  public : const GALGAS_PLMType mAssociatedValue1 ;
-  public : const GALGAS_bigint mAssociatedValue2 ;
-  public : const GALGAS_sliceMap mAssociatedValue3 ;
-  public : const GALGAS_uint mAssociatedValue4 ;
-  public : const GALGAS_uint mAssociatedValue5 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_valuedObject_register (const GALGAS_bool & inAssociatedValue0,
-                                                        const GALGAS_PLMType & inAssociatedValue1,
-                                                        const GALGAS_bigint & inAssociatedValue2,
-                                                        const GALGAS_sliceMap & inAssociatedValue3,
-                                                        const GALGAS_uint & inAssociatedValue4,
-                                                        const GALGAS_uint & inAssociatedValue5
-                                                        COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_valuedObject_register (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5366,4 +5320,41 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessibleEntities ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Abstract extension method '@abstractInstructionIR enterAccessibleEntities'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities) (const class cPtr_abstractInstructionIR * inObject,
+                                                                                        class GALGAS_accessibleEntities & ioArgument0,
+                                                                                        class GALGAS_uint & ioArgument1,
+                                                                                        class C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_enterAccessibleEntities (const int32_t inClassIndex,
+                                                   extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_enterAccessibleEntities (const class cPtr_abstractInstructionIR * inObject,
+                                                  GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                                  GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension method '@instructionListIR enterAccessibleEntities'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_enterAccessibleEntities (const class GALGAS_instructionListIR inObject,
+                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
