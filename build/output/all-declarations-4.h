@@ -10,16 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Extension getter '@routineTypedSignature string' (as function)                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_string (const class GALGAS_routineTypedSignature & inObject,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                     Extension getter '@effectiveArgumentListAST routineSignature' (as function)                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -498,12 +488,11 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                                        COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_valuedObject constructor_register (const class GALGAS_bool & inOperand0,
-                                                                  const class GALGAS_bool & inOperand1,
-                                                                  const class GALGAS_PLMType & inOperand2,
-                                                                  const class GALGAS_bigint & inOperand3,
-                                                                  const class GALGAS_sliceMap & inOperand4,
-                                                                  const class GALGAS_uint & inOperand5,
-                                                                  const class GALGAS_uint & inOperand6
+                                                                  const class GALGAS_PLMType & inOperand1,
+                                                                  const class GALGAS_bigint & inOperand2,
+                                                                  const class GALGAS_sliceMap & inOperand3,
+                                                                  const class GALGAS_uint & inOperand4,
+                                                                  const class GALGAS_uint & inOperand5
                                                                   COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_valuedObject constructor_task (const class GALGAS_PLMType & inOperand0
@@ -538,12 +527,11 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_bool & outArgument0,
-                                                  class GALGAS_bool & outArgument1,
-                                                  class GALGAS_PLMType & outArgument2,
-                                                  class GALGAS_bigint & outArgument3,
-                                                  class GALGAS_sliceMap & outArgument4,
+                                                  class GALGAS_PLMType & outArgument1,
+                                                  class GALGAS_bigint & outArgument2,
+                                                  class GALGAS_sliceMap & outArgument3,
+                                                  class GALGAS_uint & outArgument4,
                                                   class GALGAS_uint & outArgument5,
-                                                  class GALGAS_uint & outArgument6,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -1088,21 +1076,19 @@ class cEnumAssociatedValues_valuedObject_task : public cEnumAssociatedValues {
 
 class cEnumAssociatedValues_valuedObject_register : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
-  public : const GALGAS_bool mAssociatedValue1 ;
-  public : const GALGAS_PLMType mAssociatedValue2 ;
-  public : const GALGAS_bigint mAssociatedValue3 ;
-  public : const GALGAS_sliceMap mAssociatedValue4 ;
+  public : const GALGAS_PLMType mAssociatedValue1 ;
+  public : const GALGAS_bigint mAssociatedValue2 ;
+  public : const GALGAS_sliceMap mAssociatedValue3 ;
+  public : const GALGAS_uint mAssociatedValue4 ;
   public : const GALGAS_uint mAssociatedValue5 ;
-  public : const GALGAS_uint mAssociatedValue6 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_valuedObject_register (const GALGAS_bool & inAssociatedValue0,
-                                                        const GALGAS_bool & inAssociatedValue1,
-                                                        const GALGAS_PLMType & inAssociatedValue2,
-                                                        const GALGAS_bigint & inAssociatedValue3,
-                                                        const GALGAS_sliceMap & inAssociatedValue4,
-                                                        const GALGAS_uint & inAssociatedValue5,
-                                                        const GALGAS_uint & inAssociatedValue6
+                                                        const GALGAS_PLMType & inAssociatedValue1,
+                                                        const GALGAS_bigint & inAssociatedValue2,
+                                                        const GALGAS_sliceMap & inAssociatedValue3,
+                                                        const GALGAS_uint & inAssociatedValue4,
+                                                        const GALGAS_uint & inAssociatedValue5
                                                         COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

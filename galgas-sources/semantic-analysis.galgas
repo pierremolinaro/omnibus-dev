@@ -50,10 +50,9 @@ struct @semanticTemporariesStruct {
   @uint mTemporaryIndex
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
-  @initRoutinePriorityMap mInitRoutinePriorityMap
-  @bootRoutinePriorityMap mBootRoutinePriorityMap
   @subprogramInvocationGraph mSubprogramInvocationGraph
   @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries
+  @stringset mInitializedDriverSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

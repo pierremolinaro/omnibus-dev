@@ -272,7 +272,7 @@ abstract method @callInstructionAST baseGuardAnalyze
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -285,7 +285,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext unused inContext
-  ?mode:let @mode unused inCurrentMode
+  ?mode:let @mode unused inMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
@@ -301,7 +301,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -318,7 +318,12 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       currentObject = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
     end
   else
-    [ioUniversalMap searchValuedObject !mIdentifier !inRoutineAttributes ?currentObject]
+    [ioUniversalMap searchValuedObject
+      !mIdentifier
+      !inRoutineAttributes
+      !ioTemporaries.mInitializedDriverSet
+      ?currentObject
+    ]
   end
   var currentErrorLocation = mIdentifier.location
 #--- Insulate last access
@@ -380,7 +385,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       else
       #--- Check modes
 #        let calleeKind = checkMode (
-#          !callerMode:inCurrentMode
+#          !callerMode:inMode
 #          !calleeMode:calleeMode
 #          !kind:routineKind
 #          !error:methodName.location
@@ -393,7 +398,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !errorLocation:methodName.location
           !callerForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
-          !requiredMode:inCurrentMode
+          !requiredMode:inMode
           !?temporary:ioTemporaries
           !?staticStringMap:ioGlobalLiteralStringMap
           !?variableMap:ioUniversalMap

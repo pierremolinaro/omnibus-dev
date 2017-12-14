@@ -244,13 +244,13 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       !?result: outResult
     )
-  case register (* accessibleInUserMode type address sliceMap arraySize elementSize) :
+  case register (* type address sliceMap arraySize elementSize) :
     if [inRoutineAttributes guard] then
       error mReceiverName : "control register is not readable in guard" : outResult
     elsif not [inRoutineAttributes controlRegisterReadable] then
       error mReceiverName : "control register is not readable in this context" : outResult
-    elsif ([inMode isUserMode] || [inMode isAnyMode]) && not accessibleInUserMode then
-      error mReceiverName : "control register is not readable in user mode" : outResult
+    elsif [inMode isUserMode] || [inMode isAnyMode] then
+      error mReceiverName : "a control register is not accessible in user mode" : outResult
     else
       analyzeRegisterExpression (
         !self: inSelfType

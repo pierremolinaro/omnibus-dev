@@ -68,7 +68,7 @@ func checkMode
   case section :
     if inCallerMode == .userMode then
       outResult = .sectionFromProcessorUserMode
-    elsif (inCallerMode == .primitiveMode) || (inCallerMode == .sectionMode) then
+    elsif (inCallerMode == .primitiveMode) || (inCallerMode == .sectionMode) || (inCallerMode == .initMode) then
       outResult = .sectionFromProcessorPrivilegedMode
     else
       error inErrorLocation : "a section cannot be called from " + inCallerMode + " mode" : outResult

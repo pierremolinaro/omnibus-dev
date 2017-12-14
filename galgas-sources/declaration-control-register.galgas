@@ -174,7 +174,6 @@ map @sliceMap {
 map @controlRegisterMap {
   @PLMType mType
   @bool mIsReadOnly
-  @bool mIsAccessibleInUserMode
   @sliceMap mRegisterFieldAccessMap
   @controlRegisterFieldMap mRegisterFieldMap
   @bigint mAddress
@@ -369,7 +368,6 @@ override method @controlRegisterDeclarationAST enterInContext
   for register in mRegisterArrayList do
   #--- Analyze attributes
     var isReadOnly = false
-    var isAccessibleInUserMode = false
     for (att) in register.mAttributeList do
       if att.string == "ro" then
         if isReadOnly then
@@ -377,14 +375,8 @@ override method @controlRegisterDeclarationAST enterInContext
         else
           isReadOnly = true
         end
-      elsif att.string == userModeName () then
-        if isAccessibleInUserMode then
-          error att : "duplicated attribute"
-        else
-          isAccessibleInUserMode = true
-        end
       else
-        error att : "only @ro (read only) and @user (accessible in `user mode) attributes are accepted here"
+        error att : "only @ro (read only) attributes is accepted here"
       end
     end
   #--- Analyse register address expression
@@ -470,7 +462,6 @@ override method @controlRegisterDeclarationAST enterInContext
       !register.mRegisterName
       !registerType
       !isReadOnly
-      !isAccessibleInUserMode
       !registerBitSliceMap
       !registerFieldMap
       !registerAddress
@@ -482,7 +473,6 @@ override method @controlRegisterDeclarationAST enterInContext
     [!?ioContext.mValuedObjectMap insertRegister
       !register.mRegisterName
       !writable:not isReadOnly
-      !accessibleInUserMode:isAccessibleInUserMode
       !type:registerType
       !address:registerAddress 
       !sliceMap:registerBitSliceMap
@@ -491,24 +481,6 @@ override method @controlRegisterDeclarationAST enterInContext
     ]
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @controlRegisterDeclarationAST semanticAnalysis
-#  ?context:let @semanticContext unused inContext
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-#{
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @controlRegisterDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  BUILD HTML FILE                                                                                                      

@@ -2171,14 +2171,13 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_PLMType & inOperand1,
                                                       const class GALGAS_bool & inOperand2,
-                                                      const class GALGAS_bool & inOperand3,
-                                                      const class GALGAS_sliceMap & inOperand4,
-                                                      const class GALGAS_controlRegisterFieldMap & inOperand5,
-                                                      const class GALGAS_bigint & inOperand6,
-                                                      const class GALGAS_controlRegisterFieldList & inOperand7,
+                                                      const class GALGAS_sliceMap & inOperand3,
+                                                      const class GALGAS_controlRegisterFieldMap & inOperand4,
+                                                      const class GALGAS_bigint & inOperand5,
+                                                      const class GALGAS_controlRegisterFieldList & inOperand6,
+                                                      const class GALGAS_uint & inOperand7,
                                                       const class GALGAS_uint & inOperand8,
                                                       const class GALGAS_uint & inOperand9,
-                                                      const class GALGAS_uint & inOperand10,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -2186,14 +2185,13 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_PLMType constinArgument1,
                                                    class GALGAS_bool constinArgument2,
-                                                   class GALGAS_bool constinArgument3,
-                                                   class GALGAS_sliceMap constinArgument4,
-                                                   class GALGAS_controlRegisterFieldMap constinArgument5,
-                                                   class GALGAS_bigint constinArgument6,
-                                                   class GALGAS_controlRegisterFieldList constinArgument7,
+                                                   class GALGAS_sliceMap constinArgument3,
+                                                   class GALGAS_controlRegisterFieldMap constinArgument4,
+                                                   class GALGAS_bigint constinArgument5,
+                                                   class GALGAS_controlRegisterFieldList constinArgument6,
+                                                   class GALGAS_uint constinArgument7,
                                                    class GALGAS_uint constinArgument8,
                                                    class GALGAS_uint constinArgument9,
-                                                   class GALGAS_uint constinArgument10,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -2216,11 +2214,6 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                                     class GALGAS_string constinArgument1,
                                                                     C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMIsAccessibleInUserModeForKey (class GALGAS_bool constinArgument0,
-                                                                          class GALGAS_string constinArgument1,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMIsReadOnlyForKey (class GALGAS_bool constinArgument0,
                                                               class GALGAS_string constinArgument1,
@@ -2252,14 +2245,13 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_PLMType & outArgument1,
                                                    class GALGAS_bool & outArgument2,
-                                                   class GALGAS_bool & outArgument3,
-                                                   class GALGAS_sliceMap & outArgument4,
-                                                   class GALGAS_controlRegisterFieldMap & outArgument5,
-                                                   class GALGAS_bigint & outArgument6,
-                                                   class GALGAS_controlRegisterFieldList & outArgument7,
+                                                   class GALGAS_sliceMap & outArgument3,
+                                                   class GALGAS_controlRegisterFieldMap & outArgument4,
+                                                   class GALGAS_bigint & outArgument5,
+                                                   class GALGAS_controlRegisterFieldList & outArgument6,
+                                                   class GALGAS_uint & outArgument7,
                                                    class GALGAS_uint & outArgument8,
                                                    class GALGAS_uint & outArgument9,
-                                                   class GALGAS_uint & outArgument10,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -2281,10 +2273,6 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mElementArraySizeForKey (const class GALGAS_string & constinOperand0,
                                                                               C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsAccessibleInUserModeForKey (const class GALGAS_string & constinOperand0,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsReadOnlyForKey (const class GALGAS_string & constinOperand0,
                                                                         C_Compiler * inCompiler
@@ -2334,7 +2322,6 @@ class cEnumerator_controlRegisterMap : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_PLMType current_mType (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsReadOnly (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mIsAccessibleInUserMode (LOCATION_ARGS) const ;
   public : class GALGAS_sliceMap current_mRegisterFieldAccessMap (LOCATION_ARGS) const ;
   public : class GALGAS_controlRegisterFieldMap current_mRegisterFieldMap (LOCATION_ARGS) const ;
   public : class GALGAS_bigint current_mAddress (LOCATION_ARGS) const ;
@@ -2360,7 +2347,6 @@ class cMapElement_controlRegisterMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_PLMType mProperty_mType ;
   public : GALGAS_bool mProperty_mIsReadOnly ;
-  public : GALGAS_bool mProperty_mIsAccessibleInUserMode ;
   public : GALGAS_sliceMap mProperty_mRegisterFieldAccessMap ;
   public : GALGAS_controlRegisterFieldMap mProperty_mRegisterFieldMap ;
   public : GALGAS_bigint mProperty_mAddress ;
@@ -2373,7 +2359,6 @@ class cMapElement_controlRegisterMap : public cMapElement {
   public : cMapElement_controlRegisterMap (const GALGAS_lstring & inKey,
                                            const GALGAS_PLMType & in_mType,
                                            const GALGAS_bool & in_mIsReadOnly,
-                                           const GALGAS_bool & in_mIsAccessibleInUserMode,
                                            const GALGAS_sliceMap & in_mRegisterFieldAccessMap,
                                            const GALGAS_controlRegisterFieldMap & in_mRegisterFieldMap,
                                            const GALGAS_bigint & in_mAddress,
@@ -2410,8 +2395,6 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_bool mProperty_mIsReadOnly ;
 
-  public : GALGAS_bool mProperty_mIsAccessibleInUserMode ;
-
   public : GALGAS_sliceMap mProperty_mRegisterFieldAccessMap ;
 
   public : GALGAS_controlRegisterFieldMap mProperty_mRegisterFieldMap ;
@@ -2440,7 +2423,6 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_controlRegisterMap_2D_element (const GALGAS_lstring & in_lkey,
                                                  const GALGAS_PLMType & in_mType,
                                                  const GALGAS_bool & in_mIsReadOnly,
-                                                 const GALGAS_bool & in_mIsAccessibleInUserMode,
                                                  const GALGAS_sliceMap & in_mRegisterFieldAccessMap,
                                                  const GALGAS_controlRegisterFieldMap & in_mRegisterFieldMap,
                                                  const GALGAS_bigint & in_mAddress,
@@ -2463,14 +2445,13 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
   public : static class GALGAS_controlRegisterMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                               const class GALGAS_PLMType & inOperand1,
                                                                               const class GALGAS_bool & inOperand2,
-                                                                              const class GALGAS_bool & inOperand3,
-                                                                              const class GALGAS_sliceMap & inOperand4,
-                                                                              const class GALGAS_controlRegisterFieldMap & inOperand5,
-                                                                              const class GALGAS_bigint & inOperand6,
-                                                                              const class GALGAS_controlRegisterFieldList & inOperand7,
+                                                                              const class GALGAS_sliceMap & inOperand3,
+                                                                              const class GALGAS_controlRegisterFieldMap & inOperand4,
+                                                                              const class GALGAS_bigint & inOperand5,
+                                                                              const class GALGAS_controlRegisterFieldList & inOperand6,
+                                                                              const class GALGAS_uint & inOperand7,
                                                                               const class GALGAS_uint & inOperand8,
-                                                                              const class GALGAS_uint & inOperand9,
-                                                                              const class GALGAS_uint & inOperand10
+                                                                              const class GALGAS_uint & inOperand9
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2494,8 +2475,6 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterFieldList getter_mControlRegisterFieldList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mElementArraySize (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsAccessibleInUserMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsReadOnly (LOCATION_ARGS) const ;
 
