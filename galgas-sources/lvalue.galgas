@@ -174,13 +174,34 @@ method @LValueAST analyzeLValue
       error mIdentifier : "a task has no value" : outInternalRepresentation
     case driver (* *) :
       error mIdentifier : "a driver has no value" : outInternalRepresentation
+    case registerGroup (registerMap) :
+      if [inMode isUserMode] || [inMode isAnyMode] then
+        error mIdentifier : "a control register is not accessible in user mode" : outInternalRepresentation
+      else
+        analyzeControlRegisterInLValue (
+          !self: inSelfType
+          !routineAttributes:inRoutineAttributes
+          !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+          !context: inContext
+          !mode: inMode
+          !?temporary: ioTemporaries
+          !?staticStringMap: ioGlobalLiteralStringMap
+          !?variableMap: ioUniversalMap
+          !?alloca: ioAllocaList
+          !?instructionListIR: ioInstructionGenerationList
+          !registerGroupName: mIdentifier
+          !registerMap: registerMap
+          !accessList: mAccessList
+          ?outInternalRepresentation
+        )
+      end
     case register (writable registerType registerAddress * arraySize elementSize) :
       if not writable then
          error mIdentifier : "the control register is not writable in this context" : outInternalRepresentation
       elsif [inMode isUserMode] || [inMode isAnyMode] then
          error mIdentifier : "a control register is not accessible in user mode" : outInternalRepresentation
       else
-        analyzeControlRegisterInLValue (
+        analyzeControlRegisterInLValueEX (
           !self: inSelfType
           !routineAttributes:inRoutineAttributes
           !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -229,6 +250,102 @@ method @LValueAST analyzeLValue
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc analyzeControlRegisterInLValue
+  ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?registerGroupName:let @lstring inRegisterGroupName
+  ?registerMap:let @controlRegisterMap inControlRegisterMap
+#  ?registerAddress:let @uint inRegisterAddress
+#  ?registerArraySize:let @uint inArraySize
+#  ?elementSize:let @uint inElementSize
+  ?accessList:let @accessInAssignmentListAST inAccessList
+  !@LValueRepresentation outInternalRepresentation
+{
+  if [inAccessList length] == 0 then # No subscript, no slice
+    error inRegisterGroupName : "a control register group has no value" : outInternalRepresentation
+  else
+    var accessList = inAccessList
+    [!?accessList popFirst ?let registerNameAsField]
+    if not [registerNameAsField isProperty] then
+      error inRegisterGroupName
+      : "the control register group should be followed by a control register name"
+      : outInternalRepresentation
+    else
+      [registerNameAsField property ?name:let controlRegisterName]
+      [inControlRegisterMap searchKey
+        !controlRegisterName
+        ?let @PLMType inRegisterType
+        ?let @bool unused mIsReadOnly
+        ?let @sliceMap unused inRegisterSliceMap
+        ?let @controlRegisterFieldMap unused mRegisterFieldMap
+        ?let @bigint inRegisterAddress
+        ?let @controlRegisterFieldList unused mControlRegisterFieldList # Used for HTML file
+        ?let @uint unused mRegisterBitCount
+        ?let @uint inRegisterArraySize # 0 if not an array
+        ?let @uint inRegisterElementSize # 0 if not an array
+      ]
+      if [inAccessList length] == 0 then # Simple access to a control register for writing
+        if inRegisterArraySize == 0 then
+          outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:inRegisterAddress}
+        else
+          error controlRegisterName : "the control register is an array" : outInternalRepresentation
+        end
+      elsif [inAccessList length] == 1 then # Simple access to a control register for writing
+        [inAccessList first ?let access]
+        switch access
+        case property (@lstring propertyName) :
+          error propertyName : "writing a slice of a control register is not allowed" : outInternalRepresentation
+        case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+          handleArraySubscriptNew (
+            !self: inSelfType
+            !routineAttributes:inRoutineAttributes
+            !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+            !context: inContext
+            !mode: inMode
+            !?temporary: ioTemporaries
+            !?staticStringMap: ioGlobalLiteralStringMap
+            !?variableMap: ioUniversalMap
+            !?alloca: ioAllocaList
+            !indexExpression 
+            !endOfIndex
+            !arraySize:inRegisterArraySize
+            !elementType:inRegisterType
+            !? ioInstructionGenerationList
+            ?let @objectIR indexIR
+          )
+          if [indexIR isLiteralInteger] then # subscript expression is constant
+             [indexIR literalInteger ?1* ?value:let @bigint idx]
+             let addr = inRegisterAddress + idx * inRegisterElementSize
+             outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:addr}      
+          else
+            [!?ioTemporaries newTempLLVMVar ?let llvmName]
+            [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
+              !llvmName
+              !indexIR
+              !inRegisterAddress
+              !inRegisterElementSize
+            ]
+            outInternalRepresentation = .volatileIndirectReference {!type:inRegisterType !llvmName:llvmName}      
+          end
+        end
+      else
+        error controlRegisterName
+        : "only subscripting is allowed in control register assignment" : outInternalRepresentation
+      end
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc analyzeControlRegisterInLValueEX
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

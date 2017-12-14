@@ -94,6 +94,7 @@ struct @semanticContext {
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
   @controlRegisterMap mControlRegisterMap
+  @controlRegisterGroupMap mControlRegisterGroupMap
   @globalConstantMap mGlobalConstantMap
   @driverMap mDriverMap
   @staticlistMap mStaticListMap

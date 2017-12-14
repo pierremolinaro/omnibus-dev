@@ -1058,6 +1058,29 @@ void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_typeOpaque
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                  Extension method '@controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_controlRegisterGroupDeclarationAST_noteTypesInPrecedenceGraph) (const class cPtr_controlRegisterGroupDeclarationAST * inObject,
+                                                                                                        class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
+                                                                                                        class C_Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_noteTypesInPrecedenceGraph (const int32_t inClassIndex,
+                                                      extensionMethodSignature_controlRegisterGroupDeclarationAST_noteTypesInPrecedenceGraph inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_controlRegisterGroupDeclarationAST * inObject,
+                                                     GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                    Extension method '@controlRegisterDeclarationAST noteTypesInPrecedenceGraph'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1078,84 +1101,6 @@ void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_controlReg
                                                      GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Extension method '@controlRegisterDeclarationAST controlRegisterType'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_controlRegisterDeclarationAST_controlRegisterType) (const class cPtr_controlRegisterDeclarationAST * inObject,
-                                                                                            class GALGAS_semanticContext & ioArgument0,
-                                                                                            class GALGAS_PLMType & outArgument1,
-                                                                                            class GALGAS_uint & outArgument2,
-                                                                                            class C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_controlRegisterType (const int32_t inClassIndex,
-                                               extensionMethodSignature_controlRegisterDeclarationAST_controlRegisterType inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_controlRegisterType (const class cPtr_controlRegisterDeclarationAST * inObject,
-                                              GALGAS_semanticContext & io_ioContext,
-                                              GALGAS_PLMType & out_outRegisterType,
-                                              GALGAS_uint & out_outRegisterBitCount,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Extension method '@controlRegisterDeclarationAST buildControlRegisterSliceMap'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_controlRegisterDeclarationAST_buildControlRegisterSliceMap) (const class cPtr_controlRegisterDeclarationAST * inObject,
-                                                                                                     class GALGAS_semanticContext & ioArgument0,
-                                                                                                     class GALGAS_PLMType & ioArgument1,
-                                                                                                     const class GALGAS_uint constinArgument2,
-                                                                                                     class GALGAS_controlRegisterFieldMap & outArgument3,
-                                                                                                     class GALGAS_sliceMap & outArgument4,
-                                                                                                     class GALGAS_controlRegisterFieldList & outArgument5,
-                                                                                                     class C_Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_buildControlRegisterSliceMap (const int32_t inClassIndex,
-                                                        extensionMethodSignature_controlRegisterDeclarationAST_buildControlRegisterSliceMap inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_buildControlRegisterSliceMap (const class cPtr_controlRegisterDeclarationAST * inObject,
-                                                       GALGAS_semanticContext & io_ioContext,
-                                                       GALGAS_PLMType & io_ioRegisterType,
-                                                       const GALGAS_uint constin_inRegisterBitCount,
-                                                       GALGAS_controlRegisterFieldMap & out_outRegisterFieldMap,
-                                                       GALGAS_sliceMap & out_outRegisterBitSliceMap,
-                                                       GALGAS_controlRegisterFieldList & out_outControlRegisterFieldList,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               Function 'boolTypeName'                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               Function 'booleanType'                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_PLMType function_booleanType (class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2319,15 +2264,38 @@ void routine_analyzeRegisterExpression (const class GALGAS_PLMType constinArgume
                                         class GALGAS_universalValuedObjectMap & ioArgument7,
                                         class GALGAS_allocaList & ioArgument8,
                                         class GALGAS_instructionListIR & ioArgument9,
-                                        const class GALGAS_PLMType constinArgument10,
-                                        const class GALGAS_bigint constinArgument11,
-                                        const class GALGAS_sliceMap constinArgument12,
-                                        const class GALGAS_uint constinArgument13,
-                                        const class GALGAS_uint constinArgument14,
-                                        const class GALGAS_primaryInExpressionAccessListAST constinArgument15,
-                                        class GALGAS_objectIR & outArgument16,
+                                        const class GALGAS_controlRegisterMap constinArgument10,
+                                        const class GALGAS_location constinArgument11,
+                                        const class GALGAS_primaryInExpressionAccessListAST constinArgument12,
+                                        class GALGAS_objectIR & outArgument13,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Routine 'analyzeRegisterExpressionEX'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzeRegisterExpressionEX (const class GALGAS_PLMType constinArgument0,
+                                          const class GALGAS_routineAttributes constinArgument1,
+                                          const class GALGAS_lstring constinArgument2,
+                                          const class GALGAS_semanticContext constinArgument3,
+                                          const class GALGAS_mode constinArgument4,
+                                          class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                          class GALGAS_staticStringMap & ioArgument6,
+                                          class GALGAS_universalValuedObjectMap & ioArgument7,
+                                          class GALGAS_allocaList & ioArgument8,
+                                          class GALGAS_instructionListIR & ioArgument9,
+                                          const class GALGAS_PLMType constinArgument10,
+                                          const class GALGAS_bigint constinArgument11,
+                                          const class GALGAS_sliceMap constinArgument12,
+                                          const class GALGAS_uint constinArgument13,
+                                          const class GALGAS_uint constinArgument14,
+                                          const class GALGAS_primaryInExpressionAccessListAST constinArgument15,
+                                          class GALGAS_objectIR & outArgument16,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

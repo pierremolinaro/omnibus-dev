@@ -12,7 +12,7 @@ enum @controlRegisterKind {
 
 #·······················································································································
 
-list @controlRegisterList {
+list @controlRegisterNameListAST {
   @lstring mRegisterName
   @controlRegisterKind mControlRegisterKind
   @lstringlist mAttributeList
@@ -23,7 +23,16 @@ list @controlRegisterList {
 #·······················································································································
 
 class @controlRegisterDeclarationAST  : @abstractDeclarationAST {
-  @controlRegisterList mRegisterArrayList
+  @controlRegisterNameListAST mRegisterArrayList
+  @lstring mRegisterTypeName
+  @controlRegisterBitSliceList mRegisterBitSliceList
+  @location mRegisterBitSliceListLocation
+}
+
+#·······················································································································
+
+list @controlRegisterDeclarationList {
+  @controlRegisterNameListAST mRegisterArrayList
   @lstring mRegisterTypeName
   @controlRegisterBitSliceList mRegisterBitSliceList
   @location mRegisterBitSliceListLocation
@@ -42,6 +51,13 @@ enum @controlRegisterBitSlice {
   case namedBit (@lstring name @lbigint count)
 }
 
+#·······················································································································
+
+class @controlRegisterGroupDeclarationAST  : @abstractDeclarationAST {
+  @lstring mRegisterGroupName
+  @controlRegisterDeclarationList mRegisters
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -52,7 +68,55 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $register$
-    @controlRegisterList registerDeclarationList = {}
+    $identifier$ ?let registerGroupName
+    ${$
+    @controlRegisterDeclarationList controlRegisterDeclarationList = {}
+    repeat
+    while
+      @controlRegisterNameListAST registerDeclarationList = {}
+      repeat
+        <registerDeclaration> !?ioAST !?registerDeclarationList
+      while
+      end
+      $\$type$ ?let registerTypeName
+      @controlRegisterBitSliceList registerBitSliceList = {}
+      select
+      or
+        ${$
+        repeat
+          @controlRegisterBitSlice registerBitSlice
+          select
+            $integer$ ?let @lbigint unusedBitCount
+            registerBitSlice = .unusedBits {!count:unusedBitCount}
+          or
+            $identifier$ ?let bitName
+            select
+              registerBitSlice = .namedBit {!name:bitName !count:.new{!1G !.here}}
+            or
+              $[$
+              $integer$ ?let @lbigint bitCount
+              $]$
+              registerBitSlice = .namedBit {!name:bitName !count:bitCount}
+            end
+          end
+          registerBitSliceList += !registerBitSlice
+        while
+          $,$
+        end
+        $}$
+      end
+      let endOfBitSlice = @location.here
+      controlRegisterDeclarationList += !registerDeclarationList !registerTypeName !registerBitSliceList !endOfBitSlice
+    end
+    ioAST.mDeclarationListAST += !@controlRegisterGroupDeclarationAST.new {!registerGroupName !controlRegisterDeclarationList}
+    $}$
+  }
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $register$
+    @controlRegisterNameListAST registerDeclarationList = {}
     repeat
       <registerDeclaration> !?ioAST !?registerDeclarationList
     while
@@ -94,7 +158,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <registerDeclaration> ?!@ast ioAST ?!@controlRegisterList ioRegisterDeclarationList {
+  rule <registerDeclaration> ?!@ast ioAST ?!@controlRegisterNameListAST ioRegisterDeclarationList {
     $identifier$ ?let registerName
     @lstringlist attributeList = {}
     repeat
@@ -186,8 +250,74 @@ map @controlRegisterMap {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @controlRegisterGroupMap {
+  @controlRegisterMap mControlRegisterMap
+  insert insertKey error message "the '%K' control register group has been already declared in %L"
+  search searchKey error message "** internal error **"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   PRECEDENCE GRAPH
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for reg in mRegisters do
+    let typeName = llvmTypeNameFromPLMname (!reg.mRegisterTypeName)
+    [!?ioGraph noteNode !typeName]
+  end
+}
+
+#·······················································································································
+
+override getter @controlRegisterGroupDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = registerGroupNameFromPLMname (!mRegisterGroupName)
+}
+
+#·······················································································································
+
+override getter @controlRegisterGroupDeclarationAST location -> @location {
+  result = mRegisterGroupName
+}
+
+#·······················································································································
+
+override method @controlRegisterGroupDeclarationAST addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
+  !@abstractDeclarationAST outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#·······················································································································
+
+override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let nodeName = registerGroupNameFromPLMname (!mRegisterGroupName)
+#--- Add node
+  [!?ioGraph addNode !nodeName !self]
+#--- Add dependence definitions
+  for reg in mRegisters do
+  #--- Add dependency from type name
+    let typeName = llvmTypeNameFromPLMname (!reg.mRegisterTypeName)
+    [!?ioGraph addEdge !nodeName !typeName]
+  #--- Add dependency from config node
+    let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !nodeName.location}
+    [!?ioGraph addEdge !nodeName !rootNode]
+  #--- Add dependency from source expression
+    for register in reg.mRegisterArrayList do
+      switch register.mControlRegisterKind
+      case scalar :
+      case registerArray (@expressionAST arraySize * @expressionAST arrayElementSize *) :
+        [arraySize addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
+        [arrayElementSize addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
+      end
+    end
+  end
+}
+
+#·······················································································································
+#·······················································································································
 
 method @controlRegisterDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let typeName = llvmTypeNameFromPLMname (!mRegisterTypeName)
@@ -222,9 +352,6 @@ override method @controlRegisterDeclarationAST enterInPrecedenceGraph ?!@semanti
 override getter @controlRegisterDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   let nodeName = [mRegisterArrayList mRegisterNameAtIndex !0]
   outRepresentation = "control register " + nodeName
-#  for register in mRegisterArrayList do
-#    outRepresentation += " " + register.mRegisterName
-#  end
 }
 
 #·······················································································································
@@ -247,39 +374,42 @@ override method @controlRegisterDeclarationAST addExtension
 #!   CONTEXT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @controlRegisterDeclarationAST controlRegisterType
+private proc controlRegisterType
+  ?let @lstring inRegisterTypeName
   ?!context:@semanticContext ioContext
   !type:@PLMType outRegisterType
   !bitCount:@uint outRegisterBitCount
 {
-  outRegisterType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mRegisterTypeName} type]
+  outRegisterType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inRegisterTypeName} type]
   switch outRegisterType.kind
   case integer (* * * bitCount):
     outRegisterBitCount = bitCount
   case boolean, void :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case enumeration (*) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case literalString :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case staticInteger :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case structure (*) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case opaque (*) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case arrayType (* *) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case function (*) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case pointer (*) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-method @controlRegisterDeclarationAST buildControlRegisterSliceMap
+private proc buildControlRegisterSliceMap
+  ?let @controlRegisterBitSliceList inRegisterBitSliceList
+  ?let @location inEndOfBitSliceLocation
   ?!context:@semanticContext unused ioContext
   ?!type:@PLMType ioRegisterType
   ?bitCount:let @uint inRegisterBitCount
@@ -291,9 +421,9 @@ method @controlRegisterDeclarationAST buildControlRegisterSliceMap
   outRegisterFieldMap = {}
   outRegisterBitSliceMap = {}
   outControlRegisterFieldList = {} # Used for HTML file
-  if [mRegisterBitSliceList length] > 0 then
+  if [inRegisterBitSliceList length] > 0 then
     @uint shiftCount = 0
-    for > () in mRegisterBitSliceList do
+    for > () in inRegisterBitSliceList do
       switch mRegisterBitSlice
       case unusedBits (@lbigint count) :
         shiftCount = shiftCount + [count.bigint uint]
@@ -337,13 +467,168 @@ method @controlRegisterDeclarationAST buildControlRegisterSliceMap
     end
   #--- Check slice bit count is correct
     if inRegisterBitCount != shiftCount then
-      error mRegisterBitSliceListLocation
+      error inEndOfBitSliceLocation
        : "total bit slice count is " + shiftCount + " (should be " + inRegisterBitCount + ")"
     end
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
+
+method @controlRegisterDeclarationList-element enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@controlRegisterMap ioControlRegisterMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+{
+  controlRegisterType (!mRegisterTypeName !?context:ioContext ?type:var registerType ?bitCount:let registerBitCount)
+#--- Build bit slice map
+  buildControlRegisterSliceMap (
+    !mRegisterBitSliceList
+    !mRegisterBitSliceListLocation
+    !?context:ioContext
+    !?type:registerType
+    !bitCount:registerBitCount
+    ?let registerFieldMap
+    ?let registerBitSliceMap
+    ?let controlRegisterFieldList  # Used for HTML file
+  )
+#---  
+  let @bigint maxRegisterAddress = (1G << ioContext.mPointerSize) - 1G
+  for register in mRegisterArrayList do
+  #--- Analyze attributes
+    var isReadOnly = false
+    for (att) in register.mAttributeList do
+      if att.string == "ro" then
+        if isReadOnly then
+          error att : "duplicated attribute"
+        else
+          isReadOnly = true
+        end
+      else
+        error att : "only @ro (read only) attributes is accepted here"
+      end
+    end
+  #--- Analyse register address expression
+    [register.mRegisterAddress analyzeStaticExpression
+      !errorLocation:register.mRegisterAddressLocation
+      !context:ioContext
+      !?staticStringMap:ioGlobalLiteralStringMap
+      ?result:let @objectIR addressExpressionResult
+    ]
+    @bigint registerAddress
+    if not [addressExpressionResult isLiteralInteger] then
+      error register.mRegisterAddressLocation
+        : "control register address is not a static integer expression"
+        : registerAddress
+    else
+      [addressExpressionResult literalInteger ?1* ?value:registerAddress]
+   #--- Check address value
+      if registerAddress > maxRegisterAddress then
+        error register.mRegisterAddressLocation
+         : "register address should be lower or equal to " + [maxRegisterAddress hexString]
+      end
+    end
+    @bigint arraySize
+    @uint elementArraySize
+    switch register.mControlRegisterKind
+    case scalar :
+      arraySize = 0G
+      elementArraySize = 0
+    case registerArray (@expressionAST arraySizeExpression @location arraySizeLocation
+                        @expressionAST arrayElementSizeExpression @location arrayElementSizeLocation) :
+    #--- Analyse register array size expression
+      @semanticTemporariesStruct temporaries = .default
+      @instructionListIR instructionGenerationList = {}
+      @allocaList allocaList = {}
+      [arraySizeExpression analyzeExpression
+        !self:voidType ()
+        !routineAttributes:.none
+        !routineNameForInvocationGraph:["compiler" nowhere]
+        !optionalTargetType:voidType ()
+        !context:ioContext
+        !mode:.bootMode
+        !?temporary:temporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioContext.mValuedObjectMap # universalMap
+        !?alloca:allocaList
+        !?instructionListIR:instructionGenerationList
+        ?result:@objectIR sizeExpressionResult
+      ]
+      if not [sizeExpressionResult isLiteralInteger] then
+        error arraySizeLocation : "control register address is not a static integer expression" : arraySize
+      else
+        [sizeExpressionResult literalInteger ?1* ?value:arraySize]
+        if arraySize < 2G then
+          error arraySizeLocation
+            : "control register array size should be a static integer expression >= 2, equal to a power of 2"
+            : arraySize
+        else
+          let powerOfTwoForArraySize = [arraySize - 1G bitCountForUnsignedRepresentation]
+          if arraySize != (1G << powerOfTwoForArraySize) then
+            error arraySizeLocation
+              : "control register array size should be a static integer expression >= 2, equal to a power of 2"
+              : arraySize
+          end
+        end
+      end
+    #--- Analyse element array size expression
+      [arrayElementSizeExpression analyzeStaticExpression
+        !errorLocation:arrayElementSizeLocation
+        !context:ioContext
+        !?staticStringMap:ioGlobalLiteralStringMap
+        ?result:let @objectIR elementArraySizeExpressionResult
+      ]
+      if not [elementArraySizeExpressionResult isLiteralInteger] then
+        error arrayElementSizeLocation
+          : "element size is not a static integer expression"
+          : elementArraySize
+      else
+        [elementArraySizeExpressionResult literalInteger ?1* ?value:let elementArraySizeAsBigInt]
+        elementArraySize = [elementArraySizeAsBigInt uint]
+      end
+    end
+    [!?ioControlRegisterMap insertKey
+      !register.mRegisterName
+      !registerType
+      !isReadOnly
+      !registerBitSliceMap
+      !registerFieldMap
+      !registerAddress
+      !controlRegisterFieldList
+      !registerBitCount
+      ![arraySize uint]
+      !elementArraySize
+    ]
+  end
+}
+
+#·······················································································································
+
+override method @controlRegisterGroupDeclarationAST enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+{
+  @controlRegisterMap controlRegisterMap = {}
+  for reg in mRegisters do
+    [reg enterInContext !?context:ioContext !?controlRegisterMap !?staticStringMap:ioGlobalLiteralStringMap]
+  end
+  [!?ioContext.mControlRegisterGroupMap insertKey !mRegisterGroupName !controlRegisterMap]
+#    [!?ioContext.mValuedObjectMap insertRegister
+#      !register.mRegisterName
+#      !writable:not isReadOnly
+#      !type:registerType
+#      !address:registerAddress 
+#      !sliceMap:registerBitSliceMap
+#      !arraySize:[arraySize uint] # 0 if not an array
+#      !elementSize:elementArraySize # 0 if not an array
+#    ]
+}
+
+#·······················································································································
 
 override method @controlRegisterDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
@@ -353,16 +638,18 @@ override method @controlRegisterDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
-  [self controlRegisterType !?context:ioContext ?type:var registerType ?bitCount:let registerBitCount]
+  controlRegisterType (!mRegisterTypeName !?context:ioContext ?type:var registerType ?bitCount:let registerBitCount)
 #--- Build bit slice map
-  [self buildControlRegisterSliceMap
+  buildControlRegisterSliceMap (
+    !mRegisterBitSliceList
+    !mRegisterBitSliceListLocation
     !?context:ioContext
     !?type:registerType
     !bitCount:registerBitCount
     ?let registerFieldMap
     ?let registerBitSliceMap
     ?let controlRegisterFieldList  # Used for HTML file
-  ]
+  )
 #---  
   let @bigint maxRegisterAddress = (1G << ioContext.mPointerSize) - 1G
   for register in mRegisterArrayList do
