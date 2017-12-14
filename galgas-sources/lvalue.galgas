@@ -97,39 +97,6 @@ getter @LValueRepresentation type -> @PLMType {
 
 #·······················································································································
 
-method @LValueAST type
-  ?selfType: let @PLMType inSelfType
-  ?variableMap:let @universalValuedObjectMap inUniversalMap
-  !@PLMType outType
-{
-  if mIdentifier.string == "" then # Receiver is self
-    outType = inSelfType
-  else
-    [inUniversalMap searchValuedObjectType !mIdentifier ?outType]
-  end
-  for (access) in mAccessList do
-    switch access
-    case property (@lstring propertyName) :
-      let @propertyMap propertyMap = outType.propertyMap
-      [propertyMap searchKey !propertyName ?* ?let accessKind]
-      switch accessKind
-      case constantProperty (value) :
-        outType = [value type]
-      case indexed  (type *) :
-        outType = type
-      case nonVirtualMethod (*) :
-        error propertyName : "a method cannot be used in this context" : outType
-      end
-    case arrayAccess (* *) :
-      if [outType.kind isArrayType] then
-        [outType.kind arrayType ?elementType:outType ?1*]
-      end
-    end
-  end
-}
-
-#·······················································································································
-
 method @LValueAST analyzeLValue
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
@@ -262,9 +229,6 @@ private proc analyzeControlRegisterInLValue
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?registerGroupName:let @lstring inRegisterGroupName
   ?registerMap:let @controlRegisterMap inControlRegisterMap
-#  ?registerAddress:let @uint inRegisterAddress
-#  ?registerArraySize:let @uint inArraySize
-#  ?elementSize:let @uint inElementSize
   ?accessList:let @accessInAssignmentListAST inAccessList
   !@LValueRepresentation outInternalRepresentation
 {
@@ -291,14 +255,14 @@ private proc analyzeControlRegisterInLValue
         ?let @uint inRegisterArraySize # 0 if not an array
         ?let @uint inRegisterElementSize # 0 if not an array
       ]
-      if [inAccessList length] == 0 then # Simple access to a control register for writing
+      if [accessList length] == 0 then # Simple access to a control register for writing
         if inRegisterArraySize == 0 then
           outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:inRegisterAddress}
         else
           error controlRegisterName : "the control register is an array" : outInternalRepresentation
         end
-      elsif [inAccessList length] == 1 then # Simple access to a control register for writing
-        [inAccessList first ?let access]
+      elsif [accessList length] == 1 then # Simple access to a control register for writing
+        [accessList first ?let access]
         switch access
         case property (@lstring propertyName) :
           error propertyName : "writing a slice of a control register is not allowed" : outInternalRepresentation

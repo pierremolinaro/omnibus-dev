@@ -76,7 +76,7 @@ newtype $patternArray : $uint32 [PATTERN_LENGTH]
 driver pit > root {
   isr safe PITChannel3 {
   //--- Acquitter l'interruption
-    PIT_TFLG [3] = {PIT_TFLG !TIF:1}
+    PIT.TFLG [3] = {PIT.TFLG !TIF:1}
   //--- Toggle LED_L3
     digital.toggle (!port:LED_L3)
   }
@@ -108,8 +108,8 @@ system section initializeDMA (?!pattern $patternArray) {
   digital.write (!no !toPort:LED_L4)
 
 //--- Power on DMA_MUX, PIT, DMA
-  SIM_SCGC6 |= {SIM_SCGC6 !DMAMUX:1 !PIT:1}
-  SIM_SCGC7 |= {SIM_SCGC7 !DMA:1}
+  SIM.SCGC6 |= {SIM.SCGC6 !DMAMUX:1 !PIT:1}
+  SIM.SCGC7 |= {SIM.SCGC7 !DMA:1}
 
 //--- Unmask PIT0 interrupt
   enable (!interrupt:.PITChannel3)
@@ -118,16 +118,16 @@ system section initializeDMA (?!pattern $patternArray) {
   enable (!interrupt:.DMAChannel_0_16_TransferComplete)
 
 //--- Enable PIT module
-  PIT_MCR = 0
+  PIT.MCR = 0
 
 //--- Disable PIT3
-  PIT_TCTRL [3] = 0
+  PIT.TCTRL [3] = 0
 
-//--- PIT0 clock frequency is F_BUS (in Hertz): PIT_LDVAL3 sets the request period of DMA 0
-  PIT_LDVAL [3] = ((F_BUS_MHZ * 1_000_000) / PATTERN_FREQUENCY) - 1
+//--- PIT0 clock frequency is F_BUS (in Hertz): PIT.LDVAL3 sets the request period of DMA 0
+  PIT.LDVAL [3] = ((F_BUS_MHZ * 1_000_000) / PATTERN_FREQUENCY) - 1
 
 //--- Clear PIT3 interrupt flag
-  PIT_TFLG [3] = 1
+  PIT.TFLG [3] = 1
 
 //--- Disable DMA Channel 0: it is required for configuring it
   DMAMUX_CHCFG [3] = 0
@@ -181,7 +181,7 @@ system section initializeDMA (?!pattern $patternArray) {
   DMA_SERQ = 3
 
 //--- Enable PIT 0 : it starts counting, enable interrupt
-  PIT_TCTRL [3] = {PIT_TCTRL !TEN:1 !TIE:1}
+  PIT.TCTRL [3] = {PIT.TCTRL !TEN:1 !TIE:1}
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

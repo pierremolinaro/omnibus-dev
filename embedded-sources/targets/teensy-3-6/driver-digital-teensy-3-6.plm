@@ -49,16 +49,16 @@ driver digital ()
 driver digital > root {
 
   //··············································································
-  // By default, the 32 PORTA_PCR registers are not accessible in user mode
+  // By default, the 32 PORTA.PCR registers are not accessible in user mode
   // Their adresses : 0x4004_9000 --> 0x4004_907C
   // This corresponds to AIPS slot 73 (§4.5.1)
-  // By default, the 32 PORTB_PCR registers are not accessible in user mode
+  // By default, the 32 PORTB.PCR registers are not accessible in user mode
   // Their adresses : 0x4004_A000 --> 0x4004_A07C
   // This corresponds to AIPS slot 74 (§4.5.1)
-  // By default, the 32 PORTC_PCR registers are not accessible in user mode
+  // By default, the 32 PORTC.PCR registers are not accessible in user mode
   // Their adresses : 0x4004_B000 --> 0x4004_B07C
   // This corresponds to AIPS slot 75 (§4.5.1)
-  // By default, the 32 PORTD_PCR registers are not accessible in user mode
+  // By default, the 32 PORTD.PCR registers are not accessible in user mode
   // Their adresses : 0x4004_C000 --> 0x4004_C07C
   // This corresponds to AIPS slot 76 (§4.5.1)
   //··············································································
@@ -80,361 +80,361 @@ driver digital > root {
     case D0 : // PTB16
       switch mode {
       case OUTPUT :
-        PORTB_PCR [16] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [16] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR |= (1 << 16)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTB_PCR [16] = {PORTB_PCR !MUX:1 !ODE:1}
+        PORTB.PCR [16] = {PORTB.PCR !MUX:1 !ODE:1}
         GPIOB_PDDR |= (1 << 16)
       case INPUT :
-        PORTB_PCR [16] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [16] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR &= ~ (1 << 16)
       case INPUT_PULLUP :
-        PORTB_PCR [16] = {PORTB_PCR !MUX:1 !PE:1 !PS:1}
+        PORTB.PCR [16] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
         GPIOB_PDDR &= ~ (1 << 16)
       }
     case D1 : // PTB17
       switch mode {
       case OUTPUT :
-        PORTB_PCR [17] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [17] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR |= (1 << 17)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTB_PCR [17] = {PORTB_PCR !MUX:1 !ODE:1}
+        PORTB.PCR [17] = {PORTB.PCR !MUX:1 !ODE:1}
         GPIOB_PDDR |= (1 << 17)
       case INPUT :
-        PORTB_PCR [17] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [17] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR &= ~ (1 << 17)
       case INPUT_PULLUP :
-        PORTB_PCR [17] = {PORTB_PCR !MUX:1 !PE:1 !PS:1}
+        PORTB.PCR [17] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
         GPIOB_PDDR &= ~ (1 << 17)
       }
     case D2 : // PTD0
       switch mode {
       case OUTPUT :
-        PORTD_PCR [0] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [0] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR |= (1 << 0)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTD_PCR [0] = {PORTD_PCR !MUX:1 !ODE:1}
+        PORTD.PCR [0] = {PORTD.PCR !MUX:1 !ODE:1}
         GPIOD_PDDR |= (1 << 0)
       case INPUT :
-        PORTD_PCR [0] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [0] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR &= ~ (1 << 0)
       case INPUT_PULLUP :
-        PORTD_PCR [0] = {PORTD_PCR !MUX:1 !PE:1 !PS:1}
+        PORTD.PCR [0] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
         GPIOD_PDDR &= ~ (1 << 0)
       }
     case D3 : // PTA12
       switch mode {
       case OUTPUT :
-        PORTA_PCR [12] = {PORTA_PCR !MUX:1}
+        PORTA.PCR [12] = {PORTA.PCR !MUX:1}
         GPIOA_PDDR |= (1 << 12)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTA_PCR [12] = {PORTA_PCR !MUX:1 !ODE:1}
+        PORTA.PCR [12] = {PORTA.PCR !MUX:1 !ODE:1}
         GPIOA_PDDR |= (1 << 12)
       case INPUT :
-        PORTA_PCR [12] = {PORTA_PCR !MUX:1}
+        PORTA.PCR [12] = {PORTA.PCR !MUX:1}
         GPIOA_PDDR &= ~ (1 << 12)
       case INPUT_PULLUP :
-        PORTA_PCR [12] = {PORTA_PCR !MUX:1 !PE:1 !PS:1}
+        PORTA.PCR [12] = {PORTA.PCR !MUX:1 !PE:1 !PS:1}
         GPIOA_PDDR &= ~ (1 << 12)
       }
     case D4 : // PTA13
       switch mode {
       case OUTPUT :
-        PORTA_PCR [13] = {PORTA_PCR !MUX:1}
+        PORTA.PCR [13] = {PORTA.PCR !MUX:1}
         GPIOA_PDDR |= (1 << 13)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTA_PCR [13] = {PORTA_PCR !MUX:1 !ODE:1}
+        PORTA.PCR [13] = {PORTA.PCR !MUX:1 !ODE:1}
         GPIOA_PDDR |= (1 << 13)
       case INPUT :
-        PORTA_PCR [13] = {PORTA_PCR !MUX:1}
+        PORTA.PCR [13] = {PORTA.PCR !MUX:1}
         GPIOA_PDDR &= ~ (1 << 13)
       case INPUT_PULLUP :
-        PORTA_PCR [13] = {PORTA_PCR !MUX:1 !PE:1 !PS:1}
+        PORTA.PCR [13] = {PORTA.PCR !MUX:1 !PE:1 !PS:1}
         GPIOA_PDDR &= ~ (1 << 13)
       }
     case D5 : // PTD7
       switch mode {
       case OUTPUT :
-        PORTD_PCR [7] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [7] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR |= (1 << 7)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTD_PCR [7] = {PORTD_PCR !MUX:1 !ODE:1}
+        PORTD.PCR [7] = {PORTD.PCR !MUX:1 !ODE:1}
         GPIOD_PDDR |= (1 << 7)
       case INPUT :
-        PORTD_PCR [7] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [7] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR &= ~ (1 << 7)
       case INPUT_PULLUP :
-        PORTD_PCR [7] = {PORTD_PCR !MUX:1 !PE:1 !PS:1}
+        PORTD.PCR [7] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
         GPIOD_PDDR &= ~ (1 << 7)
       }
     case D6 : // PTD4
       switch mode {
       case OUTPUT :
-        PORTD_PCR [4] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [4] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR |= (1 << 4)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTD_PCR [4] = {PORTD_PCR !MUX:1 !ODE:1}
+        PORTD.PCR [4] = {PORTD.PCR !MUX:1 !ODE:1}
         GPIOD_PDDR |= (1 << 4)
       case INPUT :
-        PORTD_PCR [4] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [4] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR &= ~ (1 << 4)
       case INPUT_PULLUP :
-        PORTD_PCR [4] = {PORTD_PCR !MUX:1 !PE:1 !PS:1}
+        PORTD.PCR [4] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
         GPIOD_PDDR &= ~ (1 << 4)
       }
     case D7 : // PTD2
       switch mode {
       case OUTPUT :
-        PORTD_PCR [2] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [2] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR |= (1 << 2)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTD_PCR [2] = {PORTD_PCR !MUX:1 !ODE:1}
+        PORTD.PCR [2] = {PORTD.PCR !MUX:1 !ODE:1}
         GPIOD_PDDR |= (1 << 2)
       case INPUT :
-        PORTD_PCR [2] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [2] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR &= ~ (1 << 2)
       case INPUT_PULLUP :
-        PORTD_PCR [2] = {PORTD_PCR !MUX:1 !PE:1 !PS:1}
+        PORTD.PCR [2] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
         GPIOD_PDDR &= ~ (1 << 2)
       }
     case D8 : // PTD3
       switch mode {
       case OUTPUT :
-        PORTD_PCR [3] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [3] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR |= (1 << 3)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTD_PCR [3] = {PORTD_PCR !MUX:1 !ODE:1}
+        PORTD.PCR [3] = {PORTD.PCR !MUX:1 !ODE:1}
         GPIOD_PDDR |= (1 << 3)
       case INPUT :
-        PORTD_PCR [3] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [3] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR &= ~ (1 << 3)
       case INPUT_PULLUP :
-        PORTD_PCR [3] = {PORTD_PCR !MUX:1 !PE:1 !PS:1}
+        PORTD.PCR [3] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
         GPIOD_PDDR &= ~ (1 << 3)
       }
     case D9  : // PTC3
       switch mode {
       case OUTPUT :
-        PORTC_PCR [3] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [3] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR |= (1 << 3)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTC_PCR [3] = {PORTC_PCR !MUX:1 !ODE:1}
+        PORTC.PCR [3] = {PORTC.PCR !MUX:1 !ODE:1}
         GPIOC_PDDR |= (1 << 3)
       case INPUT :
-        PORTC_PCR [3] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [3] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR &= ~ (1 << 3)
       case INPUT_PULLUP :
-        PORTC_PCR [3] = {PORTC_PCR !MUX:1 !PE:1 !PS:1}
+        PORTC.PCR [3] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
         GPIOC_PDDR &= ~ (1 << 3)
       }
     case D10 : // PTC4
       switch mode {
       case OUTPUT :
-        PORTC_PCR [4] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [4] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR |= (1 << 4)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTC_PCR [4] = {PORTC_PCR !MUX:1 !ODE:1}
+        PORTC.PCR [4] = {PORTC.PCR !MUX:1 !ODE:1}
         GPIOC_PDDR |= (1 << 4)
       case INPUT :
-        PORTC_PCR [4] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [4] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR &= ~ (1 << 4)
       case INPUT_PULLUP :
-        PORTC_PCR [4] = {PORTC_PCR !MUX:1 !PE:1 !PS:1}
+        PORTC.PCR [4] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
         GPIOC_PDDR &= ~ (1 << 4)
       }
     case D11 : // PTC6
       switch mode {
       case OUTPUT :
-        PORTC_PCR [6] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [6] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR |= (1 << 6)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTC_PCR [6] = {PORTC_PCR !MUX:1 !ODE:1}
+        PORTC.PCR [6] = {PORTC.PCR !MUX:1 !ODE:1}
         GPIOC_PDDR |= (1 << 6)
       case INPUT :
-        PORTC_PCR [6] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [6] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR &= ~ (1 << 6)
       case INPUT_PULLUP :
-        PORTC_PCR [6] = {PORTC_PCR !MUX:1 !PE:1 !PS:1}
+        PORTC.PCR [6] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
         GPIOC_PDDR &= ~ (1 << 6)
       }
     case D12 : // PTC7
       switch mode {
       case OUTPUT :
-        PORTC_PCR [7] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [7] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR |= (1 << 7)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTC_PCR [7] = {PORTC_PCR !MUX:1 !ODE:1}
+        PORTC.PCR [7] = {PORTC.PCR !MUX:1 !ODE:1}
         GPIOC_PDDR |= (1 << 7)
       case INPUT :
-        PORTC_PCR [7] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [7] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR &= ~ (1 << 7)
       case INPUT_PULLUP :
-        PORTC_PCR [7] = {PORTC_PCR !MUX:1 !PE:1 !PS:1}
+        PORTC.PCR [7] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
         GPIOC_PDDR &= ~ (1 << 7)
       }
     case D13 : // PTC5
       switch mode {
       case OUTPUT :
-        PORTC_PCR [5] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [5] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR |= (1 << 5)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTC_PCR [5] = {PORTC_PCR !MUX:1 !ODE:1}
+        PORTC.PCR [5] = {PORTC.PCR !MUX:1 !ODE:1}
         GPIOC_PDDR |= (1 << 5)
       case INPUT :
-        PORTC_PCR [5] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [5] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR &= ~ (1 << 5)
       case INPUT_PULLUP :
-        PORTC_PCR [5] = {PORTC_PCR !MUX:1 !PE:1 !PS:1}
+        PORTC.PCR [5] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
         GPIOC_PDDR &= ~ (1 << 5)
       }
     case D14 : // PTD1
       switch mode {
       case OUTPUT :
-        PORTD_PCR [1] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [1] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR |= (1 << 1)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTD_PCR [1] = {PORTD_PCR !MUX:1 !ODE:1}
+        PORTD.PCR [1] = {PORTD.PCR !MUX:1 !ODE:1}
         GPIOD_PDDR |= (1 << 1)
       case INPUT :
-        PORTD_PCR [1] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [1] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR &= ~ (1 << 1)
       case INPUT_PULLUP :
-        PORTD_PCR [1] = {PORTD_PCR !MUX:1 !PE:1 !PS:1}
+        PORTD.PCR [1] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
         GPIOD_PDDR &= ~ (1 << 1)
       }
     case D15 : // PTC0
       switch mode {
       case OUTPUT :
-        PORTC_PCR [0] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [0] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR |= (1 << 0)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTC_PCR [0] = {PORTC_PCR !MUX:1 !ODE:1}
+        PORTC.PCR [0] = {PORTC.PCR !MUX:1 !ODE:1}
         GPIOC_PDDR |= (1 << 0)
       case INPUT :
-        PORTC_PCR [0] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [0] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR &= ~ (1 << 0)
       case INPUT_PULLUP :
-        PORTC_PCR [0] = {PORTC_PCR !MUX:1 !PE:1 !PS:1}
+        PORTC.PCR [0] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
         GPIOC_PDDR &= ~ (1 << 0)
       }
     case D16 : // PTB0
       switch mode {
       case OUTPUT :
-        PORTB_PCR [0] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [0] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR |= (1 << 0)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTB_PCR [0] = {PORTB_PCR !MUX:1 !ODE:1}
+        PORTB.PCR [0] = {PORTB.PCR !MUX:1 !ODE:1}
         GPIOB_PDDR |= (1 << 0)
       case INPUT :
-        PORTB_PCR [0] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [0] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR &= ~ (1 << 0)
       case INPUT_PULLUP :
-        PORTB_PCR [0] = {PORTB_PCR !MUX:1 !PE:1 !PS:1}
+        PORTB.PCR [0] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
         GPIOB_PDDR &= ~ (1 << 0)
       }
     case D17 : // PTB1
       switch mode {
       case OUTPUT :
-        PORTB_PCR [1] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [1] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR |= (1 << 1)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTB_PCR [1] = {PORTB_PCR !MUX:1 !ODE:1}
+        PORTB.PCR [1] = {PORTB.PCR !MUX:1 !ODE:1}
         GPIOB_PDDR |= (1 << 1)
       case INPUT :
-        PORTB_PCR [1] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [1] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR &= ~ (1 << 1)
       case INPUT_PULLUP :
-        PORTB_PCR [1] = {PORTB_PCR !MUX:1 !PE:1 !PS:1}
+        PORTB.PCR [1] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
         GPIOB_PDDR &= ~ (1 << 1)
       }
     case D18 : // PTB3
       switch mode {
       case OUTPUT :
-        PORTB_PCR [3] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [3] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR |= (1 << 3)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTB_PCR [3] = {PORTB_PCR !MUX:1 !ODE:1}
+        PORTB.PCR [3] = {PORTB.PCR !MUX:1 !ODE:1}
         GPIOB_PDDR |= (1 << 3)
       case INPUT :
-        PORTB_PCR [3] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [3] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR &= ~ (1 << 3)
       case INPUT_PULLUP :
-        PORTB_PCR [3] = {PORTB_PCR !MUX:1 !PE:1 !PS:1}
+        PORTB.PCR [3] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
         GPIOB_PDDR &= ~ (1 << 3)
       }
     case D19 : // PTB2
       switch mode {
       case OUTPUT :
-        PORTB_PCR [2] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [2] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR |= (1 << 2)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTB_PCR [2] = {PORTB_PCR !MUX:1 !ODE:1}
+        PORTB.PCR [2] = {PORTB.PCR !MUX:1 !ODE:1}
         GPIOB_PDDR |= (1 << 2)
       case INPUT :
-        PORTB_PCR [2] = {PORTB_PCR !MUX:1}
+        PORTB.PCR [2] = {PORTB.PCR !MUX:1}
         GPIOB_PDDR &= ~ (1 << 2)
       case INPUT_PULLUP :
-        PORTB_PCR [2] = {PORTB_PCR !MUX:1 !PE:1 !PS:1}
+        PORTB.PCR [2] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
         GPIOB_PDDR &= ~ (1 << 2)
       }
     case D20 : // PTD5
       switch mode {
       case OUTPUT :
-        PORTD_PCR [5] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [5] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR |= (1 << 5)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTD_PCR [5] = {PORTD_PCR !MUX:1 !ODE:1}
+        PORTD.PCR [5] = {PORTD.PCR !MUX:1 !ODE:1}
         GPIOD_PDDR |= (1 << 5)
       case INPUT :
-        PORTD_PCR [5] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [5] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR &= ~ (1 << 5)
       case INPUT_PULLUP :
-        PORTD_PCR [5] = {PORTD_PCR !MUX:1 !PE:1 !PS:1}
+        PORTD.PCR [5] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
         GPIOD_PDDR &= ~ (1 << 5)
       }
     case D21 : // PTD6
       switch mode {
       case OUTPUT :
-        PORTD_PCR [6] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [6] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR |= (1 << 6)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTD_PCR [6] = {PORTD_PCR !MUX:1 !ODE:1}
+        PORTD.PCR [6] = {PORTD.PCR !MUX:1 !ODE:1}
         GPIOD_PDDR |= (1 << 6)
       case INPUT :
-        PORTD_PCR [6] = {PORTD_PCR !MUX:1}
+        PORTD.PCR [6] = {PORTD.PCR !MUX:1}
         GPIOD_PDDR &= ~ (1 << 6)
       case INPUT_PULLUP :
-        PORTD_PCR [6] = {PORTD_PCR !MUX:1 !PE:1 !PS:1}
+        PORTD.PCR [6] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
         GPIOD_PDDR &= ~ (1 << 6)
       }
     case D22 : // PTC1
       switch mode {
       case OUTPUT :
-        PORTC_PCR [1] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [1] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR |= (1 << 1)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTC_PCR [1] = {PORTC_PCR !MUX:1 !ODE:1}
+        PORTC.PCR [1] = {PORTC.PCR !MUX:1 !ODE:1}
         GPIOC_PDDR |= (1 << 1)
       case INPUT :
-        PORTC_PCR [1] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [1] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR &= ~ (1 << 1)
       case INPUT_PULLUP :
-        PORTC_PCR [1] = {PORTC_PCR !MUX:1 !PE:1 !PS:1}
+        PORTC.PCR [1] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
         GPIOC_PDDR &= ~ (1 << 1)
       }
     case D23 : // PTC2
       switch mode {
       case OUTPUT :
-        PORTC_PCR [2] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [2] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR |= (1 << 2)
       case OUTPUT_OPEN_COLLECTOR :
-        PORTC_PCR [2] = {PORTC_PCR !MUX:1 !ODE:1}
+        PORTC.PCR [2] = {PORTC.PCR !MUX:1 !ODE:1}
         GPIOC_PDDR |= (1 << 2)
       case INPUT :
-        PORTC_PCR [2] = {PORTC_PCR !MUX:1}
+        PORTC.PCR [2] = {PORTC.PCR !MUX:1}
         GPIOC_PDDR &= ~ (1 << 2)
       case INPUT_PULLUP :
-        PORTC_PCR [2] = {PORTC_PCR !MUX:1 !PE:1 !PS:1}
+        PORTC.PCR [2] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
         GPIOC_PDDR &= ~ (1 << 2)
       }
     }

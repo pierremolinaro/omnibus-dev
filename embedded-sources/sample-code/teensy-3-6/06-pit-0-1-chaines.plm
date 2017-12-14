@@ -27,24 +27,24 @@ driver timer > root {
  
   init {
   //--- Power on DMA_MUX, PIT, DMA
-    SIM_SCGC6 |= {SIM_SCGC6 !PIT:1}
+    SIM.SCGC6 |= {SIM.SCGC6 !PIT:1}
    //--- Enable PIT module
-    PIT_MCR = 0
+    PIT.MCR = 0
   //--- Disable PIT0 and PIT1
-    PIT_TCTRL [0] = 0
-    PIT_TCTRL [1] = 0
+    PIT.TCTRL [0] = 0
+    PIT.TCTRL [1] = 0
   //--- PIT0 clock frequency is F_BUS (in Hertz)
-    PIT_LDVAL [0] = $uint32.max
-    PIT_LDVAL [1] = $uint32.max
+    PIT.LDVAL [0] = $uint32.max
+    PIT.LDVAL [1] = $uint32.max
   //--- Enable PIT0 and PIT1 : start counting, no interrupt
-    PIT_TCTRL [1] = {PIT_TCTRL !CHN:1 !TEN:1}
-    PIT_TCTRL [0] = {PIT_TCTRL !TEN:1}
+    PIT.TCTRL [1] = {PIT.TCTRL !CHN:1 !TEN:1}
+    PIT.TCTRL [0] = {PIT.TCTRL !TEN:1}
   }
   
   public system safe now @noUnusedWarning () -> $uptime {
-    var r $uint64 = extend (PIT_LTMR64H)
+    var r $uint64 = extend (PIT.LTMR64H)
     r <<= 32
-    r |= extend (PIT_LTMR64L)
+    r |= extend (PIT.LTMR64L)
     r = ~ r
     r +%= 1
     result = $uptime (!rawValue: r)
