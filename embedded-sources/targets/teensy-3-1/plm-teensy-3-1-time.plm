@@ -14,21 +14,21 @@ driver time > root {
   //············································································
 
   init { // Configure Systick interrupt every ms
-    SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
-    SYST_CVR = 0
-    SYST_CSR = {SYST_CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
+    SYST.RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
+    SYST.CVR = 0
+    SYST.CSR = {SYST.CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
   }
 
   //············································································
 
   public func init oneMillisecondBusyWait @noUnusedWarning () {
-    while not SYST_CSR.COUNTFLAG.bool {}
+    while not SYST.CSR.COUNTFLAG.bool {}
   }
 
   //············································································
 
   public func panic panicOneMillisecondBusyWait @noUnusedWarning () {
-    while not SYST_CSR.COUNTFLAG.bool {}
+    while not SYST.CSR.COUNTFLAG.bool {}
   }
 
   //············································································
