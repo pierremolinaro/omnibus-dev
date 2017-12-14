@@ -109,12 +109,6 @@ override method @initAST enterInContext
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @initRoutinePriorityMap {
-  insert insertKey error message "an init routine with priority %K has been already declared"
-}
-
-#·······················································································································
-
 class @decoratedInitRoutine : @abstractDecoratedDeclaration {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
@@ -141,6 +135,8 @@ override method @decoratedInitRoutine semanticAnalysis
     ?let @allocaList allocaList
     ?let @instructionListIR instructionGenerationList
   )
+#--- Build initialized driver set
+  ioTemporaries.mInitializedDriverSet += !mDriverName.string
 #--- Code generation
   ioIntermediateCodeStruct.mInitList +=
     !selfType
@@ -164,7 +160,6 @@ private proc initSemanticAnalysis
 {
 #--- Check init routine is unique
   let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.plmTypeName !inLocation)
-  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !routineNameForInvocationGraph]
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]

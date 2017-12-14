@@ -152,7 +152,7 @@ override method @syncInstructionAST analyze
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -173,7 +173,7 @@ override method @syncInstructionAST analyze
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:voidType ()
         !context:inContext
-        !mode:inCurrentMode
+        !mode:inMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioUniversalMap
@@ -205,7 +205,7 @@ override method @syncInstructionAST analyze
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:voidType ()
         !context:inContext
-        !mode:inCurrentMode
+        !mode:inMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioUniversalMap
@@ -249,7 +249,7 @@ override method @syncInstructionAST analyze
             !effective:parameterList
             !callerForInvocationGraph:inCallerNameForInvocationGraph
             !context:inContext
-            !requiredMode:inCurrentMode
+            !requiredMode:inMode
             !?temporary:ioTemporaries
             !?staticStringMap:ioGlobalLiteralStringMap
             !?variableMap:ioUniversalMap
@@ -266,7 +266,7 @@ override method @syncInstructionAST analyze
           !effective:parameterList
           !callerForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
-          !requiredMode:inCurrentMode
+          !requiredMode:inMode
           !?temporary:ioTemporaries
           !?staticStringMap:ioGlobalLiteralStringMap
           !?variableMap:ioUniversalMap
@@ -279,7 +279,12 @@ override method @syncInstructionAST analyze
         var propertyList = nameList
         [!?propertyList popFirst ?let globalReceiverName]
         [!?propertyList popLast ?let guardName]
-        [ioUniversalMap searchValuedObject !globalReceiverName !inRoutineAttributes ?var currentObjectIR]
+        [ioUniversalMap searchValuedObject
+          !globalReceiverName
+          !inRoutineAttributes
+          !ioTemporaries.mInitializedDriverSet
+          ?var currentObjectIR
+        ]
         for (propertyName) in propertyList do
           handlePropertyAccessInExpression (
             !?currentObjectIR
@@ -295,7 +300,7 @@ override method @syncInstructionAST analyze
           !effective:parameterList
           !callerForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
-          !requiredMode:inCurrentMode
+          !requiredMode:inMode
           !?temporary:ioTemporaries
           !?staticStringMap:ioGlobalLiteralStringMap
           !?variableMap:ioUniversalMap
@@ -322,7 +327,7 @@ override method @syncInstructionAST analyze
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:endOfBranch
       !context:inContext
-      !mode:inCurrentMode
+      !mode:inMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioUniversalMap

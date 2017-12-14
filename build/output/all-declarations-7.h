@@ -443,7 +443,6 @@ void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObj
 void extensionSetter_insertRegister (class GALGAS_universalValuedObjectMap & ioObject,
                                      const class GALGAS_lstring constin_inRegisterName,
                                      const class GALGAS_bool constin_inWritable,
-                                     const class GALGAS_bool constin_inAccessibleInUserMode,
                                      const class GALGAS_PLMType constin_inType,
                                      const class GALGAS_bigint constin_inAddress,
                                      const class GALGAS_sliceMap constin_inSliceMap,
@@ -514,6 +513,7 @@ void extensionSetter_insertLocalVariable (class GALGAS_universalValuedObjectMap 
 void extensionMethod_searchValuedObject (const class GALGAS_universalValuedObjectMap inObject,
                                          const class GALGAS_lstring constin_inValuedObjectName,
                                          const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                         const class GALGAS_stringset constin_inInitializedDriverSet,
                                          class GALGAS_objectIR & out_outObjectIR,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;

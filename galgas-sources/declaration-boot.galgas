@@ -53,7 +53,7 @@ override method @bootAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph i
  [!?ioGraph addNode !nodeName !self]
  [!?ioGraph addEdge !nodeName !mDriverName]
  for (dependanceDriverName) in mDriverDependanceList do
-   let dependanceNodeName = @lstring.new {!"boot " + dependanceDriverName !dependanceDriverName}
+   let dependanceNodeName = @lstring.new {!"boot " + dependanceDriverName.string !dependanceDriverName.location}
    [!?ioGraph addEdge !nodeName !dependanceNodeName]
  end
 }
@@ -111,12 +111,6 @@ override method @bootAST enterInContext
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @bootRoutinePriorityMap {
-  insert insertKey error message "a boot routine with priority %K has been already declared"
-}
-
-#·······················································································································
-
 class @decoratedBootRoutine : @abstractDecoratedDeclaration {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
@@ -134,7 +128,6 @@ override method @decoratedBootRoutine semanticAnalysis
 {
 #---
   let routineNameForInvocationGraph = @lstring.new  {!"boot " + mDriverName !mDriverName.location}
-  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !routineNameForInvocationGraph]
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]

@@ -411,7 +411,6 @@ private proc setupSemanticAnalysis
 {
 #--- Check init routine is unique
   let routineNameForInvocationGraph = setupNameForInvocationGraph (!inSelfType.plmTypeName !inPriority)
-  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !routineNameForInvocationGraph]
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]

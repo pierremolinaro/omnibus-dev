@@ -174,11 +174,11 @@ method @LValueAST analyzeLValue
       error mIdentifier : "a task has no value" : outInternalRepresentation
     case driver (* *) :
       error mIdentifier : "a driver has no value" : outInternalRepresentation
-    case register (writable accessibleInUserMode registerType registerAddress * arraySize elementSize) :
+    case register (writable registerType registerAddress * arraySize elementSize) :
       if not writable then
          error mIdentifier : "the control register is not writable in this context" : outInternalRepresentation
-      elsif ([inMode isUserMode] || [inMode isAnyMode]) && not accessibleInUserMode then
-         error mIdentifier : "the control register is not accessible in user mode" : outInternalRepresentation
+      elsif [inMode isUserMode] || [inMode isAnyMode] then
+         error mIdentifier : "a control register is not accessible in user mode" : outInternalRepresentation
       else
         analyzeControlRegisterInLValue (
           !self: inSelfType

@@ -5,22 +5,22 @@ let f_mem $uint32 = 24_000_000
 
 // chapter 11: Port control and interrupts (PORT) Pin Control Register n
 register
-  PORTA_PCR @user [32] at 0x4004_9000 : 4 $uint32 {
+  PORTA_PCR [32] at 0x4004_9000 : 4 $uint32 {
   7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
 }
 
 register
-  PORTB_PCR @user [32] at 0x4004_A000 : 4 $uint32 {
+  PORTB_PCR [32] at 0x4004_A000 : 4 $uint32 {
   7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
 }
 
 register
-  PORTC_PCR @user [32] at 0x4004_B000 : 4 $uint32 {
+  PORTC_PCR [32] at 0x4004_B000 : 4 $uint32 {
   7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
 }
 
 register
-  PORTD_PCR @user [32] at 0x4004_C000 : 4 $uint32 {
+  PORTD_PCR [32] at 0x4004_C000 : 4 $uint32 {
   7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
 }
 
@@ -1522,37 +1522,37 @@ register RTC_RAR at 0x4003D804 $uint32 // RTC Read Access Register
 
 // Chapter 47: General-Purpose Input/Output (GPIO)
 register GPIOA_PDOR at 0x400FF000 $uint32 // Port Data Output Register
-register GPIOA_PSOR @user at 0x400FF004 $uint32 // Port Set Output Register
-register GPIOA_PCOR @user at 0x400FF008 $uint32 // Port Clear Output Register
-register GPIOA_PTOR @user at 0x400FF00C $uint32 // Port Toggle Output Register
-register GPIOA_PDIR @user at 0x400FF010 $uint32 // Port Data Input Register
-register GPIOA_PDDR @user at 0x400FF014 $uint32 // Port Data Direction Register
+register GPIOA_PSOR at 0x400FF004 $uint32 // Port Set Output Register
+register GPIOA_PCOR at 0x400FF008 $uint32 // Port Clear Output Register
+register GPIOA_PTOR at 0x400FF00C $uint32 // Port Toggle Output Register
+register GPIOA_PDIR at 0x400FF010 $uint32 // Port Data Input Register
+register GPIOA_PDDR at 0x400FF014 $uint32 // Port Data Direction Register
 
 register GPIOB_PDOR at 0x400FF040 $uint32 // Port Data Output Register
-register GPIOB_PSOR @user at 0x400FF044 $uint32 // Port Set Output Register
-register GPIOB_PCOR @user at 0x400FF048 $uint32 // Port Clear Output Register
-register GPIOB_PTOR @user at 0x400FF04C $uint32 // Port Toggle Output Register
-register GPIOB_PDIR @user at 0x400FF050 $uint32 // Port Data Input Register
-register GPIOB_PDDR @user at 0x400FF054 $uint32 // Port Data Direction Register
+register GPIOB_PSOR at 0x400FF044 $uint32 // Port Set Output Register
+register GPIOB_PCOR at 0x400FF048 $uint32 // Port Clear Output Register
+register GPIOB_PTOR at 0x400FF04C $uint32 // Port Toggle Output Register
+register GPIOB_PDIR at 0x400FF050 $uint32 // Port Data Input Register
+register GPIOB_PDDR at 0x400FF054 $uint32 // Port Data Direction Register
 
 register GPIOC_PDOR at 0x400FF080 $uint32 // Port Data Output Register
-register GPIOC_PSOR @user at 0x400FF084 $uint32 // Port Set Output Register
-register GPIOC_PCOR @user at 0x400FF088 $uint32 // Port Clear Output Register
-register GPIOC_PTOR @user at 0x400FF08C $uint32 // Port Toggle Output Register
-register GPIOC_PDIR @user at 0x400FF090 $uint32 // Port Data Input Register
-register GPIOC_PDDR @user at 0x400FF094 $uint32 // Port Data Direction Register
+register GPIOC_PSOR at 0x400FF084 $uint32 // Port Set Output Register
+register GPIOC_PCOR at 0x400FF088 $uint32 // Port Clear Output Register
+register GPIOC_PTOR at 0x400FF08C $uint32 // Port Toggle Output Register
+register GPIOC_PDIR at 0x400FF090 $uint32 // Port Data Input Register
+register GPIOC_PDDR at 0x400FF094 $uint32 // Port Data Direction Register
 
 register GPIOD_PDOR at 0x400FF0C0 $uint32 // Port Data Output Register
-register GPIOD_PSOR @user at 0x400FF0C4 $uint32 // Port Set Output Register
-register GPIOD_PCOR @user at 0x400FF0C8 $uint32 // Port Clear Output Register
-register GPIOD_PTOR @user at 0x400FF0CC $uint32 // Port Toggle Output Register
-register GPIOD_PDIR @user at 0x400FF0D0 $uint32 // Port Data Input Register
-register GPIOD_PDDR @user at 0x400FF0D4 $uint32 // Port Data Direction Register
+register GPIOD_PSOR at 0x400FF0C4 $uint32 // Port Set Output Register
+register GPIOD_PCOR at 0x400FF0C8 $uint32 // Port Clear Output Register
+register GPIOD_PTOR at 0x400FF0CC $uint32 // Port Toggle Output Register
+register GPIOD_PDIR at 0x400FF0D0 $uint32 // Port Data Input Register
+register GPIOD_PDDR at 0x400FF0D4 $uint32 // Port Data Direction Register
 
 //register GPIOE_PDOR   at 0x400FF100 $uint32 // Port Data Output Register
-//register GPIOE_PSOR @user at 0x400FF104 $uint32 // Port Set Output Register
-//register GPIOE_PCOR @user at 0x400FF108 $uint32 // Port Clear Output Register
-//register GPIOE_PTOR @user at 0x400FF10C $uint32 // Port Toggle Output Register
+//register GPIOE_PSOR at 0x400FF104 $uint32 // Port Set Output Register
+//register GPIOE_PCOR at 0x400FF108 $uint32 // Port Clear Output Register
+//register GPIOE_PTOR at 0x400FF10C $uint32 // Port Toggle Output Register
 //register GPIOE_PDIR   at 0x400FF110 $uint32 // Port Data Input Register
 //register GPIOE_PDDR   at 0x400FF114 $uint32 // Port Data Direction Register
 

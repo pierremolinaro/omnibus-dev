@@ -10,31 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Extension Getter '@routineTypedSignature string'                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string extensionGetter_string (const GALGAS_routineTypedSignature & inObject,
-                                      C_Compiler * inCompiler
-                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("(") ;
-  const GALGAS_routineTypedSignature temp_0 = inObject ;
-  cEnumerator_routineTypedSignature enumerator_854 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_854.hasCurrentObject ()) {
-    result_result.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_854.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 17)).add_operation (enumerator_854.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 17)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 17)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 17)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 17)) ;
-    enumerator_854.gotoNextObject () ;
-  }
-  result_result.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 19)) ;
-//---
-  return result_result ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                          Extension Getter '@routineFormalArgumentListAST routineSignature'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2147,12 +2122,11 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_task::compare (const cEn
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_valuedObject_register::cEnumAssociatedValues_valuedObject_register (const GALGAS_bool & inAssociatedValue0,
-                                                                                          const GALGAS_bool & inAssociatedValue1,
-                                                                                          const GALGAS_PLMType & inAssociatedValue2,
-                                                                                          const GALGAS_bigint & inAssociatedValue3,
-                                                                                          const GALGAS_sliceMap & inAssociatedValue4,
-                                                                                          const GALGAS_uint & inAssociatedValue5,
-                                                                                          const GALGAS_uint & inAssociatedValue6
+                                                                                          const GALGAS_PLMType & inAssociatedValue1,
+                                                                                          const GALGAS_bigint & inAssociatedValue2,
+                                                                                          const GALGAS_sliceMap & inAssociatedValue3,
+                                                                                          const GALGAS_uint & inAssociatedValue4,
+                                                                                          const GALGAS_uint & inAssociatedValue5
                                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -2160,8 +2134,7 @@ mAssociatedValue1 (inAssociatedValue1),
 mAssociatedValue2 (inAssociatedValue2),
 mAssociatedValue3 (inAssociatedValue3),
 mAssociatedValue4 (inAssociatedValue4),
-mAssociatedValue5 (inAssociatedValue5),
-mAssociatedValue6 (inAssociatedValue6) {
+mAssociatedValue5 (inAssociatedValue5) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2175,7 +2148,6 @@ void cEnumAssociatedValues_valuedObject_register::description (C_String & ioStri
   mAssociatedValue3.description (ioString, inIndentation) ;
   mAssociatedValue4.description (ioString, inIndentation) ;
   mAssociatedValue5.description (ioString, inIndentation) ;
-  mAssociatedValue6.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -2202,9 +2174,6 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_register::compare (const
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue5.objectCompare (ptr->mAssociatedValue5) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue6.objectCompare (ptr->mAssociatedValue6) ;
   }
   return result ;
 }
@@ -2349,18 +2318,17 @@ GALGAS_valuedObject GALGAS_valuedObject::constructor_task (const GALGAS_PLMType 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_valuedObject GALGAS_valuedObject::constructor_register (const GALGAS_bool & inAssociatedValue0,
-                                                               const GALGAS_bool & inAssociatedValue1,
-                                                               const GALGAS_PLMType & inAssociatedValue2,
-                                                               const GALGAS_bigint & inAssociatedValue3,
-                                                               const GALGAS_sliceMap & inAssociatedValue4,
-                                                               const GALGAS_uint & inAssociatedValue5,
-                                                               const GALGAS_uint & inAssociatedValue6
+                                                               const GALGAS_PLMType & inAssociatedValue1,
+                                                               const GALGAS_bigint & inAssociatedValue2,
+                                                               const GALGAS_sliceMap & inAssociatedValue3,
+                                                               const GALGAS_uint & inAssociatedValue4,
+                                                               const GALGAS_uint & inAssociatedValue5
                                                                COMMA_LOCATION_ARGS) {
   GALGAS_valuedObject result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid () && inAssociatedValue6.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid ()) {
     result.mEnum = kEnum_register ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_valuedObject_register (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5, inAssociatedValue6 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_valuedObject_register (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -2452,12 +2420,11 @@ void GALGAS_valuedObject::method_task (GALGAS_PLMType & outAssociatedValue0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_valuedObject::method_register (GALGAS_bool & outAssociatedValue0,
-                                           GALGAS_bool & outAssociatedValue1,
-                                           GALGAS_PLMType & outAssociatedValue2,
-                                           GALGAS_bigint & outAssociatedValue3,
-                                           GALGAS_sliceMap & outAssociatedValue4,
+                                           GALGAS_PLMType & outAssociatedValue1,
+                                           GALGAS_bigint & outAssociatedValue2,
+                                           GALGAS_sliceMap & outAssociatedValue3,
+                                           GALGAS_uint & outAssociatedValue4,
                                            GALGAS_uint & outAssociatedValue5,
-                                           GALGAS_uint & outAssociatedValue6,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_register) {
@@ -2467,7 +2434,6 @@ void GALGAS_valuedObject::method_register (GALGAS_bool & outAssociatedValue0,
     outAssociatedValue3.drop () ;
     outAssociatedValue4.drop () ;
     outAssociatedValue5.drop () ;
-    outAssociatedValue6.drop () ;
     C_String s ;
     s << "method @valuedObject register invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -2479,7 +2445,6 @@ void GALGAS_valuedObject::method_register (GALGAS_bool & outAssociatedValue0,
     outAssociatedValue3 = ptr->mAssociatedValue3 ;
     outAssociatedValue4 = ptr->mAssociatedValue4 ;
     outAssociatedValue5 = ptr->mAssociatedValue5 ;
-    outAssociatedValue6 = ptr->mAssociatedValue6 ;
   }
 }
 

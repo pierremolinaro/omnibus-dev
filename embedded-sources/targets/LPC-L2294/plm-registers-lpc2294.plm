@@ -67,24 +67,24 @@ register PINSEL2        at 0xE002_C014 $uint32
 
 // General Purpose Input/Output (GPIO)
 register IO0PIN          at 0xE002_8000 $uint32
-register IO0SET @user    at 0xE002_8004 $uint32
+register IO0SET          at 0xE002_8004 $uint32
 register IO0DIR          at 0xE002_8008 $uint32
-register IO0CLR @user    at 0xE002_800C $uint32
+register IO0CLR          at 0xE002_800C $uint32
 
 register IO1PIN          at 0xE002_8010 $uint32
-register IO1SET @user    at 0xE002_8014 $uint32
+register IO1SET          at 0xE002_8014 $uint32
 register IO1DIR          at 0xE002_8018 $uint32
-register IO1CLR @user    at 0xE002_801C $uint32
+register IO1CLR          at 0xE002_801C $uint32
 
 register IO2PIN          at 0xE002_8020 $uint32
-register IO2SET @user    at 0xE002_8024 $uint32
+register IO2SET          at 0xE002_8024 $uint32
 register IO2DIR          at 0xE002_8028 $uint32
-register IO2CLR @user    at 0xE002_802C $uint32
+register IO2CLR          at 0xE002_802C $uint32
 
 register IO3PIN          at 0xE002_8030 $uint32
-register IO3SET @user    at 0xE002_8034 $uint32
+register IO3SET          at 0xE002_8034 $uint32
 register IO3DIR          at 0xE002_8038 $uint32
-register IO3CLR @user    at 0xE002_803C $uint32
+register IO3CLR          at 0xE002_803C $uint32
 
 // Memory Accelerator Module (MAM)
 register MAMCR            at 0xE01F_C000 $uint8
