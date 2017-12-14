@@ -660,13 +660,13 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "//------------------------------------------------*\n"
   "\n"
   "system section ledOn () {\n"
-  "  IO1CLR  = 1 << 23 // Led On\n"
+  "  IO1.CLR  = 1 << 23 // Led On\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
   "system section ledOff () {\n"
-  "  IO1SET  = 1 << 23 // Led Off\n"
+  "  IO1.SET  = 1 << 23 // Led Off\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -689,7 +689,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  593, // Text length
+  595, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -1070,7 +1070,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/pri
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "system section getSysTick () -> $uint32 {\n"
-  "  result = SYST_CVR\n"
+  "  result = SYST.CVR\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -1775,9 +1775,9 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/pr
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "system section setupPIT () {\n"
-  "  PIT_MCR = 0\n"
-  "  PIT_LDVAL [0] = 200000\n"
-  "  PIT_TCTRL [0] = {PIT_TCTRL !TIE:1 !TEN:1} // Interrupt, enabled\n"
+  "  PIT.MCR = 0\n"
+  "  PIT.LDVAL [0] = 200000\n"
+  "  PIT.TCTRL [0] = {PIT.TCTRL !TIE:1 !TEN:1} // Interrupt, enabled\n"
   "  enable (!interrupt: .PITChannel0)\n"
   "}\n"
   "\n"
@@ -1789,7 +1789,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/pr
   "  init {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
   "    digital.set (!mode:.OUTPUT !toPort:LED_L1)\n"
-  "    SIM_SCGC6 |= SIM_SCGC6_PIT\n"
+  "    SIM.SCGC6 |= SIM_SCGC6_PIT\n"
   "  }\n"
   "\n"
   "  system section getPITValue (!outValue $uint32) {\n"
@@ -1798,7 +1798,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/pr
   "\n"
   "  isr safe PITChannel0 {\n"
   "  //--- Acquitter l'interruption\n"
-  "    PIT_TFLG [0] = {PIT_TFLG !TIF:1}\n"
+  "    PIT.TFLG [0] = {PIT.TFLG !TIF:1}\n"
   "  //--- Incr\xC3""\xA9""menter le compteur\n"
   "    self.gPITValue += 1\n"
   "  }\n"
