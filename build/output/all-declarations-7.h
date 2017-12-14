@@ -278,31 +278,6 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Extension method '@LValueAST type'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_type (const class GALGAS_LValueAST inObject,
-                           const class GALGAS_PLMType constin_inSelfType,
-                           const class GALGAS_universalValuedObjectMap constin_inUniversalMap,
-                           class GALGAS_PLMType & out_outType,
-                           class C_Compiler * inCompiler
-                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Extension method '@universalValuedObjectMap searchValuedObjectType'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedObjectMap inObject,
-                                             const class GALGAS_lstring constin_inValuedObjectName,
-                                             class GALGAS_PLMType & out_outType,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                     Extension method '@LValueAST analyzeLValue'                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -588,6 +563,20 @@ void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universa
                                                            class GALGAS_objectIR & out_outObjectIR,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Extension method '@universalValuedObjectMap searchValuedObjectType'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedObjectMap inObject,
+                                             const class GALGAS_PLMType constin_inSelfType,
+                                             const class GALGAS_lstring constin_inValuedObjectName,
+                                             const class GALGAS_accessInAssignmentListAST constin_inAccessList,
+                                             class GALGAS_PLMType & out_outType,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -459,7 +459,7 @@ private proc analyzeRegisterExpression
         ?let @uint inRegisterArraySize # 0 if not an array
         ?let @uint inRegisterElementSize # 0 if not an array
       ]
-      if [inAccessList length] == 0 then # No subscript, no slice
+      if [accessList length] == 0 then # No subscript, no slice
         getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
         [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !inRegisterAddress]
       elsif [[accessList mAccessAtIndex !0] isArrayAccess] then

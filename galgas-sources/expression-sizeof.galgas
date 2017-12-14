@@ -102,7 +102,7 @@ override method @sizeofExpressionAST analyzeExpression
     error mLValue.mIdentifier : "sizeof () cannot be used in guard" : outResult
   else
   #--- Analyze LValue
-    [mLValue type !selfType:inSelfType !variableMap:ioUniversalMap ?let type]
+    [ioUniversalMap searchValuedObjectType !selfType:inSelfType !mLValue.mIdentifier !mLValue.mAccessList ?let type]
     let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
       !inContext.mTypeMap
       !["uint" + inContext.mPointerSize nowhere]

@@ -617,15 +617,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
     [reg enterInContext !?context:ioContext !?controlRegisterMap !?staticStringMap:ioGlobalLiteralStringMap]
   end
   [!?ioContext.mControlRegisterGroupMap insertKey !mRegisterGroupName !controlRegisterMap]
-#    [!?ioContext.mValuedObjectMap insertRegister
-#      !register.mRegisterName
-#      !writable:not isReadOnly
-#      !type:registerType
-#      !address:registerAddress 
-#      !sliceMap:registerBitSliceMap
-#      !arraySize:[arraySize uint] # 0 if not an array
-#      !elementSize:elementArraySize # 0 if not an array
-#    ]
+  [!?ioContext.mValuedObjectMap insertRegisterGroup !mRegisterGroupName !controlRegisterMap]
 }
 
 #·······················································································································
