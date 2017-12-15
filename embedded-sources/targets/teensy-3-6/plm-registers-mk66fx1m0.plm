@@ -1061,8 +1061,9 @@ register DAC0 {
 ////register MCG_C2_LOCRE0   ($uint8_t)0x80   // Loss of Clock Reset Enable, Determines whether an interrupt or a reset request is made following a loss of OSC0 
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Chapter 32: Comparator (CMP)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 32: Comparator (CMP)
 register CMP0 {
   CR0   at 0x40073000 $uint8 // CMP Control Register 0
   CR1   at 0x40073001 $uint8 // CMP Control Register 1
@@ -1082,16 +1083,18 @@ register CMP1 {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Chapter 33: Voltage Reference (VREFV1)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 33: Voltage Reference (VREFV1)
 register VREF {
   TRM  at 0x40074000 $uint8 // VREF Trim Register
   SC   at 0x40074001 $uint8 // VREF Status and Control Register
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 // Chapter 34: Programmable Delay Block (PDB)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 //register PDB0_SC    0x40036000 // Status and Control Register
 //register PDB_SC_LDMOD(n)   (((n) & 3) << 18) // Load Mode Select
 //register PDB_SC_PDBEIE   0x00020000  // Sequence Error Interrupt Enable
@@ -1233,7 +1236,52 @@ register VREF {
 
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Chapter 43: Timer / PWM Module (TPM)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+register TPM1 {
+  SC      at 0x400C_9000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD [2], PS[3]}
+  CNT     at 0x400C_9004 $uint32 {16, COUNT [16]}
+  MOD     at 0x400C_9008 $uint32 {16, MOD [16]}
+  C0SC    at 0x400C_900C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C0V     at 0x400C_9010 $uint32 {16, VAL [16]}
+  C1SC    at 0x400C_9014 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C1V     at 0x400C_9018 $uint32 {16, VAL [16]}
+  STATUS  at 0x400C_9050 $uint32 {23, TOF, 6, CH1F, CH0F}
+  COMBINE at 0x400C_9064 $uint32 {30, COMSWAP0, COMBINE0}
+  POL     at 0x400C_9070 $uint32 {30, POL1, POL0}
+  FILTER  at 0x400C_9078 $uint32 {24, CH1FVAL [4], CH0FVAL [4]}
+  QDCTRL  at 0x400C_9080 $uint32 {28, QUADMODE, QUADIR, TOFDIR, QUADEN}
+  CONF    at 0x400C_9084 $uint32 {
+    4, TRGSEL [4], TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,
+    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE [2], DOZEEN, 5
+  }
+}
+
+//······················································································································
+
+register TPM2 {
+  SC      at 0x400C_A000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD [2], PS[3]}
+  CNT     at 0x400C_A004 $uint32 {16, COUNT [16]}
+  MOD     at 0x400C_A008 $uint32 {16, MOD [16]}
+  C0SC    at 0x400C_A00C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C0V     at 0x400C_A010 $uint32 {16, VAL [16]}
+  C1SC    at 0x400C_A014 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C1V     at 0x400C_A018 $uint32 {16, VAL [16]}
+  STATUS  at 0x400C_A050 $uint32 {23, TOF, 6, CH1F, CH0F}
+  COMBINE at 0x400C_A064 $uint32 {30, COMSWAP0, COMBINE0}
+  POL     at 0x400C_A070 $uint32 {30, POL1, POL0}
+  FILTER  at 0x400C_A078 $uint32 {24, CH1FVAL [4], CH0FVAL [4]}
+  QDCTRL  at 0x400C_A080 $uint32 {28, QUADMODE, QUADIR, TOFDIR, QUADEN}
+  CONF    at 0x400C_A084 $uint32 {
+    4, TRGSEL [4], TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,
+    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE [2], DOZEEN, 5
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Chapter 46: Periodic Interrupt Timer (PIT)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let PIT_COUNT = 4
 
@@ -1287,8 +1335,9 @@ register PIT {
 //register CMT_DMA   *(volatile $uint8_t  *)0x4006200B // CMT Direct Memory Access Register
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Chapter 49: Real Time Clock (RTC)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 39: Real Time Clock (RTC)
 register RTC {
   TSR at  0x4003D000 $uint32 // RTC Time Seconds Register
   TPR at  0x4003D004 $uint32 // RTC Time Prescaler Register
