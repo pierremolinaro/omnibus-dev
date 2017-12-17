@@ -284,6 +284,7 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_L
 
 void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
                                     const class GALGAS_PLMType constin_inSelfType,
+                                    const class GALGAS_bool constin_inIsReadAccess,
                                     const class GALGAS_routineAttributes constin_inRoutineAttributes,
                                     const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                     const class GALGAS_semanticContext constin_inContext,
@@ -349,20 +350,21 @@ void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgu
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument0,
-                                      const class GALGAS_routineAttributes constinArgument1,
-                                      const class GALGAS_lstring constinArgument2,
-                                      const class GALGAS_semanticContext constinArgument3,
-                                      const class GALGAS_mode constinArgument4,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                      class GALGAS_staticStringMap & ioArgument6,
-                                      class GALGAS_universalValuedObjectMap & ioArgument7,
-                                      class GALGAS_allocaList & ioArgument8,
-                                      class GALGAS_instructionListIR & ioArgument9,
-                                      const class GALGAS_lstring constinArgument10,
-                                      const class GALGAS_string constinArgument11,
-                                      const class GALGAS_PLMType constinArgument12,
-                                      const class GALGAS_accessInAssignmentListAST constinArgument13,
-                                      class GALGAS_LValueRepresentation & outArgument14,
+                                      const class GALGAS_bool constinArgument1,
+                                      const class GALGAS_routineAttributes constinArgument2,
+                                      const class GALGAS_lstring constinArgument3,
+                                      const class GALGAS_semanticContext constinArgument4,
+                                      const class GALGAS_mode constinArgument5,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                      class GALGAS_staticStringMap & ioArgument7,
+                                      class GALGAS_universalValuedObjectMap & ioArgument8,
+                                      class GALGAS_allocaList & ioArgument9,
+                                      class GALGAS_instructionListIR & ioArgument10,
+                                      const class GALGAS_lstring constinArgument11,
+                                      const class GALGAS_string constinArgument12,
+                                      const class GALGAS_PLMType constinArgument13,
+                                      const class GALGAS_accessInAssignmentListAST constinArgument14,
+                                      class GALGAS_LValueRepresentation & outArgument15,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 

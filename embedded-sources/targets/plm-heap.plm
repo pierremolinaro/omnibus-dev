@@ -1,0 +1,27 @@
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   HEAP FUNCTIONS (IMPLEMENTED IN c-heap.c)                                                                                     
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//--- Heap stats
+extern func heapEndAddress () -> $uint32 : "heap.end.address"
+extern func heapStartAddress () -> $uint32 : "heap.start.address"
+extern func heapAllocAddress () -> $uint32 : "heap.alloc.address"
+extern func freeByteCount () -> $uint32 : "heap.free.byte.count" 
+extern func tempo () -> $uint32 : "heap.temp" 
+
+extern func currentlyAllocatedObjectCount () -> $uint32 : "heap.currently.allocated.object.count"
+extern func totalAllocationObjectCount () -> $uint32 : "heap.total.allocation.object.count"
+
+extern func freeListCount () -> $uint32 : "heap.free.list.count"
+extern func freeObjectCount (?ForFreeList: inFreeListIndex $uint32) -> $uint32 : "heap.free.object.count.for.free.list"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// $data type
+
+newtype $data : [[32]] @instantiable @copyable
+
+extern func memoryAlloc (?size: inBlockSize $uint32) -> $data : "heap.alloc"
+extern func memoryFree (?! ioPointer $data) : "heap.free"
+extern func allocatedByteSize (? inPointer $data) -> $uint32 : "heap.allocated.byte.size"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

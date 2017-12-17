@@ -45,7 +45,8 @@ C_FILES:
   "../c-cortex-m4-context-code.c",
   "../../c-real-time-kernel-code.c",
   "../c-countTrainingZeros.c",
-  "../../memory-utilities.c"
+  "../../memory-utilities.c",
+  "../../c-heap.c"
 //--- Assembler Source files
 S_FILES:
   "../s-cortex-m4-header.s",
@@ -67,7 +68,8 @@ PLM_FILES:
   "../driver-digital-teensy-3-6.plm",
   "../plm-teensy-3-6-lcd.plm",
   "../plm-teensy-3-6-panic.plm",
-  "../../plm-semaphore.plm"
+  "../../plm-semaphore.plm",
+  "../../plm-heap.plm"
 //--- Interrupt handler
 INTERRUPT_HANDLER:
   "../xtr-interrupt-handler.s" ;

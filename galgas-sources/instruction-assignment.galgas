@@ -58,7 +58,6 @@ override method @assignmentInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   [ioUniversalMap searchValuedObjectType !selfType:inSelfType !mTargetAST.mIdentifier !mTargetAST.mAccessList ?let targetType]
-#  [mTargetAST type !selfType:inSelfType !variableMap:ioUniversalMap ?let targetType]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
@@ -77,6 +76,7 @@ override method @assignmentInstructionAST analyze
 #--- Analyze LValue
   [mTargetAST analyzeLValue
     !self: inSelfType
+    !readAccess:false
     !routineAttributes:inRoutineAttributes
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext

@@ -99,6 +99,7 @@ getter @LValueRepresentation type -> @PLMType {
 
 method @LValueAST analyzeLValue
   ?self:let @PLMType inSelfType
+  ?readAccess:let @bool inIsReadAccess # If false, write access
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -113,7 +114,7 @@ method @LValueAST analyzeLValue
   if mIdentifier.string == "" then # Receiver is "self"
     if inSelfType.kind == .void then
       error mIdentifier : "self is not available in this context" : outInternalRepresentation
-    elsif not [inRoutineAttributes mutating] then
+    elsif not [inRoutineAttributes mutating] && not inIsReadAccess then
       error mIdentifier
       : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
       : outInternalRepresentation
@@ -169,6 +170,7 @@ method @LValueAST analyzeLValue
     case localVariable (@PLMType variableType @lstring plmName) :
       analyzeVariableInLValue (
         !self: inSelfType
+        !readAccess:inIsReadAccess
         !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !context: inContext
@@ -285,6 +287,7 @@ private proc analyzeControlRegisterInLValue
 
 private proc analyzeVariableInLValue
   ?self:let @PLMType inSelfType
+  ?readAccess:let @bool inIsReadAccess # If false, write access
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -303,9 +306,17 @@ private proc analyzeVariableInLValue
   var currentType = inVariableType
   var currentLLVMName = inLLVMName
   if [inAccessList length] == 0 then
-    [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
+    if inIsReadAccess then
+      [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
+    else
+      [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
+    end
   else
-    [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
+    if inIsReadAccess then
+      [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
+    else
+      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
+    end
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :

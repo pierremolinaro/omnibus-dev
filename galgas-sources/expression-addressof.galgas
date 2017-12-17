@@ -71,6 +71,7 @@ override method @addressofExpressionAST analyzeExpression
   #--- Analyze LValue
     [mLValue analyzeLValue
       !self: inSelfType
+      !readAccess:true
       !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !context: inContext
