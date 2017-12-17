@@ -71,7 +71,6 @@ SECTIONS {
     FILL (0xFF)
     . = ALIGN (4) ;
     __data_start = . ;
-    * (.data.*init*) ;
     * (.data*) ;
     . = ALIGN (4) ;
     __data_end = . ;
@@ -94,8 +93,7 @@ SECTIONS {
   .bss : {
     . = ALIGN(4);
     __bss_start = . ;
-    * (.bss.*) ;
-    * (.bss) ;
+    * (.bss*) ;
     * (COMMON) ;
     . = ALIGN(4);
     __bss_end = . ;

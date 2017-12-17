@@ -2209,6 +2209,7 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_booleanGuard,
+    kEnum_sync,
     kEnum_boolAndSync
   } enumeration ;
   
@@ -2249,6 +2250,12 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
                                                                           const class GALGAS_objectIR & inOperand2
                                                                           COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_guardedCommandIR constructor_sync (const class GALGAS_bool & inOperand0,
+                                                                  const class GALGAS_string & inOperand1,
+                                                                  const class GALGAS_instructionListIR & inOperand2,
+                                                                  const class GALGAS_procCallEffectiveParameterListIR & inOperand3
+                                                                  COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -2273,12 +2280,21 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_sync (class GALGAS_bool & outArgument0,
+                                              class GALGAS_string & outArgument1,
+                                              class GALGAS_instructionListIR & outArgument2,
+                                              class GALGAS_procCallEffectiveParameterListIR & outArgument3,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolAndSync (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBooleanGuard (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSync (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2313,6 +2329,28 @@ class cEnumAssociatedValues_guardedCommandIR_booleanGuard : public cEnumAssociat
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_guardedCommandIR_booleanGuard (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_guardedCommandIR_sync : public cEnumAssociatedValues {
+  public : const GALGAS_bool mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+  public : const GALGAS_instructionListIR mAssociatedValue2 ;
+  public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue3 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_guardedCommandIR_sync (const GALGAS_bool & inAssociatedValue0,
+                                                        const GALGAS_string & inAssociatedValue1,
+                                                        const GALGAS_instructionListIR & inAssociatedValue2,
+                                                        const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue3
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_guardedCommandIR_sync (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
