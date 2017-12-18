@@ -13170,7 +13170,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                   const class GALGAS_lbigint & in_mPriority,
                                                   const class GALGAS_lbigint & in_mStackSize,
                                                   const class GALGAS_structurePropertyListAST & in_mVarList,
-                                                  const class GALGAS_functionDeclarationListAST & in_mTaskProcList,
+                                                  const class GALGAS_functionDeclarationListAST & in_mTaskFunctionList,
                                                   const class GALGAS_taskSetupListAST & in_mTaskSetupListAST,
                                                   const class GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
                                                   const class GALGAS_taskEntryListAST & in_mTaskEntryListAST,
@@ -13332,6 +13332,10 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                                                            C_Compiler * inCompiler
                                                                                            COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mTaskFunctionListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                                     C_Compiler * inCompiler
+                                                                                                     COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_taskGuardListAST getter_mTaskGuardListASTAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                            C_Compiler * inCompiler
                                                                                            COMMA_LOCATION_ARGS) const ;
@@ -13339,10 +13343,6 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTaskNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mTaskProcListAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                                 C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskSetupListAST getter_mTaskSetupListASTAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                            C_Compiler * inCompiler
@@ -13386,7 +13386,7 @@ class cEnumerator_taskListAST : public cGenericAbstractEnumerator {
   public : class GALGAS_lbigint current_mPriority (LOCATION_ARGS) const ;
   public : class GALGAS_lbigint current_mStackSize (LOCATION_ARGS) const ;
   public : class GALGAS_structurePropertyListAST current_mVarList (LOCATION_ARGS) const ;
-  public : class GALGAS_functionDeclarationListAST current_mTaskProcList (LOCATION_ARGS) const ;
+  public : class GALGAS_functionDeclarationListAST current_mTaskFunctionList (LOCATION_ARGS) const ;
   public : class GALGAS_taskSetupListAST current_mTaskSetupListAST (LOCATION_ARGS) const ;
   public : class GALGAS_syncInstructionBranchListAST current_mGuardedCommandList (LOCATION_ARGS) const ;
   public : class GALGAS_taskEntryListAST current_mTaskEntryListAST (LOCATION_ARGS) const ;

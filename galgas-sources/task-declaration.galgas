@@ -7,7 +7,7 @@ list @taskListAST {
   @lbigint mPriority
   @lbigint mStackSize
   @structurePropertyListAST mVarList
-  @functionDeclarationListAST mTaskProcList
+  @functionDeclarationListAST mTaskFunctionList
   @taskSetupListAST mTaskSetupListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @taskEntryListAST mTaskEntryListAST
@@ -126,8 +126,8 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
         [!?ioGraph noteNode !typeName]
       end
     end
-    for procedure in mTaskProcList do
-      [procedure.mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    for function in mTaskFunctionList do
+      [function.mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
     for guardedCommand in mGuardedCommandList do
       [guardedCommand.mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
@@ -153,7 +153,7 @@ method @taskListAST enterInContext
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
-  @decoratedLaskList decoratedLaskList = {}
+  @decoratedTaskList decoratedTaskList = {}
   for task in self do
   #--- task variables
     @propertyList propertyList = {}
@@ -195,6 +195,8 @@ method @taskListAST enterInContext
         !?guardMap
       ]
     end
+  #---------------- Enter task functions in property map
+    [task.mTaskFunctionList enterFunctionsInPropertyMap !?context:ioContext !?propertyMap]
   #---------------- Enter task variable map as structure type in type map
     let taskType = @PLMType.new {
       !propertyMap:propertyMap
@@ -216,19 +218,19 @@ method @taskListAST enterInContext
       !task.mTaskName.string 
       !task.mTaskName.string
       !.llvmStructureValue{!type:taskType !values:initialValueList}
-  #--- Task procedures
-    [task.mTaskProcList enterFunctionInContext
-      !selfTypeName:llvmTypeStringFromPLMname (!task.mTaskName)
+  #--- Task functions
+    [task.mTaskFunctionList enterFunctionInContext
+      !selfTypeName:task.mTaskName
       !?context:ioContext
       !?ioDecoratedDeclarationList
     ]
   #---
-    decoratedLaskList += 
+    decoratedTaskList += 
       !task.mTaskName
       !task.mPriority
       !task.mStackSize
       !task.mVarList
-      !task.mTaskProcList
+      !task.mTaskFunctionList
       !task.mTaskSetupListAST
       !task.mGuardedCommandList
       !decoratedTaskEntryList
@@ -236,14 +238,14 @@ method @taskListAST enterInContext
       !task.mEndOfTaskDeclaration
   end
 #---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedTaskList.new {!decoratedLaskList}
+  ioDecoratedDeclarationList += !@decoratedTaskListDeclaration.new {!decoratedTaskList}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @decoratedLaskList {
+list @decoratedTaskList {
   @lstring mTaskName
   @lbigint mPriority
   @lbigint mStackSize
@@ -258,13 +260,13 @@ list @decoratedLaskList {
 
 #·······················································································································
 
-class @decoratedTaskList : @abstractDecoratedDeclaration {
-  @decoratedLaskList mTaskList
+class @decoratedTaskListDeclaration : @abstractDecoratedDeclaration {
+  @decoratedTaskList mTaskList
 }
 
 #·······················································································································
 
-override method @decoratedTaskList semanticAnalysis
+override method @decoratedTaskListDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -286,7 +288,7 @@ override method @decoratedTaskList semanticAnalysis
 
 #·······················································································································
 
-method @decoratedLaskList-element semanticAnalysis
+method @decoratedTaskList-element semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -296,27 +298,8 @@ method @decoratedLaskList-element semanticAnalysis
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
     error mStackSize : "stack size should be a multiple of 8, and >= 64"
   end
-#------------------------------------------- Analyze task procedures
-  let taskType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName} type]
-  for procedure in mTaskProcList do
-    routineSemanticAnalysis (
-      !receiverType:taskType
-      !.function {!executionMode:.userMode}
-      !.userMode
-      !procedure.mFunctionName
-      !procedure.mFunctionFormalArgumentList
-      !returnTypeName:procedure.mFunctionReturnTypeName
-      !procedure.mFunctionInstructionList
-      !procedure.mEndOfFunctionDeclaration
-      !routineAttributes:.mutating | .directPropertyAccess
-      !warnIfUnused:true
-      !globalFunction:false
-      !context:inContext
-      !?temporary:ioTemporaries
-      !?intermediateCode:ioIntermediateCodeStruct
-    )
-  end
 #------------------------------------------- Analyze task entries
+  let taskType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName} type]
   for entry in mDecoratedTaskEntryList do
     [entry taskEntrySemanticAnalysis
        !taskType:taskType

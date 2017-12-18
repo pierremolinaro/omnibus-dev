@@ -141,11 +141,11 @@ void extensionMethod_generateLLVM (const class GALGAS_driverListIR_2D_element in
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Extension method '@decoratedLaskList-element semanticAnalysis'                            *
+//                           Extension method '@decoratedTaskList-element semanticAnalysis'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_semanticAnalysis (const class GALGAS_decoratedLaskList_2D_element inObject,
+void extensionMethod_semanticAnalysis (const class GALGAS_decoratedTaskList_2D_element inObject,
                                        const class GALGAS_semanticContext constin_inContext,
                                        class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                        class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
@@ -666,4 +666,14 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class C_C
 class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & constinArgument0,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'llvmDriverNameFromName'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_llvmDriverNameFromName (const class GALGAS_lstring & constinArgument0,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 

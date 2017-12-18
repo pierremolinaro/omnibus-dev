@@ -34,13 +34,11 @@ SECTIONS {
     FILL(0xff)
     __code_start = . ;
   /*--- Code */
-    *(.text.*) ;
+    *(.text*) ;
     *(.text) ;
     *(text) ;
     *(.gnu.linkonce.t.*) ;
   /*---- ROM data ----*/
-    . = ALIGN(4);
-    *(.rodata);
     . = ALIGN(4);
     *(.rodata*);
     . = ALIGN(4);

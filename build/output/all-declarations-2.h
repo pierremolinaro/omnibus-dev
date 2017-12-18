@@ -817,22 +817,22 @@ void extensionMethod_enterInContext (const class GALGAS_taskListAST inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              @decoratedTaskList class                                               *
+//                                         @decoratedTaskListDeclaration class                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_decoratedTaskList : public GALGAS_abstractDecoratedDeclaration {
+class GALGAS_decoratedTaskListDeclaration : public GALGAS_abstractDecoratedDeclaration {
 //--- Constructor
-  public : GALGAS_decoratedTaskList (void) ;
+  public : GALGAS_decoratedTaskListDeclaration (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_decoratedTaskList constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_decoratedTaskListDeclaration constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_decoratedTaskList * ptr (void) const { return (const cPtr_decoratedTaskList *) mObjectPtr ; }
+  public : inline const class cPtr_decoratedTaskListDeclaration * ptr (void) const { return (const cPtr_decoratedTaskListDeclaration *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_decoratedTaskList (const cPtr_decoratedTaskList * inSourcePtr) ;
+  public : GALGAS_decoratedTaskListDeclaration (const cPtr_decoratedTaskListDeclaration * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -840,16 +840,16 @@ class GALGAS_decoratedTaskList : public GALGAS_abstractDecoratedDeclaration {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_decoratedTaskList extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_decoratedTaskListDeclaration extractObject (const GALGAS_object & inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_decoratedTaskList constructor_new (const class GALGAS_decoratedLaskList & inOperand0
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_decoratedTaskListDeclaration constructor_new (const class GALGAS_decoratedTaskList & inOperand0
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_decoratedTaskList & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_decoratedTaskListDeclaration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -857,31 +857,31 @@ class GALGAS_decoratedTaskList : public GALGAS_abstractDecoratedDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedLaskList getter_mTaskList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedTaskList getter_mTaskList (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_decoratedTaskList class
+} ; // End of GALGAS_decoratedTaskListDeclaration class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTaskList ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTaskListDeclaration ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @decoratedLaskList list                                               *
+//                                               @decoratedTaskList list                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_decoratedLaskList : public AC_GALGAS_list {
+class GALGAS_decoratedTaskList : public AC_GALGAS_list {
 //--------------------------------- Default constructor
-  public : GALGAS_decoratedLaskList (void) ;
+  public : GALGAS_decoratedTaskList (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_decoratedLaskList (const capCollectionElementArray & inSharedArray) ;
+  public : GALGAS_decoratedTaskList (const capCollectionElementArray & inSharedArray) ;
 
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
@@ -903,14 +903,14 @@ class GALGAS_decoratedLaskList : public AC_GALGAS_list {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_decoratedLaskList extractObject (const GALGAS_object & inObject,
+  public : static GALGAS_decoratedTaskList extractObject (const GALGAS_object & inObject,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_decoratedLaskList constructor_emptyList (LOCATION_ARGS) ;
+  public : static class GALGAS_decoratedTaskList constructor_emptyList (LOCATION_ARGS) ;
 
-  public : static class GALGAS_decoratedLaskList constructor_listWithValue (const class GALGAS_lstring & inOperand0,
+  public : static class GALGAS_decoratedTaskList constructor_listWithValue (const class GALGAS_lstring & inOperand0,
                                                                             const class GALGAS_lbigint & inOperand1,
                                                                             const class GALGAS_lbigint & inOperand2,
                                                                             const class GALGAS_structurePropertyListAST & inOperand3,
@@ -923,7 +923,7 @@ class GALGAS_decoratedLaskList : public AC_GALGAS_list {
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_decoratedLaskList inOperand,
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_decoratedTaskList inOperand,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -940,7 +940,7 @@ class GALGAS_decoratedLaskList : public AC_GALGAS_list {
                                                       const class GALGAS_location & inOperand9
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
-  public : VIRTUAL_IN_DEBUG GALGAS_decoratedLaskList add_operation (const GALGAS_decoratedLaskList & inOperand,
+  public : VIRTUAL_IN_DEBUG GALGAS_decoratedTaskList add_operation (const GALGAS_decoratedTaskList & inOperand,
                                                                     C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) const ;
 
@@ -1071,15 +1071,15 @@ class GALGAS_decoratedLaskList : public AC_GALGAS_list {
                                                                                           C_Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedLaskList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedTaskList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                     C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedLaskList getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedTaskList getter_subListToIndex (const class GALGAS_uint & constinOperand0,
                                                                                   C_Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedLaskList getter_subListWithRange (const class GALGAS_range & constinOperand0,
+  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedTaskList getter_subListWithRange (const class GALGAS_range & constinOperand0,
                                                                                     C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
 
@@ -1088,16 +1088,16 @@ class GALGAS_decoratedLaskList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
 //--------------------------------- Friend
 
-  friend class cEnumerator_decoratedLaskList ;
+  friend class cEnumerator_decoratedTaskList ;
  
-} ; // End of GALGAS_decoratedLaskList class
+} ; // End of GALGAS_decoratedTaskList class
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumerator_decoratedLaskList : public cGenericAbstractEnumerator {
-  public : cEnumerator_decoratedLaskList (const GALGAS_decoratedLaskList & inEnumeratedObject,
+class cEnumerator_decoratedTaskList : public cGenericAbstractEnumerator {
+  public : cEnumerator_decoratedTaskList (const GALGAS_decoratedTaskList & inEnumeratedObject,
                                           const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
@@ -1112,32 +1112,32 @@ class cEnumerator_decoratedLaskList : public cGenericAbstractEnumerator {
   public : class GALGAS_decoratedTaskGuardList current_mDecoratedTaskGuardList (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfTaskDeclaration (LOCATION_ARGS) const ;
 //--- Current element access
-  public : class GALGAS_decoratedLaskList_2D_element current (LOCATION_ARGS) const ;
+  public : class GALGAS_decoratedTaskList_2D_element current (LOCATION_ARGS) const ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedLaskList ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTaskList ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Pointer class for @decoratedTaskList class                                      *
+//                                Pointer class for @decoratedTaskListDeclaration class                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_decoratedTaskList : public cPtr_abstractDecoratedDeclaration {
+class cPtr_decoratedTaskListDeclaration : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
-  public : GALGAS_decoratedLaskList mProperty_mTaskList ;
+  public : GALGAS_decoratedTaskList mProperty_mTaskList ;
 
 //--- Constructor
-  public : cPtr_decoratedTaskList (const GALGAS_decoratedLaskList & in_mTaskList
-                                   COMMA_LOCATION_ARGS) ;
+  public : cPtr_decoratedTaskListDeclaration (const GALGAS_decoratedTaskList & in_mTaskList
+                                              COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_decoratedLaskList getter_mTaskList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_decoratedTaskList getter_mTaskList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2827,6 +2827,18 @@ void extensionMethod_enterFunctionInContext (const class GALGAS_functionDeclarat
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                     Extension method '@functionDeclarationListAST enterFunctionsInPropertyMap'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_enterFunctionsInPropertyMap (const class GALGAS_functionDeclarationListAST inObject,
+                                                  class GALGAS_semanticContext & io_ioContext,
+                                                  class GALGAS_propertyMap & io_ioPropertyMap,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                         Extension method '@structurePropertyListAST-element enterInContext'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4419,11 +4431,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticContext ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        @decoratedLaskList_2D_element struct                                         *
+//                                        @decoratedTaskList_2D_element struct                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_decoratedLaskList_2D_element : public AC_GALGAS_root {
+class GALGAS_decoratedTaskList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_mTaskName ;
 
@@ -4450,16 +4462,16 @@ class GALGAS_decoratedLaskList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_decoratedLaskList_2D_element constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_decoratedTaskList_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_decoratedLaskList_2D_element (void) ;
+  public : GALGAS_decoratedTaskList_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_decoratedLaskList_2D_element (void) ;
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_decoratedTaskList_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_decoratedLaskList_2D_element (const GALGAS_lstring & in_mTaskName,
+  public : GALGAS_decoratedTaskList_2D_element (const GALGAS_lstring & in_mTaskName,
                                                 const GALGAS_lbigint & in_mPriority,
                                                 const GALGAS_lbigint & in_mStackSize,
                                                 const GALGAS_structurePropertyListAST & in_mVarList,
@@ -4476,12 +4488,12 @@ class GALGAS_decoratedLaskList_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_decoratedLaskList_2D_element extractObject (const GALGAS_object & inObject,
+  public : static GALGAS_decoratedTaskList_2D_element extractObject (const GALGAS_object & inObject,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_decoratedLaskList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+  public : static class GALGAS_decoratedTaskList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                              const class GALGAS_lbigint & inOperand1,
                                                                              const class GALGAS_lbigint & inOperand2,
                                                                              const class GALGAS_structurePropertyListAST & inOperand3,
@@ -4497,7 +4509,7 @@ class GALGAS_decoratedLaskList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_decoratedLaskList_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_decoratedTaskList_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4529,12 +4541,12 @@ class GALGAS_decoratedLaskList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_decoratedLaskList_2D_element class
+} ; // End of GALGAS_decoratedTaskList_2D_element class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedLaskList_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTaskList_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -9276,6 +9288,60 @@ class cPtr_decoratedFunction : public cPtr_abstractDecoratedDeclaration {
 
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     @propertyAccessKind enum, associated values                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_propertyAccessKind_constantProperty : public cEnumAssociatedValues {
+  public : const GALGAS_objectIR mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyAccessKind_constantProperty (const GALGAS_objectIR & inAssociatedValue0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_constantProperty (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_propertyAccessKind_indexed : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyAccessKind_indexed (const GALGAS_PLMType & inAssociatedValue0,
+                                                             const GALGAS_uint & inAssociatedValue1
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_indexed (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod : public cEnumAssociatedValues {
+  public : const GALGAS_routineDescriptor mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod (const GALGAS_routineDescriptor & inAssociatedValue0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

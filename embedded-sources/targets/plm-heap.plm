@@ -7,7 +7,6 @@ extern func heapEndAddress () -> $uint32 : "heap.end.address"
 extern func heapStartAddress () -> $uint32 : "heap.start.address"
 extern func heapAllocAddress () -> $uint32 : "heap.alloc.address"
 extern func freeByteCount () -> $uint32 : "heap.free.byte.count" 
-extern func tempo () -> $uint32 : "heap.temp" 
 
 extern func currentlyAllocatedObjectCount () -> $uint32 : "heap.currently.allocated.object.count"
 extern func totalAllocationObjectCount () -> $uint32 : "heap.total.allocation.object.count"

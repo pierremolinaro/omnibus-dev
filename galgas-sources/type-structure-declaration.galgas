@@ -280,38 +280,7 @@ override method @structureDeclarationAST enterInContext
     end
   end
 #---------------------------------------- Enter functions in property map
-  for function in mFunctionDeclarationListAST do
-  #--- Attributes
-    @stringset attributeSet = {}
-    for attribute in function.mFunctionAttributeList do
-      attributeSet += !attribute.mValue.string
-    end
-    let exportedFunction = [attributeSet hasKey !exportedAttribute ()]
-    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
-    let canAccessProperties = function.mMode != .userMode
-  #--- Signature
-    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
-  #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
-  #--- Routine mangled name
-    let routineMangledName = routineMangledNameFromAST (
-      !"" # mStructureName 
-      !function.mFunctionName
-      !function.mFunctionFormalArgumentList
-    )
-  #--- Routine descriptor
-    let descriptor = @routineDescriptor.new {
-      !isPublic:function.mPublicFunction
-      !exported:exportedFunction
-      !routineKind:.function {!executionMode:function.mMode}
-      !signature:signature
-      !returnTypeProxy:returnTypeProxy
-      !canAccessProperties:canAccessProperties
-      !canMutateProperties:canMutateProperties
-    }
-  #--- Enter in structure map
-    [!?propertyMap insertKey !routineMangledName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
-  end
+  [mFunctionDeclarationListAST enterFunctionsInPropertyMap !?context:ioContext !?propertyMap]
 #---------------------------------------- Enter system routines in property map
   for system in mSystemRoutineListAST do
   #--- Attributes
