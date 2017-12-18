@@ -109,7 +109,7 @@ proc routineSemanticAnalysis
   else
     [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName} type]
   end
-  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
+  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
     !routineMangledName
     !inSelfType
     !routineMangledName

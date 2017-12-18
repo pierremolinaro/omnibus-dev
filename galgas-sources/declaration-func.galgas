@@ -291,6 +291,46 @@ method @functionDeclarationListAST enterFunctionInContext
   end
 }
 
+#·······················································································································
+
+method @functionDeclarationListAST enterFunctionsInPropertyMap
+  ?!context:@semanticContext ioContext
+  ?!@propertyMap ioPropertyMap
+{
+  for function in self do
+  #--- Attributes
+    @stringset attributeSet = {}
+    for attribute in function.mFunctionAttributeList do
+      attributeSet += !attribute.mValue.string
+    end
+    let exportedFunction = [attributeSet hasKey !exportedAttribute ()]
+    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
+    let canAccessProperties = function.mMode != .userMode
+  #--- Signature
+    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
+  #--- Routine mangled name
+    let routineMangledName = routineMangledNameFromAST (
+      !""
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+    )
+  #--- Routine descriptor
+    let descriptor = @routineDescriptor.new {
+      !isPublic:function.mPublicFunction
+      !exported:exportedFunction
+      !routineKind:.function {!executionMode:function.mMode}
+      !signature:signature
+      !returnTypeProxy:returnTypeProxy
+      !canAccessProperties:canAccessProperties
+      !canMutateProperties:canMutateProperties
+    }
+  #--- Enter in structure map
+    [!?ioPropertyMap insertKey !routineMangledName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
+  end
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

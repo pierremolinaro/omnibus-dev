@@ -10310,7 +10310,7 @@ mProperty_mTaskName (),
 mProperty_mPriority (),
 mProperty_mStackSize (),
 mProperty_mVarList (),
-mProperty_mTaskProcList (),
+mProperty_mTaskFunctionList (),
 mProperty_mTaskSetupListAST (),
 mProperty_mGuardedCommandList (),
 mProperty_mTaskEntryListAST (),
@@ -10339,7 +10339,7 @@ mProperty_mTaskName (inOperand0),
 mProperty_mPriority (inOperand1),
 mProperty_mStackSize (inOperand2),
 mProperty_mVarList (inOperand3),
-mProperty_mTaskProcList (inOperand4),
+mProperty_mTaskFunctionList (inOperand4),
 mProperty_mTaskSetupListAST (inOperand5),
 mProperty_mGuardedCommandList (inOperand6),
 mProperty_mTaskEntryListAST (inOperand7),
@@ -10399,7 +10399,7 @@ typeComparisonResult GALGAS_taskListAST_2D_element::objectCompare (const GALGAS_
     result = mProperty_mVarList.objectCompare (inOperand.mProperty_mVarList) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mTaskProcList.objectCompare (inOperand.mProperty_mTaskProcList) ;
+    result = mProperty_mTaskFunctionList.objectCompare (inOperand.mProperty_mTaskFunctionList) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mTaskSetupListAST.objectCompare (inOperand.mProperty_mTaskSetupListAST) ;
@@ -10422,7 +10422,7 @@ typeComparisonResult GALGAS_taskListAST_2D_element::objectCompare (const GALGAS_
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_taskListAST_2D_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mTaskEntryListAST.isValid () && mProperty_mTaskGuardListAST.isValid () && mProperty_mEndOfTaskDeclaration.isValid () ;
+  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskFunctionList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mTaskEntryListAST.isValid () && mProperty_mTaskGuardListAST.isValid () && mProperty_mEndOfTaskDeclaration.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10432,7 +10432,7 @@ void GALGAS_taskListAST_2D_element::drop (void) {
   mProperty_mPriority.drop () ;
   mProperty_mStackSize.drop () ;
   mProperty_mVarList.drop () ;
-  mProperty_mTaskProcList.drop () ;
+  mProperty_mTaskFunctionList.drop () ;
   mProperty_mTaskSetupListAST.drop () ;
   mProperty_mGuardedCommandList.drop () ;
   mProperty_mTaskEntryListAST.drop () ;
@@ -10456,7 +10456,7 @@ void GALGAS_taskListAST_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mVarList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mTaskProcList.description (ioString, inIndentation+1) ;
+    mProperty_mTaskFunctionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mTaskSetupListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -10497,8 +10497,8 @@ GALGAS_structurePropertyListAST GALGAS_taskListAST_2D_element::getter_mVarList (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_functionDeclarationListAST GALGAS_taskListAST_2D_element::getter_mTaskProcList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTaskProcList ;
+GALGAS_functionDeclarationListAST GALGAS_taskListAST_2D_element::getter_mTaskFunctionList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskFunctionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

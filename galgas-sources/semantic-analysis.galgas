@@ -128,12 +128,6 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-#  [inAST.mGuardListAST guardSemanticAnalysis
-#    !receiverType:voidType ()
-#    !context:inSemanticContext
-#    !?temporary:temporaries
-#    !?intermediateCode:outIntermediateCodeStruct
-#  ]
   [inAST.mExternProcListAST externProcedureSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries

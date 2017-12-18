@@ -6104,7 +6104,7 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_structurePropertyListAST mProperty_mVarList ;
 
-  public : GALGAS_functionDeclarationListAST mProperty_mTaskProcList ;
+  public : GALGAS_functionDeclarationListAST mProperty_mTaskFunctionList ;
 
   public : GALGAS_taskSetupListAST mProperty_mTaskSetupListAST ;
 
@@ -6134,7 +6134,7 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
                                           const GALGAS_lbigint & in_mPriority,
                                           const GALGAS_lbigint & in_mStackSize,
                                           const GALGAS_structurePropertyListAST & in_mVarList,
-                                          const GALGAS_functionDeclarationListAST & in_mTaskProcList,
+                                          const GALGAS_functionDeclarationListAST & in_mTaskFunctionList,
                                           const GALGAS_taskSetupListAST & in_mTaskSetupListAST,
                                           const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
                                           const GALGAS_taskEntryListAST & in_mTaskEntryListAST,
@@ -6186,11 +6186,11 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskEntryListAST getter_mTaskEntryListAST (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mTaskFunctionList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_taskGuardListAST getter_mTaskGuardListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTaskName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mTaskProcList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskSetupListAST getter_mTaskSetupListAST (LOCATION_ARGS) const ;
 
