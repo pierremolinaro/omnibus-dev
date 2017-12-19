@@ -64,18 +64,18 @@ driver digital > root {
   //··············································································
   
   boot { // See §19.2.2 page 351
-  // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0_PACRJ
-  // Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0_PACRJ
-  // Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0_PACRJ
-  // Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0_PACRJ
-  // Simplification: all bits of AIPS0_PACRJ are reseted
-  //  AIPS0_PACRJ = 0
+  // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0.PACRJ
+  // Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0.PACRJ
+  // Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0.PACRJ
+  // Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0.PACRJ
+  // Simplification: all bits of AIPS0.PACRJ are reseted
+    AIPS0.PACRJ = 0
   }
 
   //··············································································
 
-  public system safe set @noUnusedWarning (?mode:mode $digitalMode
-                                           ?toPort:port $digitalPort) {
+  public func set @noUnusedWarning (?mode:mode $digitalMode
+                                    ?toPort:port $digitalPort) {
     switch port {
     case D0 : // PTB16
       switch mode {
@@ -442,8 +442,8 @@ driver digital > root {
   
   //··············································································
 
-  public system safe write @noUnusedWarning (?value $bool
-                                             ?toPort:port $digitalPort) {
+  public func write @noUnusedWarning (?value $bool
+                                      ?toPort:port $digitalPort) {
     switch port {
     case D0 : // PTB16
       if value {
@@ -594,7 +594,7 @@ driver digital > root {
 
   //··············································································
   
-  public system safe read @noUnusedWarning (?port:port $digitalPort) -> $bool {
+  public func read @noUnusedWarning (?port:port $digitalPort) -> $bool {
     switch port {
     case D0 : // PTB16
       result = (GPIOB.PDIR & (1 << 16)) ≠ 0
@@ -649,7 +649,7 @@ driver digital > root {
   
   //··············································································
   
-  public system safe toggle @noUnusedWarning (?port:port $digitalPort) {
+  public func toggle @noUnusedWarning (?port:port $digitalPort) {
     switch port {
     case D0 : // PTB16
       GPIOB.PTOR = 1 << 16 ;

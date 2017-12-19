@@ -143,26 +143,22 @@ method @LValueAST analyzeLValue
     case driver (* *) :
       error mIdentifier : "a driver has no value" : outInternalRepresentation
     case registerGroup (registerMap) :
-      if [inMode isUserMode] || [inMode isAnyMode] then
-        error mIdentifier : "a control register is not accessible in user mode" : outInternalRepresentation
-      else
-        analyzeControlRegisterInLValue (
-          !self: inSelfType
-          !routineAttributes:inRoutineAttributes
-          !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-          !context: inContext
-          !mode: inMode
-          !?temporary: ioTemporaries
-          !?staticStringMap: ioGlobalLiteralStringMap
-          !?variableMap: ioUniversalMap
-          !?alloca: ioAllocaList
-          !?instructionListIR: ioInstructionGenerationList
-          !registerGroupName: mIdentifier
-          !registerMap: registerMap
-          !accessList: mAccessList
-          ?outInternalRepresentation
-        )
-      end
+      analyzeControlRegisterInLValue (
+        !self: inSelfType
+        !routineAttributes:inRoutineAttributes
+        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+        !context: inContext
+        !mode: inMode
+        !?temporary: ioTemporaries
+        !?staticStringMap: ioGlobalLiteralStringMap
+        !?variableMap: ioUniversalMap
+        !?alloca: ioAllocaList
+        !?instructionListIR: ioInstructionGenerationList
+        !registerGroupName: mIdentifier
+        !registerMap: registerMap
+        !accessList: mAccessList
+        ?outInternalRepresentation
+      )
     case globalConstant (*) :
       error mIdentifier : "a global constant cannot be written" : outInternalRepresentation
     case localConstant (**) :
@@ -222,7 +218,8 @@ private proc analyzeControlRegisterInLValue
       [inControlRegisterMap searchKey
         !controlRegisterName
         ?let @PLMType inRegisterType
-        ?let @bool unused mIsReadOnly
+        ?let @bool readOnly
+        ?let @bool userAccess
         ?let @sliceMap unused inRegisterSliceMap
         ?let @controlRegisterFieldMap unused mRegisterFieldMap
         ?let @bigint inRegisterAddress
@@ -231,7 +228,11 @@ private proc analyzeControlRegisterInLValue
         ?let @uint inRegisterArraySize # 0 if not an array
         ?let @uint inRegisterElementSize # 0 if not an array
       ]
-      if [accessList length] == 0 then # Simple access to a control register for writing
+      if readOnly then
+        error controlRegisterName : "this control register cannot be modified (declared with @ro attribute)" : outInternalRepresentation
+      elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
+        error controlRegisterName : "this control register is not accessible in user mode" : outInternalRepresentation
+      elsif [accessList length] == 0 then # Simple access to a control register for writing
         if inRegisterArraySize == 0 then
           outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:inRegisterAddress}
         else

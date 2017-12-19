@@ -99,7 +99,7 @@ def linker ():
   result.append ("--no-undefined")
   result.append ("--cref")
   result.append ("-static")
-  result.append ("--gc-sections")
+#  result.append ("--gc-sections")
   return result
 
 #----------------------------------------------------------------------------------------------------------------------*

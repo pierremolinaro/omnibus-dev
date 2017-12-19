@@ -10,6 +10,101 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                   Overriding extension method '@standaloneRoutineCallIR enterAccessibleEntities'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_standaloneRoutineCallIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                                             GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
+                                                                             GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
+                                                                             C_Compiler * /* inCompiler */
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_standaloneRoutineCallIR * object = (const cPtr_standaloneRoutineCallIR *) inObject ;
+  macroValidSharedObject (object, cPtr_standaloneRoutineCallIR) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, object->mProperty_mGlobalVariableName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    ioArgument_ioAccessibleEntities.mProperty_mGlobalVariableSet.addAssign_operation (object->mProperty_mGlobalVariableName  COMMA_SOURCE_FILE ("intermediate-static-routine-call.galgas", 69)) ;
+  }
+  ioArgument_ioAccessibleEntities.mProperty_mRoutineSet.addAssign_operation (object->mProperty_mFunctionMangledName.getter_string (HERE)  COMMA_SOURCE_FILE ("intermediate-static-routine-call.galgas", 71)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_standaloneRoutineCallIR_enterAccessibleEntities (void) {
+  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_standaloneRoutineCallIR.mSlotID,
+                                                extensionMethod_standaloneRoutineCallIR_enterAccessibleEntities) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_standaloneRoutineCallIR_enterAccessibleEntities (defineExtensionMethod_standaloneRoutineCallIR_enterAccessibleEntities, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Overriding extension method '@indirectRoutineCallIR llvmInstructionCode'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_indirectRoutineCallIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
+                                                                       GALGAS_string & ioArgument_ioLLVMcode,
+                                                                       const GALGAS_generationContext /* constinArgument_inGenerationContext */,
+                                                                       GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_indirectRoutineCallIR * object = (const cPtr_indirectRoutineCallIR *) inObject ;
+  macroValidSharedObject (object, cPtr_indirectRoutineCallIR) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  "), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 18)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmName (object->mProperty_mFunctionPointer, inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 19)).add_operation (GALGAS_string (".func = load "), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 19)).add_operation (extensionGetter_llvmTypeName (object->mProperty_mFunctionType, inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 19)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 20)).add_operation (extensionGetter_llvmTypeName (object->mProperty_mFunctionType, inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 21)), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 20)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 21)).add_operation (extensionGetter_llvmName (object->mProperty_mFunctionPointer, inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 21)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 22)), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 19)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  "), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 24)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, object->mProperty_mResult.objectCompare (GALGAS_objectIR::constructor_null (SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 25)))).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("call void"), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 26)) ;
+  }else if (kBoolFalse == test_0) {
+    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmName (object->mProperty_mResult, inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 28)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 28)).add_operation (extensionGetter_llvmTypeName (object->mProperty_mResult, inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 28)), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 28)), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 28)) ;
+  }
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ").add_operation (extensionGetter_llvmName (object->mProperty_mFunctionPointer, inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 30)).add_operation (GALGAS_string (".func ("), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 30)), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 30)) ;
+  cEnumerator_procCallEffectiveParameterListIR enumerator_1155 (object->mProperty_mArgumentList, kENUMERATION_UP) ;
+  while (enumerator_1155.hasCurrentObject ()) {
+    switch (enumerator_1155.current_mEffectiveParameterPassingMode (HERE).enumValue ()) {
+    case GALGAS_procEffectiveParameterPassingModeIR::kNotBuilt:
+      break ;
+    case GALGAS_procEffectiveParameterPassingModeIR::kEnum_input:
+      {
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_1155.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 34)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 34)).add_operation (extensionGetter_llvmName (enumerator_1155.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 34)), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 34)), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 34)) ;
+      }
+      break ;
+    case GALGAS_procEffectiveParameterPassingModeIR::kEnum_output:
+      {
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_1155.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 36)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 36)).add_operation (extensionGetter_llvmName (enumerator_1155.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 36)), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 36)), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 36)) ;
+      }
+      break ;
+    case GALGAS_procEffectiveParameterPassingModeIR::kEnum_outputInput:
+      {
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_1155.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 38)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 38)).add_operation (extensionGetter_llvmName (enumerator_1155.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 38)), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 38)) ;
+      }
+      break ;
+    }
+    if (enumerator_1155.hasNextObject ()) {
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 41)) ;
+    }
+    enumerator_1155.gotoNextObject () ;
+  }
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-indirect-routine-call.galgas", 43)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_indirectRoutineCallIR_llvmInstructionCode (void) {
+  enterExtensionMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_indirectRoutineCallIR.mSlotID,
+                                            extensionMethod_indirectRoutineCallIR_llvmInstructionCode) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_indirectRoutineCallIR_llvmInstructionCode (defineExtensionMethod_indirectRoutineCallIR_llvmInstructionCode, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                    Overriding extension method '@indirectRoutineCallIR enterAccessibleEntities'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1481,7 +1576,7 @@ const char * gWrapperFileContent_0_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "unsigned freeListCount (void) asm (\"!FUNC!heap.free.list.count\") ;\n"
   "unsigned freeObjectCountForFreeList (const unsigned inFreeListIndex) asm (\"!FUNC!heap.free.object.count.for.free.list\") ;\n"
   "\n"
-  "unsigned memoryAlloc (const unsigned inByteSize) asm (\"!FUNC!heap.alloc\") ;\n"
+  "unsigned memoryAlloc (unsigned inByteSize) asm (\"!FUNC!heap.alloc.memory\") ;\n"
   "void memoryFree (unsigned * ioPointer) asm (\"!FUNC!heap.free\") ;\n"
   "unsigned allocatedByteSize (unsigned inPointer) asm (\"!FUNC!heap.allocated.byte.size\") ;\n"
   "\n"
@@ -1546,6 +1641,8 @@ const char * gWrapperFileContent_0_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//  FREE BLOCK SEGREGATED LIST\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "typedef struct structFreeBlock {\n"
   "  struct structFreeBlock * mNextFreeBlock ;\n"
@@ -1578,15 +1675,17 @@ const char * gWrapperFileContent_0_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//  ALLOCATION / DEALLOCATION\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "typedef struct {\n"
   "  unsigned mBlockSizeIndex ;\n"
-  "} HEADER_TYPE ;\n"
+  "} BLOCK_HEADER_TYPE ;\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "unsigned memoryAlloc (const unsigned inByteSize) {\n"
-  "  HEADER_TYPE * result = (HEADER_TYPE *) 0 ;\n"
+  "unsigned memoryAlloc (unsigned inByteSize) {\n"
+  "  BLOCK_HEADER_TYPE * result = (BLOCK_HEADER_TYPE *) 0 ;\n"
   "  if (inByteSize > 0) {\n"
   "  //--- Compute smallest block with size equal to a power of two bigger of equal to required size\n"
   "    unsigned v = inByteSize - 1 ;\n"
@@ -1606,17 +1705,14 @@ const char * gWrapperFileContent_0_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "        descriptorPtr->mFreeBlockCount -= 1 ;\n"
   "        tFreeBlock * p = descriptorPtr->mFreeBlockList ;\n"
   "        descriptorPtr->mFreeBlockList = p->mNextFreeBlock ;\n"
-  "        result = (HEADER_TYPE *) p ;\n"
+  "        result = (BLOCK_HEADER_TYPE *) p ;\n"
   "        gCurrentlyAllocatedCount += 1 ;\n"
   "        gTotalAllocationCount += 1 ;\n"
   "      }else{ // Allocate from heap\n"
-  "        result = (HEADER_TYPE *) gFirstFreeAddress ;\n"
-  "        const unsigned allocationSize = (1 << smallestPowerOfTwo) + sizeof (HEADER_TYPE) ;\n"
-  "        gFirstFreeAddress += allocationSize ;\n"
-  "        if (gFirstFreeAddress >= heapEndAddress ()) { // Heap overflow \?\n"
-  "          gFirstFreeAddress -= allocationSize ; // Yes, overflow\n"
-  "          result = (HEADER_TYPE *) 0 ;\n"
-  "        }else{\n"
+  "        const unsigned allocationSize = (1 << smallestPowerOfTwo) + sizeof (BLOCK_HEADER_TYPE) ;\n"
+  "        if ((gFirstFreeAddress + allocationSize) <= heapEndAddress ()) { // No Heap overflow\n"
+  "          result = (BLOCK_HEADER_TYPE *) gFirstFreeAddress ;\n"
+  "          gFirstFreeAddress += allocationSize ;\n"
   "          result->mBlockSizeIndex = idx ;\n"
   "          result ++ ;\n"
   "          gCurrentlyAllocatedCount += 1 ;\n"
@@ -1632,7 +1728,7 @@ const char * gWrapperFileContent_0_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "\n"
   "void memoryFree (unsigned * ioPointer) {\n"
   "  if ((*ioPointer) != 0) {\n"
-  "    const HEADER_TYPE * p = (const HEADER_TYPE *) (*ioPointer) ;\n"
+  "    const BLOCK_HEADER_TYPE * p = (const BLOCK_HEADER_TYPE *) (*ioPointer) ;\n"
   "    p -- ;\n"
   "    const unsigned idx = p->mBlockSizeIndex ;\n"
   "    tFreeBlock * freeBlockPtr = (tFreeBlock *) (*ioPointer) ;\n"
@@ -1649,7 +1745,7 @@ const char * gWrapperFileContent_0_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "unsigned allocatedByteSize (unsigned inPointer) {\n"
   "  unsigned byteSize = 0 ;\n"
   "  if (inPointer != 0) {\n"
-  "    const HEADER_TYPE * p = (const HEADER_TYPE *) inPointer ;\n"
+  "    const BLOCK_HEADER_TYPE * p = (const BLOCK_HEADER_TYPE *) inPointer ;\n"
   "    p -- ;\n"
   "    const unsigned idx = p->mBlockSizeIndex ;\n"
   "    byteSize = 1 << (kMinSizePowerOfTwo + idx) ;\n"
@@ -1663,7 +1759,7 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   "c-heap.c",
   "c",
   true, // Text file
-  8013, // Text length
+  8276, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
@@ -1671,8 +1767,10 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
 
 const char * gWrapperFileContent_1_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static void kernel_makeTaskReady (const unsigned inTaskIndex) {\n"
+  "static void kernel_makeTaskReady (const unsigned inTaskIndex, const unsigned inReturnCode) {\n"
   "  gReadyTaskList |= 1 << inTaskIndex ;\n"
+  "  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;\n"
+  "  kernel_set_return_code (& taskControlBlockPtr->mTaskContext, inReturnCode) ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -1727,7 +1825,7 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "//--- Initialize Context\n"
   "  kernel_set_task_context (taskControlBlockPtr, inTaskRoutine) ;\n"
   "//--- Make task ready\n"
-  "  kernel_makeTaskReady (inTaskIndex) ;\n"
+  "  kernel_makeTaskReady (inTaskIndex, 0) ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -1816,7 +1914,7 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "      taskControlBlockPtr->mResultPointer = (bool *) 0 ;\n"
   "    }\n"
   "  //--- Make task ready\n"
-  "    kernel_makeTaskReady (taskIndex) ;\n"
+  "    kernel_makeTaskReady (taskIndex, 1) ;\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1844,7 +1942,7 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "      taskControlBlockPtr->mResultPointer = (bool *) 0 ;\n"
   "    }\n"
   "  //--- Make task ready\n"
-  "      kernel_makeTaskReady (taskIndex) ;\n"
+  "      kernel_makeTaskReady (taskIndex, 0) ;\n"
   "    }\n"
   "  }\n"
   "}\n"
@@ -1998,7 +2096,7 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "    result = gRunningTaskControlBlock->mHaveDeadlineGuard || (gRunningTaskControlBlock->mGuardCount > 0) ;\n"
   "    if (result) {\n"
   "      gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
-  "      kernel_set_return_code (& gRunningTaskControlBlock->mTaskContext, 1) ;\n"
+  "   //   kernel_set_return_code (& gRunningTaskControlBlock->mTaskContext, 1) ;\n"
   "      kernel_makeNoTaskRunning () ;\n"
   "    }\n"
   "  }\n"
@@ -2016,8 +2114,7 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
   "    removeTaskFromGuards (taskControlBlockPtr) ;\n"
   "    if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
-  "     // kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
-  "      kernel_makeTaskReady (taskIndex) ;\n"
+  "      kernel_makeTaskReady (taskIndex, 1) ;\n"
   "      taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "    }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "      taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
@@ -2042,8 +2139,7 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "      removeTaskFromGuards (taskControlBlockPtr) ;\n"
   "      if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
   "        taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
-  "      //  kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
-  "        kernel_makeTaskReady (taskIndex) ;\n"
+  "        kernel_makeTaskReady (taskIndex, 1) ;\n"
   "      }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "        taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
   "      }else{ // GUARD_DID_CHANGE\n"
@@ -2059,7 +2155,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "c-real-time-kernel-code.c",
   "c",
   true, // Text file
-  18890, // Text length
+  18947, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -2366,11 +2462,11 @@ const char * gWrapperFileContent_7_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "// $data type\n"
   "\n"
-  "newtype $data : [[32]] @instantiable @copyable\n"
+  "//newtype $data : [[32]] @instantiable @copyable\n"
   "\n"
-  "extern func memoryAlloc (\?size: inBlockSize $uint32) -> $data : \"heap.alloc\"\n"
-  "extern func memoryFree (\?! ioPointer $data) : \"heap.free\"\n"
-  "extern func allocatedByteSize (\? inPointer $data) -> $uint32 : \"heap.allocated.byte.size\"\n"
+  "extern func memoryAlloc (\?size: inBlockSize $uint32) -> $uint32 : \"heap.alloc.memory\"\n"
+  "extern func memoryFree (\?! ioPointer $uint32) : \"heap.free\"\n"
+  "extern func allocatedByteSize (\? inPointer $uint32) -> $uint32 : \"heap.allocated.byte.size\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
@@ -2378,7 +2474,7 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "plm-heap.plm",
   "plm",
   true, // Text file
-  1560, // Text length
+  1575, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 
@@ -6480,7 +6576,7 @@ const char * gWrapperFileContent_45_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  case D23 // PTC2\n"
   "}\n"
   "\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "enum $digitalMode {\n"
   "  case OUTPUT\n"
@@ -6498,9 +6594,33 @@ const char * gWrapperFileContent_45_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "driver digital > root {\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
+  "  // By default, the 32 PORTA.PCR registers are not accessible in user mode\n"
+  "  // Their adresses : 0x4004_9000 --> 0x4004_907C\n"
+  "  // This corresponds to AIPS slot 73 (\xC2""\xA7""4.5.1)\n"
+  "  // By default, the 32 PORTB.PCR registers are not accessible in user mode\n"
+  "  // Their adresses : 0x4004_A000 --> 0x4004_A07C\n"
+  "  // This corresponds to AIPS slot 74 (\xC2""\xA7""4.5.1)\n"
+  "  // By default, the 32 PORTC.PCR registers are not accessible in user mode\n"
+  "  // Their adresses : 0x4004_B000 --> 0x4004_B07C\n"
+  "  // This corresponds to AIPS slot 75 (\xC2""\xA7""4.5.1)\n"
+  "  // By default, the 32 PORTD.PCR registers are not accessible in user mode\n"
+  "  // Their adresses : 0x4004_C000 --> 0x4004_C07C\n"
+  "  // This corresponds to AIPS slot 76 (\xC2""\xA7""4.5.1)\n"
+  "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
+  "  \n"
+  "  boot { // See \xC2""\xA7""19.2.2 page 351\n"
+  "  // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0.PACRJ\n"
+  "  // Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0.PACRJ\n"
+  "  // Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0.PACRJ\n"
+  "  // Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0.PACRJ\n"
+  "  // Simplification: all bits of AIPS0.PACRJ are reseted\n"
+  "    AIPS0.PACRJ = 0\n"
+  "  }\n"
   "\n"
-  "  public system safe set @noUnusedWarning (\?mode:mode $digitalMode\n"
-  "                                           \?toPort:port $digitalPort) {\n"
+  "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
+  "\n"
+  "  public func set @noUnusedWarning (\?mode:mode $digitalMode\n"
+  "                                    \?toPort:port $digitalPort) {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      switch mode {\n"
@@ -6867,8 +6987,8 @@ const char * gWrapperFileContent_45_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public system safe write @noUnusedWarning (\?value $bool\n"
-  "                                             \?toPort:port $digitalPort) {\n"
+  "  public func write @noUnusedWarning (\?value $bool\n"
+  "                                      \?toPort:port $digitalPort) {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      if value {\n"
@@ -7019,7 +7139,7 @@ const char * gWrapperFileContent_45_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public system safe read @noUnusedWarning (\?port:port $digitalPort) -> $bool {\n"
+  "  public func read @noUnusedWarning (\?port:port $digitalPort) -> $bool {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      result = (GPIOB.PDIR & (1 << 16)) \xE2""\x89""\xA0"" 0\n"
@@ -7074,7 +7194,7 @@ const char * gWrapperFileContent_45_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public system safe toggle @noUnusedWarning (\?port:port $digitalPort) {\n"
+  "  public func toggle @noUnusedWarning (\?port:port $digitalPort) {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      GPIOB.PTOR = 1 << 16 ;\n"
@@ -7136,7 +7256,7 @@ const cRegularFileWrapper gWrapperFile_45_targetTemplates (
   "driver-digital-teensy-3-1.plm",
   "plm",
   true, // Text file
-  19174, // Text length
+  20424, // Text length
   gWrapperFileContent_45_targetTemplates
 ) ;
 
@@ -7232,6 +7352,28 @@ const char * gWrapperFileContent_47_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
+  "/*                                Discard                                     */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  /DISCARD/ : {\n"
+  "    *(.gnu.linkonce.t.*) ;\n"
+  "    *(.glue_7t);\n"
+  "    *(.glue_7);\n"
+  "    *(.ARM.*);\n"
+  "    *(.comment);\n"
+  "    *(.debug_frame);\n"
+  "    *(.v4_bx);\n"
+  "    *(.iplt);\n"
+  "    *(.rel.*);\n"
+  "    *(.igot.plt);\n"
+  "    *(.note.GNU-stack);\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
   "/*                                ISR Vectors                                 */\n"
   "/*                                                                            */\n"
   "/*----------------------------------------------------------------------------*/\n"
@@ -7255,30 +7397,34 @@ const char * gWrapperFileContent_47_targetTemplates = "/*-----------------------
   "    FILL(0xff)\n"
   "    __code_start = . ;\n"
   "  /*--- Code */\n"
-  "    *(.text.*) ;\n"
-  "    *(.text) ;\n"
-  "    *(text) ;\n"
-  "    *(.gnu.linkonce.t.*) ;\n"
+  "    *(.text*) ;\n"
+  "    *(text*) ;\n"
+  "    *(.vfp11_veneer);\n"
   "  /*---- ROM data ----*/\n"
-  "    . = ALIGN(4);\n"
-  "    *(.rodata);\n"
   "    . = ALIGN(4);\n"
   "    *(.rodata*);\n"
   "    . = ALIGN(4);\n"
-  "    *(.gnu.linkonce.r.*);\n"
-  "    . = ALIGN(4);\n"
-  "    *(.glue_7t);\n"
-  "    . = ALIGN(4);\n"
-  "    *(.glue_7);\n"
+  "    *(.shstrtab);\n"
   "    . = ALIGN(4);\n"
   "    __code_end = . ;\n"
   "  } > flash\n"
+  "}\n"
   "\n"
-  "  /DISCARD/ : {\n"
-  "    *(rel.ARM.*);\n"
-  "    *(.ARM.*);\n"
-  "    *(.gnu.linkonce.armexidx.*);\n"
-  "  }\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                          BSS (uninitialized data)                          */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .bss (NOLOAD) : {\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_start = . ;\n"
+  "    * (.bss*) ;\n"
+  "    * (COMMON) ;\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_end = . ;\n"
+  "  } > sram\n"
   "}\n"
   "\n"
   "/*----------------------------------------------------------------------------*/\n"
@@ -7288,14 +7434,14 @@ const char * gWrapperFileContent_47_targetTemplates = "/*-----------------------
   "/*----------------------------------------------------------------------------*/\n"
   "\n"
   "SECTIONS {\n"
-  "  .data : AT (__code_end) {\n"
+  "  .data : {\n"
   "    FILL (0xFF)\n"
   "    . = ALIGN (4) ;\n"
   "    __data_start = . ;\n"
   "    * (.data*) ;\n"
   "    . = ALIGN (4) ;\n"
   "    __data_end = . ;\n"
-  "  } > sram\n"
+  "  } > sram AT > flash\n"
   "}\n"
   "\n"
   "\n"
@@ -7303,23 +7449,6 @@ const char * gWrapperFileContent_47_targetTemplates = "/*-----------------------
   "\n"
   "__data_load_start = LOADADDR (.data) ;\n"
   "__data_load_end   = LOADADDR (.data) + SIZEOF (.data) ;\n"
-  "\n"
-  "/*----------------------------------------------------------------------------*/\n"
-  "/*                                                                            */\n"
-  "/*                          BSS (uninitialized data)                          */\n"
-  "/*                                                                            */\n"
-  "/*----------------------------------------------------------------------------*/\n"
-  "\n"
-  "SECTIONS {\n"
-  "  .bss : {\n"
-  "    . = ALIGN(4);\n"
-  "    __bss_start = . ;\n"
-  "    * (.bss*) ;\n"
-  "    * (COMMON) ;\n"
-  "    . = ALIGN(4);\n"
-  "    __bss_end = . ;\n"
-  "  } > sram\n"
-  "}\n"
   "\n"
   "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
@@ -7360,7 +7489,7 @@ const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   "ld-linker.txt",
   "txt",
   true, // Text file
-  4519, // Text length
+  4944, // Text length
   gWrapperFileContent_47_targetTemplates
 ) ;
 
@@ -7387,40 +7516,40 @@ const char * gWrapperFileContent_49_targetTemplates = "\n"
   "\n"
   "// chapter 11: Port control and interrupts (PORT) Pin Control Register n\n"
   "register PORTA {\n"
-  "  PCR [32] at 0x4004_9000 : 4 $uint32 {\n"
+  "  PCR @user [32] at 0x4004_9000 : 4 $uint32 {\n"
   "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
-  "  GPCLR  at 0x40049080 $uint32 // Global Pin Control Low Register\n"
-  "  GPCHR  at 0x40049084 $uint32 // Global Pin Control High Register\n"
-  "  ISFR   at 0x400490A0 $uint32 // Interrupt Status Flag Register\n"
+  "  GPCLR @user  at 0x40049080 $uint32 // Global Pin Control Low Register\n"
+  "  GPCHR @user  at 0x40049084 $uint32 // Global Pin Control High Register\n"
+  "  ISFR @user   at 0x400490A0 $uint32 // Interrupt Status Flag Register\n"
   "}\n"
   "\n"
   "register PORTB {\n"
-  "  PCR [32] at 0x4004_A000 : 4 $uint32 {\n"
+  "  PCR @user [32] at 0x4004_A000 : 4 $uint32 {\n"
   "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
-  "  GPCLR  at 0x4004A080 $uint32 // Global Pin Control Low Register\n"
-  "  GPCHR  at 0x4004A084 $uint32 // Global Pin Control High Register\n"
-  "  ISFR   at 0x4004A0A0 $uint32 // Interrupt Status Flag Register\n"
+  "  GPCLR @user  at 0x4004A080 $uint32 // Global Pin Control Low Register\n"
+  "  GPCHR @user  at 0x4004A084 $uint32 // Global Pin Control High Register\n"
+  "  ISFR  @user  at 0x4004A0A0 $uint32 // Interrupt Status Flag Register\n"
   "}\n"
   "\n"
   "register PORTC {\n"
-  "  PCR [32] at 0x4004_B000 : 4 $uint32 {\n"
+  "  PCR @user [32] at 0x4004_B000 : 4 $uint32 {\n"
   "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
-  "  GPCLR  at 0x4004B080 $uint32 // Global Pin Control Low Register\n"
-  "  GPCHR  at 0x4004B084 $uint32 // Global Pin Control High Register\n"
-  "  ISFR   at 0x4004B0A0 $uint32 // Interrupt Status Flag Register\n"
+  "  GPCLR @user  at 0x4004B080 $uint32 // Global Pin Control Low Register\n"
+  "  GPCHR @user  at 0x4004B084 $uint32 // Global Pin Control High Register\n"
+  "  ISFR  @user  at 0x4004B0A0 $uint32 // Interrupt Status Flag Register\n"
   "}\n"
   "\n"
   "register PORTD {\n"
-  "  PCR [32] at 0x4004_C000 : 4 $uint32 {\n"
+  "  PCR @user [32] at 0x4004_C000 : 4 $uint32 {\n"
   "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
-  "  GPCLR  at 0x4004C080 $uint32 // Global Pin Control Low Register\n"
-  "  GPCHR  at 0x4004C084 $uint32 // Global Pin Control High Register\n"
-  "  ISFR   at 0x4004C0A0 $uint32 // Interrupt Status Flag Register\n"
+  "  GPCLR @user  at 0x4004C080 $uint32 // Global Pin Control Low Register\n"
+  "  GPCHR @user  at 0x4004C084 $uint32 // Global Pin Control High Register\n"
+  "  ISFR  @user  at 0x4004C0A0 $uint32 // Interrupt Status Flag Register\n"
   "}\n"
   "\n"
   "// Chapter 12: System Integration Module (SIM)\n"
@@ -8937,39 +9066,39 @@ const char * gWrapperFileContent_49_targetTemplates = "\n"
   "\n"
   "// Chapter 47: General-Purpose Input/Output (GPIO)\n"
   "register GPIOA {\n"
-  "  PDOR at 0x400FF000 $uint32 // Port Data Output Register\n"
-  "  PSOR at 0x400FF004 $uint32 // Port Set Output Register\n"
-  "  PCOR at 0x400FF008 $uint32 // Port Clear Output Register\n"
-  "  PTOR at 0x400FF00C $uint32 // Port Toggle Output Register\n"
-  "  PDIR at 0x400FF010 $uint32 // Port Data Input Register\n"
-  "  PDDR at 0x400FF014 $uint32 // Port Data Direction Register\n"
+  "  PDOR @user at 0x400FF000 $uint32 // Port Data Output Register\n"
+  "  PSOR @user at 0x400FF004 $uint32 // Port Set Output Register\n"
+  "  PCOR @user at 0x400FF008 $uint32 // Port Clear Output Register\n"
+  "  PTOR @user at 0x400FF00C $uint32 // Port Toggle Output Register\n"
+  "  PDIR @user at 0x400FF010 $uint32 // Port Data Input Register\n"
+  "  PDDR @user at 0x400FF014 $uint32 // Port Data Direction Register\n"
   "}\n"
   "\n"
   "register GPIOB {\n"
-  "  PDOR at 0x400FF040 $uint32 // Port Data Output Register\n"
-  "  PSOR at 0x400FF044 $uint32 // Port Set Output Register\n"
-  "  PCOR at 0x400FF048 $uint32 // Port Clear Output Register\n"
-  "  PTOR at 0x400FF04C $uint32 // Port Toggle Output Register\n"
-  "  PDIR at 0x400FF050 $uint32 // Port Data Input Register\n"
-  "  PDDR at 0x400FF054 $uint32 // Port Data Direction Register\n"
+  "  PDOR @user at 0x400FF040 $uint32 // Port Data Output Register\n"
+  "  PSOR @user at 0x400FF044 $uint32 // Port Set Output Register\n"
+  "  PCOR @user at 0x400FF048 $uint32 // Port Clear Output Register\n"
+  "  PTOR @user at 0x400FF04C $uint32 // Port Toggle Output Register\n"
+  "  PDIR @user at 0x400FF050 $uint32 // Port Data Input Register\n"
+  "  PDDR @user at 0x400FF054 $uint32 // Port Data Direction Register\n"
   "}\n"
   "\n"
   "register GPIOC {\n"
-  "  PDOR at 0x400FF080 $uint32 // Port Data Output Register\n"
-  "  PSOR at 0x400FF084 $uint32 // Port Set Output Register\n"
-  "  PCOR at 0x400FF088 $uint32 // Port Clear Output Register\n"
-  "  PTOR at 0x400FF08C $uint32 // Port Toggle Output Register\n"
-  "  PDIR at 0x400FF090 $uint32 // Port Data Input Register\n"
-  "  PDDR at 0x400FF094 $uint32 // Port Data Direction Register\n"
+  "  PDOR @user at 0x400FF080 $uint32 // Port Data Output Register\n"
+  "  PSOR @user at 0x400FF084 $uint32 // Port Set Output Register\n"
+  "  PCOR @user at 0x400FF088 $uint32 // Port Clear Output Register\n"
+  "  PTOR @user at 0x400FF08C $uint32 // Port Toggle Output Register\n"
+  "  PDIR @user at 0x400FF090 $uint32 // Port Data Input Register\n"
+  "  PDDR @user at 0x400FF094 $uint32 // Port Data Direction Register\n"
   "}\n"
   "\n"
   "register GPIOD {\n"
-  "  PDOR at 0x400FF0C0 $uint32 // Port Data Output Register\n"
-  "  PSOR at 0x400FF0C4 $uint32 // Port Set Output Register\n"
-  "  PCOR at 0x400FF0C8 $uint32 // Port Clear Output Register\n"
-  "  PTOR at 0x400FF0CC $uint32 // Port Toggle Output Register\n"
-  "  PDIR at 0x400FF0D0 $uint32 // Port Data Input Register\n"
-  "  PDDR at 0x400FF0D4 $uint32 // Port Data Direction Register\n"
+  "  PDOR @user at 0x400FF0C0 $uint32 // Port Data Output Register\n"
+  "  PSOR @user at 0x400FF0C4 $uint32 // Port Set Output Register\n"
+  "  PCOR @user at 0x400FF0C8 $uint32 // Port Clear Output Register\n"
+  "  PTOR @user at 0x400FF0CC $uint32 // Port Toggle Output Register\n"
+  "  PDIR @user at 0x400FF0D0 $uint32 // Port Data Input Register\n"
+  "  PDDR @user at 0x400FF0D4 $uint32 // Port Data Direction Register\n"
   "}\n"
   "\n"
   "//// Chapter 48: Touch sense input (TSI)\n"
@@ -9108,7 +9237,7 @@ const cRegularFileWrapper gWrapperFile_49_targetTemplates (
   "plm-registers-mk20dx256.plm",
   "plm",
   true, // Text file
-  95176, // Text length
+  95416, // Text length
   gWrapperFileContent_49_targetTemplates
 ) ;
 
@@ -9935,7 +10064,7 @@ const char * gWrapperFileContent_55_targetTemplates = "#! /usr/bin/env python\n"
   "  result.append (\"--no-undefined\")\n"
   "  result.append (\"--cref\")\n"
   "  result.append (\"-static\")\n"
-  "  result.append (\"--gc-sections\")\n"
+  "#  result.append (\"--gc-sections\")\n"
   "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -10060,7 +10189,7 @@ const cRegularFileWrapper gWrapperFile_55_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
-  15386, // Text length
+  15387, // Text length
   gWrapperFileContent_55_targetTemplates
 ) ;
 
@@ -10534,7 +10663,7 @@ const char * gWrapperFileContent_63_targetTemplates = "@------------------------
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  ".lcomm backgroundTaskStack, 32\n"
+  ".lcomm backgroundTaskStack, 64\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -10547,7 +10676,7 @@ const char * gWrapperFileContent_63_targetTemplates = "@------------------------
   "@--- Init micro controller\n"
   "  bl configuration.on.boot\n"
   "@--- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers\n"
-  "  ldr r0, =backgroundTaskStack + 32\n"
+  "  ldr r0, =backgroundTaskStack + 64\n"
   "  msr psp, r0\n"
   "@--- Set CONTROL register (see \xC2""\xA7""B1.4.4)\n"
   "@ bit 0 : 0 -> Thread mode has privileged access, 1 -> Thread mode has unprivileged access\n"
@@ -11145,7 +11274,7 @@ const char * gWrapperFileContent_70_targetTemplates = "@------------------------
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  ".lcomm backgroundTaskStack, 32\n"
+  ".lcomm backgroundTaskStack, 64\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -11158,7 +11287,7 @@ const char * gWrapperFileContent_70_targetTemplates = "@------------------------
   "@--- Init micro controller\n"
   "  bl configuration.on.boot\n"
   "@--- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers\n"
-  "  ldr r0, =backgroundTaskStack + 32\n"
+  "  ldr r0, =backgroundTaskStack + 64\n"
   "  msr psp, r0\n"
   "@--- Set CONTROL register (see \xC2""\xA7""B1.4.4)\n"
   "@ bit 0 : 0 -> Thread mode has privileged access, 1 -> Thread mode has unprivileged access\n"
@@ -11861,18 +11990,18 @@ const char * gWrapperFileContent_82_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
   "  boot { // See \xC2""\xA7""19.2.2 page 351\n"
-  "  // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0_PACRJ\n"
-  "  // Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0_PACRJ\n"
-  "  // Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0_PACRJ\n"
-  "  // Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0_PACRJ\n"
-  "  // Simplification: all bits of AIPS0_PACRJ are reseted\n"
-  "  //  AIPS0_PACRJ = 0\n"
+  "  // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0.PACRJ\n"
+  "  // Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0.PACRJ\n"
+  "  // Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0.PACRJ\n"
+  "  // Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0.PACRJ\n"
+  "  // Simplification: all bits of AIPS0.PACRJ are reseted\n"
+  "    AIPS0.PACRJ = 0\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public system safe set @noUnusedWarning (\?mode:mode $digitalMode\n"
-  "                                           \?toPort:port $digitalPort) {\n"
+  "  public func set @noUnusedWarning (\?mode:mode $digitalMode\n"
+  "                                    \?toPort:port $digitalPort) {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      switch mode {\n"
@@ -12239,8 +12368,8 @@ const char * gWrapperFileContent_82_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public system safe write @noUnusedWarning (\?value $bool\n"
-  "                                             \?toPort:port $digitalPort) {\n"
+  "  public func write @noUnusedWarning (\?value $bool\n"
+  "                                      \?toPort:port $digitalPort) {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      if value {\n"
@@ -12391,7 +12520,7 @@ const char * gWrapperFileContent_82_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public system safe read @noUnusedWarning (\?port:port $digitalPort) -> $bool {\n"
+  "  public func read @noUnusedWarning (\?port:port $digitalPort) -> $bool {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      result = (GPIOB.PDIR & (1 << 16)) \xE2""\x89""\xA0"" 0\n"
@@ -12446,7 +12575,7 @@ const char * gWrapperFileContent_82_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public system safe toggle @noUnusedWarning (\?port:port $digitalPort) {\n"
+  "  public func toggle @noUnusedWarning (\?port:port $digitalPort) {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      GPIOB.PTOR = 1 << 16 ;\n"
@@ -12508,7 +12637,7 @@ const cRegularFileWrapper gWrapperFile_82_targetTemplates (
   "driver-digital-teensy-3-6.plm",
   "plm",
   true, // Text file
-  20468, // Text length
+  20424, // Text length
   gWrapperFileContent_82_targetTemplates
 ) ;
 
@@ -12740,6 +12869,7 @@ const char * gWrapperFileContent_84_targetTemplates = "/*-----------------------
   "    FILL(0xff)\n"
   "    __code_start = . ;\n"
   "  /*--- Code */\n"
+  "    . = ALIGN(4);\n"
   "    *(.text*) ;\n"
   "    *(.text) ;\n"
   "    *(text) ;\n"
@@ -12843,7 +12973,7 @@ const cRegularFileWrapper gWrapperFile_84_targetTemplates (
   "ld-linker.txt",
   "txt",
   true, // Text file
-  4486, // Text length
+  4504, // Text length
   gWrapperFileContent_84_targetTemplates
 ) ;
 
@@ -12869,46 +12999,46 @@ const char * gWrapperFileContent_86_targetTemplates = "check target \"teensy-3-6
   "\n"
   "// chapter 11: Port control and interrupts (PORT) Pin Control Register n\n"
   "register PORTA {\n"
-  "    PCR [32] at 0x4004_9000 : 4 $uint32 {\n"
+  "    PCR @user [32] at 0x4004_9000 : 4 $uint32 {\n"
   "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
-  "  GPCLR  at 0x40049080 $uint32 // Global Pin Control Low Register\n"
-  "  GPCHR  at 0x40049084 $uint32 // Global Pin Control High Register\n"
-  "  ISFR   at 0x400490A0 $uint32 // Interrupt Status Flag Register\n"
+  "  GPCLR @user  at 0x40049080 $uint32 // Global Pin Control Low Register\n"
+  "  GPCHR @user  at 0x40049084 $uint32 // Global Pin Control High Register\n"
+  "  ISFR  @user  at 0x400490A0 $uint32 // Interrupt Status Flag Register\n"
   "}\n"
   "\n"
   "\n"
   "register PORTB {\n"
-  "  PCR [32] at 0x4004_A000 : 4 $uint32 {\n"
+  "  PCR @user [32] at 0x4004_A000 : 4 $uint32 {\n"
   "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
-  "  GPCLR  at 0x4004A080 $uint32 // Global Pin Control Low Register\n"
-  "  GPCHR  at 0x4004A084 $uint32 // Global Pin Control High Register\n"
-  "  ISFR   at 0x4004A0A0 $uint32 // Interrupt Status Flag Register\n"
+  "  GPCLR @user  at 0x4004A080 $uint32 // Global Pin Control Low Register\n"
+  "  GPCHR @user  at 0x4004A084 $uint32 // Global Pin Control High Register\n"
+  "  ISFR  @user  at 0x4004A0A0 $uint32 // Interrupt Status Flag Register\n"
   "}\n"
   "\n"
   "\n"
   "register PORTC {\n"
-  "  PCR [32] at 0x4004_B000 : 4 $uint32 {\n"
+  "  PCR @user [32] at 0x4004_B000 : 4 $uint32 {\n"
   "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
-  "  GPCLR  at 0x4004B080 $uint32 // Global Pin Control Low Register\n"
-  "  GPCHR  at 0x4004B084 $uint32 // Global Pin Control High Register\n"
-  "  ISFR   at 0x4004B0A0 $uint32 // Interrupt Status Flag Register\n"
+  "  GPCLR @user  at 0x4004B080 $uint32 // Global Pin Control Low Register\n"
+  "  GPCHR @user  at 0x4004B084 $uint32 // Global Pin Control High Register\n"
+  "  ISFR  @user  at 0x4004B0A0 $uint32 // Interrupt Status Flag Register\n"
   "}\n"
   "\n"
   "\n"
   "register PORTD {\n"
-  "  PCR [32] at 0x4004_C000 : 4 $uint32 {\n"
+  "  PCR @user [32] at 0x4004_C000 : 4 $uint32 {\n"
   "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
-  "  GPCLR  at 0x4004C080 $uint32 // Global Pin Control Low Register\n"
-  "  GPCHR  at 0x4004C084 $uint32 // Global Pin Control High Register\n"
-  "  ISFR   at 0x4004C0A0 $uint32 // Interrupt Status Flag Register\n"
+  "  GPCLR @user  at 0x4004C080 $uint32 // Global Pin Control Low Register\n"
+  "  GPCHR @user  at 0x4004C084 $uint32 // Global Pin Control High Register\n"
+  "  ISFR  @user  at 0x4004C0A0 $uint32 // Interrupt Status Flag Register\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -14814,39 +14944,39 @@ const char * gWrapperFileContent_86_targetTemplates = "check target \"teensy-3-6
   "\n"
   "// Chapter 47: General-Purpose Input/Output (GPIO)\n"
   "register GPIOA {\n"
-  "  PDOR at 0x400FF000 $uint32 // Port Data Output Register\n"
-  "  PSOR at 0x400FF004 $uint32 // Port Set Output Register\n"
-  "  PCOR at 0x400FF008 $uint32 // Port Clear Output Register\n"
-  "  PTOR at 0x400FF00C $uint32 // Port Toggle Output Register\n"
-  "  PDIR at 0x400FF010 $uint32 // Port Data Input Register\n"
-  "  PDDR at 0x400FF014 $uint32 // Port Data Direction Register\n"
+  "  PDOR @user at 0x400FF000 $uint32 // Port Data Output Register\n"
+  "  PSOR @user at 0x400FF004 $uint32 // Port Set Output Register\n"
+  "  PCOR @user at 0x400FF008 $uint32 // Port Clear Output Register\n"
+  "  PTOR @user at 0x400FF00C $uint32 // Port Toggle Output Register\n"
+  "  PDIR @user at 0x400FF010 $uint32 // Port Data Input Register\n"
+  "  PDDR @user at 0x400FF014 $uint32 // Port Data Direction Register\n"
   "}\n"
   "\n"
   "register GPIOB {\n"
-  "  PDOR at 0x400FF040 $uint32 // Port Data Output Register\n"
-  "  PSOR at 0x400FF044 $uint32 // Port Set Output Register\n"
-  "  PCOR at 0x400FF048 $uint32 // Port Clear Output Register\n"
-  "  PTOR at 0x400FF04C $uint32 // Port Toggle Output Register\n"
-  "  PDIR at 0x400FF050 $uint32 // Port Data Input Register\n"
-  "  PDDR at 0x400FF054 $uint32 // Port Data Direction Register\n"
+  "  PDOR @user at 0x400FF040 $uint32 // Port Data Output Register\n"
+  "  PSOR @user at 0x400FF044 $uint32 // Port Set Output Register\n"
+  "  PCOR @user at 0x400FF048 $uint32 // Port Clear Output Register\n"
+  "  PTOR @user at 0x400FF04C $uint32 // Port Toggle Output Register\n"
+  "  PDIR @user at 0x400FF050 $uint32 // Port Data Input Register\n"
+  "  PDDR @user at 0x400FF054 $uint32 // Port Data Direction Register\n"
   "}\n"
   "\n"
   "register GPIOC {\n"
-  "  PDOR at 0x400FF080 $uint32 // Port Data Output Register\n"
-  "  PSOR at 0x400FF084 $uint32 // Port Set Output Register\n"
-  "  PCOR at 0x400FF088 $uint32 // Port Clear Output Register\n"
-  "  PTOR at 0x400FF08C $uint32 // Port Toggle Output Register\n"
-  "  PDIR at 0x400FF090 $uint32 // Port Data Input Register\n"
-  "  PDDR at 0x400FF094 $uint32 // Port Data Direction Register\n"
+  "  PDOR @user at 0x400FF080 $uint32 // Port Data Output Register\n"
+  "  PSOR @user at 0x400FF084 $uint32 // Port Set Output Register\n"
+  "  PCOR @user at 0x400FF088 $uint32 // Port Clear Output Register\n"
+  "  PTOR @user at 0x400FF08C $uint32 // Port Toggle Output Register\n"
+  "  PDIR @user at 0x400FF090 $uint32 // Port Data Input Register\n"
+  "  PDDR @user at 0x400FF094 $uint32 // Port Data Direction Register\n"
   "}\n"
   "\n"
   "register GPIOD {\n"
-  "  PDOR at 0x400FF0C0 $uint32 // Port Data Output Register\n"
-  "  PSOR at 0x400FF0C4 $uint32 // Port Set Output Register\n"
-  "  PCOR at 0x400FF0C8 $uint32 // Port Clear Output Register\n"
-  "  PTOR at 0x400FF0CC $uint32 // Port Toggle Output Register\n"
-  "  PDIR at 0x400FF0D0 $uint32 // Port Data Input Register\n"
-  "  PDDR at 0x400FF0D4 $uint32 // Port Data Direction Register\n"
+  "  PDOR @user at 0x400FF0C0 $uint32 // Port Data Output Register\n"
+  "  PSOR @user at 0x400FF0C4 $uint32 // Port Set Output Register\n"
+  "  PCOR @user at 0x400FF0C8 $uint32 // Port Clear Output Register\n"
+  "  PTOR @user at 0x400FF0CC $uint32 // Port Toggle Output Register\n"
+  "  PDIR @user at 0x400FF0D0 $uint32 // Port Data Input Register\n"
+  "  PDDR @user at 0x400FF0D4 $uint32 // Port Data Direction Register\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -15011,7 +15141,7 @@ const cRegularFileWrapper gWrapperFile_86_targetTemplates (
   "plm-registers-mk66fx1m0.plm",
   "plm",
   true, // Text file
-  103284, // Text length
+  103524, // Text length
   gWrapperFileContent_86_targetTemplates
 ) ;
 
@@ -15622,7 +15752,7 @@ const char * gWrapperFileContent_90_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  isr service systick {\n"
-  "    noteCurrentTaskFreeStackSize ()\n"
+  " //   noteCurrentTaskFreeStackSize ()\n"
   "    let now = self.mUptime +% 1\n"
   "    self.mUptime = now\n"
   "    makeTasksReady (!fromCurrentDate:now)\n"
@@ -15648,8 +15778,8 @@ const char * gWrapperFileContent_90_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public guard wait @noUnusedWarning (\?untilDeadline:inDeadline $uint32) {\n"
-  "    noteCurrentTaskFreeStackSize ()\n"
-  "    accept = (inDeadline) \xE2""\x89""\xA4"" self.mUptime\n"
+  "//    noteCurrentTaskFreeStackSize ()\n"
+  "    accept = inDeadline \xE2""\x89""\xA4"" self.mUptime\n"
   "    if not accept {\n"
   "      handle (!guardedDeadline:inDeadline)\n"
   "    }\n"
@@ -15665,7 +15795,7 @@ const cRegularFileWrapper gWrapperFile_90_targetTemplates (
   "plm-teensy-3-6-time.plm",
   "plm",
   true, // Text file
-  3595, // Text length
+  3597, // Text length
   gWrapperFileContent_90_targetTemplates
 ) ;
 

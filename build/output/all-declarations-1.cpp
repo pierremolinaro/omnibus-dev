@@ -6322,6 +6322,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::extractObject (const GALG
 cMapElement_controlRegisterMap::cMapElement_controlRegisterMap (const GALGAS_lstring & inKey,
                                                                 const GALGAS_PLMType & in_mType,
                                                                 const GALGAS_bool & in_mIsReadOnly,
+                                                                const GALGAS_bool & in_mUserAccess,
                                                                 const GALGAS_sliceMap & in_mRegisterFieldAccessMap,
                                                                 const GALGAS_controlRegisterFieldMap & in_mRegisterFieldMap,
                                                                 const GALGAS_bigint & in_mAddress,
@@ -6333,6 +6334,7 @@ cMapElement_controlRegisterMap::cMapElement_controlRegisterMap (const GALGAS_lst
 cMapElement (inKey COMMA_THERE),
 mProperty_mType (in_mType),
 mProperty_mIsReadOnly (in_mIsReadOnly),
+mProperty_mUserAccess (in_mUserAccess),
 mProperty_mRegisterFieldAccessMap (in_mRegisterFieldAccessMap),
 mProperty_mRegisterFieldMap (in_mRegisterFieldMap),
 mProperty_mAddress (in_mAddress),
@@ -6345,14 +6347,14 @@ mProperty_mElementArraySize (in_mElementArraySize) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_controlRegisterMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mRegisterFieldAccessMap.isValid () && mProperty_mRegisterFieldMap.isValid () && mProperty_mAddress.isValid () && mProperty_mControlRegisterFieldList.isValid () && mProperty_mRegisterBitCount.isValid () && mProperty_mArraySize.isValid () && mProperty_mElementArraySize.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mUserAccess.isValid () && mProperty_mRegisterFieldAccessMap.isValid () && mProperty_mRegisterFieldMap.isValid () && mProperty_mAddress.isValid () && mProperty_mControlRegisterFieldList.isValid () && mProperty_mRegisterBitCount.isValid () && mProperty_mArraySize.isValid () && mProperty_mElementArraySize.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_controlRegisterMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_controlRegisterMap (mProperty_lkey, mProperty_mType, mProperty_mIsReadOnly, mProperty_mRegisterFieldAccessMap, mProperty_mRegisterFieldMap, mProperty_mAddress, mProperty_mControlRegisterFieldList, mProperty_mRegisterBitCount, mProperty_mArraySize, mProperty_mElementArraySize COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_controlRegisterMap (mProperty_lkey, mProperty_mType, mProperty_mIsReadOnly, mProperty_mUserAccess, mProperty_mRegisterFieldAccessMap, mProperty_mRegisterFieldMap, mProperty_mAddress, mProperty_mControlRegisterFieldList, mProperty_mRegisterBitCount, mProperty_mArraySize, mProperty_mElementArraySize COMMA_HERE)) ;
   return result ;
 }
 
@@ -6367,6 +6369,10 @@ void cMapElement_controlRegisterMap::description (C_String & ioString, const int
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mIsReadOnly" ":" ;
   mProperty_mIsReadOnly.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mUserAccess" ":" ;
+  mProperty_mUserAccess.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRegisterFieldAccessMap" ":" ;
@@ -6407,6 +6413,9 @@ typeComparisonResult cMapElement_controlRegisterMap::compare (const cCollectionE
   }
   if (kOperandEqual == result) {
     result = mProperty_mIsReadOnly.objectCompare (operand->mProperty_mIsReadOnly) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mUserAccess.objectCompare (operand->mProperty_mUserAccess) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mRegisterFieldAccessMap.objectCompare (operand->mProperty_mRegisterFieldAccessMap) ;
@@ -6482,17 +6491,18 @@ GALGAS_controlRegisterMap GALGAS_controlRegisterMap::getter_overriddenMap (C_Com
 void GALGAS_controlRegisterMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                      const GALGAS_PLMType & inArgument0,
                                                      const GALGAS_bool & inArgument1,
-                                                     const GALGAS_sliceMap & inArgument2,
-                                                     const GALGAS_controlRegisterFieldMap & inArgument3,
-                                                     const GALGAS_bigint & inArgument4,
-                                                     const GALGAS_controlRegisterFieldList & inArgument5,
-                                                     const GALGAS_uint & inArgument6,
+                                                     const GALGAS_bool & inArgument2,
+                                                     const GALGAS_sliceMap & inArgument3,
+                                                     const GALGAS_controlRegisterFieldMap & inArgument4,
+                                                     const GALGAS_bigint & inArgument5,
+                                                     const GALGAS_controlRegisterFieldList & inArgument6,
                                                      const GALGAS_uint & inArgument7,
                                                      const GALGAS_uint & inArgument8,
+                                                     const GALGAS_uint & inArgument9,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   cMapElement_controlRegisterMap * p = NULL ;
-  macroMyNew (p, cMapElement_controlRegisterMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_controlRegisterMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8, inArgument9 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -6506,17 +6516,18 @@ void GALGAS_controlRegisterMap::addAssign_operation (const GALGAS_lstring & inKe
 void GALGAS_controlRegisterMap::setter_insertKey (GALGAS_lstring inKey,
                                                   GALGAS_PLMType inArgument0,
                                                   GALGAS_bool inArgument1,
-                                                  GALGAS_sliceMap inArgument2,
-                                                  GALGAS_controlRegisterFieldMap inArgument3,
-                                                  GALGAS_bigint inArgument4,
-                                                  GALGAS_controlRegisterFieldList inArgument5,
-                                                  GALGAS_uint inArgument6,
+                                                  GALGAS_bool inArgument2,
+                                                  GALGAS_sliceMap inArgument3,
+                                                  GALGAS_controlRegisterFieldMap inArgument4,
+                                                  GALGAS_bigint inArgument5,
+                                                  GALGAS_controlRegisterFieldList inArgument6,
                                                   GALGAS_uint inArgument7,
                                                   GALGAS_uint inArgument8,
+                                                  GALGAS_uint inArgument9,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
   cMapElement_controlRegisterMap * p = NULL ;
-  macroMyNew (p, cMapElement_controlRegisterMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_controlRegisterMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8, inArgument9 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -6534,13 +6545,14 @@ const char * kSearchErrorMessage_controlRegisterMap_searchKey = "** internal err
 void GALGAS_controlRegisterMap::method_searchKey (GALGAS_lstring inKey,
                                                   GALGAS_PLMType & outArgument0,
                                                   GALGAS_bool & outArgument1,
-                                                  GALGAS_sliceMap & outArgument2,
-                                                  GALGAS_controlRegisterFieldMap & outArgument3,
-                                                  GALGAS_bigint & outArgument4,
-                                                  GALGAS_controlRegisterFieldList & outArgument5,
-                                                  GALGAS_uint & outArgument6,
+                                                  GALGAS_bool & outArgument2,
+                                                  GALGAS_sliceMap & outArgument3,
+                                                  GALGAS_controlRegisterFieldMap & outArgument4,
+                                                  GALGAS_bigint & outArgument5,
+                                                  GALGAS_controlRegisterFieldList & outArgument6,
                                                   GALGAS_uint & outArgument7,
                                                   GALGAS_uint & outArgument8,
+                                                  GALGAS_uint & outArgument9,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) performSearch (inKey,
@@ -6557,17 +6569,19 @@ void GALGAS_controlRegisterMap::method_searchKey (GALGAS_lstring inKey,
     outArgument6.drop () ;
     outArgument7.drop () ;
     outArgument8.drop () ;
+    outArgument9.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     outArgument0 = p->mProperty_mType ;
     outArgument1 = p->mProperty_mIsReadOnly ;
-    outArgument2 = p->mProperty_mRegisterFieldAccessMap ;
-    outArgument3 = p->mProperty_mRegisterFieldMap ;
-    outArgument4 = p->mProperty_mAddress ;
-    outArgument5 = p->mProperty_mControlRegisterFieldList ;
-    outArgument6 = p->mProperty_mRegisterBitCount ;
-    outArgument7 = p->mProperty_mArraySize ;
-    outArgument8 = p->mProperty_mElementArraySize ;
+    outArgument2 = p->mProperty_mUserAccess ;
+    outArgument3 = p->mProperty_mRegisterFieldAccessMap ;
+    outArgument4 = p->mProperty_mRegisterFieldMap ;
+    outArgument5 = p->mProperty_mAddress ;
+    outArgument6 = p->mProperty_mControlRegisterFieldList ;
+    outArgument7 = p->mProperty_mRegisterBitCount ;
+    outArgument8 = p->mProperty_mArraySize ;
+    outArgument9 = p->mProperty_mElementArraySize ;
   }
 }
 
@@ -6597,6 +6611,21 @@ GALGAS_bool GALGAS_controlRegisterMap::getter_mIsReadOnlyForKey (const GALGAS_st
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mIsReadOnly ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_controlRegisterMap::getter_mUserAccessForKey (const GALGAS_string & inKey,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
+    result = p->mProperty_mUserAccess ;
   }
   return result ;
 }
@@ -6736,6 +6765,20 @@ void GALGAS_controlRegisterMap::setter_setMIsReadOnlyForKey (GALGAS_bool inAttri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_controlRegisterMap::setter_setMUserAccessForKey (GALGAS_bool inAttributeValue,
+                                                             GALGAS_string inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
+    p->mProperty_mUserAccess = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_controlRegisterMap::setter_setMRegisterFieldAccessMapForKey (GALGAS_sliceMap inAttributeValue,
                                                                          GALGAS_string inKey,
                                                                          C_Compiler * inCompiler
@@ -6855,7 +6898,7 @@ cGenericAbstractEnumerator (inOrder) {
 GALGAS_controlRegisterMap_2D_element cEnumerator_controlRegisterMap::current (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
-  return GALGAS_controlRegisterMap_2D_element (p->mProperty_lkey, p->mProperty_mType, p->mProperty_mIsReadOnly, p->mProperty_mRegisterFieldAccessMap, p->mProperty_mRegisterFieldMap, p->mProperty_mAddress, p->mProperty_mControlRegisterFieldList, p->mProperty_mRegisterBitCount, p->mProperty_mArraySize, p->mProperty_mElementArraySize) ;
+  return GALGAS_controlRegisterMap_2D_element (p->mProperty_lkey, p->mProperty_mType, p->mProperty_mIsReadOnly, p->mProperty_mUserAccess, p->mProperty_mRegisterFieldAccessMap, p->mProperty_mRegisterFieldMap, p->mProperty_mAddress, p->mProperty_mControlRegisterFieldList, p->mProperty_mRegisterBitCount, p->mProperty_mArraySize, p->mProperty_mElementArraySize) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6880,6 +6923,14 @@ GALGAS_bool cEnumerator_controlRegisterMap::current_mIsReadOnly (LOCATION_ARGS) 
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
   return p->mProperty_mIsReadOnly ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_controlRegisterMap::current_mUserAccess (LOCATION_ARGS) const {
+  const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
+  return p->mProperty_mUserAccess ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -319,7 +319,7 @@ method @universalValuedObjectMap searchValuedObjectType
       else
         [!?accessList popFirst ?let access0]
         [access0 property ?name:let registerName]
-        [registerMap searchKey !registerName ?outType ?8*]
+        [registerMap searchKey !registerName ?outType ?9*]
       end
     case globalConstant (*) :
       error inValuedObjectName : "undefined in this context" : outType

@@ -1,7 +1,9 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void kernel_makeTaskReady (const unsigned inTaskIndex) {
+static void kernel_makeTaskReady (const unsigned inTaskIndex, const unsigned inReturnCode) {
   gReadyTaskList |= 1 << inTaskIndex ;
+  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
+  kernel_set_return_code (& taskControlBlockPtr->mTaskContext, inReturnCode) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -56,7 +58,7 @@ void kernel_create_task (const unsigned inTaskIndex,
 //--- Initialize Context
   kernel_set_task_context (taskControlBlockPtr, inTaskRoutine) ;
 //--- Make task ready
-  kernel_makeTaskReady (inTaskIndex) ;
+  kernel_makeTaskReady (inTaskIndex, 0) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -145,7 +147,7 @@ void makeTaskReadyFromBlockingList (TaskList * ioWaitingList, bool * outFound) {
       taskControlBlockPtr->mResultPointer = (bool *) 0 ;
     }
   //--- Make task ready
-    kernel_makeTaskReady (taskIndex) ;
+    kernel_makeTaskReady (taskIndex, 1) ;
   }
 }
 
@@ -173,7 +175,7 @@ void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
       taskControlBlockPtr->mResultPointer = (bool *) 0 ;
     }
   //--- Make task ready
-      kernel_makeTaskReady (taskIndex) ;
+      kernel_makeTaskReady (taskIndex, 0) ;
     }
   }
 }
@@ -327,7 +329,7 @@ bool kernel_waitForGuardChange (void) {
     result = gRunningTaskControlBlock->mHaveDeadlineGuard || (gRunningTaskControlBlock->mGuardCount > 0) ;
     if (result) {
       gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;
-      kernel_set_return_code (& gRunningTaskControlBlock->mTaskContext, 1) ;
+   //   kernel_set_return_code (& gRunningTaskControlBlock->mTaskContext, 1) ;
       kernel_makeNoTaskRunning () ;
     }
   }
@@ -345,8 +347,7 @@ void kernel_guardDidChange (GuardList * ioGuardList) {
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
     removeTaskFromGuards (taskControlBlockPtr) ;
     if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
-     // kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
-      kernel_makeTaskReady (taskIndex) ;
+      kernel_makeTaskReady (taskIndex, 1) ;
       taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
     }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
       taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
@@ -371,8 +372,7 @@ void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
       removeTaskFromGuards (taskControlBlockPtr) ;
       if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
         taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
-      //  kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
-        kernel_makeTaskReady (taskIndex) ;
+        kernel_makeTaskReady (taskIndex, 1) ;
       }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
         taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
       }else{ // GUARD_DID_CHANGE

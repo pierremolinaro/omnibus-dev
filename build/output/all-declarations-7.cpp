@@ -1551,45 +1551,34 @@ void extensionMethod_analyzeLValue (const GALGAS_LValueAST inObject,
       break ;
     case GALGAS_valuedObject::kEnum_registerGroup:
       {
-        const cEnumAssociatedValues_valuedObject_registerGroup * extractPtr_6776 = (const cEnumAssociatedValues_valuedObject_registerGroup *) (var_entity_5707.unsafePointer ()) ;
-        const GALGAS_controlRegisterMap extractedValue_registerMap = extractPtr_6776->mAssociatedValue0 ;
-        GALGAS_bool test_8 = constinArgument_inMode.getter_isUserMode (SOURCE_FILE ("lvalue.galgas", 146)) ;
-        if (kBoolTrue != test_8.boolEnum ()) {
-          test_8 = constinArgument_inMode.getter_isAnyMode (SOURCE_FILE ("lvalue.galgas", 146)) ;
-        }
-        const enumGalgasBool test_9 = test_8.boolEnum () ;
-        if (kBoolTrue == test_9) {
-          TC_Array <C_FixItDescription> fixItArray10 ;
-          inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("lvalue.galgas", 147)), GALGAS_string ("a control register is not accessible in user mode"), fixItArray10  COMMA_SOURCE_FILE ("lvalue.galgas", 147)) ;
-          outArgument_outInternalRepresentation.drop () ; // Release error dropped variable
-        }else if (kBoolFalse == test_9) {
-          {
-          routine_analyzeControlRegisterInLValue (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inObject.mProperty_mIdentifier, extractedValue_registerMap, inObject.mProperty_mAccessList, outArgument_outInternalRepresentation, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 149)) ;
-          }
+        const cEnumAssociatedValues_valuedObject_registerGroup * extractPtr_6559 = (const cEnumAssociatedValues_valuedObject_registerGroup *) (var_entity_5707.unsafePointer ()) ;
+        const GALGAS_controlRegisterMap extractedValue_registerMap = extractPtr_6559->mAssociatedValue0 ;
+        {
+        routine_analyzeControlRegisterInLValue (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inObject.mProperty_mIdentifier, extractedValue_registerMap, inObject.mProperty_mAccessList, outArgument_outInternalRepresentation, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 146)) ;
         }
       }
       break ;
     case GALGAS_valuedObject::kEnum_globalConstant:
       {
-        TC_Array <C_FixItDescription> fixItArray11 ;
-        inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("lvalue.galgas", 167)), GALGAS_string ("a global constant cannot be written"), fixItArray11  COMMA_SOURCE_FILE ("lvalue.galgas", 167)) ;
+        TC_Array <C_FixItDescription> fixItArray8 ;
+        inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("lvalue.galgas", 163)), GALGAS_string ("a global constant cannot be written"), fixItArray8  COMMA_SOURCE_FILE ("lvalue.galgas", 163)) ;
         outArgument_outInternalRepresentation.drop () ; // Release error dropped variable
       }
       break ;
     case GALGAS_valuedObject::kEnum_localConstant:
       {
-        TC_Array <C_FixItDescription> fixItArray12 ;
-        inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("lvalue.galgas", 169)), GALGAS_string ("a local constant cannot be written"), fixItArray12  COMMA_SOURCE_FILE ("lvalue.galgas", 169)) ;
+        TC_Array <C_FixItDescription> fixItArray9 ;
+        inCompiler->emitSemanticError (inObject.mProperty_mIdentifier.getter_location (SOURCE_FILE ("lvalue.galgas", 165)), GALGAS_string ("a local constant cannot be written"), fixItArray9  COMMA_SOURCE_FILE ("lvalue.galgas", 165)) ;
         outArgument_outInternalRepresentation.drop () ; // Release error dropped variable
       }
       break ;
     case GALGAS_valuedObject::kEnum_localVariable:
       {
-        const cEnumAssociatedValues_valuedObject_localVariable * extractPtr_7752 = (const cEnumAssociatedValues_valuedObject_localVariable *) (var_entity_5707.unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_variableType = extractPtr_7752->mAssociatedValue0 ;
-        const GALGAS_lstring extractedValue_plmName = extractPtr_7752->mAssociatedValue1 ;
+        const cEnumAssociatedValues_valuedObject_localVariable * extractPtr_7535 = (const cEnumAssociatedValues_valuedObject_localVariable *) (var_entity_5707.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_variableType = extractPtr_7535->mAssociatedValue0 ;
+        const GALGAS_lstring extractedValue_plmName = extractPtr_7535->mAssociatedValue1 ;
         {
-        routine_analyzeVariableInLValue (constinArgument_inSelfType, constinArgument_inIsReadAccess, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inObject.mProperty_mIdentifier, function_llvmNameForLocalVariable (extractedValue_plmName.getter_string (SOURCE_FILE ("lvalue.galgas", 184)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 184)), extractedValue_variableType, inObject.mProperty_mAccessList, outArgument_outInternalRepresentation, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 171)) ;
+        routine_analyzeVariableInLValue (constinArgument_inSelfType, constinArgument_inIsReadAccess, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inObject.mProperty_mIdentifier, function_llvmNameForLocalVariable (extractedValue_plmName.getter_string (SOURCE_FILE ("lvalue.galgas", 180)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 180)), extractedValue_variableType, inObject.mProperty_mAccessList, outArgument_outInternalRepresentation, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 167)) ;
         }
       }
       break ;
@@ -2818,6 +2807,7 @@ void extensionMethod_searchValuedObjectType (const GALGAS_universalValuedObjectM
             }
             GALGAS_lstring var_registerName_12597 ;
             var_access_30__12547.method_property (var_registerName_12597, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 321)) ;
+            GALGAS_bool joker_12654_9 ; // Joker input parameter
             GALGAS_bool joker_12654_8 ; // Joker input parameter
             GALGAS_sliceMap joker_12654_7 ; // Joker input parameter
             GALGAS_controlRegisterFieldMap joker_12654_6 ; // Joker input parameter
@@ -2826,7 +2816,7 @@ void extensionMethod_searchValuedObjectType (const GALGAS_universalValuedObjectM
             GALGAS_uint joker_12654_3 ; // Joker input parameter
             GALGAS_uint joker_12654_2 ; // Joker input parameter
             GALGAS_uint joker_12654_1 ; // Joker input parameter
-            extractedValue_registerMap.method_searchKey (var_registerName_12597, outArgument_outType, joker_12654_8, joker_12654_7, joker_12654_6, joker_12654_5, joker_12654_4, joker_12654_3, joker_12654_2, joker_12654_1, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 322)) ;
+            extractedValue_registerMap.method_searchKey (var_registerName_12597, outArgument_outType, joker_12654_9, joker_12654_8, joker_12654_7, joker_12654_6, joker_12654_5, joker_12654_4, joker_12654_3, joker_12654_2, joker_12654_1, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 322)) ;
           }
         }
       }
@@ -8163,6 +8153,7 @@ GALGAS_controlRegisterMap_2D_element::GALGAS_controlRegisterMap_2D_element (void
 mProperty_lkey (),
 mProperty_mType (),
 mProperty_mIsReadOnly (),
+mProperty_mUserAccess (),
 mProperty_mRegisterFieldAccessMap (),
 mProperty_mRegisterFieldMap (),
 mProperty_mAddress (),
@@ -8182,23 +8173,25 @@ GALGAS_controlRegisterMap_2D_element::~ GALGAS_controlRegisterMap_2D_element (vo
 GALGAS_controlRegisterMap_2D_element::GALGAS_controlRegisterMap_2D_element (const GALGAS_lstring & inOperand0,
                                                                             const GALGAS_PLMType & inOperand1,
                                                                             const GALGAS_bool & inOperand2,
-                                                                            const GALGAS_sliceMap & inOperand3,
-                                                                            const GALGAS_controlRegisterFieldMap & inOperand4,
-                                                                            const GALGAS_bigint & inOperand5,
-                                                                            const GALGAS_controlRegisterFieldList & inOperand6,
-                                                                            const GALGAS_uint & inOperand7,
+                                                                            const GALGAS_bool & inOperand3,
+                                                                            const GALGAS_sliceMap & inOperand4,
+                                                                            const GALGAS_controlRegisterFieldMap & inOperand5,
+                                                                            const GALGAS_bigint & inOperand6,
+                                                                            const GALGAS_controlRegisterFieldList & inOperand7,
                                                                             const GALGAS_uint & inOperand8,
-                                                                            const GALGAS_uint & inOperand9) :
+                                                                            const GALGAS_uint & inOperand9,
+                                                                            const GALGAS_uint & inOperand10) :
 mProperty_lkey (inOperand0),
 mProperty_mType (inOperand1),
 mProperty_mIsReadOnly (inOperand2),
-mProperty_mRegisterFieldAccessMap (inOperand3),
-mProperty_mRegisterFieldMap (inOperand4),
-mProperty_mAddress (inOperand5),
-mProperty_mControlRegisterFieldList (inOperand6),
-mProperty_mRegisterBitCount (inOperand7),
-mProperty_mArraySize (inOperand8),
-mProperty_mElementArraySize (inOperand9) {
+mProperty_mUserAccess (inOperand3),
+mProperty_mRegisterFieldAccessMap (inOperand4),
+mProperty_mRegisterFieldMap (inOperand5),
+mProperty_mAddress (inOperand6),
+mProperty_mControlRegisterFieldList (inOperand7),
+mProperty_mRegisterBitCount (inOperand8),
+mProperty_mArraySize (inOperand9),
+mProperty_mElementArraySize (inOperand10) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8206,17 +8199,18 @@ mProperty_mElementArraySize (inOperand9) {
 GALGAS_controlRegisterMap_2D_element GALGAS_controlRegisterMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                             const GALGAS_PLMType & inOperand1,
                                                                                             const GALGAS_bool & inOperand2,
-                                                                                            const GALGAS_sliceMap & inOperand3,
-                                                                                            const GALGAS_controlRegisterFieldMap & inOperand4,
-                                                                                            const GALGAS_bigint & inOperand5,
-                                                                                            const GALGAS_controlRegisterFieldList & inOperand6,
-                                                                                            const GALGAS_uint & inOperand7,
+                                                                                            const GALGAS_bool & inOperand3,
+                                                                                            const GALGAS_sliceMap & inOperand4,
+                                                                                            const GALGAS_controlRegisterFieldMap & inOperand5,
+                                                                                            const GALGAS_bigint & inOperand6,
+                                                                                            const GALGAS_controlRegisterFieldList & inOperand7,
                                                                                             const GALGAS_uint & inOperand8,
-                                                                                            const GALGAS_uint & inOperand9 
+                                                                                            const GALGAS_uint & inOperand9,
+                                                                                            const GALGAS_uint & inOperand10 
                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_controlRegisterMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
-    result = GALGAS_controlRegisterMap_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
+    result = GALGAS_controlRegisterMap_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
   }
   return result ;
 }
@@ -8233,6 +8227,9 @@ typeComparisonResult GALGAS_controlRegisterMap_2D_element::objectCompare (const 
   }
   if (result == kOperandEqual) {
     result = mProperty_mIsReadOnly.objectCompare (inOperand.mProperty_mIsReadOnly) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mUserAccess.objectCompare (inOperand.mProperty_mUserAccess) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mRegisterFieldAccessMap.objectCompare (inOperand.mProperty_mRegisterFieldAccessMap) ;
@@ -8261,7 +8258,7 @@ typeComparisonResult GALGAS_controlRegisterMap_2D_element::objectCompare (const 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_controlRegisterMap_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mRegisterFieldAccessMap.isValid () && mProperty_mRegisterFieldMap.isValid () && mProperty_mAddress.isValid () && mProperty_mControlRegisterFieldList.isValid () && mProperty_mRegisterBitCount.isValid () && mProperty_mArraySize.isValid () && mProperty_mElementArraySize.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mUserAccess.isValid () && mProperty_mRegisterFieldAccessMap.isValid () && mProperty_mRegisterFieldMap.isValid () && mProperty_mAddress.isValid () && mProperty_mControlRegisterFieldList.isValid () && mProperty_mRegisterBitCount.isValid () && mProperty_mArraySize.isValid () && mProperty_mElementArraySize.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8270,6 +8267,7 @@ void GALGAS_controlRegisterMap_2D_element::drop (void) {
   mProperty_lkey.drop () ;
   mProperty_mType.drop () ;
   mProperty_mIsReadOnly.drop () ;
+  mProperty_mUserAccess.drop () ;
   mProperty_mRegisterFieldAccessMap.drop () ;
   mProperty_mRegisterFieldMap.drop () ;
   mProperty_mAddress.drop () ;
@@ -8292,6 +8290,8 @@ void GALGAS_controlRegisterMap_2D_element::description (C_String & ioString,
     mProperty_mType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mIsReadOnly.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mUserAccess.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mRegisterFieldAccessMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -8326,6 +8326,12 @@ GALGAS_PLMType GALGAS_controlRegisterMap_2D_element::getter_mType (UNUSED_LOCATI
 
 GALGAS_bool GALGAS_controlRegisterMap_2D_element::getter_mIsReadOnly (UNUSED_LOCATION_ARGS) const {
   return mProperty_mIsReadOnly ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_controlRegisterMap_2D_element::getter_mUserAccess (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mUserAccess ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
