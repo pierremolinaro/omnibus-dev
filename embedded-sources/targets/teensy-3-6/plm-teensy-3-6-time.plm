@@ -57,7 +57,7 @@ driver time > root {
   //····················································································································
 
   isr service systick {
-    noteCurrentTaskFreeStackSize ()
+ //   noteCurrentTaskFreeStackSize ()
     let now = self.mUptime +% 1
     self.mUptime = now
     makeTasksReady (!fromCurrentDate:now)
@@ -83,8 +83,8 @@ driver time > root {
   //····················································································································
 
   public guard wait @noUnusedWarning (?untilDeadline:inDeadline $uint32) {
-    noteCurrentTaskFreeStackSize ()
-    accept = (inDeadline) ≤ self.mUptime
+//    noteCurrentTaskFreeStackSize ()
+    accept = inDeadline ≤ self.mUptime
     if not accept {
       handle (!guardedDeadline:inDeadline)
     }

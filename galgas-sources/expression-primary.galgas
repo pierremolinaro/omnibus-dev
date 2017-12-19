@@ -249,8 +249,8 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       error mReceiverName : "control register is not readable in guard" : outResult
     elsif not [inRoutineAttributes controlRegisterReadable] then
       error mReceiverName : "control register is not readable in this context" : outResult
-    elsif [inMode isUserMode] || [inMode isAnyMode] then
-      error mReceiverName : "a control register is not accessible in user mode" : outResult
+#    elsif [inMode isUserMode] || [inMode isAnyMode] then
+#      error mReceiverName : "a control register is not accessible in user mode" : outResult
     else
       analyzeRegisterExpression (
         !self: inSelfType
@@ -422,7 +422,8 @@ private proc analyzeRegisterExpression
       [inControlRegisterMap searchKey
         !controlRegisterName
         ?let @PLMType inRegisterType
-        ?let @bool unused mIsReadOnly
+        ?*
+        ?let @bool userAccess
         ?let @sliceMap inRegisterSliceMap
         ?let @controlRegisterFieldMap unused mRegisterFieldMap
         ?let @bigint inRegisterAddress
@@ -431,7 +432,9 @@ private proc analyzeRegisterExpression
         ?let @uint inRegisterArraySize # 0 if not an array
         ?let @uint inRegisterElementSize # 0 if not an array
       ]
-      if [accessList length] == 0 then # No subscript, no slice
+      if not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
+        error controlRegisterName : "this control register is not accessible in user mode" : outResult
+      elsif [accessList length] == 0 then # No subscript, no slice
         getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
         [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !inRegisterAddress]
       elsif [[accessList mAccessAtIndex !0] isArrayAccess] then

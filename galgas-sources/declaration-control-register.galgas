@@ -185,6 +185,7 @@ map @sliceMap {
 map @controlRegisterMap {
   @PLMType mType
   @bool mIsReadOnly
+  @bool mUserAccess
   @sliceMap mRegisterFieldAccessMap
   @controlRegisterFieldMap mRegisterFieldMap
   @bigint mAddress
@@ -390,6 +391,7 @@ method @controlRegisterDeclarationList-element enterInContext
   for register in mRegisterArrayList do
   #--- Analyze attributes
     var isReadOnly = false
+    var userAccess = false
     for (att) in register.mAttributeList do
       if att.string == "ro" then
         if isReadOnly then
@@ -397,8 +399,14 @@ method @controlRegisterDeclarationList-element enterInContext
         else
           isReadOnly = true
         end
+      elsif att.string == userAttributeForRegister () then
+        if userAccess then
+          error att : "duplicated attribute"
+        else
+          userAccess = true
+        end
       else
-        error att : "only @ro (read only) attributes is accepted here"
+        error att : "only @ro (read only) and @" + userAttributeForRegister () + " attributes are accepted here"
       end
     end
   #--- Analyse register address expression
@@ -484,6 +492,7 @@ method @controlRegisterDeclarationList-element enterInContext
       !register.mRegisterName
       !registerType
       !isReadOnly
+      !userAccess
       !registerBitSliceMap
       !registerFieldMap
       !registerAddress

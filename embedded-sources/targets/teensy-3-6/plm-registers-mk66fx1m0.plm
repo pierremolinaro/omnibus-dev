@@ -4,46 +4,46 @@ check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
 
 // chapter 11: Port control and interrupts (PORT) Pin Control Register n
 register PORTA {
-    PCR [32] at 0x4004_9000 : 4 $uint32 {
+    PCR @user [32] at 0x4004_9000 : 4 $uint32 {
     7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   
-  GPCLR  at 0x40049080 $uint32 // Global Pin Control Low Register
-  GPCHR  at 0x40049084 $uint32 // Global Pin Control High Register
-  ISFR   at 0x400490A0 $uint32 // Interrupt Status Flag Register
+  GPCLR @user  at 0x40049080 $uint32 // Global Pin Control Low Register
+  GPCHR @user  at 0x40049084 $uint32 // Global Pin Control High Register
+  ISFR  @user  at 0x400490A0 $uint32 // Interrupt Status Flag Register
 }
 
 
 register PORTB {
-  PCR [32] at 0x4004_A000 : 4 $uint32 {
+  PCR @user [32] at 0x4004_A000 : 4 $uint32 {
     7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   
-  GPCLR  at 0x4004A080 $uint32 // Global Pin Control Low Register
-  GPCHR  at 0x4004A084 $uint32 // Global Pin Control High Register
-  ISFR   at 0x4004A0A0 $uint32 // Interrupt Status Flag Register
+  GPCLR @user  at 0x4004A080 $uint32 // Global Pin Control Low Register
+  GPCHR @user  at 0x4004A084 $uint32 // Global Pin Control High Register
+  ISFR  @user  at 0x4004A0A0 $uint32 // Interrupt Status Flag Register
 }
 
 
 register PORTC {
-  PCR [32] at 0x4004_B000 : 4 $uint32 {
+  PCR @user [32] at 0x4004_B000 : 4 $uint32 {
     7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   
-  GPCLR  at 0x4004B080 $uint32 // Global Pin Control Low Register
-  GPCHR  at 0x4004B084 $uint32 // Global Pin Control High Register
-  ISFR   at 0x4004B0A0 $uint32 // Interrupt Status Flag Register
+  GPCLR @user  at 0x4004B080 $uint32 // Global Pin Control Low Register
+  GPCHR @user  at 0x4004B084 $uint32 // Global Pin Control High Register
+  ISFR  @user  at 0x4004B0A0 $uint32 // Interrupt Status Flag Register
 }
 
 
 register PORTD {
-  PCR [32] at 0x4004_C000 : 4 $uint32 {
+  PCR @user [32] at 0x4004_C000 : 4 $uint32 {
     7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   
-  GPCLR  at 0x4004C080 $uint32 // Global Pin Control Low Register
-  GPCHR  at 0x4004C084 $uint32 // Global Pin Control High Register
-  ISFR   at 0x4004C0A0 $uint32 // Interrupt Status Flag Register
+  GPCLR @user  at 0x4004C080 $uint32 // Global Pin Control Low Register
+  GPCHR @user  at 0x4004C084 $uint32 // Global Pin Control High Register
+  ISFR  @user  at 0x4004C0A0 $uint32 // Interrupt Status Flag Register
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -1946,39 +1946,39 @@ register RTC {
 
 // Chapter 47: General-Purpose Input/Output (GPIO)
 register GPIOA {
-  PDOR at 0x400FF000 $uint32 // Port Data Output Register
-  PSOR at 0x400FF004 $uint32 // Port Set Output Register
-  PCOR at 0x400FF008 $uint32 // Port Clear Output Register
-  PTOR at 0x400FF00C $uint32 // Port Toggle Output Register
-  PDIR at 0x400FF010 $uint32 // Port Data Input Register
-  PDDR at 0x400FF014 $uint32 // Port Data Direction Register
+  PDOR @user at 0x400FF000 $uint32 // Port Data Output Register
+  PSOR @user at 0x400FF004 $uint32 // Port Set Output Register
+  PCOR @user at 0x400FF008 $uint32 // Port Clear Output Register
+  PTOR @user at 0x400FF00C $uint32 // Port Toggle Output Register
+  PDIR @user at 0x400FF010 $uint32 // Port Data Input Register
+  PDDR @user at 0x400FF014 $uint32 // Port Data Direction Register
 }
 
 register GPIOB {
-  PDOR at 0x400FF040 $uint32 // Port Data Output Register
-  PSOR at 0x400FF044 $uint32 // Port Set Output Register
-  PCOR at 0x400FF048 $uint32 // Port Clear Output Register
-  PTOR at 0x400FF04C $uint32 // Port Toggle Output Register
-  PDIR at 0x400FF050 $uint32 // Port Data Input Register
-  PDDR at 0x400FF054 $uint32 // Port Data Direction Register
+  PDOR @user at 0x400FF040 $uint32 // Port Data Output Register
+  PSOR @user at 0x400FF044 $uint32 // Port Set Output Register
+  PCOR @user at 0x400FF048 $uint32 // Port Clear Output Register
+  PTOR @user at 0x400FF04C $uint32 // Port Toggle Output Register
+  PDIR @user at 0x400FF050 $uint32 // Port Data Input Register
+  PDDR @user at 0x400FF054 $uint32 // Port Data Direction Register
 }
 
 register GPIOC {
-  PDOR at 0x400FF080 $uint32 // Port Data Output Register
-  PSOR at 0x400FF084 $uint32 // Port Set Output Register
-  PCOR at 0x400FF088 $uint32 // Port Clear Output Register
-  PTOR at 0x400FF08C $uint32 // Port Toggle Output Register
-  PDIR at 0x400FF090 $uint32 // Port Data Input Register
-  PDDR at 0x400FF094 $uint32 // Port Data Direction Register
+  PDOR @user at 0x400FF080 $uint32 // Port Data Output Register
+  PSOR @user at 0x400FF084 $uint32 // Port Set Output Register
+  PCOR @user at 0x400FF088 $uint32 // Port Clear Output Register
+  PTOR @user at 0x400FF08C $uint32 // Port Toggle Output Register
+  PDIR @user at 0x400FF090 $uint32 // Port Data Input Register
+  PDDR @user at 0x400FF094 $uint32 // Port Data Direction Register
 }
 
 register GPIOD {
-  PDOR at 0x400FF0C0 $uint32 // Port Data Output Register
-  PSOR at 0x400FF0C4 $uint32 // Port Set Output Register
-  PCOR at 0x400FF0C8 $uint32 // Port Clear Output Register
-  PTOR at 0x400FF0CC $uint32 // Port Toggle Output Register
-  PDIR at 0x400FF0D0 $uint32 // Port Data Input Register
-  PDDR at 0x400FF0D4 $uint32 // Port Data Direction Register
+  PDOR @user at 0x400FF0C0 $uint32 // Port Data Output Register
+  PSOR @user at 0x400FF0C4 $uint32 // Port Set Output Register
+  PCOR @user at 0x400FF0C8 $uint32 // Port Clear Output Register
+  PTOR @user at 0x400FF0CC $uint32 // Port Toggle Output Register
+  PDIR @user at 0x400FF0D0 $uint32 // Port Data Input Register
+  PDDR @user at 0x400FF0D4 $uint32 // Port Data Direction Register
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

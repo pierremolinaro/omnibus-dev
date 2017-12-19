@@ -93,7 +93,7 @@ override method @registerConstantExpressionAST analyzeExpression
   [controlRegisterMap searchKey
     !mRegisterName
     ?let registerType
-    ?*
+    ?2*
     ?let @sliceMap unused registerBitSliceMap
     ?let @controlRegisterFieldMap registerFieldMap
     ?let @bigint unused registerAddress

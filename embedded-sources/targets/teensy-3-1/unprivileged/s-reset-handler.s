@@ -4,7 +4,7 @@
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-.lcomm backgroundTaskStack, 32
+.lcomm backgroundTaskStack, 64
 
 @----------------------------------------------------------------------------------------------------------------------*
 
@@ -17,7 +17,7 @@ as_reset_handler:
 @--- Init micro controller
   bl configuration.on.boot
 @--- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers
-  ldr r0, =backgroundTaskStack + 32
+  ldr r0, =backgroundTaskStack + 64
   msr psp, r0
 @--- Set CONTROL register (see §B1.4.4)
 @ bit 0 : 0 -> Thread mode has privileged access, 1 -> Thread mode has unprivileged access

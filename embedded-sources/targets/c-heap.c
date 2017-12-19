@@ -15,7 +15,7 @@ unsigned totalAllocationObjectCount (void)  asm ("!FUNC!heap.total.allocation.ob
 unsigned freeListCount (void) asm ("!FUNC!heap.free.list.count") ;
 unsigned freeObjectCountForFreeList (const unsigned inFreeListIndex) asm ("!FUNC!heap.free.object.count.for.free.list") ;
 
-unsigned memoryAlloc (const unsigned inByteSize) asm ("!FUNC!heap.alloc") ;
+unsigned memoryAlloc (unsigned inByteSize) asm ("!FUNC!heap.alloc.memory") ;
 void memoryFree (unsigned * ioPointer) asm ("!FUNC!heap.free") ;
 unsigned allocatedByteSize (unsigned inPointer) asm ("!FUNC!heap.allocated.byte.size") ;
 
@@ -80,6 +80,8 @@ unsigned totalAllocationObjectCount (void) {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  FREE BLOCK SEGREGATED LIST
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 typedef struct structFreeBlock {
   struct structFreeBlock * mNextFreeBlock ;
@@ -112,15 +114,17 @@ unsigned freeListCount (void) {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  ALLOCATION / DEALLOCATION
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 typedef struct {
   unsigned mBlockSizeIndex ;
-} HEADER_TYPE ;
+} BLOCK_HEADER_TYPE ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-unsigned memoryAlloc (const unsigned inByteSize) {
-  HEADER_TYPE * result = (HEADER_TYPE *) 0 ;
+unsigned memoryAlloc (unsigned inByteSize) {
+  BLOCK_HEADER_TYPE * result = (BLOCK_HEADER_TYPE *) 0 ;
   if (inByteSize > 0) {
   //--- Compute smallest block with size equal to a power of two bigger of equal to required size
     unsigned v = inByteSize - 1 ;
@@ -140,17 +144,14 @@ unsigned memoryAlloc (const unsigned inByteSize) {
         descriptorPtr->mFreeBlockCount -= 1 ;
         tFreeBlock * p = descriptorPtr->mFreeBlockList ;
         descriptorPtr->mFreeBlockList = p->mNextFreeBlock ;
-        result = (HEADER_TYPE *) p ;
+        result = (BLOCK_HEADER_TYPE *) p ;
         gCurrentlyAllocatedCount += 1 ;
         gTotalAllocationCount += 1 ;
       }else{ // Allocate from heap
-        result = (HEADER_TYPE *) gFirstFreeAddress ;
-        const unsigned allocationSize = (1 << smallestPowerOfTwo) + sizeof (HEADER_TYPE) ;
-        gFirstFreeAddress += allocationSize ;
-        if (gFirstFreeAddress >= heapEndAddress ()) { // Heap overflow ?
-          gFirstFreeAddress -= allocationSize ; // Yes, overflow
-          result = (HEADER_TYPE *) 0 ;
-        }else{
+        const unsigned allocationSize = (1 << smallestPowerOfTwo) + sizeof (BLOCK_HEADER_TYPE) ;
+        if ((gFirstFreeAddress + allocationSize) <= heapEndAddress ()) { // No Heap overflow
+          result = (BLOCK_HEADER_TYPE *) gFirstFreeAddress ;
+          gFirstFreeAddress += allocationSize ;
           result->mBlockSizeIndex = idx ;
           result ++ ;
           gCurrentlyAllocatedCount += 1 ;
@@ -166,7 +167,7 @@ unsigned memoryAlloc (const unsigned inByteSize) {
 
 void memoryFree (unsigned * ioPointer) {
   if ((*ioPointer) != 0) {
-    const HEADER_TYPE * p = (const HEADER_TYPE *) (*ioPointer) ;
+    const BLOCK_HEADER_TYPE * p = (const BLOCK_HEADER_TYPE *) (*ioPointer) ;
     p -- ;
     const unsigned idx = p->mBlockSizeIndex ;
     tFreeBlock * freeBlockPtr = (tFreeBlock *) (*ioPointer) ;
@@ -183,7 +184,7 @@ void memoryFree (unsigned * ioPointer) {
 unsigned allocatedByteSize (unsigned inPointer) {
   unsigned byteSize = 0 ;
   if (inPointer != 0) {
-    const HEADER_TYPE * p = (const HEADER_TYPE *) inPointer ;
+    const BLOCK_HEADER_TYPE * p = (const BLOCK_HEADER_TYPE *) inPointer ;
     p -- ;
     const unsigned idx = p->mBlockSizeIndex ;
     byteSize = 1 << (kMinSizePowerOfTwo + idx) ;

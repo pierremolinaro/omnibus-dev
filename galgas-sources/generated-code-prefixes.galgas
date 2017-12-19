@@ -294,6 +294,12 @@ func %once userAccessAttribute -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once userAttributeForRegister -> @string {
+  result = "user"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func %once noUnusedWarningAttribute -> @string {
   result = "noUnusedWarning"
 }
