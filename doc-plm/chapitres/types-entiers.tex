@@ -355,3 +355,16 @@ let x = {$uint8 !b:yes !1:0 !6:12} // 0x8C
 \end{PLM}
 
 Si toutes les expressions associées aux sélecteurs sont statiques, alors l'expression de construction d'un entier non signé par tranches est aussi une expression statique~: on peut donc utiliser cette construction pour définir des constantes globales.
+
+
+
+
+
+\section{Décomposition d'un entier non signé en tranches}
+
+Cette forme particulière d'affectation permet de décomposer une valeur entière non signée en tranches. Par exemple~:
+\begin{PLM}
+~{$uint8 ?1:var b1 ?2:let b2 ?5:let b3} = 0xCC // b1 <- 1, b3 <- 2, b3 <- 12
+\end{PLM}
+
+
