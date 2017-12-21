@@ -2076,10 +2076,11 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1/un
   "\n"
   "task T\xC3""\xA2""che1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
+  "  var test = yes\n"
   "\n"
   "  setup 1000 {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy\n"
-  "    let b = {$uint8 !0:0 !1:0 !1:1 !6:12}\n"
+  "    let b = {$uint8 !b:self.test !1:0 !6:12}\n"
   "    lcd.print (!hex2:extend (b))\n"
   "  }\n"
   "\n"
@@ -2095,7 +2096,7 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "14-integer-slices.plm",
   "plm",
   true, // Text file
-  1361, // Text length
+  1381, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 

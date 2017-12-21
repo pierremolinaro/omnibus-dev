@@ -54,6 +54,8 @@ proc routineSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+#--- Reset index to temporaries
+  ioTemporaries.mTemporaryIndex = 0
 #--- Mangled routine name
   let routineMangledName = routineMangledNameFromAST (
     !if inSelfType.kind == .void then "" else llvmTypeStringFromPLMname (!inSelfType.plmTypeName) end

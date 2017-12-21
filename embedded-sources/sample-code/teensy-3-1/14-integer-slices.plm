@@ -22,10 +22,11 @@ let LED_L3 = $digitalPort.D6
 
 task Tâche1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
+  var test = yes
 
   setup 1000 {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
-    let b = {$uint8 !1:1 !1:0 !6:12}
+    let b = {$uint8 !b:self.test !1:0 !6:12}
     lcd.print (!hex2:extend (b))
   }
 

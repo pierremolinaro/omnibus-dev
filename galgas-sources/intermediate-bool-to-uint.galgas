@@ -1,0 +1,36 @@
+
+setter @instructionListIR appendBoolToUInt
+  ?let @objectIR inUIntResult
+  ?let @objectIR inBoolSource
+{
+  self += !@boolToUIntIR.new {!inUIntResult !inBoolSource}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @boolToUIntIR : @abstractInstructionIR {
+  @objectIR mUIntResult
+  @objectIR mBoolSource
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @boolToUIntIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  " + [mUIntResult llvmName]
+             +  " = zext " + [mBoolSource  llvmTypeName] + " " + [mBoolSource llvmName]
+             + " to " + [mUIntResult llvmTypeName] + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @boolToUIntIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
