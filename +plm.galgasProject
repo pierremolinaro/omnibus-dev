@@ -72,6 +72,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-if.galgas"
   "galgas-sources/expression-infix-operators.galgas"
   "galgas-sources/expression-boolean-short-circuit-and-operator.galgas"
+  "galgas-sources/expression-integer-slice.galgas"
   "galgas-sources/expression-prefix-operators.galgas"
   "galgas-sources/expression-literal-integer.galgas"
   "galgas-sources/expression-literal-string.galgas"

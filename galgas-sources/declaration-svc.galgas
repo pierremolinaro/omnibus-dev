@@ -21,8 +21,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
-    @bool public
+  rule <system_routine_prefix> !@bool public {
     select
       public = false
     or
@@ -30,6 +29,12 @@ syntax extension plm_syntax {
       public = true
     end
     $system$
+  }
+  
+  #·····················································································································
+
+  rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
+    <system_routine_prefix> ?let public
     @routineKind routineKind
     select
       $section$
@@ -37,12 +42,6 @@ syntax extension plm_syntax {
     or
       $safe$
       routineKind = .safe
-    or
-      $primitive$
-      routineKind = .primitive
-    or
-      $service$
-      routineKind = .service
     end
     $identifier$ ?let name
     @lstringlist attributeList = {}
@@ -69,6 +68,42 @@ syntax extension plm_syntax {
       !attributeList
       !formalArgumentList
       !returnTypeName
+      !instructionList
+      !.here
+  }
+
+  #·····················································································································
+
+  # A primitive or a service does not return any value
+
+  rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
+    <system_routine_prefix> ?let public
+    @routineKind routineKind
+    select
+      $primitive$
+      routineKind = .primitive
+    or
+      $service$
+      routineKind = .service
+    end
+    $identifier$ ?let name
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $@attribute$ ?let attribute
+      attributeList += !attribute
+    end
+    <procedure_formal_arguments> !?ioAST ?let formalArgumentList
+    ${$
+    <instructionList> !?ioAST ?let instructionList
+    $}$
+    ioSVCListAST +=
+      !name
+      !routineKind
+      !public
+      !attributeList
+      !formalArgumentList
+      !["" here]
       !instructionList
       !.here
   }

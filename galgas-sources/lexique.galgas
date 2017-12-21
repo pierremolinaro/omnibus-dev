@@ -301,7 +301,7 @@ rule '?' {
   case '!' :
     tag onlyExclamationInterrogationMark
     select
-    case 'a' -> 'z' | 'A' ->'Z' :
+    case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
       repeat
         enterCharacterIntoString (!?tokenString !* )
       while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
@@ -316,7 +316,7 @@ rule '?' {
     default
       send $?!selector:$
     end
-  case 'a' -> 'z' | 'A' ->'Z' :
+  case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
     repeat
       enterCharacterIntoString (!?tokenString !* )
     while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
@@ -339,7 +339,7 @@ rule '!' {
   case '?' :
     tag onlyInterrogationExclamationMark
     select
-    case 'a' -> 'z' | 'A' ->'Z' :
+    case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
       repeat
         enterCharacterIntoString (!?tokenString !* )
       while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
@@ -354,7 +354,7 @@ rule '!' {
     default
       send $!?selector:$
     end
-  case 'a' -> 'z' | 'A' ->'Z' :
+  case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
     repeat
       enterCharacterIntoString (!?tokenString !* )
     while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :

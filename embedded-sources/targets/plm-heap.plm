@@ -17,10 +17,10 @@ extern func freeObjectCount (?ForFreeList: inFreeListIndex $uint32) -> $uint32 :
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // $data type
 
-//newtype $data : [[32]] @instantiable @copyable
+newtype $data : [[32]] @instantiable @copyable
 
-extern func memoryAlloc (?size: inBlockSize $uint32) -> $uint32 : "heap.alloc.memory"
-extern func memoryFree (?! ioPointer $uint32) : "heap.free"
-extern func allocatedByteSize (? inPointer $uint32) -> $uint32 : "heap.allocated.byte.size"
+extern func memoryAlloc (?size: inBlockSize $uint32) -> $data : "heap.alloc.memory"
+extern func memoryFree (?! ioPointer $data) : "heap.free"
+extern func allocatedByteSize (? inPointer $data) -> $uint32 : "heap.allocated.byte.size"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
