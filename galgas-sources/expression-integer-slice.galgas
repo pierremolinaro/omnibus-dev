@@ -1,0 +1,243 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @integerSliceFieldListAST {
+  @lstring mSliceWidth
+  @expressionAST mExpression
+  @location mExpressionLocation
+}
+
+#·······················································································································
+
+class @integerSliceExpressionAST : @expressionAST {
+  @lstring mTypeName
+  @integerSliceFieldListAST mSliceValues
+  @location mLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+    ${$
+    $\$type$ ?let typeName
+    @integerSliceFieldListAST integerFieldValues = {}
+    repeat
+      $!selector:$ ?let sliceWidth
+      <expression> !?ioAST ?let expression
+      integerFieldValues += !sliceWidth !expression !.here
+    while
+    end
+    if [integerFieldValues length] < 2 then
+      error .here : "this expression should contain two bit slices or more" : outExpression
+    else
+      outExpression = @integerSliceExpressionAST.new {!typeName !integerFieldValues !.here}
+    end
+    $}$
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @integerSliceExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  for (sliceWidthStr expression expressionLocation) in mSliceValues do
+    [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph noteNode !llvmTypeNameFromPLMname (!mTypeName)]
+  for (sliceWidthStr expression expressionLocation) in mSliceValues do
+    [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    if [sliceWidthStr.string isDecimalUnsignedNumber] then
+      let sliceWidth = [sliceWidthStr decimalUnsignedNumber]
+      if sliceWidth == 0 then
+        error sliceWidthStr : "the bit slice width should be > 0"
+      else
+        let sliceTypeName = @lstring.new {!"uint" + sliceWidth !expressionLocation}
+        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
+      end
+    elsif sliceWidthStr.string == "b" then
+      let sliceTypeName = @lstring.new {!"bool" !expressionLocation}
+      [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @integerSliceExpressionAST analyzeExpression
+  ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Search Type
+  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+#--- Check type is an unsigned integer type
+  if not [resultType.kind isInteger] then
+    error mTypeName: "this type should be an unsigned integer type" :outResult
+  else
+    [resultType.kind integer ?2* ?unsigned:let unsigned ?bitCount:let bitCount]
+    if not unsigned then
+      error mTypeName: "this type should be an unsigned integer type" :outResult
+    else
+    #------------------------------------------------------ Valuated fields
+      var leftShiftAmount = bitCount
+      @bigint accumulatedFieldStaticValues = 0G
+      @operandIRList operandList = {}
+      for (sliceWidthStr expression expressionLocation) in mSliceValues do
+        @uint sliceWidth
+        @lstring expressionTypeName
+        if sliceWidthStr.string == "" then
+          error sliceWidthStr : "anonymous selector not allowed here" : operandList, sliceWidth, expressionTypeName
+        elsif sliceWidthStr.string == "b" then
+          sliceWidth = 1
+          expressionTypeName = .new {!"bool" !mTypeName.location}
+        elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
+          error sliceWidthStr : "the selector should be an unsigned integer value" : operandList, sliceWidth, expressionTypeName
+        else
+          sliceWidth = [sliceWidthStr decimalUnsignedNumber]
+          expressionTypeName = .new {!"uint" + sliceWidth !mTypeName.location}
+          if sliceWidth == 0 then
+            error sliceWidthStr : "the bit slice width should be > 0"
+          end
+        end
+        if leftShiftAmount >= sliceWidth then
+          leftShiftAmount = leftShiftAmount - sliceWidth
+        else
+          let specifiedBitCount = bitCount + sliceWidth - leftShiftAmount
+          error sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount
+          leftShiftAmount = 0
+        end
+      #--- Analyze expression
+        let expressionTargetType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !expressionTypeName} type]
+        [expression analyzeExpression
+          !self:inSelfType
+          !routineAttributes:inRoutineAttributes
+          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+          !optionalTargetType:expressionTargetType
+          !context:inContext
+          !mode:inCurrentMode
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioUniversalMap
+          !?alloca:ioAllocaList
+          !?instructionListIR:ioInstructionGenerationList
+          ?result:let @objectIR expressionResultPossibleReference
+        ]
+        [!?ioInstructionGenerationList appendLoadWhenReference
+          !?ioTemporaries
+          !expressionResultPossibleReference
+          ?let expressionResult
+        ]  
+      #--- Check expression type
+        switch [expressionResult type].kind
+        case arrayType (* *) :
+          error expressionLocation: "an unsigned integer expression is required here"
+        case opaque (*) :
+          error expressionLocation: "an unsigned integer expression is required here"
+        case enumeration (*) :
+          error expressionLocation: "an unsigned integer expression is required here"
+        case structure (*) :
+          error expressionLocation: "an unsigned integer expression is required here"
+        case boolean :
+          if [[expressionResult type] plmTypeName] != [expressionTargetType plmTypeName] then
+            error expressionLocation :
+            "an $" + [expressionTargetType plmTypeName] + " expression is required, found an $" +
+            [[expressionResult type] plmTypeName] + " expression"
+          end
+          #--- Perform an bit extend to register type or a trunc
+            getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)
+            [!?ioInstructionGenerationList appendBoolToUInt !extendedResult !expressionResult]
+          #--- Perform left shift
+            getNewTempValue (!resultType !?ioTemporaries ?let shiftedResult)
+            [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
+          #---- Accumulate 
+            operandList += !shiftedResult
+        case void :
+          error expressionLocation: "an unsigned integer expression is required here"
+        case literalString :
+          error expressionLocation: "an unsigned integer expression is required here"
+        case pointer (*) :
+          error expressionLocation: "an unsigned integer expression is required here"
+        case function (*) :
+          error expressionLocation: "an unsigned integer expression is required here"
+        case staticInteger :
+          [expressionResult literalInteger ?1* ?value:let @bigint value]
+          if value < 0G then
+            error expressionLocation: "this integer expression should be positive"
+          elsif value < (1G << sliceWidth) then
+            accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << leftShiftAmount)
+          else
+            error expressionLocation: "expression too large (should be < " + (1G << sliceWidth) + ")"
+          end
+        case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
+          if not unsigned then
+            error expressionLocation: "an $uint" + sliceWidth + " expression is required here"
+          elsif expressionBitCount != sliceWidth then
+            error expressionLocation: "an $uint" + sliceWidth + " expression is required here"
+          else
+          #--- Perform an bit extend to result type
+            getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)
+            [!?ioInstructionGenerationList appendExtend !extendedResult !expressionResult]
+          #--- Perform left shift
+            getNewTempValue (!resultType !?ioTemporaries ?let shiftedResult)
+            [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
+          #---- Accumulate 
+            operandList += !shiftedResult
+          end
+        end
+      end
+      if leftShiftAmount != 0 then
+        error mLocation : [bitCount string] + " bits required, " + (bitCount - leftShiftAmount) + " bits defined"
+      end
+    #------------------------------------------------------ Result
+      outResult = .literalInteger {!type: resultType!value:accumulatedFieldStaticValues}
+      for (operand) in operandList do
+        getNewTempValue (!resultType !?ioTemporaries ?let newResult)
+        [!?ioInstructionGenerationList appendBinaryOperation
+          !newResult
+          ![newResult type]
+          !.here
+          !outResult
+          !.ior
+          !operand
+        ] 
+        outResult = newResult
+      end
+      end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
