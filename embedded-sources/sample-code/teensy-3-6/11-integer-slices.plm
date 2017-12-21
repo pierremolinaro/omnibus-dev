@@ -1,0 +1,45 @@
+target "teensy-3-6/unprivileged"
+let F_CPU_MHZ = 180
+
+driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func safe activityLedOn @exported () {
+  digital.write (!yes !toPort:.D13)
+}
+
+func safe activityLedOff @exported () {
+  digital.write (!no !toPort:.D13)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let LED_L3 = $digitalPort.D6
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche1 priority 1 stackSize 512 {
+  var compteur $uint32 = 0
+  var test = yes
+
+  setup 1000 {
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+    let b = {$uint8 !b:self.test !1:0 !6:12}
+    lcd.print (!hex2:extend (b))
+    lcd.print (!spaces:1)
+    var b7 $bool
+    {$uint8 ?b:b7 ?2:let b2 ?5:let b3} = 0xAC
+    let bb = {$uint8 !b:b7 !2:b2 !5:b3}
+    lcd.print (!hex2:extend (bb))
+  }
+
+  on time.wait (!untilDeadline:self.compteur) {
+    self.compteur +%= 500
+    digital.toggle (!port:LED_L3)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
