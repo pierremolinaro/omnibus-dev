@@ -337,3 +337,21 @@ let x $uint16 = 0x_1234
 let y = x.trainingZeroCount () // 2
 \end{PLM}
 
+
+\section{Construction d'un entier non signé par tranches}
+
+Cette expression permet de construire un entier non signé à partir d'entiers non signés ou de booléens. Par exemple~:
+\begin{PLM}
+let x = {$uint8 !1:1 !1:0 !6:12} // 0x8C
+\end{PLM}
+
+Dans l'exemple ci-dessus, le bit n°7 est à 1, le bit n°6 à 0, et les 6 bits de poids faibles à 12.
+
+Les tranches sont désignés par des sélecteurs (\plm=!1:=, \plm=!6:=) qui indiquent le nombre de bits de la tranche. La description commence à partir du bit de poids fort. L'expression qui suit le sélecteur doit être du type entier non signé correspondant~: par exemple, \plm=!1:= $\rightarrow$ \plm=$uint1=, \plm=!6:= $\rightarrow$ \plm=$uint6=.
+
+Attention, une tranche \plm=!1:= signifie que l'expression doit être un entier non signé sur un bit, et non pas un booléen. Si l'on veut initialiser une tranche de 1 bit à partir d'un booléen, il faut utiliser le sélecteur particulier \plm=!b:=. Par exemple~:
+\begin{PLM}
+let x = {$uint8 !b:yes !1:0 !6:12} // 0x8C
+\end{PLM}
+
+Si toutes les expressions associées aux sélecteurs sont statiques, alors l'expression de construction d'un entier non signé par tranches est aussi une expression statique~: on peut donc utiliser cette construction pour définir des constantes globales.
