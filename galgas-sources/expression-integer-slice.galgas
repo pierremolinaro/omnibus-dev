@@ -177,6 +177,10 @@ override method @integerSliceExpressionAST analyzeExpression
             "an $" + [expressionTargetType plmTypeName] + " expression is required, found an $" +
             [[expressionResult type] plmTypeName] + " expression"
           end
+          if [expressionResult isLiteralInteger] then
+            [expressionResult literalInteger ?1* ?value:let @bigint value]
+            accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << leftShiftAmount)
+          else
           #--- Perform an bit extend to register type or a trunc
             getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)
             [!?ioInstructionGenerationList appendBoolToUInt !extendedResult !expressionResult]
@@ -185,6 +189,7 @@ override method @integerSliceExpressionAST analyzeExpression
             [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
           #---- Accumulate 
             operandList += !shiftedResult
+          end
         case void :
           error expressionLocation: "an unsigned integer expression is required here"
         case literalString :
