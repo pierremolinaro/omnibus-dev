@@ -400,7 +400,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       if (scanningOk && ([self testForInputChar:33])) {
         scanningPointStructForCocoa locationForTag_onlyExclamationInterrogationMark ;
         [self saveScanningPoint: & locationForTag_onlyExclamationInterrogationMark] ;
-        if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
+        if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57])) {
           do {
             scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
             if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {
@@ -419,7 +419,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
         }else{
           mTokenCode = plm_lexique_1__3F__21_selector_3A_ ;
         }
-      }else if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
+      }else if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57])) {
         do {
           scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
           if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {
@@ -444,7 +444,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       if (scanningOk && ([self testForInputChar:63])) {
         scanningPointStructForCocoa locationForTag_onlyInterrogationExclamationMark ;
         [self saveScanningPoint: & locationForTag_onlyInterrogationExclamationMark] ;
-        if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
+        if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57])) {
           do {
             scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
             if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {
@@ -463,7 +463,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
         }else{
           mTokenCode = plm_lexique_1__21__3F_selector_3A_ ;
         }
-      }else if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
+      }else if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57])) {
         do {
           scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
           if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {

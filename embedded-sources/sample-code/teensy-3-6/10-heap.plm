@@ -93,11 +93,11 @@ task T1 priority 10 stackSize 512 {
 
 task T2 priority 0 stackSize 512 {
   var compteur $uint32 = 2001
-  var data $uint32 = 0
+  var data = $data ()
 
   on time.wait (!untilDeadline:self.compteur) {
 //    assert (self.compteur > 10_000)
-    self.compteur +%= 70
+    self.compteur +%= 71
     digital.toggle (!port:LED_L4)
     if allocatedByteSize (!self.data) == 0 {
       let size = self.compteur % 977

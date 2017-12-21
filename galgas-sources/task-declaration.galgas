@@ -126,6 +126,9 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
         [!?ioGraph noteNode !typeName]
       end
     end
+    for setup in mTaskSetupListAST do
+      [setup.mTaskSetupInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    end
     for function in mTaskFunctionList do
       [function.mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
