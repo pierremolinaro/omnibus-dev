@@ -989,17 +989,17 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i78_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_assignment_5F_operator_i79_ (GALGAS_infixOperator & outArgument0,
-                                                                   GALGAS_location & outArgument1,
-                                                                   C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_assignment_5F_operator_i79_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i80_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i79_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_instructionListAST & ioArgument1,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i80_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i79_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_assignment_5F_operator_i80_ (GALGAS_infixOperator & outArgument0,
+                                                                   GALGAS_location & outArgument1,
+                                                                   C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_assignment_5F_operator_i80_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i81_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_instructionListAST & ioArgument1,
@@ -1043,17 +1043,17 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i87_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_if_5F_instruction_i88_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i88_ (GALGAS_ast & ioArgument0,
+                                                        GALGAS_instructionListAST & ioArgument1,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_instruction_i88_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_if_5F_instruction_i89_ (GALGAS_ast & ioArgument0,
                                                               GALGAS_ifInstructionAST & outArgument1,
                                                               C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_if_5F_instruction_i88_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_guarded_5F_command_i89_ (GALGAS_ast & ioArgument0,
-                                                               GALGAS_guardedCommandAST & outArgument1,
-                                                               C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_guarded_5F_command_i89_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_if_5F_instruction_i89_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_guarded_5F_command_i90_ (GALGAS_ast & ioArgument0,
                                                                GALGAS_guardedCommandAST & outArgument1,
@@ -1061,11 +1061,11 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_guarded_5F_command_i90_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i91_ (GALGAS_ast & ioArgument0,
-                                                        GALGAS_instructionListAST & ioArgument1,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_guarded_5F_command_i91_ (GALGAS_ast & ioArgument0,
+                                                               GALGAS_guardedCommandAST & outArgument1,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i91_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_guarded_5F_command_i91_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i92_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_instructionListAST & ioArgument1,
@@ -1091,40 +1091,46 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i95_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_call_i96_ (GALGAS_ast & ioArgument0,
-                                                              GALGAS_callInstructionAST & outArgument1,
-                                                              C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_procedure_5F_call_i96_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i97_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i96_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_instructionListAST & ioArgument1,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i97_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i96_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_lvalue_i98_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_procedure_5F_call_i97_ (GALGAS_ast & ioArgument0,
+                                                              GALGAS_callInstructionAST & outArgument1,
+                                                              C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_procedure_5F_call_i97_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_instruction_i98_ (GALGAS_ast & ioArgument0,
+                                                        GALGAS_instructionListAST & ioArgument1,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_instruction_i98_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_lvalue_i99_ (GALGAS_ast & ioArgument0,
                                                    GALGAS_LValueAST & outArgument1,
                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_lvalue_i98_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_lvalue_i99_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i99_ (GALGAS_ast & ioArgument0,
-                                                                    GALGAS_effectiveArgumentListAST & outArgument1,
-                                                                    GALGAS_location & outArgument2,
-                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i100_ (GALGAS_ast & ioArgument0,
+                                                                     GALGAS_effectiveArgumentListAST & outArgument1,
+                                                                     GALGAS_location & outArgument2,
+                                                                     C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i99_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i100_ (GALGAS_ast & ioArgument0,
-                                                         C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i100_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i100_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i101_ (GALGAS_ast & ioArgument0,
                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i101_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i102_ (GALGAS_ast & ioArgument0,
+                                                         C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i102_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -1326,6 +1332,10 @@ class cParser_plm_5F_syntax {
   protected : virtual int32_t select_plm_5F_syntax_97 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_plm_5F_syntax_98 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_99 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_100 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;
@@ -6309,6 +6319,244 @@ class cPtr_sizeofTypeAST : public cPtr_expressionAST {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                        @sliceAssignmentInstructionAST class                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_sliceAssignmentInstructionAST : public GALGAS_instructionAST {
+//--- Constructor
+  public : GALGAS_sliceAssignmentInstructionAST (void) ;
+
+//---
+  public : inline const class cPtr_sliceAssignmentInstructionAST * ptr (void) const { return (const cPtr_sliceAssignmentInstructionAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_sliceAssignmentInstructionAST (const cPtr_sliceAssignmentInstructionAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_sliceAssignmentInstructionAST extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_sliceAssignmentInstructionAST constructor_new (const class GALGAS_location & inOperand0,
+                                                                              const class GALGAS_lstring & inOperand1,
+                                                                              const class GALGAS_sliceAssignmentListAST & inOperand2,
+                                                                              const class GALGAS_expressionAST & inOperand3,
+                                                                              const class GALGAS_location & inOperand4
+                                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_sliceAssignmentInstructionAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_sliceAssignmentListAST getter_mSliceAssignmentList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSourceExpressionLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_sliceAssignmentInstructionAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceAssignmentInstructionAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @sliceAssignmentListAST list                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_sliceAssignmentListAST : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public : GALGAS_sliceAssignmentListAST (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public : GALGAS_sliceAssignmentListAST (const capCollectionElementArray & inSharedArray) ;
+
+//--------------------------------- Element constructor
+  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                  const class GALGAS_lstring & in_mSliceWidth,
+                                                  const class GALGAS_sliceTargetAST & in_mSliceKind
+                                                  COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_sliceAssignmentListAST extractObject (const GALGAS_object & inObject,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_sliceAssignmentListAST constructor_emptyList (LOCATION_ARGS) ;
+
+  public : static class GALGAS_sliceAssignmentListAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
+                                                                                 const class GALGAS_sliceTargetAST & inOperand1
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_sliceAssignmentListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
+                                                      const class GALGAS_sliceTargetAST & inOperand1
+                                                      COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public : VIRTUAL_IN_DEBUG GALGAS_sliceAssignmentListAST add_operation (const GALGAS_sliceAssignmentListAST & inOperand,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
+                                                       class GALGAS_sliceTargetAST constinArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
+                                                  class GALGAS_sliceTargetAST & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
+                                                 class GALGAS_sliceTargetAST & outArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
+                                                       class GALGAS_sliceTargetAST & outArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
+                                               class GALGAS_sliceTargetAST & outArgument1,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
+                                              class GALGAS_sliceTargetAST & outArgument1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_sliceTargetAST getter_mSliceKindAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSliceWidthAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_sliceAssignmentListAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_sliceAssignmentListAST getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_sliceAssignmentListAST getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_sliceAssignmentListAST ;
+ 
+} ; // End of GALGAS_sliceAssignmentListAST class
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Enumerator declaration                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumerator_sliceAssignmentListAST : public cGenericAbstractEnumerator {
+  public : cEnumerator_sliceAssignmentListAST (const GALGAS_sliceAssignmentListAST & inEnumeratedObject,
+                                               const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_lstring current_mSliceWidth (LOCATION_ARGS) const ;
+  public : class GALGAS_sliceTargetAST current_mSliceKind (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_sliceAssignmentListAST_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceAssignmentListAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Pointer class for @sliceAssignmentInstructionAST class                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
+//--- Attributes
+  public : GALGAS_lstring mProperty_mTypeName ;
+  public : GALGAS_sliceAssignmentListAST mProperty_mSliceAssignmentList ;
+  public : GALGAS_expressionAST mProperty_mSourceExpression ;
+  public : GALGAS_location mProperty_mSourceExpressionLocation ;
+
+//--- Constructor
+  public : cPtr_sliceAssignmentInstructionAST (const GALGAS_location & in_mInstructionLocation,
+                                               const GALGAS_lstring & in_mTypeName,
+                                               const GALGAS_sliceAssignmentListAST & in_mSliceAssignmentList,
+                                               const GALGAS_expressionAST & in_mSourceExpression,
+                                               const GALGAS_location & in_mSourceExpressionLocation
+                                               COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_sliceAssignmentListAST getter_mSliceAssignmentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSourceExpressionLocation (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                    @standAloneProcedureCallInstructionAST class                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10493,6 +10741,155 @@ class cEnumAssociatedValues_routineKind_function : public cEnumAssociatedValues 
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_routineKind_function (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @sliceTargetAST enum                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_sliceTargetAST : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_sliceTargetAST (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_discarded,
+    kEnum_varDeclaration,
+    kEnum_letDeclaration,
+    kEnum_lValue
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
+
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_sliceTargetAST extractObject (const GALGAS_object & inObject,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_sliceTargetAST constructor_discarded (LOCATION_ARGS) ;
+
+  public : static class GALGAS_sliceTargetAST constructor_lValue (const class GALGAS_LValueAST & inOperand0
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_sliceTargetAST constructor_letDeclaration (const class GALGAS_lstring & inOperand0
+                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_sliceTargetAST constructor_varDeclaration (const class GALGAS_lstring & inOperand0
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_sliceTargetAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_lValue (class GALGAS_LValueAST & outArgument0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_letDeclaration (class GALGAS_lstring & outArgument0,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_varDeclaration (class GALGAS_lstring & outArgument0,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDiscarded (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLetDeclaration (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVarDeclaration (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_sliceTargetAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceTargetAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       @sliceTargetAST enum, associated values                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_sliceTargetAST_varDeclaration : public cEnumAssociatedValues {
+  public : const GALGAS_lstring mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_sliceTargetAST_varDeclaration (const GALGAS_lstring & inAssociatedValue0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_sliceTargetAST_varDeclaration (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_sliceTargetAST_letDeclaration : public cEnumAssociatedValues {
+  public : const GALGAS_lstring mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_sliceTargetAST_letDeclaration (const GALGAS_lstring & inAssociatedValue0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_sliceTargetAST_letDeclaration (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_sliceTargetAST_lValue : public cEnumAssociatedValues {
+  public : const GALGAS_LValueAST mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_sliceTargetAST_lValue (const GALGAS_LValueAST & inAssociatedValue0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_sliceTargetAST_lValue (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

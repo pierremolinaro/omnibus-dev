@@ -1,15 +1,15 @@
 
-setter @instructionListIR appendShiftLeft
+setter @instructionListIR appendLogicalShiftRight
   ?let @objectIR inResult
   ?let @objectIR inSource
   ?let @uint inShiftAmount
 {
-  self += !@leftShiftIR.new {!inResult !inSource !inShiftAmount}
+  self += !@logicalRightShiftIR.new {!inResult !inSource !inShiftAmount}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @leftShiftIR : @abstractInstructionIR {
+class @logicalRightShiftIR : @abstractInstructionIR {
   @objectIR mResult
   @objectIR mSource
   @uint mShiftAmount
@@ -17,19 +17,18 @@ class @leftShiftIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @leftShiftIR llvmInstructionCode
+override method @logicalRightShiftIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult llvmName]
-             + " = shl " + [mSource  llvmTypeName] + " " + [mSource llvmName]
-             + ", " + mShiftAmount + "\n"
+  ioLLVMcode += "  " + [mResult llvmName] + " = "
+  ioLLVMcode += "lshr " + [mResult  llvmTypeName] + " " + [mSource llvmName] + ", " + mShiftAmount + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @leftShiftIR enterAccessibleEntities
+override method @logicalRightShiftIR enterAccessibleEntities
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

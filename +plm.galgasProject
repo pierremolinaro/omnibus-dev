@@ -5,7 +5,7 @@ project (1:0:0) -> "plm" {
 #  %makefile-x86linux32-on-macosx
 #  %makefile-x86linux64-on-macosx
 #  %makefile-win32-on-macosx
-#  %codeblocks-mac
+  %codeblocks-mac
   %SierraElCapitan
   %applicationBundleBase : "pierre.molinaro.name"
 
@@ -85,6 +85,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/instructionList.galgas"
   "galgas-sources/directive-check.galgas"
   "galgas-sources/instruction-assignment.galgas"
+  "galgas-sources/instruction-slice-assignment.galgas"
   "galgas-sources/instruction-assignment-operator.galgas"
   "galgas-sources/instruction-var.galgas"
   "galgas-sources/instruction-let.galgas"
@@ -126,6 +127,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-trunc.galgas"
   "galgas-sources/intermediate-bool-to-uint.galgas"
   "galgas-sources/intermediate-shift-left.galgas"
+  "galgas-sources/intermediate-logical-shift-right.galgas"
   "galgas-sources/intermediate-binary-operation.galgas"
   "galgas-sources/intermediate-short-circuit-and.galgas"
   "galgas-sources/intermediate-load-control-register-with-subscript.galgas"

@@ -1,0 +1,271 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @sliceAssignmentInstructionAST : @instructionAST {
+  @lstring mTypeName
+  @sliceAssignmentListAST mSliceAssignmentList
+  @expressionAST mSourceExpression
+  @location mSourceExpressionLocation
+}
+
+#·······················································································································
+
+list @sliceAssignmentListAST {
+  @lstring mSliceWidth
+  @sliceTargetAST mSliceKind
+}
+
+#·······················································································································
+
+enum @sliceTargetAST {
+  case discarded
+  case varDeclaration (@lstring varName)
+  case letDeclaration (@lstring letName)
+  case lValue (@LValueAST target)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+    ${$
+    $\$type$ ?let typeName
+    @sliceAssignmentListAST sliceAssignmentListAST = {}
+    repeat
+      $?selector:$ ?let sliceWidth
+      @sliceTargetAST sliceKind
+      select
+        $_$
+        sliceKind = .discarded
+      or
+        <lvalue> !?ioAST ?let target
+        sliceKind = .lValue {!target:target}
+      or
+        $var$
+        $identifier$ ?let varName
+        sliceKind = .varDeclaration {!varName:varName}
+      or
+        $let$
+        $identifier$ ?let letName
+        sliceKind = .letDeclaration {!letName:letName}
+      end
+      sliceAssignmentListAST += !sliceWidth !sliceKind
+    while
+    end
+    $}$
+  #--- Source expression
+    $=$
+    <expression> !?ioAST ?let sourceExpression
+  #--- AST
+    ioInstructionList += !@sliceAssignmentInstructionAST.new {
+      !typeName.location
+      !typeName
+      !sliceAssignmentListAST
+      !sourceExpression
+      !.here
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [!?ioGraph noteNode !llvmTypeNameFromPLMname (!mTypeName)]
+  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  for (sliceWidthStr sliceKind) in mSliceAssignmentList do
+    if [sliceWidthStr.string isDecimalUnsignedNumber] then
+      let sliceWidth = [sliceWidthStr decimalUnsignedNumber]
+      if sliceWidth == 0 then
+        error sliceWidthStr : "the bit slice width should be > 0"
+      else
+        let sliceTypeName = @lstring.new {!"uint" + sliceWidth !sliceWidthStr.location}
+        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
+      end
+    elsif sliceWidthStr.string == "b" then
+      let sliceTypeName = @lstring.new {!"bool" !sliceWidthStr.location}
+      [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
+    end
+    switch sliceKind
+    case discarded :
+    case varDeclaration (*) :
+    case letDeclaration (*) :
+    case lValue (@LValueAST target) :
+      [target noteInstructionTypesInPrecedenceGraph !?ioGraph]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @sliceAssignmentInstructionAST analyze
+  ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+#--- Search Type
+  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+#--- Check type is an unsigned integer type
+  @uint bitCount
+  if not [resultType.kind isInteger] then
+    error mTypeName: "this type should be an unsigned integer type" : bitCount
+  else
+    [resultType.kind integer ?2* ?unsigned:let unsigned ?bitCount:bitCount]
+    if not unsigned then
+      error mTypeName: "this type should be an unsigned integer type" : bitCount
+    end
+  end
+#--- Analyze source expression
+  [mSourceExpression analyzeExpression
+    !self:inSelfType
+    !routineAttributes:inRoutineAttributes
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:resultType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR sourceOperand
+  ]
+#--- Load from reference ?
+  if [sourceOperand isReference] then
+    [!?ioInstructionGenerationList appendLoadWhenReference
+      !?ioTemporaries
+      !sourceOperand
+      ?let loadedResultValue
+    ]
+    sourceOperand = loadedResultValue
+  end
+#--- If source operand is static type, check value and convert it to 'resultType'
+  if [sourceOperand isLiteralInteger] then
+    [sourceOperand literalInteger ?1* ?value:let @bigint value]
+    if value >= (1G << bitCount) then
+      error mSourceExpressionLocation : "static value too large" : sourceOperand
+    else
+      sourceOperand = .literalInteger {!type:resultType !value:value}
+    end
+  end
+#--- Analyze slices
+  var rightShiftAmount = bitCount
+  @bigint accumulatedFieldStaticValues = 0G
+  for (sliceWidthStr sliceKind) in mSliceAssignmentList do
+  #--- Analyze selector
+    @lstring sliceTypeName
+    @uint sliceWidth
+    if sliceWidthStr.string == "" then
+      error sliceWidthStr : "anonymous selector not allowed here" : sliceWidth, sliceTypeName
+    elsif sliceWidthStr.string == "b" then
+      sliceWidth = 1
+      sliceTypeName = .new {!"bool" !mTypeName.location}
+    elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
+      error sliceWidthStr : "the selector should be an unsigned integer value" : sliceWidth, sliceTypeName
+    else
+      sliceWidth = [sliceWidthStr decimalUnsignedNumber]
+      sliceTypeName = .new {!"uint" + sliceWidth !mTypeName.location}
+      if sliceWidth == 0 then
+        error sliceWidthStr : "the bit slice width should be > 0"
+      end
+    end
+    if rightShiftAmount >= sliceWidth then
+      rightShiftAmount = rightShiftAmount - sliceWidth
+    else
+      let specifiedBitCount = bitCount + sliceWidth - rightShiftAmount
+      error sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount
+      rightShiftAmount = 0
+    end
+    let sliceType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !sliceTypeName} type]
+  #--- Shift and truncate source value
+    getNewTempValue (![sourceOperand type] !?ioTemporaries ?let shiftedSourceValue)
+    [!?ioInstructionGenerationList appendLogicalShiftRight !shiftedSourceValue !sourceOperand !rightShiftAmount]
+    getNewTempValue (!sliceType !?ioTemporaries ?let shiftedTruncatedSourceValue)
+    [!?ioInstructionGenerationList appendTrunc !shiftedTruncatedSourceValue !shiftedSourceValue]
+  #--- Analyze target
+    switch sliceKind
+    case discarded :
+    case varDeclaration (varName) :
+    #--- Declare local variable
+      let plmLocalVariableName = @lstring.new {!varName.string + "." + ioTemporaries.mTemporaryIndex !varName}
+      ioTemporaries.mTemporaryIndex ++
+      [!?ioUniversalMap insertLocalVariable !varName !sliceType !plmLocalVariableName !.hasUnreadValue !false]
+    #--- Code generation
+      ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) ![sliceType llvmTypeName]
+    #--- Target reference
+      let targetRef = @LValueRepresentation.universalReference {
+        !type:sliceType
+        !llvmName:llvmNameForLocalVariable (!plmLocalVariableName)
+      }
+   #--- Generate assignment instruction
+      [!?ioInstructionGenerationList appendCopyFromReferences
+        !?ioTemporaries
+        !errorLocation:varName.location
+        !source:shiftedTruncatedSourceValue
+        !target:targetRef
+      ]
+    case letDeclaration (letName) :
+    #--- Declare local constant
+      let plmLocalVariableName = @lstring.new {!letName.string + "." + ioTemporaries.mTemporaryIndex !letName}
+      ioTemporaries.mTemporaryIndex ++
+      [!?ioUniversalMap insertLocalConstant !letName !sliceType !plmLocalVariableName]
+    #--- Code generation
+      ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) ![sliceType llvmTypeName]
+    #--- Target reference
+      let targetRef = @LValueRepresentation.universalReference {
+        !type:sliceType
+        !llvmName:llvmNameForLocalVariable (!plmLocalVariableName)
+       }
+    #--- Generate assignment instruction
+      [!?ioInstructionGenerationList appendCopyFromReferences
+        !?ioTemporaries
+        !errorLocation:letName.location
+        !source:shiftedTruncatedSourceValue
+        !target:targetRef
+      ]
+    case lValue (@LValueAST target) :
+      [target analyzeLValue
+        !self: inSelfType
+        !readAccess:false
+        !routineAttributes:inRoutineAttributes
+        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+        !context: inContext
+        !mode: inCurrentMode
+        !?temporary: ioTemporaries
+        !?staticStringMap: ioGlobalLiteralStringMap
+        !?variableMap:ioUniversalMap
+        !?alloca: ioAllocaList
+        !?instructionListIR: ioInstructionGenerationList
+        ?let @LValueRepresentation lvalueIR
+      ]
+    #--- Generate assignment instruction
+      [!?ioInstructionGenerationList appendCopyFromReferences
+        !?ioTemporaries
+        !errorLocation:target.mIdentifier
+        !source:shiftedTruncatedSourceValue
+        !target:lvalueIR
+      ]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

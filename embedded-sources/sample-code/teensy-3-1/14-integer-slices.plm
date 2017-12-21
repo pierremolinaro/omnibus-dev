@@ -17,7 +17,6 @@ func safe activityLedOff @exported () {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let LED_L3 = $digitalPort.D6
-let bb = {$uint8 !b:yes !1:0 !6:12}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -29,6 +28,10 @@ task Tâche1 priority 1 stackSize 512 {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     let b = {$uint8 !b:self.test !1:0 !6:12}
     lcd.print (!hex2:extend (b))
+    lcd.print (!spaces:1)
+    {$uint8 ?b:var b7 ?2:var b2 ?5:var b3} = 0xAC
+    let bb = {$uint8 !b:b7 !2:b2 !5:b3}
+    lcd.print (!hex2:extend (bb))
   }
 
   on time.wait (!untilDeadline:self.compteur) {
