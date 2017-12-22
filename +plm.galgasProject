@@ -26,6 +26,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/type-bool.galgas"
   "galgas-sources/type-enumeration-declaration.galgas"
   "galgas-sources/type-structure-declaration.galgas"
+  "galgas-sources/type-sync-declaration.galgas"
   "galgas-sources/type-extension-declaration.galgas"
   "galgas-sources/type-integer.galgas"
   "galgas-sources/type-literal-integer.galgas"
@@ -35,6 +36,7 @@ project (1:0:0) -> "plm" {
 #--- Global declarations
   "galgas-sources/declaration-control-register.galgas"
   "galgas-sources/declaration-global-constant.galgas"
+  "galgas-sources/declaration-global-sync-instance.galgas"
   "galgas-sources/declaration-driver.galgas"
   "galgas-sources/declaration-static-array.galgas"
 

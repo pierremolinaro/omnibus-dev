@@ -21,6 +21,10 @@ let LED_L2 = $digitalPort.D5
 
 //——————————————————————————————————————————————————————————————————————————————
 
+sync sémaphore = $semaphore (!value:0)
+
+//——————————————————————————————————————————————————————————————————————————————
+
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
@@ -31,12 +35,12 @@ task T1 priority 1 stackSize 512 {
   }
 
   on time.wait (!untilDeadline:self.top) {
-    T2.signal ()
+    sémaphore.signal ()
     self.top += 250
     digital.write (!yes !toPort:LED_L1)
     let constanteAccentuée = self.top
     time.wait (!untilDeadline:constanteAccentuée)
-    T2.signal ()
+    sémaphore.signal ()
     self.top += 250
     digital.write (!no !toPort:LED_L1)
   }
@@ -45,13 +49,10 @@ task T1 priority 1 stackSize 512 {
 //——————————————————————————————————————————————————————————————————————————————
 
 task T2 priority 2 stackSize 512 {
-  var sémaphore = $semaphore (!value:0)
 
-  entry signal : self.sémaphore.signal ()
-
-  on self.sémaphore.wait () {
+  on sémaphore.wait () {
     digital.write (!yes !toPort:LED_L2)
-    self.sémaphore.wait ()
+    sémaphore.wait ()
     digital.write (!no !toPort:LED_L2)
   }
 }

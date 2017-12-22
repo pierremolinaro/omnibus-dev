@@ -25,7 +25,7 @@ let LED_L2 = $digitalPort.D5
 
 let SIZE = 10
 
-struct $synchronizationBuffer {
+sync $synchronizationBuffer {
   var data = $uint32 [SIZE] (!repeated:$uint32 ())
   var readIndex $uint32 = 0
   var writeIndex $uint32 = 0
@@ -73,6 +73,10 @@ struct $synchronizationBuffer {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+sync buffer = $synchronizationBuffer ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 task Tâche1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
   var index $uint32 = 0
@@ -88,15 +92,13 @@ task Tâche1 priority 1 stackSize 512 {
     digital.toggle (!port:LED_L0)
     self.compteur +%= 500
     self.index += 1
-    Tâche2.write (!self.index)
+    buffer.write (!self.index)
   }
 }
 
 task Tâche2 priority 2 stackSize 512 {
-  entry write : self.buffer.write (? value $uint32)
-  var buffer = $synchronizationBuffer ()
    
-  on self.buffer.read (?var value $uint32) {
+  on buffer.read (?var value $uint32) {
     lcd.goto (!line:0 !column:0)
     lcd.print (!unsigned:value)
   }

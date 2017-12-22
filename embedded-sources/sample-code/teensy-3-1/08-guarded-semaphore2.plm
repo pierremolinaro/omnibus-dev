@@ -24,6 +24,11 @@ let LED_L4 = $digitalPort.D7
 
 //-----------------------------------------------------------------------------*
 
+sync s0 = $semaphore (!value:0)
+sync s1 = $semaphore (!value:0)
+
+//-----------------------------------------------------------------------------*
+
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
@@ -37,11 +42,11 @@ task T0 priority 0 stackSize 512 {
   }
 
   on time.wait (!untilDeadline:self.top) {
-    T2.signal0 ()
+    s0.signal ()
     self.top += 250
     digital.write (!yes !toPort:LED_L0)
     time.wait (!untilDeadline:self.top)
-    T2.signal0 ()
+    s0.signal ()
     self.top += 250
     digital.write (!no !toPort:LED_L0)
   }
@@ -53,11 +58,11 @@ task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
   on time.wait (!untilDeadline:self.top) {
-    T2.signal1 ()
+    s1.signal ()
     self.top += 249
     digital.write (!yes !toPort:LED_L4)
     time.wait (!untilDeadline:self.top)
-    T2.signal1 ()
+    s1.signal ()
     self.top += 249
     digital.write (!no !toPort:LED_L4)
   }
@@ -68,13 +73,8 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   var toggleD3 = no
-  var s0 = $semaphore (!value:0)
-  var s1 = $semaphore (!value:0)
-  
-  entry signal0 : self.s0.signal ()
-  entry signal1 : self.s1.signal ()
  
-  on self.s0.wait () {
+  on s0.wait () {
     self.toggleD3 = yes // Just for having a boolean guard
   }
   
@@ -83,7 +83,7 @@ task T2 priority 2 stackSize 512 {
     self.toggleD3 = no
   }
   
-  on self.s1.wait () {
+  on s1.wait () {
     digital.toggle (!port:LED_L3)
   }
   

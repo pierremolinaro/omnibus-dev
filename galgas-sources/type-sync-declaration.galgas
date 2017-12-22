@@ -1,0 +1,418 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @syncDeclarationAST : @abstractDeclarationAST {
+  @lstring mSyncToolName
+  @structurePropertyListAST mStructurePropertyListAST
+  @functionDeclarationListAST mFunctionDeclarationListAST
+  @systemRoutineDeclarationListAST mSystemRoutineListAST
+  @guardDeclarationListAST mGuardListAST
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $sync$
+    $\$type$ ?let structureName
+    ${$
+    @functionDeclarationListAST procedureDeclarationListAST = {}
+    @structurePropertyListAST fieldList = {}
+    @systemRoutineDeclarationListAST systemRoutineListAST = {}
+    @guardDeclarationListAST guardListAST = {}
+    repeat
+    while
+      <private_or_public_struct_property_declaration> !?ioAST !?fieldList
+    while
+      <function> !?ioAST !?procedureDeclarationListAST
+    while
+      <system_routine> !?ioAST !?systemRoutineListAST
+    while
+      <guard> !?ioAST !?guardListAST
+    while
+      $;$
+    end
+    $}$
+    ioAST.mDeclarationListAST += !@syncDeclarationAST.new {
+      !structureName
+      !fieldList
+      !procedureDeclarationListAST
+      !systemRoutineListAST
+      !guardListAST
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @syncDeclarationAST addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
+  !@abstractDeclarationAST outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let structureTypeName = llvmTypeNameFromPLMname (!mSyncToolName)
+#--- Add structure type name as node
+  [!?ioGraph addNode !structureTypeName !self]
+#--- Add property types
+  for (propertyName * public fieldTypeName initExpression) in mStructurePropertyListAST do
+    if fieldTypeName.string != "" then
+      let typeName = llvmTypeNameFromPLMname (!fieldTypeName)
+      [!?ioGraph addEdge !structureTypeName !typeName]
+    end
+    if public then
+      error propertyName : "a sync tool property cannot be public (should be private)"
+    end
+    switch initExpression
+    case noExpression :
+    case expression (initExpression) :
+      [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
+    end
+  end
+#--- Add structure functions
+  for () in mFunctionDeclarationListAST do
+    for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
+      let typeName = llvmTypeNameFromPLMname (!formalArgumentTypeName)
+      [!?ioGraph noteNode !typeName]
+    end
+    if mFunctionReturnTypeName.string != "" then
+      let typeName = llvmTypeNameFromPLMname (!mFunctionReturnTypeName)
+      [!?ioGraph noteNode !typeName]
+    end
+    [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+#--- Add structure services, section, primitives and guards
+  [mSystemRoutineListAST noteTypesInPrecedenceGraph !?ioGraph]
+  [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
+}
+
+#·······················································································································
+
+override getter @syncDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "sync $" + mSyncToolName 
+}
+
+#·······················································································································
+
+override getter @syncDeclarationAST location -> @location outLocation {
+  outLocation = mSyncToolName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @syncDeclarationAST enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+{
+#---------------------------------------- Properties
+  @propertyList propertyList = {}
+  @propertyMap propertyMap = {}
+  @sortedOperandIRList sortedOperandIRList = {}
+  @constructorSignature constructorSignature = {}
+  @string constructorKey = "("
+  for property in mStructurePropertyListAST do
+    [property enterInContext
+      !mSyncToolName
+      !?context:ioContext
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?propertyList
+      !?propertyMap
+      !?sortedOperandIRList
+      !?constructorSignature
+      !?constructorKey
+      !?*
+    ]
+  end
+  constructorKey += ")"
+#---------------------------------------- Constructor map
+  @constructorMap constructorMap = {}
+  [!?constructorMap insertKey
+    !.new {!constructorKey !mSyncToolName.location}
+    !constructorSignature
+    !.structure {!sortedOperandList:sortedOperandIRList}
+  ]
+#---------------------------------------- Enter functions in property map
+  [mFunctionDeclarationListAST enterFunctionsInPropertyMap !?context:ioContext !?propertyMap]
+#---------------------------------------- Enter system routines in property map
+  for system in mSystemRoutineListAST do
+  #--- Attributes
+    @stringset attributeSet = {}
+    for attribute in system.mAttributeList do
+      attributeSet += !attribute.mValue.string
+    end
+    let exportedRoutine = [attributeSet hasKey !exportedAttribute ()]
+    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
+  #--- Routine mangled name
+    let routineMangledName = routineMangledNameFromAST (
+      !"" # mStructureName 
+      !system.mName
+      !system.mFormalArgumentList
+    )
+  #--- Signature
+    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let signature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
+  #--- Attributes
+    var mutating = false
+    for (attribute) in system.mAttributeList do
+      if attribute.string == mutatingAttribute () then
+        mutating = true    
+      end
+    end
+  #--- Routine descriptor
+    let descriptor = @routineDescriptor.new {
+      !isPublic:system.mPublic
+      !exported:exportedRoutine
+      !routineKind:system.mRoutineKind
+      !signature:signature
+      !returnTypeProxy:returnTypeProxy
+      !canAccessProperties:true
+      !canMutateProperties:canMutateProperties
+    }
+  #--- Enter in structure map
+    [!?propertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
+  end
+#---------------------------------------- Enter guards in guard map
+  @guardMapForContext guardMap = {}
+  for guard in mGuardListAST do
+  #--- Guard mangled name
+    let guardMangledName = routineMangledNameFromAST (
+      !"" 
+      !guard.mGuardName
+      !guard.mGuardFormalArgumentList
+    )
+  #--- Signature
+    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
+  #--- Enter in context
+    [!?guardMap insertKey
+      !guardMangledName
+      !guard.mIsPublic
+      !signature
+    ]
+  end
+#---------------------------------------- Enter in type map
+  let structureType = @PLMType.new {
+    !propertyMap:propertyMap
+    !classConstantMap:{}
+    !constructorMap:constructorMap
+    !guardMap:guardMap
+    !typeAttributes:.instanciable
+    !plmTypeName:mSyncToolName
+    !kind:.structure {!propertyList:propertyList}
+  }
+  [!?ioContext.mTypeMap insertType
+    !lkey:mSyncToolName
+    !type:structureType
+    !index:[ioContext.mTypeMap count]
+  ]
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {
+    !mSyncToolName
+    !mFunctionDeclarationListAST
+    !mSystemRoutineListAST
+    !mGuardListAST
+  }
+}
+
+#·······················································································································
+
+#method @structurePropertyListAST-element enterInContext
+#  ?let @lstring inStructureName
+#  ?!context:@semanticContext ioContext
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!@propertyList propertyList
+#  ?!@propertyMap propertyMap
+#  ?!@sortedOperandIRList sortedOperandIRList
+#  ?!@constructorSignature constructorSignature
+#  ?!@string ioConstructorKey
+#  ?!@bool canBeCopied
+#{
+##---------- Property type
+#  let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
+#    then voidType ()
+#    else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
+#  end
+##---------- Init expression
+#  switch mInitialisation
+#  case expression (initExpression) :
+#    [initExpression analyzeExpression
+#      !self:voidType ()
+#      !routineAttributes:.none
+#      !routineNameForInvocationGraph:.new {!inStructureName.string + " init" !inStructureName.location}
+#      !optionalTargetType:optionalPropertyType
+#      !context:ioContext
+#      !mode:.bootMode
+#      !?temporary:*
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioContext.mValuedObjectMap
+#      !?alloca:*
+#      !?instructionListIR:*
+#      ?result:let @objectIR expressionIR
+#    ]
+#    if not [expressionIR isStatic] then
+#      error mPropertyName : "initialization expression cannot be computed statically"
+#    end
+#    @PLMType actualPropertyType
+#    if optionalPropertyType.kind != .void then
+#      actualPropertyType = optionalPropertyType
+#    else
+#      actualPropertyType = [expressionIR type]
+#    end
+#    if not [actualPropertyType instanciable] then
+#      error mPropertyName : "$" + actualPropertyType.plmTypeName + " type is not instanciable"
+#    end
+#    if not [actualPropertyType copyable] then
+#      canBeCopied = false
+#    end
+#    if mIsConstant then
+#     [!?propertyMap insertKey
+#        !mPropertyName
+#        !mIsPublic
+#        !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
+#      ]
+#    else
+#      let propertyIndex = [propertyList length]
+#      propertyList += !mPropertyName.string !actualPropertyType
+#      [!?propertyMap insertKey
+#        !mPropertyName
+#        !mIsPublic
+#        !.indexed{!type:actualPropertyType !index:propertyIndex}
+#      ]
+#      sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
+#    end
+#  case noExpression :
+#    if not [optionalPropertyType instanciable] then
+#      error mPropertyName : "$" + optionalPropertyType.plmTypeName + " type is not instanciable"
+#    end
+#    let propertyIndex = [propertyList length]
+#    propertyList += !mPropertyName.string !optionalPropertyType
+#    [!?propertyMap insertKey
+#      !mPropertyName
+#      !mIsPublic
+#      !.indexed{!type: optionalPropertyType!index:propertyIndex}
+#    ]
+#    constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
+#    ioConstructorKey += "!" + mPropertyName
+#  end
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
+#  @lstring mStructureName
+#  @functionDeclarationListAST mFunctionDeclarationListAST
+#  @systemRoutineDeclarationListAST mSystemRoutineListAST
+#  @guardDeclarationListAST mGuardListAST
+#}
+
+#·······················································································································
+
+#override method @decoratedStructureDeclaration semanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName} type]
+##--- Analyze functions
+#  [self functionSemanticAnalysis
+#    !structureType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
+##--- Analyze system routines
+#  [mSystemRoutineListAST systemRoutineSemanticAnalysis
+#    !receiverType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
+##--- Analyze guards
+#  [mGuardListAST guardSemanticAnalysis
+#    !receiverType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
+#}
+
+#·······················································································································
+
+#method @decoratedStructureDeclaration functionSemanticAnalysis
+#  ?structureType:let @PLMType inStructureType
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  for function in mFunctionDeclarationListAST do
+#    var warnIfUnused = true
+#    var functionAttributes = @routineAttributes.none
+#    for (attribute) in function.mFunctionAttributeList do
+#      if attribute.string == noUnusedWarningAttribute () then
+#        if not warnIfUnused then
+#          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
+#        end
+#        warnIfUnused = false    
+#      elsif attribute.string == userAccessAttribute () then
+#        if [functionAttributes directPropertyAccess] then
+#          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
+#        end
+#        functionAttributes = functionAttributes | .directPropertyAccess   
+#      elsif attribute.string == mutatingAttribute () then
+#        if [functionAttributes mutating] then
+#          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+#        end
+#        functionAttributes = functionAttributes | .mutating    
+#      else
+#        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
+#          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
+#      end
+#    end
+##    accessProperties = function.mMode != .userMode
+#    routineSemanticAnalysis (
+#      !receiverType:inStructureType
+#      !.function {!executionMode:function.mMode}
+#      !function.mMode
+#      !function.mFunctionName
+#      !function.mFunctionFormalArgumentList
+#      !returnTypeName:function.mFunctionReturnTypeName
+#      !function.mFunctionInstructionList
+#      !function.mEndOfFunctionDeclaration
+#      !routineAttributes:functionAttributes | .controlRegisterReadable
+#      !warnIfUnused:warnIfUnused
+#      !globalFunction:false
+#      !context:inContext
+#      !?temporary:ioTemporaries
+#      !?intermediateCode:ioIntermediateCodeStruct
+#    )
+#  end
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

@@ -1,0 +1,187 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @syncToolInstanceDeclarationAST : @abstractDeclarationAST {
+  @lstring mSyncTypeName
+  @lstring mSyncInstanceName
+  @expressionAST mSourceExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $sync$
+    $identifier$ ?let syncInstanceName
+    @lstring syncTypeName
+    select
+      syncTypeName = ["" here]
+    or
+      <type_definition> !?ioAST ?syncTypeName
+    end
+    $=$
+    <expression> !?ioAST ?let @expressionAST expression
+    ioAST.mDeclarationListAST += !@syncToolInstanceDeclarationAST.new {
+      !syncTypeName
+      !syncInstanceName
+      !expression
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @syncToolInstanceDeclarationAST addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
+  !@abstractDeclarationAST outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN PRECEDENCE GRAPH                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @syncToolInstanceDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [!?ioGraph addNode !mSyncInstanceName !self]
+  if mSyncTypeName.string != "" then
+    [!?ioGraph addEdge !mSyncInstanceName !llvmTypeNameFromPLMname (!mSyncTypeName)]
+  end
+  [mSourceExpression addDependenceEdgeForStaticExpression !mSyncInstanceName !?ioGraph]
+}
+
+#·······················································································································
+
+override getter @syncToolInstanceDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "sync " + mSyncInstanceName 
+}
+
+#·······················································································································
+
+override getter @syncToolInstanceDeclarationAST location -> @location outLocation {
+  outLocation = mSyncInstanceName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @globalSyncInstanceMap %selectors {
+  @PLMType type
+  @objectIR initialValue
+
+  insert insertKey error message "the '%K' global variable is already declared in %L"
+  search searchKey error message "there is no '%K' global variable"
+}
+
+#·······················································································································
+
+override method @syncToolInstanceDeclarationAST enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+{
+#--- Get sync type
+  let optionalSyncType = if mSyncTypeName.string == "" then
+    voidType ()
+  else
+    [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mSyncTypeName} type]
+  end
+#--- Analyze source expression
+  [mSourceExpression analyzeExpression
+     !self:voidType ()
+     !routineAttributes:.none
+     !routineNameForInvocationGraph:["compiler" nowhere]
+     !optionalTargetType:optionalSyncType
+     !context:ioContext
+     !mode:.bootMode
+     !?temporary:*
+     !?staticStringMap:ioGlobalLiteralStringMap
+     !?variableMap:ioContext.mValuedObjectMap
+     !?alloca:*
+     !?instructionListIR:*
+     ?result:@objectIR expressionResult
+  ]
+  if not [expressionResult isStatic] then
+    error mSyncInstanceName : "source expression cannot be statically computed"
+  end
+#--- Check variable type and expression type
+  let result = checkAssignmentCompatibility (
+    !source:expressionResult
+    !targetAnnotationType:optionalSyncType
+    !errorLocation:mSyncInstanceName.location
+    !staticTypeAllowed:false
+  )
+#---------------- Enter variable in global variable map
+  [!?ioContext.mGlobalSyncInstanceMap insertKey
+    !lkey:mSyncInstanceName
+    !type:[result type]
+    !initialValue:result
+  ]
+#---------------- Enter in valuated object map
+  [!?ioContext.mValuedObjectMap insertGlobalSyncInstance !mSyncInstanceName ![result type]]
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@decoratedSyncInstance.new {!mSyncInstanceName !result}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @decoratedSyncInstance : @abstractDecoratedDeclaration {
+  @lstring mSyncInstanceName
+  @objectIR mExpressionGeneratedCode
+}
+
+#·······················································································································
+
+override method @decoratedSyncInstance semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  [!?ioIntermediateCodeStruct.mGlobalSyncInstanceMap insertKey
+    !mSyncInstanceName
+    !mExpressionGeneratedCode
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @globalSyncInstanceMapIR {
+  @objectIR mInitialValue
+  insert insertKey error message "** internal error **"
+}
+
+#·······················································································································
+
+method @globalSyncInstanceMapIR-element generateLLVM ?!@string ioLLVMcode {
+  ioLLVMcode += llvmNameForGlobalSyncInstance (!lkey.string) + " = internal global "
+  ioLLVMcode += [[mInitialValue type] llvmTypeName] + " "
+  let initialString = [mInitialValue llvmName]
+  if initialString == "" then
+    ioLLVMcode += "zeroinitializer"
+  else
+    ioLLVMcode += initialString
+  end
+  ioLLVMcode += "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

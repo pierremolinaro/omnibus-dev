@@ -1,6 +1,6 @@
 //——————————————————————————————————————————————————————————————————————————————
 
-struct $semaphore {
+sync $semaphore {
   var value $uint32
   var list = $taskList ()
   var guardList = $guardList ()

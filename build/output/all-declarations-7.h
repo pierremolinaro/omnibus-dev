@@ -434,6 +434,18 @@ void extensionSetter_insertGlobalConstant (class GALGAS_universalValuedObjectMap
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                        Extension setter '@universalValuedObjectMap insertGlobalSyncInstance'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertGlobalSyncInstance (class GALGAS_universalValuedObjectMap & ioObject,
+                                               const class GALGAS_lstring constin_inSyncInstanceName,
+                                               const class GALGAS_PLMType constin_inType,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Extension setter '@universalValuedObjectMap insertLocalConstant'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

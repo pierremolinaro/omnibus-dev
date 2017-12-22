@@ -249,8 +249,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       error mReceiverName : "control register is not readable in guard" : outResult
     elsif not [inRoutineAttributes controlRegisterReadable] then
       error mReceiverName : "control register is not readable in this context" : outResult
-#    elsif [inMode isUserMode] || [inMode isAnyMode] then
-#      error mReceiverName : "a control register is not accessible in user mode" : outResult
     else
       analyzeRegisterExpression (
         !self: inSelfType
@@ -307,6 +305,23 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   case localVariable (@PLMType type @lstring plmName) :
     outResult = .reference {!type: type !llvmName:llvmNameForLocalVariable (!plmName)}
     [!?ioUniversalMap readAccess !mReceiverName]
+    procAnalyzeAccesListInExpression (
+      !self: inSelfType
+      !routineAttributes:inRoutineAttributes
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !mAccessList
+      !?result: outResult
+    )
+  case globalSyncInstance (@PLMType type @lstring plmName) :
+    outResult = .reference {!type: type !llvmName:llvmNameForGlobalSyncInstance (!plmName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
