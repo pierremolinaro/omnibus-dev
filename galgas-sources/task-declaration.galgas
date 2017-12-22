@@ -10,7 +10,6 @@ list @taskListAST {
   @functionDeclarationListAST mTaskFunctionList
   @taskSetupListAST mTaskSetupListAST
   @syncInstructionBranchListAST mGuardedCommandList
-  @taskEntryListAST mTaskEntryListAST
   @taskGuardListAST mTaskGuardListAST
   @location mEndOfTaskDeclaration
 }
@@ -54,7 +53,6 @@ syntax extension plm_syntax {
     @functionDeclarationListAST taskProcList = {}
     @taskSetupListAST taskInitListAST = {}
     @syncInstructionBranchListAST branchList = {}
-    @taskEntryListAST taskEntryListAST = {}
     @taskGuardListAST taskGuardListAST = {}
     repeat
     while
@@ -91,8 +89,6 @@ syntax extension plm_syntax {
       $}$
       branchList += !guardedCommand !instructionList !endOfInstructions
     while
-      <task_entry_declaration> !?ioAST !?taskEntryListAST
-    while
       <task_guard_declaration> !?ioAST !?taskGuardListAST
     end
     let endOfTask = @location.here
@@ -105,7 +101,6 @@ syntax extension plm_syntax {
       !taskProcList
       !taskInitListAST
       !branchList
-      !taskEntryListAST
       !taskGuardListAST
       !endOfTask
   }
@@ -176,17 +171,6 @@ method @taskListAST enterInContext
       ]
     end
   #------------------------- Enter task entries
-    @decoratedTaskEntryList decoratedTaskEntryList = {}
-    for entry in task.mTaskEntryListAST do
-      [entry enterInContext
-        !taskName:task.mTaskName
-        !?context:ioContext
-        !?ioSubprogramInvocationGraph
-        !?decoratedTaskEntryList 
-        !?propertyMap
-      ]
-    end
-  #------------------------- Enter task entries
     @guardMapForContext guardMap = {}
     @decoratedTaskGuardList decoratedTaskGuardList = {}
     for guard in task.mTaskGuardListAST do
@@ -236,7 +220,6 @@ method @taskListAST enterInContext
       !task.mTaskFunctionList
       !task.mTaskSetupListAST
       !task.mGuardedCommandList
-      !decoratedTaskEntryList
       !decoratedTaskGuardList
       !task.mEndOfTaskDeclaration
   end
@@ -256,7 +239,6 @@ list @decoratedTaskList {
   @functionDeclarationListAST mTaskProcList
   @taskSetupListAST mTaskSetupListAST
   @syncInstructionBranchListAST mGuardedCommandList
-  @decoratedTaskEntryList mDecoratedTaskEntryList
   @decoratedTaskGuardList mDecoratedTaskGuardList
   @location mEndOfTaskDeclaration
 }
@@ -301,17 +283,8 @@ method @decoratedTaskList-element semanticAnalysis
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
     error mStackSize : "stack size should be a multiple of 8, and >= 64"
   end
-#------------------------------------------- Analyze task entries
-  let taskType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName} type]
-  for entry in mDecoratedTaskEntryList do
-    [entry taskEntrySemanticAnalysis
-       !taskType:taskType
-       !context:inContext
-       !?temporary:ioTemporaries
-       !?intermediateCode:ioIntermediateCodeStruct
-     ]
-  end
 #------------------------------------------- Analyze task guards
+  let taskType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName} type]
   for guard in mDecoratedTaskGuardList do
     [guard taskGuardSemanticAnalysis
        !taskType:taskType
