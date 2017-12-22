@@ -28,6 +28,7 @@ enum @typeKind {
   case literalString
   case enumeration (@uint bitCount)
   case structure (@propertyList propertyList)
+  case syncTool (@propertyList propertyList)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
@@ -150,6 +151,8 @@ getter @PLMType llvmTypeName -> @string {
     result = "i" + bitCount
   case structure (*) :
     result = "%" + [llvmTypeNameFromPLMname (![plmTypeName nowhere]) assemblerRepresentation]
+  case syncTool (*) :
+    result = "%" + [llvmTypeNameFromPLMname (![plmTypeName nowhere]) assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case staticInteger :
@@ -194,6 +197,8 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Enumeration"
   case structure (*) :
     result = "Structure"
+  case syncTool (*) :
+    result = "Synchronization tool"
   case integer (* * @bool unsigned @uint bitCount) :
     result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
            + ", " + if unsigned then "unsigned" else "signed" end + ")"

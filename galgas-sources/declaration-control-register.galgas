@@ -288,6 +288,8 @@ private proc controlRegisterType
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case structure (*) :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+  case syncTool (*) :
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case opaque (*) :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case arrayType (* *) :

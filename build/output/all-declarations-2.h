@@ -1451,6 +1451,22 @@ class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+class cEnumAssociatedValues_typeKind_syncTool : public cEnumAssociatedValues {
+  public : const GALGAS_propertyList mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_syncTool (const GALGAS_propertyList & inAssociatedValue0
+                                                    COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_syncTool (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
   public : const GALGAS_bigint mAssociatedValue0 ;
   public : const GALGAS_bigint mAssociatedValue1 ;

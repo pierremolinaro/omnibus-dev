@@ -22,7 +22,7 @@ let LED_L1 = $digitalPort.D4
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct $periodicTimer {
+sync $periodicTimer {
   var deadline $uint32 = 0
   let period $uint32
   var guardList = $guardList ()

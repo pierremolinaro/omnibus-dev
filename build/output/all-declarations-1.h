@@ -262,6 +262,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
     kEnum_literalString,
     kEnum_enumeration,
     kEnum_structure,
+    kEnum_syncTool,
     kEnum_integer,
     kEnum_staticInteger,
     kEnum_opaque,
@@ -325,6 +326,9 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : static class GALGAS_typeKind constructor_structure (const class GALGAS_propertyList & inOperand0
                                                                COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_typeKind constructor_syncTool (const class GALGAS_propertyList & inOperand0
+                                                              COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_typeKind constructor_void (LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -368,6 +372,10 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_syncTool (class GALGAS_propertyList & outArgument0,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
@@ -390,6 +398,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticInteger (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStructure (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSyncTool (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVoid (LOCATION_ARGS) const ;
 
