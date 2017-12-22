@@ -174,20 +174,6 @@ void extensionMethod_semanticAnalysis (const class GALGAS_decoratedTaskList_2D_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Extension method '@decoratedTaskEntryList-element taskEntrySemanticAnalysis'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_taskEntrySemanticAnalysis (const class GALGAS_decoratedTaskEntryList_2D_element inObject,
-                                                const class GALGAS_PLMType constin_inTaskType,
-                                                const class GALGAS_semanticContext constin_inContext,
-                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                    Extension method '@decoratedTaskGuardList-element taskGuardSemanticAnalysis'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -218,19 +204,6 @@ void routine_setupSemanticAnalysis (const class GALGAS_semanticContext constinAr
                                     class GALGAS_instructionListIR & outArgument9,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                Function 'checkMode'                                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_calleeKindIR function_checkMode (const class GALGAS_mode & constinArgument0,
-                                              const class GALGAS_mode & constinArgument1,
-                                              const class GALGAS_routineKind & constinArgument2,
-                                              const class GALGAS_location & constinArgument3,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -553,4 +526,14 @@ void routine_generateIntegerIntrinsicFunction (const class GALGAS_string constin
 void routine_enterLiteralIntegerOperators (class GALGAS_semanticContext & ioArgument0,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Function 'registerGroupNameFromPLMname'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_registerGroupNameFromPLMname (const class GALGAS_lstring & constinArgument0,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
