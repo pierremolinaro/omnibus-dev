@@ -171,6 +171,8 @@ override method @integerSliceExpressionAST analyzeExpression
           error expressionLocation: "an unsigned integer expression is required here"
         case structure (*) :
           error expressionLocation: "an unsigned integer expression is required here"
+        case syncTool (*) :
+          error expressionLocation: "an unsigned integer expression is required here"
         case boolean :
           if [[expressionResult type] plmTypeName] != [expressionTargetType plmTypeName] then
             error expressionLocation :

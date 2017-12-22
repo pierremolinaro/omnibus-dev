@@ -133,6 +133,10 @@ override method @syncToolInstanceDeclarationAST enterInContext
     !type:[result type]
     !initialValue:result
   ]
+#---------------- Check type is a sync tool type
+  if not [[result type].kind isSyncTool] then
+    error mSyncInstanceName : "the type is not a synchronization tool type"
+  end
 #---------------- Enter in valuated object map
   [!?ioContext.mValuedObjectMap insertGlobalSyncInstance !mSyncInstanceName ![result type]]
 #---------------- Add decorated declaration

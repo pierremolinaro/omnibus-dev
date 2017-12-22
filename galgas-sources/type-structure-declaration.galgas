@@ -96,17 +96,11 @@ syntax extension plm_syntax {
     ${$
     @functionDeclarationListAST procedureDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
-    @systemRoutineDeclarationListAST systemRoutineListAST = {}
-    @guardDeclarationListAST guardListAST = {}
     repeat
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
     while
       <function> !?ioAST !?procedureDeclarationListAST
-    while
-      <system_routine> !?ioAST !?systemRoutineListAST
-    while
-      <guard> !?ioAST !?guardListAST
     while
       $;$
     end
@@ -117,8 +111,8 @@ syntax extension plm_syntax {
       !true # Generate assignment routine
       !fieldList
       !procedureDeclarationListAST
-      !systemRoutineListAST
-      !guardListAST
+      !{}
+      !{}
     }
   }
 

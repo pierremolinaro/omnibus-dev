@@ -398,8 +398,8 @@ private proc analyzeSelfAssignmentTarget
   ?let @accessInAssignmentListAST inAccessList
   !@LValueRepresentation outInternalRepresentation
 {
-  if not [inSelfType.kind isStructure] then
-    error inSelfLocation : "'self' should be a structure instance" : outInternalRepresentation
+  if not ([inSelfType.kind isStructure] || [inSelfType.kind isSyncTool]) then
+    error inSelfLocation : "'self' is not available in this context" : outInternalRepresentation
   else
     var currentType = inSelfType
     var currentLLVMName = llvmNameForSelf ()

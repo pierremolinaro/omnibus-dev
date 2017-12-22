@@ -23,7 +23,7 @@ let LED_L2 = $digitalPort.D5
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct $synchronizationGate {
+sync $synchronizationGate {
   var isOpen $bool
   var taskList = $taskList ()
   var guardList = $guardList ()
