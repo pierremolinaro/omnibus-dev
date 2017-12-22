@@ -110,7 +110,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_primitive,
    kToken_priority,
    kToken_public,
-   kToken_register,
+   kToken_registers,
    kToken_required,
    kToken_safe,
    kToken_section,
