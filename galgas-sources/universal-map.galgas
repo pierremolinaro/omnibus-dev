@@ -73,6 +73,20 @@ setter @universalValuedObjectMap insertGlobalConstant
 
 #·······················································································································
 
+setter @universalValuedObjectMap insertGlobalSyncInstance
+  ?let @lstring inSyncInstanceName
+  ?let @PLMType inType
+{
+  [!?mInternalPropertyAndRoutineMap insertKey
+    !inSyncInstanceName
+    !.noValue
+    !false
+    !.globalSyncInstance {!type:inType !plmName:inSyncInstanceName}
+  ]
+}
+
+#·······················································································································
+
 setter @universalValuedObjectMap insertLocalConstant
   ?let @lstring inLocalConstantName
   ?let @PLMType inType
@@ -163,9 +177,11 @@ method @universalValuedObjectMap searchValuedObject
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
   case localConstant (@PLMType type @lstring plmName) :
-    outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
   case localVariable (@PLMType type @lstring plmName) :
-    outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+  case globalSyncInstance (@PLMType type @lstring plmName) :
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalSyncInstance (!plmName)}
   end
 }
 
@@ -180,11 +196,12 @@ setter @universalValuedObjectMap readAccess
   case driver (* *) :
   case registerGroup (*) :
   case globalConstant (*) :
-  case localConstant (* *) :
+  case globalSyncInstance (2*) :
+  case localConstant (2*) :
     if valueState == .hasUnreadValue then
       [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     end
-  case localVariable (* *) :
+  case localVariable (2*) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "'" + inValuedObjectName + "' has no value"
@@ -220,15 +237,17 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
     if valueState == .hasUnreadValue then
       [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     end
+  case globalSyncInstance (@PLMType type @lstring plmName) :
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalSyncInstance (!plmName)}
   case localVariable (@PLMType type @lstring plmName) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "'" + inValuedObjectName + "' has no value" : outObjectIR
     case hasUnreadValue :
       [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
-      outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+      outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     case hasReadValue :
-      outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+      outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     end
   end
 }
@@ -249,6 +268,8 @@ setter @universalValuedObjectMap searchValuedObjectForWriteAccess
     error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
+  case globalSyncInstance (2*) :
+    error inValuedObjectName : "a global sync instance cannot be written" : outObjectIR
   case localConstant (* *) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case localVariable (@PLMType type @lstring plmName) :
@@ -280,6 +301,8 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case localConstant (* *) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
+  case globalSyncInstance (2*) :
+    error inValuedObjectName : "a global sync instance cannot be written" : outObjectIR
   case localVariable (@PLMType type @lstring plmName) :
     switch valueState 
     case noValue :
@@ -327,6 +350,8 @@ method @universalValuedObjectMap searchValuedObjectType
       error inValuedObjectName : "undefined in this context" : outType
     case localVariable (@PLMType type *) :
       outType = type
+    case globalSyncInstance (@PLMType type *) :
+      outType = type
     end
   end
   for (access) in accessList do
@@ -360,6 +385,7 @@ method @universalValuedObjectMap checkLocalVariableFinalState {
     case task (*) :
     case driver (* *) :
     case registerGroup (*) :
+    case globalSyncInstance (2*) :
     case globalConstant (*) :
     case localConstant (* *) :
       if entry.mObjectState == .hasUnreadValue then
@@ -381,6 +407,7 @@ setter @universalValuedObjectMap openOverrideForSelectBlock {
     switch entry.mValuedObject
     case task (*) :
     case driver (* *) :
+    case globalSyncInstance (2*) :
     case registerGroup (*) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -401,6 +428,7 @@ setter @universalValuedObjectMap openOverrideForRepeatBlock {
     switch entry.mValuedObject
     case task (*) :
     case driver (* *) :
+    case globalSyncInstance (2*) :
     case registerGroup (*) :
     case globalConstant (*) :
     case localConstant (* *) :
@@ -434,6 +462,7 @@ setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
       case driver (* *) :
       case registerGroup (*) :
       case globalConstant (*) :
+      case globalSyncInstance (2*) :
       case localConstant (* *) :
         [!?newReferenceStateMap insertKey !entry.lkey !entry.mObjectState]
       case localVariable (**) :
@@ -489,6 +518,7 @@ setter @universalValuedObjectMap closeOverride ?let @location inErrorLocation {
     case task (*) :
     case driver (* *) :
     case registerGroup (*) :
+    case globalSyncInstance (2*) :
     case globalConstant (*) :
     case localConstant (* *) :
       if currentObjectState == .hasUnreadValue then
@@ -558,6 +588,7 @@ enum @valuedObject {
   case globalConstant (@objectIR objectIR)
   case localConstant (@PLMType type @lstring plmName)
   case localVariable (@PLMType type @lstring plmName)
+  case globalSyncInstance (@PLMType type @lstring plmName)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

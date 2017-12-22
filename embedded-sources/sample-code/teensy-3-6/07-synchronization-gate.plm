@@ -78,12 +78,13 @@ struct $synchronizationGate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 priority 1 stackSize 512 {
-  entry signal : self.s1.signal ()
-  entry wait : self.s2.wait ()
+sync s1 = $semaphore (!value:0)
+sync s2 = $semaphore (!value:0)
+sync gate = $synchronizationGate (!isOpen:no)
 
-  var s1 = $semaphore (!value:0)
-  var s2 = $semaphore (!value:0)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
   setup 1000 {
@@ -96,33 +97,30 @@ task Tâche1 priority 1 stackSize 512 {
   on time.wait (!untilDeadline:self.compteur) {
     digital.toggle (!port:LED_L0)
     self.compteur +%= 500
-    Tâche2.openGate ()
-    self.s1.wait ()
-    self.s1.wait ()
-    Tâche2.openGate ()
-    self.s2.signal ()
-    self.s2.signal ()
+    gate.open ()
+    s1.wait ()
+    s1.wait ()
+    gate.open ()
+    s2.signal ()
+    s2.signal ()
   }
 }
 
 task Tâche2 priority 2 stackSize 512 {
-  var gate = $synchronizationGate (!isOpen:no)
-  entry openGate : self.gate.open ()
-  guard waitOnGate : self.gate.wait ()
  
-  on self.gate.wait () {
+  on gate.wait () {
     digital.toggle (!port:LED_L1)
-    Tâche1.signal ()
-    Tâche1.wait ()
+    s1.signal ()
+    s2.wait ()
   }
 }
 
 task Tâche3 priority 3 stackSize 512 {
    
-  on Tâche2.waitOnGate () {
+  on gate.wait () {
     digital.toggle (!port:LED_L2)
-    Tâche1.signal ()
-    Tâche1.wait ()
+    s1.signal ()
+    s2.wait ()
   }
 }
 

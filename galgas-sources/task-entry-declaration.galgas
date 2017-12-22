@@ -21,6 +21,7 @@ syntax extension plm_syntax {
   rule <task_entry_declaration> ?!@ast ioAST ?!@taskEntryListAST ioTaskEntryListAST {
     $entry$
     $identifier$ ?let entryName
+    warning entryName : "obsolete"
     $:$
     $self$
     $.$

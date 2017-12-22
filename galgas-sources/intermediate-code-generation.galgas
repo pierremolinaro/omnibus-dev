@@ -23,6 +23,7 @@ struct @intermediateCodeStruct {
   @driverListIR mDriverList
   @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
   @generationListIR mGenerationListIR
+  @globalSyncInstanceMapIR mGlobalSyncInstanceMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

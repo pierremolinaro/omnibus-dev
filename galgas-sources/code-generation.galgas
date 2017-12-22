@@ -194,6 +194,12 @@ private proc generateCodeFiles
   declareLLVMTypes (!inTypeMap !?llvmCode)
 #----------------------------------------- Static array type declaration
   [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]
+#----------------------------------------- Global sync instances
+  for globalSyncInstance in inIntermediateCodeStruct.mGlobalSyncInstanceMap
+    before llvmCode += llvmTitleComment (!"Global synchronization tool instances")
+    do [globalSyncInstance generateLLVM !?llvmCode]
+    after llvmCode += "\n"
+  end
 #----------------------------------------- Modules
   for driver in inIntermediateCodeStruct.mDriverList
     before llvmCode += llvmTitleComment (!"Drivers")

@@ -24,7 +24,7 @@ let LED_L4 = $digitalPort.D7
 
 //-----------------------------------------------------------------------------*
 
-struct $rendezVous {
+sync $rendezVous {
   var inputWaitList = $taskList ()
   var outputWaitList = $taskList ()
   var inputGuardList = $guardList ()
@@ -80,6 +80,10 @@ struct $rendezVous {
 
 //-----------------------------------------------------------------------------*
 
+sync rdvs = $rendezVous ()
+
+//-----------------------------------------------------------------------------*
+
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
@@ -94,11 +98,11 @@ task T0 priority 0 stackSize 512 {
 
 
   on time.wait (!untilDeadline:self.top) {
-    T1.enter ()
+    rdvs.output ()
     self.top += 250
     digital.write (!yes !toPort:LED_L0)
     time.wait (!untilDeadline:self.top)
-    T1.enter ()
+    rdvs.output ()
     self.top += 250
     digital.write (!no !toPort:LED_L0)
   }
@@ -107,13 +111,10 @@ task T0 priority 0 stackSize 512 {
 //-----------------------------------------------------------------------------*
 
 task T1 priority 1 stackSize 512 {
-  var rdvs = $rendezVous ()
-
-  entry enter : self.rdvs.output ()
  
-  on self.rdvs.input () {
+  on rdvs.input () {
     digital.write (!yes !toPort:LED_L1)
-    self.rdvs.input ()
+    rdvs.input ()
     digital.write (!no !toPort:LED_L1)
   }
 }

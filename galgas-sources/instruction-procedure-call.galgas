@@ -254,6 +254,9 @@ override method @procedureCallInstructionAST analyze
     case localVariable (@PLMType type @lstring plmName) :
       currentType = type
       currentLLVMAddressVar = llvmNameForLocalVariable (!plmName)
+    case globalSyncInstance (@PLMType type @lstring plmName) :
+      currentType = type
+      currentLLVMAddressVar = llvmNameForGlobalSyncInstance (!plmName)
     end
   end
 #--- Get current object property map

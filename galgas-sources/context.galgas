@@ -95,6 +95,7 @@ struct @semanticContext {
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
   @controlRegisterGroupMap mControlRegisterGroupMap
   @globalConstantMap mGlobalConstantMap
+  @globalSyncInstanceMap mGlobalSyncInstanceMap
   @driverMap mDriverMap
   @staticlistMap mStaticListMap
 #--- Interrupts

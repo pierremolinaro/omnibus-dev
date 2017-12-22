@@ -23,7 +23,7 @@ let LED_L4 = $digitalPort.D7
 
 //-----------------------------------------------------------------------------*
 
-struct $rendezVousData {
+sync $rendezVousData {
   var readBarrier  = $semaphore (!value:0)
   var writeBarrier = $semaphore (!value:1)
   var data $uint32 = 0
@@ -54,11 +54,13 @@ struct $rendezVousData {
 
 //-----------------------------------------------------------------------------*
 
-task T0 priority 0 stackSize 512 {
-  entry P : self.s.wait ()
-  entry V : self.s.signal ()
+sync s = $semaphore (!value:1)
+sync rdvs = $rendezVousData ()
+sync rdvs2 = $rendezVousData ()
 
-  var s = $semaphore (!value:1)
+//-----------------------------------------------------------------------------*
+
+task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
   setup 100 {
@@ -70,8 +72,8 @@ task T0 priority 0 stackSize 512 {
   }
 
   on time.wait (!untilDeadline:self.top) {
-    T2.input (?data:let n)
-    T1.output (!data:n)
+    rdvs2.input (?data:let n)
+    rdvs.output (!data:n)
     digital.toggle (!port:LED_L0)
     self.top += 500
   }
@@ -80,34 +82,27 @@ task T0 priority 0 stackSize 512 {
 //-----------------------------------------------------------------------------*
 
 task T1 priority 1 stackSize 1024 {
-  entry output : self.rdvs.output (?data:inData $uint32)
-
-  var rdvs = $rendezVousData ()
-
-  on self.rdvs.input (?data:let x) {
+  on rdvs.input (?data:let x) {
     digital.toggle (!port:LED_L1)
-    T0.P ()
+    s.wait ()
       lcd.goto (!line:0 !column:0)
       lcd.print (!unsigned:x)
-    T0.V ()
+    s.signal ()
   }
 }
 
 //-----------------------------------------------------------------------------*
 
 task T2 priority 2 stackSize 1024 {
-  entry input : self.rdvs2.input (!data:inData $uint32)
-
-  var rdvs2 = $rendezVousData ()
   var deadline $uint32 = 0
   var n $uint32 = 0
 
-  on self.rdvs2.output (!data:self.n) {
+  on rdvs2.output (!data:self.n) {
     digital.toggle (!port:LED_L2)
-    T0.P ()
+    s.wait ()
       lcd.goto (!line:1 !column:0)
       lcd.print (!unsigned:self.n)
-    T0.V ()
+    s.signal ()
     self.n += 1
   }
   
