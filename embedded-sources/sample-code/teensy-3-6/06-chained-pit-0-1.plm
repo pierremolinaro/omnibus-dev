@@ -8,11 +8,11 @@ driver timer ()
 //   ACTIVITY LED                                                                                                       
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func safe activityLedOn @exported () {
+func activityLedOn @safe @exported () {
   digital.write (!yes !toPort:.D13)
 }
 
-func safe activityLedOff @exported () {
+func activityLedOff @safe @exported () {
   digital.write (!no !toPort:.D13)
 }
 
@@ -41,7 +41,7 @@ driver timer > root {
     PIT.TCTRL [0] = {PIT.TCTRL !TEN:1}
   }
   
-  public system safe now @noUnusedWarning () -> $uptime {
+  public system section now @noUnusedWarning () -> $uptime {
     var r $uint64 = extend (PIT.LTMR64H)
     r <<= 32
     r |= extend (PIT.LTMR64L)

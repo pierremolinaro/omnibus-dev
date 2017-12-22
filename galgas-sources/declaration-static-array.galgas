@@ -4,7 +4,7 @@
 
 enum @staticListPropertyTypeAST {
   case valueType (@lstring type)
-  case function (@mode mode @routineFormalArgumentListAST formalArgs @lstring returnType)
+  case function (@mode mode @bool safe @routineFormalArgumentListAST formalArgs @lstring returnType)
 }
 
 #·······················································································································
@@ -81,6 +81,12 @@ syntax extension plm_syntax {
     or
       $func$
       <mode> ?let mode
+      @lstringlist attributeList = {}
+      repeat
+      while
+        $@attribute$ ?let attribute
+        attributeList += !attribute
+      end
       <procedure_formal_arguments> !?ioAST ?let formalArgs
       @lstring returnType
       select
@@ -89,7 +95,19 @@ syntax extension plm_syntax {
         $->$
         <type_definition>!?ioAST ?returnType
       end
-      ioPropertyList += !propertyName !.function{!mode:mode !formalArgs:formalArgs !returnType:returnType}
+      var isSafe = false
+      for (attribute) in attributeList do
+        if attribute.string == safeAttribute () then
+          if isSafe then
+            error attribute : "duplicated attribute" fixit { remove }
+          else
+            isSafe = true
+          end
+        else
+          error attribute : "invalid attribute" fixit {replace "@" + safeAttribute () }
+        end
+      end
+      ioPropertyList += !propertyName !.function{!mode:mode !safe:isSafe !formalArgs:formalArgs !returnType:returnType}
     end
   }
 
@@ -171,7 +189,7 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
     case valueType (@lstring propertyTypeName) :
       let typeName = llvmTypeNameFromPLMname (!propertyTypeName)
       [!?ioGraph addEdge !mStaticListName !typeName]
-    case function (* @routineFormalArgumentListAST formalArgs @lstring returnType) :
+    case function (* * @routineFormalArgumentListAST formalArgs @lstring returnType) :
       for (* * formalArgumentTypeName *) in formalArgs do
         let typeName = llvmTypeNameFromPLMname(!formalArgumentTypeName)
         [!?ioGraph noteNode !typeName]
@@ -258,7 +276,7 @@ override method @staticListAST enterInContext
           !.indexed{!type:propertyType !index:propertyIndex}
         ]
       end
-    case function (@mode mode @routineFormalArgumentListAST formalArgs @lstring returnTypeName) :
+    case function (@mode mode @bool safe @routineFormalArgumentListAST formalArgs @lstring returnTypeName) :
     #--- Routine mangled name
       let routineMangledName = routineMangledNameFromAST (
         !"" 
@@ -280,6 +298,7 @@ override method @staticListAST enterInContext
         !returnTypeProxy:returnTypeProxy 
         !canAccessProperties:true # Routine is declared with @access attribute
         !canMutateProperties:true # Routine is declared with @mutating attribute
+        !safe:safe # Routine is declared with @safe attribute
      }
      let type = functionType (!descriptor)
       if not [ioContext.mTypeMap hasKey !routineMangledName] then

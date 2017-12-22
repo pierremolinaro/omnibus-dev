@@ -152,8 +152,6 @@ func llvmNameForSVCCall ?let @lstring inName ?let @routineKind inMode -> @string
     result = llvmNameForServiceCall (!inName.string)
   case section :
     result = llvmNameForSectionCall (!inName.string)
-  case safe :
-    result = llvmNameForSafeCall (!inName.string)
   case function (*) :
     error inName : "INTERNAL ERROR" : result
   end
@@ -169,8 +167,6 @@ func llvmNameForSVCImplementation ?let @lstring inName ?let @routineKind inMode 
     result = llvmNameForServiceImplementation (!inName.string)
   case section :
     result = llvmNameForSectionImplementation (!inName.string)
-  case safe :
-    result = llvmNameForSafeImplementation (!inName.string)
   case function (*) :
     error inName : "INTERNAL ERROR" : result
   end
@@ -216,20 +212,6 @@ func llvmNameForSectionCall ?let @string inName -> @string {
 
 func llvmNameForSectionImplementation ?let @string inName -> @string {
   result = ["section.implementation." + inName assemblerRepresentation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!   Safe
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForSafeCall ?let @string inName -> @string {
-  result = ["safe.call." + inName assemblerRepresentation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForSafeImplementation ?let @string inName -> @string {
-  result = ["safe.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -290,6 +272,12 @@ func llvmNameForGlobalSyncInstance ?let @string inName -> @string {
 
 func %once mutatingAttribute -> @string {
   result = "mutating"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once safeAttribute -> @string {
+  result = "safe"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

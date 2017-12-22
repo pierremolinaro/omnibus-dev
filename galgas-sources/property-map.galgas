@@ -22,6 +22,7 @@ map @propertyMap {
 setter @propertyMap addFunction
   ?receiverTypeName:let @string inReceiverTypeName
   ?methodName:let @string inMethodName
+  ?safe:let @bool inIsSafe
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
 {
@@ -33,6 +34,7 @@ setter @propertyMap addFunction
     !returnTypeProxy:inResultType # Return type 
     !canAccessProperties:false # Routine is declared with @access attribute
     !canMutateProperties:false # Routine is declared with @mutating attribute
+    !safe:inIsSafe # Routine is declared with @safe attribute
   }
   [!?self insertKey
     ![inMethodName + "()" nowhere]

@@ -33,7 +33,7 @@ driver time > root {
 
   //············································································
 
-  public system safe now @noUnusedWarning () -> $uint32 {
+  public system section now @safe @noUnusedWarning () -> $uint32 {
     result = self.mUptime
   }
 

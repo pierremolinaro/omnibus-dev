@@ -11,25 +11,7 @@ enum @mode {
   case panicMode
   case bootMode
   case initMode
-  case safeMode
   case anyMode
-}
-
-#·······················································································································
-
-getter @mode panicAllowed -> @bool {
-  switch self
-  case userMode : result = true
-  case sectionMode : result = true
-  case serviceMode : result = true
-  case primitiveMode : result = true
-  case guardMode : result = true
-  case panicMode : result = false
-  case bootMode : result = false
-  case initMode : result = true
-  case safeMode : result = false
-  case anyMode : result = false
-  end
 }
 
 #·······················································································································
@@ -44,7 +26,6 @@ getter @mode string -> @string {
   case panicMode : result = "panic"
   case bootMode : result = "boot"
   case initMode : result = "init"
-  case safeMode : result = "safe"
   case anyMode : result = "any"
   end
 }
@@ -59,16 +40,10 @@ func checkMode
   -> @calleeKindIR outResult
 {
   switch inRoutineKind
-  case safe :
-    if inCallerMode == .userMode then
-      outResult = .safeFromProcessorUserMode
-    else
-      outResult = .safeFromProcessorPrivilegedMode
-    end
   case section :
     if inCallerMode == .userMode then
       outResult = .sectionFromProcessorUserMode
-    elsif (inCallerMode == .primitiveMode) || (inCallerMode == .sectionMode) || (inCallerMode == .initMode) then
+    elsif (inCallerMode == .primitiveMode) || (inCallerMode == .sectionMode) || (inCallerMode == .initMode) || (inCallerMode == .guardMode) then
       outResult = .sectionFromProcessorPrivilegedMode
     else
       error inErrorLocation : "a section cannot be called from " + inCallerMode + " mode" : outResult
@@ -94,18 +69,16 @@ func checkMode
       case userMode :
         ok = inCalleeMode == .anyMode
       case sectionMode :
-        ok = (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
-      case serviceMode :
-        ok = (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
-      case primitiveMode :
-        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
-      case guardMode :
-        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
-      case panicMode, initMode :
-        ok = (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
-      case bootMode :
-      case safeMode :
         ok = inCalleeMode == .anyMode
+      case serviceMode :
+        ok = (inCalleeMode == .sectionMode) || (inCalleeMode == .anyMode)
+      case primitiveMode :
+        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .anyMode)
+      case guardMode :
+        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .anyMode)
+      case panicMode, initMode :
+        ok = (inCalleeMode == .anyMode)
+      case bootMode :
       case anyMode :
       end
     end
@@ -123,7 +96,7 @@ getter @mode controlRegisterAccess ?let @bool inIsAccessibleInUserMode -> @bool 
   switch self
   case userMode, anyMode :
     result = inIsAccessibleInUserMode
-  case sectionMode, serviceMode, primitiveMode, panicMode, bootMode, initMode, safeMode :
+  case sectionMode, serviceMode, primitiveMode, panicMode, bootMode, initMode :
     result = true
   case guardMode :
     result = false

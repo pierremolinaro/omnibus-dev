@@ -2437,6 +2437,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorMap_2D_e
 void extensionSetter_addFunction (class GALGAS_propertyMap & ioObject,
                                   const class GALGAS_string constin_inReceiverTypeName,
                                   const class GALGAS_string constin_inMethodName,
+                                  const class GALGAS_bool constin_inIsSafe,
                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
                                   class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
                                   class C_Compiler * inCompiler

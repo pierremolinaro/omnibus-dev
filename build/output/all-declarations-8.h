@@ -274,16 +274,6 @@ class GALGAS_string function_llvmNameForPrimitiveImplementation (const class GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Function 'llvmNameForSafeImplementation'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForSafeImplementation (const class GALGAS_string & constinArgument0,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                     Function 'llvmNameForSectionImplementation'                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

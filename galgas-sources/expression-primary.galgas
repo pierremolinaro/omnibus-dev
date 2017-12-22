@@ -395,6 +395,7 @@ proc procAnalyzeAccesListInExpression
           !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
           !mode:inMode
+          !routineAttributes:inRoutineAttributes
           !?temporary:ioTemporaries
           !?staticStringMap:ioGlobalLiteralStringMap
           !?variableMap:ioUniversalMap
@@ -581,6 +582,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
           !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
           !mode:inMode
+          !routineAttributes:inRoutineAttributes
           !?temporary:ioTemporaries
           !?staticStringMap:ioGlobalLiteralStringMap
           !?variableMap:ioUniversalMap
@@ -679,6 +681,7 @@ private proc handleFunctionCallInExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -713,6 +716,7 @@ private proc handleFunctionCallInExpression
     #--- Analyze effective parameters
       analyzeEffectiveParameters (
         !self:inSelfType
+        !routineAttributes:inRoutineAttributes
         !formal:routineDescriptor.signature
         !effective:inArguments
         !errorLocation:inMethodName.location
@@ -763,6 +767,7 @@ private proc handleFunctionCallInExpression
         @procCallEffectiveParameterListIR effectiveParameterListIR = {}
         analyzeEffectiveParameters (
           !self:inSelfType
+          !routineAttributes:inRoutineAttributes
           !formal:descriptor.signature
           !effective:inArguments
           !errorLocation:inMethodName.location

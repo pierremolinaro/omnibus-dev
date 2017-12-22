@@ -123,6 +123,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     analyzeEffectiveParameters (
       !self:inSelfType
+      !routineAttributes:inRoutineAttributes
       !formal:formalSignature
       !effective:mArguments
       !errorLocation:mStandaloneFunctionName.location

@@ -35,14 +35,7 @@ syntax extension plm_syntax {
 
   rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
     <system_routine_prefix> ?let public
-    @routineKind routineKind
-    select
-      $section$
-      routineKind = .section
-    or
-      $safe$
-      routineKind = .safe
-    end
+    $section$
     $identifier$ ?let name
     @lstringlist attributeList = {}
     repeat
@@ -63,7 +56,7 @@ syntax extension plm_syntax {
     $}$
     ioSVCListAST +=
       !name
-      !routineKind
+      !.section
       !public
       !attributeList
       !formalArgumentList
@@ -147,9 +140,12 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !svc.mReturnTypeName ?let returnTypeProxy]
   #--- Attributes
     var mutating = false
+    var safe = false
     for (attribute) in svc.mAttributeList do
       if attribute.string == mutatingAttribute () then
         mutating = true    
+      elsif attribute.string == safeAttribute () then
+        safe = true    
       end
     end
   #--- Enter in context
@@ -165,6 +161,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
         !returnTypeProxy:returnTypeProxy
         !canAccessProperties:true
         !canMutateProperties:mutating
+        !safe:safe
       }
     ]
   end
@@ -183,6 +180,7 @@ method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis
   for svc in self do
     var mutating = false
     var noUnusedWarning = false
+    var isSafe = false
     for (attribute) in svc.mAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if noUnusedWarning then
@@ -194,6 +192,11 @@ method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis
           error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
         end
         mutating = true    
+      elsif attribute.string == safeAttribute () then
+        if isSafe then
+          error attribute : "duplicated @" + safeAttribute () + " attribute" fixit { remove }
+        end
+        isSafe = true    
       else
         error attribute 
         : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + mutatingAttribute ()
@@ -205,8 +208,11 @@ method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis
     case section : mode = .sectionMode
     case primitive : mode = .primitiveMode
     case service : mode = .serviceMode
-    case safe : mode = .safeMode
     case function (*) : error svc.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
+    end
+    @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable
+    if not isSafe then
+      attributes = attributes | .panicAllowed
     end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
@@ -217,7 +223,7 @@ method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis
       !returnTypeName:svc.mReturnTypeName
       !svc.mInstructionList
       !svc.mEndOfInstructionListLocation
-      !routineAttributes:.mutating | .directPropertyAccess | .controlRegisterReadable
+      !routineAttributes:attributes
       !warnIfUnused:not noUnusedWarning
       !globalFunction:true
       !context:inSemanticContext
@@ -314,7 +320,7 @@ method @routineMapIR svcCodeGeneration
       let svcCallName = llvmNameForSVCCall (!svc.mRoutineNameForGeneration !svc.mKind)
       let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineNameForGeneration !svc.mKind)
       switch svc.mKind
-      case section, safe :
+      case section :
         ioSectionList +=
           !svcCallName
           !svcImplementationName

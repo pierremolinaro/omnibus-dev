@@ -244,6 +244,7 @@ override method @syncInstructionAST analyze
           end
           analyzeGuardCall (
             !self:inSelfType
+            !routineAttributes:inRoutineAttributes
             !receiver:currentObject
             !guardName:guardName
             !effective:parameterList
@@ -262,6 +263,7 @@ override method @syncInstructionAST analyze
       elsif [nameList length] == 1 then # Standalone guard: g (…)
         analyzeStandaloneGuardCall (
           !self:inSelfType
+          !routineAttributes:inRoutineAttributes
           !guardName:[nameList mValueAtIndex !0]
           !effective:parameterList
           !callerForInvocationGraph:inCallerNameForInvocationGraph
@@ -295,6 +297,7 @@ override method @syncInstructionAST analyze
         end
         analyzeGuardCall (
           !self:inSelfType
+          !routineAttributes:inRoutineAttributes
           !receiver:currentObjectIR
           !guardName:guardName
           !effective:parameterList
@@ -362,6 +365,7 @@ override method @syncInstructionAST analyze
 
 proc analyzeGuardCall
   ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?receiver:let @objectIR inReceiver
   ?guardName:let @lstring inGuardName
   ?effective:let @effectiveArgumentListAST inEffectiveParameterList
@@ -394,6 +398,7 @@ proc analyzeGuardCall
     outEffectiveParameterListIR = {!.outputInput !inReceiver}
     analyzeEffectiveParameters (
       !self:inSelfType
+      !routineAttributes:inRoutineAttributes
       !formal:formalSignature
       !effective:inEffectiveParameterList
       !errorLocation:inGuardName.location
@@ -414,6 +419,7 @@ proc analyzeGuardCall
 
 proc analyzeStandaloneGuardCall
   ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?guardName:let @lstring inGuardName
   ?effective:let @effectiveArgumentListAST inEffectiveParameterList
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -451,6 +457,7 @@ proc analyzeStandaloneGuardCall
   outEffectiveParameterListIR = {}
   analyzeEffectiveParameters (
     !self:inSelfType
+    !routineAttributes:inRoutineAttributes
     !formal:formalSignature
     !effective:inEffectiveParameterList
     !errorLocation:inGuardName.location

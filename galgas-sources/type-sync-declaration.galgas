@@ -178,9 +178,12 @@ override method @syncDeclarationAST enterInContext
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
   #--- Attributes
     var mutating = false
+    var safe = false
     for (attribute) in system.mAttributeList do
       if attribute.string == mutatingAttribute () then
         mutating = true    
+      elsif attribute.string == safeAttribute () then
+        safe = true    
       end
     end
   #--- Routine descriptor
@@ -192,6 +195,7 @@ override method @syncDeclarationAST enterInContext
       !returnTypeProxy:returnTypeProxy
       !canAccessProperties:true
       !canMutateProperties:canMutateProperties
+      !safe:safe
     }
   #--- Enter in structure map
     [!?propertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]

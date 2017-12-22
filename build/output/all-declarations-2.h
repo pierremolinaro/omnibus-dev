@@ -1337,6 +1337,8 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
 
   public : GALGAS_bool mProperty_canMutateProperties ;
 
+  public : GALGAS_bool mProperty_safe ;
+
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -1354,7 +1356,8 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
                                      const GALGAS_routineTypedSignature & in_signature,
                                      const GALGAS_unifiedTypeMap_2D_proxy & in_returnTypeProxy,
                                      const GALGAS_bool & in_canAccessProperties,
-                                     const GALGAS_bool & in_canMutateProperties) ;
+                                     const GALGAS_bool & in_canMutateProperties,
+                                     const GALGAS_bool & in_safe) ;
 
 //-- Start of generic part --*
 
@@ -1373,7 +1376,8 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
                                                                   const class GALGAS_routineTypedSignature & inOperand3,
                                                                   const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
                                                                   const class GALGAS_bool & inOperand5,
-                                                                  const class GALGAS_bool & inOperand6
+                                                                  const class GALGAS_bool & inOperand6,
+                                                                  const class GALGAS_bool & inOperand7
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1399,6 +1403,8 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_returnTypeProxy (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_routineKind (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_safe (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineTypedSignature getter_signature (LOCATION_ARGS) const ;
 
@@ -5942,16 +5948,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineTypedSignatu
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Extension getter '@mode panicAllowed' (as function)                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool extensionGetter_panicAllowed (const class GALGAS_mode & inObject,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                    Extension getter '@mode string' (as function)                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6365,6 +6361,8 @@ class GALGAS_routineAttributes : public AC_GALGAS_root {
 
   public : static class GALGAS_routineAttributes constructor_none (LOCATION_ARGS) ;
 
+  public : static class GALGAS_routineAttributes constructor_panicAllowed (LOCATION_ARGS) ;
+
 //--------------------------------- & operator
   public : VIRTUAL_IN_DEBUG GALGAS_routineAttributes operator_and (const GALGAS_routineAttributes & inOperand
                                                                    COMMA_LOCATION_ARGS) const ;
@@ -6410,6 +6408,8 @@ class GALGAS_routineAttributes : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mutating (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_none (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_panicAllowed (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -8926,7 +8926,8 @@ class GALGAS_decoratedFunction : public GALGAS_abstractDecoratedDeclaration {
                                                                   const class GALGAS_instructionListAST & inOperand6,
                                                                   const class GALGAS_location & inOperand7,
                                                                   const class GALGAS_bool & inOperand8,
-                                                                  const class GALGAS_bool & inOperand9
+                                                                  const class GALGAS_bool & inOperand9,
+                                                                  const class GALGAS_bool & inOperand10
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -8948,6 +8949,10 @@ class GALGAS_decoratedFunction : public GALGAS_abstractDecoratedDeclaration {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionReturnTypeName (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsGlobalProcedure (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSafe (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mPublicFunction (LOCATION_ARGS) const ;
@@ -8955,8 +8960,6 @@ class GALGAS_decoratedFunction : public GALGAS_abstractDecoratedDeclaration {
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSelfTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_misGlobalProcedure (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -8986,7 +8989,8 @@ class cPtr_decoratedFunction : public cPtr_abstractDecoratedDeclaration {
   public : GALGAS_instructionListAST mProperty_mFunctionInstructionList ;
   public : GALGAS_location mProperty_mEndOfFunctionDeclaration ;
   public : GALGAS_bool mProperty_mWarnIfUnused ;
-  public : GALGAS_bool mProperty_misGlobalProcedure ;
+  public : GALGAS_bool mProperty_mIsGlobalProcedure ;
+  public : GALGAS_bool mProperty_mIsSafe ;
 
 //--- Constructor
   public : cPtr_decoratedFunction (const GALGAS_string & in_mSelfTypeName,
@@ -8998,7 +9002,8 @@ class cPtr_decoratedFunction : public cPtr_abstractDecoratedDeclaration {
                                    const GALGAS_instructionListAST & in_mFunctionInstructionList,
                                    const GALGAS_location & in_mEndOfFunctionDeclaration,
                                    const GALGAS_bool & in_mWarnIfUnused,
-                                   const GALGAS_bool & in_misGlobalProcedure
+                                   const GALGAS_bool & in_mIsGlobalProcedure,
+                                   const GALGAS_bool & in_mIsSafe
                                    COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -9014,7 +9019,8 @@ class cPtr_decoratedFunction : public cPtr_abstractDecoratedDeclaration {
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfFunctionDeclaration (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_misGlobalProcedure (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsGlobalProcedure (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsSafe (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -9093,6 +9099,8 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
 
   public : GALGAS_bool mProperty_mIsExported ;
 
+  public : GALGAS_bool mProperty_mIsSafe ;
+
   public : GALGAS_routineFormalArgumentListAST mProperty_mFormalArgumentList ;
 
   public : GALGAS_location mProperty_mEndOfProcLocation ;
@@ -9111,6 +9119,7 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
   public : GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mName,
                                                                   const GALGAS_mode & in_mExecutionMode,
                                                                   const GALGAS_bool & in_mIsExported,
+                                                                  const GALGAS_bool & in_mIsSafe,
                                                                   const GALGAS_routineFormalArgumentListAST & in_mFormalArgumentList,
                                                                   const GALGAS_location & in_mEndOfProcLocation) ;
 
@@ -9128,8 +9137,9 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
   public : static class GALGAS_requiredProcedureDeclarationListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                                const class GALGAS_mode & inOperand1,
                                                                                                const class GALGAS_bool & inOperand2,
-                                                                                               const class GALGAS_routineFormalArgumentListAST & inOperand3,
-                                                                                               const class GALGAS_location & inOperand4
+                                                                                               const class GALGAS_bool & inOperand3,
+                                                                                               const class GALGAS_routineFormalArgumentListAST & inOperand4,
+                                                                                               const class GALGAS_location & inOperand5
                                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -9151,6 +9161,8 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
   public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mFormalArgumentList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsExported (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSafe (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mName (LOCATION_ARGS) const ;
 
@@ -9177,6 +9189,8 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
 
   public : GALGAS_mode mProperty_mMode ;
 
+  public : GALGAS_lstringlist mProperty_mAttributeList ;
+
   public : GALGAS_routineFormalArgumentListAST mProperty_mProcFormalArgumentList ;
 
   public : GALGAS_lstring mProperty_mReturnTypeName ;
@@ -9198,6 +9212,7 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
 //--------------------------------- Native constructor
   public : GALGAS_externProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mExternProcedureName,
                                                                 const GALGAS_mode & in_mMode,
+                                                                const GALGAS_lstringlist & in_mAttributeList,
                                                                 const GALGAS_routineFormalArgumentListAST & in_mProcFormalArgumentList,
                                                                 const GALGAS_lstring & in_mReturnTypeName,
                                                                 const GALGAS_lstring & in_mRoutineNameForGeneration,
@@ -9216,10 +9231,11 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_externProcedureDeclarationListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                              const class GALGAS_mode & inOperand1,
-                                                                                             const class GALGAS_routineFormalArgumentListAST & inOperand2,
-                                                                                             const class GALGAS_lstring & inOperand3,
+                                                                                             const class GALGAS_lstringlist & inOperand2,
+                                                                                             const class GALGAS_routineFormalArgumentListAST & inOperand3,
                                                                                              const class GALGAS_lstring & inOperand4,
-                                                                                             const class GALGAS_location & inOperand5
+                                                                                             const class GALGAS_lstring & inOperand5,
+                                                                                             const class GALGAS_location & inOperand6
                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -9234,6 +9250,8 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfProcLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mExternProcedureName (LOCATION_ARGS) const ;

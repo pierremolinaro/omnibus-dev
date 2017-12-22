@@ -2458,12 +2458,13 @@ void routine_handleFunctionCallInExpression (const class GALGAS_lstring constinA
                                              const class GALGAS_lstring constinArgument3,
                                              const class GALGAS_semanticContext constinArgument4,
                                              const class GALGAS_mode constinArgument5,
-                                             class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                             class GALGAS_staticStringMap & ioArgument7,
-                                             class GALGAS_universalValuedObjectMap & ioArgument8,
-                                             class GALGAS_allocaList & ioArgument9,
-                                             const class GALGAS_effectiveArgumentListAST constinArgument10,
-                                             class GALGAS_instructionListIR & ioArgument11,
+                                             const class GALGAS_routineAttributes constinArgument6,
+                                             class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                             class GALGAS_staticStringMap & ioArgument8,
+                                             class GALGAS_universalValuedObjectMap & ioArgument9,
+                                             class GALGAS_allocaList & ioArgument10,
+                                             const class GALGAS_effectiveArgumentListAST constinArgument11,
+                                             class GALGAS_instructionListIR & ioArgument12,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 

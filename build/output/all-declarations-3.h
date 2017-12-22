@@ -3360,12 +3360,10 @@ class GALGAS_calleeKindIR : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_function,
     kEnum_primitiveFromProcessorUserMode,
-    kEnum_safeFromProcessorUserMode,
     kEnum_sectionFromProcessorUserMode,
     kEnum_serviceFromProcessorUserMode,
     kEnum_primitiveFromProcessorPrivilegedMode,
     kEnum_sectionFromProcessorPrivilegedMode,
-    kEnum_safeFromProcessorPrivilegedMode,
     kEnum_serviceFromProcessorPrivilegedMode
   } enumeration ;
   
@@ -3394,10 +3392,6 @@ class GALGAS_calleeKindIR : public AC_GALGAS_root {
 
   public : static class GALGAS_calleeKindIR constructor_primitiveFromProcessorUserMode (LOCATION_ARGS) ;
 
-  public : static class GALGAS_calleeKindIR constructor_safeFromProcessorPrivilegedMode (LOCATION_ARGS) ;
-
-  public : static class GALGAS_calleeKindIR constructor_safeFromProcessorUserMode (LOCATION_ARGS) ;
-
   public : static class GALGAS_calleeKindIR constructor_sectionFromProcessorPrivilegedMode (LOCATION_ARGS) ;
 
   public : static class GALGAS_calleeKindIR constructor_sectionFromProcessorUserMode (LOCATION_ARGS) ;
@@ -3423,10 +3417,6 @@ class GALGAS_calleeKindIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPrimitiveFromProcessorPrivilegedMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPrimitiveFromProcessorUserMode (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSafeFromProcessorPrivilegedMode (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSafeFromProcessorUserMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSectionFromProcessorPrivilegedMode (LOCATION_ARGS) const ;
 

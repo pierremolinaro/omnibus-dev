@@ -63,19 +63,20 @@ void routine_handleArraySubscript (const class GALGAS_PLMType constinArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
-                               const class GALGAS_objectIR constinArgument1,
-                               const class GALGAS_lstring constinArgument2,
-                               const class GALGAS_effectiveArgumentListAST constinArgument3,
-                               const class GALGAS_lstring constinArgument4,
-                               const class GALGAS_semanticContext constinArgument5,
-                               const class GALGAS_mode constinArgument6,
-                               class GALGAS_semanticTemporariesStruct & ioArgument7,
-                               class GALGAS_staticStringMap & ioArgument8,
-                               class GALGAS_universalValuedObjectMap & ioArgument9,
-                               class GALGAS_allocaList & ioArgument10,
-                               class GALGAS_instructionListIR & ioArgument11,
-                               class GALGAS_procCallEffectiveParameterListIR & outArgument12,
-                               class GALGAS_lstring & outArgument13,
+                               const class GALGAS_routineAttributes constinArgument1,
+                               const class GALGAS_objectIR constinArgument2,
+                               const class GALGAS_lstring constinArgument3,
+                               const class GALGAS_effectiveArgumentListAST constinArgument4,
+                               const class GALGAS_lstring constinArgument5,
+                               const class GALGAS_semanticContext constinArgument6,
+                               const class GALGAS_mode constinArgument7,
+                               class GALGAS_semanticTemporariesStruct & ioArgument8,
+                               class GALGAS_staticStringMap & ioArgument9,
+                               class GALGAS_universalValuedObjectMap & ioArgument10,
+                               class GALGAS_allocaList & ioArgument11,
+                               class GALGAS_instructionListIR & ioArgument12,
+                               class GALGAS_procCallEffectiveParameterListIR & outArgument13,
+                               class GALGAS_lstring & outArgument14,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -86,18 +87,19 @@ void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeStandaloneGuardCall (const class GALGAS_PLMType constinArgument0,
-                                         const class GALGAS_lstring constinArgument1,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument2,
-                                         const class GALGAS_lstring constinArgument3,
-                                         const class GALGAS_semanticContext constinArgument4,
-                                         const class GALGAS_mode constinArgument5,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                         class GALGAS_staticStringMap & ioArgument7,
-                                         class GALGAS_universalValuedObjectMap & ioArgument8,
-                                         class GALGAS_allocaList & ioArgument9,
-                                         class GALGAS_instructionListIR & ioArgument10,
-                                         class GALGAS_procCallEffectiveParameterListIR & outArgument11,
-                                         class GALGAS_lstring & outArgument12,
+                                         const class GALGAS_routineAttributes constinArgument1,
+                                         const class GALGAS_lstring constinArgument2,
+                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
+                                         const class GALGAS_lstring constinArgument4,
+                                         const class GALGAS_semanticContext constinArgument5,
+                                         const class GALGAS_mode constinArgument6,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                         class GALGAS_staticStringMap & ioArgument8,
+                                         class GALGAS_universalValuedObjectMap & ioArgument9,
+                                         class GALGAS_allocaList & ioArgument10,
+                                         class GALGAS_instructionListIR & ioArgument11,
+                                         class GALGAS_procCallEffectiveParameterListIR & outArgument12,
+                                         class GALGAS_lstring & outArgument13,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -226,16 +228,6 @@ class GALGAS_string function_llvmDriverStringFromName (const class GALGAS_string
 class GALGAS_string function_llvmNameForPrimitiveCall (const class GALGAS_string & constinArgument0,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'llvmNameForSafeCall'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForSafeCall (const class GALGAS_string & constinArgument0,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
