@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Control Registers of %!PROJECT_NAME%</title>
 <style type="text/css">body {
-  font-family: Georgia, sans-serif ;
   font-size: small ;
 }
 
@@ -79,34 +78,43 @@ end
 <tr><td class="result_title">Control Register Name</td><td class="result_title">PLM Type</td><td class="result_title">Address</td><td class="result_title">Value</td></tr>\n%
 for () in CONTROL_REGISTER_GROUP_MAP : group_ do
   for () in group_mControlRegisterMap do
-    %<tr class="result_line"><td>%
     if mArraySize == 0 then
+      %<tr class="result_line"><td>%
       %<a name="%!group_lkey.string + "." + lkey%">%!group_lkey.string + "." + lkey%</a>%
-    else 
-      for () in arrayIndexListFor (!size:mArraySize) do
-        %<a name="%!group_lkey.string + "." + lkey% [%![mValue string]%]">%!group_lkey.string + "." + lkey% [%![mValue string]%]</a><br/>%
-      end
-    end
-    %</td><td class="address">$%!mType.plmTypeName%</td><td class="address">%
-    if mArraySize == 0 then
-    ![mAddress hexString]
+      %</td><td class="address">$%!mType.plmTypeName%</td><td class="address">%
+      ![mAddress hexString]
+      %</td><td>%
+      if [mControlRegisterFieldList length] > 0 then
+        %<table class="fields">%
+          %<tr>%!fieldIndexColumns (!mRegisterBitCount) %</tr>%
+          %<tr>%
+          for > () in mControlRegisterFieldList do
+            %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
+          end
+          %</tr>%
+        %</table>%
+      end  
+      %</td></tr>\n%
     else
       for () in arrayIndexListFor (!size:mArraySize) do
+        %<tr class="result_line"><td>%
+        %<a name="%!group_lkey.string + "." + lkey% [%![mValue string]%]">%!group_lkey.string + "." + lkey% [%![mValue string]%]</a><br/>%
+        %</td><td class="address">$%!mType.plmTypeName%</td><td class="address">%
         ![mAddress + mValue * mElementArraySize hexString] + "<br/>"
+        %</td><td>%
+        if [mControlRegisterFieldList length] > 0 then
+          %<table class="fields">%
+            %<tr>%!fieldIndexColumns (!mRegisterBitCount) %</tr>%
+            %<tr>%
+            for > () in mControlRegisterFieldList do
+              %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
+            end
+            %</tr>%
+          %</table>%
+        end  
+        %</td></tr>\n%
       end
     end
-    %</td><td>%
-    if [mControlRegisterFieldList length] > 0 then
-      %<table class="fields">%
-        %<tr>%!fieldIndexColumns (!mRegisterBitCount) %</tr>%
-        %<tr>%
-        for > () in mControlRegisterFieldList do
-          %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
-        end
-        %</tr>%
-      %</table>%
-    end  
-  %</td></tr>\n%
   end
 end%
 </table>

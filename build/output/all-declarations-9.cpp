@@ -66,10 +66,10 @@ GALGAS_string function_fieldIndexColumns (const GALGAS_uint & constinArgument_in
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
   result_result = GALGAS_string::makeEmptyString () ;
-  cEnumerator_range enumerator_23772 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inBitCount.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 596))), kENUMERATION_DOWN) ;
-  while (enumerator_23772.hasCurrentObject ()) {
-    result_result.plusAssign_operation(GALGAS_string ("<td class=\"fields\">").add_operation (enumerator_23772.current (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 597)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 597)).add_operation (GALGAS_string ("</td>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 597)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 597)) ;
-    enumerator_23772.gotoNextObject () ;
+  cEnumerator_range enumerator_23773 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inBitCount.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 596))), kENUMERATION_DOWN) ;
+  while (enumerator_23773.hasCurrentObject ()) {
+    result_result.plusAssign_operation(GALGAS_string ("<td class=\"fields\">").add_operation (enumerator_23773.current (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 597)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 597)).add_operation (GALGAS_string ("</td>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 597)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 597)) ;
+    enumerator_23773.gotoNextObject () ;
   }
 //---
   return result_result ;
@@ -118,10 +118,10 @@ GALGAS_uintlist function_arrayIndexListFor (const GALGAS_uint & constinArgument_
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_uintlist result_result ; // Returned variable
   result_result = GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("declaration-control-register.galgas", 604)) ;
-  cEnumerator_range enumerator_24057 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inSize.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 605))), kENUMERATION_UP) ;
-  while (enumerator_24057.hasCurrentObject ()) {
-    result_result.addAssign_operation (enumerator_24057.current (HERE)  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 606)) ;
-    enumerator_24057.gotoNextObject () ;
+  cEnumerator_range enumerator_24058 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inSize.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 605))), kENUMERATION_UP) ;
+  while (enumerator_24058.hasCurrentObject ()) {
+    result_result.addAssign_operation (enumerator_24058.current (HERE)  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 606)) ;
+    enumerator_24058.gotoNextObject () ;
   }
 //---
   return result_result ;
