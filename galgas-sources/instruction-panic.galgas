@@ -51,7 +51,7 @@ override method @panicInstructionAST analyze
 {
 #--- Panic allowed ?
   if inCurrentMode == .panicMode then
-    error mInstructionLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+    error mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR unusedInstructionListIR = {}

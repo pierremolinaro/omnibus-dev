@@ -126,9 +126,6 @@ syntax extension plm_syntax {
     or
       $guard$
       outMode = .guardMode
-    or
-      $safe$
-      outMode = .safeMode
     end
   }
 
@@ -231,6 +228,7 @@ method @functionDeclarationListAST enterFunctionInContext
     var warnIfUnused = true
     var globalFunction = false
     var canMutateProperties = false
+    var isSafe = false
     for (attribute) in function.mFunctionAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
@@ -247,9 +245,15 @@ method @functionDeclarationListAST enterFunctionInContext
           error attribute : "duplicated @" + mutatingAttribute () + " attribute"
         end
         canMutateProperties = true
+      elsif attribute.string == safeAttribute () then
+        if isSafe then
+          error attribute : "duplicated attribute" fixit { remove }
+        else
+          isSafe = true
+        end
       else
         error attribute : "unknown attribute; available attributes are @"
-          + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + ", @" + exportedAttribute ()
+          + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + ", @" + exportedAttribute ()+ ", @" + safeAttribute ()
       end
     end
     let canAccessProperties = function.mMode != .userMode
@@ -272,6 +276,7 @@ method @functionDeclarationListAST enterFunctionInContext
         !returnTypeProxy:returnTypeProxy
         !canAccessProperties:canAccessProperties
         !canMutateProperties:canMutateProperties
+        !safe:isSafe
       }
     ]
   #---------------- Add decorated declaration
@@ -286,7 +291,7 @@ method @functionDeclarationListAST enterFunctionInContext
       !function.mEndOfFunctionDeclaration
       !warnIfUnused
       !globalFunction
-      
+      !isSafe
     }
   end
 }
@@ -305,6 +310,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
     end
     let exportedFunction = [attributeSet hasKey !exportedAttribute ()]
     let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
+    let safe = [attributeSet hasKey !safeAttribute ()]
     let canAccessProperties = function.mMode != .userMode
   #--- Signature
     routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
@@ -325,6 +331,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !returnTypeProxy:returnTypeProxy
       !canAccessProperties:canAccessProperties
       !canMutateProperties:canMutateProperties
+      !safe:safe
     }
   #--- Enter in structure map
     [!?ioPropertyMap insertKey !routineMangledName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
@@ -345,7 +352,8 @@ class @decoratedFunction : @abstractDecoratedDeclaration {
   @instructionListAST mFunctionInstructionList
   @location mEndOfFunctionDeclaration
   @bool mWarnIfUnused
-  @bool misGlobalProcedure
+  @bool mIsGlobalProcedure
+  @bool mIsSafe
 }
 
 #·······················································································································
@@ -360,6 +368,10 @@ override method @decoratedFunction semanticAnalysis
   else
     [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap ![mSelfTypeName nowhere]} type]
   end
+  @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable
+  if not mIsSafe then
+    attributes = attributes | .panicAllowed
+  end
   routineSemanticAnalysis (
     !receiverType:receiverType
     !.function {!executionMode:mMode}
@@ -369,9 +381,9 @@ override method @decoratedFunction semanticAnalysis
     !returnTypeName:mFunctionReturnTypeName
     !mFunctionInstructionList
     !mEndOfFunctionDeclaration
-    !routineAttributes:.mutating | .directPropertyAccess | .controlRegisterReadable
+    !routineAttributes:attributes
     !warnIfUnused:mWarnIfUnused
-    !globalFunction:misGlobalProcedure
+    !globalFunction:mIsGlobalProcedure
     !context:inSemanticContext
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct

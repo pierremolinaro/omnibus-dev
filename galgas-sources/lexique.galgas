@@ -53,7 +53,6 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "public",
   "registers",
   "required",
-  "safe",
   "section",
   "self",
   "service",

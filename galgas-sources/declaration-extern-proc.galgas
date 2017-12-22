@@ -5,6 +5,7 @@
 list @externProcedureDeclarationListAST {
   @lstring mExternProcedureName
   @mode mMode
+  @lstringlist mAttributeList
   @routineFormalArgumentListAST mProcFormalArgumentList
   @lstring mReturnTypeName
   @lstring mRoutineNameForGeneration
@@ -25,7 +26,7 @@ syntax extension plm_syntax {
       !?ioAST
       ?mode:let @mode mode
       ?name:let procName
-      ?attributes:let unused attributeList
+      ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
     @lstring returnTypeName
     select
@@ -36,7 +37,7 @@ syntax extension plm_syntax {
     end
     $:$
     $"string"$ ?let llvmName
-    ioAST.mExternProcListAST += !procName !mode !procFormalArgumentList !returnTypeName !llvmName !.here
+    ioAST.mExternProcListAST += !procName !mode !attributeList !procFormalArgumentList !returnTypeName !llvmName !.here
   }
 
   #·····················································································································
@@ -76,6 +77,13 @@ method @externProcedureDeclarationListAST enterExternProcInContext
 method @externProcedureDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
 #--- Signature
   routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
+#---
+  var safe = false
+  for (attribute) in mAttributeList do
+    if attribute.string == safeAttribute () then
+      safe = true
+    end
+  end
 #--- Enter in context
   [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnTypeProxy]
   [!?ioContext.mRoutineMapForContext insertRoutine
@@ -90,6 +98,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
       !returnTypeProxy:returnTypeProxy
       !canAccessProperties:false
       !canMutateProperties:false
+      !safe:safe
     }
   ]
 }

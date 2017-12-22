@@ -127,7 +127,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     if inCurrentMode == .panicMode then
       error mOperatorLocation
-        : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+        : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
       binaryOperator = .subNoOVF

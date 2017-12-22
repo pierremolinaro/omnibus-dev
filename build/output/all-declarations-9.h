@@ -519,18 +519,19 @@ class GALGAS_lstring function_routineMangledNameFromCall (const class GALGAS_str
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeEffectiveParameters (const class GALGAS_PLMType constinArgument0,
-                                         const class GALGAS_routineTypedSignature constinArgument1,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument2,
-                                         const class GALGAS_location constinArgument3,
-                                         const class GALGAS_lstring constinArgument4,
-                                         const class GALGAS_semanticContext constinArgument5,
-                                         const class GALGAS_mode constinArgument6,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                         class GALGAS_staticStringMap & ioArgument8,
-                                         class GALGAS_universalValuedObjectMap & ioArgument9,
-                                         class GALGAS_allocaList & ioArgument10,
-                                         class GALGAS_instructionListIR & ioArgument11,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
+                                         const class GALGAS_routineAttributes constinArgument1,
+                                         const class GALGAS_routineTypedSignature constinArgument2,
+                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
+                                         const class GALGAS_location constinArgument4,
+                                         const class GALGAS_lstring constinArgument5,
+                                         const class GALGAS_semanticContext constinArgument6,
+                                         const class GALGAS_mode constinArgument7,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument8,
+                                         class GALGAS_staticStringMap & ioArgument9,
+                                         class GALGAS_universalValuedObjectMap & ioArgument10,
+                                         class GALGAS_allocaList & ioArgument11,
+                                         class GALGAS_instructionListIR & ioArgument12,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument13,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 

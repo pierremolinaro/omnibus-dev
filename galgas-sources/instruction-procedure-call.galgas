@@ -138,7 +138,7 @@ list @procEffectiveParameterList {
 
 override method @standAloneProcedureCallInstructionAST analyze
   ?self:let @PLMType inSelfType
-  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -177,6 +177,7 @@ override method @standAloneProcedureCallInstructionAST analyze
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   analyzeEffectiveParameters (
     !self:inSelfType
+    !routineAttributes:inRoutineAttributes
     !formal:routineDescriptor.signature
     !effective:mArguments
     !errorLocation:mSandAloneRoutineName.location
@@ -338,6 +339,7 @@ override method @procedureCallInstructionAST analyze
       #--- Analyze effective parameters
         analyzeEffectiveParameters (
           !self:inSelfType
+          !routineAttributes:inRoutineAttributes
           !formal:formalSignature
           !effective:mArguments
           !errorLocation:methodName.location
@@ -385,6 +387,7 @@ override method @procedureCallInstructionAST analyze
           @procCallEffectiveParameterListIR effectiveParameterListIR = {}
           analyzeEffectiveParameters (
             !self:inSelfType
+            !routineAttributes:inRoutineAttributes
             !formal:descriptor.signature
             !effective:mArguments
             !errorLocation:methodName.location
@@ -442,12 +445,10 @@ list @procCallEffectiveParameterListIR {
 enum @calleeKindIR {
   case function
   case primitiveFromProcessorUserMode
-  case safeFromProcessorUserMode
   case sectionFromProcessorUserMode
   case serviceFromProcessorUserMode
   case primitiveFromProcessorPrivilegedMode
   case sectionFromProcessorPrivilegedMode
-  case safeFromProcessorPrivilegedMode
   case serviceFromProcessorPrivilegedMode
 }
 

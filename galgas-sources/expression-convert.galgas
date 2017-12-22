@@ -107,8 +107,8 @@ override method @convertExpressionAST analyzeExpression
     ?let expressionResult
   ]  
 #--- 
-  if not [inCurrentMode panicAllowed] then
-    error mTypeName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+  if not [inRoutineAttributes panicAllowed] then
+    error mTypeName : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze type
   let @PLMType resultType = if mTypeName.string == ""

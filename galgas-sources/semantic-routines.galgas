@@ -161,7 +161,6 @@ method @routineMapIR-element llvmCodeGeneration
   switch mKind
   case function (*) : routineName = llvmNameForFunction (!mRoutineNameForGeneration.string)
   case section : routineName = llvmNameForSectionImplementation (!mRoutineNameForGeneration.string)
-  case safe : routineName = llvmNameForSafeImplementation (!mRoutineNameForGeneration.string)
   case service : routineName = llvmNameForServiceImplementation (!mRoutineNameForGeneration.string)
   case primitive : routineName = llvmNameForPrimitiveImplementation (!mRoutineNameForGeneration.string)
   end

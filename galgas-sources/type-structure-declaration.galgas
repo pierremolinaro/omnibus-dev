@@ -82,6 +82,46 @@ syntax extension plm_syntax {
     end
   }
 
+ #·····················································································································
+
+  rule <structure_function> ?!@ast ioAST ?!@functionDeclarationListAST ioProcListAST {
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
+    $func$
+    $identifier$ ?let procName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $@attribute$ ?let attribute
+      attributeList += !attribute
+    end
+    <procedure_formal_arguments>  !?ioAST ?let procFormalArgumentList
+    @lstring returnTypeName
+    select
+      returnTypeName = ["" here]
+    or
+      $->$
+      <type_definition>!?ioAST  ?returnTypeName
+    end
+    ${$
+    <instructionList> !?ioAST ?let instructionList
+    ioProcListAST +=
+      !.anyMode
+      !public
+      !procName
+      !attributeList
+      !procFormalArgumentList
+      !returnTypeName
+      !instructionList
+      !.here
+    $}$
+  }
+
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
@@ -100,7 +140,7 @@ syntax extension plm_syntax {
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
     while
-      <function> !?ioAST !?procedureDeclarationListAST
+      <structure_function> !?ioAST !?procedureDeclarationListAST
     while
       $;$
     end
@@ -296,9 +336,12 @@ override method @structureDeclarationAST enterInContext
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
   #--- Attributes
     var mutating = false
+    var safe = false
     for (attribute) in system.mAttributeList do
       if attribute.string == mutatingAttribute () then
         mutating = true    
+      elsif attribute.string == safeAttribute () then
+        safe = true    
       end
     end
   #--- Routine descriptor
@@ -310,6 +353,7 @@ override method @structureDeclarationAST enterInContext
       !returnTypeProxy:returnTypeProxy
       !canAccessProperties:true
       !canMutateProperties:canMutateProperties
+      !safe:safe
     }
   #--- Enter in structure map
     [!?propertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
@@ -490,7 +534,7 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
 {
   for function in mFunctionDeclarationListAST do
     var warnIfUnused = true
-    var functionAttributes = @routineAttributes.none
+    var functionAttributes = @routineAttributes.panicAllowed | .controlRegisterReadable
     for (attribute) in function.mFunctionAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
@@ -502,6 +546,11 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
           error attribute : "duplicated @" + userAccessAttribute () + " attribute"
         end
         functionAttributes = functionAttributes | .directPropertyAccess   
+      elsif attribute.string == safeAttribute () then
+        if not [functionAttributes panicAllowed] then
+          error attribute : "duplicated @" + safeAttribute () + " attribute"
+        end
+        functionAttributes = functionAttributes - .panicAllowed   
       elsif attribute.string == mutatingAttribute () then
         if [functionAttributes mutating] then
           error attribute : "duplicated @" + mutatingAttribute () + " attribute"
@@ -522,7 +571,7 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
       !returnTypeName:function.mFunctionReturnTypeName
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
-      !routineAttributes:functionAttributes | .controlRegisterReadable
+      !routineAttributes:functionAttributes
       !warnIfUnused:warnIfUnused
       !globalFunction:false
       !context:inContext

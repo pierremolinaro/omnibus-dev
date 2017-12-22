@@ -61,7 +61,6 @@ getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLo
 enum @routineKind {
   case function (@mode executionMode)
   case section
-  case safe
   case service
   case primitive
 }
@@ -72,7 +71,6 @@ getter @routineKind executionMode -> @mode {
   switch self
   case function (mode) : result = mode
   case section : result = .sectionMode
-  case safe : result = .safeMode
   case service : result = .serviceMode
   case primitive : result = .primitiveMode
   end
@@ -88,6 +86,7 @@ struct @routineDescriptor {
   @unifiedTypeMap-proxy returnTypeProxy %selector # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
   @bool canAccessProperties %selector # Routine is declared with @access attribute
   @bool canMutateProperties %selector # Routine is declared with @mutating attribute
+  @bool safe %selector # Routine is declared with @safe attribute
 }
 
 #·······················································································································

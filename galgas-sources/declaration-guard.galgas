@@ -205,7 +205,7 @@ proc guardSemanticAnalysis
   #--- Analyze instruction list
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
-      !routineAttributes:.mutating | .directPropertyAccess
+      !routineAttributes:.mutating | .directPropertyAccess | .panicAllowed
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.guardMode
@@ -238,7 +238,7 @@ proc guardSemanticAnalysis
   #--- Analyze instruction list
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
-      !routineAttributes: .mutating | .directPropertyAccess
+      !routineAttributes: .mutating | .directPropertyAccess | .panicAllowed
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.userMode # Convenience guards instructions are executed in user mode
@@ -393,6 +393,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       #--- Analyze effective parameters
         analyzeEffectiveParameters (
           !self:inSelfType
+          !routineAttributes:inRoutineAttributes
           !formal:formalSignature
           !effective:mArguments
           !errorLocation:methodName.location

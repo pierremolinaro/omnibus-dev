@@ -38,10 +38,6 @@ override method @standaloneRoutineCallIR llvmInstructionCode
     ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionNameForGeneration.string)
   case primitiveFromProcessorPrivilegedMode :
     ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionNameForGeneration.string)
-  case safeFromProcessorUserMode :
-    ioLLVMcode += llvmNameForSafeCall (!mFunctionNameForGeneration.string)
-  case safeFromProcessorPrivilegedMode :
-    ioLLVMcode += llvmNameForSafeImplementation (!mFunctionNameForGeneration.string)
   end
   ioLLVMcode += " ("
   for () in mArgumentList do

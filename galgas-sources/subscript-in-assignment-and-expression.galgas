@@ -52,7 +52,7 @@ proc handleArraySubscriptNew
         !inArraySize
         ?let @bool generatePanicInstruction
       ]
-      if generatePanicInstruction && not [inCurrentMode panicAllowed] then
+      if generatePanicInstruction && not [inRoutineAttributes panicAllowed] then
         error inErrorLocation : "index computation can generate panic"
       end
     end
@@ -123,7 +123,7 @@ proc handleArraySubscript
         !inArraySize
         ?let @bool generatePanicInstruction
       ]
-      if generatePanicInstruction && not [inCurrentMode panicAllowed] then
+      if generatePanicInstruction && not [inRoutineAttributes panicAllowed] then
         error inErrorLocation : "index computation can generate panic" : ioObjectPtr
       end
     end

@@ -94,6 +94,7 @@ syntax extension plm_syntax {
 
 proc analyzeEffectiveParameters
   ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?formal:let @routineTypedSignature inFormalSignature
   ?effective:let @effectiveArgumentListAST inEffectiveParameterList
   ?errorLocation:let @location inErrorLocation
@@ -148,7 +149,7 @@ proc analyzeEffectiveParameters
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
-        !routineAttributes:.none
+        !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:[formal_mTypeProxy type]
         !context:inContext

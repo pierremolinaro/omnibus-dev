@@ -2526,7 +2526,8 @@ mProperty_routineKind (),
 mProperty_signature (),
 mProperty_returnTypeProxy (),
 mProperty_canAccessProperties (),
-mProperty_canMutateProperties () {
+mProperty_canMutateProperties (),
+mProperty_safe () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2542,14 +2543,16 @@ GALGAS_routineDescriptor::GALGAS_routineDescriptor (const GALGAS_bool & inOperan
                                                     const GALGAS_routineTypedSignature & inOperand3,
                                                     const GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
                                                     const GALGAS_bool & inOperand5,
-                                                    const GALGAS_bool & inOperand6) :
+                                                    const GALGAS_bool & inOperand6,
+                                                    const GALGAS_bool & inOperand7) :
 mProperty_isPublic (inOperand0),
 mProperty_exported (inOperand1),
 mProperty_routineKind (inOperand2),
 mProperty_signature (inOperand3),
 mProperty_returnTypeProxy (inOperand4),
 mProperty_canAccessProperties (inOperand5),
-mProperty_canMutateProperties (inOperand6) {
+mProperty_canMutateProperties (inOperand6),
+mProperty_safe (inOperand7) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2560,11 +2563,12 @@ GALGAS_routineDescriptor GALGAS_routineDescriptor::constructor_new (const GALGAS
                                                                     const GALGAS_routineTypedSignature & inOperand3,
                                                                     const GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
                                                                     const GALGAS_bool & inOperand5,
-                                                                    const GALGAS_bool & inOperand6 
+                                                                    const GALGAS_bool & inOperand6,
+                                                                    const GALGAS_bool & inOperand7 
                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_routineDescriptor result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
-    result = GALGAS_routineDescriptor (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
+    result = GALGAS_routineDescriptor (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7) ;
   }
   return result ;
 }
@@ -2594,13 +2598,16 @@ typeComparisonResult GALGAS_routineDescriptor::objectCompare (const GALGAS_routi
   if (result == kOperandEqual) {
     result = mProperty_canMutateProperties.objectCompare (inOperand.mProperty_canMutateProperties) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_safe.objectCompare (inOperand.mProperty_safe) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_routineDescriptor::isValid (void) const {
-  return mProperty_isPublic.isValid () && mProperty_exported.isValid () && mProperty_routineKind.isValid () && mProperty_signature.isValid () && mProperty_returnTypeProxy.isValid () && mProperty_canAccessProperties.isValid () && mProperty_canMutateProperties.isValid () ;
+  return mProperty_isPublic.isValid () && mProperty_exported.isValid () && mProperty_routineKind.isValid () && mProperty_signature.isValid () && mProperty_returnTypeProxy.isValid () && mProperty_canAccessProperties.isValid () && mProperty_canMutateProperties.isValid () && mProperty_safe.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2613,6 +2620,7 @@ void GALGAS_routineDescriptor::drop (void) {
   mProperty_returnTypeProxy.drop () ;
   mProperty_canAccessProperties.drop () ;
   mProperty_canMutateProperties.drop () ;
+  mProperty_safe.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2636,6 +2644,8 @@ void GALGAS_routineDescriptor::description (C_String & ioString,
     mProperty_canAccessProperties.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_canMutateProperties.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_safe.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -2680,6 +2690,12 @@ GALGAS_bool GALGAS_routineDescriptor::getter_canAccessProperties (UNUSED_LOCATIO
 
 GALGAS_bool GALGAS_routineDescriptor::getter_canMutateProperties (UNUSED_LOCATION_ARGS) const {
   return mProperty_canMutateProperties ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_routineDescriptor::getter_safe (UNUSED_LOCATION_ARGS) const {
+  return mProperty_safe ;
 }
 
 
@@ -13594,6 +13610,7 @@ GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureD
 mProperty_mName (),
 mProperty_mExecutionMode (),
 mProperty_mIsExported (),
+mProperty_mIsSafe (),
 mProperty_mFormalArgumentList (),
 mProperty_mEndOfProcLocation () {
 }
@@ -13608,13 +13625,15 @@ GALGAS_requiredProcedureDeclarationListAST_2D_element::~ GALGAS_requiredProcedur
 GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
                                                                                                               const GALGAS_mode & inOperand1,
                                                                                                               const GALGAS_bool & inOperand2,
-                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand3,
-                                                                                                              const GALGAS_location & inOperand4) :
+                                                                                                              const GALGAS_bool & inOperand3,
+                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand4,
+                                                                                                              const GALGAS_location & inOperand5) :
 mProperty_mName (inOperand0),
 mProperty_mExecutionMode (inOperand1),
 mProperty_mIsExported (inOperand2),
-mProperty_mFormalArgumentList (inOperand3),
-mProperty_mEndOfProcLocation (inOperand4) {
+mProperty_mIsSafe (inOperand3),
+mProperty_mFormalArgumentList (inOperand4),
+mProperty_mEndOfProcLocation (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13622,12 +13641,13 @@ mProperty_mEndOfProcLocation (inOperand4) {
 GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                                               const GALGAS_mode & inOperand1,
                                                                                                                               const GALGAS_bool & inOperand2,
-                                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand3,
-                                                                                                                              const GALGAS_location & inOperand4 
+                                                                                                                              const GALGAS_bool & inOperand3,
+                                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand4,
+                                                                                                                              const GALGAS_location & inOperand5 
                                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_requiredProcedureDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_requiredProcedureDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
+    result = GALGAS_requiredProcedureDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
   }
   return result ;
 }
@@ -13646,6 +13666,9 @@ typeComparisonResult GALGAS_requiredProcedureDeclarationListAST_2D_element::obje
     result = mProperty_mIsExported.objectCompare (inOperand.mProperty_mIsExported) ;
   }
   if (result == kOperandEqual) {
+    result = mProperty_mIsSafe.objectCompare (inOperand.mProperty_mIsSafe) ;
+  }
+  if (result == kOperandEqual) {
     result = mProperty_mFormalArgumentList.objectCompare (inOperand.mProperty_mFormalArgumentList) ;
   }
   if (result == kOperandEqual) {
@@ -13657,7 +13680,7 @@ typeComparisonResult GALGAS_requiredProcedureDeclarationListAST_2D_element::obje
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_requiredProcedureDeclarationListAST_2D_element::isValid (void) const {
-  return mProperty_mName.isValid () && mProperty_mExecutionMode.isValid () && mProperty_mIsExported.isValid () && mProperty_mFormalArgumentList.isValid () && mProperty_mEndOfProcLocation.isValid () ;
+  return mProperty_mName.isValid () && mProperty_mExecutionMode.isValid () && mProperty_mIsExported.isValid () && mProperty_mIsSafe.isValid () && mProperty_mFormalArgumentList.isValid () && mProperty_mEndOfProcLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13666,6 +13689,7 @@ void GALGAS_requiredProcedureDeclarationListAST_2D_element::drop (void) {
   mProperty_mName.drop () ;
   mProperty_mExecutionMode.drop () ;
   mProperty_mIsExported.drop () ;
+  mProperty_mIsSafe.drop () ;
   mProperty_mFormalArgumentList.drop () ;
   mProperty_mEndOfProcLocation.drop () ;
 }
@@ -13683,6 +13707,8 @@ void GALGAS_requiredProcedureDeclarationListAST_2D_element::description (C_Strin
     mProperty_mExecutionMode.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mIsExported.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mIsSafe.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mFormalArgumentList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -13707,6 +13733,12 @@ GALGAS_mode GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mExecu
 
 GALGAS_bool GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mIsExported (UNUSED_LOCATION_ARGS) const {
   return mProperty_mIsExported ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mIsSafe (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mIsSafe ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

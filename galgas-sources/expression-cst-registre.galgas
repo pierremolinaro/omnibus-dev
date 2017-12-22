@@ -167,12 +167,12 @@ override method @registerConstantExpressionAST analyzeExpression
         if not unsigned then
           error expressionLocation: "an unsigned integer expression is required here"
         else
-          if (expressionBitCount > fieldBitCount) && not [inCurrentMode panicAllowed] then
+          if (expressionBitCount > fieldBitCount) && not [inRoutineAttributes panicAllowed] then
             error expressionLocation
               : "operations that can generate panic are not allowed here: the expression should be an $uint" + fieldBitCount
           end
         #--- Generate an upper bound check
-          if (expressionBitCount > fieldBitCount) && [inCurrentMode panicAllowed] && not [option plm_options.noPanicGeneration value] then
+          if (expressionBitCount > fieldBitCount) && [inRoutineAttributes panicAllowed] && not [option plm_options.noPanicGeneration value] then
             [!?ioInstructionGenerationList appendUpperBoundCheck
               !expressionResult
               !1G << fieldBitCount

@@ -124,6 +124,7 @@ override method @integerDeclarationAST enterInContext
     [!?propertyMap addFunction
       !receiverTypeName:integerTypeName
       !methodName:byteSwappedMethoName ()
+      !safe:true
       !resultTypeProxy:selfTypeProxy
       !?ioSubprogramInvocationGraph
     ]
@@ -131,24 +132,28 @@ override method @integerDeclarationAST enterInContext
   [!?propertyMap addFunction
     !receiverTypeName:integerTypeName
     !methodName:bitReversedMethoName ()
+    !safe:true
     !resultTypeProxy:selfTypeProxy
     !?ioSubprogramInvocationGraph
   ]
   [!?propertyMap addFunction
     !receiverTypeName:integerTypeName
     !methodName:countLeadingZerosMethoName ()
+    !safe:true
     !resultTypeProxy:selfTypeProxy
     !?ioSubprogramInvocationGraph
   ]
   [!?propertyMap addFunction
     !receiverTypeName:integerTypeName
     !methodName:countTrainingZerosMethoName ()
+    !safe:true
     !resultTypeProxy:selfTypeProxy
     !?ioSubprogramInvocationGraph
   ]
   [!?propertyMap addFunction
     !receiverTypeName:integerTypeName
     !methodName:setBitCountMethoName ()
+    !safe:true
     !resultTypeProxy:selfTypeProxy
     !?ioSubprogramInvocationGraph
   ]

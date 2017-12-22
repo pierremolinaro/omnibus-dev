@@ -145,6 +145,7 @@ override method @enumerationDeclarationAST enterInContext
   [!?propertyMap addFunction
     !receiverTypeName:mEnumerationName
     !methodName:integerEnumAccessorName (!forBitCount:representationBitCount)
+    !safe:true
     !resultTypeProxy:integerTypeProxy
     !?ioSubprogramInvocationGraph
   ]

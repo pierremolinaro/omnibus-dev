@@ -27,9 +27,6 @@ syntax extension plm_syntax {
     or
       $section$
       mode = .sectionMode
-    or
-      $safe$
-      mode = .safeMode
     end 
     $identifier$ ?let isrName
     ${$

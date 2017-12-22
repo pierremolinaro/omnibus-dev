@@ -24,11 +24,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //   ACTIVITY LED                                                                                                       
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func safe activityLedOn @exported () {
+func activityLedOn @safe @exported () {
   digital.write (!yes !toPort:.D13)
 }
 
-func safe activityLedOff @exported () {
+func activityLedOff @safe @exported () {
   digital.write (!no !toPort:.D13)
 }
 
@@ -74,14 +74,14 @@ newtype $patternArray : $uint32 [PATTERN_LENGTH]
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver pit > root {
-  isr safe PITChannel3 {
+  isr section PITChannel3 {
   //--- Acquitter l'interruption
     PIT.TFLG [3] = {PIT.TFLG !TIF:1}
   //--- Toggle LED_L3
     digital.toggle (!port:LED_L3)
   }
   
-  isr safe DMAChannel_0_16_TransferComplete {
+  isr section DMAChannel_0_16_TransferComplete {
   //--- Acquitter l'interruption
     DMA.CINT = 0
   //--- Toggle LED_L2

@@ -20,6 +20,7 @@ syntax extension plm_syntax {
   rule <task_guard_declaration> ?!@ast ioAST ?!@taskGuardListAST ioTaskEntryListAST {
     $guard$
     $identifier$ ?let guardName
+    warning guardName : "OBSOLETE"
     $:$
     $self$
     $.$

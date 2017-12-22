@@ -70,9 +70,8 @@ syntax extension plm_syntax {
       end
       ${$
       <instructionList> !?ioAST ?let instructionList
-      let endOfProc = @location.here
+      taskProcList += !.userMode !false !procName !{} !formalArgumentList !returnTypeName !instructionList !.here
       $}$
-      taskProcList += !.userMode !false !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
     while
       $setup$
       $integer$ ?let @lbigint priority
@@ -332,7 +331,7 @@ method @decoratedTaskList-element semanticAnalysis
     !returnTypeName:["" nowhere]
     !taskListInstructionList
     !mTaskName.location
-    !routineAttributes:.mutating | .directPropertyAccess
+    !routineAttributes:.mutating | .directPropertyAccess | .panicAllowed
     !warnIfUnused:true
     !globalFunction:false
     !context:inContext
