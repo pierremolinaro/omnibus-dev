@@ -10,7 +10,6 @@ list @taskListAST {
   @functionDeclarationListAST mTaskFunctionList
   @taskSetupListAST mTaskSetupListAST
   @syncInstructionBranchListAST mGuardedCommandList
-  @taskGuardListAST mTaskGuardListAST
   @location mEndOfTaskDeclaration
 }
 
@@ -53,7 +52,6 @@ syntax extension plm_syntax {
     @functionDeclarationListAST taskProcList = {}
     @taskSetupListAST taskInitListAST = {}
     @syncInstructionBranchListAST branchList = {}
-    @taskGuardListAST taskGuardListAST = {}
     repeat
     while
       <private_struct_property_declaration> !?ioAST !?taskVarList
@@ -87,8 +85,6 @@ syntax extension plm_syntax {
       let endOfInstructions = @location.here
       $}$
       branchList += !guardedCommand !instructionList !endOfInstructions
-    while
-      <task_guard_declaration> !?ioAST !?taskGuardListAST
     end
     let endOfTask = @location.here
     $}$
@@ -100,7 +96,6 @@ syntax extension plm_syntax {
       !taskProcList
       !taskInitListAST
       !branchList
-      !taskGuardListAST
       !endOfTask
   }
 
@@ -147,7 +142,7 @@ map @taskMap {
 method @taskListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
   @decoratedTaskList decoratedTaskList = {}
@@ -169,18 +164,6 @@ method @taskListAST enterInContext
         !?*
       ]
     end
-  #------------------------- Enter task entries
-    @guardMapForContext guardMap = {}
-    @decoratedTaskGuardList decoratedTaskGuardList = {}
-    for guard in task.mTaskGuardListAST do
-      [guard enterInContext
-        !taskName:task.mTaskName
-        !?context:ioContext
-        !?ioSubprogramInvocationGraph
-        !?decoratedTaskGuardList 
-        !?guardMap
-      ]
-    end
   #---------------- Enter task functions in property map
     [task.mTaskFunctionList enterFunctionsInPropertyMap !?context:ioContext !?propertyMap]
   #---------------- Enter task variable map as structure type in type map
@@ -188,7 +171,7 @@ method @taskListAST enterInContext
       !propertyMap:propertyMap
       !classConstantMap:{}
       !constructorMap:{}
-      !guardMap:guardMap
+      !guardMap:{}
       !typeAttributes:.none
       !plmTypeName:task.mTaskName
       !kind:.structure {!propertyList:propertyList}
@@ -219,7 +202,6 @@ method @taskListAST enterInContext
       !task.mTaskFunctionList
       !task.mTaskSetupListAST
       !task.mGuardedCommandList
-      !decoratedTaskGuardList
       !task.mEndOfTaskDeclaration
   end
 #---------------- Add decorated declaration
@@ -238,7 +220,6 @@ list @decoratedTaskList {
   @functionDeclarationListAST mTaskProcList
   @taskSetupListAST mTaskSetupListAST
   @syncInstructionBranchListAST mGuardedCommandList
-  @decoratedTaskGuardList mDecoratedTaskGuardList
   @location mEndOfTaskDeclaration
 }
 
@@ -282,17 +263,8 @@ method @decoratedTaskList-element semanticAnalysis
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
     error mStackSize : "stack size should be a multiple of 8, and >= 64"
   end
-#------------------------------------------- Analyze task guards
-  let taskType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName} type]
-  for guard in mDecoratedTaskGuardList do
-    [guard taskGuardSemanticAnalysis
-       !taskType:taskType
-       !context:inContext
-       !?temporary:ioTemporaries
-       !?intermediateCode:ioIntermediateCodeStruct
-     ]
-  end
 #------------------------------------------- Analyze task setup routines
+  let taskType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName} type]
   @taskSetupSortedListAST taskInitSortedListAST = {}
   for (priority instructionList endOfDeclaration) in mTaskSetupListAST do
     taskInitSortedListAST += !priority !instructionList !endOfDeclaration !priority.bigint
