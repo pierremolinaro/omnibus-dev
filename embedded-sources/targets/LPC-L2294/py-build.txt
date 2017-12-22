@@ -55,6 +55,7 @@ def CLANGcompiler ():
   result.append ("-Oz")
   result.append ("-fomit-frame-pointer")
   result.append ("-fshort-enums")
+  result.append ("-Wall")
   return result
 
 #----------------------------------------------------------------------------------------------------------------------*

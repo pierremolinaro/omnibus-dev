@@ -109,7 +109,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   let calleeMode = [routineKind executionMode]
   let formalSignature = routineDescriptor.signature
 #--- Check routine is actually a function
-  if [routineDescriptor.returnTypeProxy type].kind == .void then
+  if routineDescriptor.returnTypeProxy == .null then
     error mStandaloneFunctionName : "not a function (returns no value)" : routineDescriptor, outFunctionCallReturnedValue
   else
   #--- Check modes

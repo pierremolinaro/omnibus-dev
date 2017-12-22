@@ -17,10 +17,21 @@ extern func freeObjectCount (?ForFreeList: inFreeListIndex $uint32) -> $uint32 :
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // $data type
 
-newtype $data : [[32]] @instantiable @copyable
+newtype $data : [[32]] @instantiable
 
-extern func memoryAlloc (?size: inBlockSize $uint32) -> $data : "heap.alloc.memory"
-extern func memoryFree (?! ioPointer $data) : "heap.free"
-extern func allocatedByteSize (? inPointer $data) -> $uint32 : "heap.allocated.byte.size"
+extern func append (?byte:inByte $uint8 ?!toBuffer: ioBuffer $data) : "data.buffer.append.byte"
+
+extern func lengthOf (?buffer: buffer $data) -> $uint32 : "data.buffer.length"
+
+extern func removeAll (?!fromBuffer: ioBuffer $data) : "data.buffer.remove.all"
+
+extern func set (?byte: inByte $uint8 ?atIndex: inIndex $uint32 ?!intoBuffer: ioPointer $data)
+: "data.buffer.set.byte.at.index"
+
+extern func getByte (?atIndex: inIndex $uint32 ?!intoBuffer: ioPointer $data) -> $uint8
+: "data.buffer.get.byte.at.index"
+
+extern func removeByte (?atIndex: inIndex $uint32 ?!intoBuffer: ioPointer $data)
+: "data.buffer.remove.byte.at.index"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
