@@ -34,6 +34,21 @@ driver toto ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+struct $structWithARC {
+  var unEntierQuelconque $uint32 = 0
+  var donnée = $data ()
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct $autreStructWithARC {
+  var autreEntierQuelconque $uint32 = 0
+  var structure = $structWithARC ()
+  var autreDonnée = $data ()
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 task T1 priority 10 stackSize 512 {
   var compteur $uint32 = 0
   var freeRam $uint32 = 0 
