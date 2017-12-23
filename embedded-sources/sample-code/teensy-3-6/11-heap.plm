@@ -35,16 +35,16 @@ driver toto ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $structWithARC {
-  var unEntierQuelconque $uint32 = 0
-  var donnée = $data ()
+  public var unEntierQuelconque $uint32 = 0
+  public var donnée = $data ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $autreStructWithARC {
-  var autreEntierQuelconque $uint32 = 0
-  var structure = $structWithARC ()
-  var autreDonnée = $data ()
+  public var autreEntierQuelconque $uint32 = 0
+  public var structure = $structWithARC ()
+  public var autreDonnée = $data ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -119,7 +119,7 @@ task T2 priority 0 stackSize 512 {
   var échéance3 $uint32 = 2001
   var data1 = $data ()
   var data2 = $data ()
-  var data3 = $data ()
+  var structure = $autreStructWithARC ()
   var b $uint8 = 0
 
   on time.wait (!untilDeadline:self.échéance1) {
@@ -140,12 +140,13 @@ task T2 priority 0 stackSize 512 {
 
   on time.wait (!untilDeadline:self.échéance3) {
     self.échéance3 +%= 511
-    self.data3 = self.data2
-    self.testReleaseLocalVar (!self.data3)
+    self.structure.structure.donnée = self.data2
+    self.testReleaseLocalVar (!self.structure.structure.donnée)
   }
   
   func testReleaseLocalVar (? inData $data) {
-     var d = inData
+     var d = $structWithARC ()
+     d.donnée = inData
   }
 }
 
