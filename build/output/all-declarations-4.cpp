@@ -9697,10 +9697,10 @@ void extensionMethod_llvmCodeGeneration (const GALGAS_routineMapIR inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineMapIR temp_0 = inObject ;
-  cEnumerator_routineMapIR enumerator_5969 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5969.hasCurrentObject ()) {
-    extensionMethod_llvmCodeGeneration (enumerator_5969.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)) ;
-    enumerator_5969.gotoNextObject () ;
+  cEnumerator_routineMapIR enumerator_5995 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_5995.hasCurrentObject ()) {
+    extensionMethod_llvmCodeGeneration (enumerator_5995.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)) ;
+    enumerator_5995.gotoNextObject () ;
   }
 }
 
@@ -9716,10 +9716,23 @@ void extensionMethod_generateAllocaList (const GALGAS_allocaList inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_allocaList temp_0 = inObject ;
-  cEnumerator_allocaList enumerator_10038 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_10038.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_10038.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)).add_operation (enumerator_10038.current_mLLVMTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)) ;
-    enumerator_10038.gotoNextObject () ;
+  cEnumerator_allocaList enumerator_9905 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_9905.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_9905.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 246)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 246)).add_operation (extensionGetter_llvmTypeName (enumerator_9905.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 246)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 246)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 246)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 246)) ;
+    enumerator_9905.gotoNextObject () ;
+  }
+  const GALGAS_allocaList temp_1 = inObject ;
+  cEnumerator_allocaList enumerator_10066 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_10066.hasCurrentObject ()) {
+    GALGAS_bool test_2 = enumerator_10066.current_mLLVMType (HERE).getter_typeAttributes (HERE).getter_arc (SOURCE_FILE ("semantic-routines.galgas", 250)) ;
+    if (kBoolTrue == test_2.boolEnum ()) {
+      test_2 = enumerator_10066.current_mFormalInputArgument (HERE).operator_not (SOURCE_FILE ("semantic-routines.galgas", 250)) ;
+    }
+    const enumGalgasBool test_3 = test_2.boolEnum () ;
+    if (kBoolTrue == test_3) {
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (extensionGetter_llvmTypeName (enumerator_10066.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 251)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 251)).add_operation (GALGAS_string (" 0, "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 251)).add_operation (extensionGetter_llvmTypeName (enumerator_10066.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 251)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 251)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 251)).add_operation (enumerator_10066.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 251)).add_operation (GALGAS_string (" ; init ARC value\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 251)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 251)) ;
+    }
+    enumerator_10066.gotoNextObject () ;
   }
 }
 
@@ -13885,7 +13898,7 @@ void extensionSetter_referenceFromPossibleValue (GALGAS_instructionListIR & ioOb
   if (kBoolTrue == test_0) {
     GALGAS_string var_llvmTemporaryName_908 = function_llvmNameForLocalVariable (GALGAS_string ("tempz.").add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 30)) ;
     ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 31)) ;
-    ioArgument_ioAllocaList.addAssign_operation (var_llvmTemporaryName_908, extensionGetter_llvmTypeName (extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 33)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 33))  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 33)) ;
+    ioArgument_ioAllocaList.addAssign_operation (var_llvmTemporaryName_908, extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 33)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 33)) ;
     {
     extensionSetter_appendStoreTemporaryReference (ioObject, extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 35)), var_llvmTemporaryName_908, ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 35)) ;
     }
@@ -14881,161 +14894,4 @@ void extensionSetter_appendSourceLineComment (GALGAS_instructionListIR & ioObjec
   ioObject.addAssign_operation (GALGAS_sourceLocationIR::constructor_new (constinArgument_inSourceLocation  COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 3)) ;
 }
 
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_sourceLocationIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_sourceLocationIR * p = (const cPtr_sourceLocationIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_sourceLocationIR) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mSourceLocation.objectCompare (p->mProperty_mSourceLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_sourceLocationIR::objectCompare (const GALGAS_sourceLocationIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sourceLocationIR::GALGAS_sourceLocationIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sourceLocationIR GALGAS_sourceLocationIR::constructor_default (LOCATION_ARGS) {
-  return GALGAS_sourceLocationIR::constructor_new (GALGAS_location::constructor_nowhere (HERE)
-                                                   COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sourceLocationIR::GALGAS_sourceLocationIR (const cPtr_sourceLocationIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_sourceLocationIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sourceLocationIR GALGAS_sourceLocationIR::constructor_new (const GALGAS_location & inAttribute_mSourceLocation
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_sourceLocationIR result ;
-  if (inAttribute_mSourceLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_sourceLocationIR (inAttribute_mSourceLocation COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_sourceLocationIR::getter_mSourceLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_sourceLocationIR * p = (const cPtr_sourceLocationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_sourceLocationIR) ;
-    result = p->mProperty_mSourceLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_sourceLocationIR::getter_mSourceLocation (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSourceLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                      Pointer class for @sourceLocationIR class                                      *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_sourceLocationIR::cPtr_sourceLocationIR (const GALGAS_location & in_mSourceLocation
-                                              COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mProperty_mSourceLocation (in_mSourceLocation) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_sourceLocationIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_sourceLocationIR ;
-}
-
-void cPtr_sourceLocationIR::description (C_String & ioString,
-                                         const int32_t inIndentation) const {
-  ioString << "[@sourceLocationIR:" ;
-  mProperty_mSourceLocation.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_sourceLocationIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_sourceLocationIR (mProperty_mSourceLocation COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               @sourceLocationIR type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_sourceLocationIR ("sourceLocationIR",
-                                         & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_sourceLocationIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_sourceLocationIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_sourceLocationIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_sourceLocationIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sourceLocationIR GALGAS_sourceLocationIR::extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_sourceLocationIR result ;
-  const GALGAS_sourceLocationIR * p = (const GALGAS_sourceLocationIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_sourceLocationIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("sourceLocationIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
 

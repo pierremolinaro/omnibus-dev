@@ -133,7 +133,8 @@ proc routineSemanticAnalysis
 
 list @allocaList {
   @string mVarLLVMName
-  @string mLLVMTypeName
+  @PLMType mLLVMType
+  @bool mFormalInputArgument
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -199,26 +200,23 @@ method @routineMapIR-element llvmCodeGeneration
     if not first then
       ioLLVMcode += ", "
     end
-    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " %LINE, i8* %FILE"
+    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %LINE, i8* %FILE"
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Add result variable ?
+  var allocaList = mAllocaList
   if mReturnType.kind != .void then
-    ioLLVMcode += "  " + llvmNameForLocalVariable (!functionResultVariableName ())
-                + " = alloca " + [mReturnType llvmTypeName] + "\n"
-  end
-  for (variable llvmTypeName) in mAllocaList do
-    ioLLVMcode += "  " + variable + " = alloca " + llvmTypeName + "\n"
+    allocaList += !llvmNameForLocalVariable (!functionResultVariableName ()) !mReturnType !false
   end
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
-      let llvmType = [mFormalArgumentType llvmTypeName]
-      ioLLVMcode += "  " + llvmNameForLocalVariable (!mFormalArgumentName) + " = alloca " + llvmType + "\n"
+      allocaList += !llvmNameForLocalVariable (!mFormalArgumentName) !mFormalArgumentType !true
     case output, inputOutput :
     end
   end
+  [allocaList generateAllocaList !?ioLLVMcode]
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
@@ -244,8 +242,14 @@ method @routineMapIR-element llvmCodeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @allocaList generateAllocaList ?!@string ioLLVMcode {
-  for (variable LLVMTypeName) in self do
-    ioLLVMcode += "  " + variable + " = alloca " + LLVMTypeName + "\n"
+  for (variable type *) in self do
+    ioLLVMcode += "  " + variable + " = alloca " + [type llvmTypeName] + "\n"
+  end
+#--- Init ARC variables
+  for (variable type formalInputArgument) in self do
+    if [type.typeAttributes arc] && not formalInputArgument then
+      ioLLVMcode += "  store " + [type llvmTypeName] + " 0, " + [type llvmTypeName] + "* " + variable + " ; init ARC value\n"
+    end
   end
 }
 

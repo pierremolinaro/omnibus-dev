@@ -110,8 +110,8 @@ override method @panicInstructionIR llvmInstructionCode
     ?let staticStringIndex
   ]
   ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
-  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mThrowLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ")\n"
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mThrowLocation line] + ", "
+  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + mPanicCode + ")\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

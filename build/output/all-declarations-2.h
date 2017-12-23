@@ -4276,7 +4276,8 @@ class GALGAS_allocaList : public AC_GALGAS_list {
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_string & in_mVarLLVMName,
-                                                  const class GALGAS_string & in_mLLVMTypeName
+                                                  const class GALGAS_PLMType & in_mLLVMType,
+                                                  const class GALGAS_bool & in_mFormalInputArgument
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -4293,7 +4294,8 @@ class GALGAS_allocaList : public AC_GALGAS_list {
   public : static class GALGAS_allocaList constructor_emptyList (LOCATION_ARGS) ;
 
   public : static class GALGAS_allocaList constructor_listWithValue (const class GALGAS_string & inOperand0,
-                                                                     const class GALGAS_string & inOperand1
+                                                                     const class GALGAS_PLMType & inOperand1,
+                                                                     const class GALGAS_bool & inOperand2
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -4303,7 +4305,8 @@ class GALGAS_allocaList : public AC_GALGAS_list {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_string & inOperand0,
-                                                      const class GALGAS_string & inOperand1
+                                                      const class GALGAS_PLMType & inOperand1,
+                                                      const class GALGAS_bool & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_allocaList add_operation (const GALGAS_allocaList & inOperand,
@@ -4313,45 +4316,55 @@ class GALGAS_allocaList : public AC_GALGAS_list {
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_string constinArgument0,
-                                                       class GALGAS_string constinArgument1,
-                                                       class GALGAS_uint constinArgument2,
+                                                       class GALGAS_PLMType constinArgument1,
+                                                       class GALGAS_bool constinArgument2,
+                                                       class GALGAS_uint constinArgument3,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_string & outArgument0,
-                                                  class GALGAS_string & outArgument1,
+                                                  class GALGAS_PLMType & outArgument1,
+                                                  class GALGAS_bool & outArgument2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_string & outArgument0,
-                                                 class GALGAS_string & outArgument1,
+                                                 class GALGAS_PLMType & outArgument1,
+                                                 class GALGAS_bool & outArgument2,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_string & outArgument0,
-                                                       class GALGAS_string & outArgument1,
-                                                       class GALGAS_uint constinArgument2,
+                                                       class GALGAS_PLMType & outArgument1,
+                                                       class GALGAS_bool & outArgument2,
+                                                       class GALGAS_uint constinArgument3,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_string & outArgument0,
-                                               class GALGAS_string & outArgument1,
+                                               class GALGAS_PLMType & outArgument1,
+                                               class GALGAS_bool & outArgument2,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_string & outArgument0,
-                                              class GALGAS_string & outArgument1,
+                                              class GALGAS_PLMType & outArgument1,
+                                              class GALGAS_bool & outArgument2,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mFormalInputArgumentAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mLLVMTypeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mVarLLVMNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                             C_Compiler * inCompiler
@@ -4388,7 +4401,8 @@ class cEnumerator_allocaList : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_string current_mVarLLVMName (LOCATION_ARGS) const ;
-  public : class GALGAS_string current_mLLVMTypeName (LOCATION_ARGS) const ;
+  public : class GALGAS_PLMType current_mLLVMType (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mFormalInputArgument (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_allocaList_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -4666,14 +4680,13 @@ class GALGAS_allocaList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_string mProperty_mVarLLVMName ;
 
-  public : GALGAS_string mProperty_mLLVMTypeName ;
+  public : GALGAS_PLMType mProperty_mLLVMType ;
+
+  public : GALGAS_bool mProperty_mFormalInputArgument ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_allocaList_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
   public : GALGAS_allocaList_2D_element (void) ;
@@ -4683,7 +4696,8 @@ class GALGAS_allocaList_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_allocaList_2D_element (const GALGAS_string & in_mVarLLVMName,
-                                         const GALGAS_string & in_mLLVMTypeName) ;
+                                         const GALGAS_PLMType & in_mLLVMType,
+                                         const GALGAS_bool & in_mFormalInputArgument) ;
 
 //-- Start of generic part --*
 
@@ -4697,7 +4711,8 @@ class GALGAS_allocaList_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_allocaList_2D_element constructor_new (const class GALGAS_string & inOperand0,
-                                                                      const class GALGAS_string & inOperand1
+                                                                      const class GALGAS_PLMType & inOperand1,
+                                                                      const class GALGAS_bool & inOperand2
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4712,7 +4727,9 @@ class GALGAS_allocaList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mFormalInputArgument (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mLLVMType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mVarLLVMName (LOCATION_ARGS) const ;
 
@@ -5223,6 +5240,17 @@ class GALGAS_string extensionGetter_llvmName (const class GALGAS_objectIR & inOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                  Extension method '@allocaList generateAllocaList'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_generateAllocaList (const class GALGAS_allocaList inObject,
+                                         class GALGAS_string & io_ioLLVMcode,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                            Extension method '@instructionListIR instructionListLLVMCode'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5325,9 +5353,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationAdds ;
 
 class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_string mProperty_mPanicCodeLLVMType ;
+  public : GALGAS_PLMType mProperty_mPanicCodeLLVMType ;
 
-  public : GALGAS_string mProperty_mPanicLineLLVMType ;
+  public : GALGAS_PLMType mProperty_mPanicLineLLVMType ;
 
   public : GALGAS_string mProperty_mNopInstructionInLLVM ;
 
@@ -5339,9 +5367,6 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_generationContext constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public : GALGAS_generationContext (void) ;
 
@@ -5349,8 +5374,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_generationContext (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_generationContext (const GALGAS_string & in_mPanicCodeLLVMType,
-                                     const GALGAS_string & in_mPanicLineLLVMType,
+  public : GALGAS_generationContext (const GALGAS_PLMType & in_mPanicCodeLLVMType,
+                                     const GALGAS_PLMType & in_mPanicLineLLVMType,
                                      const GALGAS_string & in_mNopInstructionInLLVM,
                                      const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
                                      const GALGAS_availableInterruptMap & in_mAvailableInterruptMap) ;
@@ -5366,8 +5391,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_generationContext constructor_new (const class GALGAS_string & inOperand0,
-                                                                  const class GALGAS_string & inOperand1,
+  public : static class GALGAS_generationContext constructor_new (const class GALGAS_PLMType & inOperand0,
+                                                                  const class GALGAS_PLMType & inOperand1,
                                                                   const class GALGAS_string & inOperand2,
                                                                   const class GALGAS_globalTaskVariableList & inOperand3,
                                                                   const class GALGAS_availableInterruptMap & inOperand4
@@ -5391,9 +5416,9 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mNopInstructionInLLVM (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPanicCodeLLVMType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mPanicCodeLLVMType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPanicLineLLVMType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mPanicLineLLVMType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

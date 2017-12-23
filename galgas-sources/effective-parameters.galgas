@@ -123,7 +123,7 @@ proc analyzeEffectiveParameters
       else
         [!?ioUniversalMap insertLocalVariable !name !type !name !.hasUnreadValue !false]
       end
-      ioAllocaList += !llvmNameForLocalVariable (!name) ![type llvmTypeName]
+      ioAllocaList += !llvmNameForLocalVariable (!name) !type !true
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input

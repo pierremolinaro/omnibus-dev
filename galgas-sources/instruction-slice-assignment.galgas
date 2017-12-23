@@ -210,7 +210,7 @@ override method @sliceAssignmentInstructionAST analyze
       ioTemporaries.mTemporaryIndex ++
       [!?ioUniversalMap insertLocalVariable !varName !sliceType !plmLocalVariableName !.hasUnreadValue !false]
     #--- Code generation
-      ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) ![sliceType llvmTypeName]
+      ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) !sliceType !false
     #--- Target reference
       let targetRef = @LValueRepresentation.universalReference {
         !type:sliceType
@@ -229,7 +229,7 @@ override method @sliceAssignmentInstructionAST analyze
       ioTemporaries.mTemporaryIndex ++
       [!?ioUniversalMap insertLocalConstant !letName !false !sliceType !plmLocalVariableName]
     #--- Code generation
-      ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) ![sliceType llvmTypeName]
+      ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) !sliceType !false
     #--- Target reference
       let targetRef = @LValueRepresentation.universalReference {
         !type:sliceType

@@ -107,7 +107,7 @@ override method @letInstructionWithAssignmentAST analyze
   let plmName = @lstring.new {!mConstantName.string + "." + ioTemporaries.mTemporaryIndex !mConstantName}
   ioTemporaries.mTemporaryIndex ++
   if [result plmTypeName] != staticIntegerTypeName () then
-    ioAllocaList += !llvmNameForLocalVariable (!plmName) ![[result type] llvmTypeName]
+    ioAllocaList += !llvmNameForLocalVariable (!plmName) ![result type] !false
     [!?ioInstructionGenerationList appendStoreTemporaryReference
       ![result type]
       !llvmNameForLocalVariable (!plmName)
