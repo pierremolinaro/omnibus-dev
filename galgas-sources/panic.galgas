@@ -188,7 +188,7 @@ override method @decoratedPanicRoutine semanticAnalysis
     !?generatedCode:instructionGenerationList
   ]
 #--- End of variableMap
-  [universalMap checkLocalVariableFinalState]
+  [universalMap checkLocalVariableFinalState !?instructionGenerationList]
   [!?universalMap closeBranch !mEndOfPanicInstructions]
   [!?universalMap closeOverride !mEndOfPanicInstructions]
 #--- Code generation

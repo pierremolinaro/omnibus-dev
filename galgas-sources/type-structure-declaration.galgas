@@ -301,7 +301,7 @@ override method @structureDeclarationAST enterInContext
     attributes = attributes | .generateAssignmentRoutine
   end
   for (s) in mAttributeListAST do
-    if s.string == "copyable" then
+    if s.string == copyableAttribute () then
       if [attributes copyable] then
         error s : "duplicated attribute"
       elsif not canBeCopied then

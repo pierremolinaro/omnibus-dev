@@ -270,6 +270,24 @@ func llvmNameForGlobalSyncInstance ?let @string inName -> @string {
 #!   Attributes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once instantiableAttribute -> @string {
+  result = "instantiable"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once copyableAttribute -> @string {
+  result = "copyable"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once arcAttribute -> @string {
+  result = "arc"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func %once mutatingAttribute -> @string {
   result = "mutating"
 }

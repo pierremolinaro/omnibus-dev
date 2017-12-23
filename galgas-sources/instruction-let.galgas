@@ -114,7 +114,7 @@ override method @letInstructionWithAssignmentAST analyze
       !result
     ]
   end
-  [!?ioUniversalMap insertLocalConstant !mConstantName ![result type] !plmName]
+  [!?ioUniversalMap insertLocalConstant !mConstantName !false ![result type] !plmName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

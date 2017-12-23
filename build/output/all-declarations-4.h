@@ -640,7 +640,8 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                                             COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_valuedObject constructor_localConstant (const class GALGAS_PLMType & inOperand0,
-                                                                       const class GALGAS_lstring & inOperand1
+                                                                       const class GALGAS_lstring & inOperand1,
+                                                                       const class GALGAS_bool & inOperand2
                                                                        COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_valuedObject constructor_localVariable (const class GALGAS_PLMType & inOperand0,
@@ -678,6 +679,7 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_PLMType & outArgument0,
                                                        class GALGAS_lstring & outArgument1,
+                                                       class GALGAS_bool & outArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
@@ -1266,10 +1268,12 @@ class cEnumAssociatedValues_valuedObject_globalConstant : public cEnumAssociated
 class cEnumAssociatedValues_valuedObject_localConstant : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
+  public : const GALGAS_bool mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_valuedObject_localConstant (const GALGAS_PLMType & inAssociatedValue0,
-                                                             const GALGAS_lstring & inAssociatedValue1
+                                                             const GALGAS_lstring & inAssociatedValue1,
+                                                             const GALGAS_bool & inAssociatedValue2
                                                              COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -2287,6 +2291,17 @@ void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_elem
                                          class GALGAS_string & io_ioAssemblerCode,
                                          const class GALGAS_generationContext constin_inGenerationContext,
                                          class GALGAS_generationAdds & io_ioGenerationAdds,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Extension method '@allocaList generateAllocaList'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_generateAllocaList (const class GALGAS_allocaList inObject,
+                                         class GALGAS_string & io_ioLLVMcode,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -4454,6 +4469,105 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                Extension setter '@instructionListIR generateRelease'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_generateRelease (class GALGAS_instructionListIR & ioObject,
+                                      const class GALGAS_PLMType constin_inType,
+                                      const class GALGAS_lstring constin_in_5F_plmName,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                  @releaseIR class                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_releaseIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_releaseIR (void) ;
+
+//---
+  public : inline const class cPtr_releaseIR * ptr (void) const { return (const cPtr_releaseIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_releaseIR (const cPtr_releaseIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_releaseIR extractObject (const GALGAS_object & inObject,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_releaseIR constructor_new (const class GALGAS_PLMType & inOperand0,
+                                                          const class GALGAS_lstring & inOperand1
+                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_releaseIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPLMName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_releaseIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_releaseIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Pointer class for @releaseIR class                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_releaseIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_PLMType mProperty_mType ;
+  public : GALGAS_lstring mProperty_mPLMName ;
+
+//--- Constructor
+  public : cPtr_releaseIR (const GALGAS_PLMType & in_mType,
+                           const GALGAS_lstring & in_mPLMName
+                           COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPLMName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

@@ -284,7 +284,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       !?result: outResult
     )
-  case localConstant (@PLMType type @lstring plmName) :
+  case localConstant (@PLMType type @lstring plmName *) :
     [!?ioUniversalMap readAccess !mReceiverName]
     outResult = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
     procAnalyzeAccesListInExpression (

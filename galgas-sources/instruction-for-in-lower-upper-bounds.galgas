@@ -170,7 +170,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     ioTemporaries.mTemporaryIndex ++
     ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) ![type llvmTypeName]
     if mVarName.string != "" then
-     [!?ioUniversalMap insertLocalConstant !mVarName !type !enumeratedVarName]
+     [!?ioUniversalMap insertLocalConstant !mVarName !false !type !enumeratedVarName]
     end
   #--- Analyze instruction list
     @instructionListIR instructionGenerationList = {}

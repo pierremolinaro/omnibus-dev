@@ -148,7 +148,7 @@ override method @decoratedBootRoutine semanticAnalysis
     !?generatedCode:instructionGenerationList
   ]
 #--- End of variableMap
-  [universalMap checkLocalVariableFinalState]
+  [universalMap checkLocalVariableFinalState !?instructionGenerationList]
   [!?universalMap closeBranch !mEndOfBootLocation]
   [!?universalMap closeOverride !mEndOfBootLocation]
 #--- Code generation

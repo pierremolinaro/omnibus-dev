@@ -452,6 +452,7 @@ void extensionSetter_insertGlobalSyncInstance (class GALGAS_universalValuedObjec
 
 void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                           const class GALGAS_lstring constin_inLocalConstantName,
+                                          const class GALGAS_bool constin_inIsFormalInputArgument,
                                           const class GALGAS_PLMType constin_inType,
                                           const class GALGAS_lstring constin_inPLMConstantName,
                                           class C_Compiler * inCompiler
@@ -556,6 +557,7 @@ void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedO
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionMethod_checkLocalVariableFinalState (const class GALGAS_universalValuedObjectMap inObject,
+                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -639,6 +641,26 @@ class GALGAS_bool extensionGetter_copyable (const class GALGAS_unifiedTypeMap_2D
 class GALGAS_bool extensionGetter_copyable (const class GALGAS_PLMType & inObject,
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Extension getter '@unifiedTypeMap-proxy arc' (as function)                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_arc (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Extension getter '@PLMType arc' (as function)                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_arc (const class GALGAS_PLMType & inObject,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -249,7 +249,7 @@ override method @procedureCallInstructionAST analyze
       error mIdentifier
         : "a global constant cannot be used in this context"
         : currentType, currentLLVMAddressVar
-    case localConstant (@PLMType type @lstring plmName) :
+    case localConstant (@PLMType type @lstring plmName *) :
       currentType = type
       currentLLVMAddressVar = llvmNameForLocalVariable (!plmName)
     case localVariable (@PLMType type @lstring plmName) :

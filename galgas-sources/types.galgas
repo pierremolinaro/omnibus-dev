@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 boolset @PLMTypeAttributes {
-  instanciable, equatable, copyable, generateAssignmentRoutine
+  instanciable, equatable, copyable, generateAssignmentRoutine, arc
 }
 
 #·······················································································································
@@ -45,7 +45,7 @@ func booleanType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.all
+    !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmTypeName:boolTypeName ()
     !kind:.boolean
   }
@@ -73,7 +73,7 @@ func literalStringType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.all
+    !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmTypeName:staticStringTypeName () 
     !kind:.literalString
   }
@@ -135,6 +135,18 @@ getter @unifiedTypeMap-proxy copyable -> @bool {
 
 getter @PLMType copyable -> @bool {
   result = [typeAttributes copyable]
+}
+
+#·······················································································································
+
+getter @unifiedTypeMap-proxy arc -> @bool {
+  result = [[self type] arc]
+}
+
+#·······················································································································
+
+getter @PLMType arc -> @bool {
+  result = [typeAttributes arc]
 }
 
 #·······················································································································
