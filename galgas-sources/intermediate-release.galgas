@@ -1,0 +1,39 @@
+
+setter @instructionListIR generateRelease ?let @PLMType inType ?let @lstring in_plmName {
+  self += !@releaseIR.new {!inType !in_plmName}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @releaseIR : @abstractInstructionIR {
+  @PLMType mType
+  @lstring mPLMName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @releaseIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  
+  let tempLLVMVariable = "%temp." + [mPLMName assemblerRepresentation] + ".loaded"
+  let llvmTypeName = [mType llvmTypeName]
+  let LLVMVariable =  llvmNameForLocalVariable (!mPLMName)
+  ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
+  ioLLVMcode += "  call void @" + [mType plmTypeName] + ".release (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
+}
+
+#  %d = load i32, i32* %var.d.0
+#  call void @data.release (i32 %d)
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @releaseIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
