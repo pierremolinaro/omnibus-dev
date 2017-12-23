@@ -191,11 +191,6 @@ asm ("!FUNC!data.buffer.remove.byte.at.index") ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-void retain (unsigned inPointer) asm ("data.retain") ;
-void release (unsigned inPointer) asm ("data.release") ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 static DataBufferHeaderType * reallocBlock (DataBufferHeaderType * inPointer, const unsigned short inBlockSizeIndex) {
 //--- Allocate next size block
   DataBufferHeaderType * newBlock = memoryAlloc (inBlockSizeIndex) ;
@@ -322,6 +317,13 @@ void removeByteAtIndex (const unsigned inIndex, unsigned * ioPointer) {
     }
   }
 }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   INTERNAL FUNCTIONS CALLED BY PLM
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+void retain (unsigned inPointer) asm ("data.retain") ;
+void release (unsigned inPointer) asm ("data.release") ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

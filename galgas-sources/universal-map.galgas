@@ -392,16 +392,14 @@ method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionList
       if entry.mObjectState == .hasUnreadValue then
         warning entry.lkey : "'" + entry.lkey + "' is never read"
       end
-      if [type.typeAttributes arc] && not isFormalInputArg then
+      if not isFormalInputArg then
         [!?ioInstructionGenerationList generateRelease !type !plmName]
       end
     case localVariable (@PLMType type @lstring plmName) :
       if (entry.mObjectState == .noValue) && entry.mObjectShouldBeValuedAtEndOfScope then
         error entry.lkey : "'" + entry.lkey + "' should be valued at the end of routine"
       end
-      if [type.typeAttributes arc] then
-        [!?ioInstructionGenerationList generateRelease !type !plmName]
-      end
+      [!?ioInstructionGenerationList generateRelease !type !plmName]
     end
   end
 }
