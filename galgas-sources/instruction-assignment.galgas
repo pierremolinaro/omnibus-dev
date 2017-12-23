@@ -89,7 +89,8 @@ override method @assignmentInstructionAST analyze
     ?let @LValueRepresentation lvalueIR
   ]
 #--- Is source copyable ?
-  if not [[sourceOperandPossibleReference type] copyable] then
+  let t = [sourceOperandPossibleReference type]
+  if not ([t copyable] || [t arc]) then
     error mTargetAST.mIdentifier : "source expression is not copyable"
   else
     [!?ioInstructionGenerationList appendCopyFromReferences

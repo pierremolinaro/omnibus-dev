@@ -170,7 +170,7 @@ override method @integerDeclarationAST enterInContext
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap
     !guardMap:{}
-    !typeAttributes:.all
+    !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmTypeName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
   }

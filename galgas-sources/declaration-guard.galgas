@@ -250,7 +250,7 @@ proc guardSemanticAnalysis
     ]
   end 
 #--- End of variableMap
-  [universalMap checkLocalVariableFinalState]
+  [universalMap checkLocalVariableFinalState !?instructionGenerationList]
   [!?universalMap closeBranch !inEndOfRoutineDeclaration]
   [!?universalMap closeOverride !inEndOfRoutineDeclaration]
 #--- Code generation

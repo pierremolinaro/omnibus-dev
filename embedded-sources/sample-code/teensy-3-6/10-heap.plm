@@ -39,15 +39,14 @@ task T1 priority 10 stackSize 512 {
   var freeRam $uint32 = 0 
   var start $uint32 = 0 
   var end $uint32 = 0 
-  var alloc $uint32 = 0 
+  var alloc $uint32 = .max 
+  var current $uint32 = .max 
 
   setup 1000 {
     lcd.print (!string:"Free:")
     lcd.goto (!line:1 !column:0)
     lcd.print (!string:"Start:")
     lcd.goto (!line:2 !column:0)
-    lcd.print (!string:"End:")
-    lcd.goto (!line:3 !column:0)
     lcd.print (!string:"Addr:")
   }
 
@@ -70,7 +69,7 @@ task T1 priority 10 stackSize 512 {
       lcd.goto (!line:1 !column:6)
       lcd.print (!hex8:start)
     }
-    let end = heapEndAddress ()
+    let end = heapAllocAddress ()
     if self.end ≠ end {
       self.end = end
       lcd.goto (!line:2 !column:6)
@@ -78,13 +77,21 @@ task T1 priority 10 stackSize 512 {
       lcd.goto (!line:2 !column:6)
       lcd.print (!hex8:end)
     }
-    let alloc = heapAllocAddress ()
+    let alloc = totalAllocationObjectCount ()
     if self.alloc ≠ alloc {
       self.alloc = alloc
-      lcd.goto (!line:3 !column:6)
+      lcd.goto (!line:3 !column:0)
       lcd.print (!spaces:6)
-      lcd.goto (!line:3 !column:6)
-      lcd.print (!hex8:alloc)
+      lcd.goto (!line:3 !column:0)
+      lcd.print (!unsigned:alloc)
+    }
+    let current = currentlyAllocatedObjectCount ()
+    if self.current ≠ current {
+      self.current = current
+      lcd.goto (!line:3 !column:10)
+      lcd.print (!spaces:6)
+      lcd.goto (!line:3 !column:10)
+      lcd.print (!unsigned:current)
     }
   }
 }
@@ -92,19 +99,38 @@ task T1 priority 10 stackSize 512 {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T2 priority 0 stackSize 512 {
-  var compteur $uint32 = 2001
-  var data = $data ()
+  var échéance1 $uint32 = 2001
+  var échéance2 $uint32 = 2001
+  var échéance3 $uint32 = 2001
+  var data1 = $data ()
+  var data2 = $data ()
+  var data3 = $data ()
   var b $uint8 = 0
 
-  on time.wait (!untilDeadline:self.compteur) {
-    self.compteur +%= 71
+  on time.wait (!untilDeadline:self.échéance1) {
+    self.échéance1 +%= 71
     digital.toggle (!port:LED_L4)
-    if lengthOf (!buffer:self.data) < 500 {
-      append (!byte:self.b !?toBuffer:self.data)
+    if lengthOf (!buffer:self.data1) < 500 {
+      append (!byte:self.b !?toBuffer:self.data1)
       self.b +%= 1
     }else{
-      removeAll (!?fromBuffer:self.data)
+      removeAll (!?fromBuffer:self.data1)
     }
+  }
+
+  on time.wait (!untilDeadline:self.échéance2) {
+    self.échéance2 +%= 97
+    self.data2 = self.data1
+  }
+
+  on time.wait (!untilDeadline:self.échéance3) {
+    self.échéance3 +%= 511
+    self.data3 = self.data2
+    self.testReleaseLocalVar (!self.data3)
+  }
+  
+  func testReleaseLocalVar (? inData $data) {
+     var d = inData
   }
 }
 

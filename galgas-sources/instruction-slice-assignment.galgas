@@ -227,7 +227,7 @@ override method @sliceAssignmentInstructionAST analyze
     #--- Declare local constant
       let plmLocalVariableName = @lstring.new {!letName.string + "." + ioTemporaries.mTemporaryIndex !letName}
       ioTemporaries.mTemporaryIndex ++
-      [!?ioUniversalMap insertLocalConstant !letName !sliceType !plmLocalVariableName]
+      [!?ioUniversalMap insertLocalConstant !letName !false !sliceType !plmLocalVariableName]
     #--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) ![sliceType llvmTypeName]
     #--- Target reference

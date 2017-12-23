@@ -60,7 +60,7 @@ override method @copyFromReferencesIR llvmInstructionCode
 {
   let llvmType = [mType llvmTypeName]
   ioLLVMcode += "  call void @plm.assign." + [mType.plmTypeName identifierRepresentation]
-              + " (" + llvmType + "* " + mTargetLLVMName + ", " + llvmType + "* " + mSourceLLVMName + ")\n"
+             + " (" + llvmType + "* " + mTargetLLVMName + ", " + llvmType + "* " + mSourceLLVMName + ")\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -74,12 +74,11 @@ override method @copyFromReferencesIR enterAccessibleEntities
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
+  let typeName = [self llvmTypeName]
   if [typeAttributes generateAssignmentRoutine] then
-    let typeName = [self llvmTypeName]
     ioLLVMCode += llvmSeparatorLine () + "\n"
     ioLLVMCode += "define internal void @plm.assign." + [self.plmTypeName identifierRepresentation]
                 + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
-    ioLLVMCode += "entry:\n"
     ioLLVMCode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
     ioLLVMCode += "  %byteCount = ptrtoint " + typeName + "* %sizeAsPtr to i32\n"
     ioLLVMCode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
@@ -110,34 +109,25 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
     ioLLVMCode += "copyWords.loop:\n"
     ioLLVMCode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
     ioLLVMCode += "  br label %copy.end\n"
-#    ioLLVMCode += "  %target32.current = phi i32* [%target32, %copyWords], [%target32.next, %copyWords.loop]\n"
-#    ioLLVMCode += "  %source32.current = phi i32* [%source32, %copyWords], [%source32.next, %copyWords.loop]\n"
-#    ioLLVMCode += "  %wordCount.current = phi i32 [%wordCount, %copyWords], [%wordCount.next, %copyWords.loop]\n"
-#    ioLLVMCode += "  %value32 = load i32, i32* %source32.current\n"
-#    ioLLVMCode += "  store i32 %value32, i32* %target32.current\n"
-#    ioLLVMCode += "  %target32.next = getelementptr inbounds i32, i32* %target32.current, i32 1\n"
-#    ioLLVMCode += "  %source32.next = getelementptr inbounds i32, i32* %source32.current, i32 1\n"
-#    ioLLVMCode += "  %wordCount.next = sub i32 %wordCount.current, 1\n"
-#    ioLLVMCode += "  %wordCount.next.isZero = icmp eq i32 %wordCount.next, 0\n"
-#    ioLLVMCode += "  br i1 %wordCount.next.isZero, label %copy.end, label %copyWords.loop\n"
     ioLLVMCode += "copyBytes:\n"
     ioLLVMCode += "  %target8 = bitcast " + typeName + "* %inTarget to i8*\n"
     ioLLVMCode += "  %source8 = bitcast " + typeName + "* %inSource to i8*\n"
     ioLLVMCode += "  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"
     ioLLVMCode += "  br label %copy.end\n"
-#    ioLLVMCode += "  br label %copyBytes.loop\n"
-#    ioLLVMCode += "copyBytes.loop:\n"
-#    ioLLVMCode += "  %target8.current = phi i8* [%target8, %copyBytes], [%target8.next, %copyBytes.loop]\n"
-#    ioLLVMCode += "  %source8.current = phi i8* [%source8, %copyBytes], [%source8.next, %copyBytes.loop]\n"
-#    ioLLVMCode += "  %byteCount.current = phi i32 [%byteCount, %copyBytes], [%byteCount.next, %copyBytes.loop]\n"
-#    ioLLVMCode += "  %value8 = load i8, i8* %source8.current\n"
-#    ioLLVMCode += "  store i8 %value8, i8* %target8.current\n"
-#    ioLLVMCode += "  %target8.next = getelementptr inbounds i8, i8* %target8.current, i32 1\n"
-#    ioLLVMCode += "  %source8.next = getelementptr inbounds i8, i8* %source8.current, i32 1\n"
-#    ioLLVMCode += "  %byteCount.next = sub i32 %byteCount.current, 1\n"
-#    ioLLVMCode += "  %byteCount.next.isZero = icmp eq i32 %byteCount.next, 0\n"
-#    ioLLVMCode += "  br i1 %byteCount.next.isZero, label %copy.end, label %copyBytes.loop\n"
     ioLLVMCode += "copy.end:\n"
+    ioLLVMCode += "  ret void\n"
+    ioLLVMCode += "}\n\n"
+  elsif [typeAttributes arc] then
+    ioLLVMCode += llvmSeparatorLine () + "\n"
+    ioLLVMCode += "declare void @" + [self plmTypeName] + ".retain (" + typeName + " %source)\n"
+    ioLLVMCode += "declare void @" + [self plmTypeName] + ".release (" + typeName + " %target)\n\n"
+    ioLLVMCode += "define internal void @plm.assign." + [self.plmTypeName identifierRepresentation]
+                + " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr) nounwind optsize {\n"
+    ioLLVMCode += "  %source = load " + typeName + ", " + typeName + "* %inSourcePtr\n" 
+    ioLLVMCode += "  call void @" + [self plmTypeName] + ".retain (" + typeName + " %source)\n" 
+    ioLLVMCode += "  %target = load " + typeName + ", " + typeName + "* %inTargetPtr\n" 
+    ioLLVMCode += "  call void @" + plmTypeName + ".release (" + typeName + " %target)\n" 
+    ioLLVMCode += "  store " + typeName + " %source, " + typeName + "* %inTargetPtr\n" 
     ioLLVMCode += "  ret void\n"
     ioLLVMCode += "}\n\n"
   end

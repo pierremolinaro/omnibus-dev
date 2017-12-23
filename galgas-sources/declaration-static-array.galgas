@@ -452,7 +452,7 @@ override method @staticListAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.all
+    !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmTypeName:plmNameForStaticListType (!mStaticListName)
     !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
   }

@@ -119,7 +119,7 @@ proc analyzeEffectiveParameters
         [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName} type]
       end
       if constant then
-        [!?ioUniversalMap insertLocalConstant !name !type !name]
+        [!?ioUniversalMap insertLocalConstant !name !false !type !name]
       else
         [!?ioUniversalMap insertLocalVariable !name !type !name !.hasUnreadValue !false]
       end

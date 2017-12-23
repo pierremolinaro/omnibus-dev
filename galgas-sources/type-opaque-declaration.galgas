@@ -100,22 +100,30 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  @PLMTypeAttributes attributes = .none
+  @PLMTypeAttributes opaqueTypeAttributes = .none
   for (attribute) in mAttributeList do
-    if attribute.string == "instantiable" then
-      if [attributes instanciable] then
+    if attribute.string == instantiableAttribute () then
+      if [opaqueTypeAttributes instanciable] then
         error attribute : "duplicated attribute"
       else
-        attributes = attributes | .instanciable
+        opaqueTypeAttributes = opaqueTypeAttributes | .instanciable
       end
-    elsif attribute.string == "copyable" then
-      if [attributes copyable] then
+    elsif attribute.string == copyableAttribute () then
+      if [opaqueTypeAttributes copyable] then
         error attribute : "duplicated attribute"
       else
-        attributes = attributes | .copyable
+        opaqueTypeAttributes = opaqueTypeAttributes | .copyable
+      end
+    elsif attribute.string == arcAttribute () then
+      if [opaqueTypeAttributes arc] then
+        error attribute : "duplicated attribute"
+      else
+        opaqueTypeAttributes = opaqueTypeAttributes | .arc
       end
     else
-      error attribute : "only @copyable and @instantiable attributes are allowed here"
+      error attribute
+      : "only @" + copyableAttribute () + ", @" + arcAttribute () + " and @" + instantiableAttribute ()
+        + " attributes are allowed here"
     end
   end
 #--- Compute array size
@@ -131,7 +139,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
     !mode:.bootMode
     !?temporary:temporaries
     !?staticStringMap:*
-    !?variableMap:ioContext.mValuedObjectMap # universalMap
+    !?variableMap:ioContext.mValuedObjectMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
     ?result:let @objectIR sizeExpressionIR
@@ -140,7 +148,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
     error mSizeExpressionLocation : "array size expression is not static"
   else
     @constructorMap constructorMap = {}
-    if [attributes instanciable] then
+    if [opaqueTypeAttributes instanciable] then
       [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
     end
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
@@ -149,7 +157,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
       !classConstantMap:{}
       !constructorMap:constructorMap
       !guardMap:{}
-      !typeAttributes:attributes
+      !typeAttributes:opaqueTypeAttributes
       !plmTypeName:mAnonymousOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}
     }

@@ -3408,11 +3408,13 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_globalConstant::compare 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_valuedObject_localConstant::cEnumAssociatedValues_valuedObject_localConstant (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                                    const GALGAS_lstring & inAssociatedValue1
+                                                                                                    const GALGAS_lstring & inAssociatedValue1,
+                                                                                                    const GALGAS_bool & inAssociatedValue2
                                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3422,6 +3424,7 @@ void cEnumAssociatedValues_valuedObject_localConstant::description (C_String & i
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -3436,6 +3439,9 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_localConstant::compare (
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
   }
   return result ;
 }
@@ -3581,13 +3587,14 @@ GALGAS_valuedObject GALGAS_valuedObject::constructor_globalConstant (const GALGA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_valuedObject GALGAS_valuedObject::constructor_localConstant (const GALGAS_PLMType & inAssociatedValue0,
-                                                                    const GALGAS_lstring & inAssociatedValue1
+                                                                    const GALGAS_lstring & inAssociatedValue1,
+                                                                    const GALGAS_bool & inAssociatedValue2
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_valuedObject result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_localConstant ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_valuedObject_localConstant (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_valuedObject_localConstant (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -3697,11 +3704,13 @@ void GALGAS_valuedObject::method_globalConstant (GALGAS_objectIR & outAssociated
 
 void GALGAS_valuedObject::method_localConstant (GALGAS_PLMType & outAssociatedValue0,
                                                 GALGAS_lstring & outAssociatedValue1,
+                                                GALGAS_bool & outAssociatedValue2,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_localConstant) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
     C_String s ;
     s << "method @valuedObject localConstant invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -3709,6 +3718,7 @@ void GALGAS_valuedObject::method_localConstant (GALGAS_PLMType & outAssociatedVa
     const cEnumAssociatedValues_valuedObject_localConstant * ptr = (const cEnumAssociatedValues_valuedObject_localConstant *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
   }
 }
 
@@ -6781,7 +6791,7 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_none (UNUSED_LOCA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_all (UNUSED_LOCATION_ARGS) {
-  return GALGAS_PLMTypeAttributes (0xF) ;
+  return GALGAS_PLMTypeAttributes ((uint64_t) 0x1F) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6806,6 +6816,12 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_copyable (UNUSED_
 
 GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_generateAssignmentRoutine (UNUSED_LOCATION_ARGS) {
   return GALGAS_PLMTypeAttributes (((uint64_t) 1) << 3) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_arc (UNUSED_LOCATION_ARGS) {
+  return GALGAS_PLMTypeAttributes (((uint64_t) 1) << 4) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6885,7 +6901,7 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::substract_operation (const GA
 GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::operator_tilde (UNUSED_LOCATION_ARGS) const {
   GALGAS_PLMTypeAttributes result ;
   if (mIsValid) {
-    result = GALGAS_PLMTypeAttributes (0xF ^ mFlags) ;
+    result = GALGAS_PLMTypeAttributes (((uint64_t) 0x1F) ^ mFlags) ;
   }
   return result ;
 }
@@ -6910,6 +6926,9 @@ void GALGAS_PLMTypeAttributes::description (C_String & ioString,
     if ((mFlags & ((uint64_t) 1) << 3) != 0) {
       ioString << " generateAssignmentRoutine" ;
     }
+    if ((mFlags & ((uint64_t) 1) << 4) != 0) {
+      ioString << " arc" ;
+    }
   }
   ioString << ">" ;
 }
@@ -6929,7 +6948,7 @@ GALGAS_bool GALGAS_PLMTypeAttributes::getter_none (UNUSED_LOCATION_ARGS) const {
 GALGAS_bool GALGAS_PLMTypeAttributes::getter_all (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (mIsValid) {
-    result = GALGAS_bool (mFlags == 0xF) ;
+    result = GALGAS_bool (mFlags == (uint64_t) 0x1F) ;
   }
   return result ;
 }
@@ -6970,6 +6989,16 @@ GALGAS_bool GALGAS_PLMTypeAttributes::getter_generateAssignmentRoutine (UNUSED_L
   GALGAS_bool result ;
   if (mIsValid) {
     result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 3) != 0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_PLMTypeAttributes::getter_arc (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (mIsValid) {
+    result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 4) != 0) ;
   }
   return result ;
 }
@@ -9668,10 +9697,29 @@ void extensionMethod_llvmCodeGeneration (const GALGAS_routineMapIR inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineMapIR temp_0 = inObject ;
-  cEnumerator_routineMapIR enumerator_5935 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5935.hasCurrentObject ()) {
-    extensionMethod_llvmCodeGeneration (enumerator_5935.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)) ;
-    enumerator_5935.gotoNextObject () ;
+  cEnumerator_routineMapIR enumerator_5969 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_5969.hasCurrentObject ()) {
+    extensionMethod_llvmCodeGeneration (enumerator_5969.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)) ;
+    enumerator_5969.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Extension method '@allocaList generateAllocaList'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_generateAllocaList (const GALGAS_allocaList inObject,
+                                         GALGAS_string & ioArgument_ioLLVMcode,
+                                         C_Compiler * inCompiler
+                                         COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_allocaList temp_0 = inObject ;
+  cEnumerator_allocaList enumerator_10038 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_10038.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_10038.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)).add_operation (enumerator_10038.current_mLLVMTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 248)) ;
+    enumerator_10038.gotoNextObject () ;
   }
 }
 
@@ -13608,6 +13656,21 @@ void extensionSetter_appendStoreTemporaryReference (GALGAS_instructionListIR & i
                                                     C_Compiler * /* inCompiler */
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   ioObject.addAssign_operation (GALGAS_storeFromTemporaryReferenceIR::constructor_new (constinArgument_inTargetVarType, constinArgument_inLLVMName, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-to-temporary-reference.galgas", 8))  COMMA_SOURCE_FILE ("intermediate-store-to-temporary-reference.galgas", 8)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                Extension method '@instructionListIR generateRelease'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_generateRelease (GALGAS_instructionListIR & ioObject,
+                                      const GALGAS_PLMType constinArgument_inType,
+                                      const GALGAS_lstring constinArgument_in_5F_plmName,
+                                      C_Compiler * /* inCompiler */
+                                      COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_releaseIR::constructor_new (constinArgument_inType, constinArgument_in_5F_plmName  COMMA_SOURCE_FILE ("intermediate-release.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-release.galgas", 3)) ;
 }
 
 

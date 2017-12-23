@@ -17,7 +17,7 @@ extern func freeObjectCount (?ForFreeList: inFreeListIndex $uint32) -> $uint32 :
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // $data type
 
-newtype $data : [[32]] @instantiable
+newtype $data : [[32]] @instantiable @arc
 
 extern func append (?byte:inByte $uint8 ?!toBuffer: ioBuffer $data) : "data.buffer.append.byte"
 

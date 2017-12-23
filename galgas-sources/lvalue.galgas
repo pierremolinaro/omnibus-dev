@@ -161,7 +161,7 @@ method @LValueAST analyzeLValue
       )
     case globalConstant (*) :
       error mIdentifier : "a global constant cannot be written" : outInternalRepresentation
-    case localConstant (2*) :
+    case localConstant (3*) :
       error mIdentifier : "a local constant cannot be written" : outInternalRepresentation
     case globalSyncInstance (2*) :
       error mIdentifier : "a global sync instance is not allowed here" : outInternalRepresentation

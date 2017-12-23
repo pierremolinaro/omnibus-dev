@@ -225,16 +225,20 @@ void appendByte (const unsigned char inByte, unsigned * ioPointer) {
   }else{ // Block is allocated
     DataBufferHeaderType * p = (DataBufferHeaderType *) (*ioPointer) ;
     if (p->mLength < blockSize (p)) { // Buffer full ?
-      p->mBuffer8 [p->mLength] = inByte ; // Not full
+      if (p->mReferenceCount > 1) {
+        p = reallocBlock (p, p->mBlockSizeIndex) ;
+        *ioPointer = (unsigned) p ;
+      }
+      p->mBuffer8 [p->mLength] = inByte ;
       p->mLength += 1 ;
     }else{ // Block is full
      //--- Allocate next size block
-      DataBufferHeaderType * newBlock = reallocBlock (p, p->mBlockSizeIndex + 1) ;
-    //--- Copy buffer content to new block
-      newBlock->mBuffer8 [newBlock->mLength] = inByte ;
-      newBlock->mLength += 1 ;
+      p = reallocBlock (p, p->mBlockSizeIndex + 1) ;
+    //--- Append byte
+      p->mBuffer8 [p->mLength] = inByte ;
+      p->mLength += 1 ;
     //---
-      *ioPointer = (unsigned) newBlock ;
+      *ioPointer = (unsigned) p ;
     }
   }
 }

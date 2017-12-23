@@ -27,7 +27,7 @@ proc enterFormalArguments
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind
     case input :
-      [!?ioUniversalMap insertLocalConstant !formalArgumentName !typeProxy !formalArgumentName]
+      [!?ioUniversalMap insertLocalConstant !formalArgumentName !true !typeProxy !formalArgumentName]
     case inputOutput :
       [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasUnreadValue !true]
     case output :
@@ -102,7 +102,7 @@ proc routineSemanticAnalysis
     !?generatedCode:instructionGenerationList
   ]
 #--- End of variableMap
-  [universalMap checkLocalVariableFinalState]
+  [universalMap checkLocalVariableFinalState !?instructionGenerationList]
   [!?universalMap closeBranch !inEndOfRoutineDeclaration]
   [!?universalMap closeOverride !inEndOfRoutineDeclaration]
 #--- Code generation
@@ -239,6 +239,14 @@ method @routineMapIR-element llvmCodeGeneration
     ioLLVMcode += "  ret " + [mReturnType llvmTypeName] + " %result\n"
   end
   ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @allocaList generateAllocaList ?!@string ioLLVMcode {
+  for (variable LLVMTypeName) in self do
+    ioLLVMcode += "  " + variable + " = alloca " + LLVMTypeName + "\n"
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

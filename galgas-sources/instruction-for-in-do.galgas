@@ -108,7 +108,7 @@ override method @forInstructionAST analyze
   ioAllocaList += !llvmNameForLocalVariable (!plmName) ![iteratedElementType llvmTypeName]
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
-  [!?ioUniversalMap insertLocalConstant !mVarName !iteratedElementType !plmName]
+  [!?ioUniversalMap insertLocalConstant !mVarName !false !iteratedElementType !plmName]
 #--- Analyze while expression
   @instructionListIR whileExpression_GenerationList = {}
   [mWhileExpression analyzeExpression

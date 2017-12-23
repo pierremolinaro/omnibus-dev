@@ -179,6 +179,8 @@ class GALGAS_PLMTypeAttributes : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_PLMTypeAttributes constructor_all (LOCATION_ARGS) ;
 
+  public : static class GALGAS_PLMTypeAttributes constructor_arc (LOCATION_ARGS) ;
+
   public : static class GALGAS_PLMTypeAttributes constructor_copyable (LOCATION_ARGS) ;
 
   public : static class GALGAS_PLMTypeAttributes constructor_equatable (LOCATION_ARGS) ;
@@ -222,6 +224,8 @@ class GALGAS_PLMTypeAttributes : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_all (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_arc (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_copyable (LOCATION_ARGS) const ;
 

@@ -184,7 +184,7 @@ private proc initSemanticAnalysis
     !?generatedCode:outInstructionGenerationList
   ]
 #--- End of variableMap
-  [universalMap checkLocalVariableFinalState]
+  [universalMap checkLocalVariableFinalState !?outInstructionGenerationList]
   [!?universalMap closeBranch !inEndOfInitDeclaration]
   [!?universalMap closeOverride !inEndOfInitDeclaration]
 }
