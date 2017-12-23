@@ -229,6 +229,30 @@ getter @PLMType descriptionForHTMLFile -> @string {
 
 #·······················································································································
 
+list @arcAssignmentList {
+  @string mPropertyName
+  @PLMType mPropertyType
+  @uintlist mPropertyIndexPath
+}
+
+#·······················································································································
+
+getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
+  result = {}
+  if [kind isStructure] then
+    [kind structure ?propertyList:let @propertyList propertyList]
+    for (propertyName propertyType) in propertyList do (idx)
+      let indexPath = inPropertyIndexPath + {!idx}
+      if [propertyType.typeAttributes arc] then
+        result += !propertyName !propertyType !indexPath
+      end
+      result += [propertyType arcList !indexPath]
+    end
+  end
+}
+
+#·······················································································································
+
 shared map @unifiedTypeMap %selectors {
   @PLMType type
   @uint index

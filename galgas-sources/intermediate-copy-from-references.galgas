@@ -76,14 +76,43 @@ override method @copyFromReferencesIR enterAccessibleEntities
 method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
   let typeName = [self llvmTypeName]
   if [typeAttributes generateAssignmentRoutine] then
+    let arcAssignmentList = [self arcList !{}]
+
     ioLLVMCode += llvmSeparatorLine () + "\n"
     ioLLVMCode += "define internal void @plm.assign." + [self.plmTypeName identifierRepresentation]
                 + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
+    ioLLVMCode += ";--- Handle ARC properties\n"
+    for (propertyName propertyType indexPath) in arcAssignmentList do
+      let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation]
+      ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inSource, i32 0"
+      for (idx) in indexPath do
+        ioLLVMCode += ", i32 " + idx
+      end
+      ioLLVMCode += " ; " + propertyName + "\n"
+      let propertyTypeLLVMName = [propertyType llvmTypeName]
+      let llvmLoadedVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ".loaded"
+      ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+      ioLLVMCode += "  call void @" + [propertyType plmTypeName] + ".retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+    end
+    for (propertyName propertyType indexPath) in arcAssignmentList do
+      let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation]
+      ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inTarget, i32 0"
+      for (idx) in indexPath do
+        ioLLVMCode += ", i32 " + idx
+      end
+      ioLLVMCode += " ; " + propertyName + "\n"
+      let propertyTypeLLVMName = [propertyType llvmTypeName]
+      let llvmLoadedVarName = "%arc.release." + [propertyName assemblerRepresentation] + ".loaded"
+      ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+      ioLLVMCode += "  call void @" + [propertyType plmTypeName] + ".release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+    end
+    ioLLVMCode += ";--- Compute type size\n"
     ioLLVMCode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
     ioLLVMCode += "  %byteCount = ptrtoint " + typeName + "* %sizeAsPtr to i32\n"
     ioLLVMCode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
     ioLLVMCode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
-    ioLLVMCode += "loadStore: ; Perform copy using load - store\n"
+    ioLLVMCode += ";--- Copy\n"
+    ioLLVMCode += "loadStore:\n"
     ioLLVMCode += "  %v = load " + typeName + ", " + typeName + "* %inSource\n" 
     ioLLVMCode += "  store " + typeName + " %v, " + typeName + "* %inTarget\n" 
     ioLLVMCode += "  br label %copy.end\n"
