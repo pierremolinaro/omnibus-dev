@@ -187,9 +187,7 @@ method @bootListIR generateCode
   for boot in self do
     ioLLVMcode += llvmSeparatorLine () + "\n"
     ioLLVMcode += "define internal void @boot." + boot.mDriverName + " ()" + llvmAttributeFunction () + "{\n"
-    for (variable LLVMTypeName) in boot.mAllocaList do
-      ioLLVMcode += "  " + variable + " = alloca " + LLVMTypeName + "\n"
-    end
+    [boot.mAllocaList generateAllocaList !?ioLLVMcode]
     [boot.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"

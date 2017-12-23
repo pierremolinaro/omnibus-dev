@@ -134,8 +134,8 @@ proc codeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @generationContext {
-  @string mPanicCodeLLVMType
-  @string mPanicLineLLVMType
+  @PLMType mPanicCodeLLVMType
+  @PLMType mPanicLineLLVMType
   @string mNopInstructionInLLVM
   @globalTaskVariableList mGlobalTaskVariableList
   @availableInterruptMap mAvailableInterruptMap
@@ -160,8 +160,8 @@ private proc generateCodeFiles
   @generationAdds generationAdds = .default
   generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
   let @generationContext generationContext = .new {
-    ![[inPanicCodeType type] llvmTypeName]
-    ![[inPanicLineType type] llvmTypeName]
+    ![inPanicCodeType type]
+    ![inPanicLineType type]
     !inTargetParameters.mNopInstructionStringInLLVM.string
     !inIntermediateCodeStruct.mGlobalTaskVariableList
     !inAvailableInterruptMap

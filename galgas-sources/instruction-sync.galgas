@@ -610,8 +610,8 @@ override method @syncInstructionIR llvmInstructionCode
       ?let staticStringIndex
     ]
     ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
-    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mSelectInstructionLocation line] + ", "
-    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForClosedSync () + ")\n"
+    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mSelectInstructionLocation line] + ", "
+    ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForClosedSync () + ")\n"
     ioLLVMcode += "  unreachable\n\n"
   end
   ioLLVMcode += exitLabelName + ":\n"

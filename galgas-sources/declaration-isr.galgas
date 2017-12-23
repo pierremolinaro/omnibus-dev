@@ -153,9 +153,7 @@ method @interruptMapIR interruptCodeGeneration
     ioLLVMcode += llvmTitleComment (!interruptImplementationName)
     ioLLVMcode += "define void @" + interruptImplementationName + " ()" + llvmAttributeFunction () + " {\n"
   #--- Alloca
-    for (variable llvmTypeName) in interrupt.mAllocaList do
-      ioLLVMcode += "  " + variable + " = alloca " + llvmTypeName + "\n"
-    end
+    [interrupt.mAllocaList generateAllocaList !?ioLLVMcode]
   #--- Define self
     if interrupt.mSelfType.kind != .void then
       let varName = llvmNameForGlobalVariable (!interrupt.mGlobalVariableName)
@@ -192,7 +190,7 @@ method @interruptMapIR interruptCodeGeneration
           let name = llvmNameForSectionOrSafeInterrupt (!lkey.string)
           ioLLVMcode += llvmTitleComment (!"Panic code for " + name)
           ioLLVMcode += "define void @" + name + " ()" + llvmAttributeFunction () + " noreturn {\n"
-          ioLLVMcode += "  call void @panic.isr (" + inGenerationContext.mPanicCodeLLVMType + " " + value.bigint + ") noreturn \n"
+          ioLLVMcode += "  call void @panic.isr (" + [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + value.bigint + ") noreturn \n"
           ioLLVMcode += "  unreachable\n"
           ioLLVMcode += "}\n\n"
         end

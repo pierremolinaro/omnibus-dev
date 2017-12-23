@@ -35,8 +35,8 @@ override method @upperBoundCheckIR llvmInstructionCode
   ioLLVMcode += "  br i1 " + llvmSourceName + ".isOk, label %" + llvmLabelName + ".ovf, label %" + llvmLabelName + ".ok\n\n"
   ioLLVMcode += llvmLabelName + ".ovf:\n"
   ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
-  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ")\n"
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mLocation line] + ", "
+  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + mPanicCode + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += llvmLabelName + ".ok:\n"
 }

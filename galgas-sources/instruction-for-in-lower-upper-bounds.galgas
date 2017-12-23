@@ -168,7 +168,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   #--- Enter iteration variable name
     let enumeratedVarName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
     ioTemporaries.mTemporaryIndex ++
-    ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) ![type llvmTypeName]
+    ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) !type !false
     if mVarName.string != "" then
      [!?ioUniversalMap insertLocalConstant !mVarName !false !type !enumeratedVarName]
     end

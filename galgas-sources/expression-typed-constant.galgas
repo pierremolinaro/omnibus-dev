@@ -136,7 +136,7 @@ override method @typedConstantCallAST analyzeExpression
   #    So we create articially a temporary reference for resulting value
     getNewTempReference (![outResult type] !?ioTemporaries ?let newTemporaryReference)
   #--- ... add it into alloc list...
-    ioAllocaList += ![newTemporaryReference llvmName] ![newTemporaryReference llvmTypeName]
+    ioAllocaList += ![newTemporaryReference llvmName] ![newTemporaryReference type] !false
   #--- ... and store resulting value into it
     [!?ioInstructionGenerationList appendStoreTemporaryReference
       ![newTemporaryReference type]

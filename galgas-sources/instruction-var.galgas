@@ -124,7 +124,7 @@ override method @varInstructionWithAssignmentAST analyze
   ioTemporaries.mTemporaryIndex ++
   [!?ioUniversalMap insertLocalVariable !mVarName ![result type] !plmLocalVariableName !.hasUnreadValue !false]
 #--- Code generation
-  ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) ![[result type] llvmTypeName]
+  ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) ![result type] !false
 #--- Assignment generation
   [!?ioInstructionGenerationList appendCopyFromReferences
     !?ioTemporaries
@@ -158,7 +158,7 @@ override method @varInstructionAST analyze
   ioTemporaries.mTemporaryIndex ++
   [!?ioUniversalMap insertLocalVariable !mVarName !targetType !plmName !.noValue !true]
 #--- Code generation
-  ioAllocaList += !llvmNameForLocalVariable (!plmName) ![targetType llvmTypeName]
+  ioAllocaList += !llvmNameForLocalVariable (!plmName) !targetType !false
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

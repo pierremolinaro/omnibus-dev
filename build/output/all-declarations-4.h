@@ -2296,17 +2296,6 @@ void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_elem
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Extension method '@allocaList generateAllocaList'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_generateAllocaList (const class GALGAS_allocaList inObject,
-                                         class GALGAS_string & io_ioLLVMcode,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                             Extension getter '@objectIR isConstantValue' (as function)                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
