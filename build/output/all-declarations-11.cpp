@@ -12988,8 +12988,6 @@ const char * gWrapperFileContent_69_targetTemplates = "@------------------------
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call service routine\n"
   "  blx   r12         @ R4:calling task context address, R5:thread PSP\n"
-  "@----------------------------------------- Set return code (from R0 to R3) in stacked registers\n"
-  "  stmia r5!, {r0, r1, r2, r3}\n"
   "@--- Continues in sequence to .handle.context.switch\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
@@ -13014,8 +13012,7 @@ const char * gWrapperFileContent_69_targetTemplates = "@------------------------
   "  pop   {r4, r5, lr}\n"
   "@----------------------------------------- Task context did change \?\n"
   "  cmp   r0, r1  @ R0:old task context, R1:new task context\n"
-  "  it    eq  @ if equal, no context change, perform a return from exception\n"
-  "  bxeq  lr\n"
+  "  beq   __no_context_change\n"
   "@----------------------------------------- Save context of preempted task (if any)\n"
   "  cbz   r0, __perform_restore_context @ if old context is NULL, no context to save\n"
   "@--- Save registers r4 to r11, PSP, LR\n"
@@ -13028,8 +13025,14 @@ const char * gWrapperFileContent_69_targetTemplates = "@------------------------
   "  msr    psp, r12\n"
   "__direct_return:\n"
   "  bx     lr\n"
+  "@----------------------------------------- No context change\n"
+  "__no_context_change:\n"
+  "  cbz r0, __no_context_to_restore\n"
+  "  bx  lr\n"
   "@----------------------------------------- No context to restore\n"
   "__no_context_to_restore:\n"
+  "@--- Switch off activity led\n"
+  "  bl func.activityLedOff_28__29_  @ Defined in PLM source\n"
   "@--- Restore PSP of background task\n"
   "  ldr  r0, =backgroundTaskContext\n"
   "  ldr  r0, [r0]\n"
@@ -13043,7 +13046,7 @@ const cRegularFileWrapper gWrapperFile_69_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7736, // Text length
+  7764, // Text length
   gWrapperFileContent_69_targetTemplates
 ) ;
 
@@ -13632,8 +13635,6 @@ const char * gWrapperFileContent_77_targetTemplates = "@------------------------
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call service routine\n"
   "  blx   r12         @ R4:calling task context address, R5:thread PSP\n"
-  "@----------------------------------------- Set return code (from R0 to R3) in stacked registers\n"
-  "  stmia r5!, {r0, r1, r2, r3}\n"
   "@--- Continues in sequence to .handle.context.switch\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
@@ -13658,8 +13659,7 @@ const char * gWrapperFileContent_77_targetTemplates = "@------------------------
   "  pop   {r4, r5, lr}\n"
   "@----------------------------------------- Task context did change \?\n"
   "  cmp   r0, r1  @ R0:old task context, R1:new task context\n"
-  "  it    eq  @ if equal, no context change, perform a return from exception\n"
-  "  bxeq  lr\n"
+  "  beq   __no_context_change\n"
   "@----------------------------------------- Save context of preempted task (if any)\n"
   "  cbz   r0, __perform_restore_context @ if old context is NULL, no context to save\n"
   "@--- Save registers r4 to r11, PSP, LR\n"
@@ -13672,8 +13672,14 @@ const char * gWrapperFileContent_77_targetTemplates = "@------------------------
   "  msr    psp, r12\n"
   "__direct_return:\n"
   "  bx     lr\n"
+  "@----------------------------------------- No context change\n"
+  "__no_context_change:\n"
+  "  cbz r0, __no_context_to_restore\n"
+  "  bx  lr\n"
   "@----------------------------------------- No context to restore\n"
   "__no_context_to_restore:\n"
+  "@--- Switch off activity led\n"
+  "  bl func.activityLedOff_28__29_  @ Defined in PLM source\n"
   "@--- Restore PSP of background task\n"
   "  ldr  r0, =backgroundTaskContext\n"
   "  ldr  r0, [r0]\n"
@@ -13687,7 +13693,7 @@ const cRegularFileWrapper gWrapperFile_77_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7736, // Text length
+  7764, // Text length
   gWrapperFileContent_77_targetTemplates
 ) ;
 
