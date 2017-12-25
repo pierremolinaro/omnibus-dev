@@ -478,9 +478,6 @@ method @guardMapIR guardCodeGeneration
       ioSectionList +=
         !guardCallName
         !guardImplementationName
-        !guard.mReceiverType
-        !guard.mFormalArgumentListForGeneration
-        !booleanType () # A guard returns a boolean value
         !true # Onvly incocation from user mode
     end
     [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
@@ -498,10 +495,18 @@ method @guardMapIR-element llvmCodeGeneration
   switch mGuardKindGenerationIR
   case convenienceGuard (* * * *) :
     guardRoutineName = llvmNameForGuardCall (!lkey.string)
+    ioLLVMcode += llvmTitleComment (!guardRoutineName)
   case baseGuard :
     guardRoutineName = llvmNameForGuardImplementation (!lkey.string)
+    ioLLVMcode += llvmTitleComment (!guardRoutineName)
+    let prototype = llvmFunctionPrototype (
+      !booleanType ()
+      !llvmNameForGuardCall (!lkey.string)
+      !mReceiverType
+      !mFormalArgumentListForGeneration
+    )
+    ioLLVMcode += "declare " + prototype + "\n\n"
   end
-  ioLLVMcode += llvmTitleComment (!guardRoutineName)
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
   let receiverTypeName = if mReceiverType.kind == .void then
     ""

@@ -240,9 +240,6 @@ method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis
 list @sectionIRlist {
   @string mSectionCallName
   @string mSectionImplementationName
-  @PLMType mReceiverType # voidType () if standalone function
-  @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @PLMType mReturnType # voidType () if no return value
   @bool mInvocationFromUserModeOnly
 }
 
@@ -302,10 +299,14 @@ method @routineMapIR svcCodeGeneration
         ioSectionList +=
           !svcCallName
           !svcImplementationName
+          !true # Onvly incocation from user mode
+        let prototype = llvmFunctionPrototype (
+          !svc.mReturnType
+          !svcCallName
           !svc.mReceiverType
           !svc.mFormalArgumentListForGeneration
-          !svc.mReturnType
-          !true # Onvly incocation from user mode
+        )
+        ioLLVMcode += "declare " + prototype + "\n\n"
       case primitive, service :
         ioLLVMcode += llvmTitleComment (!svcCallName)
         let prototype = llvmFunctionPrototype (
@@ -330,20 +331,9 @@ proc generateSectionDispatcher
   ?let @string inTargetName
   ?targetParameters:let @targetParameters inTargetParameters
   ?!@string ioAssemblerCode
-  ?!@string ioLLVMcode
   ?let @sectionIRlist inSectionIRlist
 {
-  for (callName * receiverType formalArguments resultType *) in inSectionIRlist do
-    let prototype = llvmFunctionPrototype (
-      !resultType
-      !callName
-      !receiverType
-      !formalArguments
-    )
-    ioLLVMcode += llvmTitleComment (!callName)
-    ioLLVMcode += "declare " + prototype + "\n\n"
-  end
-  for (callName implementationName * * * invocationFromUserModeOnly) in inSectionIRlist do (idx)
+  for (callName implementationName invocationFromUserModeOnly) in inSectionIRlist do (idx)
     if invocationFromUserModeOnly then
       var s = getTargetTextFile (
         !currentDir:inCurrentDirectory
@@ -368,7 +358,7 @@ proc generateSectionDispatcher
     !currentDir:inCurrentDirectory
     !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherHeader
   )
-  for (callName implementationName * * * invocationFromUserModeOnly) in inSectionIRlist do (idx)
+  for (callName implementationName invocationFromUserModeOnly) in inSectionIRlist do (idx)
     var s = getTargetTextFile (
       !currentDir:inCurrentDirectory
       !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherEntry
