@@ -108,9 +108,9 @@ task T1 priority 10 stackSize 512 {
     let current = currentlyAllocatedObjectCount ()
     if self.current ≠ current {
       self.current = current
-      lcd.goto (!line:3 !column:10)
-      lcd.print (!spaces:6)
-      lcd.goto (!line:3 !column:10)
+      lcd.goto (!line:3 !column:17)
+      lcd.print (!spaces:2)
+      lcd.goto (!line:3 !column:17)
       lcd.print (!unsigned:current)
     }
   }

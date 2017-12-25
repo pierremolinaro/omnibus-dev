@@ -284,23 +284,16 @@ private proc generateCodeFiles
   sectionIRlist += 
     !llvmNameForSectionCall (!"heap.memory.free")
     !llvmNameForSectionImplementation (!"heap.memory.free")
-    !voidType ()
-    !{!.input !opaqueType32 () !"inPointer"}
-    !voidType ()
     !false # Invocation from any mode
   sectionIRlist += 
     !llvmNameForSectionCall (!"heap.memory.alloc")
     !llvmNameForSectionImplementation (!"heap.memory.alloc")
-    !voidType ()
-    !{!.input !opaqueType32 () !"inSize"}
-    !opaqueType32 ()
     !false # Invocation from any mode
   generateSectionDispatcher (
     !inCurrentDirectory
     !inTargetName.string
     !targetParameters:inTargetParameters
     !?asCode
-    !?llvmCode
     !sectionIRlist
   )
 #----------------------------------------- Panic
@@ -389,7 +382,7 @@ private proc generateCodeFiles
   json += "  ],\n"
 #--- sections
   json += "  \"sections\" : ["
-  for (* sectionImplementation 4*) in sectionIRlist
+  for (* sectionImplementation *) in sectionIRlist
     do json += "\n    \"" + sectionImplementation + "\""
     between json += ","
     after json += "\n"

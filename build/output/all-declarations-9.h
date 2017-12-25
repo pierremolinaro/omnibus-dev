@@ -445,8 +445,7 @@ void routine_generateSectionDispatcher (const class GALGAS_string constinArgumen
                                         const class GALGAS_string constinArgument1,
                                         const class GALGAS_targetParameters constinArgument2,
                                         class GALGAS_string & ioArgument3,
-                                        class GALGAS_string & ioArgument4,
-                                        const class GALGAS_sectionIRlist constinArgument5,
+                                        const class GALGAS_sectionIRlist constinArgument4,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
