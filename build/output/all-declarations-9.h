@@ -472,7 +472,7 @@ void routine_generateSectionAndSafeDispatcher (const class GALGAS_string constin
 void routine_generatePrimitiveAndServiceDispatcher (const class GALGAS_string constinArgument0,
                                                     const class GALGAS_string constinArgument1,
                                                     class GALGAS_string & ioArgument2,
-                                                    const class GALGAS__32_stringlist constinArgument3,
+                                                    const class GALGAS_primitiveAndServiceIRlist constinArgument3,
                                                     const class GALGAS_targetParameters constinArgument4,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;

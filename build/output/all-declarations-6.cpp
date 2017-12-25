@@ -192,196 +192,202 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (41)
 , END
 // State S41 (index = 137)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (42)
 , END
 // State S42 (index = 140)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (44)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (43)
 , END
 // State S43 (index = 143)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
 // State S44 (index = 146)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (47)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (46)
 , END
 // State S45 (index = 149)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (2)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
 // State S46 (index = 152)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (48)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (49)
 , END
 // State S47 (index = 155)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (49)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (50)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (2)
 , END
-// State S48 (index = 160)
+// State S48 (index = 158)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (50)
+, END
+// State S49 (index = 161)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (51)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (52)
+, END
+// State S50 (index = 166)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (11)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (51)
-, END
-// State S49 (index = 165)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (10)
-, END
-// State S50 (index = 168)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (53)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (53)
 , END
 // State S51 (index = 171)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (54)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (10)
 , END
 // State S52 (index = 174)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (55)
 , END
 // State S53 (index = 177)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (56)
 , END
 // State S54 (index = 180)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (11)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (51)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S55 (index = 185)
+// State S55 (index = 183)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (58)
 , END
-// State S56 (index = 188)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (59)
+// State S56 (index = 186)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (11)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (53)
 , END
 // State S57 (index = 191)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (12)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (60)
 , END
 // State S58 (index = 194)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (61)
+, END
+// State S59 (index = 197)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (12)
+, END
+// State S60 (index = 200)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (13)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (60)
-, END
-// State S59 (index = 199)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (62)
-, END
-// State S60 (index = 202)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (62)
 , END
 // State S61 (index = 205)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (64)
 , END
 // State S62 (index = 208)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (65)
 , END
 // State S63 (index = 211)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S64 (index = 214)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (67)
+, END
+// State S65 (index = 217)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (13)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (60)
-, END
-// State S64 (index = 216)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (67)
-, END
-// State S65 (index = 219)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (62)
 , END
 // State S66 (index = 222)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (14)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (69)
 , END
 // State S67 (index = 225)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (70)
+, END
+// State S68 (index = 228)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (14)
+, END
+// State S69 (index = 231)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (15)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (69)
-, END
-// State S68 (index = 230)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (9)
-, END
-// State S69 (index = 233)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (71)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (71)
 , END
 // State S70 (index = 236)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (9)
 , END
 // State S71 (index = 239)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (73)
+, END
+// State S72 (index = 242)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S73 (index = 245)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (15)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (69)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (71)
 , END
-// State S72 (index = 244)
+// State S74 (index = 250)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (17)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (74)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (76)
 , END
-// State S73 (index = 249)
+// State S75 (index = 255)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (16)
 , END
-// State S74 (index = 252)
+// State S76 (index = 258)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (19)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (76)
-, END
-// State S75 (index = 257)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S76 (index = 260)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (79)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (78)
 , END
 // State S77 (index = 263)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (18)
-, END
-// State S78 (index = 266)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (80)
-, END
-// State S79 (index = 269)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (19)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (76)
-, END
-// State S80 (index = 274)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (82)
-, END
-// State S81 (index = 277)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (20)
-, END
-// State S82 (index = 280)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (83)
-, END
-// State S83 (index = 283)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (84)
-, END
-// State S84 (index = 286)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (85)
-, END
-// State S85 (index = 289)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
+// State S78 (index = 266)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (81)
+, END
+// State S79 (index = 269)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (18)
+, END
+// State S80 (index = 272)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (82)
+, END
+// State S81 (index = 275)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (19)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (78)
+, END
+// State S82 (index = 280)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (84)
+, END
+// State S83 (index = 283)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (20)
+, END
+// State S84 (index = 286)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (85)
+, END
+// State S85 (index = 289)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (86)
+, END
 // State S86 (index = 292)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (88)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (87)
+, END
+// State S87 (index = 295)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S88 (index = 298)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (90)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (21)
 , END
-// State S87 (index = 297)
+// State S89 (index = 303)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (3)
 , END
-// State S88 (index = 300)
-, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (90)
+// State S90 (index = 306)
+, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (92)
 , C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (25)
 , END
-// State S89 (index = 307)
+// State S91 (index = 313)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (4)
 , END
-// State S90 (index = 310)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (92)
+// State S92 (index = 316)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (94)
 , END
-// State S91 (index = 313)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (93)
+// State S93 (index = 319)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (95)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (23)
 , END
-// State S92 (index = 318)
+// State S94 (index = 324)
 , C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (26)
 , END
-// State S93 (index = 323)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (95)
+// State S95 (index = 329)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (97)
 , END
-// State S94 (index = 326)
+// State S96 (index = 332)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (22)
 , END
-// State S95 (index = 329)
-, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (90)
+// State S97 (index = 335)
+, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (92)
 , C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (25)
 , END
-// State S96 (index = 336)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (93)
+// State S98 (index = 342)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (95)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (23)
 , END
-// State S97 (index = 341)
+// State S99 (index = 347)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (24)
 , END} ;
 
-static const uint32_t gActionTableIndex_plm_target_grammar [98] = {
+static const uint32_t gActionTableIndex_plm_target_grammar [100] = {
   0  // S0
 , 3  // S1
 , 6  // S2
@@ -430,56 +436,58 @@ static const uint32_t gActionTableIndex_plm_target_grammar [98] = {
 , 149  // S45
 , 152  // S46
 , 155  // S47
-, 160  // S48
-, 165  // S49
-, 168  // S50
+, 158  // S48
+, 161  // S49
+, 166  // S50
 , 171  // S51
 , 174  // S52
 , 177  // S53
 , 180  // S54
-, 185  // S55
-, 188  // S56
+, 183  // S55
+, 186  // S56
 , 191  // S57
 , 194  // S58
-, 199  // S59
-, 202  // S60
+, 197  // S59
+, 200  // S60
 , 205  // S61
 , 208  // S62
 , 211  // S63
-, 216  // S64
-, 219  // S65
+, 214  // S64
+, 217  // S65
 , 222  // S66
 , 225  // S67
-, 230  // S68
-, 233  // S69
+, 228  // S68
+, 231  // S69
 , 236  // S70
 , 239  // S71
-, 244  // S72
-, 249  // S73
-, 252  // S74
-, 257  // S75
-, 260  // S76
+, 242  // S72
+, 245  // S73
+, 250  // S74
+, 255  // S75
+, 258  // S76
 , 263  // S77
 , 266  // S78
 , 269  // S79
-, 274  // S80
-, 277  // S81
+, 272  // S80
+, 275  // S81
 , 280  // S82
 , 283  // S83
 , 286  // S84
 , 289  // S85
 , 292  // S86
-, 297  // S87
-, 300  // S88
-, 307  // S89
-, 310  // S90
+, 295  // S87
+, 298  // S88
+, 303  // S89
+, 306  // S90
 , 313  // S91
-, 318  // S92
-, 323  // S93
-, 326  // S94
+, 316  // S92
+, 319  // S93
+, 324  // S94
 , 329  // S95
-, 336  // S96
-, 341  // S97
+, 332  // S96
+, 335  // S97
+, 342  // S98
+, 347  // S99
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -515,53 +523,53 @@ static const int16_t gSuccessorTable_plm_target_grammar_29 [3] = {0, 30, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_31 [3] = {0, 32, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_41 [5] = {0, 42,
-  2, 43, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_43 [5] = {0, 44,
+  2, 45, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_42 [3] = {7, 45, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_44 [3] = {7, 47, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_43 [3] = {0, 46, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_45 [3] = {0, 48, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_48 [3] = {8, 52, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_50 [3] = {8, 54, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_52 [3] = {0, 55, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_54 [3] = {0, 57, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_54 [3] = {8, 57, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_56 [3] = {8, 59, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_58 [3] = {9, 61, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_60 [3] = {9, 63, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_61 [3] = {0, 64, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_63 [3] = {0, 66, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_63 [3] = {9, 66, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_65 [3] = {9, 68, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_67 [3] = {10, 70, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_69 [3] = {10, 72, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_70 [3] = {0, 72, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_72 [3] = {0, 74, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_71 [3] = {10, 73, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_73 [3] = {10, 75, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_72 [3] = {11, 75, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_74 [3] = {11, 77, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_74 [3] = {12, 77, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_76 [3] = {12, 79, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_75 [3] = {0, 78, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_77 [3] = {0, 80, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_79 [3] = {12, 81, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_81 [3] = {12, 83, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_85 [5] = {0, 86,
-  4, 87, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_87 [5] = {0, 88,
+  4, 89, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_86 [3] = {13, 89, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_88 [3] = {13, 91, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_88 [3] = {15, 91, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_90 [3] = {15, 93, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_91 [3] = {14, 94, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_93 [3] = {14, 96, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_95 [3] = {15, 96, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_97 [3] = {15, 98, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_96 [3] = {14, 97, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_98 [3] = {14, 99, -1} ;
 
-static const int16_t * gSuccessorTable_plm_target_grammar [98] = {
+static const int16_t * gSuccessorTable_plm_target_grammar [100] = {
 gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2, gSuccessorTable_plm_target_grammar_3, 
   NULL, NULL, NULL, NULL, 
   NULL, NULL, gSuccessorTable_plm_target_grammar_10, gSuccessorTable_plm_target_grammar_11, 
@@ -572,21 +580,21 @@ gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2
   NULL, gSuccessorTable_plm_target_grammar_29, NULL, gSuccessorTable_plm_target_grammar_31, 
   NULL, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_41, gSuccessorTable_plm_target_grammar_42, gSuccessorTable_plm_target_grammar_43, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_48, NULL, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_52, NULL, gSuccessorTable_plm_target_grammar_54, NULL, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_58, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_61, NULL, gSuccessorTable_plm_target_grammar_63, 
-  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_67, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_70, gSuccessorTable_plm_target_grammar_71, 
-  gSuccessorTable_plm_target_grammar_72, NULL, gSuccessorTable_plm_target_grammar_74, gSuccessorTable_plm_target_grammar_75, 
-  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_79, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_85, gSuccessorTable_plm_target_grammar_86, NULL, 
-  gSuccessorTable_plm_target_grammar_88, NULL, NULL, gSuccessorTable_plm_target_grammar_91, 
-  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_95, 
-  gSuccessorTable_plm_target_grammar_96, NULL} ;
+  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_43, 
+  gSuccessorTable_plm_target_grammar_44, gSuccessorTable_plm_target_grammar_45, NULL, NULL, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_50, NULL, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_54, NULL, 
+  gSuccessorTable_plm_target_grammar_56, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_60, NULL, NULL, gSuccessorTable_plm_target_grammar_63, 
+  NULL, gSuccessorTable_plm_target_grammar_65, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_69, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_72, gSuccessorTable_plm_target_grammar_73, gSuccessorTable_plm_target_grammar_74, NULL, 
+  gSuccessorTable_plm_target_grammar_76, gSuccessorTable_plm_target_grammar_77, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_81, NULL, NULL, 
+  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_87, 
+  gSuccessorTable_plm_target_grammar_88, NULL, gSuccessorTable_plm_target_grammar_90, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_93, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_97, gSuccessorTable_plm_target_grammar_98, NULL} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
@@ -598,7 +606,7 @@ static const int16_t gProductionsTable_plm_target_grammar [28 * 2] = {
   0, 2,
   1, 2,
   2, 2,
-  3, 46,
+  3, 48,
   4, 2,
   5, 0,
   5, 4,
@@ -8275,44 +8283,44 @@ GALGAS_decoratedPanicRoutine GALGAS_decoratedPanicRoutine::extractObject (const 
 
 void extensionMethod_svcCodeGeneration (const GALGAS_routineMapIR inObject,
                                         GALGAS_string & ioArgument_ioLLVMcode,
-                                        GALGAS__32_stringlist & ioArgument_ioPrimitiveAndServiceList,
+                                        GALGAS_primitiveAndServiceIRlist & ioArgument_ioPrimitiveAndServiceList,
                                         GALGAS_sectionIRlist & ioArgument_ioSectionList,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineMapIR temp_0 = inObject ;
-  cEnumerator_routineMapIR enumerator_11568 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_11568.hasCurrentObject ()) {
-    const enumGalgasBool test_1 = enumerator_11568.current (HERE).getter_mKind (HERE).getter_isFunction (SOURCE_FILE ("declaration-svc.galgas", 319)).operator_not (SOURCE_FILE ("declaration-svc.galgas", 319)).boolEnum () ;
+  cEnumerator_routineMapIR enumerator_11812 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_11812.hasCurrentObject ()) {
+    const enumGalgasBool test_1 = enumerator_11812.current (HERE).getter_mKind (HERE).getter_isFunction (SOURCE_FILE ("declaration-svc.galgas", 327)).operator_not (SOURCE_FILE ("declaration-svc.galgas", 327)).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_string var_svcCallName_11632 = function_llvmNameForSVCCall (enumerator_11568.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11568.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 320)) ;
-      GALGAS_string var_svcImplementationName_11729 = function_llvmNameForSVCImplementation (enumerator_11568.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11568.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 321)) ;
-      switch (enumerator_11568.current (HERE).getter_mKind (HERE).enumValue ()) {
+      GALGAS_string var_svcCallName_11876 = function_llvmNameForSVCCall (enumerator_11812.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11812.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 328)) ;
+      GALGAS_string var_svcImplementationName_11973 = function_llvmNameForSVCImplementation (enumerator_11812.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11812.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 329)) ;
+      switch (enumerator_11812.current (HERE).getter_mKind (HERE).enumValue ()) {
       case GALGAS_routineKind::kNotBuilt:
         break ;
       case GALGAS_routineKind::kEnum_section:
         {
-          ioArgument_ioSectionList.addAssign_operation (var_svcCallName_11632, var_svcImplementationName_11729, enumerator_11568.current (HERE).getter_mReceiverType (HERE), enumerator_11568.current (HERE).getter_mFormalArgumentListForGeneration (HERE), enumerator_11568.current (HERE).getter_mReturnType (HERE)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 324)) ;
+          ioArgument_ioSectionList.addAssign_operation (var_svcCallName_11876, var_svcImplementationName_11973, enumerator_11812.current (HERE).getter_mReceiverType (HERE), enumerator_11812.current (HERE).getter_mFormalArgumentListForGeneration (HERE), enumerator_11812.current (HERE).getter_mReturnType (HERE)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 332)) ;
         }
         break ;
       case GALGAS_routineKind::kEnum_primitive:
       case GALGAS_routineKind::kEnum_service:
         {
-          ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (var_svcCallName_11632, inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 331)), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 331)) ;
-          GALGAS_string var_prototype_12141 = function_llvmFunctionPrototype (enumerator_11568.current (HERE).getter_mReturnType (HERE), var_svcCallName_11632, enumerator_11568.current (HERE).getter_mReceiverType (HERE), enumerator_11568.current (HERE).getter_mFormalArgumentListForGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 332)) ;
-          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("declare ").add_operation (var_prototype_12141, inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 338)).add_operation (GALGAS_string ("\n"
-            "\n"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 338)), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 338)) ;
-          ioArgument_ioPrimitiveAndServiceList.addAssign_operation (var_svcCallName_11632, var_svcImplementationName_11729  COMMA_SOURCE_FILE ("declaration-svc.galgas", 339)) ;
+          ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (var_svcCallName_11876, inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 339)), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 339)) ;
+          GALGAS_string var_prototype_12385 = function_llvmFunctionPrototype (enumerator_11812.current (HERE).getter_mReturnType (HERE), var_svcCallName_11876, enumerator_11812.current (HERE).getter_mReceiverType (HERE), enumerator_11812.current (HERE).getter_mFormalArgumentListForGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 340)) ;
+          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("declare ").add_operation (var_prototype_12385, inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 346)).add_operation (GALGAS_string ("\n"
+            "\n"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 346)), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 346)) ;
+          ioArgument_ioPrimitiveAndServiceList.addAssign_operation (var_svcCallName_11876, var_svcImplementationName_11973, GALGAS_bool (false)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 347)) ;
         }
         break ;
       case GALGAS_routineKind::kEnum_function:
         {
           TC_Array <C_FixItDescription> fixItArray2 ;
-          inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("declaration-svc.galgas", 341)), GALGAS_string ("INTERNAL ERROR"), fixItArray2  COMMA_SOURCE_FILE ("declaration-svc.galgas", 341)) ;
+          inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("declaration-svc.galgas", 349)), GALGAS_string ("INTERNAL ERROR"), fixItArray2  COMMA_SOURCE_FILE ("declaration-svc.galgas", 349)) ;
         }
         break ;
       }
     }
-    enumerator_11568.gotoNextObject () ;
+    enumerator_11812.gotoNextObject () ;
   }
 }
 
@@ -10416,7 +10424,7 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
                                               GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 620)) ;
+  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 601)) ;
   switch (inObject.mProperty_mGuardKindGenerationIR.enumValue ()) {
   case GALGAS_guardKindGenerationIR::kNotBuilt:
     break ;
@@ -10426,11 +10434,11 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
     {
-      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_25998 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
-      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_25998->mAssociatedValue1 ;
-      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_25998->mAssociatedValue2 ;
-      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 624)) ;
-      ioArgument_ioAccessibleEntities.mProperty_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 625)) ;
+      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_24889 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
+      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_24889->mAssociatedValue1 ;
+      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_24889->mAssociatedValue2 ;
+      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 605)) ;
+      ioArgument_ioAccessibleEntities.mProperty_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 606)) ;
     }
     break ;
   }

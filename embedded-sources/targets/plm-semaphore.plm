@@ -27,18 +27,6 @@ sync $semaphore {
 
   //············································································
 
-  public system primitive wait @noUnusedWarning @mutating (?untilDeadline:inDeadline $uint32
-                                                           !result:result $bool) {
-    result = self.value > 0
-    if result {
-      self.value -= 1
-    }else if inDeadline > time.now () { 
-      block (!?inList:self.list !onDeadline:inDeadline !?result:result)
-    }
-  }
-
-  //············································································
-
   public guard wait @noUnusedWarning () {
     accept = self.value > 0
     if accept {

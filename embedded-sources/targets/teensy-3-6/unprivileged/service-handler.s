@@ -1,10 +1,4 @@
 @----------------------------------------------------------------------------------------------------------------------*
-
-	.syntax unified
-	.cpu cortex-m4
-	.thumb
-
-@----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
 @                 S V C    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *
 @                                                                                                                      *
@@ -81,8 +75,6 @@ as_svc_handler:
   ldr   r4, [r4]
 @----------------------------------------- Call service routine
   blx   r12         @ R4:calling task context address, R5:thread PSP
-@----------------------------------------- Set return code (from R0 to R3) in stacked registers
-  stmia r5!, {r0, r1, r2, r3}
 @--- Continues in sequence to .handle.context.switch
 
 @----------------------------------------------------------------------------------------------------------------------*
@@ -107,8 +99,7 @@ as_svc_handler:
   pop   {r4, r5, lr}
 @----------------------------------------- Task context did change ?
   cmp   r0, r1  @ R0:old task context, R1:new task context
-  it    eq  @ if equal, no context change, perform a return from exception
-  bxeq  lr
+  beq   __no_context_change
 @----------------------------------------- Save context of preempted task (if any)
   cbz   r0, __perform_restore_context @ if old context is NULL, no context to save
 @--- Save registers r4 to r11, PSP, LR
@@ -119,10 +110,16 @@ __perform_restore_context:
   cbz    r1, __no_context_to_restore
   ldmia  r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}
   msr    psp, r12
-__direct_return_for_null_service:
+__direct_return:
   bx     lr
+@----------------------------------------- No context change
+__no_context_change:
+  cbz r0, __no_context_to_restore
+  bx  lr
 @----------------------------------------- No context to restore
 __no_context_to_restore:
+@--- Switch off activity led
+  bl func.activityLedOff_28__29_  @ Defined in PLM source
 @--- Restore PSP of background task
   ldr  r0, =backgroundTaskContext
   ldr  r0, [r0]

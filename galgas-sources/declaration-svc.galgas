@@ -53,7 +53,6 @@ syntax extension plm_syntax {
     end
     ${$
     <instructionList> !?ioAST ?let instructionList
-    $}$
     ioSVCListAST +=
       !name
       !.section
@@ -63,6 +62,7 @@ syntax extension plm_syntax {
       !returnTypeName
       !instructionList
       !.here
+    $}$
   }
 
   #·····················································································································
@@ -247,6 +247,14 @@ list @sectionIRlist {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @primitiveAndServiceIRlist {
+  @string mCallName
+  @string mImplementationName
+  @bool mReturnValue
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func llvmFunctionPrototype ?let @PLMType inReturnType
                            ?let @string inFunctionName
                            ?let @PLMType inReceiverType
@@ -312,7 +320,7 @@ func llvmFunctionCall ?let @PLMType inReturnType
 
 method @routineMapIR svcCodeGeneration
   ?!@string ioLLVMcode
-  ?!@2stringlist ioPrimitiveAndServiceList
+  ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
   ?!@sectionIRlist ioSectionList
 {
   for svc in self do
@@ -336,7 +344,7 @@ method @routineMapIR svcCodeGeneration
           !svc.mFormalArgumentListForGeneration
         )
         ioLLVMcode += "declare " + prototype + "\n\n"
-        ioPrimitiveAndServiceList += !svcCallName !svcImplementationName
+        ioPrimitiveAndServiceList += !svcCallName !svcImplementationName !false
       case function (*) :
         error .nowhere : "INTERNAL ERROR"
       end
@@ -433,7 +441,7 @@ proc generatePrimitiveAndServiceDispatcher
   ?let @string inCurrentDirectory
   ?let @string inTargetName
   ?!@string ioAssemblerCode
-  ?let @2stringlist inServiceList
+  ?let @primitiveAndServiceIRlist inServiceList
   ?targetParameters:let @targetParameters inTargetParameters
 {
 #--- Generate service handler
@@ -442,20 +450,30 @@ proc generatePrimitiveAndServiceDispatcher
     !from:inTargetName + "/" + inTargetParameters.mServiceHandler
   )
 #---
-  for (callName *) in inServiceList do (idx)
-    var s = getTargetTextFile (
-      !currentDir:inCurrentDirectory
-      !from:inTargetName + "/" + inTargetParameters.mServiceEntry
-    )
-    s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
-    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-    ioAssemblerCode += s
+  for (callName * hasReturnValue) in inServiceList do (idx)
+    if hasReturnValue then
+      var s = getTargetTextFile (
+        !currentDir:inCurrentDirectory
+        !from:inTargetName + "/" + inTargetParameters.mServiceEntryWithReturnValue
+      )
+      s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
+    else
+      var s = getTargetTextFile (
+        !currentDir:inCurrentDirectory
+        !from:inTargetName + "/" + inTargetParameters.mServiceEntryNoReturnedValue
+      )
+      s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
+    end
   end
   ioAssemblerCode += getTargetTextFile (
     !currentDir:inCurrentDirectory
     !from:inTargetName + "/" + inTargetParameters.mServiceDispatcherHeader
   )
-  for (* implementationName) in inServiceList do (idx)
+  for (* implementationName *) in inServiceList do (idx)
     var s = getTargetTextFile (
       !currentDir:inCurrentDirectory
       !from:inTargetName + "/" + inTargetParameters.mServiceDispatcherEntry

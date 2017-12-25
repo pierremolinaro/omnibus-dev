@@ -9,10 +9,10 @@ extern func primitive block (?!inList:ioWaitingList $taskList) : "blockInList"
 
 extern func primitive block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
 
-extern func primitive
-block (?!inList:ioWaitingList $taskList
-       ?onDeadline:inDeadline $uint32
-       ?!result: ioResult $bool) : "block.in.list.and.on.deadline"
+//extern func primitive
+//block (?!inList:ioWaitingList $taskList
+//       ?onDeadline:inDeadline $uint32
+//       ?!result: ioResult $bool) : "block.in.list.and.on.deadline"
 
 //--- Make task Ready
 extern func service
@@ -29,7 +29,7 @@ newtype $guardList : [[32]] @instantiable
 
 extern func guard handle (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
-extern func guard handle (?guardedDeadline:inDeadlineMS $uint32) : "handleGuardedWaitUntil"
+extern func guard handle (?guardedDeadline:inDeadline $uint32) : "guard.handle.wait.until"
 
 extern func service notifyChange (?!forGuard:ioGuard $guardList) : "notify.change.from.guard.list"
 

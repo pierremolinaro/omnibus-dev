@@ -536,9 +536,9 @@ override method @syncInstructionIR llvmInstructionCode
       [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let acceptedLabelName = startLabel + "." + idx + ".true"
       let rejectedLabelName = startLabel + "." + idx + ".false"
+      ioLLVMcode += "  call void @note.guard.state (i1 " + [result llvmName] + ")\n"
       ioLLVMcode += "  br i1 " + [result llvmName] + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += acceptedLabelName + ":\n"
-      ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
       ioLLVMcode += "  br label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += rejectedLabelName + ":\n"
       ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result llvmName] + ", 0 ; assignment\n"

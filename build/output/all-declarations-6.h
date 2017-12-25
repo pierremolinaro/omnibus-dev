@@ -1569,7 +1569,7 @@ class cPtr_decoratedPanicRoutine : public cPtr_abstractDecoratedDeclaration {
 
 void extensionMethod_svcCodeGeneration (const class GALGAS_routineMapIR inObject,
                                         class GALGAS_string & io_ioLLVMcode,
-                                        class GALGAS__32_stringlist & io_ioPrimitiveAndServiceList,
+                                        class GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
                                         class GALGAS_sectionIRlist & io_ioSectionList,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;

@@ -64,7 +64,8 @@ struct @targetParameters {
   
   @lstring mServiceDispatcherEntry
   @lstring mServiceDispatcherHeader
-  @lstring mServiceEntry
+  @lstring mServiceEntryNoReturnedValue
+  @lstring mServiceEntryWithReturnValue
 }
 
 #·······················································································································
@@ -175,7 +176,9 @@ syntax extension plm_target_specific_syntax {
     $;$
     $"string"$ ?let serviceDispatcherEntry
     $;$
-    $"string"$ ?let serviceEntry
+    $"string"$ ?let serviceEntryNoReturnedValue
+    $;$
+    $"string"$ ?let serviceEntryReturnValue
     <section_specification> ?let sectionImplementation
     <key> !"C_FILES"
     @lstringlist C_definitionFiles = {}
@@ -238,7 +241,8 @@ syntax extension plm_target_specific_syntax {
       !undefinedInterruptHandler
       !serviceDispatcherEntry
       !serviceDispatcherHeader
-      !serviceEntry
+      !serviceEntryNoReturnedValue
+      !serviceEntryReturnValue
     }
    ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
       !panicCodeTypeName
@@ -388,23 +392,5 @@ override method @configurationDeclarationAST enterInContext
     end
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @configurationDeclarationAST semanticAnalysis
-#  ?context:let @semanticContext unused inContext
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-#{
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @configurationDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

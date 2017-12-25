@@ -19,6 +19,7 @@ func activityLedOff @safe @exported () {
 
 let LED_L4 = $digitalPort.D7
 let LED_L3 = $digitalPort.D6
+let LED_L0 = $digitalPort.D3
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -27,6 +28,7 @@ driver toto > digital {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
 }
 
@@ -50,7 +52,7 @@ struct $autreStructWithARC {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T1 priority 10 stackSize 512 {
-  var compteur $uint32 = 0
+  var échéance $uint32 = 0
   var freeRam $uint32 = 0 
   var start $uint32 = 0 
   var end $uint32 = 0 
@@ -65,8 +67,8 @@ task T1 priority 10 stackSize 512 {
     lcd.print (!string:"Addr:")
   }
 
-  on time.wait (!untilDeadline:self.compteur) {
-    self.compteur +%= 500
+  on time.wait (!untilDeadline:self.échéance) {
+    self.échéance +%= 500
     digital.toggle (!port:LED_L3)
     let freeRam = freeByteCount ()
     if self.freeRam ≠ freeRam {
@@ -113,7 +115,7 @@ task T1 priority 10 stackSize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T2 priority 0 stackSize 512 {
+task T2 priority 5 stackSize 512 {
   var échéance1 $uint32 = 2001
   var échéance2 $uint32 = 2001
   var échéance3 $uint32 = 2001
@@ -148,6 +150,23 @@ task T2 priority 0 stackSize 512 {
      var d = $structWithARC ()
      d.donnée = inData
   }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T3 priority 100 stackSize 512 {
+ 
+  on time.wait (!untilDeadline:0) {
+    digital.toggle (!port:LED_L0)
+//    self.échéance +%= 1
+//    if lengthOf (!buffer:self.data) < 500 {
+//      append (!byte:self.b !?toBuffer:self.data)
+//      self.b +%= 1
+//    }else{
+//      removeAll (!?fromBuffer:self.data)
+//    }
+  }
+
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
