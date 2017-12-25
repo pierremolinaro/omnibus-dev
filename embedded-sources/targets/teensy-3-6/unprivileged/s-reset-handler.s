@@ -36,7 +36,6 @@ as_reset_handler:
   svc  #0
 @--- Background task : infinite loop
 background.task:
-  bl func.activityLedOff_28__29_  @ Defined in PLM source
   wfi
   b  background.task
 

@@ -55,18 +55,7 @@ sync $synchronizationGate {
     }
   }
 
-  //············································································
-  
-  public system primitive wait @noUnusedWarning @mutating (?untilDeadline:deadline $uint32
-                                                           !result: result $bool) {
-    result = self.isOpen
-    if result {
-    }else if deadline > time.now () {
-      block (!?inList:self.taskList !onDeadline:deadline !?result:result)
-    }
-  }
-
-  //············································································
+   //············································································
 
   public guard wait @noUnusedWarning () {
     accept = self.isOpen

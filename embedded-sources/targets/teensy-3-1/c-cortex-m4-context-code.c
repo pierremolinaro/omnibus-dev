@@ -20,11 +20,3 @@ static void kernel_set_task_context (TaskControlBlock * inTaskDescriptor,
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-static void kernel_set_return_code (TaskContext * inTaskContext,
-                                    const unsigned inReturnCode) {
-  StackedRegisters * ptr = inTaskContext->mSP_USR ;
-  ptr->mR0 = inReturnCode ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*

@@ -33,8 +33,8 @@ SERVICE:
   12 ; // as_svc_handler saves 3 registers on system stack
   "service-dispatcher-header.s" ;
   "service-dispatcher-entry.s" ;
-  "service-entry.s"
-// Section implementation
+  "service-entry-no-return.s" ;
+  "service-entry-return-value.s"
 SECTION:
   "call void asm sideeffect \"cpsid i\", \"\"() nounwind" ; // Disable interrupt
   "call void asm sideeffect \"cpsie i\", \"\"() nounwind"   // Enable interrupt

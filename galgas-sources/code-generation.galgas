@@ -240,13 +240,14 @@ private proc generateCodeFiles
   ]
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
-  @2stringlist primitiveAndServiceList = {}
+  @primitiveAndServiceIRlist primitiveAndServiceList = {}
 #----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
     let waitForGuardChange = waitForGuardChangeFunctionName ()
     primitiveAndServiceList +=
       !llvmNameForServiceCall (!waitForGuardChange)
       !llvmNameForServiceImplementation (!waitForGuardChange)
+      !true # A (boolean) value is returned
     generationAdds.mExternFunctionDeclarationSet +=
       !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
@@ -260,7 +261,7 @@ private proc generateCodeFiles
 #----------------------------------------- Guards
   [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
     !?llvmCode
-    !?primitiveAndServiceList
+    !?sectionIRlist
     !generationContext
     !?generationAdds
   ]
@@ -368,7 +369,7 @@ private proc generateCodeFiles
   json += "  },\n"
 #--- Services
   json += "  \"services\" : ["
-  for (* serviceImplementation) in primitiveAndServiceList
+  for (* serviceImplementation *) in primitiveAndServiceList
     do json += "\n    \"" + serviceImplementation + "\""
     between json += ","
     after json += "\n"

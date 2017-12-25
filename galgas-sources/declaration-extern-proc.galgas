@@ -176,16 +176,17 @@ map @externProcedureMapIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
+  ioLLVMcode += llvmTitleComment (!"extern functions")
   for externProc in self do
     [externProc llvmPrototypeGeneration !?ioLLVMcode]
   end
+  ioLLVMcode += "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
   let procName = llvmNameForFunction (!lkey.string)
-  ioLLVMcode += llvmTitleComment (!"extern procedure " + lkey)
   ioLLVMcode += "declare"
   if mReturnType == .null then
     ioLLVMcode += " void"
@@ -206,7 +207,7 @@ method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMco
   between
     ioLLVMcode += ", "
   end
-  ioLLVMcode += ")" + llvmAttributeFunction () + "; defined in C\n\n"
+  ioLLVMcode += ")" + llvmAttributeFunction () + "; defined in C\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

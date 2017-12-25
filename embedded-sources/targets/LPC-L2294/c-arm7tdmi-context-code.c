@@ -15,9 +15,3 @@ static void kernel_set_task_context (TaskControlBlock * inTaskDescriptor,
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-static void kernel_set_return_code (TaskContext * inTaskContext, const unsigned inReturnCode) {
-  inTaskContext->mR0 = inReturnCode ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*

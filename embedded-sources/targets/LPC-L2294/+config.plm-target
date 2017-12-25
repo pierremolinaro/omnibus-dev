@@ -33,8 +33,8 @@ SERVICE:
   16 ; // as_swi_handler saves 4 32-bits registers on system stack
   "service-dispatcher-header.s" ;
   "service-dispatcher-entry.s" ;
-  "service-entry.s"
-// Section implementation
+  "service-entry-no-return.s" ;
+  "service-entry-return-value.s"
 SECTION:
   "udfcoded-section-dispatcher-code.s" ;
   8 ; // saves 2 registers on system stack

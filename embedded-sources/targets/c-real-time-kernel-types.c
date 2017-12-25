@@ -32,22 +32,20 @@ static unsigned countTrainingZeros (const unsigned inValue) ; // Defined in coun
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef struct {
-//--- Context buffer (SHOULD BE THE FIRST FIELD)
-  TaskContext mTaskContext ;
+//--- Context buffer
+  TaskContext mTaskContext ; // SHOULD BE THE FIRST FIELD
 //--- Task name
   const char * mTaskName ;
-//--- This field is used for deadline waiting
+//--- This field is used for deadline
   unsigned mTaskDeadline ;
-//---
-  TaskList * mWaitingList ;
-//--- Result code pointer
-  bool * mResultPointer ;
 //--- Stack buffer parameters
   unsigned * mStackBufferAddress ;
   unsigned mStackBufferSize ; // In bytes
   unsigned mStackFreeSize ; // In bytes
 //--- Task index
   unsigned char mTaskIndex ;
+//--- User result
+  bool mUserResult ;
 //--- Guards
   GuardState mGuardState ;
   bool mHaveDeadlineGuard ;

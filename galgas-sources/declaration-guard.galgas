@@ -465,7 +465,7 @@ map @guardMapIR {
 
 method @guardMapIR guardCodeGeneration
   ?!@string ioLLVMcode
-  ?!@2stringlist ioServiceList
+  ?!@sectionIRlist ioSectionList
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
@@ -475,26 +475,12 @@ method @guardMapIR guardCodeGeneration
     case baseGuard :
       let guardImplementationName = llvmNameForGuardImplementation (!guard.lkey.string)
       let guardCallName = llvmNameForGuardCall (!guard.lkey.string)
-      ioServiceList += !guardCallName !guardImplementationName
-      ioLLVMcode += llvmTitleComment (!guardImplementationName)
-      ioLLVMcode += "declare i1 @" + guardCallName + " ("
-      let typeName = llvmTypeStringFromPLMname (!guard.mReceiverType.plmTypeName)
-      var first = typeName == ""
-      if not first then
-        ioLLVMcode += "%" + [typeName assemblerRepresentation] + "* " + llvmNameForSelf ()
-      end
-      for () in guard.mFormalArgumentListForGeneration do
-        if first then first = false else ioLLVMcode += ", " end
-        switch mFormalArgumentKind
-        case input :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-        case output :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* " + llvmNameForLocalVariable (!mFormalArgumentName)
-       case inputOutput :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* " + llvmNameForLocalVariable (!mFormalArgumentName)
-        end
-      end
-      ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
+      ioSectionList +=
+        !guardCallName
+        !guardImplementationName
+        !guard.mReceiverType
+        !guard.mFormalArgumentListForGeneration
+        !booleanType () # A guard returns a boolean value
     end
     [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   end
@@ -567,20 +553,14 @@ method @guardMapIR-element llvmCodeGeneration
 #--- Declare "accept" variable 
   let accepted_llvmName = llvmNameForLocalVariable (!acceptVariablePLMName ())
   let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariablePLMName () + ".loaded")
-  let accepted_llvmName_true =  acceptVariablePLMName () + ".true"
-  let accepted_llvmName_false = acceptVariablePLMName () + ".false"
 #--- Base guard or convenience guard ?
   switch mGuardKindGenerationIR
   case baseGuard :
-    ioLLVMcode += "  store i1 false, i1* " + accepted_llvmName + "\n"
+#    ioLLVMcode += "  store i1 false, i1* " + accepted_llvmName + "\n"
     [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  " + accepted_llvmName_loaded + " = load i1, i1* " + accepted_llvmName + "\n"
-    ioLLVMcode += "  br i1 " + accepted_llvmName_loaded + ", label %" + accepted_llvmName_true + ", label %" + accepted_llvmName_false + "\n\n"
-    ioLLVMcode += accepted_llvmName_true + ":\n"
-    ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
-    ioLLVMcode += "  ret i1 true\n\n"
-    ioLLVMcode += accepted_llvmName_false + ":\n"
-    ioLLVMcode += "  ret i1 false\n"
+    ioLLVMcode += "  call void @note.guard.state (i1 " + accepted_llvmName_loaded + ")\n"
+    ioLLVMcode += "  ret i1 " + accepted_llvmName_loaded + "\n"
     ioLLVMcode += "}\n\n"
   case convenienceGuard (baseGuardAllocaList baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
     [baseGuardAllocaList generateAllocaList !?ioLLVMcode]
@@ -608,7 +588,8 @@ method @guardMapIR-element llvmCodeGeneration
     ioLLVMcode += "  ret i1 false\n"
     ioLLVMcode += "}\n\n"
   end
-  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare void @noteGuardHasBeenAccepted ()"
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare void @note.guard.state (i1 %inAccepted)"
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare i1 @xtr.user.result ()"
 }
 
 #·······················································································································

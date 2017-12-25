@@ -1,10 +1,4 @@
 @----------------------------------------------------------------------------------------------------------------------*
-
-	.syntax unified
-	.cpu cortex-m4
-	.thumb
-
-@----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
 @                 S V C    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *
 @                                                                                                                      *
@@ -119,7 +113,7 @@ __perform_restore_context:
   cbz    r1, __no_context_to_restore
   ldmia  r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}
   msr    psp, r12
-__direct_return_for_null_service:
+__direct_return:
   bx     lr
 @----------------------------------------- No context to restore
 __no_context_to_restore:

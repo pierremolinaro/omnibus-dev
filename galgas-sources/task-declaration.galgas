@@ -405,13 +405,13 @@ method @taskMapIR generateCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
-  ?!@2stringlist ioServiceList
+  ?!@primitiveAndServiceIRlist ioServiceList
 {
 #--- Declare task self terminate service
   ioLLVMcode += llvmTitleComment (!"Task self terminate service")
-  let selfTerminateImplementationName = llvmNameForServiceImplementation (!llvmNameForTaskSelfTerminateService ())
-  let selfTerminateCallName = llvmNameForServiceCall (!llvmNameForTaskSelfTerminateService ())
-  ioServiceList += !selfTerminateCallName !selfTerminateImplementationName
+  let selfTerminateImplementationName = llvmNameForServiceImplementation (!llvmNameForTaskAutoBlockService ())
+  let selfTerminateCallName = llvmNameForServiceCall (!llvmNameForTaskAutoBlockService ())
+  ioServiceList += !selfTerminateCallName !selfTerminateImplementationName !false
   ioLLVMcode += "declare void @" + selfTerminateCallName + " () nounwind noreturn\n\n"
 #--- Declare task variables
   ioLLVMcode += llvmTitleComment (!"Task variables")

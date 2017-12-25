@@ -14800,7 +14800,9 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
   public : GALGAS_lstring mProperty_mServiceDispatcherHeader ;
 
-  public : GALGAS_lstring mProperty_mServiceEntry ;
+  public : GALGAS_lstring mProperty_mServiceEntryNoReturnedValue ;
+
+  public : GALGAS_lstring mProperty_mServiceEntryWithReturnValue ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -14834,7 +14836,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                     const GALGAS_lstring & in_mUndefinedInterruptHandler,
                                     const GALGAS_lstring & in_mServiceDispatcherEntry,
                                     const GALGAS_lstring & in_mServiceDispatcherHeader,
-                                    const GALGAS_lstring & in_mServiceEntry) ;
+                                    const GALGAS_lstring & in_mServiceEntryNoReturnedValue,
+                                    const GALGAS_lstring & in_mServiceEntryWithReturnValue) ;
 
 //-- Start of generic part --*
 
@@ -14865,7 +14868,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                                                  const class GALGAS_lstring & inOperand15,
                                                                  const class GALGAS_lstring & inOperand16,
                                                                  const class GALGAS_lstring & inOperand17,
-                                                                 const class GALGAS_lstring & inOperand18
+                                                                 const class GALGAS_lstring & inOperand18,
+                                                                 const class GALGAS_lstring & inOperand19
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -14896,7 +14900,9 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceDispatcherHeader (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceEntry (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceEntryNoReturnedValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceEntryWithReturnValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceHandler (LOCATION_ARGS) const ;
 

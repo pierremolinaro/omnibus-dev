@@ -1,4 +1,3 @@
-//--- Python tool list
 PYTHON_UTILITIES:
    "../../py-toolpath.txt" -> "sources/toolpath.py",
    "../../py-makefile.txt" -> "sources/makefile.py",
@@ -9,36 +8,28 @@ PYTHON_UTILITIES:
    "../../py-objdump.txt" -> "objdump.py",
    "../../py-objsize.txt" -> "objsize.py",
    "../py-run.txt" -> "run.py"
-//--- Python build script
 PYTHON_BUILD:
    "../py-build.txt"
-//--- Linker script
 LINKER_SCRIPT:
   "../ld-linker.txt"
-// Panic code type, panic line type, panic generation file
-PANIC:
+PANIC:  // Panic code type, panic line type, panic generation file
   $uint32 ; $uint32 ; "../target-panic.ll"
-// Pointer bit count
 POINTER_BIT_COUNT:
   32
-// System stack size (in byte count)
-SYSTEM_STACK_SIZE:
+SYSTEM_STACK_SIZE: // System stack size (in byte count)
   1024
-// NOP instruction in LLVM
 NOP:
   "call void asm sideeffect \"nop\", \"\"() nounwind"
-// Service implementation
 SERVICE:
   "service-handler.s" ;
   12 ; // as_svc_handler saves 3 registers on system stack
   "service-dispatcher-header.s" ;
   "service-dispatcher-entry.s" ;
-  "service-entry.s"
-// Section implementation
+  "service-entry-no-return.s" ;
+  "service-entry-return-value.s"
 SECTION:
   "call void asm sideeffect \"cpsid i\", \"\"() nounwind" ; // Disable interrupt
   "call void asm sideeffect \"cpsie i\", \"\"() nounwind"   // Enable interrupt
-//--- C Source files
 C_FILES:
   "../c-cortex-m4-context-types.c",
   "../../c-real-time-kernel-types.c",
@@ -47,18 +38,15 @@ C_FILES:
   "../c-countTrainingZeros.c",
   "../../memory-utilities.c",
   "../../heap.c"
-//--- Assembler Source files
 S_FILES:
   "../s-cortex-m4-header.s",
   "s-interrupt-vectors.s",
   "s-reset-handler.s"
-//--- LLVM Source files
 LL_FILES:
   "../ll-cortex-m4.ll",
   "../../ll-clear-bss.ll",
   "../../ll-copy-data-section.ll",
   "../../ll-configuration-on-boot.ll"
-//--- PLM included files
 PLM_FILES:
   "../plm-registers-mk66fx1m0.plm",
   "../plm-teensy-3-6-nvic-interrupts.plm",
@@ -70,12 +58,10 @@ PLM_FILES:
   "../plm-teensy-3-6-panic.plm",
   "../../plm-semaphore.plm",
   "../../heap.plm"
-//--- Interrupt handler
 INTERRUPT_HANDLER:
   "../xtr-interrupt-handler.s" ;
   32 ; // Cortex M4 saves 8 regs in user stack on interrupt
   "../undefined-interrupt.s"
-//--- Interrupts
 INTERRUPTS:
   NMI -> 2,
   HardFault -> 3,
