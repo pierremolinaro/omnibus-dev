@@ -1965,7 +1965,7 @@ GALGAS_string extensionGetter_passingModeForActualSelector (const GALGAS_effecti
   }
   const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, constinArgument_inSelector.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    result_result.plusAssign_operation(constinArgument_inSelector.getter_string (HERE).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 125)), inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 125)) ;
+    result_result.plusAssign_operation(constinArgument_inSelector.getter_string (HERE).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 124)), inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 124)) ;
   }
 //---
   return result_result ;
@@ -4334,7 +4334,8 @@ mProperty_mPanicSetupRoutinePriorityMap (),
 mProperty_mPanicLoopRoutinePriorityMap (),
 mProperty_mSubprogramInvocationGraph (),
 mProperty_mStaticArrayMapForTemporaries (),
-mProperty_mInitializedDriverSet () {
+mProperty_mInitializedDriverSet (),
+mProperty_mNeedsDynamicMemoryAllocation () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4349,13 +4350,15 @@ GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (const GALGAS
                                                                     const GALGAS_panicRoutinePriorityMap & inOperand2,
                                                                     const GALGAS_subprogramInvocationGraph & inOperand3,
                                                                     const GALGAS_staticListInvokedFunctionSetMap & inOperand4,
-                                                                    const GALGAS_stringset & inOperand5) :
+                                                                    const GALGAS_stringset & inOperand5,
+                                                                    const GALGAS_bool & inOperand6) :
 mProperty_mTemporaryIndex (inOperand0),
 mProperty_mPanicSetupRoutinePriorityMap (inOperand1),
 mProperty_mPanicLoopRoutinePriorityMap (inOperand2),
 mProperty_mSubprogramInvocationGraph (inOperand3),
 mProperty_mStaticArrayMapForTemporaries (inOperand4),
-mProperty_mInitializedDriverSet (inOperand5) {
+mProperty_mInitializedDriverSet (inOperand5),
+mProperty_mNeedsDynamicMemoryAllocation (inOperand6) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4366,7 +4369,8 @@ GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_d
                                            GALGAS_panicRoutinePriorityMap::constructor_emptyMap (HERE),
                                            GALGAS_subprogramInvocationGraph::constructor_emptyGraph (HERE),
                                            GALGAS_staticListInvokedFunctionSetMap::constructor_emptyMap (HERE),
-                                           GALGAS_stringset::constructor_emptySet (HERE)) ;
+                                           GALGAS_stringset::constructor_emptySet (HERE),
+                                           GALGAS_bool::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4376,11 +4380,12 @@ GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_n
                                                                                     const GALGAS_panicRoutinePriorityMap & inOperand2,
                                                                                     const GALGAS_subprogramInvocationGraph & inOperand3,
                                                                                     const GALGAS_staticListInvokedFunctionSetMap & inOperand4,
-                                                                                    const GALGAS_stringset & inOperand5 
+                                                                                    const GALGAS_stringset & inOperand5,
+                                                                                    const GALGAS_bool & inOperand6 
                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_semanticTemporariesStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
-    result = GALGAS_semanticTemporariesStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
+    result = GALGAS_semanticTemporariesStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
   }
   return result ;
 }
@@ -4407,13 +4412,16 @@ typeComparisonResult GALGAS_semanticTemporariesStruct::objectCompare (const GALG
   if (result == kOperandEqual) {
     result = mProperty_mInitializedDriverSet.objectCompare (inOperand.mProperty_mInitializedDriverSet) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mNeedsDynamicMemoryAllocation.objectCompare (inOperand.mProperty_mNeedsDynamicMemoryAllocation) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_semanticTemporariesStruct::isValid (void) const {
-  return mProperty_mTemporaryIndex.isValid () && mProperty_mPanicSetupRoutinePriorityMap.isValid () && mProperty_mPanicLoopRoutinePriorityMap.isValid () && mProperty_mSubprogramInvocationGraph.isValid () && mProperty_mStaticArrayMapForTemporaries.isValid () && mProperty_mInitializedDriverSet.isValid () ;
+  return mProperty_mTemporaryIndex.isValid () && mProperty_mPanicSetupRoutinePriorityMap.isValid () && mProperty_mPanicLoopRoutinePriorityMap.isValid () && mProperty_mSubprogramInvocationGraph.isValid () && mProperty_mStaticArrayMapForTemporaries.isValid () && mProperty_mInitializedDriverSet.isValid () && mProperty_mNeedsDynamicMemoryAllocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4425,6 +4433,7 @@ void GALGAS_semanticTemporariesStruct::drop (void) {
   mProperty_mSubprogramInvocationGraph.drop () ;
   mProperty_mStaticArrayMapForTemporaries.drop () ;
   mProperty_mInitializedDriverSet.drop () ;
+  mProperty_mNeedsDynamicMemoryAllocation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4446,6 +4455,8 @@ void GALGAS_semanticTemporariesStruct::description (C_String & ioString,
     mProperty_mStaticArrayMapForTemporaries.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mInitializedDriverSet.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mNeedsDynamicMemoryAllocation.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -4484,6 +4495,12 @@ GALGAS_staticListInvokedFunctionSetMap GALGAS_semanticTemporariesStruct::getter_
 
 GALGAS_stringset GALGAS_semanticTemporariesStruct::getter_mInitializedDriverSet (UNUSED_LOCATION_ARGS) const {
   return mProperty_mInitializedDriverSet ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_semanticTemporariesStruct::getter_mNeedsDynamicMemoryAllocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mNeedsDynamicMemoryAllocation ;
 }
 
 
@@ -4542,8 +4559,8 @@ void extensionSetter_newTempLLVMVar (GALGAS_semanticTemporariesStruct & ioObject
                                      C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outTempLLVMVar.drop () ; // Release 'out' argument
-  outArgument_outTempLLVMVar = GALGAS_string ("%temp.").add_operation (ioObject.mProperty_mTemporaryIndex.getter_string (SOURCE_FILE ("semantic-analysis.galgas", 61)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 61)) ;
-  ioObject.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 62)) ;
+  outArgument_outTempLLVMVar = GALGAS_string ("%temp.").add_operation (ioObject.mProperty_mTemporaryIndex.getter_string (SOURCE_FILE ("semantic-analysis.galgas", 62)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 62)) ;
+  ioObject.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 63)) ;
 }
 
 

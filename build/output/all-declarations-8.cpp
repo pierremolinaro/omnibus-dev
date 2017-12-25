@@ -6698,7 +6698,8 @@ mProperty_mTargetParameters (),
 mProperty_mDriverList (),
 mProperty_mStaticArrayMapForIntermediate (),
 mProperty_mGenerationListIR (),
-mProperty_mGlobalSyncInstanceMap () {
+mProperty_mGlobalSyncInstanceMap (),
+mProperty_mNeedsDynamicMemoryAllocation () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6726,7 +6727,8 @@ GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (const GALGAS_stati
                                                               const GALGAS_driverListIR & inOperand15,
                                                               const GALGAS_staticListInvokedFunctionSetMap & inOperand16,
                                                               const GALGAS_generationListIR & inOperand17,
-                                                              const GALGAS_globalSyncInstanceMapIR & inOperand18) :
+                                                              const GALGAS_globalSyncInstanceMapIR & inOperand18,
+                                                              const GALGAS_bool & inOperand19) :
 mProperty_mStaticStringMap (inOperand0),
 mProperty_mGlobalConstantMap (inOperand1),
 mProperty_mRoutineMapIR (inOperand2),
@@ -6745,7 +6747,8 @@ mProperty_mTargetParameters (inOperand14),
 mProperty_mDriverList (inOperand15),
 mProperty_mStaticArrayMapForIntermediate (inOperand16),
 mProperty_mGenerationListIR (inOperand17),
-mProperty_mGlobalSyncInstanceMap (inOperand18) {
+mProperty_mGlobalSyncInstanceMap (inOperand18),
+mProperty_mNeedsDynamicMemoryAllocation (inOperand19) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6769,7 +6772,8 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default
                                         GALGAS_driverListIR::constructor_emptyList (HERE),
                                         GALGAS_staticListInvokedFunctionSetMap::constructor_emptyMap (HERE),
                                         GALGAS_generationListIR::constructor_emptyList (HERE),
-                                        GALGAS_globalSyncInstanceMapIR::constructor_emptyMap (HERE)) ;
+                                        GALGAS_globalSyncInstanceMapIR::constructor_emptyMap (HERE),
+                                        GALGAS_bool::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6792,11 +6796,12 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (co
                                                                               const GALGAS_driverListIR & inOperand15,
                                                                               const GALGAS_staticListInvokedFunctionSetMap & inOperand16,
                                                                               const GALGAS_generationListIR & inOperand17,
-                                                                              const GALGAS_globalSyncInstanceMapIR & inOperand18 
+                                                                              const GALGAS_globalSyncInstanceMapIR & inOperand18,
+                                                                              const GALGAS_bool & inOperand19 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_intermediateCodeStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid ()) {
-    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid ()) {
+    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19) ;
   }
   return result ;
 }
@@ -6862,13 +6867,16 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
   if (result == kOperandEqual) {
     result = mProperty_mGlobalSyncInstanceMap.objectCompare (inOperand.mProperty_mGlobalSyncInstanceMap) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mNeedsDynamicMemoryAllocation.objectCompare (inOperand.mProperty_mNeedsDynamicMemoryAllocation) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_intermediateCodeStruct::isValid (void) const {
-  return mProperty_mStaticStringMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mRoutineMapIR.isValid () && mProperty_mGuardMapIR.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mRequiredProcedureSet.isValid () && mProperty_mBootList.isValid () && mProperty_mInitList.isValid () && mProperty_mPanicSetupInstructionListIR.isValid () && mProperty_mPanicLoopInstructionListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mDriverList.isValid () && mProperty_mStaticArrayMapForIntermediate.isValid () && mProperty_mGenerationListIR.isValid () && mProperty_mGlobalSyncInstanceMap.isValid () ;
+  return mProperty_mStaticStringMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mRoutineMapIR.isValid () && mProperty_mGuardMapIR.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mRequiredProcedureSet.isValid () && mProperty_mBootList.isValid () && mProperty_mInitList.isValid () && mProperty_mPanicSetupInstructionListIR.isValid () && mProperty_mPanicLoopInstructionListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mDriverList.isValid () && mProperty_mStaticArrayMapForIntermediate.isValid () && mProperty_mGenerationListIR.isValid () && mProperty_mGlobalSyncInstanceMap.isValid () && mProperty_mNeedsDynamicMemoryAllocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6893,6 +6901,7 @@ void GALGAS_intermediateCodeStruct::drop (void) {
   mProperty_mStaticArrayMapForIntermediate.drop () ;
   mProperty_mGenerationListIR.drop () ;
   mProperty_mGlobalSyncInstanceMap.drop () ;
+  mProperty_mNeedsDynamicMemoryAllocation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6940,6 +6949,8 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
     mProperty_mGenerationListIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mGlobalSyncInstanceMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mNeedsDynamicMemoryAllocation.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -7056,6 +7067,12 @@ GALGAS_generationListIR GALGAS_intermediateCodeStruct::getter_mGenerationListIR 
 
 GALGAS_globalSyncInstanceMapIR GALGAS_intermediateCodeStruct::getter_mGlobalSyncInstanceMap (UNUSED_LOCATION_ARGS) const {
   return mProperty_mGlobalSyncInstanceMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_intermediateCodeStruct::getter_mNeedsDynamicMemoryAllocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mNeedsDynamicMemoryAllocation ;
 }
 
 

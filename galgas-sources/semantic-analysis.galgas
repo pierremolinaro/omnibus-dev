@@ -53,6 +53,7 @@ struct @semanticTemporariesStruct {
   @subprogramInvocationGraph mSubprogramInvocationGraph
   @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries
   @stringset mInitializedDriverSet
+  @bool mNeedsDynamicMemoryAllocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -133,6 +134,7 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
+  outIntermediateCodeStruct.mNeedsDynamicMemoryAllocation = temporaries.mNeedsDynamicMemoryAllocation
 #--- Check required procedure are defined
   checkRequiredProcedures (
     !ast:inAST

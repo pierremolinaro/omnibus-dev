@@ -75,7 +75,6 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     end
   end
-#  [mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
   for () in mArguments do
     switch mEffectiveParameterKind
     case input (*):

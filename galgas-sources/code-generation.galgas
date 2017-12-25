@@ -281,14 +281,16 @@ private proc generateCodeFiles
     !targetParameters:inTargetParameters
   )
 #----------------------------------------- Section, safe dispatcher
-  sectionIRlist += 
-    !llvmNameForSectionCall (!"heap.memory.free")
-    !llvmNameForSectionImplementation (!"heap.memory.free")
-    !false # Invocation from any mode
-  sectionIRlist += 
-    !llvmNameForSectionCall (!"heap.memory.alloc")
-    !llvmNameForSectionImplementation (!"heap.memory.alloc")
-    !false # Invocation from any mode
+  if inIntermediateCodeStruct.mNeedsDynamicMemoryAllocation then
+    sectionIRlist += 
+      !llvmNameForSectionCall (!memoryAllocSectionName ())
+      !llvmNameForSectionImplementation (!memoryAllocSectionName ())
+      !false # Invocation from any mode
+    sectionIRlist += 
+      !llvmNameForSectionCall (!memoryFreeSectionName ())
+      !llvmNameForSectionImplementation (!memoryFreeSectionName ())
+      !false # Invocation from any mode
+  end
   generateSectionDispatcher (
     !inCurrentDirectory
     !inTargetName.string
