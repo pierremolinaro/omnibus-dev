@@ -5,7 +5,7 @@
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
 @                    |                            |                                                                    *
-@          PSP+32 -> |----------------------------| \ 
+@          PSP+32 -> |----------------------------| \
 @                    | xPSR                       |  |
 @          PSP+28 -> |----------------------------|  |
 @                    | PC (UDF instruction)       |  |
@@ -41,7 +41,7 @@ as_section_handler:
   adds  lr, #2
   str   lr, [r5, #24]
 @--------------------- R12 <- address of dispatcher
-  ldr   r12, =__udf_dispatcher_table
+  ldr   r12, =__section_dispatcher_table
 @--------------------- LR <- bits 0-7 of UDF instruction
   ldrb  lr, [lr, #-2]            @ LR is service call index
 @--------------------- r12 <- address of routine to call

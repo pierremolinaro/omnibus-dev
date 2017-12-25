@@ -3945,7 +3945,7 @@ GALGAS_bool extensionGetter_equatable (const GALGAS_PLMType & inObject,
                                        C_Compiler * /* inCompiler */
                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_typeAttributes.getter_equatable (SOURCE_FILE ("types.galgas", 113)) ;
+  result_result = inObject.mProperty_typeAttributes.getter_equatable (SOURCE_FILE ("types.galgas", 127)) ;
 //---
   return result_result ;
 }
@@ -3964,7 +3964,7 @@ GALGAS_bool extensionGetter_instanciable (const GALGAS_unifiedTypeMap_2D_proxy &
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
   const GALGAS_unifiedTypeMap_2D_proxy temp_0 = inObject ;
-  result_result = extensionGetter_instanciable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 119)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 119)) ;
+  result_result = extensionGetter_instanciable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 133)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 133)) ;
 //---
   return result_result ;
 }
@@ -3982,7 +3982,7 @@ GALGAS_bool extensionGetter_instanciable (const GALGAS_PLMType & inObject,
                                           C_Compiler * /* inCompiler */
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_typeAttributes.getter_instanciable (SOURCE_FILE ("types.galgas", 125)) ;
+  result_result = inObject.mProperty_typeAttributes.getter_instanciable (SOURCE_FILE ("types.galgas", 139)) ;
 //---
   return result_result ;
 }
@@ -4001,7 +4001,7 @@ GALGAS_bool extensionGetter_copyable (const GALGAS_unifiedTypeMap_2D_proxy & inO
                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
   const GALGAS_unifiedTypeMap_2D_proxy temp_0 = inObject ;
-  result_result = extensionGetter_copyable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 131)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 131)) ;
+  result_result = extensionGetter_copyable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 145)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 145)) ;
 //---
   return result_result ;
 }
@@ -4019,7 +4019,7 @@ GALGAS_bool extensionGetter_copyable (const GALGAS_PLMType & inObject,
                                       C_Compiler * /* inCompiler */
                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_typeAttributes.getter_copyable (SOURCE_FILE ("types.galgas", 137)) ;
+  result_result = inObject.mProperty_typeAttributes.getter_copyable (SOURCE_FILE ("types.galgas", 151)) ;
 //---
   return result_result ;
 }
@@ -4038,7 +4038,7 @@ GALGAS_bool extensionGetter_arc (const GALGAS_unifiedTypeMap_2D_proxy & inObject
                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
   const GALGAS_unifiedTypeMap_2D_proxy temp_0 = inObject ;
-  result_result = extensionGetter_arc (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 143)) ;
+  result_result = extensionGetter_arc (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 157)) ;
 //---
   return result_result ;
 }
@@ -4056,7 +4056,7 @@ GALGAS_bool extensionGetter_arc (const GALGAS_PLMType & inObject,
                                  C_Compiler * /* inCompiler */
                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_typeAttributes.getter_arc (SOURCE_FILE ("types.galgas", 149)) ;
+  result_result = inObject.mProperty_typeAttributes.getter_arc (SOURCE_FILE ("types.galgas", 163)) ;
 //---
   return result_result ;
 }
@@ -4095,26 +4095,26 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_enumeration:
     {
-      const cEnumAssociatedValues_typeKind_enumeration * extractPtr_5585 = (const cEnumAssociatedValues_typeKind_enumeration *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_5585->mAssociatedValue0 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 163)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 163)) ;
+      const cEnumAssociatedValues_typeKind_enumeration * extractPtr_5932 = (const cEnumAssociatedValues_typeKind_enumeration *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_5932->mAssociatedValue0 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_structure:
     {
-      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 165)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 165)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 165)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 165)) ;
+      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_syncTool:
     {
-      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 167)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 167)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 167)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 167)) ;
+      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 181)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 181)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_5886 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_5886->mAssociatedValue3 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 169)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 169)) ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_6233 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_6233->mAssociatedValue3 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 183)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 183)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_staticInteger:
@@ -4124,37 +4124,37 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_opaque:
     {
-      const cEnumAssociatedValues_typeKind_opaque * extractPtr_5989 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_bitCount = extractPtr_5989->mAssociatedValue0 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 173)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 173)) ;
+      const cEnumAssociatedValues_typeKind_opaque * extractPtr_6336 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_bitCount = extractPtr_6336->mAssociatedValue0 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 187)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_arrayType:
     {
-      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 175)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 175)) ;
+      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 189)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 189)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_function:
     {
-      const cEnumAssociatedValues_typeKind_function * extractPtr_6589 = (const cEnumAssociatedValues_typeKind_function *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_routineDescriptor extractedValue_descriptor = extractPtr_6589->mAssociatedValue0 ;
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, extractedValue_descriptor.getter_returnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("types.galgas", 177)))).boolEnum () ;
+      const cEnumAssociatedValues_typeKind_function * extractPtr_6936 = (const cEnumAssociatedValues_typeKind_function *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_routineDescriptor extractedValue_descriptor = extractPtr_6936->mAssociatedValue0 ;
+      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, extractedValue_descriptor.getter_returnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("types.galgas", 191)))).boolEnum () ;
       if (kBoolTrue == test_1) {
         result_result = GALGAS_string ("void") ;
       }else if (kBoolFalse == test_1) {
-        result_result = extensionGetter_llvmTypeName (extractedValue_descriptor.getter_returnTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 180)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 180)) ;
+        result_result = extensionGetter_llvmTypeName (extractedValue_descriptor.getter_returnTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)) ;
       }
-      result_result.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 182)) ;
-      cEnumerator_routineTypedSignature enumerator_6362 (extractedValue_descriptor.getter_signature (HERE), kENUMERATION_UP) ;
-      while (enumerator_6362.hasCurrentObject ()) {
-        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_6362.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 185)) ;
-        switch (enumerator_6362.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
+      result_result.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 196)) ;
+      cEnumerator_routineTypedSignature enumerator_6709 (extractedValue_descriptor.getter_signature (HERE), kENUMERATION_UP) ;
+      while (enumerator_6709.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_6709.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 199)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 199)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 199)) ;
+        switch (enumerator_6709.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
         case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
           break ;
         case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
         case GALGAS_procFormalArgumentPassingMode::kEnum_output:
           {
-            result_result.plusAssign_operation(GALGAS_string ("*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 187)) ;
+            result_result.plusAssign_operation(GALGAS_string ("*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 201)) ;
           }
           break ;
         case GALGAS_procFormalArgumentPassingMode::kEnum_input:
@@ -4162,19 +4162,19 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
           }
           break ;
         }
-        if (enumerator_6362.hasNextObject ()) {
-          result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 190)) ;
+        if (enumerator_6709.hasNextObject ()) {
+          result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 204)) ;
         }
-        enumerator_6362.gotoNextObject () ;
+        enumerator_6709.gotoNextObject () ;
       }
-      result_result.plusAssign_operation(GALGAS_string (")*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 192)) ;
+      result_result.plusAssign_operation(GALGAS_string (")*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 206)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_pointer:
     {
-      const cEnumAssociatedValues_typeKind_pointer * extractPtr_6658 = (const cEnumAssociatedValues_typeKind_pointer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_pointee = extractPtr_6658->mAssociatedValue0 ;
-      result_result = extensionGetter_llvmTypeName (extractedValue_pointee, inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (GALGAS_string ("*"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)) ;
+      const cEnumAssociatedValues_typeKind_pointer * extractPtr_7005 = (const cEnumAssociatedValues_typeKind_pointer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_pointee = extractPtr_7005->mAssociatedValue0 ;
+      result_result = extensionGetter_llvmTypeName (extractedValue_pointee, inCompiler COMMA_SOURCE_FILE ("types.galgas", 208)).add_operation (GALGAS_string ("*"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 208)) ;
     }
     break ;
   }
@@ -4231,9 +4231,9 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_7354 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bool extractedValue_unsigned = extractPtr_7354->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_7354->mAssociatedValue3 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_7701 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_7701->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_7701->mAssociatedValue3 ;
       GALGAS_string temp_1 ;
       const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, extractedValue_bitCount.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
       if (kBoolTrue == test_2) {
@@ -4248,7 +4248,7 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
       }else if (kBoolFalse == test_4) {
         temp_3 = GALGAS_string ("signed") ;
       }
-      result_result = GALGAS_string ("Integer (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 215)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string (" bit"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)) ;
+      result_result = GALGAS_string ("Integer (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 229)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)).add_operation (GALGAS_string (" bit"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)).add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)).add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 230)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 230)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_staticInteger:
@@ -4258,9 +4258,9 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
     break ;
   case GALGAS_typeKind::kEnum_opaque:
     {
-      const cEnumAssociatedValues_typeKind_opaque * extractPtr_7488 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_bitCount = extractPtr_7488->mAssociatedValue0 ;
-      result_result = GALGAS_string ("Opaque (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 220)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)).add_operation (GALGAS_string (" bits)"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)) ;
+      const cEnumAssociatedValues_typeKind_opaque * extractPtr_7835 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_bitCount = extractPtr_7835->mAssociatedValue0 ;
+      result_result = GALGAS_string ("Opaque (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 234)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)).add_operation (GALGAS_string (" bits)"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_arrayType:
@@ -4275,9 +4275,9 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
     break ;
   case GALGAS_typeKind::kEnum_pointer:
     {
-      const cEnumAssociatedValues_typeKind_pointer * extractPtr_7659 = (const cEnumAssociatedValues_typeKind_pointer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_pointee = extractPtr_7659->mAssociatedValue0 ;
-      result_result = GALGAS_string ("Pointer to ").add_operation (extensionGetter_llvmTypeName (extractedValue_pointee, inCompiler COMMA_SOURCE_FILE ("types.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 226)) ;
+      const cEnumAssociatedValues_typeKind_pointer * extractPtr_8006 = (const cEnumAssociatedValues_typeKind_pointer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_pointee = extractPtr_8006->mAssociatedValue0 ;
+      result_result = GALGAS_string ("Pointer to ").add_operation (extensionGetter_llvmTypeName (extractedValue_pointee, inCompiler COMMA_SOURCE_FILE ("types.galgas", 240)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 240)) ;
     }
     break ;
   }
@@ -4299,24 +4299,24 @@ GALGAS_arcAssignmentList extensionGetter_arcList (const GALGAS_PLMType & inObjec
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_arcAssignmentList result_result ; // Returned variable
-  result_result = GALGAS_arcAssignmentList::constructor_emptyList (SOURCE_FILE ("types.galgas", 241)) ;
-  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 242)).boolEnum () ;
+  result_result = GALGAS_arcAssignmentList::constructor_emptyList (SOURCE_FILE ("types.galgas", 255)) ;
+  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 256)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_propertyList var_propertyList_8212 ;
-    inObject.mProperty_kind.method_structure (var_propertyList_8212, inCompiler COMMA_SOURCE_FILE ("types.galgas", 243)) ;
-    cEnumerator_propertyList enumerator_8265 (var_propertyList_8212, kENUMERATION_UP) ;
-    GALGAS_uint index_8221 ((uint32_t) 0) ;
-    while (enumerator_8265.hasCurrentObject ()) {
-      GALGAS_uintlist temp_1 = GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 245)) ;
-      temp_1.addAssign_operation (index_8221  COMMA_SOURCE_FILE ("types.galgas", 245)) ;
-      GALGAS_uintlist var_indexPath_8294 = constinArgument_inPropertyIndexPath.add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 245)) ;
-      const enumGalgasBool test_2 = enumerator_8265.current_mType (HERE).getter_typeAttributes (HERE).getter_arc (SOURCE_FILE ("types.galgas", 246)).boolEnum () ;
+    GALGAS_propertyList var_propertyList_8559 ;
+    inObject.mProperty_kind.method_structure (var_propertyList_8559, inCompiler COMMA_SOURCE_FILE ("types.galgas", 257)) ;
+    cEnumerator_propertyList enumerator_8612 (var_propertyList_8559, kENUMERATION_UP) ;
+    GALGAS_uint index_8568 ((uint32_t) 0) ;
+    while (enumerator_8612.hasCurrentObject ()) {
+      GALGAS_uintlist temp_1 = GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 259)) ;
+      temp_1.addAssign_operation (index_8568  COMMA_SOURCE_FILE ("types.galgas", 259)) ;
+      GALGAS_uintlist var_indexPath_8641 = constinArgument_inPropertyIndexPath.add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 259)) ;
+      const enumGalgasBool test_2 = enumerator_8612.current_mType (HERE).getter_typeAttributes (HERE).getter_arc (SOURCE_FILE ("types.galgas", 260)).boolEnum () ;
       if (kBoolTrue == test_2) {
-        result_result.addAssign_operation (enumerator_8265.current_mPropertyName (HERE), enumerator_8265.current_mType (HERE), var_indexPath_8294  COMMA_SOURCE_FILE ("types.galgas", 247)) ;
+        result_result.addAssign_operation (enumerator_8612.current_mPropertyName (HERE), enumerator_8612.current_mType (HERE), var_indexPath_8641  COMMA_SOURCE_FILE ("types.galgas", 261)) ;
       }
-      result_result.plusAssign_operation(extensionGetter_arcList (enumerator_8265.current_mType (HERE), var_indexPath_8294, inCompiler COMMA_SOURCE_FILE ("types.galgas", 249)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 249)) ;
-      enumerator_8265.gotoNextObject () ;
-      index_8221.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 244)) ;
+      result_result.plusAssign_operation(extensionGetter_arcList (enumerator_8612.current_mType (HERE), var_indexPath_8641, inCompiler COMMA_SOURCE_FILE ("types.galgas", 263)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 263)) ;
+      enumerator_8612.gotoNextObject () ;
+      index_8568.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 258)) ;
     }
   }
 //---
@@ -5200,7 +5200,7 @@ static void extensionMethod_binaryOperationIR_enterCodeForOverflowOperation (con
     "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 97)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_labelName_2510.add_operation (GALGAS_string (".noovf:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (" = extractvalue {"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (", i1} "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (".r, 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)) ;
-  ioArgument_ioGenerationAdds.mProperty_mExternFunctionDeclarationSet.addAssign_operation (GALGAS_string ("declare {").add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (", i1} @llvm."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (".with.overflow."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101)).add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101)).add_operation (GALGAS_string (" %a, "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101)).add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101)).add_operation (GALGAS_string (" %b)"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)) ;
+  ioArgument_ioGenerationAdds.mProperty_mExternFunctionDeclarationSet.addAssign_operation (GALGAS_string ("{").add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (", i1} @llvm."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (".with.overflow."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101)).add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101)).add_operation (GALGAS_string (" %a, "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101)).add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101)).add_operation (GALGAS_string (" %b)"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 101))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5283,24 +5283,24 @@ static void extensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDiviso
                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_binaryOperationIR * object = inObject ;
   macroValidSharedObject (object, cPtr_binaryOperationIR) ;
-  GALGAS_uint var_staticStringIndex_3926 ;
+  GALGAS_uint var_staticStringIndex_3918 ;
   {
-  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mProperty_mStaticStringMap, object->mProperty_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 114)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 114)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 114)), var_staticStringIndex_3926, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 113)) ;
+  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mProperty_mStaticStringMap, object->mProperty_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 114)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 114)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 114)), var_staticStringIndex_3918, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 113)) ;
   }
-  GALGAS_string var_llvmType_3945 = extensionGetter_llvmTypeName (object->mProperty_mOperandType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (GALGAS_string (".isZero = icmp eq "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (var_llvmType_3945, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (GALGAS_string (", 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)) ;
-  GALGAS_string var_labelName_4102 = GALGAS_string ("label.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 119)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)) ;
+  GALGAS_string var_llvmType_3937 = extensionGetter_llvmTypeName (object->mProperty_mOperandType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (GALGAS_string (".isZero = icmp eq "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (var_llvmType_3937, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (GALGAS_string (", 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)) ;
+  GALGAS_string var_labelName_4094 = GALGAS_string ("label.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 119)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)) ;
   ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 120)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (GALGAS_string (".isZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (var_labelName_4102, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (GALGAS_string (".divideByZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (var_labelName_4102, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (GALGAS_string (".ok\n"
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (GALGAS_string (".isZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (var_labelName_4094, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (GALGAS_string (".divideByZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (var_labelName_4094, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (GALGAS_string (".ok\n"
     "\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(var_labelName_4102.add_operation (GALGAS_string (".divideByZero:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @raise.panic.").add_operation (var_staticStringIndex_3926.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(var_labelName_4094.add_operation (GALGAS_string (".divideByZero:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @raise.panic.").add_operation (var_staticStringIndex_3918.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (constinArgument_inGenerationContext.getter_mPanicLineLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 124)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 124)).add_operation (object->mProperty_mLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 124)).getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 124)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 124)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 124)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 124)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (constinArgument_inGenerationContext.getter_mPanicCodeLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 125)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 125)).add_operation (constinArgument_inPanicCode.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 125)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 125)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 125)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 125)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  unreachable\n"
     "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(var_labelName_4102.add_operation (GALGAS_string (".ok:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 127)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 127)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (var_llvmType_3945, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (extensionGetter_llvmName (object->mProperty_mLeft, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(var_labelName_4094.add_operation (GALGAS_string (".ok:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 127)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 127)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (var_llvmType_3937, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (extensionGetter_llvmName (object->mProperty_mLeft, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 128)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12849,7 +12849,8 @@ mProperty_mSectionCallName (),
 mProperty_mSectionImplementationName (),
 mProperty_mReceiverType (),
 mProperty_mFormalArgumentListForGeneration (),
-mProperty_mReturnType () {
+mProperty_mReturnType (),
+mProperty_mInvocationFromUserModeOnly () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12863,12 +12864,14 @@ GALGAS_sectionIRlist_2D_element::GALGAS_sectionIRlist_2D_element (const GALGAS_s
                                                                   const GALGAS_string & inOperand1,
                                                                   const GALGAS_PLMType & inOperand2,
                                                                   const GALGAS_routineFormalArgumentListIR & inOperand3,
-                                                                  const GALGAS_PLMType & inOperand4) :
+                                                                  const GALGAS_PLMType & inOperand4,
+                                                                  const GALGAS_bool & inOperand5) :
 mProperty_mSectionCallName (inOperand0),
 mProperty_mSectionImplementationName (inOperand1),
 mProperty_mReceiverType (inOperand2),
 mProperty_mFormalArgumentListForGeneration (inOperand3),
-mProperty_mReturnType (inOperand4) {
+mProperty_mReturnType (inOperand4),
+mProperty_mInvocationFromUserModeOnly (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12877,11 +12880,12 @@ GALGAS_sectionIRlist_2D_element GALGAS_sectionIRlist_2D_element::constructor_new
                                                                                   const GALGAS_string & inOperand1,
                                                                                   const GALGAS_PLMType & inOperand2,
                                                                                   const GALGAS_routineFormalArgumentListIR & inOperand3,
-                                                                                  const GALGAS_PLMType & inOperand4 
+                                                                                  const GALGAS_PLMType & inOperand4,
+                                                                                  const GALGAS_bool & inOperand5 
                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_sectionIRlist_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_sectionIRlist_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
+    result = GALGAS_sectionIRlist_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
   }
   return result ;
 }
@@ -12905,13 +12909,16 @@ typeComparisonResult GALGAS_sectionIRlist_2D_element::objectCompare (const GALGA
   if (result == kOperandEqual) {
     result = mProperty_mReturnType.objectCompare (inOperand.mProperty_mReturnType) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mInvocationFromUserModeOnly.objectCompare (inOperand.mProperty_mInvocationFromUserModeOnly) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_sectionIRlist_2D_element::isValid (void) const {
-  return mProperty_mSectionCallName.isValid () && mProperty_mSectionImplementationName.isValid () && mProperty_mReceiverType.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mReturnType.isValid () ;
+  return mProperty_mSectionCallName.isValid () && mProperty_mSectionImplementationName.isValid () && mProperty_mReceiverType.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mReturnType.isValid () && mProperty_mInvocationFromUserModeOnly.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12922,6 +12929,7 @@ void GALGAS_sectionIRlist_2D_element::drop (void) {
   mProperty_mReceiverType.drop () ;
   mProperty_mFormalArgumentListForGeneration.drop () ;
   mProperty_mReturnType.drop () ;
+  mProperty_mInvocationFromUserModeOnly.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12941,6 +12949,8 @@ void GALGAS_sectionIRlist_2D_element::description (C_String & ioString,
     mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mReturnType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mInvocationFromUserModeOnly.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -12973,6 +12983,12 @@ GALGAS_routineFormalArgumentListIR GALGAS_sectionIRlist_2D_element::getter_mForm
 
 GALGAS_PLMType GALGAS_sectionIRlist_2D_element::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
   return mProperty_mReturnType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_sectionIRlist_2D_element::getter_mInvocationFromUserModeOnly (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mInvocationFromUserModeOnly ;
 }
 
 

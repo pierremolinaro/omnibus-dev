@@ -249,7 +249,7 @@ private proc generateCodeFiles
       !llvmNameForServiceImplementation (!waitForGuardChange)
       !true # A (boolean) value is returned
     generationAdds.mExternFunctionDeclarationSet +=
-      !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
+      !"i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
 #----------------------------------------- SVC
   @sectionIRlist sectionIRlist = {}
@@ -281,7 +281,21 @@ private proc generateCodeFiles
     !targetParameters:inTargetParameters
   )
 #----------------------------------------- Section, safe dispatcher
-  generateSectionAndSafeDispatcher (
+  sectionIRlist += 
+    !llvmNameForSectionCall (!"heap.memory.free")
+    !llvmNameForSectionImplementation (!"heap.memory.free")
+    !voidType ()
+    !{!.input !opaqueType32 () !"inPointer"}
+    !voidType ()
+    !false # Invocation from any mode
+  sectionIRlist += 
+    !llvmNameForSectionCall (!"heap.memory.alloc")
+    !llvmNameForSectionImplementation (!"heap.memory.alloc")
+    !voidType ()
+    !{!.input !opaqueType32 () !"inSize"}
+    !opaqueType32 ()
+    !false # Invocation from any mode
+  generateSectionDispatcher (
     !inCurrentDirectory
     !inTargetName.string
     !targetParameters:inTargetParameters
@@ -303,22 +317,18 @@ private proc generateCodeFiles
   )
 #----------------------------------------- Copy routines
   let keyList = [inTypeMap allKeyList]
-  llvmCode += llvmTitleComment (!"PLM Copy Functions")
-  llvmCode += "declare void @copy.byte.array (i8* %dest, i8* %src, i32 %byteCount)\n\n"
-  llvmCode += llvmSeparatorLine () + "\n"
-  llvmCode += "declare void @copy.word.array (i32* %dest, i32* %src, i32 %byteCount)\n\n"
   for (key) in keyList do
     [inTypeMap searchKey !lkey:key ?type:let type ?index:*]
     [type generateCopyRoutine !?llvmCode]
   end
-#----------------------------------------- Intrinsics
-  if [generationAdds.mExternFunctionDeclarationSet count] > 0 then
-    llvmCode += llvmTitleComment (!"LLVM extern functions")
-    for (s) in generationAdds.mExternFunctionDeclarationSet do
-      llvmCode += s + "\n"
-    end
-    llvmCode += "\n"
+#----------------------------------------- Extern function declaration
+  generationAdds.mExternFunctionDeclarationSet += !"void @copy.byte.array (i8* %dest, i8* %src, i32 %byteCount)"
+  generationAdds.mExternFunctionDeclarationSet += !"void @copy.word.array (i32* %dest, i32* %src, i32 %wordCount)"
+  llvmCode += llvmTitleComment (!"LLVM extern functions")
+  for (s) in generationAdds.mExternFunctionDeclarationSet do
+    llvmCode += "declare " + s + "\n"
   end
+  llvmCode += "\n"
 #----------------------------------------- Static Strings
   if [generationAdds.mStaticStringMap count] > 0 then
     llvmCode += llvmTitleComment (!"Static strings")
@@ -350,7 +360,9 @@ private proc generateCodeFiles
   let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   let s4 = [s3 stringByReplacingStringByString !"!SERVICEIMPLEMENTATION!" !llvmNameForServiceImplementation (!"")]
   let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
-  [s5 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
+  let s6 = [s5 stringByReplacingStringByString !"!SECTIONIMPLEMENTATION!" !llvmNameForSectionImplementation (!"")]
+  let s7 = [s6 stringByReplacingStringByString !"!SECTIONCALL!" !llvmNameForSectionCall (!"")]
+  [s7 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
 #----------------------------------------- Write JSON file with stack features
   var json = "{\n"
 #--- System stack size
@@ -358,7 +370,7 @@ private proc generateCodeFiles
   json += "  \"stacked-register-size-on-user-stack\" : "
        + inIntermediateCodeStruct.mTargetParameters.mStackedUserRegisterOnInterruptByteSize.bigint + ",\n"
   json += "  \"service-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mServicePushedRegisterByteSize.bigint + ",\n"
-  json += "  \"section-stack-needs\" : " + [inIntermediateCodeStruct.mTargetParameters.mSectionImplementation sectionStackByteSize] + ",\n"
+  json += "  \"section-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mSectionPushedRegisterByteSize.bigint + ",\n"
 #--- Tasks
   json += "  \"tasks\" : {"
   for task in inIntermediateCodeStruct.mTaskMapIR
@@ -377,7 +389,7 @@ private proc generateCodeFiles
   json += "  ],\n"
 #--- sections
   json += "  \"sections\" : ["
-  for (* sectionImplementation * * *) in sectionIRlist
+  for (* sectionImplementation 4*) in sectionIRlist
     do json += "\n    \"" + sectionImplementation + "\""
     between json += ","
     after json += "\n"

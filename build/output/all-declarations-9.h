@@ -437,31 +437,18 @@ class GALGAS_bigint function_panicCodeForClosedSync (class C_Compiler * inCompil
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             Function 'llvmFunctionCall'                                             *
+//                                         Routine 'generateSectionDispatcher'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmFunctionCall (const class GALGAS_PLMType & constinArgument0,
-                                               const class GALGAS_string & constinArgument1,
-                                               const class GALGAS_PLMType & constinArgument2,
-                                               const class GALGAS_routineFormalArgumentListIR & constinArgument3,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Routine 'generateSectionAndSafeDispatcher'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_generateSectionAndSafeDispatcher (const class GALGAS_string constinArgument0,
-                                               const class GALGAS_string constinArgument1,
-                                               const class GALGAS_targetParameters constinArgument2,
-                                               class GALGAS_string & ioArgument3,
-                                               class GALGAS_string & ioArgument4,
-                                               const class GALGAS_sectionIRlist constinArgument5,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+void routine_generateSectionDispatcher (const class GALGAS_string constinArgument0,
+                                        const class GALGAS_string constinArgument1,
+                                        const class GALGAS_targetParameters constinArgument2,
+                                        class GALGAS_string & ioArgument3,
+                                        class GALGAS_string & ioArgument4,
+                                        const class GALGAS_sectionIRlist constinArgument5,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

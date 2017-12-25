@@ -845,7 +845,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
 
 //--- File 'teensy-3-1/02-blink-leds.plm'
 
-const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/privileged\"\n"
+const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
@@ -956,7 +956,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3072, // Text length
+  3074, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -1041,7 +1041,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
 
 //--- File 'teensy-3-1/04-section-service-duration.plm'
 
-const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/privileged\"\n"
+const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
@@ -1129,7 +1129,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  2371, // Text length
+  2373, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1705,7 +1705,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
 
 //--- File 'teensy-3-1/11-pit-unprivileged-mode-it.plm'
 
-const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/privileged\"\n"
+const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
@@ -1789,7 +1789,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  2029, // Text length
+  2031, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -1977,7 +1977,7 @@ const cRegularFileWrapper gWrapperFile_14_embeddedSampleCode (
 
 //--- File 'teensy-3-6/02-blink-leds.plm'
 
-const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-6/privileged\"\n"
+const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2092,7 +2092,7 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3198, // Text length
+  3200, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 
@@ -2115,7 +2115,7 @@ const char * gWrapperFileContent_16_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "//    This results in the DMA request remaining asserted continuously after the first trigger.\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "target \"teensy-3-6/privileged\"\n"
+  "target \"teensy-3-6/unprivileged\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2318,13 +2318,13 @@ const cRegularFileWrapper gWrapperFile_16_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  8226, // Text length
+  8228, // Text length
   gWrapperFileContent_16_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/04-large-structure.plm'
 
-const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/privileged\"\n"
+const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2382,13 +2382,13 @@ const cRegularFileWrapper gWrapperFile_17_embeddedSampleCode (
   "04-large-structure.plm",
   "plm",
   true, // Text file
-  1807, // Text length
+  1809, // Text length
   gWrapperFileContent_17_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/05-periodic-timer.plm'
 
-const char * gWrapperFileContent_18_embeddedSampleCode = "target \"teensy-3-6/privileged\"\n"
+const char * gWrapperFileContent_18_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2470,13 +2470,13 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "05-periodic-timer.plm",
   "plm",
   true, // Text file
-  2416, // Text length
+  2418, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/06-chained-pit-0-1.plm'
 
-const char * gWrapperFileContent_19_embeddedSampleCode = "target \"teensy-3-6/privileged\"\n"
+const char * gWrapperFileContent_19_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
   "let F_CPU_MHZ = 192\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2587,13 +2587,13 @@ const cRegularFileWrapper gWrapperFile_19_embeddedSampleCode (
   "06-chained-pit-0-1.plm",
   "plm",
   true, // Text file
-  3232, // Text length
+  3234, // Text length
   gWrapperFileContent_19_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/07-synchronization-gate.plm'
 
-const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/privileged\"\n"
+const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2714,13 +2714,13 @@ const cRegularFileWrapper gWrapperFile_20_embeddedSampleCode (
   "07-synchronization-gate.plm",
   "plm",
   true, // Text file
-  3327, // Text length
+  3329, // Text length
   gWrapperFileContent_20_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/08-synchronization-buffer.plm'
 
-const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/privileged\"\n"
+const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2832,13 +2832,13 @@ const cRegularFileWrapper gWrapperFile_21_embeddedSampleCode (
   "08-synchronization-buffer.plm",
   "plm",
   true, // Text file
-  3398, // Text length
+  3400, // Text length
   gWrapperFileContent_21_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/09-PWM-with-PTM-module.plm'
 
-const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/privileged\"\n"
+const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2935,7 +2935,7 @@ const cRegularFileWrapper gWrapperFile_22_embeddedSampleCode (
   "09-PWM-with-PTM-module.plm",
   "plm",
   true, // Text file
-  3637, // Text length
+  3639, // Text length
   gWrapperFileContent_22_embeddedSampleCode
 ) ;
 
@@ -3019,6 +3019,7 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "let LED_L4 = $digitalPort.D7\n"
   "let LED_L3 = $digitalPort.D6\n"
   "let LED_L0 = $digitalPort.D3\n"
+  "let PUSH_P0 = $digitalPort.D8\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -3028,6 +3029,8 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "    digital.set (!mode:.OUTPUT !toPort:LED_L4)\n"
   "    digital.set (!mode:.OUTPUT !toPort:LED_L3)\n"
   "    digital.set (!mode:.OUTPUT !toPort:LED_L0)\n"
+  "    digital.set (!mode:.OUTPUT !toPort:LED_L0)\n"
+  "    digital.set (!mode:.INPUT_PULLUP !toPort:PUSH_P0)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -3126,9 +3129,13 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "  on time.wait (!untilDeadline:self.\xC3""\xA9""ch\xC3""\xA9""ance1) {\n"
   "    self.\xC3""\xA9""ch\xC3""\xA9""ance1 +%= 71\n"
   "    digital.toggle (!port:LED_L4)\n"
-  "    if lengthOf (!buffer:self.data1) < 500 {\n"
-  "      append (!byte:self.b !\?toBuffer:self.data1)\n"
-  "      self.b +%= 1\n"
+  "    if digital.read (!port:PUSH_P0) {\n"
+  "      if lengthOf (!buffer:self.data1) < 500 {\n"
+  "        append (!byte:self.b !\?toBuffer:self.data1)\n"
+  "        self.b +%= 1\n"
+  "      }else{\n"
+  "        removeAll (!\?fromBuffer:self.data1)\n"
+  "      }\n"
   "    }else{\n"
   "      removeAll (!\?fromBuffer:self.data1)\n"
   "    }\n"
@@ -3146,24 +3153,27 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "  }\n"
   "  \n"
   "  func testReleaseLocalVar (\? inData $data) {\n"
-  "     var d = $structWithARC ()\n"
-  "     d.donn\xC3""\xA9""e = inData\n"
+  "    var d = $structWithARC ()\n"
+  "    d.donn\xC3""\xA9""e = inData\n"
   "  }\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T3 priority 100 stackSize 512 {\n"
+  "  var data = $data ()\n"
   " \n"
   "  on time.wait (!untilDeadline:0) {\n"
   "    digital.toggle (!port:LED_L0)\n"
-  "//    self.\xC3""\xA9""ch\xC3""\xA9""ance +%= 1\n"
-  "//    if lengthOf (!buffer:self.data) < 500 {\n"
-  "//      append (!byte:self.b !\?toBuffer:self.data)\n"
-  "//      self.b +%= 1\n"
-  "//    }else{\n"
-  "//      removeAll (!\?fromBuffer:self.data)\n"
-  "//    }\n"
+  "    if digital.read (!port:PUSH_P0) {\n"
+  "      if lengthOf (!buffer:self.data) == 0 {\n"
+  "        append (!byte:0 !\?toBuffer:self.data)\n"
+  "      }else{\n"
+  "        removeAll (!\?fromBuffer:self.data)\n"
+  "      }\n"
+  "    }else{\n"
+  "      removeAll (!\?fromBuffer:self.data)\n"
+  "    }\n"
   "  }\n"
   "\n"
   "}\n"
@@ -3174,7 +3184,7 @@ const cRegularFileWrapper gWrapperFile_24_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5145, // Text length
+  5448, // Text length
   gWrapperFileContent_24_embeddedSampleCode
 ) ;
 

@@ -39,6 +39,20 @@ enum @typeKind {
 
 #·······················································································································
 
+func opaqueType32 -> @PLMType {
+  result = .new {
+    !propertyMap:{}
+    !classConstantMap:{}
+    !constructorMap:{}
+    !guardMap:{}
+    !typeAttributes:.none
+    !plmTypeName:"???"
+    !kind:.opaque {!bitCount:32G}
+  }
+}
+
+#·······················································································································
+
 func booleanType -> @PLMType {
   result = .new {
     !propertyMap:{}

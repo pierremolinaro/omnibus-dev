@@ -40,7 +40,8 @@ SECTION:
   8 ; // saves 2 registers on system stack
   "udfcoded-section-dispatcher-header.s" ;
   "udfcoded-section-dispatcher-entry.s" ;
-  "udfcoded-section-invocation.s"
+  "udfcoded-section-invocation-from-any-mode.s" ;
+  "udfcoded-section-invocation-from-user-mode.s"
 //--- C Source files
 C_FILES:
   "c-arm7tdmi-vectors.c",
@@ -49,7 +50,8 @@ C_FILES:
   "c-arm7tdmi-context-code.c",
   "../c-real-time-kernel-code.c",
   "c-countTrainingZeros.c",
-  "../memory-utilities.c"
+  "../memory-utilities.c",
+  "../heap.c"
 //--- Assembler Source files
 S_FILES:
   "s-target.s"
