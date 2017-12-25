@@ -20,6 +20,7 @@ func activityLedOff @safe @exported () {
 let LED_L4 = $digitalPort.D7
 let LED_L3 = $digitalPort.D6
 let LED_L0 = $digitalPort.D3
+let PUSH_P0 = $digitalPort.D8
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -29,6 +30,8 @@ driver toto > digital {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.INPUT_PULLUP !toPort:PUSH_P0)
   }
 }
 
@@ -127,9 +130,13 @@ task T2 priority 5 stackSize 512 {
   on time.wait (!untilDeadline:self.échéance1) {
     self.échéance1 +%= 71
     digital.toggle (!port:LED_L4)
-    if lengthOf (!buffer:self.data1) < 500 {
-      append (!byte:self.b !?toBuffer:self.data1)
-      self.b +%= 1
+    if digital.read (!port:PUSH_P0) {
+      if lengthOf (!buffer:self.data1) < 500 {
+        append (!byte:self.b !?toBuffer:self.data1)
+        self.b +%= 1
+      }else{
+        removeAll (!?fromBuffer:self.data1)
+      }
     }else{
       removeAll (!?fromBuffer:self.data1)
     }
@@ -147,24 +154,27 @@ task T2 priority 5 stackSize 512 {
   }
   
   func testReleaseLocalVar (? inData $data) {
-     var d = $structWithARC ()
-     d.donnée = inData
+    var d = $structWithARC ()
+    d.donnée = inData
   }
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T3 priority 100 stackSize 512 {
+  var data = $data ()
  
   on time.wait (!untilDeadline:0) {
     digital.toggle (!port:LED_L0)
-//    self.échéance +%= 1
-//    if lengthOf (!buffer:self.data) < 500 {
-//      append (!byte:self.b !?toBuffer:self.data)
-//      self.b +%= 1
-//    }else{
-//      removeAll (!?fromBuffer:self.data)
-//    }
+    if digital.read (!port:PUSH_P0) {
+      if lengthOf (!buffer:self.data) == 0 {
+        append (!byte:0 !?toBuffer:self.data)
+      }else{
+        removeAll (!?fromBuffer:self.data)
+      }
+    }else{
+      removeAll (!?fromBuffer:self.data)
+    }
   }
 
 }

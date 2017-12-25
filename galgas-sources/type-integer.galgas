@@ -253,7 +253,7 @@ private proc generateIntegerIntrinsicFunction
   ioLLVMcode += "  ret " + inLLVMtypeName + " %result\n"
   ioLLVMcode += "}\n\n"
   ioGenerationAdds.mExternFunctionDeclarationSet +=
-    !"declare " + inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + ")"
+    !inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + ")"
 }
 
 #·······················································································································

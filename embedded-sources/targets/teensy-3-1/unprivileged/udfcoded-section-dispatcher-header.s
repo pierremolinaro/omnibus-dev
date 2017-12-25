@@ -6,4 +6,4 @@
 
   .align  2
 
-__udf_dispatcher_table:
+__section_dispatcher_table:

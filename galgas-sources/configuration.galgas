@@ -16,29 +16,6 @@ list @interruptionConfigurationList {
 
 #·······················································································································
 
-enum @sectionImplementationScheme {
-  case none
-  case svc (@lbigint sectionPushedRegisterByteSize 
-            @lstring sectionHandler
-            @lstring sectionDispatcherEntry
-            @lstring sectionDispatcherHeader
-            @lstring sectionDispatcherInvocation)
-  case function (@string disableInterruptInLLVM @string enableInterruptInLLVM)
-  default none
-}
-
-#·······················································································································
-
-getter @sectionImplementationScheme sectionStackByteSize -> @bigint {
-  switch self
-  case svc (sectionPushedRegisterByteSize * * * *) : result = sectionPushedRegisterByteSize.bigint
-  case function (* *) : result = 0G
-  case none: result = 0G
-  end
-}
-
-#·······················································································································
-
 struct @targetParameters {
   @2lstringlist mPython_utilityToolList
   @lstring mPython_build
@@ -50,10 +27,12 @@ struct @targetParameters {
 
   @lstring mNopInstructionStringInLLVM
 
-  @lstring mServiceHandler
-  @lbigint mServicePushedRegisterByteSize
-
-  @sectionImplementationScheme mSectionImplementation
+  @lstring mSectionHandler
+  @lbigint mSectionPushedRegisterByteSize 
+  @lstring mSectionDispatcherHeader
+  @lstring mSectionDispatcherEntry
+  @lstring mSectionDispatcherInvocationFromAnyMode
+  @lstring mSectionDispatcherInvocationFromUserMode
 
   @lstringlist m_C_definitionFiles
   @lstringlist m_S_definitionFiles
@@ -62,6 +41,8 @@ struct @targetParameters {
   @lstring mXtrInterruptHandler
   @lstring mUndefinedInterruptHandler
   
+  @lstring mServiceHandler
+  @lbigint mServicePushedRegisterByteSize
   @lstring mServiceDispatcherEntry
   @lstring mServiceDispatcherHeader
   @lstring mServiceEntryNoReturnedValue
@@ -85,7 +66,7 @@ syntax extension plm_target_specific_syntax {
 
   #·····················································································································
 
-  rule <key> ?let @string inKey {
+  rule <configuration_key> ?let @string inKey {
     $identifier$ ?let key
     if key.string != inKey then
       error key : "invalid key" fixit { replace inKey }
@@ -96,7 +77,7 @@ syntax extension plm_target_specific_syntax {
   #·····················································································································
 
   rule <python_utility_tool_list> !@2lstringlist outPythonUtilityToolList {
-    <key> !"PYTHON_UTILITIES"
+    <configuration_key> !"PYTHON_UTILITIES"
     outPythonUtilityToolList = {}
     select
     or
@@ -113,61 +94,29 @@ syntax extension plm_target_specific_syntax {
 
   #·····················································································································
 
-  rule <section_specification> !@sectionImplementationScheme outSectionImplementation {
-    <key> !"SECTION"
-    select
-      $"string"$ ?let sectionHandler
-      $;$
-      $integer$ ?let sectionPushedRegisterByteSize
-      $;$
-      $"string"$ ?let sectionDispatcherHeader
-      $;$
-      $"string"$ ?let sectionDispatcherEntry
-      $;$
-      $"string"$ ?let sectionDispatcherInvocation
-      outSectionImplementation = .svc{
-        !sectionPushedRegisterByteSize:sectionPushedRegisterByteSize
-        !sectionHandler:sectionHandler
-        !sectionDispatcherEntry:sectionDispatcherEntry
-        !sectionDispatcherHeader:sectionDispatcherHeader
-        !sectionDispatcherInvocation:sectionDispatcherInvocation
-      }
-    or
-      $"string"$ ?let sectionDisableInterrupt
-      $;$
-      $"string"$ ?let sectionEnableInterrupt
-      outSectionImplementation = .function {
-        !disableInterruptInLLVM:sectionDisableInterrupt
-        !enableInterruptInLLVM:sectionEnableInterrupt
-      }    
-    end
-  }
-
-  #·····················································································································
-
   rule <configuration_start_symbol>
     ?!@ast ioAST
     !importClauseList:@lstringlist outImportedFileList
     !endOfSourceFile:@location outEndOfSourceFile
   {
     <python_utility_tool_list> ?let python_utilityToolList
-    <key> !"PYTHON_BUILD"
+    <configuration_key> !"PYTHON_BUILD"
     $"string"$ ?let python_build
-    <key> !"LINKER_SCRIPT"
+    <configuration_key> !"LINKER_SCRIPT"
     $"string"$ ?let linkerScript
-    <key> !"PANIC"
+    <configuration_key> !"PANIC"
     $\$type$ ?let panicCodeTypeName 
     $;$
     $\$type$ ?let panicLineTypeName
     $;$
     $"string"$ ?let targetPanic_LL_filePath
-    <key> !"POINTER_BIT_COUNT"
+    <configuration_key> !"POINTER_BIT_COUNT"
     $integer$ ?let pointerSize
-    <key> !"SYSTEM_STACK_SIZE"
+    <configuration_key> !"SYSTEM_STACK_SIZE"
     $integer$ ?let systemStackSize
-    <key> !"NOP"
+    <configuration_key> !"NOP"
     $"string"$ ?let nopInstructionStringInLLVM
-    <key> !"SERVICE"
+    <configuration_key> !"SERVICE"
     $"string"$ ?let serviceHandler
     $;$
     $integer$ ?let servicePushedRegisterByteSize
@@ -179,8 +128,19 @@ syntax extension plm_target_specific_syntax {
     $"string"$ ?let serviceEntryNoReturnedValue
     $;$
     $"string"$ ?let serviceEntryReturnValue
-    <section_specification> ?let sectionImplementation
-    <key> !"C_FILES"
+    <configuration_key> !"SECTION"
+    $"string"$ ?let sectionHandler
+    $;$
+    $integer$ ?let sectionPushedRegisterByteSize
+    $;$
+    $"string"$ ?let sectionDispatcherHeader
+    $;$
+    $"string"$ ?let sectionDispatcherEntry
+    $;$
+    $"string"$ ?let sectionDispatcherInvocationFromAnyMode
+    $;$
+    $"string"$ ?let sectionDispatcherInvocationFromUserMode
+    <configuration_key> !"C_FILES"
     @lstringlist C_definitionFiles = {}
     repeat
       $"string"$ ?let fileRelativePath
@@ -188,7 +148,7 @@ syntax extension plm_target_specific_syntax {
     while
       $,$
     end
-    <key> !"S_FILES"
+    <configuration_key> !"S_FILES"
     @lstringlist S_definitionFiles = {}
     repeat
       $"string"$ ?let fileRelativePath
@@ -196,7 +156,7 @@ syntax extension plm_target_specific_syntax {
     while
       $,$
     end
-    <key> !"LL_FILES"
+    <configuration_key> !"LL_FILES"
     @lstringlist LL_definitionFiles = {}
     repeat
       $"string"$ ?let fileRelativePath
@@ -205,7 +165,7 @@ syntax extension plm_target_specific_syntax {
       $,$
     end
     outImportedFileList = {}
-    <key> !"PLM_FILES"
+    <configuration_key> !"PLM_FILES"
     select
     or
       repeat
@@ -215,14 +175,14 @@ syntax extension plm_target_specific_syntax {
         $,$
       end
     end
-    <key> !"INTERRUPT_HANDLER"
+    <configuration_key> !"INTERRUPT_HANDLER"
     $"string"$ ?let xtrInterruptHandler
     $;$
     $integer$ ?let stackedUserRegisterOnInterruptByteSize
     $;$
     $"string"$ ?let undefinedInterruptHandler
     <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
-     let parameters = @targetParameters.new {
+    let parameters = @targetParameters.new {
       !python_utilityToolList
       !python_build
       !targetPanic_LL_filePath
@@ -231,14 +191,19 @@ syntax extension plm_target_specific_syntax {
       !systemStackSize
       !stackedUserRegisterOnInterruptByteSize
       !nopInstructionStringInLLVM
-      !serviceHandler
-      !servicePushedRegisterByteSize
-      !sectionImplementation
+      !sectionHandler
+      !sectionPushedRegisterByteSize
+      !sectionDispatcherHeader
+      !sectionDispatcherEntry
+      !sectionDispatcherInvocationFromAnyMode
+      !sectionDispatcherInvocationFromUserMode
       !C_definitionFiles
       !S_definitionFiles
       !LL_definitionFiles
       !xtrInterruptHandler
       !undefinedInterruptHandler
+      !serviceHandler
+      !servicePushedRegisterByteSize
       !serviceDispatcherEntry
       !serviceDispatcherHeader
       !serviceEntryNoReturnedValue
@@ -265,7 +230,7 @@ syntax extension plm_target_specific_syntax {
   {
     interruptionConfigurationList = {}
     outEnumerationConstantList = {}
-    <key> !"INTERRUPTS"
+    <configuration_key> !"INTERRUPTS"
     select
     or
       repeat

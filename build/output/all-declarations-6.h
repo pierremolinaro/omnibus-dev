@@ -13,6 +13,14 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specific_5F_syntax {
+//------------------------------------- 'configuration_key' non terminal
+//--- 'parse' label
+  public : virtual void nt_configuration_5F_key_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_configuration_5F_key_ (const GALGAS_string inArgument0,
+                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'configuration_start_symbol' non terminal
 //--- 'parse' label
   public : virtual void nt_configuration_5F_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -60,14 +68,6 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specif
                                                  GALGAS_enumerationConstantList & outArgument1,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'key' non terminal
-//--- 'parse' label
-  public : virtual void nt_key_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_key_ (const GALGAS_string inArgument0,
-                                 C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'python_utility_tool_list' non terminal
 //--- 'parse' label
   public : virtual void nt_python_5F_utility_5F_tool_5F_list_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -75,14 +75,6 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specif
 //----------- '' label
   public : virtual void nt_python_5F_utility_5F_tool_5F_list_ (GALGAS__32_lstringlist & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'section_specification' non terminal
-//--- 'parse' label
-  public : virtual void nt_section_5F_specification_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_section_5F_specification_ (GALGAS_sectionImplementationScheme & outArgument0,
-                                                      C_Lexique_plm_5F_lexique * inCompiler) ;
 
   public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
@@ -103,8 +95,6 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specif
   public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_8 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_9 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_10 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

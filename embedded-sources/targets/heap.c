@@ -122,7 +122,13 @@ typedef struct {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-static DataBufferHeaderType * memoryAlloc (unsigned short inBlockSizeIndex) {
+DataBufferHeaderType * memoryAlloc (unsigned short inBlockSizeIndex) asm ("!SECTIONCALL!heap.memory.alloc") ;
+
+DataBufferHeaderType * kernel_memoryAlloc (unsigned short inBlockSizeIndex) asm ("!SECTIONIMPLEMENTATION!heap.memory.alloc") ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+DataBufferHeaderType * kernel_memoryAlloc (unsigned short inBlockSizeIndex) {
   DataBufferHeaderType * result = (DataBufferHeaderType *) 0 ;
   tFreeBlockListDescriptor * descriptorPtr = & gFreeBlockDescriptorArray [inBlockSizeIndex] ;
   if (descriptorPtr->mFreeBlockCount > 0) { // Allocate from free list
@@ -151,7 +157,13 @@ static DataBufferHeaderType * memoryAlloc (unsigned short inBlockSizeIndex) {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-static void memoryFree (DataBufferHeaderType * inPointer) {
+void memoryFree (DataBufferHeaderType * inPointer) asm ("!SECTIONCALL!heap.memory.free") ;
+
+void kernel_memoryFree (DataBufferHeaderType * inPointer) asm ("!SECTIONIMPLEMENTATION!heap.memory.free") ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+void kernel_memoryFree (DataBufferHeaderType * inPointer) {
   const unsigned idx = inPointer->mBlockSizeIndex ;
   tFreeBlock * freeBlockPtr = (tFreeBlock *) inPointer ;
   freeBlockPtr->mNextFreeBlock = gFreeBlockDescriptorArray [idx].mFreeBlockList ;

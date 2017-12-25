@@ -481,6 +481,7 @@ method @guardMapIR guardCodeGeneration
         !guard.mReceiverType
         !guard.mFormalArgumentListForGeneration
         !booleanType () # A guard returns a boolean value
+        !true # Onvly incocation from user mode
     end
     [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   end
@@ -588,8 +589,8 @@ method @guardMapIR-element llvmCodeGeneration
     ioLLVMcode += "  ret i1 false\n"
     ioLLVMcode += "}\n\n"
   end
-  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare void @note.guard.state (i1 %inAccepted)"
-  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare i1 @xtr.user.result ()"
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"void @note.guard.state (i1 %inAccepted)"
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"i1 @xtr.user.result ()"
 }
 
 #·······················································································································

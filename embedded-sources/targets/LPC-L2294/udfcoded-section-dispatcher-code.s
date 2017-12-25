@@ -35,7 +35,7 @@ as_undef_handler:
 @    LDRB loads a byte from memory and zero-extends the byte to a 32-bit word.
   ldrb  r7, [lr, #-4 + 1] @ -4 for undef instruction, +1 for getting second byte
 @--- r12 <- address of routine to call
-  ldr   r12, =__und_dispatcher_table
+  ldr   r12, =__section_dispatcher_table
   ldr   r12, [r12, r7, LSL #2]
 @--- Call routine
   mov   lr, pc

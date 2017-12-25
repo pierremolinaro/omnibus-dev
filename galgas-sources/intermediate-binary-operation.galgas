@@ -97,7 +97,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelName + ".noovf:\n"
   ioLLVMcode += "  " + [mTarget llvmName] + " = extractvalue {" + llvmType + ", i1} " + [mTarget llvmName] + ".r, 0\n"
-  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"{" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
      + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
 }
 

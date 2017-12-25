@@ -5,5 +5,6 @@
 @----------------------------------------------------------------------------------------------------------------------*
 
   UNDEFINED_INSTRUCTION = 0xE7F000F0
+  I_BIT_MASK = 0x80      @ IRQ is disabled when I bit is set
 
-__und_dispatcher_table:
+__section_dispatcher_table:
