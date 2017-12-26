@@ -4524,13 +4524,21 @@ const cRegularFileWrapper gWrapperFile_4_targetTemplates (
 //--- File '/ll-configuration-on-boot.ll'
 
 const char * gWrapperFileContent_5_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
-  ";   configuration.on.boot                                                                                              *\n"
+  ";   boot.routines                                                                                                      *\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "define void @configuration.on.boot () nounwind minsize optsize {\n"
+  "define void @boot.routines () nounwind minsize optsize {\n"
   "  call void @boot ()\n"
   "  call void @clear.bss ()\n"
   "  call void @copy.data ()\n"
+  "  ret  void\n"
+  "}\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  ";   init.routines                                                                                                      *\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "define void @init.routines () nounwind minsize optsize {\n"
   "  call void @init ()\n"
   "  call void @start.tasks ()\n"
   "  ret  void\n"
@@ -4540,7 +4548,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "ll-configuration-on-boot.ll",
   "ll",
   true, // Text file
-  565, // Text length
+  993, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -7975,7 +7983,8 @@ const char * gWrapperFileContent_30_targetTemplates = "  .code 32\n"
   "   ldr   sp, =__svc_stack_end\n"
   "\n"
   "@---------------------------------------- Initialize system (boot, init)\n"
-  "   bl    configuration.on.boot\n"
+  "   bl    boot.routines\n"
+  "   bl    init.routines\n"
   "\n"
   "@---------------------------------------- Call entry point\n"
   "   b    __entry_point\n"
@@ -8110,7 +8119,7 @@ const cRegularFileWrapper gWrapperFile_30_targetTemplates (
   "s-target.s",
   "s",
   true, // Text file
-  12001, // Text length
+  12016, // Text length
   gWrapperFileContent_30_targetTemplates
 ) ;
 
@@ -12547,24 +12556,18 @@ const char * gWrapperFileContent_62_targetTemplates = "@------------------------
   "!ISR!:\n"
   "\t.fnstart\n"
   "@----------------------------------------- Save preserved registers\n"
-  "\t.save\t{r0, r1, r2, r3, r4, r5, lr}\n"
+  "\t.save\t{r4, r5, lr}\n"
   "  push  {r4, r5, lr}\n"
   "@----------------------------------------- Activity led On\n"
-  "  push  {r0, r1, r2, r3}\n"
-  "  bl    func.activityLedOn_28__29_   @ Defined in PLM source\n"
-  "  pop   {r0, r1, r2, r3}\n"
+  "  bl    func.activityLedOn_28__29_   @ Defined in PLM source (can modify R0-R3 registers)\n"
   "@----------------------------------------- R4 <- running task context\n"
   "  ldr   r4, =gRunningTaskControlBlock\n"
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call Interrupt handler\n"
   "  bl    !HANDLER!\n"
-  "@----------------------------------------- Test backgroundTaskContext to check if init passed\n"
-  "  ldr   r5, =backgroundTaskContext\n"
-  "  ldr   r5, [r5]\n"
-  "  cmp   r5, #0\n"
-  "  bne   .handle.context.switch\n"
-  "@----------------------------------------- Still in init : return\n"
-  "  pop   {r4, r5, pc}\n"
+  "@----------------------------------------- Perform context switch, if needed\n"
+  "  b     .handle.context.switch\n"
+  "\n"
   "\t.cantunwind\n"
   "\t.fnend\n"
   "\n" ;
@@ -12573,7 +12576,7 @@ const cRegularFileWrapper gWrapperFile_62_targetTemplates (
   "xtr-interrupt-handler.s",
   "s",
   true, // Text file
-  1764, // Text length
+  1557, // Text length
   gWrapperFileContent_62_targetTemplates
 ) ;
 
@@ -12910,7 +12913,7 @@ const char * gWrapperFileContent_65_targetTemplates = "@------------------------
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  ".lcomm backgroundTaskStack, 64\n"
+  ".lcomm backgroundTaskStack, 32\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -12919,30 +12922,37 @@ const char * gWrapperFileContent_65_targetTemplates = "@------------------------
   "  .global as_reset_handler\n"
   "  .type as_reset_handler, %function\n"
   "\n"
-  "as_reset_handler:\n"
-  "@--- Init micro controller\n"
-  "  bl configuration.on.boot\n"
-  "@--- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers\n"
-  "  ldr r0, =backgroundTaskStack + 64\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@ See https://developer.arm.com/docs/dui0553/latest/2-the-cortex-m4-processor/21-programmers-model/213-core-registers\n"
+  "\n"
+  "\t.section\t\".text.as_reset_handler\",\"ax\",%progbits\n"
+  "\n"
+  "  .global as_reset_handler\n"
+  "  .type as_reset_handler, %function\n"
+  "\n"
+  "as_reset_handler: @ Cortex M4 boots with interrupts enabled, in Thread mode (as IPSR is set to 0 at boot)\n"
+  "@---------- Run boot, zero bss section, copy data section\n"
+  "  bl  boot.routines\n"
+  "@---------- Set background task context\n"
+  "  ldr r0, =backgroundTaskStack\n"
+  "  ldr r1, =backgroundTaskContext\n"
+  "  str r0, [r1]\n"
+  "@---------- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers\n"
+  "  add r0, #32\n"
   "  msr psp, r0\n"
-  "@--- Set CONTROL register (see \xC2""\xA7""B1.4.4)\n"
+  "@---------- Set CONTROL register (see \xC2""\xA7""B1.4.4)\n"
   "@ bit 0 : 0 -> Thread mode has privileged access, 1 -> Thread mode has unprivileged access\n"
   "@ bit 1 : 0 -> Use SP_main as the current stack, 1 -> In Thread mode, use SP_process as the current stack\n"
   "@ bit 2 : 0 -> FP extension not active, 1 -> FP extension is active\n"
   "  movs r2, #3\n"
   "  msr  control, r2\n"
-  "@ Software must use an ISB barrier instruction to ensure a write to the CONTROL register\n"
+  "@---------- Software must use an ISB barrier instruction to ensure a write to the CONTROL register\n"
   "@ takes effect before the next instruction is executed.\n"
   "  isb\n"
-  "@--- Set background task context\n"
-  "  subs r0, #32\n"
-  "  ldr  r1, =backgroundTaskContext\n"
-  "  str  r0, [r1]\n"
-  "@--- Start real-time kernel\n"
+  "@---------- Start real-time kernel (run init.routines as service)\n"
   "  svc  #0\n"
-  "@--- Background task : infinite loop\n"
+  "@---------- Background task : infinite loop\n"
   "background.task:\n"
-  "  bl func.activityLedOff_28__29_  @ Defined in PLM source\n"
   "  wfi\n"
   "  b  background.task\n"
   "\n" ;
@@ -12951,7 +12961,7 @@ const cRegularFileWrapper gWrapperFile_65_targetTemplates (
   "s-reset-handler.s",
   "s",
   true, // Text file
-  1855, // Text length
+  2332, // Text length
   gWrapperFileContent_65_targetTemplates
 ) ;
 
@@ -12975,18 +12985,18 @@ const char * gWrapperFileContent_67_targetTemplates = "@------------------------
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "  .type __direct_return, %function\n"
+  "  .type init.routines, %function\n"
   "\n"
   "  .align  2\n"
   "\n"
   "__svc_dispatcher_table:\n"
-  "  .word  __direct_return @ 0\n" ;
+  "  .word  init.routines @ 0\n" ;
 
 const cRegularFileWrapper gWrapperFile_67_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
-  708, // Text length
+  704, // Text length
   gWrapperFileContent_67_targetTemplates
 ) ;
 
@@ -13168,7 +13178,6 @@ const char * gWrapperFileContent_70_targetTemplates = "@------------------------
   "  cbz    r1, __no_context_to_restore\n"
   "  ldmia  r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}\n"
   "  msr    psp, r12\n"
-  "__direct_return:\n"
   "  bx     lr\n"
   "@----------------------------------------- No context change\n"
   "__no_context_change:\n"
@@ -13191,7 +13200,7 @@ const cRegularFileWrapper gWrapperFile_70_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7764, // Text length
+  7747, // Text length
   gWrapperFileContent_70_targetTemplates
 ) ;
 
@@ -13310,9 +13319,9 @@ const char * gWrapperFileContent_74_targetTemplates = "@------------------------
   "\n"
   "!USER_ROUTINE!:\n"
   "  .fnstart\n"
-  "  mrs r12, FAULTMASK\n"
-  "  cmp r12, #0\n"
-  "  beq !IMPLEMENTATION_ROUTINE!\n"
+  "  mrs  r12, FAULTMASK @ r12 <- \xE2""\x80""\xA6""0 if interrupts are enabled, r12 <- \xE2""\x80""\xA6""1 if interrupts are disabled\n"
+  "  ands r12, #1\n"
+  "  bne  !IMPLEMENTATION_ROUTINE! @ if interrupts are disabled, call implementation routine directly\n"
   "  udf !IDX!\n"
   "  bx  lr\n"
   "\n"
@@ -13326,7 +13335,7 @@ const cRegularFileWrapper gWrapperFile_74_targetTemplates (
   "udfcoded-section-invocation-from-any-mode.s",
   "s",
   true, // Text file
-  694, // Text length
+  840, // Text length
   gWrapperFileContent_74_targetTemplates
 ) ;
 
@@ -17930,24 +17939,18 @@ const char * gWrapperFileContent_94_targetTemplates = "\n"
   "!ISR!:\n"
   "\t.fnstart\n"
   "@----------------------------------------- Save preserved registers\n"
-  "\t.save\t{r0, r1, r2, r3, r4, r5, lr}\n"
+  "\t.save\t{r4, r5, lr}\n"
   "  push  {r4, r5, lr}\n"
   "@----------------------------------------- Activity led On\n"
-  "  push  {r0, r1, r2, r3}\n"
-  "  bl    func.activityLedOn_28__29_   @ Defined in PLM source\n"
-  "  pop   {r0, r1, r2, r3}\n"
+  "  bl    func.activityLedOn_28__29_   @ Defined in PLM source (can modify R0-R3 registers)\n"
   "@----------------------------------------- R4 <- running task context\n"
   "  ldr   r4, =gRunningTaskControlBlock\n"
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call Interrupt handler\n"
   "  bl    !HANDLER!\n"
-  "@----------------------------------------- Test backgroundTaskContext to check if init passed\n"
-  "  ldr   r5, =backgroundTaskContext\n"
-  "  ldr   r5, [r5]\n"
-  "  cmp   r5, #0\n"
-  "  bne   .handle.context.switch\n"
-  "@----------------------------------------- Still in init : return\n"
-  "  pop   {r4, r5, pc}\n"
+  "@----------------------------------------- Perform the context switch, if needed\n"
+  "  b     .handle.context.switch\n"
+  "\n"
   "\t.cantunwind\n"
   "\t.fnend\n"
   "\n" ;
@@ -17956,7 +17959,7 @@ const cRegularFileWrapper gWrapperFile_94_targetTemplates (
   "xtr-interrupt-handler.s",
   "s",
   true, // Text file
-  1765, // Text length
+  1562, // Text length
   gWrapperFileContent_94_targetTemplates
 ) ;
 
@@ -18328,34 +18331,35 @@ const char * gWrapperFileContent_97_targetTemplates = "@------------------------
   ".lcomm backgroundTaskStack, 32\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@ See https://developer.arm.com/docs/dui0553/latest/2-the-cortex-m4-processor/21-programmers-model/213-core-registers\n"
   "\n"
   "\t.section\t\".text.as_reset_handler\",\"ax\",%progbits\n"
   "\n"
   "  .global as_reset_handler\n"
   "  .type as_reset_handler, %function\n"
   "\n"
-  "as_reset_handler:\n"
-  "@--- Init micro controller\n"
-  "  bl configuration.on.boot\n"
-  "@--- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers\n"
-  "  ldr r0, =backgroundTaskStack + 32\n"
+  "as_reset_handler: @ Cortex M4 boots with interrupts enabled, in Thread mode (as IPSR is set to 0 at boot)\n"
+  "@---------- Run boot, zero bss section, copy data section\n"
+  "  bl  boot.routines\n"
+  "@---------- Set background task context\n"
+  "  ldr r0, =backgroundTaskStack\n"
+  "  ldr r1, =backgroundTaskContext\n"
+  "  str r0, [r1]\n"
+  "@---------- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers\n"
+  "  add r0, #32\n"
   "  msr psp, r0\n"
-  "@--- Set CONTROL register (see \xC2""\xA7""B1.4.4)\n"
+  "@---------- Set CONTROL register (see \xC2""\xA7""B1.4.4)\n"
   "@ bit 0 : 0 -> Thread mode has privileged access, 1 -> Thread mode has unprivileged access\n"
   "@ bit 1 : 0 -> Use SP_main as the current stack, 1 -> In Thread mode, use SP_process as the current stack\n"
   "@ bit 2 : 0 -> FP extension not active, 1 -> FP extension is active\n"
   "  movs r2, #3\n"
   "  msr  control, r2\n"
-  "@ Software must use an ISB barrier instruction to ensure a write to the CONTROL register\n"
+  "@---------- Software must use an ISB barrier instruction to ensure a write to the CONTROL register\n"
   "@ takes effect before the next instruction is executed.\n"
   "  isb\n"
-  "@--- Set background task context\n"
-  "  subs r0, #32\n"
-  "  ldr  r1, =backgroundTaskContext\n"
-  "  str  r0, [r1]\n"
-  "@--- Start real-time kernel\n"
+  "@---------- Start real-time kernel (run service configuration.on.init)\n"
   "  svc  #0\n"
-  "@--- Background task : infinite loop\n"
+  "@---------- Background task : infinite loop\n"
   "background.task:\n"
   "  wfi\n"
   "  b  background.task\n"
@@ -18365,7 +18369,7 @@ const cRegularFileWrapper gWrapperFile_97_targetTemplates (
   "s-reset-handler.s",
   "s",
   true, // Text file
-  1797, // Text length
+  2100, // Text length
   gWrapperFileContent_97_targetTemplates
 ) ;
 
@@ -18389,18 +18393,18 @@ const char * gWrapperFileContent_99_targetTemplates = "@------------------------
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "  .type __direct_return, %function\n"
+  "  .type init.routines, %function\n"
   "\n"
   "  .align  2\n"
   "\n"
   "__svc_dispatcher_table:\n"
-  "  .word  __direct_return @ 0\n" ;
+  "  .word  init.routines @ 0\n" ;
 
 const cRegularFileWrapper gWrapperFile_99_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
-  708, // Text length
+  704, // Text length
   gWrapperFileContent_99_targetTemplates
 ) ;
 
@@ -18582,7 +18586,6 @@ const char * gWrapperFileContent_102_targetTemplates = "@-----------------------
   "  cbz    r1, __no_context_to_restore\n"
   "  ldmia  r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}\n"
   "  msr    psp, r12\n"
-  "__direct_return:\n"
   "  bx     lr\n"
   "@----------------------------------------- No context change\n"
   "__no_context_change:\n"
@@ -18605,7 +18608,7 @@ const cRegularFileWrapper gWrapperFile_102_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7764, // Text length
+  7747, // Text length
   gWrapperFileContent_102_targetTemplates
 ) ;
 
@@ -18724,8 +18727,8 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "\n"
   "!USER_ROUTINE!:\n"
   "  .fnstart\n"
-  "  mrs  r12, FAULTMASK @ r12 <- 0 if interrupts are enabled, r12 <- 1 if interrupts are disabled\n"
-  "  cmp  r12, #0\n"
+  "  mrs  r12, FAULTMASK @ r12 <- \xE2""\x80""\xA6""0 if interrupts are enabled, r12 <- \xE2""\x80""\xA6""1 if interrupts are disabled\n"
+  "  ands r12, #1\n"
   "  bne  !IMPLEMENTATION_ROUTINE! @ if interrupts are disabled, call implementation routine directly\n"
   "  udf  !IDX!\n"
   "  bx   lr\n"
@@ -18740,7 +18743,7 @@ const cRegularFileWrapper gWrapperFile_106_targetTemplates (
   "udfcoded-section-invocation-from-any-mode.s",
   "s",
   true, // Text file
-  840, // Text length
+  842, // Text length
   gWrapperFileContent_106_targetTemplates
 ) ;
 

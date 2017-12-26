@@ -117,7 +117,8 @@ as_reset_handler:
    ldr   sp, =__svc_stack_end
 
 @---------------------------------------- Initialize system (boot, init)
-   bl    configuration.on.boot
+   bl    boot.routines
+   bl    init.routines
 
 @---------------------------------------- Call entry point
    b    __entry_point
