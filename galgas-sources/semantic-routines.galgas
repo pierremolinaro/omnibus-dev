@@ -217,18 +217,51 @@ method @routineMapIR-element llvmCodeGeneration
     end
   end
   [allocaList generateAllocaList !?ioLLVMcode]
+#--- Copy input arguments and generate retain instructions for input arguments
+#    Insulate input and input/output arguments
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
+      ioLLVMcode += ";--------- Input argument '" + mFormalArgumentName + "'\n"
       let llvmType = [mFormalArgumentType llvmTypeName]
       ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + " * "
                  + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
-    case output, inputOutput :
+      [mFormalArgumentType generateRetain !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+      if mKind == .section then
+        [mFormalArgumentType generateInsulate !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+      end
+    case inputOutput :
+      if mKind == .section then
+       ioLLVMcode += ";--------- Insulate input/output argument '" + mFormalArgumentName + "'\n"
+       [mFormalArgumentType generateInsulate !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+      end
+    case output :
     end
   end
 #--- Instruction list
+  ioLLVMcode += ";--------- Function instruction list\n"
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#--- Generate release instructions for input arguments
+#    Insulate output and input/output arguments
+  ioLLVMcode += ";--------- Release input arguments\n"
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      [mFormalArgumentType generateRelease !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+    case inputOutput :
+      if mKind == .section then
+       ioLLVMcode += ";--------- Insulate input/output argument '" + mFormalArgumentName + "'\n"
+       [mFormalArgumentType generateInsulate !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+      end
+    case output :
+      if mKind == .section then
+       ioLLVMcode += ";--------- Insulate output argument '" + mFormalArgumentName + "'\n"
+       [mFormalArgumentType generateInsulate !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+      end
+    end
+  end
 #--- Epilog
+  ioLLVMcode += ";--------- Return\n"
   if mReturnType.kind == .void then
     ioLLVMcode += "  ret void\n"
   else

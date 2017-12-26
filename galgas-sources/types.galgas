@@ -151,6 +151,97 @@ getter @PLMType arc -> @bool {
 
 #·······················································································································
 
+method @PLMType generateRetain
+  ?let @string inPLMName
+  ?!@string ioLLVMcode
+  ?!@generationAdds ioGenerationAdds
+{
+  let llvmTypeName = [self llvmTypeName]
+  let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
+  if [self.typeAttributes arc] then
+    let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
+    ioLLVMcode += "  call void @" + [self plmTypeName] + ".retain (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
+  else
+    let arcAssignmentList = [self arcList !{}]
+    for (propertyName propertyType indexPath) in arcAssignmentList do 
+      let llvmVarName = "%arc.retain." + ioGenerationAdds.mUniqueIndex
+      ioGenerationAdds.mUniqueIndex ++
+      ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
+      for (idx) in indexPath do
+        ioLLVMcode += ", i32 " + idx
+      end
+      ioLLVMcode += " ; " + propertyName + "\n"
+      let propertyTypeLLVMName = [propertyType llvmTypeName]
+      let llvmLoadedVarName = llvmVarName + ".loaded"
+      ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+      ioLLVMcode += "  call void @" + [propertyType plmTypeName] + ".retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+    end
+  end
+}
+
+#·······················································································································
+
+method @PLMType generateInsulate
+  ?let @string inPLMName
+  ?!@string ioLLVMcode
+  ?!@generationAdds ioGenerationAdds
+{
+  let llvmTypeName = [self llvmTypeName]
+  let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
+  if [self.typeAttributes arc] then
+    ioLLVMcode += "  call void @" + [self plmTypeName] + ".insulate (" + llvmTypeName + "* " + LLVMVariable + ")\n"
+  else
+    let arcAssignmentList = [self arcList !{}]
+    for (propertyName propertyType indexPath) in arcAssignmentList do 
+      let llvmVarName = "%arc.insulate." + ioGenerationAdds.mUniqueIndex
+      ioGenerationAdds.mUniqueIndex ++
+      ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
+      for (idx) in indexPath do
+        ioLLVMcode += ", i32 " + idx
+      end
+      ioLLVMcode += " ; " + propertyName + "\n"
+      let propertyTypeLLVMName = [propertyType llvmTypeName]
+      ioLLVMcode += "  call void @" + [propertyType plmTypeName] + ".insulate (" + propertyTypeLLVMName + "* " + propertyTypeLLVMName + ")\n" 
+    end
+  end
+}
+
+#·······················································································································
+
+method @PLMType generateRelease
+  ?let @string inPLMName
+  ?!@string ioLLVMcode
+  ?!@generationAdds ioGenerationAdds
+{
+  let llvmTypeName = [self llvmTypeName]
+  let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
+  if [self.typeAttributes arc] then
+    let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
+    ioLLVMcode += "  call void @" + [self plmTypeName] + ".release (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
+  else
+    let arcAssignmentList = [self arcList !{}]
+    for (propertyName propertyType indexPath) in arcAssignmentList do 
+      let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
+      ioGenerationAdds.mUniqueIndex ++
+      ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
+      for (idx) in indexPath do
+        ioLLVMcode += ", i32 " + idx
+      end
+      ioLLVMcode += " ; " + propertyName + "\n"
+      let propertyTypeLLVMName = [propertyType llvmTypeName]
+      let llvmLoadedVarName = llvmVarName + ".loaded"
+      ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+      ioLLVMcode += "  call void @" + [propertyType plmTypeName] + ".release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+    end
+  end
+}
+
+#·······················································································································
+
 getter @PLMType llvmTypeName -> @string {
   switch self.kind
   case void :

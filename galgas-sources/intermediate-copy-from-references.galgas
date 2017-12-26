@@ -73,8 +73,9 @@ override method @copyFromReferencesIR enterAccessibleEntities
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
+method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGenerationAdds {
   let typeName = [self llvmTypeName]
+  var usesARC = false
   if [typeAttributes generateAssignmentRoutine] then
     let arcAssignmentList = [self arcList !{}]
 
@@ -83,6 +84,7 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
                 + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
     ioLLVMCode += ";--- Handle ARC properties\n"
     for (propertyName propertyType indexPath) in arcAssignmentList do
+      usesARC = true
       let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation]
       ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inSource, i32 0"
       for (idx) in indexPath do
@@ -147,9 +149,8 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
     ioLLVMCode += "  ret void\n"
     ioLLVMCode += "}\n\n"
   elsif [typeAttributes arc] then
+    usesARC = true
     ioLLVMCode += llvmSeparatorLine () + "\n"
-    ioLLVMCode += "declare void @" + [self plmTypeName] + ".retain (" + typeName + " %source)\n"
-    ioLLVMCode += "declare void @" + [self plmTypeName] + ".release (" + typeName + " %target)\n\n"
     ioLLVMCode += "define internal void @plm.assign." + [self.plmTypeName identifierRepresentation]
                 + " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr) nounwind optsize {\n"
     ioLLVMCode += "  %source = load " + typeName + ", " + typeName + "* %inSourcePtr\n" 
@@ -159,6 +160,12 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode {
     ioLLVMCode += "  store " + typeName + " %source, " + typeName + "* %inTargetPtr\n" 
     ioLLVMCode += "  ret void\n"
     ioLLVMCode += "}\n\n"
+  end
+  
+  if usesARC then
+    ioGenerationAdds.mExternFunctionDeclarationSet += !"void @" + [self plmTypeName] + ".retain (" + typeName + " %inPtr)"
+    ioGenerationAdds.mExternFunctionDeclarationSet += !"void @" + [self plmTypeName] + ".release (" + typeName + " %inPtr)"
+    ioGenerationAdds.mExternFunctionDeclarationSet += !"void @" + [self plmTypeName] + ".insulate (" + typeName + "* %ioPtr)"
   end
 }
 

@@ -177,7 +177,7 @@ private proc generateCodeFiles
     )
   end
   let x = [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
-  asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!"")]
+  asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!"")]
   asCode += "\n"
 #----------------------------------------- Include LLVM specific file
   var llvmCode = llvmTitleComment (!"Target specific code")
@@ -200,7 +200,7 @@ private proc generateCodeFiles
     do [globalSyncInstance generateLLVM !?llvmCode]
     after llvmCode += "\n"
   end
-#----------------------------------------- Modules
+#----------------------------------------- Drivers
   for driver in inIntermediateCodeStruct.mDriverList
     before llvmCode += llvmTitleComment (!"Drivers")
     do [driver generateLLVM !?llvmCode]
@@ -314,7 +314,7 @@ private proc generateCodeFiles
   let keyList = [inTypeMap allKeyList]
   for (key) in keyList do
     [inTypeMap searchKey !lkey:key ?type:let type ?index:*]
-    [type generateCopyRoutine !?llvmCode]
+    [type generateCopyRoutine !?llvmCode !?generationAdds]
   end
 #----------------------------------------- Extern function declaration
   generationAdds.mExternFunctionDeclarationSet += !"void @copy.byte.array (i8* %dest, i8* %src, i32 %byteCount)"
@@ -402,7 +402,7 @@ private proc generateCodeFiles
     let interruptImplementationName = if mMode == .serviceMode then
       llvmNameForServiceInterrupt (!interruptName).string
     else
-      llvmNameForSectionOrSafeInterrupt (!interruptName.string)
+      llvmNameForSectionInterrupt (!interruptName.string)
     end
     json += "\n    \"" + interruptImplementationName + "\""
   end
@@ -417,7 +417,7 @@ private proc generateCodeFiles
           else
             json += ","
           end
-          json += "\n    \"" + llvmNameForSectionOrSafeInterrupt (!lkey.string) + "\""
+          json += "\n    \"" + llvmNameForSectionInterrupt (!lkey.string) + "\""
         end
       end
     end

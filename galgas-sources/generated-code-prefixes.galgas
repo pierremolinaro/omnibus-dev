@@ -131,13 +131,13 @@ func interruptNameForInvocationGraph ?let @lstring inName -> @lstring {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForServiceInterrupt ?let @lstring inName -> @lstring {
-  result = .new {!"isr.service." + inName !inName.location}
+  result = .new {!"interrupt.service." + inName !inName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSectionOrSafeInterrupt ?let @string inName -> @string {
-  result = "isr.section.or.safe." + inName
+func llvmNameForSectionInterrupt ?let @string inName -> @string {
+  result = "interrupt.section." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
