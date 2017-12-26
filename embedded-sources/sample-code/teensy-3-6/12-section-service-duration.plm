@@ -1,4 +1,5 @@
-target "teensy-3-1/unprivileged"
+target "teensy-3-6/unprivileged"
+let F_CPU_MHZ = 240
 
 driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
@@ -16,45 +17,68 @@ func section activityLedOff @safe @exported () {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-let LED_L1 = $digitalPort.D4
-let LED_L2 = $digitalPort.D5
-
-//——————————————————————————————————————————————————————————————————————————————
-
-sync sémaphore = $semaphore (!value:0)
-
-//——————————————————————————————————————————————————————————————————————————————
-
-task T1 priority 1 stackSize 512 {
-  var top $uint32 = 0
-
-  setup 1000 {
-    digital.set (!mode:.OUTPUT !toPort:.D13)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
-    digital.set (!mode:.OUTPUT !toPort:LED_L2)
-  }
-
-  on time.wait (!untilDeadline:self.top) {
-    sémaphore.signal ()
-    self.top += 250
-    digital.write (!yes !toPort:LED_L1)
-    let constanteAccentuée = self.top
-    time.wait (!untilDeadline:constanteAccentuée)
-    sémaphore.signal ()
-    self.top += 250
-    digital.write (!no !toPort:LED_L1)
-  }
+system section emptySection () {
 }
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T2 priority 2 stackSize 512 {
+system service emptyService () {
+}
 
-  on sémaphore.wait () {
-    digital.write (!yes !toPort:LED_L2)
-    sémaphore.wait ()
-    digital.write (!no !toPort:LED_L2)
+//——————————————————————————————————————————————————————————————————————————————
+
+system section getSysTick () -> $uint32 {
+  result = SYST.CVR
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+
+let ITERATIONS = 7
+
+//——————————————————————————————————————————————————————————————————————————————
+
+task T priority 0 stackSize 512 {
+
+  //············································································
+
+  setup 1 {
+    digital.set (!mode:.OUTPUT !toPort:.D13)
+    var cumul $uint32 = 0
+  //--- Compute getSysTick duration
+    for _ $uint32 in 0 ..< ITERATIONS {
+      time.wait (!duringDelay:1)
+      let t0 = getSysTick ()
+      let t1 = getSysTick ()
+      cumul += t0 - t1
+      lcd.print (!unsigned:t0 - t1)
+      lcd.print (!spaces:1)
+    }
+    let systickDuration = cumul / ITERATIONS
+  //--- Compute emptySection duration
+    lcd.goto (!line:1 !column:0)
+    for _ $uint32 in 0 ..< ITERATIONS {
+      time.wait (!duringDelay:1)
+      let t0 = getSysTick ()
+      emptySection ()
+      let t1 = getSysTick ()
+      lcd.print (!unsigned:t0 - t1 - systickDuration)
+      lcd.print (!spaces:1)
+    }
+  //--- Compute emptyService duration
+    lcd.goto (!line:2 !column:0)
+    for _ $uint32 in 0 ..< 4 {
+      time.wait (!duringDelay:1)
+      let t0 = getSysTick ()
+      emptyService ()
+      let t1 = getSysTick ()
+      lcd.print (!unsigned:t0 - t1 - systickDuration)
+      lcd.print (!spaces:1)
+    }
   }
+  
+
+  //············································································
+
 }
 
 //——————————————————————————————————————————————————————————————————————————————

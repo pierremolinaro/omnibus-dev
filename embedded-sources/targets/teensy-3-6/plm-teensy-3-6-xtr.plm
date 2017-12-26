@@ -76,8 +76,8 @@ notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
 //   ACTIVITY LED                                                                                                       
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-required func activityLedOn @safe @exported ()
+required func section activityLedOn @safe @exported ()
 
-required func activityLedOff @safe @exported ()
+required func section activityLedOff @safe @exported ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

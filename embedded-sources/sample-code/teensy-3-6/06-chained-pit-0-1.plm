@@ -8,11 +8,11 @@ driver timer ()
 //   ACTIVITY LED                                                                                                       
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func activityLedOn @safe @exported () {
+func section activityLedOn @safe @exported () {
   digital.write (!yes !toPort:.D13)
 }
 
-func activityLedOff @safe @exported () {
+func section activityLedOff @safe @exported () {
   digital.write (!no !toPort:.D13)
 }
 

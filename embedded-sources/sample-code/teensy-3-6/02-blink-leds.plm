@@ -7,11 +7,11 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
 
-func activityLedOn @safe @exported () {
+func section activityLedOn @safe @exported () {
   digital.write (!yes !toPort:.D13)
 }
 
-func activityLedOff @safe @exported () {
+func section activityLedOff @safe @exported () {
   digital.write (!no !toPort:.D13)
 }
 
