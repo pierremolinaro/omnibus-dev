@@ -148,7 +148,7 @@ method @interruptMapIR interruptCodeGeneration
     let interruptImplementationName = if interrupt.mMode == .serviceMode then
       llvmNameForServiceInterrupt (!interrupt.lkey).string
     else
-      llvmNameForSectionOrSafeInterrupt (!interrupt.lkey.string)
+      llvmNameForSectionInterrupt (!interrupt.lkey.string)
     end
     ioLLVMcode += llvmTitleComment (!interruptImplementationName)
     ioLLVMcode += "define void @" + interruptImplementationName + " ()" + llvmAttributeFunction () + " {\n"
@@ -169,7 +169,7 @@ method @interruptMapIR interruptCodeGeneration
   #---- Generate interrupt handler for XTR
     if interrupt.mMode == .serviceMode then
      let interruptHandlerName = llvmNameForServiceInterrupt (!interrupt.lkey).string
-     let isrName = llvmNameForSectionOrSafeInterrupt (!interrupt.lkey.string)
+     let isrName = llvmNameForSectionInterrupt (!interrupt.lkey.string)
      let s1 = [inXTRInterruptHandlerString stringByReplacingStringByString !"!ISR!" !isrName]
      let s2 = [s1 stringByReplacingStringByString !"!HANDLER!" !interruptHandlerName]
      ioAScode += s2
@@ -180,14 +180,14 @@ method @interruptMapIR interruptCodeGeneration
     if not [definedInterrupts hasKey !lkey.string] then
       switch panicCode
       case noCode :
-        let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
+        let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!lkey.string)]
         ioAScode += s
       case code (@lbigint value) :
         if [option plm_options.noPanicGeneration value] then
-          let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
+          let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!lkey.string)]
           ioAScode += s
         else
-          let name = llvmNameForSectionOrSafeInterrupt (!lkey.string)
+          let name = llvmNameForSectionInterrupt (!lkey.string)
           ioLLVMcode += llvmTitleComment (!"Panic code for " + name)
           ioLLVMcode += "define void @" + name + " ()" + llvmAttributeFunction () + " noreturn {\n"
           ioLLVMcode += "  call void @panic.isr (" + [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + value.bigint + ") noreturn \n"

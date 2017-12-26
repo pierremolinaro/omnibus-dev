@@ -1,107 +1,100 @@
-//--- Python tool list
 PYTHON_UTILITIES:
-  "../py-toolpath.txt" -> "sources/toolpath.py",
-  "../py-makefile.txt" -> "sources/makefile.py",
-  "../py-check-stacks.txt" -> "sources/check-stacks.py",
-  "../py-plm.txt" -> "sources/plm.py",
-  "../py-build-verbose.txt" -> "build-verbose.py",
-  "../py-clean.txt" -> "clean.py",
-  "../py-objdump.txt" -> "objdump.py",
-  "../py-objsize.txt" -> "objsize.py",
+  "../py-toolpath.txt" -> "sources/toolpath.py"
+  "../py-makefile.txt" -> "sources/makefile.py"
+  "../py-check-stacks.txt" -> "sources/check-stacks.py"
+  "../py-plm.txt" -> "sources/plm.py"
+  "../py-build-verbose.txt" -> "build-verbose.py"
+  "../py-clean.txt" -> "clean.py"
+  "../py-objdump.txt" -> "objdump.py"
+  "../py-objsize.txt" -> "objsize.py"
   "py-run.txt" -> "run.py"
-//--- Python build script
-PYTHON_BUILD:
-  "py-build.txt"
-//--- Linker script
-LINKER_SCRIPT:
-  "ld-linker.txt"
-// Panic code type, panic line type, panic generation file
-PANIC:
-  $uint32 ; $uint32 ; "target-panic.ll"
-// Pointer bit count
-POINTER_BIT_COUNT:
-  32
-// System stack size
-SYSTEM_STACK_SIZE:
-  1024
-// NOP instruction in LLVM
-NOP:
-  "call void asm sideeffect \"nop\", \"\"() nounwind"
-// Service implementation
-SERVICE:
-  "service-handler.s" ;
-  16 ; // as_swi_handler saves 4 32-bits registers on system stack
-  "service-dispatcher-header.s" ;
-  "service-dispatcher-entry.s" ;
-  "service-entry-no-return.s" ;
-  "service-entry-return-value.s"
-SECTION:
-  "udfcoded-section-dispatcher-code.s" ;
-  8 ; // saves 2 registers on system stack
-  "udfcoded-section-dispatcher-header.s" ;
-  "udfcoded-section-dispatcher-entry.s" ;
-  "udfcoded-section-invocation-from-any-mode.s" ;
-  "udfcoded-section-invocation-from-user-mode.s"
-//--- C Source files
+
+PYTHON_BUILD: "py-build.txt"
+
+LINKER_SCRIPT: "ld-linker.txt"
+
+PANIC_CODE_TYPE_NAME: $uint32
+PANIC_LINE_TYPE_NAME: $uint32
+PANIC_LL_FILE: "target-panic.ll"
+
+POINTER_BIT_COUNT: 32
+
+SYSTEM_STACK_SIZE: 1024
+
+NOP: "call void asm sideeffect \"nop\", \"\"() nounwind"
+
+SERVICE_HANDLER: "service-handler.s"
+SERVICE_SYSTEM_STACK_SIZE: 16 // as_swi_handler saves 4 32-bits registers on system stack
+SERVICE_DISPATCHER_HEADER: "service-dispatcher-header.s"
+SERVICE_DISPATCHER_ENTRY: "service-dispatcher-entry.s"
+SERVICE_ENTRY_NO_RETURNED_VALUE: "service-entry-no-return.s"
+SERVICE_ENTRY_WITH_RETURNED_VALUE: "service-entry-return-value.s"
+
+SECTION_HANDLER: "udfcoded-section-dispatcher-code.s"
+SECTION_SYSTEM_STACK_SIZE:  8 // saves 2 registers on system stack
+SECTION_DISPATCHER_HEADER: "udfcoded-section-dispatcher-header.s"
+SECTION_DISPATCHER_ENTRY: "udfcoded-section-dispatcher-entry.s"
+SECTION_ENTRY_FROM_ANY_MODE: "udfcoded-section-invocation-from-any-mode.s"
+SECTION_ENTRY_FROM_USER_MODE: "udfcoded-section-invocation-from-user-mode.s"
+
+INTERRUPT_HANDLER: "xtr-interrupt-handler.s"
+INTERRUPT_USER_STACK_SIZE: 0 // ARM7TDMI save no reg in user stack on interrupt
+UNDEFINED_INTERRUPT: "undefined-interrupt.s"
+
 C_FILES:
-  "c-arm7tdmi-vectors.c",
-  "c-arm7tdmi-context-types.c",
-  "../c-real-time-kernel-types.c",
-  "c-arm7tdmi-context-code.c",
-  "../c-real-time-kernel-code.c",
-  "c-countTrainingZeros.c",
-  "../memory-utilities.c",
+  "c-arm7tdmi-vectors.c"
+  "c-arm7tdmi-context-types.c"
+  "../c-real-time-kernel-types.c"
+  "c-arm7tdmi-context-code.c"
+  "../c-real-time-kernel-code.c"
+  "c-countTrainingZeros.c"
+  "../memory-utilities.c"
   "../heap.c"
-//--- Assembler Source files
+
 S_FILES:
   "s-target.s"
-//--- LLVM Source files
+
 LL_FILES:
-   "ll-arm7tdmi.ll",
-   "../ll-clear-bss.ll",
-   "../ll-copy-data-section.ll",
-   "../ll-configuration-on-boot.ll",
+   "ll-arm7tdmi.ll"
+   "../ll-clear-bss.ll"
+   "../ll-copy-data-section.ll"
+   "../ll-configuration-on-boot.ll"
    "ll-install-interrupts.ll"
-//--- Included PLM sources
+
 PLM_FILES:
-  "plm-registers-lpc2294.plm",
-  "plm-lpc2294-xtr.plm",
+  "plm-registers-lpc2294.plm"
+  "plm-lpc2294-xtr.plm"
   "../plm-semaphore.plm"
-//--- Interrupt handler
-INTERRUPT_HANDLER:
-  "xtr-interrupt-handler.s" ;
-  0 ; // ARM7TDMI save no reg in user stack on interrupt
-  "undefined-interrupt.s"
-//--- Interrupt vectors
+
 INTERRUPTS:
-  WDT,
-  ARMCore0,
-  ARMCore1,
-  TIMER0,
-  TIMER1,
-  UART0,
-  UART1,
-  PWM0,
-  I2C,
-  SPI0,
-  SPI1_SSP,
-  PLL,
-  RTC,
-  EINT0,
-  EINT1,
-  EINT2,
-  EINT3,
-  ADC,
-  CAN_COMMON,
-  CAN0_TX,
-  CAN1_TX,
-  CAN2_TX,
-  CAN3_TX,
-  FULLCAN,
-  CAN0_RX,
-  CAN1_RX,
-  CAN2_RX,
-  CAN3_RX,
-  PAbort -> 40,
-  DAbort -> 41,
+  WDT
+  ARMCore0
+  ARMCore1
+  TIMER0
+  TIMER1
+  UART0
+  UART1
+  PWM0
+  I2C
+  SPI0
+  SPI1_SSP
+  PLL
+  RTC
+  EINT0
+  EINT1
+  EINT2
+  EINT3
+  ADC
+  CAN_COMMON
+  CAN0_TX
+  CAN1_TX
+  CAN2_TX
+  CAN3_TX
+  FULLCAN
+  CAN0_RX
+  CAN1_RX
+  CAN2_RX
+  CAN3_RX
+  PAbort -> 40
+  DAbort -> 41
   FIQ -> 42

@@ -142,6 +142,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-store-to-temporary-reference.galgas"
   "galgas-sources/intermediate-static-routine-call.galgas"
   "galgas-sources/intermediate-indirect-routine-call.galgas"
+  "galgas-sources/intermediate-retain.galgas"
   "galgas-sources/intermediate-release.galgas"
 
   "galgas-sources/intermediate-load-when-reference.galgas"

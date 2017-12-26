@@ -17,28 +17,7 @@ override method @releaseIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let llvmTypeName = [mType llvmTypeName]
-  let LLVMVariable =  llvmNameForLocalVariable (!mPLMName)
-  if [mType.typeAttributes arc] then
-    let tempLLVMVariable = "%temp." + [mPLMName assemblerRepresentation] + ".loaded"
-    ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
-    ioLLVMcode += "  call void @" + [mType plmTypeName] + ".release (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
-  else
-    let arcAssignmentList = [mType arcList !{}]
-    for (propertyName propertyType indexPath) in arcAssignmentList do 
-      let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
-      ioGenerationAdds.mUniqueIndex ++
-      ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
-      for (idx) in indexPath do
-        ioLLVMcode += ", i32 " + idx
-      end
-      ioLLVMcode += " ; " + propertyName + "\n"
-      let propertyTypeLLVMName = [propertyType llvmTypeName]
-      let llvmLoadedVarName = llvmVarName + ".loaded"
-      ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMcode += "  call void @" + [propertyType plmTypeName] + ".release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
-    end
-  end
+  [mType generateRelease !mPLMName !?ioLLVMcode !?ioGenerationAdds]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

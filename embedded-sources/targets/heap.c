@@ -186,20 +186,20 @@ static unsigned blockSize (DataBufferHeaderType * inPointer) {
 //  DYNAMIC BYTE BUFFER
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-void appendByte (const unsigned char inByte, unsigned * ioPointer) asm ("!FUNC!data.buffer.append.byte") ;
+void appendByte (const unsigned char inByte, unsigned * ioPointer) asm ("!FUNC!dynamicByteBuffer.buffer.append.byte") ;
 
-unsigned bufferLength (unsigned inPointer) asm ("!FUNC!data.buffer.length") ;
+unsigned bufferLength (unsigned inPointer) asm ("!FUNC!dynamicByteBuffer.buffer.length") ;
 
-void removeAll (unsigned * ioPointer) asm ("!FUNC!data.buffer.remove.all") ;
+void removeAll (unsigned * ioPointer) asm ("!FUNC!dynamicByteBuffer.buffer.remove.all") ;
 
 void setByteAtIndex (const unsigned char inByte, const unsigned inIndex, unsigned * ioPointer)
-asm ("!FUNC!data.buffer.set.byte.at.index") ;
+asm ("!FUNC!dynamicByteBuffer.buffer.set.byte.at.index") ;
 
 unsigned char getByteAtIndex (const unsigned inIndex, unsigned * ioPointer)
-asm ("!FUNC!data.buffer.get.byte.at.index") ;
+asm ("!FUNC!dynamicByteBuffer.buffer.get.byte.at.index") ;
 
 void removeByteAtIndex (const unsigned inIndex, unsigned * ioPointer)
-asm ("!FUNC!data.buffer.remove.byte.at.index") ;
+asm ("!FUNC!dynamicByteBuffer.buffer.remove.byte.at.index") ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -334,8 +334,9 @@ void removeByteAtIndex (const unsigned inIndex, unsigned * ioPointer) {
 //   INTERNAL FUNCTIONS CALLED BY PLM
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-void retain (unsigned inPointer) asm ("data.retain") ;
-void release (unsigned inPointer) asm ("data.release") ;
+void retain (unsigned inPointer) asm ("dynamicByteBuffer.retain") ;
+void release (unsigned inPointer) asm ("dynamicByteBuffer.release") ;
+void insulate (unsigned* ioPointer) asm ("dynamicByteBuffer.insulate") ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -355,6 +356,18 @@ void release (unsigned inPointer) {
       p->mReferenceCount -= 1 ;
     }else{
       memoryFree (p) ;
+    }
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+void insulate (unsigned* ioPointer) {
+  if ((*ioPointer) != 0) {
+    DataBufferHeaderType * p = (DataBufferHeaderType *) (*ioPointer) ;
+    if (p->mReferenceCount > 1) {
+      p = reallocBlock (p, p->mBlockSizeIndex) ;
+      *ioPointer = (unsigned) p ;
     }
   }
 }

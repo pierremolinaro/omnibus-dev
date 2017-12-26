@@ -79,16 +79,12 @@ syntax extension plm_target_specific_syntax {
   rule <python_utility_tool_list> !@2lstringlist outPythonUtilityToolList {
     <configuration_key> !"PYTHON_UTILITIES"
     outPythonUtilityToolList = {}
-    select
-    or
-      repeat
-        $"string"$ ?let relativePath
-        $->$
-        $"string"$ ?let destinationFile
-        outPythonUtilityToolList += !relativePath !destinationFile
+    repeat
       while
-        $,$
-      end
+      $"string"$ ?let relativePath
+      $->$
+      $"string"$ ?let destinationFile
+      outPythonUtilityToolList += !relativePath !destinationFile
     end
   }
 
@@ -104,11 +100,11 @@ syntax extension plm_target_specific_syntax {
     $"string"$ ?let python_build
     <configuration_key> !"LINKER_SCRIPT"
     $"string"$ ?let linkerScript
-    <configuration_key> !"PANIC"
+    <configuration_key> !"PANIC_CODE_TYPE_NAME"
     $\$type$ ?let panicCodeTypeName 
-    $;$
+    <configuration_key> !"PANIC_LINE_TYPE_NAME"
     $\$type$ ?let panicLineTypeName
-    $;$
+    <configuration_key> !"PANIC_LL_FILE"
     $"string"$ ?let targetPanic_LL_filePath
     <configuration_key> !"POINTER_BIT_COUNT"
     $integer$ ?let pointerSize
@@ -116,71 +112,64 @@ syntax extension plm_target_specific_syntax {
     $integer$ ?let systemStackSize
     <configuration_key> !"NOP"
     $"string"$ ?let nopInstructionStringInLLVM
-    <configuration_key> !"SERVICE"
+    <configuration_key> !"SERVICE_HANDLER"
     $"string"$ ?let serviceHandler
-    $;$
+    <configuration_key> !"SERVICE_SYSTEM_STACK_SIZE"
     $integer$ ?let servicePushedRegisterByteSize
-    $;$
+    <configuration_key> !"SERVICE_DISPATCHER_HEADER"
     $"string"$ ?let serviceDispatcherHeader
-    $;$
+    <configuration_key> !"SERVICE_DISPATCHER_ENTRY"
     $"string"$ ?let serviceDispatcherEntry
-    $;$
+    <configuration_key> !"SERVICE_ENTRY_NO_RETURNED_VALUE"
     $"string"$ ?let serviceEntryNoReturnedValue
-    $;$
+    <configuration_key> !"SERVICE_ENTRY_WITH_RETURNED_VALUE"
     $"string"$ ?let serviceEntryReturnValue
-    <configuration_key> !"SECTION"
+    <configuration_key> !"SECTION_HANDLER"
     $"string"$ ?let sectionHandler
-    $;$
+    <configuration_key> !"SECTION_SYSTEM_STACK_SIZE"
     $integer$ ?let sectionPushedRegisterByteSize
-    $;$
+    <configuration_key> !"SECTION_DISPATCHER_HEADER"
     $"string"$ ?let sectionDispatcherHeader
-    $;$
+    <configuration_key> !"SECTION_DISPATCHER_ENTRY"
     $"string"$ ?let sectionDispatcherEntry
-    $;$
+    <configuration_key> !"SECTION_ENTRY_FROM_ANY_MODE"
     $"string"$ ?let sectionDispatcherInvocationFromAnyMode
-    $;$
+    <configuration_key> !"SECTION_ENTRY_FROM_USER_MODE"
     $"string"$ ?let sectionDispatcherInvocationFromUserMode
+    <configuration_key> !"INTERRUPT_HANDLER"
+    $"string"$ ?let xtrInterruptHandler
+    <configuration_key> !"INTERRUPT_USER_STACK_SIZE"
+    $integer$ ?let stackedUserRegisterOnInterruptByteSize
+    <configuration_key> !"UNDEFINED_INTERRUPT"
+    $"string"$ ?let undefinedInterruptHandler
     <configuration_key> !"C_FILES"
     @lstringlist C_definitionFiles = {}
     repeat
+    while
       $"string"$ ?let fileRelativePath
       C_definitionFiles += !fileRelativePath
-    while
-      $,$
     end
     <configuration_key> !"S_FILES"
     @lstringlist S_definitionFiles = {}
     repeat
+    while
       $"string"$ ?let fileRelativePath
       S_definitionFiles += !fileRelativePath
-    while
-      $,$
     end
     <configuration_key> !"LL_FILES"
     @lstringlist LL_definitionFiles = {}
     repeat
+    while
       $"string"$ ?let fileRelativePath
       LL_definitionFiles += !fileRelativePath
-    while
-      $,$
     end
     outImportedFileList = {}
     <configuration_key> !"PLM_FILES"
-    select
-    or
-      repeat
-        $"string"$ ?let relativeFilePath
-        outImportedFileList += !relativeFilePath
-      while
-        $,$
-      end
+    repeat
+    while
+      $"string"$ ?let relativeFilePath
+      outImportedFileList += !relativeFilePath
     end
-    <configuration_key> !"INTERRUPT_HANDLER"
-    $"string"$ ?let xtrInterruptHandler
-    $;$
-    $integer$ ?let stackedUserRegisterOnInterruptByteSize
-    $;$
-    $"string"$ ?let undefinedInterruptHandler
     <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
     let parameters = @targetParameters.new {
       !python_utilityToolList
@@ -231,23 +220,19 @@ syntax extension plm_target_specific_syntax {
     interruptionConfigurationList = {}
     outEnumerationConstantList = {}
     <configuration_key> !"INTERRUPTS"
-    select
-    or
-      repeat
-        $identifier$ ?let interruptName
-        @interruptionPanicCode interruptionPanicCode
-        select
-          interruptionPanicCode = .noCode
-        or
-          $->$
-          $integer$ ?let panicCode
-          interruptionPanicCode = .code {!value:panicCode}
-          outEnumerationConstantList += !interruptName !panicCode
-        end
-        interruptionConfigurationList += !interruptName !interruptionPanicCode
-      while
-        $,$
+    repeat
+    while
+      $identifier$ ?let interruptName
+      @interruptionPanicCode interruptionPanicCode
+      select
+        interruptionPanicCode = .noCode
+      or
+        $->$
+        $integer$ ?let panicCode
+        interruptionPanicCode = .code {!value:panicCode}
+        outEnumerationConstantList += !interruptName !panicCode
       end
+      interruptionConfigurationList += !interruptName !interruptionPanicCode
     end
   }
 
