@@ -4,9 +4,9 @@
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .type __direct_return, %function
+  .type init.routines, %function
 
   .align  2
 
 __svc_dispatcher_table:
-  .word  __direct_return @ 0
+  .word  init.routines @ 0

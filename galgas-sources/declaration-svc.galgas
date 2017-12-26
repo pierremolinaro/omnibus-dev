@@ -67,7 +67,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  # A primitive or a service does not return any value
+  # A primitive or a service accepts only input arguments and does not return any value
 
   rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
     <system_routine_prefix> ?let public
@@ -86,7 +86,7 @@ syntax extension plm_syntax {
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
-    <procedure_formal_arguments> !?ioAST ?let formalArgumentList
+    <procedure_input_formal_arguments> !?ioAST ?let formalArgumentList
     ${$
     <instructionList> !?ioAST ?let instructionList
     $}$
@@ -99,6 +99,25 @@ syntax extension plm_syntax {
       !["" here]
       !instructionList
       !.here
+  }
+
+  #·····················································································································
+
+  rule <procedure_input_formal_arguments> ?!@ast ioAST !@routineFormalArgumentListAST outProcFormalArgumentList {
+    outProcFormalArgumentList = {}
+    $($
+    repeat
+    while
+      $?selector:$ ?let selector
+      $identifier$ ?let formalArgumentName
+      <type_definition> !?ioAST  ?let formalArgumentTypeName
+      outProcFormalArgumentList +=
+        !@procFormalArgumentPassingMode.input
+        !selector
+        !formalArgumentTypeName
+        !formalArgumentName
+    end
+    $)$
   }
 
   #·····················································································································

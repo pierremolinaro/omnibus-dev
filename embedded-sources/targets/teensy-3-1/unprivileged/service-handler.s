@@ -110,7 +110,6 @@ __perform_restore_context:
   cbz    r1, __no_context_to_restore
   ldmia  r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}
   msr    psp, r12
-__direct_return:
   bx     lr
 @----------------------------------------- No context change
 __no_context_change:

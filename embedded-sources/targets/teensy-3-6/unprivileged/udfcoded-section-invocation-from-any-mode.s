@@ -13,8 +13,8 @@
 
 !USER_ROUTINE!:
   .fnstart
-  mrs  r12, FAULTMASK @ r12 <- 0 if interrupts are enabled, r12 <- 1 if interrupts are disabled
-  cmp  r12, #0
+  mrs  r12, FAULTMASK @ r12 <- …0 if interrupts are enabled, r12 <- …1 if interrupts are disabled
+  ands r12, #1
   bne  !IMPLEMENTATION_ROUTINE! @ if interrupts are disabled, call implementation routine directly
   udf  !IDX!
   bx   lr
