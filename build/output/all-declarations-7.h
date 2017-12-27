@@ -375,6 +375,7 @@ void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionMethod_searchKey (const class GALGAS_routineMapForContext inObject,
+                                const class GALGAS_string constin_inReceiverTypeName,
                                 const class GALGAS_lstring constin_inRoutineName,
                                 const class GALGAS_lstring constin_inArgumentSignature,
                                 class GALGAS_lstring & out_outRoutineLLVMName,
@@ -390,8 +391,9 @@ void extensionMethod_searchKey (const class GALGAS_routineMapForContext inObject
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_bool extensionGetter_hasKey (const class GALGAS_routineMapForContext & inObject,
-                                          const class GALGAS_lstring & constinArgument0,
+                                          const class GALGAS_string & constinArgument0,
                                           const class GALGAS_lstring & constinArgument1,
+                                          const class GALGAS_lstring & constinArgument2,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 

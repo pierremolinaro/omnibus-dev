@@ -5903,6 +5903,7 @@ void routine_routineSignature (class GALGAS_unifiedTypeMap & ioArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_insertRoutine (class GALGAS_routineMapForContext & ioObject,
+                                    const class GALGAS_string constin_inReceiverTypeName,
                                     const class GALGAS_lstring constin_inRoutineName,
                                     const class GALGAS_lstring constin_inArgumentSignature,
                                     const class GALGAS_lstring constin_inRoutineLLVMName,

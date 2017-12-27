@@ -98,6 +98,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   let signature = [mArguments routineSignature !mStandaloneFunctionName.location]
 #--- Search function in map
   [inContext.mRoutineMapForContext searchKey
+    !""
     !mStandaloneFunctionName
     !signature
     ?let @lstring LLVMInvocationRoutineName

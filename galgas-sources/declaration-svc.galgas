@@ -169,6 +169,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
     end
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertRoutine
+      !inReceiverTypeName
       !svc.mName
       ![svc.mFormalArgumentList routineSignature !svc.mName]
       !routineMangledName

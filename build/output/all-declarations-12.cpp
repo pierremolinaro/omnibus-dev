@@ -3133,7 +3133,7 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "      if lengthOf (!buffer:self.data1) < 500 {\n"
   "        append (!byte:self.b !\?toBuffer:self.data1)\n"
   "        self.b +%= 1\n"
-  "        assert (self.b < 25)\n"
+  "        // assert (self.b < 25) // For checking assert instruction\n"
   "      }else{\n"
   "        removeAll (!\?fromBuffer:self.data1)\n"
   "      }\n"
@@ -3150,10 +3150,10 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "  on time.wait (!untilDeadline:self.\xC3""\xA9""ch\xC3""\xA9""ance3) {\n"
   "    self.\xC3""\xA9""ch\xC3""\xA9""ance3 +%= 511\n"
   "    self.structure.structure.donn\xC3""\xA9""e = self.data2\n"
-  "    self.testReleaseLocalVar (!self.structure.structure.donn\xC3""\xA9""e)\n"
+  "    self.testReleaseLocalVar (!in:self.structure.structure.donn\xC3""\xA9""e)\n"
   "  }\n"
   "  \n"
-  "  func testReleaseLocalVar (\? inData $dynamicByteBuffer) {\n"
+  "  func testReleaseLocalVar (\?in: inData $dynamicByteBuffer) {\n"
   "    var d = $structWithARC ()\n"
   "    d.donn\xC3""\xA9""e = inData\n"
   "  }\n"
@@ -3169,7 +3169,7 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "    if digital.read (!port:PUSH_P0) {\n"
   "      if lengthOf (!buffer:self.data) == 0 {\n"
   "        append (!byte:0 !\?toBuffer:self.data)\n"
-  "        self.testReleaseLocalVar2 (!in:self.data)\n"
+  "        self.testReleaseLocalVar (!in:self.data)\n"
   "      }else{\n"
   "        removeAll (!\?fromBuffer:self.data)\n"
   "      }\n"
@@ -3178,7 +3178,7 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "    }\n"
   "  }\n"
   "\n"
-  "  func testReleaseLocalVar2 (\?in: inData $dynamicByteBuffer) {\n"
+  "  func testReleaseLocalVar (\?in: inData $dynamicByteBuffer) {\n"
   "    externalSection (!in:inData)\n"
   "  }\n"
   "\n"
@@ -3197,7 +3197,7 @@ const cRegularFileWrapper gWrapperFile_24_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5962, // Text length
+  6004, // Text length
   gWrapperFileContent_24_embeddedSampleCode
 ) ;
 

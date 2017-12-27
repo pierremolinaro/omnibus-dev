@@ -265,6 +265,7 @@ method @functionDeclarationListAST enterFunctionInContext
     )
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertRoutine # Raises a redefinition error
+      !inSelfTypeName 
       !function.mFunctionName
       ![function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
       !routineMangledName
