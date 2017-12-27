@@ -4469,7 +4469,6 @@ GALGAS_orderedTypeList_2D_element GALGAS_orderedTypeList_2D_element::extractObje
 GALGAS_targetParameters::GALGAS_targetParameters (void) :
 mProperty_mPython_5F_utilityToolList (),
 mProperty_mPython_5F_build (),
-mProperty_mTargetPanic_5F_LL_5F_filePath (),
 mProperty_mLinkerScript (),
 mProperty_mPointerSize (),
 mProperty_mSystemStackSize (),
@@ -4504,60 +4503,57 @@ GALGAS_targetParameters::~ GALGAS_targetParameters (void) {
 GALGAS_targetParameters::GALGAS_targetParameters (const GALGAS__32_lstringlist & inOperand0,
                                                   const GALGAS_lstring & inOperand1,
                                                   const GALGAS_lstring & inOperand2,
-                                                  const GALGAS_lstring & inOperand3,
+                                                  const GALGAS_lbigint & inOperand3,
                                                   const GALGAS_lbigint & inOperand4,
                                                   const GALGAS_lbigint & inOperand5,
-                                                  const GALGAS_lbigint & inOperand6,
+                                                  const GALGAS_lstring & inOperand6,
                                                   const GALGAS_lstring & inOperand7,
-                                                  const GALGAS_lstring & inOperand8,
-                                                  const GALGAS_lbigint & inOperand9,
+                                                  const GALGAS_lbigint & inOperand8,
+                                                  const GALGAS_lstring & inOperand9,
                                                   const GALGAS_lstring & inOperand10,
                                                   const GALGAS_lstring & inOperand11,
                                                   const GALGAS_lstring & inOperand12,
-                                                  const GALGAS_lstring & inOperand13,
+                                                  const GALGAS_lstringlist & inOperand13,
                                                   const GALGAS_lstringlist & inOperand14,
                                                   const GALGAS_lstringlist & inOperand15,
-                                                  const GALGAS_lstringlist & inOperand16,
+                                                  const GALGAS_lstring & inOperand16,
                                                   const GALGAS_lstring & inOperand17,
                                                   const GALGAS_lstring & inOperand18,
-                                                  const GALGAS_lstring & inOperand19,
-                                                  const GALGAS_lbigint & inOperand20,
+                                                  const GALGAS_lbigint & inOperand19,
+                                                  const GALGAS_lstring & inOperand20,
                                                   const GALGAS_lstring & inOperand21,
                                                   const GALGAS_lstring & inOperand22,
-                                                  const GALGAS_lstring & inOperand23,
-                                                  const GALGAS_lstring & inOperand24) :
+                                                  const GALGAS_lstring & inOperand23) :
 mProperty_mPython_5F_utilityToolList (inOperand0),
 mProperty_mPython_5F_build (inOperand1),
-mProperty_mTargetPanic_5F_LL_5F_filePath (inOperand2),
-mProperty_mLinkerScript (inOperand3),
-mProperty_mPointerSize (inOperand4),
-mProperty_mSystemStackSize (inOperand5),
-mProperty_mStackedUserRegisterOnInterruptByteSize (inOperand6),
-mProperty_mNopInstructionStringInLLVM (inOperand7),
-mProperty_mSectionHandler (inOperand8),
-mProperty_mSectionPushedRegisterByteSize (inOperand9),
-mProperty_mSectionDispatcherHeader (inOperand10),
-mProperty_mSectionDispatcherEntry (inOperand11),
-mProperty_mSectionDispatcherInvocationFromAnyMode (inOperand12),
-mProperty_mSectionDispatcherInvocationFromUserMode (inOperand13),
-mProperty_m_5F_C_5F_definitionFiles (inOperand14),
-mProperty_m_5F_S_5F_definitionFiles (inOperand15),
-mProperty_m_5F_LL_5F_definitionFiles (inOperand16),
-mProperty_mXtrInterruptHandler (inOperand17),
-mProperty_mUndefinedInterruptHandler (inOperand18),
-mProperty_mServiceHandler (inOperand19),
-mProperty_mServicePushedRegisterByteSize (inOperand20),
-mProperty_mServiceDispatcherEntry (inOperand21),
-mProperty_mServiceDispatcherHeader (inOperand22),
-mProperty_mServiceEntryNoReturnedValue (inOperand23),
-mProperty_mServiceEntryWithReturnValue (inOperand24) {
+mProperty_mLinkerScript (inOperand2),
+mProperty_mPointerSize (inOperand3),
+mProperty_mSystemStackSize (inOperand4),
+mProperty_mStackedUserRegisterOnInterruptByteSize (inOperand5),
+mProperty_mNopInstructionStringInLLVM (inOperand6),
+mProperty_mSectionHandler (inOperand7),
+mProperty_mSectionPushedRegisterByteSize (inOperand8),
+mProperty_mSectionDispatcherHeader (inOperand9),
+mProperty_mSectionDispatcherEntry (inOperand10),
+mProperty_mSectionDispatcherInvocationFromAnyMode (inOperand11),
+mProperty_mSectionDispatcherInvocationFromUserMode (inOperand12),
+mProperty_m_5F_C_5F_definitionFiles (inOperand13),
+mProperty_m_5F_S_5F_definitionFiles (inOperand14),
+mProperty_m_5F_LL_5F_definitionFiles (inOperand15),
+mProperty_mXtrInterruptHandler (inOperand16),
+mProperty_mUndefinedInterruptHandler (inOperand17),
+mProperty_mServiceHandler (inOperand18),
+mProperty_mServicePushedRegisterByteSize (inOperand19),
+mProperty_mServiceDispatcherEntry (inOperand20),
+mProperty_mServiceDispatcherHeader (inOperand21),
+mProperty_mServiceEntryNoReturnedValue (inOperand22),
+mProperty_mServiceEntryWithReturnValue (inOperand23) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_targetParameters GALGAS_targetParameters::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_targetParameters (GALGAS__32_lstringlist::constructor_emptyList (HERE),
-                                  GALGAS_lstring::constructor_default (HERE),
                                   GALGAS_lstring::constructor_default (HERE),
                                   GALGAS_lstring::constructor_default (HERE),
                                   GALGAS_lbigint::constructor_default (HERE),
@@ -4588,32 +4584,31 @@ GALGAS_targetParameters GALGAS_targetParameters::constructor_default (UNUSED_LOC
 GALGAS_targetParameters GALGAS_targetParameters::constructor_new (const GALGAS__32_lstringlist & inOperand0,
                                                                   const GALGAS_lstring & inOperand1,
                                                                   const GALGAS_lstring & inOperand2,
-                                                                  const GALGAS_lstring & inOperand3,
+                                                                  const GALGAS_lbigint & inOperand3,
                                                                   const GALGAS_lbigint & inOperand4,
                                                                   const GALGAS_lbigint & inOperand5,
-                                                                  const GALGAS_lbigint & inOperand6,
+                                                                  const GALGAS_lstring & inOperand6,
                                                                   const GALGAS_lstring & inOperand7,
-                                                                  const GALGAS_lstring & inOperand8,
-                                                                  const GALGAS_lbigint & inOperand9,
+                                                                  const GALGAS_lbigint & inOperand8,
+                                                                  const GALGAS_lstring & inOperand9,
                                                                   const GALGAS_lstring & inOperand10,
                                                                   const GALGAS_lstring & inOperand11,
                                                                   const GALGAS_lstring & inOperand12,
-                                                                  const GALGAS_lstring & inOperand13,
+                                                                  const GALGAS_lstringlist & inOperand13,
                                                                   const GALGAS_lstringlist & inOperand14,
                                                                   const GALGAS_lstringlist & inOperand15,
-                                                                  const GALGAS_lstringlist & inOperand16,
+                                                                  const GALGAS_lstring & inOperand16,
                                                                   const GALGAS_lstring & inOperand17,
                                                                   const GALGAS_lstring & inOperand18,
-                                                                  const GALGAS_lstring & inOperand19,
-                                                                  const GALGAS_lbigint & inOperand20,
+                                                                  const GALGAS_lbigint & inOperand19,
+                                                                  const GALGAS_lstring & inOperand20,
                                                                   const GALGAS_lstring & inOperand21,
                                                                   const GALGAS_lstring & inOperand22,
-                                                                  const GALGAS_lstring & inOperand23,
-                                                                  const GALGAS_lstring & inOperand24 
+                                                                  const GALGAS_lstring & inOperand23 
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_targetParameters result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid ()) {
-    result = GALGAS_targetParameters (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid ()) {
+    result = GALGAS_targetParameters (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23) ;
   }
   return result ;
 }
@@ -4627,9 +4622,6 @@ typeComparisonResult GALGAS_targetParameters::objectCompare (const GALGAS_target
   }
   if (result == kOperandEqual) {
     result = mProperty_mPython_5F_build.objectCompare (inOperand.mProperty_mPython_5F_build) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mTargetPanic_5F_LL_5F_filePath.objectCompare (inOperand.mProperty_mTargetPanic_5F_LL_5F_filePath) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mLinkerScript.objectCompare (inOperand.mProperty_mLinkerScript) ;
@@ -4703,7 +4695,7 @@ typeComparisonResult GALGAS_targetParameters::objectCompare (const GALGAS_target
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_targetParameters::isValid (void) const {
-  return mProperty_mPython_5F_utilityToolList.isValid () && mProperty_mPython_5F_build.isValid () && mProperty_mTargetPanic_5F_LL_5F_filePath.isValid () && mProperty_mLinkerScript.isValid () && mProperty_mPointerSize.isValid () && mProperty_mSystemStackSize.isValid () && mProperty_mStackedUserRegisterOnInterruptByteSize.isValid () && mProperty_mNopInstructionStringInLLVM.isValid () && mProperty_mSectionHandler.isValid () && mProperty_mSectionPushedRegisterByteSize.isValid () && mProperty_mSectionDispatcherHeader.isValid () && mProperty_mSectionDispatcherEntry.isValid () && mProperty_mSectionDispatcherInvocationFromAnyMode.isValid () && mProperty_mSectionDispatcherInvocationFromUserMode.isValid () && mProperty_m_5F_C_5F_definitionFiles.isValid () && mProperty_m_5F_S_5F_definitionFiles.isValid () && mProperty_m_5F_LL_5F_definitionFiles.isValid () && mProperty_mXtrInterruptHandler.isValid () && mProperty_mUndefinedInterruptHandler.isValid () && mProperty_mServiceHandler.isValid () && mProperty_mServicePushedRegisterByteSize.isValid () && mProperty_mServiceDispatcherEntry.isValid () && mProperty_mServiceDispatcherHeader.isValid () && mProperty_mServiceEntryNoReturnedValue.isValid () && mProperty_mServiceEntryWithReturnValue.isValid () ;
+  return mProperty_mPython_5F_utilityToolList.isValid () && mProperty_mPython_5F_build.isValid () && mProperty_mLinkerScript.isValid () && mProperty_mPointerSize.isValid () && mProperty_mSystemStackSize.isValid () && mProperty_mStackedUserRegisterOnInterruptByteSize.isValid () && mProperty_mNopInstructionStringInLLVM.isValid () && mProperty_mSectionHandler.isValid () && mProperty_mSectionPushedRegisterByteSize.isValid () && mProperty_mSectionDispatcherHeader.isValid () && mProperty_mSectionDispatcherEntry.isValid () && mProperty_mSectionDispatcherInvocationFromAnyMode.isValid () && mProperty_mSectionDispatcherInvocationFromUserMode.isValid () && mProperty_m_5F_C_5F_definitionFiles.isValid () && mProperty_m_5F_S_5F_definitionFiles.isValid () && mProperty_m_5F_LL_5F_definitionFiles.isValid () && mProperty_mXtrInterruptHandler.isValid () && mProperty_mUndefinedInterruptHandler.isValid () && mProperty_mServiceHandler.isValid () && mProperty_mServicePushedRegisterByteSize.isValid () && mProperty_mServiceDispatcherEntry.isValid () && mProperty_mServiceDispatcherHeader.isValid () && mProperty_mServiceEntryNoReturnedValue.isValid () && mProperty_mServiceEntryWithReturnValue.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4711,7 +4703,6 @@ bool GALGAS_targetParameters::isValid (void) const {
 void GALGAS_targetParameters::drop (void) {
   mProperty_mPython_5F_utilityToolList.drop () ;
   mProperty_mPython_5F_build.drop () ;
-  mProperty_mTargetPanic_5F_LL_5F_filePath.drop () ;
   mProperty_mLinkerScript.drop () ;
   mProperty_mPointerSize.drop () ;
   mProperty_mSystemStackSize.drop () ;
@@ -4747,8 +4738,6 @@ void GALGAS_targetParameters::description (C_String & ioString,
     mProperty_mPython_5F_utilityToolList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mPython_5F_build.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mTargetPanic_5F_LL_5F_filePath.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mLinkerScript.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -4807,12 +4796,6 @@ GALGAS__32_lstringlist GALGAS_targetParameters::getter_mPython_5F_utilityToolLis
 
 GALGAS_lstring GALGAS_targetParameters::getter_mPython_5F_build (UNUSED_LOCATION_ARGS) const {
   return mProperty_mPython_5F_build ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_targetParameters::getter_mTargetPanic_5F_LL_5F_filePath (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTargetPanic_5F_LL_5F_filePath ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8033,18 +8016,18 @@ static void extensionMethod_configurationDeclarationAST_enterInPrecedenceGraph (
                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_configurationDeclarationAST * object = (const cPtr_configurationDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_configurationDeclarationAST) ;
-  GALGAS_lstring var_rootNode_9994 = GALGAS_lstring::constructor_new (function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 269)), object->mProperty_mPanicCodeTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 269)) ;
+  GALGAS_lstring var_rootNode_9843 = GALGAS_lstring::constructor_new (function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 266)), object->mProperty_mPanicCodeTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 266)) ;
   {
   const GALGAS_configurationDeclarationAST temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (var_rootNode_9994, temp_0, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 270)) ;
+  ioArgument_ioGraph.setter_addNode (var_rootNode_9843, temp_0, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 267)) ;
   }
-  GALGAS_lstring var_panicCodeTypeName_10147 = function_llvmTypeNameFromPLMname (object->mProperty_mPanicCodeTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 271)) ;
+  GALGAS_lstring var_panicCodeTypeName_9996 = function_llvmTypeNameFromPLMname (object->mProperty_mPanicCodeTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 268)) ;
   {
-  ioArgument_ioGraph.setter_addEdge (var_rootNode_9994, var_panicCodeTypeName_10147 COMMA_SOURCE_FILE ("configuration.galgas", 272)) ;
+  ioArgument_ioGraph.setter_addEdge (var_rootNode_9843, var_panicCodeTypeName_9996 COMMA_SOURCE_FILE ("configuration.galgas", 269)) ;
   }
-  GALGAS_lstring var_panicLineTypeName_10270 = function_llvmTypeNameFromPLMname (object->mProperty_mPanicLineTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 273)) ;
+  GALGAS_lstring var_panicLineTypeName_10119 = function_llvmTypeNameFromPLMname (object->mProperty_mPanicLineTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 270)) ;
   {
-  ioArgument_ioGraph.setter_addEdge (var_rootNode_9994, var_panicLineTypeName_10270 COMMA_SOURCE_FILE ("configuration.galgas", 274)) ;
+  ioArgument_ioGraph.setter_addEdge (var_rootNode_9843, var_panicLineTypeName_10119 COMMA_SOURCE_FILE ("configuration.galgas", 271)) ;
   }
 }
 
@@ -8098,7 +8081,7 @@ static GALGAS_string extensionGetter_configurationDeclarationAST_keyRepresentati
                                                                                                      C_Compiler * inCompiler
                                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outRepresentation ; // Returned variable
-  result_outRepresentation = function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 286)) ;
+  result_outRepresentation = function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
 //---
   return result_outRepresentation ;
 }
@@ -8135,58 +8118,58 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, ioArgument_ioContext.getter_mPointerSize (HERE).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_0) {
     TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_location (SOURCE_FILE ("configuration.galgas", 303)), GALGAS_string ("duplicate configuration"), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 303)) ;
+    inCompiler->emitSemanticError (object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_location (SOURCE_FILE ("configuration.galgas", 300)), GALGAS_string ("duplicate configuration"), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 300)) ;
   }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_bigint (HERE).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 304)))).boolEnum () ;
+    const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_bigint (HERE).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 301)))).boolEnum () ;
     if (kBoolTrue == test_2) {
       TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_location (SOURCE_FILE ("configuration.galgas", 305)), GALGAS_string ("zero size pointer not allowed"), fixItArray3  COMMA_SOURCE_FILE ("configuration.galgas", 305)) ;
+      inCompiler->emitSemanticError (object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_location (SOURCE_FILE ("configuration.galgas", 302)), GALGAS_string ("zero size pointer not allowed"), fixItArray3  COMMA_SOURCE_FILE ("configuration.galgas", 302)) ;
     }else if (kBoolFalse == test_2) {
-      ioArgument_ioContext.mProperty_mPointerSize = object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_bigint (HERE).getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 307)) ;
+      ioArgument_ioContext.mProperty_mPointerSize = object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_bigint (HERE).getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 304)) ;
     }
   }
   ioArgument_ioContext.mProperty_mTargetParameters = object->mProperty_mTargetParameters ;
-  ioArgument_ioContext.mProperty_mPanicCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 311)) ;
-  const enumGalgasBool test_4 = ioArgument_ioContext.getter_mPanicCodeType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 312)).getter_kind (HERE).getter_isInteger (SOURCE_FILE ("configuration.galgas", 312)).boolEnum () ;
+  ioArgument_ioContext.mProperty_mPanicCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 308)) ;
+  const enumGalgasBool test_4 = ioArgument_ioContext.getter_mPanicCodeType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 309)).getter_kind (HERE).getter_isInteger (SOURCE_FILE ("configuration.galgas", 309)).boolEnum () ;
   if (kBoolTrue == test_4) {
-    GALGAS_bool var_unsigned_12457 ;
-    GALGAS_bigint joker_12432_2 ; // Joker input parameter
-    GALGAS_bigint joker_12432_1 ; // Joker input parameter
-    GALGAS_uint joker_12459_1 ; // Joker input parameter
-    ioArgument_ioContext.getter_mPanicCodeType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 313)).getter_kind (HERE).method_integer (joker_12432_2, joker_12432_1, var_unsigned_12457, joker_12459_1, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 313)) ;
-    const enumGalgasBool test_5 = var_unsigned_12457.operator_not (SOURCE_FILE ("configuration.galgas", 314)).boolEnum () ;
+    GALGAS_bool var_unsigned_12306 ;
+    GALGAS_bigint joker_12281_2 ; // Joker input parameter
+    GALGAS_bigint joker_12281_1 ; // Joker input parameter
+    GALGAS_uint joker_12308_1 ; // Joker input parameter
+    ioArgument_ioContext.getter_mPanicCodeType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 310)).getter_kind (HERE).method_integer (joker_12281_2, joker_12281_1, var_unsigned_12306, joker_12308_1, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 310)) ;
+    const enumGalgasBool test_5 = var_unsigned_12306.operator_not (SOURCE_FILE ("configuration.galgas", 311)).boolEnum () ;
     if (kBoolTrue == test_5) {
       TC_Array <C_FixItDescription> fixItArray6 ;
-      inCompiler->emitSemanticError (object->mProperty_mPanicCodeTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 315)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray6  COMMA_SOURCE_FILE ("configuration.galgas", 315)) ;
+      inCompiler->emitSemanticError (object->mProperty_mPanicCodeTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 312)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray6  COMMA_SOURCE_FILE ("configuration.galgas", 312)) ;
     }
   }else if (kBoolFalse == test_4) {
     TC_Array <C_FixItDescription> fixItArray7 ;
-    inCompiler->emitSemanticError (object->mProperty_mPanicCodeTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 318)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray7  COMMA_SOURCE_FILE ("configuration.galgas", 318)) ;
+    inCompiler->emitSemanticError (object->mProperty_mPanicCodeTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 315)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray7  COMMA_SOURCE_FILE ("configuration.galgas", 315)) ;
   }
-  ioArgument_ioContext.mProperty_mPanicLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicLineTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 321)) ;
-  const enumGalgasBool test_8 = ioArgument_ioContext.getter_mPanicLineType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 322)).getter_kind (HERE).getter_isInteger (SOURCE_FILE ("configuration.galgas", 322)).boolEnum () ;
+  ioArgument_ioContext.mProperty_mPanicLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicLineTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 318)) ;
+  const enumGalgasBool test_8 = ioArgument_ioContext.getter_mPanicLineType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 319)).getter_kind (HERE).getter_isInteger (SOURCE_FILE ("configuration.galgas", 319)).boolEnum () ;
   if (kBoolTrue == test_8) {
-    GALGAS_bool var_unsigned_12926 ;
-    GALGAS_bigint joker_12901_2 ; // Joker input parameter
-    GALGAS_bigint joker_12901_1 ; // Joker input parameter
-    GALGAS_uint joker_12928_1 ; // Joker input parameter
-    ioArgument_ioContext.getter_mPanicLineType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 323)).getter_kind (HERE).method_integer (joker_12901_2, joker_12901_1, var_unsigned_12926, joker_12928_1, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 323)) ;
-    const enumGalgasBool test_9 = var_unsigned_12926.operator_not (SOURCE_FILE ("configuration.galgas", 324)).boolEnum () ;
+    GALGAS_bool var_unsigned_12775 ;
+    GALGAS_bigint joker_12750_2 ; // Joker input parameter
+    GALGAS_bigint joker_12750_1 ; // Joker input parameter
+    GALGAS_uint joker_12777_1 ; // Joker input parameter
+    ioArgument_ioContext.getter_mPanicLineType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 320)).getter_kind (HERE).method_integer (joker_12750_2, joker_12750_1, var_unsigned_12775, joker_12777_1, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 320)) ;
+    const enumGalgasBool test_9 = var_unsigned_12775.operator_not (SOURCE_FILE ("configuration.galgas", 321)).boolEnum () ;
     if (kBoolTrue == test_9) {
       TC_Array <C_FixItDescription> fixItArray10 ;
-      inCompiler->emitSemanticError (object->mProperty_mPanicLineTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 325)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray10  COMMA_SOURCE_FILE ("configuration.galgas", 325)) ;
+      inCompiler->emitSemanticError (object->mProperty_mPanicLineTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 322)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray10  COMMA_SOURCE_FILE ("configuration.galgas", 322)) ;
     }
   }else if (kBoolFalse == test_8) {
     TC_Array <C_FixItDescription> fixItArray11 ;
-    inCompiler->emitSemanticError (object->mProperty_mPanicLineTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 328)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray11  COMMA_SOURCE_FILE ("configuration.galgas", 328)) ;
+    inCompiler->emitSemanticError (object->mProperty_mPanicLineTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 325)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray11  COMMA_SOURCE_FILE ("configuration.galgas", 325)) ;
   }
-  GALGAS_stringset var_panicCodeSet_13218 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("configuration.galgas", 331)) ;
-  cEnumerator_interruptionConfigurationList enumerator_13280 (object->mProperty_mInterruptionConfigurationList, kENUMERATION_UP) ;
-  while (enumerator_13280.hasCurrentObject ()) {
+  GALGAS_stringset var_panicCodeSet_13067 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("configuration.galgas", 328)) ;
+  cEnumerator_interruptionConfigurationList enumerator_13129 (object->mProperty_mInterruptionConfigurationList, kENUMERATION_UP) ;
+  while (enumerator_13129.hasCurrentObject ()) {
     {
-    ioArgument_ioContext.mProperty_mAvailableInterruptMap.setter_insertKey (enumerator_13280.current_mInterruptName (HERE), enumerator_13280.current_mInterruptionPanicCode (HERE), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 333)) ;
+    ioArgument_ioContext.mProperty_mAvailableInterruptMap.setter_insertKey (enumerator_13129.current_mInterruptName (HERE), enumerator_13129.current_mInterruptionPanicCode (HERE), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 330)) ;
     }
-    switch (enumerator_13280.current_mInterruptionPanicCode (HERE).enumValue ()) {
+    switch (enumerator_13129.current_mInterruptionPanicCode (HERE).enumValue ()) {
     case GALGAS_interruptionPanicCode::kNotBuilt:
       break ;
     case GALGAS_interruptionPanicCode::kEnum_noCode:
@@ -8195,19 +8178,19 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
       break ;
     case GALGAS_interruptionPanicCode::kEnum_code:
       {
-        const cEnumAssociatedValues_interruptionPanicCode_code * extractPtr_13573 = (const cEnumAssociatedValues_interruptionPanicCode_code *) (enumerator_13280.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
-        const GALGAS_lbigint extractedValue_value = extractPtr_13573->mAssociatedValue0 ;
-        GALGAS_string var_s_13426 = extractedValue_value.getter_bigint (HERE).getter_string (SOURCE_FILE ("configuration.galgas", 337)) ;
-        const enumGalgasBool test_12 = var_panicCodeSet_13218.getter_hasKey (var_s_13426 COMMA_SOURCE_FILE ("configuration.galgas", 338)).boolEnum () ;
+        const cEnumAssociatedValues_interruptionPanicCode_code * extractPtr_13422 = (const cEnumAssociatedValues_interruptionPanicCode_code *) (enumerator_13129.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
+        const GALGAS_lbigint extractedValue_value = extractPtr_13422->mAssociatedValue0 ;
+        GALGAS_string var_s_13275 = extractedValue_value.getter_bigint (HERE).getter_string (SOURCE_FILE ("configuration.galgas", 334)) ;
+        const enumGalgasBool test_12 = var_panicCodeSet_13067.getter_hasKey (var_s_13275 COMMA_SOURCE_FILE ("configuration.galgas", 335)).boolEnum () ;
         if (kBoolTrue == test_12) {
           TC_Array <C_FixItDescription> fixItArray13 ;
-          inCompiler->emitSemanticError (extractedValue_value.getter_location (SOURCE_FILE ("configuration.galgas", 339)), GALGAS_string ("duplicate interrupt code"), fixItArray13  COMMA_SOURCE_FILE ("configuration.galgas", 339)) ;
+          inCompiler->emitSemanticError (extractedValue_value.getter_location (SOURCE_FILE ("configuration.galgas", 336)), GALGAS_string ("duplicate interrupt code"), fixItArray13  COMMA_SOURCE_FILE ("configuration.galgas", 336)) ;
         }
-        var_panicCodeSet_13218.addAssign_operation (var_s_13426  COMMA_SOURCE_FILE ("configuration.galgas", 341)) ;
+        var_panicCodeSet_13067.addAssign_operation (var_s_13275  COMMA_SOURCE_FILE ("configuration.galgas", 338)) ;
       }
       break ;
     }
-    enumerator_13280.gotoNextObject () ;
+    enumerator_13129.gotoNextObject () ;
   }
 }
 

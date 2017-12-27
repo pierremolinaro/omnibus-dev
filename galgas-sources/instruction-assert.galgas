@@ -121,13 +121,6 @@ override method @assertInstructionIR llvmInstructionCode
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForAssertViolation () + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelAssertOk + ":\n"
-
-
-#  ioLLVMcode += "if (!" + [mExpressionValue llvmName] + ") {\n"
-#  ioLLVMcode += "  raise_exception (" + panicCodeForAssertViolation ()
-#     + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
-#     + ", " + [mAssertInstructionLocation line] + ") ;\n"
-#  ioLLVMcode += "}\n" 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -269,27 +269,32 @@ class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_generatePanicCode (class GALGAS_string & ioArgument0,
-                                const class GALGAS_string constinArgument1,
-                                const class GALGAS_stringset constinArgument2,
-                                const class GALGAS_targetParameters constinArgument3,
-                                const class GALGAS_string constinArgument4,
-                                const class GALGAS_generationContext constinArgument5,
-                                class GALGAS_generationAdds & ioArgument6,
-                                const class GALGAS_instructionListSortedListIR constinArgument7,
-                                const class GALGAS_instructionListSortedListIR constinArgument8,
+                                const class GALGAS_stringset constinArgument1,
+                                const class GALGAS_generationContext constinArgument2,
+                                class GALGAS_generationAdds & ioArgument3,
+                                const class GALGAS_instructionListSortedListIR constinArgument4,
+                                const class GALGAS_instructionListSortedListIR constinArgument5,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Function 'getTargetTextFile'                                             *
+//                                          Function 'llvmNameForSectionCall'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_getTargetTextFile (const class GALGAS_string & constinArgument0,
-                                                const class GALGAS_string & constinArgument1,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Function 'panicRoutineName'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_panicRoutineName (class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -448,6 +453,17 @@ void routine_generateSectionDispatcher (const class GALGAS_string constinArgumen
                                         const class GALGAS_sectionIRlist constinArgument4,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Function 'getTargetTextFile'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_getTargetTextFile (const class GALGAS_string & constinArgument0,
+                                                const class GALGAS_string & constinArgument1,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

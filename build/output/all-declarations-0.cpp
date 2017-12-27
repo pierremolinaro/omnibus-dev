@@ -8734,13 +8734,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i104_parse (C_Lexique
 
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_ (const GALGAS_string constinArgument_inKey,
                                                                                                                      C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_lstring var_key_2703 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_key_2668 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 70)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_key_2703.getter_string (HERE).objectCompare (constinArgument_inKey)).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_key_2668.getter_string (HERE).objectCompare (constinArgument_inKey)).boolEnum () ;
   if (kBoolTrue == test_0) {
     TC_Array <C_FixItDescription> fixItArray1 ;
     appendFixItActions (fixItArray1, kFixItReplace, constinArgument_inKey) ;
-    inCompiler->emitSemanticError (var_key_2703.getter_location (SOURCE_FILE ("configuration.galgas", 72)), GALGAS_string ("invalid key"), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 72)) ;
+    inCompiler->emitSemanticError (var_key_2668.getter_location (SOURCE_FILE ("configuration.galgas", 72)), GALGAS_string ("invalid key"), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 72)) ;
   }
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 74)) ;
 }
@@ -8764,12 +8764,12 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   while (repeatFlag_0) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_0 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_relativePath_3146 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_relativePath_3111 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 84)) ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("configuration.galgas", 85)) ;
-      GALGAS_lstring var_destinationFile_3195 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_destinationFile_3160 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
-      outArgument_outPythonUtilityToolList.addAssign_operation (var_relativePath_3146, var_destinationFile_3195  COMMA_SOURCE_FILE ("configuration.galgas", 87)) ;
+      outArgument_outPythonUtilityToolList.addAssign_operation (var_relativePath_3111, var_destinationFile_3160  COMMA_SOURCE_FILE ("configuration.galgas", 87)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -8806,86 +8806,83 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
                                                                                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outImportedFileList.drop () ; // Release 'out' argument
   outArgument_outEndOfSourceFile.drop () ; // Release 'out' argument
-  GALGAS__32_lstringlist var_python_5F_utilityToolList_3616 ;
-  nt_python_5F_utility_5F_tool_5F_list_ (var_python_5F_utilityToolList_3616, inCompiler) ;
+  GALGAS__32_lstringlist var_python_5F_utilityToolList_3581 ;
+  nt_python_5F_utility_5F_tool_5F_list_ (var_python_5F_utilityToolList_3581, inCompiler) ;
   nt_configuration_5F_key_ (GALGAS_string ("PYTHON_BUILD"), inCompiler) ;
-  GALGAS_lstring var_python_5F_build_3689 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_python_5F_build_3654 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 100)) ;
   nt_configuration_5F_key_ (GALGAS_string ("LINKER_SCRIPT"), inCompiler) ;
-  GALGAS_lstring var_linkerScript_3763 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_linkerScript_3728 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 102)) ;
   nt_configuration_5F_key_ (GALGAS_string ("PANIC_CODE_TYPE_NAME"), inCompiler) ;
-  GALGAS_lstring var_panicCodeTypeName_3847 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_panicCodeTypeName_3812 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("configuration.galgas", 104)) ;
   nt_configuration_5F_key_ (GALGAS_string ("PANIC_LINE_TYPE_NAME"), inCompiler) ;
-  GALGAS_lstring var_panicLineTypeName_3932 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_panicLineTypeName_3897 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("configuration.galgas", 106)) ;
-  nt_configuration_5F_key_ (GALGAS_string ("PANIC_LL_FILE"), inCompiler) ;
-  GALGAS_lstring var_targetPanic_5F_LL_5F_filePath_4017 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 108)) ;
   nt_configuration_5F_key_ (GALGAS_string ("POINTER_BIT_COUNT"), inCompiler) ;
-  GALGAS_lbigint var_pointerSize_4093 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 110)) ;
+  GALGAS_lbigint var_pointerSize_3973 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 108)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SYSTEM_STACK_SIZE"), inCompiler) ;
-  GALGAS_lbigint var_systemStackSize_4173 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 112)) ;
+  GALGAS_lbigint var_systemStackSize_4053 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 110)) ;
   nt_configuration_5F_key_ (GALGAS_string ("NOP"), inCompiler) ;
-  GALGAS_lstring var_nopInstructionStringInLLVM_4251 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 114)) ;
+  GALGAS_lstring var_nopInstructionStringInLLVM_4131 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 112)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_HANDLER"), inCompiler) ;
-  GALGAS_lstring var_serviceHandler_4329 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 116)) ;
+  GALGAS_lstring var_serviceHandler_4209 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 114)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_SYSTEM_STACK_SIZE"), inCompiler) ;
-  GALGAS_lbigint var_servicePushedRegisterByteSize_4431 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 118)) ;
+  GALGAS_lbigint var_servicePushedRegisterByteSize_4311 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 116)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_DISPATCHER_HEADER"), inCompiler) ;
-  GALGAS_lstring var_serviceDispatcherHeader_4528 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 120)) ;
+  GALGAS_lstring var_serviceDispatcherHeader_4408 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 118)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_DISPATCHER_ENTRY"), inCompiler) ;
-  GALGAS_lstring var_serviceDispatcherEntry_4623 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 122)) ;
+  GALGAS_lstring var_serviceDispatcherEntry_4503 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 120)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_ENTRY_NO_RETURNED_VALUE"), inCompiler) ;
-  GALGAS_lstring var_serviceEntryNoReturnedValue_4730 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 124)) ;
+  GALGAS_lstring var_serviceEntryNoReturnedValue_4610 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 122)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_ENTRY_WITH_RETURNED_VALUE"), inCompiler) ;
-  GALGAS_lstring var_serviceEntryReturnValue_4835 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 126)) ;
+  GALGAS_lstring var_serviceEntryReturnValue_4715 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 124)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_HANDLER"), inCompiler) ;
-  GALGAS_lstring var_sectionHandler_4913 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
+  GALGAS_lstring var_sectionHandler_4793 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 126)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_SYSTEM_STACK_SIZE"), inCompiler) ;
-  GALGAS_lbigint var_sectionPushedRegisterByteSize_5015 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 130)) ;
+  GALGAS_lbigint var_sectionPushedRegisterByteSize_4895 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_DISPATCHER_HEADER"), inCompiler) ;
-  GALGAS_lstring var_sectionDispatcherHeader_5112 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
+  GALGAS_lstring var_sectionDispatcherHeader_4992 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 130)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_DISPATCHER_ENTRY"), inCompiler) ;
-  GALGAS_lstring var_sectionDispatcherEntry_5207 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
+  GALGAS_lstring var_sectionDispatcherEntry_5087 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_ENTRY_FROM_ANY_MODE"), inCompiler) ;
-  GALGAS_lstring var_sectionDispatcherInvocationFromAnyMode_5321 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 136)) ;
+  GALGAS_lstring var_sectionDispatcherInvocationFromAnyMode_5201 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_ENTRY_FROM_USER_MODE"), inCompiler) ;
-  GALGAS_lstring var_sectionDispatcherInvocationFromUserMode_5437 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 138)) ;
+  GALGAS_lstring var_sectionDispatcherInvocationFromUserMode_5317 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 136)) ;
   nt_configuration_5F_key_ (GALGAS_string ("INTERRUPT_HANDLER"), inCompiler) ;
-  GALGAS_lstring var_xtrInterruptHandler_5522 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 140)) ;
+  GALGAS_lstring var_xtrInterruptHandler_5402 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 138)) ;
   nt_configuration_5F_key_ (GALGAS_string ("INTERRUPT_USER_STACK_SIZE"), inCompiler) ;
-  GALGAS_lbigint var_stackedUserRegisterOnInterruptByteSize_5633 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
+  GALGAS_lbigint var_stackedUserRegisterOnInterruptByteSize_5513 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 140)) ;
   nt_configuration_5F_key_ (GALGAS_string ("UNDEFINED_INTERRUPT"), inCompiler) ;
-  GALGAS_lstring var_undefinedInterruptHandler_5726 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 144)) ;
+  GALGAS_lstring var_undefinedInterruptHandler_5606 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
   nt_configuration_5F_key_ (GALGAS_string ("C_FILES"), inCompiler) ;
-  GALGAS_lstringlist var_C_5F_definitionFiles_5796 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 146)) ;
+  GALGAS_lstringlist var_C_5F_definitionFiles_5676 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 144)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_fileRelativePath_5861 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
-      var_C_5F_definitionFiles_5796.addAssign_operation (var_fileRelativePath_5861  COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
+      GALGAS_lstring var_fileRelativePath_5741 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 147)) ;
+      var_C_5F_definitionFiles_5676.addAssign_operation (var_fileRelativePath_5741  COMMA_SOURCE_FILE ("configuration.galgas", 148)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -8893,14 +8890,14 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
     }
   }
   nt_configuration_5F_key_ (GALGAS_string ("S_FILES"), inCompiler) ;
-  GALGAS_lstringlist var_S_5F_definitionFiles_5984 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 153)) ;
+  GALGAS_lstringlist var_S_5F_definitionFiles_5864 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 151)) ;
   bool repeatFlag_1 = true ;
   while (repeatFlag_1) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_2 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_fileRelativePath_6049 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
-      var_S_5F_definitionFiles_5984.addAssign_operation (var_fileRelativePath_6049  COMMA_SOURCE_FILE ("configuration.galgas", 157)) ;
+      GALGAS_lstring var_fileRelativePath_5929 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 154)) ;
+      var_S_5F_definitionFiles_5864.addAssign_operation (var_fileRelativePath_5929  COMMA_SOURCE_FILE ("configuration.galgas", 155)) ;
     } break ;
     default:
       repeatFlag_1 = false ;
@@ -8908,42 +8905,42 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
     }
   }
   nt_configuration_5F_key_ (GALGAS_string ("LL_FILES"), inCompiler) ;
-  GALGAS_lstringlist var_LL_5F_definitionFiles_6174 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 160)) ;
+  GALGAS_lstringlist var_LL_5F_definitionFiles_6054 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 158)) ;
   bool repeatFlag_2 = true ;
   while (repeatFlag_2) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_3 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_fileRelativePath_6239 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 163)) ;
-      var_LL_5F_definitionFiles_6174.addAssign_operation (var_fileRelativePath_6239  COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
+      GALGAS_lstring var_fileRelativePath_6119 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 161)) ;
+      var_LL_5F_definitionFiles_6054.addAssign_operation (var_fileRelativePath_6119  COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
     } break ;
     default:
       repeatFlag_2 = false ;
       break ;
     }
   }
-  outArgument_outImportedFileList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 166)) ;
+  outArgument_outImportedFileList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 164)) ;
   nt_configuration_5F_key_ (GALGAS_string ("PLM_FILES"), inCompiler) ;
   bool repeatFlag_3 = true ;
   while (repeatFlag_3) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_4 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_relativeFilePath_6419 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
-      outArgument_outImportedFileList.addAssign_operation (var_relativeFilePath_6419  COMMA_SOURCE_FILE ("configuration.galgas", 171)) ;
+      GALGAS_lstring var_relativeFilePath_6299 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
+      outArgument_outImportedFileList.addAssign_operation (var_relativeFilePath_6299  COMMA_SOURCE_FILE ("configuration.galgas", 169)) ;
     } break ;
     default:
       repeatFlag_3 = false ;
       break ;
     }
   }
-  GALGAS_interruptionConfigurationList var_interruptionConfigurationList_6535 ;
-  GALGAS_enumerationConstantList var_interruptConstantList_6562 ;
-  nt_interruptConfigList_ (var_interruptionConfigurationList_6535, var_interruptConstantList_6562, inCompiler) ;
-  GALGAS_targetParameters var_parameters_6581 = GALGAS_targetParameters::constructor_new (var_python_5F_utilityToolList_3616, var_python_5F_build_3689, var_targetPanic_5F_LL_5F_filePath_4017, var_linkerScript_3763, var_pointerSize_4093, var_systemStackSize_4173, var_stackedUserRegisterOnInterruptByteSize_5633, var_nopInstructionStringInLLVM_4251, var_sectionHandler_4913, var_sectionPushedRegisterByteSize_5015, var_sectionDispatcherHeader_5112, var_sectionDispatcherEntry_5207, var_sectionDispatcherInvocationFromAnyMode_5321, var_sectionDispatcherInvocationFromUserMode_5437, var_C_5F_definitionFiles_5796, var_S_5F_definitionFiles_5984, var_LL_5F_definitionFiles_6174, var_xtrInterruptHandler_5522, var_undefinedInterruptHandler_5726, var_serviceHandler_4329, var_servicePushedRegisterByteSize_4431, var_serviceDispatcherEntry_4623, var_serviceDispatcherHeader_4528, var_serviceEntryNoReturnedValue_4730, var_serviceEntryReturnValue_4835  COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_configurationDeclarationAST::constructor_new (var_panicCodeTypeName_3847, var_panicLineTypeName_3932, var_parameters_6581, var_interruptionConfigurationList_6535  COMMA_SOURCE_FILE ("configuration.galgas", 201))  COMMA_SOURCE_FILE ("configuration.galgas", 201)) ;
-  outArgument_outEndOfSourceFile = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 207)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_enumerationDeclarationAST::constructor_new (GALGAS_lstring::constructor_new (function_isrSlotTypeName (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 209)), var_xtrInterruptHandler_5522.getter_location (HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 209)), var_interruptConstantList_6562  COMMA_SOURCE_FILE ("configuration.galgas", 208))  COMMA_SOURCE_FILE ("configuration.galgas", 208)) ;
+  GALGAS_interruptionConfigurationList var_interruptionConfigurationList_6415 ;
+  GALGAS_enumerationConstantList var_interruptConstantList_6442 ;
+  nt_interruptConfigList_ (var_interruptionConfigurationList_6415, var_interruptConstantList_6442, inCompiler) ;
+  GALGAS_targetParameters var_parameters_6461 = GALGAS_targetParameters::constructor_new (var_python_5F_utilityToolList_3581, var_python_5F_build_3654, var_linkerScript_3728, var_pointerSize_3973, var_systemStackSize_4053, var_stackedUserRegisterOnInterruptByteSize_5513, var_nopInstructionStringInLLVM_4131, var_sectionHandler_4793, var_sectionPushedRegisterByteSize_4895, var_sectionDispatcherHeader_4992, var_sectionDispatcherEntry_5087, var_sectionDispatcherInvocationFromAnyMode_5201, var_sectionDispatcherInvocationFromUserMode_5317, var_C_5F_definitionFiles_5676, var_S_5F_definitionFiles_5864, var_LL_5F_definitionFiles_6054, var_xtrInterruptHandler_5402, var_undefinedInterruptHandler_5606, var_serviceHandler_4209, var_servicePushedRegisterByteSize_4311, var_serviceDispatcherEntry_4503, var_serviceDispatcherHeader_4408, var_serviceEntryNoReturnedValue_4610, var_serviceEntryReturnValue_4715  COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_configurationDeclarationAST::constructor_new (var_panicCodeTypeName_3812, var_panicLineTypeName_3897, var_parameters_6461, var_interruptionConfigurationList_6415  COMMA_SOURCE_FILE ("configuration.galgas", 198))  COMMA_SOURCE_FILE ("configuration.galgas", 198)) ;
+  outArgument_outEndOfSourceFile = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 204)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_enumerationDeclarationAST::constructor_new (GALGAS_lstring::constructor_new (function_isrSlotTypeName (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 206)), var_xtrInterruptHandler_5402.getter_location (HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 206)), var_interruptConstantList_6442  COMMA_SOURCE_FILE ("configuration.galgas", 205))  COMMA_SOURCE_FILE ("configuration.galgas", 205)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8959,17 +8956,17 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   nt_configuration_5F_key_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("configuration.galgas", 106)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 108)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 108)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 110)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 112)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 112)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 114)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 116)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 116)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 118)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 118)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 120)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
@@ -8979,9 +8976,9 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   nt_configuration_5F_key_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 126)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 130)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 130)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
@@ -8991,17 +8988,15 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   nt_configuration_5F_key_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 138)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 140)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 140)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
-  nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 144)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 147)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -9013,7 +9008,7 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   while (repeatFlag_1) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_2 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 154)) ;
     } break ;
     default:
       repeatFlag_1 = false ;
@@ -9025,7 +9020,7 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   while (repeatFlag_2) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_3 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 163)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 161)) ;
     } break ;
     default:
       repeatFlag_2 = false ;
@@ -9037,7 +9032,7 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   while (repeatFlag_3) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_4 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
     } break ;
     default:
       repeatFlag_3 = false ;
@@ -9055,31 +9050,31 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
                                                                                                                     C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_interruptionConfigurationList.drop () ; // Release 'out' argument
   outArgument_outEnumerationConstantList.drop () ; // Release 'out' argument
-  outArgument_interruptionConfigurationList = GALGAS_interruptionConfigurationList::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 220)) ;
-  outArgument_outEnumerationConstantList = GALGAS_enumerationConstantList::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 221)) ;
+  outArgument_interruptionConfigurationList = GALGAS_interruptionConfigurationList::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 217)) ;
+  outArgument_outEnumerationConstantList = GALGAS_enumerationConstantList::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 218)) ;
   nt_configuration_5F_key_ (GALGAS_string ("INTERRUPTS"), inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_5 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_interruptName_8201 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 225)) ;
-      GALGAS_interruptionPanicCode var_interruptionPanicCode_8252 ;
+      GALGAS_lstring var_interruptName_8050 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 222)) ;
+      GALGAS_interruptionPanicCode var_interruptionPanicCode_8101 ;
       switch (select_plm_5F_target_5F_specific_5F_syntax_6 (inCompiler)) {
       case 1: {
-        var_interruptionPanicCode_8252 = GALGAS_interruptionPanicCode::constructor_noCode (SOURCE_FILE ("configuration.galgas", 228)) ;
+        var_interruptionPanicCode_8101 = GALGAS_interruptionPanicCode::constructor_noCode (SOURCE_FILE ("configuration.galgas", 225)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("configuration.galgas", 230)) ;
-        GALGAS_lbigint var_panicCode_8360 = inCompiler->synthetizedAttribute_bigInteger () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 231)) ;
-        var_interruptionPanicCode_8252 = GALGAS_interruptionPanicCode::constructor_code (var_panicCode_8360  COMMA_SOURCE_FILE ("configuration.galgas", 232)) ;
-        outArgument_outEnumerationConstantList.addAssign_operation (var_interruptName_8201, var_panicCode_8360.getter_bigint (SOURCE_FILE ("configuration.galgas", 233))  COMMA_SOURCE_FILE ("configuration.galgas", 233)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("configuration.galgas", 227)) ;
+        GALGAS_lbigint var_panicCode_8209 = inCompiler->synthetizedAttribute_bigInteger () ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 228)) ;
+        var_interruptionPanicCode_8101 = GALGAS_interruptionPanicCode::constructor_code (var_panicCode_8209  COMMA_SOURCE_FILE ("configuration.galgas", 229)) ;
+        outArgument_outEnumerationConstantList.addAssign_operation (var_interruptName_8050, var_panicCode_8209.getter_bigint (SOURCE_FILE ("configuration.galgas", 230))  COMMA_SOURCE_FILE ("configuration.galgas", 230)) ;
       } break ;
       default:
         break ;
       }
-      outArgument_interruptionConfigurationList.addAssign_operation (var_interruptName_8201, var_interruptionPanicCode_8252  COMMA_SOURCE_FILE ("configuration.galgas", 235)) ;
+      outArgument_interruptionConfigurationList.addAssign_operation (var_interruptName_8050, var_interruptionPanicCode_8101  COMMA_SOURCE_FILE ("configuration.galgas", 232)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -9096,13 +9091,13 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   while (repeatFlag_0) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_5 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 225)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 222)) ;
       switch (select_plm_5F_target_5F_specific_5F_syntax_6 (inCompiler)) {
       case 1: {
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("configuration.galgas", 230)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 231)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("configuration.galgas", 227)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 228)) ;
       } break ;
       default:
         break ;

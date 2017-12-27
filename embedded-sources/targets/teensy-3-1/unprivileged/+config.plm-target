@@ -15,7 +15,6 @@ LINKER_SCRIPT: "../ld-linker.txt"
 
 PANIC_CODE_TYPE_NAME: $uint32
 PANIC_LINE_TYPE_NAME: $uint32
-PANIC_LL_FILE: "../target-panic.ll"
 
 POINTER_BIT_COUNT: 32
 

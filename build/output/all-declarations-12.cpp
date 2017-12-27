@@ -3133,7 +3133,7 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "      if lengthOf (!buffer:self.data1) < 500 {\n"
   "        append (!byte:self.b !\?toBuffer:self.data1)\n"
   "        self.b +%= 1\n"
-  "        assert (self.b < 255)\n"
+  "        assert (self.b < 25)\n"
   "      }else{\n"
   "        removeAll (!\?fromBuffer:self.data1)\n"
   "      }\n"
@@ -3197,7 +3197,7 @@ const cRegularFileWrapper gWrapperFile_24_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5963, // Text length
+  5962, // Text length
   gWrapperFileContent_24_embeddedSampleCode
 ) ;
 
