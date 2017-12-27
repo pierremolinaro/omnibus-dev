@@ -134,6 +134,7 @@ task T2 priority 5 stackSize 512 {
       if lengthOf (!buffer:self.data1) < 500 {
         append (!byte:self.b !?toBuffer:self.data1)
         self.b +%= 1
+        assert (self.b < 255)
       }else{
         removeAll (!?fromBuffer:self.data1)
       }
@@ -169,7 +170,7 @@ task T3 priority 100 stackSize 512 {
     if digital.read (!port:PUSH_P0) {
       if lengthOf (!buffer:self.data) == 0 {
         append (!byte:0 !?toBuffer:self.data)
-        self.testReleaseLocalVar2 (!self.data)
+        self.testReleaseLocalVar2 (!in:self.data)
       }else{
         removeAll (!?fromBuffer:self.data)
       }
@@ -178,7 +179,7 @@ task T3 priority 100 stackSize 512 {
     }
   }
 
-  func testReleaseLocalVar2 (? inData $dynamicByteBuffer) {
+  func testReleaseLocalVar2 (?in: inData $dynamicByteBuffer) {
     externalSection (!in:inData)
   }
 
@@ -187,6 +188,8 @@ task T3 priority 100 stackSize 512 {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 system section externalSection (?in: inData $dynamicByteBuffer) {
+  var d = inData
+  append (!byte:0 !?toBuffer:d)
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

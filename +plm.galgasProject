@@ -84,13 +84,13 @@ project (1:0:0) -> "plm" {
 #--- Instructions
   "galgas-sources/instructionList.galgas"
   "galgas-sources/directive-check.galgas"
+  "galgas-sources/instruction-assert.galgas"
   "galgas-sources/instruction-assignment.galgas"
   "galgas-sources/instruction-slice-assignment.galgas"
   "galgas-sources/instruction-assignment-operator.galgas"
   "galgas-sources/instruction-var.galgas"
   "galgas-sources/instruction-let.galgas"
   "galgas-sources/instruction-nop.galgas"
-  "galgas-sources/instruction-assert.galgas"
   "galgas-sources/instruction-panic.galgas"
   "galgas-sources/instruction-if.galgas"
   "galgas-sources/instruction-sync.galgas"
@@ -142,7 +142,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-store-to-temporary-reference.galgas"
   "galgas-sources/intermediate-static-routine-call.galgas"
   "galgas-sources/intermediate-indirect-routine-call.galgas"
-  "galgas-sources/intermediate-retain.galgas"
   "galgas-sources/intermediate-release.galgas"
 
   "galgas-sources/intermediate-load-when-reference.galgas"

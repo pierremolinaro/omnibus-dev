@@ -336,7 +336,7 @@ void removeByteAtIndex (const unsigned inIndex, unsigned * ioPointer) {
 
 void retain (unsigned inPointer) asm ("dynamicByteBuffer.retain") ;
 void release (unsigned inPointer) asm ("dynamicByteBuffer.release") ;
-void insulate (unsigned* ioPointer) asm ("dynamicByteBuffer.insulate") ;
+unsigned insulate (unsigned inPointer) asm ("dynamicByteBuffer.insulate") ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -362,14 +362,16 @@ void release (unsigned inPointer) {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-void insulate (unsigned* ioPointer) {
-  if ((*ioPointer) != 0) {
-    DataBufferHeaderType * p = (DataBufferHeaderType *) (*ioPointer) ;
+unsigned insulate (unsigned inPointer) {
+  unsigned result = inPointer ;
+  if (inPointer != 0) {
+    DataBufferHeaderType * p = (DataBufferHeaderType *) inPointer ;
     if (p->mReferenceCount > 1) {
       p = reallocBlock (p, p->mBlockSizeIndex) ;
-      *ioPointer = (unsigned) p ;
+      result = (unsigned) p ;
     }
   }
+  return result ;
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

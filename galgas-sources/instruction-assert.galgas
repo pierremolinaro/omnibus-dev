@@ -107,11 +107,27 @@ override method @assertInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
-  ioLLVMcode += "if (!" + [mExpressionValue llvmName] + ") {\n"
-  ioLLVMcode += "  raise_exception (" + panicCodeForAssertViolation ()
-     + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
-     + ", " + [mAssertInstructionLocation line] + ") ;\n"
-  ioLLVMcode += "}\n" 
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
+    ![[[mAssertInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
+    ?let staticStringIndex
+  ]
+  let labelAssertOk = "assert.ok." + ioGenerationAdds.mUniqueIndex
+  let labelAssertEr = "assert.not.ok." + ioGenerationAdds.mUniqueIndex
+  ioGenerationAdds.mUniqueIndex ++
+  ioLLVMcode += "  br i1 " + [mExpressionValue llvmName] + ", label %" + labelAssertOk + ", label %" + labelAssertEr + "\n\n"
+  ioLLVMcode += labelAssertEr + ":\n"
+  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mAssertInstructionLocation line] + ", "
+  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForAssertViolation () + ")\n"
+  ioLLVMcode += "  unreachable\n\n"
+  ioLLVMcode += labelAssertOk + ":\n"
+
+
+#  ioLLVMcode += "if (!" + [mExpressionValue llvmName] + ") {\n"
+#  ioLLVMcode += "  raise_exception (" + panicCodeForAssertViolation ()
+#     + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
+#     + ", " + [mAssertInstructionLocation line] + ") ;\n"
+#  ioLLVMcode += "}\n" 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

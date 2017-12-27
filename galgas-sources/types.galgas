@@ -191,11 +191,16 @@ method @PLMType generateInsulate
   let llvmTypeName = [self llvmTypeName]
   let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
   if [self.typeAttributes arc] then
-    ioLLVMcode += "  call void @" + [self plmTypeName] + ".insulate (" + llvmTypeName + "* " + LLVMVariable + ")\n"
+    let loadedVar = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
+    let insulatedVar = "%temp." + [inPLMName assemblerRepresentation] + ".insulated." + ioGenerationAdds.mUniqueIndex   
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + loadedVar + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
+    ioLLVMcode += "  " + insulatedVar + " = call " + llvmTypeName + " @" + [self plmTypeName] + ".insulate (" + llvmTypeName + " " + loadedVar + ")\n"
+    ioLLVMcode += "  store " + llvmTypeName + " " + insulatedVar + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
   else
     let arcAssignmentList = [self arcList !{}]
     for (propertyName propertyType indexPath) in arcAssignmentList do 
-      let llvmVarName = "%arc.insulate." + ioGenerationAdds.mUniqueIndex
+      let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex ++
       ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
       for (idx) in indexPath do
@@ -203,7 +208,12 @@ method @PLMType generateInsulate
       end
       ioLLVMcode += " ; " + propertyName + "\n"
       let propertyTypeLLVMName = [propertyType llvmTypeName]
-      ioLLVMcode += "  call void @" + [propertyType plmTypeName] + ".insulate (" + propertyTypeLLVMName + "* " + propertyTypeLLVMName + ")\n" 
+      let loadedVar = llvmVarName + ".loaded." + ioGenerationAdds.mUniqueIndex 
+      let insulatedVar = llvmVarName + ".insulated." + ioGenerationAdds.mUniqueIndex 
+      ioGenerationAdds.mUniqueIndex ++
+      ioLLVMcode += "  " + loadedVar + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+      ioLLVMcode += "  " + insulatedVar + " = call " + propertyTypeLLVMName + " @" + [propertyType plmTypeName] + ".insulate (" + propertyTypeLLVMName + " " + loadedVar + ")\n" 
+      ioLLVMcode += "  store " + propertyTypeLLVMName + " " + insulatedVar + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n"
     end
   end
 }

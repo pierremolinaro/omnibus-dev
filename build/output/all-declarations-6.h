@@ -1547,16 +1547,16 @@ class cPtr_decoratedPanicRoutine : public cPtr_abstractDecoratedDeclaration {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Extension method '@routineMapIR svcCodeGeneration'                                  *
+//                              Extension method '@routineMapIR svcDeclarationGeneration'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_svcCodeGeneration (const class GALGAS_routineMapIR inObject,
-                                        class GALGAS_string & io_ioLLVMcode,
-                                        class GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
-                                        class GALGAS_sectionIRlist & io_ioSectionList,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+void extensionMethod_svcDeclarationGeneration (const class GALGAS_routineMapIR inObject,
+                                               class GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
+                                               class GALGAS_sectionIRlist & io_ioSectionList,
+                                               class GALGAS_generationAdds & io_ioGenerationAdds,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
