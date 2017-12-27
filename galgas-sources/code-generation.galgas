@@ -431,7 +431,7 @@ private proc generateCodeFiles
   [json writeToFileWhenDifferentContents !sourceDirectory + "/provided-stacks.json" ?*]
 #----------------------------------------- Run compilation script
   if (@uint.errorCount == 0) then
-    let script = if [option plm_options.performFlashing value] then "run" else "build" end
+    let script = if [option plm_option_not_appearing_in_cocoa.performFlashing value] then "run" else "build" end
     let fullScript = "python " + inProductDirectory + "/" + script + ".py"
     @sint result = [fullScript system]
     if result != 0S then
