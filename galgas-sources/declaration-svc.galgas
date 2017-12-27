@@ -304,37 +304,26 @@ func llvmFunctionPrototype ?let @PLMType inReturnType
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR svcCodeGeneration
-  ?!@string ioLLVMcode
+method @routineMapIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
   ?!@sectionIRlist ioSectionList
+  ?!@generationAdds ioGenerationAdds
 {
   for svc in self do
     if not [svc.mKind isFunction] then
       let svcCallName = llvmNameForSVCCall (!svc.mRoutineNameForGeneration !svc.mKind)
       let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineNameForGeneration !svc.mKind)
+      let prototype = llvmFunctionPrototype (
+        !svc.mReturnType
+        !svcCallName
+        !svc.mReceiverType
+        !svc.mFormalArgumentListForGeneration
+      )
+      ioGenerationAdds.mExternFunctionDeclarationSet += !prototype
       switch svc.mKind
       case section :
-        ioSectionList +=
-          !svcCallName
-          !svcImplementationName
-          !true # Onvly incocation from user mode
-        let prototype = llvmFunctionPrototype (
-          !svc.mReturnType
-          !svcCallName
-          !svc.mReceiverType
-          !svc.mFormalArgumentListForGeneration
-        )
-        ioLLVMcode += "declare " + prototype + "\n\n"
+        ioSectionList += !svcCallName !svcImplementationName !true # Onvly incocation from user mode
       case primitive, service :
-        ioLLVMcode += llvmTitleComment (!svcCallName)
-        let prototype = llvmFunctionPrototype (
-          !svc.mReturnType
-          !svcCallName
-          !svc.mReceiverType
-          !svc.mFormalArgumentListForGeneration
-        )
-        ioLLVMcode += "declare " + prototype + "\n\n"
         ioPrimitiveAndServiceList += !svcCallName !svcImplementationName !false
       case function (*) :
         error .nowhere : "INTERNAL ERROR"

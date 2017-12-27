@@ -13382,21 +13382,6 @@ void extensionSetter_appendStoreTemporaryReference (GALGAS_instructionListIR & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Extension method '@instructionListIR generateRetain'                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_generateRetain (GALGAS_instructionListIR & ioObject,
-                                     const GALGAS_PLMType constinArgument_inType,
-                                     const GALGAS_lstring constinArgument_in_5F_plmName,
-                                     C_Compiler * /* inCompiler */
-                                     COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_retainIR::constructor_new (constinArgument_inType, constinArgument_in_5F_plmName  COMMA_SOURCE_FILE ("intermediate-retain.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-retain.galgas", 3)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                Extension method '@instructionListIR generateRelease'                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

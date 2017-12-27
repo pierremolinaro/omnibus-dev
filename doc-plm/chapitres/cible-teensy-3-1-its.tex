@@ -452,17 +452,6 @@ Cette primitive effectue l'opération \texttt{wait} sur le sémaphore sur lequel
 
 
 
-\subsubsection{Primitive \texttt{wait(?untilDeadline{}:)}}
-
-\begin{PLM}
-  public primitive wait (?untilDeadline:inDeadline $uint32) -> $bool
-\end{PLM}
-
-Cette primitive attend d'effectuer l'opération \texttt{wait}, jusqu'à l'échéance \plm=inDeadline=. Elle renvoie \plm=yes= si la primitive \texttt{P} a été effectuée, ou \plm=no= si l'échéance est arrivée.
-
-
-
-
 
 \subsubsection{Garde \texttt{wait()}}
 
@@ -595,7 +584,6 @@ Une routine d'interruption porte un des noms définis par la cible~:
 Prenons l'exemple d'une interruption que l'on appelera \texttt{MyIT}. On déclare la routine d'interruption avec l'un des trois qualificatifs suivants ~:
 \begin{itemize}
   \item \plm=section=, \refSubsubsection{itModeSection}~;
-  \item \plm=safe=, \refSubsubsection{itModeSafe}~;
   \item \plm=service=, \refSubsubsection{itModeService}.
 \end{itemize}
 
@@ -610,18 +598,6 @@ isr section MyIT {
 \end{PLM}
 
 La routine d'interruption s'exécute en mode \plm=section=, c'est-à-dire que les routines de l'exécutif lui sont inaccessibles. 
-
-
-
-\subsubsectionLabel{Routine d'interruption en mode \texttt{safe}}{itModeSafe}
-
-\begin{PLM}
-isr safe MyIT {
-  ...
-}
-\end{PLM}
-
-La routine d'interruption s'exécute en mode \plm=safe=, c'est-à-dire que les routines de l'exécutif lui sont inaccessibles, et elle ne peut pas invoquer des instructions povant provoquer la panique. 
 
 
 
