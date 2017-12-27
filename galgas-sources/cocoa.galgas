@@ -8,4 +8,6 @@ gui cocoa {
     blockComment : "//"
   }
 
+  run : "-f"
+
 }

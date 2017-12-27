@@ -24,6 +24,12 @@ option plm_options {
   @bool optimizationS : '\0', "Os" -> "Like previous option with extra optimizations for size"
   @bool optimizationZ : '\0', "Oz" -> "Like previous option but reduces code size further"
   @bool optimizationZ3 : '\0', "O3" -> "Optimization level 3"
+}
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+option plm_option_not_appearing_in_cocoa {
   @bool performFlashing: 'f', "flash-target" -> "After successful compilation, flash target"
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

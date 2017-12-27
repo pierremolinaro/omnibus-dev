@@ -10,9 +10,9 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
-                                                       NSMutableArray * ioUIntOptionArray,
-                                                       NSMutableArray * ioStringOptionArray,
-                                                       NSMutableArray * ioStringListOptionArray) {
+                                     NSMutableArray * ioUIntOptionArray,
+                                     NSMutableArray * ioStringOptionArray,
+                                     NSMutableArray * ioStringListOptionArray) {
   OC_GGS_CommandLineOption * option ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
@@ -119,15 +119,6 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:122
     commandString:@"display-deadcode-elimination"
     comment:@"Display dead code elimination"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"plm_options"
-    identifier:@"performFlashing"
-    commandChar:102
-    commandString:@"flash-target"
-    comment:@"After successful compilation, flash target"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
