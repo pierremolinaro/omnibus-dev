@@ -280,6 +280,21 @@ private proc generateCodeFiles
     !primitiveAndServiceList
     !targetParameters:inTargetParameters
   )
+#----------------------------------------- Panic
+  if not [option plm_options.noPanicGeneration value] then
+    sectionIRlist += 
+      !llvmNameForSectionCall (!panicRoutineName ())
+      !llvmNameForSectionImplementation (!panicRoutineName ())
+      !false # Invocation from any mode
+    generatePanicCode (
+      !?llvmCode
+      !sourceFileSet: inSourceFileAbsolutePathSet
+      !generationContext: generationContext
+      !?generationAdds: generationAdds
+      !setup: inIntermediateCodeStruct.mPanicSetupInstructionListIR
+      !loop: inIntermediateCodeStruct.mPanicLoopInstructionListIR
+    )
+  end
 #----------------------------------------- Section, safe dispatcher
   if inIntermediateCodeStruct.mNeedsDynamicMemoryAllocation then
     sectionIRlist += 
@@ -297,18 +312,6 @@ private proc generateCodeFiles
     !targetParameters:inTargetParameters
     !?asCode
     !sectionIRlist
-  )
-#----------------------------------------- Panic
-  generatePanicCode (
-    !? llvmCode
-    !currentDir: inCurrentDirectory
-    !sourceFileSet: inSourceFileAbsolutePathSet
-    !targetParameters: inTargetParameters
-    !targetName: inTargetName
-    !generationContext: generationContext
-    !?generationAdds: generationAdds
-    !setup: inIntermediateCodeStruct.mPanicSetupInstructionListIR
-    !loop: inIntermediateCodeStruct.mPanicLoopInstructionListIR
   )
 #----------------------------------------- Copy routines
   let keyList = [inTypeMap allKeyList]

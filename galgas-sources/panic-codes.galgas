@@ -1,5 +1,9 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once panicRoutineName -> @string { result = "handle.panic" }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func %once panicCodeForAssertViolation -> @bigint { result = 1G }
 
 func %once panicCodeForUnsignedAdditionOverflow -> @bigint { result = 2G }
