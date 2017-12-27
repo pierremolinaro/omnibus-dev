@@ -2519,8 +2519,8 @@ GALGAS_bool extensionGetter_hasKey (const GALGAS_routineMapForContext & inObject
                                     C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  GALGAS_lstring var_routineName_2559 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 59)).add_operation (constinArgument_inRoutineName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 59)).add_operation (constinArgument_inArgumentSignature.getter_string (SOURCE_FILE ("routine-map.galgas", 59)), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 59)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 59)) ;
-  result_result = inObject.mProperty_mInternalRoutineMap.getter_hasKey (var_routineName_2559.getter_string (SOURCE_FILE ("routine-map.galgas", 60)) COMMA_SOURCE_FILE ("routine-map.galgas", 60)) ;
+  GALGAS_lstring var_routineName_2697 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 61)).add_operation (constinArgument_inRoutineName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 61)).add_operation (constinArgument_inArgumentSignature.getter_string (SOURCE_FILE ("routine-map.galgas", 61)), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 61)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 61)) ;
+  result_result = inObject.mProperty_mInternalRoutineMap.getter_hasKey (var_routineName_2697.getter_string (SOURCE_FILE ("routine-map.galgas", 62)) COMMA_SOURCE_FILE ("routine-map.galgas", 62)) ;
 //---
   return result_result ;
 }
