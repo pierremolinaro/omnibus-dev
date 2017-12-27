@@ -1,23 +1,9 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! UNIVERSAL PROPERTY - ROUTINE MAP
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-# Cette table contient routines et variables. La clé est le nom de la variable ou le nom de la routine. Il est valide
-# d'avoir plusieurs routines de même nom, du moment qu'elle se distinguent par leur signature. Il est valide d'avoir une
-# variable de même nom qu'une routine : la syntaxe permet de savoir si une routine ou une variable est attendue.
-
+#! ROUTINE MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @routineMapForContext {
-  @internalRoutineMapForContext mInternalRoutineMap
-}
-
-#·······················································································································
-
-map @internalRoutineMapForContext { # Key is a mangled name
-  @routineArgumentSignatureMapForContext mRoutineArgumentSignatureMapForContext
-
-  insert insertKey error message "the '%K' routine is already declared in %L"
-  search searchKey error message "there is no '%K' routine"
+  @routineArgumentSignatureMapForContext mInternalRoutineMap
 }
 
 #·······················································································································
@@ -41,23 +27,8 @@ setter @routineMapForContext insertRoutine
   ?let @lstring inRoutineLLVMName
   ?let @routineDescriptor inDescriptor
 {
-  let routineName = @lstring.new {!inReceiverTypeName + "." + inRoutineName.string !inRoutineName.location}
-  
-  with routineName.string in !?mInternalRoutineMap do
-    [!?mRoutineArgumentSignatureMapForContext insertKey
-      !inArgumentSignature
-      !inRoutineLLVMName
-      !inDescriptor
-    ]
-  else
-    @routineArgumentSignatureMapForContext routineArgumentSignatureMapForContext = {}
-    [!?routineArgumentSignatureMapForContext insertKey
-      !inArgumentSignature
-      !inRoutineLLVMName
-      !inDescriptor
-    ]
-    [!?mInternalRoutineMap insertKey !routineName !routineArgumentSignatureMapForContext]
-  end
+  let routineName = @lstring.new {!inReceiverTypeName + "." + inRoutineName.string + inArgumentSignature !inRoutineName.location}
+  [!?mInternalRoutineMap insertKey !routineName !inRoutineLLVMName !inDescriptor]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -72,14 +43,14 @@ method @routineMapForContext searchKey
   !@routineDescriptor outDescriptor
   !@location outKeyLocation
 {
-  let routineName = @lstring.new {!inReceiverTypeName + "." + inRoutineName.string !inRoutineName.location}
+  let routineName = @lstring.new {!inReceiverTypeName + "." + inRoutineName.string + inArgumentSignature !inRoutineName.location}
 
-  [mInternalRoutineMap searchKey !routineName ?let routineArgumentSignatureMapForContext]
-
-  [routineArgumentSignatureMapForContext searchKey !inArgumentSignature ?outRoutineLLVMName ?outDescriptor ?outKeyLocation]
+  [mInternalRoutineMap searchKey !routineName ?outRoutineLLVMName ?outDescriptor ?outKeyLocation]
 }
 
-#·······················································································································
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! HASKEY METHOD
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @routineMapForContext hasKey
   ?let @string inReceiverTypeName # "" if not self type
@@ -87,13 +58,8 @@ getter @routineMapForContext hasKey
   ?let @lstring inArgumentSignature
   -> @bool
 {
-  let routineName = @lstring.new {!inReceiverTypeName + "." + inRoutineName.string !inRoutineName.location}
-
+  let routineName = @lstring.new {!inReceiverTypeName + "." + inRoutineName.string + inArgumentSignature !inRoutineName.location}
   result = [mInternalRoutineMap hasKey !routineName]
-  if result then
-    [mInternalRoutineMap searchKey !routineName ?let routineArgumentSignatureMapForContext]
-    result = [routineArgumentSignatureMapForContext hasKey !inArgumentSignature]
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
