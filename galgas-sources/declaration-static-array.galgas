@@ -385,6 +385,7 @@ override method @staticListAST enterInContext
             [type.kind function ?descriptor:let descriptor]
             let argumentSignature = [formalArgs routineSignature !functionName]
             [ioContext.mRoutineMapForContext searchKey
+              !""
               !functionName
               !argumentSignature
               ?let @lstring candidateRoutineLLVMName

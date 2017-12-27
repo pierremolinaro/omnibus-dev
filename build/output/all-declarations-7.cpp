@@ -2469,25 +2469,27 @@ GALGAS_routineMapForContext GALGAS_routineMapForContext::extractObject (const GA
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_insertRoutine (GALGAS_routineMapForContext & ioObject,
+                                    const GALGAS_string constinArgument_inReceiverTypeName,
                                     const GALGAS_lstring constinArgument_inRoutineName,
                                     const GALGAS_lstring constinArgument_inArgumentSignature,
                                     const GALGAS_lstring constinArgument_inRoutineLLVMName,
                                     const GALGAS_routineDescriptor constinArgument_inDescriptor,
                                     C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
-  cMapElement_internalRoutineMapForContext * objectArray_2124 = (cMapElement_internalRoutineMapForContext *) ioObject.mProperty_mInternalRoutineMap.readWriteAccessForWithInstruction (inCompiler, constinArgument_inRoutineName.getter_string (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 43)) ;
-  if (NULL != objectArray_2124) {
-      macroValidSharedObject (objectArray_2124, cMapElement_internalRoutineMapForContext) ;
+  GALGAS_lstring var_routineName_2191 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 44)).add_operation (constinArgument_inRoutineName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 44)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 44)) ;
+  cMapElement_internalRoutineMapForContext * objectArray_2291 = (cMapElement_internalRoutineMapForContext *) ioObject.mProperty_mInternalRoutineMap.readWriteAccessForWithInstruction (inCompiler, var_routineName_2191.getter_string (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 46)) ;
+  if (NULL != objectArray_2291) {
+      macroValidSharedObject (objectArray_2291, cMapElement_internalRoutineMapForContext) ;
     {
-    objectArray_2124->mProperty_mRoutineArgumentSignatureMapForContext.setter_insertKey (constinArgument_inArgumentSignature, constinArgument_inRoutineLLVMName, constinArgument_inDescriptor, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 44)) ;
+    objectArray_2291->mProperty_mRoutineArgumentSignatureMapForContext.setter_insertKey (constinArgument_inArgumentSignature, constinArgument_inRoutineLLVMName, constinArgument_inDescriptor, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 47)) ;
     }
   }else{
-    GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_2395 = GALGAS_routineArgumentSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("routine-map.galgas", 50)) ;
+    GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_2560 = GALGAS_routineArgumentSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("routine-map.galgas", 53)) ;
     {
-    var_routineArgumentSignatureMapForContext_2395.setter_insertKey (constinArgument_inArgumentSignature, constinArgument_inRoutineLLVMName, constinArgument_inDescriptor, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 51)) ;
+    var_routineArgumentSignatureMapForContext_2560.setter_insertKey (constinArgument_inArgumentSignature, constinArgument_inRoutineLLVMName, constinArgument_inDescriptor, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 54)) ;
     }
     {
-    ioObject.mProperty_mInternalRoutineMap.setter_insertKey (constinArgument_inRoutineName, var_routineArgumentSignatureMapForContext_2395, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 56)) ;
+    ioObject.mProperty_mInternalRoutineMap.setter_insertKey (var_routineName_2191, var_routineArgumentSignatureMapForContext_2560, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 59)) ;
     }
   }
 }
@@ -2500,6 +2502,7 @@ void extensionSetter_insertRoutine (GALGAS_routineMapForContext & ioObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionMethod_searchKey (const GALGAS_routineMapForContext inObject,
+                                const GALGAS_string constinArgument_inReceiverTypeName,
                                 const GALGAS_lstring constinArgument_inRoutineName,
                                 const GALGAS_lstring constinArgument_inArgumentSignature,
                                 GALGAS_lstring & outArgument_outRoutineLLVMName,
@@ -2510,9 +2513,10 @@ void extensionMethod_searchKey (const GALGAS_routineMapForContext inObject,
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
   outArgument_outDescriptor.drop () ; // Release 'out' argument
   outArgument_outKeyLocation.drop () ; // Release 'out' argument
-  GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_3187 ;
-  inObject.mProperty_mInternalRoutineMap.method_searchKey (constinArgument_inRoutineName, var_routineArgumentSignatureMapForContext_3187, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 71)) ;
-  var_routineArgumentSignatureMapForContext_3187.method_searchKey (constinArgument_inArgumentSignature, outArgument_outRoutineLLVMName, outArgument_outDescriptor, outArgument_outKeyLocation, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 72)) ;
+  GALGAS_lstring var_routineName_3333 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 75)).add_operation (constinArgument_inRoutineName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 75)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 75)) ;
+  GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_3513 ;
+  inObject.mProperty_mInternalRoutineMap.method_searchKey (var_routineName_3333, var_routineArgumentSignatureMapForContext_3513, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 77)) ;
+  var_routineArgumentSignatureMapForContext_3513.method_searchKey (constinArgument_inArgumentSignature, outArgument_outRoutineLLVMName, outArgument_outDescriptor, outArgument_outKeyLocation, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 79)) ;
 }
 
 
@@ -2523,17 +2527,19 @@ void extensionMethod_searchKey (const GALGAS_routineMapForContext inObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool extensionGetter_hasKey (const GALGAS_routineMapForContext & inObject,
+                                    const GALGAS_string & constinArgument_inReceiverTypeName,
                                     const GALGAS_lstring & constinArgument_inRoutineName,
                                     const GALGAS_lstring & constinArgument_inArgumentSignature,
                                     C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_mInternalRoutineMap.getter_hasKey (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("routine-map.galgas", 78)) COMMA_SOURCE_FILE ("routine-map.galgas", 78)) ;
+  GALGAS_lstring var_routineName_3953 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 90)).add_operation (constinArgument_inRoutineName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 90)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 90)) ;
+  result_result = inObject.mProperty_mInternalRoutineMap.getter_hasKey (var_routineName_3953.getter_string (SOURCE_FILE ("routine-map.galgas", 92)) COMMA_SOURCE_FILE ("routine-map.galgas", 92)) ;
   const enumGalgasBool test_0 = result_result.boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_3711 ;
-    inObject.mProperty_mInternalRoutineMap.method_searchKey (constinArgument_inRoutineName, var_routineArgumentSignatureMapForContext_3711, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 80)) ;
-    result_result = var_routineArgumentSignatureMapForContext_3711.getter_hasKey (constinArgument_inArgumentSignature.getter_string (SOURCE_FILE ("routine-map.galgas", 81)) COMMA_SOURCE_FILE ("routine-map.galgas", 81)) ;
+    GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_4205 ;
+    inObject.mProperty_mInternalRoutineMap.method_searchKey (var_routineName_3953, var_routineArgumentSignatureMapForContext_4205, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 94)) ;
+    result_result = var_routineArgumentSignatureMapForContext_4205.getter_hasKey (constinArgument_inArgumentSignature.getter_string (SOURCE_FILE ("routine-map.galgas", 95)) COMMA_SOURCE_FILE ("routine-map.galgas", 95)) ;
   }
 //---
   return result_result ;
