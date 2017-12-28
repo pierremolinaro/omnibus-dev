@@ -90,7 +90,16 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   end
 #-------------------------------------------- Property map
   @propertyMap propertyMap = {}
-#--- Method 'length'
+#--- Method 'removeAll()'
+  [!?propertyMap addFunctionWithoutArgument
+    !?ioSubprogramInvocationGraph
+    !receiverTypeName:mAnonymousDynamicArrayTypeName
+    !methodName:"removeAll"
+    !safe:false
+    !resultTypeProxy: .null
+    !canMutateProperties:true
+  ]
+#--- Method 'length()'
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["uint32" nowhere] ?let uint32TypeProxy]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
@@ -98,6 +107,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     !methodName:"length"
     !safe:false
     !resultTypeProxy: uint32TypeProxy
+    !canMutateProperties:false
   ]
 #--- Method 'append(?:)'
   [!?propertyMap addFunctionWithInputArgument
@@ -200,7 +210,21 @@ override method @dynamicArrayIR generateLLVMcode
   let pointer = "i" + mPtrSize
   let elementLLVMTypeName = [mElementType llvmTypeName]
   let bufferLengthFunctionName = llvmNameForFunction (!"arc.buffer.length")
-#---------- Method 'length'
+#---------- Method 'removeAll()'
+  let removeAllRoutineMangledName = routineMangledNameFromAST (
+    !llvmTypeStringFromPLMname (!mAnonymousDynamicArrayTypeName)
+    !["removeAll" nowhere]
+    !{}
+  )
+  let removeAllRoutineLLVMName = llvmNameForFunction (!removeAllRoutineMangledName.string)
+  ioLLVMcode += llvmTitleComment (!removeAllRoutineMangledName)
+  ioLLVMcode += "define internal void @" + removeAllRoutineLLVMName + " (" + pointer + "* %ioArray)" + llvmAttributeFunction () + "{\n"
+  ioLLVMcode += "  %buffer.pointer = load " + pointer + ", " + pointer + "* %ioArray\n"
+  ioLLVMcode += "  call void @arc.release (" + pointer + " %buffer.pointer)\n"
+  ioLLVMcode += "  store " + pointer + " 0, " + pointer + "* %ioArray\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+#---------- Method 'length()'
   let lengthRoutineMangledName = routineMangledNameFromAST (
     !llvmTypeStringFromPLMname (!mAnonymousDynamicArrayTypeName)
     !["length" nowhere]

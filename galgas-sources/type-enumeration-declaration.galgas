@@ -148,6 +148,7 @@ override method @enumerationDeclarationAST enterInContext
     !methodName:integerEnumAccessorName (!forBitCount:representationBitCount)
     !safe:true
     !resultTypeProxy:integerTypeProxy
+    !canMutateProperties:false
   ]
 #---------------- Insert enumeration in type map
   let enumerationType = @PLMType.new {
