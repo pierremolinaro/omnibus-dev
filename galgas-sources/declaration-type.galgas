@@ -77,7 +77,7 @@ override getter @newTypeDeclaration keyRepresentationForErrorSignaling -> @strin
 override method @newTypeDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -91,6 +91,7 @@ override method @newTypeDeclaration enterInContext
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mNewTypeName ?let newTypeProxy]
   let oldPropertyMap = type.propertyMap
   type.propertyMap = {}
+  @newTypeDecoratedMethodList newTypeDecoratedMethodList = {}
   for (propertyName public access) in oldPropertyMap do
     switch access 
     case constantProperty (*) :
@@ -117,18 +118,19 @@ override method @newTypeDeclaration enterInContext
         !safe: oldDescriptor.safe
       }
       [!?type.propertyMap insertKey !propertyName !public !.nonVirtualMethod {!descriptor:newDescriptor}]
+      newTypeDecoratedMethodList += !newDescriptor !newSignatureAST
     #--- Enter in invocation graph
       let routineNameForInvocationGraph = routineMangledNameFromAST (
         !llvmTypeStringFromPLMname (!mNewTypeName)
         ![oldDescriptor.name nowhere]
         !newSignatureAST
       )
-      log routineNameForInvocationGraph
       [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
     end
   end
 #---------- Enter in type map
   [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:type !index:[ioContext.mTypeMap count]]
+  ioDecoratedDeclarationList += !@newTypeDecoratedDeclaration.new {!newTypeProxy !newTypeDecoratedMethodList !originalTypeProxy}
 #---------- Enter infix operators
   let newNewInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !mNewTypeName.string)
   let aliasAliasInfixKey = combineTypeNamesForInfixOperator (!mOriginalTypeName.string !mOriginalTypeName.string)
@@ -459,6 +461,93 @@ private proc enterNewTypeInfixOperator
       !resultType
       !operation
     ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @newTypeDecoratedMethodList {
+  @routineDescriptor mRoutineDescriptor
+  @routineFormalArgumentListAST mFormalArgumentListAST
+}
+
+#·······················································································································
+
+class @newTypeDecoratedDeclaration : @abstractDecoratedDeclaration {
+  @unifiedTypeMap-proxy mNewTypeProxy
+  @newTypeDecoratedMethodList mNewTypeDecoratedMethodList
+  @unifiedTypeMap-proxy mOldTypeProxy
+}
+
+#·······················································································································
+
+override method @newTypeDecoratedDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#----------- Generate enumeration specific code
+  ioIntermediateCodeStruct.mGenerationListIR += !@newTypeIR.new {!mNewTypeProxy !mNewTypeDecoratedMethodList !mOldTypeProxy}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @newTypeIR : @abstractGenerationIR {
+  @unifiedTypeMap-proxy mNewTypeProxy
+  @newTypeDecoratedMethodList mNewTypeDecoratedMethodList
+  @unifiedTypeMap-proxy mOldTypeProxy
+}
+
+#·······················································································································
+
+override method @newTypeIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
+  for (descriptor formalArgumentListAST) in mNewTypeDecoratedMethodList do
+    let oldRoutineMangledName = routineMangledNameFromAST (
+      !llvmTypeStringFromPLMname (![mOldTypeProxy type].plmUserTypeName)
+      ![descriptor.name nowhere]
+      !formalArgumentListAST
+    )
+    let oldRoutineLLVMName = llvmNameForFunction (!oldRoutineMangledName.string)
+    let newRoutineMangledName = routineMangledNameFromAST (
+      !llvmTypeStringFromPLMname (![mNewTypeProxy type].plmUserTypeName)
+      ![descriptor.name nowhere]
+      !formalArgumentListAST
+    )
+    let newRoutineLLVMName = llvmNameForFunction (!newRoutineMangledName.string)
+    let returnTypeLLVMName = if descriptor.returnTypeProxy == .null then
+      "void"
+    else
+      [[descriptor.returnTypeProxy type] llvmTypeName]
+    end
+    ioLLVMcode += llvmTitleComment (!newRoutineMangledName)
+    ioLLVMcode += "define internal " + returnTypeLLVMName + " @" + newRoutineLLVMName + " ("
+    var s = [[mNewTypeProxy type] llvmTypeName] + "* %receiver"
+    for (formalArgumentPassingMode * typeProxy) in descriptor.signature do (idx)
+      s += ", " + [[typeProxy type] llvmTypeName]
+      switch formalArgumentPassingMode
+      case input :
+      case inputOutput, output :
+        s += "*"
+      end
+      s += " %arg." + idx
+    end
+    ioLLVMcode +=  s + ")" + llvmAttributeFunction () + "{\n"
+    if descriptor.returnTypeProxy == .null then
+       ioLLVMcode += "  call void @"
+    else
+      ioLLVMcode += "  %result = call " + returnTypeLLVMName + " @"
+    end
+    ioLLVMcode += oldRoutineLLVMName + " (" + s + ")\n"
+    if descriptor.returnTypeProxy == .null then
+      ioLLVMcode += "  ret void\n"
+    else
+      ioLLVMcode += "  ret " + [[descriptor.returnTypeProxy type] llvmTypeName] + " %result\n"
+    end
+    ioLLVMcode += "}\n\n"
   end
 }
 

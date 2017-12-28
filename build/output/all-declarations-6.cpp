@@ -1054,6 +1054,339 @@ GALGAS_newTypeDeclaration GALGAS_newTypeDeclaration::extractObject (const GALGAS
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy::GALGAS_unifiedTypeMap_2D_proxy (void) :
+AC_GALGAS_uniqueMapProxy () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_null (LOCATION_ARGS) {
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  result.makeNullProxy (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeOptionalProxy (GALGAS_unifiedTypeMap & ioMap,
+                                                                     GALGAS_lstring inKey,
+                                                                     GALGAS_unifiedTypeMap_2D_proxy & outProxy
+                                                                     COMMA_LOCATION_ARGS) {
+  outProxy.internalMakeOptionalProxy (ioMap, inKey COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (GALGAS_unifiedTypeMap & ioMap,
+                                                             GALGAS_lstring inKey,
+                                                             GALGAS_unifiedTypeMap_2D_proxy & outProxy
+                                                             COMMA_LOCATION_ARGS) {
+  outProxy.internalMakeProxy (ioMap, inKey COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxyFromString (GALGAS_unifiedTypeMap & ioMap,
+                                                                       GALGAS_string inKey,
+                                                                       GALGAS_unifiedTypeMap_2D_proxy & outProxy
+                                                                       COMMA_LOCATION_ARGS) {
+  outProxy.internalMakeProxyFromString (ioMap, inKey COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMType GALGAS_unifiedTypeMap_2D_proxy::getter_type (C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
+  GALGAS_PLMType result ;
+  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) getAttributeListPointer (inCompiler, "type" COMMA_THERE) ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
+    result = p->mProperty_type;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_unifiedTypeMap_2D_proxy::getter_index (C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
+  GALGAS_uint result ;
+  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) getAttributeListPointer (inCompiler, "index" COMMA_THERE) ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
+    result = p->mProperty_index;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (const GALGAS_unifiedTypeMap & inMap,
+                                                                                      const GALGAS_lstring & inKey,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedTypeMap_searchKey, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @unifiedTypeMap-proxy type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ("unifiedTypeMap-proxy",
+                                                NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_unifiedTypeMap_2D_proxy::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_unifiedTypeMap_2D_proxy::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_unifiedTypeMap_2D_proxy (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::extractObject (const GALGAS_object & inObject,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  const GALGAS_unifiedTypeMap_2D_proxy * p = (const GALGAS_unifiedTypeMap_2D_proxy *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_unifiedTypeMap_2D_proxy *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("unifiedTypeMap-proxy", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_newTypeIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_newTypeIR * p = (const cPtr_newTypeIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_newTypeIR) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mNewTypeProxy.objectCompare (p->mProperty_mNewTypeProxy) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mNewTypeDecoratedMethodList.objectCompare (p->mProperty_mNewTypeDecoratedMethodList) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mOldTypeProxy.objectCompare (p->mProperty_mOldTypeProxy) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_newTypeIR::objectCompare (const GALGAS_newTypeIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_newTypeIR::GALGAS_newTypeIR (void) :
+GALGAS_abstractGenerationIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_newTypeIR GALGAS_newTypeIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_newTypeIR::constructor_new (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
+                                            GALGAS_newTypeDecoratedMethodList::constructor_emptyList (HERE),
+                                            GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE)
+                                            COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_newTypeIR::GALGAS_newTypeIR (const cPtr_newTypeIR * inSourcePtr) :
+GALGAS_abstractGenerationIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_newTypeIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_newTypeIR GALGAS_newTypeIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mNewTypeProxy,
+                                                    const GALGAS_newTypeDecoratedMethodList & inAttribute_mNewTypeDecoratedMethodList,
+                                                    const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mOldTypeProxy
+                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_newTypeIR result ;
+  if (inAttribute_mNewTypeProxy.isValid () && inAttribute_mNewTypeDecoratedMethodList.isValid () && inAttribute_mOldTypeProxy.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_newTypeIR (inAttribute_mNewTypeProxy, inAttribute_mNewTypeDecoratedMethodList, inAttribute_mOldTypeProxy COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_newTypeIR::getter_mNewTypeProxy (UNUSED_LOCATION_ARGS) const {
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_newTypeIR * p = (const cPtr_newTypeIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_newTypeIR) ;
+    result = p->mProperty_mNewTypeProxy ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cPtr_newTypeIR::getter_mNewTypeProxy (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mNewTypeProxy ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_newTypeDecoratedMethodList GALGAS_newTypeIR::getter_mNewTypeDecoratedMethodList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_newTypeDecoratedMethodList result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_newTypeIR * p = (const cPtr_newTypeIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_newTypeIR) ;
+    result = p->mProperty_mNewTypeDecoratedMethodList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_newTypeDecoratedMethodList cPtr_newTypeIR::getter_mNewTypeDecoratedMethodList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mNewTypeDecoratedMethodList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_newTypeIR::getter_mOldTypeProxy (UNUSED_LOCATION_ARGS) const {
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_newTypeIR * p = (const cPtr_newTypeIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_newTypeIR) ;
+    result = p->mProperty_mOldTypeProxy ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cPtr_newTypeIR::getter_mOldTypeProxy (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mOldTypeProxy ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                         Pointer class for @newTypeIR class                                          *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_newTypeIR::cPtr_newTypeIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mNewTypeProxy,
+                                const GALGAS_newTypeDecoratedMethodList & in_mNewTypeDecoratedMethodList,
+                                const GALGAS_unifiedTypeMap_2D_proxy & in_mOldTypeProxy
+                                COMMA_LOCATION_ARGS) :
+cPtr_abstractGenerationIR (THERE),
+mProperty_mNewTypeProxy (in_mNewTypeProxy),
+mProperty_mNewTypeDecoratedMethodList (in_mNewTypeDecoratedMethodList),
+mProperty_mOldTypeProxy (in_mOldTypeProxy) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_newTypeIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_newTypeIR ;
+}
+
+void cPtr_newTypeIR::description (C_String & ioString,
+                                  const int32_t inIndentation) const {
+  ioString << "[@newTypeIR:" ;
+  mProperty_mNewTypeProxy.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mNewTypeDecoratedMethodList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mOldTypeProxy.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_newTypeIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_newTypeIR (mProperty_mNewTypeProxy, mProperty_mNewTypeDecoratedMethodList, mProperty_mOldTypeProxy COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                   @newTypeIR type                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_newTypeIR ("newTypeIR",
+                                  & kTypeDescriptor_GALGAS_abstractGenerationIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_newTypeIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_newTypeIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_newTypeIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_newTypeIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_newTypeIR GALGAS_newTypeIR::extractObject (const GALGAS_object & inObject,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_newTypeIR result ;
+  const GALGAS_newTypeIR * p = (const GALGAS_newTypeIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_newTypeIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("newTypeIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -7083,128 +7416,6 @@ GALGAS_decoratedRequiredDriver GALGAS_decoratedRequiredDriver::extractObject (co
       result = *p ;
     }else{
       inCompiler->castError ("decoratedRequiredDriver", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy::GALGAS_unifiedTypeMap_2D_proxy (void) :
-AC_GALGAS_uniqueMapProxy () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_null (LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  result.makeNullProxy (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeOptionalProxy (GALGAS_unifiedTypeMap & ioMap,
-                                                                     GALGAS_lstring inKey,
-                                                                     GALGAS_unifiedTypeMap_2D_proxy & outProxy
-                                                                     COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeOptionalProxy (ioMap, inKey COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (GALGAS_unifiedTypeMap & ioMap,
-                                                             GALGAS_lstring inKey,
-                                                             GALGAS_unifiedTypeMap_2D_proxy & outProxy
-                                                             COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeProxy (ioMap, inKey COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxyFromString (GALGAS_unifiedTypeMap & ioMap,
-                                                                       GALGAS_string inKey,
-                                                                       GALGAS_unifiedTypeMap_2D_proxy & outProxy
-                                                                       COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeProxyFromString (ioMap, inKey COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType GALGAS_unifiedTypeMap_2D_proxy::getter_type (C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  GALGAS_PLMType result ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) getAttributeListPointer (inCompiler, "type" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mProperty_type;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint GALGAS_unifiedTypeMap_2D_proxy::getter_index (C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_uint result ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) getAttributeListPointer (inCompiler, "index" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mProperty_index;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (const GALGAS_unifiedTypeMap & inMap,
-                                                                                      const GALGAS_lstring & inKey,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedTypeMap_searchKey, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @unifiedTypeMap-proxy type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ("unifiedTypeMap-proxy",
-                                                NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_unifiedTypeMap_2D_proxy::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_unifiedTypeMap_2D_proxy::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_unifiedTypeMap_2D_proxy (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::extractObject (const GALGAS_object & inObject,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  const GALGAS_unifiedTypeMap_2D_proxy * p = (const GALGAS_unifiedTypeMap_2D_proxy *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_unifiedTypeMap_2D_proxy *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("unifiedTypeMap-proxy", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
