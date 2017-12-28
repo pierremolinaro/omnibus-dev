@@ -11,6 +11,8 @@ unsigned insulate (unsigned inPointer) asm ("arc.insulate") ;
 unsigned insertAtIndex (unsigned inPointer, unsigned inIndex, unsigned inElementSize, unsigned* outElementPtr)
 asm ("arc.insert.at.index") ;
 
+unsigned bufferLength (unsigned inPointer) asm ("arc.length") ;
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 void retain (unsigned inPointer) {
@@ -38,6 +40,20 @@ void release (unsigned inPointer) {
 unsigned insulate (unsigned inPointer) {
   return (unsigned) internalInsulate ((DataBufferHeaderType *) inPointer) ;
 }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  BUFFER LENGTH
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+unsigned bufferLength (unsigned inPointer) {
+  unsigned length = 0 ;
+  if (inPointer != 0) {
+    const DataBufferHeaderType * p = (const DataBufferHeaderType *) inPointer ;
+    length = p->mLength ;
+  }
+  return length ;
+}
+
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

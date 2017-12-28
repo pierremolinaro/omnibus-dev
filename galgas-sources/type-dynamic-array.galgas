@@ -214,7 +214,6 @@ override method @dynamicArrayIR generateLLVMcode
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
   let pointer = "i" + mPtrSize
   let elementLLVMTypeName = [mElementType llvmTypeName]
-  let bufferLengthFunctionName = llvmNameForFunction (!"arc.buffer.length")
 #---------- Method 'removeAll()'
   let removeAllRoutineMangledName = routineMangledNameFromAST (
     !llvmTypeStringFromPLMname (!mAnonymousDynamicArrayTypeName)
@@ -239,7 +238,7 @@ override method @dynamicArrayIR generateLLVMcode
   ioLLVMcode += llvmTitleComment (!lengthRoutineMangledName)
   ioLLVMcode += "define internal i32 @" + lengthRoutineLLVMName + " (" + pointer + "* %ioArray)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  %buffer.pointer = load " + pointer + ", " + pointer + "* %ioArray\n"
-  ioLLVMcode += "  %length = call i32 @" + bufferLengthFunctionName + "(" + pointer + " %buffer.pointer)\n"
+  ioLLVMcode += "  %length = call i32 @arc.length (" + pointer + " %buffer.pointer)\n"
   ioLLVMcode += "  ret i32 %length\n"
   ioLLVMcode += "}\n\n"
 #---------- Method 'insert(?:?atIndex:)'
@@ -308,8 +307,7 @@ override method @dynamicArrayIR generateLLVMcode
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += ";--- Get buffer length\n"
   ioLLVMcode += "  %current.buffer.pointer = load " + pointer + ", " + pointer + "* %ioArray\n"
-  ioLLVMcode += "  %current.buffer.length = call " + pointer + " @" + bufferLengthFunctionName
-             +  " (" + pointer + " %current.buffer.pointer)\n"
+  ioLLVMcode += "  %current.buffer.length = call " + pointer + " @arc.length (" + pointer + " %current.buffer.pointer)\n"
   ioLLVMcode += ";--- Insert\n"
   ioLLVMcode += "  call void @" + insertRoutineLLVMName
              + "(" + pointer + "* %ioArray, " + elementLLVMTypeName + " %inValue, i32 %current.buffer.length)\n"
