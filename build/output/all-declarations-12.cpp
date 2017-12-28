@@ -831,7 +831,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1/unp
   "    digital.write (!no !toPort:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:time.now ())\n"
+  "    lcd.print (!u32:time.now ())\n"
   "    self.continue = time.now () < 10_000\n"
   "  }\n"
   "}\n"
@@ -842,7 +842,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  1296, // Text length
+  1291, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -893,7 +893,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unp
   "    digital.write (!no !toPort:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:time.now ())\n"
+  "    lcd.print (!u32:time.now ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -959,7 +959,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3090, // Text length
+  3085, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -1095,7 +1095,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "      let t0 = getSysTick ()\n"
   "      let t1 = getSysTick ()\n"
   "      cumul += t0 - t1\n"
-  "      lcd.print (!unsigned:t0 - t1)\n"
+  "      lcd.print (!u32:t0 - t1)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
   "    let systickDuration = cumul / ITERATIONS\n"
@@ -1106,7 +1106,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "      let t0 = getSysTick ()\n"
   "      emptySection ()\n"
   "      let t1 = getSysTick ()\n"
-  "      lcd.print (!unsigned:t0 - t1 - systickDuration)\n"
+  "      lcd.print (!u32:t0 - t1 - systickDuration)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
   "  //--- Compute emptyService duration\n"
@@ -1116,7 +1116,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "      let t0 = getSysTick ()\n"
   "      emptyService ()\n"
   "      let t1 = getSysTick ()\n"
-  "      lcd.print (!unsigned:t0 - t1 - systickDuration)\n"
+  "      lcd.print (!u32:t0 - t1 - systickDuration)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
   "  }\n"
@@ -1132,7 +1132,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  2389, // Text length
+  2374, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1342,7 +1342,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1/unp
   "      \xC3""\xA9""l\xC3""\xA9""ment.p (!\?par: total)\n"
   "    }\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:total)\n"
+  "    lcd.print (!u32:total)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1352,7 +1352,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "07-static-list-example.plm",
   "plm",
   true, // Text file
-  2208, // Text length
+  2203, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1670,7 +1670,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/un
   "    digital.toggle (!port:LED_L1)\n"
   "    s.wait ()\n"
   "      lcd.goto (!line:0 !column:0)\n"
-  "      lcd.print (!unsigned:x)\n"
+  "      lcd.print (!u32:x)\n"
   "    s.signal ()\n"
   "  }\n"
   "}\n"
@@ -1685,7 +1685,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/un
   "    digital.toggle (!port:LED_L2)\n"
   "    s.wait ()\n"
   "      lcd.goto (!line:1 !column:0)\n"
-  "      lcd.print (!unsigned:self.n)\n"
+  "      lcd.print (!u32:self.n)\n"
   "    s.signal ()\n"
   "    self.n += 1\n"
   "  }\n"
@@ -1702,7 +1702,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "10-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  3151, // Text length
+  3141, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
@@ -1782,7 +1782,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "    lcd.goto (!line:1 !column:0)\n"
   "    var value $uint32\n"
   "    pit.getPITValue (\?value)\n"
-  "    lcd.print (!unsigned:value)\n"
+  "    lcd.print (!u32:value)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1792,7 +1792,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  2047, // Text length
+  2042, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -1860,7 +1860,7 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/un
   "    self.array2 = self.array \n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    for i $uint32 in 0 ..< $A.count {\n"
-  "      lcd.print (!unsigned:self.array2 [i])\n"
+  "      lcd.print (!u32:self.array2 [i])\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
   "    \n"
@@ -1887,7 +1887,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1948, // Text length
+  1943, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 
@@ -2027,9 +2027,9 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-6/un
   "    digital.write (!no !toPort:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    lcd.print (!unsigned:time.now ())\n"
+  "    lcd.print (!u32:time.now ())\n"
   "    lcd.goto (!line:2 !column:0)\n"
-  "    lcd.print (!unsigned:freeStackSize ())\n"
+  "    lcd.print (!u32:freeStackSize ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2095,7 +2095,7 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3216, // Text length
+  3206, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 
@@ -2308,10 +2308,10 @@ const char * gWrapperFileContent_16_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    digital.write (!no !toPort:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:self.pattern.count)\n"
+  "    lcd.print (!u32:self.pattern.count)\n"
   "    lcd.print (!string:\" \")\n"
   "    let cc = $isrSlot.PITChannel3.uint7 ()\n"
-  "    lcd.print (!unsigned:extend (cc))\n"
+  "    lcd.print (!u32:extend (cc))\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2321,7 +2321,7 @@ const cRegularFileWrapper gWrapperFile_16_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  8244, // Text length
+  8234, // Text length
   gWrapperFileContent_16_embeddedSampleCode
 ) ;
 
@@ -2375,7 +2375,7 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/un
   "    digital.write (!no !toPort:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:$patternArray.count)\n"
+  "    lcd.print (!u32:$patternArray.count)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2385,7 +2385,7 @@ const cRegularFileWrapper gWrapperFile_17_embeddedSampleCode (
   "04-large-structure.plm",
   "plm",
   true, // Text file
-  1825, // Text length
+  1820, // Text length
   gWrapperFileContent_17_embeddedSampleCode
 ) ;
 
@@ -2571,15 +2571,15 @@ const char * gWrapperFileContent_19_embeddedSampleCode = "target \"teensy-3-6/un
   "    let tick = timer.now ()\n"
   "    digital.toggle (!port:LED_L0)\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:self.compteur)\n"
+  "    lcd.print (!u32:self.compteur)\n"
   "    lcd.goto (!line:1 !column:0)\n"
   "    lcd.print (!u64:tick.raw () / F_BUS_MHZ)\n"
   "    lcd.goto (!line:2 !column:0)\n"
-  "    lcd.print (!unsigned:tick.s ())\n"
+  "    lcd.print (!u32:tick.s ())\n"
   "    lcd.print (!string:\" \")\n"
-  "    lcd.print (!unsigned:tick.ms ())\n"
+  "    lcd.print (!u32:tick.ms ())\n"
   "    lcd.print (!string:\" \")\n"
-  "    lcd.print (!unsigned:tick.\xC2""\xB5""s ())\n"
+  "    lcd.print (!u32:tick.\xC2""\xB5""s ())\n"
   "    self.compteur +%= 1_001\n"
   "  }\n"
   "}\n"
@@ -2590,7 +2590,7 @@ const cRegularFileWrapper gWrapperFile_19_embeddedSampleCode (
   "06-chained-pit-0-1.plm",
   "plm",
   true, // Text file
-  3250, // Text length
+  3230, // Text length
   gWrapperFileContent_19_embeddedSampleCode
 ) ;
 
@@ -2825,7 +2825,7 @@ const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/un
   "   \n"
   "  on buffer.read (\?var value $uint32) {\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!unsigned:value)\n"
+  "    lcd.print (!u32:value)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2835,7 +2835,7 @@ const cRegularFileWrapper gWrapperFile_21_embeddedSampleCode (
   "08-synchronization-buffer.plm",
   "plm",
   true, // Text file
-  3416, // Text length
+  3411, // Text length
   gWrapperFileContent_21_embeddedSampleCode
 ) ;
 
@@ -3001,7 +3001,7 @@ const cRegularFileWrapper gWrapperFile_23_embeddedSampleCode (
 //--- File 'teensy-3-6/11-heap.plm'
 
 const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
-  "let F_CPU_MHZ = 180\n"
+  "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"
@@ -3081,15 +3081,11 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "    if self.freeRam \xE2""\x89""\xA0"" freeRam {\n"
   "      self.freeRam = freeRam\n"
   "      lcd.goto (!line:0 !column:6)\n"
-  "      lcd.print (!spaces:6)\n"
-  "      lcd.goto (!line:0 !column:6)\n"
-  "      lcd.print (!unsigned:freeRam)\n"
+  "      lcd.print (!u32:freeRam !width:6)\n"
   "    }\n"
   "    let start = heapStartAddress ()\n"
   "    if self.start \xE2""\x89""\xA0"" start {\n"
   "      self.start = start\n"
-  "      lcd.goto (!line:1 !column:6)\n"
-  "      lcd.print (!spaces:6)\n"
   "      lcd.goto (!line:1 !column:6)\n"
   "      lcd.print (!hex8:start)\n"
   "    }\n"
@@ -3097,25 +3093,19 @@ const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/un
   "    if self.end \xE2""\x89""\xA0"" end {\n"
   "      self.end = end\n"
   "      lcd.goto (!line:2 !column:6)\n"
-  "      lcd.print (!spaces:6)\n"
-  "      lcd.goto (!line:2 !column:6)\n"
   "      lcd.print (!hex8:end)\n"
   "    }\n"
   "    let alloc = totalAllocationObjectCount ()\n"
   "    if self.alloc \xE2""\x89""\xA0"" alloc {\n"
   "      self.alloc = alloc\n"
   "      lcd.goto (!line:3 !column:0)\n"
-  "      lcd.print (!spaces:6)\n"
-  "      lcd.goto (!line:3 !column:0)\n"
-  "      lcd.print (!unsigned:alloc)\n"
+  "      lcd.print (!u32:alloc !width:10)\n"
   "    }\n"
   "    let current = currentlyAllocatedObjectCount ()\n"
   "    if self.current \xE2""\x89""\xA0"" current {\n"
   "      self.current = current\n"
   "      lcd.goto (!line:3 !column:17)\n"
-  "      lcd.print (!spaces:2)\n"
-  "      lcd.goto (!line:3 !column:17)\n"
-  "      lcd.print (!unsigned:current)\n"
+  "      lcd.print (!u32:current !width:3)\n"
   "    }\n"
   "  }\n"
   "}\n"
@@ -3205,7 +3195,7 @@ const cRegularFileWrapper gWrapperFile_24_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5907, // Text length
+  5604, // Text length
   gWrapperFileContent_24_embeddedSampleCode
 ) ;
 
@@ -3263,7 +3253,7 @@ const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/un
   "      let t0 = getSysTick ()\n"
   "      let t1 = getSysTick ()\n"
   "      cumul += t0 - t1\n"
-  "      lcd.print (!unsigned:t0 - t1)\n"
+  "      lcd.print (!u32:t0 - t1)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
   "    let systickDuration = cumul / ITERATIONS\n"
@@ -3274,7 +3264,7 @@ const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/un
   "      let t0 = getSysTick ()\n"
   "      emptySection ()\n"
   "      let t1 = getSysTick ()\n"
-  "      lcd.print (!unsigned:t0 - t1 - systickDuration)\n"
+  "      lcd.print (!u32:t0 - t1 - systickDuration)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
   "  //--- Compute emptyService duration\n"
@@ -3284,7 +3274,7 @@ const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/un
   "      let t0 = getSysTick ()\n"
   "      emptyService ()\n"
   "      let t1 = getSysTick ()\n"
-  "      lcd.print (!unsigned:t0 - t1 - systickDuration)\n"
+  "      lcd.print (!u32:t0 - t1 - systickDuration)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
   "  }\n"
@@ -3300,7 +3290,7 @@ const cRegularFileWrapper gWrapperFile_25_embeddedSampleCode (
   "12-section-service-duration.plm",
   "plm",
   true, // Text file
-  2409, // Text length
+  2394, // Text length
   gWrapperFileContent_25_embeddedSampleCode
 ) ;
 

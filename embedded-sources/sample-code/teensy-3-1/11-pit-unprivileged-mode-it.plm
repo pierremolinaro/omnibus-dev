@@ -72,7 +72,7 @@ task T priority 12 stackSize 512 {
     lcd.goto (!line:1 !column:0)
     var value $uint32
     pit.getPITValue (?value)
-    lcd.print (!unsigned:value)
+    lcd.print (!u32:value)
   }
 }
 

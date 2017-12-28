@@ -1,5 +1,5 @@
 target "teensy-3-6/unprivileged"
-let F_CPU_MHZ = 180
+let F_CPU_MHZ = 240
 
 driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
@@ -79,15 +79,11 @@ task T1 priority 10 stackSize 512 {
     if self.freeRam ≠ freeRam {
       self.freeRam = freeRam
       lcd.goto (!line:0 !column:6)
-      lcd.print (!spaces:6)
-      lcd.goto (!line:0 !column:6)
-      lcd.print (!unsigned:freeRam)
+      lcd.print (!u32:freeRam !width:6)
     }
     let start = heapStartAddress ()
     if self.start ≠ start {
       self.start = start
-      lcd.goto (!line:1 !column:6)
-      lcd.print (!spaces:6)
       lcd.goto (!line:1 !column:6)
       lcd.print (!hex8:start)
     }
@@ -95,25 +91,19 @@ task T1 priority 10 stackSize 512 {
     if self.end ≠ end {
       self.end = end
       lcd.goto (!line:2 !column:6)
-      lcd.print (!spaces:6)
-      lcd.goto (!line:2 !column:6)
       lcd.print (!hex8:end)
     }
     let alloc = totalAllocationObjectCount ()
     if self.alloc ≠ alloc {
       self.alloc = alloc
       lcd.goto (!line:3 !column:0)
-      lcd.print (!spaces:6)
-      lcd.goto (!line:3 !column:0)
-      lcd.print (!unsigned:alloc)
+      lcd.print (!u32:alloc !width:10)
     }
     let current = currentlyAllocatedObjectCount ()
     if self.current ≠ current {
       self.current = current
       lcd.goto (!line:3 !column:17)
-      lcd.print (!spaces:2)
-      lcd.goto (!line:3 !column:17)
-      lcd.print (!unsigned:current)
+      lcd.print (!u32:current !width:3)
     }
   }
 }

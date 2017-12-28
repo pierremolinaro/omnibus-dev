@@ -90,15 +90,15 @@ task Tâche priority 1 stackSize 512 {
     let tick = timer.now ()
     digital.toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)
-    lcd.print (!unsigned:self.compteur)
+    lcd.print (!u32:self.compteur)
     lcd.goto (!line:1 !column:0)
     lcd.print (!u64:tick.raw () / F_BUS_MHZ)
     lcd.goto (!line:2 !column:0)
-    lcd.print (!unsigned:tick.s ())
+    lcd.print (!u32:tick.s ())
     lcd.print (!string:" ")
-    lcd.print (!unsigned:tick.ms ())
+    lcd.print (!u32:tick.ms ())
     lcd.print (!string:" ")
-    lcd.print (!unsigned:tick.µs ())
+    lcd.print (!u32:tick.µs ())
     self.compteur +%= 1_001
   }
 }

@@ -46,7 +46,7 @@ task Tâche priority 1 stackSize 5512 {
     digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.print (!unsigned:$patternArray.count)
+    lcd.print (!u32:$patternArray.count)
   }
 }
 

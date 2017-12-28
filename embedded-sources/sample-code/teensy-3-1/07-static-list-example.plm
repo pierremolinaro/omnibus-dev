@@ -77,7 +77,7 @@ task T priority 12 stackSize 512 {
       élément.p (!?par: total)
     }
     lcd.goto (!line:0 !column:0)
-    lcd.print (!unsigned:total)
+    lcd.print (!u32:total)
   }
 }
 

@@ -86,7 +86,7 @@ task T1 priority 1 stackSize 1024 {
     digital.toggle (!port:LED_L1)
     s.wait ()
       lcd.goto (!line:0 !column:0)
-      lcd.print (!unsigned:x)
+      lcd.print (!u32:x)
     s.signal ()
   }
 }
@@ -101,7 +101,7 @@ task T2 priority 2 stackSize 1024 {
     digital.toggle (!port:LED_L2)
     s.wait ()
       lcd.goto (!line:1 !column:0)
-      lcd.print (!unsigned:self.n)
+      lcd.print (!u32:self.n)
     s.signal ()
     self.n += 1
   }
