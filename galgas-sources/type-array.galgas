@@ -23,7 +23,7 @@ syntax extension plm_syntax {
     <expression> !?ioAST ?let sizeExpression
     let sizeExpressionLocation = @location.here
     $]$
-    outTypeName = ["anonymous.array." + ioAST.mTypeDeclarationIndex here]
+    outTypeName = ["array." + ioAST.mTypeDeclarationIndex here]
     ioAST.mTypeDeclarationIndex ++
     ioAST.mDeclarationListAST += !@typeArrayDeclarationAST.new {
       !outTypeName

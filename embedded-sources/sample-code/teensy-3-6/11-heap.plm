@@ -37,11 +37,13 @@ driver project > digital {
 
 driver project ()
 
+newtype $dArray : [$uint8]
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $structWithARC {
   public var unEntierQuelconque $uint32 = 0
-  public var donnée = $dynamicBuffer ()
+  public var donnée = $dArray ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -49,7 +51,7 @@ struct $structWithARC {
 struct $autreStructWithARC {
   public var autreEntierQuelconque $uint32 = 0
   public var structure = $structWithARC ()
-  public var autreDonnée = $dynamicBuffer ()
+  public var autreDonnée = $dArray ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -122,8 +124,8 @@ task T2 priority 5 stackSize 512 {
   var échéance1 $uint32 = 2001
   var échéance2 $uint32 = 2001
   var échéance3 $uint32 = 2001
-  var data1 = $dynamicBuffer ()
-  var data2 = $dynamicBuffer ()
+  var data1 = $dArray ()
+  var data2 = $dArray ()
   var structure = $autreStructWithARC ()
   var b $uint8 = 0
 
@@ -131,15 +133,15 @@ task T2 priority 5 stackSize 512 {
     self.échéance1 +%= 71
     digital.toggle (!port:LED_L4)
     if digital.read (!port:PUSH_P0) {
-      if lengthOf (!buffer:self.data1) < 500 {
-        append (!byte:self.b !?toBuffer:self.data1)
+      if self.data1.length () < 500 {
+        self.data1.append (!self.b)
         self.b +%= 1
         // assert (self.b < 25) // For checking assert instruction
       }else{
-        removeAll (!?fromBuffer:self.data1)
+        self.data1.removeAll ()
       }
     }else{
-      removeAll (!?fromBuffer:self.data1)
+      self.data1.removeAll ()
     }
   }
 
@@ -154,7 +156,7 @@ task T2 priority 5 stackSize 512 {
     self.testReleaseLocalVar (!in:self.structure.structure.donnée)
   }
   
-  func testReleaseLocalVar (?in: inData $dynamicBuffer) {
+  func testReleaseLocalVar (?in: inData $dArray) {
     var d = $structWithARC ()
     d.donnée = inData
   }
@@ -163,23 +165,23 @@ task T2 priority 5 stackSize 512 {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T3 priority 100 stackSize 512 {
-  var data = $dynamicBuffer ()
+  var data = $dArray ()
  
   on time.wait (!untilDeadline:0) {
     digital.toggle (!port:LED_L0)
     if digital.read (!port:PUSH_P0) {
-      if lengthOf (!buffer:self.data) == 0 {
-        append (!byte:0 !?toBuffer:self.data)
+      if self.data.length () == 0 {
+        self.data.append (!0)
         self.testReleaseLocalVar (!in:self.data)
       }else{
-        removeAll (!?fromBuffer:self.data)
+        self.data.removeAll ()
       }
     }else{
-      removeAll (!?fromBuffer:self.data)
+      self.data.removeAll ()
     }
   }
 
-  func testReleaseLocalVar (?in: inData $dynamicBuffer) {
+  func testReleaseLocalVar (?in: inData $dArray) {
     externalSection (!in:inData)
   }
 
@@ -187,9 +189,9 @@ task T3 priority 100 stackSize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-system section externalSection (?in: inData $dynamicBuffer) {
+system section externalSection (?in: inData $dArray) {
   var d = inData
-  append (!byte:0 !?toBuffer:d)
+  d.append (!0)
   var xxxx = [$bool] ()
   xxxx.append (!yes)
   var lg = xxxx.length ()
