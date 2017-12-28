@@ -88,7 +88,7 @@ override method @newTypeDeclaration enterInContext
 #--- Enter in type map
   [ioContext.mTypeMap searchKey !lkey:mAliasedTypeName ?type:var type ?1*]
 #--- Set new type name
-  type.plmTypeName = mNewTypeName.string
+  type.plmUserTypeName = mNewTypeName.string
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:type !index:[ioContext.mTypeMap count]
 ]

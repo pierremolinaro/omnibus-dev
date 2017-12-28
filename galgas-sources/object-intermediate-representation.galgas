@@ -128,8 +128,8 @@ getter @objectIR llvmTypeName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @objectIR plmTypeName -> @string {
-  result = [self type].plmTypeName
+getter @objectIR plmUserTypeName -> @string {
+  result = [self type].plmUserTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

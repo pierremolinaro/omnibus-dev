@@ -799,7 +799,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
 
   public : GALGAS_PLMTypeAttributes mProperty_typeAttributes ;
 
-  public : GALGAS_string mProperty_plmTypeName ;
+  public : GALGAS_string mProperty_plmUserTypeName ;
 
   public : GALGAS_typeKind mProperty_kind ;
 
@@ -819,7 +819,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                            const GALGAS_constructorMap & in_constructorMap,
                            const GALGAS_guardMapForContext & in_guardMap,
                            const GALGAS_PLMTypeAttributes & in_typeAttributes,
-                           const GALGAS_string & in_plmTypeName,
+                           const GALGAS_string & in_plmUserTypeName,
                            const GALGAS_typeKind & in_kind) ;
 
 //-- Start of generic part --*
@@ -862,7 +862,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_typeKind getter_kind (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_plmTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_plmUserTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_propertyMap getter_propertyMap (LOCATION_ARGS) const ;
 

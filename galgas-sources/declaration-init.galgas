@@ -159,7 +159,7 @@ private proc initSemanticAnalysis
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
-  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.plmTypeName !inLocation)
+  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.plmUserTypeName !inLocation)
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]

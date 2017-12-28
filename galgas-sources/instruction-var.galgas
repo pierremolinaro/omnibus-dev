@@ -151,7 +151,7 @@ override method @varInstructionAST analyze
   let targetType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
 #---
   if not [targetType instanciable] then
-    error mVarName : "$" + targetType.plmTypeName + " type is not instanciable"
+    error mVarName : "$" + targetType.plmUserTypeName + " type is not instanciable"
   end
 #--- Declare local variable
   let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}

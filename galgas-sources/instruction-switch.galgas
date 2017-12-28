@@ -114,7 +114,7 @@ override method @switchInstructionAST analyze
 #    [[switchValueIR type].kind enumeration ?constantMap:enumConstantMap ?2*]
 #  else
     error mEndOf_test_expression
-      : "test expression type is '" + [switchValueIR plmTypeName] + "', it should be boolean"
+      : "test expression type is '" + [switchValueIR plmUserTypeName] + "', it should be boolean"
 #      : enumConstantMap
   end
   if [switchValueIR isStatic] then

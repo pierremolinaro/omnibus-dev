@@ -176,10 +176,10 @@ override method @integerSliceExpressionAST analyzeExpression
         case syncTool (*) :
           error expressionLocation: "an unsigned integer expression is required here"
         case boolean :
-          if [[expressionResult type] plmTypeName] != [expressionTargetType plmTypeName] then
+          if [[expressionResult type] plmUserTypeName] != [expressionTargetType plmUserTypeName] then
             error expressionLocation :
-            "an $" + [expressionTargetType plmTypeName] + " expression is required, found an $" +
-            [[expressionResult type] plmTypeName] + " expression"
+            "an $" + [expressionTargetType plmUserTypeName] + " expression is required, found an $" +
+            [[expressionResult type] plmUserTypeName] + " expression"
           end
           if [expressionResult isLiteralInteger] then
             [expressionResult literalInteger ?1* ?value:let @bigint value]

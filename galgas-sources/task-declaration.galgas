@@ -173,7 +173,7 @@ method @taskListAST enterInContext
       !constructorMap:{}
       !guardMap:{}
       !typeAttributes:.none
-      !plmTypeName:task.mTaskName
+      !plmUserTypeName:task.mTaskName
       !kind:.structure {!propertyList:propertyList}
     }
     [!?ioContext.mTypeMap insertType
@@ -340,7 +340,7 @@ private proc setupSemanticAnalysis
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
-  let routineNameForInvocationGraph = setupNameForInvocationGraph (!inSelfType.plmTypeName !inPriority)
+  let routineNameForInvocationGraph = setupNameForInvocationGraph (!inSelfType.plmUserTypeName !inPriority)
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]

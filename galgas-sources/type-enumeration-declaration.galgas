@@ -157,7 +157,7 @@ override method @enumerationDeclarationAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmTypeName:mEnumerationName
+    !plmUserTypeName:mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
   }
   [!?ioContext.mTypeMap insertType
