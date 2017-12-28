@@ -104,6 +104,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_nop,
    kToken_not,
    kToken_on,
+   kToken_opaque,
    kToken_or,
    kToken_panic,
    kToken_primitive,
@@ -214,7 +215,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 119 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 120 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -608,11 +609,10 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_property_5F_in_5F_extension_i14_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_type_5F_definition_i15_ (GALGAS_ast & ioArgument0,
-                                                               GALGAS_lstring & outArgument1,
-                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i15_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_type_5F_definition_i15_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i15_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i16_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;

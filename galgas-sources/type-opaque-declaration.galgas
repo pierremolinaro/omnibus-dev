@@ -17,23 +17,21 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
-    $[$
-    $[$
-    <expression> !?ioAST ?let sizeExpression
-    let sizeExpressionLocation = @location.here
-    $]$   
-    $]$   
-    outTypeName = ["opaque." + ioAST.mTypeDeclarationIndex here]
-    ioAST.mTypeDeclarationIndex ++
+  rule <declaration> ?!@ast ioAST {
+    $opaque$
+    $\$type$ ?let opaqueTypeName
     @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
+    ${$
+    <expression> !?ioAST ?let sizeExpression
+    let sizeExpressionLocation = @location.here
+    $}$
     ioAST.mDeclarationListAST += !@typeOpaqueDefinitionDeclaration.new {
-      !outTypeName
+      !opaqueTypeName
       !sizeExpression
       !sizeExpressionLocation
       !attributeList
