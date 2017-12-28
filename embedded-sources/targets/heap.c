@@ -226,19 +226,3 @@ static DataBufferHeaderType * internalInsulate (DataBufferHeaderType * inPointer
   return result ;
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//  BUFFER LENGTH
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-unsigned bufferLength (unsigned inPointer) asm ("!FUNC!arc.buffer.length") ;
-
-unsigned bufferLength (unsigned inPointer) {
-  unsigned length = 0 ;
-  if (inPointer != 0) {
-    const DataBufferHeaderType * p = (const DataBufferHeaderType *) inPointer ;
-    length = p->mLength ;
-  }
-  return length ;
-}
-
-

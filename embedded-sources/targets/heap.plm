@@ -1,5 +1,5 @@
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//   HEAP FUNCTIONS (IMPLEMENTED IN c-heap.c)                                                                                     
+//   HEAP FUNCTIONS (IMPLEMENTED IN heap.c)                                                                                     
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 //--- Heap stats
@@ -13,25 +13,5 @@ extern func totalAllocationObjectCount () -> $uint32 : "heap.total.allocation.ob
 
 extern func freeListCount () -> $uint32 : "heap.free.list.count"
 extern func freeObjectCount (?ForFreeList: inFreeListIndex $uint32) -> $uint32 : "heap.free.object.count.for.free.list"
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// $dynamicBuffer type
-
-newtype $dynamicBuffer : [[32]] @instantiable @arc
-
-extern func append (?byte:inByte $uint8 ?!toBuffer: ioBuffer $dynamicBuffer) : "dynamicBuffer.buffer.append.byte"
-
-extern func lengthOf (?buffer: buffer $dynamicBuffer) -> $uint32 : "arc.buffer.length"
-
-extern func removeAll (?!fromBuffer: ioBuffer $dynamicBuffer) : "dynamicBuffer.buffer.remove.all"
-
-extern func set (?byte: inByte $uint8 ?atIndex: inIndex $uint32 ?!intoBuffer: ioPointer $dynamicBuffer)
-: "dynamicBuffer.buffer.set.byte.at.index"
-
-extern func getByte (?atIndex: inIndex $uint32 ?!intoBuffer: ioPointer $dynamicBuffer) -> $uint8
-: "dynamicBuffer.buffer.get.byte.at.index"
-
-extern func removeByte (?atIndex: inIndex $uint32 ?!intoBuffer: ioPointer $dynamicBuffer)
-: "dynamicBuffer.buffer.remove.byte.at.index"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

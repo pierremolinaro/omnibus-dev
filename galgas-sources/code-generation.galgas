@@ -177,8 +177,7 @@ private proc generateCodeFiles
     let insertFunction = pointer + " @arc.insert.at.index "
                        + "(" + pointer + " %inPointer, i32 %inIndex, i32 %inElementSize, " + pointer + "* %outElementPtr)"
     generationAdds.mExternFunctionDeclarationSet += !insertFunction
-#    let bufferLengthFunctionName = llvmNameForFunction (!"arc.buffer.length")
-  #  generationAdds.mExternFunctionDeclarationSet += !"i32 @" + bufferLengthFunctionName + " (i32 %inPointer)"
+    generationAdds.mExternFunctionDeclarationSet += !"i32 @arc.length (i32 %inPointer)"
   end
 #----------------------------------------- Include assembler specific file
   var asCode = asTitleComment (!"Target specific code")
