@@ -88,22 +88,24 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   if not [elementType instanciable] then
     error mElementTypeName : "an array element should be instanciable"
   end
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mAnonymousDynamicArrayTypeName ?let arrayTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["uint32" nowhere] ?let uint32TypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mElementTypeName ?let elementTypeProxy]
 #-------------------------------------------- Property map
   @propertyMap propertyMap = {}
 #--- Method 'removeAll()'
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:mAnonymousDynamicArrayTypeName
+    !receiverTypeProxy:arrayTypeProxy
     !methodName:"removeAll"
     !safe:false
     !resultTypeProxy: .null
     !canMutateProperties:true
   ]
 #--- Method 'length()'
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["uint32" nowhere] ?let uint32TypeProxy]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:mAnonymousDynamicArrayTypeName
+    !receiverTypeProxy:arrayTypeProxy
     !methodName:"length"
     !safe:false
     !resultTypeProxy: uint32TypeProxy
@@ -113,11 +115,11 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   [!?propertyMap addFunctionWithInputArgument
     !?context:ioContext
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:mAnonymousDynamicArrayTypeName
+    !receiverTypeProxy:arrayTypeProxy
     !methodName:"append"
     !safe:false
     !inputArgumentSelector:""
-    !inputArgumentTypeName:mElementTypeName
+    !inputArgumentTypeProxy:elementTypeProxy
     !inputArgumentName:"inValue"
     !resultTypeProxy:.null
     !canMutateProperties:true
@@ -126,14 +128,14 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   [!?propertyMap addFunctionWithTwoInputArguments
     !?context:ioContext
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:mAnonymousDynamicArrayTypeName
+    !receiverTypeProxy:arrayTypeProxy
     !methodName:"append"
     !safe:false
     !inputArgumentSelector1:""
-    !inputArgumentTypeName1:mElementTypeName
+    !inputArgumentTypeProxy1:elementTypeProxy
     !inputArgumentName1:"inValue"
     !inputArgumentSelector2:"atIndex"
-    !inputArgumentTypeName2:"uint32"
+    !inputArgumentTypeProxy2:uint32TypeProxy
     !inputArgumentName2:"inIndex"
     !resultTypeProxy:.null
     !canMutateProperties:true
@@ -144,6 +146,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
 #-------------------------------------------- Type attributes
   let @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine | .copyable | .arc
 #-------------------------------------------- Enter in type map
+  let plmImplementationTypeName = "dynarray." + mElementTypeName
   let arrayType = @PLMType.new {
     !propertyMap:propertyMap
     !classConstantMap:{}
@@ -152,6 +155,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     !typeAttributes:typeAttributes
     !plmUserTypeName:mAnonymousDynamicArrayTypeName
     !kind:.dynamicArrayType {!elementType:elementType !ptrSize:ioContext.mTargetParameters.mPointerSize}
+    !plmImplementationTypeName:plmImplementationTypeName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mAnonymousDynamicArrayTypeName
@@ -205,8 +209,9 @@ class @dynamicArrayIR : @abstractGenerationIR {
 
 override method @dynamicArrayIR generateLLVMcode
   ?!@string ioLLVMcode
-  ?!@generationAdds unused ioGenerationAdds
+  ?!@generationAdds ioGenerationAdds
 {
+  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
   let pointer = "i" + mPtrSize
   let elementLLVMTypeName = [mElementType llvmTypeName]
   let bufferLengthFunctionName = llvmNameForFunction (!"arc.buffer.length")

@@ -8208,20 +8208,20 @@ GALGAS_propertyAccessKind GALGAS_propertyAccessKind::extractObject (const GALGAS
 
 void extensionSetter_addFunctionWithoutArgument (GALGAS_propertyMap & ioObject,
                                                  GALGAS_subprogramInvocationGraph & ioArgument_ioSubprogramInvocationGraph,
-                                                 const GALGAS_string constinArgument_inReceiverTypeName,
+                                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inReceiverType,
                                                  const GALGAS_string constinArgument_inMethodName,
                                                  const GALGAS_bool constinArgument_inIsSafe,
                                                  const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
                                                  const GALGAS_bool constinArgument_inCanMutateProperties,
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineDescriptor var_descriptor_1365 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 33))  COMMA_SOURCE_FILE ("property-map.galgas", 33)), GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 34)), constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 30)) ;
+  GALGAS_routineDescriptor var_descriptor_1376 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 34))  COMMA_SOURCE_FILE ("property-map.galgas", 34)), GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 35)), constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 30)) ;
   {
-  ioObject.setter_insertKey (constinArgument_inMethodName.add_operation (GALGAS_string ("()"), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 41)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 41)), GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_1365  COMMA_SOURCE_FILE ("property-map.galgas", 43)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 40)) ;
+  ioObject.setter_insertKey (constinArgument_inMethodName.add_operation (GALGAS_string ("()"), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 42)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 42)), GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_1376  COMMA_SOURCE_FILE ("property-map.galgas", 44)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 41)) ;
   }
-  GALGAS_lstring var_routineNameForInvocationGraph_1948 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverTypeName, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 47)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 48)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 49)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 46)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph_1982 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 48)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 48)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 49)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 50)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 47)) ;
   {
-  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_1948, var_routineNameForInvocationGraph_1948, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 51)) ;
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_1982, var_routineNameForInvocationGraph_1982, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 52)) ;
   }
 }
 
@@ -8235,31 +8235,31 @@ void extensionSetter_addFunctionWithoutArgument (GALGAS_propertyMap & ioObject,
 void extensionSetter_addFunctionWithInputArgument (GALGAS_propertyMap & ioObject,
                                                    GALGAS_semanticContext & ioArgument_ioContext,
                                                    GALGAS_subprogramInvocationGraph & ioArgument_ioSubprogramInvocationGraph,
-                                                   const GALGAS_lstring constinArgument_inReceiverTypeName,
+                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inReceiverType,
                                                    const GALGAS_string constinArgument_inMethodName,
                                                    const GALGAS_bool constinArgument_inIsSafe,
                                                    const GALGAS_string constinArgument_inInputSelector,
-                                                   const GALGAS_string constinArgument_inInputArgumentTypeName,
+                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inInputArgumentTypeProxy,
                                                    const GALGAS_string constinArgument_inInputArgumentName,
                                                    const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
                                                    const GALGAS_bool constinArgument_inCanMutateProperties,
                                                    C_Compiler * inCompiler
                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineFormalArgumentListAST temp_0 = GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 75)) ;
-  temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 72)), constinArgument_inInputSelector.getter_nowhere (SOURCE_FILE ("property-map.galgas", 73)), constinArgument_inInputArgumentTypeName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 74)), constinArgument_inInputArgumentName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 75))  COMMA_SOURCE_FILE ("property-map.galgas", 75)) ;
-  GALGAS_routineFormalArgumentListAST var_argumentList_2878 = temp_0 ;
-  GALGAS_routineTypedSignature var_signature_3103 ;
+  GALGAS_routineFormalArgumentListAST temp_0 = GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 76)) ;
+  temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 73)), constinArgument_inInputSelector.getter_nowhere (SOURCE_FILE ("property-map.galgas", 74)), constinArgument_inInputArgumentTypeProxy.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 75)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 75)), constinArgument_inInputArgumentName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 76))  COMMA_SOURCE_FILE ("property-map.galgas", 76)) ;
+  GALGAS_routineFormalArgumentListAST var_argumentList_2940 = temp_0 ;
+  GALGAS_routineTypedSignature var_signature_3172 ;
   {
-  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_2878, var_signature_3103, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 77)) ;
+  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_2940, var_signature_3172, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 78)) ;
   }
-  GALGAS_routineDescriptor var_descriptor_3140 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 81))  COMMA_SOURCE_FILE ("property-map.galgas", 81)), var_signature_3103, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 78)) ;
-  GALGAS_lstring var_methodMangledName_3483 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, constinArgument_inReceiverTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("property-map.galgas", 90)), var_argumentList_2878, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 88)) ;
+  GALGAS_routineDescriptor var_descriptor_3209 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 83))  COMMA_SOURCE_FILE ("property-map.galgas", 83)), var_signature_3172, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 79)) ;
+  GALGAS_lstring var_methodMangledName_3575 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, GALGAS_location::constructor_nowhere (SOURCE_FILE ("property-map.galgas", 92))  COMMA_SOURCE_FILE ("property-map.galgas", 92)), var_argumentList_2940, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 90)) ;
   {
-  ioObject.setter_insertKey (var_methodMangledName_3483, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_3140  COMMA_SOURCE_FILE ("property-map.galgas", 96)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 93)) ;
+  ioObject.setter_insertKey (var_methodMangledName_3575, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_3209  COMMA_SOURCE_FILE ("property-map.galgas", 98)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 95)) ;
   }
-  GALGAS_lstring var_routineNameForInvocationGraph_3765 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverTypeName.getter_string (SOURCE_FILE ("property-map.galgas", 100)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 100)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 101)), var_argumentList_2878, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 99)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph_3838 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 102)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 103)), var_argumentList_2940, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 101)) ;
   {
-  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_3765, var_routineNameForInvocationGraph_3765, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 104)) ;
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_3838, var_routineNameForInvocationGraph_3838, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 106)) ;
   }
 }
 
@@ -8273,35 +8273,35 @@ void extensionSetter_addFunctionWithInputArgument (GALGAS_propertyMap & ioObject
 void extensionSetter_addFunctionWithTwoInputArguments (GALGAS_propertyMap & ioObject,
                                                        GALGAS_semanticContext & ioArgument_ioContext,
                                                        GALGAS_subprogramInvocationGraph & ioArgument_ioSubprogramInvocationGraph,
-                                                       const GALGAS_lstring constinArgument_inReceiverTypeName,
+                                                       const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inReceiverType,
                                                        const GALGAS_string constinArgument_inMethodName,
                                                        const GALGAS_bool constinArgument_inIsSafe,
                                                        const GALGAS_string constinArgument_inInputSelector_31_,
-                                                       const GALGAS_string constinArgument_inInputArgumentTypeName_31_,
+                                                       const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inInputArgumentTypeProxy_31_,
                                                        const GALGAS_string constinArgument_inInputArgumentName_31_,
                                                        const GALGAS_string constinArgument_inInputSelector_32_,
-                                                       const GALGAS_string constinArgument_inInputArgumentTypeName_32_,
+                                                       const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inInputArgumentTypeProxy_32_,
                                                        const GALGAS_string constinArgument_inInputArgumentName_32_,
                                                        const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
                                                        const GALGAS_bool constinArgument_inCanMutateProperties,
                                                        C_Compiler * inCompiler
                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineFormalArgumentListAST temp_0 = GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 133)) ;
-  temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 125)), constinArgument_inInputSelector_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 126)), constinArgument_inInputArgumentTypeName_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 127)), constinArgument_inInputArgumentName_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 128))  COMMA_SOURCE_FILE ("property-map.galgas", 128)) ;
-  temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 130)), constinArgument_inInputSelector_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 131)), constinArgument_inInputArgumentTypeName_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 132)), constinArgument_inInputArgumentName_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 133))  COMMA_SOURCE_FILE ("property-map.galgas", 133)) ;
-  GALGAS_routineFormalArgumentListAST var_argumentList_4878 = temp_0 ;
-  GALGAS_routineTypedSignature var_signature_5230 ;
+  GALGAS_routineFormalArgumentListAST temp_0 = GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 135)) ;
+  temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 127)), constinArgument_inInputSelector_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 128)), constinArgument_inInputArgumentTypeProxy_31_.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 129)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 129)), constinArgument_inInputArgumentName_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 130))  COMMA_SOURCE_FILE ("property-map.galgas", 130)) ;
+  temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 132)), constinArgument_inInputSelector_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 133)), constinArgument_inInputArgumentTypeProxy_32_.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 134)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 134)), constinArgument_inInputArgumentName_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 135))  COMMA_SOURCE_FILE ("property-map.galgas", 135)) ;
+  GALGAS_routineFormalArgumentListAST var_argumentList_4995 = temp_0 ;
+  GALGAS_routineTypedSignature var_signature_5361 ;
   {
-  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_4878, var_signature_5230, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 135)) ;
+  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_4995, var_signature_5361, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 137)) ;
   }
-  GALGAS_routineDescriptor var_descriptor_5267 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 139))  COMMA_SOURCE_FILE ("property-map.galgas", 139)), var_signature_5230, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 136)) ;
-  GALGAS_lstring var_methodMangledName_5610 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, constinArgument_inReceiverTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("property-map.galgas", 148)), var_argumentList_4878, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 146)) ;
+  GALGAS_routineDescriptor var_descriptor_5398 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 142))  COMMA_SOURCE_FILE ("property-map.galgas", 142)), var_signature_5361, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 138)) ;
+  GALGAS_lstring var_methodMangledName_5764 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, GALGAS_location::constructor_nowhere (SOURCE_FILE ("property-map.galgas", 151))  COMMA_SOURCE_FILE ("property-map.galgas", 151)), var_argumentList_4995, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 149)) ;
   {
-  ioObject.setter_insertKey (var_methodMangledName_5610, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_5267  COMMA_SOURCE_FILE ("property-map.galgas", 154)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 151)) ;
+  ioObject.setter_insertKey (var_methodMangledName_5764, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_5398  COMMA_SOURCE_FILE ("property-map.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 154)) ;
   }
-  GALGAS_lstring var_routineNameForInvocationGraph_5892 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverTypeName.getter_string (SOURCE_FILE ("property-map.galgas", 158)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 158)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 159)), var_argumentList_4878, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 157)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph_6027 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 161)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 161)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 162)), var_argumentList_4995, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 160)) ;
   {
-  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_5892, var_routineNameForInvocationGraph_5892, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 162)) ;
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_6027, var_routineNameForInvocationGraph_6027, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 165)) ;
   }
 }
 

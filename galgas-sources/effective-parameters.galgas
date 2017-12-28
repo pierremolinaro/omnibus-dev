@@ -176,9 +176,6 @@ proc analyzeEffectiveParameters
       ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
       [!?ioUniversalMap searchValuedObjectForReadWriteAccess !name ?let objectIR]
-      if [[objectIR type] arc] then
-        ioTemporaries.mNeedsDynamicMemoryAllocation = true
-      end
 #      if not canBeUsedAsInputParameter then
 #        error name : "this variable cannot be used as output/input parameter"
 #      end
@@ -199,9 +196,6 @@ proc analyzeEffectiveParameters
       case constantProperty (*) :
         error inErrorLocation : "a constant property cannot be used here"
       case indexed (@PLMType propertyType @uint propertyIndex) :
-        if [propertyType arc] then
-          ioTemporaries.mNeedsDynamicMemoryAllocation = true
-        end
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
           !inSelfType

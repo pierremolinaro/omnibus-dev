@@ -4,7 +4,7 @@
 
 class @newTypeDeclaration : @abstractDeclarationAST {
   @lstring mNewTypeName
-  @lstring mAliasedTypeName
+  @lstring mOriginalTypeName
 }
 
 #·······················································································································
@@ -26,10 +26,7 @@ syntax extension plm_syntax {
     $\$type$ ?let newTypeName
     $:$
     <type_definition> !?ioAST ?let typeName
-    ioAST.mDeclarationListAST += !@newTypeDeclaration.new {
-      !newTypeName
-      !typeName
-    }
+    ioAST.mDeclarationListAST += !@newTypeDeclaration.new {!newTypeName !typeName}
   }
 
   #·····················································································································
@@ -62,9 +59,9 @@ override method @newTypeDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let newTypeName = llvmTypeNameFromPLMname (!mNewTypeName)
-  let aliasedTypeName = llvmTypeNameFromPLMname (!mAliasedTypeName)
+  let originalTypeName = llvmTypeNameFromPLMname (!mOriginalTypeName)
   [!?ioGraph addNode !newTypeName !self]
-  [!?ioGraph addEdge !newTypeName !aliasedTypeName]
+  [!?ioGraph addEdge !newTypeName !originalTypeName]
 }
 
 #·······················································································································
@@ -81,27 +78,67 @@ override method @newTypeDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-#--- Enter in type map
-  [ioContext.mTypeMap searchKey !lkey:mAliasedTypeName ?type:var type ?1*]
-#--- Set new type name
+#---------- Enter in type map
+  [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type ?1*]
+#---------- Set new type name
   type.plmUserTypeName = mNewTypeName.string
-#--- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:type !index:[ioContext.mTypeMap count]
-]
-#--- Enter infix operators
+#---------- Transform property map
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mOriginalTypeName ?let originalTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mNewTypeName ?let newTypeProxy]
+  let oldPropertyMap = type.propertyMap
+  type.propertyMap = {}
+  for (propertyName public access) in oldPropertyMap do
+    switch access 
+    case constantProperty (*) :
+      [!?type.propertyMap insertKey !propertyName !public !access]
+    case indexed  (2*) :
+      [!?type.propertyMap insertKey !propertyName !public !access]
+    case nonVirtualMethod (@routineDescriptor oldDescriptor) :
+      @routineTypedSignature newSignature = {}
+      @routineFormalArgumentListAST newSignatureAST = {}
+      for (formalArgumentPassingMode selector typeProxy) in oldDescriptor.signature do
+        let t = if originalTypeProxy == typeProxy then newTypeProxy else typeProxy end
+        newSignature += !formalArgumentPassingMode !selector !t
+        newSignatureAST += !formalArgumentPassingMode !selector ![[t key] nowhere] !["" nowhere]
+      end
+      let newDescriptor = @routineDescriptor.new {
+        !isPublic: oldDescriptor.isPublic
+        !exported: oldDescriptor.exported
+        !name: oldDescriptor.name
+        !routineKind: oldDescriptor.routineKind
+        !signature:newSignature
+        !returnTypeProxy: if oldDescriptor.returnTypeProxy == newTypeProxy then newTypeProxy else oldDescriptor.returnTypeProxy end
+        !canAccessProperties: oldDescriptor.canAccessProperties
+        !canMutateProperties: oldDescriptor.canMutateProperties
+        !safe: oldDescriptor.safe
+      }
+      [!?type.propertyMap insertKey !propertyName !public !.nonVirtualMethod {!descriptor:newDescriptor}]
+    #--- Enter in invocation graph
+      let routineNameForInvocationGraph = routineMangledNameFromAST (
+        !llvmTypeStringFromPLMname (!mNewTypeName)
+        ![oldDescriptor.name nowhere]
+        !newSignatureAST
+      )
+      log routineNameForInvocationGraph
+      [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
+    end
+  end
+#---------- Enter in type map
+  [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:type !index:[ioContext.mTypeMap count]]
+#---------- Enter infix operators
   let newNewInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !mNewTypeName.string)
-  let aliasAliasInfixKey = combineTypeNamesForInfixOperator (!mAliasedTypeName.string !mAliasedTypeName.string)
+  let aliasAliasInfixKey = combineTypeNamesForInfixOperator (!mOriginalTypeName.string !mOriginalTypeName.string)
   let newLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !staticIntegerTypeName ())
-  let aliasLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mAliasedTypeName.string !staticIntegerTypeName ())
+  let aliasLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mOriginalTypeName.string !staticIntegerTypeName ())
   let literalIntegerNewInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mNewTypeName.string)
-  let literalIntegerAliasInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mAliasedTypeName.string)
+  let literalIntegerAliasInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mOriginalTypeName.string)
   let newType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mNewTypeName} type]
-  let oldType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mAliasedTypeName} type]
-  enterAliasInfixOperator (
+  let oldType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mOriginalTypeName} type]
+  enterNewTypeInfixOperator (
     !?ioContext.mEqualOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -112,7 +149,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mNonEqualOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -123,7 +160,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mStrictInfOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -134,7 +171,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mInfEqualOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -145,7 +182,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mStrictSupOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -156,7 +193,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mSupEqualOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -167,7 +204,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mAndOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -178,7 +215,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mOrOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -189,7 +226,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mXorOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -200,7 +237,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mBooleanXorOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -211,7 +248,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mAddOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -222,7 +259,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mAddNoOvfOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -233,7 +270,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mSubOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -244,7 +281,7 @@ override method @newTypeDeclaration enterInContext
      !newType
     !oldType
  )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mSubNoOvfOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -255,7 +292,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mMulOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -266,7 +303,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mMulNoOvfOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -277,7 +314,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mDivOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -288,7 +325,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mDivNoOvfOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -299,7 +336,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mModOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -310,7 +347,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mModNoOvfOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -321,7 +358,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mLeftShiftOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -332,7 +369,7 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasInfixOperator (
+  enterNewTypeInfixOperator (
     !?ioContext.mRightShiftOperatorMap
     !newNewInfixKey
     !aliasAliasInfixKey
@@ -343,14 +380,14 @@ override method @newTypeDeclaration enterInContext
     !newType
     !oldType
   )
-  enterAliasPrefixOperator (!?ioContext.mUnaryMinusOperatorMap !mNewTypeName !mAliasedTypeName)
-  enterAliasPrefixOperator (!?ioContext.mNotOperatorMap !mNewTypeName !mAliasedTypeName)
-  enterAliasPrefixOperator (!?ioContext.mUnsignedComplementOperatorMap !mNewTypeName !mAliasedTypeName)
+  enterNewTypePrefixOperator (!?ioContext.mUnaryMinusOperatorMap !mNewTypeName !mOriginalTypeName)
+  enterNewTypePrefixOperator (!?ioContext.mNotOperatorMap !mNewTypeName !mOriginalTypeName)
+  enterNewTypePrefixOperator (!?ioContext.mUnsignedComplementOperatorMap !mNewTypeName !mOriginalTypeName)
 }
 
 #·······················································································································
 
-private proc enterAliasPrefixOperator
+private proc enterNewTypePrefixOperator
   ?!@prefixOperatorMap ioInfixOperatorMap
   ?let @lstring inNewTypeName
   ?let @lstring inAliasedTypeName
@@ -367,7 +404,7 @@ private proc enterAliasPrefixOperator
 
 #·······················································································································
 
-private proc enterAliasInfixOperator
+private proc enterNewTypeInfixOperator
   ?!@infixOperatorMap ioInfixOperatorMap
   ?let @lstring inNewNewInfixKey
   ?let @lstring inAliasedAliasedInfixKey

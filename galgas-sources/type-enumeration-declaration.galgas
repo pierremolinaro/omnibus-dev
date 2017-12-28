@@ -142,9 +142,10 @@ override method @enumerationDeclarationAST enterInContext
     !ioContext.mTypeMap
     !.new {!"uint" + representationBitCount !mEnumerationName}
   }
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mEnumerationName ?let enumTypeProxy]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:mEnumerationName
+    !receiverTypeProxy:enumTypeProxy
     !methodName:integerEnumAccessorName (!forBitCount:representationBitCount)
     !safe:true
     !resultTypeProxy:integerTypeProxy
@@ -159,6 +160,7 @@ override method @enumerationDeclarationAST enterInContext
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmUserTypeName:mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
+    !plmImplementationTypeName:mEnumerationName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName

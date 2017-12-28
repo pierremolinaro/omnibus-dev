@@ -175,6 +175,7 @@ method @taskListAST enterInContext
       !typeAttributes:.none
       !plmUserTypeName:task.mTaskName
       !kind:.structure {!propertyList:propertyList}
+      !plmImplementationTypeName:task.mTaskName
     }
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName

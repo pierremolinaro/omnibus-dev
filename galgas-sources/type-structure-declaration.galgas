@@ -348,6 +348,7 @@ override method @structureDeclarationAST enterInContext
     let descriptor = @routineDescriptor.new {
       !isPublic:system.mPublic
       !exported:exportedRoutine
+      !name:system.mName
       !routineKind:system.mRoutineKind
       !signature:signature
       !returnTypeProxy:returnTypeProxy
@@ -385,6 +386,7 @@ override method @structureDeclarationAST enterInContext
     !typeAttributes:attributes
     !plmUserTypeName:mStructureName
     !kind:.structure {!propertyList:propertyList}
+    !plmImplementationTypeName:mStructureName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName

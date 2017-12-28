@@ -95,7 +95,8 @@ GALGAS_generationAdds::GALGAS_generationAdds (void) :
 mProperty_mUniqueIndex (),
 mProperty_mExternFunctionDeclarationSet (),
 mProperty_mStaticStringMap (),
-mProperty_mUsesGuards () {
+mProperty_mUsesGuards (),
+mProperty_mNeedsDynamicMemoryAllocation () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -108,11 +109,13 @@ GALGAS_generationAdds::~ GALGAS_generationAdds (void) {
 GALGAS_generationAdds::GALGAS_generationAdds (const GALGAS_uint & inOperand0,
                                               const GALGAS_stringset & inOperand1,
                                               const GALGAS_staticStringMap & inOperand2,
-                                              const GALGAS_bool & inOperand3) :
+                                              const GALGAS_bool & inOperand3,
+                                              const GALGAS_bool & inOperand4) :
 mProperty_mUniqueIndex (inOperand0),
 mProperty_mExternFunctionDeclarationSet (inOperand1),
 mProperty_mStaticStringMap (inOperand2),
-mProperty_mUsesGuards (inOperand3) {
+mProperty_mUsesGuards (inOperand3),
+mProperty_mNeedsDynamicMemoryAllocation (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -121,6 +124,7 @@ GALGAS_generationAdds GALGAS_generationAdds::constructor_default (UNUSED_LOCATIO
   return GALGAS_generationAdds (GALGAS_uint::constructor_default (HERE),
                                 GALGAS_stringset::constructor_emptySet (HERE),
                                 GALGAS_staticStringMap::constructor_emptyMap (HERE),
+                                GALGAS_bool::constructor_default (HERE),
                                 GALGAS_bool::constructor_default (HERE)) ;
 }
 
@@ -129,11 +133,12 @@ GALGAS_generationAdds GALGAS_generationAdds::constructor_default (UNUSED_LOCATIO
 GALGAS_generationAdds GALGAS_generationAdds::constructor_new (const GALGAS_uint & inOperand0,
                                                               const GALGAS_stringset & inOperand1,
                                                               const GALGAS_staticStringMap & inOperand2,
-                                                              const GALGAS_bool & inOperand3 
+                                                              const GALGAS_bool & inOperand3,
+                                                              const GALGAS_bool & inOperand4 
                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_generationAdds result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_generationAdds (inOperand0, inOperand1, inOperand2, inOperand3) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_generationAdds (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
   }
   return result ;
 }
@@ -154,13 +159,16 @@ typeComparisonResult GALGAS_generationAdds::objectCompare (const GALGAS_generati
   if (result == kOperandEqual) {
     result = mProperty_mUsesGuards.objectCompare (inOperand.mProperty_mUsesGuards) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mNeedsDynamicMemoryAllocation.objectCompare (inOperand.mProperty_mNeedsDynamicMemoryAllocation) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_generationAdds::isValid (void) const {
-  return mProperty_mUniqueIndex.isValid () && mProperty_mExternFunctionDeclarationSet.isValid () && mProperty_mStaticStringMap.isValid () && mProperty_mUsesGuards.isValid () ;
+  return mProperty_mUniqueIndex.isValid () && mProperty_mExternFunctionDeclarationSet.isValid () && mProperty_mStaticStringMap.isValid () && mProperty_mUsesGuards.isValid () && mProperty_mNeedsDynamicMemoryAllocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -170,6 +178,7 @@ void GALGAS_generationAdds::drop (void) {
   mProperty_mExternFunctionDeclarationSet.drop () ;
   mProperty_mStaticStringMap.drop () ;
   mProperty_mUsesGuards.drop () ;
+  mProperty_mNeedsDynamicMemoryAllocation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -187,6 +196,8 @@ void GALGAS_generationAdds::description (C_String & ioString,
     mProperty_mStaticStringMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mUsesGuards.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mNeedsDynamicMemoryAllocation.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -213,6 +224,12 @@ GALGAS_staticStringMap GALGAS_generationAdds::getter_mStaticStringMap (UNUSED_LO
 
 GALGAS_bool GALGAS_generationAdds::getter_mUsesGuards (UNUSED_LOCATION_ARGS) const {
   return mProperty_mUsesGuards ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_generationAdds::getter_mNeedsDynamicMemoryAllocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mNeedsDynamicMemoryAllocation ;
 }
 
 

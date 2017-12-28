@@ -293,6 +293,7 @@ override method @staticListAST enterInContext
       let descriptor = @routineDescriptor.new {
         !isPublic:true # Routine is declared with "public"
         !exported:false # Routine is declared with @exported attribute
+        !name:propertyName
         !routineKind:.function {!executionMode:mode} # @routineKind mRoutineKind
         !signature:signature
         !returnTypeProxy:returnTypeProxy 
@@ -327,6 +328,7 @@ override method @staticListAST enterInContext
     !typeAttributes:.none
     !plmUserTypeName:llvmNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyList:propertyList}
+    !plmImplementationTypeName:llvmNameForStaticListElementType (!mStaticListName)
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmElementTypeName
@@ -456,6 +458,8 @@ override method @staticListAST enterInContext
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmUserTypeName:plmNameForStaticListType (!mStaticListName)
     !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
+    !plmImplementationTypeName:plmNameForStaticListType (!mStaticListName)
+
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmNameForStaticListType (!mStaticListName)

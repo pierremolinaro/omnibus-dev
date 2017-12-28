@@ -160,6 +160,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
       !typeAttributes:opaqueTypeAttributes
       !plmUserTypeName:mAnonymousOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}
+      !plmImplementationTypeName:mAnonymousOpaqueTypeName
     }
     [!?ioContext.mTypeMap insertType
       !lkey:mAnonymousOpaqueTypeName

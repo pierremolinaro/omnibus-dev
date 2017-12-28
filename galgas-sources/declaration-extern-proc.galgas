@@ -94,6 +94,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
     !.new {
       !isPublic:true
       !exported:false
+      !name:mExternProcedureName
       !routineKind:.function {!executionMode:mMode}
       !signature:signature
       !returnTypeProxy:returnTypeProxy

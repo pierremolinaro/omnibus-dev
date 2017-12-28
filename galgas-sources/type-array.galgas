@@ -141,6 +141,7 @@ override method @typeArrayDeclarationAST enterInContext
       !typeAttributes:typeAttributes
       !plmUserTypeName:mAnonymousArrayTypeName
       !kind:.arrayType {!elementType:elementType !size:arraySize}
+      !plmImplementationTypeName:mAnonymousArrayTypeName
     }
     [!?ioContext.mTypeMap insertType
       !lkey:mAnonymousArrayTypeName

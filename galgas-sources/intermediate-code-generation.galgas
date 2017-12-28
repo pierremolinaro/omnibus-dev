@@ -24,7 +24,6 @@ struct @intermediateCodeStruct {
   @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
   @generationListIR mGenerationListIR
   @globalSyncInstanceMapIR mGlobalSyncInstanceMap
-  @bool mNeedsDynamicMemoryAllocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

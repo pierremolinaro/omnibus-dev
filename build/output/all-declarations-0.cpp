@@ -3294,12 +3294,12 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_start_5F_symbol_i1_parse (C_Lexiq
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i2_ (GALGAS_ast & ioArgument_ioAST,
                                                                 C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_newtype) COMMA_SOURCE_FILE ("declaration-type.galgas", 25)) ;
-  GALGAS_lstring var_newTypeName_1302 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_newTypeName_1303 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("declaration-type.galgas", 26)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("declaration-type.galgas", 27)) ;
-  GALGAS_lstring var_typeName_1354 ;
-  nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_1354, inCompiler) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_newTypeDeclaration::constructor_new (var_newTypeName_1302, var_typeName_1354  COMMA_SOURCE_FILE ("declaration-type.galgas", 29))  COMMA_SOURCE_FILE ("declaration-type.galgas", 29)) ;
+  GALGAS_lstring var_typeName_1355 ;
+  nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_1355, inCompiler) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_newTypeDeclaration::constructor_new (var_newTypeName_1303, var_typeName_1355  COMMA_SOURCE_FILE ("declaration-type.galgas", 29))  COMMA_SOURCE_FILE ("declaration-type.galgas", 29)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3319,13 +3319,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_type_5F_definition_i3_ (GALGAS_as
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outTypeName.drop () ; // Release 'out' argument
   outArgument_outTypeName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("declaration-type.galgas", 38)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("declaration-type.galgas", 35)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_type_5F_definition_i3_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("declaration-type.galgas", 38)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("declaration-type.galgas", 35)) ;
   inCompiler->resetTemplateString () ;
 }
 

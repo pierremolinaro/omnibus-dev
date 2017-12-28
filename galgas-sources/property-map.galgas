@@ -21,7 +21,7 @@ map @propertyMap {
 
 setter @propertyMap addFunctionWithoutArgument
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
-  ?receiverTypeName:let @string inReceiverTypeName
+  ?receiverTypeProxy:let @unifiedTypeMap-proxy inReceiverType
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
@@ -30,6 +30,7 @@ setter @propertyMap addFunctionWithoutArgument
   let @routineDescriptor descriptor = .new {
     !isPublic:true
     !exported:false
+    !name:inMethodName
     !routineKind:.function {!executionMode:.anyMode}
     !signature:{}
     !returnTypeProxy:inResultType # Return type 
@@ -44,7 +45,7 @@ setter @propertyMap addFunctionWithoutArgument
   ]
 #--- Routine mangled name
   let routineNameForInvocationGraph = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!inReceiverTypeName)
+    !llvmTypeStringFromPLMname (![inReceiverType key])
     ![inMethodName nowhere]
     !{}
   )
@@ -59,11 +60,11 @@ setter @propertyMap addFunctionWithoutArgument
 setter @propertyMap addFunctionWithInputArgument
   ?!context:@semanticContext ioContext
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
-  ?receiverTypeName:let @lstring inReceiverTypeName
+  ?receiverTypeProxy:let @unifiedTypeMap-proxy inReceiverType
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
   ?inputArgumentSelector:let @string inInputSelector
-  ?inputArgumentTypeName:let @string inInputArgumentTypeName
+  ?inputArgumentTypeProxy:let @unifiedTypeMap-proxy inInputArgumentTypeProxy
   ?inputArgumentName: let @string inInputArgumentName
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
   ?canMutateProperties:let @bool inCanMutateProperties
@@ -71,13 +72,14 @@ setter @propertyMap addFunctionWithInputArgument
   let argumentList = @routineFormalArgumentListAST {
     !.input
     ![inInputSelector nowhere]
-    ![inInputArgumentTypeName nowhere]
+    ![[inInputArgumentTypeProxy key] nowhere]
     ![inInputArgumentName nowhere]
   }
   routineSignature (!?ioContext.mTypeMap !argumentList ?let signature)
   let @routineDescriptor descriptor = .new {
     !isPublic:true
     !exported:false
+    !name:inMethodName
     !routineKind:.function {!executionMode:.anyMode}
     !signature:signature
     !returnTypeProxy:inResultType # Return type 
@@ -87,7 +89,7 @@ setter @propertyMap addFunctionWithInputArgument
   }
   let methodMangledName = routineMangledNameFromAST (
     !""
-    !.new {!inMethodName !inReceiverTypeName.location}
+    !.new {!inMethodName !.nowhere}
     !argumentList
   )
   [!?self insertKey
@@ -97,7 +99,7 @@ setter @propertyMap addFunctionWithInputArgument
   ]
 #--- Routine mangled name
   let routineNameForInvocationGraph = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!inReceiverTypeName)
+    !llvmTypeStringFromPLMname (![inReceiverType key])
     ![inMethodName nowhere]
     !argumentList
   )
@@ -109,14 +111,14 @@ setter @propertyMap addFunctionWithInputArgument
 setter @propertyMap addFunctionWithTwoInputArguments
   ?!context:@semanticContext ioContext
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
-  ?receiverTypeName:let @lstring inReceiverTypeName
+  ?receiverTypeProxy:let @unifiedTypeMap-proxy inReceiverType
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
   ?inputArgumentSelector1:let @string inInputSelector1
-  ?inputArgumentTypeName1:let @string inInputArgumentTypeName1
+  ?inputArgumentTypeProxy1:let @unifiedTypeMap-proxy inInputArgumentTypeProxy1
   ?inputArgumentName1: let @string inInputArgumentName1
   ?inputArgumentSelector2:let @string inInputSelector2
-  ?inputArgumentTypeName2:let @string inInputArgumentTypeName2
+  ?inputArgumentTypeProxy2:let @unifiedTypeMap-proxy inInputArgumentTypeProxy2
   ?inputArgumentName2: let @string inInputArgumentName2
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
   ?canMutateProperties:let @bool inCanMutateProperties
@@ -124,18 +126,19 @@ setter @propertyMap addFunctionWithTwoInputArguments
   let argumentList = @routineFormalArgumentListAST {
     !.input
     ![inInputSelector1 nowhere]
-    ![inInputArgumentTypeName1 nowhere]
+    ![[inInputArgumentTypeProxy1 key] nowhere]
     ![inInputArgumentName1 nowhere]
   ,
     !.input
     ![inInputSelector2 nowhere]
-    ![inInputArgumentTypeName2 nowhere]
+    ![[inInputArgumentTypeProxy2 key] nowhere]
     ![inInputArgumentName2 nowhere]
   }
   routineSignature (!?ioContext.mTypeMap !argumentList ?let signature)
   let @routineDescriptor descriptor = .new {
     !isPublic:true
     !exported:false
+    !name:inMethodName
     !routineKind:.function {!executionMode:.anyMode}
     !signature:signature
     !returnTypeProxy:inResultType # Return type 
@@ -145,7 +148,7 @@ setter @propertyMap addFunctionWithTwoInputArguments
   }
   let methodMangledName = routineMangledNameFromAST (
     !""
-    !.new {!inMethodName !inReceiverTypeName.location}
+    !.new {!inMethodName !.nowhere}
     !argumentList
   )
   [!?self insertKey
@@ -155,7 +158,7 @@ setter @propertyMap addFunctionWithTwoInputArguments
   ]
 #--- Routine mangled name
   let routineNameForInvocationGraph = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!inReceiverTypeName)
+    !llvmTypeStringFromPLMname (![inReceiverType key])
     ![inMethodName nowhere]
     !argumentList
   )
