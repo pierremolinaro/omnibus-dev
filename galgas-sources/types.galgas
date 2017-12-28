@@ -33,6 +33,7 @@ enum @typeKind {
   case staticInteger
   case opaque (@bigint bitCount)
   case arrayType (@PLMType elementType @bigint size)
+  case dynamicArrayType (@PLMType elementType @bigint ptrSize)
   case function (@routineDescriptor descriptor)
   case pointer (@PLMType pointee)
 }
@@ -162,7 +163,7 @@ method @PLMType generateRetain
     let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
-    ioLLVMcode += "  call void @" + [self plmTypeName] + ".retain (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
+    ioLLVMcode += "  call void @arc.retain (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
   else
     let arcAssignmentList = [self arcList !{}]
     for (propertyName propertyType indexPath) in arcAssignmentList do 
@@ -176,7 +177,7 @@ method @PLMType generateRetain
       let propertyTypeLLVMName = [propertyType llvmTypeName]
       let llvmLoadedVarName = llvmVarName + ".loaded"
       ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMcode += "  call void @" + [propertyType plmTypeName] + ".retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+      ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
     end
   end
 }
@@ -195,7 +196,7 @@ method @PLMType generateInsulate
     let insulatedVar = "%temp." + [inPLMName assemblerRepresentation] + ".insulated." + ioGenerationAdds.mUniqueIndex   
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + loadedVar + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
-    ioLLVMcode += "  " + insulatedVar + " = call " + llvmTypeName + " @" + [self plmTypeName] + ".insulate (" + llvmTypeName + " " + loadedVar + ")\n"
+    ioLLVMcode += "  " + insulatedVar + " = call " + llvmTypeName + " @arc.insulate (" + llvmTypeName + " " + loadedVar + ")\n"
     ioLLVMcode += "  store " + llvmTypeName + " " + insulatedVar + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
   else
     let arcAssignmentList = [self arcList !{}]
@@ -212,7 +213,7 @@ method @PLMType generateInsulate
       let insulatedVar = llvmVarName + ".insulated." + ioGenerationAdds.mUniqueIndex 
       ioGenerationAdds.mUniqueIndex ++
       ioLLVMcode += "  " + loadedVar + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMcode += "  " + insulatedVar + " = call " + propertyTypeLLVMName + " @" + [propertyType plmTypeName] + ".insulate (" + propertyTypeLLVMName + " " + loadedVar + ")\n" 
+      ioLLVMcode += "  " + insulatedVar + " = call " + propertyTypeLLVMName + " @arc.insulate (" + propertyTypeLLVMName + " " + loadedVar + ")\n" 
       ioLLVMcode += "  store " + propertyTypeLLVMName + " " + insulatedVar + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n"
     end
   end
@@ -231,7 +232,7 @@ method @PLMType generateRelease
     let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
-    ioLLVMcode += "  call void @" + [self plmTypeName] + ".release (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
+    ioLLVMcode += "  call void @arc.release (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
   else
     let arcAssignmentList = [self arcList !{}]
     for (propertyName propertyType indexPath) in arcAssignmentList do 
@@ -245,7 +246,7 @@ method @PLMType generateRelease
       let propertyTypeLLVMName = [propertyType llvmTypeName]
       let llvmLoadedVarName = llvmVarName + ".loaded"
       ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMcode += "  call void @" + [propertyType plmTypeName] + ".release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+      ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
     end
   end
 }
@@ -274,6 +275,8 @@ getter @PLMType llvmTypeName -> @string {
     result = "i" + bitCount
   case arrayType (* *) :
     result = "%" + [llvmTypeNameFromPLMname (![plmTypeName nowhere]) assemblerRepresentation]
+  case dynamicArrayType (* ptrSize) :
+    result = "i" + ptrSize
   case function (@routineDescriptor descriptor) :
     if descriptor.returnTypeProxy == .null then
       result = "void"
@@ -321,6 +324,8 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Opaque (" + bitCount + " bits)"
   case arrayType (* *) :
     result = "Array"
+  case dynamicArrayType (2*) :
+    result = "Dynamic array"
   case function (*) :
     result = "Function"
   case pointer (pointee) :

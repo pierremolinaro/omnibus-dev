@@ -261,7 +261,7 @@ override method @procedureCallInstructionAST analyze
     end
   end
 #--- Get current object property map
-  let @propertyMap propertyMap = currentType.propertyMap
+  @propertyMap currentObjectPropertyMap = currentType.propertyMap
 #--- Insulate last access (should be a "property", used as routine name
   var accessList = mAccessList
   [!?accessList popLast ?let lastAccess]
@@ -269,7 +269,7 @@ override method @procedureCallInstructionAST analyze
   for (access) in accessList do
     switch access
     case property (@lstring propertyName) :
-      [propertyMap searchKey
+      [currentObjectPropertyMap searchKey
         !propertyName
         ?let @bool unused isPublic
         ?let @propertyAccessKind propertyAccess
@@ -292,6 +292,7 @@ override method @procedureCallInstructionAST analyze
         ]
         currentType = propertyType
         currentLLVMAddressVar = llvmPropertyName
+        currentObjectPropertyMap = currentType.propertyMap # ????
       end
     case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
       error endOfIndex : "not handled yet" : currentType, currentLLVMAddressVar
@@ -302,7 +303,8 @@ override method @procedureCallInstructionAST analyze
   case arrayAccess (* @location endOfIndex) :
     error endOfIndex : "a property access is required here"
   case property (@lstring methodName) :
-    let @propertyMap propertyMap = currentType.propertyMap
+#    let propertyMap = currentType.propertyMap
+    let propertyMap = currentObjectPropertyMap # ????
     let key = routineMangledNameFromCall (!"" !methodName !mArguments)
     [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     switch propertyAccess

@@ -147,8 +147,8 @@ private proc compileProject
   ast.mDeclarationListAST = orderedDeclarationListAST
   @subprogramInvocationGraph subprogramInvocationGraph = .emptyGraph
   @declarationDecorationList decoratedDeclarationList = {}
-  var @timer t = .start 
   if @uint.errorCount == 0 then
+    var @timer t = .start 
     buildSemanticContext (
       !sourceFile:inSourceFile
       !ast:ast
@@ -158,11 +158,12 @@ private proc compileProject
       ?subprogramInvocationGraph
       ?decoratedDeclarationList
     )
+    message "Context: " + [t string] + "\n" 
   end
-  message "Contexte : " + [t string] + "\n" 
 #------------------------------------------------------------ Semantic analysis
   @intermediateCodeStruct intermediateCodeStruct = .default
   if @uint.errorCount == 0 then
+    var @timer t = .start 
     semanticAnalysis (
       !sourceFile:inSourceFile.string
       !ast:ast
@@ -173,15 +174,17 @@ private proc compileProject
       !staticStringMap:globalLiteralStringMap
       ?intermediateCode:intermediateCodeStruct
     )
+    message "Semantic: " + [t string] + "\n" 
   end
-  message "Sémantique : " + [t string] + "\n" 
 #------------------------------------------------------------ Code optimisation
   if @uint.errorCount == 0 then
+    var @timer tOpt = .start 
     codeOptimisation (!?intermediateCode:intermediateCodeStruct)
+    message "Optimization: " + [tOpt string] + "\n" 
   end
-  message "Optimisation : " + [t string] + "\n" 
 #------------------------------------------------------------ Code generation
   if @uint.errorCount == 0 then
+    var @timer tGen = .start 
     codeGeneration (
       !currentDir:inCurrentDirectory
       !outputFile:inSourceFile.string
@@ -196,8 +199,8 @@ private proc compileProject
       !sourceFileSet:sourceFileAbsolutePathSet
       !targetParameters:semanticContext.mTargetParameters
     )
+    message "Code generation: " + [tGen string] + "\n" 
   end
-  message "Génération : " + [t string] + "\n" 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

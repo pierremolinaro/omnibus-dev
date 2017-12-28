@@ -459,7 +459,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   end
 #--- Generate LLVM type declarations
 # Unsing forward type is allowed for pointers
-  ioLLVMcode += llvmTitleComment (!"Types (structures and static arraies)")
+  ioLLVMcode += llvmTitleComment (!"User Defined Types")
   for (type *) in orderedTypeList do
     switch type.kind
     case void :
@@ -485,6 +485,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     case opaque (*) :
     case arrayType (elementType arraySize) :
       ioLLVMcode += [type llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
+    case dynamicArrayType (2*) :
     case function (*) :
     case pointer (unused pointee) :
     end

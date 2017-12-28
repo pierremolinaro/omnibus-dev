@@ -1325,6 +1325,24 @@ class cEnumAssociatedValues_typeKind_arrayType : public cEnumAssociatedValues {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+class cEnumAssociatedValues_typeKind_dynamicArrayType : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_bigint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_dynamicArrayType (const GALGAS_PLMType & inAssociatedValue0,
+                                                            const GALGAS_bigint & inAssociatedValue1
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_dynamicArrayType (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 class cEnumAssociatedValues_typeKind_function : public cEnumAssociatedValues {
   public : const GALGAS_routineDescriptor mAssociatedValue0 ;
 
@@ -1877,6 +1895,7 @@ class GALGAS_constructorValue : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
+    kEnum_null,
     kEnum_simple,
     kEnum_structure,
     kEnum_arrayValue
@@ -1910,6 +1929,8 @@ class GALGAS_constructorValue : public AC_GALGAS_root {
                                                                         const class GALGAS_uint & inOperand1
                                                                         COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_constructorValue constructor_null (LOCATION_ARGS) ;
+
   public : static class GALGAS_constructorValue constructor_simple (const class GALGAS_bigint & inOperand0
                                                                     COMMA_LOCATION_ARGS) ;
 
@@ -1942,6 +1963,8 @@ class GALGAS_constructorValue : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNull (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSimple (LOCATION_ARGS) const ;
 

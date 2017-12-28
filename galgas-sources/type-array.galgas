@@ -88,15 +88,11 @@ override method @typeArrayDeclarationAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Get element type
-  [ioContext.mTypeMap searchKey
-    !lkey:mElementTypeName
-    ?type:let kind
-    ?1*
-  ]
-  if not [kind copyable] then
+  [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?1*]
+  if not [elementType copyable] then
     error mElementTypeName : "an array element should be copyable"
   end
-  if not [kind instanciable] then
+  if not [elementType instanciable] then
     error mElementTypeName : "an array element should be instanciable"
   end
 #--- Compute array size
@@ -121,7 +117,6 @@ override method @typeArrayDeclarationAST enterInContext
     error mSizeExpressionLocation : "array size expression is not static"
   else
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
-    let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName} type]
   #-------------------------------------------- Class method map : add "count" constructor
     @classConstantMap classConstantMap = {}
    [!?classConstantMap insertKey !.new {!"count" !mAnonymousArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
@@ -136,10 +131,7 @@ override method @typeArrayDeclarationAST enterInContext
     @constructorMap constructorMap = {}
     [!?constructorMap insertKey !["(!repeated)" nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
   #-------------------------------------------- Type attributes
-    @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine
-    if [elementType copyable] then
-      typeAttributes = typeAttributes | .copyable
-    end
+    @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine | .copyable
   #-------------------------------------------- Enter in type map
     let arrayType = @PLMType.new {
       !propertyMap:arrayTypePropertyMap

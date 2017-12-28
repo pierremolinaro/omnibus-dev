@@ -1,42 +1,27 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
+#  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @enumerationConstantList {
-  @lstring mConstantName
-  @bigint mConstantValue
-}
-
-#·······················································································································
-
-class @enumerationDeclarationAST : @abstractDeclarationAST {
-  @lstring mEnumerationName
-  @enumerationConstantList mCaseNameList
+class @typeDynamicArrayDeclarationAST : @abstractDeclarationAST {
+  @lstring mAnonymousDynamicArrayTypeName
+  @lstring mElementTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
+#  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
-    $enum$
-    $\$type$ ?let enumName
-    ${$
-    @enumerationConstantList enumCaseList = {}
-    var idx = 0G
-    repeat
-      $case$
-      $identifier$ ?let constantName
-      enumCaseList += !constantName !idx
-      idx = idx + 1
-    while
-    end
-    $}$
-    ioAST.mDeclarationListAST += !@enumerationDeclarationAST.new {!enumName !enumCaseList}
+  rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
+    $[$
+    $\$type$ ?let elementTypeName
+    $]$
+    outTypeName = ["anonymous.dynamic.array." + ioAST.mTypeDeclarationIndex here]
+    ioAST.mTypeDeclarationIndex ++
+    ioAST.mDeclarationListAST += !@typeDynamicArrayDeclarationAST.new {!outTypeName !elementTypeName}
   }
 
   #·····················································································································
@@ -44,10 +29,10 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ADD EXTENSION                                                                                                        
+#  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @enumerationDeclarationAST addExtension
+override method @typeDynamicArrayDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
@@ -56,64 +41,35 @@ override method @enumerationDeclarationAST addExtension
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH                                                                                                     
+#  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @enumerationDeclarationAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  let typeName = llvmTypeNameFromPLMname (!mEnumerationName)
-  [!?ioGraph addNode !typeName !self]
-  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (![boolTypeName () nowhere])]
-#--- Mark dependance from $uintN used for value property
-  @bigint maxValue = 0G
-  for (* value) in mCaseNameList do
-    if maxValue < value then
-      maxValue = value
-    end
-  end
-  @uint representationBitCount = 0
-  loop (@uint.max) while maxValue > 0G do
-    representationBitCount ++ ;
-    maxValue = maxValue / 2G
-  end
-  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (!["uint" + representationBitCount nowhere])]
+override method @typeDynamicArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let newTypeName = llvmTypeNameFromPLMname (!mAnonymousDynamicArrayTypeName)
+  let elementTypeName = llvmTypeNameFromPLMname (!mElementTypeName)
+  [!?ioGraph addNode !newTypeName !self]
+  [!?ioGraph addEdge !newTypeName !elementTypeName]
+  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !mAnonymousDynamicArrayTypeName.location}
+  [!?ioGraph addEdge !newTypeName !rootNode]
 }
 
 #·······················································································································
 
-override getter @enumerationDeclarationAST location -> @location outLocation {
-  outLocation = mEnumerationName.location
+override getter @typeDynamicArrayDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "anonymous $" + mAnonymousDynamicArrayTypeName 
 }
 
 #·······················································································································
 
-override getter @enumerationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "enum $" + mEnumerationName 
+override getter @typeDynamicArrayDeclarationAST location -> @location outLocation {
+  outLocation = mAnonymousDynamicArrayTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  UTILITIES                                                                                                     
+#  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func integerEnumAccessorName ?forBitCount:let @uint inBitCount -> @string {
-  result = "uint" + inBitCount
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @classConstantMap {
-  @bigint mIndex
-  @lstring mClassTypeName
-  insert insertKey error message "the '%K' constant is already declared"
-  search searchKey error message "there is no '%K' constant"
-}
-
-#·······················································································································
-
-override method @enumerationDeclarationAST enterInContext
+override method @typeDynamicArrayDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
@@ -121,139 +77,149 @@ override method @enumerationDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-#---------------- Build constant map
-  @classConstantMap enumConstantMap = {}
-  @bigint maxValue = 0G
-  for (name value) in mCaseNameList do
-    [!?enumConstantMap insertKey !name !value !mEnumerationName]
-    if maxValue < value then
-      maxValue = value
-    end
+#-------------------------------------------- Get element type
+  [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?1*]
+  if not [elementType copyable] then
+    error mElementTypeName : "an array element should be copyable"
   end
-#---------------- Compute representation bit count
-  @uint representationBitCount = 0
-  loop (@uint.max) while maxValue > 0G do
-    representationBitCount ++ ;
-    maxValue = maxValue / 2G
+  if not [elementType instanciable] then
+    error mElementTypeName : "an array element should be instanciable"
   end
-#---------------- Property map: add uintN() accessor
+#-------------------------------------------- Property map
   @propertyMap propertyMap = {}
-  let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
-    !ioContext.mTypeMap
-    !.new {!"uint" + representationBitCount !mEnumerationName}
-  }
-  [!?propertyMap addFunctionWithoutArgument
+#--- Method 'append'
+  [!?propertyMap addFunctionWithInputArgument
+    !?context:ioContext
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:mEnumerationName
-    !methodName:integerEnumAccessorName (!forBitCount:representationBitCount)
-    !safe:true
-    !resultTypeProxy:integerTypeProxy
+    !receiverTypeName:mAnonymousDynamicArrayTypeName
+    !methodName:"append"
+    !safe:false
+    !inputArgumentSelector:""
+    !inputArgumentTypeName:mElementTypeName
+    !inputArgumentName:"inValue"
+    !resultTypeProxy:.null
+    !canMutateProperties:true
   ]
-#---------------- Insert enumeration in type map
-  let enumerationType = @PLMType.new {
+#-------------------------------------------- Constructor map
+  @constructorMap constructorMap = {}
+  [!?constructorMap insertKey !["()" nowhere] !{} !.null]
+#-------------------------------------------- Type attributes
+  let @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine | .copyable | .arc
+#-------------------------------------------- Enter in type map
+  let arrayType = @PLMType.new {
     !propertyMap:propertyMap
-    !classConstantMap:enumConstantMap
-    !constructorMap:{}
+    !classConstantMap:{}
+    !constructorMap:constructorMap
     !guardMap:{}
-    !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmTypeName:mEnumerationName
-    !kind:.enumeration {!bitCount:representationBitCount}
+    !typeAttributes:typeAttributes
+    !plmTypeName:mAnonymousDynamicArrayTypeName
+    !kind:.dynamicArrayType {!elementType:elementType !ptrSize:ioContext.mTargetParameters.mPointerSize}
   }
   [!?ioContext.mTypeMap insertType
-    !lkey:mEnumerationName
-    !type:enumerationType
+    !lkey:mAnonymousDynamicArrayTypeName
+    !type:arrayType
     !index:[ioContext.mTypeMap count]
   ]
-#---------------- Infix operators
-  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
 #---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@enumerationDecoratedDeclaration.new {!mEnumerationName !representationBitCount}
+  ioDecoratedDeclarationList += !@decoratedTypeDynamicArrayDeclaration.new {
+    !mAnonymousDynamicArrayTypeName
+    !ioContext.mTargetParameters.mPointerSize
+    !elementType
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @decoratedTypeDynamicArrayDeclaration : @abstractDecoratedDeclaration {
+  @string mAnonymousDynamicArrayTypeName
+  @bigint mPtrSize
+  @PLMType mElementType
 }
 
 #·······················································································································
 
-proc enterEnumerationComparisonOperators
-  ?typeName:@lstring inTypeName
-  ?!context:@semanticContext ioContext
-{
-  let key = combineTypeNamesForInfixOperator (!inTypeName.string !inTypeName.string)
-  [!?ioContext.mEqualOperatorMap insertKey
-    !key
-    !booleanType ()
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
-  ]
-  [!?ioContext.mNonEqualOperatorMap insertKey
-    !key
-    !booleanType ()
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
-  ]
-  [!?ioContext.mStrictInfOperatorMap insertKey
-    !key
-    !booleanType ()
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
-  ]
-  [!?ioContext.mInfEqualOperatorMap insertKey
-    !key
-    !booleanType ()
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
-  ]
-  [!?ioContext.mStrictSupOperatorMap insertKey
-    !key
-    !booleanType ()
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
-  ]
-  [!?ioContext.mSupEqualOperatorMap insertKey
-    !key
-    !booleanType ()
-    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
-  ]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @enumerationDecoratedDeclaration : @abstractDecoratedDeclaration {
-  @lstring mEnumerationName
-  @uint mRepresentationBitCount
-}
-
-#·······················································································································
-
-override method @enumerationDecoratedDeclaration semanticAnalysis
+override method @decoratedTypeDynamicArrayDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #----------- Generate enumeration specific code
-  ioIntermediateCodeStruct.mGenerationListIR += !@enumerationIR.new {!mEnumerationName !mRepresentationBitCount}
+  ioIntermediateCodeStruct.mGenerationListIR += !@dynamicArrayIR.new {
+    !mAnonymousDynamicArrayTypeName
+    !mPtrSize
+    !mElementType
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @enumerationIR : @abstractGenerationIR {
-  @lstring mEnumerationName
-  @uint mBitCount
+class @dynamicArrayIR : @abstractGenerationIR {
+  @string mAnonymousDynamicArrayTypeName
+  @uint mPtrSize
+  @PLMType mElementType
 }
 
 #·······················································································································
 
-override method @enumerationIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
+override method @dynamicArrayIR generateLLVMcode
+  ?!@string ioLLVMcode
+  ?!@generationAdds ioGenerationAdds
+{
+#--- Add extern functions
+  let insertFunction = "i32 @arc.insert.at.index "
+                     + "(i32 %inPointer, i32 %inIndex, i32 %inElementSize, i32* %outElementPtr)"
+  ioGenerationAdds.mExternFunctionDeclarationSet += !insertFunction
+  let bufferLengthFunctionName = llvmNameForFunction (!"arc.buffer.length")
+#  ioGenerationAdds.mExternFunctionDeclarationSet += !"i32 @" + bufferLengthFunctionName + " (i32 %inPointer)"
+
+  let elementLLVMTypeName = [mElementType llvmTypeName]
+#--- Method 'append'
+  let argumentList = @routineFormalArgumentListAST {
+    !.input
+    !["" nowhere]
+    ![mElementType.plmTypeName nowhere]
+    !["inValue" nowhere]
+  }
   let routineMangledName = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!mEnumerationName)
-    !.new {!integerEnumAccessorName (!forBitCount:mBitCount) !mEnumerationName}
-    !{}
+    !llvmTypeStringFromPLMname (!mAnonymousDynamicArrayTypeName)
+    !["append" nowhere]
+    !argumentList
   )
   let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
-  let type = "i" + mBitCount
   ioLLVMcode += llvmTitleComment (!routineMangledName)
-  ioLLVMcode += "define internal " + type + "  @" + routineLLVMName + " (" + type + "* %inValue) nounwind {\n"
-  ioLLVMcode += "  %r = load " + type + ", " + type + "* %inValue\n"
-  ioLLVMcode += "  ret " + type + " %r\n"
+  ioLLVMcode += "define internal void @" + routineLLVMName + " ("
+  ioLLVMcode += "i" + mPtrSize + "* %ioArray"
+  ioLLVMcode += ", " + elementLLVMTypeName + " %inValue"
+  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
+  ioLLVMcode += ";--- Inserted element pointer\n"
+  ioLLVMcode += " %insert.address = alloca i" + mPtrSize + "\n"
+  ioLLVMcode += ";--- value pointer\n"
+  ioLLVMcode += "  %value.pointer = alloca " + elementLLVMTypeName + "\n"
+  ioLLVMcode += "  store " + elementLLVMTypeName + " %inValue, " + elementLLVMTypeName + "* %value.pointer\n"
+  ioLLVMcode += ";--- Size of element\n"
+  ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + elementLLVMTypeName + ", " + elementLLVMTypeName + "* null, i32 1\n"
+  ioLLVMcode += "  %element.byte.size = ptrtoint " + elementLLVMTypeName + "* %sizeAsPtr to i32\n"
+  ioLLVMcode += ";--- Get buffer length\n"
+  ioLLVMcode += "  %current.buffer.pointer = load i" + mPtrSize + ", i" + mPtrSize + "* %ioArray\n"
+  ioLLVMcode += "  %current.buffer.length = call i" + mPtrSize + " @" + bufferLengthFunctionName
+             +  " (i" + mPtrSize + " %current.buffer.pointer)\n"
+  ioLLVMcode += ";--- Get inserted element pointer\n"
+  ioLLVMcode += "  %new.buffer.pointer = call i" + mPtrSize + " @arc.insert.at.index "
+             + "(i" + mPtrSize + " %current.buffer.pointer, i32 %current.buffer.length, i32 %element.byte.size, "
+             + "i" + mPtrSize + "* %insert.address)\n"
+  ioLLVMcode += ";--- Perform copy\n"
+  ioLLVMcode += "  %typed.insert.address = bitcast i" + mPtrSize + "* %insert.address to " + elementLLVMTypeName + "*\n"
+  ioLLVMcode += "  call void @plm.assign." + [mElementType.plmTypeName identifierRepresentation]
+  ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
+  ioLLVMcode += ";--- Store new buffer pointer\n"
+  ioLLVMcode += "  store i" + mPtrSize + " %new.buffer.pointer, i" + mPtrSize + "* %ioArray\n"
+  ioLLVMcode += ";--- Return\n"
+  ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-

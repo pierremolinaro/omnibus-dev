@@ -294,6 +294,8 @@ private proc controlRegisterType
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case arrayType (* *) :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+  case dynamicArrayType (2*) :
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case function (*) :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case pointer (*) :
