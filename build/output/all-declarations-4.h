@@ -2070,6 +2070,29 @@ void extensionSetter_addFunctionWithInputArgument (class GALGAS_propertyMap & io
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                          Extension setter '@propertyMap addFunctionWithTwoInputArguments'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_propertyMap & ioObject,
+                                                       class GALGAS_semanticContext & io_ioContext,
+                                                       class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
+                                                       const class GALGAS_lstring constin_inReceiverTypeName,
+                                                       const class GALGAS_string constin_inMethodName,
+                                                       const class GALGAS_bool constin_inIsSafe,
+                                                       const class GALGAS_string constin_inInputSelector_31_,
+                                                       const class GALGAS_string constin_inInputArgumentTypeName_31_,
+                                                       const class GALGAS_string constin_inInputArgumentName_31_,
+                                                       const class GALGAS_string constin_inInputSelector_32_,
+                                                       const class GALGAS_string constin_inInputArgumentTypeName_32_,
+                                                       const class GALGAS_string constin_inInputArgumentName_32_,
+                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
+                                                       const class GALGAS_bool constin_inCanMutateProperties,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      @constructorValue enum, associated values                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5543,41 +5566,4 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessibleEntities ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                     Abstract extension method '@abstractInstructionIR enterAccessibleEntities'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities) (const class cPtr_abstractInstructionIR * inObject,
-                                                                                        class GALGAS_accessibleEntities & ioArgument0,
-                                                                                        class GALGAS_uint & ioArgument1,
-                                                                                        class C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_enterAccessibleEntities (const int32_t inClassIndex,
-                                                   extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_enterAccessibleEntities (const class cPtr_abstractInstructionIR * inObject,
-                                                  GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                                  GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Extension method '@instructionListIR enterAccessibleEntities'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_enterAccessibleEntities (const class GALGAS_instructionListIR inObject,
-                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 

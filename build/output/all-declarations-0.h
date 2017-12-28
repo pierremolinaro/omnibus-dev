@@ -14547,6 +14547,8 @@ class cParser_plm_5F_target_5F_specific_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_6 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_7 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -14759,13 +14761,17 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 
 class GALGAS_targetParameters : public AC_GALGAS_root {
 //--------------------------------- Properties
+  public : GALGAS_location mProperty_mConfigurationLocation ;
+
   public : GALGAS__32_lstringlist mProperty_mPython_5F_utilityToolList ;
 
   public : GALGAS_lstring mProperty_mPython_5F_build ;
 
   public : GALGAS_lstring mProperty_mLinkerScript ;
 
-  public : GALGAS_lbigint mProperty_mPointerSize ;
+  public : GALGAS_uint mProperty_mPointerSize ;
+
+  public : GALGAS_bool mProperty_mHandleDynamicArray ;
 
   public : GALGAS_lbigint mProperty_mSystemStackSize ;
 
@@ -14821,10 +14827,12 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_targetParameters (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_targetParameters (const GALGAS__32_lstringlist & in_mPython_5F_utilityToolList,
+  public : GALGAS_targetParameters (const GALGAS_location & in_mConfigurationLocation,
+                                    const GALGAS__32_lstringlist & in_mPython_5F_utilityToolList,
                                     const GALGAS_lstring & in_mPython_5F_build,
                                     const GALGAS_lstring & in_mLinkerScript,
-                                    const GALGAS_lbigint & in_mPointerSize,
+                                    const GALGAS_uint & in_mPointerSize,
+                                    const GALGAS_bool & in_mHandleDynamicArray,
                                     const GALGAS_lbigint & in_mSystemStackSize,
                                     const GALGAS_lbigint & in_mStackedUserRegisterOnInterruptByteSize,
                                     const GALGAS_lstring & in_mNopInstructionStringInLLVM,
@@ -14857,30 +14865,32 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_targetParameters constructor_new (const class GALGAS__32_lstringlist & inOperand0,
-                                                                 const class GALGAS_lstring & inOperand1,
+  public : static class GALGAS_targetParameters constructor_new (const class GALGAS_location & inOperand0,
+                                                                 const class GALGAS__32_lstringlist & inOperand1,
                                                                  const class GALGAS_lstring & inOperand2,
-                                                                 const class GALGAS_lbigint & inOperand3,
-                                                                 const class GALGAS_lbigint & inOperand4,
-                                                                 const class GALGAS_lbigint & inOperand5,
-                                                                 const class GALGAS_lstring & inOperand6,
-                                                                 const class GALGAS_lstring & inOperand7,
-                                                                 const class GALGAS_lbigint & inOperand8,
+                                                                 const class GALGAS_lstring & inOperand3,
+                                                                 const class GALGAS_uint & inOperand4,
+                                                                 const class GALGAS_bool & inOperand5,
+                                                                 const class GALGAS_lbigint & inOperand6,
+                                                                 const class GALGAS_lbigint & inOperand7,
+                                                                 const class GALGAS_lstring & inOperand8,
                                                                  const class GALGAS_lstring & inOperand9,
-                                                                 const class GALGAS_lstring & inOperand10,
+                                                                 const class GALGAS_lbigint & inOperand10,
                                                                  const class GALGAS_lstring & inOperand11,
                                                                  const class GALGAS_lstring & inOperand12,
-                                                                 const class GALGAS_lstringlist & inOperand13,
-                                                                 const class GALGAS_lstringlist & inOperand14,
+                                                                 const class GALGAS_lstring & inOperand13,
+                                                                 const class GALGAS_lstring & inOperand14,
                                                                  const class GALGAS_lstringlist & inOperand15,
-                                                                 const class GALGAS_lstring & inOperand16,
-                                                                 const class GALGAS_lstring & inOperand17,
+                                                                 const class GALGAS_lstringlist & inOperand16,
+                                                                 const class GALGAS_lstringlist & inOperand17,
                                                                  const class GALGAS_lstring & inOperand18,
-                                                                 const class GALGAS_lbigint & inOperand19,
+                                                                 const class GALGAS_lstring & inOperand19,
                                                                  const class GALGAS_lstring & inOperand20,
-                                                                 const class GALGAS_lstring & inOperand21,
+                                                                 const class GALGAS_lbigint & inOperand21,
                                                                  const class GALGAS_lstring & inOperand22,
-                                                                 const class GALGAS_lstring & inOperand23
+                                                                 const class GALGAS_lstring & inOperand23,
+                                                                 const class GALGAS_lstring & inOperand24,
+                                                                 const class GALGAS_lstring & inOperand25
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -14895,11 +14905,15 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mConfigurationLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mHandleDynamicArray (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLinkerScript (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNopInstructionStringInLLVM (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPointerSize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPython_5F_build (LOCATION_ARGS) const ;
 

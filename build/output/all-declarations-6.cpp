@@ -24,7 +24,7 @@
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gNonTerminalNames_plm_target_grammar [12] = {
+static const char * gNonTerminalNames_plm_target_grammar [13] = {
   "<configuration_key>",// Index 0
   "<python_utility_tool_list>",// Index 1
   "<configuration_start_symbol>",// Index 2
@@ -36,7 +36,8 @@ static const char * gNonTerminalNames_plm_target_grammar [12] = {
   "<select_plm_5F_target_5F_specific_5F_syntax_4>",// Index 8
   "<select_plm_5F_target_5F_specific_5F_syntax_5>",// Index 9
   "<select_plm_5F_target_5F_specific_5F_syntax_6>",// Index 10
-  "<>"// Index 11
+  "<select_plm_5F_target_5F_specific_5F_syntax_7>",// Index 11
+  "<>"// Index 12
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -77,322 +78,341 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, REDUCE (0)
 , C_Lexique_plm_5F_lexique::kToken__24_type, REDUCE (0)
 , C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (0)
+, C_Lexique_plm_5F_lexique::kToken_yes, REDUCE (0)
+, C_Lexique_plm_5F_lexique::kToken_no, REDUCE (0)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (0)
 , END
-// State S6 (index = 28)
+// State S6 (index = 32)
 , C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (9)
 , END
-// State S7 (index = 31)
+// State S7 (index = 35)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (1)
 , END
-// State S8 (index = 34)
+// State S8 (index = 38)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (10)
 , END
-// State S9 (index = 37)
+// State S9 (index = 41)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (11)
 , END
-// State S10 (index = 40)
+// State S10 (index = 44)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S11 (index = 43)
+// State S11 (index = 47)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (4)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (6)
 , END
-// State S12 (index = 48)
+// State S12 (index = 52)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (14)
 , END
-// State S13 (index = 51)
+// State S13 (index = 55)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (5)
 , END
-// State S14 (index = 54)
+// State S14 (index = 58)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S15 (index = 57)
+// State S15 (index = 61)
 , C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (16)
 , END
-// State S16 (index = 60)
+// State S16 (index = 64)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S17 (index = 63)
+// State S17 (index = 67)
 , C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (18)
 , END
-// State S18 (index = 66)
+// State S18 (index = 70)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S19 (index = 69)
+// State S19 (index = 73)
 , C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (20)
 , END
-// State S20 (index = 72)
+// State S20 (index = 76)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S21 (index = 75)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (22)
+// State S21 (index = 79)
+, C_Lexique_plm_5F_lexique::kToken_yes, SHIFT (22)
+, C_Lexique_plm_5F_lexique::kToken_no, SHIFT (23)
 , END
-// State S22 (index = 78)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S23 (index = 81)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (24)
-, END
-// State S24 (index = 84)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S25 (index = 87)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (26)
-, END
-// State S26 (index = 90)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S27 (index = 93)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (28)
-, END
-// State S28 (index = 96)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S29 (index = 99)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (30)
-, END
-// State S30 (index = 102)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S31 (index = 105)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (32)
-, END
-// State S32 (index = 108)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S33 (index = 111)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (34)
-, END
-// State S34 (index = 114)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S35 (index = 117)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (36)
-, END
-// State S36 (index = 120)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S37 (index = 123)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (38)
-, END
-// State S38 (index = 126)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S39 (index = 129)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (40)
-, END
-// State S40 (index = 132)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S41 (index = 135)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (42)
-, END
-// State S42 (index = 138)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S43 (index = 141)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (44)
-, END
-// State S44 (index = 144)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S45 (index = 147)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (46)
-, END
-// State S46 (index = 150)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S47 (index = 153)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (48)
-, END
-// State S48 (index = 156)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S49 (index = 159)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (50)
-, END
-// State S50 (index = 162)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S51 (index = 165)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (52)
-, END
-// State S52 (index = 168)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S53 (index = 171)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (54)
-, END
-// State S54 (index = 174)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S55 (index = 177)
+// State S22 (index = 84)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (6)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (56)
 , END
-// State S56 (index = 182)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (6)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (56)
-, END
-// State S57 (index = 187)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
-, END
-// State S58 (index = 190)
+// State S23 (index = 87)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (7)
 , END
-// State S59 (index = 193)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (8)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (60)
-, END
-// State S60 (index = 198)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (8)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (60)
-, END
-// State S61 (index = 203)
+// State S24 (index = 90)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S62 (index = 206)
+// State S25 (index = 93)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (26)
+, END
+// State S26 (index = 96)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S27 (index = 99)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (28)
+, END
+// State S28 (index = 102)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S29 (index = 105)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (30)
+, END
+// State S30 (index = 108)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S31 (index = 111)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (32)
+, END
+// State S32 (index = 114)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S33 (index = 117)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (34)
+, END
+// State S34 (index = 120)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S35 (index = 123)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (36)
+, END
+// State S36 (index = 126)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S37 (index = 129)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (38)
+, END
+// State S38 (index = 132)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S39 (index = 135)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (40)
+, END
+// State S40 (index = 138)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S41 (index = 141)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (42)
+, END
+// State S42 (index = 144)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S43 (index = 147)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (44)
+, END
+// State S44 (index = 150)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S45 (index = 153)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (46)
+, END
+// State S46 (index = 156)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S47 (index = 159)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (48)
+, END
+// State S48 (index = 162)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S49 (index = 165)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (50)
+, END
+// State S50 (index = 168)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S51 (index = 171)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (52)
+, END
+// State S52 (index = 174)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S53 (index = 177)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (54)
+, END
+// State S54 (index = 180)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S55 (index = 183)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (56)
+, END
+// State S56 (index = 186)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S57 (index = 189)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (58)
+, END
+// State S58 (index = 192)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S59 (index = 195)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (8)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (60)
+, END
+// State S60 (index = 200)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (8)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (60)
+, END
+// State S61 (index = 205)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S62 (index = 208)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (9)
 , END
-// State S63 (index = 209)
+// State S63 (index = 211)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (64)
 , END
-// State S64 (index = 214)
+// State S64 (index = 216)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (64)
 , END
-// State S65 (index = 219)
+// State S65 (index = 221)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S66 (index = 222)
+// State S66 (index = 224)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (11)
 , END
-// State S67 (index = 225)
+// State S67 (index = 227)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (68)
 , END
-// State S68 (index = 230)
+// State S68 (index = 232)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (68)
 , END
-// State S69 (index = 235)
+// State S69 (index = 237)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S70 (index = 238)
+// State S70 (index = 240)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (13)
 , END
-// State S71 (index = 241)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (73)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (14)
+// State S71 (index = 243)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (14)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (72)
 , END
-// State S72 (index = 246)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (2)
+// State S72 (index = 248)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (14)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (72)
 , END
-// State S73 (index = 249)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (16)
-, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (75)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (16)
+// State S73 (index = 253)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
 // State S74 (index = 256)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (3)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (15)
 , END
 // State S75 (index = 259)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (77)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (77)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (16)
 , END
-// State S76 (index = 262)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (73)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (14)
+// State S76 (index = 264)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (2)
 , END
 // State S77 (index = 267)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (17)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (17)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (18)
+, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (79)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (18)
 , END
-// State S78 (index = 272)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (15)
+// State S78 (index = 274)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (3)
+, END
+// State S79 (index = 277)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (81)
+, END
+// State S80 (index = 280)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (77)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (16)
+, END
+// State S81 (index = 285)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (19)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (19)
+, END
+// State S82 (index = 290)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (17)
 , END} ;
 
-static const uint32_t gActionTableIndex_plm_target_grammar [79] = {
+static const uint32_t gActionTableIndex_plm_target_grammar [83] = {
   0  // S0
 , 3  // S1
 , 6  // S2
 , 11  // S3
 , 14  // S4
 , 17  // S5
-, 28  // S6
-, 31  // S7
-, 34  // S8
-, 37  // S9
-, 40  // S10
-, 43  // S11
-, 48  // S12
-, 51  // S13
-, 54  // S14
-, 57  // S15
-, 60  // S16
-, 63  // S17
-, 66  // S18
-, 69  // S19
-, 72  // S20
-, 75  // S21
-, 78  // S22
-, 81  // S23
-, 84  // S24
-, 87  // S25
-, 90  // S26
-, 93  // S27
-, 96  // S28
-, 99  // S29
-, 102  // S30
-, 105  // S31
-, 108  // S32
-, 111  // S33
-, 114  // S34
-, 117  // S35
-, 120  // S36
-, 123  // S37
-, 126  // S38
-, 129  // S39
-, 132  // S40
-, 135  // S41
-, 138  // S42
-, 141  // S43
-, 144  // S44
-, 147  // S45
-, 150  // S46
-, 153  // S47
-, 156  // S48
-, 159  // S49
-, 162  // S50
-, 165  // S51
-, 168  // S52
-, 171  // S53
-, 174  // S54
-, 177  // S55
-, 182  // S56
-, 187  // S57
-, 190  // S58
-, 193  // S59
-, 198  // S60
-, 203  // S61
-, 206  // S62
-, 209  // S63
-, 214  // S64
-, 219  // S65
-, 222  // S66
-, 225  // S67
-, 230  // S68
-, 235  // S69
-, 238  // S70
-, 241  // S71
-, 246  // S72
-, 249  // S73
+, 32  // S6
+, 35  // S7
+, 38  // S8
+, 41  // S9
+, 44  // S10
+, 47  // S11
+, 52  // S12
+, 55  // S13
+, 58  // S14
+, 61  // S15
+, 64  // S16
+, 67  // S17
+, 70  // S18
+, 73  // S19
+, 76  // S20
+, 79  // S21
+, 84  // S22
+, 87  // S23
+, 90  // S24
+, 93  // S25
+, 96  // S26
+, 99  // S27
+, 102  // S28
+, 105  // S29
+, 108  // S30
+, 111  // S31
+, 114  // S32
+, 117  // S33
+, 120  // S34
+, 123  // S35
+, 126  // S36
+, 129  // S37
+, 132  // S38
+, 135  // S39
+, 138  // S40
+, 141  // S41
+, 144  // S42
+, 147  // S43
+, 150  // S44
+, 153  // S45
+, 156  // S46
+, 159  // S47
+, 162  // S48
+, 165  // S49
+, 168  // S50
+, 171  // S51
+, 174  // S52
+, 177  // S53
+, 180  // S54
+, 183  // S55
+, 186  // S56
+, 189  // S57
+, 192  // S58
+, 195  // S59
+, 200  // S60
+, 205  // S61
+, 208  // S62
+, 211  // S63
+, 216  // S64
+, 221  // S65
+, 224  // S66
+, 227  // S67
+, 232  // S68
+, 237  // S69
+, 240  // S70
+, 243  // S71
+, 248  // S72
+, 253  // S73
 , 256  // S74
 , 259  // S75
-, 262  // S76
+, 264  // S76
 , 267  // S77
-, 272  // S78
+, 274  // S78
+, 277  // S79
+, 280  // S80
+, 285  // S81
+, 290  // S82
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -424,7 +444,7 @@ static const int16_t gSuccessorTable_plm_target_grammar_18 [3] = {0, 19, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_20 [3] = {0, 21, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_22 [3] = {0, 23, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_21 [3] = {5, 24, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_24 [3] = {0, 25, -1} ;
 
@@ -458,11 +478,9 @@ static const int16_t gSuccessorTable_plm_target_grammar_52 [3] = {0, 53, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_54 [3] = {0, 55, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_55 [3] = {5, 57, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_56 [3] = {0, 57, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_56 [3] = {5, 58, -1} ;
-
-static const int16_t gSuccessorTable_plm_target_grammar_57 [3] = {0, 59, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_58 [3] = {0, 59, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_59 [3] = {6, 61, -1} ;
 
@@ -480,22 +498,28 @@ static const int16_t gSuccessorTable_plm_target_grammar_67 [3] = {8, 69, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_68 [3] = {8, 70, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_69 [5] = {0, 71,
-  3, 72, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_69 [3] = {0, 71, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_71 [3] = {9, 74, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_71 [3] = {9, 73, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_73 [3] = {10, 76, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_72 [3] = {9, 74, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_76 [3] = {9, 78, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_73 [5] = {0, 75,
+  3, 76, -1} ;
 
-static const int16_t * gSuccessorTable_plm_target_grammar [79] = {
+static const int16_t gSuccessorTable_plm_target_grammar_75 [3] = {10, 78, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_77 [3] = {11, 80, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_80 [3] = {10, 82, -1} ;
+
+static const int16_t * gSuccessorTable_plm_target_grammar [83] = {
 gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2, gSuccessorTable_plm_target_grammar_3, 
   NULL, NULL, NULL, NULL, 
   NULL, NULL, gSuccessorTable_plm_target_grammar_10, gSuccessorTable_plm_target_grammar_11, 
   NULL, NULL, gSuccessorTable_plm_target_grammar_14, NULL, 
   gSuccessorTable_plm_target_grammar_16, NULL, gSuccessorTable_plm_target_grammar_18, NULL, 
-  gSuccessorTable_plm_target_grammar_20, NULL, gSuccessorTable_plm_target_grammar_22, NULL, 
+  gSuccessorTable_plm_target_grammar_20, gSuccessorTable_plm_target_grammar_21, NULL, NULL, 
   gSuccessorTable_plm_target_grammar_24, NULL, gSuccessorTable_plm_target_grammar_26, NULL, 
   gSuccessorTable_plm_target_grammar_28, NULL, gSuccessorTable_plm_target_grammar_30, NULL, 
   gSuccessorTable_plm_target_grammar_32, NULL, gSuccessorTable_plm_target_grammar_34, NULL, 
@@ -503,13 +527,14 @@ gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2
   gSuccessorTable_plm_target_grammar_40, NULL, gSuccessorTable_plm_target_grammar_42, NULL, 
   gSuccessorTable_plm_target_grammar_44, NULL, gSuccessorTable_plm_target_grammar_46, NULL, 
   gSuccessorTable_plm_target_grammar_48, NULL, gSuccessorTable_plm_target_grammar_50, NULL, 
-  gSuccessorTable_plm_target_grammar_52, NULL, gSuccessorTable_plm_target_grammar_54, gSuccessorTable_plm_target_grammar_55, 
-  gSuccessorTable_plm_target_grammar_56, gSuccessorTable_plm_target_grammar_57, NULL, gSuccessorTable_plm_target_grammar_59, 
+  gSuccessorTable_plm_target_grammar_52, NULL, gSuccessorTable_plm_target_grammar_54, NULL, 
+  gSuccessorTable_plm_target_grammar_56, NULL, gSuccessorTable_plm_target_grammar_58, gSuccessorTable_plm_target_grammar_59, 
   gSuccessorTable_plm_target_grammar_60, gSuccessorTable_plm_target_grammar_61, NULL, gSuccessorTable_plm_target_grammar_63, 
   gSuccessorTable_plm_target_grammar_64, gSuccessorTable_plm_target_grammar_65, NULL, gSuccessorTable_plm_target_grammar_67, 
   gSuccessorTable_plm_target_grammar_68, gSuccessorTable_plm_target_grammar_69, NULL, gSuccessorTable_plm_target_grammar_71, 
-  NULL, gSuccessorTable_plm_target_grammar_73, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_76, NULL, NULL} ;
+  gSuccessorTable_plm_target_grammar_72, gSuccessorTable_plm_target_grammar_73, NULL, gSuccessorTable_plm_target_grammar_75, 
+  NULL, gSuccessorTable_plm_target_grammar_77, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_80, NULL, NULL} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
@@ -517,15 +542,15 @@ gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int16_t gProductionsTable_plm_target_grammar [19 * 2] = {
+static const int16_t gProductionsTable_plm_target_grammar [21 * 2] = {
   0, 2,
   1, 2,
-  2, 54,
+  2, 56,
   3, 2,
   4, 0,
   4, 4,
-  5, 0,
-  5, 2,
+  5, 1,
+  5, 1,
   6, 0,
   6, 2,
   7, 0,
@@ -533,10 +558,12 @@ static const int16_t gProductionsTable_plm_target_grammar [19 * 2] = {
   8, 0,
   8, 2,
   9, 0,
-  9, 3,
+  9, 2,
   10, 0,
-  10, 2,
-  11, 1
+  10, 3,
+  11, 0,
+  11, 2,
+  12, 1
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -827,6 +854,17 @@ int32_t cGrammar_plm_5F_target_5F_grammar::select_plm_5F_target_5F_specific_5F_s
 int32_t cGrammar_plm_5F_target_5F_grammar::select_plm_5F_target_5F_specific_5F_syntax_6 (C_Lexique_plm_5F_lexique * inLexique) {
 // Productions numbers : 16 17
   return inLexique->nextProductionIndex () - 15 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                     'select_plm_5F_target_5F_specific_5F_syntax_7' non terminal implementation                       
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+int32_t cGrammar_plm_5F_target_5F_grammar::select_plm_5F_target_5F_specific_5F_syntax_7 (C_Lexique_plm_5F_lexique * inLexique) {
+// Productions numbers : 18 19
+  return inLexique->nextProductionIndex () - 17 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14935,215 +14973,6 @@ GALGAS_sliceAssignmentInstructionAST GALGAS_sliceAssignmentInstructionAST::extra
       result = *p ;
     }else{
       inCompiler->castError ("sliceAssignmentInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_varInstructionWithAssignmentAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_varInstructionWithAssignmentAST * p = (const cPtr_varInstructionWithAssignmentAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_varInstructionWithAssignmentAST) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mInstructionLocation.objectCompare (p->mProperty_mInstructionLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mVarName.objectCompare (p->mProperty_mVarName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mOptionalTypeName.objectCompare (p->mProperty_mOptionalTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mSourceExpression.objectCompare (p->mProperty_mSourceExpression) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_varInstructionWithAssignmentAST::objectCompare (const GALGAS_varInstructionWithAssignmentAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInstructionWithAssignmentAST::GALGAS_varInstructionWithAssignmentAST (void) :
-GALGAS_instructionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInstructionWithAssignmentAST::GALGAS_varInstructionWithAssignmentAST (const cPtr_varInstructionWithAssignmentAST * inSourcePtr) :
-GALGAS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_varInstructionWithAssignmentAST) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInstructionWithAssignmentAST GALGAS_varInstructionWithAssignmentAST::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation,
-                                                                                                const GALGAS_lstring & inAttribute_mVarName,
-                                                                                                const GALGAS_lstring & inAttribute_mOptionalTypeName,
-                                                                                                const GALGAS_expressionAST & inAttribute_mSourceExpression
-                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_varInstructionWithAssignmentAST result ;
-  if (inAttribute_mInstructionLocation.isValid () && inAttribute_mVarName.isValid () && inAttribute_mOptionalTypeName.isValid () && inAttribute_mSourceExpression.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_varInstructionWithAssignmentAST (inAttribute_mInstructionLocation, inAttribute_mVarName, inAttribute_mOptionalTypeName, inAttribute_mSourceExpression COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_varInstructionWithAssignmentAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_varInstructionWithAssignmentAST * p = (const cPtr_varInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_varInstructionWithAssignmentAST) ;
-    result = p->mProperty_mVarName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_varInstructionWithAssignmentAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_varInstructionWithAssignmentAST::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_varInstructionWithAssignmentAST * p = (const cPtr_varInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_varInstructionWithAssignmentAST) ;
-    result = p->mProperty_mOptionalTypeName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_varInstructionWithAssignmentAST::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mOptionalTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST GALGAS_varInstructionWithAssignmentAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_varInstructionWithAssignmentAST * p = (const cPtr_varInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_varInstructionWithAssignmentAST) ;
-    result = p->mProperty_mSourceExpression ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST cPtr_varInstructionWithAssignmentAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSourceExpression ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                              Pointer class for @varInstructionWithAssignmentAST class                               *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_varInstructionWithAssignmentAST::cPtr_varInstructionWithAssignmentAST (const GALGAS_location & in_mInstructionLocation,
-                                                                            const GALGAS_lstring & in_mVarName,
-                                                                            const GALGAS_lstring & in_mOptionalTypeName,
-                                                                            const GALGAS_expressionAST & in_mSourceExpression
-                                                                            COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (in_mInstructionLocation COMMA_THERE),
-mProperty_mVarName (in_mVarName),
-mProperty_mOptionalTypeName (in_mOptionalTypeName),
-mProperty_mSourceExpression (in_mSourceExpression) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_varInstructionWithAssignmentAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_varInstructionWithAssignmentAST ;
-}
-
-void cPtr_varInstructionWithAssignmentAST::description (C_String & ioString,
-                                                        const int32_t inIndentation) const {
-  ioString << "[@varInstructionWithAssignmentAST:" ;
-  mProperty_mInstructionLocation.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mVarName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mOptionalTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mSourceExpression.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_varInstructionWithAssignmentAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_varInstructionWithAssignmentAST (mProperty_mInstructionLocation, mProperty_mVarName, mProperty_mOptionalTypeName, mProperty_mSourceExpression COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @varInstructionWithAssignmentAST type                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_varInstructionWithAssignmentAST ("varInstructionWithAssignmentAST",
-                                                        & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_varInstructionWithAssignmentAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_varInstructionWithAssignmentAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_varInstructionWithAssignmentAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_varInstructionWithAssignmentAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInstructionWithAssignmentAST GALGAS_varInstructionWithAssignmentAST::extractObject (const GALGAS_object & inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_varInstructionWithAssignmentAST result ;
-  const GALGAS_varInstructionWithAssignmentAST * p = (const GALGAS_varInstructionWithAssignmentAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_varInstructionWithAssignmentAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("varInstructionWithAssignmentAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

@@ -8264,6 +8264,48 @@ void extensionSetter_addFunctionWithInputArgument (GALGAS_propertyMap & ioObject
 
 
 //---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Extension method '@propertyMap addFunctionWithTwoInputArguments'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_addFunctionWithTwoInputArguments (GALGAS_propertyMap & ioObject,
+                                                       GALGAS_semanticContext & ioArgument_ioContext,
+                                                       GALGAS_subprogramInvocationGraph & ioArgument_ioSubprogramInvocationGraph,
+                                                       const GALGAS_lstring constinArgument_inReceiverTypeName,
+                                                       const GALGAS_string constinArgument_inMethodName,
+                                                       const GALGAS_bool constinArgument_inIsSafe,
+                                                       const GALGAS_string constinArgument_inInputSelector_31_,
+                                                       const GALGAS_string constinArgument_inInputArgumentTypeName_31_,
+                                                       const GALGAS_string constinArgument_inInputArgumentName_31_,
+                                                       const GALGAS_string constinArgument_inInputSelector_32_,
+                                                       const GALGAS_string constinArgument_inInputArgumentTypeName_32_,
+                                                       const GALGAS_string constinArgument_inInputArgumentName_32_,
+                                                       const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
+                                                       const GALGAS_bool constinArgument_inCanMutateProperties,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_routineFormalArgumentListAST temp_0 = GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 132)) ;
+  temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 124)), constinArgument_inInputSelector_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 125)), constinArgument_inInputArgumentTypeName_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 126)), constinArgument_inInputArgumentName_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 127))  COMMA_SOURCE_FILE ("property-map.galgas", 127)) ;
+  temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 129)), constinArgument_inInputSelector_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 130)), constinArgument_inInputArgumentTypeName_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 131)), constinArgument_inInputArgumentName_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 132))  COMMA_SOURCE_FILE ("property-map.galgas", 132)) ;
+  GALGAS_routineFormalArgumentListAST var_argumentList_4807 = temp_0 ;
+  GALGAS_routineTypedSignature var_signature_5159 ;
+  {
+  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_4807, var_signature_5159, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 134)) ;
+  }
+  GALGAS_routineDescriptor var_descriptor_5196 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 138))  COMMA_SOURCE_FILE ("property-map.galgas", 138)), var_signature_5159, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 135)) ;
+  GALGAS_lstring var_methodMangledName_5539 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, constinArgument_inReceiverTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("property-map.galgas", 147)), var_argumentList_4807, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 145)) ;
+  {
+  ioObject.setter_insertKey (var_methodMangledName_5539, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_5196  COMMA_SOURCE_FILE ("property-map.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 150)) ;
+  }
+  GALGAS_lstring var_routineNameForInvocationGraph_5821 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverTypeName.getter_string (SOURCE_FILE ("property-map.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 157)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 158)), var_argumentList_4807, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 156)) ;
+  {
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_5821, var_routineNameForInvocationGraph_5821, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 161)) ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_constructorValue_simple::cEnumAssociatedValues_constructorValue_simple (const GALGAS_bigint & inAssociatedValue0
                                                                                               COMMA_LOCATION_ARGS) :
@@ -14819,85 +14861,4 @@ GALGAS_accessibleEntities GALGAS_accessibleEntities::extractObject (const GALGAS
   }
   return result ;
 }
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                     Abstract extension method '@abstractInstructionIR enterAccessibleEntities'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities> gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_enterAccessibleEntities (const int32_t inClassIndex,
-                                                   extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) {
-  gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeExtensionMethod_abstractInstructionIR_enterAccessibleEntities (void) {
-  gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractInstructionIR_enterAccessibleEntities (NULL,
-                                                                          freeExtensionMethod_abstractInstructionIR_enterAccessibleEntities) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                  GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                                  GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractInstructionIR) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities f = NULL ;
-    if (classIndex < gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
-      f = gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-      while ((NULL == f) && (NULL != p)) {
-        if (p->mSlotID < gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
-          f = gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities (p->mSlotID COMMA_HERE) ;
-        }
-        p = p->mSuperclassDescriptor ;
-      }
-      gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, io_ioAccessibleEntities, io_ioMaxBranchOfOnInstructions, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Extension method '@instructionListIR enterAccessibleEntities'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_enterAccessibleEntities (const GALGAS_instructionListIR inObject,
-                                              GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                              GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
-                                              C_Compiler * inCompiler
-                                              COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_1321 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_1321.hasCurrentObject ()) {
-    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_1321.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 25)) ;
-    enumerator_1321.gotoNextObject () ;
-  }
-}
-
 
