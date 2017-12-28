@@ -16,7 +16,7 @@ struct @PLMType {
   @constructorMap constructorMap %selector # $type (!... !...)
   @guardMapForContext guardMap %selector
   @PLMTypeAttributes typeAttributes %selector # as instanciable, copyable, ...
-  @string plmTypeName %selector # Without le leading '$'; empty string for void type kind
+  @string plmUserTypeName %selector # Without le leading '$'; empty string for void type kind, used for type display
   @typeKind kind %selector
 }
 
@@ -47,7 +47,7 @@ func booleanType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmTypeName:boolTypeName ()
+    !plmUserTypeName:boolTypeName ()
     !kind:.boolean
   }
 }
@@ -61,7 +61,7 @@ func staticIntegerType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.equatable | .copyable
-    !plmTypeName:staticIntegerTypeName ()
+    !plmUserTypeName:staticIntegerTypeName ()
     !kind:.staticInteger
   }
 }
@@ -75,7 +75,7 @@ func literalStringType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmTypeName:staticStringTypeName () 
+    !plmUserTypeName:staticStringTypeName () 
     !kind:.literalString
   }
 }
@@ -89,7 +89,7 @@ func voidType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.none
-    !plmTypeName:""
+    !plmUserTypeName:""
     !kind:.void
   }
 }
@@ -103,7 +103,7 @@ func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.none
-    !plmTypeName:""
+    !plmUserTypeName:""
     !kind:.function {!descriptor:inDescriptor}
   }
 }
@@ -264,9 +264,9 @@ getter @PLMType llvmTypeName -> @string {
   case enumeration (@uint bitCount) :
     result = "i" + bitCount
   case structure (*) :
-    result = "%" + [llvmTypeNameFromPLMname (![plmTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![plmUserTypeName nowhere]) assemblerRepresentation]
   case syncTool (*) :
-    result = "%" + [llvmTypeNameFromPLMname (![plmTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![plmUserTypeName nowhere]) assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case staticInteger :
@@ -274,7 +274,7 @@ getter @PLMType llvmTypeName -> @string {
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case arrayType (* *) :
-    result = "%" + [llvmTypeNameFromPLMname (![plmTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![plmUserTypeName nowhere]) assemblerRepresentation]
   case dynamicArrayType (* ptrSize) :
     result = "i" + ptrSize
   case function (@routineDescriptor descriptor) :

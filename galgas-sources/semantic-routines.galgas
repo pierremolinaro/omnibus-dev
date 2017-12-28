@@ -58,7 +58,7 @@ proc routineSemanticAnalysis
   ioTemporaries.mTemporaryIndex = 0
 #--- Mangled routine name
   let routineMangledName = routineMangledNameFromAST (
-    !if inSelfType.kind == .void then "" else llvmTypeStringFromPLMname (!inSelfType.plmTypeName) end
+    !if inSelfType.kind == .void then "" else llvmTypeStringFromPLMname (!inSelfType.plmUserTypeName) end
     !inRoutineName
     !inRoutineFormalArgumentList
   )
@@ -174,7 +174,7 @@ method @routineMapIR-element llvmCodeGeneration
   ioLLVMcode += " @" + routineName + " ("
   let receiverTypeName = if mReceiverType.kind == .void
     then ""
-    else llvmTypeStringFromPLMname (!mReceiverType.plmTypeName)
+    else llvmTypeStringFromPLMname (!mReceiverType.plmUserTypeName)
   end
   var first = true
   if receiverTypeName != "" then

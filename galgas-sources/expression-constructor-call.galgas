@@ -98,7 +98,7 @@ override method @constructorCallAST analyzeExpression
   switch initValue
   case arrayValue (elementType size) :
     if [mParameterList length] != 1 then
-      error mErrorLocation : "$" + resultType.plmTypeName + " array constructor should have one parameter" : outResult
+      error mErrorLocation : "$" + resultType.plmUserTypeName + " array constructor should have one parameter" : outResult
     else
       let expression = [mParameterList mExpressionAtIndex !0]
       [expression analyzeExpression
@@ -129,7 +129,7 @@ override method @constructorCallAST analyzeExpression
     end
   case simple (value) :
     if [mParameterList length] != 0 then
-      error mErrorLocation : "$" + resultType.plmTypeName + " constructor should have no parameter" : outResult
+      error mErrorLocation : "$" + resultType.plmUserTypeName + " constructor should have no parameter" : outResult
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end

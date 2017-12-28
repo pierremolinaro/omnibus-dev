@@ -325,7 +325,7 @@ override method @staticListAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.none
-    !plmTypeName:llvmNameForStaticListElementType (!mStaticListName)
+    !plmUserTypeName:llvmNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyList:propertyList}
   }
   [!?ioContext.mTypeMap insertType
@@ -454,7 +454,7 @@ override method @staticListAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmTypeName:plmNameForStaticListType (!mStaticListName)
+    !plmUserTypeName:plmNameForStaticListType (!mStaticListName)
     !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
   }
   [!?ioContext.mTypeMap insertType
