@@ -391,7 +391,7 @@ method @controlRegisterDeclarationList-element enterInContext
     ?let controlRegisterFieldList  # Used for HTML file
   )
 #---  
-  let @bigint maxRegisterAddress = (1G << ioContext.mPointerSize) - 1G
+  let @bigint maxRegisterAddress = (1G << ioContext.mTargetParameters.mPointerSize) - 1G
   for register in mRegisterArrayList do
   #--- Analyze attributes
     var isReadOnly = false

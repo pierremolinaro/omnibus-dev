@@ -17,13 +17,17 @@ list @interruptionConfigurationList {
 #·······················································································································
 
 struct @targetParameters {
+  @location mConfigurationLocation
+  
   @2lstringlist mPython_utilityToolList
   @lstring mPython_build
 
   @lstring mLinkerScript
   
-  @lbigint mPointerSize
+  @uint mPointerSize
 
+  @bool mHandleDynamicArray
+ 
   @lbigint mSystemStackSize
   @lbigint mStackedUserRegisterOnInterruptByteSize
 
@@ -97,6 +101,7 @@ syntax extension plm_target_specific_syntax {
     !importClauseList:@lstringlist outImportedFileList
     !endOfSourceFile:@location outEndOfSourceFile
   {
+    let loc = @location.here
     <python_utility_tool_list> ?let python_utilityToolList
     <configuration_key> !"PYTHON_BUILD"
     $"string"$ ?let python_build
@@ -108,6 +113,15 @@ syntax extension plm_target_specific_syntax {
     $\$type$ ?let panicLineTypeName
     <configuration_key> !"POINTER_BIT_COUNT"
     $integer$ ?let pointerSize
+    <configuration_key> !"DYNAMIC_ARRAY"
+    @bool handleDynamicArray
+    select
+      $yes$
+      handleDynamicArray = true
+    or
+      $no$
+      handleDynamicArray = false
+    end
     <configuration_key> !"SYSTEM_STACK_SIZE"
     $integer$ ?let systemStackSize
     <configuration_key> !"NOP"
@@ -171,11 +185,19 @@ syntax extension plm_target_specific_syntax {
       outImportedFileList += !relativeFilePath
     end
     <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
+    @uint ptrSize
+    if pointerSize.bigint == 0G then
+      error pointerSize : "zero size pointer is invalid" : ptrSize
+    else
+      ptrSize = [pointerSize.bigint uint]
+    end
     let parameters = @targetParameters.new {
+      !loc
       !python_utilityToolList
       !python_build
       !linkerScript
-      !pointerSize
+      !ptrSize
+      !handleDynamicArray
       !systemStackSize
       !stackedUserRegisterOnInterruptByteSize
       !nopInstructionStringInLLVM
@@ -298,12 +320,8 @@ override method @configurationDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  if ioContext.mPointerSize != 0 then
-    error mTargetParameters.mPointerSize : "duplicate configuration"
-  elsif mTargetParameters.mPointerSize.bigint == 0G then
-    error mTargetParameters.mPointerSize : "zero size pointer not allowed"
-  else
-    ioContext.mPointerSize = [mTargetParameters.mPointerSize.bigint uint]
+  if ioContext.mTargetParameters.mPointerSize != 0 then
+    error mTargetParameters.mConfigurationLocation : "duplicate configuration"
   end
   ioContext.mTargetParameters = mTargetParameters
 #--- Panic code type

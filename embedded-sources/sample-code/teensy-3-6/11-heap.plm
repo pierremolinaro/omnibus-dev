@@ -192,6 +192,7 @@ system section externalSection (?in: inData $dynamicBuffer) {
   append (!byte:0 !?toBuffer:d)
   var xxxx = [$bool] ()
   xxxx.append (!yes)
+  var lg = xxxx.length ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

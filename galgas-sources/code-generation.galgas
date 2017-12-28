@@ -167,6 +167,18 @@ private proc generateCodeFiles
     !inAvailableInterruptMap
   }
   let sourceDirectory = inProductDirectory + "/sources"
+#----------------------------------------- Add dynamic array extern routines
+  if inTargetParameters.mHandleDynamicArray then
+    let pointer = "i" + inTargetParameters.mPointerSize
+    generationAdds.mExternFunctionDeclarationSet += !"void @arc.retain (" + pointer + " %inPtr)"
+    generationAdds.mExternFunctionDeclarationSet += !"void @arc.release (" + pointer + " %inPtr)"
+    generationAdds.mExternFunctionDeclarationSet += !pointer + " @arc.insulate (" + pointer + " %inPtr)"
+    let insertFunction = pointer + " @arc.insert.at.index "
+                       + "(" + pointer + " %inPointer, i32 %inIndex, i32 %inElementSize, " + pointer + "* %outElementPtr)"
+    generationAdds.mExternFunctionDeclarationSet += !insertFunction
+#    let bufferLengthFunctionName = llvmNameForFunction (!"arc.buffer.length")
+  #  generationAdds.mExternFunctionDeclarationSet += !"i32 @" + bufferLengthFunctionName + " (i32 %inPointer)"
+  end
 #----------------------------------------- Include assembler specific file
   var asCode = asTitleComment (!"Target specific code")
   var asFileContents = ""

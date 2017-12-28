@@ -18,6 +18,8 @@ PANIC_LINE_TYPE_NAME: $uint32
 
 POINTER_BIT_COUNT: 32
 
+DYNAMIC_ARRAY: no
+
 SYSTEM_STACK_SIZE: 1024
 
 NOP: "call void asm sideeffect \"nop\", \"\"() nounwind"
@@ -48,9 +50,6 @@ C_FILES:
   "../c-real-time-kernel-code.c"
   "c-countTrainingZeros.c"
   "../memory-utilities.c"
-  "../heap.c"
-  "../dynamic-byte-buffer.c"
-  "../dynamic-buffer.c"
 
 S_FILES:
   "s-target.s"

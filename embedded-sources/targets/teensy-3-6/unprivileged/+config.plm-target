@@ -18,6 +18,8 @@ PANIC_LINE_TYPE_NAME: $uint32
 
 POINTER_BIT_COUNT: 32
 
+DYNAMIC_ARRAY: yes
+
 SYSTEM_STACK_SIZE: 1024
 
 NOP: "call void asm sideeffect \"nop\", \"\"() nounwind"
