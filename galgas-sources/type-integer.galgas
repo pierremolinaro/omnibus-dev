@@ -127,6 +127,7 @@ override method @integerDeclarationAST enterInContext
       !methodName:byteSwappedMethoName ()
       !safe:true
       !resultTypeProxy:selfTypeProxy
+      !canMutateProperties:false
     ]
   end
   [!?propertyMap addFunctionWithoutArgument
@@ -135,6 +136,7 @@ override method @integerDeclarationAST enterInContext
     !methodName:bitReversedMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
+    !canMutateProperties:false
   ]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
@@ -142,6 +144,7 @@ override method @integerDeclarationAST enterInContext
     !methodName:countLeadingZerosMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
+    !canMutateProperties:false
   ]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
@@ -149,6 +152,7 @@ override method @integerDeclarationAST enterInContext
     !methodName:countTrainingZerosMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
+    !canMutateProperties:false
   ]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
@@ -156,6 +160,7 @@ override method @integerDeclarationAST enterInContext
     !methodName:setBitCountMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
+    !canMutateProperties:false
   ]
 #--------------------------------------- Class constant map
   @classConstantMap classConstantMap = {}

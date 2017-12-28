@@ -25,6 +25,7 @@ setter @propertyMap addFunctionWithoutArgument
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
+  ?canMutateProperties:let @bool inCanMutateProperties
 {
   let @routineDescriptor descriptor = .new {
     !isPublic:true
@@ -33,7 +34,7 @@ setter @propertyMap addFunctionWithoutArgument
     !signature:{}
     !returnTypeProxy:inResultType # Return type 
     !canAccessProperties:false # Routine is declared with @access attribute
-    !canMutateProperties:false # Routine is declared with @mutating attribute
+    !canMutateProperties:inCanMutateProperties # Routine is declared with @mutating attribute
     !safe:inIsSafe # Routine is declared with @safe attribute
   }
   [!?self insertKey
