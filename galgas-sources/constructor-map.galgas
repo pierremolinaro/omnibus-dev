@@ -3,7 +3,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @constructorValue {
-  case null
   case simple (@bigint value)
   case structure (@sortedOperandIRList sortedOperandList)
   case arrayValue (@PLMType elementType @uint size)

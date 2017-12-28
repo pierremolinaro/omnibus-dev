@@ -8408,14 +8408,6 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_constructorValue GALGAS_constructorValue::constructor_null (UNUSED_LOCATION_ARGS) {
-  GALGAS_constructorValue result ;
-  result.mEnum = kEnum_null ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_constructorValue GALGAS_constructorValue::constructor_simple (const GALGAS_bigint & inAssociatedValue0
                                                                      COMMA_LOCATION_ARGS) {
   GALGAS_constructorValue result ;
@@ -8513,19 +8505,12 @@ void GALGAS_constructorValue::method_arrayValue (GALGAS_PLMType & outAssociatedV
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_constructorValue [5] = {
+static const char * gEnumNameArrayFor_constructorValue [4] = {
   "(not built)",
-  "null",
   "simple",
   "structure",
   "arrayValue"
 } ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_constructorValue::getter_isNull (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_null == mEnum) ;
-}
 
 //---------------------------------------------------------------------------------------------------------------------*
 

@@ -19,7 +19,7 @@ syntax extension plm_syntax {
     $[$
     $\$type$ ?let elementTypeName
     $]$
-    outTypeName = ["anonymous.dynamic.array." + ioAST.mTypeDeclarationIndex here]
+    outTypeName = ["dynarray." + ioAST.mTypeDeclarationIndex here]
     ioAST.mTypeDeclarationIndex ++
     ioAST.mDeclarationListAST += !@typeDynamicArrayDeclarationAST.new {!outTypeName !elementTypeName}
   }
@@ -140,7 +140,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   ]
 #-------------------------------------------- Constructor map
   @constructorMap constructorMap = {}
-  [!?constructorMap insertKey !["()" nowhere] !{} !.null]
+  [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
 #-------------------------------------------- Type attributes
   let @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine | .copyable | .arc
 #-------------------------------------------- Enter in type map

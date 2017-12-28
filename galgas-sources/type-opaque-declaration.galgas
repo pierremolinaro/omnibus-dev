@@ -24,7 +24,7 @@ syntax extension plm_syntax {
     let sizeExpressionLocation = @location.here
     $]$   
     $]$   
-    outTypeName = ["anonymous.opaque." + ioAST.mTypeDeclarationIndex here]
+    outTypeName = ["opaque." + ioAST.mTypeDeclarationIndex here]
     ioAST.mTypeDeclarationIndex ++
     @lstringlist attributeList = {}
     repeat

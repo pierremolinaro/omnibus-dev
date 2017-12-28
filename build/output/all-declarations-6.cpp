@@ -5029,9 +5029,9 @@ static void extensionMethod_typeOpaqueDefinitionDeclaration_noteTypesInPrecedenc
                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_typeOpaqueDefinitionDeclaration * object = inObject ;
   macroValidSharedObject (object, cPtr_typeOpaqueDefinitionDeclaration) ;
-  GALGAS_lstring var_typeName_2961 = function_llvmTypeNameFromPLMname (object->mProperty_mAnonymousOpaqueTypeName, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 64)) ;
+  GALGAS_lstring var_typeName_2951 = function_llvmTypeNameFromPLMname (object->mProperty_mAnonymousOpaqueTypeName, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 64)) ;
   {
-  ioArgument_ioGraph.setter_noteNode (var_typeName_2961 COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 65)) ;
+  ioArgument_ioGraph.setter_noteNode (var_typeName_2951 COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 65)) ;
   }
   callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 66)) ;
 }

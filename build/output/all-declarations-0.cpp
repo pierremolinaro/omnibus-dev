@@ -3342,7 +3342,7 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_type_5F_definition_i4_ (GALGAS_as
   nt_expression_ (ioArgument_ioAST, var_sizeExpression_1222, inCompiler) ;
   GALGAS_location var_sizeExpressionLocation_1253 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-array.galgas", 24)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5D_) COMMA_SOURCE_FILE ("type-array.galgas", 25)) ;
-  outArgument_outTypeName = GALGAS_string ("anonymous.array.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-array.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 26)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 26)) ;
+  outArgument_outTypeName = GALGAS_string ("array.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-array.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 26)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 26)) ;
   ioArgument_ioAST.mProperty_mTypeDeclarationIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-array.galgas", 27)) ;
   ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_typeArrayDeclarationAST::constructor_new (outArgument_outTypeName, var_elementTypeName_1169, var_sizeExpression_1222, var_sizeExpressionLocation_1253  COMMA_SOURCE_FILE ("type-array.galgas", 28))  COMMA_SOURCE_FILE ("type-array.galgas", 28)) ;
 }
@@ -3367,7 +3367,7 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_type_5F_definition_i5_ (GALGAS_as
   GALGAS_lstring var_elementTypeName_1122 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 20)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5D_) COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 21)) ;
-  outArgument_outTypeName = GALGAS_string ("anonymous.dynamic.array.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-dynamic-array.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22)) ;
+  outArgument_outTypeName = GALGAS_string ("dynarray.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-dynamic-array.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22)) ;
   ioArgument_ioAST.mProperty_mTypeDeclarationIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 23)) ;
   ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_typeDynamicArrayDeclarationAST::constructor_new (outArgument_outTypeName, var_elementTypeName_1122  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 24))  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 24)) ;
 }
@@ -3977,23 +3977,23 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_type_5F_definition_i15_ (GALGAS_a
   GALGAS_location var_sizeExpressionLocation_1238 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 24)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5D_) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 25)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5D_) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 26)) ;
-  outArgument_outTypeName = GALGAS_string ("anonymous.opaque.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 27)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 27)) ;
+  outArgument_outTypeName = GALGAS_string ("opaque.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 27)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 27)) ;
   ioArgument_ioAST.mProperty_mTypeDeclarationIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 28)) ;
-  GALGAS_lstringlist var_attributeList_1418 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 29)) ;
+  GALGAS_lstringlist var_attributeList_1408 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 29)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_15 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_attribute_1478 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_attribute_1468 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__40_attribute) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 32)) ;
-      var_attributeList_1418.addAssign_operation (var_attribute_1478  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 33)) ;
+      var_attributeList_1408.addAssign_operation (var_attribute_1468  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 33)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_typeOpaqueDefinitionDeclaration::constructor_new (outArgument_outTypeName, var_sizeExpression_1207, var_sizeExpressionLocation_1238, var_attributeList_1418  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 35))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 35)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_typeOpaqueDefinitionDeclaration::constructor_new (outArgument_outTypeName, var_sizeExpression_1207, var_sizeExpressionLocation_1238, var_attributeList_1408  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 35))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 35)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
