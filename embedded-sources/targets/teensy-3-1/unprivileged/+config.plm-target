@@ -49,6 +49,8 @@ C_FILES:
   "../c-countTrainingZeros.c"
   "../../memory-utilities.c"
   "../../heap.c"
+  "../../dynamic-byte-buffer.c"
+  "../../dynamic-buffer.c"
 
 S_FILES:
   "../s-cortex-m4-header.s"

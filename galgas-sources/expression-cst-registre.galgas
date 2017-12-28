@@ -138,6 +138,8 @@ override method @registerConstantExpressionAST analyzeExpression
       switch [expressionResult type].kind
       case arrayType (* *) :
         error expressionLocation: "an unsigned integer expression is required here"
+      case dynamicArrayType (2*) :
+        error expressionLocation: "an unsigned integer expression is required here"
       case opaque (*) :
         error expressionLocation: "an unsigned integer expression is required here"
       case enumeration (*) :

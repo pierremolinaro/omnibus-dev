@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @constructorValue {
-#  case zero
+  case null
   case simple (@bigint value)
   case structure (@sortedOperandIRList sortedOperandList)
   case arrayValue (@PLMType elementType @uint size)
@@ -25,8 +25,5 @@ map @constructorMap { # Key is (!selector!selector)
   insert insertKey error message "-- internal error --"
   search searchKey error message "constructor is not defined"
 }
-
-#·······················································································································
-
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

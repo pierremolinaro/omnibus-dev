@@ -19,17 +19,17 @@ map @propertyMap {
 
 #·······················································································································
 
-setter @propertyMap addFunction
+setter @propertyMap addFunctionWithoutArgument
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?receiverTypeName:let @string inReceiverTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
 {
   let @routineDescriptor descriptor = .new {
     !isPublic:true
     !exported:false
-    !routineKind:.function {!executionMode:.anyMode} # @routineKind mRoutineKind
+    !routineKind:.function {!executionMode:.anyMode}
     !signature:{}
     !returnTypeProxy:inResultType # Return type 
     !canAccessProperties:false # Routine is declared with @access attribute
@@ -51,6 +51,56 @@ setter @propertyMap addFunction
     !routineNameForInvocationGraph
     !routineNameForInvocationGraph
   ]
+}
+
+#·······················································································································
+
+setter @propertyMap addFunctionWithInputArgument
+  ?!context:@semanticContext ioContext
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?receiverTypeName:let @lstring inReceiverTypeName
+  ?methodName:let @string inMethodName
+  ?safe:let @bool inIsSafe
+  ?inputArgumentSelector:let @string inInputSelector
+  ?inputArgumentTypeName:let @string inInputArgumentTypeName
+  ?inputArgumentName: let @string inInputArgumentName
+  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
+  ?canMutateProperties:let @bool inCanMutateProperties
+{
+  let argumentList = @routineFormalArgumentListAST {
+    !.input
+    ![inInputSelector nowhere]
+    ![inInputArgumentTypeName nowhere]
+    ![inInputArgumentName nowhere]
+  }
+  routineSignature (!?ioContext.mTypeMap !argumentList ?let signature)
+  let @routineDescriptor descriptor = .new {
+    !isPublic:true
+    !exported:false
+    !routineKind:.function {!executionMode:.anyMode}
+    !signature:signature
+    !returnTypeProxy:inResultType # Return type 
+    !canAccessProperties:false
+    !canMutateProperties:inCanMutateProperties
+    !safe:inIsSafe # Routine is declared with @safe attribute
+  }
+  let methodMangledName = routineMangledNameFromAST (
+    !""
+    !.new {!inMethodName !inReceiverTypeName.location}
+    !argumentList
+  )
+  [!?self insertKey
+    !methodMangledName
+    !true
+    !.nonVirtualMethod {!descriptor:descriptor}
+  ]
+#--- Routine mangled name
+  let routineNameForInvocationGraph = routineMangledNameFromAST (
+    !llvmTypeStringFromPLMname (!inReceiverTypeName)
+    ![inMethodName nowhere]
+    !argumentList
+  )
+  [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

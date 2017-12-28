@@ -2035,18 +2035,38 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_arcAssignmentList_2
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Extension setter '@propertyMap addFunction'                                     *
+//                             Extension setter '@propertyMap addFunctionWithoutArgument'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_addFunction (class GALGAS_propertyMap & ioObject,
-                                  const class GALGAS_string constin_inReceiverTypeName,
-                                  const class GALGAS_string constin_inMethodName,
-                                  const class GALGAS_bool constin_inIsSafe,
-                                  const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                  class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
-                                  class C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
+void extensionSetter_addFunctionWithoutArgument (class GALGAS_propertyMap & ioObject,
+                                                 class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
+                                                 const class GALGAS_string constin_inReceiverTypeName,
+                                                 const class GALGAS_string constin_inMethodName,
+                                                 const class GALGAS_bool constin_inIsSafe,
+                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension setter '@propertyMap addFunctionWithInputArgument'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_addFunctionWithInputArgument (class GALGAS_propertyMap & ioObject,
+                                                   class GALGAS_semanticContext & io_ioContext,
+                                                   class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
+                                                   const class GALGAS_lstring constin_inReceiverTypeName,
+                                                   const class GALGAS_string constin_inMethodName,
+                                                   const class GALGAS_bool constin_inIsSafe,
+                                                   const class GALGAS_string constin_inInputSelector,
+                                                   const class GALGAS_string constin_inInputArgumentTypeName,
+                                                   const class GALGAS_string constin_inInputArgumentName,
+                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
+                                                   const class GALGAS_bool constin_inCanMutateProperties,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

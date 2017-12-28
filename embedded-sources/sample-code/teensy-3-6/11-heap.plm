@@ -24,7 +24,7 @@ let PUSH_P0 = $digitalPort.D8
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-driver toto > digital {
+driver project > digital {
   init {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
@@ -35,13 +35,13 @@ driver toto > digital {
   }
 }
 
-driver toto ()
+driver project ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $structWithARC {
   public var unEntierQuelconque $uint32 = 0
-  public var donnée = $dynamicByteBuffer ()
+  public var donnée = $dynamicBuffer ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -49,7 +49,7 @@ struct $structWithARC {
 struct $autreStructWithARC {
   public var autreEntierQuelconque $uint32 = 0
   public var structure = $structWithARC ()
-  public var autreDonnée = $dynamicByteBuffer ()
+  public var autreDonnée = $dynamicBuffer ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -122,8 +122,8 @@ task T2 priority 5 stackSize 512 {
   var échéance1 $uint32 = 2001
   var échéance2 $uint32 = 2001
   var échéance3 $uint32 = 2001
-  var data1 = $dynamicByteBuffer ()
-  var data2 = $dynamicByteBuffer ()
+  var data1 = $dynamicBuffer ()
+  var data2 = $dynamicBuffer ()
   var structure = $autreStructWithARC ()
   var b $uint8 = 0
 
@@ -154,7 +154,7 @@ task T2 priority 5 stackSize 512 {
     self.testReleaseLocalVar (!in:self.structure.structure.donnée)
   }
   
-  func testReleaseLocalVar (?in: inData $dynamicByteBuffer) {
+  func testReleaseLocalVar (?in: inData $dynamicBuffer) {
     var d = $structWithARC ()
     d.donnée = inData
   }
@@ -163,7 +163,7 @@ task T2 priority 5 stackSize 512 {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T3 priority 100 stackSize 512 {
-  var data = $dynamicByteBuffer ()
+  var data = $dynamicBuffer ()
  
   on time.wait (!untilDeadline:0) {
     digital.toggle (!port:LED_L0)
@@ -179,7 +179,7 @@ task T3 priority 100 stackSize 512 {
     }
   }
 
-  func testReleaseLocalVar (?in: inData $dynamicByteBuffer) {
+  func testReleaseLocalVar (?in: inData $dynamicBuffer) {
     externalSection (!in:inData)
   }
 
@@ -187,9 +187,11 @@ task T3 priority 100 stackSize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-system section externalSection (?in: inData $dynamicByteBuffer) {
+system section externalSection (?in: inData $dynamicBuffer) {
   var d = inData
   append (!byte:0 !?toBuffer:d)
+  var xxxx = [$bool] ()
+  xxxx.append (!yes)
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

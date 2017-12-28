@@ -121,41 +121,41 @@ override method @integerDeclarationAST enterInContext
 #--------------------------------------- Property map
   @propertyMap propertyMap = {}
   if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
-    [!?propertyMap addFunction
+    [!?propertyMap addFunctionWithoutArgument
+      !?ioSubprogramInvocationGraph
       !receiverTypeName:integerTypeName
       !methodName:byteSwappedMethoName ()
       !safe:true
       !resultTypeProxy:selfTypeProxy
-      !?ioSubprogramInvocationGraph
     ]
   end
-  [!?propertyMap addFunction
+  [!?propertyMap addFunctionWithoutArgument
+    !?ioSubprogramInvocationGraph
     !receiverTypeName:integerTypeName
     !methodName:bitReversedMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
-    !?ioSubprogramInvocationGraph
   ]
-  [!?propertyMap addFunction
+  [!?propertyMap addFunctionWithoutArgument
+    !?ioSubprogramInvocationGraph
     !receiverTypeName:integerTypeName
     !methodName:countLeadingZerosMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
-    !?ioSubprogramInvocationGraph
   ]
-  [!?propertyMap addFunction
+  [!?propertyMap addFunctionWithoutArgument
+    !?ioSubprogramInvocationGraph
     !receiverTypeName:integerTypeName
     !methodName:countTrainingZerosMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
-    !?ioSubprogramInvocationGraph
   ]
-  [!?propertyMap addFunction
+  [!?propertyMap addFunctionWithoutArgument
+    !?ioSubprogramInvocationGraph
     !receiverTypeName:integerTypeName
     !methodName:setBitCountMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
-    !?ioSubprogramInvocationGraph
   ]
 #--------------------------------------- Class constant map
   @classConstantMap classConstantMap = {}

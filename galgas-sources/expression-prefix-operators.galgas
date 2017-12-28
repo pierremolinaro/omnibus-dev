@@ -85,6 +85,8 @@ override method @prefixOperatorExpressionAST analyzeExpression
     switch [expressionResult type].kind
     case arrayType (* *) :
       error mOperatorLocation : "internal error" : leftOperand
+    case dynamicArrayType (2*) :
+      error mOperatorLocation : "internal error" : leftOperand
     case opaque (*) :
       error mOperatorLocation : "internal error" : leftOperand
     case boolean, void :

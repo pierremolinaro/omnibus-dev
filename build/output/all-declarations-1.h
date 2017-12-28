@@ -271,6 +271,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
     kEnum_staticInteger,
     kEnum_opaque,
     kEnum_arrayType,
+    kEnum_dynamicArrayType,
     kEnum_function,
     kEnum_pointer
   } enumeration ;
@@ -304,6 +305,10 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                                COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_boolean (LOCATION_ARGS) ;
+
+  public : static class GALGAS_typeKind constructor_dynamicArrayType (const class GALGAS_PLMType & inOperand0,
+                                                                      const class GALGAS_bigint & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_enumeration (const class GALGAS_uint & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
@@ -349,6 +354,11 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_dynamicArrayType (class GALGAS_PLMType & outArgument0,
+                                                          class GALGAS_bigint & outArgument1,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_enumeration (class GALGAS_uint & outArgument0,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
@@ -386,6 +396,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolean (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDynamicArrayType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isEnumeration (LOCATION_ARGS) const ;
 

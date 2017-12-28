@@ -96,12 +96,8 @@ override method @constructorCallAST analyzeExpression
   [constructorMap searchKey !.new {!constructorKey !mErrorLocation} ?let constructorSignature ?let initValue]
 #--- Examine init value
   switch initValue
-#  case zero :
-#    if [mParameterList length] != 0 then
-#      error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult
-#    else
-#      outResult = .zero {!type: resultType}
-#    end
+  case null :
+    outResult = .llvmValue {!type:resultType !llvmName:"0"}
   case arrayValue (elementType size) :
     if [mParameterList length] != 1 then
       error mErrorLocation : "$" + resultType.plmTypeName + " array constructor should have one parameter" : outResult

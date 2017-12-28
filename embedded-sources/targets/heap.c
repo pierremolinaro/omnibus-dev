@@ -17,8 +17,8 @@ unsigned freeObjectCountForFreeList (const unsigned inFreeListIndex) asm ("!FUNC
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-static const unsigned short kMinSizePowerOfTwo =  4 ; // Smallest block being allocated = 2 ** kMinSizePowerOfTwo
-static const unsigned short kMaxSizePowerOfTwo = 16 ; // Biggest block being allocated = 2 ** kMaxSizePowerOfTwo
+static const unsigned kMinSizePowerOfTwo =  4 ; // Smallest block being allocated = 2 ** kMinSizePowerOfTwo
+static const unsigned kMaxSizePowerOfTwo = 16 ; // Biggest block being allocated = 2 ** kMaxSizePowerOfTwo
 static const unsigned kSegregatedAllocationListCount = kMaxSizePowerOfTwo - kMinSizePowerOfTwo + 1 ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -122,13 +122,13 @@ typedef struct {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-DataBufferHeaderType * memoryAlloc (unsigned short inBlockSizeIndex) asm ("!SECTIONCALL!heap.memory.alloc") ;
+DataBufferHeaderType * memoryAlloc (unsigned inBlockSizeIndex) asm ("!SECTIONCALL!heap.memory.alloc") ;
 
-DataBufferHeaderType * kernel_memoryAlloc (unsigned short inBlockSizeIndex) asm ("!SECTIONIMPLEMENTATION!heap.memory.alloc") ;
+DataBufferHeaderType * kernel_memoryAlloc (unsigned inBlockSizeIndex) asm ("!SECTIONIMPLEMENTATION!heap.memory.alloc") ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-DataBufferHeaderType * kernel_memoryAlloc (unsigned short inBlockSizeIndex) {
+DataBufferHeaderType * kernel_memoryAlloc (unsigned inBlockSizeIndex) {
   DataBufferHeaderType * result = (DataBufferHeaderType *) 0 ;
   tFreeBlockListDescriptor * descriptorPtr = & gFreeBlockDescriptorArray [inBlockSizeIndex] ;
   if (descriptorPtr->mFreeBlockCount > 0) { // Allocate from free list
@@ -145,7 +145,7 @@ DataBufferHeaderType * kernel_memoryAlloc (unsigned short inBlockSizeIndex) {
   }
 //---
   if (result != (DataBufferHeaderType *) 0) {
-    result->mBlockSizeIndex = inBlockSizeIndex ;
+    result->mBlockSizeIndex = (unsigned short) inBlockSizeIndex ;
     result->mLength = 0 ;
     result->mReferenceCount = 1 ;
     gCurrentlyAllocatedCount += 1 ;
@@ -183,27 +183,22 @@ static unsigned blockSize (DataBufferHeaderType * inPointer) {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//  DYNAMIC BYTE BUFFER
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-void appendByte (const unsigned char inByte, unsigned * ioPointer) asm ("!FUNC!dynamicByteBuffer.buffer.append.byte") ;
-
-unsigned bufferLength (unsigned inPointer) asm ("!FUNC!dynamicByteBuffer.buffer.length") ;
-
-void removeAll (unsigned * ioPointer) asm ("!FUNC!dynamicByteBuffer.buffer.remove.all") ;
-
-void setByteAtIndex (const unsigned char inByte, const unsigned inIndex, unsigned * ioPointer)
-asm ("!FUNC!dynamicByteBuffer.buffer.set.byte.at.index") ;
-
-unsigned char getByteAtIndex (const unsigned inIndex, unsigned * ioPointer)
-asm ("!FUNC!dynamicByteBuffer.buffer.get.byte.at.index") ;
-
-void removeByteAtIndex (const unsigned inIndex, unsigned * ioPointer)
-asm ("!FUNC!dynamicByteBuffer.buffer.remove.byte.at.index") ;
+static unsigned blockSizeIndexForSize (const unsigned inRequiredBlockSize) {
+  unsigned powerOfTwo = 0 ;
+  if (inRequiredBlockSize > 0) {
+    unsigned s = inRequiredBlockSize - 1 ;
+    while (s > 0) {
+      powerOfTwo += 1 ;
+      s >>= 1 ;
+    }
+  }
+  return (powerOfTwo <= kMinSizePowerOfTwo) ? 0 : (powerOfTwo - kMinSizePowerOfTwo) ;
+}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-static DataBufferHeaderType * reallocBlock (DataBufferHeaderType * inPointer, const unsigned short inBlockSizeIndex) {
+static DataBufferHeaderType * reallocBlock (DataBufferHeaderType * inPointer, const unsigned inBlockSizeIndex) {
 //--- Allocate next size block
   DataBufferHeaderType * newBlock = memoryAlloc (inBlockSizeIndex) ;
 //--- Copy buffer content to new block
@@ -223,34 +218,19 @@ static DataBufferHeaderType * reallocBlock (DataBufferHeaderType * inPointer, co
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-void appendByte (const unsigned char inByte, unsigned * ioPointer) {
-  if ((*ioPointer) == 0) { // No allocated block
-    DataBufferHeaderType * p = memoryAlloc (0) ; // Allocate smallest block
-    p->mBuffer8 [0] = inByte ;
-    p->mLength = 1 ;
-    *ioPointer = (unsigned) p ;
-  }else{ // Block is allocated
-    DataBufferHeaderType * p = (DataBufferHeaderType *) (*ioPointer) ;
-    if (p->mLength < blockSize (p)) { // Buffer full ?
-      if (p->mReferenceCount > 1) {
-        p = reallocBlock (p, p->mBlockSizeIndex) ;
-        *ioPointer = (unsigned) p ;
-      }
-      p->mBuffer8 [p->mLength] = inByte ;
-      p->mLength += 1 ;
-    }else{ // Block is full
-     //--- Allocate next size block
-      p = reallocBlock (p, p->mBlockSizeIndex + 1) ;
-    //--- Append byte
-      p->mBuffer8 [p->mLength] = inByte ;
-      p->mLength += 1 ;
-    //---
-      *ioPointer = (unsigned) p ;
-    }
+static DataBufferHeaderType * internalInsulate (DataBufferHeaderType * inPointer) {
+  DataBufferHeaderType * result = inPointer ;
+  if ((inPointer != (DataBufferHeaderType *) 0) && (inPointer->mReferenceCount > 1)) {
+    result = reallocBlock (inPointer, inPointer->mBlockSizeIndex) ;
   }
+  return result ;
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  BUFFER LENGTH
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+unsigned bufferLength (unsigned inPointer) asm ("!FUNC!arc.buffer.length") ;
 
 unsigned bufferLength (unsigned inPointer) {
   unsigned length = 0 ;
@@ -261,117 +241,4 @@ unsigned bufferLength (unsigned inPointer) {
   return length ;
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-void removeAll (unsigned * ioPointer) {
-  if ((*ioPointer) != 0) {
-    DataBufferHeaderType * p = (DataBufferHeaderType *) (*ioPointer) ;
-    if (p->mReferenceCount == 1) {
-      memoryFree (p) ;
-    }else{
-      p->mReferenceCount -= 1 ;
-    }
-    *ioPointer = 0 ;
-  }
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-void setByteAtIndex (const unsigned char inByte, const unsigned inIndex, unsigned * ioPointer) {
-  if (inIndex < bufferLength (* ioPointer)) { // Prevent over index
-    DataBufferHeaderType * p = (DataBufferHeaderType *) (*ioPointer) ;
-    if (p->mReferenceCount == 1) {
-      p->mBuffer8 [inIndex] = inByte ;
-    }else{
-     //--- Allocate next size block
-      DataBufferHeaderType * newBlock = reallocBlock (p, p->mBlockSizeIndex) ;
-    //--- Copy byte
-      newBlock->mBuffer8 [inIndex] = inByte ;
-    //---
-      *ioPointer = (unsigned) newBlock ;
-    }
-  }
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-unsigned char getByteAtIndex (const unsigned inIndex, unsigned * inPointer) {
-  unsigned char result = 0 ;
-  if (inIndex < bufferLength (*inPointer)) { // Prevent over index
-    DataBufferHeaderType * p = (DataBufferHeaderType *) (*inPointer) ;
-    result = p->mBuffer8 [inIndex] ;
-  }
-  return result ;
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-void removeByteAtIndex (const unsigned inIndex, unsigned * ioPointer) {
-  const unsigned length = bufferLength (* ioPointer) ;
-  if (inIndex < length) { // Prevent over index
-    DataBufferHeaderType * p = (DataBufferHeaderType *) (*ioPointer) ;
-    if (length == 1) { // Buffer has one one byte --> release it
-      if (p->mReferenceCount > 1) {
-        p->mReferenceCount -= 1 ;
-      }else{
-        memoryFree (p) ;
-        *ioPointer = 0 ;
-      }
-    }else{ // Buffer has more than one byte
-      if (p->mReferenceCount > 1) {
-        p = reallocBlock (p, p->mBlockSizeIndex) ;
-        *ioPointer = (unsigned) p ;
-      }
-      for (unsigned i=inIndex+1 ; i<length ; i++) {
-        p->mBuffer8 [i-1] = p->mBuffer8 [i] ;
-      }
-      p->mLength -= 1 ;
-    }
-  }
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//   INTERNAL FUNCTIONS CALLED BY PLM
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-void retain (unsigned inPointer) asm ("dynamicByteBuffer.retain") ;
-void release (unsigned inPointer) asm ("dynamicByteBuffer.release") ;
-unsigned insulate (unsigned inPointer) asm ("dynamicByteBuffer.insulate") ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-void retain (unsigned inPointer) {
-  if (inPointer != 0) {
-    DataBufferHeaderType * p = (DataBufferHeaderType *) inPointer ;
-    p->mReferenceCount += 1 ;
-  }
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-void release (unsigned inPointer) {
-  if (inPointer != 0) {
-    DataBufferHeaderType * p = (DataBufferHeaderType *) inPointer ;
-    if (p->mReferenceCount > 1) {
-      p->mReferenceCount -= 1 ;
-    }else{
-      memoryFree (p) ;
-    }
-  }
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-unsigned insulate (unsigned inPointer) {
-  unsigned result = inPointer ;
-  if (inPointer != 0) {
-    DataBufferHeaderType * p = (DataBufferHeaderType *) inPointer ;
-    if (p->mReferenceCount > 1) {
-      p = reallocBlock (p, p->mBlockSizeIndex) ;
-      result = (unsigned) p ;
-    }
-  }
-  return result ;
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

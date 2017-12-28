@@ -83,11 +83,11 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGen
                 + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
     ioLLVMCode += ";--- Handle ARC properties\n"
     for (propertyName propertyType indexPath) in arcAssignmentList do
-      let propertyTypePLMName = [propertyType plmTypeName]
+#      let propertyTypePLMName = [propertyType plmTypeName]
       let propertyTypeLLVMName = [propertyType llvmTypeName]
-      ioGenerationAdds.mExternFunctionDeclarationSet += !"void @" + propertyTypePLMName + ".retain (" + propertyTypeLLVMName + " %inPtr)"
-      ioGenerationAdds.mExternFunctionDeclarationSet += !"void @" + propertyTypePLMName + ".release (" + propertyTypeLLVMName + " %inPtr)"
-      ioGenerationAdds.mExternFunctionDeclarationSet += !propertyTypeLLVMName + " @" + propertyTypePLMName + ".insulate (" + propertyTypeLLVMName + " %inPtr)"
+      ioGenerationAdds.mExternFunctionDeclarationSet += !"void @arc.retain (" + propertyTypeLLVMName + " %inPtr)"
+      ioGenerationAdds.mExternFunctionDeclarationSet += !"void @arc.release (" + propertyTypeLLVMName + " %inPtr)"
+      ioGenerationAdds.mExternFunctionDeclarationSet += !propertyTypeLLVMName + " @arc.insulate (" + propertyTypeLLVMName + " %inPtr)"
       let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation]
       ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inSource, i32 0"
       for (idx) in indexPath do
@@ -96,7 +96,7 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGen
       ioLLVMCode += " ; " + propertyName + "\n"
       let llvmLoadedVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ".loaded"
       ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMCode += "  call void @" + [propertyType plmTypeName] + ".retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+      ioLLVMCode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
     end
     for (propertyName propertyType indexPath) in arcAssignmentList do
       let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation]
@@ -108,7 +108,7 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGen
       let propertyTypeLLVMName = [propertyType llvmTypeName]
       let llvmLoadedVarName = "%arc.release." + [propertyName assemblerRepresentation] + ".loaded"
       ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMCode += "  call void @" + [propertyType plmTypeName] + ".release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+      ioLLVMCode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
     end
     ioLLVMCode += ";--- Compute type size\n"
     ioLLVMCode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
@@ -151,16 +151,16 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGen
     ioLLVMCode += "  ret void\n"
     ioLLVMCode += "}\n\n"
   elsif [typeAttributes arc] then
-    ioGenerationAdds.mExternFunctionDeclarationSet += !"void @" + [self plmTypeName] + ".retain (" + typeName + " %inPtr)"
-    ioGenerationAdds.mExternFunctionDeclarationSet += !"void @" + [self plmTypeName] + ".release (" + typeName + " %inPtr)"
-    ioGenerationAdds.mExternFunctionDeclarationSet += !typeName + " @" + [self plmTypeName] + ".insulate (" + typeName + " %inPtr)"
+    ioGenerationAdds.mExternFunctionDeclarationSet += !"void @arc.retain (" + typeName + " %inPtr)"
+    ioGenerationAdds.mExternFunctionDeclarationSet += !"void @arc.release (" + typeName + " %inPtr)"
+    ioGenerationAdds.mExternFunctionDeclarationSet += !typeName + " @arc.insulate (" + typeName + " %inPtr)"
     ioLLVMCode += llvmSeparatorLine () + "\n"
     ioLLVMCode += "define internal void @plm.assign." + [self.plmTypeName identifierRepresentation]
                 + " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr) nounwind optsize {\n"
     ioLLVMCode += "  %source = load " + typeName + ", " + typeName + "* %inSourcePtr\n" 
-    ioLLVMCode += "  call void @" + [self plmTypeName] + ".retain (" + typeName + " %source)\n" 
+    ioLLVMCode += "  call void @arc.retain (" + typeName + " %source)\n" 
     ioLLVMCode += "  %target = load " + typeName + ", " + typeName + "* %inTargetPtr\n" 
-    ioLLVMCode += "  call void @" + plmTypeName + ".release (" + typeName + " %target)\n" 
+    ioLLVMCode += "  call void @arc.release (" + typeName + " %target)\n" 
     ioLLVMCode += "  store " + typeName + " %source, " + typeName + "* %inTargetPtr\n" 
     ioLLVMCode += "  ret void\n"
     ioLLVMCode += "}\n\n"

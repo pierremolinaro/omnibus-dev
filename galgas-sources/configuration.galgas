@@ -21,7 +21,9 @@ struct @targetParameters {
   @lstring mPython_build
 
   @lstring mLinkerScript
+  
   @lbigint mPointerSize
+
   @lbigint mSystemStackSize
   @lbigint mStackedUserRegisterOnInterruptByteSize
 
