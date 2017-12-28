@@ -31,7 +31,7 @@ extern func user taskName (?taskIndex: inIndex $uint32) -> $staticString : "task
 //   SYNCHRONIZATION TOOLS ROUTINES                                                                                     
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-newtype $taskList : [[32]] @instantiable
+opaque $taskList @instantiable {32}
 
 //--- Block running task
 extern func primitive
@@ -57,7 +57,7 @@ makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCur
 //   GUARD                                                                                                              
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-newtype $guardList : [[32]] @instantiable
+opaque $guardList @instantiable {32}
 
 extern func guard
 handle (?!guard:ioGuard $guardList) : "handleGuardedCommand"

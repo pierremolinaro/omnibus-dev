@@ -2,17 +2,12 @@
 //   SYNCHRONIZATION TOOLS ROUTINES
 //——————————————————————————————————————————————————————————————————————————————
 
-newtype $taskList : [[32]] @instantiable
+opaque $taskList @instantiable {32}
 
 //--- Block running task
 extern func primitive block (?!inList:ioWaitingList $taskList) : "blockInList"
 
 extern func primitive block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
-
-//extern func primitive
-//block (?!inList:ioWaitingList $taskList
-//       ?onDeadline:inDeadline $uint32
-//       ?!result: ioResult $bool) : "block.in.list.and.on.deadline"
 
 //--- Make task Ready
 extern func service
@@ -25,7 +20,7 @@ extern func service makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "m
 //   GUARD
 //——————————————————————————————————————————————————————————————————————————————
 
-newtype $guardList : [[32]] @instantiable
+opaque $guardList @instantiable {32}
 
 extern func guard handle (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
