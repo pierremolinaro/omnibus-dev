@@ -129,7 +129,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     !?context:ioContext
     !?ioSubprogramInvocationGraph
     !receiverTypeProxy:arrayTypeProxy
-    !methodName:"append"
+    !methodName:"insert"
     !safe:false
     !inputArgumentSelector1:""
     !inputArgumentTypeProxy1:elementTypeProxy
@@ -144,7 +144,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   @constructorMap constructorMap = {}
   [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
 #-------------------------------------------- Type attributes
-  let @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine | .copyable | .arc
+  let @PLMTypeAttributes typeAttributes = .instanciable | .copyable | .arc
 #-------------------------------------------- Enter in type map
   let plmImplementationTypeName = "dynarray." + mElementTypeName
   let arrayType = @PLMType.new {
