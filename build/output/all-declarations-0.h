@@ -5211,9 +5211,9 @@ class GALGAS_newTypeDeclaration : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mAliasedTypeName (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNewTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOriginalTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -5235,11 +5235,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_newTypeDeclaration 
 class cPtr_newTypeDeclaration : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mNewTypeName ;
-  public : GALGAS_lstring mProperty_mAliasedTypeName ;
+  public : GALGAS_lstring mProperty_mOriginalTypeName ;
 
 //--- Constructor
   public : cPtr_newTypeDeclaration (const GALGAS_lstring & in_mNewTypeName,
-                                    const GALGAS_lstring & in_mAliasedTypeName
+                                    const GALGAS_lstring & in_mOriginalTypeName
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -5247,7 +5247,7 @@ class cPtr_newTypeDeclaration : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mNewTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mAliasedTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOriginalTypeName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

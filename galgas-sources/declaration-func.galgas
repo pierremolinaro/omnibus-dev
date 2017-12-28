@@ -272,6 +272,7 @@ method @functionDeclarationListAST enterFunctionInContext
       !.new{
         !isPublic:function.mPublicFunction
         !exported:globalFunction
+        !name:function.mFunctionName
         !routineKind:.function {!executionMode:function.mMode}
         !signature:signature
         !returnTypeProxy:returnTypeProxy
@@ -327,6 +328,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
     let descriptor = @routineDescriptor.new {
       !isPublic:function.mPublicFunction
       !exported:exportedFunction
+      !name:function.mFunctionName
       !routineKind:.function {!executionMode:function.mMode}
       !signature:signature
       !returnTypeProxy:returnTypeProxy

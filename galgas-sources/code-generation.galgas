@@ -11,6 +11,7 @@ struct @generationAdds {
   @stringset mExternFunctionDeclarationSet
   @staticStringMap mStaticStringMap
   @bool mUsesGuards
+  @bool mNeedsDynamicMemoryAllocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -308,7 +309,7 @@ private proc generateCodeFiles
     )
   end
 #----------------------------------------- Section, safe dispatcher
-  if inIntermediateCodeStruct.mNeedsDynamicMemoryAllocation then
+  if generationAdds.mNeedsDynamicMemoryAllocation then
     sectionIRlist += 
       !llvmNameForSectionCall (!memoryAllocSectionName ())
       !llvmNameForSectionImplementation (!memoryAllocSectionName ())

@@ -123,7 +123,7 @@ override method @integerDeclarationAST enterInContext
   if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
-      !receiverTypeName:integerTypeName
+      !receiverTypeProxy:selfTypeProxy
       !methodName:byteSwappedMethoName ()
       !safe:true
       !resultTypeProxy:selfTypeProxy
@@ -132,7 +132,7 @@ override method @integerDeclarationAST enterInContext
   end
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:integerTypeName
+    !receiverTypeProxy:selfTypeProxy
     !methodName:bitReversedMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
@@ -140,7 +140,7 @@ override method @integerDeclarationAST enterInContext
   ]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:integerTypeName
+    !receiverTypeProxy:selfTypeProxy
     !methodName:countLeadingZerosMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
@@ -148,7 +148,7 @@ override method @integerDeclarationAST enterInContext
   ]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:integerTypeName
+    !receiverTypeProxy:selfTypeProxy
     !methodName:countTrainingZerosMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
@@ -156,7 +156,7 @@ override method @integerDeclarationAST enterInContext
   ]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeName:integerTypeName
+    !receiverTypeProxy:selfTypeProxy
     !methodName:setBitCountMethoName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
@@ -178,6 +178,7 @@ override method @integerDeclarationAST enterInContext
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmUserTypeName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
+    !plmImplementationTypeName:integerTypeName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName

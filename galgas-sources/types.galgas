@@ -18,6 +18,7 @@ struct @PLMType {
   @PLMTypeAttributes typeAttributes %selector # as instanciable, copyable, ...
   @string plmUserTypeName %selector # Without le leading '$'; empty string for void type kind, used for type display
   @typeKind kind %selector
+  @string plmImplementationTypeName %selector # Without le leading '$'; empty string for void type kind, used for type implementation
 }
 
 #·······················································································································
@@ -49,6 +50,7 @@ func booleanType -> @PLMType {
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmUserTypeName:boolTypeName ()
     !kind:.boolean
+    !plmImplementationTypeName:boolTypeName ()
   }
 }
 
@@ -63,6 +65,7 @@ func staticIntegerType -> @PLMType {
     !typeAttributes:.equatable | .copyable
     !plmUserTypeName:staticIntegerTypeName ()
     !kind:.staticInteger
+    !plmImplementationTypeName:staticIntegerTypeName ()
   }
 }
 
@@ -77,6 +80,7 @@ func literalStringType -> @PLMType {
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmUserTypeName:staticStringTypeName () 
     !kind:.literalString
+    !plmImplementationTypeName:staticStringTypeName ()
   }
 }
 
@@ -91,6 +95,7 @@ func voidType -> @PLMType {
     !typeAttributes:.none
     !plmUserTypeName:""
     !kind:.void
+    !plmImplementationTypeName:""
   }
 }
 
@@ -105,6 +110,7 @@ func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
     !typeAttributes:.none
     !plmUserTypeName:""
     !kind:.function {!descriptor:inDescriptor}
+    !plmImplementationTypeName:""
   }
 }
 

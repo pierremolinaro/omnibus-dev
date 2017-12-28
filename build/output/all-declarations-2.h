@@ -1123,6 +1123,8 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
 
   public : GALGAS_bool mProperty_exported ;
 
+  public : GALGAS_string mProperty_name ;
+
   public : GALGAS_routineKind mProperty_routineKind ;
 
   public : GALGAS_routineTypedSignature mProperty_signature ;
@@ -1148,6 +1150,7 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_routineDescriptor (const GALGAS_bool & in_isPublic,
                                      const GALGAS_bool & in_exported,
+                                     const GALGAS_string & in_name,
                                      const GALGAS_routineKind & in_routineKind,
                                      const GALGAS_routineTypedSignature & in_signature,
                                      const GALGAS_unifiedTypeMap_2D_proxy & in_returnTypeProxy,
@@ -1168,12 +1171,13 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_routineDescriptor constructor_new (const class GALGAS_bool & inOperand0,
                                                                   const class GALGAS_bool & inOperand1,
-                                                                  const class GALGAS_routineKind & inOperand2,
-                                                                  const class GALGAS_routineTypedSignature & inOperand3,
-                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
-                                                                  const class GALGAS_bool & inOperand5,
+                                                                  const class GALGAS_string & inOperand2,
+                                                                  const class GALGAS_routineKind & inOperand3,
+                                                                  const class GALGAS_routineTypedSignature & inOperand4,
+                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
                                                                   const class GALGAS_bool & inOperand6,
-                                                                  const class GALGAS_bool & inOperand7
+                                                                  const class GALGAS_bool & inOperand7,
+                                                                  const class GALGAS_bool & inOperand8
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1195,6 +1199,8 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_exported (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPublic (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_name (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_returnTypeProxy (LOCATION_ARGS) const ;
 
@@ -5348,6 +5354,8 @@ class GALGAS_generationAdds : public AC_GALGAS_root {
 
   public : GALGAS_bool mProperty_mUsesGuards ;
 
+  public : GALGAS_bool mProperty_mNeedsDynamicMemoryAllocation ;
+
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -5365,7 +5373,8 @@ class GALGAS_generationAdds : public AC_GALGAS_root {
   public : GALGAS_generationAdds (const GALGAS_uint & in_mUniqueIndex,
                                   const GALGAS_stringset & in_mExternFunctionDeclarationSet,
                                   const GALGAS_staticStringMap & in_mStaticStringMap,
-                                  const GALGAS_bool & in_mUsesGuards) ;
+                                  const GALGAS_bool & in_mUsesGuards,
+                                  const GALGAS_bool & in_mNeedsDynamicMemoryAllocation) ;
 
 //-- Start of generic part --*
 
@@ -5381,7 +5390,8 @@ class GALGAS_generationAdds : public AC_GALGAS_root {
   public : static class GALGAS_generationAdds constructor_new (const class GALGAS_uint & inOperand0,
                                                                const class GALGAS_stringset & inOperand1,
                                                                const class GALGAS_staticStringMap & inOperand2,
-                                                               const class GALGAS_bool & inOperand3
+                                                               const class GALGAS_bool & inOperand3,
+                                                               const class GALGAS_bool & inOperand4
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -5397,6 +5407,8 @@ class GALGAS_generationAdds : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mExternFunctionDeclarationSet (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mNeedsDynamicMemoryAllocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_staticStringMap getter_mStaticStringMap (LOCATION_ARGS) const ;
 
@@ -7406,8 +7418,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
   public : GALGAS_globalSyncInstanceMapIR mProperty_mGlobalSyncInstanceMap ;
 
-  public : GALGAS_bool mProperty_mNeedsDynamicMemoryAllocation ;
-
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -7440,8 +7450,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_driverListIR & in_mDriverList,
                                           const GALGAS_staticListInvokedFunctionSetMap & in_mStaticArrayMapForIntermediate,
                                           const GALGAS_generationListIR & in_mGenerationListIR,
-                                          const GALGAS_globalSyncInstanceMapIR & in_mGlobalSyncInstanceMap,
-                                          const GALGAS_bool & in_mNeedsDynamicMemoryAllocation) ;
+                                          const GALGAS_globalSyncInstanceMapIR & in_mGlobalSyncInstanceMap) ;
 
 //-- Start of generic part --*
 
@@ -7472,8 +7481,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                        const class GALGAS_driverListIR & inOperand15,
                                                                        const class GALGAS_staticListInvokedFunctionSetMap & inOperand16,
                                                                        const class GALGAS_generationListIR & inOperand17,
-                                                                       const class GALGAS_globalSyncInstanceMapIR & inOperand18,
-                                                                       const class GALGAS_bool & inOperand19
+                                                                       const class GALGAS_globalSyncInstanceMapIR & inOperand18
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -7509,8 +7517,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_interruptMapIR getter_mInterruptMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMaxBranchOfOnInstructions (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mNeedsDynamicMemoryAllocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListSortedListIR getter_mPanicLoopInstructionListIR (LOCATION_ARGS) const ;
 
@@ -7559,8 +7565,6 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
 
   public : GALGAS_stringset mProperty_mInitializedDriverSet ;
 
-  public : GALGAS_bool mProperty_mNeedsDynamicMemoryAllocation ;
-
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -7580,8 +7584,7 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
                                              const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
                                              const GALGAS_subprogramInvocationGraph & in_mSubprogramInvocationGraph,
                                              const GALGAS_staticListInvokedFunctionSetMap & in_mStaticArrayMapForTemporaries,
-                                             const GALGAS_stringset & in_mInitializedDriverSet,
-                                             const GALGAS_bool & in_mNeedsDynamicMemoryAllocation) ;
+                                             const GALGAS_stringset & in_mInitializedDriverSet) ;
 
 //-- Start of generic part --*
 
@@ -7599,8 +7602,7 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
                                                                           const class GALGAS_panicRoutinePriorityMap & inOperand2,
                                                                           const class GALGAS_subprogramInvocationGraph & inOperand3,
                                                                           const class GALGAS_staticListInvokedFunctionSetMap & inOperand4,
-                                                                          const class GALGAS_stringset & inOperand5,
-                                                                          const class GALGAS_bool & inOperand6
+                                                                          const class GALGAS_stringset & inOperand5
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -7616,8 +7618,6 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mInitializedDriverSet (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mNeedsDynamicMemoryAllocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_mPanicLoopRoutinePriorityMap (LOCATION_ARGS) const ;
 

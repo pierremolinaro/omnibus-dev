@@ -190,6 +190,7 @@ override method @syncDeclarationAST enterInContext
     let descriptor = @routineDescriptor.new {
       !isPublic:system.mPublic
       !exported:exportedRoutine
+      !name:system.mName
       !routineKind:system.mRoutineKind
       !signature:signature
       !returnTypeProxy:returnTypeProxy
@@ -227,6 +228,7 @@ override method @syncDeclarationAST enterInContext
     !typeAttributes:.instanciable
     !plmUserTypeName:mSyncToolName
     !kind:.syncTool {!propertyList:propertyList}
+    !plmImplementationTypeName:mSyncToolName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mSyncToolName

@@ -803,6 +803,8 @@ class GALGAS_PLMType : public AC_GALGAS_root {
 
   public : GALGAS_typeKind mProperty_kind ;
 
+  public : GALGAS_string mProperty_plmImplementationTypeName ;
+
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -820,7 +822,8 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                            const GALGAS_guardMapForContext & in_guardMap,
                            const GALGAS_PLMTypeAttributes & in_typeAttributes,
                            const GALGAS_string & in_plmUserTypeName,
-                           const GALGAS_typeKind & in_kind) ;
+                           const GALGAS_typeKind & in_kind,
+                           const GALGAS_string & in_plmImplementationTypeName) ;
 
 //-- Start of generic part --*
 
@@ -839,7 +842,8 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                         const class GALGAS_guardMapForContext & inOperand3,
                                                         const class GALGAS_PLMTypeAttributes & inOperand4,
                                                         const class GALGAS_string & inOperand5,
-                                                        const class GALGAS_typeKind & inOperand6
+                                                        const class GALGAS_typeKind & inOperand6,
+                                                        const class GALGAS_string & inOperand7
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -861,6 +865,8 @@ class GALGAS_PLMType : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_guardMapForContext getter_guardMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_typeKind getter_kind (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_plmImplementationTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_plmUserTypeName (LOCATION_ARGS) const ;
 

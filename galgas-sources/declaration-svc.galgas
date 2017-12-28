@@ -176,6 +176,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !.new {
         !isPublic:svc.mPublic
         !exported:false
+        !name:svc.mName
         !routineKind:svc.mRoutineKind
         !signature:signature
         !returnTypeProxy:returnTypeProxy

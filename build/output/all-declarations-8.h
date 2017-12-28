@@ -419,33 +419,33 @@ class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompile
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Routine 'enterAliasInfixOperator'                                          *
+//                                         Routine 'enterNewTypeInfixOperator'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_enterAliasInfixOperator (class GALGAS_infixOperatorMap & ioArgument0,
-                                      const class GALGAS_lstring constinArgument1,
-                                      const class GALGAS_lstring constinArgument2,
-                                      const class GALGAS_lstring constinArgument3,
-                                      const class GALGAS_lstring constinArgument4,
-                                      const class GALGAS_lstring constinArgument5,
-                                      const class GALGAS_lstring constinArgument6,
-                                      const class GALGAS_PLMType constinArgument7,
-                                      const class GALGAS_PLMType constinArgument8,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
+void routine_enterNewTypeInfixOperator (class GALGAS_infixOperatorMap & ioArgument0,
+                                        const class GALGAS_lstring constinArgument1,
+                                        const class GALGAS_lstring constinArgument2,
+                                        const class GALGAS_lstring constinArgument3,
+                                        const class GALGAS_lstring constinArgument4,
+                                        const class GALGAS_lstring constinArgument5,
+                                        const class GALGAS_lstring constinArgument6,
+                                        const class GALGAS_PLMType constinArgument7,
+                                        const class GALGAS_PLMType constinArgument8,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Routine 'enterAliasPrefixOperator'                                          *
+//                                        Routine 'enterNewTypePrefixOperator'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_enterAliasPrefixOperator (class GALGAS_prefixOperatorMap & ioArgument0,
-                                       const class GALGAS_lstring constinArgument1,
-                                       const class GALGAS_lstring constinArgument2,
-                                       class C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
+void routine_enterNewTypePrefixOperator (class GALGAS_prefixOperatorMap & ioArgument0,
+                                         const class GALGAS_lstring constinArgument1,
+                                         const class GALGAS_lstring constinArgument2,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
