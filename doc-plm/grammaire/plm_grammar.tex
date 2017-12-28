@@ -167,6 +167,26 @@
   \draw[->] (p0-10) -- (p0-11) ;
 \end{tikzpicture}
 
+\ruleSubsection{plm\_syntax}{type-opaque-declaration}{20}
+
+\begin{tikzpicture}
+  \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
+    & & & & & & & & \node (p2-8) [point] {}; & \\
+    & & & & & & & \node (p1-7) [terminal] {@attribute}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {opaque}; & \node (p0-3) [terminal] {\$type}; & \node (p0-4) [point] {}; & \node (p0-5) [point] {}; & \node (p0-6) [point] {}; & & & \node (p0-9) [terminal] {\{}; & \node (p0-10) [nonterminal] {\nonTerminalSymbol{expression}{24}}; & \node (p0-11) [terminal] {\}}; & \node (p0-12) [lastPoint] {}; & \\
+  };
+  \draw[->] (P0start) -- (p0-2) ;
+  \draw[->] (p0-2) -- (p0-3) ;
+  \draw (p0-3) -- (p0-5) ;
+  \draw[->] (p0-6) |- (p1-7) ;
+  \draw[->] (p2-8) -| (p0-4) ;
+  \draw[->] (p1-7) -| (p2-8) ;
+  \draw[->] (p0-5) -- (p0-9) ;
+  \draw[->] (p0-9) -- (p0-10) ;
+  \draw[->] (p0-10) -- (p0-11) ;
+  \draw[->] (p0-11) -- (p0-12) ;
+\end{tikzpicture}
+
 \ruleSubsection{plm\_syntax}{declaration-control-register}{60}
 
 \begin{tikzpicture}
@@ -1108,6 +1128,17 @@
   \draw[->] (p0-3) -- (p0-4) ;
 \end{tikzpicture}
 
+\ruleSubsection{plm\_syntax}{instruction-assert}{17}
+
+\begin{tikzpicture}
+  \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {assert}; & \node (p0-3) [nonterminal] {\nonTerminalSymbol{expression}{24}}; & \node (p0-4) [lastPoint] {}; & \\
+  };
+  \draw[->] (P0start) -- (p0-2) ;
+  \draw[->] (p0-2) -- (p0-3) ;
+  \draw[->] (p0-3) -- (p0-4) ;
+\end{tikzpicture}
+
 \ruleSubsection{plm\_syntax}{instruction-assignment}{18}
 
 \begin{tikzpicture}
@@ -1219,17 +1250,6 @@
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
-\end{tikzpicture}
-
-\ruleSubsection{plm\_syntax}{instruction-assert}{17}
-
-\begin{tikzpicture}
-  \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {assert}; & \node (p0-3) [nonterminal] {\nonTerminalSymbol{expression}{24}}; & \node (p0-4) [lastPoint] {}; & \\
-  };
-  \draw[->] (P0start) -- (p0-2) ;
-  \draw[->] (p0-2) -- (p0-3) ;
-  \draw[->] (p0-3) -- (p0-4) ;
 \end{tikzpicture}
 
 \ruleSubsection{plm\_syntax}{instruction-panic}{17}
@@ -2133,7 +2153,7 @@
 
 \nonTerminalSection{type\_definition}{3}
 
-\ruleSubsection{plm\_syntax}{declaration-type}{37}
+\ruleSubsection{plm\_syntax}{declaration-type}{34}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -2156,23 +2176,15 @@
   \draw[->] (p0-5) -- (p0-6) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{type-opaque-declaration}{20}
+\ruleSubsection{plm\_syntax}{type-dynamic-array}{18}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & & & & & & & & \node (p2-11) [point] {}; & \\
-    & & & & & & & & & & \node (p1-10) [terminal] {@attribute}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {[}; & \node (p0-3) [terminal] {[}; & \node (p0-4) [nonterminal] {\nonTerminalSymbol{expression}{24}}; & \node (p0-5) [terminal] {]}; & \node (p0-6) [terminal] {]}; & \node (p0-7) [point] {}; & \node (p0-8) [point] {}; & \node (p0-9) [point] {}; & & & \node (p0-12) [lastPoint] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {[}; & \node (p0-3) [terminal] {\$type}; & \node (p0-4) [terminal] {]}; & \node (p0-5) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
   \draw[->] (p0-3) -- (p0-4) ;
   \draw[->] (p0-4) -- (p0-5) ;
-  \draw[->] (p0-5) -- (p0-6) ;
-  \draw (p0-6) -- (p0-8) ;
-  \draw[->] (p0-9) |- (p1-10) ;
-  \draw[->] (p2-11) -| (p0-7) ;
-  \draw[->] (p1-10) -| (p2-11) ;
-  \draw[->] (p0-8) -- (p0-12) ;
 \end{tikzpicture}
 

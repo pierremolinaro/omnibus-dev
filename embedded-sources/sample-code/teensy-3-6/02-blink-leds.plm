@@ -45,9 +45,9 @@ task T1 priority 1 stackSize 512 {
     digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:1 !column:0)
-    lcd.print (!unsigned:time.now ())
+    lcd.print (!u32:time.now ())
     lcd.goto (!line:2 !column:0)
-    lcd.print (!unsigned:freeStackSize ())
+    lcd.print (!u32:freeStackSize ())
   }
 }
 

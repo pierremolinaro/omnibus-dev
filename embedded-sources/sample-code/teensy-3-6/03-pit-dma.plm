@@ -205,10 +205,10 @@ task Tâche priority 1 stackSize 512 {
     digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.print (!unsigned:self.pattern.count)
+    lcd.print (!u32:self.pattern.count)
     lcd.print (!string:" ")
     let cc = $isrSlot.PITChannel3.uint7 ()
-    lcd.print (!unsigned:extend (cc))
+    lcd.print (!u32:extend (cc))
   }
 }
 

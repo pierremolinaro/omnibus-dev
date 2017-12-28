@@ -251,7 +251,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func user print @noUnusedWarning (?unsigned:inValue $uint32) {
+  public func user print @noUnusedWarning (?u32:inValue $uint32) {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
@@ -267,6 +267,33 @@ driver lcd > digital {
     }
     if not isPrinting {
       self.writeData_inUserMode (!0x30)
+    }
+  }
+
+  //············································································
+
+  public func user print @noUnusedWarning (?u32:inValue $uint32 ?width: inWidth $uint32) {
+    var divisor $uint32 = 1_000_000_000
+    var value = inValue
+    var isPrinting = no
+    var count $uint32 = 0
+    while divisor > 0 {
+      if isPrinting or (value ≥ divisor) {
+        let quotient = value / divisor
+        let remainder = value - quotient * divisor
+        self.writeData_inUserMode (!convert (quotient) + 0x30)
+        count += 1
+        value = remainder
+        isPrinting = yes
+      }
+      divisor = divisor / 10
+    }
+    if not isPrinting {
+      self.writeData_inUserMode (!0x30)
+      count += 1
+    }
+    for _ $uint32 in count ..< inWidth {
+      self.writeData_inUserMode (!0x20)
     }
   }
 

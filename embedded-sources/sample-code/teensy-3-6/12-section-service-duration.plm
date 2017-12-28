@@ -50,7 +50,7 @@ task T priority 0 stackSize 512 {
       let t0 = getSysTick ()
       let t1 = getSysTick ()
       cumul += t0 - t1
-      lcd.print (!unsigned:t0 - t1)
+      lcd.print (!u32:t0 - t1)
       lcd.print (!spaces:1)
     }
     let systickDuration = cumul / ITERATIONS
@@ -61,7 +61,7 @@ task T priority 0 stackSize 512 {
       let t0 = getSysTick ()
       emptySection ()
       let t1 = getSysTick ()
-      lcd.print (!unsigned:t0 - t1 - systickDuration)
+      lcd.print (!u32:t0 - t1 - systickDuration)
       lcd.print (!spaces:1)
     }
   //--- Compute emptyService duration
@@ -71,7 +71,7 @@ task T priority 0 stackSize 512 {
       let t0 = getSysTick ()
       emptyService ()
       let t1 = getSysTick ()
-      lcd.print (!unsigned:t0 - t1 - systickDuration)
+      lcd.print (!u32:t0 - t1 - systickDuration)
       lcd.print (!spaces:1)
     }
   }
