@@ -142,7 +142,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   ]
 #-------------------------------------------- Constructor map
   @constructorMap constructorMap = {}
-  [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
+  [!?constructorMap insertKey !["()" nowhere] !{} !.null]
 #-------------------------------------------- Type attributes
   let @PLMTypeAttributes typeAttributes = .instanciable | .copyable | .arc
 #-------------------------------------------- Enter in type map
@@ -325,8 +325,8 @@ override method @dynamicArrayIR generateLLVMcode
 #---------- denit
   let deinitName = [mDynamicArrayType deinitFunctionLLVMName]
   ioLLVMcode += llvmTitleComment (!deinitName)
-  ioLLVMcode += "define internal void " + deinitName + " (" + [mDynamicArrayType llvmTypeName] + "* %inPointerAddress) nounwind {\n"
-  ioLLVMcode += "  %byte.ptr = bitcast " + [mDynamicArrayType llvmTypeName] + "* %inPointerAddress to %ptrtype\n"
+  ioLLVMcode += "define internal void " + deinitName + " (" + [mDynamicArrayType llvmTypeName] + " %inPointerAddress) nounwind {\n"
+  ioLLVMcode += "  %byte.ptr = bitcast " + [mDynamicArrayType llvmTypeName] + " %inPointerAddress to %ptrtype\n"
   ioLLVMcode += "  call void @arc.release (%ptrtype %byte.ptr, void (%ptrtype)* " + [mElementType deinitFunctionLLVMName] + ")\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"

@@ -10,6 +10,242 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                    Extension method '@instructionListIR appendGetUniversalArrayElementReference'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendGetUniversalArrayElementReference (GALGAS_instructionListIR & ioObject,
+                                                              const GALGAS_PLMType constinArgument_inType,
+                                                              const GALGAS_string constinArgument_inLLVMName,
+                                                              const GALGAS_PLMType constinArgument_inElementType,
+                                                              const GALGAS_string constinArgument_inElementLLVMName,
+                                                              const GALGAS_objectIR constinArgument_inIndexIR,
+                                                              C_Compiler * /* inCompiler */
+                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_getUniversalArrayElementReferenceIR::constructor_new (constinArgument_inType, constinArgument_inLLVMName, constinArgument_inElementType, constinArgument_inElementLLVMName, constinArgument_inIndexIR  COMMA_SOURCE_FILE ("intermediate-get-universal-array-element-reference.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-get-universal-array-element-reference.galgas", 9)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Extension method '@instructionListIR appendGetArrayElementReference'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendGetArrayElementReference (GALGAS_instructionListIR & ioObject,
+                                                     const GALGAS_objectIR constinArgument_inTarget,
+                                                     const GALGAS_objectIR constinArgument_inSource,
+                                                     const GALGAS_string constinArgument_inElementIndex,
+                                                     C_Compiler * /* inCompiler */
+                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_getArrayElementReferenceIR::constructor_new (constinArgument_inTarget, constinArgument_inSource, constinArgument_inElementIndex  COMMA_SOURCE_FILE ("intermediate-get-array-element-reference.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-get-array-element-reference.galgas", 7)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_getArrayElementReferenceIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_getArrayElementReferenceIR * p = (const cPtr_getArrayElementReferenceIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_getArrayElementReferenceIR) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mTarget.objectCompare (p->mProperty_mTarget) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mSource.objectCompare (p->mProperty_mSource) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mElementIndex.objectCompare (p->mProperty_mElementIndex) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_getArrayElementReferenceIR::objectCompare (const GALGAS_getArrayElementReferenceIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_getArrayElementReferenceIR::GALGAS_getArrayElementReferenceIR (void) :
+GALGAS_abstractInstructionIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_getArrayElementReferenceIR::GALGAS_getArrayElementReferenceIR (const cPtr_getArrayElementReferenceIR * inSourcePtr) :
+GALGAS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_getArrayElementReferenceIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_getArrayElementReferenceIR GALGAS_getArrayElementReferenceIR::constructor_new (const GALGAS_objectIR & inAttribute_mTarget,
+                                                                                      const GALGAS_objectIR & inAttribute_mSource,
+                                                                                      const GALGAS_string & inAttribute_mElementIndex
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_getArrayElementReferenceIR result ;
+  if (inAttribute_mTarget.isValid () && inAttribute_mSource.isValid () && inAttribute_mElementIndex.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_getArrayElementReferenceIR (inAttribute_mTarget, inAttribute_mSource, inAttribute_mElementIndex COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_getArrayElementReferenceIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_getArrayElementReferenceIR * p = (const cPtr_getArrayElementReferenceIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_getArrayElementReferenceIR) ;
+    result = p->mProperty_mTarget ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR cPtr_getArrayElementReferenceIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTarget ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_getArrayElementReferenceIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_getArrayElementReferenceIR * p = (const cPtr_getArrayElementReferenceIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_getArrayElementReferenceIR) ;
+    result = p->mProperty_mSource ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR cPtr_getArrayElementReferenceIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSource ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_getArrayElementReferenceIR::getter_mElementIndex (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_getArrayElementReferenceIR * p = (const cPtr_getArrayElementReferenceIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_getArrayElementReferenceIR) ;
+    result = p->mProperty_mElementIndex ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string cPtr_getArrayElementReferenceIR::getter_mElementIndex (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mElementIndex ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                 Pointer class for @getArrayElementReferenceIR class                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_getArrayElementReferenceIR::cPtr_getArrayElementReferenceIR (const GALGAS_objectIR & in_mTarget,
+                                                                  const GALGAS_objectIR & in_mSource,
+                                                                  const GALGAS_string & in_mElementIndex
+                                                                  COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (THERE),
+mProperty_mTarget (in_mTarget),
+mProperty_mSource (in_mSource),
+mProperty_mElementIndex (in_mElementIndex) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_getArrayElementReferenceIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_getArrayElementReferenceIR ;
+}
+
+void cPtr_getArrayElementReferenceIR::description (C_String & ioString,
+                                                   const int32_t inIndentation) const {
+  ioString << "[@getArrayElementReferenceIR:" ;
+  mProperty_mTarget.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mSource.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mElementIndex.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_getArrayElementReferenceIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_getArrayElementReferenceIR (mProperty_mTarget, mProperty_mSource, mProperty_mElementIndex COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @getArrayElementReferenceIR type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_getArrayElementReferenceIR ("getArrayElementReferenceIR",
+                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_getArrayElementReferenceIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_getArrayElementReferenceIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_getArrayElementReferenceIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_getArrayElementReferenceIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_getArrayElementReferenceIR GALGAS_getArrayElementReferenceIR::extractObject (const GALGAS_object & inObject,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_getArrayElementReferenceIR result ;
+  const GALGAS_getArrayElementReferenceIR * p = (const GALGAS_getArrayElementReferenceIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_getArrayElementReferenceIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("getArrayElementReferenceIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                             Extension method '@instructionListIR appendSelectOperation'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

@@ -8,6 +8,7 @@ enum @objectIR {
 #--- Reference
   case reference (@PLMType type @string llvmName)
 #--- Values
+  case nullValue (@PLMType type)
   case llvmValue (@PLMType type @string llvmName)
   case literalInteger  (@PLMType type @bigint value)
   case llvmStructureValue (@PLMType type @sortedOperandIRList values)
@@ -23,6 +24,8 @@ getter @objectIR isConstantValue -> @bool {
   case null :
     result = true
   case zero (*) :
+    result = true
+  case nullValue (*) :
     result = true
   case literalInteger (* *) :
     result = true
@@ -57,6 +60,8 @@ getter @objectIR isStructuredNonConstantValue -> @bool {
     result = false
   case llvmValue (* *) :
     result = false
+  case nullValue (*) :
+    result = false
   case reference (* *) :
     result = false
   case llvmStructureValue (* @sortedOperandIRList inValues) :
@@ -81,6 +86,7 @@ getter @objectIR llvmName -> @string {
   case null : error .nowhere : "<<@objectIR llvmName null>>" : result
   case zero (*) : result = "zeroinitializer"
   case literalInteger (* @bigint value) : result = [value string]
+  case nullValue (*) : result = "null"
   case llvmValue (* llvmName) : result = llvmName
   case reference (* llvmName) : result = llvmName
   case llvmStructureValue (* @sortedOperandIRList inValues) :
@@ -113,6 +119,7 @@ getter @objectIR type -> @PLMType {
   case reference (type *) : result = type
   case zero (type) : result = type
   case literalInteger (type *) : result = type
+  case nullValue (type) : result = type
   case llvmValue (type *) : result = type
   case llvmStructureValue (type *) : result = type
   case llvmArrayValue (type *) : result = type
@@ -137,6 +144,8 @@ getter @objectIR plmUserTypeName -> @string {
 getter @objectIR withType ?let @PLMType inType -> @objectIR {
   switch self
   case null : error .nowhere : "<<@objectIR withType null>>" : result
+  case nullValue (*) :
+    result = .nullValue {!type:inType}
   case reference (* llvmName) :
     result = .reference {!type:inType !llvmName:llvmName}
   case literalInteger (* @bigint value) :
@@ -159,6 +168,7 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
 getter @objectIR name -> @string {
   switch self
   case null : error .nowhere : "<<@objectIR name null>>" : result
+  case nullValue (*) : result = "null"
   case reference (* llvmName) : result = llvmName
   case zero (*) : result = "zeroinitializer"
   case literalInteger (* @bigint value) : result = [value string]
@@ -180,6 +190,7 @@ getter @objectIR isStatic -> @bool {
   case reference (**) : result = false
   case zero (*) : result = true
   case literalInteger (* *) : result = true
+  case nullValue (*) : result = true
   case llvmValue (* *) : result = false
   case llvmStructureValue (* *) : result = true
   case llvmArrayValue (* *) : result = true
