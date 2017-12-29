@@ -7153,7 +7153,8 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                         const class GALGAS_structurePropertyListAST & inOperand3,
                                                                         const class GALGAS_functionDeclarationListAST & inOperand4,
                                                                         const class GALGAS_systemRoutineDeclarationListAST & inOperand5,
-                                                                        const class GALGAS_guardDeclarationListAST & inOperand6
+                                                                        const class GALGAS_guardDeclarationListAST & inOperand6,
+                                                                        const class GALGAS_bool & inOperand7
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -7172,6 +7173,8 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mGenerateAssignmentRoutine (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStructureName (LOCATION_ARGS) const ;
 
@@ -8033,6 +8036,7 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public : GALGAS_functionDeclarationListAST mProperty_mFunctionDeclarationListAST ;
   public : GALGAS_systemRoutineDeclarationListAST mProperty_mSystemRoutineListAST ;
   public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
+  public : GALGAS_bool mProperty_mMayImplementDeinit ;
 
 //--- Constructor
   public : cPtr_structureDeclarationAST (const GALGAS_lstring & in_mStructureName,
@@ -8041,7 +8045,8 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
                                          const GALGAS_structurePropertyListAST & in_mStructurePropertyListAST,
                                          const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
                                          const GALGAS_systemRoutineDeclarationListAST & in_mSystemRoutineListAST,
-                                         const GALGAS_guardDeclarationListAST & in_mGuardListAST
+                                         const GALGAS_guardDeclarationListAST & in_mGuardListAST,
+                                         const GALGAS_bool & in_mMayImplementDeinit
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -8055,6 +8060,7 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
