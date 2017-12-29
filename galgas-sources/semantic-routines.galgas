@@ -243,11 +243,17 @@ method @routineMapIR-element llvmCodeGeneration
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
 #--- Generate release instructions for input arguments
 #    Insulate output and input/output arguments
-  ioLLVMcode += ";--------- Release input arguments\n"
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
-      [mFormalArgumentType generateRelease !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+      if [mFormalArgumentType deinitNeeded] then
+        ioLLVMcode += ";--------- Release '" + mFormalArgumentName + "' input argument\n"
+        let deinitName = [mFormalArgumentType deinitFunctionLLVMName]
+        let llvmVarName = llvmNameForLocalVariable (!mFormalArgumentName)
+#        ioLLVMcode += "  " + llvmVarName + ".loaded.for.deinit = load i32, i32* " + llvmVarName + "\n"
+        ioLLVMcode += "  call void " + deinitName + " (" + [mFormalArgumentType llvmTypeName] + "* " + llvmVarName + ")\n"
+#        [mFormalArgumentType generateTypeRelease !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+      end
     case inputOutput :
       if mKind == .section then
        ioLLVMcode += ";--------- Insulate input/output argument '" + mFormalArgumentName + "'\n"
