@@ -10,6 +10,7 @@ class @structureDeclarationAST : @abstractDeclarationAST {
   @functionDeclarationListAST mFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
+  @bool mMayImplementDeinit
 }
 
 #·······················································································································
@@ -153,6 +154,7 @@ syntax extension plm_syntax {
       !procedureDeclarationListAST
       !{}
       !{}
+      !true
     }
   }
 
@@ -181,7 +183,8 @@ override method @structureDeclarationAST addExtension
         ![newDeclaration mStructurePropertyListAST] + properties
         ![newDeclaration mFunctionDeclarationListAST] + functions
         ![newDeclaration mSystemRoutineListAST] + svcs
-        ![newDeclaration mGuardListAST] + guards      
+        ![newDeclaration mGuardListAST] + guards
+        !newDeclaration.mMayImplementDeinit   
       }
     else
       ioExtensionDeclarationListAST += !typeName !functions !properties !svcs !guards
@@ -399,6 +402,7 @@ override method @structureDeclarationAST enterInContext
     !mFunctionDeclarationListAST
     !mSystemRoutineListAST
     !mGuardListAST
+    !mMayImplementDeinit
   }
 }
 
@@ -493,6 +497,7 @@ class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
   @functionDeclarationListAST mFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
+  @bool mMayImplementDeinit
 }
 
 #·······················································································································
@@ -503,27 +508,31 @@ override method @decoratedStructureDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName} type]
-#--- Analyze functions
+#----------- Analyze functions
   [self functionSemanticAnalysis
     !structureType:structureType
     !context:inContext
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
-#--- Analyze system routines
+#----------- Analyze system routines
   [mSystemRoutineListAST systemRoutineSemanticAnalysis
     !receiverType:structureType
     !context:inContext
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
-#--- Analyze guards
+#----------- Analyze guards
   [mGuardListAST guardSemanticAnalysis
     !receiverType:structureType
     !context:inContext
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
+#----------- Generate enumeration specific code
+  if mMayImplementDeinit && [structureType deinitNeeded]  then
+    ioIntermediateCodeStruct.mGenerationListIR += !@structureIR.new {!structureType !inContext.mTargetParameters.mPointerSize}
+  end
 }
 
 #·······················································································································
@@ -581,6 +590,29 @@ method @decoratedStructureDeclaration functionSemanticAnalysis
       !?intermediateCode:ioIntermediateCodeStruct
     )
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  CODE GENERATION: DEINIT                                                                                                   
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @structureIR : @abstractGenerationIR {
+  @PLMType mStructureType
+  @uint mPointerSize
+}
+
+#·······················································································································
+
+override method @structureIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
+  let llvmTypeName = [mStructureType llvmTypeName]
+  let deinitName = "@deinit." + [[mStructureType plmImplementationTypeName] assemblerRepresentation]
+  ioLLVMcode += llvmTitleComment (!deinitName)
+  ioLLVMcode += "define internal void " + deinitName + " (i" + mPointerSize + " %inPointer) nounwind {\n"
+  let arg = "ptr"
+  ioLLVMcode += "  " + llvmNameForLocalVariable (!arg) + " = inttoptr i" + mPointerSize + " %inPointer to " + llvmTypeName + "*\n"
+  [mStructureType generateRelease !arg !?ioLLVMcode !?ioGenerationAdds]
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

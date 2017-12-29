@@ -300,6 +300,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !declaration.mDriverFunctionDeclarationListAST
       !declaration.mDriverSystemRoutineListAST
       !declaration.mDriverGuardListAST
+      !false # Do not implement deinit
     }
     for (init) in declaration.mDriverInitListAST do
       ioAST.mDeclarationListAST += !init

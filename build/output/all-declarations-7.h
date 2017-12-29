@@ -726,6 +726,16 @@ class GALGAS_string extensionGetter_descriptionForHTMLFile (const class GALGAS_P
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                               Extension getter '@PLMType deinitNeeded' (as function)                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_deinitNeeded (const class GALGAS_PLMType & inObject,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                            Extension setter '@semanticTemporariesStruct newTempLLVMVar'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

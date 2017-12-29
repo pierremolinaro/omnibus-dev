@@ -241,6 +241,7 @@ override method @syncDeclarationAST enterInContext
     !mFunctionDeclarationListAST
     !mSystemRoutineListAST
     !mGuardListAST
+    !false # Do not implement deinit
   }
 }
 

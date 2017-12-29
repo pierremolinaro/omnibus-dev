@@ -760,7 +760,8 @@ class GALGAS_decoratedStructureDeclaration : public GALGAS_abstractDecoratedDecl
   public : static class GALGAS_decoratedStructureDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
                                                                               const class GALGAS_functionDeclarationListAST & inOperand1,
                                                                               const class GALGAS_systemRoutineDeclarationListAST & inOperand2,
-                                                                              const class GALGAS_guardDeclarationListAST & inOperand3
+                                                                              const class GALGAS_guardDeclarationListAST & inOperand3,
+                                                                              const class GALGAS_bool & inOperand4
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -775,6 +776,8 @@ class GALGAS_decoratedStructureDeclaration : public GALGAS_abstractDecoratedDecl
   public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStructureName (LOCATION_ARGS) const ;
 
@@ -803,12 +806,14 @@ class cPtr_decoratedStructureDeclaration : public cPtr_abstractDecoratedDeclarat
   public : GALGAS_functionDeclarationListAST mProperty_mFunctionDeclarationListAST ;
   public : GALGAS_systemRoutineDeclarationListAST mProperty_mSystemRoutineListAST ;
   public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
+  public : GALGAS_bool mProperty_mMayImplementDeinit ;
 
 //--- Constructor
   public : cPtr_decoratedStructureDeclaration (const GALGAS_lstring & in_mStructureName,
                                                const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
                                                const GALGAS_systemRoutineDeclarationListAST & in_mSystemRoutineListAST,
-                                               const GALGAS_guardDeclarationListAST & in_mGuardListAST
+                                               const GALGAS_guardDeclarationListAST & in_mGuardListAST,
+                                               const GALGAS_bool & in_mMayImplementDeinit
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -819,6 +824,7 @@ class cPtr_decoratedStructureDeclaration : public cPtr_abstractDecoratedDeclarat
   public : VIRTUAL_IN_DEBUG GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -866,6 +872,93 @@ void callExtensionMethod_functionSemanticAnalysis (const class cPtr_decoratedStr
 
 class GALGAS_string function_userAccessAttribute (class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                 @structureIR class                                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_structureIR : public GALGAS_abstractGenerationIR {
+//--- Constructor
+  public : GALGAS_structureIR (void) ;
+
+//---
+  public : inline const class cPtr_structureIR * ptr (void) const { return (const cPtr_structureIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_structureIR (const cPtr_structureIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_structureIR extractObject (const GALGAS_object & inObject,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_structureIR constructor_new (const class GALGAS_PLMType & inOperand0,
+                                                            const class GALGAS_uint & inOperand1
+                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_structureIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPointerSize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mStructureType (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_structureIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structureIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Pointer class for @structureIR class                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_structureIR : public cPtr_abstractGenerationIR {
+//--- Attributes
+  public : GALGAS_PLMType mProperty_mStructureType ;
+  public : GALGAS_uint mProperty_mPointerSize ;
+
+//--- Constructor
+  public : cPtr_structureIR (const GALGAS_PLMType & in_mStructureType,
+                             const GALGAS_uint & in_mPointerSize
+                             COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mStructureType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mPointerSize (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

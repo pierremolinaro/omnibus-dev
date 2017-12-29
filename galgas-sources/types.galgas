@@ -365,6 +365,18 @@ getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList
 
 #·······················································································································
 
+getter @PLMType deinitNeeded -> @bool {
+  result = [typeAttributes arc]
+  if [kind isStructure] then
+    [kind structure ?propertyList:let @propertyList propertyList]
+    for (propertyName propertyType) in propertyList while not result do
+      result = [propertyType deinitNeeded]
+    end
+  end
+}
+
+#·······················································································································
+
 shared map @unifiedTypeMap %selectors {
   @PLMType type
   @uint index
