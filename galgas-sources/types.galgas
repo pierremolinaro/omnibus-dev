@@ -227,38 +227,6 @@ method @PLMType generateInsulate
 
 #·······················································································································
 
-method @PLMType generateRelease
-  ?let @string inPLMName
-  ?!@string ioLLVMcode
-  ?!@generationAdds ioGenerationAdds
-{
-  let llvmTypeName = [self llvmTypeName]
-  let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
-  if [self.typeAttributes arc] then
-    let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
-    ioGenerationAdds.mUniqueIndex ++
-    ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
-    ioLLVMcode += "  call void @arc.release (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
-  else
-    let arcAssignmentList = [self arcList !{}]
-    for (propertyName propertyType indexPath) in arcAssignmentList do 
-      let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
-      ioGenerationAdds.mUniqueIndex ++
-      ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
-      for (idx) in indexPath do
-        ioLLVMcode += ", i32 " + idx
-      end
-      ioLLVMcode += " ; " + propertyName + "\n"
-      let propertyTypeLLVMName = [propertyType llvmTypeName]
-      let llvmLoadedVarName = llvmVarName + ".loaded"
-      ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
-    end
-  end
-}
-
-#·······················································································································
-
 getter @PLMType llvmTypeName -> @string {
   switch self.kind
   case void :
@@ -281,8 +249,8 @@ getter @PLMType llvmTypeName -> @string {
     result = "i" + bitCount
   case arrayType (* *) :
     result = "%" + [llvmTypeNameFromPLMname (![plmUserTypeName nowhere]) assemblerRepresentation]
-  case dynamicArrayType (* ptrSize) :
-    result = "i" + ptrSize
+  case dynamicArrayType (* unused ptrSize) :
+    result = "%" + [llvmTypeNameFromPLMname (![plmUserTypeName nowhere]) assemblerRepresentation]
   case function (@routineDescriptor descriptor) :
     if descriptor.returnTypeProxy == .null then
       result = "void"
@@ -306,6 +274,65 @@ getter @PLMType llvmTypeName -> @string {
 }
 
 #·······················································································································
+
+list @arcAssignmentList {
+  @string mPropertyName
+  @PLMType mPropertyType
+  @uintlist mPropertyIndexPath
+}
+
+#·······················································································································
+
+getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
+  result = {}
+  if [kind isStructure] then
+    [kind structure ?propertyList:let @propertyList propertyList]
+    for (propertyName propertyType) in propertyList do (idx)
+      let indexPath = inPropertyIndexPath + {!idx}
+      if [propertyType.typeAttributes arc] then
+        result += !propertyName !propertyType !indexPath
+      end
+      result += [propertyType arcList !indexPath]
+    end
+  end
+}
+
+#·······················································································································
+
+getter @PLMType deinitNeeded -> @bool {
+  result = [typeAttributes arc]
+  if [kind isStructure] then
+    [kind structure ?propertyList:let @propertyList propertyList]
+    for (* propertyType) in propertyList while not result do
+      result = [propertyType deinitNeeded]
+    end
+  end
+}
+
+#·······················································································································
+
+getter @PLMType deinitFunctionLLVMName -> @string {
+  result = if [self deinitNeeded]
+  then
+    "@deinit." + [[self plmImplementationTypeName] assemblerRepresentation]
+  else
+    "null"
+  end
+}
+
+#·······················································································································
+
+shared map @unifiedTypeMap %selectors {
+  @PLMType type
+  @uint index
+
+  insert insertType error message "the '%K' type is already declared in %L"
+  search searchKey error message "there is no '%K' type"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  BUILD TYPE MAP HTML FILE                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @PLMType descriptionForHTMLFile -> @string {
   switch self.kind
@@ -340,54 +367,6 @@ getter @PLMType descriptionForHTMLFile -> @string {
 }
 
 #·······················································································································
-
-list @arcAssignmentList {
-  @string mPropertyName
-  @PLMType mPropertyType
-  @uintlist mPropertyIndexPath
-}
-
-#·······················································································································
-
-getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
-  result = {}
-  if [kind isStructure] then
-    [kind structure ?propertyList:let @propertyList propertyList]
-    for (propertyName propertyType) in propertyList do (idx)
-      let indexPath = inPropertyIndexPath + {!idx}
-      if [propertyType.typeAttributes arc] then
-        result += !propertyName !propertyType !indexPath
-      end
-      result += [propertyType arcList !indexPath]
-    end
-  end
-}
-
-#·······················································································································
-
-getter @PLMType deinitNeeded -> @bool {
-  result = [typeAttributes arc]
-  if [kind isStructure] then
-    [kind structure ?propertyList:let @propertyList propertyList]
-    for (propertyName propertyType) in propertyList while not result do
-      result = [propertyType deinitNeeded]
-    end
-  end
-}
-
-#·······················································································································
-
-shared map @unifiedTypeMap %selectors {
-  @PLMType type
-  @uint index
-
-  insert insertType error message "the '%K' type is already declared in %L"
-  search searchKey error message "there is no '%K' type"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  BUILD TYPE MAP HTML FILE                                                                                                      
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildTypeMapHTMLFile
   ?@unifiedTypeMap inTypeMap

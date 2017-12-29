@@ -703,16 +703,13 @@ void extensionMethod_generateInsulate (const class GALGAS_PLMType inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Extension method '@PLMType generateRelease'                                     *
+//                          Extension getter '@PLMType deinitFunctionLLVMName' (as function)                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_generateRelease (const class GALGAS_PLMType inObject,
-                                      const class GALGAS_string constin_inPLMName,
-                                      class GALGAS_string & io_ioLLVMcode,
-                                      class GALGAS_generationAdds & io_ioGenerationAdds,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
+class GALGAS_string extensionGetter_deinitFunctionLLVMName (const class GALGAS_PLMType & inObject,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -723,16 +720,6 @@ void extensionMethod_generateRelease (const class GALGAS_PLMType inObject,
 class GALGAS_string extensionGetter_descriptionForHTMLFile (const class GALGAS_PLMType & inObject,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Extension getter '@PLMType deinitNeeded' (as function)                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool extensionGetter_deinitNeeded (const class GALGAS_PLMType & inObject,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

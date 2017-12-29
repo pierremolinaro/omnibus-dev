@@ -80,7 +80,7 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds unuse
 
     ioLLVMCode += llvmSeparatorLine () + "\n"
     ioLLVMCode += "define internal void @plm.assign." + [self.plmUserTypeName identifierRepresentation]
-                + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
+                + " (" + typeName + " * %inTarget, " + typeName + "* %inSource)" + llvmAttributeFunction () +"{\n"
     ioLLVMCode += ";--- Handle ARC properties\n"
     for (propertyName propertyType indexPath) in arcAssignmentList do
       let propertyTypeLLVMName = [propertyType llvmTypeName]
@@ -94,17 +94,30 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds unuse
       ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
       ioLLVMCode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
     end
-    for (propertyName propertyType indexPath) in arcAssignmentList do
-      let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation]
-      ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inTarget, i32 0"
-      for (idx) in indexPath do
-        ioLLVMCode += ", i32 " + idx
+    switch kind
+    case void, boolean, literalString , staticInteger: # Nothing to do
+    case enumeration (*) : # Nothing to do
+    case structure (@propertyList propertyList) :
+      for (propertyName propertyType) in propertyList do (idx)
+        if [propertyType deinitNeeded] then
+          ioLLVMCode += ";--- denit '" + propertyName + "' source object property\n"
+          let propertyTypeLLVMName = [propertyType llvmTypeName]
+          let llvmVarName = "%property.addr." + [propertyName assemblerRepresentation]
+          ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName
+                     + "* %inTarget, i32 0, i32 " + idx + " ; " + propertyName + "\n"
+#          ioLLVMCode += "  call void @arc.release (" + propertyTypeLLVMName + "* " + llvmVarName
+#                     + ", void (i32)* " + [propertyType deinitFunctionLLVMName] + ")\n" 
+          let deinitName = [propertyType deinitFunctionLLVMName]
+          ioLLVMCode += "  call void " + deinitName + " (" + propertyTypeLLVMName + "* " + llvmVarName + ")\n"
+        end
       end
-      ioLLVMCode += " ; " + propertyName + "\n"
-      let propertyTypeLLVMName = [propertyType llvmTypeName]
-      let llvmLoadedVarName = "%arc.release." + [propertyName assemblerRepresentation] + ".loaded"
-      ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMCode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+    case syncTool (*) : # Nothing to do
+    case integer (4*) : # Nothing to do
+    case opaque (*) : # Nothing to do
+    case arrayType (@PLMType unused elementType @bigint unused size) : # Nothing to do
+    case dynamicArrayType (@PLMType unused elementType @bigint unused ptrSize) :
+    case function (*) : # Nothing to do
+    case pointer (*) : # Nothing to do
     end
     ioLLVMCode += ";--- Compute type size\n"
     ioLLVMCode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
@@ -149,11 +162,12 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds unuse
   elsif [typeAttributes arc] then
     ioLLVMCode += llvmSeparatorLine () + "\n"
     ioLLVMCode += "define internal void @plm.assign." + [self.plmUserTypeName identifierRepresentation]
-                + " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr) nounwind optsize {\n"
+                + " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr)" + llvmAttributeFunction () +"{\n"
     ioLLVMCode += "  %source = load " + typeName + ", " + typeName + "* %inSourcePtr\n" 
     ioLLVMCode += "  call void @arc.retain (" + typeName + " %source)\n" 
-    ioLLVMCode += "  %target = load " + typeName + ", " + typeName + "* %inTargetPtr\n" 
-    ioLLVMCode += "  call void @arc.release (" + typeName + " %target)\n" 
+    ioLLVMCode += "  %target = load " + typeName + ", " + typeName + "* %inTargetPtr\n"
+    ioLLVMCode += "  %function.deinit = bitcast " + [self llvmTypeName] + "* " + [self deinitFunctionLLVMName] + " to void (i32)*\n"
+    ioLLVMCode += "  call void @arc.release (" + typeName + " %target, void (i32)* %function.deinit)\n" 
     ioLLVMCode += "  store " + typeName + " %source, " + typeName + "* %inTargetPtr\n" 
     ioLLVMCode += "  ret void\n"
     ioLLVMCode += "}\n\n"

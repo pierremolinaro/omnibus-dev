@@ -397,9 +397,10 @@ class GALGAS_dynamicArrayIR : public GALGAS_abstractGenerationIR {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_dynamicArrayIR constructor_new (const class GALGAS_string & inOperand0,
-                                                               const class GALGAS_uint & inOperand1,
-                                                               const class GALGAS_PLMType & inOperand2
+  public : static class GALGAS_dynamicArrayIR constructor_new (const class GALGAS_PLMType & inOperand0,
+                                                               const class GALGAS_string & inOperand1,
+                                                               const class GALGAS_uint & inOperand2,
+                                                               const class GALGAS_PLMType & inOperand3
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -412,6 +413,8 @@ class GALGAS_dynamicArrayIR : public GALGAS_abstractGenerationIR {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mAnonymousDynamicArrayTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mDynamicArrayType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mElementType (LOCATION_ARGS) const ;
 
@@ -436,12 +439,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynamicArrayIR ;
 
 class cPtr_dynamicArrayIR : public cPtr_abstractGenerationIR {
 //--- Attributes
+  public : GALGAS_PLMType mProperty_mDynamicArrayType ;
   public : GALGAS_string mProperty_mAnonymousDynamicArrayTypeName ;
   public : GALGAS_uint mProperty_mPtrSize ;
   public : GALGAS_PLMType mProperty_mElementType ;
 
 //--- Constructor
-  public : cPtr_dynamicArrayIR (const GALGAS_string & in_mAnonymousDynamicArrayTypeName,
+  public : cPtr_dynamicArrayIR (const GALGAS_PLMType & in_mDynamicArrayType,
+                                const GALGAS_string & in_mAnonymousDynamicArrayTypeName,
                                 const GALGAS_uint & in_mPtrSize,
                                 const GALGAS_PLMType & in_mElementType
                                 COMMA_LOCATION_ARGS) ;
@@ -450,6 +455,7 @@ class cPtr_dynamicArrayIR : public cPtr_abstractGenerationIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mDynamicArrayType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mAnonymousDynamicArrayTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mPtrSize (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mElementType (LOCATION_ARGS) const ;

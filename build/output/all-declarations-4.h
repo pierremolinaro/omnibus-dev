@@ -4605,31 +4605,31 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Extension setter '@instructionListIR generateRelease'                                *
+//                                Extension setter '@instructionListIR generateDeinit'                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_generateRelease (class GALGAS_instructionListIR & ioObject,
-                                      const class GALGAS_PLMType constin_inType,
-                                      const class GALGAS_lstring constin_in_5F_plmName,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
+void extensionSetter_generateDeinit (class GALGAS_instructionListIR & ioObject,
+                                     const class GALGAS_PLMType constin_inType,
+                                     const class GALGAS_lstring constin_in_5F_plmName,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                  @releaseIR class                                                   *
+//                                                   @deinitIR class                                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_releaseIR : public GALGAS_abstractInstructionIR {
+class GALGAS_deinitIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
-  public : GALGAS_releaseIR (void) ;
+  public : GALGAS_deinitIR (void) ;
 
 //---
-  public : inline const class cPtr_releaseIR * ptr (void) const { return (const cPtr_releaseIR *) mObjectPtr ; }
+  public : inline const class cPtr_deinitIR * ptr (void) const { return (const cPtr_deinitIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_releaseIR (const cPtr_releaseIR * inSourcePtr) ;
+  public : GALGAS_deinitIR (const cPtr_deinitIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -4637,17 +4637,17 @@ class GALGAS_releaseIR : public GALGAS_abstractInstructionIR {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_releaseIR extractObject (const GALGAS_object & inObject,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_deinitIR extractObject (const GALGAS_object & inObject,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_releaseIR constructor_new (const class GALGAS_PLMType & inOperand0,
-                                                          const class GALGAS_lstring & inOperand1
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_deinitIR constructor_new (const class GALGAS_PLMType & inOperand0,
+                                                         const class GALGAS_lstring & inOperand1
+                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_releaseIR & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_deinitIR & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4663,28 +4663,28 @@ class GALGAS_releaseIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_releaseIR class
+} ; // End of GALGAS_deinitIR class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_releaseIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_deinitIR ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Pointer class for @releaseIR class                                          *
+//                                          Pointer class for @deinitIR class                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_releaseIR : public cPtr_abstractInstructionIR {
+class cPtr_deinitIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_PLMType mProperty_mType ;
   public : GALGAS_lstring mProperty_mPLMName ;
 
 //--- Constructor
-  public : cPtr_releaseIR (const GALGAS_PLMType & in_mType,
-                           const GALGAS_lstring & in_mPLMName
-                           COMMA_LOCATION_ARGS) ;
+  public : cPtr_deinitIR (const GALGAS_PLMType & in_mType,
+                          const GALGAS_lstring & in_mPLMName
+                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -4701,6 +4701,16 @@ class cPtr_releaseIR : public cPtr_abstractInstructionIR {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Extension getter '@PLMType deinitNeeded' (as function)                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_deinitNeeded (const class GALGAS_PLMType & inObject,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
