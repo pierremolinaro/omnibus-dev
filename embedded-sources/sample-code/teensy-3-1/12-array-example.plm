@@ -22,7 +22,7 @@ let LED_L1 = $digitalPort.D4
 
 let SIZE = 9
 
-newtype $A : $uint32 [SIZE]
+typealias $A : $uint32 [SIZE]
 
 struct $B {
   var a $uint32 = 0

@@ -21,7 +21,7 @@ let LED_L0 = $digitalPort.D3
 
 let PATTERN_LENGTH = 1000
 
-newtype $patternArray : $uint32 [PATTERN_LENGTH]
+typealias $patternArray : $uint32 [PATTERN_LENGTH]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
