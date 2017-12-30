@@ -325,7 +325,7 @@ override method @staticListAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.none
+    !attributes:.none
     !plmOriginalTypeName:llvmNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyList:propertyList}
     !plmAliasedTypeName:llvmNameForStaticListElementType (!mStaticListName)
@@ -455,7 +455,7 @@ override method @staticListAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
+    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmOriginalTypeName:plmNameForStaticListType (!mStaticListName)
     !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
     !plmAliasedTypeName:plmNameForStaticListType (!mStaticListName)

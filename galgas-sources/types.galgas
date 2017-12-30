@@ -15,7 +15,7 @@ struct @PLMType {
   @classConstantMap classConstantMap %selector # $type.cst, as enumeration values
   @constructorMap constructorMap %selector # $type (!... !...)
   @guardMapForContext guardMap %selector
-  @PLMTypeAttributes typeAttributes %selector # as instanciable, copyable, ...
+  @PLMTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string plmOriginalTypeName %selector # Without le leading '$'; empty string for void type kind, used for type display
   @typeKind kind %selector
   @string plmAliasedTypeName %selector # Without le leading '$'; empty string for void type kind, used for type implementation
@@ -47,7 +47,7 @@ func booleanType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
+    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmOriginalTypeName:boolTypeName ()
     !kind:.boolean
     !plmAliasedTypeName:boolTypeName ()
@@ -62,7 +62,7 @@ func staticIntegerType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.equatable | .copyable
+    !attributes:.equatable | .copyable
     !plmOriginalTypeName:staticIntegerTypeName ()
     !kind:.staticInteger
     !plmAliasedTypeName:staticIntegerTypeName ()
@@ -77,7 +77,7 @@ func literalStringType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
+    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmOriginalTypeName:staticStringTypeName () 
     !kind:.literalString
     !plmAliasedTypeName:staticStringTypeName ()
@@ -92,7 +92,7 @@ func voidType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.none
+    !attributes:.none
     !plmOriginalTypeName:""
     !kind:.void
     !plmAliasedTypeName:""
@@ -107,7 +107,7 @@ func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.none
+    !attributes:.none
     !plmOriginalTypeName:""
     !kind:.function {!descriptor:inDescriptor}
     !plmAliasedTypeName:""
@@ -117,7 +117,7 @@ func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
 #·······················································································································
 
 getter @PLMType equatable -> @bool {
-  result = [typeAttributes equatable]
+  result = [attributes equatable]
 }
 
 #·······················································································································
@@ -129,7 +129,7 @@ getter @unifiedTypeMap-proxy instanciable -> @bool {
 #·······················································································································
 
 getter @PLMType instanciable -> @bool {
-  result = [typeAttributes instanciable]
+  result = [attributes instanciable]
 }
 
 #·······················································································································
@@ -141,7 +141,7 @@ getter @unifiedTypeMap-proxy copyable -> @bool {
 #·······················································································································
 
 getter @PLMType copyable -> @bool {
-  result = [typeAttributes copyable]
+  result = [attributes copyable]
 }
 
 #·······················································································································
@@ -153,7 +153,7 @@ getter @unifiedTypeMap-proxy arc -> @bool {
 #·······················································································································
 
 getter @PLMType arc -> @bool {
-  result = [typeAttributes arc]
+  result = [attributes arc]
 }
 
 #·······················································································································
@@ -165,7 +165,7 @@ method @PLMType generateRetain
 {
   let llvmTypeName = [self llvmTypeName]
   let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
-  if [self.typeAttributes arc] then
+  if [self.attributes arc] then
     let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
@@ -197,7 +197,7 @@ method @PLMType generateInsulate
 {
   let llvmTypeName = [self llvmTypeName]
   let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
-  if [self.typeAttributes arc] then
+  if [self.attributes arc] then
     let loadedVar = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
     let insulatedVar = "%temp." + [inPLMName assemblerRepresentation] + ".insulated." + ioGenerationAdds.mUniqueIndex   
     ioGenerationAdds.mUniqueIndex ++
@@ -234,7 +234,7 @@ method @PLMType generateRelease
 {
   let llvmTypeName = [self llvmTypeName]
   let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
-  if [self.typeAttributes arc] then
+  if [self.attributes arc] then
     let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
@@ -355,7 +355,7 @@ getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList
     [kind structure ?propertyList:let @propertyList propertyList]
     for (propertyName propertyType) in propertyList do (idx)
       let indexPath = inPropertyIndexPath + {!idx}
-      if [propertyType.typeAttributes arc] then
+      if [propertyType.attributes arc] then
         result += !propertyName !propertyType !indexPath
       end
       result += [propertyType arcList !indexPath]
@@ -366,7 +366,7 @@ getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList
 #·······················································································································
 
 getter @PLMType deinitNeeded -> @bool {
-  result = [typeAttributes arc]
+  result = [attributes arc]
   if [kind isStructure] then
     [kind structure ?propertyList:let @propertyList propertyList]
     for (propertyName propertyType) in propertyList while not result do

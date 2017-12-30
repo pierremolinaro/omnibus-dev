@@ -157,7 +157,7 @@ override method @enumerationDeclarationAST enterInContext
     !classConstantMap:enumConstantMap
     !constructorMap:{}
     !guardMap:{}
-    !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
+    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmOriginalTypeName:mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
     !plmAliasedTypeName:mEnumerationName

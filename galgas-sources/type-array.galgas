@@ -23,7 +23,7 @@ syntax extension plm_syntax {
     <expression> !?ioAST ?let sizeExpression
     let sizeExpressionLocation = @location.here
     $]$
-    outTypeName = ["array." + ioAST.mTypeDeclarationIndex here]
+    outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]
     ioAST.mTypeDeclarationIndex ++
     ioAST.mDeclarationListAST += !@typeArrayDeclarationAST.new {
       !outTypeName
@@ -138,7 +138,7 @@ override method @typeArrayDeclarationAST enterInContext
       !classConstantMap:classConstantMap
       !constructorMap:constructorMap
       !guardMap:{}
-      !typeAttributes:typeAttributes
+      !attributes:typeAttributes
       !plmOriginalTypeName:mAnonymousArrayTypeName
       !kind:.arrayType {!elementType:elementType !size:arraySize}
       !plmAliasedTypeName:mAnonymousArrayTypeName

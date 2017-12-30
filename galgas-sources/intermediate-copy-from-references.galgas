@@ -75,7 +75,7 @@ override method @copyFromReferencesIR enterAccessibleEntities
 
 method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds unused ioGenerationAdds {
   let typeName = [self llvmTypeName]
-  if [typeAttributes generateAssignmentRoutine] then
+  if [attributes generateAssignmentRoutine] then
     let arcAssignmentList = [self arcList !{}]
 
     ioLLVMCode += llvmSeparatorLine () + "\n"
@@ -146,7 +146,7 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds unuse
     ioLLVMCode += "copy.end:\n"
     ioLLVMCode += "  ret void\n"
     ioLLVMCode += "}\n\n"
-  elsif [typeAttributes arc] then
+  elsif [attributes arc] then
     ioLLVMCode += llvmSeparatorLine () + "\n"
     ioLLVMCode += "define internal void @plm.assign." + [self.plmOriginalTypeName identifierRepresentation]
                 + " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr) nounwind optsize {\n"
