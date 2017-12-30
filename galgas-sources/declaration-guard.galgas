@@ -162,7 +162,7 @@ proc guardSemanticAnalysis
 {
 #--- Guard mangled name
   let guardMangledName = routineMangledNameFromAST (
-    !if inSelfType.kind == .void then "" else llvmTypeStringFromPLMname (!inSelfType.plmUserTypeName) end
+    !if inSelfType.kind == .void then "" else llvmTypeStringFromPLMname (!inSelfType.plmOriginalTypeName) end
     !inRoutineName
     !inRoutineFormalArgumentList
   )
@@ -408,7 +408,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !?effectiveIR:effectiveParameterListIR
         )
       #--- Get function name and map containing the function definition
-        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.plmUserTypeName) !methodName !mArguments)
+        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.plmOriginalTypeName) !methodName !mArguments)
       #--- Code generation
 #        baseGuardInstructionGenerationList += !@staticRoutineCallIR.new {
 #          !mIdentifier
@@ -511,7 +511,7 @@ method @guardMapIR-element llvmCodeGeneration
   let receiverTypeName = if mReceiverType.kind == .void then
     ""
   else
-    llvmTypeStringFromPLMname (!mReceiverType.plmUserTypeName)
+    llvmTypeStringFromPLMname (!mReceiverType.plmOriginalTypeName)
   end
   var first = true
   if receiverTypeName != "" then

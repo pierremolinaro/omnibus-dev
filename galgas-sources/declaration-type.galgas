@@ -85,7 +85,7 @@ override method @newTypeDeclaration enterInContext
 #---------- Enter in type map
   [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type ?1*]
 #---------- Set new type name
-  type.plmUserTypeName = mNewTypeName.string
+  type.plmOriginalTypeName = mNewTypeName.string
 #---------- Transform property map
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mOriginalTypeName ?let originalTypeProxy]
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mNewTypeName ?let newTypeProxy]
@@ -507,13 +507,13 @@ class @newTypeIR : @abstractGenerationIR {
 override method @newTypeIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
   for (descriptor formalArgumentListAST) in mNewTypeDecoratedMethodList do
     let oldRoutineMangledName = routineMangledNameFromAST (
-      !llvmTypeStringFromPLMname (![mOldTypeProxy type].plmUserTypeName)
+      !llvmTypeStringFromPLMname (![mOldTypeProxy type].plmOriginalTypeName)
       ![descriptor.name nowhere]
       !formalArgumentListAST
     )
     let oldRoutineLLVMName = llvmNameForFunction (!oldRoutineMangledName.string)
     let newRoutineMangledName = routineMangledNameFromAST (
-      !llvmTypeStringFromPLMname (![mNewTypeProxy type].plmUserTypeName)
+      !llvmTypeStringFromPLMname (![mNewTypeProxy type].plmOriginalTypeName)
       ![descriptor.name nowhere]
       !formalArgumentListAST
     )

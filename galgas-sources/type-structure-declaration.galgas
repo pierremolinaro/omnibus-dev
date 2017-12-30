@@ -387,9 +387,9 @@ override method @structureDeclarationAST enterInContext
     !constructorMap:constructorMap
     !guardMap:guardMap
     !typeAttributes:attributes
-    !plmUserTypeName:mStructureName
+    !plmOriginalTypeName:mStructureName
     !kind:.structure {!propertyList:propertyList}
-    !plmImplementationTypeName:mStructureName
+    !plmAliasedTypeName:mStructureName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
@@ -451,7 +451,7 @@ method @structurePropertyListAST-element enterInContext
       actualPropertyType = [expressionIR type]
     end
     if not [actualPropertyType instanciable] then
-      error mPropertyName : "$" + actualPropertyType.plmUserTypeName + " type is not instanciable"
+      error mPropertyName : "$" + actualPropertyType.plmOriginalTypeName + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then
       canBeCopied = false
@@ -474,7 +474,7 @@ method @structurePropertyListAST-element enterInContext
     end
   case noExpression :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : "$" + optionalPropertyType.plmUserTypeName + " type is not instanciable"
+      error mPropertyName : "$" + optionalPropertyType.plmOriginalTypeName + " type is not instanciable"
     end
     let propertyIndex = [propertyList length]
     propertyList += !mPropertyName.string !optionalPropertyType
@@ -605,7 +605,7 @@ class @structureIR : @abstractGenerationIR {
 
 override method @structureIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
   let llvmTypeName = [mStructureType llvmTypeName]
-  let deinitName = "@deinit." + [[mStructureType plmImplementationTypeName] assemblerRepresentation]
+  let deinitName = "@deinit." + [[mStructureType plmOriginalTypeName] assemblerRepresentation]
   ioLLVMcode += llvmTitleComment (!deinitName)
   ioLLVMcode += "define internal void " + deinitName + " (i" + mPointerSize + " %inPointer) nounwind {\n"
   let arg = "ptr"

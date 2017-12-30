@@ -16,9 +16,9 @@ struct @PLMType {
   @constructorMap constructorMap %selector # $type (!... !...)
   @guardMapForContext guardMap %selector
   @PLMTypeAttributes typeAttributes %selector # as instanciable, copyable, ...
-  @string plmUserTypeName %selector # Without le leading '$'; empty string for void type kind, used for type display
+  @string plmOriginalTypeName %selector # Without le leading '$'; empty string for void type kind, used for type display
   @typeKind kind %selector
-  @string plmImplementationTypeName %selector # Without le leading '$'; empty string for void type kind, used for type implementation
+  @string plmAliasedTypeName %selector # Without le leading '$'; empty string for void type kind, used for type implementation
 }
 
 #·······················································································································
@@ -48,9 +48,9 @@ func booleanType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmUserTypeName:boolTypeName ()
+    !plmOriginalTypeName:boolTypeName ()
     !kind:.boolean
-    !plmImplementationTypeName:boolTypeName ()
+    !plmAliasedTypeName:boolTypeName ()
   }
 }
 
@@ -63,9 +63,9 @@ func staticIntegerType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.equatable | .copyable
-    !plmUserTypeName:staticIntegerTypeName ()
+    !plmOriginalTypeName:staticIntegerTypeName ()
     !kind:.staticInteger
-    !plmImplementationTypeName:staticIntegerTypeName ()
+    !plmAliasedTypeName:staticIntegerTypeName ()
   }
 }
 
@@ -78,9 +78,9 @@ func literalStringType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmUserTypeName:staticStringTypeName () 
+    !plmOriginalTypeName:staticStringTypeName () 
     !kind:.literalString
-    !plmImplementationTypeName:staticStringTypeName ()
+    !plmAliasedTypeName:staticStringTypeName ()
   }
 }
 
@@ -93,9 +93,9 @@ func voidType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.none
-    !plmUserTypeName:""
+    !plmOriginalTypeName:""
     !kind:.void
-    !plmImplementationTypeName:""
+    !plmAliasedTypeName:""
   }
 }
 
@@ -108,9 +108,9 @@ func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.none
-    !plmUserTypeName:""
+    !plmOriginalTypeName:""
     !kind:.function {!descriptor:inDescriptor}
-    !plmImplementationTypeName:""
+    !plmAliasedTypeName:""
   }
 }
 
@@ -270,9 +270,9 @@ getter @PLMType llvmTypeName -> @string {
   case enumeration (@uint bitCount) :
     result = "i" + bitCount
   case structure (*) :
-    result = "%" + [llvmTypeNameFromPLMname (![plmUserTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![plmOriginalTypeName nowhere]) assemblerRepresentation]
   case syncTool (*) :
-    result = "%" + [llvmTypeNameFromPLMname (![plmUserTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![plmOriginalTypeName nowhere]) assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case staticInteger :
@@ -280,7 +280,7 @@ getter @PLMType llvmTypeName -> @string {
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case arrayType (* *) :
-    result = "%" + [llvmTypeNameFromPLMname (![plmUserTypeName nowhere]) assemblerRepresentation]
+    result = "%" + [llvmTypeNameFromPLMname (![plmOriginalTypeName nowhere]) assemblerRepresentation]
   case dynamicArrayType (* ptrSize) :
     result = "i" + ptrSize
   case function (@routineDescriptor descriptor) :

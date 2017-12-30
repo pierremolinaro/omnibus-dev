@@ -81,7 +81,7 @@ for () in CONTROL_REGISTER_GROUP_MAP : group_ do
     if mArraySize == 0 then
       %<tr class="result_line"><td>%
       %<a name="%!group_lkey.string + "." + lkey%">%!group_lkey.string + "." + lkey%</a>%
-      %</td><td class="address">$%!mType.plmUserTypeName%</td><td class="address">%
+      %</td><td class="address">$%!mType.plmOriginalTypeName%</td><td class="address">%
       ![mAddress hexString]
       %</td><td>%
       if [mControlRegisterFieldList length] > 0 then
@@ -99,7 +99,7 @@ for () in CONTROL_REGISTER_GROUP_MAP : group_ do
       for () in arrayIndexListFor (!size:mArraySize) do
         %<tr class="result_line"><td>%
         %<a name="%!group_lkey.string + "." + lkey% [%![mValue string]%]">%!group_lkey.string + "." + lkey% [%![mValue string]%]</a><br/>%
-        %</td><td class="address">$%!mType.plmUserTypeName%</td><td class="address">%
+        %</td><td class="address">$%!mType.plmOriginalTypeName%</td><td class="address">%
         ![mAddress + mValue * mElementArraySize hexString] + "<br/>"
         %</td><td>%
         if [mControlRegisterFieldList length] > 0 then

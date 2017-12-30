@@ -158,9 +158,9 @@ override method @enumerationDeclarationAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmUserTypeName:mEnumerationName
+    !plmOriginalTypeName:mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
-    !plmImplementationTypeName:mEnumerationName
+    !plmAliasedTypeName:mEnumerationName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName

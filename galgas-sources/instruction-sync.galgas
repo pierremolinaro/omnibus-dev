@@ -181,7 +181,7 @@ override method @syncInstructionAST analyze
         !?instructionListIR:guardInstructionGenerationList
         ?result:let @objectIR sourceOperand
       ]
-      if [sourceOperand plmUserTypeName] != boolTypeName () then
+      if [sourceOperand plmOriginalTypeName] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
       elsif [sourceOperand isStatic] then
         warning endOfExpression : "guarded expression is static"
@@ -213,7 +213,7 @@ override method @syncInstructionAST analyze
         !?instructionListIR:boolExpInstructionGenerationList
         ?result:let @objectIR boolExpressionResult
       ]
-      if [boolExpressionResult plmUserTypeName] != boolTypeName () then
+      if [boolExpressionResult plmOriginalTypeName] != boolTypeName () then
         error endOfExp : "guarded expression should be boolean"
       elsif warnsOnStaticExpression && [boolExpressionResult isStatic] then
         warning endOfExp : "guarded expression is static"
@@ -388,7 +388,7 @@ proc analyzeGuardCall
     error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
   else  
     outGuardMangledName = routineMangledNameFromCall (
-      !llvmTypeStringFromPLMname (![inReceiver type].plmUserTypeName)
+      !llvmTypeStringFromPLMname (![inReceiver type].plmOriginalTypeName)
       !inGuardName
       !inEffectiveParameterList
     )
