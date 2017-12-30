@@ -131,7 +131,6 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
   {"system", plm_lexique_1_system},
   {"target", plm_lexique_1_target},
   {"convert", plm_lexique_1_convert},
-  {"newtype", plm_lexique_1_newtype},
   {"section", plm_lexique_1_section},
   {"service", plm_lexique_1_service},
   {"priority", plm_lexique_1_priority},
@@ -142,6 +141,7 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
   {"primitive", plm_lexique_1_primitive},
   {"registers", plm_lexique_1_registers},
   {"stackSize", plm_lexique_1_stackSize},
+  {"typealias", plm_lexique_1_typealias},
   {"staticArray", plm_lexique_1_staticArray}
 } ;
 
@@ -569,7 +569,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_isr */,
     1 /* plm_lexique_1_let */,
     1 /* plm_lexique_1_loop */,
-    1 /* plm_lexique_1_newtype */,
     1 /* plm_lexique_1_no */,
     1 /* plm_lexique_1_nop */,
     1 /* plm_lexique_1_not */,
@@ -596,6 +595,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_target */,
     1 /* plm_lexique_1_task */,
     1 /* plm_lexique_1_truncate */,
+    1 /* plm_lexique_1_typealias */,
     1 /* plm_lexique_1_var */,
     1 /* plm_lexique_1_user */,
     1 /* plm_lexique_1_when */,
@@ -701,7 +701,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_isr */,
     YES /* plm_lexique_1_let */,
     YES /* plm_lexique_1_loop */,
-    YES /* plm_lexique_1_newtype */,
     YES /* plm_lexique_1_no */,
     YES /* plm_lexique_1_nop */,
     YES /* plm_lexique_1_not */,
@@ -728,6 +727,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_target */,
     YES /* plm_lexique_1_task */,
     YES /* plm_lexique_1_truncate */,
+    YES /* plm_lexique_1_typealias */,
     YES /* plm_lexique_1_var */,
     YES /* plm_lexique_1_user */,
     YES /* plm_lexique_1_when */,

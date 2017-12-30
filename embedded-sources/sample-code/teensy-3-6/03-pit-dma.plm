@@ -69,7 +69,7 @@ extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
 
 let PATTERN_LENGTH = kPATTERN.count
 
-newtype $patternArray : $uint32 [PATTERN_LENGTH]
+typealias $patternArray : $uint32 [PATTERN_LENGTH]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
