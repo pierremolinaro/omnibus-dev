@@ -24,9 +24,9 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
 {
   let llvmType = [mTargetVarType llvmTypeName]
   switch mSourceValue
-  case null :
-    ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode NULL >>\n"
-  case nullValue (*) :
+  case void :
+    ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode void >>\n"
+  case null (*) :
     ioLLVMcode += "  store " +  llvmType + " null, " + llvmType + "* " + mLLVMTargetVarName + "\n"
   case reference (* *) :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode reference >>\n"

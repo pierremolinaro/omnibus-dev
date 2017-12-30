@@ -4922,7 +4922,7 @@ static void extensionMethod_standAloneProcedureCallInstructionAST_analyze (const
   {
   routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_routineDescriptor_6606.getter_signature (HERE), object->mProperty_mArguments, object->mProperty_mSandAloneRoutineName.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_7260, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 178)) ;
   }
-  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_standaloneRoutineCallIR::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_objectIR::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 198)), var_routineMangledName_6712, var_LLVMInvocationRoutineName_6560, var_routineKindIR_6973, var_effectiveParameterListIR_7260  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 196))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 196)) ;
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_standaloneRoutineCallIR::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_objectIR::constructor_void (SOURCE_FILE ("instruction-procedure-call.galgas", 198)), var_routineMangledName_6712, var_LLVMInvocationRoutineName_6560, var_routineKindIR_6973, var_effectiveParameterListIR_7260  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 196))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 196)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5180,7 +5180,7 @@ static void extensionMethod_procedureCallInstructionAST_analyze (const cPtr_inst
             routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_formalSignature_13157, object->mProperty_mArguments, extractedValue_methodName.getter_location (HERE), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_12861, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 342)) ;
             }
             GALGAS_lstring var_routineMangledName_14795 = function_routineMangledNameFromCall (function_llvmTypeStringFromPLMname (var_currentType_8940.getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 359)), extractedValue_methodName, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 359)) ;
-            ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_standaloneRoutineCallIR::constructor_new (object->mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 362)), GALGAS_objectIR::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 363)), var_routineMangledName_14795, var_routineMangledName_14795, var_calleeKind_13859, var_effectiveParameterListIR_12861  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 361))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 361)) ;
+            ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_standaloneRoutineCallIR::constructor_new (object->mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 362)), GALGAS_objectIR::constructor_void (SOURCE_FILE ("instruction-procedure-call.galgas", 363)), var_routineMangledName_14795, var_routineMangledName_14795, var_calleeKind_13859, var_effectiveParameterListIR_12861  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 361))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 361)) ;
             {
             ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineMangledName_14795 COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 370)) ;
             }
@@ -5215,7 +5215,7 @@ static void extensionMethod_procedureCallInstructionAST_analyze (const cPtr_inst
               {
               extensionSetter_appendGetUniversalPropertyReference (ioArgument_ioInstructionGenerationList, var_currentType_8940, var_currentLLVMAddressVar_8972, var_property_5F_llvmName_16968, extractedValue_propertyIndex, extractedValue_methodName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 413)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 408)) ;
               }
-              ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_indirectRoutineCallIR::constructor_new (GALGAS_objectIR::constructor_reference (extractedValue_propertyType, var_property_5F_llvmName_16968  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 417)), extractedValue_propertyType, GALGAS_objectIR::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 419)), var_effectiveParameterListIR_16190  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 416))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 416)) ;
+              ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_indirectRoutineCallIR::constructor_new (GALGAS_objectIR::constructor_reference (extractedValue_propertyType, var_property_5F_llvmName_16968  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 417)), extractedValue_propertyType, GALGAS_objectIR::constructor_void (SOURCE_FILE ("instruction-procedure-call.galgas", 419)), var_effectiveParameterListIR_16190  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 416))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 416)) ;
             }
           }
         }
@@ -7134,7 +7134,7 @@ void routine_getNewTempValue (const GALGAS_PLMType constinArgument_inType,
   outArgument_outTempVariable.drop () ; // Release 'out' argument
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inType.getter_kind (HERE).objectCompare (GALGAS_typeKind::constructor_void (SOURCE_FILE ("semantic-analysis.galgas", 72)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    outArgument_outTempVariable = GALGAS_objectIR::constructor_null (SOURCE_FILE ("semantic-analysis.galgas", 73)) ;
+    outArgument_outTempVariable = GALGAS_objectIR::constructor_void (SOURCE_FILE ("semantic-analysis.galgas", 73)) ;
   }else if (kBoolFalse == test_0) {
     GALGAS_string var_llvmName_3403 ;
     {
@@ -7159,7 +7159,7 @@ void routine_getNewTempReference (const GALGAS_PLMType constinArgument_inType,
   outArgument_outTempVariable.drop () ; // Release 'out' argument
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inType.getter_kind (HERE).objectCompare (GALGAS_typeKind::constructor_void (SOURCE_FILE ("semantic-analysis.galgas", 87)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    outArgument_outTempVariable = GALGAS_objectIR::constructor_null (SOURCE_FILE ("semantic-analysis.galgas", 88)) ;
+    outArgument_outTempVariable = GALGAS_objectIR::constructor_void (SOURCE_FILE ("semantic-analysis.galgas", 88)) ;
   }else if (kBoolFalse == test_0) {
     GALGAS_string var_llvmName_3843 ;
     {

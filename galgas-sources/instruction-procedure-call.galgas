@@ -195,7 +195,7 @@ override method @standAloneProcedureCallInstructionAST analyze
 #--- Code generation
   ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
     !""
-    !.null
+    !.void
     !routineMangledName
     !LLVMInvocationRoutineName
     !routineKindIR
@@ -360,7 +360,7 @@ override method @procedureCallInstructionAST analyze
       #--- Code generation
         ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
           !mIdentifier
-          !.null # No result
+          !.void # No result
           !routineMangledName
           !routineMangledName # LLVMInvocationRoutineName
           !calleeKind
@@ -416,7 +416,7 @@ override method @procedureCallInstructionAST analyze
           ioInstructionGenerationList += !@indirectRoutineCallIR.new {
             !.reference {!type:propertyType !llvmName:property_llvmName}
             !propertyType
-            !.null # Function does not return any value
+            !.void # Function does not return any value
             !effectiveParameterListIR
           }
         end

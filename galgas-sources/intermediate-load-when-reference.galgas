@@ -6,15 +6,15 @@ setter @instructionListIR appendLoadWhenReference
   !@objectIR outResultingValue
 {
   switch inSource
-  case null :
-    error .nowhere : "<<@instructionListIR appendLoadWhenReference null>>" : outResultingValue
+  case void :
+    error .nowhere : "<<@instructionListIR appendLoadWhenReference void>>" : outResultingValue
   case reference (@PLMType type llvmName) :
     getNewTempValue (!type !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromReference !outResultingValue !llvmName]
 #--- Values
   case literalInteger (**) :
     outResultingValue = inSource
-  case nullValue (*) :
+  case null (*) :
     outResultingValue = inSource
   case llvmValue (**) :
     outResultingValue = inSource

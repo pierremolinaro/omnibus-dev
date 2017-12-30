@@ -22,7 +22,7 @@ override method @indirectRoutineCallIR llvmInstructionCode
              + [mFunctionPointer llvmName] + "\n"
 #--- Call function
   ioLLVMcode += "  "
-  if mResult == .null then
+  if mResult == .void then
     ioLLVMcode += "call void"
   else
     ioLLVMcode += [mResult llvmName] + " = call " + [mResult llvmTypeName]
