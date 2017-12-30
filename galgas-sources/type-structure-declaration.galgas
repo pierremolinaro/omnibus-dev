@@ -177,13 +177,13 @@ override method @structureDeclarationAST addExtension
   for (typeName functions properties svcs guards) in currentExtensionDeclarationListAST do
     if mStructureName.string == typeName.string then
       newDeclaration = .new {
-        ![newDeclaration mStructureName]
-        ![newDeclaration mAttributeListAST]
-        ![newDeclaration mGenerateAssignmentRoutine]
-        ![newDeclaration mStructurePropertyListAST] + properties
-        ![newDeclaration mFunctionDeclarationListAST] + functions
-        ![newDeclaration mSystemRoutineListAST] + svcs
-        ![newDeclaration mGuardListAST] + guards
+        !newDeclaration.mStructureName
+        !newDeclaration.mAttributeListAST
+        !newDeclaration.mGenerateAssignmentRoutine
+        !newDeclaration.mStructurePropertyListAST + properties
+        !newDeclaration.mFunctionDeclarationListAST + functions
+        !newDeclaration.mSystemRoutineListAST + svcs
+        !newDeclaration.mGuardListAST + guards
         !newDeclaration.mMayImplementDeinit   
       }
     else
@@ -298,19 +298,20 @@ override method @structureDeclarationAST enterInContext
     !constructorSignature
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
-#---------------------------------------- Attribute "copyable"
-  var attributes = @PLMTypeAttributes.instanciable
+#---------------------------------------- Attribute "generateAssignmentRoutine"
+  var typeAttributes = @PLMTypeAttributes.instanciable
   if mGenerateAssignmentRoutine then
-    attributes = attributes | .generateAssignmentRoutine
+    typeAttributes = typeAttributes | .generateAssignmentRoutine
   end
+#---------------------------------------- Attribute "copyable"
   for (s) in mAttributeListAST do
     if s.string == copyableAttribute () then
-      if [attributes copyable] then
+      if [typeAttributes copyable] then
         error s : "duplicated attribute"
       elsif not canBeCopied then
         error mStructureName : "this structure cannot be copied, one field is not copyable"
       else
-        attributes = attributes | .copyable
+        typeAttributes = typeAttributes | .copyable
       end
     else
       error s : "only @copyable attribute is allowed here"
@@ -386,7 +387,7 @@ override method @structureDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:constructorMap
     !guardMap:guardMap
-    !attributes:attributes
+    !attributes:typeAttributes
     !plmOriginalTypeName:mStructureName
     !kind:.structure {!propertyList:propertyList}
     !plmAliasedTypeName:mStructureName

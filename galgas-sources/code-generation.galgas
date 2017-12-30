@@ -170,14 +170,13 @@ private proc generateCodeFiles
   let sourceDirectory = inProductDirectory + "/sources"
 #----------------------------------------- Add dynamic array extern routines
   if inTargetParameters.mHandleDynamicArray then
-    let pointer = "i" + inTargetParameters.mPointerSize
-    generationAdds.mExternFunctionDeclarationSet += !"void @arc.retain (" + pointer + " %inPtr)"
-    generationAdds.mExternFunctionDeclarationSet += !"void @arc.release (" + pointer + " %inPtr)"
-    generationAdds.mExternFunctionDeclarationSet += !pointer + " @arc.insulate (" + pointer + " %inPtr)"
-    let insertFunction = pointer + " @arc.insert.at.index "
-                       + "(" + pointer + " %inPointer, i32 %inIndex, i32 %inElementSize, " + pointer + "* %outElementPtr)"
+    generationAdds.mExternFunctionDeclarationSet += !"void @arc.retain (%ptrtype %inPtr)"
+    generationAdds.mExternFunctionDeclarationSet += !"void @arc.release (%ptrtype %inPtr)"
+    generationAdds.mExternFunctionDeclarationSet += !"%ptrtype @arc.insulate (%ptrtype* %inPtr)"
+    let insertFunction = "%ptrtype @arc.insert.at.index "
+                       + "(%ptrtype %inPointer, i32 %inIndex, i32 %inElementSize, %ptrtype* %outElementPtr)"
     generationAdds.mExternFunctionDeclarationSet += !insertFunction
-    generationAdds.mExternFunctionDeclarationSet += !"i32 @arc.length (i32 %inPointer)"
+    generationAdds.mExternFunctionDeclarationSet += !"i32 @arc.length (%ptrtype %inPointer)"
   end
 #----------------------------------------- Include assembler specific file
   var asCode = asTitleComment (!"Target specific code")
@@ -471,6 +470,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   end
 #--- Generate LLVM type declarations (using forward type is allowed for pointers)
   ioLLVMcode += llvmTitleComment (!"User Defined Types")
+  ioLLVMcode += "%ptrtype = type i8* ; Generic pointer type for dynamic objects\n"
   for (type *) in orderedTypeList do
     if type.plmOriginalTypeName == type.plmAliasedTypeName then
       switch type.kind

@@ -281,8 +281,8 @@ getter @PLMType llvmTypeName -> @string {
     result = "i" + bitCount
   case arrayType (* *) :
     result = "%" + [llvmTypeNameFromPLMname (![plmOriginalTypeName nowhere]) assemblerRepresentation]
-  case dynamicArrayType (* ptrSize) :
-    result = "i" + ptrSize
+  case dynamicArrayType (* *) :
+    result = "%ptrtype" # "i" + ptrSize
   case function (@routineDescriptor descriptor) :
     if descriptor.returnTypeProxy == .null then
       result = "void"
