@@ -1,5 +1,5 @@
 
-check target "teensy-3-1/unprivileged", "teensy-3-1/privileged"
+check target "teensy-3-1/unprivileged"
 
 //——————————————————————————————————————————————————————————————————————————————
 driver root {

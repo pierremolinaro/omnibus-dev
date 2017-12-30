@@ -410,51 +410,21 @@ class GALGAS_string function_configurationNodeNameForPrecedenceGraph (class C_Co
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'staticIntegerTypeName'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Routine 'enterNewTypeInfixOperator'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterNewTypeInfixOperator (class GALGAS_infixOperatorMap & ioArgument0,
-                                        const class GALGAS_lstring constinArgument1,
-                                        const class GALGAS_lstring constinArgument2,
-                                        const class GALGAS_lstring constinArgument3,
-                                        const class GALGAS_lstring constinArgument4,
-                                        const class GALGAS_lstring constinArgument5,
-                                        const class GALGAS_lstring constinArgument6,
-                                        const class GALGAS_PLMType constinArgument7,
-                                        const class GALGAS_PLMType constinArgument8,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Routine 'enterNewTypePrefixOperator'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterNewTypePrefixOperator (class GALGAS_prefixOperatorMap & ioArgument0,
-                                         const class GALGAS_lstring constinArgument1,
-                                         const class GALGAS_lstring constinArgument2,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                            Function 'staticIntegerType'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_PLMType function_staticIntegerType (class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'staticIntegerTypeName'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -608,4 +578,19 @@ void routine_enter_5F_literal_5F_integer_5F_operators (const class GALGAS_lstrin
                                                        class GALGAS_semanticContext & ioArgument2,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Routine 'generateIntegerIntrinsicFunction'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_generateIntegerIntrinsicFunction (const class GALGAS_string constinArgument0,
+                                               class GALGAS_string & ioArgument1,
+                                               const class GALGAS_string constinArgument2,
+                                               const class GALGAS_string constinArgument3,
+                                               class GALGAS_generationAdds & ioArgument4,
+                                               const class GALGAS_string constinArgument5,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 

@@ -5211,7 +5211,7 @@ class GALGAS_newTypeDeclaration : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNewTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mAliasTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOriginalTypeName (LOCATION_ARGS) const ;
 
@@ -5234,11 +5234,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_newTypeDeclaration 
 
 class cPtr_newTypeDeclaration : public cPtr_abstractDeclarationAST {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mNewTypeName ;
+  public : GALGAS_lstring mProperty_mAliasTypeName ;
   public : GALGAS_lstring mProperty_mOriginalTypeName ;
 
 //--- Constructor
-  public : cPtr_newTypeDeclaration (const GALGAS_lstring & in_mNewTypeName,
+  public : cPtr_newTypeDeclaration (const GALGAS_lstring & in_mAliasTypeName,
                                     const GALGAS_lstring & in_mOriginalTypeName
                                     COMMA_LOCATION_ARGS) ;
 
@@ -5246,7 +5246,7 @@ class cPtr_newTypeDeclaration : public cPtr_abstractDeclarationAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mNewTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mAliasTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOriginalTypeName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

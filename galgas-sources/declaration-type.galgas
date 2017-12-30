@@ -3,14 +3,14 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @newTypeDeclaration : @abstractDeclarationAST {
-  @lstring mNewTypeName
+  @lstring mAliasTypeName
   @lstring mOriginalTypeName
 }
 
 #·······················································································································
 
 override getter @newTypeDeclaration location -> @location outLocation {
-  outLocation = mNewTypeName.location
+  outLocation = mAliasTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -58,7 +58,7 @@ override method @newTypeDeclaration addExtension
 override method @newTypeDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let newTypeName = llvmTypeNameFromPLMname (!mNewTypeName)
+  let newTypeName = llvmTypeNameFromPLMname (!mAliasTypeName)
   let originalTypeName = llvmTypeNameFromPLMname (!mOriginalTypeName)
   [!?ioGraph addNode !newTypeName !self]
   [!?ioGraph addEdge !newTypeName !originalTypeName]
@@ -67,7 +67,7 @@ override method @newTypeDeclaration enterInPrecedenceGraph
 #·······················································································································
 
 override getter @newTypeDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "newtype $" + mNewTypeName 
+  outRepresentation = "typealias $" + mAliasTypeName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -84,342 +84,342 @@ override method @newTypeDeclaration enterInContext
 {
 #---------- Enter in type map
   [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type ?1*]
-#---------- Set new type name
-  type.plmAliasedTypeName = mNewTypeName.string
+#---------- Set alias type name
+  type.plmAliasedTypeName = mAliasTypeName.string
   type.attributes = type.attributes - .generateAssignmentRoutine
 #---------- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:type !index:[ioContext.mTypeMap count]]
+  [!?ioContext.mTypeMap insertType !lkey:mAliasTypeName !type:type !index:[ioContext.mTypeMap count]]
 #---------- Enter infix operators
-  let newNewInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !mNewTypeName.string)
-  let aliasAliasInfixKey = combineTypeNamesForInfixOperator (!mOriginalTypeName.string !mOriginalTypeName.string)
-  let newLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !staticIntegerTypeName ())
-  let aliasLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mOriginalTypeName.string !staticIntegerTypeName ())
-  let literalIntegerNewInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mNewTypeName.string)
-  let literalIntegerAliasInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mOriginalTypeName.string)
-  let newType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mNewTypeName} type]
-  let oldType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mOriginalTypeName} type]
-  enterNewTypeInfixOperator (
-    !?ioContext.mEqualOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mNonEqualOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mStrictInfOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mInfEqualOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mStrictSupOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mSupEqualOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mAndOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mOrOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mXorOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mBooleanXorOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mAddOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mAddNoOvfOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mSubOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-     !newType
-    !oldType
- )
-  enterNewTypeInfixOperator (
-    !?ioContext.mSubNoOvfOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mMulOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mMulNoOvfOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mDivOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mDivNoOvfOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mModOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mModNoOvfOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mLeftShiftOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypeInfixOperator (
-    !?ioContext.mRightShiftOperatorMap
-    !newNewInfixKey
-    !aliasAliasInfixKey
-    !newLiteralIntegerInfixKey
-    !aliasLiteralIntegerInfixKey
-    !literalIntegerNewInfixKey
-    !literalIntegerAliasInfixKey
-    !newType
-    !oldType
-  )
-  enterNewTypePrefixOperator (!?ioContext.mUnaryMinusOperatorMap !mNewTypeName !mOriginalTypeName)
-  enterNewTypePrefixOperator (!?ioContext.mNotOperatorMap !mNewTypeName !mOriginalTypeName)
-  enterNewTypePrefixOperator (!?ioContext.mUnsignedComplementOperatorMap !mNewTypeName !mOriginalTypeName)
+#  let newNewInfixKey = combineTypeNamesForInfixOperator (!mAliasTypeName.string !mAliasTypeName.string)
+#  let aliasAliasInfixKey = combineTypeNamesForInfixOperator (!mOriginalTypeName.string !mOriginalTypeName.string)
+#  let newLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mAliasTypeName.string !staticIntegerTypeName ())
+#  let aliasLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mOriginalTypeName.string !staticIntegerTypeName ())
+#  let literalIntegerNewInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mAliasTypeName.string)
+#  let literalIntegerAliasInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mOriginalTypeName.string)
+#  let newType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mAliasTypeName} type]
+#  let oldType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mOriginalTypeName} type]
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mEqualOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mNonEqualOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mStrictInfOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mInfEqualOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mStrictSupOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mSupEqualOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mAndOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mOrOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mXorOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mBooleanXorOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mAddOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mAddNoOvfOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mSubOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#     !newType
+#    !oldType
+# )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mSubNoOvfOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mMulOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mMulNoOvfOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mDivOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mDivNoOvfOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mModOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mModNoOvfOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mLeftShiftOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypeInfixOperator (
+#    !?ioContext.mRightShiftOperatorMap
+#    !newNewInfixKey
+#    !aliasAliasInfixKey
+#    !newLiteralIntegerInfixKey
+#    !aliasLiteralIntegerInfixKey
+#    !literalIntegerNewInfixKey
+#    !literalIntegerAliasInfixKey
+#    !newType
+#    !oldType
+#  )
+#  enterNewTypePrefixOperator (!?ioContext.mUnaryMinusOperatorMap !mAliasTypeName !mOriginalTypeName)
+#  enterNewTypePrefixOperator (!?ioContext.mNotOperatorMap !mAliasTypeName !mOriginalTypeName)
+#  enterNewTypePrefixOperator (!?ioContext.mUnsignedComplementOperatorMap !mAliasTypeName !mOriginalTypeName)
 }
 
 #·······················································································································
 
-private proc enterNewTypePrefixOperator
-  ?!@prefixOperatorMap ioInfixOperatorMap
-  ?let @lstring inNewTypeName
-  ?let @lstring inAliasedTypeName
-{
-  if [ioInfixOperatorMap hasKey !inAliasedTypeName.string] then
-    [ioInfixOperatorMap searchKey
-      !inAliasedTypeName
-    ]
-    [!?ioInfixOperatorMap insertKey
-      !inNewTypeName
-    ]
-  end
-}
+#private proc enterNewTypePrefixOperator
+#  ?!@prefixOperatorMap ioInfixOperatorMap
+#  ?let @lstring inNewTypeName
+#  ?let @lstring inAliasedTypeName
+#{
+#  if [ioInfixOperatorMap hasKey !inAliasedTypeName.string] then
+#    [ioInfixOperatorMap searchKey
+#      !inAliasedTypeName
+#    ]
+#    [!?ioInfixOperatorMap insertKey
+#      !inNewTypeName
+#    ]
+#  end
+#}
 
 #·······················································································································
 
-private proc enterNewTypeInfixOperator
-  ?!@infixOperatorMap ioInfixOperatorMap
-  ?let @lstring inNewNewInfixKey
-  ?let @lstring inAliasedAliasedInfixKey
-  ?let @lstring inNewLiteralIntegerInfixKey
-  ?let @lstring inAliasedLiteralIntegerInfixKey
-  ?let @lstring inLiteralIntegerNewInfixKey
-  ?let @lstring inLiteralIntegerAliasInfixKey
-  ?let @PLMType inNewType
-  ?let @PLMType inOldType
-{
-  if [ioInfixOperatorMap hasKey !inAliasedAliasedInfixKey.string] then
-    [ioInfixOperatorMap searchKey
-      !inAliasedAliasedInfixKey
-      ?@PLMType resultType
-      ?let @infixOperatorDescription operation
-    ]
-    if resultType == inOldType then
-      resultType = inNewType
-    end
-    [!?ioInfixOperatorMap insertKey
-      !inNewNewInfixKey
-      !resultType
-      !operation
-    ]
-  end
-  if [ioInfixOperatorMap hasKey !inAliasedLiteralIntegerInfixKey.string] then
-    [ioInfixOperatorMap searchKey
-      !inAliasedLiteralIntegerInfixKey
-      ?@PLMType resultType
-      ?let @infixOperatorDescription operation
-    ]
-    if resultType == inOldType then
-      resultType = inNewType
-    end
-    [!?ioInfixOperatorMap insertKey
-      !inNewLiteralIntegerInfixKey
-      !resultType
-      !operation
-    ]
-  end
-  if [ioInfixOperatorMap hasKey !inLiteralIntegerAliasInfixKey.string] then
-    [ioInfixOperatorMap searchKey
-      !inLiteralIntegerAliasInfixKey
-      ?@PLMType resultType
-      ?let @infixOperatorDescription operation
-    ]
-    if resultType == inOldType then
-      resultType = inNewType
-    end
-    [!?ioInfixOperatorMap insertKey
-      !inLiteralIntegerNewInfixKey
-      !resultType
-      !operation
-    ]
-  end
-}
+#private proc enterNewTypeInfixOperator
+#  ?!@infixOperatorMap ioInfixOperatorMap
+#  ?let @lstring inNewNewInfixKey
+#  ?let @lstring inAliasedAliasedInfixKey
+#  ?let @lstring inNewLiteralIntegerInfixKey
+#  ?let @lstring inAliasedLiteralIntegerInfixKey
+#  ?let @lstring inLiteralIntegerNewInfixKey
+#  ?let @lstring inLiteralIntegerAliasInfixKey
+#  ?let @PLMType inNewType
+#  ?let @PLMType inOldType
+#{
+#  if [ioInfixOperatorMap hasKey !inAliasedAliasedInfixKey.string] then
+#    [ioInfixOperatorMap searchKey
+#      !inAliasedAliasedInfixKey
+#      ?@PLMType resultType
+#      ?let @infixOperatorDescription operation
+#    ]
+#    if resultType == inOldType then
+#      resultType = inNewType
+#    end
+#    [!?ioInfixOperatorMap insertKey
+#      !inNewNewInfixKey
+#      !resultType
+#      !operation
+#    ]
+#  end
+#  if [ioInfixOperatorMap hasKey !inAliasedLiteralIntegerInfixKey.string] then
+#    [ioInfixOperatorMap searchKey
+#      !inAliasedLiteralIntegerInfixKey
+#      ?@PLMType resultType
+#      ?let @infixOperatorDescription operation
+#    ]
+#    if resultType == inOldType then
+#      resultType = inNewType
+#    end
+#    [!?ioInfixOperatorMap insertKey
+#      !inNewLiteralIntegerInfixKey
+#      !resultType
+#      !operation
+#    ]
+#  end
+#  if [ioInfixOperatorMap hasKey !inLiteralIntegerAliasInfixKey.string] then
+#    [ioInfixOperatorMap searchKey
+#      !inLiteralIntegerAliasInfixKey
+#      ?@PLMType resultType
+#      ?let @infixOperatorDescription operation
+#    ]
+#    if resultType == inOldType then
+#      resultType = inNewType
+#    end
+#    [!?ioInfixOperatorMap insertKey
+#      !inLiteralIntegerNewInfixKey
+#      !resultType
+#      !operation
+#    ]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

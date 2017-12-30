@@ -3320,12 +3320,12 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_start_5F_symbol_i1_parse (C_Lexiq
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i2_ (GALGAS_ast & ioArgument_ioAST,
                                                                 C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typealias) COMMA_SOURCE_FILE ("declaration-type.galgas", 25)) ;
-  GALGAS_lstring var_newTypeName_1305 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_newTypeName_1309 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__24_type) COMMA_SOURCE_FILE ("declaration-type.galgas", 26)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("declaration-type.galgas", 27)) ;
-  GALGAS_lstring var_typeName_1357 ;
-  nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_1357, inCompiler) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_newTypeDeclaration::constructor_new (var_newTypeName_1305, var_typeName_1357  COMMA_SOURCE_FILE ("declaration-type.galgas", 29))  COMMA_SOURCE_FILE ("declaration-type.galgas", 29)) ;
+  GALGAS_lstring var_typeName_1361 ;
+  nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_1361, inCompiler) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_newTypeDeclaration::constructor_new (var_newTypeName_1309, var_typeName_1361  COMMA_SOURCE_FILE ("declaration-type.galgas", 29))  COMMA_SOURCE_FILE ("declaration-type.galgas", 29)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

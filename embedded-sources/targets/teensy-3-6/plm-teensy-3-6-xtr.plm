@@ -1,5 +1,5 @@
 
-check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
+check target "teensy-3-6/unprivileged"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   UTILITY ROUTINES                                                                                                   
@@ -39,11 +39,6 @@ block (?!inList:ioWaitingList $taskList) : "blockInList"
 
 extern func primitive
 block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
-
-//extern func primitive
-//block (?!inList:ioWaitingList $taskList
-//       ?onDeadline:inDeadline $uint32
-//       ?!result: ioResult $bool) : "block.in.list.and.on.deadline"
 
 //--- Make task Ready
 extern func service
