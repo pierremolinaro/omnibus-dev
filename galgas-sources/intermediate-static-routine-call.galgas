@@ -17,7 +17,7 @@ override method @standaloneRoutineCallIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "  "
-  if mResult == .null then
+  if mResult == .void then
     ioLLVMcode += "call void"
   else
     ioLLVMcode += [mResult llvmName] + " = call " + [mResult llvmTypeName]

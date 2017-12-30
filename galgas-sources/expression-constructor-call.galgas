@@ -128,7 +128,7 @@ override method @constructorCallAST analyzeExpression
       outResult = .llvmArrayValue {!type:resultType !values:operandIRList}
     end
   case null :
-    outResult = .nullValue {!type: resultType}
+    outResult = .null {!type: resultType}
   case simple (value) :
     if [mParameterList length] != 0 then
       error mErrorLocation : "$" + resultType.plmOriginalTypeName + " constructor should have no parameter" : outResult

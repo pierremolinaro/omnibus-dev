@@ -70,7 +70,7 @@ proc getNewTempValue
   !@objectIR outTempVariable
 {
   if inType.kind == .void then
-    outTempVariable = .null
+    outTempVariable = .void
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]
     outTempVariable = .llvmValue {!type: inType !llvmName:llvmName}
@@ -85,7 +85,7 @@ proc getNewTempReference
   !@objectIR outTempVariable
 {
   if inType.kind == .void then
-    outTempVariable = .null
+    outTempVariable = .void
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]
     outTempVariable = .reference {!type: inType !llvmName:llvmName}

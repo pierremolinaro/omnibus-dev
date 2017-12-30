@@ -747,16 +747,16 @@ typeComparisonResult cEnumAssociatedValues_objectIR_reference::compare (const cE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_objectIR_nullValue::cEnumAssociatedValues_objectIR_nullValue (const GALGAS_PLMType & inAssociatedValue0
-                                                                                    COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_objectIR_null::cEnumAssociatedValues_objectIR_null (const GALGAS_PLMType & inAssociatedValue0
+                                                                          COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_objectIR_nullValue::description (C_String & ioString,
-                                                            const int32_t inIndentation) const {
+void cEnumAssociatedValues_objectIR_null::description (C_String & ioString,
+                                                       const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   ioString << ")" ;
@@ -764,8 +764,8 @@ void cEnumAssociatedValues_objectIR_nullValue::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_objectIR_nullValue::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectIR_nullValue * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_nullValue *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_objectIR_null::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectIR_null * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_null *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -987,9 +987,9 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_null (UNUSED_LOCATION_ARGS) {
+GALGAS_objectIR GALGAS_objectIR::constructor_void (UNUSED_LOCATION_ARGS) {
   GALGAS_objectIR result ;
-  result.mEnum = kEnum_null ;
+  result.mEnum = kEnum_void ;
   return result ;
 }
 
@@ -1011,13 +1011,13 @@ GALGAS_objectIR GALGAS_objectIR::constructor_reference (const GALGAS_PLMType & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_nullValue (const GALGAS_PLMType & inAssociatedValue0
-                                                        COMMA_LOCATION_ARGS) {
+GALGAS_objectIR GALGAS_objectIR::constructor_null (const GALGAS_PLMType & inAssociatedValue0
+                                                   COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
   if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_nullValue ;
+    result.mEnum = kEnum_null ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_nullValue (inAssociatedValue0 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectIR_null (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -1140,16 +1140,16 @@ void GALGAS_objectIR::method_reference (GALGAS_PLMType & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_objectIR::method_nullValue (GALGAS_PLMType & outAssociatedValue0,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_nullValue) {
+void GALGAS_objectIR::method_null (GALGAS_PLMType & outAssociatedValue0,
+                                   C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_null) {
     outAssociatedValue0.drop () ;
     C_String s ;
-    s << "method @objectIR nullValue invoked with an invalid enum value" ;
+    s << "method @objectIR null invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_objectIR_nullValue * ptr = (const cEnumAssociatedValues_objectIR_nullValue *) unsafePointer () ;
+    const cEnumAssociatedValues_objectIR_null * ptr = (const cEnumAssociatedValues_objectIR_null *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
@@ -1269,9 +1269,9 @@ void GALGAS_objectIR::method_zero (GALGAS_PLMType & outAssociatedValue0,
 
 static const char * gEnumNameArrayFor_objectIR [10] = {
   "(not built)",
-  "null",
+  "void",
   "reference",
-  "nullValue",
+  "null",
   "llvmValue",
   "literalInteger",
   "llvmStructureValue",
@@ -1282,8 +1282,8 @@ static const char * gEnumNameArrayFor_objectIR [10] = {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_objectIR::getter_isNull (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_null == mEnum) ;
+GALGAS_bool GALGAS_objectIR::getter_isVoid (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_void == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1294,8 +1294,8 @@ GALGAS_bool GALGAS_objectIR::getter_isReference (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_objectIR::getter_isNullValue (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_nullValue == mEnum) ;
+GALGAS_bool GALGAS_objectIR::getter_isNull (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_null == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

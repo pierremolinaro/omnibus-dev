@@ -7991,13 +7991,13 @@ static void extensionMethod_constructorCallAST_analyzeExpression (const cPtr_exp
     break ;
   case GALGAS_constructorValue::kEnum_null:
     {
-      outArgument_outResult = GALGAS_objectIR::constructor_nullValue (var_resultType_4279  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 131)) ;
+      outArgument_outResult = GALGAS_objectIR::constructor_null (var_resultType_4279  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 131)) ;
     }
     break ;
   case GALGAS_constructorValue::kEnum_simple:
     {
-      const cEnumAssociatedValues_constructorValue_simple * extractPtr_6129 = (const cEnumAssociatedValues_constructorValue_simple *) (var_initValue_4511.unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_value = extractPtr_6129->mAssociatedValue0 ;
+      const cEnumAssociatedValues_constructorValue_simple * extractPtr_6124 = (const cEnumAssociatedValues_constructorValue_simple *) (var_initValue_4511.unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_value = extractPtr_6124->mAssociatedValue0 ;
       const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, object->mProperty_mParameterList.getter_length (SOURCE_FILE ("expression-constructor-call.galgas", 133)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
       if (kBoolTrue == test_2) {
         TC_Array <C_FixItDescription> fixItArray3 ;
@@ -8010,9 +8010,9 @@ static void extensionMethod_constructorCallAST_analyzeExpression (const cPtr_exp
     break ;
   case GALGAS_constructorValue::kEnum_structure:
     {
-      const cEnumAssociatedValues_constructorValue_structure * extractPtr_7876 = (const cEnumAssociatedValues_constructorValue_structure *) (var_initValue_4511.unsafePointer ()) ;
-      const GALGAS_sortedOperandIRList extractedValue_sortedOperandList = extractPtr_7876->mAssociatedValue0 ;
-      GALGAS_sortedOperandIRList var_sortedOperandIRList_6196 = extractedValue_sortedOperandList ;
+      const cEnumAssociatedValues_constructorValue_structure * extractPtr_7871 = (const cEnumAssociatedValues_constructorValue_structure *) (var_initValue_4511.unsafePointer ()) ;
+      const GALGAS_sortedOperandIRList extractedValue_sortedOperandList = extractPtr_7871->mAssociatedValue0 ;
+      GALGAS_sortedOperandIRList var_sortedOperandIRList_6191 = extractedValue_sortedOperandList ;
       const enumGalgasBool test_4 = GALGAS_bool (kIsNotEqual, object->mProperty_mParameterList.getter_length (SOURCE_FILE ("expression-constructor-call.galgas", 140)).objectCompare (var_constructorSignature_4496.getter_length (SOURCE_FILE ("expression-constructor-call.galgas", 140)))).boolEnum () ;
       if (kBoolTrue == test_4) {
         GALGAS_string temp_5 ;
@@ -8026,26 +8026,26 @@ static void extensionMethod_constructorCallAST_analyzeExpression (const cPtr_exp
         inCompiler->emitSemanticError (object->mProperty_mErrorLocation, GALGAS_string ("this constructor call should name ").add_operation (var_constructorSignature_4496.getter_length (SOURCE_FILE ("expression-constructor-call.galgas", 141)).getter_string (SOURCE_FILE ("expression-constructor-call.galgas", 141)), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 141)).add_operation (GALGAS_string (" parameter"), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 141)).add_operation (temp_5, inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 141)).add_operation (GALGAS_string (" instead of "), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 142)).add_operation (object->mProperty_mParameterList.getter_length (SOURCE_FILE ("expression-constructor-call.galgas", 143)).getter_string (SOURCE_FILE ("expression-constructor-call.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 143)), fixItArray7  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 141)) ;
         outArgument_outResult.drop () ; // Release error dropped variable
       }else if (kBoolFalse == test_4) {
-        cEnumerator_constructorSignature enumerator_6589 (var_constructorSignature_4496, kENUMERATION_UP) ;
-        cEnumerator_functionCallEffectiveParameterListAST enumerator_6622 (object->mProperty_mParameterList, kENUMERATION_UP) ;
-        while (enumerator_6589.hasCurrentObject () && enumerator_6622.hasCurrentObject ()) {
-          const enumGalgasBool test_8 = GALGAS_bool (kIsNotEqual, enumerator_6622.current_mSelector (HERE).getter_string (HERE).objectCompare (enumerator_6589.current_mSelector (HERE))).boolEnum () ;
+        cEnumerator_constructorSignature enumerator_6584 (var_constructorSignature_4496, kENUMERATION_UP) ;
+        cEnumerator_functionCallEffectiveParameterListAST enumerator_6617 (object->mProperty_mParameterList, kENUMERATION_UP) ;
+        while (enumerator_6584.hasCurrentObject () && enumerator_6617.hasCurrentObject ()) {
+          const enumGalgasBool test_8 = GALGAS_bool (kIsNotEqual, enumerator_6617.current_mSelector (HERE).getter_string (HERE).objectCompare (enumerator_6584.current_mSelector (HERE))).boolEnum () ;
           if (kBoolTrue == test_8) {
             TC_Array <C_FixItDescription> fixItArray9 ;
-            inCompiler->emitSemanticError (enumerator_6622.current_mSelector (HERE).getter_location (SOURCE_FILE ("expression-constructor-call.galgas", 148)), GALGAS_string ("the selector should be '!").add_operation (enumerator_6589.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 148)).add_operation (GALGAS_string (":'"), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 148)), fixItArray9  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 148)) ;
+            inCompiler->emitSemanticError (enumerator_6617.current_mSelector (HERE).getter_location (SOURCE_FILE ("expression-constructor-call.galgas", 148)), GALGAS_string ("the selector should be '!").add_operation (enumerator_6584.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 148)).add_operation (GALGAS_string (":'"), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 148)), fixItArray9  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 148)) ;
           }
-          GALGAS_objectIR var_expressionResult_7359 ;
-          callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) enumerator_6622.current_mExpression (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, enumerator_6589.current_mType (HERE), constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult_7359, inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 150)) ;
-          GALGAS_objectIR var_result_7388 = function_checkAssignmentCompatibility (var_expressionResult_7359, enumerator_6589.current_mType (HERE), enumerator_6622.current_mSelector (HERE).getter_location (HERE), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 164)) ;
-          GALGAS_objectIR var_resultAsValue_7706 ;
+          GALGAS_objectIR var_expressionResult_7354 ;
+          callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) enumerator_6617.current_mExpression (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, enumerator_6584.current_mType (HERE), constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult_7354, inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 150)) ;
+          GALGAS_objectIR var_result_7383 = function_checkAssignmentCompatibility (var_expressionResult_7354, enumerator_6584.current_mType (HERE), enumerator_6617.current_mSelector (HERE).getter_location (HERE), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 164)) ;
+          GALGAS_objectIR var_resultAsValue_7701 ;
           {
-          extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_result_7388, var_resultAsValue_7706, inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 170)) ;
+          extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_result_7383, var_resultAsValue_7701, inCompiler COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 170)) ;
           }
-          var_sortedOperandIRList_6196.addAssign_operation (var_resultAsValue_7706, enumerator_6589.current_mFieldIndex (HERE)  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 171)) ;
-          enumerator_6589.gotoNextObject () ;
-          enumerator_6622.gotoNextObject () ;
+          var_sortedOperandIRList_6191.addAssign_operation (var_resultAsValue_7701, enumerator_6584.current_mFieldIndex (HERE)  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 171)) ;
+          enumerator_6584.gotoNextObject () ;
+          enumerator_6617.gotoNextObject () ;
         }
-        outArgument_outResult = GALGAS_objectIR::constructor_llvmStructureValue (var_resultType_4279, var_sortedOperandIRList_6196  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 173)) ;
+        outArgument_outResult = GALGAS_objectIR::constructor_llvmStructureValue (var_resultType_4279, var_sortedOperandIRList_6191  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 173)) ;
       }
     }
     break ;
