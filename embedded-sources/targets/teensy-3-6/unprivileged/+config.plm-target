@@ -24,6 +24,8 @@ SYSTEM_STACK_SIZE: 1024
 
 NOP: "call void asm sideeffect \"nop\", \"\"() nounwind"
 
+BIT_BAND:0x4000_0000 0x4200_0000 0x4200_0000 32 4
+
 SERVICE_HANDLER: "service-handler.s"
 SERVICE_SYSTEM_STACK_SIZE: 12 // as_svc_handler saves 3 registers on system stack
 SERVICE_DISPATCHER_HEADER: "service-dispatcher-header.s"
@@ -49,7 +51,6 @@ C_FILES:
   "../../c-real-time-kernel-code.c"
   "../c-countTrainingZeros.c"
   "../../memory-utilities.c"
-  "../c-bitband.c"
   "../../heap.c"
   "../../dynamic-buffer.c"
 
@@ -70,7 +71,6 @@ PLM_FILES:
   "../driver-root-teensy-3-6.plm"
   "../plm-teensy-3-6-time.plm"
   "../plm-teensy-3-6-xtr.plm"
-  "../plm-teensy-3-6-bitband.plm"
   "../driver-digital-teensy-3-6.plm"
   "../plm-teensy-3-6-lcd.plm"
   "../plm-teensy-3-6-panic.plm"

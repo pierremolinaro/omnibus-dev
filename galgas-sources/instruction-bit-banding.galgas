@@ -1,0 +1,255 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @bitbandInstructionAST : @instructionAST {
+  @lstring mRegisterGroupName
+  @lstring mRegisterName
+  @expressionAST mBitExpression
+  @location mBitExpressionLocation
+  @expressionAST mSourceExpression
+  @location mSourceExpressionLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+    ${$
+    $identifier$ ?let registerGroupName
+    $.$
+    $identifier$ ?let registerName
+    $:$
+    <expression> !?ioAST ?let bitExpression
+    let bitExpressionLocation = @location.here
+    $}$
+    $=$
+    <expression> !?ioAST ?let sourceExpression
+  #--- AST
+    ioInstructionList += !@bitbandInstructionAST.new {
+      !registerGroupName.location
+      !registerGroupName
+      !registerName
+      !bitExpression
+      !bitExpressionLocation
+      !sourceExpression
+      !.here
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [!?ioGraph noteNode !llvmTypeNameFromPLMname (!.new{!"uint1" !mRegisterGroupName})]
+  [mBitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @bitbandInstructionAST analyze
+  ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+#--- Search register group name
+  [ioUniversalMap searchEntity !mRegisterGroupName ?let @valuedObject entity]
+  if not [entity isRegisterGroup] then
+    error mRegisterGroupName : "a register group is required here"
+  else
+    [entity registerGroup ?registerMap:let registerMap]
+    [registerMap searchKey
+      !mRegisterName
+      ?let @PLMType unused registerType
+      ?let @bool readOnly
+      ?let @bool userAccess
+      ?let @sliceMap unused inRegisterSliceMap
+      ?let @controlRegisterFieldMap unused mRegisterFieldMap
+      ?let @bigint registerAddress
+      ?let @controlRegisterFieldList unused mControlRegisterFieldList # Used for HTML file
+      ?let @uint unused registerBitCount
+      ?let @uint registerArraySize # 0 if not an array
+      ?let @uint unused registerElementSize # 0 if not an array
+    ]
+  #--- Check the control register can be used
+    if (registerAddress < inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint) ||
+       (registerAddress >= inContext.mTargetParameters.mBitbandRegisterEndAddress.bigint) then
+      error mRegisterName
+        : "register address (" + [registerAddress hexString] + ") invalid: should be >= "
+        + [inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint hexString]
+        + " and < " + [inContext.mTargetParameters.mBitbandRegisterEndAddress.bigint hexString]
+    elsif readOnly then
+      error mRegisterName : "this control register cannot be modified (declared with @ro attribute)"
+    elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
+      error mRegisterName : "this control register is not accessible in user mode"
+    elsif registerArraySize != 0 then
+      error mRegisterName : "control register array not handled yet"
+    end
+  #--- Inferred bit expression type
+    [inContext.mTypeMap searchKey
+      !lkey:.new {!"uint" + [registerBitCount-1G significantBitCount] !mBitExpressionLocation}
+      ?type:let requiredBitExpressionType
+      ?1*
+    ]
+  #--- Compute bit expression
+    [mBitExpression analyzeExpression
+      !self:inSelfType
+      !routineAttributes:inRoutineAttributes
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !optionalTargetType:requiredBitExpressionType
+      !context:inContext
+      !mode:inMode
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      ?result:@objectIR bitExpressionOperand
+    ]
+  #--- Load from reference ?
+    if [bitExpressionOperand isReference] then
+      [!?ioInstructionGenerationList appendLoadWhenReference
+        !?ioTemporaries
+        !bitExpressionOperand
+        ?let loadedResultValue
+      ]
+      bitExpressionOperand = loadedResultValue
+    end
+  #--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
+    if [bitExpressionOperand isLiteralInteger] then
+      [bitExpressionOperand literalInteger ?1* ?value:let @bigint value]
+      if (value < 0G) || (value >= registerBitCount) then
+        error mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
+      else
+        bitExpressionOperand = .literalInteger {!type:requiredBitExpressionType !value:value}
+      end
+    elsif [bitExpressionOperand type].plmOriginalTypeName != requiredBitExpressionType.plmOriginalTypeName then
+      error mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.plmOriginalTypeName
+    end
+  #--- Inferred source expression type
+    [inContext.mTypeMap searchKey
+      !lkey:.new {!"uint1" !mSourceExpressionLocation}
+      ?type:let requiredSourceExpressionType
+      ?1*
+    ]
+  #--- Compute source expression
+    [mSourceExpression analyzeExpression
+      !self:inSelfType
+      !routineAttributes:inRoutineAttributes
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !optionalTargetType:requiredSourceExpressionType
+      !context:inContext
+      !mode:inMode
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      ?result:@objectIR sourceExpressionOperand
+    ]
+  #--- Load from reference ?
+    if [sourceExpressionOperand isReference] then
+      [!?ioInstructionGenerationList appendLoadWhenReference
+        !?ioTemporaries
+        !sourceExpressionOperand
+        ?let loadedResultValue
+      ]
+      sourceExpressionOperand = loadedResultValue
+    end
+  #--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
+    if [sourceExpressionOperand isLiteralInteger] then
+      [sourceExpressionOperand literalInteger ?1* ?value:let @bigint value]
+      if (value < 0G) || (value > 1G) then
+        error mSourceExpressionLocation : "static value should be 0 or 1"
+      else
+        sourceExpressionOperand = .literalInteger {!type:requiredSourceExpressionType !value:value}
+      end
+    elsif [sourceExpressionOperand type].plmOriginalTypeName != requiredSourceExpressionType.plmOriginalTypeName then
+      error mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.plmOriginalTypeName
+    end
+  #--- Generate code
+    ioInstructionGenerationList += !@bitbandInstructionIR.new {
+      !registerAddress
+      !bitExpressionOperand
+      !sourceExpressionOperand
+      !inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint
+      !inContext.mTargetParameters.mBitbandRegisterRelocationAddress.bigint
+      !inContext.mTargetParameters.mBitbandRegisterOffsetMultiplier.bigint
+      !inContext.mTargetParameters.mBitbandRegisterBitMultiplier.bigint
+    }
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @bitbandInstructionIR : @abstractInstructionIR {
+  @bigint mRegisterAddress
+  @objectIR mBitExpressionOperand
+  @objectIR mSourceExpressionOperand
+  @bigint mBitbandRegisterBaseAddress
+  @bigint mBitbandRegisterRelocationAddress
+  @bigint mBitbandRegisterOffsetMultiplier
+  @bigint mBitbandRegisterBitMultiplier
+}
+
+#·······················································································································
+#void bitband (const unsigned char inBit, const unsigned inAddress, const unsigned char inValue) {
+#  const unsigned register_base = 0x4000 * 0x10000 ;
+#  const unsigned byte_offset = inAddress - register_base ;
+#  const unsigned bit_word_offset = (byte_offset * 32) + (inBit * 4) ;
+#  const unsigned bit_band_base = 0x4200 * 0x10000 ;
+#  const unsigned bit_word_addr = bit_band_base + bit_word_offset ;
+#  unsigned * ptr = (unsigned *) bit_word_addr ;
+#  *ptr = inValue ;
+#}
+#·······················································································································
+
+override method @bitbandInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let idx = [ioGenerationAdds.mUniqueIndex string]
+  ioGenerationAdds.mUniqueIndex ++
+  ioLLVMcode += ";--- Bit band\n"
+  ioLLVMcode += "  %byte.offset." + idx + " = sub i32 " + mRegisterAddress + ", " + mBitbandRegisterBaseAddress + "\n"
+  ioLLVMcode += "  %byte.offset." + idx + ".mul = mul i32 %byte.offset." + idx + ", " + mBitbandRegisterOffsetMultiplier + "\n"
+  ioLLVMcode += "  %bit.offset." + idx + ".mul = mul i32 " + [mBitExpressionOperand llvmName] + ", " + mBitbandRegisterBitMultiplier + "\n"
+  ioLLVMcode += "  %offset." + idx + " = add i32 %byte.offset." + idx + ".mul, %bit.offset." + idx + ".mul\n"
+  ioLLVMcode += "  %bit.word.addr." + idx + " = add i32 %offset." + idx + ", " + mBitbandRegisterRelocationAddress + "\n"
+  ioLLVMcode += "  %ptr." + idx + " = inttoptr i32 %bit.word.addr." + idx + " to i32*\n"
+  ioLLVMcode += "  %value." + idx + " = zext i1 " + [mSourceExpressionOperand llvmName] + " to i32\n"
+  ioLLVMcode += "  store i32 %value." + idx + ", i32* %ptr." + idx + "\n"
+}
+
+#·······················································································································
+
+override method @bitbandInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

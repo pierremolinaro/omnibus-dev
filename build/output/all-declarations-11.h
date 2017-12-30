@@ -10,6 +10,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         Function 'llvmNameForPrimitiveCall'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveCall (const class GALGAS_string & constinArgument0,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          Function 'memoryAllocSectionName'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -274,8 +284,6 @@ extern const char * gWrapperFileContent_103_targetTemplates ;
 extern const char * gWrapperFileContent_104_targetTemplates ;
 extern const char * gWrapperFileContent_105_targetTemplates ;
 extern const char * gWrapperFileContent_106_targetTemplates ;
-extern const char * gWrapperFileContent_107_targetTemplates ;
-extern const char * gWrapperFileContent_108_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -389,8 +397,6 @@ extern const cRegularFileWrapper gWrapperFile_103_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_104_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_105_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_106_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_107_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_108_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

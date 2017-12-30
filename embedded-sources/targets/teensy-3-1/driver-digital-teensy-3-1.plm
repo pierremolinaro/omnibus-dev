@@ -1,8 +1,8 @@
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————
 
 check target "teensy-3-1/unprivileged"
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————
   
 enum $digitalPort {
   case D0  // PTB16
@@ -31,7 +31,7 @@ enum $digitalPort {
   case D23 // PTC2
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//··············································································
 
 enum $digitalMode {
   case OUTPUT
@@ -40,15 +40,15 @@ enum $digitalMode {
   case INPUT_PULLUP
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————
 
 driver digital ()
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————
 
 driver digital > root {
 
-  //····················································································································
+  //··············································································
   // By default, the 32 PORTA.PCR registers are not accessible in user mode
   // Their adresses : 0x4004_9000 --> 0x4004_907C
   // This corresponds to AIPS slot 73 (§4.5.1)
@@ -61,7 +61,7 @@ driver digital > root {
   // By default, the 32 PORTD.PCR registers are not accessible in user mode
   // Their adresses : 0x4004_C000 --> 0x4004_C07C
   // This corresponds to AIPS slot 76 (§4.5.1)
-  //····················································································································
+  //··············································································
   
   boot { // See §19.2.2 page 351
   // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0.PACRJ
@@ -72,7 +72,7 @@ driver digital > root {
     AIPS0.PACRJ = 0
   }
 
-  //····················································································································
+  //··············································································
 
   public func set @noUnusedWarning (?mode:mode $digitalMode
                                     ?toPort:port $digitalPort) {
@@ -81,366 +81,366 @@ driver digital > root {
       switch mode {
       case OUTPUT :
         PORTB.PCR [16] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR |= (1 << 16)
+        {GPIOB.PDDR : 16} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTB.PCR [16] = {PORTB.PCR !MUX:1 !ODE:1}
-        GPIOB.PDDR |= (1 << 16)
+        {GPIOB.PDDR : 16} = 1
       case INPUT :
         PORTB.PCR [16] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR &= ~ (1 << 16)
+        {GPIOB.PDDR : 16} = 0
       case INPUT_PULLUP :
         PORTB.PCR [16] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOB.PDDR &= ~ (1 << 16)
+        {GPIOB.PDDR : 16} = 0
       }
     case D1 : // PTB17
       switch mode {
       case OUTPUT :
         PORTB.PCR [17] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR |= (1 << 17)
+        {GPIOB.PDDR : 17} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTB.PCR [17] = {PORTB.PCR !MUX:1 !ODE:1}
-        GPIOB.PDDR |= (1 << 17)
+        {GPIOB.PDDR : 17} = 1
       case INPUT :
         PORTB.PCR [17] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR &= ~ (1 << 17)
+        {GPIOB.PDDR : 17} = 0
       case INPUT_PULLUP :
         PORTB.PCR [17] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOB.PDDR &= ~ (1 << 17)
+        {GPIOB.PDDR : 17} = 0
       }
     case D2 : // PTD0
       switch mode {
       case OUTPUT :
         PORTD.PCR [0] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR |= (1 << 0)
+        {GPIOD.PDDR : 0} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTD.PCR [0] = {PORTD.PCR !MUX:1 !ODE:1}
-        GPIOD.PDDR |= (1 << 0)
+        {GPIOD.PDDR : 0} = 1
       case INPUT :
         PORTD.PCR [0] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR &= ~ (1 << 0)
+        {GPIOD.PDDR : 0} = 0
       case INPUT_PULLUP :
         PORTD.PCR [0] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOD.PDDR &= ~ (1 << 0)
+        {GPIOD.PDDR : 0} = 0
       }
     case D3 : // PTA12
       switch mode {
       case OUTPUT :
         PORTA.PCR [12] = {PORTA.PCR !MUX:1}
-        GPIOA.PDDR |= (1 << 12)
+        {GPIOA.PDDR : 12} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTA.PCR [12] = {PORTA.PCR !MUX:1 !ODE:1}
-        GPIOA.PDDR |= (1 << 12)
+        {GPIOA.PDDR : 12} = 1
       case INPUT :
         PORTA.PCR [12] = {PORTA.PCR !MUX:1}
-        GPIOA.PDDR &= ~ (1 << 12)
+        {GPIOA.PDDR : 12} = 0
       case INPUT_PULLUP :
         PORTA.PCR [12] = {PORTA.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOA.PDDR &= ~ (1 << 12)
+        {GPIOA.PDDR : 12} = 0
       }
     case D4 : // PTA13
       switch mode {
       case OUTPUT :
         PORTA.PCR [13] = {PORTA.PCR !MUX:1}
-        GPIOA.PDDR |= (1 << 13)
+        {GPIOA.PDDR : 13} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTA.PCR [13] = {PORTA.PCR !MUX:1 !ODE:1}
-        GPIOA.PDDR |= (1 << 13)
+        {GPIOA.PDDR : 13} = 1
       case INPUT :
         PORTA.PCR [13] = {PORTA.PCR !MUX:1}
-        GPIOA.PDDR &= ~ (1 << 13)
+        {GPIOA.PDDR : 13} = 0
       case INPUT_PULLUP :
         PORTA.PCR [13] = {PORTA.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOA.PDDR &= ~ (1 << 13)
+        {GPIOA.PDDR : 13} = 0
       }
     case D5 : // PTD7
       switch mode {
       case OUTPUT :
         PORTD.PCR [7] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR |= (1 << 7)
+        {GPIOD.PDDR : 7} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTD.PCR [7] = {PORTD.PCR !MUX:1 !ODE:1}
-        GPIOD.PDDR |= (1 << 7)
+        {GPIOD.PDDR : 7} = 1
       case INPUT :
         PORTD.PCR [7] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR &= ~ (1 << 7)
+        {GPIOD.PDDR : 7} = 0
       case INPUT_PULLUP :
         PORTD.PCR [7] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOD.PDDR &= ~ (1 << 7)
+        {GPIOD.PDDR : 7} = 0
       }
     case D6 : // PTD4
       switch mode {
       case OUTPUT :
         PORTD.PCR [4] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR |= (1 << 4)
+        {GPIOD.PDDR : 4} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTD.PCR [4] = {PORTD.PCR !MUX:1 !ODE:1}
-        GPIOD.PDDR |= (1 << 4)
+        {GPIOD.PDDR : 4} = 1
       case INPUT :
         PORTD.PCR [4] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR &= ~ (1 << 4)
+        {GPIOD.PDDR : 4} = 0
       case INPUT_PULLUP :
         PORTD.PCR [4] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOD.PDDR &= ~ (1 << 4)
+        {GPIOD.PDDR : 4} = 0
       }
     case D7 : // PTD2
       switch mode {
       case OUTPUT :
         PORTD.PCR [2] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR |= (1 << 2)
+        {GPIOD.PDDR : 2} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTD.PCR [2] = {PORTD.PCR !MUX:1 !ODE:1}
-        GPIOD.PDDR |= (1 << 2)
+        {GPIOD.PDDR : 2} = 1
       case INPUT :
         PORTD.PCR [2] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR &= ~ (1 << 2)
+        {GPIOD.PDDR : 2} = 0
       case INPUT_PULLUP :
         PORTD.PCR [2] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOD.PDDR &= ~ (1 << 2)
+        {GPIOD.PDDR : 2} = 0
       }
     case D8 : // PTD3
       switch mode {
       case OUTPUT :
         PORTD.PCR [3] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR |= (1 << 3)
+        {GPIOD.PDDR : 3} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTD.PCR [3] = {PORTD.PCR !MUX:1 !ODE:1}
-        GPIOD.PDDR |= (1 << 3)
+        {GPIOD.PDDR : 3} = 1
       case INPUT :
         PORTD.PCR [3] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR &= ~ (1 << 3)
+        {GPIOD.PDDR : 3} = 0
       case INPUT_PULLUP :
         PORTD.PCR [3] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOD.PDDR &= ~ (1 << 3)
+        {GPIOD.PDDR : 3} = 0
       }
     case D9  : // PTC3
       switch mode {
       case OUTPUT :
         PORTC.PCR [3] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR |= (1 << 3)
+        {GPIOC.PDDR : 3} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTC.PCR [3] = {PORTC.PCR !MUX:1 !ODE:1}
-        GPIOC.PDDR |= (1 << 3)
+        {GPIOC.PDDR : 3} = 1
       case INPUT :
         PORTC.PCR [3] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR &= ~ (1 << 3)
+        {GPIOC.PDDR : 3} = 0
       case INPUT_PULLUP :
         PORTC.PCR [3] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOC.PDDR &= ~ (1 << 3)
+        {GPIOC.PDDR : 3} = 0
       }
     case D10 : // PTC4
       switch mode {
       case OUTPUT :
         PORTC.PCR [4] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR |= (1 << 4)
+        {GPIOC.PDDR : 4} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTC.PCR [4] = {PORTC.PCR !MUX:1 !ODE:1}
-        GPIOC.PDDR |= (1 << 4)
+        {GPIOC.PDDR : 4} = 1
       case INPUT :
         PORTC.PCR [4] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR &= ~ (1 << 4)
+        {GPIOC.PDDR : 4} = 0
       case INPUT_PULLUP :
         PORTC.PCR [4] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOC.PDDR &= ~ (1 << 4)
+        {GPIOC.PDDR : 4} = 0
       }
     case D11 : // PTC6
       switch mode {
       case OUTPUT :
         PORTC.PCR [6] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR |= (1 << 6)
+        {GPIOC.PDDR : 6} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTC.PCR [6] = {PORTC.PCR !MUX:1 !ODE:1}
-        GPIOC.PDDR |= (1 << 6)
+        {GPIOC.PDDR : 6} = 1
       case INPUT :
         PORTC.PCR [6] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR &= ~ (1 << 6)
+        {GPIOC.PDDR : 6} = 0
       case INPUT_PULLUP :
         PORTC.PCR [6] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOC.PDDR &= ~ (1 << 6)
+        {GPIOC.PDDR : 6} = 0
       }
     case D12 : // PTC7
       switch mode {
       case OUTPUT :
         PORTC.PCR [7] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR |= (1 << 7)
+        {GPIOC.PDDR : 7} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTC.PCR [7] = {PORTC.PCR !MUX:1 !ODE:1}
-        GPIOC.PDDR |= (1 << 7)
+        {GPIOC.PDDR : 7} = 1
       case INPUT :
         PORTC.PCR [7] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR &= ~ (1 << 7)
+        {GPIOC.PDDR : 7} = 0
       case INPUT_PULLUP :
         PORTC.PCR [7] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOC.PDDR &= ~ (1 << 7)
+        {GPIOC.PDDR : 7} = 0
       }
     case D13 : // PTC5
       switch mode {
       case OUTPUT :
         PORTC.PCR [5] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR |= (1 << 5)
+        {GPIOC.PDDR : 5} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTC.PCR [5] = {PORTC.PCR !MUX:1 !ODE:1}
-        GPIOC.PDDR |= (1 << 5)
+        {GPIOC.PDDR : 5} = 1
       case INPUT :
         PORTC.PCR [5] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR &= ~ (1 << 5)
+        {GPIOC.PDDR : 5} = 0
       case INPUT_PULLUP :
         PORTC.PCR [5] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOC.PDDR &= ~ (1 << 5)
+        {GPIOC.PDDR : 5} = 0
       }
     case D14 : // PTD1
       switch mode {
       case OUTPUT :
         PORTD.PCR [1] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR |= (1 << 1)
+        {GPIOD.PDDR : 1} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTD.PCR [1] = {PORTD.PCR !MUX:1 !ODE:1}
-        GPIOD.PDDR |= (1 << 1)
+        {GPIOD.PDDR : 1} = 1
       case INPUT :
         PORTD.PCR [1] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR &= ~ (1 << 1)
+        {GPIOD.PDDR : 1} = 0
       case INPUT_PULLUP :
         PORTD.PCR [1] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOD.PDDR &= ~ (1 << 1)
+        {GPIOD.PDDR : 1} = 0
       }
     case D15 : // PTC0
       switch mode {
       case OUTPUT :
         PORTC.PCR [0] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR |= (1 << 0)
+        {GPIOC.PDDR : 0} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTC.PCR [0] = {PORTC.PCR !MUX:1 !ODE:1}
-        GPIOC.PDDR |= (1 << 0)
+        {GPIOC.PDDR : 0} = 1
       case INPUT :
         PORTC.PCR [0] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR &= ~ (1 << 0)
+        {GPIOC.PDDR : 0} = 0
       case INPUT_PULLUP :
         PORTC.PCR [0] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOC.PDDR &= ~ (1 << 0)
+        {GPIOC.PDDR : 0} = 0
       }
     case D16 : // PTB0
       switch mode {
       case OUTPUT :
         PORTB.PCR [0] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR |= (1 << 0)
+        {GPIOB.PDDR : 0} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTB.PCR [0] = {PORTB.PCR !MUX:1 !ODE:1}
-        GPIOB.PDDR |= (1 << 0)
+        {GPIOB.PDDR : 0} = 1
       case INPUT :
         PORTB.PCR [0] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR &= ~ (1 << 0)
+        {GPIOB.PDDR : 0} = 0
       case INPUT_PULLUP :
         PORTB.PCR [0] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOB.PDDR &= ~ (1 << 0)
+        {GPIOB.PDDR : 0} = 0
       }
     case D17 : // PTB1
       switch mode {
       case OUTPUT :
         PORTB.PCR [1] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR |= (1 << 1)
+        {GPIOB.PDDR : 1} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTB.PCR [1] = {PORTB.PCR !MUX:1 !ODE:1}
-        GPIOB.PDDR |= (1 << 1)
+        {GPIOB.PDDR : 1} = 1
       case INPUT :
         PORTB.PCR [1] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR &= ~ (1 << 1)
+        {GPIOB.PDDR : 1} = 0
       case INPUT_PULLUP :
         PORTB.PCR [1] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOB.PDDR &= ~ (1 << 1)
+        {GPIOB.PDDR : 1} = 0
       }
     case D18 : // PTB3
       switch mode {
       case OUTPUT :
         PORTB.PCR [3] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR |= (1 << 3)
+        {GPIOB.PDDR : 3} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTB.PCR [3] = {PORTB.PCR !MUX:1 !ODE:1}
-        GPIOB.PDDR |= (1 << 3)
+        {GPIOB.PDDR : 3} = 1
       case INPUT :
         PORTB.PCR [3] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR &= ~ (1 << 3)
+        {GPIOB.PDDR : 3} = 0
       case INPUT_PULLUP :
         PORTB.PCR [3] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOB.PDDR &= ~ (1 << 3)
+        {GPIOB.PDDR : 3} = 0
       }
     case D19 : // PTB2
       switch mode {
       case OUTPUT :
         PORTB.PCR [2] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR |= (1 << 2)
+        {GPIOB.PDDR : 2} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTB.PCR [2] = {PORTB.PCR !MUX:1 !ODE:1}
-        GPIOB.PDDR |= (1 << 2)
+        {GPIOB.PDDR : 2} = 1
       case INPUT :
         PORTB.PCR [2] = {PORTB.PCR !MUX:1}
-        GPIOB.PDDR &= ~ (1 << 2)
+        {GPIOB.PDDR : 2} = 0
       case INPUT_PULLUP :
         PORTB.PCR [2] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOB.PDDR &= ~ (1 << 2)
+        {GPIOB.PDDR : 2} = 0
       }
     case D20 : // PTD5
       switch mode {
       case OUTPUT :
         PORTD.PCR [5] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR |= (1 << 5)
+        {GPIOD.PDDR : 5} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTD.PCR [5] = {PORTD.PCR !MUX:1 !ODE:1}
-        GPIOD.PDDR |= (1 << 5)
+        {GPIOD.PDDR : 5} = 1
       case INPUT :
         PORTD.PCR [5] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR &= ~ (1 << 5)
+        {GPIOD.PDDR : 5} = 0
       case INPUT_PULLUP :
         PORTD.PCR [5] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOD.PDDR &= ~ (1 << 5)
+        {GPIOD.PDDR : 5} = 0
       }
     case D21 : // PTD6
       switch mode {
       case OUTPUT :
         PORTD.PCR [6] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR |= (1 << 6)
+        {GPIOD.PDDR : 6} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTD.PCR [6] = {PORTD.PCR !MUX:1 !ODE:1}
-        GPIOD.PDDR |= (1 << 6)
+        {GPIOD.PDDR : 6} = 1
       case INPUT :
         PORTD.PCR [6] = {PORTD.PCR !MUX:1}
-        GPIOD.PDDR &= ~ (1 << 6)
+        {GPIOD.PDDR : 6} = 0
       case INPUT_PULLUP :
         PORTD.PCR [6] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOD.PDDR &= ~ (1 << 6)
+        {GPIOD.PDDR : 6} = 0
       }
     case D22 : // PTC1
       switch mode {
       case OUTPUT :
         PORTC.PCR [1] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR |= (1 << 1)
+        {GPIOC.PDDR : 1} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTC.PCR [1] = {PORTC.PCR !MUX:1 !ODE:1}
-        GPIOC.PDDR |= (1 << 1)
+        {GPIOC.PDDR : 1} = 1
       case INPUT :
         PORTC.PCR [1] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR &= ~ (1 << 1)
+        {GPIOC.PDDR : 1} = 0
       case INPUT_PULLUP :
         PORTC.PCR [1] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOC.PDDR &= ~ (1 << 1)
+        {GPIOC.PDDR : 1} = 0
       }
     case D23 : // PTC2
       switch mode {
       case OUTPUT :
         PORTC.PCR [2] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR |= (1 << 2)
+        {GPIOC.PDDR : 2} = 1
       case OUTPUT_OPEN_COLLECTOR :
         PORTC.PCR [2] = {PORTC.PCR !MUX:1 !ODE:1}
-        GPIOC.PDDR |= (1 << 2)
+        {GPIOC.PDDR : 2} = 1
       case INPUT :
         PORTC.PCR [2] = {PORTC.PCR !MUX:1}
-        GPIOC.PDDR &= ~ (1 << 2)
+        {GPIOC.PDDR : 2} = 0
       case INPUT_PULLUP :
         PORTC.PCR [2] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOC.PDDR &= ~ (1 << 2)
+        {GPIOC.PDDR : 2} = 0
       }
     }
   }
   
-  //····················································································································
+  //··············································································
 
   public func write @noUnusedWarning (?value $bool
                                       ?toPort:port $digitalPort) {
@@ -592,7 +592,7 @@ driver digital > root {
     }
   }
 
-  //····················································································································
+  //··············································································
   
   public func read @noUnusedWarning (?port:port $digitalPort) -> $bool {
     switch port {
@@ -647,7 +647,7 @@ driver digital > root {
     }
   }
   
-  //····················································································································
+  //··············································································
   
   public func toggle @noUnusedWarning (?port:port $digitalPort) {
     switch port {
@@ -701,9 +701,8 @@ driver digital > root {
       GPIOC.PTOR = 1 << 2 ;
     }
   }
-
-  //····················································································································
+  //··············································································
 
 }
 
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————

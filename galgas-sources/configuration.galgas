@@ -33,6 +33,12 @@ struct @targetParameters {
 
   @lstring mNopInstructionStringInLLVM
 
+  @lbigint mBitbandRegisterBaseAddress
+  @lbigint mBitbandRegisterEndAddress
+  @lbigint mBitbandRegisterRelocationAddress
+  @lbigint mBitbandRegisterOffsetMultiplier
+  @lbigint mBitbandRegisterBitMultiplier
+  
   @lstring mSectionHandler
   @lbigint mSectionPushedRegisterByteSize 
   @lstring mSectionDispatcherHeader
@@ -126,6 +132,26 @@ syntax extension plm_target_specific_syntax {
     $integer$ ?let systemStackSize
     <configuration_key> !"NOP"
     $"string"$ ?let nopInstructionStringInLLVM
+    <configuration_key> !"BIT_BAND"
+    @lbigint bitbandRegisterBaseAddress
+    @lbigint bitbandRegisterEndAddress
+    @lbigint bitbandRegisterRelocationAddress
+    @lbigint bitbandRegisterOffsetMultiplier
+    @lbigint bitbandRegisterBitMultiplier
+    select
+      $no$
+      bitbandRegisterBaseAddress = .new {!0G !.here}
+      bitbandRegisterEndAddress = .new {!0G !.here}
+      bitbandRegisterRelocationAddress = .new {!0G !.here}
+      bitbandRegisterOffsetMultiplier = .new {!0G !.here}
+      bitbandRegisterBitMultiplier= .new {!0G !.here}
+    or
+      $integer$ ?bitbandRegisterBaseAddress
+      $integer$ ?bitbandRegisterEndAddress
+      $integer$ ?bitbandRegisterRelocationAddress
+      $integer$ ?bitbandRegisterOffsetMultiplier
+      $integer$ ?bitbandRegisterBitMultiplier
+    end
     <configuration_key> !"SERVICE_HANDLER"
     $"string"$ ?let serviceHandler
     <configuration_key> !"SERVICE_SYSTEM_STACK_SIZE"
@@ -201,6 +227,11 @@ syntax extension plm_target_specific_syntax {
       !systemStackSize
       !stackedUserRegisterOnInterruptByteSize
       !nopInstructionStringInLLVM
+      !bitbandRegisterBaseAddress
+      !bitbandRegisterEndAddress
+      !bitbandRegisterRelocationAddress
+      !bitbandRegisterOffsetMultiplier
+      !bitbandRegisterBitMultiplier
       !sectionHandler
       !sectionPushedRegisterByteSize
       !sectionDispatcherHeader
