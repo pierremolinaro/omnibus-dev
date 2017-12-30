@@ -107,15 +107,7 @@ class @addressofInstructionIR : @abstractInstructionIR {
   @LValueRepresentation mLValue
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @addressofInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override method @addressofInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -133,6 +125,14 @@ override method @addressofInstructionIR llvmInstructionCode
     ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + [type llvmTypeName] + "* " + llvmName
                 + " to " + [mTarget llvmTypeName] + " ; addressof\n"
   end
+}
+
+#·······················································································································
+
+override method @addressofInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

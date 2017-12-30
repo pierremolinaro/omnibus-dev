@@ -24,6 +24,8 @@ SYSTEM_STACK_SIZE: 1024
 
 NOP: "call void asm sideeffect \"nop\", \"\"() nounwind"
 
+BIT_BAND:no
+
 SERVICE_HANDLER: "service-handler.s"
 SERVICE_SYSTEM_STACK_SIZE: 16 // as_swi_handler saves 4 32-bits registers on system stack
 SERVICE_DISPATCHER_HEADER: "service-dispatcher-header.s"
