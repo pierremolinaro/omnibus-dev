@@ -139,9 +139,9 @@ override method @typeArrayDeclarationAST enterInContext
       !constructorMap:constructorMap
       !guardMap:{}
       !typeAttributes:typeAttributes
-      !plmUserTypeName:mAnonymousArrayTypeName
+      !plmOriginalTypeName:mAnonymousArrayTypeName
       !kind:.arrayType {!elementType:elementType !size:arraySize}
-      !plmImplementationTypeName:mAnonymousArrayTypeName
+      !plmAliasedTypeName:mAnonymousArrayTypeName
     }
     [!?ioContext.mTypeMap insertType
       !lkey:mAnonymousArrayTypeName

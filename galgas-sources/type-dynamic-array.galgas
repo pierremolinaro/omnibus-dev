@@ -146,16 +146,16 @@ override method @typeDynamicArrayDeclarationAST enterInContext
 #-------------------------------------------- Type attributes
   let @PLMTypeAttributes typeAttributes = .instanciable | .copyable | .arc
 #-------------------------------------------- Enter in type map
-  let plmImplementationTypeName = "dynarray." + mElementTypeName
+  let plmAliasedTypeName = "dynarray." + mElementTypeName
   let arrayType = @PLMType.new {
     !propertyMap:propertyMap
     !classConstantMap:{}
     !constructorMap:constructorMap
     !guardMap:{}
     !typeAttributes:typeAttributes
-    !plmUserTypeName:mAnonymousDynamicArrayTypeName
+    !plmOriginalTypeName:mAnonymousDynamicArrayTypeName
     !kind:.dynamicArrayType {!elementType:elementType !ptrSize:ioContext.mTargetParameters.mPointerSize}
-    !plmImplementationTypeName:plmImplementationTypeName
+    !plmAliasedTypeName:plmAliasedTypeName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mAnonymousDynamicArrayTypeName
@@ -245,7 +245,7 @@ override method @dynamicArrayIR generateLLVMcode
   @routineFormalArgumentListAST argumentList = {
     !.input
     !["" nowhere]
-    ![mElementType.plmUserTypeName nowhere]
+    ![mElementType.plmOriginalTypeName nowhere]
     !["inValue" nowhere]
   ,
     !.input
@@ -280,7 +280,7 @@ override method @dynamicArrayIR generateLLVMcode
              + pointer + "* %insert.address)\n"
   ioLLVMcode += ";--- Perform copy\n"
   ioLLVMcode += "  %typed.insert.address = bitcast " + pointer + "* %insert.address to " + elementLLVMTypeName + "*\n"
-  ioLLVMcode += "  call void @plm.assign." + [mElementType.plmUserTypeName identifierRepresentation]
+  ioLLVMcode += "  call void @plm.assign." + [mElementType.plmOriginalTypeName identifierRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"
   ioLLVMcode += "  store " + pointer + " %new.buffer.pointer, " + pointer + "* %ioArray\n"
@@ -291,7 +291,7 @@ override method @dynamicArrayIR generateLLVMcode
   argumentList = {
     !.input
     !["" nowhere]
-    ![mElementType.plmUserTypeName nowhere]
+    ![mElementType.plmOriginalTypeName nowhere]
     !["inValue" nowhere]
   }
   let routineMangledName = routineMangledNameFromAST (

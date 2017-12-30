@@ -63,7 +63,7 @@ end
 <table class="result">
 <tr><td class="result_title">Constant Name</td><td class="result_title">PLM Type</td><td class="result_title">LLVM Type</td><td class="result_title">Value</td></tr>\n%
 for () in GLOBAL_CONSTANT_MAP do
-  %<tr class="result_line"><td><a name="%!lkey.string%">%!lkey.string%</a></td><td>$%![mValue plmUserTypeName]%</td><td>%![mValue llvmTypeName]%</td><td>%![mValue llvmName]%</td></tr>\n%
+  %<tr class="result_line"><td><a name="%!lkey.string%">%!lkey.string%</a></td><td>$%![mValue plmOriginalTypeName]%</td><td>%![mValue llvmTypeName]%</td><td>%![mValue llvmName]%</td></tr>\n%
 end%
 </table>
 </div>

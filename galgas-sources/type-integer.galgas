@@ -176,9 +176,9 @@ override method @integerDeclarationAST enterInContext
     !constructorMap:constructorMap
     !guardMap:{}
     !typeAttributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmUserTypeName:integerTypeName
+    !plmOriginalTypeName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
-    !plmImplementationTypeName:integerTypeName
+    !plmAliasedTypeName:integerTypeName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName

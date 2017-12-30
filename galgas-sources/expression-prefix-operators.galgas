@@ -140,7 +140,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     end
   end
 #--- Check operator
-  [prefixOperatorMap searchKey !.new {![expressionResult plmUserTypeName] !mOperatorLocation}]
+  [prefixOperatorMap searchKey !.new {![expressionResult plmOriginalTypeName] !mOperatorLocation}]
   let resultType = [expressionResult type]
 #---
   if [expressionResult isLiteralInteger] then

@@ -2490,13 +2490,13 @@ class GALGAS_PLMType function_literalStringType (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Extension getter '@objectIR plmUserTypeName' (as function)                              *
+//                           Extension getter '@objectIR plmOriginalTypeName' (as function)                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string extensionGetter_plmUserTypeName (const class GALGAS_objectIR & inObject,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+class GALGAS_string extensionGetter_plmOriginalTypeName (const class GALGAS_objectIR & inObject,
+                                                         class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

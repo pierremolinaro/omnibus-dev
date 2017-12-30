@@ -173,9 +173,9 @@ method @taskListAST enterInContext
       !constructorMap:{}
       !guardMap:{}
       !typeAttributes:.none
-      !plmUserTypeName:task.mTaskName
+      !plmOriginalTypeName:task.mTaskName
       !kind:.structure {!propertyList:propertyList}
-      !plmImplementationTypeName:task.mTaskName
+      !plmAliasedTypeName:task.mTaskName
     }
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
@@ -341,7 +341,7 @@ private proc setupSemanticAnalysis
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
-  let routineNameForInvocationGraph = setupNameForInvocationGraph (!inSelfType.plmUserTypeName !inPriority)
+  let routineNameForInvocationGraph = setupNameForInvocationGraph (!inSelfType.plmOriginalTypeName !inPriority)
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
