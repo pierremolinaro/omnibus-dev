@@ -469,37 +469,38 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   for (* type index) in inTypeMap do
     orderedTypeList += !type !index
   end
-#--- Generate LLVM type declarations
-# Unsing forward type is allowed for pointers
+#--- Generate LLVM type declarations (using forward type is allowed for pointers)
   ioLLVMcode += llvmTitleComment (!"User Defined Types")
   for (type *) in orderedTypeList do
-    switch type.kind
-    case void :
-    case boolean :
-    case enumeration (*) :
-    case integer (* * * *) :
-    case structure (propertyList) :
-      ioLLVMcode += [type llvmTypeName] + " = type {"
-      for () in propertyList
-        do ioLLVMcode += [mType llvmTypeName]
-        between ioLLVMcode += ", "
+    if type.plmOriginalTypeName == type.plmAliasedTypeName then
+      switch type.kind
+      case void :
+      case boolean :
+      case enumeration (*) :
+      case integer (* * * *) :
+      case structure (propertyList) :
+        ioLLVMcode += [type llvmTypeName] + " = type {"
+        for () in propertyList
+          do ioLLVMcode += [mType llvmTypeName]
+          between ioLLVMcode += ", "
+        end
+        ioLLVMcode += "}\n"
+      case syncTool (propertyList) :
+        ioLLVMcode += [type llvmTypeName] + " = type {"
+        for () in propertyList
+          do ioLLVMcode += [mType llvmTypeName]
+          between ioLLVMcode += ", "
+        end
+        ioLLVMcode += "}\n"
+      case literalString : 
+      case staticInteger : 
+      case opaque (*) :
+      case arrayType (elementType arraySize) :
+        ioLLVMcode += [type llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
+      case dynamicArrayType (2*) :
+      case function (*) :
+      case pointer (unused pointee) :
       end
-      ioLLVMcode += "}\n"
-    case syncTool (propertyList) :
-      ioLLVMcode += [type llvmTypeName] + " = type {"
-      for () in propertyList
-        do ioLLVMcode += [mType llvmTypeName]
-        between ioLLVMcode += ", "
-      end
-      ioLLVMcode += "}\n"
-    case literalString : 
-    case staticInteger : 
-    case opaque (*) :
-    case arrayType (elementType arraySize) :
-      ioLLVMcode += [type llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
-    case dynamicArrayType (2*) :
-    case function (*) :
-    case pointer (unused pointee) :
     end
   end
   ioLLVMcode += "\n"

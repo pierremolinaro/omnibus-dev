@@ -386,7 +386,7 @@ override method @structureDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:constructorMap
     !guardMap:guardMap
-    !typeAttributes:attributes
+    !attributes:attributes
     !plmOriginalTypeName:mStructureName
     !kind:.structure {!propertyList:propertyList}
     !plmAliasedTypeName:mStructureName
