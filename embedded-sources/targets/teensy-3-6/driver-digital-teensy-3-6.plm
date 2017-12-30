@@ -1,6 +1,6 @@
 //——————————————————————————————————————————————————————————————————————————————
 
-check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
+check target "teensy-3-6/unprivileged"
 
 //——————————————————————————————————————————————————————————————————————————————
   
@@ -277,15 +277,19 @@ driver digital > root {
       case OUTPUT :
         PORTC.PCR [5] = {PORTC.PCR !MUX:1}
         GPIOC.PDDR |= (1 << 5)
+ //       registerBitband (!setBit:5 !ofAddress:addressof (GPIOC.PDDR) !to:1)
       case OUTPUT_OPEN_COLLECTOR :
         PORTC.PCR [5] = {PORTC.PCR !MUX:1 !ODE:1}
         GPIOC.PDDR |= (1 << 5)
+     //   registerBitband (!setBit:5 !ofAddress:addressof (GPIOC.PDDR) !to:1)
       case INPUT :
         PORTC.PCR [5] = {PORTC.PCR !MUX:1}
         GPIOC.PDDR &= ~ (1 << 5)
+ //       registerBitband (!setBit:5 !ofAddress:addressof (GPIOC.PDDR) !to:0)
       case INPUT_PULLUP :
         PORTC.PCR [5] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        GPIOC.PDDR &= ~ (1 << 5)
+         GPIOC.PDDR &= ~ (1 << 5)
+    //    registerBitband (!setBit:5 !ofAddress:addressof (GPIOC.PDDR) !to:0)
       }
     case D14 : // PTD1
       switch mode {

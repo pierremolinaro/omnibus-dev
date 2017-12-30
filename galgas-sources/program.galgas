@@ -133,7 +133,7 @@ private proc compileProject
     for (targetLocation acceptedTargetList) in ast.mCheckTargetListAST do
       var accepted = false
       for (possibleTarget) in acceptedTargetList while not accepted do
-        accepted = possibleTarget.string != inTargetName
+        accepted = possibleTarget.string == inTargetName
       end
       if not accepted then
         error targetLocation : "invalid target"

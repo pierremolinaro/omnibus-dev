@@ -39,10 +39,11 @@ driver project ()
 
 typealias $dArray : [$uint8]
 
+typealias $T : $uint32
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $structWithARC {
-  public var unEntierQuelconque $uint32 = 0
+  public var unEntierQuelconque $uint32 = $T ()
   public var donnée = $dArray ()
 }
 
@@ -185,6 +186,8 @@ system section externalSection (?in: inData $dArray) {
   var xxxx = [$bool] ()
   xxxx.append (!yes)
   var lg = xxxx.length ()
+  let u $T = 90
+  lg += u
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

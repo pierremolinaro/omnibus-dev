@@ -878,7 +878,7 @@ typeComparisonResult cPtr_newTypeDeclaration::dynamicObjectCompare (const acPtr_
   const cPtr_newTypeDeclaration * p = (const cPtr_newTypeDeclaration *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_newTypeDeclaration) ;
   if (kOperandEqual == result) {
-    result = mProperty_mNewTypeName.objectCompare (p->mProperty_mNewTypeName) ;
+    result = mProperty_mAliasTypeName.objectCompare (p->mProperty_mAliasTypeName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mOriginalTypeName.objectCompare (p->mProperty_mOriginalTypeName) ;
@@ -928,32 +928,32 @@ GALGAS_abstractDeclarationAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_newTypeDeclaration GALGAS_newTypeDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mNewTypeName,
+GALGAS_newTypeDeclaration GALGAS_newTypeDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mAliasTypeName,
                                                                       const GALGAS_lstring & inAttribute_mOriginalTypeName
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_newTypeDeclaration result ;
-  if (inAttribute_mNewTypeName.isValid () && inAttribute_mOriginalTypeName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_newTypeDeclaration (inAttribute_mNewTypeName, inAttribute_mOriginalTypeName COMMA_THERE)) ;
+  if (inAttribute_mAliasTypeName.isValid () && inAttribute_mOriginalTypeName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_newTypeDeclaration (inAttribute_mAliasTypeName, inAttribute_mOriginalTypeName COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_newTypeDeclaration::getter_mNewTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_newTypeDeclaration::getter_mAliasTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_newTypeDeclaration * p = (const cPtr_newTypeDeclaration *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_newTypeDeclaration) ;
-    result = p->mProperty_mNewTypeName ;
+    result = p->mProperty_mAliasTypeName ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_newTypeDeclaration::getter_mNewTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mNewTypeName ;
+GALGAS_lstring cPtr_newTypeDeclaration::getter_mAliasTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAliasTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -978,11 +978,11 @@ GALGAS_lstring cPtr_newTypeDeclaration::getter_mOriginalTypeName (UNUSED_LOCATIO
 //                                     Pointer class for @newTypeDeclaration class                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_newTypeDeclaration::cPtr_newTypeDeclaration (const GALGAS_lstring & in_mNewTypeName,
+cPtr_newTypeDeclaration::cPtr_newTypeDeclaration (const GALGAS_lstring & in_mAliasTypeName,
                                                   const GALGAS_lstring & in_mOriginalTypeName
                                                   COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclarationAST (THERE),
-mProperty_mNewTypeName (in_mNewTypeName),
+mProperty_mAliasTypeName (in_mAliasTypeName),
 mProperty_mOriginalTypeName (in_mOriginalTypeName) {
 }
 
@@ -995,7 +995,7 @@ const C_galgas_type_descriptor * cPtr_newTypeDeclaration::classDescriptor (void)
 void cPtr_newTypeDeclaration::description (C_String & ioString,
                                            const int32_t inIndentation) const {
   ioString << "[@newTypeDeclaration:" ;
-  mProperty_mNewTypeName.description (ioString, inIndentation+1) ;
+  mProperty_mAliasTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mOriginalTypeName.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -1005,7 +1005,7 @@ void cPtr_newTypeDeclaration::description (C_String & ioString,
 
 acPtr_class * cPtr_newTypeDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_newTypeDeclaration (mProperty_mNewTypeName, mProperty_mOriginalTypeName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_newTypeDeclaration (mProperty_mAliasTypeName, mProperty_mOriginalTypeName COMMA_THERE)) ;
   return ptr ;
 }
 
