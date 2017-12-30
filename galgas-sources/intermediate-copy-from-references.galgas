@@ -73,7 +73,7 @@ override method @copyFromReferencesIR enterAccessibleEntities
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds unused ioGenerationAdds {
+method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGenerationAdds {
   let typeName = [self llvmTypeName]
   if [attributes generateAssignmentRoutine] then
     let arcAssignmentList = [self arcList !{}]
@@ -84,25 +84,27 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds unuse
     ioLLVMCode += ";--- Handle ARC properties\n"
     for (propertyName propertyType indexPath) in arcAssignmentList do
       let propertyTypeLLVMName = [propertyType llvmTypeName]
-      let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation]
+      let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+      ioGenerationAdds.mUniqueIndex ++
       ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inSource, i32 0"
       for (idx) in indexPath do
         ioLLVMCode += ", i32 " + idx
       end
       ioLLVMCode += " ; " + propertyName + "\n"
-      let llvmLoadedVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ".loaded"
+      let llvmLoadedVarName = llvmVarName + ".loaded"
       ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
       ioLLVMCode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
     end
     for (propertyName propertyType indexPath) in arcAssignmentList do
-      let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation]
+      let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+      ioGenerationAdds.mUniqueIndex ++
       ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inTarget, i32 0"
       for (idx) in indexPath do
         ioLLVMCode += ", i32 " + idx
       end
       ioLLVMCode += " ; " + propertyName + "\n"
       let propertyTypeLLVMName = [propertyType llvmTypeName]
-      let llvmLoadedVarName = "%arc.release." + [propertyName assemblerRepresentation] + ".loaded"
+      let llvmLoadedVarName = llvmVarName + ".loaded"
       ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
       ioLLVMCode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
     end

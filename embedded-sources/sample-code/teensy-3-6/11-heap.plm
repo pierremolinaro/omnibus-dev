@@ -60,7 +60,7 @@ task T1 priority 10 stackSize 512 {
   var échéance $uint32 = 0
   var freeRam $uint32 = 0 
   var start $uint32 = 0 
-  var end $uint32 = 0 
+  var maxAllocationParSeconde $uint32 = 0 
   var alloc $uint32 = .max 
   var current $uint32 = .max 
 
@@ -69,11 +69,11 @@ task T1 priority 10 stackSize 512 {
     lcd.goto (!line:1 !column:0)
     lcd.print (!string:"Start:")
     lcd.goto (!line:2 !column:0)
-    lcd.print (!string:"Addr:")
+    lcd.print (!string:"Max:")
   }
 
   on time.wait (!untilDeadline:self.échéance) {
-    self.échéance +%= 500
+    self.échéance +%= 1_000
     digital.toggle (!port:LED_L3)
     let freeRam = freeByteCount ()
     if self.freeRam ≠ freeRam {
@@ -87,13 +87,13 @@ task T1 priority 10 stackSize 512 {
       lcd.goto (!line:1 !column:6)
       lcd.print (!hex8:start)
     }
-    let end = heapAllocAddress ()
-    if self.end ≠ end {
-      self.end = end
-      lcd.goto (!line:2 !column:6)
-      lcd.print (!hex8:end)
-    }
     let alloc = totalAllocationObjectCount ()
+    let allocationParSecondes = alloc - self.alloc
+    if allocationParSecondes > self.maxAllocationParSeconde {
+      self.maxAllocationParSeconde = allocationParSecondes
+      lcd.goto (!line:2 !column:6)
+      lcd.print (!u32:allocationParSecondes !width:7)
+    }
     if self.alloc ≠ alloc {
       self.alloc = alloc
       lcd.goto (!line:3 !column:0)
