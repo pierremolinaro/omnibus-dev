@@ -117,39 +117,67 @@ override method @typeArrayDeclarationAST enterInContext
     error mSizeExpressionLocation : "array size expression is not static"
   else
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
-  #-------------------------------------------- Class method map : add "count" constructor
-    @classConstantMap classConstantMap = {}
-   [!?classConstantMap insertKey !.new {!"count" !mAnonymousArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
-  #-------------------------------------------- Property map
-    @propertyMap arrayTypePropertyMap = {}
-    [!?arrayTypePropertyMap insertKey # "count" property
-      !.new {!"count" !mAnonymousArrayTypeName.location}
-      !true # public
-      !.constantProperty {!value:.literalInteger {!type:staticIntegerType () !value:arraySize}}
-    ]
-  #-------------------------------------------- Constructor map
-    @constructorMap constructorMap = {}
-    [!?constructorMap insertKey !["(!repeated)" nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
-  #-------------------------------------------- Type attributes
-    @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine | .copyable
-  #-------------------------------------------- Enter in type map
-    let arrayType = @PLMType.new {
-      !propertyMap:arrayTypePropertyMap
-      !classConstantMap:classConstantMap
-      !constructorMap:constructorMap
-      !guardMap:{}
-      !attributes:typeAttributes
-      !plmOriginalTypeName:mAnonymousArrayTypeName
-      !kind:.arrayType {!elementType:elementType !size:arraySize}
-      !plmAliasedTypeName:mAnonymousArrayTypeName
-    }
-    [!?ioContext.mTypeMap insertType
-      !lkey:mAnonymousArrayTypeName
-      !type:arrayType
-      !index:[ioContext.mTypeMap count]
-    ]
-  #---------------- Add decorated declaration
-    ioDecoratedDeclarationList += !@decoratedTypeArrayDeclaration.new {!mAnonymousArrayTypeName !arraySize}
+  #-------------------------------------------- Original type name
+    let originalTypeName = @lstring.new {!"array." + elementType.plmOriginalTypeName + "." + arraySize !mAnonymousArrayTypeName}
+    if [ioContext.mTypeMap hasKey !originalTypeName] then
+      [ioContext.mTypeMap searchKey !lkey:originalTypeName ?type:var type ?1*]
+      type.plmAliasedTypeName = mAnonymousArrayTypeName
+      type.attributes = type.attributes - .generateAssignmentRoutine
+      [!?ioContext.mTypeMap insertType
+        !lkey:mAnonymousArrayTypeName
+        !type:type
+        !index:[ioContext.mTypeMap count]
+      ]
+    else
+    #-------------------------------------------- Class method map : add "count" constructor
+      @classConstantMap classConstantMap = {}
+     [!?classConstantMap insertKey !.new {!"count" !originalTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
+    #-------------------------------------------- Property map
+      @propertyMap arrayTypePropertyMap = {}
+      [!?arrayTypePropertyMap insertKey # "count" property
+        !.new {!"count" !originalTypeName.location}
+        !true # public
+        !.constantProperty {!value:.literalInteger {!type:staticIntegerType () !value:arraySize}}
+      ]
+    #-------------------------------------------- Constructor map
+      @constructorMap constructorMap = {}
+      [!?constructorMap insertKey !["(!repeated)" nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
+    #-------------------------------------------- Type attributes
+      @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine | .copyable
+    #-------------------------------------------- Enter in type map
+      let arrayType = @PLMType.new {
+        !propertyMap:arrayTypePropertyMap
+        !classConstantMap:classConstantMap
+        !constructorMap:constructorMap
+        !guardMap:{}
+        !attributes:typeAttributes
+        !plmOriginalTypeName:originalTypeName
+        !kind:.arrayType {!elementType:elementType !size:arraySize}
+        !plmAliasedTypeName:originalTypeName
+      }
+      [!?ioContext.mTypeMap insertType
+        !lkey:originalTypeName
+        !type:arrayType
+        !index:[ioContext.mTypeMap count]
+      ]
+      let aliasedArrayType = @PLMType.new {
+        !propertyMap:arrayTypePropertyMap
+        !classConstantMap:classConstantMap
+        !constructorMap:constructorMap
+        !guardMap:{}
+        !attributes:typeAttributes - .generateAssignmentRoutine
+        !plmOriginalTypeName:originalTypeName
+        !kind:.arrayType {!elementType:elementType !size:arraySize}
+        !plmAliasedTypeName:mAnonymousArrayTypeName
+      }
+      [!?ioContext.mTypeMap insertType
+        !lkey:mAnonymousArrayTypeName
+        !type:aliasedArrayType
+        !index:[ioContext.mTypeMap count]
+      ]
+    #---------------- Add decorated declaration
+      ioDecoratedDeclarationList += !@decoratedTypeArrayDeclaration.new {!originalTypeName !arraySize}
+    end
   end
 }
 
@@ -158,7 +186,7 @@ override method @typeArrayDeclarationAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedTypeArrayDeclaration : @abstractDecoratedDeclaration {
-  @lstring mAnonymousArrayTypeName
+  @lstring mOriginalArrayTypeName
   @uint mArraySize
 }
 
@@ -170,7 +198,7 @@ override method @decoratedTypeArrayDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #----------- Generate enumeration specific code
-  ioIntermediateCodeStruct.mGenerationListIR += !@arrayIR.new {!mAnonymousArrayTypeName !mArraySize}
+  ioIntermediateCodeStruct.mGenerationListIR += !@arrayIR.new {!mOriginalArrayTypeName !mArraySize}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -178,7 +206,7 @@ override method @decoratedTypeArrayDeclaration semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @arrayIR : @abstractGenerationIR {
-  @string mArrayTypePLMName
+  @string mOriginalArrayTypeName
   @bigint mArraySize
 }
 
@@ -186,13 +214,13 @@ class @arrayIR : @abstractGenerationIR {
 
 override method @arrayIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
   let routineMangledName = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!mArrayTypePLMName)
+    !llvmTypeStringFromPLMname (!mOriginalArrayTypeName)
     !["count" nowhere]
     !{}
   )
   let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
   ioLLVMcode += llvmTitleComment (!routineMangledName)
-  ioLLVMcode += "define internal i32  @" + routineLLVMName + " (%" + llvmTypeStringFromPLMname (!mArrayTypePLMName) + "* %inUnusedValue) nounwind {\n"
+  ioLLVMcode += "define internal i32  @" + routineLLVMName + " (%" + llvmTypeStringFromPLMname (!mOriginalArrayTypeName) + "* %inUnusedValue) nounwind {\n"
   ioLLVMcode += "  ret i32 " + mArraySize + "\n"
   ioLLVMcode += "}\n\n"
 }
