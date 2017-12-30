@@ -3263,7 +3263,7 @@ const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/un
   "  var \xC3""\xA9""ch\xC3""\xA9""ance $uint32 = 0\n"
   "  var freeRam $uint32 = 0 \n"
   "  var start $uint32 = 0 \n"
-  "  var end $uint32 = 0 \n"
+  "  var maxAllocationParSeconde $uint32 = 0 \n"
   "  var alloc $uint32 = .max \n"
   "  var current $uint32 = .max \n"
   "\n"
@@ -3272,11 +3272,11 @@ const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/un
   "    lcd.goto (!line:1 !column:0)\n"
   "    lcd.print (!string:\"Start:\")\n"
   "    lcd.goto (!line:2 !column:0)\n"
-  "    lcd.print (!string:\"Addr:\")\n"
+  "    lcd.print (!string:\"Max:\")\n"
   "  }\n"
   "\n"
   "  on time.wait (!untilDeadline:self.\xC3""\xA9""ch\xC3""\xA9""ance) {\n"
-  "    self.\xC3""\xA9""ch\xC3""\xA9""ance +%= 500\n"
+  "    self.\xC3""\xA9""ch\xC3""\xA9""ance +%= 1_000\n"
   "    digital.toggle (!port:LED_L3)\n"
   "    let freeRam = freeByteCount ()\n"
   "    if self.freeRam \xE2""\x89""\xA0"" freeRam {\n"
@@ -3290,13 +3290,13 @@ const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/un
   "      lcd.goto (!line:1 !column:6)\n"
   "      lcd.print (!hex8:start)\n"
   "    }\n"
-  "    let end = heapAllocAddress ()\n"
-  "    if self.end \xE2""\x89""\xA0"" end {\n"
-  "      self.end = end\n"
-  "      lcd.goto (!line:2 !column:6)\n"
-  "      lcd.print (!hex8:end)\n"
-  "    }\n"
   "    let alloc = totalAllocationObjectCount ()\n"
+  "    let allocationParSecondes = alloc - self.alloc\n"
+  "    if allocationParSecondes > self.maxAllocationParSeconde {\n"
+  "      self.maxAllocationParSeconde = allocationParSecondes\n"
+  "      lcd.goto (!line:2 !column:6)\n"
+  "      lcd.print (!u32:allocationParSecondes !width:7)\n"
+  "    }\n"
   "    if self.alloc \xE2""\x89""\xA0"" alloc {\n"
   "      self.alloc = alloc\n"
   "      lcd.goto (!line:3 !column:0)\n"
@@ -3396,7 +3396,7 @@ const cRegularFileWrapper gWrapperFile_25_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5606, // Text length
+  5746, // Text length
   gWrapperFileContent_25_embeddedSampleCode
 ) ;
 

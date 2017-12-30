@@ -165,7 +165,7 @@ method @PLMType generateRetain
 {
   let llvmTypeName = [self llvmTypeName]
   let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
-  if [self.attributes arc] then
+  if [self.kind isDynamicArrayType] then
     let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
@@ -197,7 +197,7 @@ method @PLMType generateInsulate
 {
   let llvmTypeName = [self llvmTypeName]
   let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
-  if [self.attributes arc] then
+  if [self.kind isDynamicArrayType] then
     let loadedVar = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
     let insulatedVar = "%temp." + [inPLMName assemblerRepresentation] + ".insulated." + ioGenerationAdds.mUniqueIndex   
     ioGenerationAdds.mUniqueIndex ++
@@ -234,7 +234,7 @@ method @PLMType generateRelease
 {
   let llvmTypeName = [self llvmTypeName]
   let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
-  if [self.attributes arc] then
+  if [self.kind isDynamicArrayType] then
     let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
@@ -351,13 +351,15 @@ list @arcAssignmentList {
 
 getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
   result = {}
-  if [kind isStructure] then
+  if [kind isDynamicArrayType] then
+    result += !"" !self !inPropertyIndexPath
+  elsif [kind isStructure] then
     [kind structure ?propertyList:let @propertyList propertyList]
     for (propertyName propertyType) in propertyList do (idx)
       let indexPath = inPropertyIndexPath + {!idx}
-      if [propertyType.attributes arc] then
-        result += !propertyName !propertyType !indexPath
-      end
+#      if [propertyType.attributes arc] then
+#        result += !propertyName !propertyType !indexPath
+#      end
       result += [propertyType arcList !indexPath]
     end
   end
