@@ -1901,6 +1901,7 @@ class GALGAS_constructorValue : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
+    kEnum_null,
     kEnum_simple,
     kEnum_structure,
     kEnum_arrayValue
@@ -1934,6 +1935,8 @@ class GALGAS_constructorValue : public AC_GALGAS_root {
                                                                         const class GALGAS_uint & inOperand1
                                                                         COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_constructorValue constructor_null (LOCATION_ARGS) ;
+
   public : static class GALGAS_constructorValue constructor_simple (const class GALGAS_bigint & inOperand0
                                                                     COMMA_LOCATION_ARGS) ;
 
@@ -1966,6 +1969,8 @@ class GALGAS_constructorValue : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNull (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSimple (LOCATION_ARGS) const ;
 

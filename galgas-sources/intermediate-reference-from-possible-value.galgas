@@ -15,6 +15,8 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
     performStore = true
   case literalInteger  (* *) :
     performStore = true
+  case nullValue (*) :
+    performStore = true
   case llvmStructureValue (* *) :
     performStore = true
   case llvmArrayValue (* *) :
