@@ -646,26 +646,6 @@ class GALGAS_bool extensionGetter_copyable (const class GALGAS_PLMType & inObjec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Extension getter '@unifiedTypeMap-proxy arc' (as function)                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool extensionGetter_arc (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
-                                       class C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Extension getter '@PLMType arc' (as function)                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool extensionGetter_arc (const class GALGAS_PLMType & inObject,
-                                       class C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                     Extension method '@PLMType generateRetain'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

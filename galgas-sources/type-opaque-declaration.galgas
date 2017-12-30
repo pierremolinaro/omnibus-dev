@@ -112,15 +112,9 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
       else
         opaqueTypeAttributes = opaqueTypeAttributes | .copyable
       end
-    elsif attribute.string == arcAttribute () then
-      if [opaqueTypeAttributes arc] then
-        error attribute : "duplicated attribute"
-      else
-        opaqueTypeAttributes = opaqueTypeAttributes | .arc
-      end
     else
       error attribute
-      : "only @" + copyableAttribute () + ", @" + arcAttribute () + " and @" + instantiableAttribute ()
+      : "only @" + copyableAttribute () + " and @" + instantiableAttribute ()
         + " attributes are allowed here"
     end
   end

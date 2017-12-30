@@ -157,7 +157,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     @constructorMap constructorMap = {}
     [!?constructorMap insertKey !["()" nowhere] !{} !.null]
   #-------------------------------------------- Type attributes
-    let @PLMTypeAttributes typeAttributes = .instanciable | .copyable | .arc
+    let @PLMTypeAttributes typeAttributes = .instanciable | .copyable | .generateAssignmentRoutine
   #-------------------------------------------- Enter in type map
     let arrayType = @PLMType.new {
       !propertyMap:propertyMap
@@ -179,7 +179,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !classConstantMap:{}
       !constructorMap:constructorMap
       !guardMap:{}
-      !attributes:typeAttributes - .generateAssignmentRoutine - .arc
+      !attributes:typeAttributes - .generateAssignmentRoutine
       !plmOriginalTypeName:originalTypeName
       !kind:.dynamicArrayType {!elementType:elementType !ptrSize:ioContext.mTargetParameters.mPointerSize}
       !plmAliasedTypeName:mAnonymousDynamicArrayTypeName
