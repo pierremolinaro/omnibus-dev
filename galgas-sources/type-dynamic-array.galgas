@@ -142,7 +142,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   ]
 #-------------------------------------------- Constructor map
   @constructorMap constructorMap = {}
-  [!?constructorMap insertKey !["()" nowhere] !{} !.null]
+  [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
 #-------------------------------------------- Type attributes
   let @PLMTypeAttributes typeAttributes = .instanciable | .copyable | .arc
 #-------------------------------------------- Enter in type map
@@ -164,7 +164,6 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   ]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedTypeDynamicArrayDeclaration.new {
-    ![arrayTypeProxy type]
     !mAnonymousDynamicArrayTypeName
     !ioContext.mTargetParameters.mPointerSize
     !elementType
@@ -176,7 +175,6 @@ override method @typeDynamicArrayDeclarationAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedTypeDynamicArrayDeclaration : @abstractDecoratedDeclaration {
-  @PLMType mDynamicArrayType
   @string mAnonymousDynamicArrayTypeName
   @bigint mPtrSize
   @PLMType mElementType
@@ -191,7 +189,6 @@ override method @decoratedTypeDynamicArrayDeclaration semanticAnalysis
 {
 #----------- Generate enumeration specific code
   ioIntermediateCodeStruct.mGenerationListIR += !@dynamicArrayIR.new {
-    !mDynamicArrayType
     !mAnonymousDynamicArrayTypeName
     !mPtrSize
     !mElementType
@@ -203,7 +200,6 @@ override method @decoratedTypeDynamicArrayDeclaration semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @dynamicArrayIR : @abstractGenerationIR {
-  @PLMType mDynamicArrayType
   @string mAnonymousDynamicArrayTypeName
   @uint mPtrSize
   @PLMType mElementType
@@ -216,8 +212,8 @@ override method @dynamicArrayIR generateLLVMcode
   ?!@generationAdds ioGenerationAdds
 {
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
+  let pointer = "i" + mPtrSize
   let elementLLVMTypeName = [mElementType llvmTypeName]
-  let arrayLLVMTypeName = [mDynamicArrayType llvmTypeName]
 #---------- Method 'removeAll()'
   let removeAllRoutineMangledName = routineMangledNameFromAST (
     !llvmTypeStringFromPLMname (!mAnonymousDynamicArrayTypeName)
@@ -226,11 +222,10 @@ override method @dynamicArrayIR generateLLVMcode
   )
   let removeAllRoutineLLVMName = llvmNameForFunction (!removeAllRoutineMangledName.string)
   ioLLVMcode += llvmTitleComment (!removeAllRoutineMangledName)
-  ioLLVMcode += "define internal void @" + removeAllRoutineLLVMName + " (" + arrayLLVMTypeName + "* %ioArray)" + llvmAttributeFunction () + "{\n"
-  ioLLVMcode += "  %buffer.pointer = load " + arrayLLVMTypeName + ", " + arrayLLVMTypeName + "* %ioArray\n"
-  ioLLVMcode += "  %ptr8 = bitcast " + arrayLLVMTypeName + " %buffer.pointer to %ptrtype\n"
-  ioLLVMcode += "  call void @arc.release (%ptrtype %ptr8, void (%ptrtype)* " + [mElementType deinitFunctionLLVMName] + ")\n"
-  ioLLVMcode += "  store " + arrayLLVMTypeName + " null, " + arrayLLVMTypeName + "* %ioArray\n"
+  ioLLVMcode += "define internal void @" + removeAllRoutineLLVMName + " (" + pointer + "* %ioArray)" + llvmAttributeFunction () + "{\n"
+  ioLLVMcode += "  %buffer.pointer = load " + pointer + ", " + pointer + "* %ioArray\n"
+  ioLLVMcode += "  call void @arc.release (" + pointer + " %buffer.pointer)\n"
+  ioLLVMcode += "  store " + pointer + " 0, " + pointer + "* %ioArray\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 #---------- Method 'length()'
@@ -241,10 +236,9 @@ override method @dynamicArrayIR generateLLVMcode
   )
   let lengthRoutineLLVMName = llvmNameForFunction (!lengthRoutineMangledName.string)
   ioLLVMcode += llvmTitleComment (!lengthRoutineMangledName)
-  ioLLVMcode += "define internal i32 @" + lengthRoutineLLVMName + " (" + arrayLLVMTypeName + "* %ioArray)" + llvmAttributeFunction () + "{\n"
-  ioLLVMcode += "  %buffer.pointer = load " + arrayLLVMTypeName + ", " + arrayLLVMTypeName + "* %ioArray\n"
-  ioLLVMcode += "  %ptr8 = bitcast " + arrayLLVMTypeName + " %buffer.pointer to %ptrtype\n"
-  ioLLVMcode += "  %length = call i32 @arc.length (%ptrtype %ptr8)\n"
+  ioLLVMcode += "define internal i32 @" + lengthRoutineLLVMName + " (" + pointer + "* %ioArray)" + llvmAttributeFunction () + "{\n"
+  ioLLVMcode += "  %buffer.pointer = load " + pointer + ", " + pointer + "* %ioArray\n"
+  ioLLVMcode += "  %length = call i32 @arc.length (" + pointer + " %buffer.pointer)\n"
   ioLLVMcode += "  ret i32 %length\n"
   ioLLVMcode += "}\n\n"
 #---------- Method 'insert(?:?atIndex:)'
@@ -267,12 +261,12 @@ override method @dynamicArrayIR generateLLVMcode
   let insertRoutineLLVMName = llvmNameForFunction (!insertRoutineMangledName.string)
   ioLLVMcode += llvmTitleComment (!insertRoutineMangledName)
   ioLLVMcode += "define internal void @" + insertRoutineLLVMName + " ("
-  ioLLVMcode += arrayLLVMTypeName + "* %ioArray"
+  ioLLVMcode += pointer + "* %ioArray"
   ioLLVMcode += ", " + elementLLVMTypeName + " %inValue"
   ioLLVMcode += ", i32 %inIndex"
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += ";--- Inserted element pointer\n"
-  ioLLVMcode += "  %insert.address.ptr = alloca %ptrtype\n"
+  ioLLVMcode += "  %insert.address = alloca " + pointer + "\n"
   ioLLVMcode += ";--- value pointer\n"
   ioLLVMcode += "  %value.pointer = alloca " + elementLLVMTypeName + "\n"
   ioLLVMcode += "  store " + elementLLVMTypeName + " %inValue, " + elementLLVMTypeName + "* %value.pointer\n"
@@ -280,17 +274,16 @@ override method @dynamicArrayIR generateLLVMcode
   ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + elementLLVMTypeName + ", " + elementLLVMTypeName + "* null, i32 1\n"
   ioLLVMcode += "  %element.byte.size = ptrtoint " + elementLLVMTypeName + "* %sizeAsPtr to i32\n"
   ioLLVMcode += ";--- Get inserted element pointer\n"
-  ioLLVMcode += "  %current.buffer.pointer = load " + arrayLLVMTypeName + ", " + arrayLLVMTypeName + "* %ioArray\n"
-  ioLLVMcode += "  %current.ptr8 = bitcast " + arrayLLVMTypeName + " %current.buffer.pointer to %ptrtype\n"
-  ioLLVMcode += "  %new.ptr8 = call %ptrtype @arc.insert.at.index (%ptrtype %current.ptr8, i32 %inIndex, i32 %element.byte.size, %ptrtype* %insert.address.ptr)\n"
+  ioLLVMcode += "  %current.buffer.pointer = load " + pointer + ", " + pointer + "* %ioArray\n"
+  ioLLVMcode += "  %new.buffer.pointer = call " + pointer + " @arc.insert.at.index "
+             + "(" + pointer + " %current.buffer.pointer, i32 %inIndex, i32 %element.byte.size, "
+             + pointer + "* %insert.address)\n"
   ioLLVMcode += ";--- Perform copy\n"
-  ioLLVMcode += "  %insert.address = load %ptrtype, %ptrtype* %insert.address.ptr\n"
-  ioLLVMcode += "  %typed.insert.address = bitcast %ptrtype %insert.address to " + elementLLVMTypeName + "*\n"
+  ioLLVMcode += "  %typed.insert.address = bitcast " + pointer + "* %insert.address to " + elementLLVMTypeName + "*\n"
   ioLLVMcode += "  call void @plm.assign." + [mElementType.plmUserTypeName identifierRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"
-  ioLLVMcode += "  %new.buffer.pointer = bitcast %ptrtype %new.ptr8 to " + arrayLLVMTypeName + "\n"
-  ioLLVMcode += "  store " + arrayLLVMTypeName + " %new.buffer.pointer, " + arrayLLVMTypeName + "* %ioArray\n"
+  ioLLVMcode += "  store " + pointer + " %new.buffer.pointer, " + pointer + "* %ioArray\n"
   ioLLVMcode += ";--- Return\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
@@ -309,25 +302,16 @@ override method @dynamicArrayIR generateLLVMcode
   var routineLLVMName = llvmNameForFunction (!routineMangledName.string)
   ioLLVMcode += llvmTitleComment (!routineMangledName)
   ioLLVMcode += "define internal void @" + routineLLVMName + " ("
-  ioLLVMcode += arrayLLVMTypeName + "* %ioArray"
+  ioLLVMcode += pointer + "* %ioArray"
   ioLLVMcode += ", " + elementLLVMTypeName + " %inValue"
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += ";--- Get buffer length\n"
-  ioLLVMcode += "  %buffer.pointer = load " + arrayLLVMTypeName + ", " + arrayLLVMTypeName + "* %ioArray\n"
-  ioLLVMcode += "  %current.ptr8 = bitcast " + arrayLLVMTypeName + " %buffer.pointer to %ptrtype\n"
-  ioLLVMcode += "  %current.buffer.length = call i32 @arc.length (%ptrtype %current.ptr8)\n"
+  ioLLVMcode += "  %current.buffer.pointer = load " + pointer + ", " + pointer + "* %ioArray\n"
+  ioLLVMcode += "  %current.buffer.length = call " + pointer + " @arc.length (" + pointer + " %current.buffer.pointer)\n"
   ioLLVMcode += ";--- Insert\n"
   ioLLVMcode += "  call void @" + insertRoutineLLVMName
-             + "(" + arrayLLVMTypeName + "* %ioArray, " + elementLLVMTypeName + " %inValue, i32 %current.buffer.length)\n"
+             + "(" + pointer + "* %ioArray, " + elementLLVMTypeName + " %inValue, i32 %current.buffer.length)\n"
   ioLLVMcode += ";--- Return\n"
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-#---------- denit
-  let deinitName = [mDynamicArrayType deinitFunctionLLVMName]
-  ioLLVMcode += llvmTitleComment (!deinitName)
-  ioLLVMcode += "define internal void " + deinitName + " (" + [mDynamicArrayType llvmTypeName] + " %inPointerAddress) nounwind {\n"
-  ioLLVMcode += "  %byte.ptr = bitcast " + [mDynamicArrayType llvmTypeName] + " %inPointerAddress to %ptrtype\n"
-  ioLLVMcode += "  call void @arc.release (%ptrtype %byte.ptr, void (%ptrtype)* " + [mElementType deinitFunctionLLVMName] + ")\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }

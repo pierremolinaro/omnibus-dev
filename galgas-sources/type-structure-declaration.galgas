@@ -605,26 +605,12 @@ class @structureIR : @abstractGenerationIR {
 
 override method @structureIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
   let llvmTypeName = [mStructureType llvmTypeName]
-  let deinitName = [mStructureType deinitFunctionLLVMName]
+  let deinitName = "@deinit." + [[mStructureType plmImplementationTypeName] assemblerRepresentation]
   ioLLVMcode += llvmTitleComment (!deinitName)
-  ioLLVMcode += "define internal void " + deinitName + " (" + llvmTypeName + "* %inPointer) nounwind {\n"
-#  let arg = "ptr"
-#  ioLLVMcode += "  " + llvmNameForLocalVariable (!arg) + " = inttoptr i" + mPointerSize + " %inPointer to " + llvmTypeName + "*\n"
-  [mStructureType.kind structure ?propertyList:let propertyList]
-  for (propertyName propertyType) in propertyList do (idx)
-    if [propertyType deinitNeeded] then
-      let llvmVarName = "%property." + ioGenerationAdds.mUniqueIndex
-      ioGenerationAdds.mUniqueIndex ++
-      ioLLVMcode += ";--- deinit '" + propertyName + "' property\n"
-      ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* %inPointer, i32 0, i32 " + idx + " ; " + propertyName + "\n"
-      let propertyTypeLLVMName = [propertyType llvmTypeName]
-#      let llvmLoadedVarName = llvmVarName + ".loaded"
-#      ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      let deinitName = [propertyType deinitFunctionLLVMName]
-      ioLLVMcode += "  call void " + deinitName + " (" + propertyTypeLLVMName + "* " + llvmVarName + ")\n"
-    end
-  end
-  ioLLVMcode += ";---\n"
+  ioLLVMcode += "define internal void " + deinitName + " (i" + mPointerSize + " %inPointer) nounwind {\n"
+  let arg = "ptr"
+  ioLLVMcode += "  " + llvmNameForLocalVariable (!arg) + " = inttoptr i" + mPointerSize + " %inPointer to " + llvmTypeName + "*\n"
+  [mStructureType generateRelease !arg !?ioLLVMcode !?ioGenerationAdds]
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }

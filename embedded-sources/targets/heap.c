@@ -115,9 +115,8 @@ unsigned freeListCount (void) {
 
 typedef struct {
   unsigned short mBlockSizeIndex ;
-  unsigned short mReferenceCount ;
   unsigned short mLength ;
-  unsigned short mElementSize ;
+  unsigned mReferenceCount ;
   unsigned char mBuffer8 [] ;
 } DataBufferHeaderType ;
 
@@ -207,7 +206,6 @@ static DataBufferHeaderType * reallocBlock (DataBufferHeaderType * inPointer, co
     newBlock->mBuffer8 [i] = inPointer->mBuffer8 [i] ;
   }
   newBlock->mLength = inPointer->mLength ;
-  newBlock->mElementSize = inPointer->mElementSize ;
 //--- Free old block ?
   if (inPointer->mReferenceCount == 1) {
     memoryFree (inPointer) ;

@@ -97,6 +97,7 @@ scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
 #--- Compile PLM
 print MAGENTA() + BOLD () + "********** Compile PLM" + ENDC ()
+runCommand (["galgas", "../../../+plm.galgasProject"])
 runCommand (["python", "../../../makefile-macosx/build+release.py"])
 #--- Compile PLM sources
 for dirname, dirnames, filenames in os.walk (scriptDir):

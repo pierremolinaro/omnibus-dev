@@ -26,8 +26,6 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
   switch mSourceValue
   case null :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode NULL >>\n"
-  case nullValue (*) :
-    ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode NULL VALUE >>\n"
   case reference (* *) :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode reference >>\n"
   case llvmValue (* @string llvmName) :
