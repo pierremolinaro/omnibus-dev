@@ -137,9 +137,9 @@ class GALGAS_decoratedTypeArrayDeclaration : public GALGAS_abstractDecoratedDecl
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mAnonymousArrayTypeName (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOriginalArrayTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -160,11 +160,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTypeArrayD
 
 class cPtr_decoratedTypeArrayDeclaration : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mAnonymousArrayTypeName ;
+  public : GALGAS_lstring mProperty_mOriginalArrayTypeName ;
   public : GALGAS_uint mProperty_mArraySize ;
 
 //--- Constructor
-  public : cPtr_decoratedTypeArrayDeclaration (const GALGAS_lstring & in_mAnonymousArrayTypeName,
+  public : cPtr_decoratedTypeArrayDeclaration (const GALGAS_lstring & in_mOriginalArrayTypeName,
                                                const GALGAS_uint & in_mArraySize
                                                COMMA_LOCATION_ARGS) ;
 
@@ -172,7 +172,7 @@ class cPtr_decoratedTypeArrayDeclaration : public cPtr_abstractDecoratedDeclarat
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mAnonymousArrayTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOriginalArrayTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -229,7 +229,7 @@ class GALGAS_arrayIR : public GALGAS_abstractGenerationIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mArraySize (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mArrayTypePLMName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mOriginalArrayTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -250,11 +250,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_arrayIR ;
 
 class cPtr_arrayIR : public cPtr_abstractGenerationIR {
 //--- Attributes
-  public : GALGAS_string mProperty_mArrayTypePLMName ;
+  public : GALGAS_string mProperty_mOriginalArrayTypeName ;
   public : GALGAS_bigint mProperty_mArraySize ;
 
 //--- Constructor
-  public : cPtr_arrayIR (const GALGAS_string & in_mArrayTypePLMName,
+  public : cPtr_arrayIR (const GALGAS_string & in_mOriginalArrayTypeName,
                          const GALGAS_bigint & in_mArraySize
                          COMMA_LOCATION_ARGS) ;
 
@@ -262,7 +262,7 @@ class cPtr_arrayIR : public cPtr_abstractGenerationIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mArrayTypePLMName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mOriginalArrayTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mArraySize (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

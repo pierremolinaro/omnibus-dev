@@ -1290,7 +1290,7 @@ typeComparisonResult cPtr_decoratedTypeArrayDeclaration::dynamicObjectCompare (c
   const cPtr_decoratedTypeArrayDeclaration * p = (const cPtr_decoratedTypeArrayDeclaration *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_decoratedTypeArrayDeclaration) ;
   if (kOperandEqual == result) {
-    result = mProperty_mAnonymousArrayTypeName.objectCompare (p->mProperty_mAnonymousArrayTypeName) ;
+    result = mProperty_mOriginalArrayTypeName.objectCompare (p->mProperty_mOriginalArrayTypeName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mArraySize.objectCompare (p->mProperty_mArraySize) ;
@@ -1340,32 +1340,32 @@ GALGAS_abstractDecoratedDeclaration (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_decoratedTypeArrayDeclaration GALGAS_decoratedTypeArrayDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mAnonymousArrayTypeName,
+GALGAS_decoratedTypeArrayDeclaration GALGAS_decoratedTypeArrayDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mOriginalArrayTypeName,
                                                                                             const GALGAS_uint & inAttribute_mArraySize
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_decoratedTypeArrayDeclaration result ;
-  if (inAttribute_mAnonymousArrayTypeName.isValid () && inAttribute_mArraySize.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_decoratedTypeArrayDeclaration (inAttribute_mAnonymousArrayTypeName, inAttribute_mArraySize COMMA_THERE)) ;
+  if (inAttribute_mOriginalArrayTypeName.isValid () && inAttribute_mArraySize.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_decoratedTypeArrayDeclaration (inAttribute_mOriginalArrayTypeName, inAttribute_mArraySize COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_decoratedTypeArrayDeclaration::getter_mAnonymousArrayTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_decoratedTypeArrayDeclaration::getter_mOriginalArrayTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_decoratedTypeArrayDeclaration * p = (const cPtr_decoratedTypeArrayDeclaration *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_decoratedTypeArrayDeclaration) ;
-    result = p->mProperty_mAnonymousArrayTypeName ;
+    result = p->mProperty_mOriginalArrayTypeName ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_decoratedTypeArrayDeclaration::getter_mAnonymousArrayTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mAnonymousArrayTypeName ;
+GALGAS_lstring cPtr_decoratedTypeArrayDeclaration::getter_mOriginalArrayTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mOriginalArrayTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1390,11 +1390,11 @@ GALGAS_uint cPtr_decoratedTypeArrayDeclaration::getter_mArraySize (UNUSED_LOCATI
 //                               Pointer class for @decoratedTypeArrayDeclaration class                                *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_decoratedTypeArrayDeclaration::cPtr_decoratedTypeArrayDeclaration (const GALGAS_lstring & in_mAnonymousArrayTypeName,
+cPtr_decoratedTypeArrayDeclaration::cPtr_decoratedTypeArrayDeclaration (const GALGAS_lstring & in_mOriginalArrayTypeName,
                                                                         const GALGAS_uint & in_mArraySize
                                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractDecoratedDeclaration (THERE),
-mProperty_mAnonymousArrayTypeName (in_mAnonymousArrayTypeName),
+mProperty_mOriginalArrayTypeName (in_mOriginalArrayTypeName),
 mProperty_mArraySize (in_mArraySize) {
 }
 
@@ -1407,7 +1407,7 @@ const C_galgas_type_descriptor * cPtr_decoratedTypeArrayDeclaration::classDescri
 void cPtr_decoratedTypeArrayDeclaration::description (C_String & ioString,
                                                       const int32_t inIndentation) const {
   ioString << "[@decoratedTypeArrayDeclaration:" ;
-  mProperty_mAnonymousArrayTypeName.description (ioString, inIndentation+1) ;
+  mProperty_mOriginalArrayTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mArraySize.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -1417,7 +1417,7 @@ void cPtr_decoratedTypeArrayDeclaration::description (C_String & ioString,
 
 acPtr_class * cPtr_decoratedTypeArrayDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_decoratedTypeArrayDeclaration (mProperty_mAnonymousArrayTypeName, mProperty_mArraySize COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_decoratedTypeArrayDeclaration (mProperty_mOriginalArrayTypeName, mProperty_mArraySize COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -1474,7 +1474,7 @@ typeComparisonResult cPtr_arrayIR::dynamicObjectCompare (const acPtr_class * inO
   const cPtr_arrayIR * p = (const cPtr_arrayIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_arrayIR) ;
   if (kOperandEqual == result) {
-    result = mProperty_mArrayTypePLMName.objectCompare (p->mProperty_mArrayTypePLMName) ;
+    result = mProperty_mOriginalArrayTypeName.objectCompare (p->mProperty_mOriginalArrayTypeName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mArraySize.objectCompare (p->mProperty_mArraySize) ;
@@ -1524,32 +1524,32 @@ GALGAS_abstractGenerationIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_arrayIR GALGAS_arrayIR::constructor_new (const GALGAS_string & inAttribute_mArrayTypePLMName,
+GALGAS_arrayIR GALGAS_arrayIR::constructor_new (const GALGAS_string & inAttribute_mOriginalArrayTypeName,
                                                 const GALGAS_bigint & inAttribute_mArraySize
                                                 COMMA_LOCATION_ARGS) {
   GALGAS_arrayIR result ;
-  if (inAttribute_mArrayTypePLMName.isValid () && inAttribute_mArraySize.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_arrayIR (inAttribute_mArrayTypePLMName, inAttribute_mArraySize COMMA_THERE)) ;
+  if (inAttribute_mOriginalArrayTypeName.isValid () && inAttribute_mArraySize.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_arrayIR (inAttribute_mOriginalArrayTypeName, inAttribute_mArraySize COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_arrayIR::getter_mArrayTypePLMName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_arrayIR::getter_mOriginalArrayTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_arrayIR * p = (const cPtr_arrayIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_arrayIR) ;
-    result = p->mProperty_mArrayTypePLMName ;
+    result = p->mProperty_mOriginalArrayTypeName ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_arrayIR::getter_mArrayTypePLMName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mArrayTypePLMName ;
+GALGAS_string cPtr_arrayIR::getter_mOriginalArrayTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mOriginalArrayTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1574,11 +1574,11 @@ GALGAS_bigint cPtr_arrayIR::getter_mArraySize (UNUSED_LOCATION_ARGS) const {
 //                                          Pointer class for @arrayIR class                                           *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_arrayIR::cPtr_arrayIR (const GALGAS_string & in_mArrayTypePLMName,
+cPtr_arrayIR::cPtr_arrayIR (const GALGAS_string & in_mOriginalArrayTypeName,
                             const GALGAS_bigint & in_mArraySize
                             COMMA_LOCATION_ARGS) :
 cPtr_abstractGenerationIR (THERE),
-mProperty_mArrayTypePLMName (in_mArrayTypePLMName),
+mProperty_mOriginalArrayTypeName (in_mOriginalArrayTypeName),
 mProperty_mArraySize (in_mArraySize) {
 }
 
@@ -1591,7 +1591,7 @@ const C_galgas_type_descriptor * cPtr_arrayIR::classDescriptor (void) const {
 void cPtr_arrayIR::description (C_String & ioString,
                                 const int32_t inIndentation) const {
   ioString << "[@arrayIR:" ;
-  mProperty_mArrayTypePLMName.description (ioString, inIndentation+1) ;
+  mProperty_mOriginalArrayTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mArraySize.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -1601,7 +1601,7 @@ void cPtr_arrayIR::description (C_String & ioString,
 
 acPtr_class * cPtr_arrayIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_arrayIR (mProperty_mArrayTypePLMName, mProperty_mArraySize COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_arrayIR (mProperty_mOriginalArrayTypeName, mProperty_mArraySize COMMA_THERE)) ;
   return ptr ;
 }
 
