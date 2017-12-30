@@ -1,64 +1,31 @@
 
-#setter @instructionListIR generateRelease ?let @PLMType inType ?let @lstring in_plmName {
-#  self += !@releaseIR.new {!inType !in_plmName}
-#}
-
-setter @instructionListIR generateDeinit ?let @PLMType inType ?let @lstring in_plmName {
-  if [inType deinitNeeded] then
-    self += !@deinitIR.new {!inType !in_plmName}
-  end
+setter @instructionListIR generateRelease ?let @PLMType inType ?let @lstring in_plmName {
+  self += !@releaseIR.new {!inType !in_plmName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @deinitIR : @abstractInstructionIR {
+class @releaseIR : @abstractInstructionIR {
   @PLMType mType
   @lstring mPLMName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @deinitIR llvmInstructionCode
+override method @releaseIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?!@generationAdds ioGenerationAdds
 {
-  let deinitName = [mType deinitFunctionLLVMName]
-  ioLLVMcode += ";--- deinit '" + mPLMName + "' local variable\n"
-  ioLLVMcode += "  call void " + deinitName + " (" + [mType llvmTypeName] + "* " + llvmNameForLocalVariable (!mPLMName) + ")\n"
+  [mType generateRelease !mPLMName !?ioLLVMcode !?ioGenerationAdds]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @deinitIR enterAccessibleEntities
+override method @releaseIR enterAccessibleEntities
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#class @releaseIR : @abstractInstructionIR {
-#  @PLMType mType
-#  @lstring mPLMName
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#override method @releaseIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
-#  [mType generateTypeRelease !mPLMName !?ioLLVMcode !?ioGenerationAdds]
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#override method @releaseIR enterAccessibleEntities
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -4,7 +4,7 @@
 
 void retain (unsigned inPointer) asm ("arc.retain") ;
 
-void release (unsigned inPointer, void (*deinitFunction) (unsigned inPointer)) asm ("arc.release") ;
+void release (unsigned inPointer) asm ("arc.release") ;
 
 unsigned insulate (unsigned inPointer) asm ("arc.insulate") ;
 
@@ -24,19 +24,12 @@ void retain (unsigned inPointer) {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-void release (unsigned inPointer, void (*deinitFunction) (unsigned inPointer)) {
+void release (unsigned inPointer) {
   if (inPointer != 0) {
     DataBufferHeaderType * p = (DataBufferHeaderType *) inPointer ;
     if (p->mReferenceCount > 1) {
       p->mReferenceCount -= 1 ;
     }else{
-      if (deinitFunction != 0) {
-        unsigned elementPtr = (unsigned) & p->mBuffer8 [0] ;
-        for (unsigned i=0 ; i<p->mLength ; i++) {
-//          deinitFunction (elementPtr) ;
-          elementPtr += p->mElementSize ;
-        }
-      }
       memoryFree (p) ;
     }
   }
@@ -68,7 +61,6 @@ unsigned insertAtIndex (unsigned inPointer, unsigned inIndex, unsigned inElement
   DataBufferHeaderType * ptr = (DataBufferHeaderType *) inPointer ;
   if (inPointer == 0) {
     ptr = memoryAlloc (blockSizeIndexForSize (inElementSize)) ;
-    ptr->mElementSize = inElementSize ;
   }else{
     const unsigned currentLength = bufferLength (inPointer) ;
     const unsigned requiredSize = (currentLength + 1) * inElementSize ;

@@ -2401,9 +2401,6 @@ typeComparisonResult cPtr_dynamicArrayIR::dynamicObjectCompare (const acPtr_clas
   const cPtr_dynamicArrayIR * p = (const cPtr_dynamicArrayIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_dynamicArrayIR) ;
   if (kOperandEqual == result) {
-    result = mProperty_mDynamicArrayType.objectCompare (p->mProperty_mDynamicArrayType) ;
-  }
-  if (kOperandEqual == result) {
     result = mProperty_mAnonymousDynamicArrayTypeName.objectCompare (p->mProperty_mAnonymousDynamicArrayTypeName) ;
   }
   if (kOperandEqual == result) {
@@ -2449,34 +2446,15 @@ GALGAS_abstractGenerationIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_dynamicArrayIR GALGAS_dynamicArrayIR::constructor_new (const GALGAS_PLMType & inAttribute_mDynamicArrayType,
-                                                              const GALGAS_string & inAttribute_mAnonymousDynamicArrayTypeName,
+GALGAS_dynamicArrayIR GALGAS_dynamicArrayIR::constructor_new (const GALGAS_string & inAttribute_mAnonymousDynamicArrayTypeName,
                                                               const GALGAS_uint & inAttribute_mPtrSize,
                                                               const GALGAS_PLMType & inAttribute_mElementType
                                                               COMMA_LOCATION_ARGS) {
   GALGAS_dynamicArrayIR result ;
-  if (inAttribute_mDynamicArrayType.isValid () && inAttribute_mAnonymousDynamicArrayTypeName.isValid () && inAttribute_mPtrSize.isValid () && inAttribute_mElementType.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_dynamicArrayIR (inAttribute_mDynamicArrayType, inAttribute_mAnonymousDynamicArrayTypeName, inAttribute_mPtrSize, inAttribute_mElementType COMMA_THERE)) ;
+  if (inAttribute_mAnonymousDynamicArrayTypeName.isValid () && inAttribute_mPtrSize.isValid () && inAttribute_mElementType.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_dynamicArrayIR (inAttribute_mAnonymousDynamicArrayTypeName, inAttribute_mPtrSize, inAttribute_mElementType COMMA_THERE)) ;
   }
   return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType GALGAS_dynamicArrayIR::getter_mDynamicArrayType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_PLMType result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_dynamicArrayIR * p = (const cPtr_dynamicArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_dynamicArrayIR) ;
-    result = p->mProperty_mDynamicArrayType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType cPtr_dynamicArrayIR::getter_mDynamicArrayType (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mDynamicArrayType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2537,13 +2515,11 @@ GALGAS_PLMType cPtr_dynamicArrayIR::getter_mElementType (UNUSED_LOCATION_ARGS) c
 //                                       Pointer class for @dynamicArrayIR class                                       *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_dynamicArrayIR::cPtr_dynamicArrayIR (const GALGAS_PLMType & in_mDynamicArrayType,
-                                          const GALGAS_string & in_mAnonymousDynamicArrayTypeName,
+cPtr_dynamicArrayIR::cPtr_dynamicArrayIR (const GALGAS_string & in_mAnonymousDynamicArrayTypeName,
                                           const GALGAS_uint & in_mPtrSize,
                                           const GALGAS_PLMType & in_mElementType
                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractGenerationIR (THERE),
-mProperty_mDynamicArrayType (in_mDynamicArrayType),
 mProperty_mAnonymousDynamicArrayTypeName (in_mAnonymousDynamicArrayTypeName),
 mProperty_mPtrSize (in_mPtrSize),
 mProperty_mElementType (in_mElementType) {
@@ -2558,8 +2534,6 @@ const C_galgas_type_descriptor * cPtr_dynamicArrayIR::classDescriptor (void) con
 void cPtr_dynamicArrayIR::description (C_String & ioString,
                                        const int32_t inIndentation) const {
   ioString << "[@dynamicArrayIR:" ;
-  mProperty_mDynamicArrayType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
   mProperty_mAnonymousDynamicArrayTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mPtrSize.description (ioString, inIndentation+1) ;
@@ -2572,7 +2546,7 @@ void cPtr_dynamicArrayIR::description (C_String & ioString,
 
 acPtr_class * cPtr_dynamicArrayIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_dynamicArrayIR (mProperty_mDynamicArrayType, mProperty_mAnonymousDynamicArrayTypeName, mProperty_mPtrSize, mProperty_mElementType COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_dynamicArrayIR (mProperty_mAnonymousDynamicArrayTypeName, mProperty_mPtrSize, mProperty_mElementType COMMA_THERE)) ;
   return ptr ;
 }
 

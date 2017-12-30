@@ -8,8 +8,6 @@ setter @instructionListIR appendLoadWhenReference
   switch inSource
   case null :
     error .nowhere : "<<@instructionListIR appendLoadWhenReference null>>" : outResultingValue
-  case nullValue (*) :
-    outResultingValue = inSource
   case reference (@PLMType type llvmName) :
     getNewTempValue (!type !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromReference !outResultingValue !llvmName]

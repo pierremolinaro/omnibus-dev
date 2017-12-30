@@ -7,9 +7,7 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
 {
   @bool performStore
   switch ioObjectIR
-  case null :
-    performStore = false
-  case nullValue (*) :
+  case null : # Do nothing
     performStore = false
   case reference (* *) : # Already a reference: do nothing
     performStore = false
