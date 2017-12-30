@@ -280,8 +280,9 @@ method @allocaList generateAllocaList ?!@string ioLLVMcode {
   end
 #--- Init ARC variables
   for (variable type formalInputArgument) in self do
-    if [type.attributes arc] && not formalInputArgument then
-      ioLLVMcode += "  store " + [type llvmTypeName] + " 0, " + [type llvmTypeName] + "* " + variable + " ; init ARC value\n"
+    if [type.kind isDynamicArrayType] && not formalInputArgument then
+      ioLLVMcode += ";--- init dynamic array type '" + variable + "'\n"
+      ioLLVMcode += "  store " + [type llvmTypeName] + " null, " + [type llvmTypeName] + "* " + variable + " ; init ARC value\n"
     end
   end
 }

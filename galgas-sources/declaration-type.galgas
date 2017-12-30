@@ -86,7 +86,7 @@ override method @newTypeDeclaration enterInContext
   [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type ?1*]
 #---------- Set new type name
   type.plmAliasedTypeName = mNewTypeName.string
-  type.attributes = (type.attributes - .generateAssignmentRoutine) - .arc
+  type.attributes = type.attributes - .generateAssignmentRoutine
 #---------- Enter in type map
   [!?ioContext.mTypeMap insertType !lkey:mNewTypeName !type:type !index:[ioContext.mTypeMap count]]
 #---------- Enter infix operators

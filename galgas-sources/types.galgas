@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 boolset @PLMTypeAttributes {
-  instanciable, equatable, copyable, generateAssignmentRoutine, arc
+  instanciable, equatable, copyable, generateAssignmentRoutine
 }
 
 #·······················································································································
@@ -142,18 +142,6 @@ getter @unifiedTypeMap-proxy copyable -> @bool {
 
 getter @PLMType copyable -> @bool {
   result = [attributes copyable]
-}
-
-#·······················································································································
-
-getter @unifiedTypeMap-proxy arc -> @bool {
-  result = [[self type] arc]
-}
-
-#·······················································································································
-
-getter @PLMType arc -> @bool {
-  result = [attributes arc]
 }
 
 #·······················································································································
@@ -357,9 +345,6 @@ getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList
     [kind structure ?propertyList:let @propertyList propertyList]
     for (propertyName propertyType) in propertyList do (idx)
       let indexPath = inPropertyIndexPath + {!idx}
-#      if [propertyType.attributes arc] then
-#        result += !propertyName !propertyType !indexPath
-#      end
       result += [propertyType arcList !indexPath]
     end
   end
@@ -368,7 +353,7 @@ getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList
 #·······················································································································
 
 getter @PLMType deinitNeeded -> @bool {
-  result = [attributes arc]
+  result = [kind isDynamicArrayType]
   if [kind isStructure] then
     [kind structure ?propertyList:let @propertyList propertyList]
     for (propertyName propertyType) in propertyList while not result do

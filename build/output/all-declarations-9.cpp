@@ -1345,51 +1345,40 @@ static void extensionMethod_typeOpaqueDefinitionDeclaration_enterInContext (cons
           var_opaqueTypeAttributes_4957 = var_opaqueTypeAttributes_4957.operator_or (GALGAS_PLMTypeAttributes::constructor_copyable (SOURCE_FILE ("type-opaque-declaration.galgas", 113)) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 113)) ;
         }
       }else if (kBoolFalse == test_3) {
-        const enumGalgasBool test_6 = GALGAS_bool (kIsEqual, enumerator_5001.current_mValue (HERE).getter_string (HERE).objectCompare (function_arcAttribute (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 115)))).boolEnum () ;
-        if (kBoolTrue == test_6) {
-          const enumGalgasBool test_7 = var_opaqueTypeAttributes_4957.getter_arc (SOURCE_FILE ("type-opaque-declaration.galgas", 116)).boolEnum () ;
-          if (kBoolTrue == test_7) {
-            TC_Array <C_FixItDescription> fixItArray8 ;
-            inCompiler->emitSemanticError (enumerator_5001.current_mValue (HERE).getter_location (SOURCE_FILE ("type-opaque-declaration.galgas", 117)), GALGAS_string ("duplicated attribute"), fixItArray8  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)) ;
-          }else if (kBoolFalse == test_7) {
-            var_opaqueTypeAttributes_4957 = var_opaqueTypeAttributes_4957.operator_or (GALGAS_PLMTypeAttributes::constructor_arc (SOURCE_FILE ("type-opaque-declaration.galgas", 119)) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 119)) ;
-          }
-        }else if (kBoolFalse == test_6) {
-          TC_Array <C_FixItDescription> fixItArray9 ;
-          inCompiler->emitSemanticError (enumerator_5001.current_mValue (HERE).getter_location (SOURCE_FILE ("type-opaque-declaration.galgas", 122)), GALGAS_string ("only @").add_operation (function_copyableAttribute (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 123)).add_operation (GALGAS_string (", @"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 123)).add_operation (function_arcAttribute (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 123)).add_operation (GALGAS_string (" and @"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 123)).add_operation (function_instantiableAttribute (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 123)).add_operation (GALGAS_string (" attributes are allowed here"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 123)), fixItArray9  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 122)) ;
-        }
+        TC_Array <C_FixItDescription> fixItArray6 ;
+        inCompiler->emitSemanticError (enumerator_5001.current_mValue (HERE).getter_location (SOURCE_FILE ("type-opaque-declaration.galgas", 116)), GALGAS_string ("only @").add_operation (function_copyableAttribute (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)).add_operation (GALGAS_string (" and @"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)).add_operation (function_instantiableAttribute (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)).add_operation (GALGAS_string (" attributes are allowed here"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)), fixItArray6  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 116)) ;
       }
     }
     enumerator_5001.gotoNextObject () ;
   }
-  GALGAS_instructionListIR var_initInstructionGenerationList_5971 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 128)) ;
-  GALGAS_allocaList var_allocaList_6001 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 129)) ;
-  GALGAS_semanticTemporariesStruct var_temporaries_6047 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("type-opaque-declaration.galgas", 130)) ;
-  GALGAS_staticStringMap joker_6396 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 139)) ;
-  GALGAS_objectIR var_sizeExpressionIR_6563 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), function_voidType (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 132)), GALGAS_routineAttributes::constructor_none (SOURCE_FILE ("type-opaque-declaration.galgas", 133)), GALGAS_lstring::constructor_new (object->mProperty_mAnonymousOpaqueTypeName.getter_string (HERE).add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 134)), object->mProperty_mAnonymousOpaqueTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 134)), function_voidType (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 135)), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("type-opaque-declaration.galgas", 137)), var_temporaries_6047, joker_6396, ioArgument_ioContext.mProperty_mValuedObjectMap, var_allocaList_6001, var_initInstructionGenerationList_5971, var_sizeExpressionIR_6563, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 131)) ;
-  GALGAS_bool test_10 = GALGAS_bool (kIsStrictSup, var_allocaList_6001.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 145)).add_operation (var_initInstructionGenerationList_5971.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 145)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 145)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
-  if (kBoolTrue != test_10.boolEnum ()) {
-    test_10 = var_sizeExpressionIR_6563.getter_isLiteralInteger (SOURCE_FILE ("type-opaque-declaration.galgas", 145)).operator_not (SOURCE_FILE ("type-opaque-declaration.galgas", 145)) ;
+  GALGAS_instructionListIR var_initInstructionGenerationList_5724 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 122)) ;
+  GALGAS_allocaList var_allocaList_5754 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 123)) ;
+  GALGAS_semanticTemporariesStruct var_temporaries_5800 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("type-opaque-declaration.galgas", 124)) ;
+  GALGAS_staticStringMap joker_6149 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 133)) ;
+  GALGAS_objectIR var_sizeExpressionIR_6316 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), function_voidType (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 126)), GALGAS_routineAttributes::constructor_none (SOURCE_FILE ("type-opaque-declaration.galgas", 127)), GALGAS_lstring::constructor_new (object->mProperty_mAnonymousOpaqueTypeName.getter_string (HERE).add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 128)), object->mProperty_mAnonymousOpaqueTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 128)), function_voidType (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 129)), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("type-opaque-declaration.galgas", 131)), var_temporaries_5800, joker_6149, ioArgument_ioContext.mProperty_mValuedObjectMap, var_allocaList_5754, var_initInstructionGenerationList_5724, var_sizeExpressionIR_6316, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 125)) ;
+  GALGAS_bool test_7 = GALGAS_bool (kIsStrictSup, var_allocaList_5754.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 139)).add_operation (var_initInstructionGenerationList_5724.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 139)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 139)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  if (kBoolTrue != test_7.boolEnum ()) {
+    test_7 = var_sizeExpressionIR_6316.getter_isLiteralInteger (SOURCE_FILE ("type-opaque-declaration.galgas", 139)).operator_not (SOURCE_FILE ("type-opaque-declaration.galgas", 139)) ;
   }
-  const enumGalgasBool test_11 = test_10.boolEnum () ;
-  if (kBoolTrue == test_11) {
-    TC_Array <C_FixItDescription> fixItArray12 ;
-    inCompiler->emitSemanticError (object->mProperty_mSizeExpressionLocation, GALGAS_string ("array size expression is not static"), fixItArray12  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 146)) ;
-  }else if (kBoolFalse == test_11) {
-    GALGAS_constructorMap var_constructorMap_6805 = GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 148)) ;
-    const enumGalgasBool test_13 = var_opaqueTypeAttributes_4957.getter_instanciable (SOURCE_FILE ("type-opaque-declaration.galgas", 149)).boolEnum () ;
-    if (kBoolTrue == test_13) {
+  const enumGalgasBool test_8 = test_7.boolEnum () ;
+  if (kBoolTrue == test_8) {
+    TC_Array <C_FixItDescription> fixItArray9 ;
+    inCompiler->emitSemanticError (object->mProperty_mSizeExpressionLocation, GALGAS_string ("array size expression is not static"), fixItArray9  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 140)) ;
+  }else if (kBoolFalse == test_8) {
+    GALGAS_constructorMap var_constructorMap_6558 = GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 142)) ;
+    const enumGalgasBool test_10 = var_opaqueTypeAttributes_4957.getter_instanciable (SOURCE_FILE ("type-opaque-declaration.galgas", 143)).boolEnum () ;
+    if (kBoolTrue == test_10) {
       {
-      var_constructorMap_6805.setter_insertKey (GALGAS_string ("()").getter_nowhere (SOURCE_FILE ("type-opaque-declaration.galgas", 150)), GALGAS_constructorSignature::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 150)), GALGAS_constructorValue::constructor_simple (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 150))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 150)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 150)) ;
+      var_constructorMap_6558.setter_insertKey (GALGAS_string ("()").getter_nowhere (SOURCE_FILE ("type-opaque-declaration.galgas", 144)), GALGAS_constructorSignature::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 144)), GALGAS_constructorValue::constructor_simple (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 144))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 144)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 144)) ;
       }
     }
-    GALGAS_bigint var_bitSize_7002 ;
-    GALGAS_PLMType joker_6981_1 ; // Joker input parameter
-    var_sizeExpressionIR_6563.method_literalInteger (joker_6981_1, var_bitSize_7002, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 152)) ;
-    GALGAS_PLMType var_opaqueType_7022 = GALGAS_PLMType::constructor_new (GALGAS_propertyMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 154)), GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 155)), var_constructorMap_6805, GALGAS_guardMapForContext::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 157)), var_opaqueTypeAttributes_4957, object->mProperty_mAnonymousOpaqueTypeName.getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 159)), GALGAS_typeKind::constructor_opaque (var_bitSize_7002  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 160)), object->mProperty_mAnonymousOpaqueTypeName.getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 161))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 153)) ;
+    GALGAS_bigint var_bitSize_6755 ;
+    GALGAS_PLMType joker_6734_1 ; // Joker input parameter
+    var_sizeExpressionIR_6316.method_literalInteger (joker_6734_1, var_bitSize_6755, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 146)) ;
+    GALGAS_PLMType var_opaqueType_6775 = GALGAS_PLMType::constructor_new (GALGAS_propertyMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 148)), GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 149)), var_constructorMap_6558, GALGAS_guardMapForContext::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 151)), var_opaqueTypeAttributes_4957, object->mProperty_mAnonymousOpaqueTypeName.getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 153)), GALGAS_typeKind::constructor_opaque (var_bitSize_6755  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 154)), object->mProperty_mAnonymousOpaqueTypeName.getter_string (SOURCE_FILE ("type-opaque-declaration.galgas", 155))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 147)) ;
     {
-    ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mAnonymousOpaqueTypeName, var_opaqueType_7022, ioArgument_ioContext.getter_mTypeMap (HERE).getter_count (SOURCE_FILE ("type-opaque-declaration.galgas", 166)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 163)) ;
+    ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mAnonymousOpaqueTypeName, var_opaqueType_6775, ioArgument_ioContext.getter_mTypeMap (HERE).getter_count (SOURCE_FILE ("type-opaque-declaration.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 157)) ;
     }
   }
 }
