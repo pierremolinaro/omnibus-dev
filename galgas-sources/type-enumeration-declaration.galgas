@@ -180,34 +180,35 @@ proc enterEnumerationComparisonOperators
   ?!context:@semanticContext ioContext
 {
   let key = combineTypeNamesForInfixOperator (!inTypeName.string !inTypeName.string)
+  let booleanType = [ioContext booleanType]
   [!?ioContext.mEqualOperatorMap insertKey
     !key
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !key
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !key
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !key
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !key
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !key
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
   ]
 }

@@ -87,19 +87,24 @@ struct @semanticContext {
 
   @unifiedTypeMap-proxy mPanicCodeType
   @unifiedTypeMap-proxy mPanicLineType
-  @unifiedTypeMap mTypeMap
-  @routineMapForContext mRoutineMapForContext
-  @guardMapForContext mGuardMapForContext
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
+
+  @routineMapForContext mRoutineMapForContext
+  @guardMapForContext mGuardMapForContext
   @controlRegisterGroupMap mControlRegisterGroupMap
   @globalConstantMap mGlobalConstantMap
   @globalSyncInstanceMap mGlobalSyncInstanceMap
   @driverMap mDriverMap
   @staticlistMap mStaticListMap
+
+#--- Types
+  @unifiedTypeMap mTypeMap
+
 #--- Interrupts
   @stringset mDefinedInterruptSet
   @availableInterruptMap mAvailableInterruptMap
+
 #--- Operators
   @infixOperatorMap mEqualOperatorMap           # ==
   @infixOperatorMap mNonEqualOperatorMap        # !=
@@ -126,14 +131,45 @@ struct @semanticContext {
   @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
   @prefixOperatorMap mNotOperatorMap            # not
   @prefixOperatorMap mUnsignedComplementOperatorMap # ~
+
 #--- Tasks
   @taskMap mTaskMap
   @globalTaskVariableList mGlobalTaskVariableList
+
 #--- Entity map
   @universalValuedObjectMap mValuedObjectMap
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
+
+getter @semanticContext booleanType -> @PLMType {
+  [mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result ?1*]
+#  @propertyMap propertyMap = {}
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mBooleanTypeName ?let boolTypeProxy]
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" !mBooleanTypeName} ?let uint1TypeProxy]
+##--- Add uint1 accessor
+#  [!?propertyMap addFunctionWithoutArgument
+#    !?ioSubprogramInvocationGraph
+#    !receiverTypeProxy:boolTypeProxy
+#    !methodName:"uint1"
+#    !safe:true
+#    !resultTypeProxy:uint1TypeProxy
+#    !canMutateProperties:false
+#  ]
+##---------- Define boolean type composition
+#  result = .new {
+#    !propertyMap:propertyMap
+#    !classConstantMap:{}
+#    !constructorMap:{}
+#    !guardMap:{}
+#    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
+#    !plmOriginalTypeName:boolTypeName ()
+#    !kind:.boolean
+#    !plmAliasedTypeName:boolTypeName ()
+#  }
+}
+
+#·······················································································································
 
 abstract method @abstractDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST

@@ -39,11 +39,10 @@ driver project ()
 
 typealias $dArray : [$uint8]
 
-typealias $T : $uint32
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $structWithARC {
-  public var unEntierQuelconque $uint32 = $T ()
+  public var unEntierQuelconque $uint32 = 0
   public var donnée = $dArray ()
 }
 
@@ -71,6 +70,7 @@ task T1 priority 10 stackSize 512 {
     lcd.print (!string:"Start:")
     lcd.goto (!line:2 !column:0)
     lcd.print (!string:"Max:")
+    {GPIOB.PDDR : 8} = yes.uint1 ()
   }
 
   on time.wait (!untilDeadline:self.échéance) {
@@ -186,8 +186,6 @@ system section externalSection (?in: inData $dArray) {
   var xxxx = [$bool] ()
   xxxx.append (!yes)
   var lg = xxxx.length ()
-  let u $T = 90
-  lg += u
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

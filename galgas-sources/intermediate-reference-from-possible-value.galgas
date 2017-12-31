@@ -29,7 +29,7 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
 #--- Perform strore ?
   if performStore then
   #--- Declare new temporary variable
-    let llvmTemporaryName = llvmNameForLocalVariable (!"tempz." + ioTemporaries.mTemporaryIndex)
+    let llvmTemporaryName = llvmNameForLocalVariable (!"temp." + ioTemporaries.mTemporaryIndex)
     ioTemporaries.mTemporaryIndex ++
   #--- Add temporary reference to allocation list
     ioAllocaList += !llvmTemporaryName ![ioObjectIR type] !false

@@ -41,21 +41,6 @@ enum @typeKind {
 
 #·······················································································································
 
-func booleanType -> @PLMType {
-  result = .new {
-    !propertyMap:{}
-    !classConstantMap:{}
-    !constructorMap:{}
-    !guardMap:{}
-    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmOriginalTypeName:boolTypeName ()
-    !kind:.boolean
-    !plmAliasedTypeName:boolTypeName ()
-  }
-}
-
-#·······················································································································
-
 func staticIntegerType -> @PLMType {
   result = .new {
     !propertyMap:{}

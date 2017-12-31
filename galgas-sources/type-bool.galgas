@@ -33,6 +33,8 @@ override method @booleanDeclarationAST enterInPrecedenceGraph
 {
   let boolTypeName = llvmTypeNameFromPLMname (!mBooleanTypeName)
   [!?ioGraph addNode !boolTypeName !self]
+  let uint1TypeName = llvmTypeNameFromPLMname (!.new{!"uint1" !mBooleanTypeName.location})
+  [!?ioGraph noteNode !uint1TypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -42,24 +44,47 @@ override getter @booleanDeclarationAST keyRepresentationForErrorSignaling -> @st
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
+  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-#--- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !type:booleanType () !index:[ioContext.mTypeMap count]]
-#--- Enter boolean operators
-  enterBooleanOperators (
-    !boolTypeName:mBooleanTypeName
-    !?context:ioContext
-  )
+#---------- Property map
+  @propertyMap propertyMap = {}
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mBooleanTypeName ?let boolTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" !mBooleanTypeName} ?let uint1TypeProxy]
+#--- Add uint1 accessor
+  [!?propertyMap addFunctionWithoutArgument
+    !?ioSubprogramInvocationGraph
+    !receiverTypeProxy:boolTypeProxy
+    !methodName:"uint1"
+    !safe:true
+    !resultTypeProxy:uint1TypeProxy
+    !canMutateProperties:false
+  ]
+#---------- Define boolean type composition
+  let booleanType = @PLMType.new {
+    !propertyMap:propertyMap
+    !classConstantMap:{}
+    !constructorMap:{}
+    !guardMap:{}
+    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
+    !plmOriginalTypeName:boolTypeName ()
+    !kind:.boolean
+    !plmAliasedTypeName:boolTypeName ()
+  }
+#---------- Enter in type map
+  [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !type:booleanType !index:[ioContext.mTypeMap count]]
+#---------- Enter boolean operators
+  enterBooleanOperators (!boolTypeName:mBooleanTypeName!?context:ioContext)
+#---------------- Add decorated declaration
+  ioDecoratedDeclarationList += !@boolDecoratedDeclaration.new
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -121,22 +146,44 @@ private proc enterBooleanOperators
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
+#!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @booleanDeclarationAST semanticAnalysis
-#  ?context:let @semanticContext unused inContext
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-#{
-#}
+class @boolDecoratedDeclaration : @abstractDecoratedDeclaration {
+}
+
+#·······················································································································
+
+override method @boolDecoratedDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  ioIntermediateCodeStruct.mGenerationListIR += !@boolIR.new
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                    
+#! CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @booleanDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
-#}
+class @boolIR : @abstractGenerationIR {
+}
+
+#·······················································································································
+
+override method @boolIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
+#---------- Generate $bool to $uint1 conversion function
+  let routineMangledName = routineMangledNameFromAST (
+    !llvmTypeStringFromPLMname (!boolTypeName ())
+    !["uint1" nowhere]
+    !{}
+  )
+  let functionName = llvmNameForFunction (!routineMangledName)
+  ioLLVMcode += "define internal i1 @" + functionName + " (i1* %inValue) {\n"
+  ioLLVMcode += "  %value = load i1, i1* %inValue\n"
+  ioLLVMcode += "  ret i1 %value\n"
+  ioLLVMcode += "}\n\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

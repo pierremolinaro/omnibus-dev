@@ -4870,7 +4870,7 @@ GALGAS_bool extensionGetter_equatable (const GALGAS_PLMType & inObject,
                                        C_Compiler * /* inCompiler */
                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_attributes.getter_equatable (SOURCE_FILE ("types.galgas", 120)) ;
+  result_result = inObject.mProperty_attributes.getter_equatable (SOURCE_FILE ("types.galgas", 105)) ;
 //---
   return result_result ;
 }
@@ -4889,7 +4889,7 @@ GALGAS_bool extensionGetter_instanciable (const GALGAS_unifiedTypeMap_2D_proxy &
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
   const GALGAS_unifiedTypeMap_2D_proxy temp_0 = inObject ;
-  result_result = extensionGetter_instanciable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 126)) ;
+  result_result = extensionGetter_instanciable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 111)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 111)) ;
 //---
   return result_result ;
 }
@@ -4907,7 +4907,7 @@ GALGAS_bool extensionGetter_instanciable (const GALGAS_PLMType & inObject,
                                           C_Compiler * /* inCompiler */
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_attributes.getter_instanciable (SOURCE_FILE ("types.galgas", 132)) ;
+  result_result = inObject.mProperty_attributes.getter_instanciable (SOURCE_FILE ("types.galgas", 117)) ;
 //---
   return result_result ;
 }
@@ -4926,7 +4926,7 @@ GALGAS_bool extensionGetter_copyable (const GALGAS_unifiedTypeMap_2D_proxy & inO
                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
   const GALGAS_unifiedTypeMap_2D_proxy temp_0 = inObject ;
-  result_result = extensionGetter_copyable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 138)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 138)) ;
+  result_result = extensionGetter_copyable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 123)) ;
 //---
   return result_result ;
 }
@@ -4944,7 +4944,7 @@ GALGAS_bool extensionGetter_copyable (const GALGAS_PLMType & inObject,
                                       C_Compiler * /* inCompiler */
                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_attributes.getter_copyable (SOURCE_FILE ("types.galgas", 144)) ;
+  result_result = inObject.mProperty_attributes.getter_copyable (SOURCE_FILE ("types.galgas", 129)) ;
 //---
   return result_result ;
 }
@@ -4965,34 +4965,34 @@ void extensionMethod_generateRetain (const GALGAS_PLMType inObject,
                                      C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_PLMType temp_0 = inObject ;
-  GALGAS_string var_llvmTypeName_5509 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 154)) ;
-  GALGAS_string var_LLVMVariable_5550 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 155)) ;
+  GALGAS_string var_llvmTypeName_5062 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 139)) ;
+  GALGAS_string var_LLVMVariable_5103 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 140)) ;
   const GALGAS_PLMType temp_1 = inObject ;
-  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 156)).boolEnum () ;
+  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 141)).boolEnum () ;
   if (kBoolTrue == test_2) {
-    GALGAS_string var_tempLLVMVariable_5657 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 157)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 157)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 157)) ;
-    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 158)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_tempLLVMVariable_5657, inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (var_llvmTypeName_5509, inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (var_llvmTypeName_5509, inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (var_LLVMVariable_5550, inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 159)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_llvmTypeName_5509, inCompiler COMMA_SOURCE_FILE ("types.galgas", 160)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 160)).add_operation (var_tempLLVMVariable_5657, inCompiler COMMA_SOURCE_FILE ("types.galgas", 160)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 160)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 160)) ;
+    GALGAS_string var_tempLLVMVariable_5210 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 142)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 142)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 142)) ;
+    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 143)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_tempLLVMVariable_5210, inCompiler COMMA_SOURCE_FILE ("types.galgas", 144)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 144)).add_operation (var_llvmTypeName_5062, inCompiler COMMA_SOURCE_FILE ("types.galgas", 144)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 144)).add_operation (var_llvmTypeName_5062, inCompiler COMMA_SOURCE_FILE ("types.galgas", 144)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 144)).add_operation (var_LLVMVariable_5103, inCompiler COMMA_SOURCE_FILE ("types.galgas", 144)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 144)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 144)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_llvmTypeName_5062, inCompiler COMMA_SOURCE_FILE ("types.galgas", 145)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 145)).add_operation (var_tempLLVMVariable_5210, inCompiler COMMA_SOURCE_FILE ("types.galgas", 145)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 145)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 145)) ;
   }else if (kBoolFalse == test_2) {
     const GALGAS_PLMType temp_3 = inObject ;
-    GALGAS_arcAssignmentList var_arcAssignmentList_6036 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 162)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 162)) ;
-    cEnumerator_arcAssignmentList enumerator_6124 (var_arcAssignmentList_6036, kENUMERATION_UP) ;
-    while (enumerator_6124.hasCurrentObject ()) {
-      GALGAS_string var_llvmVarName_6150 = GALGAS_string ("%arc.retain.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 164)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 164)) ;
-      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 165)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_6150, inCompiler COMMA_SOURCE_FILE ("types.galgas", 166)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 166)).add_operation (var_llvmTypeName_5509, inCompiler COMMA_SOURCE_FILE ("types.galgas", 166)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 166)).add_operation (var_llvmTypeName_5509, inCompiler COMMA_SOURCE_FILE ("types.galgas", 166)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 166)).add_operation (var_LLVMVariable_5550, inCompiler COMMA_SOURCE_FILE ("types.galgas", 166)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 166)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 166)) ;
-      cEnumerator_uintlist enumerator_6408 (enumerator_6124.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-      while (enumerator_6408.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_6408.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 168)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 168)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 168)) ;
-        enumerator_6408.gotoNextObject () ;
+    GALGAS_arcAssignmentList var_arcAssignmentList_5589 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 147)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 147)) ;
+    cEnumerator_arcAssignmentList enumerator_5677 (var_arcAssignmentList_5589, kENUMERATION_UP) ;
+    while (enumerator_5677.hasCurrentObject ()) {
+      GALGAS_string var_llvmVarName_5703 = GALGAS_string ("%arc.retain.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 149)) ;
+      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 150)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_5703, inCompiler COMMA_SOURCE_FILE ("types.galgas", 151)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 151)).add_operation (var_llvmTypeName_5062, inCompiler COMMA_SOURCE_FILE ("types.galgas", 151)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 151)).add_operation (var_llvmTypeName_5062, inCompiler COMMA_SOURCE_FILE ("types.galgas", 151)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 151)).add_operation (var_LLVMVariable_5103, inCompiler COMMA_SOURCE_FILE ("types.galgas", 151)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 151)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 151)) ;
+      cEnumerator_uintlist enumerator_5961 (enumerator_5677.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+      while (enumerator_5961.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_5961.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 153)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 153)) ;
+        enumerator_5961.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_6124.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 170)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 170)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 170)) ;
-      GALGAS_string var_propertyTypeLLVMName_6537 = extensionGetter_llvmTypeName (enumerator_6124.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 171)) ;
-      GALGAS_string var_llvmLoadedVarName_6595 = var_llvmVarName_6150.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 172)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_6595, inCompiler COMMA_SOURCE_FILE ("types.galgas", 173)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 173)).add_operation (var_propertyTypeLLVMName_6537, inCompiler COMMA_SOURCE_FILE ("types.galgas", 173)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 173)).add_operation (var_propertyTypeLLVMName_6537, inCompiler COMMA_SOURCE_FILE ("types.galgas", 173)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 173)).add_operation (var_llvmVarName_6150, inCompiler COMMA_SOURCE_FILE ("types.galgas", 173)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 173)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 173)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_propertyTypeLLVMName_6537, inCompiler COMMA_SOURCE_FILE ("types.galgas", 174)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 174)).add_operation (var_llvmLoadedVarName_6595, inCompiler COMMA_SOURCE_FILE ("types.galgas", 174)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 174)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 174)) ;
-      enumerator_6124.gotoNextObject () ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_5677.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 155)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 155)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 155)) ;
+      GALGAS_string var_propertyTypeLLVMName_6090 = extensionGetter_llvmTypeName (enumerator_5677.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 156)) ;
+      GALGAS_string var_llvmLoadedVarName_6148 = var_llvmVarName_5703.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 157)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_6148, inCompiler COMMA_SOURCE_FILE ("types.galgas", 158)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 158)).add_operation (var_propertyTypeLLVMName_6090, inCompiler COMMA_SOURCE_FILE ("types.galgas", 158)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 158)).add_operation (var_propertyTypeLLVMName_6090, inCompiler COMMA_SOURCE_FILE ("types.galgas", 158)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 158)).add_operation (var_llvmVarName_5703, inCompiler COMMA_SOURCE_FILE ("types.galgas", 158)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 158)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 158)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_propertyTypeLLVMName_6090, inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (var_llvmLoadedVarName_6148, inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 159)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 159)) ;
+      enumerator_5677.gotoNextObject () ;
     }
   }
 }
@@ -5011,39 +5011,39 @@ void extensionMethod_generateInsulate (const GALGAS_PLMType inObject,
                                        C_Compiler * inCompiler
                                        COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_PLMType temp_0 = inObject ;
-  GALGAS_string var_llvmTypeName_7145 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 186)) ;
-  GALGAS_string var_LLVMVariable_7186 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 187)) ;
+  GALGAS_string var_llvmTypeName_6698 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 171)) ;
+  GALGAS_string var_LLVMVariable_6739 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 172)) ;
   const GALGAS_PLMType temp_1 = inObject ;
-  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 188)).boolEnum () ;
+  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 173)).boolEnum () ;
   if (kBoolTrue == test_2) {
-    GALGAS_string var_loadedVar_7286 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 189)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 189)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)) ;
-    GALGAS_string var_insulatedVar_7404 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 190)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 190)).add_operation (GALGAS_string (".insulated."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 190)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 190)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 190)) ;
-    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 191)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_loadedVar_7286, inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)).add_operation (var_llvmTypeName_7145, inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)).add_operation (var_llvmTypeName_7145, inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)).add_operation (var_LLVMVariable_7186, inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 192)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_insulatedVar_7404, inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)).add_operation (var_llvmTypeName_7145, inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)).add_operation (GALGAS_string (" @arc.insulate ("), inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)).add_operation (var_llvmTypeName_7145, inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)).add_operation (var_loadedVar_7286, inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 193)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_llvmTypeName_7145, inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (var_insulatedVar_7404, inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (var_llvmTypeName_7145, inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (var_LLVMVariable_7186, inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 194)) ;
+    GALGAS_string var_loadedVar_6839 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 174)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 174)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 174)) ;
+    GALGAS_string var_insulatedVar_6957 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 175)).add_operation (GALGAS_string (".insulated."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 175)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 175)) ;
+    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 176)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_loadedVar_6839, inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)).add_operation (var_llvmTypeName_6698, inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)).add_operation (var_llvmTypeName_6698, inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)).add_operation (var_LLVMVariable_6739, inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 177)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_insulatedVar_6957, inCompiler COMMA_SOURCE_FILE ("types.galgas", 178)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 178)).add_operation (var_llvmTypeName_6698, inCompiler COMMA_SOURCE_FILE ("types.galgas", 178)).add_operation (GALGAS_string (" @arc.insulate ("), inCompiler COMMA_SOURCE_FILE ("types.galgas", 178)).add_operation (var_llvmTypeName_6698, inCompiler COMMA_SOURCE_FILE ("types.galgas", 178)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 178)).add_operation (var_loadedVar_6839, inCompiler COMMA_SOURCE_FILE ("types.galgas", 178)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 178)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 178)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_llvmTypeName_6698, inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).add_operation (var_insulatedVar_6957, inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).add_operation (var_llvmTypeName_6698, inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).add_operation (var_LLVMVariable_6739, inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 179)) ;
   }else if (kBoolFalse == test_2) {
     const GALGAS_PLMType temp_3 = inObject ;
-    GALGAS_arcAssignmentList var_arcAssignmentList_7932 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 196)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)) ;
-    cEnumerator_arcAssignmentList enumerator_8020 (var_arcAssignmentList_7932, kENUMERATION_UP) ;
-    while (enumerator_8020.hasCurrentObject ()) {
-      GALGAS_string var_llvmVarName_8046 = GALGAS_string ("%arc.release.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 198)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 198)) ;
-      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 199)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_8046, inCompiler COMMA_SOURCE_FILE ("types.galgas", 200)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 200)).add_operation (var_llvmTypeName_7145, inCompiler COMMA_SOURCE_FILE ("types.galgas", 200)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 200)).add_operation (var_llvmTypeName_7145, inCompiler COMMA_SOURCE_FILE ("types.galgas", 200)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 200)).add_operation (var_LLVMVariable_7186, inCompiler COMMA_SOURCE_FILE ("types.galgas", 200)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 200)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 200)) ;
-      cEnumerator_uintlist enumerator_8305 (enumerator_8020.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-      while (enumerator_8305.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_8305.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 202)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 202)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 202)) ;
-        enumerator_8305.gotoNextObject () ;
+    GALGAS_arcAssignmentList var_arcAssignmentList_7485 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 181)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)) ;
+    cEnumerator_arcAssignmentList enumerator_7573 (var_arcAssignmentList_7485, kENUMERATION_UP) ;
+    while (enumerator_7573.hasCurrentObject ()) {
+      GALGAS_string var_llvmVarName_7599 = GALGAS_string ("%arc.release.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 183)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 183)) ;
+      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 184)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_7599, inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)).add_operation (var_llvmTypeName_6698, inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)).add_operation (var_llvmTypeName_6698, inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)).add_operation (var_LLVMVariable_6739, inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 185)) ;
+      cEnumerator_uintlist enumerator_7858 (enumerator_7573.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+      while (enumerator_7858.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_7858.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 187)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 187)) ;
+        enumerator_7858.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_8020.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 204)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 204)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 204)) ;
-      GALGAS_string var_propertyTypeLLVMName_8434 = extensionGetter_llvmTypeName (enumerator_8020.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 205)) ;
-      GALGAS_string var_loadedVar_8484 = var_llvmVarName_8046.add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 206)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 206)) ;
-      GALGAS_string var_insulatedVar_8567 = var_llvmVarName_8046.add_operation (GALGAS_string (".insulated."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 207)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 207)) ;
-      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 208)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_loadedVar_8484, inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)).add_operation (var_propertyTypeLLVMName_8434, inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)).add_operation (var_propertyTypeLLVMName_8434, inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)).add_operation (var_llvmVarName_8046, inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 209)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_insulatedVar_8567, inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (var_propertyTypeLLVMName_8434, inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (GALGAS_string (" @arc.insulate ("), inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (var_propertyTypeLLVMName_8434, inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (var_loadedVar_8484, inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 210)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_propertyTypeLLVMName_8434, inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (var_insulatedVar_8567, inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (var_propertyTypeLLVMName_8434, inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (var_llvmVarName_8046, inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 211)) ;
-      enumerator_8020.gotoNextObject () ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_7573.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 189)) ;
+      GALGAS_string var_propertyTypeLLVMName_7987 = extensionGetter_llvmTypeName (enumerator_7573.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 190)) ;
+      GALGAS_string var_loadedVar_8037 = var_llvmVarName_7599.add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 191)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 191)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 191)) ;
+      GALGAS_string var_insulatedVar_8120 = var_llvmVarName_7599.add_operation (GALGAS_string (".insulated."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 192)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)) ;
+      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 193)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_loadedVar_8037, inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (var_propertyTypeLLVMName_7987, inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (var_propertyTypeLLVMName_7987, inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (var_llvmVarName_7599, inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 194)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_insulatedVar_8120, inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (var_propertyTypeLLVMName_7987, inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (GALGAS_string (" @arc.insulate ("), inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (var_propertyTypeLLVMName_7987, inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (var_loadedVar_8037, inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 195)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_propertyTypeLLVMName_7987, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (var_insulatedVar_8120, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (var_propertyTypeLLVMName_7987, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (var_llvmVarName_7599, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 196)) ;
+      enumerator_7573.gotoNextObject () ;
     }
   }
 }
@@ -5062,34 +5062,34 @@ void extensionMethod_generateRelease (const GALGAS_PLMType inObject,
                                       C_Compiler * inCompiler
                                       COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_PLMType temp_0 = inObject ;
-  GALGAS_string var_llvmTypeName_9358 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 223)) ;
-  GALGAS_string var_LLVMVariable_9399 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 224)) ;
+  GALGAS_string var_llvmTypeName_8911 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 208)) ;
+  GALGAS_string var_LLVMVariable_8952 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)) ;
   const GALGAS_PLMType temp_1 = inObject ;
-  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 225)).boolEnum () ;
+  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 210)).boolEnum () ;
   if (kBoolTrue == test_2) {
-    GALGAS_string var_tempLLVMVariable_9506 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 226)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 226)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 226)) ;
-    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 227)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_tempLLVMVariable_9506, inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (var_llvmTypeName_9358, inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (var_llvmTypeName_9358, inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (var_LLVMVariable_9399, inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 228)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_llvmTypeName_9358, inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)).add_operation (var_tempLLVMVariable_9506, inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 229)) ;
+    GALGAS_string var_tempLLVMVariable_9059 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)) ;
+    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 212)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_tempLLVMVariable_9059, inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)).add_operation (var_llvmTypeName_8911, inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)).add_operation (var_llvmTypeName_8911, inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)).add_operation (var_LLVMVariable_8952, inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 213)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_llvmTypeName_8911, inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (var_tempLLVMVariable_9059, inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 214)) ;
   }else if (kBoolFalse == test_2) {
     const GALGAS_PLMType temp_3 = inObject ;
-    GALGAS_arcAssignmentList var_arcAssignmentList_9889 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 231)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 231)) ;
-    cEnumerator_arcAssignmentList enumerator_9977 (var_arcAssignmentList_9889, kENUMERATION_UP) ;
-    while (enumerator_9977.hasCurrentObject ()) {
-      GALGAS_string var_llvmVarName_10003 = GALGAS_string ("%arc.release.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 233)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)) ;
-      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 234)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_10003, inCompiler COMMA_SOURCE_FILE ("types.galgas", 235)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 235)).add_operation (var_llvmTypeName_9358, inCompiler COMMA_SOURCE_FILE ("types.galgas", 235)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 235)).add_operation (var_llvmTypeName_9358, inCompiler COMMA_SOURCE_FILE ("types.galgas", 235)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 235)).add_operation (var_LLVMVariable_9399, inCompiler COMMA_SOURCE_FILE ("types.galgas", 235)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 235)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 235)) ;
-      cEnumerator_uintlist enumerator_10262 (enumerator_9977.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-      while (enumerator_10262.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_10262.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 237)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 237)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 237)) ;
-        enumerator_10262.gotoNextObject () ;
+    GALGAS_arcAssignmentList var_arcAssignmentList_9442 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)) ;
+    cEnumerator_arcAssignmentList enumerator_9530 (var_arcAssignmentList_9442, kENUMERATION_UP) ;
+    while (enumerator_9530.hasCurrentObject ()) {
+      GALGAS_string var_llvmVarName_9556 = GALGAS_string ("%arc.release.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 218)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 218)) ;
+      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 219)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_9556, inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)).add_operation (var_llvmTypeName_8911, inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)).add_operation (var_llvmTypeName_8911, inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)).add_operation (var_LLVMVariable_8952, inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 220)) ;
+      cEnumerator_uintlist enumerator_9815 (enumerator_9530.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+      while (enumerator_9815.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_9815.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 222)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 222)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 222)) ;
+        enumerator_9815.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_9977.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 239)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 239)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 239)) ;
-      GALGAS_string var_propertyTypeLLVMName_10391 = extensionGetter_llvmTypeName (enumerator_9977.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 240)) ;
-      GALGAS_string var_llvmLoadedVarName_10449 = var_llvmVarName_10003.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 241)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_10449, inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)).add_operation (var_propertyTypeLLVMName_10391, inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)).add_operation (var_propertyTypeLLVMName_10391, inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)).add_operation (var_llvmVarName_10003, inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 242)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_propertyTypeLLVMName_10391, inCompiler COMMA_SOURCE_FILE ("types.galgas", 243)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 243)).add_operation (var_llvmLoadedVarName_10449, inCompiler COMMA_SOURCE_FILE ("types.galgas", 243)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 243)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 243)) ;
-      enumerator_9977.gotoNextObject () ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_9530.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 224)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 224)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 224)) ;
+      GALGAS_string var_propertyTypeLLVMName_9944 = extensionGetter_llvmTypeName (enumerator_9530.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 225)) ;
+      GALGAS_string var_llvmLoadedVarName_10002 = var_llvmVarName_9556.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 226)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_10002, inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)).add_operation (var_propertyTypeLLVMName_9944, inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)).add_operation (var_propertyTypeLLVMName_9944, inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)).add_operation (var_llvmVarName_9556, inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 227)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_propertyTypeLLVMName_9944, inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (var_llvmLoadedVarName_10002, inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 228)) ;
+      enumerator_9530.gotoNextObject () ;
     }
   }
 }
@@ -5126,26 +5126,26 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_enumeration:
     {
-      const cEnumAssociatedValues_typeKind_enumeration * extractPtr_11099 = (const cEnumAssociatedValues_typeKind_enumeration *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_11099->mAssociatedValue0 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 259)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 259)) ;
+      const cEnumAssociatedValues_typeKind_enumeration * extractPtr_10652 = (const cEnumAssociatedValues_typeKind_enumeration *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_10652->mAssociatedValue0 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 244)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 244)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_structure:
     {
-      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmOriginalTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 261)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 261)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 261)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 261)) ;
+      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmOriginalTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 246)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 246)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 246)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 246)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_syncTool:
     {
-      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmOriginalTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 263)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 263)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 263)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 263)) ;
+      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmOriginalTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 248)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 248)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 248)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 248)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_11416 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_11416->mAssociatedValue3 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 265)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)) ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_10969 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_10969->mAssociatedValue3 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 250)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 250)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_staticInteger:
@@ -5155,14 +5155,14 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_opaque:
     {
-      const cEnumAssociatedValues_typeKind_opaque * extractPtr_11519 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_bitCount = extractPtr_11519->mAssociatedValue0 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 269)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 269)) ;
+      const cEnumAssociatedValues_typeKind_opaque * extractPtr_11072 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_bitCount = extractPtr_11072->mAssociatedValue0 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 254)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 254)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_arrayType:
     {
-      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmOriginalTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 271)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 271)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 271)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 271)) ;
+      result_result = GALGAS_string ("%").add_operation (function_llvmTypeNameFromPLMname (inObject.mProperty_plmOriginalTypeName.getter_nowhere (SOURCE_FILE ("types.galgas", 256)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 256)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 256)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 256)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_dynamicArrayType:
@@ -5172,25 +5172,25 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_function:
     {
-      const cEnumAssociatedValues_typeKind_function * extractPtr_12199 = (const cEnumAssociatedValues_typeKind_function *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_routineDescriptor extractedValue_descriptor = extractPtr_12199->mAssociatedValue0 ;
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, extractedValue_descriptor.getter_returnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("types.galgas", 275)))).boolEnum () ;
+      const cEnumAssociatedValues_typeKind_function * extractPtr_11752 = (const cEnumAssociatedValues_typeKind_function *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_routineDescriptor extractedValue_descriptor = extractPtr_11752->mAssociatedValue0 ;
+      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, extractedValue_descriptor.getter_returnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("types.galgas", 260)))).boolEnum () ;
       if (kBoolTrue == test_1) {
         result_result = GALGAS_string ("void") ;
       }else if (kBoolFalse == test_1) {
-        result_result = extensionGetter_llvmTypeName (extractedValue_descriptor.getter_returnTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 278)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 278)) ;
+        result_result = extensionGetter_llvmTypeName (extractedValue_descriptor.getter_returnTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 263)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 263)) ;
       }
-      result_result.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 280)) ;
-      cEnumerator_routineTypedSignature enumerator_11972 (extractedValue_descriptor.getter_signature (HERE), kENUMERATION_UP) ;
-      while (enumerator_11972.hasCurrentObject ()) {
-        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_11972.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 283)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 283)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 283)) ;
-        switch (enumerator_11972.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
+      result_result.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 265)) ;
+      cEnumerator_routineTypedSignature enumerator_11525 (extractedValue_descriptor.getter_signature (HERE), kENUMERATION_UP) ;
+      while (enumerator_11525.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_11525.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 268)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 268)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 268)) ;
+        switch (enumerator_11525.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
         case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
           break ;
         case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
         case GALGAS_procFormalArgumentPassingMode::kEnum_output:
           {
-            result_result.plusAssign_operation(GALGAS_string ("*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 285)) ;
+            result_result.plusAssign_operation(GALGAS_string ("*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 270)) ;
           }
           break ;
         case GALGAS_procFormalArgumentPassingMode::kEnum_input:
@@ -5198,19 +5198,19 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
           }
           break ;
         }
-        if (enumerator_11972.hasNextObject ()) {
-          result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 288)) ;
+        if (enumerator_11525.hasNextObject ()) {
+          result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 273)) ;
         }
-        enumerator_11972.gotoNextObject () ;
+        enumerator_11525.gotoNextObject () ;
       }
-      result_result.plusAssign_operation(GALGAS_string (")*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 290)) ;
+      result_result.plusAssign_operation(GALGAS_string (")*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 275)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_pointer:
     {
-      const cEnumAssociatedValues_typeKind_pointer * extractPtr_12268 = (const cEnumAssociatedValues_typeKind_pointer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_pointee = extractPtr_12268->mAssociatedValue0 ;
-      result_result = extensionGetter_llvmTypeName (extractedValue_pointee, inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)).add_operation (GALGAS_string ("*"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)) ;
+      const cEnumAssociatedValues_typeKind_pointer * extractPtr_11821 = (const cEnumAssociatedValues_typeKind_pointer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_pointee = extractPtr_11821->mAssociatedValue0 ;
+      result_result = extensionGetter_llvmTypeName (extractedValue_pointee, inCompiler COMMA_SOURCE_FILE ("types.galgas", 277)).add_operation (GALGAS_string ("*"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 277)) ;
     }
     break ;
   }
@@ -5267,9 +5267,9 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_12964 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bool extractedValue_unsigned = extractPtr_12964->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_12964->mAssociatedValue3 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_12517 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_12517->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_12517->mAssociatedValue3 ;
       GALGAS_string temp_1 ;
       const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, extractedValue_bitCount.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
       if (kBoolTrue == test_2) {
@@ -5284,7 +5284,7 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
       }else if (kBoolFalse == test_4) {
         temp_3 = GALGAS_string ("signed") ;
       }
-      result_result = GALGAS_string ("Integer (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 313)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 313)).add_operation (GALGAS_string (" bit"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 313)).add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 313)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 313)).add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 314)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 314)) ;
+      result_result = GALGAS_string ("Integer (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 298)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 298)).add_operation (GALGAS_string (" bit"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 298)).add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 298)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 298)).add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 299)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 299)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_staticInteger:
@@ -5294,9 +5294,9 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
     break ;
   case GALGAS_typeKind::kEnum_opaque:
     {
-      const cEnumAssociatedValues_typeKind_opaque * extractPtr_13098 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_bitCount = extractPtr_13098->mAssociatedValue0 ;
-      result_result = GALGAS_string ("Opaque (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 318)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 318)).add_operation (GALGAS_string (" bits)"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 318)) ;
+      const cEnumAssociatedValues_typeKind_opaque * extractPtr_12651 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_bitCount = extractPtr_12651->mAssociatedValue0 ;
+      result_result = GALGAS_string ("Opaque (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 303)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 303)).add_operation (GALGAS_string (" bits)"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 303)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_arrayType:
@@ -5316,9 +5316,9 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
     break ;
   case GALGAS_typeKind::kEnum_pointer:
     {
-      const cEnumAssociatedValues_typeKind_pointer * extractPtr_13329 = (const cEnumAssociatedValues_typeKind_pointer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_pointee = extractPtr_13329->mAssociatedValue0 ;
-      result_result = GALGAS_string ("Pointer to ").add_operation (extensionGetter_llvmTypeName (extractedValue_pointee, inCompiler COMMA_SOURCE_FILE ("types.galgas", 326)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 326)) ;
+      const cEnumAssociatedValues_typeKind_pointer * extractPtr_12882 = (const cEnumAssociatedValues_typeKind_pointer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_pointee = extractPtr_12882->mAssociatedValue0 ;
+      result_result = GALGAS_string ("Pointer to ").add_operation (extensionGetter_llvmTypeName (extractedValue_pointee, inCompiler COMMA_SOURCE_FILE ("types.galgas", 311)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 311)) ;
     }
     break ;
   }
@@ -5340,25 +5340,25 @@ GALGAS_arcAssignmentList extensionGetter_arcList (const GALGAS_PLMType & inObjec
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_arcAssignmentList result_result ; // Returned variable
-  result_result = GALGAS_arcAssignmentList::constructor_emptyList (SOURCE_FILE ("types.galgas", 341)) ;
-  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 342)).boolEnum () ;
+  result_result = GALGAS_arcAssignmentList::constructor_emptyList (SOURCE_FILE ("types.galgas", 326)) ;
+  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 327)).boolEnum () ;
   if (kBoolTrue == test_0) {
     const GALGAS_PLMType temp_1 = inObject ;
-    result_result.addAssign_operation (GALGAS_string::makeEmptyString (), temp_1, constinArgument_inPropertyIndexPath  COMMA_SOURCE_FILE ("types.galgas", 343)) ;
+    result_result.addAssign_operation (GALGAS_string::makeEmptyString (), temp_1, constinArgument_inPropertyIndexPath  COMMA_SOURCE_FILE ("types.galgas", 328)) ;
   }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_2 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 344)).boolEnum () ;
+    const enumGalgasBool test_2 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 329)).boolEnum () ;
     if (kBoolTrue == test_2) {
-      GALGAS_propertyList var_propertyList_13966 ;
-      inObject.mProperty_kind.method_structure (var_propertyList_13966, inCompiler COMMA_SOURCE_FILE ("types.galgas", 345)) ;
-      cEnumerator_propertyList enumerator_14019 (var_propertyList_13966, kENUMERATION_UP) ;
-      GALGAS_uint index_13975 ((uint32_t) 0) ;
-      while (enumerator_14019.hasCurrentObject ()) {
-        GALGAS_uintlist temp_3 = GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 347)) ;
-        temp_3.addAssign_operation (index_13975  COMMA_SOURCE_FILE ("types.galgas", 347)) ;
-        GALGAS_uintlist var_indexPath_14048 = constinArgument_inPropertyIndexPath.add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 347)) ;
-        result_result.plusAssign_operation(extensionGetter_arcList (enumerator_14019.current_mType (HERE), var_indexPath_14048, inCompiler COMMA_SOURCE_FILE ("types.galgas", 348)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 348)) ;
-        enumerator_14019.gotoNextObject () ;
-        index_13975.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 346)) ;
+      GALGAS_propertyList var_propertyList_13519 ;
+      inObject.mProperty_kind.method_structure (var_propertyList_13519, inCompiler COMMA_SOURCE_FILE ("types.galgas", 330)) ;
+      cEnumerator_propertyList enumerator_13572 (var_propertyList_13519, kENUMERATION_UP) ;
+      GALGAS_uint index_13528 ((uint32_t) 0) ;
+      while (enumerator_13572.hasCurrentObject ()) {
+        GALGAS_uintlist temp_3 = GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 332)) ;
+        temp_3.addAssign_operation (index_13528  COMMA_SOURCE_FILE ("types.galgas", 332)) ;
+        GALGAS_uintlist var_indexPath_13601 = constinArgument_inPropertyIndexPath.add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 332)) ;
+        result_result.plusAssign_operation(extensionGetter_arcList (enumerator_13572.current_mType (HERE), var_indexPath_13601, inCompiler COMMA_SOURCE_FILE ("types.galgas", 333)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 333)) ;
+        enumerator_13572.gotoNextObject () ;
+        index_13528.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 331)) ;
       }
     }
   }
@@ -5379,19 +5379,19 @@ GALGAS_bool extensionGetter_deinitNeeded (const GALGAS_PLMType & inObject,
                                           C_Compiler * inCompiler
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 356)) ;
-  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 357)).boolEnum () ;
+  result_result = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 341)) ;
+  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 342)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_propertyList var_propertyList_14439 ;
-    inObject.mProperty_kind.method_structure (var_propertyList_14439, inCompiler COMMA_SOURCE_FILE ("types.galgas", 358)) ;
-    cEnumerator_propertyList enumerator_14492 (var_propertyList_14439, kENUMERATION_UP) ;
-    bool bool_1 = result_result.operator_not (SOURCE_FILE ("types.galgas", 359)).isValidAndTrue () ;
-    if (enumerator_14492.hasCurrentObject () && bool_1) {
-      while (enumerator_14492.hasCurrentObject () && bool_1) {
-        result_result = extensionGetter_deinitNeeded (enumerator_14492.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 360)) ;
-        enumerator_14492.gotoNextObject () ;
-        if (enumerator_14492.hasCurrentObject ()) {
-          bool_1 = result_result.operator_not (SOURCE_FILE ("types.galgas", 359)).isValidAndTrue () ;
+    GALGAS_propertyList var_propertyList_13992 ;
+    inObject.mProperty_kind.method_structure (var_propertyList_13992, inCompiler COMMA_SOURCE_FILE ("types.galgas", 343)) ;
+    cEnumerator_propertyList enumerator_14045 (var_propertyList_13992, kENUMERATION_UP) ;
+    bool bool_1 = result_result.operator_not (SOURCE_FILE ("types.galgas", 344)).isValidAndTrue () ;
+    if (enumerator_14045.hasCurrentObject () && bool_1) {
+      while (enumerator_14045.hasCurrentObject () && bool_1) {
+        result_result = extensionGetter_deinitNeeded (enumerator_14045.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 345)) ;
+        enumerator_14045.gotoNextObject () ;
+        if (enumerator_14045.hasCurrentObject ()) {
+          bool_1 = result_result.operator_not (SOURCE_FILE ("types.galgas", 344)).isValidAndTrue () ;
         }
       }
     }

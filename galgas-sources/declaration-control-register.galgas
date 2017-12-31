@@ -319,7 +319,7 @@ private proc controlRegisterType
 private proc buildControlRegisterSliceMap
   ?let @controlRegisterBitSliceList inRegisterBitSliceList
   ?let @location inEndOfBitSliceLocation
-  ?!context:@semanticContext unused ioContext
+  ?!context:@semanticContext ioContext
   ?!type:@PLMType ioRegisterType
   ?bitCount:let @uint inRegisterBitCount
   !@controlRegisterFieldMap outRegisterFieldMap
@@ -360,7 +360,7 @@ private proc buildControlRegisterSliceMap
           !.icmp_ne
           !0G
           !{}
-          !booleanType ()
+          ![ioContext booleanType]
         ]
       #--- property name
         let mask = ((1G << bitCount) - 1G) << shiftCount

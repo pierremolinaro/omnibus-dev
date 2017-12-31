@@ -115,6 +115,7 @@ override method @integerDeclarationAST enterInContext
 {
   let integerTypeName = [[self typeName] nowhere]
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!boolTypeName () !.nowhere} ?let boolTypeProxy]
 #--------------------------------------- Get min and max
   let min = minValueForInteger (!not mIsSigned !mSize)
   let max = maxValueForInteger (!not mIsSigned !mSize)
@@ -127,6 +128,16 @@ override method @integerDeclarationAST enterInContext
       !methodName:byteSwappedMethoName ()
       !safe:true
       !resultTypeProxy:selfTypeProxy
+      !canMutateProperties:false
+    ]
+  end
+  if mSize == 1 && not mIsSigned then # Add "bool" intrinsic function
+    [!?propertyMap addFunctionWithoutArgument
+      !?ioSubprogramInvocationGraph
+      !receiverTypeProxy:selfTypeProxy
+      !methodName:boolTypeName ()
+      !safe:true
+      !resultTypeProxy:boolTypeProxy
       !canMutateProperties:false
     ]
   end
@@ -264,9 +275,36 @@ private proc generateIntegerIntrinsicFunction
 
 #·······················································································································
 
+private proc generateUInt1ToBoolFunction
+  ?PLMTypeName:let @string inPLMtypeName
+  ?!@string ioLLVMcode
+  ?LLVMTypeName:let @string inLLVMtypeName
+{
+  let routineMangledName = routineMangledNameFromAST (
+    !llvmTypeStringFromPLMname (!inPLMtypeName)
+    ![boolTypeName () nowhere]
+    !{}
+  )
+  let functionName = llvmNameForFunction (!routineMangledName)
+  ioLLVMcode += "define internal " + inLLVMtypeName + " @" + functionName + " (" + inLLVMtypeName + "* %inValue) {\n"
+  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inValue\n"
+  ioLLVMcode += "  ret i1 %value\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#·······················································································································
+
 override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
   let llvmTypeName = "i" + mSize
   ioLLVMcode += llvmTitleComment (!"INTEGER TYPE $" + mTypeName)
+#--- Add "bool" function for $uint1
+  if (mSize == 1) && not mIsSigned then
+    generateUInt1ToBoolFunction (
+      !PLMTypeName:mTypeName
+      !?ioLLVMcode
+      !LLVMTypeName:llvmTypeName
+    )
+  end
 #--- Add "byteSwapped" intrinsic function
   if (mSize mod 16) == 0 then
     generateIntegerIntrinsicFunction (
@@ -326,36 +364,37 @@ private proc enter_integer_integer_operators
   ?!context:@semanticContext ioContext
 {
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
+  let booleanType = [ioContext booleanType]
 #--- Comparison infix operator
   let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
   ]
 #--- Bit Wise operators (for unsigned integers)
@@ -498,36 +537,37 @@ private proc enter_integer_literal_operators
 {
 #--- Infix operators
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
+  let booleanType = [ioContext booleanType]
 #--- Comparison infix operator
   let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !staticIntegerTypeName ())
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@integerObject_literal_infixOperator.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@integerObject_literal_infixOperator.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
   ]
 #--- Bit Wise operators (for unsigned integers)
@@ -662,34 +702,35 @@ private proc enter_literal_integer_operators
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
 #--- Comparison infix operator
   let intLiteralOp = combineTypeNamesForInfixOperator (!staticIntegerTypeName () !inIntegerTypeName.string)
+  let booleanType = [ioContext booleanType]
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@literal_integerObject_infixOperator.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@literal_integerObject_infixOperator.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intLiteralOp
-    !booleanType ()
+    !booleanType
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
   ]
 #--- Bit Wise operators (for unsigned integers)

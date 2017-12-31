@@ -8851,7 +8851,7 @@ void extensionMethod_svcDeclarationGeneration (const GALGAS_routineMapIR inObjec
     if (kBoolTrue == test_1) {
       GALGAS_string var_svcCallName_11302 = function_llvmNameForSVCCall (enumerator_11238.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11238.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 316)) ;
       GALGAS_string var_svcImplementationName_11399 = function_llvmNameForSVCImplementation (enumerator_11238.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11238.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 317)) ;
-      GALGAS_string var_prototype_11494 = function_llvmFunctionPrototype (enumerator_11238.current (HERE).getter_mReturnType (HERE), var_svcCallName_11302, enumerator_11238.current (HERE).getter_mReceiverType (HERE), enumerator_11238.current (HERE).getter_mFormalArgumentListForGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 318)) ;
+      GALGAS_string var_prototype_11494 = function_llvmFunctionPrototype (extensionGetter_llvmTypeName (enumerator_11238.current (HERE).getter_mReturnType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 319)), var_svcCallName_11302, enumerator_11238.current (HERE).getter_mReceiverType (HERE), enumerator_11238.current (HERE).getter_mFormalArgumentListForGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 318)) ;
       ioArgument_ioGenerationAdds.mProperty_mExternFunctionDeclarationSet.addAssign_operation (var_prototype_11494  COMMA_SOURCE_FILE ("declaration-svc.galgas", 324)) ;
       switch (enumerator_11238.current (HERE).getter_mKind (HERE).enumValue ()) {
       case GALGAS_routineKind::kNotBuilt:
