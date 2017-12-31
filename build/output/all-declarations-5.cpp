@@ -72,7 +72,7 @@ void extensionSetter_referenceFromPossibleValue (GALGAS_instructionListIR & ioOb
   }
   const enumGalgasBool test_0 = var_performStore_325.boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_string var_llvmTemporaryName_950 = function_llvmNameForLocalVariable (GALGAS_string ("tempz.").add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 32)) ;
+    GALGAS_string var_llvmTemporaryName_950 = function_llvmNameForLocalVariable (GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 32)) ;
     ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 33)) ;
     ioArgument_ioAllocaList.addAssign_operation (var_llvmTemporaryName_950, extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 35)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 35)) ;
     {

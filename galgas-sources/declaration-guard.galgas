@@ -500,7 +500,7 @@ method @guardMapIR-element llvmCodeGeneration
     guardRoutineName = llvmNameForGuardImplementation (!lkey.string)
     ioLLVMcode += llvmTitleComment (!guardRoutineName)
     let prototype = llvmFunctionPrototype (
-      !booleanType ()
+      !"i1" # Boolean
       !llvmNameForGuardCall (!lkey.string)
       !mReceiverType
       !mFormalArgumentListForGeneration

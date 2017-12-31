@@ -211,7 +211,6 @@ private proc addTargetSpecificFiles
   ?currentDirectory:let @string inCurrentDirectory
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
-#  @ast ast = .default
   if [option plm_options.useDirAsTargetDir value] != "" then # Target is defined in files
     let targetDirectory = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     if [targetDirectory directoryExists] then

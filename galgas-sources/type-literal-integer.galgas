@@ -77,34 +77,35 @@ private proc enterLiteralIntegerOperators
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !literalIntegerTypeName} type]
 #  ioContext.mLiteralIntegerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !literalIntegerTypeName}
 #--- Comparison infix operator
+  let booleanType = [ioContext booleanType]
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@literal_literal_integerInfixOperation.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@literal_literal_integerInfixOperation.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@literal_literal_integerInfixOperation.new {!.icmp_slt}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@literal_literal_integerInfixOperation.new {!.icmp_sle}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@literal_literal_integerInfixOperation.new {!.icmp_sgt}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
-    !booleanType ()
+    !booleanType
     !@literal_literal_integerInfixOperation.new {!.icmp_sge}
   ]
 #--- Bit Wise operators (for unsigned integers)

@@ -136,7 +136,7 @@ override method @bitbandInstructionAST analyze
       bitExpressionOperand = loadedResultValue
     end
   #--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
-    if [bitExpressionOperand isLiteralInteger] then
+    if ([bitExpressionOperand type].plmOriginalTypeName == staticIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
       [bitExpressionOperand literalInteger ?1* ?value:let @bigint value]
       if (value < 0G) || (value >= registerBitCount) then
         error mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
@@ -177,7 +177,7 @@ override method @bitbandInstructionAST analyze
       sourceExpressionOperand = loadedResultValue
     end
   #--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
-    if [sourceExpressionOperand isLiteralInteger] then
+    if ([sourceExpressionOperand type].plmOriginalTypeName == staticIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
       [sourceExpressionOperand literalInteger ?1* ?value:let @bigint value]
       if (value < 0G) || (value > 1G) then
         error mSourceExpressionLocation : "static value should be 0 or 1"

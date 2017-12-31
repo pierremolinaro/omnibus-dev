@@ -3760,15 +3760,13 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mPanicLineType ;
 
-  public : GALGAS_unifiedTypeMap mProperty_mTypeMap ;
+  public : GALGAS_panicRoutinePriorityMap mProperty_mPanicSetupRoutinePriorityMap ;
+
+  public : GALGAS_panicRoutinePriorityMap mProperty_mPanicLoopRoutinePriorityMap ;
 
   public : GALGAS_routineMapForContext mProperty_mRoutineMapForContext ;
 
   public : GALGAS_guardMapForContext mProperty_mGuardMapForContext ;
-
-  public : GALGAS_panicRoutinePriorityMap mProperty_mPanicSetupRoutinePriorityMap ;
-
-  public : GALGAS_panicRoutinePriorityMap mProperty_mPanicLoopRoutinePriorityMap ;
 
   public : GALGAS_controlRegisterGroupMap mProperty_mControlRegisterGroupMap ;
 
@@ -3779,6 +3777,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_driverMap mProperty_mDriverMap ;
 
   public : GALGAS_staticlistMap mProperty_mStaticListMap ;
+
+  public : GALGAS_unifiedTypeMap mProperty_mTypeMap ;
 
   public : GALGAS_stringset mProperty_mDefinedInterruptSet ;
 
@@ -3857,16 +3857,16 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_semanticContext (const GALGAS_targetParameters & in_mTargetParameters,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mPanicCodeType,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mPanicLineType,
-                                   const GALGAS_unifiedTypeMap & in_mTypeMap,
-                                   const GALGAS_routineMapForContext & in_mRoutineMapForContext,
-                                   const GALGAS_guardMapForContext & in_mGuardMapForContext,
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
+                                   const GALGAS_routineMapForContext & in_mRoutineMapForContext,
+                                   const GALGAS_guardMapForContext & in_mGuardMapForContext,
                                    const GALGAS_controlRegisterGroupMap & in_mControlRegisterGroupMap,
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
                                    const GALGAS_globalSyncInstanceMap & in_mGlobalSyncInstanceMap,
                                    const GALGAS_driverMap & in_mDriverMap,
                                    const GALGAS_staticlistMap & in_mStaticListMap,
+                                   const GALGAS_unifiedTypeMap & in_mTypeMap,
                                    const GALGAS_stringset & in_mDefinedInterruptSet,
                                    const GALGAS_availableInterruptMap & in_mAvailableInterruptMap,
                                    const GALGAS_infixOperatorMap & in_mEqualOperatorMap,
@@ -3912,16 +3912,16 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : static class GALGAS_semanticContext constructor_new (const class GALGAS_targetParameters & inOperand0,
                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                                const class GALGAS_unifiedTypeMap & inOperand3,
-                                                                const class GALGAS_routineMapForContext & inOperand4,
-                                                                const class GALGAS_guardMapForContext & inOperand5,
-                                                                const class GALGAS_panicRoutinePriorityMap & inOperand6,
-                                                                const class GALGAS_panicRoutinePriorityMap & inOperand7,
-                                                                const class GALGAS_controlRegisterGroupMap & inOperand8,
-                                                                const class GALGAS_globalConstantMap & inOperand9,
-                                                                const class GALGAS_globalSyncInstanceMap & inOperand10,
-                                                                const class GALGAS_driverMap & inOperand11,
-                                                                const class GALGAS_staticlistMap & inOperand12,
+                                                                const class GALGAS_panicRoutinePriorityMap & inOperand3,
+                                                                const class GALGAS_panicRoutinePriorityMap & inOperand4,
+                                                                const class GALGAS_routineMapForContext & inOperand5,
+                                                                const class GALGAS_guardMapForContext & inOperand6,
+                                                                const class GALGAS_controlRegisterGroupMap & inOperand7,
+                                                                const class GALGAS_globalConstantMap & inOperand8,
+                                                                const class GALGAS_globalSyncInstanceMap & inOperand9,
+                                                                const class GALGAS_driverMap & inOperand10,
+                                                                const class GALGAS_staticlistMap & inOperand11,
+                                                                const class GALGAS_unifiedTypeMap & inOperand12,
                                                                 const class GALGAS_stringset & inOperand13,
                                                                 const class GALGAS_availableInterruptMap & inOperand14,
                                                                 const class GALGAS_infixOperatorMap & inOperand15,

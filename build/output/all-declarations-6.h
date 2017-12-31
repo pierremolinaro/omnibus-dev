@@ -1754,7 +1754,7 @@ void extensionMethod_svcDeclarationGeneration (const class GALGAS_routineMapIR i
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_PLMType & constinArgument0,
+class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_string & constinArgument0,
                                                     const class GALGAS_string & constinArgument1,
                                                     const class GALGAS_PLMType & constinArgument2,
                                                     const class GALGAS_routineFormalArgumentListIR & constinArgument3,

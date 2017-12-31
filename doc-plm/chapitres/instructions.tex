@@ -105,24 +105,6 @@ Ou encore toute combinaison de propriétés et d'éléments de tableau.
 
 
 
-%\sectionLabel{Instructions d'incrémentation et de décrémentation}{instructionIncDec}
-%\index{Incrementation@Incrémentation!Instruction}
-%\index{Decrementation@Decrémentation!Instruction}
-%
-%Les opérateurs postfixés \plm=++= et \plm=--= réalisent respectivement l'incrémentation et la décrémentation de la variable nommée dans l'instruction :
-%\begin{PLM}
-%variable ++
-%\end{PLM}
-%
-%\plm=++= et \plm=--= déclenchent la panique sur dépassement de capacité.
-%
-%Les opérateurs \plm=++%= et \plm=--%= ignorent le dépassement de capacité.
-%
-%Les instructions d'incrémentation et de décrémentation de variables entières sont détaillées à la \refSectionPage{incDecEntier}.
-%
-
-
-
 
 
 \sectionLabel {Opérateurs combinés avec l'affectation}{operateursCombinesAffectation}
@@ -155,6 +137,48 @@ Le \refTableau{tableauOperateursCombinesAffectation} liste les opérateurs combi
 \labelTableau{tableauOperateursCombinesAffectation}
 \end{table}
 
+
+
+
+
+
+
+
+
+\sectionLabel{Instruction d'affectation «~Bit banding~»}{bitbandRegistreControle}
+
+La technique de «~Bit banding~» est implémentée sur certains processeurs pour pouvoir mettre à 0 ou à 1 un bit d'un registre, et ce de manière atomique. C'est par exemple le cas des Cortex-M4.
+
+Considérons l'instruction suivante~:
+\begin{PLM}
+GPIOB.PDDR |= 1 << 16
+\end{PLM}
+Son exécution met à 1 le bit n°16 du registre \plm+GPIOB.PDDR+. Mais cette opération n'est pas atomique sur un Cortex-M4. Si elle apparaît dans une fonction s'exécutant en mode utilisateur, elle peut être interrompue.
+
+Pour la rendre atomique, on pourrait l'enfermer dans une \plm=section=. En PLM, une autre possibilité est d'utiliser l'instruction de «~Bit banding~»~:
+\begin{PLM}
+\~{GPIOB.PDDR : 16} = 1
+\end{PLM}
+
+La forme générale de cette instruction est~:
+\begin{PLM}
+\~{registre_contrôle : numéro_bit} = expression_source
+\end{PLM}
+
+PLM limite le bit-banding à une zone de registres, aussi le premier argument \plm=registre_contrôle= doit nommer un registre de contrôle. L'argument \plm=numéro_bit= désigne le bit du registre par son numéro, c'est une expression du type \plm=$uint5= pour un registre 32-bits, \plm=$uint4= pour un registre 16-bits et \plm=$uint3= pour un registre 8-bits.
+L'\plm=expression_source= est de type \plm=$uint1=, et donne la valeur à affecter au bit du registre.
+
+
+
+
+
+
+\section{Instruction de décomposition d'un entier non signé en tranches}
+
+Cette forme particulière d'affectation permet de décomposer une valeur entière non signée en tranches. Par exemple~:
+\begin{PLM}
+\~{$uint8 ?1:var b1 ?2:let b2 ?5:let b3} = 0xCC // b1 <- 1, b3 <- 2, b3 <- 12
+\end{PLM}
 
 \sectionLabel{Instruction \texttt{check}}{directiveCheck}\index{check@\plm=check=}
 

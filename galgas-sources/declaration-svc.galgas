@@ -274,12 +274,12 @@ list @primitiveAndServiceIRlist {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmFunctionPrototype ?let @PLMType inReturnType
+func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
                            ?let @string inFunctionName
                            ?let @PLMType inReceiverType
                            ?let @routineFormalArgumentListIR inFormalArgumentListForGeneration
                            -> @string {
-  result = [inReturnType llvmTypeName]
+  result = inReturnTypeLLVMName
   result += " @" + inFunctionName + " ("
   var first = true
   if inReceiverType.kind != .void then
@@ -316,7 +316,7 @@ method @routineMapIR svcDeclarationGeneration
       let svcCallName = llvmNameForSVCCall (!svc.mRoutineNameForGeneration !svc.mKind)
       let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineNameForGeneration !svc.mKind)
       let prototype = llvmFunctionPrototype (
-        !svc.mReturnType
+        ![svc.mReturnType llvmTypeName]
         !svcCallName
         !svc.mReceiverType
         !svc.mFormalArgumentListForGeneration
