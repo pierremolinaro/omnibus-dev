@@ -5,6 +5,7 @@ check target "teensy-3-6/unprivileged"
 //——————————————————————————————————————————————————————————————————————————————
   
 enum $digitalPort {
+//--- Common with Teensy 3.1 / 3.2
   case D0  // PTB16
   case D1  // PTB17
   case D2  // PTD0
@@ -29,6 +30,41 @@ enum $digitalPort {
   case D21 // PTD6
   case D22 // PTC1
   case D23 // PTC2
+//--- Only on Teensy 3.6
+  case D24 // PTE26
+  case D25 // PTA5
+  case D26 // PTA14
+  case D27 // PTA15
+  case D28 // PTA16
+  case D29 // PTB18
+  case D30 // PTB19
+  case D31 // PTB10
+  case D32 // PTB11
+  case D33 // PTE24
+  case D34 // PTE25
+  case D35 // PTC8
+  case D36 // PTC9
+  case D37 // PTC10
+  case D38 // PTC11
+  case D39 // PTA17
+  case D40 // PTA28
+  case D41 // PTA29
+  case D42 // PTA26
+  case D43 // PTB20
+  case D44 // PTB22
+  case D45 // PTB23
+  case D46 // PTB21
+  case D47 // PTD8
+  case D48 // PTD9
+  case D49 // PTB4
+  case D50 // PTB5
+  case D51 // PTD14
+  case D52 // PTD13
+  case D53 // PTD12
+  case D54 // PTD15
+  case D55 // PTD11
+  case D56 // PTE10
+  case D57 // PTE11
 }
 
 //··············································································
@@ -76,367 +112,199 @@ driver digital > root {
 
   public func set @noUnusedWarning (?mode:mode $digitalMode
                                     ?toPort:port $digitalPort) {
+  //--- Set config and dir to apply
+   var config $uint32
+    var dir $uint1
+    switch mode {
+    case OUTPUT :
+      config = {PORTC.PCR !MUX:1}
+      dir = 1
+    case OUTPUT_OPEN_COLLECTOR :
+      config = {PORTC.PCR !MUX:1 !ODE:1}
+      dir = 1
+    case INPUT :
+      config = {PORTC.PCR !MUX:1}
+      dir = 0
+    case INPUT_PULLUP :
+      config = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
+      dir = 0
+    }
+  //---Apply
     switch port {
     case D0 : // PTB16
-      switch mode {
-      case OUTPUT :
-        PORTB.PCR [16] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 16} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTB.PCR [16] = {PORTB.PCR !MUX:1 !ODE:1}
-        {GPIOB.PDDR : 16} = 1
-      case INPUT :
-        PORTB.PCR [16] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 16} = 0
-      case INPUT_PULLUP :
-        PORTB.PCR [16] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOB.PDDR : 16} = 0
-      }
+      PORTB.PCR [16] = config
+      {GPIOB.PDDR : 16} = dir
     case D1 : // PTB17
-      switch mode {
-      case OUTPUT :
-        PORTB.PCR [17] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 17} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTB.PCR [17] = {PORTB.PCR !MUX:1 !ODE:1}
-        {GPIOB.PDDR : 17} = 1
-      case INPUT :
-        PORTB.PCR [17] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 17} = 0
-      case INPUT_PULLUP :
-        PORTB.PCR [17] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOB.PDDR : 17} = 0
-      }
+      PORTB.PCR [17] = config
+      {GPIOB.PDDR : 17} = dir
     case D2 : // PTD0
-      switch mode {
-      case OUTPUT :
-        PORTD.PCR [0] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 0} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTD.PCR [0] = {PORTD.PCR !MUX:1 !ODE:1}
-        {GPIOD.PDDR : 0} = 1
-      case INPUT :
-        PORTD.PCR [0] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 0} = 0
-      case INPUT_PULLUP :
-        PORTD.PCR [0] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOD.PDDR : 0} = 0
-      }
+      PORTD.PCR [0] = config
+      {GPIOD.PDDR : 0} = dir
     case D3 : // PTA12
-      switch mode {
-      case OUTPUT :
-        PORTA.PCR [12] = {PORTA.PCR !MUX:1}
-        {GPIOA.PDDR : 12} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTA.PCR [12] = {PORTA.PCR !MUX:1 !ODE:1}
-        {GPIOA.PDDR : 12} = 1
-      case INPUT :
-        PORTA.PCR [12] = {PORTA.PCR !MUX:1}
-        {GPIOA.PDDR : 12} = 0
-      case INPUT_PULLUP :
-        PORTA.PCR [12] = {PORTA.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOA.PDDR : 12} = 0
-      }
+      PORTA.PCR [12] = config
+      {GPIOA.PDDR : 12} = dir
     case D4 : // PTA13
-      switch mode {
-      case OUTPUT :
-        PORTA.PCR [13] = {PORTA.PCR !MUX:1}
-        {GPIOA.PDDR : 13} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTA.PCR [13] = {PORTA.PCR !MUX:1 !ODE:1}
-        {GPIOA.PDDR : 13} = 1
-      case INPUT :
-        PORTA.PCR [13] = {PORTA.PCR !MUX:1}
-        {GPIOA.PDDR : 13} = 0
-      case INPUT_PULLUP :
-        PORTA.PCR [13] = {PORTA.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOA.PDDR : 13} = 0
-      }
+      PORTA.PCR [13] = config
+      {GPIOA.PDDR : 13} = dir
     case D5 : // PTD7
-      switch mode {
-      case OUTPUT :
-        PORTD.PCR [7] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 7} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTD.PCR [7] = {PORTD.PCR !MUX:1 !ODE:1}
-        {GPIOD.PDDR : 7} = 1
-      case INPUT :
-        PORTD.PCR [7] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 7} = 0
-      case INPUT_PULLUP :
-        PORTD.PCR [7] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOD.PDDR : 7} = 0
-      }
+      PORTD.PCR [7] = config
+      {GPIOD.PDDR : 7} = dir
     case D6 : // PTD4
-      switch mode {
-      case OUTPUT :
-        PORTD.PCR [4] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 4} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTD.PCR [4] = {PORTD.PCR !MUX:1 !ODE:1}
-        {GPIOD.PDDR : 4} = 1
-      case INPUT :
-        PORTD.PCR [4] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 4} = 0
-      case INPUT_PULLUP :
-        PORTD.PCR [4] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOD.PDDR : 4} = 0
-      }
+      PORTD.PCR [4] = config
+      {GPIOD.PDDR : 4} = dir
     case D7 : // PTD2
-      switch mode {
-      case OUTPUT :
-        PORTD.PCR [2] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 2} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTD.PCR [2] = {PORTD.PCR !MUX:1 !ODE:1}
-        {GPIOD.PDDR : 2} = 1
-      case INPUT :
-        PORTD.PCR [2] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 2} = 0
-      case INPUT_PULLUP :
-        PORTD.PCR [2] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOD.PDDR : 2} = 0
-      }
+      PORTD.PCR [2] = config
+      {GPIOD.PDDR : 2} = dir
     case D8 : // PTD3
-      switch mode {
-      case OUTPUT :
-        PORTD.PCR [3] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 3} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTD.PCR [3] = {PORTD.PCR !MUX:1 !ODE:1}
-        {GPIOD.PDDR : 3} = 1
-      case INPUT :
-        PORTD.PCR [3] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 3} = 0
-      case INPUT_PULLUP :
-        PORTD.PCR [3] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOD.PDDR : 3} = 0
-      }
+      PORTD.PCR [3] = config
+      {GPIOD.PDDR : 3} = dir
     case D9  : // PTC3
-      switch mode {
-      case OUTPUT :
-        PORTC.PCR [3] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 3} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTC.PCR [3] = {PORTC.PCR !MUX:1 !ODE:1}
-        {GPIOC.PDDR : 3} = 1
-      case INPUT :
-        PORTC.PCR [3] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 3} = 0
-      case INPUT_PULLUP :
-        PORTC.PCR [3] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOC.PDDR : 3} = 0
-      }
+      PORTC.PCR [3] = config
+      {GPIOC.PDDR : 3} = dir
     case D10 : // PTC4
-      switch mode {
-      case OUTPUT :
-        PORTC.PCR [4] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 4} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTC.PCR [4] = {PORTC.PCR !MUX:1 !ODE:1}
-        {GPIOC.PDDR : 4} = 1
-      case INPUT :
-        PORTC.PCR [4] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 4} = 0
-      case INPUT_PULLUP :
-        PORTC.PCR [4] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOC.PDDR : 4} = 0
-      }
+      PORTC.PCR [4] = config
+      {GPIOC.PDDR : 4} = dir
     case D11 : // PTC6
-      switch mode {
-      case OUTPUT :
-        PORTC.PCR [6] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 6} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTC.PCR [6] = {PORTC.PCR !MUX:1 !ODE:1}
-        {GPIOC.PDDR : 6} = 1
-      case INPUT :
-        PORTC.PCR [6] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 6} = 0
-      case INPUT_PULLUP :
-        PORTC.PCR [6] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOC.PDDR : 6} = 0
-      }
+      PORTC.PCR [6] = config
+      {GPIOC.PDDR : 6} = dir
     case D12 : // PTC7
-      switch mode {
-      case OUTPUT :
-        PORTC.PCR [7] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 7} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTC.PCR [7] = {PORTC.PCR !MUX:1 !ODE:1}
-        {GPIOC.PDDR : 7} = 1
-      case INPUT :
-        PORTC.PCR [7] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 7} = 0
-      case INPUT_PULLUP :
-        PORTC.PCR [7] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOC.PDDR : 7} = 0
-      }
+      PORTC.PCR [7] = config
+      {GPIOC.PDDR : 7} = dir
     case D13 : // PTC5
-      switch mode {
-      case OUTPUT :
-        PORTC.PCR [5] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 5} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTC.PCR [5] = {PORTC.PCR !MUX:1 !ODE:1}
-        {GPIOC.PDDR : 5} = 1
-      case INPUT :
-        PORTC.PCR [5] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 5} = 0
-      case INPUT_PULLUP :
-        PORTC.PCR [5] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOC.PDDR : 5} = 0
-      }
+      PORTC.PCR [5] = config
+      {GPIOC.PDDR : 5} = dir
     case D14 : // PTD1
-      switch mode {
-      case OUTPUT :
-        PORTD.PCR [1] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 1} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTD.PCR [1] = {PORTD.PCR !MUX:1 !ODE:1}
-        {GPIOD.PDDR : 1} = 1
-      case INPUT :
-        PORTD.PCR [1] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 1} = 0
-      case INPUT_PULLUP :
-        PORTD.PCR [1] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOD.PDDR : 1} = 0
-      }
+      PORTD.PCR [1] = config
+      {GPIOD.PDDR : 1} = dir
     case D15 : // PTC0
-      switch mode {
-      case OUTPUT :
-        PORTC.PCR [0] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 0} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTC.PCR [0] = {PORTC.PCR !MUX:1 !ODE:1}
-        {GPIOC.PDDR : 0} = 1
-      case INPUT :
-        PORTC.PCR [0] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 0} = 0
-      case INPUT_PULLUP :
-        PORTC.PCR [0] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOC.PDDR : 0} = 0
-      }
+      PORTC.PCR [0] = config
+      {GPIOC.PDDR : 0} = dir
     case D16 : // PTB0
-      switch mode {
-      case OUTPUT :
-        PORTB.PCR [0] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 0} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTB.PCR [0] = {PORTB.PCR !MUX:1 !ODE:1}
-        {GPIOB.PDDR : 0} = 1
-      case INPUT :
-        PORTB.PCR [0] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 0} = 0
-      case INPUT_PULLUP :
-        PORTB.PCR [0] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOB.PDDR : 0} = 0
-      }
+      PORTB.PCR [0] = config
+      {GPIOB.PDDR : 0} = dir
     case D17 : // PTB1
-      switch mode {
-      case OUTPUT :
-        PORTB.PCR [1] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 1} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTB.PCR [1] = {PORTB.PCR !MUX:1 !ODE:1}
-        {GPIOB.PDDR : 1} = 1
-      case INPUT :
-        PORTB.PCR [1] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 1} = 0
-      case INPUT_PULLUP :
-        PORTB.PCR [1] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOB.PDDR : 1} = 0
-      }
+      PORTB.PCR [1] = config
+      {GPIOB.PDDR : 1} = dir
     case D18 : // PTB3
-      switch mode {
-      case OUTPUT :
-        PORTB.PCR [3] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 3} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTB.PCR [3] = {PORTB.PCR !MUX:1 !ODE:1}
-        {GPIOB.PDDR : 3} = 1
-      case INPUT :
-        PORTB.PCR [3] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 3} = 0
-      case INPUT_PULLUP :
-        PORTB.PCR [3] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOB.PDDR : 3} = 0
-      }
+      PORTB.PCR [3] = config
+      {GPIOB.PDDR : 3} = dir
     case D19 : // PTB2
-      switch mode {
-      case OUTPUT :
-        PORTB.PCR [2] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 2} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTB.PCR [2] = {PORTB.PCR !MUX:1 !ODE:1}
-        {GPIOB.PDDR : 2} = 1
-      case INPUT :
-        PORTB.PCR [2] = {PORTB.PCR !MUX:1}
-        {GPIOB.PDDR : 2} = 0
-      case INPUT_PULLUP :
-        PORTB.PCR [2] = {PORTB.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOB.PDDR : 2} = 0
-      }
+      PORTB.PCR [2] = config
+      {GPIOB.PDDR : 2} = dir
     case D20 : // PTD5
-      switch mode {
-      case OUTPUT :
-        PORTD.PCR [5] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 5} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTD.PCR [5] = {PORTD.PCR !MUX:1 !ODE:1}
-        {GPIOD.PDDR : 5} = 1
-      case INPUT :
-        PORTD.PCR [5] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 5} = 0
-      case INPUT_PULLUP :
-        PORTD.PCR [5] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOD.PDDR : 5} = 0
-      }
+      PORTD.PCR [5] = config
+      {GPIOD.PDDR : 5} = dir
     case D21 : // PTD6
-      switch mode {
-      case OUTPUT :
-        PORTD.PCR [6] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 6} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTD.PCR [6] = {PORTD.PCR !MUX:1 !ODE:1}
-        {GPIOD.PDDR : 6} = 1
-      case INPUT :
-        PORTD.PCR [6] = {PORTD.PCR !MUX:1}
-        {GPIOD.PDDR : 6} = 0
-      case INPUT_PULLUP :
-        PORTD.PCR [6] = {PORTD.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOD.PDDR : 6} = 0
-      }
+      PORTD.PCR [6] = config
+      {GPIOD.PDDR : 6} = dir
     case D22 : // PTC1
-      switch mode {
-      case OUTPUT :
-        PORTC.PCR [1] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 1} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTC.PCR [1] = {PORTC.PCR !MUX:1 !ODE:1}
-        {GPIOC.PDDR : 1} = 1
-      case INPUT :
-        PORTC.PCR [1] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 1} = 0
-      case INPUT_PULLUP :
-        PORTC.PCR [1] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOC.PDDR : 1} = 0
-      }
+      PORTC.PCR [1] = config
+      {GPIOC.PDDR : 1} = dir
     case D23 : // PTC2
-      switch mode {
-      case OUTPUT :
-        PORTC.PCR [2] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 2} = 1
-      case OUTPUT_OPEN_COLLECTOR :
-        PORTC.PCR [2] = {PORTC.PCR !MUX:1 !ODE:1}
-        {GPIOC.PDDR : 2} = 1
-      case INPUT :
-        PORTC.PCR [2] = {PORTC.PCR !MUX:1}
-        {GPIOC.PDDR : 2} = 0
-      case INPUT_PULLUP :
-        PORTC.PCR [2] = {PORTC.PCR !MUX:1 !PE:1 !PS:1}
-        {GPIOC.PDDR : 2} = 0
-      }
+      PORTC.PCR [2] = config
+      {GPIOC.PDDR : 2} = dir
+    case D24 : // PTE26
+      PORTE.PCR [26] = config
+      {GPIOE.PDDR : 26} = dir
+    case D25 : // PTA5
+      PORTA.PCR [5] = config
+      {GPIOA.PDDR : 5} = dir
+    case D26 : // PTA14
+      PORTA.PCR [14] = config
+      {GPIOA.PDDR : 14} = dir
+    case D27 : // PTA15
+      PORTA.PCR [15] = config
+      {GPIOA.PDDR : 15} = dir
+    case D28 : // PTA16
+      PORTA.PCR [16] = config
+      {GPIOA.PDDR : 16} = dir
+    case D29 : // PTB18
+      PORTB.PCR [18] = config
+      {GPIOB.PDDR : 18} = dir
+    case D30 : // PTB19
+      PORTB.PCR [19] = config
+      {GPIOB.PDDR : 19} = dir
+    case D31 : // PTB10
+      PORTB.PCR [10] = config
+      {GPIOB.PDDR : 10} = dir
+    case D32 : // PTB11
+      PORTB.PCR [11] = config
+      {GPIOB.PDDR : 11} = dir
+    case D33 : // PTE24
+      PORTE.PCR [24] = config
+      {GPIOE.PDDR : 24} = dir
+    case D34 : // PTE25
+      PORTE.PCR [25] = config
+      {GPIOE.PDDR : 25} = dir
+    case D35 : // PTC8
+      PORTC.PCR [8] = config
+      {GPIOC.PDDR : 8} = dir
+    case D36 : // PTC9
+      PORTC.PCR [9] = config
+      {GPIOC.PDDR : 9} = dir
+    case D37 : // PTC10
+      PORTC.PCR [10] = config
+      {GPIOC.PDDR : 10} = dir
+    case D38 : // PTC11
+       PORTC.PCR [11] = config
+      {GPIOC.PDDR : 11} = dir
+   case D39 : // PTA17
+      PORTA.PCR [17] = config
+      {GPIOA.PDDR : 17} = dir
+    case D40 : // PTA28
+      PORTA.PCR [28] = config
+      {GPIOA.PDDR : 28} = dir
+    case D41 : // PTA29
+      PORTA.PCR [29] = config
+      {GPIOA.PDDR : 29} = dir
+    case D42 : // PTA26
+      PORTA.PCR [26] = config
+      {GPIOA.PDDR : 26} = dir
+    case D43 : // PTB20
+      PORTB.PCR [20] = config
+      {GPIOB.PDDR : 20} = dir
+    case D44 : // PTB22
+      PORTB.PCR [22] = config
+      {GPIOB.PDDR : 22} = dir
+    case D45 : // PTB23
+      PORTB.PCR [23] = config
+      {GPIOB.PDDR : 23} = dir
+    case D46 : // PTB21
+      PORTB.PCR [21] = config
+      {GPIOB.PDDR : 21} = dir
+    case D47 : // PTD8
+      PORTD.PCR [8] = config
+      {GPIOD.PDDR : 8} = dir
+    case D48 : // PTD9
+      PORTD.PCR [9] = config
+      {GPIOD.PDDR : 9} = dir
+    case D49 : // PTB4
+      PORTB.PCR [4] = config
+      {GPIOB.PDDR : 4} = dir
+    case D50 : // PTB5
+      PORTB.PCR [5] = config
+      {GPIOB.PDDR : 5} = dir
+    case D51 : // PTD14
+      PORTD.PCR [14] = config
+      {GPIOD.PDDR : 14} = dir
+    case D52 : // PTD13
+      PORTD.PCR [13] = config
+      {GPIOD.PDDR : 13} = dir
+    case D53 : // PTD12
+      PORTD.PCR [12] = config
+      {GPIOD.PDDR : 12} = dir
+    case D54 : // PTD15
+       PORTD.PCR [15] = config
+      {GPIOD.PDDR : 15} = dir
+   case D55 : // PTD11
+      PORTD.PCR [11] = config
+      {GPIOD.PDDR : 11} = dir
+    case D56 : // PTE10
+      PORTE.PCR [10] = config
+      {GPIOE.PDDR : 10} = dir
+    case D57 : // PTE11
+      PORTE.PCR [11] = config
+      {GPIOE.PDDR : 11} = dir
     }
   }
   
@@ -589,6 +457,210 @@ driver digital > root {
       }else{
         GPIOC.PCOR = 1 << 2 ;
       }
+    case D24 : // PTE26
+      if value {
+        GPIOE.PSOR = 1 << 26 ;
+      }else{
+        GPIOE.PCOR = 1 << 26 ;
+      }
+    case D25 : // PTA5
+      if value {
+        GPIOA.PSOR = 1 << 5 ;
+      }else{
+        GPIOA.PCOR = 1 << 5 ;
+      }
+    case D26 : // PTA14
+      if value {
+        GPIOA.PSOR = 1 << 14 ;
+      }else{
+        GPIOA.PCOR = 1 << 14 ;
+      }
+    case D27 : // PTA15
+      if value {
+        GPIOA.PSOR = 1 << 15 ;
+      }else{
+        GPIOA.PCOR = 1 << 15 ;
+      }
+    case D28 : // PTA16
+      if value {
+        GPIOA.PSOR = 1 << 16 ;
+      }else{
+        GPIOA.PCOR = 1 << 16 ;
+      }
+    case D29 : // PTB18
+      if value {
+        GPIOB.PSOR = 1 << 18 ;
+      }else{
+        GPIOB.PCOR = 1 << 18 ;
+      }
+    case D30 : // PTB19
+      if value {
+        GPIOB.PSOR = 1 << 19 ;
+      }else{
+        GPIOB.PCOR = 1 << 19 ;
+      }
+    case D31 : // PTB10
+      if value {
+        GPIOB.PSOR = 1 << 10 ;
+      }else{
+        GPIOB.PCOR = 1 << 10 ;
+      }
+    case D32 : // PTB11
+      if value {
+        GPIOB.PSOR = 1 << 11 ;
+      }else{
+        GPIOB.PCOR = 1 << 11 ;
+      }
+    case D33 : // PTE24
+      if value {
+        GPIOE.PSOR = 1 << 24 ;
+      }else{
+        GPIOE.PCOR = 1 << 24 ;
+      }
+    case D34 : // PTE25
+      if value {
+        GPIOE.PSOR = 1 << 25 ;
+      }else{
+        GPIOE.PCOR = 1 << 25 ;
+      }
+    case D35 : // PTC8
+      if value {
+        GPIOC.PSOR = 1 << 8 ;
+      }else{
+        GPIOC.PCOR = 1 << 8 ;
+      }
+    case D36 : // PTC9
+      if value {
+        GPIOC.PSOR = 1 << 9 ;
+      }else{
+        GPIOC.PCOR = 1 << 9 ;
+      }
+    case D37 : // PTC10
+      if value {
+        GPIOC.PSOR = 1 << 10 ;
+      }else{
+        GPIOC.PCOR = 1 << 10 ;
+      }
+    case D38 : // PTC11
+      if value {
+        GPIOC.PSOR = 1 << 11 ;
+      }else{
+        GPIOC.PCOR = 1 << 11 ;
+      }
+    case D39 : // PTA17
+      if value {
+        GPIOA.PSOR = 1 << 17 ;
+      }else{
+        GPIOA.PCOR = 1 << 17 ;
+      }
+    case D40 : // PTA28
+      if value {
+        GPIOA.PSOR = 1 << 28 ;
+      }else{
+        GPIOA.PCOR = 1 << 28 ;
+      }
+    case D41 : // PTA29
+      if value {
+        GPIOA.PSOR = 1 << 29 ;
+      }else{
+        GPIOA.PCOR = 1 << 29 ;
+      }
+    case D42 : // PTA26
+      if value {
+        GPIOA.PSOR = 1 << 26 ;
+      }else{
+        GPIOA.PCOR = 1 << 26 ;
+      }
+    case D43 : // PTB20
+      if value {
+        GPIOB.PSOR = 1 << 20 ;
+      }else{
+        GPIOB.PCOR = 1 << 20 ;
+      }
+    case D44 : // PTB22
+      if value {
+        GPIOB.PSOR = 1 << 22 ;
+      }else{
+        GPIOB.PCOR = 1 << 22 ;
+      }
+    case D45 : // PTB23
+      if value {
+        GPIOB.PSOR = 1 << 23 ;
+      }else{
+        GPIOB.PCOR = 1 << 23 ;
+      }
+    case D46 : // PTB21
+      if value {
+        GPIOB.PSOR = 1 << 21 ;
+      }else{
+        GPIOB.PCOR = 1 << 21 ;
+      }
+    case D47 : // PTD8
+      if value {
+        GPIOD.PSOR = 1 << 8 ;
+      }else{
+        GPIOD.PCOR = 1 << 8 ;
+      }
+    case D48 : // PTD9
+      if value {
+        GPIOD.PSOR = 1 << 9 ;
+      }else{
+        GPIOD.PCOR = 1 << 9 ;
+      }
+    case D49 : // PTB4
+      if value {
+        GPIOB.PSOR = 1 << 4 ;
+      }else{
+        GPIOB.PCOR = 1 << 4 ;
+      }
+    case D50 : // PTB5
+      if value {
+        GPIOB.PSOR = 1 << 5 ;
+      }else{
+        GPIOB.PCOR = 1 << 5 ;
+      }
+    case D51 : // PTD14
+      if value {
+        GPIOD.PSOR = 1 << 14 ;
+      }else{
+        GPIOD.PCOR = 1 << 14 ;
+      }
+    case D52 : // PTD13
+      if value {
+        GPIOD.PSOR = 1 << 13 ;
+      }else{
+        GPIOD.PCOR = 1 << 13 ;
+      }
+    case D53 : // PTD12
+      if value {
+        GPIOD.PSOR = 1 << 12 ;
+      }else{
+        GPIOD.PCOR = 1 << 12 ;
+      }
+    case D54 : // PTD15
+      if value {
+        GPIOD.PSOR = 1 << 15 ;
+      }else{
+        GPIOD.PCOR = 1 << 15 ;
+      }
+    case D55 : // PTD11
+      if value {
+        GPIOD.PSOR = 1 << 11 ;
+      }else{
+        GPIOD.PCOR = 1 << 11 ;
+      }
+    case D56 : // PTE10
+      if value {
+        GPIOE.PSOR = 1 << 10 ;
+      }else{
+        GPIOE.PCOR = 1 << 10 ;
+      }
+    case D57 : // PTE11
+      if value {
+        GPIOE.PSOR = 1 << 11 ;
+      }else{
+        GPIOE.PCOR = 1 << 11 ;
+      }
     }
   }
 
@@ -644,6 +716,74 @@ driver digital > root {
       result = (GPIOC.PDIR & (1 << 1)) ≠ 0
     case D23 : // PTC2
       result = (GPIOC.PDIR & (1 << 2)) ≠ 0
+    case D24 : // PTE26
+      result = (GPIOE.PDIR & (1 << 26)) ≠ 0
+    case D25 : // PTA5
+      result = (GPIOA.PDIR & (1 << 5)) ≠ 0
+    case D26 : // PTA14
+      result = (GPIOA.PDIR & (1 << 14)) ≠ 0
+    case D27 : // PTA15
+      result = (GPIOA.PDIR & (1 << 15)) ≠ 0
+    case D28 : // PTA16
+      result = (GPIOA.PDIR & (1 << 16)) ≠ 0
+    case D29 : // PTB18
+      result = (GPIOB.PDIR & (1 << 18)) ≠ 0
+    case D30 : // PTB19
+      result = (GPIOB.PDIR & (1 << 19)) ≠ 0
+    case D31 : // PTB10
+      result = (GPIOB.PDIR & (1 << 10)) ≠ 0
+    case D32 : // PTB11
+      result = (GPIOB.PDIR & (1 << 11)) ≠ 0
+    case D33 : // PTE24
+      result = (GPIOE.PDIR & (1 << 24)) ≠ 0
+    case D34 : // PTE25
+      result = (GPIOE.PDIR & (1 << 25)) ≠ 0
+    case D35 : // PTC8
+      result = (GPIOC.PDIR & (1 << 8)) ≠ 0
+    case D36 : // PTC9
+      result = (GPIOC.PDIR & (1 << 9)) ≠ 0
+    case D37 : // PTC10
+      result = (GPIOC.PDIR & (1 << 10)) ≠ 0
+    case D38 : // PTC11
+      result = (GPIOC.PDIR & (1 << 11)) ≠ 0
+    case D39 : // PTA17
+      result = (GPIOA.PDIR & (1 << 17)) ≠ 0
+    case D40 : // PTA28
+      result = (GPIOA.PDIR & (1 << 28)) ≠ 0
+    case D41 : // PTA29
+      result = (GPIOA.PDIR & (1 << 29)) ≠ 0
+    case D42 : // PTA26
+      result = (GPIOA.PDIR & (1 << 26)) ≠ 0
+    case D43 : // PTB20
+      result = (GPIOB.PDIR & (1 << 20)) ≠ 0
+    case D44 : // PTB22
+      result = (GPIOB.PDIR & (1 << 22)) ≠ 0
+    case D45 : // PTB23
+      result = (GPIOB.PDIR & (1 << 23)) ≠ 0
+    case D46 : // PTB21
+      result = (GPIOB.PDIR & (1 << 21)) ≠ 0
+    case D47 : // PTD8
+      result = (GPIOD.PDIR & (1 << 8)) ≠ 0
+    case D48 : // PTD9
+      result = (GPIOD.PDIR & (1 << 9)) ≠ 0
+    case D49 : // PTB4
+      result = (GPIOB.PDIR & (1 << 4)) ≠ 0
+    case D50 : // PTB5
+      result = (GPIOB.PDIR & (1 << 5)) ≠ 0
+    case D51 : // PTD14
+      result = (GPIOD.PDIR & (1 << 14)) ≠ 0
+    case D52 : // PTD13
+      result = (GPIOD.PDIR & (1 << 13)) ≠ 0
+    case D53 : // PTD12
+      result = (GPIOD.PDIR & (1 << 12)) ≠ 0
+    case D54 : // PTD15
+      result = (GPIOD.PDIR & (1 << 15)) ≠ 0
+    case D55 : // PTD11
+      result = (GPIOD.PDIR & (1 << 11)) ≠ 0
+    case D56 : // PTE10
+      result = (GPIOE.PDIR & (1 << 10)) ≠ 0
+    case D57 : // PTE11
+      result = (GPIOE.PDIR & (1 << 11)) ≠ 0
     }
   }
   
@@ -699,6 +839,74 @@ driver digital > root {
       GPIOC.PTOR = 1 << 1 ;
     case D23 : // PTC2
       GPIOC.PTOR = 1 << 2 ;
+    case D24 : // PTE26
+      GPIOE.PTOR = 1 << 26 ;
+    case D25 : // PTA5
+      GPIOA.PTOR = 1 << 5 ;
+    case D26 : // PTA14
+      GPIOA.PTOR = 1 << 14 ;
+    case D27 : // PTA15
+      GPIOA.PTOR = 1 << 15 ;
+    case D28 : // PTA16
+      GPIOA.PTOR = 1 << 16 ;
+    case D29 : // PTB18
+      GPIOB.PTOR = 1 << 18 ;
+    case D30 : // PTB19
+      GPIOB.PTOR = 1 << 19 ;
+    case D31 : // PTB10
+      GPIOB.PTOR = 1 << 10 ;
+    case D32 : // PTB11
+      GPIOB.PTOR = 1 << 11 ;
+    case D33 : // PTE24
+      GPIOE.PTOR = 1 << 24 ;
+    case D34 : // PTE25
+      GPIOE.PTOR = 1 << 25 ;
+    case D35 : // PTC8
+      GPIOC.PTOR = 1 << 8 ;
+    case D36 : // PTC9
+      GPIOC.PTOR = 1 << 9 ;
+    case D37 : // PTC10
+      GPIOC.PTOR = 1 << 10 ;
+    case D38 : // PTC11
+      GPIOC.PTOR = 1 << 11 ;
+    case D39 : // PTA17
+      GPIOA.PTOR = 1 << 17 ;
+    case D40 : // PTA28
+      GPIOA.PTOR = 1 << 28 ;
+    case D41 : // PTA29
+      GPIOA.PTOR = 1 << 29 ;
+    case D42 : // PTA26
+      GPIOA.PTOR = 1 << 26 ;
+    case D43 : // PTB20
+      GPIOB.PTOR = 1 << 20 ;
+    case D44 : // PTB22
+      GPIOB.PTOR = 1 << 22 ;
+    case D45 : // PTB23
+      GPIOB.PTOR = 1 << 23 ;
+    case D46 : // PTB21
+      GPIOB.PTOR = 1 << 21 ;
+    case D47 : // PTD8
+      GPIOD.PTOR = 1 << 8 ;
+    case D48 : // PTD9
+      GPIOD.PTOR = 1 << 9 ;
+    case D49 : // PTB4
+      GPIOB.PTOR = 1 << 4 ;
+    case D50 : // PTB5
+      GPIOB.PTOR = 1 << 5 ;
+    case D51 : // PTD14
+      GPIOD.PTOR = 1 << 14 ;
+    case D52 : // PTD13
+      GPIOD.PTOR = 1 << 13 ;
+    case D53 : // PTD12
+      GPIOD.PTOR = 1 << 12 ;
+    case D54 : // PTD15
+      GPIOD.PTOR = 1 << 15 ;
+    case D55 : // PTD11
+      GPIOD.PTOR = 1 << 11 ;
+    case D56 : // PTE10
+      GPIOE.PTOR = 1 << 10 ;
+    case D57 : // PTE11
+      GPIOE.PTOR = 1 << 11 ;
     }
   }
   //··············································································

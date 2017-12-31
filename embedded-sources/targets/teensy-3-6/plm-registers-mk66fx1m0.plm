@@ -46,6 +46,17 @@ registers PORTD {
   ISFR  @user  at 0x4004C0A0 $uint32 // Interrupt Status Flag Register
 }
 
+
+registers PORTE {
+  PCR @user [32] at 0x4004_D000 : 4 $uint32 {
+    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
+  }
+  
+  GPCLR @user  at 0x4004D080 $uint32 // Global Pin Control Low Register
+  GPCHR @user  at 0x4004D084 $uint32 // Global Pin Control High Register
+  ISFR  @user  at 0x4004D0A0 $uint32 // Interrupt Status Flag Register
+}
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 // Chapter 12: System Integration Module (SIM)
@@ -1979,6 +1990,15 @@ registers GPIOD {
   PTOR @user at 0x400FF0CC $uint32 // Port Toggle Output Register
   PDIR @user at 0x400FF0D0 $uint32 // Port Data Input Register
   PDDR @user at 0x400FF0D4 $uint32 // Port Data Direction Register
+}
+
+registers GPIOE {
+  PDOR @user at 0x400FF100 $uint32 // Port Data Output Register
+  PSOR @user at 0x400FF104 $uint32 // Port Set Output Register
+  PCOR @user at 0x400FF108 $uint32 // Port Clear Output Register
+  PTOR @user at 0x400FF10C $uint32 // Port Toggle Output Register
+  PDIR @user at 0x400FF110 $uint32 // Port Data Input Register
+  PDDR @user at 0x400FF114 $uint32 // Port Data Direction Register
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
