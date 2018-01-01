@@ -43,9 +43,15 @@ syntax extension plm_syntax {
   rule <declaration> ?!@ast ioAST {
     $task$
     $identifier$ ?let taskName
-    $priority$
+    $@attribute$ ?let prioriryAttribute
+    if prioriryAttribute.string != "priority" then
+      error prioriryAttribute : "this attribute should be @priority"
+    end
     $integer$ ?let @lbigint priority
-    $stackSize$
+    $@attribute$ ?let stackSizeAttribute
+    if stackSizeAttribute.string != "stacksize" then
+      error stackSizeAttribute : "this attribute should be @stacksize"
+    end
     $integer$ ?let @lbigint stackSize
     ${$
     @structurePropertyListAST taskVarList = {}

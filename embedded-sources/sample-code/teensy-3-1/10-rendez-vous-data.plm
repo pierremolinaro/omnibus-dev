@@ -60,7 +60,7 @@ sync rdvs2 = $rendezVousData ()
 
 //-----------------------------------------------------------------------------*
 
-task T0 priority 0 stackSize 512 {
+task T0 @priority 0 @stacksize 512 {
   var top $uint32 = 0
 
   setup 100 {
@@ -81,7 +81,7 @@ task T0 priority 0 stackSize 512 {
 
 //-----------------------------------------------------------------------------*
 
-task T1 priority 1 stackSize 1024 {
+task T1 @priority 1 @stacksize 1024 {
   on rdvs.input (?data:let x) {
     digital.toggle (!port:LED_L1)
     s.wait ()
@@ -93,7 +93,7 @@ task T1 priority 1 stackSize 1024 {
 
 //-----------------------------------------------------------------------------*
 
-task T2 priority 2 stackSize 1024 {
+task T2 @priority 2 @stacksize 1024 {
   var deadline $uint32 = 0
   var n $uint32 = 0
 

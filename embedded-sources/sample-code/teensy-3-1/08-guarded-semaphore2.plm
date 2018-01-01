@@ -29,7 +29,7 @@ sync s1 = $semaphore (!value:0)
 
 //-----------------------------------------------------------------------------*
 
-task T0 priority 0 stackSize 512 {
+task T0 @priority 0 @stacksize 512 {
   var top $uint32 = 0
 
   setup 1000 {
@@ -54,7 +54,7 @@ task T0 priority 0 stackSize 512 {
 
 //-----------------------------------------------------------------------------*
 
-task T1 priority 1 stackSize 512 {
+task T1 @priority 1 @stacksize 512 {
   var top $uint32 = 0
 
   on time.wait (!untilDeadline:self.top) {
@@ -70,7 +70,7 @@ task T1 priority 1 stackSize 512 {
 
 //-----------------------------------------------------------------------------*
 
-task T2 priority 2 stackSize 512 {
+task T2 @priority 2 @stacksize 512 {
   var deadline $uint32 = 0
   var toggleD3 = no
  

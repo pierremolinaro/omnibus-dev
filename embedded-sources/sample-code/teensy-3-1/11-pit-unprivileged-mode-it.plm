@@ -54,7 +54,7 @@ driver pit ()
 
 //------------------------------------------------*
 
-task T priority 12 stackSize 512 {
+task T @priority 12 @stacksize 512 {
   var deadline $uint32 = 0
 
   setup 0 {
