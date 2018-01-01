@@ -43,7 +43,7 @@ Pour déclarer le registre \texttt{PORTA\_PCR0} (\refFigure{}{definitionPORTxPCR
 
 \begin{PLM}
 registers PORTA {
-  PCR0 at 0x4004_9000 $uint32
+  PCR0 0x4004_9000 $uint32
 }
 \end{PLM}
 
@@ -92,7 +92,7 @@ Lors de la déclaration d'un registre, il est possible de préciser la compositi
 
 \begin{PLM}
 registers PORTA {
-  PCR0 at 0x4004_9000 $uint32 {
+  PCR0 0x4004_9000 $uint32 {
     7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
 }
@@ -281,8 +281,8 @@ Il est possible de regrouper les déclarations de registres partageant la même 
 
 \begin{PLM}
 registers PORTA {
-  PCR0 at 0x4004_9000
-  PCR1 at 0x4004_9004
+  PCR0 0x4004_9000
+  PCR1 0x4004_9004
   $uint32 {
     7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
@@ -325,10 +325,10 @@ Il est possible de déclarer ces registres individuellement~:
 
 \begin{PLM}
 register
-  CANCMR0 at 0xE004_4004
-  CANCMR1 at 0xE004_8004
-  CANCMR2 at 0xE004_C004
-  CANCMR3 at 0xE005_0004
+  CANCMR0 0xE004_4004
+  CANCMR1 0xE004_8004
+  CANCMR2 0xE004_C004
+  CANCMR3 0xE005_0004
 $uint32 {
   STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
 }
@@ -352,7 +352,7 @@ On peut simplifier l'accès en déclarant les registres \texttt{CANCMR$n$} comme
 
 \begin{PLM}
 register
-  CANCMR[4] at 0xE004_4004 : 1 << 14
+  CANCMR[4] 0xE004_4004 : 1 << 14
 $uint8 {
   STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
 }
@@ -360,7 +360,7 @@ $uint8 {
 
 D'une manière générale, la déclaration d'un tableau de registres de contrôle est de la forme~:
 \begin{PLM}
-nom_registre [taille] at adresse_base~: multiplicateur
+nom_registre [taille] adresse_base~: multiplicateur
 $type { ... }
 \end{PLM}
 
@@ -404,7 +404,7 @@ CANCMR[n] = v // Aucune vérification, indice toujours valide
 La déclaration d'un registre accepte l'attribut \plm+@ro+, qui signifie qu'il est en lecture seule. Par exemple~:
 \begin{PLM}
 registers {
-   CALIB @ro at 0xE000_E01C $uint32
+   CALIB @ro 0xE000_E01C $uint32
 }
 \end{PLM}
 
@@ -419,7 +419,7 @@ Toute tentative de faire figurer ce registre dans une construction qui provoque 
 La déclaration d'un registre accepte l'attribut \plm+@user+, qui signifie qu'il est accessible en mode \plm!user!. Par défaut, un registre de contrôle n'est pas accessible en mode  \plm!user!. Par exemple~:
 \begin{PLM}
 registers GPIOE {
-  PSOR @user at 0x400F_F104 $uint32
+  PSOR @user 0x400F_F104 $uint32
 }
 \end{PLM}
 

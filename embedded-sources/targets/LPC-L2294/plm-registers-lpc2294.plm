@@ -2,328 +2,328 @@
 
 // Vectored Interrupt Controller (VIC)
 registers VIC {
-  IRQStatus   at 0xFFFF_F000 $uint32
-  FIQStatus   at 0xFFFF_F000 $uint32
-  RawIntr     at 0xFFFF_F008 $uint32
-  IntSelect   at 0xFFFF_F00C $uint32
-  IntEnable   at 0xFFFF_F010 $uint32
-  IntEnClr    at 0xFFFF_F014 $uint32
-  SoftInt     at 0xFFFF_F018 $uint32
-  SoftIntClr  at 0xFFFF_F01C $uint32
-  Protection  at 0xFFFF_F020 $uint32
-  VectAddr    at 0xFFFF_F030 $uint32
-  DefVectAddr at 0xFFFF_F034 $uint32
+  IRQStatus   0xFFFF_F000 $uint32
+  FIQStatus   0xFFFF_F000 $uint32
+  RawIntr     0xFFFF_F008 $uint32
+  IntSelect   0xFFFF_F00C $uint32
+  IntEnable   0xFFFF_F010 $uint32
+  IntEnClr    0xFFFF_F014 $uint32
+  SoftInt     0xFFFF_F018 $uint32
+  SoftIntClr  0xFFFF_F01C $uint32
+  Protection  0xFFFF_F020 $uint32
+  VectAddr    0xFFFF_F030 $uint32
+  DefVectAddr 0xFFFF_F034 $uint32
 
-  VectAddr0   at 0xFFFF_F100 $uint32
-  VectAddr1   at 0xFFFF_F104 $uint32
-  VectAddr2   at 0xFFFF_F108 $uint32
-  VectAddr3   at 0xFFFF_F10C $uint32
-  VectAddr4   at 0xFFFF_F110 $uint32
-  VectAddr5   at 0xFFFF_F114 $uint32
-  VectAddr6   at 0xFFFF_F118 $uint32
-  VectAddr7   at 0xFFFF_F11C $uint32
-  VectAddr8   at 0xFFFF_F120 $uint32
-  VectAddr9   at 0xFFFF_F124 $uint32
-  VectAddr10  at 0xFFFF_F128 $uint32
-  VectAddr11  at 0xFFFF_F12C $uint32
-  VectAddr12  at 0xFFFF_F130 $uint32
-  VectAddr13  at 0xFFFF_F134 $uint32
-  VectAddr14  at 0xFFFF_F138 $uint32
-  VectAddr15  at 0xFFFF_F13C $uint32
+  VectAddr0   0xFFFF_F100 $uint32
+  VectAddr1   0xFFFF_F104 $uint32
+  VectAddr2   0xFFFF_F108 $uint32
+  VectAddr3   0xFFFF_F10C $uint32
+  VectAddr4   0xFFFF_F110 $uint32
+  VectAddr5   0xFFFF_F114 $uint32
+  VectAddr6   0xFFFF_F118 $uint32
+  VectAddr7   0xFFFF_F11C $uint32
+  VectAddr8   0xFFFF_F120 $uint32
+  VectAddr9   0xFFFF_F124 $uint32
+  VectAddr10  0xFFFF_F128 $uint32
+  VectAddr11  0xFFFF_F12C $uint32
+  VectAddr12  0xFFFF_F130 $uint32
+  VectAddr13  0xFFFF_F134 $uint32
+  VectAddr14  0xFFFF_F138 $uint32
+  VectAddr15  0xFFFF_F13C $uint32
 
-  VectCntl0   at 0xFFFF_F200 $uint32
-  VectCntl1   at 0xFFFF_F204 $uint32
-  VectCntl2   at 0xFFFF_F208 $uint32
-  VectCntl3   at 0xFFFF_F20C $uint32
-  VectCntl4   at 0xFFFF_F210 $uint32
-  VectCntl5   at 0xFFFF_F214 $uint32
-  VectCntl6   at 0xFFFF_F218 $uint32
-  VectCntl7   at 0xFFFF_F21C $uint32
-  VectCntl8   at 0xFFFF_F220 $uint32
-  VectCntl9   at 0xFFFF_F224 $uint32
-  VectCntl10  at 0xFFFF_F228 $uint32
-  VectCntl11  at 0xFFFF_F22C $uint32
-  VectCntl12  at 0xFFFF_F230 $uint32
-  VectCntl13  at 0xFFFF_F234 $uint32
-  VectCntl14  at 0xFFFF_F238 $uint32
-  VectCntl15  at 0xFFFF_F23C $uint32
+  VectCntl0   0xFFFF_F200 $uint32
+  VectCntl1   0xFFFF_F204 $uint32
+  VectCntl2   0xFFFF_F208 $uint32
+  VectCntl3   0xFFFF_F20C $uint32
+  VectCntl4   0xFFFF_F210 $uint32
+  VectCntl5   0xFFFF_F214 $uint32
+  VectCntl6   0xFFFF_F218 $uint32
+  VectCntl7   0xFFFF_F21C $uint32
+  VectCntl8   0xFFFF_F220 $uint32
+  VectCntl9   0xFFFF_F224 $uint32
+  VectCntl10  0xFFFF_F228 $uint32
+  VectCntl11  0xFFFF_F22C $uint32
+  VectCntl12  0xFFFF_F230 $uint32
+  VectCntl13  0xFFFF_F234 $uint32
+  VectCntl14  0xFFFF_F238 $uint32
+  VectCntl15  0xFFFF_F23C $uint32
 }
 
 //------------------------------------------------------------------------------
 
 // Watchdog
 registers WD {
-  MOD            at 0xE000_0000 $uint8
-  TC             at 0xE000_0004 $uint32
-  FEED           at 0xE000_0008 $uint8
-  TV             at 0xE000_000C $uint32
+  MOD            0xE000_0000 $uint8
+  TC             0xE000_0004 $uint32
+  FEED           0xE000_0008 $uint8
+  TV             0xE000_000C $uint32
 }
 
 // Pin Connect Block
 registers PIN {
-  SEL0        at 0xE002_C000 $uint32
-  SEL1        at 0xE002_C004 $uint32
-  SEL2        at 0xE002_C014 $uint32
+  SEL0        0xE002_C000 $uint32
+  SEL1        0xE002_C004 $uint32
+  SEL2        0xE002_C014 $uint32
 }
 
 // General Purpose Input/Output (GPIO)
 registers IO0 {
-  PIN          at 0xE002_8000 $uint32
-  SET          at 0xE002_8004 $uint32
-  DIR          at 0xE002_8008 $uint32
-  CLR          at 0xE002_800C $uint32
+  PIN          0xE002_8000 $uint32
+  SET          0xE002_8004 $uint32
+  DIR          0xE002_8008 $uint32
+  CLR          0xE002_800C $uint32
 }
 
 registers IO1 {
-  PIN          at 0xE002_8010 $uint32
-  SET          at 0xE002_8014 $uint32
-  DIR          at 0xE002_8018 $uint32
-  CLR          at 0xE002_801C $uint32
+  PIN          0xE002_8010 $uint32
+  SET          0xE002_8014 $uint32
+  DIR          0xE002_8018 $uint32
+  CLR          0xE002_801C $uint32
 }
 
 registers IO2 {
-  PIN          at 0xE002_8020 $uint32
-  SET          at 0xE002_8024 $uint32
-  DIR          at 0xE002_8028 $uint32
-  CLR          at 0xE002_802C $uint32
+  PIN          0xE002_8020 $uint32
+  SET          0xE002_8024 $uint32
+  DIR          0xE002_8028 $uint32
+  CLR          0xE002_802C $uint32
 }
 
 registers IO3 {
-  PIN          at 0xE002_8030 $uint32
-  SET          at 0xE002_8034 $uint32
-  DIR          at 0xE002_8038 $uint32
-  CLR          at 0xE002_803C $uint32
+  PIN          0xE002_8030 $uint32
+  SET          0xE002_8034 $uint32
+  DIR          0xE002_8038 $uint32
+  CLR          0xE002_803C $uint32
 }
 
 // Memory Accelerator Module (MAM)
 registers MAM {
-  CR            at 0xE01F_C000 $uint8
-  TIM           at 0xE01F_C004 $uint8
+  CR            0xE01F_C000 $uint8
+  TIM           0xE01F_C004 $uint8
 }
 
 registers MEM {
-  MAP           at 0xE01F_C040 $uint8
+  MAP           0xE01F_C040 $uint8
 }
 
 // Phase Locked Loop (PLL)
 registers PLL {
-  CON           at 0xE01F_C080 $uint8
-  CFG           at 0xE01F_C084 $uint8
-  STAT          at 0xE01F_C088 $uint16
-  FEED          at 0xE01F_C08C $uint8
+  CON           0xE01F_C080 $uint8
+  CFG           0xE01F_C084 $uint8
+  STAT          0xE01F_C088 $uint16
+  FEED          0xE01F_C08C $uint8
 }
 
 // VPB Divider */
 registers VPB {
-  DIV           at 0xE01F_C100 $uint8
+  DIV           0xE01F_C100 $uint8
 }
 
 // Power Control */
 registers PC {
-  ON             at 0xE01F_C0C0 $uint8
-  ONP            at 0xE01F_C0C4 $uint32
+  ON             0xE01F_C0C0 $uint8
+  ONP            0xE01F_C0C4 $uint32
 }
 
 // External Interrupts
 registers EXT {
-  INT           at 0xE01F_C140 $uint8
-  WAKE          at 0xE01F_C144 $uint8
-  MODE          at 0xE01F_C148 $uint8
-  POLAR         at 0xE01F_C14C $uint8
+  INT           0xE01F_C140 $uint8
+  WAKE          0xE01F_C144 $uint8
+  MODE          0xE01F_C148 $uint8
+  POLAR         0xE01F_C14C $uint8
 }
 
 // Timer 0
 registers TIMER0 {
-  IR      at 0xE000_4000 $uint32
-  TCR     at 0xE000_4004 $uint32
-  TC      at 0xE000_4008 $uint32
-  PR      at 0xE000_400C $uint32
-  PC      at 0xE000_4010 $uint32
-  MCR     at 0xE000_4014 $uint32
-  MR0     at 0xE000_4018 $uint32
-  MR1     at 0xE000_401C $uint32
-  MR2     at 0xE000_4020 $uint32
-  MR3     at 0xE000_4024 $uint32
-  CCR     at 0xE000_4028 $uint32
-  CR0     at 0xE000_402C $uint32
-  CR1     at 0xE000_4030 $uint32
-  CR2     at 0xE000_4034 $uint32
-  CR3     at 0xE000_4038 $uint32
-  EMR     at 0xE000_403C $uint32
+  IR      0xE000_4000 $uint32
+  TCR     0xE000_4004 $uint32
+  TC      0xE000_4008 $uint32
+  PR      0xE000_400C $uint32
+  PC      0xE000_4010 $uint32
+  MCR     0xE000_4014 $uint32
+  MR0     0xE000_4018 $uint32
+  MR1     0xE000_401C $uint32
+  MR2     0xE000_4020 $uint32
+  MR3     0xE000_4024 $uint32
+  CCR     0xE000_4028 $uint32
+  CR0     0xE000_402C $uint32
+  CR1     0xE000_4030 $uint32
+  CR2     0xE000_4034 $uint32
+  CR3     0xE000_4038 $uint32
+  EMR     0xE000_403C $uint32
 }
 
 // Timer 1
 registers TIMER1 {
-  IR      at 0xE000_8000 $uint32
-  TCR     at 0xE000_8004 $uint32
-  TC      at 0xE000_8008 $uint32
-  PR      at 0xE000_800C $uint32
-  PC      at 0xE000_8010 $uint32
-  MCR     at 0xE000_8014 $uint32
-  MR0     at 0xE000_8018 $uint32
-  MR1     at 0xE000_801C $uint32
-  MR2     at 0xE000_8020 $uint32
-  MR3     at 0xE000_8024 $uint32
-  CCR     at 0xE000_8028 $uint32
-  CR0     at 0xE000_802C $uint32
-  CR1     at 0xE000_8030 $uint32
-  CR2     at 0xE000_8034 $uint32
-  CR3     at 0xE000_8038 $uint32
-  EMR     at 0xE000_803C $uint32
+  IR      0xE000_8000 $uint32
+  TCR     0xE000_8004 $uint32
+  TC      0xE000_8008 $uint32
+  PR      0xE000_800C $uint32
+  PC      0xE000_8010 $uint32
+  MCR     0xE000_8014 $uint32
+  MR0     0xE000_8018 $uint32
+  MR1     0xE000_801C $uint32
+  MR2     0xE000_8020 $uint32
+  MR3     0xE000_8024 $uint32
+  CCR     0xE000_8028 $uint32
+  CR0     0xE000_802C $uint32
+  CR1     0xE000_8030 $uint32
+  CR2     0xE000_8034 $uint32
+  CR3     0xE000_8038 $uint32
+  EMR     0xE000_803C $uint32
 }
 
 // Pulse Width Modulator (PWM)
 registers PWM {
-  IR         at 0xE001_4000 $uint32
-  TCR        at 0xE001_4004 $uint32
-  TC         at 0xE001_4008 $uint32
-  PR         at 0xE001_400C $uint32
-  PC         at 0xE001_4010 $uint32
-  MCR        at 0xE001_4014 $uint32
-  MR0        at 0xE001_4018 $uint32
-  MR1        at 0xE001_401C $uint32
-  MR2        at 0xE001_4020 $uint32
-  MR3        at 0xE001_4024 $uint32
-  MR4        at 0xE001_4040 $uint32
-  MR5        at 0xE001_4044 $uint32
-  MR6        at 0xE001_4048 $uint32
-  CCR        at 0xE001_4028 $uint32
-  CR0        at 0xE001_402C $uint32
-  CR1        at 0xE001_4030 $uint32
-  CR2        at 0xE001_4034 $uint32
-  CR3        at 0xE001_4038 $uint32
-  EMR        at 0xE001_403C $uint32
-  PCR        at 0xE001_404C $uint32
-  LER        at 0xE001_4050 $uint32
+  IR         0xE001_4000 $uint32
+  TCR        0xE001_4004 $uint32
+  TC         0xE001_4008 $uint32
+  PR         0xE001_400C $uint32
+  PC         0xE001_4010 $uint32
+  MCR        0xE001_4014 $uint32
+  MR0        0xE001_4018 $uint32
+  MR1        0xE001_401C $uint32
+  MR2        0xE001_4020 $uint32
+  MR3        0xE001_4024 $uint32
+  MR4        0xE001_4040 $uint32
+  MR5        0xE001_4044 $uint32
+  MR6        0xE001_4048 $uint32
+  CCR        0xE001_4028 $uint32
+  CR0        0xE001_402C $uint32
+  CR1        0xE001_4030 $uint32
+  CR2        0xE001_4034 $uint32
+  CR3        0xE001_4038 $uint32
+  EMR        0xE001_403C $uint32
+  PCR        0xE001_404C $uint32
+  LER        0xE001_4050 $uint32
 }
 
 // Universal Asynchronous Receiver Transmitter 0 (UART0)
 registers U0 {
-  RBR        at 0xE000_C000 $uint8
-  THR        at 0xE000_C000 $uint8
-  DLL        at 0xE000_C000 $uint8
-  DLM        at 0xE000_C004 $uint8
-  IER        at 0xE000_C004 $uint32
-  IIR        at 0xE000_C008 $uint32
-  FCR        at 0xE000_C008 $uint8
-  LCR        at 0xE000_C00C $uint8
-  LSR        at 0xE000_C014 $uint8
-  SCR        at 0xE000_C01C $uint8
-  ACR        at 0xE000_C020 $uint32
-  FDR        at 0xE000_C028 $uint32
-  TER        at 0xE000_C030 $uint8
+  RBR        0xE000_C000 $uint8
+  THR        0xE000_C000 $uint8
+  DLL        0xE000_C000 $uint8
+  DLM        0xE000_C004 $uint8
+  IER        0xE000_C004 $uint32
+  IIR        0xE000_C008 $uint32
+  FCR        0xE000_C008 $uint8
+  LCR        0xE000_C00C $uint8
+  LSR        0xE000_C014 $uint8
+  SCR        0xE000_C01C $uint8
+  ACR        0xE000_C020 $uint32
+  FDR        0xE000_C028 $uint32
+  TER        0xE000_C030 $uint8
 }
 
 // Universal Asynchronous Receiver Transmitter 1 (UART1)
 registers U1 {
-  RBR        at 0xE001_0000 $uint8
-  THR        at 0xE001_0000 $uint8
-  DLL        at 0xE001_0000 $uint8
-  DLM        at 0xE001_0004 $uint8
-  IER        at 0xE001_0004 $uint32
-  IIR        at 0xE001_0008 $uint32
-  FCR        at 0xE001_0008 $uint8
-  LCR        at 0xE001_000C $uint8
-  MCR        at 0xE001_0010 $uint8
-  LSR        at 0xE001_0014 $uint8
-  MSR        at 0xE001_0018 $uint8
-  SCR        at 0xE001_001C $uint8
-  ACR        at 0xE001_0020 $uint32
-  FDR        at 0xE001_0028 $uint32
-  TER        at 0xE001_0030 $uint8
+  RBR        0xE001_0000 $uint8
+  THR        0xE001_0000 $uint8
+  DLL        0xE001_0000 $uint8
+  DLM        0xE001_0004 $uint8
+  IER        0xE001_0004 $uint32
+  IIR        0xE001_0008 $uint32
+  FCR        0xE001_0008 $uint8
+  LCR        0xE001_000C $uint8
+  MCR        0xE001_0010 $uint8
+  LSR        0xE001_0014 $uint8
+  MSR        0xE001_0018 $uint8
+  SCR        0xE001_001C $uint8
+  ACR        0xE001_0020 $uint32
+  FDR        0xE001_0028 $uint32
+  TER        0xE001_0030 $uint8
 }
 
 // I2C Interface
 registers I2C {
-  I2CONSET     at 0xE001_C000 $uint8
-  I2STAT       at 0xE001_C004 $uint8
-  I2DAT        at 0xE001_C008 $uint8
-  I2ADR        at 0xE001_C00C $uint8
-  I2SCLH       at 0xE001_C010 $uint16
-  I2SCLL       at 0xE001_C014 $uint16
-  I2CONCLR     at 0xE001_C018 $uint8
+  I2CONSET     0xE001_C000 $uint8
+  I2STAT       0xE001_C004 $uint8
+  I2DAT        0xE001_C008 $uint8
+  I2ADR        0xE001_C00C $uint8
+  I2SCLH       0xE001_C010 $uint16
+  I2SCLL       0xE001_C014 $uint16
+  I2CONCLR     0xE001_C018 $uint8
 }
 
 // SPI 0 (Serial Peripheral Interface 0)
 registers SPI0 {
-  SPCR          at 0xE002_0000 $uint16
-  SPSR          at 0xE002_0004 $uint8
-  SPDR          at 0xE002_0008 $uint16
-  SPCCR         at 0xE002_000C $uint8
-  // SPTCR        at 0xE002_0010 $uint8
-  // SPTSR        at 0xE002_0014 $uint8
-  // SPTOR        at 0xE002_0018 $uint8
-  SPINT         at 0xE002_001C $uint8
+  SPCR          0xE002_0000 $uint16
+  SPSR          0xE002_0004 $uint8
+  SPDR          0xE002_0008 $uint16
+  SPCCR         0xE002_000C $uint8
+  // SPTCR        0xE002_0010 $uint8
+  // SPTSR        0xE002_0014 $uint8
+  // SPTOR        0xE002_0018 $uint8
+  SPINT         0xE002_001C $uint8
 }
 
 // SPI 1 (Serial Peripheral Interface 1)
 registers SPI1 {
-  SPCR          at 0xE003_0000 $uint16
-  SPSR          at 0xE003_0004 $uint8
-  SPDR          at 0xE003_0008 $uint16
-  SPCCR         at 0xE003_000C $uint8
-  // SPTCR        at  $uint8   0xE003_0010
-  // SPTSR        at  $uint8   0xE003_0014
-  // SPTOR        at  $uint8   0xE003_0018
-  SPINT         at 0xE003_001C $uint8
+  SPCR          0xE003_0000 $uint16
+  SPSR          0xE003_0004 $uint8
+  SPDR          0xE003_0008 $uint16
+  SPCCR         0xE003_000C $uint8
+  // SPTCR        $uint8   0xE003_0010
+  // SPTSR        $uint8   0xE003_0014
+  // SPTOR        $uint8   0xE003_0018
+  SPINT         0xE003_001C $uint8
 }
 
 // Real Time Clock
 registers RTC {
-  ILR          at 0xE002_4000 $uint8
-  CTC          at 0xE002_4004 $uint16
-  CCR          at 0xE002_4008 $uint8
-  CIIR         at 0xE002_400C $uint8
-  AMR          at 0xE002_4010 $uint8
-  CTIME0       at 0xE002_4014 $uint32
-  CTIME1       at 0xE002_4018 $uint32
-  CTIME2       at 0xE002_401C $uint32
-  SEC          at 0xE002_4020 $uint8
-  MIN          at 0xE002_4024 $uint8
-  HOUR         at 0xE002_4028 $uint8
-  DOM          at 0xE002_402C $uint8
-  DOW          at 0xE002_4030 $uint8
-  DOY          at 0xE002_4034 $uint16
-  MONTH        at 0xE002_4038 $uint8
-  YEAR         at 0xE002_403C $uint16
-  ALSEC        at 0xE002_4060 $uint8
-  ALMIN        at 0xE002_4064 $uint8
-  ALHOUR       at 0xE002_4068 $uint8
-  ALDOM        at 0xE002_406C $uint8
-  ALDOW        at 0xE002_4070 $uint8
-  ALDOY        at 0xE002_4074 $uint16
-  ALMON        at 0xE002_4078 $uint8
-  ALYEAR       at 0xE002_407C $uint16
-  PREINT       at 0xE002_4080 $uint16
-  PREFRAC      at 0xE002_4084 $uint16
+  ILR          0xE002_4000 $uint8
+  CTC          0xE002_4004 $uint16
+  CCR          0xE002_4008 $uint8
+  CIIR         0xE002_400C $uint8
+  AMR          0xE002_4010 $uint8
+  CTIME0       0xE002_4014 $uint32
+  CTIME1       0xE002_4018 $uint32
+  CTIME2       0xE002_401C $uint32
+  SEC          0xE002_4020 $uint8
+  MIN          0xE002_4024 $uint8
+  HOUR         0xE002_4028 $uint8
+  DOM          0xE002_402C $uint8
+  DOW          0xE002_4030 $uint8
+  DOY          0xE002_4034 $uint16
+  MONTH        0xE002_4038 $uint8
+  YEAR         0xE002_403C $uint16
+  ALSEC        0xE002_4060 $uint8
+  ALMIN        0xE002_4064 $uint8
+  ALHOUR       0xE002_4068 $uint8
+  ALDOM        0xE002_406C $uint8
+  ALDOW        0xE002_4070 $uint8
+  ALDOY        0xE002_4074 $uint16
+  ALMON        0xE002_4078 $uint8
+  ALYEAR       0xE002_407C $uint16
+  PREINT       0xE002_4080 $uint16
+  PREFRAC      0xE002_4084 $uint16
 }
 
 // Bank Configuration registers
 registers BCF {
-  G0          at 0xFFE0_0000 $uint32
-  G1          at 0xFFE0_0004 $uint32
-  G2          at 0xFFE0_0008 $uint32
-  G3          at 0xFFE0_000C $uint32
+  G0          0xFFE0_0000 $uint32
+  G1          0xFFE0_0004 $uint32
+  G2          0xFFE0_0008 $uint32
+  G3          0xFFE0_000C $uint32
 }
 
 // CAN Controllers
 registers CAN {
-  CMR [4] at 0xE004_4004 : 1 << 14 $uint8 {
+  CMR [4] 0xE004_4004 : 1 << 14 $uint8 {
     STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
   }
-  AMFR          at 0xE003_C000 $uint32
-  SFF_SA        at 0xE003_C004 $uint32
-  SFF_GRP_SA    at 0xE003_C008 $uint32
-  EFF_SA        at 0xE003_C00C $uint32
-  EFF_GRP_SA    at 0xE003_C010 $uint32
-  END_OF_TABLES at 0xE003_C014 $uint32
+  AMFR          0xE003_C000 $uint32
+  SFF_SA        0xE003_C004 $uint32
+  SFF_GRP_SA    0xE003_C008 $uint32
+  EFF_SA        0xE003_C00C $uint32
+  EFF_GRP_SA    0xE003_C010 $uint32
+  END_OF_TABLES 0xE003_C014 $uint32
 }
 
 // Analog/Digital Converter (ADC)
 registers AD {
-  CR           at 0xE003_4000 $uint32
-  GDR          at 0xE003_4004 $uint32
-  INTEN        at 0xE003_400C $uint32
+  CR           0xE003_4000 $uint32
+  GDR          0xE003_4004 $uint32
+  INTEN        0xE003_400C $uint32
 }
 
 //------------------------------------------------------------------------------
