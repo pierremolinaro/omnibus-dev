@@ -35,7 +35,7 @@ struct $C {
 
 //------------------------------------------------*
 
-task T priority 12 stackSize 512 {
+task T @priority 12 @stacksize 512 {
   var deadline $uint32 = 0
   var array = $A (!repeated:0)
   var array2 = $A (!repeated:1)

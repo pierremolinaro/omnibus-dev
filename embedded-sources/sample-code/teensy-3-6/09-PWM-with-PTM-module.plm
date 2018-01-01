@@ -75,7 +75,7 @@ let LED_L4 = $digitalPort.D7
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 priority 1 stackSize 512 {
+task Tâche1 @priority 1 @stacksize 512 {
   var compteur $uint32 = 0
 
   setup 1000 {
