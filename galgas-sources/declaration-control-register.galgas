@@ -114,7 +114,6 @@ syntax extension plm_syntax {
       attributeList += !attribute
     end
     select
-      $at$
       <expression> !?ioAST ?let registerAddress
       ioRegisterDeclarationList +=
         !registerName
@@ -127,7 +126,6 @@ syntax extension plm_syntax {
       <expression> !?ioAST ?let sizeExpression
       let sizeExpressionLocation = @location.here
       $]$
-      $at$
       <expression> !?ioAST ?let baseAddressExpression
       let baseAddressExpressionLocation = @location.here
       $:$

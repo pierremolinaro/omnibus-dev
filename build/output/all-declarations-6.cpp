@@ -5591,13 +5591,13 @@ static void extensionMethod_controlRegisterGroupDeclarationAST_noteTypesInPreced
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_controlRegisterGroupDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_controlRegisterGroupDeclarationAST) ;
-  cEnumerator_controlRegisterDeclarationList enumerator_8140 (object->mProperty_mRegisters, kENUMERATION_UP) ;
-  while (enumerator_8140.hasCurrentObject ()) {
-    GALGAS_lstring var_typeName_8160 = function_llvmTypeNameFromPLMname (enumerator_8140.current (HERE).getter_mRegisterTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 214)) ;
+  cEnumerator_controlRegisterDeclarationList enumerator_8118 (object->mProperty_mRegisters, kENUMERATION_UP) ;
+  while (enumerator_8118.hasCurrentObject ()) {
+    GALGAS_lstring var_typeName_8138 = function_llvmTypeNameFromPLMname (enumerator_8118.current (HERE).getter_mRegisterTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 212)) ;
     {
-    ioArgument_ioGraph.setter_noteNode (var_typeName_8160 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 215)) ;
+    ioArgument_ioGraph.setter_noteNode (var_typeName_8138 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 213)) ;
     }
-    enumerator_8140.gotoNextObject () ;
+    enumerator_8118.gotoNextObject () ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*

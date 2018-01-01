@@ -209,7 +209,7 @@ method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMco
   between
     ioLLVMcode += ", "
   end
-  ioLLVMcode += ")" + llvmAttributeFunction () + "; defined in C\n"
+  ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern PLM function declaration\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
