@@ -8,6 +8,13 @@ graph @semanticTypePrecedenceGraph (@declarationListAST) {
   insert addNode error message "the '%K' symbol is already declared at %L"
 }
 
+#·······················································································································
+
+setter @semanticTypePrecedenceGraph noteUINTType ?let @uint inBitSize ?let @location inErrorLocation {
+  let typeName = @lstring.new {!"uint" + inBitSize !inErrorLocation}
+  [!?self noteNode !llvmTypeNameFromPLMname (!typeName)]
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @abstractDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph

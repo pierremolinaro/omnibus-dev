@@ -1592,6 +1592,18 @@ class GALGAS_string extensionGetter_string (const class GALGAS_valuedObjectState
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Extension setter '@semanticTypePrecedenceGraph noteUINTType'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_noteUINTType (class GALGAS_semanticTypePrecedenceGraph & ioObject,
+                                   const class GALGAS_uint constin_inBitSize,
+                                   const class GALGAS_location constin_inErrorLocation,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                     Abstract extension method '@abstractDeclarationAST enterInPrecedenceGraph'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

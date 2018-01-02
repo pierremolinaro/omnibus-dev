@@ -89,8 +89,9 @@ override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceG
       if sliceWidth == 0 then
         error sliceWidthStr : "the bit slice width should be > 0"
       else
-        let sliceTypeName = @lstring.new {!"uint" + sliceWidth !sliceWidthStr.location}
-        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
+        [!?ioGraph noteUINTType !sliceWidth !sliceWidthStr.location]
+#        let sliceTypeName = @lstring.new {!"uint" + sliceWidth !sliceWidthStr.location}
+#        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
       end
     elsif sliceWidthStr.string == "b" then
       let sliceTypeName = @lstring.new {!"bool" !sliceWidthStr.location}

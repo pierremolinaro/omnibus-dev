@@ -526,15 +526,6 @@ class GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inC
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Function 'panicCodeForRegisterFieldOvf'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bigint function_panicCodeForRegisterFieldOvf (class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      Function 'panicCodeForNegativeArrayIndex'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

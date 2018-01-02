@@ -84,12 +84,12 @@ override method @registerConstantExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Search Control register Group
+#------------------------------------------------------ Search Control register Group
   [inContext.mControlRegisterGroupMap searchKey
     !mRegisterGroupName
     ?let controlRegisterMap
   ]
-#--- Search Control register
+#------------------------------------------------------ Search Control register
   [controlRegisterMap searchKey
     !mRegisterName
     ?let registerType
@@ -114,12 +114,14 @@ override method @registerConstantExpressionAST analyzeExpression
         ?let @uint fieldBitIndex
         ?let @uint fieldBitCount
       ]
+      let inferredTypeName = @lstring.new {!"uint" + fieldBitCount !fieldName.location}
+      [inContext.mTypeMap searchKey !lkey:inferredTypeName ?type:let inferredType ?1*]
     #--- Analyze expression
       [expression analyzeExpression
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:voidType ()
+        !optionalTargetType:inferredType
         !context:inContext
         !mode:inCurrentMode
         !?temporary:ioTemporaries
@@ -135,28 +137,7 @@ override method @registerConstantExpressionAST analyzeExpression
         ?let expressionResult
       ]  
     #--- Check expression type
-      switch [expressionResult type].kind
-      case arrayType (* *) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case dynamicArrayType (2*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case opaque (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case enumeration (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case structure (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case syncTool (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case boolean, void :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case literalString :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case pointer (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case function (*) :
-        error expressionLocation: "an unsigned integer expression is required here"
-      case staticInteger :
+      if [[expressionResult type].kind isStaticInteger] then 
         [expressionResult literalInteger ?1* ?value:let @bigint value]
         if value < 0G then
           error expressionLocation: "this integer expression should be positive"
@@ -165,40 +146,26 @@ override method @registerConstantExpressionAST analyzeExpression
         else
           error expressionLocation: "expression too large (should be < " + (1G << fieldBitCount) + ")"
         end
-      case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
+      elsif [[expressionResult type].kind isInteger] then 
+        [[expressionResult type].kind integer ?2* ?unsigned:let @bool unsigned ?bitCount:let @uint expressionBitCount]
         if not unsigned then
           error expressionLocation: "an unsigned integer expression is required here"
+        elsif expressionBitCount != fieldBitCount then
+            error expressionLocation : "type error, $uint" + fieldBitCount + " type required"
         else
-          if (expressionBitCount > fieldBitCount) && not [inRoutineAttributes panicAllowed] then
-            error expressionLocation
-              : "operations that can generate panic are not allowed here: the expression should be an $uint" + fieldBitCount
-          end
-        #--- Generate an upper bound check
-          if (expressionBitCount > fieldBitCount) && [inRoutineAttributes panicAllowed] && not [option plm_options.noPanicGeneration value] then
-            [!?ioInstructionGenerationList appendUpperBoundCheck
-              !expressionResult
-              !1G << fieldBitCount
-              !panicCode:panicCodeForRegisterFieldOvf ()
-              !expressionLocation
-            ]
-          end
         #--- Perform an bit extend to register type or a trunc
           var partialResult = expressionResult
           if expressionBitCount < registerBitCount then
             getNewTempValue (!registerType !?ioTemporaries ?let extendedResult)
             [!?ioInstructionGenerationList appendExtend !extendedResult !partialResult]
             partialResult = extendedResult
-          elsif expressionBitCount > registerBitCount then
-            getNewTempValue (!registerType !?ioTemporaries ?let truncatedResult)
-            [!?ioInstructionGenerationList appendTrunc !truncatedResult !partialResult]
-            partialResult = truncatedResult
           end
         #--- Perform left shift
           getNewTempValue (!registerType !?ioTemporaries ?let shiftedResult)
           [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !partialResult !fieldBitIndex]
         #---- Accumulate 
           operandList += !shiftedResult
-        end
+        end   
       end
     end
   end

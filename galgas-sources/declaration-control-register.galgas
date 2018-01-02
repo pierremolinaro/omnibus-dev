@@ -84,9 +84,8 @@ syntax extension plm_syntax {
             select
               registerBitSlice = .namedBit {!name:bitName !count:.new{!1G !.here}}
             or
-              $[$
+              $:$
               $integer$ ?let @lbigint bitCount
-              $]$
               registerBitSlice = .namedBit {!name:bitName !count:bitCount}
             end
           end
@@ -249,13 +248,21 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
     [!?ioGraph addEdge !nodeName !typeName]
   #--- Add dependency from the number of integer type name (i.e. $uint32 --> $uint5)
     let split = [reg.mRegisterTypeName componentsSeparatedByString !"uint"]
-#    log split
     if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
       let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
       if n > 0 then
-#        log "": reg.mRegisterTypeName, n
         let bitSizeTypeName = @lstring.new {!"uint" + [n-1 significantBitCount] !reg.mRegisterTypeName}
         [!?ioGraph addEdge !nodeName !llvmTypeNameFromPLMname (!bitSizeTypeName)]
+      end
+    end
+  #--- Add integer type corresponding to slices
+    for (slice) in reg.mRegisterBitSliceList do
+      switch slice
+      case unusedBits (*) :
+      case namedBit (* @lbigint count) :
+        if count.bigint >= 0G then
+          [!?ioGraph noteUINTType ![count.bigint uint] !count.location]
+        end
       end
     end
   #--- Add dependency from config node

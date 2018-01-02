@@ -10,167 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Function 'linkForHTMLTypeMap'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_linkForHTMLTypeMap (const GALGAS_string & constinArgument_inTypeName,
-                                           C_Compiler * inCompiler
-                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("<a class=\"header_link\" href=\"#").add_operation (constinArgument_inTypeName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 411)).add_operation (GALGAS_string ("\">"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 411)).add_operation (constinArgument_inTypeName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 411)).add_operation (GALGAS_string ("</a>"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 411)) ;
-//---
-  return result_result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_linkForHTMLTypeMap [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_linkForHTMLTypeMap (C_Compiler * inCompiler,
-                                                                   const cObjectArray & inEffectiveParameterArray,
-                                                                   const GALGAS_location & /* inErrorLocation */
-                                                                   COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_linkForHTMLTypeMap (operand0,
-                                      inCompiler
-                                      COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_linkForHTMLTypeMap ("linkForHTMLTypeMap",
-                                                                    functionWithGenericHeader_linkForHTMLTypeMap,
-                                                                    & kTypeDescriptor_GALGAS_string,
-                                                                    1,
-                                                                    functionArgs_linkForHTMLTypeMap) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Function 'checkAssignmentCompatibility'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR function_checkAssignmentCompatibility (const GALGAS_objectIR & constinArgument_inSourceValue,
-                                                       const GALGAS_PLMType & constinArgument_inOptionalTargetAnnotationType,
-                                                       const GALGAS_location & constinArgument_inErrorLocation,
-                                                       const GALGAS_bool & constinArgument_inStaticTypeAllowed,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_objectIR result_result ; // Returned variable
-  GALGAS_PLMType var_sourceType_876 = extensionGetter_type (constinArgument_inSourceValue, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 14)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inOptionalTargetAnnotationType.objectCompare (var_sourceType_876)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    result_result = constinArgument_inSourceValue ;
-  }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_1 = constinArgument_inOptionalTargetAnnotationType.getter_kind (HERE).getter_isVoid (SOURCE_FILE ("semantic-analysis.galgas", 17)).boolEnum () ;
-    if (kBoolTrue == test_1) {
-      result_result = constinArgument_inSourceValue ;
-    }else if (kBoolFalse == test_1) {
-      GALGAS_bool test_2 = var_sourceType_876.getter_kind (HERE).getter_isStaticInteger (SOURCE_FILE ("semantic-analysis.galgas", 19)) ;
-      if (kBoolTrue == test_2.boolEnum ()) {
-        test_2 = constinArgument_inOptionalTargetAnnotationType.getter_kind (HERE).getter_isInteger (SOURCE_FILE ("semantic-analysis.galgas", 19)) ;
-      }
-      const enumGalgasBool test_3 = test_2.boolEnum () ;
-      if (kBoolTrue == test_3) {
-        GALGAS_bigint var_value_1219 ;
-        GALGAS_PLMType joker_1200_1 ; // Joker input parameter
-        constinArgument_inSourceValue.method_literalInteger (joker_1200_1, var_value_1219, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 20)) ;
-        GALGAS_bigint var_minTarget_1288 ;
-        GALGAS_bigint var_maxTarget_1307 ;
-        GALGAS_bool joker_1309_2 ; // Joker input parameter
-        GALGAS_uint joker_1309_1 ; // Joker input parameter
-        constinArgument_inOptionalTargetAnnotationType.getter_kind (HERE).method_integer (var_minTarget_1288, var_maxTarget_1307, joker_1309_2, joker_1309_1, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 21)) ;
-        GALGAS_bool test_4 = GALGAS_bool (kIsStrictInf, var_value_1219.objectCompare (var_minTarget_1288)) ;
-        if (kBoolTrue != test_4.boolEnum ()) {
-          test_4 = GALGAS_bool (kIsStrictInf, var_maxTarget_1307.objectCompare (var_value_1219)) ;
-        }
-        const enumGalgasBool test_5 = test_4.boolEnum () ;
-        if (kBoolTrue == test_5) {
-          TC_Array <C_FixItDescription> fixItArray6 ;
-          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("literal integer too large"), fixItArray6  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)) ;
-          result_result.drop () ; // Release error dropped variable
-        }else if (kBoolFalse == test_5) {
-          result_result = extensionGetter_withType (constinArgument_inSourceValue, constinArgument_inOptionalTargetAnnotationType, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 25)) ;
-        }
-      }else if (kBoolFalse == test_3) {
-        TC_Array <C_FixItDescription> fixItArray7 ;
-        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("object of type $").add_operation (constinArgument_inOptionalTargetAnnotationType.getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 29)).add_operation (GALGAS_string (" cannot be assigned from expression of type $"), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 29)).add_operation (extensionGetter_plmOriginalTypeName (constinArgument_inSourceValue, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 30)), fixItArray7  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 28)) ;
-        result_result.drop () ; // Release error dropped variable
-      }
-    }
-  }
-  const enumGalgasBool test_8 = constinArgument_inStaticTypeAllowed.operator_not (SOURCE_FILE ("semantic-analysis.galgas", 33)).boolEnum () ;
-  if (kBoolTrue == test_8) {
-    const enumGalgasBool test_9 = GALGAS_bool (kIsEqual, extensionGetter_plmOriginalTypeName (result_result, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 34)).objectCompare (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 34)))).boolEnum () ;
-    if (kBoolTrue == test_9) {
-      TC_Array <C_FixItDescription> fixItArray10 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("the $").add_operation (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 35)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 35)).add_operation (GALGAS_string (" static type is not allowed here"), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 35)), fixItArray10  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 35)) ;
-    }
-  }
-//---
-  return result_result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_checkAssignmentCompatibility [5] = {
-  & kTypeDescriptor_GALGAS_objectIR,
-  & kTypeDescriptor_GALGAS_PLMType,
-  & kTypeDescriptor_GALGAS_location,
-  & kTypeDescriptor_GALGAS_bool,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_checkAssignmentCompatibility (C_Compiler * inCompiler,
-                                                                             const cObjectArray & inEffectiveParameterArray,
-                                                                             const GALGAS_location & /* inErrorLocation */
-                                                                             COMMA_LOCATION_ARGS) {
-  const GALGAS_objectIR operand0 = GALGAS_objectIR::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                                   inCompiler
-                                                                   COMMA_THERE) ;
-  const GALGAS_PLMType operand1 = GALGAS_PLMType::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
-                                                                 inCompiler
-                                                                 COMMA_THERE) ;
-  const GALGAS_location operand2 = GALGAS_location::extractObject (inEffectiveParameterArray.objectAtIndex (2 COMMA_HERE),
-                                                                   inCompiler
-                                                                   COMMA_THERE) ;
-  const GALGAS_bool operand3 = GALGAS_bool::extractObject (inEffectiveParameterArray.objectAtIndex (3 COMMA_HERE),
-                                                           inCompiler
-                                                           COMMA_THERE) ;
-  return function_checkAssignmentCompatibility (operand0,
-                                                operand1,
-                                                operand2,
-                                                operand3,
-                                                inCompiler
-                                                COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_checkAssignmentCompatibility ("checkAssignmentCompatibility",
-                                                                              functionWithGenericHeader_checkAssignmentCompatibility,
-                                                                              & kTypeDescriptor_GALGAS_objectIR,
-                                                                              4,
-                                                                              functionArgs_checkAssignmentCompatibility) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                              Routine 'getNewTempValue'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12585,7 +12424,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "// chapter 11: Port control and interrupts (PORT) Pin Control registers n\n"
   "registers PORTA {\n"
   "  PCR @user [32] 0x4004_9000 : 4 $uint32 {\n"
-  "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
+  "    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
   "  GPCLR @user  0x40049080 $uint32 // Global Pin Control Low Register\n"
@@ -12595,7 +12434,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "\n"
   "registers PORTB {\n"
   "  PCR @user [32] 0x4004_A000 : 4 $uint32 {\n"
-  "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
+  "    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  GPCLR @user  0x4004A080 $uint32 // Global Pin Control Low Register\n"
   "  GPCHR @user  0x4004A084 $uint32 // Global Pin Control High Register\n"
@@ -12604,7 +12443,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "\n"
   "registers PORTC {\n"
   "  PCR @user [32] 0x4004_B000 : 4 $uint32 {\n"
-  "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
+  "    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  GPCLR @user  0x4004B080 $uint32 // Global Pin Control Low Register\n"
   "  GPCHR @user  0x4004B084 $uint32 // Global Pin Control High Register\n"
@@ -12613,7 +12452,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "\n"
   "registers PORTD {\n"
   "  PCR @user [32] 0x4004_C000 : 4 $uint32 {\n"
-  "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
+  "    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  GPCLR @user  0x4004C080 $uint32 // Global Pin Control Low Register\n"
   "  GPCHR @user  0x4004C084 $uint32 // Global Pin Control High Register\n"
@@ -12686,10 +12525,10 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "  SCGC7 0x40048040 $uint32 // System Clock Gating Control registers 7\n"
   "  \n"
   "  CLKDIV1 0x4004_8044 $uint32 {// System Clock Divider registers 1\n"
-  "    OUTDIV1[4], // Divide value for the core/system clock\n"
-  "    OUTDIV2[4], // Divide value for the peripheral clock\n"
+  "    OUTDIV1:4, // Divide value for the core/system clock\n"
+  "    OUTDIV2:4, // Divide value for the peripheral clock\n"
   "    4,\n"
-  "    OUTDIV4[4], // Divide value for the flash clock\n"
+  "    OUTDIV4:4, // Divide value for the flash clock\n"
   "    16\n"
   "  }\n"
   "  \n"
@@ -12826,7 +12665,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "\n"
   "registers DMAMUX0 {\n"
   "  CHCFG [DMA_CHANNEL_COUNT] 0x4002_1000 : 1 $uint8 {\n"
-  "    ENABLE, TRIG, SOURCE [6]\n"
+  "    ENABLE, TRIG, SOURCE:6\n"
   "  }\n"
   "}\n"
   "\n"
@@ -12908,7 +12747,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "  \n"
   "  // Error Status Register\n"
   "  ES  0x4000_8004 $uint32 {\n"
-  "    VLD, 14, ECX, 1, CPE, 2, ERRCHN [4], SAE, SOE, DAE, DOE, NCE, SGE, SBE, DBE\n"
+  "    VLD, 14, ECX, 1, CPE, 2, ERRCHN :4, SAE, SOE, DAE, DOE, NCE, SGE, SBE, DBE\n"
   "  }\n"
   "  \n"
   "  ERQ 0x4000_800C $uint32 { // Enable Request Register\n"
@@ -12924,35 +12763,35 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "  }\n"
   "  \n"
   "  CEEI 0x4000_8018 $uint8 { // Clear Enable Error Interrupt Register\n"
-  "   NOP, CAAE, 2, CEEI [4]\n"
+  "   NOP, CAAE, 2, CEEI:4\n"
   "  }\n"
   "  \n"
   "  SEEI 0x4000_8019 $uint8 { // Set Enable Error Interrupt Register\n"
-  "   NOP, SAAE, 2, SEEI [4]\n"
+  "   NOP, SAAE, 2, SEEI:4\n"
   "  }\n"
   "  \n"
   "  CERQ 0x4000_801A $uint8 { // Clear Enable Request Register\n"
-  "   NOP, CAER, 2, CERQ [4]\n"
+  "   NOP, CAER, 2, CERQ:4\n"
   "  }\n"
   "  \n"
   "  SERQ 0x4000_801B $uint8 { // Set Enable Request Register\n"
-  "   NOP, SAER, 2, SERQ [4]\n"
+  "   NOP, SAER, 2, SERQ:4\n"
   "  }\n"
   "  \n"
   "  CDNE 0x4000_801C $uint8 { // Clear DONE Status Bit Register\n"
-  "   NOP, CADN, 2, CDNE [4]\n"
+  "   NOP, CADN, 2, CDNE:4\n"
   "  }\n"
   "  \n"
   "  SSRT 0x4000_801D $uint8 { // Set START Bit Register\n"
-  "   NOP, SAST, 2, SSRT [4]\n"
+  "   NOP, SAST, 2, SSRT:4\n"
   "  }\n"
   "  \n"
   "  CERR 0x4000_801E $uint8 { // Clear Error Register\n"
-  "   NOP, CAEI, 2, CERR [4]\n"
+  "   NOP, CAEI, 2, CERR:4\n"
   "  }\n"
   "  \n"
   "  CINT 0x4000_801F $uint8 { // Clear Interrupt Request Register\n"
-  "   NOP, CAIR, 2, CINT [4]\n"
+  "   NOP, CAIR, 2, CINT:4\n"
   "  }\n"
   "  \n"
   "  INT 0x4000_8024 $uint32 { // Interrupt Request Register\n"
@@ -12974,7 +12813,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "  }\n"
   "  \n"
   "  DCHPRI [DMA_CHANNEL_COUNT] 0x4000_8100 : 1 $uint8 { // Channel n Priority Register\n"
-  "   ECP, DPA, 2, CHPRI [4]\n"
+  "   ECP, DPA, 2, CHPRI:4\n"
   "  }\n"
   "  \n"
   "  TCD_SADDR [DMA_CHANNEL_COUNT] 0x4000_9000 : 32 $uint32 // TCD Source Address\n"
@@ -12982,7 +12821,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "  TCD_SOFF [DMA_CHANNEL_COUNT] 0x4000_9004 : 32 $int16 // TCD Signed Source Address Offset\n"
   "  \n"
   "  TCD_ATTR [DMA_CHANNEL_COUNT] 0x4000_9006 : 32 $uint16 { // TCD Transfer Attributes\n"
-  "    SMOD [4], SSIZE [4], DMOD [4], DSIZE [4]\n"
+  "    SMOD:4, SSIZE:4, DMOD:4, DSIZE:4\n"
   "  }\n"
   "  \n"
   "  // TCD Minor Byte Count (Minor Loop Disabled)\n"
@@ -12999,7 +12838,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "  \n"
   "  // TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)\n"
   "  TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] 0x4000_9016 : 32 $uint16 {\n"
-  "    ELINK, CITER [15]\n"
+  "    ELINK, CITER:15\n"
   "  }\n"
   "  \n"
   "  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
@@ -13007,13 +12846,13 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "  \n"
   "  // TCD Control and Status \n"
   "  TCD_CSR [DMA_CHANNEL_COUNT] 0x4000_901C : 32 $uint16 {\n"
-  "    BWC [2], 2, MAJORLINKCH [4],\n"
+  "    BWC:2, 2, MAJORLINKCH:4,\n"
   "    DONE, ACTIVE, MAJORLINK, ESG, DREQ, INTHALF, INTMAJOR, START\n"
   "  }\n"
   "  \n"
   "  // TCD Beginning Minor Loop Link, Major Loop Count (Channel Linking Disabled) \n"
   "  TCD_BITER_ELINKNO [DMA_CHANNEL_COUNT] 0x4000_901E : 32 $uint16 {\n"
-  "    ELINK, BITER [15]\n"
+  "    ELINK, BITER:15\n"
   "  }\n"
   "}\n"
   "\n"
@@ -13067,8 +12906,8 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "\n"
   "registers MCG {\n"
   "  C1 0x40064000 $uint8 { // MCG Control 1 Register\n"
-  "    CLKS [2], // Clock Source Select, Selects the clock source for MCGOUTCLK\n"
-  "    FRDIV [3], // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL\n"
+  "    CLKS:2, // Clock Source Select, Selects the clock source for MCGOUTCLK\n"
+  "    FRDIV:3, // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL\n"
   "    IREFS, // Internal Reference Select, Selects the reference clock source for the FLL\n"
   "    IRCLKEN, // Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK\n"
   "    IREFSTEN // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the MCG enters Stop mode\n"
@@ -13078,7 +12917,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "    LOCRE0, // Loss of Clock Reset Enable, Determines whether an interrupt \n"
   "            // or a reset request is made following a loss of OSC0\n"
   "    1,\n"
-  "    RANGE0[2], // Frequency Range Select, Selects the frequency range\n"
+  "    RANGE0:2, // Frequency Range Select, Selects the frequency range\n"
   "               // for the crystal oscillator\n"
   "    HGO0, // High Gain Oscillator Select, Controls the crystal oscillator mode of operation  \n"
   "    EREFS, // External Reference Select, selects the source for the external reference clock\n"
@@ -13096,14 +12935,14 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "   1,\n"
   "   PLLCLKEN0, // PLL Clock Enable\n"
   "   PLLSTEN0,  // PLL Stop Enable\n"
-  "   PRDIV0 [5] // PLL External Reference Divider\n"
+  "   PRDIV0:5 // PLL External Reference Divider\n"
   "  }\n"
   "  \n"
   "  C6 0x4006_4005 $uint8 { // MCG Control 6 Register\n"
   "   LOLIE0, // Loss of Lock Interrrupt Enable\n"
   "   PLLS, // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00\n"
   "   CME0,   // Clock Monitor Enable\n"
-  "   VDIV0[5] // VCO 0 Divider\n"
+  "   VDIV0:5 // VCO 0 Divider\n"
   "  }\n"
   "  \n"
   "  S @ro 0x40064006 $uint8 { // MCG Status Register\n"
@@ -13111,7 +12950,7 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "   LOCK0, // Lock Status, 0=PLL Unlocked, 1=PLL Locked\n"
   "   PLLST, // PLL Select Status\n"
   "   IREFST, // Internal Reference Status\n"
-  "   CLKST [2], // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
+  "   CLKST:2, // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
   "   OSCINIT0, // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator\n"
   "   IRCST   // Internal Reference Clock Status\n"
   "  }\n"
@@ -14214,13 +14053,13 @@ const char * gWrapperFileContent_52_targetTemplates = "\n"
   "  \n"
   "  ICSR 0xE000_ED04 $uint32 { // Interrupt Control and State\n"
   "    NMIPENDSET, 2, PENDSVSET, PENDSVCLR, PENDSTSET, PENDSTCLR, 1, ISRPREEMPT,\n"
-  "    ISRPENDING, 1, VECTPENDING[9], RETTOBASE, 2, VECTACTIVE[9]\n"
+  "    ISRPENDING, 1, VECTPENDING:9, RETTOBASE, 2, VECTACTIVE:9\n"
   "  }\n"
   "  \n"
   "  VTOR 0xE000ED08 $uint32 // Vector Table Offset\n"
   "  \n"
   "  AIRCR 0xE000ED0C $uint32 { // Application Interrupt and Reset Control\n"
-  "    VECTKEY[16], ENDIANNESS, 4, PRIGROUP[3],\n"
+  "    VECTKEY:16, ENDIANNESS, 4, PRIGROUP:3,\n"
   "    5, SYSRESETREQ, VECTCLRACTIVE, VECTRESET \n"
   "  }\n"
   "}\n"
@@ -14305,7 +14144,7 @@ const cRegularFileWrapper gWrapperFile_52_targetTemplates (
   "plm-registers-mk20dx256.plm",
   "plm",
   true, // Text file
-  95395, // Text length
+  95333, // Text length
   gWrapperFileContent_52_targetTemplates
 ) ;
 
@@ -17725,7 +17564,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "// chapter 11: Port control and interrupts (PORT) Pin Control registers n\n"
   "registers PORTA {\n"
   "    PCR @user [32] 0x4004_9000 : 4 $uint32 {\n"
-  "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
+  "    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
   "  GPCLR @user  0x40049080 $uint32 // Global Pin Control Low Register\n"
@@ -17736,7 +17575,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "\n"
   "registers PORTB {\n"
   "  PCR @user [32] 0x4004_A000 : 4 $uint32 {\n"
-  "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
+  "    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
   "  GPCLR @user  0x4004A080 $uint32 // Global Pin Control Low Register\n"
@@ -17747,7 +17586,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "\n"
   "registers PORTC {\n"
   "  PCR @user [32] 0x4004_B000 : 4 $uint32 {\n"
-  "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
+  "    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
   "  GPCLR @user  0x4004B080 $uint32 // Global Pin Control Low Register\n"
@@ -17758,7 +17597,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "\n"
   "registers PORTD {\n"
   "  PCR @user [32] 0x4004_C000 : 4 $uint32 {\n"
-  "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
+  "    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
   "  GPCLR @user  0x4004C080 $uint32 // Global Pin Control Low Register\n"
@@ -17769,7 +17608,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "\n"
   "registers PORTE {\n"
   "  PCR @user [32] 0x4004_D000 : 4 $uint32 {\n"
-  "    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
+  "    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS\n"
   "  }\n"
   "  \n"
   "  GPCLR @user  0x4004D080 $uint32 // Global Pin Control Low Register\n"
@@ -17787,19 +17626,19 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "\n"
   "  SOPT2    0x40048004 $uint32 { // System Options registers 2\n"
   "    2,\n"
-  "    SDHCSRC [2],     // SDHC Clock, 0=system, 1=FLL/PLL, 2=OSCERCLK, 3=external\n"
-  "    LPUARTSRC [2],     // LPUART Clock, 0=off, 1=FLL/PLL, 2=OSCERCLK, 3=MCGIRCLK\n"
-  "    TPMSRC [2],    // TPM Clock, 0=off, 1=FLL/PLL, 2=OSCERCLK, 3=MCGIRCLK\n"
+  "    SDHCSRC:2,     // SDHC Clock, 0=system, 1=FLL/PLL, 2=OSCERCLK, 3=external\n"
+  "    LPUARTSRC:2,     // LPUART Clock, 0=off, 1=FLL/PLL, 2=OSCERCLK, 3=MCGIRCLK\n"
+  "    TPMSRC:2,    // TPM Clock, 0=off, 1=FLL/PLL, 2=OSCERCLK, 3=MCGIRCLK\n"
   "    2,\n"
-  "    TIMESRC [2], // IEEE 1588 clock, 0=system, 1=FLL/PLL, 2=OSCERCLK, 3=external\n"
+  "    TIMESRC:2, // IEEE 1588 clock, 0=system, 1=FLL/PLL, 2=OSCERCLK, 3=external\n"
   "    RMIISRC, // 0=external, 1=external 1588\n"
   "    USBSRC, // 0=USB_CLKIN, 1=FFL/PLL\n"
-  "    PLLFLLSEL [2], // 0=FLL, 1=PLL\n"
+  "    PLLFLLSEL:2, // 0=FLL, 1=PLL\n"
   "    3,\n"
   "    TRACECLKSEL, // 0=MCGOUTCLK, 1=CPU\n"
   "    2,\n"
-  "    FBSL[2], // FlexBus security level\n"
-  "    CLKOUTSEL[3], // Selects the clock to output on the CLKOUT pin.\n"
+  "    FBSL:2, // FlexBus security level\n"
+  "    CLKOUTSEL:3, // Selects the clock to output on the CLKOUT pin.\n"
   "    RTCCLKOUTSEL, // RTC clock out select\n"
   "    2,\n"
   "    USBREGEN, // USB PHY PLL Regulator Enable\n"
@@ -17914,16 +17753,16 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  }\n"
   "\n"
   "  CLKDIV1 0x4004_8044 $uint32 {// System Clock Divider registers 1\n"
-  "    OUTDIV1[4], // Divide value for the core/system clock\n"
-  "    OUTDIV2[4], // Divide value for the peripheral clock\n"
-  "    OUTDIV3[4], // Divide value for flexbus\n"
-  "    OUTDIV4[4], // Divide value for the flash clock\n"
+  "    OUTDIV1:4, // Divide value for the core/system clock\n"
+  "    OUTDIV2:4, // Divide value for the peripheral clock\n"
+  "    OUTDIV3:4, // Divide value for flexbus\n"
+  "    OUTDIV4:4, // Divide value for the flash clock\n"
   "    16\n"
   "  }\n"
   "\n"
   "  CLKDIV2 0x40048048 $uint32 { // System Clock Divider registers 2\n"
   "    28,\n"
-  "    USBDIV [3],\n"
+  "    USBDIV:3,\n"
   "    USBFRAC\n"
   "  }\n"
   "\n"
@@ -17964,19 +17803,19 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "\n"
   "  PMCTRL 0x4007_E001 $uint8 { // Power Mode Control Register\n"
   "    LPWUI, // Low Power Wake Up on Interrupt\n"
-  "    RUNM[2], // Run Mode Control\n"
+  "    RUNM:2, // Run Mode Control\n"
   "    1,\n"
   "    STOPA, // Stop Aborted\n"
-  "    STOPM [3] // Stop Mode Control\n"
+  "    STOPM:3 // Stop Mode Control\n"
   "  }\n"
   "\n"
   "\n"
   "  STOPCTRL 0x4007E002 $uint8 { // VLLS Control Register\n"
-  "    PSTOPO [2],\n"
+  "    PSTOPO:2,\n"
   "    PORPO,\n"
   "    RAM2PO,\n"
   "    1,\n"
-  "    LLSM [3]\n"
+  "    LLSM:3\n"
   "  }\n"
   "\n"
   "\n"
@@ -17995,7 +17834,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "    LVDIE,\n"
   "    LVDRE,\n"
   "    2,\n"
-  "    LVDV [2]\n"
+  "    LVDV:2\n"
   "  }\n"
   "  \n"
   "  LVDSC2 0x4007D001 $uint8 { // Low Voltage Detect Status And Control 2 register\n"
@@ -18003,7 +17842,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "    LVWACK, // Low-Voltage Warning Acknowledge\n"
   "    LVWIE, // Low-Voltage Warning Interrupt Enable\n"
   "    3,\n"
-  "    LVWV [2] // Low-Voltage Warning Voltage Select\n"
+  "    LVWV:2 // Low-Voltage Warning Voltage Select\n"
   "  }\n"
   "  \n"
   "  REGSC 0x4007D002 $uint8 { // Regulator Status And Control register\n"
@@ -18039,10 +17878,10 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  CR 0xE008_000C $uint32 { // Crossbar Switch (AXBS) Control Register\n"
   "    1,\n"
   "    SRAMLWP, // SRAM_L write protect\n"
-  "    SRAMLAP [2], // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
+  "    SRAMLAP:2, // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
   "    1,\n"
   "    SRAMUWP, // SRAM_U write protect\n"
-  "    SRAMUAP [2],\n"
+  "    SRAMUAP:2,\n"
   "    24\n"
   "  }\n"
   "}\n"
@@ -18071,11 +17910,11 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "    READONLY,\n"
   "    HLP,\n"
   "    20,\n"
-  "    ARB [2],\n"
+  "    ARB:2,\n"
   "    2,\n"
-  "    PCTL [2],\n"
+  "    PCTL:2,\n"
   "    1,\n"
-  "    PARK [3]\n"
+  "    PARK:3\n"
   "  }\n"
   "  \n"
   "  \n"
@@ -18088,7 +17927,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  MGPCR6 0x40004E00 // Master 6 General Purpose Control Register\n"
   "  MGPCR7 0x40004F00 $uint32 { // Master 7 General Purpose Control Register\n"
   "    29,\n"
-  "    AULB [3]\n"
+  "    AULB:3\n"
   "  }\n"
   "}\n"
   "\n"
@@ -18100,7 +17939,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "\n"
   "registers DMAMUX {\n"
   "  CHCFG [DMA_CHANNEL_COUNT] 0x4002_1000 : 1 $uint8 {\n"
-  "    ENABLE, TRIG, SOURCE [6]\n"
+  "    ENABLE, TRIG, SOURCE:6\n"
   "  }\n"
   "}\n"
   "\n"
@@ -18209,7 +18048,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  \n"
   "  // Error Status Register\n"
   "  ES  0x4000_8004 $uint32 {\n"
-  "    VLD, 14, ECX, GPE, CPE, 1, ERRCHN [5],\n"
+  "    VLD, 14, ECX, GPE, CPE, 1, ERRCHN:5,\n"
   "    SAE, SOE, DAE, DOE, NCE, SGE, SBE, DBE\n"
   "  }\n"
   "  \n"
@@ -18228,35 +18067,35 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  }\n"
   "  \n"
   "  CEEI 0x4000_8018 $uint8 { // Clear Enable Error Interrupt Register\n"
-  "   NOP, CAAE, 1, CEEI [5]\n"
+  "   NOP, CAAE, 1, CEEI:5\n"
   "  }\n"
   "  \n"
   "  SEEI 0x4000_8019 $uint8 { // Set Enable Error Interrupt Register\n"
-  "   NOP, SAAE, 1, SEEI [5]\n"
+  "   NOP, SAAE, 1, SEEI:5\n"
   "  }\n"
   "  \n"
   "  CERQ 0x4000_801A $uint8 { // Clear Enable Request Register\n"
-  "   NOP, CAER, 1, CERQ [5]\n"
+  "   NOP, CAER, 1, CERQ:5\n"
   "  }\n"
   "  \n"
   "  SERQ 0x4000_801B $uint8 { // Set Enable Request Register\n"
-  "   NOP, SAER, 1, SERQ [5]\n"
+  "   NOP, SAER, 1, SERQ:5\n"
   "  }\n"
   "  \n"
   "  CDNE 0x4000_801C $uint8 { // Clear DONE Status Bit Register\n"
-  "   NOP, CADN, 1, CDNE [5]\n"
+  "   NOP, CADN, 1, CDNE:5\n"
   "  }\n"
   "  \n"
   "  SSRT 0x4000_801D $uint8 { // Set START Bit Register\n"
-  "   NOP, SAST, 2, SSRT [4]\n"
+  "   NOP, SAST, 2, SSRT :4\n"
   "  }\n"
   "  \n"
   "  CERR 0x4000_801E $uint8 { // Clear Error Register\n"
-  "   NOP, CAEI, 1, CERR [5]\n"
+  "   NOP, CAEI, 1, CERR:5\n"
   "  }\n"
   "  \n"
   "  CINT 0x4000_801F $uint8 { // Clear Interrupt Request Register\n"
-  "   NOP, CAIR, 1, CINT [5]\n"
+  "   NOP, CAIR, 1, CINT:5\n"
   "  }\n"
   "  \n"
   "  INT 0x4000_8024 $uint32 { // Interrupt Request Register\n"
@@ -18290,7 +18129,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  \n"
   "  // Channel n Priority Register\n"
   "  DCHPRI [DMA_CHANNEL_COUNT] 0x4000_8100 : 1 $uint8 {\n"
-  "    ECP, DPA, 1, CHPRI [5]\n"
+  "    ECP, DPA, 1, CHPRI:5\n"
   "  }\n"
   "  \n"
   "  TCD_SADDR [DMA_CHANNEL_COUNT] 0x4000_9000 : 32 $uint32 // TCD Source Address\n"
@@ -18298,7 +18137,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  TCD_SOFF [DMA_CHANNEL_COUNT] 0x4000_9004 : 32 $int16 // TCD Signed Source Address Offset\n"
   "  \n"
   "  TCD_ATTR [DMA_CHANNEL_COUNT] 0x4000_9006 : 32 $uint16 { // TCD Transfer Attributes\n"
-  "    SMOD [4], SSIZE [4], DMOD [4], DSIZE [4]\n"
+  "    SMOD :4, SSIZE :4, DMOD :4, DSIZE :4\n"
   "  }\n"
   "  \n"
   "  // TCD Minor Byte Count (Minor Loop Disabled)\n"
@@ -18315,7 +18154,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  \n"
   "  // TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)\n"
   "  TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] 0x4000_9016 : 32 $uint16 {\n"
-  "    ELINK, CITER [15]\n"
+  "    ELINK, CITER:15\n"
   "  }\n"
   "  \n"
   "  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
@@ -18323,13 +18162,13 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  \n"
   "  // TCD Control and Status \n"
   "  TCD_CSR [DMA_CHANNEL_COUNT] 0x4000_901C : 32 $uint16 {\n"
-  "    BWC [2], 2, MAJORLINKCH [4],\n"
+  "    BWC:2, 2, MAJORLINKCH :4,\n"
   "    DONE, ACTIVE, MAJORLINK, ESG, DREQ, INTHALF, INTMAJOR, START\n"
   "  }\n"
   "  \n"
   "  // TCD Beginning Minor Loop Link, Major Loop Count (Channel Linking Disabled) \n"
   "  TCD_BITER_ELINKNO [DMA_CHANNEL_COUNT] 0x4000_901E : 32 $uint16 {\n"
-  "    ELINK, BITER [15]\n"
+  "    ELINK, BITER:15\n"
   "  }\n"
   "}\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -18348,7 +18187,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  STCTRLH 0x40052000 $uint16 { // Watchdog Status and Control registers High\n"
   "    1,\n"
   "    WDOG_STCTRLH_DISTESTWDOG,  // Allows the WDOG's functional test mode to be disabled permanently.\n"
-  "    BYTESEL [2], // selects the byte to be tested when the watchdog is in the byte test mode.\n"
+  "    BYTESEL:2, // selects the byte to be tested when the watchdog is in the byte test mode.\n"
   "    TESTSEL,\n"
   "    TESTWDOG,\n"
   "    2,\n"
@@ -18386,8 +18225,8 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "// Chapter 24: Multipurpose Clock Generator (MCG)\n"
   "registers MCG {\n"
   "  C1 0x40064000 $uint8 { // MCG Control 1 Register\n"
-  "    CLKS [2], // Clock Source Select, Selects the clock source for MCGOUTCLK\n"
-  "    FRDIV [3], // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL\n"
+  "    CLKS:2, // Clock Source Select, Selects the clock source for MCGOUTCLK\n"
+  "    FRDIV:3, // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL\n"
   "    IREFS, // Internal Reference Select, Selects the reference clock source for the FLL\n"
   "    IRCLKEN, // Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK\n"
   "    IREFSTEN // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the MCG enters Stop mode\n"
@@ -18397,7 +18236,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "    LOCRE0, // Loss of Clock Reset Enable, Determines whether an interrupt \n"
   "            // or a reset request is made following a loss of OSC0\n"
   "    1,\n"
-  "    RANGE0[2], // Frequency Range Select, Selects the frequency range\n"
+  "    RANGE0:2, // Frequency Range Select, Selects the frequency range\n"
   "               // for the crystal oscillator\n"
   "    HGO0, // High Gain Oscillator Select, Controls the crystal oscillator mode of operation  \n"
   "    EREFS, // External Reference Select, selects the source for the external reference clock\n"
@@ -18410,8 +18249,8 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  \n"
   "  C4 0x40064003 $uint8 { // MCG Control 4 Register\n"
   "    DMX32, // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed\n"
-  "    DRST_DRS [2], // Fast Internal Reference Clock Trim Setting\n"
-  "    FCTRIM [4], // DCO Range Select\n"
+  "    DRST_DRS:2, // Fast Internal Reference Clock Trim Setting\n"
+  "    FCTRIM :4, // DCO Range Select\n"
   "    SCFTRIM // Slow Internal Reference Clock Fine Trim\n"
   "  }\n"
   "  \n"
@@ -18420,14 +18259,14 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "   1,\n"
   "   PLLCLKEN0, // PLL Clock Enable\n"
   "   PLLSTEN0,  // PLL Stop Enable\n"
-  "   PRDIV0 [5] // PLL External Reference Divider\n"
+  "   PRDIV0:5 // PLL External Reference Divider\n"
   "  }\n"
   "  \n"
   "  C6 0x4006_4005 $uint8 { // MCG Control 6 Register\n"
   "   LOLIE0, // Loss of Lock Interrrupt Enable\n"
   "   PLLS, // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00\n"
   "   CME0,   // Clock Monitor Enable\n"
-  "   VDIV0[5] // VCO 0 Divider\n"
+  "   VDIV0:5 // VCO 0 Divider\n"
   "  }\n"
   "  \n"
   "  S @ro 0x40064006 $uint8 { // MCG Status Register\n"
@@ -18435,7 +18274,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "   LOCK0, // Lock Status, 0=PLL Unlocked, 1=PLL Locked\n"
   "   PLLST, // PLL Select Status\n"
   "   IREFST, // Internal Reference Status\n"
-  "   CLKST [2], // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
+  "   CLKST:2, // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
   "   OSCINIT0, // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator\n"
   "   IRCST   // Internal Reference Clock Status\n"
   "  }\n"
@@ -18445,7 +18284,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "    ATMS, // Automatic Trim Machine Select\n"
   "    ATMF, // Automatic Trim Machine Fail Flag\n"
   "    FLTPRSRV, // FLL Filter Preserve Enable\n"
-  "    FCRDIV [3], // Fast Clock Internal Reference Divider\n"
+  "    FCRDIV:3, // Fast Clock Internal Reference Divider\n"
   "    LOCS0 // OSC0 Loss of Clock Status\n"
   "  }\n"
   "  \n"
@@ -18580,16 +18419,16 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "    COCO, // Conversion complete flag\n"
   "    AIEN, // Interrupt enable\n"
   "    DIFF, // Differential mode enable\n"
-  "    ADCH [5] // Input channel select\n"
+  "    ADCH:5 // Input channel select\n"
   "  }\n"
   "  \n"
   "  CFG1 0x4003B008 $uint32 { // ADC configuration registers 1\n"
   "    24,\n"
   "    ADLPC, // Low-power configuration\n"
-  "    ADIV [2], // Clock divide select, 0=direct, 1=div2, 2=div4, 3=div8\n"
+  "    ADIV:2, // Clock divide select, 0=direct, 1=div2, 2=div4, 3=div8\n"
   "    ADLSMP, // Sample time configuration, 0=Short, 1=Long\n"
-  "    MODE [2], // Conversion mode, 0=8 bit, 1=12 bit, 2=10 bit, 3=16 bit\n"
-  "    ADICLK [2] // Input clock, 0=bus, 1=bus/2, 2=OSCERCLK, 3=async\n"
+  "    MODE:2, // Conversion mode, 0=8 bit, 1=12 bit, 2=10 bit, 3=16 bit\n"
+  "    ADICLK:2 // Input clock, 0=bus, 1=bus/2, 2=OSCERCLK, 3=async\n"
   "  }\n"
   "  \n"
   "  CFG2  0x4003B00C $uint32 { // Configuration registers 2\n"
@@ -18597,7 +18436,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "    MUXSEL,  // 0=a channels, 1=b channels\n"
   "    ADACKEN,   // async clock enable\n"
   "    ADHSC, // High speed configuration\n"
-  "    ADLSTS [2] // Sample time, 0=24 cycles, 1=12 cycles, 2=6 cycles, 3=2 cycles\n"
+  "    ADLSTS:2 // Sample time, 0=24 cycles, 1=12 cycles, 2=6 cycles, 3=2 cycles\n"
   "  }\n"
   "  \n"
   "  RA    0x4003B010 $uint32 // ADC data result register\n"
@@ -18616,7 +18455,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "    ACFGT,  // Compare function greater than enable\n"
   "    ACREN,  // Compare function range enable\n"
   "    DMAEN,  // DMA enable\n"
-  "    REFSEL [2] // Voltage reference, 0=vcc/external, 1=1.2 volts\n"
+  "    REFSEL:2 // Voltage reference, 0=vcc/external, 1=1.2 volts\n"
   "  }\n"
   "  \n"
   "  SC3 0x4003B024 $uint32 { // Status and control registers 3\n"
@@ -18626,7 +18465,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "    2,\n"
   "    ADCO,  // Continuous conversion enable\n"
   "    AVGE,  // Hardware average enable\n"
-  "    AVGS [2] // avg select, 0=4 samples, 1=8 samples, 2=16 samples, 3=32 samples\n"
+  "    AVGS:2 // avg select, 0=4 samples, 1=8 samples, 2=16 samples, 3=32 samples\n"
   "  }\n"
   "  \n"
   "  OFS   0x4003B028 $uint32 // ADC offset correction register\n"
@@ -18777,8 +18616,8 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  C1  0x400CC022 $uint8 { // DAC Control registers 1 \n"
   "    DMAEN,    // DMA Enable Select\n"
   "    2,\n"
-  "    DACBFWM [2],  // DAC Buffer Watermark Select\n"
-  "    DACBFMD [2],  // DAC Buffer Work Mode Select\n"
+  "    DACBFWM:2,  // DAC Buffer Watermark Select\n"
+  "    DACBFMD:2,  // DAC Buffer Work Mode Select\n"
   "    DACBFEN // DAC Buffer Enable\n"
   "  }\n"
   "  \n"
@@ -18972,42 +18811,42 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "registers TPM1 {\n"
-  "  SC      0x400C_9000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD [2], PS[3]}\n"
-  "  CNT     0x400C_9004 $uint32 {16, COUNT [16]}\n"
-  "  MOD     0x400C_9008 $uint32 {16, MOD [16]}\n"
+  "  SC      0x400C_9000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD:2, PS:3}\n"
+  "  CNT     0x400C_9004 $uint32 {16, COUNT:16}\n"
+  "  MOD     0x400C_9008 $uint32 {16, MOD:16}\n"
   "  C0SC    0x400C_900C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
-  "  C0V     0x400C_9010 $uint32 {16, VAL [16]}\n"
+  "  C0V     0x400C_9010 $uint32 {16, VAL:16}\n"
   "  C1SC    0x400C_9014 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
-  "  C1V     0x400C_9018 $uint32 {16, VAL [16]}\n"
+  "  C1V     0x400C_9018 $uint32 {16, VAL:16}\n"
   "  STATUS  0x400C_9050 $uint32 {23, TOF, 6, CH1F, CH0F}\n"
   "  COMBINE 0x400C_9064 $uint32 {30, COMSWAP0, COMBINE0}\n"
   "  POL     0x400C_9070 $uint32 {30, POL1, POL0}\n"
-  "  FILTER  0x400C_9078 $uint32 {24, CH1FVAL [4], CH0FVAL [4]}\n"
+  "  FILTER  0x400C_9078 $uint32 {24, CH1FVAL :4, CH0FVAL :4}\n"
   "  QDCTRL  0x400C_9080 $uint32 {28, QUADMODE, QUADIR, TOFDIR, QUADEN}\n"
   "  CONF    0x400C_9084 $uint32 {\n"
-  "    4, TRGSEL [4], TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,\n"
-  "    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE [2], DOZEEN, 5\n"
+  "    4, TRGSEL :4, TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,\n"
+  "    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE:2, DOZEEN, 5\n"
   "  }\n"
   "}\n"
   "\n"
   "//\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "registers TPM2 {\n"
-  "  SC      0x400C_A000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD [2], PS[3]}\n"
-  "  CNT     0x400C_A004 $uint32 {16, COUNT [16]}\n"
-  "  MOD     0x400C_A008 $uint32 {16, MOD [16]}\n"
+  "  SC      0x400C_A000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD:2, PS:3}\n"
+  "  CNT     0x400C_A004 $uint32 {16, COUNT:16}\n"
+  "  MOD     0x400C_A008 $uint32 {16, MOD:16}\n"
   "  C0SC    0x400C_A00C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
-  "  C0V     0x400C_A010 $uint32 {16, VAL [16]}\n"
+  "  C0V     0x400C_A010 $uint32 {16, VAL:16}\n"
   "  C1SC    0x400C_A014 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
-  "  C1V     0x400C_A018 $uint32 {16, VAL [16]}\n"
+  "  C1V     0x400C_A018 $uint32 {16, VAL:16}\n"
   "  STATUS  0x400C_A050 $uint32 {23, TOF, 6, CH1F, CH0F}\n"
   "  COMBINE 0x400C_A064 $uint32 {30, COMSWAP0, COMBINE0}\n"
   "  POL     0x400C_A070 $uint32 {30, POL1, POL0}\n"
-  "  FILTER  0x400C_A078 $uint32 {24, CH1FVAL [4], CH0FVAL [4]}\n"
+  "  FILTER  0x400C_A078 $uint32 {24, CH1FVAL :4, CH0FVAL :4}\n"
   "  QDCTRL  0x400C_A080 $uint32 {28, QUADMODE, QUADIR, TOFDIR, QUADEN}\n"
   "  CONF    0x400C_A084 $uint32 {\n"
-  "    4, TRGSEL [4], TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,\n"
-  "    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE [2], DOZEEN, 5\n"
+  "    4, TRGSEL :4, TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,\n"
+  "    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE:2, DOZEEN, 5\n"
   "  }\n"
   "}\n"
   "\n"
@@ -19106,50 +18945,50 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "registers USBHS {\n"
   "//--- Identification register\n"
   "  ID @ro 0x400A_1000 $uint32 {\n"
-  "    VERSIONID [3], VERSION [4], REVISION [4], TAG [5], 2, NID [6], 2, ID [6]\n"
+  "    VERSIONID:3, VERSION:4, REVISION:4, TAG:5, 2, NID:6, 2, ID:6\n"
   "  }\n"
   "\n"
   "//--- General Hardware Parameters Register\n"
-  "  HWGENERAL @ro 0x400A_1004 $uint32 {21, SM [2], PHYM [3], PHYW [2], 4}\n"
+  "  HWGENERAL @ro 0x400A_1004 $uint32 {21, SM:2, PHYM:3, PHYW:2, 4}\n"
   "\n"
   "//--- Host Hardware Parameters Register\n"
-  "  HWHOST @ro 0x400A_1008 $uint32 {TIPER [8], TTASY [8], 12, NPORT [3], HC}\n"
+  "  HWHOST @ro 0x400A_1008 $uint32 {TIPER:8, TTASY:8, 12, NPORT:3, HC}\n"
   "  \n"
   "//--- Device Hardware Parameters Register\n"
-  "  HWDEVICE @ro 0x400A_100C $uint32 {26, DEVEP [5], DC}\n"
+  "  HWDEVICE @ro 0x400A_100C $uint32 {26, DEVEP:5, DC}\n"
   "  \n"
   "//--- Transmit Buffer Hardware Parameters Register\n"
-  "  HWTXBUF @ro 0x400A_1010 $uint32 {TXLC, 7, TXCHANADD [8], TXADD [8], TXBURST [8]}\n"
+  "  HWTXBUF @ro 0x400A_1010 $uint32 {TXLC, 7, TXCHANADD:8, TXADD:8, TXBURST:8}\n"
   "  \n"
   "//--- Receive Buffer Hardware Parameters Register\n"
-  "  HWRXBUF @ro 0x400A_1014 $uint32 {16, RXADD [8], RXBURST [8]}\n"
+  "  HWRXBUF @ro 0x400A_1014 $uint32 {16, RXADD:8, RXBURST:8}\n"
   "  \n"
   "//--- General Purpose Timer n Load Register\n"
-  "  GPTIMERnLD [2] 0x400A_1080 : 8 $uint32 {8, GPTLD [24]}\n"
+  "  GPTIMERnLD [2] 0x400A_1080 : 8 $uint32 {8, GPTLD:24}\n"
   "  \n"
   "//--- General Purpose Timer n Control Register\n"
-  "  GPTIMERnCTL [2] 0x400A_1084 : 8 $uint32 {RUN, RST, 5, MODE, GPTCNT [24]}\n"
+  "  GPTIMERnCTL [2] 0x400A_1084 : 8 $uint32 {RUN, RST, 5, MODE, GPTCNT:24}\n"
   "  \n"
   "//--- General Purpose Timer n Control Register\n"
-  "  USB_SBUSCFG 0x400A_1090 $uint32 {29, BURSTMODE [3]}\n"
+  "  USB_SBUSCFG 0x400A_1090 $uint32 {29, BURSTMODE:3}\n"
   "  \n"
   "//--- Host Controller Interface Version and Capability Register\n"
-  "  HCIVERSION 0x400A_1100 $uint32 {HCIVERSION [16], 8, CAPLENGTH [8]}\n"
+  "  HCIVERSION 0x400A_1100 $uint32 {HCIVERSION:16, 8, CAPLENGTH:8}\n"
   "  \n"
   "//--- Host Controller Structural Parameters Register\n"
-  "  HCSPARAMS 0x400A_1104 $uint32 {4, N_TT [4], N_PTT [4], 3, PI, N_CC [4], N_PCC [4], 3, PCC, N_PORTS [4]}\n"
+  "  HCSPARAMS 0x400A_1104 $uint32 {4, N_TT:4, N_PTT:4, 3, PI, N_CC:4, N_PCC:4, 3, PCC, N_PORTS:4}\n"
   "  \n"
   "//--- Host Controller Capability Parameter Register\n"
-  "  HCCPARAMS 0x400A_1108 $uint32 {16, EECP [8], IST [4], 1, ASP, PFL, ADC}\n"
+  "  HCCPARAMS 0x400A_1108 $uint32 {16, EECP:8, IST:4, 1, ASP, PFL, ADC}\n"
   "  \n"
   "//--- Device Controller Interface Version Register\n"
   "  DCIVERSION 0x400A_1122 $uint16\n"
   "  \n"
   "//--- Device Controller Capability Parameters Register\n"
-  "  DCCPARAMS 0x400A_1124 $uint32 {23, HC, DC, 2, DEN [5]}\n"
+  "  DCCPARAMS 0x400A_1124 $uint32 {23, HC, DC, 2, DEN:5}\n"
   "  \n"
   "//--- USB Command Register\n"
-  "  USBCMD 0x400A_1140 $uint32 {8, ITC [8], FS2, ATDTW, SUTW, 1, ASPE, 1, ASP [2], 1, IAA, ASE, PSE, FS [2], RST, RS}\n"
+  "  USBCMD 0x400A_1140 $uint32 {8, ITC:8, FS2, ATDTW, SUTW, 1, ASPE, 1, ASP:2, 1, IAA, ASE, PSE, FS:2, RST, RS}\n"
   "  \n"
   "//--- USB Status Register\n"
   "  USBSTS 0x400A_1144 $uint32 {\n"
@@ -19164,42 +19003,42 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  }\n"
   "\n"
   "//--- Frame Index Register\n"
-  "  FRINDEX 0x400A_114C $uint32 {18, FRINDEX [14]}\n"
+  "  FRINDEX 0x400A_114C $uint32 {18, FRINDEX:14}\n"
   "\n"
   "//--- Periodic Frame List Base Address Register\n"
-  "  PERIODICLISTBASE 0x400A_1154 $uint32 {PERBASE [20], 12}\n"
+  "  PERIODICLISTBASE 0x400A_1154 $uint32 {PERBASE:20, 12}\n"
   "\n"
   "//--- Device Address Register\n"
-  "  DEVICEADDR 0x400A_1154 $uint32 {USBADDR [7], USBADRA, 24}\n"
+  "  DEVICEADDR 0x400A_1154 $uint32 {USBADDR:7, USBADRA, 24}\n"
   "\n"
   "//--- Current Asynchronous List Address Register\n"
-  "  ASYNCLISTADDR 0x400A_1158 $uint32 {ASYBASE [27], 5}\n"
+  "  ASYNCLISTADDR 0x400A_1158 $uint32 {ASYBASE:27, 5}\n"
   "\n"
   "//--- Endpoint List Address Register\n"
-  "  EPLISTADDR 0x400A_1158 $uint32 {EPBASE [21], 11}\n"
+  "  EPLISTADDR 0x400A_1158 $uint32 {EPBASE:21, 11}\n"
   "\n"
   "//--- Host TT Asynchronous Buffer Control Register\n"
-  "  TCCTRL 0x400A_115C $uint32 {1, TTHA [7], 24}\n"
+  "  TCCTRL 0x400A_115C $uint32 {1, TTHA:7, 24}\n"
   "\n"
   "//--- Master Interface Data Burst Size Register\n"
-  "  BURSTSIZE 0x400A_1160 $uint32 {16, TXPBURST [8], RXPBURST [8]}\n"
+  "  BURSTSIZE 0x400A_1160 $uint32 {16, TXPBURST:8, RXPBURST:8}\n"
   "\n"
   "//--- Transmit FIFO Tuning Control Register\n"
-  "  TXFILLTUNING 0x400A_1164 $uint32 {10, TXFIFOTHRES [6], 3, TXSCHHEALTH [5], 1, TXCHOH [7]}\n"
+  "  TXFILLTUNING 0x400A_1164 $uint32 {10, TXFIFOTHRES:6, 3, TXSCHHEALTH:5, 1, TXCHOH:7}\n"
   "\n"
   "//--- Endpoint NAK Register\n"
-  "  ENDPTNAK 0x400A_1178 $uint32 {12, EPTN [4], 12, EPRN [4]}\n"
+  "  ENDPTNAK 0x400A_1178 $uint32 {12, EPTN:4, 12, EPRN:4}\n"
   "\n"
   "//--- Endpoint NAK Enable Register\n"
-  "  ENDPTNAKEN 0x400A_117C $uint32 {12, EPTNE [4], 12, EPRNE [4]}\n"
+  "  ENDPTNAKEN 0x400A_117C $uint32 {12, EPTNE:4, 12, EPRNE:4}\n"
   "\n"
   "//--- Configure Flag Register\n"
   "  CONFIGFLAG @ro 0x400A_1180 $uint32\n"
   "\n"
   "//--- Port Status and Control Register\n"
   "  PORTSC1 0x400A_1184 $uint32 {\n"
-  "    PTS [2], 2, PSPD [2], PTS2, PFSC, PHCD, WKOC, WKDS, WKCN, PTC [4],\n"
-  "    PIC [2], PO, PP, LS [2], HSP, PR, SUSP, FPR, OCC, OCA, PEC, PE, CSC, CCS\n"
+  "    PTS:2, 2, PSPD:2, PTS2, PFSC, PHCD, WKOC, WKDS, WKCN, PTC:4,\n"
+  "    PIC:2, PO, PP, LS:2, HSP, PR, SUSP, FPR, OCC, OCA, PEC, PE, CSC, CCS\n"
   "  }\n"
   "\n"
   "//--- On-the-Go Status and Control Register\n"
@@ -19209,28 +19048,28 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  }\n"
   "\n"
   "//--- USB Mode Register\n"
-  "  USBMODE 0x400A_11A8 $uint32 {17, TXHSD [3], 7, SDIS, SLOM, ES, CM [2]}\n"
+  "  USBMODE 0x400A_11A8 $uint32 {17, TXHSD:3, 7, SDIS, SLOM, ES, CM:2}\n"
   "\n"
   "//--- Endpoint Setup Status Register\n"
-  "  EPSETUPSR 0x400A_11AC $uint32 {27, EPSETUPSTAT [5]}\n"
+  "  EPSETUPSR 0x400A_11AC $uint32 {27, EPSETUPSTAT:5}\n"
   "\n"
   "//--- Endpoint Initialization Register\n"
-  "  EPPRIME 0x400A_11B0 $uint32 {12, PETB [4], 12, PERB [4]}\n"
+  "  EPPRIME 0x400A_11B0 $uint32 {12, PETB:4, 12, PERB:4}\n"
   "\n"
   "//--- Endpoint Flush Register\n"
-  "  EPFLUSH 0x400A_11B4 $uint32 {12, FETB [4], 12, FERB [4]}\n"
+  "  EPFLUSH 0x400A_11B4 $uint32 {12, FETB:4, 12, FERB:4}\n"
   "\n"
   "//--- Endpoint Status Register\n"
-  "  EPSR 0x400A_11B8 $uint32 {12, ETBR [4], 12, ERBR [4]}\n"
+  "  EPSR 0x400A_11B8 $uint32 {12, ETBR:4, 12, ERBR:4}\n"
   "\n"
   "//--- Endpoint Status Register\n"
-  "  EPCOMPLETE 0x400A_11BC $uint32 {12, ETCE [4], 12, ERCE [4]}\n"
+  "  EPCOMPLETE 0x400A_11BC $uint32 {12, ETCE:4, 12, ERCE:4}\n"
   "\n"
   "//--- Endpoint Control Register 0\n"
-  "  EPCR0 0x400A_11C0 $uint32 {8, TXE, 3, TXT [2], 1, TXS, 8, RXE, 3, RXT [2], 1, RXS}\n"
+  "  EPCR0 0x400A_11C0 $uint32 {8, TXE, 3, TXT:2, 1, TXS, 8, RXE, 3, RXT:2, 1, RXS}\n"
   "\n"
   "//--- Endpoint Control Register n (0 < n < 8)\n"
-  "  EPCR [8] 0x400A_11C0 : 4 $uint32 {8, TXE, TXR, TXI, 1, TXT [2], TXD, TXS, 8, RXE, RXR, RXI, 1, RXT [2], RXD, RXS}\n"
+  "  EPCR [8] 0x400A_11C0 : 4 $uint32 {8, TXE, TXR, TXI, 1, TXT:2, TXD, TXS, 8, RXE, RXR, RXI, 1, RXT:2, RXD, RXS}\n"
   "\n"
   "//--- USB General Control Register\n"
   "  USBGENCTRL 0x400A_1200 $uint32 {26, WU_INT_CLR, 4, WU_IE}\n"
@@ -19251,13 +19090,13 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  TX     0x400A_2010\n"
   "  TX_SET 0x400A_2014\n"
   "  TX_CLR 0x400A_2018\n"
-  "  TX_TOG 0x400A_201C $uint32 {3, USBPHY_TX_EDGECTRL [3], 6, TXCAL45DP [4], 4, TXCAL45DM [4], 4, D_CAL [4]}\n"
+  "  TX_TOG 0x400A_201C $uint32 {3, USBPHY_TX_EDGECTRL:3, 6, TXCAL45DP:4, 4, TXCAL45DM:4, 4, D_CAL:4}\n"
   "\n"
   "//--- USB PHY Receiver Control Register\n"
   "  RX     0x400A_2020\n"
   "  RX_SET 0x400A_2024\n"
   "  RX_CLR 0x400A_2028\n"
-  "  RX_TOG 0x400A_202C $uint32 {9, RXDBYPASS, 15, DISCONADJ [3], 1, ENVADJ [3]}\n"
+  "  RX_TOG 0x400A_202C $uint32 {9, RXDBYPASS, 15, DISCONADJ:3, 1, ENVADJ:3}\n"
   "\n"
   "//--- USB PHY General Control Register\n"
   "  CTRL     0x400A_2030\n"
@@ -19280,21 +19119,21 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  DEBUG_SET 0x400A_2054\n"
   "  DEBUG_CLR 0x400A_2058\n"
   "  DEBUG_TOG 0x400A_205C $uint32 {\n"
-  "    1, CLKGATE, HOST_RESUME_DEBUG, SQUELCHRESETLENGTH [4], ENSQUELCHRESET, 3, SQUELCHRESETCOUNT [5],\n"
-  "    3, ENTX2RXCOUNT, TX2RXCOUNT [4], 2, ENHSTPULLDOWN [2], HSTPULLDOWN [2], DEBUG_INTERFACE_HOLD, OTGIDPIOLOCK\n"
+  "    1, CLKGATE, HOST_RESUME_DEBUG, SQUELCHRESETLENGTH:4, ENSQUELCHRESET, 3, SQUELCHRESETCOUNT:5,\n"
+  "    3, ENTX2RXCOUNT, TX2RXCOUNT:4, 2, ENHSTPULLDOWN:2, HSTPULLDOWN:2, DEBUG_INTERFACE_HOLD, OTGIDPIOLOCK\n"
   "  }\n"
   "\n"
   "//--- UTMI Debug Status Register 0\n"
-  "  DEBUG0_STATUS 0x400A_2060 $uint32 {SQUEL_COUNT [6], UTMI_RXERROR_FAIL_COUNT [10], LOOP_BACK_FAIL_COUNT [16]}\n"
+  "  DEBUG0_STATUS 0x400A_2060 $uint32 {SQUEL_COUNT:6, UTMI_RXERROR_FAIL_COUNT:10, LOOP_BACK_FAIL_COUNT:16}\n"
   "\n"
   "//--- UTMI Debug Status Register 1\n"
   "  DEBUG1     0x400A_2070\n"
   "  DEBUG1_SET 0x400A_2074\n"
   "  DEBUG1_CLR 0x400A_2078\n"
-  "  DEBUG1_TOG 0x400A_207C $uint32 {17, ENTAILADJVD [2], 13}\n"
+  "  DEBUG1_TOG 0x400A_207C $uint32 {17, ENTAILADJVD:2, 13}\n"
   "\n"
   "//--- UTMI RTL Version Register\n"
-  "  VERSION @ro 0x400A_2080 $uint32 {MAJOR [8], MINOR [8], STEP [16]}\n"
+  "  VERSION @ro 0x400A_2080 $uint32 {MAJOR:8, MINOR:8, STEP:16}\n"
   "\n"
   "//--- USB PHY PLL Control / Status Register\n"
   "  PLL_SIC     0x400A_20A0\n"
@@ -19303,7 +19142,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  PLL_SIC_TOG 0x400A_20AC\n"
   "  $uint32 {\n"
   "    PLL_LOCK, 14, PLL_BYPASS,\n"
-  "    2, PLL_ENABLE, PLL_POWER, PLL_HOLD_RING_OFF, 4, PLL_EN_USB_CLKS, 4, PLL_DIV_SEL [2]\n"
+  "    2, PLL_ENABLE, PLL_POWER, PLL_HOLD_RING_OFF, 4, PLL_EN_USB_CLKS, 4, PLL_DIV_SEL:2\n"
   "  }\n"
   "\n"
   "//--- USB PHY VBUS Detect Control Register\n"
@@ -19313,8 +19152,8 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  USB1_VBUS_DETECT_TOG 0x400A_20CC\n"
   "  $uint32 {\n"
   "    EN_CHARGER_RESISTOR, 4, DISCHARGE_VBUS, 5, PWRUP_CMPS, 1, VBUSVALID_TO_SESSVALID, 2,\n"
-  "    5, VBUS_SOURCE_SEL [2], VBUSVALID_SEL,\n"
-  "    VBUSVALID_OVERRIDE, AVALID_OVERRIDE, BVALID_OVERRIDE, SESSEND_OVERRIDE, VBUS_OVERRIDE_EN, VBUSVALID_THRESH [3]\n"
+  "    5, VBUS_SOURCE_SEL:2, VBUSVALID_SEL,\n"
+  "    VBUSVALID_OVERRIDE, AVALID_OVERRIDE, BVALID_OVERRIDE, SESSEND_OVERRIDE, VBUS_OVERRIDE_EN, VBUSVALID_THRESH:3\n"
   "  }\n"
   "\n"
   "//--- USB PHY VBUS Detector Status Register\n"
@@ -19329,7 +19168,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  ANACTRL_CLR 0x400A_2108\n"
   "  ANACTRL_TOG 0x400A_210C $uint32 {\n"
   "    PFD_STABLE, 15,\n"
-  "    EMPH_CUR_CTRL[2], EMPH_EN, EMPH_PULSE_CTRL [2], DEV_PULLDOWN, PFD_FRAC [6], PFD_CLK_SEL [2], PFD_CLKGATE, TESTCLK_SEL\n"
+  "    EMPH_CUR_CTRL:2, EMPH_EN, EMPH_PULSE_CTRL:2, DEV_PULLDOWN, PFD_FRAC:6, PFD_CLK_SEL:2, PFD_CLKGATE, TESTCLK_SEL\n"
   "  }\n"
   "\n"
   "//--- USB PHY Loopback Control/Status Register\n"
@@ -19337,7 +19176,7 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  USB1_LOOPBACK_SET 0x400A_2114\n"
   "  USB1_LOOPBACK_CLR 0x400A_2118\n"
   "  USB1_LOOPBACK_TOG 0x400A_211C $uint32 {\n"
-  "    8, TSTPKT [8], TSTL_HSFS_MODE_EN, 6, UTM0_DIG_TST1,\n"
+  "    8, TSTPKT:8, TSTL_HSFS_MODE_EN, 6, UTM0_DIG_TST1,\n"
   "    UTM0_DIG_TST0, TSTL_TX_HIZ, TSTI_TX_EN, TSTI_TX_LS_MODE,\n"
   "    TSTI_TX_HS_MODE, UTMI_DIG_TST1, UTMI_DIG_TST0, UTMI_TESTSTART\n"
   "  }\n"
@@ -19346,15 +19185,15 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "  USB1_LOOPBACK_HSFSCNT     0x400A_2120\n"
   "  USB1_LOOPBACK_HSFSCNT_SET 0x400A_2124\n"
   "  USB1_LOOPBACK_HSFSCNT_CLR 0x400A_2128\n"
-  "  USB1_LOOPBACK_HSFSCNT_TOG 0x400A_212C $uint32 {TSTL_FS_NUMBER [16], TSTL_HS_NUMBER [16]}\n"
+  "  USB1_LOOPBACK_HSFSCNT_TOG 0x400A_212C $uint32 {TSTL_FS_NUMBER:16, TSTL_HS_NUMBER:16}\n"
   "\n"
   "//--- USB PHY Trim Override Enable Register\n"
   "  TRIM_OVERRIDE_EN     0x400A_2130\n"
   "  TRIM_OVERRIDE_EN_SET 0x400A_2134\n"
   "  TRIM_OVERRIDE_EN_CLR 0x400A_2138\n"
   "  TRIM_OVERRIDE_EN_TOG 0x400A_213C $uint32 {\n"
-  "    TRIM_USBPHY_TX_CAL45DM [4], TRIM_USBPHY_TX_CAL45CP [4],\n"
-  "    TRIM_USBPHY_TX_DCAL [4], TRIM_USB_REG_ENV_TAIL_ADJ_VD [2], TRIM_PLL_CTRL0_DIV_SEL [2],\n"
+  "    TRIM_USBPHY_TX_CAL45DM:4, TRIM_USBPHY_TX_CAL45CP:4,\n"
+  "    TRIM_USBPHY_TX_DCAL:4, TRIM_USB_REG_ENV_TAIL_ADJ_VD:2, TRIM_PLL_CTRL0_DIV_SEL:2,\n"
   "    11, TRIM_TX_CAL45DM_OVERRIDE, TRIM_TX_CAL45DP_OVERRIDE,\n"
   "    TRIM_TX_D_CAL_OVERRIDE, TRIM_ENV_TAIL_ADJ_VD_OVERRIDE, TRIM_DEV_SEL_OVERRIDE\n"
   "  }\n"
@@ -19907,13 +19746,13 @@ const char * gWrapperFileContent_83_targetTemplates = "check target \"teensy-3-6
   "\n"
   "  ICSR 0xE000_ED04 $uint32 { // Interrupt Control and State\n"
   "    NMIPENDSET, 2, PENDSVSET, PENDSVCLR, PENDSTSET, PENDSTCLR, 1, ISRPREEMPT,\n"
-  "    ISRPENDING, 1, VECTPENDING[9], RETTOBASE, 2, VECTACTIVE[9]\n"
+  "    ISRPENDING, 1, VECTPENDING:9, RETTOBASE, 2, VECTACTIVE:9\n"
   "  }\n"
   "  \n"
   "  VTOR 0xE000_ED08 $uint32 // Vector Table Offset\n"
   "  \n"
   "  AIRCR 0xE000_ED0C $uint32 { // Application Interrupt and Reset Control\n"
-  "    VECTKEY[16], ENDIANNESS, 4, PRIGROUP[3],\n"
+  "    VECTKEY:16, ENDIANNESS, 4, PRIGROUP:3,\n"
   "    5, SYSRESETREQ, VECTCLRACTIVE, VECTRESET \n"
   "  }\n"
   "  \n"
@@ -20009,7 +19848,7 @@ const cRegularFileWrapper gWrapperFile_83_targetTemplates (
   "plm-registers-mk66fx1m0.plm",
   "plm",
   true, // Text file
-  104665, // Text length
+  104308, // Text length
   gWrapperFileContent_83_targetTemplates
 ) ;
 
