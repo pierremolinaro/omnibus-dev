@@ -119,12 +119,17 @@ override method @constructorCallAST analyzeExpression
         !errorLocation:[mParameterList mSelectorAtIndex !0].location
         !staticTypeAllowed:false
       )
-      @operandIRList operandIRList = {}
-      for i in 0 ..< size do
-        operandIRList += !result
+      if [result isStatic] then
+        let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  length]
+        outResult = .llvmArrayRepeatedStaticValue {!type:resultType !arraySize:size !value:result !index:idx}
+        @operandIRList operandIRList = {}
+        for i in 0 ..< size do
+          operandIRList += !result
+        end
+        ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
+      else
+        outResult = .llvmArrayRepeatedDynamicValue {!type:resultType !arraySize:size !value:result}
       end
-      outResult = .llvmArrayValue {!type:resultType !values:operandIRList !index:[ioStaticEntityMap.mGlobalStructuredConstantList  length]}
-      ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
     else
       var individualConstructor = "("
       for i in 0 ..< size do

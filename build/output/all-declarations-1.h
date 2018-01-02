@@ -1059,9 +1059,11 @@ class GALGAS_objectIR : public AC_GALGAS_root {
     kEnum_llvmValue,
     kEnum_literalInteger,
     kEnum_llvmStructureValue,
-    kEnum_llvmArrayValue,
     kEnum_literalString,
-    kEnum_zero
+    kEnum_zero,
+    kEnum_llvmArrayValue,
+    kEnum_llvmArrayRepeatedStaticValue,
+    kEnum_llvmArrayRepeatedDynamicValue
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -1095,6 +1097,17 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : static class GALGAS_objectIR constructor_literalString (const class GALGAS_uint & inOperand0,
                                                                    const class GALGAS_uint & inOperand1
                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_objectIR constructor_llvmArrayRepeatedDynamicValue (const class GALGAS_PLMType & inOperand0,
+                                                                                   const class GALGAS_uint & inOperand1,
+                                                                                   const class GALGAS_objectIR & inOperand2
+                                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_objectIR constructor_llvmArrayRepeatedStaticValue (const class GALGAS_PLMType & inOperand0,
+                                                                                  const class GALGAS_uint & inOperand1,
+                                                                                  const class GALGAS_objectIR & inOperand2,
+                                                                                  const class GALGAS_uint & inOperand3
+                                                                                  COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_llvmArrayValue (const class GALGAS_PLMType & inOperand0,
                                                                     const class GALGAS_operandIRList & inOperand1,
@@ -1140,6 +1153,19 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_llvmArrayRepeatedDynamicValue (class GALGAS_PLMType & outArgument0,
+                                                                       class GALGAS_uint & outArgument1,
+                                                                       class GALGAS_objectIR & outArgument2,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_llvmArrayRepeatedStaticValue (class GALGAS_PLMType & outArgument0,
+                                                                      class GALGAS_uint & outArgument1,
+                                                                      class GALGAS_objectIR & outArgument2,
+                                                                      class GALGAS_uint & outArgument3,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_llvmArrayValue (class GALGAS_PLMType & outArgument0,
                                                         class GALGAS_operandIRList & outArgument1,
                                                         class GALGAS_uint & outArgument2,
@@ -1175,6 +1201,10 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralInteger (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmArrayRepeatedDynamicValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmArrayRepeatedStaticValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmArrayValue (LOCATION_ARGS) const ;
 
@@ -1418,26 +1448,6 @@ class cEnumAssociatedValues_objectIR_llvmStructureValue : public cEnumAssociated
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_objectIR_llvmArrayValue : public cEnumAssociatedValues {
-  public : const GALGAS_PLMType mAssociatedValue0 ;
-  public : const GALGAS_operandIRList mAssociatedValue1 ;
-  public : const GALGAS_uint mAssociatedValue2 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectIR_llvmArrayValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                          const GALGAS_operandIRList & inAssociatedValue1,
-                                                          const GALGAS_uint & inAssociatedValue2
-                                                          COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectIR_llvmArrayValue (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 class cEnumAssociatedValues_objectIR_literalString : public cEnumAssociatedValues {
   public : const GALGAS_uint mAssociatedValue0 ;
   public : const GALGAS_uint mAssociatedValue1 ;
@@ -1468,6 +1478,68 @@ class cEnumAssociatedValues_objectIR_zero : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_objectIR_zero (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectIR_llvmArrayValue : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_operandIRList mAssociatedValue1 ;
+  public : const GALGAS_uint mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectIR_llvmArrayValue (const GALGAS_PLMType & inAssociatedValue0,
+                                                          const GALGAS_operandIRList & inAssociatedValue1,
+                                                          const GALGAS_uint & inAssociatedValue2
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectIR_llvmArrayValue (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
+  public : const GALGAS_objectIR mAssociatedValue2 ;
+  public : const GALGAS_uint mAssociatedValue3 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue (const GALGAS_PLMType & inAssociatedValue0,
+                                                                        const GALGAS_uint & inAssociatedValue1,
+                                                                        const GALGAS_objectIR & inAssociatedValue2,
+                                                                        const GALGAS_uint & inAssociatedValue3
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
+  public : const GALGAS_objectIR mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue (const GALGAS_PLMType & inAssociatedValue0,
+                                                                         const GALGAS_uint & inAssociatedValue1,
+                                                                         const GALGAS_objectIR & inAssociatedValue2
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

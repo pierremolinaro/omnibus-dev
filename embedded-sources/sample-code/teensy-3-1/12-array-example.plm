@@ -20,7 +20,7 @@ let LED_L1 = $digitalPort.D4
 
 //-----------------------------------------------------------------------------*
 
-let SIZE = 9
+let SIZE = 3
 
 typealias $A : $uint32 [SIZE]
 
@@ -32,6 +32,8 @@ struct $B {
 struct $C {
   var c = $B ()
 }
+
+let array = $A (!1 !2 !3)
 
 //------------------------------------------------*
 
@@ -64,7 +66,8 @@ task T @priority 12 @stacksize 512 {
       lcd.print (!spaces:1)
     }
     
-    var a = $A (!repeated:2)
+    var e $uint32 = 5
+    var a = $A (!repeated:e)
     var x $uint32 = 0
     for i $uint32 in 0 ..< $A.count {
       a [i] = 9
