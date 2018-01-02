@@ -6669,64 +6669,64 @@ GALGAS_routineAttributes GALGAS_routineAttributes::extractObject (const GALGAS_o
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Abstract extension method '@instructionAST analyze'                                 *
+//                       Abstract extension method '@instructionAST instructionSemanticAnalysis'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static TC_UniqueArray <extensionMethodSignature_instructionAST_analyze> gExtensionMethodTable_instructionAST_analyze ;
+static TC_UniqueArray <extensionMethodSignature_instructionAST_instructionSemanticAnalysis> gExtensionMethodTable_instructionAST_instructionSemanticAnalysis ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterExtensionMethod_analyze (const int32_t inClassIndex,
-                                   extensionMethodSignature_instructionAST_analyze inMethod) {
-  gExtensionMethodTable_instructionAST_analyze.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+void enterExtensionMethod_instructionSemanticAnalysis (const int32_t inClassIndex,
+                                                       extensionMethodSignature_instructionAST_instructionSemanticAnalysis inMethod) {
+  gExtensionMethodTable_instructionAST_instructionSemanticAnalysis.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void freeExtensionMethod_instructionAST_analyze (void) {
-  gExtensionMethodTable_instructionAST_analyze.free () ;
+static void freeExtensionMethod_instructionAST_instructionSemanticAnalysis (void) {
+  gExtensionMethodTable_instructionAST_instructionSemanticAnalysis.free () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gMethod_instructionAST_analyze (NULL,
-                                                   freeExtensionMethod_instructionAST_analyze) ;
+C_PrologueEpilogue gMethod_instructionAST_instructionSemanticAnalysis (NULL,
+                                                                       freeExtensionMethod_instructionAST_instructionSemanticAnalysis) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionMethod_analyze (const cPtr_instructionAST * inObject,
-                                  const GALGAS_PLMType constin_inSelfType,
-                                  const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                  const GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                  const GALGAS_semanticContext constin_inContext,
-                                  const GALGAS_mode constin_inCurrentMode,
-                                  GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                  GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                  GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                  GALGAS_allocaList & io_ioAllocaList,
-                                  GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                  C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) {
+void callExtensionMethod_instructionSemanticAnalysis (const cPtr_instructionAST * inObject,
+                                                      const GALGAS_PLMType constin_inSelfType,
+                                                      const GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                      const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                                      const GALGAS_semanticContext constin_inContext,
+                                                      const GALGAS_mode constin_inCurrentMode,
+                                                      GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                      GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                      GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                      GALGAS_allocaList & io_ioAllocaList,
+                                                      GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
 //--- Find method
   if (NULL != inObject) {
     macroValidSharedObject (inObject, cPtr_instructionAST) ;
     const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
     const int32_t classIndex = info->mSlotID ;
-    extensionMethodSignature_instructionAST_analyze f = NULL ;
-    if (classIndex < gExtensionMethodTable_instructionAST_analyze.count ()) {
-      f = gExtensionMethodTable_instructionAST_analyze (classIndex COMMA_HERE) ;
+    extensionMethodSignature_instructionAST_instructionSemanticAnalysis f = NULL ;
+    if (classIndex < gExtensionMethodTable_instructionAST_instructionSemanticAnalysis.count ()) {
+      f = gExtensionMethodTable_instructionAST_instructionSemanticAnalysis (classIndex COMMA_HERE) ;
     }
     if (NULL == f) {
       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
       while ((NULL == f) && (NULL != p)) {
-        if (p->mSlotID < gExtensionMethodTable_instructionAST_analyze.count ()) {
-          f = gExtensionMethodTable_instructionAST_analyze (p->mSlotID COMMA_HERE) ;
+        if (p->mSlotID < gExtensionMethodTable_instructionAST_instructionSemanticAnalysis.count ()) {
+          f = gExtensionMethodTable_instructionAST_instructionSemanticAnalysis (p->mSlotID COMMA_HERE) ;
         }
         p = p->mSuperclassDescriptor ;
       }
-      gExtensionMethodTable_instructionAST_analyze.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+      gExtensionMethodTable_instructionAST_instructionSemanticAnalysis.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
     }
     if (NULL == f) {
       fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
@@ -6760,13 +6760,13 @@ void extensionMethod_analyzeBranchInstructionList (const GALGAS_instructionListA
   extensionSetter_openBranch (ioArgument_ioUniversalMap, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 96)) ;
   }
   const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_4332 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_4332.hasCurrentObject ()) {
+  cEnumerator_instructionListAST enumerator_4352 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_4352.hasCurrentObject ()) {
     {
-    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_4332.current_mInstruction (HERE).getter_mInstructionLocation (SOURCE_FILE ("instructionList.galgas", 98)), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 98)) ;
+    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_4352.current_mInstruction (HERE).getter_mInstructionLocation (SOURCE_FILE ("instructionList.galgas", 98)), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 98)) ;
     }
-    callExtensionMethod_analyze ((const cPtr_instructionAST *) enumerator_4332.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 99)) ;
-    enumerator_4332.gotoNextObject () ;
+    callExtensionMethod_instructionSemanticAnalysis ((const cPtr_instructionAST *) enumerator_4352.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 99)) ;
+    enumerator_4352.gotoNextObject () ;
   }
   {
   extensionSetter_closeBranch (ioArgument_ioUniversalMap, inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 113)) ;
@@ -6794,13 +6794,13 @@ void extensionMethod_analyzeRoutineInstructionList (const GALGAS_instructionList
                                                     C_Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_5652 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5652.hasCurrentObject ()) {
+  cEnumerator_instructionListAST enumerator_5692 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_5692.hasCurrentObject ()) {
     {
-    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_5652.current_mInstruction (HERE).getter_mInstructionLocation (SOURCE_FILE ("instructionList.galgas", 131)), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 131)) ;
+    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_5692.current_mInstruction (HERE).getter_mInstructionLocation (SOURCE_FILE ("instructionList.galgas", 131)), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 131)) ;
     }
-    callExtensionMethod_analyze ((const cPtr_instructionAST *) enumerator_5652.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 132)) ;
-    enumerator_5652.gotoNextObject () ;
+    callExtensionMethod_instructionSemanticAnalysis ((const cPtr_instructionAST *) enumerator_5692.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 132)) ;
+    enumerator_5692.gotoNextObject () ;
   }
 }
 
@@ -6818,10 +6818,10 @@ void extensionMethod_instructionListLLVMCode (const GALGAS_instructionListIR inO
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_6719 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_6719.hasCurrentObject ()) {
-    callExtensionMethod_llvmInstructionCode ((const cPtr_abstractInstructionIR *) enumerator_6719.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 157)) ;
-    enumerator_6719.gotoNextObject () ;
+  cEnumerator_instructionListIR enumerator_6779 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_6779.hasCurrentObject ()) {
+    callExtensionMethod_llvmInstructionCode ((const cPtr_abstractInstructionIR *) enumerator_6779.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 157)) ;
+    enumerator_6779.gotoNextObject () ;
   }
 }
 

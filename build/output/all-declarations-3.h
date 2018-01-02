@@ -1375,44 +1375,44 @@ void callExtensionMethod_noteInstructionTypesInPrecedenceGraph (const class cPtr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Abstract extension method '@instructionAST analyze'                                 *
+//                       Abstract extension method '@instructionAST instructionSemanticAnalysis'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_instructionAST_analyze) (const class cPtr_instructionAST * inObject,
-                                                                 const class GALGAS_PLMType constinArgument0,
-                                                                 const class GALGAS_routineAttributes constinArgument1,
-                                                                 const class GALGAS_lstring constinArgument2,
-                                                                 const class GALGAS_semanticContext constinArgument3,
-                                                                 const class GALGAS_mode constinArgument4,
-                                                                 class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                                 class GALGAS_staticStringMap & ioArgument6,
-                                                                 class GALGAS_universalValuedObjectMap & ioArgument7,
-                                                                 class GALGAS_allocaList & ioArgument8,
-                                                                 class GALGAS_instructionListIR & ioArgument9,
-                                                                 class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_instructionAST_instructionSemanticAnalysis) (const class cPtr_instructionAST * inObject,
+                                                                                     const class GALGAS_PLMType constinArgument0,
+                                                                                     const class GALGAS_routineAttributes constinArgument1,
+                                                                                     const class GALGAS_lstring constinArgument2,
+                                                                                     const class GALGAS_semanticContext constinArgument3,
+                                                                                     const class GALGAS_mode constinArgument4,
+                                                                                     class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                                                                     class GALGAS_staticStringMap & ioArgument6,
+                                                                                     class GALGAS_universalValuedObjectMap & ioArgument7,
+                                                                                     class GALGAS_allocaList & ioArgument8,
+                                                                                     class GALGAS_instructionListIR & ioArgument9,
+                                                                                     class C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterExtensionMethod_analyze (const int32_t inClassIndex,
-                                   extensionMethodSignature_instructionAST_analyze inMethod) ;
+void enterExtensionMethod_instructionSemanticAnalysis (const int32_t inClassIndex,
+                                                       extensionMethodSignature_instructionAST_instructionSemanticAnalysis inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionMethod_analyze (const class cPtr_instructionAST * inObject,
-                                  const GALGAS_PLMType constin_inSelfType,
-                                  const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                  const GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                  const GALGAS_semanticContext constin_inContext,
-                                  const GALGAS_mode constin_inCurrentMode,
-                                  GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                  GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                  GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                  GALGAS_allocaList & io_ioAllocaList,
-                                  GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                  C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_instructionSemanticAnalysis (const class cPtr_instructionAST * inObject,
+                                                      const GALGAS_PLMType constin_inSelfType,
+                                                      const GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                      const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                                      const GALGAS_semanticContext constin_inContext,
+                                                      const GALGAS_mode constin_inCurrentMode,
+                                                      GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                      GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                      GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                      GALGAS_allocaList & io_ioAllocaList,
+                                                      GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

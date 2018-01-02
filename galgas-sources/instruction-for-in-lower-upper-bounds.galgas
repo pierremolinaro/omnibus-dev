@@ -76,7 +76,7 @@ override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPreceden
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forLowerUpperBoundInstructionAST analyze
+override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

@@ -55,7 +55,7 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @letInstructionWithAssignmentAST analyze
+override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

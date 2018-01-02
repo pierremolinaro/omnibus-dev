@@ -141,7 +141,15 @@ override method @typeArrayDeclarationAST enterInContext
       ]
     #-------------------------------------------- Constructor map
       @constructorMap constructorMap = {}
+    #--- Constructor (!repeated)
       [!?constructorMap insertKey !["(!repeated)" nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
+    #--- Constructor (!!!!)
+      var constructorName = "("
+      for i in 0 ..< [arraySize uint] do
+        constructorName += "!"
+      end
+      constructorName += ")"
+      [!?constructorMap insertKey ![constructorName nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
     #-------------------------------------------- Type attributes
       @PLMTypeAttributes typeAttributes = .instanciable | .generateAssignmentRoutine | .copyable
     #-------------------------------------------- Enter in type map

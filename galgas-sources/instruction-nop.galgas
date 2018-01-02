@@ -33,7 +33,7 @@ override method @letInstructionNOP noteInstructionTypesInPrecedenceGraph ?!@sema
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @letInstructionNOP analyze
+override method @letInstructionNOP instructionSemanticAnalysis
   ?self:let @PLMType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph

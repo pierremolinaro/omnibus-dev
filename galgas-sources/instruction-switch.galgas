@@ -75,7 +75,7 @@ override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @switchInstructionAST analyze
+override method @switchInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

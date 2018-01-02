@@ -52,7 +52,7 @@ override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @whileInstructionAST analyze
+override method @whileInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
