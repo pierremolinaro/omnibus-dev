@@ -25,6 +25,10 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
     performStore = true
   case zero (*) :
     performStore = true
+  case llvmArrayRepeatedStaticValue (4*) :
+    performStore = true
+  case llvmArrayRepeatedDynamicValue (3*) :
+    performStore = true
   end
 #--- Perform strore ?
   if performStore then

@@ -26,6 +26,10 @@ setter @instructionListIR appendLoadWhenReference
     outResultingValue = inSource
   case zero (*) :
     outResultingValue = inSource
+  case llvmArrayRepeatedStaticValue (4*) :
+    outResultingValue = inSource
+  case llvmArrayRepeatedDynamicValue (3*) :
+    outResultingValue = inSource
   end
 }
 
