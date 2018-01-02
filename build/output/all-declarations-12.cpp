@@ -1865,10 +1865,17 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/un
   "      lcd.print (!u32:self.array2 [i])\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
-  "    \n"
+  "  \n"
+  "  //--- Init from a repeated static value\n"
   "    var a = $A (!repeated:5)\n"
-  "//    var e $uint32 = 5\n"
-  "//    a = $A (!repeated:e)\n"
+  "  //--- Init from a repeated dynamic value\n"
+  "    var e $uint32 = 5\n"
+  "    var b = $A (!repeated:e)\n"
+  "  //--- Init from a static values\n"
+  "    var c = $A (!0 !1 !2)\n"
+  "  //--- Init from a dynamic values\n"
+  "    var d = $A (!0 !e !2)\n"
+  "  //---\n"
   "    var x $uint32 = 0\n"
   "    for i $uint32 in 0 ..< $A.count {\n"
   "      a [i] = 9\n"
@@ -1891,7 +1898,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  2025, // Text length
+  2237, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 

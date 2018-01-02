@@ -86,7 +86,8 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += "  " + loopTestName + " = icmp ult i32 " + nextIndexVarName + ", " + size + "\n"
     ioLLVMcode += "  br i1 " + loopTestName + ", label %" + loopLabel + ", label %" + exitLabel + "\n"
     ioLLVMcode += exitLabel + ":\n\n"
-  case llvmArrayValue (* @operandIRList operands *) :
+  case llvmArrayStaticValues (* @operandIRList operands *) :
+    ioLLVMcode += ";--- Assign static array from static value\n"
     for (value) in operands do (index)
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex ++
@@ -94,6 +95,21 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
                  + llvmType + " * " + mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
       let valueType = [value llvmTypeName]
       ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
+    end
+  case llvmArrayDynamicValues (* @operandIRList operands) :
+    ioLLVMcode += ";--- Assign static array from dynamic values\n"
+    for (value) in operands do (index)
+      let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
+      ioGenerationAdds.mUniqueIndex ++
+      ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
+                 + llvmType + " * " + mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
+      let valueType = [value llvmTypeName]
+      if [value isStatic] then
+        ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
+      else
+        ioLLVMcode += "  call void @plm.assign." + [[value type].plmOriginalTypeName assemblerRepresentation] + " ("
+                   +  valueType + "* " + tempVar + ", " + valueType + "* " + [value llvmName] + ")\n"
+      end
     end
   case literalString  (* *) :
   case zero (*) :

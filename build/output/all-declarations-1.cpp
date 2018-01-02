@@ -1108,10 +1108,10 @@ typeComparisonResult cEnumAssociatedValues_objectIR_zero::compare (const cEnumAs
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_objectIR_llvmArrayValue::cEnumAssociatedValues_objectIR_llvmArrayValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                              const GALGAS_operandIRList & inAssociatedValue1,
-                                                                                              const GALGAS_uint & inAssociatedValue2
-                                                                                              COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_objectIR_llvmArrayStaticValues::cEnumAssociatedValues_objectIR_llvmArrayStaticValues (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                            const GALGAS_operandIRList & inAssociatedValue1,
+                                                                                                            const GALGAS_uint & inAssociatedValue2
+                                                                                                            COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1),
@@ -1120,8 +1120,8 @@ mAssociatedValue2 (inAssociatedValue2) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_objectIR_llvmArrayValue::description (C_String & ioString,
-                                                                 const int32_t inIndentation) const {
+void cEnumAssociatedValues_objectIR_llvmArrayStaticValues::description (C_String & ioString,
+                                                                        const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
@@ -1131,8 +1131,8 @@ void cEnumAssociatedValues_objectIR_llvmArrayValue::description (C_String & ioSt
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_objectIR_llvmArrayValue::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectIR_llvmArrayValue * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_llvmArrayValue *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_objectIR_llvmArrayStaticValues::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectIR_llvmArrayStaticValues * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_llvmArrayStaticValues *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -1143,6 +1143,41 @@ typeComparisonResult cEnumAssociatedValues_objectIR_llvmArrayValue::compare (con
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_objectIR_llvmArrayDynamicValues::cEnumAssociatedValues_objectIR_llvmArrayDynamicValues (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                              const GALGAS_operandIRList & inAssociatedValue1
+                                                                                                              COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_objectIR_llvmArrayDynamicValues::description (C_String & ioString,
+                                                                         const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_objectIR_llvmArrayDynamicValues::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectIR_llvmArrayDynamicValues * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_llvmArrayDynamicValues *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
   }
   return result ;
 }
@@ -1362,15 +1397,31 @@ GALGAS_objectIR GALGAS_objectIR::constructor_zero (const GALGAS_PLMType & inAsso
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                             const GALGAS_operandIRList & inAssociatedValue1,
-                                                             const GALGAS_uint & inAssociatedValue2
-                                                             COMMA_LOCATION_ARGS) {
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayStaticValues (const GALGAS_PLMType & inAssociatedValue0,
+                                                                    const GALGAS_operandIRList & inAssociatedValue1,
+                                                                    const GALGAS_uint & inAssociatedValue2
+                                                                    COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
-    result.mEnum = kEnum_llvmArrayValue ;
+    result.mEnum = kEnum_llvmArrayStaticValues ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_llvmArrayValue (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectIR_llvmArrayStaticValues (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayDynamicValues (const GALGAS_PLMType & inAssociatedValue0,
+                                                                     const GALGAS_operandIRList & inAssociatedValue1
+                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_objectIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_llvmArrayDynamicValues ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectIR_llvmArrayDynamicValues (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -1541,23 +1592,42 @@ void GALGAS_objectIR::method_zero (GALGAS_PLMType & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_objectIR::method_llvmArrayValue (GALGAS_PLMType & outAssociatedValue0,
-                                             GALGAS_operandIRList & outAssociatedValue1,
-                                             GALGAS_uint & outAssociatedValue2,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_llvmArrayValue) {
+void GALGAS_objectIR::method_llvmArrayStaticValues (GALGAS_PLMType & outAssociatedValue0,
+                                                    GALGAS_operandIRList & outAssociatedValue1,
+                                                    GALGAS_uint & outAssociatedValue2,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_llvmArrayStaticValues) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     outAssociatedValue2.drop () ;
     C_String s ;
-    s << "method @objectIR llvmArrayValue invoked with an invalid enum value" ;
+    s << "method @objectIR llvmArrayStaticValues invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_objectIR_llvmArrayValue * ptr = (const cEnumAssociatedValues_objectIR_llvmArrayValue *) unsafePointer () ;
+    const cEnumAssociatedValues_objectIR_llvmArrayStaticValues * ptr = (const cEnumAssociatedValues_objectIR_llvmArrayStaticValues *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
     outAssociatedValue2 = ptr->mAssociatedValue2 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_objectIR::method_llvmArrayDynamicValues (GALGAS_PLMType & outAssociatedValue0,
+                                                     GALGAS_operandIRList & outAssociatedValue1,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_llvmArrayDynamicValues) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @objectIR llvmArrayDynamicValues invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_objectIR_llvmArrayDynamicValues * ptr = (const cEnumAssociatedValues_objectIR_llvmArrayDynamicValues *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -1610,7 +1680,7 @@ void GALGAS_objectIR::method_llvmArrayRepeatedDynamicValue (GALGAS_PLMType & out
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_objectIR [12] = {
+static const char * gEnumNameArrayFor_objectIR [13] = {
   "(not built)",
   "void",
   "reference",
@@ -1620,7 +1690,8 @@ static const char * gEnumNameArrayFor_objectIR [12] = {
   "llvmStructureValue",
   "literalString",
   "zero",
-  "llvmArrayValue",
+  "llvmArrayStaticValues",
+  "llvmArrayDynamicValues",
   "llvmArrayRepeatedStaticValue",
   "llvmArrayRepeatedDynamicValue"
 } ;
@@ -1675,8 +1746,14 @@ GALGAS_bool GALGAS_objectIR::getter_isZero (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_objectIR::getter_isLlvmArrayValue (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmArrayValue == mEnum) ;
+GALGAS_bool GALGAS_objectIR::getter_isLlvmArrayStaticValues (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmArrayStaticValues == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_objectIR::getter_isLlvmArrayDynamicValues (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmArrayDynamicValues == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14821,264 +14898,6 @@ GALGAS_staticListInitializationMap GALGAS_staticListInitializationMap::extractOb
       result = *p ;
     }else{
       inCompiler->castError ("staticListInitializationMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_staticListInvokedFunctionSetMap::cMapElement_staticListInvokedFunctionSetMap (const GALGAS_lstring & inKey,
-                                                                                          const GALGAS_stringset & in_mInvokedFunctionSet
-                                                                                          COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mProperty_mInvokedFunctionSet (in_mInvokedFunctionSet) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cMapElement_staticListInvokedFunctionSetMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mInvokedFunctionSet.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement * cMapElement_staticListInvokedFunctionSetMap::copy (void) {
-  cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_staticListInvokedFunctionSetMap (mProperty_lkey, mProperty_mInvokedFunctionSet COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cMapElement_staticListInvokedFunctionSetMap::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mInvokedFunctionSet" ":" ;
-  mProperty_mInvokedFunctionSet.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cMapElement_staticListInvokedFunctionSetMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_staticListInvokedFunctionSetMap * operand = (cMapElement_staticListInvokedFunctionSetMap *) inOperand ;
-  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mInvokedFunctionSet.objectCompare (operand->mProperty_mInvokedFunctionSet) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_staticListInvokedFunctionSetMap::GALGAS_staticListInvokedFunctionSetMap (void) :
-AC_GALGAS_map () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_staticListInvokedFunctionSetMap::GALGAS_staticListInvokedFunctionSetMap (const GALGAS_staticListInvokedFunctionSetMap & inSource) :
-AC_GALGAS_map (inSource) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_staticListInvokedFunctionSetMap & GALGAS_staticListInvokedFunctionSetMap::operator = (const GALGAS_staticListInvokedFunctionSetMap & inSource) {
-  * ((AC_GALGAS_map *) this) = inSource ;
-  return * this ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_staticListInvokedFunctionSetMap GALGAS_staticListInvokedFunctionSetMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_staticListInvokedFunctionSetMap result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_staticListInvokedFunctionSetMap GALGAS_staticListInvokedFunctionSetMap::constructor_mapWithMapToOverride (const GALGAS_staticListInvokedFunctionSetMap & inMapToOverride
-                                                                                                                 COMMA_LOCATION_ARGS) {
-  GALGAS_staticListInvokedFunctionSetMap result ;
-  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_staticListInvokedFunctionSetMap GALGAS_staticListInvokedFunctionSetMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) const {
-  GALGAS_staticListInvokedFunctionSetMap result ;
-  getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_staticListInvokedFunctionSetMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                                  const GALGAS_stringset & inArgument0,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
-  cMapElement_staticListInvokedFunctionSetMap * p = NULL ;
-  macroMyNew (p, cMapElement_staticListInvokedFunctionSetMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@staticListInvokedFunctionSetMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_staticListInvokedFunctionSetMap::setter_insertKey (GALGAS_lstring inKey,
-                                                               GALGAS_stringset inArgument0,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) {
-  cMapElement_staticListInvokedFunctionSetMap * p = NULL ;
-  macroMyNew (p, cMapElement_staticListInvokedFunctionSetMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "INTERNAL ERROR" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_staticListInvokedFunctionSetMap_searchKey = "INTERNAL ERROR" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_staticListInvokedFunctionSetMap::method_searchKey (GALGAS_lstring inKey,
-                                                               GALGAS_stringset & outArgument0,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const {
-  const cMapElement_staticListInvokedFunctionSetMap * p = (const cMapElement_staticListInvokedFunctionSetMap *) performSearch (inKey,
-                                                                                                                               inCompiler,
-                                                                                                                               kSearchErrorMessage_staticListInvokedFunctionSetMap_searchKey
-                                                                                                                               COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_staticListInvokedFunctionSetMap) ;
-    outArgument0 = p->mProperty_mInvokedFunctionSet ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_staticListInvokedFunctionSetMap::getter_mInvokedFunctionSetForKey (const GALGAS_string & inKey,
-                                                                                           C_Compiler * inCompiler
-                                                                                           COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_staticListInvokedFunctionSetMap * p = (const cMapElement_staticListInvokedFunctionSetMap *) attributes ;
-  GALGAS_stringset result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_staticListInvokedFunctionSetMap) ;
-    result = p->mProperty_mInvokedFunctionSet ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_staticListInvokedFunctionSetMap::setter_setMInvokedFunctionSetForKey (GALGAS_stringset inAttributeValue,
-                                                                                  GALGAS_string inKey,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_staticListInvokedFunctionSetMap * p = (cMapElement_staticListInvokedFunctionSetMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_staticListInvokedFunctionSetMap) ;
-    p->mProperty_mInvokedFunctionSet = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_staticListInvokedFunctionSetMap * GALGAS_staticListInvokedFunctionSetMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                                         const GALGAS_string & inKey
-                                                                                                                         COMMA_LOCATION_ARGS) {
-  cMapElement_staticListInvokedFunctionSetMap * result = (cMapElement_staticListInvokedFunctionSetMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_staticListInvokedFunctionSetMap) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_staticListInvokedFunctionSetMap::cEnumerator_staticListInvokedFunctionSetMap (const GALGAS_staticListInvokedFunctionSetMap & inEnumeratedObject,
-                                                                                          const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_staticListInvokedFunctionSetMap_2D_element cEnumerator_staticListInvokedFunctionSetMap::current (LOCATION_ARGS) const {
-  const cMapElement_staticListInvokedFunctionSetMap * p = (const cMapElement_staticListInvokedFunctionSetMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_staticListInvokedFunctionSetMap) ;
-  return GALGAS_staticListInvokedFunctionSetMap_2D_element (p->mProperty_lkey, p->mProperty_mInvokedFunctionSet) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_staticListInvokedFunctionSetMap::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mProperty_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset cEnumerator_staticListInvokedFunctionSetMap::current_mInvokedFunctionSet (LOCATION_ARGS) const {
-  const cMapElement_staticListInvokedFunctionSetMap * p = (const cMapElement_staticListInvokedFunctionSetMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_staticListInvokedFunctionSetMap) ;
-  return p->mProperty_mInvokedFunctionSet ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @staticListInvokedFunctionSetMap type                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_staticListInvokedFunctionSetMap ("staticListInvokedFunctionSetMap",
-                                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_staticListInvokedFunctionSetMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_staticListInvokedFunctionSetMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_staticListInvokedFunctionSetMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_staticListInvokedFunctionSetMap (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_staticListInvokedFunctionSetMap GALGAS_staticListInvokedFunctionSetMap::extractObject (const GALGAS_object & inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_staticListInvokedFunctionSetMap result ;
-  const GALGAS_staticListInvokedFunctionSetMap * p = (const GALGAS_staticListInvokedFunctionSetMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_staticListInvokedFunctionSetMap *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("staticListInvokedFunctionSetMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
