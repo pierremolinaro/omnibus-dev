@@ -54,13 +54,13 @@ override method @literalStringInExpressionAST analyzeExpression
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  [!?ioGlobalLiteralStringMap findOrAddStaticString !mLiteralString.string ?let staticStringIndex]
+  [!?ioStaticEntityMap findOrAddStaticString !mLiteralString.string ?let staticStringIndex]
   outResult = .literalString {!utf8Size:[mLiteralString.string utf8Length] + 1 !index:staticStringIndex}
 }
 

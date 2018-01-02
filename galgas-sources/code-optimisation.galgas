@@ -46,9 +46,8 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
   #--- Display
     if [option plm_options.optimization_displayDeadCodeElimination value] then
       var s = "Optimisation pass " + pass + "\n"
-      s += "  " + [ioIntermediateCodeStruct.mStaticStringMap count] + " static strings\n"
+      s += "  " + [ioIntermediateCodeStruct.mStaticEntityMap.mStaticStringMap count] + " static strings\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
-#      s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
       s += "  " + [ioIntermediateCodeStruct.mRoutineMapIR count] + " routine(s)\n"
       for routine in ioIntermediateCodeStruct.mRoutineMapIR do
         s += "   - " + routine.lkey + "\n"

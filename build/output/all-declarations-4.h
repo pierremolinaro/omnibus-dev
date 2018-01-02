@@ -1482,6 +1482,34 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorMap_2
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                     Class for element of '@staticStringMap' map                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cMapElement_staticStringMap : public cMapElement {
+//--- Map attributes
+  public : GALGAS_uint mProperty_mIndex ;
+
+//--- Constructor
+  public : cMapElement_staticStringMap (const GALGAS_lstring & inKey,
+                                        const GALGAS_uint & in_mIndex
+                                        COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cMapElement * copy (void) ;
+
+//--- Description
+ public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                         @staticStringMap_2D_element struct                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1550,18 +1578,6 @@ class GALGAS_staticStringMap_2D_element : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticStringMap_2D_element ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Extension setter '@staticStringMap findOrAddStaticString'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_findOrAddStaticString (class GALGAS_staticStringMap & ioObject,
-                                            class GALGAS_string in_inString,
-                                            class GALGAS_uint & out_outIndex,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1813,7 +1829,7 @@ typedef void (*extensionMethodSignature_abstractDeclarationAST_enterInContext) (
                                                                                 class GALGAS_declarationDecorationList & ioArgument2,
                                                                                 class GALGAS_subprogramInvocationGraph & ioArgument3,
                                                                                 class GALGAS_staticListInitializationMap & ioArgument4,
-                                                                                class GALGAS_staticStringMap & ioArgument5,
+                                                                                class GALGAS_staticEntityMap & ioArgument5,
                                                                                 class C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -1830,7 +1846,7 @@ void callExtensionMethod_enterInContext (const class cPtr_abstractDeclarationAST
                                          GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
                                          GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
                                          GALGAS_staticListInitializationMap & io_ioStaticListValueMap,
-                                         GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                         GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 

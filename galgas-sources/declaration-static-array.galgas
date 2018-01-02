@@ -254,7 +254,7 @@ override method @staticListAST enterInContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
 {
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
@@ -361,7 +361,7 @@ override method @staticListAST enterInContext
               !context:ioContext
               !mode:.bootMode
               !?temporary:temporaries
-              !?staticStringMap:ioGlobalLiteralStringMap
+              !?staticEntityMap:ioStaticEntityMap
               !?variableMap:ioContext.mValuedObjectMap # universalMap
               !?alloca:allocaList
               !?instructionListIR:instructionGenerationList

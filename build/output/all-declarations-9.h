@@ -10,6 +10,42 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Function 'byteSwappedMethoName'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_byteSwappedMethoName (class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'bitReversedMethoName'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_bitReversedMethoName (class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Function 'countLeadingZerosMethoName'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_countLeadingZerosMethoName (class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Function 'countTrainingZerosMethoName'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_countTrainingZerosMethoName (class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Function 'setBitCountMethoName'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -630,7 +666,7 @@ void routine_analyzeEffectiveParameters (const class GALGAS_PLMType constinArgum
                                          const class GALGAS_semanticContext constinArgument6,
                                          const class GALGAS_mode constinArgument7,
                                          class GALGAS_semanticTemporariesStruct & ioArgument8,
-                                         class GALGAS_staticStringMap & ioArgument9,
+                                         class GALGAS_staticEntityMap & ioArgument9,
                                          class GALGAS_universalValuedObjectMap & ioArgument10,
                                          class GALGAS_allocaList & ioArgument11,
                                          class GALGAS_instructionListIR & ioArgument12,
@@ -649,17 +685,4 @@ void routine_getNewTempReference (const class GALGAS_PLMType constinArgument0,
                                   class GALGAS_objectIR & outArgument2,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'getInfixOperatorMap'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_infixOperator & constinArgument0,
-                                                            const class GALGAS_semanticContext & constinArgument1,
-                                                            const class GALGAS_mode & constinArgument2,
-                                                            const class GALGAS_location & constinArgument3,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
 

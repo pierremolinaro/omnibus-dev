@@ -149,7 +149,7 @@ method @taskListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
 {
   @decoratedTaskList decoratedTaskList = {}
   for task in self do
@@ -161,7 +161,7 @@ method @taskListAST enterInContext
       [property enterInContext
         !task.mTaskName
         !?context:ioContext
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?propertyList
         !?propertyMap
         !?initialValueList
@@ -318,7 +318,7 @@ method @decoratedTaskList-element semanticAnalysis
     !?intermediateCode:ioIntermediateCodeStruct
   )
 #------------------------------------------- Task Name string constant index
-  [!?ioIntermediateCodeStruct.mStaticStringMap findOrAddStaticString !mTaskName.string ?let taskNameStringIndex]
+  [!?ioIntermediateCodeStruct.mStaticEntityMap findOrAddStaticString !mTaskName.string ?let taskNameStringIndex]
 #------------------------------------------- Generate task
   [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
     !mTaskName
@@ -327,7 +327,6 @@ method @decoratedTaskList-element semanticAnalysis
     !mStackSize.bigint
     !setupAllocaList
     !setupInstructionListIR
-#    !taskGuardListIR
     !taskNameStringIndex
   ]
 }
@@ -366,7 +365,7 @@ private proc setupSemanticAnalysis
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
     !?variableMap:universalMap
     !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList

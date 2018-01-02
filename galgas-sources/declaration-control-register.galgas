@@ -385,7 +385,7 @@ private proc buildControlRegisterSliceMap
 method @controlRegisterDeclarationList-element enterInContext
   ?!context:@semanticContext ioContext
   ?!@controlRegisterMap ioControlRegisterMap
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
 {
   controlRegisterType (!mRegisterTypeName !?context:ioContext ?type:var registerType ?bitCount:let registerBitCount)
 #--- Build bit slice map
@@ -426,7 +426,7 @@ method @controlRegisterDeclarationList-element enterInContext
     [register.mRegisterAddress analyzeStaticExpression
       !errorLocation:register.mRegisterAddressLocation
       !context:ioContext
-      !?staticStringMap:ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       ?result:let @objectIR addressExpressionResult
     ]
     @bigint registerAddress
@@ -462,7 +462,7 @@ method @controlRegisterDeclarationList-element enterInContext
         !context:ioContext
         !mode:.bootMode
         !?temporary:temporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioContext.mValuedObjectMap # universalMap
         !?alloca:allocaList
         !?instructionListIR:instructionGenerationList
@@ -489,7 +489,7 @@ method @controlRegisterDeclarationList-element enterInContext
       [arrayElementSizeExpression analyzeStaticExpression
         !errorLocation:arrayElementSizeLocation
         !context:ioContext
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         ?result:let @objectIR elementArraySizeExpressionResult
       ]
       if not [elementArraySizeExpressionResult isLiteralInteger] then
@@ -525,11 +525,11 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
 {
   @controlRegisterMap controlRegisterMap = {}
   for reg in mRegisters do
-    [reg enterInContext !?context:ioContext !?controlRegisterMap !?staticStringMap:ioGlobalLiteralStringMap]
+    [reg enterInContext !?context:ioContext !?controlRegisterMap !?staticEntityMap:ioStaticEntityMap]
   end
   [!?ioContext.mControlRegisterGroupMap insertKey !mRegisterGroupName !controlRegisterMap]
   [!?ioContext.mValuedObjectMap insertRegisterGroup !mRegisterGroupName !controlRegisterMap]

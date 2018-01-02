@@ -187,7 +187,7 @@ class cPtr_infixObjectObjectOperatorDescription : public cPtr_infixOperatorDescr
 void extensionMethod_enterInContext (const class GALGAS_controlRegisterDeclarationList_2D_element inObject,
                                      class GALGAS_semanticContext & io_ioContext,
                                      class GALGAS_controlRegisterMap & io_ioControlRegisterMap,
-                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                     class GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
@@ -297,7 +297,7 @@ typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (co
                                                                               const class GALGAS_semanticContext constinArgument3,
                                                                               const class GALGAS_mode constinArgument4,
                                                                               class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                                              class GALGAS_staticStringMap & ioArgument6,
+                                                                              class GALGAS_staticEntityMap & ioArgument6,
                                                                               class GALGAS_universalValuedObjectMap & ioArgument7,
                                                                               class GALGAS_guardKindGenerationIR & outArgument8,
                                                                               class C_Compiler * inCompiler
@@ -317,7 +317,7 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            const GALGAS_semanticContext constin_inContext,
                                            const GALGAS_mode constin_inMode,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                           GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                            GALGAS_universalValuedObjectMap & io_ioUniversalMap,
                                            GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
                                            C_Compiler * inCompiler
@@ -498,40 +498,4 @@ class GALGAS_bigint function_maxValueForInteger (const class GALGAS_bool & const
                                                  const class GALGAS_uint & constinArgument1,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'byteSwappedMethoName'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_byteSwappedMethoName (class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'bitReversedMethoName'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_bitReversedMethoName (class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Function 'countLeadingZerosMethoName'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_countLeadingZerosMethoName (class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Function 'countTrainingZerosMethoName'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_countTrainingZerosMethoName (class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
 

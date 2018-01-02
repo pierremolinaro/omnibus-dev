@@ -67,7 +67,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -120,7 +120,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
       !context:inContext
       !mode:inMode
       !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -161,7 +161,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
       !context:inContext
       !mode:inMode
       !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList

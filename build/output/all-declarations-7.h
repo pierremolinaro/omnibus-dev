@@ -290,7 +290,7 @@ void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
                                     const class GALGAS_semanticContext constin_inContext,
                                     const class GALGAS_mode constin_inMode,
                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                    class GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                     class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
                                     class GALGAS_allocaList & io_ioAllocaList,
                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
@@ -310,7 +310,7 @@ void routine_analyzeControlRegisterInLValue (const class GALGAS_PLMType constinA
                                              const class GALGAS_semanticContext constinArgument3,
                                              const class GALGAS_mode constinArgument4,
                                              class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                             class GALGAS_staticStringMap & ioArgument6,
+                                             class GALGAS_staticEntityMap & ioArgument6,
                                              class GALGAS_universalValuedObjectMap & ioArgument7,
                                              class GALGAS_allocaList & ioArgument8,
                                              class GALGAS_instructionListIR & ioArgument9,
@@ -333,7 +333,7 @@ void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgu
                                           const class GALGAS_semanticContext constinArgument3,
                                           const class GALGAS_mode constinArgument4,
                                           class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                          class GALGAS_staticStringMap & ioArgument6,
+                                          class GALGAS_staticEntityMap & ioArgument6,
                                           class GALGAS_universalValuedObjectMap & ioArgument7,
                                           class GALGAS_allocaList & ioArgument8,
                                           class GALGAS_instructionListIR & ioArgument9,
@@ -356,7 +356,7 @@ void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument
                                       const class GALGAS_semanticContext constinArgument4,
                                       const class GALGAS_mode constinArgument5,
                                       class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                      class GALGAS_staticStringMap & ioArgument7,
+                                      class GALGAS_staticEntityMap & ioArgument7,
                                       class GALGAS_universalValuedObjectMap & ioArgument8,
                                       class GALGAS_allocaList & ioArgument9,
                                       class GALGAS_instructionListIR & ioArgument10,
@@ -593,6 +593,18 @@ void extensionSetter_closeOverride (class GALGAS_universalValuedObjectMap & ioOb
                                     const class GALGAS_location constin_inErrorLocation,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Extension setter '@staticEntityMap findOrAddStaticString'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_findOrAddStaticString (class GALGAS_staticEntityMap & ioObject,
+                                            class GALGAS_string in_inString,
+                                            class GALGAS_uint & out_outIndex,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

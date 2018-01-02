@@ -94,7 +94,7 @@ override method @globalConstantDeclarationAST enterInContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
 {
 #  initialVariableMap (
 #    !context:ioContext
@@ -119,7 +119,7 @@ override method @globalConstantDeclarationAST enterInContext
     !context:ioContext
     !mode:.bootMode
     !?temporary:*
-    !?staticStringMap:ioGlobalLiteralStringMap
+    !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioContext.mValuedObjectMap # universalMap
     !?alloca:*
     !?instructionListIR:*

@@ -75,7 +75,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
 {
   if not ioContext.mTargetParameters.mHandleDynamicArray then
     error mElementTypeName : "this target does not handle dynamic array"

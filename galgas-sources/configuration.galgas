@@ -349,7 +349,7 @@ override method @configurationDeclarationAST enterInContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
 {
   if ioContext.mTargetParameters.mPointerSize != 0 then
     error mTargetParameters.mConfigurationLocation : "duplicate configuration"

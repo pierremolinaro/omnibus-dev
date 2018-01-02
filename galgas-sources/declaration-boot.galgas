@@ -92,7 +92,7 @@ override method @bootAST enterInContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
 {
 #--- Enter in invocation graph
   let routineNameForInvocationGraph = @lstring.new  {!"boot " + mDriverName !mDriverName}
@@ -142,7 +142,7 @@ override method @decoratedBootRoutine semanticAnalysis
     !context:inContext
     !mode:.bootMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
     !?variableMap:universalMap
     !?alloca:bootAllocaList
     !?generatedCode:instructionGenerationList

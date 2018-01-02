@@ -210,7 +210,7 @@ proc guardSemanticAnalysis
       !context:inContext
       !mode:.guardMode
       !?temporary:ioTemporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
@@ -231,7 +231,7 @@ proc guardSemanticAnalysis
       !context:inContext
       !mode:.userMode # Convenience guards instructions are executed in user mode
       !?temporary:ioTemporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
       ?convenienceGuardGenerationIR
     ]
@@ -243,7 +243,7 @@ proc guardSemanticAnalysis
       !context:inContext
       !mode:.userMode # Convenience guards instructions are executed in user mode
       !?temporary:ioTemporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
@@ -274,7 +274,7 @@ abstract method @callInstructionAST baseGuardAnalyze
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 
@@ -287,7 +287,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
@@ -303,7 +303,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
@@ -401,7 +401,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !context:inContext
           !requiredMode:inMode
           !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
+          !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap
           !?alloca:baseGuardAllocaList
           !?instructionListIR:baseGuardInstructionGenerationList
