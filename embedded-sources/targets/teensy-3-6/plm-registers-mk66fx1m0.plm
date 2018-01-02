@@ -1379,141 +1379,265 @@ registers RTC {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//// Chapter 40: Universal Serial Bus OTG Controller (USBOTG)
-//registers USB0_PERID  *(const    $uint8_t  *)0x40072000 // Peripheral ID register
-//registers USB0_IDCOMP  *(const    $uint8_t  *)0x40072004 // Peripheral ID Complement register
-//registers USB0_REV  *(const    $uint8_t  *)0x40072008 // Peripheral Revision register
-//registers USB0_ADDINFO  *(volatile $uint8_t  *)0x4007200C // Peripheral Additional Info register
-//registers USB0_OTGIST *(volatile $uint8_t  *)0x40072010 // OTG Interrupt Status register
-//registers USB_OTGISTAT_IDCHG  ($uint8_t)0x80   //
-//registers USB_OTGISTAT_ONEMSEC  ($uint8_t)0x40   //
-//registers USB_OTGISTAT_LINE_STATE_CHG ($uint8_t)0x20   //
-//registers USB_OTGISTAT_SESSVLDCHG  ($uint8_t)0x08   //
-//registers USB_OTGISTAT_B_SESS_CHG  ($uint8_t)0x04   //
-//registers USB_OTGISTAT_AVBUSCHG  ($uint8_t)0x01   //
-//registers USB0_OTGICR  *(volatile $uint8_t  *)0x40072014 // OTG Interrupt Control Register
-//registers USB_OTGICR_IDEN   ($uint8_t)0x80   // 
-//registers USB_OTGICR_ONEMSECEN  ($uint8_t)0x40   // 
-//registers USB_OTGICR_LINESTATEEN  ($uint8_t)0x20   // 
-//registers USB_OTGICR_SESSVLDEN  ($uint8_t)0x08   // 
-//registers USB_OTGICR_BSESSEN  ($uint8_t)0x04   // 
-//registers USB_OTGICR_AVBUSEN  ($uint8_t)0x01   // 
-//registers USB0_OTGST *(volatile $uint8_t  *)0x40072018 // OTG Status register
-//registers USB_OTGSTAT_ID   ($uint8_t)0x80   // 
-//registers USB_OTGSTAT_ONEMSECEN  ($uint8_t)0x40   // 
-//registers USB_OTGSTAT_LINESTATESTABLE ($uint8_t)0x20   // 
-//registers USB_OTGSTAT_SESS_VLD  ($uint8_t)0x08   // 
-//registers USB_OTGSTAT_BSESSEND  ($uint8_t)0x04   // 
-//registers USB_OTGSTAT_AVBUSVLD  ($uint8_t)0x01   // 
-//registers USB0_OTGCTL  *(volatile $uint8_t  *)0x4007201C // OTG Control Register
-//registers USB_OTGCTL_DPHIGH  ($uint8_t)0x80   // 
-//registers USB_OTGCTL_DPLOW  ($uint8_t)0x20   // 
-//registers USB_OTGCTL_DMLOW  ($uint8_t)0x10   // 
-//registers USB_OTGCTL_OTGEN  ($uint8_t)0x04   // 
-//registers USB0_IST *(volatile $uint8_t  *)0x40072080 // Interrupt Status Register
-//registers USB_ISTAT_STALL   ($uint8_t)0x80   // 
-//registers USB_ISTAT_ATTACH  ($uint8_t)0x40   // 
-//registers USB_ISTAT_RESUME  ($uint8_t)0x20   // 
-//registers USB_ISTAT_SLEEP   ($uint8_t)0x10   // 
-//registers USB_ISTAT_TOKDNE  ($uint8_t)0x08   // 
-//registers USB_ISTAT_SOFTOK  ($uint8_t)0x04   // 
-//registers USB_ISTAT_ERROR   ($uint8_t)0x02   // 
-//registers USB_ISTAT_USBRST  ($uint8_t)0x01   // 
-//registers USB0_INTEN  *(volatile $uint8_t  *)0x40072084 // Interrupt Enable Register
-//registers USB_INTEN_STALLEN  ($uint8_t)0x80   // 
-//registers USB_INTEN_ATTACHEN  ($uint8_t)0x40   // 
-//registers USB_INTEN_RESUMEEN  ($uint8_t)0x20   // 
-//registers USB_INTEN_SLEEPEN  ($uint8_t)0x10   // 
-//registers USB_INTEN_TOKDNEEN  ($uint8_t)0x08   // 
-//registers USB_INTEN_SOFTOKEN  ($uint8_t)0x04   // 
-//registers USB_INTEN_ERROREN  ($uint8_t)0x02   // 
-//registers USB_INTEN_USBRSTEN  ($uint8_t)0x01   // 
-//registers USB0_ERRST *(volatile $uint8_t  *)0x40072088 // Error Interrupt Status Register
-//registers USB_ERRSTAT_BTSERR  ($uint8_t)0x80   // 
-//registers USB_ERRSTAT_DMAERR  ($uint8_t)0x20   // 
-//registers USB_ERRSTAT_BTOERR  ($uint8_t)0x10   // 
-//registers USB_ERRSTAT_DFN8  ($uint8_t)0x08   // 
-//registers USB_ERRSTAT_CRC16  ($uint8_t)0x04   // 
-//registers USB_ERRSTAT_CRC5EOF  ($uint8_t)0x02   // 
-//registers USB_ERRSTAT_PIDERR  ($uint8_t)0x01   // 
-//registers USB0_ERREN  *(volatile $uint8_t  *)0x4007208C // Error Interrupt Enable Register
-//registers USB_ERREN_BTSERREN  ($uint8_t)0x80   // 
-//registers USB_ERREN_DMAERREN  ($uint8_t)0x20   // 
-//registers USB_ERREN_BTOERREN  ($uint8_t)0x10   // 
-//registers USB_ERREN_DFN8EN  ($uint8_t)0x08   // 
-//registers USB_ERREN_CRC16EN  ($uint8_t)0x04   // 
-//registers USB_ERREN_CRC5EOFEN  ($uint8_t)0x02   // 
-//registers USB_ERREN_PIDERREN  ($uint8_t)0x01   // 
-//registers USB0_ST *(volatile $uint8_t  *)0x40072090 // Status Register
-//registers USB_STAT_TX   ($uint8_t)0x08   // 
-//registers USB_STAT_ODD   ($uint8_t)0x04   // 
-//registers USB_STAT_ENDP(n)  ($uint8_t)((n) >> 4)  // 
-//registers USB0_CTL  *(volatile $uint8_t  *)0x40072094 // Control Register
-//registers USB_CTL_JSTATE   ($uint8_t)0x80   // 
-//registers USB_CTL_SE0   ($uint8_t)0x40   // 
-//registers USB_CTL_TXSUSPENDTOKENBUSY ($uint8_t)0x20   // 
-//registers USB_CTL_RESET   ($uint8_t)0x10   // 
-//registers USB_CTL_HOSTMODEEN  ($uint8_t)0x08   // 
-//registers USB_CTL_RESUME   ($uint8_t)0x04   // 
-//registers USB_CTL_ODDRST   ($uint8_t)0x02   // 
-//registers USB_CTL_USBENSOFEN  ($uint8_t)0x01   // 
-//registers USB0_ADDR  *(volatile $uint8_t  *)0x40072098 // Address Register
-//registers USB0_BDTPAGE1  *(volatile $uint8_t  *)0x4007209C // BDT Page registers 1
-//registers USB0_FRMNUML  *(volatile $uint8_t  *)0x400720A0 // Frame Number registers Low
-//registers USB0_FRMNUMH  *(volatile $uint8_t  *)0x400720A4 // Frame Number registers High
-//registers USB0_TOKEN  *(volatile $uint8_t  *)0x400720A8 // Token Register
-//registers USB0_SOFTHLD  *(volatile $uint8_t  *)0x400720AC // SOF Threshold Register
-//registers USB0_BDTPAGE2  *(volatile $uint8_t  *)0x400720B0 // BDT Page registers 2
-//registers USB0_BDTPAGE3  *(volatile $uint8_t  *)0x400720B4 // BDT Page registers 3
-//registers USB0_ENDPT0  *(volatile $uint8_t  *)0x400720C0 // Endpoint Control Register
-//registers USB_ENDPT_HOSTWOHUB  ($uint8_t)0x80   // host only, enable low speed
-//registers USB_ENDPT_RETRYDIS  ($uint8_t)0x40   // host only, set to disable NAK retry
-//registers USB_ENDPT_EPCTLDIS  ($uint8_t)0x10   // 0=control, 1=bulk, interrupt, isync
-//registers USB_ENDPT_EPRXEN  ($uint8_t)0x08   // enables the endpoint for RX transfers.
-//registers USB_ENDPT_EPTXEN  ($uint8_t)0x04   // enables the endpoint for TX transfers.
-//registers USB_ENDPT_EPSTALL  ($uint8_t)0x02   // set to stall endpoint
-//registers USB_ENDPT_EPHSHK  ($uint8_t)0x01   // enable handshaking during a transaction, generally set unless Isochronous
-//registers USB0_ENDPT1  *(volatile $uint8_t  *)0x400720C4 // Endpoint Control Register
-//registers USB0_ENDPT2  *(volatile $uint8_t  *)0x400720C8 // Endpoint Control Register
-//registers USB0_ENDPT3  *(volatile $uint8_t  *)0x400720CC // Endpoint Control Register
-//registers USB0_ENDPT4  *(volatile $uint8_t  *)0x400720D0 // Endpoint Control Register
-//registers USB0_ENDPT5  *(volatile $uint8_t  *)0x400720D4 // Endpoint Control Register
-//registers USB0_ENDPT6  *(volatile $uint8_t  *)0x400720D8 // Endpoint Control Register
-//registers USB0_ENDPT7  *(volatile $uint8_t  *)0x400720DC // Endpoint Control Register
-//registers USB0_ENDPT8  *(volatile $uint8_t  *)0x400720E0 // Endpoint Control Register
-//registers USB0_ENDPT9  *(volatile $uint8_t  *)0x400720E4 // Endpoint Control Register
-//registers USB0_ENDPT10  *(volatile $uint8_t  *)0x400720E8 // Endpoint Control Register
-//registers USB0_ENDPT11  *(volatile $uint8_t  *)0x400720EC // Endpoint Control Register
-//registers USB0_ENDPT12  *(volatile $uint8_t  *)0x400720F0 // Endpoint Control Register
-//registers USB0_ENDPT13  *(volatile $uint8_t  *)0x400720F4 // Endpoint Control Register
-//registers USB0_ENDPT14  *(volatile $uint8_t  *)0x400720F8 // Endpoint Control Register
-//registers USB0_ENDPT15  *(volatile $uint8_t  *)0x400720FC // Endpoint Control Register
-//registers USB0_USBCTRL  *(volatile $uint8_t  *)0x40072100 // USB Control Register
-//registers USB_USBCTRL_SUSP  ($uint8_t)0x80   // Places the USB transceiver into the suspend state.
-//registers USB_USBCTRL_PDE   ($uint8_t)0x40   // Enables the weak pulldowns on the USB transceiver.
-//registers USB0_OBSERVE  *(volatile $uint8_t  *)0x40072104 // USB OTG Observe Register
-//registers USB_OBSERVE_DPPU  ($uint8_t)0x80   // 
-//registers USB_OBSERVE_DPPD  ($uint8_t)0x40   // 
-//registers USB_OBSERVE_DMPD  ($uint8_t)0x10   // 
-//registers USB0_CONTROL  *(volatile $uint8_t  *)0x40072108 // USB OTG Control Register
-//registers USB_CONTROL_DPPULLUPNONOTG ($uint8_t)0x10   //  Provides control of the DP PULLUP in the USB OTG module, if USB is configured in non-OTG device mode.
-//registers USB0_USBTRC0  *(volatile $uint8_t  *)0x4007210C // USB Transceiver Control registers 0
-//registers USB_USBTRC_USBRESET  ($uint8_t)0x80   //
-//registers USB_USBTRC_USBRESMEN  ($uint8_t)0x20   //
-//registers USB_USBTRC_SYNC_DET  ($uint8_t)0x02   //
-//registers USB_USBTRC_USB_RESUME_INT ($uint8_t)0x01   //
-//registers USB0_USBFRMADJUST *(volatile $uint8_t  *)0x40072114 // Frame Adjust Register
-
+// Chapter 54: Universal Serial Bus OTG Controller (USBOTG)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 41: USB Device Charger Detection Module (USBDCD)
-//registers USBDCD_CONTROL   0x40035000 // Control register
-//registers USBDCD_CLOCK   0x40035004 // Clock register
-//registers USBDCD_STATUS   0x40035008 // Status register
-//registers USBDCD_TIMER0   0x40035010 // TIMER0 register
-//registers USBDCD_TIMER1   0x40035014 // TIMER1 register
-//registers USBDCD_TIMER2   0x40035018 // TIMER2 register
+registers USBHS {
+//--- Identification register
+  ID @ro 0x400A_1000 $uint32 {
+    VERSIONID [3], VERSION [4], REVISION [4], TAG [5], 2, NID [6], 2, ID [6]
+  }
+
+//--- General Hardware Parameters Register
+  HWGENERAL @ro 0x400A_1004 $uint32 {21, SM [2], PHYM [3], PHYW [2], 4}
+
+//--- Host Hardware Parameters Register
+  HWHOST @ro 0x400A_1008 $uint32 {TIPER [8], TTASY [8], 12, NPORT [3], HC}
+  
+//--- Device Hardware Parameters Register
+  HWDEVICE @ro 0x400A_100C $uint32 {26, DEVEP [5], DC}
+  
+//--- Transmit Buffer Hardware Parameters Register
+  HWTXBUF @ro 0x400A_1010 $uint32 {TXLC, 7, TXCHANADD [8], TXADD [8], TXBURST [8]}
+  
+//--- Receive Buffer Hardware Parameters Register
+  HWRXBUF @ro 0x400A_1014 $uint32 {16, RXADD [8], RXBURST [8]}
+  
+//--- General Purpose Timer n Load Register
+  GPTIMERnLD [2] 0x400A_1080 : 8 $uint32 {8, GPTLD [24]}
+  
+//--- General Purpose Timer n Control Register
+  GPTIMERnCTL [2] 0x400A_1084 : 8 $uint32 {RUN, RST, 5, MODE, GPTCNT [24]}
+  
+//--- General Purpose Timer n Control Register
+  USB_SBUSCFG 0x400A_1090 $uint32 {29, BURSTMODE [3]}
+  
+//--- Host Controller Interface Version and Capability Register
+  HCIVERSION 0x400A_1100 $uint32 {HCIVERSION [16], 8, CAPLENGTH [8]}
+  
+//--- Host Controller Structural Parameters Register
+  HCSPARAMS 0x400A_1104 $uint32 {4, N_TT [4], N_PTT [4], 3, PI, N_CC [4], N_PCC [4], 3, PCC, N_PORTS [4]}
+  
+//--- Host Controller Capability Parameter Register
+  HCCPARAMS 0x400A_1108 $uint32 {16, EECP [8], IST [4], 1, ASP, PFL, ADC}
+  
+//--- Device Controller Interface Version Register
+  DCIVERSION 0x400A_1122 $uint16
+  
+//--- Device Controller Capability Parameters Register
+  DCCPARAMS 0x400A_1124 $uint32 {23, HC, DC, 2, DEN [5]}
+  
+//--- USB Command Register
+  USBCMD 0x400A_1140 $uint32 {8, ITC [8], FS2, ATDTW, SUTW, 1, ASPE, 1, ASP [2], 1, IAA, ASE, PSE, FS [2], RST, RS}
+  
+//--- USB Status Register
+  USBSTS 0x400A_1144 $uint32 {
+    6, TI1, TI0, 4, UPI, UAI, 1, NAKI,
+    AS, PS, RCL, HCH, 3, SLI, SRI, URI, AAI, SEI, FRI, PCI, UEI, UI
+  }
+
+//--- USB Interrupt Enable Register
+  USBINTR 0x400A_1148 $uint32 {
+    6, TIE1, TI40, 4, UPIE, UAIE, 1, NAKIE,
+    7, SLE, SRE, URE, AAE, SEE, FRE, PCE, UEE, UE
+  }
+
+//--- Frame Index Register
+  FRINDEX 0x400A_114C $uint32 {18, FRINDEX [14]}
+
+//--- Periodic Frame List Base Address Register
+  PERIODICLISTBASE 0x400A_1154 $uint32 {PERBASE [20], 12}
+
+//--- Device Address Register
+  DEVICEADDR 0x400A_1154 $uint32 {USBADDR [7], USBADRA, 24}
+
+//--- Current Asynchronous List Address Register
+  ASYNCLISTADDR 0x400A_1158 $uint32 {ASYBASE [27], 5}
+
+//--- Endpoint List Address Register
+  EPLISTADDR 0x400A_1158 $uint32 {EPBASE [21], 11}
+
+//--- Host TT Asynchronous Buffer Control Register
+  TCCTRL 0x400A_115C $uint32 {1, TTHA [7], 24}
+
+//--- Master Interface Data Burst Size Register
+  BURSTSIZE 0x400A_1160 $uint32 {16, TXPBURST [8], RXPBURST [8]}
+
+//--- Transmit FIFO Tuning Control Register
+  TXFILLTUNING 0x400A_1164 $uint32 {10, TXFIFOTHRES [6], 3, TXSCHHEALTH [5], 1, TXCHOH [7]}
+
+//--- Endpoint NAK Register
+  ENDPTNAK 0x400A_1178 $uint32 {12, EPTN [4], 12, EPRN [4]}
+
+//--- Endpoint NAK Enable Register
+  ENDPTNAKEN 0x400A_117C $uint32 {12, EPTNE [4], 12, EPRNE [4]}
+
+//--- Configure Flag Register
+  CONFIGFLAG @ro 0x400A_1180 $uint32
+
+//--- Port Status and Control Register
+  PORTSC1 0x400A_1184 $uint32 {
+    PTS [2], 2, PSPD [2], PTS2, PFSC, PHCD, WKOC, WKDS, WKCN, PTC [4],
+    PIC [2], PO, PP, LS [2], HSP, PR, SUSP, FPR, OCC, OCA, PEC, PE, CSC, CCS
+  }
+
+//--- On-the-Go Status and Control Register
+  OTGSC 0x400A_11A4 $uint32 {
+    1, DPIE, MSE, BSEIE, BSVIE, ASVIE, AVVIE, IDIE, 1, DPIS, MSS, BSEIS, BSVIS, ASVIS, AVVIS, IDIS,
+    1, DPS, MST, BSE, BSV, ASV, AVV, ID, HABA, 1, IDPU, DP, OT, HAAR, VC, VD
+  }
+
+//--- USB Mode Register
+  USBMODE 0x400A_11A8 $uint32 {17, TXHSD [3], 7, SDIS, SLOM, ES, CM [2]}
+
+//--- Endpoint Setup Status Register
+  EPSETUPSR 0x400A_11AC $uint32 {27, EPSETUPSTAT [5]}
+
+//--- Endpoint Initialization Register
+  EPPRIME 0x400A_11B0 $uint32 {12, PETB [4], 12, PERB [4]}
+
+//--- Endpoint Flush Register
+  EPFLUSH 0x400A_11B4 $uint32 {12, FETB [4], 12, FERB [4]}
+
+//--- Endpoint Status Register
+  EPSR 0x400A_11B8 $uint32 {12, ETBR [4], 12, ERBR [4]}
+
+//--- Endpoint Status Register
+  EPCOMPLETE 0x400A_11BC $uint32 {12, ETCE [4], 12, ERCE [4]}
+
+//--- Endpoint Control Register 0
+  EPCR0 0x400A_11C0 $uint32 {8, TXE, 3, TXT [2], 1, TXS, 8, RXE, 3, RXT [2], 1, RXS}
+
+//--- Endpoint Control Register n (0 < n < 8)
+  EPCR [8] 0x400A_11C0 : 4 $uint32 {8, TXE, TXR, TXI, 1, TXT [2], TXD, TXS, 8, RXE, RXR, RXI, 1, RXT [2], RXD, RXS}
+
+//--- USB General Control Register
+  USBGENCTRL 0x400A_1200 $uint32 {26, WU_INT_CLR, 4, WU_IE}
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Chapter 55: Universal Serial Bus 2.0 Integrated PHY
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+registers USBPHY {
+//--- USB PHY Power-Down Register
+  PWD     0x400A_2000
+  PWD_SET 0x400A_2004
+  PWD_CLR 0x400A_2008
+  PWD_TOG 0x400A_200C $uint32 {11, RXPWDRX, RXPWDDIFF, RXPWD1PT1, RXPWDENV, 4, TXPWDV2I, TXPWDBIAS, TXPWDFS, 10}
+
+//--- USB PHY Transmitter Control Register
+  TX     0x400A_2010
+  TX_SET 0x400A_2014
+  TX_CLR 0x400A_2018
+  TX_TOG 0x400A_201C $uint32 {3, USBPHY_TX_EDGECTRL [3], 6, TXCAL45DP [4], 4, TXCAL45DM [4], 4, D_CAL [4]}
+
+//--- USB PHY Receiver Control Register
+  RX     0x400A_2020
+  RX_SET 0x400A_2024
+  RX_CLR 0x400A_2028
+  RX_TOG 0x400A_202C $uint32 {9, RXDBYPASS, 15, DISCONADJ [3], 1, ENVADJ [3]}
+
+//--- USB PHY General Control Register
+  CTRL     0x400A_2030
+  CTRL_SET 0x400A_2034
+  CTRL_CLR 0x400A_2038
+  CTRL_TOG 0x400A_203C $uint32 {
+    SFTRST, CLKGATE, UTMI_SUSPENDM, HOST_FORCE_LS_SEO, OTG_ID_VALUE, 2, FSDLL_RST_EN,
+    3, ENAUTOCLR_PHY_PWD, ENAUTOCLR_CLKGATE, AUTORESUME_EN, 2,
+    ENUTMILEVEL3, ENUTMILEVEL2, 1, DEVPLUGIN_IRQ, 4,
+    3, ENDEVPLUGINDET, HOSTDISCONNECTDETECT_IRQ, 1, ENHOSTDISCONDETEXCT, 1
+  }
+
+//--- USB PHY Status Register
+  STATUS 0x400A_2040 $uint32 {
+    21, RESUME_STATUS, 1, OTGID_STATUS, 1, DEVPLUGIN_STATUS, 2, HOST_DISCONNECTDETECT_STATUS, 3
+  }
+
+//--- USB PHY General Control Register
+  DEBUG     0x400A_2050
+  DEBUG_SET 0x400A_2054
+  DEBUG_CLR 0x400A_2058
+  DEBUG_TOG 0x400A_205C $uint32 {
+    1, CLKGATE, HOST_RESUME_DEBUG, SQUELCHRESETLENGTH [4], ENSQUELCHRESET, 3, SQUELCHRESETCOUNT [5],
+    3, ENTX2RXCOUNT, TX2RXCOUNT [4], 2, ENHSTPULLDOWN [2], HSTPULLDOWN [2], DEBUG_INTERFACE_HOLD, OTGIDPIOLOCK
+  }
+
+//--- UTMI Debug Status Register 0
+  DEBUG0_STATUS 0x400A_2060 $uint32 {SQUEL_COUNT [6], UTMI_RXERROR_FAIL_COUNT [10], LOOP_BACK_FAIL_COUNT [16]}
+
+//--- UTMI Debug Status Register 1
+  DEBUG1     0x400A_2070
+  DEBUG1_SET 0x400A_2074
+  DEBUG1_CLR 0x400A_2078
+  DEBUG1_TOG 0x400A_207C $uint32 {17, ENTAILADJVD [2], 13}
+
+//--- UTMI RTL Version Register
+  VERSION @ro 0x400A_2080 $uint32 {MAJOR [8], MINOR [8], STEP [16]}
+
+//--- USB PHY PLL Control / Status Register
+  PLL_SIC     0x400A_20A0
+  PLL_SIC_SET 0x400A_20A4
+  PLL_SIC_CLR 0x400A_20A8
+  PLL_SIC_TOG 0x400A_20AC
+  $uint32 {
+    PLL_LOCK, 14, PLL_BYPASS,
+    2, PLL_ENABLE, PLL_POWER, PLL_HOLD_RING_OFF, 4, PLL_EN_USB_CLKS, 4, PLL_DIV_SEL [2]
+  }
+
+//--- USB PHY VBUS Detect Control Register
+  USB1_VBUS_DETECT     0x400A_20C0
+  USB1_VBUS_DETECT_SET 0x400A_20C4
+  USB1_VBUS_DETECT_CLR 0x400A_20C8
+  USB1_VBUS_DETECT_TOG 0x400A_20CC
+  $uint32 {
+    EN_CHARGER_RESISTOR, 4, DISCHARGE_VBUS, 5, PWRUP_CMPS, 1, VBUSVALID_TO_SESSVALID, 2,
+    5, VBUS_SOURCE_SEL [2], VBUSVALID_SEL,
+    VBUSVALID_OVERRIDE, AVALID_OVERRIDE, BVALID_OVERRIDE, SESSEND_OVERRIDE, VBUS_OVERRIDE_EN, VBUSVALID_THRESH [3]
+  }
+
+//--- USB PHY VBUS Detector Status Register
+  USB1_VBUS_DET_STAT 0x400A_20D0 $uint32 {27, VBUS_VALID_3V, VBUS_VALID, AVALID, BVALID, SESSEND}
+
+//--- USB PHY Charger Detect Status Register
+  USB1_VBUS__CHRG_DET_STAT 0x400A_20F0 $uint32 {27, SECDET_DCP, DP_STATE, DM_STATE, CHRG_DETECTED, PLUG_CONTACT}
+
+//--- USB PHY Analog Control Register
+  ANACTRL     0x400A_2100
+  ANACTRL_SET 0x400A_2104
+  ANACTRL_CLR 0x400A_2108
+  ANACTRL_TOG 0x400A_210C $uint32 {
+    PFD_STABLE, 15,
+    EMPH_CUR_CTRL[2], EMPH_EN, EMPH_PULSE_CTRL [2], DEV_PULLDOWN, PFD_FRAC [6], PFD_CLK_SEL [2], PFD_CLKGATE, TESTCLK_SEL
+  }
+
+//--- USB PHY Loopback Control/Status Register
+  USB1_LOOPBACK     0x400A_2110
+  USB1_LOOPBACK_SET 0x400A_2114
+  USB1_LOOPBACK_CLR 0x400A_2118
+  USB1_LOOPBACK_TOG 0x400A_211C $uint32 {
+    8, TSTPKT [8], TSTL_HSFS_MODE_EN, 6, UTM0_DIG_TST1,
+    UTM0_DIG_TST0, TSTL_TX_HIZ, TSTI_TX_EN, TSTI_TX_LS_MODE,
+    TSTI_TX_HS_MODE, UTMI_DIG_TST1, UTMI_DIG_TST0, UTMI_TESTSTART
+  }
+
+//--- USB PHY Loopback Packet Number Select Register
+  USB1_LOOPBACK_HSFSCNT     0x400A_2120
+  USB1_LOOPBACK_HSFSCNT_SET 0x400A_2124
+  USB1_LOOPBACK_HSFSCNT_CLR 0x400A_2128
+  USB1_LOOPBACK_HSFSCNT_TOG 0x400A_212C $uint32 {TSTL_FS_NUMBER [16], TSTL_HS_NUMBER [16]}
+
+//--- USB PHY Trim Override Enable Register
+  TRIM_OVERRIDE_EN     0x400A_2130
+  TRIM_OVERRIDE_EN_SET 0x400A_2134
+  TRIM_OVERRIDE_EN_CLR 0x400A_2138
+  TRIM_OVERRIDE_EN_TOG 0x400A_213C $uint32 {
+    TRIM_USBPHY_TX_CAL45DM [4], TRIM_USBPHY_TX_CAL45CP [4],
+    TRIM_USBPHY_TX_DCAL [4], TRIM_USB_REG_ENV_TAIL_ADJ_VD [2], TRIM_PLL_CTRL0_DIV_SEL [2],
+    11, TRIM_TX_CAL45DM_OVERRIDE, TRIM_TX_CAL45DP_OVERRIDE,
+    TRIM_TX_D_CAL_OVERRIDE, TRIM_ENV_TAIL_ADJ_VD_OVERRIDE, TRIM_DEV_SEL_OVERRIDE
+  }
+}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
