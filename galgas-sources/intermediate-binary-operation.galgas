@@ -79,7 +79,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
+  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString 
     ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
@@ -110,7 +110,7 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
     ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]

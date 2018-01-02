@@ -265,7 +265,7 @@ proc generatePanicCode
   ioLLVMcode += "  br label %panic.loop\n"
   ioLLVMcode += "}\n\n"
 #--- Panic for isr
-  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString !"" ?let emptyStringIndex]
+  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString !"" ?let emptyStringIndex]
   ioLLVMcode += llvmTitleComment (!"Panic for ISR")
   ioLLVMcode += "define internal void @panic.isr (" + [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
   ioLLVMcode += "  %str.FILE = load i8*, i8** " + literalStringName (!emptyStringIndex) + "\n"
@@ -278,7 +278,7 @@ proc generatePanicCode
   ioLLVMcode += "}\n\n"    
 #--- File specific routines
   for (filePath) in inSourceFileAbsolutePathSet do
-    [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+    [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
       ![[filePath lastPathComponent] stringByDeletingPathExtension]
       ?let staticStringIndex
     ]

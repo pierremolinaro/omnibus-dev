@@ -107,7 +107,7 @@ override method @assertInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
-  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
+  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString 
     ![[[mAssertInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]

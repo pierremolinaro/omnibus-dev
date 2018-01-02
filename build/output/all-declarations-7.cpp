@@ -4863,7 +4863,8 @@ void extensionSetter_closeOverride (GALGAS_universalValuedObjectMap & ioObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticEntityMap::GALGAS_staticEntityMap (void) :
-mProperty_mStaticStringMap () {
+mProperty_mStaticStringMap (),
+mProperty_mGlobalStructuredConstantList () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4873,23 +4874,27 @@ GALGAS_staticEntityMap::~ GALGAS_staticEntityMap (void) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_staticEntityMap::GALGAS_staticEntityMap (const GALGAS_staticStringMap & inOperand0) :
-mProperty_mStaticStringMap (inOperand0) {
+GALGAS_staticEntityMap::GALGAS_staticEntityMap (const GALGAS_staticStringMap & inOperand0,
+                                                const GALGAS_globalStructuredConstantList & inOperand1) :
+mProperty_mStaticStringMap (inOperand0),
+mProperty_mGlobalStructuredConstantList (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticEntityMap GALGAS_staticEntityMap::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_staticEntityMap (GALGAS_staticStringMap::constructor_emptyMap (HERE)) ;
+  return GALGAS_staticEntityMap (GALGAS_staticStringMap::constructor_emptyMap (HERE),
+                                 GALGAS_globalStructuredConstantList::constructor_emptyList (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_staticEntityMap GALGAS_staticEntityMap::constructor_new (const GALGAS_staticStringMap & inOperand0 
+GALGAS_staticEntityMap GALGAS_staticEntityMap::constructor_new (const GALGAS_staticStringMap & inOperand0,
+                                                                const GALGAS_globalStructuredConstantList & inOperand1 
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_staticEntityMap result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_staticEntityMap (inOperand0) ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_staticEntityMap (inOperand0, inOperand1) ;
   }
   return result ;
 }
@@ -4901,19 +4906,23 @@ typeComparisonResult GALGAS_staticEntityMap::objectCompare (const GALGAS_staticE
   if (result == kOperandEqual) {
     result = mProperty_mStaticStringMap.objectCompare (inOperand.mProperty_mStaticStringMap) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mGlobalStructuredConstantList.objectCompare (inOperand.mProperty_mGlobalStructuredConstantList) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_staticEntityMap::isValid (void) const {
-  return mProperty_mStaticStringMap.isValid () ;
+  return mProperty_mStaticStringMap.isValid () && mProperty_mGlobalStructuredConstantList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_staticEntityMap::drop (void) {
   mProperty_mStaticStringMap.drop () ;
+  mProperty_mGlobalStructuredConstantList.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4925,6 +4934,8 @@ void GALGAS_staticEntityMap::description (C_String & ioString,
     ioString << " not built" ;
   }else{
     mProperty_mStaticStringMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGlobalStructuredConstantList.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -4933,6 +4944,12 @@ void GALGAS_staticEntityMap::description (C_String & ioString,
 
 GALGAS_staticStringMap GALGAS_staticEntityMap::getter_mStaticStringMap (UNUSED_LOCATION_ARGS) const {
   return mProperty_mStaticStringMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalStructuredConstantList GALGAS_staticEntityMap::getter_mGlobalStructuredConstantList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGlobalStructuredConstantList ;
 }
 
 
@@ -4992,13 +5009,13 @@ void extensionSetter_findOrAddStaticString (GALGAS_staticEntityMap & ioObject,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outIndex.drop () ; // Release 'out' argument
-  const enumGalgasBool test_0 = ioObject.mProperty_mStaticStringMap.getter_hasKey (inArgument_inString COMMA_SOURCE_FILE ("context.galgas", 51)).boolEnum () ;
+  const enumGalgasBool test_0 = ioObject.mProperty_mStaticStringMap.getter_hasKey (inArgument_inString COMMA_SOURCE_FILE ("context.galgas", 59)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    ioObject.mProperty_mStaticStringMap.method_searchKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("context.galgas", 52)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("context.galgas", 52)) ;
+    ioObject.mProperty_mStaticStringMap.method_searchKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("context.galgas", 60)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("context.galgas", 60)) ;
   }else if (kBoolFalse == test_0) {
-    outArgument_outIndex = ioObject.mProperty_mStaticStringMap.getter_count (SOURCE_FILE ("context.galgas", 54)) ;
+    outArgument_outIndex = ioObject.mProperty_mStaticStringMap.getter_count (SOURCE_FILE ("context.galgas", 62)) ;
     {
-    ioObject.mProperty_mStaticStringMap.setter_insertKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("context.galgas", 55)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("context.galgas", 55)) ;
+    ioObject.mProperty_mStaticStringMap.setter_insertKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("context.galgas", 63)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("context.galgas", 63)) ;
     }
   }
 }
@@ -6403,7 +6420,7 @@ static void extensionMethod_binaryOperationIR_enterCodeForOverflowOperation (con
   macroValidSharedObject (object, cPtr_binaryOperationIR) ;
   GALGAS_uint var_staticStringIndex_2079 ;
   {
-  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mProperty_mStaticStringMap, object->mProperty_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 83)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 83)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 83)), var_staticStringIndex_2079, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 82)) ;
+  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mProperty_mStaticEntityMap, object->mProperty_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 83)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 83)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 83)), var_staticStringIndex_2079, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 82)) ;
   }
   GALGAS_string var_llvmType_2098 = extensionGetter_llvmTypeName (object->mProperty_mOperandType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 86)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (GALGAS_string (".r = call {"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (GALGAS_string (", i1} @llvm."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (GALGAS_string (".with.overflow."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (var_llvmType_2098, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)) ;
@@ -6506,7 +6523,7 @@ static void extensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDiviso
   macroValidSharedObject (object, cPtr_binaryOperationIR) ;
   GALGAS_uint var_staticStringIndex_3918 ;
   {
-  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mProperty_mStaticStringMap, object->mProperty_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 114)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 114)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 114)), var_staticStringIndex_3918, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 113)) ;
+  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mProperty_mStaticEntityMap, object->mProperty_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 114)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 114)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 114)), var_staticStringIndex_3918, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 113)) ;
   }
   GALGAS_string var_llvmType_3937 = extensionGetter_llvmTypeName (object->mProperty_mOperandType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (GALGAS_string (".isZero = icmp eq "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (var_llvmType_3937, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)).add_operation (GALGAS_string (", 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)) ;
@@ -9080,7 +9097,7 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_routineMapIR_2D_eleme
 GALGAS_generationAdds::GALGAS_generationAdds (void) :
 mProperty_mUniqueIndex (),
 mProperty_mExternFunctionDeclarationSet (),
-mProperty_mStaticStringMap (),
+mProperty_mStaticEntityMap (),
 mProperty_mUsesGuards (),
 mProperty_mNeedsDynamicMemoryAllocation () {
 }
@@ -9099,7 +9116,7 @@ GALGAS_generationAdds::GALGAS_generationAdds (const GALGAS_uint & inOperand0,
                                               const GALGAS_bool & inOperand4) :
 mProperty_mUniqueIndex (inOperand0),
 mProperty_mExternFunctionDeclarationSet (inOperand1),
-mProperty_mStaticStringMap (inOperand2),
+mProperty_mStaticEntityMap (inOperand2),
 mProperty_mUsesGuards (inOperand3),
 mProperty_mNeedsDynamicMemoryAllocation (inOperand4) {
 }
@@ -9140,7 +9157,7 @@ typeComparisonResult GALGAS_generationAdds::objectCompare (const GALGAS_generati
     result = mProperty_mExternFunctionDeclarationSet.objectCompare (inOperand.mProperty_mExternFunctionDeclarationSet) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mStaticStringMap.objectCompare (inOperand.mProperty_mStaticStringMap) ;
+    result = mProperty_mStaticEntityMap.objectCompare (inOperand.mProperty_mStaticEntityMap) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mUsesGuards.objectCompare (inOperand.mProperty_mUsesGuards) ;
@@ -9154,7 +9171,7 @@ typeComparisonResult GALGAS_generationAdds::objectCompare (const GALGAS_generati
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_generationAdds::isValid (void) const {
-  return mProperty_mUniqueIndex.isValid () && mProperty_mExternFunctionDeclarationSet.isValid () && mProperty_mStaticStringMap.isValid () && mProperty_mUsesGuards.isValid () && mProperty_mNeedsDynamicMemoryAllocation.isValid () ;
+  return mProperty_mUniqueIndex.isValid () && mProperty_mExternFunctionDeclarationSet.isValid () && mProperty_mStaticEntityMap.isValid () && mProperty_mUsesGuards.isValid () && mProperty_mNeedsDynamicMemoryAllocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9162,7 +9179,7 @@ bool GALGAS_generationAdds::isValid (void) const {
 void GALGAS_generationAdds::drop (void) {
   mProperty_mUniqueIndex.drop () ;
   mProperty_mExternFunctionDeclarationSet.drop () ;
-  mProperty_mStaticStringMap.drop () ;
+  mProperty_mStaticEntityMap.drop () ;
   mProperty_mUsesGuards.drop () ;
   mProperty_mNeedsDynamicMemoryAllocation.drop () ;
 }
@@ -9179,7 +9196,7 @@ void GALGAS_generationAdds::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mExternFunctionDeclarationSet.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mStaticStringMap.description (ioString, inIndentation+1) ;
+    mProperty_mStaticEntityMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mUsesGuards.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -9202,8 +9219,8 @@ GALGAS_stringset GALGAS_generationAdds::getter_mExternFunctionDeclarationSet (UN
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_staticEntityMap GALGAS_generationAdds::getter_mStaticStringMap (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mStaticStringMap ;
+GALGAS_staticEntityMap GALGAS_generationAdds::getter_mStaticEntityMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mStaticEntityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
