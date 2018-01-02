@@ -123,6 +123,8 @@ override method @constructorCallAST analyzeExpression
       for i in 0 ..< size do
         operandIRList += !result
       end
+      let globalConstantName = "@gconst." + [ioStaticEntityMap.mGlobalStructuredConstantList  length]
+      ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
       outResult = .llvmArrayValue {!type:resultType !values:operandIRList}
     else
       var individualConstructor = "("
@@ -150,11 +152,13 @@ override method @constructorCallAST analyzeExpression
           let result = checkAssignmentCompatibility (
             !source:expressionResult
             !targetAnnotationType:elementType
-            !errorLocation:[mParameterList mSelectorAtIndex !0].location
+            !errorLocation:mSelector.location
             !staticTypeAllowed:false
           )
           operandIRList += !result
         end
+        let globalConstantName = "@gconst." + [ioStaticEntityMap.mGlobalStructuredConstantList  length]
+        ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
         outResult = .llvmArrayValue {!type:resultType !values:operandIRList}
       else
         error mErrorLocation : "invalid constructor" : outResult

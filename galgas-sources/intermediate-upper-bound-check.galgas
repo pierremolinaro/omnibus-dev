@@ -24,7 +24,7 @@ override method @upperBoundCheckIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
+  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString 
     ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]

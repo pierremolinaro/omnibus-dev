@@ -35,6 +35,14 @@ map @prefixOperatorMap {
 
 struct @staticEntityMap {
   @staticStringMap mStaticStringMap
+  @globalStructuredConstantList mGlobalStructuredConstantList
+}
+
+#·······················································································································
+
+list @globalStructuredConstantList {
+  @PLMType mType
+  @operandIRList mOperandIRList
 }
 
 #·······················································································································

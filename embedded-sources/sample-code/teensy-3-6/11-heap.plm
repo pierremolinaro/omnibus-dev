@@ -22,7 +22,7 @@ let LED_L3 = $digitalPort.D6
 let LED_L0 = $digitalPort.D3
 let PUSH_P0 = $digitalPort.D8
 
-let array = $uint8 [3] (!repeated:0) // (!1 !2 !3)
+let array = $uint8 [3] (!1 !2 !3)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

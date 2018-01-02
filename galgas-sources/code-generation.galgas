@@ -9,7 +9,7 @@
 struct @generationAdds {
   @uint mUniqueIndex
   @stringset mExternFunctionDeclarationSet
-  @staticEntityMap mStaticStringMap
+  @staticEntityMap mStaticEntityMap
   @bool mUsesGuards
   @bool mNeedsDynamicMemoryAllocation
 }
@@ -159,7 +159,7 @@ private proc generateCodeFiles
   ?targetParameters:let @targetParameters inTargetParameters
 {
   @generationAdds generationAdds = .default
-  generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticEntityMap
+  generationAdds.mStaticEntityMap = inIntermediateCodeStruct.mStaticEntityMap
   let @generationContext generationContext = .new {
     ![inPanicCodeType type]
     ![inPanicLineType type]
@@ -339,9 +339,9 @@ private proc generateCodeFiles
   end
   llvmCode += "\n"
 #----------------------------------------- Static Strings
-  if [generationAdds.mStaticStringMap.mStaticStringMap count] > 0 then
+  if [generationAdds.mStaticEntityMap.mStaticStringMap count] > 0 then
     llvmCode += llvmTitleComment (!"Static strings")
-    for () in generationAdds.mStaticStringMap.mStaticStringMap do
+    for () in generationAdds.mStaticEntityMap.mStaticStringMap do
       let lgStr = [[lkey.string utf8Length] + 1 string]
       llvmCode += literalCharacterArrayName (!mIndex) + " = private unnamed_addr constant ["
       llvmCode += lgStr + " x i8] c\"" + lkey.string + "\\00\", align 1\n"
@@ -349,6 +349,20 @@ private proc generateCodeFiles
       llvmCode += lgStr + " x i8], [" + lgStr + " x i8]* "
       llvmCode += literalCharacterArrayName (!mIndex) + ", i32 0, i32 0), align 4\n\n"
     end
+  end
+#----------------------------------------- Global structured constants
+  if [generationAdds.mStaticEntityMap.mGlobalStructuredConstantList length] > 0 then
+    llvmCode += llvmTitleComment (!"Global structured constants")
+    for () in generationAdds.mStaticEntityMap.mGlobalStructuredConstantList do (idx)
+      llvmCode += "@gconst." + idx + " = private unnamed_addr constant " + [mType llvmTypeName]
+      llvmCode += " ["
+      for () in mOperandIRList
+        do llvmCode += [mOperand llvmTypeName] + " " + [mOperand llvmName]
+        between llvmCode += ", "
+      end
+      llvmCode += "]\n"
+    end
+    llvmCode += "\n"
   end
 #----------------------------------------- Write LLVM file
   llvmCode += llvmSeparatorLine ()

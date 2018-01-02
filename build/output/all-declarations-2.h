@@ -3933,6 +3933,143 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticContext ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         @globalStructuredConstantList list                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_globalStructuredConstantList : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public : GALGAS_globalStructuredConstantList (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public : GALGAS_globalStructuredConstantList (const capCollectionElementArray & inSharedArray) ;
+
+//--------------------------------- Element constructor
+  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                  const class GALGAS_PLMType & in_mType,
+                                                  const class GALGAS_operandIRList & in_mOperandIRList
+                                                  COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_globalStructuredConstantList extractObject (const GALGAS_object & inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_globalStructuredConstantList constructor_emptyList (LOCATION_ARGS) ;
+
+  public : static class GALGAS_globalStructuredConstantList constructor_listWithValue (const class GALGAS_PLMType & inOperand0,
+                                                                                       const class GALGAS_operandIRList & inOperand1
+                                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_globalStructuredConstantList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_PLMType & inOperand0,
+                                                      const class GALGAS_operandIRList & inOperand1
+                                                      COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public : VIRTUAL_IN_DEBUG GALGAS_globalStructuredConstantList add_operation (const GALGAS_globalStructuredConstantList & inOperand,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_PLMType constinArgument0,
+                                                       class GALGAS_operandIRList constinArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_PLMType & outArgument0,
+                                                  class GALGAS_operandIRList & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_PLMType & outArgument0,
+                                                 class GALGAS_operandIRList & outArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_PLMType & outArgument0,
+                                                       class GALGAS_operandIRList & outArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_PLMType & outArgument0,
+                                               class GALGAS_operandIRList & outArgument1,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_PLMType & outArgument0,
+                                              class GALGAS_operandIRList & outArgument1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIRList getter_mOperandIRListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                     C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mTypeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalStructuredConstantList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                               C_Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalStructuredConstantList getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalStructuredConstantList getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                               C_Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_globalStructuredConstantList ;
+ 
+} ; // End of GALGAS_globalStructuredConstantList class
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Enumerator declaration                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumerator_globalStructuredConstantList : public cGenericAbstractEnumerator {
+  public : cEnumerator_globalStructuredConstantList (const GALGAS_globalStructuredConstantList & inEnumeratedObject,
+                                                     const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_PLMType current_mType (LOCATION_ARGS) const ;
+  public : class GALGAS_operandIRList current_mOperandIRList (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_globalStructuredConstantList_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalStructuredConstantList ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                                @staticStringMap map                                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4045,6 +4182,8 @@ class GALGAS_staticEntityMap : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_staticStringMap mProperty_mStaticStringMap ;
 
+  public : GALGAS_globalStructuredConstantList mProperty_mGlobalStructuredConstantList ;
+
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -4059,7 +4198,8 @@ class GALGAS_staticEntityMap : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_staticEntityMap (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_staticEntityMap (const GALGAS_staticStringMap & in_mStaticStringMap) ;
+  public : GALGAS_staticEntityMap (const GALGAS_staticStringMap & in_mStaticStringMap,
+                                   const GALGAS_globalStructuredConstantList & in_mGlobalStructuredConstantList) ;
 
 //-- Start of generic part --*
 
@@ -4072,7 +4212,8 @@ class GALGAS_staticEntityMap : public AC_GALGAS_root {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_staticEntityMap constructor_new (const class GALGAS_staticStringMap & inOperand0
+  public : static class GALGAS_staticEntityMap constructor_new (const class GALGAS_staticStringMap & inOperand0,
+                                                                const class GALGAS_globalStructuredConstantList & inOperand1
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4087,6 +4228,8 @@ class GALGAS_staticEntityMap : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalStructuredConstantList getter_mGlobalStructuredConstantList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_staticStringMap getter_mStaticStringMap (LOCATION_ARGS) const ;
 
 
@@ -5551,7 +5694,7 @@ class GALGAS_generationAdds : public AC_GALGAS_root {
 
   public : GALGAS_stringset mProperty_mExternFunctionDeclarationSet ;
 
-  public : GALGAS_staticEntityMap mProperty_mStaticStringMap ;
+  public : GALGAS_staticEntityMap mProperty_mStaticEntityMap ;
 
   public : GALGAS_bool mProperty_mUsesGuards ;
 
@@ -5573,7 +5716,7 @@ class GALGAS_generationAdds : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_generationAdds (const GALGAS_uint & in_mUniqueIndex,
                                   const GALGAS_stringset & in_mExternFunctionDeclarationSet,
-                                  const GALGAS_staticEntityMap & in_mStaticStringMap,
+                                  const GALGAS_staticEntityMap & in_mStaticEntityMap,
                                   const GALGAS_bool & in_mUsesGuards,
                                   const GALGAS_bool & in_mNeedsDynamicMemoryAllocation) ;
 
@@ -5611,7 +5754,7 @@ class GALGAS_generationAdds : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mNeedsDynamicMemoryAllocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_staticEntityMap getter_mStaticStringMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_staticEntityMap getter_mStaticEntityMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mUniqueIndex (LOCATION_ARGS) const ;
 

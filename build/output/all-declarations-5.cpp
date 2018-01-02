@@ -10,6 +10,256 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                        Extension method '@instructionListIR appendStoreToUniversalReference'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendStoreToUniversalReference (GALGAS_instructionListIR & ioObject,
+                                                      const GALGAS_string constinArgument_inLLVMVarName,
+                                                      const GALGAS_PLMType constinArgument_inTargetVarType,
+                                                      const GALGAS_objectIR constinArgument_inSourceValue,
+                                                      C_Compiler * /* inCompiler */
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_storeToUniversalReferenceIR::constructor_new (constinArgument_inLLVMVarName, constinArgument_inTargetVarType, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-to-universal-reference.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-store-to-universal-reference.galgas", 7)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Extension method '@instructionListIR appendStoreIndirectVolatileRegister'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendStoreIndirectVolatileRegister (GALGAS_instructionListIR & ioObject,
+                                                          const GALGAS_PLMType constinArgument_inTargetVarType,
+                                                          const GALGAS_string constinArgument_inLLVMName,
+                                                          const GALGAS_objectIR constinArgument_inSourceValue,
+                                                          C_Compiler * /* inCompiler */
+                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_storeIndirectVolatileIR::constructor_new (constinArgument_inTargetVarType, constinArgument_inLLVMName, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-indirect-volatile-register.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-store-indirect-volatile-register.galgas", 7)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Extension method '@instructionListIR appendStoreVolatileRegister'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendStoreVolatileRegister (GALGAS_instructionListIR & ioObject,
+                                                  const GALGAS_PLMType constinArgument_inTargetVarType,
+                                                  const GALGAS_bigint constinArgument_inAddress,
+                                                  const GALGAS_objectIR constinArgument_inSourceValue,
+                                                  C_Compiler * /* inCompiler */
+                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_storeVolatileIR::constructor_new (constinArgument_inTargetVarType, constinArgument_inAddress, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 7)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Extension method '@instructionListIR appendStoreLocalVariable'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendStoreLocalVariable (GALGAS_instructionListIR & ioObject,
+                                               const GALGAS_string constinArgument_inLocalVarName,
+                                               const GALGAS_PLMType constinArgument_inTargetVarType,
+                                               const GALGAS_objectIR constinArgument_inSourceValue,
+                                               C_Compiler * /* inCompiler */
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_storeLocalVariableIR::constructor_new (constinArgument_inLocalVarName, constinArgument_inTargetVarType, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 7)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Extension method '@instructionListIR appendStoreTemporaryReference'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendStoreTemporaryReference (GALGAS_instructionListIR & ioObject,
+                                                    const GALGAS_PLMType constinArgument_inTargetVarType,
+                                                    const GALGAS_string constinArgument_inLLVMName,
+                                                    const GALGAS_objectIR constinArgument_inSourceValue,
+                                                    C_Compiler * /* inCompiler */
+                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_storeFromTemporaryReferenceIR::constructor_new (constinArgument_inTargetVarType, constinArgument_inLLVMName, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-to-temporary-reference.galgas", 8))  COMMA_SOURCE_FILE ("intermediate-store-to-temporary-reference.galgas", 8)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                Extension method '@instructionListIR generateRelease'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_generateRelease (GALGAS_instructionListIR & ioObject,
+                                      const GALGAS_PLMType constinArgument_inType,
+                                      const GALGAS_lstring constinArgument_in_5F_plmName,
+                                      C_Compiler * /* inCompiler */
+                                      COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_releaseIR::constructor_new (constinArgument_inType, constinArgument_in_5F_plmName  COMMA_SOURCE_FILE ("intermediate-release.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-release.galgas", 3)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension method '@instructionListIR appendLoadWhenReference'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendLoadWhenReference (GALGAS_instructionListIR & ioObject,
+                                              GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                              const GALGAS_objectIR constinArgument_inSource,
+                                              GALGAS_objectIR & outArgument_outResultingValue,
+                                              C_Compiler * inCompiler
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outResultingValue.drop () ; // Release 'out' argument
+  switch (constinArgument_inSource.enumValue ()) {
+  case GALGAS_objectIR::kNotBuilt:
+    break ;
+  case GALGAS_objectIR::kEnum_void:
+    {
+      TC_Array <C_FixItDescription> fixItArray0 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-when-reference.galgas", 10)), GALGAS_string ("<<@instructionListIR appendLoadWhenReference void>>"), fixItArray0  COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 10)) ;
+      outArgument_outResultingValue.drop () ; // Release error dropped variable
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_reference:
+    {
+      const cEnumAssociatedValues_objectIR_reference * extractPtr_574 = (const cEnumAssociatedValues_objectIR_reference *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_type = extractPtr_574->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_574->mAssociatedValue1 ;
+      {
+      routine_getNewTempValue (extractedValue_type, ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 12)) ;
+      }
+      {
+      extensionSetter_appendLoadFromReference (ioObject, outArgument_outResultingValue, extractedValue_llvmName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 13)) ;
+      }
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_literalInteger:
+    {
+      outArgument_outResultingValue = constinArgument_inSource ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_null:
+    {
+      outArgument_outResultingValue = constinArgument_inSource ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_llvmValue:
+    {
+      outArgument_outResultingValue = constinArgument_inSource ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_llvmStructureValue:
+    {
+      outArgument_outResultingValue = constinArgument_inSource ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_llvmArrayValue:
+    {
+      outArgument_outResultingValue = constinArgument_inSource ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_literalString:
+    {
+      outArgument_outResultingValue = constinArgument_inSource ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_zero:
+    {
+      outArgument_outResultingValue = constinArgument_inSource ;
+    }
+    break ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Extension method '@instructionListIR appendCopyFromReferences'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendCopyFromReferences (GALGAS_instructionListIR & ioObject,
+                                               GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                               const GALGAS_location constinArgument_inErrorLocation,
+                                               const GALGAS_objectIR constinArgument_inSourcePossibleReference,
+                                               const GALGAS_LValueRepresentation constinArgument_inTargetReference,
+                                               C_Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bool test_0 = constinArgument_inTargetReference.getter_isVolatileAbsoluteReference (SOURCE_FILE ("intermediate-copy-from-references.galgas", 10)) ;
+  if (kBoolTrue != test_0.boolEnum ()) {
+    test_0 = constinArgument_inTargetReference.getter_isVolatileIndirectReference (SOURCE_FILE ("intermediate-copy-from-references.galgas", 11)) ;
+  }
+  GALGAS_bool test_1 = test_0 ;
+  if (kBoolTrue != test_1.boolEnum ()) {
+    test_1 = constinArgument_inSourcePossibleReference.getter_isReference (SOURCE_FILE ("intermediate-copy-from-references.galgas", 12)).operator_not (SOURCE_FILE ("intermediate-copy-from-references.galgas", 12)) ;
+  }
+  GALGAS_bool var_performLoadStore_444 = test_1 ;
+  const enumGalgasBool test_2 = var_performLoadStore_444.boolEnum () ;
+  if (kBoolTrue == test_2) {
+    GALGAS_objectIR var_loadedResultValue_750 ;
+    {
+    extensionSetter_appendLoadWhenReference (ioObject, ioArgument_ioTemporaries, constinArgument_inSourcePossibleReference, var_loadedResultValue_750, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 15)) ;
+    }
+    GALGAS_objectIR var_result_771 = function_checkAssignmentCompatibility (var_loadedResultValue_750, extensionGetter_type (constinArgument_inTargetReference, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 22)), constinArgument_inErrorLocation, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 20)) ;
+    switch (constinArgument_inTargetReference.enumValue ()) {
+    case GALGAS_LValueRepresentation::kNotBuilt:
+      break ;
+    case GALGAS_LValueRepresentation::kEnum_volatileAbsoluteReference:
+      {
+        const cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference * extractPtr_1125 = (const cEnumAssociatedValues_LValueRepresentation_volatileAbsoluteReference *) (constinArgument_inTargetReference.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_type = extractPtr_1125->mAssociatedValue0 ;
+        const GALGAS_uint extractedValue_address = extractPtr_1125->mAssociatedValue1 ;
+        {
+        extensionSetter_appendStoreVolatileRegister (ioObject, extractedValue_type, extractedValue_address.getter_bigint (SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)), var_result_771, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)) ;
+        }
+      }
+      break ;
+    case GALGAS_LValueRepresentation::kEnum_volatileIndirectReference:
+      {
+        const cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference * extractPtr_1270 = (const cEnumAssociatedValues_LValueRepresentation_volatileIndirectReference *) (constinArgument_inTargetReference.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_type = extractPtr_1270->mAssociatedValue0 ;
+        const GALGAS_string extractedValue_llvmName = extractPtr_1270->mAssociatedValue1 ;
+        {
+        extensionSetter_appendStoreIndirectVolatileRegister (ioObject, extractedValue_type, extractedValue_llvmName, var_result_771, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30)) ;
+        }
+      }
+      break ;
+    case GALGAS_LValueRepresentation::kEnum_universalReference:
+      {
+        const cEnumAssociatedValues_LValueRepresentation_universalReference * extractPtr_1416 = (const cEnumAssociatedValues_LValueRepresentation_universalReference *) (constinArgument_inTargetReference.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_type = extractPtr_1416->mAssociatedValue0 ;
+        const GALGAS_string extractedValue_targetLLVMname = extractPtr_1416->mAssociatedValue1 ;
+        {
+        extensionSetter_appendStoreToUniversalReference (ioObject, extractedValue_targetLLVMname, extractedValue_type, var_result_771, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 32)) ;
+        }
+      }
+      break ;
+    }
+  }else if (kBoolFalse == test_2) {
+    GALGAS_PLMType var_targetType_1516 ;
+    GALGAS_string var_targetLLVMName_1546 ;
+    constinArgument_inTargetReference.method_universalReference (var_targetType_1516, var_targetLLVMName_1546, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 35)) ;
+    GALGAS_PLMType var_sourceType_1609 ;
+    GALGAS_string var_sourceLLVMName_1638 ;
+    constinArgument_inSourcePossibleReference.method_reference (var_sourceType_1609, var_sourceLLVMName_1638, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 36)) ;
+    const enumGalgasBool test_3 = GALGAS_bool (kIsNotEqual, var_sourceType_1609.objectCompare (var_targetType_1516)).boolEnum () ;
+    if (kBoolTrue == test_3) {
+      TC_Array <C_FixItDescription> fixItArray4 ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("object of type $").add_operation (var_targetType_1516.getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 39)).add_operation (GALGAS_string (" cannot be assigned from expression of type $"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 39)).add_operation (var_sourceType_1609.getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 40)), fixItArray4  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 38)) ;
+    }
+    ioObject.addAssign_operation (GALGAS_copyFromReferencesIR::constructor_new (var_sourceType_1609, var_targetLLVMName_1546, var_sourceLLVMName_1638  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 42))  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 42)) ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Extension method '@instructionListIR referenceFromPossibleValue'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
