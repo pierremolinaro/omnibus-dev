@@ -15,8 +15,9 @@ enum @objectIR {
   case literalString  (@uint utf8Size @uint index)
   case zero (@PLMType type)
 
-#--- Static array values
-  case llvmArrayValue (@PLMType type @operandIRList values @uint index)
+#--- Array values
+  case llvmArrayStaticValues (@PLMType type @operandIRList values @uint index)
+  case llvmArrayDynamicValues (@PLMType type @operandIRList values)
   case llvmArrayRepeatedStaticValue (@PLMType type @uint arraySize @objectIR value @uint index)
   case llvmArrayRepeatedDynamicValue (@PLMType type @uint arraySize @objectIR value)
 }
@@ -38,7 +39,7 @@ getter @objectIR llvmName -> @string {
       between result += ", "
     end
     result += "}"
-  case llvmArrayValue (2* index) :
+  case llvmArrayStaticValues (2* index) :
     result = "@gconst." + index
   case llvmArrayRepeatedStaticValue (3* index) :
     result = "@gconst." + index
@@ -48,6 +49,8 @@ getter @objectIR llvmName -> @string {
     result += literalCharacterArrayName (!index) + ", i32 0, i32 0)"
   case llvmArrayRepeatedDynamicValue (3*) :
     error .nowhere : "<< ERROR @objectIR llvmName llvmArrayRepeatedDynamicValue >>\n" : result
+  case llvmArrayDynamicValues (2*) :
+    error .nowhere : "<< ERROR @objectIR llvmName llvmArrayDynamicValues >>\n" : result
   end
 }
 
@@ -61,6 +64,10 @@ getter @objectIR llvmValue -> @string {
   case literalInteger (* @bigint value) : result = [value string]
   case llvmValue (* llvmName) : result = llvmName
   case reference (* llvmName) : result = llvmName
+  case literalString  (@uint size @uint index) :
+    let sizeStr = [size string]
+    result = "getelementptr inbounds ([" + sizeStr + " x i8], [" + sizeStr + " x i8]* "
+    result += literalCharacterArrayName (!index) + ", i32 0, i32 0)"
   case llvmStructureValue (* @sortedOperandIRList inValues) :
     result = "{"
     for () in inValues
@@ -68,7 +75,7 @@ getter @objectIR llvmValue -> @string {
       between result += ", "
     end
     result += "}"
-  case llvmArrayValue (* @operandIRList inValues *) :
+  case llvmArrayStaticValues (* @operandIRList inValues *) :
     result = "["
     for () in inValues
       do result += [mOperand llvmTypeName] + " " + [mOperand llvmValue]
@@ -82,11 +89,9 @@ getter @objectIR llvmValue -> @string {
       between result += ", "
     end
     result += "]"
-  case literalString  (@uint size @uint index) :
-    let sizeStr = [size string]
-    result = "getelementptr inbounds ([" + sizeStr + " x i8], [" + sizeStr + " x i8]* "
-    result += literalCharacterArrayName (!index) + ", i32 0, i32 0)"
   case llvmArrayRepeatedDynamicValue (3*) :
+    error .nowhere : "<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n" : result
+  case llvmArrayDynamicValues (2*) :
     error .nowhere : "<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n" : result
   end
 }
@@ -103,10 +108,11 @@ getter @objectIR type -> @PLMType {
   case literalInteger (type *) : result = type
   case llvmValue (type *) : result = type
   case llvmStructureValue (type *) : result = type
-  case llvmArrayValue (type * *) : result = type
+  case llvmArrayStaticValues (type * *) : result = type
   case literalString  (* *) : result = literalStringType ()
   case llvmArrayRepeatedStaticValue (type 3*) : result = type
-  case llvmArrayRepeatedDynamicValue (type 2*) :  result = type
+  case llvmArrayRepeatedDynamicValue (type 2*) : result = type
+  case llvmArrayDynamicValues (type *) : result = type
   end
 }
 
@@ -139,14 +145,16 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
     result = .zero {!type: inType}
   case llvmStructureValue (* @sortedOperandIRList values) :
     result = .llvmStructureValue {!type: inType !values: values}
-  case llvmArrayValue (* @operandIRList values index) :
-    result = .llvmArrayValue {!type: inType !values: values !index:index}
   case literalString  (@uint size @uint index) :
     result = .literalString {!utf8Size: size !index: index}
   case llvmArrayRepeatedStaticValue (* size value index) :
     result = .llvmArrayRepeatedStaticValue {!type: inType !arraySize:size !value: value !index:index}
   case llvmArrayRepeatedDynamicValue (* size value) :
     result = .llvmArrayRepeatedDynamicValue {!type: inType !arraySize:size !value: value}
+  case llvmArrayStaticValues (* @operandIRList values index) :
+    result = .llvmArrayStaticValues {!type: inType !values: values !index:index}
+  case llvmArrayDynamicValues (* @operandIRList values) :
+    result = .llvmArrayDynamicValues {!type: inType !values: values}
   end
 }
 
@@ -161,7 +169,8 @@ getter @objectIR name -> @string {
   case literalInteger (* @bigint value) : result = [value string]
   case llvmValue (* name) : result = name
   case llvmStructureValue (* *) : result = "{...}"
-  case llvmArrayValue (3*) : result = "[...]"
+  case llvmArrayStaticValues (3*) : result = "[...]"
+  case llvmArrayDynamicValues (2*) : result = "[...]"
   case llvmArrayRepeatedStaticValue (4*) : result = "[...]"
   case llvmArrayRepeatedDynamicValue (3*) : result = "[...]"
   case literalString  (@uint size @uint index) :
@@ -182,7 +191,8 @@ getter @objectIR isStatic -> @bool {
   case literalInteger (* *) : result = true
   case llvmValue (* *) : result = false
   case llvmStructureValue (* *) : result = true
-  case llvmArrayValue (3*) : result = true
+  case llvmArrayStaticValues (3*) : result = true
+  case llvmArrayDynamicValues (2*) : result = false
   case literalString  (* *) : result = true
   case llvmArrayRepeatedStaticValue (4*) : result = true
   case llvmArrayRepeatedDynamicValue (3*) : result = false

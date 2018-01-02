@@ -20,7 +20,7 @@ setter @instructionListIR appendLoadWhenReference
     outResultingValue = inSource
   case llvmStructureValue (* *) :
     outResultingValue = inSource
-  case llvmArrayValue (3*) :
+  case llvmArrayStaticValues (3*) :
     outResultingValue = inSource
   case literalString (**) :
     outResultingValue = inSource
@@ -29,6 +29,8 @@ setter @instructionListIR appendLoadWhenReference
   case llvmArrayRepeatedStaticValue (4*) :
     outResultingValue = inSource
   case llvmArrayRepeatedDynamicValue (3*) :
+    outResultingValue = inSource
+  case llvmArrayDynamicValues (2*) :
     outResultingValue = inSource
   end
 }

@@ -138,6 +138,7 @@ override method @constructorCallAST analyzeExpression
       individualConstructor += ")"
       if constructorKey == individualConstructor then
         @operandIRList operandIRList = {}
+        var resultIsStatic = true
         for () in mParameterList do
           [mExpression analyzeExpression
             !self:inSelfType
@@ -160,9 +161,15 @@ override method @constructorCallAST analyzeExpression
             !staticTypeAllowed:false
           )
           operandIRList += !result
+          resultIsStatic = resultIsStatic && [result isStatic]
         end
-        outResult = .llvmArrayValue {!type:resultType !values:operandIRList !index:[ioStaticEntityMap.mGlobalStructuredConstantList  length]}
-        ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
+        if resultIsStatic then
+          let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  length]
+          outResult = .llvmArrayStaticValues {!type:resultType !values:operandIRList !index:idx}
+          ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
+        else
+          outResult = .llvmArrayDynamicValues {!type:resultType !values:operandIRList}
+        end
       else
         error mErrorLocation : "invalid constructor" : outResult
       end

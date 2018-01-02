@@ -19,7 +19,7 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
     performStore = true
   case llvmStructureValue (* *) :
     performStore = true
-  case llvmArrayValue (3*) :
+  case llvmArrayStaticValues (3*) :
     performStore = true
   case literalString  (* *) :
     performStore = true
@@ -28,6 +28,8 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
   case llvmArrayRepeatedStaticValue (4*) :
     performStore = true
   case llvmArrayRepeatedDynamicValue (3*) :
+    performStore = true
+  case llvmArrayDynamicValues (2*) :
     performStore = true
   end
 #--- Perform strore ?
