@@ -5811,6 +5811,24 @@ GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::extractOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Extension method '@semanticTypePrecedenceGraph noteUINTType'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_noteUINTType (GALGAS_semanticTypePrecedenceGraph & ioObject,
+                                   const GALGAS_uint constinArgument_inBitSize,
+                                   const GALGAS_location constinArgument_inErrorLocation,
+                                   C_Compiler * inCompiler
+                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring var_typeName_981 = GALGAS_lstring::constructor_new (GALGAS_string ("uint").add_operation (constinArgument_inBitSize.getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 14)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 14)), constinArgument_inErrorLocation  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 14)) ;
+  {
+  ioObject.setter_noteNode (function_llvmTypeNameFromPLMname (var_typeName_981, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 15)) COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 15)) ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                     Abstract extension method '@abstractDeclarationAST enterInPrecedenceGraph'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

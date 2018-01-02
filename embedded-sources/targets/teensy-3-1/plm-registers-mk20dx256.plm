@@ -6,7 +6,7 @@ let f_mem $uint32 = 24_000_000
 // chapter 11: Port control and interrupts (PORT) Pin Control registers n
 registers PORTA {
   PCR @user [32] 0x4004_9000 : 4 $uint32 {
-    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
+    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   
   GPCLR @user  0x40049080 $uint32 // Global Pin Control Low Register
@@ -16,7 +16,7 @@ registers PORTA {
 
 registers PORTB {
   PCR @user [32] 0x4004_A000 : 4 $uint32 {
-    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
+    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   GPCLR @user  0x4004A080 $uint32 // Global Pin Control Low Register
   GPCHR @user  0x4004A084 $uint32 // Global Pin Control High Register
@@ -25,7 +25,7 @@ registers PORTB {
 
 registers PORTC {
   PCR @user [32] 0x4004_B000 : 4 $uint32 {
-    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
+    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   GPCLR @user  0x4004B080 $uint32 // Global Pin Control Low Register
   GPCHR @user  0x4004B084 $uint32 // Global Pin Control High Register
@@ -34,7 +34,7 @@ registers PORTC {
 
 registers PORTD {
   PCR @user [32] 0x4004_C000 : 4 $uint32 {
-    7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
+    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   GPCLR @user  0x4004C080 $uint32 // Global Pin Control Low Register
   GPCHR @user  0x4004C084 $uint32 // Global Pin Control High Register
@@ -107,10 +107,10 @@ registers SIM {
   SCGC7 0x40048040 $uint32 // System Clock Gating Control registers 7
   
   CLKDIV1 0x4004_8044 $uint32 {// System Clock Divider registers 1
-    OUTDIV1[4], // Divide value for the core/system clock
-    OUTDIV2[4], // Divide value for the peripheral clock
+    OUTDIV1:4, // Divide value for the core/system clock
+    OUTDIV2:4, // Divide value for the peripheral clock
     4,
-    OUTDIV4[4], // Divide value for the flash clock
+    OUTDIV4:4, // Divide value for the flash clock
     16
   }
   
@@ -247,7 +247,7 @@ let DMA_CHANNEL_COUNT = 16
 
 registers DMAMUX0 {
   CHCFG [DMA_CHANNEL_COUNT] 0x4002_1000 : 1 $uint8 {
-    ENABLE, TRIG, SOURCE [6]
+    ENABLE, TRIG, SOURCE:6
   }
 }
 
@@ -329,7 +329,7 @@ registers DMA {
   
   // Error Status Register
   ES  0x4000_8004 $uint32 {
-    VLD, 14, ECX, 1, CPE, 2, ERRCHN [4], SAE, SOE, DAE, DOE, NCE, SGE, SBE, DBE
+    VLD, 14, ECX, 1, CPE, 2, ERRCHN :4, SAE, SOE, DAE, DOE, NCE, SGE, SBE, DBE
   }
   
   ERQ 0x4000_800C $uint32 { // Enable Request Register
@@ -345,35 +345,35 @@ registers DMA {
   }
   
   CEEI 0x4000_8018 $uint8 { // Clear Enable Error Interrupt Register
-   NOP, CAAE, 2, CEEI [4]
+   NOP, CAAE, 2, CEEI:4
   }
   
   SEEI 0x4000_8019 $uint8 { // Set Enable Error Interrupt Register
-   NOP, SAAE, 2, SEEI [4]
+   NOP, SAAE, 2, SEEI:4
   }
   
   CERQ 0x4000_801A $uint8 { // Clear Enable Request Register
-   NOP, CAER, 2, CERQ [4]
+   NOP, CAER, 2, CERQ:4
   }
   
   SERQ 0x4000_801B $uint8 { // Set Enable Request Register
-   NOP, SAER, 2, SERQ [4]
+   NOP, SAER, 2, SERQ:4
   }
   
   CDNE 0x4000_801C $uint8 { // Clear DONE Status Bit Register
-   NOP, CADN, 2, CDNE [4]
+   NOP, CADN, 2, CDNE:4
   }
   
   SSRT 0x4000_801D $uint8 { // Set START Bit Register
-   NOP, SAST, 2, SSRT [4]
+   NOP, SAST, 2, SSRT:4
   }
   
   CERR 0x4000_801E $uint8 { // Clear Error Register
-   NOP, CAEI, 2, CERR [4]
+   NOP, CAEI, 2, CERR:4
   }
   
   CINT 0x4000_801F $uint8 { // Clear Interrupt Request Register
-   NOP, CAIR, 2, CINT [4]
+   NOP, CAIR, 2, CINT:4
   }
   
   INT 0x4000_8024 $uint32 { // Interrupt Request Register
@@ -395,7 +395,7 @@ registers DMA {
   }
   
   DCHPRI [DMA_CHANNEL_COUNT] 0x4000_8100 : 1 $uint8 { // Channel n Priority Register
-   ECP, DPA, 2, CHPRI [4]
+   ECP, DPA, 2, CHPRI:4
   }
   
   TCD_SADDR [DMA_CHANNEL_COUNT] 0x4000_9000 : 32 $uint32 // TCD Source Address
@@ -403,7 +403,7 @@ registers DMA {
   TCD_SOFF [DMA_CHANNEL_COUNT] 0x4000_9004 : 32 $int16 // TCD Signed Source Address Offset
   
   TCD_ATTR [DMA_CHANNEL_COUNT] 0x4000_9006 : 32 $uint16 { // TCD Transfer Attributes
-    SMOD [4], SSIZE [4], DMOD [4], DSIZE [4]
+    SMOD:4, SSIZE:4, DMOD:4, DSIZE:4
   }
   
   // TCD Minor Byte Count (Minor Loop Disabled)
@@ -420,7 +420,7 @@ registers DMA {
   
   // TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)
   TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] 0x4000_9016 : 32 $uint16 {
-    ELINK, CITER [15]
+    ELINK, CITER:15
   }
   
   // TCD Last Destination Address Adjustment/Scatter Gather Address
@@ -428,13 +428,13 @@ registers DMA {
   
   // TCD Control and Status 
   TCD_CSR [DMA_CHANNEL_COUNT] 0x4000_901C : 32 $uint16 {
-    BWC [2], 2, MAJORLINKCH [4],
+    BWC:2, 2, MAJORLINKCH:4,
     DONE, ACTIVE, MAJORLINK, ESG, DREQ, INTHALF, INTMAJOR, START
   }
   
   // TCD Beginning Minor Loop Link, Major Loop Count (Channel Linking Disabled) 
   TCD_BITER_ELINKNO [DMA_CHANNEL_COUNT] 0x4000_901E : 32 $uint16 {
-    ELINK, BITER [15]
+    ELINK, BITER:15
   }
 }
 
@@ -488,8 +488,8 @@ let MCG_SC_ATME $uint8 = 0x80   // Automatic Trim Machine Enable
 
 registers MCG {
   C1 0x40064000 $uint8 { // MCG Control 1 Register
-    CLKS [2], // Clock Source Select, Selects the clock source for MCGOUTCLK
-    FRDIV [3], // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL
+    CLKS:2, // Clock Source Select, Selects the clock source for MCGOUTCLK
+    FRDIV:3, // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL
     IREFS, // Internal Reference Select, Selects the reference clock source for the FLL
     IRCLKEN, // Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK
     IREFSTEN // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the MCG enters Stop mode
@@ -499,7 +499,7 @@ registers MCG {
     LOCRE0, // Loss of Clock Reset Enable, Determines whether an interrupt 
             // or a reset request is made following a loss of OSC0
     1,
-    RANGE0[2], // Frequency Range Select, Selects the frequency range
+    RANGE0:2, // Frequency Range Select, Selects the frequency range
                // for the crystal oscillator
     HGO0, // High Gain Oscillator Select, Controls the crystal oscillator mode of operation  
     EREFS, // External Reference Select, selects the source for the external reference clock
@@ -517,14 +517,14 @@ registers MCG {
    1,
    PLLCLKEN0, // PLL Clock Enable
    PLLSTEN0,  // PLL Stop Enable
-   PRDIV0 [5] // PLL External Reference Divider
+   PRDIV0:5 // PLL External Reference Divider
   }
   
   C6 0x4006_4005 $uint8 { // MCG Control 6 Register
    LOLIE0, // Loss of Lock Interrrupt Enable
    PLLS, // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00
    CME0,   // Clock Monitor Enable
-   VDIV0[5] // VCO 0 Divider
+   VDIV0:5 // VCO 0 Divider
   }
   
   S @ro 0x40064006 $uint8 { // MCG Status Register
@@ -532,7 +532,7 @@ registers MCG {
    LOCK0, // Lock Status, 0=PLL Unlocked, 1=PLL Locked
    PLLST, // PLL Select Status
    IREFST, // Internal Reference Status
-   CLKST [2], // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL
+   CLKST:2, // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL
    OSCINIT0, // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator
    IRCST   // Internal Reference Clock Status
   }
@@ -1633,13 +1633,13 @@ registers NVIC {
   
   ICSR 0xE000_ED04 $uint32 { // Interrupt Control and State
     NMIPENDSET, 2, PENDSVSET, PENDSVCLR, PENDSTSET, PENDSTCLR, 1, ISRPREEMPT,
-    ISRPENDING, 1, VECTPENDING[9], RETTOBASE, 2, VECTACTIVE[9]
+    ISRPENDING, 1, VECTPENDING:9, RETTOBASE, 2, VECTACTIVE:9
   }
   
   VTOR 0xE000ED08 $uint32 // Vector Table Offset
   
   AIRCR 0xE000ED0C $uint32 { // Application Interrupt and Reset Control
-    VECTKEY[16], ENDIANNESS, 4, PRIGROUP[3],
+    VECTKEY:16, ENDIANNESS, 4, PRIGROUP:3,
     5, SYSRESETREQ, VECTCLRACTIVE, VECTRESET 
   }
 }

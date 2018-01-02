@@ -32,10 +32,6 @@ func %once panicCodeForConvertOverflow -> @bigint { result = 12G }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForRegisterFieldOvf -> @bigint { result = 13G }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func %once panicCodeForNegativeArrayIndex -> @bigint { result = 14G }
 
 func %once panicCodeForTooLargeArrayIndex -> @bigint { result = 15G }

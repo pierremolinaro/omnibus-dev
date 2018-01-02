@@ -74,8 +74,7 @@ override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
       if sliceWidth == 0 then
         error sliceWidthStr : "the bit slice width should be > 0"
       else
-        let sliceTypeName = @lstring.new {!"uint" + sliceWidth !expressionLocation}
-        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
+        [!?ioGraph noteUINTType !sliceWidth !expressionLocation]
       end
     elsif sliceWidthStr.string == "b" then
       let sliceTypeName = @lstring.new {!"bool" !expressionLocation}
