@@ -110,7 +110,7 @@ override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceG
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sliceAssignmentInstructionAST analyze
+override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

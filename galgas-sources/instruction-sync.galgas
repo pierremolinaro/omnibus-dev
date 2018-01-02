@@ -147,7 +147,7 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncInstructionAST analyze
+override method @syncInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

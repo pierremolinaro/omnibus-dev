@@ -40,7 +40,7 @@ override method @assertInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @assertInstructionAST analyze
+override method @assertInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

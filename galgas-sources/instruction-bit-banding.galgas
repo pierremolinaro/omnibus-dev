@@ -60,7 +60,7 @@ override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @bitbandInstructionAST analyze
+override method @bitbandInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

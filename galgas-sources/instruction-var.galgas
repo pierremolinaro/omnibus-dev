@@ -82,7 +82,7 @@ override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInstructionWithAssignmentAST analyze
+override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -136,7 +136,7 @@ override method @varInstructionWithAssignmentAST analyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInstructionAST analyze
+override method @varInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph

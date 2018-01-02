@@ -135,7 +135,7 @@ list @procEffectiveParameterList {
 
 #·······················································································································
 
-override method @standAloneProcedureCallInstructionAST analyze
+override method @standAloneProcedureCallInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -205,7 +205,7 @@ override method @standAloneProcedureCallInstructionAST analyze
 
 #·······················································································································
 
-override method @procedureCallInstructionAST analyze
+override method @procedureCallInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph

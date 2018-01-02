@@ -37,7 +37,7 @@ override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @panicInstructionAST analyze
+override method @panicInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
