@@ -19,7 +19,7 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
     performStore = true
   case llvmStructureValue (* *) :
     performStore = true
-  case llvmArrayValue (* *) :
+  case llvmArrayValue (3*) :
     performStore = true
   case literalString  (* *) :
     performStore = true

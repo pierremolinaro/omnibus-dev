@@ -257,13 +257,13 @@ func %once llvmNameForSelf -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGlobalVariable ?let @string inName -> @string {
-  result = "@" + ["gvar." + inName assemblerRepresentation]
+  result = "@gvar." + [inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGlobalSyncInstance ?let @string inName -> @string {
-  result = "@" + ["gsync." + inName assemblerRepresentation]
+  result = "@gsync." + [inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

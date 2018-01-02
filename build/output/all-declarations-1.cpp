@@ -1045,11 +1045,13 @@ typeComparisonResult cEnumAssociatedValues_objectIR_llvmStructureValue::compare 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_objectIR_llvmArrayValue::cEnumAssociatedValues_objectIR_llvmArrayValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                                                              const GALGAS_operandIRList & inAssociatedValue1
+                                                                                              const GALGAS_operandIRList & inAssociatedValue1,
+                                                                                              const GALGAS_uint & inAssociatedValue2
                                                                                               COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1059,6 +1061,7 @@ void cEnumAssociatedValues_objectIR_llvmArrayValue::description (C_String & ioSt
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -1073,6 +1076,9 @@ typeComparisonResult cEnumAssociatedValues_objectIR_llvmArrayValue::compare (con
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
   }
   return result ;
 }
@@ -1238,13 +1244,14 @@ GALGAS_objectIR GALGAS_objectIR::constructor_llvmStructureValue (const GALGAS_PL
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                             const GALGAS_operandIRList & inAssociatedValue1
+                                                             const GALGAS_operandIRList & inAssociatedValue1,
+                                                             const GALGAS_uint & inAssociatedValue2
                                                              COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_llvmArrayValue ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_llvmArrayValue (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectIR_llvmArrayValue (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -1378,11 +1385,13 @@ void GALGAS_objectIR::method_llvmStructureValue (GALGAS_PLMType & outAssociatedV
 
 void GALGAS_objectIR::method_llvmArrayValue (GALGAS_PLMType & outAssociatedValue0,
                                              GALGAS_operandIRList & outAssociatedValue1,
+                                             GALGAS_uint & outAssociatedValue2,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_llvmArrayValue) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
     C_String s ;
     s << "method @objectIR llvmArrayValue invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -1390,6 +1399,7 @@ void GALGAS_objectIR::method_llvmArrayValue (GALGAS_PLMType & outAssociatedValue
     const cEnumAssociatedValues_objectIR_llvmArrayValue * ptr = (const cEnumAssociatedValues_objectIR_llvmArrayValue *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
   }
 }
 

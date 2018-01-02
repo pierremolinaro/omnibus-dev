@@ -406,7 +406,7 @@ method @driverListIR-element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalVariable (!mDriverName) + " = internal global "
   ioLLVMcode += [[mType type] llvmTypeName] + " {"
   for (value) in mInitialValueList
-    do ioLLVMcode += [value llvmTypeName] + " " + [value llvmName]
+    do ioLLVMcode += [value llvmTypeName] + " " + [value llvmValue]
     between ioLLVMcode += ", "  
   end
   ioLLVMcode += "}\n"

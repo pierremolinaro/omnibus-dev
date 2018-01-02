@@ -88,14 +88,6 @@ map @availableInterruptMap {
 
 #·······················································································································
 
-list @globalTaskVariableList {
-  @string mTaskName
-  @string mTaskTypeName
-  @objectIR mInitialValue
-}
-
-#·······················································································································
-
 struct @semanticContext {
   @targetParameters mTargetParameters
 

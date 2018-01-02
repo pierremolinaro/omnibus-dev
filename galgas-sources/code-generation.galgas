@@ -201,7 +201,7 @@ private proc generateCodeFiles
   end
   llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
   llvmCode += "\n"
-#----------------------------------------- Structure types declaration
+#----------------------------------------- Type declarations
   declareLLVMTypes (!inTypeMap !?llvmCode)
 #----------------------------------------- Static array type declaration
   [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]

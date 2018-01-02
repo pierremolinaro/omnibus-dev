@@ -407,34 +407,36 @@ sortedlist @taskSortedListIR {
 
 #·······················································································································
 
+list @globalTaskVariableList {
+  @string mTaskName
+  @string mTaskTypeName
+  @objectIR mInitialValue
+}
+
+#·······················································································································
+
 method @taskMapIR generateCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
   ?!@primitiveAndServiceIRlist ioServiceList
 {
-#--- Declare task self terminate service
+#---------- Declare task self terminate service
   ioLLVMcode += llvmTitleComment (!"Task self terminate service")
   let selfTerminateImplementationName = llvmNameForServiceImplementation (!llvmNameForTaskAutoBlockService ())
   let selfTerminateCallName = llvmNameForServiceCall (!llvmNameForTaskAutoBlockService ())
   ioServiceList += !selfTerminateCallName !selfTerminateImplementationName !false
   ioLLVMcode += "declare void @" + selfTerminateCallName + " () nounwind noreturn\n\n"
-#--- Declare task variables
+#---------- Declare task variables
   ioLLVMcode += llvmTitleComment (!"Task variables")
   for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
     ioLLVMcode += llvmNameForGlobalVariable (!taskName)
     ioLLVMcode += " = internal global %"
-    ioLLVMcode += [llvmTypeStringFromPLMname (!taskTypeName) assemblerRepresentation] + " "
-    let initialString = [initValueList llvmName]
-    if initialString == "" then
-      ioLLVMcode += "zeroinitializer"
-    else
-      ioLLVMcode += initialString
-    end
-    ioLLVMcode += "\n"
+    ioLLVMcode += [llvmTypeStringFromPLMname (!taskTypeName) assemblerRepresentation]
+    ioLLVMcode += " " + [initValueList llvmValue] + "\n"
   end
   ioLLVMcode += "\n"
-#--- Build ordered task list
+#---------- Build ordered task list
   @taskSortedListIR orderedTaskList = {}
   for task in self do
     orderedTaskList +=
@@ -445,7 +447,7 @@ method @taskMapIR generateCode
       !task.mInitInstructionListIR
       !task.mTaskNameStringIndex
   end
-#--- Declare task stacks and main routine
+#---------- Declare task stacks and main routine
   ioLLVMcode += llvmTitleComment (!"Create task extern routine")
   ioLLVMcode += "declare void @kernel_create_task (i32 %inTaskIndex, i8* %inTaskName, i32* %inStackBufferAddress, "
   ioLLVMcode += "i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n\n"
@@ -457,7 +459,7 @@ method @taskMapIR generateCode
     let effectiveParameter = "(%" + assemblerTaskName + "* " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
     let formalArgument = "(%" + assemblerTaskName + "* " + llvmNameForSelf () + ")"
     ioLLVMcode += llvmSeparatorLine () + "\n"
-  #--- Init
+  #---------- Init
     ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
     [task.mAllocaList generateAllocaList !?ioLLVMcode]
     [task.mSetupInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
