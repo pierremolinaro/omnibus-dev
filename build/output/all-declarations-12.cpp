@@ -1866,8 +1866,9 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/un
   "      lcd.print (!spaces:1)\n"
   "    }\n"
   "    \n"
-  "    var e $uint32 = 5\n"
-  "    var a = $A (!repeated:e)\n"
+  "    var a = $A (!repeated:5)\n"
+  "//    var e $uint32 = 5\n"
+  "//    a = $A (!repeated:e)\n"
   "    var x $uint32 = 0\n"
   "    for i $uint32 in 0 ..< $A.count {\n"
   "      a [i] = 9\n"
@@ -1890,7 +1891,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1996, // Text length
+  2025, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 
