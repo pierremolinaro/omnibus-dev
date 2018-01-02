@@ -178,14 +178,7 @@ map @globalSyncInstanceMapIR {
 
 method @globalSyncInstanceMapIR-element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalSyncInstance (!lkey.string) + " = internal global "
-  ioLLVMcode += [[mInitialValue type] llvmTypeName] + " "
-  let initialString = [mInitialValue llvmName]
-  if initialString == "" then
-    ioLLVMcode += "zeroinitializer"
-  else
-    ioLLVMcode += initialString
-  end
-  ioLLVMcode += "\n"
+  ioLLVMcode += [[mInitialValue type] llvmTypeName] + " " + [mInitialValue llvmValue] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

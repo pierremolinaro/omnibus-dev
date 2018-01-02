@@ -38,12 +38,28 @@ newtype $monTypeTableau : $uint32 [SIZE]
 
 \sectionLabel{Construction d'un tableau}{ConstructionTableau}
 
-L'expression \plm=$monTypeTableau (!repeated:exp)= est une instance du type \plm=$monTypeTableau=, dont tous les éléments sont initialisés avec la valeur de \plm=exp=. Cette expression permet de fixer la valeur initiale d'une variable de ce type.
+Un tableau statique implémente deux constructeurs~:
+\begin{itemize}
+  \item un constructeur qui initialise tous les éléments du tableau à la même valeur (\refSubsectionPage{constructeurTableauRepeated})~;
+  \item un constructeur qui initialise chaque élément du tableau à une valeur particulière (\refSubsectionPage{constructeurTableauValeurParticuliere}).
+\end{itemize}
 
-%
-%\fbox{\begin{minipage}{1.0\textwidth}
-%   En fait, cette construction n'est pas satisfaisante. Rien n'indique qu'un zéro binaire corresponde à une valeur valide d'un élément de n'importe quel type. Pour un entier, cela correspond à $0$, et c'est acceptable, mais pour une structure ? \bf Cette construction est à améliorer.
-%\end{minipage}}
+
+
+
+\subsectionLabel{Constructeur \texttt{(!repeated)}}{constructeurTableauRepeated}
+L'expression \plm=$monTypeTableau (!repeated:exp)= est une instance du type \plm=$monTypeTableau=, dont tous les éléments sont initialisés avec la valeur de \plm=exp=. Par exemple~:
+\begin{PLM}
+let v $uint32 = 0
+var t $uint32 [10] = $uint32 [10] (!repeated:v)
+\end{PLM}
+
+
+\subsectionLabel{Constructeur \texttt{(!!...)}}{constructeurTableauValeurParticuliere}
+Ce constructeur possède autant d'arguments que d'éléments dans le tableau. Le premier est affecté à l'élément d'indice 0, le deuxième à celui d'indice 1, ... Par exemple~:
+\begin{PLM}
+var t $uint32 [3] = $uint32 [3] (!0 !1 !2)
+\end{PLM}
 
 
 

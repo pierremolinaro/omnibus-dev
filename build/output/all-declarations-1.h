@@ -1097,7 +1097,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_llvmArrayValue (const class GALGAS_PLMType & inOperand0,
-                                                                    const class GALGAS_operandIRList & inOperand1
+                                                                    const class GALGAS_operandIRList & inOperand1,
+                                                                    const class GALGAS_uint & inOperand2
                                                                     COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_llvmStructureValue (const class GALGAS_PLMType & inOperand0,
@@ -1141,6 +1142,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_llvmArrayValue (class GALGAS_PLMType & outArgument0,
                                                         class GALGAS_operandIRList & outArgument1,
+                                                        class GALGAS_uint & outArgument2,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
@@ -1419,10 +1421,12 @@ class cEnumAssociatedValues_objectIR_llvmStructureValue : public cEnumAssociated
 class cEnumAssociatedValues_objectIR_llvmArrayValue : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_operandIRList mAssociatedValue1 ;
+  public : const GALGAS_uint mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_objectIR_llvmArrayValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                          const GALGAS_operandIRList & inAssociatedValue1
+                                                          const GALGAS_operandIRList & inAssociatedValue1,
+                                                          const GALGAS_uint & inAssociatedValue2
                                                           COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

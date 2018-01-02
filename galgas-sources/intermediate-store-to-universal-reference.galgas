@@ -43,7 +43,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
       let valueType = [value llvmTypeName]
       ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
     end
-  case llvmArrayValue (* @operandIRList operands) :
+  case llvmArrayValue (* @operandIRList operands *) :
     for (value) in operands do (index)
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex ++
