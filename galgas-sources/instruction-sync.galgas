@@ -154,7 +154,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -175,7 +175,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !context:inContext
         !mode:inMode
         !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
@@ -207,7 +207,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !context:inContext
         !mode:inMode
         !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
@@ -252,7 +252,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
             !context:inContext
             !requiredMode:inMode
             !?temporary:ioTemporaries
-            !?staticStringMap:ioGlobalLiteralStringMap
+            !?staticEntityMap:ioStaticEntityMap
             !?variableMap:ioUniversalMap
             !?alloca:ioAllocaList
             !?instructionListIR:guardInstructionGenerationList
@@ -270,7 +270,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
           !context:inContext
           !requiredMode:inMode
           !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
+          !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap
           !?alloca:ioAllocaList
           !?instructionListIR:guardInstructionGenerationList
@@ -305,7 +305,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
           !context:inContext
           !requiredMode:inMode
           !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
+          !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap
           !?alloca:ioAllocaList
           !?instructionListIR:guardInstructionGenerationList
@@ -346,7 +346,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
       !context:inContext
       !mode:inMode
       !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:branchInstructionGenerationList
@@ -373,7 +373,7 @@ proc analyzeGuardCall
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -406,7 +406,7 @@ proc analyzeGuardCall
       !context:inContext
       !requiredMode:inRequiredMode
       !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -426,7 +426,7 @@ proc analyzeStandaloneGuardCall
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -465,7 +465,7 @@ proc analyzeStandaloneGuardCall
     !context:inContext
     !requiredMode:inRequiredMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
+    !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList

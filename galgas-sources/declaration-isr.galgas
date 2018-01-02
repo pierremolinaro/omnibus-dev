@@ -99,7 +99,7 @@ override method @decoratedISRDeclarations semanticAnalysis
       !context:inContext
       !mode:isr.mMode
       !?temporary:ioTemporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList

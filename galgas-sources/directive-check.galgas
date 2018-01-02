@@ -47,7 +47,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
@@ -62,7 +62,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
+    !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList

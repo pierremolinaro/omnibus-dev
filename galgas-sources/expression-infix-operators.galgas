@@ -88,7 +88,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -103,7 +103,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
+    !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
@@ -123,7 +123,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
+    !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList

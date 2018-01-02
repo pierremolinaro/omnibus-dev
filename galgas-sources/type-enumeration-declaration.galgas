@@ -119,7 +119,7 @@ override method @enumerationDeclarationAST enterInContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
 {
 #---------------- Build constant map
   @classConstantMap enumConstantMap = {}

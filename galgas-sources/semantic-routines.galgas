@@ -96,7 +96,7 @@ proc routineSemanticAnalysis
     !context:inContext
     !mode:inRoutineMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
     !?variableMap:universalMap
     !?alloca:allocaList
     !?generatedCode:instructionGenerationList

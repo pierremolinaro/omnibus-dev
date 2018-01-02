@@ -425,7 +425,7 @@ abstract method @expressionAST analyzeExpression
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -436,7 +436,7 @@ abstract method @expressionAST analyzeExpression
 method @expressionAST analyzeStaticExpression
   ?errorLocation:let @location inErrorLocation
   ?context:let @semanticContext inContext
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   !result:@objectIR outResult
 {
   @instructionListIR instructionGenerationList = {}
@@ -449,7 +449,7 @@ method @expressionAST analyzeStaticExpression
     !context:inContext
     !mode:.bootMode
     !?temporary:*
-    !?staticStringMap:ioGlobalLiteralStringMap
+    !?staticEntityMap:ioStaticEntityMap
     !?variableMap:*
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList

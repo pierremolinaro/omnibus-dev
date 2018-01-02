@@ -7,7 +7,7 @@ proc handleArraySubscriptNew
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
@@ -26,7 +26,7 @@ proc handleArraySubscriptNew
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
+    !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
@@ -71,7 +71,7 @@ proc handleArraySubscript
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
@@ -90,7 +90,7 @@ proc handleArraySubscript
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
+    !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList

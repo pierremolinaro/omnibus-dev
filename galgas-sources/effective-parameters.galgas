@@ -102,7 +102,7 @@ proc analyzeEffectiveParameters
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -155,7 +155,7 @@ proc analyzeEffectiveParameters
         !context:inContext
         !mode:inRequiredMode
         !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList

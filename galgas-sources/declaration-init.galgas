@@ -92,7 +92,7 @@ override method @initAST enterInContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
 {
    let routineNameForInvocationGraph = initNameForInvocationGraph (!llvmDriverNameFromName (!mDriverName) !mInitLocation)
   [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
@@ -178,7 +178,7 @@ private proc initSemanticAnalysis
     !context:inContext
     !mode:.initMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
     !?variableMap:universalMap
     !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList

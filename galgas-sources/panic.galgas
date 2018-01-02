@@ -116,7 +116,7 @@ override method @panicAST enterInContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
 {
   if mIsSetup then
     [!?ioContext.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
@@ -182,7 +182,7 @@ override method @decoratedPanicRoutine semanticAnalysis
     !context:inContext
     !mode:.panicMode
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
     !?variableMap:universalMap
     !?alloca:initAllocaList
     !?generatedCode:instructionGenerationList

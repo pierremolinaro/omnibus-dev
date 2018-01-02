@@ -9,7 +9,7 @@
 struct @generationAdds {
   @uint mUniqueIndex
   @stringset mExternFunctionDeclarationSet
-  @staticStringMap mStaticStringMap
+  @staticEntityMap mStaticStringMap
   @bool mUsesGuards
   @bool mNeedsDynamicMemoryAllocation
 }
@@ -159,7 +159,7 @@ private proc generateCodeFiles
   ?targetParameters:let @targetParameters inTargetParameters
 {
   @generationAdds generationAdds = .default
-  generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
+  generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticEntityMap
   let @generationContext generationContext = .new {
     ![inPanicCodeType type]
     ![inPanicLineType type]
@@ -339,9 +339,9 @@ private proc generateCodeFiles
   end
   llvmCode += "\n"
 #----------------------------------------- Static Strings
-  if [generationAdds.mStaticStringMap count] > 0 then
+  if [generationAdds.mStaticStringMap.mStaticStringMap count] > 0 then
     llvmCode += llvmTitleComment (!"Static strings")
-    for () in generationAdds.mStaticStringMap do
+    for () in generationAdds.mStaticStringMap.mStaticStringMap do
       let lgStr = [[lkey.string utf8Length] + 1 string]
       llvmCode += literalCharacterArrayName (!mIndex) + " = private unnamed_addr constant ["
       llvmCode += lgStr + " x i8] c\"" + lkey.string + "\\00\", align 1\n"

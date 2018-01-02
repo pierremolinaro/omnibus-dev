@@ -126,7 +126,7 @@ override method @syncDeclarationAST enterInContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
 {
 #---------------------------------------- Properties
   @propertyList propertyList = {}
@@ -138,7 +138,7 @@ override method @syncDeclarationAST enterInContext
     [property enterInContext
       !mSyncToolName
       !?context:ioContext
-      !?staticStringMap:ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?propertyList
       !?propertyMap
       !?sortedOperandIRList

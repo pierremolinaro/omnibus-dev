@@ -10,6 +10,23 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             Routine 'semanticAnalysis'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
+                               const class GALGAS_ast constinArgument1,
+                               const class GALGAS_declarationDecorationList constinArgument2,
+                               const class GALGAS_semanticContext constinArgument3,
+                               class GALGAS_subprogramInvocationGraph inArgument4,
+                               const class GALGAS_location constinArgument5,
+                               const class GALGAS_staticEntityMap constinArgument6,
+                               class GALGAS_intermediateCodeStruct & outArgument7,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                         Function 'llvmDriverStringFromName'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

@@ -105,7 +105,7 @@ method @LValueAST analyzeLValue
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -126,7 +126,7 @@ method @LValueAST analyzeLValue
         !context:inContext
         !mode:inMode
         !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap: ioUniversalMap
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
@@ -150,7 +150,7 @@ method @LValueAST analyzeLValue
         !context: inContext
         !mode: inMode
         !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap: ioUniversalMap
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
@@ -174,7 +174,7 @@ method @LValueAST analyzeLValue
         !context: inContext
         !mode: inMode
         !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap: ioUniversalMap
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
@@ -197,7 +197,7 @@ private proc analyzeControlRegisterInLValue
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -253,7 +253,7 @@ private proc analyzeControlRegisterInLValue
             !context: inContext
             !mode: inMode
             !?temporary: ioTemporaries
-            !?staticStringMap: ioGlobalLiteralStringMap
+            !?staticEntityMap:ioStaticEntityMap
             !?variableMap: ioUniversalMap
             !?alloca: ioAllocaList
             !indexExpression 
@@ -296,7 +296,7 @@ private proc analyzeVariableInLValue
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -352,7 +352,7 @@ private proc analyzeVariableInLValue
             !context: inContext
             !mode: inMode
             !?temporary: ioTemporaries
-            !?staticStringMap: ioGlobalLiteralStringMap
+            !?staticEntityMap:ioStaticEntityMap
             !?variableMap:ioUniversalMap
             !?alloca: ioAllocaList
             !indexExpression 
@@ -390,7 +390,7 @@ private proc analyzeSelfAssignmentTarget
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -435,7 +435,7 @@ private proc analyzeSelfAssignmentTarget
             !context: inContext
             !mode: inMode
             !?temporary: ioTemporaries
-            !?staticStringMap: ioGlobalLiteralStringMap
+            !?staticEntityMap:ioStaticEntityMap
             !?variableMap:ioUniversalMap
             !?alloca: ioAllocaList
             !indexExpression 

@@ -85,7 +85,7 @@ override method @typeArrayDeclarationAST enterInContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
 {
 #--- Get element type
   [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?1*]
@@ -107,7 +107,7 @@ override method @typeArrayDeclarationAST enterInContext
     !context:ioContext
     !mode:.bootMode
     !?temporary:temporaries
-    !?staticStringMap:*
+    !?staticEntityMap:*
     !?variableMap:ioContext.mValuedObjectMap # universalMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList

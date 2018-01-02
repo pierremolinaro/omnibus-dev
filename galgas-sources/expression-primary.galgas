@@ -143,7 +143,7 @@ override method @primaryInExpressionAST analyzeExpression
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -162,7 +162,7 @@ override method @primaryInExpressionAST analyzeExpression
         !context: inContext
         !mode: inMode
         !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap: ioUniversalMap
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
@@ -180,7 +180,7 @@ override method @primaryInExpressionAST analyzeExpression
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
@@ -199,7 +199,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -217,7 +217,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
@@ -237,7 +237,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
@@ -257,7 +257,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
         !context: inContext
         !mode: inMode
         !?temporary: ioTemporaries
-        !?staticStringMap: ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap: ioUniversalMap
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
@@ -277,7 +277,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
@@ -295,7 +295,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
@@ -313,7 +313,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
@@ -330,7 +330,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
@@ -350,7 +350,7 @@ proc procAnalyzeAccesListInExpression
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -379,7 +379,7 @@ proc procAnalyzeAccesListInExpression
         !context:inContext
         !mode:inMode
         !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
@@ -397,7 +397,7 @@ proc procAnalyzeAccesListInExpression
           !mode:inMode
           !routineAttributes:inRoutineAttributes
           !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
+          !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap
           !?alloca:ioAllocaList
           !arguments 
@@ -417,7 +417,7 @@ private proc analyzeRegisterExpression
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -463,7 +463,7 @@ private proc analyzeRegisterExpression
            !context: inContext
            !mode: inMode
            !?temporary: ioTemporaries
-           !?staticStringMap: ioGlobalLiteralStringMap
+           !?staticEntityMap:ioStaticEntityMap
            !?variableMap: ioUniversalMap
            !?alloca: ioAllocaList
            !indexExpression 
@@ -536,7 +536,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -566,7 +566,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !context:inContext
         !mode:inMode
         !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
@@ -584,7 +584,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
           !mode:inMode
           !routineAttributes:inRoutineAttributes
           !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
+          !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap
           !?alloca:ioAllocaList
           !arguments 
@@ -637,7 +637,7 @@ private proc handleArrayAccessInExpression
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -652,7 +652,7 @@ private proc handleArrayAccessInExpression
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
       !?alloca: ioAllocaList
       !inIndexExpression 
@@ -683,7 +683,7 @@ private proc handleFunctionCallInExpression
   ?mode:let @mode inMode
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @effectiveArgumentListAST inArguments 
@@ -724,7 +724,7 @@ private proc handleFunctionCallInExpression
         !context:inContext
         !requiredMode:inMode
         !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
+        !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
@@ -775,7 +775,7 @@ private proc handleFunctionCallInExpression
           !context:inContext
           !requiredMode:inMode
           !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
+          !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap
           !?alloca:ioAllocaList
           !?instructionListIR:ioInstructionGenerationList

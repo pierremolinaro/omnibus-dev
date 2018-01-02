@@ -7,13 +7,13 @@
 abstract class @abstractDecoratedDeclaration {
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @declarationDecorationList {
   @abstractDecoratedDeclaration mDeclaration
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 map @infixOperatorMap {
   @PLMType mResultType
@@ -22,7 +22,7 @@ map @infixOperatorMap {
   search searchKey error message "** internal error **"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 map @prefixOperatorMap {
   insert insertKey error message "** internal error **"
@@ -30,8 +30,14 @@ map @prefixOperatorMap {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @staticStringMap
+#! @staticEntityMap
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct @staticEntityMap {
+  @staticStringMap mStaticStringMap
+}
+
+#·······················································································································
 
 map @staticStringMap {
   @uint mIndex
@@ -39,18 +45,18 @@ map @staticStringMap {
   search searchKey error message "-- internal error --"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-setter @staticStringMap findOrAddStaticString ?@string inString !@uint outIndex {
-  if [self hasKey !inString]  then
-    [self searchKey ![inString nowhere] ?outIndex]
+setter @staticEntityMap findOrAddStaticString ?@string inString !@uint outIndex {
+  if [mStaticStringMap hasKey !inString]  then
+    [mStaticStringMap searchKey ![inString nowhere] ?outIndex]
   else
-    outIndex = [self count]
-    [!?self insertKey ![inString nowhere] !outIndex]
+    outIndex = [mStaticStringMap count]
+    [!?mStaticStringMap insertKey ![inString nowhere] !outIndex]
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 map @globalConstantMap {
   @objectIR mValue
@@ -58,13 +64,13 @@ map @globalConstantMap {
   search searchKey error message "there is no '%K' constant"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @operandIRList {
   @objectIR mOperand
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 map @availableInterruptMap {
   @interruptionPanicCode mInterruptionPanicCode
@@ -72,7 +78,7 @@ map @availableInterruptMap {
   search searchKey error message "interrupt '%K' is not defined"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @globalTaskVariableList {
   @string mTaskName
@@ -80,7 +86,7 @@ list @globalTaskVariableList {
   @objectIR mInitialValue
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 struct @semanticContext {
   @targetParameters mTargetParameters
@@ -177,14 +183,14 @@ abstract method @abstractDeclarationAST enterInContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 proc buildSemanticContext
   ?sourceFile:let @lstring inSourceFile
   ?ast:let @ast inAST
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   !context:@semanticContext outSemanticContext
   !@subprogramInvocationGraph outSubprogramInvocationGraph
@@ -210,7 +216,7 @@ proc buildSemanticContext
       !?outDecoratedDeclarationList
       !?outSubprogramInvocationGraph
       !?staticlistValues:ioStaticListValueMap
-      !?staticStringMap:ioGlobalLiteralStringMap
+      !?staticEntityMap:ioStaticEntityMap
     ]
   end
 #--- Build an HTML containing all global constants
@@ -233,11 +239,11 @@ proc buildSemanticContext
      !?context: outSemanticContext
      !?outDecoratedDeclarationList
      !?outSubprogramInvocationGraph
-     !?staticStringMap:ioGlobalLiteralStringMap
+     !?staticEntityMap:ioStaticEntityMap
    ]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring {
   result = ["{" + inLeftTypeName + ", " + inRightTypeName + "}" nowhere]
