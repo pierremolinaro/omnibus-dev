@@ -22,7 +22,7 @@ syntax extension plm_syntax {
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     ${$
     $identifier$ ?let registerGroupName
-    $.$
+    $:$
     $identifier$ ?let registerName
     $:$
     <expression> !?ioAST ?let bitExpression

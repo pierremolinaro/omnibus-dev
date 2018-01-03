@@ -12151,7 +12151,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__3F_selector_3A_, SHIFT (504)
 , END
 // State S386 (index = 10118)
-, C_Lexique_plm_5F_lexique::kToken__2E_, SHIFT (505)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (505)
 , END
 // State S387 (index = 10121)
 , C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (61)
