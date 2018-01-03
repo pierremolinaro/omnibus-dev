@@ -133,178 +133,178 @@ driver digital > root {
     switch port {
     case D0 : // PTB16
       PORTB.PCR [16] = config
-      {GPIOB.PDDR : 16} = dir
+      {GPIOB:PDDR : 16} = dir
     case D1 : // PTB17
       PORTB.PCR [17] = config
-      {GPIOB.PDDR : 17} = dir
+      {GPIOB:PDDR : 17} = dir
     case D2 : // PTD0
       PORTD.PCR [0] = config
-      {GPIOD.PDDR : 0} = dir
+      {GPIOD:PDDR : 0} = dir
     case D3 : // PTA12
       PORTA.PCR [12] = config
-      {GPIOA.PDDR : 12} = dir
+      {GPIOA:PDDR : 12} = dir
     case D4 : // PTA13
       PORTA.PCR [13] = config
-      {GPIOA.PDDR : 13} = dir
+      {GPIOA:PDDR : 13} = dir
     case D5 : // PTD7
       PORTD.PCR [7] = config
-      {GPIOD.PDDR : 7} = dir
+      {GPIOD:PDDR : 7} = dir
     case D6 : // PTD4
       PORTD.PCR [4] = config
-      {GPIOD.PDDR : 4} = dir
+      {GPIOD:PDDR : 4} = dir
     case D7 : // PTD2
       PORTD.PCR [2] = config
-      {GPIOD.PDDR : 2} = dir
+      {GPIOD:PDDR : 2} = dir
     case D8 : // PTD3
       PORTD.PCR [3] = config
-      {GPIOD.PDDR : 3} = dir
+      {GPIOD:PDDR : 3} = dir
     case D9  : // PTC3
       PORTC.PCR [3] = config
-      {GPIOC.PDDR : 3} = dir
+      {GPIOC:PDDR : 3} = dir
     case D10 : // PTC4
       PORTC.PCR [4] = config
-      {GPIOC.PDDR : 4} = dir
+      {GPIOC:PDDR : 4} = dir
     case D11 : // PTC6
       PORTC.PCR [6] = config
-      {GPIOC.PDDR : 6} = dir
+      {GPIOC:PDDR : 6} = dir
     case D12 : // PTC7
       PORTC.PCR [7] = config
-      {GPIOC.PDDR : 7} = dir
+      {GPIOC:PDDR : 7} = dir
     case D13 : // PTC5
       PORTC.PCR [5] = config
-      {GPIOC.PDDR : 5} = dir
+      {GPIOC:PDDR : 5} = dir
     case D14 : // PTD1
       PORTD.PCR [1] = config
-      {GPIOD.PDDR : 1} = dir
+      {GPIOD:PDDR : 1} = dir
     case D15 : // PTC0
       PORTC.PCR [0] = config
-      {GPIOC.PDDR : 0} = dir
+      {GPIOC:PDDR : 0} = dir
     case D16 : // PTB0
       PORTB.PCR [0] = config
-      {GPIOB.PDDR : 0} = dir
+      {GPIOB:PDDR : 0} = dir
     case D17 : // PTB1
       PORTB.PCR [1] = config
-      {GPIOB.PDDR : 1} = dir
+      {GPIOB:PDDR : 1} = dir
     case D18 : // PTB3
       PORTB.PCR [3] = config
-      {GPIOB.PDDR : 3} = dir
+      {GPIOB:PDDR : 3} = dir
     case D19 : // PTB2
       PORTB.PCR [2] = config
-      {GPIOB.PDDR : 2} = dir
+      {GPIOB:PDDR : 2} = dir
     case D20 : // PTD5
       PORTD.PCR [5] = config
-      {GPIOD.PDDR : 5} = dir
+      {GPIOD:PDDR : 5} = dir
     case D21 : // PTD6
       PORTD.PCR [6] = config
-      {GPIOD.PDDR : 6} = dir
+      {GPIOD:PDDR : 6} = dir
     case D22 : // PTC1
       PORTC.PCR [1] = config
-      {GPIOC.PDDR : 1} = dir
+      {GPIOC:PDDR : 1} = dir
     case D23 : // PTC2
       PORTC.PCR [2] = config
-      {GPIOC.PDDR : 2} = dir
+      {GPIOC:PDDR : 2} = dir
     case D24 : // PTE26
       PORTE.PCR [26] = config
-      {GPIOE.PDDR : 26} = dir
+      {GPIOE:PDDR : 26} = dir
     case D25 : // PTA5
       PORTA.PCR [5] = config
-      {GPIOA.PDDR : 5} = dir
+      {GPIOA:PDDR : 5} = dir
     case D26 : // PTA14
       PORTA.PCR [14] = config
-      {GPIOA.PDDR : 14} = dir
+      {GPIOA:PDDR : 14} = dir
     case D27 : // PTA15
       PORTA.PCR [15] = config
-      {GPIOA.PDDR : 15} = dir
+      {GPIOA:PDDR : 15} = dir
     case D28 : // PTA16
       PORTA.PCR [16] = config
-      {GPIOA.PDDR : 16} = dir
+      {GPIOA:PDDR : 16} = dir
     case D29 : // PTB18
       PORTB.PCR [18] = config
-      {GPIOB.PDDR : 18} = dir
+      {GPIOB:PDDR : 18} = dir
     case D30 : // PTB19
       PORTB.PCR [19] = config
-      {GPIOB.PDDR : 19} = dir
+      {GPIOB:PDDR : 19} = dir
     case D31 : // PTB10
       PORTB.PCR [10] = config
-      {GPIOB.PDDR : 10} = dir
+      {GPIOB:PDDR : 10} = dir
     case D32 : // PTB11
       PORTB.PCR [11] = config
-      {GPIOB.PDDR : 11} = dir
+      {GPIOB:PDDR : 11} = dir
     case D33 : // PTE24
       PORTE.PCR [24] = config
-      {GPIOE.PDDR : 24} = dir
+      {GPIOE:PDDR : 24} = dir
     case D34 : // PTE25
       PORTE.PCR [25] = config
-      {GPIOE.PDDR : 25} = dir
+      {GPIOE:PDDR : 25} = dir
     case D35 : // PTC8
       PORTC.PCR [8] = config
-      {GPIOC.PDDR : 8} = dir
+      {GPIOC:PDDR : 8} = dir
     case D36 : // PTC9
       PORTC.PCR [9] = config
-      {GPIOC.PDDR : 9} = dir
+      {GPIOC:PDDR : 9} = dir
     case D37 : // PTC10
       PORTC.PCR [10] = config
-      {GPIOC.PDDR : 10} = dir
+      {GPIOC:PDDR : 10} = dir
     case D38 : // PTC11
        PORTC.PCR [11] = config
-      {GPIOC.PDDR : 11} = dir
+      {GPIOC:PDDR : 11} = dir
    case D39 : // PTA17
       PORTA.PCR [17] = config
-      {GPIOA.PDDR : 17} = dir
+      {GPIOA:PDDR : 17} = dir
     case D40 : // PTA28
       PORTA.PCR [28] = config
-      {GPIOA.PDDR : 28} = dir
+      {GPIOA:PDDR : 28} = dir
     case D41 : // PTA29
       PORTA.PCR [29] = config
-      {GPIOA.PDDR : 29} = dir
+      {GPIOA:PDDR : 29} = dir
     case D42 : // PTA26
       PORTA.PCR [26] = config
-      {GPIOA.PDDR : 26} = dir
+      {GPIOA:PDDR : 26} = dir
     case D43 : // PTB20
       PORTB.PCR [20] = config
-      {GPIOB.PDDR : 20} = dir
+      {GPIOB:PDDR : 20} = dir
     case D44 : // PTB22
       PORTB.PCR [22] = config
-      {GPIOB.PDDR : 22} = dir
+      {GPIOB:PDDR : 22} = dir
     case D45 : // PTB23
       PORTB.PCR [23] = config
-      {GPIOB.PDDR : 23} = dir
+      {GPIOB:PDDR : 23} = dir
     case D46 : // PTB21
       PORTB.PCR [21] = config
-      {GPIOB.PDDR : 21} = dir
+      {GPIOB:PDDR : 21} = dir
     case D47 : // PTD8
       PORTD.PCR [8] = config
-      {GPIOD.PDDR : 8} = dir
+      {GPIOD:PDDR : 8} = dir
     case D48 : // PTD9
       PORTD.PCR [9] = config
-      {GPIOD.PDDR : 9} = dir
+      {GPIOD:PDDR : 9} = dir
     case D49 : // PTB4
       PORTB.PCR [4] = config
-      {GPIOB.PDDR : 4} = dir
+      {GPIOB:PDDR : 4} = dir
     case D50 : // PTB5
       PORTB.PCR [5] = config
-      {GPIOB.PDDR : 5} = dir
+      {GPIOB:PDDR : 5} = dir
     case D51 : // PTD14
       PORTD.PCR [14] = config
-      {GPIOD.PDDR : 14} = dir
+      {GPIOD:PDDR : 14} = dir
     case D52 : // PTD13
       PORTD.PCR [13] = config
-      {GPIOD.PDDR : 13} = dir
+      {GPIOD:PDDR : 13} = dir
     case D53 : // PTD12
       PORTD.PCR [12] = config
-      {GPIOD.PDDR : 12} = dir
+      {GPIOD:PDDR : 12} = dir
     case D54 : // PTD15
        PORTD.PCR [15] = config
-      {GPIOD.PDDR : 15} = dir
+      {GPIOD:PDDR : 15} = dir
    case D55 : // PTD11
       PORTD.PCR [11] = config
-      {GPIOD.PDDR : 11} = dir
+      {GPIOD:PDDR : 11} = dir
     case D56 : // PTE10
       PORTE.PCR [10] = config
-      {GPIOE.PDDR : 10} = dir
+      {GPIOE:PDDR : 10} = dir
     case D57 : // PTE11
       PORTE.PCR [11] = config
-      {GPIOE.PDDR : 11} = dir
+      {GPIOE:PDDR : 11} = dir
     }
   }
   
