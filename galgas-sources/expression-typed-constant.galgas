@@ -47,6 +47,7 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
   end
   for (access) in mAccessList do
     switch access
+    case integerSlice (2*) :
     case property (@lstring unused name) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
@@ -77,7 +78,8 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
   end
   for (access) in mAccessList do
     switch access
-    case property (@lstring unused name) :
+    case integerSlice (2*) :
+    case property (*) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :

@@ -173,6 +173,8 @@ task T3 @priority 100 @stacksize 512 {
 
   func testReleaseLocalVar (?in: inData $dArray) {
     externalSection (!in:inData)
+    var d $uint32 = 143
+    var x $uint3 = d [3 ... 5]
   }
 
 }

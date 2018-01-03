@@ -149,6 +149,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__7E_,
    kToken__2D__3E_,
    kToken__2E__2E__3C_,
+   kToken__2E__2E__2E_,
    kToken__7C_,
    kToken__7C__3D_,
    kToken__26_,
@@ -209,7 +210,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 114 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 115 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -10842,6 +10843,7 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_property,
+    kEnum_integerSlice,
     kEnum_arrayAccess,
     kEnum_funcCall
   } enumeration ;
@@ -10879,6 +10881,10 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
                                                                                   const class GALGAS_location & inOperand2
                                                                                   COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_primaryInExpressionAccessAST constructor_integerSlice (const class GALGAS_lbigint & inOperand0,
+                                                                                      const class GALGAS_lbigint & inOperand1
+                                                                                      COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_primaryInExpressionAccessAST constructor_property (const class GALGAS_lstring & inOperand0
                                                                                   COMMA_LOCATION_ARGS) ;
 
@@ -10902,6 +10908,11 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_integerSlice (class GALGAS_lbigint & outArgument0,
+                                                      class GALGAS_lbigint & outArgument1,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_property (class GALGAS_lstring & outArgument0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
@@ -10912,6 +10923,8 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayAccess (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFuncCall (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIntegerSlice (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
 
@@ -10944,6 +10957,24 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_property : public cEnum
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_property (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice : public cEnumAssociatedValues {
+  public : const GALGAS_lbigint mAssociatedValue0 ;
+  public : const GALGAS_lbigint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice (const GALGAS_lbigint & inAssociatedValue0,
+                                                                            const GALGAS_lbigint & inAssociatedValue1
+                                                                            COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

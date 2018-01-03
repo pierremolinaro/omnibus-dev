@@ -1,337 +1,284 @@
 lexique plm_lexique {
 
-@string tokenString
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   Identifiers and keywords                                                                                            
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Identifiers and keywords
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-style keywordsStyle -> "Keywords"
-
-$identifier$ ! tokenString error message "an identifier"
-
-list keyWordList style keywordsStyle error message "the '%K' keyword" {
-  "addressof",
-  "and",
-  "assert",
-  "boot",
-  "case",
-  "check",
-  "convert",
-  "driver",
-  "else",
-  "enum",
-  "exit",
-  "extend",
-  "extern",
-  "for",
-  "func",
-  "guard",
-  "if",
-  "import",
-  "in",
-  "init",
-  "isr",
-  "let",
-  "loop",
-  "no",
-  "nop",
-  "not",
-  "on",
-  "opaque",
-  "or",
-  "panic",
-  "primitive",
-  "public",
-  "registers",
-  "required",
-  "section",
-  "self",
-  "service",
-  "setup",
-  "sizeof",
-  "struct",
-  "staticArray",
-  "switch",
-  "sync",
-  "system",
-  "target",
-  "task",
-  "truncate",
-  "typealias",
-  "var",
-  "user",
-  "while",
-  "xor",
-  "yes"
-}
-
-rule isUnicodeLetter {
-  repeat
-    enterCharacterIntoString (!?tokenString !*)
-  while isUnicodeLetter | '_' | '0'->'9' :
-  end
-  send search tokenString in keyWordList default $identifier$
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   Attributes                                                                                                          
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Attributes
-
-style attributeStyle -> "Attributes"
-
-$@attribute$ ! tokenString  style attributeStyle error message "an attribute @..."
-
-message attributeError : "in an attribute name, a letter, a digit or a dot should follow the '@' character"
-
-rule '@' {
-  select
-  case isUnicodeLetter | '0'->'9' :
+  @string tokenString
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Identifiers and keywords
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style keywordsStyle -> "Keywords"
+  
+  $identifier$ ! tokenString error message "an identifier"
+  
+  list keyWordList style keywordsStyle error message "the '%K' keyword" {
+    "addressof",
+    "and",
+    "assert",
+    "boot",
+    "case",
+    "check",
+    "convert",
+    "driver",
+    "else",
+    "enum",
+    "exit",
+    "extend",
+    "extern",
+    "for",
+    "func",
+    "guard",
+    "if",
+    "import",
+    "in",
+    "init",
+    "isr",
+    "let",
+    "loop",
+    "no",
+    "nop",
+    "not",
+    "on",
+    "opaque",
+    "or",
+    "panic",
+    "primitive",
+    "public",
+    "registers",
+    "required",
+    "section",
+    "self",
+    "service",
+    "setup",
+    "sizeof",
+    "struct",
+    "staticArray",
+    "switch",
+    "sync",
+    "system",
+    "target",
+    "task",
+    "truncate",
+    "typealias",
+    "var",
+    "user",
+    "while",
+    "xor",
+    "yes"
+  }
+  
+  rule isUnicodeLetter {
     repeat
       enterCharacterIntoString (!?tokenString !*)
-    while isUnicodeLetter | '0'->'9' | '.' :
+    while isUnicodeLetter | '_' | '0'->'9' :
     end
-  default
-    error attributeError
-  end
-  send $@attribute$ 
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   Type Name                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Type
-
-style typeStyle -> "Types"
-
-$\$type$ ! tokenString  style typeStyle error message "a type $..."
-
-message typeError : "in a type name, a letter or a digit should follow the '$' character"
-
-rule '$' {
-  select
-  case isUnicodeLetter :
-    repeat
-      enterCharacterIntoString (!?tokenString !*)
-    while isUnicodeLetter | '0' -> '9' | '_' :
+    send search tokenString in keyWordList default $identifier$
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Attributes
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style attributeStyle -> "Attributes"
+  
+  $@attribute$ ! tokenString  style attributeStyle error message "an attribute @..."
+  
+  message attributeError : "in an attribute name, a letter, a digit or a dot should follow the '@' character"
+  
+  rule '@' {
+    select
+    case isUnicodeLetter | '0'->'9' :
+      repeat
+        enterCharacterIntoString (!?tokenString !*)
+      while isUnicodeLetter | '0'->'9' | '.' :
+      end
+    default
+      error attributeError
     end
-  default
-    error typeError
-  end
-  send $\$type$ 
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   Literal integers                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Literal integers
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-style integerStyle -> "Integer Constants"
-@bigint bigInteger
-$integer$ !bigInteger style integerStyle error message "a literal integer"
-
-message internalError : "internal error"
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-message binaryDigitError : "0b should be followed by a binary digit"
-
-rule "0b" {
-  repeat
-  while '_' :
-  end
-  select
-  case '0'->'1' :
-    enterBinaryDigitIntoBigInt (!* !?bigInteger error internalError)
+    send $@attribute$ 
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Type Name                                                                                                           
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style typeStyle -> "Types"
+  
+  $\$type$ ! tokenString  style typeStyle error message "a type $..."
+  
+  message typeError : "in a type name, a letter or a digit should follow the '$' character"
+  
+  rule '$' {
+    select
+    case isUnicodeLetter :
+      repeat
+        enterCharacterIntoString (!?tokenString !*)
+      while isUnicodeLetter | '0' -> '9' | '_' :
+      end
+    default
+      error typeError
+    end
+    send $\$type$ 
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Literal integer
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style integerStyle -> "Integer Constants"
+  @bigint bigInteger
+  $integer$ !bigInteger style integerStyle error message "a literal integer"
+  
+  message internalError : "internal error"
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  message binaryDigitError : "0b should be followed by a binary digit"
+  
+  rule "0b" {
     repeat
-    while '0'->'1' :
+    while '_' :
+    end
+    select
+    case '0'->'1' :
       enterBinaryDigitIntoBigInt (!* !?bigInteger error internalError)
+      repeat
+      while '0'->'1' :
+        enterBinaryDigitIntoBigInt (!* !?bigInteger error internalError)
+      while '_' :
+      end
+      send $integer$
+    default
+      error binaryDigitError
+    end
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  message hexDigitError : "0x should be followed by a hexadecimal digit"
+  
+  rule "0x" {
+    repeat
     while '_' :
     end
-    send $integer$
-  default
-    error binaryDigitError
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-message hexDigitError : "0x should be followed by a hexadecimal digit"
-
-rule "0x" {
-  repeat
-  while '_' :
-  end
-  select
-  case '0'->'9' | 'a'->'f' | 'A'->'F' :
-    enterHexDigitIntoBigInt (!* !?bigInteger error internalError)
-    repeat
-    while '0'->'9' | 'a'->'f' | 'A'->'F' :
+    select
+    case '0'->'9' | 'a'->'f' | 'A'->'F' :
       enterHexDigitIntoBigInt (!* !?bigInteger error internalError)
+      repeat
+      while '0'->'9' | 'a'->'f' | 'A'->'F' :
+        enterHexDigitIntoBigInt (!* !?bigInteger error internalError)
+      while '_' :
+      end
+      send $integer$
+    default
+      error hexDigitError
+    end
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  rule '0'->'9' {
+    enterDecimalDigitIntoBigInt (!* !?bigInteger error internalError)
+    repeat
+    while '0'->'9' :
+      enterDecimalDigitIntoBigInt (!* !?bigInteger error internalError)
     while '_' :
     end
     send $integer$
-  default
-    error hexDigitError
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-rule '0'->'9' {
-  enterDecimalDigitIntoBigInt (!* !?bigInteger error internalError)
-  repeat
-  while '0'->'9' :
-    enterDecimalDigitIntoBigInt (!* !?bigInteger error internalError)
-  while '_' :
-  end
-  send $integer$
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   Literal character strings                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Literal character strings
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-style stringStyle -> "Literal Strings"
-$"string"$ ! tokenString style stringStyle %nonAtomicSelection error message "a literal character string \"...\""
-
-message incorrectStringEnd : "string does not end with '\"'"
-
-rule '"' {
-  repeat
-  while "\\\"" :
-    enterCharacterIntoString (!?tokenString !'"')
-  while ' ' | '!' | '#'-> '\uFFFD' :
-    enterCharacterIntoString (!?tokenString !*)
-  end
-  select
-  case '"' :
-    send $"string"$
-  default
-    error incorrectStringEnd
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   Comment                                                                                                             
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Comment
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-style commentStyle -> "Comments"
-$comment$ style commentStyle %nonAtomicSelection error message "a comment"
-rule "//" {
-  repeat
-  while '\u0001' -> '\u0009' | '\u000B' | '\u000C' | '\u000E' -> '\uFFFD' :
-  end
-  drop $comment$
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   Delimiters                                                                                                          
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Delimiters
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-style delimitersStyle -> "Delimiters"
-list delimitorsList style delimitersStyle error message "the '%K' delimitor" {
-  ":", ".",  ",", ";", "{", "}", "=", "(", ")", "_",
-  "==", "≠", "<", "≤", ">", "≥",
-  "[", "]", "<<", ">>",
-  "~",
-  "->", "..<",
-  "|", "|=",
-  "&", "&=",
-  "^", "^=",
-  "+", "+%", "+=", "+%=",
-  "-", "-%", "-=", "-%=",
-  "*", "*%", "*=", "*%=",
-  "/", "!/", "/=", "!/=",
-  "%", "!%",  "%=", "!%=",
-  "<<=", ">>="
-}
-
-rule list delimitorsList
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#                                                                                                                       
-#   S E L E C T O R S                                                                                                   
-#                                                                                                                       
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Selectors
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-style selectorStyle -> "Selectors"
-
-$?selector:$ !tokenString  style selectorStyle error message "the '?' or '?selector:' delimitor"
-$?!selector:$ !tokenString  style selectorStyle error message "the '?!' or '?!selector:' delimitor"
-$!selector:$ !tokenString  style selectorStyle error message "the '!' or '!selector:' delimitor"
-$!?selector:$ !tokenString  style selectorStyle error message "the '!?' or '!?selector:' delimitor"
-
-rule '?' {
-  tag onlyInterrogationMark
-  select
-  case '!' :
-    tag onlyExclamationInterrogationMark
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Literal character strings
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style stringStyle -> "Literal Strings"
+  $"string"$ ! tokenString style stringStyle %nonAtomicSelection error message "a literal character string \"...\""
+  
+  message incorrectStringEnd : "string does not end with '\"'"
+  
+  rule '"' {
+    repeat
+    while "\\\"" :
+      enterCharacterIntoString (!?tokenString !'"')
+    while ' ' | '!' | '#'-> '\uFFFD' :
+      enterCharacterIntoString (!?tokenString !*)
+    end
     select
-    case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
-      repeat
-        enterCharacterIntoString (!?tokenString !* )
-      while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
-      end
+    case '"' :
+      send $"string"$
+    default
+      error incorrectStringEnd
+    end
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Comment
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style commentStyle -> "Comments"
+  $comment$ style commentStyle %nonAtomicSelection error message "a comment"
+  rule "//" {
+    repeat
+    while '\u0001' -> '\u0009' | '\u000B' | '\u000C' | '\u000E' -> '\uFFFD' :
+    end
+    drop $comment$
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Delimiters
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style delimitersStyle -> "Delimiters"
+  list delimitorsList style delimitersStyle error message "the '%K' delimitor" {
+    ":", ".",  ",", ";", "{", "}", "=", "(", ")", "_",
+    "==", "≠", "<", "≤", ">", "≥",
+    "[", "]", "<<", ">>",
+    "~",
+    "->", "..<", "...",
+    "|", "|=",
+    "&", "&=",
+    "^", "^=",
+    "+", "+%", "+=", "+%=",
+    "-", "-%", "-=", "-%=",
+    "*", "*%", "*=", "*%=",
+    "/", "!/", "/=", "!/=",
+    "%", "!%",  "%=", "!%=",
+    "<<=", ">>="
+  }
+  
+  rule list delimitorsList
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Selectors
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style selectorStyle -> "Selectors"
+  
+  $?selector:$ !tokenString  style selectorStyle error message "the '?' or '?selector:' delimitor"
+  $?!selector:$ !tokenString  style selectorStyle error message "the '?!' or '?!selector:' delimitor"
+  $!selector:$ !tokenString  style selectorStyle error message "the '!' or '!selector:' delimitor"
+  $!?selector:$ !tokenString  style selectorStyle error message "the '!?' or '!?selector:' delimitor"
+  
+  rule '?' {
+    tag onlyInterrogationMark
+    select
+    case '!' :
+      tag onlyExclamationInterrogationMark
       select
-      case ':' :
+      case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
+        repeat
+          enterCharacterIntoString (!?tokenString !* )
+        while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
+        end
+        select
+        case ':' :
+          send $?!selector:$
+        default
+          resetString (!?tokenString )
+          rewind onlyExclamationInterrogationMark send $?!selector:$
+        end
+      default
         send $?!selector:$
-      default
-        resetString (!?tokenString )
-        rewind onlyExclamationInterrogationMark send $?!selector:$
       end
-    default
-      send $?!selector:$
-    end
-  case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
-    repeat
-      enterCharacterIntoString (!?tokenString !* )
-    while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
-    end
-    select
-    case ':' :
-      send $?selector:$
-    default
-      resetString (!?tokenString )
-      rewind onlyInterrogationMark send $?selector:$
-    end
-  default
-    send $?selector:$
-  end
-}
-
-rule '!' {
-  tag onlyExclamationMark
-  select
-  case '?' :
-    tag onlyInterrogationExclamationMark
-    select
     case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
       repeat
         enterCharacterIntoString (!?tokenString !* )
@@ -339,43 +286,62 @@ rule '!' {
       end
       select
       case ':' :
-        send $!?selector:$
+        send $?selector:$
       default
         resetString (!?tokenString )
-        rewind onlyInterrogationExclamationMark send $!?selector:$
+        rewind onlyInterrogationMark send $?selector:$
       end
     default
-      send $!?selector:$
+      send $?selector:$
     end
-  case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
-    repeat
-      enterCharacterIntoString (!?tokenString !* )
-    while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
-    end
+  }
+  
+  rule '!' {
+    tag onlyExclamationMark
     select
-    case ':' :
-      send $!selector:$
+    case '?' :
+      tag onlyInterrogationExclamationMark
+      select
+      case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
+        repeat
+          enterCharacterIntoString (!?tokenString !* )
+        while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
+        end
+        select
+        case ':' :
+          send $!?selector:$
+        default
+          resetString (!?tokenString )
+          rewind onlyInterrogationExclamationMark send $!?selector:$
+        end
+      default
+        send $!?selector:$
+      end
+    case 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' :
+      repeat
+        enterCharacterIntoString (!?tokenString !* )
+      while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
+      end
+      select
+      case ':' :
+        send $!selector:$
+      default
+        resetString (!?tokenString )
+        rewind onlyExclamationMark send $!selector:$
+      end
     default
-      resetString (!?tokenString )
-      rewind onlyExclamationMark send $!selector:$
+      send $!selector:$
     end
-  default
-    send $!selector:$
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   Separators                                                                                                          
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Separators
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-rule '\u0001' -> ' ' {
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Separators
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  rule '\u0001' -> ' ' {
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 }
 
