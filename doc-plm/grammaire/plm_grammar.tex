@@ -191,13 +191,13 @@
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \node (p6-29) [point] {}; & \\
-    & & & & & & & & & & & & & & & & & & & & & & & & & & \node (p5-26) [point] {}; & \\
-    & & & & & & & & & & & & & & & & & & & \node (p4-19) [terminal] {[}; & \node (p4-20) [terminal] {integer}; & \node (p4-21) [terminal] {]}; & \\
-    & & & & & & & & & & & & & & & & & \node (p3-17) [terminal] {identifier}; & \node (p3-18) [point] {}; & \node (p3-19) [point] {}; & & & \node (p3-22) [point] {}; & & & \node (p3-25) [terminal] {,}; & \\
-    & & & & & & & & & & & \node (p2-11) [point] {}; & & & \node (p2-14) [terminal] {\{}; & \node (p2-15) [point] {}; & \node (p2-16) [point] {}; & \node (p2-17) [terminal] {integer}; & & & & & & \node (p2-23) [point] {}; & \node (p2-24) [point] {}; & & & \node (p2-27) [terminal] {\}}; & \\
-    & & & & & & & & \node (p1-8) [point] {}; & \node (p1-9) [nonterminal] {\nonTerminalSymbol{registerDeclaration}{9}}; & \node (p1-10) [point] {}; & & \node (p1-12) [terminal] {\$type}; & \node (p1-13) [point] {}; & \node (p1-14) [point] {}; & & & & & & & & & & & & & & \node (p1-28) [point] {}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {registers}; & \node (p0-3) [terminal] {identifier}; & \node (p0-4) [terminal] {\{}; & \node (p0-5) [point] {}; & \node (p0-6) [point] {}; & \node (p0-7) [point] {}; & & & & & & & & & & & & & & & & & & & & & & & \node (p0-30) [terminal] {\}}; & \node (p0-31) [lastPoint] {}; & \\
+    & & & & & & & & & & & & & & & & & & & & & & & & & & & & \node (p6-28) [point] {}; & \\
+    & & & & & & & & & & & & & & & & & & & & & & & & & \node (p5-25) [point] {}; & \\
+    & & & & & & & & & & & & & & & & & & & \node (p4-19) [terminal] {:}; & \node (p4-20) [terminal] {integer}; & \\
+    & & & & & & & & & & & & & & & & & \node (p3-17) [terminal] {identifier}; & \node (p3-18) [point] {}; & \node (p3-19) [point] {}; & & \node (p3-21) [point] {}; & & & \node (p3-24) [terminal] {,}; & \\
+    & & & & & & & & & & & \node (p2-11) [point] {}; & & & \node (p2-14) [terminal] {\{}; & \node (p2-15) [point] {}; & \node (p2-16) [point] {}; & \node (p2-17) [terminal] {integer}; & & & & & \node (p2-22) [point] {}; & \node (p2-23) [point] {}; & & & \node (p2-26) [terminal] {\}}; & \\
+    & & & & & & & & \node (p1-8) [point] {}; & \node (p1-9) [nonterminal] {\nonTerminalSymbol{registerDeclaration}{9}}; & \node (p1-10) [point] {}; & & \node (p1-12) [terminal] {\$type}; & \node (p1-13) [point] {}; & \node (p1-14) [point] {}; & & & & & & & & & & & & & \node (p1-27) [point] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {registers}; & \node (p0-3) [terminal] {identifier}; & \node (p0-4) [terminal] {\{}; & \node (p0-5) [point] {}; & \node (p0-6) [point] {}; & \node (p0-7) [point] {}; & & & & & & & & & & & & & & & & & & & & & & \node (p0-29) [terminal] {\}}; & \node (p0-30) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
@@ -214,21 +214,20 @@
   \draw (p3-17) -- (p3-19) ;
   \draw[->] (p3-18) |- (p4-19) ;
   \draw[->] (p4-19) -- (p4-20) ;
-  \draw[->] (p4-20) -- (p4-21) ;
-  \draw (p3-19) -- (p3-22) ;
-  \draw[->] (p4-21) -| (p3-22) ;
-  \draw (p2-17) -- (p2-23) ;
-  \draw[->] (p3-22) -| (p2-23) ;
-  \draw[->] (p2-24) |- (p3-25) ;
-  \draw[->] (p5-26) -| (p2-15) ;
-  \draw[->] (p3-25) -| (p5-26) ;
-  \draw[->] (p2-23) -- (p2-27) ;
-  \draw (p1-14) -- (p1-28) ;
-  \draw[->] (p2-27) -| (p1-28) ;
-  \draw[->] (p6-29) -| (p0-5) ;
-  \draw[->] (p1-28) -| (p6-29) ;
-  \draw[->] (p0-6) -- (p0-30) ;
-  \draw[->] (p0-30) -- (p0-31) ;
+  \draw (p3-19) -- (p3-21) ;
+  \draw[->] (p4-20) -| (p3-21) ;
+  \draw (p2-17) -- (p2-22) ;
+  \draw[->] (p3-21) -| (p2-22) ;
+  \draw[->] (p2-23) |- (p3-24) ;
+  \draw[->] (p5-25) -| (p2-15) ;
+  \draw[->] (p3-24) -| (p5-25) ;
+  \draw[->] (p2-22) -- (p2-26) ;
+  \draw (p1-14) -- (p1-27) ;
+  \draw[->] (p2-26) -| (p1-27) ;
+  \draw[->] (p6-28) -| (p0-5) ;
+  \draw[->] (p1-27) -| (p6-28) ;
+  \draw[->] (p0-6) -- (p0-29) ;
+  \draw[->] (p0-29) -- (p0-30) ;
 \end{tikzpicture}
 
 \ruleSubsection{plm\_syntax}{declaration-global-constant}{25}
@@ -1944,7 +1943,7 @@
 
 \nonTerminalSection{registerDeclaration}{9}
 
-\ruleSubsection{plm\_syntax}{declaration-control-register}{108}
+\ruleSubsection{plm\_syntax}{declaration-control-register}{107}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {

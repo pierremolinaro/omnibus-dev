@@ -4,6 +4,7 @@
 
 enum @primaryInExpressionAccessAST {
   case property (@lstring name)
+  case integerSlice (@lbigint low @lbigint high)
   case arrayAccess (@expressionAST index @location endOfIndex)
   case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location endOfArguments)
 }
@@ -55,6 +56,13 @@ syntax extension plm_syntax {
       outAccessList += !.property {!name:propertyName}
     while
       $[$
+      $integer$ ?let low
+      $...$
+      $integer$ ?let high
+      $]$
+      outAccessList += !.integerSlice {!low:low !high:high}
+    while
+      $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
       $]$
@@ -84,7 +92,8 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
   end
   for (access) in mAccessList do
     switch access
-    case property (@lstring unused name) :
+    case integerSlice (2*) :
+    case property (*) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
@@ -111,7 +120,11 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
 override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (access) in mAccessList do
     switch access
-    case property (@lstring unused name) :
+    case integerSlice (@lbigint low @lbigint high) :
+      if high.bigint >= low.bigint then
+        [!?ioGraph noteUINTType ![high.bigint - low.bigint + 1G uint] !low.location]
+      end
+    case property (*) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
@@ -360,6 +373,15 @@ proc procAnalyzeAccesListInExpression
 #--- Access list
   for (access) in inAccessList do
     switch access
+    case integerSlice (@lbigint low @lbigint high) :
+      handleSliceInExpression (
+        !context: inContext
+        !?ioResult
+        !low
+        !high
+        !?temporary: ioTemporaries
+        !?instructionListIR: ioInstructionGenerationList
+      )
     case property (@lstring propertyName) :
       handlePropertyAccessInExpression (
         !?ioResult
@@ -496,6 +518,8 @@ private proc analyzeRegisterExpression
       var currentType = inRegisterType
       for (access) in accessList do
         switch access
+        case integerSlice (@lbigint low *) :
+          error low : "cannot extract a slice from a register"
         case property (@lstring propertyName) :
           [currentSliceMap searchKey
             !propertyName
@@ -547,6 +571,15 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
 #--- Access list
   for (access) in mAccessList do
     switch access
+    case integerSlice (@lbigint low @lbigint high) :
+      handleSliceInExpression (
+        !context: inContext
+        !?outResult
+        !low
+        !high
+        !?temporary: ioTemporaries
+        !?instructionListIR: ioInstructionGenerationList
+      )
     case property (@lstring propertyName) :
       handlePropertyAccessInExpression (
         !?outResult
@@ -592,6 +625,36 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         )
       end
     end
+  end
+}
+
+#·······················································································································
+
+proc handleSliceInExpression
+  ?context:let @semanticContext inContext
+  ?!@objectIR ioResult
+  ?let @lbigint inLow
+  ?let @lbigint inHigh
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  if inLow.bigint > inHigh.bigint then
+    error inLow : "low bound should be lower or equal to high bound" : ioResult
+  elsif not [[ioResult type].kind isInteger] then
+    error inLow : "Invalid, receiver is not an integer" : ioResult
+  else
+  #--- Load when reference
+    [!?ioInstructionGenerationList appendLoadWhenReference !? ioTemporaries !ioResult ?let loadedValue]
+  #--- Shift source value
+    getNewTempValue (![loadedValue type] !?ioTemporaries ?let shiftedSourceValue)
+    [!?ioInstructionGenerationList appendLogicalShiftRight !shiftedSourceValue !loadedValue ![inHigh.bigint uint]]
+  #--- Truncate source value
+    let resultIntegerName = @lstring.new {!"uint" + (inHigh.bigint - inLow.bigint + 1G) !inLow.location}
+    [inContext.mTypeMap searchKey !lkey:resultIntegerName ?type:let sliceType ?1*]
+    getNewTempValue (!sliceType !?ioTemporaries ?let shiftedTruncatedSourceValue)
+    [!?ioInstructionGenerationList appendTrunc !shiftedTruncatedSourceValue !shiftedSourceValue]
+  #---
+    ioResult = shiftedTruncatedSourceValue
   end
 }
 

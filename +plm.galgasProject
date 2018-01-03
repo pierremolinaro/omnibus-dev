@@ -78,7 +78,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-literal-string.galgas"
   "galgas-sources/expression-true-false.galgas"
   "galgas-sources/expression-cst-registre.galgas"
-#  "galgas-sources/expression-register-read.galgas"
   "galgas-sources/expression-primary.galgas"
   "galgas-sources/expression-standalone-function-call.galgas"
 

@@ -2655,3 +2655,18 @@ void routine_handlePropertyAccessInExpression (class GALGAS_objectIR & ioArgumen
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'handleSliceInExpression'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleSliceInExpression (const class GALGAS_semanticContext constinArgument0,
+                                      class GALGAS_objectIR & ioArgument1,
+                                      const class GALGAS_lbigint constinArgument2,
+                                      const class GALGAS_lbigint constinArgument3,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                      class GALGAS_instructionListIR & ioArgument5,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
