@@ -22,8 +22,8 @@ let LED_L1 = $digitalPort.D4
 
 system section setupPIT () {
   PIT.MCR = 0
-  PIT.LDVAL [0] = 200000
-  PIT.TCTRL [0] = {PIT.TCTRL !TIE:1 !TEN:1} // Interrupt, enabled
+  PIT.LDVAL [0] = 200_000
+  PIT.TCTRL [0] = {PIT:TCTRL !TIE:1 !TEN:1} // Interrupt, enabled
   enable (!interrupt: .PITChannel0)
 }
 
@@ -44,7 +44,7 @@ driver pit > digital {
 
   isr section PITChannel0 {
   //--- Acquitter l'interruption
-    PIT.TFLG [0] = {PIT.TFLG !TIF:1}
+    PIT.TFLG [0] = {PIT:TFLG !TIF:1}
   //--- Incrémenter le compteur
     self.gPITValue += 1
   }

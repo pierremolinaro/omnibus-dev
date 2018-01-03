@@ -1297,9 +1297,7 @@ registers TPM2 {
 let PIT_COUNT = 4
 
 registers PIT {
-  MCR 0x4003_7000 $uint32 {
-    30, MDIS, FRZ
-  }
+  MCR 0x4003_7000 $uint32 {30, MDIS, FRZ}
   
   // PIT Lifetime Timer Registers
   LTMR64H @ro 0x4003_70E0 $uint32
@@ -1312,14 +1310,10 @@ registers PIT {
   LCVAL [PIT_COUNT] 0x4003_7104 : 16 $uint32
   
   // Timer Control Register
-  TCTRL [PIT_COUNT] 0x4003_7108 : 16 $uint32 {
-    29, CHN, TIE, TEN
-  }
+  TCTRL [PIT_COUNT] 0x4003_7108 : 16 $uint32 {29, CHN, TIE, TEN}
   
   // Timer Flag Register
-  TFLG [PIT_COUNT] 0x4003_710C : 16 $uint32 {
-    31, TIF
-  }
+  TFLG [PIT_COUNT] 0x4003_710C : 16 $uint32 {31, TIF}
 
 }
 
@@ -1376,6 +1370,108 @@ registers RTC {
   IER 0x4003D01C $uint32 // RTC Interrupt Enable Register
   WAR 0x4003D800 $uint32 // RTC Write Access Register
   RAR 0x4003D804 $uint32 // RTC Read Access Register
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Chapter 51: Universal Serial Bus Full Speed OTG Controller (USBFSOTG)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+registers USB0 {
+//--- Peripheral ID Register
+  PERID @ro 0x4007_2000 $uint8 {2, ID:6}
+
+//--- Peripheral ID Complement Register
+  IDCOMP @ro 0x4007_2004 $uint8 {2, NID:6}
+
+//--- Peripheral Revision Register
+  REV @ro 0x4007_2008 $uint8
+
+//--- Peripheral Additional Info Register
+  ADDINFO @ro 0x4007_200C $uint8 {7, IEHOST}
+
+//--- OTG Interrupt Status Register
+  OTGISTAT 0x4007_2010 $uint8 {IDCHG, ONEMSEC, LINE_STAT_CHG, 1, SESSVLDCHG, B_SESS_CHG, 1, AVBUSHG}
+
+//--- OTG Interrupt Control Register
+  OTGICR 0x4007_2014 $uint8 {IDEN, ONEMSECEN, LINESTATEEN, 1, SESSVLDEN, BSESSEN, 1, AVBUSEN}
+
+//--- OTG Status Register
+  OTGSTAT 0x4007_2018 $uint8 {ID, ONEMSECEN, LINESTATESTABLE, 1, SESS_VLD, BSESSEND, 1, AVBUSVLD}
+
+//--- OTG Control Register
+  OTGCTL 0x4007_201C $uint8 {DPHIGH, 1, DPLOW, DMLOW, 1, OTGEN, 2}
+
+//--- Interrupt Status Register
+  ISTAT 0x4007_2080 $uint8 {STALL, ATTACH, RESUME, SLEEP, TOKDNE, SOFTOK, ERROR, USBRST}
+
+//--- Interrupt Enable Register
+  INTEN 0x4007_2084 $uint8 {STALLEN, ATTACHEN, RESUMEEN, SLEEPEN, TOKDNEEN, SOFTOKEN, ERROREN, USBRSTEN}
+
+//--- Interrupt Error Register
+  ERRSTAT 0x4007_2088 $uint8 {BSTERR, 1, DMAERR, BTOERR, DFN8, CRC16, CRC5EOF, PIDERR}
+
+//--- Error Interrupt Enable Register
+  ERREN 0x4007_208C $uint8 {BSTERR, 1, DMAERREN, BTOERREN, DFN8EN, CRC16EN, CRC5EOFEN, PIDERREN}
+
+//--- Status Register
+  STAT 0x4007_2090 $uint8 {ENDP:4, TX, ODD, 2}
+
+//--- Control Register
+  CTL 0x4007_2094 $uint8 {JSTATE, SE0, TXSUSPENDTOKENBUSY, RESET, HOSTMODEEN, RESUME, ODDRST, USBENOFEN}
+
+//--- Address Register
+  ADDR 0x4007_2098 $uint8 {LSEN, ADDR:7}
+
+//--- BDT Page Register 1
+  BDTPAGE1 0x4007_209C $uint8 {BDTBA:7, 1}
+
+//--- Frame Number Register Low
+  FRMNUML 0x4007_20A0 $uint8
+
+//--- Frame Number Register High
+  FRMNUMH 0x4007_20A4 $uint8 {5, FRM:3}
+
+//--- Token Register
+  TOKEN 0x4007_20A8 $uint8 {TOKENPID:4, TOKENDPT:4}
+
+//--- SOF Threshold Register
+  SOFTHLD 0x4007_20AC $uint8
+
+//--- BDT Page Register 2
+  BDTPAGE2 0x4007_20B0 $uint8
+
+//--- BDT Page Register 3
+  BDTPAGE3 0x4007_20B4 $uint8
+
+//--- Endpoint Control
+  ENDPT [16] 0x4007_20C0 : 4 $uint8 {HOSTWCHUB, RETRYDIS, 1, EPCTLDIS, EPRXEN, EPTXEN, EPSTALL, EPHSHK}
+  
+//--- USB Control Register
+  USBCTRL 0x4007_2100 $uint8 {SUSP, PDE, 6}
+  
+//--- USB OTG Observe Register
+  OBSERVE @ro 0x4007_2104 $uint8 {DPPU, DPPD, 1, DMPD, 4}
+  
+//--- USB OTG Control Register
+  CONTROL 0x4007_2108 $uint8 {3, DPPULLNONOTG, 4}
+
+//--- USB Transceiver Control Register 0
+  USBTRC0 0x4007_210C $uint8 {USBRESET, 1, USBRESMEM, 2, USB_CLK_RECOVERY_INT, SYNC_DET, USB_RESUME_INT}
+  
+//--- Frame Adjust Register
+  USBFRMADJUST 0x4007_2114 $uint8
+  
+//--- USB Clock Recovery Control Register
+  CLK_RECOVERY_CTRL 0x4007_2140 $uint8 {CLOCK_RECOVER_EN, RESET_RESUME_ROUGH_EN, RESTART_IFRTRIM_EN, 5}
+  
+//--- ICR48 Oscillator Enable Register
+  CLK_RECOVERY_IRCN_EN 0x4007_2144 $uint8 {6, IRC_EN, REG_EN}
+  
+//--- Clock recovery combined Enable Register
+  CLK_RECOVERY_INT_EN 0x4007_2154 $uint8 {3, OVF_ERROR_EN, 4}
+  
+//--- Clock recovery separated interrupt status Register
+  CLK_RECOVERY_INT_STATUS 0x4007_215C $uint8 {3, OVF_ERROR, 4}
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -2212,24 +2308,24 @@ registers SCB {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// SYSTICK
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//--- SYSTICK
 registers SYST {
-  CSR 0xE000_E010 $uint32 { // SysTick Control and Status
-    15, 
-    COUNTFLAG,
-    13,
-    CLKSOURCE,
-    TICKINT,
-    ENABLE
-  }
+//--- SysTick Control and Status Register
+  CSR 0xE000_E010 $uint32 {15, COUNTFLAG, 13, CLKSOURCE, TICKINT, ENABLE}
   
-  RVR   0xE000_E014 $uint32 // SysTick Reload Value Register
+//--- SysTick Reload Value Register
+  RVR 0xE000_E014 $uint32
   
-  CVR   0xE000_E018 $uint32 // SysTick Current Value Register
+//--- SysTick Current Value Register
+  CVR 0xE000_E018 $uint32
   
-  CALIB  @ro 0xE000_E01C $uint32 // SysTick Calibration Value
+//--- SysTick Calibration Value Register
+  CALIB @ro 0xE000_E01C $uint32
 }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers AIPS0 {
   MPRA 0x_4000_0000 $uint32

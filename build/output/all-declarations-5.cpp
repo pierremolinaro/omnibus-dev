@@ -9987,7 +9987,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__21_selector_3A_, SHIFT (437)
 , END
 // State S285 (index = 6093)
-, C_Lexique_plm_5F_lexique::kToken__2E_, SHIFT (438)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (438)
 , END
 // State S286 (index = 6096)
 , C_Lexique_plm_5F_lexique::kToken__21_selector_3A_, SHIFT (439)

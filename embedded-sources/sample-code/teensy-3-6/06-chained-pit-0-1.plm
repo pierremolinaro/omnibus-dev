@@ -27,7 +27,7 @@ driver timer > root {
  
   init {
   //--- Power on DMA_MUX, PIT, DMA
-    SIM.SCGC6 |= {SIM.SCGC6 !PIT:1}
+    SIM.SCGC6 |= {SIM:SCGC6 !PIT:1}
    //--- Enable PIT module
     PIT.MCR = 0
   //--- Disable PIT0 and PIT1
@@ -37,8 +37,8 @@ driver timer > root {
     PIT.LDVAL [0] = $uint32.max
     PIT.LDVAL [1] = $uint32.max
   //--- Enable PIT0 and PIT1 : start counting, no interrupt
-    PIT.TCTRL [1] = {PIT.TCTRL !CHN:1 !TEN:1}
-    PIT.TCTRL [0] = {PIT.TCTRL !TEN:1}
+    PIT.TCTRL [1] = {PIT:TCTRL !CHN:1 !TEN:1}
+    PIT.TCTRL [0] = {PIT:TCTRL !TEN:1}
   }
   
   public system section now @noUnusedWarning () -> $uptime {
