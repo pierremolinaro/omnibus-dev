@@ -3,6 +3,7 @@
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @accessInAssignmentAST {
+  case register (@lstring name)
   case property (@lstring name)
   case arrayAccess (@expressionAST index @location endOfIndex)
 }
@@ -25,6 +26,25 @@ struct @LValueAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <lvalue> ?!@ast ioAST !@LValueAST outAssignmentTargetAST {
+    $identifier$ ?let registerGroupName
+    $:$
+    @accessInAssignmentListAST accessList = {}
+    $identifier$ ?let registerName
+    accessList += !.register {!name:registerName}
+    select
+    or
+      $[$
+      <expression> !?ioAST ?let expression
+      let endOfIndex = @location.here
+      $]$
+      accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+    end
+    outAssignmentTargetAST = .new {!registerGroupName !accessList}
+  }
 
   #·····················································································································
 
@@ -65,6 +85,7 @@ syntax extension plm_syntax {
 method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (access) in mAccessList do
     switch access
+    case register (*) :
     case property (*) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -211,12 +232,12 @@ private proc analyzeControlRegisterInLValue
   else
     var accessList = inAccessList
     [!?accessList popFirst ?let registerNameAsField]
-    if not [registerNameAsField isProperty] then
+    if not [registerNameAsField isRegister] then
       error inRegisterGroupName
       : "the control register group should be followed by a control register name"
       : outInternalRepresentation
     else
-      [registerNameAsField property ?name:let controlRegisterName]
+      [registerNameAsField register ?name:let controlRegisterName]
       [inControlRegisterMap searchKey
         !controlRegisterName
         ?let @PLMType inRegisterType
@@ -243,6 +264,8 @@ private proc analyzeControlRegisterInLValue
       elsif [accessList length] == 1 then # Simple access to a control register for writing
         [accessList first ?let access]
         switch access
+        case register (@lstring registerName) :
+          error registerName : "invalid register access" : outInternalRepresentation
         case property (@lstring propertyName) :
           error propertyName : "writing a slice of a control register is not allowed" : outInternalRepresentation
         case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
@@ -322,6 +345,8 @@ private proc analyzeVariableInLValue
     end
     for (access) in inAccessList do
       switch access
+      case register (@lstring registerName) :
+        error registerName : "invalid register access, receiver is not a register group"
       case property (@lstring propertyName) :
         let @propertyMap propertyMap = currentType.propertyMap
         [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
@@ -405,6 +430,8 @@ private proc analyzeSelfAssignmentTarget
     var currentLLVMName = llvmNameForSelf ()
     for (access) in inAccessList do
       switch access
+      case register (@lstring registerName) :
+        error registerName : "invalid register access, receiver is not a register group"
       case property (@lstring propertyName) :
         let @propertyMap propertyMap = currentType.propertyMap
         [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]

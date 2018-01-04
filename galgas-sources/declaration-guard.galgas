@@ -333,6 +333,8 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   for (access) in accessList do
     let currentType = [currentObject type]
     switch access
+    case register (@lstring registerName) :
+      error registerName : "a register access is invalid here"
     case property (@lstring propertyName) :
       let @propertyMap propertyMap = currentType.propertyMap
       [propertyMap searchKey !propertyName ?* ?let propertyAccess]
@@ -358,6 +360,8 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   end
 #--- Handle last access
   switch lastAccess
+  case register (@lstring registerName) :
+    error registerName : "a register access is invalid here" : outConvenienceGuardGenerationIR
   case property (@lstring methodName) :
     let currentType = [currentObject type]
     let @propertyMap propertyMap = currentType.propertyMap
