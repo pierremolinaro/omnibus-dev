@@ -2942,6 +2942,152 @@ GALGAS_sortedOperandIRList_2D_element GALGAS_sortedOperandIRList_2D_element::ext
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_globalVariableIRList_2D_element::GALGAS_globalVariableIRList_2D_element (void) :
+mProperty_mLLVMVariable (),
+mProperty_mExpression (),
+mProperty_mAlignment () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableIRList_2D_element::~ GALGAS_globalVariableIRList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableIRList_2D_element::GALGAS_globalVariableIRList_2D_element (const GALGAS_string & inOperand0,
+                                                                                const GALGAS_objectIR & inOperand1,
+                                                                                const GALGAS_uint & inOperand2) :
+mProperty_mLLVMVariable (inOperand0),
+mProperty_mExpression (inOperand1),
+mProperty_mAlignment (inOperand2) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableIRList_2D_element GALGAS_globalVariableIRList_2D_element::constructor_new (const GALGAS_string & inOperand0,
+                                                                                                const GALGAS_objectIR & inOperand1,
+                                                                                                const GALGAS_uint & inOperand2 
+                                                                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_globalVariableIRList_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+    result = GALGAS_globalVariableIRList_2D_element (inOperand0, inOperand1, inOperand2) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_globalVariableIRList_2D_element::objectCompare (const GALGAS_globalVariableIRList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mLLVMVariable.objectCompare (inOperand.mProperty_mLLVMVariable) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mExpression.objectCompare (inOperand.mProperty_mExpression) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mAlignment.objectCompare (inOperand.mProperty_mAlignment) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_globalVariableIRList_2D_element::isValid (void) const {
+  return mProperty_mLLVMVariable.isValid () && mProperty_mExpression.isValid () && mProperty_mAlignment.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableIRList_2D_element::drop (void) {
+  mProperty_mLLVMVariable.drop () ;
+  mProperty_mExpression.drop () ;
+  mProperty_mAlignment.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableIRList_2D_element::description (C_String & ioString,
+                                                          const int32_t inIndentation) const {
+  ioString << "<struct @globalVariableIRList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mLLVMVariable.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mExpression.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mAlignment.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_globalVariableIRList_2D_element::getter_mLLVMVariable (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLLVMVariable ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_globalVariableIRList_2D_element::getter_mExpression (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_globalVariableIRList_2D_element::getter_mAlignment (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAlignment ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @globalVariableIRList-element type                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_globalVariableIRList_2D_element ("globalVariableIRList-element",
+                                                        NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_globalVariableIRList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_globalVariableIRList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_globalVariableIRList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_globalVariableIRList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableIRList_2D_element GALGAS_globalVariableIRList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_globalVariableIRList_2D_element result ;
+  const GALGAS_globalVariableIRList_2D_element * p = (const GALGAS_globalVariableIRList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_globalVariableIRList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("globalVariableIRList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_controlRegisterBitSliceList_2D_element::GALGAS_controlRegisterBitSliceList_2D_element (void) :
 mProperty_mRegisterBitSlice () {
 }

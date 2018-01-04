@@ -284,6 +284,10 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         error propertyName
           : "a context property cannot be used in this context"
           : currentType, currentLLVMAddressVar
+      case autonomous  (@objectIR object *) :
+        currentType = [object type]
+        currentLLVMAddressVar = [object llvmName]
+        currentObjectPropertyMap = [object type].propertyMap # ????
       case indexed (@PLMType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
@@ -373,6 +377,8 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       #--- Enter in invocation graph
         [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
       end
+    case autonomous  (* errorLocation) :
+      error errorLocation : "a property cannot be used as method"
     case indexed  (@PLMType propertyType @uint propertyIndex) :
       if not [propertyType.kind isFunction] then
         error methodName : "an indexed property cannot be used as method"

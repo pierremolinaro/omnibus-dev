@@ -69,7 +69,7 @@ syntax extension plm_syntax {
     <type_definition> !?ioAST ?let typeName
     $=$
     <expression> !?ioAST ?let initExpression
-    ioPropertyList += !fieldName !{} !constant !public !typeName !.expression{!initExpression:initExpression}
+    ioPropertyList += !fieldName !{} !constant !public !typeName !.expression{!initExpression:initExpression} !false
   }
 
   #·····················································································································

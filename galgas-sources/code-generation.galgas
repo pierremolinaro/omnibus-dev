@@ -100,6 +100,7 @@ proc codeGeneration
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
   ?targetParameters:let @targetParameters inTargetParameters
+  ?globalVariables:let @globalVariableIRList inGlobalVariableIRList
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
 #--- Create source directory (if does not exist)
@@ -129,6 +130,7 @@ proc codeGeneration
     !staticlistValues:inStaticListValueMap
     !sourceFileSet:inSourceFileAbsolutePathSet
     !targetParameters:inTargetParameters
+    !globalVariables:inGlobalVariableIRList
   )
 }
 
@@ -157,6 +159,7 @@ private proc generateCodeFiles
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
   ?targetParameters:let @targetParameters inTargetParameters
+  ?globalVariables:let @globalVariableIRList inGlobalVariableIRList
 {
   @generationAdds generationAdds = .default
   generationAdds.mStaticEntityMap = inIntermediateCodeStruct.mStaticEntityMap
@@ -203,20 +206,28 @@ private proc generateCodeFiles
   llvmCode += "\n"
 #----------------------------------------- Type declarations
   declareLLVMTypes (!inTypeMap !?llvmCode)
-#----------------------------------------- Static array type declaration
-  [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]
-#----------------------------------------- Global sync instances
-  for globalSyncInstance in inIntermediateCodeStruct.mGlobalSyncInstanceMap
-    before llvmCode += llvmTitleComment (!"Global synchronization tool instances")
-    do [globalSyncInstance generateLLVM !?llvmCode]
-    after llvmCode += "\n"
+#----------------------------------------- Global Variables
+  llvmCode += llvmTitleComment (!"Global variables")
+  for (llvmName expression alignment) in inGlobalVariableIRList do
+    llvmCode += llvmName + " = internal global "
+             + [expression llvmTypeName] + " " + [expression llvmValue]
+             + ", align " + alignment + "\n"
   end
+  llvmCode += "\n"
 #----------------------------------------- Drivers
   for driver in inIntermediateCodeStruct.mDriverList
     before llvmCode += llvmTitleComment (!"Drivers")
     do [driver generateLLVM !?llvmCode]
     after llvmCode += "\n"
   end
+#----------------------------------------- Global sync instances
+  for globalSyncInstance in inIntermediateCodeStruct.mGlobalSyncInstanceMap
+    before llvmCode += llvmTitleComment (!"Global synchronization tool instances")
+    do [globalSyncInstance generateLLVM !?llvmCode]
+    after llvmCode += "\n"
+  end
+#----------------------------------------- Static array type declaration
+  [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]
 #----------------------------------------- Boot
   [inIntermediateCodeStruct.mBootList generateCode !?llvmCode !generationContext !?generationAdds]
 #----------------------------------------- Enumeration uint() methods

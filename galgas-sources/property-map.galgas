@@ -5,6 +5,7 @@
 enum @propertyAccessKind {
   case constantProperty (@objectIR value)
   case indexed  (@PLMType type @uint index)
+  case autonomous  (@objectIR object @location errorLocation)
   case nonVirtualMethod (@routineDescriptor descriptor)
 }
 

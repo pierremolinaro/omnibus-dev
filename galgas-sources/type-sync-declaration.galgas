@@ -73,7 +73,7 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- Add property types
-  for (propertyName 2* public fieldTypeName initExpression) in mStructurePropertyListAST do
+  for (propertyName 2* public fieldTypeName initExpression autonomous) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       let typeName = llvmTypeNameFromPLMname (!fieldTypeName)
       [!?ioGraph addEdge !structureTypeName !typeName]
@@ -127,6 +127,7 @@ override method @syncDeclarationAST enterInContext
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
 {
 #---------------------------------------- Properties
   @propertyList propertyList = {}
@@ -135,7 +136,7 @@ override method @syncDeclarationAST enterInContext
   @constructorSignature constructorSignature = {}
   @string constructorKey = "("
   for property in mStructurePropertyListAST do
-    [property enterInContext
+    [property enterPropertyInContext
       !mSyncToolName
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
@@ -145,6 +146,7 @@ override method @syncDeclarationAST enterInContext
       !?constructorSignature
       !?constructorKey
       !?*
+      !?ioGlobalVariableIRList
     ]
   end
   constructorKey += ")"

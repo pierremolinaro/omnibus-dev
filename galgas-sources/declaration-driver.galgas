@@ -288,6 +288,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
          !false
          !optionalPropertyTypeName
          !.expression{!initExpression:initExpression}
+         !true # Variable is autonomous
       end
     #--- Check all arguments of driver instanciation have been used
       for (unusedSelector) in [driverInstanciationArgumentMap keySet] - validArgumentSet do
@@ -361,6 +362,7 @@ override method @implementedDriverAST enterInContext
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
 {
   [!?ioContext.mDriverMap insertKey !mDriverName !mIsInstancied]
   let driverType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !llvmDriverNameFromName (!mDriverName)} type]

@@ -93,6 +93,7 @@ override method @initAST enterInContext
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
 {
    let routineNameForInvocationGraph = initNameForInvocationGraph (!llvmDriverNameFromName (!mDriverName) !mInitLocation)
   [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]

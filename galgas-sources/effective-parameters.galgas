@@ -192,6 +192,9 @@ proc analyzeEffectiveParameters
       switch propertyAccess
       case nonVirtualMethod (*) :
         error inErrorLocation : "a method cannot be used in this context"
+      case autonomous  (@objectIR object *) :
+        parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![object type]
+        ioEffectiveParameterListIR += !.outputInput !object
       case constantProperty (*) :
         error inErrorLocation : "a constant property cannot be used here"
       case indexed (@PLMType propertyType @uint propertyIndex) :

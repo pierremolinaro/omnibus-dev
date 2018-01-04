@@ -2247,6 +2247,327 @@ GALGAS_objectIR GALGAS_objectIR::extractObject (const GALGAS_object & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                              Class for element of '@globalVariableIRList' sorted list                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cSortedListElement_globalVariableIRList : public cSortedListElement {
+  public : GALGAS_globalVariableIRList_2D_element mObject ;
+
+//--- Constructor
+  public : cSortedListElement_globalVariableIRList (const GALGAS_string & in_mLLVMVariable,
+                                                    const GALGAS_objectIR & in_mExpression,
+                                                    const GALGAS_uint & in_mAlignment
+                                                    COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cSortedListElement * copy (void) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Description
+ public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+
+//--- Virtual method that comparing element for sorting
+  public : virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cSortedListElement_globalVariableIRList::cSortedListElement_globalVariableIRList (const GALGAS_string & in_mLLVMVariable,
+                                                                                  const GALGAS_objectIR & in_mExpression,
+                                                                                  const GALGAS_uint & in_mAlignment
+                                                                                  COMMA_LOCATION_ARGS) :
+cSortedListElement (THERE),
+mObject (in_mLLVMVariable, in_mExpression, in_mAlignment) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cSortedListElement_globalVariableIRList::isValid (void) const {
+  return mObject.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cSortedListElement * cSortedListElement_globalVariableIRList::copy (void) {
+  cSortedListElement * result = NULL ;
+  macroMyNew (result, cSortedListElement_globalVariableIRList (mObject.mProperty_mLLVMVariable, mObject.mProperty_mExpression, mObject.mProperty_mAlignment COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cSortedListElement_globalVariableIRList::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mLLVMVariable" ":" ;
+  mObject.mProperty_mLLVMVariable.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mExpression" ":" ;
+  mObject.mProperty_mExpression.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mAlignment" ":" ;
+  mObject.mProperty_mAlignment.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cSortedListElement_globalVariableIRList::compare (const cCollectionElement * inOperand) const {
+  cSortedListElement_globalVariableIRList * operand = (cSortedListElement_globalVariableIRList *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_globalVariableIRList) ;
+  return mObject.objectCompare (operand->mObject) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableIRList::GALGAS_globalVariableIRList (void) :
+AC_GALGAS_sortedlist () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cSortedListElement_globalVariableIRList::compareForSorting (const cSortedListElement * inOperand) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cSortedListElement_globalVariableIRList * operand = (const cSortedListElement_globalVariableIRList *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_globalVariableIRList) ;
+  if (result == kOperandEqual) {
+    result = operand->mObject.mProperty_mAlignment.objectCompare (mObject.mProperty_mAlignment) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableIRList GALGAS_globalVariableIRList::constructor_emptySortedList (LOCATION_ARGS) {
+  GALGAS_globalVariableIRList result ;
+  result.createNewEmptySortedList (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableIRList GALGAS_globalVariableIRList::constructor_sortedListWithValue (const GALGAS_string & inOperand0,
+                                                                                          const GALGAS_objectIR & inOperand1,
+                                                                                          const GALGAS_uint & inOperand2
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_globalVariableIRList result = constructor_emptySortedList (THERE) ;
+  cSortedListElement * p = NULL ;
+  macroMyNew (p, cSortedListElement_globalVariableIRList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+  capSortedListElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  result.appendObject (attributes) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableIRList::addAssign_operation (const GALGAS_string & inOperand0,
+                                                       const GALGAS_objectIR & inOperand1,
+                                                       const GALGAS_uint & inOperand2
+                                                       COMMA_LOCATION_ARGS) {
+  if (isValid ()) {
+    cSortedListElement * p = NULL ;
+    macroMyNew (p, cSortedListElement_globalVariableIRList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    capSortedListElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    appendObject (attributes) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableIRList::plusAssign_operation (const GALGAS_globalVariableIRList inOperand,
+                                                        C_Compiler * /* inCompiler */
+                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  if (isValid ()) {
+    appendSortedList (inOperand) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableIRList::setter_popSmallest (GALGAS_string & outOperand0,
+                                                      GALGAS_objectIR & outOperand1,
+                                                      GALGAS_uint & outOperand2,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  capSortedListElement attributes ;
+  removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_globalVariableIRList * p = (cSortedListElement_globalVariableIRList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_globalVariableIRList) ;
+    outOperand0 = p->mObject.mProperty_mLLVMVariable ;
+    outOperand1 = p->mObject.mProperty_mExpression ;
+    outOperand2 = p->mObject.mProperty_mAlignment ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableIRList::setter_popGreatest (GALGAS_string & outOperand0,
+                                                      GALGAS_objectIR & outOperand1,
+                                                      GALGAS_uint & outOperand2,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  capSortedListElement attributes ;
+  removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_globalVariableIRList * p = (cSortedListElement_globalVariableIRList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_globalVariableIRList) ;
+    outOperand0 = p->mObject.mProperty_mLLVMVariable ;
+    outOperand1 = p->mObject.mProperty_mExpression ;
+    outOperand2 = p->mObject.mProperty_mAlignment ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableIRList::method_smallest (GALGAS_string & outOperand0,
+                                                   GALGAS_objectIR & outOperand1,
+                                                   GALGAS_uint & outOperand2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
+  capSortedListElement attributes ;
+  smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_globalVariableIRList * p = (cSortedListElement_globalVariableIRList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_globalVariableIRList) ;
+    outOperand0 = p->mObject.mProperty_mLLVMVariable ;
+    outOperand1 = p->mObject.mProperty_mExpression ;
+    outOperand2 = p->mObject.mProperty_mAlignment ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableIRList::method_greatest (GALGAS_string & outOperand0,
+                                                   GALGAS_objectIR & outOperand1,
+                                                   GALGAS_uint & outOperand2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
+  capSortedListElement attributes ;
+  greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_globalVariableIRList * p = (cSortedListElement_globalVariableIRList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_globalVariableIRList) ;
+    outOperand0 = p->mObject.mProperty_mLLVMVariable ;
+    outOperand1 = p->mObject.mProperty_mExpression ;
+    outOperand2 = p->mObject.mProperty_mAlignment ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_globalVariableIRList::cEnumerator_globalVariableIRList (const GALGAS_globalVariableIRList & inEnumeratedObject,
+                                                                    const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableIRList_2D_element cEnumerator_globalVariableIRList::current (LOCATION_ARGS) const {
+  const cSortedListElement_globalVariableIRList * p = (const cSortedListElement_globalVariableIRList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_globalVariableIRList) ;
+  return p->mObject ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string cEnumerator_globalVariableIRList::current_mLLVMVariable (LOCATION_ARGS) const {
+  const cSortedListElement_globalVariableIRList * p = (const cSortedListElement_globalVariableIRList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_globalVariableIRList) ;
+  return p->mObject.mProperty_mLLVMVariable ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR cEnumerator_globalVariableIRList::current_mExpression (LOCATION_ARGS) const {
+  const cSortedListElement_globalVariableIRList * p = (const cSortedListElement_globalVariableIRList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_globalVariableIRList) ;
+  return p->mObject.mProperty_mExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint cEnumerator_globalVariableIRList::current_mAlignment (LOCATION_ARGS) const {
+  const cSortedListElement_globalVariableIRList * p = (const cSortedListElement_globalVariableIRList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_globalVariableIRList) ;
+  return p->mObject.mProperty_mAlignment ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @globalVariableIRList type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_globalVariableIRList ("globalVariableIRList",
+                                             NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_globalVariableIRList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_globalVariableIRList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_globalVariableIRList::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_globalVariableIRList (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableIRList GALGAS_globalVariableIRList::extractObject (const GALGAS_object & inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_globalVariableIRList result ;
+  const GALGAS_globalVariableIRList * p = (const GALGAS_globalVariableIRList *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_globalVariableIRList *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("globalVariableIRList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                              Class for element of '@extensionDeclarationListAST' list                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
