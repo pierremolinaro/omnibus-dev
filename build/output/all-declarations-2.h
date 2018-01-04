@@ -1402,6 +1402,7 @@ void extensionMethod_enterInContext (const class GALGAS_taskListAST inObject,
                                      class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
                                      class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
                                      class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                     class GALGAS_globalVariableIRList & io_ioGlobalVariableIRList,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
@@ -2812,6 +2813,7 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_constantProperty,
     kEnum_indexed,
+    kEnum_autonomous,
     kEnum_nonVirtualMethod
   } enumeration ;
   
@@ -2839,6 +2841,10 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static class GALGAS_propertyAccessKind constructor_autonomous (const class GALGAS_objectIR & inOperand0,
+                                                                          const class GALGAS_location & inOperand1
+                                                                          COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_propertyAccessKind constructor_constantProperty (const class GALGAS_objectIR & inOperand0
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -2858,6 +2864,11 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_autonomous (class GALGAS_objectIR & outArgument0,
+                                                    class GALGAS_location & outArgument1,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_constantProperty (class GALGAS_objectIR & outArgument0,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
@@ -2874,6 +2885,8 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAutonomous (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConstantProperty (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIndexed (LOCATION_ARGS) const ;
@@ -2948,22 +2961,23 @@ void extensionMethod_enterFunctionsInPropertyMap (const class GALGAS_functionDec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Extension method '@structurePropertyListAST-element enterInContext'                         *
+//                     Extension method '@structurePropertyListAST-element enterPropertyInContext'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_enterInContext (const class GALGAS_structurePropertyListAST_2D_element inObject,
-                                     const class GALGAS_lstring constin_inStructureName,
-                                     class GALGAS_semanticContext & io_ioContext,
-                                     class GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                     class GALGAS_propertyList & io_propertyList,
-                                     class GALGAS_propertyMap & io_propertyMap,
-                                     class GALGAS_sortedOperandIRList & io_sortedOperandIRList,
-                                     class GALGAS_constructorSignature & io_constructorSignature,
-                                     class GALGAS_string & io_ioConstructorKey,
-                                     class GALGAS_bool & io_canBeCopied,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropertyListAST_2D_element inObject,
+                                             const class GALGAS_lstring constin_inStructureName,
+                                             class GALGAS_semanticContext & io_ioContext,
+                                             class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                             class GALGAS_propertyList & io_ioPropertyList,
+                                             class GALGAS_propertyMap & io_ioPropertyMap,
+                                             class GALGAS_sortedOperandIRList & io_sortedOperandIRList,
+                                             class GALGAS_constructorSignature & io_constructorSignature,
+                                             class GALGAS_string & io_ioConstructorKey,
+                                             class GALGAS_bool & io_canBeCopied,
+                                             class GALGAS_globalVariableIRList & io_ioGlobalVariableIRList,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -9690,6 +9704,24 @@ class cEnumAssociatedValues_propertyAccessKind_indexed : public cEnumAssociatedV
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_propertyAccessKind_indexed (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_propertyAccessKind_autonomous : public cEnumAssociatedValues {
+  public : const GALGAS_objectIR mAssociatedValue0 ;
+  public : const GALGAS_location mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyAccessKind_autonomous (const GALGAS_objectIR & inAssociatedValue0,
+                                                                const GALGAS_location & inAssociatedValue1
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_autonomous (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

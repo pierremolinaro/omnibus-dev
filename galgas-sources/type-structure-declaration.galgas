@@ -36,6 +36,7 @@ list @structurePropertyListAST {
   @bool mIsPublic
   @lstring mPropertyTypeName
   @structurePropertyInitOptionalExpressionAST mInitialisation
+  @bool mIsAutonomous # true, this property is an automomous variable (reserved to driver)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -78,16 +79,16 @@ syntax extension plm_syntax {
     select
       <type_definition> !?ioAST  ?let typeName
       select
-        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.noExpression
+        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.noExpression !false
       or
         $=$
         <expression> !?ioAST ?let initExpression
-        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.expression{!initExpression:initExpression}
+        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.expression{!initExpression:initExpression} !false
       end
     or
       $=$
       <expression> !?ioAST ?let initExpression
-      ioFieldListAST += !fieldName !{} !constant !isPublic !["" nowhere] !.expression{!initExpression:initExpression}
+      ioFieldListAST += !fieldName !{} !constant !isPublic !["" nowhere] !.expression{!initExpression:initExpression} !false
     end
   }
 
@@ -210,7 +211,7 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- Add property types
-  for (4* fieldTypeName initExpression) in mStructurePropertyListAST do
+  for (4* fieldTypeName initExpression *) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       let typeName = llvmTypeNameFromPLMname (!fieldTypeName)
       [!?ioGraph addEdge !structureTypeName !typeName]
@@ -270,6 +271,16 @@ sortedlist @sortedOperandIRList {
 
 #·······················································································································
 
+sortedlist @globalVariableIRList {
+  @string mLLVMVariable
+  @objectIR mExpression
+  @uint mAlignment
+}{
+  mAlignment >
+}
+
+#·······················································································································
+
 override method @structureDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -277,6 +288,7 @@ override method @structureDeclarationAST enterInContext
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
 {
 #---------------------------------------- Properties
   @propertyList propertyList = {}
@@ -286,7 +298,7 @@ override method @structureDeclarationAST enterInContext
   @string constructorKey = "("
   var canBeCopied = true
   for property in mStructurePropertyListAST do
-    [property enterInContext
+    [property enterPropertyInContext
       !mStructureName
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
@@ -296,6 +308,7 @@ override method @structureDeclarationAST enterInContext
       !?constructorSignature
       !?constructorKey
       !?canBeCopied
+      !?ioGlobalVariableIRList
     ]
   end
   constructorKey += ")"
@@ -417,17 +430,31 @@ override method @structureDeclarationAST enterInContext
 
 #·······················································································································
 
-method @structurePropertyListAST-element enterInContext
+method @structurePropertyListAST-element enterPropertyInContext
   ?let @lstring inStructureName
   ?!context:@semanticContext ioContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!@propertyList propertyList
-  ?!@propertyMap propertyMap
+  ?!@propertyList ioPropertyList
+  ?!@propertyMap ioPropertyMap
   ?!@sortedOperandIRList sortedOperandIRList
   ?!@constructorSignature constructorSignature
   ?!@string ioConstructorKey
   ?!@bool canBeCopied
+  ?!@globalVariableIRList ioGlobalVariableIRList
 {
+#---------- Attributes
+  var alignment = 4 # Default alignment
+  var alignmentDefined = false
+  for (attribute align) in mPropertyAttributeList do
+    if attribute.string != "align" then
+      error attribute : "only the @align attribute is allowed here"
+    elsif alignmentDefined then
+      error attribute : "@align attribute already defined"
+    else
+      alignment = [align.bigint uint]
+      alignmentDefined = true
+    end
+  end
 #---------- Property type
   let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
     then voidType ()
@@ -466,15 +493,25 @@ method @structurePropertyListAST-element enterInContext
       canBeCopied = false
     end
     if mIsConstant then
-     [!?propertyMap insertKey
+     [!?ioPropertyMap insertKey
         !mPropertyName
         !mIsPublic
         !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
       ]
+    elsif mIsAutonomous then
+      let name = @lstring.new {!inStructureName.string + "." + mPropertyName !mPropertyName}
+      let llvmName = llvmNameForGlobalVariable (!name)
+      let object = @objectIR.reference {!type:actualPropertyType !llvmName:llvmName}
+      [!?ioPropertyMap insertKey
+        !mPropertyName
+        !mIsPublic
+        !.autonomous {!object:object !errorLocation:mPropertyName}
+      ]
+      ioGlobalVariableIRList += !llvmName ![expressionIR withType !actualPropertyType] !alignment
     else
-      let propertyIndex = [propertyList length]
-      propertyList += !mPropertyName.string !actualPropertyType
-      [!?propertyMap insertKey
+      let propertyIndex = [ioPropertyList length]
+      ioPropertyList += !mPropertyName.string !actualPropertyType
+      [!?ioPropertyMap insertKey
         !mPropertyName
         !mIsPublic
         !.indexed{!type:actualPropertyType !index:propertyIndex}
@@ -485,9 +522,9 @@ method @structurePropertyListAST-element enterInContext
     if not [optionalPropertyType instanciable] then
       error mPropertyName : "$" + optionalPropertyType.plmOriginalTypeName + " type is not instanciable"
     end
-    let propertyIndex = [propertyList length]
-    propertyList += !mPropertyName.string !optionalPropertyType
-    [!?propertyMap insertKey
+    let propertyIndex = [ioPropertyList length]
+    ioPropertyList += !mPropertyName.string !optionalPropertyType
+    [!?ioPropertyMap insertKey
       !mPropertyName
       !mIsPublic
       !.indexed{!type: optionalPropertyType!index:propertyIndex}

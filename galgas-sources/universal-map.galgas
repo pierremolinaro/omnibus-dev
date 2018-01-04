@@ -365,6 +365,8 @@ method @universalValuedObjectMap searchValuedObjectType
       switch accessKind
       case constantProperty (value) :
         outType = [value type]
+      case autonomous  (object *) :
+        outType = [object type]
       case indexed  (type *) :
         outType = type
       case nonVirtualMethod (*) :

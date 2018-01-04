@@ -150,29 +150,6 @@ struct @semanticContext {
 
 getter @semanticContext booleanType -> @PLMType {
   [mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result ?1*]
-#  @propertyMap propertyMap = {}
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mBooleanTypeName ?let boolTypeProxy]
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" !mBooleanTypeName} ?let uint1TypeProxy]
-##--- Add uint1 accessor
-#  [!?propertyMap addFunctionWithoutArgument
-#    !?ioSubprogramInvocationGraph
-#    !receiverTypeProxy:boolTypeProxy
-#    !methodName:"uint1"
-#    !safe:true
-#    !resultTypeProxy:uint1TypeProxy
-#    !canMutateProperties:false
-#  ]
-##---------- Define boolean type composition
-#  result = .new {
-#    !propertyMap:propertyMap
-#    !classConstantMap:{}
-#    !constructorMap:{}
-#    !guardMap:{}
-#    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-#    !plmOriginalTypeName:boolTypeName ()
-#    !kind:.boolean
-#    !plmAliasedTypeName:boolTypeName ()
-#  }
 }
 
 #·······················································································································
@@ -184,6 +161,7 @@ abstract method @abstractDeclarationAST enterInContext
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
 
 #·······················································································································
 
@@ -195,6 +173,7 @@ proc buildSemanticContext
   !context:@semanticContext outSemanticContext
   !@subprogramInvocationGraph outSubprogramInvocationGraph
   !@declarationDecorationList outDecoratedDeclarationList
+  !@globalVariableIRList outGlobalVariableIRList
 {
   outSemanticContext = .default
   outDecoratedDeclarationList = {}
@@ -209,6 +188,7 @@ proc buildSemanticContext
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext !receiverType:"" !?context: outSemanticContext]
 #---
   outSubprogramInvocationGraph = .emptyGraph
+  outGlobalVariableIRList = {}
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext
       !procedureDeclarationList:inAST.mStandAloneFunctionDeclarationListAST
@@ -217,6 +197,7 @@ proc buildSemanticContext
       !?outSubprogramInvocationGraph
       !?staticlistValues:ioStaticListValueMap
       !?staticEntityMap:ioStaticEntityMap
+      !?globalVariables:outGlobalVariableIRList
     ]
   end
 #--- Build an HTML containing all global constants
@@ -240,6 +221,7 @@ proc buildSemanticContext
      !?outDecoratedDeclarationList
      !?outSubprogramInvocationGraph
      !?staticEntityMap:ioStaticEntityMap
+     !?globalVariables:outGlobalVariableIRList
    ]
 }
 

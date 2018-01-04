@@ -147,6 +147,7 @@ private proc compileProject
   ast.mDeclarationListAST = orderedDeclarationListAST
   @subprogramInvocationGraph subprogramInvocationGraph = .emptyGraph
   @declarationDecorationList decoratedDeclarationList = {}
+  @globalVariableIRList globalVariableIRList = {}
   if @uint.errorCount == 0 then
     var @timer t = .start 
     buildSemanticContext (
@@ -157,6 +158,7 @@ private proc compileProject
       ?context:semanticContext
       ?subprogramInvocationGraph
       ?decoratedDeclarationList
+      ?globalVariableIRList
     )
     message "Context: " + [t string] + "\n" 
   end
@@ -198,6 +200,7 @@ private proc compileProject
       !staticlistValues:staticListValueMap
       !sourceFileSet:sourceFileAbsolutePathSet
       !targetParameters:semanticContext.mTargetParameters
+      !globalVariables:globalVariableIRList
     )
     message "Code generation: " + [tGen string] + "\n" 
   end

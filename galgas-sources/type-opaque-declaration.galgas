@@ -97,6 +97,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
 {
   @PLMTypeAttributes opaqueTypeAttributes = .none
   for (attribute) in mAttributeList do

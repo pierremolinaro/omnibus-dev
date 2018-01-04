@@ -343,6 +343,8 @@ override method @procedureCallInstructionAST baseGuardAnalyze
         error propertyName : "a method cannot be used in this context" : currentObject
       case constantProperty (*) :
         error propertyName: "a constant property not available in this context" : currentObject
+      case autonomous  (object *) :
+        currentObject = object
       case indexed (@PLMType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
@@ -368,6 +370,8 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     let key = routineMangledNameFromCall (!"" !methodName !mArguments)
     [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     switch propertyAccess
+    case autonomous  (* errorLocation) :
+      error errorLocation : "a property cannot be used as method" : outConvenienceGuardGenerationIR
     case constantProperty (*) :
       error methodName : "a constant cannot be used as method" : outConvenienceGuardGenerationIR
     case indexed (* *) :

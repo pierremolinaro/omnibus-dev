@@ -52,6 +52,7 @@ override method @literalIntegerDeclarationAST enterInContext
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
 {
   let integerTypeName = [staticIntegerTypeName () nowhere]
  #---

@@ -703,6 +703,8 @@ proc handlePropertyAccessInExpression
     error inPropertyName : "a method cannot be used in this context" : ioResult
   case constantProperty (@objectIR value) :
     ioResult = value
+  case autonomous  (object *) :
+    ioResult = object
   case indexed (@PLMType propertyType @uint propertyIndex) :
     [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference
@@ -839,6 +841,8 @@ private proc handleFunctionCallInExpression
     #---
       ioObjectIR = callReturnedResult
     end
+  case autonomous  (* errorLocation) :
+    error errorLocation : "a property cannot be used as method" : ioObjectIR
   case indexed  (@PLMType propertyType @uint propertyIndex) :
     if not [propertyType.kind isFunction] then
       error inMethodName : "an indexed property cannot be used as method" : ioObjectIR

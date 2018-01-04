@@ -25,13 +25,14 @@ let NUM_ENDPOINTS = 4
 
 struct $bdt_t @copyable {
  var desc $uint32 = 0
- var addr$uint32 = 0 // void * addr;
+ var addr $uint32 = 0 // void * addr;
 }
 
 //······················································································································
 
 driver usb_device > digital {
-  var descriptorTable = $bdt_t [(NUM_ENDPOINTS+1)*4] (!repeated:$bdt_t ()) // Should be aligned on a 512 byte-boudary
+// Descriptor table should be aligned on a 512 byte-boudary
+  var descriptorTable @align 512 = $bdt_t [(NUM_ENDPOINTS+1)*4] (!repeated:$bdt_t ())
 
   //····················································································································
 
