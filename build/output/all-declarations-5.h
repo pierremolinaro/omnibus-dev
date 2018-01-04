@@ -950,31 +950,6 @@ class cPtr_releaseIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Extension setter '@instructionListIR appendLoadWhenReference'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendLoadWhenReference (class GALGAS_instructionListIR & ioObject,
-                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                              const class GALGAS_objectIR constin_inSource,
-                                              class GALGAS_objectIR & out_outResultingValue,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              Routine 'getNewTempValue'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_getNewTempValue (const class GALGAS_PLMType constinArgument0,
-                              class GALGAS_semanticTemporariesStruct & ioArgument1,
-                              class GALGAS_objectIR & outArgument2,
-                              class C_Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                           Extension setter '@instructionListIR appendCopyFromReferences'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2194,14 +2169,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_orderedTypeList_2D_
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
-//------------------------------------- 'assignment_operator' non terminal
+//------------------------------------- 'assignment_combined_with_operator' non terminal
 //--- 'parse' label
-  public : virtual void nt_assignment_5F_operator_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_assignment_5F_combined_5F_with_5F_operator_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_assignment_5F_operator_ (GALGAS_infixOperator & outArgument0,
-                                                    GALGAS_location & outArgument1,
-                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_assignment_5F_combined_5F_with_5F_operator_ (GALGAS_infixOperator & outArgument0,
+                                                                        GALGAS_location & outArgument1,
+                                                                        C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'declaration' non terminal
 //--- 'parse' label
@@ -2849,6 +2824,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_102 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_103 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_plm_5F_syntax_104 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

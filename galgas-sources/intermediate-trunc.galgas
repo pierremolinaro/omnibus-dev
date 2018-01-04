@@ -1,9 +1,17 @@
 
 setter @instructionListIR appendTrunc
-  ?let @objectIR inResult
-  ?let @objectIR inSource
+  ?let @PLMType inResultType
+  ?!@objectIR ioObject
+  ?!@semanticTemporariesStruct ioTemporaries
 {
-  self += !@truncIR.new {!inResult !inSource}
+  if [ioObject isLiteralInteger] then
+    [ioObject literalInteger ?type:* ?value:let @bigint value]
+    ioObject = .literalInteger {!type:inResultType !value:value}
+  else
+    getNewTempValue (!inResultType !?ioTemporaries ?let result)
+    self += !@truncIR.new {!result !ioObject}
+    ioObject = result
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -110,12 +110,11 @@ override method @ifExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR ifExpressionResultPossibleReference 
+    ?result:@objectIR ifExpressionResult 
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !ifExpressionResultPossibleReference
-    ?let ifExpressionResult
+    !?ifExpressionResult
   ]  
 #--- Check "if" expression type is boolean
   if not [[ifExpressionResult type].kind isBoolean] then
@@ -134,12 +133,11 @@ override method @ifExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR thenExpressionPossibleReferenceResult
+    ?result:@objectIR thenExpressionTempResult
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !thenExpressionPossibleReferenceResult
-    ?let thenExpressionTempResult
+    !?thenExpressionTempResult
   ]  
   let thenExpressionResult = checkAssignmentCompatibility (
     !source:thenExpressionTempResult
@@ -160,12 +158,11 @@ override method @ifExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR elseExpressionPossibleReferenceResult
+    ?result:@objectIR elseExpressionTempResult
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !elseExpressionPossibleReferenceResult
-    ?let elseExpressionTempResult
+    !?elseExpressionTempResult
   ]  
   let elseExpressionResult = checkAssignmentCompatibility (
     !source:elseExpressionTempResult

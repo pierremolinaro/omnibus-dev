@@ -3218,8 +3218,9 @@ class cPtr_extendIR : public cPtr_abstractInstructionIR {
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendTrunc (class GALGAS_instructionListIR & ioObject,
-                                  const class GALGAS_objectIR constin_inResult,
-                                  const class GALGAS_objectIR constin_inSource,
+                                  const class GALGAS_PLMType constin_inResultType,
+                                  class GALGAS_objectIR & io_ioObject,
+                                  class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
 
@@ -3309,6 +3310,18 @@ class cPtr_truncIR : public cPtr_abstractInstructionIR {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              Routine 'getNewTempValue'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_getNewTempValue (const class GALGAS_PLMType constinArgument0,
+                              class GALGAS_semanticTemporariesStruct & ioArgument1,
+                              class GALGAS_objectIR & outArgument2,
+                              class C_Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3522,9 +3535,9 @@ class cPtr_leftShiftIR : public cPtr_abstractInstructionIR {
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendLogicalShiftRight (class GALGAS_instructionListIR & ioObject,
-                                              const class GALGAS_objectIR constin_inResult,
-                                              const class GALGAS_objectIR constin_inSource,
+                                              class GALGAS_objectIR & io_ioResult,
                                               const class GALGAS_uint constin_inShiftAmount,
+                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
@@ -3620,6 +3633,18 @@ class cPtr_logicalRightShiftIR : public cPtr_abstractInstructionIR {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension setter '@instructionListIR appendLoadWhenReference'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendLoadWhenReference (class GALGAS_instructionListIR & ioObject,
+                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                              class GALGAS_objectIR & io_ioObject,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

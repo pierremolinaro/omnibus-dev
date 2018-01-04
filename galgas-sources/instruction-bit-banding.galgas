@@ -20,14 +20,15 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    ${$
     $identifier$ ?let registerGroupName
-    $.$
-    $identifier$ ?let registerName
     $:$
+    $identifier$ ?let registerName
+    $@attribute$ ?let attribute
+    if attribute.string != "bit" then
+      error attribute : "attribute should be @bit" fixit { replace "@bit" }
+    end
     <expression> !?ioAST ?let bitExpression
     let bitExpressionLocation = @location.here
-    $}$
     $=$
     <expression> !?ioAST ?let sourceExpression
   #--- AST
@@ -127,14 +128,10 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
       ?result:@objectIR bitExpressionOperand
     ]
   #--- Load from reference ?
-    if [bitExpressionOperand isReference] then
-      [!?ioInstructionGenerationList appendLoadWhenReference
-        !?ioTemporaries
-        !bitExpressionOperand
-        ?let loadedResultValue
-      ]
-      bitExpressionOperand = loadedResultValue
-    end
+    [!?ioInstructionGenerationList appendLoadWhenReference
+      !?ioTemporaries
+      !?bitExpressionOperand
+    ]
   #--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
     if ([bitExpressionOperand type].plmOriginalTypeName == staticIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
       [bitExpressionOperand literalInteger ?1* ?value:let @bigint value]
@@ -168,14 +165,12 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
       ?result:@objectIR sourceExpressionOperand
     ]
   #--- Load from reference ?
-    if [sourceExpressionOperand isReference] then
+#    if [sourceExpressionOperand isReference] then
       [!?ioInstructionGenerationList appendLoadWhenReference
         !?ioTemporaries
-        !sourceExpressionOperand
-        ?let loadedResultValue
+        !?sourceExpressionOperand
       ]
-      sourceExpressionOperand = loadedResultValue
-    end
+#    end
   #--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
     if ([sourceExpressionOperand type].plmOriginalTypeName == staticIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
       [sourceExpressionOperand literalInteger ?1* ?value:let @bigint value]

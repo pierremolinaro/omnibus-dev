@@ -1,10 +1,18 @@
 
 setter @instructionListIR appendLogicalShiftRight
-  ?let @objectIR inResult
-  ?let @objectIR inSource
+  ?!@objectIR ioResult
   ?let @uint inShiftAmount
+  ?!@semanticTemporariesStruct ioTemporaries
 {
-  self += !@logicalRightShiftIR.new {!inResult !inSource !inShiftAmount}
+  if [ioResult isLiteralInteger] then
+    [ioResult literalInteger ?type:let @PLMType type ?value:let @bigint value]
+    ioResult = .literalInteger {!type:type !value:value >> inShiftAmount}
+  else
+    [!?self appendLoadWhenReference !?ioTemporaries !?ioResult]
+    let source = ioResult
+    getNewTempValue (![source type] !?ioTemporaries ?ioResult)
+    self += !@logicalRightShiftIR.new {!ioResult !source !inShiftAmount}
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -159,15 +159,14 @@ proc analyzeEffectiveParameters
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
-        ?result:let @objectIR expressionResult
+        ?result:@objectIR expressionResult
       ]
       [!?ioInstructionGenerationList appendLoadWhenReference
         !?ioTemporaries
-        !expressionResult
-        ?let expressionValue
+        !?expressionResult
       ]  
       let result = checkAssignmentCompatibility (
-        !source:expressionValue
+        !source:expressionResult
         !targetAnnotationType:[formal_mTypeProxy type]
         !errorLocation:endOfExp
         !staticTypeAllowed:false

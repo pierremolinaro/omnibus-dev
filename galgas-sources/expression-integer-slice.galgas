@@ -153,12 +153,11 @@ override method @integerSliceExpressionAST analyzeExpression
           !?variableMap:ioUniversalMap
           !?alloca:ioAllocaList
           !?instructionListIR:ioInstructionGenerationList
-          ?result:let @objectIR expressionResultPossibleReference
+          ?result:@objectIR expressionResult
         ]
         [!?ioInstructionGenerationList appendLoadWhenReference
           !?ioTemporaries
-          !expressionResultPossibleReference
-          ?let expressionResult
+          !?expressionResult
         ]  
       #--- Check expression type
         switch [expressionResult type].kind

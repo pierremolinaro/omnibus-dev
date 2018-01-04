@@ -308,7 +308,7 @@ registers BCF {
 
 // CAN Controllers
 registers CAN {
-  CMR [4] 0xE004_4004 : 1 << 14 $uint8 {
+  CMR [4] 0xE004_4004 @inc 1 << 14 $uint8 {
     STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
   }
   AMFR          0xE003_C000 $uint32

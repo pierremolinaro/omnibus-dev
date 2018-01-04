@@ -18,6 +18,9 @@ func section activityLedOff @safe @exported () {
 
 let LED_L3 = $digitalPort.D6
 
+let N = 12
+let slice = N [1 ... 3]
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche1 @priority 1 @stacksize 512 {

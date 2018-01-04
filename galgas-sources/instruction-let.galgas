@@ -84,12 +84,11 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR expressionResultPossibleReference
+    ?result:@objectIR expressionResult
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !expressionResultPossibleReference
-    ?let expressionResult
+    !?expressionResult
   ]  
 #--- Declare local constant
   var result = checkAssignmentCompatibility (

@@ -101,12 +101,11 @@ override method @switchInstructionAST instructionSemanticAnalysis
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:switchExpressionGenerationList
-    ?result:let @objectIR switchValueIRPossibleReference
+    ?result:@objectIR switchValueIR
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !switchValueIRPossibleReference
-    ?let switchValueIR
+    !?switchValueIR
   ]  
 #--- Check inferred type
   let enumConstantMap = [switchValueIR type].classConstantMap

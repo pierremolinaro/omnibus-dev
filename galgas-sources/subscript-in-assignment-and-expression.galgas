@@ -30,12 +30,11 @@ proc handleArraySubscriptNew
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR indexResultPossibleReference
+    ?result:@objectIR indexResult
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !indexResultPossibleReference
-    ?let indexResult
+    !?indexResult
   ]  
   if [indexResult isLiteralInteger] then # Static expression
     [indexResult literalInteger ?1* ?value:let @bigint indexValue]
@@ -94,12 +93,11 @@ proc handleArraySubscript
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR indexResultPossibleReference
+    ?result:@objectIR indexResult
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !indexResultPossibleReference
-    ?let indexResult
+    !?indexResult
   ]  
   if [indexResult isLiteralInteger] then # Static expression
     [indexResult literalInteger ?1* ?value:let @bigint indexValue]

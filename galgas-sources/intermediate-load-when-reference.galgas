@@ -2,36 +2,26 @@
 
 setter @instructionListIR appendLoadWhenReference
   ?!@semanticTemporariesStruct ioTemporaries
-  ?let @objectIR inSource
-  !@objectIR outResultingValue
+  ?!@objectIR ioObject
 {
-  switch inSource
+  switch ioObject
   case void :
-    error .nowhere : "<<@instructionListIR appendLoadWhenReference void>>" : outResultingValue
+    error .nowhere : "<<@instructionListIR appendLoadWhenReference void>>" : ioObject
   case reference (@PLMType type llvmName) :
-    getNewTempValue (!type !?ioTemporaries ?outResultingValue)
-    [!?self appendLoadFromReference !outResultingValue !llvmName]
+    getNewTempValue (!type !?ioTemporaries ?let resultingValue)
+    [!?self appendLoadFromReference !resultingValue !llvmName]
+    ioObject = resultingValue
 #--- Values
   case literalInteger (**) :
-    outResultingValue = inSource
   case null (*) :
-    outResultingValue = inSource
   case llvmValue (**) :
-    outResultingValue = inSource
   case llvmStructureValue (* *) :
-    outResultingValue = inSource
   case llvmArrayStaticValues (3*) :
-    outResultingValue = inSource
   case literalString (**) :
-    outResultingValue = inSource
   case zero (*) :
-    outResultingValue = inSource
   case llvmArrayRepeatedStaticValue (4*) :
-    outResultingValue = inSource
   case llvmArrayRepeatedDynamicValue (3*) :
-    outResultingValue = inSource
   case llvmArrayDynamicValues (2*) :
-    outResultingValue = inSource
   end
 }
 

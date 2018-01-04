@@ -61,12 +61,11 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:leftInstructionGenerationList
-    ?result:let @objectIR leftOperandPossibleReference
+    ?result:@objectIR leftOperand
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !leftOperandPossibleReference
-    ?let leftOperand
+    !?leftOperand
   ]  
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
@@ -82,12 +81,11 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:rightInstructionGenerationList
-    ?result:let @objectIR rightOperandPossibleReference
+    ?result:@objectIR rightOperand
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !rightOperandPossibleReference
-    ?let rightOperand
+    !?rightOperand
   ]  
 #--- Check left type is boolean
   if [leftOperand type].kind != .boolean then
@@ -98,9 +96,9 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     error mOperatorLocation : "left operand should be boolean"
   end
 #--- Static operation, or dynamic operation
-  if [leftOperandPossibleReference isLiteralInteger] && [rightOperandPossibleReference isLiteralInteger] then
-    [leftOperandPossibleReference literalInteger ?type:* ?value:let @bigint leftStaticValue]
-    [rightOperandPossibleReference literalInteger ?type:* ?value:let @bigint rightStaticValue]
+  if [leftOperand isLiteralInteger] && [rightOperand isLiteralInteger] then
+    [leftOperand literalInteger ?type:* ?value:let @bigint leftStaticValue]
+    [rightOperand literalInteger ?type:* ?value:let @bigint rightStaticValue]
     outResult = .literalInteger {!type:[leftOperand type] !value:leftStaticValue & rightStaticValue}
   else
   #--- Result type : bool 

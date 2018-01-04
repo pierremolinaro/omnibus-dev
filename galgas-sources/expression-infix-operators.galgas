@@ -107,12 +107,11 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR leftOperandPossibleReference
+    ?result:@objectIR leftOperand
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !leftOperandPossibleReference
-    ?let leftOperand
+    !?leftOperand
   ]  
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
@@ -127,12 +126,11 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR rightExpressionResult
+    ?result:@objectIR rightOperand
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !rightExpressionResult
-    ?let rightOperand
+    !?rightOperand
   ]  
 #------------------- Get operator map
   let operatorMap = getInfixOperatorMap (!mOp !context:inContext !mode:inCurrentMode !mOperatorLocation)

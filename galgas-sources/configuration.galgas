@@ -81,7 +81,7 @@ syntax extension plm_target_specific_syntax {
   rule <configuration_key> ?let @string inKey {
     $identifier$ ?let key
     if key.string != inKey then
-      error key : "invalid key" fixit { replace inKey }
+      error key : "invalid key (found '" + key + "', required '" + inKey + "'" fixit { replace inKey }
     end
     $:$
   }

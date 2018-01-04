@@ -179,7 +179,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
-        ?result:let @objectIR sourceOperand
+        ?result:@objectIR sourceOperand
       ]
       if [sourceOperand plmOriginalTypeName] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
@@ -188,13 +188,12 @@ override method @syncInstructionAST instructionSemanticAnalysis
       end
       [!?guardInstructionGenerationList appendLoadWhenReference
         !?ioTemporaries
-        !sourceOperand
-        ?let sourceValue
+        !?sourceOperand
       ]
       guardedCommandIR = .booleanGuard {
         !isExitCommand:isContinue
         !instructionGenerationList:guardInstructionGenerationList
-        !result:sourceValue
+        !result:sourceOperand
       }
     case boolAndSync (isContinue exp warnsOnStaticExpression endOfExp usesSelf nameList parameterList) :
       @instructionListIR boolExpInstructionGenerationList = {}
@@ -211,7 +210,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
-        ?result:let @objectIR boolExpressionResult
+        ?result:@objectIR boolExpressionResult
       ]
       if [boolExpressionResult plmOriginalTypeName] != boolTypeName () then
         error endOfExp : "guarded expression should be boolean"
@@ -220,8 +219,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
       end
       [!?boolExpInstructionGenerationList appendLoadWhenReference
         !?ioTemporaries
-        !boolExpressionResult
-        ?let boolExpressionValue
+        !?boolExpressionResult
       ]
     #--- Analyze synchronization
       @instructionListIR guardInstructionGenerationList = {}
@@ -313,8 +311,8 @@ override method @syncInstructionAST instructionSemanticAnalysis
           ?guardMangledName: guardMangledName
         )
       end
-      if [boolExpressionValue isLiteralInteger] then
-        [boolExpressionValue literalInteger ?1* ?value:let @bigint value]
+      if [boolExpressionResult isLiteralInteger] then
+        [boolExpressionResult literalInteger ?1* ?value:let @bigint value]
         if value == 1G then
           guardedCommandIR = .sync {
             !isExitCommand:isContinue
@@ -329,7 +327,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         guardedCommandIR = .boolAndSync {
           !isExitCommand:isContinue
           !boolExpInstructionGenerationList:boolExpInstructionGenerationList
-          !boolExpResult:boolExpressionValue
+          !boolExpResult:boolExpressionResult
           !guardMangledName:guardMangledName.string
           !guardInstructionGenerationList:guardInstructionGenerationList
           !effectiveParameterListIR:guardEffectiveParameterListIR

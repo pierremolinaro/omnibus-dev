@@ -208,14 +208,14 @@ override method @constructorCallAST analyzeExpression
           !?instructionListIR:ioInstructionGenerationList
           ?result:let @objectIR expressionResult
         ]
-        let result = checkAssignmentCompatibility (
+        var result = checkAssignmentCompatibility (
           !source:expressionResult
           !targetAnnotationType:formal_mType
           !errorLocation:effective_mSelector.location
           !staticTypeAllowed:false
         )
-        [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !result ?let resultAsValue]
-        sortedOperandIRList += !resultAsValue !formal_mFieldIndex
+        [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?result]
+        sortedOperandIRList += !result !formal_mFieldIndex
       end
       outResult = .llvmStructureValue {!type:resultType !values:sortedOperandIRList}
     end

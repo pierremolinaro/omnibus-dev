@@ -27,7 +27,7 @@ syntax extension plm_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     ${$
     $identifier$ ?let registerGroupName
-    $.$
+    $:$
     $identifier$ ?let registerName
     @registerIntegerFieldListAST integerFieldValues = {}
     repeat
@@ -129,12 +129,11 @@ override method @registerConstantExpressionAST analyzeExpression
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
-        ?result:let @objectIR expressionResultPossibleReference
+        ?result:@objectIR expressionResult
       ]
       [!?ioInstructionGenerationList appendLoadWhenReference
         !?ioTemporaries
-        !expressionResultPossibleReference
-        ?let expressionResult
+        !?expressionResult
       ]  
     #--- Check expression type
       if [[expressionResult type].kind isStaticInteger] then 
