@@ -45,23 +45,23 @@ driver root {
     nop
     nop
   //--------------------------------------------------- Enable clocks to always-used peripherals
-    SIM.SCGC3 = {SIM.SCGC3 !ADC1:1 !FTM2:1 !FTM3:1}
-    SIM.SCGC5 = {SIM.SCGC5 !PORTA:1 !PORTB:1 !PORTC:1 !PORTD:1 !PORTE:1}    // clocks active to all GPIO
-    SIM.SCGC6 = {SIM.SCGC6 !RTC:1 !FTM0:1 !FTM1:1 !ADC0:1 !FTF:1}
+    SIM.SCGC3 = {SIM:SCGC3 !ADC1:1 !FTM2:1 !FTM3:1}
+    SIM.SCGC5 = {SIM:SCGC5 !PORTA:1 !PORTB:1 !PORTC:1 !PORTD:1 !PORTE:1}    // clocks active to all GPIO
+    SIM.SCGC6 = {SIM:SCGC6 !RTC:1 !FTM0:1 !FTM1:1 !ADC0:1 !FTF:1}
   //  SCB.CPACR = 0x00F0_0000; // Enable floating point unit
-    LMEM.PCCCR = {LMEM.PCCCR !GO:1 !INVW1:1 !INVW0:1 !ENWRBUF:1 !ENCACHE:1} // 0x8500_0003
+    LMEM.PCCCR = {LMEM:PCCCR !GO:1 !INVW1:1 !INVW0:1 !ENWRBUF:1 !ENCACHE:1} // 0x8500_0003
   //--- If the RTC oscillator isn't enabled, get it started early
     if not RTC.CR.OSCE.bool {
       RTC.SR = 0
-      RTC.CR = {RTC.CR !SC16P:1 !SC4P:1 !OSCE:1}
+      RTC.CR = {RTC:CR !SC16P:1 !SC4P:1 !OSCE:1}
     }
   //--- Release I/O pins hold, if we woke up from VLLS mode
     if PMC.REGSC.ACKISO ≠ 0 {
-      PMC.REGSC |= {PMC.REGSC !ACKISO:1}
+      PMC.REGSC |= {PMC:REGSC !ACKISO:1}
     }
   //--- Since this is a write once register, make it visible to all F_CPU's
   //    so we can into other sleep modes in the future at any speed
-    SMC.PMPROT = {SMC.PMPROT !AHSRUN:1 !AVLP:1 !ALLS:1 !AVLLS:1}
+    SMC.PMPROT = {SMC:PMPROT !AHSRUN:1 !AVLP:1 !ALLS:1 !AVLLS:1}
   // TODO: do this while the PLL is waiting to lock....
     SCB.VTOR = 0  // use vector table in flash
   //  // default all interrupts to medium priority level
@@ -69,54 +69,54 @@ driver root {
   //---------2- Initialisation de la PLL
   // start in FEI mode
   //--- Enable capacitors for crystal
-    OSC.CR = {OSC.CR !SC8P:1 !SC2P:1 !ERCLKEN:1}
+    OSC.CR = {OSC:CR !SC8P:1 !SC2P:1 !ERCLKEN:1}
   //--- Enable osc, 8-32 MHz range, low power mode
-    MCG.C2 = {MCG.C2 !RANGE0:2 !EREFS:1}
+    MCG.C2 = {MCG:C2 !RANGE0:2 !EREFS:1}
   //--- Switch to crystal as clock source, FLL input = 16 MHz / 512
-    MCG.C1 = {MCG.C1 !CLKS:2 !FRDIV:4}
+    MCG.C1 = {MCG:C1 !CLKS:2 !FRDIV:4}
   //--- Wait for crystal oscillator to begin
     while MCG.S.OSCINIT0 == 0 {}
   //--- Wait for FLL to use oscillator
     while MCG.S.IREFST ≠ 0 {}
   //--- Wait for MCGOUT to use oscillator
-    while MCG.S.CLKST ≠ {MCG.S !CLKST:2} {}
+    while MCG.S.CLKST ≠ {MCG:S !CLKST:2} {}
   //--- Now we're in FBE mode
   //--- If we need faster than crystal, turn on the PLL
     if @static F_CPU_MHZ > 120 {
-      SMC.PMCTRL = {SMC.PMCTRL !RUNM:3} // enter HSRUN mode
-      while SMC.PMSTAT ≠ {SMC.PMSTAT !RUN:1} {}
+      SMC.PMCTRL = {SMC:PMCTRL !RUNM:3} // enter HSRUN mode
+      while SMC.PMSTAT ≠ {SMC:PMSTAT !RUN:1} {}
     }
     check (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)
       or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24)
       or (F_CPU_MHZ == 72)
   //--- Configure CPU clock
     if @static F_CPU_MHZ == 240 {
-      MCG.C5 = {MCG.C5 !PRDIV0:0}
-      MCG.C6 = {MCG.C6 !PLLS:1 !VDIV0:14}
+      MCG.C5 = {MCG:C5 !PRDIV0:0}
+      MCG.C6 = {MCG:C6 !PLLS:1 !VDIV0:14}
     }else if @static F_CPU_MHZ == 216 {
-      MCG.C5 = {MCG.C5 !PRDIV0:0}
-      MCG.C6 = {MCG.C6 !PLLS:1 !VDIV0:11}
+      MCG.C5 = {MCG:C5 !PRDIV0:0}
+      MCG.C6 = {MCG:C6 !PLLS:1 !VDIV0:11}
     }else if @static F_CPU_MHZ == 192 {
-      MCG.C5 = {MCG.C5 !PRDIV0:0}
-      MCG.C6 = {MCG.C6 !PLLS:1 !VDIV0:8}
+      MCG.C5 = {MCG:C5 !PRDIV0:0}
+      MCG.C6 = {MCG:C6 !PLLS:1 !VDIV0:8}
     }else if @static F_CPU_MHZ == 180 {
-      MCG.C5 = {MCG.C5 !PRDIV0:1}
-      MCG.C6 = {MCG.C6 !PLLS:1 !VDIV0:29}
+      MCG.C5 = {MCG:C5 !PRDIV0:1}
+      MCG.C6 = {MCG:C6 !PLLS:1 !VDIV0:29}
     }else if @static F_CPU_MHZ == 168 {
-      MCG.C5 = {MCG.C5 !PRDIV0:0}
-      MCG.C6 = {MCG.C6 !PLLS:1 !VDIV0:5}
+      MCG.C5 = {MCG:C5 !PRDIV0:0}
+      MCG.C6 = {MCG:C6 !PLLS:1 !VDIV0:5}
     }else if @static F_CPU_MHZ == 144 {
-      MCG.C5 = {MCG.C5 !PRDIV0:0}
-      MCG.C6 = {MCG.C6 !PLLS:1 !VDIV0:2}
+      MCG.C5 = {MCG:C5 !PRDIV0:0}
+      MCG.C6 = {MCG:C6 !PLLS:1 !VDIV0:2}
     }else if @static F_CPU_MHZ == 120 {
-      MCG.C5 = {MCG.C5 !PRDIV0:1}
-      MCG.C6 = {MCG.C6 !PLLS:1 !VDIV0:14}
+      MCG.C5 = {MCG:C5 !PRDIV0:1}
+      MCG.C6 = {MCG:C6 !PLLS:1 !VDIV0:14}
     }else if @static (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24) {
-      MCG.C5 = {MCG.C5 !PRDIV0:1}
-      MCG.C6 = {MCG.C6 !PLLS:1 !VDIV0:8}
+      MCG.C5 = {MCG:C5 !PRDIV0:1}
+      MCG.C6 = {MCG:C6 !PLLS:1 !VDIV0:8}
     }else if @static F_CPU_MHZ == 72 {
-      MCG.C5 = {MCG.C5 !PRDIV0:1}
-      MCG.C6 = {MCG.C6 !PLLS:1 !VDIV0:2}
+      MCG.C5 = {MCG:C5 !PRDIV0:1}
+      MCG.C6 = {MCG:C6 !PLLS:1 !VDIV0:2}
     }
   //--- Wait for PLL to start using xtal as its input
     while MCG.S.PLLST == 0 {}
@@ -124,48 +124,48 @@ driver root {
     while MCG.S.LOCK0 == 0 {}
   //------------------------------------ Now we're in PBE mode : now program the clock dividers
     if @static F_CPU_MHZ == 240 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // Bus 120 MHz, Flash 30 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:4} // USB clock = 240 MHz / 5
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // Bus 120 MHz, Flash 30 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:4} // USB clock = 240 MHz / 5
     }else if @static F_CPU_MHZ == 216 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // bus = 108 MHz, Flash 27 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:0} // USB clock = IRC48M
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // bus = 108 MHz, Flash 27 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:0} // USB clock = IRC48M
     }else if @static F_CPU_MHZ == 192 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 96 MHz, Flash 27.4 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:3} // USB clock = 192 MHz / 4
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 96 MHz, Flash 27.4 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:3} // USB clock = 192 MHz / 4
     }else if @static F_CPU_MHZ == 180 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 90 MHz, Flash 25.7 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:0} // USB clock = IRC48M
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 90 MHz, Flash 25.7 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:0} // USB clock = IRC48M
     }else if @static F_CPU_MHZ == 168 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:0 !OUTDIV2:2 !OUTDIV4:5} // bus = 56 MHz, Flash 28 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:6 !USBFRAC:1} // USB clock = 168 MHz * 2 / 7
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:2 !OUTDIV4:5} // bus = 56 MHz, Flash 28 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:6 !USBFRAC:1} // USB clock = 168 MHz * 2 / 7
     }else if @static F_CPU_MHZ == 144 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:4} // bus = 72 MHz, Flash 28.8 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:2} // USB clock = 144 MHz / 3
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:4} // bus = 72 MHz, Flash 28.8 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:2} // USB clock = 144 MHz / 3
     }else if @static F_CPU_MHZ == 120 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:4} // bus = 120 MHz, Flash 24 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:4 !USBFRAC:1} // USB clock = 120 MHz * 2 / 5
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:4} // bus = 120 MHz, Flash 24 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:4 !USBFRAC:1} // USB clock = 120 MHz * 2 / 5
     }else if @static F_CPU_MHZ == 96 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:3} // bus = 96 MHz, Flash 24 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:1} // USB clock = 96 MHz / 2
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:3} // bus = 96 MHz, Flash 24 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:1} // USB clock = 96 MHz / 2
     }else if @static F_CPU_MHZ == 72 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:2} // bus = 72 MHz, Flash 24 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:2 !USBFRAC:1} // USB clock = 72 MHz * 2 / 3
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:2} // bus = 72 MHz, Flash 24 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:2 !USBFRAC:1} // USB clock = 72 MHz * 2 / 3
     }else if @static F_CPU_MHZ == 48 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:1 !OUTDIV2:1 !OUTDIV3:1 !OUTDIV4:3} // bus = 48 MHz, Flash 24 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:1 !OUTDIV2:1 !OUTDIV3:1 !OUTDIV4:3} // bus = 48 MHz, Flash 24 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2
     }else if @static F_CPU_MHZ == 24 {
-      SIM.CLKDIV1 = {SIM.CLKDIV1 !OUTDIV1:3 !OUTDIV2:3 !OUTDIV3:3 !OUTDIV4:3} // bus = 24 MHz, Flash 24 MHz
-      SIM.CLKDIV2 = {SIM.CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2
+      SIM.CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:3 !OUTDIV2:3 !OUTDIV3:3 !OUTDIV4:3} // bus = 24 MHz, Flash 24 MHz
+      SIM.CLKDIV2 = {SIM:CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2
     }
   //--- Switch to PLL as clock source
-    MCG.C1 = {MCG.C1 !CLKS:0 !FRDIV:4}
+    MCG.C1 = {MCG:C1 !CLKS:0 !FRDIV:4}
   //--- Wait for PLL clock to be used
-    while MCG.S.CLKST ≠ {MCG.S !CLKST:3} {}
+    while MCG.S.CLKST ≠ {MCG:S !CLKST:3} {}
   //--- USB clock
     if @static (F_CPU_MHZ == 240) or (F_CPU_MHZ == 180) {
-      SIM.SOPT2 = {SIM.SOPT2 !USBSRC:1 !PLLFLLSEL:3 !TRACECLKSEL:1 !CLKOUTSEL:6} // PLLFLLSEL:3 --> IRC48SEL
+      SIM.SOPT2 = {SIM:SOPT2 !USBSRC:1 !PLLFLLSEL:3 !TRACECLKSEL:1 !CLKOUTSEL:6} // PLLFLLSEL:3 --> IRC48SEL
     }else{
-      SIM.SOPT2 = {SIM.SOPT2 !USBSRC:1 !PLLFLLSEL:1 !TRACECLKSEL:1 !CLKOUTSEL:6}
+      SIM.SOPT2 = {SIM:SOPT2 !USBSRC:1 !PLLFLLSEL:1 !TRACECLKSEL:1 !CLKOUTSEL:6}
     }
   }
 

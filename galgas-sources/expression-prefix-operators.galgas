@@ -67,12 +67,11 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR expressionResultPossibleReference
+    ?result:@objectIR expressionResult
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !expressionResultPossibleReference
-    ?let expressionResult
+    !?expressionResult
   ]  
 #--- Check expression type accepts prefix operator
   @prefixOperatorMap prefixOperatorMap

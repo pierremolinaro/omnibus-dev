@@ -6,7 +6,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <assignment_operator> !@infixOperator outInfixOperator !@location outOperatorLocation{
+  rule <assignment_combined_with_operator> !@infixOperator outInfixOperator !@location outOperatorLocation{
     select
       $|=$
       outInfixOperator = .orOp
@@ -51,7 +51,7 @@ syntax extension plm_syntax {
     <lvalue> !?ioAST ?let lvalue
     let instructionLocation = @location.here
   #--- Assignment operator
-    <assignment_operator> ?let infixOperator ?let operatorLocation
+    <assignment_combined_with_operator> ?let infixOperator ?let operatorLocation
   #--- Right expression
     <expression> !?ioAST ?let @expressionAST rightExpression
   #--- Build source expression

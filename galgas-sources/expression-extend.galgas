@@ -97,12 +97,11 @@ override method @extendExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR expressionResultPossibleReference
+    ?result:@objectIR expressionResult
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !expressionResultPossibleReference
-    ?let expressionResult
+    !?expressionResult
   ]  
 #--- Analyze type
   let @PLMType resultType = if mTypeName.string == ""

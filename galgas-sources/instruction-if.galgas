@@ -120,12 +120,11 @@ override method @ifInstructionAST instructionSemanticAnalysis
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR testResultPossibleReference
+    ?result: @objectIR testResult
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !testResultPossibleReference
-    ?let testResult
+    !?testResult
   ]  
 #--- Check inferred type
   if [testResult type].kind != .boolean then

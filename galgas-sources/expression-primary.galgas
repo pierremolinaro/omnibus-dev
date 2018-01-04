@@ -31,6 +31,21 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+    $identifier$ ?let receiver
+    $:$
+    $identifier$ ?*
+    select
+    or
+      $:$
+      $identifier$ ?*
+    end
+  #--- AST
+    outExpression = @primaryInExpressionAST.new {!receiver !{}}
+  }
+
+  #·····················································································································
+
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     @lstring receiver
   #--- Self or identifier ?
     select
@@ -640,21 +655,15 @@ proc handleSliceInExpression
 {
   if inLow.bigint > inHigh.bigint then
     error inLow : "low bound should be lower or equal to high bound" : ioResult
-  elsif not [[ioResult type].kind isInteger] then
+  elsif not ([[ioResult type].kind isInteger] || [[ioResult type].kind isStaticInteger]) then
     error inLow : "Invalid, receiver is not an integer" : ioResult
   else
-  #--- Load when reference
-    [!?ioInstructionGenerationList appendLoadWhenReference !? ioTemporaries !ioResult ?let loadedValue]
   #--- Shift source value
-    getNewTempValue (![loadedValue type] !?ioTemporaries ?let shiftedSourceValue)
-    [!?ioInstructionGenerationList appendLogicalShiftRight !shiftedSourceValue !loadedValue ![inHigh.bigint uint]]
+    [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inHigh.bigint uint] !?ioTemporaries]
   #--- Truncate source value
     let resultIntegerName = @lstring.new {!"uint" + (inHigh.bigint - inLow.bigint + 1G) !inLow.location}
     [inContext.mTypeMap searchKey !lkey:resultIntegerName ?type:let sliceType ?1*]
-    getNewTempValue (!sliceType !?ioTemporaries ?let shiftedTruncatedSourceValue)
-    [!?ioInstructionGenerationList appendTrunc !shiftedTruncatedSourceValue !shiftedSourceValue]
-  #---
-    ioResult = shiftedTruncatedSourceValue
+    [!?ioInstructionGenerationList appendTrunc !sliceType !?ioResult !?ioTemporaries]
   end
 }
 

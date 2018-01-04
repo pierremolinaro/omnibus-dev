@@ -151,14 +151,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     ?result:@objectIR sourceOperand
   ]
 #--- Load from reference ?
-  if [sourceOperand isReference] then
-    [!?ioInstructionGenerationList appendLoadWhenReference
-      !?ioTemporaries
-      !sourceOperand
-      ?let loadedResultValue
-    ]
-    sourceOperand = loadedResultValue
-  end
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?sourceOperand]
 #--- If source operand is static type, check value and convert it to 'resultType'
   if [sourceOperand isLiteralInteger] then
     [sourceOperand literalInteger ?1* ?value:let @bigint value]
@@ -172,6 +165,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   var rightShiftAmount = bitCount
   @bigint accumulatedFieldStaticValues = 0G
   for (sliceWidthStr sliceKind) in mSliceAssignmentList do
+    var sourceOperandForSlicing = sourceOperand
   #--- Analyze selector
     @lstring sliceTypeName
     @uint sliceWidth
@@ -198,10 +192,8 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     end
     let sliceType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !sliceTypeName} type]
   #--- Shift and truncate source value
-    getNewTempValue (![sourceOperand type] !?ioTemporaries ?let shiftedSourceValue)
-    [!?ioInstructionGenerationList appendLogicalShiftRight !shiftedSourceValue !sourceOperand !rightShiftAmount]
-    getNewTempValue (!sliceType !?ioTemporaries ?let shiftedTruncatedSourceValue)
-    [!?ioInstructionGenerationList appendTrunc !shiftedTruncatedSourceValue !shiftedSourceValue]
+    [!?ioInstructionGenerationList appendLogicalShiftRight !?sourceOperandForSlicing !rightShiftAmount !?ioTemporaries]
+    [!?ioInstructionGenerationList appendTrunc !sliceType !?sourceOperandForSlicing !?ioTemporaries]
   #--- Analyze target
     switch sliceKind
     case discarded :
@@ -221,7 +213,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       [!?ioInstructionGenerationList appendCopyFromReferences
         !?ioTemporaries
         !errorLocation:varName.location
-        !source:shiftedTruncatedSourceValue
+        !source:sourceOperandForSlicing
         !target:targetRef
       ]
     case letDeclaration (letName) :
@@ -240,7 +232,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       [!?ioInstructionGenerationList appendCopyFromReferences
         !?ioTemporaries
         !errorLocation:letName.location
-        !source:shiftedTruncatedSourceValue
+        !source:sourceOperandForSlicing
         !target:targetRef
       ]
     case lValue (@LValueAST target) :
@@ -262,7 +254,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       [!?ioInstructionGenerationList appendCopyFromReferences
         !?ioTemporaries
         !errorLocation:target.mIdentifier
-        !source:shiftedTruncatedSourceValue
+        !source:sourceOperandForSlicing
         !target:lvalueIR
       ]
     end

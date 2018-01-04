@@ -127,7 +127,10 @@ syntax extension plm_syntax {
       $]$
       <expression> !?ioAST ?let baseAddressExpression
       let baseAddressExpressionLocation = @location.here
-      $:$
+      $@attribute$ ?let attribute
+      if attribute.string != "inc" then
+        error attribute : "attribute should be @inc" fixit { replace "@inc" }
+      end
       <expression> !?ioAST ?let arrayElementSizeExpression
       let arrayElementSizeExpressionLocation = @location.here
       ioRegisterDeclarationList +=

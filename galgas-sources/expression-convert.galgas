@@ -99,12 +99,11 @@ override method @convertExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR expressionResultPossibleReference
+    ?result:@objectIR expressionResult
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
-    !expressionResultPossibleReference
-    ?let expressionResult
+    !?expressionResult
   ]  
 #--- 
   if not [inRoutineAttributes panicAllowed] then

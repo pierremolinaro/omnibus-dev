@@ -126,12 +126,11 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:let @objectIR lowerBoundExpressionResultPossibleReference
+      ?result:@objectIR lowerBoundExpressionResult
     ]
     [!?ioInstructionGenerationList appendLoadWhenReference
       !?ioTemporaries
-      !lowerBoundExpressionResultPossibleReference
-      ?let lowerBoundExpressionResult
+      !?lowerBoundExpressionResult
     ]  
     [mUpperBoundExpression analyzeExpression
       !self:inSelfType
@@ -145,12 +144,11 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:let @objectIR upperBoundExpressionResultPossibleReference
+      ?result:@objectIR upperBoundExpressionResult
     ]
     [!?ioInstructionGenerationList appendLoadWhenReference
       !?ioTemporaries
-      !upperBoundExpressionResultPossibleReference
-      ?let upperBoundExpressionResult
+      !?upperBoundExpressionResult
     ]  
   #--- Check expression types
     let lowerBound = checkAssignmentCompatibility (

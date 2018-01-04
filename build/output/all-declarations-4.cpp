@@ -13322,11 +13322,25 @@ GALGAS_extendIR GALGAS_extendIR::extractObject (const GALGAS_object & inObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendTrunc (GALGAS_instructionListIR & ioObject,
-                                  const GALGAS_objectIR constinArgument_inResult,
-                                  const GALGAS_objectIR constinArgument_inSource,
-                                  C_Compiler * /* inCompiler */
+                                  const GALGAS_PLMType constinArgument_inResultType,
+                                  GALGAS_objectIR & ioArgument_ioObject,
+                                  GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                  C_Compiler * inCompiler
                                   COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_truncIR::constructor_new (constinArgument_inResult, constinArgument_inSource  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 6)) ;
+  const enumGalgasBool test_0 = ioArgument_ioObject.getter_isLiteralInteger (SOURCE_FILE ("intermediate-trunc.galgas", 7)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_bigint var_value_236 ;
+    GALGAS_PLMType joker_210 ; // Joker input parameter
+    ioArgument_ioObject.method_literalInteger (joker_210, var_value_236, inCompiler COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 8)) ;
+    ioArgument_ioObject = GALGAS_objectIR::constructor_literalInteger (constinArgument_inResultType, var_value_236  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 9)) ;
+  }else if (kBoolFalse == test_0) {
+    GALGAS_objectIR var_result_372 ;
+    {
+    routine_getNewTempValue (constinArgument_inResultType, ioArgument_ioTemporaries, var_result_372, inCompiler  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 11)) ;
+    }
+    ioObject.addAssign_operation (GALGAS_truncIR::constructor_new (var_result_372, ioArgument_ioObject  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 12))  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 12)) ;
+    ioArgument_ioObject = var_result_372 ;
+  }
 }
 
 
@@ -13922,12 +13936,27 @@ GALGAS_leftShiftIR GALGAS_leftShiftIR::extractObject (const GALGAS_object & inOb
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendLogicalShiftRight (GALGAS_instructionListIR & ioObject,
-                                              const GALGAS_objectIR constinArgument_inResult,
-                                              const GALGAS_objectIR constinArgument_inSource,
+                                              GALGAS_objectIR & ioArgument_ioResult,
                                               const GALGAS_uint constinArgument_inShiftAmount,
-                                              C_Compiler * /* inCompiler */
+                                              GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                              C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_logicalRightShiftIR::constructor_new (constinArgument_inResult, constinArgument_inSource, constinArgument_inShiftAmount  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 7)) ;
+  const enumGalgasBool test_0 = ioArgument_ioResult.getter_isLiteralInteger (SOURCE_FILE ("intermediate-logical-shift-right.galgas", 7)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_PLMType var_type_237 ;
+    GALGAS_bigint var_value_262 ;
+    ioArgument_ioResult.method_literalInteger (var_type_237, var_value_262, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 8)) ;
+    ioArgument_ioResult = GALGAS_objectIR::constructor_literalInteger (var_type_237, var_value_262.right_shift_operation (constinArgument_inShiftAmount COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9)) ;
+  }else if (kBoolFalse == test_0) {
+    {
+    extensionSetter_appendLoadWhenReference (ioObject, ioArgument_ioTemporaries, ioArgument_ioResult, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 11)) ;
+    }
+    GALGAS_objectIR var_source_423 = ioArgument_ioResult ;
+    {
+    routine_getNewTempValue (extensionGetter_type (var_source_423, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)), ioArgument_ioTemporaries, ioArgument_ioResult, inCompiler  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)) ;
+    }
+    ioObject.addAssign_operation (GALGAS_logicalRightShiftIR::constructor_new (ioArgument_ioResult, var_source_423, constinArgument_inShiftAmount  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14)) ;
+  }
 }
 
 

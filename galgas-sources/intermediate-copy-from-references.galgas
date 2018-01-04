@@ -12,10 +12,10 @@ setter @instructionListIR appendCopyFromReferences
    || not [inSourcePossibleReference isReference]
 #---
   if performLoadStore then
+    var loadedResultValue = inSourcePossibleReference
     [!?self appendLoadWhenReference
       !?ioTemporaries
-      !inSourcePossibleReference
-      ?let loadedResultValue
+      !?loadedResultValue
     ]
     let result = checkAssignmentCompatibility (
       !source:loadedResultValue
