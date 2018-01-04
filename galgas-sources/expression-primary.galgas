@@ -30,7 +30,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
     $identifier$ ?let receiver
     $:$
     $identifier$ ?*
