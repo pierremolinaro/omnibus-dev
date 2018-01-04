@@ -22,13 +22,13 @@ driver time > root {
   //············································································
 
   public func init oneMillisecondBusyWait @noUnusedWarning () {
-    while not SYST.CSR.COUNTFLAG.bool {}
+    while SYST:CSR:COUNTFLAG == 0 {}
   }
 
   //············································································
 
   public func panic panicOneMillisecondBusyWait @noUnusedWarning () {
-    while not SYST.CSR.COUNTFLAG.bool {}
+    while SYST:CSR:COUNTFLAG == 0 {}
   }
 
   //············································································

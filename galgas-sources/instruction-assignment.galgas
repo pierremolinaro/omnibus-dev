@@ -15,40 +15,6 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-#  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-#    $identifier$ ?let receiver
-#    $:$
-#    $identifier$ ?*
-#  #--- Source expression
-#    $=$
-#    <expression> !?ioAST ?let sourceExpression
-#  #--- AST
-##    ioInstructionList += !@assignmentInstructionAST.new {
-##      !assignmentTargetAST.mIdentifier.location
-##      !assignmentTargetAST
-##      !sourceExpression
-##    }
-#  }
-
-  #·····················································································································
-
-#  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-#    $identifier$ ?let receiver
-#    $:$
-#    $identifier$ ?*
-#  #--- Source expression
-#    <assignment_combined_with_operator> ?let infixOperator ?let operatorLocation
-#    <expression> !?ioAST ?let sourceExpression
-#  #--- AST
-##    ioInstructionList += !@assignmentInstructionAST.new {
-##      !assignmentTargetAST.mIdentifier.location
-##      !assignmentTargetAST
-##      !sourceExpression
-##    }
-#  }
-
-  #·····················································································································
-
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     <lvalue> !?ioAST ?let assignmentTargetAST
   #--- Source expression

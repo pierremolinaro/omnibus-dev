@@ -4,6 +4,7 @@
 
 list @driverPropertyListAST {
   @lstring mPropertyName
+  @propertyAttributeList mPropertyAttributeList
   @bool mIsConstant # true if declared with "let"
   @lstring mTypeName # Empty string if no type annotation
   @structurePropertyInitOptionalExpressionAST mOptionalExpression
@@ -74,19 +75,26 @@ syntax extension plm_syntax {
       constant = true
     end
     $identifier$ ?let fieldName
+    @propertyAttributeList propertyAttributeList = {}
+    repeat
+    while
+      $@attribute$ ?let attribute
+      $integer$ ?let value
+      propertyAttributeList += !attribute !value
+    end
     select
       <type_definition> !?ioAST ?let typeName
       select
-        ioPropertyList += !fieldName !constant !typeName !.noExpression
+        ioPropertyList += !fieldName !propertyAttributeList !constant !typeName !.noExpression
       or
         $=$
         <expression> !?ioAST ?let initExpression
-        ioPropertyList += !fieldName !constant !typeName !.expression {!initExpression:initExpression}
+        ioPropertyList += !fieldName !propertyAttributeList !constant !typeName !.expression {!initExpression:initExpression}
       end
     or
       $=$
       <expression> !?ioAST ?let initExpression
-      ioPropertyList += !fieldName !constant !["" nowhere] !.expression {!initExpression:initExpression}
+      ioPropertyList += !fieldName !propertyAttributeList !constant !["" nowhere] !.expression {!initExpression:initExpression}
     end
   }
   
@@ -264,7 +272,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       [instanciedDriverMap searchKey !declaration.mDriverName ?let driverInstanciationArgumentMap]
     #--- Build driver property list, adding init expression
       @stringset validArgumentSet = {}
-      for (propertyName constant optionalPropertyTypeName optionalInitExpression) in declaration.mDriverPropertyListAST do
+      for (propertyName propertyAttributeList constant optionalPropertyTypeName optionalInitExpression) in declaration.mDriverPropertyListAST do
         @expressionAST initExpression
         switch optionalInitExpression 
         case noExpression :
@@ -275,6 +283,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
         end
         driverPropertyListAST += 
          !propertyName
+         !propertyAttributeList
          !constant
          !false
          !optionalPropertyTypeName

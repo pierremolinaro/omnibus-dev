@@ -669,121 +669,121 @@ driver digital > root {
   public func read @noUnusedWarning (?port:port $digitalPort) -> $bool {
     switch port {
     case D0 : // PTB16
-      result = (GPIOB.PDIR & (1 << 16)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 16)) ≠ 0
     case D1 : // PTB17
-      result = (GPIOB.PDIR & (1 << 17)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 17)) ≠ 0
     case D2 : // PTD0
-      result = (GPIOD.PDIR & (1 << 0)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 0)) ≠ 0
     case D3 : // PTA12
-      result = (GPIOA.PDIR & (1 << 12)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 12)) ≠ 0
     case D4 : // PTA13
-      result = (GPIOA.PDIR & (1 << 13)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 13)) ≠ 0
     case D5 : // PTD7
-      result = (GPIOD.PDIR & (1 << 7)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 7)) ≠ 0
     case D6 : // PTD4
-      result = (GPIOD.PDIR & (1 << 4)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 4)) ≠ 0
     case D7 : // PTD2
-      result = (GPIOD.PDIR & (1 << 2)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 2)) ≠ 0
     case D8 : // PTD3
-      result = (GPIOD.PDIR & (1 << 3)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 3)) ≠ 0
     case D9  : // PTC3
-      result = (GPIOC.PDIR & (1 << 3)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 3)) ≠ 0
     case D10 : // PTC4
-      result = (GPIOC.PDIR & (1 << 4)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 4)) ≠ 0
     case D11 : // PTC6
-      result = (GPIOC.PDIR & (1 << 6)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 6)) ≠ 0
     case D12 : // PTC7
-      result = (GPIOC.PDIR & (1 << 7)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 7)) ≠ 0
     case D13 : // PTC5
-      result = (GPIOC.PDIR & (1 << 5)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 5)) ≠ 0
     case D14 : // PTD1
-      result = (GPIOD.PDIR & (1 << 1)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 1)) ≠ 0
     case D15 : // PTC0
-      result = (GPIOC.PDIR & (1 << 0)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 0)) ≠ 0
     case D16 : // PTB0
-      result = (GPIOB.PDIR & (1 << 0)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 0)) ≠ 0
     case D17 : // PTB1
-      result = (GPIOB.PDIR & (1 << 1)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 1)) ≠ 0
     case D18 : // PTB3
-      result = (GPIOB.PDIR & (1 << 3)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 3)) ≠ 0
     case D19 : // PTB2
-      result = (GPIOB.PDIR & (1 << 2)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 2)) ≠ 0
     case D20 : // PTD5
-      result = (GPIOD.PDIR & (1 << 5)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 5)) ≠ 0
     case D21 : // PTD6
-      result = (GPIOD.PDIR & (1 << 6)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 6)) ≠ 0
     case D22 : // PTC1
-      result = (GPIOC.PDIR & (1 << 1)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 1)) ≠ 0
     case D23 : // PTC2
-      result = (GPIOC.PDIR & (1 << 2)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 2)) ≠ 0
     case D24 : // PTE26
-      result = (GPIOE.PDIR & (1 << 26)) ≠ 0
+      result = (GPIOE:PDIR & (1 << 26)) ≠ 0
     case D25 : // PTA5
-      result = (GPIOA.PDIR & (1 << 5)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 5)) ≠ 0
     case D26 : // PTA14
-      result = (GPIOA.PDIR & (1 << 14)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 14)) ≠ 0
     case D27 : // PTA15
-      result = (GPIOA.PDIR & (1 << 15)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 15)) ≠ 0
     case D28 : // PTA16
-      result = (GPIOA.PDIR & (1 << 16)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 16)) ≠ 0
     case D29 : // PTB18
-      result = (GPIOB.PDIR & (1 << 18)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 18)) ≠ 0
     case D30 : // PTB19
-      result = (GPIOB.PDIR & (1 << 19)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 19)) ≠ 0
     case D31 : // PTB10
-      result = (GPIOB.PDIR & (1 << 10)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 10)) ≠ 0
     case D32 : // PTB11
-      result = (GPIOB.PDIR & (1 << 11)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 11)) ≠ 0
     case D33 : // PTE24
-      result = (GPIOE.PDIR & (1 << 24)) ≠ 0
+      result = (GPIOE:PDIR & (1 << 24)) ≠ 0
     case D34 : // PTE25
-      result = (GPIOE.PDIR & (1 << 25)) ≠ 0
+      result = (GPIOE:PDIR & (1 << 25)) ≠ 0
     case D35 : // PTC8
-      result = (GPIOC.PDIR & (1 << 8)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 8)) ≠ 0
     case D36 : // PTC9
-      result = (GPIOC.PDIR & (1 << 9)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 9)) ≠ 0
     case D37 : // PTC10
-      result = (GPIOC.PDIR & (1 << 10)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 10)) ≠ 0
     case D38 : // PTC11
-      result = (GPIOC.PDIR & (1 << 11)) ≠ 0
+      result = (GPIOC:PDIR & (1 << 11)) ≠ 0
     case D39 : // PTA17
-      result = (GPIOA.PDIR & (1 << 17)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 17)) ≠ 0
     case D40 : // PTA28
-      result = (GPIOA.PDIR & (1 << 28)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 28)) ≠ 0
     case D41 : // PTA29
-      result = (GPIOA.PDIR & (1 << 29)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 29)) ≠ 0
     case D42 : // PTA26
-      result = (GPIOA.PDIR & (1 << 26)) ≠ 0
+      result = (GPIOA:PDIR & (1 << 26)) ≠ 0
     case D43 : // PTB20
-      result = (GPIOB.PDIR & (1 << 20)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 20)) ≠ 0
     case D44 : // PTB22
-      result = (GPIOB.PDIR & (1 << 22)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 22)) ≠ 0
     case D45 : // PTB23
-      result = (GPIOB.PDIR & (1 << 23)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 23)) ≠ 0
     case D46 : // PTB21
-      result = (GPIOB.PDIR & (1 << 21)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 21)) ≠ 0
     case D47 : // PTD8
-      result = (GPIOD.PDIR & (1 << 8)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 8)) ≠ 0
     case D48 : // PTD9
-      result = (GPIOD.PDIR & (1 << 9)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 9)) ≠ 0
     case D49 : // PTB4
-      result = (GPIOB.PDIR & (1 << 4)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 4)) ≠ 0
     case D50 : // PTB5
-      result = (GPIOB.PDIR & (1 << 5)) ≠ 0
+      result = (GPIOB:PDIR & (1 << 5)) ≠ 0
     case D51 : // PTD14
-      result = (GPIOD.PDIR & (1 << 14)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 14)) ≠ 0
     case D52 : // PTD13
-      result = (GPIOD.PDIR & (1 << 13)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 13)) ≠ 0
     case D53 : // PTD12
-      result = (GPIOD.PDIR & (1 << 12)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 12)) ≠ 0
     case D54 : // PTD15
-      result = (GPIOD.PDIR & (1 << 15)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 15)) ≠ 0
     case D55 : // PTD11
-      result = (GPIOD.PDIR & (1 << 11)) ≠ 0
+      result = (GPIOD:PDIR & (1 << 11)) ≠ 0
     case D56 : // PTE10
-      result = (GPIOE.PDIR & (1 << 10)) ≠ 0
+      result = (GPIOE:PDIR & (1 << 10)) ≠ 0
     case D57 : // PTE11
-      result = (GPIOE.PDIR & (1 << 11)) ≠ 0
+      result = (GPIOE:PDIR & (1 << 11)) ≠ 0
     }
   }
   

@@ -9894,6 +9894,143 @@ GALGAS_classConstantMap_2D_element GALGAS_classConstantMap_2D_element::extractOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_propertyAttributeList_2D_element::GALGAS_propertyAttributeList_2D_element (void) :
+mProperty_mAttributeName (),
+mProperty_mAttributeValue () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAttributeList_2D_element::~ GALGAS_propertyAttributeList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAttributeList_2D_element::GALGAS_propertyAttributeList_2D_element (const GALGAS_lstring & inOperand0,
+                                                                                  const GALGAS_lbigint & inOperand1) :
+mProperty_mAttributeName (inOperand0),
+mProperty_mAttributeValue (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAttributeList_2D_element GALGAS_propertyAttributeList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_propertyAttributeList_2D_element (GALGAS_lstring::constructor_default (HERE),
+                                                  GALGAS_lbigint::constructor_default (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAttributeList_2D_element GALGAS_propertyAttributeList_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                                  const GALGAS_lbigint & inOperand1 
+                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_propertyAttributeList_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_propertyAttributeList_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_propertyAttributeList_2D_element::objectCompare (const GALGAS_propertyAttributeList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mAttributeName.objectCompare (inOperand.mProperty_mAttributeName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mAttributeValue.objectCompare (inOperand.mProperty_mAttributeValue) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_propertyAttributeList_2D_element::isValid (void) const {
+  return mProperty_mAttributeName.isValid () && mProperty_mAttributeValue.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_propertyAttributeList_2D_element::drop (void) {
+  mProperty_mAttributeName.drop () ;
+  mProperty_mAttributeValue.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_propertyAttributeList_2D_element::description (C_String & ioString,
+                                                           const int32_t inIndentation) const {
+  ioString << "<struct @propertyAttributeList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mAttributeName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mAttributeValue.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_propertyAttributeList_2D_element::getter_mAttributeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAttributeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint GALGAS_propertyAttributeList_2D_element::getter_mAttributeValue (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAttributeValue ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @propertyAttributeList-element type                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_propertyAttributeList_2D_element ("propertyAttributeList-element",
+                                                         NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_propertyAttributeList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyAttributeList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_propertyAttributeList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_propertyAttributeList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAttributeList_2D_element GALGAS_propertyAttributeList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_propertyAttributeList_2D_element result ;
+  const GALGAS_propertyAttributeList_2D_element * p = (const GALGAS_propertyAttributeList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_propertyAttributeList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyAttributeList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_propertyList_2D_element::GALGAS_propertyList_2D_element (void) :
 mProperty_mPropertyName (),
 mProperty_mType () {
@@ -11281,6 +11418,7 @@ GALGAS_globalSyncInstanceMap_2D_element GALGAS_globalSyncInstanceMap_2D_element:
 
 GALGAS_driverPropertyListAST_2D_element::GALGAS_driverPropertyListAST_2D_element (void) :
 mProperty_mPropertyName (),
+mProperty_mPropertyAttributeList (),
 mProperty_mIsConstant (),
 mProperty_mTypeName (),
 mProperty_mOptionalExpression () {
@@ -11294,25 +11432,28 @@ GALGAS_driverPropertyListAST_2D_element::~ GALGAS_driverPropertyListAST_2D_eleme
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_driverPropertyListAST_2D_element::GALGAS_driverPropertyListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                  const GALGAS_bool & inOperand1,
-                                                                                  const GALGAS_lstring & inOperand2,
-                                                                                  const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand3) :
+                                                                                  const GALGAS_propertyAttributeList & inOperand1,
+                                                                                  const GALGAS_bool & inOperand2,
+                                                                                  const GALGAS_lstring & inOperand3,
+                                                                                  const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand4) :
 mProperty_mPropertyName (inOperand0),
-mProperty_mIsConstant (inOperand1),
-mProperty_mTypeName (inOperand2),
-mProperty_mOptionalExpression (inOperand3) {
+mProperty_mPropertyAttributeList (inOperand1),
+mProperty_mIsConstant (inOperand2),
+mProperty_mTypeName (inOperand3),
+mProperty_mOptionalExpression (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_driverPropertyListAST_2D_element GALGAS_driverPropertyListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                  const GALGAS_bool & inOperand1,
-                                                                                                  const GALGAS_lstring & inOperand2,
-                                                                                                  const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand3 
+                                                                                                  const GALGAS_propertyAttributeList & inOperand1,
+                                                                                                  const GALGAS_bool & inOperand2,
+                                                                                                  const GALGAS_lstring & inOperand3,
+                                                                                                  const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand4 
                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_driverPropertyListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_driverPropertyListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_driverPropertyListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
   }
   return result ;
 }
@@ -11323,6 +11464,9 @@ typeComparisonResult GALGAS_driverPropertyListAST_2D_element::objectCompare (con
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mProperty_mPropertyName.objectCompare (inOperand.mProperty_mPropertyName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mPropertyAttributeList.objectCompare (inOperand.mProperty_mPropertyAttributeList) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mIsConstant.objectCompare (inOperand.mProperty_mIsConstant) ;
@@ -11339,13 +11483,14 @@ typeComparisonResult GALGAS_driverPropertyListAST_2D_element::objectCompare (con
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_driverPropertyListAST_2D_element::isValid (void) const {
-  return mProperty_mPropertyName.isValid () && mProperty_mIsConstant.isValid () && mProperty_mTypeName.isValid () && mProperty_mOptionalExpression.isValid () ;
+  return mProperty_mPropertyName.isValid () && mProperty_mPropertyAttributeList.isValid () && mProperty_mIsConstant.isValid () && mProperty_mTypeName.isValid () && mProperty_mOptionalExpression.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_driverPropertyListAST_2D_element::drop (void) {
   mProperty_mPropertyName.drop () ;
+  mProperty_mPropertyAttributeList.drop () ;
   mProperty_mIsConstant.drop () ;
   mProperty_mTypeName.drop () ;
   mProperty_mOptionalExpression.drop () ;
@@ -11361,6 +11506,8 @@ void GALGAS_driverPropertyListAST_2D_element::description (C_String & ioString,
   }else{
     mProperty_mPropertyName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
+    mProperty_mPropertyAttributeList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
     mProperty_mIsConstant.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mTypeName.description (ioString, inIndentation+1) ;
@@ -11374,6 +11521,12 @@ void GALGAS_driverPropertyListAST_2D_element::description (C_String & ioString,
 
 GALGAS_lstring GALGAS_driverPropertyListAST_2D_element::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mPropertyName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAttributeList GALGAS_driverPropertyListAST_2D_element::getter_mPropertyAttributeList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPropertyAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13416,177 +13569,6 @@ GALGAS_taskSetupListAST_2D_element GALGAS_taskSetupListAST_2D_element::extractOb
       result = *p ;
     }else{
       inCompiler->castError ("taskSetupListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskSetupSortedListAST_2D_element::GALGAS_taskSetupSortedListAST_2D_element (void) :
-mProperty_mTaskSetupPriority (),
-mProperty_mTaskSetupInstructionList (),
-mProperty_mEndOfTaskSetupDeclaration (),
-mProperty_mSetupPriority () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskSetupSortedListAST_2D_element::~ GALGAS_taskSetupSortedListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskSetupSortedListAST_2D_element::GALGAS_taskSetupSortedListAST_2D_element (const GALGAS_lbigint & inOperand0,
-                                                                                    const GALGAS_instructionListAST & inOperand1,
-                                                                                    const GALGAS_location & inOperand2,
-                                                                                    const GALGAS_bigint & inOperand3) :
-mProperty_mTaskSetupPriority (inOperand0),
-mProperty_mTaskSetupInstructionList (inOperand1),
-mProperty_mEndOfTaskSetupDeclaration (inOperand2),
-mProperty_mSetupPriority (inOperand3) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskSetupSortedListAST_2D_element GALGAS_taskSetupSortedListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_taskSetupSortedListAST_2D_element (GALGAS_lbigint::constructor_default (HERE),
-                                                   GALGAS_instructionListAST::constructor_emptyList (HERE),
-                                                   GALGAS_location::constructor_nowhere (HERE),
-                                                   GALGAS_bigint::constructor_zero (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskSetupSortedListAST_2D_element GALGAS_taskSetupSortedListAST_2D_element::constructor_new (const GALGAS_lbigint & inOperand0,
-                                                                                                    const GALGAS_instructionListAST & inOperand1,
-                                                                                                    const GALGAS_location & inOperand2,
-                                                                                                    const GALGAS_bigint & inOperand3 
-                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_taskSetupSortedListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_taskSetupSortedListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_taskSetupSortedListAST_2D_element::objectCompare (const GALGAS_taskSetupSortedListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mTaskSetupPriority.objectCompare (inOperand.mProperty_mTaskSetupPriority) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mTaskSetupInstructionList.objectCompare (inOperand.mProperty_mTaskSetupInstructionList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mEndOfTaskSetupDeclaration.objectCompare (inOperand.mProperty_mEndOfTaskSetupDeclaration) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mSetupPriority.objectCompare (inOperand.mProperty_mSetupPriority) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_taskSetupSortedListAST_2D_element::isValid (void) const {
-  return mProperty_mTaskSetupPriority.isValid () && mProperty_mTaskSetupInstructionList.isValid () && mProperty_mEndOfTaskSetupDeclaration.isValid () && mProperty_mSetupPriority.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_taskSetupSortedListAST_2D_element::drop (void) {
-  mProperty_mTaskSetupPriority.drop () ;
-  mProperty_mTaskSetupInstructionList.drop () ;
-  mProperty_mEndOfTaskSetupDeclaration.drop () ;
-  mProperty_mSetupPriority.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_taskSetupSortedListAST_2D_element::description (C_String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString << "<struct @taskSetupSortedListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mTaskSetupPriority.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mTaskSetupInstructionList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mEndOfTaskSetupDeclaration.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mSetupPriority.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lbigint GALGAS_taskSetupSortedListAST_2D_element::getter_mTaskSetupPriority (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTaskSetupPriority ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST GALGAS_taskSetupSortedListAST_2D_element::getter_mTaskSetupInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTaskSetupInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_taskSetupSortedListAST_2D_element::getter_mEndOfTaskSetupDeclaration (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEndOfTaskSetupDeclaration ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bigint GALGAS_taskSetupSortedListAST_2D_element::getter_mSetupPriority (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSetupPriority ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @taskSetupSortedListAST-element type                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_taskSetupSortedListAST_2D_element ("taskSetupSortedListAST-element",
-                                                          NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_taskSetupSortedListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_taskSetupSortedListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_taskSetupSortedListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_taskSetupSortedListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskSetupSortedListAST_2D_element GALGAS_taskSetupSortedListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_taskSetupSortedListAST_2D_element result ;
-  const GALGAS_taskSetupSortedListAST_2D_element * p = (const GALGAS_taskSetupSortedListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_taskSetupSortedListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("taskSetupSortedListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

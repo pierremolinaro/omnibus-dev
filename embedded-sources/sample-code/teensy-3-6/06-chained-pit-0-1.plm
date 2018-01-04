@@ -42,9 +42,9 @@ driver timer > root {
   }
   
   public system section now @noUnusedWarning () -> $uptime {
-    var r $uint64 = extend (PIT.LTMR64H)
+    var r $uint64 = extend (PIT:LTMR64H)
     r <<= 32
-    r |= extend (PIT.LTMR64L)
+    r |= extend (PIT:LTMR64L)
     r = ~ r
     r +%= 1
     result = $uptime (!rawValue: r)
