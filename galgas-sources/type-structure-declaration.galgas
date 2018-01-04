@@ -22,8 +22,16 @@ enum @structurePropertyInitOptionalExpressionAST {
 
 #·······················································································································
 
+list @propertyAttributeList {
+  @lstring mAttributeName
+  @lbigint mAttributeValue
+}
+
+#·······················································································································
+
 list @structurePropertyListAST {
   @lstring mPropertyName
+  @propertyAttributeList mPropertyAttributeList
   @bool mIsConstant # declared by "let" --> true, declared by "var" --> false
   @bool mIsPublic
   @lstring mPropertyTypeName
@@ -70,16 +78,16 @@ syntax extension plm_syntax {
     select
       <type_definition> !?ioAST  ?let typeName
       select
-        ioFieldListAST += !fieldName !constant !isPublic !typeName !.noExpression
+        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.noExpression
       or
         $=$
         <expression> !?ioAST ?let initExpression
-        ioFieldListAST += !fieldName !constant !isPublic !typeName !.expression{!initExpression:initExpression}
+        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.expression{!initExpression:initExpression}
       end
     or
       $=$
       <expression> !?ioAST ?let initExpression
-      ioFieldListAST += !fieldName !constant !isPublic !["" nowhere] !.expression{!initExpression:initExpression}
+      ioFieldListAST += !fieldName !{} !constant !isPublic !["" nowhere] !.expression{!initExpression:initExpression}
     end
   }
 
@@ -202,7 +210,7 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- Add property types
-  for (* * * fieldTypeName initExpression) in mStructurePropertyListAST do
+  for (4* fieldTypeName initExpression) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       let typeName = llvmTypeNameFromPLMname (!fieldTypeName)
       [!?ioGraph addEdge !structureTypeName !typeName]

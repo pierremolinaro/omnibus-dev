@@ -4,6 +4,7 @@
 
 enum @primaryInExpressionAccessAST {
   case property (@lstring name)
+  case register (@lstring name)
   case integerSlice (@lbigint low @lbigint high)
   case arrayAccess (@expressionAST index @location endOfIndex)
   case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location endOfArguments)
@@ -30,17 +31,28 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
-    $identifier$ ?let receiver
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+    $identifier$ ?let registerGroupName
     $:$
-    $identifier$ ?*
+    @primaryInExpressionAccessListAST accessList = {}
+    $identifier$ ?let registerName
+    accessList += !.register {!name:registerName}
+    select
+    or
+      $[$
+      <expression> !?ioAST ?let expression
+      let endOfIndex = @location.here
+      $]$
+      accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+    end
     select
     or
       $:$
-      $identifier$ ?*
+      $identifier$ ?let fieldName
+      accessList += !.register {!name:fieldName}
     end
   #--- AST
-    outExpression = @primaryInExpressionAST.new {!receiver !{}}
+    outExpression = @primaryInExpressionAST.new {!registerGroupName !accessList}
   }
 
   #·····················································································································
@@ -107,6 +119,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
   end
   for (access) in mAccessList do
     switch access
+    case register (*) :
     case integerSlice (2*) :
     case property (*) :
     case arrayAccess (@expressionAST indexExpression *) :
@@ -139,6 +152,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
       if high.bigint >= low.bigint then
         [!?ioGraph noteUINTType ![high.bigint - low.bigint + 1G uint] !low.location]
       end
+    case register (*) :
     case property (*) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -388,6 +402,8 @@ proc procAnalyzeAccesListInExpression
 #--- Access list
   for (access) in inAccessList do
     switch access
+    case register (@lstring registerName) :
+      error registerName : "invalid register access"
     case integerSlice (@lbigint low @lbigint high) :
       handleSliceInExpression (
         !context: inContext
@@ -468,10 +484,10 @@ private proc analyzeRegisterExpression
   else
     var accessList = inAccessList
     [!?accessList popFirst ?let registerNameAsField]
-    if not [registerNameAsField isProperty] then
+    if not [registerNameAsField isRegister] then
       error inErrorLocation : "the control register group should be followed by a control register name" : outResult
     else
-      [registerNameAsField property ?name:let controlRegisterName]
+      [registerNameAsField register ?name:let controlRegisterName]
       [inControlRegisterMap searchKey
         !controlRegisterName
         ?let @PLMType inRegisterType
@@ -536,8 +552,10 @@ private proc analyzeRegisterExpression
         case integerSlice (@lbigint low *) :
           error low : "cannot extract a slice from a register"
         case property (@lstring propertyName) :
+          error propertyName : "invalid prperty access"
+        case register (@lstring registerName) :
           [currentSliceMap searchKey
-            !propertyName
+            !registerName
             ?let @llvmBinaryOperation accessOperator
             ?let @bigint accessRightOperand
             ?let @sliceMap subMap
@@ -547,7 +565,7 @@ private proc analyzeRegisterExpression
           [!?ioInstructionGenerationList appendBinaryOperation
             !resultIR
             ![outResult type]
-            !propertyName.location
+            !registerName.location
             !outResult
             !accessOperator
             !.literalInteger {!type:staticIntegerType () !value:accessRightOperand}
@@ -586,6 +604,8 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
 #--- Access list
   for (access) in mAccessList do
     switch access
+    case register (@lstring registerName) :
+      error registerName : "invalid register access"
     case integerSlice (@lbigint low @lbigint high) :
       handleSliceInExpression (
         !context: inContext

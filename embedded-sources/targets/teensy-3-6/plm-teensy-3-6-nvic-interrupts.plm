@@ -26,7 +26,7 @@ system section set @noUnusedWarning (?interrupt: inInterruptCode $isrSlot ?prior
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 system section getPriorityOf @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) -> $uint8 {
-  result = NVIC.IPR [inInterruptCode.uint7 ()]
+  result = NVIC:IPR [inInterruptCode.uint7 ()]
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

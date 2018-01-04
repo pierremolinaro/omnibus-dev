@@ -477,14 +477,3 @@ void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgumen
 class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'minValueForInteger'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bigint function_minValueForInteger (const class GALGAS_bool & constinArgument0,
-                                                 const class GALGAS_uint & constinArgument1,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-

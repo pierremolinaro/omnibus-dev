@@ -73,7 +73,7 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- Add property types
-  for (propertyName * public fieldTypeName initExpression) in mStructurePropertyListAST do
+  for (propertyName 2* public fieldTypeName initExpression) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       let typeName = llvmTypeNameFromPLMname (!fieldTypeName)
       [!?ioGraph addEdge !structureTypeName !typeName]

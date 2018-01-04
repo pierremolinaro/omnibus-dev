@@ -228,7 +228,8 @@ override method @arrayIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds
   )
   let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
   ioLLVMcode += llvmTitleComment (!routineMangledName)
-  ioLLVMcode += "define internal i32  @" + routineLLVMName + " (%" + llvmTypeStringFromPLMname (!mOriginalArrayTypeName) + "* %inUnusedValue) nounwind {\n"
+  ioLLVMcode += "define internal i32  @" + routineLLVMName + " (%"
+              + llvmTypeStringFromPLMname (![mOriginalArrayTypeName assemblerRepresentation]) + "* %inUnusedValue) nounwind {\n"
   ioLLVMcode += "  ret i32 " + mArraySize + "\n"
   ioLLVMcode += "}\n\n"
 }
