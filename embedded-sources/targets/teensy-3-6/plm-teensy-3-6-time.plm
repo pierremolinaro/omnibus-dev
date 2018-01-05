@@ -56,7 +56,7 @@ driver time > root {
   //   systick interrupt service routine
   //····················································································································
 
-  isr service systick {
+  interrupt service systick {
  //   noteCurrentTaskFreeStackSize ()
     let now = self.mUptime +% 1
     self.mUptime = now

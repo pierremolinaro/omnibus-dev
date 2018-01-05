@@ -314,6 +314,57 @@ getter @PLMType descriptionForHTMLFile -> @string {
 
 #·······················································································································
 
+getter @PLMType defaultAlignment -> @uint{
+  switch self.kind
+  case void :
+    result = 0
+  case boolean :
+    result = 1
+  case literalString :
+    result = 4
+  case enumeration (bitCount) :
+    if bitCount <= 8 then
+      result = 1
+    elsif bitCount <= 16 then
+      result = 2
+    else
+      result = 4
+    end
+  case structure (*) :
+    result = 4
+  case syncTool (*) :
+    result = 4
+  case integer (3* @uint bitCount) :
+    if bitCount <= 8 then
+      result = 1
+    elsif bitCount <= 16 then
+      result = 2
+    else
+      result = 4
+    end
+  case staticInteger :
+    result = 0
+  case opaque (@bigint bitCount) :
+    if bitCount <= 8 then
+      result = 1
+    elsif bitCount <= 16 then
+      result = 2
+    else
+      result = 4
+    end
+  case arrayType (elementType *) :
+    result = [elementType defaultAlignment]
+  case dynamicArrayType (2*) :
+    result = 4
+  case function (*) :
+    result = 4
+  case pointer (*) :
+    result = 4
+  end
+}
+
+#·······················································································································
+
 list @arcAssignmentList {
   @string mPropertyName
   @PLMType mPropertyType

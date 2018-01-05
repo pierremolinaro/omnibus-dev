@@ -718,6 +718,16 @@ class GALGAS_string extensionGetter_descriptionForHTMLFile (const class GALGAS_P
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Extension getter '@PLMType defaultAlignment' (as function)                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_uint extensionGetter_defaultAlignment (const class GALGAS_PLMType & inObject,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                               Extension getter '@PLMType deinitNeeded' (as function)                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

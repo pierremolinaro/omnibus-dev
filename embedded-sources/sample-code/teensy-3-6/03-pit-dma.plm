@@ -74,14 +74,14 @@ typealias $patternArray : $uint32 [PATTERN_LENGTH]
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver pit > root {
-  isr section PITChannel3 {
+  interrupt section PITChannel3 {
   //--- Acquitter l'interruption
     PIT:TFLG [3] = {PIT:TFLG !TIF:1}
   //--- Toggle LED_L3
     digital.toggle (!port:LED_L3)
   }
   
-  isr section DMAChannel_0_16_TransferComplete {
+  interrupt section DMAChannel_0_16_TransferComplete {
   //--- Acquitter l'interruption
     DMA:CINT = 0
   //--- Toggle LED_L2

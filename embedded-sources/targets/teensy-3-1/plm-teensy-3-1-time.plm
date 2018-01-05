@@ -55,7 +55,7 @@ driver time > root {
 
   //············································································
 
-  isr service systick {
+  interrupt service systick {
     let now = self.mUptime +% 1
     self.mUptime = now
     makeTasksReady (!fromCurrentDate:now)

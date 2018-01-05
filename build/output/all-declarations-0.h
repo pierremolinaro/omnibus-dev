@@ -93,7 +93,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_import,
    kToken_in,
    kToken_init,
-   kToken_isr,
+   kToken_interrupt,
    kToken_let,
    kToken_loop,
    kToken_no,
@@ -427,12 +427,14 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (class GALGAS_ast & ioArgument0,
                                                                                              class GALGAS_structurePropertyListAST & ioArgument1,
+                                                                                             const class GALGAS_bool constinArgument2,
                                                                                              class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_private_5F_struct_5F_property_5F_declaration_ (class GALGAS_ast & ioArgument0,
                                                                              class GALGAS_structurePropertyListAST & ioArgument1,
+                                                                             const class GALGAS_bool constinArgument2,
                                                                              class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
@@ -489,6 +491,7 @@ class cParser_plm_5F_syntax {
   protected : virtual void nt_struct_5F_property_5F_declaration_ (class GALGAS_ast & ioArgument0,
                                                                   const class GALGAS_bool constinArgument1,
                                                                   class GALGAS_structurePropertyListAST & ioArgument2,
+                                                                  const class GALGAS_bool constinArgument3,
                                                                   class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_struct_5F_property_5F_declaration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
@@ -560,12 +563,14 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_ (GALGAS_ast & ioArgument0,
                                                                                                         GALGAS_structurePropertyListAST & ioArgument1,
+                                                                                                        const GALGAS_bool constinArgument2,
                                                                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_ (GALGAS_ast & ioArgument0,
                                                                                         GALGAS_structurePropertyListAST & ioArgument1,
+                                                                                        const GALGAS_bool constinArgument2,
                                                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_parse (C_Lexique_plm_5F_lexique * inLexique) ;
@@ -573,6 +578,7 @@ class cParser_plm_5F_syntax {
   protected : void rule_plm_5F_syntax_struct_5F_property_5F_declaration_i9_ (GALGAS_ast & ioArgument0,
                                                                              const GALGAS_bool constinArgument1,
                                                                              GALGAS_structurePropertyListAST & ioArgument2,
+                                                                             const GALGAS_bool constinArgument3,
                                                                              C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_struct_5F_property_5F_declaration_i9_parse (C_Lexique_plm_5F_lexique * inLexique) ;

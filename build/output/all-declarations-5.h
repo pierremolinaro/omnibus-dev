@@ -2460,6 +2460,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
                                                                                           GALGAS_structurePropertyListAST & ioArgument1,
+                                                                                          const GALGAS_bool inArgument2,
                                                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'private_struct_property_declaration' non terminal
@@ -2469,6 +2470,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_private_5F_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
                                                                           GALGAS_structurePropertyListAST & ioArgument1,
+                                                                          const GALGAS_bool inArgument2,
                                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'procedure_call' non terminal
@@ -2580,6 +2582,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
                                                                const GALGAS_bool inArgument1,
                                                                GALGAS_structurePropertyListAST & ioArgument2,
+                                                               const GALGAS_bool inArgument3,
                                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'structure_function' non terminal
