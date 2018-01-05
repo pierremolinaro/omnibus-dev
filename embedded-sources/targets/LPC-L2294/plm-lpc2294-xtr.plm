@@ -93,7 +93,7 @@ driver time {
 
   //············································································
 
-  isr service TIMER1 {
+  interrupt service TIMER1 {
     TIMER1:IR = 1 // Clears MR0 interrupt
     let now = self.mUptime +% 1
     self.mUptime = now

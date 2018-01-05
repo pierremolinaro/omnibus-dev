@@ -19,7 +19,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <isr> ?!@ast ioAST ?let @lstring inModuleName {
-    $isr$
+    $interrupt$
     @mode mode
     select
       $service$
@@ -94,7 +94,7 @@ override method @decoratedISRDeclarations semanticAnalysis
     @instructionListIR instructionGenerationList = {}
     [isr.mISRInstructionList analyzeRoutineInstructionList
       !self:selfType
-      !routineAttributes:.mutating | .directPropertyAccess
+      !routineAttributes:.mutating | .directPropertyAccess | .controlRegisterReadable | .panicAllowed
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inContext
       !mode:isr.mMode

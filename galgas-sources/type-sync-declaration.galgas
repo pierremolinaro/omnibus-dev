@@ -28,7 +28,7 @@ syntax extension plm_syntax {
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
-      <private_or_public_struct_property_declaration> !?ioAST !?fieldList
+      <private_or_public_struct_property_declaration> !?ioAST !?fieldList !true
     while
       <function> !?ioAST !?procedureDeclarationListAST
     while

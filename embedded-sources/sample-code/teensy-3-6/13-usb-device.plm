@@ -1,5 +1,5 @@
 target "teensy-3-6/unprivileged"
-let F_CPU_MHZ = 240
+let F_CPU_MHZ = 216
 
 driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
@@ -20,12 +20,41 @@ func section activityLedOff @safe @exported () {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let NUM_ENDPOINTS = 4
+let LED_L1 = $digitalPort.D4
+let LED_L2 = $digitalPort.D5
+let LED_L3 = $digitalPort.D6
+let LED_L4 = $digitalPort.D7
 
 //······················································································································
 
 struct $bdt_t @copyable {
  var desc $uint32 = 0
- var addr $uint32 = 0 // void * addr;
+ var addr $uint32 = 0
+}
+
+
+let BDT_OWN   = 0x80
+let BDT_DATA1 = 0x40
+let BDT_DATA0 = 0x00
+let BDT_DTS   = 0x08
+let BDT_STALL = 0x04
+//let BDT_PID(n) (((n) >> 2) & 15)
+
+let EP0_SIZE = 64
+
+func BDT_DESC (?count $uint32 ?data $uint1) -> $uint32 {
+  result = BDT_OWN | BDT_DTS | (count << 16) | if data ≠ 0 {BDT_DATA1} else {BDT_DATA0}
+}
+
+let TX   = 1
+let RX   = 0
+let ODD  = 1
+let EVEN = 0
+let DATA0 = 0
+let DATA1 = 1
+
+func index (? endpoint $uint32 ?tx $uint32 ?odd $uint32) -> $uint32 {
+  result = endpoint * 4 + tx * 2 + odd
 }
 
 //······················································································································
@@ -34,9 +63,23 @@ driver usb_device > digital {
 // Descriptor table should be aligned on a 512 byte-boudary
   var descriptorTable @align 512 = $bdt_t [(NUM_ENDPOINTS+1)*4] (!repeated:$bdt_t ())
 
+  var ep0_rx0_buf @align 4 = $uint8 [EP0_SIZE] (!repeated:0)
+  var ep0_rx1_buf @align 4 = $uint8 [EP0_SIZE] (!repeated:0)
+  var ep0_tx_bdt_bank $uint32 = 0
+
+  var état $uint32 = 0
+  
+  public system section lireÉtat () -> $uint32 {
+    result = self.état
+  }
+  
   //····················································································································
 
   init {
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.OUTPUT !toPort:LED_L2)
+    digital.set (!mode:.OUTPUT !toPort:LED_L3)
+    digital.set (!mode:.OUTPUT !toPort:LED_L4)
   // This basically follows the flowchart in the Kinetis Quick Reference User Guide, Rev. 3, 05/2014, page 134
   //-- Assume 48 MHz clock already running
     SIM:SCGC4 |= {SIM:SCGC4 !USBOTG:1} // SIM - enable clock
@@ -46,6 +89,9 @@ driver usb_device > digital {
       USB0:CLK_RECOVERY_IRCN_EN = {USB0:CLK_RECOVERY_IRCN_EN !IRC_EN:1 !REG_EN:1}
       USB0:CLK_RECOVERY_CTRL = {USB0:CLK_RECOVERY_CTRL !CLOCK_RECOVER_EN:1 !RESTART_IFRTRIM_EN:1}
     }
+  //--- Reset USB module
+    USB0:USBTRC0 = {USB0:USBTRC0 !USBRESET:1}
+    while USB0:USBTRC0:USBRESET ≠ 0 {} // wait for reset to end
   //-- Set descriptor table base address
     let descriptorTableBaseAddress = addressof (self.descriptorTable)
     USB0:BDTPAGE1 = descriptorTableBaseAddress [08...15]
@@ -61,12 +107,82 @@ driver usb_device > digital {
   //-- Enable reset interrupt
     USB0:INTEN = {USB0:INTEN !USBRSTEN:1}
   //-- Enable interrupt in NVIC
-    enable (!interrupt: .USB_HS_OTG)
+    enable (!interrupt: .USBFS_OTG)
   //--- Enable d+ pullup
     USB0:CONTROL = {USB0:CONTROL !DPPULLNONOTG:1}
   }
 
   //····················································································································
+  
+  interrupt section USBFS_OTG {
+    let status = USB0:ISTAT
+    if (status & {USB0:ISTAT !SOFTOK:1}) ≠ 0 {
+      self.état |= 16
+      digital.write (!yes !toPort:LED_L1)
+      USB0:ISTAT = {USB0:ISTAT !SOFTOK:1} // Ack
+    }
+    if (status & {USB0:ISTAT !TOKDNE:1}) ≠ 0 {
+      self.état |= 32
+      let endPoint $uint8 = USB0:ISTAT >> 4
+      if endPoint == 0 {
+      }else{
+      
+      }
+    }
+    if (status & {USB0:ISTAT !USBRST:1}) ≠ 0 { // RESET: configure Endpoint 0
+      self.état |= 1
+      digital.write (!yes !toPort:LED_L2)
+      USB0:CTL = {USB0:CTL !ODDRST:1}
+      self.ep0_tx_bdt_bank = 0
+   // Set up buffers to receive Setup and OUT packets
+      self.descriptorTable [index(!0 !RX !EVEN)].desc = BDT_DESC (!EP0_SIZE  !0)
+      self.descriptorTable [index(!0 !RX !EVEN)].addr = addressof (self.ep0_rx0_buf)
+      self.descriptorTable [index(!0 !RX !ODD) ].desc = BDT_DESC (!EP0_SIZE !0)
+      self.descriptorTable [index(!0 !RX !ODD) ].addr = addressof (self.ep0_rx1_buf)
+      self.descriptorTable [index(!0 !TX !EVEN)].desc = 0
+      self.descriptorTable [index(!0 !TX !ODD) ].desc = 0
+    // Activate endpoint 0
+      USB0:ENDPT [0] = {USB0:ENDPT !EPRXEN:1 !EPTXEN:1 !EPHSHK:1}
+    // Clear all ending interrupts
+      USB0:ERRSTAT = 0xFF
+      USB0:ISTAT = 0xFF
+    // Set the address to zero during enumeration
+      USB0:ADDR = 0
+    // Enable other interrupts
+      USB0:ERREN = 0xFF
+      USB0:INTEN = {USB0:INTEN !STALLEN:1 !SLEEPEN:1 !TOKDNEEN:1 !SOFTOKEN:1 !ERROREN:1 !USBRSTEN:1}
+    // is this necessary?
+      USB0:CTL = {USB0:CTL !USBENOFEN:1}
+  //    enable (!interrupt: .USB_HS_OTG)
+      digital.write (!no !toPort:LED_L2)
+    }
+    if (status & {USB0:ISTAT !STALL:1}) ≠ 0 {
+      self.état |= 8
+      digital.write (!yes !toPort:LED_L3)
+    }
+    if (status & {USB0:ISTAT !ERROR:1}) ≠ 0 {
+      self.état |= 2
+      digital.write (!yes !toPort:LED_L4)
+      USB0:ISTAT = {USB0:ISTAT !ERROR:1} // Ack
+      digital.write (!no !toPort:LED_L4)
+    }
+    if (status & {USB0:ISTAT !SLEEP:1}) ≠ 0 {
+      self.état |= 4
+  //    digital.write (!yes !toPort:LED_L4)
+      USB0:ISTAT = {USB0:ISTAT !SLEEP:1} // Ack
+  //    digital.write (!no !toPort:LED_L4)
+    }
+ //   USB0:ISTAT = {USB0:ISTAT !TOKDNE:1}
+  }
+  
+  //····················································································································
+  
+  interrupt section USB_HS_OTG {
+    digital.write (!yes !toPort:LED_L4)
+  }
+  
+  //····················································································································
+
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -83,6 +199,7 @@ let LED_L0 = $digitalPort.D3
 
 task T @priority 0 @stacksize 512 {
   var tick $uint32 = 0
+  var état $uint32 = 0
   
   //····················································································································
 
@@ -96,7 +213,13 @@ task T @priority 0 @stacksize 512 {
   on time.wait (!untilDeadline:self.tick) {
     digital.toggle (!port:LED_L0)
     self.tick +%= 500
-   } 
+    let e = usb_device.lireÉtat ()
+    if self.état ≠ e {
+      self.état = e
+      lcd.goto (!line:0 !column:0)
+      lcd.print (!u32:e !width:10)
+    }
+  } 
 
   //····················································································································
 

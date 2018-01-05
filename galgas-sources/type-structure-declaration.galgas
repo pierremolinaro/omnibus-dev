@@ -47,7 +47,11 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <private_or_public_struct_property_declaration> ?!@ast ioAST ?!@structurePropertyListAST ioFieldListAST {
+  rule <private_or_public_struct_property_declaration>
+    ?!@ast ioAST
+    ?!@structurePropertyListAST ioFieldListAST
+    ?let @bool isAutonomous
+  {
     @bool public
     select
       public = false
@@ -55,18 +59,27 @@ syntax extension plm_syntax {
       $public$
       public = true
     end
-    <struct_property_declaration> !?ioAST !public !?ioFieldListAST
+    <struct_property_declaration> !?ioAST !public !?ioFieldListAST !isAutonomous
   }
   
   #·····················································································································
 
-  rule <private_struct_property_declaration> ?!@ast ioAST ?!@structurePropertyListAST ioFieldListAST {
-    <struct_property_declaration> !?ioAST !false !?ioFieldListAST
+  rule <private_struct_property_declaration>
+    ?!@ast ioAST
+    ?!@structurePropertyListAST ioFieldListAST
+    ?let @bool isAutonomous
+  {
+    <struct_property_declaration> !?ioAST !false !?ioFieldListAST !isAutonomous
   }
 
   #·····················································································································
 
-  rule <struct_property_declaration> ?!@ast ioAST ?let @bool isPublic ?!@structurePropertyListAST ioFieldListAST {
+  rule <struct_property_declaration>
+    ?!@ast ioAST
+    ?let @bool isPublic
+    ?!@structurePropertyListAST ioFieldListAST
+    ?let @bool isAutonomous
+{
     @bool constant
     select
       $var$
@@ -79,16 +92,30 @@ syntax extension plm_syntax {
     select
       <type_definition> !?ioAST  ?let typeName
       select
-        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.noExpression !false
+        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.noExpression !isAutonomous
       or
         $=$
         <expression> !?ioAST ?let initExpression
-        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.expression{!initExpression:initExpression} !false
+        ioFieldListAST +=
+          !fieldName
+          !{}
+          !constant
+          !isPublic
+          !typeName 
+          !.expression{!initExpression:initExpression}
+          !isAutonomous
       end
     or
       $=$
       <expression> !?ioAST ?let initExpression
-      ioFieldListAST += !fieldName !{} !constant !isPublic !["" nowhere] !.expression{!initExpression:initExpression} !false
+      ioFieldListAST +=
+        !fieldName
+        !{}
+        !constant
+        !isPublic
+        !["" nowhere]
+        !.expression{!initExpression:initExpression}
+        !isAutonomous
     end
   }
 
@@ -148,7 +175,7 @@ syntax extension plm_syntax {
     @structurePropertyListAST fieldList = {}
     repeat
     while
-      <private_or_public_struct_property_declaration> !?ioAST !?fieldList
+      <private_or_public_struct_property_declaration> !?ioAST !?fieldList !false
     while
       <structure_function> !?ioAST !?procedureDeclarationListAST
     while
@@ -443,7 +470,7 @@ method @structurePropertyListAST-element enterPropertyInContext
   ?!@globalVariableIRList ioGlobalVariableIRList
 {
 #---------- Attributes
-  var alignment = 4 # Default alignment
+  @lbigint explicitAlignment = .new {!0G !.nowhere}
   var alignmentDefined = false
   for (attribute align) in mPropertyAttributeList do
     if attribute.string != "align" then
@@ -451,8 +478,13 @@ method @structurePropertyListAST-element enterPropertyInContext
     elsif alignmentDefined then
       error attribute : "@align attribute already defined"
     else
-      alignment = [align.bigint uint]
-      alignmentDefined = true
+    #--- Check alignment is a power of 2
+      if align.bigint != (1G << [align.bigint - 1G bitCountForUnsignedRepresentation]) then
+        error align : "alignment should be a power of 2"
+      else
+        explicitAlignment = align
+        alignmentDefined = true
+      end
     end
   end
 #---------- Property type
@@ -499,6 +531,14 @@ method @structurePropertyListAST-element enterPropertyInContext
         !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
       ]
     elsif mIsAutonomous then
+      var alignment = [actualPropertyType defaultAlignment]
+      if alignmentDefined then
+        if [explicitAlignment.bigint uint] < alignment then
+          error explicitAlignment : "minimum alignment for this property is " + alignment
+        else
+          alignment = [explicitAlignment.bigint uint]
+        end
+      end
       let name = @lstring.new {!inStructureName.string + "." + mPropertyName !mPropertyName}
       let llvmName = llvmNameForGlobalVariable (!name)
       let object = @objectIR.reference {!type:actualPropertyType !llvmName:llvmName}

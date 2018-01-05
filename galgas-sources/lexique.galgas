@@ -31,7 +31,7 @@ lexique plm_lexique {
     "import",
     "in",
     "init",
-    "isr",
+    "interrupt",
     "let",
     "loop",
     "no",

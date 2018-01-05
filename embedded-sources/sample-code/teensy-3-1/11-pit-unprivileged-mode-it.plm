@@ -42,7 +42,7 @@ driver pit > digital {
     outValue = self.gPITValue
   }
 
-  isr section PITChannel0 {
+  interrupt section PITChannel0 {
   //--- Acquitter l'interruption
     PIT:TFLG [0] = {PIT:TFLG !TIF:1}
   //--- Incrémenter le compteur

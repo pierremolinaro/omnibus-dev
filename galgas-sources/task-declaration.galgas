@@ -60,7 +60,7 @@ syntax extension plm_syntax {
     @syncInstructionBranchListAST branchList = {}
     repeat
     while
-      <private_struct_property_declaration> !?ioAST !?taskVarList
+      <private_struct_property_declaration> !?ioAST !?taskVarList !true
     while
       $func$
       $identifier$ ?let procName

@@ -385,7 +385,7 @@ registers AXBS {
 registers MPU {
 
 //--- Region Descriptor Alternate Access Control n (0 ... 11)
-  RGDAAC [16] 0x4000_D000 @inc 4 $uint32 {
+  RGDAAC [16] 0x4000_D800 @inc 4 $uint32 {
     M7RE, M7WE, M6RE, M6WE, M5RE, M5WE, M4RE, M4WE, M3PE, M3SM:2, M3UM:3, M2PE, M2SM:2,
     M2UM:3, M1PE, M1SM:2, M1UM:3, M0PE, M0SM:2, M0UM:3
   }
