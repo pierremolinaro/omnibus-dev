@@ -2,42 +2,276 @@
 check target "teensy-3-6/unprivileged"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// BUS FREQUENCY
+// CLOCK SETTINGS
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// The MCGCLOCKOUT frequency is given by (the 16 MHz quartz frequency is divided by 2 for the PPL)
+//  MCGCLOCKOUT = 16 MHz / 2 * (MCG:C6:VDIV + 16) / (MCG:C5:PRDIV + 1)
+//
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// CPU CLOCK
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  The CPU Clock is given by: MCGCLOCKOUT / (SIM:CLKDIV1:OUTDIV1 + 1)
+//
+//  Here, F_CPU_MHZ is a given constant, so we only check that settings are correct by asserting:
+//     F_CPU_MHZ * (MCG:C5:PRDIV + 1) * (SIM:CLKDIV1:OUTDIV1 + 1) = (16 / 2) * (MCG:C6:VDIV + 16)
+//
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// BUS (peripheral) CLOCK
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  The peripheral Clock is given by: MCGCLOCKOUT / (SIM:CLKDIV1:OUTDIV2 + 1)
+//
+//  Here, SIM:CLKDIV1:OUTDIV2 is a given constant, so we compute BUS_MHZ by:
+//     BUS_MHZ = (16 / 2) * (MCG:C6:VDIV + 16) / (MCG:C5:PRDIV + 1) / (SIM:CLKDIV1:OUTDIV2 + 1)
+//
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Flexbus CLOCK
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  The Flexbus Clock is given by: MCGCLOCKOUT / (SIM:CLKDIV1:OUTDIV3 + 1)
+//
+//  Here, SIM:CLKDIV1:OUTDIV3 is a given constant, so we compute FLEXBUS_MHZ by:
+//     FLEXBUS_MHZ = (16 / 2) * (MCG:C6:VDIV + 16) /(MCG:C5:PRDIV + 1) / (SIM:CLKDIV1:OUTDIV3 + 1)
+//
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Flash CLOCK
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  The FLASH Clock is given by: MCGCLOCKOUT / (SIM:CLKDIV1:OUTDIV3 + 1)
+//
+//  Here, SIM:CLKDIV1:OUTDIV4 is a given constant, so we compute Flash Clock in kHz (result may not be integer):
+//     FLASH_KHZ = (16000 / 2) * (MCG:C6:VDIV + 16) / (MCG:C5:PRDIV + 1) / (SIM:CLKDIV1:OUTDIV4 + 1)
+//
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// MICRO CONTROLLER REQUIREMENTS
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// The clock dividers are programmed via the SIM module’s CLKDIV registers. Each divider is programmable from a
+// divide-by-1 through divide-by-16 setting. The following requirements must be met when configuring the clocks
+// for this device: 
+// 1. The core and system clock frequencies must be 180 MHz or slower in HSRUN, 120 MHz or slower in RUN.  //
+// 2. The bus clock frequency must be programmed to 60 MHz or less in HSRUN or RUN, and an integer divide of the 
+//      core clock. The core clock to bus clock ratio is limited to a max value of 8.  //
+// 3. The flash clock frequency must be programmed to 28 MHz or less, less than or equal to the bus clock, and an
+//      integer divide of the core clock. The core clock to flash clock ratio is limited to a max value of 8.  //
+// 4. The FlexBus clock frequency must be programmed to be less than or equal to the bus clock frequency. The
+//      FlexBus also has pad interface restrictions that limits the maximum frequency. For this device the FlexBus
+//      maximum frequency is 60 MHz. The core clock to FlexBus clock ratio is limited to a max value of 8.  //
+// 5. Since SDRAMC and FlexBus both use CLKOUT, the same restrictions apply to the SDRAM controller as stated
+//      for the FlexBus clock.  //
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// SETTINGS
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// F_CPU   MCG_C5   MCG_C6   SIM_CLKDIV1   SIM_CLKDIV1   SIM_CLKDIV1   SIM_CLKDIV1   BUS_MHZ   FLEX_BUS   FLASH
+// _MHZ    _PRDIV    _VDIV      _OUTDIV1      _OUTDIV2      _OUTDIV3      _OUTDIV4                 _MHZ    _KHZ
+//  240         0       14             0             3             0             7
+//  216         0       11             0             1             0             7
+//  192         0        8             0             1             0             6
+//  180         1       29             0             1             0             6
+//  168         0        5             0             2             0             5
+//  144         0        2             0             1             0             4
+//  120         1       14             0             1             0             4
+//   96         1        8             0             1             0             2
+//   72         1        2             0             0             0             2
+//   48         1        8             1             1             1             3
+//   24         1        8             3             3             3             3
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// PRDIV SETTINGS
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let F_BUS_MHZ =
+let MCG_C5_PRDIV =
   if F_CPU_MHZ == 240 {
-    120
+    0
   }else if F_CPU_MHZ == 216 {
-    108
+    0
   }else if F_CPU_MHZ == 192 {
-    96
+    0
   }else if F_CPU_MHZ == 180 {
-    90
+    1
   }else if F_CPU_MHZ == 168 {
-    56
+    0
   }else if F_CPU_MHZ == 144 {
-    72
+    0
   }else if F_CPU_MHZ == 120 {
-    120
+    1
   }else if F_CPU_MHZ == 96 {
-    96
+    1
   }else if F_CPU_MHZ == 72 {
-    72
+    1
   }else if F_CPU_MHZ == 48 {
-    48
+    1
   }else if F_CPU_MHZ == 24 {
-    24
+    1
   }else{
-    0 // Any value, an error is raised in "check" instruction above
+    0 // Any value, an error is raised in "check" instruction below
   }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// MCG:C6:VDIV SETTINGS
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let MCG_C6_VDIV =
+  if F_CPU_MHZ == 240 {
+    14
+  }else if F_CPU_MHZ == 216 {
+    11
+  }else if F_CPU_MHZ == 192 {
+    8
+  }else if F_CPU_MHZ == 180 {
+    29
+  }else if F_CPU_MHZ == 168 {
+    5
+  }else if F_CPU_MHZ == 144 {
+    2
+  }else if F_CPU_MHZ == 120 {
+    14
+  }else if F_CPU_MHZ == 96 {
+    8
+  }else if F_CPU_MHZ == 72 {
+    2
+  }else if F_CPU_MHZ == 48 {
+    8
+  }else if F_CPU_MHZ == 24 {
+    8
+  }else{
+    0 // Any value, an error is raised in "check" instruction below
+  }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// SIM:CLKDIV1:OUTDIV1 SETTINGS
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let SIM_CLKDIV1_OUTDIV1 =
+  if F_CPU_MHZ == 48 {
+    1
+  }else if F_CPU_MHZ == 24 {
+    3
+  }else{
+    0 // 0 for all other settings
+  }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// SIM:CLKDIV1:OUTDIV2 SETTINGS (divisor for bus)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let SIM_CLKDIV1_OUTDIV2 =
+  if F_CPU_MHZ == 240 {
+    3
+  }else if F_CPU_MHZ == 216 {
+    3
+  }else if F_CPU_MHZ == 192 {
+    3
+  }else if F_CPU_MHZ == 180 {
+    2
+  }else if F_CPU_MHZ == 168 {
+    2
+  }else if F_CPU_MHZ == 144 {
+    2
+  }else if F_CPU_MHZ == 120 {
+    1
+  }else if F_CPU_MHZ == 96 {
+    1
+  }else if F_CPU_MHZ == 72 {
+    1
+  }else if F_CPU_MHZ == 48 {
+    1
+  }else if F_CPU_MHZ == 24 {
+    3
+  }else{
+    0 // Any value, an error is raised in "check" instruction below
+  }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// BUS_MHZ
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let BUS_MHZ = (16 / 2) * (MCG_C6_VDIV + 16) /(MCG_C5_PRDIV + 1) / (SIM_CLKDIV1_OUTDIV2 + 1)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// SIM:CLKDIV1:OUTDIV3 SETTINGS (divisor for Flexbus)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let SIM_CLKDIV1_OUTDIV3 =
+  if F_CPU_MHZ == 48 {
+    1
+  }else if F_CPU_MHZ == 24 {
+    3
+  }else{
+    0 // Zero for any other CPU frequency
+  }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// FLEXBUS_MHZ
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let FLEXBUS_MHZ = (16 / 2) * (MCG_C6_VDIV + 16) /(MCG_C5_PRDIV + 1) / (SIM_CLKDIV1_OUTDIV3 + 1)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// SIM:CLKDIV1:OUTDIV4 SETTINGS (divisor for Flash)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let SIM_CLKDIV1_OUTDIV4 =
+  if F_CPU_MHZ == 240 {
+    7
+  }else if F_CPU_MHZ == 216 {
+    7
+  }else if F_CPU_MHZ == 192 {
+    6
+  }else if F_CPU_MHZ == 180 {
+    6
+  }else if F_CPU_MHZ == 168 {
+    5
+  }else if F_CPU_MHZ == 144 {
+    4
+  }else if F_CPU_MHZ == 120 {
+    4
+  }else if F_CPU_MHZ == 96 {
+    3
+  }else if F_CPU_MHZ == 72 {
+    2
+  }else if F_CPU_MHZ == 48 {
+    3
+  }else if F_CPU_MHZ == 24 {
+    3
+  }else{
+    0 // Any value, an error is raised in "check" instruction below
+  }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// FLASH CLOCK (in kHz)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let FLASH_KHZ = (16_000 / 2) * (MCG_C6_VDIV + 16) / (MCG_C5_PRDIV + 1) / (SIM_CLKDIV1_OUTDIV4 + 1)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver root {
   boot {
+  //--------------------------------------------------- Static checks
+    check "F_CPU_MHZ valid values: 240, 216, 192, 180, 168, 144, 120, 96, 72, 48, 24"
+     (   (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)
+      or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ ==  96) or (F_CPU_MHZ ==  48) or (F_CPU_MHZ ==  24)
+      or (F_CPU_MHZ == 72))
+  //--- Check CPU clock setting is correct
+    check "CPU clock setting" (F_CPU_MHZ * (MCG_C5_PRDIV + 1) * (SIM_CLKDIV1_OUTDIV1 + 1) == (16 / 2) * (MCG_C6_VDIV + 16))
+  //--- (2) The bus clock frequency must be programmed to 60 MHz or less in HSRUN or RUN ...
+    check "BUS_MHZ ≤ 60" (BUS_MHZ ≤ 60)
+  //---  ... an integer divide of the core clock. ...
+    check "bus clock frequency must be an integer divide of the core clock" (F_CPU_MHZ == (F_CPU_MHZ / BUS_MHZ) * BUS_MHZ)
+  //--- ... The core clock to bus clock ratio is limited to a max value of 8. 
+    check "core clock to bus clock ratio is limited to a max value of 8" (F_CPU_MHZ / BUS_MHZ ≤ 8)
+  //--- (3) The flash clock frequency must be programmed to 28 MHz or less [No! overclocking --> 30 MHz] ...
+    check "flash clock frequency must be programmed to 30 MHz or less" (FLASH_KHZ ≤ 30_000)
+  //--- ... less than or equal to the bus clock, ...
+    check "flash clock frequency must be less than or equal to the bus clock" (FLASH_KHZ ≤ (BUS_MHZ * 1000))
+  //    ... and an integer divide of the core clock. ...
+//    check "flash clock frequency must be an integer divide of the core clock" (F_CPU_MHZ == (F_CPU_MHZ / FLASH_KHZ) * FLASH_KHZ)
+  //    ... The core clock to flash clock ratio is limited to a max value of 8.
+    check "core clock to flash clock ratio is limited to a max value of 8" (F_CPU_MHZ * 1000 / FLASH_KHZ ≤ 8)
+  //--- (4) The FlexBus clock frequency must be programmed to be less than or equal to the bus clock frequency. ...
+//    check "flexBus clock frequency must be less than or equal to the bus clock" (FLEXBUS_MHZ ≤ BUS_MHZ)
+  //--- ... For this device the FlexBus maximum frequency is 60 MHz. ...
+//    check "flexBus maximum frequency is 60 MHz" (FLEXBUS_MHZ ≤ 60)
+  //--- ... The core clock to FlexBus clock ratio is limited to a max value of 8
+    check "core clock to FlexBus clock ratio is limited to a max value of 8" (F_CPU_MHZ / FLEXBUS_MHZ ≤ 8)
   //--------------------------------------------------- Disable watchdog timer
-  // These two instructions are required for unlocking watchdog timer
+  //--- These two instructions are required for unlocking watchdog timer
     WDOG:UNLOCK = WDOG_UNLOCK_SEQ1
     WDOG:UNLOCK = WDOG_UNLOCK_SEQ2
   //--- Disable watchdog timer
@@ -84,77 +318,43 @@ driver root {
   //--- If we need faster than crystal, turn on the PLL
     if @static F_CPU_MHZ > 120 {
       SMC:PMCTRL = {SMC:PMCTRL !RUNM:3} // enter HSRUN mode
-      while SMC:PMSTAT ≠ {SMC:PMSTAT !RUN:1} {}
+      while SMC:PMSTAT ≠ {SMC:PMSTAT !HSRUN:1} {}
     }
-    check (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)
-      or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24)
-      or (F_CPU_MHZ == 72)
   //--- Configure CPU clock
-    if @static F_CPU_MHZ == 240 {
-      MCG:C5 = {MCG:C5 !PRDIV0:0}
-      MCG:C6 = {MCG:C6 !PLLS:1 !VDIV0:14}
-    }else if @static F_CPU_MHZ == 216 {
-      MCG:C5 = {MCG:C5 !PRDIV0:0}
-      MCG:C6 = {MCG:C6 !PLLS:1 !VDIV0:11}
-    }else if @static F_CPU_MHZ == 192 {
-      MCG:C5 = {MCG:C5 !PRDIV0:0}
-      MCG:C6 = {MCG:C6 !PLLS:1 !VDIV0:8}
-    }else if @static F_CPU_MHZ == 180 {
-      MCG:C5 = {MCG:C5 !PRDIV0:1}
-      MCG:C6 = {MCG:C6 !PLLS:1 !VDIV0:29}
-    }else if @static F_CPU_MHZ == 168 {
-      MCG:C5 = {MCG:C5 !PRDIV0:0}
-      MCG:C6 = {MCG:C6 !PLLS:1 !VDIV0:5}
-    }else if @static F_CPU_MHZ == 144 {
-      MCG:C5 = {MCG:C5 !PRDIV0:0}
-      MCG:C6 = {MCG:C6 !PLLS:1 !VDIV0:2}
-    }else if @static F_CPU_MHZ == 120 {
-      MCG:C5 = {MCG:C5 !PRDIV0:1}
-      MCG:C6 = {MCG:C6 !PLLS:1 !VDIV0:14}
-    }else if @static (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24) {
-      MCG:C5 = {MCG:C5 !PRDIV0:1}
-      MCG:C6 = {MCG:C6 !PLLS:1 !VDIV0:8}
-    }else if @static F_CPU_MHZ == 72 {
-      MCG:C5 = {MCG:C5 !PRDIV0:1}
-      MCG:C6 = {MCG:C6 !PLLS:1 !VDIV0:2}
-    }
+    MCG:C5 = {MCG:C5 !PRDIV:MCG_C5_PRDIV}
+    MCG:C6 = {MCG:C6 !PLLS:1 !VDIV:MCG_C6_VDIV}
   //--- Wait for PLL to start using xtal as its input
     while MCG:S:PLLST == 0 {}
   //--- Wait for PLL to lock
     while MCG:S:LOCK0 == 0 {}
   //------------------------------------ Now we're in PBE mode : now program the clock dividers
+    SIM:CLKDIV1 = {SIM:CLKDIV1
+      !OUTDIV1:SIM_CLKDIV1_OUTDIV1 // Divisor for Core clock
+      !OUTDIV2:SIM_CLKDIV1_OUTDIV2 // Divisor for Bus clock  
+      !OUTDIV3:SIM_CLKDIV1_OUTDIV3 // Divisor for Flexbus clock
+      !OUTDIV4:SIM_CLKDIV1_OUTDIV4 // Divisor for Fash clock
+    }
     if @static F_CPU_MHZ == 240 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // Bus 120 MHz, Flash 30 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:4} // USB clock = 240 MHz / 5
     }else if @static F_CPU_MHZ == 216 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:7} // bus = 108 MHz, Flash 27 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:0} // USB clock = IRC48M
     }else if @static F_CPU_MHZ == 192 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 96 MHz, Flash 27.4 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:3} // USB clock = 192 MHz / 4
     }else if @static F_CPU_MHZ == 180 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:6} // bus = 90 MHz, Flash 25.7 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:0} // USB clock = IRC48M
     }else if @static F_CPU_MHZ == 168 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:2 !OUTDIV4:5} // bus = 56 MHz, Flash 28 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:6 !USBFRAC:1} // USB clock = 168 MHz * 2 / 7
     }else if @static F_CPU_MHZ == 144 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:1 !OUTDIV4:4} // bus = 72 MHz, Flash 28.8 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:2} // USB clock = 144 MHz / 3
     }else if @static F_CPU_MHZ == 120 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:4} // bus = 120 MHz, Flash 24 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:4 !USBFRAC:1} // USB clock = 120 MHz * 2 / 5
     }else if @static F_CPU_MHZ == 96 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:3} // bus = 96 MHz, Flash 24 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:1} // USB clock = 96 MHz / 2
     }else if @static F_CPU_MHZ == 72 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:0 !OUTDIV2:0 !OUTDIV4:2} // bus = 72 MHz, Flash 24 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:2 !USBFRAC:1} // USB clock = 72 MHz * 2 / 3
     }else if @static F_CPU_MHZ == 48 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:1 !OUTDIV2:1 !OUTDIV3:1 !OUTDIV4:3} // bus = 48 MHz, Flash 24 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2
     }else if @static F_CPU_MHZ == 24 {
-      SIM:CLKDIV1 = {SIM:CLKDIV1 !OUTDIV1:3 !OUTDIV2:3 !OUTDIV3:3 !OUTDIV4:3} // bus = 24 MHz, Flash 24 MHz
       SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2
     }
   //--- Switch to PLL as clock source
@@ -162,7 +362,7 @@ driver root {
   //--- Wait for PLL clock to be used
     while MCG:S:CLKST ≠ {MCG:S !CLKST:3} {}
   //--- USB clock
-    if @static (F_CPU_MHZ == 240) or (F_CPU_MHZ == 180) {
+    if @static (F_CPU_MHZ == 216) or (F_CPU_MHZ == 180) {
       SIM:SOPT2 = {SIM:SOPT2 !USBSRC:1 !PLLFLLSEL:3 !TRACECLKSEL:1 !CLKOUTSEL:6} // PLLFLLSEL:3 --> IRC48SEL
     }else{
       SIM:SOPT2 = {SIM:SOPT2 !USBSRC:1 !PLLFLLSEL:1 !TRACECLKSEL:1 !CLKOUTSEL:6}

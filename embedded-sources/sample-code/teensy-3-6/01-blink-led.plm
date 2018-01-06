@@ -1,5 +1,5 @@
 target "teensy-3-6/unprivileged"
-let F_CPU_MHZ = 180
+let F_CPU_MHZ = 144
 
 driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
@@ -19,12 +19,40 @@ let LED_L0 = $digitalPort.D3
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+driver RegisterRead > root {
+
+  public system section SIM_CLKDIV1 () -> $uint32 {
+    result = SIM:CLKDIV1
+  }
+
+  public system section MCG_C5 () -> $uint8 {
+    result = MCG:C5
+  }
+
+  public system section MCG_C6 () -> $uint8 {
+    result = MCG:C6
+  }
+}
+
+driver RegisterRead ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 task Tâche @priority 1 @stacksize 512 {
   var compteur $uint32 = 0
 
   setup 1000 {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    lcd.goto (!line:0 !column:0)
+    lcd.print (!string:"OUTDIV: ")
+    lcd.print (!hex4: RegisterRead.SIM_CLKDIV1 ()>> 16) ;
+    lcd.goto (!line:1 !column:0)
+    lcd.print (!string:"PRDIV: ")
+    lcd.print (!u32:extend (RegisterRead.MCG_C5 () & 7))
+    lcd.goto (!line:2 !column:0)
+    lcd.print (!string:"VDIV: ")
+    lcd.print (!u32:extend (RegisterRead.MCG_C6 () & 0x1F))
   }
   
   on time.wait (!untilDeadline:self.compteur) {
@@ -33,8 +61,6 @@ task Tâche @priority 1 @stacksize 512 {
     time.wait (!untilDeadline: self.compteur)
     digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
-//    lcd.goto (!line:0 !column:0)
-//    lcd.printUnsigned (!time.now ())
   }
 }
 

@@ -123,8 +123,8 @@ system section initializeDMA (?!pattern $patternArray) {
 //--- Disable PIT3
   PIT:TCTRL [3] = 0
 
-//--- PIT0 clock frequency is F_BUS (in Hertz): PIT:LDVAL3 sets the request period of DMA 0
-  PIT:LDVAL [3] = ((F_BUS_MHZ * 1_000_000) / PATTERN_FREQUENCY) - 1
+//--- PIT0 clock frequency is BUS (in Hertz): PIT:LDVAL3 sets the request period of DMA 0
+  PIT:LDVAL [3] = ((BUS_MHZ * 1_000_000) / PATTERN_FREQUENCY) - 1
 
 //--- Clear PIT3 interrupt flag
   PIT:TFLG [3] = 1

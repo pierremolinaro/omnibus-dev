@@ -4,6 +4,7 @@
 
 class @globalConstantDeclarationAST : @abstractDeclarationAST {
   @lstring mConstantName
+  @lstringlist mAttributeList
   @lstring mConstantTypeName
   @expressionAST mSourceExpression
 }
@@ -25,6 +26,12 @@ syntax extension plm_syntax {
   rule <declaration> ?!@ast ioAST {
     $let$
     $identifier$ ?let constantName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $@attribute$ ?let attribute
+      attributeList += !attribute
+    end
     @lstring typeName
     select
       typeName = ["" nowhere]
@@ -35,6 +42,7 @@ syntax extension plm_syntax {
     <expression> !?ioAST ?let @expressionAST expression
     ioAST.mDeclarationListAST += !@globalConstantDeclarationAST.new {
       !constantName
+      !attributeList
       !typeName
       !expression
     }
@@ -97,13 +105,16 @@ override method @globalConstantDeclarationAST enterInContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
 {
-#  initialVariableMap (
-#    !context:ioContext
-#    !mode:.bootMode
-#    !globalsAreConstant:true # Any value, there is no defined global variable at this stage
-#    !returnTypeName:["" nowhere]
-#    ?@universalValuedObjectMap universalMap
-#  )
+  var displayValue = false
+  for (attribute) in mAttributeList do
+    if attribute.string != "display" then
+      error attribute : "attribute should be @display"
+    elsif displayValue then
+      error attribute : "duplicated attribute"
+    else
+      displayValue = true
+    end
+  end
 #--- Get destination type
   @PLMType annotationType
   if mConstantTypeName.string == "" then
@@ -140,6 +151,10 @@ override method @globalConstantDeclarationAST enterInContext
 #--- Enter in context
   [!?ioContext.mGlobalConstantMap insertKey !mConstantName !result]
   [!?ioContext.mValuedObjectMap insertGlobalConstant !mConstantName !result]
+#--- Diplay ?
+  if displayValue then
+    message "Global constant '" + mConstantName + "' = " + [result llvmValue] + "\n"
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

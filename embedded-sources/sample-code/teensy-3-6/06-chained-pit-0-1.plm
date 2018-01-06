@@ -61,17 +61,17 @@ struct $uptime @copyable {
   }
 
   public func µs @noUnusedWarning () -> $uint32 {
-    let r = (self.rawValue / F_BUS_MHZ) % 1_000
+    let r = (self.rawValue / BUS_MHZ) % 1_000
     result = truncate (r)
   }
 
   public func ms @noUnusedWarning () -> $uint32 {
-    let r = (self.rawValue / (F_BUS_MHZ * 1_000)) % 1_000
+    let r = (self.rawValue / (BUS_MHZ * 1_000)) % 1_000
     result = truncate (r)
   }
 
   public func s @noUnusedWarning () -> $uint32 {
-    let r = self.rawValue / (F_BUS_MHZ * 1_000_000)
+    let r = self.rawValue / (BUS_MHZ * 1_000_000)
     result = truncate (r)
   }
 }
@@ -92,7 +92,7 @@ task Tâche @priority 1 @stacksize 512 {
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:self.compteur)
     lcd.goto (!line:1 !column:0)
-    lcd.print (!u64:tick.raw () / F_BUS_MHZ)
+    lcd.print (!u64:tick.raw () / BUS_MHZ)
     lcd.goto (!line:2 !column:0)
     lcd.print (!u32:tick.s ())
     lcd.print (!string:" ")
