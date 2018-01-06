@@ -1,5 +1,5 @@
 target "teensy-3-6/unprivileged"
-let F_CPU_MHZ = 240
+let F_CPU_MHZ = 144
 
 driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
@@ -61,8 +61,8 @@ task T1 @priority 10 @stacksize 512 {
   var freeRam $uint32 = 0 
   var start $uint32 = 0 
   var maxAllocationParSeconde $uint32 = 0 
-  var alloc $uint32 = .max 
-  var current $uint32 = .max 
+  var alloc $uint32 = 0
+  var current $uint32 = 0 
 
   setup 1000 {
     lcd.print (!string:"Free:")

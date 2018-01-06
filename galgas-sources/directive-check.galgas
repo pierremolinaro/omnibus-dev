@@ -3,6 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @checkInstructionAST : @instructionAST {
+  @lstring mCheckMessage
   @expressionAST mExpression
 }
 
@@ -16,12 +17,16 @@ syntax extension plm_syntax {
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $check$
-    let loc = @location.here
+    @lstring checkMessage
+    select
+      checkMessage = ["" here]
+    or
+      $"string"$ ?checkMessage
+    end
+    $($
     <expression> !?ioAST ?let @expressionAST expression
-    ioInstructionList += !@checkInstructionAST.new {
-      !loc
-      !expression
-    }
+    ioInstructionList += !@checkInstructionAST.new {!checkMessage.location !checkMessage !expression}
+    $)$
   }
 
   #·····················································································································
@@ -78,7 +83,11 @@ override method @checkInstructionAST instructionSemanticAnalysis
   else
     [expressionResult literalInteger ?1* ?value:@bigint value]
     if value != 1G then
-      error mInstructionLocation : "check expression value is false"
+      if mCheckMessage.string != "" then
+        error mCheckMessage : "check failure: " + mCheckMessage
+      else
+        error mCheckMessage : "check failure"
+      end
     end
   end
 }

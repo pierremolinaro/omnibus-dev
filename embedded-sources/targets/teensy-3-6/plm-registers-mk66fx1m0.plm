@@ -58,14 +58,21 @@ registers PORTE {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Chapter 13: System Integration Module (SIM)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// Chapter 12: System Integration Module (SIM)
 registers SIM {
-  SOPT1    0x40047000 $uint32 // System Options registers 1
+//--- System Options registers 1
+  SOPT1 0x4004_7000 $uint32 {USBREGEN, USBSSTBY, USBVSTBY, 9, OSC32KSEL:2, 2, RAMSIZE:4, 12}
 
-  SOPT1CFG 0x40047004 $uint32 // SOPT1 Configuration Register
+//--- SOPT1 Configuration Register
+  SOPT1CFG 0x4004_7004 $uint32 {5, USSWE, UVSWE, URWE, 24}
 
-  SOPT2    0x40048004 $uint32 { // System Options registers 2
+//--- USB PHY Control Register 
+  USBPHYCTL 0x4004_7008 $uint32 {8, USBDISILIM, USB3VOUTTRG:3, 10, USBVREGPD, USBVREGSEL, 8}
+
+//--- System Options registers 2
+   SOPT2 0x4004_8004 $uint32 {
     2,
     SDHCSRC:2,     // SDHC Clock, 0=system, 1=FLL/PLL, 2=OSCERCLK, 3=external
     LPUARTSRC:2,     // LPUART Clock, 0=off, 1=FLL/PLL, 2=OSCERCLK, 3=MCGIRCLK
@@ -86,15 +93,30 @@ registers SIM {
     USBSLSRC // USB Slow Clock Source
   }
 
-  SOPT4   0x4004800C $uint32 // System Options registers 4
+// System Options registers 4
+  SOPT4 0x4004_800C $uint32 {
+    FTM3TRG1SRC, FTM3TRG0SRC, FTM0TRG1SRC, FTM0TRG0SRC, FTM3CLKSEL, FTM2CLKSEL, FTM1CLKSEL, FTM0CLKSEL, 
+    1, FTM2CH1SRC, FTM2CH0SRC:2, FTM1CH0SRC:2, 2,
+    3, FTM3FLT0, 3, FTM2FLT0, 3, FTM1FLT0, FTM0FLT3, FTM0FLT2, FTM0FLT1, FTM0FLT0
+  }
 
-  SOPT5   0x40048010 $uint32 // System Options registers 5
+//--- System Options registers 5
+  SOPT5 0x4004_8010 $uint32 {
+    12, LPUART0RXSRC:2, LPUART0TXSRC:2, 8,
+    UART1RXSRC:2, UART1TXSRC:2, UART0RXSRC:2, UART0TXSRC:2
+  }
 
-  SOPT7   0x40048018 $uint32 // System Options registers 7
+//--- System Options registers 7
+  SOPT7 0x4004_8018 $uint32 {
+    16, ADC1ALTTRGEN, 2, ADC1PRETRGSEL, ADC1TRGSEL:4,
+    ADC0ALTTRGEN, 2, ADC0PRETRGSEL, ADC0TRGSEL:4
+  }
 
-  SDID @ro 0x40048024 $uint32 // System Device Identification Register
+//--- System Device Identification Register
+  SDID @ro 0x4004_8024 $uint32 {FAMILYID:4, SUBFAMID:4, SERIESID:4, 4, REVID:4, DIEID:5, FAMID:3, PINID:4}
 
-  SCGC2  0x4004802C $uint32 { // System Clock Gating Control registers 2
+//--- System Clock Gating Control registers 2
+  SCGC2 0x4004_802C $uint32 {
     18,
     DAC1,
     DAC0,
@@ -107,7 +129,8 @@ registers SIM {
     ENET
   }
 
-  SCGC3  0x4004_8030 $uint32 {// System Clock Gating Control registers 3
+//--- System Clock Gating Control registers 3
+  SCGC3 0x4004_8030 $uint32 {
     4,
     ADC1, // ADC1 Clock Gate Control
     1,
@@ -125,7 +148,8 @@ registers SIM {
     RNGA
   }
 
-  SCGC4 0x40048034 $uint32 { // System Clock Gating Control registers 4
+//--- System Clock Gating Control registers 4
+  SCGC4 0x4004_8034 $uint32 {
     11,
     VREF,
     CMP,
@@ -144,7 +168,8 @@ registers SIM {
     1
   }
 
-  SCGC5 0x4004_8038 $uint32 { // System Clock Gating Control registers 5
+//--- System Clock Gating Control registers 5
+  SCGC5 0x4004_8038 $uint32 {
     18,
     PORTE,
     PORTD,
@@ -157,7 +182,8 @@ registers SIM {
     LPTMR // Low Power Timer Access Control
   }
 
-  SCGC6 0x4004803C $uint32 { // System Clock Gating Control registers 6
+//--- System Clock Gating Control registers 6
+  SCGC6 0x4004_803C $uint32 {
     DAC0,
     1,
     RTC,
@@ -185,7 +211,8 @@ registers SIM {
     FTF
   }
 
-  SCGC7 0x40048040 $uint32 { // System Clock Gating Control registers 7
+//--- System Clock Gating Control registers 7
+  SCGC7 0x4004_8040 $uint32 {
     28,
     SDRAMMC,
     MPU,
@@ -193,7 +220,8 @@ registers SIM {
     FLEXBUS
   }
 
-  CLKDIV1 0x4004_8044 $uint32 {// System Clock Divider registers 1
+//--- System Clock Divider registers 1
+  CLKDIV1 0x4004_8044 $uint32 {
     OUTDIV1:4, // Divide value for the core/system clock
     OUTDIV2:4, // Divide value for the peripheral clock
     OUTDIV3:4, // Divide value for flexbus
@@ -201,7 +229,8 @@ registers SIM {
     16
   }
 
-  CLKDIV2 0x40048048 $uint32 { // System Clock Divider registers 2
+//--- System Clock Divider registers 2
+   CLKDIV2 0x4004_8048 $uint32 {
     28,
     USBDIV:3,
     USBFRAC
@@ -714,29 +743,32 @@ registers MCG {
     SCFTRIM // Slow Internal Reference Clock Fine Trim
   }
   
-  
-  C5 0x4006_4004 $uint8 { // MCG Control 5 Register
-   1,
-   PLLCLKEN0, // PLL Clock Enable
-   PLLSTEN0,  // PLL Stop Enable
-   PRDIV0:5 // PLL External Reference Divider
+//--- MCG Control 5 Register  
+  C5 0x4006_4004 $uint8 {
+    1,
+    PLLCLKEN, // PLL Clock Enable
+    PLLSTEN,  // PLL Stop Enable
+    2,
+    PRDIV:3 // PLL External Reference Divider
   }
   
-  C6 0x4006_4005 $uint8 { // MCG Control 6 Register
-   LOLIE0, // Loss of Lock Interrrupt Enable
-   PLLS, // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00
-   CME0,   // Clock Monitor Enable
-   VDIV0:5 // VCO 0 Divider
+//--- MCG Control 6 Register
+  C6 0x4006_4005 $uint8 {
+    LOLIE0, // Loss of Lock Interrrupt Enable
+    PLLS, // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00
+    CME0,   // Clock Monitor Enable
+    VDIV:5 // VCO 0 Divider
   }
   
-  S @ro 0x40064006 $uint8 { // MCG Status Register
-   LOLS0, // Loss of Lock Status
-   LOCK0, // Lock Status, 0=PLL Unlocked, 1=PLL Locked
-   PLLST, // PLL Select Status
-   IREFST, // Internal Reference Status
-   CLKST:2, // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL
-   OSCINIT0, // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator
-   IRCST   // Internal Reference Clock Status
+//--- MCG Status Register
+  S @ro 0x4006_4006 $uint8 {
+    LOLS0, // Loss of Lock Status
+    LOCK0, // Lock Status, 0=PLL Unlocked, 1=PLL Locked
+    PLLST, // PLL Select Status
+    IREFST, // Internal Reference Status
+    CLKST:2, // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL
+    OSCINIT0, // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator
+    IRCST   // Internal Reference Clock Status
   }
   
   SC 0x40064008 $uint8 { // MCG Status and Control Register
@@ -1430,7 +1462,7 @@ registers USB0 {
   ERRSTAT 0x4007_2088 $uint8 {BSTERR, 1, DMAERR, BTOERR, DFN8, CRC16, CRC5EOF, PIDERR}
 
 //--- Error Interrupt Enable Register
-  ERREN 0x4007_208C $uint8 {BSTERR, 1, DMAERREN, BTOERREN, DFN8EN, CRC16EN, CRC5EOFEN, PIDERREN}
+  ERREN 0x4007_208C $uint8 {BSTERREN, 1, DMAERREN, BTOERREN, DFN8EN, CRC16EN, CRC5EOFEN, PIDERREN}
 
 //--- Status Register
   STAT 0x4007_2090 $uint8 {ENDP:4, TX, ODD, 2}
@@ -1481,16 +1513,16 @@ registers USB0 {
   USBFRMADJUST 0x4007_2114 $uint8
   
 //--- USB Clock Recovery Control Register
-  CLK_RECOVERY_CTRL 0x4007_2140 $uint8 {CLOCK_RECOVER_EN, RESET_RESUME_ROUGH_EN, RESTART_IFRTRIM_EN, 5}
+  CLK_RECOVER_CTRL 0x4007_2140 $uint8 {CLOCK_RECOVER_EN, RESET_RESUME_ROUGH_EN, RESTART_IFRTRIM_EN, 5}
   
 //--- ICR48 Oscillator Enable Register
-  CLK_RECOVERY_IRCN_EN 0x4007_2144 $uint8 {6, IRC_EN, REG_EN}
+  CLK_RECOVER_IRCN_EN 0x4007_2144 $uint8 {6, IRC_EN, REG_EN}
   
 //--- Clock recovery combined Enable Register
-  CLK_RECOVERY_INT_EN 0x4007_2154 $uint8 {3, OVF_ERROR_EN, 4}
+  CLK_RECOVER_INT_EN 0x4007_2154 $uint8 {3, OVF_ERROR_EN, 4}
   
 //--- Clock recovery separated interrupt status Register
-  CLK_RECOVERY_INT_STATUS 0x4007_215C $uint8 {3, OVF_ERROR, 4}
+  CLK_RECOVER_INT_STATUS 0x4007_215C $uint8 {3, OVF_ERROR, 4}
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

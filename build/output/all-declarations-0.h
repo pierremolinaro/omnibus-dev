@@ -1384,6 +1384,10 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_107 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_syntax_108 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_109 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -2731,7 +2735,8 @@ class GALGAS_checkInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_checkInstructionAST constructor_new (const class GALGAS_location & inOperand0,
-                                                                    const class GALGAS_expressionAST & inOperand1
+                                                                    const class GALGAS_lstring & inOperand1,
+                                                                    const class GALGAS_expressionAST & inOperand2
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2743,6 +2748,8 @@ class GALGAS_checkInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mCheckMessage (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
 
 
@@ -2764,10 +2771,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_checkInstructionAST
 
 class cPtr_checkInstructionAST : public cPtr_instructionAST {
 //--- Attributes
+  public : GALGAS_lstring mProperty_mCheckMessage ;
   public : GALGAS_expressionAST mProperty_mExpression ;
 
 //--- Constructor
   public : cPtr_checkInstructionAST (const GALGAS_location & in_mInstructionLocation,
+                                     const GALGAS_lstring & in_mCheckMessage,
                                      const GALGAS_expressionAST & in_mExpression
                                      COMMA_LOCATION_ARGS) ;
 
@@ -2775,6 +2784,7 @@ class cPtr_checkInstructionAST : public cPtr_instructionAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mCheckMessage (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -3959,8 +3969,9 @@ class GALGAS_globalConstantDeclarationAST : public GALGAS_abstractDeclarationAST
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_globalConstantDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                             const class GALGAS_lstring & inOperand1,
-                                                                             const class GALGAS_expressionAST & inOperand2
+                                                                             const class GALGAS_lstringlist & inOperand1,
+                                                                             const class GALGAS_lstring & inOperand2,
+                                                                             const class GALGAS_expressionAST & inOperand3
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3972,6 +3983,8 @@ class GALGAS_globalConstantDeclarationAST : public GALGAS_abstractDeclarationAST
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConstantTypeName (LOCATION_ARGS) const ;
@@ -3998,11 +4011,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalConstantDecla
 class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mConstantName ;
+  public : GALGAS_lstringlist mProperty_mAttributeList ;
   public : GALGAS_lstring mProperty_mConstantTypeName ;
   public : GALGAS_expressionAST mProperty_mSourceExpression ;
 
 //--- Constructor
   public : cPtr_globalConstantDeclarationAST (const GALGAS_lstring & in_mConstantName,
+                                              const GALGAS_lstringlist & in_mAttributeList,
                                               const GALGAS_lstring & in_mConstantTypeName,
                                               const GALGAS_expressionAST & in_mSourceExpression
                                               COMMA_LOCATION_ARGS) ;
@@ -4012,6 +4027,7 @@ class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstantTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
 //--- Description
