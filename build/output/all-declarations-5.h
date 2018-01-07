@@ -1340,7 +1340,7 @@ class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstruction
 void extensionSetter_appendGetArrayElementReference (class GALGAS_instructionListIR & ioObject,
                                                      const class GALGAS_objectIR constin_inTarget,
                                                      const class GALGAS_objectIR constin_inSource,
-                                                     const class GALGAS_string constin_inElementIndex,
+                                                     const class GALGAS_objectIR constin_inElement,
                                                      class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -1373,7 +1373,7 @@ class GALGAS_getArrayElementReferenceIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_getArrayElementReferenceIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                            const class GALGAS_objectIR & inOperand1,
-                                                                           const class GALGAS_string & inOperand2
+                                                                           const class GALGAS_objectIR & inOperand2
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1385,7 +1385,7 @@ class GALGAS_getArrayElementReferenceIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mElementIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mElement (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
 
@@ -1412,12 +1412,12 @@ class cPtr_getArrayElementReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectIR mProperty_mTarget ;
   public : GALGAS_objectIR mProperty_mSource ;
-  public : GALGAS_string mProperty_mElementIndex ;
+  public : GALGAS_objectIR mProperty_mElement ;
 
 //--- Constructor
   public : cPtr_getArrayElementReferenceIR (const GALGAS_objectIR & in_mTarget,
                                             const GALGAS_objectIR & in_mSource,
-                                            const GALGAS_string & in_mElementIndex
+                                            const GALGAS_objectIR & in_mElement
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -1426,7 +1426,7 @@ class cPtr_getArrayElementReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mElementIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mElement (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

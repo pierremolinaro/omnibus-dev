@@ -2,9 +2,9 @@
 setter @instructionListIR appendGetArrayElementReference
   ?let @objectIR inTarget
   ?let @objectIR inSource
-  ?let @string inElementIndex
+  ?let @objectIR inElement
 {
-  self += !@getArrayElementReferenceIR.new {!inTarget !inSource !inElementIndex}
+  self += !@getArrayElementReferenceIR.new {!inTarget !inSource !inElement}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -12,7 +12,7 @@ setter @instructionListIR appendGetArrayElementReference
 class @getArrayElementReferenceIR : @abstractInstructionIR {
   @objectIR mTarget
   @objectIR mSource
-  @string mElementIndex
+  @objectIR mElement
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,8 +24,8 @@ override method @getArrayElementReferenceIR llvmInstructionCode
 {
   let llvmType = [[mSource type] llvmTypeName]
   ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mElementIndex
-  ioLLVMcode += " ; Element of index " + mElementIndex + "\n"
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, " + [mElement llvmTypeName] + " " + [mElement llvmName]
+  ioLLVMcode += " ; Element of index " + [mElement llvmName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -109,7 +109,7 @@ proc handleArraySubscript
       [!?ioInstructionGenerationList appendGetArrayElementReference
         !result
         !ioObjectPtr
-        ![indexValue uint]
+        !indexResult
       ]
       ioObjectPtr = result      
     end
@@ -130,7 +130,7 @@ proc handleArraySubscript
       [!?ioInstructionGenerationList appendGetArrayElementReference
         !result
         !ioObjectPtr
-        ![indexResult llvmName]
+        !indexResult
       ]
       ioObjectPtr = result      
   else
