@@ -1516,7 +1516,7 @@ registers USB0 {
   CLK_RECOVER_CTRL 0x4007_2140 $uint8 {CLOCK_RECOVER_EN, RESET_RESUME_ROUGH_EN, RESTART_IFRTRIM_EN, 5}
   
 //--- ICR48 Oscillator Enable Register
-  CLK_RECOVER_IRCN_EN 0x4007_2144 $uint8 {6, IRC_EN, REG_EN}
+  CLK_RECOVER_IRC_EN 0x4007_2144 $uint8 {6, IRC_EN, REG_EN}
   
 //--- Clock recovery combined Enable Register
   CLK_RECOVER_INT_EN 0x4007_2154 $uint8 {3, OVF_ERROR_EN, 4}

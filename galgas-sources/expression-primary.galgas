@@ -679,7 +679,7 @@ proc handleSliceInExpression
     error inLow : "Invalid, receiver is not an integer" : ioResult
   else
   #--- Shift source value
-    [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inHigh.bigint uint] !?ioTemporaries]
+    [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inLow.bigint uint] !?ioTemporaries]
   #--- Truncate source value
     let resultIntegerName = @lstring.new {!"uint" + (inHigh.bigint - inLow.bigint + 1G) !inLow.location}
     [inContext.mTypeMap searchKey !lkey:resultIntegerName ?type:let sliceType ?1*]
