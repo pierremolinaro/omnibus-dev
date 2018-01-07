@@ -56,7 +56,7 @@ check target "teensy-3-6/unprivileged"
 // 5. Since SDRAMC and FlexBus both use CLKOUT, the same restrictions apply to the SDRAM controller as stated
 //      for the FlexBus clock.  //
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// SETTINGS
+// SETTING SUMMARY
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // F_CPU   MCG_C5   MCG_C6   SIM_CLKDIV1   SIM_CLKDIV1   SIM_CLKDIV1   SIM_CLKDIV1   BUS_MHZ   FLEX_BUS   FLASH
 // _MHZ    _PRDIV    _VDIV      _OUTDIV1      _OUTDIV2      _OUTDIV3      _OUTDIV4                 _MHZ    _KHZ
@@ -240,14 +240,100 @@ let SIM_CLKDIV1_OUTDIV4 =
 let FLASH_KHZ = (16_000 / 2) * (MCG_C6_VDIV + 16) / (MCG_C5_PRDIV + 1) / (SIM_CLKDIV1_OUTDIV4 + 1)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// USB CLOCK
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// The USB module SHOULD be driven by a 48 MHz clock.
+//
+// For all CPU frequencies (but 216 MHz and 180 MHz), this clock is derived from MCGPLLCLK; the MCGPLLCLK is
+// identical to MCGCLOCKOUT (as SIM_CLKDIV2_PLL_FLL_SEL=1). So:
+//   USB_CLOCK = MCGCLOCKOUT * (SIM_CLKDIV2_USBFRAC + 1) / (SIM_CLKDIV2_USBDIV + 1)
+// We check :
+//   48 MHz == 16 MHz / 2 * (MCG:C6:VDIV + 16) / (MCG:C5:PRDIV + 1) * (SIM_CLKDIV2_USBFRAC + 1) / (SIM_CLKDIV2_USBDIV + 1)
+// So:
+//   6 * (MCG:C5:PRDIV + 1) * (SIM_CLKDIV2_USBDIV + 1) == (MCG:C6:VDIV + 16) * (SIM_CLKDIV2_USBFRAC + 1)
+//
+// For 216 MHz and 180 MHz CPU frequencies, we use directly the built-in 48 MHz clock: SIM_CLKDIV2_PLL_FLL_SEL=3, with
+// di divisor (SIM_CLKDIV2_USBFRAC=0 and SIM_CLKDIV2_USBDIV=0).
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// USB SETTING SUMMARY (for all CPU frequencies, but 216 MHz and 180 MHz)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// F_CPU   SIM_CLKDIV2   SIM_CLKDIV2   SIM_SOPT2_
+// _MHZ        _USBDIV      _USBFRAC    PLLFLLSEL
+//  240              4             0            1
+//  216              0             0            3
+//  192              3             0            1
+//  180              0             0            3
+//  168              6             1            1
+//  144              2             0            1
+//  120              4             1            1
+//   96              1             0            1 
+//   72              2             1            1
+//   48              1             0            1
+//   24              1             0            1
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// SIM:SOPT2:PLLFLLSEL SETTINGS
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let SIM_SOPT2_PLLFLLSEL =
+  if (F_CPU_MHZ == 216) or (F_CPU_MHZ == 180) {
+    3
+  }else{
+    1
+  }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// SIM:CLKDIV2:USBFRAC SETTINGS
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let SIM_CLKDIV2_USBFRAC =
+  if (F_CPU_MHZ == 168) or (F_CPU_MHZ == 120) or (F_CPU_MHZ == 72) {
+    1
+  }else{
+    0
+  }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// SIM:CLKDIV2:USBDIV SETTINGS
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let SIM_CLKDIV2_USBDIV =
+  if F_CPU_MHZ == 240 {
+    4
+  }else if F_CPU_MHZ == 216 {
+    0
+  }else if F_CPU_MHZ == 192 {
+    3
+  }else if F_CPU_MHZ == 180 {
+    0
+  }else if F_CPU_MHZ == 168 {
+    6
+  }else if F_CPU_MHZ == 144 {
+    2
+  }else if F_CPU_MHZ == 120 {
+    4
+  }else if F_CPU_MHZ == 96 {
+    1
+  }else if F_CPU_MHZ == 72 {
+    2
+  }else if F_CPU_MHZ == 48 {
+    1
+  }else if F_CPU_MHZ == 24 {
+    1
+  }else{
+    0 // Any value, an error is raised in "check" instruction below
+  }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  DRIVER ROOT
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver root {
   boot {
   //--------------------------------------------------- Static checks
-    check "F_CPU_MHZ valid values: 240, 216, 192, 180, 168, 144, 120, 96, 72, 48, 24"
+    check "F_CPU_MHZ valid values: 240, 216, 192, 180, 168, 144, 120, 96, 72, 48 or 24"
      (   (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)
-      or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ ==  96) or (F_CPU_MHZ ==  48) or (F_CPU_MHZ ==  24)
-      or (F_CPU_MHZ == 72))
+      or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ ==  96) or (F_CPU_MHZ ==  72) or (F_CPU_MHZ ==  48)
+      or (F_CPU_MHZ == 24))
   //--- Check CPU clock setting is correct
     check "CPU clock setting" (F_CPU_MHZ * (MCG_C5_PRDIV + 1) * (SIM_CLKDIV1_OUTDIV1 + 1) == (16 / 2) * (MCG_C6_VDIV + 16))
   //--- (2) The bus clock frequency must be programmed to 60 MHz or less in HSRUN or RUN ...
@@ -261,7 +347,9 @@ driver root {
   //--- ... less than or equal to the bus clock, ...
     check "flash clock frequency must be less than or equal to the bus clock" (FLASH_KHZ ≤ (BUS_MHZ * 1000))
   //    ... and an integer divide of the core clock. ...
-//    check "flash clock frequency must be an integer divide of the core clock" (F_CPU_MHZ == (F_CPU_MHZ / FLASH_KHZ) * FLASH_KHZ)
+    check "flash clock frequency must be an integer divide of the core clock" (
+      (SIM_CLKDIV1_OUTDIV4 + 1) == ((SIM_CLKDIV1_OUTDIV4 + 1) / (SIM_CLKDIV1_OUTDIV1 + 1)) * (SIM_CLKDIV1_OUTDIV1 + 1)
+    )
   //    ... The core clock to flash clock ratio is limited to a max value of 8.
     check "core clock to flash clock ratio is limited to a max value of 8" (F_CPU_MHZ * 1000 / FLASH_KHZ ≤ 8)
   //--- (4) The FlexBus clock frequency must be programmed to be less than or equal to the bus clock frequency. ...
@@ -270,6 +358,19 @@ driver root {
 //    check "flexBus maximum frequency is 60 MHz" (FLEXBUS_MHZ ≤ 60)
   //--- ... The core clock to FlexBus clock ratio is limited to a max value of 8
     check "core clock to FlexBus clock ratio is limited to a max value of 8" (F_CPU_MHZ / FLEXBUS_MHZ ≤ 8)
+  //--- USB Clock
+    check "USB Clock is 48 MHz" (
+     (F_CPU_MHZ == 180) or (F_CPU_MHZ == 216) or // 180 MHz and 216 MHz use directly IRC48MHZ clock
+     (6 * (MCG_C5_PRDIV + 1) * (SIM_CLKDIV2_USBDIV + 1) == (MCG_C6_VDIV + 16) * (SIM_CLKDIV2_USBFRAC + 1))
+    )
+    check "USB Clock is 48 MHz (for 180 MHz CPU clock)" (
+     (F_CPU_MHZ ≠ 180) or // 180 MHz uses directly IRC48 clock
+     ((SIM_CLKDIV2_USBDIV == 0) and (SIM_CLKDIV2_USBFRAC == 0))
+    )
+    check "USB Clock is 48 MHz (for 216 MHz CPU clock)" (
+     (F_CPU_MHZ ≠ 216) or // 216 MHz uses directly IRC48 clock
+     ((SIM_CLKDIV2_USBDIV == 0) and (SIM_CLKDIV2_USBFRAC == 0))
+    )
   //--------------------------------------------------- Disable watchdog timer
   //--- These two instructions are required for unlocking watchdog timer
     WDOG:UNLOCK = WDOG_UNLOCK_SEQ1
@@ -296,10 +397,8 @@ driver root {
   //--- Since this is a write once register, make it visible to all F_CPU's
   //    so we can into other sleep modes in the future at any speed
     SMC:PMPROT = {SMC:PMPROT !AHSRUN:1 !AVLP:1 !ALLS:1 !AVLLS:1}
-  // TODO: do this while the PLL is waiting to lock....
+
     SCB:VTOR = 0  // use vector table in flash
-  //  // default all interrupts to medium priority level
-  ////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);
   //---------2- Initialisation de la PLL
   // start in FEI mode
   //--- Enable capacitors for crystal
@@ -334,38 +433,17 @@ driver root {
       !OUTDIV3:SIM_CLKDIV1_OUTDIV3 // Divisor for Flexbus clock
       !OUTDIV4:SIM_CLKDIV1_OUTDIV4 // Divisor for Fash clock
     }
-    if @static F_CPU_MHZ == 240 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:4} // USB clock = 240 MHz / 5
-    }else if @static F_CPU_MHZ == 216 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:0} // USB clock = IRC48M
-    }else if @static F_CPU_MHZ == 192 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:3} // USB clock = 192 MHz / 4
-    }else if @static F_CPU_MHZ == 180 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:0} // USB clock = IRC48M
-    }else if @static F_CPU_MHZ == 168 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:6 !USBFRAC:1} // USB clock = 168 MHz * 2 / 7
-    }else if @static F_CPU_MHZ == 144 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:2} // USB clock = 144 MHz / 3
-    }else if @static F_CPU_MHZ == 120 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:4 !USBFRAC:1} // USB clock = 120 MHz * 2 / 5
-    }else if @static F_CPU_MHZ == 96 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:1} // USB clock = 96 MHz / 2
-    }else if @static F_CPU_MHZ == 72 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:2 !USBFRAC:1} // USB clock = 72 MHz * 2 / 3
-    }else if @static F_CPU_MHZ == 48 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2
-    }else if @static F_CPU_MHZ == 24 {
-      SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:1} // USB clock = 72 MHz / 2
-    }
+    SIM:CLKDIV2 = {SIM:CLKDIV2 !USBDIV:SIM_CLKDIV2_USBDIV !USBFRAC:SIM_CLKDIV2_USBFRAC}
   //--- Switch to PLL as clock source
     MCG:C1 = {MCG:C1 !CLKS:0 !FRDIV:4}
   //--- Wait for PLL clock to be used
     while MCG:S:CLKST ≠ {MCG:S !CLKST:3} {}
   //--- USB clock
-    if @static (F_CPU_MHZ == 216) or (F_CPU_MHZ == 180) {
-      SIM:SOPT2 = {SIM:SOPT2 !USBSRC:1 !PLLFLLSEL:3 !TRACECLKSEL:1 !CLKOUTSEL:6} // PLLFLLSEL:3 --> IRC48SEL
-    }else{
-      SIM:SOPT2 = {SIM:SOPT2 !USBSRC:1 !PLLFLLSEL:1 !TRACECLKSEL:1 !CLKOUTSEL:6}
+    SIM:SOPT2 = {SIM:SOPT2
+      !USBSRC:1
+      !PLLFLLSEL:SIM_SOPT2_PLLFLLSEL
+      !TRACECLKSEL:1
+      !CLKOUTSEL:6 // Selects the clock to output on the CLKOUT pin: OSCERCLK0 
     }
   }
 
