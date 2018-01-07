@@ -7,9 +7,9 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //   Display clock settings                                                               
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let myBUS_MHZ @display = BUS_MHZ
-let myFLEXBUS_MHZ @display = FLEXBUS_MHZ
-let myFLASH_KHZ @display = FLASH_KHZ
+//let myBUS_MHZ @display = BUS_MHZ
+//let myFLEXBUS_MHZ @display = FLEXBUS_MHZ
+//let myFLASH_KHZ @display = FLASH_KHZ
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                               
@@ -25,6 +25,12 @@ func section activityLedOff @safe @exported () {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // USB DEVICE DRIVER
+// Kevin Cuzner wrote a simpler version, and a great blog article:
+//   http://kevincuzner.com/2014/12/12/teensy-3-1-bare-metal-writing-a-usb-driver/
+//   https://github.com/kcuzner/teensy-oscilloscope/blob/master/scope-teensy/src/usb.c
+//---
+//   https://github.com/prof7bit/frdm-kl25z-minimal-usb-hid
+//   http://www.beyondlogic.org/usbnutshell/usb1.shtml
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let NUM_ENDPOINTS = 4
@@ -84,9 +90,10 @@ driver usb_device > digital {
     result = extend (self.état [index])
   }
   
+  var trace $uint32 = 0 
+  
   public system section lireAddresseUSB () -> $uint32 {
-    let r = addressof (self.descriptorTable)
-    result = extend (r [8 ... 15])
+    result = extend (USB0:ADDR)
   }
   
   //····················································································································
@@ -99,9 +106,6 @@ driver usb_device > digital {
   // This basically follows the flowchart in the Kinetis Quick Reference User Guide, Rev. 3, 05/2014, page 134
   //-- Assume 48 MHz clock already running
     SIM:SCGC4 |= {SIM:SCGC4 !USBOTG:1} // SIM - enable clock
-//    SIM:SCGC7 |= {SIM:SCGC7 !MPU:1} //--- Useful ?
-//    SIM:SCGC6 |= {SIM:SCGC6 !USBDCD:1} //--- Useful ?
-//    SIM:SCGC3 |= {SIM:SCGC3 !USBHSDCD:1 !USBHSPHY:1 !USBHS:1} //--- Useful ?
     MPU:RGDAAC [0] |= {MPU:RGDAAC !M4RE:1 !M4WE:1}
   //--- If using IRC48M, turn on the USB clock recovery hardware
     if @static (F_CPU_MHZ == 180) or (F_CPU_MHZ == 216) {
@@ -116,13 +120,11 @@ driver usb_device > digital {
     USB0:BDTPAGE1 = descriptorTableBaseAddress [08...15]
     USB0:BDTPAGE2 = descriptorTableBaseAddress [16...23]
     USB0:BDTPAGE3 = descriptorTableBaseAddress [24...31]
-  //--- Enable weak pull-downs (???)
- //   SIM:USBPHYCTL = {SIM:USBPHYCTL !USB3VOUTTRG:6 !USBVREGPD:1 !USBVREGSEL:1}
   //--- Clear all ISR flags
     USB0:ISTAT = 0xFF
     USB0:ERRSTAT = 0xFF
     USB0:OTGISTAT = 0xFF
-    USB0:INTEN = {USB0:INTEN !USBRSTEN:1} | 0x40
+    USB0:INTEN = {USB0:INTEN !USBRSTEN:1} // | 0x40
   //-- Enable USB
     USB0:CTL = {USB0:CTL !USBENOFEN:1}
     USB0:USBCTRL = 0
@@ -131,7 +133,6 @@ driver usb_device > digital {
   //-- Enable interrupt in NVIC
     enable (!interrupt: .USBFS_OTG)
   //--- Enable d+ pullup
-    // USB0:OTGCTL = {USB0:OTGCTL !DPHIGH:1} // Page 1500
     USB0:CONTROL = {USB0:CONTROL !DPPULLNONOTG:1} // Page 1515
   }
 
@@ -140,9 +141,59 @@ driver usb_device > digital {
   interrupt section USBFS_OTG {
     let status = USB0:ISTAT
 
-    if (status & {USB0:ISTAT !USBRST:1}) ≠ 0 { // RESET: configure Endpoint 0
-      self.état [self.indexÉtat] = 1
-      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+  //-------------------- RESET: configure Endpoint 0
+    if (status & {USB0:ISTAT !USBRST:1}) ≠ 0 {
+//      self.état [self.indexÉtat] = 1
+//      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+      self.configureEndPoint0OnReset ()
+  //    USB0:ISTAT = {USB0:ISTAT !USBRST:1} // Ack
+    }else{
+    //-------------------- START OF FRAME
+      if (status & {USB0:ISTAT !SOFTOK:1}) ≠ 0 {
+  //        self.état [self.indexÉtat] = 2
+  //        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        USB0:ISTAT = {USB0:ISTAT !SOFTOK:1} // Ack
+      }
+  
+    //-------------------- TOKEN COMPLETED
+      if (status & {USB0:ISTAT !TOKDNE:1}) ≠ 0 { // Page 1502
+  //        digital.write (!yes !toPort:LED_L2)
+  //        self.état [self.indexÉtat] = 3
+  //        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        self.tokenCompleted ()
+        USB0:ISTAT = {USB0:ISTAT !TOKDNE:1} // Ack
+      }
+     
+    //-------------------- STALL
+      if (status & {USB0:ISTAT !STALL:1}) ≠ 0 {
+        self.état [self.indexÉtat] = 4
+        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        USB0:ISTAT = {USB0:ISTAT !STALL:1} // Ack
+      }
+  
+    //-------------------- ERROR
+      if (status & {USB0:ISTAT !ERROR:1}) ≠ 0 {
+        self.état [self.indexÉtat] = 5
+        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        let err = USB0:ERRSTAT
+        USB0:ERRSTAT = err
+        USB0:ISTAT = {USB0:ISTAT !ERROR:1} // Ack
+      }
+  
+    //-------------------- SLEEP
+      if (status & {USB0:ISTAT !SLEEP:1}) ≠ 0 {
+        self.état [self.indexÉtat] = 6
+        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        USB0:ISTAT = {USB0:ISTAT !SLEEP:1} // Ack
+      }
+    }
+  }
+  
+  //····················································································································
+  
+  func section configureEndPoint0OnReset @mutating () {
+//      self.état [self.indexÉtat] = 1
+//      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
       USB0:CTL |= {USB0:CTL !ODDRST:1}
       self.ep0_tx_bdt_bank = 0
    //--- Set up buffers to receive Setup and OUT packets
@@ -164,58 +215,161 @@ driver usb_device > digital {
       USB0:INTEN = {USB0:INTEN !STALLEN:1 !SLEEPEN:1 !TOKDNEEN:1 !SOFTOKEN:1 !ERROREN:1 !USBRSTEN:1}
     //--- is this necessary?
    //   USB0:CTL = {USB0:CTL !USBENOFEN:1} // Page 1507
-    //  USB0:ISTAT = {USB0:ISTAT !USBRST:1} // Ack
-    }else{
-      if (status & {USB0:ISTAT !SOFTOK:1}) ≠ 0 {
-        self.état [self.indexÉtat] = 2
-        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
-        USB0:ISTAT = {USB0:ISTAT !SOFTOK:1} // Ack
-      }
-  
-      if (status & {USB0:ISTAT !TOKDNE:1}) ≠ 0 { // Page 1502
-        digital.write (!yes !toPort:LED_L2)
-        self.état [self.indexÉtat] = 3
-        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
-        let transactionStatus = USB0:STAT
-        let endPoint $uint4 = transactionStatus [4...7]
-  //      let TX_transitionStatus = transactionStatus [3...3].bool ()
-  //      let ODD_transitionStatus = transactionStatus [2...2].bool ()
-        if endPoint == 0 {
-        }else{
-        
-        }
-        USB0:ISTAT = {USB0:ISTAT !TOKDNE:1} // Ack
-      }
-  
-      
-      if (status & {USB0:ISTAT !STALL:1}) ≠ 0 {
-        self.état [self.indexÉtat] = 4
-        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
-        USB0:ISTAT = {USB0:ISTAT !STALL:1} // Ack
-      }
-  
-      if (status & {USB0:ISTAT !ERROR:1}) ≠ 0 {
-        self.état [self.indexÉtat] = 5
-        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
-        let err = USB0:ERRSTAT
-        USB0:ERRSTAT = err
-        USB0:ISTAT = {USB0:ISTAT !ERROR:1} // Ack
-      }
-  
-      if (status & {USB0:ISTAT !SLEEP:1}) ≠ 0 {
-        self.état [self.indexÉtat] = 6
-        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
-        USB0:ISTAT = {USB0:ISTAT !SLEEP:1} // Ack
-    }
-    }
   }
   
   //····················································································································
+  // This means a transaction has completed, we receive this interrupt
+  // after data was transferred and the handshake has been completed:
+  //
+  //   host:TOK_IN    -> device:DATA ->   host:ACK/NAK -> Interrupt
+  //   host:TOK_OUT   ->   host:DATA -> device:ACK/NAK -> Interrupt
+  //   host:TOK_SETUP ->   host:DATA -> device:ACK/NAK -> Interrupt
+  //
+  // The handler can then process the received data or queue more
+  // data to be sent during the next transaction. When there is a
+  // TOK_IN transaction and no data has been placed in the TX buffer
+  // then the hardware will automatically send a NAK:
+  //
+  //   host:TOK_IN -> device:NAK -> NO Interrupt!
+  //
+  // There will be no interrupt in this case! This means as long
+  // as there is no data to be sent there will also be no TOK_IN
+  // calls to the handler anymore. Something else has to prepare
+  // a new TX buffer for that endpoint when data becomes available
+  // again, the handler will only be called AFTER the transmission!
   
-  interrupt section USB_HS_OTG {
-    digital.write (!yes !toPort:LED_L4)
+  func section tokenCompleted @mutating () {
+    let transactionStatus = USB0:STAT
+    let endPoint $uint4 = transactionStatus [4...7]
+//    let TX_transitionStatus = transactionStatus [3...3]
+//    let ODD_transitionStatus = transactionStatus [2...2]
+//    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))
+    if endPoint == 0 {
+      self.endpoint_0_handler (!transactionStatus)
+    }else{
+    
+    }
+//    let index = transactionStatus >> 2
+//    let pid = (self.descriptorTable [index].desc >> 2) & 15
+//    if pid == 0x0D { // Setup received from host
+//      self.usb_setup ()
+//    //--- Unfreeze the USB, now that we're ready
+//      USB0:CTL = {USB0:CTL !USBENOFEN:1}// clear TXSUSPENDTOKENBUSY bit
+//    }else if pid == 0x09 { // IN transaction completed to host
+//    }else if (pid == 0x01) or (pid == 0x02) { // OUT transaction received from host
+//
+//    }
+
+//    if endPoint == 0 {
+//      self.configure
+//    }else{
+//    
+//    }
   }
+
+  //····················································································································
   
+  func section endpoint_0_handler @mutating (?transactionStatus $uint8) {
+  }
+
+  //····················································································································
+  
+//  func section usb_setup @mutating () {
+//  //---
+//    let index $uint32 = 0
+//    self.descriptorTable [index].desc = BDT_DESC (!EP0_SIZE !DATA1)
+//    self.descriptorTable [index(!0 !TX !EVEN)].desc = 0
+//    self.descriptorTable [index(!0 !TX !ODD) ].desc = 0
+//  //--- Grab the 8 byte setup info
+//    let bmRequestType = self.ep0_rx0_buf [0] & 0x1F
+//    let bRequest = self.ep0_rx0_buf [1]
+//    if bmRequestType == 0 { // Setup device
+//      digital.write (!yes !toPort:LED_L2)
+//      self.usb_setup_device (!bRequest)
+//    }else if bmRequestType == 1 { // Setup interface
+//      digital.write (!yes !toPort:LED_L3)
+//    
+//    }else if bmRequestType == 2 { // Setup endpoint
+//      digital.write (!yes !toPort:LED_L4)
+//    
+//    }
+//////    let wValue  = {$uint16 !8:self.ep0_rx0_buf [3] !8:self.ep0_rx0_buf [2]}
+//////    let wIndex  = {$uint16 !8:self.ep0_rx0_buf [5] !8:self.ep0_rx0_buf [4]}
+//////    let wLength = {$uint16 !8:self.ep0_rx0_buf [7] !8:self.ep0_rx0_buf [6]}
+////  //--- Build uint16 requestAndType
+////    let requestAndType = {$uint16 !8:bRequest !8:bmRequestType}
+////  //---
+////    if requestAndType == 0x0500 { // Set address, nothing to do
+////        digital.write (!yes !toPort:LED_L2)
+////    }else if requestAndType == 0x0900 { // Set configuration
+////        digital.write (!yes !toPort:LED_L1)
+////
+////    
+////    }else if requestAndType == 0x0880 { // Get configuration
+////    }else if requestAndType == 0x0080 { // Get status (device)
+////    }else if requestAndType == 0x0082 { // Get status (endpoint)
+////    }else if requestAndType == 0x0102 { // Clear feature (device)
+////    }else if requestAndType == 0x0302 { // Clear feature (endpoint)
+////    }else if (requestAndType == 0x0680) or (requestAndType == 0x0681) { // Get descriptor
+////        digital.write (!yes !toPort:LED_L3)
+////    }
+//  }
+//
+////#define mGET_STATUS           0
+////#define mCLR_FEATURE          1
+////#define mSET_FEATURE          3
+////#define mSET_ADDRESS          5
+////#define mGET_DESC             6
+////#define mSET_DESC             7
+////#define mGET_CONFIG           8
+////#define mSET_CONFIG           9
+////#define mGET_INTF             10
+////#define mSET_INTF             11
+////#define mSYNC_FRAME           12
+//
+//  func section usb_setup_device @mutating (?bRequest $uint8) {
+//    self.trace = extend (bRequest)
+////    const usb_descriptor_list_t *p;
+////    int len;
+////
+////    switch (setup->bRequest) {
+////        case mGET_DESC:
+////            p = usb_descriptor_list;                    // Find entry in table
+////            while(p->wValue) {
+////                if(p->wValue == setup->wValue) {
+////                    if(p->length == 0)
+////                        len = p->addr[0];               // Use structure length
+////                    else
+////                        len = p->length;
+////                        
+////                    iprintf("sending 0x%04x %d\r\n",setup->wValue, len);
+////                    usb_queue_tx(ep, p->addr, min(len, setup->wLength));
+////                    return;
+////                }
+////                p++;
+////            }
+////            iprintf("NOT IMPLEMENTED! 0x%04x\r\n", setup->wValue);              
+////            break;
+////            
+////        case mSET_ADDRESS:
+////            device_state = ADDRESS;
+////            device_address = setup->wValue & 0x7f;
+////            usb_tx(ep,0,0);                         // Send handshake
+////            break;
+////            
+////        case mSET_CONFIG:
+////            iprintf("setconfig: %d\r\n", setup->wValue);
+////            device_state = ENUMERATED;
+////            usb_set_config(setup->wValue);
+////            usb_tx(ep,0,0);                         // Send handshake
+////            break;
+////            
+////        default:
+////            iprintf("NOT IMPLEMENTED! %d\r\n", setup->bRequest);
+////            break;
+////      }
+//  }
+ 
   //····················································································································
 
 }

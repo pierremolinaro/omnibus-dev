@@ -28,7 +28,7 @@ override method @getUniversalArrayElementReferenceIR llvmInstructionCode
 {
   let llvmType = [mType llvmTypeName]
   ioLLVMcode += "  " + mElementLLVMName + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * " + mLLVMName + ", i32 0, i32 " + [mIndexIR llvmName] + "\n"
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + mLLVMName + ", i32 0, " + [mIndexIR llvmTypeName] + " " + [mIndexIR llvmName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

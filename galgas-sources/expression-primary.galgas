@@ -756,11 +756,11 @@ private proc handleArrayAccessInExpression
       !?ioInstructionGenerationList
       !?ioResult
    )
-   getNewTempValue (![ioResult type] !?ioTemporaries ?let loadedObjectIR)
-   [!?ioInstructionGenerationList appendLoadFromReference
-     !loadedObjectIR
-     ![ioResult llvmName]
-   ]
+#   getNewTempValue (![ioResult type] !?ioTemporaries ?let loadedObjectIR)
+#   [!?ioInstructionGenerationList appendLoadFromReference
+#     !loadedObjectIR
+#     ![ioResult llvmName]
+#   ]
   else
     error inEndOfIndex : "the receiver is not an array and does not accept subscripting"
   end

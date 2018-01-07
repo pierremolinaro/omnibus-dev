@@ -249,7 +249,7 @@ getter @PLMType llvmTypeName -> @string {
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case staticInteger :
-    result = "—"
+    result = "i32"
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case arrayType (* *) :

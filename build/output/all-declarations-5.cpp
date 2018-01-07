@@ -1025,10 +1025,10 @@ void extensionSetter_appendGetUniversalArrayElementReference (GALGAS_instruction
 void extensionSetter_appendGetArrayElementReference (GALGAS_instructionListIR & ioObject,
                                                      const GALGAS_objectIR constinArgument_inTarget,
                                                      const GALGAS_objectIR constinArgument_inSource,
-                                                     const GALGAS_string constinArgument_inElementIndex,
+                                                     const GALGAS_objectIR constinArgument_inElement,
                                                      C_Compiler * /* inCompiler */
                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_getArrayElementReferenceIR::constructor_new (constinArgument_inTarget, constinArgument_inSource, constinArgument_inElementIndex  COMMA_SOURCE_FILE ("intermediate-get-array-element-reference.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-get-array-element-reference.galgas", 7)) ;
+  ioObject.addAssign_operation (GALGAS_getArrayElementReferenceIR::constructor_new (constinArgument_inTarget, constinArgument_inSource, constinArgument_inElement  COMMA_SOURCE_FILE ("intermediate-get-array-element-reference.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-get-array-element-reference.galgas", 7)) ;
 }
 
 
@@ -1047,7 +1047,7 @@ typeComparisonResult cPtr_getArrayElementReferenceIR::dynamicObjectCompare (cons
     result = mProperty_mSource.objectCompare (p->mProperty_mSource) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mElementIndex.objectCompare (p->mProperty_mElementIndex) ;
+    result = mProperty_mElement.objectCompare (p->mProperty_mElement) ;
   }
   return result ;
 }
@@ -1088,11 +1088,11 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_getArrayElementReferenceIR GALGAS_getArrayElementReferenceIR::constructor_new (const GALGAS_objectIR & inAttribute_mTarget,
                                                                                       const GALGAS_objectIR & inAttribute_mSource,
-                                                                                      const GALGAS_string & inAttribute_mElementIndex
+                                                                                      const GALGAS_objectIR & inAttribute_mElement
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_getArrayElementReferenceIR result ;
-  if (inAttribute_mTarget.isValid () && inAttribute_mSource.isValid () && inAttribute_mElementIndex.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_getArrayElementReferenceIR (inAttribute_mTarget, inAttribute_mSource, inAttribute_mElementIndex COMMA_THERE)) ;
+  if (inAttribute_mTarget.isValid () && inAttribute_mSource.isValid () && inAttribute_mElement.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_getArrayElementReferenceIR (inAttribute_mTarget, inAttribute_mSource, inAttribute_mElement COMMA_THERE)) ;
   }
   return result ;
 }
@@ -1135,20 +1135,20 @@ GALGAS_objectIR cPtr_getArrayElementReferenceIR::getter_mSource (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_getArrayElementReferenceIR::getter_mElementIndex (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
+GALGAS_objectIR GALGAS_getArrayElementReferenceIR::getter_mElement (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_getArrayElementReferenceIR * p = (const cPtr_getArrayElementReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getArrayElementReferenceIR) ;
-    result = p->mProperty_mElementIndex ;
+    result = p->mProperty_mElement ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_getArrayElementReferenceIR::getter_mElementIndex (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mElementIndex ;
+GALGAS_objectIR cPtr_getArrayElementReferenceIR::getter_mElement (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mElement ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1157,12 +1157,12 @@ GALGAS_string cPtr_getArrayElementReferenceIR::getter_mElementIndex (UNUSED_LOCA
 
 cPtr_getArrayElementReferenceIR::cPtr_getArrayElementReferenceIR (const GALGAS_objectIR & in_mTarget,
                                                                   const GALGAS_objectIR & in_mSource,
-                                                                  const GALGAS_string & in_mElementIndex
+                                                                  const GALGAS_objectIR & in_mElement
                                                                   COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mProperty_mTarget (in_mTarget),
 mProperty_mSource (in_mSource),
-mProperty_mElementIndex (in_mElementIndex) {
+mProperty_mElement (in_mElement) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1178,7 +1178,7 @@ void cPtr_getArrayElementReferenceIR::description (C_String & ioString,
   ioString << ", " ;
   mProperty_mSource.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mElementIndex.description (ioString, inIndentation+1) ;
+  mProperty_mElement.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -1186,7 +1186,7 @@ void cPtr_getArrayElementReferenceIR::description (C_String & ioString,
 
 acPtr_class * cPtr_getArrayElementReferenceIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_getArrayElementReferenceIR (mProperty_mTarget, mProperty_mSource, mProperty_mElementIndex COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_getArrayElementReferenceIR (mProperty_mTarget, mProperty_mSource, mProperty_mElement COMMA_THERE)) ;
   return ptr ;
 }
 
