@@ -284,7 +284,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         error propertyName
           : "a context property cannot be used in this context"
           : currentType, currentLLVMAddressVar
-      case autonomous  (@objectIR object *) :
+      case singleton  (@objectIR object *) :
         currentType = [object type]
         currentLLVMAddressVar = [object llvmName]
         currentObjectPropertyMap = [object type].propertyMap # ????
@@ -377,7 +377,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       #--- Enter in invocation graph
         [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
       end
-    case autonomous  (* errorLocation) :
+    case singleton  (* errorLocation) :
       error errorLocation : "a property cannot be used as method"
     case indexed  (@PLMType propertyType @uint propertyIndex) :
       if not [propertyType.kind isFunction] then

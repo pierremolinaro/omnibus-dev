@@ -28,7 +28,7 @@ syntax extension plm_syntax {
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
-      <private_or_public_struct_property_declaration> !?ioAST !?fieldList !true
+      <private_or_public_struct_property_declaration> !?ioAST !?fieldList !singletonObject:false
     while
       <function> !?ioAST !?procedureDeclarationListAST
     while
@@ -73,7 +73,7 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- Add property types
-  for (propertyName 2* public fieldTypeName initExpression autonomous) in mStructurePropertyListAST do
+  for (propertyName 2* public fieldTypeName initExpression *) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       let typeName = llvmTypeNameFromPLMname (!fieldTypeName)
       [!?ioGraph addEdge !structureTypeName !typeName]
