@@ -49,7 +49,7 @@ C_FILES:
   "../../c-real-time-kernel-types.c"
   "../c-cortex-m4-context-code.c"
   "../../c-real-time-kernel-code.c"
-  "../c-countTrainingZeros.c"
+  "../../c-countTrainingZeros.c"
   "../../memory-utilities.c"
   "../../heap.c"
   "../../dynamic-buffer.c"
