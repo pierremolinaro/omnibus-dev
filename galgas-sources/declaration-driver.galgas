@@ -288,7 +288,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
          !false
          !optionalPropertyTypeName
          !.expression{!initExpression:initExpression}
-         !true # Variable is autonomous
+         !true # Variable is singleton
       end
     #--- Check all arguments of driver instanciation have been used
       for (unusedSelector) in [driverInstanciationArgumentMap keySet] - validArgumentSet do

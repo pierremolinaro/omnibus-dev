@@ -5,7 +5,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 1996, ..., 2016 Pierre Molinaro.                                                                     *
+//  Copyright (C) 1996, ..., 2018 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@ec-nantes.fr                                                                              *
 //                                                                                                                     *
@@ -825,9 +825,9 @@ bool C_Lexique::performTopDownParsing (const int16_t inProductions [],
     }
   //---
     int32_t indentationForParseOnly = 0 ;
-    cToken * currentTokenPtr = mFirstToken ;
-//    while ((currentTokenPtr != NULL) && currentTokenPtr->mIsOptional) {
-//      currentTokenPtr = currentTokenPtr->mNextToken ;
+    cToken * tokenPtr = mFirstToken ;
+//    while ((tokenPtr != NULL) && tokenPtr->mIsOptional) {
+//      tokenPtr = tokenPtr->mNextToken ;
 //    }
 
     if (executionModeIsSyntaxAnalysisOnly ()) {
@@ -837,35 +837,35 @@ bool C_Lexique::performTopDownParsing (const int16_t inProductions [],
     TC_Array <int16_t> stack (10000 COMMA_HERE) ;
     TC_Array <int16_t> errorStack ;
     int32_t errorStackCount = 0 ;
-    bool loop = currentTokenPtr != NULL ;
+    bool loop = tokenPtr != NULL ;
     result = true ;
     int16_t programCounter = inProgramCounterInitialValue ;
     int16_t errorProgramCounter = inProgramCounterInitialValue ;
-    int16_t currentToken = (currentTokenPtr != NULL) ? currentTokenPtr->mTokenCode : ((int16_t) -1) ;
-    if (currentTokenPtr == NULL) {
+    int16_t currentToken = (tokenPtr != NULL) ? tokenPtr->mTokenCode : ((int16_t) -1) ;
+    if (tokenPtr == NULL) {
       mCurrentLocation.resetLocation () ;
     }else{
-      mCurrentLocation = currentTokenPtr->mEndLocation ;
+      mCurrentLocation = tokenPtr->mEndLocation ;
     }
     while (loop) {
     //--- If no current token, get one
       if (currentToken < 0) {
-        if (currentTokenPtr == NULL) {
+        if (tokenPtr == NULL) {
           currentToken = 0 ; // 0 means end of source file
         }else{
-          currentTokenPtr = currentTokenPtr->mNextToken ;
-//          while ((currentTokenPtr != NULL) && currentTokenPtr->mIsOptional) {
-//            currentTokenPtr = currentTokenPtr->mNextToken ;
+          tokenPtr = tokenPtr->mNextToken ;
+//          while ((tokenPtr != NULL) && tokenPtr->mIsOptional) {
+//            tokenPtr = tokenPtr->mNextToken ;
 //          }
-          currentToken = (currentTokenPtr != NULL) ? currentTokenPtr->mTokenCode : ((int16_t) 0) ;
-          if (currentTokenPtr != NULL) {
-            mCurrentLocation = currentTokenPtr->mEndLocation ;
+          currentToken = (tokenPtr != NULL) ? tokenPtr->mTokenCode : ((int16_t) 0) ;
+          if (tokenPtr != NULL) {
+            mCurrentLocation = tokenPtr->mEndLocation ;
           }
         }
       }
       #ifdef TRACE_LL1_PARSING
         co << "---------------------------\n"
-              "Current token is " << getCurrentTokenString (currentTokenPtr) << " (#" << currentToken << ")\n" ;
+              "Current token is " << getCurrentTokenString (tokenPtr) << " (#" << currentToken << ")\n" ;
         co.flush () ;
       #endif
     //--- Get instruction to do
@@ -981,12 +981,12 @@ bool C_Lexique::performTopDownParsing (const int16_t inProductions [],
         if (currentToken == terminalSymbol) {
           if (executionModeIsSyntaxAnalysisOnly ()) {
             indentForParseOnly (indentationForParseOnly) ;
-            co << getCurrentTokenString (currentTokenPtr) << "\n" ;
+            co << getCurrentTokenString (tokenPtr) << "\n" ;
           }
           currentToken = -1 ; // Ok, current terminal symbol is no longer available
           if (produceSyntaxTree) {
             syntaxTreeDescriptionString << "  T" << cStringWithUnsigned (uniqueTerminalIndex) << " [shape=ellipse, label=" ;
-            syntaxTreeDescriptionString.appendCLiteralStringConstant (getCurrentTokenString (currentTokenPtr)) ;
+            syntaxTreeDescriptionString.appendCLiteralStringConstant (getCurrentTokenString (tokenPtr)) ;
             syntaxTreeDescriptionString << "];\n"
                                         << "  NT"
                                         << cStringWithUnsigned (currentProductionName)
@@ -1185,31 +1185,31 @@ bool C_Lexique::performBottomUpParsing (const int16_t inActionTable [],
     int32_t errorSignalingUselessEntryOnTopOfStack = 0 ;
     TC_Array <int16_t> poppedErrors (1000 COMMA_HERE)  ;
     
-    cToken * currentTokenPtr = mFirstToken ;
+    cToken * tokenPtr = mFirstToken ;
 
     int16_t currentToken = (int16_t) -1 ;
 //    bool currentTokenIsOptional = false ;
-    if (currentTokenPtr == NULL) {
+    if (tokenPtr == NULL) {
       mCurrentLocation.resetLocation () ;
     }else{
-      currentToken = currentTokenPtr->mTokenCode ;
-//      currentTokenIsOptional = currentTokenPtr->mIsOptional ;
-      mCurrentLocation = currentTokenPtr->mEndLocation ;
+      currentToken = tokenPtr->mTokenCode ;
+//      currentTokenIsOptional = tokenPtr->mIsOptional ;
+      mCurrentLocation = tokenPtr->mEndLocation ;
     }
     bool loop = true ;
     result = true ;
     while (loop) {
       if (currentToken < 0) {
-        if (currentTokenPtr == NULL) {
+        if (tokenPtr == NULL) {
           currentToken = 0 ; // 0 means end of source file
         }else{
-          currentTokenPtr = currentTokenPtr->mNextToken ;
+          tokenPtr = tokenPtr->mNextToken ;
           currentToken = 0 ;
 //          currentTokenIsOptional = false ;
-          if (currentTokenPtr != NULL) {
-            mCurrentLocation = currentTokenPtr->mEndLocation ;
-            currentToken = currentTokenPtr->mTokenCode ;
-//            currentTokenIsOptional = currentTokenPtr->mIsOptional ;
+          if (tokenPtr != NULL) {
+            mCurrentLocation = tokenPtr->mEndLocation ;
+            currentToken = tokenPtr->mTokenCode ;
+//            currentTokenIsOptional = tokenPtr->mIsOptional ;
           }
         }
       }
@@ -1241,7 +1241,7 @@ bool C_Lexique::performBottomUpParsing (const int16_t inActionTable [],
           C_String terminalUniqueName ;
           terminalUniqueName << "T" << cStringWithUnsigned (uniqueTerminalIndex) ;
           syntaxTreeDescriptionString << "  " << terminalUniqueName << " [shape=ellipse, label=" ;
-          syntaxTreeDescriptionString.appendCLiteralStringConstant (getCurrentTokenString (currentTokenPtr)) ;
+          syntaxTreeDescriptionString.appendCLiteralStringConstant (getCurrentTokenString (tokenPtr)) ;
           syntaxTreeDescriptionString << "];\n" ;
           shiftedElementStack.appendObject (terminalUniqueName) ;
           uniqueTerminalIndex ++ ;
@@ -1249,7 +1249,7 @@ bool C_Lexique::performBottomUpParsing (const int16_t inActionTable [],
       //--- Parse Only : print terminal symbol
         if (executionModeIsSyntaxAnalysisOnly ()) {
           co << "  [S" << cStringWithSigned (currentState) << ", "
-             << getCurrentTokenString (currentTokenPtr)
+             << getCurrentTokenString (tokenPtr)
              << "] |- Shift -> S" << cStringWithSigned (actionCode) << "\n" ;
         }
         // co <<  "EXTENSION executionList: " << executionList.count () << "\n" ;
@@ -1308,7 +1308,7 @@ bool C_Lexique::performBottomUpParsing (const int16_t inActionTable [],
           currentProductionName ++ ;
         }
         if (executionModeIsSyntaxAnalysisOnly ()) {
-          co << "  [S" << cStringWithSigned (currentState) << ", " << getCurrentTokenString (currentTokenPtr)
+          co << "  [S" << cStringWithSigned (currentState) << ", " << getCurrentTokenString (tokenPtr)
              << "] |- Reduce "
              << inNonTerminalSymbolNames [nonTerminal]
              << " -> S"
@@ -1320,7 +1320,7 @@ bool C_Lexique::performBottomUpParsing (const int16_t inActionTable [],
         loop = false ;
         executionList (0 COMMA_HERE).mergeListAtBottom (executionList (1 COMMA_HERE)) ;
         if (executionModeIsSyntaxAnalysisOnly ()) {
-          co << "  [S" << cStringWithSigned (currentState) << ", " << getCurrentTokenString (currentTokenPtr) << "] : Accept\n" ;
+          co << "  [S" << cStringWithSigned (currentState) << ", " << getCurrentTokenString (tokenPtr) << "] : Accept\n" ;
         }
 //      }else if (currentTokenIsOptional) {
 //        currentToken = -1 ; //--- Token has been used

@@ -3356,21 +3356,21 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i6_parse (C_Lexique_p
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_ (GALGAS_ast & ioArgument_ioAST,
                                                                                                                  GALGAS_structurePropertyListAST & ioArgument_ioFieldListAST,
-                                                                                                                 const GALGAS_bool constinArgument_isAutonomous,
+                                                                                                                 const GALGAS_bool constinArgument_isSingletonObject,
                                                                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_bool var_public_2406 ;
+  GALGAS_bool var_public_2432 ;
   switch (select_plm_5F_syntax_2 (inCompiler)) {
   case 1: {
-    var_public_2406 = GALGAS_bool (false) ;
+    var_public_2432 = GALGAS_bool (false) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_public COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 59)) ;
-    var_public_2406 = GALGAS_bool (true) ;
+    var_public_2432 = GALGAS_bool (true) ;
   } break ;
   default:
     break ;
   }
-  nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_public_2406, ioArgument_ioFieldListAST, constinArgument_isAutonomous, inCompiler) ;
+  nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_public_2432, ioArgument_ioFieldListAST, constinArgument_isSingletonObject, inCompiler) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3393,9 +3393,9 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_ (GALGAS_ast & ioArgument_ioAST,
                                                                                                  GALGAS_structurePropertyListAST & ioArgument_ioFieldListAST,
-                                                                                                 const GALGAS_bool constinArgument_isAutonomous,
+                                                                                                 const GALGAS_bool constinArgument_isSingletonObject,
                                                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
-  nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, GALGAS_bool (false), ioArgument_ioFieldListAST, constinArgument_isAutonomous, inCompiler) ;
+  nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, GALGAS_bool (false), ioArgument_ioFieldListAST, constinArgument_isSingletonObject, inCompiler) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3410,36 +3410,36 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_private_5F_struct_5F_property_5F_
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_struct_5F_property_5F_declaration_i9_ (GALGAS_ast & ioArgument_ioAST,
                                                                                       const GALGAS_bool constinArgument_isPublic,
                                                                                       GALGAS_structurePropertyListAST & ioArgument_ioFieldListAST,
-                                                                                      const GALGAS_bool constinArgument_isAutonomous,
+                                                                                      const GALGAS_bool constinArgument_isSingletonObject,
                                                                                       C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_bool var_constant_3220 ;
+  GALGAS_bool var_constant_3266 ;
   switch (select_plm_5F_syntax_3 (inCompiler)) {
   case 1: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_var COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 85)) ;
-    var_constant_3220 = GALGAS_bool (false) ;
+    var_constant_3266 = GALGAS_bool (false) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_let COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 88)) ;
-    var_constant_3220 = GALGAS_bool (true) ;
+    var_constant_3266 = GALGAS_bool (true) ;
   } break ;
   default:
     break ;
   }
-  GALGAS_lstring var_fieldName_3347 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_fieldName_3393 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 91)) ;
   switch (select_plm_5F_syntax_4 (inCompiler)) {
   case 1: {
-    GALGAS_lstring var_typeName_3405 ;
-    nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_3405, inCompiler) ;
+    GALGAS_lstring var_typeName_3451 ;
+    nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_3451, inCompiler) ;
     switch (select_plm_5F_syntax_5 (inCompiler)) {
     case 1: {
-      ioArgument_ioFieldListAST.addAssign_operation (var_fieldName_3347, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 95)), var_constant_3220, constinArgument_isPublic, var_typeName_3405, GALGAS_structurePropertyInitOptionalExpressionAST::constructor_noExpression (SOURCE_FILE ("type-structure-declaration.galgas", 95)), constinArgument_isAutonomous  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 95)) ;
+      ioArgument_ioFieldListAST.addAssign_operation (var_fieldName_3393, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 95)), var_constant_3266, constinArgument_isPublic, var_typeName_3451, GALGAS_structurePropertyInitOptionalExpressionAST::constructor_noExpression (SOURCE_FILE ("type-structure-declaration.galgas", 95)), constinArgument_isSingletonObject  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 95)) ;
     } break ;
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 97)) ;
-      GALGAS_expressionAST var_initExpression_3588 ;
-      nt_expression_ (ioArgument_ioAST, var_initExpression_3588, inCompiler) ;
-      ioArgument_ioFieldListAST.addAssign_operation (var_fieldName_3347, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 101)), var_constant_3220, constinArgument_isPublic, var_typeName_3405, GALGAS_structurePropertyInitOptionalExpressionAST::constructor_expression (var_initExpression_3588  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 105)), constinArgument_isAutonomous  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 99)) ;
+      GALGAS_expressionAST var_initExpression_3639 ;
+      nt_expression_ (ioArgument_ioAST, var_initExpression_3639, inCompiler) ;
+      ioArgument_ioFieldListAST.addAssign_operation (var_fieldName_3393, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 101)), var_constant_3266, constinArgument_isPublic, var_typeName_3451, GALGAS_structurePropertyInitOptionalExpressionAST::constructor_expression (var_initExpression_3639  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 105)), constinArgument_isSingletonObject  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 99)) ;
     } break ;
     default:
       break ;
@@ -3447,9 +3447,9 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_struct_5F_property_5F_declaration
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 109)) ;
-    GALGAS_expressionAST var_initExpression_3863 ;
-    nt_expression_ (ioArgument_ioAST, var_initExpression_3863, inCompiler) ;
-    ioArgument_ioFieldListAST.addAssign_operation (var_fieldName_3347, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 113)), var_constant_3220, constinArgument_isPublic, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("type-structure-declaration.galgas", 116)), GALGAS_structurePropertyInitOptionalExpressionAST::constructor_expression (var_initExpression_3863  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 117)), constinArgument_isAutonomous  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 111)) ;
+    GALGAS_expressionAST var_initExpression_3919 ;
+    nt_expression_ (ioArgument_ioAST, var_initExpression_3919, inCompiler) ;
+    ioArgument_ioFieldListAST.addAssign_operation (var_fieldName_3393, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 113)), var_constant_3266, constinArgument_isPublic, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("type-structure-declaration.galgas", 116)), GALGAS_structurePropertyInitOptionalExpressionAST::constructor_expression (var_initExpression_3919  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 117)), constinArgument_isSingletonObject  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 111)) ;
   } break ;
   default:
     break ;
@@ -3499,53 +3499,53 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_struct_5F_property_5F_declaration
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_structure_5F_function_i10_ (GALGAS_ast & ioArgument_ioAST,
                                                                            GALGAS_functionDeclarationListAST & ioArgument_ioProcListAST,
                                                                            C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_bool var_public_4289 ;
+  GALGAS_bool var_public_4350 ;
   switch (select_plm_5F_syntax_6 (inCompiler)) {
   case 1: {
-    var_public_4289 = GALGAS_bool (false) ;
+    var_public_4350 = GALGAS_bool (false) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_public COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 129)) ;
-    var_public_4289 = GALGAS_bool (true) ;
+    var_public_4350 = GALGAS_bool (true) ;
   } break ;
   default:
     break ;
   }
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_func COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 132)) ;
-  GALGAS_lstring var_procName_4413 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_procName_4474 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 133)) ;
-  GALGAS_lstringlist var_attributeList_4444 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 134)) ;
+  GALGAS_lstringlist var_attributeList_4505 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 134)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_7 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_attribute_4504 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_attribute_4565 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 137)) ;
-      var_attributeList_4444.addAssign_operation (var_attribute_4504  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 138)) ;
+      var_attributeList_4505.addAssign_operation (var_attribute_4565  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 138)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  GALGAS_routineFormalArgumentListAST var_procFormalArgumentList_4616 ;
-  nt_procedure_5F_formal_5F_arguments_ (ioArgument_ioAST, var_procFormalArgumentList_4616, inCompiler) ;
-  GALGAS_lstring var_returnTypeName_4644 ;
+  GALGAS_routineFormalArgumentListAST var_procFormalArgumentList_4677 ;
+  nt_procedure_5F_formal_5F_arguments_ (ioArgument_ioAST, var_procFormalArgumentList_4677, inCompiler) ;
+  GALGAS_lstring var_returnTypeName_4705 ;
   switch (select_plm_5F_syntax_8 (inCompiler)) {
   case 1: {
-    var_returnTypeName_4644 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 143)) ;
+    var_returnTypeName_4705 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 143)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 145)) ;
-    nt_type_5F_definition_ (ioArgument_ioAST, var_returnTypeName_4644, inCompiler) ;
+    nt_type_5F_definition_ (ioArgument_ioAST, var_returnTypeName_4705, inCompiler) ;
   } break ;
   default:
     break ;
   }
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 148)) ;
-  GALGAS_instructionListAST var_instructionList_4821 ;
-  nt_instructionList_ (ioArgument_ioAST, var_instructionList_4821, inCompiler) ;
-  ioArgument_ioProcListAST.addAssign_operation (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("type-structure-declaration.galgas", 151)), var_public_4289, var_procName_4413, var_attributeList_4444, var_procFormalArgumentList_4616, var_returnTypeName_4644, var_instructionList_4821, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 158))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 150)) ;
+  GALGAS_instructionListAST var_instructionList_4882 ;
+  nt_instructionList_ (ioArgument_ioAST, var_instructionList_4882, inCompiler) ;
+  ioArgument_ioProcListAST.addAssign_operation (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("type-structure-declaration.galgas", 151)), var_public_4350, var_procName_4474, var_attributeList_4505, var_procFormalArgumentList_4677, var_returnTypeName_4705, var_instructionList_4882, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 158))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 150)) ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 159)) ;
 }
 
@@ -3596,16 +3596,16 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_structure_5F_function_i10_parse (
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i11_ (GALGAS_ast & ioArgument_ioAST,
                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_struct COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 165)) ;
-  GALGAS_lstring var_structureName_5213 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_structureName_5274 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 166)) ;
-  GALGAS_lstringlist var_attributeList_5244 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 167)) ;
+  GALGAS_lstringlist var_attributeList_5305 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 167)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_9 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_attribute_5304 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_attribute_5365 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 170)) ;
-      var_attributeList_5244.addAssign_operation (var_attribute_5304  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 171)) ;
+      var_attributeList_5305.addAssign_operation (var_attribute_5365  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 171)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -3613,16 +3613,16 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i11_ (GALGAS_ast & io
     }
   }
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 173)) ;
-  GALGAS_functionDeclarationListAST var_procedureDeclarationListAST_5415 = GALGAS_functionDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 174)) ;
-  GALGAS_structurePropertyListAST var_fieldList_5460 = GALGAS_structurePropertyListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 175)) ;
+  GALGAS_functionDeclarationListAST var_procedureDeclarationListAST_5476 = GALGAS_functionDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 174)) ;
+  GALGAS_structurePropertyListAST var_fieldList_5521 = GALGAS_structurePropertyListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 175)) ;
   bool repeatFlag_1 = true ;
   while (repeatFlag_1) {
     switch (select_plm_5F_syntax_10 (inCompiler)) {
     case 2: {
-      nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_fieldList_5460, GALGAS_bool (false), inCompiler) ;
+      nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_fieldList_5521, GALGAS_bool (false), inCompiler) ;
     } break ;
     case 3: {
-      nt_structure_5F_function_ (ioArgument_ioAST, var_procedureDeclarationListAST_5415, inCompiler) ;
+      nt_structure_5F_function_ (ioArgument_ioAST, var_procedureDeclarationListAST_5476, inCompiler) ;
     } break ;
     case 4: {
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3B_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 182)) ;
@@ -3633,7 +3633,7 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i11_ (GALGAS_ast & io
     }
   }
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 184)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_structureDeclarationAST::constructor_new (var_structureName_5213, var_attributeList_5244, GALGAS_bool (true), var_fieldList_5460, var_procedureDeclarationListAST_5415, GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 191)), GALGAS_guardDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 192)), GALGAS_bool (true)  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 185))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 185)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_structureDeclarationAST::constructor_new (var_structureName_5274, var_attributeList_5305, GALGAS_bool (true), var_fieldList_5521, var_procedureDeclarationListAST_5476, GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 191)), GALGAS_guardDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 192)), GALGAS_bool (true)  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 185))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 185)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3690,7 +3690,7 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i12_ (GALGAS_ast & io
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_11 (inCompiler)) {
     case 2: {
-      nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_fieldList_1365, GALGAS_bool (true), inCompiler) ;
+      nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_fieldList_1365, GALGAS_bool (false), inCompiler) ;
     } break ;
     case 3: {
       nt_function_ (ioArgument_ioAST, var_procedureDeclarationListAST_1320, inCompiler) ;
@@ -11315,7 +11315,7 @@ class cCollectionElement_structurePropertyListAST : public cCollectionElement {
                                                         const GALGAS_bool & in_mIsPublic,
                                                         const GALGAS_lstring & in_mPropertyTypeName,
                                                         const GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation,
-                                                        const GALGAS_bool & in_mIsAutonomous
+                                                        const GALGAS_bool & in_mIsSingletonObject
                                                         COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -11339,10 +11339,10 @@ cCollectionElement_structurePropertyListAST::cCollectionElement_structurePropert
                                                                                           const GALGAS_bool & in_mIsPublic,
                                                                                           const GALGAS_lstring & in_mPropertyTypeName,
                                                                                           const GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation,
-                                                                                          const GALGAS_bool & in_mIsAutonomous
+                                                                                          const GALGAS_bool & in_mIsSingletonObject
                                                                                           COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mPropertyName, in_mPropertyAttributeList, in_mIsConstant, in_mIsPublic, in_mPropertyTypeName, in_mInitialisation, in_mIsAutonomous) {
+mObject (in_mPropertyName, in_mPropertyAttributeList, in_mIsConstant, in_mIsPublic, in_mPropertyTypeName, in_mInitialisation, in_mIsSingletonObject) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11355,7 +11355,7 @@ bool cCollectionElement_structurePropertyListAST::isValid (void) const {
 
 cCollectionElement * cCollectionElement_structurePropertyListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_structurePropertyListAST (mObject.mProperty_mPropertyName, mObject.mProperty_mPropertyAttributeList, mObject.mProperty_mIsConstant, mObject.mProperty_mIsPublic, mObject.mProperty_mPropertyTypeName, mObject.mProperty_mInitialisation, mObject.mProperty_mIsAutonomous COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_structurePropertyListAST (mObject.mProperty_mPropertyName, mObject.mProperty_mPropertyAttributeList, mObject.mProperty_mIsConstant, mObject.mProperty_mIsPublic, mObject.mProperty_mPropertyTypeName, mObject.mProperty_mInitialisation, mObject.mProperty_mIsSingletonObject COMMA_HERE)) ;
   return result ;
 }
 
@@ -11388,8 +11388,8 @@ void cCollectionElement_structurePropertyListAST::description (C_String & ioStri
   mObject.mProperty_mInitialisation.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mIsAutonomous" ":" ;
-  mObject.mProperty_mIsAutonomous.description (ioString, inIndentation) ;
+  ioString << "mIsSingletonObject" ":" ;
+  mObject.mProperty_mIsSingletonObject.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11447,7 +11447,7 @@ void GALGAS_structurePropertyListAST::makeAttributesFromObjects (capCollectionEl
                                                                  const GALGAS_bool & in_mIsPublic,
                                                                  const GALGAS_lstring & in_mPropertyTypeName,
                                                                  const GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation,
-                                                                 const GALGAS_bool & in_mIsAutonomous
+                                                                 const GALGAS_bool & in_mIsSingletonObject
                                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement_structurePropertyListAST * p = NULL ;
   macroMyNew (p, cCollectionElement_structurePropertyListAST (in_mPropertyName,
@@ -11456,7 +11456,7 @@ void GALGAS_structurePropertyListAST::makeAttributesFromObjects (capCollectionEl
                                                               in_mIsPublic,
                                                               in_mPropertyTypeName,
                                                               in_mInitialisation,
-                                                              in_mIsAutonomous COMMA_THERE)) ;
+                                                              in_mIsSingletonObject COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
@@ -11535,7 +11535,7 @@ void GALGAS_structurePropertyListAST::setter_removeAtIndex (GALGAS_lstring & out
       outOperand3 = p->mObject.mProperty_mIsPublic ;
       outOperand4 = p->mObject.mProperty_mPropertyTypeName ;
       outOperand5 = p->mObject.mProperty_mInitialisation ;
-      outOperand6 = p->mObject.mProperty_mIsAutonomous ;
+      outOperand6 = p->mObject.mProperty_mIsSingletonObject ;
     }
   }
 }
@@ -11570,7 +11570,7 @@ void GALGAS_structurePropertyListAST::setter_popFirst (GALGAS_lstring & outOpera
     outOperand3 = p->mObject.mProperty_mIsPublic ;
     outOperand4 = p->mObject.mProperty_mPropertyTypeName ;
     outOperand5 = p->mObject.mProperty_mInitialisation ;
-    outOperand6 = p->mObject.mProperty_mIsAutonomous ;
+    outOperand6 = p->mObject.mProperty_mIsSingletonObject ;
   }
 }
 
@@ -11604,7 +11604,7 @@ void GALGAS_structurePropertyListAST::setter_popLast (GALGAS_lstring & outOperan
     outOperand3 = p->mObject.mProperty_mIsPublic ;
     outOperand4 = p->mObject.mProperty_mPropertyTypeName ;
     outOperand5 = p->mObject.mProperty_mInitialisation ;
-    outOperand6 = p->mObject.mProperty_mIsAutonomous ;
+    outOperand6 = p->mObject.mProperty_mIsSingletonObject ;
   }
 }
 
@@ -11638,7 +11638,7 @@ void GALGAS_structurePropertyListAST::method_first (GALGAS_lstring & outOperand0
     outOperand3 = p->mObject.mProperty_mIsPublic ;
     outOperand4 = p->mObject.mProperty_mPropertyTypeName ;
     outOperand5 = p->mObject.mProperty_mInitialisation ;
-    outOperand6 = p->mObject.mProperty_mIsAutonomous ;
+    outOperand6 = p->mObject.mProperty_mIsSingletonObject ;
   }
 }
 
@@ -11672,7 +11672,7 @@ void GALGAS_structurePropertyListAST::method_last (GALGAS_lstring & outOperand0,
     outOperand3 = p->mObject.mProperty_mIsPublic ;
     outOperand4 = p->mObject.mProperty_mPropertyTypeName ;
     outOperand5 = p->mObject.mProperty_mInitialisation ;
-    outOperand6 = p->mObject.mProperty_mIsAutonomous ;
+    outOperand6 = p->mObject.mProperty_mIsSingletonObject ;
   }
 }
 
@@ -11819,15 +11819,15 @@ GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyListAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_structurePropertyListAST::getter_mIsAutonomousAtIndex (const GALGAS_uint & inIndex,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_structurePropertyListAST::getter_mIsSingletonObjectAtIndex (const GALGAS_uint & inIndex,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_bool result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
-    result = p->mObject.mProperty_mIsAutonomous ;
+    result = p->mObject.mProperty_mIsSingletonObject ;
   }
   return result ;
 }
@@ -11901,10 +11901,10 @@ GALGAS_structurePropertyInitOptionalExpressionAST cEnumerator_structurePropertyL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cEnumerator_structurePropertyListAST::current_mIsAutonomous (LOCATION_ARGS) const {
+GALGAS_bool cEnumerator_structurePropertyListAST::current_mIsSingletonObject (LOCATION_ARGS) const {
   const cCollectionElement_structurePropertyListAST * p = (const cCollectionElement_structurePropertyListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
-  return p->mObject.mProperty_mIsAutonomous ;
+  return p->mObject.mProperty_mIsSingletonObject ;
 }
 
 

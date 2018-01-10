@@ -36,7 +36,7 @@ list @structurePropertyListAST {
   @bool mIsPublic
   @lstring mPropertyTypeName
   @structurePropertyInitOptionalExpressionAST mInitialisation
-  @bool mIsAutonomous # true, this property is an automomous variable (reserved to driver)
+  @bool mIsSingletonObject # true, this property is an automomous variable (reserved to driver)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -50,7 +50,7 @@ syntax extension plm_syntax {
   rule <private_or_public_struct_property_declaration>
     ?!@ast ioAST
     ?!@structurePropertyListAST ioFieldListAST
-    ?let @bool isAutonomous
+    ?singletonObject:let @bool isSingletonObject
   {
     @bool public
     select
@@ -59,7 +59,7 @@ syntax extension plm_syntax {
       $public$
       public = true
     end
-    <struct_property_declaration> !?ioAST !public !?ioFieldListAST !isAutonomous
+    <struct_property_declaration> !?ioAST !public !?ioFieldListAST !isSingletonObject
   }
   
   #·····················································································································
@@ -67,9 +67,9 @@ syntax extension plm_syntax {
   rule <private_struct_property_declaration>
     ?!@ast ioAST
     ?!@structurePropertyListAST ioFieldListAST
-    ?let @bool isAutonomous
+    ?let @bool isSingletonObject
   {
-    <struct_property_declaration> !?ioAST !false !?ioFieldListAST !isAutonomous
+    <struct_property_declaration> !?ioAST !false !?ioFieldListAST !isSingletonObject
   }
 
   #·····················································································································
@@ -78,7 +78,7 @@ syntax extension plm_syntax {
     ?!@ast ioAST
     ?let @bool isPublic
     ?!@structurePropertyListAST ioFieldListAST
-    ?let @bool isAutonomous
+    ?let @bool isSingletonObject
 {
     @bool constant
     select
@@ -92,7 +92,7 @@ syntax extension plm_syntax {
     select
       <type_definition> !?ioAST  ?let typeName
       select
-        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.noExpression !isAutonomous
+        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.noExpression !isSingletonObject
       or
         $=$
         <expression> !?ioAST ?let initExpression
@@ -103,7 +103,7 @@ syntax extension plm_syntax {
           !isPublic
           !typeName 
           !.expression{!initExpression:initExpression}
-          !isAutonomous
+          !isSingletonObject
       end
     or
       $=$
@@ -115,7 +115,7 @@ syntax extension plm_syntax {
         !isPublic
         !["" nowhere]
         !.expression{!initExpression:initExpression}
-        !isAutonomous
+        !isSingletonObject
     end
   }
 
@@ -175,7 +175,7 @@ syntax extension plm_syntax {
     @structurePropertyListAST fieldList = {}
     repeat
     while
-      <private_or_public_struct_property_declaration> !?ioAST !?fieldList !false
+      <private_or_public_struct_property_declaration> !?ioAST !?fieldList !singletonObject:false
     while
       <structure_function> !?ioAST !?procedureDeclarationListAST
     while
@@ -530,7 +530,7 @@ method @structurePropertyListAST-element enterPropertyInContext
         !mIsPublic
         !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
       ]
-    elsif mIsAutonomous then
+    elsif mIsSingletonObject then
       var alignment = [actualPropertyType defaultAlignment]
       if alignmentDefined then
         if [explicitAlignment.bigint uint] < alignment then
@@ -545,7 +545,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       [!?ioPropertyMap insertKey
         !mPropertyName
         !mIsPublic
-        !.autonomous {!object:object !errorLocation:mPropertyName}
+        !.singleton {!object:object !errorLocation:mPropertyName}
       ]
       ioGlobalVariableIRList += !llvmName ![expressionIR withType !actualPropertyType] !alignment
     else

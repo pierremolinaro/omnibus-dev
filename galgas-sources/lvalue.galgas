@@ -353,7 +353,7 @@ private proc analyzeVariableInLValue
         switch propertyAccess
         case nonVirtualMethod (*) :
            error propertyName : "a method cannot be written" : currentType, currentLLVMName
-        case autonomous  (@objectIR object *) :
+        case singleton  (@objectIR object *) :
           currentType = [object type]
           currentLLVMName = [object llvmName]
         case constantProperty (*) :
@@ -443,7 +443,7 @@ private proc analyzeSelfAssignmentTarget
            error propertyName : "a method cannot be written" : currentType, currentLLVMName
         case constantProperty (*) :
           error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
-        case autonomous  (@objectIR object *) :
+        case singleton  (@objectIR object *) :
           currentType = [object type]
           currentLLVMName = [object llvmName]
         case indexed (@PLMType propertyType @uint index) :

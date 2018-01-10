@@ -10322,9 +10322,9 @@ typeComparisonResult cEnumAssociatedValues_propertyAccessKind_indexed::compare (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_propertyAccessKind_autonomous::cEnumAssociatedValues_propertyAccessKind_autonomous (const GALGAS_objectIR & inAssociatedValue0,
-                                                                                                          const GALGAS_location & inAssociatedValue1
-                                                                                                          COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_propertyAccessKind_singleton::cEnumAssociatedValues_propertyAccessKind_singleton (const GALGAS_objectIR & inAssociatedValue0,
+                                                                                                        const GALGAS_location & inAssociatedValue1
+                                                                                                        COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
@@ -10332,8 +10332,8 @@ mAssociatedValue1 (inAssociatedValue1) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_propertyAccessKind_autonomous::description (C_String & ioString,
-                                                                       const int32_t inIndentation) const {
+void cEnumAssociatedValues_propertyAccessKind_singleton::description (C_String & ioString,
+                                                                      const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
@@ -10342,8 +10342,8 @@ void cEnumAssociatedValues_propertyAccessKind_autonomous::description (C_String 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_propertyAccessKind_autonomous::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_propertyAccessKind_autonomous * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_autonomous *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_propertyAccessKind_singleton::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyAccessKind_singleton * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_singleton *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -10424,14 +10424,14 @@ GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_indexed (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_autonomous (const GALGAS_objectIR & inAssociatedValue0,
-                                                                             const GALGAS_location & inAssociatedValue1
-                                                                             COMMA_LOCATION_ARGS) {
+GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_singleton (const GALGAS_objectIR & inAssociatedValue0,
+                                                                            const GALGAS_location & inAssociatedValue1
+                                                                            COMMA_LOCATION_ARGS) {
   GALGAS_propertyAccessKind result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_autonomous ;
+    result.mEnum = kEnum_singleton ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_autonomous (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_singleton (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -10490,18 +10490,18 @@ void GALGAS_propertyAccessKind::method_indexed (GALGAS_PLMType & outAssociatedVa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessKind::method_autonomous (GALGAS_objectIR & outAssociatedValue0,
-                                                   GALGAS_location & outAssociatedValue1,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_autonomous) {
+void GALGAS_propertyAccessKind::method_singleton (GALGAS_objectIR & outAssociatedValue0,
+                                                  GALGAS_location & outAssociatedValue1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_singleton) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     C_String s ;
-    s << "method @propertyAccessKind autonomous invoked with an invalid enum value" ;
+    s << "method @propertyAccessKind singleton invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_propertyAccessKind_autonomous * ptr = (const cEnumAssociatedValues_propertyAccessKind_autonomous *) unsafePointer () ;
+    const cEnumAssociatedValues_propertyAccessKind_singleton * ptr = (const cEnumAssociatedValues_propertyAccessKind_singleton *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
@@ -10529,7 +10529,7 @@ static const char * gEnumNameArrayFor_propertyAccessKind [5] = {
   "(not built)",
   "constantProperty",
   "indexed",
-  "autonomous",
+  "singleton",
   "nonVirtualMethod"
 } ;
 
@@ -10547,8 +10547,8 @@ GALGAS_bool GALGAS_propertyAccessKind::getter_isIndexed (UNUSED_LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_propertyAccessKind::getter_isAutonomous (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_autonomous == mEnum) ;
+GALGAS_bool GALGAS_propertyAccessKind::getter_isSingleton (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_singleton == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10640,13 +10640,13 @@ void extensionSetter_addFunctionWithoutArgument (GALGAS_propertyMap & ioObject,
                                                  const GALGAS_bool constinArgument_inCanMutateProperties,
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineDescriptor var_descriptor_1438 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 35))  COMMA_SOURCE_FILE ("property-map.galgas", 35)), GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 36)), constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 31)) ;
+  GALGAS_routineDescriptor var_descriptor_1437 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 35))  COMMA_SOURCE_FILE ("property-map.galgas", 35)), GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 36)), constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 31)) ;
   {
-  ioObject.setter_insertKey (constinArgument_inMethodName.add_operation (GALGAS_string ("()"), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 43)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 43)), GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_1438  COMMA_SOURCE_FILE ("property-map.galgas", 45)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 42)) ;
+  ioObject.setter_insertKey (constinArgument_inMethodName.add_operation (GALGAS_string ("()"), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 43)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 43)), GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_1437  COMMA_SOURCE_FILE ("property-map.galgas", 45)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 42)) ;
   }
-  GALGAS_lstring var_routineNameForInvocationGraph_2044 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 49)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 49)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 50)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 51)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 48)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph_2043 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 49)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 49)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 50)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 51)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 48)) ;
   {
-  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_2044, var_routineNameForInvocationGraph_2044, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 53)) ;
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_2043, var_routineNameForInvocationGraph_2043, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 53)) ;
   }
 }
 
@@ -10672,19 +10672,19 @@ void extensionSetter_addFunctionWithInputArgument (GALGAS_propertyMap & ioObject
                                                    COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_routineFormalArgumentListAST temp_0 = GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 77)) ;
   temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 74)), constinArgument_inInputSelector.getter_nowhere (SOURCE_FILE ("property-map.galgas", 75)), constinArgument_inInputArgumentTypeProxy.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 76)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 76)), constinArgument_inInputArgumentName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 77))  COMMA_SOURCE_FILE ("property-map.galgas", 77)) ;
-  GALGAS_routineFormalArgumentListAST var_argumentList_3002 = temp_0 ;
-  GALGAS_routineTypedSignature var_signature_3234 ;
+  GALGAS_routineFormalArgumentListAST var_argumentList_3001 = temp_0 ;
+  GALGAS_routineTypedSignature var_signature_3233 ;
   {
-  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_3002, var_signature_3234, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 79)) ;
+  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_3001, var_signature_3233, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 79)) ;
   }
-  GALGAS_routineDescriptor var_descriptor_3271 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 84))  COMMA_SOURCE_FILE ("property-map.galgas", 84)), var_signature_3234, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 80)) ;
-  GALGAS_lstring var_methodMangledName_3637 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, GALGAS_location::constructor_nowhere (SOURCE_FILE ("property-map.galgas", 93))  COMMA_SOURCE_FILE ("property-map.galgas", 93)), var_argumentList_3002, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 91)) ;
+  GALGAS_routineDescriptor var_descriptor_3270 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 84))  COMMA_SOURCE_FILE ("property-map.galgas", 84)), var_signature_3233, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 80)) ;
+  GALGAS_lstring var_methodMangledName_3636 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, GALGAS_location::constructor_nowhere (SOURCE_FILE ("property-map.galgas", 93))  COMMA_SOURCE_FILE ("property-map.galgas", 93)), var_argumentList_3001, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 91)) ;
   {
-  ioObject.setter_insertKey (var_methodMangledName_3637, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_3271  COMMA_SOURCE_FILE ("property-map.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 96)) ;
+  ioObject.setter_insertKey (var_methodMangledName_3636, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_3270  COMMA_SOURCE_FILE ("property-map.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 96)) ;
   }
-  GALGAS_lstring var_routineNameForInvocationGraph_3900 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 103)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 103)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 104)), var_argumentList_3002, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 102)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph_3899 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 103)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 103)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 104)), var_argumentList_3001, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 102)) ;
   {
-  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_3900, var_routineNameForInvocationGraph_3900, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 107)) ;
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_3899, var_routineNameForInvocationGraph_3899, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 107)) ;
   }
 }
 
@@ -10714,19 +10714,19 @@ void extensionSetter_addFunctionWithTwoInputArguments (GALGAS_propertyMap & ioOb
   GALGAS_routineFormalArgumentListAST temp_0 = GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 136)) ;
   temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 128)), constinArgument_inInputSelector_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 129)), constinArgument_inInputArgumentTypeProxy_31_.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 130)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 130)), constinArgument_inInputArgumentName_31_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 131))  COMMA_SOURCE_FILE ("property-map.galgas", 131)) ;
   temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 133)), constinArgument_inInputSelector_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 134)), constinArgument_inInputArgumentTypeProxy_32_.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 135)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 135)), constinArgument_inInputArgumentName_32_.getter_nowhere (SOURCE_FILE ("property-map.galgas", 136))  COMMA_SOURCE_FILE ("property-map.galgas", 136)) ;
-  GALGAS_routineFormalArgumentListAST var_argumentList_5057 = temp_0 ;
-  GALGAS_routineTypedSignature var_signature_5423 ;
+  GALGAS_routineFormalArgumentListAST var_argumentList_5056 = temp_0 ;
+  GALGAS_routineTypedSignature var_signature_5422 ;
   {
-  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_5057, var_signature_5423, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 138)) ;
+  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_5056, var_signature_5422, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 138)) ;
   }
-  GALGAS_routineDescriptor var_descriptor_5460 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 143))  COMMA_SOURCE_FILE ("property-map.galgas", 143)), var_signature_5423, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 139)) ;
-  GALGAS_lstring var_methodMangledName_5826 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, GALGAS_location::constructor_nowhere (SOURCE_FILE ("property-map.galgas", 152))  COMMA_SOURCE_FILE ("property-map.galgas", 152)), var_argumentList_5057, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 150)) ;
+  GALGAS_routineDescriptor var_descriptor_5459 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 143))  COMMA_SOURCE_FILE ("property-map.galgas", 143)), var_signature_5422, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 139)) ;
+  GALGAS_lstring var_methodMangledName_5825 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, GALGAS_location::constructor_nowhere (SOURCE_FILE ("property-map.galgas", 152))  COMMA_SOURCE_FILE ("property-map.galgas", 152)), var_argumentList_5056, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 150)) ;
   {
-  ioObject.setter_insertKey (var_methodMangledName_5826, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_5460  COMMA_SOURCE_FILE ("property-map.galgas", 158)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 155)) ;
+  ioObject.setter_insertKey (var_methodMangledName_5825, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_5459  COMMA_SOURCE_FILE ("property-map.galgas", 158)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 155)) ;
   }
-  GALGAS_lstring var_routineNameForInvocationGraph_6089 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 162)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 162)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 163)), var_argumentList_5057, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 161)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph_6088 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 162)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 162)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 163)), var_argumentList_5056, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 161)) ;
   {
-  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_6089, var_routineNameForInvocationGraph_6089, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 166)) ;
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_6088, var_routineNameForInvocationGraph_6088, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 166)) ;
   }
 }
 
