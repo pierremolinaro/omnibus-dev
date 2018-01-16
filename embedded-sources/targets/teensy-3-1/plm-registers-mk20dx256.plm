@@ -94,14 +94,48 @@ let SIM_CLKDIV2_USBFRAC  $uint32 =  0x01
 registers SIM {
   SOPT1    0x40047000 $uint32 // System Options registers 1
   SOPT1CFG 0x40047004 $uint32 // SOPT1 Configuration Register
-  SOPT2    0x40048004 $uint32 // System Options registers 2
+
+//--- System Options registers 2
+   SOPT2 0x4004_8004 $uint32 {
+    13,
+    USBSRC, // 0=USB_CLKIN, 1=FFL/PLL
+    1,
+    PLLFLLSEL, // 0=FLL, 1=PLL
+    3,
+    TRACECLKSEL, // 0=MCGOUTCLK, 1=CPU
+    PTD7PAD,
+    3,
+    CLKOUTSEL:3, // Selects the clock to output on the CLKOUT pin.
+    RTCCLKOUTSEL, // RTC clock out select
+    4
+  }
+
   SOPT4   0x4004800C $uint32 // System Options registers 4
   SOPT5   0x40048010 $uint32 // System Options registers 5
   SOPT7   0x40048018 $uint32 // System Options registers 7
   SDID @ro 0x40048024 $uint32 // System Device Identification Register
   SCGC2  0x4004802C $uint32 // System Clock Gating Control registers 2
   SCGC3  0x40048030 $uint32 // System Clock Gating Control registers 3
-  SCGC4 0x40048034 $uint32 // System Clock Gating Control registers 4
+
+//--- System Clock Gating Control registers 4
+  SCGC4 0x4004_8034 $uint32 {
+    11,
+    VREF,
+    CMP,
+    USBOTG,
+    5,
+    UART2,
+    UART1,
+    UART0,
+    2,
+    I2C1,
+    I2C0,
+    3,
+    CMT,
+    EWM,
+    1
+  }
+
   SCGC5 0x40048038 $uint32 // System Clock Gating Control registers 5
   SCGC6 0x4004803C $uint32 // System Clock Gating Control registers 6
   SCGC7 0x40048040 $uint32 // System Clock Gating Control registers 7
@@ -114,7 +148,12 @@ registers SIM {
     16
   }
   
-  CLKDIV2 0x40048048 $uint32 // System Clock Divider registers 2
+//--- System Clock Divider registers 2
+   CLKDIV2 0x4004_8048 $uint32 {
+    28,
+    USBDIV:3,
+    USBFRAC
+  }
 
   FCFG1 @ro 0x4004804C $uint32 // Flash Configuration registers 1
   FCFG2 @ro 0x40048050 $uint32 // Flash Configuration registers 2
@@ -988,570 +1027,101 @@ registers RTC {
   RAR 0x4003D804 $uint32 // RTC Read Access Register
 }
 
-//// Chapter 40: Universal Serial Bus OTG Controller (USBOTG)
-//registers USB0_PERID  *(const    $uint8_t  *)0x40072000 // Peripheral ID register
-//registers USB0_IDCOMP  *(const    $uint8_t  *)0x40072004 // Peripheral ID Complement register
-//registers USB0_REV  *(const    $uint8_t  *)0x40072008 // Peripheral Revision register
-//registers USB0_ADDINFO  *(volatile $uint8_t  *)0x4007200C // Peripheral Additional Info register
-//registers USB0_OTGIST *(volatile $uint8_t  *)0x40072010 // OTG Interrupt Status register
-//registers USB_OTGISTAT_IDCHG  ($uint8_t)0x80   //
-//registers USB_OTGISTAT_ONEMSEC  ($uint8_t)0x40   //
-//registers USB_OTGISTAT_LINE_STATE_CHG ($uint8_t)0x20   //
-//registers USB_OTGISTAT_SESSVLDCHG  ($uint8_t)0x08   //
-//registers USB_OTGISTAT_B_SESS_CHG  ($uint8_t)0x04   //
-//registers USB_OTGISTAT_AVBUSCHG  ($uint8_t)0x01   //
-//registers USB0_OTGICR  *(volatile $uint8_t  *)0x40072014 // OTG Interrupt Control Register
-//registers USB_OTGICR_IDEN   ($uint8_t)0x80   // 
-//registers USB_OTGICR_ONEMSECEN  ($uint8_t)0x40   // 
-//registers USB_OTGICR_LINESTATEEN  ($uint8_t)0x20   // 
-//registers USB_OTGICR_SESSVLDEN  ($uint8_t)0x08   // 
-//registers USB_OTGICR_BSESSEN  ($uint8_t)0x04   // 
-//registers USB_OTGICR_AVBUSEN  ($uint8_t)0x01   // 
-//registers USB0_OTGST *(volatile $uint8_t  *)0x40072018 // OTG Status register
-//registers USB_OTGSTAT_ID   ($uint8_t)0x80   // 
-//registers USB_OTGSTAT_ONEMSECEN  ($uint8_t)0x40   // 
-//registers USB_OTGSTAT_LINESTATESTABLE ($uint8_t)0x20   // 
-//registers USB_OTGSTAT_SESS_VLD  ($uint8_t)0x08   // 
-//registers USB_OTGSTAT_BSESSEND  ($uint8_t)0x04   // 
-//registers USB_OTGSTAT_AVBUSVLD  ($uint8_t)0x01   // 
-//registers USB0_OTGCTL  *(volatile $uint8_t  *)0x4007201C // OTG Control Register
-//registers USB_OTGCTL_DPHIGH  ($uint8_t)0x80   // 
-//registers USB_OTGCTL_DPLOW  ($uint8_t)0x20   // 
-//registers USB_OTGCTL_DMLOW  ($uint8_t)0x10   // 
-//registers USB_OTGCTL_OTGEN  ($uint8_t)0x04   // 
-//registers USB0_IST *(volatile $uint8_t  *)0x40072080 // Interrupt Status Register
-//registers USB_ISTAT_STALL   ($uint8_t)0x80   // 
-//registers USB_ISTAT_ATTACH  ($uint8_t)0x40   // 
-//registers USB_ISTAT_RESUME  ($uint8_t)0x20   // 
-//registers USB_ISTAT_SLEEP   ($uint8_t)0x10   // 
-//registers USB_ISTAT_TOKDNE  ($uint8_t)0x08   // 
-//registers USB_ISTAT_SOFTOK  ($uint8_t)0x04   // 
-//registers USB_ISTAT_ERROR   ($uint8_t)0x02   // 
-//registers USB_ISTAT_USBRST  ($uint8_t)0x01   // 
-//registers USB0_INTEN  *(volatile $uint8_t  *)0x40072084 // Interrupt Enable Register
-//registers USB_INTEN_STALLEN  ($uint8_t)0x80   // 
-//registers USB_INTEN_ATTACHEN  ($uint8_t)0x40   // 
-//registers USB_INTEN_RESUMEEN  ($uint8_t)0x20   // 
-//registers USB_INTEN_SLEEPEN  ($uint8_t)0x10   // 
-//registers USB_INTEN_TOKDNEEN  ($uint8_t)0x08   // 
-//registers USB_INTEN_SOFTOKEN  ($uint8_t)0x04   // 
-//registers USB_INTEN_ERROREN  ($uint8_t)0x02   // 
-//registers USB_INTEN_USBRSTEN  ($uint8_t)0x01   // 
-//registers USB0_ERRST *(volatile $uint8_t  *)0x40072088 // Error Interrupt Status Register
-//registers USB_ERRSTAT_BTSERR  ($uint8_t)0x80   // 
-//registers USB_ERRSTAT_DMAERR  ($uint8_t)0x20   // 
-//registers USB_ERRSTAT_BTOERR  ($uint8_t)0x10   // 
-//registers USB_ERRSTAT_DFN8  ($uint8_t)0x08   // 
-//registers USB_ERRSTAT_CRC16  ($uint8_t)0x04   // 
-//registers USB_ERRSTAT_CRC5EOF  ($uint8_t)0x02   // 
-//registers USB_ERRSTAT_PIDERR  ($uint8_t)0x01   // 
-//registers USB0_ERREN  *(volatile $uint8_t  *)0x4007208C // Error Interrupt Enable Register
-//registers USB_ERREN_BTSERREN  ($uint8_t)0x80   // 
-//registers USB_ERREN_DMAERREN  ($uint8_t)0x20   // 
-//registers USB_ERREN_BTOERREN  ($uint8_t)0x10   // 
-//registers USB_ERREN_DFN8EN  ($uint8_t)0x08   // 
-//registers USB_ERREN_CRC16EN  ($uint8_t)0x04   // 
-//registers USB_ERREN_CRC5EOFEN  ($uint8_t)0x02   // 
-//registers USB_ERREN_PIDERREN  ($uint8_t)0x01   // 
-//registers USB0_ST *(volatile $uint8_t  *)0x40072090 // Status Register
-//registers USB_STAT_TX   ($uint8_t)0x08   // 
-//registers USB_STAT_ODD   ($uint8_t)0x04   // 
-//registers USB_STAT_ENDP(n)  ($uint8_t)((n) >> 4)  // 
-//registers USB0_CTL  *(volatile $uint8_t  *)0x40072094 // Control Register
-//registers USB_CTL_JSTATE   ($uint8_t)0x80   // 
-//registers USB_CTL_SE0   ($uint8_t)0x40   // 
-//registers USB_CTL_TXSUSPENDTOKENBUSY ($uint8_t)0x20   // 
-//registers USB_CTL_RESET   ($uint8_t)0x10   // 
-//registers USB_CTL_HOSTMODEEN  ($uint8_t)0x08   // 
-//registers USB_CTL_RESUME   ($uint8_t)0x04   // 
-//registers USB_CTL_ODDRST   ($uint8_t)0x02   // 
-//registers USB_CTL_USBENSOFEN  ($uint8_t)0x01   // 
-//registers USB0_ADDR  *(volatile $uint8_t  *)0x40072098 // Address Register
-//registers USB0_BDTPAGE1  *(volatile $uint8_t  *)0x4007209C // BDT Page registers 1
-//registers USB0_FRMNUML  *(volatile $uint8_t  *)0x400720A0 // Frame Number registers Low
-//registers USB0_FRMNUMH  *(volatile $uint8_t  *)0x400720A4 // Frame Number registers High
-//registers USB0_TOKEN  *(volatile $uint8_t  *)0x400720A8 // Token Register
-//registers USB0_SOFTHLD  *(volatile $uint8_t  *)0x400720AC // SOF Threshold Register
-//registers USB0_BDTPAGE2  *(volatile $uint8_t  *)0x400720B0 // BDT Page registers 2
-//registers USB0_BDTPAGE3  *(volatile $uint8_t  *)0x400720B4 // BDT Page registers 3
-//registers USB0_ENDPT0  *(volatile $uint8_t  *)0x400720C0 // Endpoint Control Register
-//registers USB_ENDPT_HOSTWOHUB  ($uint8_t)0x80   // host only, enable low speed
-//registers USB_ENDPT_RETRYDIS  ($uint8_t)0x40   // host only, set to disable NAK retry
-//registers USB_ENDPT_EPCTLDIS  ($uint8_t)0x10   // 0=control, 1=bulk, interrupt, isync
-//registers USB_ENDPT_EPRXEN  ($uint8_t)0x08   // enables the endpoint for RX transfers.
-//registers USB_ENDPT_EPTXEN  ($uint8_t)0x04   // enables the endpoint for TX transfers.
-//registers USB_ENDPT_EPSTALL  ($uint8_t)0x02   // set to stall endpoint
-//registers USB_ENDPT_EPHSHK  ($uint8_t)0x01   // enable handshaking during a transaction, generally set unless Isochronous
-//registers USB0_ENDPT1  *(volatile $uint8_t  *)0x400720C4 // Endpoint Control Register
-//registers USB0_ENDPT2  *(volatile $uint8_t  *)0x400720C8 // Endpoint Control Register
-//registers USB0_ENDPT3  *(volatile $uint8_t  *)0x400720CC // Endpoint Control Register
-//registers USB0_ENDPT4  *(volatile $uint8_t  *)0x400720D0 // Endpoint Control Register
-//registers USB0_ENDPT5  *(volatile $uint8_t  *)0x400720D4 // Endpoint Control Register
-//registers USB0_ENDPT6  *(volatile $uint8_t  *)0x400720D8 // Endpoint Control Register
-//registers USB0_ENDPT7  *(volatile $uint8_t  *)0x400720DC // Endpoint Control Register
-//registers USB0_ENDPT8  *(volatile $uint8_t  *)0x400720E0 // Endpoint Control Register
-//registers USB0_ENDPT9  *(volatile $uint8_t  *)0x400720E4 // Endpoint Control Register
-//registers USB0_ENDPT10  *(volatile $uint8_t  *)0x400720E8 // Endpoint Control Register
-//registers USB0_ENDPT11  *(volatile $uint8_t  *)0x400720EC // Endpoint Control Register
-//registers USB0_ENDPT12  *(volatile $uint8_t  *)0x400720F0 // Endpoint Control Register
-//registers USB0_ENDPT13  *(volatile $uint8_t  *)0x400720F4 // Endpoint Control Register
-//registers USB0_ENDPT14  *(volatile $uint8_t  *)0x400720F8 // Endpoint Control Register
-//registers USB0_ENDPT15  *(volatile $uint8_t  *)0x400720FC // Endpoint Control Register
-//registers USB0_USBCTRL  *(volatile $uint8_t  *)0x40072100 // USB Control Register
-//registers USB_USBCTRL_SUSP  ($uint8_t)0x80   // Places the USB transceiver into the suspend state.
-//registers USB_USBCTRL_PDE   ($uint8_t)0x40   // Enables the weak pulldowns on the USB transceiver.
-//registers USB0_OBSERVE  *(volatile $uint8_t  *)0x40072104 // USB OTG Observe Register
-//registers USB_OBSERVE_DPPU  ($uint8_t)0x80   // 
-//registers USB_OBSERVE_DPPD  ($uint8_t)0x40   // 
-//registers USB_OBSERVE_DMPD  ($uint8_t)0x10   // 
-//registers USB0_CONTROL  *(volatile $uint8_t  *)0x40072108 // USB OTG Control Register
-//registers USB_CONTROL_DPPULLUPNONOTG ($uint8_t)0x10   //  Provides control of the DP PULLUP in the USB OTG module, if USB is configured in non-OTG device mode.
-//registers USB0_USBTRC0  *(volatile $uint8_t  *)0x4007210C // USB Transceiver Control registers 0
-//registers USB_USBTRC_USBRESET  ($uint8_t)0x80   //
-//registers USB_USBTRC_USBRESMEN  ($uint8_t)0x20   //
-//registers USB_USBTRC_SYNC_DET  ($uint8_t)0x02   //
-//registers USB_USBTRC_USB_RESUME_INT ($uint8_t)0x01   //
-//registers USB0_USBFRMADJUST *(volatile $uint8_t  *)0x40072114 // Frame Adjust Register
-//
-//// Chapter 41: USB Device Charger Detection Module (USBDCD)
-//registers USBDCD_CONTROL   0x40035000 // Control register
-//registers USBDCD_CLOCK   0x40035004 // Clock register
-//registers USBDCD_STATUS   0x40035008 // Status register
-//registers USBDCD_TIMER0   0x40035010 // TIMER0 register
-//registers USBDCD_TIMER1   0x40035014 // TIMER1 register
-//registers USBDCD_TIMER2   0x40035018 // TIMER2 register
-//
-//// Chapter 43: SPI (DSPI)
-//registers SPI0_MCR   0x4002C000 // DSPI Module Configuration Register
-//registers SPI_MCR_MSTR    0x80000000  // Master/Slave Mode Select
-//registers SPI_MCR_CONT_SCKE   0x40000000  // 
-//registers SPI_MCR_DCONF(n)  (((n) & 3) << 28)  // 
-//registers SPI_MCR_FRZ    0x08000000  // 
-//registers SPI_MCR_MTFE    0x04000000  // 
-//registers SPI_MCR_ROOE    0x01000000  // 
-//registers SPI_MCR_PCSIS(n)  (((n) & 0x1F) << 16)  //
-//registers SPI_MCR_DOZE    0x00008000  // 
-//registers SPI_MCR_MDIS    0x00004000  // 
-//registers SPI_MCR_DIS_TXF    0x00002000  // 
-//registers SPI_MCR_DIS_RXF    0x00001000  // 
-//registers SPI_MCR_CLR_TXF    0x00000800  // 
-//registers SPI_MCR_CLR_RXF    0x00000400  // 
-//registers SPI_MCR_SMPL_PT(n)  (((n) & 3) << 8)  //
-//registers SPI_MCR_HALT    0x00000001  // 
-//registers SPI0_TCR   0x4002C008 // DSPI Transfer Count Register
-//registers SPI0_CTAR0   0x4002C00C // DSPI Clock and Transfer Attributes Register, In Master Mode
-//registers SPI_CTAR_DBR    0x80000000  // Double Baud Rate
-//registers SPI_CTAR_FMSZ(n)  (((n) & 15) << 27)  // Frame Size (+1)
-//registers SPI_CTAR_CPOL    0x04000000  // Clock Polarity
-//registers SPI_CTAR_CPHA    0x02000000  // Clock Phase
-//registers SPI_CTAR_LSBFE    0x01000000  // LSB First
-//registers SPI_CTAR_PCSSCK(n)  (((n) & 3) << 22)  // PCS to SCK Delay Prescaler
-//registers SPI_CTAR_PASC(n)  (((n) & 3) << 20)  // After SCK Delay Prescaler
-//registers SPI_CTAR_PDT(n)   (((n) & 3) << 18)  // Delay after Transfer Prescaler
-//registers SPI_CTAR_PBR(n)   (((n) & 3) << 16)  // Baud Rate Prescaler
-//registers SPI_CTAR_CSSCK(n)  (((n) & 15) << 12)  // PCS to SCK Delay Scaler
-//registers SPI_CTAR_ASC(n)   (((n) & 15) << 8)  // After SCK Delay Scaler
-//registers SPI_CTAR_DT(n)   (((n) & 15) << 4)  // Delay After Transfer Scaler
-//registers SPI_CTAR_BR(n)   (((n) & 15) << 0)  // Baud Rate Scaler
-//registers SPI0_CTAR0_SLAVE  0x4002C00C // DSPI Clock and Transfer Attributes Register, In Slave Mode
-//registers SPI0_CTAR1   0x4002C010 // DSPI Clock and Transfer Attributes Register, In Master Mode
-//registers SPI0_SR    0x4002C02C // DSPI Status Register
-//registers SPI_SR_TCF    0x80000000  // Transfer Complete Flag
-//registers SPI_SR_TXRXS    0x40000000  // TX and RX Status
-//registers SPI_SR_EOQF    0x10000000  // End of Queue Flag
-//registers SPI_SR_TFUF    0x08000000  // Transmit FIFO Underflow Flag
-//registers SPI_SR_TFFF    0x02000000  // Transmit FIFO Fill Flag
-//registers SPI_SR_RFOF    0x00080000  // Receive FIFO Overflow Flag
-//registers SPI_SR_RFDF    0x00020000  // Receive FIFO Drain Flag
-//registers SPI0_RSER   0x4002C030 // DSPI DMA/Interrupt Request Select and Enable Register
-//registers SPI_RSER_TCF_RE    0x80000000  // Transmission Complete Request Enable
-//registers SPI_RSER_EOQF_RE   0x10000000  // DSPI Finished Request Request Enable
-//registers SPI_RSER_TFUF_RE   0x08000000  // Transmit FIFO Underflow Request Enable
-//registers SPI_RSER_TFFF_RE   0x02000000  // Transmit FIFO Fill Request Enable
-//registers SPI_RSER_TFFF_DIRS   0x01000000  // Transmit FIFO FIll Dma or Interrupt Request Select
-//registers SPI_RSER_RFOF_RE   0x00080000  // Receive FIFO Overflow Request Enable
-//registers SPI_RSER_RFDF_RE   0x00020000  // Receive FIFO Drain Request Enable
-//registers SPI_RSER_RFDF_DIRS   0x00010000  // Receive FIFO Drain DMA or Interrupt Request Select
-//registers SPI0_PUSHR   0x4002C034 // DSPI PUSH TX FIFO registers In Master Mode
-//registers SPI_PUSHR_CONT    0x80000000  // 
-//registers SPI_PUSHR_CTAS(n)  (((n) & 7) << 28)  // 
-//registers SPI_PUSHR_EOQ    0x08000000  // 
-//registers SPI_PUSHR_CTCNT    0x04000000  // 
-//registers SPI_PUSHR_PCS(n)  (((n) & 31) << 16)  //
-//registers SPI0_PUSHR_SLAVE  0x4002C034 // DSPI PUSH TX FIFO registers In Slave Mode
-//registers SPI0_POPR   0x4002C038 // DSPI POP RX FIFO Register
-//registers SPI0_TXFR0   0x4002C03C // DSPI Transmit FIFO Registers
-//registers SPI0_TXFR1   0x4002C040 // DSPI Transmit FIFO Registers
-//registers SPI0_TXFR2   0x4002C044 // DSPI Transmit FIFO Registers
-//registers SPI0_TXFR3   0x4002C048 // DSPI Transmit FIFO Registers
-//registers SPI0_RXFR0   0x4002C07C // DSPI Receive FIFO Registers
-//registers SPI0_RXFR1   0x4002C080 // DSPI Receive FIFO Registers
-//registers SPI0_RXFR2   0x4002C084 // DSPI Receive FIFO Registers
-//registers SPI0_RXFR3   0x4002C088 // DSPI Receive FIFO Registers
-//typedef struct {
-// volatile $uint32_t MCR; // 0
-// volatile $uint32_t unused1;// 4
-// volatile $uint32_t TCR; // 8
-// volatile $uint32_t CTAR0; // c
-// volatile $uint32_t CTAR1; // 10
-// volatile $uint32_t CTAR2; // 14
-// volatile $uint32_t CTAR3; // 18
-// volatile $uint32_t CTAR4; // 1c
-// volatile $uint32_t CTAR5; // 20
-// volatile $uint32_t CTAR6; // 24
-// volatile $uint32_t CTAR7; // 28
-// volatile $uint32_t SR; // 2c
-// volatile $uint32_t RSER; // 30
-// volatile $uint32_t PUSHR; // 34
-// volatile $uint32_t POPR; // 38
-// volatile $uint32_t TXFR[16]; // 3c
-// volatile $uint32_t RXFR[16]; // 7c
-//} SPI_t;
-//registers SPI0  (*(SPI_t *)0x4002C000)
-//
-//// Chapter 44: Inter-Integrated Circuit (I2C)
-//registers I2C0_A1   *(volatile $uint8_t  *)0x40066000 // I2C Address registers 1
-//registers I2C0_F   *(volatile $uint8_t  *)0x40066001 // I2C Frequency Divider register
-//registers I2C0_C1   *(volatile $uint8_t  *)0x40066002 // I2C Control registers 1
-//registers I2C_C1_IICEN   ($uint8_t)0x80   // I2C Enable
-//registers I2C_C1_IICIE   ($uint8_t)0x40   // I2C Interrupt Enable
-//registers I2C_C1_MST   ($uint8_t)0x20   // Master Mode Select
-//registers I2C_C1_TX   ($uint8_t)0x10   // Transmit Mode Select
-//registers I2C_C1_TXAK   ($uint8_t)0x08   // Transmit Acknowledge Enable
-//registers I2C_C1_RSTA   ($uint8_t)0x04   // RepeSTART
-//registers I2C_C1_WUEN   ($uint8_t)0x02   // Wakeup Enable
-//registers I2C_C1_DMAEN   ($uint8_t)0x01   // DMA Enable
-//registers I2C0_S   *(volatile $uint8_t  *)0x40066003 // I2C Status register
-//registers I2C_S_TCF   ($uint8_t)0x80   // Transfer Complete Flag
-//registers I2C_S_IAAS   ($uint8_t)0x40   // Addressed As A Slave
-//registers I2C_S_BUSY   ($uint8_t)0x20   // Bus Busy
-//registers I2C_S_ARBL   ($uint8_t)0x10   // Arbitration Lost
-//registers I2C_S_RAM   ($uint8_t)0x08   // Range Address Match
-//registers I2C_S_SRW   ($uint8_t)0x04   // Slave Read/Write
-//registers I2C_S_IICIF   ($uint8_t)0x02   // Interrupt Flag
-//registers I2C_S_RXAK   ($uint8_t)0x01   // Receive Acknowledge
-//registers I2C0_D   *(volatile $uint8_t  *)0x40066004 // I2C Data I/O register
-//registers I2C0_C2   *(volatile $uint8_t  *)0x40066005 // I2C Control registers 2
-//registers I2C_C2_GCAEN   ($uint8_t)0x80   // General Call Address Enable
-//registers I2C_C2_ADEXT   ($uint8_t)0x40   // Address Extension
-//registers I2C_C2_HDRS   ($uint8_t)0x20   // High Drive Select
-//registers I2C_C2_SBRC   ($uint8_t)0x10   // Slave Baud Rate Control
-//registers I2C_C2_RMEN   ($uint8_t)0x08   // Range Address Matching Enable
-//registers I2C_C2_AD(n)   ((n) & 7)   // Slave Address, upper 3 bits
-//registers I2C0_FLT  *(volatile $uint8_t  *)0x40066006 // I2C Programmable Input Glitch Filter register
-//registers I2C0_RA   *(volatile $uint8_t  *)0x40066007 // I2C Range Address register
-//registers I2C0_SMB  *(volatile $uint8_t  *)0x40066008 // I2C SMBus Control and Status register
-//registers I2C0_A2   *(volatile $uint8_t  *)0x40066009 // I2C Address registers 2
-//registers I2C0_SLTH  *(volatile $uint8_t  *)0x4006600A // I2C SCL Low Timeout registers High
-//registers I2C0_SLTL  *(volatile $uint8_t  *)0x4006600B // I2C SCL Low Timeout registers Low
-//
-//registers I2C1_A1   *(volatile $uint8_t  *)0x40067000 // I2C Address registers 1
-//registers I2C1_F   *(volatile $uint8_t  *)0x40067001 // I2C Frequency Divider register
-//registers I2C1_C1   *(volatile $uint8_t  *)0x40067002 // I2C Control registers 1
-//registers I2C1_S   *(volatile $uint8_t  *)0x40067003 // I2C Status register
-//registers I2C1_D   *(volatile $uint8_t  *)0x40067004 // I2C Data I/O register
-//registers I2C1_C2   *(volatile $uint8_t  *)0x40067005 // I2C Control registers 2
-//registers I2C1_FLT  *(volatile $uint8_t  *)0x40067006 // I2C Programmable Input Glitch Filter register
-//registers I2C1_RA   *(volatile $uint8_t  *)0x40067007 // I2C Range Address register
-//registers I2C1_SMB  *(volatile $uint8_t  *)0x40067008 // I2C SMBus Control and Status register
-//registers I2C1_A2   *(volatile $uint8_t  *)0x40067009 // I2C Address registers 2
-//registers I2C1_SLTH  *(volatile $uint8_t  *)0x4006700A // I2C SCL Low Timeout registers High
-//registers I2C1_SLTL  *(volatile $uint8_t  *)0x4006700B // I2C SCL Low Timeout registers Low
-//
-//// Chapter 45: Universal Asynchronous Receiver/Transmitter (UART)
-//registers UART0_BDH  *(volatile $uint8_t  *)0x4006A000 // UART Baud Rate Registers: High
-//registers UART0_BDL  *(volatile $uint8_t  *)0x4006A001 // UART Baud Rate Registers: Low
-//registers UART0_C1  *(volatile $uint8_t  *)0x4006A002 // UART Control registers 1
-//registers UART_C1_LOOPS   ($uint8_t)0x80   // When LOOPS is set, the RxD pin is disconnected from the UART and the transmitter output is internally connected to the receiver input
-//registers UART_C1_UARTSWAI  ($uint8_t)0x40   // UART Stops in Wait Mode
-//registers UART_C1_RSRC   ($uint8_t)0x20   // When LOOPS is set, the RSRC field determines the source for the receiver shift registers input
-//registers UART_C1_M   ($uint8_t)0x10   // 9-bit or 8-bit Mode Select
-//registers UART_C1_WAKE   ($uint8_t)0x08   // Determines which condition wakes the UART
-//registers UART_C1_ILT   ($uint8_t)0x04   // Idle Line Type Select
-//registers UART_C1_PE   ($uint8_t)0x02   // Parity Enable
-//registers UART_C1_PT   ($uint8_t)0x01   // Parity Type, 0=even, 1=odd
-//registers UART0_C2  *(volatile $uint8_t  *)0x4006A003 // UART Control registers 2
-//registers UART_C2_TIE   ($uint8_t)0x80   // Transmitter Interrupt or DMA Transfer Enable.
-//registers UART_C2_TCIE   ($uint8_t)0x40   // Transmission Complete Interrupt Enable
-//registers UART_C2_RIE   ($uint8_t)0x20   // Receiver Full Interrupt or DMA Transfer Enable
-//registers UART_C2_ILIE   ($uint8_t)0x10   // Idle Line Interrupt Enable
-//registers UART_C2_TE   ($uint8_t)0x08   // Transmitter Enable
-//registers UART_C2_RE   ($uint8_t)0x04   // Receiver Enable
-//registers UART_C2_RWU   ($uint8_t)0x02   // Receiver Wakeup Control
-//registers UART_C2_SBK   ($uint8_t)0x01   // Send Break
-//registers UART0_S1  *(volatile $uint8_t  *)0x4006A004 // UART Status registers 1
-//registers UART_S1_TDRE   ($uint8_t)0x80   // Transmit Data registers Empty Flag
-//registers UART_S1_TC   ($uint8_t)0x40   // Transmit Complete Flag
-//registers UART_S1_RDRF   ($uint8_t)0x20   // Receive Data registers Full Flag
-//registers UART_S1_IDLE   ($uint8_t)0x10   // Idle Line Flag
-//registers UART_S1_OR   ($uint8_t)0x08   // Receiver Overrun Flag
-//registers UART_S1_NF   ($uint8_t)0x04   // Noise Flag
-//registers UART_S1_FE   ($uint8_t)0x02   // Framing Error Flag
-//registers UART_S1_PF   ($uint8_t)0x01   // Parity Error Flag
-//registers UART0_S2  *(volatile $uint8_t  *)0x4006A005 // UART Status registers 2
-//registers UART0_C3  *(volatile $uint8_t  *)0x4006A006 // UART Control registers 3
-//registers UART0_D   *(volatile $uint8_t  *)0x4006A007 // UART Data Register
-//registers UART0_MA1  *(volatile $uint8_t  *)0x4006A008 // UART Match Address Registers 1
-//registers UART0_MA2  *(volatile $uint8_t  *)0x4006A009 // UART Match Address Registers 2
-//registers UART0_C4  *(volatile $uint8_t  *)0x4006A00A // UART Control registers 4
-//registers UART0_C5  *(volatile $uint8_t  *)0x4006A00B // UART Control registers 5
-//registers UART0_ED  *(volatile $uint8_t  *)0x4006A00C // UART Extended Data Register
-//registers UART0_MODEM  *(volatile $uint8_t  *)0x4006A00D // UART Modem Register
-//registers UART0_IR  *(volatile $uint8_t  *)0x4006A00E // UART Infrared Register
-//registers UART0_PFIFO  *(volatile $uint8_t  *)0x4006A010 // UART FIFO Parameters
-//registers UART_PFIFO_TXFE   ($uint8_t)0x80
-//registers UART_PFIFO_RXFE   ($uint8_t)0x08
-//registers UART0_CFIFO  *(volatile $uint8_t  *)0x4006A011 // UART FIFO Control Register
-//registers UART_CFIFO_TXFLUSH  ($uint8_t)0x80   // 
-//registers UART_CFIFO_RXFLUSH  ($uint8_t)0x40   // 
-//registers UART_CFIFO_RXOFE  ($uint8_t)0x04   // 
-//registers UART_CFIFO_TXOFE  ($uint8_t)0x02   // 
-//registers UART_CFIFO_RXUFE  ($uint8_t)0x01   // 
-//registers UART0_SFIFO  *(volatile $uint8_t  *)0x4006A012 // UART FIFO Status Register
-//registers UART_SFIFO_TXEMPT  ($uint8_t)0x80
-//registers UART_SFIFO_RXEMPT  ($uint8_t)0x40
-//registers UART_SFIFO_RXOF   ($uint8_t)0x04
-//registers UART_SFIFO_TXOF   ($uint8_t)0x02
-//registers UART_SFIFO_RXUF   ($uint8_t)0x01
-//registers UART0_TWFIFO  *(volatile $uint8_t  *)0x4006A013 // UART FIFO Transmit Watermark
-//registers UART0_TCFIFO  *(volatile $uint8_t  *)0x4006A014 // UART FIFO Transmit Count
-//registers UART0_RWFIFO  *(volatile $uint8_t  *)0x4006A015 // UART FIFO Receive Watermark
-//registers UART0_RCFIFO  *(volatile $uint8_t  *)0x4006A016 // UART FIFO Receive Count
-//registers UART0_C7816  *(volatile $uint8_t  *)0x4006A018 // UART 7816 Control Register
-//registers UART0_IE7816  *(volatile $uint8_t  *)0x4006A019 // UART 7816 Interrupt Enable Register
-//registers UART0_IS7816  *(volatile $uint8_t  *)0x4006A01A // UART 7816 Interrupt Status Register
-//registers UART0_WP7816T0  *(volatile $uint8_t  *)0x4006A01B // UART 7816 Wait Parameter Register
-//registers UART0_WP7816T1  *(volatile $uint8_t  *)0x4006A01B // UART 7816 Wait Parameter Register
-//registers UART0_WN7816  *(volatile $uint8_t  *)0x4006A01C // UART 7816 Wait N Register
-//registers UART0_WF7816  *(volatile $uint8_t  *)0x4006A01D // UART 7816 Wait FD Register
-//registers UART0_ET7816  *(volatile $uint8_t  *)0x4006A01E // UART 7816 Error Threshold Register
-//registers UART0_TL7816  *(volatile $uint8_t  *)0x4006A01F // UART 7816 Transmit Length Register
-//registers UART0_C6  *(volatile $uint8_t  *)0x4006A021 // UART CEA709.1-B Control registers 6
-//registers UART0_PCTH  *(volatile $uint8_t  *)0x4006A022 // UART CEA709.1-B Packet Cycle Time Counter High
-//registers UART0_PCTL  *(volatile $uint8_t  *)0x4006A023 // UART CEA709.1-B Packet Cycle Time Counter Low
-//registers UART0_B1T  *(volatile $uint8_t  *)0x4006A024 // UART CEA709.1-B Beta1 Timer
-//registers UART0_SDTH  *(volatile $uint8_t  *)0x4006A025 // UART CEA709.1-B Secondary Delay Timer High
-//registers UART0_SDTL  *(volatile $uint8_t  *)0x4006A026 // UART CEA709.1-B Secondary Delay Timer Low
-//registers UART0_PRE  *(volatile $uint8_t  *)0x4006A027 // UART CEA709.1-B Preamble
-//registers UART0_TPL  *(volatile $uint8_t  *)0x4006A028 // UART CEA709.1-B Transmit Packet Length
-//registers UART0_IE  *(volatile $uint8_t  *)0x4006A029 // UART CEA709.1-B Interrupt Enable Register
-//registers UART0_WB  *(volatile $uint8_t  *)0x4006A02A // UART CEA709.1-B WBASE
-//registers UART0_S3  *(volatile $uint8_t  *)0x4006A02B // UART CEA709.1-B Status Register
-//registers UART0_S4  *(volatile $uint8_t  *)0x4006A02C // UART CEA709.1-B Status Register
-//registers UART0_RPL  *(volatile $uint8_t  *)0x4006A02D // UART CEA709.1-B Received Packet Length
-//registers UART0_RPREL  *(volatile $uint8_t  *)0x4006A02E // UART CEA709.1-B Received Preamble Length
-//registers UART0_CPW  *(volatile $uint8_t  *)0x4006A02F // UART CEA709.1-B Collision Pulse Width
-//registers UART0_RIDT  *(volatile $uint8_t  *)0x4006A030 // UART CEA709.1-B Receive Indeterminate Time
-//registers UART0_TIDT  *(volatile $uint8_t  *)0x4006A031 // UART CEA709.1-B Transmit Indeterminate Time
-//registers UART1_BDH  *(volatile $uint8_t  *)0x4006B000 // UART Baud Rate Registers: High
-//registers UART1_BDL  *(volatile $uint8_t  *)0x4006B001 // UART Baud Rate Registers: Low
-//registers UART1_C1  *(volatile $uint8_t  *)0x4006B002 // UART Control registers 1
-//registers UART1_C2  *(volatile $uint8_t  *)0x4006B003 // UART Control registers 2
-//registers UART1_S1  *(volatile $uint8_t  *)0x4006B004 // UART Status registers 1
-//registers UART1_S2  *(volatile $uint8_t  *)0x4006B005 // UART Status registers 2
-//registers UART1_C3  *(volatile $uint8_t  *)0x4006B006 // UART Control registers 3
-//registers UART1_D   *(volatile $uint8_t  *)0x4006B007 // UART Data Register
-//registers UART1_MA1  *(volatile $uint8_t  *)0x4006B008 // UART Match Address Registers 1
-//registers UART1_MA2  *(volatile $uint8_t  *)0x4006B009 // UART Match Address Registers 2
-//registers UART1_C4  *(volatile $uint8_t  *)0x4006B00A // UART Control registers 4
-//registers UART1_C5  *(volatile $uint8_t  *)0x4006B00B // UART Control registers 5
-//registers UART1_ED  *(volatile $uint8_t  *)0x4006B00C // UART Extended Data Register
-//registers UART1_MODEM  *(volatile $uint8_t  *)0x4006B00D // UART Modem Register
-//registers UART1_IR  *(volatile $uint8_t  *)0x4006B00E // UART Infrared Register
-//registers UART1_PFIFO  *(volatile $uint8_t  *)0x4006B010 // UART FIFO Parameters
-//registers UART1_CFIFO  *(volatile $uint8_t  *)0x4006B011 // UART FIFO Control Register
-//registers UART1_SFIFO  *(volatile $uint8_t  *)0x4006B012 // UART FIFO Status Register
-//registers UART1_TWFIFO  *(volatile $uint8_t  *)0x4006B013 // UART FIFO Transmit Watermark
-//registers UART1_TCFIFO  *(volatile $uint8_t  *)0x4006B014 // UART FIFO Transmit Count
-//registers UART1_RWFIFO  *(volatile $uint8_t  *)0x4006B015 // UART FIFO Receive Watermark
-//registers UART1_RCFIFO  *(volatile $uint8_t  *)0x4006B016 // UART FIFO Receive Count
-//registers UART1_C7816  *(volatile $uint8_t  *)0x4006B018 // UART 7816 Control Register
-//registers UART1_IE7816  *(volatile $uint8_t  *)0x4006B019 // UART 7816 Interrupt Enable Register
-//registers UART1_IS7816  *(volatile $uint8_t  *)0x4006B01A // UART 7816 Interrupt Status Register
-//registers UART1_WP7816T0  *(volatile $uint8_t  *)0x4006B01B // UART 7816 Wait Parameter Register
-//registers UART1_WP7816T1  *(volatile $uint8_t  *)0x4006B01B // UART 7816 Wait Parameter Register
-//registers UART1_WN7816  *(volatile $uint8_t  *)0x4006B01C // UART 7816 Wait N Register
-//registers UART1_WF7816  *(volatile $uint8_t  *)0x4006B01D // UART 7816 Wait FD Register
-//registers UART1_ET7816  *(volatile $uint8_t  *)0x4006B01E // UART 7816 Error Threshold Register
-//registers UART1_TL7816  *(volatile $uint8_t  *)0x4006B01F // UART 7816 Transmit Length Register
-//registers UART1_C6  *(volatile $uint8_t  *)0x4006B021 // UART CEA709.1-B Control registers 6
-//registers UART1_PCTH  *(volatile $uint8_t  *)0x4006B022 // UART CEA709.1-B Packet Cycle Time Counter High
-//registers UART1_PCTL  *(volatile $uint8_t  *)0x4006B023 // UART CEA709.1-B Packet Cycle Time Counter Low
-//registers UART1_B1T  *(volatile $uint8_t  *)0x4006B024 // UART CEA709.1-B Beta1 Timer
-//registers UART1_SDTH  *(volatile $uint8_t  *)0x4006B025 // UART CEA709.1-B Secondary Delay Timer High
-//registers UART1_SDTL  *(volatile $uint8_t  *)0x4006B026 // UART CEA709.1-B Secondary Delay Timer Low
-//registers UART1_PRE  *(volatile $uint8_t  *)0x4006B027 // UART CEA709.1-B Preamble
-//registers UART1_TPL  *(volatile $uint8_t  *)0x4006B028 // UART CEA709.1-B Transmit Packet Length
-//registers UART1_IE  *(volatile $uint8_t  *)0x4006B029 // UART CEA709.1-B Interrupt Enable Register
-//registers UART1_WB  *(volatile $uint8_t  *)0x4006B02A // UART CEA709.1-B WBASE
-//registers UART1_S3  *(volatile $uint8_t  *)0x4006B02B // UART CEA709.1-B Status Register
-//registers UART1_S4  *(volatile $uint8_t  *)0x4006B02C // UART CEA709.1-B Status Register
-//registers UART1_RPL  *(volatile $uint8_t  *)0x4006B02D // UART CEA709.1-B Received Packet Length
-//registers UART1_RPREL  *(volatile $uint8_t  *)0x4006B02E // UART CEA709.1-B Received Preamble Length
-//registers UART1_CPW  *(volatile $uint8_t  *)0x4006B02F // UART CEA709.1-B Collision Pulse Width
-//registers UART1_RIDT  *(volatile $uint8_t  *)0x4006B030 // UART CEA709.1-B Receive Indeterminate Time
-//registers UART1_TIDT  *(volatile $uint8_t  *)0x4006B031 // UART CEA709.1-B Transmit Indeterminate Time
-//registers UART2_BDH  *(volatile $uint8_t  *)0x4006C000 // UART Baud Rate Registers: High
-//registers UART2_BDL  *(volatile $uint8_t  *)0x4006C001 // UART Baud Rate Registers: Low
-//registers UART2_C1  *(volatile $uint8_t  *)0x4006C002 // UART Control registers 1
-//registers UART2_C2  *(volatile $uint8_t  *)0x4006C003 // UART Control registers 2
-//registers UART2_S1  *(volatile $uint8_t  *)0x4006C004 // UART Status registers 1
-//registers UART2_S2  *(volatile $uint8_t  *)0x4006C005 // UART Status registers 2
-//registers UART2_C3  *(volatile $uint8_t  *)0x4006C006 // UART Control registers 3
-//registers UART2_D   *(volatile $uint8_t  *)0x4006C007 // UART Data Register
-//registers UART2_MA1  *(volatile $uint8_t  *)0x4006C008 // UART Match Address Registers 1
-//registers UART2_MA2  *(volatile $uint8_t  *)0x4006C009 // UART Match Address Registers 2
-//registers UART2_C4  *(volatile $uint8_t  *)0x4006C00A // UART Control registers 4
-//registers UART2_C5  *(volatile $uint8_t  *)0x4006C00B // UART Control registers 5
-//registers UART2_ED  *(volatile $uint8_t  *)0x4006C00C // UART Extended Data Register
-//registers UART2_MODEM  *(volatile $uint8_t  *)0x4006C00D // UART Modem Register
-//registers UART2_IR  *(volatile $uint8_t  *)0x4006C00E // UART Infrared Register
-//registers UART2_PFIFO  *(volatile $uint8_t  *)0x4006C010 // UART FIFO Parameters
-//registers UART2_CFIFO  *(volatile $uint8_t  *)0x4006C011 // UART FIFO Control Register
-//registers UART2_SFIFO  *(volatile $uint8_t  *)0x4006C012 // UART FIFO Status Register
-//registers UART2_TWFIFO  *(volatile $uint8_t  *)0x4006C013 // UART FIFO Transmit Watermark
-//registers UART2_TCFIFO  *(volatile $uint8_t  *)0x4006C014 // UART FIFO Transmit Count
-//registers UART2_RWFIFO  *(volatile $uint8_t  *)0x4006C015 // UART FIFO Receive Watermark
-//registers UART2_RCFIFO  *(volatile $uint8_t  *)0x4006C016 // UART FIFO Receive Count
-//registers UART2_C7816  *(volatile $uint8_t  *)0x4006C018 // UART 7816 Control Register
-//registers UART2_IE7816  *(volatile $uint8_t  *)0x4006C019 // UART 7816 Interrupt Enable Register
-//registers UART2_IS7816  *(volatile $uint8_t  *)0x4006C01A // UART 7816 Interrupt Status Register
-//registers UART2_WP7816T0  *(volatile $uint8_t  *)0x4006C01B // UART 7816 Wait Parameter Register
-//registers UART2_WP7816T1  *(volatile $uint8_t  *)0x4006C01B // UART 7816 Wait Parameter Register
-//registers UART2_WN7816  *(volatile $uint8_t  *)0x4006C01C // UART 7816 Wait N Register
-//registers UART2_WF7816  *(volatile $uint8_t  *)0x4006C01D // UART 7816 Wait FD Register
-//registers UART2_ET7816  *(volatile $uint8_t  *)0x4006C01E // UART 7816 Error Threshold Register
-//registers UART2_TL7816  *(volatile $uint8_t  *)0x4006C01F // UART 7816 Transmit Length Register
-//registers UART2_C6  *(volatile $uint8_t  *)0x4006C021 // UART CEA709.1-B Control registers 6
-//registers UART2_PCTH  *(volatile $uint8_t  *)0x4006C022 // UART CEA709.1-B Packet Cycle Time Counter High
-//registers UART2_PCTL  *(volatile $uint8_t  *)0x4006C023 // UART CEA709.1-B Packet Cycle Time Counter Low
-//registers UART2_B1T  *(volatile $uint8_t  *)0x4006C024 // UART CEA709.1-B Beta1 Timer
-//registers UART2_SDTH  *(volatile $uint8_t  *)0x4006C025 // UART CEA709.1-B Secondary Delay Timer High
-//registers UART2_SDTL  *(volatile $uint8_t  *)0x4006C026 // UART CEA709.1-B Secondary Delay Timer Low
-//registers UART2_PRE  *(volatile $uint8_t  *)0x4006C027 // UART CEA709.1-B Preamble
-//registers UART2_TPL  *(volatile $uint8_t  *)0x4006C028 // UART CEA709.1-B Transmit Packet Length
-//registers UART2_IE  *(volatile $uint8_t  *)0x4006C029 // UART CEA709.1-B Interrupt Enable Register
-//registers UART2_WB  *(volatile $uint8_t  *)0x4006C02A // UART CEA709.1-B WBASE
-//registers UART2_S3  *(volatile $uint8_t  *)0x4006C02B // UART CEA709.1-B Status Register
-//registers UART2_S4  *(volatile $uint8_t  *)0x4006C02C // UART CEA709.1-B Status Register
-//registers UART2_RPL  *(volatile $uint8_t  *)0x4006C02D // UART CEA709.1-B Received Packet Length
-//registers UART2_RPREL  *(volatile $uint8_t  *)0x4006C02E // UART CEA709.1-B Received Preamble Length
-//registers UART2_CPW  *(volatile $uint8_t  *)0x4006C02F // UART CEA709.1-B Collision Pulse Width
-//registers UART2_RIDT  *(volatile $uint8_t  *)0x4006C030 // UART CEA709.1-B Receive Indeterminate Time
-//registers UART2_TIDT  *(volatile $uint8_t  *)0x4006C031 // UART CEA709.1-B Transmit Indeterminate Time
-//
-//// Chapter 46: Synchronous Audio Interface (SAI)
-//registers I2S0_TCSR   0x4002F000 // SAI Transmit Control Register
-//registers I2S_TCSR_TE    0x80000000 // Transmitter Enable
-//registers I2S_TCSR_STOPE    0x40000000 // Transmitter Enable in Stop mode
-//registers I2S_TCSR_DBGE    0x20000000 // Transmitter Enable in Debug mode
-//registers I2S_TCSR_BCE    0x10000000 // Bit Clock Enable
-//registers I2S_TCSR_FR    0x02000000 // FIFO Reset
-//registers I2S_TCSR_SR    0x01000000 // Software Reset
-//registers I2S_TCSR_WSF    0x00100000 // Word Start Flag
-//registers I2S_TCSR_SEF    0x00080000 // Sync Error Flag
-//registers I2S_TCSR_FEF    0x00040000 // FIFO Error Flag (underrun)
-//registers I2S_TCSR_FWF    0x00020000 // FIFO Warning Flag (empty)
-//registers I2S_TCSR_FRF    0x00010000 // FIFO Request Flag (Data Ready)
-//registers I2S_TCSR_WSIE    0x00001000 // Word Start Interrupt Enable
-//registers I2S_TCSR_SEIE    0x00000800 // Sync Error Interrupt Enable
-//registers I2S_TCSR_FEIE    0x00000400 // FIFO Error Interrupt Enable
-//registers I2S_TCSR_FWIE    0x00000200 // FIFO Warning Interrupt Enable
-//registers I2S_TCSR_FRIE    0x00000100 // FIFO Request Interrupt Enable
-//registers I2S_TCSR_FWDE    0x00000002 // FIFO Warning DMA Enable
-//registers I2S_TCSR_FRDE    0x00000001 // FIFO Request DMA Enable
-//registers I2S0_TCR1   0x4002F004 // SAI Transmit Configuration 1 Register
-//registers I2S_TCR1_TFW(n)   ( n & 0x03)       // Transmit FIFO watermark
-//registers I2S0_TCR2   0x4002F008 // SAI Transmit Configuration 2 Register
-//registers I2S_TCR2_DIV(n)   ( n & 0xff)       // Bit clock divide by (DIV+1)*2
-//registers I2S_TCR2_BCD   ( 1<<24)       // Bit clock direction
-//registers I2S_TCR2_BCP   ( 1<<25)       // Bit clock polarity
-//registers I2S_TCR2_MSEL(n)  ( (n & 3)<<26)       // MCLK select, 0=bus clock, 1=I2S0_MCLK
-//registers I2S_TCR2_BCI   ( 1<<28)       // Bit clock input
-//registers I2S_TCR2_BCS   ( 1<<29)       // Bit clock swap
-//registers I2S_TCR2_SYNC(n)  ( (n & 3)<<30)       // 0=async 1=sync with receiver
-//registers I2S0_TCR3   0x4002F00C // SAI Transmit Configuration 3 Register
-//registers I2S_TCR3_WDFL(n)  ( n & 0x0f)       // word flag configuration
-//registers I2S_TCR3_TCE   ( 0x10000)       // transmit channel enable
-//registers I2S0_TCR4   0x4002F010 // SAI Transmit Configuration 4 Register
-//registers I2S_TCR4_FSD   ( 1)        // Frame Sync Direction
-//registers I2S_TCR4_FSP   ( 2)        // Frame Sync Polarity
-//registers I2S_TCR4_FSE   ( 8)        // Frame Sync Early
-//registers I2S_TCR4_MF   ( 0x10)       // MSB First
-//registers I2S_TCR4_SYWD(n)  ( (n & 0x1f)<<8)     // Sync Width
-//registers I2S_TCR4_FRSZ(n)  ( (n & 0x0f)<<16)    // Frame Size
-//registers I2S0_TCR5   0x4002F014 // SAI Transmit Configuration 5 Register
-//registers I2S_TCR5_FBT(n)   ( (n & 0x1f)<<8)     // First Bit Shifted
-//registers I2S_TCR5_W0W(n)   ( (n & 0x1f)<<16)    // Word 0 Width
-//registers I2S_TCR5_WNW(n)   ( (n & 0x1f)<<24)    // Word N Width
-//registers I2S0_TDR0   0x4002F020 // SAI Transmit Data Register
-//registers I2S0_TDR1   0x4002F024 // SAI Transmit Data Register
-//registers I2S0_TFR0   0x4002F040 // SAI Transmit FIFO Register
-//registers I2S0_TFR1   0x4002F044 // SAI Transmit FIFO Register
-//registers I2S_TFR_RFP(n)   ( n & 7)       // read FIFO pointer
-//registers I2S_TFR_WFP(n)   ( (n & 7)<<16)       // write FIFO pointer
-//registers I2S0_TMR   0x4002F060 // SAI Transmit Mask Register
-//registers I2S_TMR_TWM(n)   ( n & 0xFFFFFFFF)
-//registers I2S0_RCSR   0x4002F080 // SAI Receive Control Register
-//registers I2S_RCSR_RE    0x80000000 // Receiver Enable
-//registers I2S_RCSR_STOPE    0x40000000 // Receiver Enable in Stop mode
-//registers I2S_RCSR_DBGE    0x20000000 // Receiver Enable in Debug mode
-//registers I2S_RCSR_BCE    0x10000000 // Bit Clock Enable
-//registers I2S_RCSR_FR    0x02000000 // FIFO Reset
-//registers I2S_RCSR_SR    0x01000000 // Software Reset
-//registers I2S_RCSR_WSF    0x00100000 // Word Start Flag
-//registers I2S_RCSR_SEF    0x00080000 // Sync Error Flag
-//registers I2S_RCSR_FEF    0x00040000 // FIFO Error Flag (underrun)
-//registers I2S_RCSR_FWF    0x00020000 // FIFO Warning Flag (empty)
-//registers I2S_RCSR_FRF    0x00010000 // FIFO Request Flag (Data Ready)
-//registers I2S_RCSR_WSIE    0x00001000 // Word Start Interrupt Enable
-//registers I2S_RCSR_SEIE    0x00000800 // Sync Error Interrupt Enable
-//registers I2S_RCSR_FEIE    0x00000400 // FIFO Error Interrupt Enable
-//registers I2S_RCSR_FWIE    0x00000200 // FIFO Warning Interrupt Enable
-//registers I2S_RCSR_FRIE    0x00000100 // FIFO Request Interrupt Enable
-//registers I2S_RCSR_FWDE    0x00000002 // FIFO Warning DMA Enable
-//registers I2S_RCSR_FRDE    0x00000001 // FIFO Request DMA Enable
-//registers I2S0_RCR1   0x4002F084 // SAI Receive Configuration 1 Register
-//registers I2S_RCR1_RFW(n)   ( n & 0x03)       // Receive FIFO watermark
-//registers I2S0_RCR2   0x4002F088 // SAI Receive Configuration 2 Register
-//registers I2S_RCR2_DIV(n)   ( n & 0xff)       // Bit clock divide by (DIV+1)*2
-//registers I2S_RCR2_BCD   ( 1<<24)       // Bit clock direction
-//registers I2S_RCR2_BCP   ( 1<<25)       // Bit clock polarity
-//registers I2S_RCR2_MSEL(n)  ( (n & 3)<<26)       // MCLK select, 0=bus clock, 1=I2S0_MCLK
-//registers I2S_RCR2_BCI   ( 1<<28)       // Bit clock input
-//registers I2S_RCR2_BCS   ( 1<<29)       // Bit clock swap
-//registers I2S_RCR2_SYNC(n)  ( (n & 3)<<30)       // 0=async 1=sync with receiver
-//registers I2S0_RCR3   0x4002F08C // SAI Receive Configuration 3 Register
-//registers I2S_RCR3_WDFL(n)  ( n & 0x0f)       // word flag configuration
-//registers I2S_RCR3_RCE   ( 0x10000)       // receive channel enable
-//registers I2S0_RCR4   0x4002F090 // SAI Receive Configuration 4 Register
-//registers I2S_RCR4_FSD   ( 1)        // Frame Sync Direction
-//registers I2S_RCR4_FSP   ( 2)        // Frame Sync Polarity
-//registers I2S_RCR4_FSE   ( 8)        // Frame Sync Early
-//registers I2S_RCR4_MF   ( 0x10)       // MSB First
-//registers I2S_RCR4_SYWD(n)  ( (n & 0x1f)<<8)     // Sync Width
-//registers I2S_RCR4_FRSZ(n)  ( (n & 0x0f)<<16)    // Frame Size
-//registers I2S0_RCR5   0x4002F094 // SAI Receive Configuration 5 Register
-//registers I2S_RCR5_FBT(n)   ( (n & 0x1f)<<8)     // First Bit Shifted
-//registers I2S_RCR5_W0W(n)   ( (n & 0x1f)<<16)    // Word 0 Width
-//registers I2S_RCR5_WNW(n)   ( (n & 0x1f)<<24)    // Word N Width
-//registers I2S0_RDR0   0x4002F0A0 // SAI Receive Data Register
-//registers I2S0_RDR1   0x4002F0A4 // SAI Receive Data Register
-//registers I2S0_RFR0   0x4002F0C0 // SAI Receive FIFO Register
-//registers I2S0_RFR1   0x4002F0C4 // SAI Receive FIFO Register
-//registers I2S_RFR_RFP(n)   ( n & 7)       // read FIFO pointer
-//registers I2S_RFR_WFP(n)   ( (n & 7)<<16)       // write FIFO pointer
-//registers I2S0_RMR   0x4002F0E0 // SAI Receive Mask Register
-//registers I2S_RMR_RWM(n)   ( n & 0xFFFFFFFF)
-//registers I2S0_MCR   0x4002F100 // SAI MCLK Control Register
-//registers I2S_MCR_DUF   ( 1<<31)       // Divider Update Flag
-//registers I2S_MCR_MOE   ( 1<<30)       // MCLK Output Enable
-//registers I2S_MCR_MICS(n)   ( (n & 3)<<24)       // MCLK Input Clock Select
-//registers I2S0_MDR   0x4002F104 // SAI MCLK Divide Register
-//registers I2S_MDR_FRACT(n)  ( (n & 0xff)<<12)    // MCLK Fraction
-//registers I2S_MDR_DIVIDE(n)  ( (n & 0xfff))       // MCLK Divide
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Chapter 40: Universal Serial Bus Full Speed OTG Controller (USBFSOTG)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+registers USB0 {
+//--- Peripheral ID Register
+  PERID @ro 0x4007_2000 $uint8 {2, ID:6}
+
+//--- Peripheral ID Complement Register
+  IDCOMP @ro 0x4007_2004 $uint8 {2, NID:6}
+
+//--- Peripheral Revision Register
+  REV @ro 0x4007_2008 $uint8
+
+//--- Peripheral Additional Info Register
+  ADDINFO @ro 0x4007_200C $uint8 {IRQNUM:5, 2, IEHOST}
+
+//--- OTG Interrupt Status Register
+  OTGISTAT 0x4007_2010 $uint8 {IDCHG, ONEMSEC, LINE_STAT_CHG, 1, SESSVLDCHG, B_SESS_CHG, 1, AVBUSHG}
+
+//--- OTG Interrupt Control Register
+  OTGICR 0x4007_2014 $uint8 {IDEN, ONEMSECEN, LINESTATEEN, 1, SESSVLDEN, BSESSEN, 1, AVBUSEN}
+
+//--- OTG Status Register
+  OTGSTAT 0x4007_2018 $uint8 {ID, ONEMSECEN, LINESTATESTABLE, 1, SESS_VLD, BSESSEND, 1, AVBUSVLD}
+
+//--- OTG Control Register
+  OTGCTL 0x4007_201C $uint8 {DPHIGH, 1, DPLOW, DMLOW, 1, OTGEN, 2}
+
+//--- Interrupt Status Register
+  ISTAT 0x4007_2080 $uint8 {STALL, ATTACH, RESUME, SLEEP, TOKDNE, SOFTOK, ERROR, USBRST}
+
+//--- Interrupt Enable Register
+  INTEN 0x4007_2084 $uint8 {STALLEN, ATTACHEN, RESUMEEN, SLEEPEN, TOKDNEEN, SOFTOKEN, ERROREN, USBRSTEN}
+
+//--- Interrupt Error Register
+  ERRSTAT 0x4007_2088 $uint8 {BSTERR, 1, DMAERR, BTOERR, DFN8, CRC16, CRC5EOF, PIDERR}
+
+//--- Error Interrupt Enable Register
+  ERREN 0x4007_208C $uint8 {BSTERREN, 1, DMAERREN, BTOERREN, DFN8EN, CRC16EN, CRC5EOFEN, PIDERREN}
+
+//--- Status Register
+  STAT 0x4007_2090 $uint8 {ENDP:4, TX, ODD, 2}
+
+//--- Control Register
+  CTL 0x4007_2094 $uint8 {JSTATE, SE0, TXSUSPENDTOKENBUSY, RESET, HOSTMODEEN, RESUME, ODDRST, USBENOFEN}
+
+//--- Address Register
+  ADDR 0x4007_2098 $uint8 {LSEN, ADDR:7}
+
+//--- BDT Page Register 1
+  BDTPAGE1 0x4007_209C $uint8 {BDTBA:7, 1}
+
+//--- Frame Number Register Low
+  FRMNUML 0x4007_20A0 $uint8
+
+//--- Frame Number Register High
+  FRMNUMH 0x4007_20A4 $uint8 {5, FRM:3}
+
+//--- Token Register
+  TOKEN 0x4007_20A8 $uint8 {TOKENPID:4, TOKENDPT:4}
+
+//--- SOF Threshold Register
+  SOFTHLD 0x4007_20AC $uint8
+
+//--- BDT Page Register 2
+  BDTPAGE2 0x4007_20B0 $uint8
+
+//--- BDT Page Register 3
+  BDTPAGE3 0x4007_20B4 $uint8
+
+//--- Endpoint Control
+  ENDPT [16] 0x4007_20C0 @inc 4 $uint8 {HOSTWCHUB, RETRYDIS, 1, EPCTLDIS, EPRXEN, EPTXEN, EPSTALL, EPHSHK}
+  
+//--- USB Control Register
+  USBCTRL 0x4007_2100 $uint8 {SUSP, PDE, 6}
+  
+//--- USB OTG Observe Register
+  OBSERVE @ro 0x4007_2104 $uint8 {DPPU, DPPD, 1, DMPD, 4}
+  
+//--- USB OTG Control Register
+  CONTROL 0x4007_2108 $uint8 {3, DPPULLNONOTG, 4}
+
+//--- USB Transceiver Control Register 0
+  USBTRC0 0x4007_210C $uint8 {USBRESET, 1, USBRESMEM, 3, SYNC_DET, USB_RESUME_INT}
+  
+//--- Frame Adjust Register
+  USBFRMADJUST 0x4007_2114 $uint8
+}
+
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Chapter 47: General-Purpose Input/Output (GPIO)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 registers GPIOA {
   PDOR @user 0x400FF000 $uint32 // Port Data Output Register
   PSOR @user 0x400FF004 $uint32 // Port Set Output Register
