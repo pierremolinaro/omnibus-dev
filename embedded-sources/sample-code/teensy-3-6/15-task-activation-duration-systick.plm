@@ -1,0 +1,63 @@
+target "teensy-3-6/unprivileged"
+let F_CPU_MHZ = 240
+
+driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+driver myDriver ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func section activityLedOn @safe @exported () {
+  digital.write (!yes !toPort:.D13)
+}
+
+func section activityLedOff @safe @exported () {
+  digital.write (!no !toPort:.D13)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let LED_L0 = $digitalPort.D3
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//
+driver myDriver > time {
+  var tick = $uint32 ()
+
+  public system section noteTick () {
+    self.tick = SYST:CVR
+  } 
+
+  public system section getDuration () -> $uint32 {
+    result = self.tick - SYST:CVR
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sync s = $semaphore (!value:0)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche0 @priority 0 @stacksize 512 {
+
+  setup 1000 {
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+    s.wait ()
+    let duration = myDriver.getDuration ()
+    lcd.print (!u32:duration)
+  }
+}
+  
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche1 @priority 1 @stacksize 512 {
+
+  setup 1000 {
+    myDriver.noteTick ()
+    s.signal ()
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

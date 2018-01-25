@@ -1,5 +1,4 @@
-target "teensy-3-6/unprivileged"
-let F_CPU_MHZ = 180
+target "teensy-3-1/unprivileged"
 
 driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
@@ -32,70 +31,6 @@ func section activityLedOff @safe @exported () {
 //   https://github.com/prof7bit/frdm-kl25z-minimal-usb-hid
 //   http://www.beyondlogic.org/usbnutshell/usb1.shtml
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// 1. La routine init du pilote est exécutée. Elle se termine par l'activation du pull-up sur D+. Ceci a pour
-//    conséquence que le host lance une commande d'initialisation qui déclenche une interruption
-// 2. L'interruption est du type 'RESET', et la routine configureEndPoint0OnReset effectue la configuration.
-// 3. Nouvelle interruption, du type 'TOKEN COMPLETED' -> on lance tokenCompleted (). Cette routine lit l'endPoint
-//    concerné, il s'agit du n°0. On exécute alors endpoint_0_handler ().
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-let DEVICE_DESCRIPTOR = $uint8 [18] (
-  !18 // Descriptor size in bytes
-  !1  // DEVICE constant
-  !0x00 !0x02 // USB specification release (BCD): 0x0200
-  !0x02 // Class code (2 -> communication)
-  !0    // Subclass code
-  !0    // Protocol code
-  !8    // Maximum packet size for endpoint0 (low-speed: 8, full-speed: 8, 16, 32, 64)
-  !0xAD !0xDE // Vendor ID:   0xDEAD
-  !0xAF !0xBE // Product ID : 0xBEAF
-  !0 !0 // Device release number (BCD)
-  !0 // Index of string descriptor for the manufacturer (0 -> no string)
-  !0 // Index of string descriptor for the product (0 -> no string)
-  !0 // Index of string descriptor for the serial umber (0 -> no string)
-  !1 // Number of possible configurations
-)
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-let CONFIG_DESCRIPTOR = $uint8 [32] (
-//--- Configuration descriptor
-  !9  // Configuration descriptor size in bytes
-  !2  // CONFIGURATION constant
-  !32 !0 // The number of bytes in the configuration descriptor and all its subordinate descriptors
-  !1 // Number of interfaces in the configuration (should be ≥ 1)
-  !1 // Identifier for Set_Configuration and Get_Configuration (should be ≥ 1)
-  !0 // Index of string descriptor for the configuration (0 -> no string)
-  !0 // Device is bus-powered (bit 6=1 --> self powered)
-  !100 / 2 // Half of bus current required, in milli-amperes (50 --> 100 mA)
-//--- Subordinate descriptor: INTERFACE association
-  !9  // Interface descriptor size in bytes
-  !4  // INTERFACE constant
-  !0  // Number identifying this interface
-  !0  // Value used to select an alternate setting (0: no alternate setting)
-  !2  // Number of endpoints supported (not counting endpoint 0)
-  !0x0A // Class code (0x0A --> Data Interface of Communication Device Class)
-  !0x00 // Subclass code
-  !0  // Interface Protocol
-  !0  // Index of string descriptor for the interface (0 --> no string)
-//--- Subordinate descriptor: ENDPOINT association
-  !7  // Endpoint descriptor size in bytes
-  !5  // ENDPOINT constant
-  !1  // ENDPOINT number and direction (bit 7=0 --> OUT)
-  !0x02 // Transfer type (0x02 --> BULK)
-  !64 !0 // Maximum packet size (0 à 1024); here: 64
-  !0  // Maximulm latency / polling interval / NAK rate [ignored for bulk and control transfers]
-//--- Subordinate descriptor: ENDPOINT association
-  !7  // Endpoint descriptor size in bytes
-  !5  // ENDPOINT constant
-  !1 | 0x80  // ENDPOINT number and direction (bit 7=1 --> IN)
-  !0x02 // Transfer type (0x02 --> BULK)
-  !64 !0 // Maximum packet size (0 à 1024); here: 64
-  !0  // Maximulm latency / polling interval / NAK rate [ignored for bulk and control transfers]
-)
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let NUM_ENDPOINTS = 4
 let LED_L1 = $digitalPort.D4
@@ -118,7 +53,7 @@ let BDT_DTS   = 0x08
 let BDT_STALL = 0x04
 //let BDT_PID(n) (((n) >> 2) & 15)
 
-let EP0_RX_SIZE = 8
+let EP0_SIZE = 64
 
 func BDT_DESC (?count $uint32 ?data $uint1) -> $uint32 {
   result = BDT_OWN | BDT_DTS | (count << 16) | if data ≠ 0 {BDT_DATA1} else {BDT_DATA0}
@@ -143,8 +78,8 @@ driver usb_device > digital {
 // Descriptor table should be aligned on a 512 byte-boudary
   var descriptorTable @align 512 = $bdt_t [(NUM_ENDPOINTS+1)*4] (!repeated:$bdt_t ())
 
-  var ep0_rx0_buf @align 4 = $uint8 [EP0_RX_SIZE] (!repeated:0)
-  var ep0_rx1_buf @align 4 = $uint8 [EP0_RX_SIZE] (!repeated:0)
+  var ep0_rx0_buf @align 4 = $uint8 [EP0_SIZE] (!repeated:0)
+  var ep0_rx1_buf @align 4 = $uint8 [EP0_SIZE] (!repeated:0)
   var ep0_tx_bdt_bank $uint32 = 0
 
   var état = $uint4 [TRACE_SIZE] (!repeated:0)
@@ -155,10 +90,6 @@ driver usb_device > digital {
   }
   
   var trace $uint32 = 0 
-
-  public system section lireTrace () -> $uint32 {
-    result = self.trace
-  }
   
   public system section lireAddresseUSB () -> $uint32 {
     result = extend (USB0:ADDR)
@@ -174,12 +105,12 @@ driver usb_device > digital {
   // This basically follows the flowchart in the Kinetis Quick Reference User Guide, Rev. 3, 05/2014, page 134
   //-- Assume 48 MHz clock already running
     SIM:SCGC4 |= {SIM:SCGC4 !USBOTG:1} // SIM - enable clock
-    MPU:RGDAAC [0] |= {MPU:RGDAAC !M4RE:1 !M4WE:1}
+//    MPU:RGDAAC [0] |= {MPU:RGDAAC !M4RE:1 !M4WE:1}
   //--- If using IRC48M, turn on the USB clock recovery hardware
-    if @static (F_CPU_MHZ == 180) or (F_CPU_MHZ == 216) {
-      USB0:CLK_RECOVER_IRC_EN = {USB0:CLK_RECOVER_IRC_EN !IRC_EN:1 !REG_EN:1}
-      USB0:CLK_RECOVER_CTRL = {USB0:CLK_RECOVER_CTRL !CLOCK_RECOVER_EN:1 !RESTART_IFRTRIM_EN:1}
-    }
+//    if @static (F_CPU_MHZ == 180) or (F_CPU_MHZ == 216) {
+//      USB0:CLK_RECOVER_IRC_EN = {USB0:CLK_RECOVER_IRC_EN !IRC_EN:1 !REG_EN:1}
+//      USB0:CLK_RECOVER_CTRL = {USB0:CLK_RECOVER_CTRL !CLOCK_RECOVER_EN:1 !RESTART_IFRTRIM_EN:1}
+//    }
   //--- Reset USB module (SB0:USBTRC0:USBRESET is always read as 0. Wait 2 USB clock cycles after setting this bit)
     USB0:USBTRC0 |= {USB0:USBTRC0 !USBRESET:1} // Page 1516
     while USB0:USBTRC0:USBRESET ≠ 0 {} // wait for reset to end
@@ -199,19 +130,18 @@ driver usb_device > digital {
   //-- Enable reset interrupt
     USB0:INTEN = {USB0:INTEN !USBRSTEN:1}
   //-- Enable interrupt in NVIC
-    enable (!interrupt: .USBFS_OTG)
+    enable (!interrupt: .USBOTG)
   //--- Enable d+ pullup
     USB0:CONTROL = {USB0:CONTROL !DPPULLNONOTG:1} // Page 1515
   }
 
   //····················································································································
   
-  interrupt section USBFS_OTG {
+  interrupt section USBOTG {
     let status = USB0:ISTAT
 
   //-------------------- RESET: configure Endpoint 0
     if (status & {USB0:ISTAT !USBRST:1}) ≠ 0 {
-      self.trace |= 1
 //      self.état [self.indexÉtat] = 1
 //      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
       self.configureEndPoint0OnReset ()
@@ -226,7 +156,6 @@ driver usb_device > digital {
   
     //-------------------- TOKEN COMPLETED
       if (status & {USB0:ISTAT !TOKDNE:1}) ≠ 0 { // Page 1502
-        self.trace |= 2
   //        digital.write (!yes !toPort:LED_L2)
   //        self.état [self.indexÉtat] = 3
   //        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
@@ -267,9 +196,9 @@ driver usb_device > digital {
       USB0:CTL |= {USB0:CTL !ODDRST:1}
       self.ep0_tx_bdt_bank = 0
    //--- Set up buffers to receive Setup and OUT packets
-      self.descriptorTable [index(!0 !RX !EVEN)].desc = BDT_DESC (!EP0_RX_SIZE  !0)
+      self.descriptorTable [index(!0 !RX !EVEN)].desc = BDT_DESC (!EP0_SIZE  !0)
       self.descriptorTable [index(!0 !RX !EVEN)].addr = addressof (self.ep0_rx0_buf)
-      self.descriptorTable [index(!0 !RX !ODD) ].desc = BDT_DESC (!EP0_RX_SIZE !0)
+      self.descriptorTable [index(!0 !RX !ODD) ].desc = BDT_DESC (!EP0_SIZE !0)
       self.descriptorTable [index(!0 !RX !ODD) ].addr = addressof (self.ep0_rx1_buf)
       self.descriptorTable [index(!0 !TX !EVEN)].desc = 0
       self.descriptorTable [index(!0 !TX !ODD) ].desc = 0
@@ -311,29 +240,9 @@ driver usb_device > digital {
   func section tokenCompleted @mutating () {
     let transactionStatus = USB0:STAT
     let endPoint $uint4 = transactionStatus [4...7]
-    let TX_transitionStatus = transactionStatus [3...3]
-    let ODD_transitionStatus = transactionStatus [2...2]
-    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))
-   //--- Get TOK_PID
-     let TOK_PID = self.descriptorTable [index].desc [2...5]
-//     let TOK_PID = self.ep0_rx0_buf [0] [2...5]
-     self.trace |= (extend $uint32 (TOK_PID)) << 8
-   //--- 
-     if TOK_PID == 0x09 { // IN_TOKEN: transfer device --> host
-     }else if TOK_PID == 0x01 { // OUT_TOKEN: transfer host --> device
-     }else if TOK_PID == 0x0D { // SETUP_TOKEN: transfer host --> device
-       let bmRequestType = self.ep0_rx0_buf [0]
-       self.trace |= (extend $uint32 (bmRequestType)) << 12
-       if bmRequestType == 0 { // setup device
-         self.setupDevice ()
-       }else if bmRequestType == 1 { // setup interface
-
-       }else if bmRequestType == 2 { // setup end point
-
-       }
-       USB0:CTL = {USB0:CTL !USBENOFEN:1}
-     }
-   //---
+//    let TX_transitionStatus = transactionStatus [3...3]
+//    let ODD_transitionStatus = transactionStatus [2...2]
+//    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))
     if endPoint == 0 {
       self.endpoint_0_handler (!transactionStatus)
     }else{
@@ -359,22 +268,7 @@ driver usb_device > digital {
 
   //····················································································································
   
-  func section setupDevice @mutating () {
-    self.trace |= 8
-    let bRequest = self.ep0_rx0_buf [1]
-    if bRequest == 6 { // mGET_DESC
-    
-    }else if bRequest == 5 { // mSET_ADDRESS
-    
-    }else if bRequest == 9 { // mSET_CONFIG
-    
-    }
-  }
-
-  //····················································································································
-  
   func section endpoint_0_handler @mutating (?transactionStatus $uint8) {
-    self.trace |= 4 
   }
 
   //····················································································································
@@ -514,8 +408,7 @@ task T @priority 0 @stacksize 512 {
     }
     lcd.goto (!line:1 !column:0)
     lcd.print (!hex8:usb_device.lireAddresseUSB ())
-    lcd.goto (!line:2 !column:0)
-    lcd.print (!hex8:usb_device.lireTrace ())
+    
   } 
 
   //····················································································································

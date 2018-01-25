@@ -1,0 +1,89 @@
+target "teensy-3-6/unprivileged"
+let F_CPU_MHZ = 240
+let BUS_MHZ2 @display = BUS_MHZ
+
+driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+driver timer ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func section activityLedOn @safe @exported () {
+  digital.write (!yes !toPort:.D13)
+}
+
+func section activityLedOff @safe @exported () {
+  digital.write (!no !toPort:.D13)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let LED_L0 = $digitalPort.D3
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver timer > root {
+  var tick = $uint64 ()
+
+  init {
+  //--- Power on PIT
+    SIM:SCGC6 |= {SIM:SCGC6 !PIT:1}
+   //--- Enable PIT module
+    PIT:MCR = 0
+  //--- Disable PIT0 and PIT1
+    PIT:TCTRL [0] = 0
+    PIT:TCTRL [1] = 0
+  //--- PIT0 clock frequency is BUS_MHZ (in MHz)
+    PIT:LDVAL [0] = $uint32.max
+    PIT:LDVAL [1] = $uint32.max
+  //--- Enable PIT0 and PIT1 : start counting, no interrupt
+    PIT:TCTRL [1] = {PIT:TCTRL !CHN:1 !TEN:1}
+    PIT:TCTRL [0] = {PIT:TCTRL !TEN:1}
+  }
+  
+  public system section setTick () {
+    self.tick = self.now ()
+  } 
+
+  public system section getTick () -> $uint64 {
+    result = self.tick
+  } 
+
+  public system section now () -> $uint64 {
+    result = extend (PIT:LTMR64H)
+    result <<= 32
+    result |= extend (PIT:LTMR64L)
+    result = ~ result
+    result +%= 1
+  } 
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sync s = $semaphore (!value:0)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche0 @priority 0 @stacksize 512 {
+  var compteur $uint32 = 0
+
+  setup 1000 {
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+    s.wait ()
+    let duration = ((timer.now () - timer.getTick ()) * 1000) / BUS_MHZ
+    lcd.print (!u64:duration)
+  }
+}
+  
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche1 @priority 1 @stacksize 512 {
+
+  setup 1000 {
+    timer.setTick ()
+    s.signal ()
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
