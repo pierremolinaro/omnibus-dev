@@ -46,6 +46,7 @@ enum @controlRegisterBitSlice {
 
 class @controlRegisterGroupDeclarationAST  : @abstractDeclarationAST {
   @lstring mRegisterGroupName
+  @lbigint mRegisterGroupBaseAddress
   @controlRegisterDeclarationList mRegisters
 }
 
@@ -60,6 +61,7 @@ syntax extension plm_syntax {
   rule <declaration> ?!@ast ioAST {
     $registers$
     $identifier$ ?let registerGroupName
+    $integer$ ?let @lbigint registerGroupBaseAddress
     ${$
     @controlRegisterDeclarationList controlRegisterDeclarationList = {}
     repeat
@@ -98,7 +100,11 @@ syntax extension plm_syntax {
       let endOfBitSlice = @location.here
       controlRegisterDeclarationList += !registerDeclarationList !registerTypeName !registerBitSliceList !endOfBitSlice
     end
-    ioAST.mDeclarationListAST += !@controlRegisterGroupDeclarationAST.new {!registerGroupName !controlRegisterDeclarationList}
+    ioAST.mDeclarationListAST += !@controlRegisterGroupDeclarationAST.new {
+      !registerGroupName
+      !registerGroupBaseAddress
+      !controlRegisterDeclarationList
+    }
     $}$
   }
 
@@ -393,6 +399,7 @@ private proc buildControlRegisterSliceMap
 #·······················································································································
 
 method @controlRegisterDeclarationList-element enterInContext
+  ?let @bigint inRegisterGroupBaseAddress
   ?!context:@semanticContext ioContext
   ?!@controlRegisterMap ioControlRegisterMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -437,15 +444,16 @@ method @controlRegisterDeclarationList-element enterInContext
       !errorLocation:register.mRegisterAddressLocation
       !context:ioContext
       !?staticEntityMap:ioStaticEntityMap
-      ?result:let @objectIR addressExpressionResult
+      ?result:let @objectIR addressOffsetExpressionResult
     ]
     @bigint registerAddress
-    if not [addressExpressionResult isLiteralInteger] then
+    if not [addressOffsetExpressionResult isLiteralInteger] then
       error register.mRegisterAddressLocation
-        : "control register address is not a static integer expression"
+        : "control register address offset is not a static integer expression"
         : registerAddress
     else
-      [addressExpressionResult literalInteger ?1* ?value:registerAddress]
+      [addressOffsetExpressionResult literalInteger ?1* ?value:let registerAddressOffset]
+      registerAddress = inRegisterGroupBaseAddress + registerAddressOffset
    #--- Check address value
       if registerAddress > maxRegisterAddress then
         error register.mRegisterAddressLocation
@@ -540,7 +548,12 @@ override method @controlRegisterGroupDeclarationAST enterInContext
 {
   @controlRegisterMap controlRegisterMap = {}
   for reg in mRegisters do
-    [reg enterInContext !?context:ioContext !?controlRegisterMap !?staticEntityMap:ioStaticEntityMap]
+    [reg enterInContext
+      !mRegisterGroupBaseAddress.bigint
+      !?context:ioContext
+      !?controlRegisterMap
+      !?staticEntityMap:ioStaticEntityMap
+    ]
   end
   [!?ioContext.mControlRegisterGroupMap insertKey !mRegisterGroupName !controlRegisterMap]
   [!?ioContext.mValuedObjectMap insertRegisterGroup !mRegisterGroupName !controlRegisterMap]
@@ -550,12 +563,21 @@ override method @controlRegisterGroupDeclarationAST enterInContext
 #!  BUILD HTML FILE                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+sortedlist @controlRegisterByAddress {
+  @bigint mAddress
+  @string mHTML
+}{
+  mAddress <
+}
+
+#·······················································································································
+
 proc buildControlRegisterMapHTMLFile
   ?let @controlRegisterGroupMap inControlRegisterGroupMap
   ?sourceFile:let @lstring inSourceFile
 {
-#------------------------------------ Build an HTML file that contains all declared constants
-  let @string typeDumpFilePath = inSourceFile.string + ".control-registers.html"
+#------------------------------- Build an HTML file that contains all declared control registers, ordered by names
+  @string typeDumpFilePath = inSourceFile.string + ".control-registers-by-names.html"
   if [option plm_options.writeControlRegisterHTMLDumpFile value] then
     @stringset firstLetterSet = {}
     for () in inControlRegisterGroupMap do
@@ -567,7 +589,7 @@ proc buildControlRegisterMapHTMLFile
     for () group_ in inControlRegisterGroupMap do
       controlRegisterCount = controlRegisterCount + [group_mControlRegisterMap count]
       for () type_ in group_mControlRegisterMap do
-        let registerName = group_lkey.string + "." + type_lkey
+        let registerName = group_lkey.string + ":" + type_lkey
         if currentFirstLetter != [registerName characterAtIndex !0] then
           currentFirstLetter = [registerName characterAtIndex !0]
           tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
@@ -576,17 +598,72 @@ proc buildControlRegisterMapHTMLFile
           tableOfTypeString += linkForControlRegister (!registerName) + "<br>"
         else
           for i in 0 ..< type_mArraySize do
-            tableOfTypeString += linkForControlRegister (!registerName + " [" + i + "]") + "<br/>"
+            tableOfTypeString += linkForControlRegister (!registerName + " [" + i + "]")
           end
         end
       end
     end
-    let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dump
+    let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByName
       ![inSourceFile lastPathComponent]
       !controlRegisterCount
       !inControlRegisterGroupMap
       !firstLetterSet
       !tableOfTypeString
+    ]
+    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+  else
+    [@string deleteFileIfExists !typeDumpFilePath]
+  end
+#------------------------------- Build an HTML file that contains all declared control registers, ordered by address
+  typeDumpFilePath = inSourceFile.string + ".control-registers-by-address.html"
+  if [option plm_options.writeControlRegisterHTMLDumpFile value] then
+    @controlRegisterByAddress controlRegisterByAddress = {}
+    @uint controlRegisterCount = 0
+    for () group_ in inControlRegisterGroupMap do
+      controlRegisterCount = controlRegisterCount + [group_mControlRegisterMap count]
+      for () reg_ in group_mControlRegisterMap do
+        if reg_mArraySize == 0 then
+          var s = "<tr class=\"result_line\"><td>"
+            + group_lkey.string + ":" + reg_lkey
+            + "</td><td class=\"address\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+            + [reg_mAddress hexString] + "</td><td>"
+          if [reg_mControlRegisterFieldList length] > 0 then
+            s += "<table class=\"fields\">"
+              + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) +  "</tr>"
+              + "<tr>"
+            for > () in reg_mControlRegisterFieldList do
+              s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
+            end
+            s += "</tr></table>"
+          end  
+          s += "</td></tr>\n"
+          controlRegisterByAddress += !reg_mAddress !s
+        else
+          for () in arrayIndexListFor (!size:reg_mArraySize) do
+            let address = reg_mAddress + mValue * reg_mElementArraySize
+            var s = "<tr class=\"result_line\"><td>"
+              + group_lkey.string + ":" + reg_lkey + "[" + [mValue string] + "]"
+              +"</td><td class=\"address\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+              + [address hexString]
+              + "</td><td>"
+            if [reg_mControlRegisterFieldList length] > 0 then
+              s += "<table class=\"fields\">"
+                + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) + "</tr><tr>"
+              for > () in reg_mControlRegisterFieldList do
+                s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
+              end
+              s += "</tr></table>"
+            end  
+            s += "</td></tr>\n"
+            controlRegisterByAddress += !reg_mAddress !s
+          end
+        end
+      end
+    end
+    let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByAddress
+      ![inSourceFile lastPathComponent]
+      !controlRegisterCount
+      !controlRegisterByAddress
     ]
     [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
   else
@@ -599,12 +676,17 @@ proc buildControlRegisterMapHTMLFile
 filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" {
 }{
 }{
-  template dump "controlRegisterDump.html.galgasTemplate"
+  template dumpByName "controlRegisterByNameDump.html.galgasTemplate"
     ?@string PROJECT_NAME
     ?@uint CONTROL_REGISTER_COUNT
     ?@controlRegisterGroupMap CONTROL_REGISTER_GROUP_MAP
     ?@stringset FIRST_LETTER_SET
     ?@string TABLE_OF_TYPES_STRING
+
+  template dumpByAddress "controlRegisterByAddressDump.html.galgasTemplate"
+    ?@string PROJECT_NAME
+    ?@uint CONTROL_REGISTER_COUNT
+    ?@controlRegisterByAddress CONTROL_REGISTER_SORTED_BY_ADDRESS
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

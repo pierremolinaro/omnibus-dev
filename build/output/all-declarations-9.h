@@ -197,27 +197,29 @@ extern const cDirectoryWrapper gWrapperDirectory_0_controlRegisterDumpGeneration
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Filewrapper template 'controlRegisterDumpGenerationTemplate dump'                          *
+//                       Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByName'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dump (class C_Compiler * inCompiler,
-                                                                              const class GALGAS_string & in_PROJECT_5F_NAME,
-                                                                              const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
-                                                                              const class GALGAS_controlRegisterGroupMap & in_CONTROL_5F_REGISTER_5F_GROUP_5F_MAP,
-                                                                              const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
-                                                                              const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
-                                                                              COMMA_LOCATION_ARGS) ;
+GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByName (class C_Compiler * inCompiler,
+                                                                                    const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                                    const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
+                                                                                    const class GALGAS_controlRegisterGroupMap & in_CONTROL_5F_REGISTER_5F_GROUP_5F_MAP,
+                                                                                    const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                                    const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'linkForControlRegister'                                          *
+//                     Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByAddress'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_linkForControlRegister (const class GALGAS_string & constinArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAddress (class C_Compiler * inCompiler,
+                                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                                       const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
+                                                                                       const class GALGAS_controlRegisterByAddress & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS
+                                                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -238,6 +240,16 @@ class GALGAS_uintlist function_arrayIndexListFor (const class GALGAS_uint & cons
 class GALGAS_string function_fieldIndexColumns (const class GALGAS_uint & constinArgument0,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'linkForControlRegister'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_linkForControlRegister (const class GALGAS_string & constinArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

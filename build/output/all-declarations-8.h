@@ -185,6 +185,7 @@ class cPtr_infixObjectObjectOperatorDescription : public cPtr_infixOperatorDescr
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionMethod_enterInContext (const class GALGAS_controlRegisterDeclarationList_2D_element inObject,
+                                     const class GALGAS_bigint constin_inRegisterGroupBaseAddress,
                                      class GALGAS_semanticContext & io_ioContext,
                                      class GALGAS_controlRegisterMap & io_ioControlRegisterMap,
                                      class GALGAS_staticEntityMap & io_ioStaticEntityMap,

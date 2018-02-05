@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Control Registers of %!PROJECT_NAME%</title>
+<style type="text/css">body {
+  font-size: small ;
+}
+
+h1 {
+  text-align: center ;
+}
+
+.selecteur {
+  color:green ;
+}
+
+a.header_link {
+  background-color: #FFFFCC ;
+}
+
+a:visited, a:link, a:active{
+  color: blue ;
+  text-decoration: underline ;
+}
+
+a:hover {
+  color:green ;
+  background-color: #FFFF00 ;
+  text-decoration: none ;
+}
+
+table.result {
+  border: 1px solid #666666 ;
+}
+
+table.fields {
+  border-collapse: collapse ;
+  border-spacing: 1px 1px;
+}
+
+td.fields {
+  border: 1px solid #333333 ;
+  text-align: center ;
+  padding : 4px ;
+}
+
+td.result_title {
+  font-weight: bold ;
+  text-align: center ;
+  background-color: yellow ;
+}
+
+td.address {
+  font-family: Courier ;
+}
+
+tr.result_line {
+  background-color: #EEEEEE ;
+}
+
+</style>
+</head>
+<body>
+<div>
+<h1>Control Registers of %!PROJECT_NAME%</h1>
+<p>This document lists all %![CONTROL_REGISTER_COUNT string]% defined control registers, sorted by address.</p>
+<table class="result">
+<tr><td class="result_title">Control Register Name</td><td class="result_title">PLM Type</td><td class="result_title">Address</td><td class="result_title">Value</td></tr>\n%
+for () in CONTROL_REGISTER_SORTED_BY_ADDRESS do
+  !mHTML
+end%
+</table>
+</div>
+</body>
+</html>
