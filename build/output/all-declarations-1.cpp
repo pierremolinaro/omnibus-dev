@@ -8525,6 +8525,299 @@ GALGAS_controlRegisterGroupMap GALGAS_controlRegisterGroupMap::extractObject (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Class for element of '@controlRegisterByAddress' sorted list                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cSortedListElement_controlRegisterByAddress : public cSortedListElement {
+  public : GALGAS_controlRegisterByAddress_2D_element mObject ;
+
+//--- Constructor
+  public : cSortedListElement_controlRegisterByAddress (const GALGAS_bigint & in_mAddress,
+                                                        const GALGAS_string & in_mHTML
+                                                        COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cSortedListElement * copy (void) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Description
+ public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+
+//--- Virtual method that comparing element for sorting
+  public : virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cSortedListElement_controlRegisterByAddress::cSortedListElement_controlRegisterByAddress (const GALGAS_bigint & in_mAddress,
+                                                                                          const GALGAS_string & in_mHTML
+                                                                                          COMMA_LOCATION_ARGS) :
+cSortedListElement (THERE),
+mObject (in_mAddress, in_mHTML) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cSortedListElement_controlRegisterByAddress::isValid (void) const {
+  return mObject.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cSortedListElement * cSortedListElement_controlRegisterByAddress::copy (void) {
+  cSortedListElement * result = NULL ;
+  macroMyNew (result, cSortedListElement_controlRegisterByAddress (mObject.mProperty_mAddress, mObject.mProperty_mHTML COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cSortedListElement_controlRegisterByAddress::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mAddress" ":" ;
+  mObject.mProperty_mAddress.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mHTML" ":" ;
+  mObject.mProperty_mHTML.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cSortedListElement_controlRegisterByAddress::compare (const cCollectionElement * inOperand) const {
+  cSortedListElement_controlRegisterByAddress * operand = (cSortedListElement_controlRegisterByAddress *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_controlRegisterByAddress) ;
+  return mObject.objectCompare (operand->mObject) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterByAddress::GALGAS_controlRegisterByAddress (void) :
+AC_GALGAS_sortedlist () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cSortedListElement_controlRegisterByAddress::compareForSorting (const cSortedListElement * inOperand) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cSortedListElement_controlRegisterByAddress * operand = (const cSortedListElement_controlRegisterByAddress *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_controlRegisterByAddress) ;
+  if (result == kOperandEqual) {
+    result = mObject.mProperty_mAddress.objectCompare (operand->mObject.mProperty_mAddress) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterByAddress GALGAS_controlRegisterByAddress::constructor_emptySortedList (LOCATION_ARGS) {
+  GALGAS_controlRegisterByAddress result ;
+  result.createNewEmptySortedList (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterByAddress GALGAS_controlRegisterByAddress::constructor_sortedListWithValue (const GALGAS_bigint & inOperand0,
+                                                                                                  const GALGAS_string & inOperand1
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterByAddress result = constructor_emptySortedList (THERE) ;
+  cSortedListElement * p = NULL ;
+  macroMyNew (p, cSortedListElement_controlRegisterByAddress (inOperand0, inOperand1 COMMA_THERE)) ;
+  capSortedListElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  result.appendObject (attributes) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterByAddress::addAssign_operation (const GALGAS_bigint & inOperand0,
+                                                           const GALGAS_string & inOperand1
+                                                           COMMA_LOCATION_ARGS) {
+  if (isValid ()) {
+    cSortedListElement * p = NULL ;
+    macroMyNew (p, cSortedListElement_controlRegisterByAddress (inOperand0, inOperand1 COMMA_THERE)) ;
+    capSortedListElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    appendObject (attributes) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterByAddress::plusAssign_operation (const GALGAS_controlRegisterByAddress inOperand,
+                                                            C_Compiler * /* inCompiler */
+                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  if (isValid ()) {
+    appendSortedList (inOperand) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterByAddress::setter_popSmallest (GALGAS_bigint & outOperand0,
+                                                          GALGAS_string & outOperand1,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  capSortedListElement attributes ;
+  removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_controlRegisterByAddress * p = (cSortedListElement_controlRegisterByAddress *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_controlRegisterByAddress) ;
+    outOperand0 = p->mObject.mProperty_mAddress ;
+    outOperand1 = p->mObject.mProperty_mHTML ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterByAddress::setter_popGreatest (GALGAS_bigint & outOperand0,
+                                                          GALGAS_string & outOperand1,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  capSortedListElement attributes ;
+  removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_controlRegisterByAddress * p = (cSortedListElement_controlRegisterByAddress *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_controlRegisterByAddress) ;
+    outOperand0 = p->mObject.mProperty_mAddress ;
+    outOperand1 = p->mObject.mProperty_mHTML ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterByAddress::method_smallest (GALGAS_bigint & outOperand0,
+                                                       GALGAS_string & outOperand1,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
+  capSortedListElement attributes ;
+  smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_controlRegisterByAddress * p = (cSortedListElement_controlRegisterByAddress *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_controlRegisterByAddress) ;
+    outOperand0 = p->mObject.mProperty_mAddress ;
+    outOperand1 = p->mObject.mProperty_mHTML ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_controlRegisterByAddress::method_greatest (GALGAS_bigint & outOperand0,
+                                                       GALGAS_string & outOperand1,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
+  capSortedListElement attributes ;
+  greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
+  cSortedListElement_controlRegisterByAddress * p = (cSortedListElement_controlRegisterByAddress *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cSortedListElement_controlRegisterByAddress) ;
+    outOperand0 = p->mObject.mProperty_mAddress ;
+    outOperand1 = p->mObject.mProperty_mHTML ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_controlRegisterByAddress::cEnumerator_controlRegisterByAddress (const GALGAS_controlRegisterByAddress & inEnumeratedObject,
+                                                                            const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterByAddress_2D_element cEnumerator_controlRegisterByAddress::current (LOCATION_ARGS) const {
+  const cSortedListElement_controlRegisterByAddress * p = (const cSortedListElement_controlRegisterByAddress *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_controlRegisterByAddress) ;
+  return p->mObject ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint cEnumerator_controlRegisterByAddress::current_mAddress (LOCATION_ARGS) const {
+  const cSortedListElement_controlRegisterByAddress * p = (const cSortedListElement_controlRegisterByAddress *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_controlRegisterByAddress) ;
+  return p->mObject.mProperty_mAddress ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string cEnumerator_controlRegisterByAddress::current_mHTML (LOCATION_ARGS) const {
+  const cSortedListElement_controlRegisterByAddress * p = (const cSortedListElement_controlRegisterByAddress *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_controlRegisterByAddress) ;
+  return p->mObject.mProperty_mHTML ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @controlRegisterByAddress type                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_controlRegisterByAddress ("controlRegisterByAddress",
+                                                 NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_controlRegisterByAddress::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterByAddress ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_controlRegisterByAddress::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_controlRegisterByAddress (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterByAddress GALGAS_controlRegisterByAddress::extractObject (const GALGAS_object & inObject,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterByAddress result ;
+  const GALGAS_controlRegisterByAddress * p = (const GALGAS_controlRegisterByAddress *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_controlRegisterByAddress *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterByAddress", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Abstract extension method '@expressionAST addDependenceEdgeForStaticExpression'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14796,415 +15089,6 @@ GALGAS_extendStaticListExpressionAST GALGAS_extendStaticListExpressionAST::extra
       result = *p ;
     }else{
       inCompiler->castError ("extendStaticListExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Class for element of '@extendStaticArrayDeclarationAST' list                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cCollectionElement_extendStaticArrayDeclarationAST : public cCollectionElement {
-  public : GALGAS_extendStaticArrayDeclarationAST_2D_element mObject ;
-
-//--- Constructor
-  public : cCollectionElement_extendStaticArrayDeclarationAST (const GALGAS_lstring & in_mStaticListName,
-                                                               const GALGAS_extendStaticListElementListAST & in_mExpressions
-                                                               COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
-
-//--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cCollectionElement_extendStaticArrayDeclarationAST::cCollectionElement_extendStaticArrayDeclarationAST (const GALGAS_lstring & in_mStaticListName,
-                                                                                                        const GALGAS_extendStaticListElementListAST & in_mExpressions
-                                                                                                        COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (in_mStaticListName, in_mExpressions) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cCollectionElement_extendStaticArrayDeclarationAST::isValid (void) const {
-  return mObject.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cCollectionElement * cCollectionElement_extendStaticArrayDeclarationAST::copy (void) {
-  cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_extendStaticArrayDeclarationAST (mObject.mProperty_mStaticListName, mObject.mProperty_mExpressions COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cCollectionElement_extendStaticArrayDeclarationAST::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mStaticListName" ":" ;
-  mObject.mProperty_mStaticListName.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mExpressions" ":" ;
-  mObject.mProperty_mExpressions.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cCollectionElement_extendStaticArrayDeclarationAST::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_extendStaticArrayDeclarationAST * operand = (cCollectionElement_extendStaticArrayDeclarationAST *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_extendStaticArrayDeclarationAST) ;
-  return mObject.objectCompare (operand->mObject) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST::GALGAS_extendStaticArrayDeclarationAST (void) :
-AC_GALGAS_list () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST::GALGAS_extendStaticArrayDeclarationAST (const capCollectionElementArray & inSharedArray) :
-AC_GALGAS_list (inSharedArray) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST GALGAS_extendStaticArrayDeclarationAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_extendStaticArrayDeclarationAST  (capCollectionElementArray ()) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST GALGAS_extendStaticArrayDeclarationAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                                          const GALGAS_extendStaticListElementListAST & inOperand1
-                                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_extendStaticArrayDeclarationAST result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_extendStaticArrayDeclarationAST (capCollectionElementArray ()) ;
-    capCollectionElement attributes ;
-    GALGAS_extendStaticArrayDeclarationAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
-    result.appendObject (attributes) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_extendStaticArrayDeclarationAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                                        const GALGAS_lstring & in_mStaticListName,
-                                                                        const GALGAS_extendStaticListElementListAST & in_mExpressions
-                                                                        COMMA_LOCATION_ARGS) {
-  cCollectionElement_extendStaticArrayDeclarationAST * p = NULL ;
-  macroMyNew (p, cCollectionElement_extendStaticArrayDeclarationAST (in_mStaticListName,
-                                                                     in_mExpressions COMMA_THERE)) ;
-  outAttributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_extendStaticArrayDeclarationAST::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                                                  const GALGAS_extendStaticListElementListAST & inOperand1
-                                                                  COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_extendStaticArrayDeclarationAST (inOperand0, inOperand1 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    appendObject (attributes) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_extendStaticArrayDeclarationAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                                   const GALGAS_extendStaticListElementListAST inOperand1,
-                                                                   const GALGAS_uint inInsertionIndex,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_extendStaticArrayDeclarationAST (inOperand0, inOperand1 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_extendStaticArrayDeclarationAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                                   GALGAS_extendStaticListElementListAST & outOperand1,
-                                                                   const GALGAS_uint inRemoveIndex,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  if (isValid () && inRemoveIndex.isValid ()) {
-    capCollectionElement attributes ;
-    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_extendStaticArrayDeclarationAST * p = (cCollectionElement_extendStaticArrayDeclarationAST *) attributes.ptr () ;
-    if (NULL == p) {
-      outOperand0.drop () ;
-      outOperand1.drop () ;
-    }else{
-      macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-      outOperand0 = p->mObject.mProperty_mStaticListName ;
-      outOperand1 = p->mObject.mProperty_mExpressions ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_extendStaticArrayDeclarationAST::setter_popFirst (GALGAS_lstring & outOperand0,
-                                                              GALGAS_extendStaticListElementListAST & outOperand1,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticArrayDeclarationAST * p = (cCollectionElement_extendStaticArrayDeclarationAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-    outOperand0 = p->mObject.mProperty_mStaticListName ;
-    outOperand1 = p->mObject.mProperty_mExpressions ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_extendStaticArrayDeclarationAST::setter_popLast (GALGAS_lstring & outOperand0,
-                                                             GALGAS_extendStaticListElementListAST & outOperand1,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticArrayDeclarationAST * p = (cCollectionElement_extendStaticArrayDeclarationAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-    outOperand0 = p->mObject.mProperty_mStaticListName ;
-    outOperand1 = p->mObject.mProperty_mExpressions ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_extendStaticArrayDeclarationAST::method_first (GALGAS_lstring & outOperand0,
-                                                           GALGAS_extendStaticListElementListAST & outOperand1,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticArrayDeclarationAST * p = (cCollectionElement_extendStaticArrayDeclarationAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-    outOperand0 = p->mObject.mProperty_mStaticListName ;
-    outOperand1 = p->mObject.mProperty_mExpressions ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_extendStaticArrayDeclarationAST::method_last (GALGAS_lstring & outOperand0,
-                                                          GALGAS_extendStaticListElementListAST & outOperand1,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticArrayDeclarationAST * p = (cCollectionElement_extendStaticArrayDeclarationAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-    outOperand0 = p->mObject.mProperty_mStaticListName ;
-    outOperand1 = p->mObject.mProperty_mExpressions ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST GALGAS_extendStaticArrayDeclarationAST::add_operation (const GALGAS_extendStaticArrayDeclarationAST & inOperand,
-                                                                                              C_Compiler * /* inCompiler */
-                                                                                              COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_extendStaticArrayDeclarationAST result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST GALGAS_extendStaticArrayDeclarationAST::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) const {
-  GALGAS_extendStaticArrayDeclarationAST result = GALGAS_extendStaticArrayDeclarationAST::constructor_emptyList (THERE) ;
-  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST GALGAS_extendStaticArrayDeclarationAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) const {
-  GALGAS_extendStaticArrayDeclarationAST result = GALGAS_extendStaticArrayDeclarationAST::constructor_emptyList (THERE) ;
-  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST GALGAS_extendStaticArrayDeclarationAST::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                                                      C_Compiler * inCompiler
-                                                                                                      COMMA_LOCATION_ARGS) const {
-  GALGAS_extendStaticArrayDeclarationAST result = GALGAS_extendStaticArrayDeclarationAST::constructor_emptyList (THERE) ;
-  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_extendStaticArrayDeclarationAST::plusAssign_operation (const GALGAS_extendStaticArrayDeclarationAST inOperand,
-                                                                   C_Compiler * /* inCompiler */
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  appendList (inOperand) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_extendStaticArrayDeclarationAST::getter_mStaticListNameAtIndex (const GALGAS_uint & inIndex,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticArrayDeclarationAST * p = (cCollectionElement_extendStaticArrayDeclarationAST *) attributes.ptr () ;
-  GALGAS_lstring result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-    result = p->mObject.mProperty_mStaticListName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticListElementListAST GALGAS_extendStaticArrayDeclarationAST::getter_mExpressionsAtIndex (const GALGAS_uint & inIndex,
-                                                                                                          C_Compiler * inCompiler
-                                                                                                          COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticArrayDeclarationAST * p = (cCollectionElement_extendStaticArrayDeclarationAST *) attributes.ptr () ;
-  GALGAS_extendStaticListElementListAST result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-    result = p->mObject.mProperty_mExpressions ;
-  }
-  return result ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_extendStaticArrayDeclarationAST::cEnumerator_extendStaticArrayDeclarationAST (const GALGAS_extendStaticArrayDeclarationAST & inEnumeratedObject,
-                                                                                          const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST_2D_element cEnumerator_extendStaticArrayDeclarationAST::current (LOCATION_ARGS) const {
-  const cCollectionElement_extendStaticArrayDeclarationAST * p = (const cCollectionElement_extendStaticArrayDeclarationAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-  return p->mObject ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_extendStaticArrayDeclarationAST::current_mStaticListName (LOCATION_ARGS) const {
-  const cCollectionElement_extendStaticArrayDeclarationAST * p = (const cCollectionElement_extendStaticArrayDeclarationAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-  return p->mObject.mProperty_mStaticListName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticListElementListAST cEnumerator_extendStaticArrayDeclarationAST::current_mExpressions (LOCATION_ARGS) const {
-  const cCollectionElement_extendStaticArrayDeclarationAST * p = (const cCollectionElement_extendStaticArrayDeclarationAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_extendStaticArrayDeclarationAST) ;
-  return p->mObject.mProperty_mExpressions ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @extendStaticArrayDeclarationAST type                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_extendStaticArrayDeclarationAST ("extendStaticArrayDeclarationAST",
-                                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_extendStaticArrayDeclarationAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_extendStaticArrayDeclarationAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_extendStaticArrayDeclarationAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_extendStaticArrayDeclarationAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extendStaticArrayDeclarationAST GALGAS_extendStaticArrayDeclarationAST::extractObject (const GALGAS_object & inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_extendStaticArrayDeclarationAST result ;
-  const GALGAS_extendStaticArrayDeclarationAST * p = (const GALGAS_extendStaticArrayDeclarationAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_extendStaticArrayDeclarationAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("extendStaticArrayDeclarationAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

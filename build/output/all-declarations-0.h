@@ -3061,7 +3061,8 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_controlRegisterGroupDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                   const class GALGAS_controlRegisterDeclarationList & inOperand1
+                                                                                   const class GALGAS_lbigint & inOperand1,
+                                                                                   const class GALGAS_controlRegisterDeclarationList & inOperand2
                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3073,6 +3074,8 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mRegisterGroupBaseAddress (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterGroupName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterDeclarationList getter_mRegisters (LOCATION_ARGS) const ;
@@ -3262,10 +3265,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterDecl
 class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mRegisterGroupName ;
+  public : GALGAS_lbigint mProperty_mRegisterGroupBaseAddress ;
   public : GALGAS_controlRegisterDeclarationList mProperty_mRegisters ;
 
 //--- Constructor
   public : cPtr_controlRegisterGroupDeclarationAST (const GALGAS_lstring & in_mRegisterGroupName,
+                                                    const GALGAS_lbigint & in_mRegisterGroupBaseAddress,
                                                     const GALGAS_controlRegisterDeclarationList & in_mRegisters
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -3274,6 +3279,7 @@ class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationA
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterGroupName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mRegisterGroupBaseAddress (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_controlRegisterDeclarationList getter_mRegisters (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
