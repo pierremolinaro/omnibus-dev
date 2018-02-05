@@ -67,7 +67,14 @@ void enterOptions (NSMutableArray * ioBoolOptionArray,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const UInt16 * gPopUpData_plm_5F_lexique [1] = {
+static const UInt16 gPopUpData_plm_5F_lexique_200 [4] = {
+  1, // Leading character count to strip
+  plm_lexique_1_commentMark, 48,
+  0
+} ;
+
+static const UInt16 * gPopUpData_plm_5F_lexique [2] = {
+  gPopUpData_plm_5F_lexique_200,
   NULL
 } ;
 

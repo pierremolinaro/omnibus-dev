@@ -88,6 +88,9 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique__22_string_22_ = "a liter
 //--- Syntax error message for terminal '$comment$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_comment = "a comment" ;
 
+//--- Syntax error message for terminal '$commentMark$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_commentMark = "a comment" ;
+
 //--- Syntax error message for terminal '$?selector:$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique__3F_selector_3A_ = "the '\?' or '\?selector:' delimitor" ;
 
@@ -421,14 +424,15 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique__3E__3E__3D_ = "the '>>='
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
   C_String result = "<unknown>" ;
-  if ((inTerminalIndex >= 0) && (inTerminalIndex < 116)) {
-    static const char * syntaxErrorMessageArray [116] = {kEndOfSourceLexicalErrorMessage,
+  if ((inTerminalIndex >= 0) && (inTerminalIndex < 117)) {
+    static const char * syntaxErrorMessageArray [117] = {kEndOfSourceLexicalErrorMessage,
         gSyntaxErrorMessage_plm_5F_lexique_identifier,
         gSyntaxErrorMessage_plm_5F_lexique__40_attribute,
         gSyntaxErrorMessage_plm_5F_lexique__24_type,
         gSyntaxErrorMessage_plm_5F_lexique_integer,
         gSyntaxErrorMessage_plm_5F_lexique__22_string_22_,
         gSyntaxErrorMessage_plm_5F_lexique_comment,
+        gSyntaxErrorMessage_plm_5F_lexique_commentMark,
         gSyntaxErrorMessage_plm_5F_lexique__3F_selector_3A_,
         gSyntaxErrorMessage_plm_5F_lexique__3F__21_selector_3A_,
         gSyntaxErrorMessage_plm_5F_lexique__21_selector_3A_,
@@ -745,6 +749,14 @@ static const utf32 kUnicodeString_plm_5F_lexique__2F_ [] = {
 static const utf32 kUnicodeString_plm_5F_lexique__2F__2F_ [] = {
   TO_UNICODE ('/'),
   TO_UNICODE ('/'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$_2F__2F__21_$'
+static const utf32 kUnicodeString_plm_5F_lexique__2F__2F__21_ [] = {
+  TO_UNICODE ('/'),
+  TO_UNICODE ('/'),
+  TO_UNICODE ('!'),
   TO_UNICODE (0)
 } ;
 
@@ -1646,6 +1658,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("comment") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
+    case kToken_commentMark:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("commentMark") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken__3F_selector_3A_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("\?selector:") ;
@@ -2362,6 +2379,15 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
         }else{
           lexicalError (gLexicalMessage_plm_5F_lexique_incorrectStringEnd COMMA_LINE_AND_SOURCE_FILE) ;
         }
+      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__2F__2F__21_, 3, true)) {
+        do {
+          if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE ('\t')) || testForInputUTF32Char (TO_UNICODE ('\v')) || testForInputUTF32Char (TO_UNICODE ('\f')) || testForInputUTF32CharRange (TO_UNICODE (14), TO_UNICODE (65533))) {
+          }else{
+            mLoop = false ;
+          }
+        }while (mLoop) ;
+        mLoop = true ;
+        enterDroppedTerminal (kToken_commentMark) ;
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__2F__2F_, 2, true)) {
         do {
           if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE ('\t')) || testForInputUTF32Char (TO_UNICODE ('\v')) || testForInputUTF32Char (TO_UNICODE ('\f')) || testForInputUTF32CharRange (TO_UNICODE (14), TO_UNICODE (65533))) {
@@ -2729,6 +2755,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("integer") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("\"string\"") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("comment") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("commentMark") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("\?selector:") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("\?!selector:") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("!selector:") COMMA_THERE) ;
@@ -2979,13 +3006,14 @@ __attribute__ ((unused)) (getKeywordLists_plm_5F_lexique, getKeywordsForIdentifi
 //---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [116] = {0,
+  static const uint32_t kTerminalSymbolStyles [117] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1__40_attribute */,
     3 /* plm_lexique_1__24_type */,
     4 /* plm_lexique_1_integer */,
     5 /* plm_lexique_1__22_string_22_ */,
     6 /* plm_lexique_1_comment */,
+    6 /* plm_lexique_1_commentMark */,
     8 /* plm_lexique_1__3F_selector_3A_ */,
     8 /* plm_lexique_1__3F__21_selector_3A_ */,
     8 /* plm_lexique_1__21_selector_3A_ */,

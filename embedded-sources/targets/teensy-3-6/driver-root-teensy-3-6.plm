@@ -443,7 +443,6 @@ driver root {
       !USBSRC:1
       !PLLFLLSEL:SIM_SOPT2_PLLFLLSEL
       !TRACECLKSEL:1
-      !CLKOUTSEL:6 // Selects the clock to output on the CLKOUT pin: OSCERCLK0 
     }
   }
 
