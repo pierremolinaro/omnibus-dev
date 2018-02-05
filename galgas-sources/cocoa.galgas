@@ -6,6 +6,7 @@ gui cocoa {
     fileExtension: "plm-target"
     title: "Source"
     blockComment : "//"
+    label * $commentMark$ (3, 0)
   }
 
   run : "-f"

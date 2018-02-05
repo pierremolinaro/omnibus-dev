@@ -1,8 +1,9 @@
 check target "teensy-3-6/unprivileged"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 12: Port control and interrupts (PORT) Pin Control registers n
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// chapter 11: Port control and interrupts (PORT) Pin Control registers n
 registers PORTA {
     PCR @user [32] 0x4004_9000 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
@@ -58,7 +59,7 @@ registers PORTE {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 13: System Integration Module (SIM)
+//! Chapter 13: System Integration Module (SIM)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers SIM {
@@ -245,7 +246,7 @@ registers SIM {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 13: Reset Control Module (RCM)
+//! Chapter 15: Reset Control Module (RCM)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers RCM {
@@ -257,7 +258,7 @@ registers RCM {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 14: System Mode Controller
+//! Chapter 16: System Mode Controller
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers SMC {
@@ -297,7 +298,7 @@ registers SMC {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 15: Power Management Controller
+//! Chapter 17: Power Management Controller
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers PMC {
@@ -324,7 +325,7 @@ registers PMC {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 16: Low-Leakage Wakeup Unit (LLWU)
+//! Chapter 18: Low-Leakage Wakeup Unit (LLWU)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers LLWU {
@@ -342,7 +343,7 @@ registers LLWU {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 17: Miscellaneous Control Module (MCM)
+//! Chapter 19: Miscellaneous Control Module (MCM)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers MCM {
@@ -362,7 +363,7 @@ registers MCM {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 20: Crossbar Switch (AXBS)
+//! Chapter 20: Crossbar Switch (AXBS)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers AXBS {
@@ -408,7 +409,55 @@ registers AXBS {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 22: Memory Protection Unit
+//! Chapter 21: Peripheral Bridge (AIPS-Lite)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+registers AIPS0 {
+  MPRA 0x_4000_0000 $uint32
+  
+  //--- AICS0_PACR (§4.5.1 and §19.2, §19.2.2)
+  // SPx: Determines whether the peripheral requires supervisor privilege level
+  // for accesses. When this field is set, the master privilege level must indicate
+  // the supervisor access attribute, and the MPR x [MPL n ] control field for the
+  // master must be set. If not, access terminates with an error response and no
+  // peripheral access initiates. 
+  // 0  This peripheral does not require supervisor privilege level for accesses.    // 1  This peripheral requires supervisor privilege level for accesses.    // WPx: Determines whether the peripheral allows write accessses. When this field
+  // is set and a write access is attempted, access terminates with an error
+  // response and no peripheral access initiates
+  // 0  This peripheral allows write accesses.    // 1  This peripheral is write protected.    // TPx : Determines whether the peripheral allows accesses from an untrusted master.
+  // When this bit is set and an access is attempted by an untrusted master, the 
+  // access terminates with an error response and no peripheral access initiates.
+  // 0  Accesses from an untrusted master are allowed.    // 1  Accesses from an untrusted master are not allowed.    
+  PACRA 0x_4000_0020
+  PACRB 0x_4000_0024
+  PACRC 0x_4000_0028
+  PACRD 0x_4000_002C
+  PACRE 0x_4000_0040
+  PACRF 0x_4000_0044
+  PACRG 0x_4000_0048
+  PACRH 0x_4000_004C
+  PACRI 0x_4000_0050
+  PACRJ 0x_4000_0054
+  PACRK 0x_4000_0058
+  PACRL 0x_4000_005C
+  PACRM 0x_4000_0060
+  PACRN 0x_4000_0064
+  PACRO 0x_4000_0068
+  PACRP 0x_4000_006C
+  $uint32 {
+   1, SP0, WP0, TP0,
+   1, SP1, WP1, TP1,
+   1, SP2, WP2, TP2,
+   1, SP3, WP3, TP3,
+   1, SP4, WP4, TP4,
+   1, SP5, WP5, TP5,
+   1, SP6, WP6, TP6,
+   1, SP7, WP7, TP7
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 22: Memory Protection Unit
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers MPU {
@@ -421,7 +470,7 @@ registers MPU {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 23: Direct Memory Access Multiplexer (DMAMUX)
+//! Chapter 23: Direct Memory Access Multiplexer (DMAMUX)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let DMA_CHANNEL_COUNT = 32
@@ -507,9 +556,9 @@ let DMAMUX_SOURCE_ALWAYS2 $uint6 = 62
 let DMAMUX_SOURCE_ALWAYS3 $uint6 = 63
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 24: Direct Memory Access Controller (eDMA)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// Chapter 21: Direct Memory Access Controller (eDMA)
-  
 let DMA_TCD_ATTR_SIZE_8BIT   $uint4 = 0
 let DMA_TCD_ATTR_SIZE_16BIT  $uint4 = 1
 let DMA_TCD_ATTR_SIZE_32BIT  $uint4 = 2
@@ -661,17 +710,18 @@ registers DMA {
   }
 }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 25: External Watchdog Monitor (EWM)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 22: External Watchdog Monitor (EWM)
 //registers EWM_CTRL  *(volatile $uint8_t  *)0x40061000 // Control Register
 //registers EWM_SERV  *(volatile $uint8_t  *)0x40061001 // Service Register
 //registers EWM_CMPL  *(volatile $uint8_t  *)0x40061002 // Compare Low Register
 //registers EWM_CMPH  *(volatile $uint8_t  *)0x40061003 // Compare High Register
 
-
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 26: Watchdog Timer (WDOG)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// Chapter 23: Watchdog Timer (WDOG)
 registers WDOG {
   STCTRLH 0x40052000 $uint16 { // Watchdog Status and Control registers High
     1,
@@ -710,8 +760,9 @@ let WDOG_UNLOCK_SEQ1 $uint16   = 0xC520
 let WDOG_UNLOCK_SEQ2 $uint16   = 0xD928
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 27: Multipurpose Clock Generator (MCG)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// Chapter 24: Multipurpose Clock Generator (MCG)
 registers MCG {
   C1 0x40064000 $uint8 { // MCG Control 1 Register
     CLKS:2, // Clock Source Select, Selects the clock source for MCGOUTCLK
@@ -779,9 +830,7 @@ registers MCG {
     FCRDIV:3, // Fast Clock Internal Reference Divider
     LOCS0 // OSC0 Loss of Clock Status
   }
-  
-  
-  
+
   ATCVH 0x4006400A $uint8 // MCG Auto Trim Compare Value High Register
   ATCVL 0x4006400B $uint8 // MCG Auto Trim Compare Value Low Register
   C7    0x4006400C $uint8 // MCG Control 7 Register
@@ -789,8 +838,9 @@ registers MCG {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 28: Oscillator (OSC)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// Chapter 25: Oscillator (OSC)
 registers OSC {
   CR 0x40065000 $uint8 {// OSC Control Register
     ERCLKEN, // External Reference Enable, Enables external reference clock (OSCERCLK)
@@ -807,8 +857,9 @@ registers OSC {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 30: Local Memory Controller
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// Local Memory Controller
 registers LMEM {
   PCCCR 0xE008_2000 $uint32 { // Cache control register
     GO,
@@ -831,8 +882,9 @@ registers LMEM {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 31: Flash Memory Controller (FMC)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 27: Flash Memory Controller (FMC)
 registers FMC {
   PFAPR     0x4001F000 $uint32 // Flash Access Protection
   PFB0CR    0x4001F004 $uint32 // Flash Control
@@ -855,8 +907,9 @@ registers FMC {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 32: Flash Memory Module (FTFL)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 28: Flash Memory Module (FTFL)
 //registers FTFL_FST *(volatile $uint8_t  *)0x40020000      // Flash Status Register
 //registers FTFL_FSTAT_CCIF   ($uint8_t)0x80   // Command Complete Interrupt Flag
 //registers FTFL_FSTAT_RDCOLERR  ($uint8_t)0x40   // Flash Read Collision Error Flag
@@ -893,8 +946,9 @@ registers FMC {
 //registers FTFL_FDPROT  *(volatile $uint8_t  *)0x40020017      // Data Flash Protection Register
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 36: Cyclic Redundancy Check (CRC)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// Chapter 30: Cyclic Redundancy Check (CRC)
 registers CRC {
   CRC   0x40032000 $uint32 // CRC Data register
   GPOLY 0x40032004 $uint32 // CRC Polynomial register
@@ -902,8 +956,9 @@ registers CRC {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 39: Analog-to-Digital Converter (ADC)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// Chapter 31: Analog-to-Digital Converter (ADC)
 registers ADC0 {
   SC1A   0x4003B000
   SC1B   0x4003B004 $uint32  {// ADC status and control registers 1
@@ -1056,6 +1111,30 @@ registers ADC1 {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 40: Comparator (CMP)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+registers CMP0 {
+  CR0   0x40073000 $uint8 // CMP Control registers 0
+  CR1   0x40073001 $uint8 // CMP Control registers 1
+  FPR   0x40073002 $uint8 // CMP Filter Period Register
+  SCR   0x40073003 $uint8 // CMP Status and Control Register
+  DACCR 0x40073004 $uint8 // DAC Control Register
+  MUXCR 0x40073005 $uint8 // MUX Control Register
+}
+
+registers CMP1 {
+  CR0   0x40073008 $uint8 // CMP Control registers 0
+  CR1   0x40073009 $uint8 // CMP Control registers 1
+  FPR   0x4007300A $uint8 // CMP Filter Period Register
+  SCR   0x4007300B $uint8 // CMP Status and Control Register
+  DACCR 0x4007300C $uint8 // DAC Control Register
+  MUXCR 0x4007300D $uint8 // MUX Control Register
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 41: 12-bit Digital-to-Analog Converter (DAC)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers DAC0 {
   DAT0L 0x400CC000 $uint8 // DAC Data Low registers 
@@ -1123,29 +1202,7 @@ registers DAC0 {
 ////registers MCG_C2_LOCRE0   ($uint8_t)0x80   // Loss of Clock Reset Enable, Determines whether an interrupt or a reset request is made following a loss of OSC0 
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 32: Comparator (CMP)
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-registers CMP0 {
-  CR0   0x40073000 $uint8 // CMP Control registers 0
-  CR1   0x40073001 $uint8 // CMP Control registers 1
-  FPR   0x40073002 $uint8 // CMP Filter Period Register
-  SCR   0x40073003 $uint8 // CMP Status and Control Register
-  DACCR 0x40073004 $uint8 // DAC Control Register
-  MUXCR 0x40073005 $uint8 // MUX Control Register
-}
-
-registers CMP1 {
-  CR0   0x40073008 $uint8 // CMP Control registers 0
-  CR1   0x40073009 $uint8 // CMP Control registers 1
-  FPR   0x4007300A $uint8 // CMP Filter Period Register
-  SCR   0x4007300B $uint8 // CMP Status and Control Register
-  DACCR 0x4007300C $uint8 // DAC Control Register
-  MUXCR 0x4007300D $uint8 // MUX Control Register
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 33: Voltage Reference (VREFV1)
+//! Chapter 42: Voltage Reference (VREFV1)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers VREF {
@@ -1154,7 +1211,51 @@ registers VREF {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 34: Programmable Delay Block (PDB)
+//! Chapter 43: Timer / PWM Module (TPM)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+registers TPM1 {
+  SC      0x400C_9000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD:2, PS:3}
+  CNT     0x400C_9004 $uint32 {16, COUNT:16}
+  MOD     0x400C_9008 $uint32 {16, MOD:16}
+  C0SC    0x400C_900C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C0V     0x400C_9010 $uint32 {16, VAL:16}
+  C1SC    0x400C_9014 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C1V     0x400C_9018 $uint32 {16, VAL:16}
+  STATUS  0x400C_9050 $uint32 {23, TOF, 6, CH1F, CH0F}
+  COMBINE 0x400C_9064 $uint32 {30, COMSWAP0, COMBINE0}
+  POL     0x400C_9070 $uint32 {30, POL1, POL0}
+  FILTER  0x400C_9078 $uint32 {24, CH1FVAL :4, CH0FVAL :4}
+  QDCTRL  0x400C_9080 $uint32 {28, QUADMODE, QUADIR, TOFDIR, QUADEN}
+  CONF    0x400C_9084 $uint32 {
+    4, TRGSEL :4, TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,
+    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE:2, DOZEEN, 5
+  }
+}
+
+//······················································································································
+
+registers TPM2 {
+  SC      0x400C_A000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD:2, PS:3}
+  CNT     0x400C_A004 $uint32 {16, COUNT:16}
+  MOD     0x400C_A008 $uint32 {16, MOD:16}
+  C0SC    0x400C_A00C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C0V     0x400C_A010 $uint32 {16, VAL:16}
+  C1SC    0x400C_A014 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C1V     0x400C_A018 $uint32 {16, VAL:16}
+  STATUS  0x400C_A050 $uint32 {23, TOF, 6, CH1F, CH0F}
+  COMBINE 0x400C_A064 $uint32 {30, COMSWAP0, COMBINE0}
+  POL     0x400C_A070 $uint32 {30, POL1, POL0}
+  FILTER  0x400C_A078 $uint32 {24, CH1FVAL :4, CH0FVAL :4}
+  QDCTRL  0x400C_A080 $uint32 {28, QUADMODE, QUADIR, TOFDIR, QUADEN}
+  CONF    0x400C_A084 $uint32 {
+    4, TRGSEL :4, TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,
+    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE:2, DOZEEN, 5
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 44: Programmable Delay Block (PDB)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 //registers PDB0_SC    0x40036000 // Status and Control Register
@@ -1180,8 +1281,113 @@ registers VREF {
 //registers PDB0_POEN   0x40036190 // Pulse-Out n Enable Register
 //registers PDB0_PO0DLY   0x40036194 // Pulse-Out n Delay Register
 //registers PDB0_PO1DLY   0x40036198 // Pulse-Out n Delay Register
-//
-//// Chapter 35: FlexTimer Module (FTM)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 45: FlexTimer Module (FTM)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Base address
+//  FTM0: 0x4003_8000
+//  FTM1: 0x4003_9000
+//  FTM2: 0x4003_A000
+//  FTM3: 0x400B_9000 <--- CAUTION
+
+registers FTM {
+  SC [4] 0x4003_8000 @inc 0x1000 $uint32 {24, TOF, TOIE, CPWMS, CLKS:2, PS:3}
+
+  CNT [4] 0x4003_8004 @inc 0x1000 $uint32 {16, COUNT:16}
+
+  MOD [4] 0x4003_8008 @inc 0x1000 $uint32 {16, MOD:16}
+  
+  C0SC [4] 0x4003_800C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  
+  C0V  [4] 0x4003_8010 @inc 0x1000 $uint32 {16, VAL:16}
+  
+  C1SC [4] 0x4003_8014 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+
+  C1V  [4] 0x4003_8018 @inc 0x1000 $uint32 {16, VAL:16}
+
+  C2SC [4] 0x4003_801C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+
+  C2V  [4] 0x4003_8020 @inc 0x1000 $uint32 {16, VAL:16}
+
+  C3SC [4] 0x4003_8024 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+
+  C3V  [4] 0x4003_8028 @inc 0x1000 $uint32 {16, VAL:16}
+
+  C4SC [4] 0x4003_802C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+
+  C4V  [4] 0x4003_8030 @inc 0x1000 $uint32 {16, VAL:16}
+
+  C5SC [4] 0x4003_8034 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  
+  C5V  [4] 0x4003_8038 @inc 0x1000 $uint32 {16, VAL:16}
+
+  C6SC [4] 0x4003_803C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+
+  C6V  [4] 0x4003_8040 @inc 0x1000 $uint32 {16, VAL:16}
+
+  C7SC [4] 0x4003_8044 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+
+  C7V  [4] 0x4003_8048 @inc 0x1000 $uint32 {16, VAL:16}
+
+  STATUS [4] 0x4003_8050 @inc 0x1000 $uint32 {24, CH7F, CH6F, CH5F, CH4F, CH3F, CH2F, CH1F, CH0F}
+
+  MODE [4] 0x4003_8054 @inc 0x1000 $uint32 {24, FAULTIE, FAULTM:2, CAPTEST, PWMSYNC, WPDIS, INIT, FTMEN}
+
+  SYNC [4] 0x4003_8058 @inc 0x1000 $uint32 {24, SWSYNC, TRIG2, TRG1, TRIG0, SYNCHOM, REINIT, CNTMAX, CNTMIN}
+
+  OUTINIT [4] 0x4003_805C @inc 0x1000 $uint32 {24, CH7OI, CH6OI, CH5OI, CH4OI, CH3OI, CH2OI, CH1OI, CH0OI}
+
+  MASK [4] 0x4003_8060 @inc 0x1000 $uint32 {24, CH7OM, CH6OM, CH5OM, CH4OM, CH3OM, CH2OM, CH1OM, CH0OM}
+
+  COMBINE [4] 0x4003_8064 @inc 0x1000 $uint32 {
+    1, FAULTEN3, SYNCEN3, DTEN3, DECAP3, DECAPEN3, COMP3, COMBINE3,
+    1, FAULTEN2, SYNCEN2, DTEN2, DECAP2, DECAPEN2, COMP2, COMBINE2,
+    1, FAULTEN1, SYNCEN1, DTEN1, DECAP1, DECAPEN1, COMP1, COMBINE1,
+    1, FAULTEN0, SYNCEN0, DTEN0, DECAP0, DECAPEN0, COMP0, COMBINE0
+  }
+
+  DEADTIME [4] 0x4003_8068 @inc 0x1000 $uint32 {24, DTPS:2, DTVAL:6}
+
+  EXTTRIG [4] 0x4003_806C @inc 0x1000 $uint32 {
+    24, TRIGF, INITTRIGEN, CH1TRIG, CH0TRIG, CH5TRIG, CH4TRIG, CH3TRIG, CH2TRIG
+  }
+
+  POL [4] 0x4003_8070 @inc 0x1000 $uint32 {24, POL7, POL6, POL5, POL4, POL3, POL2, POL1, POL0}
+
+  FMS [4] 0x4003_8074 @inc 0x1000 $uint32 {24, FAULTF, WPEN, FAULTIN, 1, FAULTF3, FAULTF2, FAULTF1, FAULTF0}
+
+  FILTER [4] 0x4003_8078 @inc 0x1000 $uint32 {16, CH3FVAL:4, CH2FVAL:4, CH1FVAL:4, CH0FVAL:4}
+
+  FLTCTRL [4] 0x4003_807C @inc 0x1000 $uint32 {
+    20, FFVAL:4, FFLTR3EN, FFLTR2EN, FFLTR1EN, FFLTR0EN, FAULT3EN, FAULT2EN, FAULT1EN, FAULT0EN
+  }
+
+  QDCTRL [4] 0x4003_8080 @inc 0x1000 $uint32 {24, PHALTREN, PHBFLTREN, PHAPOL, PHBPOL, QUADMODE, QUADIR, TOFDIR, QUADEN}
+
+  CONF [4] 0x4003_8084 @inc 0x1000 $uint32 {21, GTBEOUT, GTBEEN, 1, BDMMODE:2, 1, NUMTOF:5}
+
+  FLTPOL [4] 0x4003_8088 @inc 0x1000 $uint32 {28, FLT3POL, FLT2POL, FLT1POL, FLT0POL}
+
+  SYNCCONF [4] 0x4003_808C @inc 0x1000 $uint32 {
+    11, HWSOC, HWINVC, HWOM, HWWRBUF, HWRSTCNT,
+    3, SWSOC, SWINVC, SWOM, SWWRBUF, SWRSTCNT, SYNCMODE, 1, SWOC, INVC, 1, CNTINC, 1, HWTRIGMODE
+  }
+
+  INVCTRL [4] 0x4003_8090 @inc 0x1000 $uint32 {28, INV3EN, INV2EN, INV1EN, INV0EN}
+
+  SWOCTRL [4] 0x4003_8094 @inc 0x1000 $uint32 {
+    16,
+    CH7OCV, CH6OCV, CH5OCV, CH4OCV, CH3OCV, CH2OCV, CH1OCV, CH0OCV,
+    CH7OC, CH6OC, CH5OC, CH4OC, CH3OC, CH2OC, CH1OC, CH0OC
+  }
+ 
+  PMWLOAD [4] 0x4003_8098 @inc 0x1000 $uint32 {
+    22, LDOK, 1, CH7SEL, CH6SEL, CH5SEL, CH4SEL, CH3SEL, CH2SEL, CH1SEL, CH0SEL
+  }
+
+}
+
 //registers FTM0_SC    0x40038000 // Status And Control
 //registers FTM_SC_TOF   0x80    // Timer Overflow Flag
 //registers FTM_SC_TOIE   0x40    // Timer Overflow Interrupt Enable
@@ -1296,53 +1502,8 @@ registers VREF {
 //registers FTM2_SWOCTRL   0x400B8094 // FTM Software Output Control
 //registers FTM2_PWMLOAD   0x400B8098 // FTM PWM Load
 
-
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 43: Timer / PWM Module (TPM)
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-registers TPM1 {
-  SC      0x400C_9000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD:2, PS:3}
-  CNT     0x400C_9004 $uint32 {16, COUNT:16}
-  MOD     0x400C_9008 $uint32 {16, MOD:16}
-  C0SC    0x400C_900C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
-  C0V     0x400C_9010 $uint32 {16, VAL:16}
-  C1SC    0x400C_9014 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
-  C1V     0x400C_9018 $uint32 {16, VAL:16}
-  STATUS  0x400C_9050 $uint32 {23, TOF, 6, CH1F, CH0F}
-  COMBINE 0x400C_9064 $uint32 {30, COMSWAP0, COMBINE0}
-  POL     0x400C_9070 $uint32 {30, POL1, POL0}
-  FILTER  0x400C_9078 $uint32 {24, CH1FVAL :4, CH0FVAL :4}
-  QDCTRL  0x400C_9080 $uint32 {28, QUADMODE, QUADIR, TOFDIR, QUADEN}
-  CONF    0x400C_9084 $uint32 {
-    4, TRGSEL :4, TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,
-    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE:2, DOZEEN, 5
-  }
-}
-
-//······················································································································
-
-registers TPM2 {
-  SC      0x400C_A000 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD:2, PS:3}
-  CNT     0x400C_A004 $uint32 {16, COUNT:16}
-  MOD     0x400C_A008 $uint32 {16, MOD:16}
-  C0SC    0x400C_A00C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
-  C0V     0x400C_A010 $uint32 {16, VAL:16}
-  C1SC    0x400C_A014 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
-  C1V     0x400C_A018 $uint32 {16, VAL:16}
-  STATUS  0x400C_A050 $uint32 {23, TOF, 6, CH1F, CH0F}
-  COMBINE 0x400C_A064 $uint32 {30, COMSWAP0, COMBINE0}
-  POL     0x400C_A070 $uint32 {30, POL1, POL0}
-  FILTER  0x400C_A078 $uint32 {24, CH1FVAL :4, CH0FVAL :4}
-  QDCTRL  0x400C_A080 $uint32 {28, QUADMODE, QUADIR, TOFDIR, QUADEN}
-  CONF    0x400C_A084 $uint32 {
-    4, TRGSEL :4, TRGSRC, TRGPOL, 2, CPOT, CROT, CSOO,
-    CSOT, 6, GTBEEN, GTBSYNC, DBGMODE:2, DOZEEN, 5
-  }
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 46: Periodic Interrupt Timer (PIT)
+//! Chapter 46: Periodic Interrupt Timer (PIT)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let PIT_COUNT = 4
@@ -1369,14 +1530,15 @@ registers PIT {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 47: Low-Power Timer (LPTMR)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 37: Low-Power Timer (LPTMR)
 //registers LPTMR0_CSR   0x40040000 // Low Power Timer Control Status Register
 //registers LPTMR0_PSR   0x40040004 // Low Power Timer Prescale Register
 //registers LPTMR0_CMR   0x40040008 // Low Power Timer Compare Register
 //registers LPTMR0_CNR   0x4004000C // Low Power Timer Counter Register
 //
-//// Chapter 38: Carrier Modulator Transmitter (CMT)
+////! Chapter 38: Carrier Modulator Transmitter (CMT)
 //registers CMT_CGH1  *(volatile $uint8_t  *)0x40062000 // CMT Carrier Generator High Data registers 1
 //registers CMT_CGL1  *(volatile $uint8_t  *)0x40062001 // CMT Carrier Generator Low Data registers 1
 //registers CMT_CGH2  *(volatile $uint8_t  *)0x40062002 // CMT Carrier Generator High Data registers 2
@@ -1391,7 +1553,7 @@ registers PIT {
 //registers CMT_DMA   *(volatile $uint8_t  *)0x4006200B // CMT Direct Memory Access Register
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 49: Real Time Clock (RTC)
+//! Chapter 49: Real Time Clock (RTC)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers RTC {
@@ -1424,7 +1586,7 @@ registers RTC {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 51: Universal Serial Bus Full Speed OTG Controller (USBFSOTG)
+//! Chapter 51: Universal Serial Bus Full Speed OTG Controller (USBFSOTG)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers USB0 {
@@ -1526,7 +1688,7 @@ registers USB0 {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 54: Universal Serial Bus OTG Controller (USBOTG)
+//! Chapter 54: Universal Serial Bus OTG Controller (USBOTG)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers USBHS {
@@ -1663,7 +1825,7 @@ registers USBHS {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Chapter 55: Universal Serial Bus 2.0 Integrated PHY
+//! Chapter 55: Universal Serial Bus 2.0 Integrated PHY
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers USBPHY {
@@ -1787,8 +1949,13 @@ registers USBPHY {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 56: FlexCAN
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 43: SPI (DSPI)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 57: Serial Peripheral Interface (SPI)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 //registers SPI0_MCR   0x4002C000 // DSPI Module Configuration Register
 //registers SPI_MCR_MSTR    0x80000000  // Master/Slave Mode Select
 //registers SPI_MCR_CONT_SCKE   0x40000000  // 
@@ -1877,8 +2044,9 @@ registers USBPHY {
 //registers SPI0  (*(SPI_t *)0x4002C000)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 58: Inter-Integrated Circuit (I2C)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 44: Inter-Integrated Circuit (I2C)
 //registers I2C0_A1   *(volatile $uint8_t  *)0x40066000 // I2C Address registers 1
 //registers I2C0_F   *(volatile $uint8_t  *)0x40066001 // I2C Frequency Divider register
 //registers I2C0_C1   *(volatile $uint8_t  *)0x40066002 // I2C Control registers 1
@@ -1928,8 +2096,9 @@ registers USBPHY {
 //registers I2C1_SLTL  *(volatile $uint8_t  *)0x4006700B // I2C SCL Low Timeout registers Low
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 59: Universal Asynchronous Receiver/Transmitter (UART)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 45: Universal Asynchronous Receiver/Transmitter (UART)
 //registers UART0_BDH  *(volatile $uint8_t  *)0x4006A000 // UART Baud Rate Registers: High
 //registers UART0_BDL  *(volatile $uint8_t  *)0x4006A001 // UART Baud Rate Registers: Low
 //registers UART0_C1  *(volatile $uint8_t  *)0x4006A002 // UART Control registers 1
@@ -2112,8 +2281,9 @@ registers USBPHY {
 //registers UART2_TIDT  *(volatile $uint8_t  *)0x4006C031 // UART CEA709.1-B Transmit Indeterminate Time
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 61: Integrated Interchip Sound (I2S) / Synchronous Audio Interface (SAI)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 46: Synchronous Audio Interface (SAI)
 //registers I2S0_TCSR   0x4002F000 // SAI Transmit Control Register
 //registers I2S_TCSR_TE    0x80000000 // Transmitter Enable
 //registers I2S_TCSR_STOPE    0x40000000 // Transmitter Enable in Stop mode
@@ -2225,8 +2395,9 @@ registers USBPHY {
 //registers I2S_MDR_DIVIDE(n)  ( (n & 0xfff))       // MCLK Divide
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 63: General-Purpose Input/Output (GPIO)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-// Chapter 47: General-Purpose Input/Output (GPIO)
 registers GPIOA {
   PDOR @user 0x400FF000 $uint32 // Port Data Output Register
   PSOR @user 0x400FF004 $uint32 // Port Set Output Register
@@ -2273,8 +2444,9 @@ registers GPIOE {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Chapter 64: Touch sense input (TSI)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//// Chapter 48: Touch sense input (TSI)
 //registers TSI0_GENCS   0x40045000 // General Control and Status Register
 //registers TSI_GENCS_LPCLKS   0x10000000  // 
 //registers TSI_GENCS_LPSCNITV(n)  (((n) & 15) << 24)  // 
@@ -2311,8 +2483,8 @@ registers GPIOE {
 //registers TSI0_THRESHOLD   0x40045120 // Low Power Channel Threshold Register
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 // Nested Vectored Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
  
 registers NVIC {
   ISER [4]  0xE000_E100 @inc 4 $uint32 // Interrupt Set-enable Registers
@@ -2325,8 +2497,9 @@ registers NVIC {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 //System Control Space (SCS), ARMv7 ref manual, B3.2, page 708
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 registers SCB {
   CPUID 0xE000_ED00 $uint32 // CPUID Base Register
 
@@ -2377,50 +2550,6 @@ registers SYST {
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-registers AIPS0 {
-  MPRA 0x_4000_0000 $uint32
-  
-  //--- AICS0_PACR (§4.5.1 and §19.2, §19.2.2)
-  // SPx: Determines whether the peripheral requires supervisor privilege level
-  // for accesses. When this field is set, the master privilege level must indicate
-  // the supervisor access attribute, and the MPR x [MPL n ] control field for the
-  // master must be set. If not, access terminates with an error response and no
-  // peripheral access initiates. 
-  // 0  This peripheral does not require supervisor privilege level for accesses.    // 1  This peripheral requires supervisor privilege level for accesses.    // WPx: Determines whether the peripheral allows write accessses. When this field
-  // is set and a write access is attempted, access terminates with an error
-  // response and no peripheral access initiates
-  // 0  This peripheral allows write accesses.    // 1  This peripheral is write protected.    // TPx : Determines whether the peripheral allows accesses from an untrusted master.
-  // When this bit is set and an access is attempted by an untrusted master, the 
-  // access terminates with an error response and no peripheral access initiates.
-  // 0  Accesses from an untrusted master are allowed.    // 1  Accesses from an untrusted master are not allowed.    
-  PACRA 0x_4000_0020
-  PACRB 0x_4000_0024
-  PACRC 0x_4000_0028
-  PACRD 0x_4000_002C
-  PACRE 0x_4000_0040
-  PACRF 0x_4000_0044
-  PACRG 0x_4000_0048
-  PACRH 0x_4000_004C
-  PACRI 0x_4000_0050
-  PACRJ 0x_4000_0054
-  PACRK 0x_4000_0058
-  PACRL 0x_4000_005C
-  PACRM 0x_4000_0060
-  PACRN 0x_4000_0064
-  PACRO 0x_4000_0068
-  PACRP 0x_4000_006C
-  $uint32 {
-   1, SP0, WP0, TP0,
-   1, SP1, WP1, TP1,
-   1, SP2, WP2, TP2,
-   1, SP3, WP3, TP3,
-   1, SP4, WP4, TP4,
-   1, SP5, WP5, TP5,
-   1, SP6, WP6, TP6,
-   1, SP7, WP7, TP7
-  }
-}
 
 //registers ARM_DEMCR   0xE000EDFC // Debug Exception and Monitor Control
 //registers ARM_DEMCR_TRCENA  (1 << 24)  // Enable debugging & monitoring blocks

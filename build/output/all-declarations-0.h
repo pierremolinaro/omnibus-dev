@@ -69,6 +69,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_integer,
    kToken__22_string_22_,
    kToken_comment,
+   kToken_commentMark,
    kToken__3F_selector_3A_,
    kToken__3F__21_selector_3A_,
    kToken__21_selector_3A_,
@@ -210,7 +211,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 115 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 116 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;

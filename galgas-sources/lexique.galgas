@@ -216,6 +216,13 @@ lexique plm_lexique {
   
   style commentStyle -> "Comments"
   $comment$ style commentStyle %nonAtomicSelection error message "a comment"
+  $commentMark$  style commentStyle %nonAtomicSelection error message "a comment"
+  rule "//!" {
+    repeat
+    while '\u0001' -> '\u0009' | '\u000B' | '\u000C' | '\u000E' -> '\uFFFD' :
+    end
+    drop $commentMark$
+  }
   rule "//" {
     repeat
     while '\u0001' -> '\u0009' | '\u000B' | '\u000C' | '\u000E' -> '\uFFFD' :
