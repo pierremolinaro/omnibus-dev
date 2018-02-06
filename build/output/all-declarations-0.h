@@ -1389,6 +1389,8 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_109 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_syntax_110 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -3060,9 +3062,8 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_controlRegisterGroupDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                   const class GALGAS_lbigint & inOperand1,
-                                                                                   const class GALGAS_controlRegisterDeclarationList & inOperand2
+  public : static class GALGAS_controlRegisterGroupDeclarationAST constructor_new (const class GALGAS_registerGroupListAST & inOperand0,
+                                                                                   const class GALGAS_controlRegisterDeclarationList & inOperand1
                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3074,9 +3075,7 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mRegisterGroupBaseAddress (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterGroupName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_registerGroupListAST getter_mRegisterGroupList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterDeclarationList getter_mRegisters (LOCATION_ARGS) const ;
 
@@ -3258,19 +3257,154 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterDecl
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             @registerGroupListAST list                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_registerGroupListAST : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public : GALGAS_registerGroupListAST (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public : GALGAS_registerGroupListAST (const capCollectionElementArray & inSharedArray) ;
+
+//--------------------------------- Element constructor
+  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                  const class GALGAS_lstring & in_mRegisterGroupName,
+                                                  const class GALGAS_lbigint & in_mRegisterGroupBaseAddress
+                                                  COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_registerGroupListAST extractObject (const GALGAS_object & inObject,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_registerGroupListAST constructor_emptyList (LOCATION_ARGS) ;
+
+  public : static class GALGAS_registerGroupListAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
+                                                                               const class GALGAS_lbigint & inOperand1
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_registerGroupListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
+                                                      const class GALGAS_lbigint & inOperand1
+                                                      COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public : VIRTUAL_IN_DEBUG GALGAS_registerGroupListAST add_operation (const GALGAS_registerGroupListAST & inOperand,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
+                                                       class GALGAS_lbigint constinArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
+                                                  class GALGAS_lbigint & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
+                                                 class GALGAS_lbigint & outArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
+                                                       class GALGAS_lbigint & outArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
+                                               class GALGAS_lbigint & outArgument1,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
+                                              class GALGAS_lbigint & outArgument1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mRegisterGroupBaseAddressAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterGroupNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_registerGroupListAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_registerGroupListAST getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                                     C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_registerGroupListAST getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_registerGroupListAST ;
+ 
+} ; // End of GALGAS_registerGroupListAST class
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Enumerator declaration                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumerator_registerGroupListAST : public cGenericAbstractEnumerator {
+  public : cEnumerator_registerGroupListAST (const GALGAS_registerGroupListAST & inEnumeratedObject,
+                                             const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_lstring current_mRegisterGroupName (LOCATION_ARGS) const ;
+  public : class GALGAS_lbigint current_mRegisterGroupBaseAddress (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_registerGroupListAST_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerGroupListAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                             Pointer class for @controlRegisterGroupDeclarationAST class                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mRegisterGroupName ;
-  public : GALGAS_lbigint mProperty_mRegisterGroupBaseAddress ;
+  public : GALGAS_registerGroupListAST mProperty_mRegisterGroupList ;
   public : GALGAS_controlRegisterDeclarationList mProperty_mRegisters ;
 
 //--- Constructor
-  public : cPtr_controlRegisterGroupDeclarationAST (const GALGAS_lstring & in_mRegisterGroupName,
-                                                    const GALGAS_lbigint & in_mRegisterGroupBaseAddress,
+  public : cPtr_controlRegisterGroupDeclarationAST (const GALGAS_registerGroupListAST & in_mRegisterGroupList,
                                                     const GALGAS_controlRegisterDeclarationList & in_mRegisters
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -3278,8 +3412,7 @@ class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationA
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterGroupName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mRegisterGroupBaseAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_registerGroupListAST getter_mRegisterGroupList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_controlRegisterDeclarationList getter_mRegisters (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

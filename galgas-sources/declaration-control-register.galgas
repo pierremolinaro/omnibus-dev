@@ -44,9 +44,15 @@ enum @controlRegisterBitSlice {
 
 #·······················································································································
 
-class @controlRegisterGroupDeclarationAST  : @abstractDeclarationAST {
+list @registerGroupListAST {
   @lstring mRegisterGroupName
   @lbigint mRegisterGroupBaseAddress
+}
+
+#·······················································································································
+
+class @controlRegisterGroupDeclarationAST  : @abstractDeclarationAST {
+  @registerGroupListAST mRegisterGroupList
   @controlRegisterDeclarationList mRegisters
 }
 
@@ -60,8 +66,14 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $registers$
-    $identifier$ ?let registerGroupName
-    $integer$ ?let @lbigint registerGroupBaseAddress
+    @registerGroupListAST registerGroupListAST = {}
+    repeat
+      $identifier$ ?let registerGroupName
+      $integer$ ?let @lbigint registerGroupBaseAddress
+      registerGroupListAST += !registerGroupName !registerGroupBaseAddress
+    while
+      $,$
+    end
     ${$
     @controlRegisterDeclarationList controlRegisterDeclarationList = {}
     repeat
@@ -101,8 +113,7 @@ syntax extension plm_syntax {
       controlRegisterDeclarationList += !registerDeclarationList !registerTypeName !registerBitSliceList !endOfBitSlice
     end
     ioAST.mDeclarationListAST += !@controlRegisterGroupDeclarationAST.new {
-      !registerGroupName
-      !registerGroupBaseAddress
+      !registerGroupListAST
       !controlRegisterDeclarationList
     }
     $}$
@@ -225,13 +236,13 @@ method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanti
 #·······················································································································
 
 override getter @controlRegisterGroupDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = registerGroupNameFromPLMname (!mRegisterGroupName)
+  outRepresentation = registerGroupNameFromPLMname (![mRegisterGroupList mRegisterGroupNameAtIndex !0])
 }
 
 #·······················································································································
 
 override getter @controlRegisterGroupDeclarationAST location -> @location {
-  result = mRegisterGroupName
+  result = [mRegisterGroupList mRegisterGroupNameAtIndex !0]
 }
 
 #·······················································································································
@@ -247,7 +258,7 @@ override method @controlRegisterGroupDeclarationAST addExtension
 #·······················································································································
 
 override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let nodeName = registerGroupNameFromPLMname (!mRegisterGroupName)
+  let nodeName = registerGroupNameFromPLMname (![mRegisterGroupList mRegisterGroupNameAtIndex !0])
 #--- Add node
   [!?ioGraph addNode !nodeName !self]
 #--- Add dependence definitions
@@ -546,17 +557,19 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
 {
-  @controlRegisterMap controlRegisterMap = {}
-  for reg in mRegisters do
-    [reg enterInContext
-      !mRegisterGroupBaseAddress.bigint
-      !?context:ioContext
-      !?controlRegisterMap
-      !?staticEntityMap:ioStaticEntityMap
-    ]
+  for group in mRegisterGroupList while @uint.errorCount == 0 do
+    @controlRegisterMap controlRegisterMap = {}
+    for reg in mRegisters do
+      [reg enterInContext
+        !group.mRegisterGroupBaseAddress.bigint
+        !?context:ioContext
+        !?controlRegisterMap
+        !?staticEntityMap:ioStaticEntityMap
+      ]
+    end
+    [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !controlRegisterMap]
+    [!?ioContext.mValuedObjectMap insertRegisterGroup !group.mRegisterGroupName !controlRegisterMap]
   end
-  [!?ioContext.mControlRegisterGroupMap insertKey !mRegisterGroupName !controlRegisterMap]
-  [!?ioContext.mValuedObjectMap insertRegisterGroup !mRegisterGroupName !controlRegisterMap]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -587,18 +600,19 @@ proc buildControlRegisterMapHTMLFile
     @char currentFirstLetter = ' '
     @uint controlRegisterCount = 0
     for () group_ in inControlRegisterGroupMap do
-      controlRegisterCount = controlRegisterCount + [group_mControlRegisterMap count]
-      for () type_ in group_mControlRegisterMap do
-        let registerName = group_lkey.string + ":" + type_lkey
+      for () reg_ in group_mControlRegisterMap do
+        let registerName = group_lkey.string + ":" + reg_lkey
         if currentFirstLetter != [registerName characterAtIndex !0] then
           currentFirstLetter = [registerName characterAtIndex !0]
           tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
         end
-        if type_mArraySize == 0 then
+        if reg_mArraySize == 0 then
+          controlRegisterCount = controlRegisterCount + 1
           tableOfTypeString += linkForControlRegister (!registerName) + "<br>"
         else
-          for i in 0 ..< type_mArraySize do
-            tableOfTypeString += linkForControlRegister (!registerName + " [" + i + "]")
+          controlRegisterCount = controlRegisterCount + reg_mArraySize
+          for i in 0 ..< reg_mArraySize do
+            tableOfTypeString += linkForControlRegister (!registerName + "[" + i + "]") + "<br>"
           end
         end
       end
@@ -620,12 +634,12 @@ proc buildControlRegisterMapHTMLFile
     @controlRegisterByAddress controlRegisterByAddress = {}
     @uint controlRegisterCount = 0
     for () group_ in inControlRegisterGroupMap do
-      controlRegisterCount = controlRegisterCount + [group_mControlRegisterMap count]
       for () reg_ in group_mControlRegisterMap do
         if reg_mArraySize == 0 then
-          var s = "<tr class=\"result_line\"><td>"
+          controlRegisterCount = controlRegisterCount + 1
+          var s = "<tr class=\"result_line\"><td class=\"name\">"
             + group_lkey.string + ":" + reg_lkey
-            + "</td><td class=\"address\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+            + "</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
             + [reg_mAddress hexString] + "</td><td>"
           if [reg_mControlRegisterFieldList length] > 0 then
             s += "<table class=\"fields\">"
@@ -639,11 +653,12 @@ proc buildControlRegisterMapHTMLFile
           s += "</td></tr>\n"
           controlRegisterByAddress += !reg_mAddress !s
         else
+          controlRegisterCount = controlRegisterCount + reg_mArraySize
           for () in arrayIndexListFor (!size:reg_mArraySize) do
             let address = reg_mAddress + mValue * reg_mElementArraySize
-            var s = "<tr class=\"result_line\"><td>"
+            var s = "<tr class=\"result_line\"><td class=\"name\">"
               + group_lkey.string + ":" + reg_lkey + "[" + [mValue string] + "]"
-              +"</td><td class=\"address\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+              +"</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
               + [address hexString]
               + "</td><td>"
             if [reg_mControlRegisterFieldList length] > 0 then
