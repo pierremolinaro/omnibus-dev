@@ -53,6 +53,17 @@ td.result_title {
 
 td.address {
   font-family: Courier ;
+  padding : 4px ;
+}
+
+td.name {
+  font-family: Courier ;
+  padding : 4px ;
+}
+
+td.type {
+  font-family: Courier ;
+  padding : 4px ;
 }
 
 tr.result_line {

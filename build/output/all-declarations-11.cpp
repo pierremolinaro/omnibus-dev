@@ -10,79 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Function 'routineMangledNameFromAST'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring function_routineMangledNameFromAST (const GALGAS_string & constinArgument_inReceiverTypeName,
-                                                   const GALGAS_lstring & constinArgument_inRoutineName,
-                                                   const GALGAS_routineFormalArgumentListAST & constinArgument_inFormalArgumentList,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring result_result ; // Returned variable
-  GALGAS_lstring temp_0 ;
-  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inReceiverTypeName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    temp_0 = constinArgument_inRoutineName ;
-  }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 102)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("context-routines.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 102)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("context-routines.galgas", 102)) ;
-  }
-  result_result = temp_0 ;
-  result_result.mProperty_string.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 104)) ;
-  cEnumerator_routineFormalArgumentListAST enumerator_4590 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
-  while (enumerator_4590.hasCurrentObject ()) {
-    result_result.mProperty_string.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_4590.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 106)).add_operation (enumerator_4590.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 106)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 106)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 106)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 106)) ;
-    enumerator_4590.gotoNextObject () ;
-  }
-  result_result.mProperty_string.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 108)) ;
-//---
-  return result_result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_routineMangledNameFromAST [4] = {
-  & kTypeDescriptor_GALGAS_string,
-  & kTypeDescriptor_GALGAS_lstring,
-  & kTypeDescriptor_GALGAS_routineFormalArgumentListAST,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_routineMangledNameFromAST (C_Compiler * inCompiler,
-                                                                          const cObjectArray & inEffectiveParameterArray,
-                                                                          const GALGAS_location & /* inErrorLocation */
-                                                                          COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  const GALGAS_lstring operand1 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
-                                                                 inCompiler
-                                                                 COMMA_THERE) ;
-  const GALGAS_routineFormalArgumentListAST operand2 = GALGAS_routineFormalArgumentListAST::extractObject (inEffectiveParameterArray.objectAtIndex (2 COMMA_HERE),
-                                                                                                           inCompiler
-                                                                                                           COMMA_THERE) ;
-  return function_routineMangledNameFromAST (operand0,
-                                             operand1,
-                                             operand2,
-                                             inCompiler
-                                             COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_routineMangledNameFromAST ("routineMangledNameFromAST",
-                                                                           functionWithGenericHeader_routineMangledNameFromAST,
-                                                                           & kTypeDescriptor_GALGAS_lstring,
-                                                                           3,
-                                                                           functionArgs_routineMangledNameFromAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -19536,98 +19463,98 @@ const char * gWrapperFileContent_81_targetTemplates = "check target \"teensy-3-6
   "//  FTM2: 0x4003_A000\n"
   "//  FTM3: 0x400B_9000 <--- CAUTION\n"
   "\n"
-  "registers FTM 0x4003_8000 {\n"
-  "  SC [4] 0x00 @inc 0x1000 $uint32 {24, TOF, TOIE, CPWMS, CLKS:2, PS:3}\n"
+  "registers FTM0 0x4003_8000, FTM1 0x4003_9000, FTM2 0x4003_A000, FTM3 0x400B_9000 {\n"
+  "  SC 0x00 $uint32 {24, TOF, TOIE, CPWMS, CLKS:2, PS:3}\n"
   "\n"
-  "  CNT [4] 0x04 @inc 0x1000 $uint32 {16, COUNT:16}\n"
+  "  CNT 0x04 $uint32 {16, COUNT:16}\n"
   "\n"
-  "  MOD [4] 0x08 @inc 0x1000 $uint32 {16, MOD:16}\n"
+  "  MOD 0x08 $uint32 {16, MOD:16}\n"
   "  \n"
-  "  C0SC [4] 0x0C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
+  "  C0SC 0x0C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
   "  \n"
-  "  C0V  [4] 0x10 @inc 0x1000 $uint32 {16, VAL:16}\n"
+  "  C0V  0x10 $uint32 {16, VAL:16}\n"
   "  \n"
-  "  C1SC [4] 0x14 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
+  "  C1SC 0x14 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
   "\n"
-  "  C1V  [4] 0x18 @inc 0x1000 $uint32 {16, VAL:16}\n"
+  "  C1V  0x18 $uint32 {16, VAL:16}\n"
   "\n"
-  "  C2SC [4] 0x1C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
+  "  C2SC 0x1C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
   "\n"
-  "  C2V  [4] 0x20 @inc 0x1000 $uint32 {16, VAL:16}\n"
+  "  C2V  0x20 $uint32 {16, VAL:16}\n"
   "\n"
-  "  C3SC [4] 0x24 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
+  "  C3SC 0x24 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
   "\n"
-  "  C3V  [4] 0x28 @inc 0x1000 $uint32 {16, VAL:16}\n"
+  "  C3V  0x28 $uint32 {16, VAL:16}\n"
   "\n"
-  "  C4SC [4] 0x2C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
+  "  C4SC 0x2C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
   "\n"
-  "  C4V  [4] 0x30 @inc 0x1000 $uint32 {16, VAL:16}\n"
+  "  C4V  0x30 $uint32 {16, VAL:16}\n"
   "\n"
-  "  C5SC [4] 0x34 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
+  "  C5SC 0x34 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
   "  \n"
-  "  C5V  [4] 0x38 @inc 0x1000 $uint32 {16, VAL:16}\n"
+  "  C5V  0x38 $uint32 {16, VAL:16}\n"
   "\n"
-  "  C6SC [4] 0x3C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
+  "  C6SC 0x3C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
   "\n"
-  "  C6V  [4] 0x40 @inc 0x1000 $uint32 {16, VAL:16}\n"
+  "  C6V  0x40 $uint32 {16, VAL:16}\n"
   "\n"
-  "  C7SC [4] 0x44 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
+  "  C7SC 0x44 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}\n"
   "\n"
-  "  C7V  [4] 0x48 @inc 0x1000 $uint32 {16, VAL:16}\n"
+  "  C7V  0x48 $uint32 {16, VAL:16}\n"
   "\n"
-  "  STATUS [4] 0x50 @inc 0x1000 $uint32 {24, CH7F, CH6F, CH5F, CH4F, CH3F, CH2F, CH1F, CH0F}\n"
+  "  STATUS 0x50 $uint32 {24, CH7F, CH6F, CH5F, CH4F, CH3F, CH2F, CH1F, CH0F}\n"
   "\n"
-  "  MODE [4] 0x54 @inc 0x1000 $uint32 {24, FAULTIE, FAULTM:2, CAPTEST, PWMSYNC, WPDIS, INIT, FTMEN}\n"
+  "  MODE 0x54 $uint32 {24, FAULTIE, FAULTM:2, CAPTEST, PWMSYNC, WPDIS, INIT, FTMEN}\n"
   "\n"
-  "  SYNC [4] 0x58 @inc 0x1000 $uint32 {24, SWSYNC, TRIG2, TRG1, TRIG0, SYNCHOM, REINIT, CNTMAX, CNTMIN}\n"
+  "  SYNC 0x58 $uint32 {24, SWSYNC, TRIG2, TRG1, TRIG0, SYNCHOM, REINIT, CNTMAX, CNTMIN}\n"
   "\n"
-  "  OUTINIT [4] 0x5C @inc 0x1000 $uint32 {24, CH7OI, CH6OI, CH5OI, CH4OI, CH3OI, CH2OI, CH1OI, CH0OI}\n"
+  "  OUTINIT 0x5C $uint32 {24, CH7OI, CH6OI, CH5OI, CH4OI, CH3OI, CH2OI, CH1OI, CH0OI}\n"
   "\n"
-  "  MASK [4] 0x60 @inc 0x1000 $uint32 {24, CH7OM, CH6OM, CH5OM, CH4OM, CH3OM, CH2OM, CH1OM, CH0OM}\n"
+  "  MASK 0x60 $uint32 {24, CH7OM, CH6OM, CH5OM, CH4OM, CH3OM, CH2OM, CH1OM, CH0OM}\n"
   "\n"
-  "  COMBINE [4] 0x64 @inc 0x1000 $uint32 {\n"
+  "  COMBINE 0x64 $uint32 {\n"
   "    1, FAULTEN3, SYNCEN3, DTEN3, DECAP3, DECAPEN3, COMP3, COMBINE3,\n"
   "    1, FAULTEN2, SYNCEN2, DTEN2, DECAP2, DECAPEN2, COMP2, COMBINE2,\n"
   "    1, FAULTEN1, SYNCEN1, DTEN1, DECAP1, DECAPEN1, COMP1, COMBINE1,\n"
   "    1, FAULTEN0, SYNCEN0, DTEN0, DECAP0, DECAPEN0, COMP0, COMBINE0\n"
   "  }\n"
   "\n"
-  "  DEADTIME [4] 0x68 @inc 0x1000 $uint32 {24, DTPS:2, DTVAL:6}\n"
+  "  DEADTIME 0x68 $uint32 {24, DTPS:2, DTVAL:6}\n"
   "\n"
-  "  EXTTRIG [4] 0x6C @inc 0x1000 $uint32 {\n"
+  "  EXTTRIG 0x6C $uint32 {\n"
   "    24, TRIGF, INITTRIGEN, CH1TRIG, CH0TRIG, CH5TRIG, CH4TRIG, CH3TRIG, CH2TRIG\n"
   "  }\n"
   "\n"
-  "  POL [4] 0x70 @inc 0x1000 $uint32 {24, POL7, POL6, POL5, POL4, POL3, POL2, POL1, POL0}\n"
+  "  POL 0x70 $uint32 {24, POL7, POL6, POL5, POL4, POL3, POL2, POL1, POL0}\n"
   "\n"
-  "  FMS [4] 0x74 @inc 0x1000 $uint32 {24, FAULTF, WPEN, FAULTIN, 1, FAULTF3, FAULTF2, FAULTF1, FAULTF0}\n"
+  "  FMS 0x74 $uint32 {24, FAULTF, WPEN, FAULTIN, 1, FAULTF3, FAULTF2, FAULTF1, FAULTF0}\n"
   "\n"
-  "  FILTER [4] 0x78 @inc 0x1000 $uint32 {16, CH3FVAL:4, CH2FVAL:4, CH1FVAL:4, CH0FVAL:4}\n"
+  "  FILTER 0x78 $uint32 {16, CH3FVAL:4, CH2FVAL:4, CH1FVAL:4, CH0FVAL:4}\n"
   "\n"
-  "  FLTCTRL [4] 0x7C @inc 0x1000 $uint32 {\n"
+  "  FLTCTRL 0x7C $uint32 {\n"
   "    20, FFVAL:4, FFLTR3EN, FFLTR2EN, FFLTR1EN, FFLTR0EN, FAULT3EN, FAULT2EN, FAULT1EN, FAULT0EN\n"
   "  }\n"
   "\n"
-  "  QDCTRL [4] 0x80 @inc 0x1000 $uint32 {24, PHALTREN, PHBFLTREN, PHAPOL, PHBPOL, QUADMODE, QUADIR, TOFDIR, QUADEN}\n"
+  "  QDCTRL 0x80 $uint32 {24, PHALTREN, PHBFLTREN, PHAPOL, PHBPOL, QUADMODE, QUADIR, TOFDIR, QUADEN}\n"
   "\n"
-  "  CONF [4] 0x84 @inc 0x1000 $uint32 {21, GTBEOUT, GTBEEN, 1, BDMMODE:2, 1, NUMTOF:5}\n"
+  "  CONF 0x84 $uint32 {21, GTBEOUT, GTBEEN, 1, BDMMODE:2, 1, NUMTOF:5}\n"
   "\n"
-  "  FLTPOL [4] 0x88 @inc 0x1000 $uint32 {28, FLT3POL, FLT2POL, FLT1POL, FLT0POL}\n"
+  "  FLTPOL 0x88 $uint32 {28, FLT3POL, FLT2POL, FLT1POL, FLT0POL}\n"
   "\n"
-  "  SYNCCONF [4] 0x8C @inc 0x1000 $uint32 {\n"
+  "  SYNCCONF 0x8C $uint32 {\n"
   "    11, HWSOC, HWINVC, HWOM, HWWRBUF, HWRSTCNT,\n"
   "    3, SWSOC, SWINVC, SWOM, SWWRBUF, SWRSTCNT, SYNCMODE, 1, SWOC, INVC, 1, CNTINC, 1, HWTRIGMODE\n"
   "  }\n"
   "\n"
-  "  INVCTRL [4] 0x90 @inc 0x1000 $uint32 {28, INV3EN, INV2EN, INV1EN, INV0EN}\n"
+  "  INVCTRL 0x90 $uint32 {28, INV3EN, INV2EN, INV1EN, INV0EN}\n"
   "\n"
-  "  SWOCTRL [4] 0x94 @inc 0x1000 $uint32 {\n"
+  "  SWOCTRL 0x94 $uint32 {\n"
   "    16,\n"
   "    CH7OCV, CH6OCV, CH5OCV, CH4OCV, CH3OCV, CH2OCV, CH1OCV, CH0OCV,\n"
   "    CH7OC, CH6OC, CH5OC, CH4OC, CH3OC, CH2OC, CH1OC, CH0OC\n"
   "  }\n"
   " \n"
-  "  PMWLOAD [4] 0x98 @inc 0x1000 $uint32 {\n"
+  "  PMWLOAD 0x98 $uint32 {\n"
   "    22, LDOK, 1, CH7SEL, CH6SEL, CH5SEL, CH4SEL, CH3SEL, CH2SEL, CH1SEL, CH0SEL\n"
   "  }\n"
   "\n"
@@ -20530,43 +20457,7 @@ const char * gWrapperFileContent_81_targetTemplates = "check target \"teensy-3-6
   "//! Chapter 63: General-Purpose Input/Output (GPIO)\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "registers GPIOA 0x400F_F000 {\n"
-  "  PDOR @user 0x00 $uint32 // Port Data Output Register\n"
-  "  PSOR @user 0x04 $uint32 // Port Set Output Register\n"
-  "  PCOR @user 0x08 $uint32 // Port Clear Output Register\n"
-  "  PTOR @user 0x0C $uint32 // Port Toggle Output Register\n"
-  "  PDIR @user 0x10 $uint32 // Port Data Input Register\n"
-  "  PDDR @user 0x14 $uint32 // Port Data Direction Register\n"
-  "}\n"
-  "\n"
-  "registers GPIOB 0x400F_F040 {\n"
-  "  PDOR @user 0x00 $uint32 // Port Data Output Register\n"
-  "  PSOR @user 0x04 $uint32 // Port Set Output Register\n"
-  "  PCOR @user 0x08 $uint32 // Port Clear Output Register\n"
-  "  PTOR @user 0x0C $uint32 // Port Toggle Output Register\n"
-  "  PDIR @user 0x10 $uint32 // Port Data Input Register\n"
-  "  PDDR @user 0x14 $uint32 // Port Data Direction Register\n"
-  "}\n"
-  "\n"
-  "registers GPIOC 0x400F_F080 {\n"
-  "  PDOR @user 0x00 $uint32 // Port Data Output Register\n"
-  "  PSOR @user 0x04 $uint32 // Port Set Output Register\n"
-  "  PCOR @user 0x08 $uint32 // Port Clear Output Register\n"
-  "  PTOR @user 0x0C $uint32 // Port Toggle Output Register\n"
-  "  PDIR @user 0x10 $uint32 // Port Data Input Register\n"
-  "  PDDR @user 0x14 $uint32 // Port Data Direction Register\n"
-  "}\n"
-  "\n"
-  "registers GPIOD 0x400F_F0C0 {\n"
-  "  PDOR @user 0x00 $uint32 // Port Data Output Register\n"
-  "  PSOR @user 0x04 $uint32 // Port Set Output Register\n"
-  "  PCOR @user 0x08 $uint32 // Port Clear Output Register\n"
-  "  PTOR @user 0x0C $uint32 // Port Toggle Output Register\n"
-  "  PDIR @user 0x10 $uint32 // Port Data Input Register\n"
-  "  PDDR @user 0x14 $uint32 // Port Data Direction Register\n"
-  "}\n"
-  "\n"
-  "registers GPIOE 0x400F_F100 {\n"
+  "registers GPIOA 0x400F_F000, GPIOB 0x400F_F040, GPIOC 0x400F_F080, GPIOD 0x400F_F0C0, GPIOE 0x400F_F100 {\n"
   "  PDOR @user 0x00 $uint32 // Port Data Output Register\n"
   "  PSOR @user 0x04 $uint32 // Port Set Output Register\n"
   "  PCOR @user 0x08 $uint32 // Port Clear Output Register\n"
@@ -20693,7 +20584,7 @@ const cRegularFileWrapper gWrapperFile_81_targetTemplates (
   "plm-registers-mk66fx1m0.plm",
   "plm",
   true, // Text file
-  108213, // Text length
+  106268, // Text length
   gWrapperFileContent_81_targetTemplates
 ) ;
 

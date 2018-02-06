@@ -1291,98 +1291,98 @@ registers TPM2 0x400C_A000 {
 //  FTM2: 0x4003_A000
 //  FTM3: 0x400B_9000 <--- CAUTION
 
-registers FTM 0x4003_8000 {
-  SC [4] 0x00 @inc 0x1000 $uint32 {24, TOF, TOIE, CPWMS, CLKS:2, PS:3}
+registers FTM0 0x4003_8000, FTM1 0x4003_9000, FTM2 0x4003_A000, FTM3 0x400B_9000 {
+  SC 0x00 $uint32 {24, TOF, TOIE, CPWMS, CLKS:2, PS:3}
 
-  CNT [4] 0x04 @inc 0x1000 $uint32 {16, COUNT:16}
+  CNT 0x04 $uint32 {16, COUNT:16}
 
-  MOD [4] 0x08 @inc 0x1000 $uint32 {16, MOD:16}
+  MOD 0x08 $uint32 {16, MOD:16}
   
-  C0SC [4] 0x0C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C0SC 0x0C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
   
-  C0V  [4] 0x10 @inc 0x1000 $uint32 {16, VAL:16}
+  C0V  0x10 $uint32 {16, VAL:16}
   
-  C1SC [4] 0x14 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C1SC 0x14 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
 
-  C1V  [4] 0x18 @inc 0x1000 $uint32 {16, VAL:16}
+  C1V  0x18 $uint32 {16, VAL:16}
 
-  C2SC [4] 0x1C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C2SC 0x1C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
 
-  C2V  [4] 0x20 @inc 0x1000 $uint32 {16, VAL:16}
+  C2V  0x20 $uint32 {16, VAL:16}
 
-  C3SC [4] 0x24 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C3SC 0x24 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
 
-  C3V  [4] 0x28 @inc 0x1000 $uint32 {16, VAL:16}
+  C3V  0x28 $uint32 {16, VAL:16}
 
-  C4SC [4] 0x2C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C4SC 0x2C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
 
-  C4V  [4] 0x30 @inc 0x1000 $uint32 {16, VAL:16}
+  C4V  0x30 $uint32 {16, VAL:16}
 
-  C5SC [4] 0x34 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C5SC 0x34 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
   
-  C5V  [4] 0x38 @inc 0x1000 $uint32 {16, VAL:16}
+  C5V  0x38 $uint32 {16, VAL:16}
 
-  C6SC [4] 0x3C @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C6SC 0x3C $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
 
-  C6V  [4] 0x40 @inc 0x1000 $uint32 {16, VAL:16}
+  C6V  0x40 $uint32 {16, VAL:16}
 
-  C7SC [4] 0x44 @inc 0x1000 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
+  C7SC 0x44 $uint32 {24, CHF, CHIE, MSB, MSA, ELSB, ELSA, 1, DMA}
 
-  C7V  [4] 0x48 @inc 0x1000 $uint32 {16, VAL:16}
+  C7V  0x48 $uint32 {16, VAL:16}
 
-  STATUS [4] 0x50 @inc 0x1000 $uint32 {24, CH7F, CH6F, CH5F, CH4F, CH3F, CH2F, CH1F, CH0F}
+  STATUS 0x50 $uint32 {24, CH7F, CH6F, CH5F, CH4F, CH3F, CH2F, CH1F, CH0F}
 
-  MODE [4] 0x54 @inc 0x1000 $uint32 {24, FAULTIE, FAULTM:2, CAPTEST, PWMSYNC, WPDIS, INIT, FTMEN}
+  MODE 0x54 $uint32 {24, FAULTIE, FAULTM:2, CAPTEST, PWMSYNC, WPDIS, INIT, FTMEN}
 
-  SYNC [4] 0x58 @inc 0x1000 $uint32 {24, SWSYNC, TRIG2, TRG1, TRIG0, SYNCHOM, REINIT, CNTMAX, CNTMIN}
+  SYNC 0x58 $uint32 {24, SWSYNC, TRIG2, TRG1, TRIG0, SYNCHOM, REINIT, CNTMAX, CNTMIN}
 
-  OUTINIT [4] 0x5C @inc 0x1000 $uint32 {24, CH7OI, CH6OI, CH5OI, CH4OI, CH3OI, CH2OI, CH1OI, CH0OI}
+  OUTINIT 0x5C $uint32 {24, CH7OI, CH6OI, CH5OI, CH4OI, CH3OI, CH2OI, CH1OI, CH0OI}
 
-  MASK [4] 0x60 @inc 0x1000 $uint32 {24, CH7OM, CH6OM, CH5OM, CH4OM, CH3OM, CH2OM, CH1OM, CH0OM}
+  MASK 0x60 $uint32 {24, CH7OM, CH6OM, CH5OM, CH4OM, CH3OM, CH2OM, CH1OM, CH0OM}
 
-  COMBINE [4] 0x64 @inc 0x1000 $uint32 {
+  COMBINE 0x64 $uint32 {
     1, FAULTEN3, SYNCEN3, DTEN3, DECAP3, DECAPEN3, COMP3, COMBINE3,
     1, FAULTEN2, SYNCEN2, DTEN2, DECAP2, DECAPEN2, COMP2, COMBINE2,
     1, FAULTEN1, SYNCEN1, DTEN1, DECAP1, DECAPEN1, COMP1, COMBINE1,
     1, FAULTEN0, SYNCEN0, DTEN0, DECAP0, DECAPEN0, COMP0, COMBINE0
   }
 
-  DEADTIME [4] 0x68 @inc 0x1000 $uint32 {24, DTPS:2, DTVAL:6}
+  DEADTIME 0x68 $uint32 {24, DTPS:2, DTVAL:6}
 
-  EXTTRIG [4] 0x6C @inc 0x1000 $uint32 {
+  EXTTRIG 0x6C $uint32 {
     24, TRIGF, INITTRIGEN, CH1TRIG, CH0TRIG, CH5TRIG, CH4TRIG, CH3TRIG, CH2TRIG
   }
 
-  POL [4] 0x70 @inc 0x1000 $uint32 {24, POL7, POL6, POL5, POL4, POL3, POL2, POL1, POL0}
+  POL 0x70 $uint32 {24, POL7, POL6, POL5, POL4, POL3, POL2, POL1, POL0}
 
-  FMS [4] 0x74 @inc 0x1000 $uint32 {24, FAULTF, WPEN, FAULTIN, 1, FAULTF3, FAULTF2, FAULTF1, FAULTF0}
+  FMS 0x74 $uint32 {24, FAULTF, WPEN, FAULTIN, 1, FAULTF3, FAULTF2, FAULTF1, FAULTF0}
 
-  FILTER [4] 0x78 @inc 0x1000 $uint32 {16, CH3FVAL:4, CH2FVAL:4, CH1FVAL:4, CH0FVAL:4}
+  FILTER 0x78 $uint32 {16, CH3FVAL:4, CH2FVAL:4, CH1FVAL:4, CH0FVAL:4}
 
-  FLTCTRL [4] 0x7C @inc 0x1000 $uint32 {
+  FLTCTRL 0x7C $uint32 {
     20, FFVAL:4, FFLTR3EN, FFLTR2EN, FFLTR1EN, FFLTR0EN, FAULT3EN, FAULT2EN, FAULT1EN, FAULT0EN
   }
 
-  QDCTRL [4] 0x80 @inc 0x1000 $uint32 {24, PHALTREN, PHBFLTREN, PHAPOL, PHBPOL, QUADMODE, QUADIR, TOFDIR, QUADEN}
+  QDCTRL 0x80 $uint32 {24, PHALTREN, PHBFLTREN, PHAPOL, PHBPOL, QUADMODE, QUADIR, TOFDIR, QUADEN}
 
-  CONF [4] 0x84 @inc 0x1000 $uint32 {21, GTBEOUT, GTBEEN, 1, BDMMODE:2, 1, NUMTOF:5}
+  CONF 0x84 $uint32 {21, GTBEOUT, GTBEEN, 1, BDMMODE:2, 1, NUMTOF:5}
 
-  FLTPOL [4] 0x88 @inc 0x1000 $uint32 {28, FLT3POL, FLT2POL, FLT1POL, FLT0POL}
+  FLTPOL 0x88 $uint32 {28, FLT3POL, FLT2POL, FLT1POL, FLT0POL}
 
-  SYNCCONF [4] 0x8C @inc 0x1000 $uint32 {
+  SYNCCONF 0x8C $uint32 {
     11, HWSOC, HWINVC, HWOM, HWWRBUF, HWRSTCNT,
     3, SWSOC, SWINVC, SWOM, SWWRBUF, SWRSTCNT, SYNCMODE, 1, SWOC, INVC, 1, CNTINC, 1, HWTRIGMODE
   }
 
-  INVCTRL [4] 0x90 @inc 0x1000 $uint32 {28, INV3EN, INV2EN, INV1EN, INV0EN}
+  INVCTRL 0x90 $uint32 {28, INV3EN, INV2EN, INV1EN, INV0EN}
 
-  SWOCTRL [4] 0x94 @inc 0x1000 $uint32 {
+  SWOCTRL 0x94 $uint32 {
     16,
     CH7OCV, CH6OCV, CH5OCV, CH4OCV, CH3OCV, CH2OCV, CH1OCV, CH0OCV,
     CH7OC, CH6OC, CH5OC, CH4OC, CH3OC, CH2OC, CH1OC, CH0OC
   }
  
-  PMWLOAD [4] 0x98 @inc 0x1000 $uint32 {
+  PMWLOAD 0x98 $uint32 {
     22, LDOK, 1, CH7SEL, CH6SEL, CH5SEL, CH4SEL, CH3SEL, CH2SEL, CH1SEL, CH0SEL
   }
 
@@ -2284,43 +2284,7 @@ registers USBPHY 0x400A_2000 {
 //! Chapter 63: General-Purpose Input/Output (GPIO)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers GPIOA 0x400F_F000 {
-  PDOR @user 0x00 $uint32 // Port Data Output Register
-  PSOR @user 0x04 $uint32 // Port Set Output Register
-  PCOR @user 0x08 $uint32 // Port Clear Output Register
-  PTOR @user 0x0C $uint32 // Port Toggle Output Register
-  PDIR @user 0x10 $uint32 // Port Data Input Register
-  PDDR @user 0x14 $uint32 // Port Data Direction Register
-}
-
-registers GPIOB 0x400F_F040 {
-  PDOR @user 0x00 $uint32 // Port Data Output Register
-  PSOR @user 0x04 $uint32 // Port Set Output Register
-  PCOR @user 0x08 $uint32 // Port Clear Output Register
-  PTOR @user 0x0C $uint32 // Port Toggle Output Register
-  PDIR @user 0x10 $uint32 // Port Data Input Register
-  PDDR @user 0x14 $uint32 // Port Data Direction Register
-}
-
-registers GPIOC 0x400F_F080 {
-  PDOR @user 0x00 $uint32 // Port Data Output Register
-  PSOR @user 0x04 $uint32 // Port Set Output Register
-  PCOR @user 0x08 $uint32 // Port Clear Output Register
-  PTOR @user 0x0C $uint32 // Port Toggle Output Register
-  PDIR @user 0x10 $uint32 // Port Data Input Register
-  PDDR @user 0x14 $uint32 // Port Data Direction Register
-}
-
-registers GPIOD 0x400F_F0C0 {
-  PDOR @user 0x00 $uint32 // Port Data Output Register
-  PSOR @user 0x04 $uint32 // Port Set Output Register
-  PCOR @user 0x08 $uint32 // Port Clear Output Register
-  PTOR @user 0x0C $uint32 // Port Toggle Output Register
-  PDIR @user 0x10 $uint32 // Port Data Input Register
-  PDDR @user 0x14 $uint32 // Port Data Direction Register
-}
-
-registers GPIOE 0x400F_F100 {
+registers GPIOA 0x400F_F000, GPIOB 0x400F_F040, GPIOC 0x400F_F080, GPIOD 0x400F_F0C0, GPIOE 0x400F_F100 {
   PDOR @user 0x00 $uint32 // Port Data Output Register
   PSOR @user 0x04 $uint32 // Port Set Output Register
   PCOR @user 0x08 $uint32 // Port Clear Output Register
