@@ -126,9 +126,9 @@ INTERRUPTS:
   ADC0 -> 55
   CMP0 -> 56
   CMP1 -> 57
-  FMT0 -> 58
-  FMT1 -> 59
-  FMT2 -> 60
+  FTM0 -> 58
+  FTM1 -> 59
+  FTM2 -> 60
   CMT -> 61
   RTCAlarm -> 62
   RTCSecond -> 63
@@ -152,7 +152,7 @@ INTERRUPTS:
   UART4Status -> 82
   UART4Error -> 83
   CMP2 -> 86
-  FMT3 -> 87
+  FTM3 -> 87
   DAC1 -> 88
   ADC1 -> 89
   I2C2 -> 90

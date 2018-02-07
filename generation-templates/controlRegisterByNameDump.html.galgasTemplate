@@ -99,7 +99,7 @@ for () in CONTROL_REGISTER_GROUP_MAP : group_ do
       %<tr class="result_line"><td class="name">%
       %<a name="%!group_lkey.string + ":" + lkey%">%!group_lkey.string + ":" + lkey%</a>%
       %</td><td class="type">$%!mType.plmOriginalTypeName%</td><td class="address">%
-      ![mAddress hexString]
+      ![mAddress hexStringSeparatedBy !'_' !4]
       %</td><td>%
       if [mControlRegisterFieldList length] > 0 then
         %<table class="fields">%
@@ -117,7 +117,7 @@ for () in CONTROL_REGISTER_GROUP_MAP : group_ do
         %<tr class="result_line"><td class="name">%
         %<a name="%!group_lkey.string + ":" + lkey%[%![mValue string]%]">%!group_lkey.string + ":" + lkey% [%![mValue string]%]</a>%
         %</td><td class="type">$%!mType.plmOriginalTypeName%</td><td class="address">%
-        ![mAddress + mValue * mElementArraySize hexString]
+        ![mAddress + mValue * mElementArraySize hexStringSeparatedBy !'_' !4]
         %</td><td>%
         if [mControlRegisterFieldList length] > 0 then
           %<table class="fields">%
