@@ -13,7 +13,7 @@ check target "teensy-3-6/unprivileged"
 //  The CPU Clock is given by: MCGCLOCKOUT / (SIM:CLKDIV1:OUTDIV1 + 1)
 //
 //  Here, F_CPU_MHZ is a given constant, so we only check that settings are correct by asserting:
-//     F_CPU_MHZ * (MCG:C5:PRDIV + 1) * (SIM:CLKDIV1:OUTDIV1 + 1) = (16 / 2) * (MCG:C6:VDIV + 16)
+//     F_CPU_MHZ * (MCG:C5:PRDIV + 1) * (SIM:CLKDIV1:OUTDIV1 + 1) = (16 MHz / 2) * (MCG:C6:VDIV + 16)
 //
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // BUS (peripheral) CLOCK
@@ -21,7 +21,7 @@ check target "teensy-3-6/unprivileged"
 //  The peripheral Clock is given by: MCGCLOCKOUT / (SIM:CLKDIV1:OUTDIV2 + 1)
 //
 //  Here, SIM:CLKDIV1:OUTDIV2 is a given constant, so we compute BUS_MHZ by:
-//     BUS_MHZ = (16 / 2) * (MCG:C6:VDIV + 16) / (MCG:C5:PRDIV + 1) / (SIM:CLKDIV1:OUTDIV2 + 1)
+//     BUS_MHZ = (16 MHz / 2) * (MCG:C6:VDIV + 16) / (MCG:C5:PRDIV + 1) / (SIM:CLKDIV1:OUTDIV2 + 1)
 //
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Flexbus CLOCK
@@ -29,7 +29,7 @@ check target "teensy-3-6/unprivileged"
 //  The Flexbus Clock is given by: MCGCLOCKOUT / (SIM:CLKDIV1:OUTDIV3 + 1)
 //
 //  Here, SIM:CLKDIV1:OUTDIV3 is a given constant, so we compute FLEXBUS_MHZ by:
-//     FLEXBUS_MHZ = (16 / 2) * (MCG:C6:VDIV + 16) /(MCG:C5:PRDIV + 1) / (SIM:CLKDIV1:OUTDIV3 + 1)
+//     FLEXBUS_MHZ = (16 MHz / 2) * (MCG:C6:VDIV + 16) /(MCG:C5:PRDIV + 1) / (SIM:CLKDIV1:OUTDIV3 + 1)
 //
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Flash CLOCK
@@ -37,7 +37,7 @@ check target "teensy-3-6/unprivileged"
 //  The FLASH Clock is given by: MCGCLOCKOUT / (SIM:CLKDIV1:OUTDIV3 + 1)
 //
 //  Here, SIM:CLKDIV1:OUTDIV4 is a given constant, so we compute Flash Clock in kHz (result may not be integer):
-//     FLASH_KHZ = (16000 / 2) * (MCG:C6:VDIV + 16) / (MCG:C5:PRDIV + 1) / (SIM:CLKDIV1:OUTDIV4 + 1)
+//     FLASH_KHZ = (16000 kHz / 2) * (MCG:C6:VDIV + 16) / (MCG:C5:PRDIV + 1) / (SIM:CLKDIV1:OUTDIV4 + 1)
 //
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // MICRO CONTROLLER REQUIREMENTS
@@ -58,19 +58,19 @@ check target "teensy-3-6/unprivileged"
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // SETTING SUMMARY
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// F_CPU   MCG_C5   MCG_C6   SIM_CLKDIV1   SIM_CLKDIV1   SIM_CLKDIV1   SIM_CLKDIV1   BUS_MHZ   FLEX_BUS   FLASH
-// _MHZ    _PRDIV    _VDIV      _OUTDIV1      _OUTDIV2      _OUTDIV3      _OUTDIV4                 _MHZ    _KHZ
-//  240         0       14             0             3             0             7
-//  216         0       11             0             1             0             7
-//  192         0        8             0             1             0             6
-//  180         1       29             0             1             0             6
-//  168         0        5             0             2             0             5
-//  144         0        2             0             1             0             4
-//  120         1       14             0             1             0             4
-//   96         1        8             0             1             0             2
-//   72         1        2             0             0             0             2
-//   48         1        8             1             1             1             3
-//   24         1        8             3             3             3             3
+// F_CPU   MCG_C5   MCG_C6   SIM_CLKDIV1   SIM_CLKDIV1   SIM_CLKDIV1   SIM_CLKDIV1   BUS_MHZ   FLEXBUS    FLASH
+// _MHZ    _PRDIV    _VDIV      _OUTDIV1      _OUTDIV2      _OUTDIV3      _OUTDIV4                _MHZ     _KHZ
+//  240         0       14             0             3             0             7       60        240   30 000
+//  216         0       11             0             1             0             7       54        216   27 000
+//  192         0        8             0             1             0             6       28        192   27 428
+//  180         1       29             0             1             0             6       60        180   25 714
+//  168         0        5             0             2             0             5       56        168   28 000
+//  144         0        2             0             1             0             4       28        144   28 800
+//  120         1       14             0             1             0             4       60        120   24 000
+//   96         1        8             0             1             0             2       24         96   24 000
+//   72         1        2             0             0             0             2       36         72   24 000
+//   48         1        8             1             1             1             3       48         48   24 000
+//   24         1        8             3             3             3             3       24         24   24 000
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // PRDIV SETTINGS
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

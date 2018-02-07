@@ -640,7 +640,7 @@ proc buildControlRegisterMapHTMLFile
           var s = "<tr class=\"result_line\"><td class=\"name\">"
             + group_lkey.string + ":" + reg_lkey
             + "</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
-            + [reg_mAddress hexString] + "</td><td>"
+            + [reg_mAddress hexStringSeparatedBy !'_' !4] + "</td><td>"
           if [reg_mControlRegisterFieldList length] > 0 then
             s += "<table class=\"fields\">"
               + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) +  "</tr>"
@@ -659,7 +659,7 @@ proc buildControlRegisterMapHTMLFile
             var s = "<tr class=\"result_line\"><td class=\"name\">"
               + group_lkey.string + ":" + reg_lkey + "[" + [mValue string] + "]"
               +"</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
-              + [address hexString]
+              + [address hexStringSeparatedBy !'_' !4]
               + "</td><td>"
             if [reg_mControlRegisterFieldList length] > 0 then
               s += "<table class=\"fields\">"

@@ -64,9 +64,9 @@
   .word !ISR!ADC0 @ 55
   .word !ISR!CMP0 @ 56
   .word !ISR!CMP1 @ 57
-  .word !ISR!FMT0 @ 58
-  .word !ISR!FMT1 @ 59
-  .word !ISR!FMT2 @ 60
+  .word !ISR!FTM0 @ 58
+  .word !ISR!FTM1 @ 59
+  .word !ISR!FTM2 @ 60
   .word !ISR!CMT @ 61
   .word !ISR!RTCAlarm @ 62
   .word !ISR!RTCSecond @ 63
@@ -93,7 +93,7 @@
   .word -1 @ 84
   .word -1 @ 85
   .word !ISR!CMP2 @ 86
-  .word !ISR!FMT3 @ 87
+  .word !ISR!FTM3 @ 87
   .word !ISR!DAC1 @ 88
   .word !ISR!ADC1 @ 89
   .word !ISR!I2C2 @ 90
