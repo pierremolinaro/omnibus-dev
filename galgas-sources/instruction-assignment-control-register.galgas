@@ -31,7 +31,6 @@ syntax extension plm_syntax {
     !@lstring outRegisterName
     !@registerIndexAST outRegisterIndex
   {
-#    $§$
     $identifier$ ?outRegisterGroupName
     $:$
     $identifier$ ?outRegisterName

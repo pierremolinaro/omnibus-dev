@@ -39,26 +39,21 @@ syntax extension plm_syntax {
     let instructionLocation = @location.here
     <lvalue> !?ioAST ?let assignmentTargetAST
     <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
-    switch assignmentTargetAST.mKind
-    case register (2*) :
-      error assignmentTargetAST.mIdentifier : "a control register cannot be used for method call" : outInstruction
-    case regular (@accessInAssignmentListAST accessList) :
-      if ([accessList length] == 0) & (assignmentTargetAST.mIdentifier.string != "") then
-        outInstruction = @standAloneProcedureCallInstructionAST.new {
-          !instructionLocation
-          !arguments
-          !endOfArguments
-          !assignmentTargetAST.mIdentifier
-        }
-      else
-        outInstruction = @procedureCallInstructionAST.new {
-          !instructionLocation
-          !arguments
-          !endOfArguments
-          !assignmentTargetAST.mIdentifier
-          !accessList
-        }
-      end
+    if ([assignmentTargetAST.mAccessList length] == 0) & (assignmentTargetAST.mIdentifier.string != "") then
+      outInstruction = @standAloneProcedureCallInstructionAST.new {
+        !instructionLocation
+        !arguments
+        !endOfArguments
+        !assignmentTargetAST.mIdentifier
+      }
+    else
+      outInstruction = @procedureCallInstructionAST.new {
+        !instructionLocation
+        !arguments
+        !endOfArguments
+        !assignmentTargetAST.mIdentifier
+        !assignmentTargetAST.mAccessList
+      }
     end
   }
 

@@ -300,29 +300,6 @@ void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'analyzeControlRegisterInLValue'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeControlRegisterInLValue (const class GALGAS_PLMType constinArgument0,
-                                             const class GALGAS_routineAttributes constinArgument1,
-                                             const class GALGAS_lstring constinArgument2,
-                                             const class GALGAS_semanticContext constinArgument3,
-                                             const class GALGAS_mode constinArgument4,
-                                             class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                             class GALGAS_staticEntityMap & ioArgument6,
-                                             class GALGAS_universalValuedObjectMap & ioArgument7,
-                                             class GALGAS_allocaList & ioArgument8,
-                                             class GALGAS_instructionListIR & ioArgument9,
-                                             const class GALGAS_lstring constinArgument10,
-                                             const class GALGAS_controlRegisterMap constinArgument11,
-                                             const class GALGAS_LValueKindAST constinArgument12,
-                                             class GALGAS_LValueRepresentation & outArgument13,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Routine 'analyzeSelfAssignmentTarget'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -338,7 +315,7 @@ void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgu
                                           class GALGAS_allocaList & ioArgument8,
                                           class GALGAS_instructionListIR & ioArgument9,
                                           const class GALGAS_location constinArgument10,
-                                          const class GALGAS_LValueKindAST constinArgument11,
+                                          const class GALGAS_accessInAssignmentListAST constinArgument11,
                                           class GALGAS_LValueRepresentation & outArgument12,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
@@ -363,7 +340,7 @@ void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument
                                       const class GALGAS_lstring constinArgument11,
                                       const class GALGAS_string constinArgument12,
                                       const class GALGAS_PLMType constinArgument13,
-                                      const class GALGAS_LValueKindAST constinArgument14,
+                                      const class GALGAS_accessInAssignmentListAST constinArgument14,
                                       class GALGAS_LValueRepresentation & outArgument15,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
@@ -546,8 +523,7 @@ void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universa
 
 void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedObjectMap inObject,
                                              const class GALGAS_PLMType constin_inSelfType,
-                                             const class GALGAS_lstring constin_inValuedObjectName,
-                                             const class GALGAS_LValueKindAST constin_inKind,
+                                             const class GALGAS_LValueAST constin_inLValue,
                                              class GALGAS_PLMType & out_outType,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
