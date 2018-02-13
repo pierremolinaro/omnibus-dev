@@ -135,14 +135,13 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-short-circuit-and.galgas"
   "galgas-sources/intermediate-load-from-reference.galgas"
   "galgas-sources/intermediate-store-to-universal-reference.galgas"
-  "galgas-sources/intermediate-store-local-variable.galgas"
   "galgas-sources/intermediate-store-to-temporary-reference.galgas"
   "galgas-sources/intermediate-static-routine-call.galgas"
   "galgas-sources/intermediate-indirect-routine-call.galgas"
   "galgas-sources/intermediate-release.galgas"
 
   "galgas-sources/intermediate-compute-subscripted-volatile-register-address.galgas"
-  "galgas-sources/intermediate-register-address.galgas"
+  "galgas-sources/intermediate-enter-register-address.galgas"
   "galgas-sources/intermediate-load-indirect-volatile-register.galgas"
   "galgas-sources/intermediate-store-indirect-volatile-register.galgas"
 
