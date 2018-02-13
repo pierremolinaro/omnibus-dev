@@ -2,10 +2,17 @@
 #! AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @registerIndexAST {
+  case noIndex
+  case index (@expressionAST index @location endOfIndex)
+}
+
+#·······················································································································
+
 class @registerInExpressionAST : @expressionAST {
   @lstring mGroupName
   @lstring mRegisterName
-  @primaryInExpressionAccessListAST mAccessList
+  @registerIndexAST mRegisterIndex
   @lstring mFieldName # Empty string if no field access
 }
 
@@ -21,14 +28,15 @@ syntax extension plm_syntax {
     $identifier$ ?let registerGroupName
     $:$
     $identifier$ ?let registerName
-    @primaryInExpressionAccessListAST accessList = {}
+  @registerIndexAST registerIndex
     select
+      registerIndex = .noIndex
     or
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
       $]$
-      accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+      registerIndex = .index {!index:expression !endOfIndex:endOfIndex}
     end
     @lstring fieldName
     select
@@ -36,10 +44,9 @@ syntax extension plm_syntax {
     or
       $:$
       $identifier$ ?fieldName
-#      accessList += !.register {!name:fieldName}
     end
   #--- AST
-    outExpression = @registerInExpressionAST.new {!registerGroupName !registerName !accessList !fieldName}
+    outExpression = @registerInExpressionAST.new {!registerGroupName !registerName !registerIndex !fieldName}
   }
 
   #·····················································································································
@@ -55,27 +62,10 @@ override method @registerInExpressionAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addEdge !inConstantName !mGroupName]
-  for (access) in mAccessList do
-    switch access
-    case register (*) :
-    case integerSlice (2*) :
-    case property (*) :
-    case arrayAccess (@expressionAST indexExpression *) :
-      [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-    case funcCall (* @effectiveArgumentListAST arguments *) :
-      for () in arguments do
-        switch mEffectiveParameterKind
-        case input (*):
-        case inputWithType (* @lstring typeName *) :
-          if typeName.string != "" then
-            [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
-          end
-        case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-        case outputInput (*) :
-        case outputInputSelfVariable (*) :
-        end 
-      end
-    end
+  switch mRegisterIndex
+  case noIndex :
+  case index (@expressionAST indexExpression *) :
+    [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   end
 }
 
@@ -84,30 +74,10 @@ override method @registerInExpressionAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (access) in mAccessList do
-    switch access
-    case integerSlice (@lbigint low @lbigint high) :
-      if high.bigint >= low.bigint then
-        [!?ioGraph noteUINTType ![high.bigint - low.bigint + 1G uint] !low.location]
-      end
-    case register (*) :
-    case property (*) :
-    case arrayAccess (@expressionAST indexExpression *) :
-      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-    case funcCall (* @effectiveArgumentListAST arguments *) :
-      for () in arguments do
-        switch mEffectiveParameterKind
-        case input (*):
-        case inputWithType (* @lstring typeName *) :
-          if typeName.string != "" then
-            [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
-          end
-        case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-        case outputInput (*) :
-        case outputInputSelfVariable (*) :
-        end 
-      end
-    end
+  switch mRegisterIndex
+  case noIndex :
+  case index (@expressionAST indexExpression *) :
+    [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
@@ -162,7 +132,7 @@ override method @registerInExpressionAST analyzeExpression
         !?instructionListIR: ioInstructionGenerationList
         !registerMap
         !mRegisterName
-        !mAccessList
+        !mRegisterIndex
         !mFieldName # Empty string if no field access
         ?result: outResult
       )
@@ -185,11 +155,11 @@ private proc analyzeRegisterExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?let @controlRegisterMap inControlRegisterMap
   ?let @lstring inRegisterName
-  ?let @primaryInExpressionAccessListAST inAccessList
+  ?let @registerIndexAST inRegisterIndex
   ?let @lstring inFieldName # Empty string if no field access
   !result:@objectIR outResult
 {
-  var accessList = inAccessList
+#-------------------- Search register in group
   [inControlRegisterMap searchKey
     !inRegisterName
     ?let @PLMType inRegisterType
@@ -203,17 +173,15 @@ private proc analyzeRegisterExpression
     ?let @uint inRegisterArraySize # 0 if not an array
     ?let @uint inRegisterElementSize # 0 if not an array
   ]
-  if not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
-    error inRegisterName : "this control register is not accessible in user mode" : outResult
-  elsif [accessList length] == 0 then # No subscript, no slice
+#-------------------- Register index
+  switch inRegisterIndex
+  case noIndex :
     getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
     switch controlRegisterGroupKind
     case single (registerAddress) :
       [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !registerAddress]
     end
-  elsif [[accessList mAccessAtIndex !0] isArrayAccess] then
-    [!?accessList popFirst ?let first]
-    [first arrayAccess ?index:let @expressionAST indexExpression ?endOfIndex:let @location endOfIndex]
+  case index (@expressionAST indexExpression @location endOfIndex) :
     handleArraySubscriptNew (
        !self: inSelfType
        !routineAttributes:inRoutineAttributes
@@ -251,14 +219,8 @@ private proc analyzeRegisterExpression
         ]
       end
     end
-  else
-    getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
-    switch controlRegisterGroupKind
-    case single (registerAddress) :
-      [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !registerAddress]
-    end
   end
-#---------- Field access
+#-------------------- Field access
   if inFieldName.string != "" then
     [inRegisterSliceMap searchKey
       !inFieldName
@@ -277,6 +239,10 @@ private proc analyzeRegisterExpression
       !.literalInteger {!type:staticIntegerType () !value:accessRightOperand}
     ]
     outResult = resultIR
+  end
+#-------------------- User mode ?
+  if not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
+    error inRegisterName : "this control register is not accessible in user mode" : outResult
   end
 }
 
