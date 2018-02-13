@@ -1,38 +1,36 @@
 
-setter @instructionListIR appendStoreIndirectVolatileRegister
-  ?let @PLMType inTargetVarType
+setter @instructionListIR appendLoadIndirectVolatileRegister
+  ?let @objectIR inTargetValue
   ?let @string inLLVMName
-  ?let @objectIR inSourceValue
 {
-  self += !@storeIndirectVolatileIR.new {!inTargetVarType !inLLVMName !inSourceValue}
+  self += !@loadIndirectVolatileIR.new {!inTargetValue !inLLVMName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeIndirectVolatileIR : @abstractInstructionIR {
-  @PLMType mTargetVarType
+class @loadIndirectVolatileIR : @abstractInstructionIR {
+  @objectIR mTargetValue
   @string mLLVMName
-  @objectIR mSourceValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeIndirectVolatileIR llvmInstructionCode
+override method @loadIndirectVolatileIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let llvmType = [mTargetVarType llvmTypeName]
+  let llvmType = [mTargetValue llvmTypeName]
   let ptr = "%registerPointer." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
   ioLLVMcode += "  " + ptr + " = inttoptr i32 " + mLLVMName + " to " + llvmType + "* ;\n"
-              + "  store volatile " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType
-              + " * " + ptr + " ;\n"
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
+         + "* " + ptr + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeIndirectVolatileIR enterAccessibleEntities 
+override method @loadIndirectVolatileIR enterAccessibleEntities 
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

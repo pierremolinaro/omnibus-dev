@@ -24,10 +24,12 @@ setter @instructionListIR appendCopyFromReferences
       !staticTypeAllowed:false
     )
     switch inTargetReference
-    case volatileAbsoluteReference (@PLMType type @uint address) :
-      [!?self appendStoreVolatileRegister !type !address !result]
-    case volatileIndirectReference (@PLMType type @string llvmName) :
-      [!?self appendStoreIndirectVolatileRegister !type !llvmName !result]
+    case volatileAbsoluteReference (2*) :
+      error inErrorLocation : "INTERNAL ERROR"
+#      [!?self appendStoreVolatileRegister !type !address !result]
+    case volatileIndirectReference (2*) :
+      error inErrorLocation : "INTERNAL ERROR"
+#      [!?self appendStoreIndirectVolatileRegister !type !llvmName !result]
     case universalReference (@PLMType type @string targetLLVMname) :
       [!?self appendStoreToUniversalReference !targetLLVMname !type !result]
     end

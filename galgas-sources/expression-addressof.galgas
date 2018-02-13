@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
+#!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @addressofExpressionAST : @expressionAST {
@@ -15,7 +15,7 @@ class @addressofControlRegisterAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
@@ -45,7 +45,7 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+#!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @addressofExpressionAST addDependenceEdgeForStaticExpression
@@ -63,7 +63,7 @@ override method @addressofControlRegisterAST addDependenceEdgeForStaticExpressio
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
+#!  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
@@ -85,9 +85,7 @@ override method @addressofControlRegisterAST noteExpressionTypesInPrecedenceGrap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @addressofExpressionAST
+#!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @addressofControlRegisterAST analyzeExpression
@@ -142,15 +140,22 @@ override method @addressofControlRegisterAST analyzeExpression
   elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
     error mRegisterName : "this control register is not accessible in user mode"
   end
+#-------------------- Result
+  let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
+    !inContext.mTypeMap
+    !["uint" + [inContext.mTargetParameters.mPointerSize string] nowhere]
+  }
+  let resultType = [resultTypeProxy type]
+  getNewTempValue (!resultType !?ioTemporaries ?outResult)
 #-------------------- Analyze control register target
-  @LValueRepresentation registerRepresentation
   switch controlRegisterGroupKind
   case single (registerAddress) :
     if [mRegisterIndex isNoIndex] then # Simple access to a control register for writing
       if inRegisterArraySize == 0 then
-        registerRepresentation = .volatileAbsoluteReference {!type:registerType !address:registerAddress}
+        let registerName = mRegisterGroupName.string + ":" + mRegisterName
+        [!?ioInstructionGenerationList appendLoadRegisterAddress ![outResult llvmName] !registerAddress !registerName]
       else
-        error mRegisterName : "the control register is an array" : registerRepresentation
+        error mRegisterName : "the control register is an array"
       end
     else # Simple access to a control register for writing
       [mRegisterIndex index ?index:let indexExpression ?endOfIndex:let endOfIndex]
@@ -174,7 +179,8 @@ override method @addressofControlRegisterAST analyzeExpression
       if [indexIR isLiteralInteger] then # subscript expression is constant
         [indexIR literalInteger ?1* ?value:let @bigint idx]
         let addr = registerAddress + idx * inRegisterElementSize
-        registerRepresentation = .volatileAbsoluteReference {!type:registerType !address:addr}      
+        let registerName = mRegisterGroupName.string + ":" + mRegisterName + "[" + idx + "]"
+        [!?ioInstructionGenerationList appendLoadRegisterAddress ![outResult llvmName] !addr !registerName]
       else
         [!?ioTemporaries newTempLLVMVar ?let llvmName]
         [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
@@ -183,21 +189,9 @@ override method @addressofControlRegisterAST analyzeExpression
           !registerAddress
           !inRegisterElementSize
         ]
-        registerRepresentation = .volatileIndirectReference {!type:registerType !llvmName:llvmName}      
       end
     end
   end
-#-------------------- Result
-  let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
-    !inContext.mTypeMap
-    !["uint" + [inContext.mTargetParameters.mPointerSize string] nowhere]
-  }
-  let resultType = [resultTypeProxy type]
-  getNewTempValue (!resultType !?ioTemporaries ?outResult)
-  ioInstructionGenerationList += !@addressofInstructionIR.new {
-    !outResult
-    !registerRepresentation
-    }
 }
 
 #·······················································································································
@@ -248,9 +242,7 @@ override method @addressofExpressionAST analyzeExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @addressofInstructionIR
+#!  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @addressofInstructionIR : @abstractInstructionIR {

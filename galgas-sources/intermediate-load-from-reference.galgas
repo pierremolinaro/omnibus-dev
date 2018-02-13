@@ -21,8 +21,7 @@ override method @loadFromReferenceIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetValue llvmTypeName]
-  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
-             + llvmType + ", " + llvmType + " * " + mLLVMName + "\n"
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load " + llvmType + ", " + llvmType + " * " + mLLVMName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

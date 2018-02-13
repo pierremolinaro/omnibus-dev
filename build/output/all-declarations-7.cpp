@@ -7693,208 +7693,6 @@ GALGAS_storeIndirectVolatileIR GALGAS_storeIndirectVolatileIR::extractObject (co
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_storeVolatileIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_storeVolatileIR) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mTargetVarType.objectCompare (p->mProperty_mTargetVarType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mAddress.objectCompare (p->mProperty_mAddress) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mSourceValue.objectCompare (p->mProperty_mSourceValue) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_storeVolatileIR::objectCompare (const GALGAS_storeVolatileIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_storeVolatileIR::GALGAS_storeVolatileIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_storeVolatileIR::GALGAS_storeVolatileIR (const cPtr_storeVolatileIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_storeVolatileIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_storeVolatileIR GALGAS_storeVolatileIR::constructor_new (const GALGAS_PLMType & inAttribute_mTargetVarType,
-                                                                const GALGAS_bigint & inAttribute_mAddress,
-                                                                const GALGAS_objectIR & inAttribute_mSourceValue
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_storeVolatileIR result ;
-  if (inAttribute_mTargetVarType.isValid () && inAttribute_mAddress.isValid () && inAttribute_mSourceValue.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_storeVolatileIR (inAttribute_mTargetVarType, inAttribute_mAddress, inAttribute_mSourceValue COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType GALGAS_storeVolatileIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_PLMType result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeVolatileIR) ;
-    result = p->mProperty_mTargetVarType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType cPtr_storeVolatileIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTargetVarType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bigint GALGAS_storeVolatileIR::getter_mAddress (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bigint result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeVolatileIR) ;
-    result = p->mProperty_mAddress ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bigint cPtr_storeVolatileIR::getter_mAddress (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mAddress ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_objectIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeVolatileIR) ;
-    result = p->mProperty_mSourceValue ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR cPtr_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSourceValue ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                      Pointer class for @storeVolatileIR class                                       *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_storeVolatileIR::cPtr_storeVolatileIR (const GALGAS_PLMType & in_mTargetVarType,
-                                            const GALGAS_bigint & in_mAddress,
-                                            const GALGAS_objectIR & in_mSourceValue
-                                            COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mProperty_mTargetVarType (in_mTargetVarType),
-mProperty_mAddress (in_mAddress),
-mProperty_mSourceValue (in_mSourceValue) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_storeVolatileIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_storeVolatileIR ;
-}
-
-void cPtr_storeVolatileIR::description (C_String & ioString,
-                                        const int32_t inIndentation) const {
-  ioString << "[@storeVolatileIR:" ;
-  mProperty_mTargetVarType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mAddress.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mSourceValue.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_storeVolatileIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_storeVolatileIR (mProperty_mTargetVarType, mProperty_mAddress, mProperty_mSourceValue COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @storeVolatileIR type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_storeVolatileIR ("storeVolatileIR",
-                                        & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_storeVolatileIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_storeVolatileIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_storeVolatileIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_storeVolatileIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_storeVolatileIR GALGAS_storeVolatileIR::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_storeVolatileIR result ;
-  const GALGAS_storeVolatileIR * p = (const GALGAS_storeVolatileIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_storeVolatileIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("storeVolatileIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
 typeComparisonResult cPtr_storeLocalVariableIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) inOperandPtr ;
@@ -9192,105 +8990,105 @@ void extensionMethod_generateCopyRoutine (const GALGAS_PLMType inObject,
                                           GALGAS_generationAdds & ioArgument_ioGenerationAdds,
                                           C_Compiler * inCompiler
                                           COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = inObject.mProperty_attributes.getter_generateAssignmentRoutine (SOURCE_FILE ("intermediate-copy-from-references.galgas", 77)).boolEnum () ;
+  const enumGalgasBool test_0 = inObject.mProperty_attributes.getter_generateAssignmentRoutine (SOURCE_FILE ("intermediate-copy-from-references.galgas", 79)).boolEnum () ;
   if (kBoolTrue == test_0) {
     const GALGAS_PLMType temp_1 = inObject ;
-    GALGAS_string var_typeName_3341 = extensionGetter_llvmTypeName (temp_1, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 78)) ;
-    const enumGalgasBool test_2 = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("intermediate-copy-from-references.galgas", 79)).boolEnum () ;
+    GALGAS_string var_typeName_3384 = extensionGetter_llvmTypeName (temp_1, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 80)) ;
+    const enumGalgasBool test_2 = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("intermediate-copy-from-references.galgas", 81)).boolEnum () ;
     if (kBoolTrue == test_2) {
-      ioArgument_ioLLVMCode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 80)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 80)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 80)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 82)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 82)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 82)) ;
       const GALGAS_PLMType temp_3 = inObject ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("define internal void @plm.assign.").add_operation (temp_3.getter_plmOriginalTypeName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("intermediate-copy-from-references.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 81)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 81)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 82)).add_operation (GALGAS_string (" * %inTargetPtr, "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 82)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 82)).add_operation (GALGAS_string ("* %inSourcePtr) nounwind optsize {\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 82)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 81)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %source = load ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 83)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 83)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 83)).add_operation (GALGAS_string ("* %inSourcePtr\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 83)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 83)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 84)).add_operation (GALGAS_string (" %source)\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 84)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 84)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %target = load ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)).add_operation (GALGAS_string ("* %inTargetPtr\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 86)).add_operation (GALGAS_string (" %target)\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 86)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 86)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)).add_operation (GALGAS_string (" %source, "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)).add_operation (GALGAS_string ("* %inTargetPtr\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 88)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("define internal void @plm.assign.").add_operation (temp_3.getter_plmOriginalTypeName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("intermediate-copy-from-references.galgas", 83)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 83)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 83)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 84)).add_operation (GALGAS_string (" * %inTargetPtr, "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 84)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 84)).add_operation (GALGAS_string ("* %inSourcePtr) nounwind optsize {\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 84)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 83)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %source = load ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)).add_operation (GALGAS_string ("* %inSourcePtr\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 85)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 86)).add_operation (GALGAS_string (" %source)\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 86)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 86)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %target = load ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)).add_operation (GALGAS_string ("* %inTargetPtr\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 87)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 88)).add_operation (GALGAS_string (" %target)\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 88)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 89)).add_operation (GALGAS_string (" %source, "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 89)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 89)).add_operation (GALGAS_string ("* %inTargetPtr\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 89)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 89)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 90)) ;
       ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("}\n"
-        "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 89)) ;
+        "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 91)) ;
     }else if (kBoolFalse == test_2) {
       const GALGAS_PLMType temp_4 = inObject ;
-      GALGAS_arcAssignmentList var_arcAssignmentList_4193 = extensionGetter_arcList (temp_4, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("intermediate-copy-from-references.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 91)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 93)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 93)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 93)) ;
+      GALGAS_arcAssignmentList var_arcAssignmentList_4236 = extensionGetter_arcList (temp_4, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("intermediate-copy-from-references.galgas", 93)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 93)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 95)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 95)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 95)) ;
       const GALGAS_PLMType temp_5 = inObject ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("define internal void @plm.assign.").add_operation (temp_5.getter_plmOriginalTypeName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("intermediate-copy-from-references.galgas", 94)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 94)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 94)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 95)).add_operation (GALGAS_string (" * %inTarget, "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 95)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 95)).add_operation (GALGAS_string ("* %inSource) nounwind optsize {\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 95)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 94)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (";--- Handle ARC properties\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 96)) ;
-      cEnumerator_arcAssignmentList enumerator_4598 (var_arcAssignmentList_4193, kENUMERATION_UP) ;
-      while (enumerator_4598.hasCurrentObject ()) {
-        GALGAS_string var_propertyTypeLLVMName_4634 = extensionGetter_llvmTypeName (enumerator_4598.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 98)) ;
-        GALGAS_string var_llvmVarName_4688 = GALGAS_string ("%arc.retain.").add_operation (enumerator_4598.current_mPropertyName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("intermediate-copy-from-references.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 99)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("intermediate-copy-from-references.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 99)) ;
-        ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 100)) ;
-        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_4688, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)).add_operation (GALGAS_string ("* %inSource, i32 0"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)) ;
-        cEnumerator_uintlist enumerator_4974 (enumerator_4598.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-        while (enumerator_4974.hasCurrentObject ()) {
-          ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_4974.current_mValue (HERE).getter_string (SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)) ;
-          enumerator_4974.gotoNextObject () ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("define internal void @plm.assign.").add_operation (temp_5.getter_plmOriginalTypeName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("intermediate-copy-from-references.galgas", 96)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 96)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 96)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 97)).add_operation (GALGAS_string (" * %inTarget, "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 97)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 97)).add_operation (GALGAS_string ("* %inSource) nounwind optsize {\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 97)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 96)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (";--- Handle ARC properties\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 98)) ;
+      cEnumerator_arcAssignmentList enumerator_4641 (var_arcAssignmentList_4236, kENUMERATION_UP) ;
+      while (enumerator_4641.hasCurrentObject ()) {
+        GALGAS_string var_propertyTypeLLVMName_4677 = extensionGetter_llvmTypeName (enumerator_4641.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 100)) ;
+        GALGAS_string var_llvmVarName_4731 = GALGAS_string ("%arc.retain.").add_operation (enumerator_4641.current_mPropertyName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 101)) ;
+        ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 102)) ;
+        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_4731, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)).add_operation (GALGAS_string ("* %inSource, i32 0"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 103)) ;
+        cEnumerator_uintlist enumerator_5017 (enumerator_4641.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+        while (enumerator_5017.hasCurrentObject ()) {
+          ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_5017.current_mValue (HERE).getter_string (SOURCE_FILE ("intermediate-copy-from-references.galgas", 105)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 105)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 105)) ;
+          enumerator_5017.gotoNextObject () ;
         }
-        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_4598.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 105)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 105)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 105)) ;
-        GALGAS_string var_llvmLoadedVarName_5108 = var_llvmVarName_4688.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 106)) ;
-        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_5108, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)).add_operation (var_propertyTypeLLVMName_4634, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)).add_operation (var_propertyTypeLLVMName_4634, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)).add_operation (var_llvmVarName_4688, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)) ;
-        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_propertyTypeLLVMName_4634, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 108)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 108)).add_operation (var_llvmLoadedVarName_5108, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 108)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 108)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 108)) ;
-        enumerator_4598.gotoNextObject () ;
+        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_4641.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 107)) ;
+        GALGAS_string var_llvmLoadedVarName_5151 = var_llvmVarName_4731.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 108)) ;
+        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_5151, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 109)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 109)).add_operation (var_propertyTypeLLVMName_4677, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 109)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 109)).add_operation (var_propertyTypeLLVMName_4677, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 109)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 109)).add_operation (var_llvmVarName_4731, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 109)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 109)) ;
+        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_propertyTypeLLVMName_4677, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 110)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 110)).add_operation (var_llvmLoadedVarName_5151, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 110)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 110)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 110)) ;
+        enumerator_4641.gotoNextObject () ;
       }
-      cEnumerator_arcAssignmentList enumerator_5463 (var_arcAssignmentList_4193, kENUMERATION_UP) ;
-      while (enumerator_5463.hasCurrentObject ()) {
-        GALGAS_string var_llvmVarName_5490 = GALGAS_string ("%arc.release.").add_operation (enumerator_5463.current_mPropertyName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("intermediate-copy-from-references.galgas", 111)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 111)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("intermediate-copy-from-references.galgas", 111)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 111)) ;
-        ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 112)) ;
-        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_5490, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)).add_operation (GALGAS_string ("* %inTarget, i32 0"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)) ;
-        cEnumerator_uintlist enumerator_5777 (enumerator_5463.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-        while (enumerator_5777.hasCurrentObject ()) {
-          ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_5777.current_mValue (HERE).getter_string (SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)) ;
-          enumerator_5777.gotoNextObject () ;
+      cEnumerator_arcAssignmentList enumerator_5506 (var_arcAssignmentList_4236, kENUMERATION_UP) ;
+      while (enumerator_5506.hasCurrentObject ()) {
+        GALGAS_string var_llvmVarName_5533 = GALGAS_string ("%arc.release.").add_operation (enumerator_5506.current_mPropertyName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 113)) ;
+        ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 114)) ;
+        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_5533, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)).add_operation (GALGAS_string ("* %inTarget, i32 0"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 115)) ;
+        cEnumerator_uintlist enumerator_5820 (enumerator_5506.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+        while (enumerator_5820.hasCurrentObject ()) {
+          ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_5820.current_mValue (HERE).getter_string (SOURCE_FILE ("intermediate-copy-from-references.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 117)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 117)) ;
+          enumerator_5820.gotoNextObject () ;
         }
-        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_5463.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 117)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 117)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 117)) ;
-        GALGAS_string var_propertyTypeLLVMName_5914 = extensionGetter_llvmTypeName (enumerator_5463.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 118)) ;
-        GALGAS_string var_llvmLoadedVarName_5974 = var_llvmVarName_5490.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 119)) ;
-        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_5974, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)).add_operation (var_propertyTypeLLVMName_5914, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)).add_operation (var_propertyTypeLLVMName_5914, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)).add_operation (var_llvmVarName_5490, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)) ;
-        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_propertyTypeLLVMName_5914, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 121)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 121)).add_operation (var_llvmLoadedVarName_5974, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 121)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 121)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 121)) ;
-        enumerator_5463.gotoNextObject () ;
+        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_5506.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 119)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 119)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 119)) ;
+        GALGAS_string var_propertyTypeLLVMName_5957 = extensionGetter_llvmTypeName (enumerator_5506.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 120)) ;
+        GALGAS_string var_llvmLoadedVarName_6017 = var_llvmVarName_5533.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 121)) ;
+        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_6017, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 122)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 122)).add_operation (var_propertyTypeLLVMName_5957, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 122)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 122)).add_operation (var_propertyTypeLLVMName_5957, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 122)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 122)).add_operation (var_llvmVarName_5533, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 122)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 122)) ;
+        ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_propertyTypeLLVMName_5957, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 123)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 123)).add_operation (var_llvmLoadedVarName_6017, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 123)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 123)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 123)) ;
+        enumerator_5506.gotoNextObject () ;
       }
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (";--- Compute type size\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 123)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %sizeAsPtr = getelementptr inbounds ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 124)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 124)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 124)).add_operation (GALGAS_string ("* null, i32 1\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 124)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 124)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %byteCount = ptrtoint ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 125)).add_operation (GALGAS_string ("* %sizeAsPtr to i32\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 125)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 125)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %useLoadStore = icmp ule i32 %byteCount, 12\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 126)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 127)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (";--- Copy\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 128)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("loadStore:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 129)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %v = load ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 130)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 130)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 130)).add_operation (GALGAS_string ("* %inSource\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 130)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 130)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 131)).add_operation (GALGAS_string (" %v, "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 131)).add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 131)).add_operation (GALGAS_string ("* %inTarget\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 131)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 131)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 132)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copyBytesOrCopyWords:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 133)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %byteCountAnd3 = and i32 %byteCount, 3\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 134)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 135)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 136)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("testTarget:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 137)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %targetAsUnsigned = ptrtoint ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 138)).add_operation (GALGAS_string ("* %inTarget to i32\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 138)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 138)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 139)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %targetAsUnsignedIsMutipleOf4 = icmp eq  i32%targetAsUnsignedAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 140)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 141)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("testSource:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 142)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsigned = ptrtoint ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 143)).add_operation (GALGAS_string ("* %inSource to i32\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 143)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 143)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 144)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 145)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 146)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copyWords:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 147)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %target32 = bitcast ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 148)).add_operation (GALGAS_string ("* %inTarget to i32*\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 148)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 148)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %source32 = bitcast ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 149)).add_operation (GALGAS_string ("* %inSource to i32*\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 149)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 149)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %wordCount = udiv i32 %byteCount, 4\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 150)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br label %copyWords.loop\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 151)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copyWords.loop:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 152)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 153)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 154)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copyBytes:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 155)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %target8 = bitcast ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 156)).add_operation (GALGAS_string ("* %inTarget to i8*\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 156)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 156)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %source8 = bitcast ").add_operation (var_typeName_3341, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 157)).add_operation (GALGAS_string ("* %inSource to i8*\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 157)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 157)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 158)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 159)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copy.end:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 160)) ;
-      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 161)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (";--- Compute type size\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 125)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %sizeAsPtr = getelementptr inbounds ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 126)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 126)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 126)).add_operation (GALGAS_string ("* null, i32 1\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 126)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 126)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %byteCount = ptrtoint ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 127)).add_operation (GALGAS_string ("* %sizeAsPtr to i32\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 127)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 127)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %useLoadStore = icmp ule i32 %byteCount, 12\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 128)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 129)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string (";--- Copy\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 130)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("loadStore:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 131)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %v = load ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 132)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 132)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 132)).add_operation (GALGAS_string ("* %inSource\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 132)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 132)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 133)).add_operation (GALGAS_string (" %v, "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 133)).add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 133)).add_operation (GALGAS_string ("* %inTarget\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 133)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 133)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 134)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copyBytesOrCopyWords:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 135)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %byteCountAnd3 = and i32 %byteCount, 3\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 136)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 137)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 138)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("testTarget:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 139)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %targetAsUnsigned = ptrtoint ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 140)).add_operation (GALGAS_string ("* %inTarget to i32\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 140)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 140)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 141)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %targetAsUnsignedIsMutipleOf4 = icmp eq  i32%targetAsUnsignedAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 142)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 143)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("testSource:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 144)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsigned = ptrtoint ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 145)).add_operation (GALGAS_string ("* %inSource to i32\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 145)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 145)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 146)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 147)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 148)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copyWords:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 149)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %target32 = bitcast ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 150)).add_operation (GALGAS_string ("* %inTarget to i32*\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 150)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 150)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %source32 = bitcast ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 151)).add_operation (GALGAS_string ("* %inSource to i32*\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 151)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 151)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %wordCount = udiv i32 %byteCount, 4\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 152)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br label %copyWords.loop\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 153)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copyWords.loop:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 154)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 155)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 156)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copyBytes:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 157)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %target8 = bitcast ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 158)).add_operation (GALGAS_string ("* %inTarget to i8*\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 158)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 158)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  %source8 = bitcast ").add_operation (var_typeName_3384, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 159)).add_operation (GALGAS_string ("* %inSource to i8*\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 159)), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 159)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 160)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 161)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("copy.end:\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 162)) ;
+      ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 163)) ;
       ioArgument_ioLLVMCode.plusAssign_operation(GALGAS_string ("}\n"
-        "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 162)) ;
+        "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 164)) ;
     }
   }
 }
@@ -13609,6 +13407,143 @@ GALGAS_extendStaticArrayDeclarationAST_2D_element GALGAS_extendStaticArrayDeclar
       result = *p ;
     }else{
       inCompiler->castError ("extendStaticArrayDeclarationAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistMap_2D_element::GALGAS_staticlistMap_2D_element (void) :
+mProperty_lkey (),
+mProperty_mStaticListPropertyList () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistMap_2D_element::~ GALGAS_staticlistMap_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistMap_2D_element::GALGAS_staticlistMap_2D_element (const GALGAS_lstring & inOperand0,
+                                                                  const GALGAS_propertyList & inOperand1) :
+mProperty_lkey (inOperand0),
+mProperty_mStaticListPropertyList (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistMap_2D_element GALGAS_staticlistMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_staticlistMap_2D_element (GALGAS_lstring::constructor_default (HERE),
+                                          GALGAS_propertyList::constructor_emptyList (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistMap_2D_element GALGAS_staticlistMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                  const GALGAS_propertyList & inOperand1 
+                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_staticlistMap_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_staticlistMap_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_staticlistMap_2D_element::objectCompare (const GALGAS_staticlistMap_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mStaticListPropertyList.objectCompare (inOperand.mProperty_mStaticListPropertyList) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_staticlistMap_2D_element::isValid (void) const {
+  return mProperty_lkey.isValid () && mProperty_mStaticListPropertyList.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_staticlistMap_2D_element::drop (void) {
+  mProperty_lkey.drop () ;
+  mProperty_mStaticListPropertyList.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_staticlistMap_2D_element::description (C_String & ioString,
+                                                   const int32_t inIndentation) const {
+  ioString << "<struct @staticlistMap-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_lkey.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mStaticListPropertyList.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_staticlistMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
+  return mProperty_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyList GALGAS_staticlistMap_2D_element::getter_mStaticListPropertyList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mStaticListPropertyList ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @staticlistMap-element type                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_staticlistMap_2D_element ("staticlistMap-element",
+                                                 NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_staticlistMap_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_staticlistMap_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_staticlistMap_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_staticlistMap_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_staticlistMap_2D_element GALGAS_staticlistMap_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_staticlistMap_2D_element result ;
+  const GALGAS_staticlistMap_2D_element * p = (const GALGAS_staticlistMap_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_staticlistMap_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("staticlistMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

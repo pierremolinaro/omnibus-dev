@@ -1,35 +1,34 @@
 
-setter @instructionListIR appendStoreVolatileRegister
-  ?let @PLMType inTargetVarType
+setter @instructionListIR appendLoadRegisterAddress
+  ?let @string inLLVMName
   ?let @bigint inAddress
-  ?let @objectIR inSourceValue
+  ?let @string inRegisterName
 {
-  self += !@storeVolatileIR.new {!inTargetVarType !inAddress !inSourceValue}
+  self += !@intToPtrIR.new {!inLLVMName !inAddress !inRegisterName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeVolatileIR : @abstractInstructionIR {
-  @PLMType mTargetVarType
-  @bigint mAddress
-  @objectIR mSourceValue
+class @intToPtrIR : @abstractInstructionIR {
+  @string mLLVMName
+  @bigint mRegisterAddress
+  @string mRegisterName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeVolatileIR llvmInstructionCode
+override method @intToPtrIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetVarType llvmTypeName]
-  ioLLVMcode += "  store volatile " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType
-             + " * inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
+  ioLLVMcode += "  " + mLLVMName + " = add i32 " + mRegisterAddress
+             + ", 0 ; Register " + mRegisterName + " at " + [mRegisterAddress hexString] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeVolatileIR enterAccessibleEntities 
+override method @intToPtrIR enterAccessibleEntities 
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
