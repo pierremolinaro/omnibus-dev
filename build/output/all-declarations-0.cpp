@@ -6829,10 +6829,10 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i63_ (GALGAS_ast & ioArgu
   outArgument_outExpression.drop () ; // Release 'out' argument
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_addressof COMMA_SOURCE_FILE ("expression-addressof.galgas", 26)) ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("expression-addressof.galgas", 27)) ;
-  GALGAS_LValueAST var_lvalue_1340 ;
-  nt_lvalue_ (ioArgument_ioAST, var_lvalue_1340, inCompiler) ;
+  GALGAS_LValueAST var_lvalue_1342 ;
+  nt_lvalue_ (ioArgument_ioAST, var_lvalue_1342, inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("expression-addressof.galgas", 29)) ;
-  outArgument_outExpression = GALGAS_addressofExpressionAST::constructor_new (var_lvalue_1340  COMMA_SOURCE_FILE ("expression-addressof.galgas", 30)) ;
+  outArgument_outExpression = GALGAS_addressofExpressionAST::constructor_new (var_lvalue_1342  COMMA_SOURCE_FILE ("expression-addressof.galgas", 30)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6853,12 +6853,12 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i64_ (GALGAS_ast & ioArgu
   outArgument_outExpression.drop () ; // Release 'out' argument
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_addressof COMMA_SOURCE_FILE ("expression-addressof.galgas", 36)) ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("expression-addressof.galgas", 37)) ;
-  GALGAS_lstring var_registerGroupName_1680 ;
-  GALGAS_lstring var_registerName_1698 ;
-  GALGAS_registerIndexAST var_registerIndex_1717 ;
-  nt_control_5F_register_5F_lvalue_ (ioArgument_ioAST, var_registerGroupName_1680, var_registerName_1698, var_registerIndex_1717, inCompiler) ;
+  GALGAS_lstring var_registerGroupName_1682 ;
+  GALGAS_lstring var_registerName_1700 ;
+  GALGAS_registerIndexAST var_registerIndex_1719 ;
+  nt_control_5F_register_5F_lvalue_ (ioArgument_ioAST, var_registerGroupName_1682, var_registerName_1700, var_registerIndex_1719, inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("expression-addressof.galgas", 39)) ;
-  outArgument_outExpression = GALGAS_addressofControlRegisterAST::constructor_new (var_registerGroupName_1680, var_registerName_1698, var_registerIndex_1717  COMMA_SOURCE_FILE ("expression-addressof.galgas", 40)) ;
+  outArgument_outExpression = GALGAS_addressofControlRegisterAST::constructor_new (var_registerGroupName_1682, var_registerName_1700, var_registerIndex_1719  COMMA_SOURCE_FILE ("expression-addressof.galgas", 40)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
