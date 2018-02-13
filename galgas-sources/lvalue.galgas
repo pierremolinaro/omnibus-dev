@@ -49,7 +49,6 @@ syntax extension plm_syntax {
       let endOfIndex = @location.here
       $]$
       registerIndexAST = .index {!index:expression !endOfIndex:endOfIndex}
-#      accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
     end
     outAssignmentTargetAST = .new {!registerGroupName !.register {!registerName:registerName !index:registerIndexAST}}
   }
@@ -95,7 +94,6 @@ method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenc
   case regular (@accessInAssignmentListAST accessList) :
     for (access) in accessList do
       switch access
-#      case register (*) :
       case property (*) :
       case arrayAccess (@expressionAST indexExpression *) :
         [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]

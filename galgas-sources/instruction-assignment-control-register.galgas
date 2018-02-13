@@ -1,0 +1,262 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @controlRegisterAssignmentOperatorKind {
+  case assignment
+  case assignmentWithOperator (@infixOperator infixOperator @location operatorLocation)
+}
+
+#·······················································································································
+
+class @controlRegisterAssignmentInstructionAST : @instructionAST {
+  @lstring mRegisterGroupName
+  @lstring mRegisterName
+  @registerIndexAST mRegisterIndex
+  @controlRegisterAssignmentOperatorKind mAssignmentKind
+  @expressionAST mSourceExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+    $§$
+    $identifier$ ?let registerGroupName
+    $:$
+    $identifier$ ?let registerName
+    @registerIndexAST registerIndexAST 
+    select
+      registerIndexAST = .noIndex
+    or
+      $[$
+      <expression> !?ioAST ?let expression
+      let endOfIndex = @location.here
+      $]$
+      registerIndexAST = .index {!index:expression !endOfIndex:endOfIndex}
+    end
+  #--- Assignment or assignment operator
+    @controlRegisterAssignmentOperatorKind assignmentKind
+    select
+      $=$
+      assignmentKind = .assignment
+    or
+      <assignment_combined_with_operator> ?let infixOperator ?let operatorLocation
+      assignmentKind = .assignmentWithOperator {!infixOperator:infixOperator !operatorLocation:operatorLocation}
+    end
+  #--- Source expression
+    <expression> !?ioAST ?let sourceExpression
+  #---
+    ioInstructionList += !@controlRegisterAssignmentInstructionAST.new {
+      !registerGroupName.location
+      !registerGroupName
+      !registerName
+      !registerIndexAST
+      !assignmentKind
+      !sourceExpression
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @controlRegisterAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  switch mRegisterIndex
+  case noIndex :
+  case index (indexExpression *) :
+    [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @controlRegisterAssignmentInstructionAST instructionSemanticAnalysis
+  ?self:let @PLMType inSelfType
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+#-------------------- Search register group name in entity map
+  [ioUniversalMap searchEntity !mRegisterGroupName ?let entity]
+  @controlRegisterMap registerMap
+#-------------------- Search register name in register group map
+  switch entity
+  case task (*) :
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+  case driver (2*) :
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+  case globalConstant (*) :
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+  case localConstant (3*) :
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+  case globalSyncInstance (2*) :
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+  case localVariable (2*) :
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+  case registerGroup (theRegisterMap) :
+    registerMap = theRegisterMap
+  end
+  [registerMap searchKey
+    !mRegisterName
+    ?let @PLMType registerType
+    ?let @bool readOnly
+    ?let @bool userAccess
+    ?2*
+    ?let @controlRegisterGroupKind controlRegisterGroupKind
+    ?2*
+    ?let @uint inRegisterArraySize # 0 if not an array
+    ?let @uint inRegisterElementSize # 0 if not an array
+  ]
+#-------------------- Check access
+  if readOnly then
+    error mRegisterName
+      : "this control register cannot be modified (declared with @ro attribute)"
+  elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
+    error mRegisterName : "this control register is not accessible in user mode"
+  end
+#-------------------- Analyze source expression
+  [mSourceExpression analyzeExpression
+    !self:inSelfType
+    !routineAttributes:inRoutineAttributes
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:registerType
+    !context:inContext
+    !mode:inMode
+    !?temporary:ioTemporaries
+    !?staticEntityMap:ioStaticEntityMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR sourceOperand
+  ]
+#-------------------- Load source expression
+  [!?ioInstructionGenerationList appendLoadWhenReference
+    !?ioTemporaries
+    !?sourceOperand
+  ]
+#-------------------- Analyze control register target
+  @objectIR registerReferenceIR
+  @LValueRepresentation registerRepresentation
+  switch controlRegisterGroupKind
+  case single (registerAddress) :
+    if [mRegisterIndex isNoIndex] then # Simple access to a control register for writing
+      if inRegisterArraySize == 0 then
+        registerRepresentation = .volatileAbsoluteReference {!type:registerType !address:registerAddress}
+        getNewTempValue (!registerType !?ioTemporaries ?registerReferenceIR)
+        [!?ioInstructionGenerationList appendLoadVolatileRegister !registerReferenceIR !registerAddress]
+      else
+        error mRegisterName : "the control register is an array" : registerRepresentation, registerReferenceIR
+      end
+    else # Simple access to a control register for writing
+      [mRegisterIndex index ?index:let indexExpression ?endOfIndex:let endOfIndex]
+      handleArraySubscriptNew (
+        !self: inSelfType
+        !routineAttributes:inRoutineAttributes
+        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+        !context: inContext
+        !mode: inMode
+        !?temporary: ioTemporaries
+        !?staticEntityMap:ioStaticEntityMap
+        !?variableMap: ioUniversalMap
+        !?alloca: ioAllocaList
+        !indexExpression 
+        !endOfIndex
+        !arraySize:inRegisterArraySize
+        !elementType:registerType
+        !?ioInstructionGenerationList
+        ?let @objectIR indexIR
+      )
+      if [indexIR isLiteralInteger] then # subscript expression is constant
+        [indexIR literalInteger ?1* ?value:let @bigint idx]
+        let addr = registerAddress + idx * inRegisterElementSize
+        registerRepresentation = .volatileAbsoluteReference {!type:registerType !address:addr}      
+        getNewTempValue (!registerType !?ioTemporaries ?registerReferenceIR)
+        [!?ioInstructionGenerationList appendLoadVolatileRegister !registerReferenceIR !addr]
+      else
+        [!?ioTemporaries newTempLLVMVar ?let llvmName]
+        [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
+          !llvmName
+          !indexIR
+          !registerAddress
+          !inRegisterElementSize
+        ]
+        registerRepresentation = .volatileIndirectReference {!type:registerType !llvmName:llvmName}      
+        getNewTempValue (!registerType  !?ioTemporaries ?registerReferenceIR)
+        [!?ioInstructionGenerationList appendLoadVolatileRegisterWithSubscript
+          !registerReferenceIR
+          !indexIR
+          !registerAddress
+          !inRegisterElementSize
+        ]
+      end
+    end
+  end
+#-------------------- Perform assignment
+  let t = [sourceOperand type]
+  if not [t copyable] then
+    error mRegisterGroupName : "source expression is not copyable"
+  else
+    switch mAssignmentKind
+    case assignment :
+      switch registerRepresentation
+      case volatileAbsoluteReference (@PLMType type @uint address) :
+        [!?ioInstructionGenerationList appendStoreVolatileRegister !type !address !sourceOperand]
+      case volatileIndirectReference (@PLMType type @string llvmName) :
+        [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !type !llvmName !sourceOperand]
+      case universalReference (2*) :
+        error mRegisterGroupName : "INTERNAL ERROR"
+      end
+    case assignmentWithOperator (@infixOperator infixOperator @location operatorLocation) :
+    #--- Perform operation
+      let operatorMap = getInfixOperatorMap (!infixOperator !context:inContext !mode:inMode !operatorLocation)
+      [operatorMap checkBinaryOperationWith
+        !leftType:[registerReferenceIR type]
+        !rightType:[sourceOperand type]
+        !operatorLocation:operatorLocation
+        ?resultType:let resultType
+        ?op:let @infixOperatorDescription binaryOperator
+      ]
+      [binaryOperator generateInfixOperatorCode
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+        !registerReferenceIR
+        !operatorLocation
+        !sourceOperand
+        !resultType
+        ?let operationResult
+      ]
+    #--- Store register
+      switch registerRepresentation
+      case volatileAbsoluteReference (@PLMType type @uint address) :
+        [!?ioInstructionGenerationList appendStoreVolatileRegister !type !address !operationResult]
+      case volatileIndirectReference (@PLMType type @string llvmName) :
+        [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !type !llvmName !operationResult]
+      case universalReference (2*) :
+        error mRegisterGroupName : "INTERNAL ERROR"
+      end
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
