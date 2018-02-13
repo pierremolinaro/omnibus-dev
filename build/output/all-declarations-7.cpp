@@ -7308,208 +7308,6 @@ GALGAS_storeToUniversalReferenceIR GALGAS_storeToUniversalReferenceIR::extractOb
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_storeIndirectVolatileIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_storeIndirectVolatileIR * p = (const cPtr_storeIndirectVolatileIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_storeIndirectVolatileIR) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mTargetVarType.objectCompare (p->mProperty_mTargetVarType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mLLVMName.objectCompare (p->mProperty_mLLVMName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mSourceValue.objectCompare (p->mProperty_mSourceValue) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_storeIndirectVolatileIR::objectCompare (const GALGAS_storeIndirectVolatileIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_storeIndirectVolatileIR::GALGAS_storeIndirectVolatileIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_storeIndirectVolatileIR::GALGAS_storeIndirectVolatileIR (const cPtr_storeIndirectVolatileIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_storeIndirectVolatileIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_storeIndirectVolatileIR GALGAS_storeIndirectVolatileIR::constructor_new (const GALGAS_PLMType & inAttribute_mTargetVarType,
-                                                                                const GALGAS_string & inAttribute_mLLVMName,
-                                                                                const GALGAS_objectIR & inAttribute_mSourceValue
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_storeIndirectVolatileIR result ;
-  if (inAttribute_mTargetVarType.isValid () && inAttribute_mLLVMName.isValid () && inAttribute_mSourceValue.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_storeIndirectVolatileIR (inAttribute_mTargetVarType, inAttribute_mLLVMName, inAttribute_mSourceValue COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType GALGAS_storeIndirectVolatileIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_PLMType result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_storeIndirectVolatileIR * p = (const cPtr_storeIndirectVolatileIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeIndirectVolatileIR) ;
-    result = p->mProperty_mTargetVarType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType cPtr_storeIndirectVolatileIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTargetVarType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_storeIndirectVolatileIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_storeIndirectVolatileIR * p = (const cPtr_storeIndirectVolatileIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeIndirectVolatileIR) ;
-    result = p->mProperty_mLLVMName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_storeIndirectVolatileIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mLLVMName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_storeIndirectVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_objectIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_storeIndirectVolatileIR * p = (const cPtr_storeIndirectVolatileIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeIndirectVolatileIR) ;
-    result = p->mProperty_mSourceValue ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR cPtr_storeIndirectVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSourceValue ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                  Pointer class for @storeIndirectVolatileIR class                                   *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_storeIndirectVolatileIR::cPtr_storeIndirectVolatileIR (const GALGAS_PLMType & in_mTargetVarType,
-                                                            const GALGAS_string & in_mLLVMName,
-                                                            const GALGAS_objectIR & in_mSourceValue
-                                                            COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mProperty_mTargetVarType (in_mTargetVarType),
-mProperty_mLLVMName (in_mLLVMName),
-mProperty_mSourceValue (in_mSourceValue) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_storeIndirectVolatileIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_storeIndirectVolatileIR ;
-}
-
-void cPtr_storeIndirectVolatileIR::description (C_String & ioString,
-                                                const int32_t inIndentation) const {
-  ioString << "[@storeIndirectVolatileIR:" ;
-  mProperty_mTargetVarType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mLLVMName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mSourceValue.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_storeIndirectVolatileIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_storeIndirectVolatileIR (mProperty_mTargetVarType, mProperty_mLLVMName, mProperty_mSourceValue COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @storeIndirectVolatileIR type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_storeIndirectVolatileIR ("storeIndirectVolatileIR",
-                                                & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_storeIndirectVolatileIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_storeIndirectVolatileIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_storeIndirectVolatileIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_storeIndirectVolatileIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_storeIndirectVolatileIR GALGAS_storeIndirectVolatileIR::extractObject (const GALGAS_object & inObject,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_storeIndirectVolatileIR result ;
-  const GALGAS_storeIndirectVolatileIR * p = (const GALGAS_storeIndirectVolatileIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_storeIndirectVolatileIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("storeIndirectVolatileIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
 typeComparisonResult cPtr_storeLocalVariableIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) inOperandPtr ;
@@ -8589,6 +8387,208 @@ GALGAS_releaseIR GALGAS_releaseIR::extractObject (const GALGAS_object & inObject
       result = *p ;
     }else{
       inCompiler->castError ("releaseIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_storeIndirectVolatileIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_storeIndirectVolatileIR * p = (const cPtr_storeIndirectVolatileIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_storeIndirectVolatileIR) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mTargetVarType.objectCompare (p->mProperty_mTargetVarType) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mLLVMName.objectCompare (p->mProperty_mLLVMName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mSourceValue.objectCompare (p->mProperty_mSourceValue) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_storeIndirectVolatileIR::objectCompare (const GALGAS_storeIndirectVolatileIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_storeIndirectVolatileIR::GALGAS_storeIndirectVolatileIR (void) :
+GALGAS_abstractInstructionIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_storeIndirectVolatileIR::GALGAS_storeIndirectVolatileIR (const cPtr_storeIndirectVolatileIR * inSourcePtr) :
+GALGAS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_storeIndirectVolatileIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_storeIndirectVolatileIR GALGAS_storeIndirectVolatileIR::constructor_new (const GALGAS_PLMType & inAttribute_mTargetVarType,
+                                                                                const GALGAS_string & inAttribute_mLLVMName,
+                                                                                const GALGAS_objectIR & inAttribute_mSourceValue
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_storeIndirectVolatileIR result ;
+  if (inAttribute_mTargetVarType.isValid () && inAttribute_mLLVMName.isValid () && inAttribute_mSourceValue.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_storeIndirectVolatileIR (inAttribute_mTargetVarType, inAttribute_mLLVMName, inAttribute_mSourceValue COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMType GALGAS_storeIndirectVolatileIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+  GALGAS_PLMType result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_storeIndirectVolatileIR * p = (const cPtr_storeIndirectVolatileIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_storeIndirectVolatileIR) ;
+    result = p->mProperty_mTargetVarType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMType cPtr_storeIndirectVolatileIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTargetVarType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_storeIndirectVolatileIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_storeIndirectVolatileIR * p = (const cPtr_storeIndirectVolatileIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_storeIndirectVolatileIR) ;
+    result = p->mProperty_mLLVMName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string cPtr_storeIndirectVolatileIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLLVMName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_storeIndirectVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_storeIndirectVolatileIR * p = (const cPtr_storeIndirectVolatileIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_storeIndirectVolatileIR) ;
+    result = p->mProperty_mSourceValue ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR cPtr_storeIndirectVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSourceValue ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                  Pointer class for @storeIndirectVolatileIR class                                   *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_storeIndirectVolatileIR::cPtr_storeIndirectVolatileIR (const GALGAS_PLMType & in_mTargetVarType,
+                                                            const GALGAS_string & in_mLLVMName,
+                                                            const GALGAS_objectIR & in_mSourceValue
+                                                            COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (THERE),
+mProperty_mTargetVarType (in_mTargetVarType),
+mProperty_mLLVMName (in_mLLVMName),
+mProperty_mSourceValue (in_mSourceValue) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_storeIndirectVolatileIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_storeIndirectVolatileIR ;
+}
+
+void cPtr_storeIndirectVolatileIR::description (C_String & ioString,
+                                                const int32_t inIndentation) const {
+  ioString << "[@storeIndirectVolatileIR:" ;
+  mProperty_mTargetVarType.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mLLVMName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mSourceValue.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_storeIndirectVolatileIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_storeIndirectVolatileIR (mProperty_mTargetVarType, mProperty_mLLVMName, mProperty_mSourceValue COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @storeIndirectVolatileIR type                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_storeIndirectVolatileIR ("storeIndirectVolatileIR",
+                                                & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_storeIndirectVolatileIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_storeIndirectVolatileIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_storeIndirectVolatileIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_storeIndirectVolatileIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_storeIndirectVolatileIR GALGAS_storeIndirectVolatileIR::extractObject (const GALGAS_object & inObject,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_storeIndirectVolatileIR result ;
+  const GALGAS_storeIndirectVolatileIR * p = (const GALGAS_storeIndirectVolatileIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_storeIndirectVolatileIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("storeIndirectVolatileIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
