@@ -6497,7 +6497,8 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_registerInExpressionAST constructor_new (const class GALGAS_lstring & inOperand0,
                                                                         const class GALGAS_lstring & inOperand1,
-                                                                        const class GALGAS_primaryInExpressionAccessListAST & inOperand2
+                                                                        const class GALGAS_primaryInExpressionAccessListAST & inOperand2,
+                                                                        const class GALGAS_lstring & inOperand3
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -6510,6 +6511,8 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFieldName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mGroupName (LOCATION_ARGS) const ;
 
@@ -6537,11 +6540,13 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
   public : GALGAS_lstring mProperty_mGroupName ;
   public : GALGAS_lstring mProperty_mRegisterName ;
   public : GALGAS_primaryInExpressionAccessListAST mProperty_mAccessList ;
+  public : GALGAS_lstring mProperty_mFieldName ;
 
 //--- Constructor
   public : cPtr_registerInExpressionAST (const GALGAS_lstring & in_mGroupName,
                                          const GALGAS_lstring & in_mRegisterName,
-                                         const GALGAS_primaryInExpressionAccessListAST & in_mAccessList
+                                         const GALGAS_primaryInExpressionAccessListAST & in_mAccessList,
+                                         const GALGAS_lstring & in_mFieldName
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -6551,6 +6556,7 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mGroupName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFieldName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
