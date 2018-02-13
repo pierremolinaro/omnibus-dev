@@ -1,5 +1,5 @@
 
-setter @instructionListIR appendLoadVolatileRegister
+setter @instructionListIR appendLoadVolatileRegister2
   ?let @objectIR inTargetValue
   ?let @bigint inAddress
 {
