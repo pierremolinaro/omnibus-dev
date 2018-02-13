@@ -6,6 +6,7 @@ class @registerInExpressionAST : @expressionAST {
   @lstring mGroupName
   @lstring mRegisterName
   @primaryInExpressionAccessListAST mAccessList
+  @lstring mFieldName # Empty string if no field access
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,8 +20,8 @@ syntax extension plm_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $identifier$ ?let registerGroupName
     $:$
-    @primaryInExpressionAccessListAST accessList = {}
     $identifier$ ?let registerName
+    @primaryInExpressionAccessListAST accessList = {}
     select
     or
       $[$
@@ -29,14 +30,16 @@ syntax extension plm_syntax {
       $]$
       accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
     end
+    @lstring fieldName
     select
+      fieldName = ["" nowhere]
     or
       $:$
-      $identifier$ ?let fieldName
-      accessList += !.register {!name:fieldName}
+      $identifier$ ?fieldName
+#      accessList += !.register {!name:fieldName}
     end
   #--- AST
-    outExpression = @registerInExpressionAST.new {!registerGroupName !registerName !accessList}
+    outExpression = @registerInExpressionAST.new {!registerGroupName !registerName !accessList !fieldName}
   }
 
   #·····················································································································
@@ -160,6 +163,7 @@ override method @registerInExpressionAST analyzeExpression
         !registerMap
         !mRegisterName
         !mAccessList
+        !mFieldName # Empty string if no field access
         ?result: outResult
       )
     end
@@ -182,6 +186,7 @@ private proc analyzeRegisterExpression
   ?let @controlRegisterMap inControlRegisterMap
   ?let @lstring inRegisterName
   ?let @primaryInExpressionAccessListAST inAccessList
+  ?let @lstring inFieldName # Empty string if no field access
   !result:@objectIR outResult
 {
   var accessList = inAccessList
@@ -253,40 +258,25 @@ private proc analyzeRegisterExpression
       [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !registerAddress]
     end
   end
-#--- Access list
-  var currentSliceMap = inRegisterSliceMap
-  var currentType = inRegisterType
-  for (access) in accessList do
-    switch access
-    case integerSlice (@lbigint low *) :
-      error low : "cannot extract a slice from a register"
-    case property (@lstring propertyName) :
-      error propertyName : "invalid prperty access"
-    case register (@lstring registerName) :
-      [currentSliceMap searchKey
-        !registerName
-        ?let @llvmBinaryOperation accessOperator
-        ?let @bigint accessRightOperand
-        ?let @sliceMap subMap
-        ?let @PLMType resultType
-      ]
-      getNewTempValue (!resultType !?ioTemporaries ?let resultIR)
-      [!?ioInstructionGenerationList appendBinaryOperation
-        !resultIR
-        ![outResult type]
-        !registerName.location
-        !outResult
-        !accessOperator
-        !.literalInteger {!type:staticIntegerType () !value:accessRightOperand}
-      ]
-      currentSliceMap = subMap
-      currentType = resultType
-      outResult = resultIR
-    case arrayAccess (* @location endOfIndex) :
-      error endOfIndex : "receiver is a control register, subscripting is invalid here"
-    case funcCall (* * errorLocation) :
-      error errorLocation : "receiver is a control register, cannot be used as a function"
-    end
+#---------- Field access
+  if inFieldName.string != "" then
+    [inRegisterSliceMap searchKey
+      !inFieldName
+      ?let @llvmBinaryOperation accessOperator
+      ?let @bigint accessRightOperand
+      ?*
+      ?let @PLMType resultType
+    ]
+    getNewTempValue (!resultType !?ioTemporaries ?let resultIR)
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !resultIR
+      ![outResult type]
+      !inFieldName.location
+      !outResult
+      !accessOperator
+      !.literalInteger {!type:staticIntegerType () !value:accessRightOperand}
+    ]
+    outResult = resultIR
   end
 }
 
