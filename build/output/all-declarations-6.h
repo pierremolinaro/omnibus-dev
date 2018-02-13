@@ -2475,26 +2475,26 @@ void extensionMethod_searchEntity (const class GALGAS_universalValuedObjectMap i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Routine 'analyzeRegisterExpression'                                         *
+//                                        Routine 'analyzeRegisterExpressionEX'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_analyzeRegisterExpression (const class GALGAS_PLMType constinArgument0,
-                                        const class GALGAS_routineAttributes constinArgument1,
-                                        const class GALGAS_lstring constinArgument2,
-                                        const class GALGAS_semanticContext constinArgument3,
-                                        const class GALGAS_mode constinArgument4,
-                                        class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                        class GALGAS_staticEntityMap & ioArgument6,
-                                        class GALGAS_universalValuedObjectMap & ioArgument7,
-                                        class GALGAS_allocaList & ioArgument8,
-                                        class GALGAS_instructionListIR & ioArgument9,
-                                        const class GALGAS_controlRegisterMap constinArgument10,
-                                        const class GALGAS_location constinArgument11,
-                                        const class GALGAS_primaryInExpressionAccessListAST constinArgument12,
-                                        class GALGAS_objectIR & outArgument13,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+void routine_analyzeRegisterExpressionEX (const class GALGAS_PLMType constinArgument0,
+                                          const class GALGAS_routineAttributes constinArgument1,
+                                          const class GALGAS_lstring constinArgument2,
+                                          const class GALGAS_semanticContext constinArgument3,
+                                          const class GALGAS_mode constinArgument4,
+                                          class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                          class GALGAS_staticEntityMap & ioArgument6,
+                                          class GALGAS_universalValuedObjectMap & ioArgument7,
+                                          class GALGAS_allocaList & ioArgument8,
+                                          class GALGAS_instructionListIR & ioArgument9,
+                                          const class GALGAS_controlRegisterMap constinArgument10,
+                                          const class GALGAS_location constinArgument11,
+                                          const class GALGAS_primaryInExpressionAccessListAST constinArgument12,
+                                          class GALGAS_objectIR & outArgument13,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
