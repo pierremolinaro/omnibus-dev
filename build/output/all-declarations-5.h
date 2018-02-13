@@ -3280,6 +3280,17 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                                                         GALGAS_location & outArgument1,
                                                                         C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'control_register_lvalue' non terminal
+//--- 'parse' label
+  public : virtual void nt_control_5F_register_5F_lvalue_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_control_5F_register_5F_lvalue_ (GALGAS_ast & ioArgument0,
+                                                           GALGAS_lstring & outArgument1,
+                                                           GALGAS_lstring & outArgument2,
+                                                           GALGAS_registerIndexAST & outArgument3,
+                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'declaration' non terminal
 //--- 'parse' label
   public : virtual void nt_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -3945,8 +3956,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_110 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_111 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_syntax_112 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
