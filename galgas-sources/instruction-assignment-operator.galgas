@@ -55,22 +55,16 @@ syntax extension plm_syntax {
   #--- Right expression
     <expression> !?ioAST ?let @expressionAST rightExpression
   #--- Build source expression
-    @expressionAST leftExpression
-    switch lvalue.mKind
-    case register (@lstring registerName  @registerIndexAST index) :
-      leftExpression = @registerInExpressionAST.new {!lvalue.mIdentifier !registerName !index !["" nowhere]}
-    case regular (@accessInAssignmentListAST accessList) :
-      @primaryInExpressionAccessListAST expressionAccessList = {}
-      for (access) in accessList do
-        switch access
-        case property (@lstring name) :
-          expressionAccessList += !.property {!name:name}
-        case arrayAccess (@expressionAST index @location endOfIndex) :
-          expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
-        end
+    @primaryInExpressionAccessListAST expressionAccessList = {}
+    for (access) in lvalue.mAccessList do
+      switch access
+      case property (@lstring name) :
+        expressionAccessList += !.property {!name:name}
+      case arrayAccess (@expressionAST index @location endOfIndex) :
+        expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
       end
-      leftExpression = @primaryInExpressionAST.new {!lvalue.mIdentifier !expressionAccessList}
     end
+    let leftExpression = @primaryInExpressionAST.new {!lvalue.mIdentifier !expressionAccessList}
     let expression = @infixOperatorExpressionAST.new {
       !leftExpression
       !operatorLocation

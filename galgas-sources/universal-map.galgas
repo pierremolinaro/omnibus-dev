@@ -321,71 +321,49 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
 
 method @universalValuedObjectMap searchValuedObjectType
   ?selfType: let @PLMType inSelfType
-  ?let @lstring inValuedObjectName
-  ?let @LValueKindAST inKind
+  ?let @LValueAST inLValue
   !@PLMType outType
 {
-  switch inKind
-  case register (registerName *) : # inValuedObjectName is register group name
-    [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?let property]
+  var accessList = inLValue.mAccessList
+  if inLValue.mIdentifier.string == "" then # Receiver is self
+    outType = inSelfType
+  else
+    [mInternalPropertyAndRoutineMap searchKey !inLValue.mIdentifier ?2* ?let property]
     switch property
     case task (*) :
-      error inValuedObjectName : "undefined in this context" : outType
+      error inLValue.mIdentifier : "undefined in this context" : outType
     case driver (* *) :
-      error inValuedObjectName : "undefined in this context" : outType
-    case registerGroup (registerMap) :
-      [registerMap searchKey !registerName ?outType ?9*]
+      error inLValue.mIdentifier : "undefined in this context" : outType
+    case registerGroup (*) :
+      error inLValue.mIdentifier : "undefined in this context" : outType
     case globalConstant (*) :
-      error inValuedObjectName : "undefined in this context" : outType
+      error inLValue.mIdentifier : "undefined in this context" : outType
     case localConstant (3*) :
-      error inValuedObjectName : "undefined in this context" : outType
-    case localVariable (2*) :
-      error inValuedObjectName : "undefined in this context" : outType
-    case globalSyncInstance (2*) :
-      error inValuedObjectName : "undefined in this context" : outType
+      error inLValue.mIdentifier : "undefined in this context" : outType
+    case localVariable (@PLMType type *) :
+      outType = type
+    case globalSyncInstance (@PLMType type *) :
+      outType = type
     end
-  case regular (regularAccessList) :
-    var accessList = regularAccessList
-    if inValuedObjectName.string == "" then # Receiver is self
-      outType = inSelfType
-    else
-      [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?let property]
-      switch property
-      case task (*) :
-        error inValuedObjectName : "undefined in this context" : outType
-      case driver (* *) :
-        error inValuedObjectName : "undefined in this context" : outType
-      case registerGroup (*) :
-        error inValuedObjectName : "undefined in this context" : outType
-      case globalConstant (*) :
-        error inValuedObjectName : "undefined in this context" : outType
-      case localConstant (3*) :
-        error inValuedObjectName : "undefined in this context" : outType
-      case localVariable (@PLMType type *) :
+  end
+  for (access) in accessList do
+    switch access
+    case property (@lstring propertyName) :
+      let @propertyMap propertyMap = outType.propertyMap
+      [propertyMap searchKey !propertyName ?* ?let accessKind]
+      switch accessKind
+      case constantProperty (value) :
+        outType = [value type]
+      case singleton  (object *) :
+        outType = [object type]
+      case indexed  (type *) :
         outType = type
-      case globalSyncInstance (@PLMType type *) :
-        outType = type
+      case nonVirtualMethod (*) :
+        error propertyName : "a method cannot be used in this context" : outType
       end
-    end
-    for (access) in accessList do
-      switch access
-      case property (@lstring propertyName) :
-        let @propertyMap propertyMap = outType.propertyMap
-        [propertyMap searchKey !propertyName ?* ?let accessKind]
-        switch accessKind
-        case constantProperty (value) :
-          outType = [value type]
-        case singleton  (object *) :
-          outType = [object type]
-        case indexed  (type *) :
-          outType = type
-        case nonVirtualMethod (*) :
-          error propertyName : "a method cannot be used in this context" : outType
-        end
-      case arrayAccess (* *) :
-        if [outType.kind isArrayType] then
-          [outType.kind arrayType ?elementType:outType ?1*]
-        end
+    case arrayAccess (* *) :
+      if [outType.kind isArrayType] then
+        [outType.kind arrayType ?elementType:outType ?1*]
       end
     end
   end

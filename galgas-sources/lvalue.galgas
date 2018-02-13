@@ -3,7 +3,6 @@
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @accessInAssignmentAST {
-#  case register (@lstring name)
   case property (@lstring name)
   case arrayAccess (@expressionAST index @location endOfIndex)
 }
@@ -16,16 +15,9 @@ list @accessInAssignmentListAST {
 
 #·······················································································································
 
-enum @LValueKindAST {
-  case regular (@accessInAssignmentListAST accessList)
-  case register (@lstring registerName  @registerIndexAST index)
-}
-
-#·······················································································································
-
 struct @LValueAST {
   @lstring mIdentifier
-  @LValueKindAST mKind
+  @accessInAssignmentListAST mAccessList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -33,25 +25,6 @@ struct @LValueAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
-
-  #·····················································································································
-
-#  rule <lvalue> ?!@ast ioAST !@LValueAST outAssignmentTargetAST {
-#    $identifier$ ?let registerGroupName
-#    $:$
-#    $identifier$ ?let registerName
-#    @registerIndexAST registerIndexAST 
-#    select
-#      registerIndexAST = .noIndex
-#    or
-#      $[$
-#      <expression> !?ioAST ?let expression
-#      let endOfIndex = @location.here
-#      $]$
-#      registerIndexAST = .index {!index:expression !endOfIndex:endOfIndex}
-#    end
-#    outAssignmentTargetAST = .new {!registerGroupName !.register {!registerName:registerName !index:registerIndexAST}}
-#  }
 
   #·····················································································································
 
@@ -78,7 +51,7 @@ syntax extension plm_syntax {
       $]$
       accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
     end
-    outAssignmentTargetAST = .new {!receiver !.regular {!accessList:accessList}}
+    outAssignmentTargetAST = .new {!receiver !accessList}
   }
 
   #·····················································································································
@@ -90,19 +63,10 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  switch mKind
-  case regular (@accessInAssignmentListAST accessList) :
-    for (access) in accessList do
-      switch access
-      case property (*) :
-      case arrayAccess (@expressionAST indexExpression *) :
-        [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-      end
-    end
-  case register (* index) :
-    switch index
-    case noIndex :
-    case index (indexExpression *) :
+  for (access) in mAccessList do
+    switch access
+    case property (*) :
+    case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     end
   end
@@ -167,7 +131,7 @@ method @LValueAST analyzeLValue
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
         !mIdentifier.location
-        !mKind
+        !mAccessList
         ?outInternalRepresentation
       )
     end
@@ -178,23 +142,8 @@ method @LValueAST analyzeLValue
       error mIdentifier : "a task has no value" : outInternalRepresentation
     case driver (* *) :
       error mIdentifier : "a driver has no value" : outInternalRepresentation
-    case registerGroup (registerMap) :
-      analyzeControlRegisterInLValue (
-        !self: inSelfType
-        !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !context: inContext
-        !mode: inMode
-        !?temporary: ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !registerGroupName: mIdentifier
-        !registerMap: registerMap
-        !mKind
-        ?outInternalRepresentation
-      )
+    case registerGroup (*) :
+      error mIdentifier : "INTERNAL ERROR" : outInternalRepresentation
     case globalConstant (*) :
       error mIdentifier : "a global constant cannot be written" : outInternalRepresentation
     case localConstant (3*) :
@@ -217,95 +166,9 @@ method @LValueAST analyzeLValue
         !variableName: mIdentifier
         !llvmName:llvmNameForLocalVariable (!plmName)
         !type: variableType
-        !mKind
+        !mAccessList
         ?outInternalRepresentation
       )
-    end
-  end
-}
-
-#·······················································································································
-
-private proc analyzeControlRegisterInLValue
-  ?self:let @PLMType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?registerGroupName:let @lstring inRegisterGroupName
-  ?registerMap:let @controlRegisterMap inControlRegisterMap
-  ?let @LValueKindAST inKind
-  !@LValueRepresentation outInternalRepresentation
-{
-  if not [inKind isRegister] then # No subscript, no slice
-    error inRegisterGroupName : "the \":\" access is reserved for control register" : outInternalRepresentation
-  else
-    [inKind register ?registerName:let registerName ?index:let registerIndex]
-    [inControlRegisterMap searchKey
-      !registerName
-      ?let @PLMType inRegisterType
-      ?let @bool readOnly
-      ?let @bool userAccess
-      ?let @sliceMap unused inRegisterSliceMap
-      ?let @controlRegisterFieldMap unused mRegisterFieldMap
-      ?let @controlRegisterGroupKind controlRegisterGroupKind
-      ?let @controlRegisterFieldList unused mControlRegisterFieldList # Used for HTML file
-      ?let @uint unused mRegisterBitCount
-      ?let @uint inRegisterArraySize # 0 if not an array
-      ?let @uint inRegisterElementSize # 0 if not an array
-    ]
-    switch controlRegisterGroupKind
-    case single (registerAddress) :
-      if readOnly then
-        error registerName
-          : "this control register cannot be modified (declared with @ro attribute)" : outInternalRepresentation
-      elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
-        error registerName : "this control register is not accessible in user mode" : outInternalRepresentation
-      elsif [registerIndex isNoIndex] then # Simple access to a control register for writing
-        if inRegisterArraySize == 0 then
-          outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:registerAddress}
-        else
-          error registerName : "the control register is an array" : outInternalRepresentation
-        end
-      else # Simple access to a control register for writing
-        [registerIndex index ?index:let indexExpression ?endOfIndex:let endOfIndex]
-        handleArraySubscriptNew (
-          !self: inSelfType
-          !routineAttributes:inRoutineAttributes
-          !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-          !context: inContext
-          !mode: inMode
-          !?temporary: ioTemporaries
-          !?staticEntityMap:ioStaticEntityMap
-          !?variableMap: ioUniversalMap
-          !?alloca: ioAllocaList
-          !indexExpression 
-          !endOfIndex
-          !arraySize:inRegisterArraySize
-          !elementType:inRegisterType
-          !?ioInstructionGenerationList
-          ?let @objectIR indexIR
-        )
-        if [indexIR isLiteralInteger] then # subscript expression is constant
-           [indexIR literalInteger ?1* ?value:let @bigint idx]
-           let addr = registerAddress + idx * inRegisterElementSize
-           outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:addr}      
-        else
-          [!?ioTemporaries newTempLLVMVar ?let llvmName]
-          [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
-            !llvmName
-            !indexIR
-            !registerAddress
-            !inRegisterElementSize
-          ]
-          outInternalRepresentation = .volatileIndirectReference {!type:inRegisterType !llvmName:llvmName}      
-        end
-      end
     end
   end
 }
@@ -327,92 +190,85 @@ private proc analyzeVariableInLValue
   ?variableName:let @lstring inVariableName
   ?llvmName:let @string inLLVMName
   ?type:let @PLMType inVariableType
-  ?let @LValueKindAST inKind
+  ?let @accessInAssignmentListAST inAccessList
   !@LValueRepresentation outInternalRepresentation
 {
-  if not [inKind isRegular] then
-    error inVariableName : "the \":\" access is reserved for control register" : outInternalRepresentation
-  else
-    [inKind regular ?accessList:let accessList]
-    var currentType = inVariableType
-    var currentLLVMName = inLLVMName
-    if [accessList length] == 0 then
-      if inIsReadAccess then
-        [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
-      else
-        [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
-      end
+  var currentType = inVariableType
+  var currentLLVMName = inLLVMName
+  if [inAccessList length] == 0 then
+    if inIsReadAccess then
+      [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
     else
-      if inIsReadAccess then
-        [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
-      else
-        [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
-      end
-      for (access) in accessList do
-        switch access
-#        case register (@lstring registerName) :
-#          error registerName : "invalid register access, receiver is not a register group"
-        case property (@lstring propertyName) :
-          let @propertyMap propertyMap = currentType.propertyMap
-          [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
-          switch propertyAccess
-          case nonVirtualMethod (*) :
-             error propertyName : "a method cannot be written" : currentType, currentLLVMName
-          case singleton  (@objectIR object *) :
-            currentType = [object type]
-            currentLLVMName = [object llvmName]
-          case constantProperty (*) :
-            error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
-          case indexed (@PLMType propertyType @uint index) :
-            [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-            [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-              !currentType
-              !currentLLVMName
-              !newLLVMvariable
-              !index
-              !propertyName
-            ]
-            currentType = propertyType
-            currentLLVMName = newLLVMvariable
-          end
-        case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-          if [currentType.kind isArrayType] then
-            [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
-            handleArraySubscriptNew (
-              !self: inSelfType
-              !routineAttributes:inRoutineAttributes
-              !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-              !context: inContext
-              !mode: inMode
-              !?temporary: ioTemporaries
-              !?staticEntityMap:ioStaticEntityMap
-              !?variableMap:ioUniversalMap
-              !?alloca: ioAllocaList
-              !indexExpression 
-              !endOfIndex
-              !arraySize:arraySize
-              !elementType:elementType
-              !?ioInstructionGenerationList
-              ?let @objectIR indexIR
-           )
-           [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-           [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
-             !currentType
-             !currentLLVMName
-             !elementType
-             !newLLVMvariable
-             !indexIR
-           ]
-           currentType = elementType
-           currentLLVMName = newLLVMvariable
-          else
-            error endOfIndex : "cannot subscript, not an array" : currentType, currentLLVMName
-          end
+      [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
+    end
+  else
+    if inIsReadAccess then
+      [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
+    else
+      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
+    end
+    for (access) in inAccessList do
+      switch access
+      case property (@lstring propertyName) :
+        let @propertyMap propertyMap = currentType.propertyMap
+        [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
+        switch propertyAccess
+        case nonVirtualMethod (*) :
+           error propertyName : "a method cannot be written" : currentType, currentLLVMName
+        case singleton  (@objectIR object *) :
+          currentType = [object type]
+          currentLLVMName = [object llvmName]
+        case constantProperty (*) :
+          error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
+        case indexed (@PLMType propertyType @uint index) :
+          [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+            !currentType
+            !currentLLVMName
+            !newLLVMvariable
+            !index
+            !propertyName
+          ]
+          currentType = propertyType
+          currentLLVMName = newLLVMvariable
+        end
+      case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+        if [currentType.kind isArrayType] then
+          [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
+          handleArraySubscriptNew (
+            !self: inSelfType
+            !routineAttributes:inRoutineAttributes
+            !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+            !context: inContext
+            !mode: inMode
+            !?temporary: ioTemporaries
+            !?staticEntityMap:ioStaticEntityMap
+            !?variableMap:ioUniversalMap
+            !?alloca: ioAllocaList
+            !indexExpression 
+            !endOfIndex
+            !arraySize:arraySize
+            !elementType:elementType
+            !?ioInstructionGenerationList
+            ?let @objectIR indexIR
+         )
+         [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+         [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
+           !currentType
+           !currentLLVMName
+           !elementType
+           !newLLVMvariable
+           !indexIR
+         ]
+         currentType = elementType
+         currentLLVMName = newLLVMvariable
+        else
+          error endOfIndex : "cannot subscript, not an array" : currentType, currentLLVMName
         end
       end
     end
-    outInternalRepresentation = .universalReference {!type:currentType !llvmName:currentLLVMName}
   end
+  outInternalRepresentation = .universalReference {!type:currentType !llvmName:currentLLVMName}
  }
 
 #·······················································································································
@@ -429,18 +285,15 @@ private proc analyzeSelfAssignmentTarget
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?let @location inSelfLocation
-  ?let @LValueKindAST inKind
+  ?let @accessInAssignmentListAST inAccessList
   !@LValueRepresentation outInternalRepresentation
 {
   if not ([inSelfType.kind isStructure] || [inSelfType.kind isSyncTool]) then
     error inSelfLocation : "'self' is not available in this context" : outInternalRepresentation
-  elsif not [inKind isRegular] then
-    error inSelfLocation : "'self' is not available in this context" : outInternalRepresentation
   else
-    [inKind regular ?accessList:let accessList]
     var currentType = inSelfType
     var currentLLVMName = llvmNameForSelf ()
-    for (access) in accessList do
+    for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :
         let @propertyMap propertyMap = currentType.propertyMap
