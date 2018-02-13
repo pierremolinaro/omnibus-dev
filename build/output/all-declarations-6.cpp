@@ -11604,7 +11604,7 @@ GALGAS_truncateExpressionAST GALGAS_truncateExpressionAST::extractObject (const 
 
 GALGAS_LValueAST::GALGAS_LValueAST (void) :
 mProperty_mIdentifier (),
-mProperty_mAccessList () {
+mProperty_mKind () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11615,22 +11615,15 @@ GALGAS_LValueAST::~ GALGAS_LValueAST (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_LValueAST::GALGAS_LValueAST (const GALGAS_lstring & inOperand0,
-                                    const GALGAS_accessInAssignmentListAST & inOperand1) :
+                                    const GALGAS_LValueKindAST & inOperand1) :
 mProperty_mIdentifier (inOperand0),
-mProperty_mAccessList (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_LValueAST GALGAS_LValueAST::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_LValueAST (GALGAS_lstring::constructor_default (HERE),
-                           GALGAS_accessInAssignmentListAST::constructor_emptyList (HERE)) ;
+mProperty_mKind (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_LValueAST GALGAS_LValueAST::constructor_new (const GALGAS_lstring & inOperand0,
-                                                    const GALGAS_accessInAssignmentListAST & inOperand1 
+                                                    const GALGAS_LValueKindAST & inOperand1 
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_LValueAST result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
@@ -11647,7 +11640,7 @@ typeComparisonResult GALGAS_LValueAST::objectCompare (const GALGAS_LValueAST & i
     result = mProperty_mIdentifier.objectCompare (inOperand.mProperty_mIdentifier) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mAccessList.objectCompare (inOperand.mProperty_mAccessList) ;
+    result = mProperty_mKind.objectCompare (inOperand.mProperty_mKind) ;
   }
   return result ;
 }
@@ -11655,14 +11648,14 @@ typeComparisonResult GALGAS_LValueAST::objectCompare (const GALGAS_LValueAST & i
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_LValueAST::isValid (void) const {
-  return mProperty_mIdentifier.isValid () && mProperty_mAccessList.isValid () ;
+  return mProperty_mIdentifier.isValid () && mProperty_mKind.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_LValueAST::drop (void) {
   mProperty_mIdentifier.drop () ;
-  mProperty_mAccessList.drop () ;
+  mProperty_mKind.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11675,7 +11668,7 @@ void GALGAS_LValueAST::description (C_String & ioString,
   }else{
     mProperty_mIdentifier.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mAccessList.description (ioString, inIndentation+1) ;
+    mProperty_mKind.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -11688,8 +11681,8 @@ GALGAS_lstring GALGAS_LValueAST::getter_mIdentifier (UNUSED_LOCATION_ARGS) const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_accessInAssignmentListAST GALGAS_LValueAST::getter_mAccessList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mAccessList ;
+GALGAS_LValueKindAST GALGAS_LValueAST::getter_mKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mKind ;
 }
 
 
@@ -11950,13 +11943,6 @@ typeComparisonResult GALGAS_sizeofExpressionAST::objectCompare (const GALGAS_siz
 
 GALGAS_sizeofExpressionAST::GALGAS_sizeofExpressionAST (void) :
 GALGAS_expressionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sizeofExpressionAST GALGAS_sizeofExpressionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_sizeofExpressionAST::constructor_new (GALGAS_LValueAST::constructor_default (HERE)
-                                                      COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

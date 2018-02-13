@@ -10,6 +10,144 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   Extension method '@instructionListIR appendNOP'                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendNOP (GALGAS_instructionListIR & ioObject,
+                                C_Compiler * /* inCompiler */
+                                COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_nopIR::constructor_new (SOURCE_FILE ("intermediate-nop.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-nop.galgas", 3)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_nopIR::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
+  return kOperandEqual ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_nopIR::objectCompare (const GALGAS_nopIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR::GALGAS_nopIR (void) :
+GALGAS_abstractInstructionIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR GALGAS_nopIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_nopIR::constructor_new (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR::GALGAS_nopIR (const cPtr_nopIR * inSourcePtr) :
+GALGAS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_nopIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR GALGAS_nopIR::constructor_new (LOCATION_ARGS) {
+  GALGAS_nopIR result ;
+  macroMyNew (result.mObjectPtr, cPtr_nopIR (THERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                           Pointer class for @nopIR class                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_nopIR::cPtr_nopIR (LOCATION_ARGS) :
+cPtr_abstractInstructionIR (THERE) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_nopIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_nopIR ;
+}
+
+void cPtr_nopIR::description (C_String & ioString,
+                              const int32_t /* inIndentation */) const {
+  ioString << "[@nopIR]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_nopIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_nopIR (THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                     @nopIR type                                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_nopIR ("nopIR",
+                              & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_nopIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_nopIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_nopIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_nopIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR GALGAS_nopIR::extractObject (const GALGAS_object & inObject,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
+  GALGAS_nopIR result ;
+  const GALGAS_nopIR * p = (const GALGAS_nopIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_nopIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("nopIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                 Extension method '@instructionListIR appendExtend'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
