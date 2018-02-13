@@ -6496,7 +6496,8 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_registerInExpressionAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                        const class GALGAS_primaryInExpressionAccessListAST & inOperand1
+                                                                        const class GALGAS_lstring & inOperand1,
+                                                                        const class GALGAS_primaryInExpressionAccessListAST & inOperand2
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -6511,6 +6512,8 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
   public : VIRTUAL_IN_DEBUG class GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mGroupName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -6532,10 +6535,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerInExpressio
 class cPtr_registerInExpressionAST : public cPtr_expressionAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mGroupName ;
+  public : GALGAS_lstring mProperty_mRegisterName ;
   public : GALGAS_primaryInExpressionAccessListAST mProperty_mAccessList ;
 
 //--- Constructor
   public : cPtr_registerInExpressionAST (const GALGAS_lstring & in_mGroupName,
+                                         const GALGAS_lstring & in_mRegisterName,
                                          const GALGAS_primaryInExpressionAccessListAST & in_mAccessList
                                          COMMA_LOCATION_ARGS) ;
 
@@ -6544,6 +6549,7 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mGroupName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
