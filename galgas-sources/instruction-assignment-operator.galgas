@@ -6,7 +6,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <assignment_combined_with_operator> !@infixOperator outInfixOperator !@location outOperatorLocation{
+  rule <assignment_combined_with_operator> !@infixOperator outInfixOperator !@location outOperatorLocation {
     select
       $|=$
       outInfixOperator = .orOp

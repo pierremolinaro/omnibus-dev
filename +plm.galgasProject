@@ -87,6 +87,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/directive-check.galgas"
   "galgas-sources/instruction-assert.galgas"
   "galgas-sources/instruction-assignment.galgas"
+  "galgas-sources/instruction-assignment-control-register.galgas"
   "galgas-sources/instruction-slice-assignment.galgas"
   "galgas-sources/instruction-bit-banding.galgas"
   "galgas-sources/instruction-assignment-operator.galgas"
