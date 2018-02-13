@@ -608,15 +608,15 @@ class cPtr_ComputeRegisterAddressWithSubscriptIR : public cPtr_abstractInstructi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Extension setter '@instructionListIR appendLoadVolatileRegister'                           *
+//                          Extension setter '@instructionListIR appendLoadVolatileRegister2'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendLoadVolatileRegister (class GALGAS_instructionListIR & ioObject,
-                                                 const class GALGAS_objectIR constin_inTargetValue,
-                                                 const class GALGAS_bigint constin_inAddress,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+void extensionSetter_appendLoadVolatileRegister_32_ (class GALGAS_instructionListIR & ioObject,
+                                                     const class GALGAS_objectIR constin_inTargetValue,
+                                                     const class GALGAS_bigint constin_inAddress,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

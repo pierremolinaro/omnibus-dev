@@ -1051,15 +1051,15 @@ GALGAS_ComputeRegisterAddressWithSubscriptIR GALGAS_ComputeRegisterAddressWithSu
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Extension method '@instructionListIR appendLoadVolatileRegister'                           *
+//                          Extension method '@instructionListIR appendLoadVolatileRegister2'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendLoadVolatileRegister (GALGAS_instructionListIR & ioObject,
-                                                 const GALGAS_objectIR constinArgument_inTargetValue,
-                                                 const GALGAS_bigint constinArgument_inAddress,
-                                                 C_Compiler * /* inCompiler */
-                                                 COMMA_UNUSED_LOCATION_ARGS) {
+void extensionSetter_appendLoadVolatileRegister_32_ (GALGAS_instructionListIR & ioObject,
+                                                     const GALGAS_objectIR constinArgument_inTargetValue,
+                                                     const GALGAS_bigint constinArgument_inAddress,
+                                                     C_Compiler * /* inCompiler */
+                                                     COMMA_UNUSED_LOCATION_ARGS) {
   ioObject.addAssign_operation (GALGAS_loadRegisterIR::constructor_new (constinArgument_inTargetValue, constinArgument_inAddress  COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 6)) ;
 }
 
@@ -2277,15 +2277,15 @@ void extensionSetter_appendCopyFromReferences (GALGAS_instructionListIR & ioObje
     extensionSetter_appendStoreToUniversalReference (ioObject, constinArgument_inTargetReference.getter_llvmName (HERE), constinArgument_inTargetReference.getter_type (HERE), var_result_587, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 22)) ;
     }
   }else if (kBoolFalse == test_0) {
-    GALGAS_PLMType var_sourceType_1070 ;
-    GALGAS_string var_sourceLLVMName_1099 ;
-    constinArgument_inSourcePossibleReference.method_reference (var_sourceType_1070, var_sourceLLVMName_1099, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 25)) ;
-    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_sourceType_1070.objectCompare (constinArgument_inTargetReference.getter_type (HERE))).boolEnum () ;
+    GALGAS_PLMType var_sourceType_975 ;
+    GALGAS_string var_sourceLLVMName_1004 ;
+    constinArgument_inSourcePossibleReference.method_reference (var_sourceType_975, var_sourceLLVMName_1004, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 24)) ;
+    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_sourceType_975.objectCompare (constinArgument_inTargetReference.getter_type (HERE))).boolEnum () ;
     if (kBoolTrue == test_1) {
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("object of type $").add_operation (constinArgument_inTargetReference.getter_type (HERE).getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)).add_operation (GALGAS_string (" cannot be assigned from expression of type $"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)).add_operation (var_sourceType_1070.getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 29)), fixItArray2  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 27)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("object of type $").add_operation (constinArgument_inTargetReference.getter_type (HERE).getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 27)).add_operation (GALGAS_string (" cannot be assigned from expression of type $"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 27)).add_operation (var_sourceType_975.getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)), fixItArray2  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 26)) ;
     }
-    ioObject.addAssign_operation (GALGAS_copyFromReferencesIR::constructor_new (var_sourceType_1070, constinArgument_inTargetReference.getter_llvmName (HERE), var_sourceLLVMName_1099  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 31))  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 31)) ;
+    ioObject.addAssign_operation (GALGAS_copyFromReferencesIR::constructor_new (var_sourceType_975, constinArgument_inTargetReference.getter_llvmName (HERE), var_sourceLLVMName_1004  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30))  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30)) ;
   }
 }
 

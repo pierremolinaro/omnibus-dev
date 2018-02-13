@@ -3468,7 +3468,7 @@ const cRegularFileWrapper gWrapperFile_24_embeddedSampleCode (
 //--- File 'teensy-3-6/11-heap.plm'
 
 const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
-  "let F_CPU_MHZ = 144\n"
+  "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
   "\n"

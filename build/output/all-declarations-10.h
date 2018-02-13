@@ -51,9 +51,10 @@ void routine_analyzeRegisterExpression (const class GALGAS_PLMType constinArgume
                                         class GALGAS_instructionListIR & ioArgument9,
                                         const class GALGAS_controlRegisterMap constinArgument10,
                                         const class GALGAS_lstring constinArgument11,
-                                        const class GALGAS_registerIndexAST constinArgument12,
-                                        const class GALGAS_lstring constinArgument13,
-                                        class GALGAS_objectIR & outArgument14,
+                                        const class GALGAS_lstring constinArgument12,
+                                        const class GALGAS_registerIndexAST constinArgument13,
+                                        const class GALGAS_lstring constinArgument14,
+                                        class GALGAS_objectIR & outArgument15,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 

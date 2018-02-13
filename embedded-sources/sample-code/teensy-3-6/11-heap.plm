@@ -1,5 +1,5 @@
 target "teensy-3-6/unprivileged"
-let F_CPU_MHZ = 144
+let F_CPU_MHZ = 240
 
 driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
