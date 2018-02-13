@@ -100,8 +100,6 @@ override method @sizeofExpressionAST analyzeExpression
 {
   if [inRoutineAttributes guard] then
     error mLValue.mIdentifier : "sizeof () cannot be used in guard" : outResult
-#  elsif not [mLValue.mKind isRegular] then
-#    error mLValue.mIdentifier : "sizeof () cannot be used with control register" : outResult
   else
   #--- Analyze LValue
     [ioUniversalMap searchValuedObjectType !selfType:inSelfType !mLValue.mIdentifier !mLValue.mKind ?let type]

@@ -75,7 +75,6 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
 {
   for (access) in mAccessList do
     switch access
-    case register (*) :
     case property (*) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -274,8 +273,8 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
 #--- loop on access list
   for (access) in accessList do
     switch access
-    case register (@lstring registerName) :
-      error registerName : "a register access is invalid here"
+#    case register (@lstring registerName) :
+#      error registerName : "a register access is invalid here"
     case property (@lstring propertyName) :
       [currentObjectPropertyMap searchKey
         !propertyName
@@ -312,8 +311,8 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   end
 #--- Handle last access
   switch lastAccess
-  case register (@lstring registerName) :
-    error registerName : "a property is required here"
+#  case register (@lstring registerName) :
+#    error registerName : "a property is required here"
   case arrayAccess (* @location endOfIndex) :
     error endOfIndex : "a property is required here"
   case property (@lstring methodName) :

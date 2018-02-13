@@ -355,16 +355,8 @@ method @universalValuedObjectMap searchValuedObjectType
         error inValuedObjectName : "undefined in this context" : outType
       case driver (* *) :
         error inValuedObjectName : "undefined in this context" : outType
-      case registerGroup (registerMap) :
-        if [accessList length] == 0 then
-          error inValuedObjectName : "undefined in this context" : outType
-        elsif not [[accessList mAccessAtIndex !0] isRegister] then
-          error inValuedObjectName : "undefined in this context" : outType
-        else
-          [!?accessList popFirst ?let access0]
-          [access0 register ?name:let registerName]
-          [registerMap searchKey !registerName ?outType ?9*]
-        end
+      case registerGroup (*) :
+        error inValuedObjectName : "undefined in this context" : outType
       case globalConstant (*) :
         error inValuedObjectName : "undefined in this context" : outType
       case localConstant (3*) :
@@ -377,8 +369,6 @@ method @universalValuedObjectMap searchValuedObjectType
     end
     for (access) in accessList do
       switch access
-      case register (@lstring registerName) :
-        error registerName : "a register access is invalid here" : outType
       case property (@lstring propertyName) :
         let @propertyMap propertyMap = outType.propertyMap
         [propertyMap searchKey !propertyName ?* ?let accessKind]

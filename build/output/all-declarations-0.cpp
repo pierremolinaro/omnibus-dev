@@ -7859,45 +7859,38 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i87_ (GALGAS_ast & io
     break ;
   case GALGAS_LValueKindAST::kEnum_regular:
     {
-      const cEnumAssociatedValues_LValueKindAST_regular * extractPtr_2673 = (const cEnumAssociatedValues_LValueKindAST_regular *) (var_lvalue_1499.getter_mKind (HERE).unsafePointer ()) ;
-      const GALGAS_accessInAssignmentListAST extractedValue_accessList = extractPtr_2673->mAssociatedValue0 ;
+      const cEnumAssociatedValues_LValueKindAST_regular * extractPtr_2559 = (const cEnumAssociatedValues_LValueKindAST_regular *) (var_lvalue_1499.getter_mKind (HERE).unsafePointer ()) ;
+      const GALGAS_accessInAssignmentListAST extractedValue_accessList = extractPtr_2559->mAssociatedValue0 ;
       GALGAS_primaryInExpressionAccessListAST var_expressionAccessList_2124 = GALGAS_primaryInExpressionAccessListAST::constructor_emptyList (SOURCE_FILE ("instruction-assignment-operator.galgas", 63)) ;
       cEnumerator_accessInAssignmentListAST enumerator_2162 (extractedValue_accessList, kENUMERATION_UP) ;
       while (enumerator_2162.hasCurrentObject ()) {
         switch (enumerator_2162.current_mAccess (HERE).enumValue ()) {
         case GALGAS_accessInAssignmentAST::kNotBuilt:
           break ;
-        case GALGAS_accessInAssignmentAST::kEnum_register:
-          {
-            const cEnumAssociatedValues_accessInAssignmentAST_register * extractPtr_2301 = (const cEnumAssociatedValues_accessInAssignmentAST_register *) (enumerator_2162.current_mAccess (HERE).unsafePointer ()) ;
-            const GALGAS_lstring extractedValue_registerName = extractPtr_2301->mAssociatedValue0 ;
-            var_expressionAccessList_2124.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_register (extractedValue_registerName  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 67))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 67)) ;
-          }
-          break ;
         case GALGAS_accessInAssignmentAST::kEnum_property:
           {
-            const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_2399 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_2162.current_mAccess (HERE).unsafePointer ()) ;
-            const GALGAS_lstring extractedValue_name = extractPtr_2399->mAssociatedValue0 ;
-            var_expressionAccessList_2124.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_property (extractedValue_name  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 69))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 69)) ;
+            const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_2285 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_2162.current_mAccess (HERE).unsafePointer ()) ;
+            const GALGAS_lstring extractedValue_name = extractPtr_2285->mAssociatedValue0 ;
+            var_expressionAccessList_2124.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_property (extractedValue_name  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 67))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 67)) ;
           }
           break ;
         case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
           {
-            const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_2556 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_2162.current_mAccess (HERE).unsafePointer ()) ;
-            const GALGAS_expressionAST extractedValue_index = extractPtr_2556->mAssociatedValue0 ;
-            const GALGAS_location extractedValue_endOfIndex = extractPtr_2556->mAssociatedValue1 ;
-            var_expressionAccessList_2124.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_arrayAccess (extractedValue_index, extractedValue_endOfIndex  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 71))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 71)) ;
+            const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_2442 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_2162.current_mAccess (HERE).unsafePointer ()) ;
+            const GALGAS_expressionAST extractedValue_index = extractPtr_2442->mAssociatedValue0 ;
+            const GALGAS_location extractedValue_endOfIndex = extractPtr_2442->mAssociatedValue1 ;
+            var_expressionAccessList_2124.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_arrayAccess (extractedValue_index, extractedValue_endOfIndex  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 69))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 69)) ;
           }
           break ;
         }
         enumerator_2162.gotoNextObject () ;
       }
-      var_leftExpression_1802 = GALGAS_primaryInExpressionAST::constructor_new (var_lvalue_1499.getter_mIdentifier (HERE), var_expressionAccessList_2124  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 74)) ;
+      var_leftExpression_1802 = GALGAS_primaryInExpressionAST::constructor_new (var_lvalue_1499.getter_mIdentifier (HERE), var_expressionAccessList_2124  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 72)) ;
     }
     break ;
   }
-  GALGAS_infixOperatorExpressionAST var_expression_2700 = GALGAS_infixOperatorExpressionAST::constructor_new (var_leftExpression_1802, var_operatorLocation_1652, var_infixOperator_1630, var_rightExpression_1737  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 76)) ;
-  ioArgument_ioInstructionList.addAssign_operation (GALGAS_assignmentInstructionAST::constructor_new (var_instructionLocation_1527, var_lvalue_1499, var_expression_2700  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 83))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 83)) ;
+  GALGAS_infixOperatorExpressionAST var_expression_2586 = GALGAS_infixOperatorExpressionAST::constructor_new (var_leftExpression_1802, var_operatorLocation_1652, var_infixOperator_1630, var_rightExpression_1737  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 74)) ;
+  ioArgument_ioInstructionList.addAssign_operation (GALGAS_assignmentInstructionAST::constructor_new (var_instructionLocation_1527, var_lvalue_1499, var_expression_2586  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 81))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 81)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8716,28 +8709,28 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_lvalue_i104_ (GALGAS_ast & ioArgu
                                                              GALGAS_LValueAST & outArgument_outAssignmentTargetAST,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outAssignmentTargetAST.drop () ; // Release 'out' argument
-  GALGAS_lstring var_registerGroupName_1797 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_registerGroupName_1798 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("lvalue.galgas", 40)) ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("lvalue.galgas", 41)) ;
-  GALGAS_lstring var_registerName_1840 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_registerName_1841 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("lvalue.galgas", 42)) ;
-  GALGAS_registerIndexAST var_registerIndexAST_1879 ;
+  GALGAS_registerIndexAST var_registerIndexAST_1880 ;
   switch (select_plm_5F_syntax_104 (inCompiler)) {
   case 1: {
-    var_registerIndexAST_1879 = GALGAS_registerIndexAST::constructor_noIndex (SOURCE_FILE ("lvalue.galgas", 45)) ;
+    var_registerIndexAST_1880 = GALGAS_registerIndexAST::constructor_noIndex (SOURCE_FILE ("lvalue.galgas", 45)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5B_ COMMA_SOURCE_FILE ("lvalue.galgas", 47)) ;
-    GALGAS_expressionAST var_expression_1985 ;
-    nt_expression_ (ioArgument_ioAST, var_expression_1985, inCompiler) ;
-    GALGAS_location var_endOfIndex_2006 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 49)) ;
+    GALGAS_expressionAST var_expression_1986 ;
+    nt_expression_ (ioArgument_ioAST, var_expression_1986, inCompiler) ;
+    GALGAS_location var_endOfIndex_2007 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 49)) ;
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("lvalue.galgas", 50)) ;
-    var_registerIndexAST_1879 = GALGAS_registerIndexAST::constructor_index (var_expression_1985, var_endOfIndex_2006  COMMA_SOURCE_FILE ("lvalue.galgas", 51)) ;
+    var_registerIndexAST_1880 = GALGAS_registerIndexAST::constructor_index (var_expression_1986, var_endOfIndex_2007  COMMA_SOURCE_FILE ("lvalue.galgas", 51)) ;
   } break ;
   default:
     break ;
   }
-  outArgument_outAssignmentTargetAST = GALGAS_LValueAST::constructor_new (var_registerGroupName_1797, GALGAS_LValueKindAST::constructor_register (var_registerName_1840, var_registerIndexAST_1879  COMMA_SOURCE_FILE ("lvalue.galgas", 54))  COMMA_SOURCE_FILE ("lvalue.galgas", 54)) ;
+  outArgument_outAssignmentTargetAST = GALGAS_LValueAST::constructor_new (var_registerGroupName_1798, GALGAS_LValueKindAST::constructor_register (var_registerName_1841, var_registerIndexAST_1880  COMMA_SOURCE_FILE ("lvalue.galgas", 54))  COMMA_SOURCE_FILE ("lvalue.galgas", 54)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8766,43 +8759,43 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_lvalue_i105_ (GALGAS_ast & ioArgu
                                                              GALGAS_LValueAST & outArgument_outAssignmentTargetAST,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outAssignmentTargetAST.drop () ; // Release 'out' argument
-  GALGAS_lstring var_receiver_2528 ;
+  GALGAS_lstring var_receiver_2529 ;
   switch (select_plm_5F_syntax_105 (inCompiler)) {
   case 1: {
-    var_receiver_2528 = inCompiler->synthetizedAttribute_tokenString () ;
+    var_receiver_2529 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("lvalue.galgas", 63)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_self COMMA_SOURCE_FILE ("lvalue.galgas", 65)) ;
-    var_receiver_2528 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 66)) ;
+    var_receiver_2529 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 66)) ;
   } break ;
   default:
     break ;
   }
-  GALGAS_accessInAssignmentListAST var_accessList_2713 = GALGAS_accessInAssignmentListAST::constructor_emptyList (SOURCE_FILE ("lvalue.galgas", 69)) ;
+  GALGAS_accessInAssignmentListAST var_accessList_2714 = GALGAS_accessInAssignmentListAST::constructor_emptyList (SOURCE_FILE ("lvalue.galgas", 69)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_106 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2E_ COMMA_SOURCE_FILE ("lvalue.galgas", 72)) ;
-      GALGAS_lstring var_propertyName_2786 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_propertyName_2787 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("lvalue.galgas", 73)) ;
-      var_accessList_2713.addAssign_operation (GALGAS_accessInAssignmentAST::constructor_property (var_propertyName_2786  COMMA_SOURCE_FILE ("lvalue.galgas", 74))  COMMA_SOURCE_FILE ("lvalue.galgas", 74)) ;
+      var_accessList_2714.addAssign_operation (GALGAS_accessInAssignmentAST::constructor_property (var_propertyName_2787  COMMA_SOURCE_FILE ("lvalue.galgas", 74))  COMMA_SOURCE_FILE ("lvalue.galgas", 74)) ;
     } break ;
     case 3: {
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5B_ COMMA_SOURCE_FILE ("lvalue.galgas", 76)) ;
-      GALGAS_expressionAST var_expression_2901 ;
-      nt_expression_ (ioArgument_ioAST, var_expression_2901, inCompiler) ;
-      GALGAS_location var_endOfIndex_2922 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 78)) ;
+      GALGAS_expressionAST var_expression_2902 ;
+      nt_expression_ (ioArgument_ioAST, var_expression_2902, inCompiler) ;
+      GALGAS_location var_endOfIndex_2923 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 78)) ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("lvalue.galgas", 79)) ;
-      var_accessList_2713.addAssign_operation (GALGAS_accessInAssignmentAST::constructor_arrayAccess (var_expression_2901, var_endOfIndex_2922  COMMA_SOURCE_FILE ("lvalue.galgas", 80))  COMMA_SOURCE_FILE ("lvalue.galgas", 80)) ;
+      var_accessList_2714.addAssign_operation (GALGAS_accessInAssignmentAST::constructor_arrayAccess (var_expression_2902, var_endOfIndex_2923  COMMA_SOURCE_FILE ("lvalue.galgas", 80))  COMMA_SOURCE_FILE ("lvalue.galgas", 80)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  outArgument_outAssignmentTargetAST = GALGAS_LValueAST::constructor_new (var_receiver_2528, GALGAS_LValueKindAST::constructor_regular (var_accessList_2713  COMMA_SOURCE_FILE ("lvalue.galgas", 82))  COMMA_SOURCE_FILE ("lvalue.galgas", 82)) ;
+  outArgument_outAssignmentTargetAST = GALGAS_LValueAST::constructor_new (var_receiver_2529, GALGAS_LValueKindAST::constructor_regular (var_accessList_2714  COMMA_SOURCE_FILE ("lvalue.galgas", 82))  COMMA_SOURCE_FILE ("lvalue.galgas", 82)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
