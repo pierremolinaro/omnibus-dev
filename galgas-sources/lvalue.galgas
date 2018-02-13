@@ -245,65 +245,69 @@ private proc analyzeControlRegisterInLValue
         ?let @bool userAccess
         ?let @sliceMap unused inRegisterSliceMap
         ?let @controlRegisterFieldMap unused mRegisterFieldMap
-        ?let @bigint inRegisterAddress
+        ?let @controlRegisterGroupKind controlRegisterGroupKind
         ?let @controlRegisterFieldList unused mControlRegisterFieldList # Used for HTML file
         ?let @uint unused mRegisterBitCount
         ?let @uint inRegisterArraySize # 0 if not an array
         ?let @uint inRegisterElementSize # 0 if not an array
       ]
-      if readOnly then
-        error controlRegisterName : "this control register cannot be modified (declared with @ro attribute)" : outInternalRepresentation
-      elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
-        error controlRegisterName : "this control register is not accessible in user mode" : outInternalRepresentation
-      elsif [accessList length] == 0 then # Simple access to a control register for writing
-        if inRegisterArraySize == 0 then
-          outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:inRegisterAddress}
-        else
-          error controlRegisterName : "the control register is an array" : outInternalRepresentation
-        end
-      elsif [accessList length] == 1 then # Simple access to a control register for writing
-        [accessList first ?let access]
-        switch access
-        case register (@lstring registerName) :
-          error registerName : "invalid register access" : outInternalRepresentation
-        case property (@lstring propertyName) :
-          error propertyName : "writing a slice of a control register is not allowed" : outInternalRepresentation
-        case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-          handleArraySubscriptNew (
-            !self: inSelfType
-            !routineAttributes:inRoutineAttributes
-            !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-            !context: inContext
-            !mode: inMode
-            !?temporary: ioTemporaries
-            !?staticEntityMap:ioStaticEntityMap
-            !?variableMap: ioUniversalMap
-            !?alloca: ioAllocaList
-            !indexExpression 
-            !endOfIndex
-            !arraySize:inRegisterArraySize
-            !elementType:inRegisterType
-            !? ioInstructionGenerationList
-            ?let @objectIR indexIR
-          )
-          if [indexIR isLiteralInteger] then # subscript expression is constant
-             [indexIR literalInteger ?1* ?value:let @bigint idx]
-             let addr = inRegisterAddress + idx * inRegisterElementSize
-             outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:addr}      
+      switch controlRegisterGroupKind
+      case single (registerAddress) :
+        if readOnly then
+          error controlRegisterName
+            : "this control register cannot be modified (declared with @ro attribute)" : outInternalRepresentation
+        elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
+          error controlRegisterName : "this control register is not accessible in user mode" : outInternalRepresentation
+        elsif [accessList length] == 0 then # Simple access to a control register for writing
+          if inRegisterArraySize == 0 then
+            outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:registerAddress}
           else
-            [!?ioTemporaries newTempLLVMVar ?let llvmName]
-            [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
-              !llvmName
-              !indexIR
-              !inRegisterAddress
-              !inRegisterElementSize
-            ]
-            outInternalRepresentation = .volatileIndirectReference {!type:inRegisterType !llvmName:llvmName}      
+            error controlRegisterName : "the control register is an array" : outInternalRepresentation
           end
+        elsif [accessList length] == 1 then # Simple access to a control register for writing
+          [accessList first ?let access]
+          switch access
+          case register (@lstring registerName) :
+            error registerName : "invalid register access" : outInternalRepresentation
+          case property (@lstring propertyName) :
+            error propertyName : "writing a slice of a control register is not allowed" : outInternalRepresentation
+          case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+            handleArraySubscriptNew (
+              !self: inSelfType
+              !routineAttributes:inRoutineAttributes
+              !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+              !context: inContext
+              !mode: inMode
+              !?temporary: ioTemporaries
+              !?staticEntityMap:ioStaticEntityMap
+              !?variableMap: ioUniversalMap
+              !?alloca: ioAllocaList
+              !indexExpression 
+              !endOfIndex
+              !arraySize:inRegisterArraySize
+              !elementType:inRegisterType
+              !? ioInstructionGenerationList
+              ?let @objectIR indexIR
+            )
+            if [indexIR isLiteralInteger] then # subscript expression is constant
+               [indexIR literalInteger ?1* ?value:let @bigint idx]
+               let addr = registerAddress + idx * inRegisterElementSize
+               outInternalRepresentation = .volatileAbsoluteReference {!type:inRegisterType !address:addr}      
+            else
+              [!?ioTemporaries newTempLLVMVar ?let llvmName]
+              [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
+                !llvmName
+                !indexIR
+                !registerAddress
+                !inRegisterElementSize
+              ]
+              outInternalRepresentation = .volatileIndirectReference {!type:inRegisterType !llvmName:llvmName}      
+            end
+          end
+        else
+          error controlRegisterName
+          : "only subscripting is allowed in control register assignment" : outInternalRepresentation
         end
-      else
-        error controlRegisterName
-        : "only subscripting is allowed in control register assignment" : outInternalRepresentation
       end
     end
   end

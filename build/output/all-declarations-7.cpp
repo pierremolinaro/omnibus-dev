@@ -4337,7 +4337,7 @@ void extensionMethod_searchValuedObjectType (const GALGAS_universalValuedObjectM
             GALGAS_bool joker_13724_8 ; // Joker input parameter
             GALGAS_sliceMap joker_13724_7 ; // Joker input parameter
             GALGAS_controlRegisterFieldMap joker_13724_6 ; // Joker input parameter
-            GALGAS_bigint joker_13724_5 ; // Joker input parameter
+            GALGAS_controlRegisterGroupKind joker_13724_5 ; // Joker input parameter
             GALGAS_controlRegisterFieldList joker_13724_4 ; // Joker input parameter
             GALGAS_uint joker_13724_3 ; // Joker input parameter
             GALGAS_uint joker_13724_2 ; // Joker input parameter
@@ -10661,7 +10661,7 @@ GALGAS_controlRegisterNameListAST_2D_element GALGAS_controlRegisterNameListAST_2
 
 GALGAS_registerGroupListAST_2D_element::GALGAS_registerGroupListAST_2D_element (void) :
 mProperty_mRegisterGroupName (),
-mProperty_mRegisterGroupBaseAddress () {
+mProperty_mControlRegisterGroupKind () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10672,22 +10672,15 @@ GALGAS_registerGroupListAST_2D_element::~ GALGAS_registerGroupListAST_2D_element
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_registerGroupListAST_2D_element::GALGAS_registerGroupListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                const GALGAS_lbigint & inOperand1) :
+                                                                                const GALGAS_controlRegisterGroupKindAST & inOperand1) :
 mProperty_mRegisterGroupName (inOperand0),
-mProperty_mRegisterGroupBaseAddress (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerGroupListAST_2D_element GALGAS_registerGroupListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_registerGroupListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                                 GALGAS_lbigint::constructor_default (HERE)) ;
+mProperty_mControlRegisterGroupKind (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_registerGroupListAST_2D_element GALGAS_registerGroupListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                const GALGAS_lbigint & inOperand1 
+                                                                                                const GALGAS_controlRegisterGroupKindAST & inOperand1 
                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_registerGroupListAST_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
@@ -10704,7 +10697,7 @@ typeComparisonResult GALGAS_registerGroupListAST_2D_element::objectCompare (cons
     result = mProperty_mRegisterGroupName.objectCompare (inOperand.mProperty_mRegisterGroupName) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mRegisterGroupBaseAddress.objectCompare (inOperand.mProperty_mRegisterGroupBaseAddress) ;
+    result = mProperty_mControlRegisterGroupKind.objectCompare (inOperand.mProperty_mControlRegisterGroupKind) ;
   }
   return result ;
 }
@@ -10712,14 +10705,14 @@ typeComparisonResult GALGAS_registerGroupListAST_2D_element::objectCompare (cons
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_registerGroupListAST_2D_element::isValid (void) const {
-  return mProperty_mRegisterGroupName.isValid () && mProperty_mRegisterGroupBaseAddress.isValid () ;
+  return mProperty_mRegisterGroupName.isValid () && mProperty_mControlRegisterGroupKind.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerGroupListAST_2D_element::drop (void) {
   mProperty_mRegisterGroupName.drop () ;
-  mProperty_mRegisterGroupBaseAddress.drop () ;
+  mProperty_mControlRegisterGroupKind.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10732,7 +10725,7 @@ void GALGAS_registerGroupListAST_2D_element::description (C_String & ioString,
   }else{
     mProperty_mRegisterGroupName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mRegisterGroupBaseAddress.description (ioString, inIndentation+1) ;
+    mProperty_mControlRegisterGroupKind.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -10745,8 +10738,8 @@ GALGAS_lstring GALGAS_registerGroupListAST_2D_element::getter_mRegisterGroupName
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint GALGAS_registerGroupListAST_2D_element::getter_mRegisterGroupBaseAddress (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRegisterGroupBaseAddress ;
+GALGAS_controlRegisterGroupKindAST GALGAS_registerGroupListAST_2D_element::getter_mControlRegisterGroupKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mControlRegisterGroupKind ;
 }
 
 
@@ -11135,7 +11128,7 @@ mProperty_mIsReadOnly (),
 mProperty_mUserAccess (),
 mProperty_mRegisterFieldAccessMap (),
 mProperty_mRegisterFieldMap (),
-mProperty_mAddress (),
+mProperty_mControlRegisterGroupKind (),
 mProperty_mControlRegisterFieldList (),
 mProperty_mRegisterBitCount (),
 mProperty_mArraySize (),
@@ -11155,7 +11148,7 @@ GALGAS_controlRegisterMap_2D_element::GALGAS_controlRegisterMap_2D_element (cons
                                                                             const GALGAS_bool & inOperand3,
                                                                             const GALGAS_sliceMap & inOperand4,
                                                                             const GALGAS_controlRegisterFieldMap & inOperand5,
-                                                                            const GALGAS_bigint & inOperand6,
+                                                                            const GALGAS_controlRegisterGroupKind & inOperand6,
                                                                             const GALGAS_controlRegisterFieldList & inOperand7,
                                                                             const GALGAS_uint & inOperand8,
                                                                             const GALGAS_uint & inOperand9,
@@ -11166,7 +11159,7 @@ mProperty_mIsReadOnly (inOperand2),
 mProperty_mUserAccess (inOperand3),
 mProperty_mRegisterFieldAccessMap (inOperand4),
 mProperty_mRegisterFieldMap (inOperand5),
-mProperty_mAddress (inOperand6),
+mProperty_mControlRegisterGroupKind (inOperand6),
 mProperty_mControlRegisterFieldList (inOperand7),
 mProperty_mRegisterBitCount (inOperand8),
 mProperty_mArraySize (inOperand9),
@@ -11181,7 +11174,7 @@ GALGAS_controlRegisterMap_2D_element GALGAS_controlRegisterMap_2D_element::const
                                                                                             const GALGAS_bool & inOperand3,
                                                                                             const GALGAS_sliceMap & inOperand4,
                                                                                             const GALGAS_controlRegisterFieldMap & inOperand5,
-                                                                                            const GALGAS_bigint & inOperand6,
+                                                                                            const GALGAS_controlRegisterGroupKind & inOperand6,
                                                                                             const GALGAS_controlRegisterFieldList & inOperand7,
                                                                                             const GALGAS_uint & inOperand8,
                                                                                             const GALGAS_uint & inOperand9,
@@ -11217,7 +11210,7 @@ typeComparisonResult GALGAS_controlRegisterMap_2D_element::objectCompare (const 
     result = mProperty_mRegisterFieldMap.objectCompare (inOperand.mProperty_mRegisterFieldMap) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mAddress.objectCompare (inOperand.mProperty_mAddress) ;
+    result = mProperty_mControlRegisterGroupKind.objectCompare (inOperand.mProperty_mControlRegisterGroupKind) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mControlRegisterFieldList.objectCompare (inOperand.mProperty_mControlRegisterFieldList) ;
@@ -11237,7 +11230,7 @@ typeComparisonResult GALGAS_controlRegisterMap_2D_element::objectCompare (const 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_controlRegisterMap_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mUserAccess.isValid () && mProperty_mRegisterFieldAccessMap.isValid () && mProperty_mRegisterFieldMap.isValid () && mProperty_mAddress.isValid () && mProperty_mControlRegisterFieldList.isValid () && mProperty_mRegisterBitCount.isValid () && mProperty_mArraySize.isValid () && mProperty_mElementArraySize.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mUserAccess.isValid () && mProperty_mRegisterFieldAccessMap.isValid () && mProperty_mRegisterFieldMap.isValid () && mProperty_mControlRegisterGroupKind.isValid () && mProperty_mControlRegisterFieldList.isValid () && mProperty_mRegisterBitCount.isValid () && mProperty_mArraySize.isValid () && mProperty_mElementArraySize.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11249,7 +11242,7 @@ void GALGAS_controlRegisterMap_2D_element::drop (void) {
   mProperty_mUserAccess.drop () ;
   mProperty_mRegisterFieldAccessMap.drop () ;
   mProperty_mRegisterFieldMap.drop () ;
-  mProperty_mAddress.drop () ;
+  mProperty_mControlRegisterGroupKind.drop () ;
   mProperty_mControlRegisterFieldList.drop () ;
   mProperty_mRegisterBitCount.drop () ;
   mProperty_mArraySize.drop () ;
@@ -11276,7 +11269,7 @@ void GALGAS_controlRegisterMap_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mRegisterFieldMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mAddress.description (ioString, inIndentation+1) ;
+    mProperty_mControlRegisterGroupKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mControlRegisterFieldList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -11327,8 +11320,8 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterMap_2D_element::getter_mReg
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_controlRegisterMap_2D_element::getter_mAddress (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mAddress ;
+GALGAS_controlRegisterGroupKind GALGAS_controlRegisterMap_2D_element::getter_mControlRegisterGroupKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mControlRegisterGroupKind ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

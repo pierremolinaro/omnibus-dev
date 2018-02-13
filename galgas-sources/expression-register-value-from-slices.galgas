@@ -96,8 +96,7 @@ override method @registerConstantExpressionAST analyzeExpression
     ?2*
     ?let @sliceMap unused registerBitSliceMap
     ?let @controlRegisterFieldMap registerFieldMap
-    ?let @bigint unused registerAddress
-    ?*
+    ?2*
     ?let registerBitCount
     ?let unused powerOfTwoForArraySize
     ?let unused elementArraySize
