@@ -130,7 +130,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
     !?ioTemporaries
     !errorLocation:mVarName
     !source:sourcePossibleReference
-    !target:.universalReference {!type:[result type] !llvmName:llvmNameForLocalVariable (!plmLocalVariableName)}
+    !target:.new {![result type] !llvmNameForLocalVariable (!plmLocalVariableName)}
   ]  
 }
 

@@ -6,12 +6,8 @@ setter @instructionListIR appendCopyFromReferences
   ?source:let @objectIR inSourcePossibleReference
   ?target:let @LValueRepresentation inTargetReference
 {
-#--- Perform load / store, or call a copy routine ?
-  let performLoadStore = [inTargetReference isVolatileAbsoluteReference]
-   || [inTargetReference isVolatileIndirectReference]
-   || not [inSourcePossibleReference isReference]
 #---
-  if performLoadStore then
+  if not [inSourcePossibleReference isReference] then
     var loadedResultValue = inSourcePossibleReference
     [!?self appendLoadWhenReference
       !?ioTemporaries
@@ -23,25 +19,15 @@ setter @instructionListIR appendCopyFromReferences
       !errorLocation:inErrorLocation
       !staticTypeAllowed:false
     )
-    switch inTargetReference
-    case volatileAbsoluteReference (2*) :
-      error inErrorLocation : "INTERNAL ERROR"
-#      [!?self appendStoreVolatileRegister !type !address !result]
-    case volatileIndirectReference (2*) :
-      error inErrorLocation : "INTERNAL ERROR"
-#      [!?self appendStoreIndirectVolatileRegister !type !llvmName !result]
-    case universalReference (@PLMType type @string targetLLVMname) :
-      [!?self appendStoreToUniversalReference !targetLLVMname !type !result]
-    end
+    [!?self appendStoreToUniversalReference !inTargetReference.llvmName !inTargetReference.type !result]
   else # Call a copy routine
-    [inTargetReference universalReference ?type:let targetType ?llvmName: let targetLLVMName]
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName:let sourceLLVMName]
-    if sourceType != targetType then
+    if sourceType != inTargetReference.type then
       error inErrorLocation
-      : "object of type $" + targetType.plmOriginalTypeName
+      : "object of type $" + inTargetReference.type.plmOriginalTypeName
         + " cannot be assigned from expression of type $" + sourceType.plmOriginalTypeName
     end
-     self += !@copyFromReferencesIR.new {!sourceType !targetLLVMName !sourceLLVMName}
+     self += !@copyFromReferencesIR.new {!sourceType !inTargetReference.llvmName !sourceLLVMName}
   end
 }
 

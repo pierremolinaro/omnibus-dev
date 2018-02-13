@@ -4,7 +4,6 @@
 
 enum @primaryInExpressionAccessAST {
   case property (@lstring name)
-#  case register (@lstring name)
   case integerSlice (@lbigint low @lbigint high)
   case arrayAccess (@expressionAST index @location endOfIndex)
   case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location endOfArguments)
