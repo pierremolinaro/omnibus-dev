@@ -768,22 +768,6 @@ void extensionSetter_appendStoreToUniversalReference (GALGAS_instructionListIR &
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Extension method '@instructionListIR appendStoreLocalVariable'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendStoreLocalVariable (GALGAS_instructionListIR & ioObject,
-                                               const GALGAS_string constinArgument_inLocalVarName,
-                                               const GALGAS_PLMType constinArgument_inTargetVarType,
-                                               const GALGAS_objectIR constinArgument_inSourceValue,
-                                               C_Compiler * /* inCompiler */
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_storeLocalVariableIR::constructor_new (constinArgument_inLocalVarName, constinArgument_inTargetVarType, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 7)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                         Extension method '@instructionListIR appendStoreTemporaryReference'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1070,7 +1054,7 @@ void extensionSetter_appendLoadRegisterAddress (GALGAS_instructionListIR & ioObj
                                                 const GALGAS_string constinArgument_inRegisterName,
                                                 C_Compiler * /* inCompiler */
                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_intToPtrIR::constructor_new (constinArgument_inLLVMName, constinArgument_inAddress, constinArgument_inRegisterName  COMMA_SOURCE_FILE ("intermediate-register-address.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-register-address.galgas", 7)) ;
+  ioObject.addAssign_operation (GALGAS_intToPtrIR::constructor_new (constinArgument_inLLVMName, constinArgument_inAddress, constinArgument_inRegisterName  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 7)) ;
 }
 
 
