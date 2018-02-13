@@ -180,17 +180,17 @@ class cPtr_infixObjectObjectOperatorDescription : public cPtr_infixOperatorDescr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Extension method '@controlRegisterDeclarationList-element enterInContext'                      *
+//            Extension method '@controlRegisterDeclarationList-element enterControlRegisterGroupInContext'            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_enterInContext (const class GALGAS_controlRegisterDeclarationList_2D_element inObject,
-                                     const class GALGAS_bigint constin_inRegisterGroupBaseAddress,
-                                     class GALGAS_semanticContext & io_ioContext,
-                                     class GALGAS_controlRegisterMap & io_ioControlRegisterMap,
-                                     class GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterControlRegisterGroupInContext (const class GALGAS_controlRegisterDeclarationList_2D_element inObject,
+                                                         const class GALGAS_controlRegisterGroupKindAST constin_inRegisterGroupKind,
+                                                         class GALGAS_semanticContext & io_ioContext,
+                                                         class GALGAS_controlRegisterMap & io_ioControlRegisterMap,
+                                                         class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                         class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -44,9 +44,15 @@ enum @controlRegisterBitSlice {
 
 #·······················································································································
 
+enum @controlRegisterGroupKindAST {
+  case single (@lbigint registerGroupBaseAddress)
+}
+
+#·······················································································································
+
 list @registerGroupListAST {
   @lstring mRegisterGroupName
-  @lbigint mRegisterGroupBaseAddress
+  @controlRegisterGroupKindAST mControlRegisterGroupKind
 }
 
 #·······················································································································
@@ -70,7 +76,8 @@ syntax extension plm_syntax {
     repeat
       $identifier$ ?let registerGroupName
       $integer$ ?let @lbigint registerGroupBaseAddress
-      registerGroupListAST += !registerGroupName !registerGroupBaseAddress
+      let groupKind = @controlRegisterGroupKindAST.single {!registerGroupBaseAddress:registerGroupBaseAddress}
+      registerGroupListAST += !registerGroupName !groupKind
     while
       $,$
     end
@@ -177,7 +184,7 @@ list @controlRegisterFieldList { # Used for displaying in HTML file
   @string mFieldName # "—" if unused
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 map @controlRegisterFieldMap {
   @uint mBitIndex
@@ -186,7 +193,7 @@ map @controlRegisterFieldMap {
   search searchKey error message "the '%K' slice is not declared"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 map @sliceMap {
   @llvmBinaryOperation mAccessOperator
@@ -197,7 +204,13 @@ map @sliceMap {
   search searchKey error message "the '%K' slice is not declared"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
+
+enum @controlRegisterGroupKind {
+  case single (@bigint address)
+}
+
+#·······················································································································
 
 map @controlRegisterMap {
   @PLMType mType
@@ -205,7 +218,7 @@ map @controlRegisterMap {
   @bool mUserAccess
   @sliceMap mRegisterFieldAccessMap
   @controlRegisterFieldMap mRegisterFieldMap
-  @bigint mAddress
+  @controlRegisterGroupKind mControlRegisterGroupKind
   @controlRegisterFieldList mControlRegisterFieldList # Used for HTML file
   @uint mRegisterBitCount
   @uint mArraySize # 0 if not an array
@@ -214,7 +227,7 @@ map @controlRegisterMap {
   search searchKey error message "** internal error **"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 map @controlRegisterGroupMap {
   @controlRegisterMap mControlRegisterMap
@@ -409,8 +422,8 @@ private proc buildControlRegisterSliceMap
 
 #·······················································································································
 
-method @controlRegisterDeclarationList-element enterInContext
-  ?let @bigint inRegisterGroupBaseAddress
+method @controlRegisterDeclarationList-element enterControlRegisterGroupInContext
+  ?let @controlRegisterGroupKindAST inRegisterGroupKind
   ?!context:@semanticContext ioContext
   ?!@controlRegisterMap ioControlRegisterMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -457,18 +470,23 @@ method @controlRegisterDeclarationList-element enterInContext
       !?staticEntityMap:ioStaticEntityMap
       ?result:let @objectIR addressOffsetExpressionResult
     ]
-    @bigint registerAddress
+    @controlRegisterGroupKind controlRegisterGroupKind
     if not [addressOffsetExpressionResult isLiteralInteger] then
       error register.mRegisterAddressLocation
         : "control register address offset is not a static integer expression"
-        : registerAddress
+        : controlRegisterGroupKind
     else
       [addressOffsetExpressionResult literalInteger ?1* ?value:let registerAddressOffset]
-      registerAddress = inRegisterGroupBaseAddress + registerAddressOffset
-   #--- Check address value
-      if registerAddress > maxRegisterAddress then
-        error register.mRegisterAddressLocation
-         : "register address should be lower or equal to " + [maxRegisterAddress hexString]
+      switch inRegisterGroupKind
+      case single (baseAddress) :
+        let registerAddress = baseAddress.bigint + registerAddressOffset
+        controlRegisterGroupKind = .single {!address:registerAddress}
+#      registerAddress = inRegisterGroupBaseAddress + registerAddressOffset
+     #--- Check address value
+        if registerAddress > maxRegisterAddress then
+          error register.mRegisterAddressLocation
+           : "register address should be lower or equal to " + [maxRegisterAddress hexString]
+        end
       end
     end
     @bigint arraySize
@@ -537,7 +555,7 @@ method @controlRegisterDeclarationList-element enterInContext
       !userAccess
       !registerBitSliceMap
       !registerFieldMap
-      !registerAddress
+      !controlRegisterGroupKind
       !controlRegisterFieldList
       !registerBitCount
       ![arraySize uint]
@@ -560,8 +578,8 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   for group in mRegisterGroupList while @uint.errorCount == 0 do
     @controlRegisterMap controlRegisterMap = {}
     for reg in mRegisters do
-      [reg enterInContext
-        !group.mRegisterGroupBaseAddress.bigint
+      [reg enterControlRegisterGroupInContext
+        !group.mControlRegisterGroupKind
         !?context:ioContext
         !?controlRegisterMap
         !?staticEntityMap:ioStaticEntityMap
@@ -635,42 +653,45 @@ proc buildControlRegisterMapHTMLFile
     @uint controlRegisterCount = 0
     for () group_ in inControlRegisterGroupMap do
       for () reg_ in group_mControlRegisterMap do
-        if reg_mArraySize == 0 then
-          controlRegisterCount = controlRegisterCount + 1
-          var s = "<tr class=\"result_line\"><td class=\"name\">"
-            + group_lkey.string + ":" + reg_lkey
-            + "</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
-            + [reg_mAddress hexStringSeparatedBy !'_' !4] + "</td><td>"
-          if [reg_mControlRegisterFieldList length] > 0 then
-            s += "<table class=\"fields\">"
-              + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) +  "</tr>"
-              + "<tr>"
-            for > () in reg_mControlRegisterFieldList do
-              s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
-            end
-            s += "</tr></table>"
-          end  
-          s += "</td></tr>\n"
-          controlRegisterByAddress += !reg_mAddress !s
-        else
-          controlRegisterCount = controlRegisterCount + reg_mArraySize
-          for () in arrayIndexListFor (!size:reg_mArraySize) do
-            let address = reg_mAddress + mValue * reg_mElementArraySize
+        switch reg_mControlRegisterGroupKind
+        case single (registerAddress) :
+          if reg_mArraySize == 0 then
+            controlRegisterCount = controlRegisterCount + 1
             var s = "<tr class=\"result_line\"><td class=\"name\">"
-              + group_lkey.string + ":" + reg_lkey + "[" + [mValue string] + "]"
-              +"</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
-              + [address hexStringSeparatedBy !'_' !4]
-              + "</td><td>"
+              + group_lkey.string + ":" + reg_lkey
+              + "</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+              + [registerAddress hexStringSeparatedBy !'_' !4] + "</td><td>"
             if [reg_mControlRegisterFieldList length] > 0 then
               s += "<table class=\"fields\">"
-                + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) + "</tr><tr>"
+                + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) +  "</tr>"
+                + "<tr>"
               for > () in reg_mControlRegisterFieldList do
                 s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
               end
               s += "</tr></table>"
             end  
             s += "</td></tr>\n"
-            controlRegisterByAddress += !reg_mAddress !s
+            controlRegisterByAddress += !registerAddress !s
+          else
+            controlRegisterCount = controlRegisterCount + reg_mArraySize
+            for () in arrayIndexListFor (!size:reg_mArraySize) do
+              let address = registerAddress + mValue * reg_mElementArraySize
+              var s = "<tr class=\"result_line\"><td class=\"name\">"
+                + group_lkey.string + ":" + reg_lkey + "[" + [mValue string] + "]"
+                +"</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+                + [address hexStringSeparatedBy !'_' !4]
+                + "</td><td>"
+              if [reg_mControlRegisterFieldList length] > 0 then
+                s += "<table class=\"fields\">"
+                  + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) + "</tr><tr>"
+                for > () in reg_mControlRegisterFieldList do
+                  s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
+                end
+                s += "</tr></table>"
+              end  
+              s += "</td></tr>\n"
+              controlRegisterByAddress += !registerAddress !s
+            end
           end
         end
       end

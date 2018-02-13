@@ -3271,7 +3271,7 @@ class GALGAS_registerGroupListAST : public AC_GALGAS_list {
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_lstring & in_mRegisterGroupName,
-                                                  const class GALGAS_lbigint & in_mRegisterGroupBaseAddress
+                                                  const class GALGAS_controlRegisterGroupKindAST & in_mControlRegisterGroupKind
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -3288,7 +3288,7 @@ class GALGAS_registerGroupListAST : public AC_GALGAS_list {
   public : static class GALGAS_registerGroupListAST constructor_emptyList (LOCATION_ARGS) ;
 
   public : static class GALGAS_registerGroupListAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
-                                                                               const class GALGAS_lbigint & inOperand1
+                                                                               const class GALGAS_controlRegisterGroupKindAST & inOperand1
                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -3298,7 +3298,7 @@ class GALGAS_registerGroupListAST : public AC_GALGAS_list {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_lbigint & inOperand1
+                                                      const class GALGAS_controlRegisterGroupKindAST & inOperand1
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_registerGroupListAST add_operation (const GALGAS_registerGroupListAST & inOperand,
@@ -3308,23 +3308,23 @@ class GALGAS_registerGroupListAST : public AC_GALGAS_list {
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
-                                                       class GALGAS_lbigint constinArgument1,
+                                                       class GALGAS_controlRegisterGroupKindAST constinArgument1,
                                                        class GALGAS_uint constinArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
-                                                  class GALGAS_lbigint & outArgument1,
+                                                  class GALGAS_controlRegisterGroupKindAST & outArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
-                                                 class GALGAS_lbigint & outArgument1,
+                                                 class GALGAS_controlRegisterGroupKindAST & outArgument1,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
-                                                       class GALGAS_lbigint & outArgument1,
+                                                       class GALGAS_controlRegisterGroupKindAST & outArgument1,
                                                        class GALGAS_uint constinArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
@@ -3332,21 +3332,21 @@ class GALGAS_registerGroupListAST : public AC_GALGAS_list {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
-                                               class GALGAS_lbigint & outArgument1,
+                                               class GALGAS_controlRegisterGroupKindAST & outArgument1,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
-                                              class GALGAS_lbigint & outArgument1,
+                                              class GALGAS_controlRegisterGroupKindAST & outArgument1,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mRegisterGroupBaseAddressAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterGroupKindAST getter_mControlRegisterGroupKindAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                                              C_Compiler * inCompiler
+                                                                                                              COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterGroupNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                    C_Compiler * inCompiler
@@ -3383,7 +3383,7 @@ class cEnumerator_registerGroupListAST : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_mRegisterGroupName (LOCATION_ARGS) const ;
-  public : class GALGAS_lbigint current_mRegisterGroupBaseAddress (LOCATION_ARGS) const ;
+  public : class GALGAS_controlRegisterGroupKindAST current_mControlRegisterGroupKind (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_registerGroupListAST_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -10110,6 +10110,98 @@ class cEnumAssociatedValues_controlRegisterBitSlice_namedBit : public cEnumAssoc
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_controlRegisterBitSlice_namedBit (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @controlRegisterGroupKindAST enum                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_controlRegisterGroupKindAST (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_single
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
+
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_controlRegisterGroupKindAST extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_controlRegisterGroupKindAST constructor_single (const class GALGAS_lbigint & inOperand0
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_controlRegisterGroupKindAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_single (class GALGAS_lbigint & outArgument0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSingle (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_controlRegisterGroupKindAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGroupKindAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                @controlRegisterGroupKindAST enum, associated values                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_controlRegisterGroupKindAST_single : public cEnumAssociatedValues {
+  public : const GALGAS_lbigint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_controlRegisterGroupKindAST_single (const GALGAS_lbigint & inAssociatedValue0
+                                                                     COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_controlRegisterGroupKindAST_single (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -4531,7 +4531,7 @@ const cRegularFileWrapper gWrapperFile_30_embeddedSampleCode (
 //--- File 'teensy-3-6/17-flextimer-as-pwm.plm'
 
 const char * gWrapperFileContent_31_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
-  "//let F_CPU_MHZ = 24\n"
+  "let F_CPU_MHZ = 24\n"
   "//let myBUS_MHZ @display = BUS_MHZ\n"
   "//let myFLEXBUS_MHZ @display = FLEXBUS_MHZ\n"
   "//let myFLASH_KHZ @display = FLASH_KHZ\n"
@@ -4556,10 +4556,19 @@ const char * gWrapperFileContent_31_embeddedSampleCode = "target \"teensy-3-6/un
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  //--- Clock source is set by the CLKS field of FTM0:SC :\n"
-  "  //   00 \xC2""\xA0""No clock selected. This in effect disables the FTM counter. \xE2""\x80""\xA8""  //   01 \xC2""\xA0""System clock, frequency given by BUS_MHZ\xE2""\x80""\xA8""  //   10 \xC2""\xA0""Fixed frequency"
-  " clock, is MCGFFCLK \?\?\?\?\?\xE2""\x80""\xA8""  //   11 \xC2""\xA0""External clock \xE2""\x80""\xA8""  //--- Clock prescaler is set by the PS field of FTM0:SC :\n"
-  "  //   000 \xC2""\xA0""Divide by 1 \xE2""\x80""\xA8""  //   001 \xC2""\xA0""Divide by 2 \xE2""\x80""\xA8""  //   010 \xC2""\xA0""Divide by 4 \xE2""\x80""\xA8""  //   011 \xC2""\xA0""Divide by 8 \xE2""\x80""\xA8""  //   100 \xC2""\xA0""Divide by 16 \xE2""\x80""\xA8""  //   101 \xC2""\xA0""Divide by 32"
-  " \xE2""\x80""\xA8""  //   110 \xC2""\xA0""Divide by 64 \xE2""\x80""\xA8""  //   111 \xC2""\xA0""Divide by 128 \n"
+  "  //   00 \xC2""\xA0""No clock selected. This in effect disables the FTM counter. \n"
+  "  //   01 \xC2""\xA0""System clock, frequency given by BUS_MHZ\n"
+  "  //   10 \xC2""\xA0""Fixed frequency clock, is MCGFFCLK \?\?\?\?\?\n"
+  "  //   11 \xC2""\xA0""External clock \n"
+  "  //--- Clock prescaler is set by the PS field of FTM0:SC :\n"
+  "  //   000 \xC2""\xA0""Divide by 1 \n"
+  "  //   001 \xC2""\xA0""Divide by 2 \n"
+  "  //   010 \xC2""\xA0""Divide by 4 \n"
+  "  //   011 \xC2""\xA0""Divide by 8 \n"
+  "  //   100 \xC2""\xA0""Divide by 16 \n"
+  "  //   101 \xC2""\xA0""Divide by 32 \n"
+  "  //   110 \xC2""\xA0""Divide by 64 \n"
+  "  //   111 \xC2""\xA0""Divide by 128 \n"
   "  //  The overflow frequency is : BUS_MHZ / (prescaler * (FTM0:MOD - FTM0:CNTIN + 1))\n"
   "  //---- Examples for BUS_MHZ = 60 MHz (F_CPU_MHZ = 240)\n"
   "  //    prescaler   FTM0:CNTIN   FTM0:MOD   Resulting frequency\n"
@@ -4606,7 +4615,7 @@ const cRegularFileWrapper gWrapperFile_31_embeddedSampleCode (
   "17-flextimer-as-pwm.plm",
   "plm",
   true, // Text file
-  3290, // Text length
+  3288, // Text length
   gWrapperFileContent_31_embeddedSampleCode
 ) ;
 

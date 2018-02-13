@@ -495,7 +495,7 @@ private proc analyzeRegisterExpression
         ?let @bool userAccess
         ?let @sliceMap inRegisterSliceMap
         ?let @controlRegisterFieldMap unused mRegisterFieldMap
-        ?let @bigint inRegisterAddress
+        ?let @controlRegisterGroupKind controlRegisterGroupKind
         ?let @controlRegisterFieldList unused mControlRegisterFieldList # Used for HTML file
         ?let @uint unused mRegisterBitCount
         ?let @uint inRegisterArraySize # 0 if not an array
@@ -505,7 +505,10 @@ private proc analyzeRegisterExpression
         error controlRegisterName : "this control register is not accessible in user mode" : outResult
       elsif [accessList length] == 0 then # No subscript, no slice
         getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
-        [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !inRegisterAddress]
+        switch controlRegisterGroupKind
+        case single (registerAddress) :
+          [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !registerAddress]
+        end
       elsif [[accessList mAccessAtIndex !0] isArrayAccess] then
         [!?accessList popFirst ?let first]
         [first arrayAccess ?index:let @expressionAST indexExpression ?endOfIndex:let @location endOfIndex]
@@ -528,21 +531,30 @@ private proc analyzeRegisterExpression
         )
         if [indexIR isLiteralInteger] then # subscript expression is constant
           [indexIR literalInteger ?1* ?value:let @bigint idx]
-          let addr = inRegisterAddress + idx * inRegisterElementSize
-          getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
-          [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !addr]
+          switch controlRegisterGroupKind
+          case single (registerAddress) :
+            let addr = registerAddress + idx * inRegisterElementSize
+            getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
+            [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !addr]
+          end
         else
           getNewTempValue (!inRegisterType  !?ioTemporaries ?outResult)
-          [!?ioInstructionGenerationList appendLoadVolatileRegisterWithSubscript
-            !outResult
-            !indexIR
-            !inRegisterAddress
-            !inRegisterElementSize
-          ]
+          switch controlRegisterGroupKind
+          case single (registerAddress) :
+            [!?ioInstructionGenerationList appendLoadVolatileRegisterWithSubscript
+              !outResult
+              !indexIR
+              !registerAddress
+              !inRegisterElementSize
+            ]
+          end
         end
       else
         getNewTempValue (!inRegisterType !?ioTemporaries ?outResult)
-        [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !inRegisterAddress]
+        switch controlRegisterGroupKind
+        case single (registerAddress) :
+          [!?ioInstructionGenerationList appendLoadVolatileRegister !outResult !registerAddress]
+        end
       end
     #--- Access list
       var currentSliceMap = inRegisterSliceMap

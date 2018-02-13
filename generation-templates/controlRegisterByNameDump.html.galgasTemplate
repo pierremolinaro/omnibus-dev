@@ -94,42 +94,45 @@ end
 <table class="result">
 <tr><td class="result_title">Control Register Name</td><td class="result_title">PLM Type</td><td class="result_title">Address</td><td class="result_title">Value</td></tr>\n%
 for () in CONTROL_REGISTER_GROUP_MAP : group_ do
-  for () in group_mControlRegisterMap do
-    if mArraySize == 0 then
-      %<tr class="result_line"><td class="name">%
-      %<a name="%!group_lkey.string + ":" + lkey%">%!group_lkey.string + ":" + lkey%</a>%
-      %</td><td class="type">$%!mType.plmOriginalTypeName%</td><td class="address">%
-      ![mAddress hexStringSeparatedBy !'_' !4]
-      %</td><td>%
-      if [mControlRegisterFieldList length] > 0 then
-        %<table class="fields">%
-          %<tr>%!fieldIndexColumns (!mRegisterBitCount) %</tr>%
-          %<tr>%
-          for > () in mControlRegisterFieldList do
-            %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
-          end
-          %</tr>%
-        %</table>%
-      end  
-      %</td></tr>\n%
-    else
-      for () in arrayIndexListFor (!size:mArraySize) do
+  for () in group_mControlRegisterMap : reg_ do
+    switch reg_mControlRegisterGroupKind
+    case single (registerAddress) :
+      if reg_mArraySize == 0 then
         %<tr class="result_line"><td class="name">%
-        %<a name="%!group_lkey.string + ":" + lkey%[%![mValue string]%]">%!group_lkey.string + ":" + lkey% [%![mValue string]%]</a>%
-        %</td><td class="type">$%!mType.plmOriginalTypeName%</td><td class="address">%
-        ![mAddress + mValue * mElementArraySize hexStringSeparatedBy !'_' !4]
+        %<a name="%!group_lkey.string + ":" + reg_lkey%">%!group_lkey.string + ":" + reg_lkey%</a>%
+        %</td><td class="type">$%!reg_mType.plmOriginalTypeName%</td><td class="address">%
+        ![registerAddress hexStringSeparatedBy !'_' !4]
         %</td><td>%
-        if [mControlRegisterFieldList length] > 0 then
+        if [reg_mControlRegisterFieldList length] > 0 then
           %<table class="fields">%
-            %<tr>%!fieldIndexColumns (!mRegisterBitCount) %</tr>%
+            %<tr>%!fieldIndexColumns (!reg_mRegisterBitCount) %</tr>%
             %<tr>%
-            for > () in mControlRegisterFieldList do
+            for > () in reg_mControlRegisterFieldList do
               %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
             end
             %</tr>%
           %</table>%
         end  
         %</td></tr>\n%
+      else
+        for () in arrayIndexListFor (!size:reg_mArraySize) do
+          %<tr class="result_line"><td class="name">%
+          %<a name="%!group_lkey.string + ":" + reg_lkey%[%![mValue string]%]">%!group_lkey.string + ":" + reg_lkey% [%![mValue string]%]</a>%
+          %</td><td class="type">$%!reg_mType.plmOriginalTypeName%</td><td class="address">%
+          ![registerAddress + mValue * reg_mElementArraySize hexStringSeparatedBy !'_' !4]
+          %</td><td>%
+          if [reg_mControlRegisterFieldList length] > 0 then
+            %<table class="fields">%
+              %<tr>%!fieldIndexColumns (!reg_mRegisterBitCount) %</tr>%
+              %<tr>%
+              for > () in reg_mControlRegisterFieldList do
+                %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
+              end
+              %</tr>%
+            %</table>%
+          end  
+          %</td></tr>\n%
+        end
       end
     end
   end

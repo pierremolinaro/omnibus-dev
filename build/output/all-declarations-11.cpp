@@ -10,6 +10,79 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                        Function 'routineMangledNameFromAST'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring function_routineMangledNameFromAST (const GALGAS_string & constinArgument_inReceiverTypeName,
+                                                   const GALGAS_lstring & constinArgument_inRoutineName,
+                                                   const GALGAS_routineFormalArgumentListAST & constinArgument_inFormalArgumentList,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring result_result ; // Returned variable
+  GALGAS_lstring temp_0 ;
+  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inReceiverTypeName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    temp_0 = constinArgument_inRoutineName ;
+  }else if (kBoolFalse == test_1) {
+    temp_0 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 102)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("context-routines.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 102)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("context-routines.galgas", 102)) ;
+  }
+  result_result = temp_0 ;
+  result_result.mProperty_string.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 104)) ;
+  cEnumerator_routineFormalArgumentListAST enumerator_4590 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
+  while (enumerator_4590.hasCurrentObject ()) {
+    result_result.mProperty_string.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_4590.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 106)).add_operation (enumerator_4590.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 106)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 106)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 106)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 106)) ;
+    enumerator_4590.gotoNextObject () ;
+  }
+  result_result.mProperty_string.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 108)) ;
+//---
+  return result_result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_routineMangledNameFromAST [4] = {
+  & kTypeDescriptor_GALGAS_string,
+  & kTypeDescriptor_GALGAS_lstring,
+  & kTypeDescriptor_GALGAS_routineFormalArgumentListAST,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_routineMangledNameFromAST (C_Compiler * inCompiler,
+                                                                          const cObjectArray & inEffectiveParameterArray,
+                                                                          const GALGAS_location & /* inErrorLocation */
+                                                                          COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  const GALGAS_lstring operand1 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                                 inCompiler
+                                                                 COMMA_THERE) ;
+  const GALGAS_routineFormalArgumentListAST operand2 = GALGAS_routineFormalArgumentListAST::extractObject (inEffectiveParameterArray.objectAtIndex (2 COMMA_HERE),
+                                                                                                           inCompiler
+                                                                                                           COMMA_THERE) ;
+  return function_routineMangledNameFromAST (operand0,
+                                             operand1,
+                                             operand2,
+                                             inCompiler
+                                             COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_routineMangledNameFromAST ("routineMangledNameFromAST",
+                                                                           functionWithGenericHeader_routineMangledNameFromAST,
+                                                                           & kTypeDescriptor_GALGAS_lstring,
+                                                                           3,
+                                                                           functionArgs_routineMangledNameFromAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14464,15 +14537,19 @@ const char * gWrapperFileContent_51_targetTemplates = "\n"
   "  // the supervisor access attribute, and the MPR x [MPL n ] control field for the\n"
   "  // master must be set. If not, access terminates with an error response and no\n"
   "  // peripheral access initiates. \n"
-  "  // 0 \xC2""\xA0""This peripheral does not require supervisor privilege level for accesses. \xE2""\x80""\xA8""  // 1 \xC2""\xA0""This peripheral requires supervisor privilege level for acc"
-  "esses. \xE2""\x80""\xA8""  // WPx: Determines whether the peripheral allows write accessses. When this field\n"
+  "  // 0 \xC2""\xA0""This peripheral does not require supervisor privilege level for accesses. \n"
+  "  // 1 \xC2""\xA0""This peripheral requires supervisor privilege level for accesses. \n"
+  "  // WPx: Determines whether the peripheral allows write accessses. When this field\n"
   "  // is set and a write access is attempted, access terminates with an error\n"
   "  // response and no peripheral access initiates\n"
-  "  // 0 \xC2""\xA0""This peripheral allows write accesses. \xE2""\x80""\xA8""  // 1 \xC2""\xA0""This peripheral is write protected. \xE2""\x80""\xA8""  // TPx : Determines whether the peripheral allows acces"
-  "ses from an untrusted master.\n"
+  "  // 0 \xC2""\xA0""This peripheral allows write accesses. \n"
+  "  // 1 \xC2""\xA0""This peripheral is write protected. \n"
+  "  // TPx : Determines whether the peripheral allows accesses from an untrusted master.\n"
   "  // When this bit is set and an access is attempted by an untrusted master, the \n"
   "  // access terminates with an error response and no peripheral access initiates.\n"
-  "  // 0 \xC2""\xA0""Accesses from an untrusted master are allowed. \xE2""\x80""\xA8""  // 1 \xC2""\xA0""Accesses from an untrusted master are not allowed. \xE2""\x80""\xA8""  \n"
+  "  // 0 \xC2""\xA0""Accesses from an untrusted master are allowed. \n"
+  "  // 1 \xC2""\xA0""Accesses from an untrusted master are not allowed. \n"
+  "  \n"
   "  PACRA 0x20\n"
   "  PACRB 0x24\n"
   "  PACRC 0x28\n"
@@ -17587,16 +17664,21 @@ const char * gWrapperFileContent_78_targetTemplates = "\n"
   "// The clock dividers are programmed via the SIM module\xE2""\x80""\x99""s CLKDIV registers. Each divider is programmable from a\n"
   "// divide-by-1 through divide-by-16 setting. The following requirements must be met when configuring the clocks\n"
   "// for this device: \n"
-  "// 1. The core and system clock frequencies must be 180 MHz or slower in HSRUN, 120 MHz or slower in RUN. \xE2""\x80""\xA8""//\n"
+  "// 1. The core and system clock frequencies must be 180 MHz or slower in HSRUN, 120 MHz or slower in RUN. \n"
+  "//\n"
   "// 2. The bus clock frequency must be programmed to 60 MHz or less in HSRUN or RUN, and an integer divide of the \n"
-  "//      core clock. The core clock to bus clock ratio is limited to a max value of 8. \xE2""\x80""\xA8""//\n"
+  "//      core clock. The core clock to bus clock ratio is limited to a max value of 8. \n"
+  "//\n"
   "// 3. The flash clock frequency must be programmed to 28 MHz or less, less than or equal to the bus clock, and an\n"
-  "//      integer divide of the core clock. The core clock to flash clock ratio is limited to a max value of 8. \xE2""\x80""\xA8""//\n"
+  "//      integer divide of the core clock. The core clock to flash clock ratio is limited to a max value of 8. \n"
+  "//\n"
   "// 4. The FlexBus clock frequency must be programmed to be less than or equal to the bus clock frequency. The\n"
   "//      FlexBus also has pad interface restrictions that limits the maximum frequency. For this device the FlexBus\n"
-  "//      maximum frequency is 60 MHz. The core clock to FlexBus clock ratio is limited to a max value of 8. \xE2""\x80""\xA8""//\n"
+  "//      maximum frequency is 60 MHz. The core clock to FlexBus clock ratio is limited to a max value of 8. \n"
+  "//\n"
   "// 5. Since SDRAMC and FlexBus both use CLKOUT, the same restrictions apply to the SDRAM controller as stated\n"
-  "//      for the FlexBus clock. \xE2""\x80""\xA8""//\n"
+  "//      for the FlexBus clock. \n"
+  "//\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "// SETTING SUMMARY\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -18590,15 +18672,19 @@ const char * gWrapperFileContent_81_targetTemplates = "check target \"teensy-3-6
   "  // the supervisor access attribute, and the MPR x [MPL n ] control field for the\n"
   "  // master must be set. If not, access terminates with an error response and no\n"
   "  // peripheral access initiates. \n"
-  "  // 0 \xC2""\xA0""This peripheral does not require supervisor privilege level for accesses. \xE2""\x80""\xA8""  // 1 \xC2""\xA0""This peripheral requires supervisor privilege level for acc"
-  "esses. \xE2""\x80""\xA8""  // WPx: Determines whether the peripheral allows write accessses. When this field\n"
+  "  // 0 \xC2""\xA0""This peripheral does not require supervisor privilege level for accesses. \n"
+  "  // 1 \xC2""\xA0""This peripheral requires supervisor privilege level for accesses. \n"
+  "  // WPx: Determines whether the peripheral allows write accessses. When this field\n"
   "  // is set and a write access is attempted, access terminates with an error\n"
   "  // response and no peripheral access initiates\n"
-  "  // 0 \xC2""\xA0""This peripheral allows write accesses. \xE2""\x80""\xA8""  // 1 \xC2""\xA0""This peripheral is write protected. \xE2""\x80""\xA8""  // TPx : Determines whether the peripheral allows acces"
-  "ses from an untrusted master.\n"
+  "  // 0 \xC2""\xA0""This peripheral allows write accesses. \n"
+  "  // 1 \xC2""\xA0""This peripheral is write protected. \n"
+  "  // TPx : Determines whether the peripheral allows accesses from an untrusted master.\n"
   "  // When this bit is set and an access is attempted by an untrusted master, the \n"
   "  // access terminates with an error response and no peripheral access initiates.\n"
-  "  // 0 \xC2""\xA0""Accesses from an untrusted master are allowed. \xE2""\x80""\xA8""  // 1 \xC2""\xA0""Accesses from an untrusted master are not allowed. \xE2""\x80""\xA8""  \n"
+  "  // 0 \xC2""\xA0""Accesses from an untrusted master are allowed. \n"
+  "  // 1 \xC2""\xA0""Accesses from an untrusted master are not allowed. \n"
+  "  \n"
   "  PACRA 0x20\n"
   "  PACRB 0x24\n"
   "  PACRC 0x28\n"
