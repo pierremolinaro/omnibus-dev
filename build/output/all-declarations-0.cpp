@@ -7325,22 +7325,22 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i77_ (GALGAS_ast & ioArgu
                                                              GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  GALGAS_lstring var_receiver_1731 ;
+  GALGAS_lstring var_receiver_1732 ;
   switch (select_plm_5F_syntax_82 (inCompiler)) {
   case 1: {
-    var_receiver_1731 = inCompiler->synthetizedAttribute_tokenString () ;
+    var_receiver_1732 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("expression-primary.galgas", 38)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_self COMMA_SOURCE_FILE ("expression-primary.galgas", 40)) ;
-    var_receiver_1731 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 41)) ;
+    var_receiver_1732 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 41)) ;
   } break ;
   default:
     break ;
   }
-  GALGAS_primaryInExpressionAccessListAST var_accessList_1936 ;
-  nt_expression_5F_access_5F_list_ (ioArgument_ioAST, var_accessList_1936, inCompiler) ;
-  outArgument_outExpression = GALGAS_primaryInExpressionAST::constructor_new (var_receiver_1731, var_accessList_1936  COMMA_SOURCE_FILE ("expression-primary.galgas", 46)) ;
+  GALGAS_primaryInExpressionAccessListAST var_accessList_1937 ;
+  nt_expression_5F_access_5F_list_ (ioArgument_ioAST, var_accessList_1937, inCompiler) ;
+  outArgument_outExpression = GALGAS_primaryInExpressionAST::constructor_new (var_receiver_1732, var_accessList_1937  COMMA_SOURCE_FILE ("expression-primary.galgas", 46)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7372,36 +7372,36 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_access_5F_list_i78_
     switch (select_plm_5F_syntax_83 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2E_ COMMA_SOURCE_FILE ("expression-primary.galgas", 55)) ;
-      GALGAS_lstring var_propertyName_2334 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_propertyName_2335 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("expression-primary.galgas", 56)) ;
-      outArgument_outAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_property (var_propertyName_2334  COMMA_SOURCE_FILE ("expression-primary.galgas", 57))  COMMA_SOURCE_FILE ("expression-primary.galgas", 57)) ;
+      outArgument_outAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_property (var_propertyName_2335  COMMA_SOURCE_FILE ("expression-primary.galgas", 57))  COMMA_SOURCE_FILE ("expression-primary.galgas", 57)) ;
     } break ;
     case 3: {
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5B_ COMMA_SOURCE_FILE ("expression-primary.galgas", 59)) ;
-      GALGAS_lbigint var_low_2434 = inCompiler->synthetizedAttribute_bigInteger () ;
+      GALGAS_lbigint var_low_2435 = inCompiler->synthetizedAttribute_bigInteger () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("expression-primary.galgas", 60)) ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2E__2E__2E_ COMMA_SOURCE_FILE ("expression-primary.galgas", 61)) ;
-      GALGAS_lbigint var_high_2472 = inCompiler->synthetizedAttribute_bigInteger () ;
+      GALGAS_lbigint var_high_2473 = inCompiler->synthetizedAttribute_bigInteger () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("expression-primary.galgas", 62)) ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("expression-primary.galgas", 63)) ;
-      outArgument_outAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_integerSlice (var_low_2434, var_high_2472  COMMA_SOURCE_FILE ("expression-primary.galgas", 64))  COMMA_SOURCE_FILE ("expression-primary.galgas", 64)) ;
+      outArgument_outAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_integerSlice (var_low_2435, var_high_2473  COMMA_SOURCE_FILE ("expression-primary.galgas", 64))  COMMA_SOURCE_FILE ("expression-primary.galgas", 64)) ;
     } break ;
     case 4: {
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5B_ COMMA_SOURCE_FILE ("expression-primary.galgas", 66)) ;
-      GALGAS_expressionAST var_expression_2605 ;
-      nt_expression_ (ioArgument_ioAST, var_expression_2605, inCompiler) ;
-      GALGAS_location var_endOfIndex_2626 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 68)) ;
+      GALGAS_expressionAST var_expression_2606 ;
+      nt_expression_ (ioArgument_ioAST, var_expression_2606, inCompiler) ;
+      GALGAS_location var_endOfIndex_2627 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 68)) ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("expression-primary.galgas", 69)) ;
-      outArgument_outAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_arrayAccess (var_expression_2605, var_endOfIndex_2626  COMMA_SOURCE_FILE ("expression-primary.galgas", 70))  COMMA_SOURCE_FILE ("expression-primary.galgas", 70)) ;
+      outArgument_outAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_arrayAccess (var_expression_2606, var_endOfIndex_2627  COMMA_SOURCE_FILE ("expression-primary.galgas", 70))  COMMA_SOURCE_FILE ("expression-primary.galgas", 70)) ;
     } break ;
     case 5: {
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2E_ COMMA_SOURCE_FILE ("expression-primary.galgas", 72)) ;
-      GALGAS_lstring var_methodName_2788 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_methodName_2789 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("expression-primary.galgas", 73)) ;
-      GALGAS_effectiveArgumentListAST var_arguments_2840 ;
-      GALGAS_location var_endOfArguments_2860 ;
-      nt_effective_5F_parameters_ (ioArgument_ioAST, var_arguments_2840, var_endOfArguments_2860, inCompiler) ;
-      outArgument_outAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_funcCall (var_methodName_2788, var_arguments_2840, var_endOfArguments_2860  COMMA_SOURCE_FILE ("expression-primary.galgas", 75))  COMMA_SOURCE_FILE ("expression-primary.galgas", 75)) ;
+      GALGAS_effectiveArgumentListAST var_arguments_2841 ;
+      GALGAS_location var_endOfArguments_2861 ;
+      nt_effective_5F_parameters_ (ioArgument_ioAST, var_arguments_2841, var_endOfArguments_2861, inCompiler) ;
+      outArgument_outAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_funcCall (var_methodName_2789, var_arguments_2841, var_endOfArguments_2861  COMMA_SOURCE_FILE ("expression-primary.galgas", 75))  COMMA_SOURCE_FILE ("expression-primary.galgas", 75)) ;
     } break ;
     default:
       repeatFlag_0 = false ;

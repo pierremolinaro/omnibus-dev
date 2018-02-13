@@ -11458,7 +11458,6 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_property,
-    kEnum_register,
     kEnum_integerSlice,
     kEnum_arrayAccess,
     kEnum_funcCall
@@ -11504,9 +11503,6 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
   public : static class GALGAS_primaryInExpressionAccessAST constructor_property (const class GALGAS_lstring & inOperand0
                                                                                   COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_primaryInExpressionAccessAST constructor_register (const class GALGAS_lstring & inOperand0
-                                                                                  COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -11536,10 +11532,6 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_lstring & outArgument0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
@@ -11550,8 +11542,6 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIntegerSlice (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegister (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -11582,22 +11572,6 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_property : public cEnum
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_property (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_primaryInExpressionAccessAST_register : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_primaryInExpressionAccessAST_register (const GALGAS_lstring & inAssociatedValue0
-                                                                        COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_register (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
