@@ -63,8 +63,6 @@ syntax extension plm_syntax {
       @primaryInExpressionAccessListAST expressionAccessList = {}
       for (access) in accessList do
         switch access
-        case register (@lstring registerName) :
-          expressionAccessList += !.register {!name:registerName}
         case property (@lstring name) :
           expressionAccessList += !.property {!name:name}
         case arrayAccess (@expressionAST index @location endOfIndex) :

@@ -10168,7 +10168,6 @@ class GALGAS_accessInAssignmentAST : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
-    kEnum_register,
     kEnum_property,
     kEnum_arrayAccess
   } enumeration ;
@@ -10204,9 +10203,6 @@ class GALGAS_accessInAssignmentAST : public AC_GALGAS_root {
   public : static class GALGAS_accessInAssignmentAST constructor_property (const class GALGAS_lstring & inOperand0
                                                                            COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_accessInAssignmentAST constructor_register (const class GALGAS_lstring & inOperand0
-                                                                           COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -10225,18 +10221,12 @@ class GALGAS_accessInAssignmentAST : public AC_GALGAS_root {
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_lstring & outArgument0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayAccess (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegister (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -10253,22 +10243,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentA
 //                                                                                                                     *
 //                                   @accessInAssignmentAST enum, associated values                                    *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_accessInAssignmentAST_register : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_accessInAssignmentAST_register (const GALGAS_lstring & inAssociatedValue0
-                                                                 COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_accessInAssignmentAST_register (void) {}
-} ;
-
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_accessInAssignmentAST_property : public cEnumAssociatedValues {

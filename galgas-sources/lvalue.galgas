@@ -3,7 +3,7 @@
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @accessInAssignmentAST {
-  case register (@lstring name)
+#  case register (@lstring name)
   case property (@lstring name)
   case arrayAccess (@expressionAST index @location endOfIndex)
 }
@@ -95,7 +95,7 @@ method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenc
   case regular (@accessInAssignmentListAST accessList) :
     for (access) in accessList do
       switch access
-      case register (*) :
+#      case register (*) :
       case property (*) :
       case arrayAccess (@expressionAST indexExpression *) :
         [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -352,8 +352,8 @@ private proc analyzeVariableInLValue
       end
       for (access) in accessList do
         switch access
-        case register (@lstring registerName) :
-          error registerName : "invalid register access, receiver is not a register group"
+#        case register (@lstring registerName) :
+#          error registerName : "invalid register access, receiver is not a register group"
         case property (@lstring propertyName) :
           let @propertyMap propertyMap = currentType.propertyMap
           [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
@@ -444,8 +444,6 @@ private proc analyzeSelfAssignmentTarget
     var currentLLVMName = llvmNameForSelf ()
     for (access) in accessList do
       switch access
-      case register (@lstring registerName) :
-        error registerName : "invalid register access, receiver is not a register group"
       case property (@lstring propertyName) :
         let @propertyMap propertyMap = currentType.propertyMap
         [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
