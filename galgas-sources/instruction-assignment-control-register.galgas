@@ -166,17 +166,14 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     !?sourceOperand
   ]
 #-------------------- Analyze control register target
-  @objectIR registerReferenceIR
   @LValueRepresentation registerRepresentation
   switch controlRegisterGroupKind
   case single (registerAddress) :
     if [mRegisterIndex isNoIndex] then # Simple access to a control register for writing
       if inRegisterArraySize == 0 then
         registerRepresentation = .volatileAbsoluteReference {!type:registerType !address:registerAddress}
-        getNewTempValue (!registerType !?ioTemporaries ?registerReferenceIR)
-        [!?ioInstructionGenerationList appendLoadVolatileRegister !registerReferenceIR !registerAddress]
       else
-        error mRegisterName : "the control register is an array" : registerRepresentation, registerReferenceIR
+        error mRegisterName : "the control register is an array" : registerRepresentation
       end
     else # Simple access to a control register for writing
       [mRegisterIndex index ?index:let indexExpression ?endOfIndex:let endOfIndex]
@@ -201,8 +198,6 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
         [indexIR literalInteger ?1* ?value:let @bigint idx]
         let addr = registerAddress + idx * inRegisterElementSize
         registerRepresentation = .volatileAbsoluteReference {!type:registerType !address:addr}      
-        getNewTempValue (!registerType !?ioTemporaries ?registerReferenceIR)
-        [!?ioInstructionGenerationList appendLoadVolatileRegister !registerReferenceIR !addr]
       else
         [!?ioTemporaries newTempLLVMVar ?let llvmName]
         [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
@@ -212,13 +207,6 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
           !inRegisterElementSize
         ]
         registerRepresentation = .volatileIndirectReference {!type:registerType !llvmName:llvmName}      
-        getNewTempValue (!registerType  !?ioTemporaries ?registerReferenceIR)
-        [!?ioInstructionGenerationList appendLoadVolatileRegisterWithSubscript
-          !registerReferenceIR
-          !indexIR
-          !registerAddress
-          !inRegisterElementSize
-        ]
       end
     end
   end
@@ -238,10 +226,20 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
         error mRegisterGroupName : "INTERNAL ERROR"
       end
     case assignmentWithOperator (@infixOperator infixOperator @location operatorLocation) :
+    #--- Load register
+      getNewTempValue (!registerType !?ioTemporaries ?let registerValueIR)
+      switch registerRepresentation
+      case volatileAbsoluteReference (* @uint address) :
+        [!?ioInstructionGenerationList appendLoadVolatileRegister !registerValueIR !address]
+      case volatileIndirectReference (* @string llvmName) :
+        [!?ioInstructionGenerationList appendLoadFromReference !registerValueIR !llvmName]
+      case universalReference (2*) :
+        error mRegisterGroupName : "INTERNAL ERROR"
+      end
     #--- Perform operation
       let operatorMap = getInfixOperatorMap (!infixOperator !context:inContext !mode:inMode !operatorLocation)
       [operatorMap checkBinaryOperationWith
-        !leftType:[registerReferenceIR type]
+        !leftType:[registerValueIR type]
         !rightType:[sourceOperand type]
         !operatorLocation:operatorLocation
         ?resultType:let resultType
@@ -250,7 +248,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
       [binaryOperator generateInfixOperatorCode
         !?ioTemporaries
         !?ioInstructionGenerationList
-        !registerReferenceIR
+        !registerValueIR
         !operatorLocation
         !sourceOperand
         !resultType
