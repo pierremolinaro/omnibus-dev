@@ -205,9 +205,9 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     #--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) !sliceType !false
     #--- Target reference
-      let targetRef = @LValueRepresentation.universalReference {
-        !type:sliceType
-        !llvmName:llvmNameForLocalVariable (!plmLocalVariableName)
+      let targetRef = @LValueRepresentation.new {
+        !sliceType
+        !llvmNameForLocalVariable (!plmLocalVariableName)
       }
    #--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences
@@ -224,9 +224,9 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     #--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) !sliceType !false
     #--- Target reference
-      let targetRef = @LValueRepresentation.universalReference {
-        !type:sliceType
-        !llvmName:llvmNameForLocalVariable (!plmLocalVariableName)
+      let targetRef = @LValueRepresentation.new {
+        !sliceType
+        !llvmNameForLocalVariable (!plmLocalVariableName)
        }
     #--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences

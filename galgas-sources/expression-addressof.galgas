@@ -257,17 +257,11 @@ override method @addressofInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  switch mLValue
-  case volatileAbsoluteReference (@PLMType type @uint address) :
-    ioLLVMcode += "  " + [mTarget llvmName] + " = add " + [type llvmTypeName] + " " + address
-                + ", 0 ; addressof (" + [address hexString] + ")\n"
-  case volatileIndirectReference (@PLMType type @string llvmName) :
-    ioLLVMcode += "  " + [mTarget llvmName] + " = add " + [type llvmTypeName] + " " + llvmName
-                + ", 0 ; addressof (" + llvmName + ")\n"
-  case universalReference (@PLMType type @string llvmName) :
-    ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + [type llvmTypeName] + "* " + llvmName
+#  switch mLValue
+#  case universalReference (@PLMType type @string llvmName) :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + [mLValue.type llvmTypeName] + "* " + mLValue.llvmName
                 + " to " + [mTarget llvmTypeName] + " ; addressof\n"
-  end
+#  end
 }
 
 #·······················································································································

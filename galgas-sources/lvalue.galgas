@@ -76,24 +76,19 @@ method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenc
 #!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @LValueRepresentation {
-  case volatileAbsoluteReference (@PLMType type @uint address)
-  case volatileIndirectReference (@PLMType type @string llvmName)
-  case universalReference (@PLMType type @string llvmName)
+struct @LValueRepresentation {
+  @PLMType type
+  @string llvmName
 }
 
 #·······················································································································
 
-getter @LValueRepresentation type -> @PLMType {
-  switch self
-  case volatileAbsoluteReference (@PLMType type *) :
-    result = type
-  case volatileIndirectReference (@PLMType type *) :
-    result = type
-  case universalReference (@PLMType type *) :
-    result = type
-  end
-}
+#getter @LValueRepresentation type -> @PLMType {
+#  switch self
+#  case universalReference (@PLMType type *) :
+#    result = type
+#  end
+#}
 
 #·······················································································································
 
@@ -268,7 +263,7 @@ private proc analyzeVariableInLValue
       end
     end
   end
-  outInternalRepresentation = .universalReference {!type:currentType !llvmName:currentLLVMName}
+  outInternalRepresentation = .new {!currentType !currentLLVMName}
  }
 
 #·······················································································································
@@ -353,7 +348,7 @@ private proc analyzeSelfAssignmentTarget
         end
       end
     end
-    outInternalRepresentation = .universalReference {!type:currentType !llvmName:currentLLVMName}
+    outInternalRepresentation = .new {!currentType !currentLLVMName}
   end
 }
 
