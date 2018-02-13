@@ -13713,6 +13713,9 @@ typeComparisonResult cPtr_registerInExpressionAST::dynamicObjectCompare (const a
     result = mProperty_mGroupName.objectCompare (p->mProperty_mGroupName) ;
   }
   if (kOperandEqual == result) {
+    result = mProperty_mRegisterName.objectCompare (p->mProperty_mRegisterName) ;
+  }
+  if (kOperandEqual == result) {
     result = mProperty_mAccessList.objectCompare (p->mProperty_mAccessList) ;
   }
   return result ;
@@ -13747,6 +13750,7 @@ GALGAS_expressionAST () {
 
 GALGAS_registerInExpressionAST GALGAS_registerInExpressionAST::constructor_default (LOCATION_ARGS) {
   return GALGAS_registerInExpressionAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                          GALGAS_lstring::constructor_default (HERE),
                                                           GALGAS_primaryInExpressionAccessListAST::constructor_emptyList (HERE)
                                                           COMMA_THERE) ;
 }
@@ -13761,11 +13765,12 @@ GALGAS_expressionAST (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_registerInExpressionAST GALGAS_registerInExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mGroupName,
+                                                                                const GALGAS_lstring & inAttribute_mRegisterName,
                                                                                 const GALGAS_primaryInExpressionAccessListAST & inAttribute_mAccessList
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_registerInExpressionAST result ;
-  if (inAttribute_mGroupName.isValid () && inAttribute_mAccessList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_registerInExpressionAST (inAttribute_mGroupName, inAttribute_mAccessList COMMA_THERE)) ;
+  if (inAttribute_mGroupName.isValid () && inAttribute_mRegisterName.isValid () && inAttribute_mAccessList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_registerInExpressionAST (inAttribute_mGroupName, inAttribute_mRegisterName, inAttribute_mAccessList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -13786,6 +13791,24 @@ GALGAS_lstring GALGAS_registerInExpressionAST::getter_mGroupName (UNUSED_LOCATIO
 
 GALGAS_lstring cPtr_registerInExpressionAST::getter_mGroupName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mGroupName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_registerInExpressionAST::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_registerInExpressionAST * p = (const cPtr_registerInExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_registerInExpressionAST) ;
+    result = p->mProperty_mRegisterName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_registerInExpressionAST::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13811,10 +13834,12 @@ GALGAS_primaryInExpressionAccessListAST cPtr_registerInExpressionAST::getter_mAc
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_registerInExpressionAST::cPtr_registerInExpressionAST (const GALGAS_lstring & in_mGroupName,
+                                                            const GALGAS_lstring & in_mRegisterName,
                                                             const GALGAS_primaryInExpressionAccessListAST & in_mAccessList
                                                             COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
 mProperty_mGroupName (in_mGroupName),
+mProperty_mRegisterName (in_mRegisterName),
 mProperty_mAccessList (in_mAccessList) {
 }
 
@@ -13829,6 +13854,8 @@ void cPtr_registerInExpressionAST::description (C_String & ioString,
   ioString << "[@registerInExpressionAST:" ;
   mProperty_mGroupName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mProperty_mRegisterName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mProperty_mAccessList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
@@ -13837,7 +13864,7 @@ void cPtr_registerInExpressionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_registerInExpressionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_registerInExpressionAST (mProperty_mGroupName, mProperty_mAccessList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_registerInExpressionAST (mProperty_mGroupName, mProperty_mRegisterName, mProperty_mAccessList COMMA_THERE)) ;
   return ptr ;
 }
 
