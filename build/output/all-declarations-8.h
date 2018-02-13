@@ -469,12 +469,3 @@ void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgumen
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'copyableAttribute'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-

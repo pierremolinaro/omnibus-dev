@@ -36,22 +36,22 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <lvalue> ?!@ast ioAST !@LValueAST outAssignmentTargetAST {
-    $identifier$ ?let registerGroupName
-    $:$
-    $identifier$ ?let registerName
-    @registerIndexAST registerIndexAST 
-    select
-      registerIndexAST = .noIndex
-    or
-      $[$
-      <expression> !?ioAST ?let expression
-      let endOfIndex = @location.here
-      $]$
-      registerIndexAST = .index {!index:expression !endOfIndex:endOfIndex}
-    end
-    outAssignmentTargetAST = .new {!registerGroupName !.register {!registerName:registerName !index:registerIndexAST}}
-  }
+#  rule <lvalue> ?!@ast ioAST !@LValueAST outAssignmentTargetAST {
+#    $identifier$ ?let registerGroupName
+#    $:$
+#    $identifier$ ?let registerName
+#    @registerIndexAST registerIndexAST 
+#    select
+#      registerIndexAST = .noIndex
+#    or
+#      $[$
+#      <expression> !?ioAST ?let expression
+#      let endOfIndex = @location.here
+#      $]$
+#      registerIndexAST = .index {!index:expression !endOfIndex:endOfIndex}
+#    end
+#    outAssignmentTargetAST = .new {!registerGroupName !.register {!registerName:registerName !index:registerIndexAST}}
+#  }
 
   #·····················································································································
 
