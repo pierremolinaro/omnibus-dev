@@ -223,8 +223,8 @@ map @controlRegisterMap {
   @uint mRegisterBitCount
   @uint mArraySize # 0 if not an array
   @uint mElementArraySize # 0 if not an array
-  insert insertKey error message "the '%K' register has been already declared in %L"
-  search searchKey error message "** internal error **"
+  insert insertKey error message "the '%K' control register has been already declared in %L"
+  search searchKey error message "the '%K' control register is not declared"
 }
 
 #·······················································································································
@@ -523,13 +523,13 @@ method @controlRegisterDeclarationList-element enterControlRegisterGroupInContex
           error arraySizeLocation
             : "control register array size should be a static integer expression >= 2, equal to a power of 2"
             : arraySize
-        else
-          let powerOfTwoForArraySize = [arraySize - 1G bitCountForUnsignedRepresentation]
-          if arraySize != (1G << powerOfTwoForArraySize) then
-            error arraySizeLocation
-              : "control register array size should be a static integer expression >= 2, equal to a power of 2"
-              : arraySize
-          end
+#        else
+#          let powerOfTwoForArraySize = [arraySize - 1G bitCountForUnsignedRepresentation]
+#          if arraySize != (1G << powerOfTwoForArraySize) then
+#            error arraySizeLocation
+#              : "control register array size should be a static integer expression >= 2, equal to a power of 2"
+#              : arraySize
+#          end
         end
       end
     #--- Analyse element array size expression

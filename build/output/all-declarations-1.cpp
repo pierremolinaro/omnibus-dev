@@ -8651,14 +8651,14 @@ void GALGAS_controlRegisterMap::setter_insertKey (GALGAS_lstring inKey,
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' register has been already declared in %L" ;
+  const char * kInsertErrorMessage = "the '%K' control register has been already declared in %L" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_controlRegisterMap_searchKey = "** internal error **" ;
+const char * kSearchErrorMessage_controlRegisterMap_searchKey = "the '%K' control register is not declared" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -9467,13 +9467,13 @@ static void extensionMethod_controlRegisterGroupDeclarationAST_noteTypesInPreced
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_controlRegisterGroupDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_controlRegisterGroupDeclarationAST) ;
-  cEnumerator_controlRegisterDeclarationList enumerator_9282 (object->mProperty_mRegisters, kENUMERATION_UP) ;
-  while (enumerator_9282.hasCurrentObject ()) {
-    GALGAS_lstring var_typeName_9302 = function_llvmTypeNameFromPLMname (enumerator_9282.current (HERE).getter_mRegisterTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 244)) ;
+  cEnumerator_controlRegisterDeclarationList enumerator_9311 (object->mProperty_mRegisters, kENUMERATION_UP) ;
+  while (enumerator_9311.hasCurrentObject ()) {
+    GALGAS_lstring var_typeName_9331 = function_llvmTypeNameFromPLMname (enumerator_9311.current (HERE).getter_mRegisterTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 244)) ;
     {
-    ioArgument_ioGraph.setter_noteNode (var_typeName_9302 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 245)) ;
+    ioArgument_ioGraph.setter_noteNode (var_typeName_9331 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 245)) ;
     }
-    enumerator_9282.gotoNextObject () ;
+    enumerator_9311.gotoNextObject () ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*

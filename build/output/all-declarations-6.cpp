@@ -11601,143 +11601,6 @@ GALGAS_truncateExpressionAST GALGAS_truncateExpressionAST::extractObject (const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_LValueAST::GALGAS_LValueAST (void) :
-mProperty_mIdentifier (),
-mProperty_mAccessList () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_LValueAST::~ GALGAS_LValueAST (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_LValueAST::GALGAS_LValueAST (const GALGAS_lstring & inOperand0,
-                                    const GALGAS_accessInAssignmentListAST & inOperand1) :
-mProperty_mIdentifier (inOperand0),
-mProperty_mAccessList (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_LValueAST GALGAS_LValueAST::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_LValueAST (GALGAS_lstring::constructor_default (HERE),
-                           GALGAS_accessInAssignmentListAST::constructor_emptyList (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_LValueAST GALGAS_LValueAST::constructor_new (const GALGAS_lstring & inOperand0,
-                                                    const GALGAS_accessInAssignmentListAST & inOperand1 
-                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_LValueAST result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_LValueAST (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_LValueAST::objectCompare (const GALGAS_LValueAST & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mIdentifier.objectCompare (inOperand.mProperty_mIdentifier) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mAccessList.objectCompare (inOperand.mProperty_mAccessList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_LValueAST::isValid (void) const {
-  return mProperty_mIdentifier.isValid () && mProperty_mAccessList.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_LValueAST::drop (void) {
-  mProperty_mIdentifier.drop () ;
-  mProperty_mAccessList.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_LValueAST::description (C_String & ioString,
-                                    const int32_t inIndentation) const {
-  ioString << "<struct @LValueAST:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mIdentifier.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mAccessList.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_LValueAST::getter_mIdentifier (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIdentifier ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_accessInAssignmentListAST GALGAS_LValueAST::getter_mAccessList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mAccessList ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                   @LValueAST type                                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_LValueAST ("LValueAST",
-                                  NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_LValueAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_LValueAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_LValueAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_LValueAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_LValueAST GALGAS_LValueAST::extractObject (const GALGAS_object & inObject,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_LValueAST result ;
-  const GALGAS_LValueAST * p = (const GALGAS_LValueAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_LValueAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("LValueAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11934,6 +11797,143 @@ GALGAS_addressofControlRegisterAST GALGAS_addressofControlRegisterAST::extractOb
       result = *p ;
     }else{
       inCompiler->castError ("addressofControlRegisterAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_LValueAST::GALGAS_LValueAST (void) :
+mProperty_mIdentifier (),
+mProperty_mAccessList () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_LValueAST::~ GALGAS_LValueAST (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_LValueAST::GALGAS_LValueAST (const GALGAS_lstring & inOperand0,
+                                    const GALGAS_accessInAssignmentListAST & inOperand1) :
+mProperty_mIdentifier (inOperand0),
+mProperty_mAccessList (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_LValueAST GALGAS_LValueAST::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_LValueAST (GALGAS_lstring::constructor_default (HERE),
+                           GALGAS_accessInAssignmentListAST::constructor_emptyList (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_LValueAST GALGAS_LValueAST::constructor_new (const GALGAS_lstring & inOperand0,
+                                                    const GALGAS_accessInAssignmentListAST & inOperand1 
+                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_LValueAST result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_LValueAST (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_LValueAST::objectCompare (const GALGAS_LValueAST & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mIdentifier.objectCompare (inOperand.mProperty_mIdentifier) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mAccessList.objectCompare (inOperand.mProperty_mAccessList) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_LValueAST::isValid (void) const {
+  return mProperty_mIdentifier.isValid () && mProperty_mAccessList.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_LValueAST::drop (void) {
+  mProperty_mIdentifier.drop () ;
+  mProperty_mAccessList.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_LValueAST::description (C_String & ioString,
+                                    const int32_t inIndentation) const {
+  ioString << "<struct @LValueAST:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mIdentifier.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mAccessList.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_LValueAST::getter_mIdentifier (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mIdentifier ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessInAssignmentListAST GALGAS_LValueAST::getter_mAccessList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAccessList ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                   @LValueAST type                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_LValueAST ("LValueAST",
+                                  NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_LValueAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_LValueAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_LValueAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_LValueAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_LValueAST GALGAS_LValueAST::extractObject (const GALGAS_object & inObject,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_LValueAST result ;
+  const GALGAS_LValueAST * p = (const GALGAS_LValueAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_LValueAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("LValueAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
