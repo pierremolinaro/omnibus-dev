@@ -804,13 +804,18 @@ void extensionSetter_generateRelease (GALGAS_instructionListIR & ioObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendComputeSubscriptedVolatileRegisterAddress (GALGAS_instructionListIR & ioObject,
-                                                                      const GALGAS_string constinArgument_inLLVMResultVarName,
+                                                                      GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                      GALGAS_string & outArgument_outLLVMResultVarName,
                                                                       const GALGAS_objectIR constinArgument_inIndexIR,
                                                                       const GALGAS_bigint constinArgument_inAddress,
                                                                       const GALGAS_uint constinArgument_inElementSize,
-                                                                      C_Compiler * /* inCompiler */
+                                                                      C_Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_computeSubscriptedVolatileRegisterAddress::constructor_new (constinArgument_inLLVMResultVarName, constinArgument_inIndexIR, constinArgument_inAddress, constinArgument_inElementSize  COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 8))  COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 8)) ;
+  outArgument_outLLVMResultVarName.drop () ; // Release 'out' argument
+  {
+  extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, outArgument_outLLVMResultVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 9)) ;
+  }
+  ioObject.addAssign_operation (GALGAS_computeSubscriptedVolatileRegisterAddress::constructor_new (outArgument_outLLVMResultVarName, constinArgument_inIndexIR, constinArgument_inAddress, constinArgument_inElementSize  COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 10))  COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 10)) ;
 }
 
 
@@ -1044,17 +1049,22 @@ GALGAS_computeSubscriptedVolatileRegisterAddress GALGAS_computeSubscriptedVolati
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Extension method '@instructionListIR appendLoadRegisterAddress'                           *
+//                          Extension method '@instructionListIR appendEnterRegisterAddress'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendLoadRegisterAddress (GALGAS_instructionListIR & ioObject,
-                                                const GALGAS_string constinArgument_inLLVMName,
-                                                const GALGAS_bigint constinArgument_inAddress,
-                                                const GALGAS_string constinArgument_inRegisterName,
-                                                C_Compiler * /* inCompiler */
-                                                COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_intToPtrIR::constructor_new (constinArgument_inLLVMName, constinArgument_inAddress, constinArgument_inRegisterName  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 7)) ;
+void extensionSetter_appendEnterRegisterAddress (GALGAS_instructionListIR & ioObject,
+                                                 GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                 GALGAS_string & outArgument_out_5F_llvmName,
+                                                 const GALGAS_bigint constinArgument_inAddress,
+                                                 const GALGAS_string constinArgument_inRegisterName,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_out_5F_llvmName.drop () ; // Release 'out' argument
+  {
+  extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, outArgument_out_5F_llvmName, inCompiler COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 8)) ;
+  }
+  ioObject.addAssign_operation (GALGAS_enterRegisterAddressIR::constructor_new (outArgument_out_5F_llvmName, constinArgument_inAddress, constinArgument_inRegisterName  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 9)) ;
 }
 
 
@@ -1062,10 +1072,10 @@ void extensionSetter_appendLoadRegisterAddress (GALGAS_instructionListIR & ioObj
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_intToPtrIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+typeComparisonResult cPtr_enterRegisterAddressIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
-  const cPtr_intToPtrIR * p = (const cPtr_intToPtrIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_intToPtrIR) ;
+  const cPtr_enterRegisterAddressIR * p = (const cPtr_enterRegisterAddressIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_enterRegisterAddressIR) ;
   if (kOperandEqual == result) {
     result = mProperty_mLLVMName.objectCompare (p->mProperty_mLLVMName) ;
   }
@@ -1081,7 +1091,7 @@ typeComparisonResult cPtr_intToPtrIR::dynamicObjectCompare (const acPtr_class * 
 //---------------------------------------------------------------------------------------------------------------------*
 
 
-typeComparisonResult GALGAS_intToPtrIR::objectCompare (const GALGAS_intToPtrIR & inOperand) const {
+typeComparisonResult GALGAS_enterRegisterAddressIR::objectCompare (const GALGAS_enterRegisterAddressIR & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -1099,46 +1109,46 @@ typeComparisonResult GALGAS_intToPtrIR::objectCompare (const GALGAS_intToPtrIR &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_intToPtrIR::GALGAS_intToPtrIR (void) :
+GALGAS_enterRegisterAddressIR::GALGAS_enterRegisterAddressIR (void) :
 GALGAS_abstractInstructionIR () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_intToPtrIR GALGAS_intToPtrIR::constructor_default (LOCATION_ARGS) {
-  return GALGAS_intToPtrIR::constructor_new (GALGAS_string::constructor_default (HERE),
-                                             GALGAS_bigint::constructor_zero (HERE),
-                                             GALGAS_string::constructor_default (HERE)
-                                             COMMA_THERE) ;
+GALGAS_enterRegisterAddressIR GALGAS_enterRegisterAddressIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_enterRegisterAddressIR::constructor_new (GALGAS_string::constructor_default (HERE),
+                                                         GALGAS_bigint::constructor_zero (HERE),
+                                                         GALGAS_string::constructor_default (HERE)
+                                                         COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_intToPtrIR::GALGAS_intToPtrIR (const cPtr_intToPtrIR * inSourcePtr) :
+GALGAS_enterRegisterAddressIR::GALGAS_enterRegisterAddressIR (const cPtr_enterRegisterAddressIR * inSourcePtr) :
 GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_intToPtrIR) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_enterRegisterAddressIR) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_intToPtrIR GALGAS_intToPtrIR::constructor_new (const GALGAS_string & inAttribute_mLLVMName,
-                                                      const GALGAS_bigint & inAttribute_mRegisterAddress,
-                                                      const GALGAS_string & inAttribute_mRegisterName
-                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_intToPtrIR result ;
+GALGAS_enterRegisterAddressIR GALGAS_enterRegisterAddressIR::constructor_new (const GALGAS_string & inAttribute_mLLVMName,
+                                                                              const GALGAS_bigint & inAttribute_mRegisterAddress,
+                                                                              const GALGAS_string & inAttribute_mRegisterName
+                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_enterRegisterAddressIR result ;
   if (inAttribute_mLLVMName.isValid () && inAttribute_mRegisterAddress.isValid () && inAttribute_mRegisterName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_intToPtrIR (inAttribute_mLLVMName, inAttribute_mRegisterAddress, inAttribute_mRegisterName COMMA_THERE)) ;
+    macroMyNew (result.mObjectPtr, cPtr_enterRegisterAddressIR (inAttribute_mLLVMName, inAttribute_mRegisterAddress, inAttribute_mRegisterName COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_intToPtrIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_enterRegisterAddressIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
-    const cPtr_intToPtrIR * p = (const cPtr_intToPtrIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_intToPtrIR) ;
+    const cPtr_enterRegisterAddressIR * p = (const cPtr_enterRegisterAddressIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_enterRegisterAddressIR) ;
     result = p->mProperty_mLLVMName ;
   }
   return result ;
@@ -1146,17 +1156,17 @@ GALGAS_string GALGAS_intToPtrIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_intToPtrIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_enterRegisterAddressIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mLLVMName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_intToPtrIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_enterRegisterAddressIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
   GALGAS_bigint result ;
   if (NULL != mObjectPtr) {
-    const cPtr_intToPtrIR * p = (const cPtr_intToPtrIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_intToPtrIR) ;
+    const cPtr_enterRegisterAddressIR * p = (const cPtr_enterRegisterAddressIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_enterRegisterAddressIR) ;
     result = p->mProperty_mRegisterAddress ;
   }
   return result ;
@@ -1164,17 +1174,17 @@ GALGAS_bigint GALGAS_intToPtrIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cPtr_intToPtrIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint cPtr_enterRegisterAddressIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
   return mProperty_mRegisterAddress ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_intToPtrIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_enterRegisterAddressIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
-    const cPtr_intToPtrIR * p = (const cPtr_intToPtrIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_intToPtrIR) ;
+    const cPtr_enterRegisterAddressIR * p = (const cPtr_enterRegisterAddressIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_enterRegisterAddressIR) ;
     result = p->mProperty_mRegisterName ;
   }
   return result ;
@@ -1182,18 +1192,18 @@ GALGAS_string GALGAS_intToPtrIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_intToPtrIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_enterRegisterAddressIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                         Pointer class for @intToPtrIR class                                         *
+//                                   Pointer class for @enterRegisterAddressIR class                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_intToPtrIR::cPtr_intToPtrIR (const GALGAS_string & in_mLLVMName,
-                                  const GALGAS_bigint & in_mRegisterAddress,
-                                  const GALGAS_string & in_mRegisterName
-                                  COMMA_LOCATION_ARGS) :
+cPtr_enterRegisterAddressIR::cPtr_enterRegisterAddressIR (const GALGAS_string & in_mLLVMName,
+                                                          const GALGAS_bigint & in_mRegisterAddress,
+                                                          const GALGAS_string & in_mRegisterName
+                                                          COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mProperty_mLLVMName (in_mLLVMName),
 mProperty_mRegisterAddress (in_mRegisterAddress),
@@ -1202,13 +1212,13 @@ mProperty_mRegisterName (in_mRegisterName) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * cPtr_intToPtrIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_intToPtrIR ;
+const C_galgas_type_descriptor * cPtr_enterRegisterAddressIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_enterRegisterAddressIR ;
 }
 
-void cPtr_intToPtrIR::description (C_String & ioString,
-                                   const int32_t inIndentation) const {
-  ioString << "[@intToPtrIR:" ;
+void cPtr_enterRegisterAddressIR::description (C_String & ioString,
+                                               const int32_t inIndentation) const {
+  ioString << "[@enterRegisterAddressIR:" ;
   mProperty_mLLVMName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mRegisterAddress.description (ioString, inIndentation+1) ;
@@ -1219,51 +1229,51 @@ void cPtr_intToPtrIR::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-acPtr_class * cPtr_intToPtrIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_enterRegisterAddressIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_intToPtrIR (mProperty_mLLVMName, mProperty_mRegisterAddress, mProperty_mRegisterName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_enterRegisterAddressIR (mProperty_mLLVMName, mProperty_mRegisterAddress, mProperty_mRegisterName COMMA_THERE)) ;
   return ptr ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                  @intToPtrIR type                                                   *
+//                                            @enterRegisterAddressIR type                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_intToPtrIR ("intToPtrIR",
-                                   & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+kTypeDescriptor_GALGAS_enterRegisterAddressIR ("enterRegisterAddressIR",
+                                               & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_intToPtrIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_intToPtrIR ;
+const C_galgas_type_descriptor * GALGAS_enterRegisterAddressIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_enterRegisterAddressIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_intToPtrIR::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_enterRegisterAddressIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_intToPtrIR (*this)) ;
+    macroMyNew (result, GALGAS_enterRegisterAddressIR (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_intToPtrIR GALGAS_intToPtrIR::extractObject (const GALGAS_object & inObject,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_intToPtrIR result ;
-  const GALGAS_intToPtrIR * p = (const GALGAS_intToPtrIR *) inObject.embeddedObject () ;
+GALGAS_enterRegisterAddressIR GALGAS_enterRegisterAddressIR::extractObject (const GALGAS_object & inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_enterRegisterAddressIR result ;
+  const GALGAS_enterRegisterAddressIR * p = (const GALGAS_enterRegisterAddressIR *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_intToPtrIR *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_enterRegisterAddressIR *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("intToPtrIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("enterRegisterAddressIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -16819,82 +16829,6 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (666)
 , END
 // State S565 (index = 16947)
-, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__24_type, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_case, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_public, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_var, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_let, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__3D_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__40_attribute, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_sync, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_extend, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_opaque, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_registers, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_driver, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__21_selector_3A_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_staticArray, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_task, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_setup, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_panic, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_system, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__3F_selector_3A_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_init, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_guard, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_required, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_extern, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_interrupt, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_or, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_xor, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_and, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__7C_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__5E_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__26_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__3D__3D_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2260_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2264_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2265_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__3C_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__3C__3C_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__3E__3E_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2B_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2B__25_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2D__25_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2A_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2A__25_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__25_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__21__25_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2F_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__21__2F_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_if, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_self, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_check, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_nop, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_on, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_while, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_for, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__2E__2E__3C_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_switch, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken__21__3F_selector_3A_, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_target, REDUCE (64)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (64)
-, END
-// State S566 (index = 17096)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (63)
 , C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (63)
 , C_Lexique_plm_5F_lexique::kToken__24_type, REDUCE (63)
@@ -16969,6 +16903,82 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__21__3F_selector_3A_, REDUCE (63)
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (63)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (63)
+, END
+// State S566 (index = 17096)
+, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__24_type, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_case, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_public, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_var, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_let, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__3D_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__40_attribute, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_sync, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_extend, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_opaque, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_registers, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_driver, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__21_selector_3A_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_staticArray, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_task, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_setup, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_panic, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_system, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__3F_selector_3A_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_init, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_guard, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_required, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_extern, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_interrupt, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_or, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_xor, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_and, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__7C_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__5E_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__26_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__3D__3D_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2260_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2264_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2265_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__3C_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__3C__3C_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__3E__3E_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2B_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2B__25_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2D__25_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2A_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2A__25_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__25_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__21__25_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2F_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__21__2F_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_if, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_self, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_check, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_nop, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_on, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_while, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_for, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__2E__2E__3C_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_switch, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken__21__3F_selector_3A_, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_target, REDUCE (64)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (64)
 , END
 // State S567 (index = 17245)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (66)

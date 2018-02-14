@@ -6,14 +6,6 @@ class @addressofExpressionAST : @expressionAST {
   @LValueAST mLValue
 }
 
-#·······················································································································
-
-class @addressofControlRegisterAST : @expressionAST {
-  @lstring mRegisterGroupName
-  @lstring mRegisterName
-  @registerIndexAST mRegisterIndex
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -32,16 +24,6 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    $addressof$
-    $($
-    <control_register_lvalue> !?ioAST ?let registerGroupName ?let registerName ?let registerIndex
-    $)$
-    outExpression = @addressofControlRegisterAST.new {!registerGroupName !registerName !registerIndex}
-  }
-
-  #·····················································································································
-
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -49,14 +31,6 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @addressofExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
-  ?!@semanticTypePrecedenceGraph unused ioGraph
-{
-}
-
-#·······················································································································
-
-override method @addressofControlRegisterAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
   ?!@semanticTypePrecedenceGraph unused ioGraph
 {
@@ -72,129 +46,9 @@ override method @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
   [mLValue noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#·······················································································································
-
-override method @addressofControlRegisterAST noteExpressionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  switch mRegisterIndex
-  case noIndex :
-  case index (indexExpression *) :
-    [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  end
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @addressofControlRegisterAST analyzeExpression
-  ?self:let @PLMType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@objectIR outResult
-{
-#-------------------- Search register group name in entity map
-  [ioUniversalMap searchEntity !mRegisterGroupName ?let entity]
-  @controlRegisterMap registerMap
-#-------------------- Search register name in register group map
-  switch entity
-  case task (*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
-  case driver (2*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
-  case globalConstant (*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
-  case localConstant (3*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
-  case globalSyncInstance (2*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
-  case localVariable (2*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
-  case registerGroup (theRegisterMap) :
-    registerMap = theRegisterMap
-  end
-  [registerMap searchKey
-    !mRegisterName
-    ?let @PLMType registerType
-    ?let @bool readOnly
-    ?let @bool userAccess
-    ?2*
-    ?let @controlRegisterGroupKind controlRegisterGroupKind
-    ?2*
-    ?let @uint inRegisterArraySize # 0 if not an array
-    ?let @uint inRegisterElementSize # 0 if not an array
-  ]
-#-------------------- Check access
-  if readOnly then
-    error mRegisterName
-      : "this control register cannot be modified (declared with @ro attribute)"
-  elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
-    error mRegisterName : "this control register is not accessible in user mode"
-  end
-#-------------------- Result
-  let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
-    !inContext.mTypeMap
-    !["uint" + [inContext.mTargetParameters.mPointerSize string] nowhere]
-  }
-  let resultType = [resultTypeProxy type]
-  getNewTempValue (!resultType !?ioTemporaries ?outResult)
-#-------------------- Analyze control register target
-  switch controlRegisterGroupKind
-  case single (registerAddress) :
-    if [mRegisterIndex isNoIndex] then # Simple access to a control register for writing
-      if inRegisterArraySize == 0 then
-        let registerName = mRegisterGroupName.string + ":" + mRegisterName
-        [!?ioInstructionGenerationList appendLoadRegisterAddress ![outResult llvmName] !registerAddress !registerName]
-      else
-        error mRegisterName : "the control register is an array"
-      end
-    else # Simple access to a control register for writing
-      [mRegisterIndex index ?index:let indexExpression ?endOfIndex:let endOfIndex]
-      handleArraySubscriptNew (
-        !self: inSelfType
-        !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !context: inContext
-        !mode: inMode
-        !?temporary: ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !indexExpression 
-        !endOfIndex
-        !arraySize:inRegisterArraySize
-        !elementType:registerType
-        !?ioInstructionGenerationList
-        ?let @objectIR indexIR
-      )
-      if [indexIR isLiteralInteger] then # subscript expression is constant
-        [indexIR literalInteger ?1* ?value:let @bigint idx]
-        let addr = registerAddress + idx * inRegisterElementSize
-        let registerName = mRegisterGroupName.string + ":" + mRegisterName + "[" + idx + "]"
-        [!?ioInstructionGenerationList appendLoadRegisterAddress ![outResult llvmName] !addr !registerName]
-      else
-        [!?ioTemporaries newTempLLVMVar ?let llvmName]
-        [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
-          !llvmName
-          !indexIR
-          !registerAddress
-          !inRegisterElementSize
-        ]
-      end
-    end
-  end
-}
-
-#·······················································································································
 
 override method @addressofExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
@@ -257,11 +111,8 @@ override method @addressofInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-#  switch mLValue
-#  case universalReference (@PLMType type @string llvmName) :
-    ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + [mLValue.type llvmTypeName] + "* " + mLValue.llvmName
-                + " to " + [mTarget llvmTypeName] + " ; addressof\n"
-#  end
+  ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + [mLValue.type llvmTypeName] + "* " + mLValue.llvmName
+             + " to " + [mTarget llvmTypeName] + " ; addressof\n"
 }
 
 #·······················································································································

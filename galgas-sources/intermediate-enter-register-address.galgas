@@ -1,38 +1,36 @@
 
-setter @instructionListIR appendStoreIndirectVolatileRegister
-  ?let @PLMType inTargetVarType
-  ?let @string inLLVMName
-  ?let @objectIR inSourceValue
+setter @instructionListIR appendEnterRegisterAddress
+  ?!@semanticTemporariesStruct ioTemporaries
+  !@string out_llvmName
+  ?let @bigint inAddress
+  ?let @string inRegisterName
 {
-  self += !@storeIndirectVolatileIR.new {!inTargetVarType !inLLVMName !inSourceValue}
+  [!?ioTemporaries newTempLLVMVar ?out_llvmName]
+  self += !@enterRegisterAddressIR.new {!out_llvmName !inAddress !inRegisterName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeIndirectVolatileIR : @abstractInstructionIR {
-  @PLMType mTargetVarType
+class @enterRegisterAddressIR : @abstractInstructionIR {
   @string mLLVMName
-  @objectIR mSourceValue
+  @bigint mRegisterAddress
+  @string mRegisterName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeIndirectVolatileIR llvmInstructionCode
+override method @enterRegisterAddressIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
-  ?!@generationAdds ioGenerationAdds
+  ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetVarType llvmTypeName]
-  let ptr = "%registerPointer." + ioGenerationAdds.mUniqueIndex
-  ioGenerationAdds.mUniqueIndex ++
-  ioLLVMcode += "  " + ptr + " = inttoptr i32 " + mLLVMName + " to " + llvmType + "*\n"
-              + "  store volatile " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType
-              + " * " + ptr + "\n"
+  ioLLVMcode += "  " + mLLVMName + " = add i32 " + mRegisterAddress
+             + ", 0 ; " + mRegisterName + " at " + [mRegisterAddress hexString] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeIndirectVolatileIR enterAccessibleEntities 
+override method @enterRegisterAddressIR enterAccessibleEntities 
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

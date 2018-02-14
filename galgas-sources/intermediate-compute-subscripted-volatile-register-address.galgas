@@ -1,11 +1,13 @@
 
 setter @instructionListIR appendComputeSubscriptedVolatileRegisterAddress
-  ?let @string inLLVMResultVarName
+  ?!@semanticTemporariesStruct ioTemporaries
+  !@string outLLVMResultVarName
   ?let @objectIR inIndexIR
   ?let @bigint inAddress
   ?let @uint inElementSize
 {
-  self += !@computeSubscriptedVolatileRegisterAddress.new {!inLLVMResultVarName !inIndexIR !inAddress !inElementSize}
+  [!?ioTemporaries newTempLLVMVar ?outLLVMResultVarName]
+  self += !@computeSubscriptedVolatileRegisterAddress.new {!outLLVMResultVarName !inIndexIR !inAddress !inElementSize}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

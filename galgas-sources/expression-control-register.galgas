@@ -100,89 +100,50 @@ override method @registerInExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
   [ioUniversalMap searchEntity !mGroupName ?let entity]
+  @controlRegisterMap controlRegisterMap
   switch entity
   case globalConstant (*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : outResult
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
   case driver (2*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : outResult
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
   case globalSyncInstance (2*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : outResult
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
   case localConstant (3*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : outResult
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
   case localVariable (2*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : outResult
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
   case task (*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : outResult
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
   case registerGroup (registerMap) :
     if [inRoutineAttributes guard] then
-      error mGroupName : "control register is not readable in guard" : outResult
+      error mGroupName : "control register is not readable in guard" : controlRegisterMap
     elsif not [inRoutineAttributes controlRegisterReadable] then
-      error mGroupName : "control register is not readable in this context" : outResult
+      error mGroupName : "control register is not readable in this context" : controlRegisterMap
     else
-      analyzeRegisterExpression (
-        !self: inSelfType
-        !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !context: inContext
-        !mode: inMode
-        !?temporary: ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !registerMap
-        !mGroupName
-        !mRegisterName
-        !mRegisterIndex
-        !mFieldName # Empty string if no field access
-        ?result: outResult
-      )
+      controlRegisterMap = registerMap
     end
   end
-}
-
-#·······················································································································
-
-private proc analyzeRegisterExpression
-  ?self:let @PLMType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?let @controlRegisterMap inControlRegisterMap
-  ?let @lstring inRegisterGroupName
-  ?let @lstring inRegisterName
-  ?let @registerIndexAST inRegisterIndex
-  ?let @lstring inFieldName # Empty string if no field access
-  !result:@objectIR outResult
-{
 #-------------------- Search register in group
-  [inControlRegisterMap searchKey
-    !inRegisterName
+  [controlRegisterMap searchKey
+    !mRegisterName
     ?let @PLMType registerType
     ?*
     ?let @bool userAccess
-    ?let @sliceMap inRegisterSliceMap
-    ?let @controlRegisterFieldMap unused mRegisterFieldMap
+    ?let @sliceMap registerSliceMap
+    ?*
     ?let @controlRegisterGroupKind controlRegisterGroupKind
-    ?let @controlRegisterFieldList unused mControlRegisterFieldList # Used for HTML file
-    ?let @uint unused mRegisterBitCount
-    ?let @uint inRegisterArraySize # 0 if not an array
-    ?let @uint inRegisterElementSize # 0 if not an array
+    ?2*
+    ?let @uint registerArraySize # 0 if not an array
+    ?let @uint registerElementSize # 0 if not an array
   ]
 #-------------------- Register index
-  [!?ioTemporaries newTempLLVMVar ?let llvmName]
-  switch inRegisterIndex
+  @string llvmName
+  switch mRegisterIndex
   case noIndex :
     switch controlRegisterGroupKind
     case single (registerAddress) :
-      let registerName = inRegisterGroupName.string + ":" + inRegisterName
-      [!?ioInstructionGenerationList appendLoadRegisterAddress !llvmName !registerAddress !registerName]
+      let registerName = mGroupName.string + ":" + mRegisterName
+      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !registerName]
     end
   case index (@expressionAST indexExpression @location endOfIndex) :
     handleArraySubscriptNew (
@@ -197,7 +158,7 @@ private proc analyzeRegisterExpression
        !?alloca: ioAllocaList
        !indexExpression 
        !endOfIndex
-       !arraySize:inRegisterArraySize
+       !arraySize:registerArraySize
        !elementType:registerType
        !? ioInstructionGenerationList
        ?let @objectIR indexIR
@@ -206,18 +167,19 @@ private proc analyzeRegisterExpression
       [indexIR literalInteger ?1* ?value:let @bigint idx]
       switch controlRegisterGroupKind
       case single (registerAddress) :
-        let addr = registerAddress + idx * inRegisterElementSize
-        let registerName = inRegisterGroupName.string + ":" + inRegisterName + "[" + idx + "]"
-        [!?ioInstructionGenerationList appendLoadRegisterAddress !llvmName !addr !registerName]
+        let addr = registerAddress + idx * registerElementSize
+        let registerName = mGroupName.string + ":" + mRegisterName + "[" + idx + "]"
+        [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !registerName]
       end
     else
       switch controlRegisterGroupKind
       case single (registerAddress) :
         [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
-          !llvmName
+          !?ioTemporaries
+          ?llvmName
           !indexIR
           !registerAddress
-          !inRegisterElementSize
+          !registerElementSize
         ]
       end
     end
@@ -226,9 +188,9 @@ private proc analyzeRegisterExpression
   getNewTempValue (!registerType !?ioTemporaries ?outResult)
   [!?ioInstructionGenerationList appendLoadIndirectVolatileRegister !outResult !llvmName]
 #-------------------- Field access
-  if inFieldName.string != "" then
-    [inRegisterSliceMap searchKey
-      !inFieldName
+  if mFieldName.string != "" then
+    [registerSliceMap searchKey
+      !mFieldName
       ?let @llvmBinaryOperation accessOperator
       ?let @bigint accessRightOperand
       ?*
@@ -238,7 +200,7 @@ private proc analyzeRegisterExpression
     [!?ioInstructionGenerationList appendBinaryOperation
       !resultIR
       ![outResult type]
-      !inFieldName.location
+      !mFieldName.location
       !outResult
       !accessOperator
       !.literalInteger {!type:staticIntegerType () !value:accessRightOperand}
@@ -247,7 +209,7 @@ private proc analyzeRegisterExpression
   end
 #-------------------- User mode ?
   if not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
-    error inRegisterName : "this control register is not accessible in user mode" : outResult
+    error mRegisterName : "this control register is not accessible in user mode" : outResult
   end
 }
 

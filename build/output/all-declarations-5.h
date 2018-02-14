@@ -797,7 +797,8 @@ class cPtr_releaseIR : public cPtr_abstractInstructionIR {
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendComputeSubscriptedVolatileRegisterAddress (class GALGAS_instructionListIR & ioObject,
-                                                                      const class GALGAS_string constin_inLLVMResultVarName,
+                                                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                                      class GALGAS_string & out_outLLVMResultVarName,
                                                                       const class GALGAS_objectIR constin_inIndexIR,
                                                                       const class GALGAS_bigint constin_inAddress,
                                                                       const class GALGAS_uint constin_inElementSize,
@@ -905,35 +906,47 @@ class cPtr_computeSubscriptedVolatileRegisterAddress : public cPtr_abstractInstr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Extension setter '@instructionListIR appendLoadRegisterAddress'                           *
+//                            Extension setter '@semanticTemporariesStruct newTempLLVMVar'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendLoadRegisterAddress (class GALGAS_instructionListIR & ioObject,
-                                                const class GALGAS_string constin_inLLVMName,
-                                                const class GALGAS_bigint constin_inAddress,
-                                                const class GALGAS_string constin_inRegisterName,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionSetter_newTempLLVMVar (class GALGAS_semanticTemporariesStruct & ioObject,
+                                     class GALGAS_string & out_outTempLLVMVar,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                  @intToPtrIR class                                                  *
+//                          Extension setter '@instructionListIR appendEnterRegisterAddress'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_intToPtrIR : public GALGAS_abstractInstructionIR {
+void extensionSetter_appendEnterRegisterAddress (class GALGAS_instructionListIR & ioObject,
+                                                 class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                 class GALGAS_string & out_out_5F_llvmName,
+                                                 const class GALGAS_bigint constin_inAddress,
+                                                 const class GALGAS_string constin_inRegisterName,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @enterRegisterAddressIR class                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_enterRegisterAddressIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
-  public : GALGAS_intToPtrIR (void) ;
+  public : GALGAS_enterRegisterAddressIR (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_intToPtrIR constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_enterRegisterAddressIR constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_intToPtrIR * ptr (void) const { return (const cPtr_intToPtrIR *) mObjectPtr ; }
+  public : inline const class cPtr_enterRegisterAddressIR * ptr (void) const { return (const cPtr_enterRegisterAddressIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_intToPtrIR (const cPtr_intToPtrIR * inSourcePtr) ;
+  public : GALGAS_enterRegisterAddressIR (const cPtr_enterRegisterAddressIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -941,18 +954,18 @@ class GALGAS_intToPtrIR : public GALGAS_abstractInstructionIR {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_intToPtrIR extractObject (const GALGAS_object & inObject,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_enterRegisterAddressIR extractObject (const GALGAS_object & inObject,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_intToPtrIR constructor_new (const class GALGAS_string & inOperand0,
-                                                           const class GALGAS_bigint & inOperand1,
-                                                           const class GALGAS_string & inOperand2
-                                                           COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_enterRegisterAddressIR constructor_new (const class GALGAS_string & inOperand0,
+                                                                       const class GALGAS_bigint & inOperand1,
+                                                                       const class GALGAS_string & inOperand2
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_intToPtrIR & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_enterRegisterAddressIR & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -970,30 +983,30 @@ class GALGAS_intToPtrIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_intToPtrIR class
+} ; // End of GALGAS_enterRegisterAddressIR class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_intToPtrIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enterRegisterAddressIR ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Pointer class for @intToPtrIR class                                         *
+//                                   Pointer class for @enterRegisterAddressIR class                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_intToPtrIR : public cPtr_abstractInstructionIR {
+class cPtr_enterRegisterAddressIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mProperty_mLLVMName ;
   public : GALGAS_bigint mProperty_mRegisterAddress ;
   public : GALGAS_string mProperty_mRegisterName ;
 
 //--- Constructor
-  public : cPtr_intToPtrIR (const GALGAS_string & in_mLLVMName,
-                            const GALGAS_bigint & in_mRegisterAddress,
-                            const GALGAS_string & in_mRegisterName
-                            COMMA_LOCATION_ARGS) ;
+  public : cPtr_enterRegisterAddressIR (const GALGAS_string & in_mLLVMName,
+                                        const GALGAS_bigint & in_mRegisterAddress,
+                                        const GALGAS_string & in_mRegisterName
+                                        COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
