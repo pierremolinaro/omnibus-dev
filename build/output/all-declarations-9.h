@@ -10,6 +10,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                            Function 'copyableAttribute'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Function 'minValueForInteger'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -223,6 +232,30 @@ GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAd
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          Function 'linkForControlRegister'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_linkForControlRegister (const class GALGAS_string & constinArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Routine 'buildControlRegisterMapByAddress'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildControlRegisterMapByAddress (const class GALGAS_controlRegisterMap constinArgument0,
+                                               const class GALGAS_bigint constinArgument1,
+                                               const class GALGAS_string constinArgument2,
+                                               class GALGAS_controlRegisterByAddress & ioArgument3,
+                                               class GALGAS_uint & ioArgument4,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Function 'arrayIndexListFor'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -240,16 +273,6 @@ class GALGAS_uintlist function_arrayIndexListFor (const class GALGAS_uint & cons
 class GALGAS_string function_fieldIndexColumns (const class GALGAS_uint & constinArgument0,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'linkForControlRegister'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_linkForControlRegister (const class GALGAS_string & constinArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -698,28 +721,4 @@ void routine_analyzeEffectiveParameters (const class GALGAS_PLMType constinArgum
                                          class GALGAS_procCallEffectiveParameterListIR & ioArgument13,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Routine 'handleArraySubscriptNew'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
-                                      const class GALGAS_routineAttributes constinArgument1,
-                                      const class GALGAS_lstring constinArgument2,
-                                      const class GALGAS_semanticContext constinArgument3,
-                                      const class GALGAS_mode constinArgument4,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                      class GALGAS_staticEntityMap & ioArgument6,
-                                      class GALGAS_universalValuedObjectMap & ioArgument7,
-                                      class GALGAS_allocaList & ioArgument8,
-                                      const class GALGAS_expressionAST constinArgument9,
-                                      const class GALGAS_location constinArgument10,
-                                      const class GALGAS_bigint constinArgument11,
-                                      const class GALGAS_PLMType constinArgument12,
-                                      class GALGAS_instructionListIR & ioArgument13,
-                                      class GALGAS_objectIR & outArgument14,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
 

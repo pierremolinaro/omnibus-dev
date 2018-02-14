@@ -110,21 +110,23 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
   [ioUniversalMap searchEntity !mRegisterGroupName ?let entity]
 #-------------------- Search register name in register group map
   @controlRegisterMap registerMap
+  @registerGroupKind groupKind
   switch entity
   case task (*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
   case driver (2*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
   case globalConstant (*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
   case localConstant (3*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
   case globalSyncInstance (2*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
   case localVariable (2*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap
-  case registerGroup (theRegisterMap) :
+    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
+  case registerGroup (theRegisterMap theGroupKind) :
     registerMap = theRegisterMap
+    groupKind = theGroupKind
   end
   [registerMap searchKey
     !mRegisterName
@@ -132,11 +134,18 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     ?let @bool readOnly
     ?let @bool userAccess
     ?2*
-    ?let @controlRegisterGroupKind controlRegisterGroupKind
+    ?let @bigint addressOffset
     ?2*
     ?let @uint registerArraySize # 0 if not an array
     ?let @uint registerElementSize # 0 if not an array
   ]
+  @bigint registerAddress
+  switch groupKind
+  case single (@bigint baseAddress) :
+    registerAddress = baseAddress + addressOffset
+  case arrayGroup (@lbigintlist baseAddresses) :
+    registerAddress = 0 + addressOffset
+  end
 #-------------------- Check access
   if readOnly then
     error mRegisterName
@@ -166,48 +175,45 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
   ]
 #-------------------- Analyze control register target
   @string llvmName
-  switch controlRegisterGroupKind
-  case single (registerAddress) :
-    switch mRegisterIndex
-    case noIndex :
-      if registerArraySize == 0 then
-        let regName = mRegisterGroupName.string + ":" + mRegisterName
-        [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !regName]
-      else
-        error mRegisterName : "the control register is an array" : llvmName
-      end
-    case index (indexExpression endOfIndex) :
-      handleArraySubscriptNew (
-        !self: inSelfType
-        !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-        !context: inContext
-        !mode: inMode
-        !?temporary: ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !indexExpression 
-        !endOfIndex
-        !arraySize:registerArraySize
-        !elementType:registerType
-        !?ioInstructionGenerationList
-        ?let @objectIR indexIR
-      )
-      if [indexIR isLiteralInteger] then # subscript expression is constant
-        [indexIR literalInteger ?1* ?value:let @bigint idx]
-        let addr = registerAddress + idx * registerElementSize
-        let registerName = mRegisterGroupName.string + ":" + mRegisterName + "[" + idx + "]"
-        [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !registerName]
-      else
-        [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
-          !?ioTemporaries
-          ?llvmName
-          !indexIR
-          !registerAddress
-          !registerElementSize
-        ]
-      end
+  switch mRegisterIndex
+  case noIndex :
+    if registerArraySize == 0 then
+      let regName = mRegisterGroupName.string + ":" + mRegisterName
+      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !regName]
+    else
+      error mRegisterName : "the control register is an array" : llvmName
+    end
+  case index (indexExpression endOfIndex) :
+    handleArraySubscriptNew (
+      !self: inSelfType
+      !routineAttributes:inRoutineAttributes
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap:ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !indexExpression 
+      !endOfIndex
+      !arraySize:registerArraySize
+      !elementType:registerType
+      !?ioInstructionGenerationList
+      ?let @objectIR indexIR
+    )
+    if [indexIR isLiteralInteger] then # subscript expression is constant
+      [indexIR literalInteger ?1* ?value:let @bigint idx]
+      let addr = registerAddress + idx * registerElementSize
+      let registerName = mRegisterGroupName.string + ":" + mRegisterName + "[" + idx + "]"
+      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !registerName]
+    else
+      [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
+        !?ioTemporaries
+        ?llvmName
+        !indexIR
+        !registerAddress
+        !registerElementSize
+      ]
     end
   end
 #-------------------- Perform assignment

@@ -24,6 +24,14 @@ struct @intermediateCodeStruct {
   @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
   @generationListIR mGenerationListIR
   @globalSyncInstanceMapIR mGlobalSyncInstanceMap
+  @controlRegisterGroupArrayList mControlRegisterGroupArrayList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @controlRegisterGroupArrayList {
+  @lstring mGroupName
+  @lbigintlist mBaseAddresses
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

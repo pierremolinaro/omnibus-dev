@@ -137,7 +137,7 @@ method @LValueAST analyzeLValue
       error mIdentifier : "a task has no value" : outInternalRepresentation
     case driver (* *) :
       error mIdentifier : "a driver has no value" : outInternalRepresentation
-    case registerGroup (*) :
+    case registerGroup (2*) :
       error mIdentifier : "INTERNAL ERROR" : outInternalRepresentation
     case globalConstant (*) :
       error mIdentifier : "a global constant cannot be written" : outInternalRepresentation

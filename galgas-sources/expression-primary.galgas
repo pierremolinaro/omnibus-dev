@@ -258,7 +258,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       !?result: outResult
     )
-  case registerGroup (*) :
+  case registerGroup (2*) :
     error mReceiverName : "control register is not accessible in this context" : outResult
   case globalConstant (@objectIR objectIR) :
     outResult = objectIR

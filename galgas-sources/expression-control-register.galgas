@@ -101,26 +101,28 @@ override method @registerInExpressionAST analyzeExpression
 {
   [ioUniversalMap searchEntity !mGroupName ?let entity]
   @controlRegisterMap controlRegisterMap
+  @registerGroupKind groupKind
   switch entity
   case globalConstant (*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
   case driver (2*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
   case globalSyncInstance (2*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
   case localConstant (3*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
   case localVariable (2*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
   case task (*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap
-  case registerGroup (registerMap) :
+    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
+  case registerGroup (registerMap theGroupKind) :
     if [inRoutineAttributes guard] then
-      error mGroupName : "control register is not readable in guard" : controlRegisterMap
+      error mGroupName : "control register is not readable in guard" : controlRegisterMap, groupKind
     elsif not [inRoutineAttributes controlRegisterReadable] then
-      error mGroupName : "control register is not readable in this context" : controlRegisterMap
+      error mGroupName : "control register is not readable in this context" : controlRegisterMap, groupKind
     else
       controlRegisterMap = registerMap
+      groupKind = theGroupKind
     end
   end
 #-------------------- Search register in group
@@ -131,20 +133,25 @@ override method @registerInExpressionAST analyzeExpression
     ?let @bool userAccess
     ?let @sliceMap registerSliceMap
     ?*
-    ?let @controlRegisterGroupKind controlRegisterGroupKind
+    ?let @bigint addressOffset
     ?2*
     ?let @uint registerArraySize # 0 if not an array
     ?let @uint registerElementSize # 0 if not an array
   ]
+#-------------------- Register group kind
+  @bigint registerAddress
+  switch groupKind
+  case single (@bigint baseAddress) :
+    registerAddress = baseAddress + addressOffset
+  case arrayGroup (@lbigintlist baseAddresses) :
+    registerAddress = 0 + addressOffset
+  end
 #-------------------- Register index
   @string llvmName
   switch mRegisterIndex
   case noIndex :
-    switch controlRegisterGroupKind
-    case single (registerAddress) :
-      let registerName = mGroupName.string + ":" + mRegisterName
-      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !registerName]
-    end
+    let registerName = mGroupName.string + ":" + mRegisterName
+    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !registerName]
   case index (@expressionAST indexExpression @location endOfIndex) :
     handleArraySubscriptNew (
        !self: inSelfType
@@ -165,23 +172,17 @@ override method @registerInExpressionAST analyzeExpression
     )
     if [indexIR isLiteralInteger] then # subscript expression is constant
       [indexIR literalInteger ?1* ?value:let @bigint idx]
-      switch controlRegisterGroupKind
-      case single (registerAddress) :
-        let addr = registerAddress + idx * registerElementSize
-        let registerName = mGroupName.string + ":" + mRegisterName + "[" + idx + "]"
-        [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !registerName]
-      end
+      let addr = registerAddress + idx * registerElementSize
+      let registerName = mGroupName.string + ":" + mRegisterName + "[" + idx + "]"
+      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !registerName]
     else
-      switch controlRegisterGroupKind
-      case single (registerAddress) :
-        [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
-          !?ioTemporaries
-          ?llvmName
-          !indexIR
-          !registerAddress
-          !registerElementSize
-        ]
-      end
+      [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
+        !?ioTemporaries
+        ?llvmName
+        !indexIR
+        !registerAddress
+        !registerElementSize
+      ]
     end
   end
 #-------------------- Load register

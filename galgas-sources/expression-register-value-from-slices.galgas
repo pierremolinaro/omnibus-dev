@@ -87,6 +87,7 @@ override method @registerConstantExpressionAST analyzeExpression
 #------------------------------------------------------ Search Control register Group
   [inContext.mControlRegisterGroupMap searchKey
     !mRegisterGroupName
+    ?*
     ?let controlRegisterMap
   ]
 #------------------------------------------------------ Search Control register
