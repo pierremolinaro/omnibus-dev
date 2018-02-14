@@ -1415,6 +1415,10 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_111 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_syntax_112 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_113 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -10624,7 +10628,8 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
-    kEnum_single
+    kEnum_single,
+    kEnum_groupArray
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -10651,6 +10656,10 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static class GALGAS_controlRegisterGroupKindAST constructor_groupArray (const class GALGAS_lbigint & inOperand0,
+                                                                                   const class GALGAS_lbigintlist & inOperand1
+                                                                                   COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_controlRegisterGroupKindAST constructor_single (const class GALGAS_lbigint & inOperand0
                                                                                COMMA_LOCATION_ARGS) ;
 
@@ -10663,6 +10672,11 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_groupArray (class GALGAS_lbigint & outArgument0,
+                                                    class GALGAS_lbigintlist & outArgument1,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_single (class GALGAS_lbigint & outArgument0,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
@@ -10670,6 +10684,8 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGroupArray (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSingle (LOCATION_ARGS) const ;
 
 
@@ -10701,6 +10717,24 @@ class cEnumAssociatedValues_controlRegisterGroupKindAST_single : public cEnumAss
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_controlRegisterGroupKindAST_single (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray : public cEnumAssociatedValues {
+  public : const GALGAS_lbigint mAssociatedValue0 ;
+  public : const GALGAS_lbigintlist mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_lbigint & inAssociatedValue0,
+                                                                         const GALGAS_lbigintlist & inAssociatedValue1
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12825,8 +12859,8 @@ class GALGAS_controlRegisterNameListAST : public AC_GALGAS_list {
                                                   const class GALGAS_lstring & in_mRegisterName,
                                                   const class GALGAS_controlRegisterKind & in_mControlRegisterKind,
                                                   const class GALGAS_lstringlist & in_mAttributeList,
-                                                  const class GALGAS_expressionAST & in_mRegisterAddress,
-                                                  const class GALGAS_location & in_mRegisterAddressLocation
+                                                  const class GALGAS_expressionAST & in_mRegisterOffset,
+                                                  const class GALGAS_location & in_mRegisterOffsetLocation
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -12931,17 +12965,17 @@ class GALGAS_controlRegisterNameListAST : public AC_GALGAS_list {
                                                                                                  C_Compiler * inCompiler
                                                                                                  COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mRegisterAddressAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mRegisterAddressLocationAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                               C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mRegisterOffsetAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mRegisterOffsetLocationAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterNameListAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                              C_Compiler * inCompiler
@@ -12976,8 +13010,8 @@ class cEnumerator_controlRegisterNameListAST : public cGenericAbstractEnumerator
   public : class GALGAS_lstring current_mRegisterName (LOCATION_ARGS) const ;
   public : class GALGAS_controlRegisterKind current_mControlRegisterKind (LOCATION_ARGS) const ;
   public : class GALGAS_lstringlist current_mAttributeList (LOCATION_ARGS) const ;
-  public : class GALGAS_expressionAST current_mRegisterAddress (LOCATION_ARGS) const ;
-  public : class GALGAS_location current_mRegisterAddressLocation (LOCATION_ARGS) const ;
+  public : class GALGAS_expressionAST current_mRegisterOffset (LOCATION_ARGS) const ;
+  public : class GALGAS_location current_mRegisterOffsetLocation (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_controlRegisterNameListAST_2D_element current (LOCATION_ARGS) const ;
 } ;

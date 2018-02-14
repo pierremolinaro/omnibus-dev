@@ -94,14 +94,14 @@ end
 <table class="result">
 <tr><td class="result_title">Control Register Name</td><td class="result_title">PLM Type</td><td class="result_title">Address</td><td class="result_title">Value</td></tr>\n%
 for () in CONTROL_REGISTER_GROUP_MAP : group_ do
-  for () in group_mControlRegisterMap : reg_ do
-    switch reg_mControlRegisterGroupKind
-    case single (registerAddress) :
+  switch group_mGroupKind
+  case single (groupBaseAddress) :
+    for () in group_mControlRegisterMap : reg_ do
       if reg_mArraySize == 0 then
         %<tr class="result_line"><td class="name">%
         %<a name="%!group_lkey.string + ":" + reg_lkey%">%!group_lkey.string + ":" + reg_lkey%</a>%
         %</td><td class="type">$%!reg_mType.plmOriginalTypeName%</td><td class="address">%
-        ![registerAddress hexStringSeparatedBy !'_' !4]
+        ![groupBaseAddress + reg_mAddressOffset hexStringSeparatedBy !'_' !4]
         %</td><td>%
         if [reg_mControlRegisterFieldList length] > 0 then
           %<table class="fields">%
@@ -119,7 +119,7 @@ for () in CONTROL_REGISTER_GROUP_MAP : group_ do
           %<tr class="result_line"><td class="name">%
           %<a name="%!group_lkey.string + ":" + reg_lkey%[%![mValue string]%]">%!group_lkey.string + ":" + reg_lkey% [%![mValue string]%]</a>%
           %</td><td class="type">$%!reg_mType.plmOriginalTypeName%</td><td class="address">%
-          ![registerAddress + mValue * reg_mElementArraySize hexStringSeparatedBy !'_' !4]
+          ![groupBaseAddress + reg_mAddressOffset + mValue * reg_mElementArraySize hexStringSeparatedBy !'_' !4]
           %</td><td>%
           if [reg_mControlRegisterFieldList length] > 0 then
             %<table class="fields">%
@@ -135,6 +135,7 @@ for () in CONTROL_REGISTER_GROUP_MAP : group_ do
         end
       end
     end
+  case arrayGroup (@lbigintlist baseAddresses) :
   end
 end%
 </table>

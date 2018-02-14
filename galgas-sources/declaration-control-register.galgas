@@ -16,8 +16,8 @@ list @controlRegisterNameListAST {
   @lstring mRegisterName
   @controlRegisterKind mControlRegisterKind
   @lstringlist mAttributeList
-  @expressionAST mRegisterAddress
-  @location mRegisterAddressLocation
+  @expressionAST mRegisterOffset
+  @location mRegisterOffsetLocation
 }
 
 #·······················································································································
@@ -46,6 +46,7 @@ enum @controlRegisterBitSlice {
 
 enum @controlRegisterGroupKindAST {
   case single (@lbigint registerGroupBaseAddress)
+  case groupArray (@lbigint size @lbigintlist baseAddresses)
 }
 
 #·······················································································································
@@ -75,9 +76,26 @@ syntax extension plm_syntax {
     @registerGroupListAST registerGroupListAST = {}
     repeat
       $identifier$ ?let registerGroupName
-      $integer$ ?let @lbigint registerGroupBaseAddress
-      let groupKind = @controlRegisterGroupKindAST.single {!registerGroupBaseAddress:registerGroupBaseAddress}
-      registerGroupListAST += !registerGroupName !groupKind
+      select
+        $integer$ ?let @lbigint registerGroupBaseAddress
+        let groupKind = @controlRegisterGroupKindAST.single {!registerGroupBaseAddress:registerGroupBaseAddress}
+        registerGroupListAST += !registerGroupName !groupKind
+      or
+        $[$
+        $integer$ ?let @lbigint groupSize
+        $]$
+        @lbigintlist groupBaseAddresses = {}
+        ${$
+        repeat
+          $integer$ ?let @lbigint baseAddress
+          groupBaseAddresses += !baseAddress
+        while
+          $,$
+        end
+        $}$
+        let groupKind = @controlRegisterGroupKindAST.groupArray {!size:groupSize !baseAddresses:groupBaseAddresses}
+        registerGroupListAST += !registerGroupName !groupKind
+      end
     while
       $,$
     end
@@ -204,37 +222,6 @@ map @sliceMap {
   search searchKey error message "the '%K' slice is not declared"
 }
 
-#·······················································································································
-
-enum @controlRegisterGroupKind {
-  case single (@bigint address)
-}
-
-#·······················································································································
-
-map @controlRegisterMap {
-  @PLMType mType
-  @bool mIsReadOnly
-  @bool mUserAccess
-  @sliceMap mRegisterFieldAccessMap
-  @controlRegisterFieldMap mRegisterFieldMap
-  @controlRegisterGroupKind mControlRegisterGroupKind
-  @controlRegisterFieldList mControlRegisterFieldList # Used for HTML file
-  @uint mRegisterBitCount
-  @uint mArraySize # 0 if not an array
-  @uint mElementArraySize # 0 if not an array
-  insert insertKey error message "the '%K' control register has been already declared in %L"
-  search searchKey error message "the '%K' control register is not declared"
-}
-
-#·······················································································································
-
-map @controlRegisterGroupMap {
-  @controlRegisterMap mControlRegisterMap
-  insert insertKey error message "the '%K' control register group has been already declared in %L"
-  search searchKey error message "** internal error **"
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   PRECEDENCE GRAPH
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -316,6 +303,39 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   CONTEXT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @controlRegisterMap {
+  @PLMType mType
+  @bool mIsReadOnly
+  @bool mUserAccess
+  @sliceMap mRegisterFieldAccessMap
+  @controlRegisterFieldMap mRegisterFieldMap
+  @bigint mAddressOffset
+  @controlRegisterFieldList mControlRegisterFieldList # Used for HTML file
+  @uint mRegisterBitCount
+  @uint mArraySize # 0 if not an array
+  @uint mElementArraySize # 0 if not an array
+  insert insertKey error message "the '%K' control register has been already declared in %L"
+  search searchKey error message "the '%K' control register is not declared"
+}
+
+#·······················································································································
+
+enum @registerGroupKind {
+  case single (@bigint baseAddress)
+  case arrayGroup (@lbigintlist baseAddresses)
+}
+
+#·······················································································································
+
+map @controlRegisterGroupMap {
+  @registerGroupKind mGroupKind
+  @controlRegisterMap mControlRegisterMap
+  insert insertKey error message "the '%K' control register group has been already declared in %L"
+  search searchKey error message "** internal error **"
+}
+
+#·······················································································································
 
 private proc controlRegisterType
   ?let @lstring inRegisterTypeName
@@ -423,7 +443,6 @@ private proc buildControlRegisterSliceMap
 #·······················································································································
 
 method @controlRegisterDeclarationList-element enterControlRegisterGroupInContext
-  ?let @controlRegisterGroupKindAST inRegisterGroupKind
   ?!context:@semanticContext ioContext
   ?!@controlRegisterMap ioControlRegisterMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -441,7 +460,6 @@ method @controlRegisterDeclarationList-element enterControlRegisterGroupInContex
     ?let controlRegisterFieldList  # Used for HTML file
   )
 #---  
-  let @bigint maxRegisterAddress = (1G << ioContext.mTargetParameters.mPointerSize) - 1G
   for register in mRegisterArrayList do
   #--- Analyze attributes
     var isReadOnly = false
@@ -464,30 +482,19 @@ method @controlRegisterDeclarationList-element enterControlRegisterGroupInContex
       end
     end
   #--- Analyse register address expression
-    [register.mRegisterAddress analyzeStaticExpression
-      !errorLocation:register.mRegisterAddressLocation
+    [register.mRegisterOffset analyzeStaticExpression
+      !errorLocation:register.mRegisterOffsetLocation
       !context:ioContext
       !?staticEntityMap:ioStaticEntityMap
       ?result:let @objectIR addressOffsetExpressionResult
     ]
-    @controlRegisterGroupKind controlRegisterGroupKind
+    @bigint registerAddressOffset
     if not [addressOffsetExpressionResult isLiteralInteger] then
-      error register.mRegisterAddressLocation
+      error register.mRegisterOffsetLocation
         : "control register address offset is not a static integer expression"
-        : controlRegisterGroupKind
+        : registerAddressOffset
     else
-      [addressOffsetExpressionResult literalInteger ?1* ?value:let registerAddressOffset]
-      switch inRegisterGroupKind
-      case single (baseAddress) :
-        let registerAddress = baseAddress.bigint + registerAddressOffset
-        controlRegisterGroupKind = .single {!address:registerAddress}
-#      registerAddress = inRegisterGroupBaseAddress + registerAddressOffset
-     #--- Check address value
-        if registerAddress > maxRegisterAddress then
-          error register.mRegisterAddressLocation
-           : "register address should be lower or equal to " + [maxRegisterAddress hexString]
-        end
-      end
+      [addressOffsetExpressionResult literalInteger ?1* ?value:registerAddressOffset]
     end
     @bigint arraySize
     @uint elementArraySize
@@ -555,7 +562,7 @@ method @controlRegisterDeclarationList-element enterControlRegisterGroupInContex
       !userAccess
       !registerBitSliceMap
       !registerFieldMap
-      !controlRegisterGroupKind
+      !registerAddressOffset
       !controlRegisterFieldList
       !registerBitCount
       ![arraySize uint]
@@ -569,24 +576,87 @@ method @controlRegisterDeclarationList-element enterControlRegisterGroupInContex
 override method @controlRegisterGroupDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
 {
-  for group in mRegisterGroupList while @uint.errorCount == 0 do
-    @controlRegisterMap controlRegisterMap = {}
-    for reg in mRegisters do
-      [reg enterControlRegisterGroupInContext
-        !group.mControlRegisterGroupKind
-        !?context:ioContext
-        !?controlRegisterMap
-        !?staticEntityMap:ioStaticEntityMap
-      ]
+  @controlRegisterMap registerMap = {}
+  for reg in mRegisters do
+    [reg enterControlRegisterGroupInContext
+      !?context:ioContext
+      !?registerMap
+      !?staticEntityMap:ioStaticEntityMap
+    ]
+  end
+  for group in mRegisterGroupList do
+    switch group.mControlRegisterGroupKind
+    case single (baseAddress) :
+      let groupKind = @registerGroupKind.single {!baseAddress:baseAddress}
+      [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
+      [!?ioContext.mValuedObjectMap insertRegisterGroup !group.mRegisterGroupName !groupKind !registerMap]
+    case groupArray (size baseAddresses) :
+      if [size.bigint uint] != [baseAddresses length] then
+        error size : "the group size is " + size.bigint + ", but " + [baseAddresses length] + " base addresses are defined"
+      end
+      let groupKind = @registerGroupKind.arrayGroup {!baseAddresses:baseAddresses}
+      [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
+      [!?ioContext.mValuedObjectMap insertRegisterGroup !group.mRegisterGroupName !groupKind !registerMap]
+      ioDecoratedDeclarationList += !@decoratedControlRegisterArrayGroupDeclaration.new {
+        !group.mRegisterGroupName
+        !baseAddresses
+      }
     end
-    [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !controlRegisterMap]
-    [!?ioContext.mValuedObjectMap insertRegisterGroup !group.mRegisterGroupName !controlRegisterMap]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @decoratedControlRegisterArrayGroupDeclaration : @abstractDecoratedDeclaration {
+  @lstring mGroupName
+  @lbigintlist mBaseAddresses
+}
+
+#·······················································································································
+
+override method @decoratedControlRegisterArrayGroupDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  ioIntermediateCodeStruct.mControlRegisterGroupArrayList += !mGroupName !mBaseAddresses
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  CODE GENERATION                                                                                                   
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @controlRegisterGroupArrayList generateLLVMcode ?!@string ioLLVMcode ?let @uint inPointerSize {
+  if [self length] > 0 then
+    ioLLVMcode += llvmTitleComment (!"Control Register Group Arraies")
+    let int = "i" + inPointerSize
+    for (groupName baseAddresses) in self do
+      ioLLVMcode += "@register.group.array." + [groupName assemblerRepresentation]
+                 + " = private unnamed_addr constant [" + [baseAddresses length] + " x " + int + "] ["
+      for (addr) in baseAddresses
+      do
+        ioLLVMcode += int + " " + [addr.bigint string]
+      between
+        ioLLVMcode += ", "
+      end
+      ioLLVMcode += "] ; "
+      for (addr) in baseAddresses
+      do
+        ioLLVMcode += [addr.bigint hexString]
+      between
+        ioLLVMcode += ", "
+      end
+      ioLLVMcode += "\n"
+    end
+    ioLLVMcode += "\n"
   end
 }
 
@@ -652,47 +722,24 @@ proc buildControlRegisterMapHTMLFile
     @controlRegisterByAddress controlRegisterByAddress = {}
     @uint controlRegisterCount = 0
     for () group_ in inControlRegisterGroupMap do
-      for () reg_ in group_mControlRegisterMap do
-        switch reg_mControlRegisterGroupKind
-        case single (registerAddress) :
-          if reg_mArraySize == 0 then
-            controlRegisterCount = controlRegisterCount + 1
-            var s = "<tr class=\"result_line\"><td class=\"name\">"
-              + group_lkey.string + ":" + reg_lkey
-              + "</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
-              + [registerAddress hexStringSeparatedBy !'_' !4] + "</td><td>"
-            if [reg_mControlRegisterFieldList length] > 0 then
-              s += "<table class=\"fields\">"
-                + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) +  "</tr>"
-                + "<tr>"
-              for > () in reg_mControlRegisterFieldList do
-                s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
-              end
-              s += "</tr></table>"
-            end  
-            s += "</td></tr>\n"
-            controlRegisterByAddress += !registerAddress !s
-          else
-            controlRegisterCount = controlRegisterCount + reg_mArraySize
-            for () in arrayIndexListFor (!size:reg_mArraySize) do
-              let address = registerAddress + mValue * reg_mElementArraySize
-              var s = "<tr class=\"result_line\"><td class=\"name\">"
-                + group_lkey.string + ":" + reg_lkey + "[" + [mValue string] + "]"
-                +"</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
-                + [address hexStringSeparatedBy !'_' !4]
-                + "</td><td>"
-              if [reg_mControlRegisterFieldList length] > 0 then
-                s += "<table class=\"fields\">"
-                  + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) + "</tr><tr>"
-                for > () in reg_mControlRegisterFieldList do
-                  s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
-                end
-                s += "</tr></table>"
-              end  
-              s += "</td></tr>\n"
-              controlRegisterByAddress += !registerAddress !s
-            end
-          end
+      switch group_mGroupKind
+      case single (groupBaseAddress) :
+        buildControlRegisterMapByAddress (
+          !group_mControlRegisterMap
+          !groupBaseAddress
+          !group_lkey.string
+          !?controlRegisterByAddress
+          !?controlRegisterCount
+        )
+      case arrayGroup (@lbigintlist baseAddresses) :
+        for (baseAddr) in baseAddresses do (idx)
+          buildControlRegisterMapByAddress (
+            !group_mControlRegisterMap
+            !baseAddr.bigint
+            !group_lkey.string + "[" + idx + "]"
+            !?controlRegisterByAddress
+            !?controlRegisterCount
+          )
         end
       end
     end
@@ -704,6 +751,58 @@ proc buildControlRegisterMapHTMLFile
     [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
   else
     [@string deleteFileIfExists !typeDumpFilePath]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc buildControlRegisterMapByAddress
+  ?let @controlRegisterMap inControlRegisterMap
+  ?let @bigint inGroupBaseAddress
+  ?let @string inGroupName
+  ?!@controlRegisterByAddress ioControlRegisterByAddress
+  ?!@uint ioControlRegisterCount
+{
+  for () reg_ in inControlRegisterMap do
+    let registerAddress = inGroupBaseAddress + reg_mAddressOffset
+    if reg_mArraySize == 0 then
+      ioControlRegisterCount = ioControlRegisterCount + 1
+      var s = "<tr class=\"result_line\"><td class=\"name\">"
+        + inGroupName + ":" + reg_lkey
+        + "</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+        + [registerAddress hexStringSeparatedBy !'_' !4] + "</td><td>"
+      if [reg_mControlRegisterFieldList length] > 0 then
+        s += "<table class=\"fields\">"
+          + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) +  "</tr>"
+          + "<tr>"
+        for > () in reg_mControlRegisterFieldList do
+          s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
+        end
+        s += "</tr></table>"
+      end  
+      s += "</td></tr>\n"
+      ioControlRegisterByAddress += !registerAddress !s
+    else
+      ioControlRegisterCount = ioControlRegisterCount + reg_mArraySize
+      for () in arrayIndexListFor (!size:reg_mArraySize) do
+        let address = registerAddress + mValue * reg_mElementArraySize
+        var s = "<tr class=\"result_line\"><td class=\"name\">"
+          + inGroupName + ":" + reg_lkey + "[" + [mValue string] + "]"
+          +"</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+          + [address hexStringSeparatedBy !'_' !4]
+          + "</td><td>"
+        if [reg_mControlRegisterFieldList length] > 0 then
+          s += "<table class=\"fields\">"
+            + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) + "</tr><tr>"
+          for > () in reg_mControlRegisterFieldList do
+            s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
+          end
+          s += "</tr></table>"
+        end  
+        s += "</td></tr>\n"
+        ioControlRegisterByAddress += !registerAddress !s
+      end
+    end
   end
 }
 

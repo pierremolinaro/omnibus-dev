@@ -185,7 +185,6 @@ class cPtr_infixObjectObjectOperatorDescription : public cPtr_infixOperatorDescr
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionMethod_enterControlRegisterGroupInContext (const class GALGAS_controlRegisterDeclarationList_2D_element inObject,
-                                                         const class GALGAS_controlRegisterGroupKindAST constin_inRegisterGroupKind,
                                                          class GALGAS_semanticContext & io_ioContext,
                                                          class GALGAS_controlRegisterMap & io_ioControlRegisterMap,
                                                          class GALGAS_staticEntityMap & io_ioStaticEntityMap,
@@ -555,13 +554,4 @@ void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgumen
                                                   class GALGAS_semanticContext & ioArgument1,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'copyableAttribute'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
 

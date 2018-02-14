@@ -220,6 +220,8 @@ private proc generateCodeFiles
     do [driver generateLLVM !?llvmCode]
     after llvmCode += "\n"
   end
+#----------------------------------------- Control register group array
+  [inIntermediateCodeStruct.mControlRegisterGroupArrayList generateLLVMcode !?llvmCode !inTargetParameters.mPointerSize]
 #----------------------------------------- Global sync instances
   for globalSyncInstance in inIntermediateCodeStruct.mGlobalSyncInstanceMap
     before llvmCode += llvmTitleComment (!"Global synchronization tool instances")

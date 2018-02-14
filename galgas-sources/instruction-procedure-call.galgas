@@ -241,7 +241,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       else
         error mIdentifier : "the driver should be instancied" : currentType, currentLLVMAddressVar
       end
-    case registerGroup (*) :
+    case registerGroup (2*) :
       error mIdentifier
         : "a control register constant cannot be used in this context"
         : currentType, currentLLVMAddressVar
