@@ -2,25 +2,8 @@
 #! AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @registerGroupIndexAST {
-  case noIndex
-  case index (@expressionAST index @location endOfIndex)
-}
-
-#·······················································································································
-
-enum @registerIndexAST {
-  case noIndex
-  case index (@expressionAST index @location endOfIndex)
-}
-
-#·······················································································································
-
 class @registerInExpressionAST : @expressionAST {
-  @lstring mGroupName
-  @registerGroupIndexAST mGroupIndex
-  @lstring mRegisterName
-  @registerIndexAST mRegisterIndex
+  @controlRegisterLValueAST mControlRegisterLValue
   @lstring mFieldName # Empty string if no field access
 }
 
@@ -33,7 +16,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    <control_register_lvalue> !?ioAST ?let registerGroupName ?let groupIndex ?let registerName ?let registerIndex
+    <control_register_lvalue> !?ioAST ?let registerLValue
     @lstring fieldName
     select
       fieldName = ["" nowhere]
@@ -42,7 +25,7 @@ syntax extension plm_syntax {
       $identifier$ ?fieldName
     end
   #--- AST
-    outExpression = @registerInExpressionAST.new {!registerGroupName !groupIndex !registerName !registerIndex !fieldName}
+    outExpression = @registerInExpressionAST.new {!registerLValue !fieldName}
   }
 
   #·····················································································································
@@ -57,12 +40,8 @@ override method @registerInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !mGroupName]
-  switch mRegisterIndex
-  case noIndex :
-  case index (@expressionAST indexExpression *) :
-    [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  end
+  [!?ioGraph addEdge !inConstantName !mControlRegisterLValue.mRegisterGroupName]
+  [mControlRegisterLValue addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -70,11 +49,7 @@ override method @registerInExpressionAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  switch mRegisterIndex
-  case noIndex :
-  case index (@expressionAST indexExpression *) :
-    [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  end
+  [mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -95,99 +70,29 @@ override method @registerInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  [ioUniversalMap searchEntity !mGroupName ?let entity]
-  @controlRegisterMap controlRegisterMap
-  @registerGroupKind groupKind
-  switch entity
-  case globalConstant (*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
-  case driver (2*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
-  case globalSyncInstance (2*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
-  case localConstant (3*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
-  case localVariable (2*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
-  case task (*) :
-    error mGroupName : "the \":\" access is reserved for a control register" : controlRegisterMap, groupKind
-  case registerGroup (registerMap theGroupKind) :
-    if [inRoutineAttributes guard] then
-      error mGroupName : "control register is not readable in guard" : controlRegisterMap, groupKind
-    elsif not [inRoutineAttributes controlRegisterReadable] then
-      error mGroupName : "control register is not readable in this context" : controlRegisterMap, groupKind
-    else
-      controlRegisterMap = registerMap
-      groupKind = theGroupKind
-    end
-  end
-#-------------------- Search register in group
-  [controlRegisterMap searchKey
-    !mRegisterName
-    ?let @PLMType registerType
-    ?*
-    ?let @bool userAccess
-    ?let @sliceMap registerSliceMap
-    ?*
-    ?let @bigint addressOffset
-    ?2*
-    ?let @uint registerArraySize # 0 if not an array
-    ?let @uint registerElementSize # 0 if not an array
+  [mControlRegisterLValue controlRegisterLValueSemanticAnalysis
+    !writeAccess:false
+    !self: inSelfType
+    !routineAttributes: inRoutineAttributes
+    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+    !context: inContext
+    !mode: inMode
+    !?temporary: ioTemporaries
+    !?staticEntityMap: ioStaticEntityMap
+    !?variableMap: ioUniversalMap
+    !?alloca: ioAllocaList
+    !?instructionListIR: ioInstructionGenerationList
+    ?registerType:let registerType
+    ?registerBitCount:*
+    ?sliceMap:let sliceMap
+    ?llvmRegisterAddressName:let llvmRegisterAddressName
   ]
-#-------------------- Register group kind
-  @string registerAddress
-  switch groupKind
-  case single (@bigint baseAddress) :
-    let regName = mGroupName.string + ":" + mRegisterName
-    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !baseAddress !addressOffset !regName]
-  case arrayGroup (@lbigintlist baseAddresses) :
-    let regName = mGroupName.string + ":" + mRegisterName
-    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !0G !addressOffset !regName]
-  end
-#-------------------- Register index
-  @string llvmName
-  switch mRegisterIndex
-  case noIndex :
-    llvmName = registerAddress
-  case index (@expressionAST indexExpression @location endOfIndex) :
-    handleArraySubscriptNew (
-       !self: inSelfType
-       !routineAttributes:inRoutineAttributes
-       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-       !context: inContext
-       !mode: inMode
-       !?temporary: ioTemporaries
-       !?staticEntityMap:ioStaticEntityMap
-       !?variableMap: ioUniversalMap
-       !?alloca: ioAllocaList
-       !indexExpression 
-       !endOfIndex
-       !arraySize:registerArraySize
-       !elementType:registerType
-       !? ioInstructionGenerationList
-       ?let @objectIR indexIR
-    )
-#    if [indexIR isLiteralInteger] then # subscript expression is constant
-#      [indexIR literalInteger ?1* ?value:let @bigint idx]
-#      let addr = registerAddress + idx * registerElementSize
-#      let registerName = mGroupName.string + ":" + mRegisterName + "[" + idx + "]"
-#      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !0G !registerName]
-#    else
-      [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
-        !?ioTemporaries
-        ?llvmName
-        !indexIR
-        !registerAddress
-        !registerElementSize
-      ]
-#    end
-  end
 #-------------------- Load register
   getNewTempValue (!registerType !?ioTemporaries ?outResult)
-  [!?ioInstructionGenerationList appendLoadIndirectVolatileRegister !outResult !llvmName]
+  [!?ioInstructionGenerationList appendLoadIndirectVolatileRegister !outResult !llvmRegisterAddressName]
 #-------------------- Field access
   if mFieldName.string != "" then
-    [registerSliceMap searchKey
+    [sliceMap searchKey
       !mFieldName
       ?let @llvmBinaryOperation accessOperator
       ?let @bigint accessRightOperand
@@ -204,10 +109,6 @@ override method @registerInExpressionAST analyzeExpression
       !.literalInteger {!type:staticIntegerType () !value:accessRightOperand}
     ]
     outResult = resultIR
-  end
-#-------------------- User mode ?
-  if not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
-    error mRegisterName : "this control register is not accessible in user mode" : outResult
   end
 }
 

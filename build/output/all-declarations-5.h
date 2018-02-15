@@ -3107,10 +3107,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 
 //----------- '' label
   public : virtual void nt_control_5F_register_5F_lvalue_ (GALGAS_ast & ioArgument0,
-                                                           GALGAS_lstring & outArgument1,
-                                                           GALGAS_registerGroupIndexAST & outArgument2,
-                                                           GALGAS_lstring & outArgument3,
-                                                           GALGAS_registerIndexAST & outArgument4,
+                                                           GALGAS_controlRegisterLValueAST & outArgument1,
                                                            C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'declaration' non terminal
