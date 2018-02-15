@@ -1840,6 +1840,50 @@ registers #USBPHY 0x400A_2000 {
 //! Chapter 56: FlexCAN
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+registers #CAN [2] {0x4002_4000, 0x400A_4000} {
+  MCR 0x00 $uint32 {
+    MDIS, FRZ, RFEN, HALT, NOTRDY, WAKMSK, SOFTRST, FRZACK,
+    SUPV, SLFWAK, WRNEN, LPMACK, WAKSRC, 1, SFRXDIS, IRMQ,
+    2, LPRIOEN, AEN, 2, IDAM:2, 1, MAXMB:7
+  }
+
+  CTRL1 0x04 $uint32 {
+    PRESDIV:8, RJW:2, PSEG1:3, PSEG2:3, 
+    BOFFMSK, ERRMSK, CLKSRC, LPB, TWRNMSK, RWRNMSK, 2, SMP, BOFFREC, TSYN, LBUF, LOM, PROPSEG:3
+  }
+
+  TIMER 0x08 $uint32 {16, TIMER:16}
+
+  RXMGMASK 0x10 $uint32
+
+  RX14MASK 0x14 $uint32
+
+  RX15MASK 0x18 $uint32
+
+  ECR 0x1C $uint32 {16, RXERRCNT:8, TXERRCNT:8}
+  
+  ESR1 0x20 $uint32 {
+    13, SYNCH, TWRNINT, RWRNINT,
+    BIT1ERR, BIT0ERR, ACKERR, CRCERR, FRMERR, STFERR, TXWRN, RXWRN, IDLE, TX, FLTCONF:2, RX, BOFFINT, ERRINT, WAKINT 
+  }
+  
+  IMASK1 0x28 $uint32
+
+  IFLAG1 0x30 $uint32 {BUF31TO8I:24, BUF7I, BUF6I, BUF5I, BUF4TO1I:4, BUF0I}
+
+  CTRL2 0x34 $uint32 {3, WRMFRZ, RFFN:4, TASD:5, MRP, RRS, EACEN, 16}
+
+  ESR2 @ro 0x38 $uint32 {9, LPTM:7, 1, VPS, IMB, 13}
+
+  CRCR @ro 0x44 $uint32 {9, MBCRC:7, 1, TXCRC:15}
+
+  RXFGMASK 0x48 $uint32
+
+  RXFIR @ro 0x4C $uint32 {24, IDHIT:8}
+
+  RXIMR [16] 0x880 @inc 4 $uint32
+}
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //! Chapter 57: Serial Peripheral Interface (SPI)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
