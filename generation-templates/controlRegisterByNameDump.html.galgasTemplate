@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Control Registers of %!PROJECT_NAME%</title>
+<title>Control Registers of %!PROJECT_NAME%, sorted by name</title>
 <style type="text/css">body {
   font-size: small ;
 }
@@ -70,73 +70,16 @@ tr.result_line {
   background-color: #EEEEEE ;
 }
 
-
-p.link {
-  font-family: Courier ;
-  padding : 4px ;
-}
-
 </style>
 </head>
 <body>
 <div>
-<h1>Control Registers of %!PROJECT_NAME%</h1>
+<h1>Control Registers of %!PROJECT_NAME%, sorted by name</h1>
 <p>This document lists all %![CONTROL_REGISTER_COUNT string]% defined control registers, sorted by name.</p>
-<p>%
-for () in FIRST_LETTER_SET
-do %<a class="header_link" href="#%![[[key characterAtIndex!0] uint] string]%">%!key%</a>%
-between % - %
-end
-%</p>
-<p class="link">%
-!TABLE_OF_TYPES_STRING%
-</p>
 <table class="result">
 <tr><td class="result_title">Control Register Name</td><td class="result_title">PLM Type</td><td class="result_title">Address</td><td class="result_title">Value</td></tr>\n%
-for () in CONTROL_REGISTER_GROUP_MAP : group_ do
-  switch group_mGroupKind
-  case single (groupBaseAddress) :
-    for () in group_mControlRegisterMap : reg_ do
-      if reg_mArraySize == 0 then
-        %<tr class="result_line"><td class="name">%
-        %<a name="%!group_lkey.string + ":" + reg_lkey%">%!group_lkey.string + ":" + reg_lkey%</a>%
-        %</td><td class="type">$%!reg_mType.plmOriginalTypeName%</td><td class="address">%
-        ![groupBaseAddress + reg_mAddressOffset hexStringSeparatedBy !'_' !4]
-        %</td><td>%
-        if [reg_mControlRegisterFieldList length] > 0 then
-          %<table class="fields">%
-            %<tr>%!fieldIndexColumns (!reg_mRegisterBitCount) %</tr>%
-            %<tr>%
-            for > () in reg_mControlRegisterFieldList do
-              %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
-            end
-            %</tr>%
-          %</table>%
-        end  
-        %</td></tr>\n%
-      else
-        for () in arrayIndexListFor (!size:reg_mArraySize) do
-          %<tr class="result_line"><td class="name">%
-          %<a name="%!group_lkey.string + ":" + reg_lkey%[%![mValue string]%]">%!group_lkey.string + ":" + reg_lkey% [%![mValue string]%]</a>%
-          %</td><td class="type">$%!reg_mType.plmOriginalTypeName%</td><td class="address">%
-          ![groupBaseAddress + reg_mAddressOffset + mValue * reg_mElementArraySize hexStringSeparatedBy !'_' !4]
-          %</td><td>%
-          if [reg_mControlRegisterFieldList length] > 0 then
-            %<table class="fields">%
-              %<tr>%!fieldIndexColumns (!reg_mRegisterBitCount) %</tr>%
-              %<tr>%
-              for > () in reg_mControlRegisterFieldList do
-                %<td class="fields" colspan="% ![mFieldBitCount string] %">% !mFieldName %</td>%
-              end
-              %</tr>%
-            %</table>%
-          end  
-          %</td></tr>\n%
-        end
-      end
-    end
-  case arrayGroup (@lbigintlist baseAddresses) :
-  end
+for () in CONTROL_REGISTER_SORTED_BY_NAME do
+  !mHTML
 end%
 </table>
 </div>
