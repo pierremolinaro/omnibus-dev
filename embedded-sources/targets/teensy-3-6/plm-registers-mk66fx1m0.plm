@@ -4,7 +4,7 @@ check target "teensy-3-6/unprivileged"
 //! Chapter 12: Port control and interrupts (PORT) Pin Control registers n
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers PORTA 0x4004_9000 {
+registers #PORTA 0x4004_9000 {
     PCR @user [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
@@ -15,7 +15,7 @@ registers PORTA 0x4004_9000 {
 }
 
 
-registers PORTB 0x4004_A000 {
+registers #PORTB 0x4004_A000 {
   PCR @user [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
@@ -26,7 +26,7 @@ registers PORTB 0x4004_A000 {
 }
 
 
-registers PORTC 0x4004_B000 {
+registers #PORTC 0x4004_B000 {
   PCR @user [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
@@ -37,7 +37,7 @@ registers PORTC 0x4004_B000 {
 }
 
 
-registers PORTD 0x4004_C000 {
+registers #PORTD 0x4004_C000 {
   PCR @user [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
@@ -48,7 +48,7 @@ registers PORTD 0x4004_C000 {
 }
 
 
-registers PORTE 0x4004_D000 {
+registers #PORTE 0x4004_D000 {
   PCR @user [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
@@ -62,7 +62,7 @@ registers PORTE 0x4004_D000 {
 //! Chapter 13: System Integration Module (SIM)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers SIM 0x4004_7000 {
+registers #SIM 0x4004_7000 {
 //--- System Options registers 1
   SOPT1 0x00 $uint32 {USBREGEN, USBSSTBY, USBVSTBY, 9, OSC32KSEL:2, 2, RAMSIZE:4, 12}
 
@@ -249,7 +249,7 @@ registers SIM 0x4004_7000 {
 //! Chapter 15: Reset Control Module (RCM)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers RCM 0x4007_F000 {
+registers #RCM 0x4007_F000 {
   SRS0 0x00 $uint8 // System Reset Status registers 0
   SRS1 0x01 $uint8 // System Reset Status registers 1
   RPFC 0x04 $uint8 // Reset Pin Filter Control Register
@@ -261,7 +261,7 @@ registers RCM 0x4007_F000 {
 //! Chapter 16: System Mode Controller
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers SMC 0x4007_E000 {
+registers #SMC 0x4007_E000 {
   PMPROT  0x00 $uint8 { // Power Mode Protection Register
     AHSRUN, // Allow high speed run mode
     1,
@@ -301,7 +301,7 @@ registers SMC 0x4007_E000 {
 //! Chapter 17: Power Management Controller
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers PMC 0x4007_D000 {
+registers #PMC 0x4007_D000 {
   LVDSC1 0x00 $uint8 { // Low Voltage Detect Status And Control 1 register
     LVDF,
     LVDACK,
@@ -328,7 +328,7 @@ registers PMC 0x4007_D000 {
 //! Chapter 18: Low-Leakage Wakeup Unit (LLWU)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers LLWU 0x4007_C000 {
+registers #LLWU 0x4007_C000 {
   PE1  0x00 $uint8 // LLWU Pin Enable 1 register
   PE2  0x01 $uint8 // LLWU Pin Enable 2 register
   PE3  0x02 $uint8 // LLWU Pin Enable 3 register
@@ -346,7 +346,7 @@ registers LLWU 0x4007_C000 {
 //! Chapter 19: Miscellaneous Control Module (MCM)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers MCM 0xE008_0000 {
+registers #MCM 0xE008_0000 {
   PLASC 0x08 $uint16 // Crossbar Switch (AXBS) Slave Configuration
   
   PLAMC 0x0A $uint16 // Crossbar Switch (AXBS) Master Configuration
@@ -366,7 +366,7 @@ registers MCM 0xE008_0000 {
 //! Chapter 20: Crossbar Switch (AXBS)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers AXBS 0x4000_4000 {
+registers #AXBS 0x4000_4000 {
   PRS0   0x000 $uint32 // Priority Registers Slave 0
   PRS1   0x100 $uint32 // Priority Registers Slave 1
   PRS2   0x200 $uint32 // Priority Registers Slave 2
@@ -412,7 +412,7 @@ registers AXBS 0x4000_4000 {
 //! Chapter 21: Peripheral Bridge (AIPS-Lite)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers AIPS0 0x_4000_0000 {
+registers #AIPS0 0x_4000_0000 {
   MPRA 0x00 $uint32
   
   //--- AICS0_PACR (§4.5.1 and §19.2, §19.2.2)
@@ -460,7 +460,7 @@ registers AIPS0 0x_4000_0000 {
 //! Chapter 22: Memory Protection Unit
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers MPU 0x4000_0000 {
+registers #MPU 0x4000_0000 {
 
 //--- Region Descriptor Alternate Access Control n (0 ... 11)
   RGDAAC [16] 0xD800 @inc 4 $uint32 {
@@ -475,7 +475,7 @@ registers MPU 0x4000_0000 {
 
 let DMA_CHANNEL_COUNT = 32
 
-registers DMAMUX 0x4002_1000 {
+registers #DMAMUX 0x4002_1000 {
   CHCFG [DMA_CHANNEL_COUNT] 0x00 @inc 1 $uint8 {
     ENABLE, TRIG, SOURCE:6
   }
@@ -565,7 +565,7 @@ let DMA_TCD_ATTR_SIZE_32BIT  $uint4 = 2
 let DMA_TCD_ATTR_SIZE_16BYTE $uint4 = 4
 let DMA_TCD_ATTR_SIZE_32BYTE $uint4 = 5
 
-registers DMA 0x4000_8000 {
+registers #DMA 0x4000_8000 {
   CR 0x00 $uint32 {
     14,
     CX, // Cancel Transfer
@@ -722,7 +722,7 @@ registers DMA 0x4000_8000 {
 //! Chapter 26: Watchdog Timer (WDOG)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers WDOG 0x4005_2000 {
+registers #WDOG 0x4005_2000 {
   STCTRLH 0x00 $uint16 { // Watchdog Status and Control registers High
     1,
     WDOG_STCTRLH_DISTESTWDOG,  // Allows the WDOG's functional test mode to be disabled permanently.
@@ -763,7 +763,7 @@ let WDOG_UNLOCK_SEQ2 $uint16   = 0xD928
 //! Chapter 27: Multipurpose Clock Generator (MCG)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers MCG 0x4006_4000 {
+registers #MCG 0x4006_4000 {
   C1 0x00 $uint8 { // MCG Control 1 Register
     CLKS:2, // Clock Source Select, Selects the clock source for MCGOUTCLK
     FRDIV:3, // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL
@@ -841,7 +841,7 @@ registers MCG 0x4006_4000 {
 //! Chapter 28: Oscillator (OSC)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers OSC 0x4006_5000 {
+registers #OSC 0x4006_5000 {
   CR 0x00 $uint8 {// OSC Control Register
     ERCLKEN, // External Reference Enable, Enables external reference clock (OSCERCLK)
     1,
@@ -860,7 +860,7 @@ registers OSC 0x4006_5000 {
 //! Chapter 30: Local Memory Controller
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers LMEM 0xE008_2000 {
+registers #LMEM 0xE008_2000 {
   PCCCR 0x00 $uint32 { // Cache control register
     GO,
     3,
@@ -885,7 +885,7 @@ registers LMEM 0xE008_2000 {
 //! Chapter 31: Flash Memory Controller (FMC)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers FMC 0x4001_F000 {
+registers #FMC 0x4001_F000 {
   PFAPR     0x000 $uint32 // Flash Access Protection
   PFB0CR    0x004 $uint32 // Flash Control
   TAGVDW0S0 0x100 $uint32 // Cache Tag Storage
@@ -949,7 +949,7 @@ registers FMC 0x4001_F000 {
 //! Chapter 36: Cyclic Redundancy Check (CRC)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers CRC 0x4003_2000 {
+registers #CRC 0x4003_2000 {
   CRC   0x00 $uint32 // CRC Data register
   GPOLY 0x04 $uint32 // CRC Polynomial register
   CTRL  0x08 $uint32 // CRC Control register
@@ -959,7 +959,7 @@ registers CRC 0x4003_2000 {
 //! Chapter 39: Analog-to-Digital Converter (ADC)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers ADC0 0x4003_B000 {
+registers #ADC0 0x4003_B000 {
   SC1A   0x00
   SC1B   0x04 $uint32  {// ADC status and control registers 1
     24,
@@ -1052,7 +1052,7 @@ registers ADC0 0x4003_B000 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers ADC1 0x400B_B000 {
+registers #ADC1 0x400B_B000 {
   SC1A   0x00 $uint32 // ADC status and control registers 1
   
   SC1B   0x04 $uint32 // ADC status and control registers 1
@@ -1114,7 +1114,7 @@ registers ADC1 0x400B_B000 {
 //! Chapter 40: Comparator (CMP)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers CMP0 0x4007_3000 {
+registers #CMP0 0x4007_3000 {
   CR0   0x00 $uint8 // CMP Control registers 0
   CR1   0x01 $uint8 // CMP Control registers 1
   FPR   0x02 $uint8 // CMP Filter Period Register
@@ -1123,7 +1123,7 @@ registers CMP0 0x4007_3000 {
   MUXCR 0x05 $uint8 // MUX Control Register
 }
 
-registers CMP1 0x4007_3000 {
+registers #CMP1 0x4007_3000 {
   CR0   0x08 $uint8 // CMP Control registers 0
   CR1   0x09 $uint8 // CMP Control registers 1
   FPR   0x0A $uint8 // CMP Filter Period Register
@@ -1136,7 +1136,7 @@ registers CMP1 0x4007_3000 {
 //! Chapter 41: 12-bit Digital-to-Analog Converter (DAC)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers DAC0 0x400C_C000 {
+registers #DAC0 0x400C_C000 {
   DAT0L 0x00 $uint8 // DAC Data Low registers 
   
   DATH  0x01 $uint8 // DAC Data High registers 
@@ -1205,7 +1205,7 @@ registers DAC0 0x400C_C000 {
 //! Chapter 42: Voltage Reference (VREFV1)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers VREF 0x4007_4000 {
+registers #VREF 0x4007_4000 {
   TRM  0x00 $uint8 // VREF Trim Register
   SC   0x01 $uint8 // VREF Status and Control Register
 }
@@ -1214,7 +1214,7 @@ registers VREF 0x4007_4000 {
 //! Chapter 43: Timer / PWM Module (TPM)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers TPM1 0x400C_9000 {
+registers #TPM1 0x400C_9000 {
   SC      0x00 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD:2, PS:3}
   CNT     0x04 $uint32 {16, COUNT:16}
   MOD     0x08 $uint32 {16, MOD:16}
@@ -1235,7 +1235,7 @@ registers TPM1 0x400C_9000 {
 
 //······················································································································
 
-registers TPM2 0x400C_A000 {
+registers #TPM2 0x400C_A000 {
   SC      0x00 $uint32 {23, DMA, TOF, TOIE, CPWMS, CMOD:2, PS:3}
   CNT     0x04 $uint32 {16, COUNT:16}
   MOD     0x08 $uint32 {16, MOD:16}
@@ -1291,8 +1291,8 @@ registers TPM2 0x400C_A000 {
 //  FTM2: 0x4003_A000
 //  FTM3: 0x400B_9000 <--- CAUTION
 
-registers FTM0 0x4003_8000, FTM1 0x4003_9000, FTM2 0x4003_A000, FTM3 0x400B_9000,
-          FTM [4] {0x4003_8000, 0x4003_9000, 0x4003_A000, 0x400B_9000} {
+registers #FTM0 0x4003_8000, #FTM1 0x4003_9000, #FTM2 0x4003_A000, #FTM3 0x400B_9000,
+          #FTM [4] {0x4003_8000, 0x4003_9000, 0x4003_A000, 0x400B_9000} {
   SC 0x00 $uint32 {24, TOF, TOIE, CPWMS, CLKS:2, PS:3}
 
   CNT 0x04 $uint32 {16, COUNT:16}
@@ -1397,7 +1397,7 @@ registers FTM0 0x4003_8000, FTM1 0x4003_9000, FTM2 0x4003_A000, FTM3 0x400B_9000
 
 let PIT_COUNT = 4
 
-registers PIT 0x4003_7000 {
+registers #PIT 0x4003_7000 {
   MCR 0x00 $uint32 {30, MDIS, FRZ}
   
   // PIT Lifetime Timer Registers
@@ -1445,7 +1445,7 @@ registers PIT 0x4003_7000 {
 //! Chapter 49: Real Time Clock (RTC)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers RTC 0x4003_D000 {
+registers #RTC 0x4003_D000 {
   TSR  0x00 $uint32 // RTC Time Seconds Register
   TPR  0x04 $uint32 // RTC Time Prescaler Register
   TAR  0x08 $uint32 // RTC Time Alarm Register
@@ -1478,7 +1478,7 @@ registers RTC 0x4003_D000 {
 //! Chapter 51: Universal Serial Bus Full Speed OTG Controller (USBFSOTG)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers USB0 0x4007_2000 {
+registers #USB0 0x4007_2000 {
 //--- Peripheral ID Register
   PERID @ro 0x00 $uint8 {2, ID:6}
 
@@ -1580,7 +1580,7 @@ registers USB0 0x4007_2000 {
 //! Chapter 54: Universal Serial Bus OTG Controller (USBOTG)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers USBHS 0x400A_1000 {
+registers #USBHS 0x400A_1000 {
 //--- Identification register
   ID @ro 0x00 $uint32 {
     VERSIONID:3, VERSION:4, REVISION:4, TAG:5, 2, NID:6, 2, ID:6
@@ -1717,7 +1717,7 @@ registers USBHS 0x400A_1000 {
 //! Chapter 55: Universal Serial Bus 2.0 Integrated PHY
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers USBPHY 0x400A_2000 {
+registers #USBPHY 0x400A_2000 {
 //--- USB PHY Power-Down Register
   PWD     0x000
   PWD_SET 0x004
@@ -2287,7 +2287,7 @@ registers USBPHY 0x400A_2000 {
 //! Chapter 63: General-Purpose Input/Output (GPIO)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers GPIOA 0x400F_F000, GPIOB 0x400F_F040, GPIOC 0x400F_F080, GPIOD 0x400F_F0C0, GPIOE 0x400F_F100 {
+registers #GPIOA 0x400F_F000, #GPIOB 0x400F_F040, #GPIOC 0x400F_F080, #GPIOD 0x400F_F0C0, #GPIOE 0x400F_F100 {
   PDOR @user 0x00 $uint32 // Port Data Output Register
   PSOR @user 0x04 $uint32 // Port Set Output Register
   PCOR @user 0x08 $uint32 // Port Clear Output Register
@@ -2339,7 +2339,7 @@ registers GPIOA 0x400F_F000, GPIOB 0x400F_F040, GPIOC 0x400F_F080, GPIOD 0x400F_
 //! Nested Vectored Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
  
-registers NVIC 0xE000_E000 {
+registers #NVIC 0xE000_E000 {
   ISER [4]  0x100 @inc 4 $uint32 // Interrupt Set-enable Registers
    
   ICER [4]  0x180 @inc 4 $uint32 //Interrupt Clear-enable Registers
@@ -2353,7 +2353,7 @@ registers NVIC 0xE000_E000 {
 //! SCB System Control Space (SCS), ARMv7 ref manual, B3.2, page 708
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers SCB 0xE000_E000 {
+registers #SCB 0xE000_E000 {
   CPUID 0xD00 $uint32 // CPUID Base Register
 
   ICSR 0xD04 $uint32 { // Interrupt Control and State
@@ -2388,7 +2388,7 @@ registers SCB 0xE000_E000 {
 //! SYSTICK
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers SYST 0xE000_E000 {
+registers #SYST 0xE000_E000 {
 //--- SysTick Control and Status Register
   CSR 0x010 $uint32 {15, COUNTFLAG, 13, CLKSOURCE, TICKINT, ENABLE}
   

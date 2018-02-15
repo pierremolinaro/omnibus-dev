@@ -32,8 +32,8 @@ func section activityLedOff @safe @exported () {
 driver myDriver > digital {
   init {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
-    SIM:SOPT2 |= {SIM:SOPT2 !CLKOUTSEL:3}
-    PORTC:PCR [3] = {PORTC:PCR !MUX:5}
+    #SIM:SOPT2 |= {#SIM:SOPT2 !CLKOUTSEL:3}
+    #PORTC:PCR [3] = {#PORTC:PCR !MUX:5}
   }
 }
 

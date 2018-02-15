@@ -64,6 +64,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
 //--- Terminal symbols enumeration
   public : enum {kToken_,
    kToken_identifier,
+   kToken__23_groupName,
    kToken__40_attribute,
    kToken__24_type,
    kToken_integer,
@@ -211,7 +212,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 116 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 117 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -243,8 +244,9 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_control_5F_register_5F_lvalue_ (class GALGAS_ast & ioArgument0,
                                                               class GALGAS_lstring & outArgument1,
-                                                              class GALGAS_lstring & outArgument2,
-                                                              class GALGAS_registerIndexAST & outArgument3,
+                                                              class GALGAS_registerGroupIndexAST & outArgument2,
+                                                              class GALGAS_lstring & outArgument3,
+                                                              class GALGAS_registerIndexAST & outArgument4,
                                                               class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_control_5F_register_5F_lvalue_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
@@ -1033,8 +1035,9 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i85_ (GALGAS_ast & ioArgument0,
                                                                           GALGAS_lstring & outArgument1,
-                                                                          GALGAS_lstring & outArgument2,
-                                                                          GALGAS_registerIndexAST & outArgument3,
+                                                                          GALGAS_registerGroupIndexAST & outArgument2,
+                                                                          GALGAS_lstring & outArgument3,
+                                                                          GALGAS_registerIndexAST & outArgument4,
                                                                           C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i85_parse (C_Lexique_plm_5F_lexique * inLexique) ;
@@ -6923,9 +6926,10 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_registerInExpressionAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                        const class GALGAS_lstring & inOperand1,
-                                                                        const class GALGAS_registerIndexAST & inOperand2,
-                                                                        const class GALGAS_lstring & inOperand3
+                                                                        const class GALGAS_registerGroupIndexAST & inOperand1,
+                                                                        const class GALGAS_lstring & inOperand2,
+                                                                        const class GALGAS_registerIndexAST & inOperand3,
+                                                                        const class GALGAS_lstring & inOperand4
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -6938,6 +6942,8 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFieldName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_registerGroupIndexAST getter_mGroupIndex (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mGroupName (LOCATION_ARGS) const ;
 
@@ -6958,6 +6964,107 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerInExpressio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             @registerGroupIndexAST enum                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_registerGroupIndexAST (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_noIndex,
+    kEnum_index
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
+
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_registerGroupIndexAST extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_registerGroupIndexAST constructor_index (const class GALGAS_expressionAST & inOperand0,
+                                                                        const class GALGAS_location & inOperand1
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_registerGroupIndexAST constructor_noIndex (LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_registerGroupIndexAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_index (class GALGAS_expressionAST & outArgument0,
+                                               class GALGAS_location & outArgument1,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIndex (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoIndex (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_registerGroupIndexAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerGroupIndexAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   @registerGroupIndexAST enum, associated values                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_registerGroupIndexAST_index : public cEnumAssociatedValues {
+  public : const GALGAS_expressionAST mAssociatedValue0 ;
+  public : const GALGAS_location mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_registerGroupIndexAST_index (const GALGAS_expressionAST & inAssociatedValue0,
+                                                              const GALGAS_location & inAssociatedValue1
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_registerGroupIndexAST_index (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                  Pointer class for @registerInExpressionAST class                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6965,12 +7072,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerInExpressio
 class cPtr_registerInExpressionAST : public cPtr_expressionAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mGroupName ;
+  public : GALGAS_registerGroupIndexAST mProperty_mGroupIndex ;
   public : GALGAS_lstring mProperty_mRegisterName ;
   public : GALGAS_registerIndexAST mProperty_mRegisterIndex ;
   public : GALGAS_lstring mProperty_mFieldName ;
 
 //--- Constructor
   public : cPtr_registerInExpressionAST (const GALGAS_lstring & in_mGroupName,
+                                         const GALGAS_registerGroupIndexAST & in_mGroupIndex,
                                          const GALGAS_lstring & in_mRegisterName,
                                          const GALGAS_registerIndexAST & in_mRegisterIndex,
                                          const GALGAS_lstring & in_mFieldName
@@ -6981,6 +7090,7 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mGroupName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_registerGroupIndexAST getter_mGroupIndex (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_registerIndexAST getter_mRegisterIndex (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFieldName (LOCATION_ARGS) const ;

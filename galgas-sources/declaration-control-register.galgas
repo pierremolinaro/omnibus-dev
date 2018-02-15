@@ -75,7 +75,7 @@ syntax extension plm_syntax {
     $registers$
     @registerGroupListAST registerGroupListAST = {}
     repeat
-      $identifier$ ?let registerGroupName
+      $#groupName$ ?let registerGroupName
       select
         $integer$ ?let @lbigint registerGroupBaseAddress
         let groupKind = @controlRegisterGroupKindAST.single {!registerGroupBaseAddress:registerGroupBaseAddress}

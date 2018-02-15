@@ -14098,6 +14098,9 @@ typeComparisonResult cPtr_registerInExpressionAST::dynamicObjectCompare (const a
     result = mProperty_mGroupName.objectCompare (p->mProperty_mGroupName) ;
   }
   if (kOperandEqual == result) {
+    result = mProperty_mGroupIndex.objectCompare (p->mProperty_mGroupIndex) ;
+  }
+  if (kOperandEqual == result) {
     result = mProperty_mRegisterName.objectCompare (p->mProperty_mRegisterName) ;
   }
   if (kOperandEqual == result) {
@@ -14144,13 +14147,14 @@ GALGAS_expressionAST (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_registerInExpressionAST GALGAS_registerInExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mGroupName,
+                                                                                const GALGAS_registerGroupIndexAST & inAttribute_mGroupIndex,
                                                                                 const GALGAS_lstring & inAttribute_mRegisterName,
                                                                                 const GALGAS_registerIndexAST & inAttribute_mRegisterIndex,
                                                                                 const GALGAS_lstring & inAttribute_mFieldName
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_registerInExpressionAST result ;
-  if (inAttribute_mGroupName.isValid () && inAttribute_mRegisterName.isValid () && inAttribute_mRegisterIndex.isValid () && inAttribute_mFieldName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_registerInExpressionAST (inAttribute_mGroupName, inAttribute_mRegisterName, inAttribute_mRegisterIndex, inAttribute_mFieldName COMMA_THERE)) ;
+  if (inAttribute_mGroupName.isValid () && inAttribute_mGroupIndex.isValid () && inAttribute_mRegisterName.isValid () && inAttribute_mRegisterIndex.isValid () && inAttribute_mFieldName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_registerInExpressionAST (inAttribute_mGroupName, inAttribute_mGroupIndex, inAttribute_mRegisterName, inAttribute_mRegisterIndex, inAttribute_mFieldName COMMA_THERE)) ;
   }
   return result ;
 }
@@ -14171,6 +14175,24 @@ GALGAS_lstring GALGAS_registerInExpressionAST::getter_mGroupName (UNUSED_LOCATIO
 
 GALGAS_lstring cPtr_registerInExpressionAST::getter_mGroupName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mGroupName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerGroupIndexAST GALGAS_registerInExpressionAST::getter_mGroupIndex (UNUSED_LOCATION_ARGS) const {
+  GALGAS_registerGroupIndexAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_registerInExpressionAST * p = (const cPtr_registerInExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_registerInExpressionAST) ;
+    result = p->mProperty_mGroupIndex ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerGroupIndexAST cPtr_registerInExpressionAST::getter_mGroupIndex (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGroupIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14232,12 +14254,14 @@ GALGAS_lstring cPtr_registerInExpressionAST::getter_mFieldName (UNUSED_LOCATION_
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_registerInExpressionAST::cPtr_registerInExpressionAST (const GALGAS_lstring & in_mGroupName,
+                                                            const GALGAS_registerGroupIndexAST & in_mGroupIndex,
                                                             const GALGAS_lstring & in_mRegisterName,
                                                             const GALGAS_registerIndexAST & in_mRegisterIndex,
                                                             const GALGAS_lstring & in_mFieldName
                                                             COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
 mProperty_mGroupName (in_mGroupName),
+mProperty_mGroupIndex (in_mGroupIndex),
 mProperty_mRegisterName (in_mRegisterName),
 mProperty_mRegisterIndex (in_mRegisterIndex),
 mProperty_mFieldName (in_mFieldName) {
@@ -14254,6 +14278,8 @@ void cPtr_registerInExpressionAST::description (C_String & ioString,
   ioString << "[@registerInExpressionAST:" ;
   mProperty_mGroupName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mProperty_mGroupIndex.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mProperty_mRegisterName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mRegisterIndex.description (ioString, inIndentation+1) ;
@@ -14266,7 +14292,7 @@ void cPtr_registerInExpressionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_registerInExpressionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_registerInExpressionAST (mProperty_mGroupName, mProperty_mRegisterName, mProperty_mRegisterIndex, mProperty_mFieldName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_registerInExpressionAST (mProperty_mGroupName, mProperty_mGroupIndex, mProperty_mRegisterName, mProperty_mRegisterIndex, mProperty_mFieldName COMMA_THERE)) ;
   return ptr ;
 }
 

@@ -2,6 +2,13 @@
 #! AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @registerGroupIndexAST {
+  case noIndex
+  case index (@expressionAST index @location endOfIndex)
+}
+
+#·······················································································································
+
 enum @registerIndexAST {
   case noIndex
   case index (@expressionAST index @location endOfIndex)
@@ -11,6 +18,7 @@ enum @registerIndexAST {
 
 class @registerInExpressionAST : @expressionAST {
   @lstring mGroupName
+  @registerGroupIndexAST mGroupIndex
   @lstring mRegisterName
   @registerIndexAST mRegisterIndex
   @lstring mFieldName # Empty string if no field access
@@ -25,19 +33,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    $identifier$ ?let registerGroupName
-    $:$
-    $identifier$ ?let registerName
-  @registerIndexAST registerIndex
-    select
-      registerIndex = .noIndex
-    or
-      $[$
-      <expression> !?ioAST ?let expression
-      let endOfIndex = @location.here
-      $]$
-      registerIndex = .index {!index:expression !endOfIndex:endOfIndex}
-    end
+    <control_register_lvalue> !?ioAST ?let registerGroupName ?let groupIndex ?let registerName ?let registerIndex
     @lstring fieldName
     select
       fieldName = ["" nowhere]
@@ -46,7 +42,7 @@ syntax extension plm_syntax {
       $identifier$ ?fieldName
     end
   #--- AST
-    outExpression = @registerInExpressionAST.new {!registerGroupName !registerName !registerIndex !fieldName}
+    outExpression = @registerInExpressionAST.new {!registerGroupName !groupIndex !registerName !registerIndex !fieldName}
   }
 
   #·····················································································································
@@ -148,20 +144,11 @@ override method @registerInExpressionAST analyzeExpression
     let regName = mGroupName.string + ":" + mRegisterName
     [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !0G !addressOffset !regName]
   end
-#  @bigint registerAddress
-#  switch groupKind
-#  case single (@bigint baseAddress) :
-#    registerAddress = baseAddress + addressOffset
-#  case arrayGroup (@lbigintlist baseAddresses) :
-#    registerAddress = 0 + addressOffset
-#  end
 #-------------------- Register index
   @string llvmName
   switch mRegisterIndex
   case noIndex :
     llvmName = registerAddress
-#    let registerName = mGroupName.string + ":" + mRegisterName
-#    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !0G !registerName]
   case index (@expressionAST indexExpression @location endOfIndex) :
     handleArraySubscriptNew (
        !self: inSelfType

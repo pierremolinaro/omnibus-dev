@@ -26,11 +26,11 @@ driver myDriver > time {
   var tick = $uint32 ()
 
   public system section noteTick () {
-    self.tick = SYST:CVR
+    self.tick = #SYST:CVR
   } 
 
   public system section getDuration () -> $uint32 {
-    result = self.tick - SYST:CVR
+    result = self.tick - #SYST:CVR
   }
 }
 

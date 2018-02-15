@@ -22,15 +22,15 @@ let LED_L0 = $digitalPort.D3
 driver RegisterRead > root {
 
   public system section SIM_CLKDIV1 () -> $uint32 {
-    result = SIM:CLKDIV1
+    result = #SIM:CLKDIV1
   }
 
   public system section MCG_C5 () -> $uint8 {
-    result = MCG:C5
+    result = #MCG:C5
   }
 
   public system section MCG_C6 () -> $uint8 {
-    result = MCG:C6
+    result = #MCG:C6
   }
 }
 

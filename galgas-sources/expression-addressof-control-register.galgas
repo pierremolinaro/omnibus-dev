@@ -19,7 +19,7 @@ syntax extension plm_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $addressof$
     $($
-    <control_register_lvalue> !?ioAST ?let registerGroupName ?let registerName ?let registerIndex
+    <control_register_lvalue> !?ioAST ?let registerGroupName ?let groupIndex ?let registerName ?let registerIndex
     $)$
     outExpression = @addressofControlRegisterAST.new {!registerGroupName !registerName !registerIndex}
   }

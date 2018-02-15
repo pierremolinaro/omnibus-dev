@@ -28,10 +28,20 @@ syntax extension plm_syntax {
   rule <control_register_lvalue>
     ?!@ast ioAST
     !@lstring outRegisterGroupName
+    !@registerGroupIndexAST outGroupIndex
     !@lstring outRegisterName
     !@registerIndexAST outRegisterIndex
   {
-    $identifier$ ?outRegisterGroupName
+    $#groupName$ ?outRegisterGroupName
+    select
+      outGroupIndex = .noIndex
+    or
+      $[$
+      <expression> !?ioAST ?let expression
+      let endOfIndex = @location.here
+      $]$
+      outGroupIndex = .index {!index:expression !endOfIndex:endOfIndex}
+    end
     $:$
     $identifier$ ?outRegisterName
     select
@@ -48,7 +58,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    <control_register_lvalue> !?ioAST ?let registerGroupName ?let registerName ?let registerIndexAST
+    <control_register_lvalue> !?ioAST ?let registerGroupName ?let groupIndex ?let registerName ?let registerIndexAST
   #--- Assignment or assignment operator
     @controlRegisterAssignmentOperatorKind assignmentKind
     select

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 
 // Vectored Interrupt Controller (VIC)
-registers VIC 0xFFFF_F000 {
+registers #VIC 0xFFFF_F000 {
   IRQStatus   0x000 $uint32
   FIQStatus   0x000 $uint32
   RawIntr     0x008 $uint32
@@ -52,7 +52,7 @@ registers VIC 0xFFFF_F000 {
 //------------------------------------------------------------------------------
 
 // Watchdog
-registers WD 0xE000_0000 {
+registers #WD 0xE000_0000 {
   MOD            0x00 $uint8
   TC             0x04 $uint32
   FEED           0x08 $uint8
@@ -60,35 +60,35 @@ registers WD 0xE000_0000 {
 }
 
 // Pin Connect Block
-registers PIN 0xE002_C000 {
+registers #PIN 0xE002_C000 {
   SEL0        0x00 $uint32
   SEL1        0x04 $uint32
   SEL2        0x14 $uint32
 }
 
 // General Purpose Input/Output (GPIO)
-registers IO0 0xE002_8000 {
+registers #IO0 0xE002_8000 {
   PIN          0x00 $uint32
   SET          0x04 $uint32
   DIR          0x08 $uint32
   CLR          0x0C $uint32
 }
 
-registers IO1 0xE002_8010 {
+registers #IO1 0xE002_8010 {
   PIN          0x00 $uint32
   SET          0x04 $uint32
   DIR          0x08 $uint32
   CLR          0x0C $uint32
 }
 
-registers IO2 0xE002_8020 {
+registers #IO2 0xE002_8020 {
   PIN          0x00 $uint32
   SET          0x04 $uint32
   DIR          0x08 $uint32
   CLR          0x0C $uint32
 }
 
-registers IO3 0xE002_8030 {
+registers #IO3 0xE002_8030 {
   PIN          0x00 $uint32
   SET          0x04 $uint32
   DIR          0x08 $uint32
@@ -96,17 +96,17 @@ registers IO3 0xE002_8030 {
 }
 
 // Memory Accelerator Module (MAM)
-registers MAM 0xE01F_C000 {
+registers #MAM 0xE01F_C000 {
   CR            0x00 $uint8
   TIM           0x04 $uint8
 }
 
-registers MEM 0xE01F_C000 {
+registers #MEM 0xE01F_C000 {
   MAP           0x40 $uint8
 }
 
 // Phase Locked Loop (PLL)
-registers PLL 0xE01F_C000 {
+registers #PLL 0xE01F_C000 {
   CON           0x80 $uint8
   CFG           0x84 $uint8
   STAT          0x88 $uint16
@@ -114,18 +114,18 @@ registers PLL 0xE01F_C000 {
 }
 
 // VPB Divider */
-registers VPB 0xE01F_C100 {
+registers #VPB 0xE01F_C100 {
   DIV           0x0 $uint8
 }
 
 // Power Control */
-registers PC 0xE01F_C0C0 {
+registers #PC 0xE01F_C0C0 {
   ON             0x0 $uint8
   ONP            0x4 $uint32
 }
 
 // External Interrupts
-registers EXT 0xE01F_C140 {
+registers #EXT 0xE01F_C140 {
   INT           0x0 $uint8
   WAKE          0x4 $uint8
   MODE          0x8 $uint8
@@ -133,7 +133,7 @@ registers EXT 0xE01F_C140 {
 }
 
 // Timer 0
-registers TIMER0 0xE000_4000 {
+registers #TIMER0 0xE000_4000 {
   IR      0x00 $uint32
   TCR     0x04 $uint32
   TC      0x08 $uint32
@@ -153,7 +153,7 @@ registers TIMER0 0xE000_4000 {
 }
 
 // Timer 1
-registers TIMER1 0xE000_8000 {
+registers #TIMER1 0xE000_8000 {
   IR      0x00 $uint32
   TCR     0x04 $uint32
   TC      0x08 $uint32
@@ -173,7 +173,7 @@ registers TIMER1 0xE000_8000 {
 }
 
 // Pulse Width Modulator (PWM)
-registers PWM 0xE001_4000 {
+registers #PWM 0xE001_4000 {
   IR         0x00 $uint32
   TCR        0x04 $uint32
   TC         0x08 $uint32
@@ -198,7 +198,7 @@ registers PWM 0xE001_4000 {
 }
 
 // Universal Asynchronous Receiver Transmitter 0 (UART0)
-registers U0 0xE000_C000 {
+registers #U0 0xE000_C000 {
   RBR        0x00 $uint8
   THR        0x00 $uint8
   DLL        0x00 $uint8
@@ -215,7 +215,7 @@ registers U0 0xE000_C000 {
 }
 
 // Universal Asynchronous Receiver Transmitter 1 (UART1)
-registers U1 0xE001_0000 {
+registers #U1 0xE001_0000 {
   RBR        0x00 $uint8
   THR        0x00 $uint8
   DLL        0x00 $uint8
@@ -234,7 +234,7 @@ registers U1 0xE001_0000 {
 }
 
 // I2C Interface
-registers I2C 0xE001_C000 {
+registers #I2C 0xE001_C000 {
   I2CONSET     0x00 $uint8
   I2STAT       0x04 $uint8
   I2DAT        0x08 $uint8
@@ -245,7 +245,7 @@ registers I2C 0xE001_C000 {
 }
 
 // SPI 0 (Serial Peripheral Interface 0)
-registers SPI0 0xE002_0000 {
+registers #SPI0 0xE002_0000 {
   SPCR          0x00 $uint16
   SPSR          0x04 $uint8
   SPDR          0x08 $uint16
@@ -257,7 +257,7 @@ registers SPI0 0xE002_0000 {
 }
 
 // SPI 1 (Serial Peripheral Interface 1)
-registers SPI1 0xE003_0000 {
+registers #SPI1 0xE003_0000 {
   SPCR          0x00 $uint16
   SPSR          0x04 $uint8
   SPDR          0x08 $uint16
@@ -269,7 +269,7 @@ registers SPI1 0xE003_0000 {
 }
 
 // Real Time Clock
-registers RTC 0xE002_4000 {
+registers #RTC 0xE002_4000 {
   ILR          0x00 $uint8
   CTC          0x04 $uint16
   CCR          0x08 $uint8
@@ -299,7 +299,7 @@ registers RTC 0xE002_4000 {
 }
 
 // Bank Configuration registers
-registers BCF 0xFFE0_0000 {
+registers #BCF 0xFFE0_0000 {
   G0          0x00 $uint32
   G1          0x04 $uint32
   G2          0x08 $uint32
@@ -307,7 +307,7 @@ registers BCF 0xFFE0_0000 {
 }
 
 // CAN Controllers
-registers CAN 0xE004_4000 {
+registers #CAN 0xE004_4000 {
   CMR [4] 0x4 @inc 1 << 14 $uint8 {
     STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
   }
@@ -320,7 +320,7 @@ registers CAN 0xE004_4000 {
 }
 
 // Analog/Digital Converter (ADC)
-registers AD 0xE003_4000 {
+registers #AD 0xE003_4000 {
   CR           0x00 $uint32
   GDR          0x04 $uint32
   INTEN        0x0C $uint32

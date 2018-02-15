@@ -75,6 +75,29 @@ lexique plm_lexique {
   }
   
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Register group name
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+  style groupNameStyle -> "Register Group Names"
+
+  $#groupName$ ! tokenString style groupNameStyle error message "a register group name (begins with '#')"
+
+  message incorrectGroupNameError : "in a group name, a letter should follow the '#' character"
+
+  rule '#' {
+    select
+    case isUnicodeLetter | '_' | '0'->'9' :
+      repeat
+        enterCharacterIntoString ( !?tokenString !* )
+      while isUnicodeLetter | '_' | '0'->'9' :
+      end
+    default
+      error incorrectGroupNameError
+    end
+    send $#groupName$
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   #! Attributes
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   
