@@ -3,8 +3,7 @@
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @bitbandInstructionAST : @instructionAST {
-  @lstring mRegisterGroupName
-  @lstring mRegisterName
+  @controlRegisterLValueAST mControlRegisterLValue
   @expressionAST mBitExpression
   @location mBitExpressionLocation
   @expressionAST mSourceExpression
@@ -20,7 +19,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    <control_register_lvalue> !?ioAST ?let registerGroupName ?let groupIndex ?let registerName ?let registerIndex
+    <control_register_lvalue> !?ioAST ?let registerLValue
     $@attribute$ ?let attribute
     if attribute.string != "bit" then
       error attribute : "attribute should be @bit" fixit { replace "@bit" }
@@ -31,9 +30,8 @@ syntax extension plm_syntax {
     <expression> !?ioAST ?let sourceExpression
   #--- AST
     ioInstructionList += !@bitbandInstructionAST.new {
-      !registerGroupName.location
-      !registerGroupName
-      !registerName
+      !registerLValue.mRegisterGroupName.location
+      !registerLValue
       !bitExpression
       !bitExpressionLocation
       !sourceExpression
@@ -50,7 +48,8 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !llvmTypeNameFromPLMname (!.new{!"uint1" !mRegisterGroupName})]
+  [mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [!?ioGraph noteNode !llvmTypeNameFromPLMname (!.new{!"uint1" !mControlRegisterLValue.mRegisterGroupName})]
   [mBitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
@@ -71,133 +70,111 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Search register group name
-  [ioUniversalMap searchEntity !mRegisterGroupName ?let @valuedObject entity]
-  if not [entity isRegisterGroup] then
-    error mRegisterGroupName : "a register group is required here"
-  else
-    [entity registerGroup ?registerMap:let registerMap ?groupKind:let groupKind]
-    [registerMap searchKey
-      !mRegisterName
-      ?let @PLMType unused registerType
-      ?let @bool readOnly
-      ?let @bool userAccess
-      ?let @sliceMap unused inRegisterSliceMap
-      ?let @controlRegisterFieldMap unused mRegisterFieldMap
-      ?let @bigint addressOffset
-      ?let @controlRegisterFieldList unused mControlRegisterFieldList # Used for HTML file
-      ?let @uint unused registerBitCount
-      ?let @uint registerArraySize # 0 if not an array
-      ?let @uint unused registerElementSize # 0 if not an array
-    ]
-    @string registerAddress
-    switch groupKind
-    case single (@bigint baseAddress) :
-      let regName = mRegisterGroupName.string + ":" + mRegisterName
-      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !baseAddress !addressOffset !regName]
-    case arrayGroup (@lbigintlist baseAddresses) :
-      let regName = mRegisterGroupName.string + ":" + mRegisterName
-      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !0G !addressOffset !regName]
+#-------------------- Source Expression
+#--- Inferred source expression type
+  [inContext.mTypeMap searchKey
+    !lkey:.new {!"uint1" !mSourceExpressionLocation}
+    ?type:let requiredSourceExpressionType
+    ?1*
+  ]
+#--- Compute source expression
+  [mSourceExpression analyzeExpression
+    !self:inSelfType
+    !routineAttributes:inRoutineAttributes
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:requiredSourceExpressionType
+    !context:inContext
+    !mode:inMode
+    !?temporary:ioTemporaries
+    !?staticEntityMap:ioStaticEntityMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR sourceExpressionOperand
+  ]
+#--- Load from reference ?
+  [!?ioInstructionGenerationList appendLoadWhenReference
+    !?ioTemporaries
+    !?sourceExpressionOperand
+  ]
+#--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
+  if ([sourceExpressionOperand type].plmOriginalTypeName == staticIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
+    [sourceExpressionOperand literalInteger ?1* ?value:let @bigint value]
+    if (value < 0G) || (value > 1G) then
+      error mSourceExpressionLocation : "static value should be 0 or 1"
+    else
+      sourceExpressionOperand = .literalInteger {!type:requiredSourceExpressionType !value:value}
     end
-  #--- Check the control register can be used
-#    if (registerAddress < inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint) ||
-#       (registerAddress >= inContext.mTargetParameters.mBitbandRegisterEndAddress.bigint) then
-#      error mRegisterName
-#        : "register address (" + [registerAddress hexString] + ") invalid: should be >= "
-#        + [inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint hexString]
-#        + " and < " + [inContext.mTargetParameters.mBitbandRegisterEndAddress.bigint hexString]
-    if readOnly then
-      error mRegisterName : "this control register cannot be modified (declared with @ro attribute)"
-    elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
-      error mRegisterName : "this control register is not accessible in user mode"
-    elsif registerArraySize != 0 then
-      error mRegisterName : "control register array not handled yet"
-    end
-  #--- Inferred bit expression type
-    [inContext.mTypeMap searchKey
-      !lkey:.new {!"uint" + [registerBitCount-1G significantBitCount] !mBitExpressionLocation}
-      ?type:let requiredBitExpressionType
-      ?1*
-    ]
-  #--- Compute bit expression
-    [mBitExpression analyzeExpression
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:requiredBitExpressionType
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      ?result:@objectIR bitExpressionOperand
-    ]
-  #--- Load from reference ?
-    [!?ioInstructionGenerationList appendLoadWhenReference
-      !?ioTemporaries
-      !?bitExpressionOperand
-    ]
-  #--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
-    if ([bitExpressionOperand type].plmOriginalTypeName == staticIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
-      [bitExpressionOperand literalInteger ?1* ?value:let @bigint value]
-      if (value < 0G) || (value >= registerBitCount) then
-        error mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
-      else
-        bitExpressionOperand = .literalInteger {!type:requiredBitExpressionType !value:value}
-      end
-    elsif [bitExpressionOperand type].plmOriginalTypeName != requiredBitExpressionType.plmOriginalTypeName then
-      error mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.plmOriginalTypeName
-    end
-  #--- Inferred source expression type
-    [inContext.mTypeMap searchKey
-      !lkey:.new {!"uint1" !mSourceExpressionLocation}
-      ?type:let requiredSourceExpressionType
-      ?1*
-    ]
-  #--- Compute source expression
-    [mSourceExpression analyzeExpression
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:requiredSourceExpressionType
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      ?result:@objectIR sourceExpressionOperand
-    ]
-  #--- Load from reference ?
-    [!?ioInstructionGenerationList appendLoadWhenReference
-      !?ioTemporaries
-      !?sourceExpressionOperand
-    ]
-  #--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
-    if ([sourceExpressionOperand type].plmOriginalTypeName == staticIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
-      [sourceExpressionOperand literalInteger ?1* ?value:let @bigint value]
-      if (value < 0G) || (value > 1G) then
-        error mSourceExpressionLocation : "static value should be 0 or 1"
-      else
-        sourceExpressionOperand = .literalInteger {!type:requiredSourceExpressionType !value:value}
-      end
-    elsif [sourceExpressionOperand type].plmOriginalTypeName != requiredSourceExpressionType.plmOriginalTypeName then
-      error mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.plmOriginalTypeName
-    end
-  #--- Generate code
-    ioInstructionGenerationList += !@bitbandInstructionIR.new {
-      !registerAddress
-      !bitExpressionOperand
-      !sourceExpressionOperand
-      !inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint
-      !inContext.mTargetParameters.mBitbandRegisterRelocationAddress.bigint
-      !inContext.mTargetParameters.mBitbandRegisterOffsetMultiplier.bigint
-      !inContext.mTargetParameters.mBitbandRegisterBitMultiplier.bigint
-    }
+  elsif [sourceExpressionOperand type].plmOriginalTypeName != requiredSourceExpressionType.plmOriginalTypeName then
+    error mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.plmOriginalTypeName
   end
+#-------------------- Control register LValue
+  [mControlRegisterLValue controlRegisterLValueSemanticAnalysis
+    !writeAccess:false
+    !self: inSelfType
+    !routineAttributes: inRoutineAttributes
+    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+    !context: inContext
+    !mode: inMode
+    !?temporary: ioTemporaries
+    !?staticEntityMap: ioStaticEntityMap
+    !?variableMap: ioUniversalMap
+    !?alloca: ioAllocaList
+    !?instructionListIR: ioInstructionGenerationList
+    ?registerType:*
+    ?registerBitCount:let registerBitCount
+    ?sliceMap:*
+    ?llvmRegisterAddressName:let llvmRegisterAddressName
+  ]
+
+#-------------------- Bit Expression
+#--- Inferred bit expression type
+  [inContext.mTypeMap searchKey
+    !lkey:.new {!"uint" + [registerBitCount-1G significantBitCount] !mBitExpressionLocation}
+    ?type:let requiredBitExpressionType
+    ?1*
+  ]
+#--- Compute bit expression
+  [mBitExpression analyzeExpression
+    !self:inSelfType
+    !routineAttributes:inRoutineAttributes
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:requiredBitExpressionType
+    !context:inContext
+    !mode:inMode
+    !?temporary:ioTemporaries
+    !?staticEntityMap:ioStaticEntityMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR bitExpressionOperand
+  ]
+#--- Load from reference ?
+  [!?ioInstructionGenerationList appendLoadWhenReference
+    !?ioTemporaries
+    !?bitExpressionOperand
+  ]
+#--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
+  if ([bitExpressionOperand type].plmOriginalTypeName == staticIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
+    [bitExpressionOperand literalInteger ?1* ?value:let @bigint value]
+    if (value < 0G) || (value >= registerBitCount) then
+      error mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
+    else
+      bitExpressionOperand = .literalInteger {!type:requiredBitExpressionType !value:value}
+    end
+  elsif [bitExpressionOperand type].plmOriginalTypeName != requiredBitExpressionType.plmOriginalTypeName then
+    error mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.plmOriginalTypeName
+  end
+#-------------------- Generate code
+  ioInstructionGenerationList += !@bitbandInstructionIR.new {
+    !llvmRegisterAddressName
+    !bitExpressionOperand
+    !sourceExpressionOperand
+    !inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint
+    !inContext.mTargetParameters.mBitbandRegisterRelocationAddress.bigint
+    !inContext.mTargetParameters.mBitbandRegisterOffsetMultiplier.bigint
+    !inContext.mTargetParameters.mBitbandRegisterBitMultiplier.bigint
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

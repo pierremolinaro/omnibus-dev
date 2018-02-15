@@ -711,27 +711,3 @@ void routine_analyzeEffectiveParameters (const class GALGAS_PLMType constinArgum
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Routine 'handleArraySubscriptNew'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
-                                      const class GALGAS_routineAttributes constinArgument1,
-                                      const class GALGAS_lstring constinArgument2,
-                                      const class GALGAS_semanticContext constinArgument3,
-                                      const class GALGAS_mode constinArgument4,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                      class GALGAS_staticEntityMap & ioArgument6,
-                                      class GALGAS_universalValuedObjectMap & ioArgument7,
-                                      class GALGAS_allocaList & ioArgument8,
-                                      const class GALGAS_expressionAST constinArgument9,
-                                      const class GALGAS_location constinArgument10,
-                                      const class GALGAS_bigint constinArgument11,
-                                      const class GALGAS_PLMType constinArgument12,
-                                      class GALGAS_instructionListIR & ioArgument13,
-                                      class GALGAS_objectIR & outArgument14,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-

@@ -347,6 +347,78 @@ void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                  Extension method '@controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GALGAS_controlRegisterLValueAST inObject,
+                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                  Extension method '@controlRegisterLValueAST addDependenceEdgeForStaticExpression'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_controlRegisterLValueAST inObject,
+                                                           const class GALGAS_lstring constin_inConstantName,
+                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                 Extension method '@controlRegisterLValueAST controlRegisterLValueSemanticAnalysis'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_controlRegisterLValueAST inObject,
+                                                            const class GALGAS_bool constin_inWriteAccess,
+                                                            const class GALGAS_PLMType constin_inSelfType,
+                                                            const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                            const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                                            const class GALGAS_semanticContext constin_inContext,
+                                                            const class GALGAS_mode constin_inMode,
+                                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                            class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                            class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                            class GALGAS_allocaList & io_ioAllocaList,
+                                                            class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                            class GALGAS_PLMType & out_outRegisterType,
+                                                            class GALGAS_uint & out_outRegisterTypeBitCount,
+                                                            class GALGAS_sliceMap & out_outSliceMap,
+                                                            class GALGAS_string & out_outllvmRegisterAddressName,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'handleArraySubscriptNew'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
+                                      const class GALGAS_routineAttributes constinArgument1,
+                                      const class GALGAS_lstring constinArgument2,
+                                      const class GALGAS_semanticContext constinArgument3,
+                                      const class GALGAS_mode constinArgument4,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                      class GALGAS_staticEntityMap & ioArgument6,
+                                      class GALGAS_universalValuedObjectMap & ioArgument7,
+                                      class GALGAS_allocaList & ioArgument8,
+                                      const class GALGAS_expressionAST constinArgument9,
+                                      const class GALGAS_location constinArgument10,
+                                      const class GALGAS_bigint constinArgument11,
+                                      const class GALGAS_PLMType constinArgument12,
+                                      class GALGAS_instructionListIR & ioArgument13,
+                                      class GALGAS_objectIR & outArgument14,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                 Extension method '@routineMapForContext searchKey'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
