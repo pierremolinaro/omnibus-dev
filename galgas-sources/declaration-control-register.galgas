@@ -673,102 +673,125 @@ sortedlist @controlRegisterByAddress {
 
 #·······················································································································
 
+sortedlist @controlRegisterByName {
+  @bigint mAddress
+  @string mHTML
+  @string mName
+}{
+  mName <
+}
+
+#·······················································································································
+
 proc buildControlRegisterMapHTMLFile
   ?let @controlRegisterGroupMap inControlRegisterGroupMap
   ?sourceFile:let @lstring inSourceFile
 {
 #------------------------------- Build an HTML file that contains all declared control registers, ordered by names
-  @string typeDumpFilePath = inSourceFile.string + ".control-registers-by-names.html"
-  if [option plm_options.writeControlRegisterHTMLDumpFile value] then
-    @stringset firstLetterSet = {}
-    for () in inControlRegisterGroupMap do
-      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
-    end
-    @string tableOfTypeString = ""
-    @char currentFirstLetter = ' '
-    @uint controlRegisterCount = 0
-    for () group_ in inControlRegisterGroupMap do
-      for () reg_ in group_mControlRegisterMap do
-        let registerName = group_lkey.string + ":" + reg_lkey
-        if currentFirstLetter != [registerName characterAtIndex !0] then
-          currentFirstLetter = [registerName characterAtIndex !0]
-          tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
-        end
-        if reg_mArraySize == 0 then
-          controlRegisterCount = controlRegisterCount + 1
-          tableOfTypeString += linkForControlRegister (!registerName) + "<br>"
-        else
-          controlRegisterCount = controlRegisterCount + reg_mArraySize
-          for i in 0 ..< reg_mArraySize do
-            tableOfTypeString += linkForControlRegister (!registerName + "[" + i + "]") + "<br>"
-          end
-        end
-      end
-    end
-    let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByName
-      ![inSourceFile lastPathComponent]
-      !controlRegisterCount
-      !inControlRegisterGroupMap
-      !firstLetterSet
-      !tableOfTypeString
-    ]
-    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
-  else
-    [@string deleteFileIfExists !typeDumpFilePath]
-  end
+#  @string typeDumpFilePath = inSourceFile.string + ".control-registers-by-names.html"
+#  if [option plm_options.writeControlRegisterHTMLDumpFile value] then
+#    @stringset firstLetterSet = {}
+#    for () in inControlRegisterGroupMap do
+#      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
+#    end
+#    @string tableOfTypeString = ""
+#    @char currentFirstLetter = ' '
+#    @uint controlRegisterCount = 0
+#    for () group_ in inControlRegisterGroupMap do
+#      for () reg_ in group_mControlRegisterMap do
+#        let registerName = group_lkey.string + ":" + reg_lkey
+#        if currentFirstLetter != [registerName characterAtIndex !0] then
+#          currentFirstLetter = [registerName characterAtIndex !0]
+#          tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
+#        end
+#        if reg_mArraySize == 0 then
+#          controlRegisterCount = controlRegisterCount + 1
+#          tableOfTypeString += linkForControlRegister (!registerName) + "<br>"
+#        else
+#          controlRegisterCount = controlRegisterCount + reg_mArraySize
+#          for i in 0 ..< reg_mArraySize do
+#            tableOfTypeString += linkForControlRegister (!registerName + "[" + i + "]") + "<br>"
+#          end
+#        end
+#      end
+#    end
+#    let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByName
+#      ![inSourceFile lastPathComponent]
+#      !controlRegisterCount
+#      !inControlRegisterGroupMap
+#      !firstLetterSet
+#      !tableOfTypeString
+#    ]
+#    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+#  else
+#    [@string deleteFileIfExists !typeDumpFilePath]
+#  end
 #------------------------------- Build an HTML file that contains all declared control registers, ordered by address
-  typeDumpFilePath = inSourceFile.string + ".control-registers-by-address.html"
+  let byAddressFilePath = inSourceFile.string + ".control-registers-sorted-by-address.html"
+  let byNameFilePath = inSourceFile.string + ".control-registers-sorted-by-name.html"
   if [option plm_options.writeControlRegisterHTMLDumpFile value] then
     @controlRegisterByAddress controlRegisterByAddress = {}
+    @controlRegisterByName controlRegisterByName = {}
     @uint controlRegisterCount = 0
     for () group_ in inControlRegisterGroupMap do
       switch group_mGroupKind
       case single (groupBaseAddress) :
-        buildControlRegisterMapByAddress (
+        buildControlRegisterMaps (
           !group_mControlRegisterMap
           !groupBaseAddress
           !group_lkey.string
           !?controlRegisterByAddress
+          !?controlRegisterByName
           !?controlRegisterCount
         )
       case arrayGroup (@lbigintlist baseAddresses) :
         for (baseAddr) in baseAddresses do (idx)
-          buildControlRegisterMapByAddress (
+          buildControlRegisterMaps (
             !group_mControlRegisterMap
             !baseAddr.bigint
             !group_lkey.string + "[" + idx + "]"
             !?controlRegisterByAddress
+            !?controlRegisterByName
             !?controlRegisterCount
           )
         end
       end
     end
-    let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByAddress
+    var typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByAddress
       ![inSourceFile lastPathComponent]
       !controlRegisterCount
       !controlRegisterByAddress
     ]
-    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+    [typeDumpString writeToFileWhenDifferentContents !byAddressFilePath ?*]
+    typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByName
+      ![inSourceFile lastPathComponent]
+      !controlRegisterCount
+      !controlRegisterByName
+    ]
+    [typeDumpString writeToFileWhenDifferentContents !byNameFilePath ?*]
   else
-    [@string deleteFileIfExists !typeDumpFilePath]
+    [@string deleteFileIfExists !byAddressFilePath]
+    [@string deleteFileIfExists !byNameFilePath]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc buildControlRegisterMapByAddress
+private proc buildControlRegisterMaps
   ?let @controlRegisterMap inControlRegisterMap
   ?let @bigint inGroupBaseAddress
   ?let @string inGroupName
   ?!@controlRegisterByAddress ioControlRegisterByAddress
+  ?!@controlRegisterByName ioControlRegisterByName
   ?!@uint ioControlRegisterCount
 {
   for () reg_ in inControlRegisterMap do
     let registerAddress = inGroupBaseAddress + reg_mAddressOffset
     if reg_mArraySize == 0 then
       ioControlRegisterCount = ioControlRegisterCount + 1
+      let registerName = inGroupName + ":" + reg_lkey
       var s = "<tr class=\"result_line\"><td class=\"name\">"
-        + inGroupName + ":" + reg_lkey
+        + registerName
         + "</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
         + [registerAddress hexStringSeparatedBy !'_' !4] + "</td><td>"
       if [reg_mControlRegisterFieldList length] > 0 then
@@ -782,12 +805,14 @@ private proc buildControlRegisterMapByAddress
       end  
       s += "</td></tr>\n"
       ioControlRegisterByAddress += !registerAddress !s
+      ioControlRegisterByName += !registerAddress !s !registerName
     else
       ioControlRegisterCount = ioControlRegisterCount + reg_mArraySize
       for () in arrayIndexListFor (!size:reg_mArraySize) do
         let address = registerAddress + mValue * reg_mElementArraySize
+        let registerName = inGroupName + ":" + reg_lkey + "[" + [mValue string] + "]"
         var s = "<tr class=\"result_line\"><td class=\"name\">"
-          + inGroupName + ":" + reg_lkey + "[" + [mValue string] + "]"
+          + registerName
           +"</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
           + [address hexStringSeparatedBy !'_' !4]
           + "</td><td>"
@@ -801,6 +826,7 @@ private proc buildControlRegisterMapByAddress
         end  
         s += "</td></tr>\n"
         ioControlRegisterByAddress += !registerAddress !s
+        ioControlRegisterByName += !registerAddress !s !registerName
       end
     end
   end
@@ -814,9 +840,7 @@ filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" 
   template dumpByName "controlRegisterByNameDump.html.galgasTemplate"
     ?@string PROJECT_NAME
     ?@uint CONTROL_REGISTER_COUNT
-    ?@controlRegisterGroupMap CONTROL_REGISTER_GROUP_MAP
-    ?@stringset FIRST_LETTER_SET
-    ?@string TABLE_OF_TYPES_STRING
+    ?@controlRegisterByName CONTROL_REGISTER_SORTED_BY_NAME
 
   template dumpByAddress "controlRegisterByAddressDump.html.galgasTemplate"
     ?@string PROJECT_NAME
