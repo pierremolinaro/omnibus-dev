@@ -10,6 +10,68 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         @generationListIR_2D_element struct                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_generationListIR_2D_element : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public : GALGAS_abstractGenerationIR mProperty_mGeneration ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_generationListIR_2D_element (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_generationListIR_2D_element (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_generationListIR_2D_element (const GALGAS_abstractGenerationIR & in_mGeneration) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_generationListIR_2D_element extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_generationListIR_2D_element constructor_new (const class GALGAS_abstractGenerationIR & inOperand0
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_generationListIR_2D_element & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_abstractGenerationIR getter_mGeneration (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_generationListIR_2D_element class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationListIR_2D_element ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                   Extension setter '@instructionListIR appendNOP'                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3046,8 +3108,9 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_control_5F_register_5F_lvalue_ (GALGAS_ast & ioArgument0,
                                                            GALGAS_lstring & outArgument1,
-                                                           GALGAS_lstring & outArgument2,
-                                                           GALGAS_registerIndexAST & outArgument3,
+                                                           GALGAS_registerGroupIndexAST & outArgument2,
+                                                           GALGAS_lstring & outArgument3,
+                                                           GALGAS_registerIndexAST & outArgument4,
                                                            C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'declaration' non terminal

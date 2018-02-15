@@ -20,9 +20,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    $identifier$ ?let registerGroupName
-    $:$
-    $identifier$ ?let registerName
+    <control_register_lvalue> !?ioAST ?let registerGroupName ?let groupIndex ?let registerName ?let registerIndex
     $@attribute$ ?let attribute
     if attribute.string != "bit" then
       error attribute : "attribute should be @bit" fixit { replace "@bit" }

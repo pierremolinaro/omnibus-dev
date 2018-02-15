@@ -26,7 +26,7 @@ syntax extension plm_syntax {
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     ${$
-    $identifier$ ?let registerGroupName
+    $#groupName$ ?let registerGroupName
     $:$
     $identifier$ ?let registerName
     @registerIntegerFieldListAST integerFieldValues = {}
