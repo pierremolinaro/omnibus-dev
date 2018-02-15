@@ -1304,7 +1304,7 @@ void extensionSetter_appendComputeSubscriptedVolatileRegisterAddress (class GALG
                                                                       class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                                       class GALGAS_string & out_outLLVMResultVarName,
                                                                       const class GALGAS_objectIR constin_inIndexIR,
-                                                                      const class GALGAS_bigint constin_inAddress,
+                                                                      const class GALGAS_string constin_inAddressLLVMname,
                                                                       const class GALGAS_uint constin_inElementSize,
                                                                       class C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) ;
@@ -1338,7 +1338,7 @@ class GALGAS_computeSubscriptedVolatileRegisterAddress : public GALGAS_abstractI
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_computeSubscriptedVolatileRegisterAddress constructor_new (const class GALGAS_string & inOperand0,
                                                                                           const class GALGAS_objectIR & inOperand1,
-                                                                                          const class GALGAS_bigint & inOperand2,
+                                                                                          const class GALGAS_string & inOperand2,
                                                                                           const class GALGAS_uint & inOperand3
                                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -1351,13 +1351,13 @@ class GALGAS_computeSubscriptedVolatileRegisterAddress : public GALGAS_abstractI
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mAddressLLVMname (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mElementSize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMResultVarName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mRegisterBaseAddress (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1380,13 +1380,13 @@ class cPtr_computeSubscriptedVolatileRegisterAddress : public cPtr_abstractInstr
 //--- Attributes
   public : GALGAS_string mProperty_mLLVMResultVarName ;
   public : GALGAS_objectIR mProperty_mIndexResult ;
-  public : GALGAS_bigint mProperty_mRegisterBaseAddress ;
+  public : GALGAS_string mProperty_mAddressLLVMname ;
   public : GALGAS_uint mProperty_mElementSize ;
 
 //--- Constructor
   public : cPtr_computeSubscriptedVolatileRegisterAddress (const GALGAS_string & in_mLLVMResultVarName,
                                                            const GALGAS_objectIR & in_mIndexResult,
-                                                           const GALGAS_bigint & in_mRegisterBaseAddress,
+                                                           const GALGAS_string & in_mAddressLLVMname,
                                                            const GALGAS_uint & in_mElementSize
                                                            COMMA_LOCATION_ARGS) ;
 
@@ -1396,7 +1396,7 @@ class cPtr_computeSubscriptedVolatileRegisterAddress : public cPtr_abstractInstr
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMResultVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterBaseAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mAddressLLVMname (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mElementSize (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -1428,7 +1428,8 @@ void extensionSetter_newTempLLVMVar (class GALGAS_semanticTemporariesStruct & io
 void extensionSetter_appendEnterRegisterAddress (class GALGAS_instructionListIR & ioObject,
                                                  class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                  class GALGAS_string & out_out_5F_llvmName,
-                                                 const class GALGAS_bigint constin_inAddress,
+                                                 const class GALGAS_bigint constin_inBaseAddress,
+                                                 const class GALGAS_bigint constin_inAddressOffset,
                                                  const class GALGAS_string constin_inRegisterName,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
@@ -1465,7 +1466,8 @@ class GALGAS_enterRegisterAddressIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_enterRegisterAddressIR constructor_new (const class GALGAS_string & inOperand0,
                                                                        const class GALGAS_bigint & inOperand1,
-                                                                       const class GALGAS_string & inOperand2
+                                                                       const class GALGAS_bigint & inOperand2,
+                                                                       const class GALGAS_string & inOperand3
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1477,9 +1479,11 @@ class GALGAS_enterRegisterAddressIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mAddressOffset (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mBaseAddress (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mRegisterName (LOCATION_ARGS) const ;
 
@@ -1503,12 +1507,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enterRegisterAddres
 class cPtr_enterRegisterAddressIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mProperty_mLLVMName ;
-  public : GALGAS_bigint mProperty_mRegisterAddress ;
+  public : GALGAS_bigint mProperty_mBaseAddress ;
+  public : GALGAS_bigint mProperty_mAddressOffset ;
   public : GALGAS_string mProperty_mRegisterName ;
 
 //--- Constructor
   public : cPtr_enterRegisterAddressIR (const GALGAS_string & in_mLLVMName,
-                                        const GALGAS_bigint & in_mRegisterAddress,
+                                        const GALGAS_bigint & in_mBaseAddress,
+                                        const GALGAS_bigint & in_mAddressOffset,
                                         const GALGAS_string & in_mRegisterName
                                         COMMA_LOCATION_ARGS) ;
 
@@ -1517,7 +1523,8 @@ class cPtr_enterRegisterAddressIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mBaseAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mAddressOffset (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mRegisterName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

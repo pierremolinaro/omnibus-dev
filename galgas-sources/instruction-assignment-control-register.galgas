@@ -139,12 +139,14 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     ?let @uint registerArraySize # 0 if not an array
     ?let @uint registerElementSize # 0 if not an array
   ]
-  @bigint registerAddress
+  @string registerAddress
   switch groupKind
   case single (@bigint baseAddress) :
-    registerAddress = baseAddress + addressOffset
+    let regName = mRegisterGroupName.string + ":" + mRegisterName
+    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !baseAddress !addressOffset !regName]
   case arrayGroup (@lbigintlist baseAddresses) :
-    registerAddress = 0 + addressOffset
+    let regName = mRegisterGroupName.string + ":" + mRegisterName
+    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !0G !addressOffset !regName]
   end
 #-------------------- Check access
   if readOnly then
@@ -178,8 +180,9 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
   switch mRegisterIndex
   case noIndex :
     if registerArraySize == 0 then
-      let regName = mRegisterGroupName.string + ":" + mRegisterName
-      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !regName]
+      llvmName = registerAddress
+#      let regName = mRegisterGroupName.string + ":" + mRegisterName
+#      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !0G !regName]
     else
       error mRegisterName : "the control register is an array" : llvmName
     end
@@ -201,20 +204,13 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
       !?ioInstructionGenerationList
       ?let @objectIR indexIR
     )
-    if [indexIR isLiteralInteger] then # subscript expression is constant
-      [indexIR literalInteger ?1* ?value:let @bigint idx]
-      let addr = registerAddress + idx * registerElementSize
-      let registerName = mRegisterGroupName.string + ":" + mRegisterName + "[" + idx + "]"
-      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !registerName]
-    else
-      [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
-        !?ioTemporaries
-        ?llvmName
-        !indexIR
-        !registerAddress
-        !registerElementSize
-      ]
-    end
+    [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
+      !?ioTemporaries
+      ?llvmName
+      !indexIR
+      !registerAddress
+      !registerElementSize
+    ]
   end
 #-------------------- Perform assignment
   let t = [sourceOperand type]

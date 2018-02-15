@@ -10819,7 +10819,7 @@ typeComparisonResult cPtr_bitbandInstructionIR::dynamicObjectCompare (const acPt
   const cPtr_bitbandInstructionIR * p = (const cPtr_bitbandInstructionIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_bitbandInstructionIR) ;
   if (kOperandEqual == result) {
-    result = mProperty_mRegisterAddress.objectCompare (p->mProperty_mRegisterAddress) ;
+    result = mProperty_mRegisterAddressLLVMname.objectCompare (p->mProperty_mRegisterAddressLLVMname) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mBitExpressionOperand.objectCompare (p->mProperty_mBitExpressionOperand) ;
@@ -10876,7 +10876,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bitbandInstructionIR GALGAS_bitbandInstructionIR::constructor_new (const GALGAS_bigint & inAttribute_mRegisterAddress,
+GALGAS_bitbandInstructionIR GALGAS_bitbandInstructionIR::constructor_new (const GALGAS_string & inAttribute_mRegisterAddressLLVMname,
                                                                           const GALGAS_objectIR & inAttribute_mBitExpressionOperand,
                                                                           const GALGAS_objectIR & inAttribute_mSourceExpressionOperand,
                                                                           const GALGAS_bigint & inAttribute_mBitbandRegisterBaseAddress,
@@ -10885,28 +10885,28 @@ GALGAS_bitbandInstructionIR GALGAS_bitbandInstructionIR::constructor_new (const 
                                                                           const GALGAS_bigint & inAttribute_mBitbandRegisterBitMultiplier
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_bitbandInstructionIR result ;
-  if (inAttribute_mRegisterAddress.isValid () && inAttribute_mBitExpressionOperand.isValid () && inAttribute_mSourceExpressionOperand.isValid () && inAttribute_mBitbandRegisterBaseAddress.isValid () && inAttribute_mBitbandRegisterRelocationAddress.isValid () && inAttribute_mBitbandRegisterOffsetMultiplier.isValid () && inAttribute_mBitbandRegisterBitMultiplier.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_bitbandInstructionIR (inAttribute_mRegisterAddress, inAttribute_mBitExpressionOperand, inAttribute_mSourceExpressionOperand, inAttribute_mBitbandRegisterBaseAddress, inAttribute_mBitbandRegisterRelocationAddress, inAttribute_mBitbandRegisterOffsetMultiplier, inAttribute_mBitbandRegisterBitMultiplier COMMA_THERE)) ;
+  if (inAttribute_mRegisterAddressLLVMname.isValid () && inAttribute_mBitExpressionOperand.isValid () && inAttribute_mSourceExpressionOperand.isValid () && inAttribute_mBitbandRegisterBaseAddress.isValid () && inAttribute_mBitbandRegisterRelocationAddress.isValid () && inAttribute_mBitbandRegisterOffsetMultiplier.isValid () && inAttribute_mBitbandRegisterBitMultiplier.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_bitbandInstructionIR (inAttribute_mRegisterAddressLLVMname, inAttribute_mBitExpressionOperand, inAttribute_mSourceExpressionOperand, inAttribute_mBitbandRegisterBaseAddress, inAttribute_mBitbandRegisterRelocationAddress, inAttribute_mBitbandRegisterOffsetMultiplier, inAttribute_mBitbandRegisterBitMultiplier COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_bitbandInstructionIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bigint result ;
+GALGAS_string GALGAS_bitbandInstructionIR::getter_mRegisterAddressLLVMname (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_bitbandInstructionIR * p = (const cPtr_bitbandInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_bitbandInstructionIR) ;
-    result = p->mProperty_mRegisterAddress ;
+    result = p->mProperty_mRegisterAddressLLVMname ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cPtr_bitbandInstructionIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRegisterAddress ;
+GALGAS_string cPtr_bitbandInstructionIR::getter_mRegisterAddressLLVMname (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRegisterAddressLLVMname ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11021,7 +11021,7 @@ GALGAS_bigint cPtr_bitbandInstructionIR::getter_mBitbandRegisterBitMultiplier (U
 //                                    Pointer class for @bitbandInstructionIR class                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_bitbandInstructionIR::cPtr_bitbandInstructionIR (const GALGAS_bigint & in_mRegisterAddress,
+cPtr_bitbandInstructionIR::cPtr_bitbandInstructionIR (const GALGAS_string & in_mRegisterAddressLLVMname,
                                                       const GALGAS_objectIR & in_mBitExpressionOperand,
                                                       const GALGAS_objectIR & in_mSourceExpressionOperand,
                                                       const GALGAS_bigint & in_mBitbandRegisterBaseAddress,
@@ -11030,7 +11030,7 @@ cPtr_bitbandInstructionIR::cPtr_bitbandInstructionIR (const GALGAS_bigint & in_m
                                                       const GALGAS_bigint & in_mBitbandRegisterBitMultiplier
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mProperty_mRegisterAddress (in_mRegisterAddress),
+mProperty_mRegisterAddressLLVMname (in_mRegisterAddressLLVMname),
 mProperty_mBitExpressionOperand (in_mBitExpressionOperand),
 mProperty_mSourceExpressionOperand (in_mSourceExpressionOperand),
 mProperty_mBitbandRegisterBaseAddress (in_mBitbandRegisterBaseAddress),
@@ -11048,7 +11048,7 @@ const C_galgas_type_descriptor * cPtr_bitbandInstructionIR::classDescriptor (voi
 void cPtr_bitbandInstructionIR::description (C_String & ioString,
                                              const int32_t inIndentation) const {
   ioString << "[@bitbandInstructionIR:" ;
-  mProperty_mRegisterAddress.description (ioString, inIndentation+1) ;
+  mProperty_mRegisterAddressLLVMname.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mBitExpressionOperand.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -11068,7 +11068,7 @@ void cPtr_bitbandInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_bitbandInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_bitbandInstructionIR (mProperty_mRegisterAddress, mProperty_mBitExpressionOperand, mProperty_mSourceExpressionOperand, mProperty_mBitbandRegisterBaseAddress, mProperty_mBitbandRegisterRelocationAddress, mProperty_mBitbandRegisterOffsetMultiplier, mProperty_mBitbandRegisterBitMultiplier COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_bitbandInstructionIR (mProperty_mRegisterAddressLLVMname, mProperty_mBitExpressionOperand, mProperty_mSourceExpressionOperand, mProperty_mBitbandRegisterBaseAddress, mProperty_mBitbandRegisterRelocationAddress, mProperty_mBitbandRegisterOffsetMultiplier, mProperty_mBitbandRegisterBitMultiplier COMMA_THERE)) ;
   return ptr ;
 }
 

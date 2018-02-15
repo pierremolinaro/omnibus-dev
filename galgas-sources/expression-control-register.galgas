@@ -139,19 +139,29 @@ override method @registerInExpressionAST analyzeExpression
     ?let @uint registerElementSize # 0 if not an array
   ]
 #-------------------- Register group kind
-  @bigint registerAddress
+  @string registerAddress
   switch groupKind
   case single (@bigint baseAddress) :
-    registerAddress = baseAddress + addressOffset
+    let regName = mGroupName.string + ":" + mRegisterName
+    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !baseAddress !addressOffset !regName]
   case arrayGroup (@lbigintlist baseAddresses) :
-    registerAddress = 0 + addressOffset
+    let regName = mGroupName.string + ":" + mRegisterName
+    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !0G !addressOffset !regName]
   end
+#  @bigint registerAddress
+#  switch groupKind
+#  case single (@bigint baseAddress) :
+#    registerAddress = baseAddress + addressOffset
+#  case arrayGroup (@lbigintlist baseAddresses) :
+#    registerAddress = 0 + addressOffset
+#  end
 #-------------------- Register index
   @string llvmName
   switch mRegisterIndex
   case noIndex :
-    let registerName = mGroupName.string + ":" + mRegisterName
-    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !registerName]
+    llvmName = registerAddress
+#    let registerName = mGroupName.string + ":" + mRegisterName
+#    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !0G !registerName]
   case index (@expressionAST indexExpression @location endOfIndex) :
     handleArraySubscriptNew (
        !self: inSelfType
@@ -170,12 +180,12 @@ override method @registerInExpressionAST analyzeExpression
        !? ioInstructionGenerationList
        ?let @objectIR indexIR
     )
-    if [indexIR isLiteralInteger] then # subscript expression is constant
-      [indexIR literalInteger ?1* ?value:let @bigint idx]
-      let addr = registerAddress + idx * registerElementSize
-      let registerName = mGroupName.string + ":" + mRegisterName + "[" + idx + "]"
-      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !registerName]
-    else
+#    if [indexIR isLiteralInteger] then # subscript expression is constant
+#      [indexIR literalInteger ?1* ?value:let @bigint idx]
+#      let addr = registerAddress + idx * registerElementSize
+#      let registerName = mGroupName.string + ":" + mRegisterName + "[" + idx + "]"
+#      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !0G !registerName]
+#    else
       [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
         !?ioTemporaries
         ?llvmName
@@ -183,7 +193,7 @@ override method @registerInExpressionAST analyzeExpression
         !registerAddress
         !registerElementSize
       ]
-    end
+#    end
   end
 #-------------------- Load register
   getNewTempValue (!registerType !?ioTemporaries ?outResult)

@@ -1750,7 +1750,7 @@ void extensionSetter_appendComputeSubscriptedVolatileRegisterAddress (GALGAS_ins
                                                                       GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
                                                                       GALGAS_string & outArgument_outLLVMResultVarName,
                                                                       const GALGAS_objectIR constinArgument_inIndexIR,
-                                                                      const GALGAS_bigint constinArgument_inAddress,
+                                                                      const GALGAS_string constinArgument_inAddressLLVMname,
                                                                       const GALGAS_uint constinArgument_inElementSize,
                                                                       C_Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
@@ -1758,7 +1758,7 @@ void extensionSetter_appendComputeSubscriptedVolatileRegisterAddress (GALGAS_ins
   {
   extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, outArgument_outLLVMResultVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 9)) ;
   }
-  ioObject.addAssign_operation (GALGAS_computeSubscriptedVolatileRegisterAddress::constructor_new (outArgument_outLLVMResultVarName, constinArgument_inIndexIR, constinArgument_inAddress, constinArgument_inElementSize  COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 10))  COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 10)) ;
+  ioObject.addAssign_operation (GALGAS_computeSubscriptedVolatileRegisterAddress::constructor_new (outArgument_outLLVMResultVarName, constinArgument_inIndexIR, constinArgument_inAddressLLVMname, constinArgument_inElementSize  COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 10))  COMMA_SOURCE_FILE ("intermediate-compute-subscripted-volatile-register-address.galgas", 10)) ;
 }
 
 
@@ -1777,7 +1777,7 @@ typeComparisonResult cPtr_computeSubscriptedVolatileRegisterAddress::dynamicObje
     result = mProperty_mIndexResult.objectCompare (p->mProperty_mIndexResult) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mRegisterBaseAddress.objectCompare (p->mProperty_mRegisterBaseAddress) ;
+    result = mProperty_mAddressLLVMname.objectCompare (p->mProperty_mAddressLLVMname) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mElementSize.objectCompare (p->mProperty_mElementSize) ;
@@ -1821,12 +1821,12 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_computeSubscriptedVolatileRegisterAddress GALGAS_computeSubscriptedVolatileRegisterAddress::constructor_new (const GALGAS_string & inAttribute_mLLVMResultVarName,
                                                                                                                     const GALGAS_objectIR & inAttribute_mIndexResult,
-                                                                                                                    const GALGAS_bigint & inAttribute_mRegisterBaseAddress,
+                                                                                                                    const GALGAS_string & inAttribute_mAddressLLVMname,
                                                                                                                     const GALGAS_uint & inAttribute_mElementSize
                                                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_computeSubscriptedVolatileRegisterAddress result ;
-  if (inAttribute_mLLVMResultVarName.isValid () && inAttribute_mIndexResult.isValid () && inAttribute_mRegisterBaseAddress.isValid () && inAttribute_mElementSize.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_computeSubscriptedVolatileRegisterAddress (inAttribute_mLLVMResultVarName, inAttribute_mIndexResult, inAttribute_mRegisterBaseAddress, inAttribute_mElementSize COMMA_THERE)) ;
+  if (inAttribute_mLLVMResultVarName.isValid () && inAttribute_mIndexResult.isValid () && inAttribute_mAddressLLVMname.isValid () && inAttribute_mElementSize.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_computeSubscriptedVolatileRegisterAddress (inAttribute_mLLVMResultVarName, inAttribute_mIndexResult, inAttribute_mAddressLLVMname, inAttribute_mElementSize COMMA_THERE)) ;
   }
   return result ;
 }
@@ -1869,20 +1869,20 @@ GALGAS_objectIR cPtr_computeSubscriptedVolatileRegisterAddress::getter_mIndexRes
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_computeSubscriptedVolatileRegisterAddress::getter_mRegisterBaseAddress (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bigint result ;
+GALGAS_string GALGAS_computeSubscriptedVolatileRegisterAddress::getter_mAddressLLVMname (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_computeSubscriptedVolatileRegisterAddress * p = (const cPtr_computeSubscriptedVolatileRegisterAddress *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_computeSubscriptedVolatileRegisterAddress) ;
-    result = p->mProperty_mRegisterBaseAddress ;
+    result = p->mProperty_mAddressLLVMname ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cPtr_computeSubscriptedVolatileRegisterAddress::getter_mRegisterBaseAddress (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRegisterBaseAddress ;
+GALGAS_string cPtr_computeSubscriptedVolatileRegisterAddress::getter_mAddressLLVMname (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAddressLLVMname ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1909,13 +1909,13 @@ GALGAS_uint cPtr_computeSubscriptedVolatileRegisterAddress::getter_mElementSize 
 
 cPtr_computeSubscriptedVolatileRegisterAddress::cPtr_computeSubscriptedVolatileRegisterAddress (const GALGAS_string & in_mLLVMResultVarName,
                                                                                                 const GALGAS_objectIR & in_mIndexResult,
-                                                                                                const GALGAS_bigint & in_mRegisterBaseAddress,
+                                                                                                const GALGAS_string & in_mAddressLLVMname,
                                                                                                 const GALGAS_uint & in_mElementSize
                                                                                                 COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mProperty_mLLVMResultVarName (in_mLLVMResultVarName),
 mProperty_mIndexResult (in_mIndexResult),
-mProperty_mRegisterBaseAddress (in_mRegisterBaseAddress),
+mProperty_mAddressLLVMname (in_mAddressLLVMname),
 mProperty_mElementSize (in_mElementSize) {
 }
 
@@ -1932,7 +1932,7 @@ void cPtr_computeSubscriptedVolatileRegisterAddress::description (C_String & ioS
   ioString << ", " ;
   mProperty_mIndexResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mRegisterBaseAddress.description (ioString, inIndentation+1) ;
+  mProperty_mAddressLLVMname.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mElementSize.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -1942,7 +1942,7 @@ void cPtr_computeSubscriptedVolatileRegisterAddress::description (C_String & ioS
 
 acPtr_class * cPtr_computeSubscriptedVolatileRegisterAddress::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_computeSubscriptedVolatileRegisterAddress (mProperty_mLLVMResultVarName, mProperty_mIndexResult, mProperty_mRegisterBaseAddress, mProperty_mElementSize COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_computeSubscriptedVolatileRegisterAddress (mProperty_mLLVMResultVarName, mProperty_mIndexResult, mProperty_mAddressLLVMname, mProperty_mElementSize COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -1999,15 +1999,16 @@ GALGAS_computeSubscriptedVolatileRegisterAddress GALGAS_computeSubscriptedVolati
 void extensionSetter_appendEnterRegisterAddress (GALGAS_instructionListIR & ioObject,
                                                  GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
                                                  GALGAS_string & outArgument_out_5F_llvmName,
-                                                 const GALGAS_bigint constinArgument_inAddress,
+                                                 const GALGAS_bigint constinArgument_inBaseAddress,
+                                                 const GALGAS_bigint constinArgument_inAddressOffset,
                                                  const GALGAS_string constinArgument_inRegisterName,
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_out_5F_llvmName.drop () ; // Release 'out' argument
   {
-  extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, outArgument_out_5F_llvmName, inCompiler COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 8)) ;
+  extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, outArgument_out_5F_llvmName, inCompiler COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 9)) ;
   }
-  ioObject.addAssign_operation (GALGAS_enterRegisterAddressIR::constructor_new (outArgument_out_5F_llvmName, constinArgument_inAddress, constinArgument_inRegisterName  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 9)) ;
+  ioObject.addAssign_operation (GALGAS_enterRegisterAddressIR::constructor_new (outArgument_out_5F_llvmName, constinArgument_inBaseAddress, constinArgument_inAddressOffset, constinArgument_inRegisterName  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 10))  COMMA_SOURCE_FILE ("intermediate-enter-register-address.galgas", 10)) ;
 }
 
 
@@ -2023,7 +2024,10 @@ typeComparisonResult cPtr_enterRegisterAddressIR::dynamicObjectCompare (const ac
     result = mProperty_mLLVMName.objectCompare (p->mProperty_mLLVMName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mRegisterAddress.objectCompare (p->mProperty_mRegisterAddress) ;
+    result = mProperty_mBaseAddress.objectCompare (p->mProperty_mBaseAddress) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mAddressOffset.objectCompare (p->mProperty_mAddressOffset) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mRegisterName.objectCompare (p->mProperty_mRegisterName) ;
@@ -2061,6 +2065,7 @@ GALGAS_abstractInstructionIR () {
 GALGAS_enterRegisterAddressIR GALGAS_enterRegisterAddressIR::constructor_default (LOCATION_ARGS) {
   return GALGAS_enterRegisterAddressIR::constructor_new (GALGAS_string::constructor_default (HERE),
                                                          GALGAS_bigint::constructor_zero (HERE),
+                                                         GALGAS_bigint::constructor_zero (HERE),
                                                          GALGAS_string::constructor_default (HERE)
                                                          COMMA_THERE) ;
 }
@@ -2075,12 +2080,13 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enterRegisterAddressIR GALGAS_enterRegisterAddressIR::constructor_new (const GALGAS_string & inAttribute_mLLVMName,
-                                                                              const GALGAS_bigint & inAttribute_mRegisterAddress,
+                                                                              const GALGAS_bigint & inAttribute_mBaseAddress,
+                                                                              const GALGAS_bigint & inAttribute_mAddressOffset,
                                                                               const GALGAS_string & inAttribute_mRegisterName
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_enterRegisterAddressIR result ;
-  if (inAttribute_mLLVMName.isValid () && inAttribute_mRegisterAddress.isValid () && inAttribute_mRegisterName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_enterRegisterAddressIR (inAttribute_mLLVMName, inAttribute_mRegisterAddress, inAttribute_mRegisterName COMMA_THERE)) ;
+  if (inAttribute_mLLVMName.isValid () && inAttribute_mBaseAddress.isValid () && inAttribute_mAddressOffset.isValid () && inAttribute_mRegisterName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_enterRegisterAddressIR (inAttribute_mLLVMName, inAttribute_mBaseAddress, inAttribute_mAddressOffset, inAttribute_mRegisterName COMMA_THERE)) ;
   }
   return result ;
 }
@@ -2105,20 +2111,38 @@ GALGAS_string cPtr_enterRegisterAddressIR::getter_mLLVMName (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_enterRegisterAddressIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_enterRegisterAddressIR::getter_mBaseAddress (UNUSED_LOCATION_ARGS) const {
   GALGAS_bigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_enterRegisterAddressIR * p = (const cPtr_enterRegisterAddressIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_enterRegisterAddressIR) ;
-    result = p->mProperty_mRegisterAddress ;
+    result = p->mProperty_mBaseAddress ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cPtr_enterRegisterAddressIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRegisterAddress ;
+GALGAS_bigint cPtr_enterRegisterAddressIR::getter_mBaseAddress (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mBaseAddress ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint GALGAS_enterRegisterAddressIR::getter_mAddressOffset (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_enterRegisterAddressIR * p = (const cPtr_enterRegisterAddressIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_enterRegisterAddressIR) ;
+    result = p->mProperty_mAddressOffset ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint cPtr_enterRegisterAddressIR::getter_mAddressOffset (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAddressOffset ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2144,12 +2168,14 @@ GALGAS_string cPtr_enterRegisterAddressIR::getter_mRegisterName (UNUSED_LOCATION
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_enterRegisterAddressIR::cPtr_enterRegisterAddressIR (const GALGAS_string & in_mLLVMName,
-                                                          const GALGAS_bigint & in_mRegisterAddress,
+                                                          const GALGAS_bigint & in_mBaseAddress,
+                                                          const GALGAS_bigint & in_mAddressOffset,
                                                           const GALGAS_string & in_mRegisterName
                                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mProperty_mLLVMName (in_mLLVMName),
-mProperty_mRegisterAddress (in_mRegisterAddress),
+mProperty_mBaseAddress (in_mBaseAddress),
+mProperty_mAddressOffset (in_mAddressOffset),
 mProperty_mRegisterName (in_mRegisterName) {
 }
 
@@ -2164,7 +2190,9 @@ void cPtr_enterRegisterAddressIR::description (C_String & ioString,
   ioString << "[@enterRegisterAddressIR:" ;
   mProperty_mLLVMName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mRegisterAddress.description (ioString, inIndentation+1) ;
+  mProperty_mBaseAddress.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mAddressOffset.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mRegisterName.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -2174,7 +2202,7 @@ void cPtr_enterRegisterAddressIR::description (C_String & ioString,
 
 acPtr_class * cPtr_enterRegisterAddressIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_enterRegisterAddressIR (mProperty_mLLVMName, mProperty_mRegisterAddress, mProperty_mRegisterName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_enterRegisterAddressIR (mProperty_mLLVMName, mProperty_mBaseAddress, mProperty_mAddressOffset, mProperty_mRegisterName COMMA_THERE)) ;
   return ptr ;
 }
 

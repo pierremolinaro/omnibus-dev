@@ -2,18 +2,20 @@
 setter @instructionListIR appendEnterRegisterAddress
   ?!@semanticTemporariesStruct ioTemporaries
   !@string out_llvmName
-  ?let @bigint inAddress
+  ?let @bigint inBaseAddress
+  ?let @bigint inAddressOffset
   ?let @string inRegisterName
 {
   [!?ioTemporaries newTempLLVMVar ?out_llvmName]
-  self += !@enterRegisterAddressIR.new {!out_llvmName !inAddress !inRegisterName}
+  self += !@enterRegisterAddressIR.new {!out_llvmName !inBaseAddress !inAddressOffset !inRegisterName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @enterRegisterAddressIR : @abstractInstructionIR {
   @string mLLVMName
-  @bigint mRegisterAddress
+  @bigint mBaseAddress
+  @bigint mAddressOffset
   @string mRegisterName
 }
 
@@ -24,8 +26,9 @@ override method @enterRegisterAddressIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + mLLVMName + " = add i32 " + mRegisterAddress
-             + ", 0 ; " + mRegisterName + " at " + [mRegisterAddress hexString] + "\n"
+  ioLLVMcode += "  " + mLLVMName + " = add i32 " + mBaseAddress
+             + ", " + mAddressOffset + " ; " + mRegisterName
+             + " at " + [mBaseAddress hexString] + " = " + [mAddressOffset hexString] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

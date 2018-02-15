@@ -103,12 +103,14 @@ override method @addressofControlRegisterAST analyzeExpression
     ?let @uint registerArraySize # 0 if not an array
     ?let @uint registerElementSize # 0 if not an array
   ]
-  @bigint registerAddress
+  @string registerAddress
   switch groupKind
   case single (@bigint baseAddress) :
-    registerAddress = baseAddress + addressOffset
+    let regName = mRegisterGroupName.string + ":" + mRegisterName
+    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !baseAddress !addressOffset !regName]
   case arrayGroup (@lbigintlist baseAddresses) :
-    registerAddress = 0 + addressOffset
+    let regName = mRegisterGroupName.string + ":" + mRegisterName
+    [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !0G !addressOffset !regName]
   end
 #-------------------- Check access
   if readOnly then
@@ -121,8 +123,9 @@ override method @addressofControlRegisterAST analyzeExpression
   @string llvmName
   if [mRegisterIndex isNoIndex] then # Simple access to a control register for writing
     if registerArraySize == 0 then
-      let registerName = mRegisterGroupName.string + ":" + mRegisterName
-      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !registerName]
+      llvmName = registerAddress
+#      let registerName = mRegisterGroupName.string + ":" + mRegisterName
+#      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !registerAddress !0G !registerName]
     else
       error mRegisterName : "the control register is an array" : llvmName
     end
@@ -145,12 +148,12 @@ override method @addressofControlRegisterAST analyzeExpression
       !?ioInstructionGenerationList
       ?let @objectIR indexIR
     )
-    if [indexIR isLiteralInteger] then # subscript expression is constant
-      [indexIR literalInteger ?1* ?value:let @bigint idx]
-      let addr = registerAddress + idx * registerElementSize
-      let registerName = mRegisterGroupName.string + ":" + mRegisterName + "[" + idx + "]"
-      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !registerName]
-    else
+#    if [indexIR isLiteralInteger] then # subscript expression is constant
+#      [indexIR literalInteger ?1* ?value:let @bigint idx]
+#      let addr = registerAddress + idx * registerElementSize
+#      let registerName = mRegisterGroupName.string + ":" + mRegisterName + "[" + idx + "]"
+#      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?llvmName !addr !0G !registerName]
+#    else
       [!?ioInstructionGenerationList appendComputeSubscriptedVolatileRegisterAddress
         !?ioTemporaries
         ?llvmName
@@ -158,7 +161,7 @@ override method @addressofControlRegisterAST analyzeExpression
         !registerAddress
         !registerElementSize
       ]
-    end
+#    end
   end
 #-------------------- Result
   let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {

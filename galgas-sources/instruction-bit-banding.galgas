@@ -92,21 +92,23 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
       ?let @uint registerArraySize # 0 if not an array
       ?let @uint unused registerElementSize # 0 if not an array
     ]
-    @bigint registerAddress
+    @string registerAddress
     switch groupKind
     case single (@bigint baseAddress) :
-      registerAddress = baseAddress + addressOffset
+      let regName = mRegisterGroupName.string + ":" + mRegisterName
+      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !baseAddress !addressOffset !regName]
     case arrayGroup (@lbigintlist baseAddresses) :
-      registerAddress = 0 + addressOffset
+      let regName = mRegisterGroupName.string + ":" + mRegisterName
+      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !0G !addressOffset !regName]
     end
   #--- Check the control register can be used
-    if (registerAddress < inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint) ||
-       (registerAddress >= inContext.mTargetParameters.mBitbandRegisterEndAddress.bigint) then
-      error mRegisterName
-        : "register address (" + [registerAddress hexString] + ") invalid: should be >= "
-        + [inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint hexString]
-        + " and < " + [inContext.mTargetParameters.mBitbandRegisterEndAddress.bigint hexString]
-    elsif readOnly then
+#    if (registerAddress < inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint) ||
+#       (registerAddress >= inContext.mTargetParameters.mBitbandRegisterEndAddress.bigint) then
+#      error mRegisterName
+#        : "register address (" + [registerAddress hexString] + ") invalid: should be >= "
+#        + [inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint hexString]
+#        + " and < " + [inContext.mTargetParameters.mBitbandRegisterEndAddress.bigint hexString]
+    if readOnly then
       error mRegisterName : "this control register cannot be modified (declared with @ro attribute)"
     elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
       error mRegisterName : "this control register is not accessible in user mode"
@@ -172,12 +174,10 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
       ?result:@objectIR sourceExpressionOperand
     ]
   #--- Load from reference ?
-#    if [sourceExpressionOperand isReference] then
-      [!?ioInstructionGenerationList appendLoadWhenReference
-        !?ioTemporaries
-        !?sourceExpressionOperand
-      ]
-#    end
+    [!?ioInstructionGenerationList appendLoadWhenReference
+      !?ioTemporaries
+      !?sourceExpressionOperand
+    ]
   #--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
     if ([sourceExpressionOperand type].plmOriginalTypeName == staticIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
       [sourceExpressionOperand literalInteger ?1* ?value:let @bigint value]
@@ -207,7 +207,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @bitbandInstructionIR : @abstractInstructionIR {
-  @bigint mRegisterAddress
+  @string mRegisterAddressLLVMname
   @objectIR mBitExpressionOperand
   @objectIR mSourceExpressionOperand
   @bigint mBitbandRegisterBaseAddress
@@ -236,7 +236,7 @@ override method @bitbandInstructionIR llvmInstructionCode
   let idx = [ioGenerationAdds.mUniqueIndex string]
   ioGenerationAdds.mUniqueIndex ++
   ioLLVMcode += ";--- Bit band\n"
-  ioLLVMcode += "  %byte.offset." + idx + " = sub i32 " + mRegisterAddress + ", " + mBitbandRegisterBaseAddress + "\n"
+  ioLLVMcode += "  %byte.offset." + idx + " = sub i32 " + mRegisterAddressLLVMname + ", " + mBitbandRegisterBaseAddress + "\n"
   ioLLVMcode += "  %byte.offset." + idx + ".mul = mul i32 %byte.offset." + idx + ", " + mBitbandRegisterOffsetMultiplier + "\n"
   ioLLVMcode += "  %bit.offset." + idx + ".mul = mul i32 " + [mBitExpressionOperand llvmName] + ", " + mBitbandRegisterBitMultiplier + "\n"
   ioLLVMcode += "  %offset." + idx + " = add i32 %byte.offset." + idx + ".mul, %bit.offset." + idx + ".mul\n"

@@ -3,11 +3,11 @@ setter @instructionListIR appendComputeSubscriptedVolatileRegisterAddress
   ?!@semanticTemporariesStruct ioTemporaries
   !@string outLLVMResultVarName
   ?let @objectIR inIndexIR
-  ?let @bigint inAddress
+  ?let @string inAddressLLVMname
   ?let @uint inElementSize
 {
   [!?ioTemporaries newTempLLVMVar ?outLLVMResultVarName]
-  self += !@computeSubscriptedVolatileRegisterAddress.new {!outLLVMResultVarName !inIndexIR !inAddress !inElementSize}
+  self += !@computeSubscriptedVolatileRegisterAddress.new {!outLLVMResultVarName !inIndexIR !inAddressLLVMname !inElementSize}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -15,7 +15,7 @@ setter @instructionListIR appendComputeSubscriptedVolatileRegisterAddress
 class @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
   @string mLLVMResultVarName
   @objectIR mIndexResult
-  @bigint mRegisterBaseAddress
+  @string mAddressLLVMname
   @uint mElementSize
 }
 
@@ -39,8 +39,8 @@ override method @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
   ioLLVMcode += "  " + scriptedRegisterOffsetName + " = mul i32 "
              + if bitCount < 32 then registerIndexName else [mIndexResult llvmName] end
              + ", " + mElementSize + " ; multiply index by size " + mElementSize + "\n"
-  ioLLVMcode += "  " + mLLVMResultVarName + " = add i32 " + scriptedRegisterOffsetName
-             + ", " + mRegisterBaseAddress + " ; Adding base address " + [mRegisterBaseAddress hexString] + "\n"
+  ioLLVMcode += "  " + mLLVMResultVarName + " = add i32 " + mAddressLLVMname
+             + ", " + scriptedRegisterOffsetName + " ; §\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
