@@ -2345,7 +2345,7 @@ class GALGAS_bitbandInstructionIR : public GALGAS_abstractInstructionIR {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_bitbandInstructionIR constructor_new (const class GALGAS_bigint & inOperand0,
+  public : static class GALGAS_bitbandInstructionIR constructor_new (const class GALGAS_string & inOperand0,
                                                                      const class GALGAS_objectIR & inOperand1,
                                                                      const class GALGAS_objectIR & inOperand2,
                                                                      const class GALGAS_bigint & inOperand3,
@@ -2373,7 +2373,7 @@ class GALGAS_bitbandInstructionIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mBitbandRegisterRelocationAddress (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mRegisterAddressLLVMname (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceExpressionOperand (LOCATION_ARGS) const ;
 
@@ -2396,7 +2396,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bitbandInstructionI
 
 class cPtr_bitbandInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_bigint mProperty_mRegisterAddress ;
+  public : GALGAS_string mProperty_mRegisterAddressLLVMname ;
   public : GALGAS_objectIR mProperty_mBitExpressionOperand ;
   public : GALGAS_objectIR mProperty_mSourceExpressionOperand ;
   public : GALGAS_bigint mProperty_mBitbandRegisterBaseAddress ;
@@ -2405,7 +2405,7 @@ class cPtr_bitbandInstructionIR : public cPtr_abstractInstructionIR {
   public : GALGAS_bigint mProperty_mBitbandRegisterBitMultiplier ;
 
 //--- Constructor
-  public : cPtr_bitbandInstructionIR (const GALGAS_bigint & in_mRegisterAddress,
+  public : cPtr_bitbandInstructionIR (const GALGAS_string & in_mRegisterAddressLLVMname,
                                       const GALGAS_objectIR & in_mBitExpressionOperand,
                                       const GALGAS_objectIR & in_mSourceExpressionOperand,
                                       const GALGAS_bigint & in_mBitbandRegisterBaseAddress,
@@ -2418,7 +2418,7 @@ class cPtr_bitbandInstructionIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mRegisterAddressLLVMname (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mBitExpressionOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceExpressionOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mBitbandRegisterBaseAddress (LOCATION_ARGS) const ;

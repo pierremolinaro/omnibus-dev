@@ -850,12 +850,6 @@ filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" 
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-private func linkForControlRegister ?let @string inControlRegisterName -> @string {
-  result = "<a class=\"header_link\" href=\"#" + inControlRegisterName + "\">" + inControlRegisterName + "</a>"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 func fieldIndexColumns ?let @uint inBitCount -> @string  {
   result = ""
   for > x in 0 ..< inBitCount do
