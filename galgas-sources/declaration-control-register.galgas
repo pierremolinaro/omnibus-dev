@@ -639,7 +639,7 @@ method @controlRegisterGroupArrayList generateLLVMcode ?!@string ioLLVMcode ?let
     ioLLVMcode += llvmTitleComment (!"Control Register Group Arraies")
     let int = "i" + inPointerSize
     for (groupName baseAddresses) in self do
-      ioLLVMcode += "@register.group.array." + [groupName assemblerRepresentation]
+      ioLLVMcode += registerGroupAddressArrayLLVMname (!groupName)
                  + " = private unnamed_addr constant [" + [baseAddresses length] + " x " + int + "] ["
       for (addr) in baseAddresses
       do
@@ -687,45 +687,6 @@ proc buildControlRegisterMapHTMLFile
   ?let @controlRegisterGroupMap inControlRegisterGroupMap
   ?sourceFile:let @lstring inSourceFile
 {
-#------------------------------- Build an HTML file that contains all declared control registers, ordered by names
-#  @string typeDumpFilePath = inSourceFile.string + ".control-registers-by-names.html"
-#  if [option plm_options.writeControlRegisterHTMLDumpFile value] then
-#    @stringset firstLetterSet = {}
-#    for () in inControlRegisterGroupMap do
-#      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
-#    end
-#    @string tableOfTypeString = ""
-#    @char currentFirstLetter = ' '
-#    @uint controlRegisterCount = 0
-#    for () group_ in inControlRegisterGroupMap do
-#      for () reg_ in group_mControlRegisterMap do
-#        let registerName = group_lkey.string + ":" + reg_lkey
-#        if currentFirstLetter != [registerName characterAtIndex !0] then
-#          currentFirstLetter = [registerName characterAtIndex !0]
-#          tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
-#        end
-#        if reg_mArraySize == 0 then
-#          controlRegisterCount = controlRegisterCount + 1
-#          tableOfTypeString += linkForControlRegister (!registerName) + "<br>"
-#        else
-#          controlRegisterCount = controlRegisterCount + reg_mArraySize
-#          for i in 0 ..< reg_mArraySize do
-#            tableOfTypeString += linkForControlRegister (!registerName + "[" + i + "]") + "<br>"
-#          end
-#        end
-#      end
-#    end
-#    let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByName
-#      ![inSourceFile lastPathComponent]
-#      !controlRegisterCount
-#      !inControlRegisterGroupMap
-#      !firstLetterSet
-#      !tableOfTypeString
-#    ]
-#    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
-#  else
-#    [@string deleteFileIfExists !typeDumpFilePath]
-#  end
 #------------------------------- Build an HTML file that contains all declared control registers, ordered by address
   let byAddressFilePath = inSourceFile.string + ".control-registers-sorted-by-address.html"
   let byNameFilePath = inSourceFile.string + ".control-registers-sorted-by-name.html"

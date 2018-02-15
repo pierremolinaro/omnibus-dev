@@ -1334,6 +1334,16 @@ void extensionMethod_generateLLVMcode (const class GALGAS_controlRegisterGroupAr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                    Function 'registerGroupAddressArrayLLVMname'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_registerGroupAddressArrayLLVMname (const class GALGAS_string & constinArgument0,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            @decoratedSyncInstance class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

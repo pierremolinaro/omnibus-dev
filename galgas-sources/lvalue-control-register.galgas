@@ -198,13 +198,18 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
         !?alloca: ioAllocaList
         !indexExpression 
         !endOfIndex
-        !arraySize:registerArraySize
+        !arraySize:[baseAddresses length]
         !elementType:outRegisterType
         !?ioInstructionGenerationList
         ?let @objectIR groupIndexIR
       )
-      let regName = mRegisterGroupName.string + "[" + [groupIndexIR llvmName] + "]:" + mRegisterName
-      [!?ioInstructionGenerationList appendEnterRegisterAddress !?ioTemporaries ?registerAddress !0G !addressOffset !regName]
+      [!?ioInstructionGenerationList appendEnterRegisterGroupSubscriptedAddress
+        !?ioTemporaries
+        ?registerAddress
+        !mRegisterGroupName.string
+        ![baseAddresses length]
+        !groupIndexIR
+      ]
     end
   end
 #-------------------- Analyze control register target
