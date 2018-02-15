@@ -388,4 +388,11 @@ func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! Register Group Array Name
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func registerGroupAddressArrayLLVMname ?let @string inGroupName -> @string {
+  result = "@register.group.array." + [inGroupName assemblerRepresentation]
+}
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

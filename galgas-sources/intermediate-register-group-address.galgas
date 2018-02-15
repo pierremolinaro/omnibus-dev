@@ -1,0 +1,44 @@
+
+setter @instructionListIR appendEnterRegisterGroupSubscriptedAddress
+  ?!@semanticTemporariesStruct ioTemporaries
+  !@string out_llvmName
+  ?let @string inGroupName
+  ?let @uint inGroupSize
+  ?let @objectIR inIndexIR
+{
+  [!?ioTemporaries newTempLLVMVar ?out_llvmName]
+  self += !@enterRegisterGroupSubscriptedAddressIR.new {!out_llvmName !inGroupName !inGroupSize !inIndexIR}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @enterRegisterGroupSubscriptedAddressIR : @abstractInstructionIR {
+  @string mLLVMName
+  @string mGroupName
+  @uint mGroupSize
+  @objectIR mIndexIR
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @enterRegisterGroupSubscriptedAddressIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let groupArrayName = registerGroupAddressArrayLLVMname (!mGroupName)
+  ioLLVMcode += "  " + mLLVMName + ".addr = getelementptr inbounds [" + mGroupSize
+             + " x i32], [" + mGroupSize + " x i32]* " + groupArrayName
+             + ", i32 0, i32 " + [mIndexIR llvmName] + "\n"
+  ioLLVMcode += "  " + mLLVMName + " = load i32, i32* " + mLLVMName + ".addr\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @enterRegisterGroupSubscriptedAddressIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

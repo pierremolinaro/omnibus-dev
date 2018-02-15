@@ -144,6 +144,7 @@ project (1:0:0) -> "plm" {
 
   "galgas-sources/intermediate-compute-subscripted-volatile-register-address.galgas"
   "galgas-sources/intermediate-enter-register-address.galgas"
+  "galgas-sources/intermediate-register-group-address.galgas"
   "galgas-sources/intermediate-load-indirect-volatile-register.galgas"
   "galgas-sources/intermediate-store-indirect-volatile-register.galgas"
 

@@ -4583,15 +4583,15 @@ const char * gWrapperFileContent_31_embeddedSampleCode = "target \"teensy-3-6/un
   "  //--- Enable clock\n"
   "    #SIM:SCGC6 |= {#SIM:SCGC6 !FTM0:1}\n"
   "  //--- Set counter min value\n"
-  "    #FTM0:CNTIN = {#FTM0:CNTIN !INIT:0}\n"
+  "    #FTM[0]:CNTIN = {#FTM:CNTIN !INIT:0}\n"
   "  //--- Set counter max value\n"
-  "    #FTM0:MOD = {#FTM0:MOD !MOD:0xFFFF}\n"
+  "    #FTM[0]:MOD = {#FTM:MOD !MOD:0xFFFF}\n"
   "  //--- Set prescaler\n"
-  "    #FTM0:SC = {#FTM0:SC !CLKS:1 !PS:4}\n"
+  "    #FTM[0]:SC = {#FTM:SC !CLKS:1 !PS:4}\n"
   "  //--- Enable NVIC interrupt\n"
   "    enable (!interrupt:.FTM0)\n"
   "  //--- Enable FTM interrupt\n"
-  "    #FTM0:SC |= {#FTM0:SC !TOIE:1}\n"
+  "    #FTM[0]:SC |= {#FTM:SC !TOIE:1}\n"
   "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
@@ -4599,7 +4599,7 @@ const char * gWrapperFileContent_31_embeddedSampleCode = "target \"teensy-3-6/un
   "  interrupt section FTM0 {\n"
   "  //--- Set by hardware when the FTM counter passes the value in the MOD register.\n"
   "  //    The TOF bit is cleared by reading the SC register while TOF is set and then writing a 0 to TOF bit\n"
-  "    #FTM0:SC = #FTM0:SC & ~ {#FTM0:SC !TOF:1}\n"
+  "    #FTM[0]:SC = #FTM[0]:SC & ~ {#FTM:SC !TOF:1}\n"
   "    digital.toggle (!port:.D3)\n"
   "    digital.toggle (!port:.D8)\n"
   "  }\n"
@@ -4615,7 +4615,7 @@ const cRegularFileWrapper gWrapperFile_31_embeddedSampleCode (
   "17-flextimer-as-pwm.plm",
   "plm",
   true, // Text file
-  3301, // Text length
+  3308, // Text length
   gWrapperFileContent_31_embeddedSampleCode
 ) ;
 
