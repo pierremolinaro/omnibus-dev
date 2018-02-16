@@ -1254,21 +1254,21 @@ registers #AIPS0 0x_4000_0000 {
   // When this bit is set and an access is attempted by an untrusted master, the 
   // access terminates with an error response and no peripheral access initiates.
   // 0  Accesses from an untrusted master are allowed.    // 1  Accesses from an untrusted master are not allowed.    
-  PACRA 0x20
-  PACRB 0x24
-  PACRC 0x28
-  PACRD 0x2C
-  PACRE 0x40
-  PACRF 0x44
-  PACRG 0x48
-  PACRH 0x4C
-  PACRI 0x50
-  PACRJ 0x54
-  PACRK 0x58
-  PACRL 0x5C
-  PACRM 0x60
-  PACRN 0x64
-  PACRO 0x68
+  PACRA 0x20,
+  PACRB 0x24,
+  PACRC 0x28,
+  PACRD 0x2C,
+  PACRE 0x40,
+  PACRF 0x44,
+  PACRG 0x48,
+  PACRH 0x4C,
+  PACRI 0x50,
+  PACRJ 0x54,
+  PACRK 0x58,
+  PACRL 0x5C,
+  PACRM 0x60,
+  PACRN 0x64,
+  PACRO 0x68,
   PACRP 0x6C
   $uint32 {
    1, SP0, WP0, TP0,

@@ -376,13 +376,13 @@ registers #AXBS 0x4000_4000 {
   PRS6   0x600 $uint32 // Priority Registers Slave 6
   PRS7   0x700 $uint32 // Priority Registers Slave 7
   
-  CRS0   0x010         // Control registers 0
-  CRS1   0x110         // Control registers 1
-  CRS2   0x210         // Control registers 2
-  CRS3   0x310         // Control registers 3
-  CRS4   0x410         // Control registers 4
-  CRS5   0x510         // Control registers 5
-  CRS6   0x610         // Control registers 6
+  CRS0   0x010,        // Control registers 0
+  CRS1   0x110,        // Control registers 1
+  CRS2   0x210,        // Control registers 2
+  CRS3   0x310,        // Control registers 3
+  CRS4   0x410,        // Control registers 4
+  CRS5   0x510,        // Control registers 5
+  CRS6   0x610,        // Control registers 6
   CRS7   0x710 $uint32 { // Control registers 7
     READONLY,
     HLP,
@@ -395,13 +395,13 @@ registers #AXBS 0x4000_4000 {
   }
   
   
-  MGPCR0 0x800 // Master 0 General Purpose Control Register
-  MGPCR1 0x900 // Master 1 General Purpose Control Register
-  MGPCR2 0xA00 // Master 2 General Purpose Control Register
-  MGPCR3 0xB00 // Master 3 General Purpose Control Register
-  MGPCR4 0xC00 // Master 4 General Purpose Control Register
-  MGPCR5 0xD00 // Master 5 General Purpose Control Register
-  MGPCR6 0xE00 // Master 6 General Purpose Control Register
+  MGPCR0 0x800, // Master 0 General Purpose Control Register
+  MGPCR1 0x900, // Master 1 General Purpose Control Register
+  MGPCR2 0xA00, // Master 2 General Purpose Control Register
+  MGPCR3 0xB00, // Master 3 General Purpose Control Register
+  MGPCR4 0xC00, // Master 4 General Purpose Control Register
+  MGPCR5 0xD00, // Master 5 General Purpose Control Register
+  MGPCR6 0xE00, // Master 6 General Purpose Control Register
   MGPCR7 0xF00 $uint32 { // Master 7 General Purpose Control Register
     29,
     AULB:3
@@ -428,21 +428,21 @@ registers #AIPS0 0x_4000_0000 {
   // When this bit is set and an access is attempted by an untrusted master, the 
   // access terminates with an error response and no peripheral access initiates.
   // 0  Accesses from an untrusted master are allowed.    // 1  Accesses from an untrusted master are not allowed.    
-  PACRA 0x20
-  PACRB 0x24
-  PACRC 0x28
-  PACRD 0x2C
-  PACRE 0x40
-  PACRF 0x44
-  PACRG 0x48
-  PACRH 0x4C
-  PACRI 0x50
-  PACRJ 0x54
-  PACRK 0x58
-  PACRL 0x5C
-  PACRM 0x60
-  PACRN 0x64
-  PACRO 0x68
+  PACRA 0x20,
+  PACRB 0x24,
+  PACRC 0x28,
+  PACRD 0x2C,
+  PACRE 0x40,
+  PACRF 0x44,
+  PACRG 0x48,
+  PACRH 0x4C,
+  PACRI 0x50,
+  PACRJ 0x54,
+  PACRK 0x58,
+  PACRL 0x5C,
+  PACRM 0x60,
+  PACRN 0x64,
+  PACRO 0x68,
   PACRP 0x6C
   $uint32 {
    1, SP0, WP0, TP0,
@@ -960,8 +960,7 @@ registers #CRC 0x4003_2000 {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers #ADC0 0x4003_B000 {
-  SC1A   0x00
-  SC1B   0x04 $uint32  {// ADC status and control registers 1
+  SC1A 0x00, SC1B 0x04 $uint32  {// ADC status and control registers 1
     24,
     COCO, // Conversion complete flag
     AIEN, // Interrupt enable
@@ -1718,27 +1717,27 @@ registers #USBHS 0x400A_1000 {
 
 registers #USBPHY 0x400A_2000 {
 //--- USB PHY Power-Down Register
-  PWD     0x000
-  PWD_SET 0x004
-  PWD_CLR 0x008
+  PWD     0x000,
+  PWD_SET 0x004,
+  PWD_CLR 0x008,
   PWD_TOG 0x00C $uint32 {11, RXPWDRX, RXPWDDIFF, RXPWD1PT1, RXPWDENV, 4, TXPWDV2I, TXPWDBIAS, TXPWDFS, 10}
 
 //--- USB PHY Transmitter Control Register
-  TX     0x010
-  TX_SET 0x014
-  TX_CLR 0x018
+  TX     0x010,
+  TX_SET 0x014,
+  TX_CLR 0x018,
   TX_TOG 0x01C $uint32 {3, USBPHY_TX_EDGECTRL:3, 6, TXCAL45DP:4, 4, TXCAL45DM:4, 4, D_CAL:4}
 
 //--- USB PHY Receiver Control Register
-  RX     0x020
-  RX_SET 0x024
-  RX_CLR 0x028
+  RX     0x020,
+  RX_SET 0x024,
+  RX_CLR 0x028,
   RX_TOG 0x02C $uint32 {9, RXDBYPASS, 15, DISCONADJ:3, 1, ENVADJ:3}
 
 //--- USB PHY General Control Register
-  CTRL     0x030
-  CTRL_SET 0x034
-  CTRL_CLR 0x038
+  CTRL     0x030,
+  CTRL_SET 0x034,
+  CTRL_CLR 0x038,
   CTRL_TOG 0x03C $uint32 {
     SFTRST, CLKGATE, UTMI_SUSPENDM, HOST_FORCE_LS_SEO, OTG_ID_VALUE, 2, FSDLL_RST_EN,
     3, ENAUTOCLR_PHY_PWD, ENAUTOCLR_CLKGATE, AUTORESUME_EN, 2,
@@ -1752,9 +1751,9 @@ registers #USBPHY 0x400A_2000 {
   }
 
 //--- USB PHY General Control Register
-  DEBUG     0x050
-  DEBUG_SET 0x054
-  DEBUG_CLR 0x058
+  DEBUG     0x050,
+  DEBUG_SET 0x054,
+  DEBUG_CLR 0x058,
   DEBUG_TOG 0x05C $uint32 {
     1, CLKGATE, HOST_RESUME_DEBUG, SQUELCHRESETLENGTH:4, ENSQUELCHRESET, 3, SQUELCHRESETCOUNT:5,
     3, ENTX2RXCOUNT, TX2RXCOUNT:4, 2, ENHSTPULLDOWN:2, HSTPULLDOWN:2, DEBUG_INTERFACE_HOLD, OTGIDPIOLOCK
@@ -1764,18 +1763,18 @@ registers #USBPHY 0x400A_2000 {
   DEBUG0_STATUS 0x060 $uint32 {SQUEL_COUNT:6, UTMI_RXERROR_FAIL_COUNT:10, LOOP_BACK_FAIL_COUNT:16}
 
 //--- UTMI Debug Status Register 1
-  DEBUG1     0x070
-  DEBUG1_SET 0x074
-  DEBUG1_CLR 0x078
+  DEBUG1     0x070,
+  DEBUG1_SET 0x074,
+  DEBUG1_CLR 0x078,
   DEBUG1_TOG 0x07C $uint32 {17, ENTAILADJVD:2, 13}
 
 //--- UTMI RTL Version Register
   VERSION @ro 0x080 $uint32 {MAJOR:8, MINOR:8, STEP:16}
 
 //--- USB PHY PLL Control / Status Register
-  PLL_SIC     0x0A0
-  PLL_SIC_SET 0x0A4
-  PLL_SIC_CLR 0x0A8
+  PLL_SIC     0x0A0,
+  PLL_SIC_SET 0x0A4,
+  PLL_SIC_CLR 0x0A8,
   PLL_SIC_TOG 0x0AC
   $uint32 {
     PLL_LOCK, 14, PLL_BYPASS,
@@ -1783,9 +1782,9 @@ registers #USBPHY 0x400A_2000 {
   }
 
 //--- USB PHY VBUS Detect Control Register
-  USB1_VBUS_DETECT     0x0C0
-  USB1_VBUS_DETECT_SET 0x0C4
-  USB1_VBUS_DETECT_CLR 0x0C8
+  USB1_VBUS_DETECT     0x0C0,
+  USB1_VBUS_DETECT_SET 0x0C4,
+  USB1_VBUS_DETECT_CLR 0x0C8,
   USB1_VBUS_DETECT_TOG 0x0CC
   $uint32 {
     EN_CHARGER_RESISTOR, 4, DISCHARGE_VBUS, 5, PWRUP_CMPS, 1, VBUSVALID_TO_SESSVALID, 2,
@@ -1800,18 +1799,18 @@ registers #USBPHY 0x400A_2000 {
   USB1_VBUS__CHRG_DET_STAT 0x0F0 $uint32 {27, SECDET_DCP, DP_STATE, DM_STATE, CHRG_DETECTED, PLUG_CONTACT}
 
 //--- USB PHY Analog Control Register
-  ANACTRL     0x100
-  ANACTRL_SET 0x104
-  ANACTRL_CLR 0x108
+  ANACTRL     0x100,
+  ANACTRL_SET 0x104,
+  ANACTRL_CLR 0x108,
   ANACTRL_TOG 0x10C $uint32 {
     PFD_STABLE, 15,
     EMPH_CUR_CTRL:2, EMPH_EN, EMPH_PULSE_CTRL:2, DEV_PULLDOWN, PFD_FRAC:6, PFD_CLK_SEL:2, PFD_CLKGATE, TESTCLK_SEL
   }
 
 //--- USB PHY Loopback Control/Status Register
-  USB1_LOOPBACK     0x110
-  USB1_LOOPBACK_SET 0x114
-  USB1_LOOPBACK_CLR 0x118
+  USB1_LOOPBACK     0x110,
+  USB1_LOOPBACK_SET 0x114,
+  USB1_LOOPBACK_CLR 0x118,
   USB1_LOOPBACK_TOG 0x11C $uint32 {
     8, TSTPKT:8, TSTL_HSFS_MODE_EN, 6, UTM0_DIG_TST1,
     UTM0_DIG_TST0, TSTL_TX_HIZ, TSTI_TX_EN, TSTI_TX_LS_MODE,
@@ -1819,15 +1818,15 @@ registers #USBPHY 0x400A_2000 {
   }
 
 //--- USB PHY Loopback Packet Number Select Register
-  USB1_LOOPBACK_HSFSCNT     0x120
-  USB1_LOOPBACK_HSFSCNT_SET 0x124
-  USB1_LOOPBACK_HSFSCNT_CLR 0x128
+  USB1_LOOPBACK_HSFSCNT     0x120,
+  USB1_LOOPBACK_HSFSCNT_SET 0x124,
+  USB1_LOOPBACK_HSFSCNT_CLR 0x128,
   USB1_LOOPBACK_HSFSCNT_TOG 0x12C $uint32 {TSTL_FS_NUMBER:16, TSTL_HS_NUMBER:16}
 
 //--- USB PHY Trim Override Enable Register
-  TRIM_OVERRIDE_EN     0x130
-  TRIM_OVERRIDE_EN_SET 0x134
-  TRIM_OVERRIDE_EN_CLR 0x138
+  TRIM_OVERRIDE_EN     0x130,
+  TRIM_OVERRIDE_EN_SET 0x134,
+  TRIM_OVERRIDE_EN_CLR 0x138,
   TRIM_OVERRIDE_EN_TOG 0x13C $uint32 {
     TRIM_USBPHY_TX_CAL45DM:4, TRIM_USBPHY_TX_CAL45CP:4,
     TRIM_USBPHY_TX_DCAL:4, TRIM_USB_REG_ENV_TAIL_ADJ_VD:2, TRIM_PLL_CTRL0_DIV_SEL:2,
@@ -1888,144 +1887,43 @@ registers #CAN [2] {0x4002_4000, 0x400A_4000} {
 //! Chapter 57: Serial Peripheral Interface (SPI)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//registers SPI0_MCR   0x4002C000 // DSPI Module Configuration Register
-//registers SPI_MCR_MSTR    0x80000000  // Master/Slave Mode Select
-//registers SPI_MCR_CONT_SCKE   0x40000000  // 
-//registers SPI_MCR_DCONF(n)  (((n) & 3) << 28)  // 
-//registers SPI_MCR_FRZ    0x08000000  // 
-//registers SPI_MCR_MTFE    0x04000000  // 
-//registers SPI_MCR_ROOE    0x01000000  // 
-//registers SPI_MCR_PCSIS(n)  (((n) & 0x1F) << 16)  //
-//registers SPI_MCR_DOZE    0x00008000  // 
-//registers SPI_MCR_MDIS    0x00004000  // 
-//registers SPI_MCR_DIS_TXF    0x00002000  // 
-//registers SPI_MCR_DIS_RXF    0x00001000  // 
-//registers SPI_MCR_CLR_TXF    0x00000800  // 
-//registers SPI_MCR_CLR_RXF    0x00000400  // 
-//registers SPI_MCR_SMPL_PT(n)  (((n) & 3) << 8)  //
-//registers SPI_MCR_HALT    0x00000001  // 
-//registers SPI0_TCR   0x4002C008 // DSPI Transfer Count Register
-//registers SPI0_CTAR0   0x4002C00C // DSPI Clock and Transfer Attributes Register, In Master Mode
-//registers SPI_CTAR_DBR    0x80000000  // Double Baud Rate
-//registers SPI_CTAR_FMSZ(n)  (((n) & 15) << 27)  // Frame Size (+1)
-//registers SPI_CTAR_CPOL    0x04000000  // Clock Polarity
-//registers SPI_CTAR_CPHA    0x02000000  // Clock Phase
-//registers SPI_CTAR_LSBFE    0x01000000  // LSB First
-//registers SPI_CTAR_PCSSCK(n)  (((n) & 3) << 22)  // PCS to SCK Delay Prescaler
-//registers SPI_CTAR_PASC(n)  (((n) & 3) << 20)  // After SCK Delay Prescaler
-//registers SPI_CTAR_PDT(n)   (((n) & 3) << 18)  // Delay after Transfer Prescaler
-//registers SPI_CTAR_PBR(n)   (((n) & 3) << 16)  // Baud Rate Prescaler
-//registers SPI_CTAR_CSSCK(n)  (((n) & 15) << 12)  // PCS to SCK Delay Scaler
-//registers SPI_CTAR_ASC(n)   (((n) & 15) << 8)  // After SCK Delay Scaler
-//registers SPI_CTAR_DT(n)   (((n) & 15) << 4)  // Delay After Transfer Scaler
-//registers SPI_CTAR_BR(n)   (((n) & 15) << 0)  // Baud Rate Scaler
-//registers SPI0_CTAR0_SLAVE  0x4002C00C // DSPI Clock and Transfer Attributes Register, In Slave Mode
-//registers SPI0_CTAR1   0x4002C010 // DSPI Clock and Transfer Attributes Register, In Master Mode
-//registers SPI0_SR    0x4002C02C // DSPI Status Register
-//registers SPI_SR_TCF    0x80000000  // Transfer Complete Flag
-//registers SPI_SR_TXRXS    0x40000000  // TX and RX Status
-//registers SPI_SR_EOQF    0x10000000  // End of Queue Flag
-//registers SPI_SR_TFUF    0x08000000  // Transmit FIFO Underflow Flag
-//registers SPI_SR_TFFF    0x02000000  // Transmit FIFO Fill Flag
-//registers SPI_SR_RFOF    0x00080000  // Receive FIFO Overflow Flag
-//registers SPI_SR_RFDF    0x00020000  // Receive FIFO Drain Flag
-//registers SPI0_RSER   0x4002C030 // DSPI DMA/Interrupt Request Select and Enable Register
-//registers SPI_RSER_TCF_RE    0x80000000  // Transmission Complete Request Enable
-//registers SPI_RSER_EOQF_RE   0x10000000  // DSPI Finished Request Request Enable
-//registers SPI_RSER_TFUF_RE   0x08000000  // Transmit FIFO Underflow Request Enable
-//registers SPI_RSER_TFFF_RE   0x02000000  // Transmit FIFO Fill Request Enable
-//registers SPI_RSER_TFFF_DIRS   0x01000000  // Transmit FIFO FIll Dma or Interrupt Request Select
-//registers SPI_RSER_RFOF_RE   0x00080000  // Receive FIFO Overflow Request Enable
-//registers SPI_RSER_RFDF_RE   0x00020000  // Receive FIFO Drain Request Enable
-//registers SPI_RSER_RFDF_DIRS   0x00010000  // Receive FIFO Drain DMA or Interrupt Request Select
-//registers SPI0_PUSHR   0x4002C034 // DSPI PUSH TX FIFO registers In Master Mode
-//registers SPI_PUSHR_CONT    0x80000000  // 
-//registers SPI_PUSHR_CTAS(n)  (((n) & 7) << 28)  // 
-//registers SPI_PUSHR_EOQ    0x08000000  // 
-//registers SPI_PUSHR_CTCNT    0x04000000  // 
-//registers SPI_PUSHR_PCS(n)  (((n) & 31) << 16)  //
-//registers SPI0_PUSHR_SLAVE  0x4002C034 // DSPI PUSH TX FIFO registers In Slave Mode
-//registers SPI0_POPR   0x4002C038 // DSPI POP RX FIFO Register
-//registers SPI0_TXFR0   0x4002C03C // DSPI Transmit FIFO Registers
-//registers SPI0_TXFR1   0x4002C040 // DSPI Transmit FIFO Registers
-//registers SPI0_TXFR2   0x4002C044 // DSPI Transmit FIFO Registers
-//registers SPI0_TXFR3   0x4002C048 // DSPI Transmit FIFO Registers
-//registers SPI0_RXFR0   0x4002C07C // DSPI Receive FIFO Registers
-//registers SPI0_RXFR1   0x4002C080 // DSPI Receive FIFO Registers
-//registers SPI0_RXFR2   0x4002C084 // DSPI Receive FIFO Registers
-//registers SPI0_RXFR3   0x4002C088 // DSPI Receive FIFO Registers
-//typedef struct {
-// volatile $uint32_t MCR; // 0
-// volatile $uint32_t unused1;// 4
-// volatile $uint32_t TCR; // 8
-// volatile $uint32_t CTAR0; // c
-// volatile $uint32_t CTAR1; // 10
-// volatile $uint32_t CTAR2; // 14
-// volatile $uint32_t CTAR3; // 18
-// volatile $uint32_t CTAR4; // 1c
-// volatile $uint32_t CTAR5; // 20
-// volatile $uint32_t CTAR6; // 24
-// volatile $uint32_t CTAR7; // 28
-// volatile $uint32_t SR; // 2c
-// volatile $uint32_t RSER; // 30
-// volatile $uint32_t PUSHR; // 34
-// volatile $uint32_t POPR; // 38
-// volatile $uint32_t TXFR[16]; // 3c
-// volatile $uint32_t RXFR[16]; // 7c
-//} SPI_t;
-//registers SPI0  (*(SPI_t *)0x4002C000)
+registers #SPI [3] {0x4002_C000, 0x4002_D000, 0x400A_C000} {
+
+  MCR 0x0 $uint32 {
+    MSTR, CONT_SCKE, DCONF:2, FRZ, MTFE, PCSSE, ROOE, 2, PCSIS:6,
+    DOZE, MDIS, DIS_TXF, DID_RXF, CLR_TXF, CLR_RXF, SMPL_PT:2, 5, 2, HALT
+  }
+
+  TCR 0x8 $uint32 {SPT_TCNT:16, 16}
+  
+  CTAR [2] 0xC @inc 4 $uint32 {
+    DBR, FMSZ:4, CPOL, CPHA, LSBFE, PCSSCK:2, PASC:2, PDT:2, PBR:2,
+    CSSCK:4, ASC:4, DT:4, BR:4
+  }
+
+  CTAR0_SLAVE 0xC $uint32 {1, FMSZ:4, CPOL, CPHA, 25}
+  
+  SR 0x2C $uint32 {
+    TCF, TXRXS, 1, EOQF, TFUF, 1, TFFF, 5, RFOF, 1, RFDF, 1,
+    TXCTR:4, TXNXTPTR:4, RXCTR:4, POPNXTPTR:4
+  }
+  
+  RSER 0x30 $uint32 {TCF_RE, 2, EOQF_RE, TFUF_RE, 1, TFFF_RE, TFFF_DIRS, 4, RFOF_RE, 1, RFDF_RE, RFDF_DIRS, 16}
+  
+  PUSHR 0x34 $uint32 {CONT, CTAS:3, EOQ, CTCNT, 4, PCS:6, TXDATA:16}
+  
+  PUSHR_SLAVE 0x34 $uint32
+  
+  POPR @ro 0x38 $uint32
+  
+  TXFR [4] 0x3C @inc 4 $uint32 {TXCMD_DATA:16, TXDATA:16}
+
+  RXFR [4] 0x7C @inc 4 $uint32
+}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //! Chapter 58: Inter-Integrated Circuit (I2C)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//registers I2C0_A1   *(volatile $uint8_t  *)0x40066000 // I2C Address registers 1
-//registers I2C0_F   *(volatile $uint8_t  *)0x40066001 // I2C Frequency Divider register
-//registers I2C0_C1   *(volatile $uint8_t  *)0x40066002 // I2C Control registers 1
-//registers I2C_C1_IICEN   ($uint8_t)0x80   // I2C Enable
-//registers I2C_C1_IICIE   ($uint8_t)0x40   // I2C Interrupt Enable
-//registers I2C_C1_MST   ($uint8_t)0x20   // Master Mode Select
-//registers I2C_C1_TX   ($uint8_t)0x10   // Transmit Mode Select
-//registers I2C_C1_TXAK   ($uint8_t)0x08   // Transmit Acknowledge Enable
-//registers I2C_C1_RSTA   ($uint8_t)0x04   // RepeSTART
-//registers I2C_C1_WUEN   ($uint8_t)0x02   // Wakeup Enable
-//registers I2C_C1_DMAEN   ($uint8_t)0x01   // DMA Enable
-//registers I2C0_S   *(volatile $uint8_t  *)0x40066003 // I2C Status register
-//registers I2C_S_TCF   ($uint8_t)0x80   // Transfer Complete Flag
-//registers I2C_S_IAAS   ($uint8_t)0x40   // Addressed As A Slave
-//registers I2C_S_BUSY   ($uint8_t)0x20   // Bus Busy
-//registers I2C_S_ARBL   ($uint8_t)0x10   // Arbitration Lost
-//registers I2C_S_RAM   ($uint8_t)0x08   // Range Address Match
-//registers I2C_S_SRW   ($uint8_t)0x04   // Slave Read/Write
-//registers I2C_S_IICIF   ($uint8_t)0x02   // Interrupt Flag
-//registers I2C_S_RXAK   ($uint8_t)0x01   // Receive Acknowledge
-//registers I2C0_D   *(volatile $uint8_t  *)0x40066004 // I2C Data I/O register
-//registers I2C0_C2   *(volatile $uint8_t  *)0x40066005 // I2C Control registers 2
-//registers I2C_C2_GCAEN   ($uint8_t)0x80   // General Call Address Enable
-//registers I2C_C2_ADEXT   ($uint8_t)0x40   // Address Extension
-//registers I2C_C2_HDRS   ($uint8_t)0x20   // High Drive Select
-//registers I2C_C2_SBRC   ($uint8_t)0x10   // Slave Baud Rate Control
-//registers I2C_C2_RMEN   ($uint8_t)0x08   // Range Address Matching Enable
-//registers I2C_C2_AD(n)   ((n) & 7)   // Slave Address, upper 3 bits
-//registers I2C0_FLT  *(volatile $uint8_t  *)0x40066006 // I2C Programmable Input Glitch Filter register
-//registers I2C0_RA   *(volatile $uint8_t  *)0x40066007 // I2C Range Address register
-//registers I2C0_SMB  *(volatile $uint8_t  *)0x40066008 // I2C SMBus Control and Status register
-//registers I2C0_A2   *(volatile $uint8_t  *)0x40066009 // I2C Address registers 2
-//registers I2C0_SLTH  *(volatile $uint8_t  *)0x4006600A // I2C SCL Low Timeout registers High
-//registers I2C0_SLTL  *(volatile $uint8_t  *)0x4006600B // I2C SCL Low Timeout registers Low
-//
-//registers I2C1_A1   *(volatile $uint8_t  *)0x40067000 // I2C Address registers 1
-//registers I2C1_F   *(volatile $uint8_t  *)0x40067001 // I2C Frequency Divider register
-//registers I2C1_C1   *(volatile $uint8_t  *)0x40067002 // I2C Control registers 1
-//registers I2C1_S   *(volatile $uint8_t  *)0x40067003 // I2C Status register
-//registers I2C1_D   *(volatile $uint8_t  *)0x40067004 // I2C Data I/O register
-//registers I2C1_C2   *(volatile $uint8_t  *)0x40067005 // I2C Control registers 2
-//registers I2C1_FLT  *(volatile $uint8_t  *)0x40067006 // I2C Programmable Input Glitch Filter register
-//registers I2C1_RA   *(volatile $uint8_t  *)0x40067007 // I2C Range Address register
-//registers I2C1_SMB  *(volatile $uint8_t  *)0x40067008 // I2C SMBus Control and Status register
-//registers I2C1_A2   *(volatile $uint8_t  *)0x40067009 // I2C Address registers 2
-//registers I2C1_SLTH  *(volatile $uint8_t  *)0x4006700A // I2C SCL Low Timeout registers High
-//registers I2C1_SLTL  *(volatile $uint8_t  *)0x4006700B // I2C SCL Low Timeout registers Low
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //! Chapter 59: Universal Asynchronous Receiver/Transmitter (UART)
