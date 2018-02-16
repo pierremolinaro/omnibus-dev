@@ -42,8 +42,8 @@ Dans ce chapitre, nous allons décrire~:
 Pour déclarer le registre \texttt{PORTA\_PCR0} (\refFigure{}{definitionPORTxPCRn}), situé à l'adresse \texttt{0x4004\_9000}, on écrit~:
 
 \begin{PLM}
-registers PORTA {
-  PCR0 0x4004_9000 $uint32
+registers #PORTA 0x4004_9000 {
+  PCR0 0x0 $uint32
 }
 \end{PLM}
 

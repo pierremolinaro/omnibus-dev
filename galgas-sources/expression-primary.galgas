@@ -568,7 +568,7 @@ private proc handleArrayAccessInExpression
 #--- Check current object is an array
   if [[ioResult type].kind isArrayType] then
     [[ioResult type].kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
-    handleArraySubscript (
+    handleArraySubscriptNew (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -576,15 +576,23 @@ private proc handleArrayAccessInExpression
       !mode: inMode
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
+      !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !inIndexExpression 
       !inEndOfIndex
       !arraySize:arraySize
       !elementType:elementType
       !?ioInstructionGenerationList
-      !?ioResult
-   )
+      ?let @objectIR indexIR
+    )
+    [!?ioTemporaries newTempLLVMVar ?let llvmName]
+    let result = @objectIR.reference {!type:elementType !llvmName:llvmName}
+    [!?ioInstructionGenerationList appendGetArrayElementReference
+      !result
+      !ioResult
+      !indexIR
+    ]
+    ioResult = result      
   else
     error inEndOfIndex : "the receiver is not an array and does not accept subscripting"
   end
