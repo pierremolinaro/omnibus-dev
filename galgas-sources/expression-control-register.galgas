@@ -96,7 +96,6 @@ override method @registerInExpressionAST analyzeExpression
       !mFieldName
       ?let @llvmBinaryOperation accessOperator
       ?let @bigint accessRightOperand
-      ?*
       ?let @PLMType resultType
     ]
     getNewTempValue (!resultType !?ioTemporaries ?let resultIR)

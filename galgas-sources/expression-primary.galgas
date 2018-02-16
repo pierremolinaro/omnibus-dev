@@ -92,7 +92,6 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
   end
   for (access) in mAccessList do
     switch access
-#    case register (*) :
     case integerSlice (2*) :
     case property (*) :
     case arrayAccess (@expressionAST indexExpression *) :

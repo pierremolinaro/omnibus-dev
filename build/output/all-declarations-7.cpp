@@ -11344,7 +11344,6 @@ GALGAS_sliceMap_2D_element::GALGAS_sliceMap_2D_element (void) :
 mProperty_lkey (),
 mProperty_mAccessOperator (),
 mProperty_mAccessRightOperand (),
-mProperty_mSubMap (),
 mProperty_mResultType () {
 }
 
@@ -11358,13 +11357,11 @@ GALGAS_sliceMap_2D_element::~ GALGAS_sliceMap_2D_element (void) {
 GALGAS_sliceMap_2D_element::GALGAS_sliceMap_2D_element (const GALGAS_lstring & inOperand0,
                                                         const GALGAS_llvmBinaryOperation & inOperand1,
                                                         const GALGAS_bigint & inOperand2,
-                                                        const GALGAS_sliceMap & inOperand3,
-                                                        const GALGAS_PLMType & inOperand4) :
+                                                        const GALGAS_PLMType & inOperand3) :
 mProperty_lkey (inOperand0),
 mProperty_mAccessOperator (inOperand1),
 mProperty_mAccessRightOperand (inOperand2),
-mProperty_mSubMap (inOperand3),
-mProperty_mResultType (inOperand4) {
+mProperty_mResultType (inOperand3) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11372,12 +11369,11 @@ mProperty_mResultType (inOperand4) {
 GALGAS_sliceMap_2D_element GALGAS_sliceMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                         const GALGAS_llvmBinaryOperation & inOperand1,
                                                                         const GALGAS_bigint & inOperand2,
-                                                                        const GALGAS_sliceMap & inOperand3,
-                                                                        const GALGAS_PLMType & inOperand4 
+                                                                        const GALGAS_PLMType & inOperand3 
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_sliceMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_sliceMap_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    result = GALGAS_sliceMap_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
   }
   return result ;
 }
@@ -11396,9 +11392,6 @@ typeComparisonResult GALGAS_sliceMap_2D_element::objectCompare (const GALGAS_sli
     result = mProperty_mAccessRightOperand.objectCompare (inOperand.mProperty_mAccessRightOperand) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mSubMap.objectCompare (inOperand.mProperty_mSubMap) ;
-  }
-  if (result == kOperandEqual) {
     result = mProperty_mResultType.objectCompare (inOperand.mProperty_mResultType) ;
   }
   return result ;
@@ -11407,7 +11400,7 @@ typeComparisonResult GALGAS_sliceMap_2D_element::objectCompare (const GALGAS_sli
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_sliceMap_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mAccessOperator.isValid () && mProperty_mAccessRightOperand.isValid () && mProperty_mSubMap.isValid () && mProperty_mResultType.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mAccessOperator.isValid () && mProperty_mAccessRightOperand.isValid () && mProperty_mResultType.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11416,7 +11409,6 @@ void GALGAS_sliceMap_2D_element::drop (void) {
   mProperty_lkey.drop () ;
   mProperty_mAccessOperator.drop () ;
   mProperty_mAccessRightOperand.drop () ;
-  mProperty_mSubMap.drop () ;
   mProperty_mResultType.drop () ;
 }
 
@@ -11433,8 +11425,6 @@ void GALGAS_sliceMap_2D_element::description (C_String & ioString,
     mProperty_mAccessOperator.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mAccessRightOperand.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mSubMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mResultType.description (ioString, inIndentation+1) ;
   }
@@ -11457,12 +11447,6 @@ GALGAS_llvmBinaryOperation GALGAS_sliceMap_2D_element::getter_mAccessOperator (U
 
 GALGAS_bigint GALGAS_sliceMap_2D_element::getter_mAccessRightOperand (UNUSED_LOCATION_ARGS) const {
   return mProperty_mAccessRightOperand ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sliceMap GALGAS_sliceMap_2D_element::getter_mSubMap (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSubMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
