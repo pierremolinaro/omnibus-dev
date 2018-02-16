@@ -107,6 +107,7 @@ syntax extension plm_syntax {
       repeat
         <registerDeclaration> !?ioAST !?registerDeclarationList
       while
+        $,$
       end
       $\$type$ ?let registerTypeName
       @controlRegisterBitSliceList registerBitSliceList = {}
