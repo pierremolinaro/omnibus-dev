@@ -2375,9 +2375,10 @@ class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstruction
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendGetArrayElementReference (class GALGAS_instructionListIR & ioObject,
-                                                     const class GALGAS_objectIR constin_inTarget,
-                                                     const class GALGAS_objectIR constin_inSource,
-                                                     const class GALGAS_objectIR constin_inElement,
+                                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                     const class GALGAS_objectIR constin_inArrayIR,
+                                                     const class GALGAS_objectIR constin_inIndexIR,
+                                                     class GALGAS_objectIR & out_outElementPtr,
                                                      class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -2422,9 +2423,9 @@ class GALGAS_getArrayElementReferenceIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mElement (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mArray (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mIndex (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
 
@@ -2448,13 +2449,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getArrayElementRefe
 class cPtr_getArrayElementReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectIR mProperty_mTarget ;
-  public : GALGAS_objectIR mProperty_mSource ;
-  public : GALGAS_objectIR mProperty_mElement ;
+  public : GALGAS_objectIR mProperty_mArray ;
+  public : GALGAS_objectIR mProperty_mIndex ;
 
 //--- Constructor
   public : cPtr_getArrayElementReferenceIR (const GALGAS_objectIR & in_mTarget,
-                                            const GALGAS_objectIR & in_mSource,
-                                            const GALGAS_objectIR & in_mElement
+                                            const GALGAS_objectIR & in_mArray,
+                                            const GALGAS_objectIR & in_mIndex
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -2462,8 +2463,8 @@ class cPtr_getArrayElementReferenceIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mElement (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mArray (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndex (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

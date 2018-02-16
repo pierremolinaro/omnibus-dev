@@ -585,12 +585,13 @@ private proc handleArrayAccessInExpression
       !?ioInstructionGenerationList
       ?let @objectIR indexIR
     )
-    [!?ioTemporaries newTempLLVMVar ?let llvmName]
-    let result = @objectIR.reference {!type:elementType !llvmName:llvmName}
+#    [!?ioTemporaries newTempLLVMVar ?let llvmName]
+#    let result = @objectIR.reference {!type:elementType !llvmName:llvmName}
     [!?ioInstructionGenerationList appendGetArrayElementReference
-      !result
-      !ioResult
-      !indexIR
+      !?temporary: ioTemporaries
+      !arrayReference:ioResult
+      !index:indexIR
+      ?elementPtr:let result
     ]
     ioResult = result      
   else
