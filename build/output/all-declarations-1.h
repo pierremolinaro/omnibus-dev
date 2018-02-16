@@ -3153,8 +3153,7 @@ class GALGAS_sliceMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_llvmBinaryOperation & inOperand1,
                                                       const class GALGAS_bigint & inOperand2,
-                                                      const class GALGAS_sliceMap & inOperand3,
-                                                      const class GALGAS_PLMType & inOperand4,
+                                                      const class GALGAS_PLMType & inOperand3,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -3162,8 +3161,7 @@ class GALGAS_sliceMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_llvmBinaryOperation constinArgument1,
                                                    class GALGAS_bigint constinArgument2,
-                                                   class GALGAS_sliceMap constinArgument3,
-                                                   class GALGAS_PLMType constinArgument4,
+                                                   class GALGAS_PLMType constinArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -3182,18 +3180,12 @@ class GALGAS_sliceMap : public AC_GALGAS_map {
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMSubMapForKey (class GALGAS_sliceMap constinArgument0,
-                                                          class GALGAS_string constinArgument1,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_llvmBinaryOperation & outArgument1,
                                                    class GALGAS_bigint & outArgument2,
-                                                   class GALGAS_sliceMap & outArgument3,
-                                                   class GALGAS_PLMType & outArgument4,
+                                                   class GALGAS_PLMType & outArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -3211,10 +3203,6 @@ class GALGAS_sliceMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mResultTypeForKey (const class GALGAS_string & constinOperand0,
                                                                            C_Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_sliceMap getter_mSubMapForKey (const class GALGAS_string & constinOperand0,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_sliceMap getter_overriddenMap (C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const ;
@@ -3244,7 +3232,6 @@ class cEnumerator_sliceMap : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_llvmBinaryOperation current_mAccessOperator (LOCATION_ARGS) const ;
   public : class GALGAS_bigint current_mAccessRightOperand (LOCATION_ARGS) const ;
-  public : class GALGAS_sliceMap current_mSubMap (LOCATION_ARGS) const ;
   public : class GALGAS_PLMType current_mResultType (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_sliceMap_2D_element current (LOCATION_ARGS) const ;
@@ -3486,14 +3473,12 @@ class cMapElement_sliceMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_llvmBinaryOperation mProperty_mAccessOperator ;
   public : GALGAS_bigint mProperty_mAccessRightOperand ;
-  public : GALGAS_sliceMap mProperty_mSubMap ;
   public : GALGAS_PLMType mProperty_mResultType ;
 
 //--- Constructor
   public : cMapElement_sliceMap (const GALGAS_lstring & inKey,
                                  const GALGAS_llvmBinaryOperation & in_mAccessOperator,
                                  const GALGAS_bigint & in_mAccessRightOperand,
-                                 const GALGAS_sliceMap & in_mSubMap,
                                  const GALGAS_PLMType & in_mResultType
                                  COMMA_LOCATION_ARGS) ;
 
@@ -3524,8 +3509,6 @@ class GALGAS_sliceMap_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_bigint mProperty_mAccessRightOperand ;
 
-  public : GALGAS_sliceMap mProperty_mSubMap ;
-
   public : GALGAS_PLMType mProperty_mResultType ;
 
 //--------------------------------- Accessors
@@ -3542,7 +3525,6 @@ class GALGAS_sliceMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_sliceMap_2D_element (const GALGAS_lstring & in_lkey,
                                        const GALGAS_llvmBinaryOperation & in_mAccessOperator,
                                        const GALGAS_bigint & in_mAccessRightOperand,
-                                       const GALGAS_sliceMap & in_mSubMap,
                                        const GALGAS_PLMType & in_mResultType) ;
 
 //-- Start of generic part --*
@@ -3559,8 +3541,7 @@ class GALGAS_sliceMap_2D_element : public AC_GALGAS_root {
   public : static class GALGAS_sliceMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                     const class GALGAS_llvmBinaryOperation & inOperand1,
                                                                     const class GALGAS_bigint & inOperand2,
-                                                                    const class GALGAS_sliceMap & inOperand3,
-                                                                    const class GALGAS_PLMType & inOperand4
+                                                                    const class GALGAS_PLMType & inOperand3
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -3582,8 +3563,6 @@ class GALGAS_sliceMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mAccessRightOperand (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mResultType (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_sliceMap getter_mSubMap (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

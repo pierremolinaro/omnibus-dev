@@ -216,7 +216,6 @@ map @controlRegisterFieldMap {
 map @sliceMap {
   @llvmBinaryOperation mAccessOperator
   @bigint mAccessRightOperand
-  @sliceMap mSubMap
   @PLMType mResultType
   insert insertKey error message "the '%K' slice has been already declared"
   search searchKey error message "the '%K' slice is not declared"
@@ -377,7 +376,7 @@ private proc controlRegisterType
 private proc buildControlRegisterSliceMap
   ?let @controlRegisterBitSliceList inRegisterBitSliceList
   ?let @location inEndOfBitSliceLocation
-  ?!context:@semanticContext ioContext
+  ?!context:@semanticContext unused ioContext
   ?!type:@PLMType ioRegisterType
   ?bitCount:let @uint inRegisterBitCount
   !@controlRegisterFieldMap outRegisterFieldMap
@@ -403,30 +402,12 @@ private proc buildControlRegisterSliceMap
           !shiftCount
           !bitCount
         ]
-        @sliceMap registerSubMap = {}
-      #--- "shifted" property
-        [!?registerSubMap insertKey
-          !.new{!"shifted" !name.location}
-          !.lshr
-          ![shiftCount bigint]
-          !{}
-          !ioRegisterType
-        ]
-      #--- "bool" property
-        [!?registerSubMap insertKey
-          !.new{!boolTypeName () !name.location}
-          !.icmp_ne
-          !0G
-          !{}
-          ![ioContext booleanType]
-        ]
-      #--- property name
+       #--- property name
         let mask = ((1G << bitCount) - 1G) << shiftCount
         [!?outRegisterBitSliceMap insertKey
           !name
           !.and
           !mask
-          !registerSubMap
           !ioRegisterType
         ]
         shiftCount = shiftCount + bitCount
@@ -736,7 +717,7 @@ proc buildControlRegisterMapHTMLFile
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 private proc buildControlRegisterMaps
   ?let @controlRegisterMap inControlRegisterMap
@@ -793,7 +774,7 @@ private proc buildControlRegisterMaps
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" {
 }{
@@ -809,7 +790,7 @@ filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" 
     ?@controlRegisterByAddress CONTROL_REGISTER_SORTED_BY_ADDRESS
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#·······················································································································
 
 func fieldIndexColumns ?let @uint inBitCount -> @string  {
   result = ""
@@ -818,7 +799,7 @@ func fieldIndexColumns ?let @uint inBitCount -> @string  {
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#·······················································································································
 
 func arrayIndexListFor ?size:let @uint inSize -> @uintlist {
   result = {}

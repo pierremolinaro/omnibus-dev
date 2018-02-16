@@ -7386,27 +7386,25 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::extractObject (co
 cMapElement_sliceMap::cMapElement_sliceMap (const GALGAS_lstring & inKey,
                                             const GALGAS_llvmBinaryOperation & in_mAccessOperator,
                                             const GALGAS_bigint & in_mAccessRightOperand,
-                                            const GALGAS_sliceMap & in_mSubMap,
                                             const GALGAS_PLMType & in_mResultType
                                             COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mAccessOperator (in_mAccessOperator),
 mProperty_mAccessRightOperand (in_mAccessRightOperand),
-mProperty_mSubMap (in_mSubMap),
 mProperty_mResultType (in_mResultType) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_sliceMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mAccessOperator.isValid () && mProperty_mAccessRightOperand.isValid () && mProperty_mSubMap.isValid () && mProperty_mResultType.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mAccessOperator.isValid () && mProperty_mAccessRightOperand.isValid () && mProperty_mResultType.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_sliceMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_sliceMap (mProperty_lkey, mProperty_mAccessOperator, mProperty_mAccessRightOperand, mProperty_mSubMap, mProperty_mResultType COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_sliceMap (mProperty_lkey, mProperty_mAccessOperator, mProperty_mAccessRightOperand, mProperty_mResultType COMMA_HERE)) ;
   return result ;
 }
 
@@ -7423,10 +7421,6 @@ void cMapElement_sliceMap::description (C_String & ioString, const int32_t inInd
   mProperty_mAccessRightOperand.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mSubMap" ":" ;
-  mProperty_mSubMap.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mResultType" ":" ;
   mProperty_mResultType.description (ioString, inIndentation) ;
 }
@@ -7441,9 +7435,6 @@ typeComparisonResult cMapElement_sliceMap::compare (const cCollectionElement * i
   }
   if (kOperandEqual == result) {
     result = mProperty_mAccessRightOperand.objectCompare (operand->mProperty_mAccessRightOperand) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mSubMap.objectCompare (operand->mProperty_mSubMap) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mResultType.objectCompare (operand->mProperty_mResultType) ;
@@ -7501,12 +7492,11 @@ GALGAS_sliceMap GALGAS_sliceMap::getter_overriddenMap (C_Compiler * inCompiler
 void GALGAS_sliceMap::addAssign_operation (const GALGAS_lstring & inKey,
                                            const GALGAS_llvmBinaryOperation & inArgument0,
                                            const GALGAS_bigint & inArgument1,
-                                           const GALGAS_sliceMap & inArgument2,
-                                           const GALGAS_PLMType & inArgument3,
+                                           const GALGAS_PLMType & inArgument2,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
   cMapElement_sliceMap * p = NULL ;
-  macroMyNew (p, cMapElement_sliceMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_sliceMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -7520,12 +7510,11 @@ void GALGAS_sliceMap::addAssign_operation (const GALGAS_lstring & inKey,
 void GALGAS_sliceMap::setter_insertKey (GALGAS_lstring inKey,
                                         GALGAS_llvmBinaryOperation inArgument0,
                                         GALGAS_bigint inArgument1,
-                                        GALGAS_sliceMap inArgument2,
-                                        GALGAS_PLMType inArgument3,
+                                        GALGAS_PLMType inArgument2,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) {
   cMapElement_sliceMap * p = NULL ;
-  macroMyNew (p, cMapElement_sliceMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_sliceMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -7543,8 +7532,7 @@ const char * kSearchErrorMessage_sliceMap_searchKey = "the '%K' slice is not dec
 void GALGAS_sliceMap::method_searchKey (GALGAS_lstring inKey,
                                         GALGAS_llvmBinaryOperation & outArgument0,
                                         GALGAS_bigint & outArgument1,
-                                        GALGAS_sliceMap & outArgument2,
-                                        GALGAS_PLMType & outArgument3,
+                                        GALGAS_PLMType & outArgument2,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) const {
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) performSearch (inKey,
@@ -7555,13 +7543,11 @@ void GALGAS_sliceMap::method_searchKey (GALGAS_lstring inKey,
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
-    outArgument3.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     outArgument0 = p->mProperty_mAccessOperator ;
     outArgument1 = p->mProperty_mAccessRightOperand ;
-    outArgument2 = p->mProperty_mSubMap ;
-    outArgument3 = p->mProperty_mResultType ;
+    outArgument2 = p->mProperty_mResultType ;
   }
 }
 
@@ -7591,21 +7577,6 @@ GALGAS_bigint GALGAS_sliceMap::getter_mAccessRightOperandForKey (const GALGAS_st
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     result = p->mProperty_mAccessRightOperand ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sliceMap GALGAS_sliceMap::getter_mSubMapForKey (const GALGAS_string & inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) attributes ;
-  GALGAS_sliceMap result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_sliceMap) ;
-    result = p->mProperty_mSubMap ;
   }
   return result ;
 }
@@ -7655,20 +7626,6 @@ void GALGAS_sliceMap::setter_setMAccessRightOperandForKey (GALGAS_bigint inAttri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_sliceMap::setter_setMSubMapForKey (GALGAS_sliceMap inAttributeValue,
-                                               GALGAS_string inKey,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_sliceMap * p = (cMapElement_sliceMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_sliceMap) ;
-    p->mProperty_mSubMap = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 void GALGAS_sliceMap::setter_setMResultTypeForKey (GALGAS_PLMType inAttributeValue,
                                                    GALGAS_string inKey,
                                                    C_Compiler * inCompiler
@@ -7704,7 +7661,7 @@ cGenericAbstractEnumerator (inOrder) {
 GALGAS_sliceMap_2D_element cEnumerator_sliceMap::current (LOCATION_ARGS) const {
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_sliceMap) ;
-  return GALGAS_sliceMap_2D_element (p->mProperty_lkey, p->mProperty_mAccessOperator, p->mProperty_mAccessRightOperand, p->mProperty_mSubMap, p->mProperty_mResultType) ;
+  return GALGAS_sliceMap_2D_element (p->mProperty_lkey, p->mProperty_mAccessOperator, p->mProperty_mAccessRightOperand, p->mProperty_mResultType) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7729,14 +7686,6 @@ GALGAS_bigint cEnumerator_sliceMap::current_mAccessRightOperand (LOCATION_ARGS) 
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_sliceMap) ;
   return p->mProperty_mAccessRightOperand ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sliceMap cEnumerator_sliceMap::current_mSubMap (LOCATION_ARGS) const {
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_sliceMap) ;
-  return p->mProperty_mSubMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8421,13 +8370,13 @@ static void extensionMethod_controlRegisterGroupDeclarationAST_noteTypesInPreced
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_controlRegisterGroupDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_controlRegisterGroupDeclarationAST) ;
-  cEnumerator_controlRegisterDeclarationList enumerator_8625 (object->mProperty_mRegisters, kENUMERATION_UP) ;
-  while (enumerator_8625.hasCurrentObject ()) {
-    GALGAS_lstring var_typeName_8645 = function_llvmTypeNameFromPLMname (enumerator_8625.current (HERE).getter_mRegisterTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 231)) ;
+  cEnumerator_controlRegisterDeclarationList enumerator_8605 (object->mProperty_mRegisters, kENUMERATION_UP) ;
+  while (enumerator_8605.hasCurrentObject ()) {
+    GALGAS_lstring var_typeName_8625 = function_llvmTypeNameFromPLMname (enumerator_8605.current (HERE).getter_mRegisterTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 230)) ;
     {
-    ioArgument_ioGraph.setter_noteNode (var_typeName_8645 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 232)) ;
+    ioArgument_ioGraph.setter_noteNode (var_typeName_8625 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 231)) ;
     }
-    enumerator_8625.gotoNextObject () ;
+    enumerator_8605.gotoNextObject () ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
