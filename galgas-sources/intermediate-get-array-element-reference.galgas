@@ -1,18 +1,22 @@
 
 setter @instructionListIR appendGetArrayElementReference
-  ?let @objectIR inTarget
-  ?let @objectIR inSource
-  ?let @objectIR inElement
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?arrayReference:let @objectIR inArrayIR
+  ?index:let @objectIR inIndexIR
+  !elementPtr:@objectIR outElementPtr
 {
-  self += !@getArrayElementReferenceIR.new {!inTarget !inSource !inElement}
+  [!?ioTemporaries newTempLLVMVar ?let llvmName]
+  [[inArrayIR type].kind arrayType ?elementType:let elementType ?1*]
+  outElementPtr = @objectIR.reference {!type:elementType !llvmName:llvmName}
+  self += !@getArrayElementReferenceIR.new {!outElementPtr !inArrayIR !inIndexIR}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @getArrayElementReferenceIR : @abstractInstructionIR {
   @objectIR mTarget
-  @objectIR mSource
-  @objectIR mElement
+  @objectIR mArray
+  @objectIR mIndex
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -22,10 +26,11 @@ override method @getArrayElementReferenceIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [[mSource type] llvmTypeName]
+  let llvmType = [[mArray type] llvmTypeName]
   ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, " + [mElement llvmTypeName] + " " + [mElement llvmName]
-  ioLLVMcode += " ; Element of index " + [mElement llvmName] + "\n"
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mArray llvmName] + ", i32 0, " + [mIndex llvmTypeName]
+             + " " + [mIndex llvmName]
+             + " ; Element of index " + [mIndex llvmName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
