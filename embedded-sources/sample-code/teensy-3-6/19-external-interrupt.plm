@@ -1,0 +1,106 @@
+target "teensy-3-6/unprivileged"
+let F_CPU_MHZ = 240
+
+driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func section activityLedOn @safe @exported () {
+  digital.write (!yes !toPort:.D13)
+}
+
+func section activityLedOff @safe @exported () {
+  digital.write (!no !toPort:.D13)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let LED_L0 = $digitalPort.D3
+let LED_L1 = $digitalPort.D4
+let LED_L4 = $digitalPort.D7
+let BUTTON_P4 = $digitalPort.D12
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver myDriver > digital {
+
+  //····················································································································
+  //--- LED_L0 is port #3: PTA12
+  //    PORTA_PCR12 is configured to generate an interrupt on falling edge
+  // So: when LED_L0 is swichted off, LED_L1 toggles
+  //--- Port #12 is PTC7
+  //    PORTC_PCR7 is configured to generate an interrupt on falling edge
+  // So: when push button P4 is pressed, LED_L4 toggles
+  //····················································································································
+
+  init {
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.OUTPUT !toPort:LED_L4)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P4)
+  //--- Generate an interrupt on falling edge of port #3 (PTA12)
+    #PORTA:PCR[12] |= {#PORTA:PCR !IRQC:0xA}
+  //--- Enable NVIC interrupt
+    enable (!interrupt:.pinDetectPortA)
+  //--- Enable NVIC interrupt
+    enable (!interrupt:.pinDetectPortA)
+  //--- Digital filters are clocked by the LPO clock 
+    #PORTC:DFCR = 1
+  //--- Setr digital filter length 
+    #PORTC:DFWR = 31
+  //--- Enable digital filter ou PTC7
+    #PORTC:DFER = 1 << 7
+  //--- Generate an interrupt on falling edge of port #12 (PTC7)
+    #PORTC:PCR[7] |= {#PORTC:PCR !IRQC:0xA}
+  //--- Enable NVIC interrupt
+    enable (!interrupt:.pinDetectPortC)
+  //--- Enable NVIC interrupt
+    enable (!interrupt:.pinDetectPortC)
+  }
+  
+  //····················································································································
+
+  interrupt section pinDetectPortA {
+  //--- Acknowledge interrupt (several ways to do)
+ //   #PORTA:PCR[12] |= {#PORTA:PCR !ISF:1} // Setting bit ISF clears interrupt
+    #PORTA:PCR[12] @bit 24 = 1 // The same, using bit banding
+ //   #PORTA:ISFR = 1 << 12 // Setting bit 12 clears interrupt
+  //--- Toggle LED_L1
+    digital.toggle (!port:LED_L1)
+  }
+
+  //····················································································································
+
+  interrupt section pinDetectPortC {
+  //--- Acknowledge interrupt (several ways to do)
+ //   #PORTC:PCR[7] |= {#PORTC:PCR !ISF:1} // Setting bit ISF clears interrupt
+    #PORTC:PCR[7] @bit 24 = 1 // The same, using bit banding
+ //   #PORTC:ISFR = 1 << 7 // Setting bit 7 clears interrupt
+  //--- Toggle LED_L4
+    digital.toggle (!port:LED_L4)
+  }
+
+  //····················································································································
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver myDriver ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T1 @priority 10 @stacksize 512 {
+  var échéance $uint32 = 0
+
+  on time.wait (!untilDeadline:self.échéance) {
+    self.échéance +%= 1_000
+    digital.toggle (!port:LED_L0)
+  }
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
