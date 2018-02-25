@@ -4,58 +4,17 @@ check target "teensy-3-6/unprivileged"
 //! Chapter 12: Port control and interrupts (PORT) Pin Control registers n
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers #PORTA 0x4004_9000 {
+registers #PORTA 0x4004_9000, #PORTB 0x4004_A000, #PORTC 0x4004_B000, #PORTD 0x4004_C000, #PORTE 0x4004_D000 {
     PCR @user [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   
-  GPCLR @user  0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user  0x84 $uint32 // Global Pin Control High Register
-  ISFR  @user  0xA0 $uint32 // Interrupt Status Flag Register
-}
-
-
-registers #PORTB 0x4004_A000 {
-  PCR @user [32] 0x00 @inc 4 $uint32 {
-    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
-  }
-  
-  GPCLR @user  0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user  0x84 $uint32 // Global Pin Control High Register
-  ISFR  @user  0xA0 $uint32 // Interrupt Status Flag Register
-}
-
-
-registers #PORTC 0x4004_B000 {
-  PCR @user [32] 0x00 @inc 4 $uint32 {
-    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
-  }
-  
-  GPCLR @user  0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user  0x84 $uint32 // Global Pin Control High Register
-  ISFR  @user  0xA0 $uint32 // Interrupt Status Flag Register
-}
-
-
-registers #PORTD 0x4004_C000 {
-  PCR @user [32] 0x00 @inc 4 $uint32 {
-    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
-  }
-  
-  GPCLR @user  0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user  0x84 $uint32 // Global Pin Control High Register
-  ISFR  @user  0xA0 $uint32 // Interrupt Status Flag Register
-}
-
-
-registers #PORTE 0x4004_D000 {
-  PCR @user [32] 0x00 @inc 4 $uint32 {
-    7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
-  }
-  
-  GPCLR @user  0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user  0x84 $uint32 // Global Pin Control High Register
-  ISFR  @user  0xA0 $uint32 // Interrupt Status Flag Register
+  GPCLR @user 0x80 $uint32 // Global Pin Control Low Register
+  GPCHR @user 0x84 $uint32 // Global Pin Control High Register
+  ISFR  0xA0 $uint32 // Interrupt Status Flag Register
+  DFER  0xC0 $uint32 // Digital Filter Enable Register
+  DFCR  0xC4 $uint32 {31, CS} // Digital Filter Clock Register
+  DFWR  0xC8 $uint32 {27, FILT:5} // Digital Filter Width Register
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
