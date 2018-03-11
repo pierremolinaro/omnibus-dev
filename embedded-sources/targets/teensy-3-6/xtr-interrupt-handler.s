@@ -23,7 +23,7 @@
 @----------------------------------------- Activity led On
   bl    func.activityLedOn_28__29_   @ Defined in PLM source (can modify R0-R3 registers)
 @----------------------------------------- R4 <- running task context
-  ldr   r4, =gRunningTaskControlBlock
+  ldr   r4, =gRunningTaskControlBlockPtr
   ldr   r4, [r4]
 @----------------------------------------- Call Interrupt handler
   bl    !HANDLER!

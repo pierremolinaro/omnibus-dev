@@ -7303,84 +7303,84 @@ void routine_generateCodeFiles (const GALGAS_string constinArgument_inCurrentDir
   GALGAS_string var_s_35__18286 = var_s_34__18171.getter_stringByReplacingStringByString (GALGAS_string ("!SERVICECALL!"), function_llvmNameForServiceCall (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 398)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 398)) ;
   GALGAS_string var_s_36__18381 = var_s_35__18286.getter_stringByReplacingStringByString (GALGAS_string ("!SECTIONIMPLEMENTATION!"), function_llvmNameForSectionImplementation (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 399)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 399)) ;
   GALGAS_string var_s_37__18496 = var_s_36__18381.getter_stringByReplacingStringByString (GALGAS_string ("!SECTIONCALL!"), function_llvmNameForSectionCall (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 400)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 400)) ;
-  GALGAS_bool joker_18651 ; // Joker input parameter
-  var_s_37__18496.method_writeToFileWhenDifferentContents (var_sourceDirectory_7736.add_operation (GALGAS_string ("/src.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 401)), joker_18651, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 401)) ;
-  GALGAS_string var_json_18744 = GALGAS_string ("{\n") ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("  \"system-stack-size\" : ").add_operation (constinArgument_inIntermediateCodeStruct.getter_mTargetParameters (HERE).getter_mSystemStackSize (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 405)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 405)).add_operation (GALGAS_string (",\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 405)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 405)) ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("  \"stacked-register-size-on-user-stack\" : ").add_operation (constinArgument_inIntermediateCodeStruct.getter_mTargetParameters (HERE).getter_mStackedUserRegisterOnInterruptByteSize (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 406)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 406)).add_operation (GALGAS_string (",\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 407)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 406)) ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("  \"service-stack-needs\" : ").add_operation (constinArgument_inIntermediateCodeStruct.getter_mTargetParameters (HERE).getter_mServicePushedRegisterByteSize (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 408)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 408)).add_operation (GALGAS_string (",\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 408)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 408)) ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("  \"section-stack-needs\" : ").add_operation (constinArgument_inIntermediateCodeStruct.getter_mTargetParameters (HERE).getter_mSectionPushedRegisterByteSize (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 409)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 409)).add_operation (GALGAS_string (",\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 409)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 409)) ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("  \"tasks\" : {"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 411)) ;
-  cEnumerator_taskMapIR enumerator_19408 (constinArgument_inIntermediateCodeStruct.getter_mTaskMapIR (HERE), kENUMERATION_UP) ;
-  while (enumerator_19408.hasCurrentObject ()) {
-    var_json_18744.plusAssign_operation(GALGAS_string ("\n"
-      "    \"").add_operation (enumerator_19408.current (HERE).getter_lkey (HERE).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("code-generation.galgas", 413)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 413)).add_operation (GALGAS_string ("\" : "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 413)).add_operation (enumerator_19408.current (HERE).getter_mStackSize (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 413)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 413)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 413)) ;
-    if (enumerator_19408.hasNextObject ()) {
-      var_json_18744.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 414)) ;
+  GALGAS_bool joker_18653 ; // Joker input parameter
+  var_s_37__18496.method_writeToFileWhenDifferentContents (var_sourceDirectory_7736.add_operation (GALGAS_string ("/src.cpp"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 401)), joker_18653, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 401)) ;
+  GALGAS_string var_json_18746 = GALGAS_string ("{\n") ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  \"system-stack-size\" : ").add_operation (constinArgument_inIntermediateCodeStruct.getter_mTargetParameters (HERE).getter_mSystemStackSize (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 405)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 405)).add_operation (GALGAS_string (",\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 405)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 405)) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  \"stacked-register-size-on-user-stack\" : ").add_operation (constinArgument_inIntermediateCodeStruct.getter_mTargetParameters (HERE).getter_mStackedUserRegisterOnInterruptByteSize (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 406)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 406)).add_operation (GALGAS_string (",\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 407)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 406)) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  \"service-stack-needs\" : ").add_operation (constinArgument_inIntermediateCodeStruct.getter_mTargetParameters (HERE).getter_mServicePushedRegisterByteSize (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 408)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 408)).add_operation (GALGAS_string (",\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 408)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 408)) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  \"section-stack-needs\" : ").add_operation (constinArgument_inIntermediateCodeStruct.getter_mTargetParameters (HERE).getter_mSectionPushedRegisterByteSize (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 409)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 409)).add_operation (GALGAS_string (",\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 409)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 409)) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  \"tasks\" : {"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 411)) ;
+  cEnumerator_taskMapIR enumerator_19410 (constinArgument_inIntermediateCodeStruct.getter_mTaskMapIR (HERE), kENUMERATION_UP) ;
+  while (enumerator_19410.hasCurrentObject ()) {
+    var_json_18746.plusAssign_operation(GALGAS_string ("\n"
+      "    \"").add_operation (enumerator_19410.current (HERE).getter_lkey (HERE).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("code-generation.galgas", 413)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 413)).add_operation (GALGAS_string ("\" : "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 413)).add_operation (enumerator_19410.current (HERE).getter_mStackSize (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 413)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 413)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 413)) ;
+    if (enumerator_19410.hasNextObject ()) {
+      var_json_18746.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 414)) ;
     }
-    enumerator_19408.gotoNextObject () ;
+    enumerator_19410.gotoNextObject () ;
   }
-  var_json_18744.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 416)) ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("  },\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 417)) ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("  \"services\" : ["), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 419)) ;
-  cEnumerator_primitiveAndServiceIRlist enumerator_19670 (var_primitiveAndServiceList_12510, kENUMERATION_UP) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 416)) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  },\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 417)) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  \"services\" : ["), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 419)) ;
+  cEnumerator_primitiveAndServiceIRlist enumerator_19672 (var_primitiveAndServiceList_12510, kENUMERATION_UP) ;
   const bool bool_8 = true ;
-  if (enumerator_19670.hasCurrentObject () && bool_8) {
-    while (enumerator_19670.hasCurrentObject () && bool_8) {
-      var_json_18744.plusAssign_operation(GALGAS_string ("\n"
-        "    \"").add_operation (enumerator_19670.current_mImplementationName (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 421)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 421)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 421)) ;
-      enumerator_19670.gotoNextObject () ;
-      if (enumerator_19670.hasCurrentObject () && bool_8) {
-        var_json_18744.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 422)) ;
+  if (enumerator_19672.hasCurrentObject () && bool_8) {
+    while (enumerator_19672.hasCurrentObject () && bool_8) {
+      var_json_18746.plusAssign_operation(GALGAS_string ("\n"
+        "    \"").add_operation (enumerator_19672.current_mImplementationName (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 421)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 421)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 421)) ;
+      enumerator_19672.gotoNextObject () ;
+      if (enumerator_19672.hasCurrentObject () && bool_8) {
+        var_json_18746.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 422)) ;
       }
     }
-    var_json_18744.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 423)) ;
+    var_json_18746.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 423)) ;
   }
-  var_json_18744.plusAssign_operation(GALGAS_string ("  ],\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 425)) ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("  \"sections\" : ["), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 427)) ;
-  cEnumerator_sectionIRlist enumerator_19895 (var_sectionIRlist_13065, kENUMERATION_UP) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  ],\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 425)) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  \"sections\" : ["), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 427)) ;
+  cEnumerator_sectionIRlist enumerator_19897 (var_sectionIRlist_13065, kENUMERATION_UP) ;
   const bool bool_9 = true ;
-  if (enumerator_19895.hasCurrentObject () && bool_9) {
-    while (enumerator_19895.hasCurrentObject () && bool_9) {
-      var_json_18744.plusAssign_operation(GALGAS_string ("\n"
-        "    \"").add_operation (enumerator_19895.current_mSectionImplementationName (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 429)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 429)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 429)) ;
-      enumerator_19895.gotoNextObject () ;
-      if (enumerator_19895.hasCurrentObject () && bool_9) {
-        var_json_18744.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 430)) ;
+  if (enumerator_19897.hasCurrentObject () && bool_9) {
+    while (enumerator_19897.hasCurrentObject () && bool_9) {
+      var_json_18746.plusAssign_operation(GALGAS_string ("\n"
+        "    \"").add_operation (enumerator_19897.current_mSectionImplementationName (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 429)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 429)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 429)) ;
+      enumerator_19897.gotoNextObject () ;
+      if (enumerator_19897.hasCurrentObject () && bool_9) {
+        var_json_18746.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 430)) ;
       }
     }
-    var_json_18744.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 431)) ;
+    var_json_18746.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 431)) ;
   }
-  var_json_18744.plusAssign_operation(GALGAS_string ("  ],\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 433)) ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("  \"isr\" : ["), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 435)) ;
-  GALGAS_bool var_first_20071 = GALGAS_bool (true) ;
-  cEnumerator_interruptMapIR enumerator_20153 (constinArgument_inIntermediateCodeStruct.getter_mInterruptMapIR (HERE), kENUMERATION_UP) ;
-  while (enumerator_20153.hasCurrentObject ()) {
-    const enumGalgasBool test_10 = var_first_20071.boolEnum () ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  ],\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 433)) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("  \"isr\" : ["), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 435)) ;
+  GALGAS_bool var_first_20073 = GALGAS_bool (true) ;
+  cEnumerator_interruptMapIR enumerator_20155 (constinArgument_inIntermediateCodeStruct.getter_mInterruptMapIR (HERE), kENUMERATION_UP) ;
+  while (enumerator_20155.hasCurrentObject ()) {
+    const enumGalgasBool test_10 = var_first_20073.boolEnum () ;
     if (kBoolTrue == test_10) {
-      var_first_20071 = GALGAS_bool (false) ;
+      var_first_20073 = GALGAS_bool (false) ;
     }else if (kBoolFalse == test_10) {
-      var_json_18744.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 441)) ;
+      var_json_18746.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 441)) ;
     }
     GALGAS_string temp_11 ;
-    const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, enumerator_20153.current_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("code-generation.galgas", 443)))).boolEnum () ;
+    const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, enumerator_20155.current_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("code-generation.galgas", 443)))).boolEnum () ;
     if (kBoolTrue == test_12) {
-      temp_11 = function_llvmNameForServiceInterrupt (enumerator_20153.current_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 444)).getter_string (HERE) ;
+      temp_11 = function_llvmNameForServiceInterrupt (enumerator_20155.current_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 444)).getter_string (HERE) ;
     }else if (kBoolFalse == test_12) {
-      temp_11 = function_llvmNameForSectionInterrupt (enumerator_20153.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 446)) ;
+      temp_11 = function_llvmNameForSectionInterrupt (enumerator_20155.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 446)) ;
     }
-    GALGAS_string var_interruptImplementationName_20265 = temp_11 ;
-    var_json_18744.plusAssign_operation(GALGAS_string ("\n"
-      "    \"").add_operation (var_interruptImplementationName_20265, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 448)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 448)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 448)) ;
-    enumerator_20153.gotoNextObject () ;
+    GALGAS_string var_interruptImplementationName_20267 = temp_11 ;
+    var_json_18746.plusAssign_operation(GALGAS_string ("\n"
+      "    \"").add_operation (var_interruptImplementationName_20267, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 448)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 448)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 448)) ;
+    enumerator_20155.gotoNextObject () ;
   }
   const enumGalgasBool test_13 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).operator_not (SOURCE_FILE ("code-generation.galgas", 450)).boolEnum () ;
   if (kBoolTrue == test_13) {
-    cEnumerator_availableInterruptMap enumerator_20607 (constinArgument_inAvailableInterruptMap, kENUMERATION_UP) ;
-    while (enumerator_20607.hasCurrentObject ()) {
-      const enumGalgasBool test_14 = constinArgument_inIntermediateCodeStruct.getter_mInterruptMapIR (HERE).getter_hasKey (enumerator_20607.current_lkey (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("code-generation.galgas", 452)).operator_not (SOURCE_FILE ("code-generation.galgas", 452)).boolEnum () ;
+    cEnumerator_availableInterruptMap enumerator_20609 (constinArgument_inAvailableInterruptMap, kENUMERATION_UP) ;
+    while (enumerator_20609.hasCurrentObject ()) {
+      const enumGalgasBool test_14 = constinArgument_inIntermediateCodeStruct.getter_mInterruptMapIR (HERE).getter_hasKey (enumerator_20609.current_lkey (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("code-generation.galgas", 452)).operator_not (SOURCE_FILE ("code-generation.galgas", 452)).boolEnum () ;
       if (kBoolTrue == test_14) {
-        switch (enumerator_20607.current_mInterruptionPanicCode (HERE).enumValue ()) {
+        switch (enumerator_20609.current_mInterruptionPanicCode (HERE).enumValue ()) {
         case GALGAS_interruptionPanicCode::kNotBuilt:
           break ;
         case GALGAS_interruptionPanicCode::kEnum_noCode:
@@ -7389,26 +7389,26 @@ void routine_generateCodeFiles (const GALGAS_string constinArgument_inCurrentDir
           break ;
         case GALGAS_interruptionPanicCode::kEnum_code:
           {
-            const enumGalgasBool test_15 = var_first_20071.boolEnum () ;
+            const enumGalgasBool test_15 = var_first_20073.boolEnum () ;
             if (kBoolTrue == test_15) {
-              var_first_20071 = GALGAS_bool (false) ;
+              var_first_20073 = GALGAS_bool (false) ;
             }else if (kBoolFalse == test_15) {
-              var_json_18744.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 459)) ;
+              var_json_18746.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 459)) ;
             }
-            var_json_18744.plusAssign_operation(GALGAS_string ("\n"
-              "    \"").add_operation (function_llvmNameForSectionInterrupt (enumerator_20607.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 461)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 461)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 461)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 461)) ;
+            var_json_18746.plusAssign_operation(GALGAS_string ("\n"
+              "    \"").add_operation (function_llvmNameForSectionInterrupt (enumerator_20609.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 461)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 461)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 461)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 461)) ;
           }
           break ;
         }
       }
-      enumerator_20607.gotoNextObject () ;
+      enumerator_20609.gotoNextObject () ;
     }
   }
-  var_json_18744.plusAssign_operation(GALGAS_string ("\n"
+  var_json_18746.plusAssign_operation(GALGAS_string ("\n"
     "  ]\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 466)) ;
-  var_json_18744.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 468)) ;
-  GALGAS_bool joker_21120 ; // Joker input parameter
-  var_json_18744.method_writeToFileWhenDifferentContents (var_sourceDirectory_7736.add_operation (GALGAS_string ("/provided-stacks.json"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 469)), joker_21120, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 469)) ;
+  var_json_18746.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 468)) ;
+  GALGAS_bool joker_21122 ; // Joker input parameter
+  var_json_18746.method_writeToFileWhenDifferentContents (var_sourceDirectory_7736.add_operation (GALGAS_string ("/provided-stacks.json"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 469)), joker_21122, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 469)) ;
   const enumGalgasBool test_16 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 471)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_16) {
     GALGAS_string temp_17 ;
@@ -7418,10 +7418,10 @@ void routine_generateCodeFiles (const GALGAS_string constinArgument_inCurrentDir
     }else if (kBoolFalse == test_18) {
       temp_17 = GALGAS_string ("build") ;
     }
-    GALGAS_string var_script_21238 = temp_17 ;
-    GALGAS_string var_fullScript_21355 = GALGAS_string ("python ").add_operation (constinArgument_inProductDirectory, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 473)).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 473)).add_operation (var_script_21238, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 473)).add_operation (GALGAS_string (".py"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 473)) ;
-    GALGAS_sint var_result_21428 = var_fullScript_21355.getter_system (SOURCE_FILE ("code-generation.galgas", 474)) ;
-    const enumGalgasBool test_19 = GALGAS_bool (kIsNotEqual, var_result_21428.objectCompare (GALGAS_sint ((int32_t) 0L))).boolEnum () ;
+    GALGAS_string var_script_21240 = temp_17 ;
+    GALGAS_string var_fullScript_21357 = GALGAS_string ("python ").add_operation (constinArgument_inProductDirectory, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 473)).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 473)).add_operation (var_script_21240, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 473)).add_operation (GALGAS_string (".py"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 473)) ;
+    GALGAS_sint var_result_21430 = var_fullScript_21357.getter_system (SOURCE_FILE ("code-generation.galgas", 474)) ;
+    const enumGalgasBool test_19 = GALGAS_bool (kIsNotEqual, var_result_21430.objectCompare (GALGAS_sint ((int32_t) 0L))).boolEnum () ;
     if (kBoolTrue == test_19) {
       TC_Array <C_FixItDescription> fixItArray20 ;
       inCompiler->emitSemanticError (constinArgument_inEndOfSourceFileLocation, GALGAS_string ("error during LLVM compilation or flashing"), fixItArray20  COMMA_SOURCE_FILE ("code-generation.galgas", 476)) ;
@@ -7440,19 +7440,19 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
                                GALGAS_string & ioArgument_ioLLVMcode,
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_orderedTypeList var_orderedTypeList_22033 = GALGAS_orderedTypeList::constructor_emptySortedList (SOURCE_FILE ("code-generation.galgas", 494)) ;
-  cEnumerator_unifiedTypeMap enumerator_22072 (constinArgument_inTypeMap, kENUMERATION_UP) ;
-  while (enumerator_22072.hasCurrentObject ()) {
-    var_orderedTypeList_22033.addAssign_operation (enumerator_22072.current_type (HERE), enumerator_22072.current_index (HERE)  COMMA_SOURCE_FILE ("code-generation.galgas", 496)) ;
-    enumerator_22072.gotoNextObject () ;
+  GALGAS_orderedTypeList var_orderedTypeList_22035 = GALGAS_orderedTypeList::constructor_emptySortedList (SOURCE_FILE ("code-generation.galgas", 494)) ;
+  cEnumerator_unifiedTypeMap enumerator_22074 (constinArgument_inTypeMap, kENUMERATION_UP) ;
+  while (enumerator_22074.hasCurrentObject ()) {
+    var_orderedTypeList_22035.addAssign_operation (enumerator_22074.current_type (HERE), enumerator_22074.current_index (HERE)  COMMA_SOURCE_FILE ("code-generation.galgas", 496)) ;
+    enumerator_22074.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("User Defined Types"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 499)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 499)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%ptrtype = type i8* ; Generic pointer type for dynamic objects\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 500)) ;
-  cEnumerator_orderedTypeList enumerator_22373 (var_orderedTypeList_22033, kENUMERATION_UP) ;
-  while (enumerator_22373.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_22373.current_mType (HERE).getter_plmOriginalTypeName (HERE).objectCompare (enumerator_22373.current_mType (HERE).getter_plmAliasedTypeName (HERE))).boolEnum () ;
+  cEnumerator_orderedTypeList enumerator_22375 (var_orderedTypeList_22035, kENUMERATION_UP) ;
+  while (enumerator_22375.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_22375.current_mType (HERE).getter_plmOriginalTypeName (HERE).objectCompare (enumerator_22375.current_mType (HERE).getter_plmAliasedTypeName (HERE))).boolEnum () ;
     if (kBoolTrue == test_0) {
-      switch (enumerator_22373.current_mType (HERE).getter_kind (HERE).enumValue ()) {
+      switch (enumerator_22375.current_mType (HERE).getter_kind (HERE).enumValue ()) {
       case GALGAS_typeKind::kNotBuilt:
         break ;
       case GALGAS_typeKind::kEnum_void:
@@ -7473,32 +7473,32 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
         break ;
       case GALGAS_typeKind::kEnum_structure:
         {
-          const cEnumAssociatedValues_typeKind_structure * extractPtr_22812 = (const cEnumAssociatedValues_typeKind_structure *) (enumerator_22373.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
-          const GALGAS_propertyList extractedValue_propertyList = extractPtr_22812->mAssociatedValue0 ;
-          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22373.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 509)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 509)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 509)) ;
-          cEnumerator_propertyList enumerator_22687 (extractedValue_propertyList, kENUMERATION_UP) ;
-          while (enumerator_22687.hasCurrentObject ()) {
-            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22687.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 511)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 511)) ;
-            if (enumerator_22687.hasNextObject ()) {
+          const cEnumAssociatedValues_typeKind_structure * extractPtr_22814 = (const cEnumAssociatedValues_typeKind_structure *) (enumerator_22375.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
+          const GALGAS_propertyList extractedValue_propertyList = extractPtr_22814->mAssociatedValue0 ;
+          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22375.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 509)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 509)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 509)) ;
+          cEnumerator_propertyList enumerator_22689 (extractedValue_propertyList, kENUMERATION_UP) ;
+          while (enumerator_22689.hasCurrentObject ()) {
+            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22689.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 511)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 511)) ;
+            if (enumerator_22689.hasNextObject ()) {
               ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 512)) ;
             }
-            enumerator_22687.gotoNextObject () ;
+            enumerator_22689.gotoNextObject () ;
           }
           ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 514)) ;
         }
         break ;
       case GALGAS_typeKind::kEnum_syncTool:
         {
-          const cEnumAssociatedValues_typeKind_syncTool * extractPtr_23061 = (const cEnumAssociatedValues_typeKind_syncTool *) (enumerator_22373.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
-          const GALGAS_propertyList extractedValue_propertyList = extractPtr_23061->mAssociatedValue0 ;
-          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22373.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 516)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 516)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 516)) ;
-          cEnumerator_propertyList enumerator_22936 (extractedValue_propertyList, kENUMERATION_UP) ;
-          while (enumerator_22936.hasCurrentObject ()) {
-            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22936.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 518)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 518)) ;
-            if (enumerator_22936.hasNextObject ()) {
+          const cEnumAssociatedValues_typeKind_syncTool * extractPtr_23063 = (const cEnumAssociatedValues_typeKind_syncTool *) (enumerator_22375.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
+          const GALGAS_propertyList extractedValue_propertyList = extractPtr_23063->mAssociatedValue0 ;
+          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22375.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 516)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 516)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 516)) ;
+          cEnumerator_propertyList enumerator_22938 (extractedValue_propertyList, kENUMERATION_UP) ;
+          while (enumerator_22938.hasCurrentObject ()) {
+            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22938.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 518)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 518)) ;
+            if (enumerator_22938.hasNextObject ()) {
               ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 519)) ;
             }
-            enumerator_22936.gotoNextObject () ;
+            enumerator_22938.gotoNextObject () ;
           }
           ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 521)) ;
         }
@@ -7517,10 +7517,10 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
         break ;
       case GALGAS_typeKind::kEnum_arrayType:
         {
-          const cEnumAssociatedValues_typeKind_arrayType * extractPtr_23301 = (const cEnumAssociatedValues_typeKind_arrayType *) (enumerator_22373.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
-          const GALGAS_PLMType extractedValue_elementType = extractPtr_23301->mAssociatedValue0 ;
-          const GALGAS_bigint extractedValue_arraySize = extractPtr_23301->mAssociatedValue1 ;
-          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22373.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("code-generation.galgas", 526)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 526)) ;
+          const cEnumAssociatedValues_typeKind_arrayType * extractPtr_23303 = (const cEnumAssociatedValues_typeKind_arrayType *) (enumerator_22375.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
+          const GALGAS_PLMType extractedValue_elementType = extractPtr_23303->mAssociatedValue0 ;
+          const GALGAS_bigint extractedValue_arraySize = extractPtr_23303->mAssociatedValue1 ;
+          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22375.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("code-generation.galgas", 526)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 526)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 526)) ;
         }
         break ;
       case GALGAS_typeKind::kEnum_dynamicArrayType:
@@ -7533,13 +7533,13 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
         break ;
       case GALGAS_typeKind::kEnum_pointer:
         {
-          const cEnumAssociatedValues_typeKind_pointer * extractPtr_23400 = (const cEnumAssociatedValues_typeKind_pointer *) (enumerator_22373.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
-          const GALGAS_PLMType extractedValue_pointee = extractPtr_23400->mAssociatedValue0 ;
+          const cEnumAssociatedValues_typeKind_pointer * extractPtr_23402 = (const cEnumAssociatedValues_typeKind_pointer *) (enumerator_22375.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
+          const GALGAS_PLMType extractedValue_pointee = extractPtr_23402->mAssociatedValue0 ;
         }
         break ;
       }
     }
-    enumerator_22373.gotoNextObject () ;
+    enumerator_22375.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 533)) ;
 }
@@ -7551,43 +7551,75 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- File '/c-real-time-kernel-code.c'
+//--- File '/c-real-time-kernel-code.cpp'
 
 const char * gWrapperFileContent_0_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   TASK LIST FUNCTIONS                                                                                               *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "bool userResult (void) asm (\"xtr.user.result\") ;\n"
+  "static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTaskControlBlockPtr) {\n"
+  "  const unsigned runningTaskIndex = inTaskControlBlockPtr->mTaskIndex ;\n"
+  "  const unsigned mask = 1 << runningTaskIndex ;\n"
+  "  ioTaskList |= mask ;\n"
+  "}\n"
   "\n"
-  "bool userResult (void) {\n"
-  "  return gRunningTaskControlBlock->mUserResult ;\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline TaskControlBlock * list_removeTask (TaskList & ioTaskList) { // Return nullptr if list is empty\n"
+  "  TaskControlBlock * result = nullptr ;\n"
+  "  if (ioTaskList != 0) {\n"
+  "    const unsigned taskIndex = __builtin_ctz (ioTaskList) ;\n"
+  "    const unsigned mask = 1 << taskIndex ;\n"
+  "    ioTaskList &= ~ mask ;\n"
+  "    result = & gTaskDescriptorArray [taskIndex] ;\n"
+  "  }\n"
+  "  return result ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline bool list_containsTask (const TaskList & inTaskList, TaskControlBlock * inTaskControlBlockPtr) {\n"
+  "  const unsigned runningTaskIndex = inTaskControlBlockPtr->mTaskIndex ;\n"
+  "  const unsigned mask = 1 << runningTaskIndex ;\n"
+  "  return (inTaskList & mask) != 0 ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   S C H E D U L E R                                                                                                 *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static TaskList gReadyTaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_makeNoTaskRunning (void) {\n"
+  "  gRunningTaskControlBlockPtr = nullptr ; // No running task\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void kernel_makeTaskReady (TaskControlBlock * inTaskControlBlockPtr) {\n"
-  "  gReadyTaskList |= 1 << inTaskControlBlockPtr->mTaskIndex ;\n"
+  "  list_enterTask (gReadyTaskList, inTaskControlBlockPtr) ;\n"
   "  inTaskControlBlockPtr->mUserResult = 1 ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static void kernel_makeNoTaskRunning (void) {\n"
-  "  gRunningTaskControlBlock = (TaskControlBlock *) 0 ; // No running task\n"
+  "void kernel_selectTaskToRun (void) asm (\"kernel_selectTaskToRun\") ;\n"
+  "\n"
+  "void kernel_selectTaskToRun (void) {\n"
+  "  if (gRunningTaskControlBlockPtr != nullptr) {\n"
+  "    list_enterTask (gReadyTaskList, gRunningTaskControlBlockPtr) ;\n"
+  "  }\n"
+  "  gRunningTaskControlBlockPtr = list_removeTask (gReadyTaskList) ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "void kernel_selectTaskToRun (void) ;\n"
+  "bool userResult (void) asm (\"xtr.user.result\") ;\n"
   "\n"
-  "void kernel_selectTaskToRun (void) {\n"
-  "  if (gRunningTaskControlBlock != ((TaskControlBlock *) 0)) {\n"
-  "    gReadyTaskList |= 1 << gRunningTaskControlBlock->mTaskIndex ;\n"
-  "    gRunningTaskControlBlock = (TaskControlBlock *) 0 ;\n"
-  "  }\n"
-  "  if (gReadyTaskList != 0) {\n"
-  "    const unsigned runningTaskIndex = __builtin_ctz (gReadyTaskList) ;\n"
-  "    gReadyTaskList &= ~ (1 << runningTaskIndex) ;\n"
-  "    gRunningTaskControlBlock = & gTaskDescriptorArray [runningTaskIndex] ;\n"
-  "  }\n"
+  "bool userResult (void) {\n"
+  "  return gRunningTaskControlBlockPtr->mUserResult ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -7598,7 +7630,7 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "                         const char * inTaskName,\n"
   "                         unsigned * inStackBufferAddress,\n"
   "                         unsigned inStackBufferSize,\n"
-  "                         RoutineTaskType inTaskRoutine) ;\n"
+  "                         RoutineTaskType inTaskRoutine) asm (\"kernel_create_task\") ;\n"
   "\n"
   "void kernel_create_task (const unsigned inTaskIndex,\n"
   "                         const char * inTaskName,\n"
@@ -7633,61 +7665,24 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//   L I S T    M A N A G E M E N T                                                                                    *\n"
+  "//   D E A D L I N E    L I S T    M A N A G E M E N T                                                                 *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static TaskList gDeadlineWaitingTaskList ;\n"
+  "static TaskListByDate gDeadlineWaitingTaskList ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//  B L O C K I N G    R U N N I N G    T A S K                                                                        *\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "void blockInList (TaskList * ioWaitingList) asm (\"!FUNC!blockInList\") ;\n"
-  "\n"
-  "void blockInList (TaskList * ioWaitingList) {\n"
-  "  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
-  "//--- Insert in tool list\n"
-  "  *ioWaitingList |= 1 << currentTaskIndex ;\n"
-  "//--- Block task\n"
-  "  kernel_makeNoTaskRunning () ;\n"
+  "static inline void deadlinelist_enterRunningTask (const unsigned inDeadline) {\n"
+  "  gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;\n"
+  "  const unsigned runningTaskIndex = gRunningTaskControlBlockPtr->mTaskIndex ;\n"
+  "  const unsigned mask = 1 << runningTaskIndex ;\n"
+  "  gDeadlineWaitingTaskList |= mask ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "void blockOnDeadline (const unsigned inDeadline) asm (\"!FUNC!blockOnDeadline\") ;\n"
-  "\n"
-  "void blockOnDeadline (const unsigned inDeadline) {\n"
-  "  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
-  "//--- Insert in deadline list\n"
-  "  gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;\n"
-  "  gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
-  "  kernel_makeNoTaskRunning () ;\n"
-  "}\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//  M A K E    T A S K    R E A D Y                                                                                    *\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "void makeTaskReadyFromBlockingList (TaskList * ioWaitingList, bool * outFound) asm (\"!FUNC!makeTaskReady\") ;\n"
-  "\n"
-  "void makeTaskReadyFromBlockingList (TaskList * ioWaitingList, bool * outFound) {\n"
-  "  *outFound = (*ioWaitingList) != 0 ;\n"
-  "  if (*outFound) {\n"
-  "  //--- Get index of waiting task\n"
-  "    const unsigned taskIndex = __builtin_ctz (*ioWaitingList) ;\n"
-  "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
-  "  //--- Remove task from waiting list\n"
-  "    *(ioWaitingList) &= ~ (1 << taskIndex) ;\n"
-  "  //--- Make task ready\n"
-  "    kernel_makeTaskReady (taskControlBlockPtr) ;\n"
-  "  }\n"
-  "}\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) asm (\"!FUNC!makeTasksReadyFromCurrentDate\") ;\n"
-  "\n"
-  "void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {\n"
+  "static inline void deadlinelist_makeTasksReadyFromCurrentDate (const unsigned inCurrentDate,\n"
+  "                                        void (* makeTaskReadyFunction) (TaskControlBlock * inTaskDescriptor)) {\n"
   "  unsigned w = gDeadlineWaitingTaskList ;\n"
   "  while (w > 0) {\n"
   "    const unsigned taskIndex = __builtin_ctz (w) ;\n"
@@ -7698,9 +7693,55 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "    //--- Remove task from deadline list\n"
   "      gDeadlineWaitingTaskList &= mask ;\n"
   "   //--- Make task ready\n"
-  "      kernel_makeTaskReady (taskControlBlockPtr) ;\n"
+  "      makeTaskReadyFunction (taskControlBlockPtr) ;\n"
   "    }\n"
   "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  B L O C K I N G    R U N N I N G    T A S K                                                                        *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void blockInList (TaskList & ioWaitingList) asm (\"!FUNC!blockInList\") ;\n"
+  "\n"
+  "void blockInList (TaskList & ioWaitingList) {\n"
+  "//--- Insert in tool list\n"
+  "  list_enterTask (ioWaitingList, gRunningTaskControlBlockPtr) ;\n"
+  "//--- Block task\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void blockOnDeadline (const unsigned inDeadline) asm (\"!FUNC!blockOnDeadline\") ;\n"
+  "\n"
+  "void blockOnDeadline (const unsigned inDeadline) {\n"
+  "//--- Insert in deadline list\n"
+  "  deadlinelist_enterRunningTask (inDeadline) ;\n"
+  "//--- Block task\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  M A K E    T A S K    R E A D Y                                                                                    *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void makeTaskReadyFromBlockingList (TaskList & ioWaitingList, bool & outFound) asm (\"!FUNC!makeTaskReady\") ;\n"
+  "\n"
+  "void makeTaskReadyFromBlockingList (TaskList & ioWaitingList, bool & outFound) {\n"
+  "  TaskControlBlock * taskControlBlockPtr = list_removeTask (ioWaitingList) ;\n"
+  "  outFound = taskControlBlockPtr != nullptr ;\n"
+  "  if (outFound) { //--- Make task ready\n"
+  "    kernel_makeTaskReady (taskControlBlockPtr) ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) asm (\"!FUNC!makeTasksReadyFromCurrentDate\") ;\n"
+  "\n"
+  "void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {\n"
+  "  deadlinelist_makeTasksReadyFromCurrentDate (inCurrentDate, kernel_makeTaskReady) ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -7710,7 +7751,7 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "unsigned freeStackSize (void) asm (\"!FUNC!freeStackSize\") ;\n"
   "\n"
   "unsigned freeStackSize (void) {\n"
-  "  return gRunningTaskControlBlock->mStackFreeSize ;\n"
+  "  return gRunningTaskControlBlockPtr->mStackFreeSize ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -7723,10 +7764,10 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "//--- Get stack pointer current value\n"
   "  unsigned stackPointer ; __asm__ (\"mov %0, sp\" : \"=r\" (stackPointer)) ;\n"
   "//--- Compute current free stack size\n"
-  "  const unsigned currentFreeStack = stackPointer - (unsigned) gRunningTaskControlBlock->mStackBufferAddress ;\n"
+  "  const unsigned currentFreeStack = stackPointer - (unsigned) gRunningTaskControlBlockPtr->mStackBufferAddress ;\n"
   "//--- If current free stack size lower than registered free stack size, assign new value\n"
-  "  if (currentFreeStack < gRunningTaskControlBlock->mStackFreeSize) {\n"
-  "    gRunningTaskControlBlock->mStackFreeSize = currentFreeStack ;\n"
+  "  if (currentFreeStack < gRunningTaskControlBlockPtr->mStackFreeSize) {\n"
+  "    gRunningTaskControlBlockPtr->mStackFreeSize = currentFreeStack ;\n"
   "  }\n"
   "}\n"
   "\n"
@@ -7805,8 +7846,8 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "\n"
   "void noteGuardState (const bool inAccepted) {\n"
   "  if (inAccepted) {\n"
-  "    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
-  "    removeTaskFromGuards (gRunningTaskControlBlock) ;\n"
+  "    gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "    removeTaskFromGuards (gRunningTaskControlBlockPtr) ;\n"
   "  }\n"
   "}\n"
   "\n"
@@ -7815,12 +7856,12 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "void kernel_handleGuardedCommand (GuardList * ioGuardListPtr) asm (\"!FUNC!handleGuardedCommand\") ;\n"
   "\n"
   "void kernel_handleGuardedCommand (GuardList * ioGuardListPtr) {\n"
-  "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
+  "  if (gRunningTaskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "    const unsigned runningTaskIndex = gRunningTaskControlBlockPtr->mTaskIndex ;\n"
   "    ioGuardListPtr->mGuardValue |= 1 << runningTaskIndex ;\n"
-  "    const unsigned guardCount = gRunningTaskControlBlock->mGuardCount ;\n"
-  "    gRunningTaskControlBlock->mGuardListArray [guardCount] = ioGuardListPtr ;\n"
-  "    gRunningTaskControlBlock->mGuardCount = guardCount + 1 ;\n"
+  "    const unsigned guardCount = gRunningTaskControlBlockPtr->mGuardCount ;\n"
+  "    gRunningTaskControlBlockPtr->mGuardListArray [guardCount] = ioGuardListPtr ;\n"
+  "    gRunningTaskControlBlockPtr->mGuardCount = guardCount + 1 ;\n"
   "  }\n"
   "}\n"
   "\n"
@@ -7831,13 +7872,13 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "void kernel_waitForGuardChange (void) asm (\"!SERVICEIMPLEMENTATION!guard.wait.for.change\") ;\n"
   "\n"
   "void kernel_waitForGuardChange (void) {\n"
-  "  gRunningTaskControlBlock->mUserResult = gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE ;\n"
-  "  if (gRunningTaskControlBlock->mUserResult) { // GUARD_DID_CHANGE\n"
-  "    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "  gRunningTaskControlBlockPtr->mUserResult = gRunningTaskControlBlockPtr->mGuardState == GUARD_DID_CHANGE ;\n"
+  "  if (gRunningTaskControlBlockPtr->mUserResult) { // GUARD_DID_CHANGE\n"
+  "    gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "  }else{ // GUARD_EVALUATING_OR_OUTSIDE\n"
-  "    gRunningTaskControlBlock->mUserResult = gRunningTaskControlBlock->mHaveDeadlineGuard || (gRunningTaskControlBlock->mGuardCount > 0) ;\n"
-  "    if (gRunningTaskControlBlock->mUserResult) {\n"
-  "      gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
+  "    gRunningTaskControlBlockPtr->mUserResult = gRunningTaskControlBlockPtr->mHaveDeadlineGuard || (gRunningTaskControlBlockPtr->mGuardCount > 0) ;\n"
+  "    if (gRunningTaskControlBlockPtr->mUserResult) {\n"
+  "      gRunningTaskControlBlockPtr->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
   "      kernel_makeNoTaskRunning () ;\n"
   "    }\n"
   "  }\n"
@@ -7869,14 +7910,13 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "void handleGuardedWaitUntil (const unsigned inDeadline) asm (\"!FUNC!guard.handle.wait.until\") ;\n"
   "\n"
   "void handleGuardedWaitUntil (const unsigned inDeadline) {\n"
-  "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
-  "    const unsigned mask = 1 << runningTaskIndex ;\n"
-  "    if (((gDeadlineWaitingInGuardTaskList & mask) == 0) || (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {\n"
-  "      gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
+  "  if (gRunningTaskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "    if ((!list_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)) || (gRunningTaskControlBlockPtr->mTaskDeadline > inDeadlin"
+  "e)) {\n"
+  "      gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;\n"
   "    }\n"
-  "    gDeadlineWaitingInGuardTaskList |= mask ;\n"
-  "    gRunningTaskControlBlock->mHaveDeadlineGuard = true ;\n"
+  "    list_enterTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;\n"
+  "    gRunningTaskControlBlockPtr->mHaveDeadlineGuard = true ;\n"
   "  }\n"
   "}\n"
   "\n"
@@ -7908,14 +7948,14 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_0_targetTemplates (
-  "c-real-time-kernel-code.c",
-  "c",
+  "c-real-time-kernel-code.cpp",
+  "cpp",
   true, // Text file
-  17307, // Text length
+  19537, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
-//--- File '/c-real-time-kernel-types.c'
+//--- File '/c-real-time-kernel-types.cpp'
 
 const char * gWrapperFileContent_1_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -7925,17 +7965,11 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "typedef unsigned TaskList ;\n"
+  "typedef unsigned TaskListByDate ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "typedef struct { unsigned mGuardValue ; } GuardList ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "typedef unsigned char bool ;\n"
-  "\n"
-  "#define true  ((bool) 1)\n"
-  "#define false ((bool) 0)\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -7973,22 +8007,21 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//   S C H E D U L E R                                                                                                 *\n"
+  "//   RUNNING TASK DESCRIPTOR POINTER                                                                                   *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "TaskControlBlock * gRunningTaskControlBlock ; // Shared with assembly code (arm_context.s)\n"
-  "static TaskList gReadyTaskList ;\n"
+  "TaskControlBlock * gRunningTaskControlBlockPtr ; // Shared with assembly code (arm_context.s)\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_1_targetTemplates (
-  "c-real-time-kernel-types.c",
-  "c",
+  "c-real-time-kernel-types.cpp",
+  "cpp",
   true, // Text file
-  2638, // Text length
+  2439, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
-//--- File '/class.c'
+//--- File '/class.cpp'
 
 const char * gWrapperFileContent_2_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//\n"
@@ -8023,14 +8056,14 @@ const char * gWrapperFileContent_2_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
 const cRegularFileWrapper gWrapperFile_2_targetTemplates (
-  "class.c",
-  "c",
+  "class.cpp",
+  "cpp",
   true, // Text file
   1230, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
-//--- File '/dynamic-buffer.c'
+//--- File '/dynamic-buffer.cpp'
 
 const char * gWrapperFileContent_3_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   GENERIC DYNAMIC BUFFER FUNCTIONS\n"
@@ -8125,14 +8158,14 @@ const char * gWrapperFileContent_3_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
 const cRegularFileWrapper gWrapperFile_3_targetTemplates (
-  "dynamic-buffer.c",
-  "c",
+  "dynamic-buffer.cpp",
+  "cpp",
   true, // Text file
   3527, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
-//--- File '/heap.c'
+//--- File '/heap.cpp'
 
 const char * gWrapperFileContent_4_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//\n"
@@ -8364,8 +8397,8 @@ const char * gWrapperFileContent_4_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_4_targetTemplates (
-  "heap.c",
-  "c",
+  "heap.cpp",
+  "cpp",
   true, // Text file
   9579, // Text length
   gWrapperFileContent_4_targetTemplates
@@ -8535,7 +8568,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   gWrapperFileContent_8_targetTemplates
 ) ;
 
-//--- File '/memory-utilities.c'
+//--- File '/memory-utilities.cpp'
 
 const char * gWrapperFileContent_9_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//   COPY BYTE ARRAY\n"
@@ -8603,8 +8636,8 @@ const char * gWrapperFileContent_9_targetTemplates = "//------------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_9_targetTemplates (
-  "memory-utilities.c",
-  "c",
+  "memory-utilities.cpp",
+  "cpp",
   true, // Text file
   2597, // Text length
   gWrapperFileContent_9_targetTemplates
@@ -10303,12 +10336,12 @@ const char * gWrapperFileContent_19_targetTemplates = "PYTHON_UTILITIES:\n"
   "UNDEFINED_INTERRUPT: \"undefined-interrupt.s\"\n"
   "\n"
   "C_FILES:\n"
-  "  \"c-arm7tdmi-vectors.c\"\n"
-  "  \"c-arm7tdmi-context-types.c\"\n"
-  "  \"../c-real-time-kernel-types.c\"\n"
-  "  \"c-arm7tdmi-context-code.c\"\n"
-  "  \"../c-real-time-kernel-code.c\"\n"
-  "  \"../memory-utilities.c\"\n"
+  "  \"c-arm7tdmi-vectors.cpp\"\n"
+  "  \"c-arm7tdmi-context-types.cpp\"\n"
+  "  \"../c-real-time-kernel-types.cpp\"\n"
+  "  \"c-arm7tdmi-context-code.cpp\"\n"
+  "  \"../c-real-time-kernel-code.cpp\"\n"
+  "  \"../memory-utilities.cpp\"\n"
   "\n"
   "S_FILES:\n"
   "  \"s-target.s\"\n"
@@ -10362,11 +10395,11 @@ const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  2357, // Text length
+  2369, // Text length
   gWrapperFileContent_19_targetTemplates
 ) ;
 
-//--- File 'LPC-L2294/c-arm7tdmi-context-code.c'
+//--- File 'LPC-L2294/c-arm7tdmi-context-code.cpp'
 
 const char * gWrapperFileContent_20_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -10387,14 +10420,14 @@ const char * gWrapperFileContent_20_targetTemplates = "//-----------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_20_targetTemplates (
-  "c-arm7tdmi-context-code.c",
-  "c",
+  "c-arm7tdmi-context-code.cpp",
+  "cpp",
   true, // Text file
   928, // Text length
   gWrapperFileContent_20_targetTemplates
 ) ;
 
-//--- File 'LPC-L2294/c-arm7tdmi-context-types.c'
+//--- File 'LPC-L2294/c-arm7tdmi-context-types.cpp'
 
 const char * gWrapperFileContent_21_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//                                                                                                                     *\n"
@@ -10454,14 +10487,14 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_21_targetTemplates (
-  "c-arm7tdmi-context-types.c",
-  "c",
+  "c-arm7tdmi-context-types.cpp",
+  "cpp",
   true, // Text file
   3306, // Text length
   gWrapperFileContent_21_targetTemplates
 ) ;
 
-//--- File 'LPC-L2294/c-arm7tdmi-vectors.c'
+//--- File 'LPC-L2294/c-arm7tdmi-vectors.cpp'
 
 const char * gWrapperFileContent_22_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -10504,8 +10537,8 @@ const char * gWrapperFileContent_22_targetTemplates = "//-----------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_22_targetTemplates (
-  "c-arm7tdmi-vectors.c",
-  "c",
+  "c-arm7tdmi-vectors.cpp",
+  "cpp",
   true, // Text file
   1492, // Text length
   gWrapperFileContent_22_targetTemplates
@@ -11474,6 +11507,8 @@ const char * gWrapperFileContent_29_targetTemplates = "#! /usr/bin/env python\n"
   "  result.append (\"-fomit-frame-pointer\")\n"
   "  result.append (\"-fshort-enums\")\n"
   "  result.append (\"-Wall\")\n"
+  "  result.append (\"-fno-rtti\")\n"
+  "  result.append (\"-fno-exceptions\")\n"
   "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -11557,7 +11592,7 @@ const char * gWrapperFileContent_29_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def CsourceList ():\n"
-  "  return [\"src.c\"]\n"
+  "  return [\"src.cpp\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -11643,7 +11678,7 @@ const cRegularFileWrapper gWrapperFile_29_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
-  15430, // Text length
+  15498, // Text length
   gWrapperFileContent_29_targetTemplates
 ) ;
 
@@ -11948,7 +11983,7 @@ const char * gWrapperFileContent_31_targetTemplates = "  .code 32\n"
   "  stmfd sp!, {r0}\n"
   "@--------------------------- Context save\n"
   "@--- R0 <- Address of current task context save\n"
-  "  ldr   r0, =gRunningTaskControlBlock\n"
+  "  ldr   r0, =gRunningTaskControlBlockPtr\n"
   "  ldr   r0, [r0]\n"
   "@--- If r0 is NULL, there is no context to save\n"
   "  movs  r0, r0\n"
@@ -11988,7 +12023,7 @@ const char * gWrapperFileContent_31_targetTemplates = "  .code 32\n"
   "  bl    kernel_selectTaskToRun\n"
   "@--------------------------- Context restore\n"
   "@--- r0 <- Address of current running task context save\n"
-  "  ldr   r0, =gRunningTaskControlBlock\n"
+  "  ldr   r0, =gRunningTaskControlBlockPtr\n"
   "  ldr   r0, [r0]\n"
   "  movs  r0, r0\n"
   "  beq   __no_context_to_restore\n"
@@ -12009,7 +12044,7 @@ const cRegularFileWrapper gWrapperFile_31_targetTemplates (
   "s-target.s",
   "s",
   true, // Text file
-  12016, // Text length
+  12022, // Text length
   gWrapperFileContent_31_targetTemplates
 ) ;
 
@@ -12115,7 +12150,7 @@ const char * gWrapperFileContent_36_targetTemplates = "@------------------------
   "@                                                                                                                      *\n"
   "@ ARM4 task context is stored is an 17 * 4 byte buffer.                                                                *\n"
   "@                                                                                                                      *\n"
-  "@ The gRunningTaskControlBlock shared variable points to the buffer associated to the current task.                    *\n"
+  "@ The gRunningTaskControlBlockPtr shared variable points to the buffer associated to the current task.                    *\n"
   "@                                                                                                                      *\n"
   "@                                                                      offset                                          *\n"
   "@                                              *---------------------*                                                 *\n"
@@ -12135,7 +12170,7 @@ const char * gWrapperFileContent_36_targetTemplates = "@------------------------
   "@                                              | R0                  | +12                                             *\n"
   "@                                              | LR_USR              | + 8                                             *\n"
   "@    *--------------------------------*        | SP_USR              | + 4                                             *\n"
-  "@    | gRunningTaskControlBlock       +------> | CPSR                | + 0                                             *\n"
+  "@    | gRunningTaskControlBlockPtr    +------> | CPSR                | + 0                                             *\n"
   "@    *--------------------------------*        *---------------------*                                                 *\n"
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
@@ -12180,8 +12215,8 @@ const char * gWrapperFileContent_36_targetTemplates = "@------------------------
   "@--------------------------- r8 <- address of sys_xxx routine to call\n"
   "  ldr   r8, =__swi_dispatcher_table\n"
   "  ldr   r8, [r8, r6, LSL #2]\n"
-  "@--------------------------- R6 <- address of gRunningTaskControlBlock variable\n"
-  "  ldr   r6, =gRunningTaskControlBlock\n"
+  "@--------------------------- R6 <- address of gRunningTaskControlBlockPtr variable\n"
+  "  ldr   r6, =gRunningTaskControlBlockPtr\n"
   "@--------------------------- Save context pointer of current running task in R7\n"
   "  ldr   r7, [r6]\n"
   "@--------------------------- Call sys_xxx routine\n"
@@ -12195,7 +12230,7 @@ const char * gWrapperFileContent_36_targetTemplates = "@------------------------
   "  mov   r0, r8\n"
   "@--------------------------- R2 <- address of new running task context\n"
   "@  R7: context of running task on SWI call\n"
-  "@  R6: 'gRunningTaskControlBlock' address\n"
+  "@  R6: 'gRunningTaskControlBlockPtr' address\n"
   "  ldr   r2, [r6] @ R2 <- address of new running task context\n"
   "  mov   r3, r7 @ R3: context of running task on SWI call\n"
   "@--------------------------- Restore task registers\n"
@@ -12249,7 +12284,7 @@ const cRegularFileWrapper gWrapperFile_36_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  9630, // Text length
+  9642, // Text length
   gWrapperFileContent_36_targetTemplates
 ) ;
 
@@ -12506,7 +12541,7 @@ const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
   gWrapperAllDirectories_targetTemplates_1
 ) ;
 
-//--- File 'teensy-3-1/c-cortex-m4-context-code.c'
+//--- File 'teensy-3-1/c-cortex-m4-context-code.cpp'
 
 const char * gWrapperFileContent_44_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -12532,14 +12567,14 @@ const char * gWrapperFileContent_44_targetTemplates = "//-----------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_44_targetTemplates (
-  "c-cortex-m4-context-code.c",
-  "c",
+  "c-cortex-m4-context-code.cpp",
+  "cpp",
   true, // Text file
   1174, // Text length
   gWrapperFileContent_44_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1/c-cortex-m4-context-types.c'
+//--- File 'teensy-3-1/c-cortex-m4-context-types.cpp'
 
 const char * gWrapperFileContent_45_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//                                                                                                                     *\n"
@@ -12624,8 +12659,8 @@ const char * gWrapperFileContent_45_targetTemplates = "//-----------------------
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_45_targetTemplates (
-  "c-cortex-m4-context-types.c",
-  "c",
+  "c-cortex-m4-context-types.cpp",
+  "cpp",
   true, // Text file
   5649, // Text length
   gWrapperFileContent_45_targetTemplates
@@ -15440,6 +15475,8 @@ const char * gWrapperFileContent_56_targetTemplates = "#! /usr/bin/env python\n"
   "  result.append (\"-fomit-frame-pointer\")\n"
   "  result.append (\"-fshort-enums\")\n"
   "  result.append (\"-Wall\")\n"
+  "  result.append (\"-fno-rtti\")\n"
+  "  result.append (\"-fno-exceptions\")\n"
   "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -15522,7 +15559,7 @@ const char * gWrapperFileContent_56_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def CsourceList ():\n"
-  "  return [\"src.c\"]\n"
+  "  return [\"src.cpp\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -15608,7 +15645,7 @@ const cRegularFileWrapper gWrapperFile_56_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
-  15412, // Text length
+  15480, // Text length
   gWrapperFileContent_56_targetTemplates
 ) ;
 
@@ -15704,7 +15741,7 @@ const char * gWrapperFileContent_60_targetTemplates = "@------------------------
   "@----------------------------------------- Activity led On\n"
   "  bl    func.activityLedOn_28__29_   @ Defined in PLM source (can modify R0-R3 registers)\n"
   "@----------------------------------------- R4 <- running task context\n"
-  "  ldr   r4, =gRunningTaskControlBlock\n"
+  "  ldr   r4, =gRunningTaskControlBlockPtr\n"
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call Interrupt handler\n"
   "  bl    !HANDLER!\n"
@@ -15719,7 +15756,7 @@ const cRegularFileWrapper gWrapperFile_60_targetTemplates (
   "xtr-interrupt-handler.s",
   "s",
   true, // Text file
-  1557, // Text length
+  1560, // Text length
   gWrapperFileContent_60_targetTemplates
 ) ;
 
@@ -15773,13 +15810,13 @@ const char * gWrapperFileContent_61_targetTemplates = "PYTHON_UTILITIES:\n"
   "UNDEFINED_INTERRUPT: \"../undefined-interrupt.s\"\n"
   "\n"
   "C_FILES:\n"
-  "  \"../c-cortex-m4-context-types.c\"\n"
-  "  \"../../c-real-time-kernel-types.c\"\n"
-  "  \"../c-cortex-m4-context-code.c\"\n"
-  "  \"../../c-real-time-kernel-code.c\"\n"
-  "  \"../../memory-utilities.c\"\n"
-  "  \"../../heap.c\"\n"
-  "  \"../../dynamic-buffer.c\"\n"
+  "  \"../c-cortex-m4-context-types.cpp\"\n"
+  "  \"../../c-real-time-kernel-types.cpp\"\n"
+  "  \"../c-cortex-m4-context-code.cpp\"\n"
+  "  \"../../c-real-time-kernel-code.cpp\"\n"
+  "  \"../../memory-utilities.cpp\"\n"
+  "  \"../../heap.cpp\"\n"
+  "  \"../../dynamic-buffer.cpp\"\n"
   "\n"
   "S_FILES:\n"
   "  \"../s-cortex-m4-header.s\"\n"
@@ -15886,7 +15923,7 @@ const cRegularFileWrapper gWrapperFile_61_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4169, // Text length
+  4183, // Text length
   gWrapperFileContent_61_targetTemplates
 ) ;
 
@@ -16250,7 +16287,7 @@ const char * gWrapperFileContent_68_targetTemplates = "@------------------------
   "@                                            *---------------------*\n"
   "@                                            | R5                  | + 4 [ 1]\n"
   "@  *--------------------------------*        *---------------------*\n"
-  "@  | gRunningTaskControlBlock       +------> | R4                  | + 0 [ 0]\n"
+  "@  | gRunningTaskControlBlockPtr    +------> | R4                  | + 0 [ 0]\n"
   "@  *--------------------------------*        *---------------------*\n"
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
@@ -16279,7 +16316,7 @@ const char * gWrapperFileContent_68_targetTemplates = "@------------------------
   "@----------------------------------------- R12 <- address of routine to call\n"
   "  ldr   r12, [r4, r12, lsl #2]   @ R12 = R4 + (R12 << 2)\n"
   "@----------------------------------------- R4 <- calling task context\n"
-  "  ldr   r4, =gRunningTaskControlBlock\n"
+  "  ldr   r4, =gRunningTaskControlBlockPtr\n"
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call service routine\n"
   "  blx   r12         @ R4:calling task context address, R5:thread PSP\n"
@@ -16300,7 +16337,7 @@ const char * gWrapperFileContent_68_targetTemplates = "@------------------------
   "@----------------------------------------- Select task to run\n"
   "  bl    kernel_selectTaskToRun\n"
   "@----------------------------------------- R0 <- calling task context, R1 <- new task context\n"
-  "  ldr   r1, =gRunningTaskControlBlock\n"
+  "  ldr   r1, =gRunningTaskControlBlockPtr\n"
   "  mov   r0, r4\n"
   "  ldr   r1, [r1]\n"
   "@----------------------------------------- Restore preserved registers\n"
@@ -16340,7 +16377,7 @@ const cRegularFileWrapper gWrapperFile_68_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7747, // Text length
+  7753, // Text length
   gWrapperFileContent_68_targetTemplates
 ) ;
 
@@ -16588,7 +16625,7 @@ const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
   gWrapperAllDirectories_targetTemplates_2
 ) ;
 
-//--- File 'teensy-3-6/c-cortex-m4-context-code.c'
+//--- File 'teensy-3-6/c-cortex-m4-context-code.cpp'
 
 const char * gWrapperFileContent_74_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -16618,15 +16655,15 @@ const char * gWrapperFileContent_74_targetTemplates = "//-----------------------
   "void noteCurrentTaskFreeStackSize (void) asm (\"!FUNC!noteCurrentTaskFreeStackSize\") ;\n"
   "\n"
   "void noteCurrentTaskFreeStackSize (void) {\n"
-  "  if (gRunningTaskControlBlock != (TaskControlBlock *) 0) { // Only if a task was running\n"
+  "  if (gRunningTaskControlBlockPtr != nullptr) { // Only if a task was running\n"
   "  //--- Get current task stack pointer current value\n"
-  "    const unsigned stackPointer = (unsigned) gRunningTaskControlBlock->mTaskContext.mSP_USR ;\n"
+  "    const unsigned stackPointer = (unsigned) gRunningTaskControlBlockPtr->mTaskContext.mSP_USR ;\n"
   "  //--- Compute current free stack size\n"
-  "    const unsigned bottomOfStack = (unsigned) gRunningTaskControlBlock->mStackBufferAddress ;\n"
+  "    const unsigned bottomOfStack = (unsigned) gRunningTaskControlBlockPtr->mStackBufferAddress ;\n"
   "    const unsigned currentFreeStack = stackPointer - bottomOfStack ;\n"
   "  //--- If current free stack size lower than registered free stack size, assign new value\n"
-  "    if (currentFreeStack < gRunningTaskControlBlock->mStackFreeSize) {\n"
-  "      gRunningTaskControlBlock->mStackFreeSize = currentFreeStack ;\n"
+  "    if (currentFreeStack < gRunningTaskControlBlockPtr->mStackFreeSize) {\n"
+  "      gRunningTaskControlBlockPtr->mStackFreeSize = currentFreeStack ;\n"
   "    }\n"
   "  }\n"
   "}\n"
@@ -16634,14 +16671,14 @@ const char * gWrapperFileContent_74_targetTemplates = "//-----------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_74_targetTemplates (
-  "c-cortex-m4-context-code.c",
-  "c",
+  "c-cortex-m4-context-code.cpp",
+  "cpp",
   true, // Text file
   2378, // Text length
   gWrapperFileContent_74_targetTemplates
 ) ;
 
-//--- File 'teensy-3-6/c-cortex-m4-context-types.c'
+//--- File 'teensy-3-6/c-cortex-m4-context-types.cpp'
 
 const char * gWrapperFileContent_75_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//                                                                                                                     *\n"
@@ -16726,8 +16763,8 @@ const char * gWrapperFileContent_75_targetTemplates = "//-----------------------
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_75_targetTemplates (
-  "c-cortex-m4-context-types.c",
-  "c",
+  "c-cortex-m4-context-types.cpp",
+  "cpp",
   true, // Text file
   5649, // Text length
   gWrapperFileContent_75_targetTemplates
@@ -21466,6 +21503,8 @@ const char * gWrapperFileContent_86_targetTemplates = "#! /usr/bin/env python\n"
   "  result.append (\"-fomit-frame-pointer\")\n"
   "  result.append (\"-fshort-enums\")\n"
   "  result.append (\"-Wall\")\n"
+  "  result.append (\"-fno-rtti\")\n"
+  "  result.append (\"-fno-exceptions\")\n"
   "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -21548,7 +21587,7 @@ const char * gWrapperFileContent_86_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def CsourceList ():\n"
-  "  return [\"src.c\"]\n"
+  "  return [\"src.cpp\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -21634,7 +21673,7 @@ const cRegularFileWrapper gWrapperFile_86_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
-  15382, // Text length
+  15450, // Text length
   gWrapperFileContent_86_targetTemplates
 ) ;
 
@@ -21731,7 +21770,7 @@ const char * gWrapperFileContent_90_targetTemplates = "\n"
   "@----------------------------------------- Activity led On\n"
   "  bl    func.activityLedOn_28__29_   @ Defined in PLM source (can modify R0-R3 registers)\n"
   "@----------------------------------------- R4 <- running task context\n"
-  "  ldr   r4, =gRunningTaskControlBlock\n"
+  "  ldr   r4, =gRunningTaskControlBlockPtr\n"
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call Interrupt handler\n"
   "  bl    !HANDLER!\n"
@@ -21746,7 +21785,7 @@ const cRegularFileWrapper gWrapperFile_90_targetTemplates (
   "xtr-interrupt-handler.s",
   "s",
   true, // Text file
-  1562, // Text length
+  1565, // Text length
   gWrapperFileContent_90_targetTemplates
 ) ;
 
@@ -21799,13 +21838,13 @@ const char * gWrapperFileContent_91_targetTemplates = "PYTHON_UTILITIES:\n"
   "UNDEFINED_INTERRUPT : \"../undefined-interrupt.s\"\n"
   "\n"
   "C_FILES:\n"
-  "  \"../c-cortex-m4-context-types.c\"\n"
-  "  \"../../c-real-time-kernel-types.c\"\n"
-  "  \"../c-cortex-m4-context-code.c\"\n"
-  "  \"../../c-real-time-kernel-code.c\"\n"
-  "  \"../../memory-utilities.c\"\n"
-  "  \"../../heap.c\"\n"
-  "  \"../../dynamic-buffer.c\"\n"
+  "  \"../c-cortex-m4-context-types.cpp\"\n"
+  "  \"../../c-real-time-kernel-types.cpp\"\n"
+  "  \"../c-cortex-m4-context-code.cpp\"\n"
+  "  \"../../c-real-time-kernel-code.cpp\"\n"
+  "  \"../../memory-utilities.cpp\"\n"
+  "  \"../../heap.cpp\"\n"
+  "  \"../../dynamic-buffer.cpp\"\n"
   "\n"
   "S_FILES:\n"
   "  \"../s-cortex-m4-header.s\"\n"
@@ -21939,7 +21978,7 @@ const cRegularFileWrapper gWrapperFile_91_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4763, // Text length
+  4777, // Text length
   gWrapperFileContent_91_targetTemplates
 ) ;
 
@@ -22301,7 +22340,7 @@ const char * gWrapperFileContent_98_targetTemplates = "@------------------------
   "@                                            *---------------------*\n"
   "@                                            | R5                  | + 4 [ 1]\n"
   "@  *--------------------------------*        *---------------------*\n"
-  "@  | gRunningTaskControlBlock       +------> | R4                  | + 0 [ 0]\n"
+  "@  | gRunningTaskControlBlockPtr    +------> | R4                  | + 0 [ 0]\n"
   "@  *--------------------------------*        *---------------------*\n"
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
@@ -22330,7 +22369,7 @@ const char * gWrapperFileContent_98_targetTemplates = "@------------------------
   "@----------------------------------------- R12 <- address of routine to call\n"
   "  ldr   r12, [r4, r12, lsl #2]   @ R12 = R4 + (R12 << 2)\n"
   "@----------------------------------------- R4 <- calling task context\n"
-  "  ldr   r4, =gRunningTaskControlBlock\n"
+  "  ldr   r4, =gRunningTaskControlBlockPtr\n"
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call service routine\n"
   "  blx   r12         @ R4:calling task context address, R5:thread PSP\n"
@@ -22351,7 +22390,7 @@ const char * gWrapperFileContent_98_targetTemplates = "@------------------------
   "@----------------------------------------- Select task to run\n"
   "  bl    kernel_selectTaskToRun\n"
   "@----------------------------------------- R0 <- calling task context, R1 <- new task context\n"
-  "  ldr   r1, =gRunningTaskControlBlock\n"
+  "  ldr   r1, =gRunningTaskControlBlockPtr\n"
   "  mov   r0, r4\n"
   "  ldr   r1, [r1]\n"
   "@----------------------------------------- Restore preserved registers\n"
@@ -22391,7 +22430,7 @@ const cRegularFileWrapper gWrapperFile_98_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7747, // Text length
+  7753, // Text length
   gWrapperFileContent_98_targetTemplates
 ) ;
 
