@@ -7551,7 +7551,7 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- File '/c-deadline-list-management.cpp'
+//--- File '/c-deadline-list.cpp'
 
 const char * gWrapperFileContent_0_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//   D E A D L I N E    L I S T    M A N A G E M E N T                                                                 *\n"
@@ -7568,46 +7568,59 @@ const char * gWrapperFileContent_0_targetTemplates = "//------------------------
   "static void kernel_makeTaskReady (TaskControlBlock * inTaskDescriptor) ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "typedef unsigned TaskListByDate ;\n"
-  "\n"
+  "//   ENTER TASK IN DEADLINE LIST                                                                                       *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static TaskListByDate gDeadlineWaitingTaskList ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "static inline void deadlinelist_enterRunningTask (const unsigned inDeadline) {\n"
-  "  gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;\n"
-  "  const unsigned runningTaskIndex = gRunningTaskControlBlockPtr->mTaskIndex ;\n"
+  "static inline void deadlinelist_enterTask (TaskListByDate & ioTaskList, TaskControlBlock * inTask) {\n"
+  "  const unsigned runningTaskIndex = inTask->mTaskIndex ;\n"
   "  const unsigned mask = 1 << runningTaskIndex ;\n"
-  "  gDeadlineWaitingTaskList |= mask ;\n"
+  "  ioTaskList |= mask ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   REMOVE TASK FROM DEADLINE LIST                                                                                    *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void deadlinelist_removeTask (TaskListByDate & ioTaskList, TaskControlBlock * inTask) {\n"
+  "  const unsigned runningTaskIndex = inTask->mTaskIndex ;\n"
+  "  const unsigned mask = 1 << runningTaskIndex ;\n"
+  "  ioTaskList &= ~ mask ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   ITERATE OVER DEADLINE LIST                                                                                        *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef unsigned DeadlineTaskListIterator ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline DeadlineTaskListIterator deadlinelist_makeIterator (const TaskListByDate & inList) {\n"
+  "  return inList ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static inline void deadlinelist_makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {\n"
-  "  unsigned w = gDeadlineWaitingTaskList ;\n"
-  "  while (w > 0) {\n"
-  "    const unsigned taskIndex = __builtin_ctz (w) ;\n"
-  "    const unsigned mask = ~ (1 << taskIndex) ;\n"
-  "    w &= mask ;\n"
-  "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
-  "    if (inCurrentDate >= taskControlBlockPtr->mTaskDeadline) {\n"
-  "    //--- Remove task from deadline list\n"
-  "      gDeadlineWaitingTaskList &= mask ;\n"
-  "   //--- Make task ready\n"
-  "      kernel_makeTaskReady (taskControlBlockPtr) ;\n"
-  "    }\n"
+  "static inline TaskControlBlock * deadlinelistIterator_nextTask (DeadlineTaskListIterator & ioIterator) {\n"
+  "  TaskControlBlock * task = nullptr ;\n"
+  "  if (ioIterator != 0) {\n"
+  "    const unsigned taskIndex = __builtin_ctz (ioIterator) ;\n"
+  "    const unsigned mask = 1 << taskIndex ;\n"
+  "    ioIterator &= ~ mask ;\n"
+  "    task = & gTaskDescriptorArray [taskIndex] ;\n"
+  "\n"
   "  }\n"
+  "  return task ;\n"
   "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_0_targetTemplates (
-  "c-deadline-list-management.cpp",
+  "c-deadline-list.cpp",
   "cpp",
   true, // Text file
-  2348, // Text length
+  3345, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
@@ -7621,18 +7634,14 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static void removeTaskFromGuards (TaskControlBlock * inTaskControlBlockPtr) {\n"
-  "  const unsigned mask = ~ (1 << inTaskControlBlockPtr->mTaskIndex) ;\n"
-  "  const unsigned guardCount = inTaskControlBlockPtr->mGuardCount ;\n"
+  "static void removeTaskFromGuards (TaskControlBlock * inTask) {\n"
+  "  const unsigned guardCount = inTask->mGuardCount ;\n"
   "  for (unsigned i=0 ; i<guardCount ; i++) {\n"
-  "    list_removeTask (* (inTaskControlBlockPtr->mGuardListArray [i]), inTaskControlBlockPtr) ;\n"
-  "//     list_removeFirstTask (* (inTaskControlBlockPtr->mGuardListArray [i]) ;\n"
-  "//    * (inTaskControlBlockPtr->mGuardListArray [i]) &= mask ;\n"
+  "    list_removeTask (inTask->mGuardListArray [i]->mGuardValue, inTask) ;\n"
   "  }\n"
-  "  inTaskControlBlockPtr->mGuardCount = 0 ;\n"
-  "  list_removeTask (gDeadlineWaitingInGuardTaskList, inTaskControlBlockPtr) ;\n"
-  "//  gDeadlineWaitingInGuardTaskList &= mask ;\n"
-  "  inTaskControlBlockPtr->mHaveDeadlineGuard = false ;\n"
+  "  inTask->mGuardCount = 0 ;\n"
+  "  list_removeTask (gDeadlineWaitingInGuardTaskList, inTask) ;\n"
+  "  inTask->mHaveDeadlineGuard = false ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -7652,7 +7661,7 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "\n"
   "void kernel_handleGuardedCommand (GuardList * ioGuardListPtr) {\n"
   "  if (gRunningTaskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "    list_enterTask (*ioGuardListPtr, gRunningTaskControlBlockPtr) ;\n"
+  "    list_enterTask (ioGuardListPtr->mGuardValue, gRunningTaskControlBlockPtr) ;\n"
   "    const unsigned guardCount = gRunningTaskControlBlockPtr->mGuardCount ;\n"
   "    gRunningTaskControlBlockPtr->mGuardListArray [guardCount] = ioGuardListPtr ;\n"
   "    gRunningTaskControlBlockPtr->mGuardCount = guardCount + 1 ;\n"
@@ -7683,14 +7692,14 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "void kernel_guardDidChange (GuardList & ioGuardList) asm (\"!FUNC!notify.change.from.guard.list\") ;\n"
   "\n"
   "void kernel_guardDidChange (GuardList & ioGuardList) {\n"
-  "  TaskControlBlock * taskControlBlockPtr ;\n"
-  "  while ((taskControlBlockPtr = list_removeFirstTask (ioGuardList))) {\n"
-  "    removeTaskFromGuards (taskControlBlockPtr) ;\n"
-  "    if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
-  "      taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
-  "      kernel_makeTaskReady (taskControlBlockPtr) ;\n"
-  "    }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "      taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
+  "  TaskControlBlock * task ;\n"
+  "  while ((task = list_removeFirstTask (ioGuardList.mGuardValue))) {\n"
+  "    removeTaskFromGuards (task) ;\n"
+  "    if (task->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
+  "      task->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "      kernel_makeTaskReady (task) ;\n"
+  "    }else if (task->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "      task->mGuardState = GUARD_DID_CHANGE ;\n"
   "    }else{ // GUARD_DID_CHANGE\n"
   "      // Nothing to do\n"
   "    }\n"
@@ -7718,51 +7727,33 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "asm (\"!FUNC!notify.change.for.guarded.wait.until\") ;\n"
   "\n"
   "void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {\n"
-  "  unsigned w = gDeadlineWaitingInGuardTaskList ;\n"
-  "  while (w > 0) {\n"
-  "    const unsigned taskIndex = __builtin_ctz (w) ;\n"
-  "    w &= ~ (1 << taskIndex) ;\n"
-  "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
-  "    if (inUptime >= taskControlBlockPtr->mTaskDeadline) {\n"
-  "      removeTaskFromGuards (taskControlBlockPtr) ;\n"
-  "      if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
-  "        taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
-  "        kernel_makeTaskReady (taskControlBlockPtr) ;\n"
-  "      }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "        taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
+  "//   unsigned w = gDeadlineWaitingInGuardTaskList ;\n"
+  "  TaskListIterator iterator = list_makeIterator (gDeadlineWaitingInGuardTaskList) ;\n"
+  "  TaskControlBlock * task ;\n"
+  "  while ((task = listIterator_nextTask (iterator))) {\n"
+  "//     const unsigned taskIndex = __builtin_ctz (w) ;\n"
+  "//     w &= ~ (1 << taskIndex) ;\n"
+  "//     TaskControlBlock * task = & gTaskDescriptorArray [taskIndex] ;\n"
+  "    if (inUptime >= task->mTaskDeadline) {\n"
+  "      removeTaskFromGuards (task) ;\n"
+  "      if (task->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
+  "        task->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "        kernel_makeTaskReady (task) ;\n"
+  "      }else if (task->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "        task->mGuardState = GUARD_DID_CHANGE ;\n"
   "      }else{ // GUARD_DID_CHANGE\n"
   "        // Nothing to do\n"
   "      }\n"
   "    }\n"
   "  }\n"
   "}\n"
-  "// void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {\n"
-  "//   unsigned w = gDeadlineWaitingInGuardTaskList ;\n"
-  "//   while (w > 0) {\n"
-  "//     const unsigned taskIndex = __builtin_ctz (w) ;\n"
-  "//     w &= ~ (1 << taskIndex) ;\n"
-  "//     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
-  "//     if (inUptime >= taskControlBlockPtr->mTaskDeadline) {\n"
-  "//       removeTaskFromGuards (taskControlBlockPtr) ;\n"
-  "//       if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
-  "//         taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
-  "//         kernel_makeTaskReady (taskControlBlockPtr) ;\n"
-  "//       }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "//         taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
-  "//       }else{ // GUARD_DID_CHANGE\n"
-  "//         // Nothing to do\n"
-  "//       }\n"
-  "//     }\n"
-  "//   }\n"
-  "// }\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+  "\n" ;
 
 const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "c-guards.cpp",
   "cpp",
   true, // Text file
-  6919, // Text length
+  5507, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -7849,6 +7840,34 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   D E A D L I N E    L I S T    M A N A G E M E N T                                                                 *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static TaskListByDate gDeadlineWaitingTaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void deadlinelist_enterRunningTask (const unsigned inDeadline) {\n"
+  "  gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;\n"
+  "  deadlinelist_enterTask (gDeadlineWaitingTaskList, gRunningTaskControlBlockPtr) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void deadlinelist_makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {\n"
+  "  DeadlineTaskListIterator iterator = deadlinelist_makeIterator (gDeadlineWaitingTaskList) ;\n"
+  "  TaskControlBlock * task ;\n"
+  "  while ((task = deadlinelistIterator_nextTask (iterator))) {\n"
+  "    if (inCurrentDate >= task->mTaskDeadline) {\n"
+  "    //--- Remove task from deadline list\n"
+  "      deadlinelist_removeTask (gDeadlineWaitingTaskList, task) ;\n"
+  "   //--- Make task ready\n"
+  "      kernel_makeTaskReady (task) ;\n"
+  "    }\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//  B L O C K I N G    R U N N I N G    T A S K                                                                        *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -7899,7 +7918,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "c-real-time-kernel-code.cpp",
   "cpp",
   true, // Text file
-  6164, // Text length
+  7553, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
@@ -7912,7 +7931,12 @@ const char * gWrapperFileContent_3_targetTemplates = "//------------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "typedef unsigned GuardList ;\n"
+  "typedef unsigned TaskList ;\n"
+  "typedef unsigned TaskListByDate ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct { unsigned mGuardValue ; } GuardList ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -7960,7 +7984,7 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "c-real-time-kernel-types.cpp",
   "cpp",
   true, // Text file
-  2229, // Text length
+  2439, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
@@ -8041,14 +8065,13 @@ const char * gWrapperFileContent_4_targetTemplates = "//------------------------
   "\n"
   "unsigned taskAllocatedStackSize (const unsigned inIndex) {\n"
   "  return gTaskDescriptorArray [inIndex].mStackBufferSize ;\n"
-  "}\n"
-  "\n" ;
+  "}\n" ;
 
 const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "c-real-time-kernel-utilities.cpp",
   "cpp",
   true, // Text file
-  4194, // Text length
+  4193, // Text length
   gWrapperFileContent_4_targetTemplates
 ) ;
 
@@ -8063,17 +8086,15 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "#endif\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "typedef unsigned TaskList ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "// ENTER TASK IN LIST: inTaskControlBlockPtr should be not null\n"
+  "// ENTER TASK IN LIST: inTask should be not null\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTaskControlBlockPtr)  __attribute__((always_inline)) ;\n"
+  "static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;\n"
   "\n"
-  "static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTaskControlBlockPtr) {\n"
-  "  const unsigned runningTaskIndex = inTaskControlBlockPtr->mTaskIndex ;\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTask) {\n"
+  "  const unsigned runningTaskIndex = inTask->mTaskIndex ;\n"
   "  const unsigned mask = 1 << runningTaskIndex ;\n"
   "  ioTaskList |= mask ;\n"
   "}\n"
@@ -8083,6 +8104,8 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static inline TaskControlBlock * list_removeFirstTask (TaskList & ioTaskList) __attribute__((always_inline)) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static inline TaskControlBlock * list_removeFirstTask (TaskList & ioTaskList) {\n"
   "  TaskControlBlock * result = nullptr ;\n"
@@ -8096,34 +8119,56 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//  TEST IF TASK IS IN LIST\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "static inline bool list_containsTask (const TaskList & inTaskList, TaskControlBlock * inTaskControlBlockPtr)  __attribute__((always_inline)) ;\n"
-  "\n"
-  "static inline bool list_containsTask (const TaskList & inTaskList, TaskControlBlock * inTaskControlBlockPtr) {\n"
-  "  const unsigned runningTaskIndex = inTaskControlBlockPtr->mTaskIndex ;\n"
-  "  const unsigned mask = 1 << runningTaskIndex ;\n"
-  "  return (inTaskList & mask) != 0 ;\n"
-  "}\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//  TEST IF LIST IS EMPTY\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "// static inline bool list_isEmpty (const TaskList & inTaskList) {\n"
-  "//   return inTaskList == 0 ;\n"
-  "// }\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//  REMOVE TASK FROM LIST: inTask should not be null                                                                   *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static inline void list_removeTask (TaskList & ioTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;\n"
   "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
   "static inline void list_removeTask (TaskList & ioTaskList, TaskControlBlock * inTask) {\n"
-  "  const unsigned mask = ~ (1 << inTask->mTaskIndex) ;\n"
+  "  const unsigned mask = 1 << inTask->mTaskIndex ;\n"
   "  ioTaskList &= ~ mask ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  TEST IF A LIST CONTAINS A TASK                                                                                     *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline bool list_containsTask (const TaskList & inTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline bool list_containsTask (const TaskList & inTaskList, TaskControlBlock * inTask) {\n"
+  "  const unsigned runningTaskIndex = inTask->mTaskIndex ;\n"
+  "  const unsigned mask = 1 << runningTaskIndex ;\n"
+  "  return (inTaskList & mask) != 0 ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   ITERATE OVER TASK LIST                                                                                            *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef unsigned TaskListIterator ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline TaskListIterator list_makeIterator (const TaskList & inList) {\n"
+  "  return inList ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline TaskControlBlock * listIterator_nextTask (TaskListIterator & ioIterator) {\n"
+  "  TaskControlBlock * task = nullptr ;\n"
+  "  if (ioIterator != 0) {\n"
+  "    const unsigned taskIndex = __builtin_ctz (ioIterator) ;\n"
+  "    const unsigned mask = 1 << taskIndex ;\n"
+  "    ioIterator &= ~ mask ;\n"
+  "    task = & gTaskDescriptorArray [taskIndex] ;\n"
+  "\n"
+  "  }\n"
+  "  return task ;\n"
   "}\n"
   "\n" ;
 
@@ -8131,7 +8176,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "c-task-list.cpp",
   "cpp",
   true, // Text file
-  3825, // Text length
+  4869, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -10455,7 +10500,7 @@ const char * gWrapperFileContent_23_targetTemplates = "PYTHON_UTILITIES:\n"
   "  \"../c-real-time-kernel-types.cpp\"\n"
   "  \"../c-task-list.cpp\"\n"
   "  \"c-arm7tdmi-context-code.cpp\"\n"
-  "  \"../c-deadline-list-management.cpp\"\n"
+  "  \"../c-deadline-list.cpp\"\n"
   "  \"../c-real-time-kernel-code.cpp\"\n"
   "  \"../c-guards.cpp\"\n"
   "  \"../c-real-time-kernel-utilities.cpp\"\n"
@@ -10513,7 +10558,7 @@ const cRegularFileWrapper gWrapperFile_23_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  2492, // Text length
+  2481, // Text length
   gWrapperFileContent_23_targetTemplates
 ) ;
 
@@ -15932,7 +15977,7 @@ const char * gWrapperFileContent_65_targetTemplates = "PYTHON_UTILITIES:\n"
   "  \"../../c-real-time-kernel-types.cpp\"\n"
   "  \"../../c-task-list.cpp\"\n"
   "  \"../c-cortex-m4-context-code.cpp\"\n"
-  "  \"../../c-deadline-list-management.cpp\"\n"
+  "  \"../../c-deadline-list.cpp\"\n"
   "  \"../../c-real-time-kernel-code.cpp\"\n"
   "  \"../../c-guards.cpp\"\n"
   "  \"../../c-real-time-kernel-utilities.cpp\"\n"
@@ -16045,7 +16090,7 @@ const cRegularFileWrapper gWrapperFile_65_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4318, // Text length
+  4307, // Text length
   gWrapperFileContent_65_targetTemplates
 ) ;
 
@@ -21964,7 +22009,7 @@ const char * gWrapperFileContent_95_targetTemplates = "PYTHON_UTILITIES:\n"
   "  \"../../c-real-time-kernel-types.cpp\"\n"
   "  \"../../c-task-list.cpp\"\n"
   "  \"../c-cortex-m4-context-code.cpp\"\n"
-  "  \"../../c-deadline-list-management.cpp\"\n"
+  "  \"../../c-deadline-list.cpp\"\n"
   "  \"../../c-real-time-kernel-code.cpp\"\n"
   "  \"../../c-guards.cpp\"\n"
   "  \"../../c-real-time-kernel-utilities.cpp\"\n"
@@ -22104,7 +22149,7 @@ const cRegularFileWrapper gWrapperFile_95_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4912, // Text length
+  4901, // Text length
   gWrapperFileContent_95_targetTemplates
 ) ;
 

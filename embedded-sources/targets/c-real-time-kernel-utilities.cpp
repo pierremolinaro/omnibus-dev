@@ -74,4 +74,3 @@ unsigned taskAllocatedStackSize (const unsigned inIndex)  asm ("!FUNC!taskAlloca
 unsigned taskAllocatedStackSize (const unsigned inIndex) {
   return gTaskDescriptorArray [inIndex].mStackBufferSize ;
 }
-

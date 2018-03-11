@@ -79,6 +79,34 @@ void kernel_running_task_auto_blocks (void) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+//   D E A D L I N E    L I S T    M A N A G E M E N T                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TaskListByDate gDeadlineWaitingTaskList ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static inline void deadlinelist_enterRunningTask (const unsigned inDeadline) {
+  gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;
+  deadlinelist_enterTask (gDeadlineWaitingTaskList, gRunningTaskControlBlockPtr) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static inline void deadlinelist_makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
+  DeadlineTaskListIterator iterator = deadlinelist_makeIterator (gDeadlineWaitingTaskList) ;
+  TaskControlBlock * task ;
+  while ((task = deadlinelistIterator_nextTask (iterator))) {
+    if (inCurrentDate >= task->mTaskDeadline) {
+    //--- Remove task from deadline list
+      deadlinelist_removeTask (gDeadlineWaitingTaskList, task) ;
+   //--- Make task ready
+      kernel_makeTaskReady (task) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //  B L O C K I N G    R U N N I N G    T A S K                                                                        *
 //---------------------------------------------------------------------------------------------------------------------*
 
