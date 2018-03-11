@@ -2,17 +2,17 @@
 //  G U A R D S                                                                                                        *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static TaskList gDeadlineWaitingInGuardTaskList ;
+static DeadlineList gDeadlineWaitingInGuardTaskList ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void removeTaskFromGuards (TaskControlBlock * inTask) {
   const unsigned guardCount = inTask->mGuardCount ;
   for (unsigned i=0 ; i<guardCount ; i++) {
-    list_removeTask (inTask->mGuardListArray [i]->mGuardValue, inTask) ;
+    guardlist_removeTask (* (inTask->mGuardListArray [i]), inTask) ;
   }
   inTask->mGuardCount = 0 ;
-  list_removeTask (gDeadlineWaitingInGuardTaskList, inTask) ;
+  deadlinelist_removeTask (gDeadlineWaitingInGuardTaskList, inTask) ;
   inTask->mHaveDeadlineGuard = false ;
 }
 
@@ -33,7 +33,7 @@ void kernel_handleGuardedCommand (GuardList * ioGuardListPtr) asm ("!FUNC!handle
 
 void kernel_handleGuardedCommand (GuardList * ioGuardListPtr) {
   if (gRunningTaskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
-    list_enterTask (ioGuardListPtr->mGuardValue, gRunningTaskControlBlockPtr) ;
+    guardlist_enterTask (* (ioGuardListPtr), gRunningTaskControlBlockPtr) ;
     const unsigned guardCount = gRunningTaskControlBlockPtr->mGuardCount ;
     gRunningTaskControlBlockPtr->mGuardListArray [guardCount] = ioGuardListPtr ;
     gRunningTaskControlBlockPtr->mGuardCount = guardCount + 1 ;
@@ -65,7 +65,7 @@ void kernel_guardDidChange (GuardList & ioGuardList) asm ("!FUNC!notify.change.f
 
 void kernel_guardDidChange (GuardList & ioGuardList) {
   TaskControlBlock * task ;
-  while ((task = list_removeFirstTask (ioGuardList.mGuardValue))) {
+  while ((task = guardlist_removeFirstTask (ioGuardList))) {
     removeTaskFromGuards (task) ;
     if (task->mGuardState == GUARD_WAITING_FOR_CHANGE) {
       task->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
@@ -84,10 +84,10 @@ void handleGuardedWaitUntil (const unsigned inDeadline) asm ("!FUNC!guard.handle
 
 void handleGuardedWaitUntil (const unsigned inDeadline) {
   if (gRunningTaskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
-    if ((!list_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)) || (gRunningTaskControlBlockPtr->mTaskDeadline > inDeadline)) {
+    if ((!deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)) || (gRunningTaskControlBlockPtr->mTaskDeadline > inDeadline)) {
       gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;
     }
-    list_enterTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;
+    deadlinelist_enterTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;
     gRunningTaskControlBlockPtr->mHaveDeadlineGuard = true ;
   }
 }
@@ -98,13 +98,9 @@ void tickHandlerForGuardedWaitUntil (const unsigned inUptime)
 asm ("!FUNC!notify.change.for.guarded.wait.until") ;
 
 void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
-//   unsigned w = gDeadlineWaitingInGuardTaskList ;
-  TaskListIterator iterator = list_makeIterator (gDeadlineWaitingInGuardTaskList) ;
+  DeadlineListIterator iterator = deadlinelist_makeIterator (gDeadlineWaitingInGuardTaskList) ;
   TaskControlBlock * task ;
-  while ((task = listIterator_nextTask (iterator))) {
-//     const unsigned taskIndex = __builtin_ctz (w) ;
-//     w &= ~ (1 << taskIndex) ;
-//     TaskControlBlock * task = & gTaskDescriptorArray [taskIndex] ;
+  while ((task = deadlinelistIterator_nextTask (iterator))) {
     if (inUptime >= task->mTaskDeadline) {
       removeTaskFromGuards (task) ;
       if (task->mGuardState == GUARD_WAITING_FOR_CHANGE) {
