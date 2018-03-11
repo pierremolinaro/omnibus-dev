@@ -45,12 +45,12 @@ INTERRUPT_USER_STACK_SIZE: 0 // ARM7TDMI save no reg in user stack on interrupt
 UNDEFINED_INTERRUPT: "undefined-interrupt.s"
 
 C_FILES:
-  "c-arm7tdmi-vectors.c"
-  "c-arm7tdmi-context-types.c"
-  "../c-real-time-kernel-types.c"
-  "c-arm7tdmi-context-code.c"
-  "../c-real-time-kernel-code.c"
-  "../memory-utilities.c"
+  "c-arm7tdmi-vectors.cpp"
+  "c-arm7tdmi-context-types.cpp"
+  "../c-real-time-kernel-types.cpp"
+  "c-arm7tdmi-context-code.cpp"
+  "../c-real-time-kernel-code.cpp"
+  "../memory-utilities.cpp"
 
 S_FILES:
   "s-target.s"

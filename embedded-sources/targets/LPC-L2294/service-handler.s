@@ -6,7 +6,7 @@
 @                                                                                                                      *
 @ ARM4 task context is stored is an 17 * 4 byte buffer.                                                                *
 @                                                                                                                      *
-@ The gRunningTaskControlBlock shared variable points to the buffer associated to the current task.                    *
+@ The gRunningTaskControlBlockPtr shared variable points to the buffer associated to the current task.                    *
 @                                                                                                                      *
 @                                                                      offset                                          *
 @                                              *---------------------*                                                 *
@@ -26,7 +26,7 @@
 @                                              | R0                  | +12                                             *
 @                                              | LR_USR              | + 8                                             *
 @    *--------------------------------*        | SP_USR              | + 4                                             *
-@    | gRunningTaskControlBlock       +------> | CPSR                | + 0                                             *
+@    | gRunningTaskControlBlockPtr    +------> | CPSR                | + 0                                             *
 @    *--------------------------------*        *---------------------*                                                 *
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
@@ -71,8 +71,8 @@ as_swi_handler:
 @--------------------------- r8 <- address of sys_xxx routine to call
   ldr   r8, =__swi_dispatcher_table
   ldr   r8, [r8, r6, LSL #2]
-@--------------------------- R6 <- address of gRunningTaskControlBlock variable
-  ldr   r6, =gRunningTaskControlBlock
+@--------------------------- R6 <- address of gRunningTaskControlBlockPtr variable
+  ldr   r6, =gRunningTaskControlBlockPtr
 @--------------------------- Save context pointer of current running task in R7
   ldr   r7, [r6]
 @--------------------------- Call sys_xxx routine
@@ -86,7 +86,7 @@ as_swi_handler:
   mov   r0, r8
 @--------------------------- R2 <- address of new running task context
 @  R7: context of running task on SWI call
-@  R6: 'gRunningTaskControlBlock' address
+@  R6: 'gRunningTaskControlBlockPtr' address
   ldr   r2, [r6] @ R2 <- address of new running task context
   mov   r3, r7 @ R3: context of running task on SWI call
 @--------------------------- Restore task registers

@@ -192,7 +192,7 @@ as_irq_handler:
   stmfd sp!, {r0}
 @--------------------------- Context save
 @--- R0 <- Address of current task context save
-  ldr   r0, =gRunningTaskControlBlock
+  ldr   r0, =gRunningTaskControlBlockPtr
   ldr   r0, [r0]
 @--- If r0 is NULL, there is no context to save
   movs  r0, r0
@@ -232,7 +232,7 @@ __entry_point: @ This entry point is kernel start routine
   bl    kernel_selectTaskToRun
 @--------------------------- Context restore
 @--- r0 <- Address of current running task context save
-  ldr   r0, =gRunningTaskControlBlock
+  ldr   r0, =gRunningTaskControlBlockPtr
   ldr   r0, [r0]
   movs  r0, r0
   beq   __no_context_to_restore

@@ -26,15 +26,15 @@ static void kernel_set_task_context (TaskControlBlock * inTaskDescriptor,
 void noteCurrentTaskFreeStackSize (void) asm ("!FUNC!noteCurrentTaskFreeStackSize") ;
 
 void noteCurrentTaskFreeStackSize (void) {
-  if (gRunningTaskControlBlock != (TaskControlBlock *) 0) { // Only if a task was running
+  if (gRunningTaskControlBlockPtr != nullptr) { // Only if a task was running
   //--- Get current task stack pointer current value
-    const unsigned stackPointer = (unsigned) gRunningTaskControlBlock->mTaskContext.mSP_USR ;
+    const unsigned stackPointer = (unsigned) gRunningTaskControlBlockPtr->mTaskContext.mSP_USR ;
   //--- Compute current free stack size
-    const unsigned bottomOfStack = (unsigned) gRunningTaskControlBlock->mStackBufferAddress ;
+    const unsigned bottomOfStack = (unsigned) gRunningTaskControlBlockPtr->mStackBufferAddress ;
     const unsigned currentFreeStack = stackPointer - bottomOfStack ;
   //--- If current free stack size lower than registered free stack size, assign new value
-    if (currentFreeStack < gRunningTaskControlBlock->mStackFreeSize) {
-      gRunningTaskControlBlock->mStackFreeSize = currentFreeStack ;
+    if (currentFreeStack < gRunningTaskControlBlockPtr->mStackFreeSize) {
+      gRunningTaskControlBlockPtr->mStackFreeSize = currentFreeStack ;
     }
   }
 }

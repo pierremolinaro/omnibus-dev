@@ -6,17 +6,11 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef unsigned TaskList ;
+typedef unsigned TaskListByDate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef struct { unsigned mGuardValue ; } GuardList ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef unsigned char bool ;
-
-#define true  ((bool) 1)
-#define false ((bool) 0)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -54,9 +48,8 @@ typedef struct {
 static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   S C H E D U L E R                                                                                                 *
+//   RUNNING TASK DESCRIPTOR POINTER                                                                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
-TaskControlBlock * gRunningTaskControlBlock ; // Shared with assembly code (arm_context.s)
-static TaskList gReadyTaskList ;
+TaskControlBlock * gRunningTaskControlBlockPtr ; // Shared with assembly code (arm_context.s)
 

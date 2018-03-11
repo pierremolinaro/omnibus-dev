@@ -65,7 +65,7 @@ before {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 filewrapper targetTemplates in "../embedded-sources/targets" {
-  "py", "ld", "c", "s", "plm", "plm-target", "ll", "txt"
+  "py", "ld", "cpp", "s", "plm", "plm-target", "ll", "txt"
 }{
 }{
 }

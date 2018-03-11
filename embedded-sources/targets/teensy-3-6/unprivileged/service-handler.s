@@ -42,7 +42,7 @@
 @                                            *---------------------*
 @                                            | R5                  | + 4 [ 1]
 @  *--------------------------------*        *---------------------*
-@  | gRunningTaskControlBlock       +------> | R4                  | + 0 [ 0]
+@  | gRunningTaskControlBlockPtr    +------> | R4                  | + 0 [ 0]
 @  *--------------------------------*        *---------------------*
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
@@ -71,7 +71,7 @@ as_svc_handler:
 @----------------------------------------- R12 <- address of routine to call
   ldr   r12, [r4, r12, lsl #2]   @ R12 = R4 + (R12 << 2)
 @----------------------------------------- R4 <- calling task context
-  ldr   r4, =gRunningTaskControlBlock
+  ldr   r4, =gRunningTaskControlBlockPtr
   ldr   r4, [r4]
 @----------------------------------------- Call service routine
   blx   r12         @ R4:calling task context address, R5:thread PSP
@@ -92,7 +92,7 @@ as_svc_handler:
 @----------------------------------------- Select task to run
   bl    kernel_selectTaskToRun
 @----------------------------------------- R0 <- calling task context, R1 <- new task context
-  ldr   r1, =gRunningTaskControlBlock
+  ldr   r1, =gRunningTaskControlBlockPtr
   mov   r0, r4
   ldr   r1, [r1]
 @----------------------------------------- Restore preserved registers

@@ -46,13 +46,13 @@ INTERRUPT_USER_STACK_SIZE: 32 // Cortex M4 saves 8 regs in user stack on interru
 UNDEFINED_INTERRUPT: "../undefined-interrupt.s"
 
 C_FILES:
-  "../c-cortex-m4-context-types.c"
-  "../../c-real-time-kernel-types.c"
-  "../c-cortex-m4-context-code.c"
-  "../../c-real-time-kernel-code.c"
-  "../../memory-utilities.c"
-  "../../heap.c"
-  "../../dynamic-buffer.c"
+  "../c-cortex-m4-context-types.cpp"
+  "../../c-real-time-kernel-types.cpp"
+  "../c-cortex-m4-context-code.cpp"
+  "../../c-real-time-kernel-code.cpp"
+  "../../memory-utilities.cpp"
+  "../../heap.cpp"
+  "../../dynamic-buffer.cpp"
 
 S_FILES:
   "../s-cortex-m4-header.s"

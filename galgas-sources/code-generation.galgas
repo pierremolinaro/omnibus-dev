@@ -398,7 +398,7 @@ private proc generateCodeFiles
   let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
   let s6 = [s5 stringByReplacingStringByString !"!SECTIONIMPLEMENTATION!" !llvmNameForSectionImplementation (!"")]
   let s7 = [s6 stringByReplacingStringByString !"!SECTIONCALL!" !llvmNameForSectionCall (!"")]
-  [s7 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
+  [s7 writeToFileWhenDifferentContents !sourceDirectory + "/src.cpp" ?*]
 #----------------------------------------- Write JSON file with stack features
   var json = "{\n"
 #--- System stack size
