@@ -7,17 +7,15 @@
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-typedef unsigned TaskList ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-// ENTER TASK IN LIST: inTaskControlBlockPtr should be not null
+// ENTER TASK IN LIST: inTask should be not null
 //---------------------------------------------------------------------------------------------------------------------*
 
-static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTaskControlBlockPtr)  __attribute__((always_inline)) ;
+static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;
 
-static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTaskControlBlockPtr) {
-  const unsigned runningTaskIndex = inTaskControlBlockPtr->mTaskIndex ;
+//---------------------------------------------------------------------------------------------------------------------*
+
+static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTask) {
+  const unsigned runningTaskIndex = inTask->mTaskIndex ;
   const unsigned mask = 1 << runningTaskIndex ;
   ioTaskList |= mask ;
 }
@@ -27,6 +25,8 @@ static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inT
 //---------------------------------------------------------------------------------------------------------------------*
 
 static inline TaskControlBlock * list_removeFirstTask (TaskList & ioTaskList) __attribute__((always_inline)) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
 
 static inline TaskControlBlock * list_removeFirstTask (TaskList & ioTaskList) {
   TaskControlBlock * result = nullptr ;
@@ -40,33 +40,55 @@ static inline TaskControlBlock * list_removeFirstTask (TaskList & ioTaskList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//  TEST IF TASK IS IN LIST
-//---------------------------------------------------------------------------------------------------------------------*
-
-static inline bool list_containsTask (const TaskList & inTaskList, TaskControlBlock * inTaskControlBlockPtr)  __attribute__((always_inline)) ;
-
-static inline bool list_containsTask (const TaskList & inTaskList, TaskControlBlock * inTaskControlBlockPtr) {
-  const unsigned runningTaskIndex = inTaskControlBlockPtr->mTaskIndex ;
-  const unsigned mask = 1 << runningTaskIndex ;
-  return (inTaskList & mask) != 0 ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  TEST IF LIST IS EMPTY
-//---------------------------------------------------------------------------------------------------------------------*
-
-// static inline bool list_isEmpty (const TaskList & inTaskList) {
-//   return inTaskList == 0 ;
-// }
-
-//---------------------------------------------------------------------------------------------------------------------*
 //  REMOVE TASK FROM LIST: inTask should not be null                                                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
 static inline void list_removeTask (TaskList & ioTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;
 
+//---------------------------------------------------------------------------------------------------------------------*
+
 static inline void list_removeTask (TaskList & ioTaskList, TaskControlBlock * inTask) {
-  const unsigned mask = ~ (1 << inTask->mTaskIndex) ;
+  const unsigned mask = 1 << inTask->mTaskIndex ;
   ioTaskList &= ~ mask ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  TEST IF A LIST CONTAINS A TASK                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static inline bool list_containsTask (const TaskList & inTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static inline bool list_containsTask (const TaskList & inTaskList, TaskControlBlock * inTask) {
+  const unsigned runningTaskIndex = inTask->mTaskIndex ;
+  const unsigned mask = 1 << runningTaskIndex ;
+  return (inTaskList & mask) != 0 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   ITERATE OVER TASK LIST                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef unsigned TaskListIterator ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static inline TaskListIterator list_makeIterator (const TaskList & inList) {
+  return inList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static inline TaskControlBlock * listIterator_nextTask (TaskListIterator & ioIterator) {
+  TaskControlBlock * task = nullptr ;
+  if (ioIterator != 0) {
+    const unsigned taskIndex = __builtin_ctz (ioIterator) ;
+    const unsigned mask = 1 << taskIndex ;
+    ioIterator &= ~ mask ;
+    task = & gTaskDescriptorArray [taskIndex] ;
+
+  }
+  return task ;
 }
 

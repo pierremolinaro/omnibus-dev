@@ -50,7 +50,7 @@ CPP_FILES:
   "../c-real-time-kernel-types.cpp"
   "../c-task-list.cpp"
   "c-arm7tdmi-context-code.cpp"
-  "../c-deadline-list-management.cpp"
+  "../c-deadline-list.cpp"
   "../c-real-time-kernel-code.cpp"
   "../c-guards.cpp"
   "../c-real-time-kernel-utilities.cpp"
