@@ -182,7 +182,7 @@ syntax extension plm_target_specific_syntax {
     $integer$ ?let stackedUserRegisterOnInterruptByteSize
     <configuration_key> !"UNDEFINED_INTERRUPT"
     $"string"$ ?let undefinedInterruptHandler
-    <configuration_key> !"C_FILES"
+    <configuration_key> !"CPP_FILES"
     @lstringlist C_definitionFiles = {}
     repeat
     while

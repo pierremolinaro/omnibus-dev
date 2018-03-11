@@ -44,12 +44,16 @@ INTERRUPT_HANDLER: "xtr-interrupt-handler.s"
 INTERRUPT_USER_STACK_SIZE: 0 // ARM7TDMI save no reg in user stack on interrupt
 UNDEFINED_INTERRUPT: "undefined-interrupt.s"
 
-C_FILES:
+CPP_FILES:
   "c-arm7tdmi-vectors.cpp"
   "c-arm7tdmi-context-types.cpp"
   "../c-real-time-kernel-types.cpp"
+  "../c-task-list.cpp"
   "c-arm7tdmi-context-code.cpp"
+  "../c-deadline-list-management.cpp"
   "../c-real-time-kernel-code.cpp"
+  "../c-guards.cpp"
+  "../c-real-time-kernel-utilities.cpp"
   "../memory-utilities.cpp"
 
 S_FILES:
