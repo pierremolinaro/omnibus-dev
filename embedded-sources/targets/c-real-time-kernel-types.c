@@ -24,10 +24,6 @@ typedef unsigned char bool ;
 typedef enum {GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-static unsigned countTrainingZeros (const unsigned inValue) ; // Defined in countTrainingZeros.c
-
-//---------------------------------------------------------------------------------------------------------------------*
 //   T A S K    C O N T R O L    B L O C K                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 

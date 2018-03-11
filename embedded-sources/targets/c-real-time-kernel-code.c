@@ -29,7 +29,7 @@ void kernel_selectTaskToRun (void) {
     gRunningTaskControlBlock = (TaskControlBlock *) 0 ;
   }
   if (gReadyTaskList != 0) {
-    const unsigned runningTaskIndex = countTrainingZeros (gReadyTaskList) ;
+    const unsigned runningTaskIndex = __builtin_ctz (gReadyTaskList) ;
     gReadyTaskList &= ~ (1 << runningTaskIndex) ;
     gRunningTaskControlBlock = & gTaskDescriptorArray [runningTaskIndex] ;
   }
@@ -119,7 +119,7 @@ void makeTaskReadyFromBlockingList (TaskList * ioWaitingList, bool * outFound) {
   *outFound = (*ioWaitingList) != 0 ;
   if (*outFound) {
   //--- Get index of waiting task
-    const unsigned taskIndex = countTrainingZeros (*ioWaitingList) ;
+    const unsigned taskIndex = __builtin_ctz (*ioWaitingList) ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
   //--- Remove task from waiting list
     *(ioWaitingList) &= ~ (1 << taskIndex) ;
@@ -135,7 +135,7 @@ void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) asm ("!FUNC!ma
 void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
   while (w > 0) {
-    const unsigned taskIndex = countTrainingZeros (w) ;
+    const unsigned taskIndex = __builtin_ctz (w) ;
     const unsigned mask = ~ (1 << taskIndex) ;
     w &= mask ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
@@ -294,7 +294,7 @@ void kernel_guardDidChange (GuardList * ioGuardListPtr) asm ("!FUNC!notify.chang
 
 void kernel_guardDidChange (GuardList * ioGuardListPtr) {
   while (ioGuardListPtr->mGuardValue > 0) {
-    const unsigned taskIndex = countTrainingZeros (ioGuardListPtr->mGuardValue) ;
+    const unsigned taskIndex = __builtin_ctz (ioGuardListPtr->mGuardValue) ;
     ioGuardListPtr->mGuardValue &= ~ (1 << taskIndex) ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
     removeTaskFromGuards (taskControlBlockPtr) ;
@@ -333,7 +333,7 @@ asm ("!FUNC!notify.change.for.guarded.wait.until") ;
 void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
   unsigned w = gDeadlineWaitingInGuardTaskList ;
   while (w > 0) {
-    const unsigned taskIndex = countTrainingZeros (w) ;
+    const unsigned taskIndex = __builtin_ctz (w) ;
     w &= ~ (1 << taskIndex) ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
     if (inUptime >= taskControlBlockPtr->mTaskDeadline) {

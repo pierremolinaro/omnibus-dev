@@ -18,7 +18,7 @@ import platform
 #  SETTINGS
 #———————————————————————————————————————————————————————————————————————————————
 
-LLVM_VERSION = "5.0.1"
+LLVM_VERSION = "6.0.0"
 LLVM_SUFFIX = ""
 
 BINUTILS_VERSION = "2.29.1"
