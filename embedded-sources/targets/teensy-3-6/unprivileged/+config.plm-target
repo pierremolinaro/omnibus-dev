@@ -44,11 +44,15 @@ INTERRUPT_HANDLER: "../xtr-interrupt-handler.s"
 INTERRUPT_USER_STACK_SIZE: 32 // Cortex M4 saves 8 regs in user stack on interrupt
 UNDEFINED_INTERRUPT : "../undefined-interrupt.s"
 
-C_FILES:
+CPP_FILES:
   "../c-cortex-m4-context-types.cpp"
   "../../c-real-time-kernel-types.cpp"
+  "../../c-task-list.cpp"
   "../c-cortex-m4-context-code.cpp"
+  "../../c-deadline-list-management.cpp"
   "../../c-real-time-kernel-code.cpp"
+  "../../c-guards.cpp"
+  "../../c-real-time-kernel-utilities.cpp"
   "../../memory-utilities.cpp"
   "../../heap.cpp"
   "../../dynamic-buffer.cpp"
