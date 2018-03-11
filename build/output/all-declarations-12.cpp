@@ -4838,6 +4838,10 @@ const char * gWrapperFileContent_33_embeddedSampleCode = "target \"teensy-3-6/un
   "    enable (!interrupt:.pinDetectPortA)\n"
   "  //--- Enable NVIC interrupt\n"
   "    enable (!interrupt:.pinDetectPortA)\n"
+  "  //--- Digital filters are clocked by the LPO clock \n"
+  "    #PORTC:DFCR = 1\n"
+  "  //--- Setr digital filter length \n"
+  "    #PORTC:DFWR = 31\n"
   "  //--- Enable digital filter ou PTC7\n"
   "    #PORTC:DFER = 1 << 7\n"
   "  //--- Generate an interrupt on falling edge of port #12 (PTC7)\n"
@@ -4896,7 +4900,7 @@ const cRegularFileWrapper gWrapperFile_33_embeddedSampleCode (
   "19-external-interrupt.plm",
   "plm",
   true, // Text file
-  4097, // Text length
+  4228, // Text length
   gWrapperFileContent_33_embeddedSampleCode
 ) ;
 
