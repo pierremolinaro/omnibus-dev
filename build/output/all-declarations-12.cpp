@@ -2373,7 +2373,7 @@ const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode (
 
 //--- File 'teensy-3-6/01-blink-led.plm'
 
-const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-6/xtr64\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2445,13 +2445,13 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  2150, // Text length
+  2143, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/02-blink-leds.plm'
 
-const char * gWrapperFileContent_16_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_16_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2566,7 +2566,7 @@ const cRegularFileWrapper gWrapperFile_16_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3216, // Text length
+  3209, // Text length
   gWrapperFileContent_16_embeddedSampleCode
 ) ;
 
@@ -2589,7 +2589,7 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "//    This results in the DMA request remaining asserted continuously after the first trigger.\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "target \"teensy-3-6/unprivileged\"\n"
+  "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2792,13 +2792,13 @@ const cRegularFileWrapper gWrapperFile_17_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  8284, // Text length
+  8277, // Text length
   gWrapperFileContent_17_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/04-large-structure.plm'
 
-const char * gWrapperFileContent_18_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_18_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2856,13 +2856,13 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "04-large-structure.plm",
   "plm",
   true, // Text file
-  1824, // Text length
+  1817, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/05-periodic-timer.plm'
 
-const char * gWrapperFileContent_19_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_19_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -2944,13 +2944,13 @@ const cRegularFileWrapper gWrapperFile_19_embeddedSampleCode (
   "05-periodic-timer.plm",
   "plm",
   true, // Text file
-  2436, // Text length
+  2429, // Text length
   gWrapperFileContent_19_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/06-chained-pit-0-1.plm'
 
-const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 192\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -3061,13 +3061,13 @@ const cRegularFileWrapper gWrapperFile_20_embeddedSampleCode (
   "06-chained-pit-0-1.plm",
   "plm",
   true, // Text file
-  3244, // Text length
+  3237, // Text length
   gWrapperFileContent_20_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/07-synchronization-gate.plm'
 
-const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -3188,13 +3188,13 @@ const cRegularFileWrapper gWrapperFile_21_embeddedSampleCode (
   "07-synchronization-gate.plm",
   "plm",
   true, // Text file
-  3351, // Text length
+  3344, // Text length
   gWrapperFileContent_21_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/08-synchronization-buffer.plm'
 
-const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -3306,13 +3306,13 @@ const cRegularFileWrapper gWrapperFile_22_embeddedSampleCode (
   "08-synchronization-buffer.plm",
   "plm",
   true, // Text file
-  3415, // Text length
+  3408, // Text length
   gWrapperFileContent_22_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/09-PWM-with-PTM-module.plm'
 
-const char * gWrapperFileContent_23_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_23_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -3405,13 +3405,13 @@ const cRegularFileWrapper gWrapperFile_23_embeddedSampleCode (
   "09-PWM-with-PTM-module.plm",
   "plm",
   true, // Text file
-  3530, // Text length
+  3523, // Text length
   gWrapperFileContent_23_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/10-integer-slices.plm'
 
-const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -3461,13 +3461,13 @@ const cRegularFileWrapper gWrapperFile_24_embeddedSampleCode (
   "10-integer-slices.plm",
   "plm",
   true, // Text file
-  1584, // Text length
+  1577, // Text length
   gWrapperFileContent_24_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/11-heap.plm'
 
-const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -3664,13 +3664,13 @@ const cRegularFileWrapper gWrapperFile_25_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5800, // Text length
+  5793, // Text length
   gWrapperFileContent_25_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/12-section-service-duration.plm'
 
-const char * gWrapperFileContent_26_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_26_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -3759,13 +3759,13 @@ const cRegularFileWrapper gWrapperFile_26_embeddedSampleCode (
   "12-section-service-duration.plm",
   "plm",
   true, // Text file
-  2397, // Text length
+  2390, // Text length
   gWrapperFileContent_26_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/13-usb-device.plm'
 
-const char * gWrapperFileContent_27_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_27_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -4295,13 +4295,13 @@ const cRegularFileWrapper gWrapperFile_27_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  21428, // Text length
+  21421, // Text length
   gWrapperFileContent_27_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/14-task-activation-duration-64-bit-timer.plm'
 
-const char * gWrapperFileContent_28_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_28_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "let BUS_MHZ2 @display = BUS_MHZ\n"
   "\n"
@@ -4395,13 +4395,13 @@ const cRegularFileWrapper gWrapperFile_28_embeddedSampleCode (
   "14-task-activation-duration-64-bit-timer.plm",
   "plm",
   true, // Text file
-  2712, // Text length
+  2705, // Text length
   gWrapperFileContent_28_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/15-task-activation-duration-systick.plm'
 
-const char * gWrapperFileContent_29_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_29_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -4469,13 +4469,13 @@ const cRegularFileWrapper gWrapperFile_29_embeddedSampleCode (
   "15-task-activation-duration-systick.plm",
   "plm",
   true, // Text file
-  2013, // Text length
+  2006, // Text length
   gWrapperFileContent_29_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/16-clock-out-pin.plm'
 
-const char * gWrapperFileContent_30_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_30_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -4524,13 +4524,13 @@ const cRegularFileWrapper gWrapperFile_30_embeddedSampleCode (
   "16-clock-out-pin.plm",
   "plm",
   true, // Text file
-  1797, // Text length
+  1790, // Text length
   gWrapperFileContent_30_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/17-flextimer-as-pwm.plm'
 
-const char * gWrapperFileContent_31_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_31_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 24\n"
   "//let myBUS_MHZ @display = BUS_MHZ\n"
   "//let myFLEXBUS_MHZ @display = FLEXBUS_MHZ\n"
@@ -4615,13 +4615,13 @@ const cRegularFileWrapper gWrapperFile_31_embeddedSampleCode (
   "17-flextimer-as-pwm.plm",
   "plm",
   true, // Text file
-  3308, // Text length
+  3301, // Text length
   gWrapperFileContent_31_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/18-flextimer-external-clock.plm'
 
-const char * gWrapperFileContent_32_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_32_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -4783,13 +4783,13 @@ const cRegularFileWrapper gWrapperFile_32_embeddedSampleCode (
   "18-flextimer-external-clock.plm",
   "plm",
   true, // Text file
-  5931, // Text length
+  5924, // Text length
   gWrapperFileContent_32_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-6/19-external-interrupt.plm'
 
-const char * gWrapperFileContent_33_embeddedSampleCode = "target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_33_embeddedSampleCode = "target \"teensy-3-6/xtr64\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
@@ -4900,7 +4900,7 @@ const cRegularFileWrapper gWrapperFile_33_embeddedSampleCode (
   "19-external-interrupt.plm",
   "plm",
   true, // Text file
-  4228, // Text length
+  4221, // Text length
   gWrapperFileContent_33_embeddedSampleCode
 ) ;
 
