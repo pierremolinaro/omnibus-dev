@@ -7551,25 +7551,9 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- File '/c-deadline-list-type.cpp'
+//--- File '/c-deadline-list-32-tasks.cpp'
 
 const char * gWrapperFileContent_0_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "typedef struct { unsigned mDeadlineList ; } DeadlineList ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_0_targetTemplates (
-  "c-deadline-list-type.cpp",
-  "cpp",
-  true, // Text file
-  303, // Text length
-  gWrapperFileContent_0_targetTemplates
-) ;
-
-//--- File '/c-deadline-list.cpp'
-
-const char * gWrapperFileContent_1_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//   D E A D L I N E    L I S T    M A N A G E M E N T                                                                 *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -7646,11 +7630,27 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_1_targetTemplates (
-  "c-deadline-list.cpp",
+const cRegularFileWrapper gWrapperFile_0_targetTemplates (
+  "c-deadline-list-32-tasks.cpp",
   "cpp",
   true, // Text file
   4270, // Text length
+  gWrapperFileContent_0_targetTemplates
+) ;
+
+//--- File '/c-deadline-list-type-32-tasks.cpp'
+
+const char * gWrapperFileContent_1_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct { unsigned mDeadlineList ; } DeadlineList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_1_targetTemplates (
+  "c-deadline-list-type-32-tasks.cpp",
+  "cpp",
+  true, // Text file
+  303, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -7783,7 +7783,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   gWrapperFileContent_2_targetTemplates
 ) ;
 
-//--- File '/c-guard-list.cpp'
+//--- File '/c-guard-list-32-tasks.cpp'
 
 const char * gWrapperFileContent_3_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "// ENTER TASK IN LIST: inTask should be not null\n"
@@ -7835,14 +7835,14 @@ const char * gWrapperFileContent_3_targetTemplates = "//------------------------
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_3_targetTemplates (
-  "c-guard-list.cpp",
+  "c-guard-list-32-tasks.cpp",
   "cpp",
   true, // Text file
   2672, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
-//--- File '/c-guard-types.cpp'
+//--- File '/c-guard-types-32-tasks.cpp'
 
 const char * gWrapperFileContent_4_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -7856,7 +7856,7 @@ const char * gWrapperFileContent_4_targetTemplates = "//------------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_4_targetTemplates (
-  "c-guard-types.cpp",
+  "c-guard-types-32-tasks.cpp",
   "cpp",
   true, // Text file
   580, // Text length
@@ -8167,26 +8167,9 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   gWrapperFileContent_7_targetTemplates
 ) ;
 
-//--- File '/c-task-list-type.cpp'
+//--- File '/c-task-list-32-tasks.cpp'
 
 const char * gWrapperFileContent_8_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "typedef struct { unsigned mList ; } TaskList ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n" ;
-
-const cRegularFileWrapper gWrapperFile_8_targetTemplates (
-  "c-task-list-type.cpp",
-  "cpp",
-  true, // Text file
-  292, // Text length
-  gWrapperFileContent_8_targetTemplates
-) ;
-
-//--- File '/c-task-list.cpp'
-
-const char * gWrapperFileContent_9_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//   TASK LIST FUNCTIONS                                                                                               *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -8228,11 +8211,28 @@ const char * gWrapperFileContent_9_targetTemplates = "//------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_targetTemplates (
-  "c-task-list.cpp",
+const cRegularFileWrapper gWrapperFile_8_targetTemplates (
+  "c-task-list-32-tasks.cpp",
   "cpp",
   true, // Text file
   2170, // Text length
+  gWrapperFileContent_8_targetTemplates
+) ;
+
+//--- File '/c-task-list-type-32-tasks.cpp'
+
+const char * gWrapperFileContent_9_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct { unsigned mList ; } TaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_9_targetTemplates (
+  "c-task-list-type-32-tasks.cpp",
+  "cpp",
+  true, // Text file
+  292, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 
@@ -10548,19 +10548,19 @@ const char * gWrapperFileContent_27_targetTemplates = "PYTHON_UTILITIES:\n"
   "\n"
   "INTERRUPT_HANDLER: \"xtr-interrupt-handler.s\"\n"
   "INTERRUPT_USER_STACK_SIZE: 0 // ARM7TDMI save no reg in user stack on interrupt\n"
-  "UNDEFINED_INTERRUPT: \"undefined-interrupt.s\"\n"
+  "UNUSED_INTERRUPT: \"undefined-interrupt.s\"\n"
   "\n"
   "CPP_FILES:\n"
   "  \"c-arm7tdmi-vectors.cpp\"\n"
   "  \"c-arm7tdmi-context-types.cpp\"\n"
-  "  \"../c-deadline-list-type.cpp\"\n"
-  "  \"../c-task-list-type.cpp\"\n"
-  "  \"../c-guard-types.cpp\"\n"
+  "  \"../c-deadline-list-type-32-tasks.cpp\"\n"
+  "  \"../c-task-list-type-32-tasks.cpp\"\n"
+  "  \"../c-guard-types-32-tasks.cpp\"\n"
   "  \"../c-task-control-block-type.cpp\"\n"
-  "  \"../c-guard-list.cpp\"\n"
-  "  \"../c-task-list.cpp\"\n"
+  "  \"../c-guard-list-32-tasks.cpp\"\n"
+  "  \"../c-task-list-32-tasks.cpp\"\n"
   "  \"c-arm7tdmi-context-code.cpp\"\n"
-  "  \"../c-deadline-list.cpp\"\n"
+  "  \"../c-deadline-list-32-tasks.cpp\"\n"
   "  \"../c-real-time-kernel-code.cpp\"\n"
   "  \"../c-guard-code.cpp\"\n"
   "  \"../c-real-time-kernel-utilities.cpp\"\n"
@@ -10618,7 +10618,7 @@ const cRegularFileWrapper gWrapperFile_27_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  2595, // Text length
+  2646, // Text length
   gWrapperFileContent_27_targetTemplates
 ) ;
 
@@ -16030,18 +16030,18 @@ const char * gWrapperFileContent_69_targetTemplates = "PYTHON_UTILITIES:\n"
   "//--- Interrupt handler\n"
   "INTERRUPT_HANDLER: \"../xtr-interrupt-handler.s\"\n"
   "INTERRUPT_USER_STACK_SIZE: 32 // Cortex M4 saves 8 regs in user stack on interrupt\n"
-  "UNDEFINED_INTERRUPT: \"../undefined-interrupt.s\"\n"
+  "UNUSED_INTERRUPT: \"../undefined-interrupt.s\"\n"
   "\n"
   "CPP_FILES:\n"
   "  \"../c-cortex-m4-context-types.cpp\"\n"
-  "  \"../../c-deadline-list-type.cpp\"\n"
-  "  \"../../c-task-list-type.cpp\"\n"
-  "  \"../../c-guard-types.cpp\"\n"
+  "  \"../../c-deadline-list-type-32-tasks.cpp\"\n"
+  "  \"../../c-task-list-type-32-tasks.cpp\"\n"
+  "  \"../../c-guard-types-32-tasks.cpp\"\n"
   "  \"../../c-task-control-block-type.cpp\"\n"
-  "  \"../../c-guard-list.cpp\"\n"
-  "  \"../../c-task-list.cpp\"\n"
+  "  \"../../c-guard-list-32-tasks.cpp\"\n"
+  "  \"../../c-task-list-32-tasks.cpp\"\n"
   "  \"../c-cortex-m4-context-code.cpp\"\n"
-  "  \"../../c-deadline-list.cpp\"\n"
+  "  \"../../c-deadline-list-32-tasks.cpp\"\n"
   "  \"../../c-real-time-kernel-code.cpp\"\n"
   "  \"../../c-guard-code.cpp\"\n"
   "  \"../../c-real-time-kernel-utilities.cpp\"\n"
@@ -16154,7 +16154,7 @@ const cRegularFileWrapper gWrapperFile_69_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  4433, // Text length
+  4484, // Text length
   gWrapperFileContent_69_targetTemplates
 ) ;
 
@@ -21957,26 +21957,9 @@ const cRegularFileWrapper gWrapperFile_96_targetTemplates (
   gWrapperFileContent_96_targetTemplates
 ) ;
 
-//--- File 'teensy-3-6/undefined-interrupt.s'
+//--- File 'teensy-3-6/s-interrupt-handler.s'
 
-const char * gWrapperFileContent_97_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@  Undefined interrupt !ISR!\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "\t!ISR! = -1\n"
-  "\n" ;
-
-const cRegularFileWrapper gWrapperFile_97_targetTemplates (
-  "undefined-interrupt.s",
-  "s",
-  true, // Text file
-  285, // Text length
-  gWrapperFileContent_97_targetTemplates
-) ;
-
-//--- File 'teensy-3-6/xtr-interrupt-handler.s'
-
-const char * gWrapperFileContent_98_targetTemplates = "\n"
+const char * gWrapperFileContent_97_targetTemplates = "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 I N T E R R U P T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                        *\n"
@@ -22012,218 +21995,17 @@ const char * gWrapperFileContent_98_targetTemplates = "\n"
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_98_targetTemplates (
-  "xtr-interrupt-handler.s",
+const cRegularFileWrapper gWrapperFile_97_targetTemplates (
+  "s-interrupt-handler.s",
   "s",
   true, // Text file
   1565, // Text length
-  gWrapperFileContent_98_targetTemplates
+  gWrapperFileContent_97_targetTemplates
 ) ;
 
-//--- File 'unprivileged/+config.plm-target'
+//--- File 'teensy-3-6/s-interrupt-vectors.s'
 
-const char * gWrapperFileContent_99_targetTemplates = "PYTHON_UTILITIES:\n"
-  "   \"../../py-toolpath.txt\" -> \"sources/toolpath.py\"\n"
-  "   \"../../py-makefile.txt\" -> \"sources/makefile.py\"\n"
-  "   \"../../py-check-stacks.txt\" -> \"sources/check-stacks.py\"\n"
-  "   \"../../py-plm.txt\" -> \"sources/plm.py\"\n"
-  "   \"../../py-build-verbose.txt\" -> \"build-verbose.py\"\n"
-  "   \"../../py-clean.txt\" -> \"clean.py\"\n"
-  "   \"../../py-objdump.txt\" -> \"objdump.py\"\n"
-  "   \"../../py-objsize.txt\" -> \"objsize.py\"\n"
-  "   \"../py-run.txt\" -> \"run.py\"\n"
-  "\n"
-  "PYTHON_BUILD: \"../py-build.txt\"\n"
-  "\n"
-  "LINKER_SCRIPT: \"../ld-linker.txt\"\n"
-  "\n"
-  "PANIC_CODE_TYPE_NAME: $uint32\n"
-  "PANIC_LINE_TYPE_NAME: $uint32\n"
-  "\n"
-  "POINTER_BIT_COUNT: 32\n"
-  "\n"
-  "DYNAMIC_ARRAY: yes\n"
-  "\n"
-  "SYSTEM_STACK_SIZE: 1024\n"
-  "\n"
-  "NOP: \"call void asm sideeffect \\\"nop\\\", \\\"\\\"() nounwind\"\n"
-  "\n"
-  "BIT_BAND:0x4000_0000 0x4200_0000 0x4200_0000 32 4\n"
-  "\n"
-  "SERVICE_HANDLER: \"service-handler.s\"\n"
-  "SERVICE_SYSTEM_STACK_SIZE: 12 // as_svc_handler saves 3 registers on system stack\n"
-  "SERVICE_DISPATCHER_HEADER: \"service-dispatcher-header.s\"\n"
-  "SERVICE_DISPATCHER_ENTRY: \"service-dispatcher-entry.s\"\n"
-  "SERVICE_ENTRY_NO_RETURNED_VALUE: \"service-entry-no-return.s\"\n"
-  "SERVICE_ENTRY_WITH_RETURNED_VALUE: \"service-entry-return-value.s\"\n"
-  "\n"
-  "SECTION_HANDLER: \"udfcoded-section-handler.s\"\n"
-  "SECTION_SYSTEM_STACK_SIZE: 8 // saves 2 registers on system stack\n"
-  "SECTION_DISPATCHER_HEADER: \"udfcoded-section-dispatcher-header.s\"\n"
-  "SECTION_DISPATCHER_ENTRY: \"udfcoded-section-dispatcher-entry.s\"\n"
-  "SECTION_ENTRY_FROM_ANY_MODE: \"udfcoded-section-invocation-from-any-mode.s\"\n"
-  "SECTION_ENTRY_FROM_USER_MODE: \"udfcoded-section-invocation-from-user-mode.s\"\n"
-  "\n"
-  "INTERRUPT_HANDLER: \"../xtr-interrupt-handler.s\"\n"
-  "INTERRUPT_USER_STACK_SIZE: 32 // Cortex M4 saves 8 regs in user stack on interrupt\n"
-  "UNDEFINED_INTERRUPT : \"../undefined-interrupt.s\"\n"
-  "\n"
-  "CPP_FILES:\n"
-  "  \"../c-cortex-m4-context-types.cpp\"\n"
-  "  \"../../c-deadline-list-type.cpp\"\n"
-  "  \"../../c-task-list-type.cpp\"\n"
-  "  \"../../c-guard-types.cpp\"\n"
-  "  \"../../c-task-control-block-type.cpp\"\n"
-  "  \"../../c-task-list.cpp\"\n"
-  "  \"../../c-guard-list.cpp\"\n"
-  "  \"../c-cortex-m4-context-code.cpp\"\n"
-  "  \"../../c-deadline-list.cpp\"\n"
-  "  \"../../c-real-time-kernel-code.cpp\"\n"
-  "  \"../../c-guard-code.cpp\"\n"
-  "  \"../../c-real-time-kernel-utilities.cpp\"\n"
-  "  \"../../memory-utilities.cpp\"\n"
-  "  \"../../heap.cpp\"\n"
-  "  \"../../dynamic-buffer.cpp\"\n"
-  "\n"
-  "S_FILES:\n"
-  "  \"../s-cortex-m4-header.s\"\n"
-  "  \"s-interrupt-vectors.s\"\n"
-  "  \"s-reset-handler.s\"\n"
-  "\n"
-  "LL_FILES:\n"
-  "  \"../ll-cortex-m4.ll\"\n"
-  "  \"../../ll-clear-bss.ll\"\n"
-  "  \"../../ll-copy-data-section.ll\"\n"
-  "  \"../../ll-configuration-on-boot.ll\"\n"
-  "\n"
-  "PLM_FILES:\n"
-  "  \"../plm-registers-mk66fx1m0.plm\"\n"
-  "  \"../plm-teensy-3-6-nvic-interrupts.plm\"\n"
-  "  \"../driver-root-teensy-3-6.plm\"\n"
-  "  \"../plm-teensy-3-6-time.plm\"\n"
-  "  \"../plm-teensy-3-6-xtr.plm\"\n"
-  "  \"../driver-digital-teensy-3-6.plm\"\n"
-  "  \"../plm-teensy-3-6-lcd.plm\"\n"
-  "  \"../plm-teensy-3-6-panic.plm\"\n"
-  "  \"../../plm-semaphore.plm\"\n"
-  "  \"../../heap.plm\"\n"
-  "\n"
-  "INTERRUPTS:\n"
-  "  NMI -> 2\n"
-  "  MemManage -> 4\n"
-  "  BusFault -> 5\n"
-  "  UsageFault -> 6\n"
-  "  DebugMonitor -> 12\n"
-  "  PendSV -> 14\n"
-  "  systick -> 15\n"
-  "  DMAChannel_0_16_TransferComplete -> 16\n"
-  "  DMAChannel_1_17_TransferComplete -> 17\n"
-  "  DMAChannel_2_18_TransferComplete -> 18\n"
-  "  DMAChannel_3_19_TransferComplete -> 19\n"
-  "  DMAChannel_4_20_TransferComplete -> 20\n"
-  "  DMAChannel_5_21_TransferComplete -> 21\n"
-  "  DMAChannel_6_22_TransferComplete -> 22\n"
-  "  DMAChannel_7_23_TransferComplete -> 23\n"
-  "  DMAChannel_8_24_TransferComplete -> 24\n"
-  "  DMAChannel_9_25_TransferComplete -> 25\n"
-  "  DMAChannel_10_26_TransferComplete -> 26\n"
-  "  DMAChannel_11_27_TransferComplete -> 27\n"
-  "  DMAChannel_12_28_TransferComplete -> 28\n"
-  "  DMAChannel_13_29_TransferComplete -> 29\n"
-  "  DMAChannel_14_30_TransferComplete -> 30\n"
-  "  DMAChannel_15_31_TransferComplete -> 31\n"
-  "  DMAError -> 32\n"
-  "  MCM -> 33\n"
-  "  FlashMemoryCommandComplete -> 34\n"
-  "  FlashMemoryReadCollision -> 35\n"
-  "  LowVoltage -> 36\n"
-  "  LowLeakageWakeup -> 37\n"
-  "  WDOG_EWM -> 38\n"
-  "  RandomNumberGenerator -> 39\n"
-  "  I2C0 -> 40\n"
-  "  I2C1 -> 41\n"
-  "  SPI0 -> 42\n"
-  "  SPI1 -> 43\n"
-  "  I2S0Transmit -> 44\n"
-  "  I2S0Receive -> 45\n"
-  "  UART0Status -> 47\n"
-  "  UART0Error -> 48\n"
-  "  UART1Status -> 49\n"
-  "  UART1Error -> 50\n"
-  "  UART2Status -> 51\n"
-  "  UART2Error -> 52\n"
-  "  UART3Status -> 53\n"
-  "  UART3Error -> 54\n"
-  "  ADC0 -> 55\n"
-  "  CMP0 -> 56\n"
-  "  CMP1 -> 57\n"
-  "  FTM0 -> 58\n"
-  "  FTM1 -> 59\n"
-  "  FTM2 -> 60\n"
-  "  CMT -> 61\n"
-  "  RTCAlarm -> 62\n"
-  "  RTCSecond -> 63\n"
-  "  PITChannel0 -> 64\n"
-  "  PITChannel1 -> 65\n"
-  "  PITChannel2 -> 66\n"
-  "  PITChannel3 -> 67\n"
-  "  PDB -> 68\n"
-  "  USBFS_OTG -> 69\n"
-  "  USBFSChargerDetect -> 70\n"
-  "  DAC0 -> 72\n"
-  "  MCG -> 73\n"
-  "  lowPowerTimer -> 74\n"
-  "  pinDetectPortA -> 75\n"
-  "  pinDetectPortB -> 76\n"
-  "  pinDetectPortC -> 77\n"
-  "  pinDetectPortD -> 78\n"
-  "  pinDetectPortE -> 79\n"
-  "  softwareInterrupt -> 80\n"
-  "  SPI2 -> 81\n"
-  "  UART4Status -> 82\n"
-  "  UART4Error -> 83\n"
-  "  CMP2 -> 86\n"
-  "  FTM3 -> 87\n"
-  "  DAC1 -> 88\n"
-  "  ADC1 -> 89\n"
-  "  I2C2 -> 90\n"
-  "  CAN0MessageBuffer -> 91\n"
-  "  CAN0BusOff -> 92\n"
-  "  CAN0Error -> 93\n"
-  "  CAN0TransmitWarning -> 94\n"
-  "  CAN0ReceiveWarning -> 95\n"
-  "  CAN0WakeUp -> 96\n"
-  "  SDHC -> 97\n"
-  "  EthernetTimer -> 98\n"
-  "  EthernetTransmit -> 99\n"
-  "  EthernetReceive -> 100\n"
-  "  EthernetError -> 101\n"
-  "  LPUART0Status -> 102\n"
-  "  TSI0 -> 103\n"
-  "  TPM1 -> 104\n"
-  "  TPM2 -> 105\n"
-  "  USB_HS_DCD_PHY -> 106\n"
-  "  I2C3 -> 107\n"
-  "  CMP3 -> 108\n"
-  "  USB_HS_OTG -> 109\n"
-  "  CAN1MessageBuffer -> 110\n"
-  "  CAN1BusOff -> 111\n"
-  "  CAN1Error -> 112\n"
-  "  CAN1TransmitWarning -> 113\n"
-  "  CAN1ReceiveWarning -> 114\n"
-  "  CAN1WakeUp -> 115\n" ;
-
-const cRegularFileWrapper gWrapperFile_99_targetTemplates (
-  "+config.plm-target",
-  "plm-target",
-  true, // Text file
-  5027, // Text length
-  gWrapperFileContent_99_targetTemplates
-) ;
-
-//--- File 'unprivileged/s-interrupt-vectors.s'
-
-const char * gWrapperFileContent_100_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_98_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@   INTERRUPT VECTOR                                                                                                   *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22373,17 +22155,17 @@ const char * gWrapperFileContent_100_targetTemplates = "@-----------------------
   "  .word -2\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_100_targetTemplates (
+const cRegularFileWrapper gWrapperFile_98_targetTemplates (
   "s-interrupt-vectors.s",
   "s",
   true, // Text file
   5107, // Text length
-  gWrapperFileContent_100_targetTemplates
+  gWrapperFileContent_98_targetTemplates
 ) ;
 
-//--- File 'unprivileged/s-reset-handler.s'
+//--- File 'teensy-3-6/s-reset-handler.s'
 
-const char * gWrapperFileContent_101_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_99_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 R E S E T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                *\n"
   "@                                                                                                                      *\n"
@@ -22426,29 +22208,46 @@ const char * gWrapperFileContent_101_targetTemplates = "@-----------------------
   "  b  background.task\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_101_targetTemplates (
+const cRegularFileWrapper gWrapperFile_99_targetTemplates (
   "s-reset-handler.s",
   "s",
   true, // Text file
   2100, // Text length
-  gWrapperFileContent_101_targetTemplates
+  gWrapperFileContent_99_targetTemplates
 ) ;
 
-//--- File 'unprivileged/service-dispatcher-entry.s'
+//--- File 'teensy-3-6/s-unused-interrupt.s'
 
-const char * gWrapperFileContent_102_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
+const char * gWrapperFileContent_100_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@  Undefined interrupt !ISR!\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "\t!ISR! = -1\n"
+  "\n" ;
 
-const cRegularFileWrapper gWrapperFile_102_targetTemplates (
+const cRegularFileWrapper gWrapperFile_100_targetTemplates (
+  "s-unused-interrupt.s",
+  "s",
+  true, // Text file
+  285, // Text length
+  gWrapperFileContent_100_targetTemplates
+) ;
+
+//--- File 'teensy-3-6/service-dispatcher-entry.s'
+
+const char * gWrapperFileContent_101_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
+
+const cRegularFileWrapper gWrapperFile_101_targetTemplates (
   "service-dispatcher-entry.s",
   "s",
   true, // Text file
   29, // Text length
-  gWrapperFileContent_102_targetTemplates
+  gWrapperFileContent_101_targetTemplates
 ) ;
 
-//--- File 'unprivileged/service-dispatcher-header.s'
+//--- File 'teensy-3-6/service-dispatcher-header.s'
 
-const char * gWrapperFileContent_103_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_102_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
   "@                                                                                                                      *\n"
@@ -22461,17 +22260,17 @@ const char * gWrapperFileContent_103_targetTemplates = "@-----------------------
   "__svc_dispatcher_table:\n"
   "  .word  init.routines @ 0\n" ;
 
-const cRegularFileWrapper gWrapperFile_103_targetTemplates (
+const cRegularFileWrapper gWrapperFile_102_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
   704, // Text length
-  gWrapperFileContent_103_targetTemplates
+  gWrapperFileContent_102_targetTemplates
 ) ;
 
-//--- File 'unprivileged/service-entry-no-return.s'
+//--- File 'teensy-3-6/service-entry-no-return.s'
 
-const char * gWrapperFileContent_104_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_103_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22493,17 +22292,17 @@ const char * gWrapperFileContent_104_targetTemplates = "@-----------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_104_targetTemplates (
+const cRegularFileWrapper gWrapperFile_103_targetTemplates (
   "service-entry-no-return.s",
   "s",
   true, // Text file
   513, // Text length
-  gWrapperFileContent_104_targetTemplates
+  gWrapperFileContent_103_targetTemplates
 ) ;
 
-//--- File 'unprivileged/service-entry-return-value.s'
+//--- File 'teensy-3-6/service-entry-return-value.s'
 
-const char * gWrapperFileContent_105_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_104_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22525,17 +22324,17 @@ const char * gWrapperFileContent_105_targetTemplates = "@-----------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_105_targetTemplates (
+const cRegularFileWrapper gWrapperFile_104_targetTemplates (
   "service-entry-return-value.s",
   "s",
   true, // Text file
   526, // Text length
-  gWrapperFileContent_105_targetTemplates
+  gWrapperFileContent_104_targetTemplates
 ) ;
 
-//--- File 'unprivileged/service-handler.s'
+//--- File 'teensy-3-6/service-handler.s'
 
-const char * gWrapperFileContent_106_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_105_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
   "@                                                                                                                      *\n"
@@ -22665,29 +22464,29 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "  bx   r1\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_106_targetTemplates (
+const cRegularFileWrapper gWrapperFile_105_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
   7753, // Text length
-  gWrapperFileContent_106_targetTemplates
+  gWrapperFileContent_105_targetTemplates
 ) ;
 
-//--- File 'unprivileged/udfcoded-section-dispatcher-entry.s'
+//--- File 'teensy-3-6/udfcoded-section-dispatcher-entry.s'
 
-const char * gWrapperFileContent_107_targetTemplates = "  .word  !IMPLEMENTATION_ROUTINE! @ !IDX!, user routine !USER_ROUTINE!\n" ;
+const char * gWrapperFileContent_106_targetTemplates = "  .word  !IMPLEMENTATION_ROUTINE! @ !IDX!, user routine !USER_ROUTINE!\n" ;
 
-const cRegularFileWrapper gWrapperFile_107_targetTemplates (
+const cRegularFileWrapper gWrapperFile_106_targetTemplates (
   "udfcoded-section-dispatcher-entry.s",
   "s",
   true, // Text file
   71, // Text length
-  gWrapperFileContent_107_targetTemplates
+  gWrapperFileContent_106_targetTemplates
 ) ;
 
-//--- File 'unprivileged/udfcoded-section-dispatcher-header.s'
+//--- File 'teensy-3-6/udfcoded-section-dispatcher-header.s'
 
-const char * gWrapperFileContent_108_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_107_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S E C T I O N   T A B L E                                                                            *\n"
   "@                                                                                                                      *\n"
@@ -22697,17 +22496,17 @@ const char * gWrapperFileContent_108_targetTemplates = "@-----------------------
   "\n"
   "__section_dispatcher_table:\n" ;
 
-const cRegularFileWrapper gWrapperFile_108_targetTemplates (
+const cRegularFileWrapper gWrapperFile_107_targetTemplates (
   "udfcoded-section-dispatcher-header.s",
   "s",
   true, // Text file
   647, // Text length
-  gWrapperFileContent_108_targetTemplates
+  gWrapperFileContent_107_targetTemplates
 ) ;
 
-//--- File 'unprivileged/udfcoded-section-handler.s'
+//--- File 'teensy-3-6/udfcoded-section-handler.s'
 
-const char * gWrapperFileContent_109_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_108_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 U D F    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
   "@                                                                                                                      *\n"
@@ -22763,17 +22562,17 @@ const char * gWrapperFileContent_109_targetTemplates = "@-----------------------
   "  pop   {r5, pc}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_109_targetTemplates (
+const cRegularFileWrapper gWrapperFile_108_targetTemplates (
   "udfcoded-section-handler.s",
   "s",
   true, // Text file
   3206, // Text length
-  gWrapperFileContent_109_targetTemplates
+  gWrapperFileContent_108_targetTemplates
 ) ;
 
-//--- File 'unprivileged/udfcoded-section-invocation-from-any-mode.s'
+//--- File 'teensy-3-6/udfcoded-section-invocation-from-any-mode.s'
 
-const char * gWrapperFileContent_110_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_109_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !USER_ROUTINE!, implemented by !IMPLEMENTATION_ROUTINE!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22800,17 +22599,17 @@ const char * gWrapperFileContent_110_targetTemplates = "@-----------------------
   "  .fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_110_targetTemplates (
+const cRegularFileWrapper gWrapperFile_109_targetTemplates (
   "udfcoded-section-invocation-from-any-mode.s",
   "s",
   true, // Text file
   809, // Text length
-  gWrapperFileContent_110_targetTemplates
+  gWrapperFileContent_109_targetTemplates
 ) ;
 
-//--- File 'unprivileged/udfcoded-section-invocation-from-user-mode.s'
+//--- File 'teensy-3-6/udfcoded-section-invocation-from-user-mode.s'
 
-const char * gWrapperFileContent_111_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_110_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !USER_ROUTINE!, implemented by !IMPLEMENTATION_ROUTINE!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22834,29 +22633,218 @@ const char * gWrapperFileContent_111_targetTemplates = "@-----------------------
   "  .fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_111_targetTemplates (
+const cRegularFileWrapper gWrapperFile_110_targetTemplates (
   "udfcoded-section-invocation-from-user-mode.s",
   "s",
   true, // Text file
   628, // Text length
+  gWrapperFileContent_110_targetTemplates
+) ;
+
+//--- File 'unprivileged/+config.plm-target'
+
+const char * gWrapperFileContent_111_targetTemplates = "PYTHON_UTILITIES:\n"
+  "   \"../../py-toolpath.txt\" -> \"sources/toolpath.py\"\n"
+  "   \"../../py-makefile.txt\" -> \"sources/makefile.py\"\n"
+  "   \"../../py-check-stacks.txt\" -> \"sources/check-stacks.py\"\n"
+  "   \"../../py-plm.txt\" -> \"sources/plm.py\"\n"
+  "   \"../../py-build-verbose.txt\" -> \"build-verbose.py\"\n"
+  "   \"../../py-clean.txt\" -> \"clean.py\"\n"
+  "   \"../../py-objdump.txt\" -> \"objdump.py\"\n"
+  "   \"../../py-objsize.txt\" -> \"objsize.py\"\n"
+  "   \"../py-run.txt\" -> \"run.py\"\n"
+  "\n"
+  "PYTHON_BUILD: \"../py-build.txt\"\n"
+  "\n"
+  "LINKER_SCRIPT: \"../ld-linker.txt\"\n"
+  "\n"
+  "PANIC_CODE_TYPE_NAME: $uint32\n"
+  "PANIC_LINE_TYPE_NAME: $uint32\n"
+  "\n"
+  "POINTER_BIT_COUNT: 32\n"
+  "\n"
+  "DYNAMIC_ARRAY: yes\n"
+  "\n"
+  "SYSTEM_STACK_SIZE: 1024\n"
+  "\n"
+  "NOP: \"call void asm sideeffect \\\"nop\\\", \\\"\\\"() nounwind\"\n"
+  "\n"
+  "BIT_BAND:0x4000_0000 0x4200_0000 0x4200_0000 32 4\n"
+  "\n"
+  "SERVICE_HANDLER: \"../service-handler.s\"\n"
+  "SERVICE_SYSTEM_STACK_SIZE: 12 // as_svc_handler saves 3 registers on system stack\n"
+  "SERVICE_DISPATCHER_HEADER: \"../service-dispatcher-header.s\"\n"
+  "SERVICE_DISPATCHER_ENTRY: \"../service-dispatcher-entry.s\"\n"
+  "SERVICE_ENTRY_NO_RETURNED_VALUE: \"../service-entry-no-return.s\"\n"
+  "SERVICE_ENTRY_WITH_RETURNED_VALUE: \"../service-entry-return-value.s\"\n"
+  "\n"
+  "SECTION_HANDLER: \"../udfcoded-section-handler.s\"\n"
+  "SECTION_SYSTEM_STACK_SIZE: 8 // saves 2 registers on system stack\n"
+  "SECTION_DISPATCHER_HEADER: \"../udfcoded-section-dispatcher-header.s\"\n"
+  "SECTION_DISPATCHER_ENTRY: \"../udfcoded-section-dispatcher-entry.s\"\n"
+  "SECTION_ENTRY_FROM_ANY_MODE: \"../udfcoded-section-invocation-from-any-mode.s\"\n"
+  "SECTION_ENTRY_FROM_USER_MODE: \"../udfcoded-section-invocation-from-user-mode.s\"\n"
+  "\n"
+  "INTERRUPT_HANDLER: \"../s-interrupt-handler.s\"\n"
+  "INTERRUPT_USER_STACK_SIZE: 32 // Cortex M4 saves 8 regs in user stack on interrupt\n"
+  "UNUSED_INTERRUPT: \"../s-unused-interrupt.s\"\n"
+  "\n"
+  "CPP_FILES:\n"
+  "  \"../c-cortex-m4-context-types.cpp\"\n"
+  "  \"../../c-deadline-list-type-32-tasks.cpp\"\n"
+  "  \"../../c-task-list-type-32-tasks.cpp\"\n"
+  "  \"../../c-guard-types-32-tasks.cpp\"\n"
+  "  \"../../c-task-control-block-type.cpp\"\n"
+  "  \"../../c-task-list-32-tasks.cpp\"\n"
+  "  \"../../c-guard-list-32-tasks.cpp\"\n"
+  "  \"../c-cortex-m4-context-code.cpp\"\n"
+  "  \"../../c-deadline-list-32-tasks.cpp\"\n"
+  "  \"../../c-real-time-kernel-code.cpp\"\n"
+  "  \"../../c-guard-code.cpp\"\n"
+  "  \"../../c-real-time-kernel-utilities.cpp\"\n"
+  "  \"../../memory-utilities.cpp\"\n"
+  "  \"../../heap.cpp\"\n"
+  "  \"../../dynamic-buffer.cpp\"\n"
+  "\n"
+  "S_FILES:\n"
+  "  \"../s-cortex-m4-header.s\"\n"
+  "  \"../s-interrupt-vectors.s\"\n"
+  "  \"../s-reset-handler.s\"\n"
+  "\n"
+  "LL_FILES:\n"
+  "  \"../ll-cortex-m4.ll\"\n"
+  "  \"../../ll-clear-bss.ll\"\n"
+  "  \"../../ll-copy-data-section.ll\"\n"
+  "  \"../../ll-configuration-on-boot.ll\"\n"
+  "\n"
+  "PLM_FILES:\n"
+  "  \"../plm-registers-mk66fx1m0.plm\"\n"
+  "  \"../plm-teensy-3-6-nvic-interrupts.plm\"\n"
+  "  \"../driver-root-teensy-3-6.plm\"\n"
+  "  \"../plm-teensy-3-6-time.plm\"\n"
+  "  \"../plm-teensy-3-6-xtr.plm\"\n"
+  "  \"../driver-digital-teensy-3-6.plm\"\n"
+  "  \"../plm-teensy-3-6-lcd.plm\"\n"
+  "  \"../plm-teensy-3-6-panic.plm\"\n"
+  "  \"../../plm-semaphore.plm\"\n"
+  "  \"../../heap.plm\"\n"
+  "\n"
+  "INTERRUPTS:\n"
+  "  NMI -> 2\n"
+  "  MemManage -> 4\n"
+  "  BusFault -> 5\n"
+  "  UsageFault -> 6\n"
+  "  DebugMonitor -> 12\n"
+  "  PendSV -> 14\n"
+  "  systick -> 15\n"
+  "  DMAChannel_0_16_TransferComplete -> 16\n"
+  "  DMAChannel_1_17_TransferComplete -> 17\n"
+  "  DMAChannel_2_18_TransferComplete -> 18\n"
+  "  DMAChannel_3_19_TransferComplete -> 19\n"
+  "  DMAChannel_4_20_TransferComplete -> 20\n"
+  "  DMAChannel_5_21_TransferComplete -> 21\n"
+  "  DMAChannel_6_22_TransferComplete -> 22\n"
+  "  DMAChannel_7_23_TransferComplete -> 23\n"
+  "  DMAChannel_8_24_TransferComplete -> 24\n"
+  "  DMAChannel_9_25_TransferComplete -> 25\n"
+  "  DMAChannel_10_26_TransferComplete -> 26\n"
+  "  DMAChannel_11_27_TransferComplete -> 27\n"
+  "  DMAChannel_12_28_TransferComplete -> 28\n"
+  "  DMAChannel_13_29_TransferComplete -> 29\n"
+  "  DMAChannel_14_30_TransferComplete -> 30\n"
+  "  DMAChannel_15_31_TransferComplete -> 31\n"
+  "  DMAError -> 32\n"
+  "  MCM -> 33\n"
+  "  FlashMemoryCommandComplete -> 34\n"
+  "  FlashMemoryReadCollision -> 35\n"
+  "  LowVoltage -> 36\n"
+  "  LowLeakageWakeup -> 37\n"
+  "  WDOG_EWM -> 38\n"
+  "  RandomNumberGenerator -> 39\n"
+  "  I2C0 -> 40\n"
+  "  I2C1 -> 41\n"
+  "  SPI0 -> 42\n"
+  "  SPI1 -> 43\n"
+  "  I2S0Transmit -> 44\n"
+  "  I2S0Receive -> 45\n"
+  "  UART0Status -> 47\n"
+  "  UART0Error -> 48\n"
+  "  UART1Status -> 49\n"
+  "  UART1Error -> 50\n"
+  "  UART2Status -> 51\n"
+  "  UART2Error -> 52\n"
+  "  UART3Status -> 53\n"
+  "  UART3Error -> 54\n"
+  "  ADC0 -> 55\n"
+  "  CMP0 -> 56\n"
+  "  CMP1 -> 57\n"
+  "  FTM0 -> 58\n"
+  "  FTM1 -> 59\n"
+  "  FTM2 -> 60\n"
+  "  CMT -> 61\n"
+  "  RTCAlarm -> 62\n"
+  "  RTCSecond -> 63\n"
+  "  PITChannel0 -> 64\n"
+  "  PITChannel1 -> 65\n"
+  "  PITChannel2 -> 66\n"
+  "  PITChannel3 -> 67\n"
+  "  PDB -> 68\n"
+  "  USBFS_OTG -> 69\n"
+  "  USBFSChargerDetect -> 70\n"
+  "  DAC0 -> 72\n"
+  "  MCG -> 73\n"
+  "  lowPowerTimer -> 74\n"
+  "  pinDetectPortA -> 75\n"
+  "  pinDetectPortB -> 76\n"
+  "  pinDetectPortC -> 77\n"
+  "  pinDetectPortD -> 78\n"
+  "  pinDetectPortE -> 79\n"
+  "  softwareInterrupt -> 80\n"
+  "  SPI2 -> 81\n"
+  "  UART4Status -> 82\n"
+  "  UART4Error -> 83\n"
+  "  CMP2 -> 86\n"
+  "  FTM3 -> 87\n"
+  "  DAC1 -> 88\n"
+  "  ADC1 -> 89\n"
+  "  I2C2 -> 90\n"
+  "  CAN0MessageBuffer -> 91\n"
+  "  CAN0BusOff -> 92\n"
+  "  CAN0Error -> 93\n"
+  "  CAN0TransmitWarning -> 94\n"
+  "  CAN0ReceiveWarning -> 95\n"
+  "  CAN0WakeUp -> 96\n"
+  "  SDHC -> 97\n"
+  "  EthernetTimer -> 98\n"
+  "  EthernetTransmit -> 99\n"
+  "  EthernetReceive -> 100\n"
+  "  EthernetError -> 101\n"
+  "  LPUART0Status -> 102\n"
+  "  TSI0 -> 103\n"
+  "  TPM1 -> 104\n"
+  "  TPM2 -> 105\n"
+  "  USB_HS_DCD_PHY -> 106\n"
+  "  I2C3 -> 107\n"
+  "  CMP3 -> 108\n"
+  "  USB_HS_OTG -> 109\n"
+  "  CAN1MessageBuffer -> 110\n"
+  "  CAN1BusOff -> 111\n"
+  "  CAN1Error -> 112\n"
+  "  CAN1TransmitWarning -> 113\n"
+  "  CAN1ReceiveWarning -> 114\n"
+  "  CAN1WakeUp -> 115\n" ;
+
+const cRegularFileWrapper gWrapperFile_111_targetTemplates (
+  "+config.plm-target",
+  "plm-target",
+  true, // Text file
+  5110, // Text length
   gWrapperFileContent_111_targetTemplates
 ) ;
 
 //--- All files of 'unprivileged' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [14] = {
-  & gWrapperFile_99_targetTemplates,
-  & gWrapperFile_100_targetTemplates,
-  & gWrapperFile_101_targetTemplates,
-  & gWrapperFile_102_targetTemplates,
-  & gWrapperFile_103_targetTemplates,
-  & gWrapperFile_104_targetTemplates,
-  & gWrapperFile_105_targetTemplates,
-  & gWrapperFile_106_targetTemplates,
-  & gWrapperFile_107_targetTemplates,
-  & gWrapperFile_108_targetTemplates,
-  & gWrapperFile_109_targetTemplates,
-  & gWrapperFile_110_targetTemplates,
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [2] = {
   & gWrapperFile_111_targetTemplates,
   NULL
 } ;
@@ -22871,7 +22859,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_5 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
   "unprivileged",
-  13,
+  1,
   gWrapperAllFiles_targetTemplates_5,
   0,
   gWrapperAllDirectories_targetTemplates_5
@@ -22879,7 +22867,7 @@ const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
 
 //--- All files of 'teensy-3-6' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [18] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [30] = {
   & gWrapperFile_82_targetTemplates,
   & gWrapperFile_83_targetTemplates,
   & gWrapperFile_84_targetTemplates,
@@ -22897,6 +22885,18 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [18] = {
   & gWrapperFile_96_targetTemplates,
   & gWrapperFile_97_targetTemplates,
   & gWrapperFile_98_targetTemplates,
+  & gWrapperFile_99_targetTemplates,
+  & gWrapperFile_100_targetTemplates,
+  & gWrapperFile_101_targetTemplates,
+  & gWrapperFile_102_targetTemplates,
+  & gWrapperFile_103_targetTemplates,
+  & gWrapperFile_104_targetTemplates,
+  & gWrapperFile_105_targetTemplates,
+  & gWrapperFile_106_targetTemplates,
+  & gWrapperFile_107_targetTemplates,
+  & gWrapperFile_108_targetTemplates,
+  & gWrapperFile_109_targetTemplates,
+  & gWrapperFile_110_targetTemplates,
   NULL
 } ;
 
@@ -22911,7 +22911,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_4 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_4_targetTemplates (
   "teensy-3-6",
-  17,
+  29,
   gWrapperAllFiles_targetTemplates_4,
   1,
   gWrapperAllDirectories_targetTemplates_4
