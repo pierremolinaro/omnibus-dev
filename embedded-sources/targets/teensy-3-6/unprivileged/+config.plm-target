@@ -26,34 +26,34 @@ NOP: "call void asm sideeffect \"nop\", \"\"() nounwind"
 
 BIT_BAND:0x4000_0000 0x4200_0000 0x4200_0000 32 4
 
-SERVICE_HANDLER: "service-handler.s"
+SERVICE_HANDLER: "../service-handler.s"
 SERVICE_SYSTEM_STACK_SIZE: 12 // as_svc_handler saves 3 registers on system stack
-SERVICE_DISPATCHER_HEADER: "service-dispatcher-header.s"
-SERVICE_DISPATCHER_ENTRY: "service-dispatcher-entry.s"
-SERVICE_ENTRY_NO_RETURNED_VALUE: "service-entry-no-return.s"
-SERVICE_ENTRY_WITH_RETURNED_VALUE: "service-entry-return-value.s"
+SERVICE_DISPATCHER_HEADER: "../service-dispatcher-header.s"
+SERVICE_DISPATCHER_ENTRY: "../service-dispatcher-entry.s"
+SERVICE_ENTRY_NO_RETURNED_VALUE: "../service-entry-no-return.s"
+SERVICE_ENTRY_WITH_RETURNED_VALUE: "../service-entry-return-value.s"
 
-SECTION_HANDLER: "udfcoded-section-handler.s"
+SECTION_HANDLER: "../udfcoded-section-handler.s"
 SECTION_SYSTEM_STACK_SIZE: 8 // saves 2 registers on system stack
-SECTION_DISPATCHER_HEADER: "udfcoded-section-dispatcher-header.s"
-SECTION_DISPATCHER_ENTRY: "udfcoded-section-dispatcher-entry.s"
-SECTION_ENTRY_FROM_ANY_MODE: "udfcoded-section-invocation-from-any-mode.s"
-SECTION_ENTRY_FROM_USER_MODE: "udfcoded-section-invocation-from-user-mode.s"
+SECTION_DISPATCHER_HEADER: "../udfcoded-section-dispatcher-header.s"
+SECTION_DISPATCHER_ENTRY: "../udfcoded-section-dispatcher-entry.s"
+SECTION_ENTRY_FROM_ANY_MODE: "../udfcoded-section-invocation-from-any-mode.s"
+SECTION_ENTRY_FROM_USER_MODE: "../udfcoded-section-invocation-from-user-mode.s"
 
-INTERRUPT_HANDLER: "../xtr-interrupt-handler.s"
+INTERRUPT_HANDLER: "../s-interrupt-handler.s"
 INTERRUPT_USER_STACK_SIZE: 32 // Cortex M4 saves 8 regs in user stack on interrupt
-UNDEFINED_INTERRUPT : "../undefined-interrupt.s"
+UNUSED_INTERRUPT: "../s-unused-interrupt.s"
 
 CPP_FILES:
   "../c-cortex-m4-context-types.cpp"
-  "../../c-deadline-list-type.cpp"
-  "../../c-task-list-type.cpp"
-  "../../c-guard-types.cpp"
+  "../../c-deadline-list-type-32-tasks.cpp"
+  "../../c-task-list-type-32-tasks.cpp"
+  "../../c-guard-types-32-tasks.cpp"
   "../../c-task-control-block-type.cpp"
-  "../../c-task-list.cpp"
-  "../../c-guard-list.cpp"
+  "../../c-task-list-32-tasks.cpp"
+  "../../c-guard-list-32-tasks.cpp"
   "../c-cortex-m4-context-code.cpp"
-  "../../c-deadline-list.cpp"
+  "../../c-deadline-list-32-tasks.cpp"
   "../../c-real-time-kernel-code.cpp"
   "../../c-guard-code.cpp"
   "../../c-real-time-kernel-utilities.cpp"
@@ -63,8 +63,8 @@ CPP_FILES:
 
 S_FILES:
   "../s-cortex-m4-header.s"
-  "s-interrupt-vectors.s"
-  "s-reset-handler.s"
+  "../s-interrupt-vectors.s"
+  "../s-reset-handler.s"
 
 LL_FILES:
   "../ll-cortex-m4.ll"

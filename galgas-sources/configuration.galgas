@@ -180,7 +180,7 @@ syntax extension plm_target_specific_syntax {
     $"string"$ ?let xtrInterruptHandler
     <configuration_key> !"INTERRUPT_USER_STACK_SIZE"
     $integer$ ?let stackedUserRegisterOnInterruptByteSize
-    <configuration_key> !"UNDEFINED_INTERRUPT"
+    <configuration_key> !"UNUSED_INTERRUPT"
     $"string"$ ?let undefinedInterruptHandler
     <configuration_key> !"CPP_FILES"
     @lstringlist C_definitionFiles = {}

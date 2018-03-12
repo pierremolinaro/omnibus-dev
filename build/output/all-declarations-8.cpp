@@ -11018,18 +11018,18 @@ static void extensionMethod_configurationDeclarationAST_enterInPrecedenceGraph (
                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_configurationDeclarationAST * object = (const cPtr_configurationDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_configurationDeclarationAST) ;
-  GALGAS_lstring var_rootNode_11573 = GALGAS_lstring::constructor_new (function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 321)), object->mProperty_mPanicCodeTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 321)) ;
+  GALGAS_lstring var_rootNode_11570 = GALGAS_lstring::constructor_new (function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 321)), object->mProperty_mPanicCodeTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 321)) ;
   {
   const GALGAS_configurationDeclarationAST temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (var_rootNode_11573, temp_0, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 322)) ;
+  ioArgument_ioGraph.setter_addNode (var_rootNode_11570, temp_0, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 322)) ;
   }
-  GALGAS_lstring var_panicCodeTypeName_11726 = function_llvmTypeNameFromPLMname (object->mProperty_mPanicCodeTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 323)) ;
+  GALGAS_lstring var_panicCodeTypeName_11723 = function_llvmTypeNameFromPLMname (object->mProperty_mPanicCodeTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 323)) ;
   {
-  ioArgument_ioGraph.setter_addEdge (var_rootNode_11573, var_panicCodeTypeName_11726 COMMA_SOURCE_FILE ("configuration.galgas", 324)) ;
+  ioArgument_ioGraph.setter_addEdge (var_rootNode_11570, var_panicCodeTypeName_11723 COMMA_SOURCE_FILE ("configuration.galgas", 324)) ;
   }
-  GALGAS_lstring var_panicLineTypeName_11849 = function_llvmTypeNameFromPLMname (object->mProperty_mPanicLineTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 325)) ;
+  GALGAS_lstring var_panicLineTypeName_11846 = function_llvmTypeNameFromPLMname (object->mProperty_mPanicLineTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 325)) ;
   {
-  ioArgument_ioGraph.setter_addEdge (var_rootNode_11573, var_panicLineTypeName_11849 COMMA_SOURCE_FILE ("configuration.galgas", 326)) ;
+  ioArgument_ioGraph.setter_addEdge (var_rootNode_11570, var_panicLineTypeName_11846 COMMA_SOURCE_FILE ("configuration.galgas", 326)) ;
   }
 }
 
@@ -11127,12 +11127,12 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
   ioArgument_ioContext.mProperty_mPanicCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 360)) ;
   const enumGalgasBool test_2 = ioArgument_ioContext.getter_mPanicCodeType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 361)).getter_kind (HERE).getter_isInteger (SOURCE_FILE ("configuration.galgas", 361)).boolEnum () ;
   if (kBoolTrue == test_2) {
-    GALGAS_bool var_unsigned_13916 ;
-    GALGAS_bigint joker_13891_2 ; // Joker input parameter
-    GALGAS_bigint joker_13891_1 ; // Joker input parameter
-    GALGAS_uint joker_13918_1 ; // Joker input parameter
-    ioArgument_ioContext.getter_mPanicCodeType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 362)).getter_kind (HERE).method_integer (joker_13891_2, joker_13891_1, var_unsigned_13916, joker_13918_1, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 362)) ;
-    const enumGalgasBool test_3 = var_unsigned_13916.operator_not (SOURCE_FILE ("configuration.galgas", 363)).boolEnum () ;
+    GALGAS_bool var_unsigned_13913 ;
+    GALGAS_bigint joker_13888_2 ; // Joker input parameter
+    GALGAS_bigint joker_13888_1 ; // Joker input parameter
+    GALGAS_uint joker_13915_1 ; // Joker input parameter
+    ioArgument_ioContext.getter_mPanicCodeType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 362)).getter_kind (HERE).method_integer (joker_13888_2, joker_13888_1, var_unsigned_13913, joker_13915_1, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 362)) ;
+    const enumGalgasBool test_3 = var_unsigned_13913.operator_not (SOURCE_FILE ("configuration.galgas", 363)).boolEnum () ;
     if (kBoolTrue == test_3) {
       TC_Array <C_FixItDescription> fixItArray4 ;
       inCompiler->emitSemanticError (object->mProperty_mPanicCodeTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 364)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray4  COMMA_SOURCE_FILE ("configuration.galgas", 364)) ;
@@ -11144,12 +11144,12 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
   ioArgument_ioContext.mProperty_mPanicLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicLineTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 370)) ;
   const enumGalgasBool test_6 = ioArgument_ioContext.getter_mPanicLineType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 371)).getter_kind (HERE).getter_isInteger (SOURCE_FILE ("configuration.galgas", 371)).boolEnum () ;
   if (kBoolTrue == test_6) {
-    GALGAS_bool var_unsigned_14385 ;
-    GALGAS_bigint joker_14360_2 ; // Joker input parameter
-    GALGAS_bigint joker_14360_1 ; // Joker input parameter
-    GALGAS_uint joker_14387_1 ; // Joker input parameter
-    ioArgument_ioContext.getter_mPanicLineType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 372)).getter_kind (HERE).method_integer (joker_14360_2, joker_14360_1, var_unsigned_14385, joker_14387_1, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 372)) ;
-    const enumGalgasBool test_7 = var_unsigned_14385.operator_not (SOURCE_FILE ("configuration.galgas", 373)).boolEnum () ;
+    GALGAS_bool var_unsigned_14382 ;
+    GALGAS_bigint joker_14357_2 ; // Joker input parameter
+    GALGAS_bigint joker_14357_1 ; // Joker input parameter
+    GALGAS_uint joker_14384_1 ; // Joker input parameter
+    ioArgument_ioContext.getter_mPanicLineType (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 372)).getter_kind (HERE).method_integer (joker_14357_2, joker_14357_1, var_unsigned_14382, joker_14384_1, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 372)) ;
+    const enumGalgasBool test_7 = var_unsigned_14382.operator_not (SOURCE_FILE ("configuration.galgas", 373)).boolEnum () ;
     if (kBoolTrue == test_7) {
       TC_Array <C_FixItDescription> fixItArray8 ;
       inCompiler->emitSemanticError (object->mProperty_mPanicLineTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 374)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray8  COMMA_SOURCE_FILE ("configuration.galgas", 374)) ;
@@ -11158,13 +11158,13 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
     TC_Array <C_FixItDescription> fixItArray9 ;
     inCompiler->emitSemanticError (object->mProperty_mPanicLineTypeName.getter_location (SOURCE_FILE ("configuration.galgas", 377)), GALGAS_string ("this type should be an unsigned integer type"), fixItArray9  COMMA_SOURCE_FILE ("configuration.galgas", 377)) ;
   }
-  GALGAS_stringset var_panicCodeSet_14677 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("configuration.galgas", 380)) ;
-  cEnumerator_interruptionConfigurationList enumerator_14739 (object->mProperty_mInterruptionConfigurationList, kENUMERATION_UP) ;
-  while (enumerator_14739.hasCurrentObject ()) {
+  GALGAS_stringset var_panicCodeSet_14674 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("configuration.galgas", 380)) ;
+  cEnumerator_interruptionConfigurationList enumerator_14736 (object->mProperty_mInterruptionConfigurationList, kENUMERATION_UP) ;
+  while (enumerator_14736.hasCurrentObject ()) {
     {
-    ioArgument_ioContext.mProperty_mAvailableInterruptMap.setter_insertKey (enumerator_14739.current_mInterruptName (HERE), enumerator_14739.current_mInterruptionPanicCode (HERE), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 382)) ;
+    ioArgument_ioContext.mProperty_mAvailableInterruptMap.setter_insertKey (enumerator_14736.current_mInterruptName (HERE), enumerator_14736.current_mInterruptionPanicCode (HERE), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 382)) ;
     }
-    switch (enumerator_14739.current_mInterruptionPanicCode (HERE).enumValue ()) {
+    switch (enumerator_14736.current_mInterruptionPanicCode (HERE).enumValue ()) {
     case GALGAS_interruptionPanicCode::kNotBuilt:
       break ;
     case GALGAS_interruptionPanicCode::kEnum_noCode:
@@ -11173,19 +11173,19 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
       break ;
     case GALGAS_interruptionPanicCode::kEnum_code:
       {
-        const cEnumAssociatedValues_interruptionPanicCode_code * extractPtr_15032 = (const cEnumAssociatedValues_interruptionPanicCode_code *) (enumerator_14739.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
-        const GALGAS_lbigint extractedValue_value = extractPtr_15032->mAssociatedValue0 ;
-        GALGAS_string var_s_14885 = extractedValue_value.getter_bigint (HERE).getter_string (SOURCE_FILE ("configuration.galgas", 386)) ;
-        const enumGalgasBool test_10 = var_panicCodeSet_14677.getter_hasKey (var_s_14885 COMMA_SOURCE_FILE ("configuration.galgas", 387)).boolEnum () ;
+        const cEnumAssociatedValues_interruptionPanicCode_code * extractPtr_15029 = (const cEnumAssociatedValues_interruptionPanicCode_code *) (enumerator_14736.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
+        const GALGAS_lbigint extractedValue_value = extractPtr_15029->mAssociatedValue0 ;
+        GALGAS_string var_s_14882 = extractedValue_value.getter_bigint (HERE).getter_string (SOURCE_FILE ("configuration.galgas", 386)) ;
+        const enumGalgasBool test_10 = var_panicCodeSet_14674.getter_hasKey (var_s_14882 COMMA_SOURCE_FILE ("configuration.galgas", 387)).boolEnum () ;
         if (kBoolTrue == test_10) {
           TC_Array <C_FixItDescription> fixItArray11 ;
           inCompiler->emitSemanticError (extractedValue_value.getter_location (SOURCE_FILE ("configuration.galgas", 388)), GALGAS_string ("duplicate interrupt code"), fixItArray11  COMMA_SOURCE_FILE ("configuration.galgas", 388)) ;
         }
-        var_panicCodeSet_14677.addAssign_operation (var_s_14885  COMMA_SOURCE_FILE ("configuration.galgas", 390)) ;
+        var_panicCodeSet_14674.addAssign_operation (var_s_14882  COMMA_SOURCE_FILE ("configuration.galgas", 390)) ;
       }
       break ;
     }
-    enumerator_14739.gotoNextObject () ;
+    enumerator_14736.gotoNextObject () ;
   }
 }
 
