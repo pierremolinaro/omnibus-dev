@@ -7704,8 +7704,8 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "\n"
   "static inline TaskControlBlock * deadlinelistIterator_nextTask (DeadlineListIterator & ioIterator) {\n"
   "  TaskControlBlock * task = nullptr ;\n"
-  "  if (ioIterator != 0) {\n"
-  "    const unsigned taskIndex = __builtin_ctzl (ioIterator) ;\n"
+  "  if (ioIterator != 0ULL) {\n"
+  "    const unsigned taskIndex = __builtin_ctzll (ioIterator) ;\n"
   "    const unsigned long long mask = 1ULL << taskIndex ;\n"
   "    ioIterator &= ~ mask ;\n"
   "    task = & gTaskDescriptorArray [taskIndex] ;\n"
@@ -7721,7 +7721,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "c-deadline-list-64-tasks.cpp",
   "cpp",
   true, // Text file
-  4333, // Text length
+  4337, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -7972,7 +7972,7 @@ const char * gWrapperFileContent_6_targetTemplates = "//------------------------
   "static inline TaskControlBlock * guardlist_removeFirstTask (GuardList & ioTaskList) {\n"
   "  TaskControlBlock * result = nullptr ;\n"
   "  if (ioTaskList.mGuardList != 0UL) {\n"
-  "    const unsigned taskIndex = __builtin_ctzl (ioTaskList.mGuardList) ;\n"
+  "    const unsigned taskIndex = __builtin_ctzll (ioTaskList.mGuardList) ;\n"
   "    const unsigned long long mask = 1ULL << taskIndex ;\n"
   "    ioTaskList.mGuardList &= ~ mask ;\n"
   "    result = & gTaskDescriptorArray [taskIndex] ;\n"
@@ -8000,7 +8000,7 @@ const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "c-guard-list-64-tasks.cpp",
   "cpp",
   true, // Text file
-  2714, // Text length
+  2715, // Text length
   gWrapperFileContent_6_targetTemplates
 ) ;
 
@@ -8436,8 +8436,8 @@ const char * gWrapperFileContent_13_targetTemplates = "//-----------------------
   "\n"
   "static inline TaskControlBlock * list_removeFirstTask (TaskList & ioTaskList) {\n"
   "  TaskControlBlock * result = nullptr ;\n"
-  "  if (ioTaskList.mList != 0UL) {\n"
-  "    const unsigned taskIndex = __builtin_ctzl (ioTaskList.mList) ;\n"
+  "  if (ioTaskList.mList != 0ULL) {\n"
+  "    const unsigned taskIndex = __builtin_ctzll (ioTaskList.mList) ;\n"
   "    const unsigned long long mask = 1ULL << taskIndex ;\n"
   "    ioTaskList.mList &= ~ mask ;\n"
   "    result = & gTaskDescriptorArray [taskIndex] ;\n"
@@ -8450,7 +8450,7 @@ const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   "c-task-list-64-tasks.cpp",
   "cpp",
   true, // Text file
-  2199, // Text length
+  2201, // Text length
   gWrapperFileContent_13_targetTemplates
 ) ;
 

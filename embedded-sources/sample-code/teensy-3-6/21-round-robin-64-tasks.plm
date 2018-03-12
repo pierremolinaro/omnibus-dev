@@ -1,0 +1,644 @@
+target "teensy-3-6/xtr64"
+let F_CPU_MHZ = 240
+
+driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func section activityLedOn @safe @exported () {
+  digital.write (!yes !toPort:.D13)
+}
+
+func section activityLedOff @safe @exported () {
+  digital.write (!no !toPort:.D13)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let LED_L0 = $digitalPort.D3
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver myDriver > digital {
+
+  //····················································································································
+  //--- LED_L0 is port #3: PTA12
+  //    PORTA_PCR12 is configured to generate an interrupt on falling edge
+  // So: when LED_L0 is swichted off, LED_L1 toggles
+  //--- Port #12 is PTC7
+  //    PORTC_PCR7 is configured to generate an interrupt on falling edge
+  // So: when push button P4 is pressed, LED_L4 toggles
+  //····················································································································
+
+  init {
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+  }
+  
+  var tick = $uint32 ()
+
+  public system section noteTick () {
+    self.tick = #SYST:CVR
+  } 
+
+  public system section getDuration () -> $uint32 {
+    result = self.tick - #SYST:CVR
+  }
+
+  //····················································································································
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver myDriver ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sync sémaphore0 = $semaphore (!value:0)
+sync sémaphore1 = $semaphore (!value:0)
+sync sémaphore2 = $semaphore (!value:0)
+sync sémaphore3 = $semaphore (!value:0)
+sync sémaphore4 = $semaphore (!value:0)
+sync sémaphore5 = $semaphore (!value:0)
+sync sémaphore6 = $semaphore (!value:0)
+sync sémaphore7 = $semaphore (!value:0)
+sync sémaphore8 = $semaphore (!value:0)
+sync sémaphore9 = $semaphore (!value:0)
+sync sémaphore10 = $semaphore (!value:0)
+sync sémaphore11 = $semaphore (!value:0)
+sync sémaphore12 = $semaphore (!value:0)
+sync sémaphore13 = $semaphore (!value:0)
+sync sémaphore14 = $semaphore (!value:0)
+sync sémaphore15 = $semaphore (!value:0)
+sync sémaphore16 = $semaphore (!value:0)
+sync sémaphore17 = $semaphore (!value:0)
+sync sémaphore18 = $semaphore (!value:0)
+sync sémaphore19 = $semaphore (!value:0)
+sync sémaphore20 = $semaphore (!value:0)
+sync sémaphore21 = $semaphore (!value:0)
+sync sémaphore22 = $semaphore (!value:0)
+sync sémaphore23 = $semaphore (!value:0)
+sync sémaphore24 = $semaphore (!value:0)
+sync sémaphore25 = $semaphore (!value:0)
+sync sémaphore26 = $semaphore (!value:0)
+sync sémaphore27 = $semaphore (!value:0)
+sync sémaphore28 = $semaphore (!value:0)
+sync sémaphore29 = $semaphore (!value:0)
+sync sémaphore30 = $semaphore (!value:0)
+sync sémaphore31 = $semaphore (!value:0)
+sync sémaphore32 = $semaphore (!value:0)
+sync sémaphore33 = $semaphore (!value:0)
+sync sémaphore34 = $semaphore (!value:0)
+sync sémaphore35 = $semaphore (!value:0)
+sync sémaphore36 = $semaphore (!value:0)
+sync sémaphore37 = $semaphore (!value:0)
+sync sémaphore38 = $semaphore (!value:0)
+sync sémaphore39 = $semaphore (!value:0)
+sync sémaphore40 = $semaphore (!value:0)
+sync sémaphore41 = $semaphore (!value:0)
+sync sémaphore42 = $semaphore (!value:0)
+sync sémaphore43 = $semaphore (!value:0)
+sync sémaphore44 = $semaphore (!value:0)
+sync sémaphore45 = $semaphore (!value:0)
+sync sémaphore46 = $semaphore (!value:0)
+sync sémaphore47 = $semaphore (!value:0)
+sync sémaphore48 = $semaphore (!value:0)
+sync sémaphore49 = $semaphore (!value:0)
+sync sémaphore50 = $semaphore (!value:0)
+sync sémaphore51 = $semaphore (!value:0)
+sync sémaphore52 = $semaphore (!value:0)
+sync sémaphore53 = $semaphore (!value:0)
+sync sémaphore54 = $semaphore (!value:0)
+sync sémaphore55 = $semaphore (!value:0)
+sync sémaphore56 = $semaphore (!value:0)
+sync sémaphore57 = $semaphore (!value:0)
+sync sémaphore58 = $semaphore (!value:0)
+sync sémaphore59 = $semaphore (!value:0)
+sync sémaphore60 = $semaphore (!value:0)
+sync sémaphore61 = $semaphore (!value:0)
+sync sémaphore62 = $semaphore (!value:0)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T0 @priority 0 @stacksize 512 {
+  var échéance $uint32 = 0
+
+  on time.wait (!untilDeadline:self.échéance) {
+    self.échéance +%= 500
+    myDriver.noteTick ()
+    sémaphore0.signal () ;
+  }
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T1 @priority 1 @stacksize 512 {
+  on sémaphore0.wait () {
+    sémaphore1.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T2 @priority 2 @stacksize 512 {
+  on sémaphore1.wait () {
+    sémaphore2.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T3 @priority 3 @stacksize 512 {
+  on sémaphore2.wait () {
+    sémaphore3.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T4 @priority 4 @stacksize 512 {
+  on sémaphore3.wait () {
+    sémaphore4.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T5 @priority 5 @stacksize 512 {
+  on sémaphore4.wait () {
+    sémaphore5.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T6 @priority 6 @stacksize 512 {
+  on sémaphore5.wait () {
+    sémaphore6.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T7 @priority 7 @stacksize 512 {
+  on sémaphore6.wait () {
+    sémaphore7.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T8 @priority 8 @stacksize 512 {
+  on sémaphore7.wait () {
+    sémaphore8.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T9 @priority 9 @stacksize 512 {
+  on sémaphore8.wait () {
+    sémaphore10.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T10 @priority 10 @stacksize 512 {
+  on sémaphore9.wait () {
+    sémaphore10.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T11 @priority 11 @stacksize 512 {
+  on sémaphore10.wait () {
+    sémaphore11.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T12 @priority 12 @stacksize 512 {
+  on sémaphore11.wait () {
+    sémaphore12.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T13 @priority 13 @stacksize 512 {
+  on sémaphore12.wait () {
+    sémaphore13.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T14 @priority 14 @stacksize 512 {
+  on sémaphore13.wait () {
+    sémaphore14.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T15 @priority 15 @stacksize 512 {
+  on sémaphore14.wait () {
+    sémaphore15.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T16 @priority 16 @stacksize 512 {
+  on sémaphore15.wait () {
+    sémaphore16.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T17 @priority 17 @stacksize 512 {
+  on sémaphore16.wait () {
+    sémaphore17.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T18 @priority 18 @stacksize 512 {
+  on sémaphore17.wait () {
+    sémaphore18.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T19 @priority 19 @stacksize 512 {
+  on sémaphore18.wait () {
+    sémaphore19.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T20 @priority 20 @stacksize 512 {
+  on sémaphore19.wait () {
+    sémaphore20.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T21 @priority 21 @stacksize 512 {
+  on sémaphore20.wait () {
+    sémaphore21.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T22 @priority 22 @stacksize 512 {
+  on sémaphore21.wait () {
+    sémaphore22.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T23 @priority 23 @stacksize 512 {
+  on sémaphore22.wait () {
+    sémaphore23.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T24 @priority 24 @stacksize 512 {
+  on sémaphore23.wait () {
+    sémaphore24.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T25 @priority 25 @stacksize 512 {
+  on sémaphore24.wait () {
+    sémaphore25.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T26 @priority 26 @stacksize 512 {
+  on sémaphore25.wait () {
+    sémaphore26.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T27 @priority 27 @stacksize 512 {
+  on sémaphore26.wait () {
+    sémaphore27.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T28 @priority 28 @stacksize 512 {
+  on sémaphore27.wait () {
+    sémaphore28.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T29 @priority 29 @stacksize 512 {
+  on sémaphore28.wait () {
+    sémaphore29.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T30 @priority 30 @stacksize 512 {
+  on sémaphore29.wait () {
+    sémaphore30.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T31 @priority 31 @stacksize 512 {
+  on sémaphore30.wait () {
+    sémaphore31.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T32 @priority 32 @stacksize 512 {
+  on sémaphore31.wait () {
+    sémaphore32.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T33 @priority 33 @stacksize 512 {
+  on sémaphore32.wait () {
+    sémaphore33.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T34 @priority 34 @stacksize 512 {
+  on sémaphore33.wait () {
+    sémaphore34.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T35 @priority 35 @stacksize 512 {
+  on sémaphore34.wait () {
+    sémaphore35.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T36 @priority 36 @stacksize 512 {
+  on sémaphore35.wait () {
+    sémaphore36.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T37 @priority 37 @stacksize 512 {
+  on sémaphore36.wait () {
+    sémaphore37.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T38 @priority 38 @stacksize 512 {
+  on sémaphore37.wait () {
+    sémaphore38.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T39 @priority 39 @stacksize 512 {
+  on sémaphore38.wait () {
+    sémaphore39.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T40 @priority 40 @stacksize 512 {
+  on sémaphore39.wait () {
+    sémaphore40.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T41 @priority 41 @stacksize 512 {
+  on sémaphore40.wait () {
+    sémaphore41.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T42 @priority 42 @stacksize 512 {
+  on sémaphore41.wait () {
+    sémaphore42.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T43 @priority 43 @stacksize 512 {
+  on sémaphore42.wait () {
+    sémaphore43.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T44 @priority 44 @stacksize 512 {
+  on sémaphore43.wait () {
+    sémaphore44.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T45 @priority 45 @stacksize 512 {
+  on sémaphore44.wait () {
+    sémaphore45.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T46 @priority 46 @stacksize 512 {
+  on sémaphore45.wait () {
+    sémaphore46.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T47 @priority 47 @stacksize 512 {
+  on sémaphore46.wait () {
+    sémaphore47.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T48 @priority 48 @stacksize 512 {
+  on sémaphore47.wait () {
+    sémaphore48.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T49 @priority 49 @stacksize 512 {
+  on sémaphore48.wait () {
+    sémaphore49.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T50 @priority 50 @stacksize 512 {
+  on sémaphore49.wait () {
+    sémaphore50.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T51 @priority 51 @stacksize 512 {
+  on sémaphore50.wait () {
+    sémaphore51.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T52 @priority 52 @stacksize 512 {
+  on sémaphore51.wait () {
+    sémaphore52.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T53 @priority 53 @stacksize 512 {
+  on sémaphore52.wait () {
+    sémaphore53.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T54 @priority 54 @stacksize 512 {
+  on sémaphore53.wait () {
+    sémaphore54.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T55 @priority 55 @stacksize 512 {
+  on sémaphore54.wait () {
+    sémaphore55.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T56 @priority 56 @stacksize 512 {
+  on sémaphore55.wait () {
+    sémaphore56.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T57 @priority 57 @stacksize 512 {
+  on sémaphore56.wait () {
+    sémaphore57.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T58 @priority 58 @stacksize 512 {
+  on sémaphore57.wait () {
+    sémaphore58.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T59 @priority 59 @stacksize 512 {
+  on sémaphore58.wait () {
+    sémaphore59.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T60 @priority 60 @stacksize 512 {
+  on sémaphore59.wait () {
+    sémaphore60.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T61 @priority 61 @stacksize 512 {
+  on sémaphore60.wait () {
+    sémaphore61.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T62 @priority 62 @stacksize 512 {
+  on sémaphore61.wait () {
+    sémaphore62.signal () ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T63 @priority 63 @stacksize 512 {
+  on sémaphore62.wait () {
+    let duration = myDriver.getDuration ()
+    lcd.goto (!line:0 !column:0)
+    lcd.print (!u32:duration)
+    digital.toggle (!port:LED_L0)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -62,8 +62,8 @@ static inline DeadlineListIterator deadlinelist_makeIterator (const DeadlineList
 
 static inline TaskControlBlock * deadlinelistIterator_nextTask (DeadlineListIterator & ioIterator) {
   TaskControlBlock * task = nullptr ;
-  if (ioIterator != 0) {
-    const unsigned taskIndex = __builtin_ctzl (ioIterator) ;
+  if (ioIterator != 0ULL) {
+    const unsigned taskIndex = __builtin_ctzll (ioIterator) ;
     const unsigned long long mask = 1ULL << taskIndex ;
     ioIterator &= ~ mask ;
     task = & gTaskDescriptorArray [taskIndex] ;
