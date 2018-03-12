@@ -7638,25 +7638,128 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   gWrapperFileContent_0_targetTemplates
 ) ;
 
-//--- File '/c-deadline-list-type-32-tasks.cpp'
+//--- File '/c-deadline-list-64-tasks.cpp'
 
 const char * gWrapperFileContent_1_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   D E A D L I N E    L I S T    M A N A G E M E N T                                                                 *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#if TASK_COUNT > 64\n"
+  "  #error \"This type of list supports at most 64 tasks\"\n"
+  "#endif\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "// FORWARD DECLARATION                                                                                                 *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_makeTaskReady (TaskControlBlock * inTaskDescriptor) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   ENTER TASK IN DEADLINE LIST                                                                                       *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void deadlinelist_enterTask (DeadlineList & ioTaskList, TaskControlBlock * inTask) {\n"
+  "  const unsigned runningTaskIndex = inTask->mTaskIndex ;\n"
+  "  const unsigned long long mask = 1ULL << runningTaskIndex ;\n"
+  "  ioTaskList.mDeadlineList |= mask ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   REMOVE TASK FROM DEADLINE LIST                                                                                    *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void deadlinelist_removeTask (DeadlineList & ioTaskList, TaskControlBlock * inTask) {\n"
+  "  const unsigned runningTaskIndex = inTask->mTaskIndex ;\n"
+  "  const unsigned long long mask = 1ULL << runningTaskIndex ;\n"
+  "  ioTaskList.mDeadlineList &= ~ mask ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  TEST IF A DEADLINE LIST CONTAINS A TASK                                                                                     *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline bool deadlinelist_containsTask (const DeadlineList & inTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline bool deadlinelist_containsTask (const DeadlineList & inTaskList, TaskControlBlock * inTask) {\n"
+  "  const unsigned runningTaskIndex = inTask->mTaskIndex ;\n"
+  "  const unsigned long long mask = 1ULL << runningTaskIndex ;\n"
+  "  return (inTaskList.mDeadlineList & mask) != 0 ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   ITERATE OVER DEADLINE LIST                                                                                        *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef unsigned long long DeadlineListIterator ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline DeadlineListIterator deadlinelist_makeIterator (const DeadlineList & inList) {\n"
+  "  return inList.mDeadlineList ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline TaskControlBlock * deadlinelistIterator_nextTask (DeadlineListIterator & ioIterator) {\n"
+  "  TaskControlBlock * task = nullptr ;\n"
+  "  if (ioIterator != 0) {\n"
+  "    const unsigned taskIndex = __builtin_ctzl (ioIterator) ;\n"
+  "    const unsigned long long mask = 1ULL << taskIndex ;\n"
+  "    ioIterator &= ~ mask ;\n"
+  "    task = & gTaskDescriptorArray [taskIndex] ;\n"
+  "\n"
+  "  }\n"
+  "  return task ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_1_targetTemplates (
+  "c-deadline-list-64-tasks.cpp",
+  "cpp",
+  true, // Text file
+  4333, // Text length
+  gWrapperFileContent_1_targetTemplates
+) ;
+
+//--- File '/c-deadline-list-type-32-tasks.cpp'
+
+const char * gWrapperFileContent_2_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "typedef struct { unsigned mDeadlineList ; } DeadlineList ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_1_targetTemplates (
+const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "c-deadline-list-type-32-tasks.cpp",
   "cpp",
   true, // Text file
   303, // Text length
-  gWrapperFileContent_1_targetTemplates
+  gWrapperFileContent_2_targetTemplates
+) ;
+
+//--- File '/c-deadline-list-type-64-tasks.cpp'
+
+const char * gWrapperFileContent_3_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct { unsigned long long mDeadlineList ; } DeadlineList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_3_targetTemplates (
+  "c-deadline-list-type-64-tasks.cpp",
+  "cpp",
+  true, // Text file
+  313, // Text length
+  gWrapperFileContent_3_targetTemplates
 ) ;
 
 //--- File '/c-guard-code.cpp'
 
-const char * gWrapperFileContent_2_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_4_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//  G U A R D S                                                                                                        *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -7775,17 +7878,17 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_2_targetTemplates (
+const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "c-guard-code.cpp",
   "cpp",
   true, // Text file
   5331, // Text length
-  gWrapperFileContent_2_targetTemplates
+  gWrapperFileContent_4_targetTemplates
 ) ;
 
 //--- File '/c-guard-list-32-tasks.cpp'
 
-const char * gWrapperFileContent_3_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_5_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "// ENTER TASK IN LIST: inTask should be not null\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -7834,17 +7937,76 @@ const char * gWrapperFileContent_3_targetTemplates = "//------------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_3_targetTemplates (
+const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "c-guard-list-32-tasks.cpp",
   "cpp",
   true, // Text file
   2672, // Text length
-  gWrapperFileContent_3_targetTemplates
+  gWrapperFileContent_5_targetTemplates
+) ;
+
+//--- File '/c-guard-list-64-tasks.cpp'
+
+const char * gWrapperFileContent_6_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "// ENTER TASK IN LIST: inTask should be not null\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void guardlist_enterTask (GuardList & ioTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void guardlist_enterTask (GuardList & ioTaskList, TaskControlBlock * inTask) {\n"
+  "  const unsigned runningTaskIndex = inTask->mTaskIndex ;\n"
+  "  const unsigned long long mask = 1ULL << runningTaskIndex ;\n"
+  "  ioTaskList.mGuardList |= mask ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  REMOVE FIRST TASK GUARD LIST: returns nullptr if list is empty                                                     *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline TaskControlBlock * guardlist_removeFirstTask (GuardList & ioTaskList) __attribute__((always_inline)) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline TaskControlBlock * guardlist_removeFirstTask (GuardList & ioTaskList) {\n"
+  "  TaskControlBlock * result = nullptr ;\n"
+  "  if (ioTaskList.mGuardList != 0UL) {\n"
+  "    const unsigned taskIndex = __builtin_ctzl (ioTaskList.mGuardList) ;\n"
+  "    const unsigned long long mask = 1ULL << taskIndex ;\n"
+  "    ioTaskList.mGuardList &= ~ mask ;\n"
+  "    result = & gTaskDescriptorArray [taskIndex] ;\n"
+  "  }\n"
+  "  return result ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  REMOVE TASK FROM LIST: inTask should not be null                                                                   *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void guardlist_removeTask (GuardList & ioList, TaskControlBlock * inTask) __attribute__((always_inline)) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void guardlist_removeTask (GuardList & ioList, TaskControlBlock * inTask) {\n"
+  "  const unsigned long long mask = 1ULL << inTask->mTaskIndex ;\n"
+  "  ioList.mGuardList &= ~ mask ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_6_targetTemplates (
+  "c-guard-list-64-tasks.cpp",
+  "cpp",
+  true, // Text file
+  2714, // Text length
+  gWrapperFileContent_6_targetTemplates
 ) ;
 
 //--- File '/c-guard-types-32-tasks.cpp'
 
-const char * gWrapperFileContent_4_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_7_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "typedef struct { unsigned mGuardList ; } GuardList ;\n"
   "\n"
@@ -7855,17 +8017,38 @@ const char * gWrapperFileContent_4_targetTemplates = "//------------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_4_targetTemplates (
+const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "c-guard-types-32-tasks.cpp",
   "cpp",
   true, // Text file
   580, // Text length
-  gWrapperFileContent_4_targetTemplates
+  gWrapperFileContent_7_targetTemplates
+) ;
+
+//--- File '/c-guard-types-64-tasks.cpp'
+
+const char * gWrapperFileContent_8_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct { unsigned long long mGuardList ; } GuardList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "// GUARD_EVALUATING_OR_OUTSIDE should be the first constant\n"
+  "typedef enum {GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_8_targetTemplates (
+  "c-guard-types-64-tasks.cpp",
+  "cpp",
+  true, // Text file
+  590, // Text length
+  gWrapperFileContent_8_targetTemplates
 ) ;
 
 //--- File '/c-real-time-kernel-code.cpp'
 
-const char * gWrapperFileContent_5_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_9_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//   S C H E D U L E R                                                                                                 *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -8020,17 +8203,17 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_targetTemplates (
+const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "c-real-time-kernel-code.cpp",
   "cpp",
   true, // Text file
   7547, // Text length
-  gWrapperFileContent_5_targetTemplates
+  gWrapperFileContent_9_targetTemplates
 ) ;
 
 //--- File '/c-real-time-kernel-utilities.cpp'
 
-const char * gWrapperFileContent_6_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_10_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//  G E T T I N G    F R E E    S T A C K    S I Z E                                                                   *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -8107,17 +8290,17 @@ const char * gWrapperFileContent_6_targetTemplates = "//------------------------
   "  return gTaskDescriptorArray [inIndex].mStackBufferSize ;\n"
   "}\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_targetTemplates (
+const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "c-real-time-kernel-utilities.cpp",
   "cpp",
   true, // Text file
   4193, // Text length
-  gWrapperFileContent_6_targetTemplates
+  gWrapperFileContent_10_targetTemplates
 ) ;
 
 //--- File '/c-task-control-block-type.cpp'
 
-const char * gWrapperFileContent_7_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_11_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#define TASK_COUNT (!TASKCOUNT!)\n"
   "#define GUARD_COUNT (!GUARDCOUNT!)\n"
@@ -8159,17 +8342,17 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "TaskControlBlock * gRunningTaskControlBlockPtr ; // Shared with assembly code (arm_context.s)\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_7_targetTemplates (
+const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "c-task-control-block-type.cpp",
   "cpp",
   true, // Text file
   1794, // Text length
-  gWrapperFileContent_7_targetTemplates
+  gWrapperFileContent_11_targetTemplates
 ) ;
 
 //--- File '/c-task-list-32-tasks.cpp'
 
-const char * gWrapperFileContent_8_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_12_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//   TASK LIST FUNCTIONS                                                                                               *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -8211,34 +8394,103 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_8_targetTemplates (
+const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "c-task-list-32-tasks.cpp",
   "cpp",
   true, // Text file
   2170, // Text length
-  gWrapperFileContent_8_targetTemplates
+  gWrapperFileContent_12_targetTemplates
+) ;
+
+//--- File '/c-task-list-64-tasks.cpp'
+
+const char * gWrapperFileContent_13_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   TASK LIST FUNCTIONS                                                                                               *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#if TASK_COUNT > 64\n"
+  "  #error \"This type of list supports at most 64 tasks\"\n"
+  "#endif\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "// ENTER TASK IN LIST: inTask should be not null\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline void list_enterTask (TaskList & ioTaskList, TaskControlBlock * inTask) {\n"
+  "  const unsigned runningTaskIndex = inTask->mTaskIndex ;\n"
+  "  const unsigned long long mask = 1ULL << runningTaskIndex ;\n"
+  "  ioTaskList.mList |= mask ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  REMOVE FIRST TASK FROM LIST: returns nullptr if list is empty                                                      *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline TaskControlBlock * list_removeFirstTask (TaskList & ioTaskList) __attribute__((always_inline)) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static inline TaskControlBlock * list_removeFirstTask (TaskList & ioTaskList) {\n"
+  "  TaskControlBlock * result = nullptr ;\n"
+  "  if (ioTaskList.mList != 0UL) {\n"
+  "    const unsigned taskIndex = __builtin_ctzl (ioTaskList.mList) ;\n"
+  "    const unsigned long long mask = 1ULL << taskIndex ;\n"
+  "    ioTaskList.mList &= ~ mask ;\n"
+  "    result = & gTaskDescriptorArray [taskIndex] ;\n"
+  "  }\n"
+  "  return result ;\n"
+  "}\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+  "c-task-list-64-tasks.cpp",
+  "cpp",
+  true, // Text file
+  2199, // Text length
+  gWrapperFileContent_13_targetTemplates
 ) ;
 
 //--- File '/c-task-list-type-32-tasks.cpp'
 
-const char * gWrapperFileContent_9_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_14_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "typedef struct { unsigned mList ; } TaskList ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_targetTemplates (
+const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "c-task-list-type-32-tasks.cpp",
   "cpp",
   true, // Text file
   292, // Text length
-  gWrapperFileContent_9_targetTemplates
+  gWrapperFileContent_14_targetTemplates
+) ;
+
+//--- File '/c-task-list-type-64-tasks.cpp'
+
+const char * gWrapperFileContent_15_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct { unsigned long long mList ; } TaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+  "c-task-list-type-64-tasks.cpp",
+  "cpp",
+  true, // Text file
+  302, // Text length
+  gWrapperFileContent_15_targetTemplates
 ) ;
 
 //--- File '/class.cpp'
 
-const char * gWrapperFileContent_10_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_16_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//\n"
   "//  CLASS ALLOCATION\n"
   "//\n"
@@ -8270,17 +8522,17 @@ const char * gWrapperFileContent_10_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_targetTemplates (
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "class.cpp",
   "cpp",
   true, // Text file
   1230, // Text length
-  gWrapperFileContent_10_targetTemplates
+  gWrapperFileContent_16_targetTemplates
 ) ;
 
 //--- File '/dynamic-buffer.cpp'
 
-const char * gWrapperFileContent_11_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_17_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   GENERIC DYNAMIC BUFFER FUNCTIONS\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -8372,17 +8624,17 @@ const char * gWrapperFileContent_11_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "dynamic-buffer.cpp",
   "cpp",
   true, // Text file
   3527, // Text length
-  gWrapperFileContent_11_targetTemplates
+  gWrapperFileContent_17_targetTemplates
 ) ;
 
 //--- File '/heap.cpp'
 
-const char * gWrapperFileContent_12_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_18_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//\n"
   "//  DYNAMIC ALLOCATION\n"
   "//\n"
@@ -8611,17 +8863,17 @@ const char * gWrapperFileContent_12_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_targetTemplates (
+const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "heap.cpp",
   "cpp",
   true, // Text file
   9579, // Text length
-  gWrapperFileContent_12_targetTemplates
+  gWrapperFileContent_18_targetTemplates
 ) ;
 
 //--- File '/heap.plm'
 
-const char * gWrapperFileContent_13_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_19_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   HEAP FUNCTIONS (IMPLEMENTED IN heap.c)                                                                                     \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -8639,17 +8891,17 @@ const char * gWrapperFileContent_13_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "heap.plm",
   "plm",
   true, // Text file
   1148, // Text length
-  gWrapperFileContent_13_targetTemplates
+  gWrapperFileContent_19_targetTemplates
 ) ;
 
 //--- File '/ll-clear-bss.ll'
 
-const char * gWrapperFileContent_14_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_20_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   ";   Clear BSS                                                                                                          *\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   ";void clearBSS (void) {\n"
@@ -8686,17 +8938,17 @@ const char * gWrapperFileContent_14_targetTemplates = ";------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_targetTemplates (
+const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "ll-clear-bss.ll",
   "ll",
   true, // Text file
   1459, // Text length
-  gWrapperFileContent_14_targetTemplates
+  gWrapperFileContent_20_targetTemplates
 ) ;
 
 //--- File '/ll-configuration-on-boot.ll'
 
-const char * gWrapperFileContent_15_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_21_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   ";   boot.routines                                                                                                      *\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -8717,17 +8969,17 @@ const char * gWrapperFileContent_15_targetTemplates = ";------------------------
   "  ret  void\n"
   "}\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "ll-configuration-on-boot.ll",
   "ll",
   true, // Text file
   993, // Text length
-  gWrapperFileContent_15_targetTemplates
+  gWrapperFileContent_21_targetTemplates
 ) ;
 
 //--- File '/ll-copy-data-section.ll'
 
-const char * gWrapperFileContent_16_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_22_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   ";   Copy .data section                                                                                                 *\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   ";void copyData (void) {\n"
@@ -8775,17 +9027,17 @@ const char * gWrapperFileContent_16_targetTemplates = ";------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+const cRegularFileWrapper gWrapperFile_22_targetTemplates (
   "ll-copy-data-section.ll",
   "ll",
   true, // Text file
   1923, // Text length
-  gWrapperFileContent_16_targetTemplates
+  gWrapperFileContent_22_targetTemplates
 ) ;
 
 //--- File '/memory-utilities.cpp'
 
-const char * gWrapperFileContent_17_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_23_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//   COPY BYTE ARRAY\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -8850,17 +9102,17 @@ const char * gWrapperFileContent_17_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_17_targetTemplates (
+const cRegularFileWrapper gWrapperFile_23_targetTemplates (
   "memory-utilities.cpp",
   "cpp",
   true, // Text file
   2597, // Text length
-  gWrapperFileContent_17_targetTemplates
+  gWrapperFileContent_23_targetTemplates
 ) ;
 
 //--- File '/plm-semaphore.plm'
 
-const char * gWrapperFileContent_18_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_24_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "sync $semaphore {\n"
   "  var value $uint32\n"
@@ -8904,17 +9156,17 @@ const char * gWrapperFileContent_18_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_18_targetTemplates (
+const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   "plm-semaphore.plm",
   "plm",
   true, // Text file
   1145, // Text length
-  gWrapperFileContent_18_targetTemplates
+  gWrapperFileContent_24_targetTemplates
 ) ;
 
 //--- File '/py-build-verbose.txt'
 
-const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_25_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -8948,17 +9200,17 @@ const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_19_targetTemplates (
+const cRegularFileWrapper gWrapperFile_25_targetTemplates (
   "py-build-verbose.txt",
   "txt",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_19_targetTemplates
+  gWrapperFileContent_25_targetTemplates
 ) ;
 
 //--- File '/py-check-stacks.txt'
 
-const char * gWrapperFileContent_20_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_26_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: utf-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -9097,17 +9349,17 @@ const char * gWrapperFileContent_20_targetTemplates = "#! /usr/bin/env python\n"
   "  sys.exit (1)\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+const cRegularFileWrapper gWrapperFile_26_targetTemplates (
   "py-check-stacks.txt",
   "txt",
   true, // Text file
   7469, // Text length
-  gWrapperFileContent_20_targetTemplates
+  gWrapperFileContent_26_targetTemplates
 ) ;
 
 //--- File '/py-clean.txt'
 
-const char * gWrapperFileContent_21_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_27_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -9144,17 +9396,17 @@ const char * gWrapperFileContent_21_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_21_targetTemplates (
+const cRegularFileWrapper gWrapperFile_27_targetTemplates (
   "py-clean.txt",
   "txt",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_21_targetTemplates
+  gWrapperFileContent_27_targetTemplates
 ) ;
 
 //--- File '/py-makefile.txt'
 
-const char * gWrapperFileContent_22_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_28_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""*\n"
@@ -10084,17 +10336,17 @@ const char * gWrapperFileContent_22_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""*\n" ;
 
-const cRegularFileWrapper gWrapperFile_22_targetTemplates (
+const cRegularFileWrapper gWrapperFile_28_targetTemplates (
   "py-makefile.txt",
   "txt",
   true, // Text file
   40378, // Text length
-  gWrapperFileContent_22_targetTemplates
+  gWrapperFileContent_28_targetTemplates
 ) ;
 
 //--- File '/py-objdump.txt'
 
-const char * gWrapperFileContent_23_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_29_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -10128,17 +10380,17 @@ const char * gWrapperFileContent_23_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_23_targetTemplates (
+const cRegularFileWrapper gWrapperFile_29_targetTemplates (
   "py-objdump.txt",
   "txt",
   true, // Text file
   1005, // Text length
-  gWrapperFileContent_23_targetTemplates
+  gWrapperFileContent_29_targetTemplates
 ) ;
 
 //--- File '/py-objsize.txt'
 
-const char * gWrapperFileContent_24_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_30_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -10172,17 +10424,17 @@ const char * gWrapperFileContent_24_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_24_targetTemplates (
+const cRegularFileWrapper gWrapperFile_30_targetTemplates (
   "py-objsize.txt",
   "txt",
   true, // Text file
   1013, // Text length
-  gWrapperFileContent_24_targetTemplates
+  gWrapperFileContent_30_targetTemplates
 ) ;
 
 //--- File '/py-plm.txt'
 
-const char * gWrapperFileContent_25_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_31_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -10465,17 +10717,17 @@ const char * gWrapperFileContent_25_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_25_targetTemplates (
+const cRegularFileWrapper gWrapperFile_31_targetTemplates (
   "py-plm.txt",
   "txt",
   true, // Text file
   13293, // Text length
-  gWrapperFileContent_25_targetTemplates
+  gWrapperFileContent_31_targetTemplates
 ) ;
 
 //--- File '/py-toolpath.txt'
 
-const char * gWrapperFileContent_26_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_32_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -10494,17 +10746,17 @@ const char * gWrapperFileContent_26_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_26_targetTemplates (
+const cRegularFileWrapper gWrapperFile_32_targetTemplates (
   "py-toolpath.txt",
   "txt",
   true, // Text file
   942, // Text length
-  gWrapperFileContent_26_targetTemplates
+  gWrapperFileContent_32_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/+config.plm-target'
 
-const char * gWrapperFileContent_27_targetTemplates = "PYTHON_UTILITIES:\n"
+const char * gWrapperFileContent_33_targetTemplates = "PYTHON_UTILITIES:\n"
   "  \"../py-toolpath.txt\" -> \"sources/toolpath.py\"\n"
   "  \"../py-makefile.txt\" -> \"sources/makefile.py\"\n"
   "  \"../py-check-stacks.txt\" -> \"sources/check-stacks.py\"\n"
@@ -10614,17 +10866,17 @@ const char * gWrapperFileContent_27_targetTemplates = "PYTHON_UTILITIES:\n"
   "  DAbort -> 41\n"
   "  FIQ -> 42\n" ;
 
-const cRegularFileWrapper gWrapperFile_27_targetTemplates (
+const cRegularFileWrapper gWrapperFile_33_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
   2646, // Text length
-  gWrapperFileContent_27_targetTemplates
+  gWrapperFileContent_33_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/c-arm7tdmi-context-code.cpp'
 
-const char * gWrapperFileContent_28_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_34_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void kernel_set_task_context (TaskControlBlock * inTaskDescriptor,\n"
   "                                     RoutineTaskType inTaskRoutine) {\n"
@@ -10642,17 +10894,17 @@ const char * gWrapperFileContent_28_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_28_targetTemplates (
+const cRegularFileWrapper gWrapperFile_34_targetTemplates (
   "c-arm7tdmi-context-code.cpp",
   "cpp",
   true, // Text file
   928, // Text length
-  gWrapperFileContent_28_targetTemplates
+  gWrapperFileContent_34_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/c-arm7tdmi-context-types.cpp'
 
-const char * gWrapperFileContent_29_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_35_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//                                                                                                                     *\n"
   "//   T A S K    R O U T I N E    T Y P E                                                                               *\n"
   "//                                                                                                                     *\n"
@@ -10709,17 +10961,17 @@ const char * gWrapperFileContent_29_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_29_targetTemplates (
+const cRegularFileWrapper gWrapperFile_35_targetTemplates (
   "c-arm7tdmi-context-types.cpp",
   "cpp",
   true, // Text file
   3306, // Text length
-  gWrapperFileContent_29_targetTemplates
+  gWrapperFileContent_35_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/c-arm7tdmi-vectors.cpp'
 
-const char * gWrapperFileContent_30_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_36_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#define VICIntEnClr    (*((volatile unsigned *) 0xFFFFF014))\n"
   "#define VICIntEnable   (*((volatile unsigned *) 0xFFFFF010))\n"
@@ -10759,17 +11011,17 @@ const char * gWrapperFileContent_30_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_30_targetTemplates (
+const cRegularFileWrapper gWrapperFile_36_targetTemplates (
   "c-arm7tdmi-vectors.cpp",
   "cpp",
   true, // Text file
   1492, // Text length
-  gWrapperFileContent_30_targetTemplates
+  gWrapperFileContent_36_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/flash.ld'
 
-const char * gWrapperFileContent_31_targetTemplates = "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_37_targetTemplates = "/*--------------------------------------------------------------------------------------------------------------------*/\n"
   "/*                                                                                                                    */\n"
   "/*                                   Memory                                                                           */\n"
   "/*                                                                                                                    */\n"
@@ -10965,17 +11217,17 @@ const char * gWrapperFileContent_31_targetTemplates = "/*-----------------------
   "\n"
   "/*--------------------------------------------------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_31_targetTemplates (
+const cRegularFileWrapper gWrapperFile_37_targetTemplates (
   "flash.ld",
   "ld",
   true, // Text file
   7649, // Text length
-  gWrapperFileContent_31_targetTemplates
+  gWrapperFileContent_37_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/ld-linker.txt'
 
-const char * gWrapperFileContent_32_targetTemplates = "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_38_targetTemplates = "/*--------------------------------------------------------------------------------------------------------------------*/\n"
   "/*                                                                                                                    */\n"
   "/*                                   Memory                                                                           */\n"
   "/*                                                                                                                    */\n"
@@ -11151,46 +11403,46 @@ const char * gWrapperFileContent_32_targetTemplates = "/*-----------------------
   "\n"
   "/*--------------------------------------------------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_32_targetTemplates (
+const cRegularFileWrapper gWrapperFile_38_targetTemplates (
   "ld-linker.txt",
   "txt",
   true, // Text file
   7085, // Text length
-  gWrapperFileContent_32_targetTemplates
+  gWrapperFileContent_38_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/ll-arm7tdmi.ll'
 
-const char * gWrapperFileContent_33_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_39_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"armv4-none--eabi\"\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_33_targetTemplates (
+const cRegularFileWrapper gWrapperFile_39_targetTemplates (
   "ll-arm7tdmi.ll",
   "ll",
   true, // Text file
   106, // Text length
-  gWrapperFileContent_33_targetTemplates
+  gWrapperFileContent_39_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/ll-install-interrupts.ll'
 
-const char * gWrapperFileContent_34_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_40_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "declare void @installInterrupts () nounwind\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_34_targetTemplates (
+const cRegularFileWrapper gWrapperFile_40_targetTemplates (
   "ll-install-interrupts.ll",
   "ll",
   true, // Text file
   167, // Text length
-  gWrapperFileContent_34_targetTemplates
+  gWrapperFileContent_40_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/plm-lpc2294-xtr.plm'
 
-const char * gWrapperFileContent_35_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_41_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   SYNCHRONIZATION TOOLS ROUTINES\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -11322,17 +11574,17 @@ const char * gWrapperFileContent_35_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_35_targetTemplates (
+const cRegularFileWrapper gWrapperFile_41_targetTemplates (
   "plm-lpc2294-xtr.plm",
   "plm",
   true, // Text file
   4625, // Text length
-  gWrapperFileContent_35_targetTemplates
+  gWrapperFileContent_41_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/plm-registers-lpc2294.plm'
 
-const char * gWrapperFileContent_36_targetTemplates = "//------------------------------------------------------------------------------\n"
+const char * gWrapperFileContent_42_targetTemplates = "//------------------------------------------------------------------------------\n"
   "\n"
   "// Vectored Interrupt Controller (VIC)\n"
   "registers #VIC 0xFFFF_F000 {\n"
@@ -11662,17 +11914,17 @@ const char * gWrapperFileContent_36_targetTemplates = "//-----------------------
   "\n"
   "//------------------------------------------------------------------------------\n" ;
 
-const cRegularFileWrapper gWrapperFile_36_targetTemplates (
+const cRegularFileWrapper gWrapperFile_42_targetTemplates (
   "plm-registers-lpc2294.plm",
   "plm",
   true, // Text file
   7755, // Text length
-  gWrapperFileContent_36_targetTemplates
+  gWrapperFileContent_42_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/py-build.txt'
 
-const char * gWrapperFileContent_37_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_43_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -11897,17 +12149,17 @@ const char * gWrapperFileContent_37_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_37_targetTemplates (
+const cRegularFileWrapper gWrapperFile_43_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
   15498, // Text length
-  gWrapperFileContent_37_targetTemplates
+  gWrapperFileContent_43_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/py-run.txt'
 
-const char * gWrapperFileContent_38_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_44_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -12002,17 +12254,17 @@ const char * gWrapperFileContent_38_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_38_targetTemplates (
+const cRegularFileWrapper gWrapperFile_44_targetTemplates (
   "py-run.txt",
   "txt",
   true, // Text file
   3092, // Text length
-  gWrapperFileContent_38_targetTemplates
+  gWrapperFileContent_44_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/s-target.s'
 
-const char * gWrapperFileContent_39_targetTemplates = "  .code 32\n"
+const char * gWrapperFileContent_45_targetTemplates = "  .code 32\n"
   "\t.text\n"
   "\t.syntax unified\n"
   "\t.cpu\tarm7tdmi-s\n"
@@ -12263,29 +12515,29 @@ const char * gWrapperFileContent_39_targetTemplates = "  .code 32\n"
   "  ldmia r0, {r0-r12, pc}^\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_39_targetTemplates (
+const cRegularFileWrapper gWrapperFile_45_targetTemplates (
   "s-target.s",
   "s",
   true, // Text file
   12022, // Text length
-  gWrapperFileContent_39_targetTemplates
+  gWrapperFileContent_45_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/service-dispatcher-entry.s'
 
-const char * gWrapperFileContent_40_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
+const char * gWrapperFileContent_46_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
 
-const cRegularFileWrapper gWrapperFile_40_targetTemplates (
+const cRegularFileWrapper gWrapperFile_46_targetTemplates (
   "service-dispatcher-entry.s",
   "s",
   true, // Text file
   25, // Text length
-  gWrapperFileContent_40_targetTemplates
+  gWrapperFileContent_46_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/service-dispatcher-header.s'
 
-const char * gWrapperFileContent_41_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_47_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
   "@                                                                                                                      *\n"
@@ -12293,17 +12545,17 @@ const char * gWrapperFileContent_41_targetTemplates = "@------------------------
   "\n"
   "__swi_dispatcher_table:\n" ;
 
-const cRegularFileWrapper gWrapperFile_41_targetTemplates (
+const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
   630, // Text length
-  gWrapperFileContent_41_targetTemplates
+  gWrapperFileContent_47_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/service-entry-no-return.s'
 
-const char * gWrapperFileContent_42_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_48_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -12324,17 +12576,17 @@ const char * gWrapperFileContent_42_targetTemplates = "@------------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_42_targetTemplates (
+const cRegularFileWrapper gWrapperFile_48_targetTemplates (
   "service-entry-no-return.s",
   "s",
   true, // Text file
   496, // Text length
-  gWrapperFileContent_42_targetTemplates
+  gWrapperFileContent_48_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/service-entry-return-value.s'
 
-const char * gWrapperFileContent_43_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_49_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -12355,17 +12607,17 @@ const char * gWrapperFileContent_43_targetTemplates = "@------------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_43_targetTemplates (
+const cRegularFileWrapper gWrapperFile_49_targetTemplates (
   "service-entry-return-value.s",
   "s",
   true, // Text file
   509, // Text length
-  gWrapperFileContent_43_targetTemplates
+  gWrapperFileContent_49_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/service-handler.s'
 
-const char * gWrapperFileContent_44_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_50_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@              A R M 4    C O N T E X T                                                                                *\n"
   "@                                                                                                                      *\n"
@@ -12503,17 +12755,17 @@ const char * gWrapperFileContent_44_targetTemplates = "@------------------------
   "  b     __wait_interrupt\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_44_targetTemplates (
+const cRegularFileWrapper gWrapperFile_50_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
   9642, // Text length
-  gWrapperFileContent_44_targetTemplates
+  gWrapperFileContent_50_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/udfcoded-section-dispatcher-code.s'
 
-const char * gWrapperFileContent_45_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_51_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@        U N D E F I N E D    I N S T R U C T I O N    H A N D L E R                                                   *\n"
   "@                                                                                                                      *\n"
@@ -12561,29 +12813,29 @@ const char * gWrapperFileContent_45_targetTemplates = "@------------------------
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_45_targetTemplates (
+const cRegularFileWrapper gWrapperFile_51_targetTemplates (
   "udfcoded-section-dispatcher-code.s",
   "s",
   true, // Text file
   3706, // Text length
-  gWrapperFileContent_45_targetTemplates
+  gWrapperFileContent_51_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/udfcoded-section-dispatcher-entry.s'
 
-const char * gWrapperFileContent_46_targetTemplates = "  .word  !IMPLEMENTATION_ROUTINE! @ !IDX!, user routine !USER_ROUTINE!\n" ;
+const char * gWrapperFileContent_52_targetTemplates = "  .word  !IMPLEMENTATION_ROUTINE! @ !IDX!, user routine !USER_ROUTINE!\n" ;
 
-const cRegularFileWrapper gWrapperFile_46_targetTemplates (
+const cRegularFileWrapper gWrapperFile_52_targetTemplates (
   "udfcoded-section-dispatcher-entry.s",
   "s",
   true, // Text file
   71, // Text length
-  gWrapperFileContent_46_targetTemplates
+  gWrapperFileContent_52_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/udfcoded-section-dispatcher-header.s'
 
-const char * gWrapperFileContent_47_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_53_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S E C T I O N   T A B L E                                                                            *\n"
   "@                                                                                                                      *\n"
@@ -12594,17 +12846,17 @@ const char * gWrapperFileContent_47_targetTemplates = "@------------------------
   "\n"
   "__section_dispatcher_table:\n" ;
 
-const cRegularFileWrapper gWrapperFile_47_targetTemplates (
+const cRegularFileWrapper gWrapperFile_53_targetTemplates (
   "udfcoded-section-dispatcher-header.s",
   "s",
   true, // Text file
   733, // Text length
-  gWrapperFileContent_47_targetTemplates
+  gWrapperFileContent_53_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/udfcoded-section-invocation-from-any-mode.s'
 
-const char * gWrapperFileContent_48_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_54_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !USER_ROUTINE!, implemented by !IMPLEMENTATION_ROUTINE!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -12629,17 +12881,17 @@ const char * gWrapperFileContent_48_targetTemplates = "@------------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_48_targetTemplates (
+const cRegularFileWrapper gWrapperFile_54_targetTemplates (
   "udfcoded-section-invocation-from-any-mode.s",
   "s",
   true, // Text file
   719, // Text length
-  gWrapperFileContent_48_targetTemplates
+  gWrapperFileContent_54_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/udfcoded-section-invocation-from-user-mode.s'
 
-const char * gWrapperFileContent_49_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_55_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !USER_ROUTINE!, implemented by !IMPLEMENTATION_ROUTINE!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -12660,34 +12912,34 @@ const char * gWrapperFileContent_49_targetTemplates = "@------------------------
   "  .cantunwind\n"
   "\t.fnend\n" ;
 
-const cRegularFileWrapper gWrapperFile_49_targetTemplates (
+const cRegularFileWrapper gWrapperFile_55_targetTemplates (
   "udfcoded-section-invocation-from-user-mode.s",
   "s",
   true, // Text file
   634, // Text length
-  gWrapperFileContent_49_targetTemplates
+  gWrapperFileContent_55_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/undefined-interrupt.s'
 
-const char * gWrapperFileContent_50_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_56_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Undefined interrupt !ISR!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "\t!ISR! = 0xFFFFFFFF\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_50_targetTemplates (
+const cRegularFileWrapper gWrapperFile_56_targetTemplates (
   "undefined-interrupt.s",
   "s",
   true, // Text file
   293, // Text length
-  gWrapperFileContent_50_targetTemplates
+  gWrapperFileContent_56_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/xtr-interrupt-handler.s'
 
-const char * gWrapperFileContent_51_targetTemplates = "\n"
+const char * gWrapperFileContent_57_targetTemplates = "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S Y S T I C K    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                            *\n"
@@ -12709,23 +12961,17 @@ const char * gWrapperFileContent_51_targetTemplates = "\n"
   "  b    !HANDLER!\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_51_targetTemplates (
+const cRegularFileWrapper gWrapperFile_57_targetTemplates (
   "xtr-interrupt-handler.s",
   "s",
   true, // Text file
   1034, // Text length
-  gWrapperFileContent_51_targetTemplates
+  gWrapperFileContent_57_targetTemplates
 ) ;
 
 //--- All files of 'LPC-L2294' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [26] = {
-  & gWrapperFile_27_targetTemplates,
-  & gWrapperFile_28_targetTemplates,
-  & gWrapperFile_29_targetTemplates,
-  & gWrapperFile_30_targetTemplates,
-  & gWrapperFile_31_targetTemplates,
-  & gWrapperFile_32_targetTemplates,
   & gWrapperFile_33_targetTemplates,
   & gWrapperFile_34_targetTemplates,
   & gWrapperFile_35_targetTemplates,
@@ -12745,6 +12991,12 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [26] = {
   & gWrapperFile_49_targetTemplates,
   & gWrapperFile_50_targetTemplates,
   & gWrapperFile_51_targetTemplates,
+  & gWrapperFile_52_targetTemplates,
+  & gWrapperFile_53_targetTemplates,
+  & gWrapperFile_54_targetTemplates,
+  & gWrapperFile_55_targetTemplates,
+  & gWrapperFile_56_targetTemplates,
+  & gWrapperFile_57_targetTemplates,
   NULL
 } ;
 
@@ -12766,7 +13018,7 @@ const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
 
 //--- File 'teensy-3-1/c-cortex-m4-context-code.cpp'
 
-const char * gWrapperFileContent_52_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_58_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void kernel_set_task_context (TaskControlBlock * inTaskDescriptor,\n"
   "                                     RoutineTaskType inTaskRoutine) {\n"
@@ -12789,17 +13041,17 @@ const char * gWrapperFileContent_52_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_52_targetTemplates (
+const cRegularFileWrapper gWrapperFile_58_targetTemplates (
   "c-cortex-m4-context-code.cpp",
   "cpp",
   true, // Text file
   1174, // Text length
-  gWrapperFileContent_52_targetTemplates
+  gWrapperFileContent_58_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/c-cortex-m4-context-types.cpp'
 
-const char * gWrapperFileContent_53_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_59_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//                                                                                                                     *\n"
   "//   T A S K    R O U T I N E    T Y P E                                                                               *\n"
   "//                                                                                                                     *\n"
@@ -12881,17 +13133,17 @@ const char * gWrapperFileContent_53_targetTemplates = "//-----------------------
   "} TaskContext ;\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_53_targetTemplates (
+const cRegularFileWrapper gWrapperFile_59_targetTemplates (
   "c-cortex-m4-context-types.cpp",
   "cpp",
   true, // Text file
   5649, // Text length
-  gWrapperFileContent_53_targetTemplates
+  gWrapperFileContent_59_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/driver-digital-teensy-3-1.plm'
 
-const char * gWrapperFileContent_54_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_60_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "check target \"teensy-3-1/unprivileged\"\n"
   "\n"
@@ -13330,17 +13582,17 @@ const char * gWrapperFileContent_54_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_54_targetTemplates (
+const cRegularFileWrapper gWrapperFile_60_targetTemplates (
   "driver-digital-teensy-3-1.plm",
   "plm",
   true, // Text file
   11633, // Text length
-  gWrapperFileContent_54_targetTemplates
+  gWrapperFileContent_60_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/driver-root-teensy-3-1.plm'
 
-const char * gWrapperFileContent_55_targetTemplates = "\n"
+const char * gWrapperFileContent_61_targetTemplates = "\n"
   "check target \"teensy-3-1/unprivileged\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -13412,17 +13664,17 @@ const char * gWrapperFileContent_55_targetTemplates = "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_55_targetTemplates (
+const cRegularFileWrapper gWrapperFile_61_targetTemplates (
   "driver-root-teensy-3-1.plm",
   "plm",
   true, // Text file
   2603, // Text length
-  gWrapperFileContent_55_targetTemplates
+  gWrapperFileContent_61_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/ld-linker.txt'
 
-const char * gWrapperFileContent_56_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_62_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -13568,31 +13820,31 @@ const char * gWrapperFileContent_56_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_56_targetTemplates (
+const cRegularFileWrapper gWrapperFile_62_targetTemplates (
   "ld-linker.txt",
   "txt",
   true, // Text file
   4944, // Text length
-  gWrapperFileContent_56_targetTemplates
+  gWrapperFileContent_62_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/ll-cortex-m4.ll'
 
-const char * gWrapperFileContent_57_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_63_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_57_targetTemplates (
+const cRegularFileWrapper gWrapperFile_63_targetTemplates (
   "ll-cortex-m4.ll",
   "ll",
   true, // Text file
   110, // Text length
-  gWrapperFileContent_57_targetTemplates
+  gWrapperFileContent_63_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/plm-registers-mk20dx256.plm'
 
-const char * gWrapperFileContent_58_targetTemplates = "\n"
+const char * gWrapperFileContent_64_targetTemplates = "\n"
   "let f_cpu $uint32 = 96_000_000\n"
   "let f_bus $uint32 = 48_000_000\n"
   "let f_mem $uint32 = 24_000_000\n"
@@ -14887,17 +15139,17 @@ const char * gWrapperFileContent_58_targetTemplates = "\n"
   "//registers ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//registers ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_58_targetTemplates (
+const cRegularFileWrapper gWrapperFile_64_targetTemplates (
   "plm-registers-mk20dx256.plm",
   "plm",
   true, // Text file
   56608, // Text length
-  gWrapperFileContent_58_targetTemplates
+  gWrapperFileContent_64_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/plm-teensy-3-1-lcd.plm'
 
-const char * gWrapperFileContent_59_targetTemplates = "\n"
+const char * gWrapperFileContent_65_targetTemplates = "\n"
   "check target \"teensy-3-1/unprivileged\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -15367,17 +15619,17 @@ const char * gWrapperFileContent_59_targetTemplates = "\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_59_targetTemplates (
+const cRegularFileWrapper gWrapperFile_65_targetTemplates (
   "plm-teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
   15520, // Text length
-  gWrapperFileContent_59_targetTemplates
+  gWrapperFileContent_65_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/plm-teensy-3-1-nvic-interrupts.plm'
 
-const char * gWrapperFileContent_60_targetTemplates = "\n"
+const char * gWrapperFileContent_66_targetTemplates = "\n"
   "system section enable @noUnusedWarning (\?interrupt: inInterruptCode $isrSlot) {\n"
   "  let idx $uint32 = extend (inInterruptCode.uint7 () - 16)\n"
   "  let bitIndex = idx & 0x1F\n"
@@ -15410,17 +15662,17 @@ const char * gWrapperFileContent_60_targetTemplates = "\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_60_targetTemplates (
+const cRegularFileWrapper gWrapperFile_66_targetTemplates (
   "plm-teensy-3-1-nvic-interrupts.plm",
   "plm",
   true, // Text file
   1383, // Text length
-  gWrapperFileContent_60_targetTemplates
+  gWrapperFileContent_66_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/plm-teensy-3-1-panic.plm'
 
-const char * gWrapperFileContent_61_targetTemplates = "\n"
+const char * gWrapperFileContent_67_targetTemplates = "\n"
   "check target \"teensy-3-1/unprivileged\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -15460,17 +15712,17 @@ const char * gWrapperFileContent_61_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_61_targetTemplates (
+const cRegularFileWrapper gWrapperFile_67_targetTemplates (
   "plm-teensy-3-1-panic.plm",
   "plm",
   true, // Text file
   1169, // Text length
-  gWrapperFileContent_61_targetTemplates
+  gWrapperFileContent_67_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/plm-teensy-3-1-time.plm'
 
-const char * gWrapperFileContent_62_targetTemplates = "check target \"teensy-3-1/unprivileged\"\n"
+const char * gWrapperFileContent_68_targetTemplates = "check target \"teensy-3-1/unprivileged\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -15565,17 +15817,17 @@ const char * gWrapperFileContent_62_targetTemplates = "check target \"teensy-3-1
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_62_targetTemplates (
+const cRegularFileWrapper gWrapperFile_68_targetTemplates (
   "plm-teensy-3-1-time.plm",
   "plm",
   true, // Text file
   2933, // Text length
-  gWrapperFileContent_62_targetTemplates
+  gWrapperFileContent_68_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/plm-teensy-3-1-xtr.plm'
 
-const char * gWrapperFileContent_63_targetTemplates = "\n"
+const char * gWrapperFileContent_69_targetTemplates = "\n"
   "check target \"teensy-3-1/unprivileged\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -15629,17 +15881,17 @@ const char * gWrapperFileContent_63_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_63_targetTemplates (
+const cRegularFileWrapper gWrapperFile_69_targetTemplates (
   "plm-teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
   1722, // Text length
-  gWrapperFileContent_63_targetTemplates
+  gWrapperFileContent_69_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/py-build.txt'
 
-const char * gWrapperFileContent_64_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_70_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -15864,17 +16116,17 @@ const char * gWrapperFileContent_64_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_64_targetTemplates (
+const cRegularFileWrapper gWrapperFile_70_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
   15480, // Text length
-  gWrapperFileContent_64_targetTemplates
+  gWrapperFileContent_70_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/py-run.txt'
 
-const char * gWrapperFileContent_65_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_71_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -15896,51 +16148,51 @@ const char * gWrapperFileContent_65_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_65_targetTemplates (
+const cRegularFileWrapper gWrapperFile_71_targetTemplates (
   "py-run.txt",
   "txt",
   true, // Text file
   629, // Text length
-  gWrapperFileContent_65_targetTemplates
+  gWrapperFileContent_71_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/s-cortex-m4-header.s'
 
-const char * gWrapperFileContent_66_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_72_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "\t.syntax unified\n"
   "\t.cpu cortex-m4\n"
   "\t.thumb\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_66_targetTemplates (
+const cRegularFileWrapper gWrapperFile_72_targetTemplates (
   "s-cortex-m4-header.s",
   "s",
   true, // Text file
   164, // Text length
-  gWrapperFileContent_66_targetTemplates
+  gWrapperFileContent_72_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/undefined-interrupt.s'
 
-const char * gWrapperFileContent_67_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_73_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Undefined interrupt !ISR!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "\t!ISR! = -1\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_67_targetTemplates (
+const cRegularFileWrapper gWrapperFile_73_targetTemplates (
   "undefined-interrupt.s",
   "s",
   true, // Text file
   285, // Text length
-  gWrapperFileContent_67_targetTemplates
+  gWrapperFileContent_73_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/xtr-interrupt-handler.s'
 
-const char * gWrapperFileContent_68_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_74_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 I N T E R R U P T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                        *\n"
   "@                                                                                                                      *\n"
@@ -15975,17 +16227,17 @@ const char * gWrapperFileContent_68_targetTemplates = "@------------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_68_targetTemplates (
+const cRegularFileWrapper gWrapperFile_74_targetTemplates (
   "xtr-interrupt-handler.s",
   "s",
   true, // Text file
   1560, // Text length
-  gWrapperFileContent_68_targetTemplates
+  gWrapperFileContent_74_targetTemplates
 ) ;
 
 //--- File 'unprivileged/+config.plm-target'
 
-const char * gWrapperFileContent_69_targetTemplates = "PYTHON_UTILITIES:\n"
+const char * gWrapperFileContent_75_targetTemplates = "PYTHON_UTILITIES:\n"
   "   \"../../py-toolpath.txt\" -> \"sources/toolpath.py\"\n"
   "   \"../../py-makefile.txt\" -> \"sources/makefile.py\"\n"
   "   \"../../py-check-stacks.txt\" -> \"sources/check-stacks.py\"\n"
@@ -16150,17 +16402,17 @@ const char * gWrapperFileContent_69_targetTemplates = "PYTHON_UTILITIES:\n"
   "  pinDetectPortE -> 107\n"
   "  softwareInterrupt -> 110\n" ;
 
-const cRegularFileWrapper gWrapperFile_69_targetTemplates (
+const cRegularFileWrapper gWrapperFile_75_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
   4484, // Text length
-  gWrapperFileContent_69_targetTemplates
+  gWrapperFileContent_75_targetTemplates
 ) ;
 
 //--- File 'unprivileged/s-interrupt-vectors.s'
 
-const char * gWrapperFileContent_70_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_76_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@   INTERRUPT VECTOR                                                                                                   *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -16305,17 +16557,17 @@ const char * gWrapperFileContent_70_targetTemplates = "@------------------------
   "  .word -2\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_70_targetTemplates (
+const cRegularFileWrapper gWrapperFile_76_targetTemplates (
   "s-interrupt-vectors.s",
   "s",
   true, // Text file
   4591, // Text length
-  gWrapperFileContent_70_targetTemplates
+  gWrapperFileContent_76_targetTemplates
 ) ;
 
 //--- File 'unprivileged/s-reset-handler.s'
 
-const char * gWrapperFileContent_71_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_77_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 R E S E T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                *\n"
   "@                                                                                                                      *\n"
@@ -16365,29 +16617,29 @@ const char * gWrapperFileContent_71_targetTemplates = "@------------------------
   "  b  background.task\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_71_targetTemplates (
+const cRegularFileWrapper gWrapperFile_77_targetTemplates (
   "s-reset-handler.s",
   "s",
   true, // Text file
   2332, // Text length
-  gWrapperFileContent_71_targetTemplates
+  gWrapperFileContent_77_targetTemplates
 ) ;
 
 //--- File 'unprivileged/service-dispatcher-entry.s'
 
-const char * gWrapperFileContent_72_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
+const char * gWrapperFileContent_78_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
 
-const cRegularFileWrapper gWrapperFile_72_targetTemplates (
+const cRegularFileWrapper gWrapperFile_78_targetTemplates (
   "service-dispatcher-entry.s",
   "s",
   true, // Text file
   29, // Text length
-  gWrapperFileContent_72_targetTemplates
+  gWrapperFileContent_78_targetTemplates
 ) ;
 
 //--- File 'unprivileged/service-dispatcher-header.s'
 
-const char * gWrapperFileContent_73_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_79_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
   "@                                                                                                                      *\n"
@@ -16400,17 +16652,17 @@ const char * gWrapperFileContent_73_targetTemplates = "@------------------------
   "__svc_dispatcher_table:\n"
   "  .word  init.routines @ 0\n" ;
 
-const cRegularFileWrapper gWrapperFile_73_targetTemplates (
+const cRegularFileWrapper gWrapperFile_79_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
   704, // Text length
-  gWrapperFileContent_73_targetTemplates
+  gWrapperFileContent_79_targetTemplates
 ) ;
 
 //--- File 'unprivileged/service-entry-no-return.s'
 
-const char * gWrapperFileContent_74_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_80_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -16432,17 +16684,17 @@ const char * gWrapperFileContent_74_targetTemplates = "@------------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_74_targetTemplates (
+const cRegularFileWrapper gWrapperFile_80_targetTemplates (
   "service-entry-no-return.s",
   "s",
   true, // Text file
   513, // Text length
-  gWrapperFileContent_74_targetTemplates
+  gWrapperFileContent_80_targetTemplates
 ) ;
 
 //--- File 'unprivileged/service-entry-return-value.s'
 
-const char * gWrapperFileContent_75_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_81_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -16464,17 +16716,17 @@ const char * gWrapperFileContent_75_targetTemplates = "@------------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_75_targetTemplates (
+const cRegularFileWrapper gWrapperFile_81_targetTemplates (
   "service-entry-return-value.s",
   "s",
   true, // Text file
   526, // Text length
-  gWrapperFileContent_75_targetTemplates
+  gWrapperFileContent_81_targetTemplates
 ) ;
 
 //--- File 'unprivileged/service-handler.s'
 
-const char * gWrapperFileContent_76_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_82_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
   "@                                                                                                                      *\n"
@@ -16604,29 +16856,29 @@ const char * gWrapperFileContent_76_targetTemplates = "@------------------------
   "  bx   r1\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_76_targetTemplates (
+const cRegularFileWrapper gWrapperFile_82_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
   7753, // Text length
-  gWrapperFileContent_76_targetTemplates
+  gWrapperFileContent_82_targetTemplates
 ) ;
 
 //--- File 'unprivileged/udfcoded-section-dispatcher-entry.s'
 
-const char * gWrapperFileContent_77_targetTemplates = "  .word  !IMPLEMENTATION_ROUTINE! @ !IDX!, user routine !USER_ROUTINE!\n" ;
+const char * gWrapperFileContent_83_targetTemplates = "  .word  !IMPLEMENTATION_ROUTINE! @ !IDX!, user routine !USER_ROUTINE!\n" ;
 
-const cRegularFileWrapper gWrapperFile_77_targetTemplates (
+const cRegularFileWrapper gWrapperFile_83_targetTemplates (
   "udfcoded-section-dispatcher-entry.s",
   "s",
   true, // Text file
   71, // Text length
-  gWrapperFileContent_77_targetTemplates
+  gWrapperFileContent_83_targetTemplates
 ) ;
 
 //--- File 'unprivileged/udfcoded-section-dispatcher-header.s'
 
-const char * gWrapperFileContent_78_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_84_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S E C T I O N   T A B L E                                                                            *\n"
   "@                                                                                                                      *\n"
@@ -16636,17 +16888,17 @@ const char * gWrapperFileContent_78_targetTemplates = "@------------------------
   "\n"
   "__section_dispatcher_table:\n" ;
 
-const cRegularFileWrapper gWrapperFile_78_targetTemplates (
+const cRegularFileWrapper gWrapperFile_84_targetTemplates (
   "udfcoded-section-dispatcher-header.s",
   "s",
   true, // Text file
   647, // Text length
-  gWrapperFileContent_78_targetTemplates
+  gWrapperFileContent_84_targetTemplates
 ) ;
 
 //--- File 'unprivileged/udfcoded-section-handler.s'
 
-const char * gWrapperFileContent_79_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_85_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 U D F    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
   "@                                                                                                                      *\n"
@@ -16702,17 +16954,17 @@ const char * gWrapperFileContent_79_targetTemplates = "@------------------------
   "  pop   {r5, pc}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_79_targetTemplates (
+const cRegularFileWrapper gWrapperFile_85_targetTemplates (
   "udfcoded-section-handler.s",
   "s",
   true, // Text file
   3206, // Text length
-  gWrapperFileContent_79_targetTemplates
+  gWrapperFileContent_85_targetTemplates
 ) ;
 
 //--- File 'unprivileged/udfcoded-section-invocation-from-any-mode.s'
 
-const char * gWrapperFileContent_80_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_86_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !USER_ROUTINE!, implemented by !IMPLEMENTATION_ROUTINE!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -16739,17 +16991,17 @@ const char * gWrapperFileContent_80_targetTemplates = "@------------------------
   "  .fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_80_targetTemplates (
+const cRegularFileWrapper gWrapperFile_86_targetTemplates (
   "udfcoded-section-invocation-from-any-mode.s",
   "s",
   true, // Text file
   807, // Text length
-  gWrapperFileContent_80_targetTemplates
+  gWrapperFileContent_86_targetTemplates
 ) ;
 
 //--- File 'unprivileged/udfcoded-section-invocation-from-user-mode.s'
 
-const char * gWrapperFileContent_81_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_87_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !USER_ROUTINE!, implemented by !IMPLEMENTATION_ROUTINE!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -16773,23 +17025,17 @@ const char * gWrapperFileContent_81_targetTemplates = "@------------------------
   "  .fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_81_targetTemplates (
+const cRegularFileWrapper gWrapperFile_87_targetTemplates (
   "udfcoded-section-invocation-from-user-mode.s",
   "s",
   true, // Text file
   628, // Text length
-  gWrapperFileContent_81_targetTemplates
+  gWrapperFileContent_87_targetTemplates
 ) ;
 
 //--- All files of 'unprivileged' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [14] = {
-  & gWrapperFile_69_targetTemplates,
-  & gWrapperFile_70_targetTemplates,
-  & gWrapperFile_71_targetTemplates,
-  & gWrapperFile_72_targetTemplates,
-  & gWrapperFile_73_targetTemplates,
-  & gWrapperFile_74_targetTemplates,
   & gWrapperFile_75_targetTemplates,
   & gWrapperFile_76_targetTemplates,
   & gWrapperFile_77_targetTemplates,
@@ -16797,6 +17043,12 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [14] = {
   & gWrapperFile_79_targetTemplates,
   & gWrapperFile_80_targetTemplates,
   & gWrapperFile_81_targetTemplates,
+  & gWrapperFile_82_targetTemplates,
+  & gWrapperFile_83_targetTemplates,
+  & gWrapperFile_84_targetTemplates,
+  & gWrapperFile_85_targetTemplates,
+  & gWrapperFile_86_targetTemplates,
+  & gWrapperFile_87_targetTemplates,
   NULL
 } ;
 
@@ -16819,12 +17071,6 @@ const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
 //--- All files of 'teensy-3-1' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [18] = {
-  & gWrapperFile_52_targetTemplates,
-  & gWrapperFile_53_targetTemplates,
-  & gWrapperFile_54_targetTemplates,
-  & gWrapperFile_55_targetTemplates,
-  & gWrapperFile_56_targetTemplates,
-  & gWrapperFile_57_targetTemplates,
   & gWrapperFile_58_targetTemplates,
   & gWrapperFile_59_targetTemplates,
   & gWrapperFile_60_targetTemplates,
@@ -16836,6 +17082,12 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [18] = {
   & gWrapperFile_66_targetTemplates,
   & gWrapperFile_67_targetTemplates,
   & gWrapperFile_68_targetTemplates,
+  & gWrapperFile_69_targetTemplates,
+  & gWrapperFile_70_targetTemplates,
+  & gWrapperFile_71_targetTemplates,
+  & gWrapperFile_72_targetTemplates,
+  & gWrapperFile_73_targetTemplates,
+  & gWrapperFile_74_targetTemplates,
   NULL
 } ;
 
@@ -16858,7 +17110,7 @@ const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
 
 //--- File 'teensy-3-6/c-cortex-m4-context-code.cpp'
 
-const char * gWrapperFileContent_82_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_88_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void kernel_set_task_context (TaskControlBlock * inTaskDescriptor,\n"
   "                                     RoutineTaskType inTaskRoutine) {\n"
@@ -16901,17 +17153,17 @@ const char * gWrapperFileContent_82_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_82_targetTemplates (
+const cRegularFileWrapper gWrapperFile_88_targetTemplates (
   "c-cortex-m4-context-code.cpp",
   "cpp",
   true, // Text file
   2378, // Text length
-  gWrapperFileContent_82_targetTemplates
+  gWrapperFileContent_88_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/c-cortex-m4-context-types.cpp'
 
-const char * gWrapperFileContent_83_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_89_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//                                                                                                                     *\n"
   "//   T A S K    R O U T I N E    T Y P E                                                                               *\n"
   "//                                                                                                                     *\n"
@@ -16993,21 +17245,20 @@ const char * gWrapperFileContent_83_targetTemplates = "//-----------------------
   "} TaskContext ;\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_83_targetTemplates (
+const cRegularFileWrapper gWrapperFile_89_targetTemplates (
   "c-cortex-m4-context-types.cpp",
   "cpp",
   true, // Text file
   5649, // Text length
-  gWrapperFileContent_83_targetTemplates
+  gWrapperFileContent_89_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/driver-digital-teensy-3-6.plm'
 
-const char * gWrapperFileContent_84_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_90_targetTemplates = "\n"
+  "check target \"teensy-3-6/xtr32\", \"teensy-3-6/xtr64\"\n"
   "\n"
-  "check target \"teensy-3-6/unprivileged\"\n"
-  "\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "  \n"
   "enum $digitalPort {\n"
   "//--- Common with Teensy 3.1 / 3.2\n"
@@ -17072,7 +17323,7 @@ const char * gWrapperFileContent_84_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  case D57 // PTE11\n"
   "}\n"
   "\n"
-  "//\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "enum $digitalMode {\n"
   "  case OUTPUT\n"
@@ -17081,11 +17332,11 @@ const char * gWrapperFileContent_84_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  case INPUT_PULLUP\n"
   "}\n"
   "\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "driver digital ()\n"
   "\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "driver digital > root {\n"
   "\n"
@@ -17918,20 +18169,20 @@ const char * gWrapperFileContent_84_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "}\n"
   "\n"
-  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_84_targetTemplates (
+const cRegularFileWrapper gWrapperFile_90_targetTemplates (
   "driver-digital-teensy-3-6.plm",
   "plm",
   true, // Text file
-  23720, // Text length
-  gWrapperFileContent_84_targetTemplates
+  23852, // Text length
+  gWrapperFileContent_90_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/driver-root-teensy-3-6.plm'
 
-const char * gWrapperFileContent_85_targetTemplates = "\n"
-  "check target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_91_targetTemplates = "\n"
+  "check target \"teensy-3-6/xtr32\", \"teensy-3-6/xtr64\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "// CLOCK SETTINGS\n"
@@ -18392,17 +18643,17 @@ const char * gWrapperFileContent_85_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_85_targetTemplates (
+const cRegularFileWrapper gWrapperFile_91_targetTemplates (
   "driver-root-teensy-3-6.plm",
   "plm",
   true, // Text file
-  21229, // Text length
-  gWrapperFileContent_85_targetTemplates
+  21242, // Text length
+  gWrapperFileContent_91_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/ld-linker.txt'
 
-const char * gWrapperFileContent_86_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_92_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -18538,31 +18789,31 @@ const char * gWrapperFileContent_86_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_86_targetTemplates (
+const cRegularFileWrapper gWrapperFile_92_targetTemplates (
   "ld-linker.txt",
   "txt",
   true, // Text file
   4504, // Text length
-  gWrapperFileContent_86_targetTemplates
+  gWrapperFileContent_92_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/ll-cortex-m4.ll'
 
-const char * gWrapperFileContent_87_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_93_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_87_targetTemplates (
+const cRegularFileWrapper gWrapperFile_93_targetTemplates (
   "ll-cortex-m4.ll",
   "ll",
   true, // Text file
   110, // Text length
-  gWrapperFileContent_87_targetTemplates
+  gWrapperFileContent_93_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/plm-registers-mk66fx1m0.plm'
 
-const char * gWrapperFileContent_88_targetTemplates = "check target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_94_targetTemplates = "check target \"teensy-3-6/xtr32\", \"teensy-3-6/xtr64\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//! Chapter 12: Port control and interrupts (PORT) Pin Control registers n\n"
@@ -20882,18 +21133,18 @@ const char * gWrapperFileContent_88_targetTemplates = "check target \"teensy-3-6
   "//registers ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//registers ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_88_targetTemplates (
+const cRegularFileWrapper gWrapperFile_94_targetTemplates (
   "plm-registers-mk66fx1m0.plm",
   "plm",
   true, // Text file
-  98754, // Text length
-  gWrapperFileContent_88_targetTemplates
+  98767, // Text length
+  gWrapperFileContent_94_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/plm-teensy-3-6-lcd.plm'
 
-const char * gWrapperFileContent_89_targetTemplates = "\n"
-  "check target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_95_targetTemplates = "\n"
+  "check target \"teensy-3-6/xtr32\", \"teensy-3-6/xtr64\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -21365,17 +21616,21 @@ const char * gWrapperFileContent_89_targetTemplates = "\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_89_targetTemplates (
+const cRegularFileWrapper gWrapperFile_95_targetTemplates (
   "plm-teensy-3-6-lcd.plm",
   "plm",
   true, // Text file
-  17286, // Text length
-  gWrapperFileContent_89_targetTemplates
+  17299, // Text length
+  gWrapperFileContent_95_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/plm-teensy-3-6-nvic-interrupts.plm'
 
-const char * gWrapperFileContent_90_targetTemplates = "\n"
+const char * gWrapperFileContent_96_targetTemplates = "\n"
+  "check target \"teensy-3-6/xtr32\", \"teensy-3-6/xtr64\"\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
   "system section enable @noUnusedWarning (\?interrupt: inInterruptCode $isrSlot) {\n"
   "  let idx $uint32 = extend (inInterruptCode.uint7 () - 16)\n"
   "  let bitIndex = idx & 0x1F\n"
@@ -21408,18 +21663,18 @@ const char * gWrapperFileContent_90_targetTemplates = "\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_90_targetTemplates (
+const cRegularFileWrapper gWrapperFile_96_targetTemplates (
   "plm-teensy-3-6-nvic-interrupts.plm",
   "plm",
   true, // Text file
-  1383, // Text length
-  gWrapperFileContent_90_targetTemplates
+  1558, // Text length
+  gWrapperFileContent_96_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/plm-teensy-3-6-panic.plm'
 
-const char * gWrapperFileContent_91_targetTemplates = "\n"
-  "check target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_97_targetTemplates = "\n"
+  "check target \"teensy-3-6/xtr32\", \"teensy-3-6/xtr64\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -21458,18 +21713,18 @@ const char * gWrapperFileContent_91_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_91_targetTemplates (
+const cRegularFileWrapper gWrapperFile_97_targetTemplates (
   "plm-teensy-3-6-panic.plm",
   "plm",
   true, // Text file
-  1169, // Text length
-  gWrapperFileContent_91_targetTemplates
+  1182, // Text length
+  gWrapperFileContent_97_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/plm-teensy-3-6-time.plm'
 
-const char * gWrapperFileContent_92_targetTemplates = "\n"
-  "check target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_98_targetTemplates = "\n"
+  "check target \"teensy-3-6/xtr32\", \"teensy-3-6/xtr64\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -21576,18 +21831,18 @@ const char * gWrapperFileContent_92_targetTemplates = "\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_92_targetTemplates (
+const cRegularFileWrapper gWrapperFile_98_targetTemplates (
   "plm-teensy-3-6-time.plm",
   "plm",
   true, // Text file
-  4390, // Text length
-  gWrapperFileContent_92_targetTemplates
+  4403, // Text length
+  gWrapperFileContent_98_targetTemplates
 ) ;
 
-//--- File 'teensy-3-6/plm-teensy-3-6-xtr.plm'
+//--- File 'teensy-3-6/plm-teensy-3-6-xtr32.plm'
 
-const char * gWrapperFileContent_93_targetTemplates = "\n"
-  "check target \"teensy-3-6/unprivileged\"\n"
+const char * gWrapperFileContent_99_targetTemplates = "\n"
+  "check target \"teensy-3-6/xtr32\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   UTILITY ROUTINES                                                                                                   \n"
@@ -21665,17 +21920,106 @@ const char * gWrapperFileContent_93_targetTemplates = "\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_93_targetTemplates (
-  "plm-teensy-3-6-xtr.plm",
+const cRegularFileWrapper gWrapperFile_99_targetTemplates (
+  "plm-teensy-3-6-xtr32.plm",
   "plm",
   true, // Text file
-  3412, // Text length
-  gWrapperFileContent_93_targetTemplates
+  3405, // Text length
+  gWrapperFileContent_99_targetTemplates
+) ;
+
+//--- File 'teensy-3-6/plm-teensy-3-6-xtr64.plm'
+
+const char * gWrapperFileContent_100_targetTemplates = "\n"
+  "check target \"teensy-3-6/xtr64\"\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//   UTILITY ROUTINES                                                                                                   \n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
+  "extern func user freeStackSize () -> $uint32 : \"freeStackSize\"\n"
+  "\n"
+  "extern func user noteFreeStackSize () : \"noteFreeStackSize\"\n"
+  "\n"
+  "extern func service noteCurrentTaskFreeStackSize () : \"noteCurrentTaskFreeStackSize\"\n"
+  "\n"
+  "extern func user taskCount () -> $uint32 : \"taskCount\"\n"
+  "\n"
+  "enum $guardState {\n"
+  "  case evaluatingOrOutside\n"
+  "  case didChange\n"
+  "  case waitingForChange\n"
+  "}\n"
+  "\n"
+  "extern func user taskGuardState (\?taskIndex: inIndex $uint32) -> $guardState : \"taskGuardState\"\n"
+  "\n"
+  "extern func user taskAllocatedStackSize (\?taskIndex: inIndex $uint32) -> $uint32 : \"taskAllocatedStackSize\"\n"
+  "\n"
+  "extern func user taskFreeStackSize (\?taskIndex: inIndex $uint32) -> $uint32 : \"taskFreeStackSize\"\n"
+  "\n"
+  "extern func user taskName (\?taskIndex: inIndex $uint32) -> $staticString : \"taskName\"\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//   SYNCHRONIZATION TOOLS ROUTINES                                                                                     \n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
+  "opaque $taskList @instantiable {64}\n"
+  "\n"
+  "//--- Block running task\n"
+  "extern func primitive\n"
+  "block (\?!inList:ioWaitingList $taskList) : \"blockInList\"\n"
+  "\n"
+  "extern func primitive\n"
+  "block (\?onDeadline:inDeadline $uint32) : \"blockOnDeadline\"\n"
+  "\n"
+  "//--- Make task Ready\n"
+  "extern func service\n"
+  "makeTaskReady (\?!fromList:ioWaitingList $taskList\n"
+  "               !found: outFound $bool) : \"makeTaskReady\"\n"
+  "\n"
+  "extern func service\n"
+  "makeTasksReady (\?fromCurrentDate:inCurrentDate $uint32) : \"makeTasksReadyFromCurrentDate\"\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//   GUARD                                                                                                              \n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
+  "opaque $guardList @instantiable {64}\n"
+  "\n"
+  "extern func guard\n"
+  "handle (\?!guard:ioGuard $guardList) : \"handleGuardedCommand\"\n"
+  "\n"
+  "extern func guard\n"
+  "handle (\?guardedDeadline:inDeadlineMS $uint32) : \"guard.handle.wait.until\"\n"
+  "\n"
+  "extern func service\n"
+  "notifyChange (\?!forGuard:ioGuard $guardList) : \"notify.change.from.guard.list\"\n"
+  "\n"
+  "extern func service\n"
+  "notifyChangeForGuardedWaitUntil (\?withCurrentDate:inCurrentDate $uint32)\n"
+  ": \"notify.change.for.guarded.wait.until\"\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "//   ACTIVITY LED                                                                                                       \n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
+  "required func section activityLedOn @safe @exported ()\n"
+  "\n"
+  "required func section activityLedOff @safe @exported ()\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
+
+const cRegularFileWrapper gWrapperFile_100_targetTemplates (
+  "plm-teensy-3-6-xtr64.plm",
+  "plm",
+  true, // Text file
+  3405, // Text length
+  gWrapperFileContent_100_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/py-build.txt'
 
-const char * gWrapperFileContent_94_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_101_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -21900,17 +22244,17 @@ const char * gWrapperFileContent_94_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_94_targetTemplates (
+const cRegularFileWrapper gWrapperFile_101_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
   15450, // Text length
-  gWrapperFileContent_94_targetTemplates
+  gWrapperFileContent_101_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/py-run.txt'
 
-const char * gWrapperFileContent_95_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_102_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -21932,34 +22276,34 @@ const char * gWrapperFileContent_95_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_95_targetTemplates (
+const cRegularFileWrapper gWrapperFile_102_targetTemplates (
   "py-run.txt",
   "txt",
   true, // Text file
   629, // Text length
-  gWrapperFileContent_95_targetTemplates
+  gWrapperFileContent_102_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/s-cortex-m4-header.s'
 
-const char * gWrapperFileContent_96_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_103_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "\t.syntax unified\n"
   "\t.cpu cortex-m4\n"
   "\t.thumb\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_96_targetTemplates (
+const cRegularFileWrapper gWrapperFile_103_targetTemplates (
   "s-cortex-m4-header.s",
   "s",
   true, // Text file
   164, // Text length
-  gWrapperFileContent_96_targetTemplates
+  gWrapperFileContent_103_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/s-interrupt-handler.s'
 
-const char * gWrapperFileContent_97_targetTemplates = "\n"
+const char * gWrapperFileContent_104_targetTemplates = "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 I N T E R R U P T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                        *\n"
@@ -21995,17 +22339,17 @@ const char * gWrapperFileContent_97_targetTemplates = "\n"
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_97_targetTemplates (
+const cRegularFileWrapper gWrapperFile_104_targetTemplates (
   "s-interrupt-handler.s",
   "s",
   true, // Text file
   1565, // Text length
-  gWrapperFileContent_97_targetTemplates
+  gWrapperFileContent_104_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/s-interrupt-vectors.s'
 
-const char * gWrapperFileContent_98_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_105_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@   INTERRUPT VECTOR                                                                                                   *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22155,17 +22499,17 @@ const char * gWrapperFileContent_98_targetTemplates = "@------------------------
   "  .word -2\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_98_targetTemplates (
+const cRegularFileWrapper gWrapperFile_105_targetTemplates (
   "s-interrupt-vectors.s",
   "s",
   true, // Text file
   5107, // Text length
-  gWrapperFileContent_98_targetTemplates
+  gWrapperFileContent_105_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/s-reset-handler.s'
 
-const char * gWrapperFileContent_99_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_106_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 R E S E T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                *\n"
   "@                                                                                                                      *\n"
@@ -22208,46 +22552,46 @@ const char * gWrapperFileContent_99_targetTemplates = "@------------------------
   "  b  background.task\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_99_targetTemplates (
+const cRegularFileWrapper gWrapperFile_106_targetTemplates (
   "s-reset-handler.s",
   "s",
   true, // Text file
   2100, // Text length
-  gWrapperFileContent_99_targetTemplates
+  gWrapperFileContent_106_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/s-unused-interrupt.s'
 
-const char * gWrapperFileContent_100_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_107_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Undefined interrupt !ISR!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "\t!ISR! = -1\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_100_targetTemplates (
+const cRegularFileWrapper gWrapperFile_107_targetTemplates (
   "s-unused-interrupt.s",
   "s",
   true, // Text file
   285, // Text length
-  gWrapperFileContent_100_targetTemplates
+  gWrapperFileContent_107_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/service-dispatcher-entry.s'
 
-const char * gWrapperFileContent_101_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
+const char * gWrapperFileContent_108_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
 
-const cRegularFileWrapper gWrapperFile_101_targetTemplates (
+const cRegularFileWrapper gWrapperFile_108_targetTemplates (
   "service-dispatcher-entry.s",
   "s",
   true, // Text file
   29, // Text length
-  gWrapperFileContent_101_targetTemplates
+  gWrapperFileContent_108_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/service-dispatcher-header.s'
 
-const char * gWrapperFileContent_102_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_109_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
   "@                                                                                                                      *\n"
@@ -22260,17 +22604,17 @@ const char * gWrapperFileContent_102_targetTemplates = "@-----------------------
   "__svc_dispatcher_table:\n"
   "  .word  init.routines @ 0\n" ;
 
-const cRegularFileWrapper gWrapperFile_102_targetTemplates (
+const cRegularFileWrapper gWrapperFile_109_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
   704, // Text length
-  gWrapperFileContent_102_targetTemplates
+  gWrapperFileContent_109_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/service-entry-no-return.s'
 
-const char * gWrapperFileContent_103_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_110_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22292,17 +22636,17 @@ const char * gWrapperFileContent_103_targetTemplates = "@-----------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_103_targetTemplates (
+const cRegularFileWrapper gWrapperFile_110_targetTemplates (
   "service-entry-no-return.s",
   "s",
   true, // Text file
   513, // Text length
-  gWrapperFileContent_103_targetTemplates
+  gWrapperFileContent_110_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/service-entry-return-value.s'
 
-const char * gWrapperFileContent_104_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_111_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22324,17 +22668,17 @@ const char * gWrapperFileContent_104_targetTemplates = "@-----------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_104_targetTemplates (
+const cRegularFileWrapper gWrapperFile_111_targetTemplates (
   "service-entry-return-value.s",
   "s",
   true, // Text file
   526, // Text length
-  gWrapperFileContent_104_targetTemplates
+  gWrapperFileContent_111_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/service-handler.s'
 
-const char * gWrapperFileContent_105_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_112_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
   "@                                                                                                                      *\n"
@@ -22464,29 +22808,29 @@ const char * gWrapperFileContent_105_targetTemplates = "@-----------------------
   "  bx   r1\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_105_targetTemplates (
+const cRegularFileWrapper gWrapperFile_112_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
   7753, // Text length
-  gWrapperFileContent_105_targetTemplates
+  gWrapperFileContent_112_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/udfcoded-section-dispatcher-entry.s'
 
-const char * gWrapperFileContent_106_targetTemplates = "  .word  !IMPLEMENTATION_ROUTINE! @ !IDX!, user routine !USER_ROUTINE!\n" ;
+const char * gWrapperFileContent_113_targetTemplates = "  .word  !IMPLEMENTATION_ROUTINE! @ !IDX!, user routine !USER_ROUTINE!\n" ;
 
-const cRegularFileWrapper gWrapperFile_106_targetTemplates (
+const cRegularFileWrapper gWrapperFile_113_targetTemplates (
   "udfcoded-section-dispatcher-entry.s",
   "s",
   true, // Text file
   71, // Text length
-  gWrapperFileContent_106_targetTemplates
+  gWrapperFileContent_113_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/udfcoded-section-dispatcher-header.s'
 
-const char * gWrapperFileContent_107_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_114_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S E C T I O N   T A B L E                                                                            *\n"
   "@                                                                                                                      *\n"
@@ -22496,17 +22840,17 @@ const char * gWrapperFileContent_107_targetTemplates = "@-----------------------
   "\n"
   "__section_dispatcher_table:\n" ;
 
-const cRegularFileWrapper gWrapperFile_107_targetTemplates (
+const cRegularFileWrapper gWrapperFile_114_targetTemplates (
   "udfcoded-section-dispatcher-header.s",
   "s",
   true, // Text file
   647, // Text length
-  gWrapperFileContent_107_targetTemplates
+  gWrapperFileContent_114_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/udfcoded-section-handler.s'
 
-const char * gWrapperFileContent_108_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_115_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 U D F    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
   "@                                                                                                                      *\n"
@@ -22562,17 +22906,17 @@ const char * gWrapperFileContent_108_targetTemplates = "@-----------------------
   "  pop   {r5, pc}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_108_targetTemplates (
+const cRegularFileWrapper gWrapperFile_115_targetTemplates (
   "udfcoded-section-handler.s",
   "s",
   true, // Text file
   3206, // Text length
-  gWrapperFileContent_108_targetTemplates
+  gWrapperFileContent_115_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/udfcoded-section-invocation-from-any-mode.s'
 
-const char * gWrapperFileContent_109_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_116_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !USER_ROUTINE!, implemented by !IMPLEMENTATION_ROUTINE!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22599,17 +22943,17 @@ const char * gWrapperFileContent_109_targetTemplates = "@-----------------------
   "  .fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_109_targetTemplates (
+const cRegularFileWrapper gWrapperFile_116_targetTemplates (
   "udfcoded-section-invocation-from-any-mode.s",
   "s",
   true, // Text file
   809, // Text length
-  gWrapperFileContent_109_targetTemplates
+  gWrapperFileContent_116_targetTemplates
 ) ;
 
 //--- File 'teensy-3-6/udfcoded-section-invocation-from-user-mode.s'
 
-const char * gWrapperFileContent_110_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_117_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !USER_ROUTINE!, implemented by !IMPLEMENTATION_ROUTINE!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -22633,17 +22977,17 @@ const char * gWrapperFileContent_110_targetTemplates = "@-----------------------
   "  .fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_110_targetTemplates (
+const cRegularFileWrapper gWrapperFile_117_targetTemplates (
   "udfcoded-section-invocation-from-user-mode.s",
   "s",
   true, // Text file
   628, // Text length
-  gWrapperFileContent_110_targetTemplates
+  gWrapperFileContent_117_targetTemplates
 ) ;
 
-//--- File 'unprivileged/+config.plm-target'
+//--- File 'xtr32/+config.plm-target'
 
-const char * gWrapperFileContent_111_targetTemplates = "PYTHON_UTILITIES:\n"
+const char * gWrapperFileContent_118_targetTemplates = "PYTHON_UTILITIES:\n"
   "   \"../../py-toolpath.txt\" -> \"sources/toolpath.py\"\n"
   "   \"../../py-makefile.txt\" -> \"sources/makefile.py\"\n"
   "   \"../../py-check-stacks.txt\" -> \"sources/check-stacks.py\"\n"
@@ -22722,7 +23066,7 @@ const char * gWrapperFileContent_111_targetTemplates = "PYTHON_UTILITIES:\n"
   "  \"../plm-teensy-3-6-nvic-interrupts.plm\"\n"
   "  \"../driver-root-teensy-3-6.plm\"\n"
   "  \"../plm-teensy-3-6-time.plm\"\n"
-  "  \"../plm-teensy-3-6-xtr.plm\"\n"
+  "  \"../plm-teensy-3-6-xtr32.plm\"\n"
   "  \"../driver-digital-teensy-3-6.plm\"\n"
   "  \"../plm-teensy-3-6-lcd.plm\"\n"
   "  \"../plm-teensy-3-6-panic.plm\"\n"
@@ -22834,46 +23178,264 @@ const char * gWrapperFileContent_111_targetTemplates = "PYTHON_UTILITIES:\n"
   "  CAN1ReceiveWarning -> 114\n"
   "  CAN1WakeUp -> 115\n" ;
 
-const cRegularFileWrapper gWrapperFile_111_targetTemplates (
+const cRegularFileWrapper gWrapperFile_118_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  5110, // Text length
-  gWrapperFileContent_111_targetTemplates
+  5112, // Text length
+  gWrapperFileContent_118_targetTemplates
 ) ;
 
-//--- All files of 'unprivileged' directory
+//--- All files of 'xtr32' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [2] = {
-  & gWrapperFile_111_targetTemplates,
+  & gWrapperFile_118_targetTemplates,
   NULL
 } ;
 
-//--- All sub-directories of 'unprivileged' directory
+//--- All sub-directories of 'xtr32' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_5 [1] = {
   NULL
 } ;
 
-//--- Directory 'unprivileged'
+//--- Directory 'xtr32'
 
 const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
-  "unprivileged",
+  "xtr32",
   1,
   gWrapperAllFiles_targetTemplates_5,
   0,
   gWrapperAllDirectories_targetTemplates_5
 ) ;
 
+//--- File 'xtr64/+config.plm-target'
+
+const char * gWrapperFileContent_119_targetTemplates = "PYTHON_UTILITIES:\n"
+  "   \"../../py-toolpath.txt\" -> \"sources/toolpath.py\"\n"
+  "   \"../../py-makefile.txt\" -> \"sources/makefile.py\"\n"
+  "   \"../../py-check-stacks.txt\" -> \"sources/check-stacks.py\"\n"
+  "   \"../../py-plm.txt\" -> \"sources/plm.py\"\n"
+  "   \"../../py-build-verbose.txt\" -> \"build-verbose.py\"\n"
+  "   \"../../py-clean.txt\" -> \"clean.py\"\n"
+  "   \"../../py-objdump.txt\" -> \"objdump.py\"\n"
+  "   \"../../py-objsize.txt\" -> \"objsize.py\"\n"
+  "   \"../py-run.txt\" -> \"run.py\"\n"
+  "\n"
+  "PYTHON_BUILD: \"../py-build.txt\"\n"
+  "\n"
+  "LINKER_SCRIPT: \"../ld-linker.txt\"\n"
+  "\n"
+  "PANIC_CODE_TYPE_NAME: $uint32\n"
+  "PANIC_LINE_TYPE_NAME: $uint32\n"
+  "\n"
+  "POINTER_BIT_COUNT: 32\n"
+  "\n"
+  "DYNAMIC_ARRAY: yes\n"
+  "\n"
+  "SYSTEM_STACK_SIZE: 1024\n"
+  "\n"
+  "NOP: \"call void asm sideeffect \\\"nop\\\", \\\"\\\"() nounwind\"\n"
+  "\n"
+  "BIT_BAND:0x4000_0000 0x4200_0000 0x4200_0000 32 4\n"
+  "\n"
+  "SERVICE_HANDLER: \"../service-handler.s\"\n"
+  "SERVICE_SYSTEM_STACK_SIZE: 12 // as_svc_handler saves 3 registers on system stack\n"
+  "SERVICE_DISPATCHER_HEADER: \"../service-dispatcher-header.s\"\n"
+  "SERVICE_DISPATCHER_ENTRY: \"../service-dispatcher-entry.s\"\n"
+  "SERVICE_ENTRY_NO_RETURNED_VALUE: \"../service-entry-no-return.s\"\n"
+  "SERVICE_ENTRY_WITH_RETURNED_VALUE: \"../service-entry-return-value.s\"\n"
+  "\n"
+  "SECTION_HANDLER: \"../udfcoded-section-handler.s\"\n"
+  "SECTION_SYSTEM_STACK_SIZE: 8 // saves 2 registers on system stack\n"
+  "SECTION_DISPATCHER_HEADER: \"../udfcoded-section-dispatcher-header.s\"\n"
+  "SECTION_DISPATCHER_ENTRY: \"../udfcoded-section-dispatcher-entry.s\"\n"
+  "SECTION_ENTRY_FROM_ANY_MODE: \"../udfcoded-section-invocation-from-any-mode.s\"\n"
+  "SECTION_ENTRY_FROM_USER_MODE: \"../udfcoded-section-invocation-from-user-mode.s\"\n"
+  "\n"
+  "INTERRUPT_HANDLER: \"../s-interrupt-handler.s\"\n"
+  "INTERRUPT_USER_STACK_SIZE: 32 // Cortex M4 saves 8 regs in user stack on interrupt\n"
+  "UNUSED_INTERRUPT: \"../s-unused-interrupt.s\"\n"
+  "\n"
+  "CPP_FILES:\n"
+  "  \"../c-cortex-m4-context-types.cpp\"\n"
+  "  \"../../c-deadline-list-type-64-tasks.cpp\"\n"
+  "  \"../../c-task-list-type-64-tasks.cpp\"\n"
+  "  \"../../c-guard-types-64-tasks.cpp\"\n"
+  "  \"../../c-task-control-block-type.cpp\"\n"
+  "  \"../../c-task-list-64-tasks.cpp\"\n"
+  "  \"../../c-guard-list-64-tasks.cpp\"\n"
+  "  \"../c-cortex-m4-context-code.cpp\"\n"
+  "  \"../../c-deadline-list-64-tasks.cpp\"\n"
+  "  \"../../c-real-time-kernel-code.cpp\"\n"
+  "  \"../../c-guard-code.cpp\"\n"
+  "  \"../../c-real-time-kernel-utilities.cpp\"\n"
+  "  \"../../memory-utilities.cpp\"\n"
+  "  \"../../heap.cpp\"\n"
+  "  \"../../dynamic-buffer.cpp\"\n"
+  "\n"
+  "S_FILES:\n"
+  "  \"../s-cortex-m4-header.s\"\n"
+  "  \"../s-interrupt-vectors.s\"\n"
+  "  \"../s-reset-handler.s\"\n"
+  "\n"
+  "LL_FILES:\n"
+  "  \"../ll-cortex-m4.ll\"\n"
+  "  \"../../ll-clear-bss.ll\"\n"
+  "  \"../../ll-copy-data-section.ll\"\n"
+  "  \"../../ll-configuration-on-boot.ll\"\n"
+  "\n"
+  "PLM_FILES:\n"
+  "  \"../plm-registers-mk66fx1m0.plm\"\n"
+  "  \"../plm-teensy-3-6-nvic-interrupts.plm\"\n"
+  "  \"../driver-root-teensy-3-6.plm\"\n"
+  "  \"../plm-teensy-3-6-time.plm\"\n"
+  "  \"../plm-teensy-3-6-xtr64.plm\"\n"
+  "  \"../driver-digital-teensy-3-6.plm\"\n"
+  "  \"../plm-teensy-3-6-lcd.plm\"\n"
+  "  \"../plm-teensy-3-6-panic.plm\"\n"
+  "  \"../../plm-semaphore.plm\"\n"
+  "  \"../../heap.plm\"\n"
+  "\n"
+  "INTERRUPTS:\n"
+  "  NMI -> 2\n"
+  "  MemManage -> 4\n"
+  "  BusFault -> 5\n"
+  "  UsageFault -> 6\n"
+  "  DebugMonitor -> 12\n"
+  "  PendSV -> 14\n"
+  "  systick -> 15\n"
+  "  DMAChannel_0_16_TransferComplete -> 16\n"
+  "  DMAChannel_1_17_TransferComplete -> 17\n"
+  "  DMAChannel_2_18_TransferComplete -> 18\n"
+  "  DMAChannel_3_19_TransferComplete -> 19\n"
+  "  DMAChannel_4_20_TransferComplete -> 20\n"
+  "  DMAChannel_5_21_TransferComplete -> 21\n"
+  "  DMAChannel_6_22_TransferComplete -> 22\n"
+  "  DMAChannel_7_23_TransferComplete -> 23\n"
+  "  DMAChannel_8_24_TransferComplete -> 24\n"
+  "  DMAChannel_9_25_TransferComplete -> 25\n"
+  "  DMAChannel_10_26_TransferComplete -> 26\n"
+  "  DMAChannel_11_27_TransferComplete -> 27\n"
+  "  DMAChannel_12_28_TransferComplete -> 28\n"
+  "  DMAChannel_13_29_TransferComplete -> 29\n"
+  "  DMAChannel_14_30_TransferComplete -> 30\n"
+  "  DMAChannel_15_31_TransferComplete -> 31\n"
+  "  DMAError -> 32\n"
+  "  MCM -> 33\n"
+  "  FlashMemoryCommandComplete -> 34\n"
+  "  FlashMemoryReadCollision -> 35\n"
+  "  LowVoltage -> 36\n"
+  "  LowLeakageWakeup -> 37\n"
+  "  WDOG_EWM -> 38\n"
+  "  RandomNumberGenerator -> 39\n"
+  "  I2C0 -> 40\n"
+  "  I2C1 -> 41\n"
+  "  SPI0 -> 42\n"
+  "  SPI1 -> 43\n"
+  "  I2S0Transmit -> 44\n"
+  "  I2S0Receive -> 45\n"
+  "  UART0Status -> 47\n"
+  "  UART0Error -> 48\n"
+  "  UART1Status -> 49\n"
+  "  UART1Error -> 50\n"
+  "  UART2Status -> 51\n"
+  "  UART2Error -> 52\n"
+  "  UART3Status -> 53\n"
+  "  UART3Error -> 54\n"
+  "  ADC0 -> 55\n"
+  "  CMP0 -> 56\n"
+  "  CMP1 -> 57\n"
+  "  FTM0 -> 58\n"
+  "  FTM1 -> 59\n"
+  "  FTM2 -> 60\n"
+  "  CMT -> 61\n"
+  "  RTCAlarm -> 62\n"
+  "  RTCSecond -> 63\n"
+  "  PITChannel0 -> 64\n"
+  "  PITChannel1 -> 65\n"
+  "  PITChannel2 -> 66\n"
+  "  PITChannel3 -> 67\n"
+  "  PDB -> 68\n"
+  "  USBFS_OTG -> 69\n"
+  "  USBFSChargerDetect -> 70\n"
+  "  DAC0 -> 72\n"
+  "  MCG -> 73\n"
+  "  lowPowerTimer -> 74\n"
+  "  pinDetectPortA -> 75\n"
+  "  pinDetectPortB -> 76\n"
+  "  pinDetectPortC -> 77\n"
+  "  pinDetectPortD -> 78\n"
+  "  pinDetectPortE -> 79\n"
+  "  softwareInterrupt -> 80\n"
+  "  SPI2 -> 81\n"
+  "  UART4Status -> 82\n"
+  "  UART4Error -> 83\n"
+  "  CMP2 -> 86\n"
+  "  FTM3 -> 87\n"
+  "  DAC1 -> 88\n"
+  "  ADC1 -> 89\n"
+  "  I2C2 -> 90\n"
+  "  CAN0MessageBuffer -> 91\n"
+  "  CAN0BusOff -> 92\n"
+  "  CAN0Error -> 93\n"
+  "  CAN0TransmitWarning -> 94\n"
+  "  CAN0ReceiveWarning -> 95\n"
+  "  CAN0WakeUp -> 96\n"
+  "  SDHC -> 97\n"
+  "  EthernetTimer -> 98\n"
+  "  EthernetTransmit -> 99\n"
+  "  EthernetReceive -> 100\n"
+  "  EthernetError -> 101\n"
+  "  LPUART0Status -> 102\n"
+  "  TSI0 -> 103\n"
+  "  TPM1 -> 104\n"
+  "  TPM2 -> 105\n"
+  "  USB_HS_DCD_PHY -> 106\n"
+  "  I2C3 -> 107\n"
+  "  CMP3 -> 108\n"
+  "  USB_HS_OTG -> 109\n"
+  "  CAN1MessageBuffer -> 110\n"
+  "  CAN1BusOff -> 111\n"
+  "  CAN1Error -> 112\n"
+  "  CAN1TransmitWarning -> 113\n"
+  "  CAN1ReceiveWarning -> 114\n"
+  "  CAN1WakeUp -> 115\n" ;
+
+const cRegularFileWrapper gWrapperFile_119_targetTemplates (
+  "+config.plm-target",
+  "plm-target",
+  true, // Text file
+  5112, // Text length
+  gWrapperFileContent_119_targetTemplates
+) ;
+
+//--- All files of 'xtr64' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [2] = {
+  & gWrapperFile_119_targetTemplates,
+  NULL
+} ;
+
+//--- All sub-directories of 'xtr64' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_6 [1] = {
+  NULL
+} ;
+
+//--- Directory 'xtr64'
+
+const cDirectoryWrapper gWrapperDirectory_6_targetTemplates (
+  "xtr64",
+  1,
+  gWrapperAllFiles_targetTemplates_6,
+  0,
+  gWrapperAllDirectories_targetTemplates_6
+) ;
+
 //--- All files of 'teensy-3-6' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [30] = {
-  & gWrapperFile_82_targetTemplates,
-  & gWrapperFile_83_targetTemplates,
-  & gWrapperFile_84_targetTemplates,
-  & gWrapperFile_85_targetTemplates,
-  & gWrapperFile_86_targetTemplates,
-  & gWrapperFile_87_targetTemplates,
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [31] = {
   & gWrapperFile_88_targetTemplates,
   & gWrapperFile_89_targetTemplates,
   & gWrapperFile_90_targetTemplates,
@@ -22897,13 +23459,21 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [30] = {
   & gWrapperFile_108_targetTemplates,
   & gWrapperFile_109_targetTemplates,
   & gWrapperFile_110_targetTemplates,
+  & gWrapperFile_111_targetTemplates,
+  & gWrapperFile_112_targetTemplates,
+  & gWrapperFile_113_targetTemplates,
+  & gWrapperFile_114_targetTemplates,
+  & gWrapperFile_115_targetTemplates,
+  & gWrapperFile_116_targetTemplates,
+  & gWrapperFile_117_targetTemplates,
   NULL
 } ;
 
 //--- All sub-directories of 'teensy-3-6' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_4 [2] = {
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_4 [3] = {
   & gWrapperDirectory_5_targetTemplates,
+  & gWrapperDirectory_6_targetTemplates,
   NULL
 } ;
 
@@ -22911,15 +23481,15 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_4 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_4_targetTemplates (
   "teensy-3-6",
-  29,
+  30,
   gWrapperAllFiles_targetTemplates_4,
-  1,
+  2,
   gWrapperAllDirectories_targetTemplates_4
 ) ;
 
 //--- All files of '' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [28] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [34] = {
   & gWrapperFile_0_targetTemplates,
   & gWrapperFile_1_targetTemplates,
   & gWrapperFile_2_targetTemplates,
@@ -22947,6 +23517,12 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [28] = {
   & gWrapperFile_24_targetTemplates,
   & gWrapperFile_25_targetTemplates,
   & gWrapperFile_26_targetTemplates,
+  & gWrapperFile_27_targetTemplates,
+  & gWrapperFile_28_targetTemplates,
+  & gWrapperFile_29_targetTemplates,
+  & gWrapperFile_30_targetTemplates,
+  & gWrapperFile_31_targetTemplates,
+  & gWrapperFile_32_targetTemplates,
   NULL
 } ;
 
@@ -22963,7 +23539,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_0 [4] = 
 
 const cDirectoryWrapper gWrapperDirectory_0_targetTemplates (
   "",
-  27,
+  33,
   gWrapperAllFiles_targetTemplates_0,
   3,
   gWrapperAllDirectories_targetTemplates_0

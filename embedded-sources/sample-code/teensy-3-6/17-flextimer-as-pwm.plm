@@ -1,4 +1,4 @@
-target "teensy-3-6/unprivileged"
+target "teensy-3-6/xtr32"
 let F_CPU_MHZ = 24
 //let myBUS_MHZ @display = BUS_MHZ
 //let myFLEXBUS_MHZ @display = FLEXBUS_MHZ

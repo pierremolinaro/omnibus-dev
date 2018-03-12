@@ -1,0 +1,78 @@
+
+check target "teensy-3-6/xtr64"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   UTILITY ROUTINES                                                                                                   
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+extern func user freeStackSize () -> $uint32 : "freeStackSize"
+
+extern func user noteFreeStackSize () : "noteFreeStackSize"
+
+extern func service noteCurrentTaskFreeStackSize () : "noteCurrentTaskFreeStackSize"
+
+extern func user taskCount () -> $uint32 : "taskCount"
+
+enum $guardState {
+  case evaluatingOrOutside
+  case didChange
+  case waitingForChange
+}
+
+extern func user taskGuardState (?taskIndex: inIndex $uint32) -> $guardState : "taskGuardState"
+
+extern func user taskAllocatedStackSize (?taskIndex: inIndex $uint32) -> $uint32 : "taskAllocatedStackSize"
+
+extern func user taskFreeStackSize (?taskIndex: inIndex $uint32) -> $uint32 : "taskFreeStackSize"
+
+extern func user taskName (?taskIndex: inIndex $uint32) -> $staticString : "taskName"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   SYNCHRONIZATION TOOLS ROUTINES                                                                                     
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+opaque $taskList @instantiable {64}
+
+//--- Block running task
+extern func primitive
+block (?!inList:ioWaitingList $taskList) : "blockInList"
+
+extern func primitive
+block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
+
+//--- Make task Ready
+extern func service
+makeTaskReady (?!fromList:ioWaitingList $taskList
+               !found: outFound $bool) : "makeTaskReady"
+
+extern func service
+makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   GUARD                                                                                                              
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+opaque $guardList @instantiable {64}
+
+extern func guard
+handle (?!guard:ioGuard $guardList) : "handleGuardedCommand"
+
+extern func guard
+handle (?guardedDeadline:inDeadlineMS $uint32) : "guard.handle.wait.until"
+
+extern func service
+notifyChange (?!forGuard:ioGuard $guardList) : "notify.change.from.guard.list"
+
+extern func service
+notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
+: "notify.change.for.guarded.wait.until"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+required func section activityLedOn @safe @exported ()
+
+required func section activityLedOff @safe @exported ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
