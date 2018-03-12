@@ -23,7 +23,7 @@ static inline TaskControlBlock * guardlist_removeFirstTask (GuardList & ioTaskLi
 static inline TaskControlBlock * guardlist_removeFirstTask (GuardList & ioTaskList) {
   TaskControlBlock * result = nullptr ;
   if (ioTaskList.mGuardList != 0UL) {
-    const unsigned taskIndex = __builtin_ctzl (ioTaskList.mGuardList) ;
+    const unsigned taskIndex = __builtin_ctzll (ioTaskList.mGuardList) ;
     const unsigned long long mask = 1ULL << taskIndex ;
     ioTaskList.mGuardList &= ~ mask ;
     result = & gTaskDescriptorArray [taskIndex] ;
