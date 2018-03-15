@@ -4373,7 +4373,8 @@ mProperty_mTaskListAST (),
 mProperty_mCheckTargetListAST (),
 mProperty_mDriverDeclarationListAST (),
 mProperty_mRequiredDriverListAST (),
-mProperty_mTypeDeclarationIndex () {
+mProperty_mTypeDeclarationIndex (),
+mProperty_mControlRegisterUserAccesMapAST () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4396,7 +4397,8 @@ GALGAS_ast::GALGAS_ast (const GALGAS_declarationListAST & inOperand0,
                         const GALGAS_checkTargetListAST & inOperand10,
                         const GALGAS_driverDeclarationListAST & inOperand11,
                         const GALGAS_driverInstanciationListAST & inOperand12,
-                        const GALGAS_uint & inOperand13) :
+                        const GALGAS_uint & inOperand13,
+                        const GALGAS_controlRegisterUserAccesMapAST & inOperand14) :
 mProperty_mDeclarationListAST (inOperand0),
 mProperty_mExtensionDeclarationListAST (inOperand1),
 mProperty_mExtendStaticArrayDeclarationAST (inOperand2),
@@ -4410,7 +4412,8 @@ mProperty_mTaskListAST (inOperand9),
 mProperty_mCheckTargetListAST (inOperand10),
 mProperty_mDriverDeclarationListAST (inOperand11),
 mProperty_mRequiredDriverListAST (inOperand12),
-mProperty_mTypeDeclarationIndex (inOperand13) {
+mProperty_mTypeDeclarationIndex (inOperand13),
+mProperty_mControlRegisterUserAccesMapAST (inOperand14) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4429,7 +4432,8 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
                      GALGAS_checkTargetListAST::constructor_emptyList (HERE),
                      GALGAS_driverDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_driverInstanciationListAST::constructor_emptyList (HERE),
-                     GALGAS_uint::constructor_default (HERE)) ;
+                     GALGAS_uint::constructor_default (HERE),
+                     GALGAS_controlRegisterUserAccesMapAST::constructor_emptyMap (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4447,11 +4451,12 @@ GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_declarationListAST & inOper
                                         const GALGAS_checkTargetListAST & inOperand10,
                                         const GALGAS_driverDeclarationListAST & inOperand11,
                                         const GALGAS_driverInstanciationListAST & inOperand12,
-                                        const GALGAS_uint & inOperand13 
+                                        const GALGAS_uint & inOperand13,
+                                        const GALGAS_controlRegisterUserAccesMapAST & inOperand14 
                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_ast result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid ()) {
-    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid ()) {
+    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14) ;
   }
   return result ;
 }
@@ -4502,13 +4507,16 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
   if (result == kOperandEqual) {
     result = mProperty_mTypeDeclarationIndex.objectCompare (inOperand.mProperty_mTypeDeclarationIndex) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mControlRegisterUserAccesMapAST.objectCompare (inOperand.mProperty_mControlRegisterUserAccesMapAST) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_ast::isValid (void) const {
-  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtensionDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () ;
+  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtensionDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () && mProperty_mControlRegisterUserAccesMapAST.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4528,6 +4536,7 @@ void GALGAS_ast::drop (void) {
   mProperty_mDriverDeclarationListAST.drop () ;
   mProperty_mRequiredDriverListAST.drop () ;
   mProperty_mTypeDeclarationIndex.drop () ;
+  mProperty_mControlRegisterUserAccesMapAST.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4565,6 +4574,8 @@ void GALGAS_ast::description (C_String & ioString,
     mProperty_mRequiredDriverListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mTypeDeclarationIndex.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mControlRegisterUserAccesMapAST.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -4651,6 +4662,12 @@ GALGAS_driverInstanciationListAST GALGAS_ast::getter_mRequiredDriverListAST (UNU
 
 GALGAS_uint GALGAS_ast::getter_mTypeDeclarationIndex (UNUSED_LOCATION_ARGS) const {
   return mProperty_mTypeDeclarationIndex ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_controlRegisterUserAccesMapAST GALGAS_ast::getter_mControlRegisterUserAccesMapAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mControlRegisterUserAccesMapAST ;
 }
 
 
@@ -10371,6 +10388,7 @@ void callExtensionMethod_enterInContext (const cPtr_abstractDeclarationAST * inO
                                          GALGAS_staticListInitializationMap & io_ioStaticListValueMap,
                                          GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                          GALGAS_globalVariableIRList & io_ioGlobalVariableIRList,
+                                         GALGAS_controlRegisterUserAccesMapAST & io_ioControlRegisterUserAccesMapAST,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
@@ -10396,7 +10414,7 @@ void callExtensionMethod_enterInContext (const cPtr_abstractDeclarationAST * inO
     if (NULL == f) {
       fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
     }else{
-      f (inObject, constin_inProcedureListAST, io_ioContext, io_ioDecoratedDeclarationList, io_ioSubprogramInvocationGraph, io_ioStaticListValueMap, io_ioStaticEntityMap, io_ioGlobalVariableIRList, inCompiler COMMA_THERE) ;
+      f (inObject, constin_inProcedureListAST, io_ioContext, io_ioDecoratedDeclarationList, io_ioSubprogramInvocationGraph, io_ioStaticListValueMap, io_ioStaticEntityMap, io_ioGlobalVariableIRList, io_ioControlRegisterUserAccesMapAST, inCompiler COMMA_THERE) ;
     }
   }
 }

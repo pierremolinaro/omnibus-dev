@@ -54,6 +54,7 @@ override method @literalStringDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType
@@ -62,23 +63,5 @@ override method @literalStringDeclarationAST enterInContext
     !index:[ioContext.mTypeMap count]
   ]
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @literalStringDeclarationAST semanticAnalysis
-#  ?context:let @semanticContext unused inContext
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-#{
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @literalStringDeclarationAST generateLLVMcode ?!@string unused ioLLVMcode {
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1,13 +1,13 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
-#define TASK_COUNT (!TASKCOUNT!)
-#define GUARD_COUNT (!GUARDCOUNT!)
+// GUARD_EVALUATING_OR_OUTSIDE should be the first constant
+typedef enum {GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   T A S K    C O N T R O L    B L O C K                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef struct {
+typedef struct TaskControlBlock {
 //--- Context buffer
   TaskContext mTaskContext ; // SHOULD BE THE FIRST FIELD
 //--- Task name
@@ -25,13 +25,13 @@ typedef struct {
 //--- Guards
   GuardState mGuardState ;
   bool mHaveDeadlineGuard ;
-  unsigned mGuardCount ;
-  GuardList * mGuardListArray [GUARD_COUNT] ;
+  GuardDescriptor mGuardDescriptor ;
+//---
 } TaskControlBlock ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;
+static TaskControlBlock gTaskDescriptorArray [!TASKCOUNT!] ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   RUNNING TASK DESCRIPTOR POINTER                                                                                   *

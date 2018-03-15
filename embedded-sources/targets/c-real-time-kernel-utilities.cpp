@@ -32,7 +32,7 @@ void noteFreeStackSize (void) {
 unsigned taskCount (void) asm ("!FUNC!taskCount") ;
 
 unsigned taskCount (void) {
-  return TASK_COUNT ;
+  return !TASKCOUNT! ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

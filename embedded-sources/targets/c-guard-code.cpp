@@ -6,12 +6,10 @@ static DeadlineList gDeadlineWaitingInGuardTaskList ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+static void removeTaskFromGuards (TaskControlBlock * inTask) __attribute__ ((always_inline)) ;
+
 static void removeTaskFromGuards (TaskControlBlock * inTask) {
-  const unsigned guardCount = inTask->mGuardCount ;
-  for (unsigned i=0 ; i<guardCount ; i++) {
-    guardlist_removeTask (* (inTask->mGuardListArray [i]), inTask) ;
-  }
-  inTask->mGuardCount = 0 ;
+  guardDescriptor_removeAllGuards (inTask->mGuardDescriptor, inTask) ;
   deadlinelist_removeTask (gDeadlineWaitingInGuardTaskList, inTask) ;
   inTask->mHaveDeadlineGuard = false ;
 }
@@ -34,9 +32,7 @@ void kernel_handleGuardedCommand (GuardList * ioGuardListPtr) asm ("!FUNC!handle
 void kernel_handleGuardedCommand (GuardList * ioGuardListPtr) {
   if (gRunningTaskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
     guardlist_enterTask (* (ioGuardListPtr), gRunningTaskControlBlockPtr) ;
-    const unsigned guardCount = gRunningTaskControlBlockPtr->mGuardCount ;
-    gRunningTaskControlBlockPtr->mGuardListArray [guardCount] = ioGuardListPtr ;
-    gRunningTaskControlBlockPtr->mGuardCount = guardCount + 1 ;
+    guardDescriptor_appendGuard (gRunningTaskControlBlockPtr->mGuardDescriptor, ioGuardListPtr) ;
   }
 }
 
@@ -51,7 +47,7 @@ void kernel_waitForGuardChange (void) {
   if (gRunningTaskControlBlockPtr->mUserResult) { // GUARD_DID_CHANGE
     gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
   }else{ // GUARD_EVALUATING_OR_OUTSIDE
-    gRunningTaskControlBlockPtr->mUserResult = gRunningTaskControlBlockPtr->mHaveDeadlineGuard || (gRunningTaskControlBlockPtr->mGuardCount > 0) ;
+    gRunningTaskControlBlockPtr->mUserResult = gRunningTaskControlBlockPtr->mHaveDeadlineGuard || (gRunningTaskControlBlockPtr->mGuardDescriptor.mCount > 0) ;
     if (gRunningTaskControlBlockPtr->mUserResult) {
       gRunningTaskControlBlockPtr->mGuardState = GUARD_WAITING_FOR_CHANGE ;
       kernel_makeNoTaskRunning () ;
@@ -115,3 +111,4 @@ void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
   }
 }
 
+//---------------------------------------------------------------------------------------------------------------------*

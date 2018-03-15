@@ -180,25 +180,16 @@ class cPtr_infixObjectObjectOperatorDescription : public cPtr_infixOperatorDescr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//            Extension method '@controlRegisterDeclarationList-element enterControlRegisterGroupInContext'            *
+//             Extension method '@controlRegisterDeclarationList-element buildControlRegisterMapForGroup'              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_enterControlRegisterGroupInContext (const class GALGAS_controlRegisterDeclarationList_2D_element inObject,
-                                                         class GALGAS_semanticContext & io_ioContext,
-                                                         class GALGAS_controlRegisterMap & io_ioControlRegisterMap,
-                                                         class GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                                         class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Function 'userAttributeForRegister'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_userAttributeForRegister (class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+void extensionMethod_buildControlRegisterMapForGroup (const class GALGAS_controlRegisterDeclarationList_2D_element inObject,
+                                                      class GALGAS_semanticContext & io_ioContext,
+                                                      class GALGAS_controlRegisterMap & io_ioControlRegisterMap,
+                                                      class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

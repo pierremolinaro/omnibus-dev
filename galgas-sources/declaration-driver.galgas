@@ -363,6 +363,7 @@ override method @implementedDriverAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
   [!?ioContext.mDriverMap insertKey !mDriverName !mIsInstancied]
   let driverType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !llvmDriverNameFromName (!mDriverName)} type]

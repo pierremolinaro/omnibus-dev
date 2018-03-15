@@ -5,40 +5,40 @@ let f_mem $uint32 = 24_000_000
 
 // chapter 11: Port control and interrupts (PORT) Pin Control registers n
 registers #PORTA 0x4004_9000 {
-  PCR @user [32] 0x00 @inc 4 $uint32 {
+  PCR [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   
-  GPCLR @user  0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user  0x84 $uint32 // Global Pin Control High Register
-  ISFR @user   0xA0 $uint32 // Interrupt Status Flag Register
+  GPCLR 0x80 $uint32 // Global Pin Control Low Register
+  GPCHR 0x84 $uint32 // Global Pin Control High Register
+  ISFR  0xA0 $uint32 // Interrupt Status Flag Register
 }
 
 registers #PORTB 0x4004_A000 {
-  PCR @user [32] 0x00 @inc 4 $uint32 {
+  PCR [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
-  GPCLR @user  0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user  0x84 $uint32 // Global Pin Control High Register
-  ISFR  @user  0xA0 $uint32 // Interrupt Status Flag Register
+  GPCLR 0x80 $uint32 // Global Pin Control Low Register
+  GPCHR 0x84 $uint32 // Global Pin Control High Register
+  ISFR  0xA0 $uint32 // Interrupt Status Flag Register
 }
 
 registers #PORTC 0x4004_B000 {
-  PCR @user [32] 0x00 @inc 4 $uint32 {
+  PCR [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
-  GPCLR @user  0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user  0x84 $uint32 // Global Pin Control High Register
-  ISFR  @user  0xA0 $uint32 // Interrupt Status Flag Register
+  GPCLR 0x80 $uint32 // Global Pin Control Low Register
+  GPCHR 0x84 $uint32 // Global Pin Control High Register
+  ISFR  0xA0 $uint32 // Interrupt Status Flag Register
 }
 
 registers #PORTD 0x4004_C000 {
-  PCR @user [32] 0x00 @inc 4 $uint32 {
+  PCR [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
-  GPCLR @user  0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user  0x84 $uint32 // Global Pin Control High Register
-  ISFR  @user  0xA0 $uint32 // Interrupt Status Flag Register
+  GPCLR 0x80 $uint32 // Global Pin Control Low Register
+  GPCHR 0x84 $uint32 // Global Pin Control High Register
+  ISFR  0xA0 $uint32 // Interrupt Status Flag Register
 }
 
 // Chapter 12: System Integration Module (SIM)
@@ -1122,39 +1122,39 @@ registers #USB0 0x4007_2000 {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers #GPIOA 0x400F_F000 {
-  PDOR @user 0x00 $uint32 // Port Data Output Register
-  PSOR @user 0x04 $uint32 // Port Set Output Register
-  PCOR @user 0x08 $uint32 // Port Clear Output Register
-  PTOR @user 0x0C $uint32 // Port Toggle Output Register
-  PDIR @user 0x10 $uint32 // Port Data Input Register
-  PDDR @user 0x14 $uint32 // Port Data Direction Register
+  PDOR 0x00 $uint32 // Port Data Output Register
+  PSOR 0x04 $uint32 // Port Set Output Register
+  PCOR 0x08 $uint32 // Port Clear Output Register
+  PTOR 0x0C $uint32 // Port Toggle Output Register
+  PDIR 0x10 $uint32 // Port Data Input Register
+  PDDR 0x14 $uint32 // Port Data Direction Register
 }
 
 registers #GPIOB 0x400F_F040 {
-  PDOR @user 0x00 $uint32 // Port Data Output Register
-  PSOR @user 0x04 $uint32 // Port Set Output Register
-  PCOR @user 0x08 $uint32 // Port Clear Output Register
-  PTOR @user 0x0C $uint32 // Port Toggle Output Register
-  PDIR @user 0x10 $uint32 // Port Data Input Register
-  PDDR @user 0x14 $uint32 // Port Data Direction Register
+  PDOR 0x00 $uint32 // Port Data Output Register
+  PSOR 0x04 $uint32 // Port Set Output Register
+  PCOR 0x08 $uint32 // Port Clear Output Register
+  PTOR 0x0C $uint32 // Port Toggle Output Register
+  PDIR 0x10 $uint32 // Port Data Input Register
+  PDDR 0x14 $uint32 // Port Data Direction Register
 }
 
 registers #GPIOC 0x400F_F080 {
-  PDOR @user 0x00 $uint32 // Port Data Output Register
-  PSOR @user 0x04 $uint32 // Port Set Output Register
-  PCOR @user 0x08 $uint32 // Port Clear Output Register
-  PTOR @user 0x0C $uint32 // Port Toggle Output Register
-  PDIR @user 0x10 $uint32 // Port Data Input Register
-  PDDR @user 0x14 $uint32 // Port Data Direction Register
+  PDOR 0x00 $uint32 // Port Data Output Register
+  PSOR 0x04 $uint32 // Port Set Output Register
+  PCOR 0x08 $uint32 // Port Clear Output Register
+  PTOR 0x0C $uint32 // Port Toggle Output Register
+  PDIR 0x10 $uint32 // Port Data Input Register
+  PDDR 0x14 $uint32 // Port Data Direction Register
 }
 
 registers #GPIOD 0x400F_F0C0 {
-  PDOR @user 0x00 $uint32 // Port Data Output Register
-  PSOR @user 0x04 $uint32 // Port Set Output Register
-  PCOR @user 0x08 $uint32 // Port Clear Output Register
-  PTOR @user 0x0C $uint32 // Port Toggle Output Register
-  PDIR @user 0x10 $uint32 // Port Data Input Register
-  PDDR @user 0x14 $uint32 // Port Data Direction Register
+  PDOR 0x00 $uint32 // Port Data Output Register
+  PSOR 0x04 $uint32 // Port Set Output Register
+  PCOR 0x08 $uint32 // Port Clear Output Register
+  PTOR 0x0C $uint32 // Port Toggle Output Register
+  PDIR 0x10 $uint32 // Port Data Input Register
+  PDDR 0x14 $uint32 // Port Data Direction Register
 }
 
 //// Chapter 48: Touch sense input (TSI)

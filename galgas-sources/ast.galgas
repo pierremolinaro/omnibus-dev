@@ -39,6 +39,7 @@ struct @ast {
   @driverDeclarationListAST mDriverDeclarationListAST
   @driverInstanciationListAST mRequiredDriverListAST
   @uint mTypeDeclarationIndex
+  @controlRegisterUserAccesMapAST mControlRegisterUserAccesMapAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

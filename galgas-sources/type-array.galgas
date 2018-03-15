@@ -87,6 +87,7 @@ override method @typeArrayDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
 #--- Get element type
   [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?1*]
