@@ -2666,6 +2666,7 @@ typedef void (*extensionMethodSignature_abstractDeclarationAST_enterInContext) (
                                                                                 class GALGAS_staticListInitializationMap & ioArgument4,
                                                                                 class GALGAS_staticEntityMap & ioArgument5,
                                                                                 class GALGAS_globalVariableIRList & ioArgument6,
+                                                                                class GALGAS_controlRegisterUserAccesMapAST & ioArgument7,
                                                                                 class C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -2684,6 +2685,7 @@ void callExtensionMethod_enterInContext (const class cPtr_abstractDeclarationAST
                                          GALGAS_staticListInitializationMap & io_ioStaticListValueMap,
                                          GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                          GALGAS_globalVariableIRList & io_ioGlobalVariableIRList,
+                                         GALGAS_controlRegisterUserAccesMapAST & io_ioControlRegisterUserAccesMapAST,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 

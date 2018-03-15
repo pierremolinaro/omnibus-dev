@@ -63,6 +63,13 @@ class @controlRegisterGroupDeclarationAST  : @abstractDeclarationAST {
   @controlRegisterDeclarationList mRegisters
 }
 
+#·······················································································································
+
+map @controlRegisterUserAccesMapAST {
+  insert insertKey error message "the '%K' register is already marked as @user in %L"
+  remove removeKey error message "-- INTERNAL ERROR ('%K') --"
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -190,6 +197,25 @@ syntax extension plm_syntax {
     end
   }
 
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $registers$
+    $@attribute$ ?let attribute
+    if attribute.string != userAttributeForRegister () then
+      error attribute : "this attribute should be @" + userAttributeForRegister ()
+    end
+    repeat
+      $#groupName$ ?let registerGroupName
+      $:$
+      $identifier$ ?let registerName
+      let key = @lstring.new {!"#" + registerGroupName + ":" + registerName !registerName.location}
+      [!?ioAST.mControlRegisterUserAccesMapAST insertKey !key]
+    while
+      $,$
+    end      
+  }
+  
   #·····················································································································
 
 }
@@ -424,7 +450,7 @@ private proc buildControlRegisterSliceMap
 
 #·······················································································································
 
-method @controlRegisterDeclarationList-element enterControlRegisterGroupInContext
+method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
   ?!context:@semanticContext ioContext
   ?!@controlRegisterMap ioControlRegisterMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -445,7 +471,6 @@ method @controlRegisterDeclarationList-element enterControlRegisterGroupInContex
   for register in mRegisterArrayList do
   #--- Analyze attributes
     var isReadOnly = false
-    var userAccess = false
     for (att) in register.mAttributeList do
       if att.string == "ro" then
         if isReadOnly then
@@ -453,14 +478,8 @@ method @controlRegisterDeclarationList-element enterControlRegisterGroupInContex
         else
           isReadOnly = true
         end
-      elsif att.string == userAttributeForRegister () then
-        if userAccess then
-          error att : "duplicated attribute"
-        else
-          userAccess = true
-        end
       else
-        error att : "only @ro (read only) and @" + userAttributeForRegister () + " attributes are accepted here"
+        error att : "only the @ro (read only) attribute is accepted here"
       end
     end
   #--- Analyse register address expression
@@ -541,7 +560,7 @@ method @controlRegisterDeclarationList-element enterControlRegisterGroupInContex
       !register.mRegisterName
       !registerType
       !isReadOnly
-      !userAccess
+      !false # user access is false by default
       !registerBitSliceMap
       !registerFieldMap
       !registerAddressOffset
@@ -563,16 +582,27 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST ioControlRegisterUserAccesMapAST
 {
-  @controlRegisterMap registerMap = {}
+  @controlRegisterMap regMap = {}
   for reg in mRegisters do
-    [reg enterControlRegisterGroupInContext
+    [reg buildControlRegisterMapForGroup
       !?context:ioContext
-      !?registerMap
+      !?regMap
       !?staticEntityMap:ioStaticEntityMap
     ]
   end
   for group in mRegisterGroupList do
+    @controlRegisterMap registerMap = regMap # {}
+  #--- Check for user access
+    for aRegister in regMap do
+      let key = "#" + group.mRegisterGroupName + ":" + aRegister.lkey
+      if [ioControlRegisterUserAccesMapAST hasKey !key] then
+        [!?registerMap setMUserAccessForKey !true !aRegister.lkey]
+        [!?ioControlRegisterUserAccesMapAST removeKey ![key nowhere]]
+      end
+    end
+  #---
     switch group.mControlRegisterGroupKind
     case single (baseAddress) :
       let groupKind = @registerGroupKind.single {!baseAddress:baseAddress}

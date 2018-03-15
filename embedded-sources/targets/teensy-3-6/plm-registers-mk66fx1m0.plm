@@ -5,12 +5,12 @@ check target "teensy-3-6/xtr32", "teensy-3-6/xtr64"
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers #PORTA 0x4004_9000, #PORTB 0x4004_A000, #PORTC 0x4004_B000, #PORTD 0x4004_C000, #PORTE 0x4004_D000 {
-    PCR @user [32] 0x00 @inc 4 $uint32 {
+    PCR [32] 0x00 @inc 4 $uint32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   
-  GPCLR @user 0x80 $uint32 // Global Pin Control Low Register
-  GPCHR @user 0x84 $uint32 // Global Pin Control High Register
+  GPCLR 0x80 $uint32 // Global Pin Control Low Register
+  GPCHR 0x84 $uint32 // Global Pin Control High Register
   ISFR  0xA0 $uint32 // Interrupt Status Flag Register
   DFER  0xC0 $uint32 // Digital Filter Enable Register
   DFCR  0xC4 $uint32 {31, CS} // Digital Filter Clock Register
@@ -2188,12 +2188,12 @@ registers #SPI [3] {0x4002_C000, 0x4002_D000, 0x400A_C000} {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers #GPIOA 0x400F_F000, #GPIOB 0x400F_F040, #GPIOC 0x400F_F080, #GPIOD 0x400F_F0C0, #GPIOE 0x400F_F100 {
-  PDOR @user 0x00 $uint32 // Port Data Output Register
-  PSOR @user 0x04 $uint32 // Port Set Output Register
-  PCOR @user 0x08 $uint32 // Port Clear Output Register
-  PTOR @user 0x0C $uint32 // Port Toggle Output Register
-  PDIR @user 0x10 $uint32 // Port Data Input Register
-  PDDR @user 0x14 $uint32 // Port Data Direction Register
+  PDOR 0x00 $uint32 // Port Data Output Register
+  PSOR 0x04 $uint32 // Port Set Output Register
+  PCOR 0x08 $uint32 // Port Clear Output Register
+  PTOR 0x0C $uint32 // Port Toggle Output Register
+  PDIR 0x10 $uint32 // Port Data Input Register
+  PDDR 0x14 $uint32 // Port Data Direction Register
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

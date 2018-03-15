@@ -82,6 +82,7 @@ override method @newTypeDeclaration enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
 #---------- Enter in type map
   [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type ?1*]

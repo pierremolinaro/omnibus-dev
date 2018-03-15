@@ -351,6 +351,7 @@ override method @configurationDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
   if ioContext.mTargetParameters.mPointerSize != 0 then
     error mTargetParameters.mConfigurationLocation : "duplicate configuration"

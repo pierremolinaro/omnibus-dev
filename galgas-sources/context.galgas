@@ -162,6 +162,7 @@ abstract method @abstractDeclarationAST enterInContext
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST ioControlRegisterUserAccesMapAST
 
 #·······················································································································
 
@@ -189,6 +190,7 @@ proc buildSemanticContext
 #---
   outSubprogramInvocationGraph = .emptyGraph
   outGlobalVariableIRList = {}
+  var controlRegisterUserAccesMapAST = inAST.mControlRegisterUserAccesMapAST
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext
       !procedureDeclarationList:inAST.mStandAloneFunctionDeclarationListAST
@@ -198,7 +200,12 @@ proc buildSemanticContext
       !?staticlistValues:ioStaticListValueMap
       !?staticEntityMap:ioStaticEntityMap
       !?globalVariables:outGlobalVariableIRList
+      !?registerUserAccess:controlRegisterUserAccesMapAST
     ]
+  end
+#--- Check all registers declared as @user are actually defined
+  for (lkey) in controlRegisterUserAccesMapAST do
+    error lkey : "this control register is not defined"
   end
 #--- Build an HTML containing all global constants
   buildGlobalConstantMapHTMLFile (

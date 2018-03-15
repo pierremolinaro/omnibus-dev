@@ -55,7 +55,7 @@ void kernel_create_task (const unsigned inTaskIndex,
   taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;
   taskControlBlockPtr->mTaskName = inTaskName ;
 //  taskControlBlockPtr->mTaskDeadline = 0 ; // statically initialized to 0
-  taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0
+//  taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0
   taskControlBlockPtr->mHaveDeadlineGuard = false ; // statically initialized to 0
 //  taskControlBlockPtr->mUserResult = false ; // statically initialized to 0
   taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to 0

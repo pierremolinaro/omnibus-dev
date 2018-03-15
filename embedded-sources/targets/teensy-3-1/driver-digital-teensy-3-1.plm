@@ -1,8 +1,21 @@
-//——————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 check target "teensy-3-1/unprivileged"
 
-//——————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+registers @user #PORTA:PCR, #PORTB:PCR, #PORTC:PCR, #PORTD:PCR
+registers @user #PORTA:GPCLR, #PORTB:GPCLR, #PORTC:GPCLR, #PORTD:GPCLR
+registers @user #PORTA:GPCHR, #PORTB:GPCHR, #PORTC:GPCHR, #PORTD:GPCHR
+
+registers @user #GPIOA:PDOR, #GPIOB:PDOR, #GPIOC:PDOR, #GPIOD:PDOR
+registers @user #GPIOA:PSOR, #GPIOB:PSOR, #GPIOC:PSOR, #GPIOD:PSOR
+registers @user #GPIOA:PCOR, #GPIOB:PCOR, #GPIOC:PCOR, #GPIOD:PCOR
+registers @user #GPIOA:PTOR, #GPIOB:PTOR, #GPIOC:PTOR, #GPIOD:PTOR
+registers @user #GPIOA:PDIR, #GPIOB:PDIR, #GPIOC:PDIR, #GPIOD:PDIR
+registers @user #GPIOA:PDDR, #GPIOB:PDDR, #GPIOC:PDDR, #GPIOD:PDDR
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   
 enum $digitalPort {
   case D0  // PTB16
@@ -40,11 +53,11 @@ enum $digitalMode {
   case INPUT_PULLUP
 }
 
-//——————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver digital ()
 
-//——————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver digital > root {
 
@@ -435,4 +448,4 @@ driver digital > root {
 
 }
 
-//——————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

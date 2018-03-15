@@ -256,6 +256,7 @@ override method @staticListAST enterInContext
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}

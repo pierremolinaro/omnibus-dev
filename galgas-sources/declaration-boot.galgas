@@ -94,6 +94,7 @@ override method @bootAST enterInContext
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
 #--- Enter in invocation graph
   let routineNameForInvocationGraph = @lstring.new  {!"boot " + mDriverName !mDriverName}
