@@ -45,13 +45,12 @@ INTERRUPT_USER_STACK_SIZE: 32 // Cortex M4 saves 8 regs in user stack on interru
 UNUSED_INTERRUPT: "../s-unused-interrupt.s"
 
 CPP_FILES:
-  "../c-cortex-m4-context-types.cpp"
+  "../c-cortex-m4-context.cpp"
   "../../c-task-list-type-64-tasks.cpp"
   "../../c-guard-types-64-tasks.cpp"
   "../../c-task-control-block-type.cpp"
   "../../c-task-list-64-tasks.cpp"
   "../../c-guard-list-64-tasks.cpp"
-  "../c-cortex-m4-context-code.cpp"
   "../../c-deadline-list-64-tasks.cpp"
   "../../c-real-time-kernel-code.cpp"
   "../../c-guard-code.cpp"

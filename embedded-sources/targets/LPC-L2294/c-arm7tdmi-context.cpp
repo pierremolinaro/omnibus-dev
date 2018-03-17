@@ -54,3 +54,17 @@ typedef struct {
 } TaskContext ;
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+static void kernel_set_task_context (TaskContext & ioTaskContext,
+                                     const unsigned inStackBufferAddress,
+                                     const unsigned inStackBufferSize,
+                                     RoutineTaskType inTaskRoutine) {
+//--- Initialize PC
+  ioTaskContext.mPC_USR = (unsigned) inTaskRoutine ;
+//--- Initialize SP
+  ioTaskContext.mSP_USR = inStackBufferAddress + inStackBufferSize ;
+//--- Initialize CPSR
+  ioTaskContext.mCPSR = 0x10 ; // ARM USER MODE, IRQ and FIRQ interrupts enabled
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
