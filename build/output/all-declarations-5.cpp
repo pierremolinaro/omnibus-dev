@@ -3174,7 +3174,7 @@ void extensionSetter_appendCopyFromReferences (GALGAS_instructionListIR & ioObje
     GALGAS_PLMType var_sourceType_975 ;
     GALGAS_string var_sourceLLVMName_1004 ;
     constinArgument_inSourcePossibleReference.method_reference (var_sourceType_975, var_sourceLLVMName_1004, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 24)) ;
-    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_sourceType_975.objectCompare (constinArgument_inTargetReference.getter_type (HERE))).boolEnum () ;
+    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_sourceType_975.getter_plmOriginalTypeName (HERE).objectCompare (constinArgument_inTargetReference.getter_type (HERE).getter_plmOriginalTypeName (HERE))).boolEnum () ;
     if (kBoolTrue == test_1) {
       TC_Array <C_FixItDescription> fixItArray2 ;
       inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("object of type $").add_operation (constinArgument_inTargetReference.getter_type (HERE).getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 27)).add_operation (GALGAS_string (" cannot be assigned from expression of type $"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 27)).add_operation (var_sourceType_975.getter_plmOriginalTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)), fixItArray2  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 26)) ;

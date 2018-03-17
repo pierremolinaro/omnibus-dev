@@ -7,7 +7,11 @@
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------*
-// FORWARD DECLARATION                                                                                                 *
+
+typedef struct { unsigned mDeadlineList ; } DeadlineList ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   FORWARD DECLARATION                                                                                               *
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void kernel_makeTaskReady (TaskControlBlock * inTaskDescriptor) ;
@@ -15,6 +19,8 @@ static void kernel_makeTaskReady (TaskControlBlock * inTaskDescriptor) ;
 //---------------------------------------------------------------------------------------------------------------------*
 //   ENTER TASK IN DEADLINE LIST                                                                                       *
 //---------------------------------------------------------------------------------------------------------------------*
+
+static inline void deadlinelist_enterTask (DeadlineList & ioTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;
 
 static inline void deadlinelist_enterTask (DeadlineList & ioTaskList, TaskControlBlock * inTask) {
   const unsigned runningTaskIndex = inTask->mTaskIndex ;
@@ -26,6 +32,8 @@ static inline void deadlinelist_enterTask (DeadlineList & ioTaskList, TaskContro
 //   REMOVE TASK FROM DEADLINE LIST                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
+static inline void deadlinelist_removeTask (DeadlineList & ioTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;
+
 static inline void deadlinelist_removeTask (DeadlineList & ioTaskList, TaskControlBlock * inTask) {
   const unsigned runningTaskIndex = inTask->mTaskIndex ;
   const unsigned mask = 1 << runningTaskIndex ;
@@ -33,12 +41,10 @@ static inline void deadlinelist_removeTask (DeadlineList & ioTaskList, TaskContr
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//  TEST IF A DEADLINE LIST CONTAINS A TASK                                                                                     *
+//  TEST IF A DEADLINE LIST CONTAINS A TASK                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 static inline bool deadlinelist_containsTask (const DeadlineList & inTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
 
 static inline bool deadlinelist_containsTask (const DeadlineList & inTaskList, TaskControlBlock * inTask) {
   const unsigned runningTaskIndex = inTask->mTaskIndex ;
@@ -54,11 +60,15 @@ typedef unsigned DeadlineListIterator ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+static inline DeadlineListIterator deadlinelist_makeIterator (const DeadlineList & inList) __attribute__((always_inline)) ;
+
 static inline DeadlineListIterator deadlinelist_makeIterator (const DeadlineList & inList) {
   return inList.mDeadlineList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+static inline TaskControlBlock * deadlinelistIterator_nextTask (DeadlineListIterator & ioIterator) __attribute__((always_inline)) ;
 
 static inline TaskControlBlock * deadlinelistIterator_nextTask (DeadlineListIterator & ioIterator) {
   TaskControlBlock * task = nullptr ;
@@ -67,7 +77,6 @@ static inline TaskControlBlock * deadlinelistIterator_nextTask (DeadlineListIter
     const unsigned mask = 1 << taskIndex ;
     ioIterator &= ~ mask ;
     task = & gTaskDescriptorArray [taskIndex] ;
-
   }
   return task ;
 }
