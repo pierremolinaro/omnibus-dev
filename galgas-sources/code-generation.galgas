@@ -190,7 +190,7 @@ private proc generateCodeFiles
       !from:inTargetName.string + "/" + relativePath
     )
   end
-  let x = [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
+  let x = [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!"")]
   asCode += "\n"
 #----------------------------------------- Include LLVM specific file
@@ -202,7 +202,7 @@ private proc generateCodeFiles
       !from:inTargetName.string + "/" + relativePath
     )
   end
-  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
+  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   llvmCode += "\n"
 #----------------------------------------- Type declarations
   declareLLVMTypes (!inTypeMap !?llvmCode)

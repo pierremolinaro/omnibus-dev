@@ -4450,6 +4450,8 @@ const char * gWrapperFileContent_29_embeddedSampleCode = "target \"teensy-3-6/xt
   "    s.wait ()\n"
   "    let duration = myDriver.getDuration ()\n"
   "    lcd.print (!u32:duration)\n"
+  "    lcd.goto (!line:1 !column:0)\n"
+  "    lcd.print (!hex8:currentStackPointer ())\n"
   "  }\n"
   "}\n"
   "  \n"
@@ -4469,7 +4471,7 @@ const cRegularFileWrapper gWrapperFile_29_embeddedSampleCode (
   "15-task-activation-duration-systick.plm",
   "plm",
   true, // Text file
-  2006, // Text length
+  2084, // Text length
   gWrapperFileContent_29_embeddedSampleCode
 ) ;
 

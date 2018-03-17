@@ -65,7 +65,12 @@ void kernel_create_task (const unsigned inTaskIndex,
 //--- Initial free stack size
   taskControlBlockPtr->mStackFreeSize = inStackBufferSize ;
 //--- Initialize Context
-  kernel_set_task_context (taskControlBlockPtr->mTaskContext, (unsigned) inStackBufferAddress, inStackBufferSize, inTaskRoutine) ;
+  const bool hasFloatingPointContext = false ;
+  kernel_set_task_context (taskControlBlockPtr->mTaskContext,
+                           (unsigned) inStackBufferAddress,
+                           inStackBufferSize,
+                           inTaskRoutine,
+                           hasFloatingPointContext) ;
 //--- Make task ready
   kernel_makeTaskReady (taskControlBlockPtr) ;
 }

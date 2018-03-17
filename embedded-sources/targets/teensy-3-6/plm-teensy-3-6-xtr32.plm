@@ -5,6 +5,8 @@ check target "teensy-3-6/xtr32"
 //   UTILITY ROUTINES                                                                                                   
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+extern func user currentStackPointer () -> $uint32 : "current.stack.pointer"
+
 extern func user freeStackSize () -> $uint32 : "freeStackSize"
 
 extern func user noteFreeStackSize () : "noteFreeStackSize"

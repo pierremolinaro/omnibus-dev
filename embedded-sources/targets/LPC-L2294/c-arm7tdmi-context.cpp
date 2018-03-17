@@ -58,7 +58,8 @@ typedef struct {
 static void kernel_set_task_context (TaskContext & ioTaskContext,
                                      const unsigned inStackBufferAddress,
                                      const unsigned inStackBufferSize,
-                                     RoutineTaskType inTaskRoutine) {
+                                     RoutineTaskType inTaskRoutine,
+                                     const bool /* inHasFloatingPointContext */) {
 //--- Initialize PC
   ioTaskContext.mPC_USR = (unsigned) inTaskRoutine ;
 //--- Initialize SP

@@ -47,6 +47,8 @@ task Tâche0 @priority 0 @stacksize 512 {
     s.wait ()
     let duration = myDriver.getDuration ()
     lcd.print (!u32:duration)
+    lcd.goto (!line:1 !column:0)
+    lcd.print (!hex8:currentStackPointer ())
   }
 }
   
