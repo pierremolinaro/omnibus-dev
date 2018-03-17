@@ -7755,7 +7755,7 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static void removeTaskFromGuards (TaskControlBlock * inTask) __attribute__ ((always_inline)) ;\n"
+  "// static void removeTaskFromGuards (TaskControlBlock * inTask) __attribute__ ((always_inline)) ;\n"
   "\n"
   "static void removeTaskFromGuards (TaskControlBlock * inTask) {\n"
   "  guardDescriptor_removeAllGuards (inTask->mGuardDescriptor, inTask) ;\n"
@@ -7765,13 +7765,11 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "void noteGuardState (const bool inAccepted) asm (\"note.guard.state\") ;\n"
+  "void acceptGuard (void) asm (\"accept.guard\") ;\n"
   "\n"
-  "void noteGuardState (const bool inAccepted) {\n"
-  "  if (inAccepted) {\n"
-  "    gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
-  "    removeTaskFromGuards (gRunningTaskControlBlockPtr) ;\n"
-  "  }\n"
+  "void acceptGuard (void) {\n"
+  "  gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "  removeTaskFromGuards (gRunningTaskControlBlockPtr) ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -7830,12 +7828,13 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "\n"
   "void handleGuardedWaitUntil (const unsigned inDeadline) {\n"
   "  if (gRunningTaskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "    if ((!deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)) || (gRunningTaskControlBlockPtr->mTaskDeadline > i"
-  "nDeadline)) {\n"
+  "    if (!deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)) {\n"
+  "      deadlinelist_enterTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;\n"
+  "      gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;\n"
+  "      gRunningTaskControlBlockPtr->mHaveDeadlineGuard = true ;\n"
+  "    }else if (gRunningTaskControlBlockPtr->mTaskDeadline > inDeadline) {\n"
   "      gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;\n"
   "    }\n"
-  "    deadlinelist_enterTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;\n"
-  "    gRunningTaskControlBlockPtr->mHaveDeadlineGuard = true ;\n"
   "  }\n"
   "}\n"
   "\n"
@@ -7868,7 +7867,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "c-guard-code.cpp",
   "cpp",
   true, // Text file
-  5312, // Text length
+  5321, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
@@ -8152,9 +8151,9 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "  taskControlBlockPtr->mTaskName = inTaskName ;\n"
   "//  taskControlBlockPtr->mTaskDeadline = 0 ; // statically initialized to 0\n"
   "//  taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0\n"
-  "  taskControlBlockPtr->mHaveDeadlineGuard = false ; // statically initialized to 0\n"
+  "//  taskControlBlockPtr->mHaveDeadlineGuard = false ; // statically initialized to 0\n"
   "//  taskControlBlockPtr->mUserResult = false ; // statically initialized to 0\n"
-  "  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to 0\n"
+  "//  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to GUARD_EVALUATING_OR_OUTSIDE\n"
   "//--- Store stack parameters\n"
   "  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;\n"
   "  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;\n"
@@ -8255,7 +8254,7 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "c-real-time-kernel-code.cpp",
   "cpp",
   true, // Text file
-  7705, // Text length
+  7735, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 
@@ -8447,14 +8446,6 @@ const cRegularFileWrapper gWrapperFile_10_targetTemplates (
 //--- File '/c-task-list-64-tasks.cpp'
 
 const char * gWrapperFileContent_11_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//   TASK LIST FUNCTIONS                                                                                               *\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "#if TASK_COUNT > 64\n"
-  "  #error \"This type of list supports at most 64 tasks\"\n"
-  "#endif\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "// ENTER TASK IN LIST: inTask should be not null\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -8492,7 +8483,7 @@ const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "c-task-list-64-tasks.cpp",
   "cpp",
   true, // Text file
-  2201, // Text length
+  1754, // Text length
   gWrapperFileContent_11_targetTemplates
 ) ;
 
@@ -8502,8 +8493,6 @@ const char * gWrapperFileContent_12_targetTemplates = "//-----------------------
   "\n"
   "typedef struct { unsigned mList ; } TaskList ;\n"
   "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//   TASK LIST FUNCTIONS                                                                                               *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#if TASK_COUNT > 32\n"
@@ -8516,7 +8505,7 @@ const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "c-task-list-type-32-tasks.cpp",
   "cpp",
   true, // Text file
-  738, // Text length
+  496, // Text length
   gWrapperFileContent_12_targetTemplates
 ) ;
 
@@ -8527,13 +8516,19 @@ const char * gWrapperFileContent_13_targetTemplates = "//-----------------------
   "typedef struct { unsigned long long mList ; } TaskList ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#if TASK_COUNT > 64\n"
+  "  #error \"This type of list supports at most 64 tasks\"\n"
+  "#endif\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   "c-task-list-type-64-tasks.cpp",
   "cpp",
   true, // Text file
-  302, // Text length
+  507, // Text length
   gWrapperFileContent_13_targetTemplates
 ) ;
 
@@ -17221,10 +17216,15 @@ const char * gWrapperFileContent_84_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static void kernel_set_task_context (TaskContext & ioTaskContext,\n"
-  "                                     const unsigned inStackBufferAddress,\n"
-  "                                     const unsigned inStackBufferSize,\n"
-  "                                     RoutineTaskType inTaskRoutine) {\n"
+  "static inline void kernel_set_task_context (TaskContext & ioTaskContext,\n"
+  "                                            const unsigned inStackBufferAddress,\n"
+  "                                            const unsigned inStackBufferSize,\n"
+  "                                            RoutineTaskType inTaskRoutine) __attribute__ ((always_inline)) ;\n"
+  "\n"
+  "static inline void kernel_set_task_context (TaskContext & ioTaskContext,\n"
+  "                                            const unsigned inStackBufferAddress,\n"
+  "                                            const unsigned inStackBufferSize,\n"
+  "                                            RoutineTaskType inTaskRoutine) {\n"
   "//--- Initialize LR\n"
   "  ioTaskContext.mLR_RETURN_CODE = 0xFFFFFFFD ; // Thread mode, process stack\n"
   "//--- Stack Pointer initial value\n"
@@ -17242,7 +17242,7 @@ const cRegularFileWrapper gWrapperFile_84_targetTemplates (
   "c-cortex-m4-context.cpp",
   "cpp",
   true, // Text file
-  6558, // Text length
+  6928, // Text length
   gWrapperFileContent_84_targetTemplates
 ) ;
 

@@ -81,10 +81,15 @@ typedef struct {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void kernel_set_task_context (TaskContext & ioTaskContext,
-                                     const unsigned inStackBufferAddress,
-                                     const unsigned inStackBufferSize,
-                                     RoutineTaskType inTaskRoutine) {
+static inline void kernel_set_task_context (TaskContext & ioTaskContext,
+                                            const unsigned inStackBufferAddress,
+                                            const unsigned inStackBufferSize,
+                                            RoutineTaskType inTaskRoutine) __attribute__ ((always_inline)) ;
+
+static inline void kernel_set_task_context (TaskContext & ioTaskContext,
+                                            const unsigned inStackBufferAddress,
+                                            const unsigned inStackBufferSize,
+                                            RoutineTaskType inTaskRoutine) {
 //--- Initialize LR
   ioTaskContext.mLR_RETURN_CODE = 0xFFFFFFFD ; // Thread mode, process stack
 //--- Stack Pointer initial value

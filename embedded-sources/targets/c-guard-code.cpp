@@ -6,7 +6,7 @@ static DeadlineList gDeadlineWaitingInGuardTaskList ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void removeTaskFromGuards (TaskControlBlock * inTask) __attribute__ ((always_inline)) ;
+// static void removeTaskFromGuards (TaskControlBlock * inTask) __attribute__ ((always_inline)) ;
 
 static void removeTaskFromGuards (TaskControlBlock * inTask) {
   guardDescriptor_removeAllGuards (inTask->mGuardDescriptor, inTask) ;
@@ -16,13 +16,11 @@ static void removeTaskFromGuards (TaskControlBlock * inTask) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void noteGuardState (const bool inAccepted) asm ("note.guard.state") ;
+void acceptGuard (void) asm ("accept.guard") ;
 
-void noteGuardState (const bool inAccepted) {
-  if (inAccepted) {
-    gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
-    removeTaskFromGuards (gRunningTaskControlBlockPtr) ;
-  }
+void acceptGuard (void) {
+  gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
+  removeTaskFromGuards (gRunningTaskControlBlockPtr) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -80,11 +78,13 @@ void handleGuardedWaitUntil (const unsigned inDeadline) asm ("!FUNC!guard.handle
 
 void handleGuardedWaitUntil (const unsigned inDeadline) {
   if (gRunningTaskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
-    if ((!deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)) || (gRunningTaskControlBlockPtr->mTaskDeadline > inDeadline)) {
+    if (!deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)) {
+      deadlinelist_enterTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;
+      gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;
+      gRunningTaskControlBlockPtr->mHaveDeadlineGuard = true ;
+    }else if (gRunningTaskControlBlockPtr->mTaskDeadline > inDeadline) {
       gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;
     }
-    deadlinelist_enterTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;
-    gRunningTaskControlBlockPtr->mHaveDeadlineGuard = true ;
   }
 }
 
