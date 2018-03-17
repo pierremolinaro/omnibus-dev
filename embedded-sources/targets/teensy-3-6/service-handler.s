@@ -123,7 +123,7 @@ __no_context_to_restore:
   ldr  r0, =backgroundTaskContext
   ldr  r0, [r0]
   msr  psp, r0
-@--- Return from exception
+@--- Return from exception (thread mode, process stack, no floating point)
   ldr  r1, =0xFFFFFFFD
   bx   r1
 

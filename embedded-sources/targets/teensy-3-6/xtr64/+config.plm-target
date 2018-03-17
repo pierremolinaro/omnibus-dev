@@ -63,6 +63,7 @@ S_FILES:
   "../s-cortex-m4-header.s"
   "../s-interrupt-vectors.s"
   "../s-reset-handler.s"
+  "../s-current-stack-pointer.s"
 
 LL_FILES:
   "../ll-cortex-m4.ll"
