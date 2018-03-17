@@ -568,11 +568,16 @@ method @guardMapIR-element llvmCodeGeneration
 #--- Base guard or convenience guard ?
   switch mGuardKindGenerationIR
   case baseGuard :
-#    ioLLVMcode += "  store i1 false, i1* " + accepted_llvmName + "\n"
+    let accepted_label = acceptVariablePLMName () + ".guard.accepted"
+    let rejected_label = acceptVariablePLMName () + ".guard.rejected"
     [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  " + accepted_llvmName_loaded + " = load i1, i1* " + accepted_llvmName + "\n"
-    ioLLVMcode += "  call void @note.guard.state (i1 " + accepted_llvmName_loaded + ")\n"
-    ioLLVMcode += "  ret i1 " + accepted_llvmName_loaded + "\n"
+    ioLLVMcode += "  br i1 " + accepted_llvmName_loaded + ", label %" + accepted_label + ", label %" + rejected_label + "\n\n"
+    ioLLVMcode += accepted_label + ":\n"
+    ioLLVMcode += "  call void @accept.guard ()\n"
+    ioLLVMcode += "  ret i1 true\n\n"
+    ioLLVMcode += rejected_label + ":\n"
+    ioLLVMcode += "  ret i1 false\n\n"
     ioLLVMcode += "}\n\n"
   case convenienceGuard (baseGuardAllocaList baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
     [baseGuardAllocaList generateAllocaList !?ioLLVMcode]
@@ -600,7 +605,7 @@ method @guardMapIR-element llvmCodeGeneration
     ioLLVMcode += "  ret i1 false\n"
     ioLLVMcode += "}\n\n"
   end
-  ioGenerationAdds.mExternFunctionDeclarationSet += !"void @note.guard.state (i1 %inAccepted)"
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"void @accept.guard ()"
   ioGenerationAdds.mExternFunctionDeclarationSet += !"i1 @xtr.user.result ()"
 }
 
