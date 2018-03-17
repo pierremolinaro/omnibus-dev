@@ -22,7 +22,7 @@ setter @instructionListIR appendCopyFromReferences
     [!?self appendStoreToUniversalReference !inTargetReference.llvmName !inTargetReference.type !result]
   else # Call a copy routine
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName:let sourceLLVMName]
-    if sourceType != inTargetReference.type then
+    if sourceType.plmOriginalTypeName != inTargetReference.type.plmOriginalTypeName then
       error inErrorLocation
       : "object of type $" + inTargetReference.type.plmOriginalTypeName
         + " cannot be assigned from expression of type $" + sourceType.plmOriginalTypeName

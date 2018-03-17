@@ -7,6 +7,10 @@
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+typedef struct { unsigned long long mDeadlineList ; } DeadlineList ;
+
+//---------------------------------------------------------------------------------------------------------------------*
 // FORWARD DECLARATION                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -33,7 +37,7 @@ static inline void deadlinelist_removeTask (DeadlineList & ioTaskList, TaskContr
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//  TEST IF A DEADLINE LIST CONTAINS A TASK                                                                                     *
+//  TEST IF A DEADLINE LIST CONTAINS A TASK                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 static inline bool deadlinelist_containsTask (const DeadlineList & inTaskList, TaskControlBlock * inTask) __attribute__((always_inline)) ;

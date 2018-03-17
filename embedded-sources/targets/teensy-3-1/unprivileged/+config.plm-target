@@ -47,7 +47,6 @@ UNUSED_INTERRUPT: "../undefined-interrupt.s"
 
 CPP_FILES:
   "../c-cortex-m4-context-types.cpp"
-  "../../c-deadline-list-type-32-tasks.cpp"
   "../../c-task-list-type-32-tasks.cpp"
   "../../c-guard-types-32-tasks.cpp"
   "../../c-task-control-block-type.cpp"

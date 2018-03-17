@@ -12,7 +12,7 @@ func checkAssignmentCompatibility
   -> @objectIR
 {
   let sourceType = [inSourceValue type]
-  if inOptionalTargetAnnotationType == sourceType then
+  if inOptionalTargetAnnotationType.plmOriginalTypeName == sourceType.plmOriginalTypeName then
     result = inSourceValue
   elsif [inOptionalTargetAnnotationType.kind isVoid] then
     result = inSourceValue

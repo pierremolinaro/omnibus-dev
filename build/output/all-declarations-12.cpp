@@ -4401,7 +4401,7 @@ const cRegularFileWrapper gWrapperFile_28_embeddedSampleCode (
 
 //--- File 'teensy-3-6/15-task-activation-duration-systick.plm'
 
-const char * gWrapperFileContent_29_embeddedSampleCode = "target \"teensy-3-6/xtr64\"\n"
+const char * gWrapperFileContent_29_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
   "driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)\n"
