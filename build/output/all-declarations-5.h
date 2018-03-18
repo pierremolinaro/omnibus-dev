@@ -10,22 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Extension setter '@propertyMap addFunctionWithoutArgument'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_addFunctionWithoutArgument (class GALGAS_propertyMap & ioObject,
-                                                 class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
-                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inReceiverType,
-                                                 const class GALGAS_string constin_inMethodName,
-                                                 const class GALGAS_bool constin_inIsSafe,
-                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                 const class GALGAS_bool constin_inCanMutateProperties,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                            Extension setter '@propertyMap addFunctionWithInputArgument'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
