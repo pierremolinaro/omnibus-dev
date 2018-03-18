@@ -18,14 +18,15 @@ typedef struct TaskControlBlock {
   unsigned * mStackBufferAddress ;
   unsigned mStackBufferSize ; // In bytes
   unsigned mStackFreeSize ; // In bytes
+//--- Guards
+  GuardDescriptor mGuardDescriptor ;
+  GuardState mGuardState ;
 //--- Task index
   unsigned char mTaskIndex ;
+//--- ActivationCount
+  signed char mActivationCount ;
 //--- User result
   bool mUserResult ;
-//--- Guards
-  GuardState mGuardState ;
-  bool mHaveDeadlineGuard ;
-  GuardDescriptor mGuardDescriptor ;
 //---
 } TaskControlBlock ;
 

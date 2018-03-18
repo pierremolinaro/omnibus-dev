@@ -423,12 +423,18 @@ method @taskMapIR generateCode
   ?!@generationAdds ioGenerationAdds
   ?!@primitiveAndServiceIRlist ioServiceList
 {
-#---------- Declare task self terminate service
-  ioLLVMcode += llvmTitleComment (!"Task self terminate service")
-  let selfTerminateImplementationName = llvmNameForServiceImplementation (!llvmNameForTaskAutoBlockService ())
-  let selfTerminateCallName = llvmNameForServiceCall (!llvmNameForTaskAutoBlockService ())
-  ioServiceList += !selfTerminateCallName !selfTerminateImplementationName !false
-  ioLLVMcode += "declare void @" + selfTerminateCallName + " () nounwind noreturn\n\n"
+#---------- Declare "activate task" service
+  ioLLVMcode += llvmTitleComment (!"Activate task service")
+  let activateTaskImplementationName = llvmNameForServiceImplementation (!llvmNameForActivateTask ())
+  let activateTaskCallName = llvmNameForServiceCall (!llvmNameForActivateTask ())
+  ioServiceList += !activateTaskCallName !activateTaskImplementationName !false
+  ioLLVMcode += "declare void @" + activateTaskCallName + " () nounwind\n\n"
+#---------- Declare "wait for activation" service
+  ioLLVMcode += llvmTitleComment (!"Wait for activation service")
+  let waitForActivationImplementationName = llvmNameForServiceImplementation (!llvmNameForTaskWaitsForActivation ())
+  let waitForActivationCallName = llvmNameForServiceCall (!llvmNameForTaskWaitsForActivation ())
+  ioServiceList += !waitForActivationCallName !waitForActivationImplementationName !false
+  ioLLVMcode += "declare void @" + waitForActivationCallName + " () nounwind\n\n"
 #---------- Declare task variables
   ioLLVMcode += llvmTitleComment (!"Task variables")
   for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
@@ -471,9 +477,12 @@ method @taskMapIR generateCode
     ioLLVMcode += "\n"
     ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " ()" + llvmAttributeFunction () + "noreturn {\n"
     ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
+    let taskLoopLabel = "loop." + [task.mTaskName assemblerRepresentation]
+    ioLLVMcode += "  br label %" + taskLoopLabel + "\n\n"
+    ioLLVMcode += taskLoopLabel + ":\n"
+    ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
     ioLLVMcode += "  call void @" + llvmNameForFunction (!llvmTypeStringFromPLMname (!task.mTaskName) + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
-    ioLLVMcode += "  call void @" + selfTerminateCallName + " ()\n"
-    ioLLVMcode += "  unreachable\n"
+    ioLLVMcode += "  br label %" + taskLoopLabel + "\n\n"
     ioLLVMcode += "}\n\n"
   end
 #--- Start tasks
