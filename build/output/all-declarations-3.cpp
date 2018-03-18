@@ -1441,32 +1441,32 @@ void extensionMethod_enterFunctionsInPropertyMap (const GALGAS_functionDeclarati
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_functionDeclarationListAST temp_0 = inObject ;
-  cEnumerator_functionDeclarationListAST enumerator_10505 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_10505.hasCurrentObject ()) {
-    GALGAS_stringset var_attributeSet_10554 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-func.galgas", 309)) ;
-    cEnumerator_lstringlist enumerator_10612 (enumerator_10505.current (HERE).getter_mFunctionAttributeList (HERE), kENUMERATION_UP) ;
-    while (enumerator_10612.hasCurrentObject ()) {
-      var_attributeSet_10554.addAssign_operation (enumerator_10612.current (HERE).getter_mValue (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-func.galgas", 311)) ;
-      enumerator_10612.gotoNextObject () ;
+  cEnumerator_functionDeclarationListAST enumerator_10511 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_10511.hasCurrentObject ()) {
+    GALGAS_stringset var_attributeSet_10560 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-func.galgas", 310)) ;
+    cEnumerator_lstringlist enumerator_10618 (enumerator_10511.current (HERE).getter_mFunctionAttributeList (HERE), kENUMERATION_UP) ;
+    while (enumerator_10618.hasCurrentObject ()) {
+      var_attributeSet_10560.addAssign_operation (enumerator_10618.current (HERE).getter_mValue (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-func.galgas", 312)) ;
+      enumerator_10618.gotoNextObject () ;
     }
-    GALGAS_bool var_exportedFunction_10695 = var_attributeSet_10554.getter_hasKey (function_exportedAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 313)) COMMA_SOURCE_FILE ("declaration-func.galgas", 313)) ;
-    GALGAS_bool var_canMutateProperties_10769 = var_attributeSet_10554.getter_hasKey (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 314)) COMMA_SOURCE_FILE ("declaration-func.galgas", 314)) ;
-    GALGAS_bool var_safe_10828 = var_attributeSet_10554.getter_hasKey (function_safeAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 315)) COMMA_SOURCE_FILE ("declaration-func.galgas", 315)) ;
-    GALGAS_bool var_canAccessProperties_10898 = GALGAS_bool (kIsNotEqual, enumerator_10505.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("declaration-func.galgas", 316)))) ;
-    GALGAS_routineTypedSignature var_signature_11041 ;
+    GALGAS_bool var_exportedFunction_10701 = var_attributeSet_10560.getter_hasKey (function_exportedAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 314)) COMMA_SOURCE_FILE ("declaration-func.galgas", 314)) ;
+    GALGAS_bool var_canMutateProperties_10775 = var_attributeSet_10560.getter_hasKey (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 315)) COMMA_SOURCE_FILE ("declaration-func.galgas", 315)) ;
+    GALGAS_bool var_safe_10834 = var_attributeSet_10560.getter_hasKey (function_safeAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 316)) COMMA_SOURCE_FILE ("declaration-func.galgas", 316)) ;
+    GALGAS_bool var_canAccessProperties_10904 = GALGAS_bool (kIsNotEqual, enumerator_10511.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("declaration-func.galgas", 317)))) ;
+    GALGAS_routineTypedSignature var_signature_11047 ;
     {
-    routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, enumerator_10505.current (HERE).getter_mFunctionFormalArgumentList (HERE), var_signature_11041, inCompiler  COMMA_SOURCE_FILE ("declaration-func.galgas", 318)) ;
+    routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, enumerator_10511.current (HERE).getter_mFunctionFormalArgumentList (HERE), var_signature_11047, inCompiler  COMMA_SOURCE_FILE ("declaration-func.galgas", 319)) ;
     }
-    GALGAS_unifiedTypeMap_2D_proxy var_returnTypeProxy_11182 ;
+    GALGAS_unifiedTypeMap_2D_proxy var_returnTypeProxy_11188 ;
     {
-    GALGAS_unifiedTypeMap_2D_proxy::class_method_makeOptionalProxy (ioArgument_ioContext.mProperty_mTypeMap, enumerator_10505.current (HERE).getter_mFunctionReturnTypeName (HERE), var_returnTypeProxy_11182 COMMA_SOURCE_FILE ("declaration-func.galgas", 320)) ;
+    GALGAS_unifiedTypeMap_2D_proxy::class_method_makeOptionalProxy (ioArgument_ioContext.mProperty_mTypeMap, enumerator_10511.current (HERE).getter_mFunctionReturnTypeName (HERE), var_returnTypeProxy_11188 COMMA_SOURCE_FILE ("declaration-func.galgas", 321)) ;
     }
-    GALGAS_lstring var_routineMangledName_11238 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), enumerator_10505.current (HERE).getter_mFunctionName (HERE), enumerator_10505.current (HERE).getter_mFunctionFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 322)) ;
-    GALGAS_routineDescriptor var_descriptor_11403 = GALGAS_routineDescriptor::constructor_new (enumerator_10505.current (HERE).getter_mPublicFunction (HERE), var_exportedFunction_10695, enumerator_10505.current (HERE).getter_mFunctionName (HERE).getter_string (SOURCE_FILE ("declaration-func.galgas", 331)), GALGAS_routineKind::constructor_function (enumerator_10505.current (HERE).getter_mMode (HERE)  COMMA_SOURCE_FILE ("declaration-func.galgas", 332)), var_signature_11041, var_returnTypeProxy_11182, var_canAccessProperties_10898, var_canMutateProperties_10769, var_safe_10828  COMMA_SOURCE_FILE ("declaration-func.galgas", 328)) ;
+    GALGAS_lstring var_routineMangledName_11244 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), enumerator_10511.current (HERE).getter_mFunctionName (HERE), enumerator_10511.current (HERE).getter_mFunctionFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 323)) ;
+    GALGAS_routineDescriptor var_descriptor_11409 = GALGAS_routineDescriptor::constructor_new (enumerator_10511.current (HERE).getter_mPublicFunction (HERE), var_exportedFunction_10701, enumerator_10511.current (HERE).getter_mFunctionName (HERE).getter_string (SOURCE_FILE ("declaration-func.galgas", 332)), GALGAS_routineKind::constructor_function (enumerator_10511.current (HERE).getter_mMode (HERE)  COMMA_SOURCE_FILE ("declaration-func.galgas", 333)), var_signature_11047, var_returnTypeProxy_11188, var_canAccessProperties_10904, var_canMutateProperties_10775, var_safe_10834  COMMA_SOURCE_FILE ("declaration-func.galgas", 329)) ;
     {
-    ioArgument_ioPropertyMap.setter_insertKey (var_routineMangledName_11238, enumerator_10505.current (HERE).getter_mPublicFunction (HERE), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_11403  COMMA_SOURCE_FILE ("declaration-func.galgas", 340)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 340)) ;
+    ioArgument_ioPropertyMap.setter_insertKey (var_routineMangledName_11244, enumerator_10511.current (HERE).getter_mPublicFunction (HERE), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_11409  COMMA_SOURCE_FILE ("declaration-func.galgas", 341)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 341)) ;
     }
-    enumerator_10505.gotoNextObject () ;
+    enumerator_10511.gotoNextObject () ;
   }
 }
 

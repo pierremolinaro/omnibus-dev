@@ -4083,6 +4083,22 @@ void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropert
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Extension setter '@propertyMap addFunctionWithoutArgument'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_addFunctionWithoutArgument (class GALGAS_propertyMap & ioObject,
+                                                 class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
+                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inReceiverType,
+                                                 const class GALGAS_string constin_inMethodName,
+                                                 const class GALGAS_bool constin_inIsSafe,
+                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
+                                                 const class GALGAS_bool constin_inCanMutateProperties,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                               Extension setter '@universalValuedObjectMap insertTask'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7431,6 +7447,18 @@ class GALGAS_string function_mainRoutineNameForTask (const class GALGAS_string &
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                        Function 'routineMangledNameFromAST'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_routineMangledNameFromAST (const class GALGAS_string & constinArgument0,
+                                                         const class GALGAS_lstring & constinArgument1,
+                                                         const class GALGAS_routineFormalArgumentListAST & constinArgument2,
+                                                         class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Function 'setupNameForTaskType'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8204,18 +8232,6 @@ void extensionMethod_enterSystemRoutineInContext (const class GALGAS_systemRouti
 
 class GALGAS_string function_mutatingAttribute (class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Function 'routineMangledNameFromAST'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_routineMangledNameFromAST (const class GALGAS_string & constinArgument0,
-                                                         const class GALGAS_lstring & constinArgument1,
-                                                         const class GALGAS_routineFormalArgumentListAST & constinArgument2,
-                                                         class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

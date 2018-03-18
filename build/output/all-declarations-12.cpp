@@ -5958,6 +5958,7 @@ const char * gWrapperFileContent_36_embeddedSampleCode = "target \"teensy-3-6/xt
   "  \n"
   "  on time.wait (!untilDeadline: self.tick) {\n"
   "    self.tick += 500\n"
+  "    T\xC3""\xA2""che1.activate ()\n"
   "  }\n"
   "}\n"
   "  \n"
@@ -5981,7 +5982,7 @@ const cRegularFileWrapper gWrapperFile_36_embeddedSampleCode (
   "22-task-activate.plm",
   "plm",
   true, // Text file
-  1560, // Text length
+  1583, // Text length
   gWrapperFileContent_36_embeddedSampleCode
 ) ;
 

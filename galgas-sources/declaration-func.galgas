@@ -304,6 +304,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
   ?!context:@semanticContext ioContext
   ?!@propertyMap ioPropertyMap
 {
+#----
   for function in self do
   #--- Attributes
     @stringset attributeSet = {}

@@ -172,7 +172,7 @@ map @taskMap {
 method @taskListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
+  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
 {
@@ -196,6 +196,16 @@ method @taskListAST enterInContext
         !?ioGlobalVariableIRList
       ]
     end
+  #---- Add activate function
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !task.mTaskName ?let taskTypeProxy]
+    [!?propertyMap addFunctionWithoutArgument
+      !?ioSubprogramInvocationGraph
+      !receiverTypeProxy:taskTypeProxy
+      !methodName:"activate"
+      !safe:true
+      !resultTypeProxy:.null
+      !canMutateProperties:false
+    ]
   #---------------- Enter task functions in property map
     [task.mTaskFunctionList enterFunctionsInPropertyMap !?context:ioContext !?propertyMap]
   #---------------- Enter task variable map as structure type in type map
@@ -554,7 +564,7 @@ method @taskMapIR generateCode
   let activateTaskImplementationName = llvmNameForServiceImplementation (!llvmNameForActivateTask ())
   let activateTaskCallName = llvmNameForServiceCall (!llvmNameForActivateTask ())
   ioServiceList += !activateTaskCallName !activateTaskImplementationName !false
-  ioLLVMcode += "declare void @" + activateTaskCallName + " () nounwind\n\n"
+  ioLLVMcode += "declare void @" + activateTaskCallName + " (i8 %inTaskIndex) nounwind\n\n"
 #---------- Declare "wait for activation" service
   ioLLVMcode += llvmTitleComment (!"Wait for activation service")
   let waitForActivationImplementationName = llvmNameForServiceImplementation (!llvmNameForTaskWaitsForActivation ())
@@ -589,7 +599,7 @@ method @taskMapIR generateCode
   ioLLVMcode += llvmTitleComment (!"Create task extern routine")
   ioLLVMcode += "declare void @kernel_create_task (i32 %inTaskIndex, i8* %inTaskName, i32* %inStackBufferAddress, "
   ioLLVMcode += "i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n\n"
-  for task in orderedTaskList do
+  for task in orderedTaskList do (taskIndex)
     ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
     let assemblerTaskName = [llvmTypeStringFromPLMname (!task.mTaskName) assemblerRepresentation]
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
@@ -597,6 +607,18 @@ method @taskMapIR generateCode
     let effectiveParameter = "(%" + assemblerTaskName + "* " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
     let formalArgument = "(%" + assemblerTaskName + "* " + llvmNameForSelf () + ")"
     ioLLVMcode += llvmSeparatorLine () + "\n"
+  #---------- Activate
+    let activateFunctionName = routineMangledNameFromAST (
+      !llvmTypeStringFromPLMname (!task.mTaskName)
+      !["activate" nowhere]
+      !{}
+    )
+    ioLLVMcode += "define internal void @" + llvmNameForFunction (!activateFunctionName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
+    ioLLVMcode += "  call void @" + activateTaskCallName + " (i8 " + taskIndex + ")\n"
+    ioLLVMcode += "  ret void\n"
+    ioLLVMcode += "}\n\n"
+    ioLLVMcode += llvmSeparatorLine ()
+    ioLLVMcode += "\n"
   #---------- Setup
     ioLLVMcode += "define internal void " + setupNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
     [task.mSetupAllocaList generateAllocaList !?ioLLVMcode]

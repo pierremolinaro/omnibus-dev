@@ -26,6 +26,7 @@ task Tâche0 @priority 0 @stacksize 512 {
   
   on time.wait (!untilDeadline: self.tick) {
     self.tick += 500
+    Tâche1.activate ()
   }
 }
   
