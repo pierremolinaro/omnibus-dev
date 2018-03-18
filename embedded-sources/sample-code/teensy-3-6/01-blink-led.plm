@@ -41,7 +41,7 @@ driver RegisterRead ()
 task Tâche @priority 1 @stacksize 512 {
   var compteur $uint32 = 0
 
-  setup 1000 {
+  on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     lcd.goto (!line:0 !column:0)

@@ -258,22 +258,19 @@ void extensionMethod_semanticAnalysis (const class GALGAS_decoratedTaskList_2D_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Routine 'setupSemanticAnalysis'                                           *
+//                                        Routine 'analyzeOrderedTaskRoutines'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_setupSemanticAnalysis (const class GALGAS_semanticContext constinArgument0,
-                                    class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                    class GALGAS_intermediateCodeStruct & ioArgument2,
-                                    const class GALGAS_PLMType constinArgument3,
-                                    const class GALGAS_lbigint constinArgument4,
-                                    const class GALGAS_mode constinArgument5,
-                                    const class GALGAS_instructionListAST constinArgument6,
-                                    const class GALGAS_location constinArgument7,
-                                    class GALGAS_allocaList & outArgument8,
-                                    class GALGAS_instructionListIR & outArgument9,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void routine_analyzeOrderedTaskRoutines (const class GALGAS_PLMType constinArgument0,
+                                         const class GALGAS_taskSetupListAST constinArgument1,
+                                         const class GALGAS_semanticContext constinArgument2,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument3,
+                                         class GALGAS_intermediateCodeStruct & ioArgument4,
+                                         class GALGAS_instructionListIR & outArgument5,
+                                         class GALGAS_allocaList & outArgument6,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -534,15 +531,4 @@ void routine_enterBooleanOperators (class GALGAS_lstring inArgument0,
 class GALGAS_string function_integerEnumAccessorName (const class GALGAS_uint & constinArgument0,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Routine 'enterEnumerationComparisonOperators'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgument0,
-                                                  class GALGAS_semanticContext & ioArgument1,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
 

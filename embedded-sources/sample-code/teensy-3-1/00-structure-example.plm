@@ -41,7 +41,7 @@ task T @priority 12 @stacksize 512 {
   var deadline $uint32 = 0
   var acc = $C ()
 
-  setup  0 {
+  on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
   }
