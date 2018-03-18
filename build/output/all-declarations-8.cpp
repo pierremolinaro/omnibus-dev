@@ -1405,7 +1405,7 @@ mProperty_mTaskType (),
 mProperty_mPriority (),
 mProperty_mStackSize (),
 mProperty_mSetupAllocaList (),
-mProperty_mInitInstructionListIR (),
+mProperty_mSetupInstructionListIR (),
 mProperty_mActivateAllocaList (),
 mProperty_mActivateInstructionListIR (),
 mProperty_mDeactivateAllocaList (),
@@ -1436,7 +1436,7 @@ mProperty_mTaskType (inOperand1),
 mProperty_mPriority (inOperand2),
 mProperty_mStackSize (inOperand3),
 mProperty_mSetupAllocaList (inOperand4),
-mProperty_mInitInstructionListIR (inOperand5),
+mProperty_mSetupInstructionListIR (inOperand5),
 mProperty_mActivateAllocaList (inOperand6),
 mProperty_mActivateInstructionListIR (inOperand7),
 mProperty_mDeactivateAllocaList (inOperand8),
@@ -1485,7 +1485,7 @@ typeComparisonResult GALGAS_taskMapIR_2D_element::objectCompare (const GALGAS_ta
     result = mProperty_mSetupAllocaList.objectCompare (inOperand.mProperty_mSetupAllocaList) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mInitInstructionListIR.objectCompare (inOperand.mProperty_mInitInstructionListIR) ;
+    result = mProperty_mSetupInstructionListIR.objectCompare (inOperand.mProperty_mSetupInstructionListIR) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mActivateAllocaList.objectCompare (inOperand.mProperty_mActivateAllocaList) ;
@@ -1508,7 +1508,7 @@ typeComparisonResult GALGAS_taskMapIR_2D_element::objectCompare (const GALGAS_ta
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_taskMapIR_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mTaskType.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mSetupAllocaList.isValid () && mProperty_mInitInstructionListIR.isValid () && mProperty_mActivateAllocaList.isValid () && mProperty_mActivateInstructionListIR.isValid () && mProperty_mDeactivateAllocaList.isValid () && mProperty_mDeactivateInstructionListIR.isValid () && mProperty_mTaskNameStringIndex.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mTaskType.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mSetupAllocaList.isValid () && mProperty_mSetupInstructionListIR.isValid () && mProperty_mActivateAllocaList.isValid () && mProperty_mActivateInstructionListIR.isValid () && mProperty_mDeactivateAllocaList.isValid () && mProperty_mDeactivateInstructionListIR.isValid () && mProperty_mTaskNameStringIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1519,7 +1519,7 @@ void GALGAS_taskMapIR_2D_element::drop (void) {
   mProperty_mPriority.drop () ;
   mProperty_mStackSize.drop () ;
   mProperty_mSetupAllocaList.drop () ;
-  mProperty_mInitInstructionListIR.drop () ;
+  mProperty_mSetupInstructionListIR.drop () ;
   mProperty_mActivateAllocaList.drop () ;
   mProperty_mActivateInstructionListIR.drop () ;
   mProperty_mDeactivateAllocaList.drop () ;
@@ -1545,7 +1545,7 @@ void GALGAS_taskMapIR_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mSetupAllocaList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mInitInstructionListIR.description (ioString, inIndentation+1) ;
+    mProperty_mSetupInstructionListIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mActivateAllocaList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -1592,8 +1592,8 @@ GALGAS_allocaList GALGAS_taskMapIR_2D_element::getter_mSetupAllocaList (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_taskMapIR_2D_element::getter_mInitInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInitInstructionListIR ;
+GALGAS_instructionListIR GALGAS_taskMapIR_2D_element::getter_mSetupInstructionListIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSetupInstructionListIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

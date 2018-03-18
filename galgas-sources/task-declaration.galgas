@@ -505,7 +505,7 @@ map @taskMapIR {
   @bigint mPriority
   @bigint mStackSize
   @allocaList mSetupAllocaList
-  @instructionListIR mInitInstructionListIR
+  @instructionListIR mSetupInstructionListIR
   @allocaList mActivateAllocaList
   @instructionListIR mActivateInstructionListIR
   @allocaList mDeactivateAllocaList
@@ -578,7 +578,7 @@ method @taskMapIR generateCode
       !task.mPriority
       !task.mStackSize
       !task.mSetupAllocaList
-      !task.mInitInstructionListIR
+      !task.mSetupInstructionListIR
       !task.mActivateAllocaList
       !task.mActivateInstructionListIR
       !task.mDeactivateAllocaList

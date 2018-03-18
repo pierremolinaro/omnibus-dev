@@ -6171,11 +6171,6 @@ class GALGAS_taskMapIR : public AC_GALGAS_map {
                                                                                C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMInitInstructionListIRForKey (class GALGAS_instructionListIR constinArgument0,
-                                                                         class GALGAS_string constinArgument1,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
-
   public : VIRTUAL_IN_DEBUG void setter_setMPriorityForKey (class GALGAS_bigint constinArgument0,
                                                             class GALGAS_string constinArgument1,
                                                             C_Compiler * inCompiler
@@ -6185,6 +6180,11 @@ class GALGAS_taskMapIR : public AC_GALGAS_map {
                                                                    class GALGAS_string constinArgument1,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSetupInstructionListIRForKey (class GALGAS_instructionListIR constinArgument0,
+                                                                          class GALGAS_string constinArgument1,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMStackSizeForKey (class GALGAS_bigint constinArgument0,
                                                              class GALGAS_string constinArgument1,
@@ -6236,10 +6236,6 @@ class GALGAS_taskMapIR : public AC_GALGAS_map {
                                                                                                       C_Compiler * inCompiler
                                                                                                       COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInitInstructionListIRForKey (const class GALGAS_string & constinOperand0,
-                                                                                                C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mPriorityForKey (const class GALGAS_string & constinOperand0,
                                                                         C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const ;
@@ -6247,6 +6243,10 @@ class GALGAS_taskMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_allocaList getter_mSetupAllocaListForKey (const class GALGAS_string & constinOperand0,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mSetupInstructionListIRForKey (const class GALGAS_string & constinOperand0,
+                                                                                                 C_Compiler * inCompiler
+                                                                                                 COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mStackSizeForKey (const class GALGAS_string & constinOperand0,
                                                                          C_Compiler * inCompiler
@@ -6290,7 +6290,7 @@ class cEnumerator_taskMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_bigint current_mPriority (LOCATION_ARGS) const ;
   public : class GALGAS_bigint current_mStackSize (LOCATION_ARGS) const ;
   public : class GALGAS_allocaList current_mSetupAllocaList (LOCATION_ARGS) const ;
-  public : class GALGAS_instructionListIR current_mInitInstructionListIR (LOCATION_ARGS) const ;
+  public : class GALGAS_instructionListIR current_mSetupInstructionListIR (LOCATION_ARGS) const ;
   public : class GALGAS_allocaList current_mActivateAllocaList (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListIR current_mActivateInstructionListIR (LOCATION_ARGS) const ;
   public : class GALGAS_allocaList current_mDeactivateAllocaList (LOCATION_ARGS) const ;
@@ -6590,7 +6590,7 @@ class cMapElement_taskMapIR : public cMapElement {
   public : GALGAS_bigint mProperty_mPriority ;
   public : GALGAS_bigint mProperty_mStackSize ;
   public : GALGAS_allocaList mProperty_mSetupAllocaList ;
-  public : GALGAS_instructionListIR mProperty_mInitInstructionListIR ;
+  public : GALGAS_instructionListIR mProperty_mSetupInstructionListIR ;
   public : GALGAS_allocaList mProperty_mActivateAllocaList ;
   public : GALGAS_instructionListIR mProperty_mActivateInstructionListIR ;
   public : GALGAS_allocaList mProperty_mDeactivateAllocaList ;
@@ -6603,7 +6603,7 @@ class cMapElement_taskMapIR : public cMapElement {
                                   const GALGAS_bigint & in_mPriority,
                                   const GALGAS_bigint & in_mStackSize,
                                   const GALGAS_allocaList & in_mSetupAllocaList,
-                                  const GALGAS_instructionListIR & in_mInitInstructionListIR,
+                                  const GALGAS_instructionListIR & in_mSetupInstructionListIR,
                                   const GALGAS_allocaList & in_mActivateAllocaList,
                                   const GALGAS_instructionListIR & in_mActivateInstructionListIR,
                                   const GALGAS_allocaList & in_mDeactivateAllocaList,
@@ -6642,7 +6642,7 @@ class GALGAS_taskMapIR_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_allocaList mProperty_mSetupAllocaList ;
 
-  public : GALGAS_instructionListIR mProperty_mInitInstructionListIR ;
+  public : GALGAS_instructionListIR mProperty_mSetupInstructionListIR ;
 
   public : GALGAS_allocaList mProperty_mActivateAllocaList ;
 
@@ -6670,7 +6670,7 @@ class GALGAS_taskMapIR_2D_element : public AC_GALGAS_root {
                                         const GALGAS_bigint & in_mPriority,
                                         const GALGAS_bigint & in_mStackSize,
                                         const GALGAS_allocaList & in_mSetupAllocaList,
-                                        const GALGAS_instructionListIR & in_mInitInstructionListIR,
+                                        const GALGAS_instructionListIR & in_mSetupInstructionListIR,
                                         const GALGAS_allocaList & in_mActivateAllocaList,
                                         const GALGAS_instructionListIR & in_mActivateInstructionListIR,
                                         const GALGAS_allocaList & in_mDeactivateAllocaList,
@@ -6723,11 +6723,11 @@ class GALGAS_taskMapIR_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mDeactivateInstructionListIR (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInitInstructionListIR (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mPriority (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_allocaList getter_mSetupAllocaList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mSetupInstructionListIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mStackSize (LOCATION_ARGS) const ;
 
