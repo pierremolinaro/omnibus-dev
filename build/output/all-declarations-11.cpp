@@ -4153,14 +4153,14 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForTaskLoopFunction ("ll
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Once function 'llvmNameForTaskAutoBlockService'                                   *
+//                                  Once function 'llvmNameForTaskWaitsForActivation'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string onceFunction_llvmNameForTaskAutoBlockService (C_Compiler * /* inCompiler */
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+static GALGAS_string onceFunction_llvmNameForTaskWaitsForActivation (C_Compiler * /* inCompiler */
+                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("xtr.auto.block") ;
+  result_result = GALGAS_string ("xtr.wait.for.activation") ;
 //---
   return result_result ;
 }
@@ -4171,55 +4171,125 @@ static GALGAS_string onceFunction_llvmNameForTaskAutoBlockService (C_Compiler * 
 //  Function implementation                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static bool gOnceFunctionResultAvailable_llvmNameForTaskAutoBlockService = false ;
-static GALGAS_string gOnceFunctionResult_llvmNameForTaskAutoBlockService ;
+static bool gOnceFunctionResultAvailable_llvmNameForTaskWaitsForActivation = false ;
+static GALGAS_string gOnceFunctionResult_llvmNameForTaskWaitsForActivation ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string function_llvmNameForTaskAutoBlockService (class C_Compiler * inCompiler
+GALGAS_string function_llvmNameForTaskWaitsForActivation (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_llvmNameForTaskAutoBlockService) {
-    gOnceFunctionResult_llvmNameForTaskAutoBlockService = onceFunction_llvmNameForTaskAutoBlockService (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_llvmNameForTaskAutoBlockService = true ;
+  if (! gOnceFunctionResultAvailable_llvmNameForTaskWaitsForActivation) {
+    gOnceFunctionResult_llvmNameForTaskWaitsForActivation = onceFunction_llvmNameForTaskWaitsForActivation (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_llvmNameForTaskWaitsForActivation = true ;
   }
-  return gOnceFunctionResult_llvmNameForTaskAutoBlockService ;
+  return gOnceFunctionResult_llvmNameForTaskWaitsForActivation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void releaseOnceFunctionResult_llvmNameForTaskAutoBlockService (void) {
-  gOnceFunctionResult_llvmNameForTaskAutoBlockService.drop () ;
+static void releaseOnceFunctionResult_llvmNameForTaskWaitsForActivation (void) {
+  gOnceFunctionResult_llvmNameForTaskWaitsForActivation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskAutoBlockService (NULL,
-                                                                             releaseOnceFunctionResult_llvmNameForTaskAutoBlockService) ;
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskWaitsForActivation (NULL,
+                                                                               releaseOnceFunctionResult_llvmNameForTaskWaitsForActivation) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskAutoBlockService [1] = {
+static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskWaitsForActivation [1] = {
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_llvmNameForTaskAutoBlockService (C_Compiler * inCompiler,
-                                                                                const cObjectArray & /* inEffectiveParameterArray */,
-                                                                                const GALGAS_location & /* inErrorLocation */
-                                                                                COMMA_LOCATION_ARGS) {
-  return function_llvmNameForTaskAutoBlockService (inCompiler COMMA_THERE).getter_object (THERE) ;
+static GALGAS_object functionWithGenericHeader_llvmNameForTaskWaitsForActivation (C_Compiler * inCompiler,
+                                                                                  const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                  const GALGAS_location & /* inErrorLocation */
+                                                                                  COMMA_LOCATION_ARGS) {
+  return function_llvmNameForTaskWaitsForActivation (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_llvmNameForTaskAutoBlockService ("llvmNameForTaskAutoBlockService",
-                                                                                 functionWithGenericHeader_llvmNameForTaskAutoBlockService,
-                                                                                 & kTypeDescriptor_GALGAS_string,
-                                                                                 0,
-                                                                                 functionArgs_llvmNameForTaskAutoBlockService) ;
+C_galgas_function_descriptor functionDescriptor_llvmNameForTaskWaitsForActivation ("llvmNameForTaskWaitsForActivation",
+                                                                                   functionWithGenericHeader_llvmNameForTaskWaitsForActivation,
+                                                                                   & kTypeDescriptor_GALGAS_string,
+                                                                                   0,
+                                                                                   functionArgs_llvmNameForTaskWaitsForActivation) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Once function 'llvmNameForActivateTask'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_llvmNameForActivateTask (C_Compiler * /* inCompiler */
+                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("xtr.activate.task") ;
+//---
+  return result_result ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_llvmNameForActivateTask = false ;
+static GALGAS_string gOnceFunctionResult_llvmNameForActivateTask ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmNameForActivateTask (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_llvmNameForActivateTask) {
+    gOnceFunctionResult_llvmNameForActivateTask = onceFunction_llvmNameForActivateTask (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_llvmNameForActivateTask = true ;
+  }
+  return gOnceFunctionResult_llvmNameForActivateTask ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_llvmNameForActivateTask (void) {
+  gOnceFunctionResult_llvmNameForActivateTask.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForActivateTask (NULL,
+                                                                     releaseOnceFunctionResult_llvmNameForActivateTask) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmNameForActivateTask [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmNameForActivateTask (C_Compiler * inCompiler,
+                                                                        const cObjectArray & /* inEffectiveParameterArray */,
+                                                                        const GALGAS_location & /* inErrorLocation */
+                                                                        COMMA_LOCATION_ARGS) {
+  return function_llvmNameForActivateTask (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmNameForActivateTask ("llvmNameForActivateTask",
+                                                                         functionWithGenericHeader_llvmNameForActivateTask,
+                                                                         & kTypeDescriptor_GALGAS_string,
+                                                                         0,
+                                                                         functionArgs_llvmNameForActivateTask) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -4371,7 +4441,7 @@ GALGAS_lstring function_plmNameForStaticListType (const GALGAS_lstring & constin
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 375)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 375)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 375))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 375)) ;
+  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 381)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 381)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 381))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 381)) ;
 //---
   return result_result ;
 }
@@ -4418,7 +4488,7 @@ GALGAS_lstring function_plmNameForStaticListElementType (const GALGAS_lstring & 
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.element.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 381)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 381)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 381))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 381)) ;
+  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.element.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 387)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 387)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 387))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 387)) ;
 //---
   return result_result ;
 }
@@ -4465,7 +4535,7 @@ GALGAS_lstring function_llvmNameForStaticListElementType (const GALGAS_lstring &
                                                           C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("static.list.element.type.").add_operation (constinArgument_inStaticListName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 387)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 387)), constinArgument_inStaticListName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 387)) ;
+  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("static.list.element.type.").add_operation (constinArgument_inStaticListName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 393)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 393)), constinArgument_inStaticListName.getter_location (HERE)  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 393)) ;
 //---
   return result_result ;
 }
@@ -4512,7 +4582,7 @@ GALGAS_string function_registerGroupAddressArrayLLVMname (const GALGAS_string & 
                                                           C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("@register.group.array.").add_operation (constinArgument_inGroupName.getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 395)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 395)) ;
+  result_result = GALGAS_string ("@register.group.array.").add_operation (constinArgument_inGroupName.getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 401)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 401)) ;
 //---
   return result_result ;
 }
@@ -7760,7 +7830,6 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "static void removeTaskFromGuards (TaskControlBlock * inTask) {\n"
   "  guardDescriptor_removeAllGuards (inTask->mGuardDescriptor, inTask) ;\n"
   "  deadlinelist_removeTask (gDeadlineWaitingInGuardTaskList, inTask) ;\n"
-  "  inTask->mHaveDeadlineGuard = false ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -7794,8 +7863,11 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "  if (gRunningTaskControlBlockPtr->mUserResult) { // GUARD_DID_CHANGE\n"
   "    gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "  }else{ // GUARD_EVALUATING_OR_OUTSIDE\n"
-  "    gRunningTaskControlBlockPtr->mUserResult = gRunningTaskControlBlockPtr->mHaveDeadlineGuard || (gRunningTaskControlBlockPtr->mGuardDescriptor.mCoun"
-  "t > 0) ;\n"
+  "    gRunningTaskControlBlockPtr->mUserResult =\n"
+  "      deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)\n"
+  "    ||\n"
+  "     (gRunningTaskControlBlockPtr->mGuardDescriptor.mCount > 0)\n"
+  "    ;\n"
   "    if (gRunningTaskControlBlockPtr->mUserResult) {\n"
   "      gRunningTaskControlBlockPtr->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
   "      kernel_makeNoTaskRunning () ;\n"
@@ -7831,7 +7903,6 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "    if (!deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)) {\n"
   "      deadlinelist_enterTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;\n"
   "      gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;\n"
-  "      gRunningTaskControlBlockPtr->mHaveDeadlineGuard = true ;\n"
   "    }else if (gRunningTaskControlBlockPtr->mTaskDeadline > inDeadline) {\n"
   "      gRunningTaskControlBlockPtr->mTaskDeadline = inDeadline ;\n"
   "    }\n"
@@ -7867,7 +7938,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "c-guard-code.cpp",
   "cpp",
   true, // Text file
-  5321, // Text length
+  5279, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
@@ -8159,6 +8230,8 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;\n"
   "//--- Initial free stack size\n"
   "  taskControlBlockPtr->mStackFreeSize = inStackBufferSize ;\n"
+  "//--- Task auto start \?\n"
+  "  taskControlBlockPtr->mActivationCount = 1 ;\n"
   "//--- Initialize Context\n"
   "  const bool hasFloatingPointContext = false ;\n"
   "  kernel_set_task_context (taskControlBlockPtr->mTaskContext,\n"
@@ -8168,16 +8241,6 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "                           hasFloatingPointContext) ;\n"
   "//--- Make task ready\n"
   "  kernel_makeTaskReady (taskControlBlockPtr) ;\n"
-  "}\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//   kernel_self_terminate                                                                                             *\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "void kernel_running_task_auto_blocks (void) asm (\"!SERVICEIMPLEMENTATION!xtr.auto.block\") ;\n"
-  "\n"
-  "void kernel_running_task_auto_blocks (void) {\n"
-  "  kernel_makeNoTaskRunning () ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -8253,13 +8316,42 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {\n"
   "  deadlinelist_makeTasksReadyFromCurrentDate (inCurrentDate) ;\n"
   "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  ACTIVATION                                                                                                         *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_activate_task (const unsigned char inTaskIndex) asm (\"!SERVICEIMPLEMENTATION!xtr.activate.task\") ;\n"
+  "\n"
+  "void kernel_activate_task (const unsigned char inTaskIndex) {\n"
+  "  TaskControlBlock * taskPtr = & gTaskDescriptorArray [inTaskIndex] ;\n"
+  "  taskPtr->mActivationCount ++ ;\n"
+  "  if (taskPtr->mActivationCount == 0) {\n"
+  "    kernel_makeTaskReady (taskPtr) ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   kernel_wait_for_activation                                                                                        *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_wait_for_activation (void) asm (\"!SERVICEIMPLEMENTATION!xtr.wait.for.activation\") ;\n"
+  "\n"
+  "void kernel_wait_for_activation (void) {\n"
+  "  gRunningTaskControlBlockPtr->mActivationCount -- ;\n"
+  "  if (gRunningTaskControlBlockPtr->mActivationCount < 0) {\n"
+  "    kernel_makeNoTaskRunning () ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "c-real-time-kernel-code.cpp",
   "cpp",
   true, // Text file
-  7915, // Text length
+  8949, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 
@@ -8372,14 +8464,15 @@ const char * gWrapperFileContent_9_targetTemplates = "//------------------------
   "  unsigned * mStackBufferAddress ;\n"
   "  unsigned mStackBufferSize ; // In bytes\n"
   "  unsigned mStackFreeSize ; // In bytes\n"
+  "//--- Guards\n"
+  "  GuardDescriptor mGuardDescriptor ;\n"
+  "  GuardState mGuardState ;\n"
   "//--- Task index\n"
   "  unsigned char mTaskIndex ;\n"
+  "//--- ActivationCount\n"
+  "  signed char mActivationCount ;\n"
   "//--- User result\n"
   "  bool mUserResult ;\n"
-  "//--- Guards\n"
-  "  GuardState mGuardState ;\n"
-  "  bool mHaveDeadlineGuard ;\n"
-  "  GuardDescriptor mGuardDescriptor ;\n"
   "//---\n"
   "} TaskControlBlock ;\n"
   "\n"
@@ -8398,7 +8491,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "c-task-control-block-type.cpp",
   "cpp",
   true, // Text file
-  1876, // Text length
+  1903, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 

@@ -64,6 +64,8 @@ void kernel_create_task (const unsigned inTaskIndex,
   taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;
 //--- Initial free stack size
   taskControlBlockPtr->mStackFreeSize = inStackBufferSize ;
+//--- Task auto start ?
+  taskControlBlockPtr->mActivationCount = 1 ;
 //--- Initialize Context
   const bool hasFloatingPointContext = false ;
   kernel_set_task_context (taskControlBlockPtr->mTaskContext,
@@ -73,16 +75,6 @@ void kernel_create_task (const unsigned inTaskIndex,
                            hasFloatingPointContext) ;
 //--- Make task ready
   kernel_makeTaskReady (taskControlBlockPtr) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   kernel_self_terminate                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void kernel_running_task_auto_blocks (void) asm ("!SERVICEIMPLEMENTATION!xtr.auto.block") ;
-
-void kernel_running_task_auto_blocks (void) {
-  kernel_makeNoTaskRunning () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -158,4 +150,33 @@ void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) asm ("!FUNC!ma
 void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
   deadlinelist_makeTasksReadyFromCurrentDate (inCurrentDate) ;
 }
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  ACTIVATION                                                                                                         *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void kernel_activate_task (const unsigned char inTaskIndex) asm ("!SERVICEIMPLEMENTATION!xtr.activate.task") ;
+
+void kernel_activate_task (const unsigned char inTaskIndex) {
+  TaskControlBlock * taskPtr = & gTaskDescriptorArray [inTaskIndex] ;
+  taskPtr->mActivationCount ++ ;
+  if (taskPtr->mActivationCount == 0) {
+    kernel_makeTaskReady (taskPtr) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   kernel_wait_for_activation                                                                                        *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void kernel_wait_for_activation (void) asm ("!SERVICEIMPLEMENTATION!xtr.wait.for.activation") ;
+
+void kernel_wait_for_activation (void) {
+  gRunningTaskControlBlockPtr->mActivationCount -- ;
+  if (gRunningTaskControlBlockPtr->mActivationCount < 0) {
+    kernel_makeNoTaskRunning () ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 

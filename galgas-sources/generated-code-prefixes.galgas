@@ -349,8 +349,14 @@ func %once llvmNameForTaskLoopFunction -> @string {
 }
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmNameForTaskAutoBlockService -> @string {
-  result = "xtr.auto.block"
+func %once llvmNameForTaskWaitsForActivation-> @string {
+  result = "xtr.wait.for.activation"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once llvmNameForActivateTask-> @string {
+  result = "xtr.activate.task"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
