@@ -149,7 +149,15 @@ private proc suppressInaccessibleSubprograms
   end
 #--- Tasks (setup and loop)
   for task in ioIntermediateCodeStruct.mTaskMapIR do
-    [task.mInitInstructionListIR enterAccessibleEntities
+    [task.mSetupInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
+    [task.mActivateInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
+    [task.mDeactivateInstructionListIR enterAccessibleEntities
       !?outAccessibleEntities
       !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
     ]
