@@ -190,7 +190,7 @@ task Tâche @priority 1 @stacksize 512 {
   var compteur $uint32 = 0
   var pattern = $patternArray (!repeated:0)
  
-  setup 1 {
+  on @setup first {
     initializeDMA (!?self.pattern)
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)

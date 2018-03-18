@@ -63,7 +63,7 @@ sync rdvs2 = $rendezVousData ()
 task T0 @priority 0 @stacksize 512 {
   var top $uint32 = 0
 
-  setup 100 {
+  on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)

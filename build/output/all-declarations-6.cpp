@@ -8072,6 +8072,8 @@ mProperty_mStackSize (),
 mProperty_mVarList (),
 mProperty_mTaskProcList (),
 mProperty_mTaskSetupListAST (),
+mProperty_mTaskActivateListAST (),
+mProperty_mTaskDeactivateListAST (),
 mProperty_mGuardedCommandList (),
 mProperty_mEndOfTaskDeclaration () {
 }
@@ -8089,16 +8091,20 @@ GALGAS_decoratedTaskList_2D_element::GALGAS_decoratedTaskList_2D_element (const 
                                                                           const GALGAS_structurePropertyListAST & inOperand3,
                                                                           const GALGAS_functionDeclarationListAST & inOperand4,
                                                                           const GALGAS_taskSetupListAST & inOperand5,
-                                                                          const GALGAS_syncInstructionBranchListAST & inOperand6,
-                                                                          const GALGAS_location & inOperand7) :
+                                                                          const GALGAS_taskSetupListAST & inOperand6,
+                                                                          const GALGAS_taskSetupListAST & inOperand7,
+                                                                          const GALGAS_syncInstructionBranchListAST & inOperand8,
+                                                                          const GALGAS_location & inOperand9) :
 mProperty_mTaskName (inOperand0),
 mProperty_mPriority (inOperand1),
 mProperty_mStackSize (inOperand2),
 mProperty_mVarList (inOperand3),
 mProperty_mTaskProcList (inOperand4),
 mProperty_mTaskSetupListAST (inOperand5),
-mProperty_mGuardedCommandList (inOperand6),
-mProperty_mEndOfTaskDeclaration (inOperand7) {
+mProperty_mTaskActivateListAST (inOperand6),
+mProperty_mTaskDeactivateListAST (inOperand7),
+mProperty_mGuardedCommandList (inOperand8),
+mProperty_mEndOfTaskDeclaration (inOperand9) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8109,6 +8115,8 @@ GALGAS_decoratedTaskList_2D_element GALGAS_decoratedTaskList_2D_element::constru
                                               GALGAS_lbigint::constructor_default (HERE),
                                               GALGAS_structurePropertyListAST::constructor_emptyList (HERE),
                                               GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
+                                              GALGAS_taskSetupListAST::constructor_emptyList (HERE),
+                                              GALGAS_taskSetupListAST::constructor_emptyList (HERE),
                                               GALGAS_taskSetupListAST::constructor_emptyList (HERE),
                                               GALGAS_syncInstructionBranchListAST::constructor_emptyList (HERE),
                                               GALGAS_location::constructor_nowhere (HERE)) ;
@@ -8122,12 +8130,14 @@ GALGAS_decoratedTaskList_2D_element GALGAS_decoratedTaskList_2D_element::constru
                                                                                           const GALGAS_structurePropertyListAST & inOperand3,
                                                                                           const GALGAS_functionDeclarationListAST & inOperand4,
                                                                                           const GALGAS_taskSetupListAST & inOperand5,
-                                                                                          const GALGAS_syncInstructionBranchListAST & inOperand6,
-                                                                                          const GALGAS_location & inOperand7 
+                                                                                          const GALGAS_taskSetupListAST & inOperand6,
+                                                                                          const GALGAS_taskSetupListAST & inOperand7,
+                                                                                          const GALGAS_syncInstructionBranchListAST & inOperand8,
+                                                                                          const GALGAS_location & inOperand9 
                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_decoratedTaskList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
-    result = GALGAS_decoratedTaskList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
+    result = GALGAS_decoratedTaskList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
   }
   return result ;
 }
@@ -8155,6 +8165,12 @@ typeComparisonResult GALGAS_decoratedTaskList_2D_element::objectCompare (const G
     result = mProperty_mTaskSetupListAST.objectCompare (inOperand.mProperty_mTaskSetupListAST) ;
   }
   if (result == kOperandEqual) {
+    result = mProperty_mTaskActivateListAST.objectCompare (inOperand.mProperty_mTaskActivateListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskDeactivateListAST.objectCompare (inOperand.mProperty_mTaskDeactivateListAST) ;
+  }
+  if (result == kOperandEqual) {
     result = mProperty_mGuardedCommandList.objectCompare (inOperand.mProperty_mGuardedCommandList) ;
   }
   if (result == kOperandEqual) {
@@ -8166,7 +8182,7 @@ typeComparisonResult GALGAS_decoratedTaskList_2D_element::objectCompare (const G
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_decoratedTaskList_2D_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mEndOfTaskDeclaration.isValid () ;
+  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mEndOfTaskDeclaration.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8178,6 +8194,8 @@ void GALGAS_decoratedTaskList_2D_element::drop (void) {
   mProperty_mVarList.drop () ;
   mProperty_mTaskProcList.drop () ;
   mProperty_mTaskSetupListAST.drop () ;
+  mProperty_mTaskActivateListAST.drop () ;
+  mProperty_mTaskDeactivateListAST.drop () ;
   mProperty_mGuardedCommandList.drop () ;
   mProperty_mEndOfTaskDeclaration.drop () ;
 }
@@ -8201,6 +8219,10 @@ void GALGAS_decoratedTaskList_2D_element::description (C_String & ioString,
     mProperty_mTaskProcList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mTaskSetupListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskActivateListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskDeactivateListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mGuardedCommandList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -8243,6 +8265,18 @@ GALGAS_functionDeclarationListAST GALGAS_decoratedTaskList_2D_element::getter_mT
 
 GALGAS_taskSetupListAST GALGAS_decoratedTaskList_2D_element::getter_mTaskSetupListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mTaskSetupListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_taskSetupListAST GALGAS_decoratedTaskList_2D_element::getter_mTaskActivateListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskActivateListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_taskSetupListAST GALGAS_decoratedTaskList_2D_element::getter_mTaskDeactivateListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskDeactivateListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14954,215 +14988,4 @@ static void freeExtensionMethod_primaryInExpressionAST_analyzePrimaryExpressionW
 
 C_PrologueEpilogue gMethod_primaryInExpressionAST_analyzePrimaryExpressionWithSelf (defineExtensionMethod_primaryInExpressionAST_analyzePrimaryExpressionWithSelf,
                                                                                     freeExtensionMethod_primaryInExpressionAST_analyzePrimaryExpressionWithSelf) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_standaloneFunctionInExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_standaloneFunctionInExpressionAST * p = (const cPtr_standaloneFunctionInExpressionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_standaloneFunctionInExpressionAST) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mStandaloneFunctionName.objectCompare (p->mProperty_mStandaloneFunctionName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mArguments.objectCompare (p->mProperty_mArguments) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mEndOfArguments.objectCompare (p->mProperty_mEndOfArguments) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_standaloneFunctionInExpressionAST::objectCompare (const GALGAS_standaloneFunctionInExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_standaloneFunctionInExpressionAST::GALGAS_standaloneFunctionInExpressionAST (void) :
-GALGAS_expressionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_standaloneFunctionInExpressionAST GALGAS_standaloneFunctionInExpressionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_standaloneFunctionInExpressionAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                                    GALGAS_effectiveArgumentListAST::constructor_emptyList (HERE),
-                                                                    GALGAS_location::constructor_nowhere (HERE)
-                                                                    COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_standaloneFunctionInExpressionAST::GALGAS_standaloneFunctionInExpressionAST (const cPtr_standaloneFunctionInExpressionAST * inSourcePtr) :
-GALGAS_expressionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_standaloneFunctionInExpressionAST) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_standaloneFunctionInExpressionAST GALGAS_standaloneFunctionInExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mStandaloneFunctionName,
-                                                                                                    const GALGAS_effectiveArgumentListAST & inAttribute_mArguments,
-                                                                                                    const GALGAS_location & inAttribute_mEndOfArguments
-                                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_standaloneFunctionInExpressionAST result ;
-  if (inAttribute_mStandaloneFunctionName.isValid () && inAttribute_mArguments.isValid () && inAttribute_mEndOfArguments.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_standaloneFunctionInExpressionAST (inAttribute_mStandaloneFunctionName, inAttribute_mArguments, inAttribute_mEndOfArguments COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_standaloneFunctionInExpressionAST::getter_mStandaloneFunctionName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_standaloneFunctionInExpressionAST * p = (const cPtr_standaloneFunctionInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_standaloneFunctionInExpressionAST) ;
-    result = p->mProperty_mStandaloneFunctionName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_standaloneFunctionInExpressionAST::getter_mStandaloneFunctionName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mStandaloneFunctionName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_effectiveArgumentListAST GALGAS_standaloneFunctionInExpressionAST::getter_mArguments (UNUSED_LOCATION_ARGS) const {
-  GALGAS_effectiveArgumentListAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_standaloneFunctionInExpressionAST * p = (const cPtr_standaloneFunctionInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_standaloneFunctionInExpressionAST) ;
-    result = p->mProperty_mArguments ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_effectiveArgumentListAST cPtr_standaloneFunctionInExpressionAST::getter_mArguments (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mArguments ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_standaloneFunctionInExpressionAST::getter_mEndOfArguments (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_standaloneFunctionInExpressionAST * p = (const cPtr_standaloneFunctionInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_standaloneFunctionInExpressionAST) ;
-    result = p->mProperty_mEndOfArguments ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_standaloneFunctionInExpressionAST::getter_mEndOfArguments (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEndOfArguments ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                             Pointer class for @standaloneFunctionInExpressionAST class                              *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_standaloneFunctionInExpressionAST::cPtr_standaloneFunctionInExpressionAST (const GALGAS_lstring & in_mStandaloneFunctionName,
-                                                                                const GALGAS_effectiveArgumentListAST & in_mArguments,
-                                                                                const GALGAS_location & in_mEndOfArguments
-                                                                                COMMA_LOCATION_ARGS) :
-cPtr_expressionAST (THERE),
-mProperty_mStandaloneFunctionName (in_mStandaloneFunctionName),
-mProperty_mArguments (in_mArguments),
-mProperty_mEndOfArguments (in_mEndOfArguments) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_standaloneFunctionInExpressionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_standaloneFunctionInExpressionAST ;
-}
-
-void cPtr_standaloneFunctionInExpressionAST::description (C_String & ioString,
-                                                          const int32_t inIndentation) const {
-  ioString << "[@standaloneFunctionInExpressionAST:" ;
-  mProperty_mStandaloneFunctionName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mArguments.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mEndOfArguments.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_standaloneFunctionInExpressionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_standaloneFunctionInExpressionAST (mProperty_mStandaloneFunctionName, mProperty_mArguments, mProperty_mEndOfArguments COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       @standaloneFunctionInExpressionAST type                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_standaloneFunctionInExpressionAST ("standaloneFunctionInExpressionAST",
-                                                          & kTypeDescriptor_GALGAS_expressionAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_standaloneFunctionInExpressionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_standaloneFunctionInExpressionAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_standaloneFunctionInExpressionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_standaloneFunctionInExpressionAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_standaloneFunctionInExpressionAST GALGAS_standaloneFunctionInExpressionAST::extractObject (const GALGAS_object & inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_standaloneFunctionInExpressionAST result ;
-  const GALGAS_standaloneFunctionInExpressionAST * p = (const GALGAS_standaloneFunctionInExpressionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_standaloneFunctionInExpressionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("standaloneFunctionInExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
 

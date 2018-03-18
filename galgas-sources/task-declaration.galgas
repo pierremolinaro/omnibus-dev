@@ -9,6 +9,8 @@ list @taskListAST {
   @structurePropertyListAST mVarList
   @functionDeclarationListAST mTaskFunctionList
   @taskSetupListAST mTaskSetupListAST
+  @taskSetupListAST mTaskActivateListAST
+  @taskSetupListAST mTaskDeactivateListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @location mEndOfTaskDeclaration
 }
@@ -16,20 +18,18 @@ list @taskListAST {
 #·······················································································································
 
 list @taskSetupListAST {
-  @lbigint mTaskSetupPriority
+  @lstring mName
+  @lstringlist mDependanceList
   @instructionListAST mTaskSetupInstructionList
   @location mEndOfTaskSetupDeclaration
 }
 
 #·······················································································································
 
-sortedlist @taskSetupSortedListAST {
-  @lbigint mTaskSetupPriority
+list @taskSetupSortedListAST {
   @instructionListAST mTaskSetupInstructionList
   @location mEndOfTaskSetupDeclaration
-  @bigint mSetupPriority
-}{
-  mSetupPriority <
+  @luint mPriority
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -56,7 +56,9 @@ syntax extension plm_syntax {
     ${$
     @structurePropertyListAST taskVarList = {}
     @functionDeclarationListAST taskProcList = {}
-    @taskSetupListAST taskInitListAST = {}
+    @taskSetupListAST taskSetupListAST = {}
+    @taskSetupListAST taskActivateListAST = {}
+    @taskSetupListAST taskDeactivateListAST = {}
     @syncInstructionBranchListAST branchList = {}
     repeat
     while
@@ -77,13 +79,33 @@ syntax extension plm_syntax {
       taskProcList += !.userMode !false !procName !{} !formalArgumentList !returnTypeName !instructionList !.here
       $}$
     while
-      $setup$
-      $integer$ ?let @lbigint priority
+      $on$
+      $@attribute$ ?let attribute
+      $identifier$ ?let name
+      @lstringlist dependenceList = {}
+      select
+      or
+        $>$
+        repeat
+          $identifier$ ?let dependenceName
+          dependenceList += !dependenceName
+        while
+          $,$
+        end
+      end
       ${$
       <instructionList> !?ioAST ?let instructionList
       let endOfInit = @location.here
       $}$
-      taskInitListAST += !priority !instructionList !endOfInit
+      if attribute.string == "setup" then
+        taskSetupListAST += !name !dependenceList !instructionList !endOfInit
+      elsif attribute.string == "activate" then
+        taskActivateListAST += !name !dependenceList !instructionList !endOfInit
+      elsif attribute.string == "deactivate" then
+        taskDeactivateListAST += !name !dependenceList !instructionList !endOfInit
+      else
+        error attribute : "attribute should be @setup, @activate or @deactivate"
+      end
     while
       <guarded_command> !?ioAST ?let @guardedCommandAST guardedCommand
       ${$
@@ -100,7 +122,9 @@ syntax extension plm_syntax {
       !stackSize
       !taskVarList
       !taskProcList
-      !taskInitListAST
+      !taskSetupListAST
+      !taskActivateListAST
+      !taskDeactivateListAST
       !branchList
       !endOfTask
   }
@@ -210,6 +234,8 @@ method @taskListAST enterInContext
       !task.mVarList
       !task.mTaskFunctionList
       !task.mTaskSetupListAST
+      !task.mTaskActivateListAST
+      !task.mTaskDeactivateListAST
       !task.mGuardedCommandList
       !task.mEndOfTaskDeclaration
   end
@@ -228,6 +254,8 @@ list @decoratedTaskList {
   @structurePropertyListAST mVarList
   @functionDeclarationListAST mTaskProcList
   @taskSetupListAST mTaskSetupListAST
+  @taskSetupListAST mTaskActivateListAST
+  @taskSetupListAST mTaskDeactivateListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @location mEndOfTaskDeclaration
 }
@@ -262,30 +290,71 @@ override method @decoratedTaskListDeclaration semanticAnalysis
 
 #·······················································································································
 
-method @decoratedTaskList-element semanticAnalysis
+private proc analyzeOrderedTaskRoutines
+  ?let @PLMType inTaskType
+  ?let @taskSetupListAST inTaskRoutineLISTAST
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  !@instructionListIR outInstructionListIR
+  !@allocaList outAllocaList
 {
-#------------------------------------------- Check stack size is >= 64, and a multiple of 8
-  let stackSize = mStackSize.bigint
-  if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
-    error mStackSize : "stack size should be a multiple of 8, and >= 64"
-  end
 #------------------------------------------- Analyze task setup routines
-  let taskType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName} type]
-  @taskSetupSortedListAST taskInitSortedListAST = {}
-  for (priority instructionList endOfDeclaration) in mTaskSetupListAST do
-    taskInitSortedListAST += !priority !instructionList !endOfDeclaration !priority.bigint
+  @taskSetupSortedListAST taskSetupSortedListAST = {} 
+  if [inTaskRoutineLISTAST length] > 0 then
+  #--- Check there is exactly one entry without any precedence
+    @uint numberOfEntriesWithoutAnyPrecedence = 0
+    for (* precedenceList 2*) in inTaskRoutineLISTAST do
+      if [precedenceList length] == 0 then
+        numberOfEntriesWithoutAnyPrecedence += numberOfEntriesWithoutAnyPrecedence + 1
+      end
+    end
+    if numberOfEntriesWithoutAnyPrecedence == 0 then
+      for (name 3*) in inTaskRoutineLISTAST do
+        error name : "Exactly one routine should have no precedence"
+      end
+    elsif numberOfEntriesWithoutAnyPrecedence > 1 then
+      for (name precedenceList 2*) in inTaskRoutineLISTAST do
+        if [precedenceList length] == 0 then
+          error name : "Exactly one routine should have no precedence"
+        end
+      end    
+    end
+  #--- Signal unsorted entries as error
+    @taskSetupListAST taskSetupListAST = inTaskRoutineLISTAST
+    @stringset precedenceSet = {}
+    var continue = true
+    loop ([inTaskRoutineLISTAST length]) while continue && ([taskSetupListAST length] > 0) do
+      continue = false
+      var idx = 0
+      for (name precedenceList instructionList endOfDeclaration) in taskSetupListAST do
+        var allPrecedenceDefined = true
+        for (precedenceName) in precedenceList while allPrecedenceDefined do
+          allPrecedenceDefined = [precedenceSet hasKey !precedenceName.string]
+        end
+        if allPrecedenceDefined then
+          taskSetupSortedListAST += !instructionList !endOfDeclaration !.new {![taskSetupSortedListAST length] !name}
+          precedenceSet += !name.string
+          continue = true
+          [!?taskSetupListAST removeAtIndex ?4* !idx]
+        else
+          idx = idx + 1
+        end
+      end
+    end
+  #--- Signal unsorted entries as error
+    for (name 3*) in taskSetupListAST do
+      error name : "this routine is out of execution order"
+    end
   end
-  @instructionListIR setupInstructionListIR = {}
-  @allocaList setupAllocaList = {}
-  for (taskInitPriority taskInitInstructionList endOfTaskInitDeclaration *) in taskInitSortedListAST do
+  outInstructionListIR = {}
+  outAllocaList= {}
+  for (taskInitInstructionList endOfTaskInitDeclaration taskInitPriority) in taskSetupSortedListAST do
     setupSemanticAnalysis (
       !context:inContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
-      !selfType:taskType
+      !selfType:inTaskType
       !priority:taskInitPriority
       !mode:.userMode
       !instructionList:taskInitInstructionList
@@ -293,9 +362,54 @@ method @decoratedTaskList-element semanticAnalysis
       ?let partialAllocaList
       ?let @instructionListIR partialInstructionGenerationList
     )
-    setupInstructionListIR += partialInstructionGenerationList
-    setupAllocaList += partialAllocaList
+    outInstructionListIR += partialInstructionGenerationList
+    outAllocaList += partialAllocaList
   end
+}
+
+#·······················································································································
+
+method @decoratedTaskList-element semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  let taskType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName} type]
+#------------------------------------------- Check stack size is >= 64, and a multiple of 8
+  let stackSize = mStackSize.bigint
+  if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
+    error mStackSize : "stack size should be a multiple of 8, and >= 64"
+  end
+#------------------------------------------- Analyze task setup routines
+  analyzeOrderedTaskRoutines (
+    !taskType
+    !mTaskSetupListAST
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode: ioIntermediateCodeStruct
+    ?let setupInstructionListIR
+    ?let setupAllocaList
+  )
+#------------------------------------------- Analyze task activate routines
+  analyzeOrderedTaskRoutines (
+    !taskType
+    !mTaskActivateListAST
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode: ioIntermediateCodeStruct
+    ?let activateInstructionListIR
+    ?let activateAllocaList
+  )
+#------------------------------------------- Analyze task deactivate routines
+  analyzeOrderedTaskRoutines (
+    !taskType
+    !mTaskDeactivateListAST
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode: ioIntermediateCodeStruct
+    ?let deactivateInstructionListIR
+    ?let deactivateAllocaList
+  )
 #------------------------------------------- Analyze task guarded command
 #  Build a "task.loop" function that contains a sync instruction
   @instructionListAST taskListInstructionList = {}
@@ -329,6 +443,10 @@ method @decoratedTaskList-element semanticAnalysis
     !mStackSize.bigint
     !setupAllocaList
     !setupInstructionListIR
+    !activateAllocaList
+    !activateInstructionListIR
+    !deactivateAllocaList
+    !deactivateInstructionListIR
     !taskNameStringIndex
   ]
 }
@@ -340,7 +458,7 @@ private proc setupSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
   ?selfType:let @PLMType inSelfType
-  ?priority:let @lbigint inPriority
+  ?priority:let @luint inPriority
   ?mode:let @mode inCurrentMode
   ?instructionList:let @instructionListAST inInstructionListAST
   ?endOfDeclaration:let @location inEndOfInitDeclaration
@@ -386,8 +504,12 @@ map @taskMapIR {
   @PLMType mTaskType
   @bigint mPriority
   @bigint mStackSize
-  @allocaList mAllocaList
+  @allocaList mSetupAllocaList
   @instructionListIR mInitInstructionListIR
+  @allocaList mActivateAllocaList
+  @instructionListIR mActivateInstructionListIR
+  @allocaList mDeactivateAllocaList
+  @instructionListIR mDeactivateInstructionListIR
   @uint mTaskNameStringIndex
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
@@ -400,8 +522,12 @@ sortedlist @taskSortedListIR {
   @string mTaskName
   @bigint mPriority
   @bigint mStackSize
-  @allocaList mAllocaList
+  @allocaList mSetupAllocaList
   @instructionListIR mSetupInstructionListIR
+  @allocaList mActivateAllocaList
+  @instructionListIR mActivateInstructionListIR
+  @allocaList mDeactivateAllocaList
+  @instructionListIR mDeactivateInstructionListIR
   @uint mTaskNameStringIndex
 }{
   mPriority <
@@ -451,8 +577,12 @@ method @taskMapIR generateCode
       !task.lkey.string
       !task.mPriority
       !task.mStackSize
-      !task.mAllocaList
+      !task.mSetupAllocaList
       !task.mInitInstructionListIR
+      !task.mActivateAllocaList
+      !task.mActivateInstructionListIR
+      !task.mDeactivateAllocaList
+      !task.mDeactivateInstructionListIR
       !task.mTaskNameStringIndex
   end
 #---------- Declare task stacks and main routine
@@ -467,22 +597,41 @@ method @taskMapIR generateCode
     let effectiveParameter = "(%" + assemblerTaskName + "* " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
     let formalArgument = "(%" + assemblerTaskName + "* " + llvmNameForSelf () + ")"
     ioLLVMcode += llvmSeparatorLine () + "\n"
-  #---------- Init
-    ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
-    [task.mAllocaList generateAllocaList !?ioLLVMcode]
+  #---------- Setup
+    ioLLVMcode += "define internal void " + setupNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
+    [task.mSetupAllocaList generateAllocaList !?ioLLVMcode]
     [task.mSetupInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
+  #---------- Activate
+    ioLLVMcode += "define internal void " + activateNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
+    [task.mActivateAllocaList generateAllocaList !?ioLLVMcode]
+    [task.mActivateInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  ret void\n"
+    ioLLVMcode += "}\n\n"
+    ioLLVMcode += llvmSeparatorLine ()
+    ioLLVMcode += "\n"
+  #---------- Deactivate
+    ioLLVMcode += "define internal void " + deactivateNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
+    [task.mDeactivateAllocaList generateAllocaList !?ioLLVMcode]
+    [task.mDeactivateInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  ret void\n"
+    ioLLVMcode += "}\n\n"
+    ioLLVMcode += llvmSeparatorLine ()
+    ioLLVMcode += "\n"
+  #---------- Task routine
     ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " ()" + llvmAttributeFunction () + "noreturn {\n"
-    ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
+    ioLLVMcode += "  call void " + setupNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     let taskLoopLabel = "loop." + [task.mTaskName assemblerRepresentation]
     ioLLVMcode += "  br label %" + taskLoopLabel + "\n\n"
     ioLLVMcode += taskLoopLabel + ":\n"
     ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
+    ioLLVMcode += "  call void " + activateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void @" + llvmNameForFunction (!llvmTypeStringFromPLMname (!task.mTaskName) + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
-    ioLLVMcode += "  br label %" + taskLoopLabel + "\n\n"
+    ioLLVMcode += "  call void " + deactivateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
+    ioLLVMcode += "  br label %" + taskLoopLabel + "\n"
     ioLLVMcode += "}\n\n"
   end
 #--- Start tasks

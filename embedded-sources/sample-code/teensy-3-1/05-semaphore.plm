@@ -28,7 +28,7 @@ sync sémaphore = $semaphore (!value:0)
 task T1 @priority 1 @stacksize 512 {
   var top $uint32 = 0
 
-  setup 1000 {
+  on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)

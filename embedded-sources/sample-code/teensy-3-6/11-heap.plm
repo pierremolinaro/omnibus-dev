@@ -64,7 +64,7 @@ task T1 @priority 10 @stacksize 512 {
   var alloc $uint32 = 0
   var current $uint32 = 0 
 
-  setup 1000 {
+  on @setup first {
     lcd.print (!string:"Free:")
     lcd.goto (!line:1 !column:0)
     lcd.print (!string:"Start:")

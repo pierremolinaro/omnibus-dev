@@ -41,7 +41,7 @@ task T @priority 0 @stacksize 512 {
 
   //············································································
 
-  setup 1 {
+  on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     var cumul $uint32 = 0
   //--- Compute getSysTick duration

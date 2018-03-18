@@ -22,7 +22,7 @@ task Tâche @priority 1 @stacksize 512 {
   var compteur $uint32 = 0
   var continue = yes
  
-  setup 1000 {
+  on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }

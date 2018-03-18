@@ -10,6 +10,17 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                    Routine 'enterEnumerationComparisonOperators'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgument0,
+                                                  class GALGAS_semanticContext & ioArgument1,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Function 'copyableAttribute'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -366,12 +377,31 @@ class GALGAS_lstring function_plmNameForStaticListType (const class GALGAS_lstri
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Routine 'setupSemanticAnalysis'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_setupSemanticAnalysis (const class GALGAS_semanticContext constinArgument0,
+                                    class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                    class GALGAS_intermediateCodeStruct & ioArgument2,
+                                    const class GALGAS_PLMType constinArgument3,
+                                    const class GALGAS_luint constinArgument4,
+                                    const class GALGAS_mode constinArgument5,
+                                    const class GALGAS_instructionListAST constinArgument6,
+                                    const class GALGAS_location constinArgument7,
+                                    class GALGAS_allocaList & outArgument8,
+                                    class GALGAS_instructionListIR & outArgument9,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                       Function 'setupNameForInvocationGraph'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_lstring function_setupNameForInvocationGraph (const class GALGAS_string & constinArgument0,
-                                                           const class GALGAS_lbigint & constinArgument1,
+                                                           const class GALGAS_luint & constinArgument1,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 

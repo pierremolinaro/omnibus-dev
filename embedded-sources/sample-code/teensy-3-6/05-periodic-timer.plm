@@ -58,7 +58,7 @@ task Tâche @priority 1 @stacksize 512 {
   var compteur $uint32 = 0
   var deadline = $periodicTimer (!period:500)
 
-  setup 1000 {
+  on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)

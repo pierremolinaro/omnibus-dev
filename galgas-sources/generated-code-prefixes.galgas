@@ -58,9 +58,9 @@ func initNameForInvocationGraph ?let @string inReceiverTypeName ?let @location i
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func setupNameForInvocationGraph ?let @string inReceiverTypeName ?let @lbigint inPriority -> @lstring {
+func setupNameForInvocationGraph ?let @string inReceiverTypeName ?let @luint inPriority -> @lstring {
   var s = "setup " + inReceiverTypeName
-  s += " " + inPriority.bigint
+  s += " " + inPriority.uint
   result = .new {!s !inPriority.location}
 }
 
@@ -326,8 +326,20 @@ func stackNameForTask ?let @string inTaskName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func initNameForTaskType ?let @string inTaskTypeName -> @string {
-  result = "@" + ["task.init." + inTaskTypeName assemblerRepresentation]
+func setupNameForTaskType ?let @string inTaskTypeName -> @string {
+  result = "@" + ["task.setup." + inTaskTypeName assemblerRepresentation]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func activateNameForTaskType ?let @string inTaskTypeName -> @string {
+  result = "@" + ["task.activate." + inTaskTypeName assemblerRepresentation]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func deactivateNameForTaskType ?let @string inTaskTypeName -> @string {
+  result = "@" + ["task.deactivate." + inTaskTypeName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

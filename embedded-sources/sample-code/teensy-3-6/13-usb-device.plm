@@ -497,7 +497,7 @@ task T @priority 0 @stacksize 512 {
   
   //····················································································································
 
-  setup 1 {
+  on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
