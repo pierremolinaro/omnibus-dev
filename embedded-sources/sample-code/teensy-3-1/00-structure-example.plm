@@ -37,7 +37,7 @@ struct $toto {
 
 //-----------------------------------------------------------------------------*
 
-task T @priority 12 @stacksize 512 {
+task T @priority 12 @stacksize 512 @activate {
   var deadline $uint32 = 0
   var acc = $C ()
 

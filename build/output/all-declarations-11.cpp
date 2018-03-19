@@ -8712,13 +8712,12 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "//  taskControlBlockPtr->mHaveDeadlineGuard = false ; // statically initialized to 0\n"
   "//  taskControlBlockPtr->mUserResult = false ; // statically initialized to 0\n"
   "//  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to GUARD_EVALUATING_OR_OUTSIDE\n"
+  "//  taskControlBlockPtr->mActivationCount = 0 ;  // statically initialized to 0\n"
   "//--- Store stack parameters\n"
   "  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;\n"
   "  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;\n"
   "//--- Initial free stack size\n"
   "  taskControlBlockPtr->mStackFreeSize = inStackBufferSize ;\n"
-  "//--- Task auto start \?\n"
-  "  taskControlBlockPtr->mActivationCount = 1 ;\n"
   "//--- Initialize Context\n"
   "  const bool hasFloatingPointContext = false ;\n"
   "  kernel_set_task_context (taskControlBlockPtr->mTaskContext,\n"
@@ -8838,7 +8837,7 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "c-real-time-kernel-code.cpp",
   "cpp",
   true, // Text file
-  8949, // Text length
+  8959, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 

@@ -91,7 +91,7 @@ sync sémaphore30 = $semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T0 @priority 0 @stacksize 512 {
+task T0 @priority 0 @stacksize 512 @activate {
   var échéance $uint32 = 0
 
   on time.wait (!untilDeadline:self.échéance) {
@@ -104,7 +104,7 @@ task T0 @priority 0 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T1 @priority 1 @stacksize 512 {
+task T1 @priority 1 @stacksize 512 @activate {
   on sémaphore0.wait () {
     sémaphore1.signal () ;
   }
@@ -112,7 +112,7 @@ task T1 @priority 1 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T2 @priority 2 @stacksize 512 {
+task T2 @priority 2 @stacksize 512 @activate {
   on sémaphore1.wait () {
     sémaphore2.signal () ;
   }
@@ -120,7 +120,7 @@ task T2 @priority 2 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T3 @priority 3 @stacksize 512 {
+task T3 @priority 3 @stacksize 512 @activate {
   on sémaphore2.wait () {
     sémaphore3.signal () ;
   }
@@ -128,7 +128,7 @@ task T3 @priority 3 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T4 @priority 4 @stacksize 512 {
+task T4 @priority 4 @stacksize 512 @activate {
   on sémaphore3.wait () {
     sémaphore4.signal () ;
   }
@@ -136,7 +136,7 @@ task T4 @priority 4 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T5 @priority 5 @stacksize 512 {
+task T5 @priority 5 @stacksize 512 @activate {
   on sémaphore4.wait () {
     sémaphore5.signal () ;
   }
@@ -144,7 +144,7 @@ task T5 @priority 5 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T6 @priority 6 @stacksize 512 {
+task T6 @priority 6 @stacksize 512 @activate {
   on sémaphore5.wait () {
     sémaphore6.signal () ;
   }
@@ -152,7 +152,7 @@ task T6 @priority 6 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T7 @priority 7 @stacksize 512 {
+task T7 @priority 7 @stacksize 512 @activate {
   on sémaphore6.wait () {
     sémaphore7.signal () ;
   }
@@ -160,7 +160,7 @@ task T7 @priority 7 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T8 @priority 8 @stacksize 512 {
+task T8 @priority 8 @stacksize 512 @activate {
   on sémaphore7.wait () {
     sémaphore8.signal () ;
   }
@@ -168,7 +168,7 @@ task T8 @priority 8 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T9 @priority 9 @stacksize 512 {
+task T9 @priority 9 @stacksize 512 @activate {
   on sémaphore8.wait () {
     sémaphore10.signal () ;
   }
@@ -176,7 +176,7 @@ task T9 @priority 9 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T10 @priority 10 @stacksize 512 {
+task T10 @priority 10 @stacksize 512 @activate {
   on sémaphore9.wait () {
     sémaphore10.signal () ;
   }
@@ -184,7 +184,7 @@ task T10 @priority 10 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T11 @priority 11 @stacksize 512 {
+task T11 @priority 11 @stacksize 512 @activate {
   on sémaphore10.wait () {
     sémaphore11.signal () ;
   }
@@ -192,7 +192,7 @@ task T11 @priority 11 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T12 @priority 12 @stacksize 512 {
+task T12 @priority 12 @stacksize 512 @activate {
   on sémaphore11.wait () {
     sémaphore12.signal () ;
   }
@@ -200,7 +200,7 @@ task T12 @priority 12 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T13 @priority 13 @stacksize 512 {
+task T13 @priority 13 @stacksize 512 @activate {
   on sémaphore12.wait () {
     sémaphore13.signal () ;
   }
@@ -208,7 +208,7 @@ task T13 @priority 13 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T14 @priority 14 @stacksize 512 {
+task T14 @priority 14 @stacksize 512 @activate {
   on sémaphore13.wait () {
     sémaphore14.signal () ;
   }
@@ -216,7 +216,7 @@ task T14 @priority 14 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T15 @priority 15 @stacksize 512 {
+task T15 @priority 15 @stacksize 512 @activate {
   on sémaphore14.wait () {
     sémaphore15.signal () ;
   }
@@ -224,7 +224,7 @@ task T15 @priority 15 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T16 @priority 16 @stacksize 512 {
+task T16 @priority 16 @stacksize 512 @activate {
   on sémaphore15.wait () {
     sémaphore16.signal () ;
   }
@@ -232,7 +232,7 @@ task T16 @priority 16 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T17 @priority 17 @stacksize 512 {
+task T17 @priority 17 @stacksize 512 @activate {
   on sémaphore16.wait () {
     sémaphore17.signal () ;
   }
@@ -240,7 +240,7 @@ task T17 @priority 17 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T18 @priority 18 @stacksize 512 {
+task T18 @priority 18 @stacksize 512 @activate {
   on sémaphore17.wait () {
     sémaphore18.signal () ;
   }
@@ -248,7 +248,7 @@ task T18 @priority 18 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T19 @priority 19 @stacksize 512 {
+task T19 @priority 19 @stacksize 512 @activate {
   on sémaphore18.wait () {
     sémaphore19.signal () ;
   }
@@ -256,7 +256,7 @@ task T19 @priority 19 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T20 @priority 20 @stacksize 512 {
+task T20 @priority 20 @stacksize 512 @activate {
   on sémaphore19.wait () {
     sémaphore20.signal () ;
   }
@@ -264,7 +264,7 @@ task T20 @priority 20 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T21 @priority 21 @stacksize 512 {
+task T21 @priority 21 @stacksize 512 @activate {
   on sémaphore20.wait () {
     sémaphore21.signal () ;
   }
@@ -272,7 +272,7 @@ task T21 @priority 21 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T22 @priority 22 @stacksize 512 {
+task T22 @priority 22 @stacksize 512 @activate {
   on sémaphore21.wait () {
     sémaphore22.signal () ;
   }
@@ -280,7 +280,7 @@ task T22 @priority 22 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T23 @priority 23 @stacksize 512 {
+task T23 @priority 23 @stacksize 512 @activate {
   on sémaphore22.wait () {
     sémaphore23.signal () ;
   }
@@ -288,7 +288,7 @@ task T23 @priority 23 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T24 @priority 24 @stacksize 512 {
+task T24 @priority 24 @stacksize 512 @activate {
   on sémaphore23.wait () {
     sémaphore24.signal () ;
   }
@@ -296,7 +296,7 @@ task T24 @priority 24 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T25 @priority 25 @stacksize 512 {
+task T25 @priority 25 @stacksize 512 @activate {
   on sémaphore24.wait () {
     sémaphore25.signal () ;
   }
@@ -304,7 +304,7 @@ task T25 @priority 25 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T26 @priority 26 @stacksize 512 {
+task T26 @priority 26 @stacksize 512 @activate {
   on sémaphore25.wait () {
     sémaphore26.signal () ;
   }
@@ -312,7 +312,7 @@ task T26 @priority 26 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T27 @priority 27 @stacksize 512 {
+task T27 @priority 27 @stacksize 512 @activate {
   on sémaphore26.wait () {
     sémaphore27.signal () ;
   }
@@ -320,7 +320,7 @@ task T27 @priority 27 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T28 @priority 28 @stacksize 512 {
+task T28 @priority 28 @stacksize 512 @activate {
   on sémaphore27.wait () {
     sémaphore28.signal () ;
   }
@@ -328,7 +328,7 @@ task T28 @priority 28 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T29 @priority 29 @stacksize 512 {
+task T29 @priority 29 @stacksize 512 @activate {
   on sémaphore28.wait () {
     sémaphore29.signal () ;
   }
@@ -336,7 +336,7 @@ task T29 @priority 29 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T30 @priority 30 @stacksize 512 {
+task T30 @priority 30 @stacksize 512 @activate {
   on sémaphore29.wait () {
     sémaphore30.signal () ;
   }
@@ -344,7 +344,7 @@ task T30 @priority 30 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T31 @priority 31 @stacksize 512 {
+task T31 @priority 31 @stacksize 512 @activate {
   on sémaphore30.wait () {
     let duration = myDriver.getDuration ()
     lcd.goto (!line:0 !column:0)

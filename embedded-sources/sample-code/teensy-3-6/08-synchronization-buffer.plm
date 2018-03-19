@@ -96,7 +96,7 @@ task Tâche1 @priority 1 @stacksize 512 {
   }
 }
 
-task Tâche2 @priority 2 @stacksize 512 {
+task Tâche2 @priority 2 @stacksize 512 @activate {
    
   on buffer.read (?var value $uint32) {
     lcd.goto (!line:0 !column:0)

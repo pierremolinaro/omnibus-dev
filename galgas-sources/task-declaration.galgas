@@ -13,6 +13,7 @@ list @taskListAST {
   @taskSetupListAST mTaskDeactivateListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @location mEndOfTaskDeclaration
+  @bool mActivate
 }
 
 #·······················································································································
@@ -53,6 +54,16 @@ syntax extension plm_syntax {
       error stackSizeAttribute : "this attribute should be @stacksize"
     end
     $integer$ ?let @lbigint stackSize
+  #--- @activate attribute
+    var activate = false
+    select
+    or
+      $@attribute$ ?let activateAttribute
+      if activateAttribute.string != "activate" then
+        error activateAttribute : "this attribute should be @activate"
+      end
+      activate = true
+    end
     ${$
     @structurePropertyListAST taskVarList = {}
     @functionDeclarationListAST taskProcList = {}
@@ -127,6 +138,7 @@ syntax extension plm_syntax {
       !taskDeactivateListAST
       !branchList
       !endOfTask
+      !activate
   }
 
   #·····················································································································
@@ -248,6 +260,7 @@ method @taskListAST enterInContext
       !task.mTaskDeactivateListAST
       !task.mGuardedCommandList
       !task.mEndOfTaskDeclaration
+      !task.mActivate
   end
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedTaskListDeclaration.new {!decoratedTaskList}
@@ -268,6 +281,7 @@ list @decoratedTaskList {
   @taskSetupListAST mTaskDeactivateListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @location mEndOfTaskDeclaration
+  @bool mActivate
 }
 
 #·······················································································································
@@ -458,6 +472,7 @@ method @decoratedTaskList-element semanticAnalysis
     !deactivateAllocaList
     !deactivateInstructionListIR
     !taskNameStringIndex
+    !mActivate
   ]
 }
 
@@ -521,6 +536,7 @@ map @taskMapIR {
   @allocaList mDeactivateAllocaList
   @instructionListIR mDeactivateInstructionListIR
   @uint mTaskNameStringIndex
+  @bool mActivate
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
@@ -539,6 +555,7 @@ sortedlist @taskSortedListIR {
   @allocaList mDeactivateAllocaList
   @instructionListIR mDeactivateInstructionListIR
   @uint mTaskNameStringIndex
+  @bool mActivate
 }{
   mPriority <
 }
@@ -594,6 +611,7 @@ method @taskMapIR generateCode
       !task.mDeactivateAllocaList
       !task.mDeactivateInstructionListIR
       !task.mTaskNameStringIndex
+      !task.mActivate
   end
 #---------- Declare task stacks and main routine
   ioLLVMcode += llvmTitleComment (!"Create task extern routine")
@@ -607,7 +625,7 @@ method @taskMapIR generateCode
     let effectiveParameter = "(%" + assemblerTaskName + "* " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
     let formalArgument = "(%" + assemblerTaskName + "* " + llvmNameForSelf () + ")"
     ioLLVMcode += llvmSeparatorLine () + "\n"
-  #---------- Activate
+  #---------- Activate method
     let activateFunctionName = routineMangledNameFromAST (
       !llvmTypeStringFromPLMname (!task.mTaskName)
       !["activate" nowhere]
@@ -649,10 +667,15 @@ method @taskMapIR generateCode
     let taskLoopLabel = "loop." + [task.mTaskName assemblerRepresentation]
     ioLLVMcode += "  br label %" + taskLoopLabel + "\n\n"
     ioLLVMcode += taskLoopLabel + ":\n"
-    ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
+    if not task.mActivate then
+      ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
+    end
     ioLLVMcode += "  call void " + activateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void @" + llvmNameForFunction (!llvmTypeStringFromPLMname (!task.mTaskName) + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void " + deactivateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
+    if task.mActivate then
+      ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
+    end
     ioLLVMcode += "  br label %" + taskLoopLabel + "\n"
     ioLLVMcode += "}\n\n"
   end

@@ -54,7 +54,7 @@ sync $periodicTimer {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche @priority 1 @stacksize 512 {
+task Tâche @priority 1 @stacksize 512 @activate {
   var compteur $uint32 = 0
   var deadline = $periodicTimer (!period:500)
 
